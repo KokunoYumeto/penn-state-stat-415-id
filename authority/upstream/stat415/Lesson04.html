@@ -1,0 +1,2430 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.9.35">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>4&nbsp; Maximum Likelihood Estimation (MLE) (Part I) – STAT 415 | Introduction to Mathematical Statistics</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./Lesson05.html" rel="next">
+<link href="./Lesson03.html" rel="prev">
+<link href="./assets/psulion.png" rel="icon" type="image/png">
+<script src="site_libs/cookie-consent/cookie-consent.js"></script>
+<link href="site_libs/cookie-consent/cookie-consent.css" rel="stylesheet">
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-46f66b053e56abd73bb6e954d61a315b.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-22b4aaf4c2978829df3684e8f2c068db.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-46f66b053e56abd73bb6e954d61a315b.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-dedc56d09aa522c36e3c0f8583f17cbf.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark-fc84954412eed28da5dc743c06b0bbd5.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="site_libs/bootstrap/bootstrap-dedc56d09aa522c36e3c0f8583f17cbf.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/quarto-contrib/language-name/language-name.css" rel="stylesheet">
+<script src="site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
+<link href="site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
+<link href="site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<script async="" src="https://www.googletagmanager.com/gtag/js?id=G-XM6C7H9XCL"></script>
+
+<script type="text/plain" cookie-consent="tracking">
+
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-XM6C7H9XCL', { 'anonymize_ip': true});
+</script>
+
+<script type="text/javascript" charset="UTF-8">
+document.addEventListener('DOMContentLoaded', function () {
+cookieconsent.run({
+  "notice_banner_type":"simple",
+  "consent_type":"express",
+  "palette":"light",
+  "language":"en",
+  "page_load_consent_levels":["strictly-necessary"],
+  "notice_banner_reject_button_hide":false,
+  "preferences_center_close_button_hide":false,
+  "website_name":""
+  ,
+"language":"en"
+  });
+});
+</script> 
+  
+<script>
+
+  window.addEventListener('load', function() {
+
+    document.getElementById("cc-nb-text").innerHTML = "We use cookies and other tracking technologies to improve your browsing experience on our website, to analyze our website traffic, and to understand where our visitors are coming from.";
+
+  });
+
+</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+</head>
+
+<body class="nav-sidebar docked nav-fixed quarto-light"><script id="quarto-html-before-body" type="application/javascript">
+    const toggleBodyColorMode = (bsSheetEl) => {
+      const mode = bsSheetEl.getAttribute("data-mode");
+      const bodyEl = window.document.querySelector("body");
+      if (mode === "dark") {
+        bodyEl.classList.add("quarto-dark");
+        bodyEl.classList.remove("quarto-light");
+      } else {
+        bodyEl.classList.add("quarto-light");
+        bodyEl.classList.remove("quarto-dark");
+      }
+    }
+    const toggleBodyColorPrimary = () => {
+      const bsSheetEl = window.document.querySelector("link#quarto-bootstrap:not([rel=disabled-stylesheet])");
+      if (bsSheetEl) {
+        toggleBodyColorMode(bsSheetEl);
+      }
+    }
+    const setColorSchemeToggle = (alternate) => {
+      const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+      for (let i=0; i < toggles.length; i++) {
+        const toggle = toggles[i];
+        if (toggle) {
+          if (alternate) {
+            toggle.classList.add("alternate");
+          } else {
+            toggle.classList.remove("alternate");
+          }
+        }
+      }
+    };
+    const toggleColorMode = (alternate) => {
+      // Switch the stylesheets
+      const primaryStylesheets = window.document.querySelectorAll('link.quarto-color-scheme:not(.quarto-color-alternate)');
+      const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+      manageTransitions('#quarto-margin-sidebar .nav-link', false);
+      if (alternate) {
+        // note: dark is layered on light, we don't disable primary!
+        enableStylesheet(alternateStylesheets);
+        for (const sheetNode of alternateStylesheets) {
+          if (sheetNode.id === "quarto-bootstrap") {
+            toggleBodyColorMode(sheetNode);
+          }
+        }
+      } else {
+        disableStylesheet(alternateStylesheets);
+        enableStylesheet(primaryStylesheets)
+        toggleBodyColorPrimary();
+      }
+      manageTransitions('#quarto-margin-sidebar .nav-link', true);
+      // Switch the toggles
+      setColorSchemeToggle(alternate)
+      // Hack to workaround the fact that safari doesn't
+      // properly recolor the scrollbar when toggling (#1455)
+      if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+        manageTransitions("body", false);
+        window.scrollTo(0, 1);
+        setTimeout(() => {
+          window.scrollTo(0, 0);
+          manageTransitions("body", true);
+        }, 40);
+      }
+    }
+    const disableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        stylesheet.rel = 'disabled-stylesheet';
+      }
+    }
+    const enableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        if(stylesheet.rel !== 'stylesheet') { // for Chrome, which will still FOUC without this check
+          stylesheet.rel = 'stylesheet';
+        }
+      }
+    }
+    const manageTransitions = (selector, allowTransitions) => {
+      const els = window.document.querySelectorAll(selector);
+      for (let i=0; i < els.length; i++) {
+        const el = els[i];
+        if (allowTransitions) {
+          el.classList.remove('notransition');
+        } else {
+          el.classList.add('notransition');
+        }
+      }
+    }
+    const isFileUrl = () => {
+      return window.location.protocol === 'file:';
+    }
+    const hasAlternateSentinel = () => {
+      let styleSentinel = getColorSchemeSentinel();
+      if (styleSentinel !== null) {
+        return styleSentinel === "alternate";
+      } else {
+        return false;
+      }
+    }
+    const setStyleSentinel = (alternate) => {
+      const value = alternate ? "alternate" : "default";
+      if (!isFileUrl()) {
+        window.localStorage.setItem("quarto-color-scheme", value);
+      } else {
+        localAlternateSentinel = value;
+      }
+    }
+    const getColorSchemeSentinel = () => {
+      if (!isFileUrl()) {
+        const storageValue = window.localStorage.getItem("quarto-color-scheme");
+        return storageValue != null ? storageValue : localAlternateSentinel;
+      } else {
+        return localAlternateSentinel;
+      }
+    }
+    const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+      const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+      const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+      let newTheme = '';
+      if(authorPrefersDark) {
+        newTheme = isAlternate ? baseTheme : alternateTheme;
+      } else {
+        newTheme = isAlternate ? alternateTheme : baseTheme;
+      }
+      const changeGiscusTheme = () => {
+        // From: https://github.com/giscus/giscus/issues/336
+        const sendMessage = (message) => {
+          const iframe = document.querySelector('iframe.giscus-frame');
+          if (!iframe) return;
+          iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+        }
+        sendMessage({
+          setConfig: {
+            theme: newTheme
+          }
+        });
+      }
+      const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+      if (isGiscussLoaded) {
+        changeGiscusTheme();
+      }
+    };
+    const authorPrefersDark = false;
+    const darkModeDefault = authorPrefersDark;
+      document.querySelector('link#quarto-text-highlighting-styles.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+      document.querySelector('link#quarto-bootstrap.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+    let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+    // Dark / light mode switch
+    window.quartoToggleColorScheme = () => {
+      // Read the current dark / light value
+      let toAlternate = !hasAlternateSentinel();
+      toggleColorMode(toAlternate);
+      setStyleSentinel(toAlternate);
+      toggleGiscusIfUsed(toAlternate, darkModeDefault);
+      window.dispatchEvent(new Event('resize'));
+    };
+    // Switch to dark mode if need be
+    if (hasAlternateSentinel()) {
+      toggleColorMode(true);
+    } else {
+      toggleColorMode(false);
+    }
+  </script>
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <div id="quarto-announcement" data-announcement-id="cb9d28251ca8388d2bc94ffe0e472446" class="alert alert-warning hidden"><i class="bi bi-info-circle quarto-announcement-icon"></i><div class="quarto-announcement-content">
+<p>Welcome to our newly redesigned course notes! Please update your bookmarks accordingly.</p>
+</div><i class="bi bi-x-lg quarto-announcement-action"></i></div>
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="./index.html">
+    <span class="navbar-title">STAT 415 | Introduction to Mathematical Statistics</span>
+    </a>
+  </div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="https://science.psu.edu/stat"> 
+<span class="menu-text">Department of Statistics</span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+  <a href="" class="quarto-reader-toggle quarto-navigation-tool px-1" onclick="window.quartoToggleReader(); return false;" title="Toggle reader mode">
+  <div class="quarto-reader-toggle-btn">
+  <i class="bi"></i>
+  </div>
+</a>
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./Lesson00.html">Lessons</a></li><li class="breadcrumb-item"><a href="./Lesson04.html"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Maximum Likelihood Estimation (MLE) (Part I)</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header sidebar-header-stacked">
+      <a href="https://science.psu.edu/" class="sidebar-logo-link">
+      <img src="./PSU_Ecosshield.png" alt="Penn State Eberly College of Science" class="sidebar-logo light-content py-0 d-lg-inline d-none">
+      <img src="./PSU_Ecosshield.png" alt="Penn State Eberly College of Science" class="sidebar-logo dark-content py-0 d-lg-inline d-none">
+      </a>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">About this course</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+ <span class="menu-text">Lessons</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Lesson00.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">0: Review Concepts from STAT 414</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Lesson01.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Order Statistics</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Lesson02.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Estimation (Part I)</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Lesson03.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Estimation (Part II)</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Lesson04.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Maximum Likelihood Estimation (MLE) (Part I)</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Lesson05.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Maximum Likelihood Estimation (MLE) (Part II)</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Lesson06.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Confidence Intervals</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Lesson07.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Asymptotic Distribution of MLE (Part I)</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Lesson08.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Asymptotic Distribution of MLE (Part II)</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Lesson09.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Hypothesis Tests (Part I)</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Lesson10.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Hypothesis Tests (Part II)</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Lesson11.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Bayesian Methods</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Lesson12.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Simple Linear Regression</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">In this lesson</h2>
+   
+  <ul>
+  <li><a href="#the-basic-idea" id="toc-the-basic-idea" class="nav-link active" data-scroll-target="#the-basic-idea"><span class="header-section-number">4.1</span> The Basic Idea</a></li>
+  <li><a href="#one-parameter-case" id="toc-one-parameter-case" class="nav-link" data-scroll-target="#one-parameter-case"><span class="header-section-number">4.2</span> One Parameter Case</a></li>
+  <li><a href="#maximize-the-likelihood-directly-support-parameters" id="toc-maximize-the-likelihood-directly-support-parameters" class="nav-link" data-scroll-target="#maximize-the-likelihood-directly-support-parameters"><span class="header-section-number">4.3</span> Maximize the Likelihood Directly: Support Parameters</a></li>
+  <li><a href="#multiparameter-case" id="toc-multiparameter-case" class="nav-link" data-scroll-target="#multiparameter-case"><span class="header-section-number">4.4</span> Multiparameter Case</a></li>
+  <li><a href="#summary" id="toc-summary" class="nav-link" data-scroll-target="#summary"><span class="header-section-number">4.5</span> Summary</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./Lesson00.html">Lessons</a></li><li class="breadcrumb-item"><a href="./Lesson04.html"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Maximum Likelihood Estimation (MLE) (Part I)</span></a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Maximum Likelihood Estimation (MLE) (Part I)</span></h1>
+  <div class="quarto-categories">
+    <div class="quarto-category">MLE</div>
+    <div class="quarto-category">R</div>
+  </div>
+  </div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="overview" class="level2 unnumbered unlisted">
+<h2 class="unnumbered unlisted anchored" data-anchor-id="overview">Overview</h2>
+<p>In the last lesson, we introduced a way of finding an estimator using the Method of Moments. In this lesson, we will introduce another method to find an estimator, finding an estimator by maximizing the likelihood.</p>
+<section id="objectives" class="level3 unnumbered unlisted objectiveblock">
+<h3 class="unnumbered unlisted anchored" data-anchor-id="objectives"><i class="bi bi-check2-circle"></i>Objectives</h3>
+<p>Upon completion of this lesson, you should be able to:</p>
+<ol type="1">
+<li>Write out the likelihood and loglikelihood functions for data from a specified probability model,</li>
+<li>Analytically calculate the maximum likelihood estimate (MLE) for a range of single parameter models where the data values are given,</li>
+<li>Analytically calculate the maximum likelihood estimate for a range of single parameter models where the data are seen as unobservable random variables,</li>
+<li>Analytically calculate the maximum likelihood estimate (MLE) for a range of single parameter models in situations where data values are given (i.e., x=(1.6,3.1,7.8)),</li>
+<li>Analytically calculate the maximum likelihood estimate for multiple parameter models where the data are seen as unobservable random variables, and</li>
+<li>Analytically calculate the maximum likelihood estimate for a range of single parameter models where the data are seen as unobservable random variables and the parameter is in the support.</li>
+</ol>
+</section>
+</section>
+<section id="the-basic-idea" class="level2" data-number="4.1">
+<h2 data-number="4.1" class="anchored" data-anchor-id="the-basic-idea"><span class="header-section-number">4.1</span> The Basic Idea</h2>
+<p>It seems reasonable that a good estimate of the unknown parameter <span class="math inline">\(\theta\)</span> would be the value of <span class="math inline">\(\theta\)</span> that <strong>maximizes</strong> the probability, errrr….that is the ** likelihood**….of getting the data we observed. (So, do you see from where the name ‘maximum likelihood’ comes?)</p>
+<div id="def-likelihoodfunction" class="ms-3 theorem definition">
+<p><span class="theorem-title"><strong>Def. 4.1 (Likelihood Function)</strong></span> Let <span class="math inline">\(X_1, X_2, \ldots, X_n\)</span> be a random sample from a distribution with unknown parameters, <span class="math inline">\(\theta_1, \theta_2, \ldots, \theta_m\)</span>. Let the probability density (or mass) function be denoted <span class="math inline">\(f(x_i|\theta_1, \theta_2, \ldots, \theta_m)\)</span>. Suppose that <span class="math inline">\((\theta_1, \theta_2, \ldots, \theta_m)\)</span> is restricted to a given parameter space <span class="math inline">\(\Omega\)</span>. The <strong>likelihood function</strong>, <span class="math inline">\(L(\theta_1, \theta_2, \ldots, \theta_m)\)</span>, is defined as the joint probability distribution of the sample. That is:</p>
+<p><span class="math display">\[\begin{align*}
+    L(\theta_1, \theta_2, \ldots, \theta_m)=\prod_{i=1}^n f(x_i|\theta_1, \theta_2, \ldots, \theta_m)=f(x_1|\theta_1, \theta_2, \ldots, \theta_m)f(x_2|\theta_1, \theta_2, \ldots, \theta_m)\cdots f(x_n|\theta_1, \theta_2, \ldots, \theta_m)
+\end{align*}\]</span></p>
+<div class="callout callout-style-simple callout-caution no-icon">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-body-container">
+<p><strong>Note!</strong><br>
+the symbol <span class="math inline">\(\prod\)</span> means “the product”. Also note that we consider the likelihood function to be a function of <span class="math inline">\(\theta_1, \theta_2, \ldots, \theta_m\)</span>. We can multiply the individual probability distributions to find the joint distribution because the random variables are independent.</p>
+</div>
+</div>
+</div>
+</div>
+<div id="exm-likelihoodfn" class="theorem example">
+<p><span class="theorem-title"><strong>Example 4.1</strong></span> Let <span class="math inline">\(X_i\overset{iid}{\sim} \text{Bin}(10, p)\)</span> for <span class="math inline">\(i=1, 2, 3, 4, 5\)</span>. That is, let <span class="math inline">\(X_1, X_2, \ldots, X_5\)</span> be an independent and identical sample from a Binomial distribution with parameters <span class="math inline">\(n=10\)</span> and <span class="math inline">\(p\)</span>. Find the likelihood function (often referred to as the likelihood).</p>
+<section id="solution" class="level4 card card-body bg-light ms-3 mb-3 pt-0">
+<h4 class="anchored" data-anchor-id="solution">Solution</h4>
+<p>The likelihood function is a product of the individual probability mass functions. Therefore. <span class="math display">\[\begin{align*}
+    L(p)=\prod_{i=1}^n f(x_i|p)=\prod_{i=1}^n {10\choose x_i}p^{x_i}(1-p)^{10-x_i}=\left[\prod_{i=1}^n {10\choose x_i}\right]p^{\sum_{i=1}^n x_i}(1-p)^{10n-\sum_{i=1}^n x_i}
+\end{align*}\]</span></p>
+</section>
+</div>
+<p>Now, that we have a formal definition of the likelihood, the basic idea of maximum likelihood estimation is to treat the likelihood function <span class="math inline">\(L(\theta)\)</span> as a function of <span class="math inline">\(\theta\)</span> and find the value of <span class="math inline">\(\theta\)</span> that maximizes it. For the moment, let’s consider the case with only one unknown parameter, <span class="math inline">\(\theta\)</span>. Recall from calculus, that to find the maximum of <span class="math inline">\(L(\theta)\)</span> (or <span class="math inline">\(\text{argmax}(L(\theta))\)</span>) we first take the derivative of the function with respect to <span class="math inline">\(\theta\)</span>. Next, we set the derivative equal to 0 and solve for <span class="math inline">\(\theta\)</span>. At this point, we know we have a critical point. Finally, we need to check the second derivative to show that it is a maximum.</p>
+<div id="exm-likelihoodfn2" class="theorem example">
+<p><span class="theorem-title"><strong>Example 4.2</strong></span> Consider the previous example where we have <span class="math inline">\(X_i\overset{iid}{\sim} \text{Bin}(10, p)\)</span> for <span class="math inline">\(i=1, 2, 3, 4, 5\)</span>. We found the likelihood function to be: <span class="math display">\[\begin{align*}
+    L(p)=\left[\prod_{i=1}^n {10\choose x_i}\right]p^{\sum_{i=1}^n x_i}(1-p)^{10n-\sum_{i=1}^n x_i}
+\end{align*}\]</span></p>
+<section id="solution-1" class="level4 card card-body bg-light ms-3 mb-3 pt-0">
+<h4 class="anchored" data-anchor-id="solution-1">Solution</h4>
+<p>The first step is to find the likelihood, that we have. The next step is to find the first derivative of the likelihood function with respect to <span class="math inline">\(p\)</span>. Now it is time to put on our calculus hats.</p>
+<p><span class="math display">\[\begin{align*}
+    \frac{d}{dp}L(P)=\left[\prod_{i=1}^n {10\choose x_i}\right]\left(\sum x_i\right)p^{\sum x_i-1}(1-p)^{10n-\sum x_i}-\left[\prod_{i=1}^n {10\choose x_i}\right]p^{\sum x_i}\left(10n-\sum x_i\right)(1-p)^{10n-\sum x_i-1}
+\end{align*}\]</span></p>
+<p>The next step is to set the derivative equal to 0 and solve for <span class="math inline">\(p\)</span>. WOW….wait! Is there an easier way to approach this problem?</p>
+</section>
+</div>
+<p>We will use a “trick” that often makes the differentiation a bit easier. Note that the natural logarithm is an increasing function of <span class="math inline">\(x\)</span>.</p>
+<div id="fig-STAT-415-SEC-1-15" class="lightbox quarto-float quarto-figure quarto-figure-center anchored" alt="Natural logarithm graph" data-fig-align="center">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-STAT-415-SEC-1-15-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="assets/STAT-415-SEC-1-15.svg" class="lightbox" data-gallery="quarto-lightbox-gallery-1" title="Fig&nbsp;4.1: "><img src="assets/STAT-415-SEC-1-15.svg" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:50.0%" alt="Natural logarithm graph"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" id="fig-STAT-415-SEC-1-15-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Fig&nbsp;4.1
+</figcaption>
+</figure>
+</div>
+<p>That is, if <span class="math inline">\(x_1&lt;x_2\)</span>, then <span class="math inline">\(f(x_1)&lt;f(x_2)\)</span> for all <span class="math inline">\(x\)</span>. This means that the value of <span class="math inline">\(x\)</span> that maximizes <span class="math inline">\(f(x)\)</span> will also maximize the natural logarithm of the function. Now, let’s take this back to our previous example.</p>
+<div id="exm-likelihoodfn3" class="theorem example">
+<p><span class="theorem-title"><strong>Example 4.3</strong></span> Again, we have <span class="math inline">\(X_i\overset{iid}{\sim} \text{Bin}(10, p)\)</span> for <span class="math inline">\(i=1, 2, 3, 4, 5\)</span> and the likelihood function:</p>
+<p><span class="math display">\[\begin{align*}
+    L(p)=\left[\prod_{i=1}^n {10\choose x_i}\right]p^{\sum_{i=1}^n x_i}(1-p)^{10n-\sum_{i=1}^n x_i}
+\end{align*}\]</span></p>
+<p>Find the value of <span class="math inline">\(p\)</span> that maximized the likelihood.</p>
+<section id="solution-2" class="level4 card card-body bg-light ms-3 mb-3 pt-0">
+<h4 class="anchored" data-anchor-id="solution-2">Solution</h4>
+<p>Let’s consider the natural logarithm of <span class="math inline">\(L(p)\)</span>, called the <strong>log-likelihood function</strong>.</p>
+<p><span class="math display">\[\begin{align*}
+    \ell(p)=\ln L(p)=\ln \prod_{i=1}^n f(x_i|p)
+\end{align*}\]</span></p>
+<p>By the rules of logarithms, we get</p>
+<p><span class="math display">\[\begin{align*}
+    \ell(p)=\ln \prod_{i=1}^n f(x_i|p)=\sum_{i=1}^n \ln f(x_i|p)=\sum_{i=1}^n\left[\ln {10\choose x_i} +x_i\ln p+(10-x_i)\ln (1-p)\right]
+\end{align*}\]</span></p>
+<p>Now, take the derivative of <span class="math inline">\(\ell(p)\)</span> with respect to <span class="math inline">\(p\)</span>.</p>
+<p><span class="math display">\[\begin{align*}    
+    \frac{d}{dp}\ell(p)=\sum_{i=1}^n \left[0+\frac{x_i}{p}-\frac{(10-x_i)}{1-p}\right]=\frac{\sum x_i}{p}-\frac{\sum (10-x_i)}{1-p}
+\end{align*}\]</span></p>
+<p>The next step is to set the derivative equal to 0 and solve for <span class="math inline">\(p\)</span>.</p>
+<p><span class="math display">\[\begin{align*}
+    &amp; 0=\frac{\sum x_i}{p}-\frac{\sum (10-x_i)}{1-p}, \qquad \Rightarrow \frac{\sum (10-x_i)}{1-p}=\frac{\sum x_i}{p}\\
+    &amp; \Rightarrow p\sum (10-x_i)=(1-p)\sum x_i\\
+    &amp; \Rightarrow 10np-\sum x_ip=\sum x_i -\sum x_ip\\
+    &amp; \Rightarrow 10np=\sum x_i\\
+    &amp; \Rightarrow p=\frac{\sum x_i}{10n}
+\end{align*}\]</span></p>
+<p>Finally, we check that the value found above is a maximum. We take the second derivative with respect to <span class="math inline">\(p\)</span>.</p>
+<p><span class="math display">\[\begin{align*}
+    \frac{d^2}{dp^2}\ell(p)=-\frac{\sum x_i}{p^2}-\frac{\sum (10-x_i)}{(1-p)^2}
+\end{align*}\]</span></p>
+<p>For <span class="math inline">\(p=\frac{\sum x_i}{10n}\)</span> to be a maximum, the value of the second derivative at this point needs to be less than 0.</p>
+<p><span class="math display">\[\begin{align*}
+    -\frac{\sum x_i}{\left(\frac{\sum x_i}{10n}\right)^2}-\frac{\sum (10-x_i)}{\left(1-\frac{\sum x_i}{10n}\right)^2}
+\end{align*}\]</span></p>
+<p>Since all the <span class="math inline">\(x_i\)</span>’s range between 0 and 10, the value of the second derivative is less than 0, therefore, it is a maximum. When we find the value that maximizes the likelihood, it is the maximum likelihood estimator (MLE) and is denoted with a ‘hat’ symbol. Therefore, the MLE is <span class="math inline">\(\hat{p}=\frac{\sum x_i}{10n}\)</span>.</p>
+</section>
+</div>
+<div class="callout callout-style-simple callout-caution no-icon">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-body-container">
+<p><strong>Note!</strong><br>
+For almost all reasonable inference problems, <span class="math inline">\(\ell(\theta)\)</span> has only one critical point, and that point is a maximum. Therefore, in this class, you do NOT have to use the second derivative test to check if it is a maximum. Finding the critical point is enough.</p>
+</div>
+</div>
+</div>
+<p>Now, we state the formal definition og the Maximum Likelihood Estimator (MLE).</p>
+<div id="def-MaximumLikelihoodEstimator.ms-3" class="theorem definition">
+<p><span class="theorem-title"><strong>Def. 4.2 (Maximum Likelihood Estimator)</strong></span> Let <span class="math inline">\(X_1, X_2, \ldots, X_n\)</span> be a random sample from a distribution with unknown parameters, <span class="math inline">\(\theta_1, \theta_2, \ldots, \theta_m\)</span>. Let the probability density (or mass) function be denoted <span class="math inline">\(f(x_i|\theta_1, \theta_2, \ldots, \theta_m)\)</span>. Suppose that <span class="math inline">\((\theta_1, \theta_2, \ldots, \theta_m)\)</span> is restricted to a given parameter space <span class="math inline">\(\Omega\)</span>. The likelihood function is defined as the joint probability distribution of the sample. That is: <span class="math display">\[\begin{align*}
+    L(\theta_1, \theta_2, \ldots, \theta_m)=\prod_{i=1}^n f(x_i|\theta_1, \theta_2, \ldots, \theta_m)
+\end{align*}\]</span> If <span class="math inline">\(\left[u_1(x_1, x_2, \ldots, x_n), u_2(x_1, x_2, \ldots, x_n), \ldots, u_m(x_1, x_2, \ldots, x_n)\right]\)</span> is the <span class="math inline">\(m\)</span>-tuple that maximizes the likelihood function then: <span class="math display">\[\begin{align*}
+    \hat{\theta}_i=u_i(x_1, x_2, \ldots, x_n), \qquad i=1, 2, \ldots, m
+\end{align*}\]</span> is the <strong>maximum likelihood estimator</strong> of <span class="math inline">\(\theta_i\)</span>. The corresponding observed value of the statistic, namely, <span class="math display">\[\begin{align*}
+    \left[u_1(x_1, x_2, \ldots, x_n), u_2(x_1, x_2, \ldots, x_n), \ldots, u_m(x_1, x_2, \ldots, x_n)\right]
+\end{align*}\]</span> are called the <strong>maximum likelihood estimates</strong> of <span class="math inline">\(\theta_i\)</span>, for <span class="math inline">\(i=1, 2, \ldots, m\)</span>.</p>
+</div>
+</section>
+<section id="one-parameter-case" class="level2" data-number="4.2">
+<h2 data-number="4.2" class="anchored" data-anchor-id="one-parameter-case"><span class="header-section-number">4.2</span> One Parameter Case</h2>
+<p>In this section, we summarize the steps to find a maximum likelihood estimator in the one parameter case.</p>
+<section id="steps-to-find-the-mle-0ne-parameter-case" class="level4">
+<h4 class="anchored" data-anchor-id="steps-to-find-the-mle-0ne-parameter-case">Steps to Find the MLE (0ne Parameter Case)</h4>
+<ol type="1">
+<li>Given a random sample <span class="math inline">\(X_1, X_2, \ldots, X_n\)</span> from a distribution with unknown parameter, <span class="math inline">\(\theta\)</span>, find the likelihood function: <span class="math display">\[\begin{align*}
+         L(\theta)=\prod_{i=1}^n f(x_i|\theta)
+     \end{align*}\]</span></li>
+<li>Find the log-likelihood function: <span class="math display">\[\begin{align*}
+         \ell(\theta)=\ln L(\theta)=\ln \prod_{i=1}^n f(x_i|\theta)=\sum_{i=1}^n \ln f(x_i\theta)
+     \end{align*}\]</span></li>
+<li>Take the first derivative of the log-likelihood function: <span class="math display">\[\begin{align*}
+         \ell^\prime(\theta)=\frac{d}{d\theta}\ell(\theta)
+     \end{align*}\]</span></li>
+<li>Set <span class="math inline">\(\ell^\prime(\theta)=0\)</span> and solve for <span class="math inline">\(\theta\)</span>. This will give us a critical point.</li>
+<li>The resulting critical value is the MLE of <span class="math inline">\(\theta\)</span>, denoted <span class="math inline">\(\hat{\theta}\)</span>.</li>
+</ol>
+<p>Now that we have the formal definitions out of the way and our steps clearly defined, let us work on some examples.</p>
+<div id="exm-mleonparam1" class="theorem example">
+<p><span class="theorem-title"><strong>Example 4.4</strong></span> Let <span class="math inline">\(X_1, X_2, \ldots, X_n\)</span> be a random sample from a Geometric distribution, with unknown parameter <span class="math inline">\(p\)</span>. Find the MLE.</p>
+<section id="solution-3" class="level4 card card-body bg-light ms-3 mb-3 pt-0">
+<h4 class="anchored" data-anchor-id="solution-3">Solution</h4>
+<p>The pmf of Geometric random variable is <span class="math inline">\(f(x)=(1-p)^{x-1}p\)</span> for <span class="math inline">\(x=1, 2, 3, \ldots\)</span>. Follow the steps above to find the MLE.</p>
+<ol type="1">
+<li><p>The likelihood function is: <span class="math display">\[\begin{align*}
+         L(p)=\prod_{i=1}^n (1-p)^{x_i-1}p=(1-p)^{\sum_{i=1}^n (x_i-1)}p^n
+     \end{align*}\]</span></p></li>
+<li><p>Find the log-likelihood function: <span class="math display">\[\begin{align*}
+         \ell(p)=\sum (x_i-1)\ln (1-p)+n\ln p
+     \end{align*}\]</span></p></li>
+<li><p>Take the first derivative of <span class="math inline">\(\ell(p)\)</span> with respect to <span class="math inline">\(p\)</span>. <span class="math display">\[\begin{align*}
+         \frac{d}{dp}\ell(p)=-\frac{\sum (x_i-1)}{1-p}+\frac{n}{p}
+     \end{align*}\]</span></p></li>
+<li><p>Set the derivative equal to 0 and solve for <span class="math inline">\(p\)</span>.</p>
+<p><span class="math display">\[\begin{align} &amp; 0=-\frac{\sum (x_i-1)}{1-p}+\frac{n}{p}, \qquad \Rightarrow 0=\frac{-p\sum   (x_i-1)+n(1-p)}{p(1-p)}=\frac{-p\sum x_i+np+n-np}{p(1-p)}\\ &amp; \Rightarrow 0=-p\sum x_i+n, \qquad \Rightarrow -n=-p\sum x_i\\ &amp; \Rightarrow p=\frac{n}{\sum x_i}\end{align}\]</span></p></li>
+<li><p>The MLE for <span class="math inline">\(p\)</span> is <span class="math inline">\(\hat{p}=\frac{n}{\sum x_i}\)</span></p></li>
+</ol>
+</section>
+</div>
+<div id="exm-mleonparam2" class="theorem example">
+<p><span class="theorem-title"><strong>Example 4.5</strong></span> Let <span class="math inline">\(X_1, X_2, \ldots, X_n\)</span> be a random sample from a Gamma distribution, with unknown parameter <span class="math inline">\(\theta\)</span> and known parameter <span class="math inline">\(\alpha\)</span>. Find the MLE of <span class="math inline">\(\theta\)</span>.</p>
+<section id="solution-4" class="level4 card card-body bg-light ms-3 mb-3 pt-0">
+<h4 class="anchored" data-anchor-id="solution-4">Solution</h4>
+<p>The pdf of Gamma random variable is <span class="math inline">\(f(x)=\frac{1}{\Gamma(\alpha)\theta^{\alpha}}x^{\alpha-1}e^{-x/\theta}\)</span> for <span class="math inline">\(x&gt;0\)</span>. Follow the steps to find the MLE.</p>
+<ol type="1">
+<li><p>The likelihood function is:</p>
+<p><span class="math display">\[\begin{align*} L(p)=\prod_{i=1}^n \frac{1}{\Gamma(\alpha)\theta^\alpha}x_i^{\alpha-1}e^{-x_i/\theta}=\left(\frac{1}{\Gamma(\alpha)\theta^\alpha}\right)^n\left(\prod_{i=1}^n x_i\right)^{\alpha-1}e^{-\frac{\sum x_i}{\theta}} \end{align*}\]</span></p></li>
+<li><p>Find the log-likelihood function:</p>
+<p><span class="math display">\[\begin{align*}
+         \ell(\theta)=-n\ln (\Gamma(\alpha))-n\alpha\ln (\theta)+(\alpha-1)\ln \left(\ln \prod x_i\right)-\frac{\sum x_i}{\theta}
+     \end{align*}\]</span></p></li>
+<li><p>Take the first derivative of <span class="math inline">\(\ell(\theta)\)</span> with respect to <span class="math inline">\(\theta\)</span>. <span class="math display">\[\begin{align*}
+         \frac{d}{d\theta}\ell(\theta)=-\frac{n\alpha}{\theta}+\frac{\sum x_i}{\theta^2}
+     \end{align*}\]</span></p></li>
+<li><p>Set the derivative equal to 0 and solve for <span class="math inline">\(p\)</span>. <span class="math display">\[\begin{align*}
+         &amp; 0=-\frac{n\alpha}{\theta}+\frac{\sum x_i}{\theta^2}=\frac{-n\alpha\theta+\sum x_i}{\theta^2}\\
+         &amp; \Rightarrow 0=-n\alpha\theta+\sum x_i, \qquad \Rightarrow n\alpha\theta=\sum x_i\\
+         &amp; \Rightarrow \theta=\frac{\sum x_i}{n\alpha}
+     \end{align*}\]</span></p></li>
+<li><p>The MLE for <span class="math inline">\(\theta\)</span> is <span class="math inline">\(\hat{\theta}=\frac{\sum x_i}{n\alpha}\)</span></p></li>
+</ol>
+</section>
+</div>
+<p>In the last two examples, we were given a random sample and we found maximum likelihood estimators for our unknown parameter. Let’s consider now some examples where find the maximum likelihood estimate when we are given a set of observations.</p>
+<div id="exm-mleonparam3" class="theorem example">
+<p><span class="theorem-title"><strong>Example 4.6</strong></span> Suppose we have three observations from a Geometric distribution. The observations are <span class="math inline">\(x_1=12, x_2=19, x_3=10\)</span>. Find the maximum likelihood estimate of <span class="math inline">\(\theta\)</span>.</p>
+<section id="solution-5" class="level4 card card-body bg-light ms-3 mb-3 pt-0">
+<h4 class="anchored" data-anchor-id="solution-5">Solution</h4>
+<p>In the previous example, we found the MLE to be <span class="math inline">\(\hat{p}=\frac{n}{\sum x_i}\)</span>. Therefore, the maximum likelihood estimate is:</p>
+<p><span class="math display">\[\begin{align*}
+    \hat{p}=\frac{n}{\sum x_i}=\frac{3}{12+19+10}=\frac{3}{41}
+\end{align*}\]</span></p>
+</section>
+</div>
+<div id="exm-mleonparam4" class="theorem example">
+<p><span class="theorem-title"><strong>Example 4.7</strong></span> Suppose we have three observations from a Gamma distribution with <span class="math inline">\(\alpha=3\)</span> and unknown parameter <span class="math inline">\(\theta\)</span>. The observations are <span class="math inline">\(x_1=3.4, x_2=8.1, x_3=5.5\)</span>. Find the maximum likelihood estimate of <span class="math inline">\(\theta\)</span>.</p>
+<section id="solution-6" class="level4 card card-body bg-light ms-3 mb-3 pt-0">
+<h4 class="anchored" data-anchor-id="solution-6">Solution</h4>
+<p>The the previous example, we found the MLE to be <span class="math inline">\(\hat{\theta}=\frac{\sum x_i}{n\alpha}\)</span>. Therefore, the maximum likelihood estimate is:</p>
+<p><span class="math display">\[\begin{align*}
+    \hat{\theta}=\frac{\sum x_i}{n\alpha}=\frac{3.4+8.1+5.5}{3(3)}=
+\end{align*}\]</span></p>
+</section>
+</div>
+<div id="exm-mleonparam5" class="theorem example">
+<p><span class="theorem-title"><strong>Example 4.8</strong></span> Suppose we have the following observations from a Poisson distribution with <span class="math inline">\(\lambda\)</span>. <span class="math display">\[\begin{align*}
+    &amp; 14, \qquad 21, \qquad 17\\
+    &amp; 11, \qquad 22
+\end{align*}\]</span> Find the maximum likelihood estimate of <span class="math inline">\(\lambda\)</span>.</p>
+<section id="solution-7" class="level4 card card-body bg-light ms-3 mb-3 pt-0">
+<h4 class="anchored" data-anchor-id="solution-7">Solution</h4>
+<p>First, we need to have the MLE, using our usual steps. The likelihood function is:</p>
+<p><span class="math display">\[\begin{align*}
+    L(\lambda)=\prod_{i=1}^n \frac{e^{-\lambda}\lambda^{x_i}}{x_i!}=\frac{e^{-n\lambda}\lambda^{\sum x_i}}{\prod x_i!}
+\end{align*}\]</span></p>
+<p>The log-likelihood is:</p>
+<p><span class="math display">\[\begin{align*}
+    \ell(\lambda)=-n\lambda +\left(\sum x_i\right)\ln \lambda +\ln \left(\prod x_i!\right)
+\end{align*}\]</span></p>
+<p>The first derivative is:</p>
+<p><span class="math display">\[\begin{align*}
+    \frac{d}{d\lambda}=-n+\frac{\sum x_i}{\lambda}
+\end{align*}\]</span></p>
+<p>Setting the derivative equal to 0 and solving for <span class="math inline">\(\lambda\)</span>, we get the following MLE:</p>
+<p><span class="math display">\[\begin{align*}
+    &amp; 0=-n+\frac{\sum x_i}{\lambda}, \qquad \Rightarrow n=\frac{\sum x_i}{\lambda}\\
+    &amp; \Rightarrow \hat{\lambda}=\frac{\sum x_i}{n}=\bar{x}
+\end{align*}\]</span></p>
+<p>Therefore, the maximum likelihood estimate of <span class="math inline">\(\lambda\)</span> is <span class="math inline">\(\hat{\lambda}=\frac{14+21+17+11+22}{5}=\frac{85}{5}=17\)</span>.</p>
+</section>
+</div>
+</section>
+</section>
+<section id="maximize-the-likelihood-directly-support-parameters" class="level2" data-number="4.3">
+<h2 data-number="4.3" class="anchored" data-anchor-id="maximize-the-likelihood-directly-support-parameters"><span class="header-section-number">4.3</span> Maximize the Likelihood Directly: Support Parameters</h2>
+<p>In this section, we will continue to explore maximum likelihood estimation. Consider the following example.</p>
+<div id="exm-suppparam1" class="theorem example">
+<p><span class="theorem-title"><strong>Example 4.9</strong></span> Suppose we have a random sample of size <span class="math inline">\(n\)</span> from a Uniform distribution over the interval <span class="math inline">\((0, a)\)</span>, where <span class="math inline">\(a\)</span> is an unknown real number. What is the MLE of <span class="math inline">\(a\)</span>?</p>
+<section id="solution-8" class="level4 card card-body bg-light ms-3 mb-3 pt-0">
+<h4 class="anchored" data-anchor-id="solution-8">Solution</h4>
+<p>Let’s approach this problem using our usual steps. The pdf of this Uniform is <span class="math inline">\(f(x)=\frac{1}{a}\)</span>, for <span class="math inline">\(0&lt;x&lt;a\)</span>. The likelihood is:</p>
+<p><span class="math display">\[\begin{align*}
+    L(a)=\prod_{i=1}^n \frac{1}{a}=\frac{1}{a^n}=a^{-n}
+\end{align*}\]</span></p>
+<p>The log-likelihood function is:</p>
+<p><span class="math display">\[\begin{align*}
+    \ell(a)=-n\ln a
+\end{align*}\]</span></p>
+<p>The derivative is:</p>
+<p><span class="math display">\[\begin{align*}
+    \frac{d}{da}\ell(a)=-\frac{n}{a}
+\end{align*}\]</span></p>
+<p>But what happens when we set the derivative equal to 0 and solve for <span class="math inline">\(a\)</span>? If we set <span class="math inline">\(-\frac{n}{a}=0\)</span>, then our MLE would be <span class="math inline">\(\hat{a}=\infty\)</span>!.</p>
+</section>
+</div>
+<p>What is different about this example compared to the other MLE examples so far? It looks like the likelihood function is monotonic increasing. Therefore, it will not have a critical point.</p>
+<p>In the above example, we did not account for the constraint that <span class="math inline">\(a\)</span> has on the data. In our previous examples from the last lesson, the unknown parameter is not in the support. For example, the support of <span class="math inline">\(X\)</span> is a Normal random variable is <span class="math inline">\(-\infty&lt;x&lt;\infty\)</span>. In the Gamma example, the support of <span class="math inline">\(X\)</span> is <span class="math inline">\(x&gt;0\)</span>, and so on.</p>
+<p>In the case of the Uniform distribution, however, the unknown parameter <span class="math inline">\(a\)</span> is in the support and we did not account for the constraint that <span class="math inline">\(a\)</span> has on the data. So what do we do?</p>
+<p>Let’s first define the indicator function.</p>
+<div id="def-Indicatorfunction" class="ms-3 theorem definition">
+<p><span class="theorem-title"><strong>Def. 4.3 (Indicator function)</strong></span> Suppose we have an event <span class="math inline">\(A\)</span>. The <strong>indicator function of</strong> <span class="math inline">\(A\)</span> is defined as:</p>
+<p><span class="math display">\[
+\begin{align*}
+    \mathbf{1}_{A}=\begin{cases}
+        1, &amp; \text{ if $A$ occurs}\\
+        0, &amp; \text{ if $A$ does not occur}
+    \end{cases}
+\end{align*}
+\]</span></p>
+</div>
+<p>Let’s look at an example where we use the indicator function and find the maximum likelihood estimator.</p>
+<div id="exm-suppparam2" class="theorem example">
+<p><span class="theorem-title"><strong>Example 4.10</strong></span> Let <span class="math inline">\(Y_1, \ldots, Y_n\)</span> be a random sample from a Bernoulli distribution with parameter <span class="math inline">\(p\)</span>. The pdf of <span class="math inline">\(Y\)</span> is:</p>
+<p><span class="math display">\[\begin{align*}
+    f(y)=\begin{cases}
+    p^y(1-p)^{1-y} &amp; y=0, 1\\
+    0 &amp; \text{otherwise}
+    \end{cases}
+\end{align*}\]</span></p>
+<p>There are other ways we could rewrite the pdf. Consider it as</p>
+<p><span class="math display">\[\begin{align*}
+    f(y)=\begin{cases}
+    p &amp; y=1\\
+    1-p &amp; y=0
+    \end{cases}
+\end{align*}\]</span></p>
+<p>Still, another way we could rewrite the pdf is with the indicator function:</p>
+<p><span class="math display">\[\begin{align*}
+    f(y)=p^y(1-p)^{1-y}\mathbf{1}_{\{y\in \{0, 1\}\}}
+\end{align*}\]</span></p>
+<p>where</p>
+<p><span class="math display">\[\begin{align*}
+    \mathbf{1}_{\{y \in \{0,1\}\}}=\begin{cases}
+    1 &amp; \text{ if $y=$ or $y=1$}\\
+    0 &amp; \text{otherwise}
+    \end{cases}
+\end{align*}\]</span></p>
+<p>Using this version of the pdf, find the maximum likelihood estimator of <span class="math inline">\(p\)</span>.</p>
+<section id="solution-9" class="level4 card card-body bg-light ms-3 mb-3 pt-0">
+<h4 class="anchored" data-anchor-id="solution-9">Solution</h4>
+<p>The likelihood is:</p>
+<p><span class="math display">\[\begin{align*}
+    L(p)=\prod_{i=1}^n p^{y_1}(1-p)^{1-y_1}\mathbf{1}_{\{y\in \{0, 1\}\}}=p^{\sum y_i}(1-p)^{n-\sum y_i}\prod \mathbf{1}_{\{y\in \{0, 1\}\}}
+\end{align*}\]</span></p>
+<p>The log-likelihood function is:</p>
+<p><span class="math display">\[\begin{align*}
+    \ell(p)=\sum y_i\ln p+(n-\sum y_i)\ln (1-p)+\sum \ln \left(\mathbf{1}_{\{y\in \{0, 1\}\}}\right)
+\end{align*}\]</span></p>
+<p>Next, take the derivative with respect to <span class="math inline">\(p\)</span>.</p>
+<p><span class="math display">\[\begin{align*}
+    \frac{d}{dp}=\frac{\sum y_1}{p}-\frac{n-\sum y_i}{1-p}
+\end{align*}\]</span></p>
+<p>At this point, notice that the indicator function dropped out as it is a constant with respect to <span class="math inline">\(p\)</span>. Now, continue to find the MLE.</p>
+<p><span class="math display">\[\begin{align*}
+    &amp; \frac{\sum y_1}{p}=\frac{n-\sum y_i}{1-p}, \qquad \Rightarrow \sum y_i-p\sum y_i=np-p\sum y_i\\
+    &amp; \Rightarrow \sum y_i=np, \qquad \Rightarrow \hat{p}=\frac{\sum y_i}{n}
+\end{align*}\]</span></p>
+</section>
+</div>
+<p>How does this help us in the Uniform <span class="math inline">\((0, a)\)</span> case? In the example above, we know <span class="math inline">\(X\)</span> is a Uniform random variable over the interval <span class="math inline">\((0, a)\)</span>. Therefore, instead of writing the pdf as</p>
+<p><span class="math display">\[\begin{align*}
+    f(x)=\begin{cases}
+        \frac{1}{a}, &amp; 0&lt;x&lt;a\\
+        0, &amp; \text{otherwise}
+        \end{cases}
+\end{align*}\]</span></p>
+<p>we can rewrite it using the indicator function.</p>
+<p><span class="math display">\[\begin{align*}
+    f(x)=\frac{1}{a}\times\mathbf{1}_{x\in (0, a)}
+\end{align*}\]</span></p>
+<p>where</p>
+<p><span class="math display">\[\begin{align*}
+    \mathbf{1}_{x\in (0, a)}=\begin{cases}
+    1, &amp; \text{ if $x\in (0, a)$}\\
+    0, &amp; \text{ if $x\notin (0, a)$}
+    \end{cases}
+\end{align*}\]</span></p>
+<div id="exm-suppparam3" class="theorem example">
+<p><span class="theorem-title"><strong>Example 4.11</strong></span> Find the maximum likelihood estimator for <span class="math inline">\(a\)</span> for the Uniform example.</p>
+<section id="solution-10" class="level4 card card-body bg-light ms-3 mb-3 pt-0">
+<h4 class="anchored" data-anchor-id="solution-10">Solution</h4>
+<p>Again, we start with the likelihood</p>
+<p><span class="math display">\[\begin{align*}
+    L(a)=\prod_{i=1}^n \frac{1}{a}\mathbf{1}_{x\in (0, a)}=a^{-n}\prod_{i=1}^n \mathbf{1}_{x\in (0, a)}
+\end{align*}\]</span></p>
+<p>Note that if <span class="math inline">\(x_i&gt;a\)</span>, then the likelihood is 0. In other words, <span class="math inline">\(a\)</span> cannot be any less than any <span class="math inline">\(x_i\)</span>. Therefore, to maximize <span class="math inline">\(L(a)\)</span>, we must make <span class="math inline">\(a\)</span> as small as possible. Therefore, the maximum likelihood estimator is</p>
+<p><span class="math display">\[\begin{align*}
+    \hat{a}=\max(X_i)=Y_n
+\end{align*}\]</span></p>
+<p>Thus, the maximum likelihood estimator for <span class="math inline">\(a\)</span> is the maximum order statistic, <span class="math inline">\(Y_n\)</span>, as the likelihood is maximized when <span class="math inline">\(a=\max(x_i)\)</span>.</p>
+</section>
+</div>
+<div id="exm-suppparam4" class="theorem example">
+<p><span class="theorem-title"><strong>Example 4.12</strong></span> Suppose we have <span class="math inline">\(X_i\sim \text{Pareto}(m, \alpha=2)\)</span> be an iid sample of size <span class="math inline">\(n\)</span>, and let the parameter <span class="math inline">\(\alpha=2\)</span>. The pdf of a Pareto is:</p>
+<p><span class="math display">\[\begin{align*}
+    f(x)=\frac{\alpha m^\alpha}{x^{\alpha+1}}=\frac{2m^2}{x^3}, \qquad x\ge m
+\end{align*}\]</span></p>
+<p>Find the maximum likelihood estimator of <span class="math inline">\(m\)</span>.</p>
+<section id="solution-11" class="level4 card card-body bg-light ms-3 mb-3 pt-0">
+<h4 class="anchored" data-anchor-id="solution-11">Solution</h4>
+<p>The first step as always is to find the likelihood function:</p>
+<p><span class="math display">\[\begin{align*}
+    L(m)=\prod_{i=1}^n \frac{2m^2}{x_i^3}\mathbf{1}_{\{x_i&gt;m\}}=\frac{2^nm^{2n}}{\prod x_i^3}\prod \mathbf{1}_{\{x_i&gt;m\}}
+\end{align*}\]</span></p>
+<p>To maximize the likelihood we consider the terms that include <span class="math inline">\(m\)</span>. Namely,</p>
+<p><span class="math display">\[\begin{align*}
+    m^{2n}\prod \mathbf{1}_{\{x_i&gt;m\}}
+\end{align*}\]</span></p>
+<p>The only way that the product of the indicator function is equal to 1 is if <span class="math inline">\(x_1&gt;m\)</span>, <span class="math inline">\(x_2&gt;m\)</span>, …, <span class="math inline">\(x_n&gt;m\)</span>. It is the same thing as stating that the minimum order statistic is greater than <span class="math inline">\(m\)</span>. In other words, if <span class="math inline">\(Y_1\)</span> (the first order statistics or minimum) is greater than <span class="math inline">\(m\)</span>, then all of the observations are greater than <span class="math inline">\(m\)</span>. Therefore, the maximum likelihood estimator of <span class="math inline">\(m\)</span> is the first order statistic, <span class="math inline">\(Y_1\)</span>.</p>
+</section>
+</div>
+<div class="callout callout-style-simple callout-caution no-icon">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-body-container">
+<p><strong>Note!</strong><br>
+This approach is only needed when the likelihood is monotonic (Increasing or decreasing) when we ignore the support. When <span class="math inline">\(L(\theta)\)</span> is monotone increasing, it is often the MLE is <span class="math inline">\(\hat{\theta}=\min(x_i)\)</span>.Likewise, when <span class="math inline">\(L(\theta)\)</span> is monotone decreasing, it is often the MLE is <span class="math inline">\(\hat{\theta}=\max(x_i)\)</span>.</p>
+</div>
+</div>
+</div>
+<div id="exm-suppparam5" class="theorem example">
+<p><span class="theorem-title"><strong>Example 4.13</strong></span> Suppose we have a random sample <span class="math inline">\(X_1, \ldots, X_4\)</span> from a Uniform distribution over <span class="math inline">\((3c, 10)\)</span>. Find the maximum likelihood estimate of <span class="math inline">\(c\)</span> using the following observations.</p>
+<p><span class="math display">\[\begin{align*}
+    &amp; x_1=-5, \qquad x_2=6\\
+    &amp; x_3=-1, \qquad x_4=2
+\end{align*}\]</span></p>
+<section id="solution-12" class="level4 card card-body bg-light ms-3 mb-3 pt-0">
+<h4 class="anchored" data-anchor-id="solution-12">Solution</h4>
+<p>The first step is to find the pdf of <span class="math inline">\(X_i\)</span>.</p>
+<p><span class="math display">\[\begin{align*}
+    f(x_i|c)=\frac{1}{10-3c}\mathbf{1}_{\{3c\le x_i\le10\}}, \qquad i=1, 2, 3, 4
+\end{align*}\]</span></p>
+<p>Next, we find the likelihood function.</p>
+<p><span class="math display">\[\begin{align*}
+    L(c)&amp;=\prod_{i=1}^4 \frac{1}{10-3c}\mathbf{1}_{\{3c\le x_i\le10\}}\\
+    &amp; =\left(\frac{1}{10-3c}\right)^4\mathbf{1}_{\{3c\le x_1\le 10, 3c\le x_2\le 10, 3c\le x_3\le 10, 3c\le x_4\le 10\}}
+\end{align*}\]</span></p>
+<p>We can show that <span class="math inline">\(\left(\frac{1}{10-3c}\right)^4\)</span> is a monotone increasing function. Now, let’s take a closer look at the indication function.</p>
+<p><span class="math display">\[\begin{align*}
+    \mathbf{1}_{\{3c\le x_1\le 10, 3c\le x_2\le 10, 3c\le x_3\le 10, 3c\le x_4\le 10\}}
+\end{align*}\]</span></p>
+<p>See if you can convince yourself that the indication function can also be written as:</p>
+<p><span class="math display">\[\begin{align*}
+    \mathbf{1}_{\{3c\le x_1, 3c\le x_2, 3c\le x_3, 3c\le x_4\}}\times\mathbf{1}_{\{x_1\le 10, x_2\le 10, x_3\le 10, x_4\le 10\}}
+\end{align*}\]</span></p>
+<p>The second term is not a function of <span class="math inline">\(c\)</span>. Therefore, we can ignore it. Let’s focus on the first term which is a function of <span class="math inline">\(c\)</span>.</p>
+<p><span class="math display">\[\begin{align*}
+    \mathbf{1}_{\{3c\le x_1, 3c\le x_2, 3c\le x_3, 3c\le x_4\}}
+\end{align*}\]</span></p>
+<p>Similar to before, we can rewrite the indicator function as:</p>
+<p><span class="math display">\[\begin{align*}
+    \mathbf{1}_{\{3c\le \min(x_1, \ldots, x_4)\}}=\mathbf{1}_{\{c\le \frac{\min(x_1, \ldots, x_4)}{3}\}}
+\end{align*}\]</span></p>
+<p>Therefore, the maximum likelihood estimator of <span class="math inline">\(c\)</span> is</p>
+<p><span class="math display">\[\begin{align*}
+    \hat{c}=\frac{\min(x_i)}{3}
+\end{align*}\]</span></p>
+<p>Using our data, the maximum likelihood estimate is <span class="math inline">\(\hat{c}=\frac{-5}{3}\)</span>.</p>
+</section>
+</div>
+</section>
+<section id="multiparameter-case" class="level2" data-number="4.4">
+<h2 data-number="4.4" class="anchored" data-anchor-id="multiparameter-case"><span class="header-section-number">4.4</span> Multiparameter Case</h2>
+<p>So far, we have learned the maximum likelihood estimator for distributions with one parameter. For example, <span class="math inline">\(\text{Unif}(0, \theta)\)</span> and <span class="math inline">\(\text{Bin}(10, p)\)</span>. We also considered the Normal distribution where only one of the parameters was unknown. In this lesson, we will learn how to find the estimators in situations where there is more than one unknown parameter. For example, <span class="math inline">\(N(\mu, \sigma^2)\)</span>, <span class="math inline">\(\text{Gamma}(\alpha, \beta)\)</span>, etc…</p>
+<p>In general, we can follow a similar approach to the multiparameter models as we do for the single parameter case.</p>
+<section id="notation" class="level4">
+<h4 class="anchored" data-anchor-id="notation">Notation</h4>
+<p>We will be using vector notation in this section. Scalars are not underlined and vectors will be underlined. For example, scalars will look like</p>
+<p><span class="math display">\[\begin{align*}
+&amp; a\in  \mathbb{R}\\
+&amp; \theta\in \mathbb{R}
+\end{align*}\]</span></p>
+<p>When we reference vectors, the notation uses an underline. For example,</p>
+<p><span class="math display">\[\begin{align*}
+    &amp; \underline{x}\in \mathbb{R}^n, \qquad \underline{x}=(x_1, x_2, \ldots, x_n)\\
+    &amp;  \underline{\theta}\in \mathbb{R}^p, \qquad \underline{\theta}=(\theta_1, \theta_2, \ldots, \theta_p)
+\end{align*}\]</span></p>
+<p>When we have more than one parameter, we can write the pdf (or pmf) as:</p>
+<p><span class="math display">\[\begin{align*}
+f(x|\underline{\theta})
+\end{align*}\]</span></p>
+<p>the likelihood as:</p>
+<p><span class="math display">\[\begin{align*}
+    L(\underline{\theta})=\prod_{i=1}^n f(x_i|\underline{\theta})
+\end{align*}\]</span></p>
+<p>The log-likelihood is:</p>
+<p><span class="math display">\[\begin{align*}
+    &amp; \ell(\underline{\theta})=\sum_{i=1}^n \log f(x_i|\underline{\theta})\\
+    &amp;=\ell(\theta_1, \ldots, \theta_p)=\sum_{i=1}^n \log f(x_i|\theta_1, \ldots, \theta_p)
+\end{align*}\]</span></p>
+<p>The critical points occur when</p>
+<p><span class="math display">\[\begin{align*}
+    &amp; \frac{d}{d\theta_1}\ell(\underline{\theta})=0\\
+    &amp; \frac{d}{d\theta_2}\ell(\underline{\theta})=0\\
+    &amp; \vdots\\
+    &amp;  \frac{d}{d\theta_p}\ell(\underline{\theta})=0
+\end{align*}\]</span></p>
+<p>Therefore, we have <span class="math inline">\(p\)</span> equations and <span class="math inline">\(p\)</span> unknowns. Solving this system of equations gives us <span class="math inline">\(\hat{\underline{\theta}}=(\hat{\theta}_1, \ldots, \hat{\theta_p})\)</span>.</p>
+<p>Let’s take a look at an example for finding the MLE of multiple parameters.</p>
+<div id="exm-multparam1" class="theorem example">
+<p><span class="theorem-title"><strong>Example 4.14</strong></span> Suppose we have a random sample of size <span class="math inline">\(n\)</span> from a Normal distribution with unknown parameters <span class="math inline">\(\mu\)</span> and <span class="math inline">\(\sigma^2\)</span>. Find the MLE of <span class="math inline">\(\underline{\theta}=(\mu, \sigma^2)\)</span>.</p>
+<section id="solution-13" class="level4 card card-body bg-light ms-3 mb-3 pt-0">
+<h4 class="anchored" data-anchor-id="solution-13">Solution</h4>
+<p>The likelihood function is:</p>
+<p><span class="math display">\[\begin{align*}
+    L(\underline{\theta})=\prod_{i=1}^n \frac{1}{\sqrt{2\pi\sigma^2}}e^{-\frac{1}{2\sigma^2}(x_i-\mu)^2}=\left(2\pi\sigma^2\right)^{-n/2}e^{\sum -\frac{1}{2\sigma^2}(x_i-\mu)^2}
+\end{align*}\]</span></p>
+<p>The log-likelihood is:</p>
+<p><span class="math display">\[\begin{align*}
+    \ell(\underline{\theta})=-\frac{n}{2}\ln (2\pi)-\frac{n}{2}\ln (\sigma^2)-\sum_{i=1}^n \frac{1}{2\sigma^2}(x_i-\mu)^2
+\end{align*}\]</span></p>
+<p>Let <span class="math inline">\(\nu=\sigma^2\)</span>. We have:</p>
+<p><span class="math display">\[\begin{align*}
+    \ell(\mu, \nu)=-\frac{n}{2}\ln (2\pi)-\frac{n}{2}\ln (\nu)-\sum_{i=1}^n \frac{1}{2\nu}(x_i-\mu)^2
+\end{align*}\]</span></p>
+<p>Now, take the derivatives with respect to <span class="math inline">\(\mu\)</span> and <span class="math inline">\(\nu\)</span>.</p>
+<p><span class="math display">\[\begin{align*}
+    &amp; \frac{d\ell(\mu, \nu)}{d\mu}=-2\frac{1}{2\nu}\sum (x_i-\mu)(-1)=\frac{\sum x_i-n\mu}{\nu} \\
+    &amp; \frac{d\ell(\mu, \nu)}{d\nu}=-\frac{n}{2\nu}+\frac{\sum (x_i-\mu)^2}{2\nu^2}=\frac{-n\nu+\sum(x_i-\mu)^2}{2\nu^2}
+\end{align*}\]</span></p>
+<p>Setting the derivatives equal to 0 and solving gives us:</p>
+<p><span class="math display">\[\begin{align*}
+    &amp; 0=\frac{\sum x_i-n\mu}{\nu}, \qquad \Rightarrow \mu=\frac{\sum x_i}{n}=\bar{x}\\
+    &amp; 0=\frac{-n\nu+\sum(x_i-\mu)^2}{2\nu^2}, \qquad \Rightarrow \nu=\frac{\sum (x_i-\mu)^2}{n}
+\end{align*}\]</span></p>
+<p>We have two equations and two unknowns. Therefore, we can find the MLEs to be:</p>
+<p><span class="math display">\[\begin{align*}
+    &amp; \hat{\mu}=\bar{x}\\
+    &amp; \hat{\nu}=\hat{\sigma^2}=\frac{\sum_{i=1}^n (x_i-\bar{x})^2}{n}
+\end{align*}\]</span></p>
+</section>
+</div>
+<div id="exm-multparam2" class="theorem example">
+<p><span class="theorem-title"><strong>Example 4.15</strong></span> Let <span class="math inline">\(X_i\overset{iid}{\sim} \text{Laplace}(\mu, b)\)</span>, for <span class="math inline">\(i=1, \ldots, n\)</span>. Find the MLE of <span class="math inline">\(\underline{\theta}=(\mu, b)\)</span>.</p>
+<section id="solution-14" class="level4 card card-body bg-light ms-3 mb-3 pt-0">
+<h4 class="anchored" data-anchor-id="solution-14">Solution</h4>
+<p>The pdf of <span class="math inline">\(X\)</span> is:</p>
+<p><span class="math display">\[\begin{align*}
+    f(x|\underline{\theta})=\frac{1}{2b}e^{-\frac{|x-\mu|}{b}}, \qquad -\infty&lt;x&lt;\infty
+\end{align*}\]</span> The likelihood function is:</p>
+<p><span class="math display">\[\begin{align*}
+    L(\underline{\theta})=\prod_{i=1}^n \frac{1}{2b}e^{\frac{|x_i-\mu|}{b}}=(2b)^{-n}e^{-\frac{\sum |x_i-\mu|}{b}}
+\end{align*}\]</span></p>
+<p>The log-likelihood function is:</p>
+<p><span class="math display">\[\begin{align*}
+    \ell(\underline{\theta})=-n\ln 2-n\ln b-\frac{\sum |x_i-\mu|}{b}
+\end{align*}\]</span></p>
+<p>Let’s start with taking the derivative with respect to <span class="math inline">\(b\)</span>.</p>
+<p><span class="math display">\[\begin{align*}
+    \frac{d\ell(\underline{\theta})}{db}=-\frac{n}{b}+\frac{\sum |x_i-\mu|}{b^2}=\frac{-nb+\sum |x_i-\mu|}{b^2}
+\end{align*}\]</span></p>
+<p>Setting the derivative equal to 0, we get:</p>
+<p><span class="math display">\[\begin{align*}
+    0=\frac{-nb+\sum |x_i-\mu|}{b^2}, \qquad \Rightarrow \hat{b}=\frac{\sum |x_i-\mu|}{n}
+\end{align*}\]</span></p>
+<p>Next, lets find the derivative of <span class="math inline">\(\ell(\underline{\theta})\)</span> with respect to <span class="math inline">\(\mu\)</span>.</p>
+<p><span class="math display">\[\begin{align*}
+    &amp; \frac{d\ell(\underline{\theta})}{d\mu}=-\sum_{i=1}^n \left(\frac{1}{b}\right)\frac{d}{d\mu} |x_i-\mu|
+\end{align*}\]</span></p>
+<p>But what is <span class="math inline">\(\frac{d}{d\mu} |x_i-\mu|\)</span>? Well, we know</p>
+<p><span class="math display">\[\begin{align*}
+    |x_i-\mu|=\begin{cases}
+        x_i-\mu &amp; \text{if }x_i\ge \mu\\
+        -x_i+\mu &amp; \text{if }x_i\le \mu
+    \end{cases}
+\end{align*}\]</span></p>
+<p>Therefore, the derivative would be</p>
+<p><span class="math display">\[\begin{align*}
+    \frac{d}{d\mu}|x_i-\mu|=\begin{cases}
+        -1 &amp; \text{if }x_i\ge \mu\\
+        1 &amp; \text{if }x_i\le \mu
+    \end{cases}
+\end{align*}\]</span></p>
+<p>We could rewrite the derivative as an indicator function in the following way:</p>
+<p><span class="math display">\[\begin{align*}
+    \frac{d}{d\mu}|x_i-\mu|=\mathbf{1}_{\{x_i&lt;\mu\}}-\mathbf{1}_{\{x_i&gt;\mu\}}
+\end{align*}\]</span></p>
+<p>Putting this in the log-likelihood, we get:</p>
+<p><span class="math display">\[\begin{align*}
+    \frac{d}{d\mu}\ell(\underline{\theta})=-\frac{1}{b}\sum_{i=1}^n\left(\mathbf{1}_{\{x_i&lt;\mu\}}-\mathbf{1}_{\{x_i&gt;\mu\}}\right)
+\end{align*}\]</span></p>
+<p>Setting it equal to 0, we get:</p>
+<p><span class="math display">\[\begin{align*}
+    &amp; 0=\sum_{i=1}^n\left(\mathbf{1}_{\{x_i&lt;\mu\}}-\mathbf{1}_{\{x_i&gt;\mu\}}\right)=\sum \mathbf{1}_{\{x_i&lt;\mu\}}-\sum \mathbf{1}_{\{x_i&gt;\mu\}}\\
+    &amp; \Rightarrow \sum \mathbf{1}_{\{x_i&lt;\mu\}}=\sum \mathbf{1}_{\{x_i&gt;\mu\}}\\
+\end{align*}\]</span></p>
+<p>Consider each of the terms in the last equation. <span class="math inline">\(\sum \mathbf{1}_{\{x_i&lt;\mu\}}\)</span> is the number of <span class="math inline">\(x_i\)</span>’s that are less than <span class="math inline">\(\mu\)</span>. Similarly, <span class="math inline">\(\sum \mathbf{1}_{\{x_i&gt;\mu\}}\)</span> is the number of <span class="math inline">\(x_i\)</span>’s that are greater than <span class="math inline">\(\mu\)</span>. The only way these two sums are equal is if <span class="math inline">\(\mu\)</span> is the median. Thus, the MLE for <span class="math inline">\(\mu\)</span> is <span class="math inline">\(\hat{\mu}=\text{median}(x_1, \ldots, x_n)\)</span>.</p>
+<p>Therefore, with the two equations and the two unknowns, we get the MLE of <span class="math inline">\(\underline{\theta}\)</span> to be:</p>
+<p><span class="math display">\[\begin{align*}
+    \hat{\theta}=(\hat{\mu}=\text{median}(x_1, \ldots, x_n), \hat{b}=\frac{1}{n}\sum_{i=1}^n |x_i-\text{median}(x_1, \ldots, x_n))
+\end{align*}\]</span></p>
+</section>
+</div>
+<p>One last example…</p>
+<div id="exm-multparam3" class="theorem example">
+<p><span class="theorem-title"><strong>Example 4.16</strong></span> Suppose <span class="math inline">\(X_1, X_2, \ldots, X_n\)</span> is a random sample from a Gamma distribution with parameters <span class="math inline">\(\alpha\)</span> and <span class="math inline">\(\beta\)</span>. Suppose we want to find the MLE of <span class="math inline">\(\underline{\theta}=(\alpha, \beta)\)</span>. We start, as usual, with the likelihood function.</p>
+<p><span class="math display">\[\begin{align*}
+    L(\underline{\theta})=\prod_{i=1}^n \frac{1}{\Gamma(\alpha)\theta^\alpha}x_i^{\alpha-1}e^{-\frac{x_i}{\theta}}=\left(\Gamma(\alpha)\right)^{-n}\left(\theta\right)^{-n\alpha}\left(\prod_{i=1}^n x_i^{\alpha-1}\right)e^{-\frac{\sum x_i}{\theta}}
+\end{align*}\]</span></p>
+<p>The log-likelihood function is:</p>
+<p><span class="math display">\[\begin{align*}
+    \ell(\underline{\theta})=-n\ln \Gamma(\alpha)-n\alpha \ln \theta+(\alpha-1)\sum \ln x_i-\frac{\sum x_i}{\theta}
+\end{align*}\]</span></p>
+<p>The next step is to take the derivatives with respect to <span class="math inline">\(\alpha\)</span> and <span class="math inline">\(\theta\)</span>.</p>
+<p><span class="math display">\[\begin{align*}
+    &amp; \frac{\ell(\underline{\theta})}{d\theta}=-\frac{n\alpha}{\theta}+\frac{\sum x_i}{\theta^2}=\frac{-n\alpha\theta+\sum x_i}{\theta^2}\\
+    &amp; \frac{d\ell(\underline{\theta})}{d\alpha}=-\frac{n}{\Gamma(\alpha)}\left(\frac{d}{d\alpha}\Gamma(\alpha)\right)+\sum \ln x_i
+\end{align*}\]</span></p>
+<p>The next step, of course, is to set the derivatives equal to zero and solve for the parameter, where we have two equations and two unknowns. Before we do that, however, let’s look at <span class="math inline">\(\frac{d}{d\alpha}\Gamma(\alpha)\)</span>. Recall that the Gamma function at <span class="math inline">\(a\)</span> is</p>
+<p><span class="math display">\[\begin{align*}
+    \Gamma(a)=\int_0^\infty t^{a-1}e^{-t}dt
+\end{align*}\]</span></p>
+<p>The Gamma function is not analytically tractable! Therefore, there is no possible Analytic solution to this system of equations. So what do we do? We need to numerically find the MLEs.</p>
+</div>
+<p>We explore numerical maximum likelihood in the future but to numerically find the MLEs, we need to use software. We take a brief break from find MLEs to introduce R.</p>
+</section>
+</section>
+<section id="summary" class="level2" data-number="4.5">
+<h2 data-number="4.5" class="anchored" data-anchor-id="summary"><span class="header-section-number">4.5</span> Summary</h2>
+<p>In this lesson, we were introduced to the method of maximum likelihood estimation (MLE) as a foundational tool in statistical inference. We learned how to construct the likelihood and log-likelihood functions based on a specified probability model, and how to analytically solve for the parameter value that maximizes the likelihood. We practiced deriving MLEs for both discrete and continuous distributions and explored cases where support restrictions require careful handling through indicator functions.</p>
+<p><strong>Key Takeaways:</strong></p>
+<ul>
+<li>The likelihood function <span class="math inline">\(L(\theta_1, \theta_2, \ldots, \theta_m)\)</span> is the joint probability distribution of the random sample.</li>
+<li>The maximum likelihood estimator (MLE) is the value of <span class="math inline">\(\theta\)</span> that is the maximum of the likelihood <span class="math inline">\(L(\theta)\)</span>.</li>
+<li>It is often easier to maximize <span class="math inline">\(\ell(\theta)=\ln L(\theta)\)</span>.</li>
+</ul>
+
+
+</section>
+
+</main> <!-- /main -->
+<!--<script>
+
+document.addEventListener('DOMContentLoaded', function () {
+
+    const toc = document.getElementById('TOC');
+
+    const navbarCollapse = document.getElementById('navbarCollapse');
+
+    const menuButton = document.querySelector('.navbar-toggler');
+
+
+
+    // Function to move TOC to navbar on small screens
+
+    function handleTOCDisplay() {
+
+        if (window.innerWidth < 768) {
+
+            if (!navbarCollapse.contains(toc)) {
+
+                navbarCollapse.appendChild(toc); // Move TOC into the navbar
+
+            }
+
+        } else {
+
+            if (toc.parentNode !== document.getElementById('quarto-margin-sidebar')) {
+
+                document.getElementById('quarto-margin-sidebar').appendChild(toc); // Move TOC back to original location
+
+            }
+
+        }
+
+    }
+
+
+
+    // Initial check on page load
+
+    handleTOCDisplay();
+
+
+
+    // Check when resizing the window
+
+    window.addEventListener('resize', handleTOCDisplay);
+
+
+
+    // Toggle TOC visibility when navbar is expanded on small screens
+
+    menuButton.addEventListener('click', function() {
+
+        if (window.innerWidth < 768) {
+
+            toc.classList.toggle('toc-active'); // Toggle visibility of the TOC in the navbar
+
+        }
+
+    });
+
+});
+
+</script>-->
+
+
+
+<script>
+
+document.addEventListener('DOMContentLoaded', function () {
+
+    const toc = document.getElementById('TOC'); // TOC element
+
+    const activeLesson = document.querySelector('.sidebar-item .sidebar-link.active'); // Active lesson link
+
+    const originalTocParent = toc.parentElement; // Store original TOC location
+
+
+
+    // Create a container for the TOC in the sidebar
+
+    const nestedTocContainer = document.createElement('ul');
+
+    nestedTocContainer.className = 'sidebar-toc-nested list-unstyled';
+
+
+
+    // Function to move the TOC into the sidebar
+
+    function moveTocToSidebar() {
+
+        if (!toc || !activeLesson) return;
+
+        while (toc.firstChild) {
+
+            nestedTocContainer.appendChild(toc.firstChild);
+
+        }
+
+        const parentItem = activeLesson.closest('.sidebar-item');
+
+        parentItem.appendChild(nestedTocContainer);
+
+        toc.style.display = 'none'; // Hide the original TOC container
+
+    }
+
+
+
+    // Function to restore the TOC to its original location
+
+    function restoreTocToOriginalLocation() {
+
+        if (nestedTocContainer.parentNode) {
+
+            while (nestedTocContainer.firstChild) {
+
+                toc.appendChild(nestedTocContainer.firstChild);
+
+            }
+
+            nestedTocContainer.remove(); // Remove the container
+
+            toc.style.display = ''; // Show the original TOC container
+
+        }
+
+    }
+
+
+
+    // Function to handle screen width changes
+
+    function handleScreenResize() {
+
+        if (window.innerWidth < 768) {
+
+            moveTocToSidebar();
+
+        } else {
+
+            restoreTocToOriginalLocation();
+
+        }
+
+    }
+
+
+
+    // Initial check and event listener for resize
+
+    handleScreenResize();
+
+    window.addEventListener('resize', handleScreenResize);
+
+});
+
+
+
+</script>
+<!---function to make the first column th instead of td when using markdown tables..just add .row-header as your class below the table!---->
+
+<script>
+
+    window.addEventListener('DOMContentLoaded', () => {
+
+        // Select only tables with the 'row-header' class
+
+        const tables = document.querySelectorAll('table.row-header');
+
+        
+
+        tables.forEach(table => {
+
+            const rows = table.querySelectorAll('tr');
+
+            
+
+            rows.forEach(row => {
+
+                const firstCell = row.cells[0];
+
+                if (firstCell && firstCell.tagName === 'TD') {
+
+                    const th = document.createElement('th');
+
+                    th.innerHTML = firstCell.innerHTML;
+
+                    th.setAttribute('scope', 'row'); // Add scope="row" to the th element
+
+                    row.replaceChild(th, firstCell);
+
+                }
+
+            });
+
+        });
+
+    });
+
+</script>
+<script>
+
+  document.addEventListener("DOMContentLoaded", function () {
+
+    const elements = document.querySelectorAll('div[id^="exm-"]');
+
+
+
+    elements.forEach((element) => {
+
+      const theoremTitle = element.querySelector('.theorem-title');
+
+      // Use the Quarto-generated id (e.g. "exm-muscleexample") directly
+
+      const anchorId = element.id;
+
+
+
+      if (theoremTitle && anchorId) {
+
+        const anchor = document.createElement('a');
+
+        anchor.href = `#${anchorId}`;
+
+        anchor.className = 'anchor';
+
+        anchor.setAttribute('aria-label', `Link to ${theoremTitle.textContent.trim()}`);
+
+        anchor.innerHTML = '<i class="bi bi-link-45deg" aria-hidden="true"></i>';
+
+        theoremTitle.appendChild(anchor);
+
+        // No need to reassign element.id — it's already correct
+
+      }
+
+    });
+
+  });
+
+</script>
+<style>
+
+  #mas-popup,
+
+  #mas-popup * {
+
+    box-sizing: border-box;
+
+  }
+
+
+
+  #mas-popup {
+
+    --mas-navy: #001e44;
+
+    --mas-blue: #1e407c;
+
+    --mas-sky: #96bee6;
+
+
+
+    position: fixed;
+
+    right: max(1.25rem, env(safe-area-inset-right));
+
+    bottom: max(1.25rem, env(safe-area-inset-bottom));
+
+    z-index: 1055;
+
+
+
+    width: min(25rem, calc(100vw - 2rem));
+
+    padding: 1.45rem 1.5rem 1.5rem 1.8rem;
+
+    overflow: hidden;
+
+
+
+    border: 1px solid rgba(0, 30, 68, 0.14);
+
+    border-radius: 0.75rem;
+
+    background: #ffffff;
+
+    color: #16243a;
+
+
+
+    box-shadow:
+
+      0 1.25rem 3.5rem rgba(0, 30, 68, 0.2),
+
+      0 0.2rem 0.7rem rgba(0, 30, 68, 0.08);
+
+
+
+    font-family: Arial, Helvetica, sans-serif;
+
+    -webkit-font-smoothing: antialiased;
+
+
+
+    animation: mas-popup-in 320ms cubic-bezier(0.2, 0.8, 0.2, 1) both;
+
+  }
+
+
+
+  #mas-popup[hidden] {
+
+    display: none;
+
+  }
+
+
+
+  /* Blue accent along the left side */
+
+  #mas-popup::before {
+
+    position: absolute;
+
+    inset: 0 auto 0 0;
+
+    width: 0.35rem;
+
+    background: linear-gradient(
+
+      180deg,
+
+      var(--mas-sky),
+
+      var(--mas-blue)
+
+    );
+
+    content: "";
+
+  }
+
+
+
+  #mas-popup-kicker {
+
+    margin: 0 3rem 0.55rem 0;
+
+    color: var(--mas-blue);
+
+    font-size: 0.69rem;
+
+    font-weight: 700;
+
+    letter-spacing: 0.12em;
+
+    line-height: 1.3;
+
+    text-transform: uppercase;
+
+  }
+
+
+
+  #mas-popup h2#mas-popup-title {
+
+    margin: 1rem 2.5rem 0.65rem 0 !important; 
+
+    max-width: 19rem;
+
+    margin: 0 2.5rem 0.65rem 0 !important;
+
+    color: var(--mas-navy);
+
+    font-family: Georgia, "Times New Roman", serif;
+
+    font-size: 1.55rem;
+
+    font-weight: 600;
+
+    letter-spacing: -0.015em;
+
+    line-height: 1.18 !important;
+
+  }
+
+
+
+  #mas-popup-description {
+
+    max-width: 21rem;
+
+    margin: 0 0 1.15rem;
+
+    color: #46586e;
+
+    font-size: 0.95rem;
+
+    line-height: 1.55;
+
+  }
+
+
+
+  #mas-popup-cta {
+
+    display: inline-flex;
+
+    min-height: 2.75rem;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 0.65rem;
+
+
+
+    padding: 0.7rem 1rem;
+
+    border: 2px solid var(--mas-navy);
+
+    border-radius: 0.35rem;
+
+    background: var(--mas-navy);
+
+    color: #ffffff;
+
+
+
+    font-size: 0.88rem;
+
+    font-weight: 700;
+
+    text-decoration: none;
+
+
+
+    transition:
+
+      background-color 160ms ease,
+
+      border-color 160ms ease,
+
+      transform 160ms ease;
+
+  }
+
+
+
+  #mas-popup-cta:hover,
+
+  #mas-popup-cta:focus-visible {
+
+    border-color: var(--mas-blue);
+
+    background: var(--mas-blue);
+
+    color: #ffffff;
+
+    transform: translateY(-1px);
+
+  }
+
+
+
+  #mas-popup-cta-arrow {
+
+    font-size: 1.1rem;
+
+    transition: transform 160ms ease;
+
+  }
+
+
+
+  #mas-popup-cta:hover #mas-popup-cta-arrow,
+
+  #mas-popup-cta:focus-visible #mas-popup-cta-arrow {
+
+    transform: translateX(0.18rem);
+
+  }
+
+
+
+  #mas-popup-close {
+
+    position: absolute;
+
+    top: 0.65rem;
+
+    right: 0.65rem;
+
+
+
+    display: grid;
+
+    width: 2.75rem;
+
+    height: 2.75rem;
+
+    padding: 0;
+
+    place-items: center;
+
+
+
+    border: 0;
+
+    border-radius: 50%;
+
+    background: transparent;
+
+    color: #485b72;
+
+
+
+    font: inherit;
+
+    font-size: 1.55rem;
+
+    line-height: 1;
+
+
+
+    cursor: pointer;
+
+  }
+
+
+
+  #mas-popup-close:hover,
+
+  #mas-popup-close:focus-visible {
+
+    background: #edf2f7;
+
+    color: var(--mas-navy);
+
+  }
+
+
+
+  #mas-popup :focus-visible {
+
+    outline: 3px solid var(--mas-sky);
+
+    outline-offset: 3px;
+
+  }
+
+
+
+  @keyframes mas-popup-in {
+
+    from {
+
+      opacity: 0;
+
+      transform: translateY(1rem) scale(0.98);
+
+    }
+
+
+
+    to {
+
+      opacity: 1;
+
+      transform: translateY(0) scale(1);
+
+    }
+
+  }
+
+
+
+  @media (max-width: 520px) {
+
+    #mas-popup {
+
+      right: max(0.75rem, env(safe-area-inset-right));
+
+      bottom: max(0.75rem, env(safe-area-inset-bottom));
+
+      width: calc(100vw - 1.5rem);
+
+      padding: 1.25rem 1.25rem 1.3rem 1.55rem;
+
+    }
+
+
+
+    #mas-popup-title {
+
+      max-width: 17rem;
+
+      font-size: 1.4rem;
+
+    }
+
+
+
+    #mas-popup-cta {
+
+      width: 100%;
+
+    }
+
+  }
+
+
+
+  @media (prefers-reduced-motion: reduce) {
+
+    #mas-popup {
+
+      animation: none;
+
+    }
+
+
+
+    #mas-popup-cta,
+
+    #mas-popup-cta-arrow {
+
+      transition: none;
+
+    }
+
+  }
+
+</style>
+
+
+
+<aside id="mas-popup" role="region" aria-labelledby="mas-popup-title" aria-describedby="mas-popup-description" aria-live="polite" hidden="">
+
+  <button id="mas-popup-close" type="button" aria-label="Close this message">
+
+    <span aria-hidden="true">×</span>
+
+  </button>
+
+
+
+  <p id="mas-popup-kicker">
+
+    Online master’s program
+
+  </p>
+
+
+
+  <h2 id="mas-popup-title">
+
+    Take your statistics skills further
+
+  </h2>
+
+
+
+  <p id="mas-popup-description">
+
+    Explore Penn State’s online Master of Applied Statistics program.
+
+  </p>
+
+
+
+  <a id="mas-popup-cta" href="https://science.psu.edu/stat/graduate-programs/master-of-applied-statistics">
+
+    Explore the program
+
+    <span id="mas-popup-cta-arrow" aria-hidden="true">→</span>
+
+  </a>
+
+</aside>
+
+
+
+<script>
+
+  (() => {
+
+    const storageKey = "stat501-mas-popup-dismissed-v2";
+
+
+
+    // Show the popup after 15 seconds.
+
+    const showDelay = 15000;
+
+
+
+    // After closing it, hide it for 30 days.
+
+    const dismissalDays = 30;
+
+
+
+    const popup = document.getElementById("mas-popup");
+
+    const closeButton = document.getElementById("mas-popup-close");
+
+    const cta = document.getElementById("mas-popup-cta");
+
+
+
+    if (!popup || !closeButton || !cta) return;
+
+
+
+    let dismissalActive = false;
+
+
+
+    try {
+
+      const dismissedUntil = Number(
+
+        localStorage.getItem(storageKey)
+
+      );
+
+
+
+      dismissalActive =
+
+        Number.isFinite(dismissedUntil) &&
+
+        Date.now() < dismissedUntil;
+
+    } catch (error) {
+
+      // The popup still works if browser storage is unavailable.
+
+    }
+
+
+
+    if (dismissalActive) return;
+
+
+
+    const rememberDismissal = () => {
+
+      try {
+
+        const millisecondsPerDay = 24 * 60 * 60 * 1000;
+
+        const dismissedUntil =
+
+          Date.now() + dismissalDays * millisecondsPerDay;
+
+
+
+        localStorage.setItem(
+
+          storageKey,
+
+          String(dismissedUntil)
+
+        );
+
+      } catch (error) {
+
+        // Closing still works if browser storage is unavailable.
+
+      }
+
+    };
+
+
+
+    const showTimer = window.setTimeout(() => {
+
+      popup.hidden = false;
+
+    }, showDelay);
+
+
+
+    const dismissPopup = () => {
+
+      window.clearTimeout(showTimer);
+
+      popup.hidden = true;
+
+      rememberDismissal();
+
+    };
+
+
+
+    closeButton.addEventListener("click", dismissPopup);
+
+
+
+    // Prevent the popup from appearing again after someone uses the CTA.
+
+    cta.addEventListener("click", rememberDismissal);
+
+
+
+    document.addEventListener("keydown", (event) => {
+
+      if (event.key === "Escape" && !popup.hidden) {
+
+        dismissPopup();
+
+      }
+
+    });
+
+  })();
+
+</script>
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    // Ensure there is a toggle, if there isn't float one in the top right
+    if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+      const a = window.document.createElement('a');
+      a.classList.add('top-right');
+      a.classList.add('quarto-color-scheme-toggle');
+      a.href = "";
+      a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+      const i = window.document.createElement("i");
+      i.classList.add('bi');
+      a.appendChild(i);
+      window.document.body.appendChild(a);
+    }
+    setColorSchemeToggle(hasAlternateSentinel())
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./Lesson03.html" class="pagination-link" aria-label="Estimation (Part II)">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Estimation (Part II)</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./Lesson05.html" class="pagination-link" aria-label="Maximum Likelihood Estimation (MLE) (Part II)">
+        <span class="nav-page-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Maximum Likelihood Estimation (MLE) (Part II)</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+<p>Except where otherwise noted, content on this site is licensed under a <a href="https://creativecommons.org/licenses/by-nc/4.0/">CC BY-NC 4.0</a> license.<br><br> <img src="assets/by-nc.svg" class="img-fluid" alt="BYNC"></p>
+</div>   
+    <div class="nav-footer-center">
+<p><a href="https://oer.psu.edu/">OPEN.ED@PSU</a></p>
+<div class="cookie-consent-footer"><a href="#" id="open_preferences_center">Cookie Preferences</a></div></div>
+    <div class="nav-footer-right">
+<a href="https://www.psu.edu/web-privacy-statement/">Privacy</a> | <a href="https://www.psu.edu/accessibilitystatement/">Accessibility</a> | <a href="https://www.psu.edu/copyright-information/">Copyright</a> <br> <a href="https://www.psu.edu/">The Pennsylvania State University</a> © <span id="copyright-year"></span> | <br> <a href="https://forms.office.com/r/GbC8H0pZhm">Leave Us Feedback</a>
+<script>
+document.getElementById("copyright-year").textContent = new Date().getFullYear();
+</script>
+</div>
+  </div>
+</footer>
+<script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","descPosition":"bottom","loop":false,"openEffect":"zoom","selector":".lightbox"});
+(function() {
+  let previousOnload = window.onload;
+  window.onload = () => {
+    if (previousOnload) {
+      previousOnload();
+    }
+    lightboxQuarto.on('slide_before_load', (data) => {
+      const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+      const href = trigger.getAttribute('href');
+      if (href !== null) {
+        const imgEl = window.document.querySelector(`a[href="${href}"] img`);
+        if (imgEl !== null) {
+          const srcAttr = imgEl.getAttribute("src");
+          if (srcAttr && srcAttr.startsWith("data:")) {
+            slideConfig.href = srcAttr;
+          }
+        }
+      } 
+    });
+  
+    lightboxQuarto.on('slide_after_load', (data) => {
+      const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(slideNode);
+      }
+    });
+  
+  };
+  
+})();
+          </script>
+
+
+
+
+</body></html>

@@ -1,0 +1,2434 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.9.35">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>0: Review Concepts from STAT 414 – STAT 415 | Introduction to Mathematical Statistics</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./Lesson01.html" rel="next">
+<link href="./index.html" rel="prev">
+<link href="./assets/psulion.png" rel="icon" type="image/png">
+<script src="site_libs/cookie-consent/cookie-consent.js"></script>
+<link href="site_libs/cookie-consent/cookie-consent.css" rel="stylesheet">
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-46f66b053e56abd73bb6e954d61a315b.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-22b4aaf4c2978829df3684e8f2c068db.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-46f66b053e56abd73bb6e954d61a315b.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-dedc56d09aa522c36e3c0f8583f17cbf.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark-fc84954412eed28da5dc743c06b0bbd5.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="site_libs/bootstrap/bootstrap-dedc56d09aa522c36e3c0f8583f17cbf.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/quarto-contrib/language-name/language-name.css" rel="stylesheet">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<script async="" src="https://www.googletagmanager.com/gtag/js?id=G-XM6C7H9XCL"></script>
+
+<script type="text/plain" cookie-consent="tracking">
+
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-XM6C7H9XCL', { 'anonymize_ip': true});
+</script>
+
+<script type="text/javascript" charset="UTF-8">
+document.addEventListener('DOMContentLoaded', function () {
+cookieconsent.run({
+  "notice_banner_type":"simple",
+  "consent_type":"express",
+  "palette":"light",
+  "language":"en",
+  "page_load_consent_levels":["strictly-necessary"],
+  "notice_banner_reject_button_hide":false,
+  "preferences_center_close_button_hide":false,
+  "website_name":""
+  ,
+"language":"en"
+  });
+});
+</script> 
+  
+<script>
+
+  window.addEventListener('load', function() {
+
+    document.getElementById("cc-nb-text").innerHTML = "We use cookies and other tracking technologies to improve your browsing experience on our website, to analyze our website traffic, and to understand where our visitors are coming from.";
+
+  });
+
+</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+</head>
+
+<body class="nav-sidebar docked nav-fixed quarto-light"><script id="quarto-html-before-body" type="application/javascript">
+    const toggleBodyColorMode = (bsSheetEl) => {
+      const mode = bsSheetEl.getAttribute("data-mode");
+      const bodyEl = window.document.querySelector("body");
+      if (mode === "dark") {
+        bodyEl.classList.add("quarto-dark");
+        bodyEl.classList.remove("quarto-light");
+      } else {
+        bodyEl.classList.add("quarto-light");
+        bodyEl.classList.remove("quarto-dark");
+      }
+    }
+    const toggleBodyColorPrimary = () => {
+      const bsSheetEl = window.document.querySelector("link#quarto-bootstrap:not([rel=disabled-stylesheet])");
+      if (bsSheetEl) {
+        toggleBodyColorMode(bsSheetEl);
+      }
+    }
+    const setColorSchemeToggle = (alternate) => {
+      const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+      for (let i=0; i < toggles.length; i++) {
+        const toggle = toggles[i];
+        if (toggle) {
+          if (alternate) {
+            toggle.classList.add("alternate");
+          } else {
+            toggle.classList.remove("alternate");
+          }
+        }
+      }
+    };
+    const toggleColorMode = (alternate) => {
+      // Switch the stylesheets
+      const primaryStylesheets = window.document.querySelectorAll('link.quarto-color-scheme:not(.quarto-color-alternate)');
+      const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+      manageTransitions('#quarto-margin-sidebar .nav-link', false);
+      if (alternate) {
+        // note: dark is layered on light, we don't disable primary!
+        enableStylesheet(alternateStylesheets);
+        for (const sheetNode of alternateStylesheets) {
+          if (sheetNode.id === "quarto-bootstrap") {
+            toggleBodyColorMode(sheetNode);
+          }
+        }
+      } else {
+        disableStylesheet(alternateStylesheets);
+        enableStylesheet(primaryStylesheets)
+        toggleBodyColorPrimary();
+      }
+      manageTransitions('#quarto-margin-sidebar .nav-link', true);
+      // Switch the toggles
+      setColorSchemeToggle(alternate)
+      // Hack to workaround the fact that safari doesn't
+      // properly recolor the scrollbar when toggling (#1455)
+      if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+        manageTransitions("body", false);
+        window.scrollTo(0, 1);
+        setTimeout(() => {
+          window.scrollTo(0, 0);
+          manageTransitions("body", true);
+        }, 40);
+      }
+    }
+    const disableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        stylesheet.rel = 'disabled-stylesheet';
+      }
+    }
+    const enableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        if(stylesheet.rel !== 'stylesheet') { // for Chrome, which will still FOUC without this check
+          stylesheet.rel = 'stylesheet';
+        }
+      }
+    }
+    const manageTransitions = (selector, allowTransitions) => {
+      const els = window.document.querySelectorAll(selector);
+      for (let i=0; i < els.length; i++) {
+        const el = els[i];
+        if (allowTransitions) {
+          el.classList.remove('notransition');
+        } else {
+          el.classList.add('notransition');
+        }
+      }
+    }
+    const isFileUrl = () => {
+      return window.location.protocol === 'file:';
+    }
+    const hasAlternateSentinel = () => {
+      let styleSentinel = getColorSchemeSentinel();
+      if (styleSentinel !== null) {
+        return styleSentinel === "alternate";
+      } else {
+        return false;
+      }
+    }
+    const setStyleSentinel = (alternate) => {
+      const value = alternate ? "alternate" : "default";
+      if (!isFileUrl()) {
+        window.localStorage.setItem("quarto-color-scheme", value);
+      } else {
+        localAlternateSentinel = value;
+      }
+    }
+    const getColorSchemeSentinel = () => {
+      if (!isFileUrl()) {
+        const storageValue = window.localStorage.getItem("quarto-color-scheme");
+        return storageValue != null ? storageValue : localAlternateSentinel;
+      } else {
+        return localAlternateSentinel;
+      }
+    }
+    const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+      const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+      const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+      let newTheme = '';
+      if(authorPrefersDark) {
+        newTheme = isAlternate ? baseTheme : alternateTheme;
+      } else {
+        newTheme = isAlternate ? alternateTheme : baseTheme;
+      }
+      const changeGiscusTheme = () => {
+        // From: https://github.com/giscus/giscus/issues/336
+        const sendMessage = (message) => {
+          const iframe = document.querySelector('iframe.giscus-frame');
+          if (!iframe) return;
+          iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+        }
+        sendMessage({
+          setConfig: {
+            theme: newTheme
+          }
+        });
+      }
+      const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+      if (isGiscussLoaded) {
+        changeGiscusTheme();
+      }
+    };
+    const authorPrefersDark = false;
+    const darkModeDefault = authorPrefersDark;
+      document.querySelector('link#quarto-text-highlighting-styles.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+      document.querySelector('link#quarto-bootstrap.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+    let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+    // Dark / light mode switch
+    window.quartoToggleColorScheme = () => {
+      // Read the current dark / light value
+      let toAlternate = !hasAlternateSentinel();
+      toggleColorMode(toAlternate);
+      setStyleSentinel(toAlternate);
+      toggleGiscusIfUsed(toAlternate, darkModeDefault);
+      window.dispatchEvent(new Event('resize'));
+    };
+    // Switch to dark mode if need be
+    if (hasAlternateSentinel()) {
+      toggleColorMode(true);
+    } else {
+      toggleColorMode(false);
+    }
+  </script>
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <div id="quarto-announcement" data-announcement-id="cb9d28251ca8388d2bc94ffe0e472446" class="alert alert-warning hidden"><i class="bi bi-info-circle quarto-announcement-icon"></i><div class="quarto-announcement-content">
+<p>Welcome to our newly redesigned course notes! Please update your bookmarks accordingly.</p>
+</div><i class="bi bi-x-lg quarto-announcement-action"></i></div>
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="./index.html">
+    <span class="navbar-title">STAT 415 | Introduction to Mathematical Statistics</span>
+    </a>
+  </div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="https://science.psu.edu/stat"> 
+<span class="menu-text">Department of Statistics</span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+  <a href="" class="quarto-reader-toggle quarto-navigation-tool px-1" onclick="window.quartoToggleReader(); return false;" title="Toggle reader mode">
+  <div class="quarto-reader-toggle-btn">
+  <i class="bi"></i>
+  </div>
+</a>
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./Lesson00.html">Lessons</a></li><li class="breadcrumb-item"><a href="./Lesson00.html">0: Review Concepts from STAT 414</a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header sidebar-header-stacked">
+      <a href="https://science.psu.edu/" class="sidebar-logo-link">
+      <img src="./PSU_Ecosshield.png" alt="Penn State Eberly College of Science" class="sidebar-logo light-content py-0 d-lg-inline d-none">
+      <img src="./PSU_Ecosshield.png" alt="Penn State Eberly College of Science" class="sidebar-logo dark-content py-0 d-lg-inline d-none">
+      </a>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">About this course</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+ <span class="menu-text">Lessons</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Lesson00.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">0: Review Concepts from STAT 414</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Lesson01.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Order Statistics</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Lesson02.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Estimation (Part I)</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Lesson03.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Estimation (Part II)</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Lesson04.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Maximum Likelihood Estimation (MLE) (Part I)</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Lesson05.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Maximum Likelihood Estimation (MLE) (Part II)</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Lesson06.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Confidence Intervals</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Lesson07.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Asymptotic Distribution of MLE (Part I)</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Lesson08.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Asymptotic Distribution of MLE (Part II)</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Lesson09.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Hypothesis Tests (Part I)</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Lesson10.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Hypothesis Tests (Part II)</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Lesson11.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Bayesian Methods</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Lesson12.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Simple Linear Regression</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">In this lesson</h2>
+   
+  <ul>
+  <li><a href="#probability" id="toc-probability" class="nav-link active" data-scroll-target="#probability">0.1: Probability</a></li>
+  <li><a href="#distributions" id="toc-distributions" class="nav-link" data-scroll-target="#distributions">0.2: Distributions</a>
+  <ul class="collapse">
+  <li><a href="#discrete-distributions" id="toc-discrete-distributions" class="nav-link" data-scroll-target="#discrete-distributions">Discrete Distributions</a></li>
+  <li><a href="#continuous-distributions" id="toc-continuous-distributions" class="nav-link" data-scroll-target="#continuous-distributions">Continuous Distributions</a></li>
+  </ul></li>
+  <li><a href="#mathematical-expectations" id="toc-mathematical-expectations" class="nav-link" data-scroll-target="#mathematical-expectations">0.3: Mathematical Expectations</a></li>
+  <li><a href="#bivariate-distributions" id="toc-bivariate-distributions" class="nav-link" data-scroll-target="#bivariate-distributions">0.4: Bivariate Distributions</a>
+  <ul class="collapse">
+  <li><a href="#conditional-distributions" id="toc-conditional-distributions" class="nav-link" data-scroll-target="#conditional-distributions">Conditional Distributions</a></li>
+  <li><a href="#distributions-of-sums-of-several-random-variables" id="toc-distributions-of-sums-of-several-random-variables" class="nav-link" data-scroll-target="#distributions-of-sums-of-several-random-variables">Distributions of Sums of Several Random Variables</a></li>
+  </ul></li>
+  <li><a href="#review-examples" id="toc-review-examples" class="nav-link" data-scroll-target="#review-examples">0.5: Review Examples</a></li>
+  <li><a href="#outline-of-stat-415" id="toc-outline-of-stat-415" class="nav-link" data-scroll-target="#outline-of-stat-415">0.6: Outline of STAT 415</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./Lesson00.html">Lessons</a></li><li class="breadcrumb-item"><a href="./Lesson00.html">0: Review Concepts from STAT 414</a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title">0: Review Concepts from STAT 414</h1>
+  <div class="quarto-categories">
+    <div class="quarto-category">Distributions</div>
+    <div class="quarto-category">Bayes'</div>
+    <div class="quarto-category">Probability</div>
+    <div class="quarto-category">Central Limit Theorem</div>
+  </div>
+  </div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="overview" class="level2 unnumbered unlisted">
+<h2 class="unnumbered unlisted anchored" data-anchor-id="overview">Overview</h2>
+<p>Many of the concepts from STAT 414: Introduction to Probability Theory will carry over in this course. In this unit, some of the essential formulas and theorems are presented here for review.</p>
+<section id="objectives" class="level3 unnumbered unlisted objectiveblock">
+<h3 class="unnumbered unlisted anchored" data-anchor-id="objectives"><i class="bi bi-check2-circle"></i>Objectives</h3>
+<p>Upon completion of this lesson, you should be able to recall and use your prior knowledge to:</p>
+<ol type="1">
+<li>Define key terms and theorems related to probability.</li>
+<li>Summarize the properties and applications of discrete random variables.</li>
+<li>Distinguish between continuous random variables and discrete random variables, providing examples and explaining their differences.</li>
+<li>Explain the formulas and definitions of jointly distributed random variables and apply them to solve problems involving joint probability distributions.</li>
+<li>Describe the concept of statistical inference and its role in making conclusions about populations based on sample data.</li>
+</ol>
+</section>
+</section>
+<section id="probability" class="level2">
+<h2 class="anchored" data-anchor-id="probability">0.1: Probability</h2>
+<p>In this section, we review some of the important definitions and theorems for probability. It would be helpful to refresh your memory on these concepts and do some practice.</p>
+<div id="def-event" class="ms-3 theorem definition">
+<p><span class="theorem-title"><strong>Def. 1 (Event)</strong></span> Let the outcome space (or sample space) be denoted as <span class="math inline">\(\mathbf{S}\)</span>. An <strong>event</strong> is subset of the sample space, Events are often denotes with capital letters, <span class="math inline">\(A,B, C, \ldots\)</span>. Therefore, if <span class="math inline">\(A\)</span> is an event in <span class="math inline">\(\mathbf{S}\)</span>, then <span class="math inline">\(A\subset \mathbf{S}\)</span>.</p>
+</div>
+<div id="def-probabilty" class="ms-3 theorem definition">
+<p><span class="theorem-title"><strong>Def. 2 (Probability)</strong></span> Probability is a logical framework for quantifying uncertainty or randomness in a princled way. It is primarily use to explain the uncertainty or randomness in obtaining the current data.</p>
+</div>
+<div id="def-mututallyexclusive" class="ms-3 theorem definition">
+<p><span class="theorem-title"><strong>Def. 3 (Mutually Exclusive Events)</strong></span> Events <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span> are called <strong>mutually exclusive</strong> (or <strong>disjoint</strong>) events if <span class="math inline">\(A\cap B=\emptyset\)</span>.</p>
+</div>
+<div id="def-conditionprob" class="ms-3 theorem definition">
+<p><span class="theorem-title"><strong>Def. 4 (Conditional Probability)</strong></span> The conditional probability of an event <span class="math inline">\(A\)</span> given that an event <span class="math inline">\(B\)</span> has occurred is: <span class="math display">\[\begin{aligned}
+P(A|B)=\frac{P(A\cap B)}{P(B)}
+\end{aligned}\]</span> as long as <span class="math inline">\(P(B)&gt;0\)</span>.</p>
+</div>
+<div id="def-independent" class="ms-3 theorem definition">
+<p><span class="theorem-title"><strong>Def. 5 (Independent Events)</strong></span> Events <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span> are <strong>independent events</strong> if the occurrence of one of them does not affect the probability of the occurrence of the other. That is, two events are independent if either <span class="math display">\[\begin{aligned}
+                    P(B|A)=P(B)
+\end{aligned}\]</span> provided that <span class="math inline">\(P(A)&gt;0\)</span>. Events <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span> are independent events if and only if <span class="math display">\[\begin{aligned}
+P(A\cap B)=P(A)P(B)
+\end{aligned}\]</span> Otherwise, <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span> are called <strong>dependent events</strong>.</p>
+</div>
+<div class="callout callout-style-simple callout-note no-icon">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-body-container">
+<div id="thm-Bayes" class="theorem">
+<p><span class="theorem-title"><strong>Theorem 1 (Bayes’ Theorem)</strong></span> Let the <span class="math inline">\(m\)</span> events <span class="math inline">\(B_1, B_2, \ldots, B_m\)</span> constitute a partition of the sample space <span class="math inline">\(S\)</span>. That is, the <span class="math inline">\(B_i\)</span> are mutually exclusive: <span class="math display">\[\begin{aligned}
+B_i\cap B_j=\emptyset \text{ for }i\ne j
+\end{aligned}\]</span> and exhaustive: <span class="math display">\[\begin{aligned}
+S=B_1\cup B_2\cup B_2\cup \ldots \cup B_m
+\end{aligned}\]</span> Also, suppose the prior probability of the vent <span class="math inline">\(B_i\)</span> is positive, that is <span class="math inline">\(P(B_i)&gt;0\)</span> for <span class="math inline">\(i=1, \ldots,m\)</span>. Now if <span class="math inline">\(A\)</span> is an event, then <span class="math inline">\(A\)</span> can be written as the union of <span class="math inline">\(m\)</span> mutually exclusive events, namely: <span class="math display">\[\begin{aligned}
+A=(A\cap B_1)\cup (A\cap B_2)\cup \ldots \cup (A\cap B_m)
+\end{aligned}\]</span> Therefore, <span class="math display">\[\begin{aligned}
+P(A) &amp; = P(A\cap B_1)+P(A\cap B_2)+\ldots+P(A\cap B_m)\\
+&amp; = \sum_{i=1}^m P(A\cap B_i)=\sum_{i=1}^m P(B_i)P(A|B_i)
+\end{aligned}\]</span> And so, as long as <span class="math inline">\(P(A)&gt;0\)</span>, the posterior probability of event <span class="math inline">\(B_k\)</span> given event <span class="math inline">\(A\)</span> has occurred is: <span class="math display">\[\begin{aligned}
+P(B_k|A)=\frac{P(B_k)P(A|B_k)}{\sum_{i=1}^m P(B_i)P(A|B_i)}
+\end{aligned}\]</span></p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="distributions" class="level2">
+<h2 class="anchored" data-anchor-id="distributions">0.2: Distributions</h2>
+<p>We will use distributions heavily in this course. It is important to review the definitions and expectations of random variables. We start with a brief review of discrete distributions and then onto continuous distributions.</p>
+<section id="discrete-distributions" class="level3">
+<h3 class="anchored" data-anchor-id="discrete-distributions">Discrete Distributions</h3>
+<div id="def-pmf" class="ms-3 theorem definition">
+<p><span class="theorem-title"><strong>Def. 6 (Probability Mass Function)</strong></span> For a discrete random variable, <span class="math inline">\(X\)</span>, the <strong>probability mass function</strong> (pmf or PMF) is a function that satisfies the following properties:</p>
+<ul>
+<li><p><span class="math inline">\(f(x)=P(X=x)&gt;0\)</span>, for all <span class="math inline">\(x\in\)</span> the support <span class="math inline">\(S\)</span></p></li>
+<li><p><span class="math inline">\(\sum_{x\in S}f(x)=1\)</span></p></li>
+<li><p><span class="math inline">\(P(X\in A)=\sum_{x\in A}f(x)\)</span>, given event <span class="math inline">\(A\)</span></p></li>
+</ul>
+<p>It is important to note that the pmf is the probability that <span class="math inline">\(X\)</span> takes on a particular value, <span class="math inline">\(x\)</span>.</p>
+</div>
+<div id="def-cdf" class="ms-3 theorem definition">
+<p><span class="theorem-title"><strong>Def. 7 (Cumulative Distribution Function)</strong></span> For a discrete random variable, <span class="math inline">\(X\)</span>, the <strong>cumulative distribution function</strong> (cdf or CDF), denoted <span class="math inline">\(F(x)\)</span> is defined as: <span class="math display">\[\begin{aligned}
+        F(x)=P(X\le x)
+    \end{aligned}\]</span></p>
+<p>The cdf of a random variable <span class="math inline">\(X\)</span> has the following properties:</p>
+<ul>
+<li><p><span class="math inline">\(F_X(t)\)</span> is a non-decreasing function of <span class="math inline">\(t\)</span>, for <span class="math inline">\(-\infty&lt;t&lt;\infty\)</span>.</p></li>
+<li><p><span class="math inline">\(F_X(t)\)</span> ranges from 0 to 1.</p></li>
+<li><p>If <span class="math inline">\(X\)</span> is a discrete random variable whose minimum is <span class="math inline">\(a\)</span>, then <span class="math display">\[\begin{aligned}
+            F_X(a)=P(X\le a)=P(X=a)=f_X(a)
+        \end{aligned}\]</span> If <span class="math inline">\(c\)</span> is less than <span class="math inline">\(a\)</span>, then <span class="math inline">\(F_X(c)=0\)</span>.</p></li>
+<li><p>If the maximum value of <span class="math inline">\(X\)</span> is <span class="math inline">\(b\)</span>, then <span class="math inline">\(F_X(b)=1\)</span>.</p></li>
+<li><p>Also called the <em>distribution function</em>.</p></li>
+<li><p>All probabilities concerning <span class="math inline">\(X\)</span> can be stated in terms of <span class="math inline">\(F\)</span>.</p></li>
+</ul>
+</div>
+<p>Below is a list some of the named discrete distributions from the previous course. It is important to be able to recall the probability mass functions, expected values, and variances for these discrete distributions.</p>
+<div class="border rounded border-lionshrine ms-4 p-2 mb-1">
+<p><span class="fs-4">Bernoulli</span>: (p) with <span class="math inline">\(0&lt;p&lt;1\)</span> <span class="math display">\[\begin{aligned}
+                &amp; f(x)=p^x(1-p)^{1-x}, \qquad x=0, 1\\
+                &amp; E(X)=p, \qquad \text{Var}(X)=p(1-p)
+            \end{aligned}\]</span></p>
+<div class="callout callout-style-simple callout-caution no-icon">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-body-container">
+<p><strong>Note!</strong><br>
+The Bernoullu distribution is a special case of the Binomial distribution with <span class="math inline">\(n=1\)</span>.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="border rounded border-lionshrine ms-4 p-2 mb-1">
+<p><span class="fs-4">Binomial</span>: (n, p) with <span class="math inline">\(0&lt;p&lt;1\)</span> <span class="math display">\[\begin{aligned}
+                &amp; f(x)={n\choose x}p^x(1-p)^{n-x}, \qquad x=0, 1, \ldots, n\\
+                &amp; E(X)=np, \qquad \text{Var}(X)=np(1-p)
+            \end{aligned}\]</span></p>
+</div>
+<div class="border rounded border-lionshrine ms-4 p-2 mb-1">
+<p><span class="fs-4">Geometric</span>: (p) with <span class="math inline">\(0&lt;p&lt;1\)</span> <span class="math display">\[\begin{aligned}
+                &amp; f(x)=p(1-p)^x, \qquad x=0, 1, 2, 3, \ldots\\
+                &amp; E(X)=\frac{1}{p}, \qquad \text{Var}(X)=\frac{1-p}{p^2}
+            \end{aligned}\]</span></p>
+</div>
+<div class="border rounded border-lionshrine ms-4 p-2 mb-1">
+<p><span class="fs-4">Negative Binomial</span>: (r, p) with <span class="math inline">\(0&lt;p&lt;1\)</span> and <span class="math inline">\(r=1, 2, \ldots\)</span> <span class="math display">\[\begin{aligned}
+                &amp; f(x)={{x-1}\choose {r-1}}p^r(1-p)^{x-r}, \qquad x=r, r+1. r+2, \ldots\\
+                &amp; E(X)=r\left(\frac{1}{p}\right), \qquad \text{Var}(X)=\frac{r(1-p)}{p^2}
+            \end{aligned}\]</span></p>
+<div class="callout callout-style-simple callout-caution no-icon">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-body-container">
+<p><strong>Note!</strong><br>
+The Geometric distribution is a special case of the Negative Binomial distribution with <span class="math inline">\(r=1\)</span>.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="border rounded border-lionshrine ms-4 p-2 mb-1">
+<p><span class="fs-4">Hypergeometric</span>: (n, <span class="math inline">\(N_1\)</span>, <span class="math inline">\(N_2\)</span>) with <span class="math inline">\(N_1&gt;0\)</span>, <span class="math inline">\(N_2&gt;0\)</span>, <span class="math inline">\(N=N_1+N_2\)</span>, <span class="math inline">\(1\le n\le N_1+N_2\)</span> <span class="math display">\[\begin{aligned}
+                &amp; f(x)=\frac{{N_1\choose x} {N_2\choose{n-x}}}{{N\choose n}}, \qquad x\le n, \;\; x\le N_1, \;\; n-x\le N-2\\
+                &amp; E(X)=n\left(\frac{N_1}{N}\right), \qquad \text{Var}(X)=n\left(\frac{N_1}{N}\right)\left(\frac{N_2}{N}\right)\left(\frac{N-n}{N-1}\right)
+            \end{aligned}\]</span></p>
+</div>
+<div class="border rounded border-lionshrine ms-4 p-2 mb-1">
+<p><span class="fs-4">Poisson</span>: (<span class="math inline">\(\lambda\)</span>) with <span class="math inline">\(\lambda&gt;0\)</span> <span class="math display">\[\begin{aligned}
+                &amp; f(x)=\frac{e^{-\lambda}\lambda^x}{x!}, \qquad x=0, 1, 2, 3, \ldots\\
+                &amp; E(X)=\lambda, \qquad \text{Var}(X)=\lambda
+            \end{aligned}\]</span></p>
+</div>
+</section>
+<section id="continuous-distributions" class="level3">
+<h3 class="anchored" data-anchor-id="continuous-distributions">Continuous Distributions</h3>
+<p>In this section, we present some of the named distributions for continuous random variables.</p>
+<div id="def-pdf" class="ms-3 theorem definition">
+<p><span class="theorem-title"><strong>Def. 8 (Probability Density Function)</strong></span> For a continuous random variable, <span class="math inline">\(X\)</span>, the <strong>probability density function</strong> (pdf or PDF) is a function that satisfies the following properties:</p>
+<ul>
+<li><p><span class="math inline">\(f(x)&gt;0\)</span>, for all <span class="math inline">\(x\in\)</span> the support <span class="math inline">\(S\)</span></p></li>
+<li><p>The area under the curve <span class="math inline">\(f(x)\)</span> in the support is equal to 1. That is: <span class="math display">\[\begin{aligned}
+            \int_{x\in S}f(x)=1
+         \end{aligned}\]</span></p></li>
+<li><p>If <span class="math inline">\(A\)</span> is an interval, then the probability that <span class="math inline">\(x\)</span> belongs to <span class="math inline">\(A\)</span> is: <span class="math display">\[\begin{aligned}
+            P(X\in A)=\int_{A}f(x)dx
+         \end{aligned}\]</span></p></li>
+</ul>
+</div>
+<p>It is important to note that unlike the probability mass function (pmf) of a discrete random variable, <span class="math inline">\(f(x)\ne P(X=x)\)</span> for a continuous random variable, <span class="math inline">\(X\)</span>, In fact, <span class="math inline">\(P(X=x)=0\)</span> if <span class="math inline">\(X\)</span> is a continuous random variable.</p>
+<p>Next, we will review the named continuous distributions. Again, it is import to recognize the probability density functions, expected values, and variances the these continuous distributions.</p>
+<div class="border rounded border-lionshrine ms-4 p-2 mb-1">
+<p><span class="fs-4">Beta</span>: (<span class="math inline">\(\alpha, \beta\)</span>), with <span class="math inline">\(\alpha&gt;0\)</span> and <span class="math inline">\(\beta&gt;0\)</span> <span class="math display">\[\begin{aligned}
+                &amp;f(x)=\frac{\Gamma(\alpha+\beta)}{\Gamma(\alpha)\Gamma(\beta)}x^{\alpha-1}(1-x)^{\beta-1}, \qquad 0&lt;x&lt;1\\
+                &amp; E(X)=\frac{\alpha}{\alpha+\beta}, \qquad \text{Var}(X)=\frac{\alpha\beta}{(\alpha+\beta+1)(\alpha+\beta)^2}
+            \end{aligned}\]</span></p>
+</div>
+<div class="border rounded border-lionshrine ms-4 p-2 mb-1">
+<p><span class="fs-4">Exponential</span>: (<span class="math inline">\(\theta\)</span>), with <span class="math inline">\(\theta&gt;0\)</span> <span class="math display">\[\begin{aligned}
+                &amp;f(x)=\frac{1}{\theta}e^{-x/\theta}, \qquad 0&lt;x\\
+                &amp; E(X)=\theta, \qquad \text{Var}(X)=\theta^2
+    \end{aligned}\]</span></p>
+<div class="callout callout-style-simple callout-caution no-icon">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-body-container">
+<p><strong>Note!</strong><br>
+The exponential distribution is a special case of the Gamma distribution with <span class="math inline">\(\alpha=1\)</span>.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="border rounded border-lionshrine ms-4 p-2 mb-1">
+<p><span class="fs-4">Chi-square</span>: <span class="math inline">\(\chi^2\)</span>(r), with <span class="math inline">\(r&gt;0\)</span> <span class="math display">\[\begin{aligned}
+                &amp;f(x)=\frac{1}{\Gamma(r/2)2^{r/2}}x^{r/2-1}e^{-x/2}, \qquad 0&lt;x\\
+                &amp; E(X)=r, \qquad \text{Var}(X)=2r
+       \end{aligned}\]</span></p>
+<div class="callout callout-style-simple callout-caution no-icon">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-body-container">
+<p><strong>Note!</strong> The chi-square distribution is a special case of the Gamma distribution with <span class="math inline">\(\alpha=r/2\)</span> and <span class="math inline">\(\theta=2\)</span>.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="border rounded border-lionshrine ms-4 p-2 mb-1">
+<p><span class="fs-4">Gamma</span>: (<span class="math inline">\(\alpha\)</span>, <span class="math inline">\(\theta\)</span>) with <span class="math inline">\(\alpha&gt;0\)</span> and <span class="math inline">\(\theta&gt;0\)</span> <span class="math display">\[\begin{aligned}
+                &amp; f(x)=\frac{1}{\Gamma(\alpha)\theta^\alpha} x^{\alpha-1}e^{-x/\theta}, \qquad x&gt;0\\
+                &amp; E(X)=\alpha \theta, \qquad \text{Var}(X)=\alpha\theta^2
+       \end{aligned}\]</span></p>
+</div>
+<div class="border rounded border-lionshrine ms-4 p-2 mb-1">
+<p><span class="fs-4">Normal</span>: (<span class="math inline">\(\mu\)</span>, <span class="math inline">\(\sigma^2\)</span>) with <span class="math inline">\(\sigma&gt;0\)</span> <span class="math display">\[\begin{aligned}
+                &amp; f(x)=\frac{1}{\sqrt{2\pi\sigma^2}}e^{-\frac{1}{2\sigma^2}(x-\mu)^2}, \qquad -\infty&lt;x&lt;\infty\\
+                &amp; E(X)=\mu, \qquad \text{Var}(X)=\sigma^2
+    \end{aligned}\]</span></p>
+</div>
+<div class="border rounded border-lionshrine ms-4 p-2 mb-1">
+<p><span class="fs-4">Uniform</span>: (<span class="math inline">\(a\)</span>, <span class="math inline">\(b\)</span>) <span class="math display">\[\begin{aligned}
+                &amp; f(x)=\frac{1}{b-a}, \qquad a&lt;x&lt;b\\
+                &amp; E(X)=\frac{a+b}{2}, \qquad \text{Var}(X)=\frac{(b-a)^2}{12}
+       \end{aligned}\]</span></p>
+</div>
+</section>
+</section>
+<section id="mathematical-expectations" class="level2">
+<h2 class="anchored" data-anchor-id="mathematical-expectations">0.3: Mathematical Expectations</h2>
+<p>You should be able to find the expected value and variance of a given random variable, as well as expected values of functions of random variables. Expectations will become particularly important when we learn about properties of estimators in the next few lessons.</p>
+<div id="def-expectdiscreterv" class="ms-3 theorem definition">
+<p><span class="theorem-title"><strong>Def. 9 (Mathematical Expectation for discrete random variable)</strong></span> If <span class="math inline">\(f(x)\)</span> is the probability mass function (pmf) of the discrete random variable <span class="math inline">\(X\)</span> with support <span class="math inline">\(S\)</span>, and if the summation <span class="math display">\[\begin{aligned}
+\sum_{x\in S} u(x)f(x)
+\end{aligned}\]</span> exists (that is, it is less than <span class="math inline">\(\infty\)</span>), then the resulting sum is called the mathematical expectation or the expected value of the function <span class="math inline">\(u(X)\)</span>. The expectation is denoted <span class="math display">\[\begin{aligned}
+E[u(X)]=\sum_{x\in S}u(x)f(x)
+\end{aligned}\]</span></p>
+</div>
+<div id="def-expectcontinuousrv" class="ms-3 theorem definition">
+<p><span class="theorem-title"><strong>Def. 10 (Mathematical Expectation for a continuous random variable)</strong></span> For a continuous random variable, <span class="math inline">\(X\)</span>, with probability distribution function (pdf), <span class="math inline">\(f(x)\)</span>, the expected value of a function of <span class="math inline">\(X\)</span>, <span class="math inline">\(u(X)\)</span> is <span class="math display">\[\begin{aligned}
+        E(u(X))=\int_{-\infty}^\infty u(x)f(x)\;dx
+    \end{aligned}\]</span></p>
+</div>
+<p>Special mathematical expectations:</p>
+<ul>
+<li>If <span class="math inline">\(u(x)=x\)</span> then <span class="math inline">\(E(u(X))=\mu\)</span></li>
+<li>If <span class="math inline">\(u(x)=(x-\mu)^2\)</span>, then <span class="math inline">\(E(u(X))=\sigma^2=\text{Var}(X)\)</span>.</li>
+</ul>
+<div class="callout callout-style-simple callout-caution no-icon">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-body-container">
+<p><strong>Note:</strong><br>
+Recall: <span class="math inline">\(\text{Var}(X)=E(X^2)-E(X)^2\)</span> and therefore <span class="math inline">\(E(X^2)=\sigma^2+\mu^2\)</span>.</p>
+</div>
+</div>
+</div>
+</section>
+<section id="bivariate-distributions" class="level2">
+<h2 class="anchored" data-anchor-id="bivariate-distributions">0.4: Bivariate Distributions</h2>
+<p>In this class, it will important to recall bivariate distributions, and be able to make the extension to multivariate distributions. A <strong>joint (bivariate) probability distribution</strong> describes the probability that a randomly selected object from the population has two characteristics of interest.</p>
+<p>Recall the definition of a joint (bivariate) probability mass function.</p>
+<div id="def-jointpmf" class="ms-3 theorem definition">
+<p><span class="theorem-title"><strong>Def. 11 (Joint Probability Mass Function)</strong></span> Let <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> be two discrete random variabled, and let <span class="math inline">\(S\)</span> denote the two-dimensional support of <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span>. The function <span class="math inline">\(f(x,y)=P(X=x, Y=y)\)</span> is a <strong>joint probability mass function</strong> (pmf) if it satisfies the following three conditions:</p>
+<ol type="1">
+<li><p><span class="math inline">\(0\le f(x,y)\le 1\)</span></p></li>
+<li><p><span class="math inline">\(\sum_{(x,y)\in S}\sum f(x,y)=1\)</span></p></li>
+<li><p><span class="math inline">\(P[(X,Y)\in A]=\sum_{(x,y)\in A}f(x,y)\)</span>, where <span class="math inline">\(A\)</span> is a subset of the support <span class="math inline">\(S\)</span>.</p></li>
+</ol>
+</div>
+<div id="def-name" class="ms-3 theorem definition">
+<p><span class="theorem-title"><strong>Def. 12 (Joint Probability Density Function)</strong></span> Let <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> be two continuous random variables, and let <span class="math inline">\(S\)</span> denote the two-dimensional support of <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span>. Then, the function <span class="math inline">\(f(x,y)\)</span> is a <strong>joint probability density function</strong> (pdf) if it satisfies the following three conditions:</p>
+<ol type="1">
+<li><p><span class="math inline">\(f(x,y)&gt;0\)</span></p></li>
+<li><p><span class="math inline">\(\int_{-\infty}^\infty \int_{-\infty}^\infty f(x,y)dxdy=1\)</span></p></li>
+<li><p><span class="math inline">\(P[(X,Y)\in A]=\int \int_A f(x,y)dxdy\)</span></p></li>
+</ol>
+<p>where <span class="math inline">\(\{(X,Y)\in A\}\)</span> is an event in the <span class="math inline">\(xy\)</span>-plane.</p>
+</div>
+<div id="def-margpmf" class="ms-3 theorem definition">
+<p><span class="theorem-title"><strong>Def. 13 (Marginal PMFs)</strong></span> Let <span class="math inline">\(X\)</span> be a discrete random variable with support <span class="math inline">\(S_1\)</span>, and let <span class="math inline">\(Y\)</span> be a discrete random variable with support <span class="math inline">\(S_2\)</span>. Let <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> have a joint probability mass function <span class="math inline">\(f(x,y)\)</span> with support <span class="math inline">\(S\)</span>. Then, the probability mass function of <span class="math inline">\(X\)</span> alone, which is called the <strong>marginal probability mass function of</strong> <span class="math inline">\(X\)</span> is defined by: <span class="math display">\[\begin{aligned}
+        f_X(x)=\sum_{y}f(x,y)=P(X=x), \qquad x\in S_1
+    \end{aligned}\]</span> where, for each <span class="math inline">\(x\)</span> in the support <span class="math inline">\(S_1\)</span>, the summation is taken over all possible values of <span class="math inline">\(y\)</span>.</p>
+<p>Similarly, the probability mass function of <span class="math inline">\(Y\)</span> alone, which is called the <strong>marginal probability mass function of</strong> <span class="math inline">\(Y\)</span> is defined by: <span class="math display">\[\begin{aligned}
+        f_Y(y)=\sum_{x}f(x,y)=P(Y=y), \qquad y\in S_2
+    \end{aligned}\]</span> where, for each <span class="math inline">\(y\)</span> in the support <span class="math inline">\(S_2\)</span>, the summation is taken over all possible values of <span class="math inline">\(x\)</span>.</p>
+</div>
+<div id="def-margpmf" class="ms-3 theorem definition">
+<p><span class="theorem-title"><strong>Def. 14 (Marginal PDFs)</strong></span> Let <span class="math inline">\(X\)</span> be a continuous random variable with support <span class="math inline">\(S_1\)</span>, and let <span class="math inline">\(Y\)</span> be a continuous random variable with support <span class="math inline">\(S_2\)</span>. Let <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> have a joint probability denstiy function <span class="math inline">\(f(x,y)\)</span> with support <span class="math inline">\(S\)</span>. Then, the probability density function of <span class="math inline">\(X\)</span> alone, which is called the <strong>marginal probability density function of</strong> <span class="math inline">\(X\)</span> is defined by: <span class="math display">\[\begin{aligned}
+        f_X(x)=\int_{y}f(x,y)dy, \qquad x\in S_1
+    \end{aligned}\]</span></p>
+<p>Similarly, the probability density function of <span class="math inline">\(Y\)</span> alone, which is called the <strong>marginal probability density function of</strong> <span class="math inline">\(Y\)</span> is defined by: <span class="math display">\[\begin{aligned}
+        f_Y(y)=\int_{x}f(x,y)dx, \qquad y\in S_2
+    \end{aligned}\]</span></p>
+</div>
+<p>Suppose we wish to determine if two random variables are independent, given the joint probability distribution and the marginal distributions. The random variables, <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> are <strong>independent</strong> if and only if <span class="math display">\[\begin{aligned}
+        f(x,y)=f_X(x)f_Y(y)
+    \end{aligned}\]</span> for all <span class="math inline">\(x \in S_1, \; y\in S_2\)</span>. Otherwise, <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> are said to be <strong>dependent</strong>.</p>
+<section id="conditional-distributions" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="conditional-distributions">Conditional Distributions</h3>
+<p>It is helpful to review conditional distributions for this course. They will be particularly useful when we cover Bayesian statistics.</p>
+<p>A <strong>conditional probability distribution</strong> is a probability distribution for a sub-population. That is, a conditional distribution describes the probability that a randomly selected object from a sub-population has the <em>one characteristic of interest</em>.</p>
+<div id="def-conditionpmf" class="ms-3 theorem definition">
+<p><span class="theorem-title"><strong>Def. 15 (Conditional probability mass function)</strong></span> The <strong>conditional probability mass function of</strong> <span class="math inline">\(X\)</span>, given <span class="math inline">\(Y=y\)</span> is defined by: <span class="math display">\[\begin{aligned}
+        g(x|y)=\frac{f(x,y)}{f_Y(y)}, \qquad \text{provided }f_Y(y)&gt;0
+\end{aligned}\]</span></p>
+</div>
+</section>
+<section id="distributions-of-sums-of-several-random-variables" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="distributions-of-sums-of-several-random-variables">Distributions of Sums of Several Random Variables</h3>
+<p>In this class, we will need to find the distributions of functions of random variables and also of functions of several random variables. Being able to recall some of the helpful There are some helpful theorems for the sum of several random variables.</p>
+<div class="callout callout-style-simple callout-note no-icon">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-body-container">
+<div id="thm-l11" class="theorem">
+<p><span class="theorem-title"><strong>Theorem 2</strong></span> Let <span class="math inline">\(X_1, X_2, \ldots, X_n\)</span> be a random sample from a Bernoulli distribution with parameter p.<br>
+Then <span class="math inline">\(Y=\sum_{i=1}^n X_i\sim\text{Bin}(n, p)\)</span>.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="callout callout-style-simple callout-note no-icon">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-body-container">
+<div id="thm-l12" class="theorem">
+<p><span class="theorem-title"><strong>Theorem 3</strong></span> Let <span class="math inline">\(X_1, X_2, \ldots, X_n\)</span> be a random sample from a Binomial distribution with parameters <span class="math inline">\(n_i\)</span> and p, for <span class="math inline">\(i=1, 2, \ldots, n\)</span>.<br>
+Then <span class="math inline">\(Y=\sum_{i=1}^n X_i\sim \text{Bin}(\sum n_i, p)\)</span>.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="callout callout-style-simple callout-note no-icon">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-body-container">
+<div id="thm-l13" class="theorem">
+<p><span class="theorem-title"><strong>Theorem 4</strong></span> Let <span class="math inline">\(X_1,X_2,\ldots,X_n\)</span> be a random sample from a Poisson distribution with parameter <span class="math inline">\(\lambda_i\)</span>, for <span class="math inline">\(i=1,2,\ldots,n\)</span>.<br>
+Then <span class="math inline">\(Y=\sum_{i=1}^n X_i\sim \text{Pois}(\sum \lambda_i)\)</span>.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="callout callout-style-simple callout-note no-icon">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-body-container">
+<div id="thm-l14" class="theorem">
+<p><span class="theorem-title"><strong>Theorem 5</strong></span> Let <span class="math inline">\(X_1,X_2,\ldots,X_n\)</span> be a random sample from an Exponential distribution with parameter <span class="math inline">\(\theta\)</span>, for <span class="math inline">\(i=1,2,\ldots,n\)</span>.<br>
+Then <span class="math inline">\(Y=\sum_{i=1}^n X_i\sim \Gamma(\alpha=n, \theta)\)</span>.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="callout callout-style-simple callout-note no-icon">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-body-container">
+<div id="thm-l15" class="theorem">
+<p><span class="theorem-title"><strong>Theorem 6</strong></span> Let <span class="math inline">\(X_1, X_2, \ldots, X_n\)</span> be a random sample from a Gamma distribution with parameters <span class="math inline">\(\alpha_i\)</span> and <span class="math inline">\(\theta\)</span>, for <span class="math inline">\(i=1,2,\ldots,n\)</span>.<br>
+Then <span class="math inline">\(Y=\sum_{i=1}^n X_i\sim \Gamma(\sum_{i=1}^n \alpha_i, \theta)\)</span>.</p>
+</div>
+</div>
+</div>
+</div>
+<section id="random-functions-associated-with-normal-distributions" class="level4 unnumbered">
+<h4 class="unnumbered anchored" data-anchor-id="random-functions-associated-with-normal-distributions">Random Functions Associated with Normal Distributions</h4>
+<p>There are many theorems for the previous statistics course that you may find useful to recall in this semester.</p>
+<div class="callout callout-style-simple callout-note no-icon">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-body-container">
+<div id="thm-l16" class="theorem">
+<p><span class="theorem-title"><strong>Theorem 7</strong></span> If <span class="math inline">\(X_1, X_2, \ldots, X_n\)</span> are mutually independent normal random variables with means <span class="math inline">\(\mu_1, \mu_2, \ldots, \mu_n\)</span> and variances <span class="math inline">\(\sigma^2_1, \sigma^2_2, \ldots, \sigma^2_n\)</span>, respectively, then the linear combination: <span class="math display">\[\begin{aligned}
+        Y=\sum_{i=1}^n c_iX_i
+    \end{aligned}\]</span> follows a Normal distribution: <span class="math display">\[\begin{aligned}
+        N\left(\sum_{i=1}^n c_i\mu, \sum_{i=1}^n c_i^2\sigma^2_i\right)
+    \end{aligned}\]</span></p>
+</div>
+</div>
+</div>
+</div>
+<div class="callout callout-style-simple callout-note no-icon">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-body-container">
+<div id="cor-l11" class="theorem corollary">
+<p><span class="theorem-title"><strong>Corollary 1</strong></span> If <span class="math inline">\(X_1, X_2, \ldots, X_n\)</span> are observations of a random sample of size <span class="math inline">\(n\)</span> from a <span class="math inline">\(N(\mu, \sigma^2)\)</span> population, then the sample mean: <span class="math display">\[\begin{aligned}
+        \bar{X}=\frac{1}{n}\sum_{i=1}^n X_i
+    \end{aligned}\]</span> is normally distributed with mean <span class="math inline">\(\mu\)</span> and variance <span class="math inline">\(\frac{\sigma^2}{n}\)</span>.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="callout callout-style-simple callout-note no-icon">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-body-container">
+<div id="thm-l17" class="theorem">
+<p><span class="theorem-title"><strong>Theorem 8</strong></span> Let <span class="math inline">\(X_1, X_2, \ldots, X_n\)</span> be observations of a random sample of size <span class="math inline">\(n\)</span> from the Normal distribution <span class="math inline">\(N(\mu, \sigma^2)\)</span>. Let <span class="math inline">\(\bar{X}=\frac{1}{n}\sum_{i=1}^n X_i\)</span> and <span class="math inline">\(S^2=\frac{1}{n_1}\sum_{i=1}^n (X_i-\bar{X})^2\)</span> be the sample mean and sample variance, respectively. Then, <span class="math inline">\(\bar{X}\)</span> and <span class="math inline">\(S^2\)</span> are independent. Also, <span class="math display">\[\begin{aligned}
+        \frac{(n-1)S^2}{\sigma^2}
+    \end{aligned}\]</span> follows a Chi-square distribution with <span class="math inline">\(n-1\)</span> degrees of freedom.</p>
+</div>
+</div>
+</div>
+</div>
+<div id="def-noname" class="ms-3 theorem definition">
+<p><span class="theorem-title"><strong>Def. 16 (t-distribution)</strong></span> If <span class="math inline">\(Z\sim N(0,1)\)</span> and <span class="math inline">\(U\sim \chi^2(r)\)</span> are independent, then the random variable <span class="math display">\[\begin{aligned}
+T=\frac{Z}{\sqrt{\frac{U}{r}}}
+\end{aligned}\]</span> follows at <span class="math inline">\(t\)</span>-distribution with <span class="math inline">\(r\)</span> degrees of freedom.<br>
+</p>
+</div>
+<div class="callout callout-style-simple callout-note no-icon">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-body-container">
+<div id="thm-clt" class="theorem">
+<p><span class="theorem-title"><strong>Theorem 9 (Central Limit Theorem)</strong></span> Let <span class="math inline">\(X_1, X_2, \ldots, X_n\)</span> be a random sample from a distribution with finite mean <span class="math inline">\(\mu\)</span> and finite variance <span class="math inline">\(\sigma^2\)</span>. If the sample size, <span class="math inline">\(n\)</span>, is <em>sufficiently large</em>, then:</p>
+<ul>
+<li><p>the sample mean <span class="math inline">\(\bar{X}\)</span> follows an approximate normal distribution</p></li>
+<li><p>with mean <span class="math inline">\(\mu_{\bar{X}}=\mu\)</span></p></li>
+<li><p>and variance <span class="math inline">\(\sigma^2_{\bar{X}}=\frac{\sigma^2}{n}\)</span>.</p></li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</section>
+</section>
+</section>
+<section id="review-examples" class="level2">
+<h2 class="anchored" data-anchor-id="review-examples">0.5: Review Examples</h2>
+<p>In this section, we present some examples to help you recall some of the information from the Introduction to Probability course.</p>
+<div id="exm-probility1" class="theorem example">
+<p><span class="theorem-title"><strong>Example 1</strong></span> A woman who was initially thougth to have a 1% risk of cancer ended up with a positive mammogram result. A mammogram accurately classifies about 80% of cancerous tumors and 90% of benign tumors. What is the probability that the woman has cancer, given the positive result?</p>
+<p><strong>Solution</strong> Let the event <span class="math inline">\(C\)</span> denote cancer and event <span class="math inline">\(P\)</span> denote a positive result. We know: <span class="math inline">\(P(C)=0.01\)</span> and thus <span class="math inline">\(P(C^\prime)=1-P(C)=1-0.01=0.99\)</span>. Also, <span class="math inline">\(P(P|C)=0.8\)</span> and <span class="math inline">\(P(P^\prime|C^\prime)\)</span>, which implies <span class="math inline">\(P(P|C^\prime)=0.1\)</span>. Putting this all together, we get” <span class="math display">\[P(C|P)=\frac{P(P|C)P(C)}{P(P|C)P(C)+P(P|C^\prime)P(C^\prime)}=\frac{0.8(0.01)}{0.8(0.01)+0.1(0.99)}=0.075\]</span></p>
+</div>
+<div id="exm-normal1" class="theorem example">
+<p><span class="theorem-title"><strong>Example 2</strong></span> When you put your money into the coffee machine at the Student Center, a paper cup comes down and some coffee is put into it. You are supposed to get 8 oz of coffee. However, the actual amount of coffee is dispensed is a normal random variable with mean equal to the machine setting and variance of 0.0625 oz.</p>
+<p>What should the machine setting be so that, in the long run, only at 2% of the drinks will contain less than 8 oz?</p>
+<button class="btn btn-outline-success collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample1" aria-expanded="false" aria-controls="collapseExample1">Solution
+</button>
+<div id="collapseExample1" class="collapse">
+<div class="card">
+<div class="card-body bg-light ms-0 mb-0 pt-2">
+<p><span class="math display">\[\begin{align*}
+                &amp; P(X\le 8)=P\left(Z\le \frac{8-\mu}{\sqrt{0.0625}}\right)=0.02, \qquad \text{table value -2.0537}\\
+                &amp; -2.0537= \frac{8-\mu}{\sqrt{0.0625}}\qquad \Rightarrow \mu=8.513425
+            \end{align*}\]</span></p>
+</div>
+</div>
+</div>
+</div>
+<div id="exm-continuous" class="theorem example">
+<p><span class="theorem-title"><strong>Example 3</strong></span> Let the random variable <span class="math inline">\(X\)</span> have the following pdf <span class="math display">\[\begin{align*}
+            f(w)=\begin{cases}
+                cx^2, &amp; -1\le x&lt;0\\
+                cx, &amp; 0\le x\le 2\\
+                0, &amp; \text{otherwise}
+            \end{cases}
+        \end{align*}\]</span> where <span class="math inline">\(c\)</span> is a constant.</p>
+<ol type="1">
+<li><p>Find the value <span class="math inline">\(c\)</span> such that the above is a valid probability density function.</p></li>
+<li><p>Find the mean of the random variable.</p></li>
+<li><p>Find the cdf of <span class="math inline">\(X\)</span>.</p></li>
+<li><p>Find the median of the random variable.</p></li>
+</ol>
+<button class="btn btn-outline-success collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample2" aria-expanded="false" aria-controls="collapseExample2">Solution
+</button>
+<div id="collapseExample2" class="collapse">
+<div class="card">
+<div class="card-body bg-light ms-0 mb-0 pt-2">
+<ol type="1">
+<li><p><span class="math inline">\(\begin{align*}&amp; \frac{1}{c}=\int_{-1}^0x^2\;dx+\int_0^2x\; dx=\frac{1}{3}x^3\mid_{-1}^0+\frac{1}{2}x^2\mid_0^2=\frac{1}{3}+2=\frac{7}{3}, \qquad c=\frac{3}{7} \end{align*}\)</span><br>
+<br></p></li>
+<li><p><span class="math inline">\(\begin{align*} E(X)=\int_{-1}^0\frac{3}{7}x^3\; dx+\int_0^2\frac{3}{7}x^2\; dx=\frac{3}{28}x^4\mid_{-1}^0+\frac{1}{7}x^3\mid_0^4=-\frac{3}{28}+\frac{8}{7}=\frac{29}{28} \end{align*}\)</span><br>
+<br></p></li>
+<li><p><span class="math inline">\(\begin{align*}
+                    F(x)=\begin{cases}
+                        \int_{-1}^x\frac{3}{7}x^2dx=\frac{1}{7}x^3\mid_{-1}^x=\frac{1}{7}(x^3+1), &amp; -1\le x&lt;0\\
+                        \frac{1}{7}+\int_0^x \frac{3}{7}xdx=\frac{1}{7}+\frac{3}{14}x^2, &amp; 0\le x&lt;2\\
+                        1, &amp; x\ge 2
+                    \end{cases}
+                \end{align*}\)</span> <br></p></li>
+<li><p><span class="math inline">\(\begin{align*}
+                    0.5=\frac{1}{7}+\frac{3}{14}x^2, \qquad \Rightarrow \frac{5}{14}=\frac{3}{14}x^2, \qquad \Rightarrow x=\sqrt{\frac{5}{3}}\approx 1.29
+                \end{align*}\)</span></p></li>
+</ol>
+</div>
+</div>
+</div>
+</div>
+<div id="exm-bivariate_cont" class="theorem example">
+<p><span class="theorem-title"><strong>Example 4</strong></span> The lifetime (in months) of two components of a machine have joint probability density function <span class="math display">\[\begin{align*}
+            f(x,y)=c(50-x-y), \qquad 0&lt;x&lt;50-y&lt;50
+        \end{align*}\]</span> and zero otherwise.</p>
+<ol type="1">
+<li><p>Find the constant, <span class="math inline">\(c\)</span>, such that <span class="math inline">\(f(x,y)\)</span> is valid joint pdf. You may leave the constant as <span class="math inline">\(c\)</span>.</p></li>
+<li><p>Find the marginal distributions.</p></li>
+<li><p>Find the conditional distribution of <span class="math inline">\(X\)</span> given <span class="math inline">\(Y=y\)</span>. If convenient, you may leave the constant as <span class="math inline">\(c\)</span>.</p></li>
+</ol>
+<button class="btn btn-outline-success collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample3" aria-expanded="false" aria-controls="collapseExample3">Solution
+</button>
+<div id="collapseExample3" class="collapse">
+<div class="card">
+<div class="card-body bg-light ms-0 mb-0 pt-2">
+<ol type="1">
+<li><span class="math inline">\(\begin{align*}\
+                     &amp; \frac{1}{c}=\int_0^{50}\int_0^{50-y} 50-x-y\;dx\;dy=\int_0^{50} \left[50x-\frac{1}{2}x^2-yx\mid_0^{50-y}\right] dy\\
+                     &amp; =\int_0^{50} \frac{1}{2}y^2-50y+1250dy=\frac{1}{6}y^3-25y^2+1250y\mid_0^{50}=\frac{125000}{6}\\
+                     &amp; \Rightarrow c=\frac{6}{125000}
+                 \end{align*}\)</span><br>
+</li>
+</ol>
+<p><br> 2. <span class="math inline">\(\begin{align*}\
+                        &amp; f(x)=c\int_0^{50-x} 50-x-y\;dy=\frac{c}{2}(x-50)^2, \qquad 0\le x\le 50\\
+                        &amp; f(y)=c\int_0^{50-y} 50-x-y\;dx=\frac{c}{2}(y-50)^2, \qquad 0\le y\le 50
+                    \end{align*}\)</span><br>
+</p>
+<p><br> 3. <span class="math inline">\(\begin{align*}\
+                        f(x|y)=\frac{f(x,y)}{f(y)}=\frac{c(50-x-y)}{\frac{c}{2}(y-50)^2}=\frac{2(50-x-y)}{(y-50)^2}, \qquad 0&lt;x&lt;50-y
+                    \end{align*}\)</span></p>
+</div>
+</div>
+</div>
+</div>
+<div id="exm-cdf" class="theorem example">
+<p><span class="theorem-title"><strong>Example 5</strong></span> Suppose the cdf for the discrete random variable <span class="math inline">\(X\)</span> is <span class="math display">\[\begin{aligned}
+        F(x)=\frac{x(x+1)}{20}, \qquad x=1,2,3,4.
+    \end{aligned}\]</span></p>
+<ol type="1">
+<li><p>Find the pdf of <span class="math inline">\(X\)</span>. You may put in table form.</p></li>
+<li><p>Derive the <span class="math inline">\(30^{th}\)</span> percentile of <span class="math inline">\(X\)</span>.</p></li>
+<li><p>Derive the mean of <span class="math inline">\(X\)</span>.</p></li>
+<li><p>Derive the standard deviation of <span class="math inline">\(X\)</span>.</p></li>
+</ol>
+<button class="btn btn-outline-success collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample4" aria-expanded="false" aria-controls="collapseExample4">Solution
+</button>
+<div id="collapseExample4" class="collapse">
+<div class="card">
+<div class="card-body bg-light ms-0 mb-0 pt-2">
+<ol type="1">
+<li><p>Recall that the cdf is defined as <span class="math inline">\(F(x)=P(X\le x)\)</span>. Start with <span class="math inline">\(x=1\)</span>. We know <span class="math inline">\(F(1)=P(X\le 1)\)</span>. Since there are no values less than 1, it follows that <span class="math display">\[\begin{aligned}
+                &amp; F(1)=P(X\le 1)=P(X=1)=\frac{1(2)}{20}=\frac{2}{20}\\
+                &amp; f(1)=P(X=1)=\frac{1}{10}
+            \end{aligned}\]</span> Next, consider <span class="math inline">\(x=2\)</span>. <span class="math display">\[\begin{aligned}
+                &amp; F(2)=P(X\le 2)=\frac{2(3)}{20}=\frac{3}{10}=0.3
+            \end{aligned}\]</span> We also know that <span class="math display">\[\begin{aligned}
+                &amp; F(2)=P(X\le 2)=P(X=1)+P(X=2)
+            \end{aligned}\]</span></p>
+<pre><code>        Therefore,</code></pre>
+<span class="math display">\[\begin{aligned}
+&amp; 0.3=P(X=1)+P(X=2)\\
+&amp; \Rightarrow P(X=2)=0.3-P(X=1)=0.3-0.1=0.2
+
+\end{aligned}\]</span>
+<p>Thus, <span class="math inline">\(f(2)=P(X=2)=0.2\)</span>. We can continue on in the same manner to find the pmf for the other values of <span class="math inline">\(x\)</span>. The tabular form of the pmf of <span class="math inline">\(X\)</span> is:<br>
+</p>
+<table class="w-auto table-sm mx-auto row-header small caption-top table">
+<thead>
+<tr class="header">
+<th style="text-align: center;"><span class="math inline">\(x\)</span></th>
+<th style="text-align: center;">1</th>
+<th style="text-align: center;">2</th>
+<th style="text-align: center;">3</th>
+<th style="text-align: center;">4</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;"><span class="math inline">\(f(x)\)</span></td>
+<td style="text-align: center;">0.1</td>
+<td style="text-align: center;">0.2</td>
+<td style="text-align: center;">0.3</td>
+<td style="text-align: center;">0.4</td>
+<td></td>
+</tr>
+</tbody>
+</table></li>
+<li><p>Derive the <span class="math inline">\(30^{th}\)</span> percentile of <span class="math inline">\(X\)</span>. <span class="math display">\[\begin{aligned}
+                    &amp; 0.3=\frac{x(x+1)}{20}\Rightarrow 6=x^2+x\Rightarrow x^2+x-6=0\\
+                    &amp; =(x+3)(x-2)=0\Rightarrow x=2
+                 \end{aligned}\]</span></p></li>
+<li><p>Derive the mean of <span class="math inline">\(X\)</span>. <span class="math display">\[\begin{aligned}
+                    E(X)=0\left(0\right)+1\left(\frac{2}{20}\right)+2\left(\frac{4}{20}\right)+3\left(\frac{6}{20}\right)+4\left(\frac{8}{20}\right)=\frac{60}{20}=3
+                \end{aligned}\]</span></p></li>
+<li><p>Derive the standard deviation of <span class="math inline">\(X\)</span>. <span class="math display">\[\begin{aligned}
+                    &amp; E(X^2)=0\left(0\right)+1\left(\frac{2}{20}\right)+4\left(\frac{4}{20}\right)+9\left(\frac{6}{20}\right)+16\left(\frac{8}{20}\right)=\frac{200}{20}=10\\
+                    &amp; \text{Var}(X)=E(X^2)-E(X)^2=10-3^2=10-9=1\\
+                    &amp; \text{SD}(X)=\sqrt{1}=1
+\end{aligned}\]</span></p></li>
+</ol>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="outline-of-stat-415" class="level2">
+<h2 class="anchored" data-anchor-id="outline-of-stat-415">0.6: Outline of STAT 415</h2>
+<p>Suppose that we obtain data <span class="math inline">\(x\)</span> from a statistical model with an unknown parameter <span class="math inline">\(\theta\)</span>. %Imagine that <span class="math inline">\(\theta\)</span> indexes a family of possible distributions for <span class="math inline">\(x\)</span>, and that the true value of <span class="math inline">\(\theta\)</span> determines the true data-generating process. We will then consider questions such as:</p>
+<p><strong>Point Estimation</strong>: What is a <strong>good</strong> estimator for <span class="math inline">\(\theta\)</span>? This depends on the definition of `good’, and we will introduce several criteria by which estimators can be judged. Just providing a point estimator <span class="math inline">\(\hat{\theta}\)</span>, without any sense of its uncertainty, is usually unsatisfying. Thus, statistical inference emphasizes accompanying point estimators with information about their uncertainties, e.g., we may be able to describe the distribution of <span class="math inline">\(\hat{\theta}\)</span> or at least say what its standard deviation is. The standard deviation of an estimator is called its standard error.</p>
+<p><strong>Interval Estimation</strong>: Intuitively, much more informative than just saying something like ``I estimate <span class="math inline">\(\theta\)</span> as 2.5’’ is to provide an interval, such as saying</p>
+<p>`I am 95% confident that <span class="math inline">\(\theta\)</span> is inclusively between 2.3 and 2.8.’</p>
+<p>But what does `confident’ mean? In this course we will define precisely what it means to give an interval estimate, and study ways of constructing such estimates.</p>
+<p>If <span class="math inline">\(\theta\)</span> is a constant, then it either is or isn’t in the interval <span class="math inline">\([2.3, 2.8]\)</span>, so what does the 95% mean?</p>
+<p><strong>Hypothesis Testing (model evaluation)</strong>: In many applications in the physical, biological, and social sciences, a researcher is interested in testing a hypothesis which can be expressed in the form <span class="math inline">\(\theta=\theta_0\)</span> or, more generally, as <span class="math inline">\(\theta\in H_0\)</span> for some set <span class="math inline">\(H_0\)</span>. Hypothesis testing is closely related to interval estimation (and arguably the latter is more useful), and can be approached via various perspectives.</p>
+
+
+</section>
+
+</main> <!-- /main -->
+<!--<script>
+
+document.addEventListener('DOMContentLoaded', function () {
+
+    const toc = document.getElementById('TOC');
+
+    const navbarCollapse = document.getElementById('navbarCollapse');
+
+    const menuButton = document.querySelector('.navbar-toggler');
+
+
+
+    // Function to move TOC to navbar on small screens
+
+    function handleTOCDisplay() {
+
+        if (window.innerWidth < 768) {
+
+            if (!navbarCollapse.contains(toc)) {
+
+                navbarCollapse.appendChild(toc); // Move TOC into the navbar
+
+            }
+
+        } else {
+
+            if (toc.parentNode !== document.getElementById('quarto-margin-sidebar')) {
+
+                document.getElementById('quarto-margin-sidebar').appendChild(toc); // Move TOC back to original location
+
+            }
+
+        }
+
+    }
+
+
+
+    // Initial check on page load
+
+    handleTOCDisplay();
+
+
+
+    // Check when resizing the window
+
+    window.addEventListener('resize', handleTOCDisplay);
+
+
+
+    // Toggle TOC visibility when navbar is expanded on small screens
+
+    menuButton.addEventListener('click', function() {
+
+        if (window.innerWidth < 768) {
+
+            toc.classList.toggle('toc-active'); // Toggle visibility of the TOC in the navbar
+
+        }
+
+    });
+
+});
+
+</script>-->
+
+
+
+<script>
+
+document.addEventListener('DOMContentLoaded', function () {
+
+    const toc = document.getElementById('TOC'); // TOC element
+
+    const activeLesson = document.querySelector('.sidebar-item .sidebar-link.active'); // Active lesson link
+
+    const originalTocParent = toc.parentElement; // Store original TOC location
+
+
+
+    // Create a container for the TOC in the sidebar
+
+    const nestedTocContainer = document.createElement('ul');
+
+    nestedTocContainer.className = 'sidebar-toc-nested list-unstyled';
+
+
+
+    // Function to move the TOC into the sidebar
+
+    function moveTocToSidebar() {
+
+        if (!toc || !activeLesson) return;
+
+        while (toc.firstChild) {
+
+            nestedTocContainer.appendChild(toc.firstChild);
+
+        }
+
+        const parentItem = activeLesson.closest('.sidebar-item');
+
+        parentItem.appendChild(nestedTocContainer);
+
+        toc.style.display = 'none'; // Hide the original TOC container
+
+    }
+
+
+
+    // Function to restore the TOC to its original location
+
+    function restoreTocToOriginalLocation() {
+
+        if (nestedTocContainer.parentNode) {
+
+            while (nestedTocContainer.firstChild) {
+
+                toc.appendChild(nestedTocContainer.firstChild);
+
+            }
+
+            nestedTocContainer.remove(); // Remove the container
+
+            toc.style.display = ''; // Show the original TOC container
+
+        }
+
+    }
+
+
+
+    // Function to handle screen width changes
+
+    function handleScreenResize() {
+
+        if (window.innerWidth < 768) {
+
+            moveTocToSidebar();
+
+        } else {
+
+            restoreTocToOriginalLocation();
+
+        }
+
+    }
+
+
+
+    // Initial check and event listener for resize
+
+    handleScreenResize();
+
+    window.addEventListener('resize', handleScreenResize);
+
+});
+
+
+
+</script>
+<!---function to make the first column th instead of td when using markdown tables..just add .row-header as your class below the table!---->
+
+<script>
+
+    window.addEventListener('DOMContentLoaded', () => {
+
+        // Select only tables with the 'row-header' class
+
+        const tables = document.querySelectorAll('table.row-header');
+
+        
+
+        tables.forEach(table => {
+
+            const rows = table.querySelectorAll('tr');
+
+            
+
+            rows.forEach(row => {
+
+                const firstCell = row.cells[0];
+
+                if (firstCell && firstCell.tagName === 'TD') {
+
+                    const th = document.createElement('th');
+
+                    th.innerHTML = firstCell.innerHTML;
+
+                    th.setAttribute('scope', 'row'); // Add scope="row" to the th element
+
+                    row.replaceChild(th, firstCell);
+
+                }
+
+            });
+
+        });
+
+    });
+
+</script>
+<script>
+
+  document.addEventListener("DOMContentLoaded", function () {
+
+    const elements = document.querySelectorAll('div[id^="exm-"]');
+
+
+
+    elements.forEach((element) => {
+
+      const theoremTitle = element.querySelector('.theorem-title');
+
+      // Use the Quarto-generated id (e.g. "exm-muscleexample") directly
+
+      const anchorId = element.id;
+
+
+
+      if (theoremTitle && anchorId) {
+
+        const anchor = document.createElement('a');
+
+        anchor.href = `#${anchorId}`;
+
+        anchor.className = 'anchor';
+
+        anchor.setAttribute('aria-label', `Link to ${theoremTitle.textContent.trim()}`);
+
+        anchor.innerHTML = '<i class="bi bi-link-45deg" aria-hidden="true"></i>';
+
+        theoremTitle.appendChild(anchor);
+
+        // No need to reassign element.id — it's already correct
+
+      }
+
+    });
+
+  });
+
+</script>
+<style>
+
+  #mas-popup,
+
+  #mas-popup * {
+
+    box-sizing: border-box;
+
+  }
+
+
+
+  #mas-popup {
+
+    --mas-navy: #001e44;
+
+    --mas-blue: #1e407c;
+
+    --mas-sky: #96bee6;
+
+
+
+    position: fixed;
+
+    right: max(1.25rem, env(safe-area-inset-right));
+
+    bottom: max(1.25rem, env(safe-area-inset-bottom));
+
+    z-index: 1055;
+
+
+
+    width: min(25rem, calc(100vw - 2rem));
+
+    padding: 1.45rem 1.5rem 1.5rem 1.8rem;
+
+    overflow: hidden;
+
+
+
+    border: 1px solid rgba(0, 30, 68, 0.14);
+
+    border-radius: 0.75rem;
+
+    background: #ffffff;
+
+    color: #16243a;
+
+
+
+    box-shadow:
+
+      0 1.25rem 3.5rem rgba(0, 30, 68, 0.2),
+
+      0 0.2rem 0.7rem rgba(0, 30, 68, 0.08);
+
+
+
+    font-family: Arial, Helvetica, sans-serif;
+
+    -webkit-font-smoothing: antialiased;
+
+
+
+    animation: mas-popup-in 320ms cubic-bezier(0.2, 0.8, 0.2, 1) both;
+
+  }
+
+
+
+  #mas-popup[hidden] {
+
+    display: none;
+
+  }
+
+
+
+  /* Blue accent along the left side */
+
+  #mas-popup::before {
+
+    position: absolute;
+
+    inset: 0 auto 0 0;
+
+    width: 0.35rem;
+
+    background: linear-gradient(
+
+      180deg,
+
+      var(--mas-sky),
+
+      var(--mas-blue)
+
+    );
+
+    content: "";
+
+  }
+
+
+
+  #mas-popup-kicker {
+
+    margin: 0 3rem 0.55rem 0;
+
+    color: var(--mas-blue);
+
+    font-size: 0.69rem;
+
+    font-weight: 700;
+
+    letter-spacing: 0.12em;
+
+    line-height: 1.3;
+
+    text-transform: uppercase;
+
+  }
+
+
+
+  #mas-popup h2#mas-popup-title {
+
+    margin: 1rem 2.5rem 0.65rem 0 !important; 
+
+    max-width: 19rem;
+
+    margin: 0 2.5rem 0.65rem 0 !important;
+
+    color: var(--mas-navy);
+
+    font-family: Georgia, "Times New Roman", serif;
+
+    font-size: 1.55rem;
+
+    font-weight: 600;
+
+    letter-spacing: -0.015em;
+
+    line-height: 1.18 !important;
+
+  }
+
+
+
+  #mas-popup-description {
+
+    max-width: 21rem;
+
+    margin: 0 0 1.15rem;
+
+    color: #46586e;
+
+    font-size: 0.95rem;
+
+    line-height: 1.55;
+
+  }
+
+
+
+  #mas-popup-cta {
+
+    display: inline-flex;
+
+    min-height: 2.75rem;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 0.65rem;
+
+
+
+    padding: 0.7rem 1rem;
+
+    border: 2px solid var(--mas-navy);
+
+    border-radius: 0.35rem;
+
+    background: var(--mas-navy);
+
+    color: #ffffff;
+
+
+
+    font-size: 0.88rem;
+
+    font-weight: 700;
+
+    text-decoration: none;
+
+
+
+    transition:
+
+      background-color 160ms ease,
+
+      border-color 160ms ease,
+
+      transform 160ms ease;
+
+  }
+
+
+
+  #mas-popup-cta:hover,
+
+  #mas-popup-cta:focus-visible {
+
+    border-color: var(--mas-blue);
+
+    background: var(--mas-blue);
+
+    color: #ffffff;
+
+    transform: translateY(-1px);
+
+  }
+
+
+
+  #mas-popup-cta-arrow {
+
+    font-size: 1.1rem;
+
+    transition: transform 160ms ease;
+
+  }
+
+
+
+  #mas-popup-cta:hover #mas-popup-cta-arrow,
+
+  #mas-popup-cta:focus-visible #mas-popup-cta-arrow {
+
+    transform: translateX(0.18rem);
+
+  }
+
+
+
+  #mas-popup-close {
+
+    position: absolute;
+
+    top: 0.65rem;
+
+    right: 0.65rem;
+
+
+
+    display: grid;
+
+    width: 2.75rem;
+
+    height: 2.75rem;
+
+    padding: 0;
+
+    place-items: center;
+
+
+
+    border: 0;
+
+    border-radius: 50%;
+
+    background: transparent;
+
+    color: #485b72;
+
+
+
+    font: inherit;
+
+    font-size: 1.55rem;
+
+    line-height: 1;
+
+
+
+    cursor: pointer;
+
+  }
+
+
+
+  #mas-popup-close:hover,
+
+  #mas-popup-close:focus-visible {
+
+    background: #edf2f7;
+
+    color: var(--mas-navy);
+
+  }
+
+
+
+  #mas-popup :focus-visible {
+
+    outline: 3px solid var(--mas-sky);
+
+    outline-offset: 3px;
+
+  }
+
+
+
+  @keyframes mas-popup-in {
+
+    from {
+
+      opacity: 0;
+
+      transform: translateY(1rem) scale(0.98);
+
+    }
+
+
+
+    to {
+
+      opacity: 1;
+
+      transform: translateY(0) scale(1);
+
+    }
+
+  }
+
+
+
+  @media (max-width: 520px) {
+
+    #mas-popup {
+
+      right: max(0.75rem, env(safe-area-inset-right));
+
+      bottom: max(0.75rem, env(safe-area-inset-bottom));
+
+      width: calc(100vw - 1.5rem);
+
+      padding: 1.25rem 1.25rem 1.3rem 1.55rem;
+
+    }
+
+
+
+    #mas-popup-title {
+
+      max-width: 17rem;
+
+      font-size: 1.4rem;
+
+    }
+
+
+
+    #mas-popup-cta {
+
+      width: 100%;
+
+    }
+
+  }
+
+
+
+  @media (prefers-reduced-motion: reduce) {
+
+    #mas-popup {
+
+      animation: none;
+
+    }
+
+
+
+    #mas-popup-cta,
+
+    #mas-popup-cta-arrow {
+
+      transition: none;
+
+    }
+
+  }
+
+</style>
+
+
+
+<aside id="mas-popup" role="region" aria-labelledby="mas-popup-title" aria-describedby="mas-popup-description" aria-live="polite" hidden="">
+
+  <button id="mas-popup-close" type="button" aria-label="Close this message">
+
+    <span aria-hidden="true">×</span>
+
+  </button>
+
+
+
+  <p id="mas-popup-kicker">
+
+    Online master’s program
+
+  </p>
+
+
+
+  <h2 id="mas-popup-title">
+
+    Take your statistics skills further
+
+  </h2>
+
+
+
+  <p id="mas-popup-description">
+
+    Explore Penn State’s online Master of Applied Statistics program.
+
+  </p>
+
+
+
+  <a id="mas-popup-cta" href="https://science.psu.edu/stat/graduate-programs/master-of-applied-statistics">
+
+    Explore the program
+
+    <span id="mas-popup-cta-arrow" aria-hidden="true">→</span>
+
+  </a>
+
+</aside>
+
+
+
+<script>
+
+  (() => {
+
+    const storageKey = "stat501-mas-popup-dismissed-v2";
+
+
+
+    // Show the popup after 15 seconds.
+
+    const showDelay = 15000;
+
+
+
+    // After closing it, hide it for 30 days.
+
+    const dismissalDays = 30;
+
+
+
+    const popup = document.getElementById("mas-popup");
+
+    const closeButton = document.getElementById("mas-popup-close");
+
+    const cta = document.getElementById("mas-popup-cta");
+
+
+
+    if (!popup || !closeButton || !cta) return;
+
+
+
+    let dismissalActive = false;
+
+
+
+    try {
+
+      const dismissedUntil = Number(
+
+        localStorage.getItem(storageKey)
+
+      );
+
+
+
+      dismissalActive =
+
+        Number.isFinite(dismissedUntil) &&
+
+        Date.now() < dismissedUntil;
+
+    } catch (error) {
+
+      // The popup still works if browser storage is unavailable.
+
+    }
+
+
+
+    if (dismissalActive) return;
+
+
+
+    const rememberDismissal = () => {
+
+      try {
+
+        const millisecondsPerDay = 24 * 60 * 60 * 1000;
+
+        const dismissedUntil =
+
+          Date.now() + dismissalDays * millisecondsPerDay;
+
+
+
+        localStorage.setItem(
+
+          storageKey,
+
+          String(dismissedUntil)
+
+        );
+
+      } catch (error) {
+
+        // Closing still works if browser storage is unavailable.
+
+      }
+
+    };
+
+
+
+    const showTimer = window.setTimeout(() => {
+
+      popup.hidden = false;
+
+    }, showDelay);
+
+
+
+    const dismissPopup = () => {
+
+      window.clearTimeout(showTimer);
+
+      popup.hidden = true;
+
+      rememberDismissal();
+
+    };
+
+
+
+    closeButton.addEventListener("click", dismissPopup);
+
+
+
+    // Prevent the popup from appearing again after someone uses the CTA.
+
+    cta.addEventListener("click", rememberDismissal);
+
+
+
+    document.addEventListener("keydown", (event) => {
+
+      if (event.key === "Escape" && !popup.hidden) {
+
+        dismissPopup();
+
+      }
+
+    });
+
+  })();
+
+</script>
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    // Ensure there is a toggle, if there isn't float one in the top right
+    if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+      const a = window.document.createElement('a');
+      a.classList.add('top-right');
+      a.classList.add('quarto-color-scheme-toggle');
+      a.href = "";
+      a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+      const i = window.document.createElement("i");
+      i.classList.add('bi');
+      a.appendChild(i);
+      window.document.body.appendChild(a);
+    }
+    setColorSchemeToggle(hasAlternateSentinel())
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./index.html" class="pagination-link" aria-label="About this course">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">About this course</span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./Lesson01.html" class="pagination-link" aria-label="Order Statistics">
+        <span class="nav-page-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Order Statistics</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+<p>Except where otherwise noted, content on this site is licensed under a <a href="https://creativecommons.org/licenses/by-nc/4.0/">CC BY-NC 4.0</a> license.<br><br> <img src="assets/by-nc.svg" class="img-fluid" alt="BYNC"></p>
+</div>   
+    <div class="nav-footer-center">
+<p><a href="https://oer.psu.edu/">OPEN.ED@PSU</a></p>
+<div class="cookie-consent-footer"><a href="#" id="open_preferences_center">Cookie Preferences</a></div></div>
+    <div class="nav-footer-right">
+<a href="https://www.psu.edu/web-privacy-statement/">Privacy</a> | <a href="https://www.psu.edu/accessibilitystatement/">Accessibility</a> | <a href="https://www.psu.edu/copyright-information/">Copyright</a> <br> <a href="https://www.psu.edu/">The Pennsylvania State University</a> © <span id="copyright-year"></span> | <br> <a href="https://forms.office.com/r/GbC8H0pZhm">Leave Us Feedback</a>
+<script>
+document.getElementById("copyright-year").textContent = new Date().getFullYear();
+</script>
+</div>
+  </div>
+</footer>
+
+
+
+
+</body></html>

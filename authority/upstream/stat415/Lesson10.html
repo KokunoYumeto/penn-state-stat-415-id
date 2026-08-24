@@ -1,0 +1,2733 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.9.35">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>10&nbsp; Hypothesis Tests (Part II) – STAT 415 | Introduction to Mathematical Statistics</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./Lesson11.html" rel="next">
+<link href="./Lesson09.html" rel="prev">
+<link href="./assets/psulion.png" rel="icon" type="image/png">
+<script src="site_libs/cookie-consent/cookie-consent.js"></script>
+<link href="site_libs/cookie-consent/cookie-consent.css" rel="stylesheet">
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-46f66b053e56abd73bb6e954d61a315b.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-22b4aaf4c2978829df3684e8f2c068db.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-46f66b053e56abd73bb6e954d61a315b.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-dedc56d09aa522c36e3c0f8583f17cbf.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark-fc84954412eed28da5dc743c06b0bbd5.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="site_libs/bootstrap/bootstrap-dedc56d09aa522c36e3c0f8583f17cbf.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/quarto-contrib/language-name/language-name.css" rel="stylesheet">
+<script src="site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
+<link href="site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
+<link href="site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<script async="" src="https://www.googletagmanager.com/gtag/js?id=G-XM6C7H9XCL"></script>
+
+<script type="text/plain" cookie-consent="tracking">
+
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-XM6C7H9XCL', { 'anonymize_ip': true});
+</script>
+
+<script type="text/javascript" charset="UTF-8">
+document.addEventListener('DOMContentLoaded', function () {
+cookieconsent.run({
+  "notice_banner_type":"simple",
+  "consent_type":"express",
+  "palette":"light",
+  "language":"en",
+  "page_load_consent_levels":["strictly-necessary"],
+  "notice_banner_reject_button_hide":false,
+  "preferences_center_close_button_hide":false,
+  "website_name":""
+  ,
+"language":"en"
+  });
+});
+</script> 
+  
+<script>
+
+  window.addEventListener('load', function() {
+
+    document.getElementById("cc-nb-text").innerHTML = "We use cookies and other tracking technologies to improve your browsing experience on our website, to analyze our website traffic, and to understand where our visitors are coming from.";
+
+  });
+
+</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+</head>
+
+<body class="nav-sidebar docked nav-fixed quarto-light"><script id="quarto-html-before-body" type="application/javascript">
+    const toggleBodyColorMode = (bsSheetEl) => {
+      const mode = bsSheetEl.getAttribute("data-mode");
+      const bodyEl = window.document.querySelector("body");
+      if (mode === "dark") {
+        bodyEl.classList.add("quarto-dark");
+        bodyEl.classList.remove("quarto-light");
+      } else {
+        bodyEl.classList.add("quarto-light");
+        bodyEl.classList.remove("quarto-dark");
+      }
+    }
+    const toggleBodyColorPrimary = () => {
+      const bsSheetEl = window.document.querySelector("link#quarto-bootstrap:not([rel=disabled-stylesheet])");
+      if (bsSheetEl) {
+        toggleBodyColorMode(bsSheetEl);
+      }
+    }
+    const setColorSchemeToggle = (alternate) => {
+      const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+      for (let i=0; i < toggles.length; i++) {
+        const toggle = toggles[i];
+        if (toggle) {
+          if (alternate) {
+            toggle.classList.add("alternate");
+          } else {
+            toggle.classList.remove("alternate");
+          }
+        }
+      }
+    };
+    const toggleColorMode = (alternate) => {
+      // Switch the stylesheets
+      const primaryStylesheets = window.document.querySelectorAll('link.quarto-color-scheme:not(.quarto-color-alternate)');
+      const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+      manageTransitions('#quarto-margin-sidebar .nav-link', false);
+      if (alternate) {
+        // note: dark is layered on light, we don't disable primary!
+        enableStylesheet(alternateStylesheets);
+        for (const sheetNode of alternateStylesheets) {
+          if (sheetNode.id === "quarto-bootstrap") {
+            toggleBodyColorMode(sheetNode);
+          }
+        }
+      } else {
+        disableStylesheet(alternateStylesheets);
+        enableStylesheet(primaryStylesheets)
+        toggleBodyColorPrimary();
+      }
+      manageTransitions('#quarto-margin-sidebar .nav-link', true);
+      // Switch the toggles
+      setColorSchemeToggle(alternate)
+      // Hack to workaround the fact that safari doesn't
+      // properly recolor the scrollbar when toggling (#1455)
+      if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+        manageTransitions("body", false);
+        window.scrollTo(0, 1);
+        setTimeout(() => {
+          window.scrollTo(0, 0);
+          manageTransitions("body", true);
+        }, 40);
+      }
+    }
+    const disableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        stylesheet.rel = 'disabled-stylesheet';
+      }
+    }
+    const enableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        if(stylesheet.rel !== 'stylesheet') { // for Chrome, which will still FOUC without this check
+          stylesheet.rel = 'stylesheet';
+        }
+      }
+    }
+    const manageTransitions = (selector, allowTransitions) => {
+      const els = window.document.querySelectorAll(selector);
+      for (let i=0; i < els.length; i++) {
+        const el = els[i];
+        if (allowTransitions) {
+          el.classList.remove('notransition');
+        } else {
+          el.classList.add('notransition');
+        }
+      }
+    }
+    const isFileUrl = () => {
+      return window.location.protocol === 'file:';
+    }
+    const hasAlternateSentinel = () => {
+      let styleSentinel = getColorSchemeSentinel();
+      if (styleSentinel !== null) {
+        return styleSentinel === "alternate";
+      } else {
+        return false;
+      }
+    }
+    const setStyleSentinel = (alternate) => {
+      const value = alternate ? "alternate" : "default";
+      if (!isFileUrl()) {
+        window.localStorage.setItem("quarto-color-scheme", value);
+      } else {
+        localAlternateSentinel = value;
+      }
+    }
+    const getColorSchemeSentinel = () => {
+      if (!isFileUrl()) {
+        const storageValue = window.localStorage.getItem("quarto-color-scheme");
+        return storageValue != null ? storageValue : localAlternateSentinel;
+      } else {
+        return localAlternateSentinel;
+      }
+    }
+    const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+      const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+      const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+      let newTheme = '';
+      if(authorPrefersDark) {
+        newTheme = isAlternate ? baseTheme : alternateTheme;
+      } else {
+        newTheme = isAlternate ? alternateTheme : baseTheme;
+      }
+      const changeGiscusTheme = () => {
+        // From: https://github.com/giscus/giscus/issues/336
+        const sendMessage = (message) => {
+          const iframe = document.querySelector('iframe.giscus-frame');
+          if (!iframe) return;
+          iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+        }
+        sendMessage({
+          setConfig: {
+            theme: newTheme
+          }
+        });
+      }
+      const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+      if (isGiscussLoaded) {
+        changeGiscusTheme();
+      }
+    };
+    const authorPrefersDark = false;
+    const darkModeDefault = authorPrefersDark;
+      document.querySelector('link#quarto-text-highlighting-styles.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+      document.querySelector('link#quarto-bootstrap.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+    let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+    // Dark / light mode switch
+    window.quartoToggleColorScheme = () => {
+      // Read the current dark / light value
+      let toAlternate = !hasAlternateSentinel();
+      toggleColorMode(toAlternate);
+      setStyleSentinel(toAlternate);
+      toggleGiscusIfUsed(toAlternate, darkModeDefault);
+      window.dispatchEvent(new Event('resize'));
+    };
+    // Switch to dark mode if need be
+    if (hasAlternateSentinel()) {
+      toggleColorMode(true);
+    } else {
+      toggleColorMode(false);
+    }
+  </script>
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <div id="quarto-announcement" data-announcement-id="cb9d28251ca8388d2bc94ffe0e472446" class="alert alert-warning hidden"><i class="bi bi-info-circle quarto-announcement-icon"></i><div class="quarto-announcement-content">
+<p>Welcome to our newly redesigned course notes! Please update your bookmarks accordingly.</p>
+</div><i class="bi bi-x-lg quarto-announcement-action"></i></div>
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="./index.html">
+    <span class="navbar-title">STAT 415 | Introduction to Mathematical Statistics</span>
+    </a>
+  </div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="https://science.psu.edu/stat"> 
+<span class="menu-text">Department of Statistics</span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+  <a href="" class="quarto-reader-toggle quarto-navigation-tool px-1" onclick="window.quartoToggleReader(); return false;" title="Toggle reader mode">
+  <div class="quarto-reader-toggle-btn">
+  <i class="bi"></i>
+  </div>
+</a>
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./Lesson00.html">Lessons</a></li><li class="breadcrumb-item"><a href="./Lesson10.html"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Hypothesis Tests (Part II)</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header sidebar-header-stacked">
+      <a href="https://science.psu.edu/" class="sidebar-logo-link">
+      <img src="./PSU_Ecosshield.png" alt="Penn State Eberly College of Science" class="sidebar-logo light-content py-0 d-lg-inline d-none">
+      <img src="./PSU_Ecosshield.png" alt="Penn State Eberly College of Science" class="sidebar-logo dark-content py-0 d-lg-inline d-none">
+      </a>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">About this course</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+ <span class="menu-text">Lessons</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Lesson00.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">0: Review Concepts from STAT 414</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Lesson01.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Order Statistics</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Lesson02.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Estimation (Part I)</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Lesson03.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Estimation (Part II)</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Lesson04.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Maximum Likelihood Estimation (MLE) (Part I)</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Lesson05.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Maximum Likelihood Estimation (MLE) (Part II)</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Lesson06.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Confidence Intervals</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Lesson07.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Asymptotic Distribution of MLE (Part I)</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Lesson08.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Asymptotic Distribution of MLE (Part II)</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Lesson09.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Hypothesis Tests (Part I)</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Lesson10.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Hypothesis Tests (Part II)</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Lesson11.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Bayesian Methods</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Lesson12.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Simple Linear Regression</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">In this lesson</h2>
+   
+  <ul>
+  <li><a href="#other-hypothesis-test-examples" id="toc-other-hypothesis-test-examples" class="nav-link active" data-scroll-target="#other-hypothesis-test-examples"><span class="header-section-number">10.1</span> Other Hypothesis Test Examples</a></li>
+  <li><a href="#linking-confidence-intervals-to-hypothesis-tests" id="toc-linking-confidence-intervals-to-hypothesis-tests" class="nav-link" data-scroll-target="#linking-confidence-intervals-to-hypothesis-tests"><span class="header-section-number">10.2</span> Linking Confidence Intervals to Hypothesis Tests</a></li>
+  <li><a href="#power-of-a-test" id="toc-power-of-a-test" class="nav-link" data-scroll-target="#power-of-a-test"><span class="header-section-number">10.3</span> Power of a Test</a>
+  <ul class="collapse">
+  <li><a href="#definition-of-power" id="toc-definition-of-power" class="nav-link" data-scroll-target="#definition-of-power"><span class="header-section-number">10.3.1</span> Definition of Power</a></li>
+  <li><a href="#power-functions" id="toc-power-functions" class="nav-link" data-scroll-target="#power-functions"><span class="header-section-number">10.3.2</span> Power Functions</a></li>
+  <li><a href="#calculating-sample-size" id="toc-calculating-sample-size" class="nav-link" data-scroll-target="#calculating-sample-size"><span class="header-section-number">10.3.3</span> Calculating Sample Size</a></li>
+  </ul></li>
+  <li><a href="#approximate-wald-test" id="toc-approximate-wald-test" class="nav-link" data-scroll-target="#approximate-wald-test"><span class="header-section-number">10.4</span> Approximate Wald Test</a>
+  <ul class="collapse">
+  <li><a href="#the-step-up" id="toc-the-step-up" class="nav-link" data-scroll-target="#the-step-up"><span class="header-section-number">10.4.1</span> The Step Up</a></li>
+  <li><a href="#a-recipe-for-wald-tests" id="toc-a-recipe-for-wald-tests" class="nav-link" data-scroll-target="#a-recipe-for-wald-tests"><span class="header-section-number">10.4.2</span> A Recipe for Wald Tests</a></li>
+  <li><a href="#examples-of-hypothesis-testing" id="toc-examples-of-hypothesis-testing" class="nav-link" data-scroll-target="#examples-of-hypothesis-testing"><span class="header-section-number">10.4.3</span> Examples of Hypothesis Testing</a></li>
+  </ul></li>
+  <li><a href="#summary" id="toc-summary" class="nav-link" data-scroll-target="#summary"><span class="header-section-number">10.5</span> Summary</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content page-columns page-full" id="quarto-document-content">
+
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./Lesson00.html">Lessons</a></li><li class="breadcrumb-item"><a href="./Lesson10.html"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Hypothesis Tests (Part II)</span></a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Hypothesis Tests (Part II)</span></h1>
+  <div class="quarto-categories">
+    <div class="quarto-category">Power</div>
+    <div class="quarto-category">Confidence Intervals</div>
+    <div class="quarto-category">Wald Test</div>
+    <div class="quarto-category">Hypothesis Tests</div>
+  </div>
+  </div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="overview" class="level2 unnumbered unlisted">
+<h2 class="unnumbered unlisted anchored" data-anchor-id="overview">Overview</h2>
+<p>This lesson picks up where our first look at hypothesis testing left off. We move beyond single‑sample tests to compare two populations, explore lesser‑known examples, and show how confidence intervals and hypothesis tests are two sides of the same coin. You’ll also learn why test quality hinges on power—the probability of catching a real effect—and how factors like sample size, significance level (<span class="math inline">\(\alpha\)</span>), and effect size work together. Finally, we preview the Wald test, a general method that leverages maximum‑likelihood estimators when classic test statistics are hard to derive.</p>
+<section id="objectives" class="level3 unnumbered unlisted objectiveblock">
+<h3 class="unnumbered unlisted anchored" data-anchor-id="objectives"><i class="bi bi-check2-circle"></i>Objectives</h3>
+<p>Upon completion of this lesson, you should be able to:</p>
+<ol type="1">
+<li>Link confidence intervals to hypothesis tests,</li>
+<li>Determine the Power of a test,</li>
+<li>Find the sample size required for a given significance level and desired power,</li>
+<li>Numerically construct simple hypothesis tests focused on parameters estimated using numerical maximum likelihood inference in R</li>
+</ol>
+</section>
+</section>
+<section id="other-hypothesis-test-examples" class="level2" data-number="10.1">
+<h2 data-number="10.1" class="anchored" data-anchor-id="other-hypothesis-test-examples"><span class="header-section-number">10.1</span> Other Hypothesis Test Examples</h2>
+<p>In this section, we will continue with some examples of hypothesis tests that may not be as familiar as the ones we have seen so far.</p>
+<div id="exm-uniformhyptest" class="theorem example">
+<p><span class="theorem-title"><strong>Example 10.1</strong></span> <strong>Part I</strong><br>
+Suppose we have a random sample of size <span class="math inline">\(n=8\)</span> from a Uniform distribution over the interval <span class="math inline">\((0, \theta)\)</span>. We wish to test the following hypotheses:</p>
+<p><span class="math display">\[
+\begin{align*}
+  H_0:\theta=2 \text{ versus }H_a:\theta&lt;2
+\end{align*}
+\]</span></p>
+<p>Derive a statistical test for these hypotheses.</p>
+<button class="btn btn-outline-success collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+    Solution
+</button>
+<div id="collapseExample" class="collapse">
+<div class="card">
+<section id="solution" class="level4 card-body bg-light ms-0 mb-0 pt-0">
+<h4 class="anchored" data-anchor-id="solution">Solution</h4>
+<p>We have step 1 already defined for us. The next step is to set a significance level. Let’s set the probability of a Type I error to be <span class="math inline">\(\alpha=0.10\)</span>.</p>
+<p>The next step is to find the test statistic. We need to know the distribution of the test statistic. A logical choice for the statistic would be the maximum order statistic. If the null hypothesis is true, the largest order statistic, <span class="math inline">\(Y_n=Y_8\)</span>, will be “close” to <span class="math inline">\(\theta=2\)</span>, and values of <span class="math inline">\(Y_8\)</span> that are much <strong>smaller</strong> than <span class="math inline">\(\theta=2\)</span> would be evidence in favor of the alternative hypothesis, <span class="math inline">\(H_a:\theta&lt;2\)</span>.</p>
+<p>The decision rule would be something like reject <span class="math inline">\(H_0:\theta=2\)</span> if <span class="math inline">\(Y_8\le c\)</span> where <span class="math display">\[\begin{align*}
+  \alpha=0.1=P(Y_8\le c|H_0\text{ is true})
+\end{align*}\]</span></p>
+<p>We know that the order statistic has the following distribution:</p>
+<p><span class="math display">\[\begin{align*}
+  f_{y_n}(y)=\frac{n}{\theta^n}y^{n-1}=\frac{8}{\theta^8}y^7, \qquad 0\le y\le \theta
+\end{align*}\]</span></p>
+<p>Under the null hypothesis, the distribution is: <span class="math display">\[\begin{align*}
+  f_{y_8}(y)=\frac{n}{2^n}y^{n-1}=\frac{8}{2^8}y^7=\frac{1}{32}y^7, \qquad 0\le y\le 2
+\end{align*}\]</span></p>
+<p>Going back to our decision rule, we reject if <span class="math inline">\(P(Y_8\le c|H_0)=0.1\)</span>. Putting this all together, we can find <span class="math inline">\(c\)</span>.</p>
+<p><span class="math display">\[\begin{align*}
+  0.1=\int_0^c \frac{1}{32}y^7dy=\frac{1}{256}c^8
+\end{align*}\]</span></p>
+<p>Solving for <span class="math inline">\(c\)</span>, we get: <span class="math display">\[\begin{align*}
+  c=\sqrt[8]{25.6}\approx 1.4998
+\end{align*}\]</span></p>
+<p>Thus, we reject the null hypothesis, at the <span class="math inline">\(\alpha=0.1\)</span> level, if <span class="math inline">\(Y_8\le 1.4998\)</span>.</p>
+</section>
+</div>
+</div>
+<p><br>
+<strong>Part II</strong></p>
+<p>We have the following observations from a Uniform distribution over the interval <span class="math inline">\((0, \theta)\)</span>.</p>
+<p><span class="math display">\[0.3977\  0.9518\   0.4598\   0.3963\   0.5222\   0.8519\   0.5270\  0.2767\]</span></p>
+<p>Test the hypotheses <span class="math inline">\(H_0: \theta=2\)</span> vs.&nbsp;<span class="math inline">\(H_a: \theta&lt;2\)</span>.</p>
+<button class="btn btn-outline-success collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample1" aria-expanded="false" aria-controls="collapseExample1">
+    Solution
+</button>
+<div id="collapseExample1" class="collapse">
+<div class="card">
+<section id="solution-1" class="level4 card-body bg-light ms-0 mb-0 pt-0">
+<h4 class="anchored" data-anchor-id="solution-1">Solution</h4>
+<p>The maximum order statistic is 0.8519. Since it is less than 1.4998, we reject the null hypothesis. We conclude, that at the <span class="math inline">\(\alpha=0.1\)</span> level, there is sufficient evidence the population parameter <span class="math inline">\(\theta\)</span> is less than 2.</p>
+</section>
+</div>
+</div>
+</div>
+<div id="exm-poissonhyptest" class="theorem example">
+<p><span class="theorem-title"><strong>Example 10.2</strong></span> Four measurements, 2, 0, 1, 0, are taken on a Poisson random variable <span class="math inline">\(X\)</span> for the purpose of testing <span class="math display">\[\begin{align*}
+  H_0:\lambda=0.8 \text{ versus } H_a: \lambda&gt;0.8
+\end{align*}\]</span></p>
+<p>Derive a statistical test for these hypotheses at the significance level of 10%.</p>
+<button class="btn btn-outline-success collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample2" aria-expanded="false" aria-controls="collapseExample2">
+    Solution
+</button>
+<div id="collapseExample2" class="collapse">
+<div class="card">
+<section id="solution-2" class="level4 card-body bg-light ms-0 mb-0 pt-0">
+<h4 class="anchored" data-anchor-id="solution-2">Solution</h4>
+<p>The first two steps for hypothesis testing are given in the problem. Therefore, the next step is to calculate the test statistic. We have seen before that <span class="math inline">\(\bar{X}\)</span> is a sufficient statistic for <span class="math inline">\(\lambda\)</span>. We have also found in 414 that <span class="math inline">\(\sum_{i=1}^4 X_i\)</span> is a Poisson random variable with parameter <span class="math inline">\(\sum_{i=1}^4 \lambda=4\lambda\)</span>. For this example, let’s consider the sum as the test statistic.</p>
+<p>If the distribution of the sum is Poisson <span class="math inline">\(4\lambda\)</span>, then we can translate our original hypotheses to:</p>
+<p><span class="math display">\[\begin{align*}
+  H_0: 4\lambda=4(0.8)=3.2 \text{ versus }H_a: 4\lambda&gt;3.2
+\end{align*}\]</span></p>
+<p>Setting up the decision rule, we want to reject the null hypothesis if <span class="math inline">\(\sum x_i&gt;c\)</span>, where <span class="math display">\[\begin{align*}
+  P\left(\sum X_i&gt;c | H_0 \text{ true }\right)=0.1
+\end{align*}\]</span></p>
+<p>Recall that the Poisson distribution. Therefore, we may not get the exact <span class="math inline">\(\alpha\)</span> level we desire. The table below shows the pmf of a Poisson random variable with <span class="math inline">\(\lambda=3.2\)</span>. The third column is the <span class="math inline">\(P(\sum X_i&gt;x)\)</span> for the value <span class="math inline">\(x\)</span>.</p>
+<table class="w-auto table-sm mx-auto small caption-top table">
+<thead>
+<tr class="header">
+<th><span class="math inline">\(x\)</span></th>
+<th><span class="math inline">\(P(X=x)\)</span></th>
+<th><span class="math inline">\(P(X&gt;x)=1-P(X\le x)\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>0</td>
+<td>0.0408</td>
+<td>0.9592</td>
+</tr>
+<tr class="even">
+<td>1</td>
+<td>0.1304</td>
+<td>0.8288</td>
+</tr>
+<tr class="odd">
+<td>2</td>
+<td>0.2087</td>
+<td>0.6201</td>
+</tr>
+<tr class="even">
+<td>3</td>
+<td>0.2226</td>
+<td>0.3975</td>
+</tr>
+<tr class="odd">
+<td>4</td>
+<td>0.1781</td>
+<td>0.2194</td>
+</tr>
+<tr class="even">
+<td>5</td>
+<td>0.1140</td>
+<td>0.1054</td>
+</tr>
+<tr class="odd">
+<td>6</td>
+<td>0.0608</td>
+<td>0.0446</td>
+</tr>
+<tr class="even">
+<td>7</td>
+<td>0.0278</td>
+<td>0.0168</td>
+</tr>
+<tr class="odd">
+<td>8</td>
+<td>0.0111</td>
+<td>0.0057</td>
+</tr>
+<tr class="even">
+<td>9</td>
+<td>0.0040</td>
+<td>0.0018</td>
+</tr>
+<tr class="odd">
+<td>10</td>
+<td>0.0013</td>
+<td>0.0005</td>
+</tr>
+<tr class="even">
+<td>11</td>
+<td>0.0004</td>
+<td>0.0001</td>
+</tr>
+<tr class="odd">
+<td>12</td>
+<td>0.0001</td>
+<td>0.0000</td>
+</tr>
+<tr class="even">
+<td>13</td>
+<td>0.0000</td>
+<td>0.0000</td>
+</tr>
+</tbody>
+</table>
+<p>We want to get as close to <span class="math inline">\(\alpha=0.1\)</span> as possible. The value that is closest is <span class="math inline">\(P(\sum X_i&gt;5)=0.1054\)</span>. Therefore, at a significance level of <span class="math inline">\(\alpha=0.1055\)</span>, the decision rule to reject the null hypothesis is when <span class="math inline">\(\sum x_i\ge 6\)</span>.</p>
+<p>Using the given data, the sum is <span class="math inline">\(Y=2+0+1+0=3\)</span>. Since the sum is not greater than or equal to 6, we fail to reject the null hypothesis. At the <span class="math inline">\(\alpha=0.1055\)</span> level, there is insufficient evidence to conclude that <span class="math inline">\(4\lambda&gt;3.2\)</span> or equivalently, <span class="math inline">\(\lambda&gt;0.8\)</span>.</p>
+</section>
+</div>
+</div>
+</div>
+</section>
+<section id="linking-confidence-intervals-to-hypothesis-tests" class="level2" data-number="10.2">
+<h2 data-number="10.2" class="anchored" data-anchor-id="linking-confidence-intervals-to-hypothesis-tests"><span class="header-section-number">10.2</span> Linking Confidence Intervals to Hypothesis Tests</h2>
+<p>At this point, we have demonstrated how to find interval estimates for unknown parameters and how to test for specific values of the unknown parameters. Is there any connection between the interval estimates and hypothesis tests? The answer is yes!</p>
+<p>So far in this class, we have discussed only two-sided confidence intervals, i.e.&nbsp;intervals with an upper bound and a lower bound. We will focus our discussion on these intervals and two-sided tests. However, we can apply what we learn here to right-tailed or left-tailed confidence intervals and one-sided hypothesis tests.</p>
+<p>As usual, lets consider an example.</p>
+<div id="exm-systbp2" class="theorem example">
+<p><span class="theorem-title"><strong>Example 10.3</strong></span> Let’s revisit a previous example. It is assumed that the mean systolic blood pressure is <span class="math inline">\(\mu = 120\)</span> mm Hg. In the Honolulu Heart Study, a sample of <span class="math inline">\(n=100\)</span> people had an average systolic blood pressure of 130.1 mm Hg with a standard deviation of 21.21 mm Hg. Find a 95% confidence interval for the population mean systolic blood pressure.</p>
+<section id="solution-3" class="level4 card card-body bg-light ms-3 mb-3 pt-0">
+<h4 class="anchored" data-anchor-id="solution-3">Solution</h4>
+<p>The 95% confidence interval is: <span class="math display">\[\begin{align*}
+  \bar{x}\pm t_{0.025, 99}\frac{s}{\sqrt{n}}
+\end{align*}\]</span></p>
+<p>With the given information, we know, the interval is: <span class="math display">\[\begin{align*}
+130.1\pm 1.984\left(\frac{21.21}{\sqrt{100}}\right)=130.1\pm 4.2081=(125.8919, 134.3081)
+\end{align*}\]</span></p>
+<p>We are 95% confident that the population mean systolic blood pressure is between <span class="math inline">\((125.8919, 134.3081)\)</span>.</p>
+<p>Previously, we asked: Is the group significantly different (with respect to systolic blood pressure!) from the regular population? We tested the hypotheses: <span class="math display">\[\begin{align*}
+  H_0: \mu=120 \text{ versus }H_a: \mu\ne 120
+\end{align*}\]</span></p>
+<p>The test statistic was <span class="math inline">\(t=4.76\)</span>. The p-value for this test <span class="math inline">\(P(T&gt;4.76)+P(T&lt;-4.76)\approx 0.000\)</span>.Therefore, we rejected the null hypothesis at the <span class="math inline">\(\alpha=0.05\)</span> level.</p>
+<p>If we look at the confidence interval, we see that the value of 120 is NOT in the confidence interval. Is this a coincidence?</p>
+<p>The critical region approach for the <span class="math inline">\(\alpha=0.05\)</span> hypothesis test tells us to reject the null hypothesis that <span class="math inline">\(\mu=120\)</span>:</p>
+<p><span class="math display">\[\begin{align*}
+  \text{ if }t=\dfrac{\bar{x}-\mu_0}{s/\sqrt{n}}\geq 1.9842 \text{ or if }t=\dfrac{\bar{x}-\mu_0}{s/\sqrt{n}}\leq -1.9842
+\end{align*}\]</span></p>
+<p>which is equivalent to rejecting: <span class="math display">\[\begin{align*}
+  \text{ if }\bar{x}-\mu_0 \geq 1.9842\left(\dfrac{s}{\sqrt{n}}\right) \text{ or if }\bar{x}-\mu_0 \leq -1.9842\left(\dfrac{s}{\sqrt{n}}\right)
+\end{align*}\]</span></p>
+<p>which is equivalent to rejecting: <span class="math display">\[\begin{align*}
+  \text{ if }\mu_0 \leq \bar{x}-1.9842\left(\dfrac{s}{\sqrt{n}}\right)\text{ or if }\mu_0 \geq \bar{x}+1.9842\left(\dfrac{s}{\sqrt{n}}\right)
+\end{align*}\]</span></p>
+<p>which, upon inserting the data for this particular example, is equivalent to rejecting: <span class="math display">\[\begin{align*}
+  \text{if }\mu_0 \leq 125.89\text{ or if }\mu_0 \geq 134.31
+\end{align*}\]</span></p>
+<p>which just happen to be (!) the endpoints of the 95% confidence interval for the mean. Indeed, the results are consistent!</p>
+</section>
+</div>
+</section>
+<section id="power-of-a-test" class="level2 page-columns page-full" data-number="10.3">
+<h2 data-number="10.3" class="anchored" data-anchor-id="power-of-a-test"><span class="header-section-number">10.3</span> Power of a Test</h2>
+<p>Whenever we conduct a hypothesis test, we’d like to make sure that it is a test of high quality. One way of quantifying the quality of a hypothesis test is to ensure that it is a “powerful” test. In this lesson, we’ll learn what it means to have a powerful hypothesis test, as well as how we can determine the sample size n necessary to ensure that the hypothesis test we are conducting has high power. Our discussions and examples focus on the case of testing for an unknown population mean from a Normal distribution.</p>
+<section id="definition-of-power" class="level3 page-columns page-full" data-number="10.3.1">
+<h3 data-number="10.3.1" class="anchored" data-anchor-id="definition-of-power"><span class="header-section-number">10.3.1</span> Definition of Power</h3>
+<p>Let’s start our discussion of statistical power by recalling two definitions we learned when we first introduced hypothesis testing:</p>
+<ul>
+<li>A Type I error occurs if we reject the null hypothesis <span class="math inline">\(H_0\)</span> (in favor of the alternative <span class="math inline">\(H_a\)</span>) when the null hypothesis <span class="math inline">\(H_0\)</span> is true. We denote <span class="math inline">\(\alpha=P(\text{Type I erro})\)</span>.</li>
+<li>A Type II error occurs if we fail to reject the null hypothesis <span class="math inline">\(H_0\)</span> when the null hypothesis <span class="math inline">\(H_0\)</span> is false (or the alternative is true). We denote <span class="math inline">\(\beta=P(\text{Type II erro})\)</span>.</li>
+</ul>
+<p>You’ll certainly need to know these two definitions inside and out, as you’ll be thinking about them a lot in this lesson, and at any time in the future when you need to calculate a sample size either for yourself or for someone else.</p>
+<div id="exm-brinellhardness" class="theorem example page-columns page-full">
+<p><span class="theorem-title"><strong>Example 10.4</strong></span> <strong>Part I</strong><br>
+The Brinell hardness scale is one of several definitions used in the field of materials science to quantify the hardness of a piece of metal. The Brinell hardness measurement of a certain type of rebar used for reinforcing concrete and masonry structures was assumed to be normally distributed with a standard deviation of 10 kilograms of force per square millimeter. Using a random sample of <span class="math inline">\(n=25\)</span> bars, an engineer is interested in performing the following hypothesis test:</p>
+
+<div class="no-row-height column-margin column-container"><div class="margin-aside">
+<p><img src="assets/ht_example1.jpg" class="rounded img-fluid" alt="Piles of metal rebar"></p>
+</div></div><ul>
+<li>the null hypothesis <span class="math inline">\(H_0:\mu=170\)</span></li>
+<li>against the alternative hypothesis <span class="math inline">\(H_a: \mu&gt;170\)</span></li>
+</ul>
+<p>If the engineer decides to reject the null hypothesis if the sample mean is 172 or greater, that is, <span class="math inline">\(\bar{X}\ge 172\)</span>, what is the probability that the engineer commits a Type I error?</p>
+<section id="solution-4" class="level4 card card-body bg-light ms-3 mb-3 pt-0">
+<h4 class="anchored" data-anchor-id="solution-4">Solution</h4>
+<p>In this case, the engineer commits a Type I error if his observed sample mean falls in the rejection region, that is, if it is 172 or greater, when the true (unknown) population mean is indeed 170. Graphically, <span class="math inline">\(\alpha\)</span>, the engineer’s probability of committing a Type I error looks like this:</p>
+<div id="fig-415_rttailengineer" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center" alt="Normal curve with center at 0 showing two-tail critical area for alpha of .05.">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-415_rttailengineer-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="assets/415_rttailengineer.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1" title="Fig&nbsp;10.1: "><img src="assets/415_rttailengineer.png" id="fig-415_rttailengineer" class="w-75 img-fluid quarto-figure quarto-figure-center anchored figure-img" alt="Normal curve with center at 0 showing two-tail critical area for alpha of .05."></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" id="fig-415_rttailengineer-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Fig&nbsp;10.1
+</figcaption>
+</figure>
+</div>
+<p>Now, we can calculate the engineer’s value of <span class="math inline">\(\alpha\)</span> by making the transformation from a normal distribution with a mean of 170 and a standard deviation of 10 to that of <span class="math inline">\(Z\)</span>, the standard normal distribution using:</p>
+<p><span class="math display">\[\begin{align*}
+  Z=\frac{\bar{X}-\mu}{\frac{\sigma}{\sqrt{n}}}
+\end{align*}\]</span></p>
+<p>Doing so, we get:</p>
+<div id="fig-STAT-415-SEC-5-02" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center" alt="Normal curve showing the alpha area in the right tail along with the z-score calculation.">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-STAT-415-SEC-5-02-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="assets/STAT-415-SEC-5-02.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2" title="Fig&nbsp;10.2: "><img src="assets/STAT-415-SEC-5-02.png" id="fig-STAT-415-SEC-5-02" class="w-75 img-fluid quarto-figure quarto-figure-center anchored figure-img" alt="Normal curve showing the alpha area in the right tail along with the z-score calculation."></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" id="fig-STAT-415-SEC-5-02-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Fig&nbsp;10.2
+</figcaption>
+</figure>
+</div>
+<p>So, calculating the engineer’s probability of committing a Type I error reduces to making a normal probability calculation. The probability is 0.1587 as illustrated here:</p>
+<p><span class="math display">\[\begin{align*}
+  \alpha=P(\bar{X}\ge 172 \text{ if }\mu=170)=P(Z\ge 1.00)=0.1587
+\end{align*}\]</span></p>
+<p>A probability of 0.1587 is a bit high. We’ll learn in this lesson how the engineer could reduce his probability of committing a Type I error.</p>
+</section>
+<p><strong>Part II</strong><br>
+Continuing on with this example, if, unknown to the engineer, the true population mean were <span class="math inline">\(\mu=173\)</span>, what is the probability that the engineer commits a Type II error?</p>
+<section id="solution-5" class="level4 card card-body bg-light ms-3 mb-3 pt-0">
+<h4 class="anchored" data-anchor-id="solution-5">Solution</h4>
+<p>In this case, the engineer commits a Type II error if his observed sample mean does not fall in the rejection region, that is, if it is less than 172, when the true (unknown) population mean is 173. Graphically, <span class="math inline">\(\beta\)</span>, the engineer’s probability of committing a Type II error looks like this:</p>
+<div id="fig-415_engineertype1" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center" alt="Normal curve with center at 0 showing two-tail critical area for alpha of .05.">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-415_engineertype1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="assets/415_engineertype1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-3" title="Fig&nbsp;10.3: "><img src="assets/415_engineertype1.png" id="fig-415_engineertype1" class="w-75 img-fluid quarto-figure quarto-figure-center anchored figure-img" alt="Normal curve with center at 0 showing two-tail critical area for alpha of .05."></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" id="fig-415_engineertype1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Fig&nbsp;10.3
+</figcaption>
+</figure>
+</div>
+<p>Again, we can calculate the engineer’s value of <span class="math inline">\(\beta\)</span> by making the transformation from a normal distribution with a mean of 173 and a standard deviation of 10 to that of <span class="math inline">\(Z\)</span>, the standard normal distribution. Doing so, we get:</p>
+<div id="fig-415_engineertype1-B" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center" alt="Normal curves showing the area for beta, a type II error with the z test statistic shown.">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-415_engineertype1-B-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="assets/415_engineertype1-B.png" class="lightbox" data-gallery="quarto-lightbox-gallery-4" title="Fig&nbsp;10.4: "><img src="assets/415_engineertype1-B.png" id="fig-415_engineertype1-B" class="w-75 img-fluid quarto-figure quarto-figure-center anchored figure-img" alt="Normal curves showing the area for beta, a type II error with the z test statistic shown."></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" id="fig-415_engineertype1-B-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Fig&nbsp;10.4
+</figcaption>
+</figure>
+</div>
+<p>So, calculating the engineer’s probability of committing a Type II error again reduces to making a normal probability calculation. The probability is 0.3085 as illustrated here: <span class="math display">\[\begin{align*}
+  \beta=P(\bar{X}&lt; 172 \text{ if }\mu=173)=P(Z&lt;-0.50)=0.3085
+\end{align*}\]</span></p>
+<p>A probability of 0.3085 is a bit high. We’ll learn in this lesson how the engineer could reduce his probability of committing a Type II error.</p>
+</section>
+</div>
+
+<div class="no-row-height column-margin column-container"><div class="margin-aside">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="assets/halfemptyglass.jpg" class="img-fluid quarto-figure quarto-figure-center figure-img" alt="Glass half empty"></p>
+</figure>
+</div>
+</div></div><p>If you think about it, considering the probability of committing a Type II error is quite similar to looking at a glass that is half empty. That is, rather than considering the probability that the engineer commits an error, perhaps we could consider the probability that the engineer makes the correct decision. Doing so involves calculating what is called the power of the hypothesis test.</p>
+<div id="def-name" class="ms-3 theorem definition">
+<p><span class="theorem-title"><strong>Def. 10.1 (Power of a Test)</strong></span> The <strong>power</strong> of a hypothesis test is the probability of making the correct decision if the alternative hypothesis is true. That is, the power of a hypothesis test is the probability of rejecting the null hypothesis <span class="math inline">\(H_0\)</span> when the alternative hypothesis <span class="math inline">\(H_a\)</span> is the hypothesis that is true.</p>
+</div>
+<p>Let’s return to our engineer’s problem to see if we can instead look at the glass as being half full!</p>
+<div id="exm-steelrebarcontd" class="theorem example">
+<p><span class="theorem-title"><strong>Example 10.5</strong></span> Continuing with our previous example, if, unknown to the engineer, the true population mean was <span class="math inline">\(\mu=173\)</span>, what is the probability that the engineer makes the correct decision by rejecting the null hypothesis in favor of the alternative hypothesis?</p>
+<section id="solution-6" class="level4 card card-body bg-light ms-3 mb-3 pt-0">
+<h4 class="anchored" data-anchor-id="solution-6">Solution</h4>
+<p>In this case, the engineer makes the correct decision if his observed sample mean falls in the rejection region, that is, if it is greater than 172 when the true (unknown) population mean is 173. Graphically, the power of the engineer’s hypothesis test looks like this:</p>
+<div id="fig-415_engineerpower" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center" alt="Normal curves showing the area for beta, a type II error with the z test statistic shown.">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-415_engineerpower-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="assets/415_engineerpower.png" class="lightbox" data-gallery="quarto-lightbox-gallery-5" title="Fig&nbsp;10.5: "><img src="assets/415_engineerpower.png" id="fig-415_engineerpower" class="w-75 img-fluid quarto-figure quarto-figure-center anchored figure-img" alt="Normal curves showing the area for beta, a type II error with the z test statistic shown."></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" id="fig-415_engineerpower-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Fig&nbsp;10.5
+</figcaption>
+</figure>
+</div>
+<p>That makes the power of the engineer’s hypothesis test 0.6915 as illustrated here: <span class="math display">\[\begin{align*}
+\text{Power}=P(\bar{X}\ge 172 \text{ if }\mu=173)=P(Z\ge -0.50)=0.6915
+\end{align*}\]</span> which of course could have alternatively been calculated by simply subtracting the probability of committing a Type II error from 1, as shown here: <span class="math display">\[\begin{align*}
+\text{Power}=1-\beta=1-0.3085=0.6915
+\end{align*}\]</span></p>
+<p>At any rate, if the unknown population mean were 173, the engineer’s hypothesis test would be at least a bit better than flipping a fair coin, in which he’d have but a 50% chance of choosing the correct hypothesis. In this case, he has a 69.15% chance. He could still do a bit better.</p>
+</section>
+</div>
+<p>In general, for every hypothesis test that we conduct, we’ll want to do the following:</p>
+<ol type="1">
+<li><p><strong>Minimize the probability of committing a Type I error</strong>. That, is minimize <span class="math inline">\(\alpha=P(\text{Type I error})\)</span>. Typically, a significance level of <span class="math inline">\(\alpha\le 0.10\)</span> is desired.</p></li>
+<li><p><strong>Maximize the power</strong> (at a value of the parameter under the alternative hypothesis that is scientifically meaningful). Typically, we desire power to be 0.80 or greater. Alternatively, we could minimize <span class="math inline">\(\beta=P(\text{Type II error})\)</span> aiming for a type II error rate of 0.20 or less.</p></li>
+</ol>
+<p>By the way, in the second point, what exactly does “at a value of the parameter under the alternative hypothesis that is scientifically meaningful” mean? Well, let’s suppose that a medical researcher is interested in testing the null hypothesis that the mean total blood cholesterol in a population of patients is 200 mg/dl against the alternative hypothesis that the mean total blood cholesterol is greater than 200 mg/dl. Well, the alternative hypothesis contains an infinite number of possible values of the mean. Under the alternative hypothesis, the mean of the population could be, among other values, 201, 202, or 210. Suppose the medical researcher rejected the null hypothesis because the mean was 201. Whoopdy-do…would that be a rocking conclusion? No, probably not. On the other hand, suppose the medical researcher rejected the null hypothesis, because the mean was 215. In that case, the mean is substantially different enough from the assumed mean under the null hypothesis, that we’d probably get excited about the result. In summary, in this example, we could probably all agree to consider a mean of 215 to be “scientifically meaningful,” whereas we could not do the same for a mean of 201.</p>
+<p>Now, of course, all of this talk is a bit of gibberish, because we’d never really know whether the true unknown population mean was 201 or 215, otherwise, we wouldn’t have to be going through the process of conducting a hypothesis test about the mean. We can do something though. We can plan our scientific studies so that our hypothesis tests have enough power to reject the null hypothesis in favor of values of the parameter under the alternative hypothesis that is scientifically meaningful.</p>
+</section>
+<section id="power-functions" class="level3" data-number="10.3.2">
+<h3 data-number="10.3.2" class="anchored" data-anchor-id="power-functions"><span class="header-section-number">10.3.2</span> Power Functions</h3>
+<p>Let’s take a look at another example that involves calculating the power of a hypothesis test.</p>
+<div id="exm-IQamericans" class="theorem example">
+<p><span class="theorem-title"><strong>Example 10.6</strong></span> Let <span class="math inline">\(X\)</span> denote the IQ of a randomly selected adult American. Assume, a bit unrealistically, that <span class="math inline">\(X\)</span> is normally distributed with unknown mean <span class="math inline">\(\mu\)</span> and standard deviation 16. Take a random sample of <span class="math inline">\(n=16\)</span> students, so that, after setting the probability of committing a Type I error at <span class="math inline">\(\alpha=0.05\)</span>, we can test the null hypothesis <span class="math inline">\(H_0:\mu=100\)</span> against the alternative hypothesis that <span class="math inline">\(H_a: \mu&gt;100\)</span>.</p>
+<p>What is the power of the hypothesis test if the true population mean was <span class="math inline">\(\mu=108\)</span>?</p>
+<section id="solution-7" class="level4 card card-body bg-light ms-3 mb-3 pt-0">
+<h4 class="anchored" data-anchor-id="solution-7">Solution</h4>
+<p>Setting <span class="math inline">\(\alpha\)</span>, the probability of committing a Type I error, to 0.05, implies that we should reject the null hypothesis when the test statistics <span class="math inline">\(Z\ge 1.645\)</span>, or equivalently, when the observed sample mean is 106.58 or greater:</p>
+<div id="fig-rttailcritical" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center" alt="Normal plot showing a right tail critical area for alpha of 0.05.">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-rttailcritical-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="assets/STAT-415-SEC-5-06.svg" class="lightbox" data-gallery="quarto-lightbox-gallery-6" title="Fig&nbsp;10.6: "><img src="assets/STAT-415-SEC-5-06.svg" id="fig-rttailcritical" class="w-50 img-fluid quarto-figure quarto-figure-center anchored figure-img" alt="Normal plot showing a right tail critical area for alpha of 0.05."></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" id="fig-rttailcritical-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Fig&nbsp;10.6
+</figcaption>
+</figure>
+</div>
+<p>because we transform the test statistic <span class="math inline">\(Z\)</span> to the sample mean by way of: <span class="math display">\[\begin{align*}
+  &amp; Z=\frac{\bar{X}-\mu}{\frac{\sigma}{\sqrt{n}}}, \qquad \Rightarrow \bar{X}=\mu+Z\frac{\sigma}{\sqrt{n}}\\
+  &amp; \bar{X}=100+1.645\left(\frac{16}{\sqrt{16}}=106.58\right)
+\end{align*}\]</span></p>
+<p>Now, that implies that the power, that is, the probability of rejecting the null hypothesis, when <span class="math inline">\(\mu=108\)</span> is 0.6406 as calculated here (recalling that <span class="math inline">\(\Phi(z)\)</span> is standard notation for the cumulative distribution function of the standard normal random variable):</p>
+<p><span class="math display">\[\begin{align*}    
+  \text{Power}&amp; =P(\bar{X}\ge 106.58 \text{ when }\mu=108)=P\left(Z\ge \frac{106.58-108}{\frac{16}{\sqrt{16}}}\right)\\
+  &amp; P(Z\ge -0.36)=1-P(Z&lt;-0.36)=1-\Phi(-0.36)
+\end{align*}\]</span></p>
+<p>and illustrated here:</p>
+<div id="fig-415_IQpower" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center" alt="Normal plots showing the power of 0.6406.">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-415_IQpower-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="assets/415_IQpower.png" class="lightbox" data-gallery="quarto-lightbox-gallery-7" title="Fig&nbsp;10.7: "><img src="assets/415_IQpower.png" id="fig-415_IQpower" class="w-75 img-fluid quarto-figure quarto-figure-center anchored figure-img" alt="Normal plots showing the power of 0.6406."></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" id="fig-415_IQpower-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Fig&nbsp;10.7
+</figcaption>
+</figure>
+</div>
+<p>In summary, we have determined that we have (only) a 64.06% chance of rejecting the null hypothesis <span class="math inline">\(H_0:\mu=100\)</span> in favor of the alternative hypothesis <span class="math inline">\(H_a: \mu&gt;100\)</span>, if the true unknown population mean, is in reality <span class="math inline">\(\mu=108\)</span>.</p>
+</section>
+<p><strong>Part II</strong><br>
+Continuing with this example, what is the power of the hypothesis test if the true population mean were <span class="math inline">\(\mu=112\)</span>?</p>
+<section id="solution-8" class="level4 card card-body bg-light ms-3 mb-3 pt-0">
+<h4 class="anchored" data-anchor-id="solution-8">Solution</h4>
+<p>Because we are setting <span class="math inline">\(\alpha\)</span>, the probability of committing a Type I error, to 0.05, we again reject the null hypothesis when the test statistic <span class="math inline">\(Z\ge 1.645\)</span>, or equivalently, when the observed sample mean is 106.58 or greater. That means that the probability of rejecting the null hypothesis, when <span class="math inline">\(\mu=112\)</span>, is 0.9131 as calculated here:</p>
+<p><span class="math display">\[\begin{align*}
+  \text{Power}&amp;=P(\bar{X}\ge 106.58\text{ when }\mu=112)\\&amp;=P\left(Z\ge \frac{106.58-112}{\frac{16}{\sqrt{16}}}\right) \\ &amp;= P(Z\ge -1.36)\\&amp;=1-P(Z&lt;-1.36)\\&amp;=1-\Phi(-1.36)\\&amp;=1-0.0869=0.9131
+\end{align*}\]</span></p>
+<p>and illustrated here:</p>
+<div id="fig-415_IQpowerB" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center" alt="Normal plots showing the power of 0.9131.">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-415_IQpowerB-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="assets/415_IQpowerB.png" class="lightbox" data-gallery="quarto-lightbox-gallery-8" title="Fig&nbsp;10.8: "><img src="assets/415_IQpowerB.png" id="fig-415_IQpowerB" class="w-75 img-fluid quarto-figure quarto-figure-center anchored figure-img" alt="Normal plots showing the power of 0.9131."></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" id="fig-415_IQpowerB-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Fig&nbsp;10.8
+</figcaption>
+</figure>
+</div>
+<p>In summary, we have determined that we now have a 91.31% chance of rejecting the null hypothesis <span class="math inline">\(H_0: \mu=100\)</span> in favor of the alternative hypothesis <span class="math inline">\(H_a: \mu&gt;100\)</span> if the true unknown population mean is in reality <span class="math inline">\(\mu=112\)</span>. Hmm…. it should make sense that the probability of rejecting the null hypothesis is larger for values of the mean, such as 112, that are far away from the assumed mean under the null hypothesis.</p>
+</section>
+<p><strong>Part III</strong><br>
+Again, continuing on with the previous example. What is the power of the hypothesis test if the true population mean were <span class="math inline">\(\mu=116\)</span>?</p>
+<section id="solution-9" class="level4 card card-body bg-light ms-3 mb-3 pt-0">
+<h4 class="anchored" data-anchor-id="solution-9">Solution</h4>
+<p>Again, because we are setting <span class="math inline">\(\alpha\)</span>, the probability of committing a Type I error, to 0.05, we reject the null hypothesis when the test statistic <span class="math inline">\(Z\ge 1.645\)</span>, or equivalently, when the observed sample mean is 106.58 or greater. That means that the probability of rejecting the null hypothesis, when <span class="math inline">\(\mu=116\)</span> is 0.9909 as calculated here:</p>
+<p><span class="math display">\[\begin{align*}
+  \text{Power}&amp;=P(\bar{X}\ge 106.58\text{ when }\mu\\&amp;=116) =P\left(Z\ge \dfrac{106.58-116}{\frac{16}{\sqrt{16}}}\right)\\ &amp;= P(Z\ge -2.36)\\&amp;=1-P(Z&lt;-2.36)\\&amp;= 1-\Phi(-2.36)\\&amp;=1-0.0091=0.9909
+\end{align*}\]</span></p>
+<p>and illustrated here:</p>
+<div id="fig-415_IQpowerC" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center" alt="Normal plots showing the power of 0.9909.">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-415_IQpowerC-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="assets/415_IQpowerC.png" class="lightbox" data-gallery="quarto-lightbox-gallery-9" title="Fig&nbsp;10.9: "><img src="assets/415_IQpowerC.png" id="fig-415_IQpowerC" class="w-75 img-fluid quarto-figure quarto-figure-center anchored figure-img" alt="Normal plots showing the power of 0.9909."></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" id="fig-415_IQpowerC-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Fig&nbsp;10.9
+</figcaption>
+</figure>
+</div>
+<p>In summary, we have determined that, in this case, we have a 99.09% chance of rejecting the null hypothesis <span class="math inline">\(H_0: \mu=100\)</span> in favor of the alternative hypothesis <span class="math inline">\(H_a: \mu&gt;100\)</span> if the true unknown population mean is in reality <span class="math inline">\(\mu=116\)</span>. The probability of rejecting the null hypothesis is the largest yet of those we calculated, because the mean, 116, is the farthest away from the assumed mean under the null hypothesis.</p>
+</section>
+</div>
+<p>Are you growing weary of this? Let’s summarize a few things we’ve learned from engaging in this exercise:</p>
+<ol type="1">
+<li><p>First and foremost, my instructor can be tedious at times….. errrr, I mean, first and foremost, the power of a hypothesis test depends on the value of the parameter being investigated. In the above, example, the power of the hypothesis test depends on the value of the mean <span class="math inline">\(\mu\)</span>.</p></li>
+<li><p>As the actual mean <span class="math inline">\(\mu\)</span> moves further away from the value of the mean <span class="math inline">\(\mu=100\)</span> under the null hypothesis, the power of the hypothesis test increases.</p></li>
+</ol>
+<p>It’s that first point that leads us to what is called the <strong>power function of the hypothesis test</strong>. If you go back and take a look, you’ll see that in each case our calculation of the power involved a step that looks like this:</p>
+<p><span class="math display">\[\begin{align*}
+  \text{Power } =1 - \Phi (z)
+\end{align*}\]</span></p>
+<p>That is, if we use the standard notation <span class="math inline">\(K(u)\)</span> to denote the power function, as it depends on <span class="math inline">\(\mu\)</span>, we have: <span class="math display">\[\begin{align*}
+  K(\mu) = 1- \Phi \left( \frac{106.58 - \mu}{16 / \sqrt{16}} \right)
+\end{align*}\]</span></p>
+<p>So, the reality is your instructor could have been a whole lot more tedious by calculating the power for <strong>every</strong> possible value of <span class="math inline">\(\mu\)</span> under the alternative hypothesis! What we can do instead is create a plot of the power function, with the mean <span class="math inline">\(\mu\)</span> on the horizontal axis and the power <span class="math inline">\(K(u)\)</span> on the vertical axis. Doing so, we get a plot in this case that looks like this:</p>
+<div id="fig-powerfunofkmu1" class="quarto-float quarto-figure quarto-figure-center anchored" width="60%" data-fig-align="center" alt="The power function of K(mu)">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-powerfunofkmu1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="assets/STAT-415-SEC-5-10.svg" class="lightbox" data-gallery="quarto-lightbox-gallery-10" title="Fig&nbsp;10.10: "><img src="assets/STAT-415-SEC-5-10.svg" id="fig-powerfunofkmu1" class="img-fluid quarto-figure quarto-figure-center anchored figure-img" style="width:60.0%" alt="The power function of K(mu)"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" id="fig-powerfunofkmu1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Fig&nbsp;10.10
+</figcaption>
+</figure>
+</div>
+<p>Now, what can we learn from this plot?</p>
+<p>Well:</p>
+<ol type="1">
+<li>We can see that <span class="math inline">\(\alpha\)</span> (the probability of a Type I error), <span class="math inline">\(\beta\)</span> (the probability of a Type II error), and <span class="math inline">\(K(u)\)</span> are all represented on a power function plot, as illustrated here:</li>
+</ol>
+<div id="fig-powerfunofkmu2" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center" alt="Power function of K(mu) with the probabilities of type 1 and 2 errors shown" width="60%">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-powerfunofkmu2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="assets/STAT-415-SEC-5-11.svg" class="lightbox" data-gallery="quarto-lightbox-gallery-11" title="Fig&nbsp;10.11: "><img src="assets/STAT-415-SEC-5-11.svg" id="fig-powerfunofkmu2" class="img-fluid quarto-figure quarto-figure-center anchored figure-img" style="width:60.0%" alt="Power function of K(mu) with the probabilities of type 1 and 2 errors shown"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" id="fig-powerfunofkmu2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Fig&nbsp;10.11
+</figcaption>
+</figure>
+</div>
+<ol start="2" type="1">
+<li><p>We can see that the probability of a Type I error is <span class="math inline">\(\alpha=K(100)=0.05\)</span>, that is, the probability of rejecting the null hypothesis when the null hypothesis is true is 0.05.</p></li>
+<li><p>We can see the power of a test <span class="math inline">\(K(u)\)</span>, as well as the probability of a Type II error <span class="math inline">\(\beta(u)\)</span>, for each possible value of <span class="math inline">\(\mu\)</span>.</p></li>
+<li><p>We can see that <span class="math inline">\(\beta(u)=1-K(u)\)</span> and vice versa, that is, <span class="math inline">\(K(u)=1-\beta(u)\)</span>.</p></li>
+<li><p>And we can see graphically that, indeed, as the actual mean <span class="math inline">\(\mu\)</span> moves further away from the null mean <span class="math inline">\(\mu=100\)</span>, the power of the hypothesis test increases.</p></li>
+</ol>
+<p>Now, what would you suppose would happen to the power of our hypothesis test if we were to change our willingness to commit a Type I error? Would the power for a given value of <span class="math inline">\(\mu\)</span> increase, decrease, or remain unchanged? Suppose, for example, that we wanted to set <span class="math inline">\(\alpha=0.01\)</span> instead of <span class="math inline">\(\alpha=0.05\)</span>. Let’s return to our example to explore this question.</p>
+<div id="exm-iqamericans" class="theorem example">
+<p><span class="theorem-title"><strong>Example 10.7</strong></span> Let <span class="math inline">\(X\)</span> denote the IQ of a randomly selected adult American. Assume, a bit unrealistically, that <span class="math inline">\(X\)</span> is normally distributed with unknown mean <span class="math inline">\(\mu\)</span> and standard deviation 16. Take a random sample of <span class="math inline">\(n=16\)</span> students, so that, after setting the probability of committing a Type I error at <span class="math inline">\(\alpha=0.01\)</span>, we can test the null hypothesis <span class="math inline">\(H_0:\mu=100\)</span> against the alternative hypothesis that <span class="math inline">\(H_a: \mu&gt;100\)</span>.</p>
+<p>What is the power of the hypothesis test if the true population mean were <span class="math inline">\(\mu=108\)</span>?</p>
+<section id="solution-10" class="level4 card card-body bg-light ms-3 mb-3 pt-0">
+<h4 class="anchored" data-anchor-id="solution-10">Solution</h4>
+<p>Setting <span class="math inline">\(\alpha\)</span>, the probability of committing a Type I error, to 0.01, implies that we should reject the null hypothesis when the test statistic <span class="math inline">\(Z\ge 2.326\)</span>, or equivalently, when the observed sample mean is 109.304 or greater:</p>
+<div id="fig-415_IQtypeI" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center" alt="Right tail area above critical value of 2.326.">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-415_IQtypeI-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="assets/415_IQtypeI.png" class="lightbox" data-gallery="quarto-lightbox-gallery-12" title="Fig&nbsp;10.12: "><img src="assets/415_IQtypeI.png" id="fig-415_IQtypeI" class="w-75 img-fluid quarto-figure quarto-figure-center anchored figure-img" alt="Right tail area above critical value of 2.326."></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" id="fig-415_IQtypeI-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Fig&nbsp;10.12
+</figcaption>
+</figure>
+</div>
+<p><span class="math display">\[\begin{align*}
+  \bar{x} = \mu + z \left( \frac{\sigma}{\sqrt{n}} \right) =100 + 2.326\left( \frac{16}{\sqrt{16}} \right)=109.304
+\end{align*}\]</span></p>
+<p>That means that the probability of rejecting the null hypothesis, when <span class="math inline">\(\mu=108\)</span> is 0.3722 as calculated here:</p>
+<p><span class="math display">\[\begin{align*}
+  \text{Power}&amp;=P(\bar{X}\ge 109.304 \text{ when }\mu=108)=P\left(Z\ge \frac{109.304-108}{\frac{16}{\sqrt{16}}}\right)\\
+  &amp; = P(Z\ge 0.326)=1-P(Z&lt;0.326)=1-\Phi(0.326)\\
+  &amp; = 1-0.6278=0.3722
+\end{align*}\]</span></p>
+<p>So, the power when <span class="math inline">\(\mu=108\)</span> and <span class="math inline">\(\alpha=0.01\)</span> is smaller (0.3722) than the power when <span class="math inline">\(\mu=108\)</span> and <span class="math inline">\(\alpha=0.05\)</span> (0.6406)! Perhaps we can see this graphically:</p>
+<div id="fig-STAT-415-SEC-5-13Version7" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center" alt="Power for alpha = .01 and alpha = .05 shown on overlapping normal curves" width="75%">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-STAT-415-SEC-5-13Version7-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="assets/STAT-415-SEC-5-13 Version 7.png" class="lightbox" data-gallery="quarto-lightbox-gallery-13" title="Fig&nbsp;10.13: "><img src="assets/STAT-415-SEC-5-13 Version 7.png" id="fig-STAT-415-SEC-5-13Version7" class="img-fluid quarto-figure quarto-figure-center anchored figure-img" style="width:75.0%" alt="Power for alpha = .01 and alpha = .05 shown on overlapping normal curves"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" id="fig-STAT-415-SEC-5-13Version7-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Fig&nbsp;10.13
+</figcaption>
+</figure>
+</div>
+<p>By the way, we could again alternatively look at the glass as being half-empty. In that case, the probability of a Type II error when <span class="math inline">\(\mu=108\)</span> and <span class="math inline">\(\alpha=0.01\)</span> is <span class="math inline">\(1-0.326=0.6278\)</span>. In this case, the probability of a Type II error is greater than the probability of a Type II error when <span class="math inline">\(\mu=108\)</span> and <span class="math inline">\(\alpha=0.05\)</span>.</p>
+<p>All of this can be seen graphically by plotting the two power functions, one where <span class="math inline">\(\alpha=0.01\)</span> and the other where <span class="math inline">\(\alpha=0.05\)</span>, simultaneously. Doing so, we get a plot that looks like this:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="assets/STAT-415-SEC-5-14.svg" class="lightbox" data-gallery="quarto-lightbox-gallery-14"><img src="assets/STAT-415-SEC-5-14.svg" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:60.0%" alt="Power function of K(mu) with the alpha of .05 and .01 shown"></a></p>
+</figure>
+</div>
+</section>
+</div>
+<p>This last example illustrates that providing the sample size <span class="math inline">\(n\)</span> remains unchanged, a decrease in <span class="math inline">\(\alpha\)</span> causes an increase in <span class="math inline">\(\beta\)</span>, and at least theoretically, if not practically, a decrease in <span class="math inline">\(\beta\)</span> causes an increase in <span class="math inline">\(\alpha\)</span>. It turns out that the only way that <span class="math inline">\(\alpha\)</span> and <span class="math inline">\(\beta\)</span> can be decreased simultaneously is by increasing the sample size <span class="math inline">\(n\)</span>.</p>
+</section>
+<section id="calculating-sample-size" class="level3" data-number="10.3.3">
+<h3 data-number="10.3.3" class="anchored" data-anchor-id="calculating-sample-size"><span class="header-section-number">10.3.3</span> Calculating Sample Size</h3>
+<p>Before we learn how to calculate the sample size that is necessary to achieve a hypothesis test with a certain power, it might behoove us to understand the effect that sample size has on power. Let’s investigate by returning to our IQ example.</p>
+<div id="exm-iqamericans2" class="theorem example">
+<p><span class="theorem-title"><strong>Example 10.8</strong></span> Let <span class="math inline">\(X\)</span> denote the IQ of a randomly selected adult American. Assume, a bit unrealistically again, that <span class="math inline">\(X\)</span> is normally distributed with unknown mean <span class="math inline">\(\mu\)</span> and (a strangely known) standard deviation of 16. This time, instead of taking a random sample of <span class="math inline">\(n=16\)</span> students, let’s increase the sample size to <span class="math inline">\(n=64\)</span>. And, while setting the probability of committing a Type I error to <span class="math inline">\(\alpha=0.05\)</span>, test the null hypothesis <span class="math inline">\(H_0:\mu=100\)</span> against the alternative hypothesis that <span class="math inline">\(H_a:\mu&gt;100\)</span>.</p>
+<p>What is the power of the hypothesis test when <span class="math inline">\(\mu=108\)</span>, <span class="math inline">\(\mu=112\)</span>, and <span class="math inline">\(\mu=116\)</span>?</p>
+<section id="solution-11" class="level4 card card-body bg-light ms-3 mb-3 pt-0">
+<h4 class="anchored" data-anchor-id="solution-11">Solution</h4>
+<p>Setting <span class="math inline">\(\alpha\)</span>, the probability of committing a Type I error, to 0.05, implies that we should reject the null hypothesis when the test statistic <span class="math inline">\(Z\ge 1.645\)</span>, or equivalently, when the observed sample mean is 103.29 or greater:</p>
+<div id="fig-415_IQtypeIB" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center" alt="Right tail area above critical value of 1.645.">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-415_IQtypeIB-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="assets/415_IQtypeIB.png" class="lightbox" data-gallery="quarto-lightbox-gallery-15" title="Fig&nbsp;10.14: "><img src="assets/415_IQtypeIB.png" id="fig-415_IQtypeIB" class="w-75 img-fluid quarto-figure quarto-figure-center anchored figure-img" alt="Right tail area above critical value of 1.645."></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" id="fig-415_IQtypeIB-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Fig&nbsp;10.14
+</figcaption>
+</figure>
+</div>
+<p>because:</p>
+<p><span class="math display">\[\begin{align*}
+  \bar{x} &amp;= \mu + z \left(\dfrac{\sigma}{\sqrt{n}} \right)\\ &amp;= 100 +1.645\left(\dfrac{16}{\sqrt{64}} \right) = 103.29
+\end{align*}\]</span></p>
+<p>Therefore, the power function <span class="math inline">\(K(\mu)\)</span>, when <span class="math inline">\(\mu&gt;100\)</span> is the true value, is:</p>
+<p><span class="math display">\[\begin{align*}
+  K(\mu) &amp;= P(\bar{X} \ge 103.29 | \mu)\\ &amp;= P \left(Z \ge \dfrac{103.29 - \mu}{16 / \sqrt{64}} \right)\\ &amp;= 1 - \Phi \left(\dfrac{103.29 - \mu}{2} \right)
+\end{align*}\]</span></p>
+<p>Therefore, the probability of rejecting the null hypothesis at the <span class="math inline">\(\alpha=0.05\)</span> level when <span class="math inline">\(\mu=108\)</span> is 0.9907, as calculated here:</p>
+<p><span class="math display">\[\begin{align*}
+  K(108) &amp;= 1 - \Phi \left( \dfrac{103.29-108}{2} \right) = 1- \Phi(-2.355) = 0.9907
+\end{align*}\]</span></p>
+<p>And, the probability of rejecting the null hypothesis at the <span class="math inline">\(\alpha=0.05\)</span> level when <span class="math inline">\(\mu=112\)</span> is greater than 0.9999, as calculated here:</p>
+<p><span class="math display">\[\begin{align*}    
+  K(112) &amp;= 1 - \Phi \left( \dfrac{103.29-112}{2} \right)\\ &amp;= 1- \Phi(-4.355)\\ &amp;= 0.9999\ldots
+\end{align*}\]</span></p>
+<p>And, the probability of rejecting the null hypothesis at the <span class="math inline">\(\alpha=0.05\)</span> level when <span class="math inline">\(\mu=116\)</span> is greater than 0.999999, as calculated here:</p>
+<p><span class="math display">\[\begin{align*}
+  K(116) &amp;= 1 - \Phi \left( \dfrac{103.29-116}{2} \right)\\ &amp;= 1- \Phi(-6.355)\\ &amp;= 0.999999...
+\end{align*}\]</span></p>
+</section>
+</div>
+<p>In summary, in the various examples throughout this lesson, we have calculated the power of testing <span class="math inline">\(H_0:\mu=100\)</span> against <span class="math inline">\(H_a:\mu&gt;100\)</span> for two sample sizes (<span class="math inline">\(n=16\)</span> and <span class="math inline">\(n=64\)</span>) and for three possible values of the mean ( <span class="math inline">\(\mu=108\)</span>, <span class="math inline">\(\mu=112\)</span>, and <span class="math inline">\(\mu=116\)</span>). Here’s a summary of our power calculations:</p>
+<table class="w-auto mx-auto table-sm small caption-top table">
+<thead>
+<tr class="header">
+<th>Power</th>
+<th><span class="math inline">\(K(108)\)</span></th>
+<th><span class="math inline">\(K(112)\)</span></th>
+<th><span class="math inline">\(K(116)\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><span class="math inline">\(n=16\)</span></td>
+<td>0.6406</td>
+<td>0.9131</td>
+<td>0.9909</td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(n=64\)</span></td>
+<td>0.9907</td>
+<td>0.9999…</td>
+<td>0.999999…</td>
+</tr>
+</tbody>
+</table>
+<p>As you can see, our work suggests that for a given value of the mean <span class="math inline">\(\mu\)</span> under the alternative hypothesis, the larger the sample size <span class="math inline">\(n\)</span>, the greater the power <span class="math inline">\(K(u)\)</span>. Perhaps there is no better way to see this than graphically by plotting the two power functions simultaneously, one when <span class="math inline">\(n=16\)</span> and the other when <span class="math inline">\(n=64\)</span>:</p>
+<div id="fig-powerfnkmu3" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center" alt="Power function of K(mu) with curves for n = 64 and n = 16." width="60%">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-powerfnkmu3-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="assets/STAT-415-SEC-5-16.svg" class="lightbox" data-gallery="quarto-lightbox-gallery-16" title="Fig&nbsp;10.15: "><img src="assets/STAT-415-SEC-5-16.svg" id="fig-powerfnkmu3" class="img-fluid quarto-figure quarto-figure-center anchored figure-img" style="width:60.0%" alt="Power function of K(mu) with curves for n = 64 and n = 16."></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" id="fig-powerfnkmu3-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Fig&nbsp;10.15
+</figcaption>
+</figure>
+</div>
+<p>As this plot suggests, if we are interested in increasing our chance of rejecting the null hypothesis when the alternative hypothesis is true, we can do so by increasing our sample size <span class="math inline">\(n\)</span>. This benefit is perhaps even greatest for values of the mean that are close to the value of the mean assumed under the null hypothesis. Let’s take a look at two examples that illustrate the kind of sample size calculation we can make to ensure our hypothesis test has sufficient power.</p>
+<div id="exm-cornyield" class="theorem example">
+<p><span class="theorem-title"><strong>Example 10.9</strong></span> Let <span class="math inline">\(X\)</span> denote the crop yield of corn measured in the number of bushels per acre. Assume (unrealistically) that <span class="math inline">\(X\)</span> is normally distributed with unknown mean <span class="math inline">\(\mu\)</span> and standard deviation <span class="math inline">\(\sigma=6\)</span>. An agricultural researcher is working to increase the current average yield from 40 bushels per acre. Therefore, he is interested in testing, at the <span class="math inline">\(\alpha=0.05\)</span> level, the null hypothesis <span class="math inline">\(H_0:\mu=40\)</span> against the alternative hypothesis that <span class="math inline">\(H_a:\mu&gt;40\)</span>. Find the sample size <span class="math inline">\(n\)</span> that is necessary to achieve 0.90 power at the alternative <span class="math inline">\(\mu=45\)</span>.</p>
+<section id="solution-12" class="level4 card card-body bg-light ms-3 mb-3 pt-0">
+<h4 class="anchored" data-anchor-id="solution-12">Solution</h4>
+<p>As is always the case, we need to start by finding a threshold value <span class="math inline">\(c\)</span>, such that if the sample mean is larger than <span class="math inline">\(c\)</span>, we’ll reject the null hypothesis:</p>
+<div id="fig-STAT-415-SEC-5-17" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center" alt="Normal curves showing the threshold, c, where we'll reject the null.">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-STAT-415-SEC-5-17-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="assets/STAT-415-SEC-5-17.png" class="lightbox" data-gallery="quarto-lightbox-gallery-17" title="Fig&nbsp;10.16: "><img src="assets/STAT-415-SEC-5-17.png" id="fig-STAT-415-SEC-5-17" class="w-75 img-fluid quarto-figure quarto-figure-center anchored figure-img" alt="Normal curves showing the threshold, c, where we'll reject the null."></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" id="fig-STAT-415-SEC-5-17-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Fig&nbsp;10.16
+</figcaption>
+</figure>
+</div>
+<p>That is, in order for our hypothesis test to be conducted at the <span class="math inline">\(\alpha=0.05\)</span> level, the following statement must hold (using our typical <span class="math inline">\(Z\)</span> transformation):</p>
+<p><span class="math display">\[\begin{align}
+c = 40 + 1.645 \left( \dfrac{6}{\sqrt{n}} \right)
+\end{align}\]</span></p>
+<p>But, that’s not the only condition that <span class="math inline">\(c\)</span> must meet, because <span class="math inline">\(c\)</span> also needs to be defined to ensure that our power is 0.90 or, alternatively, that the probability of a Type II error is 0.10. That would happen if there was a 10% chance that our test statistic fell short of <span class="math inline">\(c\)</span> when <span class="math inline">\(\mu=45\)</span>, as the following drawing illustrates in blue:</p>
+<div id="fig-alphabeta1" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center" alt="Critical areas on normal curves for type I and II errors." width="60%">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-alphabeta1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="assets/STAT-415-SEC-5-18.svg" class="lightbox" data-gallery="quarto-lightbox-gallery-18" title="Fig&nbsp;10.17: "><img src="assets/STAT-415-SEC-5-18.svg" id="fig-alphabeta1" class="img-fluid quarto-figure quarto-figure-center anchored figure-img" style="width:60.0%" alt="Critical areas on normal curves for type I and II errors."></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" id="fig-alphabeta1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Fig&nbsp;10.17
+</figcaption>
+</figure>
+</div>
+<p>This illustration suggests that in order for our hypothesis test to have 0.90 power, the following statement must hold (using our usual <span class="math inline">\(Z\)</span> transformation):</p>
+<p><span class="math display">\[\begin{align}
+  c = 45 - 1.28 \left( \dfrac{6}{\sqrt{n}} \right)
+\end{align}\]</span></p>
+<p>Aha! We have two ((1) and (2)) equations and two unknowns! All we need to do is equate the equations and solve for <span class="math inline">\(n\)</span>. Doing so, we get:</p>
+<p><span class="math display">\[\begin{align*}
+  &amp; 40+1.645\left(\frac{6}{\sqrt{n}}\right)=45-1.28\left(\frac{6}{\sqrt{n}}\right)\\
+  &amp; \Rightarrow 5=(1.645+1.28)\left(\frac{6}{\sqrt{n}}\right), \qquad \Rightarrow 5=\frac{17.55}{\sqrt{n}}, \qquad n=(3.51)^2=12.3201\approx 13
+\end{align*}\]</span></p>
+<p>Now that we know we will set <span class="math inline">\(n=13\)</span>, we can solve for our threshold value <span class="math inline">\(c\)</span>:</p>
+<p><span class="math display">\[\begin{align*}
+  c = 40 + 1.645 \left( \dfrac{6}{\sqrt{13}} \right)=42.737
+\end{align*}\]</span></p>
+<p>So, in summary, if the agricultural researcher collects data on <span class="math inline">\(n=13\)</span> corn plots, and rejects his null hypothesis <span class="math inline">\(H_0:\mu=40\)</span> if the average crop yield of the 13 plots is greater than 42.737 bushels per acre, he will have a 5% chance of committing a Type I error and a 10% chance of committing a Type II error if the population mean <span class="math inline">\(\mu\)</span> were actually 45 bushels per acre.</p>
+</section>
+<p><strong>Part II</strong><br>
+</p>
+<p>Consider <span class="math inline">\(p\)</span>, the true proportion of voters who favor a particular political candidate. A pollster is interested in testing at the <span class="math inline">\(\alpha=0.01\)</span> level, the null hypothesis <span class="math inline">\(H_0:p=0.5\)</span> against the alternative hypothesis that <span class="math inline">\(H_a:p&gt;0.5\)</span>. Find the sample size <span class="math inline">\(n\)</span> that is necessary to achieve 0.80 power at the alternative <span class="math inline">\(p=0.55\)</span>.</p>
+<p><strong>Solution</strong></p>
+<p>In this case, because we are interested in performing a hypothesis test about a population proportion <span class="math inline">\(p\)</span>, we use the <span class="math inline">\(Z\)</span>-statistic:</p>
+<p><span class="math display">\[\begin{align*}
+  Z = \dfrac{\hat{p}-p_0}{\sqrt{\frac{p_0(1-p_0)}{n}}}
+\end{align*}\]</span></p>
+<p>Again, we start by finding a threshold value <span class="math inline">\(c\)</span>, such that if the observed sample proportion is larger than <span class="math inline">\(c\)</span>, we’ll reject the null hypothesis:</p>
+<div id="fig-alphacriticalp55" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center" alt="Normal plots showing alpha for 2.326 critical value." width="60%">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-alphacriticalp55-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="assets/STAT-415-SEC-5-19.svg" class="lightbox" data-gallery="quarto-lightbox-gallery-19" title="Fig&nbsp;10.18: "><img src="assets/STAT-415-SEC-5-19.svg" id="fig-alphacriticalp55" class="img-fluid quarto-figure quarto-figure-center anchored figure-img" style="width:60.0%" alt="Normal plots showing alpha for 2.326 critical value."></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" id="fig-alphacriticalp55-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Fig&nbsp;10.18
+</figcaption>
+</figure>
+</div>
+<p>That is, in order for our hypothesis test to be conducted at the <span class="math inline">\(\alpha=0.01\)</span> level, the following statement must hold:</p>
+<p><span class="math display">\[\begin{align}
+  c = 0.5 + 2.326 \sqrt{ \dfrac{(0.5)(0.5)}{n}}
+\end{align}\]</span></p>
+<p>But, again, that’s not the only condition that c must meet, because <span class="math inline">\(c\)</span> also needs to be defined to ensure that our power is 0.80 or, alternatively, that the probability of a Type II error is 0.20. That would happen if there was a 20% chance that our test statistic fell short of <span class="math inline">\(c\)</span> when <span class="math inline">\(p=0.55\)</span>, as the following drawing illustrates in blue:</p>
+<div id="fig-alphabeta3" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center" alt="Normal plots showing alpha and beta for 2.326 critical value." width="60%">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-alphabeta3-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="assets/STAT-415-SEC-5-20.svg" class="lightbox" data-gallery="quarto-lightbox-gallery-20" title="Fig&nbsp;10.19: "><img src="assets/STAT-415-SEC-5-20.svg" id="fig-alphabeta3" class="img-fluid quarto-figure quarto-figure-center anchored figure-img" style="width:60.0%" alt="Normal plots showing alpha and beta for 2.326 critical value."></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" id="fig-alphabeta3-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Fig&nbsp;10.19
+</figcaption>
+</figure>
+</div>
+<p>This illustration suggests that in order for our hypothesis test to have 0.80 power, the following statement must hold:</p>
+<p><span class="math display">\[\begin{align}
+  c = 0.55 - 0.842 \sqrt{ \dfrac{(0.55)(0.45)}{n}}
+\end{align}\]</span></p>
+<p>Again, we have two ((3) and (4)) equations and two unknowns! All we need to do is equate the equations, and solve for <span class="math inline">\(n\)</span>. Doing so, we get:</p>
+<p><span class="math display">\[\begin{align*}
+  0.5+2.326\sqrt{\dfrac{0.5(0.5)}{n}}&amp;=0.55-0.842\sqrt{\dfrac{0.55(0.45)}{n}} \\ 2.326\dfrac{\sqrt{0.25}}{\sqrt{n}}+0.842\dfrac{\sqrt{0.2475}}{\sqrt{n}}&amp;=0.55-0.5 \\ \dfrac{1}{\sqrt{n}}(1.5818897)&amp;=0.05 \qquad\\ &amp;\Rightarrow n\approx \left(\dfrac{1.5818897}{0.05}\right)^2\\ &amp;= 1000.95 \approx 1001
+\end{align*}\]</span></p>
+<p>Now that we know we will set <span class="math inline">\(n=1001\)</span>, we can solve for our threshold value <span class="math inline">\(c\)</span>:</p>
+<p><span class="math display">\[\begin{align*}
+  c = 0.5 + 2.326 \sqrt{\dfrac{(0.5)(0.5)}{1001}}= 0.5367
+\end{align*}\]</span></p>
+<p>So, in summary, if the pollster collects data on <span class="math inline">\(n=1001\)</span> voters, and rejects his null hypothesis <span class="math inline">\(H_0:p=0.5\)</span> if the proportion of sampled voters who favor the political candidate is greater than 0.5367, he will have a 1% chance of committing a Type I error and a 20% chance of committing a Type II error if the population proportion <span class="math inline">\(p\)</span> were actually 0.55.</p>
+<p>Incidentally, we can always check our work! Conducting the survey and subsequent hypothesis test as described above, the probability of committing a Type I error is:</p>
+<p><span class="math display">\[\begin{align*}
+  \alpha= P(\hat{p} &gt;0.5367 \text { if } p = 0.50) = P(Z &gt; 2.3257) = 0.01
+\end{align*}\]</span></p>
+<p>and the probability of committing a Type II error is:</p>
+<p><span class="math display">\[\begin{align*}
+  \beta = P(\hat{p} &lt;0.5367 \text { if } p = 0.55) = P(Z &lt; -0.846) = 0.199
+\end{align*}\]</span></p>
+<p>just as the pollster had desired.</p>
+<p>We’ve illustrated several sample size calculations. Now, let’s summarize the information that goes into a sample size calculation. In order to determine a sample size for a given hypothesis test, you need to specify:</p>
+<ol type="1">
+<li><p>The desired <span class="math inline">\(\alpha\)</span> level, that is, your willingness to commit a Type I error.</p></li>
+<li><p>The desired power or, equivalently, the desired <span class="math inline">\(\beta\)</span> level, that is, your willingness to commit a Type II error.</p></li>
+<li><p>A meaningful difference from the value of the parameter that is specified in the null hypothesis.</p></li>
+<li><p>The standard deviation of the sample statistic or, at least, an estimate of the standard deviation (the “standard error”) of the sample statistic.</p></li>
+</ol>
+</div>
+</section>
+</section>
+<section id="approximate-wald-test" class="level2" data-number="10.4">
+<h2 data-number="10.4" class="anchored" data-anchor-id="approximate-wald-test"><span class="header-section-number">10.4</span> Approximate Wald Test</h2>
+<p>In the hypothesis tests we have developed so far, we need to find a test statistic and know the distribution of the test statistic under the null hypothesis. However, how do we choose the test statistic? Can we always find the distribution of the test statistic? Is the test statistic based on a statistic (or estimator) that has desirable properties?</p>
+<p>Based on what we learned so far in this class, we know the MLE has desirable properties, especially under certain conditions. We present in this lesson the Wald test. It is a test generally applicable with using the MLE and relies on the asymptotic normality of the MLE.</p>
+<section id="the-step-up" class="level3" data-number="10.4.1">
+<h3 data-number="10.4.1" class="anchored" data-anchor-id="the-step-up"><span class="header-section-number">10.4.1</span> The Step Up</h3>
+<p>As we have noted before, if we consider each data point <span class="math inline">\(x_i\)</span> as a random variable, with <span class="math display">\[\begin{align*}
+x_i \sim f_X(x|\theta)
+\end{align*}\]</span> then any function of these data points is a random variable. In particular, the MLE <span class="math inline">\(\hat{\theta}=\text{argmax}(L(\theta))\)</span> is a function of the data, and so it is a random variable. In some simple cases, we can work out the distribution of <span class="math inline">\(\hat{\theta}\)</span> directly, but in many cases we cannot. Fortunately, there is a result that, for any MLE, regardless of the distribution <span class="math inline">\(f_X\)</span> that the data come from, the MLE is normally-distributed.</p>
+<p>For single parameter models, the result is as follows:</p>
+<p>If <span class="math inline">\(L(\theta|x_1,x_2,\ldots,x_n)\)</span> is the likelihood function and <span class="math inline">\(\hat{\theta}=\text{argmax}(L(\theta))\)</span> is the MLE, then, as <span class="math inline">\(n\rightarrow \infty\)</span>, <span class="math display">\[ \hat{\theta}_{ML}\sim N\left(\theta_{\text{true}},1/I(\hat{\theta}_{ML})\right)\]</span> where <span class="math inline">\(I(\theta)\)</span> is the “Fisher Information”, defined by <span class="math display">\[I(\theta) = -E_x\left[\frac{\partial^2}{\partial \theta^2}\ell(\theta)\right]\]</span> where <span class="math inline">\(\ell(\theta)=log(L(\theta))\)</span> and the expectation is taken over all <span class="math inline">\(x_1,x_2,\ldots,x_n\)</span>.</p>
+<p>In the multivariate case, where there are two or more parameters to be estimated, <span class="math inline">\(\boldsymbol\theta=(\theta_1,\theta_2,\ldots,\theta_p)\)</span> is the vector of <span class="math inline">\(p\)</span> parameters to be estimated and the asymptotic distribution is as follows. as <span class="math inline">\(n\rightarrow \infty\)</span>,</p>
+<p><span class="math display">\[ \hat{\boldsymbol\theta}_{ML}\sim N\left(\boldsymbol\theta_{\text{true}},\mathbf{I}^{-1}(\hat{\boldsymbol\theta}_{ML})\right)\]</span></p>
+<p>where <span class="math inline">\(\mathbf{I}(\boldsymbol\theta)\)</span> is the “Fisher Information Matrix”, defined by</p>
+<p><span class="math display">\[\mathbf{I}(\boldsymbol\theta) = \left[\begin{array}{cccc}
+-E_x\left[\frac{\partial^2}{\partial \theta_1^2}\ell(\theta)\right] &amp; -E_x\left[\frac{\partial^2}{\partial \theta_1\partial\theta_2}\ell(\theta)\right] &amp; \cdots &amp; -E_x\left[\frac{\partial^2}{\partial \theta_1\partial\theta_p}\ell(\theta)\right]\\
+-E_x\left[\frac{\partial^2}{\partial \theta_2\partial\theta_1}\ell(\theta)\right] &amp; -E_x\left[\frac{\partial^2}{\partial\theta_2^2}\ell(\theta)\right] &amp; \cdots &amp; -E_x\left[\frac{\partial^2}{\partial \theta_2\partial\theta_p}\ell(\theta)\right] \\
+\vdots &amp; \vdots &amp;  &amp; \vdots \\
+-E_x\left[\frac{\partial^2}{\partial \theta_p\partial\theta_1}\ell(\theta)\right] &amp; -E_x\left[\frac{\partial^2}{\partial \theta_p\partial\theta_2}\ell(\theta)\right] &amp; \cdots &amp; -E_x\left[\frac{\partial^2}{\partial \theta_p^2}\ell(\theta)\right] \end{array}\right]
+\]</span> where again <span class="math inline">\(\ell(\theta)=log(L(\theta))\)</span> and the expectation is taken over all <span class="math inline">\(x_1,x_2,\ldots,x_n\)</span>. This result details the approximate joint distribution of the MLEs of all of the parameters. For many situations (including for most hypothesis tests), a more useful result is the resulting marginal distribution of each individual MLE. If the <span class="math inline">\(k\)</span>-th parameter is <span class="math inline">\(\theta_k\)</span>, and the MLE for this parameter is <span class="math inline">\(\hat{\theta}_k\)</span>, then a direct result of the joint distribution above is that the marginal distribution of <span class="math inline">\(\hat{\theta}_k\)</span> is asymptotically approximately Gaussian, with <span class="math display">\[ \hat{\theta}_k \approx N(\theta_{k,true},\mathbf{I}^{-1}(\hat{\boldsymbol\theta})_{[k,k]})\]</span> That is, the MLE <span class="math inline">\(\hat{\theta}_k\)</span> is approximately univariate normally distributed, with mean the true parameter <span class="math inline">\(\theta_k\)</span> and variance equal to the <span class="math inline">\(k\)</span>-th diagonal entry of the inverse <span class="math inline">\(\mathbf{I}^{-1}(\hat{\boldsymbol\theta})\)</span> of the Fisher information matrix.</p>
+<p>We can use the asymptotic approximate Gaussian distribution of MLEs described previously to construct test statistics that are useful for testing <span class="math inline">\(H_0:\theta_k=c\)</span> versus <span class="math inline">\(H_A:\theta_k \neq c\)</span>.</p>
+<p>Since we know that</p>
+<p><span class="math display">\[ \hat{\theta}_k \approx N(\theta_{k,true},\mathbf{I}^{-1}(\hat{\boldsymbol\theta})_{[k,k]})\]</span> if the null hypothesis is that <span class="math inline">\(\theta_k=c\)</span>, then under <span class="math inline">\(H_0\)</span>, the distribution of the MLE is <span class="math display">\[ \hat{\theta}_k \approx N(c,\mathbf{I}^{-1}(\hat{\boldsymbol\theta})_{[k,k]})\]</span></p>
+<p>Following our notation above, we have a test statistic (we’re calling it <span class="math inline">\(\hat{\theta}_k\)</span> here, while in the general description above we called it <span class="math inline">\(T^*\)</span>), and we know the (approximate) distribution of this statistic (<span class="math inline">\(T\sim N(c,\mathbf{I}^{-1}(\hat{\boldsymbol\theta})_{[k,k]})\)</span> under the null hypothesis. A p-value would then be</p>
+<p><span class="math display">\[p=P(|T|\geq |\hat{\theta}_k|),\text{ where } T\sim N(c,\mathbf{I}^{-1}(\hat{\boldsymbol\theta})_{[k,k]})\]</span></p>
+<p>We could simplify this a little. If we first define the <span class="math inline">\(k\)</span>-th standard error <span class="math inline">\(se_k\)</span> as</p>
+<p><span class="math display">\[se_k=\sqrt{\mathbf{I}^{-1}(\hat{\boldsymbol\theta})_{[k,k]}}\]</span> then by subtracting the mean and dividing by <span class="math inline">\(se_k\)</span> we obtain</p>
+<p><span class="math display">\[ Z^*=\frac{\hat{\theta}_k-c}{se_k}\sim N(0,1)\]</span> where <span class="math inline">\(Z^*\approx N(0,1)\)</span>. The p-value (probability of observing a more extreme value if the null hypothesis is true) can then be written as <span class="math display">\[p=P(|Z|&gt;|Z^*|)=P(Z&lt;-|Z^*|)+P(Z&gt;|Z^*|)\]</span></p>
+<p>which, by the symmetry of a standard normal distribution, is equal to</p>
+<p><span class="math display">\[p=2*P(Z\leq -|Z^*|)=2\Phi(-|Z^*|)\]</span> This sort of test, based on the asymptotic approximate gaussian distribution of the MLE, is called a <strong>Wald test</strong>.</p>
+</section>
+<section id="a-recipe-for-wald-tests" class="level3" data-number="10.4.2">
+<h3 data-number="10.4.2" class="anchored" data-anchor-id="a-recipe-for-wald-tests"><span class="header-section-number">10.4.2</span> A Recipe for Wald Tests</h3>
+<p>To summarize the above results, if <span class="math inline">\(x_i \sim f_X(x|\boldsymbol\theta)\)</span> are independent random variables, and we want to test the null hypothesis that <span class="math inline">\(H_0:\theta_k=c\)</span> versus the alternate that <span class="math inline">\(H_A:\theta_k \neq c\)</span>, then a Wald test of this hypothesis is conducted by the following:</p>
+<ol type="1">
+<li>We first find the MLE of all parameters <span class="math inline">\(\hat{\boldsymbol\theta}\)</span> in the model, and the corresponding Fisher information <span class="math inline">\(\mathbf{I}(\hat{\boldsymbol\theta})\)</span>.</li>
+<li>We then find the <span class="math inline">\(k\)</span>-th standard error <span class="math inline">\(se_k=\sqrt{\mathbf{I}^{-1}(\hat{\boldsymbol\theta})_{[k,k]}}\)</span> and construct the test statistic <span class="math display">\[Z^*=\frac{\hat{\theta}_k-c}{se_k}\]</span></li>
+<li>A Wald p-value for this test is then <span class="math display">\[p=2*P(Z\leq -|Z^*|)=2\Phi(-|Z^*|)\]</span></li>
+<li>If the above calculated p-value is <span class="math inline">\(p&lt;\alpha\)</span> then we reject <span class="math inline">\(H_0\)</span> and accept <span class="math inline">\(H_A\)</span>. If the above calculated p-value is <span class="math inline">\(p&gt;\alpha\)</span> then we fail to reject <span class="math inline">\(H_0\)</span> and conclude that there is not sufficient evidence to disprove <span class="math inline">\(H_0\)</span>.</li>
+</ol>
+</section>
+<section id="examples-of-hypothesis-testing" class="level3" data-number="10.4.3">
+<h3 data-number="10.4.3" class="anchored" data-anchor-id="examples-of-hypothesis-testing"><span class="header-section-number">10.4.3</span> Examples of Hypothesis Testing</h3>
+<p>In this section, we present an example of hypothesis testing, focusing on Wald tests for MLEs.</p>
+<div id="exm-binomialex" class="theorem example">
+<p><span class="theorem-title"><strong>Example 10.10 (A Bernoulli/Binomial Example of Hypothesis Testing)</strong></span> Assume that a casino has a game of chance that has a published probability of winning of 0.25. Assume that a person plays the game of chance 20 times, and wins the game exactly once. From that experience, is there enough evidence to conclude that the game of chance does not, in fact, have a win rate of 25%?</p>
+<p>To frame this as a hypothesis test, we first need a parametric statistical model for the observed data. We assume that each of the 20 games played is independent of each other, and each has a probability <span class="math inline">\(p\)</span> of resulting in a “win”. So <span class="math display">\[ x_i \sim Bern(p),\ \ i=1,2,\ldots,20\]</span> With the actual observed data including exactly one win (without loss of generality, let <span class="math inline">\(x_1=1\)</span>) and 19 losses (let <span class="math inline">\(x_2=0,\ x_3=0,\ \ldots,x_20=0\)</span>).</p>
+<p>Our goal is to determine if we have enough evidence to conclude that the win rate is NOT 25%. We thus specify a null hypothesis that <span class="math display">\[H_0:p=0.25\]</span> with the corresponding alternative hypothesis that <span class="math inline">\(H_A:p\neq 0.25\)</span>. We will consider a Wald test of this hypothesis. Before constructing the test, we set the level of the test to be <span class="math inline">\(\alpha=0.05\)</span>, so we are willing to conclude that the null hypothesis is false if the probability (under <span class="math inline">\(H_0\)</span>) of observing the test statistic we will construct is 5% or less.</p>
+</div>
+<section id="an-analytic-wald-hypothesis-test-for-bernoulli-data" class="level4">
+<h4 class="anchored" data-anchor-id="an-analytic-wald-hypothesis-test-for-bernoulli-data">An Analytic Wald Hypothesis Test for Bernoulli Data</h4>
+<p>We first illustrate constructing a Wald hypothesis test analytically, following the procedure outlined above.</p>
+<ol type="1">
+<li><p>We first find the MLE and Fisher Information of the parameter <span class="math inline">\(p\)</span>.</p>
+<p>From previous examples in class, we know that the MLE is <span class="math display">\[\hat{p}=\frac{\sum_{i=1}^{20} x_i}{20}=\frac{1}{20}=0.05\]</span> and that the Fisher Information is <span class="math display">\[I(\hat{p})=-E_x(\ell''(\hat{p})))=\frac{20}{\hat{p}(1-\hat{p})}=\frac{20}{.05(.95)}=421.0526\]</span></p></li>
+<li><p>We then find the standard error <span class="math display">\[ se=\sqrt{1/I(\hat{p})}=\sqrt{1/421.0526}=0.0487\]</span> and construct the Wald test statistic <span class="math display">\[ Z^*=\frac{\hat{p}-0.25}{se}=\frac{0.05-0.25}{0.0487}=-4.104\]</span></p></li>
+<li><p>We then find the p-value of this test statistic under the null hypothesis <span class="math display">\[pval=2*P(Z\leq-|Z^*|)=2*P(Z\leq-4.104)\]</span> which we evaluate in R:</p>
+<div class="cell language-name-processed">
+<div class="codeblock-with-label r">
+<style>.codeblock-with-label pre.lang-label-1::before { content: "R"; }</style>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1" data-language-name-skip="true"><pre class="sourceCode r lang-label-1 code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a> phat<span class="ot">=</span>.<span class="dv">05</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a> I<span class="ot">=</span><span class="fl">421.0526</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a> se<span class="ot">=</span><span class="fu">sqrt</span>(<span class="dv">1</span><span class="sc">/</span>I)</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a> Z.star<span class="ot">=</span>(.<span class="dv">05</span><span class="fl">-.25</span>)<span class="sc">/</span>se</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a> pval<span class="ot">=</span><span class="dv">2</span><span class="sc">*</span><span class="fu">pnorm</span>(<span class="sc">-</span><span class="fu">abs</span>(Z.star))</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a> pval</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 4.062198e-05</code></pre>
+</div>
+</div>
+<p>which results in a p-value of 0.0000406</p></li>
+<li><p>As this p-value is much smaller than the level <span class="math inline">\(\alpha=0.05\)</span>, we reject <span class="math inline">\(H_0:p=0.25\)</span> and conclude that the win rate for the game of chance is very unlikely to be the stated rate of .025.</p></li>
+</ol>
+</section>
+<section id="a-numeric-wald-hypothesis-test" class="level4">
+<h4 class="anchored" data-anchor-id="a-numeric-wald-hypothesis-test">A Numeric Wald Hypothesis Test</h4>
+<p>We now construct the same hypothesis test using numeric maximum likelihood analysis. We first enter the data</p>
+<div class="cell language-name-processed">
+<div class="codeblock-with-label r">
+<style>.codeblock-with-label pre.lang-label-2::before { content: "R"; }</style>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3" data-language-name-skip="true"><pre class="sourceCode r lang-label-2 code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>x<span class="ot">=</span><span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>)</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>n<span class="ot">=</span><span class="fu">length</span>(x)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</div>
+<p>We then write a function to evaluate the negative log likelihood and find the MLE and Fisher Information using <code>optim</code>.</p>
+<div class="cell language-name-processed">
+<div class="codeblock-with-label r">
+<style>.codeblock-with-label pre.lang-label-3::before { content: "R"; }</style>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4" data-language-name-skip="true"><pre class="sourceCode r lang-label-3 code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="do">## negative log likelihood function</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>nll.bern<span class="ot">=</span><span class="cf">function</span>(p,x){</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    <span class="sc">-</span><span class="fu">sum</span>(<span class="fu">log</span>(<span class="fu">dbinom</span>(x,<span class="at">size=</span><span class="dv">1</span>,<span class="at">prob=</span>p)))</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="do">## run optim</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>out<span class="ot">=</span><span class="fu">optim</span>(.<span class="dv">5</span>,nll.bern,<span class="at">x=</span>x,<span class="at">hessian=</span><span class="cn">TRUE</span>)</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="do">## save MLE</span></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>p.hat<span class="ot">=</span>out<span class="sc">$</span>par</span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a><span class="do">## save Fisher Information</span></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>I<span class="ot">=</span>out<span class="sc">$</span>hessian</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</div>
+<p>Using these, we find our standard error and then the Wald Test Statistic</p>
+<div class="cell language-name-processed">
+<div class="codeblock-with-label r">
+<style>.codeblock-with-label pre.lang-label-4::before { content: "R"; }</style>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5" data-language-name-skip="true"><pre class="sourceCode r lang-label-4 code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>se<span class="ot">=</span><span class="fu">sqrt</span>(<span class="dv">1</span><span class="sc">/</span>I)</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="do">## get Wald test statistic</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>T.star<span class="ot">=</span>(p.hat<span class="fl">-0.25</span>)<span class="sc">/</span>se</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>T.star</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>          [,1]
+[1,] -4.105474</code></pre>
+</div>
+</div>
+<p>And then the p-value is</p>
+<div class="cell language-name-processed">
+<div class="codeblock-with-label r">
+<style>.codeblock-with-label pre.lang-label-5::before { content: "R"; }</style>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7" data-language-name-skip="true"><pre class="sourceCode r lang-label-5 code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>pval<span class="ot">=</span><span class="dv">2</span><span class="sc">*</span><span class="fu">pnorm</span>(<span class="sc">-</span><span class="fu">abs</span>(T.star),<span class="at">mean=</span><span class="dv">0</span>,<span class="at">sd=</span><span class="dv">1</span>)</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>pval</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>             [,1]
+[1,] 4.034858e-05</code></pre>
+</div>
+</div>
+<p>which again is much smaller than the level <span class="math inline">\(\alpha=0.05\)</span>, we reject <span class="math inline">\(H_0:p=0.25\)</span> and conclude that the win rate for the game of chance is very unlikely to be the stated rate of .025.</p>
+</section>
+</section>
+</section>
+<section id="summary" class="level2" data-number="10.5">
+<h2 data-number="10.5" class="anchored" data-anchor-id="summary"><span class="header-section-number">10.5</span> Summary</h2>
+<p>In this lesson we deepened our hypothesis‑testing toolkit by explicitly connecting confidence intervals to their companion tests, examining the tug‑of‑war between Type I and II errors through the lens of power, and meeting the Wald test—a versatile large‑sample method built on maximum‑likelihood estimators. You will also see how design choices such as sample size, significance level (), and effect size interact when planning a study.</p>
+<p><strong>Key takeaways:</strong></p>
+<ul>
+<li>A two‑sided null value that lies outside its corresponding confidence interval is automatically rejected by the matching test.</li>
+<li>Increasing sample size tightens confidence intervals and boosts power without altering .</li>
+<li>Power calculations let you choose a sample size that has a high probability of detecting effects that matter.</li>
+<li>The Wald test furnishes an approximate ‑test for any parameter whose MLE is asymptotically normal, extending hypothesis‑testing tools to models where classical formulas are unwieldy.</li>
+</ul>
+
+
+</section>
+
+</main> <!-- /main -->
+<!--<script>
+
+document.addEventListener('DOMContentLoaded', function () {
+
+    const toc = document.getElementById('TOC');
+
+    const navbarCollapse = document.getElementById('navbarCollapse');
+
+    const menuButton = document.querySelector('.navbar-toggler');
+
+
+
+    // Function to move TOC to navbar on small screens
+
+    function handleTOCDisplay() {
+
+        if (window.innerWidth < 768) {
+
+            if (!navbarCollapse.contains(toc)) {
+
+                navbarCollapse.appendChild(toc); // Move TOC into the navbar
+
+            }
+
+        } else {
+
+            if (toc.parentNode !== document.getElementById('quarto-margin-sidebar')) {
+
+                document.getElementById('quarto-margin-sidebar').appendChild(toc); // Move TOC back to original location
+
+            }
+
+        }
+
+    }
+
+
+
+    // Initial check on page load
+
+    handleTOCDisplay();
+
+
+
+    // Check when resizing the window
+
+    window.addEventListener('resize', handleTOCDisplay);
+
+
+
+    // Toggle TOC visibility when navbar is expanded on small screens
+
+    menuButton.addEventListener('click', function() {
+
+        if (window.innerWidth < 768) {
+
+            toc.classList.toggle('toc-active'); // Toggle visibility of the TOC in the navbar
+
+        }
+
+    });
+
+});
+
+</script>-->
+
+
+
+<script>
+
+document.addEventListener('DOMContentLoaded', function () {
+
+    const toc = document.getElementById('TOC'); // TOC element
+
+    const activeLesson = document.querySelector('.sidebar-item .sidebar-link.active'); // Active lesson link
+
+    const originalTocParent = toc.parentElement; // Store original TOC location
+
+
+
+    // Create a container for the TOC in the sidebar
+
+    const nestedTocContainer = document.createElement('ul');
+
+    nestedTocContainer.className = 'sidebar-toc-nested list-unstyled';
+
+
+
+    // Function to move the TOC into the sidebar
+
+    function moveTocToSidebar() {
+
+        if (!toc || !activeLesson) return;
+
+        while (toc.firstChild) {
+
+            nestedTocContainer.appendChild(toc.firstChild);
+
+        }
+
+        const parentItem = activeLesson.closest('.sidebar-item');
+
+        parentItem.appendChild(nestedTocContainer);
+
+        toc.style.display = 'none'; // Hide the original TOC container
+
+    }
+
+
+
+    // Function to restore the TOC to its original location
+
+    function restoreTocToOriginalLocation() {
+
+        if (nestedTocContainer.parentNode) {
+
+            while (nestedTocContainer.firstChild) {
+
+                toc.appendChild(nestedTocContainer.firstChild);
+
+            }
+
+            nestedTocContainer.remove(); // Remove the container
+
+            toc.style.display = ''; // Show the original TOC container
+
+        }
+
+    }
+
+
+
+    // Function to handle screen width changes
+
+    function handleScreenResize() {
+
+        if (window.innerWidth < 768) {
+
+            moveTocToSidebar();
+
+        } else {
+
+            restoreTocToOriginalLocation();
+
+        }
+
+    }
+
+
+
+    // Initial check and event listener for resize
+
+    handleScreenResize();
+
+    window.addEventListener('resize', handleScreenResize);
+
+});
+
+
+
+</script>
+<!---function to make the first column th instead of td when using markdown tables..just add .row-header as your class below the table!---->
+
+<script>
+
+    window.addEventListener('DOMContentLoaded', () => {
+
+        // Select only tables with the 'row-header' class
+
+        const tables = document.querySelectorAll('table.row-header');
+
+        
+
+        tables.forEach(table => {
+
+            const rows = table.querySelectorAll('tr');
+
+            
+
+            rows.forEach(row => {
+
+                const firstCell = row.cells[0];
+
+                if (firstCell && firstCell.tagName === 'TD') {
+
+                    const th = document.createElement('th');
+
+                    th.innerHTML = firstCell.innerHTML;
+
+                    th.setAttribute('scope', 'row'); // Add scope="row" to the th element
+
+                    row.replaceChild(th, firstCell);
+
+                }
+
+            });
+
+        });
+
+    });
+
+</script>
+<script>
+
+  document.addEventListener("DOMContentLoaded", function () {
+
+    const elements = document.querySelectorAll('div[id^="exm-"]');
+
+
+
+    elements.forEach((element) => {
+
+      const theoremTitle = element.querySelector('.theorem-title');
+
+      // Use the Quarto-generated id (e.g. "exm-muscleexample") directly
+
+      const anchorId = element.id;
+
+
+
+      if (theoremTitle && anchorId) {
+
+        const anchor = document.createElement('a');
+
+        anchor.href = `#${anchorId}`;
+
+        anchor.className = 'anchor';
+
+        anchor.setAttribute('aria-label', `Link to ${theoremTitle.textContent.trim()}`);
+
+        anchor.innerHTML = '<i class="bi bi-link-45deg" aria-hidden="true"></i>';
+
+        theoremTitle.appendChild(anchor);
+
+        // No need to reassign element.id — it's already correct
+
+      }
+
+    });
+
+  });
+
+</script>
+<style>
+
+  #mas-popup,
+
+  #mas-popup * {
+
+    box-sizing: border-box;
+
+  }
+
+
+
+  #mas-popup {
+
+    --mas-navy: #001e44;
+
+    --mas-blue: #1e407c;
+
+    --mas-sky: #96bee6;
+
+
+
+    position: fixed;
+
+    right: max(1.25rem, env(safe-area-inset-right));
+
+    bottom: max(1.25rem, env(safe-area-inset-bottom));
+
+    z-index: 1055;
+
+
+
+    width: min(25rem, calc(100vw - 2rem));
+
+    padding: 1.45rem 1.5rem 1.5rem 1.8rem;
+
+    overflow: hidden;
+
+
+
+    border: 1px solid rgba(0, 30, 68, 0.14);
+
+    border-radius: 0.75rem;
+
+    background: #ffffff;
+
+    color: #16243a;
+
+
+
+    box-shadow:
+
+      0 1.25rem 3.5rem rgba(0, 30, 68, 0.2),
+
+      0 0.2rem 0.7rem rgba(0, 30, 68, 0.08);
+
+
+
+    font-family: Arial, Helvetica, sans-serif;
+
+    -webkit-font-smoothing: antialiased;
+
+
+
+    animation: mas-popup-in 320ms cubic-bezier(0.2, 0.8, 0.2, 1) both;
+
+  }
+
+
+
+  #mas-popup[hidden] {
+
+    display: none;
+
+  }
+
+
+
+  /* Blue accent along the left side */
+
+  #mas-popup::before {
+
+    position: absolute;
+
+    inset: 0 auto 0 0;
+
+    width: 0.35rem;
+
+    background: linear-gradient(
+
+      180deg,
+
+      var(--mas-sky),
+
+      var(--mas-blue)
+
+    );
+
+    content: "";
+
+  }
+
+
+
+  #mas-popup-kicker {
+
+    margin: 0 3rem 0.55rem 0;
+
+    color: var(--mas-blue);
+
+    font-size: 0.69rem;
+
+    font-weight: 700;
+
+    letter-spacing: 0.12em;
+
+    line-height: 1.3;
+
+    text-transform: uppercase;
+
+  }
+
+
+
+  #mas-popup h2#mas-popup-title {
+
+    margin: 1rem 2.5rem 0.65rem 0 !important; 
+
+    max-width: 19rem;
+
+    margin: 0 2.5rem 0.65rem 0 !important;
+
+    color: var(--mas-navy);
+
+    font-family: Georgia, "Times New Roman", serif;
+
+    font-size: 1.55rem;
+
+    font-weight: 600;
+
+    letter-spacing: -0.015em;
+
+    line-height: 1.18 !important;
+
+  }
+
+
+
+  #mas-popup-description {
+
+    max-width: 21rem;
+
+    margin: 0 0 1.15rem;
+
+    color: #46586e;
+
+    font-size: 0.95rem;
+
+    line-height: 1.55;
+
+  }
+
+
+
+  #mas-popup-cta {
+
+    display: inline-flex;
+
+    min-height: 2.75rem;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 0.65rem;
+
+
+
+    padding: 0.7rem 1rem;
+
+    border: 2px solid var(--mas-navy);
+
+    border-radius: 0.35rem;
+
+    background: var(--mas-navy);
+
+    color: #ffffff;
+
+
+
+    font-size: 0.88rem;
+
+    font-weight: 700;
+
+    text-decoration: none;
+
+
+
+    transition:
+
+      background-color 160ms ease,
+
+      border-color 160ms ease,
+
+      transform 160ms ease;
+
+  }
+
+
+
+  #mas-popup-cta:hover,
+
+  #mas-popup-cta:focus-visible {
+
+    border-color: var(--mas-blue);
+
+    background: var(--mas-blue);
+
+    color: #ffffff;
+
+    transform: translateY(-1px);
+
+  }
+
+
+
+  #mas-popup-cta-arrow {
+
+    font-size: 1.1rem;
+
+    transition: transform 160ms ease;
+
+  }
+
+
+
+  #mas-popup-cta:hover #mas-popup-cta-arrow,
+
+  #mas-popup-cta:focus-visible #mas-popup-cta-arrow {
+
+    transform: translateX(0.18rem);
+
+  }
+
+
+
+  #mas-popup-close {
+
+    position: absolute;
+
+    top: 0.65rem;
+
+    right: 0.65rem;
+
+
+
+    display: grid;
+
+    width: 2.75rem;
+
+    height: 2.75rem;
+
+    padding: 0;
+
+    place-items: center;
+
+
+
+    border: 0;
+
+    border-radius: 50%;
+
+    background: transparent;
+
+    color: #485b72;
+
+
+
+    font: inherit;
+
+    font-size: 1.55rem;
+
+    line-height: 1;
+
+
+
+    cursor: pointer;
+
+  }
+
+
+
+  #mas-popup-close:hover,
+
+  #mas-popup-close:focus-visible {
+
+    background: #edf2f7;
+
+    color: var(--mas-navy);
+
+  }
+
+
+
+  #mas-popup :focus-visible {
+
+    outline: 3px solid var(--mas-sky);
+
+    outline-offset: 3px;
+
+  }
+
+
+
+  @keyframes mas-popup-in {
+
+    from {
+
+      opacity: 0;
+
+      transform: translateY(1rem) scale(0.98);
+
+    }
+
+
+
+    to {
+
+      opacity: 1;
+
+      transform: translateY(0) scale(1);
+
+    }
+
+  }
+
+
+
+  @media (max-width: 520px) {
+
+    #mas-popup {
+
+      right: max(0.75rem, env(safe-area-inset-right));
+
+      bottom: max(0.75rem, env(safe-area-inset-bottom));
+
+      width: calc(100vw - 1.5rem);
+
+      padding: 1.25rem 1.25rem 1.3rem 1.55rem;
+
+    }
+
+
+
+    #mas-popup-title {
+
+      max-width: 17rem;
+
+      font-size: 1.4rem;
+
+    }
+
+
+
+    #mas-popup-cta {
+
+      width: 100%;
+
+    }
+
+  }
+
+
+
+  @media (prefers-reduced-motion: reduce) {
+
+    #mas-popup {
+
+      animation: none;
+
+    }
+
+
+
+    #mas-popup-cta,
+
+    #mas-popup-cta-arrow {
+
+      transition: none;
+
+    }
+
+  }
+
+</style>
+
+
+
+<aside id="mas-popup" role="region" aria-labelledby="mas-popup-title" aria-describedby="mas-popup-description" aria-live="polite" hidden="">
+
+  <button id="mas-popup-close" type="button" aria-label="Close this message">
+
+    <span aria-hidden="true">×</span>
+
+  </button>
+
+
+
+  <p id="mas-popup-kicker">
+
+    Online master’s program
+
+  </p>
+
+
+
+  <h2 id="mas-popup-title">
+
+    Take your statistics skills further
+
+  </h2>
+
+
+
+  <p id="mas-popup-description">
+
+    Explore Penn State’s online Master of Applied Statistics program.
+
+  </p>
+
+
+
+  <a id="mas-popup-cta" href="https://science.psu.edu/stat/graduate-programs/master-of-applied-statistics">
+
+    Explore the program
+
+    <span id="mas-popup-cta-arrow" aria-hidden="true">→</span>
+
+  </a>
+
+</aside>
+
+
+
+<script>
+
+  (() => {
+
+    const storageKey = "stat501-mas-popup-dismissed-v2";
+
+
+
+    // Show the popup after 15 seconds.
+
+    const showDelay = 15000;
+
+
+
+    // After closing it, hide it for 30 days.
+
+    const dismissalDays = 30;
+
+
+
+    const popup = document.getElementById("mas-popup");
+
+    const closeButton = document.getElementById("mas-popup-close");
+
+    const cta = document.getElementById("mas-popup-cta");
+
+
+
+    if (!popup || !closeButton || !cta) return;
+
+
+
+    let dismissalActive = false;
+
+
+
+    try {
+
+      const dismissedUntil = Number(
+
+        localStorage.getItem(storageKey)
+
+      );
+
+
+
+      dismissalActive =
+
+        Number.isFinite(dismissedUntil) &&
+
+        Date.now() < dismissedUntil;
+
+    } catch (error) {
+
+      // The popup still works if browser storage is unavailable.
+
+    }
+
+
+
+    if (dismissalActive) return;
+
+
+
+    const rememberDismissal = () => {
+
+      try {
+
+        const millisecondsPerDay = 24 * 60 * 60 * 1000;
+
+        const dismissedUntil =
+
+          Date.now() + dismissalDays * millisecondsPerDay;
+
+
+
+        localStorage.setItem(
+
+          storageKey,
+
+          String(dismissedUntil)
+
+        );
+
+      } catch (error) {
+
+        // Closing still works if browser storage is unavailable.
+
+      }
+
+    };
+
+
+
+    const showTimer = window.setTimeout(() => {
+
+      popup.hidden = false;
+
+    }, showDelay);
+
+
+
+    const dismissPopup = () => {
+
+      window.clearTimeout(showTimer);
+
+      popup.hidden = true;
+
+      rememberDismissal();
+
+    };
+
+
+
+    closeButton.addEventListener("click", dismissPopup);
+
+
+
+    // Prevent the popup from appearing again after someone uses the CTA.
+
+    cta.addEventListener("click", rememberDismissal);
+
+
+
+    document.addEventListener("keydown", (event) => {
+
+      if (event.key === "Escape" && !popup.hidden) {
+
+        dismissPopup();
+
+      }
+
+    });
+
+  })();
+
+</script>
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    // Ensure there is a toggle, if there isn't float one in the top right
+    if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+      const a = window.document.createElement('a');
+      a.classList.add('top-right');
+      a.classList.add('quarto-color-scheme-toggle');
+      a.href = "";
+      a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+      const i = window.document.createElement("i");
+      i.classList.add('bi');
+      a.appendChild(i);
+      window.document.body.appendChild(a);
+    }
+    setColorSchemeToggle(hasAlternateSentinel())
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./Lesson09.html" class="pagination-link" aria-label="Hypothesis Tests (Part I)">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Hypothesis Tests (Part I)</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./Lesson11.html" class="pagination-link" aria-label="Bayesian Methods">
+        <span class="nav-page-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Bayesian Methods</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+<p>Except where otherwise noted, content on this site is licensed under a <a href="https://creativecommons.org/licenses/by-nc/4.0/">CC BY-NC 4.0</a> license.<br><br> <img src="assets/by-nc.svg" class="img-fluid" alt="BYNC"></p>
+</div>   
+    <div class="nav-footer-center">
+<p><a href="https://oer.psu.edu/">OPEN.ED@PSU</a></p>
+<div class="cookie-consent-footer"><a href="#" id="open_preferences_center">Cookie Preferences</a></div></div>
+    <div class="nav-footer-right">
+<a href="https://www.psu.edu/web-privacy-statement/">Privacy</a> | <a href="https://www.psu.edu/accessibilitystatement/">Accessibility</a> | <a href="https://www.psu.edu/copyright-information/">Copyright</a> <br> <a href="https://www.psu.edu/">The Pennsylvania State University</a> © <span id="copyright-year"></span> | <br> <a href="https://forms.office.com/r/GbC8H0pZhm">Leave Us Feedback</a>
+<script>
+document.getElementById("copyright-year").textContent = new Date().getFullYear();
+</script>
+</div>
+  </div>
+</footer>
+<script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","descPosition":"bottom","loop":false,"openEffect":"zoom","selector":".lightbox"});
+(function() {
+  let previousOnload = window.onload;
+  window.onload = () => {
+    if (previousOnload) {
+      previousOnload();
+    }
+    lightboxQuarto.on('slide_before_load', (data) => {
+      const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+      const href = trigger.getAttribute('href');
+      if (href !== null) {
+        const imgEl = window.document.querySelector(`a[href="${href}"] img`);
+        if (imgEl !== null) {
+          const srcAttr = imgEl.getAttribute("src");
+          if (srcAttr && srcAttr.startsWith("data:")) {
+            slideConfig.href = srcAttr;
+          }
+        }
+      } 
+    });
+  
+    lightboxQuarto.on('slide_after_load', (data) => {
+      const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(slideNode);
+      }
+    });
+  
+  };
+  
+})();
+          </script>
+
+
+
+
+</body></html>

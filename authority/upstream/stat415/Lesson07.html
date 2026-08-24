@@ -1,0 +1,2358 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.9.35">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>7&nbsp; Asymptotic Distribution of MLE (Part I) – STAT 415 | Introduction to Mathematical Statistics</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./Lesson08.html" rel="next">
+<link href="./Lesson06.html" rel="prev">
+<link href="./assets/psulion.png" rel="icon" type="image/png">
+<script src="site_libs/cookie-consent/cookie-consent.js"></script>
+<link href="site_libs/cookie-consent/cookie-consent.css" rel="stylesheet">
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-46f66b053e56abd73bb6e954d61a315b.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-22b4aaf4c2978829df3684e8f2c068db.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-46f66b053e56abd73bb6e954d61a315b.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-dedc56d09aa522c36e3c0f8583f17cbf.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark-fc84954412eed28da5dc743c06b0bbd5.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="site_libs/bootstrap/bootstrap-dedc56d09aa522c36e3c0f8583f17cbf.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/quarto-contrib/language-name/language-name.css" rel="stylesheet">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<script async="" src="https://www.googletagmanager.com/gtag/js?id=G-XM6C7H9XCL"></script>
+
+<script type="text/plain" cookie-consent="tracking">
+
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-XM6C7H9XCL', { 'anonymize_ip': true});
+</script>
+
+<script type="text/javascript" charset="UTF-8">
+document.addEventListener('DOMContentLoaded', function () {
+cookieconsent.run({
+  "notice_banner_type":"simple",
+  "consent_type":"express",
+  "palette":"light",
+  "language":"en",
+  "page_load_consent_levels":["strictly-necessary"],
+  "notice_banner_reject_button_hide":false,
+  "preferences_center_close_button_hide":false,
+  "website_name":""
+  ,
+"language":"en"
+  });
+});
+</script> 
+  
+<script>
+
+  window.addEventListener('load', function() {
+
+    document.getElementById("cc-nb-text").innerHTML = "We use cookies and other tracking technologies to improve your browsing experience on our website, to analyze our website traffic, and to understand where our visitors are coming from.";
+
+  });
+
+</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+</head>
+
+<body class="nav-sidebar docked nav-fixed quarto-light"><script id="quarto-html-before-body" type="application/javascript">
+    const toggleBodyColorMode = (bsSheetEl) => {
+      const mode = bsSheetEl.getAttribute("data-mode");
+      const bodyEl = window.document.querySelector("body");
+      if (mode === "dark") {
+        bodyEl.classList.add("quarto-dark");
+        bodyEl.classList.remove("quarto-light");
+      } else {
+        bodyEl.classList.add("quarto-light");
+        bodyEl.classList.remove("quarto-dark");
+      }
+    }
+    const toggleBodyColorPrimary = () => {
+      const bsSheetEl = window.document.querySelector("link#quarto-bootstrap:not([rel=disabled-stylesheet])");
+      if (bsSheetEl) {
+        toggleBodyColorMode(bsSheetEl);
+      }
+    }
+    const setColorSchemeToggle = (alternate) => {
+      const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+      for (let i=0; i < toggles.length; i++) {
+        const toggle = toggles[i];
+        if (toggle) {
+          if (alternate) {
+            toggle.classList.add("alternate");
+          } else {
+            toggle.classList.remove("alternate");
+          }
+        }
+      }
+    };
+    const toggleColorMode = (alternate) => {
+      // Switch the stylesheets
+      const primaryStylesheets = window.document.querySelectorAll('link.quarto-color-scheme:not(.quarto-color-alternate)');
+      const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+      manageTransitions('#quarto-margin-sidebar .nav-link', false);
+      if (alternate) {
+        // note: dark is layered on light, we don't disable primary!
+        enableStylesheet(alternateStylesheets);
+        for (const sheetNode of alternateStylesheets) {
+          if (sheetNode.id === "quarto-bootstrap") {
+            toggleBodyColorMode(sheetNode);
+          }
+        }
+      } else {
+        disableStylesheet(alternateStylesheets);
+        enableStylesheet(primaryStylesheets)
+        toggleBodyColorPrimary();
+      }
+      manageTransitions('#quarto-margin-sidebar .nav-link', true);
+      // Switch the toggles
+      setColorSchemeToggle(alternate)
+      // Hack to workaround the fact that safari doesn't
+      // properly recolor the scrollbar when toggling (#1455)
+      if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+        manageTransitions("body", false);
+        window.scrollTo(0, 1);
+        setTimeout(() => {
+          window.scrollTo(0, 0);
+          manageTransitions("body", true);
+        }, 40);
+      }
+    }
+    const disableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        stylesheet.rel = 'disabled-stylesheet';
+      }
+    }
+    const enableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        if(stylesheet.rel !== 'stylesheet') { // for Chrome, which will still FOUC without this check
+          stylesheet.rel = 'stylesheet';
+        }
+      }
+    }
+    const manageTransitions = (selector, allowTransitions) => {
+      const els = window.document.querySelectorAll(selector);
+      for (let i=0; i < els.length; i++) {
+        const el = els[i];
+        if (allowTransitions) {
+          el.classList.remove('notransition');
+        } else {
+          el.classList.add('notransition');
+        }
+      }
+    }
+    const isFileUrl = () => {
+      return window.location.protocol === 'file:';
+    }
+    const hasAlternateSentinel = () => {
+      let styleSentinel = getColorSchemeSentinel();
+      if (styleSentinel !== null) {
+        return styleSentinel === "alternate";
+      } else {
+        return false;
+      }
+    }
+    const setStyleSentinel = (alternate) => {
+      const value = alternate ? "alternate" : "default";
+      if (!isFileUrl()) {
+        window.localStorage.setItem("quarto-color-scheme", value);
+      } else {
+        localAlternateSentinel = value;
+      }
+    }
+    const getColorSchemeSentinel = () => {
+      if (!isFileUrl()) {
+        const storageValue = window.localStorage.getItem("quarto-color-scheme");
+        return storageValue != null ? storageValue : localAlternateSentinel;
+      } else {
+        return localAlternateSentinel;
+      }
+    }
+    const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+      const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+      const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+      let newTheme = '';
+      if(authorPrefersDark) {
+        newTheme = isAlternate ? baseTheme : alternateTheme;
+      } else {
+        newTheme = isAlternate ? alternateTheme : baseTheme;
+      }
+      const changeGiscusTheme = () => {
+        // From: https://github.com/giscus/giscus/issues/336
+        const sendMessage = (message) => {
+          const iframe = document.querySelector('iframe.giscus-frame');
+          if (!iframe) return;
+          iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+        }
+        sendMessage({
+          setConfig: {
+            theme: newTheme
+          }
+        });
+      }
+      const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+      if (isGiscussLoaded) {
+        changeGiscusTheme();
+      }
+    };
+    const authorPrefersDark = false;
+    const darkModeDefault = authorPrefersDark;
+      document.querySelector('link#quarto-text-highlighting-styles.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+      document.querySelector('link#quarto-bootstrap.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+    let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+    // Dark / light mode switch
+    window.quartoToggleColorScheme = () => {
+      // Read the current dark / light value
+      let toAlternate = !hasAlternateSentinel();
+      toggleColorMode(toAlternate);
+      setStyleSentinel(toAlternate);
+      toggleGiscusIfUsed(toAlternate, darkModeDefault);
+      window.dispatchEvent(new Event('resize'));
+    };
+    // Switch to dark mode if need be
+    if (hasAlternateSentinel()) {
+      toggleColorMode(true);
+    } else {
+      toggleColorMode(false);
+    }
+  </script>
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <div id="quarto-announcement" data-announcement-id="cb9d28251ca8388d2bc94ffe0e472446" class="alert alert-warning hidden"><i class="bi bi-info-circle quarto-announcement-icon"></i><div class="quarto-announcement-content">
+<p>Welcome to our newly redesigned course notes! Please update your bookmarks accordingly.</p>
+</div><i class="bi bi-x-lg quarto-announcement-action"></i></div>
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="./index.html">
+    <span class="navbar-title">STAT 415 | Introduction to Mathematical Statistics</span>
+    </a>
+  </div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="https://science.psu.edu/stat"> 
+<span class="menu-text">Department of Statistics</span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+  <a href="" class="quarto-reader-toggle quarto-navigation-tool px-1" onclick="window.quartoToggleReader(); return false;" title="Toggle reader mode">
+  <div class="quarto-reader-toggle-btn">
+  <i class="bi"></i>
+  </div>
+</a>
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./Lesson00.html">Lessons</a></li><li class="breadcrumb-item"><a href="./Lesson07.html"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Asymptotic Distribution of MLE (Part I)</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header sidebar-header-stacked">
+      <a href="https://science.psu.edu/" class="sidebar-logo-link">
+      <img src="./PSU_Ecosshield.png" alt="Penn State Eberly College of Science" class="sidebar-logo light-content py-0 d-lg-inline d-none">
+      <img src="./PSU_Ecosshield.png" alt="Penn State Eberly College of Science" class="sidebar-logo dark-content py-0 d-lg-inline d-none">
+      </a>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">About this course</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+ <span class="menu-text">Lessons</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Lesson00.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">0: Review Concepts from STAT 414</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Lesson01.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Order Statistics</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Lesson02.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Estimation (Part I)</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Lesson03.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Estimation (Part II)</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Lesson04.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Maximum Likelihood Estimation (MLE) (Part I)</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Lesson05.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Maximum Likelihood Estimation (MLE) (Part II)</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Lesson06.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Confidence Intervals</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Lesson07.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Asymptotic Distribution of MLE (Part I)</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Lesson08.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Asymptotic Distribution of MLE (Part II)</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Lesson09.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Hypothesis Tests (Part I)</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Lesson10.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Hypothesis Tests (Part II)</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Lesson11.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Bayesian Methods</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Lesson12.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Simple Linear Regression</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">In this lesson</h2>
+   
+  <ul>
+  <li><a href="#properties-of-mles" id="toc-properties-of-mles" class="nav-link active" data-scroll-target="#properties-of-mles"><span class="header-section-number">7.1</span> Properties of MLEs</a></li>
+  <li><a href="#asymptotic-confidence-intervals" id="toc-asymptotic-confidence-intervals" class="nav-link" data-scroll-target="#asymptotic-confidence-intervals"><span class="header-section-number">7.2</span> Asymptotic Confidence Intervals</a>
+  <ul class="collapse">
+  <li><a href="#single-parmater-case" id="toc-single-parmater-case" class="nav-link" data-scroll-target="#single-parmater-case"><span class="header-section-number">7.2.1</span> Single Parmater Case</a></li>
+  <li><a href="#multiple-parmater-case" id="toc-multiple-parmater-case" class="nav-link" data-scroll-target="#multiple-parmater-case"><span class="header-section-number">7.2.2</span> Multiple Parmater Case</a></li>
+  <li><a href="#summary-the-asymptotic-95-confidence-interval" id="toc-summary-the-asymptotic-95-confidence-interval" class="nav-link" data-scroll-target="#summary-the-asymptotic-95-confidence-interval"><span class="header-section-number">7.2.3</span> Summary: The Asymptotic 95% Confidence Interval</a></li>
+  </ul></li>
+  <li><a href="#numerical-approximations-for-cis" id="toc-numerical-approximations-for-cis" class="nav-link" data-scroll-target="#numerical-approximations-for-cis"><span class="header-section-number">7.3</span> Numerical Approximations for CIs</a>
+  <ul class="collapse">
+  <li><a href="#single-parameter-case" id="toc-single-parameter-case" class="nav-link" data-scroll-target="#single-parameter-case"><span class="header-section-number">7.3.1</span> Single Parameter Case</a></li>
+  <li><a href="#multiple-parameter-case" id="toc-multiple-parameter-case" class="nav-link" data-scroll-target="#multiple-parameter-case"><span class="header-section-number">7.3.2</span> Multiple Parameter Case</a></li>
+  </ul></li>
+  <li><a href="#summary" id="toc-summary" class="nav-link" data-scroll-target="#summary"><span class="header-section-number">7.4</span> Summary</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./Lesson00.html">Lessons</a></li><li class="breadcrumb-item"><a href="./Lesson07.html"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Asymptotic Distribution of MLE (Part I)</span></a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Asymptotic Distribution of MLE (Part I)</span></h1>
+  <div class="quarto-categories">
+    <div class="quarto-category">MLEs</div>
+    <div class="quarto-category">Asymptotic Confidence Intervals</div>
+    <div class="quarto-category">Numerical Approximations</div>
+    <div class="quarto-category">Bootstrap</div>
+  </div>
+  </div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="overview" class="level2 unnumbered unlisted">
+<h2 class="unnumbered unlisted anchored" data-anchor-id="overview">Overview</h2>
+<p>Let’s revisit maximum likelihood estimators (MLEs) to explore their asymptotic properties and their application in constructing confidence intervals. This lesson introduces the theoretical foundations of MLEs, including their consistency, equivariance, and asymptotic normality under regularity conditions. You will learn to derive the Fisher Information for single and multiple parameter models and use it to construct asymptotic confidence intervals. The lesson also covers numerical approximations of these intervals using R’s <code>optim</code> function and introduces the bootstrap method—both parametric and nonparametric—for estimating confidence intervals when analytical solutions are infeasible. Additionally, you will explore the Delta method and bootstrap approaches for inference on transformations of parameters. Through examples involving Bernoulli, exponential, normal, geometric, t, and Pareto distributions, you will gain practical skills in applying these techniques, preparing you for advanced statistical inference. Let us dive in.</p>
+<div class="objectiveblock">
+<p><i class="bi bi-check2-circle"></i><span class="callout-header">Objectives</span></p>
+<p>Upon completion of this lesson, you should be able to:</p>
+</div>
+</section>
+<section id="properties-of-mles" class="level2" data-number="7.1">
+<h2 data-number="7.1" class="anchored" data-anchor-id="properties-of-mles"><span class="header-section-number">7.1</span> Properties of MLEs</h2>
+<p>Maximum likelihood estimation is popular because there are a number of provable properties that apply to <strong>ANY MLE!</strong></p>
+<p>The following result holds for any MLE, subject to some “regularity conditions”. The regularity conditions include</p>
+<ul>
+<li><p>The underlying probability function, <span class="math inline">\(f(x|\theta)\)</span>, is “smooth”.</p></li>
+<li><p>The estimator, <span class="math inline">\(\hat{\theta}_{mle}\)</span>, is NOT on the edge of allowable values. For example, the MLE is not in the support.</p></li>
+</ul>
+<p>We will not show the full list of conditions nor proofs of the following properties. You can find them in the Wasserman text, chapter 9.13.</p>
+<div class="bg-success-subtle callout callout-style-simple callout-tip no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Property 1: The estimator, <span class="math inline">\(\hat{\theta}_{mle}\)</span> is consistent.
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>This means that as the sample size <span class="math inline">\(n\)</span> approaches infinity, <span class="math inline">\(\hat{\theta}_{mle}\)</span> approaches the true <span class="math inline">\(\theta\)</span>. A corollary to this is as <span class="math inline">\(n\)</span> approaches infinity, <span class="math inline">\(E(\hat{\theta}_{mle})\)</span> approaches the true <span class="math inline">\(\theta\)</span>.</p>
+</div>
+</div>
+<div class="bg-success-subtle callout callout-style-simple callout-tip no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Property 2: The estimator, <span class="math inline">\(\hat{\theta}_{mle}\)</span>, is equivariant.
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>An estimator, <span class="math inline">\(\hat{\theta}\)</span>, is the MLE of <span class="math inline">\(\theta\)</span>, and <span class="math inline">\(g(\theta)\)</span> is an invertible function, then the MLE of <span class="math inline">\(\tau=g(\theta)\)</span> is <span class="math inline">\(\hat{\tau}=g(\hat{\theta})\)</span>.</p>
+<p>This means that MLE of a function of a parameter is the function of the MLE of the parameter, as long as the function is invertible.</p>
+</div>
+</div>
+<div id="exm-mle1" class="theorem example">
+<p><span class="theorem-title"><strong>Example 7.1</strong></span> Let <span class="math inline">\(X_i\sim N(\mu, \sigma^2)\)</span>. That is, let <span class="math inline">\(X_1, X_2, \ldots, X_n\)</span> be iid Normal random variables with mean <span class="math inline">\(\mu\)</span> and variance <span class="math inline">\(\sigma^2\)</span>. We know that <span class="math inline">\(\hat{\mu}=\bar{x}\)</span> and <span class="math inline">\(\hat{\sigma}^2=\frac{1}{n}\sum_{i=1}^n(x_i-\bar{x})^2\)</span> are the MLEs of <span class="math inline">\(\mu\)</span> and <span class="math inline">\(\sigma^2\)</span>, respectfully. What is the MLE of the standard deviation, <span class="math inline">\(\sigma\)</span>?</p>
+<section id="solution" class="level4 card card-body bg-light ms-3 mb-3 pt-0">
+<h4 class="anchored" data-anchor-id="solution">Solution</h4>
+<p>We know <span class="math inline">\(\sigma=g(\sigma^2)=\sqrt{\sigma^2}\)</span>. Therefore, based on the equivariant property, the MLE of <span class="math inline">\(\sigma\)</span> is: <span class="math display">\[\begin{align*}
+  \hat{\sigma}_{mle}=\sqrt{\hat{\sigma}^2_{mle}}=\sqrt{\frac{1}{n}\sum_{i=1}^n (x_i-\bar{x})^2}
+\end{align*}\]</span></p>
+</section>
+</div>
+<div id="exm-mle2" class="theorem example">
+<p><span class="theorem-title"><strong>Example 7.2</strong></span> Let <span class="math inline">\(X_i\sim Bin(5, p)\)</span>, for <span class="math inline">\(i=1, \ldots, n\)</span>. What is the MLE of the odds ratio, <span class="math inline">\(\text{OR}=\frac{p}{1-p}\)</span>?</p>
+<section id="solution-1" class="level4 card card-body bg-light ms-3 mb-3 pt-0">
+<h4 class="anchored" data-anchor-id="solution-1">Solution</h4>
+<p>The MLE of <span class="math inline">\(p\)</span> is <span class="math inline">\(\hat{p}=\dfrac{\sum_{i=1}^n x_i}{5n}\)</span>.Therefore, the MLE of <span class="math inline">\(\text{OR}\)</span> is <span class="math display">\[\begin{align*}
+  \hat{\text{OR}}_{mle}=\dfrac{\hat{p}}{1-\hat{p}}=\dfrac{\dfrac{\sum_{i=1}^n x_i}{5n}}{1-\dfrac{\sum_{i=1}^n x_i}{5n}}
+\end{align*}\]</span></p>
+</section>
+</div>
+<div class="bg-success-subtle callout callout-style-simple callout-tip no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Property 3: MLEs are Asymptotically Normal.
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>For <span class="math inline">\(X_i\sim f(x_i|\theta)\)</span> <span class="math inline">\(i=1, \ldots, n\)</span>, the MLE is <span class="math inline">\(\hat{\theta}=\text{argmax}_{\theta}(L(\theta))\)</span>. As <span class="math inline">\(n\)</span> approaches infinity, the MLE <span class="math inline">\(\hat{\theta}\)</span> is approximately normal: <span class="math display">\[\begin{align*}
+  \hat{\theta}\approx N\left(\theta_{\text{true}}, \frac{1}{I(\hat{\theta}_{mle})}\right)
+\end{align*}\]</span></p>
+<p>Here “<span class="math inline">\(\approx\)</span>” means “is approximately distributed as”. The function <span class="math inline">\(I(\theta)\)</span> is called the “<strong>Fisher Information</strong>” or the “Information” function. It is defined as</p>
+<p><span class="math display">\[\begin{align*}
+  I(\hat{\theta}_{mle})=-E\left(\frac{d^2}{d\theta^2}\ell(\hat{\theta})\right)
+\end{align*}\]</span></p>
+</div>
+</div>
+<div id="exm-mle3" class="theorem example">
+<p><span class="theorem-title"><strong>Example 7.3</strong></span> Let <span class="math inline">\(X_1, \ldots, X_n\)</span> be an i.i.d. sample from a Bernoulli distribution with parameter <span class="math inline">\(p\)</span>. Find the MLE of <span class="math inline">\(p\)</span> and find <span class="math inline">\(I(\hat{p})\)</span>. Then find the approximate normal distribution of <span class="math inline">\(\hat{p}\)</span>.</p>
+<section id="solution-2" class="level4 card card-body bg-light ms-3 mb-3 pt-0">
+<h4 class="anchored" data-anchor-id="solution-2">Solution</h4>
+<p>The pmf is <span class="math inline">\(f(x|p)=p^x(1-p)^{1-x}\)</span>. The likelihood function is:</p>
+<p><span class="math display">\[L(p)=\prod_{i=1}^n p^{x_i}(1-p)^{1-x_i}=p^{\sum x_i}(1-p)^{n-\sum x_i}\]</span></p>
+<p>The log-likelihood function is: <span class="math display">\[\ell(p)=\sum x_i \ln(p)+(n-\sum x_i)\ln (1-p)\]</span></p>
+<p>The derivative of the log-likelihood function is: <span class="math display">\[\frac{d}{dp}\ell(p)=\frac{\sum x_i}{p}-\frac{n-\sum x_i}{1-p}\]</span></p>
+<p>Setting the derivative equal to zero we get:</p>
+<div style="overflow-x:auto;overflow-y:hidden;">
+<span class="math display">\[\begin{align*}
+&amp;  0=\frac{\sum x_i}{p}-\frac{n-\sum x_i}{1-p}, \qquad \Rightarrow 0=\frac{\sum x_i -p\sum x_i -np+p\sum x_i}{p(1-p)}\\
+&amp; 0=\sum x_i-np, \qquad \hat{p}=\frac{\sum x_i}{n}
+\end{align*}\]</span>
+</div>
+<p>Therefore, the MLE of <span class="math inline">\(p\)</span> is <span class="math inline">\(\hat{p}=\dfrac{\sum x_i}{n}\)</span>. Next, lets find <span class="math inline">\(I(p)=-E\left(\frac{d^2}{dp^2}\ell(p)\right)\)</span>.</p>
+<p><span class="math display">\[\frac{d^2}{dp^2}\ell(p) = -\frac{\sum x_i}{p^2}-\frac{n-\sum x_i}{(1-p)^2}\]</span></p>
+<p>Next, we need to find the negative expectation of the second derivative. <span class="math display">\[\begin{align*}
+  I(p)&amp;=-E\left(\frac{d^2}{dp^2}\ell(p)\right)\\ &amp;=-E\left(-\frac{\sum x_i}{p^2}-\frac{n-\sum x_i}{(1-p)^2}\right)\\ &amp;=E\left(\frac{\sum x_i}{p^2}+\frac{n-\sum x_i}{(1-p)^2}\right)\\
+  &amp;=\frac{\sum E(x_i)}{p^2}+\frac{n-\sum E(x_i)}{(1-p)^2}
+\end{align*}\]</span></p>
+<p>For a Bernoulli random variable <span class="math inline">\(E(X)=p\)</span>. Therefore, <span class="math display">\[\begin{align*}
+  I(p)&amp;=\frac{\sum E(x_i)}{p^2}+\frac{n-\sum E(x_i)}{(1-p)^2}\\ &amp;=\frac{np}{p^2}+\frac{n-np}{(1-p)^2}\\ &amp;=\frac{np(1-p)^2+np^2-np^3}{p^2(1-p)^2}\\
+  &amp; =\frac{np((1-p)^2+p(1-p))}{p^2(1-p)^2}\\ &amp;=\frac{np(1-p)(1-p+p)}{p^2(1-p)^2}\\ &amp;=\frac{n}{p(1-p)}
+\end{align*}\]</span></p>
+<p>If <span class="math inline">\(I(p)=\frac{n}{p(1-p)}\)</span>, then <span class="math inline">\(I(\hat{p})=\dfrac{n}{\hat{p}(1-\hat{p})}=\dfrac{n}{\dfrac{\sum x_i}{n}\left(1-\dfrac{\sum x_i}{n}\right)}=\dfrac{n}{\bar{x}(1-\bar{x})}\)</span>.</p>
+<p>Putting this all together, we have <span class="math inline">\(\hat{p}\approx N\left(p_{true}, \dfrac{1}{I(\hat{p})}\right)\)</span>. Which is equivalent to <span class="math inline">\(\hat{p}\approx N\left(p_{true}, \dfrac{\bar{x}(1-\bar{x})}{n}\right)\)</span>.</p>
+</section>
+</div>
+<p>Now that we have determined an asymptotic distribution of MLEs (under certain conditions), we can use this information (with large sample size) to construct interval estimates for our unknown parameter, <span class="math inline">\(\theta\)</span>.</p>
+</section>
+<section id="asymptotic-confidence-intervals" class="level2" data-number="7.2">
+<h2 data-number="7.2" class="anchored" data-anchor-id="asymptotic-confidence-intervals"><span class="header-section-number">7.2</span> Asymptotic Confidence Intervals</h2>
+<section id="single-parmater-case" class="level3" data-number="7.2.1">
+<h3 data-number="7.2.1" class="anchored" data-anchor-id="single-parmater-case"><span class="header-section-number">7.2.1</span> Single Parmater Case</h3>
+<p>In this section, we put together the Properties discussed in the previous section to construct an asymptotic confidence interval for the unknown parameter, <span class="math inline">\(\theta\)</span>, using the MLE.</p>
+<p>The normal approximation to the distribution of any MLE gives us an easy way to find an asymptotic confidence interval for the unknown parameter.</p>
+<div class="bg-success-subtle callout callout-style-simple callout-tip no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Property 4: Approximate Confidence Interval
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Let <span class="math inline">\(X_i\)</span> follow a distribution with probability distribution <span class="math inline">\(f(x_i|\theta)\)</span>. Let <span class="math inline">\(\hat{\theta}\)</span> be the MLE of <span class="math inline">\(\theta\)</span>. We have <span class="math inline">\(I(\theta)=-E\left(\frac{d^2}{d\theta^2} \ell(\theta)\right)\)</span>. Then an asymptotic 95% confidence interval for <span class="math inline">\(\theta\)</span> is <span class="math display">\[\begin{align*}
+  \hat{\theta}\pm 1.96 \sqrt{\frac{1}{I(\hat{\theta})}}
+\end{align*}\]</span></p>
+</div>
+</div>
+<div id="exm-mle4" class="theorem example">
+<p><span class="theorem-title"><strong>Example 7.4</strong></span> Continuing the previous example, we know <span class="math inline">\(\hat{p}=\bar{x}\)</span>, <span class="math inline">\(I(\hat{p})=\frac{n}{\bar{x}(1-\bar{x})}\)</span>, and <span class="math inline">\(\hat{p}\approx N\left(p_{true}, \frac{\bar{x}(1-\bar{x})}{n}\right)\)</span>. Find a 95% asymptotic confidence interval for <span class="math inline">\(p\)</span>.</p>
+<section id="solution-3" class="level4 card card-body bg-light ms-3 mb-3 pt-0">
+<h4 class="anchored" data-anchor-id="solution-3">Solution</h4>
+<p>An approximate 95% confidence interval for <span class="math inline">\(p\)</span> is:</p>
+<span class="math display">\[\begin{align*}
+  \bar{x}\pm 1.96 \sqrt{\frac{\bar{x}(1-\bar{x})}{n}}
+\end{align*}\]</span>
+</section>
+</div>
+<div id="exm-mle4b" class="theorem example">
+<p><span class="theorem-title"><strong>Example 7.5</strong></span> Suppose we have the following 10 observations from a Bernoulli distribution with parameter <span class="math inline">\(p\)</span>. Calculate a 95% asymptotic confidence interval for <span class="math inline">\(p\)</span>.</p>
+<table class="w-auto table-sm mx-auto small caption-top table">
+<tbody>
+<tr class="odd">
+<td>1</td>
+<td>1</td>
+<td>0</td>
+<td>1</td>
+<td>0</td>
+</tr>
+<tr class="even">
+<td>0</td>
+<td>0</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+</tr>
+</tbody>
+</table>
+<section id="solution-4" class="level4 card card-body bg-light ms-3 mb-3 pt-0">
+<h4 class="anchored" data-anchor-id="solution-4">Solution</h4>
+<p>Continuing the previous example, we know <span class="math inline">\(\hat{p}=\bar{x}\)</span>, <span class="math inline">\(I(\hat{p})=\dfrac{n}{\bar{x}(1-\bar{x})}\)</span>, and <span class="math inline">\(\hat{p}\approx N\left(p_{true}, \dfrac{\bar{x}(1-\bar{x})}{n}\right)\)</span>.</p>
+<p>We can calculate <span class="math inline">\(\bar{x}=0.6\)</span> and know <span class="math inline">\(n=10\)</span>. Therefore,</p>
+<p>An approximate 95% confidence interval for <span class="math inline">\(p\)</span> is:</p>
+<span class="math display">\[\begin{align*}
+  \bar{x}\pm 1.96 \sqrt{\frac{\bar{x}(1-\bar{x})}{n}}=0.6\pm \sqrt{\frac{0.6(1-0.6)}{10}}=0.6\pm 0.3036=(0.2964, 0.9036)
+\end{align*}\]</span>
+<div class="callout callout-style-simple callout-caution no-icon">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-body-container">
+<p><strong>Note!</strong><br>
+The sample size is not large in this example but it is chosen it for practice purposes.</p>
+</div>
+</div>
+</div>
+</section>
+</div>
+<div id="exm-mle5" class="theorem example">
+<p><span class="theorem-title"><strong>Example 7.6</strong></span> Let <span class="math inline">\(X_1, X_2, \ldots, X_n\)</span> be a random sample from <span class="math inline">\(\text{Exp}(\theta)\)</span>. Find a 95% asymptotic CI for <span class="math inline">\(\theta\)</span>, using the MLE of <span class="math inline">\(\theta\)</span>.</p>
+<section id="solution-5" class="level4 card card-body bg-light ms-3 mb-3 pt-0">
+<h4 class="anchored" data-anchor-id="solution-5">Solution</h4>
+<p>The PMF is <span class="math inline">\(f(x_i|\theta)=\frac{1}{\theta}e^{-\frac{x_i}{\theta}}\)</span> and <span class="math inline">\(E(X_i)=\theta\)</span>.</p>
+<p><strong>Step 1</strong>: Find the likelihood function.</p>
+<p><span class="math display">\[\begin{align*}
+  L(\theta)=\prod_{i=1}^n \frac{1}{\theta}e^{-\frac{x_i}{\theta}}=\theta^{-n}e^{-\frac{\sum x_i}{\theta}}
+\end{align*}\]</span></p>
+<p><strong>Step 2</strong>: Find the log-likelihood function.</p>
+<p><span class="math display">\[\begin{align*}
+  \ell(\theta)=-n\log \theta -\frac{\sum x_i}{\theta}
+\end{align*}\]</span></p>
+<p><strong>Step 3</strong>: Find the derivative of the log-likelihood function with respect to <span class="math inline">\(\theta\)</span>.</p>
+<p><span class="math display">\[\begin{align*}
+  \frac{d}{d\theta}=-\frac{n}{\theta}+\frac{\sum x_i}{\theta^2}
+\end{align*}\]</span></p>
+<p><strong>Step 4</strong>: Set the derivative equal to 0 and solve for <span class="math inline">\(\theta\)</span>.</p>
+<p><span class="math display">\[\begin{align*}
+  &amp; 0=\frac{-n\theta+\sum x_i}{\theta^2}, \qquad \Rightarrow 0=-n\theta+\sum x_i\\
+  &amp; \Rightarrow \hat{\theta}=\frac{\sum x_i}{n}
+\end{align*}\]</span></p>
+<p><strong>Step 5</strong>: Find <span class="math inline">\(I(\hat{\theta})=-E\left(\frac{d^2}{d\theta^2}\ell(\hat{\theta})\right)\)</span>.</p>
+<p><span class="math display">\[\begin{align*}
+   \frac{d^2}{d\theta^2}\ell(\theta)&amp;=\frac{n}{\theta^2}-\frac{2\sum x_i}{\theta^3}\\ &amp;=\frac{n\theta -2\sum x_i}{\theta^3}\\
+   I(\hat{\theta})&amp;=-E\left[\frac{n\theta -2\sum x_i}{\theta^3}\right]\\&amp;=-\frac{n\hat{\theta} -2\sum x_i}{\hat{\theta}^3}\\ &amp;=-\frac{n\hat{\theta}-2n\hat{\theta}}{\hat{\theta}^3}=\frac{n}{\bar{x}^2}=\frac{n}{\hat{\theta}^2}=\frac{n^3}{(\sum x_i)^2}\end{align*}\]</span></p>
+<p>Therefore, a 95% asymptotic confidence interval for <span class="math inline">\(\theta\)</span> is: <span class="math display">\[\hat{\theta}\pm 1.96\sqrt{\frac{1}{I(\hat{\theta})}}=\bar{x}\pm 1.96 \sqrt{\frac{n^3}{\bar{x}^2}}\]</span></p>
+</section>
+</div>
+</section>
+<section id="multiple-parmater-case" class="level3" data-number="7.2.2">
+<h3 data-number="7.2.2" class="anchored" data-anchor-id="multiple-parmater-case"><span class="header-section-number">7.2.2</span> Multiple Parmater Case</h3>
+<p>In the multivariate case, where there are two or more parameters to be estimated, <span class="math inline">\(\boldsymbol\theta=(\theta_1,\theta_2,\ldots,\theta_p)\)</span> is the vector of <span class="math inline">\(p\)</span> parameters to be estimated and the asymptotic distribution is as follows. as <span class="math inline">\(n\rightarrow \infty\)</span>, <span class="math display">\[ \hat{\boldsymbol\theta}_{ML}\sim N\left(\boldsymbol\theta_{\text{true}},\mathbf{I}^{-1}(\hat{\boldsymbol\theta}_{ML})\right)\]</span> where <span class="math inline">\(\mathbf{I}(\boldsymbol\theta)\)</span> is the “Fisher Information Matrix”, defined by <span class="math display">\[\mathbf{I}(\boldsymbol\theta) = \left[\begin{array}{cccc}
+-E_x\left[\frac{\partial^2}{\partial \theta_1^2}\ell(\theta)\right] &amp; -E_x\left[\frac{\partial^2}{\partial \theta_1\partial\theta_2}\ell(\theta)\right] &amp; \cdots &amp; -E_x\left[\frac{\partial^2}{\partial \theta_1\partial\theta_p}\ell(\theta)\right]\\
+-E_x\left[\frac{\partial^2}{\partial \theta_2\partial\theta_1}\ell(\theta)\right] &amp; -E_x\left[\frac{\partial^2}{\partial\theta_2^2}\ell(\theta)\right] &amp; \cdots &amp; -E_x\left[\frac{\partial^2}{\partial \theta_2\partial\theta_p}\ell(\theta)\right] \\
+\vdots &amp; \vdots &amp;  &amp; \vdots \\
+-E_x\left[\frac{\partial^2}{\partial \theta_p\partial\theta_1}\ell(\theta)\right] &amp; -E_x\left[\frac{\partial^2}{\partial \theta_p\partial\theta_2}\ell(\theta)\right] &amp; \cdots &amp; -E_x\left[\frac{\partial^2}{\partial \theta_p^2}\ell(\theta)\right] \end{array}\right]
+\]</span> where again <span class="math inline">\(\ell(\theta)=log(L(\theta))\)</span> and the expectation is taken over all <span class="math inline">\(x_1,x_2,\ldots,x_n\)</span>.</p>
+</section>
+<section id="summary-the-asymptotic-95-confidence-interval" class="level3" data-number="7.2.3">
+<h3 data-number="7.2.3" class="anchored" data-anchor-id="summary-the-asymptotic-95-confidence-interval"><span class="header-section-number">7.2.3</span> Summary: The Asymptotic 95% Confidence Interval</h3>
+<p>For any MLE, the asymptotic Gaussian distribution approximation can be used to construct a confidence interval. Let <span class="math inline">\(x_i\sim f_X(x|\theta)\)</span>, <span class="math inline">\(i=1,2,\ldots,n\)</span> be <span class="math inline">\(n\)</span> independent and identically distributed random variables from a distribution with only a single parameter <span class="math inline">\(\theta\)</span>, and let <span class="math inline">\(\hat{\theta}=\text{argmax}(L(\theta))\)</span> be the MLE of the unknown parameter <span class="math inline">\(\theta\)</span>. Then from the asymptotic approximate Gaussian distribution of any MLE, an approximate asymptotic 95% confidence interval for <span class="math inline">\(\theta\)</span> is <span class="math display">\[\hat{\theta}\pm 1.96\sqrt{1/I(\hat{\theta}_{ML})}\]</span></p>
+<p>Similarly, for a multiparameter model, an approximate asymptotic 95% confidence interval for the <span class="math inline">\(k\)</span>-the parameter <span class="math inline">\(\theta_k\)</span> is <span class="math display">\[\hat{\theta_k}\pm 1.96\sqrt{\mathbf{I}^{-1}(\hat{\theta}_{ML})[k,k]}\]</span> where <span class="math inline">\(\sqrt{\mathbf{I}^{-1}(\hat{\theta}_{ML})[k,k]}\)</span> is the square root of the <span class="math inline">\(k\)</span>-th diagonal entry of <span class="math inline">\(\mathbf{I}^{-1}(\hat{\theta}_{ML})\)</span> where <span class="math inline">\(\mathbf{I}^{-1}\)</span> is the matrix inverse of <span class="math inline">\(\mathbf{I}\)</span>.</p>
+</section>
+</section>
+<section id="numerical-approximations-for-cis" class="level2" data-number="7.3">
+<h2 data-number="7.3" class="anchored" data-anchor-id="numerical-approximations-for-cis"><span class="header-section-number">7.3</span> Numerical Approximations for CIs</h2>
+<p>For some relatively simple cases, we can analytically construct 95% confidence intervals for MLEs. This requires being able to analytically find the MLE (by taking the first derivative of the log-likelihood function and setting equal to zero), and then also analytically find the Fisher Information (by taking two derivatives of the log-likelihood function and then taking the expectation over <span class="math inline">\(x_1,x_2,\ldots,x_n\)</span>). As we have seen, there are many cases, even for simple statistical distributions, where it is impossible to analytically solve for the MLE. In these cases we numerically approximated this MLE by using <code>optim</code> in R. Just like we can approximate the MLE using <code>optim</code>, we can also approximate the Fisher Information <span class="math inline">\(I(\hat{\theta})\)</span> (in the single-parameter case) or <span class="math inline">\(\mathbf{I}(\hat{\boldsymbol\theta})\)</span> (in the multiparameter case) using optim. We do this in <code>optim</code> by including one additional input in our call to <code>optim</code>.</p>
+<section id="single-parameter-case" class="level3" data-number="7.3.1">
+<h3 data-number="7.3.1" class="anchored" data-anchor-id="single-parameter-case"><span class="header-section-number">7.3.1</span> Single Parameter Case</h3>
+<p>We will walk through the numerical approximations using the case where we have data from a geometric distribution as follows:</p>
+<div id="fig-histoofx" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-histoofx-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="cell language-name-processed" data-lightbox="true">
+<div class="codeblock-with-label r">
+<style>.codeblock-with-label pre.lang-label-1::before { content: "R"; }</style>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1" data-language-name-skip="true"><pre class="sourceCode r lang-label-1 code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="do">## assume that x~geom(p)</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>x<span class="ot">=</span><span class="fu">c</span>(<span class="dv">4</span>,<span class="dv">11</span>,<span class="dv">2</span>,<span class="dv">5</span>,<span class="dv">1</span>,<span class="dv">0</span>,<span class="dv">11</span>,<span class="dv">9</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">17</span>,<span class="dv">9</span>,<span class="dv">6</span>,</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    <span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">12</span>,<span class="dv">3</span>,<span class="dv">1</span>,<span class="dv">3</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">1</span>,<span class="dv">27</span>,<span class="dv">0</span>,<span class="dv">2</span>,<span class="dv">0</span>,<span class="dv">24</span>,<span class="dv">9</span>,</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>    <span class="dv">4</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">8</span>,<span class="dv">13</span>,<span class="dv">8</span>,<span class="dv">6</span>,<span class="dv">1</span>,<span class="dv">4</span>,<span class="dv">9</span>,<span class="dv">12</span>,<span class="dv">11</span>,<span class="dv">2</span>,<span class="dv">5</span>,<span class="dv">3</span>)</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>x</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code> [1]  4 11  2  5  1  0 11  9  0  0  1  2 17  9  6  0  0 12  3  1  3  0  0  1 27
+[26]  0  2  0 24  9  4  0  0  8 13  8  6  1  4  9 12 11  2  5  3</code></pre>
+</div>
+<div class="codeblock-with-label r">
+<style>.codeblock-with-label pre.lang-label-13::before { content: "R"; }</style>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r lang-label-13 code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(x)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Lesson07_files/figure-html/unnamed-chunk-1-1.png" class="img-fluid figure-img" style="width:70.0%" alt="Histogram of geometric distribution"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" id="fig-histoofx-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Fig&nbsp;7.1
+</figcaption>
+</figure>
+</div>
+<p>To find the MLE numerically, we would first write a function to evaluate the negative log likelihood as we have done before.</p>
+<div class="cell language-name-processed">
+<div class="codeblock-with-label r">
+<style>.codeblock-with-label pre.lang-label-2::before { content: "R"; }</style>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4" data-language-name-skip="true"><pre class="sourceCode r lang-label-2 code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>nll.geom<span class="ot">=</span><span class="cf">function</span>(p,x){</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  <span class="sc">-</span><span class="fu">sum</span>(<span class="fu">log</span>(<span class="fu">dgeom</span>(x,p)))</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</div>
+<p>Then use <code>optim</code> to numerically approximate the MLE:</p>
+<div class="cell language-name-processed">
+<div class="codeblock-with-label r">
+<style>.codeblock-with-label pre.lang-label-3::before { content: "R"; }</style>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5" data-language-name-skip="true"><pre class="sourceCode r lang-label-3 code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>out<span class="ot">=</span><span class="fu">optim</span>(<span class="fl">0.5</span>,nll.geom,<span class="at">x=</span>x)</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>out</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>$par
+[1] 0.1546875
+
+$value
+[1] 125.3257
+
+$counts
+function gradient 
+      28       NA 
+
+$convergence
+[1] 0
+
+$message
+NULL</code></pre>
+</div>
+</div>
+<p>If we run the same <code>optim</code> code, but include the option <code>hessian=TRUE</code>, then <code>optim</code> will approximate the Fisher Information, and return it in the <code>optim</code> object, with the name of <code>hessian</code>.</p>
+<div class="cell language-name-processed">
+<div class="codeblock-with-label r">
+<style>.codeblock-with-label pre.lang-label-4::before { content: "R"; }</style>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7" data-language-name-skip="true"><pre class="sourceCode r lang-label-4 code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>out<span class="ot">=</span><span class="fu">optim</span>(<span class="fl">0.5</span>,nll.geom,<span class="at">x=</span>x,<span class="at">hessian=</span><span class="cn">TRUE</span>)</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>out</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>$par
+[1] 0.1546875
+
+$value
+[1] 125.3257
+
+$counts
+function gradient 
+      28       NA 
+
+$convergence
+[1] 0
+
+$message
+NULL
+
+$hessian
+         [,1]
+[1,] 2225.054</code></pre>
+</div>
+</div>
+<p>This <code>hessian</code> is the Fisher Information, so we can construct an approximate asymptotic 95% confidence interval for our MLE of the parameter <span class="math inline">\(p\)</span> by following the above formulas:</p>
+<div class="cell language-name-processed">
+<div class="codeblock-with-label r">
+<style>.codeblock-with-label pre.lang-label-5::before { content: "R"; }</style>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9" data-language-name-skip="true"><pre class="sourceCode r lang-label-5 code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="do">## get the MLE</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>p.hat<span class="ot">=</span>out<span class="sc">$</span>par</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>p.hat</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.1546875</code></pre>
+</div>
+<div class="codeblock-with-label r">
+<style>.codeblock-with-label pre.lang-label-14::before { content: "R"; }</style>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r lang-label-14 code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="do">## get the Fisher Information</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>I<span class="ot">=</span>out<span class="sc">$</span>hessian</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="do">## get the 95% CI</span></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>p.hat<span class="fl">-1.96</span><span class="sc">*</span><span class="fu">sqrt</span>(<span class="dv">1</span><span class="sc">/</span>I)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>          [,1]
+[1,] 0.1131361</code></pre>
+</div>
+<div class="codeblock-with-label r">
+<style>.codeblock-with-label pre.lang-label-15::before { content: "R"; }</style>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r lang-label-15 code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>p.hat<span class="fl">+1.96</span><span class="sc">*</span><span class="fu">sqrt</span>(<span class="dv">1</span><span class="sc">/</span>I)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>          [,1]
+[1,] 0.1962389</code></pre>
+</div>
+</div>
+<p>So a 95% CI for the MLE of <span class="math inline">\(p\)</span> would be (0.113,0.196).</p>
+</section>
+<section id="multiple-parameter-case" class="level3" data-number="7.3.2">
+<h3 data-number="7.3.2" class="anchored" data-anchor-id="multiple-parameter-case"><span class="header-section-number">7.3.2</span> Multiple Parameter Case</h3>
+<p>When we have two or more parameters, numeric optimization in R, as well as numeric approximation of the Fisher Information Matrix <span class="math inline">\(\mathbf{I}(\hat{\boldsymbol\theta})\)</span> can similarly be done using <code>optim</code>. To illustrate this, we will consider data generated from the Normal distribution. The following code simulates normally-distributed data from a distribution with a mean of -7 and variance of 16:</p>
+<div id="fig-histoofnormaldistr" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-histoofnormaldistr-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="cell language-name-processed" data-lightbox="true">
+<div class="codeblock-with-label r">
+<style>.codeblock-with-label pre.lang-label-6::before { content: "R"; }</style>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15" data-language-name-skip="true"><pre class="sourceCode r lang-label-6 code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1</span>)</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>x<span class="ot">=</span><span class="fu">rnorm</span>(<span class="dv">100</span>,<span class="at">mean=</span><span class="sc">-</span><span class="dv">7</span>,<span class="at">sd=</span><span class="fu">sqrt</span>(<span class="dv">16</span>))</span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>x</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  [1]  -9.5058152  -6.2654267 -10.3425144  -0.6188768  -5.6819689 -10.2818735
+  [7]  -5.0502838  -4.0467012  -4.6968746  -8.2215535  -0.9528753  -5.4406271
+ [13]  -9.4849623 -15.8587995  -2.5002763  -7.1797344  -7.0647611  -3.2246552
+ [19]  -3.7151152  -4.6243947  -3.3240905  -3.8714548  -6.7017401 -14.9574068
+ [25]  -4.5206970  -7.2245150  -7.6231820 -12.8830095  -8.9126002  -5.3282338
+ [31]  -1.5652818  -7.4111509  -5.4493136  -7.2152202 -12.5082382  -8.6599783
+ [37]  -8.5771598  -7.2372536  -2.5998985  -3.9472970  -7.6580944  -8.0134467
+ [43]  -4.2121465  -4.7733472  -9.7550228  -9.8299806  -5.5416722  -3.9258683
+ [49]  -7.4493848  -3.4755691  -5.4075765  -9.4481056  -5.6355212 -11.5174524
+ [55]  -1.2679052   0.9215996  -8.4688859 -11.1765385  -4.7211215  -7.5402184
+ [61]   2.6064710  -7.1569600  -4.2410426  -6.8879914  -9.9730928  -6.2448308
+ [67] -14.2198345  -1.1377806  -6.3869866   1.6904467  -5.0979619  -9.8397857
+ [73]  -4.5570946 -10.7363905 -12.0145336  -5.8342151  -8.7731675  -6.9955786
+ [79]  -6.7026347  -9.3580838  -9.2746749  -7.5407145  -2.2876520 -13.0942672
+ [85]  -4.6242152  -5.6681985  -2.7476007  -8.2167357  -5.5199248  -5.9316048
+ [91]  -9.1700801  -2.1685288  -2.3583895  -4.1991454  -0.6526662  -4.7660543
+ [97] -12.1063688  -9.2930617 -11.8984505  -8.8936025</code></pre>
+</div>
+<div class="codeblock-with-label r">
+<style>.codeblock-with-label pre.lang-label-16::before { content: "R"; }</style>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r lang-label-16 code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(x)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Lesson07_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid figure-img" style="width:70.0%" alt="Histogram of normal distribution"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" id="fig-histoofnormaldistr-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Fig&nbsp;7.2
+</figcaption>
+</figure>
+</div>
+<p>To find the MLE, we first write a function to evaluate the negative log likelihood:</p>
+<div class="cell language-name-processed">
+<div class="codeblock-with-label r">
+<style>.codeblock-with-label pre.lang-label-7::before { content: "R"; }</style>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18" data-language-name-skip="true"><pre class="sourceCode r lang-label-7 code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>nll.norm<span class="ot">=</span><span class="cf">function</span>(theta,x){</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>  mn<span class="ot">=</span>theta[<span class="dv">1</span>]</span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>  vr<span class="ot">=</span>theta[<span class="dv">2</span>]</span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>  <span class="sc">-</span><span class="fu">sum</span>(<span class="fu">log</span>(<span class="fu">dnorm</span>(x,<span class="at">mean=</span>mn,<span class="at">sd=</span><span class="fu">sqrt</span>(vr))))</span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</div>
+<p>Then run <code>optim</code> to find the MLE. We include the <code>hessian=TRUE</code> option, to tell <code>optim</code> to approximate the Fisher Information Matrix.</p>
+<div class="cell language-name-processed">
+<div class="codeblock-with-label r">
+<style>.codeblock-with-label pre.lang-label-8::before { content: "R"; }</style>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19" data-language-name-skip="true"><pre class="sourceCode r lang-label-8 code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>out<span class="ot">=</span><span class="fu">optim</span>(<span class="fu">c</span>(<span class="sc">-</span><span class="dv">11</span>,<span class="dv">1</span>),nll.norm,<span class="at">x=</span>x,<span class="at">hessian=</span><span class="cn">TRUE</span>)</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>out</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>$par
+[1] -6.564774 12.773473
+
+$value
+[1] 269.2845
+
+$counts
+function gradient 
+      61       NA 
+
+$convergence
+[1] 0
+
+$message
+NULL
+
+$hessian
+             [,1]         [,2]
+[1,] 7.8287246339 0.0001983622
+[2,] 0.0001983622 0.3067152221</code></pre>
+</div>
+</div>
+<p>The MLEs of <span class="math inline">\(\boldsymbol\theta=(\mu,\sigma^2)\)</span> are:</p>
+<div class="cell language-name-processed">
+<div class="codeblock-with-label r">
+<style>.codeblock-with-label pre.lang-label-9::before { content: "R"; }</style>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21" data-language-name-skip="true"><pre class="sourceCode r lang-label-9 code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>theta.hat<span class="ot">=</span>out<span class="sc">$</span>par</span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>theta.hat</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] -6.564774 12.773473</code></pre>
+</div>
+</div>
+<p>so the MLE of <span class="math inline">\(\mu\)</span> is 5.469399 and the MLE of <span class="math inline">\(\sigma^2\)</span> is 38.620385.</p>
+<p>To find confidence intervals for each of these parameters, we need to find the matrix inverse of the Fisher Information <span class="math inline">\(\mathbf{I}\)</span>, and then get the square root of its diagonal elements. As these values are often called the “standard errors”, we will denote them as <code>se</code> in the R code:</p>
+<div class="cell language-name-processed">
+<div class="codeblock-with-label r">
+<style>.codeblock-with-label pre.lang-label-10::before { content: "R"; }</style>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23" data-language-name-skip="true"><pre class="sourceCode r lang-label-10 code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="do">## standard errors = sqrt(1/I.inv[p,p])</span></span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>I<span class="ot">=</span>out<span class="sc">$</span>hessian</span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>se<span class="ot">=</span><span class="fu">sqrt</span>(<span class="fu">diag</span>(<span class="fu">solve</span>(I)))</span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>se</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.357400 1.805645</code></pre>
+</div>
+</div>
+<p>This gives us a vector, where the <span class="math inline">\(k\)</span>-th entry is <span class="math inline">\(\sqrt{\mathbf{I}^{-1}(\hat{\theta}_{ML})[k,k]}\)</span>. The standard error associated with <span class="math inline">\(\mu\)</span> is the first of these (<span class="math inline">\(se[1]\)</span>) and the standard error associated with <span class="math inline">\(\sigma^2\)</span> is the second of these. The order is the same as the order of the parameter estimates in <code>out\$par</code>. We can thus construct 95% CIs for <span class="math inline">\(\mu\)</span></p>
+<div class="cell language-name-processed">
+<div class="codeblock-with-label r">
+<style>.codeblock-with-label pre.lang-label-11::before { content: "R"; }</style>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb25" data-language-name-skip="true"><pre class="sourceCode r lang-label-11 code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="do">## CI for mu</span></span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>(theta.hat[<span class="dv">1</span>]<span class="sc">-</span><span class="fl">1.96</span><span class="sc">*</span>se[<span class="dv">1</span>] , theta.hat[<span class="dv">1</span>]<span class="sc">+</span><span class="fl">1.96</span><span class="sc">*</span>se[<span class="dv">1</span>])</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] -7.265278 -5.864270</code></pre>
+</div>
+</div>
+<p>and for <span class="math inline">\(\sigma^2\)</span>:</p>
+<div class="cell language-name-processed">
+<div class="codeblock-with-label r">
+<style>.codeblock-with-label pre.lang-label-12::before { content: "R"; }</style>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb27" data-language-name-skip="true"><pre class="sourceCode r lang-label-12 code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="do">## CI for sigma^2</span></span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>(theta.hat[<span class="dv">2</span>]<span class="sc">-</span><span class="fl">1.96</span><span class="sc">*</span>se[<span class="dv">2</span>] , theta.hat[<span class="dv">2</span>]<span class="sc">+</span><span class="fl">1.96</span><span class="sc">*</span>se[<span class="dv">2</span>])</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1]  9.234409 16.312537</code></pre>
+</div>
+</div>
+<p>and also <strong>asymptotically normal</strong>:</p>
+<p><span class="math display">\[
+\sqrt{n}(\hat{\theta}_{\text{MLE}} - \theta) \xrightarrow{d} \mathcal{N}\left(0, \frac{1}{I(\theta)}\right)
+\]</span></p>
+<p>Here, <span class="math inline">\(I(\theta)\)</span> is the <strong>Fisher Information</strong>, which quantifies how much information the data gives us about the parameter. It is defined as:</p>
+<p><span class="math display">\[
+I(\theta) = \mathbb{E} \left[ \left( \frac{\partial}{\partial \theta} \log f(X \mid \theta) \right)^2 \right]
+\]</span></p>
+<p>This result is powerful because it allows us to use normal-based methods, like confidence intervals and hypothesis tests, even in complex models. The takeaway: MLEs are not only useful but also come with strong theoretical guarantees as sample size grows.</p>
+</section>
+</section>
+<section id="summary" class="level2" data-number="7.4">
+<h2 data-number="7.4" class="anchored" data-anchor-id="summary"><span class="header-section-number">7.4</span> Summary</h2>
+<p>In this lesson we gained practical skills to analyze data using maximum likelihood estimation (MLE) and construct reliable confidence intervals. We can now calculate MLEs for parameters in distributions like Bernoulli, exponential, and normal, and use the Fisher Information to quantify uncertainty and build asymptotic confidence intervals. With R’s <code>optim</code> function, we can numerically estimate MLEs and intervals for complex models, such as geometric or normal distributions, even when analytical solutions are elusive.</p>
+<p>We also learned to apply parametric and nonparametric bootstrap methods to generate confidence intervals from data, as demonstrated with t-distributed and Pareto datasets, enabling robust inference without strict distributional assumptions.</p>
+<p>Looking ahead, the bootstrap confidence interval techniques we’ve mastered will be invaluable for tackling real-world datasets with non-standard distributions or small sample sizes, empowering you to make data-driven decisions in future statistical analyses.</p>
+
+
+</section>
+
+</main> <!-- /main -->
+<!--<script>
+
+document.addEventListener('DOMContentLoaded', function () {
+
+    const toc = document.getElementById('TOC');
+
+    const navbarCollapse = document.getElementById('navbarCollapse');
+
+    const menuButton = document.querySelector('.navbar-toggler');
+
+
+
+    // Function to move TOC to navbar on small screens
+
+    function handleTOCDisplay() {
+
+        if (window.innerWidth < 768) {
+
+            if (!navbarCollapse.contains(toc)) {
+
+                navbarCollapse.appendChild(toc); // Move TOC into the navbar
+
+            }
+
+        } else {
+
+            if (toc.parentNode !== document.getElementById('quarto-margin-sidebar')) {
+
+                document.getElementById('quarto-margin-sidebar').appendChild(toc); // Move TOC back to original location
+
+            }
+
+        }
+
+    }
+
+
+
+    // Initial check on page load
+
+    handleTOCDisplay();
+
+
+
+    // Check when resizing the window
+
+    window.addEventListener('resize', handleTOCDisplay);
+
+
+
+    // Toggle TOC visibility when navbar is expanded on small screens
+
+    menuButton.addEventListener('click', function() {
+
+        if (window.innerWidth < 768) {
+
+            toc.classList.toggle('toc-active'); // Toggle visibility of the TOC in the navbar
+
+        }
+
+    });
+
+});
+
+</script>-->
+
+
+
+<script>
+
+document.addEventListener('DOMContentLoaded', function () {
+
+    const toc = document.getElementById('TOC'); // TOC element
+
+    const activeLesson = document.querySelector('.sidebar-item .sidebar-link.active'); // Active lesson link
+
+    const originalTocParent = toc.parentElement; // Store original TOC location
+
+
+
+    // Create a container for the TOC in the sidebar
+
+    const nestedTocContainer = document.createElement('ul');
+
+    nestedTocContainer.className = 'sidebar-toc-nested list-unstyled';
+
+
+
+    // Function to move the TOC into the sidebar
+
+    function moveTocToSidebar() {
+
+        if (!toc || !activeLesson) return;
+
+        while (toc.firstChild) {
+
+            nestedTocContainer.appendChild(toc.firstChild);
+
+        }
+
+        const parentItem = activeLesson.closest('.sidebar-item');
+
+        parentItem.appendChild(nestedTocContainer);
+
+        toc.style.display = 'none'; // Hide the original TOC container
+
+    }
+
+
+
+    // Function to restore the TOC to its original location
+
+    function restoreTocToOriginalLocation() {
+
+        if (nestedTocContainer.parentNode) {
+
+            while (nestedTocContainer.firstChild) {
+
+                toc.appendChild(nestedTocContainer.firstChild);
+
+            }
+
+            nestedTocContainer.remove(); // Remove the container
+
+            toc.style.display = ''; // Show the original TOC container
+
+        }
+
+    }
+
+
+
+    // Function to handle screen width changes
+
+    function handleScreenResize() {
+
+        if (window.innerWidth < 768) {
+
+            moveTocToSidebar();
+
+        } else {
+
+            restoreTocToOriginalLocation();
+
+        }
+
+    }
+
+
+
+    // Initial check and event listener for resize
+
+    handleScreenResize();
+
+    window.addEventListener('resize', handleScreenResize);
+
+});
+
+
+
+</script>
+<!---function to make the first column th instead of td when using markdown tables..just add .row-header as your class below the table!---->
+
+<script>
+
+    window.addEventListener('DOMContentLoaded', () => {
+
+        // Select only tables with the 'row-header' class
+
+        const tables = document.querySelectorAll('table.row-header');
+
+        
+
+        tables.forEach(table => {
+
+            const rows = table.querySelectorAll('tr');
+
+            
+
+            rows.forEach(row => {
+
+                const firstCell = row.cells[0];
+
+                if (firstCell && firstCell.tagName === 'TD') {
+
+                    const th = document.createElement('th');
+
+                    th.innerHTML = firstCell.innerHTML;
+
+                    th.setAttribute('scope', 'row'); // Add scope="row" to the th element
+
+                    row.replaceChild(th, firstCell);
+
+                }
+
+            });
+
+        });
+
+    });
+
+</script>
+<script>
+
+  document.addEventListener("DOMContentLoaded", function () {
+
+    const elements = document.querySelectorAll('div[id^="exm-"]');
+
+
+
+    elements.forEach((element) => {
+
+      const theoremTitle = element.querySelector('.theorem-title');
+
+      // Use the Quarto-generated id (e.g. "exm-muscleexample") directly
+
+      const anchorId = element.id;
+
+
+
+      if (theoremTitle && anchorId) {
+
+        const anchor = document.createElement('a');
+
+        anchor.href = `#${anchorId}`;
+
+        anchor.className = 'anchor';
+
+        anchor.setAttribute('aria-label', `Link to ${theoremTitle.textContent.trim()}`);
+
+        anchor.innerHTML = '<i class="bi bi-link-45deg" aria-hidden="true"></i>';
+
+        theoremTitle.appendChild(anchor);
+
+        // No need to reassign element.id — it's already correct
+
+      }
+
+    });
+
+  });
+
+</script>
+<style>
+
+  #mas-popup,
+
+  #mas-popup * {
+
+    box-sizing: border-box;
+
+  }
+
+
+
+  #mas-popup {
+
+    --mas-navy: #001e44;
+
+    --mas-blue: #1e407c;
+
+    --mas-sky: #96bee6;
+
+
+
+    position: fixed;
+
+    right: max(1.25rem, env(safe-area-inset-right));
+
+    bottom: max(1.25rem, env(safe-area-inset-bottom));
+
+    z-index: 1055;
+
+
+
+    width: min(25rem, calc(100vw - 2rem));
+
+    padding: 1.45rem 1.5rem 1.5rem 1.8rem;
+
+    overflow: hidden;
+
+
+
+    border: 1px solid rgba(0, 30, 68, 0.14);
+
+    border-radius: 0.75rem;
+
+    background: #ffffff;
+
+    color: #16243a;
+
+
+
+    box-shadow:
+
+      0 1.25rem 3.5rem rgba(0, 30, 68, 0.2),
+
+      0 0.2rem 0.7rem rgba(0, 30, 68, 0.08);
+
+
+
+    font-family: Arial, Helvetica, sans-serif;
+
+    -webkit-font-smoothing: antialiased;
+
+
+
+    animation: mas-popup-in 320ms cubic-bezier(0.2, 0.8, 0.2, 1) both;
+
+  }
+
+
+
+  #mas-popup[hidden] {
+
+    display: none;
+
+  }
+
+
+
+  /* Blue accent along the left side */
+
+  #mas-popup::before {
+
+    position: absolute;
+
+    inset: 0 auto 0 0;
+
+    width: 0.35rem;
+
+    background: linear-gradient(
+
+      180deg,
+
+      var(--mas-sky),
+
+      var(--mas-blue)
+
+    );
+
+    content: "";
+
+  }
+
+
+
+  #mas-popup-kicker {
+
+    margin: 0 3rem 0.55rem 0;
+
+    color: var(--mas-blue);
+
+    font-size: 0.69rem;
+
+    font-weight: 700;
+
+    letter-spacing: 0.12em;
+
+    line-height: 1.3;
+
+    text-transform: uppercase;
+
+  }
+
+
+
+  #mas-popup h2#mas-popup-title {
+
+    margin: 1rem 2.5rem 0.65rem 0 !important; 
+
+    max-width: 19rem;
+
+    margin: 0 2.5rem 0.65rem 0 !important;
+
+    color: var(--mas-navy);
+
+    font-family: Georgia, "Times New Roman", serif;
+
+    font-size: 1.55rem;
+
+    font-weight: 600;
+
+    letter-spacing: -0.015em;
+
+    line-height: 1.18 !important;
+
+  }
+
+
+
+  #mas-popup-description {
+
+    max-width: 21rem;
+
+    margin: 0 0 1.15rem;
+
+    color: #46586e;
+
+    font-size: 0.95rem;
+
+    line-height: 1.55;
+
+  }
+
+
+
+  #mas-popup-cta {
+
+    display: inline-flex;
+
+    min-height: 2.75rem;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 0.65rem;
+
+
+
+    padding: 0.7rem 1rem;
+
+    border: 2px solid var(--mas-navy);
+
+    border-radius: 0.35rem;
+
+    background: var(--mas-navy);
+
+    color: #ffffff;
+
+
+
+    font-size: 0.88rem;
+
+    font-weight: 700;
+
+    text-decoration: none;
+
+
+
+    transition:
+
+      background-color 160ms ease,
+
+      border-color 160ms ease,
+
+      transform 160ms ease;
+
+  }
+
+
+
+  #mas-popup-cta:hover,
+
+  #mas-popup-cta:focus-visible {
+
+    border-color: var(--mas-blue);
+
+    background: var(--mas-blue);
+
+    color: #ffffff;
+
+    transform: translateY(-1px);
+
+  }
+
+
+
+  #mas-popup-cta-arrow {
+
+    font-size: 1.1rem;
+
+    transition: transform 160ms ease;
+
+  }
+
+
+
+  #mas-popup-cta:hover #mas-popup-cta-arrow,
+
+  #mas-popup-cta:focus-visible #mas-popup-cta-arrow {
+
+    transform: translateX(0.18rem);
+
+  }
+
+
+
+  #mas-popup-close {
+
+    position: absolute;
+
+    top: 0.65rem;
+
+    right: 0.65rem;
+
+
+
+    display: grid;
+
+    width: 2.75rem;
+
+    height: 2.75rem;
+
+    padding: 0;
+
+    place-items: center;
+
+
+
+    border: 0;
+
+    border-radius: 50%;
+
+    background: transparent;
+
+    color: #485b72;
+
+
+
+    font: inherit;
+
+    font-size: 1.55rem;
+
+    line-height: 1;
+
+
+
+    cursor: pointer;
+
+  }
+
+
+
+  #mas-popup-close:hover,
+
+  #mas-popup-close:focus-visible {
+
+    background: #edf2f7;
+
+    color: var(--mas-navy);
+
+  }
+
+
+
+  #mas-popup :focus-visible {
+
+    outline: 3px solid var(--mas-sky);
+
+    outline-offset: 3px;
+
+  }
+
+
+
+  @keyframes mas-popup-in {
+
+    from {
+
+      opacity: 0;
+
+      transform: translateY(1rem) scale(0.98);
+
+    }
+
+
+
+    to {
+
+      opacity: 1;
+
+      transform: translateY(0) scale(1);
+
+    }
+
+  }
+
+
+
+  @media (max-width: 520px) {
+
+    #mas-popup {
+
+      right: max(0.75rem, env(safe-area-inset-right));
+
+      bottom: max(0.75rem, env(safe-area-inset-bottom));
+
+      width: calc(100vw - 1.5rem);
+
+      padding: 1.25rem 1.25rem 1.3rem 1.55rem;
+
+    }
+
+
+
+    #mas-popup-title {
+
+      max-width: 17rem;
+
+      font-size: 1.4rem;
+
+    }
+
+
+
+    #mas-popup-cta {
+
+      width: 100%;
+
+    }
+
+  }
+
+
+
+  @media (prefers-reduced-motion: reduce) {
+
+    #mas-popup {
+
+      animation: none;
+
+    }
+
+
+
+    #mas-popup-cta,
+
+    #mas-popup-cta-arrow {
+
+      transition: none;
+
+    }
+
+  }
+
+</style>
+
+
+
+<aside id="mas-popup" role="region" aria-labelledby="mas-popup-title" aria-describedby="mas-popup-description" aria-live="polite" hidden="">
+
+  <button id="mas-popup-close" type="button" aria-label="Close this message">
+
+    <span aria-hidden="true">×</span>
+
+  </button>
+
+
+
+  <p id="mas-popup-kicker">
+
+    Online master’s program
+
+  </p>
+
+
+
+  <h2 id="mas-popup-title">
+
+    Take your statistics skills further
+
+  </h2>
+
+
+
+  <p id="mas-popup-description">
+
+    Explore Penn State’s online Master of Applied Statistics program.
+
+  </p>
+
+
+
+  <a id="mas-popup-cta" href="https://science.psu.edu/stat/graduate-programs/master-of-applied-statistics">
+
+    Explore the program
+
+    <span id="mas-popup-cta-arrow" aria-hidden="true">→</span>
+
+  </a>
+
+</aside>
+
+
+
+<script>
+
+  (() => {
+
+    const storageKey = "stat501-mas-popup-dismissed-v2";
+
+
+
+    // Show the popup after 15 seconds.
+
+    const showDelay = 15000;
+
+
+
+    // After closing it, hide it for 30 days.
+
+    const dismissalDays = 30;
+
+
+
+    const popup = document.getElementById("mas-popup");
+
+    const closeButton = document.getElementById("mas-popup-close");
+
+    const cta = document.getElementById("mas-popup-cta");
+
+
+
+    if (!popup || !closeButton || !cta) return;
+
+
+
+    let dismissalActive = false;
+
+
+
+    try {
+
+      const dismissedUntil = Number(
+
+        localStorage.getItem(storageKey)
+
+      );
+
+
+
+      dismissalActive =
+
+        Number.isFinite(dismissedUntil) &&
+
+        Date.now() < dismissedUntil;
+
+    } catch (error) {
+
+      // The popup still works if browser storage is unavailable.
+
+    }
+
+
+
+    if (dismissalActive) return;
+
+
+
+    const rememberDismissal = () => {
+
+      try {
+
+        const millisecondsPerDay = 24 * 60 * 60 * 1000;
+
+        const dismissedUntil =
+
+          Date.now() + dismissalDays * millisecondsPerDay;
+
+
+
+        localStorage.setItem(
+
+          storageKey,
+
+          String(dismissedUntil)
+
+        );
+
+      } catch (error) {
+
+        // Closing still works if browser storage is unavailable.
+
+      }
+
+    };
+
+
+
+    const showTimer = window.setTimeout(() => {
+
+      popup.hidden = false;
+
+    }, showDelay);
+
+
+
+    const dismissPopup = () => {
+
+      window.clearTimeout(showTimer);
+
+      popup.hidden = true;
+
+      rememberDismissal();
+
+    };
+
+
+
+    closeButton.addEventListener("click", dismissPopup);
+
+
+
+    // Prevent the popup from appearing again after someone uses the CTA.
+
+    cta.addEventListener("click", rememberDismissal);
+
+
+
+    document.addEventListener("keydown", (event) => {
+
+      if (event.key === "Escape" && !popup.hidden) {
+
+        dismissPopup();
+
+      }
+
+    });
+
+  })();
+
+</script>
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    // Ensure there is a toggle, if there isn't float one in the top right
+    if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+      const a = window.document.createElement('a');
+      a.classList.add('top-right');
+      a.classList.add('quarto-color-scheme-toggle');
+      a.href = "";
+      a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+      const i = window.document.createElement("i");
+      i.classList.add('bi');
+      a.appendChild(i);
+      window.document.body.appendChild(a);
+    }
+    setColorSchemeToggle(hasAlternateSentinel())
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./Lesson06.html" class="pagination-link" aria-label="Confidence Intervals">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Confidence Intervals</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./Lesson08.html" class="pagination-link" aria-label="Asymptotic Distribution of MLE (Part II)">
+        <span class="nav-page-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Asymptotic Distribution of MLE (Part II)</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+<p>Except where otherwise noted, content on this site is licensed under a <a href="https://creativecommons.org/licenses/by-nc/4.0/">CC BY-NC 4.0</a> license.<br><br> <img src="assets/by-nc.svg" class="img-fluid" alt="BYNC"></p>
+</div>   
+    <div class="nav-footer-center">
+<p><a href="https://oer.psu.edu/">OPEN.ED@PSU</a></p>
+<div class="cookie-consent-footer"><a href="#" id="open_preferences_center">Cookie Preferences</a></div></div>
+    <div class="nav-footer-right">
+<a href="https://www.psu.edu/web-privacy-statement/">Privacy</a> | <a href="https://www.psu.edu/accessibilitystatement/">Accessibility</a> | <a href="https://www.psu.edu/copyright-information/">Copyright</a> <br> <a href="https://www.psu.edu/">The Pennsylvania State University</a> © <span id="copyright-year"></span> | <br> <a href="https://forms.office.com/r/GbC8H0pZhm">Leave Us Feedback</a>
+<script>
+document.getElementById("copyright-year").textContent = new Date().getFullYear();
+</script>
+</div>
+  </div>
+</footer>
+
+
+
+
+</body></html>

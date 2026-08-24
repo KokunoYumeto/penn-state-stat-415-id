@@ -1,0 +1,657 @@
+<!doctype html>
+<html lang="en-US">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>0: Review Concepts from STAT 414 – STAT 415 | Introduction to Mathematical Statistics</title>
+<meta name="source-url" content="https://online.stat.psu.edu/stat415/Lesson00">
+<meta name="translation-provenance" content="OpenAI Codex gpt-5.6-sol, Ultra">
+</head>
+<body>
+<main class="content" data-component-id="Lesson00" data-source-url="https://online.stat.psu.edu/stat415/Lesson00" id="quarto-document-content">
+<header class="quarto-title-block default" data-o006-id="O006-PSU-001-U0001" id="title-block-header"><nav aria-label="breadcrumb" class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" data-o006-id="O006-PSU-001-U0002"><ol class="breadcrumb" data-o006-id="O006-PSU-001-U0003"><li class="breadcrumb-item" data-o006-id="O006-PSU-001-U0004"><a data-o006-id="O006-PSU-001-U0005" href="./Lesson00.html">Lessons</a></li><li class="breadcrumb-item" data-o006-id="O006-PSU-001-U0006"><a data-o006-id="O006-PSU-001-U0007" href="./Lesson00.html">0: Review Concepts from STAT 414</a></li></ol></nav>
+<div class="quarto-title" data-o006-id="O006-PSU-001-U0008">
+<h1 class="title" data-o006-id="O006-PSU-001-U0009">0: Review Concepts from STAT 414</h1>
+<div class="quarto-categories" data-o006-id="O006-PSU-001-U0010">
+<div class="quarto-category" data-o006-id="O006-PSU-001-U0011">Distributions</div>
+<div class="quarto-category" data-o006-id="O006-PSU-001-U0012">Bayes'</div>
+<div class="quarto-category" data-o006-id="O006-PSU-001-U0013">Probability</div>
+<div class="quarto-category" data-o006-id="O006-PSU-001-U0014">Central Limit Theorem</div>
+</div>
+</div>
+<div class="quarto-title-meta" data-o006-id="O006-PSU-001-U0015">
+</div>
+</header>
+<section class="level2 unnumbered unlisted" data-o006-id="O006-PSU-001-U0016" id="overview">
+<h2 class="unnumbered unlisted anchored" data-anchor-id="overview" data-o006-id="O006-PSU-001-U0017">Overview</h2>
+<p data-o006-id="O006-PSU-001-U0018">Many of the concepts from STAT 414: Introduction to Probability Theory will carry over in this course. In this unit, some of the essential formulas and theorems are presented here for review.</p>
+<section class="level3 unnumbered unlisted objectiveblock" data-o006-id="O006-PSU-001-U0019" id="objectives">
+<h3 class="unnumbered unlisted anchored" data-anchor-id="objectives" data-o006-id="O006-PSU-001-U0020"><i class="bi bi-check2-circle"></i>Objectives</h3>
+<p data-o006-id="O006-PSU-001-U0021">Upon completion of this lesson, you should be able to recall and use your prior knowledge to:</p>
+<ol data-o006-id="O006-PSU-001-U0022" type="1">
+<li data-o006-id="O006-PSU-001-U0023">Define key terms and theorems related to probability.</li>
+<li data-o006-id="O006-PSU-001-U0024">Summarize the properties and applications of discrete random variables.</li>
+<li data-o006-id="O006-PSU-001-U0025">Distinguish between continuous random variables and discrete random variables, providing examples and explaining their differences.</li>
+<li data-o006-id="O006-PSU-001-U0026">Explain the formulas and definitions of jointly distributed random variables and apply them to solve problems involving joint probability distributions.</li>
+<li data-o006-id="O006-PSU-001-U0027">Describe the concept of statistical inference and its role in making conclusions about populations based on sample data.</li>
+</ol>
+</section>
+</section>
+<section class="level2" data-o006-id="O006-PSU-001-U0028" id="probability">
+<h2 class="anchored" data-anchor-id="probability" data-o006-id="O006-PSU-001-U0029">0.1: Probability</h2>
+<p data-o006-id="O006-PSU-001-U0030">In this section, we review some of the important definitions and theorems for probability. It would be helpful to refresh your memory on these concepts and do some practice.</p>
+<div class="ms-3 theorem definition" data-o006-id="O006-PSU-001-U0031" id="def-event">
+<p data-o006-id="O006-PSU-001-U0032"><span class="theorem-title"><strong>Def. 1 (Event)</strong></span> Let the outcome space (or sample space) be denoted as <span class="math inline">\(\mathbf{S}\)</span>. An <strong>event</strong> is subset of the sample space, Events are often denotes with capital letters, <span class="math inline">\(A,B, C, \ldots\)</span>. Therefore, if <span class="math inline">\(A\)</span> is an event in <span class="math inline">\(\mathbf{S}\)</span>, then <span class="math inline">\(A\subset \mathbf{S}\)</span>.</p>
+</div>
+<div class="ms-3 theorem definition" data-o006-id="O006-PSU-001-U0033" id="def-probabilty">
+<p data-o006-id="O006-PSU-001-U0034"><span class="theorem-title"><strong>Def. 2 (Probability)</strong></span> Probability is a logical framework for quantifying uncertainty or randomness in a princled way. It is primarily use to explain the uncertainty or randomness in obtaining the current data.</p>
+</div>
+<div class="ms-3 theorem definition" data-o006-id="O006-PSU-001-U0035" id="def-mututallyexclusive">
+<p data-o006-id="O006-PSU-001-U0036"><span class="theorem-title"><strong>Def. 3 (Mutually Exclusive Events)</strong></span> Events <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span> are called <strong>mutually exclusive</strong> (or <strong>disjoint</strong>) events if <span class="math inline">\(A\cap B=\emptyset\)</span>.</p>
+</div>
+<div class="ms-3 theorem definition" data-o006-id="O006-PSU-001-U0037" id="def-conditionprob">
+<p data-o006-id="O006-PSU-001-U0038"><span class="theorem-title"><strong>Def. 4 (Conditional Probability)</strong></span> The conditional probability of an event <span class="math inline">\(A\)</span> given that an event <span class="math inline">\(B\)</span> has occurred is: <span class="math display">\[\begin{aligned}
+P(A|B)=\frac{P(A\cap B)}{P(B)}
+\end{aligned}\]</span> as long as <span class="math inline">\(P(B)&gt;0\)</span>.</p>
+</div>
+<div class="ms-3 theorem definition" data-o006-id="O006-PSU-001-U0039" id="def-independent">
+<p data-o006-id="O006-PSU-001-U0040"><span class="theorem-title"><strong>Def. 5 (Independent Events)</strong></span> Events <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span> are <strong>independent events</strong> if the occurrence of one of them does not affect the probability of the occurrence of the other. That is, two events are independent if either <span class="math display">\[\begin{aligned}
+                    P(B|A)=P(B)
+\end{aligned}\]</span> provided that <span class="math inline">\(P(A)&gt;0\)</span>. Events <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span> are independent events if and only if <span class="math display">\[\begin{aligned}
+P(A\cap B)=P(A)P(B)
+\end{aligned}\]</span> Otherwise, <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span> are called <strong>dependent events</strong>.</p>
+</div>
+<div class="callout callout-style-simple callout-note no-icon" data-o006-id="O006-PSU-001-U0041">
+<div class="callout-body d-flex" data-o006-id="O006-PSU-001-U0042">
+<div class="callout-icon-container" data-o006-id="O006-PSU-001-U0043">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-body-container" data-o006-id="O006-PSU-001-U0044">
+<div class="theorem" data-o006-id="O006-PSU-001-U0045" id="thm-Bayes">
+<p data-o006-id="O006-PSU-001-U0046"><span class="theorem-title"><strong>Theorem 1 (Bayes’ Theorem)</strong></span> Let the <span class="math inline">\(m\)</span> events <span class="math inline">\(B_1, B_2, \ldots, B_m\)</span> constitute a partition of the sample space <span class="math inline">\(S\)</span>. That is, the <span class="math inline">\(B_i\)</span> are mutually exclusive: <span class="math display">\[\begin{aligned}
+B_i\cap B_j=\emptyset \text{ for }i\ne j
+\end{aligned}\]</span> and exhaustive: <span class="math display">\[\begin{aligned}
+S=B_1\cup B_2\cup B_2\cup \ldots \cup B_m
+\end{aligned}\]</span> Also, suppose the prior probability of the vent <span class="math inline">\(B_i\)</span> is positive, that is <span class="math inline">\(P(B_i)&gt;0\)</span> for <span class="math inline">\(i=1, \ldots,m\)</span>. Now if <span class="math inline">\(A\)</span> is an event, then <span class="math inline">\(A\)</span> can be written as the union of <span class="math inline">\(m\)</span> mutually exclusive events, namely: <span class="math display">\[\begin{aligned}
+A=(A\cap B_1)\cup (A\cap B_2)\cup \ldots \cup (A\cap B_m)
+\end{aligned}\]</span> Therefore, <span class="math display">\[\begin{aligned}
+P(A) &amp; = P(A\cap B_1)+P(A\cap B_2)+\ldots+P(A\cap B_m)\\
+&amp; = \sum_{i=1}^m P(A\cap B_i)=\sum_{i=1}^m P(B_i)P(A|B_i)
+\end{aligned}\]</span> And so, as long as <span class="math inline">\(P(A)&gt;0\)</span>, the posterior probability of event <span class="math inline">\(B_k\)</span> given event <span class="math inline">\(A\)</span> has occurred is: <span class="math display">\[\begin{aligned}
+P(B_k|A)=\frac{P(B_k)P(A|B_k)}{\sum_{i=1}^m P(B_i)P(A|B_i)}
+\end{aligned}\]</span></p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section class="level2" data-o006-id="O006-PSU-001-U0047" id="distributions">
+<h2 class="anchored" data-anchor-id="distributions" data-o006-id="O006-PSU-001-U0048">0.2: Distributions</h2>
+<p data-o006-id="O006-PSU-001-U0049">We will use distributions heavily in this course. It is important to review the definitions and expectations of random variables. We start with a brief review of discrete distributions and then onto continuous distributions.</p>
+<section class="level3" data-o006-id="O006-PSU-001-U0050" id="discrete-distributions">
+<h3 class="anchored" data-anchor-id="discrete-distributions" data-o006-id="O006-PSU-001-U0051">Discrete Distributions</h3>
+<div class="ms-3 theorem definition" data-o006-id="O006-PSU-001-U0052" id="def-pmf">
+<p data-o006-id="O006-PSU-001-U0053"><span class="theorem-title"><strong>Def. 6 (Probability Mass Function)</strong></span> For a discrete random variable, <span class="math inline">\(X\)</span>, the <strong>probability mass function</strong> (pmf or PMF) is a function that satisfies the following properties:</p>
+<ul data-o006-id="O006-PSU-001-U0054">
+<li data-o006-id="O006-PSU-001-U0055"><p data-o006-id="O006-PSU-001-U0056"><span class="math inline">\(f(x)=P(X=x)&gt;0\)</span>, for all <span class="math inline">\(x\in\)</span> the support <span class="math inline">\(S\)</span></p></li>
+<li data-o006-id="O006-PSU-001-U0057"><p data-o006-id="O006-PSU-001-U0058"><span class="math inline">\(\sum_{x\in S}f(x)=1\)</span></p></li>
+<li data-o006-id="O006-PSU-001-U0059"><p data-o006-id="O006-PSU-001-U0060"><span class="math inline">\(P(X\in A)=\sum_{x\in A}f(x)\)</span>, given event <span class="math inline">\(A\)</span></p></li>
+</ul>
+<p data-o006-id="O006-PSU-001-U0061">It is important to note that the pmf is the probability that <span class="math inline">\(X\)</span> takes on a particular value, <span class="math inline">\(x\)</span>.</p>
+</div>
+<div class="ms-3 theorem definition" data-o006-id="O006-PSU-001-U0062" id="def-cdf">
+<p data-o006-id="O006-PSU-001-U0063"><span class="theorem-title"><strong>Def. 7 (Cumulative Distribution Function)</strong></span> For a discrete random variable, <span class="math inline">\(X\)</span>, the <strong>cumulative distribution function</strong> (cdf or CDF), denoted <span class="math inline">\(F(x)\)</span> is defined as: <span class="math display">\[\begin{aligned}
+        F(x)=P(X\le x)
+    \end{aligned}\]</span></p>
+<p data-o006-id="O006-PSU-001-U0064">The cdf of a random variable <span class="math inline">\(X\)</span> has the following properties:</p>
+<ul data-o006-id="O006-PSU-001-U0065">
+<li data-o006-id="O006-PSU-001-U0066"><p data-o006-id="O006-PSU-001-U0067"><span class="math inline">\(F_X(t)\)</span> is a non-decreasing function of <span class="math inline">\(t\)</span>, for <span class="math inline">\(-\infty&lt;t&lt;\infty\)</span>.</p></li>
+<li data-o006-id="O006-PSU-001-U0068"><p data-o006-id="O006-PSU-001-U0069"><span class="math inline">\(F_X(t)\)</span> ranges from 0 to 1.</p></li>
+<li data-o006-id="O006-PSU-001-U0070"><p data-o006-id="O006-PSU-001-U0071">If <span class="math inline">\(X\)</span> is a discrete random variable whose minimum is <span class="math inline">\(a\)</span>, then <span class="math display">\[\begin{aligned}
+            F_X(a)=P(X\le a)=P(X=a)=f_X(a)
+        \end{aligned}\]</span> If <span class="math inline">\(c\)</span> is less than <span class="math inline">\(a\)</span>, then <span class="math inline">\(F_X(c)=0\)</span>.</p></li>
+<li data-o006-id="O006-PSU-001-U0072"><p data-o006-id="O006-PSU-001-U0073">If the maximum value of <span class="math inline">\(X\)</span> is <span class="math inline">\(b\)</span>, then <span class="math inline">\(F_X(b)=1\)</span>.</p></li>
+<li data-o006-id="O006-PSU-001-U0074"><p data-o006-id="O006-PSU-001-U0075">Also called the <em>distribution function</em>.</p></li>
+<li data-o006-id="O006-PSU-001-U0076"><p data-o006-id="O006-PSU-001-U0077">All probabilities concerning <span class="math inline">\(X\)</span> can be stated in terms of <span class="math inline">\(F\)</span>.</p></li>
+</ul>
+</div>
+<p data-o006-id="O006-PSU-001-U0078">Below is a list some of the named discrete distributions from the previous course. It is important to be able to recall the probability mass functions, expected values, and variances for these discrete distributions.</p>
+<div class="border rounded border-lionshrine ms-4 p-2 mb-1" data-o006-id="O006-PSU-001-U0079">
+<p data-o006-id="O006-PSU-001-U0080"><span class="fs-4">Bernoulli</span>: (p) with <span class="math inline">\(0&lt;p&lt;1\)</span> <span class="math display">\[\begin{aligned}
+                &amp; f(x)=p^x(1-p)^{1-x}, \qquad x=0, 1\\
+                &amp; E(X)=p, \qquad \text{Var}(X)=p(1-p)
+            \end{aligned}\]</span></p>
+<div class="callout callout-style-simple callout-caution no-icon" data-o006-id="O006-PSU-001-U0081">
+<div class="callout-body d-flex" data-o006-id="O006-PSU-001-U0082">
+<div class="callout-icon-container" data-o006-id="O006-PSU-001-U0083">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-body-container" data-o006-id="O006-PSU-001-U0084">
+<p data-o006-id="O006-PSU-001-U0085"><strong>Note!</strong><br/>
+The Bernoullu distribution is a special case of the Binomial distribution with <span class="math inline">\(n=1\)</span>.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="border rounded border-lionshrine ms-4 p-2 mb-1" data-o006-id="O006-PSU-001-U0086">
+<p data-o006-id="O006-PSU-001-U0087"><span class="fs-4">Binomial</span>: (n, p) with <span class="math inline">\(0&lt;p&lt;1\)</span> <span class="math display">\[\begin{aligned}
+                &amp; f(x)={n\choose x}p^x(1-p)^{n-x}, \qquad x=0, 1, \ldots, n\\
+                &amp; E(X)=np, \qquad \text{Var}(X)=np(1-p)
+            \end{aligned}\]</span></p>
+</div>
+<div class="border rounded border-lionshrine ms-4 p-2 mb-1" data-o006-id="O006-PSU-001-U0088">
+<p data-o006-id="O006-PSU-001-U0089"><span class="fs-4">Geometric</span>: (p) with <span class="math inline">\(0&lt;p&lt;1\)</span> <span class="math display">\[\begin{aligned}
+                &amp; f(x)=p(1-p)^x, \qquad x=0, 1, 2, 3, \ldots\\
+                &amp; E(X)=\frac{1}{p}, \qquad \text{Var}(X)=\frac{1-p}{p^2}
+            \end{aligned}\]</span></p>
+</div>
+<div class="border rounded border-lionshrine ms-4 p-2 mb-1" data-o006-id="O006-PSU-001-U0090">
+<p data-o006-id="O006-PSU-001-U0091"><span class="fs-4">Negative Binomial</span>: (r, p) with <span class="math inline">\(0&lt;p&lt;1\)</span> and <span class="math inline">\(r=1, 2, \ldots\)</span> <span class="math display">\[\begin{aligned}
+                &amp; f(x)={{x-1}\choose {r-1}}p^r(1-p)^{x-r}, \qquad x=r, r+1. r+2, \ldots\\
+                &amp; E(X)=r\left(\frac{1}{p}\right), \qquad \text{Var}(X)=\frac{r(1-p)}{p^2}
+            \end{aligned}\]</span></p>
+<div class="callout callout-style-simple callout-caution no-icon" data-o006-id="O006-PSU-001-U0092">
+<div class="callout-body d-flex" data-o006-id="O006-PSU-001-U0093">
+<div class="callout-icon-container" data-o006-id="O006-PSU-001-U0094">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-body-container" data-o006-id="O006-PSU-001-U0095">
+<p data-o006-id="O006-PSU-001-U0096"><strong>Note!</strong><br/>
+The Geometric distribution is a special case of the Negative Binomial distribution with <span class="math inline">\(r=1\)</span>.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="border rounded border-lionshrine ms-4 p-2 mb-1" data-o006-id="O006-PSU-001-U0097">
+<p data-o006-id="O006-PSU-001-U0098"><span class="fs-4">Hypergeometric</span>: (n, <span class="math inline">\(N_1\)</span>, <span class="math inline">\(N_2\)</span>) with <span class="math inline">\(N_1&gt;0\)</span>, <span class="math inline">\(N_2&gt;0\)</span>, <span class="math inline">\(N=N_1+N_2\)</span>, <span class="math inline">\(1\le n\le N_1+N_2\)</span> <span class="math display">\[\begin{aligned}
+                &amp; f(x)=\frac{{N_1\choose x} {N_2\choose{n-x}}}{{N\choose n}}, \qquad x\le n, \;\; x\le N_1, \;\; n-x\le N-2\\
+                &amp; E(X)=n\left(\frac{N_1}{N}\right), \qquad \text{Var}(X)=n\left(\frac{N_1}{N}\right)\left(\frac{N_2}{N}\right)\left(\frac{N-n}{N-1}\right)
+            \end{aligned}\]</span></p>
+</div>
+<div class="border rounded border-lionshrine ms-4 p-2 mb-1" data-o006-id="O006-PSU-001-U0099">
+<p data-o006-id="O006-PSU-001-U0100"><span class="fs-4">Poisson</span>: (<span class="math inline">\(\lambda\)</span>) with <span class="math inline">\(\lambda&gt;0\)</span> <span class="math display">\[\begin{aligned}
+                &amp; f(x)=\frac{e^{-\lambda}\lambda^x}{x!}, \qquad x=0, 1, 2, 3, \ldots\\
+                &amp; E(X)=\lambda, \qquad \text{Var}(X)=\lambda
+            \end{aligned}\]</span></p>
+</div>
+</section>
+<section class="level3" data-o006-id="O006-PSU-001-U0101" id="continuous-distributions">
+<h3 class="anchored" data-anchor-id="continuous-distributions" data-o006-id="O006-PSU-001-U0102">Continuous Distributions</h3>
+<p data-o006-id="O006-PSU-001-U0103">In this section, we present some of the named distributions for continuous random variables.</p>
+<div class="ms-3 theorem definition" data-o006-id="O006-PSU-001-U0104" id="def-pdf">
+<p data-o006-id="O006-PSU-001-U0105"><span class="theorem-title"><strong>Def. 8 (Probability Density Function)</strong></span> For a continuous random variable, <span class="math inline">\(X\)</span>, the <strong>probability density function</strong> (pdf or PDF) is a function that satisfies the following properties:</p>
+<ul data-o006-id="O006-PSU-001-U0106">
+<li data-o006-id="O006-PSU-001-U0107"><p data-o006-id="O006-PSU-001-U0108"><span class="math inline">\(f(x)&gt;0\)</span>, for all <span class="math inline">\(x\in\)</span> the support <span class="math inline">\(S\)</span></p></li>
+<li data-o006-id="O006-PSU-001-U0109"><p data-o006-id="O006-PSU-001-U0110">The area under the curve <span class="math inline">\(f(x)\)</span> in the support is equal to 1. That is: <span class="math display">\[\begin{aligned}
+            \int_{x\in S}f(x)=1
+         \end{aligned}\]</span></p></li>
+<li data-o006-id="O006-PSU-001-U0111"><p data-o006-id="O006-PSU-001-U0112">If <span class="math inline">\(A\)</span> is an interval, then the probability that <span class="math inline">\(x\)</span> belongs to <span class="math inline">\(A\)</span> is: <span class="math display">\[\begin{aligned}
+            P(X\in A)=\int_{A}f(x)dx
+         \end{aligned}\]</span></p></li>
+</ul>
+</div>
+<p data-o006-id="O006-PSU-001-U0113">It is important to note that unlike the probability mass function (pmf) of a discrete random variable, <span class="math inline">\(f(x)\ne P(X=x)\)</span> for a continuous random variable, <span class="math inline">\(X\)</span>, In fact, <span class="math inline">\(P(X=x)=0\)</span> if <span class="math inline">\(X\)</span> is a continuous random variable.</p>
+<p data-o006-id="O006-PSU-001-U0114">Next, we will review the named continuous distributions. Again, it is import to recognize the probability density functions, expected values, and variances the these continuous distributions.</p>
+<div class="border rounded border-lionshrine ms-4 p-2 mb-1" data-o006-id="O006-PSU-001-U0115">
+<p data-o006-id="O006-PSU-001-U0116"><span class="fs-4">Beta</span>: (<span class="math inline">\(\alpha, \beta\)</span>), with <span class="math inline">\(\alpha&gt;0\)</span> and <span class="math inline">\(\beta&gt;0\)</span> <span class="math display">\[\begin{aligned}
+                &amp;f(x)=\frac{\Gamma(\alpha+\beta)}{\Gamma(\alpha)\Gamma(\beta)}x^{\alpha-1}(1-x)^{\beta-1}, \qquad 0&lt;x&lt;1\\
+                &amp; E(X)=\frac{\alpha}{\alpha+\beta}, \qquad \text{Var}(X)=\frac{\alpha\beta}{(\alpha+\beta+1)(\alpha+\beta)^2}
+            \end{aligned}\]</span></p>
+</div>
+<div class="border rounded border-lionshrine ms-4 p-2 mb-1" data-o006-id="O006-PSU-001-U0117">
+<p data-o006-id="O006-PSU-001-U0118"><span class="fs-4">Exponential</span>: (<span class="math inline">\(\theta\)</span>), with <span class="math inline">\(\theta&gt;0\)</span> <span class="math display">\[\begin{aligned}
+                &amp;f(x)=\frac{1}{\theta}e^{-x/\theta}, \qquad 0&lt;x\\
+                &amp; E(X)=\theta, \qquad \text{Var}(X)=\theta^2
+    \end{aligned}\]</span></p>
+<div class="callout callout-style-simple callout-caution no-icon" data-o006-id="O006-PSU-001-U0119">
+<div class="callout-body d-flex" data-o006-id="O006-PSU-001-U0120">
+<div class="callout-icon-container" data-o006-id="O006-PSU-001-U0121">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-body-container" data-o006-id="O006-PSU-001-U0122">
+<p data-o006-id="O006-PSU-001-U0123"><strong>Note!</strong><br/>
+The exponential distribution is a special case of the Gamma distribution with <span class="math inline">\(\alpha=1\)</span>.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="border rounded border-lionshrine ms-4 p-2 mb-1" data-o006-id="O006-PSU-001-U0124">
+<p data-o006-id="O006-PSU-001-U0125"><span class="fs-4">Chi-square</span>: <span class="math inline">\(\chi^2\)</span>(r), with <span class="math inline">\(r&gt;0\)</span> <span class="math display">\[\begin{aligned}
+                &amp;f(x)=\frac{1}{\Gamma(r/2)2^{r/2}}x^{r/2-1}e^{-x/2}, \qquad 0&lt;x\\
+                &amp; E(X)=r, \qquad \text{Var}(X)=2r
+       \end{aligned}\]</span></p>
+<div class="callout callout-style-simple callout-caution no-icon" data-o006-id="O006-PSU-001-U0126">
+<div class="callout-body d-flex" data-o006-id="O006-PSU-001-U0127">
+<div class="callout-icon-container" data-o006-id="O006-PSU-001-U0128">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-body-container" data-o006-id="O006-PSU-001-U0129">
+<p data-o006-id="O006-PSU-001-U0130"><strong>Note!</strong> The chi-square distribution is a special case of the Gamma distribution with <span class="math inline">\(\alpha=r/2\)</span> and <span class="math inline">\(\theta=2\)</span>.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="border rounded border-lionshrine ms-4 p-2 mb-1" data-o006-id="O006-PSU-001-U0131">
+<p data-o006-id="O006-PSU-001-U0132"><span class="fs-4">Gamma</span>: (<span class="math inline">\(\alpha\)</span>, <span class="math inline">\(\theta\)</span>) with <span class="math inline">\(\alpha&gt;0\)</span> and <span class="math inline">\(\theta&gt;0\)</span> <span class="math display">\[\begin{aligned}
+                &amp; f(x)=\frac{1}{\Gamma(\alpha)\theta^\alpha} x^{\alpha-1}e^{-x/\theta}, \qquad x&gt;0\\
+                &amp; E(X)=\alpha \theta, \qquad \text{Var}(X)=\alpha\theta^2
+       \end{aligned}\]</span></p>
+</div>
+<div class="border rounded border-lionshrine ms-4 p-2 mb-1" data-o006-id="O006-PSU-001-U0133">
+<p data-o006-id="O006-PSU-001-U0134"><span class="fs-4">Normal</span>: (<span class="math inline">\(\mu\)</span>, <span class="math inline">\(\sigma^2\)</span>) with <span class="math inline">\(\sigma&gt;0\)</span> <span class="math display">\[\begin{aligned}
+                &amp; f(x)=\frac{1}{\sqrt{2\pi\sigma^2}}e^{-\frac{1}{2\sigma^2}(x-\mu)^2}, \qquad -\infty&lt;x&lt;\infty\\
+                &amp; E(X)=\mu, \qquad \text{Var}(X)=\sigma^2
+    \end{aligned}\]</span></p>
+</div>
+<div class="border rounded border-lionshrine ms-4 p-2 mb-1" data-o006-id="O006-PSU-001-U0135">
+<p data-o006-id="O006-PSU-001-U0136"><span class="fs-4">Uniform</span>: (<span class="math inline">\(a\)</span>, <span class="math inline">\(b\)</span>) <span class="math display">\[\begin{aligned}
+                &amp; f(x)=\frac{1}{b-a}, \qquad a&lt;x&lt;b\\
+                &amp; E(X)=\frac{a+b}{2}, \qquad \text{Var}(X)=\frac{(b-a)^2}{12}
+       \end{aligned}\]</span></p>
+</div>
+</section>
+</section>
+<section class="level2" data-o006-id="O006-PSU-001-U0137" id="mathematical-expectations">
+<h2 class="anchored" data-anchor-id="mathematical-expectations" data-o006-id="O006-PSU-001-U0138">0.3: Mathematical Expectations</h2>
+<p data-o006-id="O006-PSU-001-U0139">You should be able to find the expected value and variance of a given random variable, as well as expected values of functions of random variables. Expectations will become particularly important when we learn about properties of estimators in the next few lessons.</p>
+<div class="ms-3 theorem definition" data-o006-id="O006-PSU-001-U0140" id="def-expectdiscreterv">
+<p data-o006-id="O006-PSU-001-U0141"><span class="theorem-title"><strong>Def. 9 (Mathematical Expectation for discrete random variable)</strong></span> If <span class="math inline">\(f(x)\)</span> is the probability mass function (pmf) of the discrete random variable <span class="math inline">\(X\)</span> with support <span class="math inline">\(S\)</span>, and if the summation <span class="math display">\[\begin{aligned}
+\sum_{x\in S} u(x)f(x)
+\end{aligned}\]</span> exists (that is, it is less than <span class="math inline">\(\infty\)</span>), then the resulting sum is called the mathematical expectation or the expected value of the function <span class="math inline">\(u(X)\)</span>. The expectation is denoted <span class="math display">\[\begin{aligned}
+E[u(X)]=\sum_{x\in S}u(x)f(x)
+\end{aligned}\]</span></p>
+</div>
+<div class="ms-3 theorem definition" data-o006-id="O006-PSU-001-U0142" id="def-expectcontinuousrv">
+<p data-o006-id="O006-PSU-001-U0143"><span class="theorem-title"><strong>Def. 10 (Mathematical Expectation for a continuous random variable)</strong></span> For a continuous random variable, <span class="math inline">\(X\)</span>, with probability distribution function (pdf), <span class="math inline">\(f(x)\)</span>, the expected value of a function of <span class="math inline">\(X\)</span>, <span class="math inline">\(u(X)\)</span> is <span class="math display">\[\begin{aligned}
+        E(u(X))=\int_{-\infty}^\infty u(x)f(x)\;dx
+    \end{aligned}\]</span></p>
+</div>
+<p data-o006-id="O006-PSU-001-U0144">Special mathematical expectations:</p>
+<ul data-o006-id="O006-PSU-001-U0145">
+<li data-o006-id="O006-PSU-001-U0146">If <span class="math inline">\(u(x)=x\)</span> then <span class="math inline">\(E(u(X))=\mu\)</span></li>
+<li data-o006-id="O006-PSU-001-U0147">If <span class="math inline">\(u(x)=(x-\mu)^2\)</span>, then <span class="math inline">\(E(u(X))=\sigma^2=\text{Var}(X)\)</span>.</li>
+</ul>
+<div class="callout callout-style-simple callout-caution no-icon" data-o006-id="O006-PSU-001-U0148">
+<div class="callout-body d-flex" data-o006-id="O006-PSU-001-U0149">
+<div class="callout-icon-container" data-o006-id="O006-PSU-001-U0150">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-body-container" data-o006-id="O006-PSU-001-U0151">
+<p data-o006-id="O006-PSU-001-U0152"><strong>Note:</strong><br/>
+Recall: <span class="math inline">\(\text{Var}(X)=E(X^2)-E(X)^2\)</span> and therefore <span class="math inline">\(E(X^2)=\sigma^2+\mu^2\)</span>.</p>
+</div>
+</div>
+</div>
+</section>
+<section class="level2" data-o006-id="O006-PSU-001-U0153" id="bivariate-distributions">
+<h2 class="anchored" data-anchor-id="bivariate-distributions" data-o006-id="O006-PSU-001-U0154">0.4: Bivariate Distributions</h2>
+<p data-o006-id="O006-PSU-001-U0155">In this class, it will important to recall bivariate distributions, and be able to make the extension to multivariate distributions. A <strong>joint (bivariate) probability distribution</strong> describes the probability that a randomly selected object from the population has two characteristics of interest.</p>
+<p data-o006-id="O006-PSU-001-U0156">Recall the definition of a joint (bivariate) probability mass function.</p>
+<div class="ms-3 theorem definition" data-o006-id="O006-PSU-001-U0157" id="def-jointpmf">
+<p data-o006-id="O006-PSU-001-U0158"><span class="theorem-title"><strong>Def. 11 (Joint Probability Mass Function)</strong></span> Let <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> be two discrete random variabled, and let <span class="math inline">\(S\)</span> denote the two-dimensional support of <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span>. The function <span class="math inline">\(f(x,y)=P(X=x, Y=y)\)</span> is a <strong>joint probability mass function</strong> (pmf) if it satisfies the following three conditions:</p>
+<ol data-o006-id="O006-PSU-001-U0159" type="1">
+<li data-o006-id="O006-PSU-001-U0160"><p data-o006-id="O006-PSU-001-U0161"><span class="math inline">\(0\le f(x,y)\le 1\)</span></p></li>
+<li data-o006-id="O006-PSU-001-U0162"><p data-o006-id="O006-PSU-001-U0163"><span class="math inline">\(\sum_{(x,y)\in S}\sum f(x,y)=1\)</span></p></li>
+<li data-o006-id="O006-PSU-001-U0164"><p data-o006-id="O006-PSU-001-U0165"><span class="math inline">\(P[(X,Y)\in A]=\sum_{(x,y)\in A}f(x,y)\)</span>, where <span class="math inline">\(A\)</span> is a subset of the support <span class="math inline">\(S\)</span>.</p></li>
+</ol>
+</div>
+<div class="ms-3 theorem definition" data-o006-id="O006-PSU-001-U0166" id="def-name">
+<p data-o006-id="O006-PSU-001-U0167"><span class="theorem-title"><strong>Def. 12 (Joint Probability Density Function)</strong></span> Let <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> be two continuous random variables, and let <span class="math inline">\(S\)</span> denote the two-dimensional support of <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span>. Then, the function <span class="math inline">\(f(x,y)\)</span> is a <strong>joint probability density function</strong> (pdf) if it satisfies the following three conditions:</p>
+<ol data-o006-id="O006-PSU-001-U0168" type="1">
+<li data-o006-id="O006-PSU-001-U0169"><p data-o006-id="O006-PSU-001-U0170"><span class="math inline">\(f(x,y)&gt;0\)</span></p></li>
+<li data-o006-id="O006-PSU-001-U0171"><p data-o006-id="O006-PSU-001-U0172"><span class="math inline">\(\int_{-\infty}^\infty \int_{-\infty}^\infty f(x,y)dxdy=1\)</span></p></li>
+<li data-o006-id="O006-PSU-001-U0173"><p data-o006-id="O006-PSU-001-U0174"><span class="math inline">\(P[(X,Y)\in A]=\int \int_A f(x,y)dxdy\)</span></p></li>
+</ol>
+<p data-o006-id="O006-PSU-001-U0175">where <span class="math inline">\(\{(X,Y)\in A\}\)</span> is an event in the <span class="math inline">\(xy\)</span>-plane.</p>
+</div>
+<div class="ms-3 theorem definition" data-o006-id="O006-PSU-001-U0176" id="def-margpmf">
+<p data-o006-id="O006-PSU-001-U0177"><span class="theorem-title"><strong>Def. 13 (Marginal PMFs)</strong></span> Let <span class="math inline">\(X\)</span> be a discrete random variable with support <span class="math inline">\(S_1\)</span>, and let <span class="math inline">\(Y\)</span> be a discrete random variable with support <span class="math inline">\(S_2\)</span>. Let <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> have a joint probability mass function <span class="math inline">\(f(x,y)\)</span> with support <span class="math inline">\(S\)</span>. Then, the probability mass function of <span class="math inline">\(X\)</span> alone, which is called the <strong>marginal probability mass function of</strong> <span class="math inline">\(X\)</span> is defined by: <span class="math display">\[\begin{aligned}
+        f_X(x)=\sum_{y}f(x,y)=P(X=x), \qquad x\in S_1
+    \end{aligned}\]</span> where, for each <span class="math inline">\(x\)</span> in the support <span class="math inline">\(S_1\)</span>, the summation is taken over all possible values of <span class="math inline">\(y\)</span>.</p>
+<p data-o006-id="O006-PSU-001-U0178">Similarly, the probability mass function of <span class="math inline">\(Y\)</span> alone, which is called the <strong>marginal probability mass function of</strong> <span class="math inline">\(Y\)</span> is defined by: <span class="math display">\[\begin{aligned}
+        f_Y(y)=\sum_{x}f(x,y)=P(Y=y), \qquad y\in S_2
+    \end{aligned}\]</span> where, for each <span class="math inline">\(y\)</span> in the support <span class="math inline">\(S_2\)</span>, the summation is taken over all possible values of <span class="math inline">\(x\)</span>.</p>
+</div>
+<div class="ms-3 theorem definition" data-o006-id="O006-PSU-001-U0179" id="def-margpmf">
+<p data-o006-id="O006-PSU-001-U0180"><span class="theorem-title"><strong>Def. 14 (Marginal PDFs)</strong></span> Let <span class="math inline">\(X\)</span> be a continuous random variable with support <span class="math inline">\(S_1\)</span>, and let <span class="math inline">\(Y\)</span> be a continuous random variable with support <span class="math inline">\(S_2\)</span>. Let <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> have a joint probability denstiy function <span class="math inline">\(f(x,y)\)</span> with support <span class="math inline">\(S\)</span>. Then, the probability density function of <span class="math inline">\(X\)</span> alone, which is called the <strong>marginal probability density function of</strong> <span class="math inline">\(X\)</span> is defined by: <span class="math display">\[\begin{aligned}
+        f_X(x)=\int_{y}f(x,y)dy, \qquad x\in S_1
+    \end{aligned}\]</span></p>
+<p data-o006-id="O006-PSU-001-U0181">Similarly, the probability density function of <span class="math inline">\(Y\)</span> alone, which is called the <strong>marginal probability density function of</strong> <span class="math inline">\(Y\)</span> is defined by: <span class="math display">\[\begin{aligned}
+        f_Y(y)=\int_{x}f(x,y)dx, \qquad y\in S_2
+    \end{aligned}\]</span></p>
+</div>
+<p data-o006-id="O006-PSU-001-U0182">Suppose we wish to determine if two random variables are independent, given the joint probability distribution and the marginal distributions. The random variables, <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> are <strong>independent</strong> if and only if <span class="math display">\[\begin{aligned}
+        f(x,y)=f_X(x)f_Y(y)
+    \end{aligned}\]</span> for all <span class="math inline">\(x \in S_1, \; y\in S_2\)</span>. Otherwise, <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> are said to be <strong>dependent</strong>.</p>
+<section class="level3 unnumbered" data-o006-id="O006-PSU-001-U0183" id="conditional-distributions">
+<h3 class="unnumbered anchored" data-anchor-id="conditional-distributions" data-o006-id="O006-PSU-001-U0184">Conditional Distributions</h3>
+<p data-o006-id="O006-PSU-001-U0185">It is helpful to review conditional distributions for this course. They will be particularly useful when we cover Bayesian statistics.</p>
+<p data-o006-id="O006-PSU-001-U0186">A <strong>conditional probability distribution</strong> is a probability distribution for a sub-population. That is, a conditional distribution describes the probability that a randomly selected object from a sub-population has the <em>one characteristic of interest</em>.</p>
+<div class="ms-3 theorem definition" data-o006-id="O006-PSU-001-U0187" id="def-conditionpmf">
+<p data-o006-id="O006-PSU-001-U0188"><span class="theorem-title"><strong>Def. 15 (Conditional probability mass function)</strong></span> The <strong>conditional probability mass function of</strong> <span class="math inline">\(X\)</span>, given <span class="math inline">\(Y=y\)</span> is defined by: <span class="math display">\[\begin{aligned}
+        g(x|y)=\frac{f(x,y)}{f_Y(y)}, \qquad \text{provided }f_Y(y)&gt;0
+\end{aligned}\]</span></p>
+</div>
+</section>
+<section class="level3 unnumbered" data-o006-id="O006-PSU-001-U0189" id="distributions-of-sums-of-several-random-variables">
+<h3 class="unnumbered anchored" data-anchor-id="distributions-of-sums-of-several-random-variables" data-o006-id="O006-PSU-001-U0190">Distributions of Sums of Several Random Variables</h3>
+<p data-o006-id="O006-PSU-001-U0191">In this class, we will need to find the distributions of functions of random variables and also of functions of several random variables. Being able to recall some of the helpful There are some helpful theorems for the sum of several random variables.</p>
+<div class="callout callout-style-simple callout-note no-icon" data-o006-id="O006-PSU-001-U0192">
+<div class="callout-body d-flex" data-o006-id="O006-PSU-001-U0193">
+<div class="callout-icon-container" data-o006-id="O006-PSU-001-U0194">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-body-container" data-o006-id="O006-PSU-001-U0195">
+<div class="theorem" data-o006-id="O006-PSU-001-U0196" id="thm-l11">
+<p data-o006-id="O006-PSU-001-U0197"><span class="theorem-title"><strong>Theorem 2</strong></span> Let <span class="math inline">\(X_1, X_2, \ldots, X_n\)</span> be a random sample from a Bernoulli distribution with parameter p.<br/>
+Then <span class="math inline">\(Y=\sum_{i=1}^n X_i\sim\text{Bin}(n, p)\)</span>.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="callout callout-style-simple callout-note no-icon" data-o006-id="O006-PSU-001-U0198">
+<div class="callout-body d-flex" data-o006-id="O006-PSU-001-U0199">
+<div class="callout-icon-container" data-o006-id="O006-PSU-001-U0200">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-body-container" data-o006-id="O006-PSU-001-U0201">
+<div class="theorem" data-o006-id="O006-PSU-001-U0202" id="thm-l12">
+<p data-o006-id="O006-PSU-001-U0203"><span class="theorem-title"><strong>Theorem 3</strong></span> Let <span class="math inline">\(X_1, X_2, \ldots, X_n\)</span> be a random sample from a Binomial distribution with parameters <span class="math inline">\(n_i\)</span> and p, for <span class="math inline">\(i=1, 2, \ldots, n\)</span>.<br/>
+Then <span class="math inline">\(Y=\sum_{i=1}^n X_i\sim \text{Bin}(\sum n_i, p)\)</span>.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="callout callout-style-simple callout-note no-icon" data-o006-id="O006-PSU-001-U0204">
+<div class="callout-body d-flex" data-o006-id="O006-PSU-001-U0205">
+<div class="callout-icon-container" data-o006-id="O006-PSU-001-U0206">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-body-container" data-o006-id="O006-PSU-001-U0207">
+<div class="theorem" data-o006-id="O006-PSU-001-U0208" id="thm-l13">
+<p data-o006-id="O006-PSU-001-U0209"><span class="theorem-title"><strong>Theorem 4</strong></span> Let <span class="math inline">\(X_1,X_2,\ldots,X_n\)</span> be a random sample from a Poisson distribution with parameter <span class="math inline">\(\lambda_i\)</span>, for <span class="math inline">\(i=1,2,\ldots,n\)</span>.<br/>
+Then <span class="math inline">\(Y=\sum_{i=1}^n X_i\sim \text{Pois}(\sum \lambda_i)\)</span>.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="callout callout-style-simple callout-note no-icon" data-o006-id="O006-PSU-001-U0210">
+<div class="callout-body d-flex" data-o006-id="O006-PSU-001-U0211">
+<div class="callout-icon-container" data-o006-id="O006-PSU-001-U0212">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-body-container" data-o006-id="O006-PSU-001-U0213">
+<div class="theorem" data-o006-id="O006-PSU-001-U0214" id="thm-l14">
+<p data-o006-id="O006-PSU-001-U0215"><span class="theorem-title"><strong>Theorem 5</strong></span> Let <span class="math inline">\(X_1,X_2,\ldots,X_n\)</span> be a random sample from an Exponential distribution with parameter <span class="math inline">\(\theta\)</span>, for <span class="math inline">\(i=1,2,\ldots,n\)</span>.<br/>
+Then <span class="math inline">\(Y=\sum_{i=1}^n X_i\sim \Gamma(\alpha=n, \theta)\)</span>.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="callout callout-style-simple callout-note no-icon" data-o006-id="O006-PSU-001-U0216">
+<div class="callout-body d-flex" data-o006-id="O006-PSU-001-U0217">
+<div class="callout-icon-container" data-o006-id="O006-PSU-001-U0218">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-body-container" data-o006-id="O006-PSU-001-U0219">
+<div class="theorem" data-o006-id="O006-PSU-001-U0220" id="thm-l15">
+<p data-o006-id="O006-PSU-001-U0221"><span class="theorem-title"><strong>Theorem 6</strong></span> Let <span class="math inline">\(X_1, X_2, \ldots, X_n\)</span> be a random sample from a Gamma distribution with parameters <span class="math inline">\(\alpha_i\)</span> and <span class="math inline">\(\theta\)</span>, for <span class="math inline">\(i=1,2,\ldots,n\)</span>.<br/>
+Then <span class="math inline">\(Y=\sum_{i=1}^n X_i\sim \Gamma(\sum_{i=1}^n \alpha_i, \theta)\)</span>.</p>
+</div>
+</div>
+</div>
+</div>
+<section class="level4 unnumbered" data-o006-id="O006-PSU-001-U0222" id="random-functions-associated-with-normal-distributions">
+<h4 class="unnumbered anchored" data-anchor-id="random-functions-associated-with-normal-distributions" data-o006-id="O006-PSU-001-U0223">Random Functions Associated with Normal Distributions</h4>
+<p data-o006-id="O006-PSU-001-U0224">There are many theorems for the previous statistics course that you may find useful to recall in this semester.</p>
+<div class="callout callout-style-simple callout-note no-icon" data-o006-id="O006-PSU-001-U0225">
+<div class="callout-body d-flex" data-o006-id="O006-PSU-001-U0226">
+<div class="callout-icon-container" data-o006-id="O006-PSU-001-U0227">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-body-container" data-o006-id="O006-PSU-001-U0228">
+<div class="theorem" data-o006-id="O006-PSU-001-U0229" id="thm-l16">
+<p data-o006-id="O006-PSU-001-U0230"><span class="theorem-title"><strong>Theorem 7</strong></span> If <span class="math inline">\(X_1, X_2, \ldots, X_n\)</span> are mutually independent normal random variables with means <span class="math inline">\(\mu_1, \mu_2, \ldots, \mu_n\)</span> and variances <span class="math inline">\(\sigma^2_1, \sigma^2_2, \ldots, \sigma^2_n\)</span>, respectively, then the linear combination: <span class="math display">\[\begin{aligned}
+        Y=\sum_{i=1}^n c_iX_i
+    \end{aligned}\]</span> follows a Normal distribution: <span class="math display">\[\begin{aligned}
+        N\left(\sum_{i=1}^n c_i\mu, \sum_{i=1}^n c_i^2\sigma^2_i\right)
+    \end{aligned}\]</span></p>
+</div>
+</div>
+</div>
+</div>
+<div class="callout callout-style-simple callout-note no-icon" data-o006-id="O006-PSU-001-U0231">
+<div class="callout-body d-flex" data-o006-id="O006-PSU-001-U0232">
+<div class="callout-icon-container" data-o006-id="O006-PSU-001-U0233">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-body-container" data-o006-id="O006-PSU-001-U0234">
+<div class="theorem corollary" data-o006-id="O006-PSU-001-U0235" id="cor-l11">
+<p data-o006-id="O006-PSU-001-U0236"><span class="theorem-title"><strong>Corollary 1</strong></span> If <span class="math inline">\(X_1, X_2, \ldots, X_n\)</span> are observations of a random sample of size <span class="math inline">\(n\)</span> from a <span class="math inline">\(N(\mu, \sigma^2)\)</span> population, then the sample mean: <span class="math display">\[\begin{aligned}
+        \bar{X}=\frac{1}{n}\sum_{i=1}^n X_i
+    \end{aligned}\]</span> is normally distributed with mean <span class="math inline">\(\mu\)</span> and variance <span class="math inline">\(\frac{\sigma^2}{n}\)</span>.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="callout callout-style-simple callout-note no-icon" data-o006-id="O006-PSU-001-U0237">
+<div class="callout-body d-flex" data-o006-id="O006-PSU-001-U0238">
+<div class="callout-icon-container" data-o006-id="O006-PSU-001-U0239">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-body-container" data-o006-id="O006-PSU-001-U0240">
+<div class="theorem" data-o006-id="O006-PSU-001-U0241" id="thm-l17">
+<p data-o006-id="O006-PSU-001-U0242"><span class="theorem-title"><strong>Theorem 8</strong></span> Let <span class="math inline">\(X_1, X_2, \ldots, X_n\)</span> be observations of a random sample of size <span class="math inline">\(n\)</span> from the Normal distribution <span class="math inline">\(N(\mu, \sigma^2)\)</span>. Let <span class="math inline">\(\bar{X}=\frac{1}{n}\sum_{i=1}^n X_i\)</span> and <span class="math inline">\(S^2=\frac{1}{n_1}\sum_{i=1}^n (X_i-\bar{X})^2\)</span> be the sample mean and sample variance, respectively. Then, <span class="math inline">\(\bar{X}\)</span> and <span class="math inline">\(S^2\)</span> are independent. Also, <span class="math display">\[\begin{aligned}
+        \frac{(n-1)S^2}{\sigma^2}
+    \end{aligned}\]</span> follows a Chi-square distribution with <span class="math inline">\(n-1\)</span> degrees of freedom.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="ms-3 theorem definition" data-o006-id="O006-PSU-001-U0243" id="def-noname">
+<p data-o006-id="O006-PSU-001-U0244"><span class="theorem-title"><strong>Def. 16 (t-distribution)</strong></span> If <span class="math inline">\(Z\sim N(0,1)\)</span> and <span class="math inline">\(U\sim \chi^2(r)\)</span> are independent, then the random variable <span class="math display">\[\begin{aligned}
+T=\frac{Z}{\sqrt{\frac{U}{r}}}
+\end{aligned}\]</span> follows at <span class="math inline">\(t\)</span>-distribution with <span class="math inline">\(r\)</span> degrees of freedom.<br/>
+</p>
+</div>
+<div class="callout callout-style-simple callout-note no-icon" data-o006-id="O006-PSU-001-U0245">
+<div class="callout-body d-flex" data-o006-id="O006-PSU-001-U0246">
+<div class="callout-icon-container" data-o006-id="O006-PSU-001-U0247">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-body-container" data-o006-id="O006-PSU-001-U0248">
+<div class="theorem" data-o006-id="O006-PSU-001-U0249" id="thm-clt">
+<p data-o006-id="O006-PSU-001-U0250"><span class="theorem-title"><strong>Theorem 9 (Central Limit Theorem)</strong></span> Let <span class="math inline">\(X_1, X_2, \ldots, X_n\)</span> be a random sample from a distribution with finite mean <span class="math inline">\(\mu\)</span> and finite variance <span class="math inline">\(\sigma^2\)</span>. If the sample size, <span class="math inline">\(n\)</span>, is <em>sufficiently large</em>, then:</p>
+<ul data-o006-id="O006-PSU-001-U0251">
+<li data-o006-id="O006-PSU-001-U0252"><p data-o006-id="O006-PSU-001-U0253">the sample mean <span class="math inline">\(\bar{X}\)</span> follows an approximate normal distribution</p></li>
+<li data-o006-id="O006-PSU-001-U0254"><p data-o006-id="O006-PSU-001-U0255">with mean <span class="math inline">\(\mu_{\bar{X}}=\mu\)</span></p></li>
+<li data-o006-id="O006-PSU-001-U0256"><p data-o006-id="O006-PSU-001-U0257">and variance <span class="math inline">\(\sigma^2_{\bar{X}}=\frac{\sigma^2}{n}\)</span>.</p></li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</section>
+</section>
+</section>
+<section class="level2" data-o006-id="O006-PSU-001-U0258" id="review-examples">
+<h2 class="anchored" data-anchor-id="review-examples" data-o006-id="O006-PSU-001-U0259">0.5: Review Examples</h2>
+<p data-o006-id="O006-PSU-001-U0260">In this section, we present some examples to help you recall some of the information from the Introduction to Probability course.</p>
+<div class="theorem example" data-o006-id="O006-PSU-001-U0261" id="exm-probility1">
+<p data-o006-id="O006-PSU-001-U0262"><span class="theorem-title"><strong>Example 1</strong></span> A woman who was initially thougth to have a 1% risk of cancer ended up with a positive mammogram result. A mammogram accurately classifies about 80% of cancerous tumors and 90% of benign tumors. What is the probability that the woman has cancer, given the positive result?</p>
+<p data-o006-id="O006-PSU-001-U0263"><strong>Solution</strong> Let the event <span class="math inline">\(C\)</span> denote cancer and event <span class="math inline">\(P\)</span> denote a positive result. We know: <span class="math inline">\(P(C)=0.01\)</span> and thus <span class="math inline">\(P(C^\prime)=1-P(C)=1-0.01=0.99\)</span>. Also, <span class="math inline">\(P(P|C)=0.8\)</span> and <span class="math inline">\(P(P^\prime|C^\prime)\)</span>, which implies <span class="math inline">\(P(P|C^\prime)=0.1\)</span>. Putting this all together, we get” <span class="math display">\[P(C|P)=\frac{P(P|C)P(C)}{P(P|C)P(C)+P(P|C^\prime)P(C^\prime)}=\frac{0.8(0.01)}{0.8(0.01)+0.1(0.99)}=0.075\]</span></p>
+</div>
+<div class="theorem example" data-o006-id="O006-PSU-001-U0264" id="exm-normal1">
+<p data-o006-id="O006-PSU-001-U0265"><span class="theorem-title"><strong>Example 2</strong></span> When you put your money into the coffee machine at the Student Center, a paper cup comes down and some coffee is put into it. You are supposed to get 8 oz of coffee. However, the actual amount of coffee is dispensed is a normal random variable with mean equal to the machine setting and variance of 0.0625 oz.</p>
+<p data-o006-id="O006-PSU-001-U0266">What should the machine setting be so that, in the long run, only at 2% of the drinks will contain less than 8 oz?</p>
+<button aria-controls="collapseExample1" aria-expanded="false" class="btn btn-outline-success collapsed" data-bs-target="#collapseExample1" data-bs-toggle="collapse" data-o006-id="O006-PSU-001-U0267" type="button">Solution
+</button>
+<div class="collapse" data-o006-id="O006-PSU-001-U0268" id="collapseExample1">
+<div class="card" data-o006-id="O006-PSU-001-U0269">
+<div class="card-body bg-light ms-0 mb-0 pt-2" data-o006-id="O006-PSU-001-U0270">
+<p data-o006-id="O006-PSU-001-U0271"><span class="math display">\[\begin{align*}
+                &amp; P(X\le 8)=P\left(Z\le \frac{8-\mu}{\sqrt{0.0625}}\right)=0.02, \qquad \text{table value -2.0537}\\
+                &amp; -2.0537= \frac{8-\mu}{\sqrt{0.0625}}\qquad \Rightarrow \mu=8.513425
+            \end{align*}\]</span></p>
+</div>
+</div>
+</div>
+</div>
+<div class="theorem example" data-o006-id="O006-PSU-001-U0272" id="exm-continuous">
+<p data-o006-id="O006-PSU-001-U0273"><span class="theorem-title"><strong>Example 3</strong></span> Let the random variable <span class="math inline">\(X\)</span> have the following pdf <span class="math display">\[\begin{align*}
+            f(w)=\begin{cases}
+                cx^2, &amp; -1\le x&lt;0\\
+                cx, &amp; 0\le x\le 2\\
+                0, &amp; \text{otherwise}
+            \end{cases}
+        \end{align*}\]</span> where <span class="math inline">\(c\)</span> is a constant.</p>
+<ol data-o006-id="O006-PSU-001-U0274" type="1">
+<li data-o006-id="O006-PSU-001-U0275"><p data-o006-id="O006-PSU-001-U0276">Find the value <span class="math inline">\(c\)</span> such that the above is a valid probability density function.</p></li>
+<li data-o006-id="O006-PSU-001-U0277"><p data-o006-id="O006-PSU-001-U0278">Find the mean of the random variable.</p></li>
+<li data-o006-id="O006-PSU-001-U0279"><p data-o006-id="O006-PSU-001-U0280">Find the cdf of <span class="math inline">\(X\)</span>.</p></li>
+<li data-o006-id="O006-PSU-001-U0281"><p data-o006-id="O006-PSU-001-U0282">Find the median of the random variable.</p></li>
+</ol>
+<button aria-controls="collapseExample2" aria-expanded="false" class="btn btn-outline-success collapsed" data-bs-target="#collapseExample2" data-bs-toggle="collapse" data-o006-id="O006-PSU-001-U0283" type="button">Solution
+</button>
+<div class="collapse" data-o006-id="O006-PSU-001-U0284" id="collapseExample2">
+<div class="card" data-o006-id="O006-PSU-001-U0285">
+<div class="card-body bg-light ms-0 mb-0 pt-2" data-o006-id="O006-PSU-001-U0286">
+<ol data-o006-id="O006-PSU-001-U0287" type="1">
+<li data-o006-id="O006-PSU-001-U0288"><p data-o006-id="O006-PSU-001-U0289"><span class="math inline">\(\begin{align*}&amp; \frac{1}{c}=\int_{-1}^0x^2\;dx+\int_0^2x\; dx=\frac{1}{3}x^3\mid_{-1}^0+\frac{1}{2}x^2\mid_0^2=\frac{1}{3}+2=\frac{7}{3}, \qquad c=\frac{3}{7} \end{align*}\)</span><br/>
+<br/></p></li>
+<li data-o006-id="O006-PSU-001-U0290"><p data-o006-id="O006-PSU-001-U0291"><span class="math inline">\(\begin{align*} E(X)=\int_{-1}^0\frac{3}{7}x^3\; dx+\int_0^2\frac{3}{7}x^2\; dx=\frac{3}{28}x^4\mid_{-1}^0+\frac{1}{7}x^3\mid_0^4=-\frac{3}{28}+\frac{8}{7}=\frac{29}{28} \end{align*}\)</span><br/>
+<br/></p></li>
+<li data-o006-id="O006-PSU-001-U0292"><p data-o006-id="O006-PSU-001-U0293"><span class="math inline">\(\begin{align*}
+                    F(x)=\begin{cases}
+                        \int_{-1}^x\frac{3}{7}x^2dx=\frac{1}{7}x^3\mid_{-1}^x=\frac{1}{7}(x^3+1), &amp; -1\le x&lt;0\\
+                        \frac{1}{7}+\int_0^x \frac{3}{7}xdx=\frac{1}{7}+\frac{3}{14}x^2, &amp; 0\le x&lt;2\\
+                        1, &amp; x\ge 2
+                    \end{cases}
+                \end{align*}\)</span> <br/></p></li>
+<li data-o006-id="O006-PSU-001-U0294"><p data-o006-id="O006-PSU-001-U0295"><span class="math inline">\(\begin{align*}
+                    0.5=\frac{1}{7}+\frac{3}{14}x^2, \qquad \Rightarrow \frac{5}{14}=\frac{3}{14}x^2, \qquad \Rightarrow x=\sqrt{\frac{5}{3}}\approx 1.29
+                \end{align*}\)</span></p></li>
+</ol>
+</div>
+</div>
+</div>
+</div>
+<div class="theorem example" data-o006-id="O006-PSU-001-U0296" id="exm-bivariate_cont">
+<p data-o006-id="O006-PSU-001-U0297"><span class="theorem-title"><strong>Example 4</strong></span> The lifetime (in months) of two components of a machine have joint probability density function <span class="math display">\[\begin{align*}
+            f(x,y)=c(50-x-y), \qquad 0&lt;x&lt;50-y&lt;50
+        \end{align*}\]</span> and zero otherwise.</p>
+<ol data-o006-id="O006-PSU-001-U0298" type="1">
+<li data-o006-id="O006-PSU-001-U0299"><p data-o006-id="O006-PSU-001-U0300">Find the constant, <span class="math inline">\(c\)</span>, such that <span class="math inline">\(f(x,y)\)</span> is valid joint pdf. You may leave the constant as <span class="math inline">\(c\)</span>.</p></li>
+<li data-o006-id="O006-PSU-001-U0301"><p data-o006-id="O006-PSU-001-U0302">Find the marginal distributions.</p></li>
+<li data-o006-id="O006-PSU-001-U0303"><p data-o006-id="O006-PSU-001-U0304">Find the conditional distribution of <span class="math inline">\(X\)</span> given <span class="math inline">\(Y=y\)</span>. If convenient, you may leave the constant as <span class="math inline">\(c\)</span>.</p></li>
+</ol>
+<button aria-controls="collapseExample3" aria-expanded="false" class="btn btn-outline-success collapsed" data-bs-target="#collapseExample3" data-bs-toggle="collapse" data-o006-id="O006-PSU-001-U0305" type="button">Solution
+</button>
+<div class="collapse" data-o006-id="O006-PSU-001-U0306" id="collapseExample3">
+<div class="card" data-o006-id="O006-PSU-001-U0307">
+<div class="card-body bg-light ms-0 mb-0 pt-2" data-o006-id="O006-PSU-001-U0308">
+<ol data-o006-id="O006-PSU-001-U0309" type="1">
+<li data-o006-id="O006-PSU-001-U0310"><span class="math inline">\(\begin{align*}\
+                     &amp; \frac{1}{c}=\int_0^{50}\int_0^{50-y} 50-x-y\;dx\;dy=\int_0^{50} \left[50x-\frac{1}{2}x^2-yx\mid_0^{50-y}\right] dy\\
+                     &amp; =\int_0^{50} \frac{1}{2}y^2-50y+1250dy=\frac{1}{6}y^3-25y^2+1250y\mid_0^{50}=\frac{125000}{6}\\
+                     &amp; \Rightarrow c=\frac{6}{125000}
+                 \end{align*}\)</span><br/>
+</li>
+</ol>
+<p data-o006-id="O006-PSU-001-U0311"><br/> 2. <span class="math inline">\(\begin{align*}\
+                        &amp; f(x)=c\int_0^{50-x} 50-x-y\;dy=\frac{c}{2}(x-50)^2, \qquad 0\le x\le 50\\
+                        &amp; f(y)=c\int_0^{50-y} 50-x-y\;dx=\frac{c}{2}(y-50)^2, \qquad 0\le y\le 50
+                    \end{align*}\)</span><br/>
+</p>
+<p data-o006-id="O006-PSU-001-U0312"><br/> 3. <span class="math inline">\(\begin{align*}\
+                        f(x|y)=\frac{f(x,y)}{f(y)}=\frac{c(50-x-y)}{\frac{c}{2}(y-50)^2}=\frac{2(50-x-y)}{(y-50)^2}, \qquad 0&lt;x&lt;50-y
+                    \end{align*}\)</span></p>
+</div>
+</div>
+</div>
+</div>
+<div class="theorem example" data-o006-id="O006-PSU-001-U0313" id="exm-cdf">
+<p data-o006-id="O006-PSU-001-U0314"><span class="theorem-title"><strong>Example 5</strong></span> Suppose the cdf for the discrete random variable <span class="math inline">\(X\)</span> is <span class="math display">\[\begin{aligned}
+        F(x)=\frac{x(x+1)}{20}, \qquad x=1,2,3,4.
+    \end{aligned}\]</span></p>
+<ol data-o006-id="O006-PSU-001-U0315" type="1">
+<li data-o006-id="O006-PSU-001-U0316"><p data-o006-id="O006-PSU-001-U0317">Find the pdf of <span class="math inline">\(X\)</span>. You may put in table form.</p></li>
+<li data-o006-id="O006-PSU-001-U0318"><p data-o006-id="O006-PSU-001-U0319">Derive the <span class="math inline">\(30^{th}\)</span> percentile of <span class="math inline">\(X\)</span>.</p></li>
+<li data-o006-id="O006-PSU-001-U0320"><p data-o006-id="O006-PSU-001-U0321">Derive the mean of <span class="math inline">\(X\)</span>.</p></li>
+<li data-o006-id="O006-PSU-001-U0322"><p data-o006-id="O006-PSU-001-U0323">Derive the standard deviation of <span class="math inline">\(X\)</span>.</p></li>
+</ol>
+<button aria-controls="collapseExample4" aria-expanded="false" class="btn btn-outline-success collapsed" data-bs-target="#collapseExample4" data-bs-toggle="collapse" data-o006-id="O006-PSU-001-U0324" type="button">Solution
+</button>
+<div class="collapse" data-o006-id="O006-PSU-001-U0325" id="collapseExample4">
+<div class="card" data-o006-id="O006-PSU-001-U0326">
+<div class="card-body bg-light ms-0 mb-0 pt-2" data-o006-id="O006-PSU-001-U0327">
+<ol data-o006-id="O006-PSU-001-U0328" type="1">
+<li data-o006-id="O006-PSU-001-U0329"><p data-o006-id="O006-PSU-001-U0330">Recall that the cdf is defined as <span class="math inline">\(F(x)=P(X\le x)\)</span>. Start with <span class="math inline">\(x=1\)</span>. We know <span class="math inline">\(F(1)=P(X\le 1)\)</span>. Since there are no values less than 1, it follows that <span class="math display">\[\begin{aligned}
+                &amp; F(1)=P(X\le 1)=P(X=1)=\frac{1(2)}{20}=\frac{2}{20}\\
+                &amp; f(1)=P(X=1)=\frac{1}{10}
+            \end{aligned}\]</span> Next, consider <span class="math inline">\(x=2\)</span>. <span class="math display">\[\begin{aligned}
+                &amp; F(2)=P(X\le 2)=\frac{2(3)}{20}=\frac{3}{10}=0.3
+            \end{aligned}\]</span> We also know that <span class="math display">\[\begin{aligned}
+                &amp; F(2)=P(X\le 2)=P(X=1)+P(X=2)
+            \end{aligned}\]</span></p>
+<pre data-o006-id="O006-PSU-001-U0331"><code data-o006-id="O006-PSU-001-U0332">        Therefore,</code></pre>
+<span class="math display">\[\begin{aligned}
+&amp; 0.3=P(X=1)+P(X=2)\\
+&amp; \Rightarrow P(X=2)=0.3-P(X=1)=0.3-0.1=0.2
+
+\end{aligned}\]</span>
+<p data-o006-id="O006-PSU-001-U0333">Thus, <span class="math inline">\(f(2)=P(X=2)=0.2\)</span>. We can continue on in the same manner to find the pmf for the other values of <span class="math inline">\(x\)</span>. The tabular form of the pmf of <span class="math inline">\(X\)</span> is:<br/>
+</p>
+<table class="w-auto table-sm mx-auto row-header small caption-top table" data-o006-id="O006-PSU-001-U0334">
+<thead data-o006-id="O006-PSU-001-U0335">
+<tr class="header" data-o006-id="O006-PSU-001-U0336">
+<th data-o006-id="O006-PSU-001-U0337" style="text-align: center;"><span class="math inline">\(x\)</span></th>
+<th data-o006-id="O006-PSU-001-U0338" style="text-align: center;">1</th>
+<th data-o006-id="O006-PSU-001-U0339" style="text-align: center;">2</th>
+<th data-o006-id="O006-PSU-001-U0340" style="text-align: center;">3</th>
+<th data-o006-id="O006-PSU-001-U0341" style="text-align: center;">4</th>
+<th data-o006-id="O006-PSU-001-U0342"></th>
+</tr>
+</thead>
+<tbody data-o006-id="O006-PSU-001-U0343">
+<tr class="odd" data-o006-id="O006-PSU-001-U0344">
+<td data-o006-id="O006-PSU-001-U0345" style="text-align: center;"><span class="math inline">\(f(x)\)</span></td>
+<td data-o006-id="O006-PSU-001-U0346" style="text-align: center;">0.1</td>
+<td data-o006-id="O006-PSU-001-U0347" style="text-align: center;">0.2</td>
+<td data-o006-id="O006-PSU-001-U0348" style="text-align: center;">0.3</td>
+<td data-o006-id="O006-PSU-001-U0349" style="text-align: center;">0.4</td>
+<td data-o006-id="O006-PSU-001-U0350"></td>
+</tr>
+</tbody>
+</table></li>
+<li data-o006-id="O006-PSU-001-U0351"><p data-o006-id="O006-PSU-001-U0352">Derive the <span class="math inline">\(30^{th}\)</span> percentile of <span class="math inline">\(X\)</span>. <span class="math display">\[\begin{aligned}
+                    &amp; 0.3=\frac{x(x+1)}{20}\Rightarrow 6=x^2+x\Rightarrow x^2+x-6=0\\
+                    &amp; =(x+3)(x-2)=0\Rightarrow x=2
+                 \end{aligned}\]</span></p></li>
+<li data-o006-id="O006-PSU-001-U0353"><p data-o006-id="O006-PSU-001-U0354">Derive the mean of <span class="math inline">\(X\)</span>. <span class="math display">\[\begin{aligned}
+                    E(X)=0\left(0\right)+1\left(\frac{2}{20}\right)+2\left(\frac{4}{20}\right)+3\left(\frac{6}{20}\right)+4\left(\frac{8}{20}\right)=\frac{60}{20}=3
+                \end{aligned}\]</span></p></li>
+<li data-o006-id="O006-PSU-001-U0355"><p data-o006-id="O006-PSU-001-U0356">Derive the standard deviation of <span class="math inline">\(X\)</span>. <span class="math display">\[\begin{aligned}
+                    &amp; E(X^2)=0\left(0\right)+1\left(\frac{2}{20}\right)+4\left(\frac{4}{20}\right)+9\left(\frac{6}{20}\right)+16\left(\frac{8}{20}\right)=\frac{200}{20}=10\\
+                    &amp; \text{Var}(X)=E(X^2)-E(X)^2=10-3^2=10-9=1\\
+                    &amp; \text{SD}(X)=\sqrt{1}=1
+\end{aligned}\]</span></p></li>
+</ol>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section class="level2" data-o006-id="O006-PSU-001-U0357" id="outline-of-stat-415">
+<h2 class="anchored" data-anchor-id="outline-of-stat-415" data-o006-id="O006-PSU-001-U0358">0.6: Outline of STAT 415</h2>
+<p data-o006-id="O006-PSU-001-U0359">Suppose that we obtain data <span class="math inline">\(x\)</span> from a statistical model with an unknown parameter <span class="math inline">\(\theta\)</span>. %Imagine that <span class="math inline">\(\theta\)</span> indexes a family of possible distributions for <span class="math inline">\(x\)</span>, and that the true value of <span class="math inline">\(\theta\)</span> determines the true data-generating process. We will then consider questions such as:</p>
+<p data-o006-id="O006-PSU-001-U0360"><strong>Point Estimation</strong>: What is a <strong>good</strong> estimator for <span class="math inline">\(\theta\)</span>? This depends on the definition of `good’, and we will introduce several criteria by which estimators can be judged. Just providing a point estimator <span class="math inline">\(\hat{\theta}\)</span>, without any sense of its uncertainty, is usually unsatisfying. Thus, statistical inference emphasizes accompanying point estimators with information about their uncertainties, e.g., we may be able to describe the distribution of <span class="math inline">\(\hat{\theta}\)</span> or at least say what its standard deviation is. The standard deviation of an estimator is called its standard error.</p>
+<p data-o006-id="O006-PSU-001-U0361"><strong>Interval Estimation</strong>: Intuitively, much more informative than just saying something like ``I estimate <span class="math inline">\(\theta\)</span> as 2.5’’ is to provide an interval, such as saying</p>
+<p data-o006-id="O006-PSU-001-U0362">`I am 95% confident that <span class="math inline">\(\theta\)</span> is inclusively between 2.3 and 2.8.’</p>
+<p data-o006-id="O006-PSU-001-U0363">But what does `confident’ mean? In this course we will define precisely what it means to give an interval estimate, and study ways of constructing such estimates.</p>
+<p data-o006-id="O006-PSU-001-U0364">If <span class="math inline">\(\theta\)</span> is a constant, then it either is or isn’t in the interval <span class="math inline">\([2.3, 2.8]\)</span>, so what does the 95% mean?</p>
+<p data-o006-id="O006-PSU-001-U0365"><strong>Hypothesis Testing (model evaluation)</strong>: In many applications in the physical, biological, and social sciences, a researcher is interested in testing a hypothesis which can be expressed in the form <span class="math inline">\(\theta=\theta_0\)</span> or, more generally, as <span class="math inline">\(\theta\in H_0\)</span> for some set <span class="math inline">\(H_0\)</span>. Hypothesis testing is closely related to interval estimation (and arguably the latter is more useful), and can be approached via various perspectives.</p>
+</section>
+</main>
+</body>
+</html>

@@ -1,0 +1,3193 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.9.35">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>5&nbsp; Maximum Likelihood Estimation (MLE) (Part II) – STAT 415 | Introduction to Mathematical Statistics</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./Lesson06.html" rel="next">
+<link href="./Lesson04.html" rel="prev">
+<link href="./assets/psulion.png" rel="icon" type="image/png">
+<script src="site_libs/cookie-consent/cookie-consent.js"></script>
+<link href="site_libs/cookie-consent/cookie-consent.css" rel="stylesheet">
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-46f66b053e56abd73bb6e954d61a315b.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-22b4aaf4c2978829df3684e8f2c068db.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-46f66b053e56abd73bb6e954d61a315b.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-dedc56d09aa522c36e3c0f8583f17cbf.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark-fc84954412eed28da5dc743c06b0bbd5.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="site_libs/bootstrap/bootstrap-dedc56d09aa522c36e3c0f8583f17cbf.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/quarto-contrib/language-name/language-name.css" rel="stylesheet">
+<script src="site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
+<link href="site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
+<link href="site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<script async="" src="https://www.googletagmanager.com/gtag/js?id=G-XM6C7H9XCL"></script>
+
+<script type="text/plain" cookie-consent="tracking">
+
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-XM6C7H9XCL', { 'anonymize_ip': true});
+</script>
+
+<script type="text/javascript" charset="UTF-8">
+document.addEventListener('DOMContentLoaded', function () {
+cookieconsent.run({
+  "notice_banner_type":"simple",
+  "consent_type":"express",
+  "palette":"light",
+  "language":"en",
+  "page_load_consent_levels":["strictly-necessary"],
+  "notice_banner_reject_button_hide":false,
+  "preferences_center_close_button_hide":false,
+  "website_name":""
+  ,
+"language":"en"
+  });
+});
+</script> 
+  
+<script>
+
+  window.addEventListener('load', function() {
+
+    document.getElementById("cc-nb-text").innerHTML = "We use cookies and other tracking technologies to improve your browsing experience on our website, to analyze our website traffic, and to understand where our visitors are coming from.";
+
+  });
+
+</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+</head>
+
+<body class="nav-sidebar docked nav-fixed quarto-light"><script id="quarto-html-before-body" type="application/javascript">
+    const toggleBodyColorMode = (bsSheetEl) => {
+      const mode = bsSheetEl.getAttribute("data-mode");
+      const bodyEl = window.document.querySelector("body");
+      if (mode === "dark") {
+        bodyEl.classList.add("quarto-dark");
+        bodyEl.classList.remove("quarto-light");
+      } else {
+        bodyEl.classList.add("quarto-light");
+        bodyEl.classList.remove("quarto-dark");
+      }
+    }
+    const toggleBodyColorPrimary = () => {
+      const bsSheetEl = window.document.querySelector("link#quarto-bootstrap:not([rel=disabled-stylesheet])");
+      if (bsSheetEl) {
+        toggleBodyColorMode(bsSheetEl);
+      }
+    }
+    const setColorSchemeToggle = (alternate) => {
+      const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+      for (let i=0; i < toggles.length; i++) {
+        const toggle = toggles[i];
+        if (toggle) {
+          if (alternate) {
+            toggle.classList.add("alternate");
+          } else {
+            toggle.classList.remove("alternate");
+          }
+        }
+      }
+    };
+    const toggleColorMode = (alternate) => {
+      // Switch the stylesheets
+      const primaryStylesheets = window.document.querySelectorAll('link.quarto-color-scheme:not(.quarto-color-alternate)');
+      const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+      manageTransitions('#quarto-margin-sidebar .nav-link', false);
+      if (alternate) {
+        // note: dark is layered on light, we don't disable primary!
+        enableStylesheet(alternateStylesheets);
+        for (const sheetNode of alternateStylesheets) {
+          if (sheetNode.id === "quarto-bootstrap") {
+            toggleBodyColorMode(sheetNode);
+          }
+        }
+      } else {
+        disableStylesheet(alternateStylesheets);
+        enableStylesheet(primaryStylesheets)
+        toggleBodyColorPrimary();
+      }
+      manageTransitions('#quarto-margin-sidebar .nav-link', true);
+      // Switch the toggles
+      setColorSchemeToggle(alternate)
+      // Hack to workaround the fact that safari doesn't
+      // properly recolor the scrollbar when toggling (#1455)
+      if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+        manageTransitions("body", false);
+        window.scrollTo(0, 1);
+        setTimeout(() => {
+          window.scrollTo(0, 0);
+          manageTransitions("body", true);
+        }, 40);
+      }
+    }
+    const disableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        stylesheet.rel = 'disabled-stylesheet';
+      }
+    }
+    const enableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        if(stylesheet.rel !== 'stylesheet') { // for Chrome, which will still FOUC without this check
+          stylesheet.rel = 'stylesheet';
+        }
+      }
+    }
+    const manageTransitions = (selector, allowTransitions) => {
+      const els = window.document.querySelectorAll(selector);
+      for (let i=0; i < els.length; i++) {
+        const el = els[i];
+        if (allowTransitions) {
+          el.classList.remove('notransition');
+        } else {
+          el.classList.add('notransition');
+        }
+      }
+    }
+    const isFileUrl = () => {
+      return window.location.protocol === 'file:';
+    }
+    const hasAlternateSentinel = () => {
+      let styleSentinel = getColorSchemeSentinel();
+      if (styleSentinel !== null) {
+        return styleSentinel === "alternate";
+      } else {
+        return false;
+      }
+    }
+    const setStyleSentinel = (alternate) => {
+      const value = alternate ? "alternate" : "default";
+      if (!isFileUrl()) {
+        window.localStorage.setItem("quarto-color-scheme", value);
+      } else {
+        localAlternateSentinel = value;
+      }
+    }
+    const getColorSchemeSentinel = () => {
+      if (!isFileUrl()) {
+        const storageValue = window.localStorage.getItem("quarto-color-scheme");
+        return storageValue != null ? storageValue : localAlternateSentinel;
+      } else {
+        return localAlternateSentinel;
+      }
+    }
+    const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+      const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+      const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+      let newTheme = '';
+      if(authorPrefersDark) {
+        newTheme = isAlternate ? baseTheme : alternateTheme;
+      } else {
+        newTheme = isAlternate ? alternateTheme : baseTheme;
+      }
+      const changeGiscusTheme = () => {
+        // From: https://github.com/giscus/giscus/issues/336
+        const sendMessage = (message) => {
+          const iframe = document.querySelector('iframe.giscus-frame');
+          if (!iframe) return;
+          iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+        }
+        sendMessage({
+          setConfig: {
+            theme: newTheme
+          }
+        });
+      }
+      const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+      if (isGiscussLoaded) {
+        changeGiscusTheme();
+      }
+    };
+    const authorPrefersDark = false;
+    const darkModeDefault = authorPrefersDark;
+      document.querySelector('link#quarto-text-highlighting-styles.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+      document.querySelector('link#quarto-bootstrap.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+    let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+    // Dark / light mode switch
+    window.quartoToggleColorScheme = () => {
+      // Read the current dark / light value
+      let toAlternate = !hasAlternateSentinel();
+      toggleColorMode(toAlternate);
+      setStyleSentinel(toAlternate);
+      toggleGiscusIfUsed(toAlternate, darkModeDefault);
+      window.dispatchEvent(new Event('resize'));
+    };
+    // Switch to dark mode if need be
+    if (hasAlternateSentinel()) {
+      toggleColorMode(true);
+    } else {
+      toggleColorMode(false);
+    }
+  </script>
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <div id="quarto-announcement" data-announcement-id="cb9d28251ca8388d2bc94ffe0e472446" class="alert alert-warning hidden"><i class="bi bi-info-circle quarto-announcement-icon"></i><div class="quarto-announcement-content">
+<p>Welcome to our newly redesigned course notes! Please update your bookmarks accordingly.</p>
+</div><i class="bi bi-x-lg quarto-announcement-action"></i></div>
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="./index.html">
+    <span class="navbar-title">STAT 415 | Introduction to Mathematical Statistics</span>
+    </a>
+  </div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="https://science.psu.edu/stat"> 
+<span class="menu-text">Department of Statistics</span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+  <a href="" class="quarto-reader-toggle quarto-navigation-tool px-1" onclick="window.quartoToggleReader(); return false;" title="Toggle reader mode">
+  <div class="quarto-reader-toggle-btn">
+  <i class="bi"></i>
+  </div>
+</a>
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./Lesson00.html">Lessons</a></li><li class="breadcrumb-item"><a href="./Lesson05.html"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Maximum Likelihood Estimation (MLE) (Part II)</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header sidebar-header-stacked">
+      <a href="https://science.psu.edu/" class="sidebar-logo-link">
+      <img src="./PSU_Ecosshield.png" alt="Penn State Eberly College of Science" class="sidebar-logo light-content py-0 d-lg-inline d-none">
+      <img src="./PSU_Ecosshield.png" alt="Penn State Eberly College of Science" class="sidebar-logo dark-content py-0 d-lg-inline d-none">
+      </a>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">About this course</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+ <span class="menu-text">Lessons</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Lesson00.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">0: Review Concepts from STAT 414</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Lesson01.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Order Statistics</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Lesson02.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Estimation (Part I)</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Lesson03.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Estimation (Part II)</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Lesson04.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Maximum Likelihood Estimation (MLE) (Part I)</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Lesson05.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Maximum Likelihood Estimation (MLE) (Part II)</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Lesson06.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Confidence Intervals</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Lesson07.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Asymptotic Distribution of MLE (Part I)</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Lesson08.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Asymptotic Distribution of MLE (Part II)</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Lesson09.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Hypothesis Tests (Part I)</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Lesson10.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Hypothesis Tests (Part II)</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Lesson11.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Bayesian Methods</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Lesson12.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Simple Linear Regression</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">In this lesson</h2>
+   
+  <ul>
+  <li><a href="#introduction-to-r" id="toc-introduction-to-r" class="nav-link active" data-scroll-target="#introduction-to-r"><span class="header-section-number">5.1</span> Introduction to R</a>
+  <ul class="collapse">
+  <li><a href="#basic-operations-in-r" id="toc-basic-operations-in-r" class="nav-link" data-scroll-target="#basic-operations-in-r"><span class="header-section-number">5.1.1</span> Basic Operations in R</a></li>
+  <li><a href="#defining-and-storing-scalars-and-vectors" id="toc-defining-and-storing-scalars-and-vectors" class="nav-link" data-scroll-target="#defining-and-storing-scalars-and-vectors"><span class="header-section-number">5.1.2</span> Defining and storing scalars and vectors</a></li>
+  <li><a href="#subsetting-vectors" id="toc-subsetting-vectors" class="nav-link" data-scroll-target="#subsetting-vectors"><span class="header-section-number">5.1.3</span> Subsetting vectors</a></li>
+  <li><a href="#logical-statements-and-the-which-command" id="toc-logical-statements-and-the-which-command" class="nav-link" data-scroll-target="#logical-statements-and-the-which-command"><span class="header-section-number">5.1.4</span> Logical statements and the <code>which</code> command</a></li>
+  <li><a href="#creating-data-frames" id="toc-creating-data-frames" class="nav-link" data-scroll-target="#creating-data-frames"><span class="header-section-number">5.1.5</span> Creating Data Frames</a></li>
+  <li><a href="#summary-statistics-in-r" id="toc-summary-statistics-in-r" class="nav-link" data-scroll-target="#summary-statistics-in-r"><span class="header-section-number">5.1.6</span> Summary statistics in R</a></li>
+  <li><a href="#simple-plotting-in-r" id="toc-simple-plotting-in-r" class="nav-link" data-scroll-target="#simple-plotting-in-r"><span class="header-section-number">5.1.7</span> Simple Plotting in R</a></li>
+  <li><a href="#statistical-distributions-in-r" id="toc-statistical-distributions-in-r" class="nav-link" data-scroll-target="#statistical-distributions-in-r"><span class="header-section-number">5.1.8</span> Statistical Distributions in R</a></li>
+  </ul></li>
+  <li><a href="#numeric-maximum-likelihood-estimation" id="toc-numeric-maximum-likelihood-estimation" class="nav-link" data-scroll-target="#numeric-maximum-likelihood-estimation"><span class="header-section-number">5.2</span> Numeric Maximum Likelihood Estimation</a>
+  <ul class="collapse">
+  <li><a href="#mle-through-grid-search" id="toc-mle-through-grid-search" class="nav-link" data-scroll-target="#mle-through-grid-search"><span class="header-section-number">5.2.1</span> MLE Through Grid Search</a></li>
+  <li><a href="#numerical-mle-the-idea" id="toc-numerical-mle-the-idea" class="nav-link" data-scroll-target="#numerical-mle-the-idea"><span class="header-section-number">5.2.2</span> Numerical MLE: The Idea</a></li>
+  <li><a href="#newtons-method-approach-idea" id="toc-newtons-method-approach-idea" class="nav-link" data-scroll-target="#newtons-method-approach-idea"><span class="header-section-number">5.2.3</span> Newton’s Method Approach Idea</a></li>
+  <li><a href="#numerical-optimization-in-r" id="toc-numerical-optimization-in-r" class="nav-link" data-scroll-target="#numerical-optimization-in-r"><span class="header-section-number">5.2.4</span> Numerical Optimization in R</a></li>
+  <li><a href="#numerical-mle-in-r" id="toc-numerical-mle-in-r" class="nav-link" data-scroll-target="#numerical-mle-in-r"><span class="header-section-number">5.2.5</span> Numerical MLE in R</a></li>
+  </ul></li>
+  <li><a href="#summary" id="toc-summary" class="nav-link" data-scroll-target="#summary"><span class="header-section-number">5.3</span> Summary</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./Lesson00.html">Lessons</a></li><li class="breadcrumb-item"><a href="./Lesson05.html"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Maximum Likelihood Estimation (MLE) (Part II)</span></a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Maximum Likelihood Estimation (MLE) (Part II)</span></h1>
+  <div class="quarto-categories">
+    <div class="quarto-category">Point Estimation</div>
+    <div class="quarto-category">Unbiased Estimation</div>
+    <div class="quarto-category">Bias</div>
+    <div class="quarto-category">Variance and Mean Square</div>
+    <div class="quarto-category">Factorization</div>
+    <div class="quarto-category">Sufficiency</div>
+    <div class="quarto-category">Method of Moments</div>
+  </div>
+  </div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="overview" class="level2 unnumbered unlisted">
+<h2 class="unnumbered unlisted anchored" data-anchor-id="overview">Overview</h2>
+<p>This lesson advances your understanding of maximum likelihood estimation (MLE) by focusing on its practical implementation, particularly through numerical methods in R. You will learn to compute MLEs for single and multiple parameter models using techniques such as grid search and the Newton-Raphson algorithm, with an emphasis on the optim function in R. Additionally, this lesson introduces essential R programming skills, including basic operations, vector and data frame manipulation, summary statistics, plotting, and working with statistical distributions like the normal and exponential. Through examples, you will explore how to evaluate likelihood and log-likelihood functions, simulate random variables, and estimate parameters numerically. By the end of this lesson, you will be proficient in applying MLE in real-world scenarios and leveraging R for statistical analysis, setting the stage for more advanced inference techniques.</p>
+<section id="objectives" class="level3 unnumbered unlisted objectiveblock">
+<h3 class="unnumbered unlisted anchored" data-anchor-id="objectives"><i class="bi bi-check2-circle"></i>Objectives</h3>
+<p>Upon completion of this lesson, you should be able to:</p>
+<ol type="1">
+<li>Numerically estimate MLEs for a range of single parameter models and multiple parameter models using optim in R in situations where data values are given, and</li>
+<li>Use R to numerically simulate random variables from standard distributions, and also find pdfs, CDFs, and quantiles of standard distributions, including the normal, exponential, Poisson, geometric, and binomial distributions.</li>
+</ol>
+</section>
+</section>
+<section id="introduction-to-r" class="level2" data-number="5.1">
+<h2 data-number="5.1" class="anchored" data-anchor-id="introduction-to-r"><span class="header-section-number">5.1</span> Introduction to R</h2>
+<section id="basic-operations-in-r" class="level3" data-number="5.1.1">
+<h3 data-number="5.1.1" class="anchored" data-anchor-id="basic-operations-in-r"><span class="header-section-number">5.1.1</span> Basic Operations in R</h3>
+<p>R can be used as a scientific calculator. The following shows a small subset of the calculator like functions that can be done in R.</p>
+<div class="cell language-name-processed">
+<div class="codeblock-with-label r">
+<style>.codeblock-with-label pre.lang-label-1::before { content: "R"; }</style>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1" data-language-name-skip="true"><pre class="sourceCode r lang-label-1 code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="dv">3</span><span class="sc">+</span><span class="dv">2</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="dv">3-2</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="dv">3</span><span class="sc">*</span><span class="dv">2</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="dv">3</span><span class="sc">/</span><span class="dv">2</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="dv">3</span><span class="sc">^</span><span class="dv">2</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="fu">exp</span>(<span class="dv">3</span>)</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="fu">sqrt</span>(<span class="dv">3</span>)</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a><span class="fu">log</span>(<span class="dv">3</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</div>
+<p>Note that in R, and statistics and probability in general, the “log” function is, by default, the natural logarithm (base <span class="math inline">\(e\)</span>). In mathematics, this is typically denoted by <span class="math inline">\(\ln(x)\)</span>, but in statistics, this is almost always denoted simply by <span class="math inline">\(\log(x)\)</span>.</p>
+<p>One can see this from the following code:</p>
+<div class="cell language-name-processed">
+<div class="codeblock-with-label r">
+<style>.codeblock-with-label pre.lang-label-2::before { content: "R"; }</style>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2" data-language-name-skip="true"><pre class="sourceCode r lang-label-2 code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>e<span class="ot">=</span><span class="fu">exp</span>(<span class="dv">1</span>)</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>e</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 2.718282</code></pre>
+</div>
+<div class="codeblock-with-label r">
+<style>.codeblock-with-label pre.lang-label-52::before { content: "R"; }</style>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r lang-label-52 code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="do">## log base e of e = 1</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="fu">log</span>(e)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 1</code></pre>
+</div>
+<div class="codeblock-with-label r">
+<style>.codeblock-with-label pre.lang-label-53::before { content: "R"; }</style>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r lang-label-53 code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="do">## log base e of 10 does NOT = 1</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="fu">log</span>(<span class="dv">10</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 2.302585</code></pre>
+</div>
+</div>
+</section>
+<section id="defining-and-storing-scalars-and-vectors" class="level3" data-number="5.1.2">
+<h3 data-number="5.1.2" class="anchored" data-anchor-id="defining-and-storing-scalars-and-vectors"><span class="header-section-number">5.1.2</span> Defining and storing scalars and vectors</h3>
+<p>In general, you want to type your R code in a text file with the “.r” or “.R” extension, and then send lines or blocks of code to the R console. This lets you change code easily, save your work, and copy/paste it for use in other scenarios.</p>
+<p>You will often want to store numbers as variables. You can then use those variables for calculations. Here’s a very simple example of multiplying two numbers together:</p>
+<div class="cell language-name-processed">
+<div class="codeblock-with-label r">
+<style>.codeblock-with-label pre.lang-label-3::before { content: "R"; }</style>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8" data-language-name-skip="true"><pre class="sourceCode r lang-label-3 code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>a<span class="ot">=</span><span class="dv">4</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>b<span class="ot">=</span><span class="dv">3</span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>a<span class="sc">*</span>b</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 12</code></pre>
+</div>
+</div>
+<p>We often want to work with multiple numbers, stored in a “vector” of numbers. R handles vectors (and matrices!) naturally. We can create a vector by using the <code>c</code> command in R (which stands for “concatenate”)</p>
+<div class="cell language-name-processed">
+<div class="codeblock-with-label r">
+<style>.codeblock-with-label pre.lang-label-4::before { content: "R"; }</style>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10" data-language-name-skip="true"><pre class="sourceCode r lang-label-4 code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Vectors</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>v<span class="ot">=</span><span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">4</span>,<span class="dv">3</span>,<span class="dv">2</span>)</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>v</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 1 4 3 2</code></pre>
+</div>
+<div class="codeblock-with-label r">
+<style>.codeblock-with-label pre.lang-label-54::before { content: "R"; }</style>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r lang-label-54 code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>u<span class="ot">=</span><span class="dv">1</span><span class="sc">:</span><span class="dv">4</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>u</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 1 2 3 4</code></pre>
+</div>
+</div>
+<p>This has created two vectors, u and v, each with four elements. If we apply standard math operations to vectors, R’s default behavior is to apply those operations to each element. The code below illustrates this.</p>
+<div class="cell language-name-processed">
+<div class="codeblock-with-label r">
+<style>.codeblock-with-label pre.lang-label-5::before { content: "R"; }</style>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14" data-language-name-skip="true"><pre class="sourceCode r lang-label-5 code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="do">## element-wise operations</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>v<span class="sc">+</span><span class="dv">2</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 3 6 5 4</code></pre>
+</div>
+<div class="codeblock-with-label r">
+<style>.codeblock-with-label pre.lang-label-55::before { content: "R"; }</style>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r lang-label-55 code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>v<span class="sc">*</span><span class="dv">2</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 2 8 6 4</code></pre>
+</div>
+<div class="codeblock-with-label r">
+<style>.codeblock-with-label pre.lang-label-56::before { content: "R"; }</style>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r lang-label-56 code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>u<span class="sc">^</span><span class="dv">2</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1]  1  4  9 16</code></pre>
+</div>
+<div class="codeblock-with-label r">
+<style>.codeblock-with-label pre.lang-label-57::before { content: "R"; }</style>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r lang-label-57 code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>u<span class="sc">+</span>v</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 2 6 6 6</code></pre>
+</div>
+<div class="codeblock-with-label r">
+<style>.codeblock-with-label pre.lang-label-58::before { content: "R"; }</style>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r lang-label-58 code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>u<span class="sc">*</span>v</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 1 8 9 8</code></pre>
+</div>
+</div>
+</section>
+<section id="subsetting-vectors" class="level3" data-number="5.1.3">
+<h3 data-number="5.1.3" class="anchored" data-anchor-id="subsetting-vectors"><span class="header-section-number">5.1.3</span> Subsetting vectors</h3>
+<p>We often have data or parameters stored in a vector, but only want to access one element, or a few elements, of that vector. Indexing in R is done using the square brackets: [ ]</p>
+<div class="cell language-name-processed">
+<div class="codeblock-with-label r">
+<style>.codeblock-with-label pre.lang-label-6::before { content: "R"; }</style>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb24" data-language-name-skip="true"><pre class="sourceCode r lang-label-6 code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Subsetting vectors</span></span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>v</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 1 4 3 2</code></pre>
+</div>
+<div class="codeblock-with-label r">
+<style>.codeblock-with-label pre.lang-label-59::before { content: "R"; }</style>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r lang-label-59 code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>v[<span class="dv">1</span>]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 1</code></pre>
+</div>
+<div class="codeblock-with-label r">
+<style>.codeblock-with-label pre.lang-label-60::before { content: "R"; }</style>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r lang-label-60 code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>v[<span class="dv">2</span>]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 4</code></pre>
+</div>
+<div class="codeblock-with-label r">
+<style>.codeblock-with-label pre.lang-label-61::before { content: "R"; }</style>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r lang-label-61 code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>v[<span class="dv">3</span>]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 3</code></pre>
+</div>
+<div class="codeblock-with-label r">
+<style>.codeblock-with-label pre.lang-label-62::before { content: "R"; }</style>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r lang-label-62 code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>v[<span class="dv">4</span>]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 2</code></pre>
+</div>
+<div class="codeblock-with-label r">
+<style>.codeblock-with-label pre.lang-label-63::before { content: "R"; }</style>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r lang-label-63 code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>v[<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 1 4 3</code></pre>
+</div>
+<div class="codeblock-with-label r">
+<style>.codeblock-with-label pre.lang-label-64::before { content: "R"; }</style>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r lang-label-64 code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a>v[<span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">4</span>)]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 1 2</code></pre>
+</div>
+<div class="codeblock-with-label r">
+<style>.codeblock-with-label pre.lang-label-65::before { content: "R"; }</style>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r lang-label-65 code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a>v[<span class="fu">c</span>(<span class="dv">3</span>,<span class="dv">4</span>)]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 3 2</code></pre>
+</div>
+</div>
+</section>
+<section id="logical-statements-and-the-which-command" class="level3" data-number="5.1.4">
+<h3 data-number="5.1.4" class="anchored" data-anchor-id="logical-statements-and-the-which-command"><span class="header-section-number">5.1.4</span> Logical statements and the <code>which</code> command</h3>
+<p>One important way we will subset vectors is through logical arguments. R allows us to check whether a logical statement is TRUE or FALSE. This is most often done using the <code>&lt;</code>, <code>&gt;</code>, or <code>==</code> commands. Note that testing whether or not two numbers are equal must be done with double equal signs <code>==</code>, not a single equal sign <code>=</code>, which is used to assign a value to a variable.</p>
+<p>Here are some examples of checking logical statements in R. Note that logical statements can be applied elementwise to vectors, just like mathematical operations can.</p>
+<div class="cell language-name-processed">
+<div class="codeblock-with-label r">
+<style>.codeblock-with-label pre.lang-label-7::before { content: "R"; }</style>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb40" data-language-name-skip="true"><pre class="sourceCode r lang-label-7 code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="do">## logical statements</span></span>
+<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a><span class="dv">3</span><span class="sc">&gt;</span><span class="dv">4</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] FALSE</code></pre>
+</div>
+<div class="codeblock-with-label r">
+<style>.codeblock-with-label pre.lang-label-66::before { content: "R"; }</style>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb42"><pre class="sourceCode r lang-label-66 code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="dv">3</span><span class="sc">&gt;</span><span class="dv">2</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] TRUE</code></pre>
+</div>
+<div class="codeblock-with-label r">
+<style>.codeblock-with-label pre.lang-label-67::before { content: "R"; }</style>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb44"><pre class="sourceCode r lang-label-67 code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="dv">3</span><span class="sc">==</span><span class="dv">4</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] FALSE</code></pre>
+</div>
+<div class="codeblock-with-label r">
+<style>.codeblock-with-label pre.lang-label-68::before { content: "R"; }</style>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb46"><pre class="sourceCode r lang-label-68 code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a><span class="dv">3</span><span class="sc">==</span><span class="dv">3</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] TRUE</code></pre>
+</div>
+<div class="codeblock-with-label r">
+<style>.codeblock-with-label pre.lang-label-69::before { content: "R"; }</style>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb48"><pre class="sourceCode r lang-label-69 code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a>v</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 1 4 3 2</code></pre>
+</div>
+<div class="codeblock-with-label r">
+<style>.codeblock-with-label pre.lang-label-70::before { content: "R"; }</style>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb50"><pre class="sourceCode r lang-label-70 code-with-copy"><code class="sourceCode r"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a>v<span class="sc">&gt;</span><span class="dv">2</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] FALSE  TRUE  TRUE FALSE</code></pre>
+</div>
+<div class="codeblock-with-label r">
+<style>.codeblock-with-label pre.lang-label-71::before { content: "R"; }</style>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb52"><pre class="sourceCode r lang-label-71 code-with-copy"><code class="sourceCode r"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a>v<span class="sc">==</span><span class="dv">2</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] FALSE FALSE FALSE  TRUE</code></pre>
+</div>
+<div class="codeblock-with-label r">
+<style>.codeblock-with-label pre.lang-label-72::before { content: "R"; }</style>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb54"><pre class="sourceCode r lang-label-72 code-with-copy"><code class="sourceCode r"><span id="cb54-1"><a href="#cb54-1" aria-hidden="true" tabindex="-1"></a>v<span class="sc">&gt;=</span><span class="dv">2</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] FALSE  TRUE  TRUE  TRUE</code></pre>
+</div>
+</div>
+<p>A common task in statistical analyses (See Section 4 for examples!) is to find which elements of a vector satisfy certain criteria. The commands to do so in R revolve around the <code>which</code> command. Here are some examples:</p>
+<div class="cell language-name-processed">
+<div class="codeblock-with-label r">
+<style>.codeblock-with-label pre.lang-label-8::before { content: "R"; }</style>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb56" data-language-name-skip="true"><pre class="sourceCode r lang-label-8 code-with-copy"><code class="sourceCode r"><span id="cb56-1"><a href="#cb56-1" aria-hidden="true" tabindex="-1"></a><span class="do">## subsetting using logical arguments</span></span>
+<span id="cb56-2"><a href="#cb56-2" aria-hidden="true" tabindex="-1"></a>v</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 1 4 3 2</code></pre>
+</div>
+<div class="codeblock-with-label r">
+<style>.codeblock-with-label pre.lang-label-73::before { content: "R"; }</style>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb58"><pre class="sourceCode r lang-label-73 code-with-copy"><code class="sourceCode r"><span id="cb58-1"><a href="#cb58-1" aria-hidden="true" tabindex="-1"></a><span class="fu">which</span>(v<span class="sc">&gt;</span><span class="dv">2</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 2 3</code></pre>
+</div>
+<div class="codeblock-with-label r">
+<style>.codeblock-with-label pre.lang-label-74::before { content: "R"; }</style>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb60"><pre class="sourceCode r lang-label-74 code-with-copy"><code class="sourceCode r"><span id="cb60-1"><a href="#cb60-1" aria-hidden="true" tabindex="-1"></a>v[<span class="fu">which</span>(v<span class="sc">&gt;</span><span class="dv">2</span>)]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 4 3</code></pre>
+</div>
+<div class="codeblock-with-label r">
+<style>.codeblock-with-label pre.lang-label-75::before { content: "R"; }</style>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb62"><pre class="sourceCode r lang-label-75 code-with-copy"><code class="sourceCode r"><span id="cb62-1"><a href="#cb62-1" aria-hidden="true" tabindex="-1"></a>idx<span class="ot">=</span><span class="fu">which</span>(v<span class="sc">&gt;</span><span class="dv">2</span>)</span>
+<span id="cb62-2"><a href="#cb62-2" aria-hidden="true" tabindex="-1"></a>idx</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 2 3</code></pre>
+</div>
+<div class="codeblock-with-label r">
+<style>.codeblock-with-label pre.lang-label-76::before { content: "R"; }</style>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb64"><pre class="sourceCode r lang-label-76 code-with-copy"><code class="sourceCode r"><span id="cb64-1"><a href="#cb64-1" aria-hidden="true" tabindex="-1"></a>v[idx]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 4 3</code></pre>
+</div>
+</div>
+</section>
+<section id="creating-data-frames" class="level3" data-number="5.1.5">
+<h3 data-number="5.1.5" class="anchored" data-anchor-id="creating-data-frames"><span class="header-section-number">5.1.5</span> Creating Data Frames</h3>
+<p>The R <code>data.frame</code> is a very important data structure. It allows you to store a “matrix” of data that is a mix of numeric columns (like response variables) and character columns (like human-readable names of treatments). Consider a farming example in which 10 plots were assigned either Fertilizer X (plots 1-5) or Fertilizer Y (plots 6-10). We will create a data frame that has this information in it, together with the response (corn yield at each plot).</p>
+<p>First, we will create a numeric vector of the plot number. The code below shows you two equivalent ways to do this.</p>
+<div class="cell language-name-processed">
+<div class="codeblock-with-label r">
+<style>.codeblock-with-label pre.lang-label-9::before { content: "R"; }</style>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb66" data-language-name-skip="true"><pre class="sourceCode r lang-label-9 code-with-copy"><code class="sourceCode r"><span id="cb66-1"><a href="#cb66-1" aria-hidden="true" tabindex="-1"></a>plot.ID<span class="ot">=</span><span class="dv">1</span><span class="sc">:</span><span class="dv">10</span></span>
+<span id="cb66-2"><a href="#cb66-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb66-3"><a href="#cb66-3" aria-hidden="true" tabindex="-1"></a>plot.ID<span class="ot">=</span><span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>,<span class="dv">5</span>,<span class="dv">6</span>,<span class="dv">7</span>,<span class="dv">8</span>,<span class="dv">9</span>,<span class="dv">10</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</div>
+<p>Next, we will create the character vector of treatments. Note that you need to put letters in parentheses, or R will assume that the letter is a name of a vector or scalar already defined in R. See Section 3.2 for examples.</p>
+<div class="cell language-name-processed">
+<div class="codeblock-with-label r">
+<style>.codeblock-with-label pre.lang-label-10::before { content: "R"; }</style>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb67" data-language-name-skip="true"><pre class="sourceCode r lang-label-10 code-with-copy"><code class="sourceCode r"><span id="cb67-1"><a href="#cb67-1" aria-hidden="true" tabindex="-1"></a>treatment<span class="ot">=</span><span class="fu">c</span>(<span class="st">"X"</span>,<span class="st">"X"</span>,<span class="st">"X"</span>,<span class="st">"X"</span>,<span class="st">"X"</span>,<span class="st">"Y"</span>,<span class="st">"Y"</span>,<span class="st">"Y"</span>,<span class="st">"Y"</span>,<span class="st">"Y"</span>)</span>
+<span id="cb67-2"><a href="#cb67-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb67-3"><a href="#cb67-3" aria-hidden="true" tabindex="-1"></a>treatment<span class="ot">=</span><span class="fu">c</span>(<span class="fu">rep</span>(<span class="st">"X"</span>,<span class="dv">5</span>),<span class="fu">rep</span>(<span class="st">"Y"</span>,<span class="dv">5</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</div>
+<p>Now we will create a vector of responses</p>
+<div class="cell language-name-processed">
+<div class="codeblock-with-label r">
+<style>.codeblock-with-label pre.lang-label-11::before { content: "R"; }</style>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb68" data-language-name-skip="true"><pre class="sourceCode r lang-label-11 code-with-copy"><code class="sourceCode r"><span id="cb68-1"><a href="#cb68-1" aria-hidden="true" tabindex="-1"></a>response<span class="ot">=</span><span class="fu">c</span>(<span class="dv">14</span>,<span class="dv">12</span>,<span class="dv">11</span>,<span class="dv">18</span>,<span class="dv">20</span>,<span class="dv">21</span>,<span class="dv">20</span>,<span class="dv">17</span>,<span class="dv">23</span>,<span class="dv">25</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</div>
+<p>And finally, we will put these all together into a <code>data.frame</code>.</p>
+<div class="cell language-name-processed">
+<div class="codeblock-with-label r">
+<style>.codeblock-with-label pre.lang-label-12::before { content: "R"; }</style>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb69" data-language-name-skip="true"><pre class="sourceCode r lang-label-12 code-with-copy"><code class="sourceCode r"><span id="cb69-1"><a href="#cb69-1" aria-hidden="true" tabindex="-1"></a>corn.yield<span class="ot">=</span><span class="fu">data.frame</span>(plot.ID,treatment,response)</span>
+<span id="cb69-2"><a href="#cb69-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb69-3"><a href="#cb69-3" aria-hidden="true" tabindex="-1"></a>corn.yield</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>   plot.ID treatment response
+1        1         X       14
+2        2         X       12
+3        3         X       11
+4        4         X       18
+5        5         X       20
+6        6         Y       21
+7        7         Y       20
+8        8         Y       17
+9        9         Y       23
+10      10         Y       25</code></pre>
+</div>
+</div>
+</section>
+<section id="summary-statistics-in-r" class="level3" data-number="5.1.6">
+<h3 data-number="5.1.6" class="anchored" data-anchor-id="summary-statistics-in-r"><span class="header-section-number">5.1.6</span> Summary statistics in R</h3>
+<p>The <code>summary</code> function can tell you a lot about a data frame, as it computes the minimum, maximum, mean, and median of each numeric column.</p>
+<div class="cell language-name-processed">
+<div class="codeblock-with-label r">
+<style>.codeblock-with-label pre.lang-label-13::before { content: "R"; }</style>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb71" data-language-name-skip="true"><pre class="sourceCode r lang-label-13 code-with-copy"><code class="sourceCode r"><span id="cb71-1"><a href="#cb71-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(corn.yield)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>    plot.ID       treatment            response    
+ Min.   : 1.00   Length:10          Min.   :11.00  
+ 1st Qu.: 3.25   Class :character   1st Qu.:14.75  
+ Median : 5.50   Mode  :character   Median :19.00  
+ Mean   : 5.50                      Mean   :18.10  
+ 3rd Qu.: 7.75                      3rd Qu.:20.75  
+ Max.   :10.00                      Max.   :25.00  </code></pre>
+</div>
+</div>
+<p>You can also use R to get means, variances, and standard deviations of whole vectors:</p>
+<div class="cell language-name-processed">
+<div class="codeblock-with-label r">
+<style>.codeblock-with-label pre.lang-label-14::before { content: "R"; }</style>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb73" data-language-name-skip="true"><pre class="sourceCode r lang-label-14 code-with-copy"><code class="sourceCode r"><span id="cb73-1"><a href="#cb73-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(response)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 18.1</code></pre>
+</div>
+<div class="codeblock-with-label r">
+<style>.codeblock-with-label pre.lang-label-77::before { content: "R"; }</style>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb75"><pre class="sourceCode r lang-label-77 code-with-copy"><code class="sourceCode r"><span id="cb75-1"><a href="#cb75-1" aria-hidden="true" tabindex="-1"></a><span class="fu">var</span>(response)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 21.43333</code></pre>
+</div>
+<div class="codeblock-with-label r">
+<style>.codeblock-with-label pre.lang-label-78::before { content: "R"; }</style>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb77"><pre class="sourceCode r lang-label-78 code-with-copy"><code class="sourceCode r"><span id="cb77-1"><a href="#cb77-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sd</span>(response)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 4.629615</code></pre>
+</div>
+</div>
+<p>or even subsets of vectors</p>
+<div class="cell language-name-processed">
+<div class="codeblock-with-label r">
+<style>.codeblock-with-label pre.lang-label-15::before { content: "R"; }</style>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb79" data-language-name-skip="true"><pre class="sourceCode r lang-label-15 code-with-copy"><code class="sourceCode r"><span id="cb79-1"><a href="#cb79-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(response[treatment<span class="sc">==</span><span class="st">"X"</span>])</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 15</code></pre>
+</div>
+<div class="codeblock-with-label r">
+<style>.codeblock-with-label pre.lang-label-79::before { content: "R"; }</style>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb81"><pre class="sourceCode r lang-label-79 code-with-copy"><code class="sourceCode r"><span id="cb81-1"><a href="#cb81-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(response[treatment<span class="sc">==</span><span class="st">"Y"</span>])</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 21.2</code></pre>
+</div>
+<div class="codeblock-with-label r">
+<style>.codeblock-with-label pre.lang-label-80::before { content: "R"; }</style>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb83"><pre class="sourceCode r lang-label-80 code-with-copy"><code class="sourceCode r"><span id="cb83-1"><a href="#cb83-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sd</span>(response[treatment<span class="sc">==</span><span class="st">"X"</span>])</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 3.872983</code></pre>
+</div>
+<div class="codeblock-with-label r">
+<style>.codeblock-with-label pre.lang-label-81::before { content: "R"; }</style>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb85"><pre class="sourceCode r lang-label-81 code-with-copy"><code class="sourceCode r"><span id="cb85-1"><a href="#cb85-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sd</span>(response[treatment<span class="sc">==</span><span class="st">"Y"</span>])</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 3.03315</code></pre>
+</div>
+</div>
+</section>
+<section id="simple-plotting-in-r" class="level3" data-number="5.1.7">
+<h3 data-number="5.1.7" class="anchored" data-anchor-id="simple-plotting-in-r"><span class="header-section-number">5.1.7</span> Simple Plotting in R</h3>
+<p>R can be used for plotting data as well. Having the data into a <code>data.frame</code> object can make plotting and data analysis easier. For example, we can plot a boxplot of the corn yield data using the <code>boxplot</code> command</p>
+<div class="cell language-name-processed">
+<div class="codeblock-with-label r">
+<style>.codeblock-with-label pre.lang-label-16::before { content: "R"; }</style>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb87" data-language-name-skip="true"><pre class="sourceCode r lang-label-16 code-with-copy"><code class="sourceCode r"><span id="cb87-1"><a href="#cb87-1" aria-hidden="true" tabindex="-1"></a><span class="fu">boxplot</span>(response<span class="sc">~</span>treatment,<span class="at">data=</span>corn.yield,</span>
+<span id="cb87-2"><a href="#cb87-2" aria-hidden="true" tabindex="-1"></a>        <span class="at">main=</span><span class="st">"Boxplot of Corn Yield With Different Fertilizers"</span>,</span>
+<span id="cb87-3"><a href="#cb87-3" aria-hidden="true" tabindex="-1"></a>        <span class="at">xlab=</span><span class="st">"Fertilizer"</span>,<span class="at">ylab=</span><span class="st">"Yield (kg)"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div class="cell-output-display">
+<div id="fig-boxplotcornyield" class="quarto-float quarto-figure quarto-figure-center anchored" alt="Two boxplots for X and Y from the corn yield data." width="70%">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-boxplotcornyield-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="Lesson05_files/figure-html/fig-boxplotcornyield-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1" title="Fig&nbsp;5.1: "><img src="Lesson05_files/figure-html/fig-boxplotcornyield-1.png" id="fig-boxplotcornyield" class="img-fluid figure-img" style="width:70.0%" alt="Two boxplots for X and Y from the corn yield data."></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" id="fig-boxplotcornyield-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Fig&nbsp;5.1
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>Histograms can be plotted using the <code>hist</code> command.</p>
+<div class="cell language-name-processed">
+<div class="codeblock-with-label r">
+<style>.codeblock-with-label pre.lang-label-17::before { content: "R"; }</style>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb88" data-language-name-skip="true"><pre class="sourceCode r lang-label-17 code-with-copy"><code class="sourceCode r"><span id="cb88-1"><a href="#cb88-1" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(response,<span class="at">main=</span><span class="st">"Histogram of Corn Yield (All Plots)"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div class="cell-output-display">
+<div id="fig-histogramcornyield" class="quarto-float quarto-figure quarto-figure-center anchored" alt="Histogram of all plots in the corn yield data." width="70%">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-histogramcornyield-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="Lesson05_files/figure-html/fig-histogramcornyield-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2" title="Fig&nbsp;5.2: "><img src="Lesson05_files/figure-html/fig-histogramcornyield-1.png" id="fig-histogramcornyield" class="img-fluid figure-img" style="width:70.0%" alt="Histogram of all plots in the corn yield data."></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" id="fig-histogramcornyield-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Fig&nbsp;5.2
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>And numeric data can be plotted as a scatterplot using the <code>plot</code> command.</p>
+<div class="cell language-name-processed">
+<div class="codeblock-with-label r">
+<style>.codeblock-with-label pre.lang-label-18::before { content: "R"; }</style>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb89" data-language-name-skip="true"><pre class="sourceCode r lang-label-18 code-with-copy"><code class="sourceCode r"><span id="cb89-1"><a href="#cb89-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="at">x=</span>plot.ID,<span class="at">y=</span>response)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div class="cell-output-display">
+<div id="fig-scattercornyield" class="quarto-float quarto-figure quarto-figure-center anchored" alt="Scatterplot of response vs Plot ID in the corn yield data." width="70%">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-scattercornyield-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="Lesson05_files/figure-html/fig-scattercornyield-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-3" title="Fig&nbsp;5.3: "><img src="Lesson05_files/figure-html/fig-scattercornyield-1.png" id="fig-scattercornyield" class="img-fluid figure-img" style="width:70.0%" alt="Scatterplot of response vs Plot ID in the corn yield data."></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" id="fig-scattercornyield-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Fig&nbsp;5.3
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>You will often need to include R graphics in your homework solutions. Once you have made the plot, you can right click on the figure in Rstudio, and then copy the image which can then be pasted into a Word document (or similar document).</p>
+</section>
+<section id="statistical-distributions-in-r" class="level3" data-number="5.1.8">
+<h3 data-number="5.1.8" class="anchored" data-anchor-id="statistical-distributions-in-r"><span class="header-section-number">5.1.8</span> Statistical Distributions in R</h3>
+<section id="help-files-in-r" class="level4">
+<h4 class="anchored" data-anchor-id="help-files-in-r">Help files in R</h4>
+<p>There are many functions in R - too many for any person to memorize all of the functions needed for most analyses. R also has a very robust system of documentation, as long as you know what to look for. In particular, if you know the name of a function that you need help with, R can help you very easily (see below). But if you don’t know what the name is for a function that does something you want to do, then your best bet is to search for that function on the internet using your favorite search engine.</p>
+<p>For example, if you want to know how to find the CDF of a Normal distribution in R, searching something like “CDF normal distribution in R” will quickly give you many results that point you to the <code>pnorm</code> function.</p>
+<p>Once you know the function you may want to use, you can access R’s help files for that function by typing <code>help(pnorm)</code> or <code>?pnorm</code> into the R console. Note, that you should replace <code>pnorm</code> with whatever function you are looking for help with.</p>
+</section>
+<section id="r-functions-for-statistical-distributions" class="level4">
+<h4 class="anchored" data-anchor-id="r-functions-for-statistical-distributions">R Functions for Statistical Distributions</h4>
+<p>R is a great statistical software for working with distributions. Three main tasks related to random variables that R is very good at are:</p>
+<ol type="1">
+<li><p>Drawing random variables from a given distribution</p></li>
+<li><p>Calculating the pdf or pmf or likelihood of a distribution at a given observed value</p></li>
+<li><p>Calculating quantiles and cdfs of distributions.</p></li>
+</ol>
+<p>In R, there is a pattern to functions related to a distribution. If a given distributions short name in R is “XXX”, then “rXXX” will draw a random variable from that distribution, “dXXX” will calculate the probability density function of that distribution, and “pXXX” will calculate the cumulative distribution function, and “qXXX” will calculate the quantile.</p>
+</section>
+<section id="examples-from-the-gaussian-normal-distribution" class="level4">
+<h4 class="anchored" data-anchor-id="examples-from-the-gaussian-normal-distribution">Examples from the Gaussian (Normal) Distribution</h4>
+<p>For example, let’s assume that each <span class="math inline">\(x_i \sim N(3,4)\)</span> is an independent, normally-distributed random variable with mean 3 and variance 4. R’s normally-distributed variable “short name” is “norm”, so to draw one random variable we could use the following code:</p>
+<div class="cell language-name-processed">
+<div class="codeblock-with-label r">
+<style>.codeblock-with-label pre.lang-label-19::before { content: "R"; }</style>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb90" data-language-name-skip="true"><pre class="sourceCode r lang-label-19 code-with-copy"><code class="sourceCode r"><span id="cb90-1"><a href="#cb90-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rnorm</span>(<span class="at">n=</span><span class="dv">1</span>,<span class="at">mean=</span><span class="dv">3</span>,<span class="at">sd=</span><span class="dv">2</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 4.580174</code></pre>
+</div>
+</div>
+<p>Note that R uses the standard deviation <code>sd</code> instead of the variance. If I wanted to draw 10 iid random variables, I could modify the <code>n</code> argument to rnorm:</p>
+<div class="cell language-name-processed">
+<div class="codeblock-with-label r">
+<style>.codeblock-with-label pre.lang-label-20::before { content: "R"; }</style>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb92" data-language-name-skip="true"><pre class="sourceCode r lang-label-20 code-with-copy"><code class="sourceCode r"><span id="cb92-1"><a href="#cb92-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rnorm</span>(<span class="at">n=</span><span class="dv">10</span>,<span class="at">mean=</span><span class="dv">3</span>,<span class="at">sd=</span><span class="dv">2</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code> [1] 2.6761275 1.8122462 4.9407564 3.5186309 1.7039966 2.8509964 3.2628886
+ [8] 2.7733769 0.2348553 3.2150708</code></pre>
+</div>
+</div>
+<p>I can also assign these values to a variable for future use”</p>
+<div class="cell language-name-processed">
+<div class="codeblock-with-label r">
+<style>.codeblock-with-label pre.lang-label-21::before { content: "R"; }</style>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb94" data-language-name-skip="true"><pre class="sourceCode r lang-label-21 code-with-copy"><code class="sourceCode r"><span id="cb94-1"><a href="#cb94-1" aria-hidden="true" tabindex="-1"></a>x<span class="ot">=</span><span class="fu">rnorm</span>(<span class="at">n=</span><span class="dv">1</span>,<span class="at">mean=</span><span class="dv">3</span>,<span class="at">sd=</span><span class="dv">2</span>)</span>
+<span id="cb94-2"><a href="#cb94-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb94-3"><a href="#cb94-3" aria-hidden="true" tabindex="-1"></a>x</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 3.265162</code></pre>
+</div>
+</div>
+<p>Now if I wanted to evaluate the pdf of a <span class="math inline">\(x \sim N(3,4)\)</span> at a particular value <span class="math inline">\(u=2\)</span>, I can use the <code>dnorm</code> function:</p>
+<div class="cell language-name-processed">
+<div class="codeblock-with-label r">
+<style>.codeblock-with-label pre.lang-label-22::before { content: "R"; }</style>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb96" data-language-name-skip="true"><pre class="sourceCode r lang-label-22 code-with-copy"><code class="sourceCode r"><span id="cb96-1"><a href="#cb96-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dnorm</span>(<span class="dv">2</span>,<span class="at">mean=</span><span class="dv">3</span>,<span class="at">sd=</span><span class="dv">2</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.1760327</code></pre>
+</div>
+</div>
+<p>The code above returns <span class="math inline">\(f_X(2)\)</span>. To get the CDF we use the <code>pnorm</code> function, with <span class="math inline">\(F_X(2) = P(X\le 2)\)</span> being obtained by:</p>
+<div class="cell language-name-processed">
+<div class="codeblock-with-label r">
+<style>.codeblock-with-label pre.lang-label-23::before { content: "R"; }</style>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb98" data-language-name-skip="true"><pre class="sourceCode r lang-label-23 code-with-copy"><code class="sourceCode r"><span id="cb98-1"><a href="#cb98-1" aria-hidden="true" tabindex="-1"></a><span class="fu">pnorm</span>(<span class="dv">2</span>,<span class="at">mean=</span><span class="dv">3</span>,<span class="at">sd=</span><span class="dv">2</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.3085375</code></pre>
+</div>
+</div>
+<p>These functions all work on vectors as well. For example, if I wanted to evaluate the likelihood function of the ten simulated data points in “x”, I could do so by</p>
+<div class="cell language-name-processed">
+<div class="codeblock-with-label r">
+<style>.codeblock-with-label pre.lang-label-24::before { content: "R"; }</style>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb100" data-language-name-skip="true"><pre class="sourceCode r lang-label-24 code-with-copy"><code class="sourceCode r"><span id="cb100-1"><a href="#cb100-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dnorm</span>(x,<span class="at">mean=</span><span class="dv">3</span>,<span class="at">sd=</span><span class="dv">2</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.1977257</code></pre>
+</div>
+</div>
+<p>The total likelihood of all the simulated random variables <span class="math inline">\(L(X_1,\ldots,X_{10}) = \prod_i f_X(X_i)\)</span> would then be</p>
+<div class="cell language-name-processed">
+<div class="codeblock-with-label r">
+<style>.codeblock-with-label pre.lang-label-25::before { content: "R"; }</style>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb102" data-language-name-skip="true"><pre class="sourceCode r lang-label-25 code-with-copy"><code class="sourceCode r"><span id="cb102-1"><a href="#cb102-1" aria-hidden="true" tabindex="-1"></a><span class="fu">prod</span>(<span class="fu">dnorm</span>(x,<span class="at">mean=</span><span class="dv">3</span>,<span class="at">sd=</span><span class="dv">2</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.1977257</code></pre>
+</div>
+</div>
+<p>and the log-likelihood <span class="math inline">\(l(X_1,\ldots,X_10)=\sum_i log(f_X(X_i))\)</span> could be calculated by</p>
+<div class="cell language-name-processed">
+<div class="codeblock-with-label r">
+<style>.codeblock-with-label pre.lang-label-26::before { content: "R"; }</style>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb104" data-language-name-skip="true"><pre class="sourceCode r lang-label-26 code-with-copy"><code class="sourceCode r"><span id="cb104-1"><a href="#cb104-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(<span class="fu">log</span>(<span class="fu">dnorm</span>(x,<span class="at">mean=</span><span class="dv">3</span>,<span class="at">sd=</span><span class="dv">2</span>)))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] -1.620875</code></pre>
+</div>
+</div>
+<p>R has an argument to <code>dnorm</code> to obtain the log-density instead of the density:</p>
+<div class="cell language-name-processed">
+<div class="codeblock-with-label r">
+<style>.codeblock-with-label pre.lang-label-27::before { content: "R"; }</style>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb106" data-language-name-skip="true"><pre class="sourceCode r lang-label-27 code-with-copy"><code class="sourceCode r"><span id="cb106-1"><a href="#cb106-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dnorm</span>(x,<span class="at">mean=</span><span class="dv">3</span>,<span class="at">sd=</span><span class="dv">2</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.1977257</code></pre>
+</div>
+<div class="codeblock-with-label r">
+<style>.codeblock-with-label pre.lang-label-82::before { content: "R"; }</style>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb108"><pre class="sourceCode r lang-label-82 code-with-copy"><code class="sourceCode r"><span id="cb108-1"><a href="#cb108-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dnorm</span>(x,<span class="at">mean=</span><span class="dv">3</span>,<span class="at">sd=</span><span class="dv">2</span>,<span class="at">log=</span><span class="cn">TRUE</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] -1.620875</code></pre>
+</div>
+</div>
+<p>which is also often helpful.</p>
+</section>
+<section id="examples-from-the-exponential-distribution" class="level4">
+<h4 class="anchored" data-anchor-id="examples-from-the-exponential-distribution">Examples from the Exponential distribution</h4>
+<p>As a second example, consider the Exponential distribution <span class="math inline">\(z_i\sim Exp(\lambda)\)</span>. We can draw 30 random variables, each from <span class="math inline">\(z_i\sim Exp(2)\)</span> (so <span class="math inline">\(E(z_i)=0.5\)</span>) with the following</p>
+<div class="cell language-name-processed">
+<div class="codeblock-with-label r">
+<style>.codeblock-with-label pre.lang-label-28::before { content: "R"; }</style>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb110" data-language-name-skip="true"><pre class="sourceCode r lang-label-28 code-with-copy"><code class="sourceCode r"><span id="cb110-1"><a href="#cb110-1" aria-hidden="true" tabindex="-1"></a>z<span class="ot">=</span><span class="fu">rexp</span>(<span class="at">n=</span><span class="dv">30</span>,<span class="at">rate=</span><span class="dv">2</span>)</span>
+<span id="cb110-2"><a href="#cb110-2" aria-hidden="true" tabindex="-1"></a>z</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code> [1] 0.46705460 0.13549008 0.59298057 0.15507703 0.48047756 0.05794372
+ [7] 2.49577748 0.16406064 0.06812573 0.86453227 0.20257271 0.75935034
+[13] 0.13467089 0.51720819 0.30552624 0.09729556 0.40618003 0.42356514
+[19] 0.77848292 1.26786815 0.20875659 0.67108327 0.01352500 0.57952264
+[25] 0.05873649 1.74906687 0.34446049 0.01367921 0.17598810 0.16136436</code></pre>
+</div>
+</div>
+<p>Let’s get the mean and median of the simulated data</p>
+<div class="cell language-name-processed">
+<div class="codeblock-with-label r">
+<style>.codeblock-with-label pre.lang-label-29::before { content: "R"; }</style>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb112" data-language-name-skip="true"><pre class="sourceCode r lang-label-29 code-with-copy"><code class="sourceCode r"><span id="cb112-1"><a href="#cb112-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(z)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.4783474</code></pre>
+</div>
+<div class="codeblock-with-label r">
+<style>.codeblock-with-label pre.lang-label-83::before { content: "R"; }</style>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb114"><pre class="sourceCode r lang-label-83 code-with-copy"><code class="sourceCode r"><span id="cb114-1"><a href="#cb114-1" aria-hidden="true" tabindex="-1"></a><span class="fu">median</span>(z)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.3249934</code></pre>
+</div>
+</div>
+<p>which are similar to the theoretical mean (of <span class="math inline">\(1/\lambda=0.5\)</span>) and median (of <span class="math inline">\(\ln(2)/\lambda=0.34657\)</span>)</p>
+<p>Now let’s simulate 1000 random variables</p>
+<div class="cell language-name-processed">
+<div class="codeblock-with-label r">
+<style>.codeblock-with-label pre.lang-label-30::before { content: "R"; }</style>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb116" data-language-name-skip="true"><pre class="sourceCode r lang-label-30 code-with-copy"><code class="sourceCode r"><span id="cb116-1"><a href="#cb116-1" aria-hidden="true" tabindex="-1"></a>z<span class="ot">=</span><span class="fu">rexp</span>(<span class="at">n=</span><span class="dv">1000</span>,<span class="at">rate=</span><span class="dv">2</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</div>
+<p>This is too many to print, so let’s plot them with a histogram</p>
+<div class="cell language-name-processed">
+<div class="codeblock-with-label r">
+<style>.codeblock-with-label pre.lang-label-31::before { content: "R"; }</style>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb117" data-language-name-skip="true"><pre class="sourceCode r lang-label-31 code-with-copy"><code class="sourceCode r"><span id="cb117-1"><a href="#cb117-1" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(z)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Lesson05_files/figure-html/unnamed-chunk-28-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>These look exponentially-distributed, as they should. We will now calculate multiple theoretical quantities of exponential random variables with rate 2, and compare them with estimates of these quantities from the simulated random variables <span class="math inline">\({z_i,i=1,2,...,1000}\)</span>.</p>
+<p>First let’s look at values of the CDF - the cumulative distribution function. The probability of <span class="math inline">\(P(z&lt;1)\)</span> is <span class="math inline">\(F_Z(1)\)</span>, which in R is found using the <code>pexp</code> command</p>
+<div class="cell language-name-processed">
+<div class="codeblock-with-label r">
+<style>.codeblock-with-label pre.lang-label-32::before { content: "R"; }</style>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb118" data-language-name-skip="true"><pre class="sourceCode r lang-label-32 code-with-copy"><code class="sourceCode r"><span id="cb118-1"><a href="#cb118-1" aria-hidden="true" tabindex="-1"></a><span class="fu">pexp</span>(<span class="dv">1</span>,<span class="at">rate=</span><span class="dv">2</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.8646647</code></pre>
+</div>
+</div>
+<p>and the sample-based approximation to this is given by the number of sampled <span class="math inline">\(z_i\)</span> that are less than or equal to 1, divided by the total number of samples (n=1000 here).</p>
+<div class="cell language-name-processed">
+<div class="codeblock-with-label r">
+<style>.codeblock-with-label pre.lang-label-33::before { content: "R"; }</style>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb120" data-language-name-skip="true"><pre class="sourceCode r lang-label-33 code-with-copy"><code class="sourceCode r"><span id="cb120-1"><a href="#cb120-1" aria-hidden="true" tabindex="-1"></a>n.less.than<span class="fl">.1</span><span class="ot">=</span><span class="fu">length</span>(<span class="fu">which</span>(z<span class="sc">&lt;=</span><span class="dv">1</span>))</span>
+<span id="cb120-2"><a href="#cb120-2" aria-hidden="true" tabindex="-1"></a>n.less.than<span class="fl">.1</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 870</code></pre>
+</div>
+<div class="codeblock-with-label r">
+<style>.codeblock-with-label pre.lang-label-84::before { content: "R"; }</style>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb122"><pre class="sourceCode r lang-label-84 code-with-copy"><code class="sourceCode r"><span id="cb122-1"><a href="#cb122-1" aria-hidden="true" tabindex="-1"></a>cdf.val<span class="ot">=</span>n.less.than<span class="fl">.1</span><span class="sc">/</span><span class="dv">1000</span></span>
+<span id="cb122-2"><a href="#cb122-2" aria-hidden="true" tabindex="-1"></a>cdf.val</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.87</code></pre>
+</div>
+</div>
+<p>which is a close approximation to the true value shown above.</p>
+<p>If we wanted the joint likelihood of <span class="math inline">\((z_1,z_2,...,z_1000)\)</span>, we could get it by <span class="math inline">\(f_Z(z_1,z_2,...,z_1000)=\prod_{i=1}^{1000} f_Z(z_i)=\prod_{i=1}^{1000} \lambda e^{-\lambda z_i}\)</span>, which we can obtain directly in R</p>
+<div class="cell language-name-processed">
+<div class="codeblock-with-label r">
+<style>.codeblock-with-label pre.lang-label-34::before { content: "R"; }</style>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb124" data-language-name-skip="true"><pre class="sourceCode r lang-label-34 code-with-copy"><code class="sourceCode r"><span id="cb124-1"><a href="#cb124-1" aria-hidden="true" tabindex="-1"></a><span class="fu">prod</span>(<span class="dv">2</span><span class="sc">*</span><span class="fu">exp</span>(<span class="sc">-</span><span class="dv">2</span><span class="sc">*</span>z))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 1.137955e-131</code></pre>
+</div>
+</div>
+<p>or can be obtained using the <code>dexp</code> command</p>
+<div class="cell language-name-processed">
+<div class="codeblock-with-label r">
+<style>.codeblock-with-label pre.lang-label-35::before { content: "R"; }</style>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb126" data-language-name-skip="true"><pre class="sourceCode r lang-label-35 code-with-copy"><code class="sourceCode r"><span id="cb126-1"><a href="#cb126-1" aria-hidden="true" tabindex="-1"></a><span class="fu">prod</span>(<span class="fu">dexp</span>(z,<span class="at">rate=</span><span class="dv">2</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 1.137955e-131</code></pre>
+</div>
+</div>
+</section>
+</section>
+</section>
+<section id="numeric-maximum-likelihood-estimation" class="level2" data-number="5.2">
+<h2 data-number="5.2" class="anchored" data-anchor-id="numeric-maximum-likelihood-estimation"><span class="header-section-number">5.2</span> Numeric Maximum Likelihood Estimation</h2>
+<p>Now back to MLEs!</p>
+<p>In the previous section, we showed an example where the maximum likelihood estimator could not be solved analytically and we require numerical optimization to solve the equation. In this section, we present two methods to find the maximum likelihood estimate numerically. The first method is to find it, using R, by a grid search. The other uses the <code>optim</code> function in R.</p>
+<section id="mle-through-grid-search" class="level3" data-number="5.2.1">
+<h3 data-number="5.2.1" class="anchored" data-anchor-id="mle-through-grid-search"><span class="header-section-number">5.2.1</span> MLE Through Grid Search</h3>
+<p>One way to find the MLE is through a grid search. The idea is to use software, such as R, to make the calculations for you. We know the underlying distribution and thus can find the likelihood function. Then, given a set of data and possible values of the unknown parameter, <span class="math inline">\(\theta\)</span>, we can find the value of <span class="math inline">\(\theta\)</span> that maximizes the likelihood.</p>
+<p>To illustrate this, let’s assume that we have the following data points. Suppose the data come from an exponential distribution with unknown mean <span class="math inline">\(\theta\)</span>.</p>
+<div id="fig-expdistunknownmean" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-expdistunknownmean-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="cell language-name-processed" data-lightbox="true">
+<div class="codeblock-with-label r">
+<style>.codeblock-with-label pre.lang-label-36::before { content: "R"; }</style>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb128" data-language-name-skip="true"><pre class="sourceCode r lang-label-36 code-with-copy"><code class="sourceCode r"><span id="cb128-1"><a href="#cb128-1" aria-hidden="true" tabindex="-1"></a>x<span class="ot">=</span><span class="fu">c</span>(<span class="dv">1</span>,  <span class="dv">5</span>, <span class="dv">10</span>,  <span class="dv">1</span>,  <span class="dv">3</span>, <span class="dv">11</span>, <span class="dv">10</span>, <span class="dv">23</span>,  <span class="dv">2</span>,  <span class="dv">6</span>,  <span class="dv">1</span>, <span class="dv">24</span>,  <span class="dv">6</span>, <span class="dv">11</span>, <span class="dv">19</span>)</span>
+<span id="cb128-2"><a href="#cb128-2" aria-hidden="true" tabindex="-1"></a>x</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>&gt;  [1]  1  5 10  1  3 11 10 23  2  6  1 24  6 11 19</code></pre>
+</div>
+<div class="codeblock-with-label r">
+<style>.codeblock-with-label pre.lang-label-85::before { content: "R"; }</style>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb130"><pre class="sourceCode r lang-label-85 code-with-copy"><code class="sourceCode r"><span id="cb130-1"><a href="#cb130-1" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(x,<span class="at">breaks=</span><span class="dv">7</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Lesson05_files/figure-html/unnamed-chunk-33-1.png" class="img-fluid figure-img" style="width:70.0%" alt="Histogram showing data from an exponential distribution with unknown mean theta."></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" id="fig-expdistunknownmean-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Fig&nbsp;5.4
+</figcaption>
+</figure>
+</div>
+<p>If we don’t know the parameter <span class="math inline">\(\theta\)</span>, we could try to estimate it with maximum likelihood estimation, where the estimate is the value that maximizes the likelihood function <span class="math display">\[\hat{\theta}=\text{argmax}{L(\theta,\mathbf{x})}\]</span> We could try just picking a few values of <span class="math inline">\(\theta\)</span> to try:</p>
+<div class="cell language-name-processed">
+<div class="codeblock-with-label r">
+<style>.codeblock-with-label pre.lang-label-37::before { content: "R"; }</style>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb131" data-language-name-skip="true"><pre class="sourceCode r lang-label-37 code-with-copy"><code class="sourceCode r"><span id="cb131-1"><a href="#cb131-1" aria-hidden="true" tabindex="-1"></a>lik.exp<span class="fl">.2</span><span class="ot">=</span><span class="cf">function</span>(theta,x){</span>
+<span id="cb131-2"><a href="#cb131-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">prod</span>(<span class="fu">dexp</span>(x,<span class="at">rate=</span><span class="dv">1</span><span class="sc">/</span>theta))</span>
+<span id="cb131-3"><a href="#cb131-3" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb131-4"><a href="#cb131-4" aria-hidden="true" tabindex="-1"></a><span class="fu">lik.exp.2</span>(<span class="dv">2</span>,x)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 4.017603e-34</code></pre>
+</div>
+<div class="codeblock-with-label r">
+<style>.codeblock-with-label pre.lang-label-86::before { content: "R"; }</style>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb133"><pre class="sourceCode r lang-label-86 code-with-copy"><code class="sourceCode r"><span id="cb133-1"><a href="#cb133-1" aria-hidden="true" tabindex="-1"></a><span class="fu">lik.exp.2</span>(<span class="dv">10</span>,x)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 1.674493e-21</code></pre>
+</div>
+<div class="codeblock-with-label r">
+<style>.codeblock-with-label pre.lang-label-87::before { content: "R"; }</style>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb135"><pre class="sourceCode r lang-label-87 code-with-copy"><code class="sourceCode r"><span id="cb135-1"><a href="#cb135-1" aria-hidden="true" tabindex="-1"></a><span class="fu">lik.exp.2</span>(<span class="dv">20</span>,x)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 3.949042e-23</code></pre>
+</div>
+</div>
+<p>Out of this small collection of values, <span class="math inline">\(\theta=10\)</span> gives the highest likelihood.</p>
+<p>To try a sequence of values, we’ll build a “for” loop. Our goal is to end up with a vector of likelihood values for a sequence of <span class="math inline">\(\theta\)</span> values. We start by specifying the <span class="math inline">\(\theta\)</span> values we want to consider.</p>
+<div class="cell language-name-processed">
+<div class="codeblock-with-label r">
+<style>.codeblock-with-label pre.lang-label-38::before { content: "R"; }</style>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb137" data-language-name-skip="true"><pre class="sourceCode r lang-label-38 code-with-copy"><code class="sourceCode r"><span id="cb137-1"><a href="#cb137-1" aria-hidden="true" tabindex="-1"></a>theta.vals<span class="ot">=</span><span class="fu">seq</span>(<span class="dv">1</span>,<span class="dv">100</span>,<span class="at">by=</span><span class="fl">0.1</span>)</span>
+<span id="cb137-2"><a href="#cb137-2" aria-hidden="true" tabindex="-1"></a>theta.vals</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</div>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code> [1] 1.0 1.1 1.2 1.3 1.4 1.5 1.6 1.7 1.8 1.9 2.0 2.1 2.2 2.3 2.4 2.5 2.6 2.7 2.8
+[20] 2.9 3.0 3.1 3.2 3.3 3.4
+...
+ [1]  97.6  97.7  97.8  97.9  98.0  98.1  98.2  98.3  98.4  98.5  98.6  98.7
+[13]  98.8  98.9  99.0  99.1  99.2  99.3  99.4  99.5  99.6  99.7  99.8  99.9
+[25] 100.0</code></pre>
+</div>
+</div>
+<p>We then create an empty vector of likelihood values (we’ll fill in the values later)</p>
+<div class="cell language-name-processed">
+<div class="codeblock-with-label r">
+<style>.codeblock-with-label pre.lang-label-39::before { content: "R"; }</style>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb139" data-language-name-skip="true"><pre class="sourceCode r lang-label-39 code-with-copy"><code class="sourceCode r"><span id="cb139-1"><a href="#cb139-1" aria-hidden="true" tabindex="-1"></a>lik.vals<span class="ot">=</span><span class="fu">rep</span>(<span class="cn">NA</span>,<span class="fu">length</span>(theta.vals))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</div>
+<p>We can now make a for loop that (1) evaluates the likelihood function for each value of theta, and (2) saves that value in the correct spot in <code>lik.vals</code>.</p>
+<div id="fig-mleforeachtheta" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-mleforeachtheta-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="cell" data-lightbox="true">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Lesson05_files/figure-html/unnamed-chunk-38-1.png" class="img-fluid figure-img" style="width:70.0%" alt="Graph of the likelihood function for each value of theta."></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" id="fig-mleforeachtheta-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Fig&nbsp;5.5
+</figcaption>
+</figure>
+</div>
+<p>This approach is often called a “grid search”, as we are searching over a wide range of values of our parameters. From the plot, we can see that the MLE is somewhere near 10. We can find the best value of <span class="math inline">\(\theta\)</span> out of those we tried by using the <code>which.max</code> command, which finds the index of the maximum value in a vector.</p>
+<div class="cell language-name-processed">
+<div class="codeblock-with-label r">
+<style>.codeblock-with-label pre.lang-label-40::before { content: "R"; }</style>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb140" data-language-name-skip="true"><pre class="sourceCode r lang-label-40 code-with-copy"><code class="sourceCode r"><span id="cb140-1"><a href="#cb140-1" aria-hidden="true" tabindex="-1"></a>idx.mle<span class="ot">=</span><span class="fu">which.max</span>(lik.vals)</span>
+<span id="cb140-2"><a href="#cb140-2" aria-hidden="true" tabindex="-1"></a>idx.mle</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 80</code></pre>
+</div>
+<div class="codeblock-with-label r">
+<style>.codeblock-with-label pre.lang-label-88::before { content: "R"; }</style>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb142"><pre class="sourceCode r lang-label-88 code-with-copy"><code class="sourceCode r"><span id="cb142-1"><a href="#cb142-1" aria-hidden="true" tabindex="-1"></a>theta.hat.grid<span class="ot">=</span>theta.vals[idx.mle]</span>
+<span id="cb142-2"><a href="#cb142-2" aria-hidden="true" tabindex="-1"></a>theta.hat.grid</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 8.9</code></pre>
+</div>
+</div>
+<p>Thus, given the values that we tried, our MLE is <span class="math inline">\(\hat{\theta}_{grid}=8.9\)</span>.</p>
+<p>This is a crude method of finding the MLE. The next method we present is more comprehensive.</p>
+</section>
+<section id="numerical-mle-the-idea" class="level3" data-number="5.2.2">
+<h3 data-number="5.2.2" class="anchored" data-anchor-id="numerical-mle-the-idea"><span class="header-section-number">5.2.2</span> Numerical MLE: The Idea</h3>
+<p>A better alternative to the grid search above is to use one of many iterative methods for maximizing a function. One such method is called the Newton-Raphson algorithm, also sometimes called Newton’s Method. <!-----I moved this from under the single header!----></p>
+<p>Numerical optimization is a huge field! There are many optimization algorithms to choose from. Most of the optimization algorithms share some characteristic steps. They involve:</p>
+<ol type="1">
+<li><p>Requiring a starting value for the parameters, <span class="math inline">\({\theta}=(\theta_1, \theta_2, \ldots, \theta_p)\)</span>, denoted <span class="math inline">\({\theta}_0\)</span>.</p></li>
+<li><p>Interactively finding a sequence of new parameters, <span class="math inline">\({\theta}^{(1)}, {\theta}^{(2)}, \ldots\)</span></p></li>
+<li><p>Stops when <span class="math inline">\({\theta}^{(k)}\)</span> is “close” to a local maximum.</p></li>
+</ol>
+<div id="fig-numerical_mle_1" class="lightbox quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center" alt="Graph showing normal curve with different theta values">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-numerical_mle_1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="assets/numericalmle.png" class="lightbox" data-gallery="quarto-lightbox-gallery-4" title="Fig&nbsp;5.6: "><img src="assets/numericalmle.png" id="fig-numericalmle" class="img-fluid quarto-figure quarto-figure-center anchored figure-img" style="width:70.0%" alt="Graph showing normal curve with different theta values"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" id="fig-numerical_mle_1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Fig&nbsp;5.6
+</figcaption>
+</figure>
+</div>
+<p>The algorithm we will consider in this class is the <strong>Newton-Raphson Algorithm</strong> or <strong>Newton’s Method</strong>.</p>
+</section>
+<section id="newtons-method-approach-idea" class="level3" data-number="5.2.3">
+<h3 data-number="5.2.3" class="anchored" data-anchor-id="newtons-method-approach-idea"><span class="header-section-number">5.2.3</span> Newton’s Method Approach Idea</h3>
+<div id="vid-newtons1" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-vid figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-vid" id="vid-newtons1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Video&nbsp;5.1: Newton’s Method [no sound]
+</figcaption>
+<div aria-describedby="vid-newtons1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="text-center">
+<div style="position:relative;padding-bottom:2 %>% %">
+<iframe id="kaltura_player" src="https://cdnapisec.kaltura.com/p/2356971/embedPlaykitJs/uiconf_id/54679262?iframeembed=true&amp;entry_id=1_2xwqdqgj&amp;config%5Bprovider%5D=%7B%22widgetId%22%3A%221_4bkcltvd%22%7D&amp;config%5Bplayback%5D=%7B%22startTime%22%3A0%7D" style="width: 100%;height: 690px;border: 0;" allowfullscreen="" webkitallowfullscreen="" mozallowfullscreen="" allow="autoplay *; fullscreen *; encrypted-media *" sandbox="allow-downloads allow-forms allow-same-origin allow-scripts allow-top-navigation allow-pointer-lock allow-popups allow-modals allow-orientation-lock allow-popups-to-escape-sandbox allow-presentation allow-top-navigation-by-user-activation" title="STAT 415: Newton's Method [no sound]">
+</iframe>
+</div>
+</div>
+</div>
+</figure>
+</div>
+<p>The idea is maximizing the log likelihood function, <span class="math inline">\(\ell(\theta)\)</span>. We do this by finding <span class="math inline">\(\frac{d}{d\theta} \ell(\theta)=0\)</span>. The derivative, <span class="math inline">\(\frac{d}{d\theta} \ell(\theta)=0\)</span> is just a function of <span class="math inline">\(\theta\)</span>, so let’s define it as <span class="math inline">\(h(\theta)=\frac{d}{d\theta} \ell(\theta)=0\)</span>.</p>
+<p>We need to find the “root” of <span class="math inline">\(h(\theta)\)</span>. In other words, we need to find a <span class="math inline">\(\theta\)</span> such that <span class="math inline">\(h(\theta)=0\)</span>.</p>
+<p>We get closer to the root (<span class="math inline">\(h(\theta)=0\)</span>) by approximating <span class="math inline">\(h(\theta)\)</span> with a tangent like at the current value of <span class="math inline">\(\theta\)</span>. So we start with a value, <span class="math inline">\(\theta^{(0)}\)</span>. We evaluate <span class="math inline">\(h(\theta^{(0)}=\frac{d}{d\theta}\ell(\theta^{(0)})\)</span>. The tangent line at <span class="math inline">\(\theta^{(0)}\)</span> is</p>
+<p><span class="math display">\[
+\begin{align*}
+y=h^\prime(\theta^{(0)})(\theta-\theta^{(0)})+h(\theta^{(0)})
+\end{align*}
+\]</span></p>
+<p>Setting <span class="math inline">\(y=0\)</span> gives us where this tangent line hits 0.</p>
+<p><span class="math display">\[
+\begin{align*}
+0=h^\prime(\theta^{(0)})(\theta-\theta^{(0)})+h(\theta^{(0)})
+\end{align*}
+\]</span></p>
+<p>Now, we solve for <span class="math inline">\(\theta\)</span> to get:</p>
+<p><span class="math display">\[
+\begin{align*}
+\theta^{(1)}=\theta^{(0)}-\frac{h(\theta^{(0)})}{h^\prime(\theta^{(0)})}
+\end{align*}
+\]</span></p>
+<p>The following animation displays how this works to find the root. We start with an initial value of <span class="math inline">\(\theta\)</span>, <span class="math inline">\(\theta^{(0)}\)</span> (blue dot). We evaluate the log likelihood function at that value. Then we find the tangent line for the initial value. Find where the tangent line crosses the x-axis. That point becomes our “new” value of <span class="math inline">\(\theta\)</span>, <span class="math inline">\(\theta^{(1)}\)</span>. Then, we repeat the same steps we did for the initial <span class="math inline">\(\theta\)</span> value. We keep going until we find the maximum.</p>
+<div id="vid-newtons2" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-vid figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-vid" id="vid-newtons2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Video&nbsp;5.2: Newton’s Method [no sound]
+</figcaption>
+<div aria-describedby="vid-newtons2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="text-center">
+<div style="position:relative;padding-bottom:2 %>% %">
+<iframe id="kaltura_player" src="https://cdnapisec.kaltura.com/p/2356971/embedPlaykitJs/uiconf_id/54679262?iframeembed=true&amp;entry_id=1_2xwqdqgj&amp;config%5Bprovider%5D=%7B%22widgetId%22%3A%221_4bkcltvd%22%7D&amp;config%5Bplayback%5D=%7B%22startTime%22%3A0%7D" style="width: 100%;height: 690px;border: 0;" allowfullscreen="" webkitallowfullscreen="" mozallowfullscreen="" allow="autoplay *; fullscreen *; encrypted-media *" sandbox="allow-downloads allow-forms allow-same-origin allow-scripts allow-top-navigation allow-pointer-lock allow-popups allow-modals allow-orientation-lock allow-popups-to-escape-sandbox allow-presentation allow-top-navigation-by-user-activation" title="STAT 415: Newton's Method [no sound]">
+</iframe>
+</div>
+</div>
+</div>
+</figure>
+</div>
+<p>The steps are:</p>
+<ol type="1">
+<li><p>Specify a starting value, <span class="math inline">\(\theta^{(0)}\)</span>.</p></li>
+<li><p>For <span class="math inline">\(t=1, 2, \ldots\)</span> find: <span class="math display">\[\begin{aligned}
+             \theta^{(t+1)}=\theta^{(t)}-\frac{h(\theta^{(t)})}{h^\prime(\theta^{(t)})}=\theta^{(t)}-\frac{\frac{d}{d\theta}\ell(\theta^{(t)})}{\frac{d^2}{d\theta^2}\ell(\theta^{(t)})}\end{aligned}\]</span></p></li>
+</ol>
+</section>
+<section id="numerical-optimization-in-r" class="level3" data-number="5.2.4">
+<h3 data-number="5.2.4" class="anchored" data-anchor-id="numerical-optimization-in-r"><span class="header-section-number">5.2.4</span> Numerical Optimization in R</h3>
+<p>This section is meant to give you some intuition for how numerical optimization works using the R function, <code>optim</code>. In general, we will just USE existing algorithms, so most of your homework will not focus on understanding how algorithms like Newton’s method work. The next subsection (Numerical Optimization) contains the most useful code to use algorithms like Newton’s method to find MLEs. This subsection is meant to help you understand what is happening under the hood of <code>optim</code> and other numerical optimization routines.</p>
+<p>If our goal is to maximize the likelihood function <span class="math inline">\(L(\theta,\mathbf{x})\)</span>, we could similarly maximize the log-likelihood function</p>
+<div style="overflow-x:auto;overflow-y:hidden;">
+<p><span class="math display">\[
+\ell(\theta)=\log(L(\theta))=\log\left(\prod_{i=1}^n f_X(x_i,\theta)\right)=\sum_{i=1}^n \log f_X(x_i)=\sum_{i=1}^n\left(-\log(\theta) -\frac{ x_i}{\theta}\right)
+\]</span></p>
+</div>
+<p>This maximum could be found by first identifying any critical points that satisfy <span class="math inline">\(\frac{d}{d\theta}\ell(\theta)=\ell'(\theta)=0\)</span> Thus, we need to find the values of <span class="math inline">\(\theta\)</span> which are the roots of <span class="math inline">\(\ell'(\theta)\)</span> - the values of <span class="math inline">\(\theta\)</span> that make the function <span class="math inline">\(\ell'(\theta)\)</span> equal zero.</p>
+<p>Newton’s method is a root finding algorithm that works by iteratively approximating the function by a line. The details of Newton’s method are covered in the lectures, with the algorithm being as follows. Given a starting value <span class="math inline">\(\theta^{(0)}\)</span>, we iteratively update <span class="math inline">\(\theta^{(t)}\)</span> as follows <span class="math display">\[ \theta^{(t+1)}=\theta^{(t)} - \frac{\ell'(\theta^{(t)})}{\ell''(\theta^{(t)})}\]</span> Let’s write functions to evaluate the first and second derivatives of the log-likelihood function. Note that R can’t directly calculate derivatives of a function, so we do the algebra and then code these into R functions <span class="math display">\[ \ell'(\theta)=\sum_{i=1}^n\left(\frac{-\theta+x_i}{\theta^2} \right)=\sum_{i=1}^n (x_i-\theta)\theta^{-2}\]</span> <span class="math display">\[ \ell''(\theta)=\sum_{i=1}^n\left(\frac{-2x_i+\theta}{\theta^3} \right) \]</span></p>
+<p>R functions to evaluate these are</p>
+<div class="cell language-name-processed">
+<div class="codeblock-with-label r">
+<style>.codeblock-with-label pre.lang-label-41::before { content: "R"; }</style>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb144" data-language-name-skip="true"><pre class="sourceCode r lang-label-41 code-with-copy"><code class="sourceCode r"><span id="cb144-1"><a href="#cb144-1" aria-hidden="true" tabindex="-1"></a>l.first.der<span class="ot">=</span><span class="cf">function</span>(theta,x){</span>
+<span id="cb144-2"><a href="#cb144-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sum</span>((x<span class="sc">-</span>theta)<span class="sc">*</span>theta<span class="sc">^</span>(<span class="sc">-</span><span class="dv">2</span>))</span>
+<span id="cb144-3"><a href="#cb144-3" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb144-4"><a href="#cb144-4" aria-hidden="true" tabindex="-1"></a>l.scnd.der<span class="ot">=</span><span class="cf">function</span>(theta,x){</span>
+<span id="cb144-5"><a href="#cb144-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sum</span>((<span class="sc">-</span><span class="dv">2</span><span class="sc">*</span>x<span class="sc">+</span>theta)<span class="sc">/</span>theta<span class="sc">^</span><span class="dv">3</span>)</span>
+<span id="cb144-6"><a href="#cb144-6" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb144-7"><a href="#cb144-7" aria-hidden="true" tabindex="-1"></a>sumx<span class="ot">=</span><span class="fu">sum</span>(x)</span>
+<span id="cb144-8"><a href="#cb144-8" aria-hidden="true" tabindex="-1"></a>n<span class="ot">=</span><span class="fu">length</span>(x)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</div>
+<p>And Newton’s method can be done by iterating:</p>
+<div class="cell language-name-processed">
+<div class="codeblock-with-label r">
+<style>.codeblock-with-label pre.lang-label-42::before { content: "R"; }</style>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb145" data-language-name-skip="true"><pre class="sourceCode r lang-label-42 code-with-copy"><code class="sourceCode r"><span id="cb145-1"><a href="#cb145-1" aria-hidden="true" tabindex="-1"></a><span class="do">## starting value</span></span>
+<span id="cb145-2"><a href="#cb145-2" aria-hidden="true" tabindex="-1"></a>theta0<span class="ot">=</span><span class="dv">5</span></span>
+<span id="cb145-3"><a href="#cb145-3" aria-hidden="true" tabindex="-1"></a><span class="do">## first iteration</span></span>
+<span id="cb145-4"><a href="#cb145-4" aria-hidden="true" tabindex="-1"></a>theta1<span class="ot">=</span>theta0<span class="sc">-</span><span class="fu">l.first.der</span>(theta0,x)<span class="sc">/</span><span class="fu">l.scnd.der</span>(theta0,x)</span>
+<span id="cb145-5"><a href="#cb145-5" aria-hidden="true" tabindex="-1"></a>theta1</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 6.518325</code></pre>
+</div>
+<div class="codeblock-with-label r">
+<style>.codeblock-with-label pre.lang-label-89::before { content: "R"; }</style>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb147"><pre class="sourceCode r lang-label-89 code-with-copy"><code class="sourceCode r"><span id="cb147-1"><a href="#cb147-1" aria-hidden="true" tabindex="-1"></a><span class="do">## 2nd iteration</span></span>
+<span id="cb147-2"><a href="#cb147-2" aria-hidden="true" tabindex="-1"></a>theta2<span class="ot">=</span>theta1<span class="sc">-</span><span class="fu">l.first.der</span>(theta1,x)<span class="sc">/</span><span class="fu">l.scnd.der</span>(theta1,x)</span>
+<span id="cb147-3"><a href="#cb147-3" aria-hidden="true" tabindex="-1"></a>theta2</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 7.883215</code></pre>
+</div>
+<div class="codeblock-with-label r">
+<style>.codeblock-with-label pre.lang-label-90::before { content: "R"; }</style>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb149"><pre class="sourceCode r lang-label-90 code-with-copy"><code class="sourceCode r"><span id="cb149-1"><a href="#cb149-1" aria-hidden="true" tabindex="-1"></a><span class="do">## 3rd iteration</span></span>
+<span id="cb149-2"><a href="#cb149-2" aria-hidden="true" tabindex="-1"></a>theta3<span class="ot">=</span>theta2<span class="sc">-</span><span class="fu">l.first.der</span>(theta2,x)<span class="sc">/</span><span class="fu">l.scnd.der</span>(theta2,x)</span>
+<span id="cb149-3"><a href="#cb149-3" aria-hidden="true" tabindex="-1"></a>theta3</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 8.670288</code></pre>
+</div>
+<div class="codeblock-with-label r">
+<style>.codeblock-with-label pre.lang-label-91::before { content: "R"; }</style>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb151"><pre class="sourceCode r lang-label-91 code-with-copy"><code class="sourceCode r"><span id="cb151-1"><a href="#cb151-1" aria-hidden="true" tabindex="-1"></a><span class="do">## 4th iteration</span></span>
+<span id="cb151-2"><a href="#cb151-2" aria-hidden="true" tabindex="-1"></a>theta4<span class="ot">=</span>theta3<span class="sc">-</span><span class="fu">l.first.der</span>(theta3,x)<span class="sc">/</span><span class="fu">l.scnd.der</span>(theta3,x)</span>
+<span id="cb151-3"><a href="#cb151-3" aria-hidden="true" tabindex="-1"></a>theta4</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 8.858156</code></pre>
+</div>
+<div class="codeblock-with-label r">
+<style>.codeblock-with-label pre.lang-label-92::before { content: "R"; }</style>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb153"><pre class="sourceCode r lang-label-92 code-with-copy"><code class="sourceCode r"><span id="cb153-1"><a href="#cb153-1" aria-hidden="true" tabindex="-1"></a><span class="do">## 5th iteration</span></span>
+<span id="cb153-2"><a href="#cb153-2" aria-hidden="true" tabindex="-1"></a>theta5<span class="ot">=</span>theta4<span class="sc">-</span><span class="fu">l.first.der</span>(theta4,x)<span class="sc">/</span><span class="fu">l.scnd.der</span>(theta4,x)</span>
+<span id="cb153-3"><a href="#cb153-3" aria-hidden="true" tabindex="-1"></a>theta5</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 8.86665</code></pre>
+</div>
+<div class="codeblock-with-label r">
+<style>.codeblock-with-label pre.lang-label-93::before { content: "R"; }</style>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb155"><pre class="sourceCode r lang-label-93 code-with-copy"><code class="sourceCode r"><span id="cb155-1"><a href="#cb155-1" aria-hidden="true" tabindex="-1"></a><span class="do">## 6th iteration</span></span>
+<span id="cb155-2"><a href="#cb155-2" aria-hidden="true" tabindex="-1"></a>theta6<span class="ot">=</span>theta5<span class="sc">-</span><span class="fu">l.first.der</span>(theta5,x)<span class="sc">/</span><span class="fu">l.scnd.der</span>(theta5,x)</span>
+<span id="cb155-3"><a href="#cb155-3" aria-hidden="true" tabindex="-1"></a>theta6</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 8.866667</code></pre>
+</div>
+<div class="codeblock-with-label r">
+<style>.codeblock-with-label pre.lang-label-94::before { content: "R"; }</style>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb157"><pre class="sourceCode r lang-label-94 code-with-copy"><code class="sourceCode r"><span id="cb157-1"><a href="#cb157-1" aria-hidden="true" tabindex="-1"></a><span class="do">## 7th iteration</span></span>
+<span id="cb157-2"><a href="#cb157-2" aria-hidden="true" tabindex="-1"></a>theta7<span class="ot">=</span>theta6<span class="sc">-</span><span class="fu">l.first.der</span>(theta6,x)<span class="sc">/</span><span class="fu">l.scnd.der</span>(theta6,x)</span>
+<span id="cb157-3"><a href="#cb157-3" aria-hidden="true" tabindex="-1"></a>theta7</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 8.866667</code></pre>
+</div>
+<div class="codeblock-with-label r">
+<style>.codeblock-with-label pre.lang-label-95::before { content: "R"; }</style>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb159"><pre class="sourceCode r lang-label-95 code-with-copy"><code class="sourceCode r"><span id="cb159-1"><a href="#cb159-1" aria-hidden="true" tabindex="-1"></a><span class="do">## 8th iteration</span></span>
+<span id="cb159-2"><a href="#cb159-2" aria-hidden="true" tabindex="-1"></a>theta8<span class="ot">=</span>theta7<span class="sc">-</span><span class="fu">l.first.der</span>(theta7,x)<span class="sc">/</span><span class="fu">l.scnd.der</span>(theta7,x)</span>
+<span id="cb159-3"><a href="#cb159-3" aria-hidden="true" tabindex="-1"></a>theta8</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 8.866667</code></pre>
+</div>
+</div>
+<p>You can see that successive iterations seem to be converging on a value near 8.866667, which is similar to what we found in our grid search.</p>
+<p>A visual illustration of Newton’s method is found in the <code>animation</code> R package. The following code won’t display online, but if you run it in your R console it will produce a nice illustration of Newton’s method.</p>
+<div class="cell language-name-processed">
+<div class="codeblock-with-label r">
+<style>.codeblock-with-label pre.lang-label-43::before { content: "R"; }</style>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb161" data-language-name-skip="true"><pre class="sourceCode r lang-label-43 code-with-copy"><code class="sourceCode r"><span id="cb161-1"><a href="#cb161-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"animation"</span>)</span>
+<span id="cb161-2"><a href="#cb161-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(animation)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</div>
+<div id="fig-newtonmethodgraphs" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-newtonmethodgraphs-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="cell quarto-layout-panel" data-layout-ncol="2" data-lightbox="true">
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<p><img src="Lesson05_files/figure-html/unnamed-chunk-44-1.png" class="img-fluid figure-img" alt="A series of  graphs showing the Newton method."></p>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<p><img src="Lesson05_files/figure-html/unnamed-chunk-44-2.png" class="img-fluid figure-img" alt="A series of  graphs showing the Newton method."></p>
+</div>
+</div>
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<p><img src="Lesson05_files/figure-html/unnamed-chunk-44-3.png" class="img-fluid figure-img" alt="A series of  graphs showing the Newton method."></p>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<p><img src="Lesson05_files/figure-html/unnamed-chunk-44-4.png" class="img-fluid figure-img" alt="A series of  graphs showing the Newton method."></p>
+</div>
+</div>
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<p><img src="Lesson05_files/figure-html/unnamed-chunk-44-5.png" class="img-fluid figure-img" alt="A series of  graphs showing the Newton method."></p>
+</div>
+</div>
+</div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" id="fig-newtonmethodgraphs-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Fig&nbsp;5.7
+</figcaption>
+</figure>
+</div>
+</section>
+<section id="numerical-mle-in-r" class="level3" data-number="5.2.5">
+<h3 data-number="5.2.5" class="anchored" data-anchor-id="numerical-mle-in-r"><span class="header-section-number">5.2.5</span> Numerical MLE in R</h3>
+<p>The previous section described and implemented two approaches to numerically approximating the maximum likelihood estimate. In this section, we will describe a more robust, general purpose approach to optimization using <code>optim</code> in R.</p>
+<p><code>optim</code> in R performs general numeric optimization. We will begin by considering a simple, contained use case for <code>optim</code>: using <code>optim</code> for maximum likelihood estimation. Consider the general case where <span class="math display">\[x_i\sim f_X(x_i;\boldsymbol\theta)\]</span> where <span class="math inline">\(\boldsymbol\theta=(\theta_1,\theta_2,...\theta_p)\)</span> is a vector of all parameters in the model. Our goal is to find the MLEs of <span class="math inline">\(\boldsymbol\theta\)</span>. In this situation, <code>optim</code> takes as inputs the following</p>
+<ol type="1">
+<li><p>A set of initial values for <span class="math inline">\(\boldsymbol\theta\)</span>. This is a vector of initial guesses for each parameter in the model. In most cases, you do NOT need to think hard about the initial values, but you DO need to make sure that your initial values are valid. For example, if <span class="math inline">\(x_i\sim N(\mu,\sigma^2)\)</span>, then your initial value for <span class="math inline">\(\sigma\)</span> must be a positive number, which your initial value for <span class="math inline">\(\mu\)</span> could be any number.</p></li>
+<li><p>A function to evaluate the negative log-likelihood of the data for a set of parameters. Note that we are working with the NEGATIVE log-likelihood instead of the standard log-likelihood - this is because <code>optim</code> is coded to minimize by default, so the MLE of <span class="math inline">\(\boldsymbol\theta\)</span> will maximize the log-likelihood but minimize the negative log-likelihood.</p></li>
+</ol>
+<div class="callout-danger" data-appearance="minimal">
+<p><strong>Important!</strong><br>
+This function MUST have as its first input a VECTOR of ALL PARAMETERS. Any other inputs can be in any format.</p>
+</div>
+<p>We will first look at two examples that fit this framework, and then we’ll put together a code template that can be used for other problems.</p>
+<div id="exm-mle1" class="theorem example">
+<p><span class="theorem-title"><strong>Example 5.1</strong></span> To illustrate finding numerical MLEs, we first consider data from an exponential distribution. We assume that the following 15 data points come from an exponential distribution with an unknown rate parameter <span class="math inline">\(\theta\)</span>, so <span class="math inline">\(x_i\sim Exp(\theta)\)</span>, with data</p>
+<div id="fig-histogrammle" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-histogrammle-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="cell language-name-processed" data-lightbox="true">
+<div class="codeblock-with-label r">
+<style>.codeblock-with-label pre.lang-label-44::before { content: "R"; }</style>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb162" data-language-name-skip="true"><pre class="sourceCode r lang-label-44 code-with-copy"><code class="sourceCode r"><span id="cb162-1"><a href="#cb162-1" aria-hidden="true" tabindex="-1"></a>x<span class="ot">=</span><span class="fu">c</span>(<span class="dv">1</span>,  <span class="dv">5</span>, <span class="dv">10</span>,  <span class="dv">1</span>,  <span class="dv">3</span>, <span class="dv">11</span>, <span class="dv">10</span>, <span class="dv">23</span>,  <span class="dv">2</span>,  <span class="dv">6</span>,  <span class="dv">1</span>, <span class="dv">24</span>,  <span class="dv">6</span>, <span class="dv">11</span>, <span class="dv">19</span>)</span>
+<span id="cb162-2"><a href="#cb162-2" aria-hidden="true" tabindex="-1"></a>x</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code> [1]  1  5 10  1  3 11 10 23  2  6  1 24  6 11 19</code></pre>
+</div>
+<div class="codeblock-with-label r">
+<style>.codeblock-with-label pre.lang-label-96::before { content: "R"; }</style>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb164"><pre class="sourceCode r lang-label-96 code-with-copy"><code class="sourceCode r"><span id="cb164-1"><a href="#cb164-1" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(x,<span class="at">breaks=</span><span class="dv">7</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Lesson05_files/figure-html/unnamed-chunk-45-1.png" class="img-fluid figure-img" style="width:70.0%" alt="Histogram of 15 data points that come from an exponential distribution with an unknown parameter theta."></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" id="fig-histogrammle-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Fig&nbsp;5.8
+</figcaption>
+</figure>
+</div>
+<p>We first write an R function to evaluate the negative log-likelihood of the data. We’ll use <code>dexp</code> from R to evaluate the log-likelihood, with the <code>log=TRUE</code> option</p>
+<div class="cell language-name-processed">
+<div class="codeblock-with-label r">
+<style>.codeblock-with-label pre.lang-label-45::before { content: "R"; }</style>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb165" data-language-name-skip="true"><pre class="sourceCode r lang-label-45 code-with-copy"><code class="sourceCode r"><span id="cb165-1"><a href="#cb165-1" aria-hidden="true" tabindex="-1"></a>nll.exp<span class="ot">=</span><span class="cf">function</span>(theta,x){</span>
+<span id="cb165-2"><a href="#cb165-2" aria-hidden="true" tabindex="-1"></a>  <span class="sc">-</span><span class="fu">sum</span>(<span class="fu">dexp</span>(x,<span class="at">rate=</span><span class="dv">1</span><span class="sc">/</span>theta,<span class="at">log=</span><span class="cn">TRUE</span>))</span>
+<span id="cb165-3"><a href="#cb165-3" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</div>
+<p>We break down this function piece by piece. The code: <code>dexp(x,rate=1/theta)</code> would evaluate the likelihood (PDF) of each data point in x given a value for theta, and so the code <code>dexp(x,rate=1/theta,log=TRUE)</code> evaluates the log-likelihood of each data point. Summing these up is done using the <code>sum(...)</code> command, and putting a negative sign in front returns the negative log-likelihood of the data.</p>
+<p>We can then use <code>optim</code> to find the MLE of <span class="math inline">\(\theta\)</span>. We’ll first show the code, and then break down each piece.</p>
+<div class="cell language-name-processed">
+<div class="codeblock-with-label r">
+<style>.codeblock-with-label pre.lang-label-46::before { content: "R"; }</style>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb166" data-language-name-skip="true"><pre class="sourceCode r lang-label-46 code-with-copy"><code class="sourceCode r"><span id="cb166-1"><a href="#cb166-1" aria-hidden="true" tabindex="-1"></a>out<span class="ot">=</span><span class="fu">optim</span>(<span class="dv">2</span>,nll.exp,<span class="at">x=</span>x)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</div>
+<p>The syntax of <code>optim</code> is as follows. The first input needs to be a starting value for all parameters. As we only have one parameter, <span class="math inline">\(\theta\)</span>, we supply one starting value. This could be any number that is valid for the exponential distribution. Since the parameter <span class="math inline">\(\theta\)</span> must be positive, we supply a positive initial value of <span class="math inline">\(\theta^{(0)}=2\)</span> in the code above.</p>
+<p>The second input is the <code>NAME</code> of the negative loglikelihood function we just wrote. As we called this <code>nll.exp</code>, this is what goes into <code>optim</code> in the second input slot. The third (and others if needed) inputs to <code>optim</code> are any extra inputs needed for the negative <code>loglikelihood</code> function. Our <code>nll.exp</code> function requires two inputs: <code>theta</code> and <code>x</code>. The first input, <code>theta</code>, is essentially supplied by our starting value. The second input, <code>x</code>, is a vector of the data. To tell <code>optim</code> what values to use for <code>x</code>, we put as a third input into <code>optim</code> the argument <code>x=x</code>. The left hand side <code>x</code> is the name of the input in the nll.exp function. The right hand side is the name of the data values (we called these <code>x</code> as well). In our following example, we’ll try to make this more clear.</p>
+<p>The output of <code>optim</code> has multiple warnings. In general, you can IGNORE MOST WARNINGS FROM <code>OPTIM</code>! The warnings we have here are because <code>optim</code>, as part of its optimization algorithm, tried some values of <span class="math inline">\(\theta\)</span> that were negative. These produced NA values when trying to evaluate the loglikelihood, but <code>optim</code> is coded in a way to try different values when this happens. We could avoid these warnings by specifying some options in <code>optim</code>, but for most simple cases, the result will NOT be different, and so we can almost always IGNORE WARNINGS FROM <code>OPTIM</code>.</p>
+<p><code>optim</code>s output is as follows</p>
+<div class="cell language-name-processed">
+<div class="codeblock-with-label r">
+<style>.codeblock-with-label pre.lang-label-47::before { content: "R"; }</style>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb167" data-language-name-skip="true"><pre class="sourceCode r lang-label-47 code-with-copy"><code class="sourceCode r"><span id="cb167-1"><a href="#cb167-1" aria-hidden="true" tabindex="-1"></a>out</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>$par
+[1] 8.865625
+
+$value
+[1] 47.73448
+
+$counts
+function gradient 
+      30       NA 
+
+$convergence
+[1] 0
+
+$message
+NULL</code></pre>
+</div>
+</div>
+<p>There are a few relevant pieces of this output.</p>
+<ol type="1">
+<li><p><code>out\$par</code> is the MLE - the value of the parameter(s) that maximize the likelihood (and thus minimize the negative loglikelihood)</p></li>
+<li><p><code>out\$value</code> is the actual negative loglikelihood when evaluated at the MLE. So if we ran <code>nll.exp(0.112793,x)</code> we would get 47.73448. In most applications, this can be ignored.</p></li>
+<li><p><code>out\$counts</code> is the number of iterations of the optimization algorithm run. Here we see that the algorithm ran for 32 iterations before meeting a stopping criteria. This can almost always be ignored.</p></li>
+<li><p><code>out\$convergence</code> is given a value of <code>0</code> if the algorithm converges to its internal criteria. This is the result you want. If <code>convergence</code> has a value of <code>1</code>, then the algorithm has NOT converged, and we should NOT trust the value of the MLE.</p></li>
+<li><p><code>out\$message</code> can most often be ignored.</p></li>
+</ol>
+<p>Note that if we try different starting values, we may have slightly different results. For example, choosing a starting value of <span class="math inline">\(\theta^{(0)}=0.5\)</span> gives</p>
+<div class="cell language-name-processed">
+<div class="codeblock-with-label r">
+<style>.codeblock-with-label pre.lang-label-48::before { content: "R"; }</style>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb169" data-language-name-skip="true"><pre class="sourceCode r lang-label-48 code-with-copy"><code class="sourceCode r"><span id="cb169-1"><a href="#cb169-1" aria-hidden="true" tabindex="-1"></a>out2<span class="ot">=</span><span class="fu">optim</span>(<span class="fl">0.5</span>,nll.exp,<span class="at">x=</span>x)</span>
+<span id="cb169-2"><a href="#cb169-2" aria-hidden="true" tabindex="-1"></a>out2</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>$par
+[1] 8.86875
+
+$value
+[1] 47.73448
+
+$counts
+function gradient 
+      34       NA 
+
+$convergence
+[1] 0
+
+$message
+NULL</code></pre>
+</div>
+</div>
+<p>which gives a very slightly different MLE (8.6875 vs 8.65625). If the difference is not trivial, one should take the value that gives the SMALLER negative log-likelihood value (shown in out$value).</p>
+<p>In general, when looking at <code>optim</code> output, one should do the following:</p>
+<ol type="1">
+<li>Check to see that <code>convergence</code> equals 0.</li>
+<li>Then read off the MLEs from <code>par</code></li>
+</ol>
+</div>
+<div id="exm-thenormaldistributionmle" class="theorem example">
+<p><span class="theorem-title"><strong>Example 5.2 (MLE Example: The Normal Distribution)</strong></span> We’ll now give a different example using the Normal distribution. This time we will simulate some data from known parameters</p>
+<div id="fig-histogrammlenormal" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-histogrammlenormal-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="cell language-name-processed" data-lightbox="true">
+<div class="codeblock-with-label r">
+<style>.codeblock-with-label pre.lang-label-49::before { content: "R"; }</style>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb171" data-language-name-skip="true"><pre class="sourceCode r lang-label-49 code-with-copy"><code class="sourceCode r"><span id="cb171-1"><a href="#cb171-1" aria-hidden="true" tabindex="-1"></a>mu.true<span class="ot">=</span><span class="sc">-</span><span class="dv">3</span></span>
+<span id="cb171-2"><a href="#cb171-2" aria-hidden="true" tabindex="-1"></a>s2.true<span class="ot">=</span><span class="dv">16</span></span>
+<span id="cb171-3"><a href="#cb171-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb171-4"><a href="#cb171-4" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
+<span id="cb171-5"><a href="#cb171-5" aria-hidden="true" tabindex="-1"></a>y<span class="ot">=</span><span class="fu">rnorm</span>(<span class="dv">30</span>,<span class="at">mean=</span>mu.true,<span class="at">sd=</span><span class="fu">sqrt</span>(s2.true))</span>
+<span id="cb171-6"><a href="#cb171-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb171-7"><a href="#cb171-7" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(y)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Lesson05_files/figure-html/unnamed-chunk-50-1.png" class="img-fluid figure-img" style="width:70.0%" alt="Histogram showing the normal distribution with known parameters."></p>
+</figure>
+</div>
+</div>
+<div class="codeblock-with-label r">
+<style>.codeblock-with-label pre.lang-label-97::before { content: "R"; }</style>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb172"><pre class="sourceCode r lang-label-97 code-with-copy"><code class="sourceCode r"><span id="cb172-1"><a href="#cb172-1" aria-hidden="true" tabindex="-1"></a>y</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code> [1]  -5.2419026  -3.9207100   3.2348333  -2.7179664  -2.4828491   3.8602599
+ [7]  -1.1563352  -8.0602449  -5.7474114  -4.7826479   1.8963272  -1.5607447
+[13]  -1.3969142  -2.5572691  -5.2233645   4.1476525  -1.0085981 -10.8664686
+[19]  -0.1945764  -4.8911656  -7.2712948  -3.8718997  -7.1040178  -5.9155649
+[25]  -5.5001571  -9.7467732   0.3511482  -2.3865075  -7.5525477   2.0152597</code></pre>
+</div>
+</div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" id="fig-histogrammlenormal-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Fig&nbsp;5.9
+</figcaption>
+</figure>
+</div>
+<p>This results in 30 values, each satisfying <span class="math inline">\(y_i\sim N(-3,16)\)</span>. We will now pretend that we do NOT know the true mean and variance, and numerically estimate these. We first write a negative log-likelihood function, with the first input being a vector of all parameters</p>
+<div class="cell language-name-processed">
+<div class="codeblock-with-label r">
+<style>.codeblock-with-label pre.lang-label-50::before { content: "R"; }</style>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb174" data-language-name-skip="true"><pre class="sourceCode r lang-label-50 code-with-copy"><code class="sourceCode r"><span id="cb174-1"><a href="#cb174-1" aria-hidden="true" tabindex="-1"></a>nll.norm <span class="ot">&lt;-</span> <span class="cf">function</span>(theta,y){</span>
+<span id="cb174-2"><a href="#cb174-2" aria-hidden="true" tabindex="-1"></a>    <span class="do">## get parameters</span></span>
+<span id="cb174-3"><a href="#cb174-3" aria-hidden="true" tabindex="-1"></a>    mu<span class="ot">=</span>theta[<span class="dv">1</span>]</span>
+<span id="cb174-4"><a href="#cb174-4" aria-hidden="true" tabindex="-1"></a>    s2<span class="ot">=</span>theta[<span class="dv">2</span>]</span>
+<span id="cb174-5"><a href="#cb174-5" aria-hidden="true" tabindex="-1"></a>    <span class="do">## calculate loglikelihood</span></span>
+<span id="cb174-6"><a href="#cb174-6" aria-hidden="true" tabindex="-1"></a>    loglik<span class="ot">=</span><span class="fu">sum</span>(<span class="fu">dnorm</span>(y,<span class="at">mean=</span>mu,<span class="at">sd=</span><span class="fu">sqrt</span>(s2),<span class="at">log=</span><span class="cn">TRUE</span>))</span>
+<span id="cb174-7"><a href="#cb174-7" aria-hidden="true" tabindex="-1"></a>    <span class="do">## return negative loglikelihood</span></span>
+<span id="cb174-8"><a href="#cb174-8" aria-hidden="true" tabindex="-1"></a>    <span class="sc">-</span>loglik</span>
+<span id="cb174-9"><a href="#cb174-9" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</div>
+<p>Note that our first input, called <code>theta</code>, is a vector with the first element the mean <span class="math inline">\(\mu\)</span>, and the second element the variance <span class="math inline">\(\sigma^2\)</span>. These are the parameters we need to estimate. In our exponential example above, we only had a single parameter, but here where we have two parameters, we need to first “unpack” the parameters from <code>theta</code>.</p>
+<p>Note also that we wanted to find the MLE of <span class="math inline">\(\mu\)</span> and <span class="math inline">\(\sigma^2\)</span>, but R’s <code>dnorm</code> function takes as an input the mean (<span class="math inline">\(\mu\)</span>) and the STANDARD DEVIATION (<span class="math inline">\(\sigma\)</span>), not the variance <span class="math inline">\(\sigma^2\)</span>. So in the <code>dnorm</code> statement, we specified the standard deviation <code>sd</code> as <code>sd=sqrt(s2)</code>, the square root of the variance.</p>
+<p>We now use <code>optim</code> to find the MLEs. We need a vector of starting values. For <span class="math inline">\(\mu\)</span> we can use anything, while for <span class="math inline">\(\sigma^2\)</span> we should have a positive number, so we’ll choose a starting value of <span class="math inline">\(\theta=(-1,1)\)</span>.</p>
+<div class="cell language-name-processed">
+<div class="codeblock-with-label r">
+<style>.codeblock-with-label pre.lang-label-51::before { content: "R"; }</style>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb175" data-language-name-skip="true"><pre class="sourceCode r lang-label-51 code-with-copy"><code class="sourceCode r"><span id="cb175-1"><a href="#cb175-1" aria-hidden="true" tabindex="-1"></a>out<span class="ot">=</span><span class="fu">optim</span>(<span class="fu">c</span>(<span class="sc">-</span><span class="dv">1</span>,<span class="dv">1</span>),nll.norm,<span class="at">y=</span>y)</span>
+<span id="cb175-2"><a href="#cb175-2" aria-hidden="true" tabindex="-1"></a>out</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>$par
+[1] -3.186135 14.885294
+
+$value
+[1] 83.07392
+
+$counts
+function gradient 
+      77       NA 
+
+$convergence
+[1] 0
+
+$message
+NULL</code></pre>
+</div>
+</div>
+<p>Since the <code>convergence</code> is 0, we know that <code>optim</code> has passed its internal convergence checks, and we can trust the results. The MLEs are in <code>par</code>, and the order of the two MLEs is the same as the order of <span class="math inline">\(\theta\)</span> - our vector of parameters. Since <span class="math inline">\(\mu\)</span> was first, the MLE for <span class="math inline">\(\mu\)</span> is the first number, and <span class="math inline">\(\hat{\theta}_{ML}=-3.186\)</span>. Similarly, the MLE for <span class="math inline">\(\sigma^2\)</span> is <span class="math inline">\(\hat{\sigma^2}_{ML}=14.885\)</span>.</p>
+</div>
+</section>
+</section>
+<section id="summary" class="level2" data-number="5.3">
+<h2 data-number="5.3" class="anchored" data-anchor-id="summary"><span class="header-section-number">5.3</span> Summary</h2>
+<p>This lesson deepened your understanding of maximum likelihood estimation (MLE) by focusing on its numerical application and implementation in R. We explored how to construct and maximize likelihood and log-likelihood functions for single and multiple parameter models, using both analytical and numerical approaches.</p>
+<p>Key techniques included the grid search method and the Newton-Raphson algorithm, with practical implementation through R’s <code>optim</code> function for finding MLEs. The lesson also introduced essential R programming skills, such as performing basic operations, manipulating vectors and data frames, generating summary statistics, creating visualizations like histograms and boxplots, and working with statistical distributions (e.g., normal and exponential) to simulate data and compute probabilities.</p>
+<p>Through examples, you learned to handle real-world data scenarios, such as estimating parameters for exponential and normal distributions. These skills provide a robust foundation for applying MLE in statistical inference and prepare you for advanced topics like confidence intervals and hypothesis testing.</p>
+
+
+</section>
+
+</main> <!-- /main -->
+<!--<script>
+
+document.addEventListener('DOMContentLoaded', function () {
+
+    const toc = document.getElementById('TOC');
+
+    const navbarCollapse = document.getElementById('navbarCollapse');
+
+    const menuButton = document.querySelector('.navbar-toggler');
+
+
+
+    // Function to move TOC to navbar on small screens
+
+    function handleTOCDisplay() {
+
+        if (window.innerWidth < 768) {
+
+            if (!navbarCollapse.contains(toc)) {
+
+                navbarCollapse.appendChild(toc); // Move TOC into the navbar
+
+            }
+
+        } else {
+
+            if (toc.parentNode !== document.getElementById('quarto-margin-sidebar')) {
+
+                document.getElementById('quarto-margin-sidebar').appendChild(toc); // Move TOC back to original location
+
+            }
+
+        }
+
+    }
+
+
+
+    // Initial check on page load
+
+    handleTOCDisplay();
+
+
+
+    // Check when resizing the window
+
+    window.addEventListener('resize', handleTOCDisplay);
+
+
+
+    // Toggle TOC visibility when navbar is expanded on small screens
+
+    menuButton.addEventListener('click', function() {
+
+        if (window.innerWidth < 768) {
+
+            toc.classList.toggle('toc-active'); // Toggle visibility of the TOC in the navbar
+
+        }
+
+    });
+
+});
+
+</script>-->
+
+
+
+<script>
+
+document.addEventListener('DOMContentLoaded', function () {
+
+    const toc = document.getElementById('TOC'); // TOC element
+
+    const activeLesson = document.querySelector('.sidebar-item .sidebar-link.active'); // Active lesson link
+
+    const originalTocParent = toc.parentElement; // Store original TOC location
+
+
+
+    // Create a container for the TOC in the sidebar
+
+    const nestedTocContainer = document.createElement('ul');
+
+    nestedTocContainer.className = 'sidebar-toc-nested list-unstyled';
+
+
+
+    // Function to move the TOC into the sidebar
+
+    function moveTocToSidebar() {
+
+        if (!toc || !activeLesson) return;
+
+        while (toc.firstChild) {
+
+            nestedTocContainer.appendChild(toc.firstChild);
+
+        }
+
+        const parentItem = activeLesson.closest('.sidebar-item');
+
+        parentItem.appendChild(nestedTocContainer);
+
+        toc.style.display = 'none'; // Hide the original TOC container
+
+    }
+
+
+
+    // Function to restore the TOC to its original location
+
+    function restoreTocToOriginalLocation() {
+
+        if (nestedTocContainer.parentNode) {
+
+            while (nestedTocContainer.firstChild) {
+
+                toc.appendChild(nestedTocContainer.firstChild);
+
+            }
+
+            nestedTocContainer.remove(); // Remove the container
+
+            toc.style.display = ''; // Show the original TOC container
+
+        }
+
+    }
+
+
+
+    // Function to handle screen width changes
+
+    function handleScreenResize() {
+
+        if (window.innerWidth < 768) {
+
+            moveTocToSidebar();
+
+        } else {
+
+            restoreTocToOriginalLocation();
+
+        }
+
+    }
+
+
+
+    // Initial check and event listener for resize
+
+    handleScreenResize();
+
+    window.addEventListener('resize', handleScreenResize);
+
+});
+
+
+
+</script>
+<!---function to make the first column th instead of td when using markdown tables..just add .row-header as your class below the table!---->
+
+<script>
+
+    window.addEventListener('DOMContentLoaded', () => {
+
+        // Select only tables with the 'row-header' class
+
+        const tables = document.querySelectorAll('table.row-header');
+
+        
+
+        tables.forEach(table => {
+
+            const rows = table.querySelectorAll('tr');
+
+            
+
+            rows.forEach(row => {
+
+                const firstCell = row.cells[0];
+
+                if (firstCell && firstCell.tagName === 'TD') {
+
+                    const th = document.createElement('th');
+
+                    th.innerHTML = firstCell.innerHTML;
+
+                    th.setAttribute('scope', 'row'); // Add scope="row" to the th element
+
+                    row.replaceChild(th, firstCell);
+
+                }
+
+            });
+
+        });
+
+    });
+
+</script>
+<script>
+
+  document.addEventListener("DOMContentLoaded", function () {
+
+    const elements = document.querySelectorAll('div[id^="exm-"]');
+
+
+
+    elements.forEach((element) => {
+
+      const theoremTitle = element.querySelector('.theorem-title');
+
+      // Use the Quarto-generated id (e.g. "exm-muscleexample") directly
+
+      const anchorId = element.id;
+
+
+
+      if (theoremTitle && anchorId) {
+
+        const anchor = document.createElement('a');
+
+        anchor.href = `#${anchorId}`;
+
+        anchor.className = 'anchor';
+
+        anchor.setAttribute('aria-label', `Link to ${theoremTitle.textContent.trim()}`);
+
+        anchor.innerHTML = '<i class="bi bi-link-45deg" aria-hidden="true"></i>';
+
+        theoremTitle.appendChild(anchor);
+
+        // No need to reassign element.id — it's already correct
+
+      }
+
+    });
+
+  });
+
+</script>
+<style>
+
+  #mas-popup,
+
+  #mas-popup * {
+
+    box-sizing: border-box;
+
+  }
+
+
+
+  #mas-popup {
+
+    --mas-navy: #001e44;
+
+    --mas-blue: #1e407c;
+
+    --mas-sky: #96bee6;
+
+
+
+    position: fixed;
+
+    right: max(1.25rem, env(safe-area-inset-right));
+
+    bottom: max(1.25rem, env(safe-area-inset-bottom));
+
+    z-index: 1055;
+
+
+
+    width: min(25rem, calc(100vw - 2rem));
+
+    padding: 1.45rem 1.5rem 1.5rem 1.8rem;
+
+    overflow: hidden;
+
+
+
+    border: 1px solid rgba(0, 30, 68, 0.14);
+
+    border-radius: 0.75rem;
+
+    background: #ffffff;
+
+    color: #16243a;
+
+
+
+    box-shadow:
+
+      0 1.25rem 3.5rem rgba(0, 30, 68, 0.2),
+
+      0 0.2rem 0.7rem rgba(0, 30, 68, 0.08);
+
+
+
+    font-family: Arial, Helvetica, sans-serif;
+
+    -webkit-font-smoothing: antialiased;
+
+
+
+    animation: mas-popup-in 320ms cubic-bezier(0.2, 0.8, 0.2, 1) both;
+
+  }
+
+
+
+  #mas-popup[hidden] {
+
+    display: none;
+
+  }
+
+
+
+  /* Blue accent along the left side */
+
+  #mas-popup::before {
+
+    position: absolute;
+
+    inset: 0 auto 0 0;
+
+    width: 0.35rem;
+
+    background: linear-gradient(
+
+      180deg,
+
+      var(--mas-sky),
+
+      var(--mas-blue)
+
+    );
+
+    content: "";
+
+  }
+
+
+
+  #mas-popup-kicker {
+
+    margin: 0 3rem 0.55rem 0;
+
+    color: var(--mas-blue);
+
+    font-size: 0.69rem;
+
+    font-weight: 700;
+
+    letter-spacing: 0.12em;
+
+    line-height: 1.3;
+
+    text-transform: uppercase;
+
+  }
+
+
+
+  #mas-popup h2#mas-popup-title {
+
+    margin: 1rem 2.5rem 0.65rem 0 !important; 
+
+    max-width: 19rem;
+
+    margin: 0 2.5rem 0.65rem 0 !important;
+
+    color: var(--mas-navy);
+
+    font-family: Georgia, "Times New Roman", serif;
+
+    font-size: 1.55rem;
+
+    font-weight: 600;
+
+    letter-spacing: -0.015em;
+
+    line-height: 1.18 !important;
+
+  }
+
+
+
+  #mas-popup-description {
+
+    max-width: 21rem;
+
+    margin: 0 0 1.15rem;
+
+    color: #46586e;
+
+    font-size: 0.95rem;
+
+    line-height: 1.55;
+
+  }
+
+
+
+  #mas-popup-cta {
+
+    display: inline-flex;
+
+    min-height: 2.75rem;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 0.65rem;
+
+
+
+    padding: 0.7rem 1rem;
+
+    border: 2px solid var(--mas-navy);
+
+    border-radius: 0.35rem;
+
+    background: var(--mas-navy);
+
+    color: #ffffff;
+
+
+
+    font-size: 0.88rem;
+
+    font-weight: 700;
+
+    text-decoration: none;
+
+
+
+    transition:
+
+      background-color 160ms ease,
+
+      border-color 160ms ease,
+
+      transform 160ms ease;
+
+  }
+
+
+
+  #mas-popup-cta:hover,
+
+  #mas-popup-cta:focus-visible {
+
+    border-color: var(--mas-blue);
+
+    background: var(--mas-blue);
+
+    color: #ffffff;
+
+    transform: translateY(-1px);
+
+  }
+
+
+
+  #mas-popup-cta-arrow {
+
+    font-size: 1.1rem;
+
+    transition: transform 160ms ease;
+
+  }
+
+
+
+  #mas-popup-cta:hover #mas-popup-cta-arrow,
+
+  #mas-popup-cta:focus-visible #mas-popup-cta-arrow {
+
+    transform: translateX(0.18rem);
+
+  }
+
+
+
+  #mas-popup-close {
+
+    position: absolute;
+
+    top: 0.65rem;
+
+    right: 0.65rem;
+
+
+
+    display: grid;
+
+    width: 2.75rem;
+
+    height: 2.75rem;
+
+    padding: 0;
+
+    place-items: center;
+
+
+
+    border: 0;
+
+    border-radius: 50%;
+
+    background: transparent;
+
+    color: #485b72;
+
+
+
+    font: inherit;
+
+    font-size: 1.55rem;
+
+    line-height: 1;
+
+
+
+    cursor: pointer;
+
+  }
+
+
+
+  #mas-popup-close:hover,
+
+  #mas-popup-close:focus-visible {
+
+    background: #edf2f7;
+
+    color: var(--mas-navy);
+
+  }
+
+
+
+  #mas-popup :focus-visible {
+
+    outline: 3px solid var(--mas-sky);
+
+    outline-offset: 3px;
+
+  }
+
+
+
+  @keyframes mas-popup-in {
+
+    from {
+
+      opacity: 0;
+
+      transform: translateY(1rem) scale(0.98);
+
+    }
+
+
+
+    to {
+
+      opacity: 1;
+
+      transform: translateY(0) scale(1);
+
+    }
+
+  }
+
+
+
+  @media (max-width: 520px) {
+
+    #mas-popup {
+
+      right: max(0.75rem, env(safe-area-inset-right));
+
+      bottom: max(0.75rem, env(safe-area-inset-bottom));
+
+      width: calc(100vw - 1.5rem);
+
+      padding: 1.25rem 1.25rem 1.3rem 1.55rem;
+
+    }
+
+
+
+    #mas-popup-title {
+
+      max-width: 17rem;
+
+      font-size: 1.4rem;
+
+    }
+
+
+
+    #mas-popup-cta {
+
+      width: 100%;
+
+    }
+
+  }
+
+
+
+  @media (prefers-reduced-motion: reduce) {
+
+    #mas-popup {
+
+      animation: none;
+
+    }
+
+
+
+    #mas-popup-cta,
+
+    #mas-popup-cta-arrow {
+
+      transition: none;
+
+    }
+
+  }
+
+</style>
+
+
+
+<aside id="mas-popup" role="region" aria-labelledby="mas-popup-title" aria-describedby="mas-popup-description" aria-live="polite" hidden="">
+
+  <button id="mas-popup-close" type="button" aria-label="Close this message">
+
+    <span aria-hidden="true">×</span>
+
+  </button>
+
+
+
+  <p id="mas-popup-kicker">
+
+    Online master’s program
+
+  </p>
+
+
+
+  <h2 id="mas-popup-title">
+
+    Take your statistics skills further
+
+  </h2>
+
+
+
+  <p id="mas-popup-description">
+
+    Explore Penn State’s online Master of Applied Statistics program.
+
+  </p>
+
+
+
+  <a id="mas-popup-cta" href="https://science.psu.edu/stat/graduate-programs/master-of-applied-statistics">
+
+    Explore the program
+
+    <span id="mas-popup-cta-arrow" aria-hidden="true">→</span>
+
+  </a>
+
+</aside>
+
+
+
+<script>
+
+  (() => {
+
+    const storageKey = "stat501-mas-popup-dismissed-v2";
+
+
+
+    // Show the popup after 15 seconds.
+
+    const showDelay = 15000;
+
+
+
+    // After closing it, hide it for 30 days.
+
+    const dismissalDays = 30;
+
+
+
+    const popup = document.getElementById("mas-popup");
+
+    const closeButton = document.getElementById("mas-popup-close");
+
+    const cta = document.getElementById("mas-popup-cta");
+
+
+
+    if (!popup || !closeButton || !cta) return;
+
+
+
+    let dismissalActive = false;
+
+
+
+    try {
+
+      const dismissedUntil = Number(
+
+        localStorage.getItem(storageKey)
+
+      );
+
+
+
+      dismissalActive =
+
+        Number.isFinite(dismissedUntil) &&
+
+        Date.now() < dismissedUntil;
+
+    } catch (error) {
+
+      // The popup still works if browser storage is unavailable.
+
+    }
+
+
+
+    if (dismissalActive) return;
+
+
+
+    const rememberDismissal = () => {
+
+      try {
+
+        const millisecondsPerDay = 24 * 60 * 60 * 1000;
+
+        const dismissedUntil =
+
+          Date.now() + dismissalDays * millisecondsPerDay;
+
+
+
+        localStorage.setItem(
+
+          storageKey,
+
+          String(dismissedUntil)
+
+        );
+
+      } catch (error) {
+
+        // Closing still works if browser storage is unavailable.
+
+      }
+
+    };
+
+
+
+    const showTimer = window.setTimeout(() => {
+
+      popup.hidden = false;
+
+    }, showDelay);
+
+
+
+    const dismissPopup = () => {
+
+      window.clearTimeout(showTimer);
+
+      popup.hidden = true;
+
+      rememberDismissal();
+
+    };
+
+
+
+    closeButton.addEventListener("click", dismissPopup);
+
+
+
+    // Prevent the popup from appearing again after someone uses the CTA.
+
+    cta.addEventListener("click", rememberDismissal);
+
+
+
+    document.addEventListener("keydown", (event) => {
+
+      if (event.key === "Escape" && !popup.hidden) {
+
+        dismissPopup();
+
+      }
+
+    });
+
+  })();
+
+</script>
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    // Ensure there is a toggle, if there isn't float one in the top right
+    if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+      const a = window.document.createElement('a');
+      a.classList.add('top-right');
+      a.classList.add('quarto-color-scheme-toggle');
+      a.href = "";
+      a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+      const i = window.document.createElement("i");
+      i.classList.add('bi');
+      a.appendChild(i);
+      window.document.body.appendChild(a);
+    }
+    setColorSchemeToggle(hasAlternateSentinel())
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./Lesson04.html" class="pagination-link" aria-label="Maximum Likelihood Estimation (MLE) (Part I)">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Maximum Likelihood Estimation (MLE) (Part I)</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./Lesson06.html" class="pagination-link" aria-label="Confidence Intervals">
+        <span class="nav-page-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Confidence Intervals</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+<p>Except where otherwise noted, content on this site is licensed under a <a href="https://creativecommons.org/licenses/by-nc/4.0/">CC BY-NC 4.0</a> license.<br><br> <img src="assets/by-nc.svg" class="img-fluid" alt="BYNC"></p>
+</div>   
+    <div class="nav-footer-center">
+<p><a href="https://oer.psu.edu/">OPEN.ED@PSU</a></p>
+<div class="cookie-consent-footer"><a href="#" id="open_preferences_center">Cookie Preferences</a></div></div>
+    <div class="nav-footer-right">
+<a href="https://www.psu.edu/web-privacy-statement/">Privacy</a> | <a href="https://www.psu.edu/accessibilitystatement/">Accessibility</a> | <a href="https://www.psu.edu/copyright-information/">Copyright</a> <br> <a href="https://www.psu.edu/">The Pennsylvania State University</a> © <span id="copyright-year"></span> | <br> <a href="https://forms.office.com/r/GbC8H0pZhm">Leave Us Feedback</a>
+<script>
+document.getElementById("copyright-year").textContent = new Date().getFullYear();
+</script>
+</div>
+  </div>
+</footer>
+<script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","descPosition":"bottom","loop":false,"openEffect":"zoom","selector":".lightbox"});
+(function() {
+  let previousOnload = window.onload;
+  window.onload = () => {
+    if (previousOnload) {
+      previousOnload();
+    }
+    lightboxQuarto.on('slide_before_load', (data) => {
+      const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+      const href = trigger.getAttribute('href');
+      if (href !== null) {
+        const imgEl = window.document.querySelector(`a[href="${href}"] img`);
+        if (imgEl !== null) {
+          const srcAttr = imgEl.getAttribute("src");
+          if (srcAttr && srcAttr.startsWith("data:")) {
+            slideConfig.href = srcAttr;
+          }
+        }
+      } 
+    });
+  
+    lightboxQuarto.on('slide_after_load', (data) => {
+      const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(slideNode);
+      }
+    });
+  
+  };
+  
+})();
+          </script>
+
+
+
+
+</body></html>

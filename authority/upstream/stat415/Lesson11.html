@@ -1,0 +1,2244 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.9.35">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>11&nbsp; Bayesian Methods – STAT 415 | Introduction to Mathematical Statistics</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./Lesson12.html" rel="next">
+<link href="./Lesson10.html" rel="prev">
+<link href="./assets/psulion.png" rel="icon" type="image/png">
+<script src="site_libs/cookie-consent/cookie-consent.js"></script>
+<link href="site_libs/cookie-consent/cookie-consent.css" rel="stylesheet">
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-46f66b053e56abd73bb6e954d61a315b.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-22b4aaf4c2978829df3684e8f2c068db.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-46f66b053e56abd73bb6e954d61a315b.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-dedc56d09aa522c36e3c0f8583f17cbf.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark-fc84954412eed28da5dc743c06b0bbd5.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="site_libs/bootstrap/bootstrap-dedc56d09aa522c36e3c0f8583f17cbf.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/quarto-contrib/language-name/language-name.css" rel="stylesheet">
+<script src="site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
+<link href="site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
+<link href="site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<script async="" src="https://www.googletagmanager.com/gtag/js?id=G-XM6C7H9XCL"></script>
+
+<script type="text/plain" cookie-consent="tracking">
+
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-XM6C7H9XCL', { 'anonymize_ip': true});
+</script>
+
+<script type="text/javascript" charset="UTF-8">
+document.addEventListener('DOMContentLoaded', function () {
+cookieconsent.run({
+  "notice_banner_type":"simple",
+  "consent_type":"express",
+  "palette":"light",
+  "language":"en",
+  "page_load_consent_levels":["strictly-necessary"],
+  "notice_banner_reject_button_hide":false,
+  "preferences_center_close_button_hide":false,
+  "website_name":""
+  ,
+"language":"en"
+  });
+});
+</script> 
+  
+<script>
+
+  window.addEventListener('load', function() {
+
+    document.getElementById("cc-nb-text").innerHTML = "We use cookies and other tracking technologies to improve your browsing experience on our website, to analyze our website traffic, and to understand where our visitors are coming from.";
+
+  });
+
+</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+</head>
+
+<body class="nav-sidebar docked nav-fixed quarto-light"><script id="quarto-html-before-body" type="application/javascript">
+    const toggleBodyColorMode = (bsSheetEl) => {
+      const mode = bsSheetEl.getAttribute("data-mode");
+      const bodyEl = window.document.querySelector("body");
+      if (mode === "dark") {
+        bodyEl.classList.add("quarto-dark");
+        bodyEl.classList.remove("quarto-light");
+      } else {
+        bodyEl.classList.add("quarto-light");
+        bodyEl.classList.remove("quarto-dark");
+      }
+    }
+    const toggleBodyColorPrimary = () => {
+      const bsSheetEl = window.document.querySelector("link#quarto-bootstrap:not([rel=disabled-stylesheet])");
+      if (bsSheetEl) {
+        toggleBodyColorMode(bsSheetEl);
+      }
+    }
+    const setColorSchemeToggle = (alternate) => {
+      const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+      for (let i=0; i < toggles.length; i++) {
+        const toggle = toggles[i];
+        if (toggle) {
+          if (alternate) {
+            toggle.classList.add("alternate");
+          } else {
+            toggle.classList.remove("alternate");
+          }
+        }
+      }
+    };
+    const toggleColorMode = (alternate) => {
+      // Switch the stylesheets
+      const primaryStylesheets = window.document.querySelectorAll('link.quarto-color-scheme:not(.quarto-color-alternate)');
+      const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+      manageTransitions('#quarto-margin-sidebar .nav-link', false);
+      if (alternate) {
+        // note: dark is layered on light, we don't disable primary!
+        enableStylesheet(alternateStylesheets);
+        for (const sheetNode of alternateStylesheets) {
+          if (sheetNode.id === "quarto-bootstrap") {
+            toggleBodyColorMode(sheetNode);
+          }
+        }
+      } else {
+        disableStylesheet(alternateStylesheets);
+        enableStylesheet(primaryStylesheets)
+        toggleBodyColorPrimary();
+      }
+      manageTransitions('#quarto-margin-sidebar .nav-link', true);
+      // Switch the toggles
+      setColorSchemeToggle(alternate)
+      // Hack to workaround the fact that safari doesn't
+      // properly recolor the scrollbar when toggling (#1455)
+      if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+        manageTransitions("body", false);
+        window.scrollTo(0, 1);
+        setTimeout(() => {
+          window.scrollTo(0, 0);
+          manageTransitions("body", true);
+        }, 40);
+      }
+    }
+    const disableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        stylesheet.rel = 'disabled-stylesheet';
+      }
+    }
+    const enableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        if(stylesheet.rel !== 'stylesheet') { // for Chrome, which will still FOUC without this check
+          stylesheet.rel = 'stylesheet';
+        }
+      }
+    }
+    const manageTransitions = (selector, allowTransitions) => {
+      const els = window.document.querySelectorAll(selector);
+      for (let i=0; i < els.length; i++) {
+        const el = els[i];
+        if (allowTransitions) {
+          el.classList.remove('notransition');
+        } else {
+          el.classList.add('notransition');
+        }
+      }
+    }
+    const isFileUrl = () => {
+      return window.location.protocol === 'file:';
+    }
+    const hasAlternateSentinel = () => {
+      let styleSentinel = getColorSchemeSentinel();
+      if (styleSentinel !== null) {
+        return styleSentinel === "alternate";
+      } else {
+        return false;
+      }
+    }
+    const setStyleSentinel = (alternate) => {
+      const value = alternate ? "alternate" : "default";
+      if (!isFileUrl()) {
+        window.localStorage.setItem("quarto-color-scheme", value);
+      } else {
+        localAlternateSentinel = value;
+      }
+    }
+    const getColorSchemeSentinel = () => {
+      if (!isFileUrl()) {
+        const storageValue = window.localStorage.getItem("quarto-color-scheme");
+        return storageValue != null ? storageValue : localAlternateSentinel;
+      } else {
+        return localAlternateSentinel;
+      }
+    }
+    const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+      const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+      const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+      let newTheme = '';
+      if(authorPrefersDark) {
+        newTheme = isAlternate ? baseTheme : alternateTheme;
+      } else {
+        newTheme = isAlternate ? alternateTheme : baseTheme;
+      }
+      const changeGiscusTheme = () => {
+        // From: https://github.com/giscus/giscus/issues/336
+        const sendMessage = (message) => {
+          const iframe = document.querySelector('iframe.giscus-frame');
+          if (!iframe) return;
+          iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+        }
+        sendMessage({
+          setConfig: {
+            theme: newTheme
+          }
+        });
+      }
+      const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+      if (isGiscussLoaded) {
+        changeGiscusTheme();
+      }
+    };
+    const authorPrefersDark = false;
+    const darkModeDefault = authorPrefersDark;
+      document.querySelector('link#quarto-text-highlighting-styles.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+      document.querySelector('link#quarto-bootstrap.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+    let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+    // Dark / light mode switch
+    window.quartoToggleColorScheme = () => {
+      // Read the current dark / light value
+      let toAlternate = !hasAlternateSentinel();
+      toggleColorMode(toAlternate);
+      setStyleSentinel(toAlternate);
+      toggleGiscusIfUsed(toAlternate, darkModeDefault);
+      window.dispatchEvent(new Event('resize'));
+    };
+    // Switch to dark mode if need be
+    if (hasAlternateSentinel()) {
+      toggleColorMode(true);
+    } else {
+      toggleColorMode(false);
+    }
+  </script>
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <div id="quarto-announcement" data-announcement-id="cb9d28251ca8388d2bc94ffe0e472446" class="alert alert-warning hidden"><i class="bi bi-info-circle quarto-announcement-icon"></i><div class="quarto-announcement-content">
+<p>Welcome to our newly redesigned course notes! Please update your bookmarks accordingly.</p>
+</div><i class="bi bi-x-lg quarto-announcement-action"></i></div>
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="./index.html">
+    <span class="navbar-title">STAT 415 | Introduction to Mathematical Statistics</span>
+    </a>
+  </div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="https://science.psu.edu/stat"> 
+<span class="menu-text">Department of Statistics</span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+  <a href="" class="quarto-reader-toggle quarto-navigation-tool px-1" onclick="window.quartoToggleReader(); return false;" title="Toggle reader mode">
+  <div class="quarto-reader-toggle-btn">
+  <i class="bi"></i>
+  </div>
+</a>
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./Lesson00.html">Lessons</a></li><li class="breadcrumb-item"><a href="./Lesson11.html"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Bayesian Methods</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header sidebar-header-stacked">
+      <a href="https://science.psu.edu/" class="sidebar-logo-link">
+      <img src="./PSU_Ecosshield.png" alt="Penn State Eberly College of Science" class="sidebar-logo light-content py-0 d-lg-inline d-none">
+      <img src="./PSU_Ecosshield.png" alt="Penn State Eberly College of Science" class="sidebar-logo dark-content py-0 d-lg-inline d-none">
+      </a>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">About this course</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+ <span class="menu-text">Lessons</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Lesson00.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">0: Review Concepts from STAT 414</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Lesson01.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Order Statistics</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Lesson02.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Estimation (Part I)</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Lesson03.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Estimation (Part II)</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Lesson04.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Maximum Likelihood Estimation (MLE) (Part I)</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Lesson05.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Maximum Likelihood Estimation (MLE) (Part II)</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Lesson06.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Confidence Intervals</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Lesson07.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Asymptotic Distribution of MLE (Part I)</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Lesson08.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Asymptotic Distribution of MLE (Part II)</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Lesson09.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Hypothesis Tests (Part I)</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Lesson10.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Hypothesis Tests (Part II)</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Lesson11.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Bayesian Methods</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Lesson12.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Simple Linear Regression</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">In this lesson</h2>
+   
+  <ul>
+  <li><a href="#subjective-probability" id="toc-subjective-probability" class="nav-link active" data-scroll-target="#subjective-probability"><span class="header-section-number">11.1</span> Subjective Probability</a></li>
+  <li><a href="#bayesian-estimation" id="toc-bayesian-estimation" class="nav-link" data-scroll-target="#bayesian-estimation"><span class="header-section-number">11.2</span> Bayesian Estimation</a></li>
+  <li><a href="#credible-intervals" id="toc-credible-intervals" class="nav-link" data-scroll-target="#credible-intervals"><span class="header-section-number">11.3</span> Credible Intervals</a>
+  <ul class="collapse">
+  <li><a href="#summary" id="toc-summary" class="nav-link" data-scroll-target="#summary"><span class="header-section-number">11.3.1</span> Summary</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./Lesson00.html">Lessons</a></li><li class="breadcrumb-item"><a href="./Lesson11.html"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Bayesian Methods</span></a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Bayesian Methods</span></h1>
+  <div class="quarto-categories">
+    <div class="quarto-category">Bayesian</div>
+    <div class="quarto-category">Subjective Probability</div>
+    <div class="quarto-category">Credible Intervals</div>
+  </div>
+  </div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="overview" class="level2 unnumbered unlisted">
+<h2 class="unnumbered unlisted anchored" data-anchor-id="overview">Overview</h2>
+<div id="fig-bayes" class="lightbox float-lg-end w-50 ps-3 quarto-float quarto-figure quarto-figure-center anchored" alt="Portrait of Thomas Bayes">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-bayes-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="assets/bayes.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1" title="Fig&nbsp;11.1: Thomas Bayes"><img src="assets/bayes.png" class="float-lg-end w-50 ps-3 img-fluid figure-img" style="width:70.0%" alt="Portrait of Thomas Bayes"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-bayes-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Fig&nbsp;11.1: Thomas Bayes
+</figcaption>
+</figure>
+</div>
+<p>All of the methods we have developed and used thus far in this course have been developed using what statisticians would call a “frequentist” approach. In this section, we revisit some of those methods using what statisticians would call a “Bayesian” approach. Specifically, we will:</p>
+<ul>
+<li>learn how a Bayesian would assign probabilities to certain events</li>
+<li>learn how a Bayesian would tackle the estimation of a parameter</li>
+<li>learn how a Bayesian would update the prior information they have about the value of a parameter</li>
+</ul>
+<p>In case you are wondering, the picture to the right is that of the Reverend Thomas Bayes, after which the field of Bayesian statistics is aptly named.</p>
+<p>We’d need at least an entire semester, and perhaps more, to truly do any justice to the study of Bayesian statistics. The best we can do in this course is to dabble a bit and in doing so take just a tiny peek at the world through the eyes of a Bayesian. First, we’ll take a look at an example that illustrates how a Bayesian might assign a (subjective) probability to an event given the information he or she has available. Then, we’ll investigate how a Bayesian might estimate a parameter. Finally, we’ll explore how a Bayesian might update the prior information he or she has about the value of a parameter.</p>
+<section id="objectives" class="level3 unnumbered unlisted objectiveblock">
+<h3 class="unnumbered unlisted anchored" data-anchor-id="objectives"><i class="bi bi-check2-circle"></i>Objectives</h3>
+<p>Upon completion of this lesson, you should be able to:</p>
+<ol type="1">
+<li>Analytically find Bayesian posterior distributions for single parameter models with a given prior distribution, both in situations where data values are given and in situations where the data are seen as unobservable random variables, and</li>
+<li>Calculate a credible interval for unknown parameter, .</li>
+</ol>
+</section>
+</section>
+<section id="subjective-probability" class="level2" data-number="11.1">
+<h2 data-number="11.1" class="anchored" data-anchor-id="subjective-probability"><span class="header-section-number">11.1</span> Subjective Probability</h2>
+<p>Let’s go through an example that illustrates how a Bayesian might use available data to assign probabilities to particular events.</p>
+<div id="exm-bayes1" class="theorem example">
+<p><span class="theorem-title"><strong>Example 11.1</strong></span> The following amounts, in dollars, are bet on horses A, B, C, and D to win a local race:</p>
+<table class="w-auto table-sm mx-auto small caption-top table">
+<thead>
+<tr class="header">
+<th>Horse</th>
+<th>Amount</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>A</td>
+<td>10,000</td>
+</tr>
+<tr class="even">
+<td>B</td>
+<td>30,000</td>
+</tr>
+<tr class="odd">
+<td>C</td>
+<td>22,000</td>
+</tr>
+<tr class="even">
+<td>D</td>
+<td>38,000</td>
+</tr>
+<tr class="odd">
+<td><strong>Total</strong></td>
+<td>100,000</td>
+</tr>
+</tbody>
+</table>
+<p>Determine the payout for winning with a $2 bet on each of the four horses, if the track wants to take 17%, or $17,000, from the amount collected.</p>
+<section id="solution" class="level4 card card-body bg-light ms-3 mb-3 pt-0">
+<h4 class="anchored" data-anchor-id="solution">Solution</h4>
+<p>The first thing we need to do is to determine the likelihood, that is, probability, that each of the horses wins. We could assign the probabilities based on our own “gut feeling.” Geez…. I think horse A is gonna win today. In general, that’s probably not a good idea. We’d probably be much better served if we used the information we have available, namely the “gut feeling” of all of the bettors! That is, if $38,000 worth of bets came in for Horse D and only $10,000 came in for Horse A, that tells us that more people think that Horse D is going to win than Horse A. It would behoove us, therefore, to use the amounts bet to assign the probabilities. That said, the probability that Horse A will win is then:</p>
+<p><span class="math display">\[\begin{align*}
+  P(A)=\frac{10000}{100000}=0.10
+\end{align*}\]</span></p>
+<p>And, the probability that Horse B will win is:</p>
+<p><span class="math display">\[\begin{align*}
+  P(B)=\frac{30000}{100000}=0.30
+\end{align*}\]</span></p>
+<p>And, the probability that Horse C will win is:</p>
+<p><span class="math display">\[\begin{align*}
+  P(C)=\frac{22000}{100000}=0.22
+\end{align*}\]</span></p>
+<p>And, the probability that Horse D will win is:</p>
+<p><span class="math display">\[\begin{align*}
+  P(D)=\frac{38000}{100000}=0.38
+\end{align*}\]</span></p>
+<p>Now having assigned a probability to the event that Horse A wins, we can determine the odds against horse A winning. It is:</p>
+<p><span class="math display">\[\begin{align*}
+  \text{Odds against }A=\frac{1-0.1}{0.1}=9 \text{ to }1
+\end{align*}\]</span></p>
+<p>The odds against A tells us that the track will payout $9 on a $1 bet. Now, the odds against Horse B winning is:</p>
+<p><span class="math display">\[\begin{align*}
+  \text{Odds against }B=\frac{1-0.3}{0.3}=\frac{7}{3} \text{ to }1
+\end{align*}\]</span></p>
+<p>The odds against B tells us that the track will payout <span class="math inline">\(\frac{\$7}{3}=\$2.33\)</span> on a $1 bet. Now, the odds against Horse C winning is:</p>
+<p><span class="math display">\[\begin{align*}
+  \text{Odds against }C=\frac{1-0.22}{0.22}=\frac{39}{11} \text{ to }1
+\end{align*}\]</span></p>
+<p>The odds against C tell us that the track will payout <span class="math inline">\(\frac{\$39}{11}=\$3.55\)</span> on a $1 bet. Finally, the odds against Horse D winning is:</p>
+<p><span class="math display">\[\begin{align*}
+  \text{Odds against }D=\frac{1-0.38}{0.38}=\frac{31}{19} \text{ to }1
+\end{align*}\]</span></p>
+<p>The odds against D tell us that they track will payout <span class="math inline">\(\frac{\$31}{19}=\$1.63\)</span> on a $1 bet. Now, using the odds against Horse A winning, we can determine that the amount the track pays out on a $2 bet on Horse A is:</p>
+<p><span class="math display">\[\begin{align*}
+  \text{Payout for }A=\$2+\$9(\$2)=\$20
+\end{align*}\]</span></p>
+<p>That is, the bettor gets $9 for each $1 bet, that is, $18, plus the $2 he or she originally bet. Now, using the odds against Horse B winning, we can determine that the amount the track pays out on a $2 bet on Horse B is:</p>
+<p><span class="math display">\[\begin{align*}
+  \text{Payout for }B=\$2+\frac{\$7}{3}(\$2)=\$6.67
+\end{align*}\]</span></p>
+<p>And, using the odds against Horse C winning, we can determine that the amount the track pays out on a $2 bet on Horse C is:</p>
+<p><span class="math display">\[\begin{align*}
+  \text{Payout for }C=\$2+\frac{\$39}{11}(\$2)=\$9.09
+\end{align*}\]</span></p>
+<p>And, using the odds against Horse D winning, we can determine that the amount the track pays out on a $2 bet on Horse D is:</p>
+<p><span class="math display">\[\begin{align*}
+  \text{Payout for }D=\$2+\frac{\$31}{19}(\$2)=\$5.26
+\end{align*}\]</span></p>
+<p>We’re almost there. We just need to skim the 17% off for the race track to make sure that it makes some money off of the bettors. Multiplying each of the calculated payouts by 0.83, we get:</p>
+<p><span class="math display">\[\begin{align*}
+  &amp; \text{Absolute Payout for }A=\$20.00(0.83)=\$16.60\\
+  &amp; \text{Absolute Payout for }B=\$6.67(0.83)=\$5.54\\
+  &amp; \text{Absolute Payout for }C=\$9.09(0.83)=\$7.54\\
+  &amp; \text{Absolute Payout for }D=\$5.26(0.83)=\$4.37\\
+\end{align*}\]</span></p>
+</section>
+<p>We can always check our work, too. Suppose, for example, that Horse A wins. Then the track would payout $16.60 to the 5000 bettors who bet $2 on Horse A, costing the track $16.60(5000) = $83,000. Given that that track brought in $100,000 in bets, the track would indeed make its desired $17,000. A similar check of our work can be made for Horses B, C, and D, although there may be some round-off errors because we did do some rounding in our payout calculations. Should still be very close to $83,000 in each case though!</p>
+</div>
+</section>
+<section id="bayesian-estimation" class="level2" data-number="11.2">
+<h2 data-number="11.2" class="anchored" data-anchor-id="bayesian-estimation"><span class="header-section-number">11.2</span> Bayesian Estimation</h2>
+<p>There’s one key difference between frequentist statisticians and Bayesian statisticians that we first need to acknowledge before we can even begin to talk about how a Bayesian might estimate a population parameter <span class="math inline">\(\theta\)</span>. The difference has to do with whether a statistician thinks of a parameter as some unknown constant or as a random variable. Let’s take a look at a simple example in an attempt to emphasize the difference.</p>
+<div id="exm-bayes2" class="theorem example">
+<p><span class="theorem-title"><strong>Example 11.2</strong></span> A traffic control engineer believes that the cars passing through a particular intersection arrive at a mean rate <span class="math inline">\(\lambda\)</span> equal to either 3 or 5 for a given time interval. Prior to collecting any data, the engineer believes that it is much more likely that the rate <span class="math inline">\(\lambda=3\)</span> than <span class="math inline">\(\lambda=5\)</span>. In fact, the engineer believes that the prior probabilities are:</p>
+<p><span class="math display">\[\begin{align*}
+  P(\lambda=3)=0.7\;\text{and }P(\lambda=5)=0.3
+\end{align*}\]</span></p>
+<p>One day, during a a randomly selected time interval, the engineer observes <span class="math inline">\(x=7\)</span> cars pass through the intersection. In light of the engineer’s observation, what is the probability that <span class="math inline">\(\lambda=3\)</span> And what is the probability that <span class="math inline">\(\lambda=5\)</span>?</p>
+<section id="solution-1" class="level4 card card-body bg-light ms-3 mb-3 pt-0">
+<h4 class="anchored" data-anchor-id="solution-1">Solution</h4>
+<p>The first thing you should notice in this example is that we are talking about finding the probability that a parameter <span class="math inline">\(\lambda\)</span> takes on a particular value. In one fell swoop, we’ve just turned everything that we’ve learned in Stat 414 and Stat 415 on its head! The next thing you should notice, after recovering from the dizziness of your headstand, is that we already have the tools necessary to calculate the desired probabilities. Just stick your hand in your probability tool box, and pull out Bayes’ Theorem.</p>
+<p>Now, simply by using the definition of conditional probability, we know that the probability that <span class="math inline">\(\lambda=3\)</span> given that <span class="math inline">\(X=7\)</span> is:</p>
+<p><span class="math display">\[\begin{align*}
+  P(\lambda=3|X=7)=\frac{P(\lambda=3, X=7)}{P(X=7)}
+\end{align*}\]</span></p>
+<p>which can be written using Bayes’ Theorem as:</p>
+<div style="overflow-x:auto;overflow-y:hidden;">
+<p><span class="math display">\[\begin{align*}
+  P(\lambda=3|X=7)=\frac{P(X=7|\lambda=3)P(\lambda=3)}{P(X=7|\lambda =3)P(\lambda=3)+P(X=7|\lambda=5)P(\lambda=5)}
+\end{align*}\]</span></p>
+</div>
+<p>We can use the Poisson cumulative probability table in the back of our text book to find</p>
+<p><span class="math display">\[\begin{align*}
+&amp;P(X=7|\lambda=3)\\
+&amp; P(X=7|\lambda=5)
+\end{align*}\]</span> They are:</p>
+<p><span class="math display">\[\begin{align*}
+&amp;P(X=7|\lambda=3)=0.988-0.966=0.022\\
+&amp; P(X=7|\lambda=5)=0.867-0.762=0.105
+\end{align*}\]</span></p>
+<p>Now, we have everything we need to finalize our calculation of the desired probability:</p>
+<div style="overflow-x:auto;overflow-y:hidden;">
+<p><span class="math display">\[\begin{align*}
+  P(\lambda=3|X=7)=\frac{0.7(0.022)}{0.7(0.022)+0.3(0.105)}=\frac{0.0154}{0.0154+0.0315}=0.328
+\end{align*}\]</span></p>
+</div>
+</section>
+</div>
+<p>Hmmm. Let’s summarize. The initial probability, in this case, <span class="math inline">\(P(\lambda=3)=0.7\)</span> is called the <strong>prior probability</strong>. That’s because it is the probability that the parameter takes on a particular value prior to taking into account any new information. The newly calculated probability, that is:</p>
+<p><span class="math display">\[\begin{align*}
+  P(\lambda=3|X=7)
+\end{align*}\]</span></p>
+<p>is called the <strong>posterior probability</strong>. That’s because it is the probability that the parameter takes on a particular value posterior to, that is, after, taking into account the new information. In this case, we have seen that the probability that <span class="math inline">\(\lambda=3\)</span> has decreased from 0.7 (the prior probability) to 0.328 (the posterior probability) with the information obtained from the observation <span class="math inline">\(x=7\)</span>.</p>
+<p>A similar calculation can be made in finding <span class="math inline">\(P(\lambda=5|X=7)\)</span>. In doing so, we see:</p>
+<div style="overflow-x:auto;overflow-y:hidden;">
+<p><span class="math display">\[\begin{align*}
+P(\lambda=5|X=7)=\frac{0.3(0.105)}{0.7(0.022)+0.3(0.105)}=\frac{0.0315}{0.0154+0.0315}=0.672
+\end{align*}\]</span></p>
+</div>
+<p>In this case, we see that the probability that <span class="math inline">\(\lambda=5\)</span> has increased from 0.3 (the prior probability) to 0.672 (the posterior probability) with the information obtained from the observation <span class="math inline">\(x=7\)</span>.</p>
+<p>That last example is good for illustrating the distinction between prior probabilities and posterior probabilities, but it falls a bit short as a practical example in the real world. That’s because the parameter in the example is assumed to take on only two possible values, namely <span class="math inline">\(\lambda=3\)</span> or <span class="math inline">\(\lambda=5\)</span>. In the case where the parameter space for a parameter <span class="math inline">\(\theta\)</span> takes on an infinite number of possible values, a Bayesian must specify a <strong>prior probability density function</strong> <span class="math inline">\(h(\theta)\)</span>, say. Entire courses have been devoted to the topic of choosing a good prior p.d.f., so naturally, we won’t go there! We’ll instead assume we are given a good prior p.d.f. <span class="math inline">\(h(\theta)\)</span> and focus our attention instead on how to find a <strong>posterior probability density function</strong> <span class="math inline">\(k(\theta|y)\)</span>, say, if we know the probability density function <span class="math inline">\(g(y|\theta)\)</span> of the statistic <span class="math inline">\(Y\)</span>.</p>
+<p>Well, if we knew <span class="math inline">\(h(\theta)\)</span> and <span class="math inline">\(g(y|\theta)\)</span>, we can treat: <span class="math display">\[k(y, \theta)=g(y|\theta)h(\theta)\]</span> as the joint p.d.f. of the statistic <span class="math inline">\(Y\)</span> and parameter <span class="math inline">\(\theta\)</span>. Then, we can find the marginal distribution of <span class="math inline">\(Y\)</span> from the joint distribution <span class="math inline">\(k(y, \theta)\)</span> by integrating over the parameter space of <span class="math inline">\(\theta\)</span>:</p>
+<p><span class="math display">\[k_1(y)=\int_{-\infty}^\infty k(y, \theta)d\theta=\int_{-\infty}^\infty g(y|\theta)h(\theta)d\theta\]</span></p>
+<p>And then, we can find the posterior p.d.f. of <span class="math inline">\(\theta\)</span>, given that <span class="math inline">\(Y=y\)</span>, by using Bayes’ theorem. That is:</p>
+<p><span class="math display">\[k(\theta|y)=\frac{k(y, \theta)}{k_1(y)}=\frac{g(y|\theta)h(\theta)}{k_1(y)}\]</span></p>
+<p>Let’s make this discussion more concrete by taking a look at an example.</p>
+<div id="exm-bayes3" class="theorem example">
+<p><span class="theorem-title"><strong>Example 11.3</strong></span> Suppose that <span class="math inline">\(Y\)</span> follows a binomial distribution with parameters <span class="math inline">\(n\)</span> and <span class="math inline">\(p=\theta\)</span>, so that the p.m.f. of <span class="math inline">\(Y\)</span> given <span class="math inline">\(\theta\)</span> is:</p>
+<p><span class="math inline">\(g(y|\theta)={n\choose y}\theta^y(1-\theta)^{n-y}\)</span> for <span class="math inline">\(y=0, 1, \ldots, n\)</span>. Suppose that the prior p.d.f. of the parameter <span class="math inline">\(\theta\)</span> is the beta p.d.f., that is: <span class="math inline">\(h(\theta)=\frac{\Gamma(\alpha+\beta)}{\Gamma(\alpha)\Gamma(\beta)}\theta^{\alpha-1}(1-\theta)^{\beta-1}\)</span></p>
+<p>for <span class="math inline">\(0&lt;\theta&lt;1\)</span>. Find the posterior p.d.f. of <span class="math inline">\(\theta\)</span>, given <span class="math inline">\(Y=y\)</span>. That is, find <span class="math inline">\(k(\theta|y)\)</span>.</p>
+<section id="solution-2" class="level4 card card-body bg-light ms-3 mb-3 pt-0">
+<h4 class="anchored" data-anchor-id="solution-2">Solution</h4>
+<p>First, we find the joint p.d.f. of the statistic <span class="math inline">\(Y\)</span> and the parameter <span class="math inline">\(\theta\)</span> by multiplying the prior p.d.f. <span class="math inline">\(h(\theta)\)</span> and the conditional p.m.f. of the statistic <span class="math inline">\(Y\)</span> and the parameter <span class="math inline">\(\theta\)</span> is: <span class="math display">\[k(y, \theta)={n\choose y}\left(\frac{\Gamma(\alpha+\beta)}{\Gamma(\alpha)\Gamma(\beta)}\right)\theta^{y+\alpha-1}(1-\theta)^{n-y+\beta-1}\]</span></p>
+<p>over the support <span class="math inline">\(y=0, 1, 2, \ldots, n\)</span> and <span class="math inline">\(0&lt;\theta&lt;1\)</span>.</p>
+<p>Then, we find the marginal p.d.f. of <span class="math inline">\(Y\)</span> by integrating <span class="math inline">\(k(y, \theta)\)</span> over the parameter space of <span class="math inline">\(\theta\)</span>:</p>
+<div style="overflow-x:auto;overflow-y:hidden;">
+<p><span class="math display">\[k_1(y)=\int_0^1 k(y, \theta)d\theta={n\choose y}\frac{\Gamma(\alpha+\beta)}{\Gamma(\alpha)\Gamma(\beta)}\int_0^1 \theta^{y+\alpha-1}(1-\theta)^{n-y+\beta-1}d\theta\]</span></p>
+</div>
+<p>Now, if we multiply the integrand by 1 in a special way:</p>
+<div style="overflow-x:auto;overflow-y:hidden;">
+<p><span class="math display">\[k_1(y)={n\choose y}\frac{\Gamma(\alpha+\beta)}{\Gamma(\alpha)\Gamma(\beta)}\left(\frac{\Gamma(y+\alpha)\Gamma(n-y+\beta)}{\Gamma(y+\alpha+n-y+\beta)}\right)\int_0^1 \left(\frac{\Gamma(y+\alpha+n-y+\beta)}{\Gamma(y+\alpha)\Gamma(n-y+\beta)}\right)\theta^{y+\alpha-1}(1-\theta)^{n-y+\beta-1}d\theta\]</span></p>
+</div>
+<p>we see that we get a beta p.d.f. with parameters <span class="math inline">\(y+\alpha\)</span> and <span class="math inline">\(n-y+\beta\)</span> that therefore, by the definition of a valid p.d.f., must integrate to 1. Simplifying we therefore get that the marginal p.d.f. of <span class="math inline">\(Y\)</span> is:</p>
+<p><span class="math display">\[k_1(y)={n\choose y}\frac{\Gamma(\alpha+\beta)}{\Gamma(\alpha)\Gamma(\beta)}\left(\frac{\Gamma(y+\alpha)\Gamma(n-y+\beta)}{\Gamma(y+\alpha+n-y+\beta)}\right)\]</span></p>
+<p>on the support <span class="math inline">\(y=0, 1, 2, \ldots, n\)</span>. Then, the posterior p.d.f. of <span class="math inline">\(\theta\)</span>, given that <span class="math inline">\(Y=y\)</span> is:</p>
+<p><span class="math display">\[\begin{align*}
+k(\theta|y)=\frac{{n\choose y}\frac{\Gamma(\alpha+\beta)}{\Gamma(\alpha)\Gamma(\beta)}\theta^{y+\alpha-1}(1-\theta)^{n-y+\beta-1}}{{n\choose y}\frac{\Gamma(\alpha+\beta)}{\Gamma(\alpha)\Gamma(\beta)}\left(\frac{\Gamma(y+\alpha)\Gamma(n-y+\beta)}{\Gamma(y+\alpha+n-y+\beta)}\right)}
+\end{align*}\]</span></p>
+<p>Because some things cancel out, we see that the posterior p.d.f. of <span class="math inline">\(\theta\)</span>, given <span class="math inline">\(Y=y\)</span> is:</p>
+<p><span class="math display">\[k(\theta|y)=\frac{\Gamma(n+\alpha+\beta)}{\Gamma(\alpha+y)\Gamma(n+\beta-y)}\theta^{y+\alpha-1}(1-\theta)^{n-y+\beta-1}\]</span></p>
+<p>for <span class="math inline">\(0&lt;\theta&lt;1\)</span>, which you might recognize as a beta p.d.f. with parameters <span class="math inline">\(y+\alpha\)</span> and <span class="math inline">\(n-y+\beta\)</span>.</p>
+</section>
+</div>
+<p>Let’s consider another example.</p>
+<div id="exm-bayes4" class="theorem example">
+<p><span class="theorem-title"><strong>Example 11.4</strong></span> For fixed <span class="math inline">\(p\)</span>, suppose we observe a single observation <span class="math inline">\(Y=y\)</span> for a distribution with pdf <span class="math inline">\(p(1-p)^y\)</span>, for <span class="math inline">\(y=0, 1, \ldots\)</span>, Also, prior information on <span class="math inline">\(p\)</span> indicates that <span class="math inline">\(p\)</span> has a pdf <span class="math inline">\(3p^2\)</span> for <span class="math inline">\(0&lt;p&lt;1\)</span>. Find the posterior distribution of <span class="math inline">\(p\)</span> given <span class="math inline">\(Y=y\)</span>.</p>
+<section id="solution-3" class="level4 card card-body bg-light ms-3 mb-3 pt-0">
+<h4 class="anchored" data-anchor-id="solution-3">Solution</h4>
+<p>We need to find the posterior distribution of <span class="math inline">\(p\)</span> given that <span class="math inline">\(Y=y\)</span>. We can find the joint distribution by:</p>
+<p><span class="math display">\[\begin{align*}
+  k(p, y)=g(y|p)h(p)=p(1-p)^y\left(3p^2\right)=3p^3(1-p)^y
+\end{align*}\]</span></p>
+<p>The next step would be to find <span class="math inline">\(k_1(y)\)</span> by:</p>
+<p><span class="math display">\[\begin{align*}
+  k_1(y)=\int_0^1 3p^3(1-p)^ydp
+\end{align*}\]</span></p>
+<p>Instead of doing this, let’s recognize that <span class="math inline">\(k_1(y)\)</span> is a constant in regards to <span class="math inline">\(p\)</span>. Lets denote <span class="math inline">\(k_1(p)\)</span> as <span class="math inline">\(c\)</span>.</p>
+<p>Now, we need to find <span class="math inline">\(k(p|y)=\frac{k(p, y)}{k_1(y)}\)</span>.</p>
+<p><span class="math display">\[\begin{align*}k(p|y)=\frac{k(p, y)}{k_1(y)}=\frac{3p^3(1-p)^y}{c}=\left(\frac{3}{c}\right)p^3(1-p)^y
+\end{align*}\]</span></p>
+<p>The term in the parentheses, <span class="math inline">\(\left(\frac{3}{c}\right)\)</span>, is a constant with respect to <span class="math inline">\(p\)</span>. Let’s denote that constant as <span class="math inline">\(\kappa\)</span>. Therefore, we have:</p>
+<p><span class="math display">\[k(p|y)=\kappa p^3(1-p)^y\]</span></p>
+<p>We know that <span class="math inline">\(k(p|y)\)</span> is a valid pdf. We also know that <span class="math inline">\(p\)</span> has support <span class="math inline">\(0&lt;p&lt;1\)</span> and that <span class="math inline">\(k(p|y)\)</span> integrates to 1 over the support. Therefore, the posterior distribution of <span class="math inline">\(p\)</span> given <span class="math inline">\(Y=y\)</span> has to be a beta distribution with parameters <span class="math inline">\(\alpha=4\)</span> and <span class="math inline">\(\beta=y+1\)</span>. In other words,</p>
+<p><span class="math display">\[\begin{align*}
+  k(p|y)=\frac{\Gamma(4+y)}{\Gamma(4)\Gamma(y+1)}p^{4-1}(1-p)^{(y+1)-1}
+\end{align*}\]</span></p>
+<p>We found the posterior distribution of <span class="math inline">\(p\)</span> given <span class="math inline">\(Y=y\)</span> without any integration! We just recognized lumped together all of the constants with respect to <span class="math inline">\(p\)</span> and used our knowledge of what makes a function a valid pdf.</p>
+<div class="callout callout-style-simple callout-caution no-icon">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-body-container">
+<p><strong>Note!</strong> Since <span class="math inline">\(\kappa\)</span> is a constant with respect to <span class="math inline">\(p\)</span>, we can say that <span class="math inline">\(k(p|y)\)</span> is <strong>proportional to</strong> <span class="math inline">\(p^3(1-p)^y\)</span>. We denote this as:</p>
+<p><span class="math display">\[k(p|y)\propto p^3(1-p)^y\]</span></p>
+</div>
+</div>
+</div>
+<p>This technique is helpful to find the posteriors quicker. However, it only works if we can recognize the posterior distribution, just as we recognized that <span class="math inline">\(k(p|y)\)</span> is a beta distribution.</p>
+<p>To demonstrate the long way, test your calculus and algebra skills to find</p>
+<div style="overflow-x:auto;overflow-y:hidden;">
+<p><span class="math display">\[\begin{align*}
+  c=k_1(y)=\int_0^1 3p^3(1-p)^ydp=\frac{18}{(y+1)(y+2)(y+3)(y+4)}
+\end{align*}\]</span></p>
+</div>
+<p>The constant, <span class="math inline">\(\kappa\)</span>, is equal to</p>
+<p><span class="math display">\[\begin{align*}
+\frac{3}{c}=\frac{3}{\frac{18}{(y+1)(y+2)(y+3)(y+4)}}=\frac{(y+1)(y+2)(y+3)(y+4)}{6}
+\end{align*}\]</span></p>
+<p>Compare this to the constant of the beta distribution we found as the posterior:</p>
+<div style="overflow-x:auto;overflow-y:hidden;">
+<p><span class="math display">\[\begin{align*}
+\frac{\Gamma(5+y)}{\Gamma(4)\Gamma(y+1)}=\frac{(y+4)(y+3)(y+2)(y+1)y!}{3!(y!)}=\frac{(y+4)(y+3)(y+2)(y+1)}{6}
+\end{align*}\]</span></p>
+</div>
+<p>They are exactly the same! Again, this is because we recognized the posterior distribution is a beta and only one constant can make the pdf of a beta distribution integrate to one over the support.</p>
+<p>In the examples so far, we have considered only one observation. We can begin with a sample of observations, say <span class="math inline">\(X_1, X_2, \ldots, X_n\)</span> or we can begin with a sample statistic.</p>
+<p>If we begin with a sample, we could replace <span class="math inline">\(g(y|\theta)\)</span> by the likelihood function</p>
+<p><span class="math display">\[\begin{align*}
+  L(\theta)=f(x_1|\theta)f(x_2|\theta)\cdots f(x_n|\theta)
+\end{align*}\]</span></p>
+<p>which is just the joint distribution of <span class="math inline">\(X_1, X_2, \ldots, X_n\)</span> given the parameter <span class="math inline">\(\theta\)</span>. Therefore, we can find</p>
+<p><span class="math display">\[\begin{align*}
+k(\theta|x_1, \ldots, x_n)\propto h(\theta)L(\theta)
+\end{align*}\]</span></p>
+<p>If we begin with a statistic, say <span class="math inline">\(W\)</span>, then we need to find the distribution of <span class="math inline">\(g(w|\theta)\)</span> and proceed as usual.</p>
+</section>
+</div>
+<div id="exm-bayes5" class="theorem example">
+<p><span class="theorem-title"><strong>Example 11.5</strong></span> Let <span class="math inline">\(X_1, X_2, \ldots, X_n\)</span> be a random sample from a Bernouli distribution with pmf <span class="math display">\[\begin{align*}
+  f(x|\theta)=\theta^x(1-\theta)^{1-x}, \qquad x=0, 1
+\end{align*}\]</span> Prior information tells us <span class="math inline">\(\theta\)</span> follows a beta distribution with parameters <span class="math inline">\(\alpha\)</span> and <span class="math inline">\(\beta\)</span>. Find the posteriour distribution of <span class="math inline">\(\theta\)</span> given the data.</p>
+<section id="solution-4" class="level4 card card-body bg-light ms-3 mb-3 pt-0">
+<h4 class="anchored" data-anchor-id="solution-4">Solution</h4>
+<p>First, we need to find the likelihood function:</p>
+<div style="overflow-x:auto;overflow-y:hidden;">
+<p><span class="math display">\[\begin{align*}
+  L(\theta)=\prod_{i=1}^n f(x_i|\theta)=\prod_{i=1}^n\theta^{x_i}(1-\theta)^{1-x_i}=\theta^{\sum x_i}(1-\theta)^{n-\sum x_i}
+\end{align*}\]</span></p>
+</div>
+<p>The next step is to find the joint distribution of <span class="math inline">\(\theta\)</span> and the data.</p>
+<div style="overflow-x:auto;overflow-y:hidden;">
+<p><span class="math display">\[\begin{align*}k(\theta|x_1, \ldots, x_n)\propto h(\theta)L(\theta)=\theta^{\alpha-1}(1-\theta)^{\beta-1}\theta^{\sum x_i}(1-\theta)^{n-\sum x_i}
+\end{align*}\]</span></p>
+</div>
+<p>Remember, when we say <span class="math inline">\(k(\theta|x_1, \ldots, x_n)\)</span> is proportional to the expression on the right hand side, we are ignoring all the terms that are constant with respect to <span class="math inline">\(\theta\)</span>. Simplifying, we get:</p>
+<p><span class="math display">\[\begin{align*}
+  k(\theta|x_1, \ldots, x_n)\propto \theta^{\alpha+\sum x_i -1}(1-\theta)^{n-\sum x_i+\beta-1}
+\end{align*}\]</span></p>
+<p>We can recognize that <span class="math inline">\(\theta^{\alpha+\sum x_i -1}(1-\theta)^{n-\sum x_i+\beta-1}\)</span> is proportional to a beta distribution with parameters <span class="math inline">\(\alpha^*=\alpha+\sum x_i\)</span> and <span class="math inline">\(\beta^*=n-\sum x_i +\beta\)</span>.</p>
+</section>
+</div>
+<p>Okay now, are you scratching your head wondering what this all has to do with Bayesian estimation, as the title of this page suggests it should? Well, let’s talk about that then! Bayesians believe that everything you need to know about a parameter <span class="math inline">\(\theta\)</span> can be found in its posterior p.d.f. <span class="math inline">\(k(\theta|y)\)</span>. So, if a Bayesian is asked to make a point estimate of <span class="math inline">\(\theta\)</span>, he or she is going to naturally turn to <span class="math inline">\(k(\theta|y)\)</span> for the answer. But how? Well, the logical thing to do would be to use <span class="math inline">\(k(\theta|y)\)</span> to calculate the mean or median of <span class="math inline">\(\theta\)</span>, as they would all be reasonable guesses of the value of <span class="math inline">\(\theta\)</span>. But, hmmm! Should he or she …. errrr, let’s get rid of this he or she stuff…. let’s make it a she for now… okay… should she calculate the mean or the median? Well, that depends on what it will cost her for using either. Huh? Cost? We’re talking about estimating a parameter not buying groceries. Well, let’s suppose she gets charged a certain amount for estimating the real value of the parameter <span class="math inline">\(\theta\)</span> with her guess <span class="math inline">\(w(y)\)</span>. Well, this Bayesian woman would probably want the cost of her error to be as small as possible. Suppose, she is charged the square of the error between <span class="math inline">\(\theta\)</span> and we guess <span class="math inline">\(w(y)\)</span>. That is, suppose her cost is:</p>
+<p><span class="math display">\[(\theta-w(y))^2\]</span></p>
+<p>Aha… there we have it! Because she wants her cost to be as small as possible, she should make her guess <span class="math inline">\(w(y)\)</span> be the conditional mean <span class="math inline">\(E(\theta|y)\)</span>. Thats because way back in STAT 414, we showed that if <span class="math inline">\(Z\)</span> is a random variable, then the expected value of the squared error, that is, <span class="math inline">\(E[(Z-b)^2]\)</span> is minimized at <span class="math inline">\(b=E(Z)\)</span>. In her case, the <span class="math inline">\(Z\)</span> is the <span class="math inline">\(\theta\)</span> and the <span class="math inline">\(b\)</span> is the <span class="math inline">\(w(y)=E(\theta|y)\)</span>.</p>
+<p>On the other hand, if she is charged the absolute value of the error between <span class="math inline">\(\theta\)</span> and her guess <span class="math inline">\(w(y)\)</span>, that is: <span class="math display">\[|\theta-w(y)|\]</span> then in order to make her cost be as small as possible, she’ll want to make her guess <span class="math inline">\(w(y)\)</span> be the conditional median. That’s because, again, way back in STAT 414, we showed that if <span class="math inline">\(Z\)</span> is a random variable, then the expected value of the absolute value of the error, that is <span class="math inline">\(E[|Z-b|]\)</span> is minimized when <span class="math inline">\(b\)</span> equals the median of the distribution.</p>
+<p>Let’s make this discussion concrete by returning to our binomial example.</p>
+<div id="exm-bayes6" class="theorem example">
+<p><span class="theorem-title"><strong>Example 11.6</strong></span> Suppose that <span class="math inline">\(Y\)</span> follows a binomial distribution with parameters <span class="math inline">\(n\)</span> and <span class="math inline">\(p=\theta\)</span>, so that the pmf of <span class="math inline">\(Y\)</span> given <span class="math inline">\(\theta\)</span> is:</p>
+<p><span class="math display">\[g(y|\theta)={n\choose y}\theta^y(1-\theta)^{n-y}\]</span> for <span class="math inline">\(y=0, 1, \ldots, n\)</span>. Suppose that the prior pdf of the parameter <span class="math inline">\(\theta\)</span> is the beta pdf, that is:</p>
+<p><span class="math display">\[h(\theta)=\frac{\Gamma(\alpha+\beta)}{\Gamma(\alpha)\Gamma(\beta)}\theta^{\alpha-1}(1-\theta)^{\beta-1}\]</span> for <span class="math inline">\(0&lt;\theta&lt;1\)</span>. Estimate the parameter <span class="math inline">\(\theta\)</span> using the squared error loss function.</p>
+<div class="card card-body bg-light ms-3 mb-3 pt-0">
+<p>We’ve previously shown that the posterior p.d.f. of <span class="math inline">\(\theta\)</span> given <span class="math inline">\(Y=y\)</span> is the bets p.d.f. with parameters <span class="math inline">\(y+\alpha\)</span> and <span class="math inline">\(n-y+\beta\)</span>. The previous discussion tell us that in order to minimize the squared error loss function:</p>
+<p><span class="math display">\[\begin{align*}
+  (\theta-w(y))^2
+\end{align*}\]</span></p>
+<p>we should use the conditional mean <span class="math inline">\(w(y)=E(\theta|y)\)</span> as an estimate of the parameter <span class="math inline">\(\theta\)</span>. Well, in general, the mean of a beta p.d.f. with parameters <span class="math inline">\(\alpha\)</span> and <span class="math inline">\(\beta\)</span> is:</p>
+<p><span class="math display">\[\begin{align*}
+  \frac{\alpha}{\alpha+\beta}
+\end{align*}\]</span></p>
+<p>In our case, the posterior p.d.f. of <span class="math inline">\(\theta\)</span> given <span class="math inline">\(Y=y\)</span> is the beta p.d.f. with parameters <span class="math inline">\(y+\alpha\)</span> and <span class="math inline">\(n-y+\beta\)</span>. Therefore, the conditional mean is:</p>
+<p><span class="math display">\[\begin{align*}w(y)=E(\theta|y)=\frac{\alpha+y}{\alpha+y+n-y+\beta}=\frac{\alpha+y}{\alpha+n+\beta}
+\end{align*}\]</span></p>
+<p>And, it serves, in this situation, as a Bayesian’s best estimate of <span class="math inline">\(\theta\)</span> when using the squared error loss function.</p>
+</div>
+</div>
+</section>
+<section id="credible-intervals" class="level2" data-number="11.3">
+<h2 data-number="11.3" class="anchored" data-anchor-id="credible-intervals"><span class="header-section-number">11.3</span> Credible Intervals</h2>
+<p>Previously, when we assumed the known parameter was a constant, we found a point estimate or point estimator for <span class="math inline">\(\theta\)</span>. We have done something similar in the Bayesian setting this section by find the value that minimizes the squared error loss function or by minimizing the absolute value of the error.</p>
+<p>However, in the frequentist setting, we did not stop at a point estimate. We constructed (using our probability tools) confidence intervals for the unknown parameter. Can we do something similar here with the Bayesian estimate?</p>
+<p>The answer is yes. We can find what is called a <strong>credible interval</strong>. We can construct the credible interval by finding two value of <span class="math inline">\(y\)</span>, say <span class="math inline">\(a(y)\)</span> and <span class="math inline">\(b(y)\)</span> such that:</p>
+<p><span class="math display">\[\begin{align*}
+  \int_{a(y)}^{b(y)}k(\theta|y)d\theta=1-\alpha
+\end{align*}\]</span></p>
+<p>where <span class="math inline">\(\alpha\)</span> is small, say <span class="math inline">\(\alpha=0.05\)</span>. The resulting interval from <span class="math inline">\(a(y)\)</span> to <span class="math inline">\(b(y)\)</span> could be an interval estimate for <span class="math inline">\(\theta\)</span> such that the posterior probability of <span class="math inline">\(\theta\)</span> being in that interval is <span class="math inline">\(1-\alpha\)</span>.</p>
+<p>It is common for the interval to have equal probability on each tail. Therefore, the interval should be set up such that: <span class="math display">\[\begin{align*}
+  &amp; \frac{\alpha}{2}=\int_{-\infty}^{a(y)}k(\theta|y)d\theta\\
+  &amp; \frac{\alpha}{2}=\int_{b(y)}^\infty k(\theta|y)d\theta
+\end{align*}\]</span></p>
+<div id="exm-bayes7" class="theorem example">
+<p><span class="theorem-title"><strong>Example 11.7</strong></span> Consider the previous example where we have one observation, <span class="math inline">\(Y\)</span>, from a distribution with pdf <span class="math inline">\(p(1-p)^y\)</span> for <span class="math inline">\(y=0, 1, \ldots\)</span> and a unknown parameter <span class="math inline">\(p\)</span> with a prior distribution <span class="math inline">\(3p^2\)</span>, for <span class="math inline">\(0&lt;p&lt;1\)</span>. Find a 90% credible interval for <span class="math inline">\(p\)</span> with <span class="math inline">\(Y=3\)</span>.</p>
+<section id="solution-5" class="level4 card card-body bg-light ms-3 mb-3 pt-0">
+<h4 class="anchored" data-anchor-id="solution-5">Solution</h4>
+<p>We know the posterior distribution is a beta distribution with parameters <span class="math inline">\(\alpha=4\)</span> and <span class="math inline">\(\beta=y+1\)</span>. In this case, <span class="math inline">\(Y=3\)</span>, making <span class="math inline">\(\beta=4\)</span>.</p>
+<p>To find the 90% credible interval, we need to find <span class="math inline">\(a(y)\)</span> and <span class="math inline">\(b(y)\)</span> such that</p>
+<div style="overflow-x:auto;overflow-y:hidden;">
+<p><span class="math display">\[0.90=\int_{a(y)}^{b(y)}\frac{\Gamma(8)}{\Gamma(4)\Gamma(4)}p^3(1-p)^3dp=\int_{a(y)}^{b(y)}\frac{35}{4}p^3(1-p)^3dp\]</span></p>
+</div>
+<p>We can use R to help us find this interval. We can find the <span class="math inline">\(5^{th}\)</span> percentile and the <span class="math inline">\(95^{th}\)</span> of a beta distribution with parameters <span class="math inline">\(\alpha=4\)</span> and <span class="math inline">\(\beta=4\)</span> by using the following commands.</p>
+<div class="cell language-name-processed">
+<div class="codeblock-with-label r">
+<style>.codeblock-with-label pre.lang-label-1::before { content: "R"; }</style>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1" data-language-name-skip="true"><pre class="sourceCode r lang-label-1 code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">qbeta</span>(<span class="fl">0.05</span>, <span class="at">shape1=</span><span class="dv">4</span>, <span class="at">shape2=</span><span class="dv">4</span>) </span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.2253216</code></pre>
+</div>
+<div class="codeblock-with-label r">
+<style>.codeblock-with-label pre.lang-label-2::before { content: "R"; }</style>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r lang-label-2 code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">qbeta</span>(<span class="fl">0.95</span>, <span class="at">shape1=</span><span class="dv">4</span>, <span class="at">shape2=</span><span class="dv">4</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.7746784</code></pre>
+</div>
+</div>
+<p>Therefore, the 90% credible interval for <span class="math inline">\(p\)</span>, given <span class="math inline">\(Y=3\)</span>, is <span class="math inline">\((0.2253, 0.7747)\)</span>.</p>
+</section>
+</div>
+<section id="summary" class="level3" data-number="11.3.1">
+<h3 data-number="11.3.1" class="anchored" data-anchor-id="summary"><span class="header-section-number">11.3.1</span> Summary</h3>
+<p>In this lesson, we shifted perspectives from frequentist to Bayesian thinking. While frequentist methods treat parameters as fixed but unknown values, Bayesian methods treat parameters as random variables with probability distributions. This shift allows us to incorporate prior beliefs and update them with data using Bayes’ Theorem.</p>
+<p>We started by understanding <strong>subjective probability</strong>, where a Bayesian uses available information (like betting amounts on horses) to assign probabilities to uncertain events. Then we explored how Bayesians estimate parameters using a <strong>prior distribution</strong> and <strong>likelihood</strong> to derive a <strong>posterior distribution</strong>.</p>
+<p>We also saw that Bayesian estimation often leads to posterior distributions with familiar forms—like a <strong>beta distribution</strong> for binomial data with a beta prior. A Bayesian point estimate depends on the chosen <strong>loss function</strong>. If minimizing <strong>squared error</strong>, the best estimate is the <strong>posterior mean.</strong></p>
+<p>This lesson introduced the Bayesian view of learning from data: combining prior beliefs with observed evidence to make probabilistic statements about unknown parameters. While this was just a glimpse into the Bayesian world, it showed how flexible and intuitive the approach can be.</p>
+<p><strong>Key Takeways:</strong></p>
+<ul>
+<li>Mathematically, if <span class="math inline">\(\theta\)</span> is the parameter and <span class="math inline">\(y\)</span> is the data, the posterior distribution is: <span class="math inline">\(k(\theta|y)=\frac{g(y|\theta)}{k_1(y)}\)</span></li>
+<li><strong>Credible intervals</strong>, which are Bayesian counterparts to confidence intervals, satisfies: <span class="math inline">\(\int_{a(y)}^{b(y)} k(\theta|y)d\theta=1-\alpha\)</span></li>
+</ul>
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<!--<script>
+
+document.addEventListener('DOMContentLoaded', function () {
+
+    const toc = document.getElementById('TOC');
+
+    const navbarCollapse = document.getElementById('navbarCollapse');
+
+    const menuButton = document.querySelector('.navbar-toggler');
+
+
+
+    // Function to move TOC to navbar on small screens
+
+    function handleTOCDisplay() {
+
+        if (window.innerWidth < 768) {
+
+            if (!navbarCollapse.contains(toc)) {
+
+                navbarCollapse.appendChild(toc); // Move TOC into the navbar
+
+            }
+
+        } else {
+
+            if (toc.parentNode !== document.getElementById('quarto-margin-sidebar')) {
+
+                document.getElementById('quarto-margin-sidebar').appendChild(toc); // Move TOC back to original location
+
+            }
+
+        }
+
+    }
+
+
+
+    // Initial check on page load
+
+    handleTOCDisplay();
+
+
+
+    // Check when resizing the window
+
+    window.addEventListener('resize', handleTOCDisplay);
+
+
+
+    // Toggle TOC visibility when navbar is expanded on small screens
+
+    menuButton.addEventListener('click', function() {
+
+        if (window.innerWidth < 768) {
+
+            toc.classList.toggle('toc-active'); // Toggle visibility of the TOC in the navbar
+
+        }
+
+    });
+
+});
+
+</script>-->
+
+
+
+<script>
+
+document.addEventListener('DOMContentLoaded', function () {
+
+    const toc = document.getElementById('TOC'); // TOC element
+
+    const activeLesson = document.querySelector('.sidebar-item .sidebar-link.active'); // Active lesson link
+
+    const originalTocParent = toc.parentElement; // Store original TOC location
+
+
+
+    // Create a container for the TOC in the sidebar
+
+    const nestedTocContainer = document.createElement('ul');
+
+    nestedTocContainer.className = 'sidebar-toc-nested list-unstyled';
+
+
+
+    // Function to move the TOC into the sidebar
+
+    function moveTocToSidebar() {
+
+        if (!toc || !activeLesson) return;
+
+        while (toc.firstChild) {
+
+            nestedTocContainer.appendChild(toc.firstChild);
+
+        }
+
+        const parentItem = activeLesson.closest('.sidebar-item');
+
+        parentItem.appendChild(nestedTocContainer);
+
+        toc.style.display = 'none'; // Hide the original TOC container
+
+    }
+
+
+
+    // Function to restore the TOC to its original location
+
+    function restoreTocToOriginalLocation() {
+
+        if (nestedTocContainer.parentNode) {
+
+            while (nestedTocContainer.firstChild) {
+
+                toc.appendChild(nestedTocContainer.firstChild);
+
+            }
+
+            nestedTocContainer.remove(); // Remove the container
+
+            toc.style.display = ''; // Show the original TOC container
+
+        }
+
+    }
+
+
+
+    // Function to handle screen width changes
+
+    function handleScreenResize() {
+
+        if (window.innerWidth < 768) {
+
+            moveTocToSidebar();
+
+        } else {
+
+            restoreTocToOriginalLocation();
+
+        }
+
+    }
+
+
+
+    // Initial check and event listener for resize
+
+    handleScreenResize();
+
+    window.addEventListener('resize', handleScreenResize);
+
+});
+
+
+
+</script>
+<!---function to make the first column th instead of td when using markdown tables..just add .row-header as your class below the table!---->
+
+<script>
+
+    window.addEventListener('DOMContentLoaded', () => {
+
+        // Select only tables with the 'row-header' class
+
+        const tables = document.querySelectorAll('table.row-header');
+
+        
+
+        tables.forEach(table => {
+
+            const rows = table.querySelectorAll('tr');
+
+            
+
+            rows.forEach(row => {
+
+                const firstCell = row.cells[0];
+
+                if (firstCell && firstCell.tagName === 'TD') {
+
+                    const th = document.createElement('th');
+
+                    th.innerHTML = firstCell.innerHTML;
+
+                    th.setAttribute('scope', 'row'); // Add scope="row" to the th element
+
+                    row.replaceChild(th, firstCell);
+
+                }
+
+            });
+
+        });
+
+    });
+
+</script>
+<script>
+
+  document.addEventListener("DOMContentLoaded", function () {
+
+    const elements = document.querySelectorAll('div[id^="exm-"]');
+
+
+
+    elements.forEach((element) => {
+
+      const theoremTitle = element.querySelector('.theorem-title');
+
+      // Use the Quarto-generated id (e.g. "exm-muscleexample") directly
+
+      const anchorId = element.id;
+
+
+
+      if (theoremTitle && anchorId) {
+
+        const anchor = document.createElement('a');
+
+        anchor.href = `#${anchorId}`;
+
+        anchor.className = 'anchor';
+
+        anchor.setAttribute('aria-label', `Link to ${theoremTitle.textContent.trim()}`);
+
+        anchor.innerHTML = '<i class="bi bi-link-45deg" aria-hidden="true"></i>';
+
+        theoremTitle.appendChild(anchor);
+
+        // No need to reassign element.id — it's already correct
+
+      }
+
+    });
+
+  });
+
+</script>
+<style>
+
+  #mas-popup,
+
+  #mas-popup * {
+
+    box-sizing: border-box;
+
+  }
+
+
+
+  #mas-popup {
+
+    --mas-navy: #001e44;
+
+    --mas-blue: #1e407c;
+
+    --mas-sky: #96bee6;
+
+
+
+    position: fixed;
+
+    right: max(1.25rem, env(safe-area-inset-right));
+
+    bottom: max(1.25rem, env(safe-area-inset-bottom));
+
+    z-index: 1055;
+
+
+
+    width: min(25rem, calc(100vw - 2rem));
+
+    padding: 1.45rem 1.5rem 1.5rem 1.8rem;
+
+    overflow: hidden;
+
+
+
+    border: 1px solid rgba(0, 30, 68, 0.14);
+
+    border-radius: 0.75rem;
+
+    background: #ffffff;
+
+    color: #16243a;
+
+
+
+    box-shadow:
+
+      0 1.25rem 3.5rem rgba(0, 30, 68, 0.2),
+
+      0 0.2rem 0.7rem rgba(0, 30, 68, 0.08);
+
+
+
+    font-family: Arial, Helvetica, sans-serif;
+
+    -webkit-font-smoothing: antialiased;
+
+
+
+    animation: mas-popup-in 320ms cubic-bezier(0.2, 0.8, 0.2, 1) both;
+
+  }
+
+
+
+  #mas-popup[hidden] {
+
+    display: none;
+
+  }
+
+
+
+  /* Blue accent along the left side */
+
+  #mas-popup::before {
+
+    position: absolute;
+
+    inset: 0 auto 0 0;
+
+    width: 0.35rem;
+
+    background: linear-gradient(
+
+      180deg,
+
+      var(--mas-sky),
+
+      var(--mas-blue)
+
+    );
+
+    content: "";
+
+  }
+
+
+
+  #mas-popup-kicker {
+
+    margin: 0 3rem 0.55rem 0;
+
+    color: var(--mas-blue);
+
+    font-size: 0.69rem;
+
+    font-weight: 700;
+
+    letter-spacing: 0.12em;
+
+    line-height: 1.3;
+
+    text-transform: uppercase;
+
+  }
+
+
+
+  #mas-popup h2#mas-popup-title {
+
+    margin: 1rem 2.5rem 0.65rem 0 !important; 
+
+    max-width: 19rem;
+
+    margin: 0 2.5rem 0.65rem 0 !important;
+
+    color: var(--mas-navy);
+
+    font-family: Georgia, "Times New Roman", serif;
+
+    font-size: 1.55rem;
+
+    font-weight: 600;
+
+    letter-spacing: -0.015em;
+
+    line-height: 1.18 !important;
+
+  }
+
+
+
+  #mas-popup-description {
+
+    max-width: 21rem;
+
+    margin: 0 0 1.15rem;
+
+    color: #46586e;
+
+    font-size: 0.95rem;
+
+    line-height: 1.55;
+
+  }
+
+
+
+  #mas-popup-cta {
+
+    display: inline-flex;
+
+    min-height: 2.75rem;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 0.65rem;
+
+
+
+    padding: 0.7rem 1rem;
+
+    border: 2px solid var(--mas-navy);
+
+    border-radius: 0.35rem;
+
+    background: var(--mas-navy);
+
+    color: #ffffff;
+
+
+
+    font-size: 0.88rem;
+
+    font-weight: 700;
+
+    text-decoration: none;
+
+
+
+    transition:
+
+      background-color 160ms ease,
+
+      border-color 160ms ease,
+
+      transform 160ms ease;
+
+  }
+
+
+
+  #mas-popup-cta:hover,
+
+  #mas-popup-cta:focus-visible {
+
+    border-color: var(--mas-blue);
+
+    background: var(--mas-blue);
+
+    color: #ffffff;
+
+    transform: translateY(-1px);
+
+  }
+
+
+
+  #mas-popup-cta-arrow {
+
+    font-size: 1.1rem;
+
+    transition: transform 160ms ease;
+
+  }
+
+
+
+  #mas-popup-cta:hover #mas-popup-cta-arrow,
+
+  #mas-popup-cta:focus-visible #mas-popup-cta-arrow {
+
+    transform: translateX(0.18rem);
+
+  }
+
+
+
+  #mas-popup-close {
+
+    position: absolute;
+
+    top: 0.65rem;
+
+    right: 0.65rem;
+
+
+
+    display: grid;
+
+    width: 2.75rem;
+
+    height: 2.75rem;
+
+    padding: 0;
+
+    place-items: center;
+
+
+
+    border: 0;
+
+    border-radius: 50%;
+
+    background: transparent;
+
+    color: #485b72;
+
+
+
+    font: inherit;
+
+    font-size: 1.55rem;
+
+    line-height: 1;
+
+
+
+    cursor: pointer;
+
+  }
+
+
+
+  #mas-popup-close:hover,
+
+  #mas-popup-close:focus-visible {
+
+    background: #edf2f7;
+
+    color: var(--mas-navy);
+
+  }
+
+
+
+  #mas-popup :focus-visible {
+
+    outline: 3px solid var(--mas-sky);
+
+    outline-offset: 3px;
+
+  }
+
+
+
+  @keyframes mas-popup-in {
+
+    from {
+
+      opacity: 0;
+
+      transform: translateY(1rem) scale(0.98);
+
+    }
+
+
+
+    to {
+
+      opacity: 1;
+
+      transform: translateY(0) scale(1);
+
+    }
+
+  }
+
+
+
+  @media (max-width: 520px) {
+
+    #mas-popup {
+
+      right: max(0.75rem, env(safe-area-inset-right));
+
+      bottom: max(0.75rem, env(safe-area-inset-bottom));
+
+      width: calc(100vw - 1.5rem);
+
+      padding: 1.25rem 1.25rem 1.3rem 1.55rem;
+
+    }
+
+
+
+    #mas-popup-title {
+
+      max-width: 17rem;
+
+      font-size: 1.4rem;
+
+    }
+
+
+
+    #mas-popup-cta {
+
+      width: 100%;
+
+    }
+
+  }
+
+
+
+  @media (prefers-reduced-motion: reduce) {
+
+    #mas-popup {
+
+      animation: none;
+
+    }
+
+
+
+    #mas-popup-cta,
+
+    #mas-popup-cta-arrow {
+
+      transition: none;
+
+    }
+
+  }
+
+</style>
+
+
+
+<aside id="mas-popup" role="region" aria-labelledby="mas-popup-title" aria-describedby="mas-popup-description" aria-live="polite" hidden="">
+
+  <button id="mas-popup-close" type="button" aria-label="Close this message">
+
+    <span aria-hidden="true">×</span>
+
+  </button>
+
+
+
+  <p id="mas-popup-kicker">
+
+    Online master’s program
+
+  </p>
+
+
+
+  <h2 id="mas-popup-title">
+
+    Take your statistics skills further
+
+  </h2>
+
+
+
+  <p id="mas-popup-description">
+
+    Explore Penn State’s online Master of Applied Statistics program.
+
+  </p>
+
+
+
+  <a id="mas-popup-cta" href="https://science.psu.edu/stat/graduate-programs/master-of-applied-statistics">
+
+    Explore the program
+
+    <span id="mas-popup-cta-arrow" aria-hidden="true">→</span>
+
+  </a>
+
+</aside>
+
+
+
+<script>
+
+  (() => {
+
+    const storageKey = "stat501-mas-popup-dismissed-v2";
+
+
+
+    // Show the popup after 15 seconds.
+
+    const showDelay = 15000;
+
+
+
+    // After closing it, hide it for 30 days.
+
+    const dismissalDays = 30;
+
+
+
+    const popup = document.getElementById("mas-popup");
+
+    const closeButton = document.getElementById("mas-popup-close");
+
+    const cta = document.getElementById("mas-popup-cta");
+
+
+
+    if (!popup || !closeButton || !cta) return;
+
+
+
+    let dismissalActive = false;
+
+
+
+    try {
+
+      const dismissedUntil = Number(
+
+        localStorage.getItem(storageKey)
+
+      );
+
+
+
+      dismissalActive =
+
+        Number.isFinite(dismissedUntil) &&
+
+        Date.now() < dismissedUntil;
+
+    } catch (error) {
+
+      // The popup still works if browser storage is unavailable.
+
+    }
+
+
+
+    if (dismissalActive) return;
+
+
+
+    const rememberDismissal = () => {
+
+      try {
+
+        const millisecondsPerDay = 24 * 60 * 60 * 1000;
+
+        const dismissedUntil =
+
+          Date.now() + dismissalDays * millisecondsPerDay;
+
+
+
+        localStorage.setItem(
+
+          storageKey,
+
+          String(dismissedUntil)
+
+        );
+
+      } catch (error) {
+
+        // Closing still works if browser storage is unavailable.
+
+      }
+
+    };
+
+
+
+    const showTimer = window.setTimeout(() => {
+
+      popup.hidden = false;
+
+    }, showDelay);
+
+
+
+    const dismissPopup = () => {
+
+      window.clearTimeout(showTimer);
+
+      popup.hidden = true;
+
+      rememberDismissal();
+
+    };
+
+
+
+    closeButton.addEventListener("click", dismissPopup);
+
+
+
+    // Prevent the popup from appearing again after someone uses the CTA.
+
+    cta.addEventListener("click", rememberDismissal);
+
+
+
+    document.addEventListener("keydown", (event) => {
+
+      if (event.key === "Escape" && !popup.hidden) {
+
+        dismissPopup();
+
+      }
+
+    });
+
+  })();
+
+</script>
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    // Ensure there is a toggle, if there isn't float one in the top right
+    if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+      const a = window.document.createElement('a');
+      a.classList.add('top-right');
+      a.classList.add('quarto-color-scheme-toggle');
+      a.href = "";
+      a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+      const i = window.document.createElement("i");
+      i.classList.add('bi');
+      a.appendChild(i);
+      window.document.body.appendChild(a);
+    }
+    setColorSchemeToggle(hasAlternateSentinel())
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./Lesson10.html" class="pagination-link" aria-label="Hypothesis Tests (Part II)">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Hypothesis Tests (Part II)</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./Lesson12.html" class="pagination-link" aria-label="Simple Linear Regression">
+        <span class="nav-page-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Simple Linear Regression</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+<p>Except where otherwise noted, content on this site is licensed under a <a href="https://creativecommons.org/licenses/by-nc/4.0/">CC BY-NC 4.0</a> license.<br><br> <img src="assets/by-nc.svg" class="img-fluid" alt="BYNC"></p>
+</div>   
+    <div class="nav-footer-center">
+<p><a href="https://oer.psu.edu/">OPEN.ED@PSU</a></p>
+<div class="cookie-consent-footer"><a href="#" id="open_preferences_center">Cookie Preferences</a></div></div>
+    <div class="nav-footer-right">
+<a href="https://www.psu.edu/web-privacy-statement/">Privacy</a> | <a href="https://www.psu.edu/accessibilitystatement/">Accessibility</a> | <a href="https://www.psu.edu/copyright-information/">Copyright</a> <br> <a href="https://www.psu.edu/">The Pennsylvania State University</a> © <span id="copyright-year"></span> | <br> <a href="https://forms.office.com/r/GbC8H0pZhm">Leave Us Feedback</a>
+<script>
+document.getElementById("copyright-year").textContent = new Date().getFullYear();
+</script>
+</div>
+  </div>
+</footer>
+<script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","descPosition":"bottom","loop":false,"openEffect":"zoom","selector":".lightbox"});
+(function() {
+  let previousOnload = window.onload;
+  window.onload = () => {
+    if (previousOnload) {
+      previousOnload();
+    }
+    lightboxQuarto.on('slide_before_load', (data) => {
+      const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+      const href = trigger.getAttribute('href');
+      if (href !== null) {
+        const imgEl = window.document.querySelector(`a[href="${href}"] img`);
+        if (imgEl !== null) {
+          const srcAttr = imgEl.getAttribute("src");
+          if (srcAttr && srcAttr.startsWith("data:")) {
+            slideConfig.href = srcAttr;
+          }
+        }
+      } 
+    });
+  
+    lightboxQuarto.on('slide_after_load', (data) => {
+      const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(slideNode);
+      }
+    });
+  
+  };
+  
+})();
+          </script>
+
+
+
+
+</body></html>

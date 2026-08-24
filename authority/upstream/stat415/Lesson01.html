@@ -1,0 +1,2049 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.9.35">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>1&nbsp; Order Statistics – STAT 415 | Introduction to Mathematical Statistics</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./Lesson02.html" rel="next">
+<link href="./Lesson00.html" rel="prev">
+<link href="./assets/psulion.png" rel="icon" type="image/png">
+<script src="site_libs/cookie-consent/cookie-consent.js"></script>
+<link href="site_libs/cookie-consent/cookie-consent.css" rel="stylesheet">
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-46f66b053e56abd73bb6e954d61a315b.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-22b4aaf4c2978829df3684e8f2c068db.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-46f66b053e56abd73bb6e954d61a315b.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-dedc56d09aa522c36e3c0f8583f17cbf.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark-fc84954412eed28da5dc743c06b0bbd5.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="site_libs/bootstrap/bootstrap-dedc56d09aa522c36e3c0f8583f17cbf.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/quarto-contrib/language-name/language-name.css" rel="stylesheet">
+<script src="site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
+<link href="site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
+<link href="site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<script async="" src="https://www.googletagmanager.com/gtag/js?id=G-XM6C7H9XCL"></script>
+
+<script type="text/plain" cookie-consent="tracking">
+
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-XM6C7H9XCL', { 'anonymize_ip': true});
+</script>
+
+<script type="text/javascript" charset="UTF-8">
+document.addEventListener('DOMContentLoaded', function () {
+cookieconsent.run({
+  "notice_banner_type":"simple",
+  "consent_type":"express",
+  "palette":"light",
+  "language":"en",
+  "page_load_consent_levels":["strictly-necessary"],
+  "notice_banner_reject_button_hide":false,
+  "preferences_center_close_button_hide":false,
+  "website_name":""
+  ,
+"language":"en"
+  });
+});
+</script> 
+  
+<script>
+
+  window.addEventListener('load', function() {
+
+    document.getElementById("cc-nb-text").innerHTML = "We use cookies and other tracking technologies to improve your browsing experience on our website, to analyze our website traffic, and to understand where our visitors are coming from.";
+
+  });
+
+</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+</head>
+
+<body class="nav-sidebar docked nav-fixed quarto-light"><script id="quarto-html-before-body" type="application/javascript">
+    const toggleBodyColorMode = (bsSheetEl) => {
+      const mode = bsSheetEl.getAttribute("data-mode");
+      const bodyEl = window.document.querySelector("body");
+      if (mode === "dark") {
+        bodyEl.classList.add("quarto-dark");
+        bodyEl.classList.remove("quarto-light");
+      } else {
+        bodyEl.classList.add("quarto-light");
+        bodyEl.classList.remove("quarto-dark");
+      }
+    }
+    const toggleBodyColorPrimary = () => {
+      const bsSheetEl = window.document.querySelector("link#quarto-bootstrap:not([rel=disabled-stylesheet])");
+      if (bsSheetEl) {
+        toggleBodyColorMode(bsSheetEl);
+      }
+    }
+    const setColorSchemeToggle = (alternate) => {
+      const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+      for (let i=0; i < toggles.length; i++) {
+        const toggle = toggles[i];
+        if (toggle) {
+          if (alternate) {
+            toggle.classList.add("alternate");
+          } else {
+            toggle.classList.remove("alternate");
+          }
+        }
+      }
+    };
+    const toggleColorMode = (alternate) => {
+      // Switch the stylesheets
+      const primaryStylesheets = window.document.querySelectorAll('link.quarto-color-scheme:not(.quarto-color-alternate)');
+      const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+      manageTransitions('#quarto-margin-sidebar .nav-link', false);
+      if (alternate) {
+        // note: dark is layered on light, we don't disable primary!
+        enableStylesheet(alternateStylesheets);
+        for (const sheetNode of alternateStylesheets) {
+          if (sheetNode.id === "quarto-bootstrap") {
+            toggleBodyColorMode(sheetNode);
+          }
+        }
+      } else {
+        disableStylesheet(alternateStylesheets);
+        enableStylesheet(primaryStylesheets)
+        toggleBodyColorPrimary();
+      }
+      manageTransitions('#quarto-margin-sidebar .nav-link', true);
+      // Switch the toggles
+      setColorSchemeToggle(alternate)
+      // Hack to workaround the fact that safari doesn't
+      // properly recolor the scrollbar when toggling (#1455)
+      if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+        manageTransitions("body", false);
+        window.scrollTo(0, 1);
+        setTimeout(() => {
+          window.scrollTo(0, 0);
+          manageTransitions("body", true);
+        }, 40);
+      }
+    }
+    const disableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        stylesheet.rel = 'disabled-stylesheet';
+      }
+    }
+    const enableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        if(stylesheet.rel !== 'stylesheet') { // for Chrome, which will still FOUC without this check
+          stylesheet.rel = 'stylesheet';
+        }
+      }
+    }
+    const manageTransitions = (selector, allowTransitions) => {
+      const els = window.document.querySelectorAll(selector);
+      for (let i=0; i < els.length; i++) {
+        const el = els[i];
+        if (allowTransitions) {
+          el.classList.remove('notransition');
+        } else {
+          el.classList.add('notransition');
+        }
+      }
+    }
+    const isFileUrl = () => {
+      return window.location.protocol === 'file:';
+    }
+    const hasAlternateSentinel = () => {
+      let styleSentinel = getColorSchemeSentinel();
+      if (styleSentinel !== null) {
+        return styleSentinel === "alternate";
+      } else {
+        return false;
+      }
+    }
+    const setStyleSentinel = (alternate) => {
+      const value = alternate ? "alternate" : "default";
+      if (!isFileUrl()) {
+        window.localStorage.setItem("quarto-color-scheme", value);
+      } else {
+        localAlternateSentinel = value;
+      }
+    }
+    const getColorSchemeSentinel = () => {
+      if (!isFileUrl()) {
+        const storageValue = window.localStorage.getItem("quarto-color-scheme");
+        return storageValue != null ? storageValue : localAlternateSentinel;
+      } else {
+        return localAlternateSentinel;
+      }
+    }
+    const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+      const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+      const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+      let newTheme = '';
+      if(authorPrefersDark) {
+        newTheme = isAlternate ? baseTheme : alternateTheme;
+      } else {
+        newTheme = isAlternate ? alternateTheme : baseTheme;
+      }
+      const changeGiscusTheme = () => {
+        // From: https://github.com/giscus/giscus/issues/336
+        const sendMessage = (message) => {
+          const iframe = document.querySelector('iframe.giscus-frame');
+          if (!iframe) return;
+          iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+        }
+        sendMessage({
+          setConfig: {
+            theme: newTheme
+          }
+        });
+      }
+      const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+      if (isGiscussLoaded) {
+        changeGiscusTheme();
+      }
+    };
+    const authorPrefersDark = false;
+    const darkModeDefault = authorPrefersDark;
+      document.querySelector('link#quarto-text-highlighting-styles.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+      document.querySelector('link#quarto-bootstrap.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+    let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+    // Dark / light mode switch
+    window.quartoToggleColorScheme = () => {
+      // Read the current dark / light value
+      let toAlternate = !hasAlternateSentinel();
+      toggleColorMode(toAlternate);
+      setStyleSentinel(toAlternate);
+      toggleGiscusIfUsed(toAlternate, darkModeDefault);
+      window.dispatchEvent(new Event('resize'));
+    };
+    // Switch to dark mode if need be
+    if (hasAlternateSentinel()) {
+      toggleColorMode(true);
+    } else {
+      toggleColorMode(false);
+    }
+  </script>
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <div id="quarto-announcement" data-announcement-id="cb9d28251ca8388d2bc94ffe0e472446" class="alert alert-warning hidden"><i class="bi bi-info-circle quarto-announcement-icon"></i><div class="quarto-announcement-content">
+<p>Welcome to our newly redesigned course notes! Please update your bookmarks accordingly.</p>
+</div><i class="bi bi-x-lg quarto-announcement-action"></i></div>
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="./index.html">
+    <span class="navbar-title">STAT 415 | Introduction to Mathematical Statistics</span>
+    </a>
+  </div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="https://science.psu.edu/stat"> 
+<span class="menu-text">Department of Statistics</span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+  <a href="" class="quarto-reader-toggle quarto-navigation-tool px-1" onclick="window.quartoToggleReader(); return false;" title="Toggle reader mode">
+  <div class="quarto-reader-toggle-btn">
+  <i class="bi"></i>
+  </div>
+</a>
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./Lesson00.html">Lessons</a></li><li class="breadcrumb-item"><a href="./Lesson01.html"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Order Statistics</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header sidebar-header-stacked">
+      <a href="https://science.psu.edu/" class="sidebar-logo-link">
+      <img src="./PSU_Ecosshield.png" alt="Penn State Eberly College of Science" class="sidebar-logo light-content py-0 d-lg-inline d-none">
+      <img src="./PSU_Ecosshield.png" alt="Penn State Eberly College of Science" class="sidebar-logo dark-content py-0 d-lg-inline d-none">
+      </a>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">About this course</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+ <span class="menu-text">Lessons</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Lesson00.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">0: Review Concepts from STAT 414</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Lesson01.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Order Statistics</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Lesson02.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Estimation (Part I)</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Lesson03.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Estimation (Part II)</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Lesson04.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Maximum Likelihood Estimation (MLE) (Part I)</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Lesson05.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Maximum Likelihood Estimation (MLE) (Part II)</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Lesson06.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Confidence Intervals</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Lesson07.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Asymptotic Distribution of MLE (Part I)</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Lesson08.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Asymptotic Distribution of MLE (Part II)</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Lesson09.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Hypothesis Tests (Part I)</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Lesson10.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Hypothesis Tests (Part II)</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Lesson11.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Bayesian Methods</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Lesson12.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Simple Linear Regression</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">In this lesson</h2>
+   
+  <ul>
+  <li><a href="#the-basics" id="toc-the-basics" class="nav-link active" data-scroll-target="#the-basics"><span class="header-section-number">1.1</span> The Basics</a></li>
+  <li><a href="#probability-density-functions" id="toc-probability-density-functions" class="nav-link" data-scroll-target="#probability-density-functions"><span class="header-section-number">1.2</span> Probability Density Functions</a></li>
+  <li><a href="#summary" id="toc-summary" class="nav-link" data-scroll-target="#summary"><span class="header-section-number">1.3</span> Summary</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./Lesson00.html">Lessons</a></li><li class="breadcrumb-item"><a href="./Lesson01.html"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Order Statistics</span></a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Order Statistics</span></h1>
+  <div class="quarto-categories">
+    <div class="quarto-category">Order Statistics</div>
+    <div class="quarto-category">Probability Density Functions</div>
+  </div>
+  </div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="overview" class="level2 unnumbered unlisted">
+<h2 class="unnumbered unlisted anchored" data-anchor-id="overview">Overview</h2>
+<p>We typically don’t pay particular attention to the order of a set of random variables <span class="math inline">\(X_1, X_2, \ldots, X_n\)</span>. But, what if we did? Suppose, for example, we needed to know the probability that the third largest value was less than 72. Or, suppose we needed to know the 80th percentile of a random sample of heart rates. In either case, we’d need to know something about how the order of the data behaved. That is, we’d need to know something about the probability density function of the order statistics <span class="math inline">\(Y_1, Y_2, \ldots, Y_n\)</span>. That’s what we’ll groove on in this lesson.</p>
+<section id="objectives" class="level3 unnumbered unlisted objectiveblock">
+<h3 class="unnumbered unlisted anchored" data-anchor-id="objectives"><i class="bi bi-check2-circle"></i>Objectives</h3>
+<p>Upon completion of this lesson, you should be able to:</p>
+<ol type="1">
+<li>Identify order statistics based on the definition,</li>
+<li>Derive the probability density function of the <span class="math inline">\(r^{th}\)</span> order statistic, and</li>
+<li>Derive the cumulative distribution function of the <span class="math inline">\(r^{th}\)</span> order statistic.</li>
+</ol>
+</section>
+</section>
+<section id="the-basics" class="level2" data-number="1.1">
+<h2 data-number="1.1" class="anchored" data-anchor-id="the-basics"><span class="header-section-number">1.1</span> The Basics</h2>
+<div id="exm-rats" class="theorem example">
+<p><span class="theorem-title"><strong>Example 1.1</strong></span> Let’s motivate the definition of a set of order statistics by way of a simple example.</p>
+<p>Suppose a random sample of five rats yields the following weights (in grams):</p>
+<p><span class="math display">\[x_1=602 \qquad x_2=781\qquad x_3=709\qquad x_4=742\qquad x_5=633\]</span></p>
+<p>What are the observed order statistics of this set of data?</p>
+<section id="solution" class="level4 card card-body bg-light ms-3 mb-3 pt-0">
+<h4 class="anchored" data-anchor-id="solution">Solution</h4>
+<p>Well, without even knowing the formal definition of an order statistic, we probably don’t need a rocket scientist to tell us that, to find the order statistics, we should probably arrange the data in increasing numerical order. Doing so, the observed order statistics are:</p>
+<p><span class="math display">\[y_1=602&lt;y_2=633&lt;y_3=709&lt;y_4=742&lt;y_5=781\]</span> The only thing that might have tripped us up a bit in such a trivial example is if two of the rats had shared the same weight, as observing ties is certainly a possibility. We’ll wash our hands of the likelihood of that happening, though, by making an assumption that will hold throughout this lesson… and beyond. <u><strong>We will assume that the n independent observations come from a continuous distribution, thereby making the probability zero that any two observations are equal.</strong></u> Of course, ties are still possible in practice. Making the assumption, though, that there is a near zero chance of a tie happening allows us to develop the distribution theory of order statistics that holds at least approximately even in the presence of ties. That said, let’s now formally define a set of order statistics.</p>
+</section>
+</div>
+<div id="def-orderstats" class="ms-3 mt-3 theorem definition">
+<p><span class="theorem-title"><strong>Def. 1.1 (Order Statistics)</strong></span> If <span class="math inline">\(X_1, X_2, \cdots, X_n\)</span> are observations of a random sample of size <span class="math inline">\(n\)</span> from a continuous distribution, we let the random variables:</p>
+<p><span class="math display">\[Y_1&lt;Y_2&lt;\cdots&lt;Y_n\]</span></p>
+<p>denote the order statistics of the sample, with:</p>
+<p><span class="math inline">\(Y_1\)</span> being the smallest of the <span class="math inline">\(X_1, X_2, \cdots, X_n\)</span> observations</p>
+<p><span class="math inline">\(Y_2\)</span> being the second smallest of the <span class="math inline">\(X_1, X_2, \cdots, X_n\)</span> observations</p>
+<p>….</p>
+<p><span class="math inline">\(Y_{n-1}\)</span> being the next-to-largest of the <span class="math inline">\(X_1, X_2, \cdots, X_n\)</span> observations</p>
+<p><span class="math inline">\(Y_n\)</span> being the largest of the <span class="math inline">\(X_1, X_2, \cdots, X_n\)</span> observations</p>
+</div>
+<p>Now, what we want to do is work our way up to find the probability density function of any of the <span class="math inline">\(n\)</span> order statistics, the <span class="math inline">\(r^{th}\)</span> order statistic <span class="math inline">\(Y_r\)</span>. That way, we’d know how the order statistics behave and therefore could use that knowledge to draw conclusions about something like the fastest automobile in a race or the heaviest mouse on a certain diet. In finding the probability density function, we’ll use the distribution function technique to do so. It’s probably been a mighty bit since we used the technique, so in case you need a reminder, our strategy will be to first find the distribution function <span class="math inline">\(G_r(y)\)</span> of the <span class="math inline">\(r^{th}\)</span> order statistic and then take its derivative to find the probability density function <span class="math inline">\(g_r(y)\)</span> of the <span class="math inline">\(r^{th}\)</span> order statistic. We’re getting a little bit ahead of ourselves though. That’s what we’ll do on the next page. To make our work there more understandable, let’s first take a look at a concrete example here.</p>
+<div id="exm-orderstats" class="theorem example">
+<p><span class="theorem-title"><strong>Example 1.2</strong></span> <a href="assets/STAT-415-SEC-3-18-09.svg" class="lightbox" data-gallery="quarto-lightbox-gallery-1"><img src="assets/STAT-415-SEC-3-18-09.svg" id="fig-STAT-415-SEC-3-18-09" class="float-sm-end w-25 ps-3 img-fluid" alt="Coordinate graph of f(x) = 1/2x"></a> Let <span class="math inline">\(Y_1&lt;Y_2&lt;Y_3&lt;Y_4&lt;Y_5&lt;Y_6\)</span> be the order statistics associated with <span class="math inline">\(n=6\)</span> independent observations each from the distribution with probability density function:</p>
+<p><span class="math display">\[f(x)=\dfrac{1}{2}x\]</span></p>
+<p>for <span class="math inline">\(0&lt;x&lt;2\)</span>.</p>
+<ol type="1">
+<li><p><strong>What is the probability that the next-to-largest order statistic, that is,</strong> <span class="math inline">\(Y_5\)</span>, is less than 1? That is, what is <span class="math inline">\(P(Y_5&lt;1)\)</span>?</p>
+<div class="card card-body bg-light ms-3 mb-3 pt-0">
+<h4 id="solution-1" class="anchored">Solution</h4>
+<p>The key to finding the desired probability is to recognize that the only way that the fifth order statistic, <span class="math inline">\(Y_5\)</span>, would be less than one is if at least 5 of the random variables <span class="math inline">\(X_1, X_2, X_3, X_4, X_5, X_6\)</span> are less than one. For the sake of simplicity, let’s suppose the first five observed values <span class="math inline">\(x_1, x_2, x_3, x_4, x_5\)</span> are less than one, but the sixth <span class="math inline">\(x_6\)</span> is not. In that case, the observed fifth-order statistic, <span class="math inline">\(y_5\)</span>, would be less than one:</p>
+<div id="fig-stat415sec31810" class="lightbox quarto-float quarto-figure quarto-figure-center anchored" alt="Celsius vs Fahrenheit scatterplot" data-fig-align="center">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-stat415sec31810-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="assets/stat-415-sec-3-18-10.svg" class="lightbox" data-gallery="quarto-lightbox-gallery-2" title="Fig&nbsp;1.1: "><img src="assets/stat-415-sec-3-18-10.svg" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:60.0%" alt="Celsius vs Fahrenheit scatterplot"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" id="fig-stat415sec31810-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Fig&nbsp;1.1
+</figcaption>
+</figure>
+</div>
+<p>The observed fifth order statistic, <span class="math inline">\(y_5\)</span>, would also be less than one if all six of the observed values <span class="math inline">\(x_1, x_2, x_3, x_4, x_5, x_6\)</span> are less than one:</p>
+<div id="fig-stat-415-sec-3-18-11" class="lightbox quarto-float quarto-figure quarto-figure-center anchored" alt="Number line showing 6 values less than 1." data-fig-align="center">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-stat-415-sec-3-18-11-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="assets/stat-415-sec-3-18-11.svg" class="lightbox" data-gallery="quarto-lightbox-gallery-3" title="Fig&nbsp;1.2: "><img src="assets/stat-415-sec-3-18-11.svg" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:60.0%" alt="Number line showing 6 values less than 1."></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" id="fig-stat-415-sec-3-18-11-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Fig&nbsp;1.2
+</figcaption>
+</figure>
+</div>
+<p>The observed fifth order statistic, <span class="math inline">\(y_5\)</span>, would not be less than one if the first four observed values <span class="math inline">\(x_1, x_2, x_3, x_4\)</span> are less than one, but the fifth <span class="math inline">\(x_5\)</span> and sixth <span class="math inline">\(x_6\)</span> are not:</p>
+<div id="fig-stat415sec31812" class="quarto-float quarto-figure quarto-figure-center anchored" alt="Number line showing four values less than and two greater than one." data-fig-align="center" width="60%">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-stat415sec31812-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="assets/stat-415-sec-3-18-12.svg" class="lightbox" data-gallery="quarto-lightbox-gallery-4" title="Fig&nbsp;1.3: "><img src="assets/stat-415-sec-3-18-12.svg" id="fig-stat415sec31812" class="img-fluid quarto-figure quarto-figure-center anchored figure-img" style="width:60.0%" alt="Number line showing four values less than and two greater than one."></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" id="fig-stat415sec31812-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Fig&nbsp;1.3
+</figcaption>
+</figure>
+</div>
+</div>
+<p>Again, the only way that the fifth order statistic, <span class="math inline">\(Y_5\)</span>, would be less than one is if 5 or 6… that is, at least 5… of the random variables <span class="math inline">\(X_1, X_2, X_3, X_4, X_5, \text{ and }X_6\)</span> are less than one. For the sake of simplicity, we considered just the first five or six random variables, but in reality, any five or six random variables less than one would do. We just have to do some “choosing” to count the number of ways that we can get any five or six of the random variables to be less than one.</p>
+<p>If you think about it, then, we have a binomial probability calculation here. If the event <span class="math inline">\(\{X_i&lt;1\}\)</span>, <span class="math inline">\(i=1, 2, \cdots, 5\)</span> is considered a “success,” and we let <span class="math inline">\(Z\)</span> = the number of successes in six mutually independent trials, then <span class="math inline">\(Z\)</span> is a binomial random variable with <span class="math inline">\(n=6\)</span> and <span class="math inline">\(p=0.25\)</span>:</p>
+<div style="overflow-x:auto;overflow-y:hidden;">
+<p><span class="math display">\[P(X_i\le1)=\dfrac{1}{2}\int_{0}^{1}x dx=\dfrac{1}{2}\left[\dfrac{x^2}{2}\right]_{x=0}^{x=1}=\dfrac{1}{2}\left(\dfrac{1}{2}-0\right)=\dfrac{1}{4}\]</span></p>
+</div>
+<p>Finding the probability that the fifth order statistic, <span class="math inline">\(Y_5\)</span>, is less than one reduces to a binomial calculation then. That is:</p>
+<div style="overflow-x:auto;overflow-y:hidden;">
+<p><span class="math display">\[P(Y_5&lt;1)=P(Z=5)+P(Z=6)=\binom{6}{5}\left(\dfrac{1}{4} \right)^5\left(\dfrac{3}{4} \right)^1+\binom{6}{6}\left(\dfrac{1}{4} \right)^6\left(\dfrac{3}{4} \right)^0=0.0046\]</span></p>
+</div>
+<p>The fact that the calculated probability is so small should make sense in light of the given p.d.f. of <span class="math inline">\(X\)</span>. After all, each individual <span class="math inline">\(X_i\)</span> has a greater chance of falling above, rather than below, one. For that reason, it would be unusual to observe as many as five or six <span class="math inline">\(X\)</span>’s less than one.</p></li>
+<li><p><strong>What is the cumulative distribution function,</strong> <span class="math inline">\(G_5(y)\)</span>, of the fifth order statistic <span class="math inline">\(Y_5\)</span>?</p>
+<div class="alert-light ms-4 mb-3">
+<h4 id="solution-2" class="anchored">Solution</h4>
+<p>Recalling the definition of a cumulative distribution function, <span class="math inline">\(G_5(y)\)</span> is defined to be the probability that the fifth order statistic <span class="math inline">\(Y_5\)</span> is less than some value <span class="math inline">\(y\)</span>. That is:</p>
+<p><span class="math display">\[G_5(y)=P(Y_5 &lt; y)\]</span></p>
+<p>Well, in our above work, we found the probability that the fifth order statistic <span class="math inline">\(Y_5\)</span> is less than a specific value, namely 1. We just need to generalize our work there to allow for any value <span class="math inline">\(y\)</span>. Well, if the event <span class="math inline">\(\{X_i&lt;y\}\)</span>, <span class="math inline">\(i=1, 2, \cdots, 5\)</span> is considered a “success,” and we let <span class="math inline">\(Z\)</span> = the number of successes in six mutually independent trials, then <span class="math inline">\(Z\)</span> is a binomial random variable with <span class="math inline">\(n=6\)</span> and probability of success:</p>
+<p><span class="math display">\[P(X_i\le y)=\dfrac{1}{2}\int_{0}^{y}x dx=\dfrac{1}{2}\left[\dfrac{x^2}{2}\right]_{x=0}^{x=y}=\dfrac{1}{2}\left(\dfrac{y^2}{2}-0\right)=\dfrac{y^2}{4}\]</span></p>
+<p>Therefore, the cumulative distribution function <span class="math inline">\(G_5(y)\)</span> of the fifth order statistic <span class="math inline">\(Y_5\)</span> is:</p>
+<p><span class="math display">\[G_5(y)=P(Y_5 &lt; y)=P(Z=5)+P(Z=6)=\binom{6}{5}\left(\dfrac{y^2}{4}\right)^5\left(1-\dfrac{y^2}{4}\right)+\left(\dfrac{y^2}{4}\right)^6\]</span></p>
+<p>for <span class="math inline">\(0&lt;y&lt;2\)</span>.</p>
+</div></li>
+<li><p><strong>What is the probability density function,</strong> <span class="math inline">\(g_5(y)\)</span>, of the fifth order statistic <span class="math inline">\(Y_5\)</span>?</p>
+<div class="alert-light ms-4 mb-3">
+<h4 id="solution-3" class="anchored">Solution</h4>
+<p>All we need to do to find the probability density function <span class="math inline">\(g_{5}(y)\)</span> is to take the derivative of the distribution function <span class="math inline">\(G_5(y)\)</span> with respect to <span class="math inline">\(y\)</span>. Doing so, we get:</p>
+<div style="overflow-x:auto;overflow-y:hidden;">
+<p><span class="math display">\[g_5(y)=G_{5}^{'}(y)=\binom{6}{5}\left(\dfrac{y^2}{4}\right)^5\left(\dfrac{-2y}{4}\right)+\binom{6}{5}\left(1-\dfrac{y^2}{4}\right)5\left(\dfrac{y^2}{4}\right)^4\left(\dfrac{2y}{4}\right)+6\left(\dfrac{y^2}{4}\right)^5\left(\dfrac{2y}{4}\right)\]</span></p>
+</div>
+<p>Upon recognizing that:</p>
+<p><span class="math display">\[\binom{6}{5}=6 \text{ and } \binom{6}{5}\times5=\dfrac{6!}{5!1!}\times5=\dfrac{6!}{4!1!}\]</span></p>
+<p>we see that the middle term simplifies somewhat, and the first term is just the negative of the third term, therefore they cancel each other out:</p>
+<div style="overflow-x:auto;overflow-y:hidden;">
+<p><span class="math display">\[g_{5}(y)=\left(\begin{array}{l}
+6 \\
+5
+\end{array}\right)\color{red}\cancel {\color{black}\left(\frac{y^{2}}{4}\right)^{5}\left(\frac{-2 y}{4}\right)}\color{black}+\frac{6 !}{4 ! 1 !}\left(1-\frac{y^{2}}{4}\right)\left(\frac{y^{2}}{4}\right)^{4}\left(\frac{2 y}{4}\right)+\color{red}\cancel {\color{black}6\left(\frac{y^{2}}{4}\right)^{5}\left(\frac{2 y}{4}\right)}\]</span></p>
+</div>
+<p>Therefore, the probability density function of the fifth order statistic <span class="math inline">\(Y_5\)</span> is:</p>
+<p><span class="math display">\[g_5(y)=\dfrac{6!}{4!1!}\left(1-\dfrac{y^2}{4}\right)\left(\dfrac{y^2}{4}\right)^4\left(\dfrac{1}{2}y\right)\]</span></p>
+<p>for <span class="math inline">\(0&lt;y&lt;2\)</span>. When we go on to generalize our work on the next page, it will benefit us to note that because the density function and distribution function of each <span class="math inline">\(X\)</span> are:</p>
+<p><span class="math display">\[f(x)=\dfrac{1}{2}x \text{ and } F(x)=\dfrac{x^2}{4}\]</span></p>
+<p>respectively, when <span class="math inline">\(0&lt;x&lt;2\)</span>, we can alternatively write the probability density function of the fifth order statistic <span class="math inline">\(Y_5\)</span> as:</p>
+<p><span class="math display">\[g_5(y)=\dfrac{6!}{4!1!}\left[F(y)\right]^4\left[1-F(y)\right]f(y)\]</span></p>
+<p>Done!</p>
+</div>
+<p>Whew! Now, let’s push on to the more general case of finding the probability density function of the <span class="math inline">\(r^{th}\)</span> order statistic.</p></li>
+</ol>
+</div>
+</section>
+<section id="probability-density-functions" class="level2" data-number="1.2">
+<h2 data-number="1.2" class="anchored" data-anchor-id="probability-density-functions"><span class="header-section-number">1.2</span> Probability Density Functions</h2>
+<p>Our work on the previous page with finding the probability density function of a specific order statistic, namely the fifth one of a certain set of six random variables, should help us here when we work on finding the probability density function of any old order statistic, that is, the <span class="math inline">\(r^{th}\)</span> one.</p>
+<div class="callout callout-style-simple callout-caution no-icon">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-body-container">
+<div id="thm-orderstats" class="theorem">
+<p><span class="theorem-title"><strong>Theorem 1.1</strong></span> Let <span class="math inline">\(Y_1&lt;Y_2&lt;\cdots&lt;Y_n\)</span> be the order statistics of n independent observations from a continuous distribution with cumulative distribution function <span class="math inline">\(F(x)\)</span> and probability density function:</p>
+<p><span class="math display">\[f(x)=F'(x)\]</span></p>
+<p>where <span class="math inline">\(0&lt;F(x)&lt;1\)</span> over the support <span class="math inline">\(a&lt;x&lt;b\)</span>. Then, the probability density function of the <span class="math inline">\(r^{th}\)</span> order statistic is:</p>
+<p><span class="math display">\[g_r(y)=\dfrac{n!}{(r-1)!(n-r)!}\left[F(y)\right]^{r-1}\left[1-F(y)\right]^{n-r}f(y)\]</span></p>
+<p>over the support <span class="math inline">\(a&lt;y&lt;b\)</span>.</p>
+<section id="proof" class="level4">
+<h4 class="anchored" data-anchor-id="proof">Proof</h4>
+<div class="ms-3">
+<p>We’ll again follow the strategy of first finding the cumulative distribution function <span class="math inline">\(G_r(y)\)</span> of the <span class="math inline">\(r^{th}\)</span> order statistic, and then differentiating it with respect to <span class="math inline">\(y\)</span> to get the probability density function <span class="math inline">\(g_r(y)\)</span>. Now, if the event <span class="math inline">\(\{X_i\le y\},\;i=1, 2, \cdots, r\)</span> is considered a “success,” and we let <span class="math inline">\(Z\)</span> = the number of such successes in <span class="math inline">\(n\)</span> mutually independent trials, then <span class="math inline">\(Z\)</span> is a binomial random variable with <span class="math inline">\(n\)</span> trials and probability of success:</p>
+<p><span class="math display">\[F(y)=P(X_i \le y)\]</span></p>
+<p>Now, the <span class="math inline">\(r^{th}\)</span> order statistic <span class="math inline">\(Y_r\)</span> is less than or equal to <span class="math inline">\(y\)</span> only if <span class="math inline">\(r\)</span> or more of the <span class="math inline">\(n\)</span> observations <span class="math inline">\(x_1, x_2, \cdots, x_n\)</span> are less than or equal to <span class="math inline">\(y\)</span>, which implies:</p>
+<p><span class="math display">\[G_r(y)=P(Y_r \le y)=P(Z=r)+P(Z=r+1)+ ... + P(Z=n)\]</span></p>
+<p>which can be written using summation notation as:</p>
+<p><span class="math display">\[G_r(y)=\sum_{k=r}^{n} P(Z=k)\]</span></p>
+<p>Now, we can replace <span class="math inline">\(P(Z=k)\)</span> with the probability mass function of a binomial random variable with parameters <span class="math inline">\(n\)</span> and <span class="math inline">\(p=F(y)\)</span>. Doing so, we get:</p>
+<p><span class="math display">\[G_r(y)=\sum_{k=r}^{n}\binom{n}{k}\left[F(y)\right]^{k}\left[1-F(y)\right]^{n-k}\]</span></p>
+<p>Rewriting that slightly by pulling the <span class="math inline">\(n^{th}\)</span> term out of the summation notation, we get:</p>
+<p><span class="math display">\[G_r(y)=\sum_{k=r}^{n-1}\binom{n}{k}\left[F(y)\right]^{k}\left[1-F(y)\right]^{n-k}+\left[F(y)\right]^{n}\]</span></p>
+<p>Now, it’s just a matter of taking the derivative of <span class="math inline">\(G_r(y)\)</span> with respect to <span class="math inline">\(y\)</span>. Using the product rule in conjunction with the chain rule on the terms in the summation, and the power rule in conjunction with the chain rule, we get:</p>
+<p><span id="eq-derivgry"><span class="math display">\[\begin{align} g_r(y)&amp;=\sum_{k=r}^{n-1}{n\choose k}(k)[F(y)]^{k-1}f(y)[1-F(y)]^{n-k}\\ &amp;+\sum_{k=r}^{n-1}[F(y)]^k(n-k)[1-F(y)]^{n-k-1}(-f(y))\\&amp;+n[F(y)]^{n-1}f(y)\end{align} \tag{1.1}\]</span></span></p>
+<p>Now, it’s just a matter of recognizing that:</p>
+<p><span class="math display">\[\left(\begin{array}{l}
+n \\
+k
+\end{array}\right) k=\frac{n !}{\color{blue}\underbrace{\color{black}k !}_{\underset{ \text{}}{\textstyle{\color{blue}\color{red}\cancel {\color{blue}k}\color{blue}(k-1)!}}}\color{black}(n-k) !} \times \color{red}\cancel {\color{black}k}\color{black}=\frac{n !}{(k-1) !(n-k) !}\]</span></p>
+<p>and</p>
+<p><span class="math display">\[\left(\begin{array}{l}
+n \\
+k
+\end{array}\right)(n-k)=\frac{n !}{k !\color{blue}\underbrace{\color{black}(n-k) !}_{\underset{\text{}}{{\textstyle\color{blue}\color{red}\cancel {\color{blue}(n-k)}\color{blue}(n- k -1)!}}}\color{black}} \times \color{red}\cancel {\color{black}(n-k)}\color{black}=\frac{n !}{k !(n-k-1) !}\]</span></p>
+<p>Once we do that, we see that the p.d.f. of the <span class="math inline">\(r^{th}\)</span> order statistic <span class="math inline">\(Y_r\)</span> is just the first term in the summation in <span class="math inline">\(g_r(y)\)</span>. That is:</p>
+<p><span class="math display">\[g_r(y)=\dfrac{n!}{(r-1)!(n-r)!}\left[F(y)\right]^{r-1}\left[1-F(y)\right]^{n-r}f(y)\]</span></p>
+<p>for <span class="math inline">\(a&lt;y&lt;b\)</span>. As was to be proved! Simple enough! Well, okay, that’s a little unfair to say it’s simple, as it’s not all that obvious, is it? For homework, you’ll be asked to write out, for the case when <span class="math inline">\(n=6\)</span> and r = 3, the terms in <a href="#eq-derivgry" class="quarto-xref">Equation&nbsp;<span>1.1</span></a>. In doing so, you should see that for all but the first of the positive terms in the starred equation, there is a corresponding negative term, so that everything but the first term cancels out. After you get a chance to work through that exercise, then perhaps it would be fair to say simple enough!</p>
+</div>
+</section>
+</div>
+</div>
+</div>
+</div>
+<div id="exm-18-2contd" class="theorem example">
+<p><span class="theorem-title"><strong>Example 1.3</strong></span> Let <span class="math inline">\(Y_1&lt;Y_2&lt;Y_3&lt;Y_4&lt;Y_5&lt;Y_6\)</span> be the order statistics associated with <span class="math inline">\(n=6\)</span> independent observations each from the distribution with probability density function:</p>
+<p><span class="math display">\[f(x)=\dfrac{1}{2}x\]</span></p>
+<p>for <span class="math inline">\(0&lt;x&lt;2\)</span>. What is the probability density function of the first, fourth, and sixth order statistics?</p>
+<section id="solution-4" class="level4 card card-body bg-light ms-3 mb-3 pt-0">
+<h4 class="anchored" data-anchor-id="solution-4">Solution</h4>
+<p>When we worked with this example on the previous page, we showed that the cumulative distribution function of <span class="math inline">\(X\)</span> is:</p>
+<p><span class="math display">\[F(x)=\dfrac{x^2}{4}\]</span></p>
+<p>for <span class="math inline">\(0&lt;x&lt;2\)</span>. Therefore, applying the above theorem with <span class="math inline">\(n=6\)</span> and <span class="math inline">\(r=1\)</span>, the p.d.f. of <span class="math inline">\(Y_1\)</span> is:</p>
+<p><span class="math display">\[g_1(y)=\dfrac{6!}{0!(6-1)!}\left[\dfrac{y^2}{4}\right]^{1-1}\left[1-\dfrac{y^2}{4}\right]^{6-1}\left(\dfrac{1}{2}y\right)\]</span></p>
+<p>for <span class="math inline">\(0&lt;y&lt;2\)</span>, which can be simplified to:</p>
+<p><span class="math display">\[g_1(y)=3y\left(1-\dfrac{y^2}{4}\right)^{5}\]</span></p>
+<p>Applying the theorem with <span class="math inline">\(n=6\)</span> and <span class="math inline">\(r=4\)</span>, the p.d.f. of <span class="math inline">\(Y_4\)</span> is:</p>
+<p><span class="math display">\[g_4(y)=\dfrac{6!}{3!(6-4)!}\left[\dfrac{y^2}{4}\right]^{4-1}\left[1-\dfrac{y^2}{4}\right]^{6-4}\left(\dfrac{1}{2}y\right)\]</span></p>
+<p>for <span class="math inline">\(0&lt;y&lt;2\)</span>, which can be simplified to:</p>
+<p><span class="math display">\[g_4(y)=\dfrac{15}{32}y^7\left(1-\dfrac{y^2}{4}\right)^{2}\]</span></p>
+<p>Applying the theorem with <span class="math inline">\(n=6\)</span> and <span class="math inline">\(r=6\)</span>, the p.d.f. of <span class="math inline">\(Y_6\)</span> is:</p>
+<p><span class="math display">\[g_6(y)=\dfrac{6!}{5!(6-6)!}\left[\dfrac{y^2}{4}\right]^{6-1}\left[1-\dfrac{y^2}{4}\right]^{6-6}\left(\dfrac{1}{2}y\right)\]</span></p>
+<p>for <span class="math inline">\(0&lt;y&lt;2\)</span>, which can be simplified to:</p>
+<p><span class="math display">\[g_6(y)=\dfrac{3}{1024}y^{11}\]</span></p>
+<p>Fortunately, when we graph the three functions on one plot:</p>
+<div id="fig-STAT-415-SEC-3-18-13.svg" class="lightbox quarto-float quarto-figure quarto-figure-center anchored" alt="Density plot for r = 1, 4, 6" data-fig-align="center">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-STAT-415-SEC-3-18-13.svg-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="assets/STAT-415-SEC-3-18-13.svg" class="lightbox" data-gallery="quarto-lightbox-gallery-5" title="Fig&nbsp;1.4: Density plot for r = 1, 4, 6"><img src="assets/STAT-415-SEC-3-18-13.svg" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:70.0%" alt="Density plot for r = 1, 4, 6"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-STAT-415-SEC-3-18-13.svg-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Fig&nbsp;1.4: Density plot for r = 1, 4, 6
+</figcaption>
+</figure>
+</div>
+<p>we see something that makes intuitive sense, namely that as we increase the number of the order statistic, the p.d.f. “moves to the right” on the support interval.</p>
+</section>
+</div>
+</section>
+<section id="summary" class="level2" data-number="1.3">
+<h2 data-number="1.3" class="anchored" data-anchor-id="summary"><span class="header-section-number">1.3</span> Summary</h2>
+<p>In this lesson, we explored a new idea that might seem a little different at first—what happens when we actually care about the order of our data? Instead of just looking at a bunch of values from a random sample, we asked questions like: what’s the probability the third smallest value is below a certain number? Or what does the distribution of the largest observation look like? These kinds of questions bring us into the world of order statistics.</p>
+<p>We learned how to define and identify order statistics, like the smallest, largest, or the r-th smallest value in a sample. Then we got into how to find the cumulative distribution function (CDF) and probability density function (PDF) of a specific order statistic. The cool part is that these functions can be derived using tools we already know—like the binomial distribution and some calculus. You saw how the PDF of an order statistic shifts depending on which rank we’re looking at (e.g., smallest vs.&nbsp;largest), which helps explain patterns in real-world data, like extreme weather events or test scores.</p>
+<p>This lesson sets us up to use order statistics in inference problems and real applications—anytime we care not just about the data, but how that data is arranged.</p>
+<p><strong>Key Takeaways:</strong></p>
+<ul>
+<li>If <span class="math inline">\(X_1, X_2, \ldots, X_n\)</span>, a simple random sample of size <span class="math inline">\(n\)</span>, are ordered from smallest value to largest value, the order statistics, denoted as <span class="math inline">\(Y_1, Y_2, \ldots, Y_n\)</span> are such that <span class="math inline">\(Y_i\)</span> is the <span class="math inline">\(i^{th}\)</span> smallest of <span class="math inline">\(X_1, X_2,\ldots, X_n\)</span> and <span class="math inline">\(Y_1&lt;Y_2&lt;\ldots&lt;Y_n\)</span></li>
+<li>The probability density function of the <span class="math inline">\(r^{th}\)</span> order statistic is: <span class="math inline">\(g_r(y)=\frac{n!}{(n-r)!(r-1)!} \left[F(y)]\right]^{r-1}\left[1-F(y)\right]^{n-r}f(y)\)</span></li>
+</ul>
+
+
+</section>
+
+</main> <!-- /main -->
+<!--<script>
+
+document.addEventListener('DOMContentLoaded', function () {
+
+    const toc = document.getElementById('TOC');
+
+    const navbarCollapse = document.getElementById('navbarCollapse');
+
+    const menuButton = document.querySelector('.navbar-toggler');
+
+
+
+    // Function to move TOC to navbar on small screens
+
+    function handleTOCDisplay() {
+
+        if (window.innerWidth < 768) {
+
+            if (!navbarCollapse.contains(toc)) {
+
+                navbarCollapse.appendChild(toc); // Move TOC into the navbar
+
+            }
+
+        } else {
+
+            if (toc.parentNode !== document.getElementById('quarto-margin-sidebar')) {
+
+                document.getElementById('quarto-margin-sidebar').appendChild(toc); // Move TOC back to original location
+
+            }
+
+        }
+
+    }
+
+
+
+    // Initial check on page load
+
+    handleTOCDisplay();
+
+
+
+    // Check when resizing the window
+
+    window.addEventListener('resize', handleTOCDisplay);
+
+
+
+    // Toggle TOC visibility when navbar is expanded on small screens
+
+    menuButton.addEventListener('click', function() {
+
+        if (window.innerWidth < 768) {
+
+            toc.classList.toggle('toc-active'); // Toggle visibility of the TOC in the navbar
+
+        }
+
+    });
+
+});
+
+</script>-->
+
+
+
+<script>
+
+document.addEventListener('DOMContentLoaded', function () {
+
+    const toc = document.getElementById('TOC'); // TOC element
+
+    const activeLesson = document.querySelector('.sidebar-item .sidebar-link.active'); // Active lesson link
+
+    const originalTocParent = toc.parentElement; // Store original TOC location
+
+
+
+    // Create a container for the TOC in the sidebar
+
+    const nestedTocContainer = document.createElement('ul');
+
+    nestedTocContainer.className = 'sidebar-toc-nested list-unstyled';
+
+
+
+    // Function to move the TOC into the sidebar
+
+    function moveTocToSidebar() {
+
+        if (!toc || !activeLesson) return;
+
+        while (toc.firstChild) {
+
+            nestedTocContainer.appendChild(toc.firstChild);
+
+        }
+
+        const parentItem = activeLesson.closest('.sidebar-item');
+
+        parentItem.appendChild(nestedTocContainer);
+
+        toc.style.display = 'none'; // Hide the original TOC container
+
+    }
+
+
+
+    // Function to restore the TOC to its original location
+
+    function restoreTocToOriginalLocation() {
+
+        if (nestedTocContainer.parentNode) {
+
+            while (nestedTocContainer.firstChild) {
+
+                toc.appendChild(nestedTocContainer.firstChild);
+
+            }
+
+            nestedTocContainer.remove(); // Remove the container
+
+            toc.style.display = ''; // Show the original TOC container
+
+        }
+
+    }
+
+
+
+    // Function to handle screen width changes
+
+    function handleScreenResize() {
+
+        if (window.innerWidth < 768) {
+
+            moveTocToSidebar();
+
+        } else {
+
+            restoreTocToOriginalLocation();
+
+        }
+
+    }
+
+
+
+    // Initial check and event listener for resize
+
+    handleScreenResize();
+
+    window.addEventListener('resize', handleScreenResize);
+
+});
+
+
+
+</script>
+<!---function to make the first column th instead of td when using markdown tables..just add .row-header as your class below the table!---->
+
+<script>
+
+    window.addEventListener('DOMContentLoaded', () => {
+
+        // Select only tables with the 'row-header' class
+
+        const tables = document.querySelectorAll('table.row-header');
+
+        
+
+        tables.forEach(table => {
+
+            const rows = table.querySelectorAll('tr');
+
+            
+
+            rows.forEach(row => {
+
+                const firstCell = row.cells[0];
+
+                if (firstCell && firstCell.tagName === 'TD') {
+
+                    const th = document.createElement('th');
+
+                    th.innerHTML = firstCell.innerHTML;
+
+                    th.setAttribute('scope', 'row'); // Add scope="row" to the th element
+
+                    row.replaceChild(th, firstCell);
+
+                }
+
+            });
+
+        });
+
+    });
+
+</script>
+<script>
+
+  document.addEventListener("DOMContentLoaded", function () {
+
+    const elements = document.querySelectorAll('div[id^="exm-"]');
+
+
+
+    elements.forEach((element) => {
+
+      const theoremTitle = element.querySelector('.theorem-title');
+
+      // Use the Quarto-generated id (e.g. "exm-muscleexample") directly
+
+      const anchorId = element.id;
+
+
+
+      if (theoremTitle && anchorId) {
+
+        const anchor = document.createElement('a');
+
+        anchor.href = `#${anchorId}`;
+
+        anchor.className = 'anchor';
+
+        anchor.setAttribute('aria-label', `Link to ${theoremTitle.textContent.trim()}`);
+
+        anchor.innerHTML = '<i class="bi bi-link-45deg" aria-hidden="true"></i>';
+
+        theoremTitle.appendChild(anchor);
+
+        // No need to reassign element.id — it's already correct
+
+      }
+
+    });
+
+  });
+
+</script>
+<style>
+
+  #mas-popup,
+
+  #mas-popup * {
+
+    box-sizing: border-box;
+
+  }
+
+
+
+  #mas-popup {
+
+    --mas-navy: #001e44;
+
+    --mas-blue: #1e407c;
+
+    --mas-sky: #96bee6;
+
+
+
+    position: fixed;
+
+    right: max(1.25rem, env(safe-area-inset-right));
+
+    bottom: max(1.25rem, env(safe-area-inset-bottom));
+
+    z-index: 1055;
+
+
+
+    width: min(25rem, calc(100vw - 2rem));
+
+    padding: 1.45rem 1.5rem 1.5rem 1.8rem;
+
+    overflow: hidden;
+
+
+
+    border: 1px solid rgba(0, 30, 68, 0.14);
+
+    border-radius: 0.75rem;
+
+    background: #ffffff;
+
+    color: #16243a;
+
+
+
+    box-shadow:
+
+      0 1.25rem 3.5rem rgba(0, 30, 68, 0.2),
+
+      0 0.2rem 0.7rem rgba(0, 30, 68, 0.08);
+
+
+
+    font-family: Arial, Helvetica, sans-serif;
+
+    -webkit-font-smoothing: antialiased;
+
+
+
+    animation: mas-popup-in 320ms cubic-bezier(0.2, 0.8, 0.2, 1) both;
+
+  }
+
+
+
+  #mas-popup[hidden] {
+
+    display: none;
+
+  }
+
+
+
+  /* Blue accent along the left side */
+
+  #mas-popup::before {
+
+    position: absolute;
+
+    inset: 0 auto 0 0;
+
+    width: 0.35rem;
+
+    background: linear-gradient(
+
+      180deg,
+
+      var(--mas-sky),
+
+      var(--mas-blue)
+
+    );
+
+    content: "";
+
+  }
+
+
+
+  #mas-popup-kicker {
+
+    margin: 0 3rem 0.55rem 0;
+
+    color: var(--mas-blue);
+
+    font-size: 0.69rem;
+
+    font-weight: 700;
+
+    letter-spacing: 0.12em;
+
+    line-height: 1.3;
+
+    text-transform: uppercase;
+
+  }
+
+
+
+  #mas-popup h2#mas-popup-title {
+
+    margin: 1rem 2.5rem 0.65rem 0 !important; 
+
+    max-width: 19rem;
+
+    margin: 0 2.5rem 0.65rem 0 !important;
+
+    color: var(--mas-navy);
+
+    font-family: Georgia, "Times New Roman", serif;
+
+    font-size: 1.55rem;
+
+    font-weight: 600;
+
+    letter-spacing: -0.015em;
+
+    line-height: 1.18 !important;
+
+  }
+
+
+
+  #mas-popup-description {
+
+    max-width: 21rem;
+
+    margin: 0 0 1.15rem;
+
+    color: #46586e;
+
+    font-size: 0.95rem;
+
+    line-height: 1.55;
+
+  }
+
+
+
+  #mas-popup-cta {
+
+    display: inline-flex;
+
+    min-height: 2.75rem;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 0.65rem;
+
+
+
+    padding: 0.7rem 1rem;
+
+    border: 2px solid var(--mas-navy);
+
+    border-radius: 0.35rem;
+
+    background: var(--mas-navy);
+
+    color: #ffffff;
+
+
+
+    font-size: 0.88rem;
+
+    font-weight: 700;
+
+    text-decoration: none;
+
+
+
+    transition:
+
+      background-color 160ms ease,
+
+      border-color 160ms ease,
+
+      transform 160ms ease;
+
+  }
+
+
+
+  #mas-popup-cta:hover,
+
+  #mas-popup-cta:focus-visible {
+
+    border-color: var(--mas-blue);
+
+    background: var(--mas-blue);
+
+    color: #ffffff;
+
+    transform: translateY(-1px);
+
+  }
+
+
+
+  #mas-popup-cta-arrow {
+
+    font-size: 1.1rem;
+
+    transition: transform 160ms ease;
+
+  }
+
+
+
+  #mas-popup-cta:hover #mas-popup-cta-arrow,
+
+  #mas-popup-cta:focus-visible #mas-popup-cta-arrow {
+
+    transform: translateX(0.18rem);
+
+  }
+
+
+
+  #mas-popup-close {
+
+    position: absolute;
+
+    top: 0.65rem;
+
+    right: 0.65rem;
+
+
+
+    display: grid;
+
+    width: 2.75rem;
+
+    height: 2.75rem;
+
+    padding: 0;
+
+    place-items: center;
+
+
+
+    border: 0;
+
+    border-radius: 50%;
+
+    background: transparent;
+
+    color: #485b72;
+
+
+
+    font: inherit;
+
+    font-size: 1.55rem;
+
+    line-height: 1;
+
+
+
+    cursor: pointer;
+
+  }
+
+
+
+  #mas-popup-close:hover,
+
+  #mas-popup-close:focus-visible {
+
+    background: #edf2f7;
+
+    color: var(--mas-navy);
+
+  }
+
+
+
+  #mas-popup :focus-visible {
+
+    outline: 3px solid var(--mas-sky);
+
+    outline-offset: 3px;
+
+  }
+
+
+
+  @keyframes mas-popup-in {
+
+    from {
+
+      opacity: 0;
+
+      transform: translateY(1rem) scale(0.98);
+
+    }
+
+
+
+    to {
+
+      opacity: 1;
+
+      transform: translateY(0) scale(1);
+
+    }
+
+  }
+
+
+
+  @media (max-width: 520px) {
+
+    #mas-popup {
+
+      right: max(0.75rem, env(safe-area-inset-right));
+
+      bottom: max(0.75rem, env(safe-area-inset-bottom));
+
+      width: calc(100vw - 1.5rem);
+
+      padding: 1.25rem 1.25rem 1.3rem 1.55rem;
+
+    }
+
+
+
+    #mas-popup-title {
+
+      max-width: 17rem;
+
+      font-size: 1.4rem;
+
+    }
+
+
+
+    #mas-popup-cta {
+
+      width: 100%;
+
+    }
+
+  }
+
+
+
+  @media (prefers-reduced-motion: reduce) {
+
+    #mas-popup {
+
+      animation: none;
+
+    }
+
+
+
+    #mas-popup-cta,
+
+    #mas-popup-cta-arrow {
+
+      transition: none;
+
+    }
+
+  }
+
+</style>
+
+
+
+<aside id="mas-popup" role="region" aria-labelledby="mas-popup-title" aria-describedby="mas-popup-description" aria-live="polite" hidden="">
+
+  <button id="mas-popup-close" type="button" aria-label="Close this message">
+
+    <span aria-hidden="true">×</span>
+
+  </button>
+
+
+
+  <p id="mas-popup-kicker">
+
+    Online master’s program
+
+  </p>
+
+
+
+  <h2 id="mas-popup-title">
+
+    Take your statistics skills further
+
+  </h2>
+
+
+
+  <p id="mas-popup-description">
+
+    Explore Penn State’s online Master of Applied Statistics program.
+
+  </p>
+
+
+
+  <a id="mas-popup-cta" href="https://science.psu.edu/stat/graduate-programs/master-of-applied-statistics">
+
+    Explore the program
+
+    <span id="mas-popup-cta-arrow" aria-hidden="true">→</span>
+
+  </a>
+
+</aside>
+
+
+
+<script>
+
+  (() => {
+
+    const storageKey = "stat501-mas-popup-dismissed-v2";
+
+
+
+    // Show the popup after 15 seconds.
+
+    const showDelay = 15000;
+
+
+
+    // After closing it, hide it for 30 days.
+
+    const dismissalDays = 30;
+
+
+
+    const popup = document.getElementById("mas-popup");
+
+    const closeButton = document.getElementById("mas-popup-close");
+
+    const cta = document.getElementById("mas-popup-cta");
+
+
+
+    if (!popup || !closeButton || !cta) return;
+
+
+
+    let dismissalActive = false;
+
+
+
+    try {
+
+      const dismissedUntil = Number(
+
+        localStorage.getItem(storageKey)
+
+      );
+
+
+
+      dismissalActive =
+
+        Number.isFinite(dismissedUntil) &&
+
+        Date.now() < dismissedUntil;
+
+    } catch (error) {
+
+      // The popup still works if browser storage is unavailable.
+
+    }
+
+
+
+    if (dismissalActive) return;
+
+
+
+    const rememberDismissal = () => {
+
+      try {
+
+        const millisecondsPerDay = 24 * 60 * 60 * 1000;
+
+        const dismissedUntil =
+
+          Date.now() + dismissalDays * millisecondsPerDay;
+
+
+
+        localStorage.setItem(
+
+          storageKey,
+
+          String(dismissedUntil)
+
+        );
+
+      } catch (error) {
+
+        // Closing still works if browser storage is unavailable.
+
+      }
+
+    };
+
+
+
+    const showTimer = window.setTimeout(() => {
+
+      popup.hidden = false;
+
+    }, showDelay);
+
+
+
+    const dismissPopup = () => {
+
+      window.clearTimeout(showTimer);
+
+      popup.hidden = true;
+
+      rememberDismissal();
+
+    };
+
+
+
+    closeButton.addEventListener("click", dismissPopup);
+
+
+
+    // Prevent the popup from appearing again after someone uses the CTA.
+
+    cta.addEventListener("click", rememberDismissal);
+
+
+
+    document.addEventListener("keydown", (event) => {
+
+      if (event.key === "Escape" && !popup.hidden) {
+
+        dismissPopup();
+
+      }
+
+    });
+
+  })();
+
+</script>
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    // Ensure there is a toggle, if there isn't float one in the top right
+    if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+      const a = window.document.createElement('a');
+      a.classList.add('top-right');
+      a.classList.add('quarto-color-scheme-toggle');
+      a.href = "";
+      a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+      const i = window.document.createElement("i");
+      i.classList.add('bi');
+      a.appendChild(i);
+      window.document.body.appendChild(a);
+    }
+    setColorSchemeToggle(hasAlternateSentinel())
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./Lesson00.html" class="pagination-link" aria-label="0: Review Concepts from STAT 414">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">0: Review Concepts from STAT 414</span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./Lesson02.html" class="pagination-link" aria-label="Estimation (Part I)">
+        <span class="nav-page-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Estimation (Part I)</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+<p>Except where otherwise noted, content on this site is licensed under a <a href="https://creativecommons.org/licenses/by-nc/4.0/">CC BY-NC 4.0</a> license.<br><br> <img src="assets/by-nc.svg" class="img-fluid" alt="BYNC"></p>
+</div>   
+    <div class="nav-footer-center">
+<p><a href="https://oer.psu.edu/">OPEN.ED@PSU</a></p>
+<div class="cookie-consent-footer"><a href="#" id="open_preferences_center">Cookie Preferences</a></div></div>
+    <div class="nav-footer-right">
+<a href="https://www.psu.edu/web-privacy-statement/">Privacy</a> | <a href="https://www.psu.edu/accessibilitystatement/">Accessibility</a> | <a href="https://www.psu.edu/copyright-information/">Copyright</a> <br> <a href="https://www.psu.edu/">The Pennsylvania State University</a> © <span id="copyright-year"></span> | <br> <a href="https://forms.office.com/r/GbC8H0pZhm">Leave Us Feedback</a>
+<script>
+document.getElementById("copyright-year").textContent = new Date().getFullYear();
+</script>
+</div>
+  </div>
+</footer>
+<script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","descPosition":"bottom","loop":false,"openEffect":"zoom","selector":".lightbox"});
+(function() {
+  let previousOnload = window.onload;
+  window.onload = () => {
+    if (previousOnload) {
+      previousOnload();
+    }
+    lightboxQuarto.on('slide_before_load', (data) => {
+      const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+      const href = trigger.getAttribute('href');
+      if (href !== null) {
+        const imgEl = window.document.querySelector(`a[href="${href}"] img`);
+        if (imgEl !== null) {
+          const srcAttr = imgEl.getAttribute("src");
+          if (srcAttr && srcAttr.startsWith("data:")) {
+            slideConfig.href = srcAttr;
+          }
+        }
+      } 
+    });
+  
+    lightboxQuarto.on('slide_after_load', (data) => {
+      const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(slideNode);
+      }
+    });
+  
+  };
+  
+})();
+          </script>
+
+
+
+
+</body></html>

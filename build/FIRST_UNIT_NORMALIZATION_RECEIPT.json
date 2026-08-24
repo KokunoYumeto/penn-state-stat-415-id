@@ -1,0 +1,49 @@
+{
+  "document_count": 2,
+  "documents": [
+    {
+      "component_id": "index",
+      "normalized_bytes": 26025,
+      "normalized_path": "source/normalized/en-US/index.html",
+      "normalized_sha256": "bf7231efa163c2056d1474edcb829c7cabd796fed194ed67accef04a973f0406",
+      "ordinal": 0,
+      "segments": 77,
+      "source_bytes": 76643,
+      "source_path": "authority/upstream/stat415/index.html",
+      "source_sha256": "610d1c54a29c501117de758740f037d7d7186729051b05205e7dbcf633acecf6",
+      "structures": 197
+    },
+    {
+      "component_id": "Lesson00",
+      "normalized_bytes": 65253,
+      "normalized_path": "source/normalized/en-US/Lesson00.html",
+      "normalized_sha256": "411b3973f5f0b343f87450a6c66760b6a8e827a1966232f80f1634d446eebf9f",
+      "ordinal": 1,
+      "segments": 446,
+      "source_bytes": 105627,
+      "source_path": "authority/upstream/stat415/Lesson00.html",
+      "source_sha256": "81d68a37bbe2ce635cd6d79769ce99e5ba29ea3c15f554f9db6913615045807f",
+      "structures": 365
+    }
+  ],
+  "schema": "o006.stat415.first-unit-normalization.v1",
+  "segment_count": 523,
+  "segments": {
+    "bytes": 207177,
+    "path": "backend/first_unit_segments.jsonl",
+    "sha256": "4706f76a8c7cd1bc9d477676d132ebcc69c5fbc41973ab6f6c46977c20b6bbb5"
+  },
+  "source_rule": "semantic main only; scripts/styles excluded; formulas/code protected; stable IDs additive",
+  "status": "normalized-source-ready",
+  "structure_count": 562,
+  "structures": {
+    "bytes": 114093,
+    "path": "backend/first_unit_structures.jsonl",
+    "sha256": "cc82c5a7563f8301fbe47ba9cd4fbaf22b3e4370e61d4721e707137448c2af5f"
+  },
+  "translation_template": {
+    "bytes": 89137,
+    "path": "source/id-ID/first_unit_translation.csv",
+    "sha256": "1bfeb9b5ad041b98e511539ef0d27a1d6ead49c329eb272c495ea18550ff54db"
+  }
+}

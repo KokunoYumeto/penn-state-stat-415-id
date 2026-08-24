@@ -1,0 +1,44 @@
+{
+  "bindings": {
+    "bytes": 216084,
+    "path": "backend/first_unit_translation_bindings.jsonl",
+    "sha256": "f89fb12bc5ffceba9edc5a66ce17ceaa197145d63213b7d93227abf1cf47a989"
+  },
+  "boundary_whitespace_rule": "exact source-node leading/trailing whitespace wrapped around translated prose core",
+  "documents": [
+    "index",
+    "Lesson00"
+  ],
+  "locale": "id-ID",
+  "parts": [
+    {
+      "bytes": 15485,
+      "part": "a",
+      "path": "working/translation_part_a.json",
+      "segments": 269,
+      "sha256": "23d39c392fb463fb76f9086e8858fbcaaf94fcfc56548c897aebd37c9cbdac68"
+    },
+    {
+      "bytes": 9299,
+      "part": "b",
+      "path": "working/translation_part_b.json",
+      "segments": 163,
+      "sha256": "dcae13b7f132cffcbbdf00ce3474ed78c829b9a02689008720d4de69c24aea1a"
+    },
+    {
+      "bytes": 6938,
+      "part": "c",
+      "path": "working/translation_part_c.json",
+      "segments": 91,
+      "sha256": "f389af43ac0ebf877e564d070c45b7d89909a44535469df4436ed8087d8ca40b"
+    }
+  ],
+  "schema": "o006.stat415.first-unit-translation.v1",
+  "segment_count": 523,
+  "status": "complete",
+  "translation_csv": {
+    "bytes": 108105,
+    "path": "source/id-ID/first_unit_translation.csv",
+    "sha256": "e6bce1b1dd51c057ac36424b46bb47e2cc8a6c3f48894d548dfea79e74d448c4"
+  }
+}
