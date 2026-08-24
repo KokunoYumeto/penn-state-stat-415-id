@@ -25,6 +25,8 @@ bukti QA disimpan bersama edisi.
 
 - Repositori publik: https://github.com/KokunoYumeto/penn-state-stat-415-id
 - Pembaca web: https://kokunoyumeto.github.io/penn-state-stat-415-id/
+- Rilis unit pertama: https://github.com/KokunoYumeto/penn-state-stat-415-id/releases/tag/v2026.08.24.2of14
+- Preservasi unit pertama: https://doi.org/10.5281/zenodo.22077423
 
 ## Reproduksi
 

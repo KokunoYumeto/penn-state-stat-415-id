@@ -15,16 +15,20 @@ Updated: 2026-08-24
   `73e6eaefca1e2a75415053da302c2ee7e56ac4e02ff025d1d3a074775f13e630`.
 - Deterministic and desktop/mobile browser QA: pass.
 - GitHub repository and Pages are public; anonymous readback matched 19 Pages
-  files and 104 release-commit files.
+  files and 107 release-commit files.
+- Tagged GitHub release `v2026.08.24.2of14` exposes eight verified assets /
+  3,062,395 bytes.
+- Zenodo concept DOI: `10.5281/zenodo.22077422`; first checkpoint DOI:
+  `10.5281/zenodo.22077423`; one submitted version and zero matching drafts.
 - Random chapters 5–8 edition remains complete in its separate sibling
   repository and is outside this component's write boundary.
 
 ## Next executable action
 
-Publish and anonymously verify this first substantial boundary in its sole
-Zenodo preservation lineage, then persist the sanitized receipt. Next normalize
-and translate all of Lesson 01 contiguously from
-`authority/upstream/stat415/Lesson01.html`; do not redo completed documents.
+Normalize and translate all of Lesson 01 contiguously from
+`authority/upstream/stat415/Lesson01.html`. Establish its stable segments and
+structures, direct rights-cleared assets, target-only correction ledger, and
+offline reader route; do not redo completed documents.
 
 ## Recovery
 

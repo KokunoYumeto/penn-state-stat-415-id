@@ -51,18 +51,38 @@ receipts are added after anonymous public-byte verification.
 ## GitHub publication
 
 - Repository: `https://github.com/KokunoYumeto/penn-state-stat-415-id`.
-- Release commit: `f449acfced2baabf9b2436afa77d8995dd0679c2`.
+- Release commit: `bb9269d36765f03c7991ad0c9adbce55814c2e9d`.
+- Tag/release: `v2026.08.24.2of14` /
+  `https://github.com/KokunoYumeto/penn-state-stat-415-id/releases/tag/v2026.08.24.2of14`.
 - Pages: `https://kokunoyumeto.github.io/penn-state-stat-415-id/`.
-- Actions run `32701430336` passed the full deterministic gate and deployed the
+- Actions run `32701942913` passed the full deterministic gate and deployed the
   exact release commit.
-- Anonymous readback matched 19/19 Pages files and all 104 files in the public
+- Anonymous readback matched 19/19 Pages files and all 107 files in the public
   commit tree byte-for-byte.
 - Receipt SHA-256:
-  `18f09d97b4819baefa20a9ff50a04f9c96a51dee0c15bd5358d15d85cb416de4`.
+  `6fc5631a35d129353d7c86daa5f66efd5f12d972fd921bbff8c1c7ded2d2d19e`.
+- The tagged release exposes eight exact reader/source/evidence assets /
+  3,062,395 bytes; anonymous asset readback receipt SHA-256 is
+  `eee02ea3f190c69d67ab943052ed86aa05c73e78a0166b05544663ca42ba8175`.
+
+## Zenodo publication
+
+- Sole concept: `10.5281/zenodo.22077422`.
+- First checkpoint record: `22077423`; DOI `10.5281/zenodo.22077423`.
+- Version: `2026.08.24.2of14`.
+- Reader-first payload: eight files / 3,062,395 bytes, exactly matching the
+  tagged GitHub release.
+- Publication receipt: 3,447 bytes / SHA-256
+  `e7a5796ddac25935b8fac9698473a19463561171ae8ed43f29936723a00d890c`.
+- Separate anonymous readback receipt: 3,406 bytes / SHA-256
+  `2b06632a9f0cd18c04d5ae7e8feeb46ba85f0df4c37244a7ad3a7c2ea5f440f1`.
+- Authenticated lineage audit: one submitted matching version, zero matching
+  drafts; 3,474-byte receipt / SHA-256
+  `fabbb1918ebdc94e487e05805568dc13a3ce9a6b87414157a57f8033296e25c6`.
 
 ## Next executable action
 
-Publish and anonymously verify the first Zenodo preservation version in the
-new work's sole concept lineage. Then translate Lesson 01 contiguously from the
-frozen authority. Do not reopen or redo the landing page or Lesson 00 unless a
-deterministic regression or proved correction requires it.
+Translate Lesson 01 contiguously from the frozen authority, starting with its
+normalization, stable-ID catalogue, assets, and complete reader-facing prose.
+Do not reopen or redo the landing page or Lesson 00 unless a deterministic
+regression or proved correction requires it.

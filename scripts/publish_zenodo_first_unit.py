@@ -23,6 +23,8 @@ DEPOSITIONS = f"{API}/deposit/depositions"
 RELEASE = ROOT / "release"
 PACKAGE_RECEIPT = ROOT / "build" / "FIRST_UNIT_PACKAGE_RECEIPT.json"
 DEFAULT_RECEIPT = ROOT / "00_control" / "ZENODO_PUBLICATION_RECEIPT_2026-08-24_FIRST_UNIT.json"
+READBACK_RECEIPT = ROOT / "00_control" / "ZENODO_PUBLIC_READBACK_2026-08-24_FIRST_UNIT.json"
+AUDIT_RECEIPT = ROOT / "00_control" / "ZENODO_LINEAGE_AUDIT_2026-08-24_FIRST_UNIT.json"
 LINEAGE = ROOT / "00_control" / "ZENODO_LINEAGE.json"
 TITLE = "STAT 415: Pengantar Statistika Matematis — Edisi Bahasa Indonesia (Unit 1 dari 14)"
 VERSION = "2026.08.24.2of14"
@@ -261,6 +263,7 @@ def main() -> None:
     mode.add_argument("--local-preflight", action="store_true")
     mode.add_argument("--publish", action="store_true")
     mode.add_argument("--verify-published", action="store_true")
+    mode.add_argument("--audit-lineage", action="store_true")
     parser.add_argument("--record-id")
     args = parser.parse_args()
     truststore.inject_into_ssl()
@@ -280,8 +283,24 @@ def main() -> None:
         if not args.record_id or not args.record_id.isdigit():
             raise RuntimeError("--verify-published requires numeric --record-id")
         base.update({"mode": "verify-published", "credential_access": False, "public": anonymous_readback(args.record_id, inventory)})
-        atomic_json(DEFAULT_RECEIPT, base)
+        atomic_json(READBACK_RECEIPT, base)
         print(json.dumps({"mode": "verify-published", "record_id": args.record_id, "files": len(FILES), "status": "pass"}, sort_keys=True))
+        return
+
+    if args.audit_lineage:
+        token = read_token()
+        audit_session = requests.Session()
+        audit_session.headers.update({"Authorization": f"Bearer {token}", "User-Agent": "O006-STAT415-Zenodo-lineage-audit/1.0"})
+        matches = authenticated_matches(audit_session)
+        submitted = [row for row in matches if bool(row.get("submitted")) and row.get("metadata", {}).get("version") == VERSION]
+        drafts = [row for row in matches if not bool(row.get("submitted"))]
+        if len(submitted) != 1 or drafts:
+            raise RuntimeError("Zenodo lineage is not one submitted version with zero drafts")
+        record_id = str(submitted[0].get("record_id") or submitted[0].get("id"))
+        public = anonymous_readback(record_id, inventory)
+        base.update({"mode": "audit-lineage", "credential_access": True, "submitted_matching_versions": 1, "unsubmitted_matching_drafts": 0, "public": public})
+        atomic_json(AUDIT_RECEIPT, base)
+        print(json.dumps({"mode": "audit-lineage", "record_id": record_id, "submitted": 1, "drafts": 0, "files": len(FILES), "status": "pass"}, sort_keys=True))
         return
 
     token = read_token()

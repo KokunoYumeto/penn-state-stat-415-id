@@ -22,9 +22,13 @@ retains its separate licence. Penn State marks, the identifiable-person banner,
 the licence badge copy, and upstream analytics/cookie/runtime chrome remain
 excluded. No upstream message has been sent.
 
-The next source document is Lesson 01. Publication of this first substantial
-checkpoint is active. The dedicated GitHub repository and Pages reader are
-public; anonymous readback matched all 19 reader files and all 104 files at the
-release commit. The first Zenodo preservation version remains to be published;
-after its receipt is persisted, production advances directly to Lesson 01
-without redoing the completed unit.
+The dedicated GitHub repository, Pages reader, and tagged eight-file release
+are public and anonymously verified. The first Zenodo version is public in the
+sole concept `10.5281/zenodo.22077422`; checkpoint DOI
+`10.5281/zenodo.22077423` exposes the exact same eight files / 3,062,395 bytes.
+An authenticated audit found one submitted matching version and zero matching
+drafts. All sanitized receipts are local.
+
+The next source document is Lesson 01. Production advances directly to its
+normalization and complete contiguous translation without redoing the finished
+landing/Lesson 00 unit.
