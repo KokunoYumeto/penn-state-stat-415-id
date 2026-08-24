@@ -23,6 +23,9 @@ Pembaca lokal tersedia di `build/html-id/index.html`. Riwayat sumber,
 identitas SHA-256, hak komponen, koreksi, backend modular, hasil build, dan
 bukti QA disimpan bersama edisi.
 
+- Repositori publik: https://github.com/KokunoYumeto/penn-state-stat-415-id
+- Pembaca web: https://kokunoyumeto.github.io/penn-state-stat-415-id/
+
 ## Reproduksi
 
 Gunakan Python 3.13 dan dependensi yang dipatok di `requirements.txt`, lalu

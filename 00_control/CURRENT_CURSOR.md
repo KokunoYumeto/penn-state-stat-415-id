@@ -14,14 +14,16 @@ Updated: 2026-08-24
 - First-unit reader: 19 files / 2,459,466 bytes; manifest SHA-256
   `73e6eaefca1e2a75415053da302c2ee7e56ac4e02ff025d1d3a074775f13e630`.
 - Deterministic and desktop/mobile browser QA: pass.
+- GitHub repository and Pages are public; anonymous readback matched 19 Pages
+  files and 104 release-commit files.
 - Random chapters 5–8 edition remains complete in its separate sibling
   repository and is outside this component's write boundary.
 
 ## Next executable action
 
-Publish and anonymously verify this first substantial boundary in the dedicated
-GitHub/Pages repository and its preservation lineage. Persist sanitized public
-receipts. Then normalize and translate all of Lesson 01 contiguously from
+Publish and anonymously verify this first substantial boundary in its sole
+Zenodo preservation lineage, then persist the sanitized receipt. Next normalize
+and translate all of Lesson 01 contiguously from
 `authority/upstream/stat415/Lesson01.html`; do not redo completed documents.
 
 ## Recovery

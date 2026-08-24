@@ -20,11 +20,11 @@ READER_MANIFEST = ROOT / "build" / "FIRST_UNIT_MANIFEST.csv"
 QA = ROOT / "build" / "FIRST_UNIT_QA_RECEIPT.json"
 VISUAL_QA = ROOT / "build" / "FIRST_UNIT_VISUAL_QA_RECEIPT.json"
 LICENSE = ROOT / "LICENSE.md"
-READER_ZIP = "stat415-id-first-unit-offline-reader.zip"
-SOURCE_ZIP = "stat415-id-first-unit-source-backend.zip"
-RELEASE_NOTES = "FIRST_UNIT_RELEASE_NOTES.md"
-RELEASE_MANIFEST = "RELEASE_MANIFEST.csv"
-CHECKSUMS = "CHECKSUMS.sha256"
+READER_ZIP = "00_stat415-id-first-unit-offline-reader.zip"
+SOURCE_ZIP = "10_stat415-id-first-unit-source-backend.zip"
+RELEASE_NOTES = "20_FIRST_UNIT_RELEASE_NOTES.md"
+RELEASE_MANIFEST = "50_RELEASE_MANIFEST.csv"
+CHECKSUMS = "SHA256SUMS.txt"
 RECEIPT = ROOT / "build" / "FIRST_UNIT_PACKAGE_RECEIPT.json"
 ZIP_TIME = (2026, 8, 24, 0, 0, 0)
 SOURCE_ROOTS = (
@@ -137,9 +137,9 @@ def compute() -> tuple[dict[str, bytes], bytes]:
         READER_ZIP: reader_zip,
         SOURCE_ZIP: source_zip,
         RELEASE_NOTES: notes,
-        "LICENSE.md": LICENSE.read_bytes(),
-        "FIRST_UNIT_QA_RECEIPT.json": QA.read_bytes(),
-        "FIRST_UNIT_VISUAL_QA_RECEIPT.json": VISUAL_QA.read_bytes(),
+        "30_LICENSE.md": LICENSE.read_bytes(),
+        "40_FIRST_UNIT_QA_RECEIPT.json": QA.read_bytes(),
+        "41_FIRST_UNIT_VISUAL_QA_RECEIPT.json": VISUAL_QA.read_bytes(),
     }
     manifest_output = io.StringIO(newline="")
     writer = csv.DictWriter(manifest_output, fieldnames=("filename", "bytes", "sha256", "role"), lineterminator="\n")
@@ -148,9 +148,9 @@ def compute() -> tuple[dict[str, bytes], bytes]:
         READER_ZIP: "primary-offline-reader",
         SOURCE_ZIP: "resumable-source-backend",
         RELEASE_NOTES: "scope-and-status",
-        "LICENSE.md": "component-rights",
-        "FIRST_UNIT_QA_RECEIPT.json": "deterministic-qa",
-        "FIRST_UNIT_VISUAL_QA_RECEIPT.json": "desktop-mobile-qa",
+        "30_LICENSE.md": "component-rights",
+        "40_FIRST_UNIT_QA_RECEIPT.json": "deterministic-qa",
+        "41_FIRST_UNIT_VISUAL_QA_RECEIPT.json": "desktop-mobile-qa",
     }
     for filename, data in payloads.items():
         writer.writerow({"filename": filename, "bytes": len(data), "sha256": sha256(data), "role": roles[filename]})

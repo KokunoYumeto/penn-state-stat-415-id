@@ -23,5 +23,8 @@ the licence badge copy, and upstream analytics/cookie/runtime chrome remain
 excluded. No upstream message has been sent.
 
 The next source document is Lesson 01. Publication of this first substantial
-checkpoint is active; after public receipts are persisted, production advances
-directly to Lesson 01 without redoing the completed unit.
+checkpoint is active. The dedicated GitHub repository and Pages reader are
+public; anonymous readback matched all 19 reader files and all 104 files at the
+release commit. The first Zenodo preservation version remains to be published;
+after its receipt is persisted, production advances directly to Lesson 01
+without redoing the completed unit.

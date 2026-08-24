@@ -48,9 +48,21 @@ This is a substantial, honestly partial boundary suitable for the dedicated
 GitHub repository, Pages reader, and a first preservation version. Publication
 receipts are added after anonymous public-byte verification.
 
+## GitHub publication
+
+- Repository: `https://github.com/KokunoYumeto/penn-state-stat-415-id`.
+- Release commit: `f449acfced2baabf9b2436afa77d8995dd0679c2`.
+- Pages: `https://kokunoyumeto.github.io/penn-state-stat-415-id/`.
+- Actions run `32701430336` passed the full deterministic gate and deployed the
+  exact release commit.
+- Anonymous readback matched 19/19 Pages files and all 104 files in the public
+  commit tree byte-for-byte.
+- Receipt SHA-256:
+  `18f09d97b4819baefa20a9ff50a04f9c96a51dee0c15bd5358d15d85cb416de4`.
+
 ## Next executable action
 
-After publishing and reading back this checkpoint, translate Lesson 01
-contiguously from the frozen authority. Do not reopen or redo the landing page
-or Lesson 00 unless a deterministic regression or proved correction requires
-it.
+Publish and anonymously verify the first Zenodo preservation version in the
+new work's sole concept lineage. Then translate Lesson 01 contiguously from the
+frozen authority. Do not reopen or redo the landing page or Lesson 00 unless a
+deterministic regression or proved correction requires it.
