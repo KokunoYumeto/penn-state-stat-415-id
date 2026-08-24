@@ -6,15 +6,15 @@
 <title>0: Tinjauan Konsep dari STAT 414</title>
 <meta name="source-url" content="https://online.stat.psu.edu/stat415/Lesson00">
 <meta name="translation-provenance" content="OpenAI Codex gpt-5.6-sol, Ultra">
-<meta name="edition-status" content="partial: landing and Lesson00 complete of 14 documents">
+<meta name="edition-status" content="partial: 3 of 14 documents complete; landing and Lessons 00–01">
 <link rel="license" href="https://creativecommons.org/licenses/by-nc/4.0/">
 <link rel="stylesheet" href="assets/reader.css">
 <script defer src="assets/MathJax/tex-svg.js"></script>
 </head>
 <body>
 <a class="skip-link" href="#quarto-document-content">Lewati ke isi utama</a>
-<header class="site-header"><div class="site-header__inner"><div><p class="site-title">STAT 415 — Pengantar Statistika Matematis</p><p class="site-subtitle">Rekonstruksi dan terjemahan Bahasa Indonesia · O006/C140</p></div><nav class="site-nav" aria-label="Navigasi utama"><a href="index.html">Daftar pelajaran</a><a href="Lesson00.html">Pelajaran 00</a><a href="licenses/index.html">Lisensi</a></nav></div></header>
-<div class="page-shell"><aside class="edition-note" aria-label="Status edisi"><strong>Edisi Bahasa Indonesia — unit pertama.</strong> Laman utama dan Pelajaran 00 telah diterjemahkan sepenuhnya. Pelajaran 01–12 masih menuju sumber resmi berbahasa Inggris sampai unit berikutnya selesai. <a href="https://online.stat.psu.edu/stat415/Lesson00">Sumber resmi halaman ini</a>. <a href="licenses/index.html">Atribusi, perubahan, dan lisensi</a>.</aside><main class="content" data-component-id="Lesson00" data-source-url="https://online.stat.psu.edu/stat415/Lesson00" id="quarto-document-content">
+<header class="site-header"><div class="site-header__inner"><div><p class="site-title">STAT 415 — Pengantar Statistika Matematis</p><p class="site-subtitle">Rekonstruksi dan terjemahan Bahasa Indonesia · O006/C140</p></div><nav class="site-nav" aria-label="Navigasi utama"><a href="index.html">Daftar pelajaran</a><a href="Lesson00.html">Pelajaran 00</a><a href="Lesson01.html">Pelajaran 01</a><a href="licenses/index.html">Lisensi</a></nav></div></header>
+<div class="page-shell"><aside class="edition-note" aria-label="Status edisi"><strong>Edisi Bahasa Indonesia — 3 dari 14 dokumen.</strong> Laman utama serta Pelajaran 00 dan 01 telah diterjemahkan sepenuhnya. Pelajaran 02–12 masih menuju sumber resmi berbahasa Inggris sampai unit berikutnya selesai. <a href="https://online.stat.psu.edu/stat415/Lesson00">Sumber resmi halaman ini</a>. <a href="licenses/index.html">Atribusi, perubahan, dan lisensi</a>.</aside><main class="content" data-component-id="Lesson00" data-source-url="https://online.stat.psu.edu/stat415/Lesson00" id="quarto-document-content">
 <header class="quarto-title-block default" data-o006-id="O006-PSU-001-U0001" id="title-block-header"><nav aria-label="Jejak navigasi" class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" data-o006-id="O006-PSU-001-U0002"><ol class="breadcrumb" data-o006-id="O006-PSU-001-U0003"><li class="breadcrumb-item" data-o006-id="O006-PSU-001-U0004"><a data-o006-id="O006-PSU-001-U0005" href="index.html#lessons">Pelajaran</a></li><li class="breadcrumb-item" data-o006-id="O006-PSU-001-U0006"><a data-o006-id="O006-PSU-001-U0007" href="Lesson00.html">0: Tinjauan Konsep dari STAT 414</a></li></ol></nav>
 <div class="quarto-title" data-o006-id="O006-PSU-001-U0008">
 <h1 class="title" data-o006-id="O006-PSU-001-U0009">0: Tinjauan Konsep dari STAT 414</h1>
@@ -47,25 +47,25 @@
 <h2 class="anchored" data-anchor-id="probability" data-o006-id="O006-PSU-001-U0029">0.1: Peluang</h2>
 <p data-o006-id="O006-PSU-001-U0030">Dalam bagian ini, kita meninjau beberapa definisi dan teorema penting dalam peluang. Sebaiknya Anda menyegarkan kembali pemahaman tentang konsep-konsep ini dan mengerjakan beberapa latihan.</p>
 <div class="ms-3 theorem definition" data-o006-id="O006-PSU-001-U0031" id="def-event">
-<p data-o006-id="O006-PSU-001-U0032"><span class="theorem-title"><strong>Definisi 1 (Kejadian)</strong></span> Misalkan ruang hasil (atau ruang sampel) dinotasikan dengan <span class="math inline">\(\mathbf{S}\)</span>. Sebuah <strong>kejadian</strong> adalah himpunan bagian dari ruang sampel. Kejadian sering dinotasikan dengan huruf kapital, <span class="math inline">\(A,B, C, \ldots\)</span>. Oleh karena itu, jika <span class="math inline">\(A\)</span> merupakan kejadian dalam <span class="math inline">\(\mathbf{S}\)</span>, maka <span class="math inline">\(A\subset \mathbf{S}\)</span>.</p>
+<p data-o006-id="O006-PSU-001-U0032"><span class="theorem-title"><strong>Definisi 1 (Kejadian)</strong></span> Misalkan ruang hasil (atau ruang sampel) dinotasikan dengan <span class="math inline" data-o006-math-id="O006-PSU-001-M0001">\(\mathbf{S}\)</span>. Sebuah <strong>kejadian</strong> adalah himpunan bagian dari ruang sampel. Kejadian sering dinotasikan dengan huruf kapital, <span class="math inline" data-o006-math-id="O006-PSU-001-M0002">\(A,B, C, \ldots\)</span>. Oleh karena itu, jika <span class="math inline" data-o006-math-id="O006-PSU-001-M0003">\(A\)</span> merupakan kejadian dalam <span class="math inline" data-o006-math-id="O006-PSU-001-M0004">\(\mathbf{S}\)</span>, maka <span class="math inline" data-o006-math-id="O006-PSU-001-M0005">\(A\subset \mathbf{S}\)</span>.</p>
 </div>
 <div class="ms-3 theorem definition" data-o006-id="O006-PSU-001-U0033" id="def-probabilty">
 <p data-o006-id="O006-PSU-001-U0034"><span class="theorem-title"><strong>Definisi 2 (Peluang)</strong></span> Peluang adalah kerangka logis untuk mengukur ketidakpastian atau keacakan secara berprinsip. Kerangka ini terutama digunakan untuk menjelaskan ketidakpastian atau keacakan dalam memperoleh data yang sedang diamati.</p>
 </div>
 <div class="ms-3 theorem definition" data-o006-id="O006-PSU-001-U0035" id="def-mututallyexclusive">
-<p data-o006-id="O006-PSU-001-U0036"><span class="theorem-title"><strong>Definisi 3 (Kejadian Saling Lepas)</strong></span> Kejadian <span class="math inline">\(A\)</span> dan <span class="math inline">\(B\)</span> disebut <strong>saling lepas</strong> (atau <strong>tidak beririsan</strong>) jika <span class="math inline">\(A\cap B=\emptyset\)</span>.</p>
+<p data-o006-id="O006-PSU-001-U0036"><span class="theorem-title"><strong>Definisi 3 (Kejadian Saling Lepas)</strong></span> Kejadian <span class="math inline" data-o006-math-id="O006-PSU-001-M0006">\(A\)</span> dan <span class="math inline" data-o006-math-id="O006-PSU-001-M0007">\(B\)</span> disebut <strong>saling lepas</strong> (atau <strong>tidak beririsan</strong>) jika <span class="math inline" data-o006-math-id="O006-PSU-001-M0008">\(A\cap B=\emptyset\)</span>.</p>
 </div>
 <div class="ms-3 theorem definition" data-o006-id="O006-PSU-001-U0037" id="def-conditionprob">
-<p data-o006-id="O006-PSU-001-U0038"><span class="theorem-title"><strong>Definisi 4 (Peluang Bersyarat)</strong></span> Peluang bersyarat suatu kejadian <span class="math inline">\(A\)</span> dengan syarat bahwa kejadian <span class="math inline">\(B\)</span> telah terjadi adalah: <span class="math display">\[\begin{aligned}
+<p data-o006-id="O006-PSU-001-U0038"><span class="theorem-title"><strong>Definisi 4 (Peluang Bersyarat)</strong></span> Peluang bersyarat suatu kejadian <span class="math inline" data-o006-math-id="O006-PSU-001-M0009">\(A\)</span> dengan syarat bahwa kejadian <span class="math inline" data-o006-math-id="O006-PSU-001-M0010">\(B\)</span> telah terjadi adalah: <span class="math display" data-o006-math-id="O006-PSU-001-M0011">\[\begin{aligned}
 P(A|B)=\frac{P(A\cap B)}{P(B)}
-\end{aligned}\]</span> asalkan <span class="math inline">\(P(B)&gt;0\)</span>.</p>
+\end{aligned}\]</span> asalkan <span class="math inline" data-o006-math-id="O006-PSU-001-M0012">\(P(B)&gt;0\)</span>.</p>
 </div>
 <div class="ms-3 theorem definition" data-o006-id="O006-PSU-001-U0039" id="def-independent">
-<p data-o006-id="O006-PSU-001-U0040"><span class="theorem-title"><strong>Definisi 5 (Kejadian Saling Bebas)</strong></span> Kejadian <span class="math inline">\(A\)</span> dan <span class="math inline">\(B\)</span> merupakan <strong>kejadian saling bebas</strong> jika terjadinya salah satu kejadian tidak memengaruhi peluang terjadinya kejadian yang lain. Dengan kata lain, dua kejadian saling bebas jika salah satu dari <span class="math display">\[\begin{aligned}
+<p data-o006-id="O006-PSU-001-U0040"><span class="theorem-title"><strong>Definisi 5 (Kejadian Saling Bebas)</strong></span> Kejadian <span class="math inline" data-o006-math-id="O006-PSU-001-M0013">\(A\)</span> dan <span class="math inline" data-o006-math-id="O006-PSU-001-M0014">\(B\)</span> merupakan <strong>kejadian saling bebas</strong> jika terjadinya salah satu kejadian tidak memengaruhi peluang terjadinya kejadian yang lain. Dengan kata lain, dua kejadian saling bebas jika salah satu dari <span class="math display" data-o006-math-id="O006-PSU-001-M0015">\[\begin{aligned}
                     P(B|A)=P(B)
-\end{aligned}\]</span> dengan syarat <span class="math inline">\(P(A)&gt;0\)</span>. Kejadian <span class="math inline">\(A\)</span> dan <span class="math inline">\(B\)</span> merupakan kejadian saling bebas jika dan hanya jika <span class="math display">\[\begin{aligned}
+\end{aligned}\]</span> dengan syarat <span class="math inline" data-o006-math-id="O006-PSU-001-M0016">\(P(A)&gt;0\)</span>. Kejadian <span class="math inline" data-o006-math-id="O006-PSU-001-M0017">\(A\)</span> dan <span class="math inline" data-o006-math-id="O006-PSU-001-M0018">\(B\)</span> merupakan kejadian saling bebas jika dan hanya jika <span class="math display" data-o006-math-id="O006-PSU-001-M0019">\[\begin{aligned}
 P(A\cap B)=P(A)P(B)
-\end{aligned}\]</span> Jika tidak, <span class="math inline">\(A\)</span> dan <span class="math inline">\(B\)</span> disebut <strong>kejadian saling bergantung</strong>.</p>
+\end{aligned}\]</span> Jika tidak, <span class="math inline" data-o006-math-id="O006-PSU-001-M0020">\(A\)</span> dan <span class="math inline" data-o006-math-id="O006-PSU-001-M0021">\(B\)</span> disebut <strong>kejadian saling bergantung</strong>.</p>
 </div>
 <div class="callout callout-style-simple callout-note no-icon" data-o006-id="O006-PSU-001-U0041">
 <div class="callout-body d-flex" data-o006-id="O006-PSU-001-U0042">
@@ -74,16 +74,16 @@ P(A\cap B)=P(A)P(B)
 </div>
 <div class="callout-body-container" data-o006-id="O006-PSU-001-U0044">
 <div class="theorem" data-o006-id="O006-PSU-001-U0045" id="thm-Bayes">
-<p data-o006-id="O006-PSU-001-U0046"><span class="theorem-title"><strong>Teorema 1 (Teorema Bayes)</strong></span> Misalkan <span class="math inline">\(m\)</span> kejadian <span class="math inline">\(B_1, B_2, \ldots, B_m\)</span> membentuk suatu partisi ruang sampel <span class="math inline">\(S\)</span>. Artinya, <span class="math inline">\(B_i\)</span> saling lepas: <span class="math display">\[\begin{aligned}
+<p data-o006-id="O006-PSU-001-U0046"><span class="theorem-title"><strong>Teorema 1 (Teorema Bayes)</strong></span> Misalkan <span class="math inline" data-o006-math-id="O006-PSU-001-M0022">\(m\)</span> kejadian <span class="math inline" data-o006-math-id="O006-PSU-001-M0023">\(B_1, B_2, \ldots, B_m\)</span> membentuk suatu partisi ruang sampel <span class="math inline" data-o006-math-id="O006-PSU-001-M0024">\(S\)</span>. Artinya, <span class="math inline" data-o006-math-id="O006-PSU-001-M0025">\(B_i\)</span> saling lepas: <span class="math display" data-o006-math-id="O006-PSU-001-M0026">\[\begin{aligned}
 B_i\cap B_j=\emptyset \text{ for }i\ne j
-\end{aligned}\]</span> dan mencakup seluruh ruang sampel: <span class="math display">\[\begin{aligned}
+\end{aligned}\]</span> dan mencakup seluruh ruang sampel: <span class="math display" data-o006-math-id="O006-PSU-001-M0027">\[\begin{aligned}
 S=B_1\cup B_2\cup B_3\cup \ldots \cup B_m
-\end{aligned}\]</span> Selain itu, misalkan peluang prior kejadian <span class="math inline">\(B_i\)</span> bernilai positif, yaitu <span class="math inline">\(P(B_i)&gt;0\)</span> untuk <span class="math inline">\(i=1, \ldots,m\)</span>. Sekarang, jika <span class="math inline">\(A\)</span> merupakan suatu kejadian, maka <span class="math inline">\(A\)</span> dapat ditulis sebagai gabungan dari <span class="math inline">\(m\)</span> kejadian yang saling lepas, yaitu: <span class="math display">\[\begin{aligned}
+\end{aligned}\]</span> Selain itu, misalkan peluang prior kejadian <span class="math inline" data-o006-math-id="O006-PSU-001-M0028">\(B_i\)</span> bernilai positif, yaitu <span class="math inline" data-o006-math-id="O006-PSU-001-M0029">\(P(B_i)&gt;0\)</span> untuk <span class="math inline" data-o006-math-id="O006-PSU-001-M0030">\(i=1, \ldots,m\)</span>. Sekarang, jika <span class="math inline" data-o006-math-id="O006-PSU-001-M0031">\(A\)</span> merupakan suatu kejadian, maka <span class="math inline" data-o006-math-id="O006-PSU-001-M0032">\(A\)</span> dapat ditulis sebagai gabungan dari <span class="math inline" data-o006-math-id="O006-PSU-001-M0033">\(m\)</span> kejadian yang saling lepas, yaitu: <span class="math display" data-o006-math-id="O006-PSU-001-M0034">\[\begin{aligned}
 A=(A\cap B_1)\cup (A\cap B_2)\cup \ldots \cup (A\cap B_m)
-\end{aligned}\]</span> Oleh karena itu, <span class="math display">\[\begin{aligned}
+\end{aligned}\]</span> Oleh karena itu, <span class="math display" data-o006-math-id="O006-PSU-001-M0035">\[\begin{aligned}
 P(A) &amp; = P(A\cap B_1)+P(A\cap B_2)+\ldots+P(A\cap B_m)\\
 &amp; = \sum_{i=1}^m P(A\cap B_i)=\sum_{i=1}^m P(B_i)P(A|B_i)
-\end{aligned}\]</span> Dengan demikian, asalkan <span class="math inline">\(P(A)&gt;0\)</span>, peluang posterior kejadian <span class="math inline">\(B_k\)</span> dengan syarat kejadian <span class="math inline">\(A\)</span> telah terjadi adalah: <span class="math display">\[\begin{aligned}
+\end{aligned}\]</span> Dengan demikian, asalkan <span class="math inline" data-o006-math-id="O006-PSU-001-M0036">\(P(A)&gt;0\)</span>, peluang posterior kejadian <span class="math inline" data-o006-math-id="O006-PSU-001-M0037">\(B_k\)</span> dengan syarat kejadian <span class="math inline" data-o006-math-id="O006-PSU-001-M0038">\(A\)</span> telah terjadi adalah: <span class="math display" data-o006-math-id="O006-PSU-001-M0039">\[\begin{aligned}
 P(B_k|A)=\frac{P(B_k)P(A|B_k)}{\sum_{i=1}^m P(B_i)P(A|B_i)}
 \end{aligned}\]</span></p>
 </div>
@@ -97,33 +97,33 @@ P(B_k|A)=\frac{P(B_k)P(A|B_k)}{\sum_{i=1}^m P(B_i)P(A|B_i)}
 <section class="level3" data-o006-id="O006-PSU-001-U0050" id="discrete-distributions">
 <h3 class="anchored" data-anchor-id="discrete-distributions" data-o006-id="O006-PSU-001-U0051">Distribusi Diskret</h3>
 <div class="ms-3 theorem definition" data-o006-id="O006-PSU-001-U0052" id="def-pmf">
-<p data-o006-id="O006-PSU-001-U0053"><span class="theorem-title"><strong>Definisi 6 (Fungsi Massa Peluang)</strong></span> Untuk peubah acak diskret, <span class="math inline">\(X\)</span>, <strong>fungsi massa peluang</strong> (pmf atau PMF) adalah fungsi yang memenuhi sifat-sifat berikut:</p>
+<p data-o006-id="O006-PSU-001-U0053"><span class="theorem-title"><strong>Definisi 6 (Fungsi Massa Peluang)</strong></span> Untuk peubah acak diskret, <span class="math inline" data-o006-math-id="O006-PSU-001-M0040">\(X\)</span>, <strong>fungsi massa peluang</strong> (pmf atau PMF) adalah fungsi yang memenuhi sifat-sifat berikut:</p>
 <ul data-o006-id="O006-PSU-001-U0054">
-<li data-o006-id="O006-PSU-001-U0055"><p data-o006-id="O006-PSU-001-U0056"><span class="math inline">\(f(x)=P(X=x)&gt;0\)</span>, untuk semua <span class="math inline">\(x\in\)</span> himpunan dukungan <span class="math inline">\(S\)</span></p></li>
-<li data-o006-id="O006-PSU-001-U0057"><p data-o006-id="O006-PSU-001-U0058"><span class="math inline">\(\sum_{x\in S}f(x)=1\)</span></p></li>
-<li data-o006-id="O006-PSU-001-U0059"><p data-o006-id="O006-PSU-001-U0060"><span class="math inline">\(P(X\in A)=\sum_{x\in A}f(x)\)</span>, dengan kejadian <span class="math inline">\(A\)</span></p></li>
+<li data-o006-id="O006-PSU-001-U0055"><p data-o006-id="O006-PSU-001-U0056"><span class="math inline" data-o006-math-id="O006-PSU-001-M0041">\(f(x)=P(X=x)&gt;0\)</span>, untuk semua <span class="math inline" data-o006-math-id="O006-PSU-001-M0042">\(x\in\)</span> himpunan dukungan <span class="math inline" data-o006-math-id="O006-PSU-001-M0043">\(S\)</span></p></li>
+<li data-o006-id="O006-PSU-001-U0057"><p data-o006-id="O006-PSU-001-U0058"><span class="math inline" data-o006-math-id="O006-PSU-001-M0044">\(\sum_{x\in S}f(x)=1\)</span></p></li>
+<li data-o006-id="O006-PSU-001-U0059"><p data-o006-id="O006-PSU-001-U0060"><span class="math inline" data-o006-math-id="O006-PSU-001-M0045">\(P(X\in A)=\sum_{x\in A}f(x)\)</span>, dengan kejadian <span class="math inline" data-o006-math-id="O006-PSU-001-M0046">\(A\)</span></p></li>
 </ul>
-<p data-o006-id="O006-PSU-001-U0061">Penting diperhatikan bahwa pmf adalah peluang bahwa <span class="math inline">\(X\)</span> mengambil nilai tertentu, <span class="math inline">\(x\)</span>.</p>
+<p data-o006-id="O006-PSU-001-U0061">Penting diperhatikan bahwa pmf adalah peluang bahwa <span class="math inline" data-o006-math-id="O006-PSU-001-M0047">\(X\)</span> mengambil nilai tertentu, <span class="math inline" data-o006-math-id="O006-PSU-001-M0048">\(x\)</span>.</p>
 </div>
 <div class="ms-3 theorem definition" data-o006-id="O006-PSU-001-U0062" id="def-cdf">
-<p data-o006-id="O006-PSU-001-U0063"><span class="theorem-title"><strong>Definisi 7 (Fungsi Distribusi Kumulatif)</strong></span> Untuk peubah acak diskret, <span class="math inline">\(X\)</span>, <strong>fungsi distribusi kumulatif</strong> (cdf atau CDF), yang dinotasikan dengan <span class="math inline">\(F(x)\)</span> didefinisikan sebagai: <span class="math display">\[\begin{aligned}
+<p data-o006-id="O006-PSU-001-U0063"><span class="theorem-title"><strong>Definisi 7 (Fungsi Distribusi Kumulatif)</strong></span> Untuk peubah acak diskret, <span class="math inline" data-o006-math-id="O006-PSU-001-M0049">\(X\)</span>, <strong>fungsi distribusi kumulatif</strong> (cdf atau CDF), yang dinotasikan dengan <span class="math inline" data-o006-math-id="O006-PSU-001-M0050">\(F(x)\)</span> didefinisikan sebagai: <span class="math display" data-o006-math-id="O006-PSU-001-M0051">\[\begin{aligned}
         F(x)=P(X\le x)
     \end{aligned}\]</span></p>
-<p data-o006-id="O006-PSU-001-U0064">Cdf dari peubah acak <span class="math inline">\(X\)</span> memiliki sifat-sifat berikut:</p>
+<p data-o006-id="O006-PSU-001-U0064">Cdf dari peubah acak <span class="math inline" data-o006-math-id="O006-PSU-001-M0052">\(X\)</span> memiliki sifat-sifat berikut:</p>
 <ul data-o006-id="O006-PSU-001-U0065">
-<li data-o006-id="O006-PSU-001-U0066"><p data-o006-id="O006-PSU-001-U0067"><span class="math inline">\(F_X(t)\)</span> merupakan fungsi tak menurun terhadap <span class="math inline">\(t\)</span>, untuk <span class="math inline">\(-\infty&lt;t&lt;\infty\)</span>.</p></li>
-<li data-o006-id="O006-PSU-001-U0068"><p data-o006-id="O006-PSU-001-U0069"><span class="math inline">\(F_X(t)\)</span> bernilai dari 0 sampai 1.</p></li>
-<li data-o006-id="O006-PSU-001-U0070"><p data-o006-id="O006-PSU-001-U0071">Jika <span class="math inline">\(X\)</span> merupakan peubah acak diskret dengan nilai minimum <span class="math inline">\(a\)</span>, maka <span class="math display">\[\begin{aligned}
+<li data-o006-id="O006-PSU-001-U0066"><p data-o006-id="O006-PSU-001-U0067"><span class="math inline" data-o006-math-id="O006-PSU-001-M0053">\(F_X(t)\)</span> merupakan fungsi tak menurun terhadap <span class="math inline" data-o006-math-id="O006-PSU-001-M0054">\(t\)</span>, untuk <span class="math inline" data-o006-math-id="O006-PSU-001-M0055">\(-\infty&lt;t&lt;\infty\)</span>.</p></li>
+<li data-o006-id="O006-PSU-001-U0068"><p data-o006-id="O006-PSU-001-U0069"><span class="math inline" data-o006-math-id="O006-PSU-001-M0056">\(F_X(t)\)</span> bernilai dari 0 sampai 1.</p></li>
+<li data-o006-id="O006-PSU-001-U0070"><p data-o006-id="O006-PSU-001-U0071">Jika <span class="math inline" data-o006-math-id="O006-PSU-001-M0057">\(X\)</span> merupakan peubah acak diskret dengan nilai minimum <span class="math inline" data-o006-math-id="O006-PSU-001-M0058">\(a\)</span>, maka <span class="math display" data-o006-math-id="O006-PSU-001-M0059">\[\begin{aligned}
             F_X(a)=P(X\le a)=P(X=a)=f_X(a)
-        \end{aligned}\]</span> Jika <span class="math inline">\(c\)</span> lebih kecil daripada <span class="math inline">\(a\)</span>, maka <span class="math inline">\(F_X(c)=0\)</span>.</p></li>
-<li data-o006-id="O006-PSU-001-U0072"><p data-o006-id="O006-PSU-001-U0073">Jika nilai maksimum <span class="math inline">\(X\)</span> adalah <span class="math inline">\(b\)</span>, maka <span class="math inline">\(F_X(b)=1\)</span>.</p></li>
+        \end{aligned}\]</span> Jika <span class="math inline" data-o006-math-id="O006-PSU-001-M0060">\(c\)</span> lebih kecil daripada <span class="math inline" data-o006-math-id="O006-PSU-001-M0061">\(a\)</span>, maka <span class="math inline" data-o006-math-id="O006-PSU-001-M0062">\(F_X(c)=0\)</span>.</p></li>
+<li data-o006-id="O006-PSU-001-U0072"><p data-o006-id="O006-PSU-001-U0073">Jika nilai maksimum <span class="math inline" data-o006-math-id="O006-PSU-001-M0063">\(X\)</span> adalah <span class="math inline" data-o006-math-id="O006-PSU-001-M0064">\(b\)</span>, maka <span class="math inline" data-o006-math-id="O006-PSU-001-M0065">\(F_X(b)=1\)</span>.</p></li>
 <li data-o006-id="O006-PSU-001-U0074"><p data-o006-id="O006-PSU-001-U0075">Disebut juga <em>fungsi distribusi</em>.</p></li>
-<li data-o006-id="O006-PSU-001-U0076"><p data-o006-id="O006-PSU-001-U0077">Semua peluang yang berkaitan dengan <span class="math inline">\(X\)</span> dapat dinyatakan dalam <span class="math inline">\(F\)</span>.</p></li>
+<li data-o006-id="O006-PSU-001-U0076"><p data-o006-id="O006-PSU-001-U0077">Semua peluang yang berkaitan dengan <span class="math inline" data-o006-math-id="O006-PSU-001-M0066">\(X\)</span> dapat dinyatakan dalam <span class="math inline" data-o006-math-id="O006-PSU-001-M0067">\(F\)</span>.</p></li>
 </ul>
 </div>
 <p data-o006-id="O006-PSU-001-U0078">Berikut adalah daftar beberapa distribusi diskret bernama dari mata kuliah sebelumnya. Anda perlu mengingat fungsi massa peluang, nilai harapan, dan varians dari distribusi-distribusi diskret ini.</p>
 <div class="border rounded border-lionshrine ms-4 p-2 mb-1" data-o006-id="O006-PSU-001-U0079">
-<p data-o006-id="O006-PSU-001-U0080"><span class="fs-4">Bernoulli</span>: (p) dengan <span class="math inline">\(0&lt;p&lt;1\)</span> <span class="math display">\[\begin{aligned}
+<p data-o006-id="O006-PSU-001-U0080"><span class="fs-4">Bernoulli</span>: (p) dengan <span class="math inline" data-o006-math-id="O006-PSU-001-M0068">\(0&lt;p&lt;1\)</span> <span class="math display" data-o006-math-id="O006-PSU-001-M0069">\[\begin{aligned}
                 &amp; f(x)=p^x(1-p)^{1-x}, \qquad x=0, 1\\
                 &amp; E(X)=p, \qquad \text{Var}(X)=p(1-p)
             \end{aligned}\]</span></p>
@@ -134,25 +134,25 @@ P(B_k|A)=\frac{P(B_k)P(A|B_k)}{\sum_{i=1}^m P(B_i)P(A|B_i)}
 </div>
 <div class="callout-body-container" data-o006-id="O006-PSU-001-U0084">
 <p data-o006-id="O006-PSU-001-U0085"><strong>Catatan!</strong><br/>
-Distribusi Bernoulli merupakan kasus khusus distribusi Binomial dengan <span class="math inline">\(n=1\)</span>.</p>
+Distribusi Bernoulli merupakan kasus khusus distribusi Binomial dengan <span class="math inline" data-o006-math-id="O006-PSU-001-M0070">\(n=1\)</span>.</p>
 </div>
 </div>
 </div>
 </div>
 <div class="border rounded border-lionshrine ms-4 p-2 mb-1" data-o006-id="O006-PSU-001-U0086">
-<p data-o006-id="O006-PSU-001-U0087"><span class="fs-4">Binomial</span>: (n, p) dengan <span class="math inline">\(0&lt;p&lt;1\)</span> <span class="math display">\[\begin{aligned}
+<p data-o006-id="O006-PSU-001-U0087"><span class="fs-4">Binomial</span>: (n, p) dengan <span class="math inline" data-o006-math-id="O006-PSU-001-M0071">\(0&lt;p&lt;1\)</span> <span class="math display" data-o006-math-id="O006-PSU-001-M0072">\[\begin{aligned}
                 &amp; f(x)={n\choose x}p^x(1-p)^{n-x}, \qquad x=0, 1, \ldots, n\\
                 &amp; E(X)=np, \qquad \text{Var}(X)=np(1-p)
             \end{aligned}\]</span></p>
 </div>
 <div class="border rounded border-lionshrine ms-4 p-2 mb-1" data-o006-id="O006-PSU-001-U0088">
-<p data-o006-id="O006-PSU-001-U0089"><span class="fs-4">Geometrik</span>: (p) dengan <span class="math inline">\(0&lt;p&lt;1\)</span> <span class="math display">\[\begin{aligned}
+<p data-o006-id="O006-PSU-001-U0089"><span class="fs-4">Geometrik</span>: (p) dengan <span class="math inline" data-o006-math-id="O006-PSU-001-M0073">\(0&lt;p&lt;1\)</span> <span class="math display" data-o006-math-id="O006-PSU-001-M0074">\[\begin{aligned}
                 &amp; f(x)=p(1-p)^x, \qquad x=0, 1, 2, 3, \ldots\\
                 &amp; E(X)=\frac{1}{p}, \qquad \text{Var}(X)=\frac{1-p}{p^2}
             \end{aligned}\]</span></p>
 </div>
 <div class="border rounded border-lionshrine ms-4 p-2 mb-1" data-o006-id="O006-PSU-001-U0090">
-<p data-o006-id="O006-PSU-001-U0091"><span class="fs-4">Binomial Negatif</span>: (r, p) dengan <span class="math inline">\(0&lt;p&lt;1\)</span> dan <span class="math inline">\(r=1, 2, \ldots\)</span> <span class="math display">\[\begin{aligned}
+<p data-o006-id="O006-PSU-001-U0091"><span class="fs-4">Binomial Negatif</span>: (r, p) dengan <span class="math inline" data-o006-math-id="O006-PSU-001-M0075">\(0&lt;p&lt;1\)</span> dan <span class="math inline" data-o006-math-id="O006-PSU-001-M0076">\(r=1, 2, \ldots\)</span> <span class="math display" data-o006-math-id="O006-PSU-001-M0077">\[\begin{aligned}
                 &amp; f(x)={{x-1}\choose {r-1}}p^r(1-p)^{x-r}, \qquad x=r, r+1. r+2, \ldots\\
                 &amp; E(X)=r\left(\frac{1}{p}\right), \qquad \text{Var}(X)=\frac{r(1-p)}{p^2}
             \end{aligned}\]</span></p>
@@ -163,19 +163,19 @@ Distribusi Bernoulli merupakan kasus khusus distribusi Binomial dengan <span cla
 </div>
 <div class="callout-body-container" data-o006-id="O006-PSU-001-U0095">
 <p data-o006-id="O006-PSU-001-U0096"><strong>Catatan!</strong><br/>
-Distribusi Geometrik merupakan kasus khusus distribusi Binomial Negatif dengan <span class="math inline">\(r=1\)</span>.</p>
+Distribusi Geometrik merupakan kasus khusus distribusi Binomial Negatif dengan <span class="math inline" data-o006-math-id="O006-PSU-001-M0078">\(r=1\)</span>.</p>
 </div>
 </div>
 </div>
 </div>
 <div class="border rounded border-lionshrine ms-4 p-2 mb-1" data-o006-id="O006-PSU-001-U0097">
-<p data-o006-id="O006-PSU-001-U0098"><span class="fs-4">Hipergeometrik</span>: (n, <span class="math inline">\(N_1\)</span>, <span class="math inline">\(N_2\)</span>) dengan <span class="math inline">\(N_1&gt;0\)</span>, <span class="math inline">\(N_2&gt;0\)</span>, <span class="math inline">\(N=N_1+N_2\)</span>, <span class="math inline">\(1\le n\le N_1+N_2\)</span> <span class="math display">\[\begin{aligned}
+<p data-o006-id="O006-PSU-001-U0098"><span class="fs-4">Hipergeometrik</span>: (n, <span class="math inline" data-o006-math-id="O006-PSU-001-M0079">\(N_1\)</span>, <span class="math inline" data-o006-math-id="O006-PSU-001-M0080">\(N_2\)</span>) dengan <span class="math inline" data-o006-math-id="O006-PSU-001-M0081">\(N_1&gt;0\)</span>, <span class="math inline" data-o006-math-id="O006-PSU-001-M0082">\(N_2&gt;0\)</span>, <span class="math inline" data-o006-math-id="O006-PSU-001-M0083">\(N=N_1+N_2\)</span>, <span class="math inline" data-o006-math-id="O006-PSU-001-M0084">\(1\le n\le N_1+N_2\)</span> <span class="math display" data-o006-math-id="O006-PSU-001-M0085">\[\begin{aligned}
                 &amp; f(x)=\frac{{N_1\choose x} {N_2\choose{n-x}}}{{N\choose n}}, \qquad x\le n, \;\; x\le N_1, \;\; n-x\le N-2\\
                 &amp; E(X)=n\left(\frac{N_1}{N}\right), \qquad \text{Var}(X)=n\left(\frac{N_1}{N}\right)\left(\frac{N_2}{N}\right)\left(\frac{N-n}{N-1}\right)
             \end{aligned}\]</span></p>
 </div>
 <div class="border rounded border-lionshrine ms-4 p-2 mb-1" data-o006-id="O006-PSU-001-U0099">
-<p data-o006-id="O006-PSU-001-U0100"><span class="fs-4">Poisson</span>: (<span class="math inline">\(\lambda\)</span>) dengan <span class="math inline">\(\lambda&gt;0\)</span> <span class="math display">\[\begin{aligned}
+<p data-o006-id="O006-PSU-001-U0100"><span class="fs-4">Poisson</span>: (<span class="math inline" data-o006-math-id="O006-PSU-001-M0086">\(\lambda\)</span>) dengan <span class="math inline" data-o006-math-id="O006-PSU-001-M0087">\(\lambda&gt;0\)</span> <span class="math display" data-o006-math-id="O006-PSU-001-M0088">\[\begin{aligned}
                 &amp; f(x)=\frac{e^{-\lambda}\lambda^x}{x!}, \qquad x=0, 1, 2, 3, \ldots\\
                 &amp; E(X)=\lambda, \qquad \text{Var}(X)=\lambda
             \end{aligned}\]</span></p>
@@ -185,27 +185,27 @@ Distribusi Geometrik merupakan kasus khusus distribusi Binomial Negatif dengan <
 <h3 class="anchored" data-anchor-id="continuous-distributions" data-o006-id="O006-PSU-001-U0102">Distribusi Kontinu</h3>
 <p data-o006-id="O006-PSU-001-U0103">Dalam bagian ini, kita menyajikan beberapa distribusi bernama untuk peubah acak kontinu.</p>
 <div class="ms-3 theorem definition" data-o006-id="O006-PSU-001-U0104" id="def-pdf">
-<p data-o006-id="O006-PSU-001-U0105"><span class="theorem-title"><strong>Definisi 8 (Fungsi Kepadatan Peluang)</strong></span> Untuk peubah acak kontinu, <span class="math inline">\(X\)</span>, <strong>fungsi kepadatan peluang</strong> (pdf atau PDF) adalah fungsi yang memenuhi sifat-sifat berikut:</p>
+<p data-o006-id="O006-PSU-001-U0105"><span class="theorem-title"><strong>Definisi 8 (Fungsi Kepadatan Peluang)</strong></span> Untuk peubah acak kontinu, <span class="math inline" data-o006-math-id="O006-PSU-001-M0089">\(X\)</span>, <strong>fungsi kepadatan peluang</strong> (pdf atau PDF) adalah fungsi yang memenuhi sifat-sifat berikut:</p>
 <ul data-o006-id="O006-PSU-001-U0106">
-<li data-o006-id="O006-PSU-001-U0107"><p data-o006-id="O006-PSU-001-U0108"><span class="math inline">\(f(x)&gt;0\)</span>, untuk semua <span class="math inline">\(x\in\)</span> himpunan dukungan <span class="math inline">\(S\)</span></p></li>
-<li data-o006-id="O006-PSU-001-U0109"><p data-o006-id="O006-PSU-001-U0110">Luas di bawah kurva <span class="math inline">\(f(x)\)</span> pada himpunan dukungan sama dengan 1. Yaitu: <span class="math display">\[\begin{aligned}
+<li data-o006-id="O006-PSU-001-U0107"><p data-o006-id="O006-PSU-001-U0108"><span class="math inline" data-o006-math-id="O006-PSU-001-M0090">\(f(x)&gt;0\)</span>, untuk semua <span class="math inline" data-o006-math-id="O006-PSU-001-M0091">\(x\in\)</span> himpunan dukungan <span class="math inline" data-o006-math-id="O006-PSU-001-M0092">\(S\)</span></p></li>
+<li data-o006-id="O006-PSU-001-U0109"><p data-o006-id="O006-PSU-001-U0110">Luas di bawah kurva <span class="math inline" data-o006-math-id="O006-PSU-001-M0093">\(f(x)\)</span> pada himpunan dukungan sama dengan 1. Yaitu: <span class="math display" data-o006-math-id="O006-PSU-001-M0094">\[\begin{aligned}
             \int_{x\in S}f(x)=1
          \end{aligned}\]</span></p></li>
-<li data-o006-id="O006-PSU-001-U0111"><p data-o006-id="O006-PSU-001-U0112">Jika <span class="math inline">\(A\)</span> merupakan suatu interval, maka peluang bahwa <span class="math inline">\(x\)</span> termasuk dalam <span class="math inline">\(A\)</span> adalah: <span class="math display">\[\begin{aligned}
+<li data-o006-id="O006-PSU-001-U0111"><p data-o006-id="O006-PSU-001-U0112">Jika <span class="math inline" data-o006-math-id="O006-PSU-001-M0095">\(A\)</span> merupakan suatu interval, maka peluang bahwa <span class="math inline" data-o006-math-id="O006-PSU-001-M0096">\(x\)</span> termasuk dalam <span class="math inline" data-o006-math-id="O006-PSU-001-M0097">\(A\)</span> adalah: <span class="math display" data-o006-math-id="O006-PSU-001-M0098">\[\begin{aligned}
             P(X\in A)=\int_{A}f(x)dx
          \end{aligned}\]</span></p></li>
 </ul>
 </div>
-<p data-o006-id="O006-PSU-001-U0113">Penting diperhatikan bahwa, berbeda dengan fungsi massa peluang (pmf) dari peubah acak diskret, <span class="math inline">\(f(x)\ne P(X=x)\)</span> untuk peubah acak kontinu, <span class="math inline">\(X\)</span>. Bahkan, <span class="math inline">\(P(X=x)=0\)</span> jika <span class="math inline">\(X\)</span> merupakan peubah acak kontinu.</p>
+<p data-o006-id="O006-PSU-001-U0113">Penting diperhatikan bahwa, berbeda dengan fungsi massa peluang (pmf) dari peubah acak diskret, <span class="math inline" data-o006-math-id="O006-PSU-001-M0099">\(f(x)\ne P(X=x)\)</span> untuk peubah acak kontinu, <span class="math inline" data-o006-math-id="O006-PSU-001-M0100">\(X\)</span>. Bahkan, <span class="math inline" data-o006-math-id="O006-PSU-001-M0101">\(P(X=x)=0\)</span> jika <span class="math inline" data-o006-math-id="O006-PSU-001-M0102">\(X\)</span> merupakan peubah acak kontinu.</p>
 <p data-o006-id="O006-PSU-001-U0114">Selanjutnya, kita akan meninjau distribusi-distribusi kontinu bernama. Sekali lagi, Anda perlu mengenali fungsi kepadatan peluang, nilai harapan, dan varians dari distribusi-distribusi kontinu ini.</p>
 <div class="border rounded border-lionshrine ms-4 p-2 mb-1" data-o006-id="O006-PSU-001-U0115">
-<p data-o006-id="O006-PSU-001-U0116"><span class="fs-4">Beta</span>: (<span class="math inline">\(\alpha, \beta\)</span>), dengan <span class="math inline">\(\alpha&gt;0\)</span> dan <span class="math inline">\(\beta&gt;0\)</span> <span class="math display">\[\begin{aligned}
+<p data-o006-id="O006-PSU-001-U0116"><span class="fs-4">Beta</span>: (<span class="math inline" data-o006-math-id="O006-PSU-001-M0103">\(\alpha, \beta\)</span>), dengan <span class="math inline" data-o006-math-id="O006-PSU-001-M0104">\(\alpha&gt;0\)</span> dan <span class="math inline" data-o006-math-id="O006-PSU-001-M0105">\(\beta&gt;0\)</span> <span class="math display" data-o006-math-id="O006-PSU-001-M0106">\[\begin{aligned}
                 &amp;f(x)=\frac{\Gamma(\alpha+\beta)}{\Gamma(\alpha)\Gamma(\beta)}x^{\alpha-1}(1-x)^{\beta-1}, \qquad 0&lt;x&lt;1\\
                 &amp; E(X)=\frac{\alpha}{\alpha+\beta}, \qquad \text{Var}(X)=\frac{\alpha\beta}{(\alpha+\beta+1)(\alpha+\beta)^2}
             \end{aligned}\]</span></p>
 </div>
 <div class="border rounded border-lionshrine ms-4 p-2 mb-1" data-o006-id="O006-PSU-001-U0117">
-<p data-o006-id="O006-PSU-001-U0118"><span class="fs-4">Eksponensial</span>: (<span class="math inline">\(\theta\)</span>), dengan <span class="math inline">\(\theta&gt;0\)</span> <span class="math display">\[\begin{aligned}
+<p data-o006-id="O006-PSU-001-U0118"><span class="fs-4">Eksponensial</span>: (<span class="math inline" data-o006-math-id="O006-PSU-001-M0107">\(\theta\)</span>), dengan <span class="math inline" data-o006-math-id="O006-PSU-001-M0108">\(\theta&gt;0\)</span> <span class="math display" data-o006-math-id="O006-PSU-001-M0109">\[\begin{aligned}
                 &amp;f(x)=\frac{1}{\theta}e^{-x/\theta}, \qquad 0&lt;x\\
                 &amp; E(X)=\theta, \qquad \text{Var}(X)=\theta^2
     \end{aligned}\]</span></p>
@@ -216,13 +216,13 @@ Distribusi Geometrik merupakan kasus khusus distribusi Binomial Negatif dengan <
 </div>
 <div class="callout-body-container" data-o006-id="O006-PSU-001-U0122">
 <p data-o006-id="O006-PSU-001-U0123"><strong>Catatan!</strong><br/>
-Distribusi eksponensial merupakan kasus khusus distribusi Gamma dengan <span class="math inline">\(\alpha=1\)</span>.</p>
+Distribusi eksponensial merupakan kasus khusus distribusi Gamma dengan <span class="math inline" data-o006-math-id="O006-PSU-001-M0110">\(\alpha=1\)</span>.</p>
 </div>
 </div>
 </div>
 </div>
 <div class="border rounded border-lionshrine ms-4 p-2 mb-1" data-o006-id="O006-PSU-001-U0124">
-<p data-o006-id="O006-PSU-001-U0125"><span class="fs-4">Khi-kuadrat</span>: <span class="math inline">\(\chi^2\)</span>(r), dengan <span class="math inline">\(r&gt;0\)</span> <span class="math display">\[\begin{aligned}
+<p data-o006-id="O006-PSU-001-U0125"><span class="fs-4">Khi-kuadrat</span>: <span class="math inline" data-o006-math-id="O006-PSU-001-M0111">\(\chi^2\)</span>(r), dengan <span class="math inline" data-o006-math-id="O006-PSU-001-M0112">\(r&gt;0\)</span> <span class="math display" data-o006-math-id="O006-PSU-001-M0113">\[\begin{aligned}
                 &amp;f(x)=\frac{1}{\Gamma(r/2)2^{r/2}}x^{r/2-1}e^{-x/2}, \qquad 0&lt;x\\
                 &amp; E(X)=r, \qquad \text{Var}(X)=2r
        \end{aligned}\]</span></p>
@@ -232,25 +232,25 @@ Distribusi eksponensial merupakan kasus khusus distribusi Gamma dengan <span cla
 <i class="callout-icon no-icon"></i>
 </div>
 <div class="callout-body-container" data-o006-id="O006-PSU-001-U0129">
-<p data-o006-id="O006-PSU-001-U0130"><strong>Catatan!</strong> Distribusi khi-kuadrat merupakan kasus khusus distribusi Gamma dengan <span class="math inline">\(\alpha=r/2\)</span> dan <span class="math inline">\(\theta=2\)</span>.</p>
+<p data-o006-id="O006-PSU-001-U0130"><strong>Catatan!</strong> Distribusi khi-kuadrat merupakan kasus khusus distribusi Gamma dengan <span class="math inline" data-o006-math-id="O006-PSU-001-M0114">\(\alpha=r/2\)</span> dan <span class="math inline" data-o006-math-id="O006-PSU-001-M0115">\(\theta=2\)</span>.</p>
 </div>
 </div>
 </div>
 </div>
 <div class="border rounded border-lionshrine ms-4 p-2 mb-1" data-o006-id="O006-PSU-001-U0131">
-<p data-o006-id="O006-PSU-001-U0132"><span class="fs-4">Gamma</span>: (<span class="math inline">\(\alpha\)</span>, <span class="math inline">\(\theta\)</span>) dengan <span class="math inline">\(\alpha&gt;0\)</span> dan <span class="math inline">\(\theta&gt;0\)</span> <span class="math display">\[\begin{aligned}
+<p data-o006-id="O006-PSU-001-U0132"><span class="fs-4">Gamma</span>: (<span class="math inline" data-o006-math-id="O006-PSU-001-M0116">\(\alpha\)</span>, <span class="math inline" data-o006-math-id="O006-PSU-001-M0117">\(\theta\)</span>) dengan <span class="math inline" data-o006-math-id="O006-PSU-001-M0118">\(\alpha&gt;0\)</span> dan <span class="math inline" data-o006-math-id="O006-PSU-001-M0119">\(\theta&gt;0\)</span> <span class="math display" data-o006-math-id="O006-PSU-001-M0120">\[\begin{aligned}
                 &amp; f(x)=\frac{1}{\Gamma(\alpha)\theta^\alpha} x^{\alpha-1}e^{-x/\theta}, \qquad x&gt;0\\
                 &amp; E(X)=\alpha \theta, \qquad \text{Var}(X)=\alpha\theta^2
        \end{aligned}\]</span></p>
 </div>
 <div class="border rounded border-lionshrine ms-4 p-2 mb-1" data-o006-id="O006-PSU-001-U0133">
-<p data-o006-id="O006-PSU-001-U0134"><span class="fs-4">Normal</span>: (<span class="math inline">\(\mu\)</span>, <span class="math inline">\(\sigma^2\)</span>) dengan <span class="math inline">\(\sigma&gt;0\)</span> <span class="math display">\[\begin{aligned}
+<p data-o006-id="O006-PSU-001-U0134"><span class="fs-4">Normal</span>: (<span class="math inline" data-o006-math-id="O006-PSU-001-M0121">\(\mu\)</span>, <span class="math inline" data-o006-math-id="O006-PSU-001-M0122">\(\sigma^2\)</span>) dengan <span class="math inline" data-o006-math-id="O006-PSU-001-M0123">\(\sigma&gt;0\)</span> <span class="math display" data-o006-math-id="O006-PSU-001-M0124">\[\begin{aligned}
                 &amp; f(x)=\frac{1}{\sqrt{2\pi\sigma^2}}e^{-\frac{1}{2\sigma^2}(x-\mu)^2}, \qquad -\infty&lt;x&lt;\infty\\
                 &amp; E(X)=\mu, \qquad \text{Var}(X)=\sigma^2
     \end{aligned}\]</span></p>
 </div>
 <div class="border rounded border-lionshrine ms-4 p-2 mb-1" data-o006-id="O006-PSU-001-U0135">
-<p data-o006-id="O006-PSU-001-U0136"><span class="fs-4">Seragam</span>: (<span class="math inline">\(a\)</span>, <span class="math inline">\(b\)</span>) <span class="math display">\[\begin{aligned}
+<p data-o006-id="O006-PSU-001-U0136"><span class="fs-4">Seragam</span>: (<span class="math inline" data-o006-math-id="O006-PSU-001-M0125">\(a\)</span>, <span class="math inline" data-o006-math-id="O006-PSU-001-M0126">\(b\)</span>) <span class="math display" data-o006-math-id="O006-PSU-001-M0127">\[\begin{aligned}
                 &amp; f(x)=\frac{1}{b-a}, \qquad a&lt;x&lt;b\\
                 &amp; E(X)=\frac{a+b}{2}, \qquad \text{Var}(X)=\frac{(b-a)^2}{12}
        \end{aligned}\]</span></p>
@@ -261,21 +261,21 @@ Distribusi eksponensial merupakan kasus khusus distribusi Gamma dengan <span cla
 <h2 class="anchored" data-anchor-id="mathematical-expectations" data-o006-id="O006-PSU-001-U0138">0.3: Ekspektasi Matematis</h2>
 <p data-o006-id="O006-PSU-001-U0139">Anda harus mampu menentukan nilai harapan dan varians suatu peubah acak, serta nilai harapan fungsi dari peubah acak. Ekspektasi akan menjadi sangat penting ketika kita mempelajari sifat-sifat penaksir dalam beberapa pelajaran berikutnya.</p>
 <div class="ms-3 theorem definition" data-o006-id="O006-PSU-001-U0140" id="def-expectdiscreterv">
-<p data-o006-id="O006-PSU-001-U0141"><span class="theorem-title"><strong>Definisi 9 (Ekspektasi Matematis untuk peubah acak diskret)</strong></span> Jika <span class="math inline">\(f(x)\)</span> merupakan fungsi massa peluang (pmf) dari peubah acak diskret <span class="math inline">\(X\)</span> dengan himpunan dukungan <span class="math inline">\(S\)</span>, dan jika penjumlahan <span class="math display">\[\begin{aligned}
+<p data-o006-id="O006-PSU-001-U0141"><span class="theorem-title"><strong>Definisi 9 (Ekspektasi Matematis untuk peubah acak diskret)</strong></span> Jika <span class="math inline" data-o006-math-id="O006-PSU-001-M0128">\(f(x)\)</span> merupakan fungsi massa peluang (pmf) dari peubah acak diskret <span class="math inline" data-o006-math-id="O006-PSU-001-M0129">\(X\)</span> dengan himpunan dukungan <span class="math inline" data-o006-math-id="O006-PSU-001-M0130">\(S\)</span>, dan jika penjumlahan <span class="math display" data-o006-math-id="O006-PSU-001-M0131">\[\begin{aligned}
 \sum_{x\in S} u(x)f(x)
-\end{aligned}\]</span> ada (yaitu, nilainya lebih kecil dari <span class="math inline">\(\infty\)</span>), maka jumlah yang dihasilkan disebut ekspektasi matematis atau nilai harapan dari fungsi <span class="math inline">\(u(X)\)</span>. Ekspektasi tersebut dinotasikan dengan <span class="math display">\[\begin{aligned}
+\end{aligned}\]</span> ada (yaitu, nilainya lebih kecil dari <span class="math inline" data-o006-math-id="O006-PSU-001-M0132">\(\infty\)</span>), maka jumlah yang dihasilkan disebut ekspektasi matematis atau nilai harapan dari fungsi <span class="math inline" data-o006-math-id="O006-PSU-001-M0133">\(u(X)\)</span>. Ekspektasi tersebut dinotasikan dengan <span class="math display" data-o006-math-id="O006-PSU-001-M0134">\[\begin{aligned}
 E[u(X)]=\sum_{x\in S}u(x)f(x)
 \end{aligned}\]</span></p>
 </div>
 <div class="ms-3 theorem definition" data-o006-id="O006-PSU-001-U0142" id="def-expectcontinuousrv">
-<p data-o006-id="O006-PSU-001-U0143"><span class="theorem-title"><strong>Definisi 10 (Ekspektasi Matematis untuk peubah acak kontinu)</strong></span> Untuk peubah acak kontinu, <span class="math inline">\(X\)</span>, dengan fungsi kepadatan peluang (pdf), <span class="math inline">\(f(x)\)</span>, nilai harapan fungsi dari <span class="math inline">\(X\)</span>, <span class="math inline">\(u(X)\)</span> adalah <span class="math display">\[\begin{aligned}
+<p data-o006-id="O006-PSU-001-U0143"><span class="theorem-title"><strong>Definisi 10 (Ekspektasi Matematis untuk peubah acak kontinu)</strong></span> Untuk peubah acak kontinu, <span class="math inline" data-o006-math-id="O006-PSU-001-M0135">\(X\)</span>, dengan fungsi kepadatan peluang (pdf), <span class="math inline" data-o006-math-id="O006-PSU-001-M0136">\(f(x)\)</span>, nilai harapan fungsi dari <span class="math inline" data-o006-math-id="O006-PSU-001-M0137">\(X\)</span>, <span class="math inline" data-o006-math-id="O006-PSU-001-M0138">\(u(X)\)</span> adalah <span class="math display" data-o006-math-id="O006-PSU-001-M0139">\[\begin{aligned}
         E(u(X))=\int_{-\infty}^\infty u(x)f(x)\;dx
     \end{aligned}\]</span></p>
 </div>
 <p data-o006-id="O006-PSU-001-U0144">Ekspektasi matematis khusus:</p>
 <ul data-o006-id="O006-PSU-001-U0145">
-<li data-o006-id="O006-PSU-001-U0146">Jika <span class="math inline">\(u(x)=x\)</span> maka <span class="math inline">\(E(u(X))=\mu\)</span></li>
-<li data-o006-id="O006-PSU-001-U0147">Jika <span class="math inline">\(u(x)=(x-\mu)^2\)</span>, maka <span class="math inline">\(E(u(X))=\sigma^2=\text{Var}(X)\)</span>.</li>
+<li data-o006-id="O006-PSU-001-U0146">Jika <span class="math inline" data-o006-math-id="O006-PSU-001-M0140">\(u(x)=x\)</span> maka <span class="math inline" data-o006-math-id="O006-PSU-001-M0141">\(E(u(X))=\mu\)</span></li>
+<li data-o006-id="O006-PSU-001-U0147">Jika <span class="math inline" data-o006-math-id="O006-PSU-001-M0142">\(u(x)=(x-\mu)^2\)</span>, maka <span class="math inline" data-o006-math-id="O006-PSU-001-M0143">\(E(u(X))=\sigma^2=\text{Var}(X)\)</span>.</li>
 </ul>
 <div class="callout callout-style-simple callout-caution no-icon" data-o006-id="O006-PSU-001-U0148">
 <div class="callout-body d-flex" data-o006-id="O006-PSU-001-U0149">
@@ -284,7 +284,7 @@ E[u(X)]=\sum_{x\in S}u(x)f(x)
 </div>
 <div class="callout-body-container" data-o006-id="O006-PSU-001-U0151">
 <p data-o006-id="O006-PSU-001-U0152"><strong>Catatan:</strong><br/>
-Ingat: <span class="math inline">\(\text{Var}(X)=E(X^2)-E(X)^2\)</span> dan oleh karena itu <span class="math inline">\(E(X^2)=\sigma^2+\mu^2\)</span>.</p>
+Ingat: <span class="math inline" data-o006-math-id="O006-PSU-001-M0144">\(\text{Var}(X)=E(X^2)-E(X)^2\)</span> dan oleh karena itu <span class="math inline" data-o006-math-id="O006-PSU-001-M0145">\(E(X^2)=\sigma^2+\mu^2\)</span>.</p>
 </div>
 </div>
 </div>
@@ -294,47 +294,47 @@ Ingat: <span class="math inline">\(\text{Var}(X)=E(X^2)-E(X)^2\)</span> dan oleh
 <p data-o006-id="O006-PSU-001-U0155">Dalam mata kuliah ini, penting untuk mengingat kembali distribusi bivariat dan mampu memperluasnya ke distribusi multivariat. Sebuah <strong>distribusi peluang bersama (bivariat)</strong> menyatakan peluang bahwa suatu objek yang dipilih secara acak dari populasi memiliki dua karakteristik yang diminati.</p>
 <p data-o006-id="O006-PSU-001-U0156">Ingat kembali definisi fungsi massa peluang bersama (bivariat).</p>
 <div class="ms-3 theorem definition" data-o006-id="O006-PSU-001-U0157" id="def-jointpmf">
-<p data-o006-id="O006-PSU-001-U0158"><span class="theorem-title"><strong>Def. 11 (Fungsi Massa Peluang Bersama)</strong></span> Misalkan <span class="math inline">\(X\)</span> dan <span class="math inline">\(Y\)</span> adalah dua peubah acak diskret, dan misalkan <span class="math inline">\(S\)</span> menyatakan himpunan dukungan dua dimensi bagi <span class="math inline">\(X\)</span> dan <span class="math inline">\(Y\)</span>. Fungsi <span class="math inline">\(f(x,y)=P(X=x, Y=y)\)</span> merupakan <strong>fungsi massa peluang bersama</strong> (PMF) jika memenuhi tiga syarat berikut:</p>
+<p data-o006-id="O006-PSU-001-U0158"><span class="theorem-title"><strong>Def. 11 (Fungsi Massa Peluang Bersama)</strong></span> Misalkan <span class="math inline" data-o006-math-id="O006-PSU-001-M0146">\(X\)</span> dan <span class="math inline" data-o006-math-id="O006-PSU-001-M0147">\(Y\)</span> adalah dua peubah acak diskret, dan misalkan <span class="math inline" data-o006-math-id="O006-PSU-001-M0148">\(S\)</span> menyatakan himpunan dukungan dua dimensi bagi <span class="math inline" data-o006-math-id="O006-PSU-001-M0149">\(X\)</span> dan <span class="math inline" data-o006-math-id="O006-PSU-001-M0150">\(Y\)</span>. Fungsi <span class="math inline" data-o006-math-id="O006-PSU-001-M0151">\(f(x,y)=P(X=x, Y=y)\)</span> merupakan <strong>fungsi massa peluang bersama</strong> (PMF) jika memenuhi tiga syarat berikut:</p>
 <ol data-o006-id="O006-PSU-001-U0159" type="1">
-<li data-o006-id="O006-PSU-001-U0160"><p data-o006-id="O006-PSU-001-U0161"><span class="math inline">\(0\le f(x,y)\le 1\)</span></p></li>
-<li data-o006-id="O006-PSU-001-U0162"><p data-o006-id="O006-PSU-001-U0163"><span class="math inline">\(\sum_{(x,y)\in S} f(x,y)=1\)</span></p></li>
-<li data-o006-id="O006-PSU-001-U0164"><p data-o006-id="O006-PSU-001-U0165"><span class="math inline">\(P[(X,Y)\in A]=\sum_{(x,y)\in A}f(x,y)\)</span>, dengan <span class="math inline">\(A\)</span> merupakan subhimpunan dari himpunan dukungan <span class="math inline">\(S\)</span>.</p></li>
+<li data-o006-id="O006-PSU-001-U0160"><p data-o006-id="O006-PSU-001-U0161"><span class="math inline" data-o006-math-id="O006-PSU-001-M0152">\(0\le f(x,y)\le 1\)</span></p></li>
+<li data-o006-id="O006-PSU-001-U0162"><p data-o006-id="O006-PSU-001-U0163"><span class="math inline" data-o006-math-id="O006-PSU-001-M0153">\(\sum_{(x,y)\in S} f(x,y)=1\)</span></p></li>
+<li data-o006-id="O006-PSU-001-U0164"><p data-o006-id="O006-PSU-001-U0165"><span class="math inline" data-o006-math-id="O006-PSU-001-M0154">\(P[(X,Y)\in A]=\sum_{(x,y)\in A}f(x,y)\)</span>, dengan <span class="math inline" data-o006-math-id="O006-PSU-001-M0155">\(A\)</span> merupakan subhimpunan dari himpunan dukungan <span class="math inline" data-o006-math-id="O006-PSU-001-M0156">\(S\)</span>.</p></li>
 </ol>
 </div>
 <div class="ms-3 theorem definition" data-o006-id="O006-PSU-001-U0166" id="def-name">
-<p data-o006-id="O006-PSU-001-U0167"><span class="theorem-title"><strong>Def. 12 (Fungsi Kepadatan Peluang Bersama)</strong></span> Misalkan <span class="math inline">\(X\)</span> dan <span class="math inline">\(Y\)</span> adalah dua peubah acak kontinu, dan misalkan <span class="math inline">\(S\)</span> menyatakan himpunan dukungan dua dimensi bagi <span class="math inline">\(X\)</span> dan <span class="math inline">\(Y\)</span>. Maka fungsi <span class="math inline">\(f(x,y)\)</span> merupakan <strong>fungsi kepadatan peluang bersama</strong> (PDF) jika memenuhi tiga syarat berikut:</p>
+<p data-o006-id="O006-PSU-001-U0167"><span class="theorem-title"><strong>Def. 12 (Fungsi Kepadatan Peluang Bersama)</strong></span> Misalkan <span class="math inline" data-o006-math-id="O006-PSU-001-M0157">\(X\)</span> dan <span class="math inline" data-o006-math-id="O006-PSU-001-M0158">\(Y\)</span> adalah dua peubah acak kontinu, dan misalkan <span class="math inline" data-o006-math-id="O006-PSU-001-M0159">\(S\)</span> menyatakan himpunan dukungan dua dimensi bagi <span class="math inline" data-o006-math-id="O006-PSU-001-M0160">\(X\)</span> dan <span class="math inline" data-o006-math-id="O006-PSU-001-M0161">\(Y\)</span>. Maka fungsi <span class="math inline" data-o006-math-id="O006-PSU-001-M0162">\(f(x,y)\)</span> merupakan <strong>fungsi kepadatan peluang bersama</strong> (PDF) jika memenuhi tiga syarat berikut:</p>
 <ol data-o006-id="O006-PSU-001-U0168" type="1">
-<li data-o006-id="O006-PSU-001-U0169"><p data-o006-id="O006-PSU-001-U0170"><span class="math inline">\(f(x,y)\ge 0\)</span></p></li>
-<li data-o006-id="O006-PSU-001-U0171"><p data-o006-id="O006-PSU-001-U0172"><span class="math inline">\(\int_{-\infty}^\infty \int_{-\infty}^\infty f(x,y)dxdy=1\)</span></p></li>
-<li data-o006-id="O006-PSU-001-U0173"><p data-o006-id="O006-PSU-001-U0174"><span class="math inline">\(P[(X,Y)\in A]=\int \int_A f(x,y)dxdy\)</span></p></li>
+<li data-o006-id="O006-PSU-001-U0169"><p data-o006-id="O006-PSU-001-U0170"><span class="math inline" data-o006-math-id="O006-PSU-001-M0163">\(f(x,y)\ge 0\)</span></p></li>
+<li data-o006-id="O006-PSU-001-U0171"><p data-o006-id="O006-PSU-001-U0172"><span class="math inline" data-o006-math-id="O006-PSU-001-M0164">\(\int_{-\infty}^\infty \int_{-\infty}^\infty f(x,y)dxdy=1\)</span></p></li>
+<li data-o006-id="O006-PSU-001-U0173"><p data-o006-id="O006-PSU-001-U0174"><span class="math inline" data-o006-math-id="O006-PSU-001-M0165">\(P[(X,Y)\in A]=\int \int_A f(x,y)dxdy\)</span></p></li>
 </ol>
-<p data-o006-id="O006-PSU-001-U0175">dengan <span class="math inline">\(\{(X,Y)\in A\}\)</span> merupakan kejadian pada bidang <span class="math inline">\(xy\)</span>.</p>
+<p data-o006-id="O006-PSU-001-U0175">dengan <span class="math inline" data-o006-math-id="O006-PSU-001-M0166">\(\{(X,Y)\in A\}\)</span> merupakan kejadian pada bidang <span class="math inline" data-o006-math-id="O006-PSU-001-M0167">\(xy\)</span>.</p>
 </div>
 <div class="ms-3 theorem definition" data-o006-id="O006-PSU-001-U0176" id="def-margpmf">
-<p data-o006-id="O006-PSU-001-U0177"><span class="theorem-title"><strong>Def. 13 (Fungsi Massa Peluang Marginal)</strong></span> Misalkan <span class="math inline">\(X\)</span> adalah peubah acak diskret dengan himpunan dukungan <span class="math inline">\(S_1\)</span>, dan misalkan <span class="math inline">\(Y\)</span> adalah peubah acak diskret dengan himpunan dukungan <span class="math inline">\(S_2\)</span>. Misalkan <span class="math inline">\(X\)</span> dan <span class="math inline">\(Y\)</span> memiliki fungsi massa peluang bersama <span class="math inline">\(f(x,y)\)</span> dengan himpunan dukungan <span class="math inline">\(S\)</span>. Maka fungsi massa peluang <span class="math inline">\(X\)</span> saja, yang disebut <strong>fungsi massa peluang marginal</strong> <span class="math inline">\(X\)</span> , didefinisikan sebagai: <span class="math display">\[\begin{aligned}
+<p data-o006-id="O006-PSU-001-U0177"><span class="theorem-title"><strong>Def. 13 (Fungsi Massa Peluang Marginal)</strong></span> Misalkan <span class="math inline" data-o006-math-id="O006-PSU-001-M0168">\(X\)</span> adalah peubah acak diskret dengan himpunan dukungan <span class="math inline" data-o006-math-id="O006-PSU-001-M0169">\(S_1\)</span>, dan misalkan <span class="math inline" data-o006-math-id="O006-PSU-001-M0170">\(Y\)</span> adalah peubah acak diskret dengan himpunan dukungan <span class="math inline" data-o006-math-id="O006-PSU-001-M0171">\(S_2\)</span>. Misalkan <span class="math inline" data-o006-math-id="O006-PSU-001-M0172">\(X\)</span> dan <span class="math inline" data-o006-math-id="O006-PSU-001-M0173">\(Y\)</span> memiliki fungsi massa peluang bersama <span class="math inline" data-o006-math-id="O006-PSU-001-M0174">\(f(x,y)\)</span> dengan himpunan dukungan <span class="math inline" data-o006-math-id="O006-PSU-001-M0175">\(S\)</span>. Maka fungsi massa peluang <span class="math inline" data-o006-math-id="O006-PSU-001-M0176">\(X\)</span> saja, yang disebut <strong>fungsi massa peluang marginal</strong> <span class="math inline" data-o006-math-id="O006-PSU-001-M0177">\(X\)</span> , didefinisikan sebagai: <span class="math display" data-o006-math-id="O006-PSU-001-M0178">\[\begin{aligned}
         f_X(x)=\sum_{y}f(x,y)=P(X=x), \qquad x\in S_1
-    \end{aligned}\]</span> dengan penjumlahan, untuk setiap <span class="math inline">\(x\)</span> dalam himpunan dukungan <span class="math inline">\(S_1\)</span>, dilakukan atas semua nilai yang mungkin dari <span class="math inline">\(y\)</span>.</p>
-<p data-o006-id="O006-PSU-001-U0178">Demikian pula, fungsi massa peluang <span class="math inline">\(Y\)</span> saja, yang disebut <strong>fungsi massa peluang marginal</strong> <span class="math inline">\(Y\)</span> , didefinisikan sebagai: <span class="math display">\[\begin{aligned}
+    \end{aligned}\]</span> dengan penjumlahan, untuk setiap <span class="math inline" data-o006-math-id="O006-PSU-001-M0179">\(x\)</span> dalam himpunan dukungan <span class="math inline" data-o006-math-id="O006-PSU-001-M0180">\(S_1\)</span>, dilakukan atas semua nilai yang mungkin dari <span class="math inline" data-o006-math-id="O006-PSU-001-M0181">\(y\)</span>.</p>
+<p data-o006-id="O006-PSU-001-U0178">Demikian pula, fungsi massa peluang <span class="math inline" data-o006-math-id="O006-PSU-001-M0182">\(Y\)</span> saja, yang disebut <strong>fungsi massa peluang marginal</strong> <span class="math inline" data-o006-math-id="O006-PSU-001-M0183">\(Y\)</span> , didefinisikan sebagai: <span class="math display" data-o006-math-id="O006-PSU-001-M0184">\[\begin{aligned}
         f_Y(y)=\sum_{x}f(x,y)=P(Y=y), \qquad y\in S_2
-    \end{aligned}\]</span> dengan penjumlahan, untuk setiap <span class="math inline">\(y\)</span> dalam himpunan dukungan <span class="math inline">\(S_2\)</span>, dilakukan atas semua nilai yang mungkin dari <span class="math inline">\(x\)</span>.</p>
+    \end{aligned}\]</span> dengan penjumlahan, untuk setiap <span class="math inline" data-o006-math-id="O006-PSU-001-M0185">\(y\)</span> dalam himpunan dukungan <span class="math inline" data-o006-math-id="O006-PSU-001-M0186">\(S_2\)</span>, dilakukan atas semua nilai yang mungkin dari <span class="math inline" data-o006-math-id="O006-PSU-001-M0187">\(x\)</span>.</p>
 </div>
 <div class="ms-3 theorem definition" data-o006-id="O006-PSU-001-U0179" data-source-id="def-margpmf" id="psu415-l00-def-margpdf">
-<p data-o006-id="O006-PSU-001-U0180"><span class="theorem-title"><strong>Def. 14 (Fungsi Kepadatan Peluang Marginal)</strong></span> Misalkan <span class="math inline">\(X\)</span> adalah peubah acak kontinu dengan himpunan dukungan <span class="math inline">\(S_1\)</span>, dan misalkan <span class="math inline">\(Y\)</span> adalah peubah acak kontinu dengan himpunan dukungan <span class="math inline">\(S_2\)</span>. Misalkan <span class="math inline">\(X\)</span> dan <span class="math inline">\(Y\)</span> memiliki fungsi kepadatan peluang bersama <span class="math inline">\(f(x,y)\)</span> dengan himpunan dukungan <span class="math inline">\(S\)</span>. Maka fungsi kepadatan peluang <span class="math inline">\(X\)</span> saja, yang disebut <strong>fungsi kepadatan peluang marginal</strong> <span class="math inline">\(X\)</span> , didefinisikan sebagai: <span class="math display">\[\begin{aligned}
+<p data-o006-id="O006-PSU-001-U0180"><span class="theorem-title"><strong>Def. 14 (Fungsi Kepadatan Peluang Marginal)</strong></span> Misalkan <span class="math inline" data-o006-math-id="O006-PSU-001-M0188">\(X\)</span> adalah peubah acak kontinu dengan himpunan dukungan <span class="math inline" data-o006-math-id="O006-PSU-001-M0189">\(S_1\)</span>, dan misalkan <span class="math inline" data-o006-math-id="O006-PSU-001-M0190">\(Y\)</span> adalah peubah acak kontinu dengan himpunan dukungan <span class="math inline" data-o006-math-id="O006-PSU-001-M0191">\(S_2\)</span>. Misalkan <span class="math inline" data-o006-math-id="O006-PSU-001-M0192">\(X\)</span> dan <span class="math inline" data-o006-math-id="O006-PSU-001-M0193">\(Y\)</span> memiliki fungsi kepadatan peluang bersama <span class="math inline" data-o006-math-id="O006-PSU-001-M0194">\(f(x,y)\)</span> dengan himpunan dukungan <span class="math inline" data-o006-math-id="O006-PSU-001-M0195">\(S\)</span>. Maka fungsi kepadatan peluang <span class="math inline" data-o006-math-id="O006-PSU-001-M0196">\(X\)</span> saja, yang disebut <strong>fungsi kepadatan peluang marginal</strong> <span class="math inline" data-o006-math-id="O006-PSU-001-M0197">\(X\)</span> , didefinisikan sebagai: <span class="math display" data-o006-math-id="O006-PSU-001-M0198">\[\begin{aligned}
         f_X(x)=\int_{y}f(x,y)dy, \qquad x\in S_1
     \end{aligned}\]</span></p>
-<p data-o006-id="O006-PSU-001-U0181">Demikian pula, fungsi kepadatan peluang <span class="math inline">\(Y\)</span> saja, yang disebut <strong>fungsi kepadatan peluang marginal</strong> <span class="math inline">\(Y\)</span> , didefinisikan sebagai: <span class="math display">\[\begin{aligned}
+<p data-o006-id="O006-PSU-001-U0181">Demikian pula, fungsi kepadatan peluang <span class="math inline" data-o006-math-id="O006-PSU-001-M0199">\(Y\)</span> saja, yang disebut <strong>fungsi kepadatan peluang marginal</strong> <span class="math inline" data-o006-math-id="O006-PSU-001-M0200">\(Y\)</span> , didefinisikan sebagai: <span class="math display" data-o006-math-id="O006-PSU-001-M0201">\[\begin{aligned}
         f_Y(y)=\int_{x}f(x,y)dx, \qquad y\in S_2
     \end{aligned}\]</span></p>
 </div>
-<p data-o006-id="O006-PSU-001-U0182">Misalkan kita ingin menentukan apakah dua peubah acak saling bebas berdasarkan distribusi peluang bersama dan distribusi marginalnya. Peubah acak <span class="math inline">\(X\)</span> dan <span class="math inline">\(Y\)</span> adalah <strong>saling bebas</strong> jika dan hanya jika <span class="math display">\[\begin{aligned}
+<p data-o006-id="O006-PSU-001-U0182">Misalkan kita ingin menentukan apakah dua peubah acak saling bebas berdasarkan distribusi peluang bersama dan distribusi marginalnya. Peubah acak <span class="math inline" data-o006-math-id="O006-PSU-001-M0202">\(X\)</span> dan <span class="math inline" data-o006-math-id="O006-PSU-001-M0203">\(Y\)</span> adalah <strong>saling bebas</strong> jika dan hanya jika <span class="math display" data-o006-math-id="O006-PSU-001-M0204">\[\begin{aligned}
         f(x,y)=f_X(x)f_Y(y)
-    \end{aligned}\]</span> untuk semua <span class="math inline">\(x \in S_1, \; y\in S_2\)</span>. Jika tidak, <span class="math inline">\(X\)</span> dan <span class="math inline">\(Y\)</span> dikatakan <strong>saling bergantung</strong>.</p>
+    \end{aligned}\]</span> untuk semua <span class="math inline" data-o006-math-id="O006-PSU-001-M0205">\(x \in S_1, \; y\in S_2\)</span>. Jika tidak, <span class="math inline" data-o006-math-id="O006-PSU-001-M0206">\(X\)</span> dan <span class="math inline" data-o006-math-id="O006-PSU-001-M0207">\(Y\)</span> dikatakan <strong>saling bergantung</strong>.</p>
 <section class="level3 unnumbered" data-o006-id="O006-PSU-001-U0183" id="conditional-distributions">
 <h3 class="unnumbered anchored" data-anchor-id="conditional-distributions" data-o006-id="O006-PSU-001-U0184">Distribusi Bersyarat</h3>
 <p data-o006-id="O006-PSU-001-U0185">Distribusi bersyarat perlu diingat kembali karena akan sangat berguna dalam mata kuliah ini, khususnya ketika kita membahas statistika Bayes.</p>
 <p data-o006-id="O006-PSU-001-U0186">Sebuah <strong>distribusi peluang bersyarat</strong> adalah distribusi peluang untuk suatu subpopulasi. Dengan kata lain, distribusi bersyarat menyatakan peluang bahwa objek yang dipilih secara acak dari suatu subpopulasi memiliki <em>satu karakteristik yang diminati</em>.</p>
 <div class="ms-3 theorem definition" data-o006-id="O006-PSU-001-U0187" id="def-conditionpmf">
-<p data-o006-id="O006-PSU-001-U0188"><span class="theorem-title"><strong>Def. 15 (Fungsi Massa Peluang Bersyarat)</strong></span> Fungsi <strong>massa peluang bersyarat dari</strong> <span class="math inline">\(X\)</span>, dengan diketahui <span class="math inline">\(Y=y\)</span> , didefinisikan sebagai: <span class="math display">\[\begin{aligned}
+<p data-o006-id="O006-PSU-001-U0188"><span class="theorem-title"><strong>Def. 15 (Fungsi Massa Peluang Bersyarat)</strong></span> Fungsi <strong>massa peluang bersyarat dari</strong> <span class="math inline" data-o006-math-id="O006-PSU-001-M0208">\(X\)</span>, dengan diketahui <span class="math inline" data-o006-math-id="O006-PSU-001-M0209">\(Y=y\)</span> , didefinisikan sebagai: <span class="math display" data-o006-math-id="O006-PSU-001-M0210">\[\begin{aligned}
         g(x|y)=\frac{f(x,y)}{f_Y(y)}, \qquad \text{provided }f_Y(y)&gt;0
 \end{aligned}\]</span></p>
 </div>
@@ -349,8 +349,8 @@ Ingat: <span class="math inline">\(\text{Var}(X)=E(X^2)-E(X)^2\)</span> dan oleh
 </div>
 <div class="callout-body-container" data-o006-id="O006-PSU-001-U0195">
 <div class="theorem" data-o006-id="O006-PSU-001-U0196" id="thm-l11">
-<p data-o006-id="O006-PSU-001-U0197"><span class="theorem-title"><strong>Teorema 2</strong></span> Misalkan <span class="math inline">\(X_1, X_2, \ldots, X_n\)</span> adalah sampel acak dari distribusi Bernoulli dengan parameter p.<br/>
-Maka <span class="math inline">\(Y=\sum_{i=1}^n X_i\sim\text{Bin}(n, p)\)</span>.</p>
+<p data-o006-id="O006-PSU-001-U0197"><span class="theorem-title"><strong>Teorema 2</strong></span> Misalkan <span class="math inline" data-o006-math-id="O006-PSU-001-M0211">\(X_1, X_2, \ldots, X_n\)</span> adalah sampel acak dari distribusi Bernoulli dengan parameter p.<br/>
+Maka <span class="math inline" data-o006-math-id="O006-PSU-001-M0212">\(Y=\sum_{i=1}^n X_i\sim\text{Bin}(n, p)\)</span>.</p>
 </div>
 </div>
 </div>
@@ -362,8 +362,8 @@ Maka <span class="math inline">\(Y=\sum_{i=1}^n X_i\sim\text{Bin}(n, p)\)</span>
 </div>
 <div class="callout-body-container" data-o006-id="O006-PSU-001-U0201">
 <div class="theorem" data-o006-id="O006-PSU-001-U0202" id="thm-l12">
-<p data-o006-id="O006-PSU-001-U0203"><span class="theorem-title"><strong>Teorema 3</strong></span> Misalkan <span class="math inline">\(X_1, X_2, \ldots, X_n\)</span> adalah peubah-peubah acak yang saling bebas dan masing-masing berdistribusi Binomial dengan parameter <span class="math inline">\(n_i\)</span> dan p, untuk <span class="math inline">\(i=1, 2, \ldots, n\)</span>.<br/>
-Maka <span class="math inline">\(Y=\sum_{i=1}^n X_i\sim \text{Bin}(\sum n_i, p)\)</span>.</p>
+<p data-o006-id="O006-PSU-001-U0203"><span class="theorem-title"><strong>Teorema 3</strong></span> Misalkan <span class="math inline" data-o006-math-id="O006-PSU-001-M0213">\(X_1, X_2, \ldots, X_n\)</span> adalah peubah-peubah acak yang saling bebas dan masing-masing berdistribusi Binomial dengan parameter <span class="math inline" data-o006-math-id="O006-PSU-001-M0214">\(n_i\)</span> dan p, untuk <span class="math inline" data-o006-math-id="O006-PSU-001-M0215">\(i=1, 2, \ldots, n\)</span>.<br/>
+Maka <span class="math inline" data-o006-math-id="O006-PSU-001-M0216">\(Y=\sum_{i=1}^n X_i\sim \text{Bin}(\sum n_i, p)\)</span>.</p>
 </div>
 </div>
 </div>
@@ -375,8 +375,8 @@ Maka <span class="math inline">\(Y=\sum_{i=1}^n X_i\sim \text{Bin}(\sum n_i, p)\
 </div>
 <div class="callout-body-container" data-o006-id="O006-PSU-001-U0207">
 <div class="theorem" data-o006-id="O006-PSU-001-U0208" id="thm-l13">
-<p data-o006-id="O006-PSU-001-U0209"><span class="theorem-title"><strong>Teorema 4</strong></span> Misalkan <span class="math inline">\(X_1,X_2,\ldots,X_n\)</span> adalah peubah-peubah acak yang saling bebas dan masing-masing berdistribusi Poisson dengan parameter <span class="math inline">\(\lambda_i\)</span>, untuk <span class="math inline">\(i=1,2,\ldots,n\)</span>.<br/>
-Maka <span class="math inline">\(Y=\sum_{i=1}^n X_i\sim \text{Pois}(\sum \lambda_i)\)</span>.</p>
+<p data-o006-id="O006-PSU-001-U0209"><span class="theorem-title"><strong>Teorema 4</strong></span> Misalkan <span class="math inline" data-o006-math-id="O006-PSU-001-M0217">\(X_1,X_2,\ldots,X_n\)</span> adalah peubah-peubah acak yang saling bebas dan masing-masing berdistribusi Poisson dengan parameter <span class="math inline" data-o006-math-id="O006-PSU-001-M0218">\(\lambda_i\)</span>, untuk <span class="math inline" data-o006-math-id="O006-PSU-001-M0219">\(i=1,2,\ldots,n\)</span>.<br/>
+Maka <span class="math inline" data-o006-math-id="O006-PSU-001-M0220">\(Y=\sum_{i=1}^n X_i\sim \text{Pois}(\sum \lambda_i)\)</span>.</p>
 </div>
 </div>
 </div>
@@ -388,8 +388,8 @@ Maka <span class="math inline">\(Y=\sum_{i=1}^n X_i\sim \text{Pois}(\sum \lambda
 </div>
 <div class="callout-body-container" data-o006-id="O006-PSU-001-U0213">
 <div class="theorem" data-o006-id="O006-PSU-001-U0214" id="thm-l14">
-<p data-o006-id="O006-PSU-001-U0215"><span class="theorem-title"><strong>Teorema 5</strong></span> Misalkan <span class="math inline">\(X_1,X_2,\ldots,X_n\)</span> adalah sampel acak dari distribusi Eksponensial dengan parameter <span class="math inline">\(\theta\)</span>, untuk <span class="math inline">\(i=1,2,\ldots,n\)</span>.<br/>
-Maka <span class="math inline">\(Y=\sum_{i=1}^n X_i\sim \Gamma(\alpha=n, \theta)\)</span>.</p>
+<p data-o006-id="O006-PSU-001-U0215"><span class="theorem-title"><strong>Teorema 5</strong></span> Misalkan <span class="math inline" data-o006-math-id="O006-PSU-001-M0221">\(X_1,X_2,\ldots,X_n\)</span> adalah sampel acak dari distribusi Eksponensial dengan parameter <span class="math inline" data-o006-math-id="O006-PSU-001-M0222">\(\theta\)</span>, untuk <span class="math inline" data-o006-math-id="O006-PSU-001-M0223">\(i=1,2,\ldots,n\)</span>.<br/>
+Maka <span class="math inline" data-o006-math-id="O006-PSU-001-M0224">\(Y=\sum_{i=1}^n X_i\sim \Gamma(\alpha=n, \theta)\)</span>.</p>
 </div>
 </div>
 </div>
@@ -401,8 +401,8 @@ Maka <span class="math inline">\(Y=\sum_{i=1}^n X_i\sim \Gamma(\alpha=n, \theta)
 </div>
 <div class="callout-body-container" data-o006-id="O006-PSU-001-U0219">
 <div class="theorem" data-o006-id="O006-PSU-001-U0220" id="thm-l15">
-<p data-o006-id="O006-PSU-001-U0221"><span class="theorem-title"><strong>Teorema 6</strong></span> Misalkan <span class="math inline">\(X_1, X_2, \ldots, X_n\)</span> adalah peubah-peubah acak yang saling bebas dan masing-masing berdistribusi Gamma dengan parameter <span class="math inline">\(\alpha_i\)</span> dan <span class="math inline">\(\theta\)</span>, untuk <span class="math inline">\(i=1,2,\ldots,n\)</span>.<br/>
-Maka <span class="math inline">\(Y=\sum_{i=1}^n X_i\sim \Gamma(\sum_{i=1}^n \alpha_i, \theta)\)</span>.</p>
+<p data-o006-id="O006-PSU-001-U0221"><span class="theorem-title"><strong>Teorema 6</strong></span> Misalkan <span class="math inline" data-o006-math-id="O006-PSU-001-M0225">\(X_1, X_2, \ldots, X_n\)</span> adalah peubah-peubah acak yang saling bebas dan masing-masing berdistribusi Gamma dengan parameter <span class="math inline" data-o006-math-id="O006-PSU-001-M0226">\(\alpha_i\)</span> dan <span class="math inline" data-o006-math-id="O006-PSU-001-M0227">\(\theta\)</span>, untuk <span class="math inline" data-o006-math-id="O006-PSU-001-M0228">\(i=1,2,\ldots,n\)</span>.<br/>
+Maka <span class="math inline" data-o006-math-id="O006-PSU-001-M0229">\(Y=\sum_{i=1}^n X_i\sim \Gamma(\sum_{i=1}^n \alpha_i, \theta)\)</span>.</p>
 </div>
 </div>
 </div>
@@ -417,9 +417,9 @@ Maka <span class="math inline">\(Y=\sum_{i=1}^n X_i\sim \Gamma(\sum_{i=1}^n \alp
 </div>
 <div class="callout-body-container" data-o006-id="O006-PSU-001-U0228">
 <div class="theorem" data-o006-id="O006-PSU-001-U0229" id="thm-l16">
-<p data-o006-id="O006-PSU-001-U0230"><span class="theorem-title"><strong>Teorema 7</strong></span> Jika <span class="math inline">\(X_1, X_2, \ldots, X_n\)</span> merupakan peubah-peubah acak normal yang saling bebas dengan rataan <span class="math inline">\(\mu_1, \mu_2, \ldots, \mu_n\)</span> dan varians <span class="math inline">\(\sigma^2_1, \sigma^2_2, \ldots, \sigma^2_n\)</span>, berturut-turut, maka kombinasi linearnya: <span class="math display">\[\begin{aligned}
+<p data-o006-id="O006-PSU-001-U0230"><span class="theorem-title"><strong>Teorema 7</strong></span> Jika <span class="math inline" data-o006-math-id="O006-PSU-001-M0230">\(X_1, X_2, \ldots, X_n\)</span> merupakan peubah-peubah acak normal yang saling bebas dengan rataan <span class="math inline" data-o006-math-id="O006-PSU-001-M0231">\(\mu_1, \mu_2, \ldots, \mu_n\)</span> dan varians <span class="math inline" data-o006-math-id="O006-PSU-001-M0232">\(\sigma^2_1, \sigma^2_2, \ldots, \sigma^2_n\)</span>, berturut-turut, maka kombinasi linearnya: <span class="math display" data-o006-math-id="O006-PSU-001-M0233">\[\begin{aligned}
         Y=\sum_{i=1}^n c_iX_i
-    \end{aligned}\]</span> mengikuti distribusi Normal: <span class="math display">\[\begin{aligned}
+    \end{aligned}\]</span> mengikuti distribusi Normal: <span class="math display" data-o006-math-id="O006-PSU-001-M0234">\[\begin{aligned}
         N\left(\sum_{i=1}^n c_i\mu_i, \sum_{i=1}^n c_i^2\sigma^2_i\right)
     \end{aligned}\]</span></p>
 </div>
@@ -433,9 +433,9 @@ Maka <span class="math inline">\(Y=\sum_{i=1}^n X_i\sim \Gamma(\sum_{i=1}^n \alp
 </div>
 <div class="callout-body-container" data-o006-id="O006-PSU-001-U0234">
 <div class="theorem corollary" data-o006-id="O006-PSU-001-U0235" id="cor-l11">
-<p data-o006-id="O006-PSU-001-U0236"><span class="theorem-title"><strong>Akibat 1</strong></span> Jika <span class="math inline">\(X_1, X_2, \ldots, X_n\)</span> merupakan pengamatan dari sampel acak berukuran <span class="math inline">\(n\)</span> dari populasi <span class="math inline">\(N(\mu, \sigma^2)\)</span> , maka rata-rata sampelnya: <span class="math display">\[\begin{aligned}
+<p data-o006-id="O006-PSU-001-U0236"><span class="theorem-title"><strong>Akibat 1</strong></span> Jika <span class="math inline" data-o006-math-id="O006-PSU-001-M0235">\(X_1, X_2, \ldots, X_n\)</span> merupakan pengamatan dari sampel acak berukuran <span class="math inline" data-o006-math-id="O006-PSU-001-M0236">\(n\)</span> dari populasi <span class="math inline" data-o006-math-id="O006-PSU-001-M0237">\(N(\mu, \sigma^2)\)</span> , maka rata-rata sampelnya: <span class="math display" data-o006-math-id="O006-PSU-001-M0238">\[\begin{aligned}
         \bar{X}=\frac{1}{n}\sum_{i=1}^n X_i
-    \end{aligned}\]</span> berdistribusi normal dengan rataan <span class="math inline">\(\mu\)</span> dan varians <span class="math inline">\(\frac{\sigma^2}{n}\)</span>.</p>
+    \end{aligned}\]</span> berdistribusi normal dengan rataan <span class="math inline" data-o006-math-id="O006-PSU-001-M0239">\(\mu\)</span> dan varians <span class="math inline" data-o006-math-id="O006-PSU-001-M0240">\(\frac{\sigma^2}{n}\)</span>.</p>
 </div>
 </div>
 </div>
@@ -447,17 +447,17 @@ Maka <span class="math inline">\(Y=\sum_{i=1}^n X_i\sim \Gamma(\sum_{i=1}^n \alp
 </div>
 <div class="callout-body-container" data-o006-id="O006-PSU-001-U0240">
 <div class="theorem" data-o006-id="O006-PSU-001-U0241" id="thm-l17">
-<p data-o006-id="O006-PSU-001-U0242"><span class="theorem-title"><strong>Teorema 8</strong></span> Misalkan <span class="math inline">\(X_1, X_2, \ldots, X_n\)</span> merupakan pengamatan dari sampel acak berukuran <span class="math inline">\(n\)</span> dari distribusi Normal <span class="math inline">\(N(\mu, \sigma^2)\)</span>. Misalkan <span class="math inline">\(\bar{X}=\frac{1}{n}\sum_{i=1}^n X_i\)</span> dan <span class="math inline">\(S^2=\frac{1}{n-1}\sum_{i=1}^n (X_i-\bar{X})^2\)</span> masing-masing adalah rata-rata sampel dan varians sampel. Maka, <span class="math inline">\(\bar{X}\)</span> dan <span class="math inline">\(S^2\)</span> saling bebas. Selain itu, <span class="math display">\[\begin{aligned}
+<p data-o006-id="O006-PSU-001-U0242"><span class="theorem-title"><strong>Teorema 8</strong></span> Misalkan <span class="math inline" data-o006-math-id="O006-PSU-001-M0241">\(X_1, X_2, \ldots, X_n\)</span> merupakan pengamatan dari sampel acak berukuran <span class="math inline" data-o006-math-id="O006-PSU-001-M0242">\(n\)</span> dari distribusi Normal <span class="math inline" data-o006-math-id="O006-PSU-001-M0243">\(N(\mu, \sigma^2)\)</span>. Misalkan <span class="math inline" data-o006-math-id="O006-PSU-001-M0244">\(\bar{X}=\frac{1}{n}\sum_{i=1}^n X_i\)</span> dan <span class="math inline" data-o006-math-id="O006-PSU-001-M0245">\(S^2=\frac{1}{n-1}\sum_{i=1}^n (X_i-\bar{X})^2\)</span> masing-masing adalah rata-rata sampel dan varians sampel. Maka, <span class="math inline" data-o006-math-id="O006-PSU-001-M0246">\(\bar{X}\)</span> dan <span class="math inline" data-o006-math-id="O006-PSU-001-M0247">\(S^2\)</span> saling bebas. Selain itu, <span class="math display" data-o006-math-id="O006-PSU-001-M0248">\[\begin{aligned}
         \frac{(n-1)S^2}{\sigma^2}
-    \end{aligned}\]</span> mengikuti distribusi khi-kuadrat dengan <span class="math inline">\(n-1\)</span> derajat kebebasan.</p>
+    \end{aligned}\]</span> mengikuti distribusi khi-kuadrat dengan <span class="math inline" data-o006-math-id="O006-PSU-001-M0249">\(n-1\)</span> derajat kebebasan.</p>
 </div>
 </div>
 </div>
 </div>
 <div class="ms-3 theorem definition" data-o006-id="O006-PSU-001-U0243" id="def-noname">
-<p data-o006-id="O006-PSU-001-U0244"><span class="theorem-title"><strong>Def. 16 (Distribusi t)</strong></span> Jika <span class="math inline">\(Z\sim N(0,1)\)</span> dan <span class="math inline">\(U\sim \chi^2(r)\)</span> saling bebas, maka peubah acak <span class="math display">\[\begin{aligned}
+<p data-o006-id="O006-PSU-001-U0244"><span class="theorem-title"><strong>Def. 16 (Distribusi t)</strong></span> Jika <span class="math inline" data-o006-math-id="O006-PSU-001-M0250">\(Z\sim N(0,1)\)</span> dan <span class="math inline" data-o006-math-id="O006-PSU-001-M0251">\(U\sim \chi^2(r)\)</span> saling bebas, maka peubah acak <span class="math display" data-o006-math-id="O006-PSU-001-M0252">\[\begin{aligned}
 T=\frac{Z}{\sqrt{\frac{U}{r}}}
-\end{aligned}\]</span> mengikuti distribusi <span class="math inline">\(t\)</span>dengan <span class="math inline">\(r\)</span> derajat kebebasan.<br/>
+\end{aligned}\]</span> mengikuti distribusi <span class="math inline" data-o006-math-id="O006-PSU-001-M0253">\(t\)</span>dengan <span class="math inline" data-o006-math-id="O006-PSU-001-M0254">\(r\)</span> derajat kebebasan.<br/>
 </p>
 </div>
 <div class="callout callout-style-simple callout-note no-icon" data-o006-id="O006-PSU-001-U0245">
@@ -467,11 +467,11 @@ T=\frac{Z}{\sqrt{\frac{U}{r}}}
 </div>
 <div class="callout-body-container" data-o006-id="O006-PSU-001-U0248">
 <div class="theorem" data-o006-id="O006-PSU-001-U0249" id="thm-clt">
-<p data-o006-id="O006-PSU-001-U0250"><span class="theorem-title"><strong>Teorema 9 (Teorema Limit Pusat)</strong></span> Misalkan <span class="math inline">\(X_1, X_2, \ldots, X_n\)</span> adalah sampel acak dari suatu distribusi dengan rataan hingga <span class="math inline">\(\mu\)</span> dan varians hingga <span class="math inline">\(\sigma^2\)</span>. Jika ukuran sampel, <span class="math inline">\(n\)</span>, <em>cukup besar</em>, maka:</p>
+<p data-o006-id="O006-PSU-001-U0250"><span class="theorem-title"><strong>Teorema 9 (Teorema Limit Pusat)</strong></span> Misalkan <span class="math inline" data-o006-math-id="O006-PSU-001-M0255">\(X_1, X_2, \ldots, X_n\)</span> adalah sampel acak dari suatu distribusi dengan rataan hingga <span class="math inline" data-o006-math-id="O006-PSU-001-M0256">\(\mu\)</span> dan varians hingga <span class="math inline" data-o006-math-id="O006-PSU-001-M0257">\(\sigma^2\)</span>. Jika ukuran sampel, <span class="math inline" data-o006-math-id="O006-PSU-001-M0258">\(n\)</span>, <em>cukup besar</em>, maka:</p>
 <ul data-o006-id="O006-PSU-001-U0251">
-<li data-o006-id="O006-PSU-001-U0252"><p data-o006-id="O006-PSU-001-U0253">rata-rata sampel <span class="math inline">\(\bar{X}\)</span> mengikuti distribusi normal secara hampiran</p></li>
-<li data-o006-id="O006-PSU-001-U0254"><p data-o006-id="O006-PSU-001-U0255">dengan rataan <span class="math inline">\(\mu_{\bar{X}}=\mu\)</span></p></li>
-<li data-o006-id="O006-PSU-001-U0256"><p data-o006-id="O006-PSU-001-U0257">dan varians <span class="math inline">\(\sigma^2_{\bar{X}}=\frac{\sigma^2}{n}\)</span>.</p></li>
+<li data-o006-id="O006-PSU-001-U0252"><p data-o006-id="O006-PSU-001-U0253">rata-rata sampel <span class="math inline" data-o006-math-id="O006-PSU-001-M0259">\(\bar{X}\)</span> mengikuti distribusi normal secara hampiran</p></li>
+<li data-o006-id="O006-PSU-001-U0254"><p data-o006-id="O006-PSU-001-U0255">dengan rataan <span class="math inline" data-o006-math-id="O006-PSU-001-M0260">\(\mu_{\bar{X}}=\mu\)</span></p></li>
+<li data-o006-id="O006-PSU-001-U0256"><p data-o006-id="O006-PSU-001-U0257">dan varians <span class="math inline" data-o006-math-id="O006-PSU-001-M0261">\(\sigma^2_{\bar{X}}=\frac{\sigma^2}{n}\)</span>.</p></li>
 </ul>
 </div>
 </div>
@@ -485,7 +485,7 @@ T=\frac{Z}{\sqrt{\frac{U}{r}}}
 <p data-o006-id="O006-PSU-001-U0260">Pada bagian ini, kami menyajikan beberapa contoh untuk membantu Anda mengingat kembali materi dari mata kuliah Pengantar Peluang.</p>
 <div class="theorem example" data-o006-id="O006-PSU-001-U0261" id="exm-probility1">
 <p data-o006-id="O006-PSU-001-U0262"><span class="theorem-title"><strong>Contoh 1</strong></span> Seorang perempuan yang semula diperkirakan memiliki risiko kanker sebesar 1% memperoleh hasil mamogram positif. Mamogram mengklasifikasikan dengan tepat sekitar 80% tumor ganas dan 90% tumor jinak. Berapakah peluang perempuan tersebut mengidap kanker jika diketahui hasil mamogramnya positif?</p>
-<p data-o006-id="O006-PSU-001-U0263"><strong>Penyelesaian</strong> Misalkan kejadian <span class="math inline">\(C\)</span> menyatakan kanker dan kejadian <span class="math inline">\(P\)</span> menyatakan hasil positif. Kita mengetahui: <span class="math inline">\(P(C)=0.01\)</span> dan dengan demikian <span class="math inline">\(P(C^\prime)=1-P(C)=1-0.01=0.99\)</span>. Selain itu, <span class="math inline">\(P(P|C)=0.8\)</span> dan <span class="math inline">\(P(P^\prime|C^\prime)=0.9\)</span>, yang menyiratkan <span class="math inline">\(P(P|C^\prime)=0.1\)</span>. Dengan menggabungkan semuanya, kita memperoleh: <span class="math display">\[P(C|P)=\frac{P(P|C)P(C)}{P(P|C)P(C)+P(P|C^\prime)P(C^\prime)}=\frac{0.8(0.01)}{0.8(0.01)+0.1(0.99)}=0.075\]</span></p>
+<p data-o006-id="O006-PSU-001-U0263"><strong>Penyelesaian</strong> Misalkan kejadian <span class="math inline" data-o006-math-id="O006-PSU-001-M0262">\(C\)</span> menyatakan kanker dan kejadian <span class="math inline" data-o006-math-id="O006-PSU-001-M0263">\(P\)</span> menyatakan hasil positif. Kita mengetahui: <span class="math inline" data-o006-math-id="O006-PSU-001-M0264">\(P(C)=0.01\)</span> dan dengan demikian <span class="math inline" data-o006-math-id="O006-PSU-001-M0265">\(P(C^\prime)=1-P(C)=1-0.01=0.99\)</span>. Selain itu, <span class="math inline" data-o006-math-id="O006-PSU-001-M0266">\(P(P|C)=0.8\)</span> dan <span class="math inline" data-o006-math-id="O006-PSU-001-M0267">\(P(P^\prime|C^\prime)=0.9\)</span>, yang menyiratkan <span class="math inline" data-o006-math-id="O006-PSU-001-M0268">\(P(P|C^\prime)=0.1\)</span>. Dengan menggabungkan semuanya, kita memperoleh: <span class="math display" data-o006-math-id="O006-PSU-001-M0269">\[P(C|P)=\frac{P(P|C)P(C)}{P(P|C)P(C)+P(P|C^\prime)P(C^\prime)}=\frac{0.8(0.01)}{0.8(0.01)+0.1(0.99)}=0.075\]</span></p>
 </div>
 <div class="theorem example" data-o006-id="O006-PSU-001-U0264" id="exm-normal1">
 <p data-o006-id="O006-PSU-001-U0265"><span class="theorem-title"><strong>Contoh 2</strong></span> Ketika Anda memasukkan uang ke mesin kopi di Student Center, sebuah gelas kertas turun lalu diisi kopi. Anda seharusnya memperoleh 8 oz kopi. Namun, banyaknya kopi yang benar-benar dikeluarkan merupakan peubah acak normal dengan nilai harapan yang sama dengan setelan mesin dan varians sebesar 0,0625 oz.</p>
@@ -493,7 +493,7 @@ T=\frac{Z}{\sqrt{\frac{U}{r}}}
 <details class="solution" data-o006-id="O006-PSU-001-U0268" data-source-control-id="collapseExample1" id="collapseExample1"><summary data-o006-id="O006-PSU-001-U0267" data-source-tag="button">Penyelesaian</summary>
 <div class="card" data-o006-id="O006-PSU-001-U0269">
 <div class="card-body bg-light ms-0 mb-0 pt-2" data-o006-id="O006-PSU-001-U0270">
-<p data-o006-id="O006-PSU-001-U0271"><span class="math display">\[\begin{align*}
+<p data-o006-id="O006-PSU-001-U0271"><span class="math display" data-o006-math-id="O006-PSU-001-M0270">\[\begin{align*}
                 &amp; P(X\le 8)=P\left(Z\le \frac{8-\mu}{\sqrt{0.0625}}\right)=0.02, \qquad \text{table value -2.0537}\\
                 &amp; -2.0537= \frac{8-\mu}{\sqrt{0.0625}}\qquad \Rightarrow \mu=8.513425
             \end{align*}\]</span></p>
@@ -503,35 +503,35 @@ T=\frac{Z}{\sqrt{\frac{U}{r}}}
 
 </div>
 <div class="theorem example" data-o006-id="O006-PSU-001-U0272" id="exm-continuous">
-<p data-o006-id="O006-PSU-001-U0273"><span class="theorem-title"><strong>Contoh 3</strong></span> Misalkan peubah acak <span class="math inline">\(X\)</span> memiliki fungsi kepadatan peluang (pdf) berikut <span class="math display">\[\begin{align*}
+<p data-o006-id="O006-PSU-001-U0273"><span class="theorem-title"><strong>Contoh 3</strong></span> Misalkan peubah acak <span class="math inline" data-o006-math-id="O006-PSU-001-M0271">\(X\)</span> memiliki fungsi kepadatan peluang (pdf) berikut <span class="math display" data-o006-math-id="O006-PSU-001-M0272">\[\begin{align*}
             f(x)=\begin{cases}
                 cx^2, &amp; -1\le x&lt;0\\
                 cx, &amp; 0\le x\le 2\\
                 0, &amp; \text{otherwise}
             \end{cases}
-        \end{align*}\]</span> dengan <span class="math inline">\(c\)</span> merupakan suatu konstanta.</p>
+        \end{align*}\]</span> dengan <span class="math inline" data-o006-math-id="O006-PSU-001-M0273">\(c\)</span> merupakan suatu konstanta.</p>
 <ol data-o006-id="O006-PSU-001-U0274" type="1">
-<li data-o006-id="O006-PSU-001-U0275"><p data-o006-id="O006-PSU-001-U0276">Tentukan nilai <span class="math inline">\(c\)</span> agar fungsi di atas merupakan fungsi kepadatan peluang yang sah.</p></li>
+<li data-o006-id="O006-PSU-001-U0275"><p data-o006-id="O006-PSU-001-U0276">Tentukan nilai <span class="math inline" data-o006-math-id="O006-PSU-001-M0274">\(c\)</span> agar fungsi di atas merupakan fungsi kepadatan peluang yang sah.</p></li>
 <li data-o006-id="O006-PSU-001-U0277"><p data-o006-id="O006-PSU-001-U0278">Tentukan nilai harapan peubah acak tersebut.</p></li>
-<li data-o006-id="O006-PSU-001-U0279"><p data-o006-id="O006-PSU-001-U0280">Tentukan fungsi distribusi kumulatif (cdf) dari <span class="math inline">\(X\)</span>.</p></li>
+<li data-o006-id="O006-PSU-001-U0279"><p data-o006-id="O006-PSU-001-U0280">Tentukan fungsi distribusi kumulatif (cdf) dari <span class="math inline" data-o006-math-id="O006-PSU-001-M0275">\(X\)</span>.</p></li>
 <li data-o006-id="O006-PSU-001-U0281"><p data-o006-id="O006-PSU-001-U0282">Tentukan median peubah acak tersebut.</p></li>
 </ol>
 <details class="solution" data-o006-id="O006-PSU-001-U0284" data-source-control-id="collapseExample2" id="collapseExample2"><summary data-o006-id="O006-PSU-001-U0283" data-source-tag="button">Penyelesaian</summary>
 <div class="card" data-o006-id="O006-PSU-001-U0285">
 <div class="card-body bg-light ms-0 mb-0 pt-2" data-o006-id="O006-PSU-001-U0286">
 <ol data-o006-id="O006-PSU-001-U0287" type="1">
-<li data-o006-id="O006-PSU-001-U0288"><p data-o006-id="O006-PSU-001-U0289"><span class="math inline">\(\begin{align*}&amp; \frac{1}{c}=\int_{-1}^0x^2\;dx+\int_0^2x\; dx=\frac{1}{3}x^3\mid_{-1}^0+\frac{1}{2}x^2\mid_0^2=\frac{1}{3}+2=\frac{7}{3}, \qquad c=\frac{3}{7} \end{align*}\)</span><br/>
+<li data-o006-id="O006-PSU-001-U0288"><p data-o006-id="O006-PSU-001-U0289"><span class="math inline" data-o006-math-id="O006-PSU-001-M0276">\(\begin{align*}&amp; \frac{1}{c}=\int_{-1}^0x^2\;dx+\int_0^2x\; dx=\frac{1}{3}x^3\mid_{-1}^0+\frac{1}{2}x^2\mid_0^2=\frac{1}{3}+2=\frac{7}{3}, \qquad c=\frac{3}{7} \end{align*}\)</span><br/>
 <br/></p></li>
-<li data-o006-id="O006-PSU-001-U0290"><p data-o006-id="O006-PSU-001-U0291"><span class="math inline">\(\begin{align*} E(X)=\int_{-1}^0\frac{3}{7}x^3\; dx+\int_0^2\frac{3}{7}x^2\; dx=\frac{3}{28}x^4\mid_{-1}^0+\frac{1}{7}x^3\mid_0^2=-\frac{3}{28}+\frac{8}{7}=\frac{29}{28} \end{align*}\)</span><br/>
+<li data-o006-id="O006-PSU-001-U0290"><p data-o006-id="O006-PSU-001-U0291"><span class="math inline" data-o006-math-id="O006-PSU-001-M0277">\(\begin{align*} E(X)=\int_{-1}^0\frac{3}{7}x^3\; dx+\int_0^2\frac{3}{7}x^2\; dx=\frac{3}{28}x^4\mid_{-1}^0+\frac{1}{7}x^3\mid_0^2=-\frac{3}{28}+\frac{8}{7}=\frac{29}{28} \end{align*}\)</span><br/>
 <br/></p></li>
-<li data-o006-id="O006-PSU-001-U0292"><p data-o006-id="O006-PSU-001-U0293"><span class="math inline">\(\begin{align*}
+<li data-o006-id="O006-PSU-001-U0292"><p data-o006-id="O006-PSU-001-U0293"><span class="math inline" data-o006-math-id="O006-PSU-001-M0278">\(\begin{align*}
                     F(x)=\begin{cases}
                         \int_{-1}^x\frac{3}{7}x^2dx=\frac{1}{7}x^3\mid_{-1}^x=\frac{1}{7}(x^3+1), &amp; -1\le x&lt;0\\
                         \frac{1}{7}+\int_0^x \frac{3}{7}xdx=\frac{1}{7}+\frac{3}{14}x^2, &amp; 0\le x&lt;2\\
                         1, &amp; x\ge 2
                     \end{cases}
                 \end{align*}\)</span> <br/></p></li>
-<li data-o006-id="O006-PSU-001-U0294"><p data-o006-id="O006-PSU-001-U0295"><span class="math inline">\(\begin{align*}
+<li data-o006-id="O006-PSU-001-U0294"><p data-o006-id="O006-PSU-001-U0295"><span class="math inline" data-o006-math-id="O006-PSU-001-M0279">\(\begin{align*}
                     0.5=\frac{1}{7}+\frac{3}{14}x^2, \qquad \Rightarrow \frac{5}{14}=\frac{3}{14}x^2, \qquad \Rightarrow x=\sqrt{\frac{5}{3}}\approx 1.29
                 \end{align*}\)</span></p></li>
 </ol>
@@ -541,31 +541,31 @@ T=\frac{Z}{\sqrt{\frac{U}{r}}}
 
 </div>
 <div class="theorem example" data-o006-id="O006-PSU-001-U0296" id="exm-bivariate_cont">
-<p data-o006-id="O006-PSU-001-U0297"><span class="theorem-title"><strong>Contoh 4</strong></span> Masa pakai (dalam bulan) dua komponen sebuah mesin memiliki fungsi kepadatan peluang bersama <span class="math display">\[\begin{align*}
+<p data-o006-id="O006-PSU-001-U0297"><span class="theorem-title"><strong>Contoh 4</strong></span> Masa pakai (dalam bulan) dua komponen sebuah mesin memiliki fungsi kepadatan peluang bersama <span class="math display" data-o006-math-id="O006-PSU-001-M0280">\[\begin{align*}
             f(x,y)=c(50-x-y), \qquad 0&lt;x&lt;50-y&lt;50
         \end{align*}\]</span> dan bernilai nol untuk kasus lainnya.</p>
 <ol data-o006-id="O006-PSU-001-U0298" type="1">
-<li data-o006-id="O006-PSU-001-U0299"><p data-o006-id="O006-PSU-001-U0300">Tentukan konstanta <span class="math inline">\(c\)</span>, agar <span class="math inline">\(f(x,y)\)</span> merupakan fungsi kepadatan peluang bersama yang sah. Anda boleh membiarkan konstanta tersebut dalam bentuk <span class="math inline">\(c\)</span>.</p></li>
+<li data-o006-id="O006-PSU-001-U0299"><p data-o006-id="O006-PSU-001-U0300">Tentukan konstanta <span class="math inline" data-o006-math-id="O006-PSU-001-M0281">\(c\)</span>, agar <span class="math inline" data-o006-math-id="O006-PSU-001-M0282">\(f(x,y)\)</span> merupakan fungsi kepadatan peluang bersama yang sah. Anda boleh membiarkan konstanta tersebut dalam bentuk <span class="math inline" data-o006-math-id="O006-PSU-001-M0283">\(c\)</span>.</p></li>
 <li data-o006-id="O006-PSU-001-U0301"><p data-o006-id="O006-PSU-001-U0302">Tentukan distribusi marginalnya.</p></li>
-<li data-o006-id="O006-PSU-001-U0303"><p data-o006-id="O006-PSU-001-U0304">Tentukan distribusi bersyarat dari <span class="math inline">\(X\)</span> jika diketahui <span class="math inline">\(Y=y\)</span>. Jika memudahkan, Anda boleh membiarkan konstanta tersebut dalam bentuk <span class="math inline">\(c\)</span>.</p></li>
+<li data-o006-id="O006-PSU-001-U0303"><p data-o006-id="O006-PSU-001-U0304">Tentukan distribusi bersyarat dari <span class="math inline" data-o006-math-id="O006-PSU-001-M0284">\(X\)</span> jika diketahui <span class="math inline" data-o006-math-id="O006-PSU-001-M0285">\(Y=y\)</span>. Jika memudahkan, Anda boleh membiarkan konstanta tersebut dalam bentuk <span class="math inline" data-o006-math-id="O006-PSU-001-M0286">\(c\)</span>.</p></li>
 </ol>
 <details class="solution" data-o006-id="O006-PSU-001-U0306" data-source-control-id="collapseExample3" id="collapseExample3"><summary data-o006-id="O006-PSU-001-U0305" data-source-tag="button">Penyelesaian</summary>
 <div class="card" data-o006-id="O006-PSU-001-U0307">
 <div class="card-body bg-light ms-0 mb-0 pt-2" data-o006-id="O006-PSU-001-U0308">
 <ol data-o006-id="O006-PSU-001-U0309" type="1">
-<li data-o006-id="O006-PSU-001-U0310"><span class="math inline">\(\begin{align*}\
+<li data-o006-id="O006-PSU-001-U0310"><span class="math inline" data-o006-math-id="O006-PSU-001-M0287">\(\begin{align*}\
                      &amp; \frac{1}{c}=\int_0^{50}\int_0^{50-y} 50-x-y\;dx\;dy=\int_0^{50} \left[50x-\frac{1}{2}x^2-yx\mid_0^{50-y}\right] dy\\
                      &amp; =\int_0^{50} \frac{1}{2}y^2-50y+1250dy=\frac{1}{6}y^3-25y^2+1250y\mid_0^{50}=\frac{125000}{6}\\
                      &amp; \Rightarrow c=\frac{6}{125000}
                  \end{align*}\)</span><br/>
 </li>
 </ol>
-<p data-o006-id="O006-PSU-001-U0311"><br/> 2. <span class="math inline">\(\begin{align*}\
+<p data-o006-id="O006-PSU-001-U0311"><br/> 2. <span class="math inline" data-o006-math-id="O006-PSU-001-M0288">\(\begin{align*}\
                         &amp; f(x)=c\int_0^{50-x} 50-x-y\;dy=\frac{c}{2}(x-50)^2, \qquad 0\le x\le 50\\
                         &amp; f(y)=c\int_0^{50-y} 50-x-y\;dx=\frac{c}{2}(y-50)^2, \qquad 0\le y\le 50
                     \end{align*}\)</span><br/>
 </p>
-<p data-o006-id="O006-PSU-001-U0312"><br/> 3. <span class="math inline">\(\begin{align*}\
+<p data-o006-id="O006-PSU-001-U0312"><br/> 3. <span class="math inline" data-o006-math-id="O006-PSU-001-M0289">\(\begin{align*}\
                         f(x|y)=\frac{f(x,y)}{f(y)}=\frac{c(50-x-y)}{\frac{c}{2}(y-50)^2}=\frac{2(50-x-y)}{(y-50)^2}, \qquad 0&lt;x&lt;50-y
                     \end{align*}\)</span></p>
 </div>
@@ -574,39 +574,39 @@ T=\frac{Z}{\sqrt{\frac{U}{r}}}
 
 </div>
 <div class="theorem example" data-o006-id="O006-PSU-001-U0313" id="exm-cdf">
-<p data-o006-id="O006-PSU-001-U0314"><span class="theorem-title"><strong>Contoh 5</strong></span> Misalkan cdf dari peubah acak diskret <span class="math inline">\(X\)</span> adalah <span class="math display">\[\begin{aligned}
+<p data-o006-id="O006-PSU-001-U0314"><span class="theorem-title"><strong>Contoh 5</strong></span> Misalkan cdf dari peubah acak diskret <span class="math inline" data-o006-math-id="O006-PSU-001-M0290">\(X\)</span> adalah <span class="math display" data-o006-math-id="O006-PSU-001-M0291">\[\begin{aligned}
         F(x)=\frac{x(x+1)}{20}, \qquad x=1,2,3,4.
     \end{aligned}\]</span></p>
 <ol data-o006-id="O006-PSU-001-U0315" type="1">
-<li data-o006-id="O006-PSU-001-U0316"><p data-o006-id="O006-PSU-001-U0317">Tentukan fungsi massa peluang (pmf) dari <span class="math inline">\(X\)</span>. Anda boleh menyajikannya dalam bentuk tabel.</p></li>
-<li data-o006-id="O006-PSU-001-U0318"><p data-o006-id="O006-PSU-001-U0319">Tentukan persentil <span class="math inline">\(30^{th}\)</span> dari <span class="math inline">\(X\)</span>.</p></li>
-<li data-o006-id="O006-PSU-001-U0320"><p data-o006-id="O006-PSU-001-U0321">Tentukan nilai harapan dari <span class="math inline">\(X\)</span>.</p></li>
-<li data-o006-id="O006-PSU-001-U0322"><p data-o006-id="O006-PSU-001-U0323">Tentukan simpangan baku dari <span class="math inline">\(X\)</span>.</p></li>
+<li data-o006-id="O006-PSU-001-U0316"><p data-o006-id="O006-PSU-001-U0317">Tentukan fungsi massa peluang (pmf) dari <span class="math inline" data-o006-math-id="O006-PSU-001-M0292">\(X\)</span>. Anda boleh menyajikannya dalam bentuk tabel.</p></li>
+<li data-o006-id="O006-PSU-001-U0318"><p data-o006-id="O006-PSU-001-U0319">Tentukan persentil <span class="math inline" data-o006-math-id="O006-PSU-001-M0293">\(30^{th}\)</span> dari <span class="math inline" data-o006-math-id="O006-PSU-001-M0294">\(X\)</span>.</p></li>
+<li data-o006-id="O006-PSU-001-U0320"><p data-o006-id="O006-PSU-001-U0321">Tentukan nilai harapan dari <span class="math inline" data-o006-math-id="O006-PSU-001-M0295">\(X\)</span>.</p></li>
+<li data-o006-id="O006-PSU-001-U0322"><p data-o006-id="O006-PSU-001-U0323">Tentukan simpangan baku dari <span class="math inline" data-o006-math-id="O006-PSU-001-M0296">\(X\)</span>.</p></li>
 </ol>
 <details class="solution" data-o006-id="O006-PSU-001-U0325" data-source-control-id="collapseExample4" id="collapseExample4"><summary data-o006-id="O006-PSU-001-U0324" data-source-tag="button">Penyelesaian</summary>
 <div class="card" data-o006-id="O006-PSU-001-U0326">
 <div class="card-body bg-light ms-0 mb-0 pt-2" data-o006-id="O006-PSU-001-U0327">
 <ol data-o006-id="O006-PSU-001-U0328" type="1">
-<li data-o006-id="O006-PSU-001-U0329"><p data-o006-id="O006-PSU-001-U0330">Ingat bahwa cdf didefinisikan sebagai <span class="math inline">\(F(x)=P(X\le x)\)</span>. Mulailah dengan <span class="math inline">\(x=1\)</span>. Kita mengetahui <span class="math inline">\(F(1)=P(X\le 1)\)</span>. Karena tidak ada nilai yang lebih kecil dari 1, diperoleh <span class="math display">\[\begin{aligned}
+<li data-o006-id="O006-PSU-001-U0329"><p data-o006-id="O006-PSU-001-U0330">Ingat bahwa cdf didefinisikan sebagai <span class="math inline" data-o006-math-id="O006-PSU-001-M0297">\(F(x)=P(X\le x)\)</span>. Mulailah dengan <span class="math inline" data-o006-math-id="O006-PSU-001-M0298">\(x=1\)</span>. Kita mengetahui <span class="math inline" data-o006-math-id="O006-PSU-001-M0299">\(F(1)=P(X\le 1)\)</span>. Karena tidak ada nilai yang lebih kecil dari 1, diperoleh <span class="math display" data-o006-math-id="O006-PSU-001-M0300">\[\begin{aligned}
                 &amp; F(1)=P(X\le 1)=P(X=1)=\frac{1(2)}{20}=\frac{2}{20}\\
                 &amp; f(1)=P(X=1)=\frac{1}{10}
-            \end{aligned}\]</span> Selanjutnya, tinjau <span class="math inline">\(x=2\)</span>. <span class="math display">\[\begin{aligned}
+            \end{aligned}\]</span> Selanjutnya, tinjau <span class="math inline" data-o006-math-id="O006-PSU-001-M0301">\(x=2\)</span>. <span class="math display" data-o006-math-id="O006-PSU-001-M0302">\[\begin{aligned}
                 &amp; F(2)=P(X\le 2)=\frac{2(3)}{20}=\frac{3}{10}=0.3
-            \end{aligned}\]</span> Kita juga mengetahui bahwa <span class="math display">\[\begin{aligned}
+            \end{aligned}\]</span> Kita juga mengetahui bahwa <span class="math display" data-o006-math-id="O006-PSU-001-M0303">\[\begin{aligned}
                 &amp; F(2)=P(X\le 2)=P(X=1)+P(X=2)
             \end{aligned}\]</span></p>
 <p data-o006-id="O006-PSU-001-U0331" data-source-tag="pre"><span data-o006-id="O006-PSU-001-U0332" data-source-tag="code">Oleh karena itu,</span></p>
-<span class="math display">\[\begin{aligned}
+<span class="math display" data-o006-math-id="O006-PSU-001-M0304">\[\begin{aligned}
 &amp; 0.3=P(X=1)+P(X=2)\\
 &amp; \Rightarrow P(X=2)=0.3-P(X=1)=0.3-0.1=0.2
 
 \end{aligned}\]</span>
-<p data-o006-id="O006-PSU-001-U0333">Dengan demikian, <span class="math inline">\(f(2)=P(X=2)=0.2\)</span>. Dengan cara yang sama, kita dapat melanjutkan untuk menentukan pmf bagi nilai-nilai <span class="math inline">\(x\)</span>lainnya. Bentuk tabel pmf dari <span class="math inline">\(X\)</span> adalah:<br/>
+<p data-o006-id="O006-PSU-001-U0333">Dengan demikian, <span class="math inline" data-o006-math-id="O006-PSU-001-M0305">\(f(2)=P(X=2)=0.2\)</span>. Dengan cara yang sama, kita dapat melanjutkan untuk menentukan pmf bagi nilai-nilai <span class="math inline" data-o006-math-id="O006-PSU-001-M0306">\(x\)</span>lainnya. Bentuk tabel pmf dari <span class="math inline" data-o006-math-id="O006-PSU-001-M0307">\(X\)</span> adalah:<br/>
 </p>
 <table class="w-auto table-sm mx-auto row-header small caption-top table" data-o006-id="O006-PSU-001-U0334">
 <thead data-o006-id="O006-PSU-001-U0335">
 <tr class="header" data-o006-id="O006-PSU-001-U0336">
-<th data-o006-id="O006-PSU-001-U0337" style="text-align: center;"><span class="math inline">\(x\)</span></th>
+<th data-o006-id="O006-PSU-001-U0337" style="text-align: center;"><span class="math inline" data-o006-math-id="O006-PSU-001-M0308">\(x\)</span></th>
 <th data-o006-id="O006-PSU-001-U0338" style="text-align: center;">1</th>
 <th data-o006-id="O006-PSU-001-U0339" style="text-align: center;">2</th>
 <th data-o006-id="O006-PSU-001-U0340" style="text-align: center;">3</th>
@@ -616,7 +616,7 @@ T=\frac{Z}{\sqrt{\frac{U}{r}}}
 </thead>
 <tbody data-o006-id="O006-PSU-001-U0343">
 <tr class="odd" data-o006-id="O006-PSU-001-U0344">
-<td data-o006-id="O006-PSU-001-U0345" style="text-align: center;"><span class="math inline">\(f(x)\)</span></td>
+<td data-o006-id="O006-PSU-001-U0345" style="text-align: center;"><span class="math inline" data-o006-math-id="O006-PSU-001-M0309">\(f(x)\)</span></td>
 <td data-o006-id="O006-PSU-001-U0346" style="text-align: center;">0.1</td>
 <td data-o006-id="O006-PSU-001-U0347" style="text-align: center;">0.2</td>
 <td data-o006-id="O006-PSU-001-U0348" style="text-align: center;">0.3</td>
@@ -625,14 +625,14 @@ T=\frac{Z}{\sqrt{\frac{U}{r}}}
 </tr>
 </tbody>
 </table></li>
-<li data-o006-id="O006-PSU-001-U0351"><p data-o006-id="O006-PSU-001-U0352">Tentukan persentil <span class="math inline">\(30^{th}\)</span> dari <span class="math inline">\(X\)</span>. <span class="math display">\[\begin{aligned}
+<li data-o006-id="O006-PSU-001-U0351"><p data-o006-id="O006-PSU-001-U0352">Tentukan persentil <span class="math inline" data-o006-math-id="O006-PSU-001-M0310">\(30^{th}\)</span> dari <span class="math inline" data-o006-math-id="O006-PSU-001-M0311">\(X\)</span>. <span class="math display" data-o006-math-id="O006-PSU-001-M0312">\[\begin{aligned}
                     &amp; 0.3=\frac{x(x+1)}{20}\Rightarrow 6=x^2+x\Rightarrow x^2+x-6=0\\
                     &amp; =(x+3)(x-2)=0\Rightarrow x=2
                  \end{aligned}\]</span></p></li>
-<li data-o006-id="O006-PSU-001-U0353"><p data-o006-id="O006-PSU-001-U0354">Tentukan nilai harapan dari <span class="math inline">\(X\)</span>. <span class="math display">\[\begin{aligned}
+<li data-o006-id="O006-PSU-001-U0353"><p data-o006-id="O006-PSU-001-U0354">Tentukan nilai harapan dari <span class="math inline" data-o006-math-id="O006-PSU-001-M0313">\(X\)</span>. <span class="math display" data-o006-math-id="O006-PSU-001-M0314">\[\begin{aligned}
                     E(X)=0\left(0\right)+1\left(\frac{2}{20}\right)+2\left(\frac{4}{20}\right)+3\left(\frac{6}{20}\right)+4\left(\frac{8}{20}\right)=\frac{60}{20}=3
                 \end{aligned}\]</span></p></li>
-<li data-o006-id="O006-PSU-001-U0355"><p data-o006-id="O006-PSU-001-U0356">Tentukan simpangan baku dari <span class="math inline">\(X\)</span>. <span class="math display">\[\begin{aligned}
+<li data-o006-id="O006-PSU-001-U0355"><p data-o006-id="O006-PSU-001-U0356">Tentukan simpangan baku dari <span class="math inline" data-o006-math-id="O006-PSU-001-M0315">\(X\)</span>. <span class="math display" data-o006-math-id="O006-PSU-001-M0316">\[\begin{aligned}
                     &amp; E(X^2)=0\left(0\right)+1\left(\frac{2}{20}\right)+4\left(\frac{4}{20}\right)+9\left(\frac{6}{20}\right)+16\left(\frac{8}{20}\right)=\frac{200}{20}=10\\
                     &amp; \text{Var}(X)=E(X^2)-E(X)^2=10-3^2=10-9=1\\
                     &amp; \text{SD}(X)=\sqrt{1}=1
@@ -646,13 +646,13 @@ T=\frac{Z}{\sqrt{\frac{U}{r}}}
 </section>
 <section class="level2" data-o006-id="O006-PSU-001-U0357" id="outline-of-stat-415">
 <h2 class="anchored" data-anchor-id="outline-of-stat-415" data-o006-id="O006-PSU-001-U0358">0.6: Garis Besar STAT 415</h2>
-<p data-o006-id="O006-PSU-001-U0359">Misalkan kita memperoleh data <span class="math inline">\(x\)</span> dari suatu model statistik dengan parameter yang tidak diketahui <span class="math inline">\(\theta\)</span>. Bayangkan bahwa <span class="math inline">\(\theta\)</span> mengindeks suatu keluarga distribusi yang mungkin bagi <span class="math inline">\(x\)</span>, dan bahwa nilai sebenarnya dari <span class="math inline">\(\theta\)</span> menentukan proses pembangkitan data yang sebenarnya. Selanjutnya, kita akan mempertimbangkan pertanyaan-pertanyaan seperti:</p>
-<p data-o006-id="O006-PSU-001-U0360"><strong>Estimasi Titik</strong>: Apa yang dimaksud dengan penaksir yang <strong>baik</strong> untuk <span class="math inline">\(\theta\)</span>? Jawabannya bergantung pada definisi ‘baik’, dan kita akan memperkenalkan beberapa kriteria untuk menilai penaksir. Menyajikan penaksir titik <span class="math inline">\(\hat{\theta}\)</span>saja tanpa gambaran mengenai ketidakpastiannya biasanya tidak memuaskan. Karena itu, inferensi statistik menekankan agar penaksir titik disertai informasi mengenai ketidakpastiannya; misalnya, kita mungkin dapat menjelaskan distribusi <span class="math inline">\(\hat{\theta}\)</span> atau setidaknya menyebutkan simpangan bakunya. Simpangan baku suatu penaksir disebut galat baku.</p>
-<p data-o006-id="O006-PSU-001-U0361"><strong>Estimasi Interval</strong>: Secara intuitif, pernyataan seperti “Saya menaksir <span class="math inline">\(\theta\)</span> sebesar 2,5” akan jauh lebih informatif jika disertai suatu interval, misalnya dengan mengatakan:</p>
-<p data-o006-id="O006-PSU-001-U0362">“Saya yakin 95% bahwa <span class="math inline">\(\theta\)</span> berada dalam interval tertutup antara 2,3 dan 2,8.”</p>
+<p data-o006-id="O006-PSU-001-U0359">Misalkan kita memperoleh data <span class="math inline" data-o006-math-id="O006-PSU-001-M0317">\(x\)</span> dari suatu model statistik dengan parameter yang tidak diketahui <span class="math inline" data-o006-math-id="O006-PSU-001-M0318">\(\theta\)</span>. Bayangkan bahwa <span class="math inline" data-o006-math-id="O006-PSU-001-M0319">\(\theta\)</span> mengindeks suatu keluarga distribusi yang mungkin bagi <span class="math inline" data-o006-math-id="O006-PSU-001-M0320">\(x\)</span>, dan bahwa nilai sebenarnya dari <span class="math inline" data-o006-math-id="O006-PSU-001-M0321">\(\theta\)</span> menentukan proses pembangkitan data yang sebenarnya. Selanjutnya, kita akan mempertimbangkan pertanyaan-pertanyaan seperti:</p>
+<p data-o006-id="O006-PSU-001-U0360"><strong>Estimasi Titik</strong>: Apa yang dimaksud dengan penaksir yang <strong>baik</strong> untuk <span class="math inline" data-o006-math-id="O006-PSU-001-M0322">\(\theta\)</span>? Jawabannya bergantung pada definisi ‘baik’, dan kita akan memperkenalkan beberapa kriteria untuk menilai penaksir. Menyajikan penaksir titik <span class="math inline" data-o006-math-id="O006-PSU-001-M0323">\(\hat{\theta}\)</span>saja tanpa gambaran mengenai ketidakpastiannya biasanya tidak memuaskan. Karena itu, inferensi statistik menekankan agar penaksir titik disertai informasi mengenai ketidakpastiannya; misalnya, kita mungkin dapat menjelaskan distribusi <span class="math inline" data-o006-math-id="O006-PSU-001-M0324">\(\hat{\theta}\)</span> atau setidaknya menyebutkan simpangan bakunya. Simpangan baku suatu penaksir disebut galat baku.</p>
+<p data-o006-id="O006-PSU-001-U0361"><strong>Estimasi Interval</strong>: Secara intuitif, pernyataan seperti “Saya menaksir <span class="math inline" data-o006-math-id="O006-PSU-001-M0325">\(\theta\)</span> sebesar 2,5” akan jauh lebih informatif jika disertai suatu interval, misalnya dengan mengatakan:</p>
+<p data-o006-id="O006-PSU-001-U0362">“Saya yakin 95% bahwa <span class="math inline" data-o006-math-id="O006-PSU-001-M0326">\(\theta\)</span> berada dalam interval tertutup antara 2,3 dan 2,8.”</p>
 <p data-o006-id="O006-PSU-001-U0363">Namun, apa arti ‘yakin’ di sini? Dalam mata kuliah ini, kita akan mendefinisikan secara tepat makna pemberian estimasi interval dan mempelajari berbagai cara untuk menyusun estimasi tersebut.</p>
-<p data-o006-id="O006-PSU-001-U0364">Jika <span class="math inline">\(\theta\)</span> merupakan konstanta, maka nilainya pasti berada atau tidak berada dalam interval <span class="math inline">\([2.3, 2.8]\)</span>; jadi, apa arti 95% tersebut?</p>
-<p data-o006-id="O006-PSU-001-U0365"><strong>Uji Hipotesis (evaluasi model)</strong>: Dalam banyak penerapan di bidang ilmu fisik, biologi, dan sosial, seorang peneliti ingin menguji hipotesis yang dapat dinyatakan dalam bentuk <span class="math inline">\(\theta=\theta_0\)</span> atau, secara lebih umum, sebagai <span class="math inline">\(\theta\in H_0\)</span> untuk suatu himpunan <span class="math inline">\(H_0\)</span>. Uji hipotesis berkaitan erat dengan estimasi interval—dan dapat dikatakan bahwa estimasi interval lebih berguna—serta dapat ditinjau dari berbagai sudut pandang.</p>
+<p data-o006-id="O006-PSU-001-U0364">Jika <span class="math inline" data-o006-math-id="O006-PSU-001-M0327">\(\theta\)</span> merupakan konstanta, maka nilainya pasti berada atau tidak berada dalam interval <span class="math inline" data-o006-math-id="O006-PSU-001-M0328">\([2.3, 2.8]\)</span>; jadi, apa arti 95% tersebut?</p>
+<p data-o006-id="O006-PSU-001-U0365"><strong>Uji Hipotesis (evaluasi model)</strong>: Dalam banyak penerapan di bidang ilmu fisik, biologi, dan sosial, seorang peneliti ingin menguji hipotesis yang dapat dinyatakan dalam bentuk <span class="math inline" data-o006-math-id="O006-PSU-001-M0329">\(\theta=\theta_0\)</span> atau, secara lebih umum, sebagai <span class="math inline" data-o006-math-id="O006-PSU-001-M0330">\(\theta\in H_0\)</span> untuk suatu himpunan <span class="math inline" data-o006-math-id="O006-PSU-001-M0331">\(H_0\)</span>. Uji hipotesis berkaitan erat dengan estimasi interval—dan dapat dikatakan bahwa estimasi interval lebih berguna—serta dapat ditinjau dari berbagai sudut pandang.</p>
 </section>
 </main></div>
 <footer class="site-footer"><div class="site-footer__inner">Konten sumber: Departemen Statistika Penn State, CC BY-NC 4.0 kecuali dinyatakan lain. Terjemahan dan rekonstruksi: OpenAI Codex gpt-5.6-sol, Ultra. Tidak ada dukungan atau pengesahan yang tersirat.</div></footer>

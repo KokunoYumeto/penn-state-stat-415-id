@@ -1,0 +1,44 @@
+{
+  "bindings": {
+    "bytes": 88776,
+    "path": "backend/lesson01_translation_bindings.jsonl",
+    "sha256": "bc5a0914d1515636ad3dee36933f3a93ffaea4056d79a80bf0e4125b06d3dd0e"
+  },
+  "boundary_whitespace_rule": "exact source-node leading/trailing whitespace wrapped around translated prose core",
+  "document": "Lesson01",
+  "document_id": "O006-PSU-002",
+  "locale": "id-ID",
+  "parts": [
+    {
+      "bytes": 7375,
+      "part": "a",
+      "path": "working/lesson01_translation_part_a.json",
+      "segments": 75,
+      "sha256": "4c7d5f3de83c9921b8c4313c1cf69c277054ee4325ce7c4ca9690be3aa4898ee"
+    },
+    {
+      "bytes": 5465,
+      "part": "b",
+      "path": "working/lesson01_translation_part_b.json",
+      "segments": 73,
+      "sha256": "829fbcb520d02f93bcded52192a48b9c841333783e27b4c040a8a877734bdcb7"
+    },
+    {
+      "bytes": 6256,
+      "part": "c",
+      "path": "working/lesson01_translation_part_c.json",
+      "segments": 73,
+      "sha256": "dd41f51e73335551da68c8a8a052f35602850d07a4dcdaa61405ebcce174fe59"
+    }
+  ],
+  "schema": "o006.stat415.lesson01-translation.v1",
+  "segment_count": 221,
+  "status": "complete",
+  "terminology_rule": "order statistic(s) -> statistik urutan for the Penn State component",
+  "translation_csv": {
+    "bytes": 54021,
+    "path": "source/id-ID/lesson01_translation.csv",
+    "sha256": "f7c6cc3c2089f1e3f0fb500dddd93b803cb2c63007b30349a41e88c9d52e9eeb"
+  },
+  "translation_provenance": "OpenAI Codex gpt-5.6-sol, Ultra"
+}

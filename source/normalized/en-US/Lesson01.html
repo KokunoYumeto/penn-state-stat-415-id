@@ -1,0 +1,248 @@
+<!doctype html>
+<html lang="en-US">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>1  Order Statistics – STAT 415 | Introduction to Mathematical Statistics</title>
+<meta name="source-url" content="https://online.stat.psu.edu/stat415/Lesson01">
+<meta name="translation-provenance" content="OpenAI Codex gpt-5.6-sol, Ultra">
+</head>
+<body>
+<main class="content" data-component-id="Lesson01" data-document-id="O006-PSU-002" data-source-url="https://online.stat.psu.edu/stat415/Lesson01" id="quarto-document-content">
+<header class="quarto-title-block default" data-o006-id="O006-PSU-002-U0001" id="title-block-header"><nav aria-label="breadcrumb" class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" data-o006-id="O006-PSU-002-U0002"><ol class="breadcrumb" data-o006-id="O006-PSU-002-U0003"><li class="breadcrumb-item" data-o006-id="O006-PSU-002-U0004"><a data-o006-id="O006-PSU-002-U0005" href="./Lesson00.html">Lessons</a></li><li class="breadcrumb-item" data-o006-id="O006-PSU-002-U0006"><a data-o006-id="O006-PSU-002-U0007" href="./Lesson01.html"><span class="chapter-number">1</span>  <span class="chapter-title">Order Statistics</span></a></li></ol></nav>
+<div class="quarto-title" data-o006-id="O006-PSU-002-U0008">
+<h1 class="title" data-o006-id="O006-PSU-002-U0009"><span class="chapter-number">1</span>  <span class="chapter-title">Order Statistics</span></h1>
+<div class="quarto-categories" data-o006-id="O006-PSU-002-U0010">
+<div class="quarto-category" data-o006-id="O006-PSU-002-U0011">Order Statistics</div>
+<div class="quarto-category" data-o006-id="O006-PSU-002-U0012">Probability Density Functions</div>
+</div>
+</div>
+<div class="quarto-title-meta" data-o006-id="O006-PSU-002-U0013">
+</div>
+</header>
+<section class="level2 unnumbered unlisted" data-o006-id="O006-PSU-002-U0014" id="overview">
+<h2 class="unnumbered unlisted anchored" data-anchor-id="overview" data-o006-id="O006-PSU-002-U0015">Overview</h2>
+<p data-o006-id="O006-PSU-002-U0016">We typically don’t pay particular attention to the order of a set of random variables <span class="math inline" data-o006-math-id="O006-PSU-002-M0001">\(X_1, X_2, \ldots, X_n\)</span>. But, what if we did? Suppose, for example, we needed to know the probability that the third largest value was less than 72. Or, suppose we needed to know the 80th percentile of a random sample of heart rates. In either case, we’d need to know something about how the order of the data behaved. That is, we’d need to know something about the probability density function of the order statistics <span class="math inline" data-o006-math-id="O006-PSU-002-M0002">\(Y_1, Y_2, \ldots, Y_n\)</span>. That’s what we’ll groove on in this lesson.</p>
+<section class="level3 unnumbered unlisted objectiveblock" data-o006-id="O006-PSU-002-U0017" id="objectives">
+<h3 class="unnumbered unlisted anchored" data-anchor-id="objectives" data-o006-id="O006-PSU-002-U0018"><i class="bi bi-check2-circle"></i>Objectives</h3>
+<p data-o006-id="O006-PSU-002-U0019">Upon completion of this lesson, you should be able to:</p>
+<ol data-o006-id="O006-PSU-002-U0020" type="1">
+<li data-o006-id="O006-PSU-002-U0021">Identify order statistics based on the definition,</li>
+<li data-o006-id="O006-PSU-002-U0022">Derive the probability density function of the <span class="math inline" data-o006-math-id="O006-PSU-002-M0003">\(r^{th}\)</span> order statistic, and</li>
+<li data-o006-id="O006-PSU-002-U0023">Derive the cumulative distribution function of the <span class="math inline" data-o006-math-id="O006-PSU-002-M0004">\(r^{th}\)</span> order statistic.</li>
+</ol>
+</section>
+</section>
+<section class="level2" data-number="1.1" data-o006-id="O006-PSU-002-U0024" id="the-basics">
+<h2 class="anchored" data-anchor-id="the-basics" data-number="1.1" data-o006-id="O006-PSU-002-U0025"><span class="header-section-number">1.1</span> The Basics</h2>
+<div class="theorem example" data-o006-id="O006-PSU-002-U0026" id="exm-rats">
+<p data-o006-id="O006-PSU-002-U0027"><span class="theorem-title"><strong>Example 1.1</strong></span> Let’s motivate the definition of a set of order statistics by way of a simple example.</p>
+<p data-o006-id="O006-PSU-002-U0028">Suppose a random sample of five rats yields the following weights (in grams):</p>
+<p data-o006-id="O006-PSU-002-U0029"><span class="math display" data-o006-math-id="O006-PSU-002-M0005">\[x_1=602 \qquad x_2=781\qquad x_3=709\qquad x_4=742\qquad x_5=633\]</span></p>
+<p data-o006-id="O006-PSU-002-U0030">What are the observed order statistics of this set of data?</p>
+<section class="level4 card card-body bg-light ms-3 mb-3 pt-0" data-o006-id="O006-PSU-002-U0031" id="solution">
+<h4 class="anchored" data-anchor-id="solution" data-o006-id="O006-PSU-002-U0032">Solution</h4>
+<p data-o006-id="O006-PSU-002-U0033">Well, without even knowing the formal definition of an order statistic, we probably don’t need a rocket scientist to tell us that, to find the order statistics, we should probably arrange the data in increasing numerical order. Doing so, the observed order statistics are:</p>
+<p data-o006-id="O006-PSU-002-U0034"><span class="math display" data-o006-math-id="O006-PSU-002-M0006">\[y_1=602&lt;y_2=633&lt;y_3=709&lt;y_4=742&lt;y_5=781\]</span> The only thing that might have tripped us up a bit in such a trivial example is if two of the rats had shared the same weight, as observing ties is certainly a possibility. We’ll wash our hands of the likelihood of that happening, though, by making an assumption that will hold throughout this lesson… and beyond. <u><strong>We will assume that the n independent observations come from a continuous distribution, thereby making the probability zero that any two observations are equal.</strong></u> Of course, ties are still possible in practice. Making the assumption, though, that there is a near zero chance of a tie happening allows us to develop the distribution theory of order statistics that holds at least approximately even in the presence of ties. That said, let’s now formally define a set of order statistics.</p>
+</section>
+</div>
+<div class="ms-3 mt-3 theorem definition" data-o006-id="O006-PSU-002-U0035" id="def-orderstats">
+<p data-o006-id="O006-PSU-002-U0036"><span class="theorem-title"><strong>Def. 1.1 (Order Statistics)</strong></span> If <span class="math inline" data-o006-math-id="O006-PSU-002-M0007">\(X_1, X_2, \cdots, X_n\)</span> are observations of a random sample of size <span class="math inline" data-o006-math-id="O006-PSU-002-M0008">\(n\)</span> from a continuous distribution, we let the random variables:</p>
+<p data-o006-id="O006-PSU-002-U0037"><span class="math display" data-o006-math-id="O006-PSU-002-M0009">\[Y_1&lt;Y_2&lt;\cdots&lt;Y_n\]</span></p>
+<p data-o006-id="O006-PSU-002-U0038">denote the order statistics of the sample, with:</p>
+<p data-o006-id="O006-PSU-002-U0039"><span class="math inline" data-o006-math-id="O006-PSU-002-M0010">\(Y_1\)</span> being the smallest of the <span class="math inline" data-o006-math-id="O006-PSU-002-M0011">\(X_1, X_2, \cdots, X_n\)</span> observations</p>
+<p data-o006-id="O006-PSU-002-U0040"><span class="math inline" data-o006-math-id="O006-PSU-002-M0012">\(Y_2\)</span> being the second smallest of the <span class="math inline" data-o006-math-id="O006-PSU-002-M0013">\(X_1, X_2, \cdots, X_n\)</span> observations</p>
+<p data-o006-id="O006-PSU-002-U0041">….</p>
+<p data-o006-id="O006-PSU-002-U0042"><span class="math inline" data-o006-math-id="O006-PSU-002-M0014">\(Y_{n-1}\)</span> being the next-to-largest of the <span class="math inline" data-o006-math-id="O006-PSU-002-M0015">\(X_1, X_2, \cdots, X_n\)</span> observations</p>
+<p data-o006-id="O006-PSU-002-U0043"><span class="math inline" data-o006-math-id="O006-PSU-002-M0016">\(Y_n\)</span> being the largest of the <span class="math inline" data-o006-math-id="O006-PSU-002-M0017">\(X_1, X_2, \cdots, X_n\)</span> observations</p>
+</div>
+<p data-o006-id="O006-PSU-002-U0044">Now, what we want to do is work our way up to find the probability density function of any of the <span class="math inline" data-o006-math-id="O006-PSU-002-M0018">\(n\)</span> order statistics, the <span class="math inline" data-o006-math-id="O006-PSU-002-M0019">\(r^{th}\)</span> order statistic <span class="math inline" data-o006-math-id="O006-PSU-002-M0020">\(Y_r\)</span>. That way, we’d know how the order statistics behave and therefore could use that knowledge to draw conclusions about something like the fastest automobile in a race or the heaviest mouse on a certain diet. In finding the probability density function, we’ll use the distribution function technique to do so. It’s probably been a mighty bit since we used the technique, so in case you need a reminder, our strategy will be to first find the distribution function <span class="math inline" data-o006-math-id="O006-PSU-002-M0021">\(G_r(y)\)</span> of the <span class="math inline" data-o006-math-id="O006-PSU-002-M0022">\(r^{th}\)</span> order statistic and then take its derivative to find the probability density function <span class="math inline" data-o006-math-id="O006-PSU-002-M0023">\(g_r(y)\)</span> of the <span class="math inline" data-o006-math-id="O006-PSU-002-M0024">\(r^{th}\)</span> order statistic. We’re getting a little bit ahead of ourselves though. That’s what we’ll do on the next page. To make our work there more understandable, let’s first take a look at a concrete example here.</p>
+<div class="theorem example" data-o006-id="O006-PSU-002-U0045" id="exm-orderstats">
+<p data-o006-id="O006-PSU-002-U0046"><span class="theorem-title"><strong>Example 1.2</strong></span> <a class="lightbox" data-gallery="quarto-lightbox-gallery-1" data-o006-id="O006-PSU-002-U0047" href="assets/STAT-415-SEC-3-18-09.svg"><img alt="Coordinate graph of f(x) = 1/2x" class="float-sm-end w-25 ps-3 img-fluid" data-o006-id="O006-PSU-002-U0048" id="fig-STAT-415-SEC-3-18-09" src="assets/STAT-415-SEC-3-18-09.svg"/></a> Let <span class="math inline" data-o006-math-id="O006-PSU-002-M0025">\(Y_1&lt;Y_2&lt;Y_3&lt;Y_4&lt;Y_5&lt;Y_6\)</span> be the order statistics associated with <span class="math inline" data-o006-math-id="O006-PSU-002-M0026">\(n=6\)</span> independent observations each from the distribution with probability density function:</p>
+<p data-o006-id="O006-PSU-002-U0049"><span class="math display" data-o006-math-id="O006-PSU-002-M0027">\[f(x)=\dfrac{1}{2}x\]</span></p>
+<p data-o006-id="O006-PSU-002-U0050">for <span class="math inline" data-o006-math-id="O006-PSU-002-M0028">\(0&lt;x&lt;2\)</span>.</p>
+<ol data-o006-id="O006-PSU-002-U0051" type="1">
+<li data-o006-id="O006-PSU-002-U0052"><p data-o006-id="O006-PSU-002-U0053"><strong>What is the probability that the next-to-largest order statistic, that is,</strong> <span class="math inline" data-o006-math-id="O006-PSU-002-M0029">\(Y_5\)</span>, is less than 1? That is, what is <span class="math inline" data-o006-math-id="O006-PSU-002-M0030">\(P(Y_5&lt;1)\)</span>?</p>
+<div class="card card-body bg-light ms-3 mb-3 pt-0" data-o006-id="O006-PSU-002-U0054">
+<h4 class="anchored" data-o006-id="O006-PSU-002-U0055" id="solution-1">Solution</h4>
+<p data-o006-id="O006-PSU-002-U0056">The key to finding the desired probability is to recognize that the only way that the fifth order statistic, <span class="math inline" data-o006-math-id="O006-PSU-002-M0031">\(Y_5\)</span>, would be less than one is if at least 5 of the random variables <span class="math inline" data-o006-math-id="O006-PSU-002-M0032">\(X_1, X_2, X_3, X_4, X_5, X_6\)</span> are less than one. For the sake of simplicity, let’s suppose the first five observed values <span class="math inline" data-o006-math-id="O006-PSU-002-M0033">\(x_1, x_2, x_3, x_4, x_5\)</span> are less than one, but the sixth <span class="math inline" data-o006-math-id="O006-PSU-002-M0034">\(x_6\)</span> is not. In that case, the observed fifth-order statistic, <span class="math inline" data-o006-math-id="O006-PSU-002-M0035">\(y_5\)</span>, would be less than one:</p>
+<div alt="Celsius vs Fahrenheit scatterplot" class="lightbox quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center" data-o006-id="O006-PSU-002-U0057" id="fig-stat415sec31810">
+<figure class="quarto-float quarto-float-fig figure" data-o006-id="O006-PSU-002-U0058">
+<div aria-describedby="fig-stat415sec31810-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca" data-o006-id="O006-PSU-002-U0059">
+<a class="lightbox" data-gallery="quarto-lightbox-gallery-2" data-o006-id="O006-PSU-002-U0060" href="assets/stat-415-sec-3-18-10.svg" title="Fig 1.1: "><img alt="Celsius vs Fahrenheit scatterplot" class="img-fluid quarto-figure quarto-figure-center figure-img" data-o006-id="O006-PSU-002-U0061" src="assets/stat-415-sec-3-18-10.svg" style="width:60.0%"/></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" data-o006-id="O006-PSU-002-U0062" id="fig-stat415sec31810-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Fig 1.1
+</figcaption>
+</figure>
+</div>
+<p data-o006-id="O006-PSU-002-U0063">The observed fifth order statistic, <span class="math inline" data-o006-math-id="O006-PSU-002-M0036">\(y_5\)</span>, would also be less than one if all six of the observed values <span class="math inline" data-o006-math-id="O006-PSU-002-M0037">\(x_1, x_2, x_3, x_4, x_5, x_6\)</span> are less than one:</p>
+<div alt="Number line showing 6 values less than 1." class="lightbox quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center" data-o006-id="O006-PSU-002-U0064" id="fig-stat-415-sec-3-18-11">
+<figure class="quarto-float quarto-float-fig figure" data-o006-id="O006-PSU-002-U0065">
+<div aria-describedby="fig-stat-415-sec-3-18-11-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca" data-o006-id="O006-PSU-002-U0066">
+<a class="lightbox" data-gallery="quarto-lightbox-gallery-3" data-o006-id="O006-PSU-002-U0067" href="assets/stat-415-sec-3-18-11.svg" title="Fig 1.2: "><img alt="Number line showing 6 values less than 1." class="img-fluid quarto-figure quarto-figure-center figure-img" data-o006-id="O006-PSU-002-U0068" src="assets/stat-415-sec-3-18-11.svg" style="width:60.0%"/></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" data-o006-id="O006-PSU-002-U0069" id="fig-stat-415-sec-3-18-11-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Fig 1.2
+</figcaption>
+</figure>
+</div>
+<p data-o006-id="O006-PSU-002-U0070">The observed fifth order statistic, <span class="math inline" data-o006-math-id="O006-PSU-002-M0038">\(y_5\)</span>, would not be less than one if the first four observed values <span class="math inline" data-o006-math-id="O006-PSU-002-M0039">\(x_1, x_2, x_3, x_4\)</span> are less than one, but the fifth <span class="math inline" data-o006-math-id="O006-PSU-002-M0040">\(x_5\)</span> and sixth <span class="math inline" data-o006-math-id="O006-PSU-002-M0041">\(x_6\)</span> are not:</p>
+<div alt="Number line showing four values less than and two greater than one." class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center" data-o006-id="O006-PSU-002-U0071" id="fig-stat415sec31812" width="60%">
+<figure class="quarto-float quarto-float-fig figure" data-o006-id="O006-PSU-002-U0072">
+<div aria-describedby="fig-stat415sec31812-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca" data-o006-id="O006-PSU-002-U0073">
+<a class="lightbox" data-gallery="quarto-lightbox-gallery-4" data-o006-id="O006-PSU-002-U0074" href="assets/stat-415-sec-3-18-12.svg" title="Fig 1.3: "><img alt="Number line showing four values less than and two greater than one." class="img-fluid quarto-figure quarto-figure-center anchored figure-img" data-o006-id="O006-PSU-002-U0075" id="fig-stat415sec31812" src="assets/stat-415-sec-3-18-12.svg" style="width:60.0%"/></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" data-o006-id="O006-PSU-002-U0076" id="fig-stat415sec31812-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Fig 1.3
+</figcaption>
+</figure>
+</div>
+</div>
+<p data-o006-id="O006-PSU-002-U0077">Again, the only way that the fifth order statistic, <span class="math inline" data-o006-math-id="O006-PSU-002-M0042">\(Y_5\)</span>, would be less than one is if 5 or 6… that is, at least 5… of the random variables <span class="math inline" data-o006-math-id="O006-PSU-002-M0043">\(X_1, X_2, X_3, X_4, X_5, \text{ and }X_6\)</span> are less than one. For the sake of simplicity, we considered just the first five or six random variables, but in reality, any five or six random variables less than one would do. We just have to do some “choosing” to count the number of ways that we can get any five or six of the random variables to be less than one.</p>
+<p data-o006-id="O006-PSU-002-U0078">If you think about it, then, we have a binomial probability calculation here. If the event <span class="math inline" data-o006-math-id="O006-PSU-002-M0044">\(\{X_i&lt;1\}\)</span>, <span class="math inline" data-o006-math-id="O006-PSU-002-M0045">\(i=1, 2, \cdots, 5\)</span> is considered a “success,” and we let <span class="math inline" data-o006-math-id="O006-PSU-002-M0046">\(Z\)</span> = the number of successes in six mutually independent trials, then <span class="math inline" data-o006-math-id="O006-PSU-002-M0047">\(Z\)</span> is a binomial random variable with <span class="math inline" data-o006-math-id="O006-PSU-002-M0048">\(n=6\)</span> and <span class="math inline" data-o006-math-id="O006-PSU-002-M0049">\(p=0.25\)</span>:</p>
+<div data-o006-id="O006-PSU-002-U0079" style="overflow-x:auto;overflow-y:hidden;">
+<p data-o006-id="O006-PSU-002-U0080"><span class="math display" data-o006-math-id="O006-PSU-002-M0050">\[P(X_i\le1)=\dfrac{1}{2}\int_{0}^{1}x dx=\dfrac{1}{2}\left[\dfrac{x^2}{2}\right]_{x=0}^{x=1}=\dfrac{1}{2}\left(\dfrac{1}{2}-0\right)=\dfrac{1}{4}\]</span></p>
+</div>
+<p data-o006-id="O006-PSU-002-U0081">Finding the probability that the fifth order statistic, <span class="math inline" data-o006-math-id="O006-PSU-002-M0051">\(Y_5\)</span>, is less than one reduces to a binomial calculation then. That is:</p>
+<div data-o006-id="O006-PSU-002-U0082" style="overflow-x:auto;overflow-y:hidden;">
+<p data-o006-id="O006-PSU-002-U0083"><span class="math display" data-o006-math-id="O006-PSU-002-M0052">\[P(Y_5&lt;1)=P(Z=5)+P(Z=6)=\binom{6}{5}\left(\dfrac{1}{4} \right)^5\left(\dfrac{3}{4} \right)^1+\binom{6}{6}\left(\dfrac{1}{4} \right)^6\left(\dfrac{3}{4} \right)^0=0.0046\]</span></p>
+</div>
+<p data-o006-id="O006-PSU-002-U0084">The fact that the calculated probability is so small should make sense in light of the given p.d.f. of <span class="math inline" data-o006-math-id="O006-PSU-002-M0053">\(X\)</span>. After all, each individual <span class="math inline" data-o006-math-id="O006-PSU-002-M0054">\(X_i\)</span> has a greater chance of falling above, rather than below, one. For that reason, it would be unusual to observe as many as five or six <span class="math inline" data-o006-math-id="O006-PSU-002-M0055">\(X\)</span>’s less than one.</p></li>
+<li data-o006-id="O006-PSU-002-U0085"><p data-o006-id="O006-PSU-002-U0086"><strong>What is the cumulative distribution function,</strong> <span class="math inline" data-o006-math-id="O006-PSU-002-M0056">\(G_5(y)\)</span>, of the fifth order statistic <span class="math inline" data-o006-math-id="O006-PSU-002-M0057">\(Y_5\)</span>?</p>
+<div class="alert-light ms-4 mb-3" data-o006-id="O006-PSU-002-U0087">
+<h4 class="anchored" data-o006-id="O006-PSU-002-U0088" id="solution-2">Solution</h4>
+<p data-o006-id="O006-PSU-002-U0089">Recalling the definition of a cumulative distribution function, <span class="math inline" data-o006-math-id="O006-PSU-002-M0058">\(G_5(y)\)</span> is defined to be the probability that the fifth order statistic <span class="math inline" data-o006-math-id="O006-PSU-002-M0059">\(Y_5\)</span> is less than some value <span class="math inline" data-o006-math-id="O006-PSU-002-M0060">\(y\)</span>. That is:</p>
+<p data-o006-id="O006-PSU-002-U0090"><span class="math display" data-o006-math-id="O006-PSU-002-M0061">\[G_5(y)=P(Y_5 &lt; y)\]</span></p>
+<p data-o006-id="O006-PSU-002-U0091">Well, in our above work, we found the probability that the fifth order statistic <span class="math inline" data-o006-math-id="O006-PSU-002-M0062">\(Y_5\)</span> is less than a specific value, namely 1. We just need to generalize our work there to allow for any value <span class="math inline" data-o006-math-id="O006-PSU-002-M0063">\(y\)</span>. Well, if the event <span class="math inline" data-o006-math-id="O006-PSU-002-M0064">\(\{X_i&lt;y\}\)</span>, <span class="math inline" data-o006-math-id="O006-PSU-002-M0065">\(i=1, 2, \cdots, 5\)</span> is considered a “success,” and we let <span class="math inline" data-o006-math-id="O006-PSU-002-M0066">\(Z\)</span> = the number of successes in six mutually independent trials, then <span class="math inline" data-o006-math-id="O006-PSU-002-M0067">\(Z\)</span> is a binomial random variable with <span class="math inline" data-o006-math-id="O006-PSU-002-M0068">\(n=6\)</span> and probability of success:</p>
+<p data-o006-id="O006-PSU-002-U0092"><span class="math display" data-o006-math-id="O006-PSU-002-M0069">\[P(X_i\le y)=\dfrac{1}{2}\int_{0}^{y}x dx=\dfrac{1}{2}\left[\dfrac{x^2}{2}\right]_{x=0}^{x=y}=\dfrac{1}{2}\left(\dfrac{y^2}{2}-0\right)=\dfrac{y^2}{4}\]</span></p>
+<p data-o006-id="O006-PSU-002-U0093">Therefore, the cumulative distribution function <span class="math inline" data-o006-math-id="O006-PSU-002-M0070">\(G_5(y)\)</span> of the fifth order statistic <span class="math inline" data-o006-math-id="O006-PSU-002-M0071">\(Y_5\)</span> is:</p>
+<p data-o006-id="O006-PSU-002-U0094"><span class="math display" data-o006-math-id="O006-PSU-002-M0072">\[G_5(y)=P(Y_5 &lt; y)=P(Z=5)+P(Z=6)=\binom{6}{5}\left(\dfrac{y^2}{4}\right)^5\left(1-\dfrac{y^2}{4}\right)+\left(\dfrac{y^2}{4}\right)^6\]</span></p>
+<p data-o006-id="O006-PSU-002-U0095">for <span class="math inline" data-o006-math-id="O006-PSU-002-M0073">\(0&lt;y&lt;2\)</span>.</p>
+</div></li>
+<li data-o006-id="O006-PSU-002-U0096"><p data-o006-id="O006-PSU-002-U0097"><strong>What is the probability density function,</strong> <span class="math inline" data-o006-math-id="O006-PSU-002-M0074">\(g_5(y)\)</span>, of the fifth order statistic <span class="math inline" data-o006-math-id="O006-PSU-002-M0075">\(Y_5\)</span>?</p>
+<div class="alert-light ms-4 mb-3" data-o006-id="O006-PSU-002-U0098">
+<h4 class="anchored" data-o006-id="O006-PSU-002-U0099" id="solution-3">Solution</h4>
+<p data-o006-id="O006-PSU-002-U0100">All we need to do to find the probability density function <span class="math inline" data-o006-math-id="O006-PSU-002-M0076">\(g_{5}(y)\)</span> is to take the derivative of the distribution function <span class="math inline" data-o006-math-id="O006-PSU-002-M0077">\(G_5(y)\)</span> with respect to <span class="math inline" data-o006-math-id="O006-PSU-002-M0078">\(y\)</span>. Doing so, we get:</p>
+<div data-o006-id="O006-PSU-002-U0101" style="overflow-x:auto;overflow-y:hidden;">
+<p data-o006-id="O006-PSU-002-U0102"><span class="math display" data-o006-math-id="O006-PSU-002-M0079">\[g_5(y)=G_{5}^{'}(y)=\binom{6}{5}\left(\dfrac{y^2}{4}\right)^5\left(\dfrac{-2y}{4}\right)+\binom{6}{5}\left(1-\dfrac{y^2}{4}\right)5\left(\dfrac{y^2}{4}\right)^4\left(\dfrac{2y}{4}\right)+6\left(\dfrac{y^2}{4}\right)^5\left(\dfrac{2y}{4}\right)\]</span></p>
+</div>
+<p data-o006-id="O006-PSU-002-U0103">Upon recognizing that:</p>
+<p data-o006-id="O006-PSU-002-U0104"><span class="math display" data-o006-math-id="O006-PSU-002-M0080">\[\binom{6}{5}=6 \text{ and } \binom{6}{5}\times5=\dfrac{6!}{5!1!}\times5=\dfrac{6!}{4!1!}\]</span></p>
+<p data-o006-id="O006-PSU-002-U0105">we see that the middle term simplifies somewhat, and the first term is just the negative of the third term, therefore they cancel each other out:</p>
+<div data-o006-id="O006-PSU-002-U0106" style="overflow-x:auto;overflow-y:hidden;">
+<p data-o006-id="O006-PSU-002-U0107"><span class="math display" data-o006-math-id="O006-PSU-002-M0081">\[g_{5}(y)=\left(\begin{array}{l}
+6 \\
+5
+\end{array}\right)\color{red}\cancel {\color{black}\left(\frac{y^{2}}{4}\right)^{5}\left(\frac{-2 y}{4}\right)}\color{black}+\frac{6 !}{4 ! 1 !}\left(1-\frac{y^{2}}{4}\right)\left(\frac{y^{2}}{4}\right)^{4}\left(\frac{2 y}{4}\right)+\color{red}\cancel {\color{black}6\left(\frac{y^{2}}{4}\right)^{5}\left(\frac{2 y}{4}\right)}\]</span></p>
+</div>
+<p data-o006-id="O006-PSU-002-U0108">Therefore, the probability density function of the fifth order statistic <span class="math inline" data-o006-math-id="O006-PSU-002-M0082">\(Y_5\)</span> is:</p>
+<p data-o006-id="O006-PSU-002-U0109"><span class="math display" data-o006-math-id="O006-PSU-002-M0083">\[g_5(y)=\dfrac{6!}{4!1!}\left(1-\dfrac{y^2}{4}\right)\left(\dfrac{y^2}{4}\right)^4\left(\dfrac{1}{2}y\right)\]</span></p>
+<p data-o006-id="O006-PSU-002-U0110">for <span class="math inline" data-o006-math-id="O006-PSU-002-M0084">\(0&lt;y&lt;2\)</span>. When we go on to generalize our work on the next page, it will benefit us to note that because the density function and distribution function of each <span class="math inline" data-o006-math-id="O006-PSU-002-M0085">\(X\)</span> are:</p>
+<p data-o006-id="O006-PSU-002-U0111"><span class="math display" data-o006-math-id="O006-PSU-002-M0086">\[f(x)=\dfrac{1}{2}x \text{ and } F(x)=\dfrac{x^2}{4}\]</span></p>
+<p data-o006-id="O006-PSU-002-U0112">respectively, when <span class="math inline" data-o006-math-id="O006-PSU-002-M0087">\(0&lt;x&lt;2\)</span>, we can alternatively write the probability density function of the fifth order statistic <span class="math inline" data-o006-math-id="O006-PSU-002-M0088">\(Y_5\)</span> as:</p>
+<p data-o006-id="O006-PSU-002-U0113"><span class="math display" data-o006-math-id="O006-PSU-002-M0089">\[g_5(y)=\dfrac{6!}{4!1!}\left[F(y)\right]^4\left[1-F(y)\right]f(y)\]</span></p>
+<p data-o006-id="O006-PSU-002-U0114">Done!</p>
+</div>
+<p data-o006-id="O006-PSU-002-U0115">Whew! Now, let’s push on to the more general case of finding the probability density function of the <span class="math inline" data-o006-math-id="O006-PSU-002-M0090">\(r^{th}\)</span> order statistic.</p></li>
+</ol>
+</div>
+</section>
+<section class="level2" data-number="1.2" data-o006-id="O006-PSU-002-U0116" id="probability-density-functions">
+<h2 class="anchored" data-anchor-id="probability-density-functions" data-number="1.2" data-o006-id="O006-PSU-002-U0117"><span class="header-section-number">1.2</span> Probability Density Functions</h2>
+<p data-o006-id="O006-PSU-002-U0118">Our work on the previous page with finding the probability density function of a specific order statistic, namely the fifth one of a certain set of six random variables, should help us here when we work on finding the probability density function of any old order statistic, that is, the <span class="math inline" data-o006-math-id="O006-PSU-002-M0091">\(r^{th}\)</span> one.</p>
+<div class="callout callout-style-simple callout-caution no-icon" data-o006-id="O006-PSU-002-U0119">
+<div class="callout-body d-flex" data-o006-id="O006-PSU-002-U0120">
+<div class="callout-icon-container" data-o006-id="O006-PSU-002-U0121">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-body-container" data-o006-id="O006-PSU-002-U0122">
+<div class="theorem" data-o006-id="O006-PSU-002-U0123" id="thm-orderstats">
+<p data-o006-id="O006-PSU-002-U0124"><span class="theorem-title"><strong>Theorem 1.1</strong></span> Let <span class="math inline" data-o006-math-id="O006-PSU-002-M0092">\(Y_1&lt;Y_2&lt;\cdots&lt;Y_n\)</span> be the order statistics of n independent observations from a continuous distribution with cumulative distribution function <span class="math inline" data-o006-math-id="O006-PSU-002-M0093">\(F(x)\)</span> and probability density function:</p>
+<p data-o006-id="O006-PSU-002-U0125"><span class="math display" data-o006-math-id="O006-PSU-002-M0094">\[f(x)=F'(x)\]</span></p>
+<p data-o006-id="O006-PSU-002-U0126">where <span class="math inline" data-o006-math-id="O006-PSU-002-M0095">\(0&lt;F(x)&lt;1\)</span> over the support <span class="math inline" data-o006-math-id="O006-PSU-002-M0096">\(a&lt;x&lt;b\)</span>. Then, the probability density function of the <span class="math inline" data-o006-math-id="O006-PSU-002-M0097">\(r^{th}\)</span> order statistic is:</p>
+<p data-o006-id="O006-PSU-002-U0127"><span class="math display" data-o006-math-id="O006-PSU-002-M0098">\[g_r(y)=\dfrac{n!}{(r-1)!(n-r)!}\left[F(y)\right]^{r-1}\left[1-F(y)\right]^{n-r}f(y)\]</span></p>
+<p data-o006-id="O006-PSU-002-U0128">over the support <span class="math inline" data-o006-math-id="O006-PSU-002-M0099">\(a&lt;y&lt;b\)</span>.</p>
+<section class="level4" data-o006-id="O006-PSU-002-U0129" id="proof">
+<h4 class="anchored" data-anchor-id="proof" data-o006-id="O006-PSU-002-U0130">Proof</h4>
+<div class="ms-3" data-o006-id="O006-PSU-002-U0131">
+<p data-o006-id="O006-PSU-002-U0132">We’ll again follow the strategy of first finding the cumulative distribution function <span class="math inline" data-o006-math-id="O006-PSU-002-M0100">\(G_r(y)\)</span> of the <span class="math inline" data-o006-math-id="O006-PSU-002-M0101">\(r^{th}\)</span> order statistic, and then differentiating it with respect to <span class="math inline" data-o006-math-id="O006-PSU-002-M0102">\(y\)</span> to get the probability density function <span class="math inline" data-o006-math-id="O006-PSU-002-M0103">\(g_r(y)\)</span>. Now, if the event <span class="math inline" data-o006-math-id="O006-PSU-002-M0104">\(\{X_i\le y\},\;i=1, 2, \cdots, r\)</span> is considered a “success,” and we let <span class="math inline" data-o006-math-id="O006-PSU-002-M0105">\(Z\)</span> = the number of such successes in <span class="math inline" data-o006-math-id="O006-PSU-002-M0106">\(n\)</span> mutually independent trials, then <span class="math inline" data-o006-math-id="O006-PSU-002-M0107">\(Z\)</span> is a binomial random variable with <span class="math inline" data-o006-math-id="O006-PSU-002-M0108">\(n\)</span> trials and probability of success:</p>
+<p data-o006-id="O006-PSU-002-U0133"><span class="math display" data-o006-math-id="O006-PSU-002-M0109">\[F(y)=P(X_i \le y)\]</span></p>
+<p data-o006-id="O006-PSU-002-U0134">Now, the <span class="math inline" data-o006-math-id="O006-PSU-002-M0110">\(r^{th}\)</span> order statistic <span class="math inline" data-o006-math-id="O006-PSU-002-M0111">\(Y_r\)</span> is less than or equal to <span class="math inline" data-o006-math-id="O006-PSU-002-M0112">\(y\)</span> only if <span class="math inline" data-o006-math-id="O006-PSU-002-M0113">\(r\)</span> or more of the <span class="math inline" data-o006-math-id="O006-PSU-002-M0114">\(n\)</span> observations <span class="math inline" data-o006-math-id="O006-PSU-002-M0115">\(x_1, x_2, \cdots, x_n\)</span> are less than or equal to <span class="math inline" data-o006-math-id="O006-PSU-002-M0116">\(y\)</span>, which implies:</p>
+<p data-o006-id="O006-PSU-002-U0135"><span class="math display" data-o006-math-id="O006-PSU-002-M0117">\[G_r(y)=P(Y_r \le y)=P(Z=r)+P(Z=r+1)+ ... + P(Z=n)\]</span></p>
+<p data-o006-id="O006-PSU-002-U0136">which can be written using summation notation as:</p>
+<p data-o006-id="O006-PSU-002-U0137"><span class="math display" data-o006-math-id="O006-PSU-002-M0118">\[G_r(y)=\sum_{k=r}^{n} P(Z=k)\]</span></p>
+<p data-o006-id="O006-PSU-002-U0138">Now, we can replace <span class="math inline" data-o006-math-id="O006-PSU-002-M0119">\(P(Z=k)\)</span> with the probability mass function of a binomial random variable with parameters <span class="math inline" data-o006-math-id="O006-PSU-002-M0120">\(n\)</span> and <span class="math inline" data-o006-math-id="O006-PSU-002-M0121">\(p=F(y)\)</span>. Doing so, we get:</p>
+<p data-o006-id="O006-PSU-002-U0139"><span class="math display" data-o006-math-id="O006-PSU-002-M0122">\[G_r(y)=\sum_{k=r}^{n}\binom{n}{k}\left[F(y)\right]^{k}\left[1-F(y)\right]^{n-k}\]</span></p>
+<p data-o006-id="O006-PSU-002-U0140">Rewriting that slightly by pulling the <span class="math inline" data-o006-math-id="O006-PSU-002-M0123">\(n^{th}\)</span> term out of the summation notation, we get:</p>
+<p data-o006-id="O006-PSU-002-U0141"><span class="math display" data-o006-math-id="O006-PSU-002-M0124">\[G_r(y)=\sum_{k=r}^{n-1}\binom{n}{k}\left[F(y)\right]^{k}\left[1-F(y)\right]^{n-k}+\left[F(y)\right]^{n}\]</span></p>
+<p data-o006-id="O006-PSU-002-U0142">Now, it’s just a matter of taking the derivative of <span class="math inline" data-o006-math-id="O006-PSU-002-M0125">\(G_r(y)\)</span> with respect to <span class="math inline" data-o006-math-id="O006-PSU-002-M0126">\(y\)</span>. Using the product rule in conjunction with the chain rule on the terms in the summation, and the power rule in conjunction with the chain rule, we get:</p>
+<p data-o006-id="O006-PSU-002-U0143"><span id="eq-derivgry"><span class="math display" data-o006-math-id="O006-PSU-002-M0127">\[\begin{align} g_r(y)&amp;=\sum_{k=r}^{n-1}{n\choose k}(k)[F(y)]^{k-1}f(y)[1-F(y)]^{n-k}\\ &amp;+\sum_{k=r}^{n-1}[F(y)]^k(n-k)[1-F(y)]^{n-k-1}(-f(y))\\&amp;+n[F(y)]^{n-1}f(y)\end{align} \tag{1.1}\]</span></span></p>
+<p data-o006-id="O006-PSU-002-U0144">Now, it’s just a matter of recognizing that:</p>
+<p data-o006-id="O006-PSU-002-U0145"><span class="math display" data-o006-math-id="O006-PSU-002-M0128">\[\left(\begin{array}{l}
+n \\
+k
+\end{array}\right) k=\frac{n !}{\color{blue}\underbrace{\color{black}k !}_{\underset{ \text{}}{\textstyle{\color{blue}\color{red}\cancel {\color{blue}k}\color{blue}(k-1)!}}}\color{black}(n-k) !} \times \color{red}\cancel {\color{black}k}\color{black}=\frac{n !}{(k-1) !(n-k) !}\]</span></p>
+<p data-o006-id="O006-PSU-002-U0146">and</p>
+<p data-o006-id="O006-PSU-002-U0147"><span class="math display" data-o006-math-id="O006-PSU-002-M0129">\[\left(\begin{array}{l}
+n \\
+k
+\end{array}\right)(n-k)=\frac{n !}{k !\color{blue}\underbrace{\color{black}(n-k) !}_{\underset{\text{}}{{\textstyle\color{blue}\color{red}\cancel {\color{blue}(n-k)}\color{blue}(n- k -1)!}}}\color{black}} \times \color{red}\cancel {\color{black}(n-k)}\color{black}=\frac{n !}{k !(n-k-1) !}\]</span></p>
+<p data-o006-id="O006-PSU-002-U0148">Once we do that, we see that the p.d.f. of the <span class="math inline" data-o006-math-id="O006-PSU-002-M0130">\(r^{th}\)</span> order statistic <span class="math inline" data-o006-math-id="O006-PSU-002-M0131">\(Y_r\)</span> is just the first term in the summation in <span class="math inline" data-o006-math-id="O006-PSU-002-M0132">\(g_r(y)\)</span>. That is:</p>
+<p data-o006-id="O006-PSU-002-U0149"><span class="math display" data-o006-math-id="O006-PSU-002-M0133">\[g_r(y)=\dfrac{n!}{(r-1)!(n-r)!}\left[F(y)\right]^{r-1}\left[1-F(y)\right]^{n-r}f(y)\]</span></p>
+<p data-o006-id="O006-PSU-002-U0150">for <span class="math inline" data-o006-math-id="O006-PSU-002-M0134">\(a&lt;y&lt;b\)</span>. As was to be proved! Simple enough! Well, okay, that’s a little unfair to say it’s simple, as it’s not all that obvious, is it? For homework, you’ll be asked to write out, for the case when <span class="math inline" data-o006-math-id="O006-PSU-002-M0135">\(n=6\)</span> and r = 3, the terms in <a class="quarto-xref" data-o006-id="O006-PSU-002-U0151" href="#eq-derivgry">Equation <span>1.1</span></a>. In doing so, you should see that for all but the first of the positive terms in the starred equation, there is a corresponding negative term, so that everything but the first term cancels out. After you get a chance to work through that exercise, then perhaps it would be fair to say simple enough!</p>
+</div>
+</section>
+</div>
+</div>
+</div>
+</div>
+<div class="theorem example" data-o006-id="O006-PSU-002-U0152" id="exm-18-2contd">
+<p data-o006-id="O006-PSU-002-U0153"><span class="theorem-title"><strong>Example 1.3</strong></span> Let <span class="math inline" data-o006-math-id="O006-PSU-002-M0136">\(Y_1&lt;Y_2&lt;Y_3&lt;Y_4&lt;Y_5&lt;Y_6\)</span> be the order statistics associated with <span class="math inline" data-o006-math-id="O006-PSU-002-M0137">\(n=6\)</span> independent observations each from the distribution with probability density function:</p>
+<p data-o006-id="O006-PSU-002-U0154"><span class="math display" data-o006-math-id="O006-PSU-002-M0138">\[f(x)=\dfrac{1}{2}x\]</span></p>
+<p data-o006-id="O006-PSU-002-U0155">for <span class="math inline" data-o006-math-id="O006-PSU-002-M0139">\(0&lt;x&lt;2\)</span>. What is the probability density function of the first, fourth, and sixth order statistics?</p>
+<section class="level4 card card-body bg-light ms-3 mb-3 pt-0" data-o006-id="O006-PSU-002-U0156" id="solution-4">
+<h4 class="anchored" data-anchor-id="solution-4" data-o006-id="O006-PSU-002-U0157">Solution</h4>
+<p data-o006-id="O006-PSU-002-U0158">When we worked with this example on the previous page, we showed that the cumulative distribution function of <span class="math inline" data-o006-math-id="O006-PSU-002-M0140">\(X\)</span> is:</p>
+<p data-o006-id="O006-PSU-002-U0159"><span class="math display" data-o006-math-id="O006-PSU-002-M0141">\[F(x)=\dfrac{x^2}{4}\]</span></p>
+<p data-o006-id="O006-PSU-002-U0160">for <span class="math inline" data-o006-math-id="O006-PSU-002-M0142">\(0&lt;x&lt;2\)</span>. Therefore, applying the above theorem with <span class="math inline" data-o006-math-id="O006-PSU-002-M0143">\(n=6\)</span> and <span class="math inline" data-o006-math-id="O006-PSU-002-M0144">\(r=1\)</span>, the p.d.f. of <span class="math inline" data-o006-math-id="O006-PSU-002-M0145">\(Y_1\)</span> is:</p>
+<p data-o006-id="O006-PSU-002-U0161"><span class="math display" data-o006-math-id="O006-PSU-002-M0146">\[g_1(y)=\dfrac{6!}{0!(6-1)!}\left[\dfrac{y^2}{4}\right]^{1-1}\left[1-\dfrac{y^2}{4}\right]^{6-1}\left(\dfrac{1}{2}y\right)\]</span></p>
+<p data-o006-id="O006-PSU-002-U0162">for <span class="math inline" data-o006-math-id="O006-PSU-002-M0147">\(0&lt;y&lt;2\)</span>, which can be simplified to:</p>
+<p data-o006-id="O006-PSU-002-U0163"><span class="math display" data-o006-math-id="O006-PSU-002-M0148">\[g_1(y)=3y\left(1-\dfrac{y^2}{4}\right)^{5}\]</span></p>
+<p data-o006-id="O006-PSU-002-U0164">Applying the theorem with <span class="math inline" data-o006-math-id="O006-PSU-002-M0149">\(n=6\)</span> and <span class="math inline" data-o006-math-id="O006-PSU-002-M0150">\(r=4\)</span>, the p.d.f. of <span class="math inline" data-o006-math-id="O006-PSU-002-M0151">\(Y_4\)</span> is:</p>
+<p data-o006-id="O006-PSU-002-U0165"><span class="math display" data-o006-math-id="O006-PSU-002-M0152">\[g_4(y)=\dfrac{6!}{3!(6-4)!}\left[\dfrac{y^2}{4}\right]^{4-1}\left[1-\dfrac{y^2}{4}\right]^{6-4}\left(\dfrac{1}{2}y\right)\]</span></p>
+<p data-o006-id="O006-PSU-002-U0166">for <span class="math inline" data-o006-math-id="O006-PSU-002-M0153">\(0&lt;y&lt;2\)</span>, which can be simplified to:</p>
+<p data-o006-id="O006-PSU-002-U0167"><span class="math display" data-o006-math-id="O006-PSU-002-M0154">\[g_4(y)=\dfrac{15}{32}y^7\left(1-\dfrac{y^2}{4}\right)^{2}\]</span></p>
+<p data-o006-id="O006-PSU-002-U0168">Applying the theorem with <span class="math inline" data-o006-math-id="O006-PSU-002-M0155">\(n=6\)</span> and <span class="math inline" data-o006-math-id="O006-PSU-002-M0156">\(r=6\)</span>, the p.d.f. of <span class="math inline" data-o006-math-id="O006-PSU-002-M0157">\(Y_6\)</span> is:</p>
+<p data-o006-id="O006-PSU-002-U0169"><span class="math display" data-o006-math-id="O006-PSU-002-M0158">\[g_6(y)=\dfrac{6!}{5!(6-6)!}\left[\dfrac{y^2}{4}\right]^{6-1}\left[1-\dfrac{y^2}{4}\right]^{6-6}\left(\dfrac{1}{2}y\right)\]</span></p>
+<p data-o006-id="O006-PSU-002-U0170">for <span class="math inline" data-o006-math-id="O006-PSU-002-M0159">\(0&lt;y&lt;2\)</span>, which can be simplified to:</p>
+<p data-o006-id="O006-PSU-002-U0171"><span class="math display" data-o006-math-id="O006-PSU-002-M0160">\[g_6(y)=\dfrac{3}{1024}y^{11}\]</span></p>
+<p data-o006-id="O006-PSU-002-U0172">Fortunately, when we graph the three functions on one plot:</p>
+<div alt="Density plot for r = 1, 4, 6" class="lightbox quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center" data-o006-id="O006-PSU-002-U0173" id="fig-STAT-415-SEC-3-18-13.svg">
+<figure class="quarto-float quarto-float-fig figure" data-o006-id="O006-PSU-002-U0174">
+<div aria-describedby="fig-STAT-415-SEC-3-18-13.svg-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca" data-o006-id="O006-PSU-002-U0175">
+<a class="lightbox" data-gallery="quarto-lightbox-gallery-5" data-o006-id="O006-PSU-002-U0176" href="assets/STAT-415-SEC-3-18-13.svg" title="Fig 1.4: Density plot for r = 1, 4, 6"><img alt="Density plot for r = 1, 4, 6" class="img-fluid quarto-figure quarto-figure-center figure-img" data-o006-id="O006-PSU-002-U0177" src="assets/STAT-415-SEC-3-18-13.svg" style="width:70.0%"/></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" data-o006-id="O006-PSU-002-U0178" id="fig-STAT-415-SEC-3-18-13.svg-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Fig 1.4: Density plot for r = 1, 4, 6
+</figcaption>
+</figure>
+</div>
+<p data-o006-id="O006-PSU-002-U0179">we see something that makes intuitive sense, namely that as we increase the number of the order statistic, the p.d.f. “moves to the right” on the support interval.</p>
+</section>
+</div>
+</section>
+<section class="level2" data-number="1.3" data-o006-id="O006-PSU-002-U0180" id="summary">
+<h2 class="anchored" data-anchor-id="summary" data-number="1.3" data-o006-id="O006-PSU-002-U0181"><span class="header-section-number">1.3</span> Summary</h2>
+<p data-o006-id="O006-PSU-002-U0182">In this lesson, we explored a new idea that might seem a little different at first—what happens when we actually care about the order of our data? Instead of just looking at a bunch of values from a random sample, we asked questions like: what’s the probability the third smallest value is below a certain number? Or what does the distribution of the largest observation look like? These kinds of questions bring us into the world of order statistics.</p>
+<p data-o006-id="O006-PSU-002-U0183">We learned how to define and identify order statistics, like the smallest, largest, or the r-th smallest value in a sample. Then we got into how to find the cumulative distribution function (CDF) and probability density function (PDF) of a specific order statistic. The cool part is that these functions can be derived using tools we already know—like the binomial distribution and some calculus. You saw how the PDF of an order statistic shifts depending on which rank we’re looking at (e.g., smallest vs. largest), which helps explain patterns in real-world data, like extreme weather events or test scores.</p>
+<p data-o006-id="O006-PSU-002-U0184">This lesson sets us up to use order statistics in inference problems and real applications—anytime we care not just about the data, but how that data is arranged.</p>
+<p data-o006-id="O006-PSU-002-U0185"><strong>Key Takeaways:</strong></p>
+<ul data-o006-id="O006-PSU-002-U0186">
+<li data-o006-id="O006-PSU-002-U0187">If <span class="math inline" data-o006-math-id="O006-PSU-002-M0161">\(X_1, X_2, \ldots, X_n\)</span>, a simple random sample of size <span class="math inline" data-o006-math-id="O006-PSU-002-M0162">\(n\)</span>, are ordered from smallest value to largest value, the order statistics, denoted as <span class="math inline" data-o006-math-id="O006-PSU-002-M0163">\(Y_1, Y_2, \ldots, Y_n\)</span> are such that <span class="math inline" data-o006-math-id="O006-PSU-002-M0164">\(Y_i\)</span> is the <span class="math inline" data-o006-math-id="O006-PSU-002-M0165">\(i^{th}\)</span> smallest of <span class="math inline" data-o006-math-id="O006-PSU-002-M0166">\(X_1, X_2,\ldots, X_n\)</span> and <span class="math inline" data-o006-math-id="O006-PSU-002-M0167">\(Y_1&lt;Y_2&lt;\ldots&lt;Y_n\)</span></li>
+<li data-o006-id="O006-PSU-002-U0188">The probability density function of the <span class="math inline" data-o006-math-id="O006-PSU-002-M0168">\(r^{th}\)</span> order statistic is: <span class="math inline" data-o006-math-id="O006-PSU-002-M0169">\(g_r(y)=\frac{n!}{(n-r)!(r-1)!} \left[F(y)]\right]^{r-1}\left[1-F(y)\right]^{n-r}f(y)\)</span></li>
+</ul>
+</section>
+</main>
+</body>
+</html>

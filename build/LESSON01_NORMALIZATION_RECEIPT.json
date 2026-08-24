@@ -1,0 +1,145 @@
+{
+  "counts": {
+    "catalogue_records": 579,
+    "code_nodes": 0,
+    "corollaries": 0,
+    "definitions": 1,
+    "examples": 3,
+    "figure_captions": 4,
+    "figures": 4,
+    "headings": 12,
+    "images": 5,
+    "links": 8,
+    "math_display": 34,
+    "math_inline": 135,
+    "math_nodes": 169,
+    "native_id_occurrences": 28,
+    "pre_nodes": 0,
+    "proofs": 1,
+    "sections": 8,
+    "solutions": 5,
+    "structural_units": 188,
+    "tables": 0,
+    "theorem_class_nodes": 5,
+    "theorems": 1,
+    "translation_segments": 221,
+    "unique_native_ids": 27
+  },
+  "document": {
+    "component_id": "Lesson01",
+    "document_id": "O006-PSU-002",
+    "duplicate_native_ids": [
+      "fig-stat415sec31812"
+    ],
+    "entity_id": "O006-PSU-002",
+    "formula_count": 169,
+    "formula_sha256": "f109fee1e381b21d9e67666083ee9259ebf591b320dc213f8a7968486cf09e28",
+    "locale": "en-US",
+    "native_id_occurrences": 28,
+    "normalized_bytes": 44561,
+    "normalized_path": "source/normalized/en-US/Lesson01.html",
+    "normalized_sha256": "80af5060d5b87190c82b553500024b0926af28aa4b2310091092c1873b47f02c",
+    "ordinal": 2,
+    "record_type": "document",
+    "schema": "o006.stat415.source-catalogue.v1",
+    "segment_count": 221,
+    "source_bytes": 84567,
+    "source_path": "authority/upstream/stat415/Lesson01.html",
+    "source_sha256": "6b3bf5ba7b5cc7960fb4eddec931088f51f588a879444630a83238767fbfce85",
+    "source_url": "https://online.stat.psu.edu/stat415/Lesson01",
+    "topology_sha256": "7071b1253e1c6be52183feebf881afd34a197e9000a8fcf8f560087bf8901e8f",
+    "unique_native_ids": 27,
+    "unit_count": 188
+  },
+  "duplicate_native_ids": [
+    "fig-stat415sec31812"
+  ],
+  "outputs": {
+    "catalogue": {
+      "bytes": 272659,
+      "path": "backend/lesson01_source_catalogue.jsonl",
+      "records": 579,
+      "sha256": "c1e180ddc4fd1793985a7379a058d7a046d3683642d5c1f1f382b86915583cd1"
+    },
+    "normalized": {
+      "bytes": 44561,
+      "path": "source/normalized/en-US/Lesson01.html",
+      "sha256": "80af5060d5b87190c82b553500024b0926af28aa4b2310091092c1873b47f02c"
+    },
+    "script": {
+      "bytes": 23844,
+      "path": "scripts/normalize_lesson01.py",
+      "sha256": "99924b3f08ce14584e56bf036aaab3949d6fc5ac12c2188f1c853decf240eb92"
+    },
+    "segments": {
+      "bytes": 40252,
+      "path": "working/lesson01_segments.csv",
+      "rows": 221,
+      "sha256": "8b9417cfd1895cfc773a634acfd8a6f6f867c686d511923644935905df8f92db"
+    }
+  },
+  "parser": {
+    "beautifulsoup_version": "4.14.3",
+    "name": "beautifulsoup4/html.parser",
+    "source_decoding": "UTF-8 strict"
+  },
+  "preservation": {
+    "authority_mutated": false,
+    "formula_nodes_byte_preserved": true,
+    "formula_sha256": "f109fee1e381b21d9e67666083ee9259ebf591b320dc213f8a7968486cf09e28",
+    "image_sequence_preserved": true,
+    "link_sequence_preserved": true,
+    "main_selector": "main#quarto-document-content",
+    "native_anchor_sequence_preserved": true,
+    "topology_sha256": "7071b1253e1c6be52183feebf881afd34a197e9000a8fcf8f560087bf8901e8f"
+  },
+  "schema": "o006.stat415.lesson01-normalization.v1",
+  "source_defect_count": 6,
+  "source_defects": [
+    {
+      "defect_id": "L01-D001",
+      "evidence": "fig-stat415sec31812 occurs on both the figure wrapper div and its img",
+      "kind": "duplicate-native-id",
+      "node_tags": [
+        "div",
+        "img"
+      ]
+    },
+    {
+      "defect_id": "L01-D002",
+      "evidence": "\\(g_r(y)=\\frac{n!}{(n-r)!(r-1)!} \\left[F(y)]\\right]^{r-1}\\left[1-F(y)\\right]^{n-r}f(y)\\)",
+      "kind": "formula-delimiter",
+      "note": "The summary formula has an extra closing bracket after F(y)."
+    },
+    {
+      "defect_id": "L01-D003",
+      "evidence": "\\(i=1, 2, \\cdots, 5\\)",
+      "kind": "index-range",
+      "note": "Both Example 1.2 binomial constructions count six trials but index the event only through 5.",
+      "occurrences": 2
+    },
+    {
+      "defect_id": "L01-D004",
+      "evidence": "\\(\\{X_i\\le y\\},\\;i=1, 2, \\cdots, r\\)",
+      "kind": "index-range",
+      "note": "The theorem proof defines Z over n trials, so the indexed event should range over the n observations, not only through r."
+    },
+    {
+      "defect_id": "L01-D005",
+      "evidence": {
+        "alt": "Celsius vs Fahrenheit scatterplot",
+        "src": "assets/stat-415-sec-3-18-10.svg"
+      },
+      "kind": "image-description",
+      "note": "The image occurs in the order-statistics number-line example, not a Celsius/Fahrenheit plot."
+    },
+    {
+      "defect_id": "L01-D006",
+      "evidence": "\\[\\begin{align} g_r(y)&=\\sum_{k=r}^{n-1}{n\\choose k}(k)[F(y)]^{k-1}f(y)[1-F(y)]^{n-k}\\\\ &+\\sum_{k=r}^{n-1}[F(y)]^k(n-k)[1-F(y)]^{n-k-1}(-f(y))\\\\&+n[F(y)]^{n-1}f(y)\\end{align} \\tag{1.1}\\]",
+      "kind": "missing-binomial-coefficient",
+      "note": "The second product-rule sum in Equation 1.1 omits the binomial coefficient {n choose k} carried by every differentiated summand."
+    }
+  ],
+  "source_rule": "semantic main only; no authority correction; formulas/code protected; stable unit, math, and segment IDs additive",
+  "status": "normalized-source-ready"
+}

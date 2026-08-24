@@ -6,18 +6,17 @@ komponen O006/C140.
 
 ## Status
 
-**Sebagian — unit pertama lengkap.** Laman utama dan seluruh Pelajaran 00 sudah
-diterjemahkan, dibangun, dan lulus pemeriksaan deterministik serta visual.
-Pelajaran 01–12 tetap tercantum dan untuk sementara menaut ke halaman resmi
-berbahasa Inggris. Batas akhir edisi ini adalah laman utama dan Pelajaran
-00–12, sebanyak 14 dokumen.
+**Sebagian — 3 dari 14 dokumen lengkap.** Laman utama, seluruh Pelajaran 00,
+dan seluruh Pelajaran 01 sudah diterjemahkan, dibangun, dan lulus pemeriksaan
+deterministik serta visual. Pelajaran 02–12 tetap tercantum dan untuk sementara
+menaut ke halaman resmi berbahasa Inggris. Batas akhir edisi ini adalah laman
+utama dan Pelajaran 00–12, sebanyak 14 dokumen.
 
-- 523 segmen terjemahan lengkap;
-- 562 unit struktural sumber dengan ID stabil;
-- 331 permukaan matematika Pelajaran 00;
-- 5 contoh dengan penyelesaian, termasuk 4 pengungkapan HTML aksesibel;
-- 14 koreksi turunan terverifikasi; byte sumber resmi tidak diubah;
-- pembaca HTML luring: 19 berkas / 2.459.466 byte.
+- 744 segmen terjemahan lengkap;
+- 750 unit struktural sumber dengan ID stabil dan 748 unit turunan;
+- 500 permukaan matematika, semuanya terikat ke ID yang netral terhadap locale;
+- 20 koreksi turunan terverifikasi; byte sumber resmi tidak diubah;
+- pembaca HTML luring: 28 berkas / 2.598.449 byte.
 
 Pembaca lokal tersedia di `build/html-id/index.html`. Riwayat sumber,
 identitas SHA-256, hak komponen, koreksi, backend modular, hasil build, dan
@@ -25,8 +24,8 @@ bukti QA disimpan bersama edisi.
 
 - Repositori publik: https://github.com/KokunoYumeto/penn-state-stat-415-id
 - Pembaca web: https://kokunoyumeto.github.io/penn-state-stat-415-id/
-- Rilis unit pertama: https://github.com/KokunoYumeto/penn-state-stat-415-id/releases/tag/v2026.08.24.2of14
-- Preservasi unit pertama: https://doi.org/10.5281/zenodo.22077423
+- Rilis publik terbaru: https://github.com/KokunoYumeto/penn-state-stat-415-id/releases
+- Konsep preservasi: https://doi.org/10.5281/zenodo.22077422
 
 ## Reproduksi
 
@@ -36,11 +35,14 @@ jalankan:
 ```text
 python scripts/freeze_stat415.py --check-only
 python scripts/freeze_first_unit_assets.py --check-only
+python scripts/freeze_lesson01_assets.py --check-only
 python scripts/freeze_mathjax.py --check-only
 python scripts/normalize_first_unit.py --check-only
 python scripts/merge_first_unit_translations.py --check-only
-python scripts/build_first_unit.py --check-only
-python scripts/qa_first_unit.py --check-only
+python scripts/normalize_lesson01.py --check-only
+python scripts/merge_lesson01_translations.py --check-only
+python scripts/build_through_lesson01.py --check-only
+python scripts/qa_through_lesson01.py --check-only
 ```
 
 Untuk membaca secara lokal, layani `build/html-id` dengan peladen HTTP statis;

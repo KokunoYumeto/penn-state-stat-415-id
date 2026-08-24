@@ -1,0 +1,7 @@
+# Catatan penerjemahan Lesson 01 — bagian B
+
+- Glosarium kanonis telah diterapkan. Instruksi langsung untuk partisi ini menetapkan *order statistic(s)* sebagai “statistik urutan”; istilah tersebut dipakai secara konsisten meskipun baris O006-TERM-0030 dalam glosarium saat ini mencatat “statistik terurut”. Berkas kandidat terminologi Lesson 01 tidak ada.
+- Istilah lain mengikuti glosarium: *random variable* → “peubah acak”, *independent* → “bebas”, *probability density function* → “fungsi kepadatan peluang”, *cumulative distribution function* → “fungsi distribusi kumulatif”, *support* → “himpunan dukungan”, *theorem* → “teorema”, *proof* → “bukti”, dan *solution* → “penyelesaian”.
+- Batas spasi awal/akhir setiap segmen dipertahankan. Pada O006-PSU-002-S0086, sufiks posesif Inggris `’s` yang langsung mengikuti node matematika dialihkan menjadi enklitik Indonesia `-nya`; tanda hubung mempertahankan batas tanpa spasi dan menghasilkan sambungan yang terbaca tanpa mengubah node matematika.
+- Pada pasangan O006-PSU-002-S0123–S0124 dan O006-PSU-002-S0126–S0127, node matematika terlindungi memisahkan frasa Inggris *r-th order statistic*. Target menyatakannya sebagai “statistik urutan bernomor [node matematika] tersebut” tanpa memindahkan atau mengubah node.
+- Tidak ada cacat formula atau penomoran sumber yang dapat dibuktikan dari source_text pada rentang S0076–S0148. Tidak ada formula, pengenal, atau indeks yang diperbaiki atau dinomori ulang secara diam-diam.

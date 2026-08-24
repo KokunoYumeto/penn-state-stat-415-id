@@ -1,0 +1,255 @@
+<!doctype html>
+<html lang="id-ID">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>1 Statistik Urutan</title>
+<meta name="source-url" content="https://online.stat.psu.edu/stat415/Lesson01">
+<meta name="translation-provenance" content="OpenAI Codex gpt-5.6-sol, Ultra">
+<meta name="edition-status" content="partial: 3 of 14 documents complete; landing and Lessons 00–01">
+<link rel="license" href="https://creativecommons.org/licenses/by-nc/4.0/">
+<link rel="stylesheet" href="assets/reader.css">
+<script defer src="assets/MathJax/tex-svg.js"></script>
+</head>
+<body>
+<a class="skip-link" href="#quarto-document-content">Lewati ke isi utama</a>
+<header class="site-header"><div class="site-header__inner"><div><p class="site-title">STAT 415 — Pengantar Statistika Matematis</p><p class="site-subtitle">Rekonstruksi dan terjemahan Bahasa Indonesia · O006/C140</p></div><nav class="site-nav" aria-label="Navigasi utama"><a href="index.html">Daftar pelajaran</a><a href="Lesson00.html">Pelajaran 00</a><a href="Lesson01.html">Pelajaran 01</a><a href="licenses/index.html">Lisensi</a></nav></div></header>
+<div class="page-shell"><aside class="edition-note" aria-label="Status edisi"><strong>Edisi Bahasa Indonesia — 3 dari 14 dokumen.</strong> Laman utama serta Pelajaran 00 dan 01 telah diterjemahkan sepenuhnya. Pelajaran 02–12 masih menuju sumber resmi berbahasa Inggris sampai unit berikutnya selesai. <a href="https://online.stat.psu.edu/stat415/Lesson01">Sumber resmi halaman ini</a>. <a href="licenses/index.html">Atribusi, perubahan, dan lisensi</a>.</aside><main class="content" data-component-id="Lesson01" data-document-id="O006-PSU-002" data-source-url="https://online.stat.psu.edu/stat415/Lesson01" id="quarto-document-content">
+<header class="quarto-title-block default" data-o006-id="O006-PSU-002-U0001" id="title-block-header"><nav aria-label="Jejak navigasi" class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" data-o006-id="O006-PSU-002-U0002"><ol class="breadcrumb" data-o006-id="O006-PSU-002-U0003"><li class="breadcrumb-item" data-o006-id="O006-PSU-002-U0004"><a data-o006-id="O006-PSU-002-U0005" href="index.html#lessons">Pelajaran</a></li><li class="breadcrumb-item" data-o006-id="O006-PSU-002-U0006"><a data-o006-id="O006-PSU-002-U0007" href="Lesson01.html"><span class="chapter-number">1</span>  <span class="chapter-title">Statistik Urutan</span></a></li></ol></nav>
+<div class="quarto-title" data-o006-id="O006-PSU-002-U0008">
+<h1 class="title" data-o006-id="O006-PSU-002-U0009"><span class="chapter-number">1</span>  <span class="chapter-title">Statistik Urutan</span></h1>
+<div class="quarto-categories" data-o006-id="O006-PSU-002-U0010">
+<div class="quarto-category" data-o006-id="O006-PSU-002-U0011">Statistik Urutan</div>
+<div class="quarto-category" data-o006-id="O006-PSU-002-U0012">Fungsi Kepadatan Peluang</div>
+</div>
+</div>
+<div class="quarto-title-meta" data-o006-id="O006-PSU-002-U0013">
+</div>
+</header>
+<section class="level2 unnumbered unlisted" data-o006-id="O006-PSU-002-U0014" id="overview">
+<h2 class="unnumbered unlisted anchored" data-anchor-id="overview" data-o006-id="O006-PSU-002-U0015">Gambaran Umum</h2>
+<p data-o006-id="O006-PSU-002-U0016">Biasanya kita tidak memberikan perhatian khusus pada urutan sekumpulan peubah acak <span class="math inline" data-o006-math-id="O006-PSU-002-M0001">\(X_1, X_2, \ldots, X_n\)</span>. Namun, bagaimana jika urutannya kita perhatikan? Misalkan, sebagai contoh, kita perlu mengetahui peluang bahwa nilai terbesar ketiga kurang dari 72. Atau, misalkan kita perlu mengetahui persentil ke-80 dari suatu sampel acak denyut jantung. Dalam kedua kasus tersebut, kita perlu memahami perilaku data setelah diurutkan. Dengan kata lain, kita perlu memahami fungsi kepadatan peluang dari statistik urutan <span class="math inline" data-o006-math-id="O006-PSU-002-M0002">\(Y_1, Y_2, \ldots, Y_n\)</span>. Itulah yang akan kita bahas dalam pelajaran ini.</p>
+<section class="level3 unnumbered unlisted objectiveblock" data-o006-id="O006-PSU-002-U0017" id="objectives">
+<h3 class="unnumbered unlisted anchored" data-anchor-id="objectives" data-o006-id="O006-PSU-002-U0018"><i class="bi bi-check2-circle"></i>Tujuan</h3>
+<p data-o006-id="O006-PSU-002-U0019">Setelah menyelesaikan pelajaran ini, Anda diharapkan mampu:</p>
+<ol data-o006-id="O006-PSU-002-U0020" type="1">
+<li data-o006-id="O006-PSU-002-U0021">Mengidentifikasi statistik urutan berdasarkan definisinya,</li>
+<li data-o006-id="O006-PSU-002-U0022">Menurunkan fungsi kepadatan peluang untuk statistik urutan dengan indeks <span class="math inline" data-o006-math-id="O006-PSU-002-M0003">\(r^{th}\)</span> tersebut, dan</li>
+<li data-o006-id="O006-PSU-002-U0023">Menurunkan fungsi distribusi kumulatif untuk statistik urutan dengan indeks <span class="math inline" data-o006-math-id="O006-PSU-002-M0004">\(r^{th}\)</span> tersebut.</li>
+</ol>
+</section>
+</section>
+<section class="level2" data-number="1.1" data-o006-id="O006-PSU-002-U0024" id="the-basics">
+<h2 class="anchored" data-anchor-id="the-basics" data-number="1.1" data-o006-id="O006-PSU-002-U0025"><span class="header-section-number">1.1</span> Konsep Dasar</h2>
+<div class="theorem example" data-o006-id="O006-PSU-002-U0026" id="exm-rats">
+<p data-o006-id="O006-PSU-002-U0027"><span class="theorem-title"><strong>Contoh 1.1</strong></span> Mari kita memotivasi definisi sekumpulan statistik urutan melalui sebuah contoh sederhana.</p>
+<p data-o006-id="O006-PSU-002-U0028">Misalkan sebuah sampel acak yang terdiri atas lima ekor tikus menghasilkan bobot berikut (dalam gram):</p>
+<p data-o006-id="O006-PSU-002-U0029"><span class="math display" data-o006-math-id="O006-PSU-002-M0005">\[x_1=602 \qquad x_2=781\qquad x_3=709\qquad x_4=742\qquad x_5=633\]</span></p>
+<p data-o006-id="O006-PSU-002-U0030">Apa statistik urutan teramati dari kumpulan data ini?</p>
+<section class="level4 card card-body bg-light ms-3 mb-3 pt-0" data-o006-id="O006-PSU-002-U0031" id="solution">
+<h4 class="anchored" data-anchor-id="solution" data-o006-id="O006-PSU-002-U0032">Penyelesaian</h4>
+<p data-o006-id="O006-PSU-002-U0033">Bahkan tanpa mengetahui definisi formal statistik urutan, kita tidak perlu menjadi ilmuwan roket untuk menyadari bahwa data harus disusun dalam urutan numerik menaik. Dengan demikian, statistik urutan yang teramati adalah:</p>
+<p data-o006-id="O006-PSU-002-U0034"><span class="math display" data-o006-math-id="O006-PSU-002-M0006">\[y_1=602&lt;y_2=633&lt;y_3=709&lt;y_4=742&lt;y_5=781\]</span> Satu-satunya hal yang mungkin menyulitkan dalam contoh sederhana ini adalah jika dua tikus memiliki bobot yang sama, karena nilai yang sama memang mungkin teramati. Namun, kita akan mengesampingkan peluang terjadinya hal itu dengan membuat asumsi yang berlaku sepanjang pelajaran ini—dan seterusnya. <u><strong>Kita akan mengasumsikan bahwa n pengamatan yang saling bebas berasal dari suatu distribusi kontinu, sehingga peluang bahwa dua pengamatan mana pun bernilai sama adalah nol.</strong></u> Tentu saja, dalam praktiknya nilai yang sama masih mungkin dijumpai. Namun, asumsi bahwa peluang terjadinya nilai yang sama nyaris nol memungkinkan kita mengembangkan teori distribusi statistik urutan yang setidaknya berlaku sebagai hampiran ketika nilai yang sama muncul. Selanjutnya, mari kita definisikan sekumpulan statistik urutan secara formal.</p>
+</section>
+</div>
+<div class="ms-3 mt-3 theorem definition" data-o006-id="O006-PSU-002-U0035" id="def-orderstats">
+<p data-o006-id="O006-PSU-002-U0036"><span class="theorem-title"><strong>Def. 1.1 (Statistik Urutan)</strong></span> Jika <span class="math inline" data-o006-math-id="O006-PSU-002-M0007">\(X_1, X_2, \cdots, X_n\)</span> merupakan pengamatan dari sampel acak berukuran <span class="math inline" data-o006-math-id="O006-PSU-002-M0008">\(n\)</span> dari suatu distribusi kontinu, kita menetapkan peubah-peubah acak:</p>
+<p data-o006-id="O006-PSU-002-U0037"><span class="math display" data-o006-math-id="O006-PSU-002-M0009">\[Y_1&lt;Y_2&lt;\cdots&lt;Y_n\]</span></p>
+<p data-o006-id="O006-PSU-002-U0038">menyatakan statistik urutan sampel tersebut, dengan:</p>
+<p data-o006-id="O006-PSU-002-U0039"><span class="math inline" data-o006-math-id="O006-PSU-002-M0010">\(Y_1\)</span> merupakan nilai terkecil di antara <span class="math inline" data-o006-math-id="O006-PSU-002-M0011">\(X_1, X_2, \cdots, X_n\)</span> tersebut</p>
+<p data-o006-id="O006-PSU-002-U0040"><span class="math inline" data-o006-math-id="O006-PSU-002-M0012">\(Y_2\)</span> merupakan nilai terkecil kedua di antara <span class="math inline" data-o006-math-id="O006-PSU-002-M0013">\(X_1, X_2, \cdots, X_n\)</span> tersebut</p>
+<p data-o006-id="O006-PSU-002-U0041">….</p>
+<p data-o006-id="O006-PSU-002-U0042"><span class="math inline" data-o006-math-id="O006-PSU-002-M0014">\(Y_{n-1}\)</span> merupakan nilai terbesar kedua di antara <span class="math inline" data-o006-math-id="O006-PSU-002-M0015">\(X_1, X_2, \cdots, X_n\)</span> tersebut</p>
+<p data-o006-id="O006-PSU-002-U0043"><span class="math inline" data-o006-math-id="O006-PSU-002-M0016">\(Y_n\)</span> merupakan nilai terbesar di antara <span class="math inline" data-o006-math-id="O006-PSU-002-M0017">\(X_1, X_2, \cdots, X_n\)</span> tersebut</p>
+</div>
+<p data-o006-id="O006-PSU-002-U0044">Sekarang, kita akan secara bertahap mencari fungsi kepadatan peluang untuk setiap anggota dari <span class="math inline" data-o006-math-id="O006-PSU-002-M0018">\(n\)</span> statistik urutan tersebut, yakni statistik urutan dengan indeks <span class="math inline" data-o006-math-id="O006-PSU-002-M0019">\(r^{th}\)</span> yang dilambangkan dengan <span class="math inline" data-o006-math-id="O006-PSU-002-M0020">\(Y_r\)</span>. Dengan demikian, kita dapat memahami perilaku statistik urutan dan memakai pengetahuan itu untuk menarik kesimpulan, misalnya tentang mobil tercepat dalam perlombaan atau tikus terberat pada pola makan tertentu. Untuk mencari fungsi kepadatan peluang, kita akan menggunakan teknik fungsi distribusi. Mungkin sudah cukup lama sejak teknik ini terakhir digunakan. Sebagai pengingat, strategi kita adalah terlebih dahulu mencari fungsi distribusi <span class="math inline" data-o006-math-id="O006-PSU-002-M0021">\(G_r(y)\)</span> dari statistik urutan dengan indeks <span class="math inline" data-o006-math-id="O006-PSU-002-M0022">\(r^{th}\)</span> tersebut, lalu mengambil turunannya untuk memperoleh fungsi kepadatan peluang <span class="math inline" data-o006-math-id="O006-PSU-002-M0023">\(g_r(y)\)</span> bagi statistik urutan dengan indeks <span class="math inline" data-o006-math-id="O006-PSU-002-M0024">\(r^{th}\)</span> tersebut. Namun, pembahasan kita sudah sedikit melompat ke depan. Itulah yang akan kita lakukan pada halaman berikutnya. Agar pembahasan tersebut lebih mudah dipahami, mari kita lihat dahulu sebuah contoh konkret di sini.</p>
+<div class="theorem example" data-o006-id="O006-PSU-002-U0045" id="exm-orderstats">
+<p data-o006-id="O006-PSU-002-U0046"><span class="theorem-title"><strong>Contoh 1.2</strong></span> <a class="lightbox" data-gallery="quarto-lightbox-gallery-1" data-o006-id="O006-PSU-002-U0047" href="assets/STAT-415-SEC-3-18-09.svg"><img alt="Coordinate graph of f(x) = 1/2x" class="float-sm-end w-25 ps-3 img-fluid" data-o006-id="O006-PSU-002-U0048" id="fig-STAT-415-SEC-3-18-09" src="assets/STAT-415-SEC-3-18-09.svg"/></a> Misalkan <span class="math inline" data-o006-math-id="O006-PSU-002-M0025">\(Y_1&lt;Y_2&lt;Y_3&lt;Y_4&lt;Y_5&lt;Y_6\)</span> adalah statistik urutan yang berkaitan dengan <span class="math inline" data-o006-math-id="O006-PSU-002-M0026">\(n=6\)</span> pengamatan saling bebas yang masing-masing berasal dari distribusi dengan fungsi kepadatan peluang:</p>
+<p data-o006-id="O006-PSU-002-U0049"><span class="math display" data-o006-math-id="O006-PSU-002-M0027">\[f(x)=\dfrac{1}{2}x\]</span></p>
+<p data-o006-id="O006-PSU-002-U0050">untuk <span class="math inline" data-o006-math-id="O006-PSU-002-M0028">\(0&lt;x&lt;2\)</span>.</p>
+<ol data-o006-id="O006-PSU-002-U0051" type="1">
+<li data-o006-id="O006-PSU-002-U0052"><p data-o006-id="O006-PSU-002-U0053"><strong>Berapakah peluang bahwa statistik urutan terbesar kedua, yaitu</strong> <span class="math inline" data-o006-math-id="O006-PSU-002-M0029">\(Y_5\)</span>, bernilai kurang dari 1? Dengan kata lain, berapakah <span class="math inline" data-o006-math-id="O006-PSU-002-M0030">\(P(Y_5&lt;1)\)</span>?</p>
+<div class="card card-body bg-light ms-3 mb-3 pt-0" data-o006-id="O006-PSU-002-U0054">
+<h4 class="anchored" data-o006-id="O006-PSU-002-U0055" id="solution-1">Penyelesaian</h4>
+<p data-o006-id="O006-PSU-002-U0056">Kunci untuk menemukan peluang yang diminta adalah menyadari bahwa satu-satunya cara statistik urutan kelima, <span class="math inline" data-o006-math-id="O006-PSU-002-M0031">\(Y_5\)</span>, bernilai kurang dari satu adalah jika sedikitnya 5 dari peubah acak <span class="math inline" data-o006-math-id="O006-PSU-002-M0032">\(X_1, X_2, X_3, X_4, X_5, X_6\)</span> bernilai kurang dari satu. Untuk mempermudah, misalkan lima nilai teramati pertama <span class="math inline" data-o006-math-id="O006-PSU-002-M0033">\(x_1, x_2, x_3, x_4, x_5\)</span> bernilai kurang dari satu, tetapi nilai keenam <span class="math inline" data-o006-math-id="O006-PSU-002-M0034">\(x_6\)</span> tidak demikian. Dalam hal ini, statistik urutan kelima yang teramati, <span class="math inline" data-o006-math-id="O006-PSU-002-M0035">\(y_5\)</span>, akan bernilai kurang dari satu:</p>
+<div class="lightbox quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center" data-o006-id="O006-PSU-002-U0057" id="fig-stat415sec31810">
+<figure class="quarto-float quarto-float-fig figure" data-o006-id="O006-PSU-002-U0058">
+<div aria-describedby="fig-stat415sec31810-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca" data-o006-id="O006-PSU-002-U0059">
+<a class="lightbox" data-gallery="quarto-lightbox-gallery-2" data-o006-id="O006-PSU-002-U0060" href="assets/stat-415-sec-3-18-10.svg" title="Fig 1.1: "><img alt="Garis bilangan yang menunjukkan lima nilai kurang dari satu dan satu nilai tidak kurang dari satu." class="img-fluid quarto-figure quarto-figure-center figure-img" data-o006-id="O006-PSU-002-U0061" src="assets/stat-415-sec-3-18-10.svg" style="width:60.0%"/></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" data-o006-id="O006-PSU-002-U0062" id="fig-stat415sec31810-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Gambar 1.1
+</figcaption>
+</figure>
+</div>
+<p data-o006-id="O006-PSU-002-U0063">Statistik urutan kelima yang teramati, <span class="math inline" data-o006-math-id="O006-PSU-002-M0036">\(y_5\)</span>, juga akan bernilai kurang dari satu jika keenam nilai teramati <span class="math inline" data-o006-math-id="O006-PSU-002-M0037">\(x_1, x_2, x_3, x_4, x_5, x_6\)</span> bernilai kurang dari satu:</p>
+<div alt="Number line showing 6 values less than 1." class="lightbox quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center" data-o006-id="O006-PSU-002-U0064" id="fig-stat-415-sec-3-18-11">
+<figure class="quarto-float quarto-float-fig figure" data-o006-id="O006-PSU-002-U0065">
+<div aria-describedby="fig-stat-415-sec-3-18-11-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca" data-o006-id="O006-PSU-002-U0066">
+<a class="lightbox" data-gallery="quarto-lightbox-gallery-3" data-o006-id="O006-PSU-002-U0067" href="assets/stat-415-sec-3-18-11.svg" title="Fig 1.2: "><img alt="Number line showing 6 values less than 1." class="img-fluid quarto-figure quarto-figure-center figure-img" data-o006-id="O006-PSU-002-U0068" src="assets/stat-415-sec-3-18-11.svg" style="width:60.0%"/></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" data-o006-id="O006-PSU-002-U0069" id="fig-stat-415-sec-3-18-11-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Gambar 1.2
+</figcaption>
+</figure>
+</div>
+<p data-o006-id="O006-PSU-002-U0070">Statistik urutan kelima yang teramati, <span class="math inline" data-o006-math-id="O006-PSU-002-M0038">\(y_5\)</span>, tidak akan bernilai kurang dari satu jika empat nilai teramati pertama <span class="math inline" data-o006-math-id="O006-PSU-002-M0039">\(x_1, x_2, x_3, x_4\)</span> bernilai kurang dari satu, tetapi nilai kelima <span class="math inline" data-o006-math-id="O006-PSU-002-M0040">\(x_5\)</span> dan nilai keenam <span class="math inline" data-o006-math-id="O006-PSU-002-M0041">\(x_6\)</span> tidak demikian:</p>
+<div alt="Number line showing four values less than and two greater than one." class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center" data-o006-id="O006-PSU-002-U0071" id="fig-stat415sec31812" width="60%">
+<figure class="quarto-float quarto-float-fig figure" data-o006-id="O006-PSU-002-U0072">
+<div aria-describedby="fig-stat415sec31812-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca" data-o006-id="O006-PSU-002-U0073">
+<a class="lightbox" data-gallery="quarto-lightbox-gallery-4" data-o006-id="O006-PSU-002-U0074" href="assets/stat-415-sec-3-18-12.svg" title="Fig 1.3: "><img alt="Number line showing four values less than and two greater than one." class="img-fluid quarto-figure quarto-figure-center anchored figure-img" data-o006-id="O006-PSU-002-U0075" data-source-id="fig-stat415sec31812" id="psu415-l01-fig-stat415sec31812-image" src="assets/stat-415-sec-3-18-12.svg" style="width:60.0%"/></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" data-o006-id="O006-PSU-002-U0076" id="fig-stat415sec31812-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Gambar 1.3
+</figcaption>
+</figure>
+</div>
+</div>
+<p data-o006-id="O006-PSU-002-U0077">Sekali lagi, satu-satunya cara statistik urutan kelima, <span class="math inline" data-o006-math-id="O006-PSU-002-M0042">\(Y_5\)</span>, bernilai kurang dari satu adalah jika 5 atau 6—yakni, sedikitnya 5—dari peubah acak <span class="math inline" data-o006-math-id="O006-PSU-002-M0043">\(X_1, X_2, X_3, X_4, X_5, \text{ and }X_6\)</span> bernilai kurang dari satu. Untuk mempermudah, kita hanya meninjau lima atau enam peubah acak pertama. Namun, sebenarnya sembarang lima atau enam peubah acak yang bernilai kurang dari satu akan menghasilkan keadaan yang sama. Kita hanya perlu melakukan “pemilihan” untuk menghitung banyaknya cara memperoleh sembarang lima atau enam peubah acak yang bernilai kurang dari satu.</p>
+<p data-o006-id="O006-PSU-002-U0078">Jika kita perhatikan, ini merupakan perhitungan peluang binomial. Jika kejadian <span class="math inline" data-o006-math-id="O006-PSU-002-M0044">\(\{X_i&lt;1\}\)</span>, <span class="math inline" data-o006-math-id="O006-PSU-002-M0045">\(i=1, 2, \cdots, 6\)</span> dianggap sebagai “keberhasilan,” dan kita misalkan <span class="math inline" data-o006-math-id="O006-PSU-002-M0046">\(Z\)</span> = banyaknya keberhasilan dalam enam percobaan yang saling bebas, maka <span class="math inline" data-o006-math-id="O006-PSU-002-M0047">\(Z\)</span> merupakan peubah acak binomial dengan <span class="math inline" data-o006-math-id="O006-PSU-002-M0048">\(n=6\)</span> dan <span class="math inline" data-o006-math-id="O006-PSU-002-M0049">\(p=0.25\)</span>:</p>
+<div data-o006-id="O006-PSU-002-U0079" style="overflow-x:auto;overflow-y:hidden;">
+<p data-o006-id="O006-PSU-002-U0080"><span class="math display" data-o006-math-id="O006-PSU-002-M0050">\[P(X_i\le1)=\dfrac{1}{2}\int_{0}^{1}x dx=\dfrac{1}{2}\left[\dfrac{x^2}{2}\right]_{x=0}^{x=1}=\dfrac{1}{2}\left(\dfrac{1}{2}-0\right)=\dfrac{1}{4}\]</span></p>
+</div>
+<p data-o006-id="O006-PSU-002-U0081">Menentukan peluang bahwa statistik urutan kelima, <span class="math inline" data-o006-math-id="O006-PSU-002-M0051">\(Y_5\)</span>, kurang dari satu dapat direduksi menjadi perhitungan binomial. Yaitu:</p>
+<div data-o006-id="O006-PSU-002-U0082" style="overflow-x:auto;overflow-y:hidden;">
+<p data-o006-id="O006-PSU-002-U0083"><span class="math display" data-o006-math-id="O006-PSU-002-M0052">\[P(Y_5&lt;1)=P(Z=5)+P(Z=6)=\binom{6}{5}\left(\dfrac{1}{4} \right)^5\left(\dfrac{3}{4} \right)^1+\binom{6}{6}\left(\dfrac{1}{4} \right)^6\left(\dfrac{3}{4} \right)^0=0.0046\]</span></p>
+</div>
+<p data-o006-id="O006-PSU-002-U0084">Kecilnya peluang yang dihitung tersebut semestinya masuk akal jika kita memperhatikan fungsi kepadatan peluang yang diberikan untuk <span class="math inline" data-o006-math-id="O006-PSU-002-M0053">\(X\)</span>. Lagi pula, setiap <span class="math inline" data-o006-math-id="O006-PSU-002-M0054">\(X_i\)</span> lebih berpeluang berada di atas daripada di bawah satu. Karena itu, tidak lazim jika sebanyak lima atau enam peubah yang dilambangkan <span class="math inline" data-o006-math-id="O006-PSU-002-M0055">\(X\)</span>, semuanya bernilai kurang dari satu.</p></li>
+<li data-o006-id="O006-PSU-002-U0085"><p data-o006-id="O006-PSU-002-U0086"><strong>Apa fungsi distribusi kumulatif,</strong> <span class="math inline" data-o006-math-id="O006-PSU-002-M0056">\(G_5(y)\)</span>, dari statistik urutan kelima <span class="math inline" data-o006-math-id="O006-PSU-002-M0057">\(Y_5\)</span>?</p>
+<div class="alert-light ms-4 mb-3" data-o006-id="O006-PSU-002-U0087">
+<h4 class="anchored" data-o006-id="O006-PSU-002-U0088" id="solution-2">Penyelesaian</h4>
+<p data-o006-id="O006-PSU-002-U0089">Mengingat kembali definisi fungsi distribusi kumulatif, <span class="math inline" data-o006-math-id="O006-PSU-002-M0058">\(G_5(y)\)</span> didefinisikan sebagai peluang bahwa statistik urutan kelima <span class="math inline" data-o006-math-id="O006-PSU-002-M0059">\(Y_5\)</span> kurang dari suatu nilai <span class="math inline" data-o006-math-id="O006-PSU-002-M0060">\(y\)</span>. Yaitu:</p>
+<p data-o006-id="O006-PSU-002-U0090"><span class="math display" data-o006-math-id="O006-PSU-002-M0061">\[G_5(y)=P(Y_5 &lt; y)\]</span></p>
+<p data-o006-id="O006-PSU-002-U0091">Dalam perhitungan di atas, kita telah menentukan peluang bahwa statistik urutan kelima <span class="math inline" data-o006-math-id="O006-PSU-002-M0062">\(Y_5\)</span> kurang dari nilai tertentu, yaitu 1. Kita hanya perlu menggeneralisasi perhitungan tersebut agar berlaku untuk sembarang nilai <span class="math inline" data-o006-math-id="O006-PSU-002-M0063">\(y\)</span>. Jika kejadian <span class="math inline" data-o006-math-id="O006-PSU-002-M0064">\(\{X_i&lt;y\}\)</span>, <span class="math inline" data-o006-math-id="O006-PSU-002-M0065">\(i=1, 2, \cdots, 6\)</span> dianggap sebagai “keberhasilan,” dan kita misalkan <span class="math inline" data-o006-math-id="O006-PSU-002-M0066">\(Z\)</span> = banyaknya keberhasilan dalam enam percobaan yang saling bebas, maka <span class="math inline" data-o006-math-id="O006-PSU-002-M0067">\(Z\)</span> merupakan peubah acak binomial dengan <span class="math inline" data-o006-math-id="O006-PSU-002-M0068">\(n=6\)</span> dan peluang keberhasilan:</p>
+<p data-o006-id="O006-PSU-002-U0092"><span class="math display" data-o006-math-id="O006-PSU-002-M0069">\[P(X_i\le y)=\dfrac{1}{2}\int_{0}^{y}x dx=\dfrac{1}{2}\left[\dfrac{x^2}{2}\right]_{x=0}^{x=y}=\dfrac{1}{2}\left(\dfrac{y^2}{2}-0\right)=\dfrac{y^2}{4}\]</span></p>
+<p data-o006-id="O006-PSU-002-U0093">Oleh karena itu, fungsi distribusi kumulatif <span class="math inline" data-o006-math-id="O006-PSU-002-M0070">\(G_5(y)\)</span> dari statistik urutan kelima <span class="math inline" data-o006-math-id="O006-PSU-002-M0071">\(Y_5\)</span> adalah:</p>
+<p data-o006-id="O006-PSU-002-U0094"><span class="math display" data-o006-math-id="O006-PSU-002-M0072">\[G_5(y)=P(Y_5 &lt; y)=P(Z=5)+P(Z=6)=\binom{6}{5}\left(\dfrac{y^2}{4}\right)^5\left(1-\dfrac{y^2}{4}\right)+\left(\dfrac{y^2}{4}\right)^6\]</span></p>
+<p data-o006-id="O006-PSU-002-U0095">untuk <span class="math inline" data-o006-math-id="O006-PSU-002-M0073">\(0&lt;y&lt;2\)</span>.</p>
+</div></li>
+<li data-o006-id="O006-PSU-002-U0096"><p data-o006-id="O006-PSU-002-U0097"><strong>Apa fungsi kepadatan peluang,</strong> <span class="math inline" data-o006-math-id="O006-PSU-002-M0074">\(g_5(y)\)</span>, dari statistik urutan kelima <span class="math inline" data-o006-math-id="O006-PSU-002-M0075">\(Y_5\)</span>?</p>
+<div class="alert-light ms-4 mb-3" data-o006-id="O006-PSU-002-U0098">
+<h4 class="anchored" data-o006-id="O006-PSU-002-U0099" id="solution-3">Penyelesaian</h4>
+<p data-o006-id="O006-PSU-002-U0100">Untuk menentukan fungsi kepadatan peluang <span class="math inline" data-o006-math-id="O006-PSU-002-M0076">\(g_{5}(y)\)</span> kita cukup mengambil turunan fungsi distribusi <span class="math inline" data-o006-math-id="O006-PSU-002-M0077">\(G_5(y)\)</span> terhadap <span class="math inline" data-o006-math-id="O006-PSU-002-M0078">\(y\)</span>. Dengan demikian, diperoleh:</p>
+<div data-o006-id="O006-PSU-002-U0101" style="overflow-x:auto;overflow-y:hidden;">
+<p data-o006-id="O006-PSU-002-U0102"><span class="math display" data-o006-math-id="O006-PSU-002-M0079">\[g_5(y)=G_{5}^{'}(y)=\binom{6}{5}\left(\dfrac{y^2}{4}\right)^5\left(\dfrac{-2y}{4}\right)+\binom{6}{5}\left(1-\dfrac{y^2}{4}\right)5\left(\dfrac{y^2}{4}\right)^4\left(\dfrac{2y}{4}\right)+6\left(\dfrac{y^2}{4}\right)^5\left(\dfrac{2y}{4}\right)\]</span></p>
+</div>
+<p data-o006-id="O006-PSU-002-U0103">Dengan memperhatikan bahwa:</p>
+<p data-o006-id="O006-PSU-002-U0104"><span class="math display" data-o006-math-id="O006-PSU-002-M0080">\[\binom{6}{5}=6 \text{ and } \binom{6}{5}\times5=\dfrac{6!}{5!1!}\times5=\dfrac{6!}{4!1!}\]</span></p>
+<p data-o006-id="O006-PSU-002-U0105">kita melihat bahwa suku tengah dapat disederhanakan, sedangkan suku pertama merupakan negatif dari suku ketiga; karena itu, keduanya saling meniadakan:</p>
+<div data-o006-id="O006-PSU-002-U0106" style="overflow-x:auto;overflow-y:hidden;">
+<p data-o006-id="O006-PSU-002-U0107"><span class="math display" data-o006-math-id="O006-PSU-002-M0081">\[g_{5}(y)=\left(\begin{array}{l}
+6 \\
+5
+\end{array}\right)\color{red}\cancel {\color{black}\left(\frac{y^{2}}{4}\right)^{5}\left(\frac{-2 y}{4}\right)}\color{black}+\frac{6 !}{4 ! 1 !}\left(1-\frac{y^{2}}{4}\right)\left(\frac{y^{2}}{4}\right)^{4}\left(\frac{2 y}{4}\right)+\color{red}\cancel {\color{black}6\left(\frac{y^{2}}{4}\right)^{5}\left(\frac{2 y}{4}\right)}\]</span></p>
+</div>
+<p data-o006-id="O006-PSU-002-U0108">Oleh karena itu, fungsi kepadatan peluang statistik urutan kelima <span class="math inline" data-o006-math-id="O006-PSU-002-M0082">\(Y_5\)</span> adalah:</p>
+<p data-o006-id="O006-PSU-002-U0109"><span class="math display" data-o006-math-id="O006-PSU-002-M0083">\[g_5(y)=\dfrac{6!}{4!1!}\left(1-\dfrac{y^2}{4}\right)\left(\dfrac{y^2}{4}\right)^4\left(\dfrac{1}{2}y\right)\]</span></p>
+<p data-o006-id="O006-PSU-002-U0110">untuk <span class="math inline" data-o006-math-id="O006-PSU-002-M0084">\(0&lt;y&lt;2\)</span>. Ketika kita menggeneralisasi hasil ini pada halaman berikutnya, perlu dicatat bahwa karena fungsi kepadatan dan fungsi distribusi setiap <span class="math inline" data-o006-math-id="O006-PSU-002-M0085">\(X\)</span> masing-masing adalah:</p>
+<p data-o006-id="O006-PSU-002-U0111"><span class="math display" data-o006-math-id="O006-PSU-002-M0086">\[f(x)=\dfrac{1}{2}x \text{ and } F(x)=\dfrac{x^2}{4}\]</span></p>
+<p data-o006-id="O006-PSU-002-U0112">secara berurutan, ketika <span class="math inline" data-o006-math-id="O006-PSU-002-M0087">\(0&lt;x&lt;2\)</span>, kita juga dapat menulis fungsi kepadatan peluang statistik urutan kelima <span class="math inline" data-o006-math-id="O006-PSU-002-M0088">\(Y_5\)</span> sebagai:</p>
+<p data-o006-id="O006-PSU-002-U0113"><span class="math display" data-o006-math-id="O006-PSU-002-M0089">\[g_5(y)=\dfrac{6!}{4!1!}\left[F(y)\right]^4\left[1-F(y)\right]f(y)\]</span></p>
+<p data-o006-id="O006-PSU-002-U0114">Selesai!</p>
+</div>
+<p data-o006-id="O006-PSU-002-U0115">Baik, sekarang mari kita lanjutkan ke kasus yang lebih umum, yaitu menentukan fungsi kepadatan peluang untuk statistik urutan dengan indeks <span class="math inline" data-o006-math-id="O006-PSU-002-M0090">\(r^{th}\)</span> tersebut.</p></li>
+</ol>
+</div>
+</section>
+<section class="level2" data-number="1.2" data-o006-id="O006-PSU-002-U0116" id="probability-density-functions">
+<h2 class="anchored" data-anchor-id="probability-density-functions" data-number="1.2" data-o006-id="O006-PSU-002-U0117"><span class="header-section-number">1.2</span> Fungsi Kepadatan Peluang</h2>
+<p data-o006-id="O006-PSU-002-U0118">Perhitungan pada halaman sebelumnya untuk menentukan fungsi kepadatan peluang suatu statistik urutan tertentu, yakni statistik urutan kelima dari sekumpulan enam peubah acak, akan membantu ketika kita menentukan fungsi kepadatan peluang sembarang statistik urutan, yaitu statistik urutan dengan indeks <span class="math inline" data-o006-math-id="O006-PSU-002-M0091">\(r^{th}\)</span> tersebut.</p>
+<div class="callout callout-style-simple callout-caution no-icon" data-o006-id="O006-PSU-002-U0119">
+<div class="callout-body d-flex" data-o006-id="O006-PSU-002-U0120">
+<div class="callout-icon-container" data-o006-id="O006-PSU-002-U0121">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-body-container" data-o006-id="O006-PSU-002-U0122">
+<div class="theorem" data-o006-id="O006-PSU-002-U0123" id="thm-orderstats">
+<p data-o006-id="O006-PSU-002-U0124"><span class="theorem-title"><strong>Teorema 1.1</strong></span> Misalkan <span class="math inline" data-o006-math-id="O006-PSU-002-M0092">\(Y_1&lt;Y_2&lt;\cdots&lt;Y_n\)</span> merupakan statistik urutan dari n pengamatan yang saling bebas dan berasal dari distribusi kontinu dengan fungsi distribusi kumulatif <span class="math inline" data-o006-math-id="O006-PSU-002-M0093">\(F(x)\)</span> dan fungsi kepadatan peluang:</p>
+<p data-o006-id="O006-PSU-002-U0125"><span class="math display" data-o006-math-id="O006-PSU-002-M0094">\[f(x)=F'(x)\]</span></p>
+<p data-o006-id="O006-PSU-002-U0126">dengan <span class="math inline" data-o006-math-id="O006-PSU-002-M0095">\(0&lt;F(x)&lt;1\)</span> pada himpunan dukungan <span class="math inline" data-o006-math-id="O006-PSU-002-M0096">\(a&lt;x&lt;b\)</span>. Maka, fungsi kepadatan peluang statistik urutan <span class="math inline" data-o006-math-id="O006-PSU-002-M0097">\(r^{th}\)</span> adalah:</p>
+<p data-o006-id="O006-PSU-002-U0127"><span class="math display" data-o006-math-id="O006-PSU-002-M0098">\[g_r(y)=\dfrac{n!}{(r-1)!(n-r)!}\left[F(y)\right]^{r-1}\left[1-F(y)\right]^{n-r}f(y)\]</span></p>
+<p data-o006-id="O006-PSU-002-U0128">pada himpunan dukungan <span class="math inline" data-o006-math-id="O006-PSU-002-M0099">\(a&lt;y&lt;b\)</span>.</p>
+<section class="level4" data-o006-id="O006-PSU-002-U0129" id="proof">
+<h4 class="anchored" data-anchor-id="proof" data-o006-id="O006-PSU-002-U0130">Bukti</h4>
+<div class="ms-3" data-o006-id="O006-PSU-002-U0131">
+<p data-o006-id="O006-PSU-002-U0132">Sekali lagi, kita mengikuti strategi dengan terlebih dahulu menentukan fungsi distribusi kumulatif <span class="math inline" data-o006-math-id="O006-PSU-002-M0100">\(G_r(y)\)</span> dari statistik urutan <span class="math inline" data-o006-math-id="O006-PSU-002-M0101">\(r^{th}\)</span> tersebut, lalu menurunkannya terhadap <span class="math inline" data-o006-math-id="O006-PSU-002-M0102">\(y\)</span> untuk memperoleh fungsi kepadatan peluang <span class="math inline" data-o006-math-id="O006-PSU-002-M0103">\(g_r(y)\)</span>. Sekarang, jika kejadian <span class="math inline" data-o006-math-id="O006-PSU-002-M0104">\(\{X_i\le y\},\;i=1, 2, \cdots, n\)</span> dianggap sebagai “keberhasilan,” dan kita misalkan <span class="math inline" data-o006-math-id="O006-PSU-002-M0105">\(Z\)</span> = banyaknya keberhasilan tersebut dalam <span class="math inline" data-o006-math-id="O006-PSU-002-M0106">\(n\)</span> percobaan yang saling bebas, maka <span class="math inline" data-o006-math-id="O006-PSU-002-M0107">\(Z\)</span> merupakan peubah acak binomial dengan <span class="math inline" data-o006-math-id="O006-PSU-002-M0108">\(n\)</span> percobaan dan peluang keberhasilan:</p>
+<p data-o006-id="O006-PSU-002-U0133"><span class="math display" data-o006-math-id="O006-PSU-002-M0109">\[F(y)=P(X_i \le y)\]</span></p>
+<p data-o006-id="O006-PSU-002-U0134">Sekarang, untuk statistik urutan dengan indeks <span class="math inline" data-o006-math-id="O006-PSU-002-M0110">\(r^{th}\)</span> yang dilambangkan dengan <span class="math inline" data-o006-math-id="O006-PSU-002-M0111">\(Y_r\)</span> berlaku bahwa nilainya kurang dari atau sama dengan <span class="math inline" data-o006-math-id="O006-PSU-002-M0112">\(y\)</span> hanya jika sekurang-kurangnya <span class="math inline" data-o006-math-id="O006-PSU-002-M0113">\(r\)</span> dari <span class="math inline" data-o006-math-id="O006-PSU-002-M0114">\(n\)</span> pengamatan <span class="math inline" data-o006-math-id="O006-PSU-002-M0115">\(x_1, x_2, \cdots, x_n\)</span> bernilai kurang dari atau sama dengan <span class="math inline" data-o006-math-id="O006-PSU-002-M0116">\(y\)</span>, yang menyiratkan:</p>
+<p data-o006-id="O006-PSU-002-U0135"><span class="math display" data-o006-math-id="O006-PSU-002-M0117">\[G_r(y)=P(Y_r \le y)=P(Z=r)+P(Z=r+1)+ ... + P(Z=n)\]</span></p>
+<p data-o006-id="O006-PSU-002-U0136">yang dapat ditulis dengan notasi penjumlahan sebagai:</p>
+<p data-o006-id="O006-PSU-002-U0137"><span class="math display" data-o006-math-id="O006-PSU-002-M0118">\[G_r(y)=\sum_{k=r}^{n} P(Z=k)\]</span></p>
+<p data-o006-id="O006-PSU-002-U0138">Sekarang, kita dapat mengganti <span class="math inline" data-o006-math-id="O006-PSU-002-M0119">\(P(Z=k)\)</span> dengan fungsi massa peluang dari peubah acak binomial berparameter <span class="math inline" data-o006-math-id="O006-PSU-002-M0120">\(n\)</span> dan <span class="math inline" data-o006-math-id="O006-PSU-002-M0121">\(p=F(y)\)</span>. Dengan demikian, kita memperoleh:</p>
+<p data-o006-id="O006-PSU-002-U0139"><span class="math display" data-o006-math-id="O006-PSU-002-M0122">\[G_r(y)=\sum_{k=r}^{n}\binom{n}{k}\left[F(y)\right]^{k}\left[1-F(y)\right]^{n-k}\]</span></p>
+<p data-o006-id="O006-PSU-002-U0140">Dengan sedikit menulis ulang dan mengeluarkan suku berindeks <span class="math inline" data-o006-math-id="O006-PSU-002-M0123">\(n^{th}\)</span> dari notasi penjumlahan, kita memperoleh:</p>
+<p data-o006-id="O006-PSU-002-U0141"><span class="math display" data-o006-math-id="O006-PSU-002-M0124">\[G_r(y)=\sum_{k=r}^{n-1}\binom{n}{k}\left[F(y)\right]^{k}\left[1-F(y)\right]^{n-k}+\left[F(y)\right]^{n}\]</span></p>
+<p data-o006-id="O006-PSU-002-U0142">Selanjutnya, kita tinggal mengambil turunan dari <span class="math inline" data-o006-math-id="O006-PSU-002-M0125">\(G_r(y)\)</span> terhadap <span class="math inline" data-o006-math-id="O006-PSU-002-M0126">\(y\)</span>. Dengan menerapkan aturan hasil kali bersama aturan rantai pada suku-suku dalam penjumlahan, serta aturan pangkat bersama aturan rantai, kita memperoleh:</p>
+<p data-o006-id="O006-PSU-002-U0143"><span id="eq-derivgry"><span class="math display" data-o006-math-id="O006-PSU-002-M0127">\[\begin{align} g_r(y)&amp;=\sum_{k=r}^{n-1}{n\choose k}(k)[F(y)]^{k-1}f(y)[1-F(y)]^{n-k}\\ &amp;+\sum_{k=r}^{n-1}{n\choose k}[F(y)]^k(n-k)[1-F(y)]^{n-k-1}(-f(y))\\&amp;+n[F(y)]^{n-1}f(y)\end{align} \tag{1.1}\]</span></span></p>
+<p data-o006-id="O006-PSU-002-U0144">Selanjutnya, kita cukup mengenali bahwa:</p>
+<p data-o006-id="O006-PSU-002-U0145"><span class="math display" data-o006-math-id="O006-PSU-002-M0128">\[\left(\begin{array}{l}
+n \\
+k
+\end{array}\right) k=\frac{n !}{\color{blue}\underbrace{\color{black}k !}_{\underset{ \text{}}{\textstyle{\color{blue}\color{red}\cancel {\color{blue}k}\color{blue}(k-1)!}}}\color{black}(n-k) !} \times \color{red}\cancel {\color{black}k}\color{black}=\frac{n !}{(k-1) !(n-k) !}\]</span></p>
+<p data-o006-id="O006-PSU-002-U0146">dan</p>
+<p data-o006-id="O006-PSU-002-U0147"><span class="math display" data-o006-math-id="O006-PSU-002-M0129">\[\left(\begin{array}{l}
+n \\
+k
+\end{array}\right)(n-k)=\frac{n !}{k !\color{blue}\underbrace{\color{black}(n-k) !}_{\underset{\text{}}{{\textstyle\color{blue}\color{red}\cancel {\color{blue}(n-k)}\color{blue}(n- k -1)!}}}\color{black}} \times \color{red}\cancel {\color{black}(n-k)}\color{black}=\frac{n !}{k !(n-k-1) !}\]</span></p>
+<p data-o006-id="O006-PSU-002-U0148">Setelah itu, kita melihat bahwa PDF statistik urutan dengan indeks <span class="math inline" data-o006-math-id="O006-PSU-002-M0130">\(r^{th}\)</span> yang dilambangkan dengan <span class="math inline" data-o006-math-id="O006-PSU-002-M0131">\(Y_r\)</span> hanyalah suku pertama dalam penjumlahan pada <span class="math inline" data-o006-math-id="O006-PSU-002-M0132">\(g_r(y)\)</span>. Dengan kata lain:</p>
+<p data-o006-id="O006-PSU-002-U0149"><span class="math display" data-o006-math-id="O006-PSU-002-M0133">\[g_r(y)=\dfrac{n!}{(r-1)!(n-r)!}\left[F(y)\right]^{r-1}\left[1-F(y)\right]^{n-r}f(y)\]</span></p>
+<p data-o006-id="O006-PSU-002-U0150">untuk <span class="math inline" data-o006-math-id="O006-PSU-002-M0134">\(a&lt;y&lt;b\)</span>. Terbukti! Cukup sederhana! Baiklah, mungkin agak berlebihan menyebutnya sederhana karena langkahnya memang tidak sepenuhnya jelas, bukan? Sebagai latihan, Anda akan diminta menuliskan, untuk kasus <span class="math inline" data-o006-math-id="O006-PSU-002-M0135">\(n=6\)</span> dan r = 3, suku-suku dalam <a class="quarto-xref" data-o006-id="O006-PSU-002-U0151" href="#eq-derivgry">Persamaan <span>1.1</span></a>. Dengan mengerjakannya, Anda akan melihat bahwa setiap suku positif dalam persamaan berbintang, kecuali suku pertama, mempunyai pasangan suku negatif; karena itu, semua suku selain yang pertama saling meniadakan. Setelah Anda menyelesaikan latihan tersebut, barulah mungkin wajar menyebutnya cukup sederhana!</p>
+</div>
+</section>
+</div>
+</div>
+</div>
+</div>
+<div class="theorem example" data-o006-id="O006-PSU-002-U0152" id="exm-18-2contd">
+<p data-o006-id="O006-PSU-002-U0153"><span class="theorem-title"><strong>Contoh 1.3</strong></span> Misalkan <span class="math inline" data-o006-math-id="O006-PSU-002-M0136">\(Y_1&lt;Y_2&lt;Y_3&lt;Y_4&lt;Y_5&lt;Y_6\)</span> merupakan statistik urutan yang berkaitan dengan <span class="math inline" data-o006-math-id="O006-PSU-002-M0137">\(n=6\)</span> pengamatan yang saling bebas, masing-masing berasal dari distribusi dengan fungsi kepadatan peluang:</p>
+<p data-o006-id="O006-PSU-002-U0154"><span class="math display" data-o006-math-id="O006-PSU-002-M0138">\[f(x)=\dfrac{1}{2}x\]</span></p>
+<p data-o006-id="O006-PSU-002-U0155">untuk <span class="math inline" data-o006-math-id="O006-PSU-002-M0139">\(0&lt;x&lt;2\)</span>. Apa fungsi kepadatan peluang dari statistik urutan pertama, keempat, dan keenam?</p>
+<section class="level4 card card-body bg-light ms-3 mb-3 pt-0" data-o006-id="O006-PSU-002-U0156" id="solution-4">
+<h4 class="anchored" data-anchor-id="solution-4" data-o006-id="O006-PSU-002-U0157">Penyelesaian</h4>
+<p data-o006-id="O006-PSU-002-U0158">Ketika mengerjakan contoh ini pada halaman sebelumnya, kita telah menunjukkan bahwa fungsi distribusi kumulatif dari <span class="math inline" data-o006-math-id="O006-PSU-002-M0140">\(X\)</span> adalah:</p>
+<p data-o006-id="O006-PSU-002-U0159"><span class="math display" data-o006-math-id="O006-PSU-002-M0141">\[F(x)=\dfrac{x^2}{4}\]</span></p>
+<p data-o006-id="O006-PSU-002-U0160">untuk <span class="math inline" data-o006-math-id="O006-PSU-002-M0142">\(0&lt;x&lt;2\)</span>. Oleh karena itu, dengan menerapkan teorema di atas untuk <span class="math inline" data-o006-math-id="O006-PSU-002-M0143">\(n=6\)</span> dan <span class="math inline" data-o006-math-id="O006-PSU-002-M0144">\(r=1\)</span>, fungsi kepadatan peluang (PDF) dari <span class="math inline" data-o006-math-id="O006-PSU-002-M0145">\(Y_1\)</span> adalah:</p>
+<p data-o006-id="O006-PSU-002-U0161"><span class="math display" data-o006-math-id="O006-PSU-002-M0146">\[g_1(y)=\dfrac{6!}{0!(6-1)!}\left[\dfrac{y^2}{4}\right]^{1-1}\left[1-\dfrac{y^2}{4}\right]^{6-1}\left(\dfrac{1}{2}y\right)\]</span></p>
+<p data-o006-id="O006-PSU-002-U0162">untuk <span class="math inline" data-o006-math-id="O006-PSU-002-M0147">\(0&lt;y&lt;2\)</span>, yang dapat disederhanakan menjadi:</p>
+<p data-o006-id="O006-PSU-002-U0163"><span class="math display" data-o006-math-id="O006-PSU-002-M0148">\[g_1(y)=3y\left(1-\dfrac{y^2}{4}\right)^{5}\]</span></p>
+<p data-o006-id="O006-PSU-002-U0164">Dengan menerapkan teorema untuk <span class="math inline" data-o006-math-id="O006-PSU-002-M0149">\(n=6\)</span> dan <span class="math inline" data-o006-math-id="O006-PSU-002-M0150">\(r=4\)</span>, fungsi kepadatan peluang (PDF) dari <span class="math inline" data-o006-math-id="O006-PSU-002-M0151">\(Y_4\)</span> adalah:</p>
+<p data-o006-id="O006-PSU-002-U0165"><span class="math display" data-o006-math-id="O006-PSU-002-M0152">\[g_4(y)=\dfrac{6!}{3!(6-4)!}\left[\dfrac{y^2}{4}\right]^{4-1}\left[1-\dfrac{y^2}{4}\right]^{6-4}\left(\dfrac{1}{2}y\right)\]</span></p>
+<p data-o006-id="O006-PSU-002-U0166">untuk <span class="math inline" data-o006-math-id="O006-PSU-002-M0153">\(0&lt;y&lt;2\)</span>, yang dapat disederhanakan menjadi:</p>
+<p data-o006-id="O006-PSU-002-U0167"><span class="math display" data-o006-math-id="O006-PSU-002-M0154">\[g_4(y)=\dfrac{15}{32}y^7\left(1-\dfrac{y^2}{4}\right)^{2}\]</span></p>
+<p data-o006-id="O006-PSU-002-U0168">Dengan menerapkan teorema untuk <span class="math inline" data-o006-math-id="O006-PSU-002-M0155">\(n=6\)</span> dan <span class="math inline" data-o006-math-id="O006-PSU-002-M0156">\(r=6\)</span>, fungsi kepadatan peluang (PDF) dari <span class="math inline" data-o006-math-id="O006-PSU-002-M0157">\(Y_6\)</span> adalah:</p>
+<p data-o006-id="O006-PSU-002-U0169"><span class="math display" data-o006-math-id="O006-PSU-002-M0158">\[g_6(y)=\dfrac{6!}{5!(6-6)!}\left[\dfrac{y^2}{4}\right]^{6-1}\left[1-\dfrac{y^2}{4}\right]^{6-6}\left(\dfrac{1}{2}y\right)\]</span></p>
+<p data-o006-id="O006-PSU-002-U0170">untuk <span class="math inline" data-o006-math-id="O006-PSU-002-M0159">\(0&lt;y&lt;2\)</span>, yang dapat disederhanakan menjadi:</p>
+<p data-o006-id="O006-PSU-002-U0171"><span class="math display" data-o006-math-id="O006-PSU-002-M0160">\[g_6(y)=\dfrac{3}{1024}y^{11}\]</span></p>
+<p data-o006-id="O006-PSU-002-U0172">Untungnya, ketika ketiga fungsi tersebut kita gambarkan pada satu plot:</p>
+<div alt="Density plot for r = 1, 4, 6" class="lightbox quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center" data-o006-id="O006-PSU-002-U0173" id="fig-STAT-415-SEC-3-18-13.svg">
+<figure class="quarto-float quarto-float-fig figure" data-o006-id="O006-PSU-002-U0174">
+<div aria-describedby="fig-STAT-415-SEC-3-18-13.svg-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca" data-o006-id="O006-PSU-002-U0175">
+<a class="lightbox" data-gallery="quarto-lightbox-gallery-5" data-o006-id="O006-PSU-002-U0176" href="assets/STAT-415-SEC-3-18-13.svg" title="Fig 1.4: Density plot for r = 1, 4, 6"><img alt="Density plot for r = 1, 4, 6" class="img-fluid quarto-figure quarto-figure-center figure-img" data-o006-id="O006-PSU-002-U0177" src="assets/STAT-415-SEC-3-18-13.svg" style="width:70.0%"/></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" data-o006-id="O006-PSU-002-U0178" id="fig-STAT-415-SEC-3-18-13.svg-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Gambar 1.4: Plot kepadatan untuk r = 1, 4, 6
+</figcaption>
+</figure>
+</div>
+<p data-o006-id="O006-PSU-002-U0179">kita memperoleh hasil yang masuk akal secara intuitif: ketika peringkat statistik urutan meningkat, PDF tersebut “bergeser ke kanan” pada selang dukungan.</p>
+</section>
+</div>
+</section>
+<section class="level2" data-number="1.3" data-o006-id="O006-PSU-002-U0180" id="summary">
+<h2 class="anchored" data-anchor-id="summary" data-number="1.3" data-o006-id="O006-PSU-002-U0181"><span class="header-section-number">1.3</span> Ringkasan</h2>
+<p data-o006-id="O006-PSU-002-U0182">Dalam pelajaran ini, kita mengeksplorasi gagasan baru yang awalnya mungkin terasa agak berbeda—apa yang terjadi jika urutan data benar-benar penting bagi kita? Alih-alih sekadar melihat sekumpulan nilai dari sampel acak, kita mengajukan pertanyaan seperti: berapa peluang nilai terkecil ketiga berada di bawah suatu angka? Atau, seperti apa distribusi pengamatan terbesar? Pertanyaan-pertanyaan seperti ini membawa kita ke ranah statistik urutan.</p>
+<p data-o006-id="O006-PSU-002-U0183">Kita mempelajari cara mendefinisikan dan mengidentifikasi statistik urutan, seperti nilai terkecil, terbesar, atau nilai terkecil ke-r dalam suatu sampel. Selanjutnya, kita mempelajari cara menentukan fungsi distribusi kumulatif (CDF) dan fungsi kepadatan peluang (PDF) dari statistik urutan tertentu. Menariknya, fungsi-fungsi tersebut dapat diturunkan dengan alat yang sudah kita kenal—seperti distribusi binomial dan kalkulus. Anda telah melihat bahwa PDF statistik urutan bergeser sesuai peringkat yang ditinjau (misalnya, yang terkecil dibandingkan yang terbesar), sehingga membantu menjelaskan pola dalam data dunia nyata, seperti kejadian cuaca ekstrem atau nilai ujian.</p>
+<p data-o006-id="O006-PSU-002-U0184">Pelajaran ini menyiapkan kita untuk menggunakan statistik urutan dalam masalah inferensi dan penerapan nyata—setiap kali yang penting bukan hanya datanya, melainkan juga bagaimana data tersebut diurutkan.</p>
+<p data-o006-id="O006-PSU-002-U0185"><strong>Pokok-Pokok Penting:</strong></p>
+<ul data-o006-id="O006-PSU-002-U0186">
+<li data-o006-id="O006-PSU-002-U0187">Jika <span class="math inline" data-o006-math-id="O006-PSU-002-M0161">\(X_1, X_2, \ldots, X_n\)</span>, yang merupakan sampel acak sederhana berukuran <span class="math inline" data-o006-math-id="O006-PSU-002-M0162">\(n\)</span>, diurutkan dari nilai terkecil hingga nilai terbesar, statistik urutannya, yang dinotasikan dengan <span class="math inline" data-o006-math-id="O006-PSU-002-M0163">\(Y_1, Y_2, \ldots, Y_n\)</span> memenuhi sifat bahwa <span class="math inline" data-o006-math-id="O006-PSU-002-M0164">\(Y_i\)</span> merupakan pengamatan berperingkat <span class="math inline" data-o006-math-id="O006-PSU-002-M0165">\(i^{th}\)</span> dalam urutan menaik di antara <span class="math inline" data-o006-math-id="O006-PSU-002-M0166">\(X_1, X_2,\ldots, X_n\)</span> dan <span class="math inline" data-o006-math-id="O006-PSU-002-M0167">\(Y_1&lt;Y_2&lt;\ldots&lt;Y_n\)</span></li>
+<li data-o006-id="O006-PSU-002-U0188">Fungsi kepadatan peluang statistik urutan dengan indeks <span class="math inline" data-o006-math-id="O006-PSU-002-M0168">\(r^{th}\)</span> adalah: <span class="math inline" data-o006-math-id="O006-PSU-002-M0169">\(g_r(y)=\frac{n!}{(n-r)!(r-1)!} \left[F(y)\right]^{r-1}\left[1-F(y)\right]^{n-r}f(y)\)</span></li>
+</ul>
+</section>
+</main></div>
+<footer class="site-footer"><div class="site-footer__inner">Konten sumber: Departemen Statistika Penn State, CC BY-NC 4.0 kecuali dinyatakan lain. Terjemahan dan rekonstruksi: OpenAI Codex gpt-5.6-sol, Ultra. Tidak ada dukungan atau pengesahan yang tersirat.</div></footer>
+</body>
+</html>

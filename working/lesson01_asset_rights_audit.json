@@ -1,0 +1,439 @@
+{
+  "schema_version": "o006.stat415.lesson_asset_rights_audit.v1",
+  "audit_id": "O006-PSU-LESSON01-ASSET-RIGHTS-20260824",
+  "generated_at_utc": "2026-08-24T07:55:19.277Z",
+  "scope": {
+    "component": "Penn State STAT 415 Lesson 01 — Order Statistics",
+    "authority_file": "authority/upstream/stat415/Lesson01.html",
+    "authority_official_url": "https://online.stat.psu.edu/stat415/Lesson01",
+    "main_content_boundary": {
+      "html_element": "main#quarto-document-content",
+      "authority_line_start": 494,
+      "authority_line_end": 746,
+      "utf8_bytes": 31125
+    },
+    "included_dependency_classes": [
+      "direct non-library image",
+      "direct non-library data",
+      "direct non-library download",
+      "direct non-library app",
+      "direct non-library runtime"
+    ],
+    "excluded_dependency_classes": [
+      "site chrome outside main content",
+      "navigation-only links",
+      "analytics and cookie tooling",
+      "third-party and local JavaScript/CSS libraries"
+    ]
+  },
+  "authority_integrity": {
+    "bytes": 84567,
+    "sha256": "6b3bf5ba7b5cc7960fb4eddec931088f51f588a879444630a83238767fbfce85"
+  },
+  "method": {
+    "discovery": "Parsed the exact frozen authority HTML and bounded the inventory to direct references inside main#quarto-document-content.",
+    "deduplication": "An img src and its same-URL lightbox href count as one dependency with two roles.",
+    "network_user_agent": "Codex-O006-STAT415-Lesson01-asset-audit/1.0",
+    "network_behavior": "Fetched each of the five official same-origin asset URLs directly; redirects were allowed but none occurred; response bodies were automatically decompressed before byte counting and hashing.",
+    "file_validation": "Parsed every downloaded SVG as XML; checked for script elements, external HTTP references, embedded raster images, metadata, and embedded licence/copyright text.",
+    "rights_rule": "Freeze only when the official page-level grant covers the same-origin asset and no page-level or embedded per-asset exception contradicts that grant."
+  },
+  "rights_evidence": [
+    {
+      "evidence_id": "R1",
+      "source": "authority/upstream/stat415/Lesson01.html",
+      "authority_line": 2000,
+      "source_sha256": "6b3bf5ba7b5cc7960fb4eddec931088f51f588a879444630a83238767fbfce85",
+      "text": "Except where otherwise noted, content on this site is licensed under a CC BY-NC 4.0 license.",
+      "license_name": "Creative Commons Attribution-NonCommercial 4.0 International",
+      "license_identifier": "CC BY-NC 4.0",
+      "license_url": "https://creativecommons.org/licenses/by-nc/4.0/"
+    },
+    {
+      "evidence_id": "R2",
+      "source": "authority/upstream/stat415/Lesson01.html",
+      "source_sha256": "6b3bf5ba7b5cc7960fb4eddec931088f51f588a879444630a83238767fbfce85",
+      "finding": "No per-figure source, credit, permission, copyright, licence exception, or attribution notice occurs in Lesson 01 main content. The only licence statement is the page-wide R1 notice; the only other copyright hit is the global Penn State footer link."
+    }
+  ],
+  "main_content_reference_census": {
+    "img_elements": 5,
+    "unique_img_src": 5,
+    "same_asset_lightbox_hrefs": 5,
+    "unique_direct_non_library_dependencies": 5,
+    "data_dependencies": 0,
+    "download_dependencies": 0,
+    "app_dependencies": 0,
+    "embed_object_video_audio_source_dependencies": 0,
+    "script_elements_inside_main": 0,
+    "non_library_runtime_dependencies": 0
+  },
+  "assets": [
+    {
+      "asset_id": "O006-PSU-002-A0001",
+      "source_reference": {
+        "authority_line": 558,
+        "relative_url": "assets/STAT-415-SEC-3-18-09.svg",
+        "roles": ["img", "lightbox_target"],
+        "context": "Example 1.2",
+        "alt_text": "Coordinate graph of f(x) = 1/2x"
+      },
+      "official_url": "https://online.stat.psu.edu/stat415/assets/STAT-415-SEC-3-18-09.svg",
+      "http": {
+        "final_url": "https://online.stat.psu.edu/stat415/assets/STAT-415-SEC-3-18-09.svg",
+        "redirected": false,
+        "status": 200,
+        "reason": "OK",
+        "http_version": "1.1",
+        "headers": {
+          "Date": "Mon, 24 Aug 2026 07:54:59 GMT",
+          "Server": ["Apache/2.4.62", "(Red Hat Enterprise Linux)", "OpenSSL/3.5.5"],
+          "ETag": "\"71d-6596b55899544\"",
+          "Accept-Ranges": "bytes",
+          "Last-Modified": "Wed, 19 Aug 2026 19:23:11 GMT",
+          "Content-Length": "1821",
+          "Content-Type": "image/svg+xml"
+        }
+      },
+      "integrity": {
+        "decompressed_bytes": 1821,
+        "sha256": "375775fae6e23602ebb80a69f1b6bfe187415a932e9bbc608cf1864ad364440c",
+        "content_length_matches": true,
+        "local_bytes_match": true,
+        "local_sha256_matches": true
+      },
+      "svg_validation": {
+        "xml_valid": true,
+        "root_element": "svg",
+        "viewBox": "0 0 442.78 301.25",
+        "script": false,
+        "external_http_reference": false,
+        "embedded_raster": false,
+        "metadata_element": false,
+        "embedded_license_or_copyright_text": false,
+        "title_elements": 0,
+        "desc_elements": 0,
+        "accessibility_surface": "The authority HTML supplies alt text; the standalone SVG supplies no title or desc."
+      },
+      "rights": {
+        "applied_license": "CC BY-NC 4.0",
+        "evidence_ids": ["R1", "R2"],
+        "per_asset_exception_found": false,
+        "per_asset_creator_metadata_found": false,
+        "clearance": "cleared_for_noncommercial_derivative_freeze_under_official_page_notice"
+      },
+      "disposition": "freeze",
+      "local_path": "authority/assets/stat415/lesson01/STAT-415-SEC-3-18-09.svg"
+    },
+    {
+      "asset_id": "O006-PSU-002-A0002",
+      "source_reference": {
+        "authority_line": 569,
+        "relative_url": "assets/stat-415-sec-3-18-10.svg",
+        "roles": ["img", "lightbox_target"],
+        "context": "Figure 1.1",
+        "alt_text": "Celsius vs Fahrenheit scatterplot"
+      },
+      "official_url": "https://online.stat.psu.edu/stat415/assets/stat-415-sec-3-18-10.svg",
+      "http": {
+        "final_url": "https://online.stat.psu.edu/stat415/assets/stat-415-sec-3-18-10.svg",
+        "redirected": false,
+        "status": 200,
+        "reason": "OK",
+        "http_version": "1.1",
+        "headers": {
+          "Date": "Mon, 24 Aug 2026 07:54:59 GMT",
+          "Server": ["Apache/2.4.62", "(Red Hat Enterprise Linux)", "OpenSSL/3.5.5"],
+          "ETag": "\"a85-6596b558a068c\"",
+          "Accept-Ranges": "bytes",
+          "Last-Modified": "Wed, 19 Aug 2026 19:23:11 GMT",
+          "Content-Length": "2693",
+          "Content-Type": "image/svg+xml"
+        }
+      },
+      "integrity": {
+        "decompressed_bytes": 2693,
+        "sha256": "d6880dd245560b31efe664744a9c953adb77d349002b16fd785f1b7ec39255fa",
+        "content_length_matches": true,
+        "local_bytes_match": true,
+        "local_sha256_matches": true
+      },
+      "svg_validation": {
+        "xml_valid": true,
+        "root_element": "svg",
+        "viewBox": "0 0 637.97 136.01",
+        "script": false,
+        "external_http_reference": false,
+        "embedded_raster": false,
+        "metadata_element": false,
+        "embedded_license_or_copyright_text": false,
+        "title_elements": 0,
+        "desc_elements": 0,
+        "accessibility_surface": "The authority HTML supplies alt text; the standalone SVG supplies no title or desc."
+      },
+      "rights": {
+        "applied_license": "CC BY-NC 4.0",
+        "evidence_ids": ["R1", "R2"],
+        "per_asset_exception_found": false,
+        "per_asset_creator_metadata_found": false,
+        "clearance": "cleared_for_noncommercial_derivative_freeze_under_official_page_notice"
+      },
+      "disposition": "freeze",
+      "local_path": "authority/assets/stat415/lesson01/stat-415-sec-3-18-10.svg"
+    },
+    {
+      "asset_id": "O006-PSU-002-A0003",
+      "source_reference": {
+        "authority_line": 580,
+        "relative_url": "assets/stat-415-sec-3-18-11.svg",
+        "roles": ["img", "lightbox_target"],
+        "context": "Figure 1.2",
+        "alt_text": "Number line showing 6 values less than 1."
+      },
+      "official_url": "https://online.stat.psu.edu/stat415/assets/stat-415-sec-3-18-11.svg",
+      "http": {
+        "final_url": "https://online.stat.psu.edu/stat415/assets/stat-415-sec-3-18-11.svg",
+        "redirected": false,
+        "status": 200,
+        "reason": "OK",
+        "http_version": "1.1",
+        "headers": {
+          "Date": "Mon, 24 Aug 2026 07:54:59 GMT",
+          "Server": ["Apache/2.4.62", "(Red Hat Enterprise Linux)", "OpenSSL/3.5.5"],
+          "ETag": "\"a80-6596b558a068c\"",
+          "Accept-Ranges": "bytes",
+          "Last-Modified": "Wed, 19 Aug 2026 19:23:11 GMT",
+          "Content-Length": "2688",
+          "Content-Type": "image/svg+xml"
+        }
+      },
+      "integrity": {
+        "decompressed_bytes": 2688,
+        "sha256": "7c94f0c22d3be28edc7b4fb969d14152543be180df0fa5bf029020912082caab",
+        "content_length_matches": true,
+        "local_bytes_match": true,
+        "local_sha256_matches": true
+      },
+      "svg_validation": {
+        "xml_valid": true,
+        "root_element": "svg",
+        "viewBox": "0 0 637.97 136.01",
+        "script": false,
+        "external_http_reference": false,
+        "embedded_raster": false,
+        "metadata_element": false,
+        "embedded_license_or_copyright_text": false,
+        "title_elements": 0,
+        "desc_elements": 0,
+        "accessibility_surface": "The authority HTML supplies alt text; the standalone SVG supplies no title or desc."
+      },
+      "rights": {
+        "applied_license": "CC BY-NC 4.0",
+        "evidence_ids": ["R1", "R2"],
+        "per_asset_exception_found": false,
+        "per_asset_creator_metadata_found": false,
+        "clearance": "cleared_for_noncommercial_derivative_freeze_under_official_page_notice"
+      },
+      "disposition": "freeze",
+      "local_path": "authority/assets/stat415/lesson01/stat-415-sec-3-18-11.svg"
+    },
+    {
+      "asset_id": "O006-PSU-002-A0004",
+      "source_reference": {
+        "authority_line": 591,
+        "relative_url": "assets/stat-415-sec-3-18-12.svg",
+        "roles": ["img", "lightbox_target"],
+        "context": "Figure 1.3",
+        "alt_text": "Number line showing four values less than and two greater than one."
+      },
+      "official_url": "https://online.stat.psu.edu/stat415/assets/stat-415-sec-3-18-12.svg",
+      "http": {
+        "final_url": "https://online.stat.psu.edu/stat415/assets/stat-415-sec-3-18-12.svg",
+        "redirected": false,
+        "status": 200,
+        "reason": "OK",
+        "http_version": "1.1",
+        "headers": {
+          "Date": "Mon, 24 Aug 2026 07:54:59 GMT",
+          "Server": ["Apache/2.4.62", "(Red Hat Enterprise Linux)", "OpenSSL/3.5.5"],
+          "ETag": "\"a82-6596b558a068c\"",
+          "Accept-Ranges": "bytes",
+          "Last-Modified": "Wed, 19 Aug 2026 19:23:11 GMT",
+          "Content-Length": "2690",
+          "Content-Type": "image/svg+xml"
+        }
+      },
+      "integrity": {
+        "decompressed_bytes": 2690,
+        "sha256": "0e7a00a04750e9da3d55f39b202fc10ca8cfebed000a6aa7cd55f2744bc8a5d8",
+        "content_length_matches": true,
+        "local_bytes_match": true,
+        "local_sha256_matches": true
+      },
+      "svg_validation": {
+        "xml_valid": true,
+        "root_element": "svg",
+        "viewBox": "0 0 637.97 136.01",
+        "script": false,
+        "external_http_reference": false,
+        "embedded_raster": false,
+        "metadata_element": false,
+        "embedded_license_or_copyright_text": false,
+        "title_elements": 0,
+        "desc_elements": 0,
+        "accessibility_surface": "The authority HTML supplies alt text; the standalone SVG supplies no title or desc."
+      },
+      "rights": {
+        "applied_license": "CC BY-NC 4.0",
+        "evidence_ids": ["R1", "R2"],
+        "per_asset_exception_found": false,
+        "per_asset_creator_metadata_found": false,
+        "clearance": "cleared_for_noncommercial_derivative_freeze_under_official_page_notice"
+      },
+      "disposition": "freeze",
+      "local_path": "authority/assets/stat415/lesson01/stat-415-sec-3-18-12.svg"
+    },
+    {
+      "asset_id": "O006-PSU-002-A0005",
+      "source_reference": {
+        "authority_line": 721,
+        "relative_url": "assets/STAT-415-SEC-3-18-13.svg",
+        "roles": ["img", "lightbox_target"],
+        "context": "Figure 1.4: Density plot for r = 1, 4, 6",
+        "alt_text": "Density plot for r = 1, 4, 6"
+      },
+      "official_url": "https://online.stat.psu.edu/stat415/assets/STAT-415-SEC-3-18-13.svg",
+      "http": {
+        "final_url": "https://online.stat.psu.edu/stat415/assets/STAT-415-SEC-3-18-13.svg",
+        "redirected": false,
+        "status": 200,
+        "reason": "OK",
+        "http_version": "1.1",
+        "headers": {
+          "Date": "Mon, 24 Aug 2026 07:54:59 GMT",
+          "Server": ["Apache/2.4.62", "(Red Hat Enterprise Linux)", "OpenSSL/3.5.5"],
+          "ETag": "\"cc1d-6596b55899544\"",
+          "Accept-Ranges": "bytes",
+          "Last-Modified": "Wed, 19 Aug 2026 19:23:11 GMT",
+          "Content-Length": "52253",
+          "Content-Type": "image/svg+xml"
+        }
+      },
+      "integrity": {
+        "decompressed_bytes": 52253,
+        "sha256": "b3fc3f936d4aee619981611d7c0d8797ef7cc8135fe5e40b4e8d4ad9f0849e3f",
+        "content_length_matches": true,
+        "local_bytes_match": true,
+        "local_sha256_matches": true
+      },
+      "svg_validation": {
+        "xml_valid": true,
+        "root_element": "svg",
+        "viewBox": "0 0 559 338",
+        "script": false,
+        "external_http_reference": false,
+        "embedded_raster": false,
+        "metadata_element": false,
+        "embedded_license_or_copyright_text": false,
+        "title_elements": 0,
+        "desc_elements": 0,
+        "accessibility_surface": "The authority HTML supplies alt text; the standalone SVG supplies no title or desc."
+      },
+      "rights": {
+        "applied_license": "CC BY-NC 4.0",
+        "evidence_ids": ["R1", "R2"],
+        "per_asset_exception_found": false,
+        "per_asset_creator_metadata_found": false,
+        "clearance": "cleared_for_noncommercial_derivative_freeze_under_official_page_notice"
+      },
+      "disposition": "freeze",
+      "local_path": "authority/assets/stat415/lesson01/STAT-415-SEC-3-18-13.svg"
+    }
+  ],
+  "non_asset_main_links": [
+    {
+      "href": "./Lesson00.html",
+      "classification": "navigation",
+      "dependency": false
+    },
+    {
+      "href": "./Lesson01.html",
+      "classification": "self/breadcrumb navigation",
+      "dependency": false
+    },
+    {
+      "href": "#eq-derivgry",
+      "classification": "internal equation anchor",
+      "dependency": false
+    }
+  ],
+  "explicitly_excluded_references": {
+    "outside_main_site_chrome": [
+      {
+        "url": "./assets/psulion.png",
+        "role": "favicon",
+        "reason": "head/site chrome, not main instructional content"
+      },
+      {
+        "url": "./PSU_Ecosshield.png",
+        "role": "sidebar institutional logo",
+        "reason": "site chrome outside main; possible trademark surface"
+      },
+      {
+        "url": "assets/by-nc.svg",
+        "role": "footer licence badge",
+        "reason": "footer evidence surface, not a Lesson 01 main-content dependency"
+      }
+    ],
+    "library_runtime": [
+      {
+        "url": "https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6",
+        "classification": "third-party JavaScript library",
+        "reason": "library dependency outside the requested non-library closure"
+      },
+      {
+        "url": "https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js",
+        "classification": "third-party MathJax library runtime",
+        "reason": "library dependency outside the requested non-library closure; must be handled by the edition-wide runtime licence/offline closure"
+      },
+      {
+        "url_pattern": "site_libs/**",
+        "classification": "Quarto/Bootstrap/search/lightbox local libraries",
+        "reason": "library dependencies outside the requested non-library Lesson 01 closure"
+      }
+    ],
+    "analytics_and_consent": [
+      {
+        "url": "https://www.googletagmanager.com/gtag/js?id=G-XM6C7H9XCL",
+        "reason": "tracking outside main instructional content; must not be carried into the offline reader"
+      },
+      {
+        "url_pattern": "site_libs/cookie-consent/**",
+        "reason": "site consent chrome outside main instructional content"
+      }
+    ]
+  },
+  "residual_rights_limitations": [
+    {
+      "scope": "all five SVG figures",
+      "finding": "The official page grants CC BY-NC 4.0 to site content absent an exception, and no exception is present, but the SVG files themselves contain no creator, source, copyright, or licence metadata.",
+      "effect": "This does not defeat the affirmative official page grant and is not a blocking clearance failure, but attribution must point to the Penn State STAT 415 Lesson 01 page and each exact official asset URL; the audit does not independently establish a deeper chain of title."
+    }
+  ],
+  "blocking_unresolved_rights": [],
+  "summary": {
+    "unique_main_content_dependencies": 5,
+    "frozen_assets": 5,
+    "frozen_bytes": 62145,
+    "linked_only": 0,
+    "replaced": 0,
+    "excluded_main_content_dependencies": 0,
+    "blocking_unresolved_rights": 0,
+    "all_http_status_200": true,
+    "all_content_type_svg": true,
+    "all_local_bytes_and_sha256_verified": true,
+    "all_svg_xml_valid": true,
+    "all_svg_free_of_script_external_http_and_embedded_raster": true,
+    "disposition": "Freeze all five figures under CC BY-NC 4.0 with page and per-asset attribution; no Lesson 01 main-content dependency requires link, replacement, or exclusion."
+  }
+}

@@ -1,7 +1,7 @@
 {
   "component": "MathJax",
   "distribution": "official npm mathjax package served by jsDelivr",
-  "file_count": 2,
+  "file_count": 5,
   "files": [
     {
       "bytes": 1704911,
@@ -18,15 +18,39 @@
       "relative_path": "LICENSE.txt",
       "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
       "url": "https://cdn.jsdelivr.net/npm/mathjax@3.1.2/LICENSE"
+    },
+    {
+      "bytes": 9192,
+      "component": "MathJax 3.1.2",
+      "license": "Apache-2.0",
+      "relative_path": "input/tex/extensions/color.js",
+      "sha256": "412863c1ea3db035795f39a6850f963261b81d260de61862c85013b2c96c01d7",
+      "url": "https://cdn.jsdelivr.net/npm/mathjax@3.1.2/es5/input/tex/extensions/color.js"
+    },
+    {
+      "bytes": 3071,
+      "component": "MathJax 3.1.2",
+      "license": "Apache-2.0",
+      "relative_path": "input/tex/extensions/enclose.js",
+      "sha256": "fed0d0fca9402ad9f23bba26a158cc6a802a267f900c238769e16ed30b4410ab",
+      "url": "https://cdn.jsdelivr.net/npm/mathjax@3.1.2/es5/input/tex/extensions/enclose.js"
+    },
+    {
+      "bytes": 4029,
+      "component": "MathJax 3.1.2",
+      "license": "Apache-2.0",
+      "relative_path": "input/tex/extensions/cancel.js",
+      "sha256": "6b5ede35a63fb92d69e0648755746867efdbaebbf452506ebd878c33568aadf0",
+      "url": "https://cdn.jsdelivr.net/npm/mathjax@3.1.2/es5/input/tex/extensions/cancel.js"
     }
   ],
   "license": "Apache-2.0",
   "manifest": {
-    "bytes": 375,
+    "bytes": 987,
     "path": "authority/runtime/MathJax-3.1.2/URL_MANIFEST.csv",
-    "sha256": "5ef21f18fc13cdc9d83e94fbf3edbc76491e0fa9a1356bfdff2ea441b2398d72"
+    "sha256": "ea74a936651bd0f0fce085bf6d9276f6c8bb1e18e1a4d547114fa014ac44270a"
   },
   "schema": "o006.stat415.mathjax-freeze.v1",
-  "total_bytes": 1716269,
+  "total_bytes": 1732561,
   "version": "3.1.2"
 }

@@ -1,0 +1,199 @@
+{
+  "corrections": {
+    "bytes": 6506,
+    "count": 20,
+    "first_unit_count": 14,
+    "lesson01_count": 6,
+    "path": "backend/through_lesson01_corrections.jsonl",
+    "sha256": "f66a3106401d473d2aa8208e5e04823f1b6d4e830c86d5fed61285e96fd5c7c4"
+  },
+  "coverage": {
+    "complete_count": 3,
+    "complete_documents": [
+      "index",
+      "Lesson00",
+      "Lesson01"
+    ],
+    "corpus_document_count": 14,
+    "next_document": "Lesson02"
+  },
+  "documents_backend": {
+    "bytes": 2005,
+    "path": "backend/through_lesson01_documents.jsonl",
+    "sha256": "d8983d875f55fad9df56b1dfe6962456fa357b359c14d42c253318f8775a5bc1"
+  },
+  "historical_first_unit_evidence": {
+    "backend/first_unit_corrections.jsonl": {
+      "bytes": 3915,
+      "sha256": "f437ae0f73d36f93d46398971c0a7e10a11182a873c8964aed709115b2c1af3a"
+    },
+    "backend/first_unit_documents.jsonl": {
+      "bytes": 1223,
+      "sha256": "2eb5c55778a4c013e6f9766e40a0483ec7182f3c76bddfda633944e6f4ccb944"
+    },
+    "build/FIRST_UNIT_BUILD_RECEIPT.json": {
+      "bytes": 1755,
+      "sha256": "8f182e1e2ac2fa14892397af51015e8c91162c252b7e972e1dc9cae7eb73893a"
+    },
+    "build/FIRST_UNIT_MANIFEST.csv": {
+      "bytes": 1854,
+      "sha256": "73e6eaefca1e2a75415053da302c2ee7e56ac4e02ff025d1d3a074775f13e630"
+    }
+  },
+  "inputs": {
+    "builder": {
+      "bytes": 43347,
+      "path": "scripts/build_through_lesson01.py",
+      "sha256": "0596b9e167f2b174f13848a96f7c425c4bb31b91312b8a01d5c1e444ad38742f"
+    },
+    "frozen": {
+      "authority/FIRST_UNIT_ASSET_MANIFEST.csv": {
+        "bytes": 4666,
+        "sha256": "e6973f56735defb100ac9c1b7ed2a1301a32377582b82a72d6ea3eb7db830e31"
+      },
+      "authority/runtime/MathJax-3.1.2/LICENSE.txt": {
+        "bytes": 11358,
+        "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30"
+      },
+      "authority/runtime/MathJax-3.1.2/input/tex/extensions/cancel.js": {
+        "bytes": 4029,
+        "sha256": "6b5ede35a63fb92d69e0648755746867efdbaebbf452506ebd878c33568aadf0"
+      },
+      "authority/runtime/MathJax-3.1.2/input/tex/extensions/color.js": {
+        "bytes": 9192,
+        "sha256": "412863c1ea3db035795f39a6850f963261b81d260de61862c85013b2c96c01d7"
+      },
+      "authority/runtime/MathJax-3.1.2/input/tex/extensions/enclose.js": {
+        "bytes": 3071,
+        "sha256": "fed0d0fca9402ad9f23bba26a158cc6a802a267f900c238769e16ed30b4410ab"
+      },
+      "authority/runtime/MathJax-3.1.2/tex-svg.js": {
+        "bytes": 1704911,
+        "sha256": "dba9c7e8646389650c445e0547023942bed229b3fdb9513b1c6c01237af0b81a"
+      },
+      "backend/first_unit_corrections.jsonl": {
+        "bytes": 3915,
+        "sha256": "f437ae0f73d36f93d46398971c0a7e10a11182a873c8964aed709115b2c1af3a"
+      },
+      "backend/first_unit_documents.jsonl": {
+        "bytes": 1223,
+        "sha256": "2eb5c55778a4c013e6f9766e40a0483ec7182f3c76bddfda633944e6f4ccb944"
+      },
+      "backend/first_unit_segments.jsonl": {
+        "bytes": 207177,
+        "sha256": "4706f76a8c7cd1bc9d477676d132ebcc69c5fbc41973ab6f6c46977c20b6bbb5"
+      },
+      "backend/lesson01_translation_bindings.jsonl": {
+        "bytes": 88776,
+        "sha256": "bc5a0914d1515636ad3dee36933f3a93ffaea4056d79a80bf0e4125b06d3dd0e"
+      },
+      "build/FIRST_UNIT_BUILD_RECEIPT.json": {
+        "bytes": 1755,
+        "sha256": "8f182e1e2ac2fa14892397af51015e8c91162c252b7e972e1dc9cae7eb73893a"
+      },
+      "build/FIRST_UNIT_MANIFEST.csv": {
+        "bytes": 1854,
+        "sha256": "73e6eaefca1e2a75415053da302c2ee7e56ac4e02ff025d1d3a074775f13e630"
+      },
+      "build/LESSON01_TRANSLATION_RECEIPT.json": {
+        "bytes": 1483,
+        "sha256": "fa67729b94a38fc602d6e89d646bde76d3e24fdf575087262e1b088f2f363db2"
+      },
+      "scripts/build_first_unit.py": {
+        "bytes": 27123,
+        "sha256": "ac004ef651fe77ab17e51b52ad45d3662687eba0674caf28e15a7667e0a8f624"
+      },
+      "source/id-ID/course_card_alt_text.json": {
+        "bytes": 1273,
+        "sha256": "ce580bfe695bfadd8ed0d866f5b3991554e76d7a878ee8365f07f203a61c9561"
+      },
+      "source/id-ID/first_unit_translation.csv": {
+        "bytes": 108105,
+        "sha256": "e6bce1b1dd51c057ac36424b46bb47e2cc8a6c3f48894d548dfea79e74d448c4"
+      },
+      "source/id-ID/lesson01_translation.csv": {
+        "bytes": 54021,
+        "sha256": "f7c6cc3c2089f1e3f0fb500dddd93b803cb2c63007b30349a41e88c9d52e9eeb"
+      },
+      "source/id-ID/reader.css": {
+        "bytes": 5890,
+        "sha256": "1d463e04c51aff4750dec54523952488635c08fc5d3ead30ffc399a43f96f77b"
+      },
+      "source/normalized/en-US/Lesson00.html": {
+        "bytes": 65253,
+        "sha256": "411b3973f5f0b343f87450a6c66760b6a8e827a1966232f80f1634d446eebf9f"
+      },
+      "source/normalized/en-US/Lesson01.html": {
+        "bytes": 44561,
+        "sha256": "80af5060d5b87190c82b553500024b0926af28aa4b2310091092c1873b47f02c"
+      },
+      "source/normalized/en-US/index.html": {
+        "bytes": 26025,
+        "sha256": "bf7231efa163c2056d1474edcb829c7cabd796fed194ed67accef04a973f0406"
+      },
+      "working/lesson01_asset_rights_audit.json": {
+        "bytes": 17937,
+        "sha256": "165eea7fc029c154198e6b4aa271d18d562aba083fbc4eea08d41dc9b01fcdd9"
+      },
+      "working/lesson01_source_findings.md": {
+        "bytes": 5601,
+        "sha256": "8183157dc52b1adde5c4b26783c50e772476d60f9d70f226c00cbaf0cbc6a0ae"
+      }
+    },
+    "lesson01_translation": {
+      "bytes": 54021,
+      "path": "source/id-ID/lesson01_translation.csv",
+      "rows": 221,
+      "sha256": "f7c6cc3c2089f1e3f0fb500dddd93b803cb2c63007b30349a41e88c9d52e9eeb"
+    }
+  },
+  "locale": "id-ID",
+  "math_nodes": {
+    "Lesson00": 331,
+    "Lesson01": 169,
+    "index": 0,
+    "total": 500
+  },
+  "offline": {
+    "analytics": false,
+    "cookies": false,
+    "external_runtime_requests": 0,
+    "local_mathjax": true
+  },
+  "reader": {
+    "bytes": 2598449,
+    "files": 28,
+    "manifest_bytes": 2798,
+    "manifest_path": "build/THROUGH_LESSON01_MANIFEST.csv",
+    "manifest_sha256": "6a047b981eeb71e740450678b4f802fb7ec3eb954cf92ffc3cebbaf8a050b5a7",
+    "path": "build/html-id"
+  },
+  "rights": {
+    "Lesson01 figures": "CC BY-NC 4.0 under the official page notice; per-file creator metadata absent",
+    "MathJax 3.1.2": "Apache-2.0",
+    "Penn State content": "CC BY-NC 4.0 except where otherwise noted",
+    "aggregate_uniform_relicense": false
+  },
+  "schema": "o006.stat415.through-lesson01-build.v1",
+  "status": "built",
+  "structural_units_normalized": 750,
+  "target_documents": [
+    {
+      "bytes": 25916,
+      "path": "source/id-ID/index.html",
+      "sha256": "b064358f0f6daebeeea844688ecd8bb83aa64bdffab845959ff31c6e2904a3ec"
+    },
+    {
+      "bytes": 80125,
+      "path": "source/id-ID/Lesson00.html",
+      "sha256": "a8955089fefa46d4d11fb3c6a2b97d0d2da4351a730ce5d54462a24aeefb2ce9"
+    },
+    {
+      "bytes": 47205,
+      "path": "source/id-ID/Lesson01.html",
+      "sha256": "0766b844ddbe2733e82a466fc05ffc69a9f9b4b6ff6d3b98581ad29bab3e24d1"
+    }
+  ],
+  "translation_provenance": "OpenAI Codex gpt-5.6-sol, Ultra",
+  "translation_segments": 744
+}

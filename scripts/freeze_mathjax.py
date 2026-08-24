@@ -32,6 +32,24 @@ FILES = (
         11358,
         "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
     ),
+    (
+        "input/tex/extensions/color.js",
+        "https://cdn.jsdelivr.net/npm/mathjax@3.1.2/es5/input/tex/extensions/color.js",
+        9192,
+        "412863c1ea3db035795f39a6850f963261b81d260de61862c85013b2c96c01d7",
+    ),
+    (
+        "input/tex/extensions/enclose.js",
+        "https://cdn.jsdelivr.net/npm/mathjax@3.1.2/es5/input/tex/extensions/enclose.js",
+        3071,
+        "fed0d0fca9402ad9f23bba26a158cc6a802a267f900c238769e16ed30b4410ab",
+    ),
+    (
+        "input/tex/extensions/cancel.js",
+        "https://cdn.jsdelivr.net/npm/mathjax@3.1.2/es5/input/tex/extensions/cancel.js",
+        4029,
+        "6b5ede35a63fb92d69e0648755746867efdbaebbf452506ebd878c33568aadf0",
+    ),
 )
 
 
@@ -128,7 +146,7 @@ def main() -> None:
                 raise RuntimeError(f"MathJax evidence differs: {relative}")
         state = "verified"
     receipt_data = evidence[RECEIPT.relative_to(ROOT).as_posix()]
-    print(json.dumps({"mode": state, "files": 2, "bytes": sum(map(len, file_payloads.values())), "receipt_sha256": sha256(receipt_data)}, sort_keys=True))
+    print(json.dumps({"mode": state, "files": len(FILES), "bytes": sum(map(len, file_payloads.values())), "receipt_sha256": sha256(receipt_data)}, sort_keys=True))
 
 
 if __name__ == "__main__":
