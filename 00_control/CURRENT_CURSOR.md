@@ -38,20 +38,28 @@ Updated: 2026-08-24
   `740fa491a223e0e8b6b01e21a06124ed9e38c734fcec3d74fc065f6c26888f40`.
 - Rights remain component-separated: Penn State CC BY-NC 4.0 except where
   otherwise noted; MathJax Apache-2.0; original repository layer CC BY-SA 4.0.
+- Public checkpoint commit:
+  `4a1182fc9bd5a86942da5f7be6539f4dbf048921`; workflow run `32739307538`
+  passed. Anonymous readback matched all 168 commit files and all 28 Pages
+  files. GitHub release `v2026.08.24.3of14` exposes the exact nine assets /
+  7,150,601 bytes and passed anonymous hash verification.
+- Zenodo concept DOI `10.5281/zenodo.22077422`; current version DOI
+  `10.5281/zenodo.22083156`. Anonymous readback matched all nine files and the
+  authenticated lineage audit found one submitted target version and zero
+  unpublished concept drafts.
 - No upstream message has been sent.
 
 ## Next executable action
 
-Commit and push this verified 3-of-14 checkpoint, verify the deployed 28-file
-reader anonymously, publish the nine exact assets as a new version of the
-existing Zenodo concept `10.5281/zenodo.22077422`, and anonymously read every
-published byte back. Then normalize and translate Lesson 02 without reopening
-completed documents.
+Run the admitted Lesson 02 normalizer, freeze and adjudicate its two direct
+assets, verify its nine registered source defects, and translate all Lesson 02
+segments contiguously without reopening completed documents.
 
 ## Recovery
 
 Read `WORKFLOW.md`, this file, `CURRENT_STATE.md`, `COMPONENT_BOUNDARY.md`,
 `CHECKPOINT_2026-08-24_THROUGH_LESSON01.md`, `TRANSLATION_LEDGER.csv`, the
 source/runtime/asset freeze receipts, and the latest cumulative
-build/QA/visual/package/publication receipts. Conversation summaries are not
-state. Do not broaden the filesystem or Git scope.
+build/QA/visual/package/publication receipts, especially
+`CHECKPOINT_2026-08-24_THROUGH_LESSON01_PUBLICATION_COMPLETE.md`. Conversation
+summaries are not state. Do not broaden the filesystem or Git scope.

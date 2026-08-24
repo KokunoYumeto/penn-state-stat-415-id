@@ -399,7 +399,7 @@ def authenticated_concept_drafts(session: requests.Session) -> list[dict[str, ob
                 params={
                     "q": f"conceptrecid:{CONCEPT_RECORD_ID}",
                     "all_versions": "true",
-                    "size": 100,
+                    "size": 25,
                     "page": page,
                 },
                 timeout=120,
@@ -427,7 +427,7 @@ def authenticated_concept_drafts(session: requests.Session) -> list[dict[str, ob
                 raise RuntimeError("authenticated Zenodo deposition has conflicting concept identity")
             if not bool(row.get("submitted")):
                 drafts.append(row)
-        if len(batch) < 100:
+        if len(batch) < 25:
             break
         page += 1
     return drafts
@@ -444,7 +444,8 @@ def public_concept_versions(session: requests.Session) -> list[dict[str, object]
                 params={
                     "q": f"conceptrecid:{CONCEPT_RECORD_ID}",
                     "all_versions": "true",
-                    "size": 100,
+                    # Zenodo caps anonymous record searches at 25 results.
+                    "size": 25,
                     "page": page,
                 },
                 timeout=120,
@@ -464,7 +465,7 @@ def public_concept_versions(session: requests.Session) -> list[dict[str, object]
             raise RuntimeError("public Zenodo search returned invalid or repeated record ids")
         seen.update(batch_ids)
         rows.extend(batch)
-        if len(batch) < 100:
+        if len(batch) < 25:
             break
         page += 1
     admitted = [
@@ -546,20 +547,22 @@ def exact_draft_files(draft: dict[str, object], inventory: list[dict[str, object
 
 
 def sort_draft_files(session: requests.Session, draft: dict[str, object]) -> dict[str, object]:
+    """Verify exact files and the reader-first filename convention.
+
+    Zenodo's current bucket-backed drafts reject the documented legacy file
+    sort PUT with HTTP 405, and both draft and public APIs return file arrays in
+    non-display order.  The `00_` prefix is therefore the stable reader-first
+    surface used by Zenodo's filename-sorted UI; the root receipt preserves the
+    intended upload order independently of API array order.
+    """
     deposition_id = str(draft["id"])
     current = {str(row.get("filename")): row for row in draft.get("files") or [] if isinstance(row, dict)}
     if set(current) != set(FILES) or any(not current[name].get("id") for name in FILES):
         raise RuntimeError("Zenodo draft cannot be sorted into reader-first order")
-    order = [{"id": current[name]["id"]} for name in FILES]
-    check(
-        session.put(f"{DEPOSITIONS}/{deposition_id}/files", json=order, timeout=120),
-        (200,),
-        "sort Zenodo draft files",
-    )
     draft = refetch(session, deposition_id)
     actual_order = [str(row.get("filename")) for row in draft.get("files") or [] if isinstance(row, dict)]
-    if actual_order != list(FILES):
-        raise RuntimeError("Zenodo draft file order is not reader-first")
+    if set(actual_order) != set(FILES) or not FILES[0].startswith("00_"):
+        raise RuntimeError("Zenodo draft file inventory or reader-first naming differs")
     return draft
 
 
@@ -661,7 +664,10 @@ def validate_owned_draft(
     if concept_doi and concept_doi != CONCEPT_DOI:
         raise RuntimeError("owned Zenodo draft has the wrong concept DOI")
     draft_meta = draft.get("metadata") if isinstance(draft.get("metadata"), dict) else {}
-    if draft_meta.get("version") not in (prior_version, VERSION):
+    # A freshly created Zenodo version draft may leave `version` blank instead
+    # of inheriting the prior record's value. Ownership comes from the exact
+    # locally persisted draft id, not from this mutable metadata field.
+    if draft_meta.get("version") not in (None, "", prior_version, VERSION):
         raise RuntimeError("owned Zenodo draft has the wrong prior or target version")
 
 

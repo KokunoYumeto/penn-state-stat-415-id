@@ -54,9 +54,18 @@ support remains CC BY-SA 4.0. No aggregate uniform relicensing is claimed. The
 translation provenance is exactly `OpenAI Codex gpt-5.6-sol, Ultra`; all source
 and human-contributor credits are preserved. No upstream message has been sent.
 
-The immediate operation is to publish this verified reader-first package to the
-dedicated GitHub repository/Pages and the existing Zenodo concept, then
-anonymously read every public byte back. The next production document is Lesson
-02; its normalization script is present but has not yet been admitted or run.
-The independent completed Random edition remains in its separate sibling
-repository and is outside this component's write boundary.
+This 3-of-14 boundary is public. Commit
+`4a1182fc9bd5a86942da5f7be6539f4dbf048921` passed workflow run
+`32739307538`; anonymous readback matched 168 public commit files, all 28 Pages
+files, and all nine GitHub release assets / 7,150,601 bytes. GitHub tag
+`v2026.08.24.3of14` is public. Zenodo version DOI
+`10.5281/zenodo.22083156` remains inside concept DOI
+`10.5281/zenodo.22077422`; all nine Zenodo files matched anonymously, and the
+authenticated lineage audit found one submitted target version and zero
+unpublished concept drafts.
+
+The next production document is Lesson 02. Its normalizer is present but has
+not yet been admitted or run; the immediate action is to validate it, freeze
+its two direct assets, adjudicate its nine source defects, and translate all
+segments contiguously. The independent completed Random edition remains in its
+separate sibling repository and is outside this component's write boundary.
