@@ -1,0 +1,467 @@
+segment_id,document_id,component_id,section_id,source_sha256,source_text,target_text,status
+O006-PSU-010-S0001,O006-PSU-010,Lesson09,,cb4ad503e340ebd1a921e3ed6dcbfc0a80660936d8bfc9d190f70694b9ccb51b,Lessons,,pending
+O006-PSU-010-S0002,O006-PSU-010,Lesson09,,6ee64035ea194af51b4e2411fb012572f8d34744f6bb265174dc0c4746592a5f,Hypothesis Tests (Part I),,pending
+O006-PSU-010-S0003,O006-PSU-010,Lesson09,,6ee64035ea194af51b4e2411fb012572f8d34744f6bb265174dc0c4746592a5f,Hypothesis Tests (Part I),,pending
+O006-PSU-010-S0004,O006-PSU-010,Lesson09,,ebf11f927da2029a49cbac75d5b1ef4d542ad7e20354b2d878d0093600092c7c,Hypothesis Tests,,pending
+O006-PSU-010-S0005,O006-PSU-010,Lesson09,,a1a085e3849afa37bb917d49e092e67400801d01b978ec2f84125e9e6d00ad0d,Tests about Proportions,,pending
+O006-PSU-010-S0006,O006-PSU-010,Lesson09,,7e6cc9a8c6750304536fe75fbe8c44a4da5934b1c3cb3211f0a1387b95670ef3,Tests about one Mean,,pending
+O006-PSU-010-S0007,O006-PSU-010,Lesson09,,a1d5b41c5f658bf4fd746c0637618ed68f32959799894b502b32d8a5bc294156,P-Value,,pending
+O006-PSU-010-S0008,O006-PSU-010,Lesson09,overview,d4b1ea5708dd532930a85188b45aff6f0a3ed458500c7577e0127a538eb0d100,Overview,,pending
+O006-PSU-010-S0009,O006-PSU-010,Lesson09,overview,e10c13a76a31ef416859983d25de54a2a780bedd195a2e3dcf70fde00ecc83dc,"In the previous sections, we developed statistical methods, primarily in the form of confidence intervals, for answering the question “what is the value of the parameter ",,pending
+O006-PSU-010-S0010,O006-PSU-010,Lesson09,overview,f35686228766fa145434a98f0d6ab0d1886a429d244488872b3d80561b864df5,"?” In this section, we’ll learn how to answer a slightly different question, namely “is the value of the parameter ",,pending
+O006-PSU-010-S0011,O006-PSU-010,Lesson09,overview,51a02cadf103508c8f46ee1b59bf94d2afcd9bcc0ca2127ed00cb50cb9806707," such and such?” For example, rather than attempting to estimate ",,pending
+O006-PSU-010-S0012,O006-PSU-010,Lesson09,overview,27cdbf7b76e3230798653b678f35a66bfb7ffc7d5776f87e9427f0967fe014f6,", the mean body temperature of adults, we might be interested in testing whether ",,pending
+O006-PSU-010-S0013,O006-PSU-010,Lesson09,overview,2bd31fbe01a6414c61e6e6aa92fb11c65d11103c26a603d7fe5c0edb0ae3a899,", the mean body temperature of adults, is really 37 degrees Celsius. We’ll attempt to answer such questions using a statistical method known as hypothesis testing.",,pending
+O006-PSU-010-S0014,O006-PSU-010,Lesson09,objectives,eba92953899468e3f79c084370cc455f39c256e77b5277ff480e3384ff9ecc27,Objectives,,pending
+O006-PSU-010-S0015,O006-PSU-010,Lesson09,objectives,25aef8be8be2a587942663b20614423b057589f18636ba6d72bd7bf691a84629,"Upon completion of this lesson, you should be able to:",,pending
+O006-PSU-010-S0016,O006-PSU-010,Lesson09,objectives,005badaa3b18fd672514669a5e3a268570971c542e318bd8394b41509b0e6403,"Construct a hypothesis test using the distribution of an estimator,",,pending
+O006-PSU-010-S0017,O006-PSU-010,Lesson09,objectives,eb0f0d84493b4ab3d699f51a48b6bd925f49aeb7bbff759ef4c19e899ae99079,"Make conclusions of test using the p-value approach,",,pending
+O006-PSU-010-S0018,O006-PSU-010,Lesson09,objectives,14bd71639e66f14b40203148db494b78629af00c61af5f2a367bec6d554ce64e,"Make conclusions of a test using the critical value approach,",,pending
+O006-PSU-010-S0019,O006-PSU-010,Lesson09,objectives,352ec3ee0ad682d84f9766b42630100f2813569a55021dfe843aac4f5e649c2e,"Clearly interpret the results of a hypothesis test, and",,pending
+O006-PSU-010-S0020,O006-PSU-010,Lesson09,objectives,b8d746729cb1485c0023fe37c4517dd5cc4c67bb84e713154d05594eafc2e32b,Clearly interpret the types of errors and their respective probabilities.,,pending
+O006-PSU-010-S0021,O006-PSU-010,Lesson09,introduction-to-hypothesis-tests,f7014a31b4c1fca0e18cd30a5558e05eb54256385d7c60cbe2e58e025287b04d, Introduction to Hypothesis Tests,,pending
+O006-PSU-010-S0022,O006-PSU-010,Lesson09,basic-terms,639cb7324d6252b2e5a9511c27ca8add781760ca1a7ff764fcda07c8b4756d49, Basic Terms,,pending
+O006-PSU-010-S0023,O006-PSU-010,Lesson09,basic-terms,fb268a3dcf0fd2cc9b88a10420b2c256cd9955208bab77491cf6b96381c8806a,"Before we get into the statistical theory behind hypothesis tests, we first need to understand the basic terms.",,pending
+O006-PSU-010-S0024,O006-PSU-010,Lesson09,basic-terms,c7cf461903d0f135617937e790905b39dc77bc8708cae1abc7c7097781f59434,"The first step in hypothesis testing is to set up two (mutually exclusive) and competing hypotheses. This is the most important aspect of the hypothesis test. If the hypotheses are incorrect, the conclusion of the test will also be incorrect.",,pending
+O006-PSU-010-S0025,O006-PSU-010,Lesson09,basic-terms,d0f6a6c8546f18c4484ff1fcd331f31cd5c5959f0512a75cd2a7cd8d6b5a0cf4,The two hypotheses are named the null hypothesis and the alternative hypothesis.,,pending
+O006-PSU-010-S0026,O006-PSU-010,Lesson09,basic-terms,8be27f4af8526b71c85ba16333d1c1e5d5eff45db481f5978ef25517b5519075,Def. 9.1 (Null Hypothesis),,pending
+O006-PSU-010-S0027,O006-PSU-010,Lesson09,basic-terms,79e3f2a55928f9be8e9bf79254ff7e3ef670540a1c5ca07cfe875827d89757e0, The ,,pending
+O006-PSU-010-S0028,O006-PSU-010,Lesson09,basic-terms,8e2cdea89c2de84a2a1a57b179f2a2726786657d62e95a5d9ff395cbe4c415aa,null hypothesis,,pending
+O006-PSU-010-S0029,O006-PSU-010,Lesson09,basic-terms,9ba971cd4730e9812ed0a543f64c70d2d2ff73a41fca49929f4b5469fc095c6e, is typically denoted as ,,pending
+O006-PSU-010-S0030,O006-PSU-010,Lesson09,basic-terms,c8348e2d51b7f4537798354d9bdd03994051ae6c2666e8c50f74aa4f80393106,. The null hypothesis states the “status quo”. This hypothesis is ,,pending
+O006-PSU-010-S0031,O006-PSU-010,Lesson09,basic-terms,2fbde76d5a4027d2c655b8e162a553f854aa4aca96e9fd395bbc913fbc3988f4,assumed to be true,,pending
+O006-PSU-010-S0032,O006-PSU-010,Lesson09,basic-terms,0c4f77097a458b5b2080edbf97cbff2017d4f8655f860cb419117067bdd6becf, until there is evidence to suggest otherwise.,,pending
+O006-PSU-010-S0033,O006-PSU-010,Lesson09,basic-terms,62ae5800b567d475905e90208c4a8b0d5fb6fdc54553c14d78be9a93a464a2d8,Def. 9.2 (Alternative Hypothesis),,pending
+O006-PSU-010-S0034,O006-PSU-010,Lesson09,basic-terms,79e3f2a55928f9be8e9bf79254ff7e3ef670540a1c5ca07cfe875827d89757e0, The ,,pending
+O006-PSU-010-S0035,O006-PSU-010,Lesson09,basic-terms,538760bf1430ba8b0b68777cdf658c94851c78333667b64fca8d11b2de62120e,alternative hypothesis,,pending
+O006-PSU-010-S0036,O006-PSU-010,Lesson09,basic-terms,9ba971cd4730e9812ed0a543f64c70d2d2ff73a41fca49929f4b5469fc095c6e, is typically denoted as ,,pending
+O006-PSU-010-S0037,O006-PSU-010,Lesson09,basic-terms,e1a3e78cb5c8858631bf81f94369a0be3fd2aebb9e852e66368b381c8feef91f, or ,,pending
+O006-PSU-010-S0038,O006-PSU-010,Lesson09,basic-terms,be651ee671c0e88d0c056fdcb2ee71bd7e283abf97879859391c1036fc5859b1,. This is the statement that one wants to conclude. It is also called the research hypothesis.,,pending
+O006-PSU-010-S0039,O006-PSU-010,Lesson09,basic-terms,884bfb54e274d9e310c9aee6436aef7bb4d3882b3a6dbefbfd38e00c25baae79,Example 9.1,,pending
+O006-PSU-010-S0040,O006-PSU-010,Lesson09,basic-terms,7c55351fc4b48bc08d74639211ea3bb5f8de8bc1fa0ce486212b809f44f71f83," A man, Mr. Orangejuice, goes to trial and is tried for the murder of his ex-wife. He is either guilty or innocent. Set up the null and alternative hypotheses for this example.",,pending
+O006-PSU-010-S0041,O006-PSU-010,Lesson09,solution,22927695994eab589c7601a6b15df4d9dc67c5aceb9a74cdb965444b9b8362a6,Solution,,pending
+O006-PSU-010-S0042,O006-PSU-010,Lesson09,solution,3eb545ee1e35a4f0503c6683b627012dfacc9badf0cda044b4c312a4aa1156e6,"Putting this in a hypothesis testing framework, the hypotheses being tested are: 1. The man is guilty. 2. The man is innocent.",,pending
+O006-PSU-010-S0043,O006-PSU-010,Lesson09,solution,2713ae180ee316a819ec224d83b2f1fa42979bcf7a33d2d9192d2cc203fd05af,Let’s set up the null and alternative hypotheses.,,pending
+O006-PSU-010-S0044,O006-PSU-010,Lesson09,solution,2ba48d1a6518c08580864c19a13a1081ec1120bbd98c3108d024abf666945093,"Remember that we assume the null hypothesis is true and try to see if we have evidence against the null. Therefore, it makes sense in this example to assume the man is innocent and test to see if there is evidence that he is guilty.",,pending
+O006-PSU-010-S0045,O006-PSU-010,Lesson09,the-logic-of-hypothesis-testing,f2e65850efa0534bae73e6cc02c3ef1132857b9fa1157fafacddd723c7dcdac6, The Logic of Hypothesis Testing,,pending
+O006-PSU-010-S0046,O006-PSU-010,Lesson09,the-logic-of-hypothesis-testing,6cebcccb9143470f9e8a182a8aa4000f1d5123f31dc7567be37d992a9e57a657,We want to know the answer to a research question. We determine our null and alternative hypotheses. Now it is time to make a decision.,,pending
+O006-PSU-010-S0047,O006-PSU-010,Lesson09,the-logic-of-hypothesis-testing,e137ad7445ccb5edcc76f5429af6e034ca4ada2b20ab3e75d19e9e5f8e98f537,The decision is either going to be…,,pending
+O006-PSU-010-S0048,O006-PSU-010,Lesson09,the-logic-of-hypothesis-testing,19205106c9ffc5ea566350078f2f0e362a2c5b6888aa466385d03b9af7573a14,Reject the null hypothesis or…,,pending
+O006-PSU-010-S0049,O006-PSU-010,Lesson09,the-logic-of-hypothesis-testing,430c10926c257a486bb51cd543b0797e15c89257028e47c47776f5c6874f988e,Fail to reject the null hypothesis,,pending
+O006-PSU-010-S0050,O006-PSU-010,Lesson09,the-logic-of-hypothesis-testing,2b5fbae52b9d0819e0c2bec456b8f47bc7f3e3d87d03b9ed2a24e010193937cf,Note!,,pending
+O006-PSU-010-S0051,O006-PSU-010,Lesson09,the-logic-of-hypothesis-testing,8531165653a03a660cc9964bfe48c9aa1cb907bb7b4149a1805c315f32881006,"
+Why can’t we say we “accept the null”? The reason is that we are assuming the null hypothesis is true and trying to see if there is evidence against it. Therefore, the conclusion should be in terms of rejecting the null.",,pending
+O006-PSU-010-S0052,O006-PSU-010,Lesson09,the-logic-of-hypothesis-testing,870c7f86bd84cbbb6c226d78d836282577e2ff21ea332c44762a61548cd81870,"Consider the following table. The table shows the decision/conclusion of the hypothesis test and the unknown “reality”, or truth. We do not know if the null is true or if it is false. If the null is false and we reject it, then we made the correct decision. If the null hypothesis is true and we fail to reject it, then we made the correct decision.",,pending
+O006-PSU-010-S0053,O006-PSU-010,Lesson09,the-logic-of-hypothesis-testing,640ae4baf96061fee1798e9181e2b7a5145585233df2c27a501623afb0096ec1,Decision,,pending
+O006-PSU-010-S0054,O006-PSU-010,Lesson09,the-logic-of-hypothesis-testing,ff60b80fa25f7558c202e6527ea42ac9c825a3ff07c9e986e4cc2c18fcf7e4bc,Reality,,pending
+O006-PSU-010-S0055,O006-PSU-010,Lesson09,the-logic-of-hypothesis-testing,10dbe4e5ce137a0f62b59f4f00d334bb44f7b18675e1923188e582a4b070ee8d,is true,,pending
+O006-PSU-010-S0056,O006-PSU-010,Lesson09,the-logic-of-hypothesis-testing,ed0b47ec1e832ec9536d503a578ff539ddd5c030b598d8056162a2cffa7e67b6,is false,,pending
+O006-PSU-010-S0057,O006-PSU-010,Lesson09,the-logic-of-hypothesis-testing,ab604a360777735fe2993aec7d4ffae415f1515b0a4c989269603fd3d5c07b61,Reject,,pending
+O006-PSU-010-S0058,O006-PSU-010,Lesson09,the-logic-of-hypothesis-testing,ddeb9564a097aefe203724ca99d69c222f5f0cd0ff4353d25d3b0d6f92c26e35,(Conclude,,pending
+O006-PSU-010-S0059,O006-PSU-010,Lesson09,the-logic-of-hypothesis-testing,f770a5e2b76c44d3b86fee882ff2ee2b42af9fae3ad3466756d15269de19b4a7,Correct decision,,pending
+O006-PSU-010-S0060,O006-PSU-010,Lesson09,the-logic-of-hypothesis-testing,79f841fe0bfc3ea2ba669e0492cb93237e63384ea32e96a60b8613ce48e7e490,Fail to Reject,,pending
+O006-PSU-010-S0061,O006-PSU-010,Lesson09,the-logic-of-hypothesis-testing,3082f64e7ade356b8602ccab0185623983a2ed1697bf74209524c70f6c0f79d2,Correct Decision,,pending
+O006-PSU-010-S0062,O006-PSU-010,Lesson09,the-logic-of-hypothesis-testing,37d0503f477c941939c27f62491980e2889b525ade9fb455ff747c03a3cb60a5,So what happens when we do not make the correct decision?,,pending
+O006-PSU-010-S0063,O006-PSU-010,Lesson09,the-logic-of-hypothesis-testing,9a34460a3fb4089176c77010ebc9e8a2b8f385ffbd20da6d9ca36d5e621cd557,"When doing hypothesis testing, two types of mistakes may be made and we call them Type I error and Type II error. If we reject the null hypothesis when it is true, then we made a type I error. If the null hypothesis is false and we failed to reject it, we made another error called a Type II error.",,pending
+O006-PSU-010-S0064,O006-PSU-010,Lesson09,the-logic-of-hypothesis-testing,640ae4baf96061fee1798e9181e2b7a5145585233df2c27a501623afb0096ec1,Decision,,pending
+O006-PSU-010-S0065,O006-PSU-010,Lesson09,the-logic-of-hypothesis-testing,ff60b80fa25f7558c202e6527ea42ac9c825a3ff07c9e986e4cc2c18fcf7e4bc,Reality,,pending
+O006-PSU-010-S0066,O006-PSU-010,Lesson09,the-logic-of-hypothesis-testing,10dbe4e5ce137a0f62b59f4f00d334bb44f7b18675e1923188e582a4b070ee8d,is true,,pending
+O006-PSU-010-S0067,O006-PSU-010,Lesson09,the-logic-of-hypothesis-testing,ed0b47ec1e832ec9536d503a578ff539ddd5c030b598d8056162a2cffa7e67b6,is false,,pending
+O006-PSU-010-S0068,O006-PSU-010,Lesson09,the-logic-of-hypothesis-testing,ab604a360777735fe2993aec7d4ffae415f1515b0a4c989269603fd3d5c07b61,Reject,,pending
+O006-PSU-010-S0069,O006-PSU-010,Lesson09,the-logic-of-hypothesis-testing,ddeb9564a097aefe203724ca99d69c222f5f0cd0ff4353d25d3b0d6f92c26e35,(Conclude,,pending
+O006-PSU-010-S0070,O006-PSU-010,Lesson09,the-logic-of-hypothesis-testing,18b6bc6e9cac152ac5118dc7fad404392feea994a9796114e3e21783e526339f,Type I Error,,pending
+O006-PSU-010-S0071,O006-PSU-010,Lesson09,the-logic-of-hypothesis-testing,f770a5e2b76c44d3b86fee882ff2ee2b42af9fae3ad3466756d15269de19b4a7,Correct decision,,pending
+O006-PSU-010-S0072,O006-PSU-010,Lesson09,the-logic-of-hypothesis-testing,79f841fe0bfc3ea2ba669e0492cb93237e63384ea32e96a60b8613ce48e7e490,Fail to Reject,,pending
+O006-PSU-010-S0073,O006-PSU-010,Lesson09,the-logic-of-hypothesis-testing,f770a5e2b76c44d3b86fee882ff2ee2b42af9fae3ad3466756d15269de19b4a7,Correct decision,,pending
+O006-PSU-010-S0074,O006-PSU-010,Lesson09,the-logic-of-hypothesis-testing,880df773dfcdc713bc475a0da0d8a55dd2b14f24c24cd95b76f171686c7e1f62,Type II Error,,pending
+O006-PSU-010-S0075,O006-PSU-010,Lesson09,types-of-errors,268479d94b0162d19e73aa52f0fc5bc2763485b02fbbd368c9d3caf0733f4aa7,Types of Errors,,pending
+O006-PSU-010-S0076,O006-PSU-010,Lesson09,types-of-errors,18b6bc6e9cac152ac5118dc7fad404392feea994a9796114e3e21783e526339f,Type I Error,,pending
+O006-PSU-010-S0077,O006-PSU-010,Lesson09,types-of-errors,acf0cc5b08205aec7d0d5452ca4a015f0b7276c17dc063fdded81843f4df6221,: When we reject the null hypothesis when the null hypothesis is true.,,pending
+O006-PSU-010-S0078,O006-PSU-010,Lesson09,types-of-errors,880df773dfcdc713bc475a0da0d8a55dd2b14f24c24cd95b76f171686c7e1f62,Type II Error,,pending
+O006-PSU-010-S0079,O006-PSU-010,Lesson09,types-of-errors,f17f1c265558af60649239b1a31f4efcabe81d4afe19aed9c8f74a266ac94ee6,: When we fail to reject the null hypothesis when the null hypothesis is false.,,pending
+O006-PSU-010-S0080,O006-PSU-010,Lesson09,types-of-errors,4d440bb2f950d640aad78ae8ed34c703c9f5bc95f923c259ece7943cf0e7ed59,"The “reality”, or truth, about the null hypothesis is unknown and therefore we do not know if we have made the correct decision or if we committed an error. We can, however, define the likelihood of these events.",,pending
+O006-PSU-010-S0081,O006-PSU-010,Lesson09,types-of-errors,aa6ca4482f1c5248a802861208ef916433ed86c466e6ec8d53c770778d65527d,Def. 9.3 (,,pending
+O006-PSU-010-S0082,O006-PSU-010,Lesson09,types-of-errors,cf0c0a8a0c9b31c36a5f5a0d0648208d70cd7589f797899ce370ad3b80aa4a1d, (“alpha”)),,pending
+O006-PSU-010-S0083,O006-PSU-010,Lesson09,types-of-errors,93506be7695c29fecef31e45c482d48611a7a8144ac565dad33c6c35bb87aa3d, The probability of committing a Type I error. Also known as the ,,pending
+O006-PSU-010-S0084,O006-PSU-010,Lesson09,types-of-errors,5c1d93c45632cc7faeddfb8a1140c7f3c60d8607f9385a058586a8964c6dfbac,significance level,,pending
+O006-PSU-010-S0085,O006-PSU-010,Lesson09,types-of-errors,c13339c0db95f162f1aea1abde07d15f6112cf1b630aeb1bcfb927276066b744,Def. 9.4 (,,pending
+O006-PSU-010-S0086,O006-PSU-010,Lesson09,types-of-errors,b47fe9f9525dd6ed7c26417b27f7332eb4de60f76078f1469c86cbbd37e49d07, (“beta”):),,pending
+O006-PSU-010-S0087,O006-PSU-010,Lesson09,types-of-errors,bc1c66a06b41313c2433de2794ccb66f87ac1995319073ae5c7045dd017f381e, The probability of committing a Type II error.,,pending
+O006-PSU-010-S0088,O006-PSU-010,Lesson09,power,1c733d3e79ae5bb9f8a7443b80ef13b01c29275909d291dee2970b6376b9d252, Power,,pending
+O006-PSU-010-S0089,O006-PSU-010,Lesson09,power,07ff0443e3106d5f1f47ed39207a2ba9fda7d63dc523d2710e7b33b558491900,Power is the probability the null hypothesis is rejected given that it is false. (i.e ,,pending
+O006-PSU-010-S0090,O006-PSU-010,Lesson09,introduction-to-hypothesis-tests,e3ee915a8e8c7aa02d2fced443314522b20824abd2535d5959c41dc8ab8a09e4, and ,,pending
+O006-PSU-010-S0091,O006-PSU-010,Lesson09,introduction-to-hypothesis-tests,ef7c6dfda044a2bc06e231abe79aeb8abc621c60c2f32156851b08f2e3d67e87," are probabilities of committing an error so we want these values to be low. However, we cannot decrease both. As ",,pending
+O006-PSU-010-S0092,O006-PSU-010,Lesson09,introduction-to-hypothesis-tests,9fe24cac1cc81fe603ae2e808c6d6f6f2365a87eaf96b23e456ca4996a80b7c8," decreases, ",,pending
+O006-PSU-010-S0093,O006-PSU-010,Lesson09,introduction-to-hypothesis-tests,3453765aa980b432db6633d8e3c8884068e97477ea7127cc09f9022da70f0b54, increases.,,pending
+O006-PSU-010-S0094,O006-PSU-010,Lesson09,introduction-to-hypothesis-tests,2b5fbae52b9d0819e0c2bec456b8f47bc7f3e3d87d03b9ed2a24e010193937cf,Note!,,pending
+O006-PSU-010-S0095,O006-PSU-010,Lesson09,introduction-to-hypothesis-tests,8981da22cf08ebd3f1e82fda51126fefd717110b125b91e981f25b212eed458b,"
+Type I error is also thought of as the event that we reject the null hypothesis GIVEN the null is true. In other words, Type I error is a conditional event and ",,pending
+O006-PSU-010-S0096,O006-PSU-010,Lesson09,introduction-to-hypothesis-tests,6d7035945b05e28286bf68891fa322f3b7436f6547fdbfb2a482b2f6cde7c837, is a conditional probability. The same idea applies to Type II error and ,,pending
+O006-PSU-010-S0097,O006-PSU-010,Lesson09,introduction-to-hypothesis-tests,a781216c009e923304ee13d0800a9c718cf34a33b29ee8a092264989fa495034,Example 9.2,,pending
+O006-PSU-010-S0098,O006-PSU-010,Lesson09,introduction-to-hypothesis-tests,97400a5d476dacf2430541eadad303b9816b656695d9b876234687596f555504," A man, Mr. Orangejuice, goes to trial and is tried for the murder of his ex-wife. He is either guilty or not guilty. We found before that…",,pending
+O006-PSU-010-S0099,O006-PSU-010,Lesson09,introduction-to-hypothesis-tests,142c6e1ec525ccbb8affccb75c9de5c4d7f4f7d5cb8e60301ab59be2c7cd7d97,"Interpret Type I Error, Type II Error, ",,pending
+O006-PSU-010-S0100,O006-PSU-010,Lesson09,introduction-to-hypothesis-tests,0a63e3f63f232f0c18f3bfe678607aad0b9f7ac6c73e037f74c79c0b2ba103f8,", and ",,pending
+O006-PSU-010-S0101,O006-PSU-010,Lesson09,solution-1,22927695994eab589c7601a6b15df4d9dc67c5aceb9a74cdb965444b9b8362a6,Solution,,pending
+O006-PSU-010-S0102,O006-PSU-010,Lesson09,solution-1,18b6bc6e9cac152ac5118dc7fad404392feea994a9796114e3e21783e526339f,Type I Error,,pending
+O006-PSU-010-S0103,O006-PSU-010,Lesson09,solution-1,06d5a0719bd9a7dc1f42073534a13ea3096513d944565edf40359c8932327288,Type I error is committed if we reject ,,pending
+O006-PSU-010-S0104,O006-PSU-010,Lesson09,solution-1,41cd8f1d57a0624ab5f4300ea730b8a31291ab7a685a344ce835e6514f171a48," when it is true. In other words, when the man is innocent but found guilty.",,pending
+O006-PSU-010-S0105,O006-PSU-010,Lesson09,solution-1,880df773dfcdc713bc475a0da0d8a55dd2b14f24c24cd95b76f171686c7e1f62,Type II Error,,pending
+O006-PSU-010-S0106,O006-PSU-010,Lesson09,solution-1,21cb3147e5a87e329289770f6fed50e6ad1e6a8000589d6fbf212c79ec400fb4,Type II error is committed if we fail to reject ,,pending
+O006-PSU-010-S0107,O006-PSU-010,Lesson09,solution-1,ad12f9022d079da37ed240f1411aa645cd9988a203a30f2ae84491da6647a2d3," when it is false. In other words, when the man is guilty but found not guilty.",,pending
+O006-PSU-010-S0108,O006-PSU-010,Lesson09,solution-1,02ac860c47152d5783e4fc0eee98c0e57fbd9e6443b5845ace408633346a1d89,"the probability of a Type I error, or in other words, it is the probability that Mr. Orangejuice is innocent but found guilty.",,pending
+O006-PSU-010-S0109,O006-PSU-010,Lesson09,solution-1,c84d291b75478ac62bf031eeacd034f8a6790c5918980af86d78023332352ec8,"the probability of a Type II error, or in other words, it is the probability that Mr. Orangejuice is guilty but found not guilty.",,pending
+O006-PSU-010-S0110,O006-PSU-010,Lesson09,introduction-to-hypothesis-tests,abc80707ecf294071e98a7ce550d4eca8f44c9d6b91a0e894e1e8151e765316a,"As you can see here, the Type I error (putting an innocent man in jail) is the more serious error. Ethically, it is more serious to put an innocent man in jail than to let a guilty man go free. So to minimize the probability of a type I error we would choose a smaller significance level.",,pending
+O006-PSU-010-S0111,O006-PSU-010,Lesson09,try-it,a3ab1b2e39d1a2c18f48a07754e45d15b5d22879da4a91485d37ec6aa6a26d38, Try It!,,pending
+O006-PSU-010-S0112,O006-PSU-010,Lesson09,try-it,cfcdcbc9a21e5903bf0f786eb488e76b63884a57a07b3f9e1b324e88b0d82d88,An inspector has to choose between certifying a building as safe or saying that the building is not safe. There are two hypotheses:,,pending
+O006-PSU-010-S0113,O006-PSU-010,Lesson09,try-it,c5d35022b7cdf6c594b70253ea07e765deb78ab4b5882f8e1456a7eca4873926,Building is not safe,,pending
+O006-PSU-010-S0114,O006-PSU-010,Lesson09,try-it,9d75424a2a108745aebccf98ae48b5fbc18f1adce986b45b7bba36a19ef95b33,Building is safe,,pending
+O006-PSU-010-S0115,O006-PSU-010,Lesson09,try-it,9c13dff8e40131f4c1f9ef8f5d69bc5b8c415eef6ccda166ceaf101921c8660b,Set up the null and alternative hypotheses. Interpret Type I and Type II error.,,pending
+O006-PSU-010-S0116,O006-PSU-010,Lesson09,try-it,0d8e8c90a520cfcd740113f9fd0b2eeaebb7264b7b7e4b56b95e122387c36a76,"
+    Answer
+",,pending
+O006-PSU-010-S0117,O006-PSU-010,Lesson09,try-it,22927695994eab589c7601a6b15df4d9dc67c5aceb9a74cdb965444b9b8362a6,Solution,,pending
+O006-PSU-010-S0118,O006-PSU-010,Lesson09,try-it,243ceb31e69c270b06f451434975ee684e7a446d8fb64c6a78fd05fb6352df49, is true,,pending
+O006-PSU-010-S0119,O006-PSU-010,Lesson09,try-it,3bea6067c03a460041eca8ed14ddb3d5a2d3364477c22ef344870931fec11d77, is false,,pending
+O006-PSU-010-S0120,O006-PSU-010,Lesson09,try-it,ab604a360777735fe2993aec7d4ffae415f1515b0a4c989269603fd3d5c07b61,Reject,,pending
+O006-PSU-010-S0121,O006-PSU-010,Lesson09,try-it,ddeb9564a097aefe203724ca99d69c222f5f0cd0ff4353d25d3b0d6f92c26e35,(Conclude,,pending
+O006-PSU-010-S0122,O006-PSU-010,Lesson09,try-it,55af9669c080fa6147e81d3cf956e2aacaa714b1d3060389f046baffd7acc384,"Reject “Building is not safe”, when it is safe. (",,pending
+O006-PSU-010-S0123,O006-PSU-010,Lesson09,try-it,18b6bc6e9cac152ac5118dc7fad404392feea994a9796114e3e21783e526339f,Type I Error,,pending
+O006-PSU-010-S0124,O006-PSU-010,Lesson09,try-it,f770a5e2b76c44d3b86fee882ff2ee2b42af9fae3ad3466756d15269de19b4a7,Correct decision,,pending
+O006-PSU-010-S0125,O006-PSU-010,Lesson09,try-it,79f841fe0bfc3ea2ba669e0492cb93237e63384ea32e96a60b8613ce48e7e490,Fail to Reject,,pending
+O006-PSU-010-S0126,O006-PSU-010,Lesson09,try-it,3082f64e7ade356b8602ccab0185623983a2ed1697bf74209524c70f6c0f79d2,Correct Decision,,pending
+O006-PSU-010-S0127,O006-PSU-010,Lesson09,try-it,cddc85cc3ff752222c3e74b001355f732a95db353cd520afa58733d9f898529f,"Fail to reject “building is not safe”, when it is not safe (",,pending
+O006-PSU-010-S0128,O006-PSU-010,Lesson09,try-it,880df773dfcdc713bc475a0da0d8a55dd2b14f24c24cd95b76f171686c7e1f62,Type II Error,,pending
+O006-PSU-010-S0129,O006-PSU-010,Lesson09,try-it,58031971658ddef2e2089c69d3935b6cdc5668f9c74c891abc3a28a8f9e7a5fc,Power and ,,pending
+O006-PSU-010-S0130,O006-PSU-010,Lesson09,try-it,96b931e1ce978329c189ce06add2c10f664b8ec1add03182c2178d91ec1d9e97," are complements of each other. Therefore, they have an inverse relationship, i.e. as one increases, the other decreases.",,pending
+O006-PSU-010-S0131,O006-PSU-010,Lesson09,try-it,8ecefee455008605c4a35ada7a2c762e98119bd47440cc06dcb7ebb36ecb4b77,It makes sense for us to set up the ,,pending
+O006-PSU-010-S0132,O006-PSU-010,Lesson09,try-it,e3ee915a8e8c7aa02d2fced443314522b20824abd2535d5959c41dc8ab8a09e4, and ,,pending
+O006-PSU-010-S0133,O006-PSU-010,Lesson09,try-it,1ba3c4753cdbabb3726a0460b0405b09625d08c7c5284d84c72f2b65601c2811," as above (that is, assume building is not safe until proven otherwise), because if we switch ",,pending
+O006-PSU-010-S0134,O006-PSU-010,Lesson09,try-it,e3ee915a8e8c7aa02d2fced443314522b20824abd2535d5959c41dc8ab8a09e4, and ,,pending
+O006-PSU-010-S0135,O006-PSU-010,Lesson09,try-it,2dc9d28962185240972cff600d4d7260cdfd0b501e4438849b6c20d20bf642dc," (that is, if ",,pending
+O006-PSU-010-S0136,O006-PSU-010,Lesson09,try-it,8587e34c8dd7c54849f5fd648fdd15a7695e0320592ddce66109c7834c6ca9a0, was is building is not safe) and if we fail to reject ,,pending
+O006-PSU-010-S0137,O006-PSU-010,Lesson09,try-it,351cbcb661ad2f4c9544a2823990d216665f5858b31584f6acf245f6b0576f93,", we cannot quite conclude that building is safe (we can only fail to reject ",,pending
+O006-PSU-010-S0138,O006-PSU-010,Lesson09,try-it,d82463b5c3c1b0b4c5b5fc1d1e1846e1c9c7b0401d6fb0fd47760a32b2168ccb,", we cannot accept ",,pending
+O006-PSU-010-S0139,O006-PSU-010,Lesson09,steps-for-hypothesis-testing,c5493fd86e18981bdf4e30701b40541cae5220a40a6bbe59f47c1c3916b1c91c, Steps for Hypothesis Testing,,pending
+O006-PSU-010-S0140,O006-PSU-010,Lesson09,steps-for-hypothesis-testing,4ae9bc7e0e0095efa13125f7c8cb256719e7919b370cc3230db482e442b81af6,"A hypothesis, in statistics, is a statement about a population parameter, where this statement typically is represented by some specific numerical value. In testing a hypothesis, we use a method where we gather data in an effort to gather evidence about the hypothesis.",,pending
+O006-PSU-010-S0141,O006-PSU-010,Lesson09,steps-for-hypothesis-testing,5f322efa1c69a77c9d0db46a0d72d8b6f19781efca54a651d45782429b5b42e5,How do we decide whether to reject the null hypothesis?,,pending
+O006-PSU-010-S0142,O006-PSU-010,Lesson09,steps-for-hypothesis-testing,28ae03def4e0676470ae3ae2ed80e46101094efea13eb91108caf3eca153fcd5,"If the sample data are consistent with the null hypothesis, then we do not reject it.",,pending
+O006-PSU-010-S0143,O006-PSU-010,Lesson09,steps-for-hypothesis-testing,57f2ed111048a483304bcd3510808f5b3773bf270ced79a3e41a9acbf3b5f5d1,"If the sample data are inconsistent with the null hypothesis, but consistent with the alternative, then we reject the null hypothesis and conclude that the alternative hypothesis is true.",,pending
+O006-PSU-010-S0144,O006-PSU-010,Lesson09,six-steps-for-hypothesis-tests,88c120083422ab6070a3cd9880991fa3ef8561554e1e1a063587e2583e0c4a84,Six Steps for Hypothesis Tests,,pending
+O006-PSU-010-S0145,O006-PSU-010,Lesson09,six-steps-for-hypothesis-tests,3549165526bbfb98475520019d4f12719c17f91bf66f5ec7c9760fa8ea583771,"In hypothesis testing, there are certain steps one must follow. Below these are summarized into six such steps to conducting a test of a hypothesis.",,pending
+O006-PSU-010-S0146,O006-PSU-010,Lesson09,six-steps-for-hypothesis-tests,5cbb686b727bc26a447bc00fa2f1395d3c1f309b64f9b5ec1a0065d5eaad7f04,Set up the hypotheses and check conditions:,,pending
+O006-PSU-010-S0147,O006-PSU-010,Lesson09,six-steps-for-hypothesis-tests,20a9f6162fb5f6f8026d03bfddb493fc3cfc26c7c928ca85348459e385c9354c," Each hypothesis test includes two hypotheses about the population. One is the null hypothesis, notated as ",,pending
+O006-PSU-010-S0148,O006-PSU-010,Lesson09,six-steps-for-hypothesis-tests,2847ad4eb46619eea0e73369ea8797927a6ce16432deea74ba14ac9abe235f29,", which is a statement of a particular parameter value. This hypothesis is assumed to be true until there is evidence to suggest otherwise. The second hypothesis is called the alternative, or research hypothesis, notated as ",,pending
+O006-PSU-010-S0149,O006-PSU-010,Lesson09,six-steps-for-hypothesis-tests,a41263bec980b1aee1525ccf31f84840da69febb51831e616f35a7c3815eccfb,". The alternative hypothesis is a statement of a range of alternative values in which the parameter may fall. One must also check that any conditions (assumptions) needed to run the test have been satisfied e.g. normality of data, independence, and number of success and failure outcomes.",,pending
+O006-PSU-010-S0150,O006-PSU-010,Lesson09,six-steps-for-hypothesis-tests,c016a34f89f3496719acf2354ac824098b7efe6941d37f91cb99489921ddc938,"Decide on the significance level,",,pending
+O006-PSU-010-S0151,O006-PSU-010,Lesson09,six-steps-for-hypothesis-tests,e0f6d523feec2ee14fe8a7a3afca4f30ba4e3ccf32a7298afa7ead0e29a6dc7b, This value is used as a probability cutoff for making decisions about the null hypothesis. This alpha value represents the probability we are willing to place on our test for making an incorrect decision in regard to rejecting the null hypothesis. The most common ,,pending
+O006-PSU-010-S0152,O006-PSU-010,Lesson09,six-steps-for-hypothesis-tests,d7ed51818b8911c3088ecabdffb40d988a33df9a2a1835c48ef893c1c38518fe, value is 0.05 or 5%. Other popular choices are 0.01 (1%) and 0.1 (10%).,,pending
+O006-PSU-010-S0153,O006-PSU-010,Lesson09,six-steps-for-hypothesis-tests,10a67ec6ad15e64b1eb05e4ca7d64faf452232c47801cee82b02355d28b840df,Calculate the test statistic:,,pending
+O006-PSU-010-S0154,O006-PSU-010,Lesson09,six-steps-for-hypothesis-tests,3fc4d3e1c1feb180811b94c840d8f19d690322d518b0ccabef2f5ed99c4562ce," Gather sample data and calculate a test statistic where the sample statistic is compared to the parameter value. The test statistic is calculated under the assumption the null hypothesis is true and incorporates a measure of standard error and assumptions (conditions) related to the sampling distribution. Note: We need to know the distribution of the test statistic, under the null hypothesis.",,pending
+O006-PSU-010-S0155,O006-PSU-010,Lesson09,six-steps-for-hypothesis-tests,68d28cfb65b6881a074ffb30f3317d38092e22a41b6180abdc1c06c99812cd96,"Calculate the probability value (p-value), or find the rejection region:",,pending
+O006-PSU-010-S0156,O006-PSU-010,Lesson09,six-steps-for-hypothesis-tests,9ab446d537ca32479d233288bb43e3238d4e221901862d5b4c46e5047dc5a7df," A p-value is found by using the test statistic to calculate the probability of the sample data producing such a test statistic or one more extreme. The rejection region is found by using alpha to find a critical value; the rejection region is the area that is more extreme than the critical value. Suppose our test statistic is denoted, ",,pending
+O006-PSU-010-S0157,O006-PSU-010,Lesson09,six-steps-for-hypothesis-tests,e5db8fbff69478d9156c2d74f70eae75cbc1636d35094319eae25c206003bf8d,". The rejection region finds a critical value, ",,pending
+O006-PSU-010-S0158,O006-PSU-010,Lesson09,six-steps-for-hypothesis-tests,86ee3b27fe8cb34c06ba8c468388d2d9749f5537d2e068ec557155676023cf39,", such that it is a cutoff value. For example,",,pending
+O006-PSU-010-S0159,O006-PSU-010,Lesson09,six-steps-for-hypothesis-tests,53c0d3d6c8055e9a2a658bdc93afdef61d9a2cc261da9c105ca706feed48f7ee,If ,,pending
+O006-PSU-010-S0160,O006-PSU-010,Lesson09,six-steps-for-hypothesis-tests,a889f81a6fc46064cb79917665a2d22c00440b0fa72436044b2989f31d961175,", then we make one decision, i.e. reject ",,pending
+O006-PSU-010-S0161,O006-PSU-010,Lesson09,six-steps-for-hypothesis-tests,53c0d3d6c8055e9a2a658bdc93afdef61d9a2cc261da9c105ca706feed48f7ee,If ,,pending
+O006-PSU-010-S0162,O006-PSU-010,Lesson09,six-steps-for-hypothesis-tests,6bc32847245b95b8500885b60df040d855217b26cd57b78b7a8f7c3ce5c362ee,", then we make the other decision, i.e. Fail to reject ",,pending
+O006-PSU-010-S0163,O006-PSU-010,Lesson09,six-steps-for-hypothesis-tests,83acf656b3551b4bdd27c2da9df97aa2b9178b2109103b1fd891a3d6cefcb359,"The cutoff, ",,pending
+O006-PSU-010-S0164,O006-PSU-010,Lesson09,six-steps-for-hypothesis-tests,c345414d04ca4de5852df229c2e7671db40f47fd3acfbf652431d7e83427e27a,", is defined by the level of our test, ",,pending
+O006-PSU-010-S0165,O006-PSU-010,Lesson09,six-steps-for-hypothesis-tests,05e05e065b61796f6c242786dfcb2497a4ff6309e73533f30fca3a471e4b9b7e,We discuss the p-value and rejection region in more detail in the following sections.,,pending
+O006-PSU-010-S0166,O006-PSU-010,Lesson09,six-steps-for-hypothesis-tests,4f483d9f701428a0261ee907a374fc71110295a08f555cb9d25a5b91aaec4adc,Make a decision about the null hypothesis:,,pending
+O006-PSU-010-S0167,O006-PSU-010,Lesson09,six-steps-for-hypothesis-tests,33840c04ed7147fa218073b1ce7ed847eac9fb8532d535d32b8dffb50f04a386," In this step, we decide to either reject the null hypothesis or decide to fail to reject the null hypothesis. Notice we do not make a decision where we will accept the null hypothesis.",,pending
+O006-PSU-010-S0168,O006-PSU-010,Lesson09,six-steps-for-hypothesis-tests,973c1e394ba3cd920cda75191e73ec2736868a8b1cebf67452ed03be1c4763cd,State an overall conclusion:,,pending
+O006-PSU-010-S0169,O006-PSU-010,Lesson09,six-steps-for-hypothesis-tests,6617cf6dad3e49c9e518a2f7d0b67f158dd3226516f4dd6e91209392be11fa72," Once we have found the p-value or rejection region, and made a statistical decision about the null hypothesis (i.e. we will reject the null or fail to reject the null), we then want to summarize our results into an overall conclusion for our test.",,pending
+O006-PSU-010-S0170,O006-PSU-010,Lesson09,six-steps-for-hypothesis-tests,60bffc2626b0ca1fdf13d361242fef3969895bfb0c4953eb2515d81dda55a529,"We will follow these six steps for the remainder of this Lesson, however, the steps may not be explained explicitly.",,pending
+O006-PSU-010-S0171,O006-PSU-010,Lesson09,six-steps-for-hypothesis-tests,6e9c66b51b048d5b3e1c8e6fe695b58d7fba086ba673ea835f62569fcd79cd8a,"Step 1 is a very important step to set up correctly. If your hypotheses are incorrect, your conclusion will be incorrect. In the following sections, we will continue to practice with Step 1.",,pending
+O006-PSU-010-S0172,O006-PSU-010,Lesson09,tests-about-proportions,0abf74c1dc6cf683e8b2a302723a80ae41acf4bd1781f3ba4265eec67976d9fa, Tests about Proportions,,pending
+O006-PSU-010-S0173,O006-PSU-010,Lesson09,tests-about-proportions,763efc94c2ba45c310a5ea0b2978f85303bbfac0dbd0b9678ea5243c0dd2decf,"Every time we perform a hypothesis test, this is the basic procedure that we will follow:",,pending
+O006-PSU-010-S0174,O006-PSU-010,Lesson09,tests-about-proportions,edeb384b8dec81c6ad16c325fc1cccd143e14ef426120fedcca8a28b0a6fd52c,We’ll make an initial assumption about the population parameter.,,pending
+O006-PSU-010-S0175,O006-PSU-010,Lesson09,tests-about-proportions,59a3373b7a88c57dca86ac8e7fd66aa079f258e049d4909edf5271077be9bd56,"We’ll collect evidence or else use somebody else’s evidence (in either case, our evidence will come in the form of data).",,pending
+O006-PSU-010-S0176,O006-PSU-010,Lesson09,tests-about-proportions,3ffc2f5ee7148094cec286f3510d41f2de0b1164d3f8c77fa208f726ac9f2e06,"Based on the available evidence (data), we’ll decide whether to “reject” or “not reject” our initial assumption.",,pending
+O006-PSU-010-S0177,O006-PSU-010,Lesson09,tests-about-proportions,5590ffbb743162f6bd8bbd02d0d9564dd6625af67e3d008b2dfdf7c95021997d,Let’s try to make this outlined procedure more concrete by examining a test for one proportion. Then we will follow by outlining a few more common statistical tests.,,pending
+O006-PSU-010-S0178,O006-PSU-010,Lesson09,tests-about-proportions,f69fe97c293f84eaa68090aea8f00d71e7a082c62fce22aaaefe0ea6d925a3f0,Let’s consider the following example.,,pending
+O006-PSU-010-S0179,O006-PSU-010,Lesson09,tests-about-proportions,ab70d2fd1801bcf8c7bf06b9b5be4a869178f8124ad97f134c541a94d235ea2d,Example 9.3,,pending
+O006-PSU-010-S0180,O006-PSU-010,Lesson09,tests-about-proportions,c41e1141d637777d6a3fcb004db0ab3d37cf08d154cdb6ada51837842c21bdee," A four-sided (tetrahedral) die is tossed 1000 times, and 290 fours are observed. Is there evidence to conclude that the die is biased, that is, say, that more fours than expected are observed?",,pending
+O006-PSU-010-S0181,O006-PSU-010,Lesson09,solution-2,22927695994eab589c7601a6b15df4d9dc67c5aceb9a74cdb965444b9b8362a6,Solution,,pending
+O006-PSU-010-S0182,O006-PSU-010,Lesson09,solution-2,067606a2c43b12cf2564f1a249d42f4ce810f9bf852f29fe813719333734a10c,"As the basic hypothesis testing procedure outlines above, the first step involves stating an initial assumption and determining the parameter of interest. The parameter of interest here is ",,pending
+O006-PSU-010-S0183,O006-PSU-010,Lesson09,solution-2,3d37c2e4f8ea26b1e250862236e59d8429167993f571eb698c0d879b3f938764,", the probability of getting a 4. The assumption is that die is unbiased. If the die is unbiased, then each side (1, 2, 3, and 4) is equally likely. So, we’ll assume that ",,pending
+O006-PSU-010-S0184,O006-PSU-010,Lesson09,solution-2,0825096ecdfa61ecee2fa741826c3acb6396ddc43375886bf40f40a673d1e0d7,", the probability of getting a 4 is 0.25.",,pending
+O006-PSU-010-S0185,O006-PSU-010,Lesson09,solution-2,dbc8b954e41fbceee17b075022ef272628e3c8e980cf8027fab0e88096bc0db7,"Therefore, the null hypothesis, or “status quo”, is the population parameter ",,pending
+O006-PSU-010-S0186,O006-PSU-010,Lesson09,solution-2,a11f0c1f94c6fa2c6a16da719e9f2b33683f1b989c98e74d1ef8d25ef55f1081," is equal to 0.25. In symbols, we have: ",,pending
+O006-PSU-010-S0187,O006-PSU-010,Lesson09,solution-2,5a8d509056b3988ff88a891cb59c353118a4a297e897a2023038a89873272ff8,"In our given information, it is questioned if more that four are found than what we would expect. Therefore, the alternative hypothesis would be:",,pending
+O006-PSU-010-S0188,O006-PSU-010,Lesson09,solution-2,bc5b84088829f7200b4b1ac3b19376350fce1d6d40dd13626fca8212f66686bb,"The second step is to decide on a significance level, ",,pending
+O006-PSU-010-S0189,O006-PSU-010,Lesson09,solution-2,403c92ee37ffdb103afef4bd2d802f16a900a638b7998ca9498b76404823cf93,". Generally, the most common significance level is ",,pending
+O006-PSU-010-S0190,O006-PSU-010,Lesson09,solution-2,c43b38209f921a154d34c3ddf16559f6ecb902c9beb37226223d0af72131069b,". Therefore, lets choose ",,pending
+O006-PSU-010-S0191,O006-PSU-010,Lesson09,solution-2,deab445f75d12b9a4ccd09b8f7d4e6a37f4ddca47eaa2ff758fa2c93c9692107,". Therefore, the probability we will reject the null hypothesis, given that the null hypothesis is true is 5%.",,pending
+O006-PSU-010-S0192,O006-PSU-010,Lesson09,solution-2,bb00f85d872d784ec3a38570e4c7b0ec3de02e1c4ff380a50e10f92dde4b6a08,"Now, the next step tells us that we need to collect evidence (data) for or against our initial assumption. In this case, that’s already been done for us. We were told that the die was tossed ",,pending
+O006-PSU-010-S0193,O006-PSU-010,Lesson09,solution-2,6c634c68639928c013aca1c90c80869eec64d06536c68dcd29e498e6905d639b," times, and ",,pending
+O006-PSU-010-S0194,O006-PSU-010,Lesson09,solution-2,fce93a8a3955007d71b3861dd6d99b2264add9186b0efc5fd26f3a5afc4a714b," fours were observed. We can use the sample proportion to estimate our population parameter. Therefore, we have:",,pending
+O006-PSU-010-S0195,O006-PSU-010,Lesson09,solution-2,450d9d47f94921e07ae66d73dc06232f6acd184dfbd75b8644008696c64c2801,Now we just need to complete the third step of making the decision about whether or not to reject our initial assumption that the population proportion is 0.25. We need to use the tools we developed so far in this class and STAT 414. Recall that the Central Limit Theorem tells us that the sample proportion:,,pending
+O006-PSU-010-S0196,O006-PSU-010,Lesson09,solution-2,32f1395d79ab2282f42511155c6b2af69cadb1b0b311912dc9567e40f823bb01,is approximately normal with (assumed) mean,,pending
+O006-PSU-010-S0197,O006-PSU-010,Lesson09,solution-2,6d37713f107c887b8a6aa705bb22e24743ea5c8987811dd5beaff5fc4555011c, and (assumed) standard deviation:,,pending
+O006-PSU-010-S0198,O006-PSU-010,Lesson09,solution-2,368f42b2aef1f91df0bd15a08bbdade87e45a5c2382b301cc9e6e178ec5562fa,That means that:,,pending
+O006-PSU-010-S0199,O006-PSU-010,Lesson09,solution-2,dddc72e237d28fc550e55769c4b9bcafe37848576abcfbf685af10f5848feb5d,follows a standard normal ,,pending
+O006-PSU-010-S0200,O006-PSU-010,Lesson09,solution-2,c9808ff28542b26ae317bd06bd61028cfb17bb14191b0c6f7577662302822d97, distribution. We can “translate” our observed sample proportion of 0.29 onto the ,,pending
+O006-PSU-010-S0201,O006-PSU-010,Lesson09,solution-2,65b99bdcea1d3d77592f8ac1ecb547e93c968b20d1841bf16a0899fb47b01441, scale. Here’s a picture that summarizes the situation:,,pending
+O006-PSU-010-S0202,O006-PSU-010,Lesson09,solution-2,0f89796fc4c8ad024740a50f6383dfce121c62a03b19496282816c9026d10d34,"
+Fig 9.1
+",,pending
+O006-PSU-010-S0203,O006-PSU-010,Lesson09,solution-2,c13ef63d2c68ff0ccb308421992fbe126b907287aea1be7af1a6be8d542cc466,"So, we are assuming that the population proportion is 0.25, but we’ve observed a sample proportion of 0.290 that falls way out in the right tail of the normal distribution. It certainly doesn’t appear impossible to obtain a sample proportion of 0.29. But, that’s what we’re left with to decide. That is, we have to decide if a sample proportion of 0.290 is more extreme than we’d expect if the population proportion ",,pending
+O006-PSU-010-S0204,O006-PSU-010,Lesson09,solution-2,f84132d5a015a0970e91fc6b476aea845c9aefb8a2ec096ae31d01202a07a81a, does indeed equal 0.25.,,pending
+O006-PSU-010-S0205,O006-PSU-010,Lesson09,solution-2,70501486c5f8cf8f42fac212d7d688268c0d4b6e723e729f20d70064aee886a5,The next step is to determine how to make a decision. There are two approaches to making the decision in hypothesis testing:,,pending
+O006-PSU-010-S0206,O006-PSU-010,Lesson09,solution-2,c07287120627b209a8d19e5642a5804d63dcb3c2fefb5cb83084dfa1b03f6a08,One is called the ,,pending
+O006-PSU-010-S0207,O006-PSU-010,Lesson09,solution-2,0b6a1d90643680d75015125ba737f0bb945affd78eda303dab497d56af37f3e7,“rejection region”,,pending
+O006-PSU-010-S0208,O006-PSU-010,Lesson09,solution-2,847fcdb30f659680ea347f4da11073793f3dc4774f4d28939ef4bb77a650aed8, (or critical value” or “critical region”) approach.,,pending
+O006-PSU-010-S0209,O006-PSU-010,Lesson09,solution-2,779c4b28fe2ec2efbf692dbc68fc5d5b47954ba39f736ddb466caf639f19812e,The other is called the ,,pending
+O006-PSU-010-S0210,O006-PSU-010,Lesson09,solution-2,801e51f6b658738214e7c05de5cd453ed21d7c421302475b72dbcae3081a22b8,“p-value”,,pending
+O006-PSU-010-S0211,O006-PSU-010,Lesson09,solution-2,7cd1368da288953cedb9dbef84bab731943b48aa750649ddc42052c8e751f557, approach.,,pending
+O006-PSU-010-S0212,O006-PSU-010,Lesson09,solution-2,ff83de1b06ec577cef11752f60cde9fafb5f2b0674a95b39f2106e980a7e23bb,"First, let’s consider the rejection region approach.",,pending
+O006-PSU-010-S0213,O006-PSU-010,Lesson09,solution-2,b6655f6efe2f886406498b467e90690561211c977fdd27b2d220fa8de90aa168,"Okay, so now let’s think about it. We probably wouldn’t reject our initial assumption that the population proportion ",,pending
+O006-PSU-010-S0214,O006-PSU-010,Lesson09,solution-2,46bd36ec5e063b6194980f5ddd534113a480a3e6bcf4355bd87e7ba4ca0376a3," if our observed sample proportion were 0.255. And, we might still not be inclined to reject our initial assumption that the population proportion ",,pending
+O006-PSU-010-S0215,O006-PSU-010,Lesson09,solution-2,7b76b92fea0b3e894629c18c130fe160a856c4bccac15949e091cf37e5a0dc08," if our observed sample proportion were 0.27. On the other hand, we would almost certainly want to reject our initial assumption that the population proportion ",,pending
+O006-PSU-010-S0216,O006-PSU-010,Lesson09,solution-2,4ec44601a3339561dd9d84a3156ddaa33337d2112aa957f329aa7598964a1b59," if our observed sample proportion were 0.35. That suggests, then, that there is some “threshold” value that once we “cross” the threshold value, we are inclined to reject our initial assumption. That is the critical value approach in a nutshell. That is, the critical value approach tells us to define a threshold value, called a “critical value” so that if our “test statistic” is more extreme than the critical value, then we reject the null hypothesis.",,pending
+O006-PSU-010-S0217,O006-PSU-010,Lesson09,solution-2,a0412206d04be811496d4c7a611204b220fc536cacc2e86906cfc9048acac756,"Recall that we set the significance level, ",,pending
+O006-PSU-010-S0218,O006-PSU-010,Lesson09,solution-2,91036a68f6aca3056dd4ef7de70e3e1474694fed096164b7c63d8049be62f043,", as 5%. Since we are using the standard normal distribution, that would mean we would be looking for a ",,pending
+O006-PSU-010-S0219,O006-PSU-010,Lesson09,solution-2,f462225a40ec197e9e3c717f0e3a64285b8ff35e74538e4e50583536295379d4," value greater than 1.645. In other words, we decide to reject the null hypothesis ",,pending
+O006-PSU-010-S0220,O006-PSU-010,Lesson09,solution-2,1f927aeaffc025e866af26344b6e368e065039d021318b4f884180d67c03eaf9, in favor of the “alternative hypothesis” ,,pending
+O006-PSU-010-S0221,O006-PSU-010,Lesson09,solution-2,7929681dc748c4bbde406ad604c7fe53dc7bfb462b84cc693379672cb0a3ac6b, if:,,pending
+O006-PSU-010-S0222,O006-PSU-010,Lesson09,solution-2,bf264d9f76be5f315cd913a7cfef23201858f31c36b61be19747d544d69abcde,Here’s a picture of such a ,,pending
+O006-PSU-010-S0223,O006-PSU-010,Lesson09,solution-2,0b6a1d90643680d75015125ba737f0bb945affd78eda303dab497d56af37f3e7,“rejection region”,,pending
+O006-PSU-010-S0224,O006-PSU-010,Lesson09,solution-2,0eeec5825598ae58e7dfc491e25c4304be9f82d83d110b5d1fb1630950bfd608, (or ,,pending
+O006-PSU-010-S0225,O006-PSU-010,Lesson09,solution-2,217e888dcfd3537b9f92207cb7080d39ef3f133770ae2d92e7db8e81193b78ed,“critical region”,,pending
+O006-PSU-010-S0226,O006-PSU-010,Lesson09,solution-2,557abd4df234daaebf6d50f7e4965406366256dde2cae7f71e1eeb05cc31fe32,"
+Fig 9.2
+",,pending
+O006-PSU-010-S0227,O006-PSU-010,Lesson09,solution-2,277dfd51f56d199e86a686b1f79f4bc0358c3c791c2d979b1f0135f5800bfa23,"Note, by the way, that the “size” of the critical region is 0.05. This will become apparent in a bit when we talk below about the possible errors that we can make whenever we conduct a hypothesis test.",,pending
+O006-PSU-010-S0228,O006-PSU-010,Lesson09,solution-2,a440a7b70328ac97fafc61604b079c8c98ce23a69218f5c9a1f932ea6e531728,"At any rate, let’s get back to deciding whether our particular sample proportion appears to be too extreme. Well, it looks like we should reject the null hypothesis (our initial assumption ",,pending
+O006-PSU-010-S0229,O006-PSU-010,Lesson09,solution-2,b41b74406eb344b8fdf534bc10cc92507b3d2ded175a34017a21d41fa1e94521,) because:,,pending
+O006-PSU-010-S0230,O006-PSU-010,Lesson09,solution-2,e20d52a4967144140a8b63e977c84987884e8fb9c5da769d27a83bbf209db113,or equivalently since our test statistic:,,pending
+O006-PSU-010-S0231,O006-PSU-010,Lesson09,solution-2,2ef8e468fe9da846ce4707ded1e020dc4a1b564588060ff39ad9b62730861c1a,is greater than 1.645.,,pending
+O006-PSU-010-S0232,O006-PSU-010,Lesson09,solution-2,eebf980c14a54c7fd5391f0e2e43340d0357c54ebeda7d717e01a10207732034,Our conclusion,,pending
+O006-PSU-010-S0233,O006-PSU-010,Lesson09,solution-2,90ac1e0ecaaa5768a0a683fb970686f13d6c4092c1de45ba8ad4279beb799ec8,: we say there is sufficient evidence to conclude ,,pending
+O006-PSU-010-S0234,O006-PSU-010,Lesson09,solution-2,0f40b85920ef576cfbf48eb17e2c4eb6970e05ebaaa114db38cf364d76c3f911,", that is, that the die is biased.",,pending
+O006-PSU-010-S0235,O006-PSU-010,Lesson09,solution-2,f02c2173e52b96869305024d825b1882746878c1b308127a90aa640ba4bdae55,"By the way, this example involves what is called a ",,pending
+O006-PSU-010-S0236,O006-PSU-010,Lesson09,solution-2,8f03c4609e2ccb65bf221dd9a8f0cbdec96ab78d7fe7c7a2acdc642d55ac4d49,one-tailed test,,pending
+O006-PSU-010-S0237,O006-PSU-010,Lesson09,solution-2,1ab6bf74874183f7eebab6df0e1e2fee320b691ba6d302b0d72a97a2e4baefb4,", or more specifically, a ",,pending
+O006-PSU-010-S0238,O006-PSU-010,Lesson09,solution-2,5dc16b7afd5d8d7a3b9b721f66a5363417841549971fe0fc30da63fabe06b9e1,right-tailed test,,pending
+O006-PSU-010-S0239,O006-PSU-010,Lesson09,solution-2,694c974eefdc5880c7ab21154663711fc2802f9ce161f9b4278a38d2a7e59a0c,", because the critical region falls in only one of the two tails of the normal distribution, namely the right tail.",,pending
+O006-PSU-010-S0240,O006-PSU-010,Lesson09,tests-about-proportions,e4719843ea9bd34f910a124812dddcedaf20cadc38cc83a7570a6fad2c29ea79,"Before we continue on the next page looking at two more examples, let’s revisit the basic hypothesis testing procedure that we outlined above. This time, though, let’s state the procedure in terms of ",,pending
+O006-PSU-010-S0241,O006-PSU-010,Lesson09,tests-about-proportions,f3be8bd8981785f93d0f6886cb9eb010e5a1c3c7365a97c470a0fcb3a5782439,performing a hypothesis test for a population proportion,,pending
+O006-PSU-010-S0242,O006-PSU-010,Lesson09,tests-about-proportions,4af23327f2a4361da8ff8ed5a7d9aeaa86d884d9ca7f3e97810802105b795476, using the ,,pending
+O006-PSU-010-S0243,O006-PSU-010,Lesson09,tests-about-proportions,b44202009e87975373c6113d7bcaec39b964f275f7a334b5c784d8f3eccbd8d9,critical value approach,,pending
+O006-PSU-010-S0244,O006-PSU-010,Lesson09,tests-about-proportions,9916d7a2da6da54fc0a36979075fccc3f256f67bcdd05f19c1f6974699e6b69d,. The basic procedure is:,,pending
+O006-PSU-010-S0245,O006-PSU-010,Lesson09,tests-about-proportions,ca0d08a614b512a9cf53ef32435f564ce4349791b44831ecb4aa55fd19201608,State the null hypothesis ,,pending
+O006-PSU-010-S0246,O006-PSU-010,Lesson09,tests-about-proportions,11bdf953360f52110afc4d39abd8073e1b3c4447405ac5f822ae1bedd14901e6, and the alternative hypothesis ,,pending
+O006-PSU-010-S0247,O006-PSU-010,Lesson09,tests-about-proportions,790aa85fa846b458e91fc1123d4b2957358314d3d7b189ad203a758f27068e68,"Calculate the test statistic (found by using the distribution of the test, under the null hypothesis):",,pending
+O006-PSU-010-S0248,O006-PSU-010,Lesson09,tests-about-proportions,dda01b33a26704e2cdb3b7553bc7d569f2df41c250b035fd36d15d777c40e8b2,Determine the ,,pending
+O006-PSU-010-S0249,O006-PSU-010,Lesson09,tests-about-proportions,6de0e3dbc965e06889004ce6a394719996961aecb7a05247568a02e2c98af4b6,rejection region,,pending
+O006-PSU-010-S0250,O006-PSU-010,Lesson09,tests-about-proportions,88a3c8e60db2a855007ee68b42452fda9ddd42afa17adb896e4ae4c75818130d,Make a decision.,,pending
+O006-PSU-010-S0251,O006-PSU-010,Lesson09,tests-about-proportions,1cbaa9c374f433bb369d141933a0aad9893c179d9d574e2d2ed8ca4fcc727655," Determine if the test statistic falls in the critical region. If it does, reject the null hypothesis. If it does not, do not reject the null hypothesis.",,pending
+O006-PSU-010-S0252,O006-PSU-010,Lesson09,tests-about-proportions,579bc2b3a93bd367a0a9ba63378896c58eeaf0b0e4f6cfd7071f013d4697fe4e,"Now, back to those possible errors we can make when conducting such a hypothesis test.",,pending
+O006-PSU-010-S0253,O006-PSU-010,Lesson09,possible-errors,8f9fde8520d0e0991195e6ded8b84054c67521648fc2e80a6319b49251aea0b1, Possible Errors,,pending
+O006-PSU-010-S0254,O006-PSU-010,Lesson09,possible-errors,aedc040493a53e03e997dffbe51bfda54ce570a53a8336e4465d805af4272310,"So, argh! Every time we conduct a hypothesis test, we have a chance of making an error. (Oh dear, why couldn’t I have chosen a different profession?!)",,pending
+O006-PSU-010-S0255,O006-PSU-010,Lesson09,possible-errors,24bd0a67d90af317ee882b165ae2964f969f683e5234f655f3dcf4cd01af114c,If we reject the null hypothesis ,,pending
+O006-PSU-010-S0256,O006-PSU-010,Lesson09,possible-errors,0d3b85c8b8b52cd40382927bf77e0fc2f7be58a7cbbc87caf15d9bb5ac35f250," (in favor of the alternative hypothesis ) when the null hypothesis is in fact true, we say we’ve committed a ",,pending
+O006-PSU-010-S0257,O006-PSU-010,Lesson09,possible-errors,0779e40ac98fe6f7e7eaf20bf014573f14ea953a007bc89e91f913087e587b06,Type I error,,pending
+O006-PSU-010-S0258,O006-PSU-010,Lesson09,possible-errors,a4b266055d6097a456a7b72b0e95d4c9ac7adaeff5bf25bbca5a2cb4389ba682,". For our example above, we set P(Type I error) equal to 0.05:",,pending
+O006-PSU-010-S0259,O006-PSU-010,Lesson09,possible-errors,1224217172470300286e883e3c376bcb3a86e097d61d0ebde5c96fa52aeb55e4,"
+Fig 9.3
+",,pending
+O006-PSU-010-S0260,O006-PSU-010,Lesson09,possible-errors,a49ca2ff6825f3e8ae6db63672c1bd6d42ee38dc783bad4ec75d8dce05408d40,"We wanted to minimize our chance of making a Type I error! In general, we denote ",,pending
+O006-PSU-010-S0261,O006-PSU-010,Lesson09,possible-errors,fcfb4f0317ed800f4e082b3b1498fa09804ffe48096adcaf1149f44ff0f2af3a,". Obviously, we want to minimize ",,pending
+O006-PSU-010-S0262,O006-PSU-010,Lesson09,possible-errors,8ef1be8f2a6af110883a08a15fb07fc597e72b3a88c3d31848ddb788b2d4cd0c,". Therefore, typical ",,pending
+O006-PSU-010-S0263,O006-PSU-010,Lesson09,possible-errors,6d737a3a77009f6e733f67b32c1770d4861e2243f19a13d54c8bb1037cdbd90e," values are 0.01, 0.05, and 0.10.",,pending
+O006-PSU-010-S0264,O006-PSU-010,Lesson09,possible-errors,27a4acb418a91f6c2812e3a5f7bb496b911dcf410e91a13e6e5b0209badc2924,"If we fail to reject the null hypothesis when the null hypothesis is false, we say we’ve committed a Type II error. For our example, suppose (unknown to us) that the population proportion ",,pending
+O006-PSU-010-S0265,O006-PSU-010,Lesson09,possible-errors,cf4829f967b50493c74b719d08cfccd38bfda1e47e3b3101bb2391d4ca56b387," is actually 0.27. Then, the probability of a Type II error, in this case, is:",,pending
+O006-PSU-010-S0266,O006-PSU-010,Lesson09,possible-errors,cefad1ee93b412cac6f2d48db913c028e64cc7fef956163fbdb10bb90124160b,"In general, we denote ",,pending
+O006-PSU-010-S0267,O006-PSU-010,Lesson09,possible-errors,deeff3ab36989f9abd9fa640c2df7ce6082ebb8ba505db1e4ba7fe39c91e9158,. Just as we want to minimize ,,pending
+O006-PSU-010-S0268,O006-PSU-010,Lesson09,possible-errors,051b1ff4bff9e5be9ce3b93e2d1a577a41a594352274261a50120b1652d037ec,", we want to minimize ",,pending
+O006-PSU-010-S0269,O006-PSU-010,Lesson09,possible-errors,1c75a5faf523fedac924602048fd53d91425d79dc3de8e6ba650d1bd358200f1,. Typical ,,pending
+O006-PSU-010-S0270,O006-PSU-010,Lesson09,possible-errors,d8afc39feef17b9ccb246111888b4eaeafc0bba3cf2a2526a9d7e7650a2f1bd9," values are 0.05, 0.10, and 0.20.",,pending
+O006-PSU-010-S0271,O006-PSU-010,Lesson09,the-p-value-approach,f4f71afed57dc42c68f0eaf3cbba10a4e8007aa9d77fcfb16980ab4e7213c4e2, The p-value Approach,,pending
+O006-PSU-010-S0272,O006-PSU-010,Lesson09,the-p-value-approach,68e7b884920a03314926f38a74ec48105c4273de8ee194b7dc28345d249aa5a0,"Up until now, we have used the critical region approach in conducting our hypothesis tests. Now, let’s take a look at an example in which we use what is called the ",,pending
+O006-PSU-010-S0273,O006-PSU-010,Lesson09,the-p-value-approach,5e3af869d9b7753cede4d25901630fccf5461369bba2cc9e0796d4e7de7f9311,P-value approach,,pending
+O006-PSU-010-S0274,O006-PSU-010,Lesson09,the-p-value-approach,f8e762c72a0cbc51ca3ed12d220bceb0e7a78e2258f648eb14544a7cdefda735,Example 9.4 (Lung Cancer),,pending
+O006-PSU-010-S0275,O006-PSU-010,Lesson09,the-p-value-approach,5c0114a68e34a23e9411f13e3c48fb9b6c4bdfe757a316450df5d593ef16d87c,Part I,,pending
+O006-PSU-010-S0276,O006-PSU-010,Lesson09,the-p-value-approach,61b00e57c17cc29e170bd21b23c3fed3f674fde5c760c9edf73dc23148ce3a5e,"
+Among patients with lung cancer, usually, 90% or more die within three years. As a result of new forms of treatment, it is felt that this rate has been reduced. Let’s suppose in a recent study of n = 150 lung cancer patients, y = 128 died within three years. Is there sufficient evidence at the ",,pending
+O006-PSU-010-S0277,O006-PSU-010,Lesson09,the-p-value-approach,423d4c5ad6995c720c62df85ba6e2fd889dfdb31cea072a0f1f2dc2b45ab3bdf," level, say, to conclude that the death rate due to lung cancer has been reduced?",,pending
+O006-PSU-010-S0278,O006-PSU-010,Lesson09,solution-3,22927695994eab589c7601a6b15df4d9dc67c5aceb9a74cdb965444b9b8362a6,Solution,,pending
+O006-PSU-010-S0279,O006-PSU-010,Lesson09,solution-3,985905bb046ac8faedf002cf36e9c380ce856e3a36515571a63457fbdfa8e5f6,The sample proportion is:,,pending
+O006-PSU-010-S0280,O006-PSU-010,Lesson09,solution-3,5e203fd29eff6b4923cdcc7a10a9d03b0bbfff147d119b70018d4bc874d9f0ba,The null and alternative hypotheses are: ,,pending
+O006-PSU-010-S0281,O006-PSU-010,Lesson09,solution-3,ef56be7d292b670ab0103ece4ced25f4daa8da80eae75b3fd2902706ac006a11,"The test statistic is, therefore: ",,pending
+O006-PSU-010-S0282,O006-PSU-010,Lesson09,solution-3,35e6b92147d34ddd2f7cb5864733cee071049f98dc18da017c25fc13ddb1cef8,"And, the rejection region is:",,pending
+O006-PSU-010-S0283,O006-PSU-010,Lesson09,solution-3,1462143e1f06958e0ae728af962f390a852d71574a0a14e6d20f3ce32bcd1749,Since the test statistic ,,pending
+O006-PSU-010-S0284,O006-PSU-010,Lesson09,solution-3,fa5340cc193559ca6abf11ec186cb6171cf63e14205f05547149ee09c7e23354,", we reject the null hypothesis. There is sufficient evidence at the ",,pending
+O006-PSU-010-S0285,O006-PSU-010,Lesson09,solution-3,1ec52ad7d13227d4c3b24a372943dc3fcc877d645767d9691ad33e9532b7f8ae, level to conclude that the rate has been reduced.,,pending
+O006-PSU-010-S0286,O006-PSU-010,Lesson09,the-p-value-approach,148b65833777b97f6433ce9a80e5c91dad1c433692614f647cb2357ff8eb09c4,Part II,,pending
+O006-PSU-010-S0287,O006-PSU-010,Lesson09,the-p-value-approach,13b0dae296de38a8f317779e082810dc25c4b969e5650fb216d4b51e48ee528e,"
+What if we set the significance level ",,pending
+O006-PSU-010-S0288,O006-PSU-010,Lesson09,the-p-value-approach,dd44bce254d4bb0cb769ec493e16d50ca6aa2e2b94ed56718e39a0044c375416,? Is there still sufficient evidence to conclude that the death rate due to lung cancer has been reduced?,,pending
+O006-PSU-010-S0289,O006-PSU-010,Lesson09,solution-4,22927695994eab589c7601a6b15df4d9dc67c5aceb9a74cdb965444b9b8362a6,Solution,,pending
+O006-PSU-010-S0290,O006-PSU-010,Lesson09,solution-4,c35950aee942bbf8dbb7ce3cefc4c60e1708771129017cae5171b4e2469b3476,"In this case, with ",,pending
+O006-PSU-010-S0291,O006-PSU-010,Lesson09,solution-4,852a9d61de4871dffa827e48b04b080fb9498224814a1b64400fa18211e1813a,", the rejection region is ",,pending
+O006-PSU-010-S0292,O006-PSU-010,Lesson09,solution-4,3dafe58f314a95434e72c7c70b87e4cb96fc0dc4c33f03b7bfbb8303dd9d53e3,". That is, we reject if the test statistic falls in the rejection region defined by ",,pending
+O006-PSU-010-S0293,O006-PSU-010,Lesson09,solution-4,389e52d3c14526ddb64b554e6c380e03e14dc091e5ec3203a087bef90f82a254,"
+Fig 9.4
+",,pending
+O006-PSU-010-S0294,O006-PSU-010,Lesson09,solution-4,1d3e81b2e0d55abfb7214c7d7b2776d0cf70549f998c1fbb5e3a665b392986e4,Because the test statistic ,,pending
+O006-PSU-010-S0295,O006-PSU-010,Lesson09,solution-4,f5930bff486a2edb1d6b5e6008dc98512b4e6a42d5d14ac0e16bb34d244c86b8,", we do not reject the null hypothesis. There is insufficient evidence at the ",,pending
+O006-PSU-010-S0296,O006-PSU-010,Lesson09,solution-4,1ec52ad7d13227d4c3b24a372943dc3fcc877d645767d9691ad33e9532b7f8ae, level to conclude that the rate has been reduced.,,pending
+O006-PSU-010-S0297,O006-PSU-010,Lesson09,the-p-value-approach,90042264c40322f32695570a8b1e8adfd5e96ca93226df6f546741bd6b8995b2,Part III,,pending
+O006-PSU-010-S0298,O006-PSU-010,Lesson09,the-p-value-approach,7aee78647741a5db6e326bfb99cd134d172ca432c37a91f7abf4335fa347f560,"
+In the first part of this example, we rejected the null hypothesis when ",,pending
+O006-PSU-010-S0299,O006-PSU-010,Lesson09,the-p-value-approach,edebcdca65f1459e6732dceb610828aee456a36018fc9dee9fc5d44ef2b0e3ea,". And, in the second part of this example, we failed to reject the null hypothesis when ",,pending
+O006-PSU-010-S0300,O006-PSU-010,Lesson09,the-p-value-approach,fbb7f5232f5cfdde5361b019b29a85ddefd58b6b459640b1c1e683ca1a384e69,. There must be some level of ,,pending
+O006-PSU-010-S0301,O006-PSU-010,Lesson09,the-p-value-approach,ef2e3653c79f0110df0727f9c777c9be06a96aabff44bd569f8122c214e7b218,", then, in which we cross the threshold from rejecting to not rejecting the null hypothesis. What is the smallest ",,pending
+O006-PSU-010-S0302,O006-PSU-010,Lesson09,the-p-value-approach,44066d92bc1b55bb3669d67d7ec66b2f61ed44e42a6161bebe66f35cd17b3922,level that would still cause us to reject the null hypothesis?,,pending
+O006-PSU-010-S0303,O006-PSU-010,Lesson09,solution-5,22927695994eab589c7601a6b15df4d9dc67c5aceb9a74cdb965444b9b8362a6,Solution,,pending
+O006-PSU-010-S0304,O006-PSU-010,Lesson09,solution-5,d050053f5d39e2c7f2674cd0cc3591a19838a791f08ae598523ab880f0552961,"We would, of course, reject any time the critical value was smaller than our test statistic ",,pending
+O006-PSU-010-S0305,O006-PSU-010,Lesson09,solution-5,3d337787fe58229b165e51e359c9f5293e042563c6c50a07b0866d517107a619,"
+Fig 9.5
+",,pending
+O006-PSU-010-S0306,O006-PSU-010,Lesson09,solution-5,51a05924c101047af15a4b556f4ee238cfecc0901d6ca6352fd6b03449021d05,"That is, we would reject if the critical value were ",,pending
+O006-PSU-010-S0307,O006-PSU-010,Lesson09,solution-5,0a63e3f63f232f0c18f3bfe678607aad0b9f7ac6c73e037f74c79c0b2ba103f8,", and ",,pending
+O006-PSU-010-S0308,O006-PSU-010,Lesson09,solution-5,1953dbc6011b39db98213d82b8e99efc680d1c4b022fe8d2829b7b0ff5710909,". But, we wouldn’t reject if the critical value were ",,pending
+O006-PSU-010-S0309,O006-PSU-010,Lesson09,solution-5,05384a3742d4033686d922390ff5f25d386fa0b24fc00288826e8bb7d6933022,. The ,,pending
+O006-PSU-010-S0310,O006-PSU-010,Lesson09,solution-5,529691707689e9fe13bba8a8fb0ef55cefe5af1c8b9c766f9aef14789c4b469d,level associated with the test statistic ,,pending
+O006-PSU-010-S0311,O006-PSU-010,Lesson09,solution-5,7541b6793f07ea2f8179cd0b279c17e42ed574fcb4031a5a971f1dac4f48a072, is called the P-value. It is the smallest ,,pending
+O006-PSU-010-S0312,O006-PSU-010,Lesson09,solution-5,f725130f2167b3dcf04cfc6eebf6c311763dec14e1c438c0184728940d60d41e,"level that would lead to rejection. In this case, the P-value is: ",,pending
+O006-PSU-010-S0313,O006-PSU-010,Lesson09,the-p-value-approach,ac5a4af17e40cac6b885fa7417a694624f789800f4ab5d7b34873a142d2a3786,"Let’s formalize the definition of a P-value, as well as summarize the P-value approach to conducting a hypothesis test.",,pending
+O006-PSU-010-S0314,O006-PSU-010,Lesson09,the-p-value-approach,6a01344636d4b2864a8ea54564d415309b7e900dc2436cdd7f1ef2c23554b064,Def. 9.5 (P-value),,pending
+O006-PSU-010-S0315,O006-PSU-010,Lesson09,the-p-value-approach,79e3f2a55928f9be8e9bf79254ff7e3ef670540a1c5ca07cfe875827d89757e0, The ,,pending
+O006-PSU-010-S0316,O006-PSU-010,Lesson09,the-p-value-approach,a47698f50901a055f982395b3a16af9cb66cd41df67776b7a6f5e4330437fa5e,P-value,,pending
+O006-PSU-010-S0317,O006-PSU-010,Lesson09,the-p-value-approach,52bc590d53f5126aa3e8c0307e244d01133f37ff65362b3edce7b2121aa9376d, is the smallest significance level that leads us to reject the null hypothesis.,,pending
+O006-PSU-010-S0318,O006-PSU-010,Lesson09,the-p-value-approach,357d09e6aa0e9328f5cb27f6efc597a6ee07b8c560b4ea4b39128dfec6a37b76,"Alternatively (and the way I prefer to think of P-values), the ",,pending
+O006-PSU-010-S0319,O006-PSU-010,Lesson09,the-p-value-approach,a47698f50901a055f982395b3a16af9cb66cd41df67776b7a6f5e4330437fa5e,P-value,,pending
+O006-PSU-010-S0320,O006-PSU-010,Lesson09,the-p-value-approach,c5cdd683c586e9263b522178078a4b954a84f90dd141de07279824b8eab74049, is the probability that we’d observe a more extreme statistic than we did if the null hypothesis were true.,,pending
+O006-PSU-010-S0321,O006-PSU-010,Lesson09,the-p-value-approach,d194f445f8afb7d24c198f88e25be4d49c8a65126d1bfdb6b1eeb627fb845aa3,"If the P-value is small, that is, if ",,pending
+O006-PSU-010-S0322,O006-PSU-010,Lesson09,the-p-value-approach,eec0e9b7b7947e4b6c9b5853ed9451df6e8987132ddb2625c8dc771b02f4e00d,", then we reject the null hypothesis ",,pending
+O006-PSU-010-S0323,O006-PSU-010,Lesson09,the-p-value-approach,269ce65e323ed661a6fdfa5b18252ff3b231b0b59bfe792e50c2174f0a03d771,"So far, all of the examples we’ve considered have involved a one-tailed hypothesis test in which the alternative hypothesis involved either a less than (",,pending
+O006-PSU-010-S0324,O006-PSU-010,Lesson09,the-p-value-approach,a356a8b1dcd6fe6f9e3394a164715af8eee195da4001370b5b449f4a3e08587a,) or a greater than (,,pending
+O006-PSU-010-S0325,O006-PSU-010,Lesson09,the-p-value-approach,075684903585f293804eb494927349a89a1ee4a61ac18daabcb585385b424a23,") sign. What happens if we aren’t sure of the direction in which the proportion could deviate from the hypothesized null value? That is, what if the alternative hypothesis involved a not-equal sign (",,pending
+O006-PSU-010-S0326,O006-PSU-010,Lesson09,the-p-value-approach,60d0e4935ebf3a03b20f038e16814e2cf0bdd491735e1df3866835ba131d8636,)? Let’s take a look at an example.,,pending
+O006-PSU-010-S0327,O006-PSU-010,Lesson09,the-p-value-approach,c70b2ec27840e340287405ed2aaf41af3216659ffb58dcd570ed5e8c92210423,Example 9.5 (Lung Cancer Continued),,pending
+O006-PSU-010-S0328,O006-PSU-010,Lesson09,the-p-value-approach,ba4f608fd1a6d2d8187c2913a0d225aa08c51da126c68bc329de60643bd04690, What if we wanted to perform a “,,pending
+O006-PSU-010-S0329,O006-PSU-010,Lesson09,the-p-value-approach,47c6330b91eda4e67eb37653754edf07ed6ae716d802747c0a870e3ead3c2cc1,two-tailed,,pending
+O006-PSU-010-S0330,O006-PSU-010,Lesson09,the-p-value-approach,d35b5dee8dfa5e872ee43758fc75e75a4b825fc70aefc496bd90e150063dea74,"” test? That is, what if we wanted to test: ",,pending
+O006-PSU-010-S0331,O006-PSU-010,Lesson09,the-p-value-approach,f6e07f6ee7a46a2d69fa53859a55317afb55c51cf5dc310b23b513f8bef4f4d9, at the ,,pending
+O006-PSU-010-S0332,O006-PSU-010,Lesson09,the-p-value-approach,0771f9359d6f13e6c486395a8c844dd4ab46a3e250f7a686d5749cf6211200c3, level?,,pending
+O006-PSU-010-S0333,O006-PSU-010,Lesson09,solution-6,22927695994eab589c7601a6b15df4d9dc67c5aceb9a74cdb965444b9b8362a6,Solution,,pending
+O006-PSU-010-S0334,O006-PSU-010,Lesson09,solution-6,e553063b12fed3405a04ee38eeab0e50be25df1fa4661991ca3cb13a6747a98b,Let’s first consider the ,,pending
+O006-PSU-010-S0335,O006-PSU-010,Lesson09,solution-6,b44202009e87975373c6113d7bcaec39b964f275f7a334b5c784d8f3eccbd8d9,critical value approach,,pending
+O006-PSU-010-S0336,O006-PSU-010,Lesson09,solution-6,9febad76e871abfbc6488ab1647ddad5ffd5bddebc69278e8835e5cf44aae3b8,". If we allow for the possibility that the sample proportion could either prove to be too large or too small, then we need to specify a threshold value, that is, a critical value, in each tail of the distribution. In this case, we divide the “",,pending
+O006-PSU-010-S0337,O006-PSU-010,Lesson09,solution-6,5c1d93c45632cc7faeddfb8a1140c7f3c60d8607f9385a058586a8964c6dfbac,significance level,,pending
+O006-PSU-010-S0338,O006-PSU-010,Lesson09,solution-6,845d9d53589fa9f6efd8744aeba1a3c039936bbcf01599991f7fc9827016ed72, by 2 to get ,,pending
+O006-PSU-010-S0339,O006-PSU-010,Lesson09,solution-6,8cd65975527e6db2b5a517a831533745403cb5dc8838a05abd62307ee5872d1b,"
+Fig 9.6
+",,pending
+O006-PSU-010-S0340,O006-PSU-010,Lesson09,solution-6,5dd6dfe2dd2d4b635c65ed6cad81826a59b3cc8dcbf832a5134790d79a04107e,"That is, our rejection rule is that we should reject the null hypothesis or we should reject the null hypothesis ",,pending
+O006-PSU-010-S0341,O006-PSU-010,Lesson09,solution-6,1edb9c40b5950491cad6c57f9d2196f43dd9ebd6652b9a93c619ee6221613dd6,". Alternatively, we can write that we should reject the null hypothesis ",,pending
+O006-PSU-010-S0342,O006-PSU-010,Lesson09,solution-6,b97c329094dd29378717bd4f50662c1b4ea2fd20ac90478ebda9f935252989da, if ,,pending
+O006-PSU-010-S0343,O006-PSU-010,Lesson09,solution-6,492b0e5271a6a523d87a68977158c52e40c5f68f26dc0dbe22e5a3df0b77b5ba,. Because our test statistic is ,,pending
+O006-PSU-010-S0344,O006-PSU-010,Lesson09,solution-6,f3b5c5973586435788f624d6f1b939d104616d0ed6f9ba9d43e649cfdccfbd8c,", we just barely fail to reject the null hypothesis, because ",,pending
+O006-PSU-010-S0345,O006-PSU-010,Lesson09,solution-6,4f2a154d3c2e381dfbd621c0ab74c935b849a6b824a55f0d1b041e13f6c798b8,". In this case, we would say that there is insufficient evidence at the ",,pending
+O006-PSU-010-S0346,O006-PSU-010,Lesson09,solution-6,04687d52cb6b1630d879294e2c9a3744d5a8b57538b5ecb7494080d64c6afc7c, level to conclude that the sample proportion differs significantly from 0.90.,,pending
+O006-PSU-010-S0347,O006-PSU-010,Lesson09,solution-6,388b343e71036b11253c7cbd83c1056abbeb8f317f6a9be8dd7247b489afdc8c,Now for the ,,pending
+O006-PSU-010-S0348,O006-PSU-010,Lesson09,solution-6,5e3af869d9b7753cede4d25901630fccf5461369bba2cc9e0796d4e7de7f9311,P-value approach,,pending
+O006-PSU-010-S0349,O006-PSU-010,Lesson09,solution-6,506420888a48018980ac2ed2d412811f468b623d3fc7abc2f02040946c248f84,". Again, needing to allow for the possibility that the sample proportion is either too large or too small, we multiply the P-value we obtain for the one-tailed test by 2:",,pending
+O006-PSU-010-S0350,O006-PSU-010,Lesson09,solution-6,2c7903b593360f9fc08f1d2c47b1648b068e797e8afcc5fc2018a640e7e7bd1d,"That is, the P-value is:",,pending
+O006-PSU-010-S0351,O006-PSU-010,Lesson09,solution-6,6337d4096bc51b1fd443f8d6778ecff43ac3ab3e02e163604e95d9a998a81624,Because the P-value 0.055 is (just barely) greater than the significance level ,,pending
+O006-PSU-010-S0352,O006-PSU-010,Lesson09,solution-6,4ca9cc9ea7e0aaa23891d7dc3e97a0c066108615d1ee9cc8efc8a0de6a44baa0,", we barely fail to reject the null hypothesis. Again, we would say that there is insufficient evidence at the ",,pending
+O006-PSU-010-S0353,O006-PSU-010,Lesson09,solution-6,04687d52cb6b1630d879294e2c9a3744d5a8b57538b5ecb7494080d64c6afc7c, level to conclude that the sample proportion differs significantly from 0.90.,,pending
+O006-PSU-010-S0354,O006-PSU-010,Lesson09,tests-about-one-mean,e9d342f7b1da4b5894ec4fd12c2d8fc207cea87eb7861301771a448df6bc6d12, Tests about One Mean,,pending
+O006-PSU-010-S0355,O006-PSU-010,Lesson09,tests-about-one-mean,89f2943fc02972bb59c44aaf42ff172f97ec1190b557f918ca9a00fae8f975b6,"In this lesson, we will continue our investigation of hypothesis testing. We will focus our attention on hypothesis tests for a population mean, ",,pending
+O006-PSU-010-S0356,O006-PSU-010,Lesson09,tests-about-one-mean,fc941a05acfef665f80be63a3cfc55e795cae7d52f9ab3c0ff2a7f5e3cfbd536,", under different situations.",,pending
+O006-PSU-010-S0357,O006-PSU-010,Lesson09,variance-known,aa5486d92c566b25f8b83cc9beec4a23805bad5cb021dd3a841015cbbdadbb85,Variance Known,,pending
+O006-PSU-010-S0358,O006-PSU-010,Lesson09,variance-known,d66dd23b37b4c0eaae903ac71fe8347e6dcae57e39c3ea7e7f40749a693decca,"Let’s start by acknowledging that it is completely unrealistic to think that we’d find ourselves in the situation of knowing the population variance, but not the population mean. Therefore, the hypothesis testing method that we learn on this page has limited practical use. We study it only because we’ll use it later to learn about the “power” of a hypothesis test (by learning how to calculate Type II error rates). As usual, let’s start with an example.",,pending
+O006-PSU-010-S0359,O006-PSU-010,Lesson09,variance-known,2957c3655b7ad6f3eb2156cd475d2d7bb45cd565aa9f7acb08c0b99c4c4716dd,Example 9.6,,pending
+O006-PSU-010-S0360,O006-PSU-010,Lesson09,variance-known,90e3202919a485bbfc2a77011f2d64862403b002fc9434587c2cf25eb551877d, Boys of a certain age are known to have a mean weight of ,,pending
+O006-PSU-010-S0361,O006-PSU-010,Lesson09,variance-known,0d7b77eb74e60edda471ec881ea1360f3ad91d20bb30c891787a4fd6a4274290," pounds. A complaint is made that the boys living in a municipal children’s home are underfed. As one bit of evidence, ",,pending
+O006-PSU-010-S0362,O006-PSU-010,Lesson09,variance-known,0c88715aebfd930e891dfee6381c6fad1f50de7fc431b1711a538d88fd502369, boys (of the same age) are weighed and found to have a mean weight of ,,pending
+O006-PSU-010-S0363,O006-PSU-010,Lesson09,variance-known,6bcd3f3c32d64828a92698f2c04cf2ec972559968093d882c634eab76e52df74, pounds. It is known that the population standard deviation ,,pending
+O006-PSU-010-S0364,O006-PSU-010,Lesson09,variance-known,41f7465123fe1bd4e80b9925cba4fc66550fc09eea3caf1abfe4b29b43a5c412," is 11.6 pounds (the unrealistic part of this example!). Based on the available data, what should be concluded concerning the complaint?",,pending
+O006-PSU-010-S0365,O006-PSU-010,Lesson09,solution-7,22927695994eab589c7601a6b15df4d9dc67c5aceb9a74cdb965444b9b8362a6,Solution,,pending
+O006-PSU-010-S0366,O006-PSU-010,Lesson09,solution-7,56c5427faac909f8e547584cbcfc6afb595922a40ae05ba8dc5d1af1271cc631,The null hypothesis is ,,pending
+O006-PSU-010-S0367,O006-PSU-010,Lesson09,solution-7,69dad27a1bb6434dc166b8bcc13b6088b1082e3b86ca06bd3afe6f440a2c9a2a,", and the alternative hypothesis is ",,pending
+O006-PSU-010-S0368,O006-PSU-010,Lesson09,solution-7,51caec5efea0e4bbc93b97129456a5b6975a242e0bb1765bfb1ad9d94f2ec59c,". In general, we know that if the weights are normally distributed, then:",,pending
+O006-PSU-010-S0369,O006-PSU-010,Lesson09,solution-7,abe65cc4d9508075012470d05733ab24c0008ecf9e6e0f239e8b2fc8592a64c2,follows the standard normal ,,pending
+O006-PSU-010-S0370,O006-PSU-010,Lesson09,solution-7,1bc1208647c59ebca75b9eb83687989db48befb9f2518bf66dfc60f4835acc4a," distribution. It is actually a bit irrelevant here whether or not the weights are normally distributed, because the same size ",,pending
+O006-PSU-010-S0371,O006-PSU-010,Lesson09,solution-7,488e39aac6290ced1575825af3943fcbdc7992680e5acf0ff6f2846c02e4e4e5," is large enough for the Central Limit Theorem to apply. In that case, we know that ",,pending
+O006-PSU-010-S0372,O006-PSU-010,Lesson09,solution-7,cff03650d971186e2e02d0515a3d2fbbc48670a901bf9653dee2e8ea091ac817,", as defined above, follows at least approximately the standard normal distribution. At any rate, it seems reasonable to use the test statistic:",,pending
+O006-PSU-010-S0373,O006-PSU-010,Lesson09,solution-7,e91ac5ec739512f8c88d2d078169a2a75e75b9fbd63cc617f656a2e620ae46f8,for testing the null hypothesis,,pending
+O006-PSU-010-S0374,O006-PSU-010,Lesson09,solution-7,83532bb2cd93202f401772042e59b0c05e6c42a25068e8ea41ea9632f57e7e6c,against any of the possible alternative hypotheses ,,pending
+O006-PSU-010-S0375,O006-PSU-010,Lesson09,solution-7,0a63e3f63f232f0c18f3bfe678607aad0b9f7ac6c73e037f74c79c0b2ba103f8,", and ",,pending
+O006-PSU-010-S0376,O006-PSU-010,Lesson09,solution-7,245002cafdb590e989ee3688c7214345eae0afb3a025a79d899c5dd58e2170f0,"For the example in hand, the value of the test statistic is:",,pending
+O006-PSU-010-S0377,O006-PSU-010,Lesson09,solution-7,2b49c48974a6083df5350cd267f2451782a656e5e2de6e8a96c4f93b365f986c,The critical region approach tells us to reject the null hypothesis at the ,,pending
+O006-PSU-010-S0378,O006-PSU-010,Lesson09,solution-7,025fa62c0d8749263787dcfc9b4783b252bbd2ef81d441ca8196045f12dca181, level if ,,pending
+O006-PSU-010-S0379,O006-PSU-010,Lesson09,solution-7,c4453554ba53907758aee156d11612256f7ed2f24be966082120aa3ee50a0002,". Therefore, we reject the null hypothesis because ",,pending
+O006-PSU-010-S0380,O006-PSU-010,Lesson09,solution-7,c0fa45c91416fdffc949934789844a91b29f225c2c3236ce4e15b198abf7110c,", and therefore falls in the rejection region:",,pending
+O006-PSU-010-S0381,O006-PSU-010,Lesson09,solution-7,eefeec4d71a8c704c9845c654b20a27a14e765883f763f2a166b8dceab538f47,"
+Fig 9.7
+",,pending
+O006-PSU-010-S0382,O006-PSU-010,Lesson09,solution-7,9189b67bb5a17ff5818ea0746a3a487e9c3d77fcc1c81f7e15996985df9fa4cd,"As always, we draw the same conclusion by using the ",,pending
+O006-PSU-010-S0383,O006-PSU-010,Lesson09,solution-7,7d6f5bf4aef55468e2f1c929dd355be7ca89affc6fa863bccb078b968a2cb283,-value approach. Recall that the ,,pending
+O006-PSU-010-S0384,O006-PSU-010,Lesson09,solution-7,eaa5a547e815ef0f52ff01bcc9f9e6a6949dde251c76adab660058d5014cfcad,-value approach tells us to reject the null hypothesis at the ,,pending
+O006-PSU-010-S0385,O006-PSU-010,Lesson09,solution-7,2a5c6dddfa7bac3cae1e7b1e2f0df77987ba9854c24b424dc4301fa14e1b3daf, level if the ,,pending
+O006-PSU-010-S0386,O006-PSU-010,Lesson09,solution-7,a33c4f054b3234fc0d1a4fed342e98913e3be0b56b70e32cdceaecd7387823aa,-value,,pending
+O006-PSU-010-S0387,O006-PSU-010,Lesson09,solution-7,1c2212771b7ccf344674b8f20d1549e127b6c76294db6b8507fc04f7072d94df,". In this case, the ",,pending
+O006-PSU-010-S0388,O006-PSU-010,Lesson09,solution-7,eafbdaa3e51398c3319e3dc2d5eeb4bd6f0773d22faa4683a0822ffc616aa2f2,-value is ,,pending
+O006-PSU-010-S0389,O006-PSU-010,Lesson09,solution-7,44bfa16625ce327420d850ff27a21b75fa3596d1adc1d92090599fc0cd6a2ced,"
+Fig 9.8
+",,pending
+O006-PSU-010-S0390,O006-PSU-010,Lesson09,solution-7,48d7059945cfcb90de232866de4a708893dc1694f4dbb34807472abaea68d521,"As expected, we reject the null hypothesis because the ",,pending
+O006-PSU-010-S0391,O006-PSU-010,Lesson09,solution-7,a33c4f054b3234fc0d1a4fed342e98913e3be0b56b70e32cdceaecd7387823aa,-value,,pending
+O006-PSU-010-S0392,O006-PSU-010,Lesson09,variance-unknown,da9c474cfd09129b1cb537d414b86f5ef3d0a71e60b76b6db73894566634ea2c,Variance Unknown,,pending
+O006-PSU-010-S0393,O006-PSU-010,Lesson09,variance-unknown,0b1674b8bca05ed5d6b20b81c5ac8f11a2dd2438acb79e13614dc28052f25f80,"Now that, for purely pedagogical reasons, we have the unrealistic situation (of a known population variance) behind us, let’s turn our attention to the realistic situation in which both the population mean and population variance are unknown.",,pending
+O006-PSU-010-S0394,O006-PSU-010,Lesson09,variance-unknown,222b851bc3f1b2354fcc0f1337e0edff6fb6647073d34cfba2b978ab7dc34b01,Example 9.7,,pending
+O006-PSU-010-S0395,O006-PSU-010,Lesson09,variance-unknown,5678d953b591c7cf37afe9f5bd19e3383404b5c9ca56439b802b33a9cfad5534, It is assumed that the mean systolic blood pressure is ,,pending
+O006-PSU-010-S0396,O006-PSU-010,Lesson09,variance-unknown,f1ec4fbc36c17f2cd8fdeffdc47e22a61b25789de1f50895abb3719c8d0c4466,"mm Hg. In the Honolulu Heart Study, a sample of ",,pending
+O006-PSU-010-S0397,O006-PSU-010,Lesson09,variance-unknown,ffd15692fbe34146d2fc348cf8a52e31f412fba895d55e10a7ad6beef0c7d89e, people had an average systolic blood pressure of 130.1 mm Hg with a standard deviation of 21.21 mm Hg. Is the group significantly different (with respect to systolic blood pressure!) from the regular population?,,pending
+O006-PSU-010-S0398,O006-PSU-010,Lesson09,solution-8,22927695994eab589c7601a6b15df4d9dc67c5aceb9a74cdb965444b9b8362a6,Solution,,pending
+O006-PSU-010-S0399,O006-PSU-010,Lesson09,solution-8,56c5427faac909f8e547584cbcfc6afb595922a40ae05ba8dc5d1af1271cc631,The null hypothesis is ,,pending
+O006-PSU-010-S0400,O006-PSU-010,Lesson09,solution-8,91077b679984b543211747ba68ffb912f22caeb8f95eb92e8471969a70d66e63,", and because there is no specific direction implied, the alternative hypothesis is ",,pending
+O006-PSU-010-S0401,O006-PSU-010,Lesson09,solution-8,8d2d7a91ac24bc2e332073cacf2d777f0de5d6e782ced7b750bfb3fd1cc0198a,"The next step for hypothesis testing is to determine the significance level, or the probability of a Type I error. For this example, let us set ",,pending
+O006-PSU-010-S0402,O006-PSU-010,Lesson09,solution-8,560110f31f7d5ed45c6ce23cd97dac2278ca6c78cdc87969508f5f904046ff19,"Step 3 is to calculate the test statistic. Recall that we should determine a test statistic with a known distribution, under the assumptions and the null hypothesis. From STAT 414, we know that if the data are normally distributed, then:",,pending
+O006-PSU-010-S0403,O006-PSU-010,Lesson09,solution-8,c6d9019f0047ed7805316dee458ce5c60960cb26148a30c18397a068659d8518,follows a ,,pending
+O006-PSU-010-S0404,O006-PSU-010,Lesson09,solution-8,e41de5b73d12cb7b8f0b73c063c924e73cc437a21ee09d84265bda268a84bb6e,-distribution with ,,pending
+O006-PSU-010-S0405,O006-PSU-010,Lesson09,solution-8,06323a83c7065b20b3ecf63381ead533b6d61f726fdc130a825861e6e7a1cd65," degrees of freedom. Therefore, it seems reasonable to use the test statistic:",,pending
+O006-PSU-010-S0406,O006-PSU-010,Lesson09,solution-8,fe33e06d711dcb892d6ec9d50177e2cf20e65701723fbbab966a6a0ab6b1537b,for testing the null hypothesis ,,pending
+O006-PSU-010-S0407,O006-PSU-010,Lesson09,solution-8,936877349fd4f1d5b7c38ccfb601bdb0c28de6cd8a80379886719bc0196e529a, against any of the possible alternative hypotheses ,,pending
+O006-PSU-010-S0408,O006-PSU-010,Lesson09,solution-8,0a63e3f63f232f0c18f3bfe678607aad0b9f7ac6c73e037f74c79c0b2ba103f8,", and ",,pending
+O006-PSU-010-S0409,O006-PSU-010,Lesson09,solution-8,559ee17505c3a269df86b9a367908b32e6cb559d999d0ff5dfdb5a64f59ed708,". For the example in hand, the value of the test statistic is:",,pending
+O006-PSU-010-S0410,O006-PSU-010,Lesson09,solution-8,2b49c48974a6083df5350cd267f2451782a656e5e2de6e8a96c4f93b365f986c,The critical region approach tells us to reject the null hypothesis at the ,,pending
+O006-PSU-010-S0411,O006-PSU-010,Lesson09,solution-8,025fa62c0d8749263787dcfc9b4783b252bbd2ef81d441ca8196045f12dca181, level if ,,pending
+O006-PSU-010-S0412,O006-PSU-010,Lesson09,solution-8,5941afed8380985480dc23d1c1ef20e3ccc2aa872f88bd19f47c27c28d3ebe5f, or if ,,pending
+O006-PSU-010-S0413,O006-PSU-010,Lesson09,solution-8,c4453554ba53907758aee156d11612256f7ed2f24be966082120aa3ee50a0002,". Therefore, we reject the null hypothesis because ",,pending
+O006-PSU-010-S0414,O006-PSU-010,Lesson09,solution-8,c0fa45c91416fdffc949934789844a91b29f225c2c3236ce4e15b198abf7110c,", and therefore falls in the rejection region:",,pending
+O006-PSU-010-S0415,O006-PSU-010,Lesson09,solution-8,cf841d57138c418e16259907b1955ca3d6a408b415d882e219733c0607dca1ed,"Again, as always, we draw the same conclusion by using the ",,pending
+O006-PSU-010-S0416,O006-PSU-010,Lesson09,solution-8,f4fc4e18fb3aa06c4382e9775f55d3c862c5bc7689b7e73f1834e4c5e9052a80,-value approach. The ,,pending
+O006-PSU-010-S0417,O006-PSU-010,Lesson09,solution-8,eaa5a547e815ef0f52ff01bcc9f9e6a6949dde251c76adab660058d5014cfcad,-value approach tells us to reject the null hypothesis at the ,,pending
+O006-PSU-010-S0418,O006-PSU-010,Lesson09,solution-8,2a5c6dddfa7bac3cae1e7b1e2f0df77987ba9854c24b424dc4301fa14e1b3daf, level if the ,,pending
+O006-PSU-010-S0419,O006-PSU-010,Lesson09,solution-8,a33c4f054b3234fc0d1a4fed342e98913e3be0b56b70e32cdceaecd7387823aa,-value,,pending
+O006-PSU-010-S0420,O006-PSU-010,Lesson09,solution-8,1c2212771b7ccf344674b8f20d1549e127b6c76294db6b8507fc04f7072d94df,". In this case, the ",,pending
+O006-PSU-010-S0421,O006-PSU-010,Lesson09,solution-8,33761284f9e5dbdf88bb63789cbd4111d80f296db073877a878b64e120da6e94,-value is:,,pending
+O006-PSU-010-S0422,O006-PSU-010,Lesson09,solution-8,74eece94859ece9af6a5d1ab8ce144a70a6790547a98e66e1c71ae535a90e93f,"As expected, we reject the null hypothesis because ",,pending
+O006-PSU-010-S0423,O006-PSU-010,Lesson09,solution-8,a33c4f054b3234fc0d1a4fed342e98913e3be0b56b70e32cdceaecd7387823aa,-value,,pending
+O006-PSU-010-S0424,O006-PSU-010,Lesson09,summary,1ef08bdefdb2fba4d4db153a477421a071a38cbc62cabd95702139270855caf1, Summary,,pending
+O006-PSU-010-S0425,O006-PSU-010,Lesson09,summary,8d2e42162b18827f89068714dc8c5fd1c6d584c26179f6a4dbdf4470fc82f451,"In this lesson, we introduced the framework of hypothesis testing—a formal way to use sample data to evaluate claims about a population parameter. The big idea is to set up two competing statements: the null hypothesis (",,pending
+O006-PSU-010-S0426,O006-PSU-010,Lesson09,summary,735844d16a4b393f622ca037c3667869f5d3dc1eead7aa8501b993348fd23c5e,"), which represents the status quo or no effect, and the alternative hypothesis (",,pending
+O006-PSU-010-S0427,O006-PSU-010,Lesson09,summary,86e8befc5a99d9939785fa6442e0ccb1bc1db9ae951dcf0fa29052d6a0efc970,"), which represents what we’re trying to find evidence for.",,pending
+O006-PSU-010-S0428,O006-PSU-010,Lesson09,summary,cc9f50b4b64a84d108e2c3b2b4b231feb7f3e2944e25920089a3e5f1381d649a,"We compute a test statistic, which summarizes the evidence from the sample, and determine how extreme it is under the assumption that ",,pending
+O006-PSU-010-S0429,O006-PSU-010,Lesson09,summary,c9da030948c03b5efe57a1169e3c495f46e52ba622b19af169eafad48d5bd05e, is true. This leads us to a rejection region or a p-value approach. If our test statistic falls in the rejection region or if the p-value is smaller than the significance level ,,pending
+O006-PSU-010-S0430,O006-PSU-010,Lesson09,summary,1d31de2bcc2d985d1c48de243f90a75465ab9d56f35cb70ce552b13ae3d115c4,", we reject ",,pending
+O006-PSU-010-S0431,O006-PSU-010,Lesson09,summary,a9b5392c14297c04bade6a5f92da97b0b8bbb4d6c44274a8482381193a7dbcc9,Key Takeaways:,,pending
+O006-PSU-010-S0432,O006-PSU-010,Lesson09,summary,1d1b35a95e0caf90f847fb3489883fee03b983abd0914e551c9b6a0f45d42120,A typical form of a test statistic is: ,,pending
+O006-PSU-010-S0433,O006-PSU-010,Lesson09,summary,cf69e6d099abdae3732ab29c4b69ad458a6489c7223fdc6b438e4a6b1867a960,"Type I error: rejecting when it’s actually true, ",,pending
+O006-PSU-010-S0434,O006-PSU-010,Lesson09,summary,9ebe4221e8eca19207707a3f90472ad3f88549c9feab27c2c071fefc412f4d90,"Type II error: failing to reject when is true, ",,pending
+O006-PSU-010-S0435,O006-PSU-010,Lesson09,summary,fa4c0697c621de99e0d2a8e2d64487d1658377fb397581aefeeb088b7409ae4e,The power of a test is the probability of correctly rejecting ,,pending
+O006-PSU-010-S0436,O006-PSU-010,Lesson09,summary,d7a8aa2f7edb60875cbbde20f99a53f738f6d2d02ed230b309ea7596697baf46,We also defined two types of errors: - Type I error: rejecting ,,pending
+O006-PSU-010-S0437,O006-PSU-010,Lesson09,summary,a3761dd0213a08d72ccc1a9ba1f5c38afd5006a1109ed5387cde8e80f58b71ad, when it’s actually true (probability ,,pending
+O006-PSU-010-S0438,O006-PSU-010,Lesson09,summary,24e4daa314604af1944c0cc36aa7d9de87d65d9064696e3b09cbefc697a9197d,) - Type II error: failing to reject ,,pending
+O006-PSU-010-S0439,O006-PSU-010,Lesson09,summary,3342bc4f8f5279c2c3198a558f1c98ebdc2562d2f733a16143de5bd4956cef25, when ,,pending
+O006-PSU-010-S0440,O006-PSU-010,Lesson09,summary,70df75697a685279f78d285b5dc25582ab2f7c973c4deaf3bf4c39df164e73d3, is true (probability ,,pending
+O006-PSU-010-S0441,O006-PSU-010,Lesson09,summary,103c5169871d49be7a2ebf9e6fe4720244cbf1fdbccdbfaca489898ea069504c,The ,,pending
+O006-PSU-010-S0442,O006-PSU-010,Lesson09,summary,07d715edb696fb5f628f7298e5d7217ed4d2bdfc5347a1c55fee30832267f21d,power,,pending
+O006-PSU-010-S0443,O006-PSU-010,Lesson09,summary,55db707ab9a83bdb94ed099d0532a611bf27a200243351be719cedaf6ec81915, of a test is the probability of correctly rejecting ,,pending

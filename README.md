@@ -6,17 +6,17 @@ komponen O006/C140.
 
 ## Status
 
-**Sebagian — 5 dari 14 dokumen lengkap.** Laman utama dan seluruh Pelajaran
-00–03 sudah diterjemahkan, dibangun, dan lulus pemeriksaan deterministik serta
-visual. Pelajaran 04–12 tetap tercantum dan untuk sementara menaut ke halaman
+**Sebagian — 11 dari 14 dokumen lengkap.** Laman utama dan seluruh Pelajaran
+00–09 sudah diterjemahkan, dibangun, dan lulus pemeriksaan deterministik serta
+visual. Pelajaran 10–12 tetap tercantum dan untuk sementara menaut ke halaman
 resmi berbahasa Inggris. Batas akhir edisi ini adalah laman utama dan Pelajaran
 00–12, sebanyak 14 dokumen.
 
-- 1.599 segmen terjemahan lengkap;
-- 1.399 unit struktural sumber dengan ID stabil dan 1.397 unit turunan;
-- 1.149 permukaan matematika, semuanya terikat ke ID yang netral terhadap locale;
-- 46 koreksi turunan terverifikasi; byte sumber resmi tidak diubah;
-- pembaca HTML luring: 32 berkas / 2.804.159 byte.
+- 3.458 segmen terjemahan lengkap;
+- 4.775 unit struktural sumber dengan ID stabil dan 4.763 unit turunan;
+- 2.171 permukaan matematika, semuanya terikat ke ID yang netral terhadap locale;
+- 170 koreksi turunan terverifikasi; byte sumber resmi tidak diubah;
+- pembaca HTML luring: 71 berkas / 8.551.979 byte.
 
 Pembaca lokal tersedia di `build/html-id/index.html`. Riwayat sumber,
 identitas SHA-256, hak komponen, koreksi, backend modular, hasil build, dan
@@ -26,7 +26,7 @@ bukti QA disimpan bersama edisi.
 - Pembaca web: https://kokunoyumeto.github.io/penn-state-stat-415-id/
 - Rilis publik terbaru: https://github.com/KokunoYumeto/penn-state-stat-415-id/releases
 - Konsep preservasi: https://doi.org/10.5281/zenodo.22077422
-- Preservasi hingga Pelajaran 03: https://doi.org/10.5281/zenodo.22088315
+- Preservasi terverifikasi sebelumnya, hingga Pelajaran 05: https://doi.org/10.5281/zenodo.22097348
 
 ## Reproduksi
 
@@ -44,10 +44,23 @@ python -B scripts/merge_first_unit_translations.py --check-only
 python -B scripts/normalize_lesson01.py --check-only
 python -B scripts/merge_lesson01_translations.py --check-only
 python -B scripts/normalize_lesson02.py --check-only
+python -B scripts/merge_lesson02_translations.py --check-only
 python -B scripts/normalize_lesson03.py --check-only
 python -B scripts/merge_lesson03_translations.py --check-only
-python -B scripts/build_through_lesson03.py --check-only
-python -B scripts/qa_through_lesson03.py --check-only
+python -B scripts/normalize_lesson04.py --check-only
+python -B scripts/merge_lesson04_translations.py --check-only
+python -B scripts/normalize_lesson05.py --check-only
+python -B scripts/merge_lesson05_translations.py --check-only
+python -B scripts/normalize_lesson06.py --check-only
+python -B scripts/merge_lesson06_translations.py --check-only
+python -B scripts/normalize_lesson07.py --check-only
+python -B scripts/merge_lesson07_translations.py --check-only
+python -B scripts/normalize_lesson08.py --check-only
+python -B scripts/merge_lesson08_translations.py --check-only
+python -B scripts/normalize_lesson09.py --check-only
+python -B scripts/merge_lesson09_translations.py --check-only
+python -B scripts/build_through_lesson09.py --check-only
+python -B scripts/qa_through_lesson09.py --check-only
 ```
 
 Untuk membaca secara lokal, layani `build/html-id` dengan peladen HTTP statis;

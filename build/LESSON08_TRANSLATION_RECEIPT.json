@@ -1,0 +1,121 @@
+{
+  "asset_inputs": [
+    {
+      "bytes": 12420,
+      "path": "working/lesson08_asset_closure.json",
+      "sha256": "5e9a0ef2ff57e2ca6575aa6ef5c4f9e1e22a2d2ed959058913ba364270dc220a"
+    },
+    {
+      "bytes": 15102,
+      "path": "build/LESSON08_NORMALIZATION_RECEIPT.json",
+      "sha256": "56dd21dd1d9ad17000e0b15ea2d8fd2caf9bc16f91302f9a337c15114dd04ca7"
+    }
+  ],
+  "bindings": {
+    "bytes": 124413,
+    "path": "backend/lesson08_translation_bindings.jsonl",
+    "sha256": "42624c16d2c0336589876d4bba87482665443a1b29af1c1d3d9c38531aac6534"
+  },
+  "boundary_whitespace_rule": "exact source-node leading/trailing whitespace wrapped around translated prose core",
+  "document": "Lesson08",
+  "document_id": "O006-PSU-009",
+  "identical_segments": [
+    "O006-PSU-009-S0007",
+    "O006-PSU-009-S0264"
+  ],
+  "independent_math_audit": {
+    "bytes": 15416,
+    "path": "working/lesson08_math_audit.md",
+    "sha256": "1008b2c956286ed6534550811f3059d7b2dc2b2decc0e555eb91dc06c0fdc721"
+  },
+  "locale": "id-ID",
+  "merge_script": {
+    "bytes": 2309,
+    "path": "scripts/merge_lesson08_translations.py",
+    "sha256": "0815e42f2c1b1de74b4e5778ca22ea4f02e7c1c1995da0abf4d2ebe0437681af"
+  },
+  "parts": [
+    {
+      "bytes": 10691,
+      "notes": {
+        "bytes": 2471,
+        "path": "working/lesson08_translation_part_a_notes.md",
+        "sha256": "f3041cf1753982f1a7dfd9840a8dca2f4c4a6de7265afc5a3c0f943e895d48f8"
+      },
+      "part": "a",
+      "path": "working/lesson08_translation_part_a.json",
+      "range": [
+        "O006-PSU-009-S0001",
+        "O006-PSU-009-S0100"
+      ],
+      "segments": 100,
+      "sha256": "f0f9b1640966d12b5588b383df12e0dfe0ab0507c4997dad74d61a131b441238"
+    },
+    {
+      "bytes": 8198,
+      "notes": {
+        "bytes": 1242,
+        "path": "working/lesson08_translation_part_b_notes.md",
+        "sha256": "c65e038b3b0c6af8cf84d1a10c12e84cc1af8cc3ee2af5630ce0c65a71b96159"
+      },
+      "part": "b",
+      "path": "working/lesson08_translation_part_b.json",
+      "range": [
+        "O006-PSU-009-S0101",
+        "O006-PSU-009-S0200"
+      ],
+      "segments": 100,
+      "sha256": "5f01e9a2585329609bcd93bcd535bc3a60774a3b063b11426471a506052da8cb"
+    },
+    {
+      "bytes": 8211,
+      "notes": {
+        "bytes": 3368,
+        "path": "working/lesson08_translation_part_c_notes.md",
+        "sha256": "c5ace64c65307534923bde72a63ad8f6f61aaef14b4f88fbc52c7b5bdeeb70da"
+      },
+      "part": "c",
+      "path": "working/lesson08_translation_part_c.json",
+      "range": [
+        "O006-PSU-009-S0201",
+        "O006-PSU-009-S0291"
+      ],
+      "segments": 91,
+      "sha256": "7792fa22b64842703e5d9f4a712fb631f523032b4459c3d8d5ede28822cf9340"
+    }
+  ],
+  "schema": "o006.stat415.lesson08-translation.v1",
+  "segment_count": 291,
+  "source_findings": {
+    "bytes": 9913,
+    "path": "working/lesson08_source_findings.md",
+    "sha256": "031bbfc863220fcc6152dae93c4071e2450711023eee4abd82dcc1c68c8521c4"
+  },
+  "status": "complete",
+  "template": {
+    "bytes": 61511,
+    "path": "working/lesson08_segments.csv",
+    "sha256": "48a0fdf1d9c039cbb02fbdf8549092f27ef2997451d57e0571dbc110d9c0a8a5"
+  },
+  "terminology_inputs": [
+    {
+      "bytes": 12747,
+      "path": "00_control/TERMINOLOGY_GLOSSARY_ID_ID.csv",
+      "rows": 122,
+      "scope": "exact cumulative glossary through the thirteen Lesson 08 decisions",
+      "sha256": "2887e4c3d817008744f8662c966262027bdbc7bf00314f880397d8aba766c095"
+    },
+    {
+      "bytes": 9333,
+      "path": "working/lesson08_terminology_qa.md",
+      "sha256": "0761c9dbb54a47a37f58b28b3a5851aff6216a9c7be21c0c2220b492af2a154b"
+    }
+  ],
+  "terminology_rule": "cumulative component glossary through O006-TERM-0122",
+  "translation_csv": {
+    "bytes": 81532,
+    "path": "source/id-ID/lesson08_translation.csv",
+    "sha256": "b289112067b2606dfb5b2ccf4a8b809b420e2d495b5b75a57fc1d6eb006ad2ad"
+  },
+  "translation_provenance": "OpenAI Codex gpt-5.6-sol, Ultra"
+}

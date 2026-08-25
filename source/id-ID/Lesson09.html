@@ -1,0 +1,585 @@
+<!doctype html>
+<html lang="id-ID">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>9 Uji Hipotesis (Bagian I)</title>
+<meta name="source-url" content="https://online.stat.psu.edu/stat415/Lesson09">
+<meta name="translation-provenance" content="OpenAI Codex gpt-5.6-sol, Ultra">
+<meta name="edition-status" content="partial: 11 of 14 documents complete; landing and Lessons 00–09">
+<link rel="license" href="https://creativecommons.org/licenses/by-nc/4.0/">
+<link rel="stylesheet" href="assets/reader-11of14.css">
+<script defer src="assets/MathJax/tex-svg.js"></script>
+</head>
+<body>
+<a class="skip-link" href="#quarto-document-content">Lewati ke isi utama</a>
+<header class="site-header"><div class="site-header__inner"><div><p class="site-title">STAT 415 — Pengantar Statistika Matematis</p><p class="site-subtitle">Rekonstruksi dan terjemahan Bahasa Indonesia · O006/C140</p></div><nav class="site-nav" aria-label="Navigasi utama"><a href="index.html">Daftar pelajaran</a><a href="Lesson00.html">Pelajaran 00</a><a href="Lesson01.html">Pelajaran 01</a><a href="Lesson02.html">Pelajaran 02</a><a href="Lesson03.html">Pelajaran 03</a><a href="Lesson04.html">Pelajaran 04</a><a href="Lesson05.html">Pelajaran 05</a><a href="Lesson06.html">Pelajaran 06</a><a href="Lesson07.html">Pelajaran 07</a><a href="Lesson08.html">Pelajaran 08</a><a href="Lesson09.html">Pelajaran 09</a><a href="licenses/index.html">Lisensi</a></nav></div></header>
+<div class="page-shell"><aside class="edition-note" aria-label="Status edisi"><strong>Edisi Bahasa Indonesia — 11 dari 14 dokumen.</strong> Laman utama serta Pelajaran 00–09 telah diterjemahkan sepenuhnya. Pelajaran 10–12 masih menuju sumber resmi berbahasa Inggris sampai unit berikutnya selesai. <a href="https://online.stat.psu.edu/stat415/Lesson09">Sumber resmi halaman ini</a>. <a href="licenses/index.html">Atribusi, perubahan, dan lisensi</a>.</aside><main class="content page-columns page-full" data-component-id="Lesson09" data-document-id="O006-PSU-010" data-source-url="https://online.stat.psu.edu/stat415/Lesson09" id="quarto-document-content">
+<header class="quarto-title-block default" data-o006-id="O006-PSU-010-U0001" id="title-block-header"><nav aria-label="Jejak navigasi" class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" data-o006-id="O006-PSU-010-U0002"><ol class="breadcrumb" data-o006-id="O006-PSU-010-U0003"><li class="breadcrumb-item" data-o006-id="O006-PSU-010-U0004"><a data-o006-id="O006-PSU-010-U0005" href="index.html#lessons">Pelajaran</a></li><li class="breadcrumb-item" data-o006-id="O006-PSU-010-U0006"><a data-o006-id="O006-PSU-010-U0007" href="Lesson09.html"><span class="chapter-number">9</span>  <span class="chapter-title">Uji Hipotesis (Bagian I)</span></a></li></ol></nav>
+<div class="quarto-title" data-o006-id="O006-PSU-010-U0008">
+<h1 class="title" data-o006-id="O006-PSU-010-U0009"><span class="chapter-number">9</span>  <span class="chapter-title">Uji Hipotesis (Bagian I)</span></h1>
+<div class="quarto-categories" data-o006-id="O006-PSU-010-U0010">
+<div class="quarto-category" data-o006-id="O006-PSU-010-U0011">Uji Hipotesis</div>
+<div class="quarto-category" data-o006-id="O006-PSU-010-U0012">Uji Proporsi</div>
+<div class="quarto-category" data-o006-id="O006-PSU-010-U0013">Uji Satu Rataan</div>
+<div class="quarto-category" data-o006-id="O006-PSU-010-U0014">Nilai-p</div>
+</div>
+</div>
+<div class="quarto-title-meta" data-o006-id="O006-PSU-010-U0015">
+</div>
+</header>
+<section class="level2 unnumbered unlisted" data-o006-id="O006-PSU-010-U0016" id="overview">
+<h2 class="unnumbered unlisted anchored" data-anchor-id="overview" data-o006-id="O006-PSU-010-U0017">Gambaran Umum</h2>
+<p data-o006-id="O006-PSU-010-U0018">Pada bagian-bagian sebelumnya, kita mengembangkan metode statistika, terutama berupa selang kepercayaan, untuk menjawab pertanyaan “berapakah nilai parameter <span class="math inline" data-o006-math-id="O006-PSU-010-M0001">\(\theta\)</span>?” Pada bagian ini, kita akan mempelajari cara menjawab pertanyaan yang sedikit berbeda, yaitu “apakah nilai parameter <span class="math inline" data-o006-math-id="O006-PSU-010-M0002">\(\theta\)</span> adalah nilai tertentu?” Sebagai contoh, alih-alih mencoba menduga <span class="math inline" data-o006-math-id="O006-PSU-010-M0003">\(\mu\)</span>, rataan suhu tubuh orang dewasa, kita mungkin tertarik untuk menguji apakah <span class="math inline" data-o006-math-id="O006-PSU-010-M0004">\(\mu\)</span>, rataan suhu tubuh orang dewasa, benar-benar 37 derajat Celsius. Kita akan mencoba menjawab pertanyaan semacam itu dengan metode statistika yang dikenal sebagai pengujian hipotesis.</p>
+<section class="level3 unnumbered unlisted objectiveblock" data-o006-id="O006-PSU-010-U0019" id="objectives">
+<h3 class="unnumbered unlisted anchored" data-anchor-id="objectives" data-o006-id="O006-PSU-010-U0020"><i class="bi bi-check2-circle"></i>Tujuan</h3>
+<p data-o006-id="O006-PSU-010-U0021">Setelah menyelesaikan pelajaran ini, Anda diharapkan mampu:</p>
+<ol data-o006-id="O006-PSU-010-U0022" type="1">
+<li data-o006-id="O006-PSU-010-U0023">Menyusun uji hipotesis dengan menggunakan distribusi suatu penduga,</li>
+<li data-o006-id="O006-PSU-010-U0024">Menarik kesimpulan pengujian dengan pendekatan nilai-p,</li>
+<li data-o006-id="O006-PSU-010-U0025">Menarik kesimpulan pengujian dengan pendekatan nilai kritis,</li>
+<li data-o006-id="O006-PSU-010-U0026">Menafsirkan dengan jelas hasil uji hipotesis, dan</li>
+<li data-o006-id="O006-PSU-010-U0027">Menafsirkan dengan jelas jenis-jenis galat beserta peluangnya masing-masing.</li>
+</ol>
+</section>
+</section>
+<section class="level2" data-number="9.1" data-o006-id="O006-PSU-010-U0028" id="introduction-to-hypothesis-tests">
+<h2 class="anchored" data-anchor-id="introduction-to-hypothesis-tests" data-number="9.1" data-o006-id="O006-PSU-010-U0029"><span class="header-section-number">9.1</span> Pengantar Uji Hipotesis</h2>
+<section class="level3" data-number="9.1.1" data-o006-id="O006-PSU-010-U0030" id="basic-terms">
+<h3 class="anchored" data-anchor-id="basic-terms" data-number="9.1.1" data-o006-id="O006-PSU-010-U0031"><span class="header-section-number">9.1.1</span> Istilah Dasar</h3>
+<p data-o006-id="O006-PSU-010-U0032">Sebelum mempelajari teori statistika yang mendasari uji hipotesis, terlebih dahulu kita perlu memahami istilah-istilah dasarnya.</p>
+<p data-o006-id="O006-PSU-010-U0033">Langkah pertama dalam pengujian hipotesis adalah merumuskan dua hipotesis yang saling bersaing (dan saling lepas). Ini merupakan aspek terpenting dalam uji hipotesis. Jika hipotesisnya keliru, kesimpulan pengujiannya juga akan keliru.</p>
+<p data-o006-id="O006-PSU-010-U0034">Kedua hipotesis itu disebut hipotesis nol dan hipotesis alternatif.</p>
+<div class="ms-3 theorem definition" data-o006-id="O006-PSU-010-U0035" id="def-nullhyp">
+<p data-o006-id="O006-PSU-010-U0036"><span class="theorem-title"><strong>Def. 9.1 (Hipotesis Nol)</strong></span> Istilah <strong>hipotesis nol</strong> biasanya dilambangkan dengan <span class="math inline" data-o006-math-id="O006-PSU-010-M0005">\(H_0\)</span>. Hipotesis nol menyatakan “status quo”. Hipotesis ini <strong>dianggap benar</strong> sampai ada bukti yang menunjukkan sebaliknya.</p>
+</div>
+<div class="ms-3 theorem definition" data-o006-id="O006-PSU-010-U0037" id="def-althyp">
+<p data-o006-id="O006-PSU-010-U0038"><span class="theorem-title"><strong>Def. 9.2 (Hipotesis Alternatif)</strong></span> Istilah <strong>hipotesis alternatif</strong> biasanya dilambangkan dengan <span class="math inline" data-o006-math-id="O006-PSU-010-M0006">\(H_a\)</span> atau <span class="math inline" data-o006-math-id="O006-PSU-010-M0007">\(H_1\)</span>. Inilah pernyataan yang ingin kita simpulkan. Hipotesis ini juga disebut hipotesis penelitian.</p>
+</div>
+<div class="theorem example" data-o006-id="O006-PSU-010-U0039" id="exm-hyptest1">
+<p data-o006-id="O006-PSU-010-U0040"><span class="theorem-title"><strong>Contoh 9.1</strong></span> Seorang pria, Tn. Orangejuice, diadili atas tuduhan membunuh mantan istrinya. Ia bersalah atau tidak bersalah. Rumuskan hipotesis nol dan hipotesis alternatif untuk contoh ini.</p>
+<section class="level4 card card-body bg-light ms-3 mb-3 pt-0" data-o006-id="O006-PSU-010-U0041" id="solution">
+<h4 class="anchored" data-anchor-id="solution" data-o006-id="O006-PSU-010-U0042">Solusi</h4>
+<p data-o006-id="O006-PSU-010-U0043">Dalam kerangka pengujian hipotesis, hipotesis yang diuji adalah: 1. Pria itu bersalah. 2. Pria itu tidak bersalah.</p>
+<p data-o006-id="O006-PSU-010-U0044">Mari kita rumuskan hipotesis nol dan hipotesis alternatif.</p>
+<p data-o006-id="O006-PSU-010-U0045"><span class="math display" data-o006-math-id="O006-PSU-010-M0008">\[\begin{align}
+H_0&amp;\colon\text{ Mr. Orangejuice is innocent}\\
+H_a&amp;\colon\text{ Mr. Orangejuice is guilty}
+\end{align}\]</span></p>
+<p data-o006-id="O006-PSU-010-U0046">Ingatlah bahwa kita menganggap hipotesis nol benar dan berusaha melihat apakah ada bukti yang menentangnya. Oleh karena itu, dalam contoh ini masuk akal untuk menganggap pria tersebut tidak bersalah, lalu menguji apakah ada bukti bahwa ia bersalah.</p>
+</section>
+</div>
+</section>
+<section class="level3" data-number="9.1.2" data-o006-id="O006-PSU-010-U0047" id="the-logic-of-hypothesis-testing">
+<h3 class="anchored" data-anchor-id="the-logic-of-hypothesis-testing" data-number="9.1.2" data-o006-id="O006-PSU-010-U0048"><span class="header-section-number">9.1.2</span> Logika Pengujian Hipotesis</h3>
+<p data-o006-id="O006-PSU-010-U0049">Kita ingin mengetahui jawaban atas suatu pertanyaan penelitian. Kita menentukan hipotesis nol dan hipotesis alternatif. Sekarang saatnya mengambil keputusan.</p>
+<p data-o006-id="O006-PSU-010-U0050">Keputusannya akan berupa salah satu dari berikut ini…</p>
+<ol data-o006-id="O006-PSU-010-U0051" type="1">
+<li data-o006-id="O006-PSU-010-U0052">Menolak hipotesis nol atau…</li>
+<li data-o006-id="O006-PSU-010-U0053">Gagal menolak hipotesis nol</li>
+</ol>
+<div class="callout callout-style-simple callout-caution no-icon" data-o006-id="O006-PSU-010-U0054">
+<div class="callout-body d-flex" data-o006-id="O006-PSU-010-U0055">
+<div class="callout-icon-container" data-o006-id="O006-PSU-010-U0056">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-body-container" data-o006-id="O006-PSU-010-U0057">
+<p data-o006-id="O006-PSU-010-U0058"><strong>Perhatikan!</strong><br/>
+Mengapa kita tidak boleh mengatakan “menerima hipotesis nol”? Alasannya, kita menganggap hipotesis nol benar dan berusaha melihat apakah ada bukti yang menentangnya. Oleh karena itu, kesimpulan harus dinyatakan dalam bentuk penolakan terhadap hipotesis nol.</p>
+</div>
+</div>
+</div>
+<p data-o006-id="O006-PSU-010-U0059">Perhatikan tabel berikut. Tabel tersebut menunjukkan keputusan atau kesimpulan uji hipotesis dan “kenyataan”, atau kebenaran, yang tidak diketahui. Kita tidak mengetahui apakah hipotesis nol benar atau salah. Jika hipotesis nol salah dan kita menolaknya, kita mengambil keputusan yang benar. Jika hipotesis nol benar dan kita gagal menolaknya, kita juga mengambil keputusan yang benar.</p>
+<table aria-describedby="o006-psu-010-table-1-caption" class="w-auto mx-auto table-sm small caption-top table" data-o006-id="O006-PSU-010-U0060"><caption data-o006-correction-id="O006-PSU-ADV-0168" id="o006-psu-010-table-1-caption">Keputusan pengujian menurut keadaan hipotesis nol (tanpa label galat).</caption>
+<colgroup>
+<col style="width: 47%"/>
+<col style="width: 26%"/>
+<col style="width: 26%"/>
+</colgroup>
+<tbody data-o006-id="O006-PSU-010-U0061">
+<tr class="odd" data-o006-id="O006-PSU-010-U0062">
+<th data-o006-id="O006-PSU-010-U0063" id="o006-psu-010-table-1-decision" rowspan="2" scope="col" style="text-align: center;"><strong>Keputusan</strong></th>
+<th colspan="2" data-o006-id="O006-PSU-010-U0064" id="o006-psu-010-table-1-reality" scope="colgroup" style="text-align: center;">Kenyataan</th>
+<th aria-hidden="true" data-o006-id="O006-PSU-010-U0065" hidden="" scope="col" style="text-align: center;"></th>
+</tr>
+<tr class="even" data-o006-id="O006-PSU-010-U0066">
+<th aria-hidden="true" data-o006-id="O006-PSU-010-U0067" hidden="" scope="col" style="text-align: center;"></th>
+<th data-o006-id="O006-PSU-010-U0068" headers="o006-psu-010-table-1-reality" id="o006-psu-010-table-1-h0-true" scope="col" style="text-align: center;"><span class="math inline" data-o006-math-id="O006-PSU-010-M0009">\(H_0\)</span> <strong>benar</strong></th>
+<th data-o006-id="O006-PSU-010-U0069" headers="o006-psu-010-table-1-reality" id="o006-psu-010-table-1-h0-false" scope="col" style="text-align: center;"><span class="math inline" data-o006-math-id="O006-PSU-010-M0010">\(H_0\)</span> <strong>salah</strong></th>
+</tr>
+<tr class="odd" data-o006-id="O006-PSU-010-U0070">
+<th data-o006-id="O006-PSU-010-U0071" headers="o006-psu-010-table-1-decision" id="o006-psu-010-table-1-row-1" scope="row" style="text-align: center;"><strong>Menolak</strong> <span class="math inline" data-o006-math-id="O006-PSU-010-M0011">\(H_0\)</span> <strong>(Menyimpulkan</strong> <span class="math inline" data-o006-math-id="O006-PSU-010-M0012">\(H_a\)</span><strong>)</strong></th>
+<td data-o006-id="O006-PSU-010-U0072" headers="o006-psu-010-table-1-row-1 o006-psu-010-table-1-h0-true" style="text-align: center;"></td>
+<td data-o006-id="O006-PSU-010-U0073" headers="o006-psu-010-table-1-row-1 o006-psu-010-table-1-h0-false" style="text-align: center;"><span class="text-success-emphasis"><strong>Keputusan yang benar</strong></span></td>
+</tr>
+<tr class="even" data-o006-id="O006-PSU-010-U0074">
+<th data-o006-id="O006-PSU-010-U0075" headers="o006-psu-010-table-1-decision" id="o006-psu-010-table-1-row-2" scope="row" style="text-align: center;"><strong>Gagal Menolak</strong> <span class="math inline" data-o006-math-id="O006-PSU-010-M0013">\(H_0\)</span></th>
+<td data-o006-id="O006-PSU-010-U0076" headers="o006-psu-010-table-1-row-2 o006-psu-010-table-1-h0-true" style="text-align: center;"><span class="text-success-emphasis"><strong>Keputusan yang Benar</strong></span></td>
+<td data-o006-id="O006-PSU-010-U0077" headers="o006-psu-010-table-1-row-2 o006-psu-010-table-1-h0-false" style="text-align: center;"></td>
+</tr>
+</tbody>
+</table>
+<p data-o006-id="O006-PSU-010-U0078"><strong>Lalu, apa yang terjadi ketika kita tidak mengambil keputusan yang benar?</strong></p>
+<p data-o006-id="O006-PSU-010-U0079">Dalam pengujian hipotesis, ada dua jenis galat yang dapat terjadi, yaitu galat tipe I dan galat tipe II. Jika kita menolak hipotesis nol ketika hipotesis tersebut benar, kita melakukan galat tipe I. Jika hipotesis nol salah dan kita gagal menolaknya, kita melakukan galat lain yang disebut galat tipe II.</p>
+<table aria-describedby="o006-psu-010-table-2-caption" class="w-auto mx-auto table-sm small caption-top table" data-o006-id="O006-PSU-010-U0080"><caption data-o006-correction-id="O006-PSU-ADV-0168" id="o006-psu-010-table-2-caption">Keputusan, keadaan hipotesis nol, serta galat tipe I dan tipe II.</caption>
+<colgroup>
+<col style="width: 47%"/>
+<col style="width: 26%"/>
+<col style="width: 26%"/>
+</colgroup>
+<tbody data-o006-id="O006-PSU-010-U0081">
+<tr class="odd" data-o006-id="O006-PSU-010-U0082">
+<th data-o006-id="O006-PSU-010-U0083" id="o006-psu-010-table-2-decision" rowspan="2" scope="col" style="text-align: center;"><strong>Keputusan</strong></th>
+<th colspan="2" data-o006-id="O006-PSU-010-U0084" id="o006-psu-010-table-2-reality" scope="colgroup" style="text-align: center;">Kenyataan</th>
+<th aria-hidden="true" data-o006-id="O006-PSU-010-U0085" hidden="" scope="col" style="text-align: center;"></th>
+</tr>
+<tr class="even" data-o006-id="O006-PSU-010-U0086">
+<th aria-hidden="true" data-o006-id="O006-PSU-010-U0087" hidden="" scope="col" style="text-align: center;"></th>
+<th data-o006-id="O006-PSU-010-U0088" headers="o006-psu-010-table-2-reality" id="o006-psu-010-table-2-h0-true" scope="col" style="text-align: center;"><span class="math inline" data-o006-math-id="O006-PSU-010-M0014">\(H_0\)</span> <strong>benar</strong></th>
+<th data-o006-id="O006-PSU-010-U0089" headers="o006-psu-010-table-2-reality" id="o006-psu-010-table-2-h0-false" scope="col" style="text-align: center;"><span class="math inline" data-o006-math-id="O006-PSU-010-M0015">\(H_0\)</span> <strong>salah</strong></th>
+</tr>
+<tr class="odd" data-o006-id="O006-PSU-010-U0090">
+<th data-o006-id="O006-PSU-010-U0091" headers="o006-psu-010-table-2-decision" id="o006-psu-010-table-2-row-1" scope="row" style="text-align: center;"><strong>Menolak</strong> <span class="math inline" data-o006-math-id="O006-PSU-010-M0016">\(H_0\)</span> <strong>(Menyimpulkan</strong> <span class="math inline" data-o006-math-id="O006-PSU-010-M0017">\(H_a\)</span><strong>)</strong></th>
+<td data-o006-id="O006-PSU-010-U0092" headers="o006-psu-010-table-2-row-1 o006-psu-010-table-2-h0-true" style="text-align: center;"><span class="text-danger-emphasis"><strong>Galat Tipe I</strong></span></td>
+<td data-o006-id="O006-PSU-010-U0093" headers="o006-psu-010-table-2-row-1 o006-psu-010-table-2-h0-false" style="text-align: center;"><span class="text-success-emphasis"><strong>Keputusan yang benar</strong></span></td>
+</tr>
+<tr class="even" data-o006-id="O006-PSU-010-U0094">
+<th data-o006-id="O006-PSU-010-U0095" headers="o006-psu-010-table-2-decision" id="o006-psu-010-table-2-row-2" scope="row" style="text-align: center;"><strong>Gagal Menolak</strong> <span class="math inline" data-o006-math-id="O006-PSU-010-M0018">\(H_0\)</span></th>
+<td data-o006-id="O006-PSU-010-U0096" headers="o006-psu-010-table-2-row-2 o006-psu-010-table-2-h0-true" style="text-align: center;"><span class="text-success-emphasis"><strong>Keputusan yang benar</strong></span></td>
+<td data-o006-id="O006-PSU-010-U0097" headers="o006-psu-010-table-2-row-2 o006-psu-010-table-2-h0-false" style="text-align: center;"><span class="text-danger-emphasis"><strong>Galat Tipe II</strong></span></td>
+</tr>
+</tbody>
+</table>
+<section class="level4" data-o006-id="O006-PSU-010-U0098" id="types-of-errors">
+<h4 class="anchored" data-anchor-id="types-of-errors" data-o006-id="O006-PSU-010-U0099">Jenis-Jenis Galat</h4>
+<ul data-o006-id="O006-PSU-010-U0100">
+<li data-o006-id="O006-PSU-010-U0101"><p data-o006-id="O006-PSU-010-U0102"><strong>Galat Tipe I</strong>: Terjadi ketika kita menolak hipotesis nol padahal hipotesis nol benar.</p></li>
+<li data-o006-id="O006-PSU-010-U0103"><p data-o006-id="O006-PSU-010-U0104"><strong>Galat Tipe II</strong>: Terjadi ketika kita gagal menolak hipotesis nol padahal hipotesis nol salah.</p></li>
+</ul>
+<p data-o006-id="O006-PSU-010-U0105">“Kenyataan”, atau kebenaran, mengenai hipotesis nol tidak diketahui. Karena itu, kita tidak mengetahui apakah kita telah mengambil keputusan yang benar atau melakukan galat. Namun, kita dapat mendefinisikan peluang kejadian-kejadian tersebut.</p>
+<div class="ms-3 theorem definition" data-o006-id="O006-PSU-010-U0106" id="def-alpha">
+<p data-o006-id="O006-PSU-010-U0107"><span class="theorem-title"><strong>Def. 9.3 (<span class="math inline" data-o006-math-id="O006-PSU-010-M0019">\(\alpha\)</span> (“alfa”))</strong></span> Peluang melakukan galat tipe I. Juga dikenal sebagai <strong>tingkat signifikansi</strong>.</p>
+</div>
+<div class="ms-3 theorem definition" data-o006-id="O006-PSU-010-U0108" id="def-beta">
+<p data-o006-id="O006-PSU-010-U0109"><span class="theorem-title"><strong>Def. 9.4 (<span class="math inline" data-o006-math-id="O006-PSU-010-M0020">\(\beta\)</span> (“beta”):)</strong></span> Peluang melakukan galat tipe II.</p>
+</div>
+</section>
+</section>
+<section class="level3 ms-3" data-number="9.1.3" data-o006-id="O006-PSU-010-U0110" id="power">
+<h3 class="anchored" data-anchor-id="power" data-number="9.1.3" data-o006-id="O006-PSU-010-U0111"><span class="header-section-number">9.1.3</span> Kuasa Uji</h3>
+<p data-o006-id="O006-PSU-010-U0112">Pada nilai parameter alternatif tertentu θ, kuasa uji adalah peluang menolak hipotesis nol ketika nilai θ itu benar, yaitu <span class="math inline" data-o006-math-id="O006-PSU-010-M0021">\(\operatorname{kuasa}(\theta)=1-\beta(\theta)\)</span>).</p>
+</section>
+<p data-o006-id="O006-PSU-010-U0113"><span class="math inline" data-o006-math-id="O006-PSU-010-M0022">\(\alpha\)</span> dan <span class="math inline" data-o006-math-id="O006-PSU-010-M0023">\(\beta(\theta)\)</span> adalah peluang melakukan galat, sehingga kita menginginkan keduanya kecil. Untuk ukuran sampel, keluarga uji, dan nilai parameter alternatif yang tetap, penurunan salah satunya umumnya menaikkan yang lain. Namun, penambahan informasi—misalnya dengan memperbesar ukuran sampel—dapat menurunkan keduanya. Ketika <span class="math inline" data-o006-math-id="O006-PSU-010-M0024">\(\alpha\)</span> menurun, <span class="math inline" data-o006-math-id="O006-PSU-010-M0025">\(\beta(\theta)\)</span> meningkat.</p>
+<div class="callout callout-style-simple callout-caution no-icon" data-o006-id="O006-PSU-010-U0114">
+<div class="callout-body d-flex" data-o006-id="O006-PSU-010-U0115">
+<div class="callout-icon-container" data-o006-id="O006-PSU-010-U0116">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-body-container" data-o006-id="O006-PSU-010-U0117">
+<p data-o006-id="O006-PSU-010-U0118"><strong>Perhatikan!</strong><br/>
+Galat tipe I juga dapat dipandang sebagai kejadian ketika kita menolak hipotesis nol DENGAN SYARAT hipotesis nol benar. Dengan kata lain, galat tipe I adalah kejadian bersyarat dan <span class="math inline" data-o006-math-id="O006-PSU-010-M0026">\(\alpha\)</span> adalah peluang bersyarat. Gagasan yang sama berlaku untuk galat tipe II dan <span class="math inline" data-o006-math-id="O006-PSU-010-M0027">\(\beta\)</span>.</p>
+</div>
+</div>
+</div>
+<div class="theorem example" data-o006-id="O006-PSU-010-U0119" id="exm-errorshyptest">
+<p data-o006-id="O006-PSU-010-U0120"><span class="theorem-title"><strong>Contoh 9.2</strong></span> Seorang pria, Tn. Orangejuice, diadili atas tuduhan membunuh mantan istrinya. Ia bersalah atau tidak bersalah. Sebelumnya kita telah memperoleh bahwa…</p>
+<p data-o006-id="O006-PSU-010-U0121"><span class="math display" data-o006-math-id="O006-PSU-010-M0028">\[\begin{align}
+H_0&amp;\colon\text{ Mr. Orangejuice is innocent}\\
+H_a&amp;\colon\text{ Mr. Orangejuice is guilty}
+\end{align}\]</span></p>
+<p data-o006-id="O006-PSU-010-U0122">Tafsirkan galat tipe I, galat tipe II, <span class="math inline" data-o006-math-id="O006-PSU-010-M0029">\(\alpha\)</span>, dan <span class="math inline" data-o006-math-id="O006-PSU-010-M0030">\(\beta\)</span>.</p>
+<section class="level4 card card-body bg-light ms-3 mb-3 pt-0" data-o006-id="O006-PSU-010-U0123" id="solution-1">
+<h4 class="anchored" data-anchor-id="solution-1" data-o006-id="O006-PSU-010-U0124">Solusi</h4>
+<p data-o006-id="O006-PSU-010-U0125"><strong>Galat Tipe I</strong>:</p>
+<p data-o006-id="O006-PSU-010-U0126">Galat tipe I terjadi jika kita menolak <span class="math inline" data-o006-math-id="O006-PSU-010-M0031">\(H_0\)</span> ketika hipotesis tersebut benar. Dengan kata lain, ketika pria itu tidak bersalah tetapi dinyatakan bersalah.</p>
+<p data-o006-id="O006-PSU-010-U0127"><strong>Galat Tipe II</strong>:</p>
+<p data-o006-id="O006-PSU-010-U0128">Galat tipe II terjadi jika kita gagal menolak <span class="math inline" data-o006-math-id="O006-PSU-010-M0032">\(H_0\)</span> ketika hipotesis tersebut salah. Dengan kata lain, ketika pria itu bersalah tetapi dinyatakan tidak bersalah.</p>
+<p data-o006-id="O006-PSU-010-U0129"><span class="math inline" data-o006-math-id="O006-PSU-010-M0033">\(\alpha\)</span>:</p>
+<p data-o006-id="O006-PSU-010-U0130">peluang terjadinya galat tipe I, atau dengan kata lain, peluang bahwa Tn. Orangejuice tidak bersalah tetapi dinyatakan bersalah.</p>
+<p data-o006-id="O006-PSU-010-U0131"><span class="math inline" data-o006-math-id="O006-PSU-010-M0034">\(\beta\)</span>:</p>
+<p data-o006-id="O006-PSU-010-U0132">peluang terjadinya galat tipe II, atau dengan kata lain, peluang bahwa Tn. Orangejuice bersalah tetapi dinyatakan tidak bersalah.</p>
+</section>
+<p data-o006-id="O006-PSU-010-U0133">Seperti yang terlihat di sini, galat tipe I (memasukkan orang yang tidak bersalah ke penjara) merupakan galat yang lebih serius. Dari segi etika, memasukkan orang yang tidak bersalah ke penjara lebih serius daripada membiarkan orang yang bersalah bebas. Jadi, untuk memperkecil peluang galat tipe I, kita akan memilih tingkat signifikansi yang lebih kecil.</p>
+</div>
+<section class="level3 unnumbered" data-o006-id="O006-PSU-010-U0134" id="try-it">
+<h3 class="unnumbered anchored" data-anchor-id="try-it" data-o006-id="O006-PSU-010-U0135"><i class="bi bi-question-octagon-fill text-warning"></i> Cobalah!</h3>
+<div class="tryit" data-o006-id="O006-PSU-010-U0136">
+<p data-o006-id="O006-PSU-010-U0137">Seorang pemeriksa harus memilih antara menyatakan bahwa sebuah bangunan aman atau menyatakan bahwa bangunan tersebut tidak aman. Ada dua hipotesis:</p>
+<ol data-o006-id="O006-PSU-010-U0138" type="1">
+<li data-o006-id="O006-PSU-010-U0139">Bangunan tidak aman</li>
+<li data-o006-id="O006-PSU-010-U0140">Bangunan aman</li>
+</ol>
+<p data-o006-id="O006-PSU-010-U0141">Rumuskan hipotesis nol dan hipotesis alternatif. Tafsirkan galat tipe I dan galat tipe II.</p>
+<button aria-controls="collapseExample" aria-expanded="false" class="btn btn-outline-success collapsed" data-o006-id="O006-PSU-010-U0142" type="button">
+    Jawaban
+</button>
+<div class="collapse" data-o006-id="O006-PSU-010-U0143" id="collapseExample">
+<div class="card" data-o006-id="O006-PSU-010-U0144">
+<div class="card-body bg-light ms-0 mb-0 pt-2" data-o006-id="O006-PSU-010-U0145">
+<p data-o006-id="O006-PSU-010-U0146"><strong>Solusi</strong></p>
+<div class="table-responsive" data-o006-id="O006-PSU-010-U0147">
+<table aria-describedby="o006-psu-010-table-3-caption" class="w-auto table-sm mx-auto table-bordered small caption-top table" data-o006-id="O006-PSU-010-U0148"><caption data-o006-correction-id="O006-PSU-ADV-0168" id="o006-psu-010-table-3-caption">Keputusan uji keselamatan bangunan menurut keadaan sebenarnya.</caption>
+<colgroup>
+<col style="width: 33%"/>
+<col style="width: 40%"/>
+<col style="width: 26%"/>
+</colgroup>
+<thead data-o006-id="O006-PSU-010-U0149">
+<tr class="header" data-o006-id="O006-PSU-010-U0150">
+<th aria-label="Keputusan pengujian" data-o006-id="O006-PSU-010-U0151" id="o006-psu-010-table-3-column-1" scope="col" style="text-align: center;"></th>
+<th data-o006-id="O006-PSU-010-U0152" id="o006-psu-010-table-3-column-2" scope="col" style="text-align: center;"><span class="math inline" data-o006-math-id="O006-PSU-010-M0035">\(H_0\)</span> benar</th>
+<th data-o006-id="O006-PSU-010-U0153" id="o006-psu-010-table-3-column-3" scope="col" style="text-align: center;"><span class="math inline" data-o006-math-id="O006-PSU-010-M0036">\(H_0\)</span> salah</th>
+</tr>
+</thead>
+<tbody data-o006-id="O006-PSU-010-U0154">
+<tr class="odd" data-o006-id="O006-PSU-010-U0155">
+<th data-o006-id="O006-PSU-010-U0156" id="o006-psu-010-table-3-row-1" scope="row" style="text-align: center;"><strong>Menolak</strong> <span class="math inline" data-o006-math-id="O006-PSU-010-M0037">\(H_0\)</span> <strong>(Menyimpulkan</strong> <span class="math inline" data-o006-math-id="O006-PSU-010-M0038">\(H_a\)</span><strong>)</strong></th>
+<td data-o006-id="O006-PSU-010-U0157" headers="o006-psu-010-table-3-row-1 o006-psu-010-table-3-column-2" style="text-align: center;">Menolak “Bangunan tidak aman” ketika bangunan itu aman. (<em>Galat Tipe I</em>)</td>
+<td data-o006-id="O006-PSU-010-U0158" headers="o006-psu-010-table-3-row-1 o006-psu-010-table-3-column-3" style="text-align: center;">Keputusan yang benar</td>
+</tr>
+<tr class="even" data-o006-id="O006-PSU-010-U0159">
+<th data-o006-id="O006-PSU-010-U0160" id="o006-psu-010-table-3-row-2" scope="row" style="text-align: center;"><strong>Gagal Menolak</strong> <span class="math inline" data-o006-math-id="O006-PSU-010-M0039">\(H_0\)</span></th>
+<td data-o006-id="O006-PSU-010-U0161" headers="o006-psu-010-table-3-row-2 o006-psu-010-table-3-column-2" style="text-align: center;">Keputusan yang Benar</td>
+<td data-o006-id="O006-PSU-010-U0162" headers="o006-psu-010-table-3-row-2 o006-psu-010-table-3-column-3" style="text-align: center;">Gagal menolak “bangunan tidak aman” ketika bangunan itu tidak aman (<em>Galat Tipe II</em>)</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p data-o006-id="O006-PSU-010-U0163">Kuasa uji dan <span class="math inline" data-o006-math-id="O006-PSU-010-M0040">\(\beta\)</span> merupakan komplemen satu sama lain. Oleh karena itu, keduanya berhubungan terbalik, yaitu ketika yang satu meningkat, yang lain menurun.</p>
+<p data-o006-id="O006-PSU-010-U0164">Masuk akal bagi kita untuk menetapkan <span class="math inline" data-o006-math-id="O006-PSU-010-M0041">\(H_0\)</span> dan <span class="math inline" data-o006-math-id="O006-PSU-010-M0042">\(H_a\)</span> seperti di atas (yaitu, menganggap bangunan tidak aman sampai terbukti sebaliknya), karena jika kita menukar <span class="math inline" data-o006-math-id="O006-PSU-010-M0043">\(H_0\)</span> dan <span class="math inline" data-o006-math-id="O006-PSU-010-M0044">\(H_a\)</span> (yaitu, jika <span class="math inline" data-o006-math-id="O006-PSU-010-M0045">\(H_0\)</span> menyatakan bahwa bangunan itu tidak aman) dan jika kita gagal menolak <span class="math inline" data-o006-math-id="O006-PSU-010-M0046">\(H_0\)</span>, kita tidak dapat begitu saja menyimpulkan bahwa bangunan itu aman (kita hanya dapat gagal menolak <span class="math inline" data-o006-math-id="O006-PSU-010-M0047">\(H_0\)</span>, kita tidak dapat menerima <span class="math inline" data-o006-math-id="O006-PSU-010-M0048">\(H_0\)</span>).</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section class="level3" data-number="9.1.4" data-o006-id="O006-PSU-010-U0165" id="steps-for-hypothesis-testing">
+<h3 class="anchored" data-anchor-id="steps-for-hypothesis-testing" data-number="9.1.4" data-o006-id="O006-PSU-010-U0166"><span class="header-section-number">9.1.4</span> Langkah-Langkah Pengujian Hipotesis</h3>
+<p data-o006-id="O006-PSU-010-U0167">Dalam statistika, hipotesis adalah pernyataan tentang suatu parameter populasi, dan pernyataan ini biasanya direpresentasikan oleh nilai numerik tertentu. Dalam menguji hipotesis, kita menggunakan metode dengan mengumpulkan data guna memperoleh bukti mengenai hipotesis tersebut.</p>
+<p data-o006-id="O006-PSU-010-U0168">Bagaimana kita memutuskan apakah akan menolak hipotesis nol?</p>
+<ol data-o006-id="O006-PSU-010-U0169" type="1">
+<li data-o006-id="O006-PSU-010-U0170">Jika data sampel konsisten dengan hipotesis nol, kita tidak menolaknya.</li>
+<li data-o006-id="O006-PSU-010-U0171">Jika data sampel tidak konsisten dengan hipotesis nol, tetapi konsisten dengan hipotesis alternatif, kita menolak hipotesis nol. Data itu memberikan bukti yang cukup untuk mendukung hipotesis alternatif, tetapi tidak membuktikannya benar karena galat tipe I tetap mungkin terjadi.</li>
+</ol>
+<section class="level4" data-o006-id="O006-PSU-010-U0172" id="six-steps-for-hypothesis-tests">
+<h4 class="anchored" data-anchor-id="six-steps-for-hypothesis-tests" data-o006-id="O006-PSU-010-U0173">Enam Langkah Uji Hipotesis</h4>
+<p data-o006-id="O006-PSU-010-U0174">Dalam pengujian hipotesis, ada langkah-langkah tertentu yang harus diikuti. Langkah-langkah tersebut dirangkum di bawah ini menjadi enam langkah untuk melakukan uji hipotesis.</p>
+<ol data-o006-id="O006-PSU-010-U0175" type="1">
+<li data-o006-id="O006-PSU-010-U0176"><p data-o006-id="O006-PSU-010-U0177"><strong>Rumuskan hipotesis dan periksa syarat-syaratnya:</strong> Setiap uji hipotesis mencakup dua hipotesis tentang populasi. Yang pertama adalah hipotesis nol, yang dilambangkan dengan <span class="math inline" data-o006-math-id="O006-PSU-010-M0049">\(H_0\)</span>, yaitu pernyataan mengenai suatu nilai parameter tertentu. Hipotesis ini dianggap benar sampai ada bukti yang menunjukkan sebaliknya. Hipotesis kedua disebut hipotesis alternatif, atau hipotesis penelitian, yang dilambangkan dengan <span class="math inline" data-o006-math-id="O006-PSU-010-M0050">\(H_a\)</span>. Hipotesis alternatif adalah pernyataan mengenai rentang nilai alternatif yang mungkin memuat nilai parameter. Kita juga harus memeriksa bahwa setiap syarat (asumsi) yang diperlukan untuk menjalankan uji telah terpenuhi, misalnya kenormalan data, kebebasan, serta banyaknya hasil sukses dan gagal.</p></li>
+<li data-o006-id="O006-PSU-010-U0178"><p data-o006-id="O006-PSU-010-U0179"><strong>Tentukan tingkat signifikansi,</strong> <span class="math inline" data-o006-math-id="O006-PSU-010-M0051">\(\alpha\)</span><strong>:</strong> Nilai ini digunakan sebagai batas peluang untuk mengambil keputusan mengenai hipotesis nol. Nilai alfa ini menyatakan peluang terjadinya keputusan keliru yang bersedia kita tanggung dalam pengujian ketika menolak hipotesis nol. Nilai <span class="math inline" data-o006-math-id="O006-PSU-010-M0052">\(\alpha\)</span> yang paling umum adalah 0.05 atau 5%. Pilihan lain yang populer adalah 0.01 (1%) dan 0.1 (10%).</p></li>
+<li data-o006-id="O006-PSU-010-U0180"><p data-o006-id="O006-PSU-010-U0181"><strong>Hitung statistik uji:</strong> Kumpulkan data sampel dan hitung statistik uji dengan membandingkan statistik sampel terhadap nilai parameter. Statistik uji dihitung dengan menganggap hipotesis nol benar serta memperhitungkan ukuran galat baku dan asumsi (syarat) yang berkaitan dengan distribusi penarikan sampel. Catatan: Kita perlu mengetahui distribusi statistik uji di bawah hipotesis nol.</p></li>
+<li data-o006-id="O006-PSU-010-U0182"><p data-o006-id="O006-PSU-010-U0183"><strong>Hitung nilai peluang (nilai-p), atau tentukan daerah penolakan:</strong> Nilai-p adalah peluang, di bawah hipotesis nol, memperoleh statistik uji yang sekurang-kurangnya sama ekstrem dengan nilai teramati. Dalam edisi ini, H₀ ditolak ketika nilai-p ≤ α. Daerah penolakan ditentukan dengan menggunakan alfa untuk mencari nilai kritis; daerah penolakan adalah wilayah yang sekurang-kurangnya sama ekstrem dengan batas kritis. Misalkan statistik uji kita dilambangkan dengan <span class="math inline" data-o006-math-id="O006-PSU-010-M0053">\(T^*\)</span>. Untuk menentukan daerah penolakan, dicari suatu nilai kritis, <span class="math inline" data-o006-math-id="O006-PSU-010-M0054">\(c\)</span>, yang berfungsi sebagai nilai batas. Sebagai contoh,</p>
+<p data-o006-id="O006-PSU-010-U0184">Jika <span class="math inline" data-o006-math-id="O006-PSU-010-M0055">\(|T^*|\ge c\)</span>, kita mengambil satu keputusan, yaitu menolak <span class="math inline" data-o006-math-id="O006-PSU-010-M0056">\(H_0\)</span></p>
+<p data-o006-id="O006-PSU-010-U0185">Jika <span class="math inline" data-o006-math-id="O006-PSU-010-M0057">\(|T^*|&lt;c\)</span>, kita mengambil keputusan lainnya, yaitu gagal menolak <span class="math inline" data-o006-math-id="O006-PSU-010-M0058">\(H_0\)</span>.</p><p class="target-only-correction decision-boundary-note" data-o006-correction-id="O006-PSU-ADV-0154" role="note">Konvensi batas edisi ini: tolak H₀ bila |T*| ≥ c dan gagal menolaknya bila |T*| &lt; c. Untuk hukum nol kontinu yang sesuai, kejadian |T*| = c biasanya berpeluang nol. Pada uji diskret bertaraf eksak, tindakan pada himpunan kesamaan harus ditetapkan secara deterministik atau diacak agar ukuran yang diminta tercapai.</p>
+<p data-o006-id="O006-PSU-010-U0186">Nilai batas, <span class="math inline" data-o006-math-id="O006-PSU-010-M0059">\(c\)</span>, ditentukan oleh tingkat pengujian, <span class="math inline" data-o006-math-id="O006-PSU-010-M0060">\(\alpha\)</span>.</p>
+<p data-o006-id="O006-PSU-010-U0187">Nilai-p dan daerah penolakan akan kita bahas secara lebih terperinci pada bagian-bagian berikutnya.</p></li>
+<li data-o006-id="O006-PSU-010-U0188"><p data-o006-id="O006-PSU-010-U0189"><strong>Ambil keputusan mengenai hipotesis nol:</strong> Pada langkah ini, kita memutuskan untuk menolak hipotesis nol atau gagal menolak hipotesis nol. Perhatikan bahwa kita tidak mengambil keputusan untuk menerima hipotesis nol.</p></li>
+<li data-o006-id="O006-PSU-010-U0190"><p data-o006-id="O006-PSU-010-U0191"><strong>Nyatakan kesimpulan keseluruhan:</strong> Setelah memperoleh nilai-p atau daerah penolakan dan mengambil keputusan statistika mengenai hipotesis nol (yaitu menolak atau gagal menolak hipotesis nol), kita merangkum hasil tersebut menjadi kesimpulan keseluruhan dari pengujian.</p></li>
+</ol>
+<p data-o006-id="O006-PSU-010-U0192">Sepanjang bagian selanjutnya dari pelajaran ini, kita akan mengikuti keenam langkah tersebut, meskipun langkah-langkahnya mungkin tidak dijelaskan secara eksplisit.</p>
+<p data-o006-id="O006-PSU-010-U0193">Langkah 1 sangat penting untuk dirumuskan dengan benar. Jika hipotesis Anda keliru, kesimpulan Anda juga akan keliru. Pada bagian-bagian berikutnya, kita akan terus berlatih menerapkan Langkah 1.</p>
+</section>
+</section>
+</section>
+<section class="level2 page-columns page-full" data-number="9.2" data-o006-id="O006-PSU-010-U0194" id="tests-about-proportions">
+<h2 class="anchored" data-anchor-id="tests-about-proportions" data-number="9.2" data-o006-id="O006-PSU-010-U0195"><span class="header-section-number">9.2</span> Uji Proporsi</h2>
+<p data-o006-id="O006-PSU-010-U0196">Setiap kali melakukan uji hipotesis, kita akan mengikuti prosedur dasar berikut:</p>
+<ol data-o006-id="O006-PSU-010-U0197" type="1">
+<li data-o006-id="O006-PSU-010-U0198">Kita akan membuat asumsi awal mengenai parameter populasi.</li>
+<li data-o006-id="O006-PSU-010-U0199">Kita akan mengumpulkan bukti atau menggunakan bukti yang dikumpulkan orang lain (dalam kedua kasus, bukti tersebut berbentuk data).</li>
+<li data-o006-id="O006-PSU-010-U0200">Berdasarkan bukti (data) yang tersedia, kita akan memutuskan apakah akan “menolak” atau “gagal menolak” asumsi awal.</li>
+</ol>
+<p data-o006-id="O006-PSU-010-U0201">Mari kita buat prosedur yang telah diuraikan ini menjadi lebih konkret dengan mengkaji uji untuk satu proporsi. Setelah itu, kita akan menguraikan beberapa uji statistika umum lainnya.</p>
+<p data-o006-id="O006-PSU-010-U0202">Mari kita perhatikan contoh berikut.</p>
+<div class="theorem example" data-o006-id="O006-PSU-010-U0203" id="exm-dietossed">
+<p data-o006-id="O006-PSU-010-U0204"><span class="theorem-title"><strong>Contoh 9.3</strong></span> Sebuah dadu bersisi empat (berbentuk tetrahedron) dilempar 1000 kali, dan sisi empat muncul 290 kali. Apakah terdapat bukti untuk menyimpulkan bahwa dadu tersebut tidak seimbang, yaitu bahwa sisi empat muncul lebih sering daripada yang diharapkan?</p>
+</div>
+<div class="no-row-height column-margin column-container" data-o006-id="O006-PSU-010-U0205"><div class="margin-aside" data-o006-id="O006-PSU-010-U0206">
+<p data-o006-id="O006-PSU-010-U0207" role="group"><img alt="Foto dadu tetrahedral bersisi empat yang tembus cahaya; sisi bernomor 2 dan 4 tampak. Dadu ini mengilustrasikan percobaan pada Contoh 9.3." aria-describedby="o006-psu-010-a0001-caption-id" class="img-fluid" data-o006-asset-id="O006-PSU-010-A0001" data-o006-id="O006-PSU-010-U0208" src="assets/lesson09/assets/tetra_die.png"/><span class="figure-caption d-block" data-o006-correction-id="O006-PSU-ADV-0166" id="o006-psu-010-a0001-caption-id">Dadu tetrahedral bersisi empat pada Contoh 9.3; setiap lemparan menghasilkan salah satu dari empat sisi.</span></p>
+</div></div><section class="level4 card card-body bg-light ms-3 mb-3 pt-0" data-o006-id="O006-PSU-010-U0209" id="solution-2">
+<h4 class="anchored" data-anchor-id="solution-2" data-o006-id="O006-PSU-010-U0210">Solusi</h4>
+<p data-o006-id="O006-PSU-010-U0211">Sebagaimana diuraikan dalam prosedur dasar pengujian hipotesis di atas, langkah pertama mencakup pernyataan asumsi awal dan penentuan parameter yang menjadi perhatian. Parameter yang menjadi perhatian di sini adalah <span class="math inline" data-o006-math-id="O006-PSU-010-M0061">\(p\)</span>, peluang memperoleh angka 4. Asumsinya adalah bahwa dadu itu seimbang. Jika dadu itu seimbang, setiap sisi (1, 2, 3, dan 4) memiliki peluang yang sama. Jadi, kita akan menganggap bahwa <span class="math inline" data-o006-math-id="O006-PSU-010-M0062">\(p\)</span>, peluang memperoleh angka 4, adalah 0.25.</p>
+<p data-o006-id="O006-PSU-010-U0212">Oleh karena itu, hipotesis nol, atau “status quo”, menyatakan bahwa parameter populasi <span class="math inline" data-o006-math-id="O006-PSU-010-M0063">\(p\)</span> sama dengan 0.25. Secara simbolis: <span class="math display" data-o006-math-id="O006-PSU-010-M0064">\[H_0:p=0.25\]</span></p>
+<p data-o006-id="O006-PSU-010-U0213">Dalam informasi yang diberikan, dipertanyakan apakah angka empat muncul lebih sering daripada yang diharapkan. Oleh karena itu, hipotesis alternatifnya adalah:</p>
+<p data-o006-id="O006-PSU-010-U0214"><span class="math display" data-o006-math-id="O006-PSU-010-M0065">\[H_a:p&gt;0.25\]</span></p>
+<p data-o006-id="O006-PSU-010-U0215">Langkah kedua adalah menentukan tingkat signifikansi, <span class="math inline" data-o006-math-id="O006-PSU-010-M0066">\(\alpha\)</span>. Pada umumnya, tingkat signifikansi yang paling sering digunakan adalah <span class="math inline" data-o006-math-id="O006-PSU-010-M0067">\(\alpha=0.05\)</span>. Oleh karena itu, mari kita pilih <span class="math inline" data-o006-math-id="O006-PSU-010-M0068">\(P(\text{Type I error})=\alpha=0.05\)</span>. Dengan demikian, peluang kita menolak hipotesis nol dengan syarat hipotesis nol benar adalah 5%.</p>
+<p data-o006-id="O006-PSU-010-U0216">Sekarang, langkah berikutnya menyatakan bahwa kita perlu mengumpulkan bukti (data) yang mendukung atau menentang asumsi awal. Dalam kasus ini, hal tersebut sudah dilakukan. Kita diberi tahu bahwa dadu dilempar <span class="math inline" data-o006-math-id="O006-PSU-010-M0069">\(n=1000\)</span> kali, dan tercatat <span class="math inline" data-o006-math-id="O006-PSU-010-M0070">\(y=290\)</span> untuk banyaknya kemunculan angka empat. Kita dapat menggunakan proporsi sampel untuk menduga parameter populasi. Dengan demikian, kita memperoleh:</p>
+<p data-o006-id="O006-PSU-010-U0217"><span class="math display" data-o006-math-id="O006-PSU-010-M0071">\[\hat{p}=\frac{y}{n}=\frac{290}{1000}=0.29\]</span></p>
+<p data-o006-id="O006-PSU-010-U0218">Sekarang kita hanya perlu menyelesaikan langkah ketiga, yaitu memutuskan apakah akan menolak asumsi awal bahwa proporsi populasi adalah 0.25. Kita perlu menggunakan perangkat yang sejauh ini telah kita kembangkan dalam mata kuliah ini dan STAT 414. Ingat bahwa Teorema Limit Pusat menyatakan bahwa proporsi sampel:</p>
+<p data-o006-id="O006-PSU-010-U0219"><span class="math display" data-o006-math-id="O006-PSU-010-M0072">\[\hat{p}=\frac{Y}{n}\]</span></p>
+<p data-o006-id="O006-PSU-010-U0220">berdistribusi Normal secara hampiran dengan rataan (yang diasumsikan)</p>
+<p data-o006-id="O006-PSU-010-U0221"><span class="math display" data-o006-math-id="O006-PSU-010-M0073">\[p_0=0.25\]</span> dan simpangan baku (yang diasumsikan):</p>
+<p data-o006-id="O006-PSU-010-U0222"><span class="math display" data-o006-math-id="O006-PSU-010-M0074">\[\sqrt{\frac{p_0(1-p_0)}{n}}=\sqrt{\frac{0.25(1-0.25)}{1000}}=0.01369\]</span></p>
+<p data-o006-id="O006-PSU-010-U0223">Artinya:</p>
+<p data-o006-id="O006-PSU-010-U0224"><span class="math display" data-o006-math-id="O006-PSU-010-M0075">\[Z=\dfrac{\hat{p}-p_0}{\sqrt{\dfrac{p_0(1-p_0)}{n}}}\]</span></p>
+<p data-o006-id="O006-PSU-010-U0225">mengikuti hukum <span class="math inline" data-o006-math-id="O006-PSU-010-M0076">\(N(0, 1)\)</span> yang merupakan distribusi Normal baku. Kita dapat “memetakan” proporsi sampel teramati sebesar 0.29 ke skala <span class="math inline" data-o006-math-id="O006-PSU-010-M0077">\(Z\)</span> berikut. Gambar berikut merangkum situasinya:</p>
+<div class="quarto-float quarto-figure quarto-figure-center anchored" data-o006-id="O006-PSU-010-U0226" id="fig-normalwithz1">
+<figure class="quarto-float quarto-float-fig figure" data-o006-id="O006-PSU-010-U0227">
+<div aria-describedby="fig-normalwithz1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca" data-o006-id="O006-PSU-010-U0228">
+<div class="cell" data-lightbox="true" data-o006-id="O006-PSU-010-U0229">
+<div class="cell-output-display" data-o006-id="O006-PSU-010-U0230">
+<div data-o006-id="O006-PSU-010-U0231">
+<figure class="figure" data-o006-id="O006-PSU-010-U0232">
+<p data-o006-id="O006-PSU-010-U0233"><img alt="Kurva Normal bagi distribusi penarikan sampel p-hat di bawah H₀: p = 0,25; garis batas berada di p-hat = 0,29 dan ekor kanan memuat hasil yang sekurang-kurangnya sama ekstrem dengan pengamatan." aria-describedby="fig-normalwithz1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca" class="img-fluid figure-img" data-o006-asset-id="O006-PSU-010-A0002" data-o006-id="O006-PSU-010-U0234" src="assets/lesson09/Lesson09_files/figure-html/unnamed-chunk-1-1.png"/></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" data-o006-correction-id="O006-PSU-ADV-0166" data-o006-id="O006-PSU-010-U0235" id="fig-normalwithz1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">Gambar 9.1 — Distribusi Normal hampiran bagi p-hat ketika H₀: p = 0,25; luas ekor kanan mulai 0,29 adalah peluang memperoleh hasil yang sekurang-kurangnya sama ekstrem dengan hasil teramati.</figcaption>
+</figure><p class="target-only-correction reproducibility-note" data-o006-correction-id="O006-PSU-ADV-0170" data-o006-related-asset-id="O006-PSU-010-A0002" role="note">Catatan reprodusibilitas: gambar ini adalah keluaran beku dari sumber resmi. Sumber tidak memublikasikan kode pembangkit, data masukan, kunci lingkungan, atau keadaan acak; karena itu yang dapat diverifikasi secara deterministik di sini hanyalah bita keluaran gambar, bukan regenerasi plot dari sumber.</p>
+</div>
+<p data-o006-id="O006-PSU-010-U0236">Jadi, kita menganggap proporsi populasi adalah 0.25, tetapi kita mengamati proporsi sampel sebesar 0.290 yang terletak jauh di ekor kanan distribusi Normal. Memperoleh proporsi sampel 0.29 jelas bukan hal yang mustahil. Namun, kita tetap harus memutuskan apakah proporsi sampel 0.290 lebih ekstrem daripada yang diharapkan jika proporsi populasi <span class="math inline" data-o006-math-id="O006-PSU-010-M0078">\(p\)</span> memang sama dengan 0.25.</p>
+<p data-o006-id="O006-PSU-010-U0237">Langkah berikutnya adalah menentukan cara mengambil keputusan. Ada dua pendekatan untuk mengambil keputusan dalam pengujian hipotesis:</p>
+<ol data-o006-id="O006-PSU-010-U0238" type="1">
+<li data-o006-id="O006-PSU-010-U0239">Salah satunya disebut pendekatan <strong>“daerah penolakan”</strong> (atau “nilai kritis” atau “daerah kritis”).</li>
+<li data-o006-id="O006-PSU-010-U0240">Pendekatan lainnya menggunakan <strong>“nilai-p”</strong> sebagai dasar pengambilan keputusan.</li>
+</ol>
+<p data-o006-id="O006-PSU-010-U0241">Pertama, mari kita perhatikan pendekatan daerah penolakan.</p>
+<p data-o006-id="O006-PSU-010-U0242">Baiklah, sekarang mari kita pikirkan. Kita mungkin tidak akan menolak asumsi awal bahwa proporsi populasi <span class="math inline" data-o006-math-id="O006-PSU-010-M0079">\(p=0.25\)</span> jika proporsi sampel teramati sebesar 0.255. Kita mungkin juga masih belum cenderung menolak asumsi awal bahwa proporsi populasi <span class="math inline" data-o006-math-id="O006-PSU-010-M0080">\(p=0.25\)</span> jika proporsi sampel teramati sebesar 0.27. Di sisi lain, kita hampir pasti ingin menolak asumsi awal bahwa proporsi populasi <span class="math inline" data-o006-math-id="O006-PSU-010-M0081">\(p=0.25\)</span> jika proporsi sampel teramati sebesar 0.35. Ini menunjukkan adanya suatu nilai “ambang” yang, setelah “dilampaui”, membuat kita cenderung menolak asumsi awal. Singkatnya, itulah pendekatan nilai kritis. Pendekatan ini menetapkan nilai ambang yang disebut “nilai kritis”, sehingga jika “statistik uji” lebih ekstrem daripada nilai kritis, kita menolak hipotesis nol.</p>
+<p data-o006-id="O006-PSU-010-U0243">Ingatlah bahwa kita menetapkan tingkat signifikansi, <span class="math inline" data-o006-math-id="O006-PSU-010-M0082">\(\alpha\)</span>, sebesar 5%. Karena kita menggunakan distribusi Normal baku, kita akan mencari nilai <span class="math inline" data-o006-math-id="O006-PSU-010-M0083">\(Z\)</span> yang lebih besar daripada 1.645. Dengan kata lain, kita memutuskan untuk menolak hipotesis nol <span class="math inline" data-o006-math-id="O006-PSU-010-M0084">\(H_0:p=0.25\)</span> demi mendukung “hipotesis alternatif” <span class="math inline" data-o006-math-id="O006-PSU-010-M0085">\(H_a:p&gt;0.25\)</span> jika:</p>
+<p data-o006-id="O006-PSU-010-U0244"><span class="math display" data-o006-math-id="O006-PSU-010-M0086">\[Z&gt;1.645\Longleftrightarrow \hat{p}&gt;0.272525\ldots\Longleftrightarrow Y\ge273\Longleftrightarrow \hat{p}\ge0.273\]</span></p>
+<p data-o006-id="O006-PSU-010-U0245">Berikut gambar dari <strong>“daerah penolakan”</strong> semacam itu (atau <strong>“daerah kritis”</strong>):</p>
+<div class="quarto-float quarto-figure quarto-figure-center anchored" data-o006-id="O006-PSU-010-U0246" id="fig-normalwithrejregion">
+<figure class="quarto-float quarto-float-fig figure" data-o006-id="O006-PSU-010-U0247">
+<div aria-describedby="fig-normalwithrejregion-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca" data-o006-id="O006-PSU-010-U0248">
+<div class="cell" data-lightbox="true" data-o006-id="O006-PSU-010-U0249">
+<div class="cell-output-display" data-o006-id="O006-PSU-010-U0250">
+<div data-o006-id="O006-PSU-010-U0251">
+<figure class="figure" data-o006-id="O006-PSU-010-U0252">
+<p data-o006-id="O006-PSU-010-U0253"><img alt="Kurva Normal hampiran bagi p-hat di bawah H₀: p = 0,25; batas penolakan diskret berada di p-hat = 0,273 dan ekor kanan adalah daerah penolakan hampiran bertaraf 0,05." aria-describedby="fig-normalwithrejregion-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca" class="img-fluid figure-img" data-o006-asset-id="O006-PSU-010-A0003" data-o006-id="O006-PSU-010-U0254" src="assets/lesson09/Lesson09_files/figure-html/unnamed-chunk-2-1.png"/></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" data-o006-correction-id="O006-PSU-ADV-0166" data-o006-id="O006-PSU-010-U0255" id="fig-normalwithrejregion-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">Gambar 9.2 — Daerah penolakan ekor kanan mulai p-hat = 0,273 untuk uji proporsi; aturan diskretnya adalah menolak H₀ ketika Y ≥ 273.</figcaption>
+</figure><p class="target-only-correction reproducibility-note" data-o006-correction-id="O006-PSU-ADV-0170" data-o006-related-asset-id="O006-PSU-010-A0003" role="note">Catatan reprodusibilitas: gambar ini adalah keluaran beku dari sumber resmi. Sumber tidak memublikasikan kode pembangkit, data masukan, kunci lingkungan, atau keadaan acak; karena itu yang dapat diverifikasi secara deterministik di sini hanyalah bita keluaran gambar, bukan regenerasi plot dari sumber.</p>
+</div>
+<p data-o006-id="O006-PSU-010-U0256">Dengan hampiran Normal yang digunakan di sini, ‘ukuran’ daerah kritis sekitar 0,05, bukan tepat 0,05. Untuk aturan diskret Y ≥ 273, ukuran Binomial eksaknya 0,0511947; tingkat eksak 0,05 memerlukan pengacakan pada Y = 273. Hal ini akan berkaitan dengan peluang galat yang dibahas di bawah.</p>
+<p data-o006-id="O006-PSU-010-U0257">Bagaimanapun, mari kembali memutuskan apakah proporsi sampel khusus kita tampak terlalu ekstrem. Tampaknya kita harus menolak hipotesis nol (asumsi awal kita bahwa <span class="math inline" data-o006-math-id="O006-PSU-010-M0087">\(p=0.25\)</span>) karena:</p>
+<p data-o006-id="O006-PSU-010-U0258"><span class="math display" data-o006-math-id="O006-PSU-010-M0088">\[\hat{p}=0.29&gt;0.273\]</span></p>
+<p data-o006-id="O006-PSU-010-U0259">atau, secara ekuivalen, karena statistik uji kita:</p>
+<p data-o006-id="O006-PSU-010-U0260"><span class="math display" data-o006-math-id="O006-PSU-010-M0089">\[Z=\dfrac{\hat{p}-p_0}{\sqrt{\dfrac{p_0(1-p_0)}{n}}}=\dfrac{0.29-0.25}{\sqrt{\dfrac{0.25(0.75)}{1000}}}=2.92\]</span></p>
+<p data-o006-id="O006-PSU-010-U0261">lebih besar daripada 1.645.</p>
+<p data-o006-id="O006-PSU-010-U0262"><strong>Kesimpulan kita</strong>: kita menyatakan bahwa terdapat bukti yang cukup untuk menyimpulkan <span class="math inline" data-o006-math-id="O006-PSU-010-M0090">\(H_a:p&gt;0.25\)</span>, yaitu bahwa dadu tersebut tidak seimbang.</p>
+<p data-o006-id="O006-PSU-010-U0263">Sebagai tambahan, contoh ini melibatkan apa yang disebut <strong>uji satu sisi</strong>, atau lebih khusus lagi, <strong>uji sisi kanan</strong>, karena daerah kritis hanya terletak di salah satu dari dua ekor distribusi Normal, yaitu ekor kanan.</p>
+</section>
+<p data-o006-id="O006-PSU-010-U0264">Sebelum melanjutkan ke halaman berikutnya dan melihat dua contoh lain, mari kita tinjau kembali prosedur dasar pengujian hipotesis yang diuraikan di atas. Kali ini, mari kita nyatakan prosedur tersebut dalam konteks <strong>melakukan uji hipotesis untuk proporsi populasi</strong> dengan menggunakan <strong>pendekatan nilai kritis</strong>. Prosedur dasarnya adalah:</p>
+<ol data-o006-id="O006-PSU-010-U0265" type="1">
+<li data-o006-id="O006-PSU-010-U0266">Nyatakan hipotesis nol <span class="math inline" data-o006-math-id="O006-PSU-010-M0091">\(H_0\)</span> dan hipotesis alternatif <span class="math inline" data-o006-math-id="O006-PSU-010-M0092">\(H_a\)</span>.</li>
+<li data-o006-id="O006-PSU-010-U0267">Hitung statistik uji (yang diperoleh dengan menggunakan distribusi statistik uji di bawah hipotesis nol):</li>
+</ol>
+<p data-o006-id="O006-PSU-010-U0268"><span class="math display" data-o006-math-id="O006-PSU-010-M0093">\[\begin{align*}
+  Z=\dfrac{\hat{p}-p_0}{\sqrt{\dfrac{p_0(1-p_0)}{n}}}
+\end{align*}\]</span></p>
+<ol data-o006-id="O006-PSU-010-U0269" start="3" type="1">
+<li data-o006-id="O006-PSU-010-U0270">Tentukan <strong>daerah penolakan</strong>.</li>
+<li data-o006-id="O006-PSU-010-U0271"><strong>Ambil keputusan.</strong> Tentukan apakah statistik uji berada di daerah kritis. Jika ya, tolak hipotesis nol. Jika tidak, kita gagal menolak hipotesis nol.</li>
+</ol>
+<p data-o006-id="O006-PSU-010-U0272">Sekarang, mari kembali membahas kemungkinan galat yang dapat kita lakukan ketika menjalankan uji hipotesis semacam itu.</p>
+</section>
+<section class="level2" data-number="9.3" data-o006-id="O006-PSU-010-U0273" id="possible-errors">
+<h2 class="anchored" data-anchor-id="possible-errors" data-number="9.3" data-o006-id="O006-PSU-010-U0274"><span class="header-section-number">9.3</span> Kemungkinan Galat</h2>
+<p data-o006-id="O006-PSU-010-U0275">Aduh! Setiap kali melakukan uji hipotesis, kita berpeluang melakukan galat. (Astaga, mengapa saya tidak memilih profesi lain?!)</p>
+<ol data-o006-id="O006-PSU-010-U0276" type="1">
+<li data-o006-id="O006-PSU-010-U0277"><p data-o006-id="O006-PSU-010-U0278">Jika kita menolak hipotesis nol <span class="math inline" data-o006-math-id="O006-PSU-010-M0094">\(H_0\)</span> (demi mendukung hipotesis alternatif) ketika hipotesis nol sebenarnya benar, kita dikatakan telah melakukan <strong>galat tipe I</strong>. Untuk contoh di atas, kita menetapkan P(galat tipe I) sama dengan 0.05:</p>
+<div alt="Normal curve with center at 0.25 showing right tail critical area for alpha of .05." class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center" data-o006-id="O006-PSU-010-U0279" id="fig-rttailcritical1645">
+<figure class="quarto-float quarto-float-fig figure" data-o006-id="O006-PSU-010-U0280">
+<div aria-describedby="fig-rttailcritical1645-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca" data-o006-id="O006-PSU-010-U0281">
+<a class="lightbox" data-gallery="quarto-lightbox-gallery-1" data-o006-id="O006-PSU-010-U0282" href="assets/lesson09/assets/STAT-415-SEC-2-03.svg" title="Gambar 9.3 — Di bawah H₀: p = 0,25, batas Z = 1,645 atau p-hat = 0,273 memisahkan daerah gagal menolak dari daerah penolakan ekor kanan dengan α ≈ 0,05."><img alt="Kurva Normal berpusat di p = 0,25 dengan batas p-hat = 0,273, yang setara dengan Z = 1,645; ekor kanan bertanda α = 0,05 adalah daerah penolakan H₀." aria-describedby="fig-rttailcritical1645-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca" class="w-50 img-fluid quarto-figure quarto-figure-center anchored figure-img" data-o006-asset-id="O006-PSU-010-A0004" data-o006-id="O006-PSU-010-U0283" data-o006-source-native-id="fig-rttailcritical1645" id="fig-rttailcritical1645-image" src="assets/lesson09/assets/STAT-415-SEC-2-03.svg"/></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" data-o006-correction-id="O006-PSU-ADV-0166" data-o006-id="O006-PSU-010-U0284" id="fig-rttailcritical1645-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">Gambar 9.3 — Di bawah H₀: p = 0,25, batas Z = 1,645 atau p-hat = 0,273 memisahkan daerah gagal menolak dari daerah penolakan ekor kanan dengan α ≈ 0,05.</figcaption>
+</figure>
+</div>
+<p data-o006-id="O006-PSU-010-U0285">Kita ingin memperkecil peluang melakukan galat tipe I! Secara umum, kita melambangkannya dengan <span class="math inline" data-o006-math-id="O006-PSU-010-M0095">\(\alpha=P({\text{Type I error}})=\text{ the significance level}\)</span>. Jelas, kita ingin memperkecil <span class="math inline" data-o006-math-id="O006-PSU-010-M0096">\(\alpha\)</span>. Oleh karena itu, nilai <span class="math inline" data-o006-math-id="O006-PSU-010-M0097">\(\alpha\)</span> yang umum adalah 0.01, 0.05, dan 0.10.</p></li>
+<li data-o006-id="O006-PSU-010-U0286"><p data-o006-id="O006-PSU-010-U0287">Jika kita gagal menolak hipotesis nol ketika hipotesis nol salah, kita dikatakan telah melakukan galat tipe II. Untuk contoh ini, misalkan (tanpa kita ketahui) proporsi populasi <span class="math inline" data-o006-math-id="O006-PSU-010-M0098">\(p\)</span> sebenarnya 0.27. Dalam hal ini, peluang galat tipe II adalah:</p>
+<p data-o006-id="O006-PSU-010-U0288"><span class="math display" data-o006-math-id="O006-PSU-010-M0099">\[\begin{aligned}\beta(0.27)&amp;=P_{p=0.27}(\hat{p}&lt;0.273)\\&amp;\approx P\!\left(Z&lt;\frac{0.273-0.27}{\sqrt{0.27(0.73)/1000}}\right)=P(Z&lt;0.214)\approx0.5847\end{aligned}\]</span></p>
+<p data-o006-id="O006-PSU-010-U0289">Secara umum, kita melambangkannya dengan <span class="math inline" data-o006-math-id="O006-PSU-010-M0100">\(\beta=P(\text{Type II error})\)</span>. Sama seperti kita ingin memperkecil <span class="math inline" data-o006-math-id="O006-PSU-010-M0101">\(\alpha=P(\text{Type I error})\)</span>, kita juga ingin memperkecil <span class="math inline" data-o006-math-id="O006-PSU-010-M0102">\(\beta=P(\text{Type II error})\)</span>. Nilai <span class="math inline" data-o006-math-id="O006-PSU-010-M0103">\(\beta\)</span> yang umum adalah 0.05, 0.10, dan 0.20.</p></li>
+</ol>
+</section>
+<section class="level2" data-number="9.4" data-o006-id="O006-PSU-010-U0290" id="the-p-value-approach">
+<h2 class="anchored" data-anchor-id="the-p-value-approach" data-number="9.4" data-o006-id="O006-PSU-010-U0291"><span class="header-section-number">9.4</span> Pendekatan Nilai-p</h2>
+<p data-o006-id="O006-PSU-010-U0292">Hingga saat ini, kita menggunakan pendekatan daerah kritis dalam melakukan uji hipotesis. Sekarang, mari kita lihat contoh yang menggunakan apa yang disebut <strong>pendekatan nilai-p</strong>.</p>
+<div class="theorem example" data-o006-id="O006-PSU-010-U0293" id="exm-lungcancer">
+<p data-o006-id="O006-PSU-010-U0294"><span class="theorem-title"><strong>Contoh 9.4 (Kanker Paru)</strong></span> <span class="lead">Bagian I</span><br/>
+Di antara pasien kanker paru, biasanya 90% atau lebih meninggal dalam waktu tiga tahun. Dengan adanya bentuk-bentuk pengobatan baru, angka ini diduga telah menurun. Misalkan dalam suatu studi terbaru terhadap n = 150 pasien kanker paru, y = 128 meninggal dalam waktu tiga tahun. Apakah, pada tingkat <span class="math inline" data-o006-math-id="O006-PSU-010-M0104">\(\alpha=0.05\)</span> , terdapat bukti yang cukup untuk menyimpulkan bahwa angka kematian akibat kanker paru telah menurun?</p>
+<section class="level4 card card-body bg-light ms-3 mb-3 pt-0" data-o006-id="O006-PSU-010-U0295" id="solution-3">
+<h4 class="anchored" data-anchor-id="solution-3" data-o006-id="O006-PSU-010-U0296">Solusi</h4>
+<p data-o006-id="O006-PSU-010-U0297">Proporsi sampelnya adalah:</p>
+<p data-o006-id="O006-PSU-010-U0298"><span class="math display" data-o006-math-id="O006-PSU-010-M0105">\[\begin{align*}
+  \hat{p}=\dfrac{128}{150}=0.853
+\end{align*}\]</span></p>
+<p data-o006-id="O006-PSU-010-U0299">Hipotesis nol dan hipotesis alternatif adalah: <span class="math display" data-o006-math-id="O006-PSU-010-M0106">\[\begin{align*}
+  H_0 \colon p = 0.90 \text { and } H_A: p&lt;0.9
+\end{align*}\]</span></p>
+<p data-o006-id="O006-PSU-010-U0300">Dengan demikian, statistik ujinya adalah: <span class="math display" data-o006-math-id="O006-PSU-010-M0107">\[\begin{align*}
+  Z=\dfrac{\hat{p}-p_0}{\sqrt{\dfrac{p_0(1-p_0)}{n}}}=\dfrac{0.853-0.90}{\sqrt{\dfrac{0.90(0.10)}{150}}}=-1.92
+\end{align*}\]</span></p>
+<p data-o006-id="O006-PSU-010-U0301">Daerah penolakannya adalah:</p>
+<p data-o006-id="O006-PSU-010-U0302" role="group"><img alt="Kurva Normal baku untuk uji ekor kiri: batas kritis Z = −1,645; luas ekor kiri α = 0,05 adalah daerah penolakan H₀." aria-describedby="o006-psu-010-a0005-caption-id" class="img-fluid" data-o006-asset-id="O006-PSU-010-A0005" data-o006-id="O006-PSU-010-U0303" src="assets/lesson09/assets/ht5.png"/><span class="figure-caption d-block" data-o006-correction-id="O006-PSU-ADV-0166" id="o006-psu-010-a0005-caption-id">Uji ekor kiri bertaraf 0,05: tolak H₀ bila Z ≤ −1,645; di sebelah kanan batas itu, gagal menolak H₀.</span></p>
+<p data-o006-id="O006-PSU-010-U0304">Karena statistik uji <span class="math inline" data-o006-math-id="O006-PSU-010-M0108">\(Z = −1.92 &lt; −1.645\)</span>, kita menolak hipotesis nol. Terdapat bukti yang cukup pada tingkat <span class="math inline" data-o006-math-id="O006-PSU-010-M0109">\(\alpha=0.05\)</span> untuk menyimpulkan bahwa angka kematian telah menurun.</p>
+</section>
+<p data-o006-id="O006-PSU-010-U0305"><span class="lead">Bagian II</span><br/>
+Bagaimana jika kita menetapkan tingkat signifikansi <span class="math inline" data-o006-math-id="O006-PSU-010-M0110">\(\alpha=P(\text{Type I error})=0.01\)</span>? Apakah masih terdapat bukti yang cukup untuk menyimpulkan bahwa angka kematian akibat kanker paru telah menurun?</p>
+<section class="level4 card card-body bg-light ms-3 mb-3 pt-0" data-o006-id="O006-PSU-010-U0306" id="solution-4">
+<h4 class="anchored" data-anchor-id="solution-4" data-o006-id="O006-PSU-010-U0307">Solusi</h4>
+<p data-o006-id="O006-PSU-010-U0308">Dalam kasus ini, dengan <span class="math inline" data-o006-math-id="O006-PSU-010-M0111">\(\alpha=0.01\)</span>, daerah penolakannya adalah <span class="math inline" data-o006-math-id="O006-PSU-010-M0112">\(Z ≤ −2.33\)</span>. Artinya, kita menolak jika statistik uji berada dalam daerah penolakan yang ditentukan oleh <span class="math inline" data-o006-math-id="O006-PSU-010-M0113">\(Z ≤ −2.33\)</span>:</p>
+<div alt="Normal curve with center at 0 showing left-tail critical area for alpha of 0.01." class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center" data-o006-id="O006-PSU-010-U0309" id="fig-ht6">
+<figure class="quarto-float quarto-float-fig figure" data-o006-id="O006-PSU-010-U0310">
+<div aria-describedby="fig-ht6-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca" data-o006-id="O006-PSU-010-U0311">
+<a class="lightbox" data-gallery="quarto-lightbox-gallery-2" data-o006-id="O006-PSU-010-U0312" href="assets/lesson09/assets/ht6.png" title="Gambar 9.4 — Pada taraf 0,01, tolak H₀ bila Z ≤ −2,33; nilai Z = −1,92 berada di luar daerah penolakan."><img alt="Kurva Normal baku untuk uji ekor kiri dengan batas kritis Z = −2,33; luas ekor kiri α = 0,01 adalah daerah penolakan H₀." aria-describedby="fig-ht6-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca" class="w-75 img-fluid quarto-figure quarto-figure-center anchored figure-img" data-o006-asset-id="O006-PSU-010-A0006" data-o006-id="O006-PSU-010-U0313" data-o006-source-native-id="fig-ht6" id="fig-ht6-image" src="assets/lesson09/assets/ht6.png"/></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" data-o006-correction-id="O006-PSU-ADV-0166" data-o006-id="O006-PSU-010-U0314" id="fig-ht6-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">Gambar 9.4 — Pada taraf 0,01, tolak H₀ bila Z ≤ −2,33; nilai Z = −1,92 berada di luar daerah penolakan.</figcaption>
+</figure>
+</div>
+<p data-o006-id="O006-PSU-010-U0315">Karena statistik uji <span class="math inline" data-o006-math-id="O006-PSU-010-M0114">\(Z = −1.92 &gt; −2.33\)</span>, kita gagal menolak hipotesis nol. Tidak terdapat bukti yang cukup pada tingkat <span class="math inline" data-o006-math-id="O006-PSU-010-M0115">\(\alpha=0.01\)</span> untuk menyimpulkan bahwa angka kematian telah menurun.</p>
+</section>
+<p data-o006-id="O006-PSU-010-U0316"><span class="lead">Bagian III</span><br/>
+Pada bagian pertama contoh ini, kita menolak hipotesis nol ketika <span class="math inline" data-o006-math-id="O006-PSU-010-M0116">\(\alpha=0.05\)</span>. Pada bagian kedua contoh ini, kita gagal menolak hipotesis nol ketika <span class="math inline" data-o006-math-id="O006-PSU-010-M0117">\(\alpha=0.01\)</span>. Jadi, pasti ada suatu tingkat <span class="math inline" data-o006-math-id="O006-PSU-010-M0118">\(\alpha\)</span>tempat kita melintasi ambang dari menolak menjadi tidak menolak hipotesis nol. Berapakah tingkat <span class="math inline" data-o006-math-id="O006-PSU-010-M0119">\(\alpha-\)</span>terkecil yang masih membuat kita menolak hipotesis nol?</p>
+<section class="level4 card card-body bg-light ms-3 mb-3 pt-0" data-o006-id="O006-PSU-010-U0317" id="solution-5">
+<h4 class="anchored" data-anchor-id="solution-5" data-o006-id="O006-PSU-010-U0318">Penyelesaian</h4>
+<p data-o006-id="O006-PSU-010-U0319">Tentu saja, kita akan menolak setiap kali nilai kritis lebih kecil daripada statistik uji kita, <span class="math inline" data-o006-math-id="O006-PSU-010-M0120">\(−1.92\)</span>:</p>
+<div alt="Normal curve with center at 0 showing left-tail critical area below the test statistic of -1.92." class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center" data-o006-id="O006-PSU-010-U0320" id="fig-ht7">
+<figure class="quarto-float quarto-float-fig figure" data-o006-id="O006-PSU-010-U0321">
+<div aria-describedby="fig-ht7-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca" data-o006-id="O006-PSU-010-U0322">
+<a class="lightbox" data-gallery="quarto-lightbox-gallery-3" data-o006-id="O006-PSU-010-U0323" href="assets/lesson09/assets/ht7.png" title="Gambar 9.5 — Nilai-p uji ekor kiri adalah luas di bawah kurva Normal baku untuk Z ≤ −1,92, yaitu 0,0274; karena 0,0274 ≤ 0,05, H₀ ditolak."><img alt="Kurva Normal baku dengan statistik teramati Z = −1,92; luas ekor kiri hingga −1,92 adalah nilai-p 0,0274, sehingga H₀ ditolak pada taraf 0,05." aria-describedby="fig-ht7-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca" class="w-75 img-fluid quarto-figure quarto-figure-center anchored figure-img" data-o006-asset-id="O006-PSU-010-A0007" data-o006-id="O006-PSU-010-U0324" data-o006-source-native-id="fig-ht7" id="fig-ht7-image" src="assets/lesson09/assets/ht7.png"/></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" data-o006-correction-id="O006-PSU-ADV-0166" data-o006-id="O006-PSU-010-U0325" id="fig-ht7-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">Gambar 9.5 — Nilai-p uji ekor kiri adalah luas di bawah kurva Normal baku untuk Z ≤ −1,92, yaitu 0,0274; karena 0,0274 ≤ 0,05, H₀ ditolak.</figcaption>
+</figure>
+</div>
+<p data-o006-id="O006-PSU-010-U0326">Artinya, kita akan menolak jika nilai kritisnya <span class="math inline" data-o006-math-id="O006-PSU-010-M0121">\(−1.645\)</span>, <span class="math inline" data-o006-math-id="O006-PSU-010-M0122">\(−1.83\)</span>, dan <span class="math inline" data-o006-math-id="O006-PSU-010-M0123">\(−1.92\)</span>. Namun, kita tidak akan menolak jika nilai kritisnya <span class="math inline" data-o006-math-id="O006-PSU-010-M0124">\(−1.93\)</span>. Tingkat <span class="math inline" data-o006-math-id="O006-PSU-010-M0125">\(\alpha-\)</span>yang berkaitan dengan statistik uji <span class="math inline" data-o006-math-id="O006-PSU-010-M0126">\(−1.92\)</span> disebut nilai-p. Nilai-p adalah tingkat <span class="math inline" data-o006-math-id="O006-PSU-010-M0127">\(\alpha-\)</span>terkecil yang akan menghasilkan penolakan. Dalam kasus ini, nilai-p adalah: <span class="math display" data-o006-math-id="O006-PSU-010-M0128">\[\begin{align*}
+  P(Z&lt;-1.92)=0.0274
+\end{align*}\]</span></p>
+</section>
+</div>
+<p data-o006-id="O006-PSU-010-U0327">Mari kita rumuskan definisi nilai-p secara formal, lalu merangkum pendekatan nilai-p untuk melakukan uji hipotesis.</p>
+<div class="ms-3 theorem definition" data-o006-id="O006-PSU-010-U0328" id="def-name">
+<p data-o006-id="O006-PSU-010-U0329"><span class="theorem-title"><strong>Def. 9.5 (Nilai-p)</strong></span> Istilah <strong>Nilai-p</strong> adalah tingkat signifikansi terkecil yang membuat kita menolak hipotesis nol.</p>
+<p data-o006-id="O006-PSU-010-U0330">Sebagai rumusan yang setara (dan cara yang saya sukai untuk memahami nilai-p), <strong>nilai-p</strong> adalah peluang, dengan menganggap hipotesis nol benar, untuk mengamati statistik uji yang sekurang-kurangnya sama ekstrem dengan statistik yang kita amati.</p>
+<p data-o006-id="O006-PSU-010-U0331">Jika nilai-p kecil, yaitu jika <span class="math inline" data-o006-math-id="O006-PSU-010-M0129">\(P\le \alpha\)</span>, maka kita menolak hipotesis nol. <span class="math inline" data-o006-math-id="O006-PSU-010-M0130">\(H_0\)</span>.</p>
+</div>
+<p data-o006-id="O006-PSU-010-U0332">Sejauh ini, semua contoh yang kita bahas melibatkan uji hipotesis satu sisi dengan hipotesis alternatif yang memuat tanda kurang dari (<span class="math inline" data-o006-math-id="O006-PSU-010-M0131">\(&lt;\)</span>) atau lebih dari (<span class="math inline" data-o006-math-id="O006-PSU-010-M0132">\(&gt;\)</span>). Bagaimana jika kita tidak yakin ke arah mana proporsi dapat menyimpang dari nilai yang dihipotesiskan dalam hipotesis nol? Dengan kata lain, bagaimana jika hipotesis alternatif memuat tanda tidak sama dengan (<span class="math inline" data-o006-math-id="O006-PSU-010-M0133">\(\ne\)</span>)? Mari kita lihat sebuah contoh.</p>
+<div class="theorem example" data-o006-id="O006-PSU-010-U0333" id="exm-lungcancerb">
+<p data-o006-id="O006-PSU-010-U0334"><span class="theorem-title"><strong>Contoh 9.5 (Lanjutan Kanker Paru-Paru)</strong></span> Bagaimana jika kita ingin melakukan uji “<strong>dua sisi</strong>”? Dengan kata lain, bagaimana jika kita ingin menguji: <span class="math display" data-o006-math-id="O006-PSU-010-M0134">\[\begin{align*}
+  H_0: p=0.9 \text{ versus }H_a: p\ne 0.9
+\end{align*}\]</span> pada tingkat <span class="math inline" data-o006-math-id="O006-PSU-010-M0135">\(\alpha=0.05\)</span> ?</p>
+<section class="level4 card card-body bg-light ms-3 mb-3 pt-0" data-o006-id="O006-PSU-010-U0335" id="solution-6">
+<h4 class="anchored" data-anchor-id="solution-6" data-o006-id="O006-PSU-010-U0336">Penyelesaian</h4>
+<p data-o006-id="O006-PSU-010-U0337">Pertama-tama, mari kita tinjau <strong>pendekatan nilai kritis</strong>. Jika kita membuka kemungkinan bahwa proporsi sampel dapat terlalu besar ataupun terlalu kecil, kita perlu menetapkan satu nilai ambang, yakni nilai kritis, pada setiap ekor distribusi. Dalam kasus ini, kita membagi “<strong>tingkat signifikansi</strong>” <span class="math inline" data-o006-math-id="O006-PSU-010-M0136">\(\alpha\)</span> ” dengan 2 sehingga diperoleh <span class="math inline" data-o006-math-id="O006-PSU-010-M0137">\(\frac{\alpha}{2}\)</span>:</p>
+<div alt="Normal curve with center at 0 showing two-tail critical area for alpha of .05." class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center" data-o006-id="O006-PSU-010-U0338" id="fig-ht8">
+<figure class="quarto-float quarto-float-fig figure" data-o006-id="O006-PSU-010-U0339">
+<div aria-describedby="fig-ht8-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca" data-o006-id="O006-PSU-010-U0340">
+<a class="lightbox" data-gallery="quarto-lightbox-gallery-4" data-o006-id="O006-PSU-010-U0341" href="assets/lesson09/assets/ht8.png" title="Gambar 9.6 — Daerah penolakan uji dua sisi bertaraf 0,05 berada pada Z ≤ −1,96 dan Z ≥ 1,96; nilai teramati Z = −1,92 tidak masuk daerah itu."><img alt="Kurva Normal baku untuk uji dua sisi dengan batas kritis −1,96 dan 1,96; tiap ekor memiliki luas 0,025 dan H₀ ditolak bila |Z| ≥ 1,96." aria-describedby="fig-ht8-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca" class="w-75 img-fluid quarto-figure quarto-figure-center anchored figure-img" data-o006-asset-id="O006-PSU-010-A0008" data-o006-id="O006-PSU-010-U0342" data-o006-source-native-id="fig-ht8" id="fig-ht8-image" src="assets/lesson09/assets/ht8.png"/></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" data-o006-correction-id="O006-PSU-ADV-0166" data-o006-id="O006-PSU-010-U0343" id="fig-ht8-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">Gambar 9.6 — Daerah penolakan uji dua sisi bertaraf 0,05 berada pada Z ≤ −1,96 dan Z ≥ 1,96; nilai teramati Z = −1,92 tidak masuk daerah itu.</figcaption>
+</figure>
+</div>
+<p data-o006-id="O006-PSU-010-U0344">Artinya, aturan penolakan kita adalah menolak hipotesis nol jika statistik uji berada pada ekor kiri, <span class="math inline" data-o006-math-id="O006-PSU-010-M0138">\(H_0\)</span>, atau pada ekor kanan, <span class="math inline" data-o006-math-id="O006-PSU-010-M0139">\(H_0\)</span> ; secara ekuivalen, kita menolak hipotesis nol jika <span class="math inline" data-o006-math-id="O006-PSU-010-M0140">\(|Z|\ge 1.96\)</span>. Karena statistik uji kita adalah <span class="math inline" data-o006-math-id="O006-PSU-010-M0141">\(−1.92\)</span>, kita nyaris gagal menolak hipotesis nol, sebab <span class="math inline" data-o006-math-id="O006-PSU-010-M0142">\(1.92 &lt; 1.96\)</span>. Dalam kasus ini, kita mengatakan bahwa pada tingkat <span class="math inline" data-o006-math-id="O006-PSU-010-M0143">\(\alpha=0.05\)</span> tidak terdapat bukti yang cukup untuk menyimpulkan bahwa proporsi populasi berbeda secara signifikan dari 0,90.</p>
+<p data-o006-id="O006-PSU-010-U0345">Sekarang, kita gunakan <strong>pendekatan nilai-p</strong>. Sekali lagi, karena perlu mengakomodasi kemungkinan bahwa proporsi sampel terlalu besar ataupun terlalu kecil, kita mengalikan nilai-p dari uji satu sisi dengan 2:</p>
+<p data-o006-id="O006-PSU-010-U0346">Dengan demikian, nilai-p adalah:</p>
+<p data-o006-id="O006-PSU-010-U0347"><span class="math display" data-o006-math-id="O006-PSU-010-M0144">\[\begin{align*}
+  P=P(|Z|\geq 1.92)=P(Z&gt;1.92 \text{ or } Z&lt;-1.92)=2 \times 0.0274=0.055
+\end{align*}\]</span></p>
+<p data-o006-id="O006-PSU-010-U0348">Karena nilai-p 0,055 (nyaris) lebih besar daripada tingkat signifikansi <span class="math inline" data-o006-math-id="O006-PSU-010-M0145">\(\alpha=0.05\)</span>, kita nyaris gagal menolak hipotesis nol. Sekali lagi, kita mengatakan bahwa pada tingkat <span class="math inline" data-o006-math-id="O006-PSU-010-M0146">\(\alpha=0.05\)</span> tidak terdapat bukti yang cukup untuk menyimpulkan bahwa proporsi populasi berbeda secara signifikan dari 0,90.</p>
+</section>
+</div>
+</section>
+<section class="level2" data-number="9.5" data-o006-id="O006-PSU-010-U0349" id="tests-about-one-mean">
+<h2 class="anchored" data-anchor-id="tests-about-one-mean" data-number="9.5" data-o006-id="O006-PSU-010-U0350"><span class="header-section-number">9.5</span> Uji tentang Satu Rata-Rata</h2>
+<p data-o006-id="O006-PSU-010-U0351">Dalam pelajaran ini, kita melanjutkan pembahasan pengujian hipotesis. Perhatian kita akan dipusatkan pada uji hipotesis untuk rata-rata populasi, <span class="math inline" data-o006-math-id="O006-PSU-010-M0147">\(\mu\)</span>, dalam beberapa keadaan.</p>
+<section class="level3 unnumbered" data-o006-id="O006-PSU-010-U0352" id="variance-known">
+<h3 class="unnumbered anchored" data-anchor-id="variance-known" data-o006-id="O006-PSU-010-U0353">Varians Diketahui</h3>
+<p data-o006-id="O006-PSU-010-U0354">Mari kita akui terlebih dahulu bahwa keadaan ketika varians populasi diketahui tetapi rata-rata populasi tidak diketahui sama sekali tidak realistis. Karena itu, metode pengujian hipotesis pada halaman ini memiliki kegunaan praktis yang terbatas. Kita mempelajarinya hanya karena kelak metode ini akan digunakan untuk mempelajari “kuasa” suatu uji hipotesis, melalui cara menghitung peluang galat tipe II. Seperti biasa, mari kita mulai dengan sebuah contoh.</p>
+<div class="theorem example" data-o006-id="O006-PSU-010-U0355" id="exm-boyseat">
+<p data-o006-id="O006-PSU-010-U0356"><span class="theorem-title"><strong>Contoh 9.6</strong></span> Anak laki-laki pada usia tertentu diketahui mempunyai rata-rata berat badan <span class="math inline" data-o006-math-id="O006-PSU-010-M0148">\(\mu=85\)</span> pon. Ada keluhan bahwa anak-anak lelaki yang tinggal di sebuah panti asuhan kota kekurangan makanan. Sebagai salah satu bukti, <span class="math inline" data-o006-math-id="O006-PSU-010-M0149">\(n=25\)</span> anak laki-laki (dengan usia yang sama) ditimbang dan didapati mempunyai rata-rata berat badan <span class="math inline" data-o006-math-id="O006-PSU-010-M0150">\(\bar{x} = 80.94\)</span> pon. Simpangan baku populasi <span class="math inline" data-o006-math-id="O006-PSU-010-M0151">\(\sigma\)</span> diketahui sebesar 11,6 pon—bagian yang tidak realistis dari contoh ini. Berdasarkan data yang tersedia, apa yang harus disimpulkan mengenai keluhan tersebut?</p>
+<section class="level4 card card-body bg-light ms-3 mb-3 pt-0" data-o006-id="O006-PSU-010-U0357" id="solution-7">
+<h4 class="anchored" data-anchor-id="solution-7" data-o006-id="O006-PSU-010-U0358">Penyelesaian</h4>
+<p data-o006-id="O006-PSU-010-U0359">Hipotesis nolnya adalah <span class="math inline" data-o006-math-id="O006-PSU-010-M0152">\(H_0:\mu=85\)</span>, sedangkan hipotesis alternatifnya adalah <span class="math inline" data-o006-math-id="O006-PSU-010-M0153">\(H_a:\mu&lt;85\)</span>. Secara umum, jika bobot berdistribusi Normal, kita mengetahui bahwa:</p>
+<p data-o006-id="O006-PSU-010-U0360"><span class="math display" data-o006-math-id="O006-PSU-010-M0154">\[\begin{align*}
+Z=\dfrac{\bar{X}-\mu}{\sigma/\sqrt{n}}
+\end{align*}\]</span></p>
+<p data-o006-id="O006-PSU-010-U0361">mengikuti distribusi Normal baku <span class="math inline" data-o006-math-id="O006-PSU-010-M0155">\(N(0,1)\)</span> . Pernyataan ini eksak untuk sampel acak iid dari populasi Normal. Jika populasi tidak Normal, Teorema Limit Pusat hanya dapat memberikan hampiran di bawah syarat distribusi yang sesuai; tidak ada ukuran sampel hingga yang secara universal menjamin hampiran Normal yang memadai. Di sini ukuran sampel <span class="math inline" data-o006-math-id="O006-PSU-010-M0156">\(n=25\)</span> dapat mendukung penggunaan hampiran tersebut jika syarat-syarat itu masuk akal. Dalam hal itu, kita mengetahui bahwa <span class="math inline" data-o006-math-id="O006-PSU-010-M0157">\(Z\)</span>, sebagaimana didefinisikan di atas, sekurang-kurangnya menghampiri distribusi Normal baku. Karena itu, statistik uji berikut layak digunakan:</p>
+<p data-o006-id="O006-PSU-010-U0362"><span class="math display" data-o006-math-id="O006-PSU-010-M0158">\[\begin{align*}
+  Z=\dfrac{\bar{X}-\mu_0}{\sigma/\sqrt{n}}
+\end{align*}\]</span></p>
+<p data-o006-id="O006-PSU-010-U0363">untuk menguji hipotesis nol</p>
+<p data-o006-id="O006-PSU-010-U0364"><span class="math display" data-o006-math-id="O006-PSU-010-M0159">\[\begin{align*}
+  H_0:\mu=\mu_0
+\end{align*}\]</span></p>
+<p data-o006-id="O006-PSU-010-U0365">terhadap salah satu hipotesis alternatif yang mungkin, yaitu <span class="math inline" data-o006-math-id="O006-PSU-010-M0160">\(H_a: \mu\ne\mu_0\)</span>, <span class="math inline" data-o006-math-id="O006-PSU-010-M0161">\(H_a:\mu&lt;\mu_0\)</span>, dan <span class="math inline" data-o006-math-id="O006-PSU-010-M0162">\(H_a:\mu&gt;\mu_0\)</span>.</p>
+<p data-o006-id="O006-PSU-010-U0366">Untuk contoh ini, nilai statistik ujinya adalah:</p>
+<p data-o006-id="O006-PSU-010-U0367"><span class="math display" data-o006-math-id="O006-PSU-010-M0163">\[\begin{align*}
+  Z=\dfrac{80.94-85}{11.6/\sqrt{25}}=-1.75
+\end{align*}\]</span></p>
+<p data-o006-id="O006-PSU-010-U0368">Pendekatan daerah kritis menyatakan bahwa pada tingkat <span class="math inline" data-o006-math-id="O006-PSU-010-M0164">\(\alpha=0.05\)</span> kita menolak hipotesis nol jika <span class="math inline" data-o006-math-id="O006-PSU-010-M0165">\(Z&lt;-1.645\)</span>. Oleh karena itu, kita menolak hipotesis nol karena <span class="math inline" data-o006-math-id="O006-PSU-010-M0166">\(Z=-1.75&lt;-1.645\)</span>, sehingga nilainya berada dalam daerah penolakan:</p>
+<div alt="Normal curve with center at 0 showing two-tail critical area for alpha of .05." class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center" data-o006-id="O006-PSU-010-U0369" id="fig-h10">
+<figure class="quarto-float quarto-float-fig figure" data-o006-id="O006-PSU-010-U0370">
+<div aria-describedby="fig-h10-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca" data-o006-id="O006-PSU-010-U0371">
+<a class="lightbox" data-gallery="quarto-lightbox-gallery-5" data-o006-id="O006-PSU-010-U0372" href="assets/lesson09/assets/h10.png" title="Gambar 9.7 — Pada uji rataan ekor kiri bertaraf 0,05, batas kritisnya −1,645; statistik Z = −1,75 berada di daerah penolakan."><img alt="Kurva Normal baku untuk uji ekor kiri dengan batas kritis Z = −1,645; luas ekor kiri α = 0,05 adalah daerah penolakan H₀." aria-describedby="fig-h10-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca" class="w-75 img-fluid quarto-figure quarto-figure-center anchored figure-img" data-o006-asset-id="O006-PSU-010-A0009" data-o006-id="O006-PSU-010-U0373" data-o006-source-native-id="fig-h10" id="fig-h10-image" src="assets/lesson09/assets/h10.png"/></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" data-o006-correction-id="O006-PSU-ADV-0166" data-o006-id="O006-PSU-010-U0374" id="fig-h10-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">Gambar 9.7 — Pada uji rataan ekor kiri bertaraf 0,05, batas kritisnya −1,645; statistik Z = −1,75 berada di daerah penolakan.</figcaption>
+</figure>
+</div>
+<p data-o006-id="O006-PSU-010-U0375">Seperti biasa, kita memperoleh kesimpulan yang sama dengan menggunakan pendekatan nilai <span class="math inline" data-o006-math-id="O006-PSU-010-M0167">\(p\)</span>. Ingat bahwa pendekatan nilai <span class="math inline" data-o006-math-id="O006-PSU-010-M0168">\(p\)</span>menyatakan bahwa pada tingkat <span class="math inline" data-o006-math-id="O006-PSU-010-M0169">\(\alpha=0.05\)</span> kita menolak hipotesis nol jika nilai <span class="math inline" data-o006-math-id="O006-PSU-010-M0170">\(p\)</span>tersebut<span class="math inline" data-o006-math-id="O006-PSU-010-M0171">\(\le \alpha=0.05\)</span>. Dalam kasus ini, nilai <span class="math inline" data-o006-math-id="O006-PSU-010-M0172">\(p\)</span>adalah <span class="math inline" data-o006-math-id="O006-PSU-010-M0173">\(P(Z&lt;-1.75)=0.0401\)</span>:</p>
+<div alt="Normal curve with center at 0 showing two-tail critical area for alpha of .05." class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center" data-o006-id="O006-PSU-010-U0376" id="fig-h11">
+<figure class="quarto-float quarto-float-fig figure" data-o006-id="O006-PSU-010-U0377">
+<div aria-describedby="fig-h11-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca" data-o006-id="O006-PSU-010-U0378">
+<a class="lightbox" data-gallery="quarto-lightbox-gallery-6" data-o006-id="O006-PSU-010-U0379" href="assets/lesson09/assets/h11.png" title="Gambar 9.8 — Nilai-p uji ekor kiri adalah P(Z ≤ −1,75) = 0,0401; karena 0,0401 ≤ 0,05, H₀ ditolak."><img alt="Kurva Normal baku dengan statistik teramati Z = −1,75; luas ekor kiri hingga −1,75 adalah nilai-p 0,0401, sehingga H₀ ditolak pada taraf 0,05." aria-describedby="fig-h11-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca" class="w-75 img-fluid quarto-figure quarto-figure-center anchored figure-img" data-o006-asset-id="O006-PSU-010-A0010" data-o006-id="O006-PSU-010-U0380" data-o006-source-native-id="fig-h11" id="fig-h11-image" src="assets/lesson09/assets/h11.png"/></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" data-o006-correction-id="O006-PSU-ADV-0166" data-o006-id="O006-PSU-010-U0381" id="fig-h11-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">Gambar 9.8 — Nilai-p uji ekor kiri adalah P(Z ≤ −1,75) = 0,0401; karena 0,0401 ≤ 0,05, H₀ ditolak.</figcaption>
+</figure>
+</div>
+<p data-o006-id="O006-PSU-010-U0382">Sesuai dugaan, kita menolak hipotesis nol karena nilai <span class="math inline" data-o006-math-id="O006-PSU-010-M0174">\(p\)</span>memenuhi 0,0401 &lt; 0,05.<span class="math inline" data-o006-math-id="O006-PSU-010-M0175">\(=0.0401&lt;\alpha=0.05\)</span>.</p>
+</section>
+</div>
+</section>
+<section class="level3 unnumbered" data-o006-id="O006-PSU-010-U0383" id="variance-unknown">
+<h3 class="unnumbered anchored" data-anchor-id="variance-unknown" data-o006-id="O006-PSU-010-U0384">Varians Tidak Diketahui</h3>
+<p data-o006-id="O006-PSU-010-U0385">Setelah, demi alasan pedagogis, menyelesaikan keadaan yang tidak realistis ketika varians populasi diketahui, sekarang kita beralih ke keadaan realistis ketika rata-rata dan varians populasi sama-sama tidak diketahui.</p>
+<div class="theorem example" data-o006-id="O006-PSU-010-U0386" id="exm-sysbp">
+<p data-o006-id="O006-PSU-010-U0387"><span class="theorem-title"><strong>Contoh 9.7</strong></span> Rata-rata tekanan darah sistolik diasumsikan sebesar <span class="math inline" data-o006-math-id="O006-PSU-010-M0176">\(\mu=120\)</span>mmHg. Dalam Honolulu Heart Study, sampel sebanyak <span class="math inline" data-o006-math-id="O006-PSU-010-M0177">\(n=100\)</span> orang mempunyai rata-rata tekanan darah sistolik 130,1 mmHg dengan simpangan baku 21,21 mmHg. Apakah kelompok ini berbeda secara signifikan—dalam hal tekanan darah sistolik—dari populasi biasa?</p>
+<section class="level4 card card-body bg-light ms-3 mb-3 pt-0" data-o006-id="O006-PSU-010-U0388" id="solution-8">
+<h4 class="anchored" data-anchor-id="solution-8" data-o006-id="O006-PSU-010-U0389">Penyelesaian</h4>
+<p data-o006-id="O006-PSU-010-U0390">Hipotesis nolnya adalah <span class="math inline" data-o006-math-id="O006-PSU-010-M0178">\(H_0:\mu=120\)</span>, dan karena tidak ada arah tertentu yang dinyatakan, hipotesis alternatifnya adalah <span class="math inline" data-o006-math-id="O006-PSU-010-M0179">\(H_a: \mu\ne 120\)</span>.</p>
+<p data-o006-id="O006-PSU-010-U0391">Langkah berikutnya dalam pengujian hipotesis adalah menentukan tingkat signifikansi, yakni peluang galat tipe I. Untuk contoh ini, tetapkan <span class="math inline" data-o006-math-id="O006-PSU-010-M0180">\(\alpha=0.05\)</span>.</p>
+<p data-o006-id="O006-PSU-010-U0392">Langkah 3 adalah menghitung statistik uji. Ingat bahwa kita perlu menentukan statistik uji yang distribusinya diketahui di bawah asumsi model dan hipotesis nol. Dari STAT 414, kita mengetahui bahwa jika data merupakan sampel acak iid dari populasi Normal, maka:</p>
+<p data-o006-id="O006-PSU-010-U0393"><span class="math display" data-o006-math-id="O006-PSU-010-M0181">\[\begin{align*}
+  T=\dfrac{\bar{X}-\mu}{S/\sqrt{n}}
+\end{align*}\]</span></p>
+<p data-o006-id="O006-PSU-010-U0394">mengikuti distribusi <span class="math inline" data-o006-math-id="O006-PSU-010-M0182">\(t\)</span>dengan <span class="math inline" data-o006-math-id="O006-PSU-010-M0183">\(n-1\)</span> derajat kebebasan. Karena itu, statistik uji berikut layak digunakan:</p>
+<p data-o006-id="O006-PSU-010-U0395"><span class="math display" data-o006-math-id="O006-PSU-010-M0184">\[\begin{align*}
+  T=\dfrac{\bar{X}-\mu_0}{S/\sqrt{n}}
+\end{align*}\]</span></p>
+<p data-o006-id="O006-PSU-010-U0396">untuk menguji hipotesis nol <span class="math inline" data-o006-math-id="O006-PSU-010-M0185">\(H_0:\mu=120\)</span> terhadap salah satu hipotesis alternatif yang mungkin, yaitu <span class="math inline" data-o006-math-id="O006-PSU-010-M0186">\(H_a:\mu\ne\mu_0\)</span>, <span class="math inline" data-o006-math-id="O006-PSU-010-M0187">\(H_a:\mu&lt;\mu_0\)</span>, dan <span class="math inline" data-o006-math-id="O006-PSU-010-M0188">\(H_a:\mu&gt;\mu_0\)</span>. Untuk contoh ini, nilai statistik ujinya adalah:</p>
+<p data-o006-id="O006-PSU-010-U0397"><span class="math display" data-o006-math-id="O006-PSU-010-M0189">\[\begin{align*}
+  t=\dfrac{130.1-120}{21.21/\sqrt{100}}=4.762
+\end{align*}\]</span></p>
+<p data-o006-id="O006-PSU-010-U0398">Pendekatan daerah kritis menyatakan bahwa pada tingkat <span class="math inline" data-o006-math-id="O006-PSU-010-M0190">\(\alpha=0.05\)</span> kita menolak hipotesis nol jika <span class="math inline" data-o006-math-id="O006-PSU-010-M0191">\(t\ge t_{0.025, 99}=1.9842\)</span> atau jika <span class="math inline" data-o006-math-id="O006-PSU-010-M0192">\(t\le -t_{0.025,99}=-1.9842\)</span>. Oleh karena itu, kita menolak hipotesis nol karena <span class="math inline" data-o006-math-id="O006-PSU-010-M0193">\(t=4.762&gt;1.9842\)</span>, sehingga nilainya berada dalam daerah penolakan:</p>
+<p data-o006-id="O006-PSU-010-U0399">Sekali lagi, kita memperoleh kesimpulan yang sama dengan menggunakan pendekatan nilai <span class="math inline" data-o006-math-id="O006-PSU-010-M0194">\(p\)</span>. Pendekatan nilai <span class="math inline" data-o006-math-id="O006-PSU-010-M0195">\(p\)</span>menyatakan bahwa pada tingkat <span class="math inline" data-o006-math-id="O006-PSU-010-M0196">\(\alpha=0.05\)</span> kita menolak hipotesis nol jika nilai <span class="math inline" data-o006-math-id="O006-PSU-010-M0197">\(p\)</span>tersebut<span class="math inline" data-o006-math-id="O006-PSU-010-M0198">\(\le 0.05\)</span>. Dalam kasus ini, nilai <span class="math inline" data-o006-math-id="O006-PSU-010-M0199">\(p\)</span>adalah:</p>
+<p data-o006-id="O006-PSU-010-U0400"><span class="math display" data-o006-math-id="O006-PSU-010-M0200">\[\begin{aligned}p&amp;=2P(T_{99}\ge4.762)\\&amp;\approx0.00000656&lt;0.01&lt;0.05\end{aligned}\]</span></p>
+<p data-o006-id="O006-PSU-010-U0401">Sesuai dugaan, kita menolak hipotesis nol karena nilai <span class="math inline" data-o006-math-id="O006-PSU-010-M0201">\(p\)</span>kurang dari 0,05; perhitungan dua sisi yang lengkap memberi nilai-p sekitar 0,00000656.<span class="math inline" data-o006-math-id="O006-PSU-010-M0202">\(\le 0.01&lt;\alpha=0.05\)</span>.</p>
+</section>
+</div>
+</section>
+</section>
+<section class="level2" data-number="9.6" data-o006-id="O006-PSU-010-U0402" id="summary">
+<h2 class="anchored" data-anchor-id="summary" data-number="9.6" data-o006-id="O006-PSU-010-U0403"><span class="header-section-number">9.6</span> Ringkasan</h2>
+<p data-o006-id="O006-PSU-010-U0404">Dalam pelajaran ini, kita memperkenalkan kerangka pengujian hipotesis—cara formal menggunakan data sampel untuk mengevaluasi klaim tentang parameter populasi. Gagasan utamanya adalah menyusun dua pernyataan yang bersaing: hipotesis nol (<span class="math inline" data-o006-math-id="O006-PSU-010-M0203">\(H_0\)</span>), yang mewakili keadaan semula atau tidak adanya efek, dan hipotesis alternatif (<span class="math inline" data-o006-math-id="O006-PSU-010-M0204">\(H_a\)</span>), yang menyatakan hal yang hendak kita dukung dengan bukti.</p>
+<p data-o006-id="O006-PSU-010-U0405">Kita menghitung statistik uji yang merangkum bukti dari sampel, lalu menentukan seberapa ekstrem nilainya dengan menganggap <span class="math inline" data-o006-math-id="O006-PSU-010-M0205">\(H_0\)</span> benar. Dari sini diperoleh pendekatan daerah penolakan atau nilai-p. Jika statistik uji berada di daerah penolakan, atau jika nilai-p tidak lebih besar daripada tingkat signifikansi <span class="math inline" data-o006-math-id="O006-PSU-010-M0206">\(\alpha\)</span>, kita menolak <span class="math inline" data-o006-math-id="O006-PSU-010-M0207">\(H_0\)</span>.</p>
+<p data-o006-id="O006-PSU-010-U0406"><strong>Pokok Penting:</strong></p>
+<ul data-o006-id="O006-PSU-010-U0407">
+<li data-o006-id="O006-PSU-010-U0408">Bentuk umum statistik uji adalah: <span class="math inline" data-o006-math-id="O006-PSU-010-M0208">\(Z=\frac{\hat{\theta}-\theta_0}{SE(\hat{\theta})}\)</span></li>
+<li data-o006-id="O006-PSU-010-U0409">Galat tipe I: menolak hipotesis nol ketika hipotesis nol sebenarnya benar, <span class="math inline" data-o006-math-id="O006-PSU-010-M0209">\(P(\text{Type I error})=\alpha\)</span></li>
+<li data-o006-id="O006-PSU-010-U0410">Galat tipe II: gagal menolak hipotesis nol ketika hipotesis alternatif benar pada nilai parameter yang ditentukan, <span class="math inline" data-o006-math-id="O006-PSU-010-M0210">\(P(\text{Type II error})=\beta\)</span></li>
+<li data-o006-id="O006-PSU-010-U0411">Kuasa uji adalah peluang menolak hipotesis nol dengan benar pada nilai alternatif yang ditentukan, <span class="math inline" data-o006-math-id="O006-PSU-010-M0211">\(H_0\)</span>: <span class="math inline" data-o006-math-id="O006-PSU-010-M0212">\(\text{Power}=1-\beta\)</span></li>
+</ul>
+<p data-o006-id="O006-PSU-010-U0412">Kita juga mendefinisikan dua jenis galat: — Galat tipe I: menolak <span class="math inline" data-o006-math-id="O006-PSU-010-M0213">\(H_0\)</span> ketika hipotesis itu sebenarnya benar (peluang <span class="math inline" data-o006-math-id="O006-PSU-010-M0214">\(\alpha\)</span>) — Galat tipe II: gagal menolak <span class="math inline" data-o006-math-id="O006-PSU-010-M0215">\(H_0\)</span> ketika <span class="math inline" data-o006-math-id="O006-PSU-010-M0216">\(H_a\)</span> benar pada alternatif yang ditentukan (peluang <span class="math inline" data-o006-math-id="O006-PSU-010-M0217">\(\beta\)</span>)</p>
+<p data-o006-id="O006-PSU-010-U0413">Adapun <strong>Kuasa</strong> suatu uji adalah peluang menolak hipotesis nol dengan benar pada nilai parameter alternatif yang ditentukan. <span class="math inline" data-o006-math-id="O006-PSU-010-M0218">\(H_0\)</span>:</p>
+<p data-o006-id="O006-PSU-010-U0414"><span class="math display" data-o006-math-id="O006-PSU-010-M0219">\[
+\text{Power} = 1 - \beta
+\]</span></p>
+</section>
+</main></div>
+<footer class="site-footer"><div class="site-footer__inner">Konten sumber: Departemen Statistika Penn State, CC BY-NC 4.0 kecuali dinyatakan lain. Terjemahan dan rekonstruksi: OpenAI Codex gpt-5.6-sol, Ultra. Tidak ada dukungan atau pengesahan yang tersirat.</div></footer>
+</body>
+</html>

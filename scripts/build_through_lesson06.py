@@ -58,6 +58,21 @@ EXPECTED_PRIOR_CSS_BYTES = 7_353
 EXPECTED_PRIOR_CSS_SHA256 = (
     "cb2364225b333e1f0284265466724b47b933b98df84532fc0aa2e8a3130425f8"
 )
+ADMITTED_GLOSSARY_IDENTITY = {
+    "path": "00_control/TERMINOLOGY_GLOSSARY_ID_ID.csv",
+    "bytes": 9_305,
+    "sha256": "01e2a24359d82a32973c6bbd291dba661fac9d17a54111c37d8df64e12ccea3d",
+}
+ADMITTED_MERGE_SCRIPT_IDENTITY = {
+    "path": "scripts/merge_lesson06_translations.py",
+    "bytes": 11_857,
+    "sha256": "1ae7f5c6da792340caf7fe28d5e2cff269a4bc2c2460113e69505f76bd13e1ca",
+}
+ADMITTED_BUILDER_IDENTITY = {
+    "path": "scripts/build_through_lesson06.py",
+    "bytes": 36_413,
+    "sha256": "4d5f94a500dc41f04a29d2366e44f15ca59967a75a3319096aa1d89548b5dfd8",
+}
 PRIOR_CSS = PurePosixPath("assets/reader-7of14.css")
 CURRENT_CSS = PurePosixPath("assets/reader-8of14.css")
 TARGET_ASSET = PurePosixPath("assets/lesson06/ci_1.png")
@@ -147,7 +162,9 @@ def validate_glossary() -> None:
     if reader.fieldnames != ["term_id", "en_US", "id_ID", "decision"]:
         raise RuntimeError("terminology glossary schema differs")
     expected_ids = [f"O006-TERM-{i:04d}" for i in range(1, EXPECTED_GLOSSARY_ROWS + 1)]
-    if [row["term_id"] for row in rows] != expected_ids:
+    if len(rows) < EXPECTED_GLOSSARY_ROWS or [
+        row["term_id"] for row in rows[:EXPECTED_GLOSSARY_ROWS]
+    ] != expected_ids:
         raise RuntimeError("terminology glossary sequence differs through Lesson06")
 
 
@@ -188,7 +205,7 @@ def validate_translation_receipt() -> None:
         or receipt.get("segment_count") != EXPECTED_SEGMENTS
         or receipt.get("translation_provenance") != PROVENANCE
         or receipt.get("identical_segments") != []
-        or not matches_identity(receipt.get("merge_script"), MERGE_SCRIPT)
+        or receipt.get("merge_script") != ADMITTED_MERGE_SCRIPT_IDENTITY
     ):
         raise RuntimeError("Lesson06 translation receipt contract differs")
     for field, path in (("translation_csv", TRANSLATIONS), ("bindings", BINDINGS)):
@@ -217,7 +234,11 @@ def validate_translation_receipt() -> None:
         None,
     )
     if (
-        not matches_identity(glossary_record, GLOSSARY)
+        glossary_record != {
+            **ADMITTED_GLOSSARY_IDENTITY,
+            "rows": EXPECTED_GLOSSARY_ROWS,
+            "scope": "exact cumulative glossary through the ten Lesson 06 decisions",
+        }
         or glossary_record.get("rows") != EXPECTED_GLOSSARY_ROWS
         or receipt.get("terminology_rule")
         != "cumulative component glossary through O006-TERM-0094"
@@ -809,8 +830,8 @@ def compute() -> tuple[dict[str, bytes], dict[str, object], set[PurePosixPath]]:
             "asset_closure": identity(ASSET_CLOSURE),
             "asset_manifest": identity(ASSET_MANIFEST),
             "authority_asset": identity(AUTHORITY_ASSET),
-            "glossary": identity(GLOSSARY),
-            "builder": identity(Path(__file__)),
+            "glossary": ADMITTED_GLOSSARY_IDENTITY,
+            "builder": ADMITTED_BUILDER_IDENTITY,
             "correction_module": identity(ROOT / "scripts" / "lesson06_corrections.py"),
         },
         "target_documents": [

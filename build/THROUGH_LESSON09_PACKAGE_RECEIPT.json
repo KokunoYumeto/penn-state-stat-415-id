@@ -1,0 +1,131 @@
+{
+  "coverage": {
+    "complete_count": 11,
+    "complete_documents": [
+      "index",
+      "Lesson00",
+      "Lesson01",
+      "Lesson02",
+      "Lesson03",
+      "Lesson04",
+      "Lesson05",
+      "Lesson06",
+      "Lesson07",
+      "Lesson08",
+      "Lesson09"
+    ],
+    "corpus_document_count": 14,
+    "next_document": "Lesson10",
+    "statement": "landing/index plus complete Lesson00-Lesson09; 11 of 14 documents"
+  },
+  "file_count": 9,
+  "files": [
+    {
+      "bytes": 8573719,
+      "filename": "00_stat415-id-through-lesson09-offline-reader.zip",
+      "sha256": "fbf7d1273752f0a354568468ea56a5c03f6c0f062c50a2c2323d922c781ea3bd"
+    },
+    {
+      "bytes": 21760979,
+      "filename": "10_stat415-id-through-lesson09-source-backend.zip",
+      "sha256": "5ca5c94f6405132869fd9f6251f1e3a27f811e0290e363589aa3e5c037b04483"
+    },
+    {
+      "bytes": 1242,
+      "filename": "20_THROUGH_LESSON09_RELEASE_NOTES.md",
+      "sha256": "1c5b5fad4caff78215f6dea268e30b8c5413426df196caaed4d5aa30cf3f7791"
+    },
+    {
+      "bytes": 1515,
+      "filename": "30_THROUGH_LESSON09_LICENSE.md",
+      "sha256": "cea22cdb06aae5db47989d4daebbe3e36b7eac697e23a6726398744a9812a48d"
+    },
+    {
+      "bytes": 6168,
+      "filename": "40_THROUGH_LESSON09_QA_RECEIPT.json",
+      "sha256": "431f74cc685b73220ae7559d0299bec5e08b1637d239c901dd31280503878db3"
+    },
+    {
+      "bytes": 12207,
+      "filename": "41_THROUGH_LESSON09_VISUAL_QA_RECEIPT.json",
+      "sha256": "fa3ffb355a15dbeb50da1651037c1a66e85eba87617864427981ed4c9338006d"
+    },
+    {
+      "bytes": 852,
+      "filename": "50_THROUGH_LESSON09_RELEASE_MANIFEST.csv",
+      "sha256": "e6be2545374a1edded72060326a87e22f1523bf74ef5af0d991508908f012ed6"
+    },
+    {
+      "bytes": 750,
+      "filename": "SHA256SUMS_THROUGH_LESSON09.txt",
+      "sha256": "67cd8f89371713e4d75e47a81a12a6fe3e0db88b12f2acf9342acb0ec6f7b923"
+    },
+    {
+      "bytes": 4684,
+      "filename": "60_THROUGH_LESSON09_RELEASE_ROOT_RECEIPT.json",
+      "sha256": "80643e5eed1ff876bcb43681fee04d362e440f668e72a657e4b9806c5b61e058"
+    }
+  ],
+  "inputs": {
+    "build_receipt": {
+      "bytes": 19452,
+      "sha256": "00199cebee641d78b09e8aab1b1c7ac8c687fdad93dca848444d698bc20443a1"
+    },
+    "license": {
+      "bytes": 1515,
+      "sha256": "cea22cdb06aae5db47989d4daebbe3e36b7eac697e23a6726398744a9812a48d"
+    },
+    "qa_receipt": {
+      "bytes": 6168,
+      "sha256": "431f74cc685b73220ae7559d0299bec5e08b1637d239c901dd31280503878db3"
+    },
+    "reader_manifest": {
+      "bytes": 7478,
+      "sha256": "fa29f2df5f34e441d976280696ef2433845a65fe4ec478674346e56e2f50ffc8"
+    },
+    "visual_qa_receipt": {
+      "bytes": 12207,
+      "sha256": "fa3ffb355a15dbeb50da1651037c1a66e85eba87617864427981ed4c9338006d"
+    }
+  },
+  "locale": "id-ID",
+  "primary_file": "00_stat415-id-through-lesson09-offline-reader.zip",
+  "reader_zip": {
+    "archive_method": "ZIP_STORED",
+    "filename": "00_stat415-id-through-lesson09-offline-reader.zip",
+    "manifest_bytes": 7478,
+    "manifest_sha256": "fa29f2df5f34e441d976280696ef2433845a65fe4ec478674346e56e2f50ffc8",
+    "package_entries": 72,
+    "reader_bytes": 8551979,
+    "reader_files": 71,
+    "uncompressed_bytes": 8559457
+  },
+  "rights": {
+    "aggregate_uniform_relicense": false,
+    "mathjax_3_1_2": "Apache-2.0",
+    "original_repository_layer": "CC BY-SA 4.0",
+    "penn_state": "CC BY-NC 4.0 except where otherwise noted"
+  },
+  "schema": "o006.stat415.through-lesson09-package.v1",
+  "source_zip": {
+    "allowlist_manifest_sha256": "b933d1401f6e5f9192cb20790ff094d69e6239b8f8ee1a2c0b140a131a5c32c2",
+    "archive_method": "ZIP_STORED",
+    "entries": 371,
+    "filename": "10_stat415-id-through-lesson09-source-backend.zip",
+    "uncompressed_bytes": 21685313
+  },
+  "status": "ready",
+  "total_bytes": 30362116,
+  "translation_provenance": "OpenAI Codex gpt-5.6-sol, Ultra",
+  "upload_order": [
+    "00_stat415-id-through-lesson09-offline-reader.zip",
+    "10_stat415-id-through-lesson09-source-backend.zip",
+    "20_THROUGH_LESSON09_RELEASE_NOTES.md",
+    "30_THROUGH_LESSON09_LICENSE.md",
+    "40_THROUGH_LESSON09_QA_RECEIPT.json",
+    "41_THROUGH_LESSON09_VISUAL_QA_RECEIPT.json",
+    "50_THROUGH_LESSON09_RELEASE_MANIFEST.csv",
+    "SHA256SUMS_THROUGH_LESSON09.txt",
+    "60_THROUGH_LESSON09_RELEASE_ROOT_RECEIPT.json"
+  ]
+}

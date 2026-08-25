@@ -1,0 +1,638 @@
+<!doctype html>
+<html lang="en-US">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>8  Asymptotic Distribution of MLE (Part II) – STAT 415 | Introduction to Mathematical Statistics</title>
+<meta name="source-url" content="https://online.stat.psu.edu/stat415/Lesson08">
+<meta name="translation-provenance" content="OpenAI Codex gpt-5.6-sol, Ultra">
+</head>
+<body>
+<main class="content" data-component-id="Lesson08" data-document-id="O006-PSU-009" data-source-url="https://online.stat.psu.edu/stat415/Lesson08" id="quarto-document-content">
+<header class="quarto-title-block default" data-o006-id="O006-PSU-009-U0001" id="title-block-header"><nav aria-label="breadcrumb" class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" data-o006-id="O006-PSU-009-U0002"><ol class="breadcrumb" data-o006-id="O006-PSU-009-U0003"><li class="breadcrumb-item" data-o006-id="O006-PSU-009-U0004"><a data-o006-id="O006-PSU-009-U0005" href="./Lesson00.html">Lessons</a></li><li class="breadcrumb-item" data-o006-id="O006-PSU-009-U0006"><a data-o006-id="O006-PSU-009-U0007" href="./Lesson08.html"><span class="chapter-number">8</span>  <span class="chapter-title">Asymptotic Distribution of MLE (Part II)</span></a></li></ol></nav>
+<div class="quarto-title" data-o006-id="O006-PSU-009-U0008">
+<h1 class="title" data-o006-id="O006-PSU-009-U0009"><span class="chapter-number">8</span>  <span class="chapter-title">Asymptotic Distribution of MLE (Part II)</span></h1>
+<div class="quarto-categories" data-o006-id="O006-PSU-009-U0010">
+<div class="quarto-category" data-o006-id="O006-PSU-009-U0011">MLEs</div>
+<div class="quarto-category" data-o006-id="O006-PSU-009-U0012">Asymptotic Confidence Intervals</div>
+<div class="quarto-category" data-o006-id="O006-PSU-009-U0013">Numerical Approximations</div>
+<div class="quarto-category" data-o006-id="O006-PSU-009-U0014">Bootstrap</div>
+</div>
+</div>
+<div class="quarto-title-meta" data-o006-id="O006-PSU-009-U0015">
+</div>
+</header>
+<section class="level2 unnumbered unlisted" data-o006-id="O006-PSU-009-U0016" id="overview">
+<h2 class="unnumbered unlisted anchored" data-anchor-id="overview" data-o006-id="O006-PSU-009-U0017">Overview</h2>
+<p data-o006-id="O006-PSU-009-U0018">This lesson introduces the bootstrap method—both parametric and nonparametric—for estimating confidence intervals when analytical solutions are infeasible. Additionally, you will explore the Delta method and bootstrap approaches for inference on transformations of parameters. Through examples involving Bernoulli, exponential, normal, geometric, t, and Pareto distributions, you will gain practical skills in applying these techniques, preparing you for advanced statistical inference.</p>
+<div class="objectiveblock" data-o006-id="O006-PSU-009-U0019">
+<p data-o006-id="O006-PSU-009-U0020"><i class="bi bi-check2-circle"></i><span class="callout-header">Objectives</span></p>
+<p data-o006-id="O006-PSU-009-U0021">Upon completion of this lesson, you should be able to:</p>
+<ol data-o006-id="O006-PSU-009-U0022" type="1">
+<li data-o006-id="O006-PSU-009-U0023">Analytically find asymptotic confidence intervals for transformations of parameters estimated using maximum likelihood estimation (“the Delta method”),</li>
+<li data-o006-id="O006-PSU-009-U0024">Numerically approximate asymptotic confidence intervals for MLEs, and for transformations of parameters estimated using MLE using ‘optim’ and computing in R, and</li>
+<li data-o006-id="O006-PSU-009-U0025">Numerically obtain Bootstrap confidence intervals for MLEs, and for transformations of parameters estimated using MLE.</li>
+</ol>
+</div>
+</section>
+<section class="level2" data-number="8.1" data-o006-id="O006-PSU-009-U0026" id="bootstrap-ci">
+<h2 class="anchored" data-anchor-id="bootstrap-ci" data-number="8.1" data-o006-id="O006-PSU-009-U0027"><span class="header-section-number">8.1</span> Bootstrap CI</h2>
+<p data-o006-id="O006-PSU-009-U0028">The confidence intervals constructed above rely on us knowing an approximate distribution for our estimate <span class="math inline" data-o006-math-id="O006-PSU-009-M0001">\(\hat{\theta}\)</span> of the parameter <span class="math inline" data-o006-math-id="O006-PSU-009-M0002">\(\theta\)</span>. We have relied on the asymptotic Normal (Gaussian) approximation for any MLEs above, but there are other ways to find an approximate distribution of an estimate <span class="math inline" data-o006-math-id="O006-PSU-009-M0003">\(\hat{\theta}\)</span>.</p>
+<p data-o006-id="O006-PSU-009-U0029">One incredibly common approach for finding an approximate sampling distribution of an estimator is the bootstrap. A bootstrap is an approach that relies on random samples from an approximate distribution, instead of on an actual defined distribution. The benefit of relying on samples is that we do NOT need to actually know the distribution we are sampling from, we just need to be able to sample from this distribution!</p>
+<p data-o006-id="O006-PSU-009-U0030">The goal of any bootstrap is to construct a method for sampling from the distribution of the estimator. Bootstraps typically do this by (1) approximating the distribution of the data, and then (2) simulating many data sets from that distribution. Each of those simulated data sets is approximately distributed the same as the true data, and each simulated data set could be used to find an estimate of the parameter of interest. Doing so results in (3) many parameter estimates, each a realization from the approximate sampling distribution of the estimator. We don’t know the distribution of these estimates, but we have many samples from this distribution, so we can (4) approximate confidence intervals or other quantities by looking at sample-based approximations.</p>
+<p data-o006-id="O006-PSU-009-U0031">In other words, the bootstrap steps are:</p>
+<div class="ms-3" data-o006-id="O006-PSU-009-U0032">
+<p data-o006-id="O006-PSU-009-U0033"><strong>(1)-(2)</strong>: Simulate <span class="math inline" data-o006-math-id="O006-PSU-009-M0004">\(m\)</span> data sets of <span class="math inline" data-o006-math-id="O006-PSU-009-M0005">\(n\)</span> from the approximate distribution of the data.</p>
+<p data-o006-id="O006-PSU-009-U0034"><strong>(3)</strong>: Calculate <span class="math inline" data-o006-math-id="O006-PSU-009-M0006">\(\hat{\theta}_i\)</span> from each data set, <span class="math inline" data-o006-math-id="O006-PSU-009-M0007">\(i=1, \ldots, m\)</span>.</p>
+<p data-o006-id="O006-PSU-009-U0035"><strong>(4)</strong>: Using the parameter estimates from step (3), obtain an approximate confidence interval.</p>
+</div>
+<p data-o006-id="O006-PSU-009-U0036">In the next section, we demonstrate an example.</p>
+<section class="level3" data-number="8.1.1" data-o006-id="O006-PSU-009-U0037" id="asymptotic-normal-cis-for-t-distributed-data">
+<h3 class="anchored" data-anchor-id="asymptotic-normal-cis-for-t-distributed-data" data-number="8.1.1" data-o006-id="O006-PSU-009-U0038"><span class="header-section-number">8.1.1</span> Asymptotic Normal CIs for t-distributed data</h3>
+<p data-o006-id="O006-PSU-009-U0039">To illustrate this, consider the following data from a t-distribution. We will simulate data here:</p>
+<div class="quarto-float quarto-figure quarto-figure-center anchored" data-o006-id="O006-PSU-009-U0040" id="fig-histooftdistr">
+<figure class="quarto-float quarto-float-fig figure" data-o006-id="O006-PSU-009-U0041">
+<div aria-describedby="fig-histooftdistr-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca" data-o006-id="O006-PSU-009-U0042">
+<div class="cell language-name-processed" data-lightbox="true" data-o006-id="O006-PSU-009-U0043">
+<div class="codeblock-with-label r" data-o006-id="O006-PSU-009-U0044">
+<style>.codeblock-with-label pre.lang-label-1::before { content: "R"; }</style>
+<div class="code-copy-outer-scaffold" data-o006-id="O006-PSU-009-U0045"><div class="sourceCode cell-code" data-language-name-skip="true" data-o006-id="O006-PSU-009-U0046" id="cb1"><pre class="sourceCode r lang-label-1 code-with-copy" data-o006-id="O006-PSU-009-U0047"><code class="sourceCode r" data-o006-id="O006-PSU-009-U0048"><span id="cb1-1"><a aria-hidden="true" data-o006-id="O006-PSU-009-U0049" href="#cb1-1" tabindex="-1"></a>y<span class="ot">=</span><span class="fu">c</span>(<span class="sc">-</span><span class="fl">0.71</span>,<span class="sc">-</span><span class="fl">1.30</span>,<span class="sc">-</span><span class="fl">0.13</span>,<span class="sc">-</span><span class="fl">2.03</span>, <span class="fl">1.62</span>, <span class="fl">2.38</span>, <span class="fl">0.48</span>, <span class="fl">0.51</span>,<span class="sc">-</span><span class="fl">0.69</span>,</span>
+<span id="cb1-2"><a aria-hidden="true" data-o006-id="O006-PSU-009-U0050" href="#cb1-2" tabindex="-1"></a>    <span class="sc">-</span><span class="fl">2.32</span>,<span class="sc">-</span><span class="fl">2.02</span>,<span class="fl">1.23</span>,<span class="sc">-</span><span class="fl">0.25</span>,<span class="fl">0.76</span>,<span class="fl">0.65</span>,<span class="sc">-</span><span class="fl">0.08</span>,<span class="sc">-</span><span class="fl">1.20</span>,<span class="fl">0.99</span>,</span>
+<span id="cb1-3"><a aria-hidden="true" data-o006-id="O006-PSU-009-U0051" href="#cb1-3" tabindex="-1"></a>    <span class="fl">2.58</span>,<span class="fl">0.73</span>,<span class="sc">-</span><span class="fl">0.09</span>,<span class="sc">-</span><span class="fl">0.03</span>,<span class="fl">0.56</span>,<span class="sc">-</span><span class="fl">1.44</span>,<span class="fl">0.13</span>)</span>
+<span id="cb1-4"><a aria-hidden="true" data-o006-id="O006-PSU-009-U0052" href="#cb1-4" tabindex="-1"></a><span class="fu">hist</span>(y)</span></code></pre></div><button class="code-copy-button" data-o006-id="O006-PSU-009-U0053" title="Copy to Clipboard"><i class="bi"></i></button></div>
+</div>
+<div class="cell-output-display" data-o006-id="O006-PSU-009-U0054">
+<div data-o006-id="O006-PSU-009-U0055">
+<figure class="figure" data-o006-id="O006-PSU-009-U0056">
+<p data-o006-id="O006-PSU-009-U0057"><img alt="Histogram of t distribution" class="img-fluid figure-img" data-o006-asset-id="O006-PSU-009-A0001" data-o006-id="O006-PSU-009-U0058" src="Lesson08_files/figure-html/unnamed-chunk-1-1.png" style="width:70.0%"/></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" data-o006-id="O006-PSU-009-U0059" id="fig-histooftdistr-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Fig 8.1
+</figcaption>
+</figure>
+</div>
+<p data-o006-id="O006-PSU-009-U0060">These data are independent of each other and come from <span class="math inline" data-o006-math-id="O006-PSU-009-M0008">\(y_i \sim t(4)\)</span>, a t-distribution with degrees of freedom parameter equal to 4. If we did not know the true value of the degrees of freedom (<span class="math inline" data-o006-math-id="O006-PSU-009-M0009">\(\text{df}\)</span>) parameter, we could first try to find the maximum likelihood estimate directly. However, the pdf of a t-distribution does not result in an analytically solvable MLE. We can find it from the data using numerical maximum likelihood estimation. Numerical inference in R could be done by writing a negative log-likelihood function, and then optimizing using <code data-o006-id="O006-PSU-009-U0061">optim</code>.</p>
+<div class="cell language-name-processed" data-o006-id="O006-PSU-009-U0062">
+<div class="codeblock-with-label r" data-o006-id="O006-PSU-009-U0063">
+<style>.codeblock-with-label pre.lang-label-2::before { content: "R"; }</style>
+<div class="code-copy-outer-scaffold" data-o006-id="O006-PSU-009-U0064"><div class="sourceCode cell-code" data-language-name-skip="true" data-o006-id="O006-PSU-009-U0065" id="cb2"><pre class="sourceCode r lang-label-2 code-with-copy" data-o006-id="O006-PSU-009-U0066"><code class="sourceCode r" data-o006-id="O006-PSU-009-U0067"><span id="cb2-1"><a aria-hidden="true" data-o006-id="O006-PSU-009-U0068" href="#cb2-1" tabindex="-1"></a><span class="do">## negative log-likelihood function</span></span>
+<span id="cb2-2"><a aria-hidden="true" data-o006-id="O006-PSU-009-U0069" href="#cb2-2" tabindex="-1"></a>nll.t<span class="ot">=</span><span class="cf">function</span>(df,y){</span>
+<span id="cb2-3"><a aria-hidden="true" data-o006-id="O006-PSU-009-U0070" href="#cb2-3" tabindex="-1"></a>    <span class="sc">-</span><span class="fu">sum</span>(<span class="fu">dt</span>(y,<span class="at">df=</span>df,<span class="at">log=</span><span class="cn">TRUE</span>))</span>
+<span id="cb2-4"><a aria-hidden="true" data-o006-id="O006-PSU-009-U0071" href="#cb2-4" tabindex="-1"></a>}</span>
+<span id="cb2-5"><a aria-hidden="true" data-o006-id="O006-PSU-009-U0072" href="#cb2-5" tabindex="-1"></a><span class="do">## run optim</span></span>
+<span id="cb2-6"><a aria-hidden="true" data-o006-id="O006-PSU-009-U0073" href="#cb2-6" tabindex="-1"></a>out<span class="ot">=</span><span class="fu">optim</span>(<span class="dv">1</span>,<span class="at">fn=</span>nll.t,<span class="at">y=</span>y,<span class="at">hessian=</span><span class="cn">TRUE</span>)</span>
+<span id="cb2-7"><a aria-hidden="true" data-o006-id="O006-PSU-009-U0074" href="#cb2-7" tabindex="-1"></a><span class="do">## get mle</span></span>
+<span id="cb2-8"><a aria-hidden="true" data-o006-id="O006-PSU-009-U0075" href="#cb2-8" tabindex="-1"></a>df.hat<span class="ot">=</span>out<span class="sc">$</span>par</span>
+<span id="cb2-9"><a aria-hidden="true" data-o006-id="O006-PSU-009-U0076" href="#cb2-9" tabindex="-1"></a>df.hat</span></code></pre></div><button class="code-copy-button" data-o006-id="O006-PSU-009-U0077" title="Copy to Clipboard"><i class="bi"></i></button></div>
+</div>
+<div class="cell-output cell-output-stdout" data-o006-id="O006-PSU-009-U0078">
+<pre data-o006-id="O006-PSU-009-U0079"><code data-o006-id="O006-PSU-009-U0080">[1] 6.63125</code></pre>
+</div>
+</div>
+<p data-o006-id="O006-PSU-009-U0081">We see that our MLE for <span class="math inline" data-o006-math-id="O006-PSU-009-M0010">\(\text{df}\)</span> is <span class="math inline" data-o006-math-id="O006-PSU-009-M0011">\(\hat{\text{df}}=6.63125\)</span>.</p>
+<p data-o006-id="O006-PSU-009-U0082">We could then construct a confidence interval using the asymptotic Normal approximation for MLEs, as follows:</p>
+<div class="cell language-name-processed" data-o006-id="O006-PSU-009-U0083">
+<div class="codeblock-with-label r" data-o006-id="O006-PSU-009-U0084">
+<style>.codeblock-with-label pre.lang-label-3::before { content: "R"; }</style>
+<div class="code-copy-outer-scaffold" data-o006-id="O006-PSU-009-U0085"><div class="sourceCode cell-code" data-language-name-skip="true" data-o006-id="O006-PSU-009-U0086" id="cb4"><pre class="sourceCode r lang-label-3 code-with-copy" data-o006-id="O006-PSU-009-U0087"><code class="sourceCode r" data-o006-id="O006-PSU-009-U0088"><span id="cb4-1"><a aria-hidden="true" data-o006-id="O006-PSU-009-U0089" href="#cb4-1" tabindex="-1"></a><span class="do">## Get Fisher Information</span></span>
+<span id="cb4-2"><a aria-hidden="true" data-o006-id="O006-PSU-009-U0090" href="#cb4-2" tabindex="-1"></a>I<span class="ot">=</span>out<span class="sc">$</span>hessian</span>
+<span id="cb4-3"><a aria-hidden="true" data-o006-id="O006-PSU-009-U0091" href="#cb4-3" tabindex="-1"></a><span class="do">## Get CI</span></span>
+<span id="cb4-4"><a aria-hidden="true" data-o006-id="O006-PSU-009-U0092" href="#cb4-4" tabindex="-1"></a><span class="fu">c</span>(df.hat<span class="fl">-1.96</span><span class="sc">*</span><span class="fu">sqrt</span>(<span class="dv">1</span><span class="sc">/</span>I),df.hat<span class="fl">+1.96</span><span class="sc">*</span><span class="fu">sqrt</span>(<span class="dv">1</span><span class="sc">/</span>I))</span></code></pre></div><button class="code-copy-button" data-o006-id="O006-PSU-009-U0093" title="Copy to Clipboard"><i class="bi"></i></button></div>
+</div>
+<div class="cell-output cell-output-stdout" data-o006-id="O006-PSU-009-U0094">
+<pre data-o006-id="O006-PSU-009-U0095"><code data-o006-id="O006-PSU-009-U0096">[1] -6.6074 19.8699</code></pre>
+</div>
+</div>
+<p data-o006-id="O006-PSU-009-U0097">Note that this confidence interval is quite wide, and in fact includes negative values, which are impossible for the degrees of freedom parameter in a t-distribution!</p>
+<p data-o006-id="O006-PSU-009-U0098">This confidence interval relies on a Normal distribution approximation which is known to be an accurate approximation as the sample size <span class="math inline" data-o006-math-id="O006-PSU-009-M0012">\(n\)</span> goes to infinity. However, for any fixed sample size (<span class="math inline" data-o006-math-id="O006-PSU-009-M0013">\(n=25\)</span> here), we don’t know how good the approximation is. As a normal distribution has as its support the whole real line, negative values are reasonable in that approximate distribution. Since the <span class="math inline" data-o006-math-id="O006-PSU-009-M0014">\(\text{df}\)</span> parameter must be positive, we know that this approximate distribution may not be a great one for our current situation.</p>
+<p data-o006-id="O006-PSU-009-U0099">In the next section, we present another way to construct an approximate confidence interval using bootstrap samples. We will discuss the parametric bootstrap and the nonparametric bootstrap.</p>
+</section>
+<section class="level3" data-number="8.1.2" data-o006-id="O006-PSU-009-U0100" id="the-parametric-bootstrap">
+<h3 class="anchored" data-anchor-id="the-parametric-bootstrap" data-number="8.1.2" data-o006-id="O006-PSU-009-U0101"><span class="header-section-number">8.1.2</span> The Parametric Bootstrap</h3>
+<p data-o006-id="O006-PSU-009-U0102">The first bootstrap we will learn is the <strong>parametric bootstrap</strong>. In any bootstrap method, we need a way to simulate data from an approximation to the distribution that gave rise to the data.</p>
+<p data-o006-id="O006-PSU-009-U0103">In the parametric bootstrap, we do this by first estimating the parameters in the data model, then using those estimated parameters as parameters in the data model to simulate data.</p>
+<p data-o006-id="O006-PSU-009-U0104">Let <span class="math inline" data-o006-math-id="O006-PSU-009-M0015">\(x_i\sim f_X(x_i|\theta)\)</span>, <span class="math inline" data-o006-math-id="O006-PSU-009-M0016">\(i=1, \ldots, n\)</span>, be independent data points that we assume come from the distribution <span class="math inline" data-o006-math-id="O006-PSU-009-M0017">\(f_X(x|\theta)\)</span> which relies on an unknown parameter <span class="math inline" data-o006-math-id="O006-PSU-009-M0018">\(\theta\)</span>.</p>
+<div class="callout callout-style-simple callout-caution no-icon" data-o006-id="O006-PSU-009-U0105">
+<div class="callout-body d-flex" data-o006-id="O006-PSU-009-U0106">
+<div class="callout-icon-container" data-o006-id="O006-PSU-009-U0107">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-body-container" data-o006-id="O006-PSU-009-U0108">
+<p data-o006-id="O006-PSU-009-U0109"><strong>Note!</strong><br/>
+<span class="math inline" data-o006-math-id="O006-PSU-009-M0019">\(\theta\)</span> could potentially be multiple parameters.</p>
+</div>
+</div>
+</div>
+<p data-o006-id="O006-PSU-009-U0110">The <strong>parametric bootstrap</strong> algorithm is as follows:</p>
+<ol data-o006-id="O006-PSU-009-U0111" type="1">
+<li data-o006-id="O006-PSU-009-U0112"><strong>Estimate</strong> <span class="math inline" data-o006-math-id="O006-PSU-009-M0020">\(\hat{\theta}\)</span><br/> Using the data <span class="math inline" data-o006-math-id="O006-PSU-009-M0021">\(\{x_1,x_2,\ldots,x_n\}\)</span>, estimate the parameter <span class="math inline" data-o006-math-id="O006-PSU-009-M0022">\(\hat{\theta}=h(\{x_1,x_2,\ldots,x_n\})\)</span>.</li>
+</ol>
+<p data-o006-id="O006-PSU-009-U0113">This estimation could be done using analytic MLE, numeric MLE, or even some other approach, like method of moments.</p>
+<ol data-o006-id="O006-PSU-009-U0114" start="2" type="1">
+<li data-o006-id="O006-PSU-009-U0115"><strong>Simulate Bootstrap Samples</strong><br/> Using the parameter estimate <span class="math inline" data-o006-math-id="O006-PSU-009-M0023">\(\hat{\theta}\)</span> from step 1, simulate <span class="math inline" data-o006-math-id="O006-PSU-009-M0024">\(M\)</span> independent data sets.</li>
+</ol>
+<p data-o006-id="O006-PSU-009-U0116">Each of the data set are the same size <span class="math inline" data-o006-math-id="O006-PSU-009-M0025">\(n\)</span> as the original data, and each from <span class="math inline" data-o006-math-id="O006-PSU-009-M0026">\(x_i^{(m)}\sim f_X(x|\hat{\theta})\)</span>.</p>
+<div class="callout callout-style-simple callout-caution no-icon" data-o006-id="O006-PSU-009-U0117">
+<div class="callout-body d-flex" data-o006-id="O006-PSU-009-U0118">
+<div class="callout-icon-container" data-o006-id="O006-PSU-009-U0119">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-body-container" data-o006-id="O006-PSU-009-U0120">
+<p data-o006-id="O006-PSU-009-U0121"><strong>Note!</strong><br/>
+we are using the superscript “<span class="math inline" data-o006-math-id="O006-PSU-009-M0027">\((m)\)</span>” to denote the <span class="math inline" data-o006-math-id="O006-PSU-009-M0028">\(m\)</span>-th data set. This results in <span class="math inline" data-o006-math-id="O006-PSU-009-M0029">\(M\)</span> different simulated data sets, each with <span class="math inline" data-o006-math-id="O006-PSU-009-M0030">\(n\)</span> simulated data values: <span class="math display" data-o006-math-id="O006-PSU-009-M0031">\[ \{x_1^{(1)},x_2^{(1)},\ldots,x_n^{(1)}\} \]</span> <span class="math display" data-o006-math-id="O006-PSU-009-M0032">\[ \{x_1^{(2)},x_2^{(2)},\ldots,x_n^{(2)}\} \]</span> <span class="math display" data-o006-math-id="O006-PSU-009-M0033">\[ \vdots \]</span> <span class="math display" data-o006-math-id="O006-PSU-009-M0034">\[ \{x_1^{(M)},x_2^{(M)},\ldots,x_n^{(M)}\} \]</span></p>
+</div>
+</div>
+</div>
+<ol data-o006-id="O006-PSU-009-U0122" start="3" type="1">
+<li data-o006-id="O006-PSU-009-U0123"><strong>Estimate</strong> <span class="math inline" data-o006-math-id="O006-PSU-009-M0035">\(\{\theta^{(m)}\}\)</span> <strong>using Bootstrap Data</strong><br/> Now use each of these <span class="math inline" data-o006-math-id="O006-PSU-009-M0036">\(M\)</span> data sets to obtain an estimate of <span class="math inline" data-o006-math-id="O006-PSU-009-M0037">\(\theta\)</span>, using the same method used in step 1.</li>
+</ol>
+<p data-o006-id="O006-PSU-009-U0124">This results in <span class="math inline" data-o006-math-id="O006-PSU-009-M0038">\(M\)</span> different parameter estimates: <span class="math inline" data-o006-math-id="O006-PSU-009-M0039">\(\{\hat{\theta}^{(1)},\hat{\theta}^{(2)},\ldots,\hat{\theta}^{(M)}\}\)</span>, each from a different simulated data set <span class="math display" data-o006-math-id="O006-PSU-009-M0040">\[ \{x_1^{(1)},x_2^{(1)},\ldots,x_n^{(1)}\} \rightarrow  \hat{\theta}^{(1)}\]</span> <span class="math display" data-o006-math-id="O006-PSU-009-M0041">\[ \{x_1^{(2)},x_2^{(2)},\ldots,x_n^{(2)}\} \rightarrow \hat{\theta}^{(2)}\]</span> <span class="math display" data-o006-math-id="O006-PSU-009-M0042">\[ \vdots \]</span> <span class="math display" data-o006-math-id="O006-PSU-009-M0043">\[ \{x_1^{(M)},x_2^{(M)},\ldots,x_n^{(M)}\} \rightarrow \hat{\theta}^{(M)} \]</span> This set of <span class="math inline" data-o006-math-id="O006-PSU-009-M0044">\(M\)</span> parameter estimates are approximately distributed as samples from the distribution of our parameter estimate <span class="math inline" data-o006-math-id="O006-PSU-009-M0045">\(\hat{\theta}\)</span>, with the approximation coming from the fact that we simulated data from <span class="math inline" data-o006-math-id="O006-PSU-009-M0046">\(f_X(x|\hat{\theta})\)</span> - the generating distribution of the data assuming that the true parameter is our estimate <span class="math inline" data-o006-math-id="O006-PSU-009-M0047">\(\hat{\theta}\)</span>, instead of from the true generating distribution <span class="math inline" data-o006-math-id="O006-PSU-009-M0048">\(f_X(x|\theta)\)</span>.</p>
+<ol data-o006-id="O006-PSU-009-U0125" start="4" type="1">
+<li data-o006-id="O006-PSU-009-U0126"><strong>Inference on</strong> <span class="math inline" data-o006-math-id="O006-PSU-009-M0049">\(\hat{\theta}\)</span><br/> We can then use this set of parameter estimates to numerically approximate properties of the distribution of our estimate <span class="math inline" data-o006-math-id="O006-PSU-009-M0050">\(\hat{\theta}\)</span>.</li>
+</ol>
+<p data-o006-id="O006-PSU-009-U0127">For example, if we are interested in a 95% confidence interval on <span class="math inline" data-o006-math-id="O006-PSU-009-M0051">\(\theta\)</span>, we could approximate it with a 95% probability interval of this sampling distribution, by finding the .025 and .975 quantile of the samples <span class="math inline" data-o006-math-id="O006-PSU-009-M0052">\(\{\hat{\theta}^{(1)},\hat{\theta}^{(2)},\ldots,\hat{\theta}^{(M)}\}\)</span>. <span class="math display" data-o006-math-id="O006-PSU-009-M0053">\[ 95\% \text{ CI on }  \theta \approx \left(\hat{q}_{.025}\left\{\hat{\theta}^{(1)},\hat{\theta}^{(2)},\ldots,\hat{\theta}^{(M)}\right\}\ ,\ \hat{q}_{.975}\left\{\{\hat{\theta}^{(1)},\hat{\theta}^{(2)},\ldots,\hat{\theta}^{(M)}\right\}\right)\]</span> To approximate a .025 and .975 quantile well, we will need a large number <span class="math inline" data-o006-math-id="O006-PSU-009-M0054">\(M\)</span> of bootstrap samples.</p>
+<section class="level4" data-o006-id="O006-PSU-009-U0128" id="parametric-bootstrap-confidence-interval-for-t-distributed-data">
+<h4 class="anchored" data-anchor-id="parametric-bootstrap-confidence-interval-for-t-distributed-data" data-o006-id="O006-PSU-009-U0129">Parametric Bootstrap Confidence Interval for t-distributed data</h4>
+<p data-o006-id="O006-PSU-009-U0130">To illustrate this approach, we will construct a bootstrap 95% confidence interval on <span class="math inline" data-o006-math-id="O006-PSU-009-M0055">\(df\)</span> from our t-distributed data example. For clarity, we will re-introduce the data and model. The data are as follows:</p>
+<div class="cell language-name-processed" data-o006-id="O006-PSU-009-U0131">
+<div class="codeblock-with-label r" data-o006-id="O006-PSU-009-U0132">
+<style>.codeblock-with-label pre.lang-label-4::before { content: "R"; }</style>
+<div class="code-copy-outer-scaffold" data-o006-id="O006-PSU-009-U0133"><div class="sourceCode cell-code" data-language-name-skip="true" data-o006-id="O006-PSU-009-U0134" id="cb6"><pre class="sourceCode r lang-label-4 code-with-copy" data-o006-id="O006-PSU-009-U0135"><code class="sourceCode r" data-o006-id="O006-PSU-009-U0136"><span id="cb6-1"><a aria-hidden="true" data-o006-id="O006-PSU-009-U0137" href="#cb6-1" tabindex="-1"></a>x<span class="ot">=</span><span class="fu">c</span>(<span class="sc">-</span><span class="fl">0.71</span>,<span class="sc">-</span><span class="fl">1.30</span>,<span class="sc">-</span><span class="fl">0.13</span>,<span class="sc">-</span><span class="fl">2.03</span>, <span class="fl">1.62</span>, <span class="fl">2.38</span>, <span class="fl">0.48</span>, <span class="fl">0.51</span>,<span class="sc">-</span><span class="fl">0.69</span>,</span>
+<span id="cb6-2"><a aria-hidden="true" data-o006-id="O006-PSU-009-U0138" href="#cb6-2" tabindex="-1"></a>    <span class="sc">-</span><span class="fl">2.32</span>,<span class="sc">-</span><span class="fl">2.02</span>,<span class="fl">1.23</span>,<span class="sc">-</span><span class="fl">0.25</span>,<span class="fl">0.76</span>,<span class="fl">0.65</span>,<span class="sc">-</span><span class="fl">0.08</span>,<span class="sc">-</span><span class="fl">1.20</span>,<span class="fl">0.99</span>,</span>
+<span id="cb6-3"><a aria-hidden="true" data-o006-id="O006-PSU-009-U0139" href="#cb6-3" tabindex="-1"></a>    <span class="fl">2.58</span>,<span class="fl">0.73</span>,<span class="sc">-</span><span class="fl">0.09</span>,<span class="sc">-</span><span class="fl">0.03</span>,<span class="fl">0.56</span>,<span class="sc">-</span><span class="fl">1.44</span>,<span class="fl">0.13</span>)</span></code></pre></div><button class="code-copy-button" data-o006-id="O006-PSU-009-U0140" title="Copy to Clipboard"><i class="bi"></i></button></div>
+</div>
+</div>
+<p data-o006-id="O006-PSU-009-U0141">and we assume that <span class="math inline" data-o006-math-id="O006-PSU-009-M0056">\(x_i\sim t(\text{df})\)</span>, where <span class="math inline" data-o006-math-id="O006-PSU-009-M0057">\(\text{df}\)</span> is an unknown parameter to be estimated, <span class="math inline" data-o006-math-id="O006-PSU-009-M0058">\(\theta\)</span>.</p>
+<p data-o006-id="O006-PSU-009-U0142">Following the 4 steps above:</p>
+<ol data-o006-id="O006-PSU-009-U0143" type="1">
+<li data-o006-id="O006-PSU-009-U0144"><p data-o006-id="O006-PSU-009-U0145"><strong>Estimate</strong> <span class="math inline" data-o006-math-id="O006-PSU-009-M0059">\(\hat{\theta}\)</span><br/> Using the data <span class="math inline" data-o006-math-id="O006-PSU-009-M0060">\(\{x_1,x_2,\ldots,x_n\}\)</span>, we estimate the parameter <span class="math inline" data-o006-math-id="O006-PSU-009-M0061">\(\hat{\theta}\)</span> using numerical maximum likelihood.</p>
+<div class="cell language-name-processed" data-o006-id="O006-PSU-009-U0146">
+<div class="codeblock-with-label r" data-o006-id="O006-PSU-009-U0147">
+<style>.codeblock-with-label pre.lang-label-5::before { content: "R"; }</style>
+<div class="code-copy-outer-scaffold" data-o006-id="O006-PSU-009-U0148"><div class="sourceCode cell-code" data-language-name-skip="true" data-o006-id="O006-PSU-009-U0149" id="cb7"><pre class="sourceCode r lang-label-5 code-with-copy" data-o006-id="O006-PSU-009-U0150"><code class="sourceCode r" data-o006-id="O006-PSU-009-U0151"><span id="cb7-1"><a aria-hidden="true" data-o006-id="O006-PSU-009-U0152" href="#cb7-1" tabindex="-1"></a><span class="do">## negative log-likelihood function</span></span>
+<span id="cb7-2"><a aria-hidden="true" data-o006-id="O006-PSU-009-U0153" href="#cb7-2" tabindex="-1"></a>nll.t<span class="ot">=</span><span class="cf">function</span>(df,y){</span>
+<span id="cb7-3"><a aria-hidden="true" data-o006-id="O006-PSU-009-U0154" href="#cb7-3" tabindex="-1"></a>   <span class="sc">-</span><span class="fu">sum</span>(<span class="fu">dt</span>(y,<span class="at">df=</span>df,<span class="at">log=</span><span class="cn">TRUE</span>))</span>
+<span id="cb7-4"><a aria-hidden="true" data-o006-id="O006-PSU-009-U0155" href="#cb7-4" tabindex="-1"></a>}</span>
+<span id="cb7-5"><a aria-hidden="true" data-o006-id="O006-PSU-009-U0156" href="#cb7-5" tabindex="-1"></a><span class="do">## run optim</span></span>
+<span id="cb7-6"><a aria-hidden="true" data-o006-id="O006-PSU-009-U0157" href="#cb7-6" tabindex="-1"></a>out<span class="ot">=</span><span class="fu">optim</span>(<span class="dv">1</span>,<span class="at">fn=</span>nll.t,<span class="at">y=</span>y,<span class="at">hessian=</span><span class="cn">TRUE</span>)</span>
+<span id="cb7-7"><a aria-hidden="true" data-o006-id="O006-PSU-009-U0158" href="#cb7-7" tabindex="-1"></a><span class="do">## get mle</span></span>
+<span id="cb7-8"><a aria-hidden="true" data-o006-id="O006-PSU-009-U0159" href="#cb7-8" tabindex="-1"></a>df.hat<span class="ot">=</span>out<span class="sc">$</span>par</span>
+<span id="cb7-9"><a aria-hidden="true" data-o006-id="O006-PSU-009-U0160" href="#cb7-9" tabindex="-1"></a>df.hat</span></code></pre></div><button class="code-copy-button" data-o006-id="O006-PSU-009-U0161" title="Copy to Clipboard"><i class="bi"></i></button></div>
+</div>
+<div class="cell-output cell-output-stdout" data-o006-id="O006-PSU-009-U0162">
+<pre data-o006-id="O006-PSU-009-U0163"><code data-o006-id="O006-PSU-009-U0164">[1] 6.63125</code></pre>
+</div>
+</div>
+<p data-o006-id="O006-PSU-009-U0165">The estimate of <span class="math inline" data-o006-math-id="O006-PSU-009-M0062">\(\theta\)</span> is <span class="math inline" data-o006-math-id="O006-PSU-009-M0063">\(\hat{\theta}=6.63125\)</span>.</p></li>
+<li data-o006-id="O006-PSU-009-U0166"><p data-o006-id="O006-PSU-009-U0167"><strong>Simulate Bootstrap Samples</strong><br/> We now simulate <span class="math inline" data-o006-math-id="O006-PSU-009-M0064">\(M=1000\)</span> independent data sets, each of the same size <span class="math inline" data-o006-math-id="O006-PSU-009-M0065">\(n=25\)</span> as the original data, and each from <span class="math inline" data-o006-math-id="O006-PSU-009-M0066">\(x_i^{(m)}\sim f_X(x|\hat{\theta})\)</span>, where <span class="math inline" data-o006-math-id="O006-PSU-009-M0067">\(\hat{\theta}=6.63125\)</span>.<br/>
+</p>
+<div class="cell language-name-processed" data-o006-id="O006-PSU-009-U0168">
+<div class="codeblock-with-label r" data-o006-id="O006-PSU-009-U0169">
+<style>.codeblock-with-label pre.lang-label-6::before { content: "R"; }</style>
+<div class="code-copy-outer-scaffold" data-o006-id="O006-PSU-009-U0170"><div class="sourceCode cell-code" data-language-name-skip="true" data-o006-id="O006-PSU-009-U0171" id="cb9"><pre class="sourceCode r lang-label-6 code-with-copy" data-o006-id="O006-PSU-009-U0172"><code class="sourceCode r" data-o006-id="O006-PSU-009-U0173"><span id="cb9-1"><a aria-hidden="true" data-o006-id="O006-PSU-009-U0174" href="#cb9-1" tabindex="-1"></a><span class="do">## find the size of the original data set</span></span>
+<span id="cb9-2"><a aria-hidden="true" data-o006-id="O006-PSU-009-U0175" href="#cb9-2" tabindex="-1"></a>n<span class="ot">=</span><span class="fu">length</span>(x)</span>
+<span id="cb9-3"><a aria-hidden="true" data-o006-id="O006-PSU-009-U0176" href="#cb9-3" tabindex="-1"></a><span class="do">## choose the number of bootstrap samples</span></span>
+<span id="cb9-4"><a aria-hidden="true" data-o006-id="O006-PSU-009-U0177" href="#cb9-4" tabindex="-1"></a>M<span class="ot">=</span><span class="dv">1000</span></span>
+<span id="cb9-5"><a aria-hidden="true" data-o006-id="O006-PSU-009-U0178" href="#cb9-5" tabindex="-1"></a><span class="do">## make a list to hold the simulated data sets</span></span>
+<span id="cb9-6"><a aria-hidden="true" data-o006-id="O006-PSU-009-U0179" href="#cb9-6" tabindex="-1"></a>sim.data<span class="ot">=</span><span class="fu">list</span>()</span>
+<span id="cb9-7"><a aria-hidden="true" data-o006-id="O006-PSU-009-U0180" href="#cb9-7" tabindex="-1"></a><span class="do">## start a "for" loop, going from 1 to M=1000</span></span>
+<span id="cb9-8"><a aria-hidden="true" data-o006-id="O006-PSU-009-U0181" href="#cb9-8" tabindex="-1"></a><span class="cf">for</span>(m <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>M){</span>
+<span id="cb9-9"><a aria-hidden="true" data-o006-id="O006-PSU-009-U0182" href="#cb9-9" tabindex="-1"></a>  <span class="do">## simulate the m-th data set from x[i]~dt(df.hat)</span></span>
+<span id="cb9-10"><a aria-hidden="true" data-o006-id="O006-PSU-009-U0183" href="#cb9-10" tabindex="-1"></a>  <span class="do">## note that the size "n" is the same as the size of the    original data</span></span>
+<span id="cb9-11"><a aria-hidden="true" data-o006-id="O006-PSU-009-U0184" href="#cb9-11" tabindex="-1"></a>  sim.data[[m]]<span class="ot">=</span><span class="fu">rt</span>(n,<span class="at">df=</span>df.hat)</span>
+<span id="cb9-12"><a aria-hidden="true" data-o006-id="O006-PSU-009-U0185" href="#cb9-12" tabindex="-1"></a>}</span></code></pre></div><button class="code-copy-button" data-o006-id="O006-PSU-009-U0186" title="Copy to Clipboard"><i class="bi"></i></button></div>
+</div>
+</div></li>
+<li data-o006-id="O006-PSU-009-U0187"><p data-o006-id="O006-PSU-009-U0188"><strong>Estimate</strong> <span class="math inline" data-o006-math-id="O006-PSU-009-M0068">\(\{\theta^{(m)}\}\)</span> <strong>using Bootstrap Data</strong><br/> Now use each of these <span class="math inline" data-o006-math-id="O006-PSU-009-M0069">\(M\)</span> data sets to obtain an estimate of <span class="math inline" data-o006-math-id="O006-PSU-009-M0070">\(\theta\)</span>, using the same method used in step 1.</p>
+<div class="cell language-name-processed" data-o006-id="O006-PSU-009-U0189">
+<div class="codeblock-with-label r" data-o006-id="O006-PSU-009-U0190">
+<style>.codeblock-with-label pre.lang-label-7::before { content: "R"; }</style>
+<div class="code-copy-outer-scaffold" data-o006-id="O006-PSU-009-U0191"><div class="sourceCode cell-code" data-language-name-skip="true" data-o006-id="O006-PSU-009-U0192" id="cb10"><pre class="sourceCode r lang-label-7 code-with-copy" data-o006-id="O006-PSU-009-U0193"><code class="sourceCode r" data-o006-id="O006-PSU-009-U0194"><span id="cb10-1"><a aria-hidden="true" data-o006-id="O006-PSU-009-U0195" href="#cb10-1" tabindex="-1"></a><span class="do">## make a vector to store the values of theta.hat</span></span>
+<span id="cb10-2"><a aria-hidden="true" data-o006-id="O006-PSU-009-U0196" href="#cb10-2" tabindex="-1"></a>theta.hat.vals<span class="ot">=</span><span class="fu">rep</span>(<span class="cn">NA</span>,M)</span>
+<span id="cb10-3"><a aria-hidden="true" data-o006-id="O006-PSU-009-U0197" href="#cb10-3" tabindex="-1"></a><span class="do">## start a "for" loop, going from 1 to M=1000</span></span>
+<span id="cb10-4"><a aria-hidden="true" data-o006-id="O006-PSU-009-U0198" href="#cb10-4" tabindex="-1"></a><span class="cf">for</span>(m <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>M){</span>
+<span id="cb10-5"><a aria-hidden="true" data-o006-id="O006-PSU-009-U0199" href="#cb10-5" tabindex="-1"></a>  <span class="do">## estimate theta using the m-th data set</span></span>
+<span id="cb10-6"><a aria-hidden="true" data-o006-id="O006-PSU-009-U0200" href="#cb10-6" tabindex="-1"></a>  <span class="fu">suppressWarnings</span>({out<span class="ot">=</span><span class="fu">optim</span>(<span class="dv">1</span>,nll.t,<span class="at">y=</span>sim.data[[m]])})</span>
+<span id="cb10-7"><a aria-hidden="true" data-o006-id="O006-PSU-009-U0201" href="#cb10-7" tabindex="-1"></a>  <span class="do">## save the MLE</span></span>
+<span id="cb10-8"><a aria-hidden="true" data-o006-id="O006-PSU-009-U0202" href="#cb10-8" tabindex="-1"></a>  theta.hat.vals[m]<span class="ot">=</span>out<span class="sc">$</span>par</span>
+<span id="cb10-9"><a aria-hidden="true" data-o006-id="O006-PSU-009-U0203" href="#cb10-9" tabindex="-1"></a>}</span></code></pre></div><button class="code-copy-button" data-o006-id="O006-PSU-009-U0204" title="Copy to Clipboard"><i class="bi"></i></button></div>
+</div>
+</div>
+<p data-o006-id="O006-PSU-009-U0205">This gives us a vector of <span class="math inline" data-o006-math-id="O006-PSU-009-M0071">\(M\)</span> estimates of <span class="math inline" data-o006-math-id="O006-PSU-009-M0072">\(\theta\)</span>, each resulting from finding the MLE of a simulated data set. These are called “bootstrap samples” of <span class="math inline" data-o006-math-id="O006-PSU-009-M0073">\(\hat{\theta}\)</span>.</p>
+<p data-o006-id="O006-PSU-009-U0206">To visualize them, here is a histogram:</p>
+<div class="quarto-float quarto-figure quarto-figure-center anchored" data-o006-id="O006-PSU-009-U0207" id="fig-bootstrapsamplesmleex4">
+<figure class="quarto-float quarto-float-fig figure" data-o006-id="O006-PSU-009-U0208">
+<div aria-describedby="fig-bootstrapsamplesmleex4-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca" data-o006-id="O006-PSU-009-U0209">
+<div class="cell language-name-processed" data-lightbox="true" data-o006-id="O006-PSU-009-U0210">
+<div class="codeblock-with-label r" data-o006-id="O006-PSU-009-U0211">
+<style>.codeblock-with-label pre.lang-label-8::before { content: "R"; }</style>
+<div class="code-copy-outer-scaffold" data-o006-id="O006-PSU-009-U0212"><div class="sourceCode cell-code" data-language-name-skip="true" data-o006-id="O006-PSU-009-U0213" id="cb11"><pre class="sourceCode r lang-label-8 code-with-copy" data-o006-id="O006-PSU-009-U0214"><code class="sourceCode r" data-o006-id="O006-PSU-009-U0215"><span id="cb11-1"><a aria-hidden="true" data-o006-id="O006-PSU-009-U0216" href="#cb11-1" tabindex="-1"></a><span class="fu">hist</span>(theta.hat.vals,<span class="at">main=</span><span class="st">"Bootstrap samples"</span>,<span class="at">xlab=</span><span class="st">"theta.hat"</span>,<span class="at">ylab=</span><span class="st">""</span>)</span></code></pre></div><button class="code-copy-button" data-o006-id="O006-PSU-009-U0217" title="Copy to Clipboard"><i class="bi"></i></button></div>
+</div>
+<div class="cell-output-display" data-o006-id="O006-PSU-009-U0218">
+<div data-o006-id="O006-PSU-009-U0219">
+<figure class="figure" data-o006-id="O006-PSU-009-U0220">
+<p data-o006-id="O006-PSU-009-U0221"><img alt="Distribution of bootstrap samples" class="img-fluid figure-img" data-o006-asset-id="O006-PSU-009-A0002" data-o006-id="O006-PSU-009-U0222" src="Lesson08_files/figure-html/unnamed-chunk-8-1.png" style="width:70.0%"/></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" data-o006-id="O006-PSU-009-U0223" id="fig-bootstrapsamplesmleex4-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Fig 8.2
+</figcaption>
+</figure>
+</div></li>
+<li data-o006-id="O006-PSU-009-U0224"><p data-o006-id="O006-PSU-009-U0225"><strong>Inference on</strong> <span class="math inline" data-o006-math-id="O006-PSU-009-M0074">\(\hat{\theta}\)</span><br/> We can now construct a 95% confidence interval from this bootstrap sample by finding its empirical .025 and .975 quantiles. This can be done using the <code data-o006-id="O006-PSU-009-U0226">quantile</code> command in R:</p>
+<div class="cell language-name-processed" data-o006-id="O006-PSU-009-U0227">
+<div class="codeblock-with-label r" data-o006-id="O006-PSU-009-U0228">
+<style>.codeblock-with-label pre.lang-label-9::before { content: "R"; }</style>
+<div class="code-copy-outer-scaffold" data-o006-id="O006-PSU-009-U0229"><div class="sourceCode cell-code" data-language-name-skip="true" data-o006-id="O006-PSU-009-U0230" id="cb12"><pre class="sourceCode r lang-label-9 code-with-copy" data-o006-id="O006-PSU-009-U0231"><code class="sourceCode r" data-o006-id="O006-PSU-009-U0232"><span id="cb12-1"><a aria-hidden="true" data-o006-id="O006-PSU-009-U0233" href="#cb12-1" tabindex="-1"></a><span class="do">## 95% CI </span></span>
+<span id="cb12-2"><a aria-hidden="true" data-o006-id="O006-PSU-009-U0234" href="#cb12-2" tabindex="-1"></a><span class="fu">quantile</span>(theta.hat.vals,<span class="fu">c</span>(.<span class="dv">025</span>,.<span class="dv">975</span>))</span></code></pre></div><button class="code-copy-button" data-o006-id="O006-PSU-009-U0235" title="Copy to Clipboard"><i class="bi"></i></button></div>
+</div>
+<div class="cell-output cell-output-stdout" data-o006-id="O006-PSU-009-U0236">
+<pre data-o006-id="O006-PSU-009-U0237"><code data-o006-id="O006-PSU-009-U0238">        2.5%        97.5% 
+2.612500e+00 1.342177e+07 </code></pre>
+</div>
+</div></li>
+</ol>
+<p data-o006-id="O006-PSU-009-U0239">Therefore, the approximate 95% parametric bootstrap confidence interval for <span class="math inline" data-o006-math-id="O006-PSU-009-M0075">\(\theta=\text{df}\)</span> is <span class="math inline" data-o006-math-id="O006-PSU-009-M0076">\((2.5789, 2.68\times10^7)\)</span>. While it does not contain negative values as our previous confidence interval, it is a very wide interval!</p>
+<p data-o006-id="O006-PSU-009-U0240">Let’s consider another bootstrap method.</p>
+</section>
+</section>
+<section class="level3" data-number="8.1.3" data-o006-id="O006-PSU-009-U0241" id="nonparametric-bootstrap-confidence-intervals">
+<h3 class="anchored" data-anchor-id="nonparametric-bootstrap-confidence-intervals" data-number="8.1.3" data-o006-id="O006-PSU-009-U0242"><span class="header-section-number">8.1.3</span> Nonparametric Bootstrap Confidence Intervals</h3>
+<p data-o006-id="O006-PSU-009-U0243">The parametric bootstrap introduced above simulated new data sets from (approximately) the same distribution as our observed data by using the assumed model ( a t-distribution in the above example) and the parameters estimated from the observed data (the MLE of <span class="math inline" data-o006-math-id="O006-PSU-009-M0077">\(\text{df}\)</span> in the above example).</p>
+<p data-o006-id="O006-PSU-009-U0244">An alternative approach to the bootstrap is to simulate new data sets directly from the observed data by resampling. This approach is called the <strong>nonparametric bootstrap</strong>.</p>
+<p data-o006-id="O006-PSU-009-U0245">The reasoning behind the nonparametric bootstrap is as follows. If we have observed data <span class="math inline" data-o006-math-id="O006-PSU-009-M0078">\(x_i \sim f_X(x)\)</span> that are independent and identically distributed, then the best information about the distribution <span class="math inline" data-o006-math-id="O006-PSU-009-M0079">\(f_X\)</span> that we have is actually the data themselves. We could approximate a new draw from <span class="math inline" data-o006-math-id="O006-PSU-009-M0080">\(f_X\)</span> by just drawing, at random, one of the observed values <span class="math inline" data-o006-math-id="O006-PSU-009-M0081">\(x_1,x_2,\ldots,x_n\)</span>. this is called “sampling from the <strong>empirical distribution</strong> of the data”.</p>
+<p data-o006-id="O006-PSU-009-U0246">The empirical distribution of a set of data <span class="math inline" data-o006-math-id="O006-PSU-009-M0082">\(x_1,x_2,\ldots,x_n\)</span> is a discrete distribution, with support equal to the unique values in the data <span class="math inline" data-o006-math-id="O006-PSU-009-M0083">\(x_1,x_2,\ldots,x_n\)</span> and pmf defined by <span class="math display" data-o006-math-id="O006-PSU-009-M0084">\[P(X=x) =  \begin{cases} 1/n &amp;,\text{ if }x=x_i \text{ for some }i\in\{1,2,\ldots,n\} \\ 0 &amp; \text{ otherwise} \end{cases}\]</span></p>
+<p data-o006-id="O006-PSU-009-U0247">Therefore, the empirical distribution puts equal weight on each of the observed values in the dataset.</p>
+<section class="level4" data-o006-id="O006-PSU-009-U0248" id="nonparametric-bootstrap-confidence-interval-for-t-distributed-data">
+<h4 class="anchored" data-anchor-id="nonparametric-bootstrap-confidence-interval-for-t-distributed-data" data-o006-id="O006-PSU-009-U0249">Nonparametric Bootstrap Confidence Interval for t-distributed data</h4>
+<p data-o006-id="O006-PSU-009-U0250">We now construct a 95% confidence interval on the <span class="math inline" data-o006-math-id="O006-PSU-009-M0085">\(\text{df}\)</span> parameter of our t-distributed data using a nonparametric bootstrap.</p>
+<p data-o006-id="O006-PSU-009-U0251">Similar to the parametric data example, we will re-state the model and data. The data are as follows:</p>
+<div class="cell language-name-processed" data-o006-id="O006-PSU-009-U0252">
+<div class="codeblock-with-label r" data-o006-id="O006-PSU-009-U0253">
+<style>.codeblock-with-label pre.lang-label-10::before { content: "R"; }</style>
+<div class="code-copy-outer-scaffold" data-o006-id="O006-PSU-009-U0254"><div class="sourceCode cell-code" data-language-name-skip="true" data-o006-id="O006-PSU-009-U0255" id="cb14"><pre class="sourceCode r lang-label-10 code-with-copy" data-o006-id="O006-PSU-009-U0256"><code class="sourceCode r" data-o006-id="O006-PSU-009-U0257"><span id="cb14-1"><a aria-hidden="true" data-o006-id="O006-PSU-009-U0258" href="#cb14-1" tabindex="-1"></a>x<span class="ot">=</span><span class="fu">c</span>(<span class="sc">-</span><span class="fl">0.71</span>,<span class="sc">-</span><span class="fl">1.30</span>,<span class="sc">-</span><span class="fl">0.13</span>,<span class="sc">-</span><span class="fl">2.03</span>, <span class="fl">1.62</span>, <span class="fl">2.38</span>, <span class="fl">0.48</span>, <span class="fl">0.51</span>,<span class="sc">-</span><span class="fl">0.69</span>,</span>
+<span id="cb14-2"><a aria-hidden="true" data-o006-id="O006-PSU-009-U0259" href="#cb14-2" tabindex="-1"></a>    <span class="sc">-</span><span class="fl">2.32</span>,<span class="sc">-</span><span class="fl">2.02</span>,<span class="fl">1.23</span>,<span class="sc">-</span><span class="fl">0.25</span>,<span class="fl">0.76</span>,<span class="fl">0.65</span>,<span class="sc">-</span><span class="fl">0.08</span>,<span class="sc">-</span><span class="fl">1.20</span>,<span class="fl">0.99</span>,</span>
+<span id="cb14-3"><a aria-hidden="true" data-o006-id="O006-PSU-009-U0260" href="#cb14-3" tabindex="-1"></a>    <span class="fl">2.58</span>,<span class="fl">0.73</span>,<span class="sc">-</span><span class="fl">0.09</span>,<span class="sc">-</span><span class="fl">0.03</span>,<span class="fl">0.56</span>,<span class="sc">-</span><span class="fl">1.44</span>,<span class="fl">0.13</span>)</span></code></pre></div><button class="code-copy-button" data-o006-id="O006-PSU-009-U0261" title="Copy to Clipboard"><i class="bi"></i></button></div>
+</div>
+</div>
+<p data-o006-id="O006-PSU-009-U0262">and we assume that <span class="math inline" data-o006-math-id="O006-PSU-009-M0086">\(x_i\sim t(\text{df})\)</span>, where <span class="math inline" data-o006-math-id="O006-PSU-009-M0087">\(\text{df}\)</span> is an unknown parameter to be estimated, <span class="math inline" data-o006-math-id="O006-PSU-009-M0088">\(\theta\)</span>.</p>
+<p data-o006-id="O006-PSU-009-U0263">Following the 4 steps above:</p>
+<ol data-o006-id="O006-PSU-009-U0264" type="1">
+<li data-o006-id="O006-PSU-009-U0265"><p data-o006-id="O006-PSU-009-U0266"><strong>Estimate</strong> <span class="math inline" data-o006-math-id="O006-PSU-009-M0089">\(\hat{\theta}\)</span><br/> Using the data <span class="math inline" data-o006-math-id="O006-PSU-009-M0090">\(\{x_1,x_2,\ldots,x_n\}\)</span>, we estimate the parameter <span class="math inline" data-o006-math-id="O006-PSU-009-M0091">\(\hat{\theta}\)</span> using numerical maximum likelihood.<br/>
+</p>
+<div class="cell language-name-processed" data-o006-id="O006-PSU-009-U0267">
+<div class="codeblock-with-label r" data-o006-id="O006-PSU-009-U0268">
+<style>.codeblock-with-label pre.lang-label-11::before { content: "R"; }</style>
+<div class="code-copy-outer-scaffold" data-o006-id="O006-PSU-009-U0269"><div class="sourceCode cell-code" data-language-name-skip="true" data-o006-id="O006-PSU-009-U0270" id="cb15"><pre class="sourceCode r lang-label-11 code-with-copy" data-o006-id="O006-PSU-009-U0271"><code class="sourceCode r" data-o006-id="O006-PSU-009-U0272"><span id="cb15-1"><a aria-hidden="true" data-o006-id="O006-PSU-009-U0273" href="#cb15-1" tabindex="-1"></a><span class="do">## negative log-likelihood function</span></span>
+<span id="cb15-2"><a aria-hidden="true" data-o006-id="O006-PSU-009-U0274" href="#cb15-2" tabindex="-1"></a>nll.t<span class="ot">=</span><span class="cf">function</span>(df,y){</span>
+<span id="cb15-3"><a aria-hidden="true" data-o006-id="O006-PSU-009-U0275" href="#cb15-3" tabindex="-1"></a> <span class="sc">-</span><span class="fu">sum</span>(<span class="fu">dt</span>(y,<span class="at">df=</span>df,<span class="at">log=</span><span class="cn">TRUE</span>))</span>
+<span id="cb15-4"><a aria-hidden="true" data-o006-id="O006-PSU-009-U0276" href="#cb15-4" tabindex="-1"></a>}</span>
+<span id="cb15-5"><a aria-hidden="true" data-o006-id="O006-PSU-009-U0277" href="#cb15-5" tabindex="-1"></a><span class="do">## run optim</span></span>
+<span id="cb15-6"><a aria-hidden="true" data-o006-id="O006-PSU-009-U0278" href="#cb15-6" tabindex="-1"></a>out<span class="ot">=</span><span class="fu">optim</span>(<span class="dv">1</span>,<span class="at">fn=</span>nll.t,<span class="at">y=</span>y,<span class="at">hessian=</span><span class="cn">TRUE</span>)</span>
+<span id="cb15-7"><a aria-hidden="true" data-o006-id="O006-PSU-009-U0279" href="#cb15-7" tabindex="-1"></a><span class="do">## get mle</span></span>
+<span id="cb15-8"><a aria-hidden="true" data-o006-id="O006-PSU-009-U0280" href="#cb15-8" tabindex="-1"></a>df.hat<span class="ot">=</span>out<span class="sc">$</span>par</span>
+<span id="cb15-9"><a aria-hidden="true" data-o006-id="O006-PSU-009-U0281" href="#cb15-9" tabindex="-1"></a>df.hat</span></code></pre></div><button class="code-copy-button" data-o006-id="O006-PSU-009-U0282" title="Copy to Clipboard"><i class="bi"></i></button></div>
+</div>
+<div class="cell-output cell-output-stdout" data-o006-id="O006-PSU-009-U0283">
+<pre data-o006-id="O006-PSU-009-U0284"><code data-o006-id="O006-PSU-009-U0285">[1] 6.63125</code></pre>
+</div>
+</div></li>
+</ol>
+<p data-o006-id="O006-PSU-009-U0286">Again, our estimate for <span class="math inline" data-o006-math-id="O006-PSU-009-M0092">\(\theta\)</span> is <span class="math inline" data-o006-math-id="O006-PSU-009-M0093">\(\hat{\theta}=6.63125\)</span>.</p>
+<ol data-o006-id="O006-PSU-009-U0287" start="2" type="1">
+<li data-o006-id="O006-PSU-009-U0288"><p data-o006-id="O006-PSU-009-U0289"><strong>Simulate Bootstrap Samples</strong><br/> We now simulate <span class="math inline" data-o006-math-id="O006-PSU-009-M0094">\(M=1000\)</span> independent data sets, each of the same size <span class="math inline" data-o006-math-id="O006-PSU-009-M0095">\(n\)</span> as the original data, and each from the empirical distribution. We can do this by using the <code data-o006-id="O006-PSU-009-U0290">sample</code> command in R:</p>
+<div class="cell language-name-processed" data-o006-id="O006-PSU-009-U0291">
+<div class="codeblock-with-label r" data-o006-id="O006-PSU-009-U0292">
+<style>.codeblock-with-label pre.lang-label-12::before { content: "R"; }</style>
+<div class="code-copy-outer-scaffold" data-o006-id="O006-PSU-009-U0293"><div class="sourceCode cell-code" data-language-name-skip="true" data-o006-id="O006-PSU-009-U0294" id="cb17"><pre class="sourceCode r lang-label-12 code-with-copy" data-o006-id="O006-PSU-009-U0295"><code class="sourceCode r" data-o006-id="O006-PSU-009-U0296"><span id="cb17-1"><a aria-hidden="true" data-o006-id="O006-PSU-009-U0297" href="#cb17-1" tabindex="-1"></a><span class="do">## find the size of the original data set</span></span>
+<span id="cb17-2"><a aria-hidden="true" data-o006-id="O006-PSU-009-U0298" href="#cb17-2" tabindex="-1"></a>n<span class="ot">=</span><span class="fu">length</span>(x)</span>
+<span id="cb17-3"><a aria-hidden="true" data-o006-id="O006-PSU-009-U0299" href="#cb17-3" tabindex="-1"></a><span class="do">## choose the number of bootstrap samples</span></span>
+<span id="cb17-4"><a aria-hidden="true" data-o006-id="O006-PSU-009-U0300" href="#cb17-4" tabindex="-1"></a>M<span class="ot">=</span><span class="dv">1000</span></span>
+<span id="cb17-5"><a aria-hidden="true" data-o006-id="O006-PSU-009-U0301" href="#cb17-5" tabindex="-1"></a><span class="do">## make a list to hold the simulated data sets</span></span>
+<span id="cb17-6"><a aria-hidden="true" data-o006-id="O006-PSU-009-U0302" href="#cb17-6" tabindex="-1"></a>sim.data<span class="ot">=</span><span class="fu">list</span>()</span>
+<span id="cb17-7"><a aria-hidden="true" data-o006-id="O006-PSU-009-U0303" href="#cb17-7" tabindex="-1"></a><span class="do">## start a "for" loop, going from 1 to M=1000</span></span>
+<span id="cb17-8"><a aria-hidden="true" data-o006-id="O006-PSU-009-U0304" href="#cb17-8" tabindex="-1"></a><span class="cf">for</span>(m <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>M){</span>
+<span id="cb17-9"><a aria-hidden="true" data-o006-id="O006-PSU-009-U0305" href="#cb17-9" tabindex="-1"></a>  <span class="do">## simulate the m-th data set from the empirical distribution</span></span>
+<span id="cb17-10"><a aria-hidden="true" data-o006-id="O006-PSU-009-U0306" href="#cb17-10" tabindex="-1"></a>  <span class="do">## note that the size "n" is the same as the size of the original data</span></span>
+<span id="cb17-11"><a aria-hidden="true" data-o006-id="O006-PSU-009-U0307" href="#cb17-11" tabindex="-1"></a>  sim.data[[m]]<span class="ot">=</span><span class="fu">sample</span>(x,<span class="at">size=</span>n,<span class="at">replace=</span><span class="cn">TRUE</span>)</span>
+<span id="cb17-12"><a aria-hidden="true" data-o006-id="O006-PSU-009-U0308" href="#cb17-12" tabindex="-1"></a>}</span></code></pre></div><button class="code-copy-button" data-o006-id="O006-PSU-009-U0309" title="Copy to Clipboard"><i class="bi"></i></button></div>
+</div>
+</div></li>
+<li data-o006-id="O006-PSU-009-U0310"><p data-o006-id="O006-PSU-009-U0311"><strong>Estimate</strong> <span class="math inline" data-o006-math-id="O006-PSU-009-M0096">\(\{\theta^{(m)}\}\)</span> <strong>using Bootstrap Data</strong><br/> Now use each of these <span class="math inline" data-o006-math-id="O006-PSU-009-M0097">\(M\)</span> data sets to obtain an estimate of <span class="math inline" data-o006-math-id="O006-PSU-009-M0098">\(\theta\)</span>, using the same method used in step 1.</p>
+<div class="cell language-name-processed" data-o006-id="O006-PSU-009-U0312">
+<div class="codeblock-with-label r" data-o006-id="O006-PSU-009-U0313">
+<style>.codeblock-with-label pre.lang-label-13::before { content: "R"; }</style>
+<div class="code-copy-outer-scaffold" data-o006-id="O006-PSU-009-U0314"><div class="sourceCode cell-code" data-language-name-skip="true" data-o006-id="O006-PSU-009-U0315" id="cb18"><pre class="sourceCode r lang-label-13 code-with-copy" data-o006-id="O006-PSU-009-U0316"><code class="sourceCode r" data-o006-id="O006-PSU-009-U0317"><span id="cb18-1"><a aria-hidden="true" data-o006-id="O006-PSU-009-U0318" href="#cb18-1" tabindex="-1"></a><span class="do">## make a vector to store the values of theta.hat</span></span>
+<span id="cb18-2"><a aria-hidden="true" data-o006-id="O006-PSU-009-U0319" href="#cb18-2" tabindex="-1"></a>theta.hat.vals<span class="ot">=</span><span class="fu">rep</span>(<span class="cn">NA</span>,M)</span>
+<span id="cb18-3"><a aria-hidden="true" data-o006-id="O006-PSU-009-U0320" href="#cb18-3" tabindex="-1"></a><span class="do">## start a "for" loop, going from 1 to M=1000</span></span>
+<span id="cb18-4"><a aria-hidden="true" data-o006-id="O006-PSU-009-U0321" href="#cb18-4" tabindex="-1"></a><span class="cf">for</span>(m <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>M){</span>
+<span id="cb18-5"><a aria-hidden="true" data-o006-id="O006-PSU-009-U0322" href="#cb18-5" tabindex="-1"></a>  <span class="do">## estimate theta using the m-th data set</span></span>
+<span id="cb18-6"><a aria-hidden="true" data-o006-id="O006-PSU-009-U0323" href="#cb18-6" tabindex="-1"></a>  <span class="fu">suppressWarnings</span>({out<span class="ot">=</span><span class="fu">optim</span>(<span class="dv">1</span>,nll.t,<span class="at">y=</span>sim.data[[m]])})</span>
+<span id="cb18-7"><a aria-hidden="true" data-o006-id="O006-PSU-009-U0324" href="#cb18-7" tabindex="-1"></a>  <span class="do">## save the MLE</span></span>
+<span id="cb18-8"><a aria-hidden="true" data-o006-id="O006-PSU-009-U0325" href="#cb18-8" tabindex="-1"></a>  theta.hat.vals[m]<span class="ot">=</span>out<span class="sc">$</span>par</span>
+<span id="cb18-9"><a aria-hidden="true" data-o006-id="O006-PSU-009-U0326" href="#cb18-9" tabindex="-1"></a>}</span></code></pre></div><button class="code-copy-button" data-o006-id="O006-PSU-009-U0327" title="Copy to Clipboard"><i class="bi"></i></button></div>
+</div>
+</div>
+<p data-o006-id="O006-PSU-009-U0328">This gives us a vector of <span class="math inline" data-o006-math-id="O006-PSU-009-M0099">\(M\)</span> estimates of <span class="math inline" data-o006-math-id="O006-PSU-009-M0100">\(\theta\)</span>, each resulting from finding the MLE of a simulated data set. These are called “bootstrap samples” of <span class="math inline" data-o006-math-id="O006-PSU-009-M0101">\(\hat{\theta}\)</span>.</p>
+<p data-o006-id="O006-PSU-009-U0329">To visualize them, here is a histogram</p>
+<div class="quarto-float quarto-figure quarto-figure-center anchored" data-o006-id="O006-PSU-009-U0330" id="fig-nonparabootstrapdistr">
+<figure class="quarto-float quarto-float-fig figure" data-o006-id="O006-PSU-009-U0331">
+<div aria-describedby="fig-nonparabootstrapdistr-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca" data-o006-id="O006-PSU-009-U0332">
+<div class="cell language-name-processed" data-lightbox="true" data-o006-id="O006-PSU-009-U0333">
+<div class="codeblock-with-label r" data-o006-id="O006-PSU-009-U0334">
+<style>.codeblock-with-label pre.lang-label-14::before { content: "R"; }</style>
+<div class="code-copy-outer-scaffold" data-o006-id="O006-PSU-009-U0335"><div class="sourceCode cell-code" data-language-name-skip="true" data-o006-id="O006-PSU-009-U0336" id="cb19"><pre class="sourceCode r lang-label-14 code-with-copy" data-o006-id="O006-PSU-009-U0337"><code class="sourceCode r" data-o006-id="O006-PSU-009-U0338"><span id="cb19-1"><a aria-hidden="true" data-o006-id="O006-PSU-009-U0339" href="#cb19-1" tabindex="-1"></a><span class="fu">hist</span>(theta.hat.vals,<span class="at">main=</span><span class="st">"Bootstrap samples (nonparametric bootstrap)"</span>,<span class="at">xlab=</span><span class="st">"theta.hat"</span>,<span class="at">ylab=</span><span class="st">""</span>)</span></code></pre></div><button class="code-copy-button" data-o006-id="O006-PSU-009-U0340" title="Copy to Clipboard"><i class="bi"></i></button></div>
+</div>
+<div class="cell-output-display" data-o006-id="O006-PSU-009-U0341">
+<div data-o006-id="O006-PSU-009-U0342">
+<figure class="figure" data-o006-id="O006-PSU-009-U0343">
+<p data-o006-id="O006-PSU-009-U0344"><img alt="Distribution of bootstrap samples (nonparametric boostrap)" class="img-fluid figure-img" data-o006-asset-id="O006-PSU-009-A0003" data-o006-id="O006-PSU-009-U0345" src="Lesson08_files/figure-html/unnamed-chunk-14-1.png" style="width:70.0%"/></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" data-o006-id="O006-PSU-009-U0346" id="fig-nonparabootstrapdistr-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Fig 8.3
+</figcaption>
+</figure>
+</div></li>
+<li data-o006-id="O006-PSU-009-U0347"><p data-o006-id="O006-PSU-009-U0348"><strong>Inference on</strong> <span class="math inline" data-o006-math-id="O006-PSU-009-M0102">\(\hat{\theta}\)</span><br/> We can now construct a 95% confidence interval from this nonparametric bootstrap sample by finding its empirical .025 and .975 quantiles. This can be done using the <code data-o006-id="O006-PSU-009-U0349">quantile</code> command in R:</p>
+<div class="cell language-name-processed" data-o006-id="O006-PSU-009-U0350">
+<div class="codeblock-with-label r" data-o006-id="O006-PSU-009-U0351">
+<style>.codeblock-with-label pre.lang-label-15::before { content: "R"; }</style>
+<div class="code-copy-outer-scaffold" data-o006-id="O006-PSU-009-U0352"><div class="sourceCode cell-code" data-language-name-skip="true" data-o006-id="O006-PSU-009-U0353" id="cb20"><pre class="sourceCode r lang-label-15 code-with-copy" data-o006-id="O006-PSU-009-U0354"><code class="sourceCode r" data-o006-id="O006-PSU-009-U0355"><span id="cb20-1"><a aria-hidden="true" data-o006-id="O006-PSU-009-U0356" href="#cb20-1" tabindex="-1"></a><span class="do">## 95% CI </span></span>
+<span id="cb20-2"><a aria-hidden="true" data-o006-id="O006-PSU-009-U0357" href="#cb20-2" tabindex="-1"></a><span class="fu">quantile</span>(theta.hat.vals,<span class="fu">c</span>(.<span class="dv">025</span>,.<span class="dv">975</span>))</span></code></pre></div><button class="code-copy-button" data-o006-id="O006-PSU-009-U0358" title="Copy to Clipboard"><i class="bi"></i></button></div>
+</div>
+<div class="cell-output cell-output-stdout" data-o006-id="O006-PSU-009-U0359">
+<pre data-o006-id="O006-PSU-009-U0360"><code data-o006-id="O006-PSU-009-U0361">        2.5%        97.5% 
+3.339766e+00 6.710887e+06 </code></pre>
+</div>
+</div></li>
+</ol>
+<p data-o006-id="O006-PSU-009-U0362">Therefore, the approximate 95% nonparametric bootstrap confidence interval for <span class="math inline" data-o006-math-id="O006-PSU-009-M0103">\(\text{df}=\theta\)</span> is <span class="math inline" data-o006-math-id="O006-PSU-009-M0104">\((3.2688, 6.8787\times 10^6)\)</span>. It is not as wide as the parametric interval but it is still very wide!</p>
+</section>
+</section>
+<section class="level3" data-number="8.1.4" data-o006-id="O006-PSU-009-U0363" id="template-code-for-bootstrap-confidence-intervals">
+<h3 class="anchored" data-anchor-id="template-code-for-bootstrap-confidence-intervals" data-number="8.1.4" data-o006-id="O006-PSU-009-U0364"><span class="header-section-number">8.1.4</span> Template Code for Bootstrap Confidence Intervals</h3>
+<p data-o006-id="O006-PSU-009-U0365">To make it easier to apply bootstrap methods, here is a set of template code, with some comments.</p>
+<div class="tabset-margin-container" data-o006-id="O006-PSU-009-U0366"></div><div class="panel-tabset" data-o006-id="O006-PSU-009-U0367">
+<ul class="nav nav-tabs" data-o006-id="O006-PSU-009-U0368" role="tablist"><li class="nav-item" data-o006-id="O006-PSU-009-U0369" role="presentation"><a aria-controls="tabset-1-1" aria-selected="true" class="nav-link active" data-bs-target="#tabset-1-1" data-bs-toggle="tab" data-o006-id="O006-PSU-009-U0370" href="" id="tabset-1-1-tab" role="tab"><i class="bi bi-code-slash"></i> Parametric Bootstrap</a></li><li class="nav-item" data-o006-id="O006-PSU-009-U0371" role="presentation"><a aria-controls="tabset-1-2" aria-selected="false" class="nav-link" data-bs-target="#tabset-1-2" data-bs-toggle="tab" data-o006-id="O006-PSU-009-U0372" href="" id="tabset-1-2-tab" role="tab"><i class="bi bi-code-slash"></i> Nonparametric Bootstrap</a></li></ul>
+<div class="tab-content" data-o006-id="O006-PSU-009-U0373">
+<div aria-labelledby="tabset-1-1-tab" class="tab-pane active" data-o006-id="O006-PSU-009-U0374" id="tabset-1-1" role="tabpanel">
+<p data-o006-id="O006-PSU-009-U0375">In the code below, you will need to make the following changes: a. change the data line to read in your data b. change the <code data-o006-id="O006-PSU-009-U0376">nll</code> function to be the correct negative log likelihood function for your data and <code data-o006-id="O006-PSU-009-U0377">model.c.</code> within the <code data-o006-id="O006-PSU-009-U0378">for</code> loop, change the <code data-o006-id="O006-PSU-009-U0379">rexp</code> code to be code to simulate from your model, with parameters being the MLEs from step (1). d. within the <code data-o006-id="O006-PSU-009-U0380">for</code> loop, make the <code data-o006-id="O006-PSU-009-U0381">opti</code> line be identical to your optim line in step (1), except that the data for the <code data-o006-id="O006-PSU-009-U0382">optim</code> call within the <code data-o006-id="O006-PSU-009-U0383">for</code> loop should be <code data-o006-id="O006-PSU-009-U0384">x=sim.data[[m]]</code>.</p>
+<div class="cell language-name-processed" data-o006-id="O006-PSU-009-U0385">
+<div class="codeblock-with-label r" data-o006-id="O006-PSU-009-U0386">
+<style>.codeblock-with-label pre.lang-label-16::before { content: "R"; }</style>
+<div class="code-copy-outer-scaffold" data-o006-id="O006-PSU-009-U0387"><div class="sourceCode cell-code" data-language-name-skip="true" data-o006-id="O006-PSU-009-U0388" id="cb22"><pre class="sourceCode r lang-label-16 code-with-copy" data-o006-id="O006-PSU-009-U0389"><code class="sourceCode r" data-o006-id="O006-PSU-009-U0390"><span id="cb22-1"><a aria-hidden="true" data-o006-id="O006-PSU-009-U0391" href="#cb22-1" tabindex="-1"></a><span class="do">## read in data</span></span>
+<span id="cb22-2"><a aria-hidden="true" data-o006-id="O006-PSU-009-U0392" href="#cb22-2" tabindex="-1"></a>x<span class="ot">=</span><span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>)</span>
+<span id="cb22-3"><a aria-hidden="true" data-o006-id="O006-PSU-009-U0393" href="#cb22-3" tabindex="-1"></a></span>
+<span id="cb22-4"><a aria-hidden="true" data-o006-id="O006-PSU-009-U0394" href="#cb22-4" tabindex="-1"></a><span class="do">## (1) find the MLE using `optim`</span></span>
+<span id="cb22-5"><a aria-hidden="true" data-o006-id="O006-PSU-009-U0395" href="#cb22-5" tabindex="-1"></a>nll<span class="ot">=</span><span class="cf">function</span>(theta,x){</span>
+<span id="cb22-6"><a aria-hidden="true" data-o006-id="O006-PSU-009-U0396" href="#cb22-6" tabindex="-1"></a>  <span class="do">## code for negative log likelihood goes here!</span></span>
+<span id="cb22-7"><a aria-hidden="true" data-o006-id="O006-PSU-009-U0397" href="#cb22-7" tabindex="-1"></a>}</span>
+<span id="cb22-8"><a aria-hidden="true" data-o006-id="O006-PSU-009-U0398" href="#cb22-8" tabindex="-1"></a>out<span class="ot">=</span><span class="fu">optim</span>(...,nll,<span class="at">x=</span>x)</span>
+<span id="cb22-9"><a aria-hidden="true" data-o006-id="O006-PSU-009-U0399" href="#cb22-9" tabindex="-1"></a>theta.hat<span class="ot">=</span>out<span class="sc">$</span>par</span>
+<span id="cb22-10"><a aria-hidden="true" data-o006-id="O006-PSU-009-U0400" href="#cb22-10" tabindex="-1"></a><span class="do">## Prepare for bootstrap</span></span>
+<span id="cb22-11"><a aria-hidden="true" data-o006-id="O006-PSU-009-U0401" href="#cb22-11" tabindex="-1"></a>M<span class="ot">=</span><span class="dv">1000</span></span>
+<span id="cb22-12"><a aria-hidden="true" data-o006-id="O006-PSU-009-U0402" href="#cb22-12" tabindex="-1"></a>n<span class="ot">=</span><span class="fu">length</span>(x)</span>
+<span id="cb22-13"><a aria-hidden="true" data-o006-id="O006-PSU-009-U0403" href="#cb22-13" tabindex="-1"></a>sim.data<span class="ot">=</span><span class="fu">list</span>()</span>
+<span id="cb22-14"><a aria-hidden="true" data-o006-id="O006-PSU-009-U0404" href="#cb22-14" tabindex="-1"></a>theta.hat.vals<span class="ot">=</span><span class="fu">rep</span>(<span class="cn">NA</span>,n)</span>
+<span id="cb22-15"><a aria-hidden="true" data-o006-id="O006-PSU-009-U0405" href="#cb22-15" tabindex="-1"></a></span>
+<span id="cb22-16"><a aria-hidden="true" data-o006-id="O006-PSU-009-U0406" href="#cb22-16" tabindex="-1"></a><span class="do">## "for" loop for bootstrap</span></span>
+<span id="cb22-17"><a aria-hidden="true" data-o006-id="O006-PSU-009-U0407" href="#cb22-17" tabindex="-1"></a><span class="cf">for</span>(m <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>M){</span>
+<span id="cb22-18"><a aria-hidden="true" data-o006-id="O006-PSU-009-U0408" href="#cb22-18" tabindex="-1"></a>  <span class="do">## (2) simulate new data</span></span>
+<span id="cb22-19"><a aria-hidden="true" data-o006-id="O006-PSU-009-U0409" href="#cb22-19" tabindex="-1"></a>  <span class="do">## CHANGE the rexp(...) to be code to simulate data from your model</span></span>
+<span id="cb22-20"><a aria-hidden="true" data-o006-id="O006-PSU-009-U0410" href="#cb22-20" tabindex="-1"></a>  sim.data[[m]]<span class="ot">=</span><span class="fu">rexp</span>(n,theta.hat)</span>
+<span id="cb22-21"><a aria-hidden="true" data-o006-id="O006-PSU-009-U0411" href="#cb22-21" tabindex="-1"></a>  <span class="do">## (3) find the MLE using this simulated data</span></span>
+<span id="cb22-22"><a aria-hidden="true" data-o006-id="O006-PSU-009-U0412" href="#cb22-22" tabindex="-1"></a>  <span class="do">## this optim code should be the same as above, except for the data set</span></span>
+<span id="cb22-23"><a aria-hidden="true" data-o006-id="O006-PSU-009-U0413" href="#cb22-23" tabindex="-1"></a>  out.sim<span class="ot">=</span><span class="fu">optim</span>(...,nll,<span class="at">x=</span>sim.data[[m]])</span>
+<span id="cb22-24"><a aria-hidden="true" data-o006-id="O006-PSU-009-U0414" href="#cb22-24" tabindex="-1"></a>  theta.hat.vals[m]<span class="ot">=</span>out.sim<span class="sc">$</span>par</span>
+<span id="cb22-25"><a aria-hidden="true" data-o006-id="O006-PSU-009-U0415" href="#cb22-25" tabindex="-1"></a>}</span>
+<span id="cb22-26"><a aria-hidden="true" data-o006-id="O006-PSU-009-U0416" href="#cb22-26" tabindex="-1"></a></span>
+<span id="cb22-27"><a aria-hidden="true" data-o006-id="O006-PSU-009-U0417" href="#cb22-27" tabindex="-1"></a><span class="do">## (4) find a 95% CI using the bootstrap samples</span></span>
+<span id="cb22-28"><a aria-hidden="true" data-o006-id="O006-PSU-009-U0418" href="#cb22-28" tabindex="-1"></a><span class="fu">quantile</span>(theta.hat.vals,<span class="fu">c</span>(.<span class="dv">025</span>,.<span class="dv">975</span>))</span></code></pre></div><button class="code-copy-button" data-o006-id="O006-PSU-009-U0419" title="Copy to Clipboard"><i class="bi"></i></button></div>
+</div>
+</div>
+</div>
+<div aria-labelledby="tabset-1-2-tab" class="tab-pane" data-o006-id="O006-PSU-009-U0420" id="tabset-1-2" role="tabpanel">
+<p data-o006-id="O006-PSU-009-U0421">In the code below, you will need to make the following changes: a. change the data line to read in your data b. change the <code data-o006-id="O006-PSU-009-U0422">nll</code> function to be the correct negative log likelihood function for your data and <code data-o006-id="O006-PSU-009-U0423">model.c.</code> within the <code data-o006-id="O006-PSU-009-U0424">for</code> loop, make the <code data-o006-id="O006-PSU-009-U0425">optim</code> line be identical to your <code data-o006-id="O006-PSU-009-U0426">optim</code> line in step (1), except that the data for the <code data-o006-id="O006-PSU-009-U0427">optim</code> call within the <code data-o006-id="O006-PSU-009-U0428">for</code> loop should be <code data-o006-id="O006-PSU-009-U0429">x=sim.data[[m]]</code>.</p>
+<div class="cell language-name-processed" data-o006-id="O006-PSU-009-U0430">
+<div class="codeblock-with-label r" data-o006-id="O006-PSU-009-U0431">
+<style>.codeblock-with-label pre.lang-label-17::before { content: "R"; }</style>
+<div class="code-copy-outer-scaffold" data-o006-id="O006-PSU-009-U0432"><div class="sourceCode cell-code" data-language-name-skip="true" data-o006-id="O006-PSU-009-U0433" id="cb23"><pre class="sourceCode r lang-label-17 code-with-copy" data-o006-id="O006-PSU-009-U0434"><code class="sourceCode r" data-o006-id="O006-PSU-009-U0435"><span id="cb23-1"><a aria-hidden="true" data-o006-id="O006-PSU-009-U0436" href="#cb23-1" tabindex="-1"></a><span class="do">## read in data</span></span>
+<span id="cb23-2"><a aria-hidden="true" data-o006-id="O006-PSU-009-U0437" href="#cb23-2" tabindex="-1"></a>x<span class="ot">=</span><span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>)</span>
+<span id="cb23-3"><a aria-hidden="true" data-o006-id="O006-PSU-009-U0438" href="#cb23-3" tabindex="-1"></a></span>
+<span id="cb23-4"><a aria-hidden="true" data-o006-id="O006-PSU-009-U0439" href="#cb23-4" tabindex="-1"></a><span class="do">## (1) find the MLE using `optim`</span></span>
+<span id="cb23-5"><a aria-hidden="true" data-o006-id="O006-PSU-009-U0440" href="#cb23-5" tabindex="-1"></a>nll<span class="ot">=</span><span class="cf">function</span>(theta,x){</span>
+<span id="cb23-6"><a aria-hidden="true" data-o006-id="O006-PSU-009-U0441" href="#cb23-6" tabindex="-1"></a>  <span class="do">## code for negative log likelihood goes here!</span></span>
+<span id="cb23-7"><a aria-hidden="true" data-o006-id="O006-PSU-009-U0442" href="#cb23-7" tabindex="-1"></a>}</span>
+<span id="cb23-8"><a aria-hidden="true" data-o006-id="O006-PSU-009-U0443" href="#cb23-8" tabindex="-1"></a>out<span class="ot">=</span><span class="fu">optim</span>(...,nll,<span class="at">x=</span>x)</span>
+<span id="cb23-9"><a aria-hidden="true" data-o006-id="O006-PSU-009-U0444" href="#cb23-9" tabindex="-1"></a>theta.hat<span class="ot">=</span>out<span class="sc">$</span>par</span>
+<span id="cb23-10"><a aria-hidden="true" data-o006-id="O006-PSU-009-U0445" href="#cb23-10" tabindex="-1"></a><span class="do">## Prepare for bootstrap</span></span>
+<span id="cb23-11"><a aria-hidden="true" data-o006-id="O006-PSU-009-U0446" href="#cb23-11" tabindex="-1"></a>M<span class="ot">=</span><span class="dv">1000</span></span>
+<span id="cb23-12"><a aria-hidden="true" data-o006-id="O006-PSU-009-U0447" href="#cb23-12" tabindex="-1"></a>n<span class="ot">=</span><span class="fu">length</span>(x)</span>
+<span id="cb23-13"><a aria-hidden="true" data-o006-id="O006-PSU-009-U0448" href="#cb23-13" tabindex="-1"></a>sim.data<span class="ot">=</span><span class="fu">list</span>()</span>
+<span id="cb23-14"><a aria-hidden="true" data-o006-id="O006-PSU-009-U0449" href="#cb23-14" tabindex="-1"></a>theta.hat.vals<span class="ot">=</span><span class="fu">rep</span>(<span class="cn">NA</span>,n)</span>
+<span id="cb23-15"><a aria-hidden="true" data-o006-id="O006-PSU-009-U0450" href="#cb23-15" tabindex="-1"></a></span>
+<span id="cb23-16"><a aria-hidden="true" data-o006-id="O006-PSU-009-U0451" href="#cb23-16" tabindex="-1"></a><span class="do">## "for" loop for bootstrap</span></span>
+<span id="cb23-17"><a aria-hidden="true" data-o006-id="O006-PSU-009-U0452" href="#cb23-17" tabindex="-1"></a><span class="cf">for</span>(m <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>M){</span>
+<span id="cb23-18"><a aria-hidden="true" data-o006-id="O006-PSU-009-U0453" href="#cb23-18" tabindex="-1"></a>  <span class="do">## (2) simulate new data</span></span>
+<span id="cb23-19"><a aria-hidden="true" data-o006-id="O006-PSU-009-U0454" href="#cb23-19" tabindex="-1"></a>  sim.data[[m]]<span class="ot">=</span><span class="fu">sample</span>(x,<span class="at">size=</span>n,<span class="at">replace=</span><span class="cn">TRUE</span>)</span>
+<span id="cb23-20"><a aria-hidden="true" data-o006-id="O006-PSU-009-U0455" href="#cb23-20" tabindex="-1"></a>  <span class="do">## (3) find the MLE using this simulated data</span></span>
+<span id="cb23-21"><a aria-hidden="true" data-o006-id="O006-PSU-009-U0456" href="#cb23-21" tabindex="-1"></a>  <span class="do">## this optim code should be the same as above, except for the data set</span></span>
+<span id="cb23-22"><a aria-hidden="true" data-o006-id="O006-PSU-009-U0457" href="#cb23-22" tabindex="-1"></a>  out.sim<span class="ot">=</span><span class="fu">optim</span>(...,nll,<span class="at">x=</span>sim.data[[m]])</span>
+<span id="cb23-23"><a aria-hidden="true" data-o006-id="O006-PSU-009-U0458" href="#cb23-23" tabindex="-1"></a>  theta.hat.vals[m]<span class="ot">=</span>out.sim<span class="sc">$</span>par</span>
+<span id="cb23-24"><a aria-hidden="true" data-o006-id="O006-PSU-009-U0459" href="#cb23-24" tabindex="-1"></a>}</span>
+<span id="cb23-25"><a aria-hidden="true" data-o006-id="O006-PSU-009-U0460" href="#cb23-25" tabindex="-1"></a></span>
+<span id="cb23-26"><a aria-hidden="true" data-o006-id="O006-PSU-009-U0461" href="#cb23-26" tabindex="-1"></a><span class="do">## (4) find a 95% CI using the bootstrap samples</span></span>
+<span id="cb23-27"><a aria-hidden="true" data-o006-id="O006-PSU-009-U0462" href="#cb23-27" tabindex="-1"></a><span class="fu">quantile</span>(theta.hat.vals,<span class="fu">c</span>(.<span class="dv">025</span>,.<span class="dv">975</span>))</span></code></pre></div><button class="code-copy-button" data-o006-id="O006-PSU-009-U0463" title="Copy to Clipboard"><i class="bi"></i></button></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section class="level3" data-number="8.1.5" data-o006-id="O006-PSU-009-U0464" id="a-two-parameter-example-with-pareto-distributed-data">
+<h3 class="anchored" data-anchor-id="a-two-parameter-example-with-pareto-distributed-data" data-number="8.1.5" data-o006-id="O006-PSU-009-U0465"><span class="header-section-number">8.1.5</span> A Two-parameter Example with Pareto Distributed Data</h3>
+<div class="theorem example" data-o006-id="O006-PSU-009-U0466" id="exm-paretodistributed">
+<p data-o006-id="O006-PSU-009-U0467"><span class="theorem-title"><strong>Example 8.1</strong></span> Consider the following data, which we assume come from a Pareto distribution</p>
+<div class="quarto-float quarto-figure quarto-figure-center anchored" data-o006-id="O006-PSU-009-U0468" id="fig-paretohistogram">
+<figure class="quarto-float quarto-float-fig figure" data-o006-id="O006-PSU-009-U0469">
+<div aria-describedby="fig-paretohistogram-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca" data-o006-id="O006-PSU-009-U0470">
+<div class="cell language-name-processed" data-lightbox="true" data-o006-id="O006-PSU-009-U0471">
+<div class="codeblock-with-label r" data-o006-id="O006-PSU-009-U0472">
+<style>.codeblock-with-label pre.lang-label-18::before { content: "R"; }</style>
+<div class="code-copy-outer-scaffold" data-o006-id="O006-PSU-009-U0473"><div class="sourceCode cell-code" data-language-name-skip="true" data-o006-id="O006-PSU-009-U0474" id="cb24"><pre class="sourceCode r lang-label-18 code-with-copy" data-o006-id="O006-PSU-009-U0475"><code class="sourceCode r" data-o006-id="O006-PSU-009-U0476"><span id="cb24-1"><a aria-hidden="true" data-o006-id="O006-PSU-009-U0477" href="#cb24-1" tabindex="-1"></a><span class="do">## load the library needed for "dpareto"</span></span>
+<span id="cb24-2"><a aria-hidden="true" data-o006-id="O006-PSU-009-U0478" href="#cb24-2" tabindex="-1"></a><span class="fu">library</span>(EnvStats)</span>
+<span id="cb24-3"><a aria-hidden="true" data-o006-id="O006-PSU-009-U0479" href="#cb24-3" tabindex="-1"></a><span class="do">## read in data</span></span>
+<span id="cb24-4"><a aria-hidden="true" data-o006-id="O006-PSU-009-U0480" href="#cb24-4" tabindex="-1"></a>x<span class="ot">=</span><span class="fu">c</span>(<span class="fl">5.92</span>, <span class="fl">10.87</span>,  <span class="fl">6.50</span>, <span class="fl">14.62</span>, <span class="fl">20.49</span>,  <span class="fl">5.12</span>,  <span class="fl">7.28</span>, <span class="fl">15.24</span>,</span>
+<span id="cb24-5"><a aria-hidden="true" data-o006-id="O006-PSU-009-U0481" href="#cb24-5" tabindex="-1"></a>   <span class="fl">7.47</span>,  <span class="fl">6.78</span>, <span class="fl">24.07</span>, <span class="fl">6.76</span>,  <span class="fl">8.81</span>,  <span class="fl">7.65</span>,  <span class="fl">5.28</span>, <span class="fl">15.80</span>,</span>
+<span id="cb24-6"><a aria-hidden="true" data-o006-id="O006-PSU-009-U0482" href="#cb24-6" tabindex="-1"></a>   <span class="fl">5.76</span>,  <span class="fl">5.11</span>,  <span class="fl">6.10</span>, <span class="fl">23.44</span>, <span class="fl">15.04</span>,  <span class="fl">9.02</span>,  <span class="fl">8.34</span>, <span class="fl">66.05</span>,</span>
+<span id="cb24-7"><a aria-hidden="true" data-o006-id="O006-PSU-009-U0483" href="#cb24-7" tabindex="-1"></a>   <span class="fl">8.52</span>,  <span class="fl">9.26</span>,  <span class="fl">7.40</span>,  <span class="fl">7.85</span>,  <span class="fl">5.93</span>,  <span class="fl">5.41</span>, <span class="fl">26.00</span>, <span class="fl">16.00</span>,</span>
+<span id="cb24-8"><a aria-hidden="true" data-o006-id="O006-PSU-009-U0484" href="#cb24-8" tabindex="-1"></a>   <span class="fl">8.99</span>, <span class="fl">11.06</span>,  <span class="fl">5.06</span>,  <span class="fl">6.92</span>, <span class="fl">10.17</span>,  <span class="fl">5.65</span>,  <span class="fl">6.06</span>,  <span class="fl">5.70</span>)</span>
+<span id="cb24-9"><a aria-hidden="true" data-o006-id="O006-PSU-009-U0485" href="#cb24-9" tabindex="-1"></a><span class="fu">hist</span>(x)</span></code></pre></div><button class="code-copy-button" data-o006-id="O006-PSU-009-U0486" title="Copy to Clipboard"><i class="bi"></i></button></div>
+</div>
+<div class="cell-output-display" data-o006-id="O006-PSU-009-U0487">
+<div data-o006-id="O006-PSU-009-U0488">
+<figure class="figure" data-o006-id="O006-PSU-009-U0489">
+<p data-o006-id="O006-PSU-009-U0490"><img alt="Histogram of a Pareto distribution" class="img-fluid figure-img" data-o006-asset-id="O006-PSU-009-A0004" data-o006-id="O006-PSU-009-U0491" src="Lesson08_files/figure-html/unnamed-chunk-18-1.png" style="width:70.0%"/></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" data-o006-id="O006-PSU-009-U0492" id="fig-paretohistogram-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Fig 8.4
+</figcaption>
+</figure>
+</div>
+<p data-o006-id="O006-PSU-009-U0493">Let <span class="math inline" data-o006-math-id="O006-PSU-009-M0105">\(x_i \sim \text{Pareto}(L,a)\)</span> for <span class="math inline" data-o006-math-id="O006-PSU-009-M0106">\(1, \ldots, n\)</span>, where <span class="math inline" data-o006-math-id="O006-PSU-009-M0107">\(a\)</span> is a “shape” parameter and <span class="math inline" data-o006-math-id="O006-PSU-009-M0108">\(L\)</span> is a “location” parameter which is the minimum possible value of <span class="math inline" data-o006-math-id="O006-PSU-009-M0109">\(x_i\)</span>. That is, the support of this distribution is <span class="math inline" data-o006-math-id="O006-PSU-009-M0110">\(x_i \in (L,\infty)\)</span>.</p>
+<p data-o006-id="O006-PSU-009-U0494">If we assume that we do not know the true values of the parameters, then we can estimate both parameters using numeric maximum likelihood estimation, and then find 95% confidence intervals for both parameters using a bootstrap.</p>
+<p data-o006-id="O006-PSU-009-U0495">We will use a non-parametric bootstrap below and will modify the template code from the previous section. The major change we make to it is to allow for two parameters, instead of just one.</p>
+<div class="cell language-name-processed" data-o006-id="O006-PSU-009-U0496">
+<div class="codeblock-with-label r" data-o006-id="O006-PSU-009-U0497">
+<style>.codeblock-with-label pre.lang-label-19::before { content: "R"; }</style>
+<div class="code-copy-outer-scaffold" data-o006-id="O006-PSU-009-U0498"><div class="sourceCode cell-code" data-language-name-skip="true" data-o006-id="O006-PSU-009-U0499" id="cb25"><pre class="sourceCode r lang-label-19 code-with-copy" data-o006-id="O006-PSU-009-U0500"><code class="sourceCode r" data-o006-id="O006-PSU-009-U0501"><span id="cb25-1"><a aria-hidden="true" data-o006-id="O006-PSU-009-U0502" href="#cb25-1" tabindex="-1"></a><span class="do">## (1) find the MLE using `optim`</span></span>
+<span id="cb25-2"><a aria-hidden="true" data-o006-id="O006-PSU-009-U0503" href="#cb25-2" tabindex="-1"></a>nll.pareto<span class="ot">=</span><span class="cf">function</span>(theta,x){</span>
+<span id="cb25-3"><a aria-hidden="true" data-o006-id="O006-PSU-009-U0504" href="#cb25-3" tabindex="-1"></a>  <span class="do">## code for negative log likelihood goes here!</span></span>
+<span id="cb25-4"><a aria-hidden="true" data-o006-id="O006-PSU-009-U0505" href="#cb25-4" tabindex="-1"></a>  L<span class="ot">=</span>theta[<span class="dv">1</span>]</span>
+<span id="cb25-5"><a aria-hidden="true" data-o006-id="O006-PSU-009-U0506" href="#cb25-5" tabindex="-1"></a>  a<span class="ot">=</span>theta[<span class="dv">2</span>]</span>
+<span id="cb25-6"><a aria-hidden="true" data-o006-id="O006-PSU-009-U0507" href="#cb25-6" tabindex="-1"></a>  <span class="sc">-</span><span class="fu">sum</span>(<span class="fu">log</span>(<span class="fu">dpareto</span>(x,<span class="at">location=</span>L,<span class="at">shape=</span>a)))</span>
+<span id="cb25-7"><a aria-hidden="true" data-o006-id="O006-PSU-009-U0508" href="#cb25-7" tabindex="-1"></a>}</span>
+<span id="cb25-8"><a aria-hidden="true" data-o006-id="O006-PSU-009-U0509" href="#cb25-8" tabindex="-1"></a>out<span class="ot">=</span><span class="fu">optim</span>(<span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">1</span>),nll.pareto,<span class="at">x=</span>x)</span>
+<span id="cb25-9"><a aria-hidden="true" data-o006-id="O006-PSU-009-U0510" href="#cb25-9" tabindex="-1"></a>theta.hat<span class="ot">=</span>out<span class="sc">$</span>par</span>
+<span id="cb25-10"><a aria-hidden="true" data-o006-id="O006-PSU-009-U0511" href="#cb25-10" tabindex="-1"></a>L.hat<span class="ot">=</span>theta.hat[<span class="dv">1</span>]</span>
+<span id="cb25-11"><a aria-hidden="true" data-o006-id="O006-PSU-009-U0512" href="#cb25-11" tabindex="-1"></a>a.hat<span class="ot">=</span>theta.hat[<span class="dv">2</span>]</span>
+<span id="cb25-12"><a aria-hidden="true" data-o006-id="O006-PSU-009-U0513" href="#cb25-12" tabindex="-1"></a><span class="do">## Prepare for bootstrap</span></span>
+<span id="cb25-13"><a aria-hidden="true" data-o006-id="O006-PSU-009-U0514" href="#cb25-13" tabindex="-1"></a>M<span class="ot">=</span><span class="dv">1000</span></span>
+<span id="cb25-14"><a aria-hidden="true" data-o006-id="O006-PSU-009-U0515" href="#cb25-14" tabindex="-1"></a>n<span class="ot">=</span><span class="fu">length</span>(x)</span>
+<span id="cb25-15"><a aria-hidden="true" data-o006-id="O006-PSU-009-U0516" href="#cb25-15" tabindex="-1"></a>sim.data<span class="ot">=</span><span class="fu">list</span>()</span>
+<span id="cb25-16"><a aria-hidden="true" data-o006-id="O006-PSU-009-U0517" href="#cb25-16" tabindex="-1"></a>L.hat.vals<span class="ot">=</span><span class="fu">rep</span>(<span class="cn">NA</span>,n)</span>
+<span id="cb25-17"><a aria-hidden="true" data-o006-id="O006-PSU-009-U0518" href="#cb25-17" tabindex="-1"></a>a.hat.vals<span class="ot">=</span><span class="fu">rep</span>(<span class="cn">NA</span>,n)</span>
+<span id="cb25-18"><a aria-hidden="true" data-o006-id="O006-PSU-009-U0519" href="#cb25-18" tabindex="-1"></a><span class="do">## "for" loop for bootstrap</span></span>
+<span id="cb25-19"><a aria-hidden="true" data-o006-id="O006-PSU-009-U0520" href="#cb25-19" tabindex="-1"></a><span class="cf">for</span>(m <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>M){</span>
+<span id="cb25-20"><a aria-hidden="true" data-o006-id="O006-PSU-009-U0521" href="#cb25-20" tabindex="-1"></a>  <span class="do">## (2) simulate new data</span></span>
+<span id="cb25-21"><a aria-hidden="true" data-o006-id="O006-PSU-009-U0522" href="#cb25-21" tabindex="-1"></a>  sim.data[[m]]<span class="ot">=</span><span class="fu">sample</span>(x,<span class="at">size=</span>n,<span class="at">replace=</span><span class="cn">TRUE</span>)</span>
+<span id="cb25-22"><a aria-hidden="true" data-o006-id="O006-PSU-009-U0523" href="#cb25-22" tabindex="-1"></a>  <span class="do">## (3) find the MLE using this simulated data</span></span>
+<span id="cb25-23"><a aria-hidden="true" data-o006-id="O006-PSU-009-U0524" href="#cb25-23" tabindex="-1"></a>  <span class="do">## this optim code should be the same as above, except for the data set</span></span>
+<span id="cb25-24"><a aria-hidden="true" data-o006-id="O006-PSU-009-U0525" href="#cb25-24" tabindex="-1"></a>  out.sim<span class="ot">=</span><span class="fu">suppressWarnings</span>({<span class="fu">optim</span>(<span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">1</span>),nll.pareto,<span class="at">x=</span>sim.data[[m]])})</span>
+<span id="cb25-25"><a aria-hidden="true" data-o006-id="O006-PSU-009-U0526" href="#cb25-25" tabindex="-1"></a>  L.hat.vals[m]<span class="ot">=</span>out.sim<span class="sc">$</span>par[<span class="dv">1</span>]</span>
+<span id="cb25-26"><a aria-hidden="true" data-o006-id="O006-PSU-009-U0527" href="#cb25-26" tabindex="-1"></a>  a.hat.vals[m]<span class="ot">=</span>out.sim<span class="sc">$</span>par[<span class="dv">2</span>]</span>
+<span id="cb25-27"><a aria-hidden="true" data-o006-id="O006-PSU-009-U0528" href="#cb25-27" tabindex="-1"></a>}</span>
+<span id="cb25-28"><a aria-hidden="true" data-o006-id="O006-PSU-009-U0529" href="#cb25-28" tabindex="-1"></a></span>
+<span id="cb25-29"><a aria-hidden="true" data-o006-id="O006-PSU-009-U0530" href="#cb25-29" tabindex="-1"></a><span class="do">## (4) find a 95% CI for L using the bootstrap samples</span></span>
+<span id="cb25-30"><a aria-hidden="true" data-o006-id="O006-PSU-009-U0531" href="#cb25-30" tabindex="-1"></a><span class="fu">quantile</span>(L.hat.vals,<span class="fu">c</span>(.<span class="dv">025</span>,.<span class="dv">975</span>))</span></code></pre></div><button class="code-copy-button" data-o006-id="O006-PSU-009-U0532" title="Copy to Clipboard"><i class="bi"></i></button></div>
+</div>
+<div class="cell-output cell-output-stdout" data-o006-id="O006-PSU-009-U0533">
+<pre data-o006-id="O006-PSU-009-U0534"><code data-o006-id="O006-PSU-009-U0535"> 2.5% 97.5% 
+ 5.06  5.28 </code></pre>
+</div>
+<div class="codeblock-with-label r" data-o006-id="O006-PSU-009-U0536">
+<style>.codeblock-with-label pre.lang-label-20::before { content: "R"; }</style>
+<div class="code-copy-outer-scaffold" data-o006-id="O006-PSU-009-U0537"><div class="sourceCode cell-code" data-o006-id="O006-PSU-009-U0538" id="cb27"><pre class="sourceCode r lang-label-20 code-with-copy" data-o006-id="O006-PSU-009-U0539"><code class="sourceCode r" data-o006-id="O006-PSU-009-U0540"><span id="cb27-1"><a aria-hidden="true" data-o006-id="O006-PSU-009-U0541" href="#cb27-1" tabindex="-1"></a><span class="do">## (4) find a 95% CI for a using the bootstrap samples</span></span>
+<span id="cb27-2"><a aria-hidden="true" data-o006-id="O006-PSU-009-U0542" href="#cb27-2" tabindex="-1"></a><span class="fu">quantile</span>(a.hat.vals,<span class="fu">c</span>(.<span class="dv">025</span>,.<span class="dv">975</span>))</span></code></pre></div><button class="code-copy-button" data-o006-id="O006-PSU-009-U0543" title="Copy to Clipboard"><i class="bi"></i></button></div>
+</div>
+<div class="cell-output cell-output-stdout" data-o006-id="O006-PSU-009-U0544">
+<pre data-o006-id="O006-PSU-009-U0545"><code data-o006-id="O006-PSU-009-U0546">    2.5%    97.5% 
+1.277910 2.270643 </code></pre>
+</div>
+</div>
+<p data-o006-id="O006-PSU-009-U0547">The 95% nonparametric bootstrap confidence interval for the location parameter, <span class="math inline" data-o006-math-id="O006-PSU-009-M0111">\(L\)</span>, is (5.06, 5.28). The 95% nonparametric bootstrap confidence interval for the shape parameter, <span class="math inline" data-o006-math-id="O006-PSU-009-M0112">\(a\)</span>, is (1.2912, 2.2905).</p>
+</div>
+</section>
+</section>
+<section class="level2" data-number="8.2" data-o006-id="O006-PSU-009-U0548" id="inference-on-transformations-of-parameters">
+<h2 class="anchored" data-anchor-id="inference-on-transformations-of-parameters" data-number="8.2" data-o006-id="O006-PSU-009-U0549"><span class="header-section-number">8.2</span> Inference on Transformations of Parameters</h2>
+<p data-o006-id="O006-PSU-009-U0550">A common scenario is that we have data <span class="math inline" data-o006-math-id="O006-PSU-009-M0113">\(x_1,x_2,\ldots,x_n\)</span> from a model <span class="math inline" data-o006-math-id="O006-PSU-009-M0114">\(x_i \sim f_X(x|\boldsymbol\theta)\)</span> with parameter (or parameters) <span class="math inline" data-o006-math-id="O006-PSU-009-M0115">\(\boldsymbol\theta\)</span>, which we estimate with maximum likelihood or some other method.</p>
+<p data-o006-id="O006-PSU-009-U0551">What if we desire inference on a transformation of the parameters <span class="math inline" data-o006-math-id="O006-PSU-009-M0116">\(\tau=g(\boldsymbol\theta)\)</span>?</p>
+<p data-o006-id="O006-PSU-009-U0552">There are multiple approaches that can be used, both analytic and numeric. We first present the Delta method and then present a bootstrap approach.</p>
+<section class="level3" data-number="8.2.1" data-o006-id="O006-PSU-009-U0553" id="the-delta-method">
+<h3 class="anchored" data-anchor-id="the-delta-method" data-number="8.2.1" data-o006-id="O006-PSU-009-U0554"><span class="header-section-number">8.2.1</span> The Delta Method</h3>
+<p data-o006-id="O006-PSU-009-U0555">If we estimate a parameter <span class="math inline" data-o006-math-id="O006-PSU-009-M0117">\(\theta\)</span> using maximum likelihood estimation, then we know that the asymptotic distribution of the MLE <span class="math inline" data-o006-math-id="O006-PSU-009-M0118">\(\hat{\theta}\)</span> is <span class="math display" data-o006-math-id="O006-PSU-009-M0119">\[ \hat{\theta}\sim N\left(\theta_{\text{true}},1/I(\hat{\theta}_{ML})\right)\]</span> where <span class="math inline" data-o006-math-id="O006-PSU-009-M0120">\(I(\theta)\)</span> is the “Fisher Information”, defined by <span class="math display" data-o006-math-id="O006-PSU-009-M0121">\[I(\theta) = -E_x\left[\frac{\partial^2}{\partial \theta^2}\ell(\theta)\right]\]</span> where <span class="math inline" data-o006-math-id="O006-PSU-009-M0122">\(\ell(\theta)=log(L(\theta))\)</span> and the expectation is taken over all <span class="math inline" data-o006-math-id="O006-PSU-009-M0123">\(x_1,x_2,\ldots,x_n\)</span>.</p>
+<p data-o006-id="O006-PSU-009-U0556">If <span class="math inline" data-o006-math-id="O006-PSU-009-M0124">\(g(\theta)\)</span> is an invertible function, then a common approach to inference is the so-called ‘delta method’, which relies on the asymptotic Gaussian distribution of MLEs, and standard transformation of variables results, to obtain a Gaussian approximation for the distribution of the MLE of the transformed parameter <span class="math inline" data-o006-math-id="O006-PSU-009-M0125">\(\hat{\tau}=g(\hat{\theta})\)</span>. As <span class="math inline" data-o006-math-id="O006-PSU-009-M0126">\(n\rightarrow \infty\)</span>, <span class="math display" data-o006-math-id="O006-PSU-009-M0127">\[g(\hat{\theta})\sim N\left(g(\theta_{\text{true}}),|g'(\hat{\theta})|^2 *1/I(\hat{\theta})\right)\]</span> and so a 95% approximate asymptotic confidence interval for the transformed parameter <span class="math inline" data-o006-math-id="O006-PSU-009-M0128">\(\tau=g(\theta)\)</span> is <span class="math display" data-o006-math-id="O006-PSU-009-M0129">\[ g(\hat{\theta})\pm 1.96|g'(\hat{\theta})|*1/\sqrt(I(\hat{\theta})).\]</span></p>
+</section>
+<section class="level3" data-number="8.2.2" data-o006-id="O006-PSU-009-U0557" id="bootstrap-and-transformations">
+<h3 class="anchored" data-anchor-id="bootstrap-and-transformations" data-number="8.2.2" data-o006-id="O006-PSU-009-U0558"><span class="header-section-number">8.2.2</span> Bootstrap and Transformations</h3>
+<p data-o006-id="O006-PSU-009-U0559">When a bootstrap is used to sample from the sampling distribution of the parameter estimates, the result is a large number <span class="math inline" data-o006-math-id="O006-PSU-009-M0130">\(M\)</span> of bootstrap estimates <span class="math inline" data-o006-math-id="O006-PSU-009-M0131">\(\hat{\theta}^{(1)},\hat{\theta}^{(2)},\ldots,\hat{\theta}^{(M)}\)</span>. If inference is desired on a transformation of <span class="math inline" data-o006-math-id="O006-PSU-009-M0132">\(\theta\)</span>, one can simply transform these estimates directly and then make inference on the resulting samples. That is, if we want inference on <span class="math inline" data-o006-math-id="O006-PSU-009-M0133">\(\tau=g(\theta)\)</span>, then we do the following:</p>
+<ol data-o006-id="O006-PSU-009-U0560" type="1">
+<li data-o006-id="O006-PSU-009-U0561">Obtain <span class="math inline" data-o006-math-id="O006-PSU-009-M0134">\(M\)</span> bootstrap estimates as shown in Section 5. This results in <span class="math inline" data-o006-math-id="O006-PSU-009-M0135">\(\hat{\theta}^{(1)},\hat{\theta}^{(2)},\ldots,\hat{\theta}^{(M)}\)</span></li>
+<li data-o006-id="O006-PSU-009-U0562">Transform each of these <span class="math inline" data-o006-math-id="O006-PSU-009-M0136">\(M\)</span> estimates, resulting in <span class="math inline" data-o006-math-id="O006-PSU-009-M0137">\(g(\hat{\theta}^{(1)}),g(\hat{\theta}^{(2)}),\ldots,g(\hat{\theta}^{(M)})\)</span></li>
+<li data-o006-id="O006-PSU-009-U0563">One can then conduct inference, like obtaining confidence intervals, on these transformed bootstrap estimates directly. For example, a 95% bootstrap confidence interval of <span class="math inline" data-o006-math-id="O006-PSU-009-M0138">\(\tau=g(\theta)\)</span> is just the .025 and .975 quantile of <span class="math inline" data-o006-math-id="O006-PSU-009-M0139">\(\{g(\hat{\theta}^{(1)}),g(\hat{\theta}^{(2)}),\ldots,g(\hat{\theta}^{(M)})\}\)</span></li>
+</ol>
+<p data-o006-id="O006-PSU-009-U0564">Bootstrap, and other sample based approaches, are often the approach of choice when conducting inference on transformations of parameters because of the following:</p>
+<ul data-o006-id="O006-PSU-009-U0565">
+<li data-o006-id="O006-PSU-009-U0566"><p data-o006-id="O006-PSU-009-U0567">The bootstrap approach does not have any restrictions on the function <span class="math inline" data-o006-math-id="O006-PSU-009-M0140">\(g\)</span>, while the delta method approach requires <span class="math inline" data-o006-math-id="O006-PSU-009-M0141">\(g\)</span> to be an invertible function.</p></li>
+<li data-o006-id="O006-PSU-009-U0568"><p data-o006-id="O006-PSU-009-U0569">If there is more than one parameter (i.e., <span class="math inline" data-o006-math-id="O006-PSU-009-M0142">\(\boldsymbol\theta=(\theta_1,\theta_2)\)</span>) in the model, and the transformation <span class="math inline" data-o006-math-id="O006-PSU-009-M0143">\(g\)</span> is a function of multiple parameters: <span class="math inline" data-o006-math-id="O006-PSU-009-M0144">\(\tau=g(\theta_1,\theta_2)\)</span>, then bootstrap approaches are very straightforward, as all that is needed is to apply the <span class="math inline" data-o006-math-id="O006-PSU-009-M0145">\(g\)</span> function to the bootstrap estimates of <span class="math inline" data-o006-math-id="O006-PSU-009-M0146">\(\theta_1\)</span> and <span class="math inline" data-o006-math-id="O006-PSU-009-M0147">\(\theta_2\)</span>.</p></li>
+</ul>
+</section>
+</section>
+<section class="level2" data-number="8.3" data-o006-id="O006-PSU-009-U0570" id="summary">
+<h2 class="anchored" data-anchor-id="summary" data-number="8.3" data-o006-id="O006-PSU-009-U0571"><span class="header-section-number">8.3</span> Summary</h2>
+<div class="callout callout-style-simple callout-caution no-icon" data-o006-id="O006-PSU-009-U0572">
+<div class="callout-body d-flex" data-o006-id="O006-PSU-009-U0573">
+<div class="callout-icon-container" data-o006-id="O006-PSU-009-U0574">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-body-container" data-o006-id="O006-PSU-009-U0575">
+<p data-o006-id="O006-PSU-009-U0576"><strong>Note!</strong><br/>
+The following was in the current notes</p>
+</div>
+</div>
+</div>
+<p data-o006-id="O006-PSU-009-U0577">In this lesson, we applied large-sample theory to make inference about parameters estimated by maximum likelihood. We began by constructing <strong>asymptotic confidence intervals</strong> using the normal approximation to the distribution of the MLE. We then introduced the <strong>Delta Method</strong>, which extends this approximation to functions of parameters. Finally, we explored two <strong>bootstrap</strong> approaches—parametric and nonparametric—for building confidence intervals when analytic methods are difficult or unreliable.</p>
+<p data-o006-id="O006-PSU-009-U0578"><strong>Key Takeaways</strong></p>
+<ul data-o006-id="O006-PSU-009-U0579">
+<li data-o006-id="O006-PSU-009-U0580"><p data-o006-id="O006-PSU-009-U0581"><strong>Asymptotic Confidence Interval for MLE</strong><br/>
+When the MLE <span class="math inline" data-o006-math-id="O006-PSU-009-M0148">\(\hat{\theta}\)</span> is approximately normal: <span class="math display" data-o006-math-id="O006-PSU-009-M0149">\[
+\hat{\theta} \pm z_{\alpha/2} \cdot \sqrt{\frac{1}{I(\hat{\theta})}}
+\]</span> where <span class="math inline" data-o006-math-id="O006-PSU-009-M0150">\(I(\hat{\theta})\)</span> is the observed Fisher information.</p></li>
+<li data-o006-id="O006-PSU-009-U0582"><p data-o006-id="O006-PSU-009-U0583"><strong>Delta Method</strong><br/>
+If <span class="math inline" data-o006-math-id="O006-PSU-009-M0151">\(\hat{\theta}\)</span> is approximately normal and <span class="math inline" data-o006-math-id="O006-PSU-009-M0152">\(g\)</span> is a smooth function: <span class="math display" data-o006-math-id="O006-PSU-009-M0153">\[
+g(\hat{\theta}) \sim N\left(g(\theta), \left(g'(\theta)\right)^2 \cdot \text{Var}(\hat{\theta})\right)
+\]</span><br/>
+This gives a way to build a confidence interval for <span class="math inline" data-o006-math-id="O006-PSU-009-M0154">\(g(\theta)\)</span>.</p></li>
+<li data-o006-id="O006-PSU-009-U0584"><p data-o006-id="O006-PSU-009-U0585"><strong>Parametric Bootstrap</strong></p>
+<ol data-o006-id="O006-PSU-009-U0586" type="1">
+<li data-o006-id="O006-PSU-009-U0587">Estimate <span class="math inline" data-o006-math-id="O006-PSU-009-M0155">\(\hat{\theta}\)</span> from the original sample.<br/>
+</li>
+<li data-o006-id="O006-PSU-009-U0588">Generate many samples from the model using <span class="math inline" data-o006-math-id="O006-PSU-009-M0156">\(\hat{\theta}\)</span>.<br/>
+</li>
+<li data-o006-id="O006-PSU-009-U0589">Compute MLEs for each bootstrap sample.<br/>
+</li>
+<li data-o006-id="O006-PSU-009-U0590">Use the distribution of these estimates to construct an interval.</li>
+</ol></li>
+<li data-o006-id="O006-PSU-009-U0591"><p data-o006-id="O006-PSU-009-U0592"><strong>Nonparametric Bootstrap</strong></p>
+<ol data-o006-id="O006-PSU-009-U0593" type="1">
+<li data-o006-id="O006-PSU-009-U0594">Resample (with replacement) from the original data.<br/>
+</li>
+<li data-o006-id="O006-PSU-009-U0595">Compute the statistic of interest for each bootstrap sample.<br/>
+</li>
+<li data-o006-id="O006-PSU-009-U0596">Use the empirical distribution to form a confidence interval.</li>
+</ol></li>
+</ul>
+<p data-o006-id="O006-PSU-009-U0597">These techniques allow us to quantify uncertainty for estimators in both analytic and computational ways, even when standard formulas are unavailable.</p>
+<div class="callout callout-style-simple callout-caution no-icon" data-o006-id="O006-PSU-009-U0598">
+<div class="callout-body d-flex" data-o006-id="O006-PSU-009-U0599">
+<div class="callout-icon-container" data-o006-id="O006-PSU-009-U0600">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-body-container" data-o006-id="O006-PSU-009-U0601">
+<p data-o006-id="O006-PSU-009-U0602"><strong>Note!</strong><br/>
+This was in the new list lessons.qmd</p>
+</div>
+</div>
+</div>
+<p data-o006-id="O006-PSU-009-U0603">We also learned to apply parametric and nonparametric bootstrap methods to generate confidence intervals from data, as demonstrated with t-distributed and Pareto datasets, enabling robust inference without strict distributional assumptions.</p>
+<p data-o006-id="O006-PSU-009-U0604">Looking ahead, the bootstrap confidence interval techniques we’ve mastered will be invaluable for tackling real-world datasets with non-standard distributions or small sample sizes, empowering you to make data-driven decisions in future statistical analyses.</p>
+</section>
+</main>
+</body>
+</html>

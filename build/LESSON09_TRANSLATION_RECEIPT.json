@@ -1,0 +1,122 @@
+{
+  "asset_inputs": [
+    {
+      "bytes": 19812,
+      "path": "working/lesson09_asset_closure.json",
+      "sha256": "3becf668ecfff0a1d9d951cda7941006dfdf9c7179b02687f77776bb91ed4947"
+    },
+    {
+      "bytes": 25197,
+      "path": "build/LESSON09_NORMALIZATION_RECEIPT.json",
+      "sha256": "be68de9ed0f76b93cdbf9b4ca721146f19e8b29d44433114f74c05e0093b8bcd"
+    }
+  ],
+  "bindings": {
+    "bytes": 180204,
+    "path": "backend/lesson09_translation_bindings.jsonl",
+    "sha256": "27b6491e67033adab419862589618ff2e7b25aeb54b84fbbe47c785c4c834021"
+  },
+  "boundary_whitespace_rule": "exact source-node leading/trailing whitespace wrapped around translated prose core",
+  "document": "Lesson09",
+  "document_id": "O006-PSU-010",
+  "identical_segments": [
+    "O006-PSU-010-S0081",
+    "O006-PSU-010-S0085",
+    "O006-PSU-010-S0086"
+  ],
+  "independent_math_audit": {
+    "bytes": 11871,
+    "path": "working/lesson09_math_audit.md",
+    "sha256": "12a4f5311c1b96a8a5419620e8c19a04dcf320a00f47e314d167d76507d45fb9"
+  },
+  "locale": "id-ID",
+  "merge_script": {
+    "bytes": 2381,
+    "path": "scripts/merge_lesson09_translations.py",
+    "sha256": "649862bce74b88031fe374a066942f59bf30110375624f3aa4621937978e7051"
+  },
+  "parts": [
+    {
+      "bytes": 12875,
+      "notes": {
+        "bytes": 2354,
+        "path": "working/lesson09_translation_part_a_notes.md",
+        "sha256": "d1cabd23f0489be5f2f21510356e623ad27b8090fe0b4e40be9a5052f421647c"
+      },
+      "part": "a",
+      "path": "working/lesson09_translation_part_a.json",
+      "range": [
+        "O006-PSU-010-S0001",
+        "O006-PSU-010-S0148"
+      ],
+      "segments": 148,
+      "sha256": "1ec3ce80a55aa9dfebeb3f621d4894bc2c41ff28471ee7c07de9d1c7d98ac5c0"
+    },
+    {
+      "bytes": 15559,
+      "notes": {
+        "bytes": 711,
+        "path": "working/lesson09_translation_part_b_notes.md",
+        "sha256": "717289ea5aefee37636802ecc0738e6afa068c10e10f5da9631369be9e7114eb"
+      },
+      "part": "b",
+      "path": "working/lesson09_translation_part_b.json",
+      "range": [
+        "O006-PSU-010-S0149",
+        "O006-PSU-010-S0296"
+      ],
+      "segments": 148,
+      "sha256": "7a0ca47098b7a3f00452aac346a1b7aac1978294568120c6794082d76bcb11df"
+    },
+    {
+      "bytes": 13052,
+      "notes": {
+        "bytes": 994,
+        "path": "working/lesson09_translation_part_c_notes.md",
+        "sha256": "db5f86926c732acaf2867936da9faa1a9dcef395d8ff8a66ba83b56909513b20"
+      },
+      "part": "c",
+      "path": "working/lesson09_translation_part_c.json",
+      "range": [
+        "O006-PSU-010-S0297",
+        "O006-PSU-010-S0443"
+      ],
+      "segments": 147,
+      "sha256": "d3adc1c8eb5d6cc6350f69633ddaeac37db8906b61fc076f4d95e4a8cb9342ce"
+    }
+  ],
+  "schema": "o006.stat415.lesson09-translation.v1",
+  "segment_count": 443,
+  "source_findings": {
+    "bytes": 9355,
+    "path": "working/lesson09_source_findings.md",
+    "sha256": "f09446950ab9bd655973f31a0d9e56fab2f25dfb237fbff6d352eb93645aa695"
+  },
+  "status": "complete",
+  "template": {
+    "bytes": 86543,
+    "path": "working/lesson09_segments.csv",
+    "sha256": "7cc51f79086f5bc449bd19e4f7289c5f3d763069452a666d5089308a10634421"
+  },
+  "terminology_inputs": [
+    {
+      "bytes": 14687,
+      "path": "00_control/TERMINOLOGY_GLOSSARY_ID_ID.csv",
+      "rows": 142,
+      "scope": "exact cumulative glossary through the twenty Lesson 09 decisions",
+      "sha256": "d0f8baa72ac1be3a3be1e5774db5608ce8655aa83aed910363727e05322b45f0"
+    },
+    {
+      "bytes": 6892,
+      "path": "working/lesson09_terminology_qa.md",
+      "sha256": "a4e03833b0cec621702b6a434ebb39fb5482e3c7c8f62b4f4ad41d3a69d96324"
+    }
+  ],
+  "terminology_rule": "cumulative component glossary through O006-TERM-0142",
+  "translation_csv": {
+    "bytes": 117299,
+    "path": "source/id-ID/lesson09_translation.csv",
+    "sha256": "2893ac1f3820147752c298aa12aed305f319d2fe572e1ae062773339c26e2fd8"
+  },
+  "translation_provenance": "OpenAI Codex gpt-5.6-sol, Ultra"
+}

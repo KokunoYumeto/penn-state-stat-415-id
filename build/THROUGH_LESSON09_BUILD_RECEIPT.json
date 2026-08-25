@@ -1,0 +1,450 @@
+{
+  "corrections": {
+    "bytes": 249495,
+    "count": 170,
+    "lesson07_count": 12,
+    "lesson08_count": 17,
+    "lesson09_count": 19,
+    "path": "backend/through_lesson09_corrections.jsonl",
+    "sha256": "f29e653f96b98c3dd8abdba3ce8d1bda34d60bf99b96a49c398e022cab8ae4a4",
+    "through_lesson06_count": 122
+  },
+  "coverage": {
+    "complete_count": 11,
+    "complete_documents": [
+      "index",
+      "Lesson00",
+      "Lesson01",
+      "Lesson02",
+      "Lesson03",
+      "Lesson04",
+      "Lesson05",
+      "Lesson06",
+      "Lesson07",
+      "Lesson08",
+      "Lesson09"
+    ],
+    "corpus_document_count": 14,
+    "next_document": "Lesson10"
+  },
+  "documents_backend": {
+    "bytes": 7409,
+    "path": "backend/through_lesson09_documents.jsonl",
+    "sha256": "3d36cedebb06e8d67a83f279acd8c6ebba7902385a01a3137a6628b97de8feda"
+  },
+  "inputs": {
+    "builder": {
+      "bytes": 34223,
+      "path": "scripts/build_through_lesson09.py",
+      "sha256": "21894e6700d105356321565f5e6190c28b5b8cf70aae55eff0ce60ebfee4a966"
+    },
+    "glossary": {
+      "bytes": 14687,
+      "path": "00_control/TERMINOLOGY_GLOSSARY_ID_ID.csv",
+      "sha256": "d0f8baa72ac1be3a3be1e5774db5608ce8655aa83aed910363727e05322b45f0"
+    },
+    "lessons": [
+      {
+        "component": "Lesson07",
+        "correction_module": {
+          "bytes": 39924,
+          "path": "scripts/lesson07_corrections.py",
+          "sha256": "933f291107845752636a1a57b08c26c3acb79552d6a494f799df7f1c92159329"
+        },
+        "normalization": {
+          "bytes": 13800,
+          "path": "build/LESSON07_NORMALIZATION_RECEIPT.json",
+          "sha256": "8e6b8f7b38a99c197da5ed315422250f15a81b96d543cf237e4a9659bb1476f7"
+        },
+        "translation": {
+          "bytes": 3933,
+          "path": "build/LESSON07_TRANSLATION_RECEIPT.json",
+          "sha256": "8e3703b2f5eee921569e893e636a83fcc697037dbf5756980df11c58ff66acbd"
+        }
+      },
+      {
+        "component": "Lesson08",
+        "correction_module": {
+          "bytes": 41865,
+          "path": "scripts/lesson08_corrections.py",
+          "sha256": "f19e024530b3edb4b8572eb4c4266c6af7c8cf8b2c0ded43ce93f153c0ab7a27"
+        },
+        "normalization": {
+          "bytes": 15102,
+          "path": "build/LESSON08_NORMALIZATION_RECEIPT.json",
+          "sha256": "56dd21dd1d9ad17000e0b15ea2d8fd2caf9bc16f91302f9a337c15114dd04ca7"
+        },
+        "translation": {
+          "bytes": 3962,
+          "path": "build/LESSON08_TRANSLATION_RECEIPT.json",
+          "sha256": "d6105357ecf9037c4f82bdc049c8bff37ca2b38097dafef509787de3e2b0ea13"
+        }
+      },
+      {
+        "component": "Lesson09",
+        "correction_module": {
+          "bytes": 41752,
+          "path": "scripts/lesson09_corrections.py",
+          "sha256": "702cf9469dcb2060136b09508977707d358f9bd1d06ab4d24475b1cbd3474306"
+        },
+        "normalization": {
+          "bytes": 25197,
+          "path": "build/LESSON09_NORMALIZATION_RECEIPT.json",
+          "sha256": "be68de9ed0f76b93cdbf9b4ca721146f19e8b29d44433114f74c05e0093b8bcd"
+        },
+        "translation": {
+          "bytes": 3988,
+          "path": "build/LESSON09_TRANSLATION_RECEIPT.json",
+          "sha256": "df1ab002ca2059235370dc273d29267febf929668e779e2f67fd3bb39d2ae489"
+        }
+      }
+    ],
+    "prior_build_receipt": {
+      "bytes": 7590,
+      "path": "build/THROUGH_LESSON06_BUILD_RECEIPT.json",
+      "sha256": "9ccc325f8016472aa883053d2a157969a79fbd445f22b02801274eaf0015574f"
+    }
+  },
+  "layout": {
+    "inherited_inline_width_constraints_removed": 9,
+    "reader_css_bytes": 8655,
+    "reader_css_path": "assets/reader-11of14.css",
+    "reader_css_sha256": "009a93bd6e5ebb19df4f073466a48a5b449e92b8a00f4574b403687de5adb472",
+    "rule": "all cumulative reader figures fill and center within the available reader width; code and tables reflow horizontally without page overflow"
+  },
+  "locale": "id-ID",
+  "math_nodes": {
+    "Lesson00": 331,
+    "Lesson01": 169,
+    "Lesson02": 209,
+    "Lesson03": 440,
+    "Lesson04": 289,
+    "Lesson05": 108,
+    "Lesson06": 102,
+    "Lesson07": 148,
+    "Lesson08": 156,
+    "Lesson09": 219,
+    "index": 0,
+    "total": 2171
+  },
+  "new_assets": {
+    "all_byte_preserving": true,
+    "bytes": 4574263,
+    "count": 16,
+    "inventory": [
+      {
+        "asset_id": "O006-PSU-008-A0001",
+        "source_bytes": 51500,
+        "source_inline_style": "width:70.0%",
+        "source_path": "authority/assets/stat415/lesson07/Lesson07_files/figure-html/unnamed-chunk-1-1.png",
+        "source_sha256": "261e8fee2ada5d25b3cf92d4fde1825dfcce67f97629120efc6d432b06a89372",
+        "target_alt_sha256": "99369b2cef2419dcc8645a55438d6b2f1f05ecd4b2b37984ed47949e41945586",
+        "target_bytes": 51500,
+        "target_inline_style": null,
+        "target_is_byte_preserving": true,
+        "target_path": "assets/lesson07/Lesson07_files/figure-html/unnamed-chunk-1-1.png",
+        "target_sha256": "261e8fee2ada5d25b3cf92d4fde1825dfcce67f97629120efc6d432b06a89372"
+      },
+      {
+        "asset_id": "O006-PSU-008-A0002",
+        "source_bytes": 49223,
+        "source_inline_style": "width:70.0%",
+        "source_path": "authority/assets/stat415/lesson07/Lesson07_files/figure-html/unnamed-chunk-6-1.png",
+        "source_sha256": "18e14d1763554c43bcc8c31ba57756918ea7e47985abbf840f40ee3842460e65",
+        "target_alt_sha256": "39e274ab34d93bd3e6d2d9441a682f67d4686fb1b85d66c074d93313e197532e",
+        "target_bytes": 49223,
+        "target_inline_style": null,
+        "target_is_byte_preserving": true,
+        "target_path": "assets/lesson07/Lesson07_files/figure-html/unnamed-chunk-6-1.png",
+        "target_sha256": "18e14d1763554c43bcc8c31ba57756918ea7e47985abbf840f40ee3842460e65"
+      },
+      {
+        "asset_id": "O006-PSU-009-A0001",
+        "source_bytes": 47071,
+        "source_inline_style": "width:70.0%",
+        "source_path": "authority/assets/stat415/lesson08/Lesson08_files/figure-html/unnamed-chunk-1-1.png",
+        "source_sha256": "215b809d8213ef56a36c6bf69f1886f964d39d607532d551779f859052c17c0b",
+        "target_alt_sha256": "3873f8aa10566dbd21fb0ac84048c76c418d614b969322cad867fa5e974b77ec",
+        "target_bytes": 47071,
+        "target_inline_style": "display:block;max-width:100%;height:auto;margin-inline:auto",
+        "target_is_byte_preserving": true,
+        "target_path": "assets/lesson08/Lesson08_files/figure-html/unnamed-chunk-1-1.png",
+        "target_sha256": "215b809d8213ef56a36c6bf69f1886f964d39d607532d551779f859052c17c0b"
+      },
+      {
+        "asset_id": "O006-PSU-009-A0002",
+        "source_bytes": 55503,
+        "source_inline_style": "width:70.0%",
+        "source_path": "authority/assets/stat415/lesson08/Lesson08_files/figure-html/unnamed-chunk-8-1.png",
+        "source_sha256": "c41f8223ba0306e6027ea44ec0c293b0b4a9ffdd558d7738e0c911ecc69725b6",
+        "target_alt_sha256": "986b1bc554700f2098029f48419a21c7ad8494bb81e35a14538b006c11cc24ba",
+        "target_bytes": 55503,
+        "target_inline_style": "display:block;max-width:100%;height:auto;margin-inline:auto",
+        "target_is_byte_preserving": true,
+        "target_path": "assets/lesson08/Lesson08_files/figure-html/unnamed-chunk-8-1.png",
+        "target_sha256": "c41f8223ba0306e6027ea44ec0c293b0b4a9ffdd558d7738e0c911ecc69725b6"
+      },
+      {
+        "asset_id": "O006-PSU-009-A0003",
+        "source_bytes": 59111,
+        "source_inline_style": "width:70.0%",
+        "source_path": "authority/assets/stat415/lesson08/Lesson08_files/figure-html/unnamed-chunk-14-1.png",
+        "source_sha256": "51ed4921773d92575cf3cb560d692c49e2022581b479093ad0a870302208798e",
+        "target_alt_sha256": "ba7f409df9fde117e48d7345fe7388c79f42f98fa542a155aece430803ac20f4",
+        "target_bytes": 59111,
+        "target_inline_style": "display:block;max-width:100%;height:auto;margin-inline:auto",
+        "target_is_byte_preserving": true,
+        "target_path": "assets/lesson08/Lesson08_files/figure-html/unnamed-chunk-14-1.png",
+        "target_sha256": "51ed4921773d92575cf3cb560d692c49e2022581b479093ad0a870302208798e"
+      },
+      {
+        "asset_id": "O006-PSU-009-A0004",
+        "source_bytes": 52007,
+        "source_inline_style": "width:70.0%",
+        "source_path": "authority/assets/stat415/lesson08/Lesson08_files/figure-html/unnamed-chunk-18-1.png",
+        "source_sha256": "11820bf246f37f1463f0384ce77672b0ce0d63466c186e6fb8bf25c5b1f522ad",
+        "target_alt_sha256": "e7af907c786ca66e93b72a6a0bb51ebfbe541216b842698b559d91f5d4c3d483",
+        "target_bytes": 52007,
+        "target_inline_style": "display:block;max-width:100%;height:auto;margin-inline:auto",
+        "target_is_byte_preserving": true,
+        "target_path": "assets/lesson08/Lesson08_files/figure-html/unnamed-chunk-18-1.png",
+        "target_sha256": "11820bf246f37f1463f0384ce77672b0ce0d63466c186e6fb8bf25c5b1f522ad"
+      },
+      {
+        "asset_id": "O006-PSU-010-A0001",
+        "source_bytes": 3044449,
+        "source_inline_style": null,
+        "source_path": "authority/assets/stat415/lesson09/assets/tetra_die.png",
+        "source_sha256": "48d09d5e1a7ba862fb18001773cefb64aec266f43650b5b0813add8eaff58f5a",
+        "target_alt_sha256": "982a4f57af527c7effe7122758ff3c191398c50ab2018afc3d2b91c5a0f4fe9b",
+        "target_bytes": 3044449,
+        "target_inline_style": null,
+        "target_is_byte_preserving": true,
+        "target_path": "assets/lesson09/assets/tetra_die.png",
+        "target_sha256": "48d09d5e1a7ba862fb18001773cefb64aec266f43650b5b0813add8eaff58f5a"
+      },
+      {
+        "asset_id": "O006-PSU-010-A0002",
+        "source_bytes": 16784,
+        "source_inline_style": "width:70.0%",
+        "source_path": "authority/assets/stat415/lesson09/Lesson09_files/figure-html/unnamed-chunk-1-1.png",
+        "source_sha256": "34806d496364d23810cc800b8e874992b2377bdaa0afede976176a120716d71c",
+        "target_alt_sha256": "81acec7beafcc3a525b72f8e8f4f42e0ba094a9bacded5ea62470d8b705e2db4",
+        "target_bytes": 16784,
+        "target_inline_style": null,
+        "target_is_byte_preserving": true,
+        "target_path": "assets/lesson09/Lesson09_files/figure-html/unnamed-chunk-1-1.png",
+        "target_sha256": "34806d496364d23810cc800b8e874992b2377bdaa0afede976176a120716d71c"
+      },
+      {
+        "asset_id": "O006-PSU-010-A0003",
+        "source_bytes": 17808,
+        "source_inline_style": "width:70.0%",
+        "source_path": "authority/assets/stat415/lesson09/Lesson09_files/figure-html/unnamed-chunk-2-1.png",
+        "source_sha256": "d8a4214d5a136770a14070329cfd124092eaca710eb7287e2da84fe4e6fb9894",
+        "target_alt_sha256": "7f9493222e4c3fe1cd460fec857d481eac907eff48389a454a3c02e892d38c81",
+        "target_bytes": 17808,
+        "target_inline_style": null,
+        "target_is_byte_preserving": true,
+        "target_path": "assets/lesson09/Lesson09_files/figure-html/unnamed-chunk-2-1.png",
+        "target_sha256": "d8a4214d5a136770a14070329cfd124092eaca710eb7287e2da84fe4e6fb9894"
+      },
+      {
+        "asset_id": "O006-PSU-010-A0004",
+        "source_bytes": 2181,
+        "source_inline_style": null,
+        "source_path": "authority/assets/stat415/lesson09/assets/STAT-415-SEC-2-03.svg",
+        "source_sha256": "cdcdea0ed5d30bed29c789ab1dfe6437e64d9c99fa560ba6e7cd4cf459e6044b",
+        "target_alt_sha256": "bfe4c31285cafe8126a0b81375aa152872510b47babd8def111537c74b7989ed",
+        "target_bytes": 2181,
+        "target_inline_style": null,
+        "target_is_byte_preserving": true,
+        "target_path": "assets/lesson09/assets/STAT-415-SEC-2-03.svg",
+        "target_sha256": "cdcdea0ed5d30bed29c789ab1dfe6437e64d9c99fa560ba6e7cd4cf459e6044b"
+      },
+      {
+        "asset_id": "O006-PSU-010-A0005",
+        "source_bytes": 12102,
+        "source_inline_style": null,
+        "source_path": "authority/assets/stat415/lesson09/assets/ht5.png",
+        "source_sha256": "42089920ac53b068f785e765c4af31187841097fdf811ef52fce71e542189ab7",
+        "target_alt_sha256": "1af4a33ee661dfc34df13f88e18c8f1c1ba92127d86663fedbe106ac07d620e4",
+        "target_bytes": 12102,
+        "target_inline_style": null,
+        "target_is_byte_preserving": true,
+        "target_path": "assets/lesson09/assets/ht5.png",
+        "target_sha256": "42089920ac53b068f785e765c4af31187841097fdf811ef52fce71e542189ab7"
+      },
+      {
+        "asset_id": "O006-PSU-010-A0006",
+        "source_bytes": 245769,
+        "source_inline_style": null,
+        "source_path": "authority/assets/stat415/lesson09/assets/ht6.png",
+        "source_sha256": "a094f2e57e9f0867e87ff5d4397bc3b5c222f80c4b9d3bbd7f68d0a4ef13db5e",
+        "target_alt_sha256": "24b930ac5be9d332bb7265b684c870f46c75e82475230953263df4a1c7e8a546",
+        "target_bytes": 245769,
+        "target_inline_style": null,
+        "target_is_byte_preserving": true,
+        "target_path": "assets/lesson09/assets/ht6.png",
+        "target_sha256": "a094f2e57e9f0867e87ff5d4397bc3b5c222f80c4b9d3bbd7f68d0a4ef13db5e"
+      },
+      {
+        "asset_id": "O006-PSU-010-A0007",
+        "source_bytes": 209721,
+        "source_inline_style": null,
+        "source_path": "authority/assets/stat415/lesson09/assets/ht7.png",
+        "source_sha256": "74b43d2ab8873ba123bfb3d1748e3759fa274e8ae3fe3ff5ecddc17dd2f28f08",
+        "target_alt_sha256": "8ff38807cc7c3d0367f269134daa4f311bcb2ea4593eddf7d0cebc557b92539f",
+        "target_bytes": 209721,
+        "target_inline_style": null,
+        "target_is_byte_preserving": true,
+        "target_path": "assets/lesson09/assets/ht7.png",
+        "target_sha256": "74b43d2ab8873ba123bfb3d1748e3759fa274e8ae3fe3ff5ecddc17dd2f28f08"
+      },
+      {
+        "asset_id": "O006-PSU-010-A0008",
+        "source_bytes": 278296,
+        "source_inline_style": null,
+        "source_path": "authority/assets/stat415/lesson09/assets/ht8.png",
+        "source_sha256": "7f8ec0b05f37792f81f60be0b0242aab375bdc4e79fd8454f94e5de5ba6a3a1d",
+        "target_alt_sha256": "a3f889618ae95133980aea47dcde9d98d54b717bd2807ac760c305743bba861b",
+        "target_bytes": 278296,
+        "target_inline_style": null,
+        "target_is_byte_preserving": true,
+        "target_path": "assets/lesson09/assets/ht8.png",
+        "target_sha256": "7f8ec0b05f37792f81f60be0b0242aab375bdc4e79fd8454f94e5de5ba6a3a1d"
+      },
+      {
+        "asset_id": "O006-PSU-010-A0009",
+        "source_bytes": 230356,
+        "source_inline_style": null,
+        "source_path": "authority/assets/stat415/lesson09/assets/h10.png",
+        "source_sha256": "bed97e91e72f22150d542f2ea71859dd8698c78e1f784124ba93b16cb1073988",
+        "target_alt_sha256": "c4d64899c3dbba44a3db1ebb5ae52cb9139e38a6c9b2e0b64aa12d8659767f6b",
+        "target_bytes": 230356,
+        "target_inline_style": null,
+        "target_is_byte_preserving": true,
+        "target_path": "assets/lesson09/assets/h10.png",
+        "target_sha256": "bed97e91e72f22150d542f2ea71859dd8698c78e1f784124ba93b16cb1073988"
+      },
+      {
+        "asset_id": "O006-PSU-010-A0010",
+        "source_bytes": 202382,
+        "source_inline_style": null,
+        "source_path": "authority/assets/stat415/lesson09/assets/h11.png",
+        "source_sha256": "0a738a3904c683d2a30865fafa93e4e06bcc0e2ba01bf3a4fd59b1b7fb176986",
+        "target_alt_sha256": "98e5fb38d96a87892c220c62d4ad98d0168963e624af302b66c5ce5f72da76ac",
+        "target_bytes": 202382,
+        "target_inline_style": null,
+        "target_is_byte_preserving": true,
+        "target_path": "assets/lesson09/assets/h11.png",
+        "target_sha256": "0a738a3904c683d2a30865fafa93e4e06bcc0e2ba01bf3a4fd59b1b7fb176986"
+      }
+    ]
+  },
+  "offline": {
+    "analytics": false,
+    "cookies": false,
+    "external_runtime_requests": 0,
+    "local_mathjax": true,
+    "third_party_iframes": 0
+  },
+  "reader": {
+    "bytes": 8551979,
+    "files": 71,
+    "manifest_bytes": 7478,
+    "manifest_path": "build/THROUGH_LESSON09_MANIFEST.csv",
+    "manifest_sha256": "fa29f2df5f34e441d976280696ef2433845a65fe4ec478674346e56e2f50ffc8",
+    "path": "build/html-id"
+  },
+  "rights": {
+    "Lesson09 generated plots": "two frozen generated outputs retained with explicit non-reproducibility disclosure because generating code and inputs are absent",
+    "Lessons07-09 assets": "sixteen same-origin authority assets frozen and redistributed byte-for-byte under the official page notice; derivative HTML supplies accessibility and responsive-layout repairs",
+    "MathJax 3.1.2": "Apache-2.0",
+    "Penn State content": "CC BY-NC 4.0 except where otherwise noted",
+    "aggregate_uniform_relicense": false
+  },
+  "runtime_closure": {
+    "MathJax 3.1.2": {
+      "added_autoload_dependency": {
+        "bytes": 4709,
+        "path": "assets/MathJax/input/tex/extensions/boldsymbol.js",
+        "reason": "tex-svg autoloads the boldsymbol extension when source mathematics uses its macros",
+        "sha256": "716cf8735d00abfb1627f8adbbf4aeb915ac9b5c55d47aeaf276e73dac6a2aa1"
+      },
+      "freeze_receipt": {
+        "bytes": 2376,
+        "path": "authority/runtime/MathJax-3.1.2/FREEZE_RECEIPT.json",
+        "sha256": "22cb63be3a81e70f645c71a5ae93ce618c460ea9b99c63eac55fd7d14e03e043"
+      },
+      "url_manifest": {
+        "bytes": 1199,
+        "path": "authority/runtime/MathJax-3.1.2/URL_MANIFEST.csv",
+        "sha256": "4f9c8b167eedf6e12227274a9c4e93fe5c90a5504e3ef692113c9d6c6ced400c"
+      }
+    }
+  },
+  "schema": "o006.stat415.through-lesson09-build.v1",
+  "status": "built",
+  "structural_units_normalized": 4775,
+  "structural_units_target": 4763,
+  "target_documents": [
+    {
+      "bytes": 25239,
+      "path": "source/id-ID/index.html",
+      "sha256": "e8910dc559d3f75b43fe18c5b5b596cec31541e1e748b7a91db313f906b51c9a"
+    },
+    {
+      "bytes": 80452,
+      "path": "source/id-ID/Lesson00.html",
+      "sha256": "184f29ae84adaef54e9f942781957417aa783b993225a15edb4676ba65534897"
+    },
+    {
+      "bytes": 47532,
+      "path": "source/id-ID/Lesson01.html",
+      "sha256": "6f2cf23fb2bac3511e8605f910f1894c112e055a82caed3b405be339c9c60651"
+    },
+    {
+      "bytes": 59276,
+      "path": "source/id-ID/Lesson02.html",
+      "sha256": "bc93e167c30f5459ac2c864aa1e855f4666b202b0100efd48e62a8321323cee7"
+    },
+    {
+      "bytes": 102716,
+      "path": "source/id-ID/Lesson03.html",
+      "sha256": "027a47b63a0c21b30c6b6e9965d3e70a948592b66af0bb5be9c67450d01f93f0"
+    },
+    {
+      "bytes": 81350,
+      "path": "source/id-ID/Lesson04.html",
+      "sha256": "f1e88c3f57cbb8b6d91511fdfb3cee9f54be84c68d705e7f8df43de1dde2f2ef"
+    },
+    {
+      "bytes": 195354,
+      "path": "source/id-ID/Lesson05.html",
+      "sha256": "d4dc6c744307620d878b2a9ec761ca039810ef64194f9a0d6f1227449e14cf3b"
+    },
+    {
+      "bytes": 36615,
+      "path": "source/id-ID/Lesson06.html",
+      "sha256": "32f41b9dda542c1a6896d9a7868b4e91b3dc5e837b9153035dbe5367e948b450"
+    },
+    {
+      "bytes": 74079,
+      "path": "source/id-ID/Lesson07.html",
+      "sha256": "d5714697191c3530be7183ee15a8ae3dffda87596338eadb293ac58c0d1cb440"
+    },
+    {
+      "bytes": 113208,
+      "path": "source/id-ID/Lesson08.html",
+      "sha256": "d902c11f06ed884d3124596c9c178e87dbd993063b65c454176e73c96b4d3daf"
+    },
+    {
+      "bytes": 95275,
+      "path": "source/id-ID/Lesson09.html",
+      "sha256": "539cf8f248e654ccb70bf12c98318ece8ac9de7281ae1f1ea5bb3d364d134f64"
+    }
+  ],
+  "translation_provenance": "OpenAI Codex gpt-5.6-sol, Ultra",
+  "translation_segments": 3458
+}

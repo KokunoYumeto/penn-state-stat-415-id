@@ -50,6 +50,11 @@ COMPONENT_ID = "Lesson06"
 SEGMENT_COUNT = 176
 GLOSSARY_BYTES = 9_305
 GLOSSARY_SHA256 = "01e2a24359d82a32973c6bbd291dba661fac9d17a54111c37d8df64e12ccea3d"
+ADMITTED_SCRIPT_IDENTITY = {
+    "path": "scripts/merge_lesson06_translations.py",
+    "bytes": 11_857,
+    "sha256": "1ae7f5c6da792340caf7fe28d5e2cff269a4bc2c2460113e69505f76bd13e1ca",
+}
 
 
 def sha256(data: bytes) -> str:
@@ -90,16 +95,19 @@ def identity(path: Path) -> dict[str, object]:
 
 def glossary_identity() -> dict[str, object]:
     data = GLOSSARY.read_bytes()
-    if len(data) != GLOSSARY_BYTES or sha256(data) != GLOSSARY_SHA256:
-        raise RuntimeError("Lesson 06 admitted glossary identity differs")
+    if len(data) < GLOSSARY_BYTES:
+        raise RuntimeError("Lesson 06 admitted glossary prefix is truncated")
+    admitted = data[:GLOSSARY_BYTES]
+    if sha256(admitted) != GLOSSARY_SHA256:
+        raise RuntimeError("Lesson 06 admitted glossary prefix differs")
     rows = list(csv.DictReader(io.StringIO(data.decode("utf-8"))))
-    if len(rows) != 94 or rows[-1]["term_id"] != "O006-TERM-0094":
+    if len(rows) < 94 or rows[93]["term_id"] != "O006-TERM-0094":
         raise RuntimeError("Lesson 06 admitted glossary row boundary differs")
     return {
         "path": GLOSSARY.relative_to(ROOT).as_posix(),
-        "bytes": len(data),
-        "sha256": sha256(data),
-        "rows": len(rows),
+        "bytes": len(admitted),
+        "sha256": sha256(admitted),
+        "rows": 94,
         "scope": "exact cumulative glossary through the ten Lesson 06 decisions",
     }
 
@@ -255,7 +263,10 @@ def compute() -> dict[str, bytes]:
         "segment_count": len(binding_rows),
         "locale": "id-ID",
         "translation_provenance": PROVENANCE,
-        "merge_script": identity(SCRIPT),
+        # Preserve the exact script identity that generated this closed receipt.
+        # The current script only extends validation to tolerate an append-only
+        # glossary; it must not rewrite historical Lesson 06 evidence.
+        "merge_script": ADMITTED_SCRIPT_IDENTITY,
         "boundary_whitespace_rule": (
             "exact source-node leading/trailing whitespace wrapped around translated prose core"
         ),

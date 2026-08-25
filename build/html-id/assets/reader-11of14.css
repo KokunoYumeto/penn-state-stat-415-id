@@ -273,3 +273,41 @@ main pre {
   height: auto;
   margin-inline: auto;
 }
+
+
+/* Lessons 07–09: readable, centered, full-width instructional surfaces. */
+main#quarto-document-content figure,
+main#quarto-document-content .quarto-figure,
+main#quarto-document-content .cell-output-display,
+main#quarto-document-content a.lightbox {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  margin-inline: auto;
+}
+
+main#quarto-document-content figure img,
+main#quarto-document-content .quarto-figure img,
+main#quarto-document-content img[data-o006-asset-id] {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+  margin-inline: auto;
+}
+
+main#quarto-document-content pre,
+main#quarto-document-content .sourceCode,
+main#quarto-document-content .cell-output {
+  max-width: 100%;
+  overflow-x: auto;
+  white-space: pre;
+}
+
+main#quarto-document-content table {
+  display: block;
+  width: max-content;
+  max-width: 100%;
+  overflow-x: auto;
+  margin-inline: auto;
+}

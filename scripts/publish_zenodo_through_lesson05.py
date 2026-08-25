@@ -54,6 +54,8 @@ COMPLETE_DOCUMENTS = (
     "Lesson05",
 )
 MODEL_PROVENANCE = "OpenAI Codex gpt-5.6-sol, Ultra"
+EXPECTED_COMPLETE_COUNT = 7
+NEXT_DOCUMENT = "Lesson06"
 
 
 def validate_release_root(inventory: list[dict[str, object]]) -> None:
@@ -125,10 +127,10 @@ def local_inventory() -> tuple[list[dict[str, object]], dict[str, object]]:
     ):
         raise RuntimeError("release package receipt is not the admitted cumulative boundary")
     if (
-        coverage.get("complete_count") != 7
+        coverage.get("complete_count") != EXPECTED_COMPLETE_COUNT
         or coverage.get("corpus_document_count") != 14
         or coverage.get("complete_documents") != list(COMPLETE_DOCUMENTS)
-        or coverage.get("next_document") != "Lesson06"
+        or coverage.get("next_document") != NEXT_DOCUMENT
     ):
         raise RuntimeError("release package coverage is not exactly index plus Lessons 00–05")
     by_name = {str(row.get("filename")): row for row in rows if isinstance(row, dict)}

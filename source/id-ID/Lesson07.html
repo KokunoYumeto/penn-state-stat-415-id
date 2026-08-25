@@ -1,0 +1,556 @@
+<!doctype html>
+<html lang="id-ID">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>7 Distribusi Asimtotik MLE (Bagian I)</title>
+<meta name="source-url" content="https://online.stat.psu.edu/stat415/Lesson07">
+<meta name="translation-provenance" content="OpenAI Codex gpt-5.6-sol, Ultra">
+<meta name="edition-status" content="partial: 11 of 14 documents complete; landing and Lessons 00–09">
+<link rel="license" href="https://creativecommons.org/licenses/by-nc/4.0/">
+<link rel="stylesheet" href="assets/reader-11of14.css">
+<script defer src="assets/MathJax/tex-svg.js"></script>
+</head>
+<body>
+<a class="skip-link" href="#quarto-document-content">Lewati ke isi utama</a>
+<header class="site-header"><div class="site-header__inner"><div><p class="site-title">STAT 415 — Pengantar Statistika Matematis</p><p class="site-subtitle">Rekonstruksi dan terjemahan Bahasa Indonesia · O006/C140</p></div><nav class="site-nav" aria-label="Navigasi utama"><a href="index.html">Daftar pelajaran</a><a href="Lesson00.html">Pelajaran 00</a><a href="Lesson01.html">Pelajaran 01</a><a href="Lesson02.html">Pelajaran 02</a><a href="Lesson03.html">Pelajaran 03</a><a href="Lesson04.html">Pelajaran 04</a><a href="Lesson05.html">Pelajaran 05</a><a href="Lesson06.html">Pelajaran 06</a><a href="Lesson07.html">Pelajaran 07</a><a href="Lesson08.html">Pelajaran 08</a><a href="Lesson09.html">Pelajaran 09</a><a href="licenses/index.html">Lisensi</a></nav></div></header>
+<div class="page-shell"><aside class="edition-note" aria-label="Status edisi"><strong>Edisi Bahasa Indonesia — 11 dari 14 dokumen.</strong> Laman utama serta Pelajaran 00–09 telah diterjemahkan sepenuhnya. Pelajaran 10–12 masih menuju sumber resmi berbahasa Inggris sampai unit berikutnya selesai. <a href="https://online.stat.psu.edu/stat415/Lesson07">Sumber resmi halaman ini</a>. <a href="licenses/index.html">Atribusi, perubahan, dan lisensi</a>.</aside><main class="content" data-component-id="Lesson07" data-document-id="O006-PSU-008" data-source-url="https://online.stat.psu.edu/stat415/Lesson07" id="quarto-document-content">
+<header class="quarto-title-block default" data-o006-id="O006-PSU-008-U0001" id="title-block-header"><nav aria-label="Jejak navigasi" class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" data-o006-id="O006-PSU-008-U0002"><ol class="breadcrumb" data-o006-id="O006-PSU-008-U0003"><li class="breadcrumb-item" data-o006-id="O006-PSU-008-U0004"><a data-o006-id="O006-PSU-008-U0005" href="index.html#lessons">Pelajaran</a></li><li class="breadcrumb-item" data-o006-id="O006-PSU-008-U0006"><a data-o006-id="O006-PSU-008-U0007" href="Lesson07.html"><span class="chapter-number">7</span>  <span class="chapter-title">Distribusi Asimtotik MLE (Bagian I)</span></a></li></ol></nav>
+<div class="quarto-title" data-o006-id="O006-PSU-008-U0008">
+<h1 class="title" data-o006-id="O006-PSU-008-U0009"><span class="chapter-number">7</span>  <span class="chapter-title">Distribusi Asimtotik MLE (Bagian I)</span></h1>
+<div class="quarto-categories" data-o006-id="O006-PSU-008-U0010">
+<div class="quarto-category" data-o006-id="O006-PSU-008-U0011">MLE</div>
+<div class="quarto-category" data-o006-id="O006-PSU-008-U0012">Selang Kepercayaan Asimtotik</div>
+<div class="quarto-category" data-o006-id="O006-PSU-008-U0013">Hampiran Numerik</div>
+<div class="quarto-category" data-o006-id="O006-PSU-008-U0014">Bootstrap</div>
+</div>
+</div>
+<div class="quarto-title-meta" data-o006-id="O006-PSU-008-U0015">
+</div>
+</header>
+<section class="level2 unnumbered unlisted" data-o006-id="O006-PSU-008-U0016" id="overview">
+<h2 class="unnumbered unlisted anchored" data-anchor-id="overview" data-o006-id="O006-PSU-008-U0017">Gambaran Umum</h2>
+<p data-o006-id="O006-PSU-008-U0018">Mari kita tinjau kembali penduga kemungkinan maksimum (MLE) untuk mempelajari sifat-sifat asimtotiknya dan penerapannya dalam membentuk selang kepercayaan. Pelajaran ini memperkenalkan dasar-dasar teoretis MLE, termasuk konsistensi, sifat ekuivarian, dan normalitas asimtotiknya di bawah syarat keteraturan. Anda akan mempelajari cara menurunkan informasi Fisher untuk model berparameter tunggal dan model multiparameter, lalu menggunakannya untuk membentuk selang kepercayaan asimtotik. Pelajaran ini juga membahas hampiran numerik untuk selang-selang tersebut dengan menggunakan fungsi dalam R, yaitu <code data-o006-id="O006-PSU-008-U0019">optim</code> untuk optimisasi numerik. Pernyataan ikhtisar sumber tentang selang bootstrap parametrik dan nonparametrik, metode Delta, inferensi transformasi dengan bootstrap, serta contoh t dan Pareto bersifat antisipatif dan tidak didukung oleh isi Pelajaran 07 yang tersedia. Isi sebenarnya mencakup sifat MLE, selang Wald asimtotik skalar dan vektor, serta demonstrasi numerik Geometrik dan Normal. Mari kita mulai.</p>
+<div class="objectiveblock" data-o006-id="O006-PSU-008-U0020">
+<p data-o006-id="O006-PSU-008-U0021"><i class="bi bi-check2-circle"></i><span class="callout-header">Tujuan</span></p>
+<p data-o006-id="O006-PSU-008-U0022">Setelah menyelesaikan pelajaran ini, Anda diharapkan mampu:</p>
+</div>
+</section>
+<section class="level2" data-number="7.1" data-o006-id="O006-PSU-008-U0023" id="properties-of-mles">
+<h2 class="anchored" data-anchor-id="properties-of-mles" data-number="7.1" data-o006-id="O006-PSU-008-U0024"><span class="header-section-number">7.1</span> Sifat-Sifat MLE</h2>
+<p data-o006-id="O006-PSU-008-U0025">Pendugaan kemungkinan maksimum populer karena terdapat sejumlah sifat yang dapat dibuktikan dan berlaku untuk <strong>SETIAP MLE!</strong></p>
+<p data-o006-id="O006-PSU-008-U0026">Hasil berikut berlaku bagi setiap MLE, dengan beberapa “syarat keteraturan”. Syarat keteraturan tersebut mencakup</p>
+<ul data-o006-id="O006-PSU-008-U0027">
+<li data-o006-id="O006-PSU-008-U0028"><p data-o006-id="O006-PSU-008-U0029">Fungsi peluang yang mendasarinya, <span class="math inline" data-o006-math-id="O006-PSU-008-M0001">\(f(x|\theta)\)</span>, bersifat “mulus”.</p></li>
+<li data-o006-id="O006-PSU-008-U0030"><p data-o006-id="O006-PSU-008-U0031">Parameter sebenarnya, <span class="math inline" data-o006-math-id="O006-PSU-008-M0002">\(\theta_0\)</span>, berada di bagian dalam ruang parameter, bukan pada batasnya. Syarat ini menyangkut ruang parameter dan tidak sama dengan himpunan dukungan data.</p></li>
+</ul>
+<p data-o006-id="O006-PSU-008-U0032">Kami tidak akan menyajikan daftar lengkap syarat maupun bukti bagi sifat-sifat berikut. Anda dapat menemukannya dalam buku teks Wasserman, Bab 9.13.</p>
+<div class="bg-success-subtle callout callout-style-simple callout-tip no-icon callout-titled" data-o006-id="O006-PSU-008-U0033">
+<div class="callout-header d-flex align-content-center" data-o006-id="O006-PSU-008-U0034">
+<div class="callout-icon-container" data-o006-id="O006-PSU-008-U0035">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill" data-o006-id="O006-PSU-008-U0036">
+<span class="screen-reader-only">Kiat</span>Sifat 1: Penduga, <span class="math inline" data-o006-math-id="O006-PSU-008-M0003">\(\hat{\theta}_{mle}\)</span> bersifat konsisten.
+</div>
+</div>
+<div class="callout-body-container callout-body" data-o006-id="O006-PSU-008-U0037">
+<p data-o006-id="O006-PSU-008-U0038">Ini berarti bahwa ketika ukuran sampel <span class="math inline" data-o006-math-id="O006-PSU-008-M0004">\(n\)</span> mendekati tak hingga, <span class="math inline" data-o006-math-id="O006-PSU-008-M0005">\(\hat{\theta}_{mle}\)</span> mendekati nilai sebenarnya dari <span class="math inline" data-o006-math-id="O006-PSU-008-M0006">\(\theta\)</span>. Namun, konsistensi saja tidak cukup untuk menyimpulkan konvergensi nilai harapan. Jika keluarga penduga memenuhi integrabilitas seragam, maka ketika <span class="math inline" data-o006-math-id="O006-PSU-008-M0007">\(n\)</span> mendekati tak hingga, <span class="math inline" data-o006-math-id="O006-PSU-008-M0008">\(E(\hat{\theta}_{mle})\)</span> mendekati nilai sebenarnya dari <span class="math inline" data-o006-math-id="O006-PSU-008-M0009">\(\theta\)</span>.</p><p class="target-only-correction uniform-integrability-note" data-o006-correction-id="O006-PSU-ADV-0123" role="note">Catatan koreksi: integrabilitas seragam (uniform integrability; UI), bersama konvergensi dalam peluang ke θ, menghasilkan konvergensi L¹; karena itu E(θ̂ₙ) → θ. Tanpa syarat tambahan ini, konsistensi saja tidak menjaga nilai harapan.</p>
+</div>
+</div>
+<div class="bg-success-subtle callout callout-style-simple callout-tip no-icon callout-titled" data-o006-id="O006-PSU-008-U0039">
+<div class="callout-header d-flex align-content-center" data-o006-id="O006-PSU-008-U0040">
+<div class="callout-icon-container" data-o006-id="O006-PSU-008-U0041">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill" data-o006-id="O006-PSU-008-U0042">
+<span class="screen-reader-only">Kiat</span>Sifat 2: Penduga, <span class="math inline" data-o006-math-id="O006-PSU-008-M0010">\(\hat{\theta}_{mle}\)</span>, bersifat ekuivarian.
+</div>
+</div>
+<div class="callout-body-container callout-body" data-o006-id="O006-PSU-008-U0043">
+<p data-o006-id="O006-PSU-008-U0044">Jika suatu penduga, <span class="math inline" data-o006-math-id="O006-PSU-008-M0011">\(\hat{\theta}\)</span>, merupakan MLE bagi <span class="math inline" data-o006-math-id="O006-PSU-008-M0012">\(\theta\)</span>, dan <span class="math inline" data-o006-math-id="O006-PSU-008-M0013">\(g(\theta)\)</span> merupakan fungsi yang dapat dibalik, maka MLE bagi <span class="math inline" data-o006-math-id="O006-PSU-008-M0014">\(\tau=g(\theta)\)</span> adalah <span class="math inline" data-o006-math-id="O006-PSU-008-M0015">\(\hat{\tau}=g(\hat{\theta})\)</span>.</p>
+<p data-o006-id="O006-PSU-008-U0045">Artinya, MLE bagi suatu fungsi dari parameter diperoleh dengan menerapkan fungsi tersebut pada MLE bagi parameternya, selama fungsi itu dapat dibalik.</p>
+</div>
+</div>
+<div class="theorem example" data-o006-id="O006-PSU-008-U0046" id="exm-mle1">
+<p data-o006-id="O006-PSU-008-U0047"><span class="theorem-title"><strong>Contoh 7.1</strong></span> Misalkan <span class="math inline" data-o006-math-id="O006-PSU-008-M0016">\(X_i\sim N(\mu, \sigma^2)\)</span>. Artinya, misalkan <span class="math inline" data-o006-math-id="O006-PSU-008-M0017">\(X_1, X_2, \ldots, X_n\)</span> merupakan peubah acak Normal yang saling bebas dan berdistribusi identik (iid), dengan rataan <span class="math inline" data-o006-math-id="O006-PSU-008-M0018">\(\mu\)</span> dan varians <span class="math inline" data-o006-math-id="O006-PSU-008-M0019">\(\sigma^2\)</span>. Kita mengetahui bahwa <span class="math inline" data-o006-math-id="O006-PSU-008-M0020">\(\hat{\mu}=\bar{x}\)</span> dan <span class="math inline" data-o006-math-id="O006-PSU-008-M0021">\(\hat{\sigma}^2=\frac{1}{n}\sum_{i=1}^n(x_i-\bar{x})^2\)</span> adalah MLE bagi <span class="math inline" data-o006-math-id="O006-PSU-008-M0022">\(\mu\)</span> dan <span class="math inline" data-o006-math-id="O006-PSU-008-M0023">\(\sigma^2\)</span>, masing-masing. Berapakah MLE bagi simpangan baku, <span class="math inline" data-o006-math-id="O006-PSU-008-M0024">\(\sigma\)</span>?</p>
+<section class="level4 card card-body bg-light ms-3 mb-3 pt-0" data-o006-id="O006-PSU-008-U0048" id="solution">
+<h4 class="anchored" data-anchor-id="solution" data-o006-id="O006-PSU-008-U0049">Penyelesaian</h4>
+<p data-o006-id="O006-PSU-008-U0050">Kita mengetahui bahwa <span class="math inline" data-o006-math-id="O006-PSU-008-M0025">\(\sigma=g(\sigma^2)=\sqrt{\sigma^2}\)</span>. Oleh karena itu, berdasarkan sifat ekuivarian, MLE bagi <span class="math inline" data-o006-math-id="O006-PSU-008-M0026">\(\sigma\)</span> adalah: <span class="math display" data-o006-math-id="O006-PSU-008-M0027">\[\begin{align*}
+  \hat{\sigma}_{mle}=\sqrt{\hat{\sigma}^2_{mle}}=\sqrt{\frac{1}{n}\sum_{i=1}^n (x_i-\bar{x})^2}
+\end{align*}\]</span></p>
+</section>
+</div>
+<div class="theorem example" data-o006-id="O006-PSU-008-U0051" id="exm-mle2">
+<p data-o006-id="O006-PSU-008-U0052"><span class="theorem-title"><strong>Contoh 7.2</strong></span> Misalkan <span class="math inline" data-o006-math-id="O006-PSU-008-M0028">\(X_i\sim Bin(5, p)\)</span>, untuk <span class="math inline" data-o006-math-id="O006-PSU-008-M0029">\(i=1, \ldots, n\)</span>. Berapakah MLE bagi rasio odds, <span class="math inline" data-o006-math-id="O006-PSU-008-M0030">\(\text{OR}=\frac{p}{1-p}\)</span>?</p>
+<section class="level4 card card-body bg-light ms-3 mb-3 pt-0" data-o006-id="O006-PSU-008-U0053" id="solution-1">
+<h4 class="anchored" data-anchor-id="solution-1" data-o006-id="O006-PSU-008-U0054">Penyelesaian</h4>
+<p data-o006-id="O006-PSU-008-U0055">MLE bagi <span class="math inline" data-o006-math-id="O006-PSU-008-M0031">\(p\)</span> adalah <span class="math inline" data-o006-math-id="O006-PSU-008-M0032">\(\hat{p}=\dfrac{\sum_{i=1}^n x_i}{5n}\)</span>. Oleh karena itu, MLE bagi <span class="math inline" data-o006-math-id="O006-PSU-008-M0033">\(\text{OR}\)</span> adalah <span class="math display" data-o006-math-id="O006-PSU-008-M0034">\[\begin{align*}
+  \hat{\text{OR}}_{mle}=\dfrac{\hat{p}}{1-\hat{p}}=\dfrac{\dfrac{\sum_{i=1}^n x_i}{5n}}{1-\dfrac{\sum_{i=1}^n x_i}{5n}}
+\end{align*}\]</span></p>
+</section>
+</div>
+<div class="bg-success-subtle callout callout-style-simple callout-tip no-icon callout-titled" data-o006-id="O006-PSU-008-U0056">
+<div class="callout-header d-flex align-content-center" data-o006-id="O006-PSU-008-U0057">
+<div class="callout-icon-container" data-o006-id="O006-PSU-008-U0058">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill" data-o006-id="O006-PSU-008-U0059">
+<span class="screen-reader-only">Kiat</span>Sifat 3: MLE Berdistribusi Normal secara Asimtotik.
+</div>
+</div>
+<div class="callout-body-container callout-body" data-o006-id="O006-PSU-008-U0060">
+<p data-o006-id="O006-PSU-008-U0061">Untuk <span class="math inline" data-o006-math-id="O006-PSU-008-M0035">\(X_i\sim f(x_i|\theta)\)</span> <span class="math inline" data-o006-math-id="O006-PSU-008-M0036">\(i=1, \ldots, n\)</span>, MLE-nya adalah <span class="math inline" data-o006-math-id="O006-PSU-008-M0037">\(\hat{\theta}=\text{argmax}_{\theta}(L(\theta))\)</span>. Ketika <span class="math inline" data-o006-math-id="O006-PSU-008-M0038">\(n\)</span> mendekati tak hingga, MLE <span class="math inline" data-o006-math-id="O006-PSU-008-M0039">\(\hat{\theta}\)</span> memiliki hampiran distribusi Normal: <span class="math display" data-o006-math-id="O006-PSU-008-M0040">\[\begin{align*}
+  \hat{\theta}\approx N\left(\theta_{\text{true}}, \frac{1}{I(\hat{\theta}_{mle})}\right)
+\end{align*}\]</span></p>
+<p data-o006-id="O006-PSU-008-U0062">Di sini, “<span class="math inline" data-o006-math-id="O006-PSU-008-M0041">\(\approx\)</span>” berarti “memiliki distribusi yang secara hampiran diberikan oleh”. Fungsi <span class="math inline" data-o006-math-id="O006-PSU-008-M0042">\(I(\theta)\)</span> disebut “<strong>Informasi Fisher</strong>” atau fungsi “Informasi”. Fungsi ini didefinisikan sebagai</p>
+<p data-o006-id="O006-PSU-008-U0063"><span class="math display" data-o006-math-id="O006-PSU-008-M0043">\[\begin{align*}
+  I_n(\theta)=-E_{\theta}\left[\frac{d^2}{d\theta^2}\ell_n(\theta)\right]
+\end{align*}\]</span></p>
+</div>
+</div>
+<div class="theorem example" data-o006-id="O006-PSU-008-U0064" id="exm-mle3">
+<p data-o006-id="O006-PSU-008-U0065"><span class="theorem-title"><strong>Contoh 7.3</strong></span> Misalkan <span class="math inline" data-o006-math-id="O006-PSU-008-M0044">\(X_1, \ldots, X_n\)</span> merupakan sampel iid dari distribusi Bernoulli dengan parameter <span class="math inline" data-o006-math-id="O006-PSU-008-M0045">\(p\)</span>. Tentukan MLE bagi <span class="math inline" data-o006-math-id="O006-PSU-008-M0046">\(p\)</span> dan tentukan <span class="math inline" data-o006-math-id="O006-PSU-008-M0047">\(I(\hat{p})\)</span>. Kemudian, tentukan hampiran distribusi Normal bagi <span class="math inline" data-o006-math-id="O006-PSU-008-M0048">\(\hat{p}\)</span>.</p>
+<section class="level4 card card-body bg-light ms-3 mb-3 pt-0" data-o006-id="O006-PSU-008-U0066" id="solution-2">
+<h4 class="anchored" data-anchor-id="solution-2" data-o006-id="O006-PSU-008-U0067">Penyelesaian</h4>
+<p data-o006-id="O006-PSU-008-U0068">Fungsi massa peluang (PMF)-nya adalah <span class="math inline" data-o006-math-id="O006-PSU-008-M0049">\(f(x|p)=p^x(1-p)^{1-x}\)</span>. Fungsi kemungkinannya adalah:</p>
+<p data-o006-id="O006-PSU-008-U0069"><span class="math display" data-o006-math-id="O006-PSU-008-M0050">\[L(p)=\prod_{i=1}^n p^{x_i}(1-p)^{1-x_i}=p^{\sum x_i}(1-p)^{n-\sum x_i}\]</span></p>
+<p data-o006-id="O006-PSU-008-U0070">Fungsi log-kemungkinannya adalah: <span class="math display" data-o006-math-id="O006-PSU-008-M0051">\[\ell(p)=\sum x_i \ln(p)+(n-\sum x_i)\ln (1-p)\]</span></p>
+<p data-o006-id="O006-PSU-008-U0071">Turunan fungsi log-kemungkinannya adalah: <span class="math display" data-o006-math-id="O006-PSU-008-M0052">\[\frac{d}{dp}\ell(p)=\frac{\sum x_i}{p}-\frac{n-\sum x_i}{1-p}\]</span></p>
+<p data-o006-id="O006-PSU-008-U0072">Dengan menyamakan turunan tersebut dengan nol, kita memperoleh:</p>
+<div data-o006-id="O006-PSU-008-U0073" style="overflow-x:auto;overflow-y:hidden;">
+<span class="math display" data-o006-math-id="O006-PSU-008-M0053">\[\begin{align*}
+&amp;  0=\frac{\sum x_i}{p}-\frac{n-\sum x_i}{1-p}, \qquad \Rightarrow 0=\frac{\sum x_i -p\sum x_i -np+p\sum x_i}{p(1-p)}\\
+&amp; 0=\sum x_i-np, \qquad \hat{p}=\frac{\sum x_i}{n}
+\end{align*}\]</span>
+</div>
+<p data-o006-id="O006-PSU-008-U0074">Oleh karena itu, MLE bagi <span class="math inline" data-o006-math-id="O006-PSU-008-M0054">\(p\)</span> adalah <span class="math inline" data-o006-math-id="O006-PSU-008-M0055">\(\hat{p}=\dfrac{\sum x_i}{n}\)</span>. Selanjutnya, mari kita tentukan <span class="math inline" data-o006-math-id="O006-PSU-008-M0056">\(I(p)=-E\left(\frac{d^2}{dp^2}\ell(p)\right)\)</span>.</p>
+<p data-o006-id="O006-PSU-008-U0075"><span class="math display" data-o006-math-id="O006-PSU-008-M0057">\[\frac{d^2}{dp^2}\ell(p) = -\frac{\sum x_i}{p^2}-\frac{n-\sum x_i}{(1-p)^2}\]</span></p>
+<p data-o006-id="O006-PSU-008-U0076">Selanjutnya, kita perlu menentukan negatif dari nilai harapan turunan kedua tersebut. <span class="math display" data-o006-math-id="O006-PSU-008-M0058">\[\begin{align*}
+  I(p)&amp;=-E\left(\frac{d^2}{dp^2}\ell(p)\right)\\ &amp;=-E\left(-\frac{\sum x_i}{p^2}-\frac{n-\sum x_i}{(1-p)^2}\right)\\ &amp;=E\left(\frac{\sum x_i}{p^2}+\frac{n-\sum x_i}{(1-p)^2}\right)\\
+  &amp;=\frac{\sum E(x_i)}{p^2}+\frac{n-\sum E(x_i)}{(1-p)^2}
+\end{align*}\]</span></p>
+<p data-o006-id="O006-PSU-008-U0077">Untuk peubah acak Bernoulli, <span class="math inline" data-o006-math-id="O006-PSU-008-M0059">\(E(X)=p\)</span>. Oleh karena itu, <span class="math display" data-o006-math-id="O006-PSU-008-M0060">\[\begin{align*}
+  I(p)&amp;=\frac{\sum E(x_i)}{p^2}+\frac{n-\sum E(x_i)}{(1-p)^2}\\ &amp;=\frac{np}{p^2}+\frac{n-np}{(1-p)^2}\\ &amp;=\frac{np(1-p)^2+np^2-np^3}{p^2(1-p)^2}\\
+  &amp; =\frac{np((1-p)^2+p(1-p))}{p^2(1-p)^2}\\ &amp;=\frac{np(1-p)(1-p+p)}{p^2(1-p)^2}\\ &amp;=\frac{n}{p(1-p)}
+\end{align*}\]</span></p>
+<p data-o006-id="O006-PSU-008-U0078">Jika <span class="math inline" data-o006-math-id="O006-PSU-008-M0061">\(I(p)=\frac{n}{p(1-p)}\)</span>, maka <span class="math inline" data-o006-math-id="O006-PSU-008-M0062">\(I(\hat{p})=\dfrac{n}{\hat{p}(1-\hat{p})}=\dfrac{n}{\dfrac{\sum x_i}{n}\left(1-\dfrac{\sum x_i}{n}\right)}=\dfrac{n}{\bar{x}(1-\bar{x})}\)</span>.</p>
+<p data-o006-id="O006-PSU-008-U0079">Dengan menggabungkan semua hasil ini, kita memperoleh <span class="math inline" data-o006-math-id="O006-PSU-008-M0063">\(\hat{p}\approx N\left(p_{true}, \dfrac{1}{I(\hat{p})}\right)\)</span>. Hal ini ekuivalen dengan <span class="math inline" data-o006-math-id="O006-PSU-008-M0064">\(\hat{p}\approx N\left(p_{true}, \dfrac{\bar{x}(1-\bar{x})}{n}\right)\)</span>.</p>
+</section>
+</div>
+<p data-o006-id="O006-PSU-008-U0080">Setelah menentukan distribusi asimtotik MLE (dengan syarat tertentu), kita dapat menggunakan informasi ini (dengan ukuran sampel besar) guna melakukan pendugaan selang bagi parameter yang tidak diketahui, <span class="math inline" data-o006-math-id="O006-PSU-008-M0065">\(\theta\)</span>.</p>
+</section>
+<section class="level2" data-number="7.2" data-o006-id="O006-PSU-008-U0081" id="asymptotic-confidence-intervals">
+<h2 class="anchored" data-anchor-id="asymptotic-confidence-intervals" data-number="7.2" data-o006-id="O006-PSU-008-U0082"><span class="header-section-number">7.2</span> Selang Kepercayaan Asimtotik</h2>
+<section class="level3" data-number="7.2.1" data-o006-id="O006-PSU-008-U0083" id="single-parmater-case">
+<h3 class="anchored" data-anchor-id="single-parmater-case" data-number="7.2.1" data-o006-id="O006-PSU-008-U0084"><span class="header-section-number">7.2.1</span> Kasus Satu Parameter</h3>
+<p data-o006-id="O006-PSU-008-U0085">Pada bagian ini, kita menggabungkan sifat-sifat yang dibahas pada bagian sebelumnya untuk menyusun selang kepercayaan asimtotik bagi parameter yang tidak diketahui, <span class="math inline" data-o006-math-id="O006-PSU-008-M0066">\(\theta\)</span>, dengan menggunakan MLE.</p>
+<p data-o006-id="O006-PSU-008-U0086">Hampiran distribusi Normal bagi setiap MLE memberikan cara mudah untuk menentukan selang kepercayaan asimtotik bagi parameter yang tidak diketahui.</p>
+<div class="bg-success-subtle callout callout-style-simple callout-tip no-icon callout-titled" data-o006-id="O006-PSU-008-U0087">
+<div class="callout-header d-flex align-content-center" data-o006-id="O006-PSU-008-U0088">
+<div class="callout-icon-container" data-o006-id="O006-PSU-008-U0089">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill" data-o006-id="O006-PSU-008-U0090">
+<span class="screen-reader-only">Kiat</span>Sifat 4: Selang Kepercayaan Hampiran
+</div>
+</div>
+<div class="callout-body-container callout-body" data-o006-id="O006-PSU-008-U0091">
+<p data-o006-id="O006-PSU-008-U0092">Misalkan <span class="math inline" data-o006-math-id="O006-PSU-008-M0067">\(X_i\)</span> mengikuti suatu distribusi dengan fungsi peluang <span class="math inline" data-o006-math-id="O006-PSU-008-M0068">\(f(x_i|\theta)\)</span>. Misalkan <span class="math inline" data-o006-math-id="O006-PSU-008-M0069">\(\hat{\theta}\)</span> merupakan MLE bagi <span class="math inline" data-o006-math-id="O006-PSU-008-M0070">\(\theta\)</span>. Kita mempunyai <span class="math inline" data-o006-math-id="O006-PSU-008-M0071">\(I(\theta)=-E\left(\frac{d^2}{d\theta^2} \ell(\theta)\right)\)</span>. Maka, selang kepercayaan asimtotik 95% bagi <span class="math inline" data-o006-math-id="O006-PSU-008-M0072">\(\theta\)</span> adalah <span class="math display" data-o006-math-id="O006-PSU-008-M0073">\[\begin{align*}
+  \hat{\theta}\pm 1.96 \sqrt{\frac{1}{I(\hat{\theta})}}
+\end{align*}\]</span></p>
+</div>
+</div>
+<div class="theorem example" data-o006-id="O006-PSU-008-U0093" id="exm-mle4">
+<p data-o006-id="O006-PSU-008-U0094"><span class="theorem-title"><strong>Contoh 7.4</strong></span> Melanjutkan contoh sebelumnya, kita mengetahui <span class="math inline" data-o006-math-id="O006-PSU-008-M0074">\(\hat{p}=\bar{x}\)</span>, <span class="math inline" data-o006-math-id="O006-PSU-008-M0075">\(I(\hat{p})=\frac{n}{\bar{x}(1-\bar{x})}\)</span>, dan <span class="math inline" data-o006-math-id="O006-PSU-008-M0076">\(\hat{p}\approx N\left(p_{true}, \frac{\bar{x}(1-\bar{x})}{n}\right)\)</span>. Tentukan selang kepercayaan asimtotik 95% bagi <span class="math inline" data-o006-math-id="O006-PSU-008-M0077">\(p\)</span>.</p>
+<section class="level4 card card-body bg-light ms-3 mb-3 pt-0" data-o006-id="O006-PSU-008-U0095" id="solution-3">
+<h4 class="anchored" data-anchor-id="solution-3" data-o006-id="O006-PSU-008-U0096">Penyelesaian</h4>
+<p data-o006-id="O006-PSU-008-U0097">Selang kepercayaan hampiran 95% bagi <span class="math inline" data-o006-math-id="O006-PSU-008-M0078">\(p\)</span> adalah:</p>
+<span class="math display" data-o006-math-id="O006-PSU-008-M0079">\[\begin{align*}
+  \bar{x}\pm 1.96 \sqrt{\frac{\bar{x}(1-\bar{x})}{n}}
+\end{align*}\]</span>
+</section>
+</div>
+<div class="theorem example" data-o006-id="O006-PSU-008-U0098" id="exm-mle4b">
+<p data-o006-id="O006-PSU-008-U0099"><span class="theorem-title"><strong>Contoh 7.5</strong></span> Misalkan kita memiliki 10 pengamatan berikut dari distribusi Bernoulli dengan parameter <span class="math inline" data-o006-math-id="O006-PSU-008-M0080">\(p\)</span>. Hitung selang kepercayaan asimtotik 95% bagi <span class="math inline" data-o006-math-id="O006-PSU-008-M0081">\(p\)</span>.</p>
+<table class="w-auto table-sm mx-auto small caption-top table" data-o006-id="O006-PSU-008-U0100">
+<tbody data-o006-id="O006-PSU-008-U0101">
+<tr class="odd" data-o006-id="O006-PSU-008-U0102">
+<td data-o006-id="O006-PSU-008-U0103">1</td>
+<td data-o006-id="O006-PSU-008-U0104">1</td>
+<td data-o006-id="O006-PSU-008-U0105">0</td>
+<td data-o006-id="O006-PSU-008-U0106">1</td>
+<td data-o006-id="O006-PSU-008-U0107">0</td>
+</tr>
+<tr class="even" data-o006-id="O006-PSU-008-U0108">
+<td data-o006-id="O006-PSU-008-U0109">0</td>
+<td data-o006-id="O006-PSU-008-U0110">0</td>
+<td data-o006-id="O006-PSU-008-U0111">1</td>
+<td data-o006-id="O006-PSU-008-U0112">1</td>
+<td data-o006-id="O006-PSU-008-U0113">1</td>
+</tr>
+</tbody>
+</table>
+<section class="level4 card card-body bg-light ms-3 mb-3 pt-0" data-o006-id="O006-PSU-008-U0114" id="solution-4">
+<h4 class="anchored" data-anchor-id="solution-4" data-o006-id="O006-PSU-008-U0115">Penyelesaian</h4>
+<p data-o006-id="O006-PSU-008-U0116">Melanjutkan contoh sebelumnya, kita mengetahui <span class="math inline" data-o006-math-id="O006-PSU-008-M0082">\(\hat{p}=\bar{x}\)</span>, <span class="math inline" data-o006-math-id="O006-PSU-008-M0083">\(I(\hat{p})=\dfrac{n}{\bar{x}(1-\bar{x})}\)</span>, dan <span class="math inline" data-o006-math-id="O006-PSU-008-M0084">\(\hat{p}\approx N\left(p_{true}, \dfrac{\bar{x}(1-\bar{x})}{n}\right)\)</span>.</p>
+<p data-o006-id="O006-PSU-008-U0117">Kita dapat menghitung <span class="math inline" data-o006-math-id="O006-PSU-008-M0085">\(\bar{x}=0.6\)</span> dan mengetahui <span class="math inline" data-o006-math-id="O006-PSU-008-M0086">\(n=10\)</span>. Oleh karena itu,</p>
+<p data-o006-id="O006-PSU-008-U0118">Selang kepercayaan hampiran 95% bagi <span class="math inline" data-o006-math-id="O006-PSU-008-M0087">\(p\)</span> adalah:</p>
+<span class="math display" data-o006-math-id="O006-PSU-008-M0088">\[\begin{align*}
+  \bar{x}\pm 1.96 \sqrt{\frac{\bar{x}(1-\bar{x})}{n}}=0.6\pm 1.96\sqrt{\frac{0.6(1-0.6)}{10}}=0.6\pm 0.3036=(0.2964, 0.9036)
+\end{align*}\]</span>
+<div class="callout callout-style-simple callout-caution no-icon" data-o006-id="O006-PSU-008-U0119">
+<div class="callout-body d-flex" data-o006-id="O006-PSU-008-U0120">
+<div class="callout-icon-container" data-o006-id="O006-PSU-008-U0121">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-body-container" data-o006-id="O006-PSU-008-U0122">
+<p data-o006-id="O006-PSU-008-U0123"><strong>Catatan!</strong><br/>
+Ukuran sampel dalam contoh ini tidak besar, tetapi contoh ini dipilih untuk tujuan latihan.</p>
+</div>
+</div>
+</div>
+</section>
+</div>
+<div class="theorem example" data-o006-id="O006-PSU-008-U0124" id="exm-mle5">
+<p data-o006-id="O006-PSU-008-U0125"><span class="theorem-title"><strong>Contoh 7.6</strong></span> Misalkan <span class="math inline" data-o006-math-id="O006-PSU-008-M0089">\(X_1, X_2, \ldots, X_n\)</span> merupakan sampel acak dari <span class="math inline" data-o006-math-id="O006-PSU-008-M0090">\(\text{Exp}(\theta)\)</span>. Tentukan selang kepercayaan asimtotik 95% bagi <span class="math inline" data-o006-math-id="O006-PSU-008-M0091">\(\theta\)</span>, dengan menggunakan MLE bagi <span class="math inline" data-o006-math-id="O006-PSU-008-M0092">\(\theta\)</span>.</p>
+<section class="level4 card card-body bg-light ms-3 mb-3 pt-0" data-o006-id="O006-PSU-008-U0126" id="solution-5">
+<h4 class="anchored" data-anchor-id="solution-5" data-o006-id="O006-PSU-008-U0127">Penyelesaian</h4>
+<p data-o006-id="O006-PSU-008-U0128">Untuk xᵢ ≥ 0 dan θ &gt; 0, fungsi kepadatan peluang (PDF)-nya adalah <span class="math inline" data-o006-math-id="O006-PSU-008-M0093">\(f(x_i|\theta)=\frac{1}{\theta}e^{-\frac{x_i}{\theta}}\)</span> dan <span class="math inline" data-o006-math-id="O006-PSU-008-M0094">\(E(X_i)=\theta\)</span>.</p>
+<p data-o006-id="O006-PSU-008-U0129"><strong>Langkah 1</strong>: Tentukan fungsi kemungkinan.</p>
+<p data-o006-id="O006-PSU-008-U0130"><span class="math display" data-o006-math-id="O006-PSU-008-M0095">\[\begin{align*}
+  L(\theta)=\prod_{i=1}^n \frac{1}{\theta}e^{-\frac{x_i}{\theta}}=\theta^{-n}e^{-\frac{\sum x_i}{\theta}}
+\end{align*}\]</span></p>
+<p data-o006-id="O006-PSU-008-U0131"><strong>Langkah 2</strong>: Tentukan fungsi log-kemungkinan.</p>
+<p data-o006-id="O006-PSU-008-U0132"><span class="math display" data-o006-math-id="O006-PSU-008-M0096">\[\begin{align*}
+  \ell(\theta)=-n\log \theta -\frac{\sum x_i}{\theta}
+\end{align*}\]</span></p>
+<p data-o006-id="O006-PSU-008-U0133"><strong>Langkah 3</strong>: Tentukan turunan fungsi log-kemungkinan terhadap <span class="math inline" data-o006-math-id="O006-PSU-008-M0097">\(\theta\)</span>.</p>
+<p data-o006-id="O006-PSU-008-U0134"><span class="math display" data-o006-math-id="O006-PSU-008-M0098">\[\begin{align*}
+  \frac{d}{d\theta}\ell(\theta)=-\frac{n}{\theta}+\frac{\sum x_i}{\theta^2}
+\end{align*}\]</span></p>
+<p data-o006-id="O006-PSU-008-U0135"><strong>Langkah 4</strong>: Samakan turunan tersebut dengan 0, lalu selesaikan persamaannya untuk memperoleh <span class="math inline" data-o006-math-id="O006-PSU-008-M0099">\(\theta\)</span>.</p>
+<p data-o006-id="O006-PSU-008-U0136"><span class="math display" data-o006-math-id="O006-PSU-008-M0100">\[\begin{align*}
+  &amp; 0=\frac{-n\theta+\sum x_i}{\theta^2}, \qquad \Rightarrow 0=-n\theta+\sum x_i\\
+  &amp; \Rightarrow \hat{\theta}=\frac{\sum x_i}{n}
+\end{align*}\]</span></p>
+<p data-o006-id="O006-PSU-008-U0137"><strong>Langkah 5</strong>: Tentukan <span class="math inline" data-o006-math-id="O006-PSU-008-M0101">\(I(\hat{\theta})=-E\left(\frac{d^2}{d\theta^2}\ell(\hat{\theta})\right)\)</span>.</p>
+<p data-o006-id="O006-PSU-008-U0138"><span class="math display" data-o006-math-id="O006-PSU-008-M0102">\[\begin{align*}
+  \frac{d^2}{d\theta^2}\ell_n(\theta)&amp;=\frac{n}{\theta^2}-\frac{2\sum x_i}{\theta^3},\\
+  I_n(\theta)&amp;=-E_{\theta}\left[\frac{d^2}{d\theta^2}\ell_n(\theta)\right]=\frac{n}{\theta^2},\\
+  I_n(\hat{\theta})&amp;=\frac{n}{\hat{\theta}^2}=\frac{n}{\bar{x}^2}=\frac{n^3}{(\sum x_i)^2}.
+\end{align*}\]</span></p>
+<p data-o006-id="O006-PSU-008-U0139">Oleh karena itu, selang kepercayaan asimtotik 95% bagi <span class="math inline" data-o006-math-id="O006-PSU-008-M0103">\(\theta\)</span> adalah: <span class="math display" data-o006-math-id="O006-PSU-008-M0104">\[\hat{\theta}\pm 1.96\sqrt{\frac{1}{I_n(\hat{\theta})}}=\bar{x}\pm 1.96\sqrt{\frac{\bar{x}^2}{n}}=\bar{x}\pm 1.96\frac{\bar{x}}{\sqrt{n}}\]</span></p>
+</section>
+</div>
+</section>
+<section class="level3" data-number="7.2.2" data-o006-id="O006-PSU-008-U0140" id="multiple-parmater-case">
+<h3 class="anchored" data-anchor-id="multiple-parmater-case" data-number="7.2.2" data-o006-id="O006-PSU-008-U0141"><span class="header-section-number">7.2.2</span> Kasus Multiparameter</h3>
+<p data-o006-id="O006-PSU-008-U0142">Dalam kasus multivariat, dengan dua atau lebih parameter yang akan diduga, <span class="math inline" data-o006-math-id="O006-PSU-008-M0105">\(\boldsymbol\theta=(\theta_1,\theta_2,\ldots,\theta_p)\)</span> adalah vektor yang terdiri atas <span class="math inline" data-o006-math-id="O006-PSU-008-M0106">\(p\)</span> parameter yang akan diduga, dan distribusi asimtotiknya adalah sebagai berikut. Saat <span class="math inline" data-o006-math-id="O006-PSU-008-M0107">\(n\rightarrow \infty\)</span>, <span class="math display" data-o006-math-id="O006-PSU-008-M0108">\[ \hat{\boldsymbol\theta}_{ML}\sim N\left(\boldsymbol\theta_{\text{true}},\mathbf{I}^{-1}(\hat{\boldsymbol\theta}_{ML})\right)\]</span> dengan <span class="math inline" data-o006-math-id="O006-PSU-008-M0109">\(\mathbf{I}(\boldsymbol\theta)\)</span> adalah “matriks informasi Fisher”, yang didefinisikan sebagai <span class="math display" data-o006-math-id="O006-PSU-008-M0110">\[\mathbf{I}(\boldsymbol\theta) = \left[\begin{array}{cccc}
+-E_x\left[\frac{\partial^2}{\partial \theta_1^2}\ell(\theta)\right] &amp; -E_x\left[\frac{\partial^2}{\partial \theta_1\partial\theta_2}\ell(\theta)\right] &amp; \cdots &amp; -E_x\left[\frac{\partial^2}{\partial \theta_1\partial\theta_p}\ell(\theta)\right]\\
+-E_x\left[\frac{\partial^2}{\partial \theta_2\partial\theta_1}\ell(\theta)\right] &amp; -E_x\left[\frac{\partial^2}{\partial\theta_2^2}\ell(\theta)\right] &amp; \cdots &amp; -E_x\left[\frac{\partial^2}{\partial \theta_2\partial\theta_p}\ell(\theta)\right] \\
+\vdots &amp; \vdots &amp;  &amp; \vdots \\
+-E_x\left[\frac{\partial^2}{\partial \theta_p\partial\theta_1}\ell(\theta)\right] &amp; -E_x\left[\frac{\partial^2}{\partial \theta_p\partial\theta_2}\ell(\theta)\right] &amp; \cdots &amp; -E_x\left[\frac{\partial^2}{\partial \theta_p^2}\ell(\theta)\right] \end{array}\right]
+\]</span> dengan ketentuan, seperti sebelumnya, bahwa <span class="math inline" data-o006-math-id="O006-PSU-008-M0111">\(\ell(\theta)=log(L(\theta))\)</span> dan nilai harapan dihitung terhadap semua <span class="math inline" data-o006-math-id="O006-PSU-008-M0112">\(x_1,x_2,\ldots,x_n\)</span>.</p>
+</section>
+<section class="level3" data-number="7.2.3" data-o006-id="O006-PSU-008-U0143" id="summary-the-asymptotic-95-confidence-interval">
+<h3 class="anchored" data-anchor-id="summary-the-asymptotic-95-confidence-interval" data-number="7.2.3" data-o006-id="O006-PSU-008-U0144"><span class="header-section-number">7.2.3</span> Ringkasan: Selang Kepercayaan Asimtotik 95%</h3>
+<p data-o006-id="O006-PSU-008-U0145">Untuk setiap MLE, hampiran distribusi Gaussian asimtotik dapat digunakan untuk membentuk selang kepercayaan. Misalkan <span class="math inline" data-o006-math-id="O006-PSU-008-M0113">\(x_i\sim f_X(x|\theta)\)</span>, <span class="math inline" data-o006-math-id="O006-PSU-008-M0114">\(i=1,2,\ldots,n\)</span> adalah <span class="math inline" data-o006-math-id="O006-PSU-008-M0115">\(n\)</span> peubah acak yang saling bebas dan berdistribusi identik, yang berasal dari suatu distribusi dengan hanya satu parameter <span class="math inline" data-o006-math-id="O006-PSU-008-M0116">\(\theta\)</span>, dan misalkan <span class="math inline" data-o006-math-id="O006-PSU-008-M0117">\(\hat{\theta}=\text{argmax}(L(\theta))\)</span> adalah MLE bagi parameter yang tidak diketahui <span class="math inline" data-o006-math-id="O006-PSU-008-M0118">\(\theta\)</span>. Selanjutnya, berdasarkan hampiran distribusi Gaussian asimtotik bagi setiap MLE, hampiran selang kepercayaan asimtotik 95% untuk <span class="math inline" data-o006-math-id="O006-PSU-008-M0119">\(\theta\)</span> adalah <span class="math display" data-o006-math-id="O006-PSU-008-M0120">\[\hat{\theta}\pm 1.96\sqrt{1/I(\hat{\theta}_{ML})}\]</span></p>
+<p data-o006-id="O006-PSU-008-U0146">Demikian pula, untuk model multiparameter, hampiran selang kepercayaan asimtotik 95% bagi parameter nomor <span class="math inline" data-o006-math-id="O006-PSU-008-M0121">\(k\)</span>, yaitu <span class="math inline" data-o006-math-id="O006-PSU-008-M0122">\(\theta_k\)</span> adalah <span class="math display" data-o006-math-id="O006-PSU-008-M0123">\[\hat{\theta_k}\pm 1.96\sqrt{\mathbf{I}^{-1}(\hat{\theta}_{ML})[k,k]}\]</span> dengan <span class="math inline" data-o006-math-id="O006-PSU-008-M0124">\(\sqrt{\mathbf{I}^{-1}(\hat{\theta}_{ML})[k,k]}\)</span> adalah akar kuadrat dari entri diagonal nomor <span class="math inline" data-o006-math-id="O006-PSU-008-M0125">\(k\)</span>; entri tersebut berasal dari <span class="math inline" data-o006-math-id="O006-PSU-008-M0126">\(\mathbf{I}^{-1}(\hat{\theta}_{ML})\)</span> sedangkan <span class="math inline" data-o006-math-id="O006-PSU-008-M0127">\(\mathbf{I}^{-1}\)</span> adalah matriks invers dari <span class="math inline" data-o006-math-id="O006-PSU-008-M0128">\(\mathbf{I}\)</span>.</p>
+</section>
+</section>
+<section class="level2" data-number="7.3" data-o006-id="O006-PSU-008-U0147" id="numerical-approximations-for-cis">
+<h2 class="anchored" data-anchor-id="numerical-approximations-for-cis" data-number="7.3" data-o006-id="O006-PSU-008-U0148"><span class="header-section-number">7.3</span> Hampiran Numerik untuk Selang Kepercayaan</h2>
+<p data-o006-id="O006-PSU-008-U0149">Dalam sejumlah kasus yang relatif sederhana, kita dapat membentuk selang kepercayaan 95% bagi parameter secara analitik dengan MLE sebagai pusatnya. Untuk itu, kita harus dapat mencari MLE secara analitik (dengan mengambil turunan pertama fungsi log-kemungkinan dan menyamakannya dengan nol), kemudian mencari informasi Fisher secara analitik pula (dengan mengambil turunan kedua fungsi log-kemungkinan, lalu menghitung nilai harapan terhadap <span class="math inline" data-o006-math-id="O006-PSU-008-M0129">\(x_1,x_2,\ldots,x_n\)</span>). Seperti telah kita lihat, bahkan untuk distribusi statistik sederhana terdapat banyak kasus ketika MLE tidak mungkin dicari secara analitik. Dalam kasus-kasus ini, kita menghampiri MLE tersebut secara numerik dengan menggunakan <code data-o006-id="O006-PSU-008-U0150">optim</code> dalam R. Sebagaimana kita dapat menghampiri MLE dengan menggunakan <code data-o006-id="O006-PSU-008-U0151">optim</code>, kita juga dapat menghampiri informasi teramati (observed information) <span class="math inline" data-o006-math-id="O006-PSU-008-M0130">\(I(\hat{\theta})\)</span> (untuk kasus berparameter tunggal) atau <span class="math inline" data-o006-math-id="O006-PSU-008-M0131">\(\mathbf{I}(\hat{\boldsymbol\theta})\)</span> (untuk kasus multiparameter) dengan menggunakan optim. Hal ini kita lakukan dalam <code data-o006-id="O006-PSU-008-U0152">optim</code> dengan menyertakan satu argumen tambahan ketika memanggil <code data-o006-id="O006-PSU-008-U0153">optim</code>.</p><p class="target-only-correction optimizer-domain-note" data-o006-correction-id="O006-PSU-ADV-0128" role="note">Catatan domain: kode demonstrasi di bawah dibekukan sesuai sumber, tetapi pemanggilan optim tidak memaksakan domain parameter. Model Geometrik mensyaratkan 0 &lt; p ≤ 1 dan model Normal mensyaratkan σ² &gt; 0; gunakan reparameterisasi yang sah, fungsi objektif berpelindung, atau optimisasi berbatas. Kode konvergensi 0 hanya menyatakan penghentian algoritme, bukan bukti optimum global atau keamanan domain.</p>
+<section class="level3" data-number="7.3.1" data-o006-id="O006-PSU-008-U0154" id="single-parameter-case">
+<h3 class="anchored" data-anchor-id="single-parameter-case" data-number="7.3.1" data-o006-id="O006-PSU-008-U0155"><span class="header-section-number">7.3.1</span> Kasus Berparameter Tunggal</h3>
+<p data-o006-id="O006-PSU-008-U0156">Kita akan menelusuri hampiran numerik melalui kasus ketika data berasal dari distribusi Geometrik berikut:</p>
+<div class="quarto-float quarto-figure quarto-figure-center anchored" data-o006-id="O006-PSU-008-U0157" id="fig-histoofx">
+<figure class="quarto-float quarto-float-fig figure" data-o006-id="O006-PSU-008-U0158">
+<div aria-describedby="fig-histoofx-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca" data-o006-id="O006-PSU-008-U0159">
+<div class="cell language-name-processed" data-lightbox="true" data-o006-id="O006-PSU-008-U0160">
+<div class="codeblock-with-label r" data-o006-id="O006-PSU-008-U0161">
+<style>.codeblock-with-label pre.lang-label-1::before { content: "R"; }</style>
+<div class="code-copy-outer-scaffold" data-o006-id="O006-PSU-008-U0162"><div class="sourceCode cell-code" data-language-name-skip="true" data-o006-id="O006-PSU-008-U0163" id="cb1"><pre class="sourceCode r lang-label-1 code-with-copy" data-o006-id="O006-PSU-008-U0164"><code class="sourceCode r" data-o006-id="O006-PSU-008-U0165"><span id="cb1-1"><a aria-hidden="true" data-o006-id="O006-PSU-008-U0166" href="#cb1-1" tabindex="-1"></a><span class="do">## assume that x~geom(p)</span></span>
+<span id="cb1-2"><a aria-hidden="true" data-o006-id="O006-PSU-008-U0167" href="#cb1-2" tabindex="-1"></a>x<span class="ot">=</span><span class="fu">c</span>(<span class="dv">4</span>,<span class="dv">11</span>,<span class="dv">2</span>,<span class="dv">5</span>,<span class="dv">1</span>,<span class="dv">0</span>,<span class="dv">11</span>,<span class="dv">9</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">17</span>,<span class="dv">9</span>,<span class="dv">6</span>,</span>
+<span id="cb1-3"><a aria-hidden="true" data-o006-id="O006-PSU-008-U0168" href="#cb1-3" tabindex="-1"></a>    <span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">12</span>,<span class="dv">3</span>,<span class="dv">1</span>,<span class="dv">3</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">1</span>,<span class="dv">27</span>,<span class="dv">0</span>,<span class="dv">2</span>,<span class="dv">0</span>,<span class="dv">24</span>,<span class="dv">9</span>,</span>
+<span id="cb1-4"><a aria-hidden="true" data-o006-id="O006-PSU-008-U0169" href="#cb1-4" tabindex="-1"></a>    <span class="dv">4</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">8</span>,<span class="dv">13</span>,<span class="dv">8</span>,<span class="dv">6</span>,<span class="dv">1</span>,<span class="dv">4</span>,<span class="dv">9</span>,<span class="dv">12</span>,<span class="dv">11</span>,<span class="dv">2</span>,<span class="dv">5</span>,<span class="dv">3</span>)</span>
+<span id="cb1-5"><a aria-hidden="true" data-o006-id="O006-PSU-008-U0170" href="#cb1-5" tabindex="-1"></a>x</span></code></pre></div><button class="code-copy-button" data-o006-id="O006-PSU-008-U0171" title="Copy to Clipboard"><i class="bi"></i></button></div>
+</div>
+<div class="cell-output cell-output-stdout" data-o006-id="O006-PSU-008-U0172">
+<pre data-o006-id="O006-PSU-008-U0173"><code data-o006-id="O006-PSU-008-U0174"> [1]  4 11  2  5  1  0 11  9  0  0  1  2 17  9  6  0  0 12  3  1  3  0  0  1 27
+[26]  0  2  0 24  9  4  0  0  8 13  8  6  1  4  9 12 11  2  5  3</code></pre>
+</div>
+<div class="codeblock-with-label r" data-o006-id="O006-PSU-008-U0175">
+<style>.codeblock-with-label pre.lang-label-13::before { content: "R"; }</style>
+<div class="code-copy-outer-scaffold" data-o006-id="O006-PSU-008-U0176"><div class="sourceCode cell-code" data-o006-id="O006-PSU-008-U0177" id="cb3"><pre class="sourceCode r lang-label-13 code-with-copy" data-o006-id="O006-PSU-008-U0178"><code class="sourceCode r" data-o006-id="O006-PSU-008-U0179"><span id="cb3-1"><a aria-hidden="true" data-o006-id="O006-PSU-008-U0180" href="#cb3-1" tabindex="-1"></a><span class="fu">hist</span>(x)</span></code></pre></div><button class="code-copy-button" data-o006-id="O006-PSU-008-U0181" title="Copy to Clipboard"><i class="bi"></i></button></div>
+</div>
+<div class="cell-output-display" data-o006-id="O006-PSU-008-U0182">
+<div data-o006-id="O006-PSU-008-U0183">
+<figure class="figure" data-o006-id="O006-PSU-008-U0184">
+<p data-o006-id="O006-PSU-008-U0185"><img alt="Histogram sampel Geometrik: frekuensi tertinggi berada dekat 0, kemudian cepat menurun dengan ekor panjang ke kanan; sumbu horizontal menunjukkan nilai pengamatan dan sumbu vertikal menunjukkan frekuensi." class="img-fluid figure-img" data-o006-asset-id="O006-PSU-008-A0001" data-o006-id="O006-PSU-008-U0186" src="assets/lesson07/Lesson07_files/figure-html/unnamed-chunk-1-1.png"/></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" data-o006-id="O006-PSU-008-U0187" id="fig-histoofx-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Gambar 7.1
+</figcaption>
+</figure>
+</div>
+<p data-o006-id="O006-PSU-008-U0188">Untuk mencari MLE secara numerik, pertama-tama kita menulis fungsi untuk mengevaluasi negatif fungsi log-kemungkinan, seperti yang telah dilakukan sebelumnya.</p>
+<div class="cell language-name-processed" data-o006-id="O006-PSU-008-U0189">
+<div class="codeblock-with-label r" data-o006-id="O006-PSU-008-U0190">
+<style>.codeblock-with-label pre.lang-label-2::before { content: "R"; }</style>
+<div class="code-copy-outer-scaffold" data-o006-id="O006-PSU-008-U0191"><div class="sourceCode cell-code" data-language-name-skip="true" data-o006-id="O006-PSU-008-U0192" id="cb4"><pre class="sourceCode r lang-label-2 code-with-copy" data-o006-id="O006-PSU-008-U0193"><code class="sourceCode r" data-o006-id="O006-PSU-008-U0194"><span id="cb4-1"><a aria-hidden="true" data-o006-id="O006-PSU-008-U0195" href="#cb4-1" tabindex="-1"></a>nll.geom<span class="ot">=</span><span class="cf">function</span>(p,x){</span>
+<span id="cb4-2"><a aria-hidden="true" data-o006-id="O006-PSU-008-U0196" href="#cb4-2" tabindex="-1"></a>  <span class="sc">-</span><span class="fu">sum</span>(<span class="fu">log</span>(<span class="fu">dgeom</span>(x,p)))</span>
+<span id="cb4-3"><a aria-hidden="true" data-o006-id="O006-PSU-008-U0197" href="#cb4-3" tabindex="-1"></a>}</span></code></pre></div><button class="code-copy-button" data-o006-id="O006-PSU-008-U0198" title="Copy to Clipboard"><i class="bi"></i></button></div>
+</div>
+</div>
+<p data-o006-id="O006-PSU-008-U0199">Kemudian, gunakan <code data-o006-id="O006-PSU-008-U0200">optim</code> untuk menghampiri MLE secara numerik:</p>
+<div class="cell language-name-processed" data-o006-id="O006-PSU-008-U0201">
+<div class="codeblock-with-label r" data-o006-id="O006-PSU-008-U0202">
+<style>.codeblock-with-label pre.lang-label-3::before { content: "R"; }</style>
+<div class="code-copy-outer-scaffold" data-o006-id="O006-PSU-008-U0203"><div class="sourceCode cell-code" data-language-name-skip="true" data-o006-id="O006-PSU-008-U0204" id="cb5"><pre class="sourceCode r lang-label-3 code-with-copy" data-o006-id="O006-PSU-008-U0205"><code class="sourceCode r" data-o006-id="O006-PSU-008-U0206"><span id="cb5-1"><a aria-hidden="true" data-o006-id="O006-PSU-008-U0207" href="#cb5-1" tabindex="-1"></a>out<span class="ot">=</span><span class="fu">optim</span>(<span class="fl">0.5</span>,nll.geom,<span class="at">x=</span>x)</span>
+<span id="cb5-2"><a aria-hidden="true" data-o006-id="O006-PSU-008-U0208" href="#cb5-2" tabindex="-1"></a>out</span></code></pre></div><button class="code-copy-button" data-o006-id="O006-PSU-008-U0209" title="Copy to Clipboard"><i class="bi"></i></button></div>
+</div>
+<div class="cell-output cell-output-stdout" data-o006-id="O006-PSU-008-U0210">
+<pre data-o006-id="O006-PSU-008-U0211"><code data-o006-id="O006-PSU-008-U0212">$par
+[1] 0.1546875
+
+$value
+[1] 125.3257
+
+$counts
+function gradient 
+      28       NA 
+
+$convergence
+[1] 0
+
+$message
+NULL</code></pre>
+</div>
+</div>
+<p data-o006-id="O006-PSU-008-U0213">Jika kita menjalankan <code data-o006-id="O006-PSU-008-U0214">optim</code> yang sama, tetapi menyertakan opsi <code data-o006-id="O006-PSU-008-U0215">hessian=TRUE</code>, maka <code data-o006-id="O006-PSU-008-U0216">optim</code> akan menghampiri informasi teramati dan mengembalikannya dalam objek <code data-o006-id="O006-PSU-008-U0217">optim</code> dengan nama <code data-o006-id="O006-PSU-008-U0218">hessian</code>.</p>
+<div class="cell language-name-processed" data-o006-id="O006-PSU-008-U0219">
+<div class="codeblock-with-label r" data-o006-id="O006-PSU-008-U0220">
+<style>.codeblock-with-label pre.lang-label-4::before { content: "R"; }</style>
+<div class="code-copy-outer-scaffold" data-o006-id="O006-PSU-008-U0221"><div class="sourceCode cell-code" data-language-name-skip="true" data-o006-id="O006-PSU-008-U0222" id="cb7"><pre class="sourceCode r lang-label-4 code-with-copy" data-o006-id="O006-PSU-008-U0223"><code class="sourceCode r" data-o006-id="O006-PSU-008-U0224"><span id="cb7-1"><a aria-hidden="true" data-o006-id="O006-PSU-008-U0225" href="#cb7-1" tabindex="-1"></a>out<span class="ot">=</span><span class="fu">optim</span>(<span class="fl">0.5</span>,nll.geom,<span class="at">x=</span>x,<span class="at">hessian=</span><span class="cn">TRUE</span>)</span>
+<span id="cb7-2"><a aria-hidden="true" data-o006-id="O006-PSU-008-U0226" href="#cb7-2" tabindex="-1"></a>out</span></code></pre></div><button class="code-copy-button" data-o006-id="O006-PSU-008-U0227" title="Copy to Clipboard"><i class="bi"></i></button></div>
+</div>
+<div class="cell-output cell-output-stdout" data-o006-id="O006-PSU-008-U0228">
+<pre data-o006-id="O006-PSU-008-U0229"><code data-o006-id="O006-PSU-008-U0230">$par
+[1] 0.1546875
+
+$value
+[1] 125.3257
+
+$counts
+function gradient 
+      28       NA 
+
+$convergence
+[1] 0
+
+$message
+NULL
+
+$hessian
+         [,1]
+[1,] 2225.054</code></pre>
+</div>
+</div>
+<p data-o006-id="O006-PSU-008-U0231">Objek <code data-o006-id="O006-PSU-008-U0232">hessian</code> adalah hampiran informasi teramati pada titik optimum; dengan syarat keteraturan, besaran ini dapat dipakai sebagai hampiran plug-in untuk membentuk selang kepercayaan asimtotik 95% bagi parameter <span class="math inline" data-o006-math-id="O006-PSU-008-M0132">\(p\)</span> dengan mengikuti rumus di atas:</p>
+<div class="cell language-name-processed" data-o006-id="O006-PSU-008-U0233">
+<div class="codeblock-with-label r" data-o006-id="O006-PSU-008-U0234">
+<style>.codeblock-with-label pre.lang-label-5::before { content: "R"; }</style>
+<div class="code-copy-outer-scaffold" data-o006-id="O006-PSU-008-U0235"><div class="sourceCode cell-code" data-language-name-skip="true" data-o006-id="O006-PSU-008-U0236" id="cb9"><pre class="sourceCode r lang-label-5 code-with-copy" data-o006-id="O006-PSU-008-U0237"><code class="sourceCode r" data-o006-id="O006-PSU-008-U0238"><span id="cb9-1"><a aria-hidden="true" data-o006-id="O006-PSU-008-U0239" href="#cb9-1" tabindex="-1"></a><span class="do">## get the MLE</span></span>
+<span id="cb9-2"><a aria-hidden="true" data-o006-id="O006-PSU-008-U0240" href="#cb9-2" tabindex="-1"></a>p.hat<span class="ot">=</span>out<span class="sc">$</span>par</span>
+<span id="cb9-3"><a aria-hidden="true" data-o006-id="O006-PSU-008-U0241" href="#cb9-3" tabindex="-1"></a>p.hat</span></code></pre></div><button class="code-copy-button" data-o006-id="O006-PSU-008-U0242" title="Copy to Clipboard"><i class="bi"></i></button></div>
+</div>
+<div class="cell-output cell-output-stdout" data-o006-id="O006-PSU-008-U0243">
+<pre data-o006-id="O006-PSU-008-U0244"><code data-o006-id="O006-PSU-008-U0245">[1] 0.1546875</code></pre>
+</div>
+<div class="codeblock-with-label r" data-o006-id="O006-PSU-008-U0246">
+<style>.codeblock-with-label pre.lang-label-14::before { content: "R"; }</style>
+<div class="code-copy-outer-scaffold" data-o006-id="O006-PSU-008-U0247"><div class="sourceCode cell-code" data-o006-id="O006-PSU-008-U0248" id="cb11"><pre class="sourceCode r lang-label-14 code-with-copy" data-o006-id="O006-PSU-008-U0249"><code class="sourceCode r" data-o006-id="O006-PSU-008-U0250"><span id="cb11-1"><a aria-hidden="true" data-o006-id="O006-PSU-008-U0251" href="#cb11-1" tabindex="-1"></a><span class="do">## get the Fisher Information</span></span>
+<span id="cb11-2"><a aria-hidden="true" data-o006-id="O006-PSU-008-U0252" href="#cb11-2" tabindex="-1"></a>I<span class="ot">=</span>out<span class="sc">$</span>hessian</span>
+<span id="cb11-3"><a aria-hidden="true" data-o006-id="O006-PSU-008-U0253" href="#cb11-3" tabindex="-1"></a><span class="do">## get the 95% CI</span></span>
+<span id="cb11-4"><a aria-hidden="true" data-o006-id="O006-PSU-008-U0254" href="#cb11-4" tabindex="-1"></a>p.hat<span class="fl">-1.96</span><span class="sc">*</span><span class="fu">sqrt</span>(<span class="dv">1</span><span class="sc">/</span>I)</span></code></pre></div><button class="code-copy-button" data-o006-id="O006-PSU-008-U0255" title="Copy to Clipboard"><i class="bi"></i></button></div>
+</div>
+<div class="cell-output cell-output-stdout" data-o006-id="O006-PSU-008-U0256">
+<pre data-o006-id="O006-PSU-008-U0257"><code data-o006-id="O006-PSU-008-U0258">          [,1]
+[1,] 0.1131361</code></pre>
+</div>
+<div class="codeblock-with-label r" data-o006-id="O006-PSU-008-U0259">
+<style>.codeblock-with-label pre.lang-label-15::before { content: "R"; }</style>
+<div class="code-copy-outer-scaffold" data-o006-id="O006-PSU-008-U0260"><div class="sourceCode cell-code" data-o006-id="O006-PSU-008-U0261" id="cb13"><pre class="sourceCode r lang-label-15 code-with-copy" data-o006-id="O006-PSU-008-U0262"><code class="sourceCode r" data-o006-id="O006-PSU-008-U0263"><span id="cb13-1"><a aria-hidden="true" data-o006-id="O006-PSU-008-U0264" href="#cb13-1" tabindex="-1"></a>p.hat<span class="fl">+1.96</span><span class="sc">*</span><span class="fu">sqrt</span>(<span class="dv">1</span><span class="sc">/</span>I)</span></code></pre></div><button class="code-copy-button" data-o006-id="O006-PSU-008-U0265" title="Copy to Clipboard"><i class="bi"></i></button></div>
+</div>
+<div class="cell-output cell-output-stdout" data-o006-id="O006-PSU-008-U0266">
+<pre data-o006-id="O006-PSU-008-U0267"><code data-o006-id="O006-PSU-008-U0268">          [,1]
+[1,] 0.1962389</code></pre>
+</div>
+</div>
+<p data-o006-id="O006-PSU-008-U0269">Jadi, selang kepercayaan 95% berdasarkan MLE bagi parameter <span class="math inline" data-o006-math-id="O006-PSU-008-M0133">\(p\)</span> adalah (0.113,0.196).</p>
+</section>
+<section class="level3" data-number="7.3.2" data-o006-id="O006-PSU-008-U0270" id="multiple-parameter-case">
+<h3 class="anchored" data-anchor-id="multiple-parameter-case" data-number="7.3.2" data-o006-id="O006-PSU-008-U0271"><span class="header-section-number">7.3.2</span> Kasus Multiparameter</h3>
+<p data-o006-id="O006-PSU-008-U0272">Jika terdapat dua parameter atau lebih, optimisasi numerik dalam R serta hampiran numerik matriks informasi teramati <span class="math inline" data-o006-math-id="O006-PSU-008-M0134">\(\mathbf{I}(\hat{\boldsymbol\theta})\)</span> juga dapat dilakukan dengan menggunakan <code data-o006-id="O006-PSU-008-U0273">optim</code>. Untuk mengilustrasikannya, kita akan meninjau data yang dibangkitkan dari distribusi Normal. Kode berikut menyimulasikan data berdistribusi Normal dari suatu distribusi dengan rataan -7 dan varians 16:</p>
+<div class="quarto-float quarto-figure quarto-figure-center anchored" data-o006-id="O006-PSU-008-U0274" id="fig-histoofnormaldistr">
+<figure class="quarto-float quarto-float-fig figure" data-o006-id="O006-PSU-008-U0275">
+<div aria-describedby="fig-histoofnormaldistr-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca" data-o006-id="O006-PSU-008-U0276">
+<div class="cell language-name-processed" data-lightbox="true" data-o006-id="O006-PSU-008-U0277">
+<div class="codeblock-with-label r" data-o006-id="O006-PSU-008-U0278">
+<style>.codeblock-with-label pre.lang-label-6::before { content: "R"; }</style>
+<div class="code-copy-outer-scaffold" data-o006-id="O006-PSU-008-U0279"><div class="sourceCode cell-code" data-language-name-skip="true" data-o006-id="O006-PSU-008-U0280" id="cb15"><pre class="sourceCode r lang-label-6 code-with-copy" data-o006-id="O006-PSU-008-U0281"><code class="sourceCode r" data-o006-id="O006-PSU-008-U0282"><span id="cb15-1"><a aria-hidden="true" data-o006-id="O006-PSU-008-U0283" href="#cb15-1" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1</span>)</span>
+<span id="cb15-2"><a aria-hidden="true" data-o006-id="O006-PSU-008-U0284" href="#cb15-2" tabindex="-1"></a>x<span class="ot">=</span><span class="fu">rnorm</span>(<span class="dv">100</span>,<span class="at">mean=</span><span class="sc">-</span><span class="dv">7</span>,<span class="at">sd=</span><span class="fu">sqrt</span>(<span class="dv">16</span>))</span>
+<span id="cb15-3"><a aria-hidden="true" data-o006-id="O006-PSU-008-U0285" href="#cb15-3" tabindex="-1"></a>x</span></code></pre></div><button class="code-copy-button" data-o006-id="O006-PSU-008-U0286" title="Copy to Clipboard"><i class="bi"></i></button></div>
+</div>
+<div class="cell-output cell-output-stdout" data-o006-id="O006-PSU-008-U0287">
+<pre data-o006-id="O006-PSU-008-U0288"><code data-o006-id="O006-PSU-008-U0289">  [1]  -9.5058152  -6.2654267 -10.3425144  -0.6188768  -5.6819689 -10.2818735
+  [7]  -5.0502838  -4.0467012  -4.6968746  -8.2215535  -0.9528753  -5.4406271
+ [13]  -9.4849623 -15.8587995  -2.5002763  -7.1797344  -7.0647611  -3.2246552
+ [19]  -3.7151152  -4.6243947  -3.3240905  -3.8714548  -6.7017401 -14.9574068
+ [25]  -4.5206970  -7.2245150  -7.6231820 -12.8830095  -8.9126002  -5.3282338
+ [31]  -1.5652818  -7.4111509  -5.4493136  -7.2152202 -12.5082382  -8.6599783
+ [37]  -8.5771598  -7.2372536  -2.5998985  -3.9472970  -7.6580944  -8.0134467
+ [43]  -4.2121465  -4.7733472  -9.7550228  -9.8299806  -5.5416722  -3.9258683
+ [49]  -7.4493848  -3.4755691  -5.4075765  -9.4481056  -5.6355212 -11.5174524
+ [55]  -1.2679052   0.9215996  -8.4688859 -11.1765385  -4.7211215  -7.5402184
+ [61]   2.6064710  -7.1569600  -4.2410426  -6.8879914  -9.9730928  -6.2448308
+ [67] -14.2198345  -1.1377806  -6.3869866   1.6904467  -5.0979619  -9.8397857
+ [73]  -4.5570946 -10.7363905 -12.0145336  -5.8342151  -8.7731675  -6.9955786
+ [79]  -6.7026347  -9.3580838  -9.2746749  -7.5407145  -2.2876520 -13.0942672
+ [85]  -4.6242152  -5.6681985  -2.7476007  -8.2167357  -5.5199248  -5.9316048
+ [91]  -9.1700801  -2.1685288  -2.3583895  -4.1991454  -0.6526662  -4.7660543
+ [97] -12.1063688  -9.2930617 -11.8984505  -8.8936025</code></pre>
+</div>
+<div class="codeblock-with-label r" data-o006-id="O006-PSU-008-U0290">
+<style>.codeblock-with-label pre.lang-label-16::before { content: "R"; }</style>
+<div class="code-copy-outer-scaffold" data-o006-id="O006-PSU-008-U0291"><div class="sourceCode cell-code" data-o006-id="O006-PSU-008-U0292" id="cb17"><pre class="sourceCode r lang-label-16 code-with-copy" data-o006-id="O006-PSU-008-U0293"><code class="sourceCode r" data-o006-id="O006-PSU-008-U0294"><span id="cb17-1"><a aria-hidden="true" data-o006-id="O006-PSU-008-U0295" href="#cb17-1" tabindex="-1"></a><span class="fu">hist</span>(x)</span></code></pre></div><button class="code-copy-button" data-o006-id="O006-PSU-008-U0296" title="Copy to Clipboard"><i class="bi"></i></button></div>
+</div>
+<div class="cell-output-display" data-o006-id="O006-PSU-008-U0297">
+<div data-o006-id="O006-PSU-008-U0298">
+<figure class="figure" data-o006-id="O006-PSU-008-U0299">
+<p data-o006-id="O006-PSU-008-U0300"><img alt="Histogram sampel Normal berbenih tetap: bentuknya kira-kira lonceng dan berpusat dekat −7; sumbu horizontal menunjukkan nilai pengamatan dan sumbu vertikal menunjukkan frekuensi." class="img-fluid figure-img" data-o006-asset-id="O006-PSU-008-A0002" data-o006-id="O006-PSU-008-U0301" src="assets/lesson07/Lesson07_files/figure-html/unnamed-chunk-6-1.png"/></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" data-o006-id="O006-PSU-008-U0302" id="fig-histoofnormaldistr-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Gambar 7.2
+</figcaption>
+</figure>
+</div>
+<p data-o006-id="O006-PSU-008-U0303">Untuk mencari MLE, pertama-tama kita menulis fungsi untuk mengevaluasi negatif fungsi log-kemungkinan:</p>
+<div class="cell language-name-processed" data-o006-id="O006-PSU-008-U0304">
+<div class="codeblock-with-label r" data-o006-id="O006-PSU-008-U0305">
+<style>.codeblock-with-label pre.lang-label-7::before { content: "R"; }</style>
+<div class="code-copy-outer-scaffold" data-o006-id="O006-PSU-008-U0306"><div class="sourceCode cell-code" data-language-name-skip="true" data-o006-id="O006-PSU-008-U0307" id="cb18"><pre class="sourceCode r lang-label-7 code-with-copy" data-o006-id="O006-PSU-008-U0308"><code class="sourceCode r" data-o006-id="O006-PSU-008-U0309"><span id="cb18-1"><a aria-hidden="true" data-o006-id="O006-PSU-008-U0310" href="#cb18-1" tabindex="-1"></a>nll.norm<span class="ot">=</span><span class="cf">function</span>(theta,x){</span>
+<span id="cb18-2"><a aria-hidden="true" data-o006-id="O006-PSU-008-U0311" href="#cb18-2" tabindex="-1"></a>  mn<span class="ot">=</span>theta[<span class="dv">1</span>]</span>
+<span id="cb18-3"><a aria-hidden="true" data-o006-id="O006-PSU-008-U0312" href="#cb18-3" tabindex="-1"></a>  vr<span class="ot">=</span>theta[<span class="dv">2</span>]</span>
+<span id="cb18-4"><a aria-hidden="true" data-o006-id="O006-PSU-008-U0313" href="#cb18-4" tabindex="-1"></a>  <span class="sc">-</span><span class="fu">sum</span>(<span class="fu">log</span>(<span class="fu">dnorm</span>(x,<span class="at">mean=</span>mn,<span class="at">sd=</span><span class="fu">sqrt</span>(vr))))</span>
+<span id="cb18-5"><a aria-hidden="true" data-o006-id="O006-PSU-008-U0314" href="#cb18-5" tabindex="-1"></a>}</span></code></pre></div><button class="code-copy-button" data-o006-id="O006-PSU-008-U0315" title="Copy to Clipboard"><i class="bi"></i></button></div>
+</div>
+</div>
+<p data-o006-id="O006-PSU-008-U0316">Kemudian, jalankan <code data-o006-id="O006-PSU-008-U0317">optim</code> untuk mencari MLE. Kita menyertakan opsi <code data-o006-id="O006-PSU-008-U0318">hessian=TRUE</code> untuk meminta <code data-o006-id="O006-PSU-008-U0319">optim</code> menghampiri matriks informasi teramati pada titik optimum.</p>
+<div class="cell language-name-processed" data-o006-id="O006-PSU-008-U0320">
+<div class="codeblock-with-label r" data-o006-id="O006-PSU-008-U0321">
+<style>.codeblock-with-label pre.lang-label-8::before { content: "R"; }</style>
+<div class="code-copy-outer-scaffold" data-o006-id="O006-PSU-008-U0322"><div class="sourceCode cell-code" data-language-name-skip="true" data-o006-id="O006-PSU-008-U0323" id="cb19"><pre class="sourceCode r lang-label-8 code-with-copy" data-o006-id="O006-PSU-008-U0324"><code class="sourceCode r" data-o006-id="O006-PSU-008-U0325"><span id="cb19-1"><a aria-hidden="true" data-o006-id="O006-PSU-008-U0326" href="#cb19-1" tabindex="-1"></a>out<span class="ot">=</span><span class="fu">optim</span>(<span class="fu">c</span>(<span class="sc">-</span><span class="dv">11</span>,<span class="dv">1</span>),nll.norm,<span class="at">x=</span>x,<span class="at">hessian=</span><span class="cn">TRUE</span>)</span>
+<span id="cb19-2"><a aria-hidden="true" data-o006-id="O006-PSU-008-U0327" href="#cb19-2" tabindex="-1"></a>out</span></code></pre></div><button class="code-copy-button" data-o006-id="O006-PSU-008-U0328" title="Copy to Clipboard"><i class="bi"></i></button></div>
+</div>
+<div class="cell-output cell-output-stdout" data-o006-id="O006-PSU-008-U0329">
+<pre data-o006-id="O006-PSU-008-U0330"><code data-o006-id="O006-PSU-008-U0331">$par
+[1] -6.564774 12.773473
+
+$value
+[1] 269.2845
+
+$counts
+function gradient 
+      61       NA 
+
+$convergence
+[1] 0
+
+$message
+NULL
+
+$hessian
+             [,1]         [,2]
+[1,] 7.8287246339 0.0001983622
+[2,] 0.0001983622 0.3067152221</code></pre>
+</div>
+</div>
+<p data-o006-id="O006-PSU-008-U0332">Nilai-nilai dugaan MLE bagi <span class="math inline" data-o006-math-id="O006-PSU-008-M0135">\(\boldsymbol\theta=(\mu,\sigma^2)\)</span> adalah:</p>
+<div class="cell language-name-processed" data-o006-id="O006-PSU-008-U0333">
+<div class="codeblock-with-label r" data-o006-id="O006-PSU-008-U0334">
+<style>.codeblock-with-label pre.lang-label-9::before { content: "R"; }</style>
+<div class="code-copy-outer-scaffold" data-o006-id="O006-PSU-008-U0335"><div class="sourceCode cell-code" data-language-name-skip="true" data-o006-id="O006-PSU-008-U0336" id="cb21"><pre class="sourceCode r lang-label-9 code-with-copy" data-o006-id="O006-PSU-008-U0337"><code class="sourceCode r" data-o006-id="O006-PSU-008-U0338"><span id="cb21-1"><a aria-hidden="true" data-o006-id="O006-PSU-008-U0339" href="#cb21-1" tabindex="-1"></a>theta.hat<span class="ot">=</span>out<span class="sc">$</span>par</span>
+<span id="cb21-2"><a aria-hidden="true" data-o006-id="O006-PSU-008-U0340" href="#cb21-2" tabindex="-1"></a>theta.hat</span></code></pre></div><button class="code-copy-button" data-o006-id="O006-PSU-008-U0341" title="Copy to Clipboard"><i class="bi"></i></button></div>
+</div>
+<div class="cell-output cell-output-stdout" data-o006-id="O006-PSU-008-U0342">
+<pre data-o006-id="O006-PSU-008-U0343"><code data-o006-id="O006-PSU-008-U0344">[1] -6.564774 12.773473</code></pre>
+</div>
+</div>
+<p data-o006-id="O006-PSU-008-U0345">jadi, nilai dugaan MLE bagi <span class="math inline" data-o006-math-id="O006-PSU-008-M0136">\(\mu\)</span> adalah -6.564774 dan nilai dugaan MLE bagi <span class="math inline" data-o006-math-id="O006-PSU-008-M0137">\(\sigma^2\)</span> adalah 12.773473.</p>
+<p data-o006-id="O006-PSU-008-U0346">Untuk mencari selang kepercayaan bagi setiap parameter tersebut, kita menggunakan invers matriks informasi teramati <span class="math inline" data-o006-math-id="O006-PSU-008-M0138">\(\mathbf{I}\)</span>, lalu mengambil akar kuadrat elemen-elemen diagonalnya. Karena nilai-nilai ini sering disebut “galat baku”, kita akan menuliskannya sebagai <code data-o006-id="O006-PSU-008-U0347">se</code> dalam kode R:</p>
+<div class="cell language-name-processed" data-o006-id="O006-PSU-008-U0348">
+<div class="codeblock-with-label r" data-o006-id="O006-PSU-008-U0349">
+<style>.codeblock-with-label pre.lang-label-10::before { content: "R"; }</style>
+<div class="code-copy-outer-scaffold" data-o006-id="O006-PSU-008-U0350"><div class="sourceCode cell-code" data-language-name-skip="true" data-o006-id="O006-PSU-008-U0351" id="cb23"><pre class="sourceCode r lang-label-10 code-with-copy" data-o006-id="O006-PSU-008-U0352"><code class="sourceCode r" data-o006-id="O006-PSU-008-U0353"><span id="cb23-1"><a aria-hidden="true" data-o006-id="O006-PSU-008-U0354" href="#cb23-1" tabindex="-1"></a><span class="do">## standard errors = sqrt(I.inv[p,p])</span></span>
+<span id="cb23-2"><a aria-hidden="true" data-o006-id="O006-PSU-008-U0355" href="#cb23-2" tabindex="-1"></a>I<span class="ot">=</span>out<span class="sc">$</span>hessian</span>
+<span id="cb23-3"><a aria-hidden="true" data-o006-id="O006-PSU-008-U0356" href="#cb23-3" tabindex="-1"></a>se<span class="ot">=</span><span class="fu">sqrt</span>(<span class="fu">diag</span>(<span class="fu">solve</span>(I)))</span>
+<span id="cb23-4"><a aria-hidden="true" data-o006-id="O006-PSU-008-U0357" href="#cb23-4" tabindex="-1"></a>se</span></code></pre></div><button class="code-copy-button" data-o006-id="O006-PSU-008-U0358" title="Copy to Clipboard"><i class="bi"></i></button></div>
+</div>
+<div class="cell-output cell-output-stdout" data-o006-id="O006-PSU-008-U0359">
+<pre data-o006-id="O006-PSU-008-U0360"><code data-o006-id="O006-PSU-008-U0361">[1] 0.357400 1.805645</code></pre>
+</div>
+</div>
+<p data-o006-id="O006-PSU-008-U0362">Hasilnya adalah sebuah vektor. Untuk entri bernomor <span class="math inline" data-o006-math-id="O006-PSU-008-M0139">\(k\)</span>, nilainya adalah <span class="math inline" data-o006-math-id="O006-PSU-008-M0140">\(\sqrt{\mathbf{I}^{-1}(\hat{\theta}_{ML})[k,k]}\)</span>. Galat baku yang berkaitan dengan <span class="math inline" data-o006-math-id="O006-PSU-008-M0141">\(\mu\)</span> adalah nilai pertama dalam vektor tersebut (<span class="math inline" data-o006-math-id="O006-PSU-008-M0142">\(se[1]\)</span>) dan galat baku yang berkaitan dengan <span class="math inline" data-o006-math-id="O006-PSU-008-M0143">\(\sigma^2\)</span> adalah nilai kedua. Urutannya sama dengan urutan nilai dugaan parameter dalam <code data-o006-id="O006-PSU-008-U0363">out\$par</code>. Dengan demikian, kita dapat membentuk selang kepercayaan 95% bagi <span class="math inline" data-o006-math-id="O006-PSU-008-M0144">\(\mu\)</span></p>
+<div class="cell language-name-processed" data-o006-id="O006-PSU-008-U0364">
+<div class="codeblock-with-label r" data-o006-id="O006-PSU-008-U0365">
+<style>.codeblock-with-label pre.lang-label-11::before { content: "R"; }</style>
+<div class="code-copy-outer-scaffold" data-o006-id="O006-PSU-008-U0366"><div class="sourceCode cell-code" data-language-name-skip="true" data-o006-id="O006-PSU-008-U0367" id="cb25"><pre class="sourceCode r lang-label-11 code-with-copy" data-o006-id="O006-PSU-008-U0368"><code class="sourceCode r" data-o006-id="O006-PSU-008-U0369"><span id="cb25-1"><a aria-hidden="true" data-o006-id="O006-PSU-008-U0370" href="#cb25-1" tabindex="-1"></a><span class="do">## CI for mu</span></span>
+<span id="cb25-2"><a aria-hidden="true" data-o006-id="O006-PSU-008-U0371" href="#cb25-2" tabindex="-1"></a><span class="fu">c</span>(theta.hat[<span class="dv">1</span>]<span class="sc">-</span><span class="fl">1.96</span><span class="sc">*</span>se[<span class="dv">1</span>] , theta.hat[<span class="dv">1</span>]<span class="sc">+</span><span class="fl">1.96</span><span class="sc">*</span>se[<span class="dv">1</span>])</span></code></pre></div><button class="code-copy-button" data-o006-id="O006-PSU-008-U0372" title="Copy to Clipboard"><i class="bi"></i></button></div>
+</div>
+<div class="cell-output cell-output-stdout" data-o006-id="O006-PSU-008-U0373">
+<pre data-o006-id="O006-PSU-008-U0374"><code data-o006-id="O006-PSU-008-U0375">[1] -7.265278 -5.864270</code></pre>
+</div>
+</div>
+<p data-o006-id="O006-PSU-008-U0376">dan bagi <span class="math inline" data-o006-math-id="O006-PSU-008-M0145">\(\sigma^2\)</span>:</p>
+<div class="cell language-name-processed" data-o006-id="O006-PSU-008-U0377">
+<div class="codeblock-with-label r" data-o006-id="O006-PSU-008-U0378">
+<style>.codeblock-with-label pre.lang-label-12::before { content: "R"; }</style>
+<div class="code-copy-outer-scaffold" data-o006-id="O006-PSU-008-U0379"><div class="sourceCode cell-code" data-language-name-skip="true" data-o006-id="O006-PSU-008-U0380" id="cb27"><pre class="sourceCode r lang-label-12 code-with-copy" data-o006-id="O006-PSU-008-U0381"><code class="sourceCode r" data-o006-id="O006-PSU-008-U0382"><span id="cb27-1"><a aria-hidden="true" data-o006-id="O006-PSU-008-U0383" href="#cb27-1" tabindex="-1"></a><span class="do">## CI for sigma^2</span></span>
+<span id="cb27-2"><a aria-hidden="true" data-o006-id="O006-PSU-008-U0384" href="#cb27-2" tabindex="-1"></a><span class="fu">c</span>(theta.hat[<span class="dv">2</span>]<span class="sc">-</span><span class="fl">1.96</span><span class="sc">*</span>se[<span class="dv">2</span>] , theta.hat[<span class="dv">2</span>]<span class="sc">+</span><span class="fl">1.96</span><span class="sc">*</span>se[<span class="dv">2</span>])</span></code></pre></div><button class="code-copy-button" data-o006-id="O006-PSU-008-U0385" title="Copy to Clipboard"><i class="bi"></i></button></div>
+</div>
+<div class="cell-output cell-output-stdout" data-o006-id="O006-PSU-008-U0386">
+<pre data-o006-id="O006-PSU-008-U0387"><code data-o006-id="O006-PSU-008-U0388">[1]  9.234409 16.312537</code></pre>
+</div>
+</div>
+<p data-o006-id="O006-PSU-008-U0389">dan juga <strong>secara asimtotik berdistribusi Normal</strong>:</p>
+<p data-o006-id="O006-PSU-008-U0390"><span class="math display" data-o006-math-id="O006-PSU-008-M0146">\[
+\sqrt{n}(\hat{\theta}_{\text{MLE}} - \theta) \xrightarrow{d} \mathcal{N}\left(0, \frac{1}{I(\theta)}\right)
+\]</span></p>
+<p data-o006-id="O006-PSU-008-U0391">Di sini, <span class="math inline" data-o006-math-id="O006-PSU-008-M0147">\(I(\theta)\)</span> adalah <strong>informasi Fisher per pengamatan</strong>, yang mengukur banyaknya informasi yang diberikan data tentang parameter. Informasi tersebut didefinisikan sebagai:</p>
+<p data-o006-id="O006-PSU-008-U0392"><span class="math display" data-o006-math-id="O006-PSU-008-M0148">\[
+I(\theta) = \mathbb{E} \left[ \left( \frac{\partial}{\partial \theta} \log f(X \mid \theta) \right)^2 \right]
+\]</span></p>
+<p data-o006-id="O006-PSU-008-U0393">Hasil ini penting karena memungkinkan kita menggunakan metode berbasis distribusi Normal, seperti selang kepercayaan dan pengujian hipotesis, bahkan dalam model yang kompleks. Intinya: MLE bukan hanya berguna, tetapi juga memiliki jaminan teoretis yang kuat seiring bertambahnya ukuran sampel.</p>
+</section>
+</section>
+<section class="level2" data-number="7.4" data-o006-id="O006-PSU-008-U0394" id="summary">
+<h2 class="anchored" data-anchor-id="summary" data-number="7.4" data-o006-id="O006-PSU-008-U0395"><span class="header-section-number">7.4</span> Ringkasan</h2>
+<p data-o006-id="O006-PSU-008-U0396">Dalam pelajaran ini, kita memperoleh keterampilan praktis untuk menganalisis data menggunakan pendugaan kemungkinan maksimum (MLE) dan membentuk selang kepercayaan yang andal. Kini kita dapat menghitung MLE bagi parameter pada distribusi seperti Bernoulli, Eksponensial, dan Normal, serta menggunakan informasi Fisher untuk mengukur ketidakpastian dan membentuk selang kepercayaan asimtotik. Dengan menggunakan <code data-o006-id="O006-PSU-008-U0397">optim</code> dalam R, kita dapat memperoleh nilai dugaan MLE dan selang secara numerik untuk model yang kompleks, seperti distribusi Geometrik atau Normal, bahkan ketika penyelesaian analitik sulit diperoleh.</p>
+<p data-o006-id="O006-PSU-008-U0398">Ringkasan sumber menyatakan bahwa bootstrap parametrik dan nonparametrik telah dipelajari melalui data t dan Pareto, tetapi materi tersebut tidak terdapat dalam isi Pelajaran 07 yang tersedia.</p>
+<p data-o006-id="O006-PSU-008-U0399">Topik bootstrap, metode Delta, serta contoh t dan Pareto merupakan materi lanjutan, bukan keterampilan yang telah diajarkan dalam pelajaran ini.</p>
+</section>
+</main></div>
+<footer class="site-footer"><div class="site-footer__inner">Konten sumber: Departemen Statistika Penn State, CC BY-NC 4.0 kecuali dinyatakan lain. Terjemahan dan rekonstruksi: OpenAI Codex gpt-5.6-sol, Ultra. Tidak ada dukungan atau pengesahan yang tersirat.</div></footer>
+</body>
+</html>

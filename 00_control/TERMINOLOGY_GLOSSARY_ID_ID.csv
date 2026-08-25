@@ -93,3 +93,51 @@ O006-TERM-0091,critical value,nilai kritis,fixed distribution quantile and not t
 O006-TERM-0092,confidence bounds,batas selang kepercayaan,use lower or upper qualifiers when the direction matters
 O006-TERM-0093,moment-generating function,fungsi pembangkit momen (MGF),retain the standard abbreviation MGF
 O006-TERM-0094,Z-interval,selang-Z,retain capital Z in the conventional procedure label
+O006-TERM-0095,asymptotic distribution,distribusi asimtotik,general limiting distribution; do not imply normality unless stated
+O006-TERM-0096,asymptotic normality,normalitas asimtotik,use secara asimtotik berdistribusi Normal when clearer in prose
+O006-TERM-0097,consistent estimator,penduga konsisten,consistency is convergence in probability here and does not alone imply expectation convergence
+O006-TERM-0098,equivariance / equivariant,sifat ekuivarian / ekuivarian,estimator transformation property under its stated conditions
+O006-TERM-0099,regularity conditions,syarat keteraturan,preserve the source disclaimer when the condition list and proofs are incomplete
+O006-TERM-0100,Fisher information,informasi Fisher,specify per-observation or full-sample scaling and distinguish observed information
+O006-TERM-0101,Fisher information matrix,matriks informasi Fisher,multiparameter form with Fisher capitalized
+O006-TERM-0102,Hessian matrix,matriks Hessian,preserve executable identifiers such as hessian and out$hessian
+O006-TERM-0103,observed information,informasi teramati (observed information),negative observed Hessian; use the English parenthetical on first occurrence
+O006-TERM-0104,asymptotic confidence interval,selang kepercayaan asimtotik,parameter-targeted Wald interval under stated regularity conditions
+O006-TERM-0105,convergence in probability,konvergensi dalam peluang,write konvergen dalam peluang menuju theta in explanatory prose
+O006-TERM-0106,uniform integrability,integrabilitas seragam (uniform integrability),bilingual first use; sufficient with convergence in probability for the required L1 conclusion
+O006-TERM-0107,asymptotic standard error,galat baku asimtotik,distinguish theoretical and estimated forms
+O006-TERM-0108,odds ratio,rasio odds (OR),retain OR because formulas and estimator notation use it
+O006-TERM-0109,L1 convergence,konvergensi dalam L1,explain once as E absolute estimator error tending to zero
+O006-TERM-0110,bootstrap,bootstrap,retain the established method name unchanged
+O006-TERM-0111,parametric bootstrap,bootstrap parametrik,resample from the fitted parametric family
+O006-TERM-0112,nonparametric bootstrap,bootstrap nonparametrik,resample from the empirical distribution
+O006-TERM-0113,bootstrap sample,sampel bootstrap,a resampled or simulated dataset rather than the resulting estimate
+O006-TERM-0114,bootstrap replicate,replikasi bootstrap,one repeated statistic or estimate computation
+O006-TERM-0115,percentile bootstrap confidence interval,selang kepercayaan bootstrap persentil,use empirical endpoint quantiles and qualify parametric or nonparametric where needed
+O006-TERM-0116,resampling,pengambilan sampel ulang (resampling),introduce the English alias on first occurrence
+O006-TERM-0117,sampling with replacement,pengambilan sampel dengan pengembalian,retain duplicate multiplicities in the empirical distribution
+O006-TERM-0118,delta method,metode delta,first-order transformation limit theorem requiring differentiability at the target
+O006-TERM-0119,shape parameter,parameter bentuk,Pareto parameter a
+O006-TERM-0120,location parameter,parameter lokasi,Pareto lower endpoint L with support beginning at L
+O006-TERM-0121,convergence in distribution,konvergensi dalam distribusi,do not state an asymptotic limit as finite-sample equality
+O006-TERM-0122,expected Fisher information,informasi Fisher harapan,distinguish from the observed negative log-likelihood Hessian
+O006-TERM-0123,hypothesis test,uji hipotesis,procedure; reserve pengujian hipotesis for the framework or process
+O006-TERM-0124,null hypothesis,hipotesis nol,preserve H_0 and do not translate failure to reject as acceptance
+O006-TERM-0125,alternative hypothesis,hipotesis alternatif,preserve H_a or H_1
+O006-TERM-0126,significance level,tingkat signifikansi,keep distinct from tingkat kepercayaan
+O006-TERM-0127,test statistic,statistik uji,distinguish the random statistic from its observed value
+O006-TERM-0128,rejection region,daerah penolakan (daerah kritis),introduce the parenthetical alias once
+O006-TERM-0129,reject the null hypothesis,menolak hipotesis nol,decision language does not prove the alternative true
+O006-TERM-0130,fail to reject the null hypothesis,gagal menolak hipotesis nol,never render as accepting the null
+O006-TERM-0131,Type I error,galat tipe I,rejecting the null when it is true
+O006-TERM-0132,Type II error,galat tipe II,failing to reject at a specified true alternative
+O006-TERM-0133,p-value,nilai-p,lowercase p with a hyphen in prose
+O006-TERM-0134,power of a test,kuasa uji,retain dependence on the specified alternative parameter value
+O006-TERM-0135,one-tailed test,uji satu sisi,qualify the distribution tail as right or left
+O006-TERM-0136,two-tailed test,uji dua sisi,allocate the significance level across both tails
+O006-TERM-0137,right-tailed test,uji sisi kanan,use ekor kanan for the shaded distribution tail
+O006-TERM-0138,left-tailed test,uji sisi kiri,use ekor kiri for the shaded distribution tail
+O006-TERM-0139,at least as extreme,sekurang-kurangnya sama ekstrem,mandatory equality boundary in the p-value event
+O006-TERM-0140,size of a test,ukuran uji,null rejection probability rather than sample size
+O006-TERM-0141,randomized test,uji teracak,specify the rejection probability on the equality set
+O006-TERM-0142,equality set,himpunan kesamaan,outcomes exactly on the critical boundary

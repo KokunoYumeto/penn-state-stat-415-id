@@ -1,0 +1,598 @@
+<!doctype html>
+<html lang="en-US">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>9  Hypothesis Tests (Part I) – STAT 415 | Introduction to Mathematical Statistics</title>
+<meta name="source-url" content="https://online.stat.psu.edu/stat415/Lesson09">
+<meta name="translation-provenance" content="OpenAI Codex gpt-5.6-sol, Ultra">
+</head>
+<body>
+<main class="content page-columns page-full" data-component-id="Lesson09" data-document-id="O006-PSU-010" data-source-url="https://online.stat.psu.edu/stat415/Lesson09" id="quarto-document-content">
+<header class="quarto-title-block default" data-o006-id="O006-PSU-010-U0001" id="title-block-header"><nav aria-label="breadcrumb" class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" data-o006-id="O006-PSU-010-U0002"><ol class="breadcrumb" data-o006-id="O006-PSU-010-U0003"><li class="breadcrumb-item" data-o006-id="O006-PSU-010-U0004"><a data-o006-id="O006-PSU-010-U0005" href="./Lesson00.html">Lessons</a></li><li class="breadcrumb-item" data-o006-id="O006-PSU-010-U0006"><a data-o006-id="O006-PSU-010-U0007" href="./Lesson09.html"><span class="chapter-number">9</span>  <span class="chapter-title">Hypothesis Tests (Part I)</span></a></li></ol></nav>
+<div class="quarto-title" data-o006-id="O006-PSU-010-U0008">
+<h1 class="title" data-o006-id="O006-PSU-010-U0009"><span class="chapter-number">9</span>  <span class="chapter-title">Hypothesis Tests (Part I)</span></h1>
+<div class="quarto-categories" data-o006-id="O006-PSU-010-U0010">
+<div class="quarto-category" data-o006-id="O006-PSU-010-U0011">Hypothesis Tests</div>
+<div class="quarto-category" data-o006-id="O006-PSU-010-U0012">Tests about Proportions</div>
+<div class="quarto-category" data-o006-id="O006-PSU-010-U0013">Tests about one Mean</div>
+<div class="quarto-category" data-o006-id="O006-PSU-010-U0014">P-Value</div>
+</div>
+</div>
+<div class="quarto-title-meta" data-o006-id="O006-PSU-010-U0015">
+</div>
+</header>
+<section class="level2 unnumbered unlisted" data-o006-id="O006-PSU-010-U0016" id="overview">
+<h2 class="unnumbered unlisted anchored" data-anchor-id="overview" data-o006-id="O006-PSU-010-U0017">Overview</h2>
+<p data-o006-id="O006-PSU-010-U0018">In the previous sections, we developed statistical methods, primarily in the form of confidence intervals, for answering the question “what is the value of the parameter <span class="math inline" data-o006-math-id="O006-PSU-010-M0001">\(\theta\)</span>?” In this section, we’ll learn how to answer a slightly different question, namely “is the value of the parameter <span class="math inline" data-o006-math-id="O006-PSU-010-M0002">\(\theta\)</span> such and such?” For example, rather than attempting to estimate <span class="math inline" data-o006-math-id="O006-PSU-010-M0003">\(\mu\)</span>, the mean body temperature of adults, we might be interested in testing whether <span class="math inline" data-o006-math-id="O006-PSU-010-M0004">\(\mu\)</span>, the mean body temperature of adults, is really 37 degrees Celsius. We’ll attempt to answer such questions using a statistical method known as hypothesis testing.</p>
+<section class="level3 unnumbered unlisted objectiveblock" data-o006-id="O006-PSU-010-U0019" id="objectives">
+<h3 class="unnumbered unlisted anchored" data-anchor-id="objectives" data-o006-id="O006-PSU-010-U0020"><i class="bi bi-check2-circle"></i>Objectives</h3>
+<p data-o006-id="O006-PSU-010-U0021">Upon completion of this lesson, you should be able to:</p>
+<ol data-o006-id="O006-PSU-010-U0022" type="1">
+<li data-o006-id="O006-PSU-010-U0023">Construct a hypothesis test using the distribution of an estimator,</li>
+<li data-o006-id="O006-PSU-010-U0024">Make conclusions of test using the p-value approach,</li>
+<li data-o006-id="O006-PSU-010-U0025">Make conclusions of a test using the critical value approach,</li>
+<li data-o006-id="O006-PSU-010-U0026">Clearly interpret the results of a hypothesis test, and</li>
+<li data-o006-id="O006-PSU-010-U0027">Clearly interpret the types of errors and their respective probabilities.</li>
+</ol>
+</section>
+</section>
+<section class="level2" data-number="9.1" data-o006-id="O006-PSU-010-U0028" id="introduction-to-hypothesis-tests">
+<h2 class="anchored" data-anchor-id="introduction-to-hypothesis-tests" data-number="9.1" data-o006-id="O006-PSU-010-U0029"><span class="header-section-number">9.1</span> Introduction to Hypothesis Tests</h2>
+<section class="level3" data-number="9.1.1" data-o006-id="O006-PSU-010-U0030" id="basic-terms">
+<h3 class="anchored" data-anchor-id="basic-terms" data-number="9.1.1" data-o006-id="O006-PSU-010-U0031"><span class="header-section-number">9.1.1</span> Basic Terms</h3>
+<p data-o006-id="O006-PSU-010-U0032">Before we get into the statistical theory behind hypothesis tests, we first need to understand the basic terms.</p>
+<p data-o006-id="O006-PSU-010-U0033">The first step in hypothesis testing is to set up two (mutually exclusive) and competing hypotheses. This is the most important aspect of the hypothesis test. If the hypotheses are incorrect, the conclusion of the test will also be incorrect.</p>
+<p data-o006-id="O006-PSU-010-U0034">The two hypotheses are named the null hypothesis and the alternative hypothesis.</p>
+<div class="ms-3 theorem definition" data-o006-id="O006-PSU-010-U0035" id="def-nullhyp">
+<p data-o006-id="O006-PSU-010-U0036"><span class="theorem-title"><strong>Def. 9.1 (Null Hypothesis)</strong></span> The <strong>null hypothesis</strong> is typically denoted as <span class="math inline" data-o006-math-id="O006-PSU-010-M0005">\(H_0\)</span>. The null hypothesis states the “status quo”. This hypothesis is <strong>assumed to be true</strong> until there is evidence to suggest otherwise.</p>
+</div>
+<div class="ms-3 theorem definition" data-o006-id="O006-PSU-010-U0037" id="def-althyp">
+<p data-o006-id="O006-PSU-010-U0038"><span class="theorem-title"><strong>Def. 9.2 (Alternative Hypothesis)</strong></span> The <strong>alternative hypothesis</strong> is typically denoted as <span class="math inline" data-o006-math-id="O006-PSU-010-M0006">\(H_a\)</span> or <span class="math inline" data-o006-math-id="O006-PSU-010-M0007">\(H_1\)</span>. This is the statement that one wants to conclude. It is also called the research hypothesis.</p>
+</div>
+<div class="theorem example" data-o006-id="O006-PSU-010-U0039" id="exm-hyptest1">
+<p data-o006-id="O006-PSU-010-U0040"><span class="theorem-title"><strong>Example 9.1</strong></span> A man, Mr. Orangejuice, goes to trial and is tried for the murder of his ex-wife. He is either guilty or innocent. Set up the null and alternative hypotheses for this example.</p>
+<section class="level4 card card-body bg-light ms-3 mb-3 pt-0" data-o006-id="O006-PSU-010-U0041" id="solution">
+<h4 class="anchored" data-anchor-id="solution" data-o006-id="O006-PSU-010-U0042">Solution</h4>
+<p data-o006-id="O006-PSU-010-U0043">Putting this in a hypothesis testing framework, the hypotheses being tested are: 1. The man is guilty. 2. The man is innocent.</p>
+<p data-o006-id="O006-PSU-010-U0044">Let’s set up the null and alternative hypotheses.</p>
+<p data-o006-id="O006-PSU-010-U0045"><span class="math display" data-o006-math-id="O006-PSU-010-M0008">\[\begin{align}
+H_0&amp;\colon\text{ Mr. Orangejuice is innocent}\\
+H_a&amp;\colon\text{ Mr. Orangejuice is guilty}
+\end{align}\]</span></p>
+<p data-o006-id="O006-PSU-010-U0046">Remember that we assume the null hypothesis is true and try to see if we have evidence against the null. Therefore, it makes sense in this example to assume the man is innocent and test to see if there is evidence that he is guilty.</p>
+</section>
+</div>
+</section>
+<section class="level3" data-number="9.1.2" data-o006-id="O006-PSU-010-U0047" id="the-logic-of-hypothesis-testing">
+<h3 class="anchored" data-anchor-id="the-logic-of-hypothesis-testing" data-number="9.1.2" data-o006-id="O006-PSU-010-U0048"><span class="header-section-number">9.1.2</span> The Logic of Hypothesis Testing</h3>
+<p data-o006-id="O006-PSU-010-U0049">We want to know the answer to a research question. We determine our null and alternative hypotheses. Now it is time to make a decision.</p>
+<p data-o006-id="O006-PSU-010-U0050">The decision is either going to be…</p>
+<ol data-o006-id="O006-PSU-010-U0051" type="1">
+<li data-o006-id="O006-PSU-010-U0052">Reject the null hypothesis or…</li>
+<li data-o006-id="O006-PSU-010-U0053">Fail to reject the null hypothesis</li>
+</ol>
+<div class="callout callout-style-simple callout-caution no-icon" data-o006-id="O006-PSU-010-U0054">
+<div class="callout-body d-flex" data-o006-id="O006-PSU-010-U0055">
+<div class="callout-icon-container" data-o006-id="O006-PSU-010-U0056">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-body-container" data-o006-id="O006-PSU-010-U0057">
+<p data-o006-id="O006-PSU-010-U0058"><strong>Note!</strong><br/>
+Why can’t we say we “accept the null”? The reason is that we are assuming the null hypothesis is true and trying to see if there is evidence against it. Therefore, the conclusion should be in terms of rejecting the null.</p>
+</div>
+</div>
+</div>
+<p data-o006-id="O006-PSU-010-U0059">Consider the following table. The table shows the decision/conclusion of the hypothesis test and the unknown “reality”, or truth. We do not know if the null is true or if it is false. If the null is false and we reject it, then we made the correct decision. If the null hypothesis is true and we fail to reject it, then we made the correct decision.</p>
+<table class="w-auto mx-auto table-sm small caption-top table" data-o006-id="O006-PSU-010-U0060">
+<colgroup>
+<col style="width: 47%"/>
+<col style="width: 26%"/>
+<col style="width: 26%"/>
+</colgroup>
+<tbody data-o006-id="O006-PSU-010-U0061">
+<tr class="odd" data-o006-id="O006-PSU-010-U0062">
+<td data-o006-id="O006-PSU-010-U0063" style="text-align: center;"><strong>Decision</strong></td>
+<td data-o006-id="O006-PSU-010-U0064" style="text-align: center;">Reality</td>
+<td data-o006-id="O006-PSU-010-U0065" style="text-align: center;"></td>
+</tr>
+<tr class="even" data-o006-id="O006-PSU-010-U0066">
+<td data-o006-id="O006-PSU-010-U0067" style="text-align: center;"></td>
+<td data-o006-id="O006-PSU-010-U0068" style="text-align: center;"><span class="math inline" data-o006-math-id="O006-PSU-010-M0009">\(H_0\)</span> <strong>is true</strong></td>
+<td data-o006-id="O006-PSU-010-U0069" style="text-align: center;"><span class="math inline" data-o006-math-id="O006-PSU-010-M0010">\(H_0\)</span> <strong>is false</strong></td>
+</tr>
+<tr class="odd" data-o006-id="O006-PSU-010-U0070">
+<td data-o006-id="O006-PSU-010-U0071" style="text-align: center;"><strong>Reject</strong> <span class="math inline" data-o006-math-id="O006-PSU-010-M0011">\(H_0\)</span> <strong>(Conclude</strong> <span class="math inline" data-o006-math-id="O006-PSU-010-M0012">\(H_a\)</span><strong>)</strong></td>
+<td data-o006-id="O006-PSU-010-U0072" style="text-align: center;"></td>
+<td data-o006-id="O006-PSU-010-U0073" style="text-align: center;"><span class="text-success-emphasis"><strong>Correct decision</strong></span></td>
+</tr>
+<tr class="even" data-o006-id="O006-PSU-010-U0074">
+<td data-o006-id="O006-PSU-010-U0075" style="text-align: center;"><strong>Fail to Reject</strong> <span class="math inline" data-o006-math-id="O006-PSU-010-M0013">\(H_0\)</span></td>
+<td data-o006-id="O006-PSU-010-U0076" style="text-align: center;"><span class="text-success-emphasis"><strong>Correct Decision</strong></span></td>
+<td data-o006-id="O006-PSU-010-U0077" style="text-align: center;"></td>
+</tr>
+</tbody>
+</table>
+<p data-o006-id="O006-PSU-010-U0078"><strong>So what happens when we do not make the correct decision?</strong></p>
+<p data-o006-id="O006-PSU-010-U0079">When doing hypothesis testing, two types of mistakes may be made and we call them Type I error and Type II error. If we reject the null hypothesis when it is true, then we made a type I error. If the null hypothesis is false and we failed to reject it, we made another error called a Type II error.</p>
+<table class="w-auto mx-auto table-sm small caption-top table" data-o006-id="O006-PSU-010-U0080">
+<colgroup>
+<col style="width: 47%"/>
+<col style="width: 26%"/>
+<col style="width: 26%"/>
+</colgroup>
+<tbody data-o006-id="O006-PSU-010-U0081">
+<tr class="odd" data-o006-id="O006-PSU-010-U0082">
+<td data-o006-id="O006-PSU-010-U0083" style="text-align: center;"><strong>Decision</strong></td>
+<td data-o006-id="O006-PSU-010-U0084" style="text-align: center;">Reality</td>
+<td data-o006-id="O006-PSU-010-U0085" style="text-align: center;"></td>
+</tr>
+<tr class="even" data-o006-id="O006-PSU-010-U0086">
+<td data-o006-id="O006-PSU-010-U0087" style="text-align: center;"></td>
+<td data-o006-id="O006-PSU-010-U0088" style="text-align: center;"><span class="math inline" data-o006-math-id="O006-PSU-010-M0014">\(H_0\)</span> <strong>is true</strong></td>
+<td data-o006-id="O006-PSU-010-U0089" style="text-align: center;"><span class="math inline" data-o006-math-id="O006-PSU-010-M0015">\(H_0\)</span> <strong>is false</strong></td>
+</tr>
+<tr class="odd" data-o006-id="O006-PSU-010-U0090">
+<td data-o006-id="O006-PSU-010-U0091" style="text-align: center;"><strong>Reject</strong> <span class="math inline" data-o006-math-id="O006-PSU-010-M0016">\(H_0\)</span> <strong>(Conclude</strong> <span class="math inline" data-o006-math-id="O006-PSU-010-M0017">\(H_a\)</span><strong>)</strong></td>
+<td data-o006-id="O006-PSU-010-U0092" style="text-align: center;"><span class="text-danger-emphasis"><strong>Type I Error</strong></span></td>
+<td data-o006-id="O006-PSU-010-U0093" style="text-align: center;"><span class="text-success-emphasis"><strong>Correct decision</strong></span></td>
+</tr>
+<tr class="even" data-o006-id="O006-PSU-010-U0094">
+<td data-o006-id="O006-PSU-010-U0095" style="text-align: center;"><strong>Fail to Reject</strong> <span class="math inline" data-o006-math-id="O006-PSU-010-M0018">\(H_0\)</span></td>
+<td data-o006-id="O006-PSU-010-U0096" style="text-align: center;"><span class="text-success-emphasis"><strong>Correct decision</strong></span></td>
+<td data-o006-id="O006-PSU-010-U0097" style="text-align: center;"><span class="text-danger-emphasis"><strong>Type II Error</strong></span></td>
+</tr>
+</tbody>
+</table>
+<section class="level4" data-o006-id="O006-PSU-010-U0098" id="types-of-errors">
+<h4 class="anchored" data-anchor-id="types-of-errors" data-o006-id="O006-PSU-010-U0099">Types of Errors</h4>
+<ul data-o006-id="O006-PSU-010-U0100">
+<li data-o006-id="O006-PSU-010-U0101"><p data-o006-id="O006-PSU-010-U0102"><strong>Type I Error</strong>: When we reject the null hypothesis when the null hypothesis is true.</p></li>
+<li data-o006-id="O006-PSU-010-U0103"><p data-o006-id="O006-PSU-010-U0104"><strong>Type II Error</strong>: When we fail to reject the null hypothesis when the null hypothesis is false.</p></li>
+</ul>
+<p data-o006-id="O006-PSU-010-U0105">The “reality”, or truth, about the null hypothesis is unknown and therefore we do not know if we have made the correct decision or if we committed an error. We can, however, define the likelihood of these events.</p>
+<div class="ms-3 theorem definition" data-o006-id="O006-PSU-010-U0106" id="def-alpha">
+<p data-o006-id="O006-PSU-010-U0107"><span class="theorem-title"><strong>Def. 9.3 (<span class="math inline" data-o006-math-id="O006-PSU-010-M0019">\(\alpha\)</span> (“alpha”))</strong></span> The probability of committing a Type I error. Also known as the <strong>significance level</strong>.</p>
+</div>
+<div class="ms-3 theorem definition" data-o006-id="O006-PSU-010-U0108" id="def-beta">
+<p data-o006-id="O006-PSU-010-U0109"><span class="theorem-title"><strong>Def. 9.4 (<span class="math inline" data-o006-math-id="O006-PSU-010-M0020">\(\beta\)</span> (“beta”):)</strong></span> The probability of committing a Type II error.</p>
+</div>
+</section>
+</section>
+<section class="level3 ms-3" data-number="9.1.3" data-o006-id="O006-PSU-010-U0110" id="power">
+<h3 class="anchored" data-anchor-id="power" data-number="9.1.3" data-o006-id="O006-PSU-010-U0111"><span class="header-section-number">9.1.3</span> Power</h3>
+<p data-o006-id="O006-PSU-010-U0112">Power is the probability the null hypothesis is rejected given that it is false. (i.e <span class="math inline" data-o006-math-id="O006-PSU-010-M0021">\(1-\beta\)</span>).</p>
+</section>
+<p data-o006-id="O006-PSU-010-U0113"><span class="math inline" data-o006-math-id="O006-PSU-010-M0022">\(\alpha\)</span> and <span class="math inline" data-o006-math-id="O006-PSU-010-M0023">\(\beta\)</span> are probabilities of committing an error so we want these values to be low. However, we cannot decrease both. As <span class="math inline" data-o006-math-id="O006-PSU-010-M0024">\(\alpha\)</span> decreases, <span class="math inline" data-o006-math-id="O006-PSU-010-M0025">\(\beta\)</span> increases.</p>
+<div class="callout callout-style-simple callout-caution no-icon" data-o006-id="O006-PSU-010-U0114">
+<div class="callout-body d-flex" data-o006-id="O006-PSU-010-U0115">
+<div class="callout-icon-container" data-o006-id="O006-PSU-010-U0116">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-body-container" data-o006-id="O006-PSU-010-U0117">
+<p data-o006-id="O006-PSU-010-U0118"><strong>Note!</strong><br/>
+Type I error is also thought of as the event that we reject the null hypothesis GIVEN the null is true. In other words, Type I error is a conditional event and <span class="math inline" data-o006-math-id="O006-PSU-010-M0026">\(\alpha\)</span> is a conditional probability. The same idea applies to Type II error and <span class="math inline" data-o006-math-id="O006-PSU-010-M0027">\(\beta\)</span>.</p>
+</div>
+</div>
+</div>
+<div class="theorem example" data-o006-id="O006-PSU-010-U0119" id="exm-errorshyptest">
+<p data-o006-id="O006-PSU-010-U0120"><span class="theorem-title"><strong>Example 9.2</strong></span> A man, Mr. Orangejuice, goes to trial and is tried for the murder of his ex-wife. He is either guilty or not guilty. We found before that…</p>
+<p data-o006-id="O006-PSU-010-U0121"><span class="math display" data-o006-math-id="O006-PSU-010-M0028">\[\begin{align}
+H_0&amp;\colon\text{ Mr. Orangejuice is innocent}\\
+H_a&amp;\colon\text{ Mr. Orangejuice is guilty}
+\end{align}\]</span></p>
+<p data-o006-id="O006-PSU-010-U0122">Interpret Type I Error, Type II Error, <span class="math inline" data-o006-math-id="O006-PSU-010-M0029">\(\alpha\)</span>, and <span class="math inline" data-o006-math-id="O006-PSU-010-M0030">\(\beta\)</span>.</p>
+<section class="level4 card card-body bg-light ms-3 mb-3 pt-0" data-o006-id="O006-PSU-010-U0123" id="solution-1">
+<h4 class="anchored" data-anchor-id="solution-1" data-o006-id="O006-PSU-010-U0124">Solution</h4>
+<p data-o006-id="O006-PSU-010-U0125"><strong>Type I Error</strong>:</p>
+<p data-o006-id="O006-PSU-010-U0126">Type I error is committed if we reject <span class="math inline" data-o006-math-id="O006-PSU-010-M0031">\(H_0\)</span> when it is true. In other words, when the man is innocent but found guilty.</p>
+<p data-o006-id="O006-PSU-010-U0127"><strong>Type II Error</strong>:</p>
+<p data-o006-id="O006-PSU-010-U0128">Type II error is committed if we fail to reject <span class="math inline" data-o006-math-id="O006-PSU-010-M0032">\(H_0\)</span> when it is false. In other words, when the man is guilty but found not guilty.</p>
+<p data-o006-id="O006-PSU-010-U0129"><span class="math inline" data-o006-math-id="O006-PSU-010-M0033">\(\alpha\)</span>:</p>
+<p data-o006-id="O006-PSU-010-U0130">the probability of a Type I error, or in other words, it is the probability that Mr. Orangejuice is innocent but found guilty.</p>
+<p data-o006-id="O006-PSU-010-U0131"><span class="math inline" data-o006-math-id="O006-PSU-010-M0034">\(\beta\)</span>:</p>
+<p data-o006-id="O006-PSU-010-U0132">the probability of a Type II error, or in other words, it is the probability that Mr. Orangejuice is guilty but found not guilty.</p>
+</section>
+<p data-o006-id="O006-PSU-010-U0133">As you can see here, the Type I error (putting an innocent man in jail) is the more serious error. Ethically, it is more serious to put an innocent man in jail than to let a guilty man go free. So to minimize the probability of a type I error we would choose a smaller significance level.</p>
+</div>
+<section class="level3 unnumbered" data-o006-id="O006-PSU-010-U0134" id="try-it">
+<h3 class="unnumbered anchored" data-anchor-id="try-it" data-o006-id="O006-PSU-010-U0135"><i class="bi bi-question-octagon-fill text-warning"></i> Try It!</h3>
+<div class="tryit" data-o006-id="O006-PSU-010-U0136">
+<p data-o006-id="O006-PSU-010-U0137">An inspector has to choose between certifying a building as safe or saying that the building is not safe. There are two hypotheses:</p>
+<ol data-o006-id="O006-PSU-010-U0138" type="1">
+<li data-o006-id="O006-PSU-010-U0139">Building is not safe</li>
+<li data-o006-id="O006-PSU-010-U0140">Building is safe</li>
+</ol>
+<p data-o006-id="O006-PSU-010-U0141">Set up the null and alternative hypotheses. Interpret Type I and Type II error.</p>
+<button aria-controls="collapseExample" aria-expanded="false" class="btn btn-outline-success collapsed" data-bs-target="#collapseExample" data-bs-toggle="collapse" data-o006-id="O006-PSU-010-U0142" type="button">
+    Answer
+</button>
+<div class="collapse" data-o006-id="O006-PSU-010-U0143" id="collapseExample">
+<div class="card" data-o006-id="O006-PSU-010-U0144">
+<div class="card-body bg-light ms-0 mb-0 pt-2" data-o006-id="O006-PSU-010-U0145">
+<p data-o006-id="O006-PSU-010-U0146"><strong>Solution</strong></p>
+<div class="table-responsive" data-o006-id="O006-PSU-010-U0147">
+<table class="w-auto table-sm mx-auto table-bordered small caption-top table" data-o006-id="O006-PSU-010-U0148">
+<colgroup>
+<col style="width: 33%"/>
+<col style="width: 40%"/>
+<col style="width: 26%"/>
+</colgroup>
+<thead data-o006-id="O006-PSU-010-U0149">
+<tr class="header" data-o006-id="O006-PSU-010-U0150">
+<th data-o006-id="O006-PSU-010-U0151" style="text-align: center;"></th>
+<th data-o006-id="O006-PSU-010-U0152" style="text-align: center;"><span class="math inline" data-o006-math-id="O006-PSU-010-M0035">\(H_0\)</span> is true</th>
+<th data-o006-id="O006-PSU-010-U0153" style="text-align: center;"><span class="math inline" data-o006-math-id="O006-PSU-010-M0036">\(H_0\)</span> is false</th>
+</tr>
+</thead>
+<tbody data-o006-id="O006-PSU-010-U0154">
+<tr class="odd" data-o006-id="O006-PSU-010-U0155">
+<td data-o006-id="O006-PSU-010-U0156" style="text-align: center;"><strong>Reject</strong> <span class="math inline" data-o006-math-id="O006-PSU-010-M0037">\(H_0\)</span> <strong>(Conclude</strong> <span class="math inline" data-o006-math-id="O006-PSU-010-M0038">\(H_a\)</span><strong>)</strong></td>
+<td data-o006-id="O006-PSU-010-U0157" style="text-align: center;">Reject “Building is not safe”, when it is safe. (<em>Type I Error</em>)</td>
+<td data-o006-id="O006-PSU-010-U0158" style="text-align: center;">Correct decision</td>
+</tr>
+<tr class="even" data-o006-id="O006-PSU-010-U0159">
+<td data-o006-id="O006-PSU-010-U0160" style="text-align: center;"><strong>Fail to Reject</strong> <span class="math inline" data-o006-math-id="O006-PSU-010-M0039">\(H_0\)</span></td>
+<td data-o006-id="O006-PSU-010-U0161" style="text-align: center;">Correct Decision</td>
+<td data-o006-id="O006-PSU-010-U0162" style="text-align: center;">Fail to reject “building is not safe”, when it is not safe (<em>Type II Error</em>)</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p data-o006-id="O006-PSU-010-U0163">Power and <span class="math inline" data-o006-math-id="O006-PSU-010-M0040">\(\beta\)</span> are complements of each other. Therefore, they have an inverse relationship, i.e. as one increases, the other decreases.</p>
+<p data-o006-id="O006-PSU-010-U0164">It makes sense for us to set up the <span class="math inline" data-o006-math-id="O006-PSU-010-M0041">\(H_0\)</span> and <span class="math inline" data-o006-math-id="O006-PSU-010-M0042">\(H_a\)</span> as above (that is, assume building is not safe until proven otherwise), because if we switch <span class="math inline" data-o006-math-id="O006-PSU-010-M0043">\(H_0\)</span> and <span class="math inline" data-o006-math-id="O006-PSU-010-M0044">\(H_a\)</span> (that is, if <span class="math inline" data-o006-math-id="O006-PSU-010-M0045">\(H_0\)</span> was is building is not safe) and if we fail to reject <span class="math inline" data-o006-math-id="O006-PSU-010-M0046">\(H_0\)</span>, we cannot quite conclude that building is safe (we can only fail to reject <span class="math inline" data-o006-math-id="O006-PSU-010-M0047">\(H_0\)</span>, we cannot accept <span class="math inline" data-o006-math-id="O006-PSU-010-M0048">\(H_0\)</span>).</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section class="level3" data-number="9.1.4" data-o006-id="O006-PSU-010-U0165" id="steps-for-hypothesis-testing">
+<h3 class="anchored" data-anchor-id="steps-for-hypothesis-testing" data-number="9.1.4" data-o006-id="O006-PSU-010-U0166"><span class="header-section-number">9.1.4</span> Steps for Hypothesis Testing</h3>
+<p data-o006-id="O006-PSU-010-U0167">A hypothesis, in statistics, is a statement about a population parameter, where this statement typically is represented by some specific numerical value. In testing a hypothesis, we use a method where we gather data in an effort to gather evidence about the hypothesis.</p>
+<p data-o006-id="O006-PSU-010-U0168">How do we decide whether to reject the null hypothesis?</p>
+<ol data-o006-id="O006-PSU-010-U0169" type="1">
+<li data-o006-id="O006-PSU-010-U0170">If the sample data are consistent with the null hypothesis, then we do not reject it.</li>
+<li data-o006-id="O006-PSU-010-U0171">If the sample data are inconsistent with the null hypothesis, but consistent with the alternative, then we reject the null hypothesis and conclude that the alternative hypothesis is true.</li>
+</ol>
+<section class="level4" data-o006-id="O006-PSU-010-U0172" id="six-steps-for-hypothesis-tests">
+<h4 class="anchored" data-anchor-id="six-steps-for-hypothesis-tests" data-o006-id="O006-PSU-010-U0173">Six Steps for Hypothesis Tests</h4>
+<p data-o006-id="O006-PSU-010-U0174">In hypothesis testing, there are certain steps one must follow. Below these are summarized into six such steps to conducting a test of a hypothesis.</p>
+<ol data-o006-id="O006-PSU-010-U0175" type="1">
+<li data-o006-id="O006-PSU-010-U0176"><p data-o006-id="O006-PSU-010-U0177"><strong>Set up the hypotheses and check conditions:</strong> Each hypothesis test includes two hypotheses about the population. One is the null hypothesis, notated as <span class="math inline" data-o006-math-id="O006-PSU-010-M0049">\(H_0\)</span>, which is a statement of a particular parameter value. This hypothesis is assumed to be true until there is evidence to suggest otherwise. The second hypothesis is called the alternative, or research hypothesis, notated as <span class="math inline" data-o006-math-id="O006-PSU-010-M0050">\(H_a\)</span>. The alternative hypothesis is a statement of a range of alternative values in which the parameter may fall. One must also check that any conditions (assumptions) needed to run the test have been satisfied e.g. normality of data, independence, and number of success and failure outcomes.</p></li>
+<li data-o006-id="O006-PSU-010-U0178"><p data-o006-id="O006-PSU-010-U0179"><strong>Decide on the significance level,</strong> <span class="math inline" data-o006-math-id="O006-PSU-010-M0051">\(\alpha\)</span><strong>:</strong> This value is used as a probability cutoff for making decisions about the null hypothesis. This alpha value represents the probability we are willing to place on our test for making an incorrect decision in regard to rejecting the null hypothesis. The most common <span class="math inline" data-o006-math-id="O006-PSU-010-M0052">\(\alpha\)</span> value is 0.05 or 5%. Other popular choices are 0.01 (1%) and 0.1 (10%).</p></li>
+<li data-o006-id="O006-PSU-010-U0180"><p data-o006-id="O006-PSU-010-U0181"><strong>Calculate the test statistic:</strong> Gather sample data and calculate a test statistic where the sample statistic is compared to the parameter value. The test statistic is calculated under the assumption the null hypothesis is true and incorporates a measure of standard error and assumptions (conditions) related to the sampling distribution. Note: We need to know the distribution of the test statistic, under the null hypothesis.</p></li>
+<li data-o006-id="O006-PSU-010-U0182"><p data-o006-id="O006-PSU-010-U0183"><strong>Calculate the probability value (p-value), or find the rejection region:</strong> A p-value is found by using the test statistic to calculate the probability of the sample data producing such a test statistic or one more extreme. The rejection region is found by using alpha to find a critical value; the rejection region is the area that is more extreme than the critical value. Suppose our test statistic is denoted, <span class="math inline" data-o006-math-id="O006-PSU-010-M0053">\(T^*\)</span>. The rejection region finds a critical value, <span class="math inline" data-o006-math-id="O006-PSU-010-M0054">\(c\)</span>, such that it is a cutoff value. For example,</p>
+<p data-o006-id="O006-PSU-010-U0184">If <span class="math inline" data-o006-math-id="O006-PSU-010-M0055">\(|T^*|&gt;c\)</span>, then we make one decision, i.e. reject <span class="math inline" data-o006-math-id="O006-PSU-010-M0056">\(H_0\)</span></p>
+<p data-o006-id="O006-PSU-010-U0185">If <span class="math inline" data-o006-math-id="O006-PSU-010-M0057">\(|T^*|&lt;c\)</span>, then we make the other decision, i.e. Fail to reject <span class="math inline" data-o006-math-id="O006-PSU-010-M0058">\(H_0\)</span>.</p>
+<p data-o006-id="O006-PSU-010-U0186">The cutoff, <span class="math inline" data-o006-math-id="O006-PSU-010-M0059">\(c\)</span>, is defined by the level of our test, <span class="math inline" data-o006-math-id="O006-PSU-010-M0060">\(\alpha\)</span>.</p>
+<p data-o006-id="O006-PSU-010-U0187">We discuss the p-value and rejection region in more detail in the following sections.</p></li>
+<li data-o006-id="O006-PSU-010-U0188"><p data-o006-id="O006-PSU-010-U0189"><strong>Make a decision about the null hypothesis:</strong> In this step, we decide to either reject the null hypothesis or decide to fail to reject the null hypothesis. Notice we do not make a decision where we will accept the null hypothesis.</p></li>
+<li data-o006-id="O006-PSU-010-U0190"><p data-o006-id="O006-PSU-010-U0191"><strong>State an overall conclusion:</strong> Once we have found the p-value or rejection region, and made a statistical decision about the null hypothesis (i.e. we will reject the null or fail to reject the null), we then want to summarize our results into an overall conclusion for our test.</p></li>
+</ol>
+<p data-o006-id="O006-PSU-010-U0192">We will follow these six steps for the remainder of this Lesson, however, the steps may not be explained explicitly.</p>
+<p data-o006-id="O006-PSU-010-U0193">Step 1 is a very important step to set up correctly. If your hypotheses are incorrect, your conclusion will be incorrect. In the following sections, we will continue to practice with Step 1.</p>
+</section>
+</section>
+</section>
+<section class="level2 page-columns page-full" data-number="9.2" data-o006-id="O006-PSU-010-U0194" id="tests-about-proportions">
+<h2 class="anchored" data-anchor-id="tests-about-proportions" data-number="9.2" data-o006-id="O006-PSU-010-U0195"><span class="header-section-number">9.2</span> Tests about Proportions</h2>
+<p data-o006-id="O006-PSU-010-U0196">Every time we perform a hypothesis test, this is the basic procedure that we will follow:</p>
+<ol data-o006-id="O006-PSU-010-U0197" type="1">
+<li data-o006-id="O006-PSU-010-U0198">We’ll make an initial assumption about the population parameter.</li>
+<li data-o006-id="O006-PSU-010-U0199">We’ll collect evidence or else use somebody else’s evidence (in either case, our evidence will come in the form of data).</li>
+<li data-o006-id="O006-PSU-010-U0200">Based on the available evidence (data), we’ll decide whether to “reject” or “not reject” our initial assumption.</li>
+</ol>
+<p data-o006-id="O006-PSU-010-U0201">Let’s try to make this outlined procedure more concrete by examining a test for one proportion. Then we will follow by outlining a few more common statistical tests.</p>
+<p data-o006-id="O006-PSU-010-U0202">Let’s consider the following example.</p>
+<div class="theorem example" data-o006-id="O006-PSU-010-U0203" id="exm-dietossed">
+<p data-o006-id="O006-PSU-010-U0204"><span class="theorem-title"><strong>Example 9.3</strong></span> A four-sided (tetrahedral) die is tossed 1000 times, and 290 fours are observed. Is there evidence to conclude that the die is biased, that is, say, that more fours than expected are observed?</p>
+</div>
+<div class="no-row-height column-margin column-container" data-o006-id="O006-PSU-010-U0205"><div class="margin-aside" data-o006-id="O006-PSU-010-U0206">
+<p data-o006-id="O006-PSU-010-U0207"><img alt="4 sided die" class="img-fluid" data-o006-asset-id="O006-PSU-010-A0001" data-o006-id="O006-PSU-010-U0208" src="assets/tetra_die.png"/></p>
+</div></div><section class="level4 card card-body bg-light ms-3 mb-3 pt-0" data-o006-id="O006-PSU-010-U0209" id="solution-2">
+<h4 class="anchored" data-anchor-id="solution-2" data-o006-id="O006-PSU-010-U0210">Solution</h4>
+<p data-o006-id="O006-PSU-010-U0211">As the basic hypothesis testing procedure outlines above, the first step involves stating an initial assumption and determining the parameter of interest. The parameter of interest here is <span class="math inline" data-o006-math-id="O006-PSU-010-M0061">\(p\)</span>, the probability of getting a 4. The assumption is that die is unbiased. If the die is unbiased, then each side (1, 2, 3, and 4) is equally likely. So, we’ll assume that <span class="math inline" data-o006-math-id="O006-PSU-010-M0062">\(p\)</span>, the probability of getting a 4 is 0.25.</p>
+<p data-o006-id="O006-PSU-010-U0212">Therefore, the null hypothesis, or “status quo”, is the population parameter <span class="math inline" data-o006-math-id="O006-PSU-010-M0063">\(p\)</span> is equal to 0.25. In symbols, we have: <span class="math display" data-o006-math-id="O006-PSU-010-M0064">\[H_0:p=0.25\]</span></p>
+<p data-o006-id="O006-PSU-010-U0213">In our given information, it is questioned if more that four are found than what we would expect. Therefore, the alternative hypothesis would be:</p>
+<p data-o006-id="O006-PSU-010-U0214"><span class="math display" data-o006-math-id="O006-PSU-010-M0065">\[H_a:p&gt;0.25\]</span></p>
+<p data-o006-id="O006-PSU-010-U0215">The second step is to decide on a significance level, <span class="math inline" data-o006-math-id="O006-PSU-010-M0066">\(\alpha\)</span>. Generally, the most common significance level is <span class="math inline" data-o006-math-id="O006-PSU-010-M0067">\(\alpha=0.05\)</span>. Therefore, lets choose <span class="math inline" data-o006-math-id="O006-PSU-010-M0068">\(P(\text{Type I error})=\alpha=0.05\)</span>. Therefore, the probability we will reject the null hypothesis, given that the null hypothesis is true is 5%.</p>
+<p data-o006-id="O006-PSU-010-U0216">Now, the next step tells us that we need to collect evidence (data) for or against our initial assumption. In this case, that’s already been done for us. We were told that the die was tossed <span class="math inline" data-o006-math-id="O006-PSU-010-M0069">\(n=1000\)</span> times, and <span class="math inline" data-o006-math-id="O006-PSU-010-M0070">\(y=290\)</span> fours were observed. We can use the sample proportion to estimate our population parameter. Therefore, we have:</p>
+<p data-o006-id="O006-PSU-010-U0217"><span class="math display" data-o006-math-id="O006-PSU-010-M0071">\[\hat{p}=\frac{y}{n}=\frac{290}{1000}=0.29\]</span></p>
+<p data-o006-id="O006-PSU-010-U0218">Now we just need to complete the third step of making the decision about whether or not to reject our initial assumption that the population proportion is 0.25. We need to use the tools we developed so far in this class and STAT 414. Recall that the Central Limit Theorem tells us that the sample proportion:</p>
+<p data-o006-id="O006-PSU-010-U0219"><span class="math display" data-o006-math-id="O006-PSU-010-M0072">\[\hat{p}=\frac{Y}{n}\]</span></p>
+<p data-o006-id="O006-PSU-010-U0220">is approximately normal with (assumed) mean</p>
+<p data-o006-id="O006-PSU-010-U0221"><span class="math display" data-o006-math-id="O006-PSU-010-M0073">\[p_0=0.25\]</span> and (assumed) standard deviation:</p>
+<p data-o006-id="O006-PSU-010-U0222"><span class="math display" data-o006-math-id="O006-PSU-010-M0074">\[\sqrt{\frac{p_0(1-p_0)}{n}}=\sqrt{\frac{0.25(1-0.25)}{1000}}=0.01369\]</span></p>
+<p data-o006-id="O006-PSU-010-U0223">That means that:</p>
+<p data-o006-id="O006-PSU-010-U0224"><span class="math display" data-o006-math-id="O006-PSU-010-M0075">\[Z=\dfrac{\hat{p}-p_0}{\sqrt{\dfrac{p_0(1-p_0)}{n}}}\]</span></p>
+<p data-o006-id="O006-PSU-010-U0225">follows a standard normal <span class="math inline" data-o006-math-id="O006-PSU-010-M0076">\(N(0, 1)\)</span> distribution. We can “translate” our observed sample proportion of 0.29 onto the <span class="math inline" data-o006-math-id="O006-PSU-010-M0077">\(Z\)</span> scale. Here’s a picture that summarizes the situation:</p>
+<div class="quarto-float quarto-figure quarto-figure-center anchored" data-o006-id="O006-PSU-010-U0226" id="fig-normalwithz1">
+<figure class="quarto-float quarto-float-fig figure" data-o006-id="O006-PSU-010-U0227">
+<div aria-describedby="fig-normalwithz1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca" data-o006-id="O006-PSU-010-U0228">
+<div class="cell" data-lightbox="true" data-o006-id="O006-PSU-010-U0229">
+<div class="cell-output-display" data-o006-id="O006-PSU-010-U0230">
+<div data-o006-id="O006-PSU-010-U0231">
+<figure class="figure" data-o006-id="O006-PSU-010-U0232">
+<p data-o006-id="O006-PSU-010-U0233"><img alt="Normal distribution showing area shaded above 0.29." class="img-fluid figure-img" data-o006-asset-id="O006-PSU-010-A0002" data-o006-id="O006-PSU-010-U0234" src="Lesson09_files/figure-html/unnamed-chunk-1-1.png" style="width:70.0%"/></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" data-o006-id="O006-PSU-010-U0235" id="fig-normalwithz1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Fig 9.1
+</figcaption>
+</figure>
+</div>
+<p data-o006-id="O006-PSU-010-U0236">So, we are assuming that the population proportion is 0.25, but we’ve observed a sample proportion of 0.290 that falls way out in the right tail of the normal distribution. It certainly doesn’t appear impossible to obtain a sample proportion of 0.29. But, that’s what we’re left with to decide. That is, we have to decide if a sample proportion of 0.290 is more extreme than we’d expect if the population proportion <span class="math inline" data-o006-math-id="O006-PSU-010-M0078">\(p\)</span> does indeed equal 0.25.</p>
+<p data-o006-id="O006-PSU-010-U0237">The next step is to determine how to make a decision. There are two approaches to making the decision in hypothesis testing:</p>
+<ol data-o006-id="O006-PSU-010-U0238" type="1">
+<li data-o006-id="O006-PSU-010-U0239">One is called the <strong>“rejection region”</strong> (or critical value” or “critical region”) approach.</li>
+<li data-o006-id="O006-PSU-010-U0240">The other is called the <strong>“p-value”</strong> approach.</li>
+</ol>
+<p data-o006-id="O006-PSU-010-U0241">First, let’s consider the rejection region approach.</p>
+<p data-o006-id="O006-PSU-010-U0242">Okay, so now let’s think about it. We probably wouldn’t reject our initial assumption that the population proportion <span class="math inline" data-o006-math-id="O006-PSU-010-M0079">\(p=0.25\)</span> if our observed sample proportion were 0.255. And, we might still not be inclined to reject our initial assumption that the population proportion <span class="math inline" data-o006-math-id="O006-PSU-010-M0080">\(p=0.25\)</span> if our observed sample proportion were 0.27. On the other hand, we would almost certainly want to reject our initial assumption that the population proportion <span class="math inline" data-o006-math-id="O006-PSU-010-M0081">\(p=0.25\)</span> if our observed sample proportion were 0.35. That suggests, then, that there is some “threshold” value that once we “cross” the threshold value, we are inclined to reject our initial assumption. That is the critical value approach in a nutshell. That is, the critical value approach tells us to define a threshold value, called a “critical value” so that if our “test statistic” is more extreme than the critical value, then we reject the null hypothesis.</p>
+<p data-o006-id="O006-PSU-010-U0243">Recall that we set the significance level, <span class="math inline" data-o006-math-id="O006-PSU-010-M0082">\(\alpha\)</span>, as 5%. Since we are using the standard normal distribution, that would mean we would be looking for a <span class="math inline" data-o006-math-id="O006-PSU-010-M0083">\(Z\)</span> value greater than 1.645. In other words, we decide to reject the null hypothesis <span class="math inline" data-o006-math-id="O006-PSU-010-M0084">\(H_0:p=0.25\)</span> in favor of the “alternative hypothesis” <span class="math inline" data-o006-math-id="O006-PSU-010-M0085">\(H_a:p&gt;0.25\)</span> if:</p>
+<p data-o006-id="O006-PSU-010-U0244"><span class="math display" data-o006-math-id="O006-PSU-010-M0086">\[Z&gt;1.645 \text{ or equivalently } \hat{p}&gt;0.273\]</span></p>
+<p data-o006-id="O006-PSU-010-U0245">Here’s a picture of such a <strong>“rejection region”</strong> (or <strong>“critical region”</strong>):</p>
+<div class="quarto-float quarto-figure quarto-figure-center anchored" data-o006-id="O006-PSU-010-U0246" id="fig-normalwithrejregion">
+<figure class="quarto-float quarto-float-fig figure" data-o006-id="O006-PSU-010-U0247">
+<div aria-describedby="fig-normalwithrejregion-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca" data-o006-id="O006-PSU-010-U0248">
+<div class="cell" data-lightbox="true" data-o006-id="O006-PSU-010-U0249">
+<div class="cell-output-display" data-o006-id="O006-PSU-010-U0250">
+<div data-o006-id="O006-PSU-010-U0251">
+<figure class="figure" data-o006-id="O006-PSU-010-U0252">
+<p data-o006-id="O006-PSU-010-U0253"><img alt="Normal distribution showing area shaded above 0.273." class="img-fluid figure-img" data-o006-asset-id="O006-PSU-010-A0003" data-o006-id="O006-PSU-010-U0254" src="Lesson09_files/figure-html/unnamed-chunk-2-1.png" style="width:70.0%"/></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" data-o006-id="O006-PSU-010-U0255" id="fig-normalwithrejregion-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Fig 9.2
+</figcaption>
+</figure>
+</div>
+<p data-o006-id="O006-PSU-010-U0256">Note, by the way, that the “size” of the critical region is 0.05. This will become apparent in a bit when we talk below about the possible errors that we can make whenever we conduct a hypothesis test.</p>
+<p data-o006-id="O006-PSU-010-U0257">At any rate, let’s get back to deciding whether our particular sample proportion appears to be too extreme. Well, it looks like we should reject the null hypothesis (our initial assumption <span class="math inline" data-o006-math-id="O006-PSU-010-M0087">\(p=0.25\)</span>) because:</p>
+<p data-o006-id="O006-PSU-010-U0258"><span class="math display" data-o006-math-id="O006-PSU-010-M0088">\[\hat{p}=0.29&gt;0.273\]</span></p>
+<p data-o006-id="O006-PSU-010-U0259">or equivalently since our test statistic:</p>
+<p data-o006-id="O006-PSU-010-U0260"><span class="math display" data-o006-math-id="O006-PSU-010-M0089">\[Z=\dfrac{\hat{p}-p_0}{\sqrt{\dfrac{p_0(1-p_0)}{n}}}=\dfrac{0.29-0.25}{\sqrt{\dfrac{0.25(0.75)}{1000}}}=2.92\]</span></p>
+<p data-o006-id="O006-PSU-010-U0261">is greater than 1.645.</p>
+<p data-o006-id="O006-PSU-010-U0262"><strong>Our conclusion</strong>: we say there is sufficient evidence to conclude <span class="math inline" data-o006-math-id="O006-PSU-010-M0090">\(H_a:p&gt;0.25\)</span>, that is, that the die is biased.</p>
+<p data-o006-id="O006-PSU-010-U0263">By the way, this example involves what is called a <strong>one-tailed test</strong>, or more specifically, a <strong>right-tailed test</strong>, because the critical region falls in only one of the two tails of the normal distribution, namely the right tail.</p>
+</section>
+<p data-o006-id="O006-PSU-010-U0264">Before we continue on the next page looking at two more examples, let’s revisit the basic hypothesis testing procedure that we outlined above. This time, though, let’s state the procedure in terms of <strong>performing a hypothesis test for a population proportion</strong> using the <strong>critical value approach</strong>. The basic procedure is:</p>
+<ol data-o006-id="O006-PSU-010-U0265" type="1">
+<li data-o006-id="O006-PSU-010-U0266">State the null hypothesis <span class="math inline" data-o006-math-id="O006-PSU-010-M0091">\(H_0\)</span> and the alternative hypothesis <span class="math inline" data-o006-math-id="O006-PSU-010-M0092">\(H_a\)</span>.</li>
+<li data-o006-id="O006-PSU-010-U0267">Calculate the test statistic (found by using the distribution of the test, under the null hypothesis):</li>
+</ol>
+<p data-o006-id="O006-PSU-010-U0268"><span class="math display" data-o006-math-id="O006-PSU-010-M0093">\[\begin{align*}
+  Z=\dfrac{\hat{p}-p_0}{\sqrt{\dfrac{p_0(1-p_0)}{n}}}
+\end{align*}\]</span></p>
+<ol data-o006-id="O006-PSU-010-U0269" start="3" type="1">
+<li data-o006-id="O006-PSU-010-U0270">Determine the <strong>rejection region</strong>.</li>
+<li data-o006-id="O006-PSU-010-U0271"><strong>Make a decision.</strong> Determine if the test statistic falls in the critical region. If it does, reject the null hypothesis. If it does not, do not reject the null hypothesis.</li>
+</ol>
+<p data-o006-id="O006-PSU-010-U0272">Now, back to those possible errors we can make when conducting such a hypothesis test.</p>
+</section>
+<section class="level2" data-number="9.3" data-o006-id="O006-PSU-010-U0273" id="possible-errors">
+<h2 class="anchored" data-anchor-id="possible-errors" data-number="9.3" data-o006-id="O006-PSU-010-U0274"><span class="header-section-number">9.3</span> Possible Errors</h2>
+<p data-o006-id="O006-PSU-010-U0275">So, argh! Every time we conduct a hypothesis test, we have a chance of making an error. (Oh dear, why couldn’t I have chosen a different profession?!)</p>
+<ol data-o006-id="O006-PSU-010-U0276" type="1">
+<li data-o006-id="O006-PSU-010-U0277"><p data-o006-id="O006-PSU-010-U0278">If we reject the null hypothesis <span class="math inline" data-o006-math-id="O006-PSU-010-M0094">\(H_0\)</span> (in favor of the alternative hypothesis ) when the null hypothesis is in fact true, we say we’ve committed a <strong>Type I error</strong>. For our example above, we set P(Type I error) equal to 0.05:</p>
+<div alt="Normal curve with center at 0.25 showing right tail critical area for alpha of .05." class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center" data-o006-id="O006-PSU-010-U0279" id="fig-rttailcritical1645">
+<figure class="quarto-float quarto-float-fig figure" data-o006-id="O006-PSU-010-U0280">
+<div aria-describedby="fig-rttailcritical1645-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca" data-o006-id="O006-PSU-010-U0281">
+<a class="lightbox" data-gallery="quarto-lightbox-gallery-1" data-o006-id="O006-PSU-010-U0282" href="assets/STAT-415-SEC-2-03.svg" title="Fig 9.3: "><img alt="Normal curve with center at 0.25 showing right tail critical area for alpha of .05." class="w-50 img-fluid quarto-figure quarto-figure-center anchored figure-img" data-o006-asset-id="O006-PSU-010-A0004" data-o006-id="O006-PSU-010-U0283" id="fig-rttailcritical1645" src="assets/STAT-415-SEC-2-03.svg"/></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" data-o006-id="O006-PSU-010-U0284" id="fig-rttailcritical1645-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Fig 9.3
+</figcaption>
+</figure>
+</div>
+<p data-o006-id="O006-PSU-010-U0285">We wanted to minimize our chance of making a Type I error! In general, we denote <span class="math inline" data-o006-math-id="O006-PSU-010-M0095">\(\alpha=P({\text{Type I error}})=\text{ the significance level}\)</span>. Obviously, we want to minimize <span class="math inline" data-o006-math-id="O006-PSU-010-M0096">\(\alpha\)</span>. Therefore, typical <span class="math inline" data-o006-math-id="O006-PSU-010-M0097">\(\alpha\)</span> values are 0.01, 0.05, and 0.10.</p></li>
+<li data-o006-id="O006-PSU-010-U0286"><p data-o006-id="O006-PSU-010-U0287">If we fail to reject the null hypothesis when the null hypothesis is false, we say we’ve committed a Type II error. For our example, suppose (unknown to us) that the population proportion <span class="math inline" data-o006-math-id="O006-PSU-010-M0098">\(p\)</span> is actually 0.27. Then, the probability of a Type II error, in this case, is:</p>
+<p data-o006-id="O006-PSU-010-U0288"><span class="math display" data-o006-math-id="O006-PSU-010-M0099">\[\begin{align*}
+P(\text{Type II Error})=P(\hat{p}&lt;0.273\quad if \quad            p=0.27)=P\left(Z&lt;\dfrac{0.273-0.27}{\sqrt{\dfrac{0.27(0.73)}{1000}}}\right)=P(Z&lt;0.214)=0.5847
+\end{align*}\]</span></p>
+<p data-o006-id="O006-PSU-010-U0289">In general, we denote <span class="math inline" data-o006-math-id="O006-PSU-010-M0100">\(\beta=P(\text{Type II error})\)</span>. Just as we want to minimize <span class="math inline" data-o006-math-id="O006-PSU-010-M0101">\(\alpha=P(\text{Type I error})\)</span>, we want to minimize <span class="math inline" data-o006-math-id="O006-PSU-010-M0102">\(\beta=P(\text{Type II error})\)</span>. Typical <span class="math inline" data-o006-math-id="O006-PSU-010-M0103">\(\beta\)</span> values are 0.05, 0.10, and 0.20.</p></li>
+</ol>
+</section>
+<section class="level2" data-number="9.4" data-o006-id="O006-PSU-010-U0290" id="the-p-value-approach">
+<h2 class="anchored" data-anchor-id="the-p-value-approach" data-number="9.4" data-o006-id="O006-PSU-010-U0291"><span class="header-section-number">9.4</span> The p-value Approach</h2>
+<p data-o006-id="O006-PSU-010-U0292">Up until now, we have used the critical region approach in conducting our hypothesis tests. Now, let’s take a look at an example in which we use what is called the <strong>P-value approach</strong>.</p>
+<div class="theorem example" data-o006-id="O006-PSU-010-U0293" id="exm-lungcancer">
+<p data-o006-id="O006-PSU-010-U0294"><span class="theorem-title"><strong>Example 9.4 (Lung Cancer)</strong></span> <span class="lead">Part I</span><br/>
+Among patients with lung cancer, usually, 90% or more die within three years. As a result of new forms of treatment, it is felt that this rate has been reduced. Let’s suppose in a recent study of n = 150 lung cancer patients, y = 128 died within three years. Is there sufficient evidence at the <span class="math inline" data-o006-math-id="O006-PSU-010-M0104">\(\alpha=0.05\)</span> level, say, to conclude that the death rate due to lung cancer has been reduced?</p>
+<section class="level4 card card-body bg-light ms-3 mb-3 pt-0" data-o006-id="O006-PSU-010-U0295" id="solution-3">
+<h4 class="anchored" data-anchor-id="solution-3" data-o006-id="O006-PSU-010-U0296">Solution</h4>
+<p data-o006-id="O006-PSU-010-U0297">The sample proportion is:</p>
+<p data-o006-id="O006-PSU-010-U0298"><span class="math display" data-o006-math-id="O006-PSU-010-M0105">\[\begin{align*}
+  \hat{p}=\dfrac{128}{150}=0.853
+\end{align*}\]</span></p>
+<p data-o006-id="O006-PSU-010-U0299">The null and alternative hypotheses are: <span class="math display" data-o006-math-id="O006-PSU-010-M0106">\[\begin{align*}
+  H_0 \colon p = 0.90 \text { and } H_A: p&lt;0.9
+\end{align*}\]</span></p>
+<p data-o006-id="O006-PSU-010-U0300">The test statistic is, therefore: <span class="math display" data-o006-math-id="O006-PSU-010-M0107">\[\begin{align*}
+  Z=\dfrac{\hat{p}-p_0}{\sqrt{\dfrac{p_0(1-p_0)}{n}}}=\dfrac{0.853-0.90}{\sqrt{\dfrac{0.90(0.10)}{150}}}=-1.92
+\end{align*}\]</span></p>
+<p data-o006-id="O006-PSU-010-U0301">And, the rejection region is:</p>
+<p data-o006-id="O006-PSU-010-U0302"><img class="img-fluid" data-o006-asset-id="O006-PSU-010-A0005" data-o006-id="O006-PSU-010-U0303" src="assets/ht5.png"/></p>
+<p data-o006-id="O006-PSU-010-U0304">Since the test statistic <span class="math inline" data-o006-math-id="O006-PSU-010-M0108">\(Z = −1.92 &lt; −1.645\)</span>, we reject the null hypothesis. There is sufficient evidence at the <span class="math inline" data-o006-math-id="O006-PSU-010-M0109">\(\alpha=0.05\)</span> level to conclude that the rate has been reduced.</p>
+</section>
+<p data-o006-id="O006-PSU-010-U0305"><span class="lead">Part II</span><br/>
+What if we set the significance level <span class="math inline" data-o006-math-id="O006-PSU-010-M0110">\(\alpha=P(\text{Type I error})=0.01\)</span>? Is there still sufficient evidence to conclude that the death rate due to lung cancer has been reduced?</p>
+<section class="level4 card card-body bg-light ms-3 mb-3 pt-0" data-o006-id="O006-PSU-010-U0306" id="solution-4">
+<h4 class="anchored" data-anchor-id="solution-4" data-o006-id="O006-PSU-010-U0307">Solution</h4>
+<p data-o006-id="O006-PSU-010-U0308">In this case, with <span class="math inline" data-o006-math-id="O006-PSU-010-M0111">\(\alpha=0.01\)</span>, the rejection region is <span class="math inline" data-o006-math-id="O006-PSU-010-M0112">\(Z ≤ −2.33\)</span>. That is, we reject if the test statistic falls in the rejection region defined by <span class="math inline" data-o006-math-id="O006-PSU-010-M0113">\(Z ≤ −2.33\)</span>:</p>
+<div alt="Normal curve with center at 0 showing left-tail critical area for alpha of 0.01." class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center" data-o006-id="O006-PSU-010-U0309" id="fig-ht6">
+<figure class="quarto-float quarto-float-fig figure" data-o006-id="O006-PSU-010-U0310">
+<div aria-describedby="fig-ht6-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca" data-o006-id="O006-PSU-010-U0311">
+<a class="lightbox" data-gallery="quarto-lightbox-gallery-2" data-o006-id="O006-PSU-010-U0312" href="assets/ht6.png" title="Fig 9.4: "><img alt="Normal curve with center at 0 showing left-tail critical area for alpha of 0.01." class="w-75 img-fluid quarto-figure quarto-figure-center anchored figure-img" data-o006-asset-id="O006-PSU-010-A0006" data-o006-id="O006-PSU-010-U0313" id="fig-ht6" src="assets/ht6.png"/></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" data-o006-id="O006-PSU-010-U0314" id="fig-ht6-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Fig 9.4
+</figcaption>
+</figure>
+</div>
+<p data-o006-id="O006-PSU-010-U0315">Because the test statistic <span class="math inline" data-o006-math-id="O006-PSU-010-M0114">\(Z = −1.92 &gt; −2.33\)</span>, we do not reject the null hypothesis. There is insufficient evidence at the <span class="math inline" data-o006-math-id="O006-PSU-010-M0115">\(\alpha=0.01\)</span> level to conclude that the rate has been reduced.</p>
+</section>
+<p data-o006-id="O006-PSU-010-U0316"><span class="lead">Part III</span><br/>
+In the first part of this example, we rejected the null hypothesis when <span class="math inline" data-o006-math-id="O006-PSU-010-M0116">\(\alpha=0.05\)</span>. And, in the second part of this example, we failed to reject the null hypothesis when <span class="math inline" data-o006-math-id="O006-PSU-010-M0117">\(\alpha=0.01\)</span>. There must be some level of <span class="math inline" data-o006-math-id="O006-PSU-010-M0118">\(\alpha\)</span>, then, in which we cross the threshold from rejecting to not rejecting the null hypothesis. What is the smallest <span class="math inline" data-o006-math-id="O006-PSU-010-M0119">\(\alpha-\)</span>level that would still cause us to reject the null hypothesis?</p>
+<section class="level4 card card-body bg-light ms-3 mb-3 pt-0" data-o006-id="O006-PSU-010-U0317" id="solution-5">
+<h4 class="anchored" data-anchor-id="solution-5" data-o006-id="O006-PSU-010-U0318">Solution</h4>
+<p data-o006-id="O006-PSU-010-U0319">We would, of course, reject any time the critical value was smaller than our test statistic <span class="math inline" data-o006-math-id="O006-PSU-010-M0120">\(−1.92\)</span>:</p>
+<div alt="Normal curve with center at 0 showing left-tail critical area below the test statistic of -1.92." class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center" data-o006-id="O006-PSU-010-U0320" id="fig-ht7">
+<figure class="quarto-float quarto-float-fig figure" data-o006-id="O006-PSU-010-U0321">
+<div aria-describedby="fig-ht7-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca" data-o006-id="O006-PSU-010-U0322">
+<a class="lightbox" data-gallery="quarto-lightbox-gallery-3" data-o006-id="O006-PSU-010-U0323" href="assets/ht7.png" title="Fig 9.5: "><img alt="Normal curve with center at 0 showing left-tail critical area below the test statistic of -1.92." class="w-75 img-fluid quarto-figure quarto-figure-center anchored figure-img" data-o006-asset-id="O006-PSU-010-A0007" data-o006-id="O006-PSU-010-U0324" id="fig-ht7" src="assets/ht7.png"/></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" data-o006-id="O006-PSU-010-U0325" id="fig-ht7-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Fig 9.5
+</figcaption>
+</figure>
+</div>
+<p data-o006-id="O006-PSU-010-U0326">That is, we would reject if the critical value were <span class="math inline" data-o006-math-id="O006-PSU-010-M0121">\(−1.645\)</span>, <span class="math inline" data-o006-math-id="O006-PSU-010-M0122">\(−1.83\)</span>, and <span class="math inline" data-o006-math-id="O006-PSU-010-M0123">\(−1.92\)</span>. But, we wouldn’t reject if the critical value were <span class="math inline" data-o006-math-id="O006-PSU-010-M0124">\(−1.93\)</span>. The <span class="math inline" data-o006-math-id="O006-PSU-010-M0125">\(\alpha-\)</span>level associated with the test statistic <span class="math inline" data-o006-math-id="O006-PSU-010-M0126">\(−1.92\)</span> is called the P-value. It is the smallest <span class="math inline" data-o006-math-id="O006-PSU-010-M0127">\(\alpha-\)</span>level that would lead to rejection. In this case, the P-value is: <span class="math display" data-o006-math-id="O006-PSU-010-M0128">\[\begin{align*}
+  P(Z&lt;-1.92)=0.0274
+\end{align*}\]</span></p>
+</section>
+</div>
+<p data-o006-id="O006-PSU-010-U0327">Let’s formalize the definition of a P-value, as well as summarize the P-value approach to conducting a hypothesis test.</p>
+<div class="ms-3 theorem definition" data-o006-id="O006-PSU-010-U0328" id="def-name">
+<p data-o006-id="O006-PSU-010-U0329"><span class="theorem-title"><strong>Def. 9.5 (P-value)</strong></span> The <strong>P-value</strong> is the smallest significance level that leads us to reject the null hypothesis.</p>
+<p data-o006-id="O006-PSU-010-U0330">Alternatively (and the way I prefer to think of P-values), the <strong>P-value</strong> is the probability that we’d observe a more extreme statistic than we did if the null hypothesis were true.</p>
+<p data-o006-id="O006-PSU-010-U0331">If the P-value is small, that is, if <span class="math inline" data-o006-math-id="O006-PSU-010-M0129">\(P\le \alpha\)</span>, then we reject the null hypothesis <span class="math inline" data-o006-math-id="O006-PSU-010-M0130">\(H_0\)</span>.</p>
+</div>
+<p data-o006-id="O006-PSU-010-U0332">So far, all of the examples we’ve considered have involved a one-tailed hypothesis test in which the alternative hypothesis involved either a less than (<span class="math inline" data-o006-math-id="O006-PSU-010-M0131">\(&lt;\)</span>) or a greater than (<span class="math inline" data-o006-math-id="O006-PSU-010-M0132">\(&gt;\)</span>) sign. What happens if we aren’t sure of the direction in which the proportion could deviate from the hypothesized null value? That is, what if the alternative hypothesis involved a not-equal sign (<span class="math inline" data-o006-math-id="O006-PSU-010-M0133">\(\ne\)</span>)? Let’s take a look at an example.</p>
+<div class="theorem example" data-o006-id="O006-PSU-010-U0333" id="exm-lungcancerb">
+<p data-o006-id="O006-PSU-010-U0334"><span class="theorem-title"><strong>Example 9.5 (Lung Cancer Continued)</strong></span> What if we wanted to perform a “<strong>two-tailed</strong>” test? That is, what if we wanted to test: <span class="math display" data-o006-math-id="O006-PSU-010-M0134">\[\begin{align*}
+  H_0: p=0.9 \text{ versus }H_a: p\ne 0.9
+\end{align*}\]</span> at the <span class="math inline" data-o006-math-id="O006-PSU-010-M0135">\(\alpha=0.05\)</span> level?</p>
+<section class="level4 card card-body bg-light ms-3 mb-3 pt-0" data-o006-id="O006-PSU-010-U0335" id="solution-6">
+<h4 class="anchored" data-anchor-id="solution-6" data-o006-id="O006-PSU-010-U0336">Solution</h4>
+<p data-o006-id="O006-PSU-010-U0337">Let’s first consider the <strong>critical value approach</strong>. If we allow for the possibility that the sample proportion could either prove to be too large or too small, then we need to specify a threshold value, that is, a critical value, in each tail of the distribution. In this case, we divide the “<strong>significance level</strong>” <span class="math inline" data-o006-math-id="O006-PSU-010-M0136">\(\alpha\)</span> by 2 to get <span class="math inline" data-o006-math-id="O006-PSU-010-M0137">\(\frac{\alpha}{2}\)</span>:</p>
+<div alt="Normal curve with center at 0 showing two-tail critical area for alpha of .05." class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center" data-o006-id="O006-PSU-010-U0338" id="fig-ht8">
+<figure class="quarto-float quarto-float-fig figure" data-o006-id="O006-PSU-010-U0339">
+<div aria-describedby="fig-ht8-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca" data-o006-id="O006-PSU-010-U0340">
+<a class="lightbox" data-gallery="quarto-lightbox-gallery-4" data-o006-id="O006-PSU-010-U0341" href="assets/ht8.png" title="Fig 9.6: "><img alt="Normal curve with center at 0 showing two-tail critical area for alpha of .05." class="w-75 img-fluid quarto-figure quarto-figure-center anchored figure-img" data-o006-asset-id="O006-PSU-010-A0008" data-o006-id="O006-PSU-010-U0342" id="fig-ht8" src="assets/ht8.png"/></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" data-o006-id="O006-PSU-010-U0343" id="fig-ht8-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Fig 9.6
+</figcaption>
+</figure>
+</div>
+<p data-o006-id="O006-PSU-010-U0344">That is, our rejection rule is that we should reject the null hypothesis or we should reject the null hypothesis <span class="math inline" data-o006-math-id="O006-PSU-010-M0138">\(H_0\)</span>. Alternatively, we can write that we should reject the null hypothesis <span class="math inline" data-o006-math-id="O006-PSU-010-M0139">\(H_0\)</span> if <span class="math inline" data-o006-math-id="O006-PSU-010-M0140">\(|Z|\ge 1.96\)</span>. Because our test statistic is <span class="math inline" data-o006-math-id="O006-PSU-010-M0141">\(−1.92\)</span>, we just barely fail to reject the null hypothesis, because <span class="math inline" data-o006-math-id="O006-PSU-010-M0142">\(1.92 &lt; 1.96\)</span>. In this case, we would say that there is insufficient evidence at the <span class="math inline" data-o006-math-id="O006-PSU-010-M0143">\(\alpha=0.05\)</span> level to conclude that the sample proportion differs significantly from 0.90.</p>
+<p data-o006-id="O006-PSU-010-U0345">Now for the <strong>P-value approach</strong>. Again, needing to allow for the possibility that the sample proportion is either too large or too small, we multiply the P-value we obtain for the one-tailed test by 2:</p>
+<p data-o006-id="O006-PSU-010-U0346">That is, the P-value is:</p>
+<p data-o006-id="O006-PSU-010-U0347"><span class="math display" data-o006-math-id="O006-PSU-010-M0144">\[\begin{align*}
+  P=P(|Z|\geq 1.92)=P(Z&gt;1.92 \text{ or } Z&lt;-1.92)=2 \times 0.0274=0.055
+\end{align*}\]</span></p>
+<p data-o006-id="O006-PSU-010-U0348">Because the P-value 0.055 is (just barely) greater than the significance level <span class="math inline" data-o006-math-id="O006-PSU-010-M0145">\(\alpha=0.05\)</span>, we barely fail to reject the null hypothesis. Again, we would say that there is insufficient evidence at the <span class="math inline" data-o006-math-id="O006-PSU-010-M0146">\(\alpha=0.05\)</span> level to conclude that the sample proportion differs significantly from 0.90.</p>
+</section>
+</div>
+</section>
+<section class="level2" data-number="9.5" data-o006-id="O006-PSU-010-U0349" id="tests-about-one-mean">
+<h2 class="anchored" data-anchor-id="tests-about-one-mean" data-number="9.5" data-o006-id="O006-PSU-010-U0350"><span class="header-section-number">9.5</span> Tests about One Mean</h2>
+<p data-o006-id="O006-PSU-010-U0351">In this lesson, we will continue our investigation of hypothesis testing. We will focus our attention on hypothesis tests for a population mean, <span class="math inline" data-o006-math-id="O006-PSU-010-M0147">\(\mu\)</span>, under different situations.</p>
+<section class="level3 unnumbered" data-o006-id="O006-PSU-010-U0352" id="variance-known">
+<h3 class="unnumbered anchored" data-anchor-id="variance-known" data-o006-id="O006-PSU-010-U0353">Variance Known</h3>
+<p data-o006-id="O006-PSU-010-U0354">Let’s start by acknowledging that it is completely unrealistic to think that we’d find ourselves in the situation of knowing the population variance, but not the population mean. Therefore, the hypothesis testing method that we learn on this page has limited practical use. We study it only because we’ll use it later to learn about the “power” of a hypothesis test (by learning how to calculate Type II error rates). As usual, let’s start with an example.</p>
+<div class="theorem example" data-o006-id="O006-PSU-010-U0355" id="exm-boyseat">
+<p data-o006-id="O006-PSU-010-U0356"><span class="theorem-title"><strong>Example 9.6</strong></span> Boys of a certain age are known to have a mean weight of <span class="math inline" data-o006-math-id="O006-PSU-010-M0148">\(\mu=85\)</span> pounds. A complaint is made that the boys living in a municipal children’s home are underfed. As one bit of evidence, <span class="math inline" data-o006-math-id="O006-PSU-010-M0149">\(n=25\)</span> boys (of the same age) are weighed and found to have a mean weight of <span class="math inline" data-o006-math-id="O006-PSU-010-M0150">\(\bar{x} = 80.94\)</span> pounds. It is known that the population standard deviation <span class="math inline" data-o006-math-id="O006-PSU-010-M0151">\(\sigma\)</span> is 11.6 pounds (the unrealistic part of this example!). Based on the available data, what should be concluded concerning the complaint?</p>
+<section class="level4 card card-body bg-light ms-3 mb-3 pt-0" data-o006-id="O006-PSU-010-U0357" id="solution-7">
+<h4 class="anchored" data-anchor-id="solution-7" data-o006-id="O006-PSU-010-U0358">Solution</h4>
+<p data-o006-id="O006-PSU-010-U0359">The null hypothesis is <span class="math inline" data-o006-math-id="O006-PSU-010-M0152">\(H_0:\mu=85\)</span>, and the alternative hypothesis is <span class="math inline" data-o006-math-id="O006-PSU-010-M0153">\(H_a:\mu&lt;85\)</span>. In general, we know that if the weights are normally distributed, then:</p>
+<p data-o006-id="O006-PSU-010-U0360"><span class="math display" data-o006-math-id="O006-PSU-010-M0154">\[\begin{align*}
+Z=\dfrac{\bar{X}-\mu}{\sigma/\sqrt{n}}
+\end{align*}\]</span></p>
+<p data-o006-id="O006-PSU-010-U0361">follows the standard normal <span class="math inline" data-o006-math-id="O006-PSU-010-M0155">\(N(0,1)\)</span> distribution. It is actually a bit irrelevant here whether or not the weights are normally distributed, because the same size <span class="math inline" data-o006-math-id="O006-PSU-010-M0156">\(n=25\)</span> is large enough for the Central Limit Theorem to apply. In that case, we know that <span class="math inline" data-o006-math-id="O006-PSU-010-M0157">\(Z\)</span>, as defined above, follows at least approximately the standard normal distribution. At any rate, it seems reasonable to use the test statistic:</p>
+<p data-o006-id="O006-PSU-010-U0362"><span class="math display" data-o006-math-id="O006-PSU-010-M0158">\[\begin{align*}
+  Z=\dfrac{\bar{X}-\mu_0}{\sigma/\sqrt{n}}
+\end{align*}\]</span></p>
+<p data-o006-id="O006-PSU-010-U0363">for testing the null hypothesis</p>
+<p data-o006-id="O006-PSU-010-U0364"><span class="math display" data-o006-math-id="O006-PSU-010-M0159">\[\begin{align*}
+  H_0:\mu=\mu_0
+\end{align*}\]</span></p>
+<p data-o006-id="O006-PSU-010-U0365">against any of the possible alternative hypotheses <span class="math inline" data-o006-math-id="O006-PSU-010-M0160">\(H_a: \mu\ne\mu_0\)</span>, <span class="math inline" data-o006-math-id="O006-PSU-010-M0161">\(H_a:\mu&lt;\mu_0\)</span>, and <span class="math inline" data-o006-math-id="O006-PSU-010-M0162">\(H_a:\mu&gt;\mu_0\)</span>.</p>
+<p data-o006-id="O006-PSU-010-U0366">For the example in hand, the value of the test statistic is:</p>
+<p data-o006-id="O006-PSU-010-U0367"><span class="math display" data-o006-math-id="O006-PSU-010-M0163">\[\begin{align*}
+  Z=\dfrac{80.94-85}{11.6/\sqrt{25}}=-1.75
+\end{align*}\]</span></p>
+<p data-o006-id="O006-PSU-010-U0368">The critical region approach tells us to reject the null hypothesis at the <span class="math inline" data-o006-math-id="O006-PSU-010-M0164">\(\alpha=0.05\)</span> level if <span class="math inline" data-o006-math-id="O006-PSU-010-M0165">\(Z&lt;-1.645\)</span>. Therefore, we reject the null hypothesis because <span class="math inline" data-o006-math-id="O006-PSU-010-M0166">\(Z=-1.75&lt;-1.645\)</span>, and therefore falls in the rejection region:</p>
+<div alt="Normal curve with center at 0 showing two-tail critical area for alpha of .05." class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center" data-o006-id="O006-PSU-010-U0369" id="fig-h10">
+<figure class="quarto-float quarto-float-fig figure" data-o006-id="O006-PSU-010-U0370">
+<div aria-describedby="fig-h10-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca" data-o006-id="O006-PSU-010-U0371">
+<a class="lightbox" data-gallery="quarto-lightbox-gallery-5" data-o006-id="O006-PSU-010-U0372" href="assets/h10.png" title="Fig 9.7: "><img alt="Normal curve with center at 0 showing two-tail critical area for alpha of .05." class="w-75 img-fluid quarto-figure quarto-figure-center anchored figure-img" data-o006-asset-id="O006-PSU-010-A0009" data-o006-id="O006-PSU-010-U0373" id="fig-h10" src="assets/h10.png"/></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" data-o006-id="O006-PSU-010-U0374" id="fig-h10-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Fig 9.7
+</figcaption>
+</figure>
+</div>
+<p data-o006-id="O006-PSU-010-U0375">As always, we draw the same conclusion by using the <span class="math inline" data-o006-math-id="O006-PSU-010-M0167">\(p\)</span>-value approach. Recall that the <span class="math inline" data-o006-math-id="O006-PSU-010-M0168">\(p\)</span>-value approach tells us to reject the null hypothesis at the <span class="math inline" data-o006-math-id="O006-PSU-010-M0169">\(\alpha=0.05\)</span> level if the <span class="math inline" data-o006-math-id="O006-PSU-010-M0170">\(p\)</span>-value<span class="math inline" data-o006-math-id="O006-PSU-010-M0171">\(\le \alpha=0.05\)</span>. In this case, the <span class="math inline" data-o006-math-id="O006-PSU-010-M0172">\(p\)</span>-value is <span class="math inline" data-o006-math-id="O006-PSU-010-M0173">\(P(Z&lt;-1.75)=0.0401\)</span>:</p>
+<div alt="Normal curve with center at 0 showing two-tail critical area for alpha of .05." class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center" data-o006-id="O006-PSU-010-U0376" id="fig-h11">
+<figure class="quarto-float quarto-float-fig figure" data-o006-id="O006-PSU-010-U0377">
+<div aria-describedby="fig-h11-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca" data-o006-id="O006-PSU-010-U0378">
+<a class="lightbox" data-gallery="quarto-lightbox-gallery-6" data-o006-id="O006-PSU-010-U0379" href="assets/h11.png" title="Fig 9.8: "><img alt="Normal curve with center at 0 showing two-tail critical area for alpha of .05." class="w-75 img-fluid quarto-figure quarto-figure-center anchored figure-img" data-o006-asset-id="O006-PSU-010-A0010" data-o006-id="O006-PSU-010-U0380" id="fig-h11" src="assets/h11.png"/></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" data-o006-id="O006-PSU-010-U0381" id="fig-h11-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Fig 9.8
+</figcaption>
+</figure>
+</div>
+<p data-o006-id="O006-PSU-010-U0382">As expected, we reject the null hypothesis because the <span class="math inline" data-o006-math-id="O006-PSU-010-M0174">\(p\)</span>-value<span class="math inline" data-o006-math-id="O006-PSU-010-M0175">\(=0.401&lt;\alpha=0.05\)</span>.</p>
+</section>
+</div>
+</section>
+<section class="level3 unnumbered" data-o006-id="O006-PSU-010-U0383" id="variance-unknown">
+<h3 class="unnumbered anchored" data-anchor-id="variance-unknown" data-o006-id="O006-PSU-010-U0384">Variance Unknown</h3>
+<p data-o006-id="O006-PSU-010-U0385">Now that, for purely pedagogical reasons, we have the unrealistic situation (of a known population variance) behind us, let’s turn our attention to the realistic situation in which both the population mean and population variance are unknown.</p>
+<div class="theorem example" data-o006-id="O006-PSU-010-U0386" id="exm-sysbp">
+<p data-o006-id="O006-PSU-010-U0387"><span class="theorem-title"><strong>Example 9.7</strong></span> It is assumed that the mean systolic blood pressure is <span class="math inline" data-o006-math-id="O006-PSU-010-M0176">\(\mu=120\)</span>mm Hg. In the Honolulu Heart Study, a sample of <span class="math inline" data-o006-math-id="O006-PSU-010-M0177">\(n=100\)</span> people had an average systolic blood pressure of 130.1 mm Hg with a standard deviation of 21.21 mm Hg. Is the group significantly different (with respect to systolic blood pressure!) from the regular population?</p>
+<section class="level4 card card-body bg-light ms-3 mb-3 pt-0" data-o006-id="O006-PSU-010-U0388" id="solution-8">
+<h4 class="anchored" data-anchor-id="solution-8" data-o006-id="O006-PSU-010-U0389">Solution</h4>
+<p data-o006-id="O006-PSU-010-U0390">The null hypothesis is <span class="math inline" data-o006-math-id="O006-PSU-010-M0178">\(H_0:\mu=120\)</span>, and because there is no specific direction implied, the alternative hypothesis is <span class="math inline" data-o006-math-id="O006-PSU-010-M0179">\(H_a: \mu\ne 120\)</span>.</p>
+<p data-o006-id="O006-PSU-010-U0391">The next step for hypothesis testing is to determine the significance level, or the probability of a Type I error. For this example, let us set <span class="math inline" data-o006-math-id="O006-PSU-010-M0180">\(\alpha=0.05\)</span>.</p>
+<p data-o006-id="O006-PSU-010-U0392">Step 3 is to calculate the test statistic. Recall that we should determine a test statistic with a known distribution, under the assumptions and the null hypothesis. From STAT 414, we know that if the data are normally distributed, then:</p>
+<p data-o006-id="O006-PSU-010-U0393"><span class="math display" data-o006-math-id="O006-PSU-010-M0181">\[\begin{align*}
+  T=\dfrac{\bar{X}-\mu}{S/\sqrt{n}}
+\end{align*}\]</span></p>
+<p data-o006-id="O006-PSU-010-U0394">follows a <span class="math inline" data-o006-math-id="O006-PSU-010-M0182">\(t\)</span>-distribution with <span class="math inline" data-o006-math-id="O006-PSU-010-M0183">\(n-1\)</span> degrees of freedom. Therefore, it seems reasonable to use the test statistic:</p>
+<p data-o006-id="O006-PSU-010-U0395"><span class="math display" data-o006-math-id="O006-PSU-010-M0184">\[\begin{align*}
+  T=\dfrac{\bar{X}-\mu_0}{S/\sqrt{n}}
+\end{align*}\]</span></p>
+<p data-o006-id="O006-PSU-010-U0396">for testing the null hypothesis <span class="math inline" data-o006-math-id="O006-PSU-010-M0185">\(H_0:\mu=120\)</span> against any of the possible alternative hypotheses <span class="math inline" data-o006-math-id="O006-PSU-010-M0186">\(H_a:\mu\ne\mu_0\)</span>, <span class="math inline" data-o006-math-id="O006-PSU-010-M0187">\(H_a:\mu&lt;\mu_0\)</span>, and <span class="math inline" data-o006-math-id="O006-PSU-010-M0188">\(H_a:\mu&gt;\mu_0\)</span>. For the example in hand, the value of the test statistic is:</p>
+<p data-o006-id="O006-PSU-010-U0397"><span class="math display" data-o006-math-id="O006-PSU-010-M0189">\[\begin{align*}
+  t=\dfrac{130.1-120}{21.21/\sqrt{100}}=4.762
+\end{align*}\]</span></p>
+<p data-o006-id="O006-PSU-010-U0398">The critical region approach tells us to reject the null hypothesis at the <span class="math inline" data-o006-math-id="O006-PSU-010-M0190">\(\alpha=0.05\)</span> level if <span class="math inline" data-o006-math-id="O006-PSU-010-M0191">\(t\ge t_{0.025, 99}=1.9842\)</span> or if <span class="math inline" data-o006-math-id="O006-PSU-010-M0192">\(t\le t_{0.025, 99}=-1.9842\)</span>. Therefore, we reject the null hypothesis because <span class="math inline" data-o006-math-id="O006-PSU-010-M0193">\(t=4.762&gt;1.9842\)</span>, and therefore falls in the rejection region:</p>
+<p data-o006-id="O006-PSU-010-U0399">Again, as always, we draw the same conclusion by using the <span class="math inline" data-o006-math-id="O006-PSU-010-M0194">\(p\)</span>-value approach. The <span class="math inline" data-o006-math-id="O006-PSU-010-M0195">\(p\)</span>-value approach tells us to reject the null hypothesis at the <span class="math inline" data-o006-math-id="O006-PSU-010-M0196">\(\alpha=0.05\)</span> level if the <span class="math inline" data-o006-math-id="O006-PSU-010-M0197">\(p\)</span>-value<span class="math inline" data-o006-math-id="O006-PSU-010-M0198">\(\le 0.05\)</span>. In this case, the <span class="math inline" data-o006-math-id="O006-PSU-010-M0199">\(p\)</span>-value is:</p>
+<p data-o006-id="O006-PSU-010-U0400"><span class="math display" data-o006-math-id="O006-PSU-010-M0200">\[\begin{align*}
+  2P(T_{99}&gt;4.762)&lt;2P(T_{99}&gt;1.9842)=2(0.025)=0.05
+\end{align*}\]</span></p>
+<p data-o006-id="O006-PSU-010-U0401">As expected, we reject the null hypothesis because <span class="math inline" data-o006-math-id="O006-PSU-010-M0201">\(p\)</span>-value<span class="math inline" data-o006-math-id="O006-PSU-010-M0202">\(\le 0.01&lt;\alpha=0.05\)</span>.</p>
+</section>
+</div>
+</section>
+</section>
+<section class="level2" data-number="9.6" data-o006-id="O006-PSU-010-U0402" id="summary">
+<h2 class="anchored" data-anchor-id="summary" data-number="9.6" data-o006-id="O006-PSU-010-U0403"><span class="header-section-number">9.6</span> Summary</h2>
+<p data-o006-id="O006-PSU-010-U0404">In this lesson, we introduced the framework of hypothesis testing—a formal way to use sample data to evaluate claims about a population parameter. The big idea is to set up two competing statements: the null hypothesis (<span class="math inline" data-o006-math-id="O006-PSU-010-M0203">\(H_0\)</span>), which represents the status quo or no effect, and the alternative hypothesis (<span class="math inline" data-o006-math-id="O006-PSU-010-M0204">\(H_a\)</span>), which represents what we’re trying to find evidence for.</p>
+<p data-o006-id="O006-PSU-010-U0405">We compute a test statistic, which summarizes the evidence from the sample, and determine how extreme it is under the assumption that <span class="math inline" data-o006-math-id="O006-PSU-010-M0205">\(H_0\)</span> is true. This leads us to a rejection region or a p-value approach. If our test statistic falls in the rejection region or if the p-value is smaller than the significance level <span class="math inline" data-o006-math-id="O006-PSU-010-M0206">\(\alpha\)</span>, we reject <span class="math inline" data-o006-math-id="O006-PSU-010-M0207">\(H_0\)</span>.</p>
+<p data-o006-id="O006-PSU-010-U0406"><strong>Key Takeaways:</strong></p>
+<ul data-o006-id="O006-PSU-010-U0407">
+<li data-o006-id="O006-PSU-010-U0408">A typical form of a test statistic is: <span class="math inline" data-o006-math-id="O006-PSU-010-M0208">\(Z=\frac{\hat{\theta}-\theta_0}{SE(\hat{\theta})}\)</span></li>
+<li data-o006-id="O006-PSU-010-U0409">Type I error: rejecting when it’s actually true, <span class="math inline" data-o006-math-id="O006-PSU-010-M0209">\(P(\text{Type I error})=\alpha\)</span></li>
+<li data-o006-id="O006-PSU-010-U0410">Type II error: failing to reject when is true, <span class="math inline" data-o006-math-id="O006-PSU-010-M0210">\(P(\text{Type II error})=\beta\)</span></li>
+<li data-o006-id="O006-PSU-010-U0411">The power of a test is the probability of correctly rejecting <span class="math inline" data-o006-math-id="O006-PSU-010-M0211">\(H_0\)</span>: <span class="math inline" data-o006-math-id="O006-PSU-010-M0212">\(\text{Power}=1-\beta\)</span></li>
+</ul>
+<p data-o006-id="O006-PSU-010-U0412">We also defined two types of errors: - Type I error: rejecting <span class="math inline" data-o006-math-id="O006-PSU-010-M0213">\(H_0\)</span> when it’s actually true (probability <span class="math inline" data-o006-math-id="O006-PSU-010-M0214">\(\alpha\)</span>) - Type II error: failing to reject <span class="math inline" data-o006-math-id="O006-PSU-010-M0215">\(H_0\)</span> when <span class="math inline" data-o006-math-id="O006-PSU-010-M0216">\(H_a\)</span> is true (probability <span class="math inline" data-o006-math-id="O006-PSU-010-M0217">\(\beta\)</span>)</p>
+<p data-o006-id="O006-PSU-010-U0413">The <strong>power</strong> of a test is the probability of correctly rejecting <span class="math inline" data-o006-math-id="O006-PSU-010-M0218">\(H_0\)</span>:</p>
+<p data-o006-id="O006-PSU-010-U0414"><span class="math display" data-o006-math-id="O006-PSU-010-M0219">\[
+\text{Power} = 1 - \beta
+\]</span></p>
+</section>
+</main>
+</body>
+</html>
