@@ -58,13 +58,13 @@ images load; no page or navigation overflows; and the console is clean. The
 visual-QA receipt is 6,691 bytes with SHA-256
 `c595832f3a2efd8b83b3b0fb03051cf271e717a871023cceef0ef83d30a35245`.
 
-The local 7-of-14 release package is ready: nine files / 15,405,459 bytes. Its
+The local 7-of-14 release package is ready: nine files / 15,429,698 bytes. Its
 primary 3,603,326-byte offline-reader ZIP has SHA-256
 `89a4e458ee9aa30d2293cb95b9f0be3ecef947241ddd6dfca473ac568c6ceecf`;
-the 11,782,185-byte resumable source/backend ZIP has SHA-256
-`6235fa7cc11596cd71f40b26f60b7b00851ca03d7cab2b86f56a0b2bfd66e371`.
+the 11,806,424-byte resumable source/backend ZIP has SHA-256
+`a43219092614e24db2a829b4e2cc4ed90ccf215313671ff99cc405735625aa1b`.
 The package receipt is 4,696 bytes with SHA-256
-`7791ab35cc61a0f3851930e836495273202c77d819c51e83dcce2e0d56f81095`.
+`7db3e2a7699e2f5441ebd0db14189efb9fa5cb4649ae02eab6f8b6cc45664fe0`.
 
 Rights remain component-separated: Penn State content is CC BY-NC 4.0 except
 where otherwise noted, MathJax 3.1.2 is Apache-2.0, and original repository

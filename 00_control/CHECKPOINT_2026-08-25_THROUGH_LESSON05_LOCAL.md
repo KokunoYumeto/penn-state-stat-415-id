@@ -27,20 +27,20 @@ Deterministic evidence:
 - visual-QA receipt SHA-256:
   `c595832f3a2efd8b83b3b0fb03051cf271e717a871023cceef0ef83d30a35245`;
 - package-receipt SHA-256:
-  `7791ab35cc61a0f3851930e836495273202c77d819c51e83dcce2e0d56f81095`.
+  `7db3e2a7699e2f5441ebd0db14189efb9fa5cb4649ae02eab6f8b6cc45664fe0`.
 
 Write and check-only normalization, translation merge, build, and QA replays
 pass. Desktop and mobile visual QA cover all eight routes with exact math-node
 counts, no broken images, no document/navigation overflow, and no console
 errors or warnings. The cumulative reader is 50 files / 3,588,430 bytes.
 
-The release package is ready and contains nine files / 15,405,459 bytes. Its
+The release package is ready and contains nine files / 15,429,698 bytes. Its
 primary offline reader is
 `00_stat415-id-through-lesson05-offline-reader.zip`, 3,603,326 bytes, SHA-256
 `89a4e458ee9aa30d2293cb95b9f0be3ecef947241ddd6dfca473ac568c6ceecf`.
 Its resumable source/backend package is
-`10_stat415-id-through-lesson05-source-backend.zip`, 11,782,185 bytes, SHA-256
-`6235fa7cc11596cd71f40b26f60b7b00851ca03d7cab2b86f56a0b2bfd66e371`.
+`10_stat415-id-through-lesson05-source-backend.zip`, 11,806,424 bytes, SHA-256
+`a43219092614e24db2a829b4e2cc4ed90ccf215313671ff99cc405735625aa1b`.
 
 The last public release remains 5 of 14 at commit
 `5727d8fc056d9535ac5d75a4305166f7c027b13f`, tag

@@ -68,7 +68,9 @@ EXPECTED_MATH = {
 # Extend the already explicit, reviewed 5-of-14 closure. This tuple is the
 # complete 7-of-14 source/backend allowlist and deliberately excludes volatile
 # cursors, checkpoints, publication transactions, credentials, caches, local
-# renders, screenshots, draft notes, and every untranslated future lesson.
+# renders, screenshots, unrelated draft notes, and every untranslated future
+# lesson. The six exact translation-decision notes below are deterministic
+# build inputs and therefore part of the resumable closure.
 ADDITIONAL_SOURCE_PACKAGE_FILES = (
     # Lesson 05 uses \boldsymbol; the corrected offline MathJax closure must
     # preserve its exact extension byte in addition to the historical runtime.
@@ -131,6 +133,9 @@ ADDITIONAL_SOURCE_PACKAGE_FILES = (
     "working/lesson04_translation_part_a.json",
     "working/lesson04_translation_part_b.json",
     "working/lesson04_translation_part_c.json",
+    "working/lesson04_translation_part_a_notes.md",
+    "working/lesson04_translation_part_b_notes.md",
+    "working/lesson04_translation_part_c_notes.md",
     "working/lesson04_segments.csv",
     "working/lesson04_asset_inventory.json",
     "working/lesson04_asset_rights_audit.json",
@@ -140,6 +145,9 @@ ADDITIONAL_SOURCE_PACKAGE_FILES = (
     "working/lesson05_translation_part_a.json",
     "working/lesson05_translation_part_b.json",
     "working/lesson05_translation_part_c.json",
+    "working/lesson05_translation_part_a_notes.md",
+    "working/lesson05_translation_part_b_notes.md",
+    "working/lesson05_translation_part_c_notes.md",
     "working/lesson05_segments.csv",
     "working/lesson05_asset_closure.json",
     "working/lesson05_math_audit.md",
