@@ -5,89 +5,76 @@ Updated: 2026-08-25
 ## Current boundary
 
 - Role: O006 / C140 Mathematical Statistics.
-- Component: Penn State STAT 415 external narrative spine, `id-ID`.
+- Component: Penn State STAT 415 external narrative spine, id-ID.
 - Frozen corpus: landing/index plus Lessons 00–12, fourteen official documents,
   1,604,869 bytes; source-manifest SHA-256
-  `622c9ed2d82bb0f3f60f6855b341664233dd548b5d53dfaee2a488218a5da515`.
-- Translation complete locally: landing/index plus Lessons 00–05, 7 of 14
-  documents and 2,311 admitted segments.
-- Structure and mathematics: 3,209 normalized source units, 3,207 derivative
-  units, and 1,546 protected mathematics surfaces. The two removed Lesson 00
+  622c9ed2d82bb0f3f60f6855b341664233dd548b5d53dfaee2a488218a5da515.
+- Translation complete locally: landing/index plus Lessons 00–06, 8 of 14
+  documents and 2,487 admitted segments.
+- Structure and mathematics: 3,358 normalized source units, 3,356 derivative
+  units, and 1,648 protected mathematics surfaces. The two removed Lesson 00
   units are registered source defects; all other topology is preserved.
-- Corrections: 112 target-only proved repairs—81 through Lesson 04 and 31 in
-  Lesson 05. Authority bytes remain unchanged.
-- Lesson 05 authority: 190,308 bytes; SHA-256
-  `dac6ce7c81922118cb9c03b47c2229cf2fa505db804aa45d7960dd166ef0ef8d`.
-  Deterministic normalization emits 340 segments, 1,475 units, 108 mathematics
-  nodes, 267 code nodes, fourteen same-origin PNG assets, one external video
-  dependency, 1,939 catalogue records, and 31 proved source defects;
-  normalization-receipt SHA-256
-  `d00f4238f3fe3b5104c0169a89c00aa940c25bff26ec311354b0651c443d03be`.
-- Lesson 05 translation CSV: 101,032 bytes; SHA-256
-  `9f9247ff3d7c66e164bc6691fee67da51fcdf88cd951a9582ff32dae3015e3ac`.
-  Its 340 stable-ID bindings are 141,524 bytes; SHA-256
-  `85821982f209874b0270d24fb9a3ac863139ab6d090e4c9ab34c88d262212f58`.
-- Lesson 05 target HTML: 195,351 bytes; SHA-256
-  `254cc78ca7b633c15356c90ebb37d646d39a22acffd52fd965f07563e9722308`.
-- Cumulative offline reader: 50 files / 3,588,430 bytes; manifest SHA-256
-  `fb600bfedb1792d8b1c9ba8d72d3e5ef6bf94e7a9744a387e15b1d5a7b5f8e6f`.
+- Corrections: 122 target-only proved repairs—112 through Lesson 05 and ten in
+  Lesson 06. Authority bytes remain unchanged.
+- Lesson 06 authority: 77,034 bytes; SHA-256
+  abac3002d3f325814503b40a67277a5c9eca8ac6b60e4907bbce15eb0d6b5d06.
+  Deterministic normalization emits 176 segments, 149 units, 102 mathematics
+  nodes, no code, one same-origin PNG, no external dependency, 429 catalogue
+  records, and ten proved source defects; normalization-receipt SHA-256
+  0d433c72be68f19b85565111427f32f80d8f029cbf58c717de5e6e1d405963db.
+- Lesson 06 translation CSV: 49,074 bytes; SHA-256
+  9125d88e87401f0c77c9365e2bc9be3f54b575d06677dfab9624998b5cad6ebe.
+  Its 176 stable-ID bindings are 72,845 bytes; SHA-256
+  6f2c1561731f1cf051727a4463d227025216f911eae789227b0d87dd79ce8cc3.
+- Lesson 06 target HTML: 36,492 bytes; SHA-256
+  1567542aa5ab52169d7d744664460786f7ca1d7bc9166daa00142f19a8956b6a.
+- Cumulative offline reader: 52 files / 3,693,257 bytes; manifest SHA-256
+  c50dfab1b3d09a747efc44cad124a68659617d3561dc6dbc2bfe13b8d2abe128.
 - Deterministic build-receipt SHA-256:
-  `afe2b51786792ecfc88e556c9a5dd26e1ff45524f45799a64f1f694c77e322a0`.
+  9ccc325f8016472aa883053d2a157969a79fbd445f22b02801274eaf0015574f.
 - Deterministic QA-receipt SHA-256:
-  `462b7c15f3d506d5028ba2c2c4737dc2bba701bdb91acb0b967620f23c3b3f68`.
-  Write and check-only replays pass. All 340 Lesson 05 mappings, 108 protected
-  math surfaces, 31 correction records, fourteen image routes, seeded output,
-  manifest entries, links, rights, privacy, and static video fallbacks are
-  closed.
-- Desktop/mobile visual QA passes all eight reader routes at 1,280 x 720 and
-  390 x 844 CSS pixels with exact mathematics counts, zero broken images, zero
-  page or navigation overflow, and zero console errors or warnings. Visual-QA
-  receipt SHA-256:
-  `c595832f3a2efd8b83b3b0fb03051cf271e717a871023cceef0ef83d30a35245`.
-- The local release package is ready: nine files / 15,429,698 bytes. The
-  3,603,326-byte offline-reader ZIP has SHA-256
-  `89a4e458ee9aa30d2293cb95b9f0be3ecef947241ddd6dfca473ac568c6ceecf`;
-  the 11,806,424-byte resumable source/backend ZIP has SHA-256
-  `a43219092614e24db2a829b4e2cc4ed90ccf215313671ff99cc405735625aa1b`.
-  Package-receipt SHA-256:
-  `7db3e2a7699e2f5441ebd0db14189efb9fa5cb4649ae02eab6f8b6cc45664fe0`.
+  2374ebf621d9d6dcd4aaec80450541ea86bb276a38c758275d6d1d5534c6d330.
+  Write and check-only replays pass. All 176 Lesson 06 mappings, 102 protected
+  math surfaces, ten correction records, the figure route, rights, privacy,
+  topology, stable IDs, and deterministic manifest are closed.
+- Desktop/mobile visual QA passes all nine routes at 1,280 × 720 and
+  390 × 844 CSS pixels. All 1,648 mathematics nodes render, all substantive
+  images load, every figure is centered, page/main/navigation overflow is
+  zero, and browser warning/error logs are empty. Visual-QA receipt SHA-256:
+  fa71eae170b650e5b3bcf4346ceb10cf037fe6c0c40fdf0c8fe602850cb312a2.
+- The 122-row adverse ledger exactly matches the cumulative correction backend.
+  The eight-row translation ledger resolves every current target byte count and
+  SHA-256 without mismatch.
 - Rights remain component-separated: Penn State CC BY-NC 4.0 except where
   otherwise noted; MathJax Apache-2.0; original repository layer CC BY-SA 4.0.
-- The 7-of-14 boundary is public at content commit
-  `119a516cd5f933d18aa1b548608208e1be539f6d`, tree
-  `e6900190bd218f857cbb3e07946296c131e08ef1`, tag
-  `v2026.08.25.7of14`, and successful Pages workflow run `32856448005`.
-  Anonymous readback matched all 362 commit files / 32,109,463 bytes, all 50
-  Pages files / 3,588,430 bytes, and all nine GitHub release assets /
-  15,429,698 bytes. GitHub publication-receipt SHA-256:
-  `72906372bcead09ac3e6d8b6f3a82fcc5b55ee631bcafddb16686eef4ff444a5`;
-  release-receipt SHA-256:
-  `f9d6632e27a4ca66bfea436465cef458bfed3f1c7cdd96ea022a55b0c5947a1a`.
-- The same exact nine-file checkpoint is public in the existing Zenodo lineage
-  at version DOI `10.5281/zenodo.22097348`, concept DOI
-  `10.5281/zenodo.22077422`. Anonymous readback matched all 15,429,698 bytes;
-  publication-receipt SHA-256:
-  `1d61e2795dc2d559a9fb1786006a9beed7ad5ac4582d62a31b8a858ee3187f1c`;
-  public-readback SHA-256:
-  `4a5b0420f442910ddcbeed03bf686028fd7c9e655b5230881db2421e1e622f94`;
-  lineage-audit SHA-256:
-  `e0d2e7c41a822483521859f2755005f1eda8eadea991b37e4d4d06867c5791d7`.
+- The last anonymously verified public release remains the 7-of-14 boundary at
+  content commit 119a516cd5f933d18aa1b548608208e1be539f6d, tree
+  e6900190bd218f857cbb3e07946296c131e08ef1, tag
+  v2026.08.25.7of14, successful Pages run 32856448005, Zenodo version DOI
+  10.5281/zenodo.22097348, and concept DOI 10.5281/zenodo.22077422.
 - No upstream message has been sent.
 
 ## Next executable action
 
-Continue immediately with Lesson 06 in source order: normalize its exact
-authority and asset closure, translate all admitted segments into natural
-`id-ID`, preserve code and mathematics, apply only proved target-side
-corrections, and advance the cumulative reader without reopening Lessons
-00–05.
+Translate Lesson 07 in source order from its deterministic normalized segment
+ledger, while retaining its mandatory derivative correction: consistency alone
+does not imply convergence of expectations. Expectation convergence requires
+an additional condition such as uniform integrability. Preserve the source's
+explicit omission of full regularity hypotheses as an omission and close the
+rigorous asymptotic boundary later in the separately authored companion.
+
+After Lesson 07, continue contiguously through Lessons 08 and 09. Run bounded
+structural/math checks during translation and one cumulative reader,
+visual/backend, and public-preservation gate at the substantial multi-lesson
+boundary; do not reopen Lessons 00–06 or start a publication cycle for every
+individual source page.
 
 ## Recovery
 
-Read `00_control/WORKFLOW.md`, this file, `CURRENT_STATE.md`,
-`COMPONENT_BOUNDARY.md`,
-`CHECKPOINT_2026-08-25_THROUGH_LESSON05_PUBLICATION_COMPLETE.md`, the Lesson 05
-normalization, translation, build, QA, visual-QA, package and publication
-receipts, and the Lesson 05 math audit, terminology QA, source findings, and
-asset closure. Conversation summaries are not state. Do not broaden the
-filesystem or Git scope.
+Read 00_control/WORKFLOW.md, this file, CURRENT_STATE.md,
+COMPONENT_BOUNDARY.md,
+CHECKPOINT_2026-08-25_THROUGH_LESSON06_LOCAL_COMPLETE.md, the Lesson 06
+normalization, translation, build, QA, and visual-QA receipts, the Lesson 06
+math audit, terminology QA, source findings, asset closure, and the final rows
+of the adverse and translation ledgers. Conversation summaries are not state.
+Do not broaden the filesystem or Git scope.

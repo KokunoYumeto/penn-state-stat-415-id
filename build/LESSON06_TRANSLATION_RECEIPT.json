@@ -1,0 +1,118 @@
+{
+  "asset_inputs": [
+    {
+      "bytes": 3585,
+      "path": "working/lesson06_asset_closure.json",
+      "sha256": "70e68cf9321e1649bc1dab95fda46ecef4d0c809f5826b18e3cb092cfe9c2326"
+    },
+    {
+      "bytes": 9877,
+      "path": "build/LESSON06_NORMALIZATION_RECEIPT.json",
+      "sha256": "0d433c72be68f19b85565111427f32f80d8f029cbf58c717de5e6e1d405963db"
+    }
+  ],
+  "bindings": {
+    "bytes": 72845,
+    "path": "backend/lesson06_translation_bindings.jsonl",
+    "sha256": "6f2c1561731f1cf051727a4463d227025216f911eae789227b0d87dd79ce8cc3"
+  },
+  "boundary_whitespace_rule": "exact source-node leading/trailing whitespace wrapped around translated prose core",
+  "document": "Lesson06",
+  "document_id": "O006-PSU-007",
+  "identical_segments": [],
+  "independent_math_audit": {
+    "bytes": 10146,
+    "path": "working/lesson06_math_audit.md",
+    "sha256": "10671ce17d2e5ad8833453e21e94241cd8394ab59d604ca69b5c1d18da2bed9e"
+  },
+  "locale": "id-ID",
+  "merge_script": {
+    "bytes": 11857,
+    "path": "scripts/merge_lesson06_translations.py",
+    "sha256": "1ae7f5c6da792340caf7fe28d5e2cff269a4bc2c2460113e69505f76bd13e1ca"
+  },
+  "parts": [
+    {
+      "bytes": 5750,
+      "notes": {
+        "bytes": 1463,
+        "path": "working/lesson06_translation_part_a_notes.md",
+        "sha256": "2c526161bd61c3a47ce0d1739109d574ad1db5c360ae39b80ef287ab6a173be4"
+      },
+      "part": "a",
+      "path": "working/lesson06_translation_part_a.json",
+      "range": [
+        "O006-PSU-007-S0001",
+        "O006-PSU-007-S0060"
+      ],
+      "segments": 60,
+      "sha256": "5c0aacfb6a2fe0cddefde28e1737a20ae788e4c78b4ea2049b404a314b2c412d"
+    },
+    {
+      "bytes": 5747,
+      "notes": {
+        "bytes": 1040,
+        "path": "working/lesson06_translation_part_b_notes.md",
+        "sha256": "897e289ee080a294b2844e1f0670dc2c3a50e4f908030b02de446a9d33997329"
+      },
+      "part": "b",
+      "path": "working/lesson06_translation_part_b.json",
+      "range": [
+        "O006-PSU-007-S0061",
+        "O006-PSU-007-S0120"
+      ],
+      "segments": 60,
+      "sha256": "9887525308d34544d5ce1ce63394f5ca1842bbf8a916f0263955fbfa15fd052a"
+    },
+    {
+      "bytes": 6085,
+      "notes": {
+        "bytes": 1656,
+        "path": "working/lesson06_translation_part_c_notes.md",
+        "sha256": "1c4cdde3ccc7323e621c3022b9c9cb7ed07608bc6b6efa689964077d1745bbbe"
+      },
+      "part": "c",
+      "path": "working/lesson06_translation_part_c.json",
+      "range": [
+        "O006-PSU-007-S0121",
+        "O006-PSU-007-S0176"
+      ],
+      "segments": 56,
+      "sha256": "033059f4e18efacda703449352973928489f5e0db0c5fd8a1195af159e062184"
+    }
+  ],
+  "schema": "o006.stat415.lesson06-translation.v1",
+  "segment_count": 176,
+  "source_findings": {
+    "bytes": 6521,
+    "path": "working/lesson06_source_findings.md",
+    "sha256": "2fc73f3a274969ffe93a9a683dd744cfdc38435804d238099c21c55f6101c0c8"
+  },
+  "status": "complete",
+  "template": {
+    "bytes": 35700,
+    "path": "working/lesson06_segments.csv",
+    "sha256": "adf4e5dd2ef60567347b83e3565334e521330a1ed04782720a538a41a8e1f079"
+  },
+  "terminology_inputs": [
+    {
+      "bytes": 9305,
+      "path": "00_control/TERMINOLOGY_GLOSSARY_ID_ID.csv",
+      "rows": 94,
+      "scope": "exact cumulative glossary through the ten Lesson 06 decisions",
+      "sha256": "01e2a24359d82a32973c6bbd291dba661fac9d17a54111c37d8df64e12ccea3d"
+    },
+    {
+      "bytes": 7575,
+      "path": "working/lesson06_terminology_qa.md",
+      "sha256": "bbeb1e75394e4f0fd6c09dc7e0c2b2f7704856d866ff692d9737d35c070238d1"
+    }
+  ],
+  "terminology_rule": "cumulative component glossary through O006-TERM-0094",
+  "translation_csv": {
+    "bytes": 49074,
+    "path": "source/id-ID/lesson06_translation.csv",
+    "sha256": "9125d88e87401f0c77c9365e2bc9be3f54b575d06677dfab9624998b5cad6ebe"
+  },
+  "translation_provenance": "OpenAI Codex gpt-5.6-sol, Ultra"
+}

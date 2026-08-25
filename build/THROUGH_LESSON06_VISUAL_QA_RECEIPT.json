@@ -1,0 +1,69 @@
+{
+  "browser_surface": "Codex in-app browser",
+  "coverage": "landing/index plus complete Lesson00, Lesson01, Lesson02, Lesson03, Lesson04, Lesson05, and Lesson06",
+  "date": "2026-08-25",
+  "desktop": {
+    "console_errors_or_warnings": 0,
+    "page_client_width_css_px": 1265,
+    "routes": {
+      "Lesson00": {"broken_images": 0, "navigation_horizontal_overflow": false, "page_horizontal_overflow": false, "rendered_math_containers": 331, "source_math_nodes": 331},
+      "Lesson01": {"broken_images": 0, "centered_figures": 4, "loaded_images": 5, "navigation_horizontal_overflow": false, "page_horizontal_overflow": false, "rendered_math_containers": 169, "source_math_nodes": 169},
+      "Lesson02": {"broken_images": 0, "centered_figures": 3, "loaded_images": 2, "navigation_horizontal_overflow": false, "page_horizontal_overflow": false, "rendered_math_containers": 209, "source_math_nodes": 209},
+      "Lesson03": {"broken_images": 0, "navigation_horizontal_overflow": false, "page_horizontal_overflow": false, "rendered_math_containers": 440, "source_math_nodes": 440},
+      "Lesson04": {"broken_images": 0, "centered_figures": 1, "loaded_images": 1, "navigation_horizontal_overflow": false, "page_horizontal_overflow": false, "rendered_math_containers": 289, "source_math_nodes": 289},
+      "Lesson05": {"broken_images": 0, "centered_figures": 14, "loaded_images": 14, "navigation_horizontal_overflow": false, "page_horizontal_overflow": false, "rendered_math_containers": 108, "source_math_nodes": 108},
+      "Lesson06": {"broken_images": 0, "centered_figures": 1, "figure_center_delta_css_px": 0, "loaded_images": 1, "navigation_horizontal_overflow": false, "page_horizontal_overflow": false, "rendered_math_containers": 102, "source_math_nodes": 102},
+      "index": {"broken_images": 0, "course_card_images": 13, "loaded_images_after_bounded_lazy_scroll": 13, "navigation_horizontal_overflow": false, "page_horizontal_overflow": false, "rendered_math_containers": 0, "source_math_nodes": 0},
+      "licenses": {"broken_images": 0, "navigation_horizontal_overflow": false, "page_horizontal_overflow": false, "rendered_math_containers": 0, "source_math_nodes": 0}
+    },
+    "viewport_css_px": {"height": 720, "width": 1280}
+  },
+  "evidence": {
+    "build_receipt": {"bytes": 7590, "sha256": "9ccc325f8016472aa883053d2a157969a79fbd445f22b02801274eaf0015574f"},
+    "lesson06_figure": {"bytes": 67496, "path": "assets/lesson06/ci_1.png", "sha256": "2f50c34c6a91381f3700c728b7a85797d39e2eceae4a2cbd9542003b79adab8f"},
+    "lesson06_translation_receipt": {"bytes": 3896, "sha256": "ee3564906ff873a78786f890d916a0245f83d64bf6cf86821edbc251cbd61a40"},
+    "manifest": {"bytes": 5289, "sha256": "c50dfab1b3d09a747efc44cad124a68659617d3561dc6dbc2bfe13b8d2abe128"},
+    "qa_receipt": {"bytes": 5468, "sha256": "2374ebf621d9d6dcd4aaec80450541ea86bb276a38c758275d6d1d5534c6d330"},
+    "reader_css": {"bytes": 7760, "path": "assets/reader-8of14.css", "sha256": "a80552e645d5dfecb2cc79787213cd5a928c8f7a477c30b475c21a4db90c5f7a"},
+    "target_lesson06": {"bytes": 36492, "sha256": "1567542aa5ab52169d7d744664460786f7ca1d7bc9166daa00142f19a8956b6a"}
+  },
+  "locale": "id-ID",
+  "mobile": {
+    "console_errors_or_warnings": 0,
+    "page_client_width_css_px": 375,
+    "routes": {
+      "Lesson00": {"broken_images": 0, "navigation_horizontal_overflow": false, "page_horizontal_overflow": false, "rendered_math_containers": 331, "source_math_nodes": 331},
+      "Lesson01": {"broken_images": 0, "centered_figures": 4, "loaded_images": 5, "maximum_figure_center_delta_css_px": 0, "navigation_horizontal_overflow": false, "page_horizontal_overflow": false, "rendered_math_containers": 169, "source_math_nodes": 169},
+      "Lesson02": {"broken_images": 0, "centered_figures": 3, "loaded_images": 2, "maximum_figure_center_delta_css_px": 0, "navigation_horizontal_overflow": false, "page_horizontal_overflow": false, "rendered_math_containers": 209, "source_math_nodes": 209},
+      "Lesson03": {"broken_images": 0, "navigation_horizontal_overflow": false, "page_horizontal_overflow": false, "rendered_math_containers": 440, "source_math_nodes": 440},
+      "Lesson04": {"broken_images": 0, "centered_figures": 1, "loaded_images": 1, "maximum_figure_center_delta_css_px": 0, "navigation_horizontal_overflow": false, "page_horizontal_overflow": false, "rendered_math_containers": 289, "source_math_nodes": 289},
+      "Lesson05": {"broken_images": 0, "centered_figures": 14, "loaded_images": 14, "maximum_figure_center_delta_css_px": 0, "navigation_horizontal_overflow": false, "page_horizontal_overflow": false, "rendered_math_containers": 108, "source_math_nodes": 108},
+      "Lesson06": {"broken_images": 0, "figure_center_delta_css_px": 0, "figure_width_css_px": 343.11, "image_width_css_px": 343.11, "loaded_images": 1, "navigation_horizontal_overflow": false, "page_horizontal_overflow": false, "rendered_math_containers": 102, "source_math_nodes": 102},
+      "index": {"broken_images": 0, "course_card_images": 13, "loaded_images_after_bounded_lazy_scroll": 13, "navigation_horizontal_overflow": false, "page_horizontal_overflow": false, "rendered_math_containers": 0, "source_math_nodes": 0},
+      "licenses": {"broken_images": 0, "navigation_horizontal_overflow": false, "page_horizontal_overflow": false, "rendered_math_containers": 0, "source_math_nodes": 0}
+    },
+    "viewport_css_px": {"height": 844, "width": 390}
+  },
+  "observations": [
+    "All nine reader routes fill the available centered content width and have zero page-level, main-content, or navigation horizontal overflow at both tested viewports.",
+    "All 1,648 protected source mathematics nodes render as 1,648 MathJax containers across Lessons 00–06 at desktop and mobile widths.",
+    "All substantive images load. The thirteen lazily loaded course cards were completed by bounded scrolling at both widths, and the Lesson 06 figure loaded at its natural 1,334-pixel source width.",
+    "The Lesson 06 figure is exactly centered at both widths. At 390 by 844 CSS pixels it occupies the complete 343.11-pixel figure width; the former 70-percent inline restriction is absent.",
+    "The figure alternative text, lowercase-z critical-value correction note, lower-tail chi-square quantile convention, large-sample qualification, corrected standard error, and exact iid-Normal t interval were visually inspected in rendered context.",
+    "Fresh warning/error console logs were empty after the route passes. No audio surface is present or required."
+  ],
+  "provenance": "OpenAI Codex gpt-5.6-sol, Ultra",
+  "routes": [
+    "http://127.0.0.1:39415/index.html",
+    "http://127.0.0.1:39415/Lesson00.html",
+    "http://127.0.0.1:39415/Lesson01.html",
+    "http://127.0.0.1:39415/Lesson02.html",
+    "http://127.0.0.1:39415/Lesson03.html",
+    "http://127.0.0.1:39415/Lesson04.html",
+    "http://127.0.0.1:39415/Lesson05.html",
+    "http://127.0.0.1:39415/Lesson06.html",
+    "http://127.0.0.1:39415/licenses/"
+  ],
+  "schema": "o006.stat415.through-lesson06-visual-qa.v1",
+  "status": "pass"
+}

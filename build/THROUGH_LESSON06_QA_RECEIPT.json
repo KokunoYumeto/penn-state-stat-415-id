@@ -1,0 +1,175 @@
+{
+  "asset_layout_rights_privacy": {
+    "external_dependencies": 0,
+    "full_alt_text": "Kurva normal baku: luas tengah 1−α berada di antara nilai kritis tetap −z_(α/2) dan +z_(α/2); masing-masing ekor kiri dan kanan memiliki luas α/2.",
+    "full_width_centered": true,
+    "images": 1,
+    "reader_png_bytes": 67496,
+    "reader_png_files": 1,
+    "reader_png_sha256": "2f50c34c6a91381f3700c728b7a85797d39e2eceae4a2cbd9542003b79adab8f",
+    "responsive_css": {
+      "bytes": 7760,
+      "path": "build/html-id/assets/reader-8of14.css",
+      "sha256": "a80552e645d5dfecb2cc79787213cd5a928c8f7a477c30b475c21a4db90c5f7a"
+    },
+    "rights": "CC BY-NC 4.0 except where otherwise noted",
+    "source_closure": {
+      "bytes": 3585,
+      "path": "working/lesson06_asset_closure.json",
+      "sha256": "70e68cf9321e1649bc1dab95fda46ecef4d0c809f5826b18e3cb092cfe9c2326"
+    }
+  },
+  "build_contract": {
+    "corrections": 122,
+    "math_nodes": 1648,
+    "reader_files": 52,
+    "segments": 2487,
+    "source_units": 3358,
+    "target_units": 3356
+  },
+  "build_receipt": {
+    "bytes": 7590,
+    "path": "build/THROUGH_LESSON06_BUILD_RECEIPT.json",
+    "sha256": "9ccc325f8016472aa883053d2a157969a79fbd445f22b02801274eaf0015574f"
+  },
+  "checks": [
+    "exact-176-segment-source-target-binding-replay",
+    "natural-id-ID-and-glossary-continuity",
+    "exact-149-unit-102-math-Lesson06-topology",
+    "only-registered-Lesson06-math-surfaces-change",
+    "exact-122-correction-registry-with-L06-D001-through-L06-D010",
+    "complete-proof-two-examples-one-solution",
+    "no-code-and-no-external-dependency",
+    "full-figure-alt-and-lowercase-z-critical-value-note",
+    "lower-tail-chi-square-quantile-convention-explicit",
+    "corrected-estimated-standard-error-equals-2",
+    "large-sample-studentized-convergence-qualified",
+    "exact-iid-Normal-t-interval-with-df-n-minus-1",
+    "exact-one-PNG-route-byte-alt-lightbox-and-rights-closure",
+    "full-width-centered-figure-and-responsive-reflow-CSS",
+    "offline-link-asset-rights-privacy-and-provenance-closure",
+    "deterministic-52-file-reader-and-manifest-replay",
+    "prior-Lesson05-boundary-preserved"
+  ],
+  "coverage": {
+    "complete_documents": 8,
+    "corpus_documents": 14,
+    "next_document": "Lesson07"
+  },
+  "documents": {
+    "backend": {
+      "bytes": 5383,
+      "path": "backend/through_lesson06_documents.jsonl",
+      "sha256": "3f38ee64b2762468a18772feef1ed1dbc398297958c9a438d0fcebb5834cb4fe"
+    },
+    "documents": 8
+  },
+  "prior_boundary": {
+    "preserved_non_html_files": 41,
+    "preserved_semantic_mains": [
+      "Lesson00.html",
+      "Lesson01.html",
+      "Lesson02.html",
+      "Lesson03.html",
+      "Lesson04.html",
+      "Lesson05.html"
+    ],
+    "prior_corrections": 112,
+    "prior_documents": 7,
+    "prior_math_nodes": 1546,
+    "prior_source_units": 3209,
+    "prior_target_units": 3207,
+    "prior_translation_segments": 2311
+  },
+  "reader": {
+    "bytes": 3693257,
+    "files": 52,
+    "manifest": {
+      "bytes": 5289,
+      "path": "build/THROUGH_LESSON06_MANIFEST.csv",
+      "sha256": "c50dfab1b3d09a747efc44cad124a68659617d3561dc6dbc2bfe13b8d2abe128"
+    },
+    "math_nodes": 1648,
+    "stable_units": 3356
+  },
+  "schema": "o006.stat415.through-lesson06-qa.v1",
+  "status": "passed",
+  "structure_math_and_corrections": {
+    "changed_math_ids": [
+      "O006-PSU-007-M0042",
+      "O006-PSU-007-M0073",
+      "O006-PSU-007-M0074",
+      "O006-PSU-007-M0075",
+      "O006-PSU-007-M0077",
+      "O006-PSU-007-M0086",
+      "O006-PSU-007-M0087",
+      "O006-PSU-007-M0098",
+      "O006-PSU-007-M0102"
+    ],
+    "changed_math_nodes": 9,
+    "code_nodes": 0,
+    "correction_backend": {
+      "bytes": 166973,
+      "path": "backend/through_lesson06_corrections.jsonl",
+      "sha256": "c600e7306b4c8d7c9c5667a07421e21c6d244ef72eaba04b619f66bdec73d4db"
+    },
+    "corrections": 122,
+    "examples": 2,
+    "external_dependencies": 0,
+    "historical_prefix": 112,
+    "lesson06_corrections": 10,
+    "math_nodes": 102,
+    "proofs": 1,
+    "solutions": 1,
+    "source_units": 149,
+    "surface_kinds": [
+      "adjacent-correction-note",
+      "attribute",
+      "math",
+      "semantic-role",
+      "translation-segment"
+    ],
+    "target_units": 149
+  },
+  "translation": {
+    "bindings": 176,
+    "bindings_file": {
+      "bytes": 72845,
+      "path": "backend/lesson06_translation_bindings.jsonl",
+      "sha256": "6f2c1561731f1cf051727a4463d227025216f911eae789227b0d87dd79ce8cc3"
+    },
+    "forbidden_surfaces_absent": [
+      "interval kepercayaan",
+      "interval konfidensi",
+      "kuantitas pivotal",
+      "standard error",
+      "confidence interval"
+    ],
+    "identical_segments": [],
+    "required_terms": [
+      "selang kepercayaan",
+      "koefisien kepercayaan",
+      "tingkat kepercayaan",
+      "pendugaan selang",
+      "besaran pivot",
+      "nilai kritis",
+      "fungsi pembangkit momen",
+      "selang-z",
+      "galat baku",
+      "distribusi khi-kuadrat",
+      "derajat kebebasan",
+      "peluang ekor bawah",
+      "konvergen dalam distribusi",
+      "studentisasi",
+      "ketakbiasan eksak tidak diperlukan",
+      "saling bebas dan berdistribusi identik (iid)",
+      "df = n − 1"
+    ],
+    "segments": 176,
+    "translation": {
+      "bytes": 49074,
+      "path": "source/id-ID/lesson06_translation.csv",
+      "sha256": "9125d88e87401f0c77c9365e2bc9be3f54b575d06677dfab9624998b5cad6ebe"
+    }
+  }
+}

@@ -1,0 +1,202 @@
+<!doctype html>
+<html lang="id-ID">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>6 Selang Kepercayaan</title>
+<meta name="source-url" content="https://online.stat.psu.edu/stat415/Lesson06">
+<meta name="translation-provenance" content="OpenAI Codex gpt-5.6-sol, Ultra">
+<meta name="edition-status" content="partial: 8 of 14 documents complete; landing and Lessons 00–06">
+<link rel="license" href="https://creativecommons.org/licenses/by-nc/4.0/">
+<link rel="stylesheet" href="assets/reader-8of14.css">
+<script defer src="assets/MathJax/tex-svg.js"></script>
+</head>
+<body>
+<a class="skip-link" href="#quarto-document-content">Lewati ke isi utama</a>
+<header class="site-header"><div class="site-header__inner"><div><p class="site-title">STAT 415 — Pengantar Statistika Matematis</p><p class="site-subtitle">Rekonstruksi dan terjemahan Bahasa Indonesia · O006/C140</p></div><nav class="site-nav" aria-label="Navigasi utama"><a href="index.html">Daftar pelajaran</a><a href="Lesson00.html">Pelajaran 00</a><a href="Lesson01.html">Pelajaran 01</a><a href="Lesson02.html">Pelajaran 02</a><a href="Lesson03.html">Pelajaran 03</a><a href="Lesson04.html">Pelajaran 04</a><a href="Lesson05.html">Pelajaran 05</a><a href="Lesson06.html">Pelajaran 06</a><a href="licenses/index.html">Lisensi</a></nav></div></header>
+<div class="page-shell"><aside class="edition-note" aria-label="Status edisi"><strong>Edisi Bahasa Indonesia — 8 dari 14 dokumen.</strong> Laman utama serta Pelajaran 00–06 telah diterjemahkan sepenuhnya. Pelajaran 07–12 masih menuju sumber resmi berbahasa Inggris sampai unit berikutnya selesai. <a href="https://online.stat.psu.edu/stat415/Lesson06">Sumber resmi halaman ini</a>. <a href="licenses/index.html">Atribusi, perubahan, dan lisensi</a>.</aside><main class="content" data-component-id="Lesson06" data-document-id="O006-PSU-007" data-source-url="https://online.stat.psu.edu/stat415/Lesson06" id="quarto-document-content">
+<header class="quarto-title-block default" data-o006-id="O006-PSU-007-U0001" id="title-block-header"><nav aria-label="Jejak navigasi" class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" data-o006-id="O006-PSU-007-U0002"><ol class="breadcrumb" data-o006-id="O006-PSU-007-U0003"><li class="breadcrumb-item" data-o006-id="O006-PSU-007-U0004"><a data-o006-id="O006-PSU-007-U0005" href="index.html#lessons">Pelajaran</a></li><li class="breadcrumb-item" data-o006-id="O006-PSU-007-U0006"><a data-o006-id="O006-PSU-007-U0007" href="Lesson06.html"><span class="chapter-number">6</span>  <span class="chapter-title">Selang Kepercayaan</span></a></li></ol></nav>
+<div class="quarto-title" data-o006-id="O006-PSU-007-U0008">
+<h1 class="title" data-o006-id="O006-PSU-007-U0009"><span class="chapter-number">6</span>  <span class="chapter-title">Selang Kepercayaan</span></h1>
+<div class="quarto-categories" data-o006-id="O006-PSU-007-U0010">
+<div class="quarto-category" data-o006-id="O006-PSU-007-U0011">Selang Kepercayaan</div>
+</div>
+</div>
+<div class="quarto-title-meta" data-o006-id="O006-PSU-007-U0012">
+</div>
+</header>
+<section class="level2 unnumbered unlisted" data-o006-id="O006-PSU-007-U0013" id="overview">
+<h2 class="unnumbered unlisted anchored" data-anchor-id="overview" data-o006-id="O006-PSU-007-U0014">Gambaran Umum</h2>
+<p data-o006-id="O006-PSU-007-U0015">Dalam pelajaran ini, kita akan sejenak meninggalkan pembahasan penduga kemungkinan maksimum (MLE). Jangan khawatir! Kita akan kembali ke pendugaan kemungkinan maksimum.</p>
+<p data-o006-id="O006-PSU-007-U0016">Dalam pelajaran ini, kita akan mempelajari cara menyusun dan menghitung selang kepercayaan bagi parameter populasi. Seperti akan segera kita lihat, selang kepercayaan adalah selang (atau rentang) nilai yang diperoleh melalui prosedur dengan peluang cakupan tertentu bagi parameter populasi sejati yang tidak diketahui. Kita akan meluangkan waktu untuk memahami makna “kepercayaan” pada selang tersebut, sekaligus mempelajari faktor-faktor yang memengaruhi panjang selang.</p>
+<section class="level3 unnumbered unlisted objectiveblock" data-o006-id="O006-PSU-007-U0017" id="objectives">
+<h3 class="unnumbered unlisted anchored" data-anchor-id="objectives" data-o006-id="O006-PSU-007-U0018"><i class="bi bi-check2-circle"></i>Tujuan</h3>
+<p data-o006-id="O006-PSU-007-U0019">Setelah menyelesaikan pelajaran ini, Anda diharapkan mampu:</p>
+<ol data-o006-id="O006-PSU-007-U0020" type="1">
+<li data-o006-id="O006-PSU-007-U0021">Menafsirkan dengan benar selang kepercayaan yang diberikan dalam kaitannya dengan populasi,</li>
+<li data-o006-id="O006-PSU-007-U0022">Menyusun secara analitis selang kepercayaan bagi parameter yang tidak diketahui, dan</li>
+<li data-o006-id="O006-PSU-007-U0023">Menghitung secara numerik selang kepercayaan bagi parameter yang tidak diketahui berdasarkan sekumpulan data.</li>
+</ol>
+</section>
+</section>
+<section class="level2" data-number="6.1" data-o006-id="O006-PSU-007-U0024" id="introduction-to-confidence-intervals">
+<h2 class="anchored" data-anchor-id="introduction-to-confidence-intervals" data-number="6.1" data-o006-id="O006-PSU-007-U0025"><span class="header-section-number">6.1</span> Pengantar Selang Kepercayaan</h2>
+<p data-o006-id="O006-PSU-007-U0026">Sejauh ini, ketika membahas pendugaan, kita berfokus pada penentuan penduga titik; realisasinya setelah data diamati disebut <strong>nilai dugaan titik</strong>, dan keduanya berkaitan dengan suatu parameter. Pada bagian ini, kita akan memperkenalkan <strong>pendugaan selang</strong>.</p>
+<ol data-o006-id="O006-PSU-007-U0027" type="1">
+<li data-o006-id="O006-PSU-007-U0028"><p data-o006-id="O006-PSU-007-U0029">Ketika kita menggunakan rataan sampel <span class="math inline" data-o006-math-id="O006-PSU-007-M0001">\(\bar{x}\)</span> untuk menduga rataan populasi <span class="math inline" data-o006-math-id="O006-PSU-007-M0002">\(\mu\)</span>, dapatkah kita yakin bahwa <span class="math inline" data-o006-math-id="O006-PSU-007-M0003">\(\bar{x}\)</span> dekat dengan <span class="math inline" data-o006-math-id="O006-PSU-007-M0004">\(\mu\)</span>? Dan ketika kita menggunakan proporsi sampel <span class="math inline" data-o006-math-id="O006-PSU-007-M0005">\(\hat{p}\)</span> untuk menduga proporsi populasi <span class="math inline" data-o006-math-id="O006-PSU-007-M0006">\(p\)</span>, dapatkah kita yakin bahwa <span class="math inline" data-o006-math-id="O006-PSU-007-M0007">\(\hat{p}\)</span> dekat dengan <span class="math inline" data-o006-math-id="O006-PSU-007-M0008">\(p\)</span>?</p></li>
+<li data-o006-id="O006-PSU-007-U0030"><p data-o006-id="O006-PSU-007-U0031">Apakah kita mengetahui seberapa dekat statistik sampel itu dengan parameter populasi?</p></li>
+</ol>
+<p data-o006-id="O006-PSU-007-U0032">Alih-alih hanya menggunakan nilai dugaan titik, kita dapat memakai prosedur yang, sebelum data diamati, menghasilkan selang acak dengan peluang cakupan tinggi bagi parameter populasi sejati yang tidak diketahui. Setelah data diamati, selang yang diperoleh tetap dan entah mencakup parameter tersebut atau tidak. Sebagai contoh, kita dapat menentukan batas bawah acak ( <span class="math inline" data-o006-math-id="O006-PSU-007-M0009">\(L\)</span> ) dan batas atas acak ( <span class="math inline" data-o006-math-id="O006-PSU-007-M0010">\(U\)</span> ) sehingga kejadian bahwa parameter populasi, <span class="math inline" data-o006-math-id="O006-PSU-007-M0011">\(\theta\)</span>, terletak di antara keduanya memiliki peluang yang tinggi:</p>
+<p data-o006-id="O006-PSU-007-U0033"><span class="math display" data-o006-math-id="O006-PSU-007-M0012">\[L&lt; \theta&lt;U\]</span></p>
+<p data-o006-id="O006-PSU-007-U0034">Selang dari nilai-nilai tersebut disebut <strong>selang kepercayaan</strong>. Setiap selang memiliki <strong>koefisien kepercayaan</strong> (yang dinyatakan sebagai proporsi):</p>
+<p data-o006-id="O006-PSU-007-U0035"><span class="math display" data-o006-math-id="O006-PSU-007-M0013">\[1-\alpha\]</span></p>
+<p data-o006-id="O006-PSU-007-U0036">atau <strong>tingkat kepercayaan</strong> (yang dinyatakan sebagai persentase):</p>
+<p data-o006-id="O006-PSU-007-U0037"><span class="math display" data-o006-math-id="O006-PSU-007-M0014">\[(1-\alpha)100\%\]</span></p>
+<p data-o006-id="O006-PSU-007-U0038">Koefisien kepercayaan yang lazim adalah 0.90, 0.95, dan 0.99, dengan tingkat kepercayaan masing-masing 90%, 95%, dan 99%. Sebagai contoh, setelah menghitung selang kepercayaan bagi parameter <span class="math inline" data-o006-math-id="O006-PSU-007-M0015">\(\theta\)</span> dengan tingkat kepercayaan, misalnya, 95%, kita dapat mengatakan:</p>
+<p data-o006-id="O006-PSU-007-U0039" style="text-align: center;">
+<em>“Prosedur ini memiliki peluang cakupan 95% dalam pengambilan sampel berulang; untuk sampel ini, batas selang yang diperoleh adalah <span class="math inline" data-o006-math-id="O006-PSU-007-M0016">\(L\)</span> dan <span class="math inline" data-o006-math-id="O006-PSU-007-M0017">\(U.\)</span>”</em>
+</p>
+<p data-o006-id="O006-PSU-007-U0040">Sesuai dengan intuisi, makin tinggi tingkat kepercayaan, makin besar pula peluang cakupan prosedur selang kepercayaan bagi parameter populasi yang sebenarnya.</p>
+</section>
+<section class="level2" data-number="6.2" data-o006-id="O006-PSU-007-U0041" id="population-mean-of-a-normal-distribution">
+<h2 class="anchored" data-anchor-id="population-mean-of-a-normal-distribution" data-number="6.2" data-o006-id="O006-PSU-007-U0042"><span class="header-section-number">6.2</span> Rataan Populasi dari Distribusi Normal</h2>
+<p data-o006-id="O006-PSU-007-U0043">Mari kita tunjukkan cara melakukan pendugaan selang (atau menyusun selang kepercayaan) bagi rataan populasi dari distribusi Normal dengan varians yang <strong><em>diketahui</em></strong> , yaitu <span class="math inline" data-o006-math-id="O006-PSU-007-M0018">\(\sigma^2.\)</span></p>
+<p data-o006-id="O006-PSU-007-U0044">Sebelum itu, kita perlu mendefinisikan notasi yang digunakan. Ingat bahwa <span class="math inline" data-o006-math-id="O006-PSU-007-M0019">\(z_{\alpha/2}\)</span> adalah nilai kritis dari peubah acak <span class="math inline" data-o006-math-id="O006-PSU-007-M0020">\(Z\)</span> ; nilai tersebut diperoleh dari tabel normal baku dan dipilih sedemikian rupa sehingga luas daerah di sebelah kanannya di bawah kurva normal baku adalah <span class="math inline" data-o006-math-id="O006-PSU-007-M0021">\(\frac{\alpha}{2}.\)</span> Artinya:</p>
+<p data-o006-id="O006-PSU-007-U0045"><span class="math display" data-o006-math-id="O006-PSU-007-M0022">\[P(Z\ge z_{\alpha/2})=\alpha/2\]</span></p>
+<p data-o006-id="O006-PSU-007-U0046">Demikian pula:</p>
+<p data-o006-id="O006-PSU-007-U0047"><span class="math display" data-o006-math-id="O006-PSU-007-M0023">\[-z_{\alpha/2}\]</span></p>
+<p data-o006-id="O006-PSU-007-U0048">adalah nilai kritis dari peubah acak <span class="math inline" data-o006-math-id="O006-PSU-007-M0024">\(Z\)</span>; nilai tersebut diperoleh dari tabel normal baku dan dipilih sedemikian rupa sehingga luas daerah di sebelah kirinya di bawah kurva normal baku adalah <span class="math inline" data-o006-math-id="O006-PSU-007-M0025">\(\frac{\alpha}{2}.\)</span> Artinya:</p>
+<p data-o006-id="O006-PSU-007-U0049"><span class="math display" data-o006-math-id="O006-PSU-007-M0026">\[P(Z\le -z_{\alpha/2})=\alpha/2\]</span></p>
+<p data-o006-id="O006-PSU-007-U0050">Notasi ini dapat digambarkan dengan diagram kurva normal baku berikut:</p>
+<div alt="Kurva normal baku: luas tengah 1−α berada di antara nilai kritis tetap −z_(α/2) dan +z_(α/2); masing-masing ekor kiri dan kanan memiliki luas α/2." class="lightbox quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center" data-o006-id="O006-PSU-007-U0051" id="fig-standardnormal">
+<figure class="quarto-float quarto-float-fig figure" data-o006-id="O006-PSU-007-U0052">
+<div aria-describedby="fig-standardnormal-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca" data-o006-id="O006-PSU-007-U0053">
+<a class="lightbox" data-gallery="quarto-lightbox-gallery-1" data-o006-id="O006-PSU-007-U0054" href="assets/lesson06/ci_1.png" title="Fig 6.1: "><img alt="Kurva normal baku: luas tengah 1−α berada di antara nilai kritis tetap −z_(α/2) dan +z_(α/2); masing-masing ekor kiri dan kanan memiliki luas α/2." class="img-fluid quarto-figure quarto-figure-center figure-img" data-o006-asset-id="O006-PSU-007-A0001" data-o006-id="O006-PSU-007-U0055" src="assets/lesson06/ci_1.png"/></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" data-o006-id="O006-PSU-007-U0056" id="fig-standardnormal-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Gambar 6.1. Kurva normal baku menunjukkan daerah tengah dengan luas 1 − α, dua ekor yang masing-masing memiliki luas α/2, serta nilai kritis −z_(α/2) dan z_(α/2) sebagai batasnya.
+</figcaption>
+</figure>
+</div><p class="target-only-correction figure-critical-value-note" data-o006-correction-id="O006-PSU-ADV-0115" role="note">Catatan koreksi Gambar 6.1: kedua titik batas adalah nilai kritis tetap −z_(α/2) dan +z_(α/2) (z huruf kecil), bukan peubah acak Z; masing-masing ekor mempunyai peluang α/2.</p>
+<p data-o006-id="O006-PSU-007-U0057">Setelah notasinya jelas, mari kita nyatakan rumus selang kepercayaan bagi rataan populasi.</p>
+<div class="callout callout-style-simple callout-note no-icon" data-o006-id="O006-PSU-007-U0058">
+<div class="callout-body d-flex" data-o006-id="O006-PSU-007-U0059">
+<div class="callout-icon-container" data-o006-id="O006-PSU-007-U0060">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-body-container" data-o006-id="O006-PSU-007-U0061">
+<div class="ms-3 theorem" data-o006-id="O006-PSU-007-U0062" id="thm-CI">
+<p data-o006-id="O006-PSU-007-U0063"><span class="theorem-title"><strong>Teorema 6.1 (Selang-Z untuk Rataan)</strong></span> <span class="math inline" data-o006-math-id="O006-PSU-007-M0027">\(X_1, X_2, \ldots, X_n\)</span> merupakan sampel acak dari distribusi normal dengan rataan yang tidak diketahui <span class="math inline" data-o006-math-id="O006-PSU-007-M0028">\(\mu\)</span> dan varians <strong><em>yang diketahui</em></strong> , yaitu <span class="math inline" data-o006-math-id="O006-PSU-007-M0029">\(\sigma^2.\)</span> Maka, selang kepercayaan dengan tingkat <span class="math inline" data-o006-math-id="O006-PSU-007-M0030">\((1-\alpha)100\%\)</span> untuk rataan populasi <span class="math inline" data-o006-math-id="O006-PSU-007-M0031">\(\mu\)</span> adalah:</p>
+<p data-o006-id="O006-PSU-007-U0064"><span class="math display" data-o006-math-id="O006-PSU-007-M0032">\[\bar{x}\pm z_{\alpha/2}\frac{\sigma}{\sqrt{n}}\]</span></p>
+<p data-o006-id="O006-PSU-007-U0065">Karena selang ini bergantung pada <span class="math inline" data-o006-math-id="O006-PSU-007-M0033">\(Z\)</span>, selang tersebut sering disebut selang- <span class="math inline" data-o006-math-id="O006-PSU-007-M0034">\(Z\)</span><strong>untuk rataan.</strong>.</p>
+<p data-o006-id="O006-PSU-007-U0066">Karena pada tahap ini kita hanya ingin mempelajari dasar-dasar penurunan selang kepercayaan, untuk sementara kita akan mengabaikan kenyataan bahwa asumsi kedua, yaitu varians populasi diketahui, tidak realistis. Lagi pula, kapan kita pernah mengetahui nilai varians populasi <span class="math inline" data-o006-math-id="O006-PSU-007-M0035">\(\sigma^2\)</span>, tetapi tidak mengetahui rataan populasi <span class="math inline" data-o006-math-id="O006-PSU-007-M0036">\(\mu\)</span>? Aneh juga! Nanti kita akan mencari selang kepercayaan yang praktis untuk rataan <span class="math inline" data-o006-math-id="O006-PSU-007-M0037">\(\mu\)</span> di bagian selanjutnya. Untuk sekarang, mari kita turunkan selang yang satu ini.</p>
+<section class="level4 proof" data-o006-correction-id="O006-PSU-ADV-0122" data-o006-id="O006-PSU-007-U0067" data-o006-semantic-role="proof" id="proof">
+<h4 class="anchored" data-anchor-id="proof" data-o006-id="O006-PSU-007-U0068">Bukti:</h4>
+<p data-o006-id="O006-PSU-007-U0069">Dari diagram kurva normal baku di atas, kita dapat melihat bahwa pernyataan peluang berikut benar:</p>
+<p data-o006-id="O006-PSU-007-U0070"><span class="math display" data-o006-math-id="O006-PSU-007-M0038">\[P\left[-z_{\alpha/2}\le Z\le z_{\alpha/2}\right]=1-\alpha\]</span></p>
+<p data-o006-id="O006-PSU-007-U0071">Kemudian, cukup dengan mengganti <span class="math inline" data-o006-math-id="O006-PSU-007-M0039">\(Z\)</span>, kita memperoleh:</p>
+<p data-o006-id="O006-PSU-007-U0072"><span class="math display" data-o006-math-id="O006-PSU-007-M0040">\[P\left[-z_{\alpha/2}\le \frac{\bar{X}-\mu}{\frac{\sigma}{\sqrt{n}}}\le z_{\alpha/2}\right]=1-\alpha\]</span></p>
+<p data-o006-id="O006-PSU-007-U0073">Sekarang, untuk sementara mari kita berfokus hanya pada manipulasi pertidaksamaan di dalam tanda kurung siku. Karena kita melakukan operasi yang sama pada ketiga ruas pertidaksamaan, setiap pernyataan berikut ekuivalen:</p>
+<p data-o006-id="O006-PSU-007-U0074"><span class="math display" data-o006-math-id="O006-PSU-007-M0041">\[\begin{align*}
+&amp;-z_{\alpha/2}\le \frac{\bar{X}-\mu}{\frac{\sigma}{\sqrt{n}}}\le z_{\alpha/2}\\
+&amp;-z_{\alpha/2}\left(\frac{\sigma}{\sqrt{n}}\right)\le \bar{X}-\mu\le z_{\alpha/2}\left(\frac{\sigma}{\sqrt{n}}\right)\\
+&amp;-\bar{X}-z_{\alpha/2}\left(\frac{\sigma}{\sqrt{n}}\right)\le -\mu\le -\bar{X}+z_{\alpha/2}\left(\frac{\sigma}{\sqrt{n}}\right)\\
+&amp; \bar{X}-z_{\alpha/2}\left(\frac{\sigma}{\sqrt{n}}\right)\le \mu\le \bar{X}+z_{\alpha/2}\left(\frac{\sigma}{\sqrt{n}}\right)
+\end{align*}\]</span></p>
+<p data-o006-id="O006-PSU-007-U0075">Jadi, sebagai ringkasan, dengan memanipulasi pertidaksamaan kita telah menunjukkan bahwa pernyataan peluang berikut benar:</p>
+<p data-o006-id="O006-PSU-007-U0076"><span class="math display" data-o006-math-id="O006-PSU-007-M0042">\[P\left[\bar{X}-z_{\alpha/2}\left(\frac{\sigma}{\sqrt{n}}\right)\le \mu\le \bar{X}+z_{\alpha/2}\left(\frac{\sigma}{\sqrt{n}}\right)\right]=1-\alpha\]</span></p>
+<p data-o006-id="O006-PSU-007-U0077">Sebenarnya, pada bagian berikutnya kita akan mempelajari mengapa rumus selang-Z untuk rataan, yang menggunakan <span class="math inline" data-o006-math-id="O006-PSU-007-M0043">\(Z\)</span>, tidak seharusnya (dan karena itu memang tidak) ditulis persis seperti itu. Sebagai gantinya, dengan tingkat kepercayaan <span class="math inline" data-o006-math-id="O006-PSU-007-M0044">\((1-\alpha)100\%\)</span> , kita menyatakan hal berikut tentang rataan <span class="math inline" data-o006-math-id="O006-PSU-007-M0045">\(\mu\)</span> : rataan tersebut berada dalam selang:</p>
+<p data-o006-id="O006-PSU-007-U0078"><span class="math display" data-o006-math-id="O006-PSU-007-M0046">\[\bar{x}\pm z_{\alpha/2}\left(\frac{\sigma}{\sqrt{n}}\right)=\left[\bar{x}-z_{\alpha/2}\left(\frac{\sigma}{\sqrt{n}}\right), \bar{x}+z_{\alpha/2}\left(\frac{\sigma}{\sqrt{n}}\right)\right]\]</span></p>
+</section>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section class="level2" data-number="6.3" data-o006-id="O006-PSU-007-U0079" id="interpretation">
+<h2 class="anchored" data-anchor-id="interpretation" data-number="6.3" data-o006-id="O006-PSU-007-U0080"><span class="header-section-number">6.3</span> Interpretasi</h2>
+<p data-o006-id="O006-PSU-007-U0081">Topik interpretasi selang kepercayaan sering membuat ahli statistik frekuentis gerah. Mari kita pahami alasannya!</p>
+<p data-o006-id="O006-PSU-007-U0082">Meskipun penurunan selang-Z untuk rataan, yang didasarkan pada <span class="math inline" data-o006-math-id="O006-PSU-007-M0047">\(Z\)</span>, secara teknis berakhir pada pernyataan peluang berikut:</p>
+<p data-o006-id="O006-PSU-007-U0083"><span class="math display" data-o006-math-id="O006-PSU-007-M0048">\[P\left[\bar{X}-z_{\alpha/2}\frac{\sigma}{\sqrt{n}}\le \mu\le \bar{X}+z_{\alpha/2}\frac{\sigma}{\sqrt{n}} \right]=1-\alpha\]</span></p>
+<p data-o006-id="O006-PSU-007-U0084">pernyataan berikut <em>tidak benar</em> :</p>
+<p data-o006-id="O006-PSU-007-U0085" style="text-align: center;">
+<em>“Peluang bahwa rataan populasi <span class="math inline" data-o006-math-id="O006-PSU-007-M0049">\(\mu\)</span> berada di antara batas bawah <span class="math inline" data-o006-math-id="O006-PSU-007-M0050">\(L\)</span> dan batas atas <span class="math inline" data-o006-math-id="O006-PSU-007-M0051">\(U\)</span> adalah <span class="math inline" data-o006-math-id="O006-PSU-007-M0052">\(1-\alpha.\)</span>”</em>
+</p>
+<p data-o006-id="O006-PSU-007-U0086">Namun, mengapa? Pernyataan peluang menyangkut peubah acak. Rataan populasi <span class="math inline" data-o006-math-id="O006-PSU-007-M0053">\(\mu\)</span> adalah konstanta, bukan peubah acak. Tidak masuk akal membuat pernyataan peluang tentang konstanta yang nilainya tidak berubah.</p>
+<p data-o006-id="O006-PSU-007-U0087">Singkatnya, ahli statistik frekuentis tidak suka mendengar orang mencoba membuat pernyataan peluang tentang konstanta, padahal pernyataan peluang semestinya hanya dibuat tentang peubah acak. Jadi, jika pernyataan yang tampaknya jelas berdasarkan pernyataan peluang di atas ternyata tidak benar, bagaimana selang kepercayaan seharusnya dipahami? Berikut cara ahli statistik frekuentis ingin agar kita memandang selang kepercayaan:</p>
+<ol data-o006-id="O006-PSU-007-U0088" type="1">
+<li data-o006-id="O006-PSU-007-U0089"><p data-o006-id="O006-PSU-007-U0090">Misalkan kita mengambil sejumlah besar sampel, katakanlah 1000.</p></li>
+<li data-o006-id="O006-PSU-007-U0091"><p data-o006-id="O006-PSU-007-U0092">Kemudian, kita menghitung selang kepercayaan 95% untuk setiap sampel.</p></li>
+<li data-o006-id="O006-PSU-007-U0093"><p data-o006-id="O006-PSU-007-U0094">Selanjutnya, “yakin 95%” berarti bahwa kita mengharapkan 95%, atau 950, dari 1000 selang tersebut benar, yakni memuat nilai rataan populasi sebenarnya yang belum diketahui, yaitu <span class="math inline" data-o006-math-id="O006-PSU-007-M0054">\(\mu.\)</span></p></li>
+</ol>
+<p data-o006-id="O006-PSU-007-U0095"><span class="bi bi-question-circle-fill fs-4 text-success"></span> <strong>Jadi, apa arti semua ini dalam praktik?</strong></p>
+<p data-o006-id="O006-PSU-007-U0096">Dalam praktiknya, kita hanya mengambil satu sampel acak. Selang yang kita peroleh itu <strong>benar</strong> atau <strong>tidak benar</strong>. Artinya, selang yang diperoleh berdasarkan sampel yang kita ambil memuat parameter populasi yang sebenarnya atau tidak memuatnya. Karena kita tidak mengetahui nilai parameter populasi yang sebenarnya, kita tidak akan pernah tahu secara pasti apakah selang kita benar atau tidak. Kita hanya dapat sangat yakin bahwa kita memperoleh selang yang benar (karena 95% dari seluruh selang yang mungkin kita peroleh adalah benar).</p>
+<div class="theorem example" data-o006-id="O006-PSU-007-U0097" id="exm-gammadistci">
+<p data-o006-id="O006-PSU-007-U0098"><span class="theorem-title"><strong>Contoh 6.1</strong></span> Mari kita pertimbangkan contoh lain yang mungkin mengharuskan kita mengingat kembali sebagian materi yang dipelajari dalam STAT 414.</p>
+<p data-o006-id="O006-PSU-007-U0099">Misalkan <span class="math inline" data-o006-math-id="O006-PSU-007-M0055">\(Y\)</span> merupakan peubah acak berdistribusi Gamma dengan parameter yang diketahui <span class="math inline" data-o006-math-id="O006-PSU-007-M0056">\(\alpha=2\)</span> dan parameter yang tidak diketahui, yaitu <span class="math inline" data-o006-math-id="O006-PSU-007-M0057">\(\theta.\)</span> Kita ingin membentuk selang kepercayaan 90% untuk <span class="math inline" data-o006-math-id="O006-PSU-007-M0058">\(\theta.\)</span></p>
+<p data-o006-id="O006-PSU-007-U0100">Untuk melakukannya, kita perlu menemukan besaran pivot (pivotal quantity). Besaran pivot memiliki dua karakteristik:</p>
+<ol data-o006-id="O006-PSU-007-U0101" type="1">
+<li data-o006-id="O006-PSU-007-U0102">Besaran tersebut merupakan fungsi dari nilai-nilai pengamatan sampel dan <strong><em>satu-satunya</em></strong> parameter yang tidak diketahui, yaitu <span class="math inline" data-o006-math-id="O006-PSU-007-M0059">\(\theta.\)</span></li>
+<li data-o006-id="O006-PSU-007-U0103">Distribusi besaran pivot tidak bergantung pada <span class="math inline" data-o006-math-id="O006-PSU-007-M0060">\(\theta.\)</span></li>
+</ol>
+<p data-o006-id="O006-PSU-007-U0104">Oleh karena itu, kita harus membentuk suatu fungsi dari <span class="math inline" data-o006-math-id="O006-PSU-007-M0061">\(Y\)</span> dan <span class="math inline" data-o006-math-id="O006-PSU-007-M0062">\(\theta\)</span> yang distribusinya tidak bergantung pada <span class="math inline" data-o006-math-id="O006-PSU-007-M0063">\(\theta.\)</span> Jadi, kita perlu menemukan besaran pivot. Untuk itu, ada baiknya kita mengingat kembali distribusi fungsi peubah acak yang dipelajari dalam STAT 414.</p>
+<p data-o006-id="O006-PSU-007-U0105">Perhatikan besaran <span class="math inline" data-o006-math-id="O006-PSU-007-M0064">\(U=\frac{2Y}{\theta}.\)</span> Bagaimana distribusi <span class="math inline" data-o006-math-id="O006-PSU-007-M0065">\(U\)</span>? Mari kita gunakan metode fungsi pembangkit momen (MGF) untuk memperoleh distribusi <span class="math inline" data-o006-math-id="O006-PSU-007-M0066">\(U.\)</span></p>
+<p data-o006-id="O006-PSU-007-U0106"><span class="math display" data-o006-math-id="O006-PSU-007-M0067">\[\begin{align*}
+&amp;M_Y(t)=E(e^{tY})=\frac{1}{(1-\theta t)^2}\\
+&amp;M_U(t)=E(e^{tU})=E(e^{t\left(\frac{2Y}{\theta}\right)})=E(e^{\left(\frac{2t}{\theta}\right)Y})=\frac{1}{\left(1-\theta\left(\frac{2t}{\theta}\right)\right)^2}=\frac{1}{(1-2t)^2}
+\end{align*}\]</span></p>
+<p data-o006-id="O006-PSU-007-U0107">Berdasarkan sifat ketunggalan fungsi pembangkit momen, kita dapat melihat bahwa <span class="math inline" data-o006-math-id="O006-PSU-007-M0068">\(U\)</span> berdistribusi Gamma dengan parameter bentuk <span class="math inline" data-o006-math-id="O006-PSU-007-M0069">\(\alpha=2\)</span> dan parameter skala <span class="math inline" data-o006-math-id="O006-PSU-007-M0070">\(\theta=2.\)</span> Lebih berguna lagi, kita dapat melihat bahwa <span class="math inline" data-o006-math-id="O006-PSU-007-M0071">\(U\)</span> mengikuti distribusi khi-kuadrat dengan <span class="math inline" data-o006-math-id="O006-PSU-007-M0072">\(r=4\)</span> derajat kebebasan. Menyatakan distribusi ini sebagai distribusi khi-kuadrat sangat berguna karena kita dapat memanfaatkan perangkat lunak dan tabel untuk menghitung peluang.</p>
+<p data-o006-id="O006-PSU-007-U0108">Sekarang, mari kita bentuk selang kepercayaannya.</p>
+<p data-o006-id="O006-PSU-007-U0109">Dengan konvensi bahwa subskrip p pada kuantil khi-kuadrat menyatakan peluang ekor bawah p, kita menginginkan selang yang memenuhi:</p>
+<p data-o006-id="O006-PSU-007-U0110"><span class="math display" data-o006-math-id="O006-PSU-007-M0073">\[q_p=F_{\chi^2_4}^{-1}(p),\qquad P\left[q_{0.05}\le \frac{2Y}{\theta}\le q_{0.95}\right]=0.90\]</span></p>
+<p data-o006-id="O006-PSU-007-U0111">Sekali lagi, dengan hanya meninjau pertidaksamaan di dalam tanda kurung, kita memperoleh:</p>
+<p data-o006-id="O006-PSU-007-U0112"><span class="math display" data-o006-math-id="O006-PSU-007-M0074">\[\frac{1}{q_{0.95}}\le \frac{\theta}{2Y}\le \frac{1}{q_{0.05}}\]</span></p>
+<p data-o006-id="O006-PSU-007-U0113"><span class="math display" data-o006-math-id="O006-PSU-007-M0075">\[\frac{2Y}{q_{0.95}}\le \theta \le \frac{2Y}{q_{0.05}}\]</span></p>
+<p data-o006-id="O006-PSU-007-U0114">Oleh karena itu, selang kepercayaan 90% untuk <span class="math inline" data-o006-math-id="O006-PSU-007-M0076">\(\theta\)</span> adalah:</p>
+<p data-o006-id="O006-PSU-007-U0115"><span class="math display" data-o006-math-id="O006-PSU-007-M0077">\[\left[\frac{2Y}{q_{0.95}}, \frac{2Y}{q_{0.05}}\right]\]</span></p>
+<p data-o006-id="O006-PSU-007-U0116">Terakhir, mari kita hitung selang kepercayaan menggunakan data. Misalkan kita mengamati <span class="math inline" data-o006-math-id="O006-PSU-007-M0078">\(y=1.261552\)</span> dari distribusi Gamma dengan parameter bentuk <span class="math inline" data-o006-math-id="O006-PSU-007-M0079">\(\alpha=2\)</span> dan parameter skala <span class="math inline" data-o006-math-id="O006-PSU-007-M0080">\(\theta.\)</span> Mari kita tentukan dan tafsirkan selang kepercayaan 90% untuk <span class="math inline" data-o006-math-id="O006-PSU-007-M0081">\(\theta.\)</span></p>
+<p data-o006-id="O006-PSU-007-U0117"><span class="math display" data-o006-math-id="O006-PSU-007-M0082">\[\left[\frac{2(1.261552)}{9.4877}, \frac{2(1.261552)}{0.7107}\right]=\left[0.2659, 3.5502\right]\]</span></p>
+<p data-o006-id="O006-PSU-007-U0118">Kita yakin 90% bahwa nilai sebenarnya dari <span class="math inline" data-o006-math-id="O006-PSU-007-M0083">\(\theta\)</span> berada di antara 0.2659 dan 3.5502.</p>
+<p data-o006-id="O006-PSU-007-U0119">Tantangan terbesar dalam membentuk selang kepercayaan adalah menemukan besaran pivot. Dalam contoh-contoh di kelas ini, besaran pivot akan diberikan atau tersedia petunjuk yang membantu Anda menemukannya. Jangan khawatir, Anda akan memperoleh banyak latihan membentuk selang kepercayaan melalui tugas.</p>
+</div>
+</section>
+<section class="level2" data-number="6.4" data-o006-id="O006-PSU-007-U0120" id="large-sample-confidence-intervals">
+<h2 class="anchored" data-anchor-id="large-sample-confidence-intervals" data-number="6.4" data-o006-id="O006-PSU-007-U0121"><span class="header-section-number">6.4</span> Selang Kepercayaan Sampel Besar</h2>
+<p data-o006-id="O006-PSU-007-U0122">Misalkan kita memiliki penduga, <span class="math inline" data-o006-math-id="O006-PSU-007-M0084">\(\hat{\theta}\)</span>, dengan galat baku <span class="math inline" data-o006-math-id="O006-PSU-007-M0085">\(\sigma_{\hat{\theta}}\)</span> . Untuk sampel besar, dengan syarat yang sesuai (dibahas kemudian), statistik terstandardisasi berikut:</p>
+<p data-o006-id="O006-PSU-007-U0123"><span class="math display" data-o006-math-id="O006-PSU-007-M0086">\[T_n=\frac{\hat{\theta}-\theta}{\widehat{\mathrm{SE}}(\hat{\theta})}\xrightarrow{d}N(0,1)\]</span></p>
+<p data-o006-id="O006-PSU-007-U0124">konvergen dalam distribusi ke distribusi normal baku. Selain itu, <span class="math inline" data-o006-math-id="O006-PSU-007-M0087">\(T_n=\frac{\hat{\theta}-\theta}{\widehat{\mathrm{SE}}(\hat{\theta})}\)</span>, merupakan besaran pivot hampiran yang dapat digunakan untuk membentuk selang kepercayaan bagi parameter yang tidak diketahui, <span class="math inline" data-o006-math-id="O006-PSU-007-M0088">\(\theta.\)</span></p>
+<p data-o006-id="O006-PSU-007-U0125">Syarat-syarat yang relevan adalah:</p>
+<ol data-o006-id="O006-PSU-007-U0126" type="1">
+<li data-o006-id="O006-PSU-007-U0127">Nilai harapan penduga <span class="math inline" data-o006-math-id="O006-PSU-007-M0089">\(\hat{\theta}\)</span> boleh berbeda dari <span class="math inline" data-o006-math-id="O006-PSU-007-M0090">\(\theta.\)</span> Namun, selisih ini harus dapat diabaikan secara asimtotik dibandingkan dengan galat bakunya; ketakbiasan eksak tidak diperlukan.</li>
+<li data-o006-id="O006-PSU-007-U0128">Galat baku penduga <span class="math inline" data-o006-math-id="O006-PSU-007-M0091">\(\sigma_{\hat{\theta}}\)</span> harus diketahui atau dapat dihitung. Jika digunakan taksiran galat baku, taksiran itu harus konsisten, atau hasil studentisasi yang ekuivalen harus berlaku.</li>
+<li data-o006-id="O006-PSU-007-U0129">Statistik terstudentisasi harus konvergen dalam distribusi ke distribusi normal baku. Teorema Limit Pusat, bersama syarat yang sesuai bagi taksiran galat baku, merupakan salah satu cara untuk memperoleh hasil tersebut.</li>
+</ol>
+<div class="theorem example" data-o006-id="O006-PSU-007-U0130" id="exm-cisupermarket">
+<p data-o006-id="O006-PSU-007-U0131"><span class="theorem-title"><strong>Contoh 6.2</strong></span> Waktu berbelanja dari <span class="math inline" data-o006-math-id="O006-PSU-007-M0092">\(n=64\)</span> pelanggan yang dipilih secara acak di sebuah pasar swalayan setempat dicatat. Rataan dan varians dari 64 waktu berbelanja tersebut adalah 33 menit dan 256 <span class="math inline" data-o006-math-id="O006-PSU-007-M0093">\(\text{minutes}^2\)</span>, secara berturut-turut. Dugalah rataan sebenarnya waktu berbelanja per pelanggan dengan koefisien kepercayaan 0.9.</p>
+<section class="level4 card card-body bg-light ms-3 mb-3 pt-0" data-o006-id="O006-PSU-007-U0132" id="solution">
+<h4 class="anchored" data-anchor-id="solution" data-o006-id="O006-PSU-007-U0133">Penyelesaian</h4>
+<p data-o006-id="O006-PSU-007-U0134">Selang kepercayaan hampiran tersebut berbentuk:</p>
+<p data-o006-id="O006-PSU-007-U0135"><span class="math display" data-o006-math-id="O006-PSU-007-M0094">\[\hat{\theta}\pm z_{\alpha/2}\sigma_{\hat{\theta}}\]</span></p>
+<p data-o006-id="O006-PSU-007-U0136">Kita ingin menduga rataan populasi waktu berbelanja, <span class="math inline" data-o006-math-id="O006-PSU-007-M0095">\(\mu.\)</span> Kita memiliki nilai dugaan untuk <span class="math inline" data-o006-math-id="O006-PSU-007-M0096">\(\mu\)</span>, yaitu <span class="math inline" data-o006-math-id="O006-PSU-007-M0097">\(\hat{\mu}=33.\)</span> Taksiran galat baku rataan sampel adalah 2. Secara eksplisit, <span class="math inline" data-o006-math-id="O006-PSU-007-M0098">\(\widehat{\mathrm{SE}}(\bar{X})=\frac{s}{\sqrt{64}}=\frac{16}{8}=2.\)</span> Selang hampiran tersebut adalah:</p>
+<p data-o006-id="O006-PSU-007-U0137"><span class="math display" data-o006-math-id="O006-PSU-007-M0099">\[\hat{\mu}\pm z_{\alpha/2}\left(\hat{\sigma}_{\hat{\mu}}\right)=\left(33\pm 1.645\left(\frac{16}{8}\right)\right)=(29.71, 36.29)\]</span></p>
+</section>
+</div>
+</section>
+<section class="level2" data-number="6.5" data-o006-id="O006-PSU-007-U0138" id="summary">
+<h2 class="anchored" data-anchor-id="summary" data-number="6.5" data-o006-id="O006-PSU-007-U0139"><span class="header-section-number">6.5</span> Ringkasan</h2>
+<p data-o006-id="O006-PSU-007-U0140">Dalam pelajaran ini, kita beralih dari nilai dugaan titik ke sesuatu yang lebih informatif—selang kepercayaan. Alih-alih hanya memberikan satu angka sebagai nilai dugaan (seperti rataan sampel), kini kita memberikan rentang nilai yang kita yakini, pada tingkat kepercayaan tertentu, memuat parameter populasi yang sebenarnya.</p>
+<p data-o006-id="O006-PSU-007-U0141">Kita telah menguraikan arti sebenarnya dari tingkat kepercayaan tersebut. Selang kepercayaan 95% tidak berarti bahwa parameter memiliki peluang 95% untuk berada di dalam selang yang diperoleh—sebab parameter itu tetap. Artinya, jika prosedur ini diulang berkali-kali, 95% dari selang yang dihasilkan akan memuat nilai sebenarnya.</p>
+<p data-o006-id="O006-PSU-007-U0142">Anda telah mempelajari cara membentuk selang tersebut menggunakan distribusi yang diketahui, besaran pivot, dan hampiran sampel besar.</p>
+<p data-o006-id="O006-PSU-007-U0143">Inti keseluruhannya? Selang kepercayaan membantu kita mengomunikasikan ketidakpastian dengan jelas dan jujur, serta merupakan salah satu alat penting bagi statistikawan.</p>
+<p data-o006-id="O006-PSU-007-U0144"><strong>Pokok-Pokok Utama:</strong></p>
+<ul data-o006-id="O006-PSU-007-U0145">
+<li data-o006-id="O006-PSU-007-U0146">Bentuk umum selang kepercayaan adalah: <span class="math inline" data-o006-math-id="O006-PSU-007-M0100">\(\text{Point Estimate }\pm \text{(Critical Value)}\times \text{Standard Error}\)</span></li>
+<li data-o006-id="O006-PSU-007-U0147">Selang kepercayaan untuk rataan populasi ketika varians distribusi Normal diketahui adalah: <span class="math inline" data-o006-math-id="O006-PSU-007-M0101">\(\bar{X}\pm z_{\alpha/2}\cdot \frac{\sigma}{\sqrt{n}}\)</span></li>
+<li data-o006-id="O006-PSU-007-U0148">Untuk sampel yang saling bebas dan berdistribusi identik (iid) dari distribusi Normal, selang kepercayaan eksak bagi rataan populasi ketika varians tidak diketahui, dengan df = n − 1, adalah: <span class="math inline" data-o006-math-id="O006-PSU-007-M0102">\(\bar{X}\pm t_{\alpha/2,n-1}\cdot \frac{S}{\sqrt{n}}\)</span></li>
+<li data-o006-id="O006-PSU-007-U0149">Ukuran sampel, tingkat kepercayaan, dan variabilitas memengaruhi lebar selang.</li>
+</ul>
+</section>
+</main></div>
+<footer class="site-footer"><div class="site-footer__inner">Konten sumber: Departemen Statistika Penn State, CC BY-NC 4.0 kecuali dinyatakan lain. Terjemahan dan rekonstruksi: OpenAI Codex gpt-5.6-sol, Ultra. Tidak ada dukungan atau pengesahan yang tersirat.</div></footer>
+</body>
+</html>

@@ -1,0 +1,249 @@
+{
+  "asset_closure": {
+    "external_dependencies": 0,
+    "offline_reader_asset_gate_passed": true,
+    "reference_inventory_complete": true,
+    "same_origin_image_bytes_closed": true,
+    "same_origin_png_bytes": 67496,
+    "same_origin_png_files": 1
+  },
+  "asset_inventory": [
+    {
+      "alt_texts": [
+        "Standard normal curve showing the 1-alpha area centered in the middle."
+      ],
+      "asset_id": "O006-PSU-007-A0001",
+      "bytes": 67496,
+      "occurrences": 1,
+      "sha256": "2f50c34c6a91381f3700c728b7a85797d39e2eceae4a2cbd9542003b79adab8f",
+      "source_ref": "assets/ci_1.png",
+      "source_url": "https://online.stat.psu.edu/stat415/assets/ci_1.png"
+    }
+  ],
+  "counts": {
+    "asset_occurrences": 1,
+    "assets": 1,
+    "catalogue_records": 429,
+    "code_nodes": 0,
+    "corollaries": 0,
+    "definitions": 0,
+    "dependencies": 0,
+    "examples": 2,
+    "figure_captions": 1,
+    "figures": 1,
+    "headings": 10,
+    "images": 1,
+    "links": 3,
+    "math_display": 22,
+    "math_inline": 80,
+    "math_nodes": 102,
+    "native_id_occurrences": 15,
+    "pre_nodes": 0,
+    "proofs": 0,
+    "sections": 9,
+    "solutions": 1,
+    "structural_units": 149,
+    "tables": 0,
+    "theorem_class_nodes": 3,
+    "theorems": 1,
+    "translation_segments": 176,
+    "unique_asset_sources": 1,
+    "unique_native_ids": 15
+  },
+  "document": {
+    "asset_count": 1,
+    "code_node_count": 0,
+    "code_text_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "component_id": "Lesson06",
+    "dependency_count": 0,
+    "document_id": "O006-PSU-007",
+    "duplicate_native_ids": [],
+    "entity_id": "O006-PSU-007",
+    "formula_count": 102,
+    "formula_sha256": "df4f09c3e34bf27f969283baefe53439db86123d856808fcac3d71dbce14ee21",
+    "locale": "en-US",
+    "native_id_occurrences": 15,
+    "normalized_bytes": 32426,
+    "normalized_path": "source/normalized/en-US/Lesson06.html",
+    "normalized_sha256": "a7060d1f7e3f1109d45635a79bf48aa070416bc647080faab1b0084ed8bc9d19",
+    "ordinal": 7,
+    "record_type": "document",
+    "schema": "o006.stat415.source-catalogue.v1",
+    "segment_count": 176,
+    "semantic_text_sha256": "e38808972a951bb92e5978cc5a7efd7a8895337c89e6cf1f76d008491f570e85",
+    "source_bytes": 77034,
+    "source_path": "authority/upstream/stat415/Lesson06.html",
+    "source_sha256": "abac3002d3f325814503b40a67277a5c9eca8ac6b60e4907bbce15eb0d6b5d06",
+    "source_url": "https://online.stat.psu.edu/stat415/Lesson06",
+    "topology_sha256": "80b1281ea36a8bf8b13b86c3ffc55e23cd3e74b25c867ec503c1aa8a8aab2652",
+    "unique_native_ids": 15,
+    "unit_count": 149
+  },
+  "duplicate_native_ids": [],
+  "outputs": {
+    "asset": {
+      "bytes": 67496,
+      "path": "authority/assets/stat415/lesson06/assets/ci_1.png",
+      "sha256": "2f50c34c6a91381f3700c728b7a85797d39e2eceae4a2cbd9542003b79adab8f"
+    },
+    "asset_closure": {
+      "bytes": 3585,
+      "path": "working/lesson06_asset_closure.json",
+      "sha256": "70e68cf9321e1649bc1dab95fda46ecef4d0c809f5826b18e3cb092cfe9c2326"
+    },
+    "asset_manifest": {
+      "bytes": 421,
+      "path": "authority/LESSON06_ASSET_MANIFEST.csv",
+      "sha256": "1d658618cf7783bcbef39b7d12d1b7aa9725a998061f69228dd442c62d7089ce"
+    },
+    "catalogue": {
+      "bytes": 210097,
+      "path": "backend/lesson06_source_catalogue.jsonl",
+      "records": 429,
+      "sha256": "827677a2a54d638b753fafbc63821b083d375481151e0a3c6c3a84d528e31fe2"
+    },
+    "helper_script": {
+      "bytes": 35668,
+      "path": "scripts/normalize_lesson03.py",
+      "sha256": "0eeb260de05ebae694700cc2212966ee4ba19351f067bef49c095ec6fccd70e6"
+    },
+    "normalized": {
+      "bytes": 32426,
+      "path": "source/normalized/en-US/Lesson06.html",
+      "sha256": "a7060d1f7e3f1109d45635a79bf48aa070416bc647080faab1b0084ed8bc9d19"
+    },
+    "script": {
+      "bytes": 30094,
+      "path": "scripts/normalize_lesson06.py",
+      "sha256": "0f771b86a9e9875257627875d37c8d4fd409b823aa4659f0968fdf60adef6967"
+    },
+    "segments": {
+      "bytes": 35700,
+      "path": "working/lesson06_segments.csv",
+      "rows": 176,
+      "sha256": "adf4e5dd2ef60567347b83e3565334e521330a1ed04782720a538a41a8e1f079"
+    }
+  },
+  "parser": {
+    "beautifulsoup_version": "4.14.3",
+    "name": "beautifulsoup4/html.parser",
+    "source_decoding": "UTF-8 strict"
+  },
+  "preservation": {
+    "authority_mutated": false,
+    "code_nodes_text_preserved": true,
+    "dependency_census_preserved": true,
+    "formula_nodes_byte_preserved": true,
+    "formula_sha256": "df4f09c3e34bf27f969283baefe53439db86123d856808fcac3d71dbce14ee21",
+    "image_sequence_preserved": true,
+    "link_sequence_preserved": true,
+    "main_selector": "main#quarto-document-content",
+    "native_anchor_sequence_preserved": true,
+    "semantic_main_text_preserved": true,
+    "semantic_text_sha256": "e38808972a951bb92e5978cc5a7efd7a8895337c89e6cf1f76d008491f570e85",
+    "topology_sha256": "80b1281ea36a8bf8b13b86c3ffc55e23cd3e74b25c867ec503c1aa8a8aab2652"
+  },
+  "role_counts": {
+    "example": 2,
+    "figure": 1,
+    "figure-caption": 1,
+    "heading": 10,
+    "image": 1,
+    "link": 3,
+    "section": 8,
+    "solution": 2,
+    "structure": 120,
+    "theorem": 1
+  },
+  "schema": "o006.stat415.lesson06-normalization.v1",
+  "source_defect_count": 10,
+  "source_defects": [
+    {
+      "defect_id": "L06-D001",
+      "evidence": "finding an estimator, or point estimate",
+      "kind": "estimator-and-realized-estimate-conflated",
+      "note": "A point estimator is a random statistic T(X); after observing data, T(x) is its realized point estimate. Preserve the distinction."
+    },
+    {
+      "defect_id": "L06-D002",
+      "evidence": "\\[P\\left[\\bar{X}-z_{\\alpha/2}\\left(\\frac{\\sigma}{\\sqrt{n}}\\right)\\le \\mu\\le \\bar{X}+z_{\\alpha/2}\\left(\\frac{\\sigma}{\\sqrt{n}}\\right)\\right]1-\\alpha\\]",
+      "kind": "probability-equality-operator-omitted",
+      "note": "The probability statement omits the equals sign before 1-alpha."
+    },
+    {
+      "defect_id": "L06-D003",
+      "evidence": {
+        "asset": "assets/ci_1.png",
+        "asset_sha256": "2f50c34c6a91381f3700c728b7a85797d39e2eceae4a2cbd9542003b79adab8f",
+        "pixel_labels": [
+          "-Z_{\\alpha/2}",
+          "Z_{\\alpha/2}"
+        ]
+      },
+      "kind": "figure-random-variable-and-critical-value-notation-confused",
+      "note": "The frozen figure uses capital Z for fixed cut points although the prose correctly defines lowercase z_(alpha/2) as the critical value."
+    },
+    {
+      "defect_id": "L06-D004",
+      "evidence": {
+        "numerical_interval": "\\[\\left[\\frac{2(1.261552)}{9.4877}, \\frac{2(1.261552)}{0.7107}\\right]=\\left[0.2659, 3.5502\\right]\\]",
+        "symbolic_interval": "\\[P\\left[\\chi^2_{0.05}(4)\\le \\frac{2Y}{\\theta}\\le \\chi^2_{0.95}(4)\\right]=1-\\alpha\\]"
+      },
+      "kind": "chi-square-quantile-tail-convention-undefined",
+      "note": "The z subscript was defined by upper-tail area, but the displayed chi-square values use lower-tail CDF quantiles. Define q_p=F^{-1}(p) explicitly."
+    },
+    {
+      "defect_id": "L06-D005",
+      "evidence": "The source lists exact unbiasedness as a required condition for a large-sample normal confidence interval.",
+      "kind": "exact-unbiasedness-misstated-as-large-sample-necessity",
+      "note": "Exact finite-sample unbiasedness is not necessary. Studentized convergence to N(0,1), including an asymptotically valid standard-error estimate, is the controlling condition."
+    },
+    {
+      "defect_id": "L06-D006",
+      "evidence": "\\(\\hat{\\sigma}^2_{\\hat{\\mu}}=\\frac{s}{\\sqrt{64}}=256.\\)",
+      "kind": "standard-error-notation-and-arithmetic",
+      "note": "The data give sample variance 256, hence s=16 and the estimated standard error is hat(sigma)_(hat(mu))=16/sqrt(64)=2; it is neither squared nor 256."
+    },
+    {
+      "defect_id": "L06-D007",
+      "evidence": "\\(\\bar{X}\\pm t_{\\alpha/2, df}\\cdot \\frac{s}{\\sqrt{n}}\\)",
+      "kind": "exact-t-interval-assumptions-and-degrees-of-freedom-omitted",
+      "note": "For an iid Normal sample the exact interval uses df=n-1. Outside that model, a separate large-sample or robustness qualification is required."
+    },
+    {
+      "defect_id": "L06-D008",
+      "evidence": {
+        "asset": "assets/ci_1.png",
+        "source_alt": "Standard normal curve showing the 1-alpha area centered in the middle."
+      },
+      "kind": "figure-alternative-text-incomplete",
+      "note": "The source alternative text omits both alpha/2 tails and the critical points; the derivative must describe them without relying on color."
+    },
+    {
+      "defect_id": "L06-D009",
+      "evidence": [
+        "plural sample variables followed by singular 'is'",
+        "be a a random variable",
+        "A pivotal quantity poses two characteristics",
+        "moment generating function method we get the distribution",
+        "Now, lets construct the confidence interval",
+        "Again, we only consider the expression in the brackets, we get",
+        "confidence interval ror a population mean"
+      ],
+      "kind": "mechanical-surface-defects",
+      "note": "Correct the seven unambiguous grammar, duplication, punctuation, and typo defects in the derivative."
+    },
+    {
+      "defect_id": "L06-D010",
+      "evidence": {
+        "heading": "Proof:",
+        "section_id": "proof",
+        "semantic_proof_nodes": 0
+      },
+      "kind": "proof-not-semantically-typed",
+      "note": "The proof is present but encoded only as a generic section; retain it and mark its role additively in downstream metadata."
+    }
+  ],
+  "source_rule": "semantic main only; no authority correction; formula text protected; stable unit, math, asset, and segment IDs additive",
+  "status": "normalized-source-ready-asset-closed-no-external-dependencies"
+}

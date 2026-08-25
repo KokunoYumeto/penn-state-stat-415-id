@@ -253,3 +253,23 @@ main pre {
 
 /* Quarto's copy runtime is deliberately absent in the static offline reader. */
 .code-copy-button { display: none !important; }
+
+
+/* Lesson 06: use the available reader width for the centered normal-curve figure. */
+#fig-standardnormal,
+#fig-standardnormal figure,
+#fig-standardnormal [aria-describedby],
+#fig-standardnormal a.lightbox {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  margin-inline: auto;
+}
+
+#fig-standardnormal img {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+  margin-inline: auto;
+}

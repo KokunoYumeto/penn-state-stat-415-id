@@ -1,0 +1,195 @@
+<!doctype html>
+<html lang="en-US">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>6  Confidence Intervals – STAT 415 | Introduction to Mathematical Statistics</title>
+<meta name="source-url" content="https://online.stat.psu.edu/stat415/Lesson06">
+<meta name="translation-provenance" content="OpenAI Codex gpt-5.6-sol, Ultra">
+</head>
+<body>
+<main class="content" data-component-id="Lesson06" data-document-id="O006-PSU-007" data-source-url="https://online.stat.psu.edu/stat415/Lesson06" id="quarto-document-content">
+<header class="quarto-title-block default" data-o006-id="O006-PSU-007-U0001" id="title-block-header"><nav aria-label="breadcrumb" class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" data-o006-id="O006-PSU-007-U0002"><ol class="breadcrumb" data-o006-id="O006-PSU-007-U0003"><li class="breadcrumb-item" data-o006-id="O006-PSU-007-U0004"><a data-o006-id="O006-PSU-007-U0005" href="./Lesson00.html">Lessons</a></li><li class="breadcrumb-item" data-o006-id="O006-PSU-007-U0006"><a data-o006-id="O006-PSU-007-U0007" href="./Lesson06.html"><span class="chapter-number">6</span>  <span class="chapter-title">Confidence Intervals</span></a></li></ol></nav>
+<div class="quarto-title" data-o006-id="O006-PSU-007-U0008">
+<h1 class="title" data-o006-id="O006-PSU-007-U0009"><span class="chapter-number">6</span>  <span class="chapter-title">Confidence Intervals</span></h1>
+<div class="quarto-categories" data-o006-id="O006-PSU-007-U0010">
+<div class="quarto-category" data-o006-id="O006-PSU-007-U0011">Confidence Intervals</div>
+</div>
+</div>
+<div class="quarto-title-meta" data-o006-id="O006-PSU-007-U0012">
+</div>
+</header>
+<section class="level2 unnumbered unlisted" data-o006-id="O006-PSU-007-U0013" id="overview">
+<h2 class="unnumbered unlisted anchored" data-anchor-id="overview" data-o006-id="O006-PSU-007-U0014">Overview</h2>
+<p data-o006-id="O006-PSU-007-U0015">In this lesson, we are going to take a brief break from MLEs. Don’t worry! We will go back to maximum likelihood estimation.</p>
+<p data-o006-id="O006-PSU-007-U0016">In this lesson, we’ll learn how to construct and calculate a confidence interval for a population parameter. As we’ll soon see, a confidence interval is an interval (or range) of values that we can be really confident contains the true unknown population parameter. We’ll spend some time working on understanding the “confidence part” of an interval, as well as learning what factors affect the length of an interval.</p>
+<section class="level3 unnumbered unlisted objectiveblock" data-o006-id="O006-PSU-007-U0017" id="objectives">
+<h3 class="unnumbered unlisted anchored" data-anchor-id="objectives" data-o006-id="O006-PSU-007-U0018"><i class="bi bi-check2-circle"></i>Objectives</h3>
+<p data-o006-id="O006-PSU-007-U0019">Upon completion of this lesson, you should be able to:</p>
+<ol data-o006-id="O006-PSU-007-U0020" type="1">
+<li data-o006-id="O006-PSU-007-U0021">Be able to correctly interpret a given confidence interval in terms of the population,</li>
+<li data-o006-id="O006-PSU-007-U0022">Analytically construct a confidence interval for an unknown parameter, and</li>
+<li data-o006-id="O006-PSU-007-U0023">Numerically calculate a confidence interval for an unknown parameter given a set of data.</li>
+</ol>
+</section>
+</section>
+<section class="level2" data-number="6.1" data-o006-id="O006-PSU-007-U0024" id="introduction-to-confidence-intervals">
+<h2 class="anchored" data-anchor-id="introduction-to-confidence-intervals" data-number="6.1" data-o006-id="O006-PSU-007-U0025"><span class="header-section-number">6.1</span> Introduction to Confidence Intervals</h2>
+<p data-o006-id="O006-PSU-007-U0026">So far, when we discuss estimation, we have focused on finding an estimator, or <strong>point estimate</strong>, for a parameter. In this section, we will introduce <strong>interval estimates</strong>.</p>
+<ol data-o006-id="O006-PSU-007-U0027" type="1">
+<li data-o006-id="O006-PSU-007-U0028"><p data-o006-id="O006-PSU-007-U0029">When we use the sample mean <span class="math inline" data-o006-math-id="O006-PSU-007-M0001">\(\bar{x}\)</span> to estimate the population mean <span class="math inline" data-o006-math-id="O006-PSU-007-M0002">\(\mu\)</span>, can we be confident that <span class="math inline" data-o006-math-id="O006-PSU-007-M0003">\(\bar{x}\)</span> is close to <span class="math inline" data-o006-math-id="O006-PSU-007-M0004">\(\mu\)</span>? And, when we use the sample proportion <span class="math inline" data-o006-math-id="O006-PSU-007-M0005">\(\hat{p}\)</span> to estimate the population proportion <span class="math inline" data-o006-math-id="O006-PSU-007-M0006">\(p\)</span>, can we be confident that <span class="math inline" data-o006-math-id="O006-PSU-007-M0007">\(\hat{p}\)</span> is close to <span class="math inline" data-o006-math-id="O006-PSU-007-M0008">\(p\)</span>?</p></li>
+<li data-o006-id="O006-PSU-007-U0030"><p data-o006-id="O006-PSU-007-U0031">Do we have any idea as to how close the sample statistic is to the population parameter?</p></li>
+</ol>
+<p data-o006-id="O006-PSU-007-U0032">Rather than using just a point estimate, we could find an interval (or range) of values that we can be really confident contains the actual unknown population parameter. For example, we could find lower ( <span class="math inline" data-o006-math-id="O006-PSU-007-M0009">\(L\)</span> ) and upper ( <span class="math inline" data-o006-math-id="O006-PSU-007-M0010">\(U\)</span> ) values between which we can be really confident the population parameter, <span class="math inline" data-o006-math-id="O006-PSU-007-M0011">\(\theta\)</span>, falls:</p>
+<p data-o006-id="O006-PSU-007-U0033"><span class="math display" data-o006-math-id="O006-PSU-007-M0012">\[L&lt; \theta&lt;U\]</span></p>
+<p data-o006-id="O006-PSU-007-U0034">An interval of such values is called a <strong>confidence interval</strong>. Each interval has a <strong>confidence coefficient</strong> (reported as a proportion):</p>
+<p data-o006-id="O006-PSU-007-U0035"><span class="math display" data-o006-math-id="O006-PSU-007-M0013">\[1-\alpha\]</span></p>
+<p data-o006-id="O006-PSU-007-U0036">or a <strong>confidence level</strong> (reported as a percentage):</p>
+<p data-o006-id="O006-PSU-007-U0037"><span class="math display" data-o006-math-id="O006-PSU-007-M0014">\[(1-\alpha)100\%\]</span></p>
+<p data-o006-id="O006-PSU-007-U0038">Typical confidence coefficients are 0.90, 0.95, and 0.99, with corresponding confidence levels of 90%, 95%, and 99%. For example, upon calculating a confidence interval for a parameter <span class="math inline" data-o006-math-id="O006-PSU-007-M0015">\(\theta\)</span> with a confidence level of, say 95%, we can say:</p>
+<p data-o006-id="O006-PSU-007-U0039" style="text-align: center;">
+<em>“We can be 95% confident that the population parameter falls between <span class="math inline" data-o006-math-id="O006-PSU-007-M0016">\(L\)</span> and <span class="math inline" data-o006-math-id="O006-PSU-007-M0017">\(U.\)</span>”</em>
+</p>
+<p data-o006-id="O006-PSU-007-U0040">As should agree with our intuition, the greater the confidence level, the more confident we can be that the confidence interval contains the actual population parameter.</p>
+</section>
+<section class="level2" data-number="6.2" data-o006-id="O006-PSU-007-U0041" id="population-mean-of-a-normal-distribution">
+<h2 class="anchored" data-anchor-id="population-mean-of-a-normal-distribution" data-number="6.2" data-o006-id="O006-PSU-007-U0042"><span class="header-section-number">6.2</span> Population Mean of a Normal Distribution</h2>
+<p data-o006-id="O006-PSU-007-U0043">Let’s demonstrate how to construct an interval estimate (or confidence interval) for the population mean of the Normal distribution with <strong><em>known</em></strong> variance <span class="math inline" data-o006-math-id="O006-PSU-007-M0018">\(\sigma^2.\)</span></p>
+<p data-o006-id="O006-PSU-007-U0044">Before we do, we should define our notation. Recall the value <span class="math inline" data-o006-math-id="O006-PSU-007-M0019">\(z_{\alpha/2}\)</span> is the <span class="math inline" data-o006-math-id="O006-PSU-007-M0020">\(Z\)</span> value (obtained from a standard normal table) such that the area to the right of it under the standard normal curve is <span class="math inline" data-o006-math-id="O006-PSU-007-M0021">\(\frac{\alpha}{2}.\)</span> That is:</p>
+<p data-o006-id="O006-PSU-007-U0045"><span class="math display" data-o006-math-id="O006-PSU-007-M0022">\[P(Z\ge z_{\alpha/2})=\alpha/2\]</span></p>
+<p data-o006-id="O006-PSU-007-U0046">Likewise:</p>
+<p data-o006-id="O006-PSU-007-U0047"><span class="math display" data-o006-math-id="O006-PSU-007-M0023">\[-z_{\alpha/2}\]</span></p>
+<p data-o006-id="O006-PSU-007-U0048">is the <span class="math inline" data-o006-math-id="O006-PSU-007-M0024">\(Z\)</span>-value (obtained from a standard normal table) such that the area to the left of it under the standard normal curve is <span class="math inline" data-o006-math-id="O006-PSU-007-M0025">\(\frac{\alpha}{2}.\)</span> That is:</p>
+<p data-o006-id="O006-PSU-007-U0049"><span class="math display" data-o006-math-id="O006-PSU-007-M0026">\[P(Z\le -z_{\alpha/2})=\alpha/2\]</span></p>
+<p data-o006-id="O006-PSU-007-U0050">I like to illustrate this notation with the following diagram of a standard normal curve:</p>
+<div alt="Standard normal curve showing the 1-alpha area centered in the middle." class="lightbox quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center" data-o006-id="O006-PSU-007-U0051" id="fig-standardnormal">
+<figure class="quarto-float quarto-float-fig figure" data-o006-id="O006-PSU-007-U0052">
+<div aria-describedby="fig-standardnormal-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca" data-o006-id="O006-PSU-007-U0053">
+<a class="lightbox" data-gallery="quarto-lightbox-gallery-1" data-o006-id="O006-PSU-007-U0054" href="assets/ci_1.png" title="Fig 6.1: "><img alt="Standard normal curve showing the 1-alpha area centered in the middle." class="img-fluid quarto-figure quarto-figure-center figure-img" data-o006-asset-id="O006-PSU-007-A0001" data-o006-id="O006-PSU-007-U0055" src="assets/ci_1.png" style="width:70.0%"/></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" data-o006-id="O006-PSU-007-U0056" id="fig-standardnormal-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Fig 6.1
+</figcaption>
+</figure>
+</div>
+<p data-o006-id="O006-PSU-007-U0057">With the notation now recalled, let’s state the formula for a confidence interval for the population mean.</p>
+<div class="callout callout-style-simple callout-note no-icon" data-o006-id="O006-PSU-007-U0058">
+<div class="callout-body d-flex" data-o006-id="O006-PSU-007-U0059">
+<div class="callout-icon-container" data-o006-id="O006-PSU-007-U0060">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-body-container" data-o006-id="O006-PSU-007-U0061">
+<div class="ms-3 theorem" data-o006-id="O006-PSU-007-U0062" id="thm-CI">
+<p data-o006-id="O006-PSU-007-U0063"><span class="theorem-title"><strong>Theorem 6.1 (Z-Interval for a Mean)</strong></span> <span class="math inline" data-o006-math-id="O006-PSU-007-M0027">\(X_1, X_2, \ldots, X_n\)</span> is a random sample from a normal distribution with unknown mean <span class="math inline" data-o006-math-id="O006-PSU-007-M0028">\(\mu\)</span> and <strong><em>known</em></strong> variance <span class="math inline" data-o006-math-id="O006-PSU-007-M0029">\(\sigma^2.\)</span> Then a <span class="math inline" data-o006-math-id="O006-PSU-007-M0030">\((1-\alpha)100\%\)</span> confidence interval for the population mean <span class="math inline" data-o006-math-id="O006-PSU-007-M0031">\(\mu\)</span> is:</p>
+<p data-o006-id="O006-PSU-007-U0064"><span class="math display" data-o006-math-id="O006-PSU-007-M0032">\[\bar{x}\pm z_{\alpha/2}\frac{\sigma}{\sqrt{n}}\]</span></p>
+<p data-o006-id="O006-PSU-007-U0065">The interval, because it depends on <span class="math inline" data-o006-math-id="O006-PSU-007-M0033">\(Z\)</span>, is often referred to as the <span class="math inline" data-o006-math-id="O006-PSU-007-M0034">\(Z\)</span><strong>-interval for a mean</strong>.</p>
+<p data-o006-id="O006-PSU-007-U0066">Since, at this point, we’re just interested in learning the basics of how to derive a confidence interval, we are going to ignore, for now, that the second assumption about the population variance being known is unrealistic. After all, when would we ever think we would know the value of the population variance <span class="math inline" data-o006-math-id="O006-PSU-007-M0035">\(\sigma^2\)</span>, but not the population mean <span class="math inline" data-o006-math-id="O006-PSU-007-M0036">\(\mu\)</span>? Go figure! We’ll work on finding a practical confidence interval for the mean <span class="math inline" data-o006-math-id="O006-PSU-007-M0037">\(\mu\)</span> later. For now, let’s work on deriving this one.</p>
+<section class="level4" data-o006-id="O006-PSU-007-U0067" id="proof">
+<h4 class="anchored" data-anchor-id="proof" data-o006-id="O006-PSU-007-U0068">Proof:</h4>
+<p data-o006-id="O006-PSU-007-U0069">From the above diagram of the standard normal curve, we can see that the following probability statement is true:</p>
+<p data-o006-id="O006-PSU-007-U0070"><span class="math display" data-o006-math-id="O006-PSU-007-M0038">\[P\left[-z_{\alpha/2}\le Z\le z_{\alpha/2}\right]=1-\alpha\]</span></p>
+<p data-o006-id="O006-PSU-007-U0071">Then, simply replacing <span class="math inline" data-o006-math-id="O006-PSU-007-M0039">\(Z\)</span>, we get:</p>
+<p data-o006-id="O006-PSU-007-U0072"><span class="math display" data-o006-math-id="O006-PSU-007-M0040">\[P\left[-z_{\alpha/2}\le \frac{\bar{X}-\mu}{\frac{\sigma}{\sqrt{n}}}\le z_{\alpha/2}\right]=1-\alpha\]</span></p>
+<p data-o006-id="O006-PSU-007-U0073">Now, let’s focus only on manipulating the inequality inside the brackets for a bit. Because we manipulate each of the three sides of the inequality equally, each of the following statements is equivalent:</p>
+<p data-o006-id="O006-PSU-007-U0074"><span class="math display" data-o006-math-id="O006-PSU-007-M0041">\[\begin{align*}
+&amp;-z_{\alpha/2}\le \frac{\bar{X}-\mu}{\frac{\sigma}{\sqrt{n}}}\le z_{\alpha/2}\\
+&amp;-z_{\alpha/2}\left(\frac{\sigma}{\sqrt{n}}\right)\le \bar{X}-\mu\le z_{\alpha/2}\left(\frac{\sigma}{\sqrt{n}}\right)\\
+&amp;-\bar{X}-z_{\alpha/2}\left(\frac{\sigma}{\sqrt{n}}\right)\le -\mu\le -\bar{X}+z_{\alpha/2}\left(\frac{\sigma}{\sqrt{n}}\right)\\
+&amp; \bar{X}-z_{\alpha/2}\left(\frac{\sigma}{\sqrt{n}}\right)\le \mu\le \bar{X}+z_{\alpha/2}\left(\frac{\sigma}{\sqrt{n}}\right)
+\end{align*}\]</span></p>
+<p data-o006-id="O006-PSU-007-U0075">So, in summary, by manipulating the inequality, we have shown that the following probability statement is true:</p>
+<p data-o006-id="O006-PSU-007-U0076"><span class="math display" data-o006-math-id="O006-PSU-007-M0042">\[P\left[\bar{X}-z_{\alpha/2}\left(\frac{\sigma}{\sqrt{n}}\right)\le \mu\le \bar{X}+z_{\alpha/2}\left(\frac{\sigma}{\sqrt{n}}\right)\right]1-\alpha\]</span></p>
+<p data-o006-id="O006-PSU-007-U0077">In reality, we will learn in the next section why we shouldn’t (and therefore don’t!) write the formula for the <span class="math inline" data-o006-math-id="O006-PSU-007-M0043">\(Z\)</span>-interval for the mean quite like that. Instead, we write that we can be <span class="math inline" data-o006-math-id="O006-PSU-007-M0044">\((1-\alpha)100\%\)</span> confident that the mean <span class="math inline" data-o006-math-id="O006-PSU-007-M0045">\(\mu\)</span> is in the interval:</p>
+<p data-o006-id="O006-PSU-007-U0078"><span class="math display" data-o006-math-id="O006-PSU-007-M0046">\[\bar{x}\pm z_{\alpha/2}\left(\frac{\sigma}{\sqrt{n}}\right)=\left[\bar{x}-z_{\alpha/2}\left(\frac{\sigma}{\sqrt{n}}\right), \bar{x}+z_{\alpha/2}\left(\frac{\sigma}{\sqrt{n}}\right)\right]\]</span></p>
+</section>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section class="level2" data-number="6.3" data-o006-id="O006-PSU-007-U0079" id="interpretation">
+<h2 class="anchored" data-anchor-id="interpretation" data-number="6.3" data-o006-id="O006-PSU-007-U0080"><span class="header-section-number">6.3</span> Interpretation</h2>
+<p data-o006-id="O006-PSU-007-U0081">The topic of interpreting confidence intervals is one that can get frequentist statisticians all hot under the collar. Let’s try to understand why!</p>
+<p data-o006-id="O006-PSU-007-U0082">Although the derivation of the <span class="math inline" data-o006-math-id="O006-PSU-007-M0047">\(Z\)</span>-interval for a mean technically ends with the following probability statement:</p>
+<p data-o006-id="O006-PSU-007-U0083"><span class="math display" data-o006-math-id="O006-PSU-007-M0048">\[P\left[\bar{X}-z_{\alpha/2}\frac{\sigma}{\sqrt{n}}\le \mu\le \bar{X}+z_{\alpha/2}\frac{\sigma}{\sqrt{n}} \right]=1-\alpha\]</span></p>
+<p data-o006-id="O006-PSU-007-U0084">it is <em>incorrect</em> to say:</p>
+<p data-o006-id="O006-PSU-007-U0085" style="text-align: center;">
+<em>“The probability that the population mean <span class="math inline" data-o006-math-id="O006-PSU-007-M0049">\(\mu\)</span> falls between the lower value <span class="math inline" data-o006-math-id="O006-PSU-007-M0050">\(L\)</span> and the upper value <span class="math inline" data-o006-math-id="O006-PSU-007-M0051">\(U\)</span> is <span class="math inline" data-o006-math-id="O006-PSU-007-M0052">\(1-\alpha.\)</span>”</em>
+</p>
+<p data-o006-id="O006-PSU-007-U0086">But why? Probability statements are about random variables. The population mean <span class="math inline" data-o006-math-id="O006-PSU-007-M0053">\(\mu\)</span> is a constant, not a random variable. It makes no sense to make a probability statement about a constant that does not change.</p>
+<p data-o006-id="O006-PSU-007-U0087">So, in short, frequentist statisticians don’t like to hear people trying to make probability statements about constants, when they should only be making probability statements about random variables. So, okay, if it’s incorrect to make the statement that seems obvious to make based on the above probability statement, what is the correct understanding of confidence intervals? Here’s how frequentist statisticians would like the world to think about confidence intervals:</p>
+<ol data-o006-id="O006-PSU-007-U0088" type="1">
+<li data-o006-id="O006-PSU-007-U0089"><p data-o006-id="O006-PSU-007-U0090">Suppose we take a large number of samples, say 1000.</p></li>
+<li data-o006-id="O006-PSU-007-U0091"><p data-o006-id="O006-PSU-007-U0092">Then, we calculate a 95% confidence interval for each sample.</p></li>
+<li data-o006-id="O006-PSU-007-U0093"><p data-o006-id="O006-PSU-007-U0094">Then, “95% confident” means that we’d expect 95%, or 950, of the 1000 intervals to be correct, that is, to contain the actual unknown value <span class="math inline" data-o006-math-id="O006-PSU-007-M0054">\(\mu.\)</span></p></li>
+</ol>
+<p data-o006-id="O006-PSU-007-U0095"><span class="bi bi-question-circle-fill fs-4 text-success"></span> <strong>So, what does this all mean in practice?</strong></p>
+<p data-o006-id="O006-PSU-007-U0096">In reality, we take just one random sample. The interval we obtain is either <strong>correct</strong> or <strong>incorrect</strong>. That is, the interval we obtain based on the sample we’ve taken either contains the true population parameter or it does not. Since we don’t know the value of the true population parameter, we’ll never know for sure whether our interval is correct or not. We can just be very confident that we obtained a correct interval (because 95% of the intervals we could have obtained are correct).</p>
+<div class="theorem example" data-o006-id="O006-PSU-007-U0097" id="exm-gammadistci">
+<p data-o006-id="O006-PSU-007-U0098"><span class="theorem-title"><strong>Example 6.1</strong></span> Let’s consider another example where we may have to recall some of the material learned in STAT 414.</p>
+<p data-o006-id="O006-PSU-007-U0099">Let <span class="math inline" data-o006-math-id="O006-PSU-007-M0055">\(Y\)</span> be a a random variable with a Gamma distribution with known parameter <span class="math inline" data-o006-math-id="O006-PSU-007-M0056">\(\alpha=2\)</span> and unknown parameter, <span class="math inline" data-o006-math-id="O006-PSU-007-M0057">\(\theta.\)</span> We want to construct a 90% confidence interval for <span class="math inline" data-o006-math-id="O006-PSU-007-M0058">\(\theta.\)</span></p>
+<p data-o006-id="O006-PSU-007-U0100">For us to do this, we need to find a pivotal quantity. A pivotal quantity poses two characteristics:</p>
+<ol data-o006-id="O006-PSU-007-U0101" type="1">
+<li data-o006-id="O006-PSU-007-U0102">It is a function of the sample measurements and the <strong><em>only unknown</em></strong> parameter, <span class="math inline" data-o006-math-id="O006-PSU-007-M0059">\(\theta.\)</span></li>
+<li data-o006-id="O006-PSU-007-U0103">The distribution of the pivotal quantity does not depend on <span class="math inline" data-o006-math-id="O006-PSU-007-M0060">\(\theta.\)</span></li>
+</ol>
+<p data-o006-id="O006-PSU-007-U0104">Therefore, we must construct a function of <span class="math inline" data-o006-math-id="O006-PSU-007-M0061">\(Y\)</span> and <span class="math inline" data-o006-math-id="O006-PSU-007-M0062">\(\theta\)</span> that has a distribution that does not depend on <span class="math inline" data-o006-math-id="O006-PSU-007-M0063">\(\theta.\)</span> Thus, we need to find a pivotal quantity. It is helpful to recall distributions of functions of random variables back from STAT 414.</p>
+<p data-o006-id="O006-PSU-007-U0105">Consider the quantity <span class="math inline" data-o006-math-id="O006-PSU-007-M0064">\(U=\frac{2Y}{\theta}.\)</span> What is the distribution of <span class="math inline" data-o006-math-id="O006-PSU-007-M0065">\(U\)</span>? Let’s use the moment generating function method we get the distribution of <span class="math inline" data-o006-math-id="O006-PSU-007-M0066">\(U.\)</span></p>
+<p data-o006-id="O006-PSU-007-U0106"><span class="math display" data-o006-math-id="O006-PSU-007-M0067">\[\begin{align*}
+&amp;M_Y(t)=E(e^{tY})=\frac{1}{(1-\theta t)^2}\\
+&amp;M_U(t)=E(e^{tU})=E(e^{t\left(\frac{2Y}{\theta}\right)})=E(e^{\left(\frac{2t}{\theta}\right)Y})=\frac{1}{\left(1-\theta\left(\frac{2t}{\theta}\right)\right)^2}=\frac{1}{(1-2t)^2}
+\end{align*}\]</span></p>
+<p data-o006-id="O006-PSU-007-U0107">Due to the uniqueness property of the moment generating function, we can see that <span class="math inline" data-o006-math-id="O006-PSU-007-M0068">\(U\)</span> is a Gamma distribution with parameters <span class="math inline" data-o006-math-id="O006-PSU-007-M0069">\(\alpha=2\)</span> and <span class="math inline" data-o006-math-id="O006-PSU-007-M0070">\(\theta=2.\)</span> Even more useful, we can see that <span class="math inline" data-o006-math-id="O006-PSU-007-M0071">\(U\)</span> follows a chi-square distribution with <span class="math inline" data-o006-math-id="O006-PSU-007-M0072">\(r=4\)</span> degrees of freedom. It is very useful to view the distribution as a chi-square because we have software and also tables to help us find the probabilities.</p>
+<p data-o006-id="O006-PSU-007-U0108">Now, lets construct the confidence interval.</p>
+<p data-o006-id="O006-PSU-007-U0109">We want the interval such that:</p>
+<p data-o006-id="O006-PSU-007-U0110"><span class="math display" data-o006-math-id="O006-PSU-007-M0073">\[P\left[\chi^2_{0.05}(4)\le \frac{2Y}{\theta}\le \chi^2_{0.95}(4)\right]=1-\alpha\]</span></p>
+<p data-o006-id="O006-PSU-007-U0111">Again, we only consider the expression in the brackets, we get:</p>
+<p data-o006-id="O006-PSU-007-U0112"><span class="math display" data-o006-math-id="O006-PSU-007-M0074">\[\frac{1}{\chi^2_{0.95}(4)}\le \frac{\theta}{2Y}\le \frac{1}{\chi^2_{0.05}(4)}\]</span></p>
+<p data-o006-id="O006-PSU-007-U0113"><span class="math display" data-o006-math-id="O006-PSU-007-M0075">\[\frac{2Y}{\chi^2_{0.95}(4)}\le \theta \le \frac{2Y}{\chi^2_{0.05}(4)}\]</span></p>
+<p data-o006-id="O006-PSU-007-U0114">Therefore, the 90% confidence interval for <span class="math inline" data-o006-math-id="O006-PSU-007-M0076">\(\theta\)</span> is:</p>
+<p data-o006-id="O006-PSU-007-U0115"><span class="math display" data-o006-math-id="O006-PSU-007-M0077">\[\left[\frac{2Y}{\chi^2_{0.95}(4)}, \frac{2Y}{\chi^2_{0.05}(4)}\right]\]</span></p>
+<p data-o006-id="O006-PSU-007-U0116">Finally, let’s find the confidence interval with some data. Suppose we have an observation of <span class="math inline" data-o006-math-id="O006-PSU-007-M0078">\(y=1.261552\)</span> from a Gamma distribution with parameters <span class="math inline" data-o006-math-id="O006-PSU-007-M0079">\(\alpha=2\)</span> and <span class="math inline" data-o006-math-id="O006-PSU-007-M0080">\(\theta.\)</span> Let’s find and interpret a 90% confidence interval for <span class="math inline" data-o006-math-id="O006-PSU-007-M0081">\(\theta.\)</span></p>
+<p data-o006-id="O006-PSU-007-U0117"><span class="math display" data-o006-math-id="O006-PSU-007-M0082">\[\left[\frac{2(1.261552)}{9.4877}, \frac{2(1.261552)}{0.7107}\right]=\left[0.2659, 3.5502\right]\]</span></p>
+<p data-o006-id="O006-PSU-007-U0118">We are 90% confident that the true value of <span class="math inline" data-o006-math-id="O006-PSU-007-M0083">\(\theta\)</span> is between 0.2659 and 3.5502.</p>
+<p data-o006-id="O006-PSU-007-U0119">The biggest challenge in constructing the confidence interval is finding the pivotal quantity. In the examples we have in this class, the pivotal quantity will be provided or there will be some direction to lead you to finding the pivotal quantity. Don’t worry, we will have plenty of practice constructing confidence intervals from the homework.</p>
+</div>
+</section>
+<section class="level2" data-number="6.4" data-o006-id="O006-PSU-007-U0120" id="large-sample-confidence-intervals">
+<h2 class="anchored" data-anchor-id="large-sample-confidence-intervals" data-number="6.4" data-o006-id="O006-PSU-007-U0121"><span class="header-section-number">6.4</span> Large Sample Confidence Intervals</h2>
+<p data-o006-id="O006-PSU-007-U0122">Suppose we have an unbiased estimator, <span class="math inline" data-o006-math-id="O006-PSU-007-M0084">\(\hat{\theta}\)</span>, with standard error <span class="math inline" data-o006-math-id="O006-PSU-007-M0085">\(\sigma_{\hat{\theta}}\)</span> . Under certain conditions (will discuss later), for large samples:</p>
+<p data-o006-id="O006-PSU-007-U0123"><span class="math display" data-o006-math-id="O006-PSU-007-M0086">\[Z=\frac{\hat{\theta}-\theta}{\sigma_{\hat{\theta}}}\]</span></p>
+<p data-o006-id="O006-PSU-007-U0124">follows an approximately standard normal distribution. Additionally, <span class="math inline" data-o006-math-id="O006-PSU-007-M0087">\(Z=\frac{\hat{\theta}-\theta}{\sigma_{\hat{\theta}}}\)</span>, forms (approximately) a pivotal quantity that can be used to construct a confidence interval for the unknown parameter, <span class="math inline" data-o006-math-id="O006-PSU-007-M0088">\(\theta.\)</span></p>
+<p data-o006-id="O006-PSU-007-U0125">The conditions are:</p>
+<ol data-o006-id="O006-PSU-007-U0126" type="1">
+<li data-o006-id="O006-PSU-007-U0127">The expected value of the estimator, <span class="math inline" data-o006-math-id="O006-PSU-007-M0089">\(\hat{\theta}\)</span> , should be <span class="math inline" data-o006-math-id="O006-PSU-007-M0090">\(\theta.\)</span> In other words, the estimator needs to be unbiased.</li>
+<li data-o006-id="O006-PSU-007-U0128">The standard error of the estimator, <span class="math inline" data-o006-math-id="O006-PSU-007-M0091">\(\sigma_{\hat{\theta}}\)</span> , is known or can be found.</li>
+<li data-o006-id="O006-PSU-007-U0129">The distribution of the estimator possesses a distribution that is approximately normal for large samples. One example is the Central Limit Theorem.</li>
+</ol>
+<div class="theorem example" data-o006-id="O006-PSU-007-U0130" id="exm-cisupermarket">
+<p data-o006-id="O006-PSU-007-U0131"><span class="theorem-title"><strong>Example 6.2</strong></span> The shopping times of <span class="math inline" data-o006-math-id="O006-PSU-007-M0092">\(n=64\)</span> randomly selected customers at a local supermarket were recorded. The average and variance of the 64 shopping times were 33 minutes and 256 <span class="math inline" data-o006-math-id="O006-PSU-007-M0093">\(\text{minutes}^2\)</span>, respectively. Estimate the true mean shopping time per customer with 0.9 confidence.</p>
+<section class="level4 card card-body bg-light ms-3 mb-3 pt-0" data-o006-id="O006-PSU-007-U0132" id="solution">
+<h4 class="anchored" data-anchor-id="solution" data-o006-id="O006-PSU-007-U0133">Solution</h4>
+<p data-o006-id="O006-PSU-007-U0134">The confidence interval would take the form of:</p>
+<p data-o006-id="O006-PSU-007-U0135"><span class="math display" data-o006-math-id="O006-PSU-007-M0094">\[\hat{\theta}\pm z_{\alpha/2}\sigma_{\hat{\theta}}\]</span></p>
+<p data-o006-id="O006-PSU-007-U0136">We want to estimate the population mean shopping time, <span class="math inline" data-o006-math-id="O006-PSU-007-M0095">\(\mu.\)</span> We have an estimate of <span class="math inline" data-o006-math-id="O006-PSU-007-M0096">\(\mu\)</span>, namely <span class="math inline" data-o006-math-id="O006-PSU-007-M0097">\(\hat{\mu}=33.\)</span> The estimated standard error of the estimator is <span class="math inline" data-o006-math-id="O006-PSU-007-M0098">\(\hat{\sigma}^2_{\hat{\mu}}=\frac{s}{\sqrt{64}}=256.\)</span> The interval would be:</p>
+<p data-o006-id="O006-PSU-007-U0137"><span class="math display" data-o006-math-id="O006-PSU-007-M0099">\[\hat{\mu}\pm z_{\alpha/2}\left(\hat{\sigma}_{\hat{\mu}}\right)=\left(33\pm 1.645\left(\frac{16}{8}\right)\right)=(29.71, 36.29)\]</span></p>
+</section>
+</div>
+</section>
+<section class="level2" data-number="6.5" data-o006-id="O006-PSU-007-U0138" id="summary">
+<h2 class="anchored" data-anchor-id="summary" data-number="6.5" data-o006-id="O006-PSU-007-U0139"><span class="header-section-number">6.5</span> Summary</h2>
+<p data-o006-id="O006-PSU-007-U0140">In this lesson, we shifted from point estimates to something even more informative—confidence intervals. Instead of just giving a single number as an estimate (like the sample mean), we now give a range of values that we believe, with a certain level of confidence, contains the true population parameter.</p>
+<p data-o006-id="O006-PSU-007-U0141">We spent time unpacking what that confidence level actually means. A 95% confidence interval doesn’t mean there’s a 95% chance the parameter is in the interval you got—because the parameter is fixed. What it does mean is that if we repeated this process over and over, 95% of those intervals would contain the true value.</p>
+<p data-o006-id="O006-PSU-007-U0142">You learned how to construct these intervals using known distributions, pivotal quantities, and large-sample approximations.</p>
+<p data-o006-id="O006-PSU-007-U0143">The big picture? Confidence intervals help us communicate uncertainty in a clear, honest way, and they’re a key tool in the statistician’s toolkit.</p>
+<p data-o006-id="O006-PSU-007-U0144"><strong>Key Takeaways:</strong></p>
+<ul data-o006-id="O006-PSU-007-U0145">
+<li data-o006-id="O006-PSU-007-U0146">A general form of a confidence interval is: <span class="math inline" data-o006-math-id="O006-PSU-007-M0100">\(\text{Point Estimate }\pm \text{(Critical Value)}\times \text{Standard Error}\)</span></li>
+<li data-o006-id="O006-PSU-007-U0147">The confidence interval ror a population mean when the variance is known for a Normal distribution: <span class="math inline" data-o006-math-id="O006-PSU-007-M0101">\(\bar{X}\pm z_{\alpha/2}\cdot \frac{\sigma}{\sqrt{n}}\)</span></li>
+<li data-o006-id="O006-PSU-007-U0148">The confidence interval for a population mean of a Normal distribution when the variance is unknown: <span class="math inline" data-o006-math-id="O006-PSU-007-M0102">\(\bar{X}\pm t_{\alpha/2, df}\cdot \frac{s}{\sqrt{n}}\)</span></li>
+<li data-o006-id="O006-PSU-007-U0149">Sample size, confidence level, and variability affect the width of an interval.</li>
+</ul>
+</section>
+</main>
+</body>
+</html>
