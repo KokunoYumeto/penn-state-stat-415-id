@@ -81,15 +81,18 @@ def identity(path: Path) -> dict[str, object]:
 
 def glossary_identity() -> dict[str, object]:
     data = GLOSSARY.read_bytes()
-    if len(data) != LESSON05_GLOSSARY_BYTES or sha256(data) != LESSON05_GLOSSARY_SHA256:
+    if len(data) < LESSON05_GLOSSARY_BYTES:
+        raise RuntimeError("Lesson 05 admitted glossary prefix is missing")
+    admitted = data[:LESSON05_GLOSSARY_BYTES]
+    if sha256(admitted) != LESSON05_GLOSSARY_SHA256:
         raise RuntimeError("Lesson 05 admitted glossary identity differs")
     rows = list(csv.DictReader(io.StringIO(data.decode("utf-8"))))
-    if len(rows) != 84 or rows[-1]["term_id"] != "O006-TERM-0084":
+    if len(rows) < 84 or rows[83]["term_id"] != "O006-TERM-0084":
         raise RuntimeError("Lesson 05 admitted glossary row boundary differs")
     return {
         "path": GLOSSARY.relative_to(ROOT).as_posix(),
-        "bytes": len(data),
-        "sha256": sha256(data),
+        "bytes": len(admitted),
+        "sha256": sha256(admitted),
         "rows": 84,
         "scope": "exact cumulative glossary through the twenty Lesson 05 decisions",
     }
