@@ -45,7 +45,7 @@ likelihood-ratio counterexample (U0127) and factor-versus-exponent explanation
 (U0140) were inspected in the mobile reader, and the full Lesson 03 opening was
 inspected at desktop width. The 6,042-byte visual receipt has SHA-256
 `f80ba6dc59e3ce4e869950b3b6175b75af5affb4a445a3f1881a129fba3f34f7`.
-The 5-of-14 boundary is release-ready; its public transaction remains pending.
+The 5-of-14 boundary is public and anonymously verified.
 
 Rights remain component-separated: Penn State content is CC BY-NC 4.0 except
 where otherwise noted, MathJax 3.1.2 is Apache-2.0, and original repository
@@ -53,12 +53,14 @@ support remains CC BY-SA 4.0. No aggregate uniform relicensing is claimed. The
 translation provenance is exactly `OpenAI Codex gpt-5.6-sol, Ultra`; all source
 and human-contributor credits are preserved. No upstream message has been sent.
 
-The last public checkpoint remains 3 of 14: commit
-`4a1182fc9bd5a86942da5f7be6539f4dbf048921`, GitHub release
-`v2026.08.24.3of14`, and Zenodo version DOI `10.5281/zenodo.22083156` inside
-concept DOI `10.5281/zenodo.22077422`. The next action is the exact 5-of-14
-GitHub/Pages/GitHub-release/Zenodo transaction with anonymous byte readback,
-followed immediately by Lesson 04 production.
+The public checkpoint is commit
+`5727d8fc056d9535ac5d75a4305166f7c027b13f`, GitHub release
+`v2026.08.25.5of14`, and Zenodo version DOI `10.5281/zenodo.22088315` inside
+concept DOI `10.5281/zenodo.22077422`. Anonymous readback matched all 244
+commit files, all 32 Pages reader files, and all nine GitHub/Zenodo release
+files / 10,260,651 bytes. The Zenodo lineage audit reports one submitted latest
+version and zero drafts. The next action is Lesson 04 production in source
+order.
 
 The independent completed Random edition remains in its separate sibling
 repository and is outside this component's write boundary.

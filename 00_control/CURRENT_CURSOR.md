@@ -42,24 +42,27 @@ Updated: 2026-08-25
   unclipped.
 - Rights remain component-separated: Penn State CC BY-NC 4.0 except where
   otherwise noted; MathJax Apache-2.0; original repository layer CC BY-SA 4.0.
-- Last public checkpoint remains 3 of 14 at commit
-  `4a1182fc9bd5a86942da5f7be6539f4dbf048921`, GitHub tag
-  `v2026.08.24.3of14`, and Zenodo version DOI `10.5281/zenodo.22083156`
-  inside concept DOI `10.5281/zenodo.22077422`. The 5-of-14 local boundary is
-  release-ready but not yet publicly claimed.
+- The 5-of-14 boundary is public at commit
+  `5727d8fc056d9535ac5d75a4305166f7c027b13f`, GitHub tag
+  `v2026.08.25.5of14`, and Zenodo version DOI `10.5281/zenodo.22088315`
+  inside concept DOI `10.5281/zenodo.22077422`. Anonymous readback matched all
+  244 commit files, all 32 Pages files, and all nine release files at GitHub
+  and Zenodo. The Zenodo lineage has one submitted latest version and zero
+  drafts.
 - No upstream message has been sent.
 
 ## Next executable action
 
-Commit and push the exact release-ready 5-of-14 boundary, verify GitHub commit
-bytes, Pages routes, and all 32 manifest files anonymously, then publish the
-same substantial checkpoint in the existing GitHub/Zenodo lineages and verify
-the public bytes. Continue with Lesson 04 in source order without reopening
-completed documents.
+Begin Lesson 04 in source order: normalize the already frozen official
+authority, audit its assets/terminology/source defects, translate contiguously,
+and extend the same stable-ID backend. Do not reopen completed documents or
+contact upstream.
 
 ## Recovery
 
 Read `WORKFLOW.md`, this file, `CURRENT_STATE.md`, `COMPONENT_BOUNDARY.md`,
-`CHECKPOINT_2026-08-25_THROUGH_LESSON03.md`, `TRANSLATION_LEDGER.csv`, and the
-Lesson 03 normalization/translation/build/QA/visual receipts. Conversation
-summaries are not state. Do not broaden the filesystem or Git scope.
+`CHECKPOINT_2026-08-25_THROUGH_LESSON03.md`,
+`CHECKPOINT_2026-08-25_THROUGH_LESSON03_PUBLICATION_COMPLETE.md`,
+`TRANSLATION_LEDGER.csv`, and the Lesson 03 normalization/translation/build,
+QA, visual, package, and public receipts. Conversation summaries are not state.
+Do not broaden the filesystem or Git scope.

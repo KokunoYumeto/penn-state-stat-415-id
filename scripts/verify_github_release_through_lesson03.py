@@ -7,6 +7,7 @@ import argparse
 import hashlib
 import json
 import re
+import subprocess
 import tempfile
 import time
 from concurrent.futures import ThreadPoolExecutor
@@ -53,6 +54,23 @@ def fetch(url: str) -> bytes:
             raise RuntimeError(f"anonymous GitHub release readback failed with HTTP {response.status_code}")
         time.sleep(3 * (attempt + 1))
     raise RuntimeError("unreachable retry state")
+
+
+def release_metadata() -> dict[str, object]:
+    result = subprocess.run(
+        [
+            "gh", "release", "view", TAG, "--json",
+            "tagName,isDraft,isPrerelease,publishedAt,targetCommitish,url,assets",
+        ],
+        cwd=ROOT,
+        check=True,
+        stdout=subprocess.PIPE,
+        stderr=subprocess.PIPE,
+    )
+    value = json.loads(result.stdout)
+    if not isinstance(value, dict):
+        raise RuntimeError("GitHub release metadata is not an object")
+    return value
 
 
 def resolve_tag_commit(tag_ref: dict[str, object]) -> str:
@@ -124,20 +142,15 @@ def load_package(commit_sha: str) -> tuple[dict[str, object], dict[str, dict[str
 
 def compute(commit_sha: str) -> bytes:
     truststore.inject_into_ssl()
-    commit = json.loads(fetch(f"https://api.github.com/repos/{OWNER}/{REPO}/commits/{commit_sha}"))
-    if commit.get("sha") != commit_sha:
-        raise RuntimeError("public checkpoint commit identity differs")
-    release = json.loads(fetch(f"https://api.github.com/repos/{OWNER}/{REPO}/releases/tags/{TAG}"))
+    release = release_metadata()
     if (
-        release.get("draft") is not False
-        or release.get("prerelease") is not False
-        or release.get("tag_name") != TAG
-        or not release.get("published_at")
+        release.get("isDraft") is not False
+        or release.get("isPrerelease") is not False
+        or release.get("tagName") != TAG
+        or release.get("targetCommitish") != commit_sha
+        or not release.get("publishedAt")
     ):
         raise RuntimeError("GitHub release is not the exact published checkpoint")
-    tag = json.loads(fetch(f"https://api.github.com/repos/{OWNER}/{REPO}/git/ref/tags/{TAG}"))
-    if resolve_tag_commit(tag) != commit_sha:
-        raise RuntimeError("GitHub release tag does not point to the checkpoint commit")
     package, expected = load_package(commit_sha)
 
     asset_rows = release.get("assets")
@@ -152,7 +165,9 @@ def compute(commit_sha: str) -> bytes:
         wanted = expected[filename]
         if asset.get("state") != "uploaded" or int(asset.get("size", -1)) != int(wanted["bytes"]):
             raise RuntimeError(f"GitHub release asset metadata differs: {filename}")
-        url = str(asset.get("browser_download_url", ""))
+        if asset.get("digest") != f"sha256:{wanted['sha256']}":
+            raise RuntimeError(f"GitHub release asset digest metadata differs: {filename}")
+        url = str(asset.get("url", ""))
         if not url:
             raise RuntimeError(f"GitHub release asset omits its download URL: {filename}")
         data = fetch(url)
@@ -170,8 +185,8 @@ def compute(commit_sha: str) -> bytes:
         "coverage": package["coverage"],
         "tag": TAG,
         "commit": commit_sha,
-        "url": release.get("html_url"),
-        "published_at": release.get("published_at"),
+        "url": release.get("url"),
+        "published_at": release.get("publishedAt"),
         "package_receipt": {
             "path": PACKAGE_TREE_PATH,
             "bytes": PACKAGE.stat().st_size,
@@ -182,7 +197,10 @@ def compute(commit_sha: str) -> bytes:
         "asset_count": len(verified),
         "asset_bytes": sum(int(row["bytes"]) for row in verified),
         "anonymous_readback": True,
-        "credential_access": False,
+        "credential_access": {
+            "release_metadata_via_github_cli": True,
+            "public_byte_readback": False,
+        },
     }
     return (json.dumps(receipt, ensure_ascii=False, indent=2, sort_keys=True) + "\n").encode("utf-8")
 

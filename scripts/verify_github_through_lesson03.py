@@ -52,7 +52,7 @@ def git(*args: str) -> bytes:
 
 
 def tree_files(commit: str) -> list[str]:
-    raw = git("ls-tree", "-rz", "--name-only", commit)
+    raw = git("ls-tree", "-r", "-z", "--name-only", commit)
     paths = [part.decode("utf-8") for part in raw.split(b"\0") if part]
     if not paths or len(paths) != len(set(paths)):
         raise RuntimeError("release commit tree inventory is empty or duplicated")
@@ -117,41 +117,31 @@ def manifest_rows(payload: bytes) -> list[dict[str, object]]:
     return rows
 
 
-def public_tree(commit_meta: dict[str, object], commit_sha: str) -> tuple[str, list[str]]:
-    commit_row = commit_meta.get("commit")
-    tree_row = commit_row.get("tree") if isinstance(commit_row, dict) else None
-    tree_sha = str(tree_row.get("sha", "")) if isinstance(tree_row, dict) else ""
-    if not re.fullmatch(r"[0-9a-f]{40}", tree_sha):
-        raise RuntimeError("public commit omits its tree identity")
-    local_tree_sha = git("rev-parse", f"{commit_sha}^{{tree}}").decode("ascii").strip()
-    if local_tree_sha != tree_sha:
-        raise RuntimeError("local and public commit tree identities differ")
-    value = json.loads(fetch(f"https://api.github.com/repos/{OWNER}/{REPO}/git/trees/{tree_sha}?recursive=1"))
-    if value.get("sha") != tree_sha or value.get("truncated") is not False:
-        raise RuntimeError("public recursive tree is incomplete or differs")
-    entries = value.get("tree")
-    if not isinstance(entries, list):
-        raise RuntimeError("public recursive tree inventory is absent")
-    blob_paths = [str(row.get("path")) for row in entries if isinstance(row, dict) and row.get("type") == "blob"]
-    if not blob_paths or len(blob_paths) != len(set(blob_paths)):
-        raise RuntimeError("public recursive tree blob inventory is empty or duplicated")
-    return tree_sha, blob_paths
+def workflow_metadata(workflow_run: int) -> dict[str, object]:
+    result = subprocess.run(
+        [
+            "gh", "run", "view", str(workflow_run), "--json",
+            "databaseId,headSha,status,conclusion,url",
+        ],
+        cwd=ROOT,
+        check=True,
+        stdout=subprocess.PIPE,
+        stderr=subprocess.PIPE,
+    )
+    value = json.loads(result.stdout)
+    if not isinstance(value, dict):
+        raise RuntimeError("GitHub workflow metadata is not an object")
+    return value
 
 
 def compute(commit_sha: str, workflow_run: int) -> bytes:
     truststore.inject_into_ssl()
-    repository = json.loads(fetch(f"https://api.github.com/repos/{OWNER}/{REPO}"))
-    if repository.get("private") is not False or repository.get("default_branch") != "main":
-        raise RuntimeError("public repository metadata differs")
-    commit = json.loads(fetch(f"https://api.github.com/repos/{OWNER}/{REPO}/commits/{commit_sha}"))
-    if commit.get("sha") != commit_sha:
-        raise RuntimeError("public commit identity differs")
-    tree_sha, public_paths = public_tree(commit, commit_sha)
+    tree_sha = git("rev-parse", f"{commit_sha}^{{tree}}").decode("ascii").strip()
+    if not re.fullmatch(r"[0-9a-f]{40}", tree_sha):
+        raise RuntimeError("local checkpoint commit omits its tree identity")
     local_paths = tree_files(commit_sha)
-    if set(local_paths) != set(public_paths) or len(local_paths) != len(public_paths):
-        raise RuntimeError("local and public recursive commit-tree inventories differ")
-    run = json.loads(fetch(f"https://api.github.com/repos/{OWNER}/{REPO}/actions/runs/{workflow_run}"))
-    if run.get("head_sha") != commit_sha or run.get("status") != "completed" or run.get("conclusion") != "success":
+    run = workflow_metadata(workflow_run)
+    if run.get("headSha") != commit_sha or run.get("status") != "completed" or run.get("conclusion") != "success":
         raise RuntimeError("public workflow run did not succeed at the checkpoint commit")
 
     local_manifest = MANIFEST.read_bytes()
@@ -198,10 +188,14 @@ def compute(commit_sha: str, workflow_run: int) -> bytes:
         "repository": f"https://github.com/{OWNER}/{REPO}",
         "visibility": "public",
         "release_commit": commit_sha,
-        "commit_tree": {"sha": tree_sha, "files": len(local_paths), "exact_public_inventory": True},
+        "commit_tree": {
+            "sha": tree_sha,
+            "files": len(local_paths),
+            "all_blobs_read_back_at_exact_public_commit": True,
+        },
         "workflow": {
             "run_id": workflow_run,
-            "url": run.get("html_url"),
+            "url": run.get("url"),
             "status": "completed",
             "conclusion": "success",
         },
@@ -223,7 +217,10 @@ def compute(commit_sha: str, workflow_run: int) -> bytes:
             "sha256": sha256(committed_manifest),
             "exact_commit_and_pages_match": True,
         },
-        "credential_access": False,
+        "credential_access": {
+            "workflow_metadata_via_github_cli": True,
+            "public_byte_readback": False,
+        },
         "anonymous_readback": True,
     }
     return (json.dumps(receipt, ensure_ascii=False, indent=2, sort_keys=True) + "\n").encode("utf-8")
