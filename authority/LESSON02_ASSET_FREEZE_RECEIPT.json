@@ -1,0 +1,82 @@
+{
+  "asset_bytes": 43643,
+  "assets": 2,
+  "audit": {
+    "bytes": 9531,
+    "path": "working/lesson02_asset_rights_audit.json",
+    "sha256": "f142b7257b8b36417d2d1bb145c2bec13d02274d1ee61698a1a21993e4bc86b0"
+  },
+  "component_id": "Lesson02",
+  "document_id": "O006-PSU-003",
+  "manifest": {
+    "bytes": 681,
+    "path": "authority/LESSON02_ASSET_MANIFEST.csv",
+    "sha256": "ef3739fabe02a1e77258d559e6a20be48f727e9e55b05a93851b6a037b715407"
+  },
+  "png_validation": [
+    {
+      "animated": false,
+      "asset_id": "O006-PSU-003-A0001",
+      "bit_depth": 8,
+      "chunk_crc_valid": true,
+      "chunks": [
+        "IHDR",
+        "pHYs",
+        "IDAT",
+        "IEND"
+      ],
+      "color_type": 2,
+      "compression": 0,
+      "embedded_text_or_profile": false,
+      "filter": 0,
+      "height": 544,
+      "interlace": 0,
+      "signature_valid": true,
+      "trailing_bytes": 0,
+      "width": 1753
+    },
+    {
+      "animated": false,
+      "asset_id": "O006-PSU-003-A0002",
+      "bit_depth": 8,
+      "chunk_crc_valid": true,
+      "chunks": [
+        "IHDR",
+        "PLTE",
+        "pHYs",
+        "IDAT",
+        "IDAT",
+        "IEND"
+      ],
+      "color_type": 3,
+      "compression": 0,
+      "embedded_text_or_profile": false,
+      "filter": 0,
+      "height": 960,
+      "interlace": 0,
+      "signature_valid": true,
+      "trailing_bytes": 0,
+      "width": 1344
+    }
+  ],
+  "reference_census": {
+    "images": 2,
+    "other_main_dependencies": 0,
+    "same_asset_lightbox_links": 1,
+    "unique_assets": 2
+  },
+  "rights": {
+    "attribution_rule": "preserve the Lesson 02 page and exact official asset URLs",
+    "blocking_unresolved": 0,
+    "exception_found": false,
+    "license": "CC BY-NC 4.0"
+  },
+  "schema": "o006.stat415.lesson02-asset-freeze.v1",
+  "source": {
+    "bytes": 93418,
+    "path": "authority/upstream/stat415/Lesson02.html",
+    "sha256": "29890184a4f2ba91fcd10425e0a941e7eab0f3ac9ab158b2ba469d0744ec69e5",
+    "url": "https://online.stat.psu.edu/stat415/Lesson02"
+  },
+  "status": "frozen-and-verified"
+}
