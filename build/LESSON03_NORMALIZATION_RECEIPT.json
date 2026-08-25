@@ -1,0 +1,227 @@
+{
+  "asset_inventory": [],
+  "counts": {
+    "asset_occurrences": 0,
+    "assets": 0,
+    "catalogue_records": 1393,
+    "code_nodes": 0,
+    "corollaries": 0,
+    "definitions": 1,
+    "examples": 11,
+    "figure_captions": 0,
+    "figures": 0,
+    "headings": 26,
+    "images": 0,
+    "links": 4,
+    "math_display": 91,
+    "math_inline": 349,
+    "math_nodes": 440,
+    "native_id_occurrences": 41,
+    "pre_nodes": 0,
+    "proofs": 1,
+    "sections": 25,
+    "solutions": 11,
+    "structural_units": 421,
+    "tables": 0,
+    "theorem_class_nodes": 14,
+    "theorems": 2,
+    "translation_segments": 531,
+    "unique_asset_sources": 0,
+    "unique_native_ids": 41
+  },
+  "document": {
+    "asset_count": 0,
+    "component_id": "Lesson03",
+    "document_id": "O006-PSU-004",
+    "duplicate_native_ids": [],
+    "entity_id": "O006-PSU-004",
+    "formula_count": 440,
+    "formula_sha256": "08acebc4cde21203d617c3d22a493632e4b84f86ef7f1ae9404906f8b852ae55",
+    "locale": "en-US",
+    "native_id_occurrences": 41,
+    "normalized_bytes": 98397,
+    "normalized_path": "source/normalized/en-US/Lesson03.html",
+    "normalized_sha256": "b7bf8db106f1e38d478220284c39ce89e6a9eaaaa1ae98804217c1733b75b17b",
+    "ordinal": 4,
+    "record_type": "document",
+    "schema": "o006.stat415.source-catalogue.v1",
+    "segment_count": 531,
+    "source_bytes": 118925,
+    "source_path": "authority/upstream/stat415/Lesson03.html",
+    "source_sha256": "26dd4efe75abc879a5316c215eaedbfe713c77e742898eb86e7f3d88cb0c04c9",
+    "source_url": "https://online.stat.psu.edu/stat415/Lesson03",
+    "topology_sha256": "3f329f7a7d5ea9dd850e1a6b640e3f2bdf1d55f4403da01e024e0d31d20e8d2b",
+    "unique_native_ids": 41,
+    "unit_count": 421
+  },
+  "duplicate_native_ids": [],
+  "outputs": {
+    "catalogue": {
+      "bytes": 654743,
+      "path": "backend/lesson03_source_catalogue.jsonl",
+      "records": 1393,
+      "sha256": "6ee066954be5e3777a655d6c43440f7bb2a9379e665a5ba4997136aef509ed7a"
+    },
+    "normalized": {
+      "bytes": 98397,
+      "path": "source/normalized/en-US/Lesson03.html",
+      "sha256": "b7bf8db106f1e38d478220284c39ce89e6a9eaaaa1ae98804217c1733b75b17b"
+    },
+    "script": {
+      "bytes": 35668,
+      "path": "scripts/normalize_lesson03.py",
+      "sha256": "0eeb260de05ebae694700cc2212966ee4ba19351f067bef49c095ec6fccd70e6"
+    },
+    "segments": {
+      "bytes": 94343,
+      "path": "working/lesson03_segments.csv",
+      "rows": 531,
+      "sha256": "ba6c4d7c905ec14babb1ac9a971a7195968978c581eeb0d4088d92889bdf8b8a"
+    },
+    "zero_asset_closure": {
+      "bytes": 1800,
+      "path": "working/lesson03_zero_asset_closure.json",
+      "sha256": "e235e8ab499aa0ce542898d4aaf016e6932c807da8a06fdb9f0976f60547d705"
+    }
+  },
+  "parser": {
+    "beautifulsoup_version": "4.14.3",
+    "name": "beautifulsoup4/html.parser",
+    "source_decoding": "UTF-8 strict"
+  },
+  "preservation": {
+    "authority_mutated": false,
+    "dependency_census_preserved": true,
+    "formula_nodes_byte_preserved": true,
+    "formula_sha256": "08acebc4cde21203d617c3d22a493632e4b84f86ef7f1ae9404906f8b852ae55",
+    "image_sequence_preserved": true,
+    "link_sequence_preserved": true,
+    "main_selector": "main#quarto-document-content",
+    "native_anchor_sequence_preserved": true,
+    "topology_sha256": "3f329f7a7d5ea9dd850e1a6b640e3f2bdf1d55f4403da01e024e0d31d20e8d2b"
+  },
+  "role_counts": {
+    "definition": 1,
+    "example": 11,
+    "heading": 15,
+    "link": 4,
+    "proof": 2,
+    "section": 13,
+    "solution": 22,
+    "structure": 351,
+    "theorem": 2
+  },
+  "schema": "o006.stat415.lesson03-normalization.v1",
+  "source_defect_count": 17,
+  "source_defects": [
+    {
+      "defect_id": "L03-D001",
+      "evidence": "\\(N(\\theta_1, \\theta_2.\\)",
+      "kind": "formula-delimiter",
+      "note": "The normal-distribution call opens N( but omits its closing parenthesis before the period."
+    },
+    {
+      "defect_id": "L03-D002",
+      "evidence": "\\[f(x_1, x_2, ... , x_n;\\theta_1, \\theta_2) = \\dfrac{1}{\\sqrt{2\\pi\\theta_2}} \\text{exp} \\left[-\\dfrac{1}{2}\\dfrac{(x_1-\\theta_1)^2}{\\theta_2} \\right] \\times ... \\times = \\dfrac{1}{\\sqrt{2\\pi\\theta_2}} \\text{exp} \\left[-\\dfrac{1}{2}\\dfrac{(x_n-\\theta_1)^2}{\\theta_2} \\right]\\]",
+      "kind": "normal-density-product-operator",
+      "note": "The displayed product inserts an equality sign between the multiplication sign and the final normal-density factor."
+    },
+    {
+      "defect_id": "L03-D003",
+      "evidence": "\\[f(x_1, x_2, ... , x_n;\\theta_1, \\theta_2) = \\color{blue}{\\underbrace{{\\color{black}{\\text{exp} \\left[ -\\dfrac{1}{2\\theta_2}\\sum_{i=1}^{n}x_{i}^{2}+\\dfrac{\\theta_1}{\\theta_2}\\sum_{i=1}^{n}x_{i} -\\dfrac{n\\theta_{1}^{2}}{2\\theta_2}-n\\text{log}\\sqrt{2\\pi\\theta_2} \\right]}}}_{\\textstyle \\phi[u_1(\\sum x_1^2),u_2(\\sum x_i);\\theta_1,\\theta_2]}}\\times \\color{red}\\underbrace{\\color{black}{1}}_{\\textstyle h(x_1,...,x_n)}\\]",
+      "kind": "summation-index",
+      "note": "The sufficient statistic derived immediately above is sum_i x_i^2; its underbrace label instead repeats x_1^2 inside the summation."
+    },
+    {
+      "defect_id": "L03-D004",
+      "evidence": "\\[f(x;\\theta_1,\\theta_2) =exp[\\frac{-1}{2\\theta_2}{\\color{blue}\\underbrace{\\color{black}x^2}_{\\textstyle K_1(x) }}+\\frac{\\theta_1}{\\theta_2}{\\color{blue}\\underbrace{\\color{black}x}_{\\textstyle K_2(x)}}- {\\color{brown}\\underbrace{\\color{black}\\text{log}(1)}_{\\textstyle S(x)}} - {\\color{green}\\underbrace{\\color{black}\\frac{\\theta_1^2}{2\\theta_2}-log\\sqrt{2\\pi\\theta_2}}_{\\textstyle q(\\theta_1, \\theta_2)}}]\\]",
+      "kind": "normal-density-normalization-sign",
+      "note": "The outer minus applied to theta_1^2/(2 theta_2) - log sqrt(2 pi theta_2) makes the log-normalizing term positive. A normal density requires both -theta_1^2/(2 theta_2) and -log sqrt(2 pi theta_2)."
+    },
+    {
+      "defect_id": "L03-D005",
+      "evidence": "Y = X-bar^2 is declared insufficient solely because it is not one-to-one.",
+      "kind": "insufficient-sufficiency-argument",
+      "note": "Non-injectivity alone does not prove insufficiency. Here the conclusion is true, but it requires a likelihood-ratio counterexample for samples with means a and -a."
+    },
+    {
+      "defect_id": "L03-D006",
+      "evidence": "\\(h((x_1, x_2, \\ldots, x_n)\\)",
+      "kind": "formula-delimiter",
+      "note": "The factor h opens two parentheses but closes only one."
+    },
+    {
+      "defect_id": "L03-D007",
+      "evidence": [
+        "\\[f(x_1, x_2, \\ldots, x_n;\\lambda) = {\\color{blue}\\underbrace{\\color{black} \\left(e^{-n\\lambda}\\lambda^{n\\bar{x}} \\right)}_{\\textstyle \\color{blue} {\\phi[u(\\Sigma{x_i})_i\\lambda)]}}} \\times {\\color{red}\\underbrace{\\color{black}\\left( \\frac{1}{x_1! x_2! \\ldots x_n!} \\right)}_{\\textstyle \\color{red} {h(x_1, x_2, \\ldots x_n)}}}\\]",
+        "\\[f(x_1, x_2, ... , x_n;\\mu) = {\\color{blue}{\\underbrace{\\color{black}{\\left\\{ exp \\left[ -\\dfrac{n}{2} (\\bar{x}-\\mu)^2 \\right] \\right\\}}}_{\\textstyle \\color{blue}{\\phi[\\mu(\\bar{x});\\mu)]}}}} \\times \\color{red}{\\underbrace{\\color{black}{\\left\\{ \\dfrac{1}{(2\\pi)^{n/2}} exp \\left[ -\\dfrac{1}{2}\\sum_{i=1}^{n} (x_i - \\bar{x})^2 \\right] \\right\\}}}_{\\textstyle\\color{red}{h(x_1, x_2,...,x_n)}}}\\]",
+        "\\[f(x_1, x_2, ... , x_n;\\theta) ={\\color{blue}{\\underbrace{\\color{black}{\\dfrac{1}{\\theta^n}exp\\left( - \\dfrac{1}{\\theta} \\sum_{i=1}^{n} x_i\\right)}}_{\\textstyle \\color{blue}{\\phi[\\mu(\\sum x_i);\\theta]}}}}\\times{\\color{red}{\\underbrace{\\color{black}1}_{\\textstyle \\color{red}h(x_1,x_2,...,x_n)}}}\\]",
+        "\\[f(x_1, ... , x_n;\\theta)={\\color{blue} \\underbrace{\\color{black}{\\left\\{ \\text{exp}\\left[p(\\theta)\\sum_{i=1}^{n}K(x_i) + nq(\\theta)\\right]\\right\\}}}_{\\textstyle \\color{blue}\\phi[u(\\sum K(x_i);\\theta)]}} \\times {\\color{red}\\underbrace{\\color{black}\\left\\{ \\text{exp}\\left[\\sum_{i=1}^{n}S(x_i)\\right] \\right\\}}_{\\textstyle \\color{red}h(x_1,...,x_n)}}\\]"
+      ],
+      "kind": "factor-label-syntax",
+      "note": "Four underbrace labels have mismatched delimiters, a stray subscript, or the wrong function symbol; each label should expose phi(statistic; parameter)."
+    },
+    {
+      "defect_id": "L03-D008",
+      "evidence": "adding up all n of the theta factors and the n x_i terms in the exponents",
+      "kind": "factor-versus-exponent-explanation",
+      "note": "The n factors theta^-1 multiply to theta^-n; only the exponential arguments sum."
+    },
+    {
+      "defect_id": "L03-D009",
+      "evidence": "\\[f(x;p) =exp\\left[\\text{ln}(p^x) + \\text{ln}(1-p)^{1-x} \\right]\\]",
+      "kind": "logarithm-grouping",
+      "note": "The exponent must lie inside the logarithm: ln((1-p)^(1-x))."
+    },
+    {
+      "defect_id": "L03-D010",
+      "evidence": "\\[f(x;p) =exp[{\\color{blue}\\underbrace{\\color{black}x}_{\\textstyle k(x) }}{\\color{red}\\underbrace{\\color{black}\\text{ln}\\left( \\frac{p}{1-p}\\right)}_{\\textstyle p(p)}} + {\\color{green}\\underbrace{\\color{black}\\text{ln}(1)}_{\\textstyle q(p)}} + {\\color{brown}\\underbrace{\\color{black}x\\text{ln}(1-p)}_{\\textstyle s(x,p)}}]\\]",
+      "kind": "bernoulli-exponential-equality",
+      "note": "The displayed exponent simplifies to x ln p rather than the Bernoulli log-pmf; retain x ln p + ln(1-p) - x ln(1-p) before combining terms."
+    },
+    {
+      "defect_id": "L03-D011",
+      "evidence": "\\[f(x;\\lambda) =\\frac{e^{-\\lambda}\\lambda^x}{x!}=exp[{\\color{blue}\\underbrace{\\color{black}x}_{\\textstyle k(x) }}{\\color{red}\\underbrace{\\color{black}\\text{ln}\\lambda}_{\\textstyle p(\\lambda)}} + {\\color{brown}\\underbrace{\\color{black}\\text{ln}(x!)}_{\\textstyle s(x)}} + {\\color{green}\\underbrace{\\color{black}\\lambda}_{\\textstyle q(\\lambda)}}]\\]",
+      "kind": "poisson-exponential-signs",
+      "note": "The exponential form requires -ln(x!) and -lambda, not plus signs."
+    },
+    {
+      "defect_id": "L03-D012",
+      "evidence": "\\[f(x;\\mu) =\\frac{1}{\\sqrt{2\\pi}}e^{-(x-\\mu)^2/2}=exp\\left\\{{\\color{blue}\\underbrace{\\color{black}x}_{\\textstyle k(x) }}{\\color{red}\\underbrace{\\color{black}u}_{\\textstyle p(\\mu)}} - {\\color{brown}\\underbrace{\\color{black}\\frac{x^2}{2}}_{\\textstyle s(x)}} - {\\color{green}\\underbrace{\\color{black}\\frac{\\mu^2}{2}-\\frac{1}{2}ln(2\\pi)}_{\\textstyle q(\\mu)}}\\right\\}\\]",
+      "kind": "normal-exponential-form",
+      "note": "The coefficient of x must be mu, not u, and the log-normalizing term must be -1/2 log(2 pi), not positive after an outer minus."
+    },
+    {
+      "defect_id": "L03-D013",
+      "evidence": "\\[f(x_1, x_2, ... , x_n;\\theta_1, \\theta_2) = f(x_1;\\theta_1, \\theta_2) \\times f(x_2;\\theta_1, \\theta_2) \\times ... \\times f(x_n;\\theta_1, \\theta_2) \\times\\]",
+      "kind": "trailing-product-operator",
+      "note": "The joint-density product ends with an unpaired multiplication sign."
+    },
+    {
+      "defect_id": "L03-D014",
+      "evidence": "\\[f(x_1, x_2, ... , x_n;\\theta_1, \\theta_2) = \\text{exp} \\left[\\text{log}\\left(\\dfrac{1}{\\sqrt{2\\pi\\theta_2}}\\right)^n\\right] \\text{exp} \\left[-\\dfrac{1}{2\\theta_2}\\left\\{ \\sum_{i=1}^{n}x_{i}^{2} -2\\theta_1\\sum_{i=1}^{n}x_{i} +\\sum_{i=1}^{n}\\theta_{1}^{2} \\right\\}\\right]\\]",
+      "kind": "logarithm-power-grouping",
+      "note": "(log a)^n is not log(a^n); the exponent should contain n log(a)."
+    },
+    {
+      "defect_id": "L03-D015",
+      "evidence": "\\[\\begin{align}\\bar{X} &=\\dfrac{Y_2}{n}=\\dfrac{1}{n}\\sum_{i=1}^{n}X_i \\\\ &\\text{ and }\\\\ S_2&=\\dfrac{Y_1-(Y_{2}^{2}/n)}{n-1}\\\\&=\\dfrac{1}{n-1} \\left[\\sum_{i=1}^{n}X_{i}^{2}-n\\bar{X}^2 \\right]\\end{align}\\]",
+      "kind": "variance-statistic-symbol",
+      "note": "The prose and standard definition use S^2; the display instead labels it S_2."
+    },
+    {
+      "defect_id": "L03-D016",
+      "evidence": "\\[\\hat{\\sigma}^2_{MM}=\\dfrac{1}{n}\\sum\\limits_{i=1}^n X_i^2-\\mu^2=\\dfrac{1}{n}\\sum\\limits_{i=1}^n X_i^2-\\bar{X}^2\\]",
+      "kind": "unknown-parameter-in-estimator",
+      "note": "An estimator cannot retain the unknown mu; write -mu_hat_MM^2 and then -X-bar^2."
+    },
+    {
+      "defect_id": "L03-D017",
+      "evidence": "\\[f(x_i)=\\dfrac{1}{\\Gamma(\\alpha) \\theta^\\alpha}x^{\\alpha-1}e^{-x/\\theta}\\]",
+      "kind": "gamma-density-variable",
+      "note": "The left side uses x_i while the density and support switch to x; use x_i consistently."
+    }
+  ],
+  "source_rule": "semantic main only; no authority correction; formulas/code protected; stable unit, math, asset, and segment IDs additive",
+  "status": "normalized-source-ready"
+}

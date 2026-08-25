@@ -35,16 +35,20 @@ jobs:
 
       - name: Replay deterministic authority, translation, build, and QA gates
         run: |
-          python scripts/freeze_stat415.py --check-only
-          python scripts/freeze_first_unit_assets.py --check-only
-          python scripts/freeze_lesson01_assets.py --check-only
-          python scripts/freeze_mathjax.py --check-only
-          python scripts/normalize_first_unit.py --check-only
-          python scripts/merge_first_unit_translations.py --check-only
-          python scripts/normalize_lesson01.py --check-only
-          python scripts/merge_lesson01_translations.py --check-only
-          python scripts/build_through_lesson01.py --check-only
-          python scripts/qa_through_lesson01.py --check-only
+          python -B scripts/freeze_stat415.py --check-only
+          python -B scripts/freeze_first_unit_assets.py --check-only
+          python -B scripts/freeze_lesson01_assets.py --check-only
+          python -B scripts/freeze_lesson02_assets.py --check-only
+          python -B scripts/freeze_mathjax.py --check-only
+          python -B scripts/normalize_first_unit.py --check-only
+          python -B scripts/merge_first_unit_translations.py --check-only
+          python -B scripts/normalize_lesson01.py --check-only
+          python -B scripts/merge_lesson01_translations.py --check-only
+          python -B scripts/normalize_lesson02.py --check-only
+          python -B scripts/normalize_lesson03.py --check-only
+          python -B scripts/merge_lesson03_translations.py --check-only
+          python -B scripts/build_through_lesson03.py --check-only
+          python -B scripts/qa_through_lesson03.py --check-only
 
       - name: Configure Pages
         uses: actions/configure-pages@45bfe0192ca1faeb007ade9deae92b16b8254a0d # v6.0.0

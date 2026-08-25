@@ -1,0 +1,191 @@
+{
+  "corrections": {
+    "bytes": 10143,
+    "count": 29,
+    "lesson02_count": 9,
+    "path": "backend/through_lesson02_corrections.jsonl",
+    "sha256": "db6ec366a1461c545d4c1ca93b2a76664868bb4e99878a0719d8e9ab2a976c19",
+    "through_lesson01_count": 20
+  },
+  "coverage": {
+    "complete_count": 4,
+    "complete_documents": [
+      "index",
+      "Lesson00",
+      "Lesson01",
+      "Lesson02"
+    ],
+    "corpus_document_count": 14,
+    "next_document": "Lesson03"
+  },
+  "documents_backend": {
+    "bytes": 2680,
+    "path": "backend/through_lesson02_documents.jsonl",
+    "sha256": "22f36e9a27466c271b8a9b507d356f73246b1484e1d9d13439329fc932bca474"
+  },
+  "historical_lesson01_evidence": {
+    "backend/through_lesson01_corrections.jsonl": {
+      "bytes": 6506,
+      "sha256": "f66a3106401d473d2aa8208e5e04823f1b6d4e830c86d5fed61285e96fd5c7c4"
+    },
+    "backend/through_lesson01_documents.jsonl": {
+      "bytes": 2005,
+      "sha256": "d8983d875f55fad9df56b1dfe6962456fa357b359c14d42c253318f8775a5bc1"
+    },
+    "build/THROUGH_LESSON01_BUILD_RECEIPT.json": {
+      "bytes": 7122,
+      "sha256": "ae926ca4f9a3d0d1723b059fbc578365bfd5fc704521a7a990b98bdd4bc4a1c2"
+    },
+    "build/THROUGH_LESSON01_MANIFEST.csv": {
+      "bytes": 2798,
+      "sha256": "6a047b981eeb71e740450678b4f802fb7ec3eb954cf92ffc3cebbaf8a050b5a7"
+    }
+  },
+  "inputs": {
+    "builder": {
+      "bytes": 40684,
+      "path": "scripts/build_through_lesson02.py",
+      "sha256": "22d58702d08ca55c2301f0e3652fc9adc8d9469450c259413890854711cdc3b7"
+    },
+    "frozen": {
+      "00_control/TERMINOLOGY_GLOSSARY_ID_ID.csv": {
+        "bytes": 3160,
+        "sha256": "6911989a604c656575245e84cf22765591ee7ba9da6b2f1a7d738fde85956c54"
+      },
+      "authority/LESSON02_ASSET_FREEZE_RECEIPT.json": {
+        "bytes": 2064,
+        "sha256": "ebd00288c159889b7a255ad571735a5428ab9d431e4bc73b48c077bd6c4aaf05"
+      },
+      "authority/LESSON02_ASSET_MANIFEST.csv": {
+        "bytes": 681,
+        "sha256": "ef3739fabe02a1e77258d559e6a20be48f727e9e55b05a93851b6a037b715407"
+      },
+      "authority/assets/stat415/lesson02/dartboard.png": {
+        "bytes": 32701,
+        "sha256": "c8ddb1d7befe425ac72efd04abd75c0835aae62c786765256f3f8d93ee3ec0cd"
+      },
+      "authority/assets/stat415/lesson02/unnamed-chunk-1-1.png": {
+        "bytes": 10942,
+        "sha256": "564048b4327b3a379fe9921efa9224760f6c6afd01135f17d941af393a8f4532"
+      },
+      "backend/lesson02_translation_bindings.jsonl": {
+        "bytes": 132573,
+        "sha256": "3c75bfc1cc9dc38213cf03d43c2b6b3e1ec106536a4e4ac1b04e836ef568c25f"
+      },
+      "backend/through_lesson01_corrections.jsonl": {
+        "bytes": 6506,
+        "sha256": "f66a3106401d473d2aa8208e5e04823f1b6d4e830c86d5fed61285e96fd5c7c4"
+      },
+      "backend/through_lesson01_documents.jsonl": {
+        "bytes": 2005,
+        "sha256": "d8983d875f55fad9df56b1dfe6962456fa357b359c14d42c253318f8775a5bc1"
+      },
+      "build/LESSON02_TRANSLATION_RECEIPT.json": {
+        "bytes": 2213,
+        "sha256": "bb4c79ea2511448ddd9d877d70c0f9fb6a64f597be3585f73990896b1feddd5b"
+      },
+      "build/THROUGH_LESSON01_BUILD_RECEIPT.json": {
+        "bytes": 7122,
+        "sha256": "ae926ca4f9a3d0d1723b059fbc578365bfd5fc704521a7a990b98bdd4bc4a1c2"
+      },
+      "build/THROUGH_LESSON01_MANIFEST.csv": {
+        "bytes": 2798,
+        "sha256": "6a047b981eeb71e740450678b4f802fb7ec3eb954cf92ffc3cebbaf8a050b5a7"
+      },
+      "scripts/build_through_lesson01.py": {
+        "bytes": 43347,
+        "sha256": "0596b9e167f2b174f13848a96f7c425c4bb31b91312b8a01d5c1e444ad38742f"
+      },
+      "source/id-ID/lesson02_translation.csv": {
+        "bytes": 76070,
+        "sha256": "26159d7d4beae3f16b83df0f51a7deb3afb5cd23fb5b1be1dd0056c527c3764a"
+      },
+      "source/normalized/en-US/Lesson02.html": {
+        "bytes": 55530,
+        "sha256": "efb5376be5d16d085bbc8d668b31839e0270c7a37e3a2abd52cd742a1410e646"
+      },
+      "working/lesson02_asset_rights_audit.json": {
+        "bytes": 9531,
+        "sha256": "f142b7257b8b36417d2d1bb145c2bec13d02274d1ee61698a1a21993e4bc86b0"
+      },
+      "working/lesson02_source_findings.md": {
+        "bytes": 4684,
+        "sha256": "b3ab5a3aa17a2c47aff1b4177ff64f5c7222c34b08d47a2bbee5fd69ef8897c9"
+      },
+      "working/lesson02_terminology_qa.md": {
+        "bytes": 2330,
+        "sha256": "204743e2737e38a508c2205fa0075f1240e7572f2425f9935f5175555a7845ee"
+      }
+    },
+    "lesson02_translation": {
+      "bytes": 76070,
+      "path": "source/id-ID/lesson02_translation.csv",
+      "rows": 324,
+      "sha256": "26159d7d4beae3f16b83df0f51a7deb3afb5cd23fb5b1be1dd0056c527c3764a"
+    }
+  },
+  "layout": {
+    "base_css_bytes": 5890,
+    "base_css_sha256": "1d463e04c51aff4750dec54523952488635c08fc5d3ead30ffc399a43f96f77b",
+    "reader_css_bytes": 6213,
+    "reader_css_path": "assets/reader-4of14.css",
+    "reader_css_sha256": "37fc52f724e0ea76443dc12ef243bf874ab6fb8c3c0640e03ab8cf1a6939f989",
+    "rule": "large instructional media reflow within the full reader content column"
+  },
+  "locale": "id-ID",
+  "math_nodes": {
+    "Lesson00": 331,
+    "Lesson01": 169,
+    "Lesson02": 209,
+    "index": 0,
+    "total": 709
+  },
+  "offline": {
+    "analytics": false,
+    "cookies": false,
+    "external_runtime_requests": 0,
+    "local_mathjax": true
+  },
+  "reader": {
+    "bytes": 2701521,
+    "files": 31,
+    "manifest_bytes": 3081,
+    "manifest_path": "build/THROUGH_LESSON02_MANIFEST.csv",
+    "manifest_sha256": "e0fe3c91465284cb10cf0bc802c32102bccb0eb0c84f108405a66044faf9f7ef",
+    "path": "build/html-id"
+  },
+  "rights": {
+    "Lesson01 figures": "CC BY-NC 4.0 under the official page notice; per-file creator metadata absent",
+    "Lesson02 figures": "CC BY-NC 4.0 under the official page notice; per-file creator metadata absent",
+    "MathJax 3.1.2": "Apache-2.0",
+    "Penn State content": "CC BY-NC 4.0 except where otherwise noted",
+    "aggregate_uniform_relicense": false
+  },
+  "schema": "o006.stat415.through-lesson02-build.v1",
+  "status": "built",
+  "structural_units_normalized": 978,
+  "target_documents": [
+    {
+      "bytes": 25835,
+      "path": "source/id-ID/index.html",
+      "sha256": "a6576494b171976ac9d2a08e42ba74045f9d4443ff8e126871be4122c7150d65"
+    },
+    {
+      "bytes": 80169,
+      "path": "source/id-ID/Lesson00.html",
+      "sha256": "2328e0b1d6ccf7564115e431e3c1bde9f419f6c02a11fdd15090a4868cf6659d"
+    },
+    {
+      "bytes": 47249,
+      "path": "source/id-ID/Lesson01.html",
+      "sha256": "ee61aa81a4aefb1d0087738a862bdd2c1b9a11caa2716a0746048c0e6bf5a357"
+    },
+    {
+      "bytes": 58993,
+      "path": "source/id-ID/Lesson02.html",
+      "sha256": "04dc3caab368c3d87047c7f2136fd78d719e93c9f49b85544cdb135c604e3eb4"
+    }
+  ],
+  "translation_provenance": "OpenAI Codex gpt-5.6-sol, Ultra",
+  "translation_segments": 1068
+}

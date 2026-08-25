@@ -1,0 +1,425 @@
+<!doctype html>
+<html lang="id-ID">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>2 Pendugaan (Bagian I)</title>
+<meta name="source-url" content="https://online.stat.psu.edu/stat415/Lesson02">
+<meta name="translation-provenance" content="OpenAI Codex gpt-5.6-sol, Ultra">
+<meta name="edition-status" content="partial: 5 of 14 documents complete; landing and Lessons 00–03">
+<link rel="license" href="https://creativecommons.org/licenses/by-nc/4.0/">
+<link rel="stylesheet" href="assets/reader-5of14.css">
+<script defer src="assets/MathJax/tex-svg.js"></script>
+</head>
+<body>
+<a class="skip-link" href="#quarto-document-content">Lewati ke isi utama</a>
+<header class="site-header"><div class="site-header__inner"><div><p class="site-title">STAT 415 — Pengantar Statistika Matematis</p><p class="site-subtitle">Rekonstruksi dan terjemahan Bahasa Indonesia · O006/C140</p></div><nav class="site-nav" aria-label="Navigasi utama"><a href="index.html">Daftar pelajaran</a><a href="Lesson00.html">Pelajaran 00</a><a href="Lesson01.html">Pelajaran 01</a><a href="Lesson02.html">Pelajaran 02</a><a href="Lesson03.html">Pelajaran 03</a><a href="licenses/index.html">Lisensi</a></nav></div></header>
+<div class="page-shell"><aside class="edition-note" aria-label="Status edisi"><strong>Edisi Bahasa Indonesia — 5 dari 14 dokumen.</strong> Laman utama serta Pelajaran 00–03 telah diterjemahkan sepenuhnya. Pelajaran 04–12 masih menuju sumber resmi berbahasa Inggris sampai unit berikutnya selesai. <a href="https://online.stat.psu.edu/stat415/Lesson02">Sumber resmi halaman ini</a>. <a href="licenses/index.html">Atribusi, perubahan, dan lisensi</a>.</aside><main class="content" data-component-id="Lesson02" data-document-id="O006-PSU-003" data-source-url="https://online.stat.psu.edu/stat415/Lesson02" id="quarto-document-content">
+<header class="quarto-title-block default" data-o006-id="O006-PSU-003-U0001" id="title-block-header"><nav aria-label="Jejak navigasi" class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" data-o006-id="O006-PSU-003-U0002"><ol class="breadcrumb" data-o006-id="O006-PSU-003-U0003"><li class="breadcrumb-item" data-o006-id="O006-PSU-003-U0004"><a data-o006-id="O006-PSU-003-U0005" href="index.html#lessons">Pelajaran</a></li><li class="breadcrumb-item" data-o006-id="O006-PSU-003-U0006"><a data-o006-id="O006-PSU-003-U0007" href="Lesson02.html"><span class="chapter-number">2</span>  <span class="chapter-title">Pendugaan (Bagian I)</span></a></li></ol></nav>
+<div class="quarto-title" data-o006-id="O006-PSU-003-U0008">
+<h1 class="title" data-o006-id="O006-PSU-003-U0009"><span class="chapter-number">2</span>  <span class="chapter-title">Pendugaan (Bagian I)</span></h1>
+<div class="quarto-categories" data-o006-id="O006-PSU-003-U0010">
+<div class="quarto-category" data-o006-id="O006-PSU-003-U0011">Pendugaan Titik</div>
+<div class="quarto-category" data-o006-id="O006-PSU-003-U0012">Pendugaan Tak Bias</div>
+<div class="quarto-category" data-o006-id="O006-PSU-003-U0013">Bias</div>
+<div class="quarto-category" data-o006-id="O006-PSU-003-U0014">Varians dan Rataan Kuadrat</div>
+<div class="quarto-category" data-o006-id="O006-PSU-003-U0015">Faktorisasi</div>
+<div class="quarto-category" data-o006-id="O006-PSU-003-U0016">Kecukupan</div>
+<div class="quarto-category" data-o006-id="O006-PSU-003-U0017">Metode Momen</div>
+</div>
+</div>
+<div class="quarto-title-meta" data-o006-id="O006-PSU-003-U0018">
+</div>
+</header>
+<section class="level2 unnumbered unlisted" data-o006-id="O006-PSU-003-U0019" id="overview">
+<h2 class="unnumbered unlisted anchored" data-anchor-id="overview" data-o006-id="O006-PSU-003-U0020">Gambaran Umum</h2>
+<p data-o006-id="O006-PSU-003-U0021">Pelajaran ini memperkenalkan konsep-konsep mendasar pendugaan titik, yang merupakan salah satu landasan inferensi statistik. Anda akan mempelajari cara menduga parameter populasi yang tidak diketahui, seperti rataan dan proporsi, dengan menggunakan data sampel. Melalui pelajaran ini, Anda akan mengembangkan keterampilan untuk menghitung nilai dugaan kemungkinan maksimum bagi berbagai model berparameter tunggal serta mengevaluasi kualitas penduga berdasarkan sifat-sifat utama seperti bias, varians, dan rataan kuadrat galat. Contoh-contoh praktis, termasuk menduga cakupan asuransi kesehatan di kalangan mahasiswa dan menganalisis tingkat kematian akibat COVID-19, akan mengilustrasikan konsep-konsep tersebut. Pada akhir pelajaran ini, Anda akan memiliki pemahaman yang kukuh tentang pendugaan titik dan siap mempelajari topik-topik lanjutan dalam pendugaan statistik.</p>
+<section class="level3 unnumbered unlisted objectiveblock" data-o006-id="O006-PSU-003-U0022" id="objectives">
+<h3 class="unnumbered unlisted anchored" data-anchor-id="objectives" data-o006-id="O006-PSU-003-U0023"><i class="bi bi-check2-circle"></i>Tujuan</h3>
+<p data-o006-id="O006-PSU-003-U0024">Setelah menyelesaikan pelajaran ini, Anda diharapkan mampu:</p>
+<ol data-o006-id="O006-PSU-003-U0025" type="1">
+<li data-o006-id="O006-PSU-003-U0026">Menentukan distribusi penduga,</li>
+<li data-o006-id="O006-PSU-003-U0027">Menghitung dan menafsirkan bias suatu penduga,</li>
+<li data-o006-id="O006-PSU-003-U0028">Menghitung varians dan rataan kuadrat galat suatu penduga, serta</li>
+<li data-o006-id="O006-PSU-003-U0029">Menggunakan sifat-sifat penduga untuk membandingkan dan mengidentifikasi penduga yang lebih baik berdasarkan kriteria tertentu.</li>
+</ol>
+</section>
+</section>
+<section class="level2" data-number="2.1" data-o006-id="O006-PSU-003-U0030" id="point-estimation">
+<h2 class="anchored" data-anchor-id="point-estimation" data-number="2.1" data-o006-id="O006-PSU-003-U0031"><span class="header-section-number">2.1</span> Pendugaan Titik</h2>
+<p data-o006-id="O006-PSU-003-U0032">Misalkan kita memiliki parameter populasi yang tidak diketahui, seperti rataan populasi <span class="math inline" data-o006-math-id="O006-PSU-003-M0001">\(\mu\)</span> atau proporsi populasi <span class="math inline" data-o006-math-id="O006-PSU-003-M0002">\(p\)</span>, yang ingin kita duga. Sebagai contoh, misalkan kita ingin menduga:</p>
+<ul data-o006-id="O006-PSU-003-U0033">
+<li data-o006-id="O006-PSU-003-U0034"><span class="math inline" data-o006-math-id="O006-PSU-003-M0003">\(p\)</span> = proporsi mahasiswa Amerika berusia 18–24 tahun yang memiliki asuransi kesehatan (proporsi ini tidak diketahui)</li>
+<li data-o006-id="O006-PSU-003-U0035"><span class="math inline" data-o006-math-id="O006-PSU-003-M0004">\(\mu\)</span> = rataan jumlah hari yang diperlukan pasien penyakit Alzheimer untuk mencapai tonggak tertentu (rataan ini tidak diketahui)</li>
+</ul>
+<p data-o006-id="O006-PSU-003-U0036">Dalam kedua kasus tersebut, tentu tidak mungkin kita menyurvei seluruh populasi. Artinya, kita tidak dapat menyurvei semua mahasiswa Amerika yang berusia antara 18 dan 24 tahun. Kita juga tidak dapat menyurvei semua pasien penyakit Alzheimer. Oleh karena itu, sewajarnya kita mengambil sampel acak dari populasi dan menggunakan data yang diperoleh untuk menduga nilai parameter populasi. Tentu saja, kita menginginkan nilai dugaan yang ‘baik’ dalam suatu pengertian.</p>
+<p data-o006-id="O006-PSU-003-U0037">Kita juga akan mempelajari cara menilai apakah suatu penduga titik ‘baik’. Kita akan melakukannya dengan mendefinisikan makna tak bias dan cukup bagi suatu penduga, menentukan varians penduga tersebut, serta rataan kuadrat galatnya.</p>
+<section class="level3 unnumbered unlisted" data-o006-id="O006-PSU-003-U0038" id="definitions-and-notation">
+<h3 class="unnumbered unlisted anchored" data-anchor-id="definitions-and-notation" data-o006-id="O006-PSU-003-U0039">Definisi dan Notasi</h3>
+<p data-o006-id="O006-PSU-003-U0040">Kita akan mengawali pelajaran ini dengan beberapa definisi formal. Untuk itu, ingatlah bahwa kita menyatakan <span class="math inline" data-o006-math-id="O006-PSU-003-M0005">\(n\)</span> peubah acak yang berasal dari suatu sampel acak dengan huruf kapital berindeks bawah:</p>
+<p data-o006-id="O006-PSU-003-U0041"><span class="math display" data-o006-math-id="O006-PSU-003-M0006">\[X_1, X_2, \ldots, X_n\]</span></p>
+<p data-o006-id="O006-PSU-003-U0042">Nilai teramati yang bersesuaian dari suatu sampel acak tertentu kemudian dinyatakan dengan huruf kecil berindeks bawah:</p>
+<p data-o006-id="O006-PSU-003-U0043"><span class="math display" data-o006-math-id="O006-PSU-003-M0007">\[x_1, x_2, \ldots, x_n\]</span></p>
+<div class="ms-3 theorem definition" data-o006-id="O006-PSU-003-U0044" id="def-parameterspace">
+<p data-o006-id="O006-PSU-003-U0045"><span class="theorem-title"><strong>Def. 2.1 (Ruang Parameter)</strong></span> Rentang nilai yang mungkin dari parameter <span class="math inline" data-o006-math-id="O006-PSU-003-M0008">\(\theta\)</span> disebut <strong>ruang parameter</strong> <span class="math inline" data-o006-math-id="O006-PSU-003-M0009">\(\Omega\)</span> (huruf Yunani ‘omega’).</p>
+</div>
+<div class="theorem example" data-o006-id="O006-PSU-003-U0046" id="exm-meangpa">
+<p data-o006-id="O006-PSU-003-U0047"><span class="theorem-title"><strong>Contoh 2.1</strong></span> Jika <span class="math inline" data-o006-math-id="O006-PSU-003-M0010">\(\mu\)</span> menyatakan rataan indeks prestasi semua mahasiswa, maka ruang parameternya (dengan mengasumsikan skala penilaian 4 poin) adalah:</p>
+<p data-o006-id="O006-PSU-003-U0048"><span class="math display" data-o006-math-id="O006-PSU-003-M0011">\[\Omega = \{\mu: 0 \le \mu \le 4\}\]</span></p>
+<p data-o006-id="O006-PSU-003-U0049">Jika <span class="math inline" data-o006-math-id="O006-PSU-003-M0012">\(p\)</span> adalah proporsi mahasiswa yang merokok, maka ruang parameternya adalah:</p>
+<p data-o006-id="O006-PSU-003-U0050"><span class="math display" data-o006-math-id="O006-PSU-003-M0013">\[\Omega = \{p: 0 \le p \le 1\}\]</span></p>
+</div>
+</section>
+<section class="level3 ms-3" data-number="2.1.1" data-o006-id="O006-PSU-003-U0051" id="point-estimator">
+<h3 class="anchored" data-anchor-id="point-estimator" data-number="2.1.1" data-o006-id="O006-PSU-003-U0052"><span class="header-section-number">2.1.1</span> Penduga Titik</h3>
+<p data-o006-id="O006-PSU-003-U0053">Fungsi dari <span class="math inline" data-o006-math-id="O006-PSU-003-M0014">\(X_1, X_2, \ldots X_n\)</span>, yaitu statistik <span class="math inline" data-o006-math-id="O006-PSU-003-M0015">\(u(X_1, X_2, \ldots, X_n)\)</span>, yang digunakan untuk menduga <span class="math inline" data-o006-math-id="O006-PSU-003-M0016">\(\theta\)</span> disebut <strong>penduga titik</strong> bagi <span class="math inline" data-o006-math-id="O006-PSU-003-M0017">\(\theta.\)</span></p>
+</section>
+<div class="theorem example" data-o006-id="O006-PSU-003-U0054" id="exm-ptestimator">
+<p data-o006-id="O006-PSU-003-U0055"><span class="theorem-title"><strong>Contoh 2.2</strong></span> Sebagai contoh, fungsi berikut:</p>
+<p data-o006-id="O006-PSU-003-U0056"><span class="math display" data-o006-math-id="O006-PSU-003-M0018">\[\bar{X} = \frac{1}{n} \sum_{i=1}^n X_i\]</span> merupakan penduga titik bagi rataan populasi <span class="math inline" data-o006-math-id="O006-PSU-003-M0019">\(\mu.\)</span></p>
+<p data-o006-id="O006-PSU-003-U0057">Ketika <span class="math inline" data-o006-math-id="O006-PSU-003-M0020">\(X_i = 0\)</span> atau 1, fungsi berikut:</p>
+<p data-o006-id="O006-PSU-003-U0058"><span class="math display" data-o006-math-id="O006-PSU-003-M0021">\[\hat{p} = \frac{1}{n} \sum_{i=1}^n X_i\]</span></p>
+<p data-o006-id="O006-PSU-003-U0059">merupakan penduga titik bagi proporsi populasi <span class="math inline" data-o006-math-id="O006-PSU-003-M0022">\(p.\)</span></p>
+<p data-o006-id="O006-PSU-003-U0060">Fungsi berikut:</p>
+<p data-o006-id="O006-PSU-003-U0061"><span class="math display" data-o006-math-id="O006-PSU-003-M0023">\[S^2 = \frac{1}{n-1} \sum_{i=1}^n (X_i - \bar{X})^2\]</span></p>
+<p data-o006-id="O006-PSU-003-U0062">merupakan penduga titik bagi varians populasi <span class="math inline" data-o006-math-id="O006-PSU-003-M0024">\(\sigma^2.\)</span></p>
+</div>
+<section class="level3 ms-3" data-number="2.1.2" data-o006-id="O006-PSU-003-U0063" id="point-estimate">
+<h3 class="anchored" data-anchor-id="point-estimate" data-number="2.1.2" data-o006-id="O006-PSU-003-U0064"><span class="header-section-number">2.1.2</span> Nilai Dugaan Titik</h3>
+<p data-o006-id="O006-PSU-003-U0065">Fungsi <span class="math inline" data-o006-math-id="O006-PSU-003-M0025">\(u(x_1, x_2, \ldots, x_n)\)</span> yang dihitung dari sekumpulan data merupakan suatu <strong>nilai dugaan titik</strong> teramati bagi <span class="math inline" data-o006-math-id="O006-PSU-003-M0026">\(\theta.\)</span></p>
+</section>
+<div class="theorem example" data-o006-id="O006-PSU-003-U0066" id="exm-ptestimate">
+<p data-o006-id="O006-PSU-003-U0067"><span class="theorem-title"><strong>Contoh 2.3</strong></span> Jika <span class="math inline" data-o006-math-id="O006-PSU-003-M0027">\(x_i\)</span>, <span class="math inline" data-o006-math-id="O006-PSU-003-M0028">\(i = 1, \ldots, 88\)</span> adalah indeks prestasi yang teramati pada sampel 88 mahasiswa, maka</p>
+<p data-o006-id="O006-PSU-003-U0068"><span class="math display" data-o006-math-id="O006-PSU-003-M0029">\[\bar{x} = \frac{1}{88} \sum_{i=1}^{88} x_i = 3.12\]</span> merupakan nilai dugaan titik bagi <span class="math inline" data-o006-math-id="O006-PSU-003-M0030">\(\mu\)</span>, yaitu rataan indeks prestasi semua mahasiswa dalam populasi.</p>
+<p data-o006-id="O006-PSU-003-U0069">Ingatlah kembali bahwa fungsi kepadatan peluang (PDF) ataupun fungsi massa peluang (PMF) dari suatu peubah acak telah didefinisikan sebagai <span class="math inline" data-o006-math-id="O006-PSU-003-M0031">\(f(x).\)</span> Kita mendefinisikan model peluang untuk data sebagai berikut:</p>
+<p data-o006-id="O006-PSU-003-U0070"><span class="math display" data-o006-math-id="O006-PSU-003-M0032">\[x_i \sim f_x(x_i|\theta)\]</span></p>
+<p data-o006-id="O006-PSU-003-U0071">dengan <span class="math inline" data-o006-math-id="O006-PSU-003-M0033">\(f_x\)</span> merupakan distribusi peluang dan <span class="math inline" data-o006-math-id="O006-PSU-003-M0034">\(\theta\)</span> merupakan satu atau beberapa parameter dalam model tersebut.</p>
+<p data-o006-id="O006-PSU-003-U0072">Jika <span class="math inline" data-o006-math-id="O006-PSU-003-M0035">\(\theta\)</span> diketahui, tugas kita selesai. Tujuan mata kuliah ini adalah memahami apa yang harus dilakukan ketika <span class="math inline" data-o006-math-id="O006-PSU-003-M0036">\(\theta\)</span> tidak diketahui. Kita mendefinisikan penduga bagi <span class="math inline" data-o006-math-id="O006-PSU-003-M0037">\(\theta\)</span> sebagai <span class="math inline" data-o006-math-id="O006-PSU-003-M0038">\(\hat{\theta}.\)</span> <span class="math inline" data-o006-math-id="O006-PSU-003-M0039">\(\hat{\theta}\)</span> merupakan fungsi dari data kita, yaitu <span class="math inline" data-o006-math-id="O006-PSU-003-M0040">\(\hat{\theta} = g(X_1, X_2, \ldots, X_n).\)</span> Kita akan menggunakan fungsi data ini untuk membantu kita memahami <span class="math inline" data-o006-math-id="O006-PSU-003-M0041">\(\theta.\)</span> Kita akan melakukan inferensi statistik. <strong>Inferensi Statistik</strong> adalah penggunaan data untuk menyimpulkan sifat-sifat suatu distribusi yang mendasarinya.</p>
+</div>
+<p data-o006-id="O006-PSU-003-U0073">Mari kita bahas sebuah contoh motivasi yang menggunakan beberapa istilah tersebut dan menunjukkan arah pembahasan kita.</p>
+<div class="theorem example" data-o006-id="O006-PSU-003-U0074" id="exm-covid19">
+<p data-o006-id="O006-PSU-003-U0075"><span class="theorem-title"><strong>Contoh 2.4</strong></span> Misalkan seorang peneliti tertarik pada COVID-19. Gunakan notasi - <span class="math inline" data-o006-math-id="O006-PSU-003-M0042">\(n_{c,y} =\)</span> jumlah orang yang terjangkit COVID-19 di negara <span class="math inline" data-o006-math-id="O006-PSU-003-M0043">\(c\)</span> dan pada tahun <span class="math inline" data-o006-math-id="O006-PSU-003-M0044">\(y\)</span> - <span class="math inline" data-o006-math-id="O006-PSU-003-M0045">\(d_{c,y} =\)</span> jumlah orang yang meninggal akibat COVID-19 di negara <span class="math inline" data-o006-math-id="O006-PSU-003-M0046">\(c\)</span> dan pada tahun <span class="math inline" data-o006-math-id="O006-PSU-003-M0047">\(y\)</span></p>
+<p data-o006-id="O006-PSU-003-U0076">Sebagai contoh, <span class="math inline" data-o006-math-id="O006-PSU-003-M0048">\(n_{\text{USA}, 2021}\)</span> adalah jumlah orang yang terjangkit COVID-19 di Amerika Serikat pada tahun 2021.</p>
+<p data-o006-id="O006-PSU-003-U0077">Misalkan kita ingin menjawab apakah tingkat kematian akibat COVID-19 pada 2022 (setelah vaksin tersedia) lebih rendah daripada pada 2021 (sebelum vaksin tersedia) untuk suatu negara tertentu. Kita perlu mendefinisikan model peluang bagi <span class="math inline" data-o006-math-id="O006-PSU-003-M0049">\((n_{c,y}, d_{c,y}).\)</span> Misalkan modelnya adalah:</p>
+<p data-o006-id="O006-PSU-003-U0078"><span class="math display" data-o006-math-id="O006-PSU-003-M0050">\[d_{c,y} \sim \text{Bin}(n_{c,y}, p_y)\]</span></p>
+<p data-o006-id="O006-PSU-003-U0079">Dalam model ini, parameternya adalah <span class="math inline" data-o006-math-id="O006-PSU-003-M0051">\(p_y\)</span>, yaitu peluang kematian akibat COVID-19 pada tahun <span class="math inline" data-o006-math-id="O006-PSU-003-M0052">\(y.\)</span> Karena kita ingin membandingkan 2022 dan 2021, kita memiliki dua parameter, <span class="math inline" data-o006-math-id="O006-PSU-003-M0053">\(p_{2021}\)</span> dan <span class="math inline" data-o006-math-id="O006-PSU-003-M0054">\(p_{2022}.\)</span> Jika parameter-parameter tersebut diketahui, kita dapat menjawab pertanyaan itu. Karena tidak diketahui, kita perlu menduga <span class="math inline" data-o006-math-id="O006-PSU-003-M0055">\(\theta = (p_{2021}, p_{2022}).\)</span></p>
+<p data-o006-id="O006-PSU-003-U0080">Lalu bagaimana? Apa itu <span class="math inline" data-o006-math-id="O006-PSU-003-M0056">\(\hat{\theta}\)</span>? Bagaimana kita menentukan penduganya? Mungkinkah terdapat lebih dari satu penduga? Sebentar lagi kita akan mempelajari cara menemukan penduga bagi parameter yang tidak diketahui. Untuk saat ini, kita akan mempelajari cara membandingkan penduga.</p>
+</div>
+</section>
+<section class="level2" data-number="2.2" data-o006-id="O006-PSU-003-U0081" id="properties-of-estimators">
+<h2 class="anchored" data-anchor-id="properties-of-estimators" data-number="2.2" data-o006-id="O006-PSU-003-U0082"><span class="header-section-number">2.2</span> Sifat-Sifat Penduga</h2>
+<p data-o006-id="O006-PSU-003-U0083">Misalkan kita diberikan beberapa penduga bagi suatu parameter yang tidak diketahui, <span class="math inline" data-o006-math-id="O006-PSU-003-M0057">\(\theta.\)</span> Bagaimana kita mengetahui pilihan yang ‘lebih baik’? Perhatikan contoh berikut.</p>
+<div class="theorem example" data-o006-id="O006-PSU-003-U0084" id="exm-propertiesestimators">
+<p data-o006-id="O006-PSU-003-U0085"><span class="theorem-title"><strong>Contoh 2.5</strong></span> Misalkan kita memiliki sampel yang bebas dan berdistribusi identik (i.i.d.) berukuran <span class="math inline" data-o006-math-id="O006-PSU-003-M0058">\(n=3\)</span> sedemikian sehingga</p>
+<p data-o006-id="O006-PSU-003-U0086"><span class="math display" data-o006-math-id="O006-PSU-003-M0059">\[X_i \overset{iid}{\sim} \text{Bin}(10, p)\]</span></p>
+<p data-o006-id="O006-PSU-003-U0087">Parameter yang tidak diketahui dalam kasus ini adalah <span class="math inline" data-o006-math-id="O006-PSU-003-M0060">\(p\)</span>, yaitu peluang keberhasilan. Definisikan tiga penduga yang mungkin bagi <span class="math inline" data-o006-math-id="O006-PSU-003-M0061">\(p\)</span> sebagai berikut:</p>
+<p data-o006-id="O006-PSU-003-U0088"><span class="math display" data-o006-math-id="O006-PSU-003-M0062">\[\begin{aligned}
+\hat{p}_1 = \frac{X_1}{10} \\
+\hat{p}_2 = \frac{\frac{X_1}{10} + \frac{X_2}{10} + \frac{X_3}{10}}{3} = \frac{X_1 + X_2 + X_3}{30} \\
+\hat{p}_3 = \hat{p}_2 + 0.1 = \frac{X_1 + X_2 + X_3}{30} + 0.1
+\end{aligned}\]</span></p>
+<p data-o006-id="O006-PSU-003-U0089">Penduga manakah yang lebih baik dalam menduga <span class="math inline" data-o006-math-id="O006-PSU-003-M0063">\(p\)</span>? Kita dapat memulainya dengan mendefinisikan bias suatu penduga.</p>
+</div>
+<div class="ms-3 theorem definition" data-o006-id="O006-PSU-003-U0090" id="def-unbiasedestimation">
+<p data-o006-id="O006-PSU-003-U0091"><span class="theorem-title"><strong>Def. 2.2 (Pendugaan Tak Bias)</strong></span> Salah satu ukuran bagi penduga yang “baik” adalah “ketakbiasan”. Suatu penduga dikatakan tak bias jika nilai harapan penduga tersebut sama dengan parameter yang tidak diketahui <span class="math inline" data-o006-math-id="O006-PSU-003-M0064">\(\theta.\)</span></p>
+</div>
+<section class="level3 ms-3" data-number="2.2.1" data-o006-id="O006-PSU-003-U0092" id="bias">
+<h3 class="anchored" data-anchor-id="bias" data-number="2.2.1" data-o006-id="O006-PSU-003-U0093"><span class="header-section-number">2.2.1</span> Bias</h3>
+<p data-o006-id="O006-PSU-003-U0094">Jika persamaan berikut berlaku:</p>
+<p data-o006-id="O006-PSU-003-U0095"><span class="math display" data-o006-math-id="O006-PSU-003-M0065">\[E\left[u(X_1, X_2, \ldots, X_n)\right] = \theta\]</span></p>
+<p data-o006-id="O006-PSU-003-U0096">maka statistik <span class="math inline" data-o006-math-id="O006-PSU-003-M0066">\(u(X_1, X_2, \ldots, X_n)\)</span> merupakan <strong>penduga tak bias</strong> bagi parameter <span class="math inline" data-o006-math-id="O006-PSU-003-M0067">\(\theta.\)</span> Jika tidak, <span class="math inline" data-o006-math-id="O006-PSU-003-M0068">\(u(X_1, X_2, \ldots, X_n)\)</span> merupakan <strong>penduga berbias</strong> bagi <span class="math inline" data-o006-math-id="O006-PSU-003-M0069">\(\theta.\)</span> Besarnya <strong>bias</strong> statistik tersebut didefinisikan sebagai:</p>
+<p data-o006-id="O006-PSU-003-U0097"><span class="math display" data-o006-math-id="O006-PSU-003-M0070">\[\text{Bias} = E(u(X_1, X_2, \ldots, X_n)) - \theta\]</span> Perhatikan bahwa penduga tak bias akan memiliki bias sebesar <span class="math inline" data-o006-math-id="O006-PSU-003-M0071">\(\text{Bias} = E(u(X_1, X_2, \ldots, X_n)) - \theta = 0.\)</span></p>
+</section>
+<div class="theorem example" data-o006-id="O006-PSU-003-U0098" id="exm-propest">
+<p data-o006-id="O006-PSU-003-U0099"><span class="theorem-title"><strong>Contoh 2.6</strong></span> Tinjau contoh sebelumnya. Dalam contoh tersebut, penduga-penduga bagi <span class="math inline" data-o006-math-id="O006-PSU-003-M0072">\(p\)</span> didefinisikan sebagai berikut:</p>
+<p data-o006-id="O006-PSU-003-U0100"><span class="math display" data-o006-math-id="O006-PSU-003-M0073">\[\begin{aligned}
+&amp; \hat{p}_1 = \frac{X_1}{10} \\
+&amp; \hat{p}_2 = \frac{X_1 + X_2 + X_3}{30} \\
+&amp; \hat{p}_3 = \hat{p}_2 + 0.1 = \frac{X_1 + X_2 + X_3}{30} + 0.1
+\end{aligned}\]</span></p>
+<p data-o006-id="O006-PSU-003-U0101"><strong>Berapakah bias masing-masing penduga?</strong></p>
+<section class="level4 card card-body bg-light ms-3 mb-3 pt-0" data-o006-id="O006-PSU-003-U0102" id="solution">
+<h4 class="anchored" data-anchor-id="solution" data-o006-id="O006-PSU-003-U0103">Penyelesaian</h4>
+<p data-o006-id="O006-PSU-003-U0104">Untuk menentukan bias setiap penduga, kita perlu menentukan nilai harapannya. Ingat bahwa untuk peubah acak binomial, <span class="math inline" data-o006-math-id="O006-PSU-003-M0074">\(X\)</span>, kita ketahui bahwa <span class="math inline" data-o006-math-id="O006-PSU-003-M0075">\(E(X) = np\)</span> dan <span class="math inline" data-o006-math-id="O006-PSU-003-M0076">\(\text{Var}(X) = np(1-p).\)</span> Mari kita mulai dengan <span class="math inline" data-o006-math-id="O006-PSU-003-M0077">\(\hat{p}_1.\)</span></p>
+<p data-o006-id="O006-PSU-003-U0105"><span class="math display" data-o006-math-id="O006-PSU-003-M0078">\[\begin{align}
+\text{Bias}_1 &amp;= E(\hat{p}_1)-p = E\left[\frac{X_1}{10}\right]-p = 0\\
+\text{Bias}_2 &amp;= E(\hat{p}_2)-p = E\left[\frac{X_1+X_2+X_3}{30}\right]-p = 0\\
+\text{Bias}_3 &amp;= E(\hat{p}_3)-p = E(\hat{p}_2+0.1)-p = 0.1
+\end{align}\]</span></p>
+</section>
+</div>
+<div class="theorem example" data-o006-id="O006-PSU-003-U0106" id="exm-normal-distribution">
+<p data-o006-id="O006-PSU-003-U0107"><span class="theorem-title"><strong>Contoh 2.7</strong></span> Jika <span class="math inline" data-o006-math-id="O006-PSU-003-M0079">\(X_i\)</span> merupakan peubah-peubah acak yang berdistribusi normal dengan rataan <span class="math inline" data-o006-math-id="O006-PSU-003-M0080">\(\mu\)</span> dan varians <span class="math inline" data-o006-math-id="O006-PSU-003-M0081">\(\sigma^2\)</span>, tinjaulah kedua penduga bagi <span class="math inline" data-o006-math-id="O006-PSU-003-M0082">\(\mu\)</span> dan <span class="math inline" data-o006-math-id="O006-PSU-003-M0083">\(\sigma^2\)</span>, secara berturut-turut:</p>
+<span class="math display" data-o006-math-id="O006-PSU-003-M0084">\[\begin{align*}
+\hat{\mu} &amp;= \frac{1}{n}\sum_{i=1}^n X_i, \\ \quad \hat{\sigma}^2 &amp;= \frac{\sum_{i=1}^n(X_i - \bar{X})^2}{n}
+\end{align*}\]</span>
+<p data-o006-id="O006-PSU-003-U0108"><strong>Apakah kedua penduga tersebut tak bias bagi parameternya masing-masing?</strong></p>
+<section class="level4 card card-body bg-light ms-3 mb-3 pt-0" data-o006-id="O006-PSU-003-U0109" id="solution-1">
+<h4 class="anchored" data-anchor-id="solution-1" data-o006-id="O006-PSU-003-U0110">Penyelesaian</h4>
+<p data-o006-id="O006-PSU-003-U0111">Ingat bahwa jika <span class="math inline" data-o006-math-id="O006-PSU-003-M0085">\(X_i\)</span> merupakan peubah acak yang berdistribusi normal dengan rataan <span class="math inline" data-o006-math-id="O006-PSU-003-M0086">\(\mu\)</span> dan varians <span class="math inline" data-o006-math-id="O006-PSU-003-M0087">\(\sigma^2\)</span>, maka <span class="math inline" data-o006-math-id="O006-PSU-003-M0088">\(E(X_i) = \mu\)</span> dan <span class="math inline" data-o006-math-id="O006-PSU-003-M0089">\(\text{Var}(X_i) = \sigma^2.\)</span> Oleh karena itu,</p>
+<span class="math display" data-o006-math-id="O006-PSU-003-M0090">\[\begin{align}
+E(\bar{X}) &amp;= E\left(\frac{1}{n}\sum_{i=1}^n X_i\right)\\ &amp;= \frac{1}{n}\sum_{i=1}^n E(X_i)\\ &amp;= \frac{1}{n}\sum_{i=1}^n \mu\\ &amp;= \frac{1}{n}(n\mu) = \mu
+\end{align}\]</span>
+<p data-o006-id="O006-PSU-003-U0112">Kesamaan pertama berlaku karena kita hanya mengganti <span class="math inline" data-o006-math-id="O006-PSU-003-M0091">\(\bar{X}\)</span> dengan definisinya. Kesamaan kedua berlaku berdasarkan sifat nilai harapan dari kombinasi linear. Kesamaan ketiga berlaku karena <span class="math inline" data-o006-math-id="O006-PSU-003-M0092">\(E(X_i) = \mu.\)</span> Kesamaan keempat berlaku karena ketika nilai <span class="math inline" data-o006-math-id="O006-PSU-003-M0093">\(\mu\)</span> dijumlahkan sebanyak <span class="math inline" data-o006-math-id="O006-PSU-003-M0094">\(n\)</span> kali, hasilnya adalah <span class="math inline" data-o006-math-id="O006-PSU-003-M0095">\(n\mu.\)</span> Tentu saja, kesamaan terakhir diperoleh melalui aljabar sederhana.</p>
+<p data-o006-id="O006-PSU-003-U0113">Singkatnya, telah kita tunjukkan bahwa <span class="math inline" data-o006-math-id="O006-PSU-003-M0096">\(E(\bar{X}) = \mu.\)</span> Oleh karena itu, <span class="math inline" data-o006-math-id="O006-PSU-003-M0097">\(\hat{\mu}\)</span> merupakan penduga tak bias bagi <span class="math inline" data-o006-math-id="O006-PSU-003-M0098">\(\mu.\)</span> Sekarang, mari kita periksa penduga bagi <span class="math inline" data-o006-math-id="O006-PSU-003-M0099">\(\sigma^2.\)</span> Penduganya adalah:</p>
+<span class="math display" data-o006-math-id="O006-PSU-003-M0100">\[\begin{align*}
+\hat{\sigma}^2 = \frac{\sum_{i=1}^n (X_i - \bar{X})^2}{n}
+\end{align*}\]</span>
+<p data-o006-id="O006-PSU-003-U0114">Rumus tersebut dapat ditulis ulang sebagai:</p>
+<span class="math display" data-o006-math-id="O006-PSU-003-M0101">\[\begin{align*}
+\hat{\sigma}^2 = \left(\frac{1}{n}\sum_{i=1}^n {X_i}^2\right) - \bar{X}^2
+\end{align*}\]</span>
+<p data-o006-id="O006-PSU-003-U0115">karena</p>
+<span class="math display" data-o006-math-id="O006-PSU-003-M0102">\[\begin{align*}
+\hat{\sigma}^2
+&amp;= \frac{1}{n}\sum_{i=1}^n (x_i-\bar{x})^2\\
+&amp;= \frac{1}{n}\sum_{i=1}^n\left(x_i^2-2x_i\bar{x}+\bar{x}^2\right)\\
+&amp;= \frac{1}{n}\sum_{i=1}^n x_i^2-\frac{2\bar{x}}{n}\sum_{i=1}^n x_i+\bar{x}^2\\
+&amp;= \frac{1}{n}\sum_{i=1}^n x_i^2-\bar{x}^2
+\end{align*}\]</span>
+<p data-o006-id="O006-PSU-003-U0116">Sekarang, tentukan nilai harapannya:</p>
+<div data-o006-id="O006-PSU-003-U0117" style="overflow-x:auto;overflow-y:hidden;">
+<span class="math display" data-o006-math-id="O006-PSU-003-M0103">\[\begin{align*}
+E(\hat{\sigma}^2) = E\left[\frac{1}{n}\sum_{i=1}^n X_i^2 - \bar{X}^2\right] = \left[\frac{1}{n}\sum_{i=1}^n E(X_i^2)\right] - E(\bar{X}^2)
+\end{align*}\]</span>
+</div>
+<p data-o006-id="O006-PSU-003-U0118">Ingat bahwa <span class="math inline" data-o006-math-id="O006-PSU-003-M0104">\(\sigma^2 = E(X^2) - \mu^2\)</span> untuk suatu peubah acak <span class="math inline" data-o006-math-id="O006-PSU-003-M0105">\(X.\)</span> Secara aljabar, dengan menyelesaikan persamaan terhadap <span class="math inline" data-o006-math-id="O006-PSU-003-M0106">\(E(X^2)\)</span>, diperoleh <span class="math inline" data-o006-math-id="O006-PSU-003-M0107">\(E(X^2) = \sigma^2 + \mu^2.\)</span> Oleh karena itu,</p>
+<div data-o006-id="O006-PSU-003-U0119" style="overflow-x:auto;overflow-y:hidden;">
+<span class="math display" data-o006-math-id="O006-PSU-003-M0108">\[\begin{align*}
+E(\hat{\sigma}^2) = \left[\frac{1}{n}\sum_{i=1}^n E(X_i^2)\right] - E(\bar{X}^2) = \frac{1}{n}\sum_{i=1}^n (\sigma^2 + \mu^2) - \left(\frac{\sigma^2}{n} + \mu^2\right)
+\end{align*}\]</span>
+</div>
+<p data-o006-id="O006-PSU-003-U0120">Kesamaan kedua berlaku karena <span class="math inline" data-o006-math-id="O006-PSU-003-M0109">\(\text{Var}(\bar{X}) = \frac{\sigma^2}{n}\)</span> dan <span class="math inline" data-o006-math-id="O006-PSU-003-M0110">\(E(\bar{X}) = \mu.\)</span> Selanjutnya,</p>
+<span class="math display" data-o006-math-id="O006-PSU-003-M0111">\[\begin{align*}
+E(\hat{\sigma}^2) &amp;= \frac{1}{n}\sum_{i=1}^n (\sigma^2 + \mu^2) - \left(\frac{\sigma^2}{n} + \mu^2\right) \\&amp;= \frac{1}{n}(n\sigma^2 + n\mu^2) - \frac{\sigma^2}{n} - \mu^2\\ &amp;= \sigma^2 - \frac{\sigma^2}{n} \\&amp;= \frac{n\sigma^2 - \sigma^2}{n} = \frac{(n-1)\sigma^2}{n}
+\end{align*}\]</span>
+<p data-o006-id="O006-PSU-003-U0121">Dengan demikian, telah kita tunjukkan bahwa</p>
+<span class="math display" data-o006-math-id="O006-PSU-003-M0112">\[\begin{align*}
+E(\hat{\sigma}^2) \ne \sigma^2
+\end{align*}\]</span>
+<p data-o006-id="O006-PSU-003-U0122">Statistik <span class="math inline" data-o006-math-id="O006-PSU-003-M0113">\(\hat{\sigma}^2\)</span> merupakan penduga berbias bagi <span class="math inline" data-o006-math-id="O006-PSU-003-M0114">\(\sigma^2.\)</span></p>
+</section>
+</div>
+<div class="theorem example" data-o006-id="O006-PSU-003-U0123" id="exm-unbiased-estimator">
+<p data-o006-id="O006-PSU-003-U0124"><span class="theorem-title"><strong>Contoh 2.8</strong></span> Jika <span class="math inline" data-o006-math-id="O006-PSU-003-M0115">\(X_i\)</span> merupakan peubah-peubah acak yang berdistribusi normal dengan rataan <span class="math inline" data-o006-math-id="O006-PSU-003-M0116">\(\mu\)</span> dan varians <span class="math inline" data-o006-math-id="O006-PSU-003-M0117">\(\sigma^2\)</span>, apakah <span class="math inline" data-o006-math-id="O006-PSU-003-M0118">\(S^2 = \frac{\sum_{i=1}^n (X_i - \bar{X})^2}{n-1}\)</span> merupakan penduga tak bias bagi <span class="math inline" data-o006-math-id="O006-PSU-003-M0119">\(\sigma^2\)</span>?</p>
+<section class="level4 card card-body bg-light ms-3 mb-3 pt-0" data-o006-id="O006-PSU-003-U0125" id="solution-2">
+<h4 class="anchored" data-anchor-id="solution-2" data-o006-id="O006-PSU-003-U0126">Penyelesaian</h4>
+<p data-o006-id="O006-PSU-003-U0127">Ingat bahwa jika <span class="math inline" data-o006-math-id="O006-PSU-003-M0120">\(X_i\)</span> merupakan peubah acak yang berdistribusi normal dengan rataan <span class="math inline" data-o006-math-id="O006-PSU-003-M0121">\(\mu\)</span> dan varians <span class="math inline" data-o006-math-id="O006-PSU-003-M0122">\(\sigma^2\)</span>, maka:</p>
+<p data-o006-id="O006-PSU-003-U0128"><span class="math display" data-o006-math-id="O006-PSU-003-M0123">\[
+\begin{align*}
+\frac{(n-1)S^2}{\sigma^2} \sim \chi^2_{n-1}
+\end{align*}
+\]</span></p>
+<p data-o006-id="O006-PSU-003-U0129">Selain itu, ingat bahwa nilai harapan peubah acak khi-kuadrat sama dengan derajat kebebasannya. Artinya, jika:</p>
+<p data-o006-id="O006-PSU-003-U0130"><span class="math display" data-o006-math-id="O006-PSU-003-M0124">\[
+\begin{align*}
+X \sim \chi^2_{(r)}
+\end{align*}
+\]</span></p>
+<p data-o006-id="O006-PSU-003-U0131">maka <span class="math inline" data-o006-math-id="O006-PSU-003-M0125">\(E(X) = r.\)</span> Oleh karena itu,</p>
+<p data-o006-id="O006-PSU-003-U0132"><span class="math display" data-o006-math-id="O006-PSU-003-M0126">\[
+\begin{align*}
+E(S^2) &amp;= E\left[\frac{\sigma^2}{n-1} \cdot \frac{(n-1)S^2}{\sigma^2}\right] \\&amp;= \frac{\sigma^2}{n-1}E\left[\frac{(n-1)S^2}{\sigma^2}\right]\\ &amp;= \frac{\sigma^2}{n-1}(n-1) \\&amp;= \sigma^2
+\end{align*}
+\]</span></p>
+<p data-o006-id="O006-PSU-003-U0133">Kesamaan pertama berlaku karena kita pada dasarnya mengalikan varians sampel dengan 1. Kesamaan kedua berlaku berdasarkan sifat nilai harapan yang menyatakan bahwa konstanta dapat dikeluarkan dari operasi nilai harapan. Kesamaan ketiga berlaku berdasarkan dua fakta yang diingat kembali di atas. Dengan kata lain:</p>
+<p data-o006-id="O006-PSU-003-U0134"><span class="math display" data-o006-math-id="O006-PSU-003-M0127">\[
+\begin{align*}
+E\left[\frac{(n-1)S^2}{\sigma^2}\right] = n-1
+\end{align*}
+\]</span></p>
+<p data-o006-id="O006-PSU-003-U0135">Kesamaan terakhir sekali lagi diperoleh melalui aljabar sederhana.</p>
+</section>
+</div>
+<p data-o006-id="O006-PSU-003-U0136">Singkatnya, telah kita tunjukkan bahwa jika <span class="math inline" data-o006-math-id="O006-PSU-003-M0128">\(X_i\)</span> merupakan peubah acak yang berdistribusi normal dengan rataan <span class="math inline" data-o006-math-id="O006-PSU-003-M0129">\(\mu\)</span> dan varians <span class="math inline" data-o006-math-id="O006-PSU-003-M0130">\(\sigma^2\)</span>, maka <span class="math inline" data-o006-math-id="O006-PSU-003-M0131">\(S^2\)</span> merupakan penduga tak bias bagi <span class="math inline" data-o006-math-id="O006-PSU-003-M0132">\(\sigma^2.\)</span> Namun, ternyata <span class="math inline" data-o006-math-id="O006-PSU-003-M0133">\(S^2\)</span> memang <em>selalu</em> merupakan penduga tak bias bagi <span class="math inline" data-o006-math-id="O006-PSU-003-M0134">\(\sigma^2\)</span>, yakni untuk <em>setiap</em> model, bukan hanya model normal. Menariknya, meskipun <span class="math inline" data-o006-math-id="O006-PSU-003-M0135">\(S^2\)</span> selalu merupakan penduga tak bias bagi <span class="math inline" data-o006-math-id="O006-PSU-003-M0136">\(\sigma^2\)</span>, <span class="math inline" data-o006-math-id="O006-PSU-003-M0137">\(S\)</span> ternyata <em>bukan</em> penduga tak bias bagi <span class="math inline" data-o006-math-id="O006-PSU-003-M0138">\(\sigma.\)</span></p>
+<p data-o006-id="O006-PSU-003-U0137">Selanjutnya, mari kita tinjau contoh dengan peubah acak yang tidak mengikuti distribusi bernama yang telah kita kenal.</p>
+<div class="theorem example" data-o006-id="O006-PSU-003-U0138" id="exm-unbiased-theta">
+<p data-o006-id="O006-PSU-003-U0139"><span class="theorem-title"><strong>Contoh 2.9</strong></span> Misalkan <span class="math inline" data-o006-math-id="O006-PSU-003-M0139">\(Y_1, Y_2, \ldots, Y_n\)</span> merupakan sampel acak berukuran <span class="math inline" data-o006-math-id="O006-PSU-003-M0140">\(n\)</span> dari suatu distribusi dengan fungsi kepadatan peluang berikut:</p>
+<p data-o006-id="O006-PSU-003-U0140"><span class="math display" data-o006-math-id="O006-PSU-003-M0141">\[
+\begin{align*}
+f(y) = \frac{1}{\theta} y^{\frac{1-\theta}{\theta}}, \qquad 0 &lt; y &lt; 1, \;\; 0 &lt; \theta
+\end{align*}
+\]</span></p>
+<p data-o006-id="O006-PSU-003-U0141">Tentukan apakah statistik <span class="math inline" data-o006-math-id="O006-PSU-003-M0142">\(\hat{\theta} = -\frac{1}{n} \sum_{i=1}^n \ln Y_i\)</span> merupakan penduga tak bias bagi parameter yang tidak diketahui, <span class="math inline" data-o006-math-id="O006-PSU-003-M0143">\(\theta.\)</span></p>
+<section class="level4 alert-light ms-3 mb-3 pt-1" data-o006-id="O006-PSU-003-U0142" id="solution-3">
+<h4 class="anchored" data-anchor-id="solution-3" data-o006-id="O006-PSU-003-U0143">Penyelesaian</h4>
+<p data-o006-id="O006-PSU-003-U0144">Kita dapat memulai dengan menggunakan sifat-sifat nilai harapan.</p>
+<p data-o006-id="O006-PSU-003-U0145"><span class="math display" data-o006-math-id="O006-PSU-003-M0144">\[
+\begin{align*}
+E(\hat{\theta}) = E\left(-\frac{1}{n}\sum_{i=1}^n \ln Y_i\right) = -\frac{1}{n}\sum_{i=1}^n E(\ln Y_i)
+\end{align*}
+\]</span></p>
+<p data-o006-id="O006-PSU-003-U0146">Karena sampel tersebut merupakan sampel acak, <span class="math inline" data-o006-math-id="O006-PSU-003-M0145">\(E(\ln Y_i)\)</span> bernilai sama untuk semua <span class="math inline" data-o006-math-id="O006-PSU-003-M0146">\(i = 1, \ldots, n.\)</span> Oleh karena itu, diperoleh:</p>
+<p data-o006-id="O006-PSU-003-U0147"><span class="math display" data-o006-math-id="O006-PSU-003-M0147">\[
+\begin{align*}
+E(\hat{\theta}) &amp;= -\frac{1}{n}\sum_{i=1}^n E(\ln Y_i) \\&amp;= -\frac{1}{n}(n)E(\ln Y_i) \\&amp;= -E(\ln Y_i)
+\end{align*}
+\]</span></p>
+<p data-o006-id="O006-PSU-003-U0148">Oleh karena itu, kita hanya perlu menentukan <span class="math inline" data-o006-math-id="O006-PSU-003-M0148">\(E(\ln Y_i).\)</span> Dengan menggunakan definisi nilai harapan, diperoleh:</p>
+<p data-o006-id="O006-PSU-003-U0149"><span class="math display" data-o006-math-id="O006-PSU-003-M0149">\[
+\begin{align*}
+E(\ln Y_i) = \int_0^1 \frac{\ln y}{\theta} y^{(1-\theta)/\theta} dy
+\end{align*}
+\]</span></p>
+<p data-o006-id="O006-PSU-003-U0150">Dengan menggunakan integrasi parsial, dengan <span class="math inline" data-o006-math-id="O006-PSU-003-M0150">\(u = \ln y\)</span> dan <span class="math inline" data-o006-math-id="O006-PSU-003-M0151">\(dv = \frac{1}{\theta} y^{1/\theta-1} dy\)</span>, diperoleh</p>
+<p data-o006-id="O006-PSU-003-U0151"><span class="math display" data-o006-math-id="O006-PSU-003-M0152">\[
+\begin{align*}
+E(\ln Y_i) = \lim_{a \rightarrow 0} \left[ y^{1/\theta} \ln y - \theta y^{1/\theta} \right]_a^1 = -\theta
+\end{align*}
+\]</span></p>
+<p data-o006-id="O006-PSU-003-U0152">Dengan menggabungkan semua hasil tersebut, diperoleh:</p>
+<p data-o006-id="O006-PSU-003-U0153"><span class="math display" data-o006-math-id="O006-PSU-003-M0153">\[
+\begin{align*}
+E(\hat{\theta}) = -E(\ln Y_i) = -(-\theta) = \theta
+\end{align*}
+\]</span></p>
+<p data-o006-id="O006-PSU-003-U0154">Oleh karena itu, statistik tersebut merupakan penduga tak bias bagi <span class="math inline" data-o006-math-id="O006-PSU-003-M0154">\(\theta.\)</span></p>
+</section>
+</div>
+<p data-o006-id="O006-PSU-003-U0155">Wajar jika sifat tak bias dianggap sebagai sifat penduga yang diinginkan. Namun, seperti dalam contoh kita, bagaimana cara menentukan penduga yang “lebih baik” di antara beberapa penduga tak bias? Secara logis, kita perlu mempertimbangkan bukan hanya nilai harapan penduga, melainkan juga variansnya. Pada pelajaran berikutnya, kita akan membahas varians penduga serta rataan kuadrat galat.</p>
+<section class="level3" data-number="2.2.2" data-o006-id="O006-PSU-003-U0156" id="variance-and-mean-squared-error">
+<h3 class="anchored" data-anchor-id="variance-and-mean-squared-error" data-number="2.2.2" data-o006-id="O006-PSU-003-U0157"><span class="header-section-number">2.2.2</span> Varians dan Rataan Kuadrat Galat</h3>
+<p data-o006-id="O006-PSU-003-U0158">Pada bagian sebelumnya, kita mendefinisikan bias dan makna sifat tak bias suatu penduga bagi parameter yang tidak diketahui, <span class="math inline" data-o006-math-id="O006-PSU-003-M0155">\(\theta.\)</span> Walaupun sifat tak bias merupakan sifat yang diinginkan, sifat itu saja belum mendefinisikan suatu “penduga yang baik”. Perhatikan contoh lemparan dart berikut yang menggambarkan perbedaan antara <strong>akurasi</strong> dan <strong>presisi</strong>.</p>
+<p data-o006-id="O006-PSU-003-U0159">Akurasi adalah istilah yang menunjukkan seberapa dekat suatu hasil dengan “nilai sebenarnya”. Bagi penduga, akurasi analog dengan sifat tak bias. Presisi adalah istilah yang menunjukkan seberapa dekat suatu hasil dengan hasil pengukuran lainnya. Bayangkan kita melempar dart ke papan sasaran, dengan pusat sasaran sebagai “nilai sebenarnya”. Misalkan empat orang masing-masing melempar empat dart dan kita ingin menilai siapa pemain dart yang “lebih baik” berdasarkan nilai sebenarnya. Hasil lemparan mereka ditunjukkan di bawah ini.</p>
+<div alt="Empat papan sasaran berlabel A–D: A tidak akurat dan tidak presisi; B tidak akurat tetapi lebih presisi; C lebih akurat tetapi kurang presisi; D akurat dan presisi." class="lightbox quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center" data-o006-id="O006-PSU-003-U0160" id="fig-dartboard">
+<figure class="quarto-float quarto-float-fig figure" data-o006-id="O006-PSU-003-U0161">
+<div aria-describedby="fig-dartboard-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca" data-o006-id="O006-PSU-003-U0162">
+<a data-o006-id="O006-PSU-003-U0163" href="assets/dartboard.png"><img alt="Empat papan sasaran berlabel A–D: A tidak akurat dan tidak presisi; B tidak akurat tetapi lebih presisi; C lebih akurat tetapi kurang presisi; D akurat dan presisi." class="img-fluid quarto-figure quarto-figure-center figure-img" data-o006-asset-id="O006-PSU-003-A0001" data-o006-id="O006-PSU-003-U0164" src="assets/dartboard.png"/></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" data-o006-id="O006-PSU-003-U0165" id="fig-dartboard-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Gambar 2.1
+</figcaption>
+</figure>
+</div>
+<p data-o006-id="O006-PSU-003-U0166">Mari kita telaah setiap pemain. Akurasi Pemain A rendah dan dart-nya tersebar. Pemain B tidak melempar dekat pusat sasaran, tetapi hasil lemparannya berdekatan satu sama lain. Oleh karena itu, akurasi Pemain B rendah, tetapi presisinya lebih baik. Pemain C tampaknya memiliki akurasi yang lebih tinggi daripada Pemain A dan B, tetapi presisinya buruk. Terakhir, Pemain D memiliki akurasi dan presisi yang tinggi. Berdasarkan gambar, saya akan menilai bahwa Pemain D adalah pemain yang lebih baik.</p>
+<p data-o006-id="O006-PSU-003-U0167">Tujuannya adalah memilih penduga yang akurat dan presisi. Kita telah membahas bahwa sifat tak bias analog dengan akurasi. Untuk menilai presisi suatu penduga, ukuran yang baik adalah varians penduga tersebut.</p>
+<div class="theorem example" data-o006-id="O006-PSU-003-U0168" id="exm-varianceestimator">
+<p data-o006-id="O006-PSU-003-U0169"><span class="theorem-title"><strong>Contoh 2.10</strong></span> Perhatikan kembali contoh sebelumnya yang memiliki tiga calon penduga:</p>
+<p data-o006-id="O006-PSU-003-U0170"><span class="math display" data-o006-math-id="O006-PSU-003-M0156">\[
+\begin{align*}
+&amp;\hat{p}_1 = \frac{X_1}{10}\\
+&amp;\hat{p}_2 = \frac{X_1 + X_2 + X_3}{30}\\
+&amp;\hat{p}_3 = \hat{p}_2 + 0.1
+\end{align*}
+\]</span></p>
+<p data-o006-id="O006-PSU-003-U0171">dengan <span class="math inline" data-o006-math-id="O006-PSU-003-M0157">\(X_i \overset{iid}{\sim} \text{Bin}(10, p).\)</span> Dari pembahasan sebelumnya, diketahui bahwa baik <span class="math inline" data-o006-math-id="O006-PSU-003-M0158">\(\hat{p}_1\)</span> maupun <span class="math inline" data-o006-math-id="O006-PSU-003-M0159">\(\hat{p}_2\)</span> merupakan penduga tak bias bagi <span class="math inline" data-o006-math-id="O006-PSU-003-M0160">\(p\)</span>, sedangkan <span class="math inline" data-o006-math-id="O006-PSU-003-M0161">\(\hat{p}_3\)</span> merupakan penduga yang bias. Tentukan varians setiap penduga.</p>
+<section class="level4 card card-body bg-light ms-3 mb-3 pt-0" data-o006-id="O006-PSU-003-U0172" id="solution-4">
+<h4 class="anchored" data-anchor-id="solution-4" data-o006-id="O006-PSU-003-U0173">Penyelesaian</h4>
+<p data-o006-id="O006-PSU-003-U0174">Untuk menentukan varians setiap penduga, kita perlu mengingat tiga aturan dari STAT 414: - Untuk peubah acak binomial <span class="math inline" data-o006-math-id="O006-PSU-003-M0162">\(X\)</span>, <span class="math inline" data-o006-math-id="O006-PSU-003-M0163">\(\text{Var}(X) = np(1-p).\)</span> - <span class="math inline" data-o006-math-id="O006-PSU-003-M0164">\(\text{Var}(aX+b) = a^2 \text{Var}(X)\)</span> untuk peubah acak <span class="math inline" data-o006-math-id="O006-PSU-003-M0165">\(X.\)</span> - Jika peubah acak <span class="math inline" data-o006-math-id="O006-PSU-003-M0166">\(X\)</span> dan <span class="math inline" data-o006-math-id="O006-PSU-003-M0167">\(Y\)</span> saling bebas, maka <span class="math inline" data-o006-math-id="O006-PSU-003-M0168">\(\text{Var}(X+Y) = \text{Var}(X) + \text{Var}(Y).\)</span></p>
+<p data-o006-id="O006-PSU-003-U0175">Sekarang, mari kita tentukan varians <span class="math inline" data-o006-math-id="O006-PSU-003-M0169">\(\hat{p}_1\)</span>: <span class="math display" data-o006-math-id="O006-PSU-003-M0170">\[
+\begin{align*}
+\text{Var}(\hat{p}_1) &amp;= \text{Var}\left(\frac{X_1}{10}\right)\\ &amp;= \left(\frac{1}{10}\right)^2 \text{Var}(X_1)\\&amp; = \frac{10p(1-p)}{100} \\&amp;= \frac{p(1-p)}{10}
+\end{align*}
+\]</span></p>
+<p data-o006-id="O006-PSU-003-U0176">Berikutnya, tentukan varians <span class="math inline" data-o006-math-id="O006-PSU-003-M0171">\(\hat{p}_2\)</span>: <span class="math display" data-o006-math-id="O006-PSU-003-M0172">\[
+\begin{align*}
+\text{Var}(\hat{p}_2) &amp;= \text{Var}\left(\frac{X_1 + X_2 + X_3}{30}\right)\\&amp; = \frac{1}{30^2} \text{Var}(X_1 + X_2 + X_3) \\
+&amp;= \frac{\text{Var}(X_1) + \text{Var}(X_2) + \text{Var}(X_3)}{30^2} \\&amp;= \frac{10p(1-p) + 10p(1-p) + 10p(1-p)}{30^2} \\
+&amp;= \frac{30p(1-p)}{30^2}= \frac{p(1-p)}{30}
+\end{align*}
+\]</span></p>
+<p data-o006-id="O006-PSU-003-U0177">Terakhir, tentukan varians <span class="math inline" data-o006-math-id="O006-PSU-003-M0173">\(\hat{p}_3\)</span>: <span class="math display" data-o006-math-id="O006-PSU-003-M0174">\[
+\begin{align*}
+\text{Var}(\hat{p}_3) &amp;= \text{Var}(\hat{p}_2 + 0.1) = \text{Var}(\hat{p}_2) = \frac{p(1-p)}{30}
+\end{align*}
+\]</span></p>
+<p data-o006-id="O006-PSU-003-U0178">Jadi, diperoleh bahwa baik <span class="math inline" data-o006-math-id="O006-PSU-003-M0175">\(\hat{p}_1\)</span> maupun <span class="math inline" data-o006-math-id="O006-PSU-003-M0176">\(\hat{p}_2\)</span> merupakan penduga tak bias. Di atas, juga diperoleh bahwa <span class="math inline" data-o006-math-id="O006-PSU-003-M0177">\(\text{Var}(\hat{p}_1)&gt;\text{Var}(\hat{p}_2).\)</span> Berdasarkan dua sifat penduga yang telah kita pelajari sejauh ini, tampaknya <span class="math inline" data-o006-math-id="O006-PSU-003-M0178">\(\hat{p}_2\)</span> merupakan penduga yang lebih baik.</p>
+</section>
+</div>
+<p data-o006-id="O006-PSU-003-U0179">Dalam contoh di atas, kita memilih penduga tak bias dengan varians terkecil. Apakah kita akan pernah menggunakan penduga yang bias? Jika ya, mengapa?</p>
+<p data-o006-id="O006-PSU-003-U0180">Dalam keadaan tertentu, varians dapat dikurangi secara drastis dengan memasukkan sedikit bias. Sebagai contoh, perhatikan dua penduga, <span class="math inline" data-o006-math-id="O006-PSU-003-M0179">\(\hat{\theta}_1\)</span> dan <span class="math inline" data-o006-math-id="O006-PSU-003-M0180">\(\hat{\theta}_2.\)</span> Perhatikan grafik fungsi kepadatan peluang (PDF) kedua penduga tersebut.</p>
+<div class="quarto-float quarto-figure quarto-figure-center anchored" data-o006-id="O006-PSU-003-U0181" id="fig-estimatorspdf">
+<figure class="quarto-float quarto-float-fig figure" data-o006-id="O006-PSU-003-U0182">
+<div aria-describedby="fig-estimatorspdf-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca" data-o006-id="O006-PSU-003-U0183">
+<div class="cell" data-lightbox="true" data-o006-id="O006-PSU-003-U0184">
+<div class="cell-output-display" data-o006-id="O006-PSU-003-U0185">
+<div data-o006-id="O006-PSU-003-U0186">
+<figure class="figure" data-o006-id="O006-PSU-003-U0187">
+<p data-o006-id="O006-PSU-003-U0188"><img alt="Dua kurva kepadatan penduga di sekitar nilai parameter sebenarnya: penduga pertama berpusat tetapi lebih menyebar; penduga kedua lebih sempit tetapi bergeser ke kiri." class="img-fluid figure-img" data-o006-asset-id="O006-PSU-003-A0002" data-o006-id="O006-PSU-003-U0189" src="assets/unnamed-chunk-1-1.png"/></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" data-o006-id="O006-PSU-003-U0190" id="fig-estimatorspdf-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Gambar 2.2
+</figcaption>
+</figure>
+</div>
+<p data-o006-id="O006-PSU-003-U0191">Terlihat bahwa fungsi kepadatan peluang (PDF) dari <span class="math inline" data-o006-math-id="O006-PSU-003-M0181">\(\hat{\theta}_1\)</span> berpusat di sekitar nilai sebenarnya, yaitu <span class="math inline" data-o006-math-id="O006-PSU-003-M0182">\(\theta.\)</span> Namun, <span class="math inline" data-o006-math-id="O006-PSU-003-M0183">\(\hat{\theta}_1\)</span> memiliki varians yang lebih besar. Namun, <span class="math inline" data-o006-math-id="O006-PSU-003-M0184">\(\hat{\theta}_2\)</span> tidak berpusat di sekitar nilai sebenarnya, tetapi memiliki varians yang jauh lebih kecil.</p>
+<div class="theorem example" data-o006-id="O006-PSU-003-U0192" id="exm-asymptompicallybias">
+<p data-o006-id="O006-PSU-003-U0193"><span class="theorem-title"><strong>Contoh 2.11</strong></span> Perhatikan kembali contoh sebelumnya, yaitu sampel acak berukuran <span class="math inline" data-o006-math-id="O006-PSU-003-M0185">\(n\)</span> dari distribusi normal dengan rataan <span class="math inline" data-o006-math-id="O006-PSU-003-M0186">\(\mu\)</span> dan varians <span class="math inline" data-o006-math-id="O006-PSU-003-M0187">\(\sigma^2.\)</span> Telah ditunjukkan bahwa</p>
+<p data-o006-id="O006-PSU-003-U0194"><span class="math display" data-o006-math-id="O006-PSU-003-M0188">\[\begin{align*}
+    \hat{\sigma}^2_1=\frac{\sum_{i=1}^n (X_i-\bar{X})^2}{n}
+\end{align*}\]</span></p>
+<p data-o006-id="O006-PSU-003-U0195">merupakan penduga yang bias bagi <span class="math inline" data-o006-math-id="O006-PSU-003-M0189">\(\sigma^2.\)</span> Kita juga memperoleh bahwa</p>
+<p data-o006-id="O006-PSU-003-U0196"><span class="math display" data-o006-math-id="O006-PSU-003-M0190">\[\begin{align*}
+    \hat{\sigma^2}_2=\frac{\sum_{i=1}^n(X_i-\bar{X})^2}{n-1}
+\end{align*}\]</span></p>
+<p data-o006-id="O006-PSU-003-U0197">merupakan penduga tak bias. Kita memperoleh bahwa:</p>
+<p data-o006-id="O006-PSU-003-U0198"><span class="math display" data-o006-math-id="O006-PSU-003-M0191">\[\begin{align*}
+    E(\hat{\sigma^2}_1)=\frac{n-1}{n}\sigma^2
+\end{align*}\]</span></p>
+<p data-o006-id="O006-PSU-003-U0199">Namun, ketika <span class="math inline" data-o006-math-id="O006-PSU-003-M0192">\(n\)</span> menuju tak hingga, nilai harapannya menuju <span class="math inline" data-o006-math-id="O006-PSU-003-M0193">\(\sigma^2.\)</span> Oleh karena itu, <span class="math inline" data-o006-math-id="O006-PSU-003-M0194">\(\hat{\sigma}^2_1\)</span> bersifat <strong>tak bias secara asimtotik</strong>. Oleh karena itu, ketika ukuran sampel makin besar, bias penduga dapat menuju 0.</p>
+</div>
+<p data-o006-id="O006-PSU-003-U0200">Adakah ukuran yang dapat membantu kita menemukan keseimbangan yang baik antara bias penduga dan variansnya? Jawabannya ada. Salah satu ukuran tersebut adalah <strong>rataan kuadrat galat</strong> (MSE).</p>
+<div class="ms-3 theorem definition" data-o006-id="O006-PSU-003-U0201" id="def-mseptestimator">
+<p data-o006-id="O006-PSU-003-U0202"><span class="theorem-title"><strong>Def. 2.3 (Rataan Kuadrat Galat bagi Penduga Titik <span class="math inline" data-o006-math-id="O006-PSU-003-M0195">\(\hat{\theta}\)</span>)</strong></span> Nilai <strong>rataan kuadrat galat</strong> dari suatu penduga titik <span class="math inline" data-o006-math-id="O006-PSU-003-M0196">\(\hat{\theta}\)</span> didefinisikan sebagai</p>
+<p data-o006-id="O006-PSU-003-U0203"><span class="math display" data-o006-math-id="O006-PSU-003-M0197">\[\begin{align*}
+        \text{MSE}(\hat{\theta})=E\left[(\hat{\theta}-\theta)^2\right]
+    \end{align*}\]</span></p>
+<p data-o006-id="O006-PSU-003-U0204">Rataan kuadrat galat suatu penduga adalah rataan kuadrat jarak antara penduga dan parameter sebenarnya, <span class="math inline" data-o006-math-id="O006-PSU-003-M0198">\(\theta.\)</span></p>
+</div>
+<p data-o006-id="O006-PSU-003-U0205">Berdasarkan definisi MSE, jelas bahwa penduga yang diinginkan memiliki rataan kuadrat galat terkecil.</p>
+<p data-o006-id="O006-PSU-003-U0206">Rataan kuadrat galat <span class="math inline" data-o006-math-id="O006-PSU-003-M0199">\(\hat{\theta}\)</span>, sebagai ukuran bagi suatu penduga, merupakan fungsi dari bias dan variansnya. Dapat ditunjukkan bahwa</p>
+<p data-o006-id="O006-PSU-003-U0207"><span class="math display" data-o006-math-id="O006-PSU-003-M0200">\[\begin{align*}
+        \text{MSE}(\hat{\theta})=\text{Var}(\hat{\theta})+\left[\text{Bias}(\hat{\theta})\right]^2
+    \end{align*}\]</span></p>
+<p data-o006-id="O006-PSU-003-U0208">dengan <span class="math inline" data-o006-math-id="O006-PSU-003-M0201">\(\text{Bias}(\hat{\theta})\)</span> merupakan bias dari <span class="math inline" data-o006-math-id="O006-PSU-003-M0202">\(\hat{\theta}.\)</span> Pastikan sendiri bahwa hubungan di atas berlaku. Hubungan tersebut mungkin ditanyakan dalam tugas.</p>
+<div class="theorem example" data-o006-id="O006-PSU-003-U0209" id="exm-mseofestimators">
+<p data-o006-id="O006-PSU-003-U0210"><span class="theorem-title"><strong>Contoh 2.12</strong></span> Perhatikan kembali contoh sebelumnya dengan tiga penduga berikut untuk parameter binomial <span class="math inline" data-o006-math-id="O006-PSU-003-M0203">\(p\)</span>, dengan <span class="math inline" data-o006-math-id="O006-PSU-003-M0204">\(n=10.\)</span> Penduga-penduganya adalah: <span class="math display" data-o006-math-id="O006-PSU-003-M0205">\[\begin{align*}
+    &amp; \hat{p}_1=\frac{X_1}{10}\\
+    &amp; \hat{p}_2=\frac{X_1+X_2+X_3}{30}\\
+    &amp; \hat{p}_3=\hat{p}_2+0.1
+\end{align*}\]</span> Tentukan MSE setiap penduga.</p>
+<section class="level4 card card-body bg-light ms-3 mb-3 pt-0" data-o006-id="O006-PSU-003-U0211" id="solution-5">
+<h4 class="anchored" data-anchor-id="solution-5" data-o006-id="O006-PSU-003-U0212">Penyelesaian</h4>
+<p data-o006-id="O006-PSU-003-U0213">Sebelumnya, kita telah memperoleh varians dan nilai harapan setiap penduga. Hasilnya diringkas di sini untuk memudahkan.</p>
+<p data-o006-id="O006-PSU-003-U0214"><span class="math display" data-o006-math-id="O006-PSU-003-M0206">\[\begin{align*}
+    &amp; E(\hat{p}_1)=p, \qquad \text{Var}(\hat{p}_1)=\frac{p(1-p)}{10}\\
+    &amp; E(\hat{p}_2)=p, \qquad \text{Var}(\hat{p}_2)=\frac{p(1-p)}{30}\\
+    &amp; E(\hat{p}_3)=p+0.1, \qquad \text{Var}(\hat{p}_3)=\frac{p(1-p)}{30}\\
+\end{align*} \]</span></p>
+<p data-o006-id="O006-PSU-003-U0215">Untuk menentukan rataan kuadrat galat, kita perlu menentukan bias setiap penduga.</p>
+<p data-o006-id="O006-PSU-003-U0216"><span class="math display" data-o006-math-id="O006-PSU-003-M0207">\[\begin{align*}
+    &amp; \text{Bias}(\hat{p}_1)=E(\hat{p}_1)-p=0\\
+    &amp; \text{Bias}(\hat{p}_2)=E(\hat{p}_2)-p=0\\
+    &amp; \text{Bias}(\hat{p}_3)=E(\hat{p}_3)-p=p+0.1-p=0.1\\
+\end{align*}\]</span></p>
+<p data-o006-id="O006-PSU-003-U0217">Dengan demikian, nilai MSE masing-masing adalah:</p>
+<p data-o006-id="O006-PSU-003-U0218"><span class="math display" data-o006-math-id="O006-PSU-003-M0208">\[\begin{align*}
+    &amp; MSE(\hat{p}_1)=\text{Var}(\hat{p}_1)+\left[\text{Bias}(\hat{p}_1)\right]^2=\frac{p(1-p)}{10}\\
+    &amp; MSE(\hat{p}_2)=\text{Var}(\hat{p}_2)+\left[\text{Bias}(\hat{p}_2)\right]^2=\frac{p(1-p)}{30}\\
+    &amp; MSE(\hat{p}_3)=\text{Var}(\hat{p}_3)+\left[\text{Bias}(\hat{p}_3)\right]^2=\frac{p(1-p)}{30}+0.1^2=\frac{p(1-p)}{30}+0.01\\
+\end{align*}\]</span></p>
+<p data-o006-id="O006-PSU-003-U0219">Dengan demikian, penduga dengan MSE terkecil adalah <span class="math inline" data-o006-math-id="O006-PSU-003-M0209">\(\hat{p}_2.\)</span></p>
+</section>
+</div>
+<p data-o006-id="O006-PSU-003-U0220">Pada pelajaran berikutnya, kita akan membahas sifat lain yang diinginkan dari suatu penduga, yaitu kecukupan.</p>
+</section>
+</section>
+<section class="level2" data-number="2.3" data-o006-id="O006-PSU-003-U0221" id="summary">
+<h2 class="anchored" data-anchor-id="summary" data-number="2.3" data-o006-id="O006-PSU-003-U0222"><span class="header-section-number">2.3</span> Ringkasan</h2>
+<p data-o006-id="O006-PSU-003-U0223">Pelajaran ini memperkenalkan gagasan penggunaan data sampel untuk menduga parameter populasi yang tidak diketahui. Fokus kita adalah pada <strong>pendugaan titik</strong> dan menelaah hal-hal yang membuat suatu penduga diinginkan dengan mengkaji <strong>bias</strong>, <strong>varians</strong>, dan <strong>rataan kuadrat galat (MSE)</strong>. Melalui contoh dan penurunan, kita mempelajari cara mengevaluasi dan membandingkan penduga dengan menggunakan sifat-sifat tersebut. Pelajaran ini membangun landasan untuk menilai kualitas penduga, baik dalam konteks teoretis maupun terapan.</p>
+<p data-o006-id="O006-PSU-003-U0224"><strong>Pokok-Pokok Penting</strong></p>
+<ul data-o006-id="O006-PSU-003-U0225">
+<li data-o006-id="O006-PSU-003-U0226"><strong>Bias</strong> mengukur seberapa jauh rataan suatu penduga dari parameter sebenarnya.</li>
+<li data-o006-id="O006-PSU-003-U0227"><strong>Varians</strong> mencerminkan keragaman nilai suatu penduga di berbagai sampel.</li>
+<li data-o006-id="O006-PSU-003-U0228"><strong>Rataan Kuadrat Galat (MSE)</strong> menggabungkan bias dan varians untuk menilai akurasi secara keseluruhan.<br/>
+Membandingkan MSE membantu menentukan penduga mana yang lebih baik dalam praktik.</li>
+</ul>
+</section>
+</main></div>
+<footer class="site-footer"><div class="site-footer__inner">Konten sumber: Departemen Statistika Penn State, CC BY-NC 4.0 kecuali dinyatakan lain. Terjemahan dan rekonstruksi: OpenAI Codex gpt-5.6-sol, Ultra. Tidak ada dukungan atau pengesahan yang tersirat.</div></footer>
+</body>
+</html>

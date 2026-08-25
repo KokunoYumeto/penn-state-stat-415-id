@@ -6,17 +6,17 @@ komponen O006/C140.
 
 ## Status
 
-**Sebagian — 3 dari 14 dokumen lengkap.** Laman utama, seluruh Pelajaran 00,
-dan seluruh Pelajaran 01 sudah diterjemahkan, dibangun, dan lulus pemeriksaan
-deterministik serta visual. Pelajaran 02–12 tetap tercantum dan untuk sementara
-menaut ke halaman resmi berbahasa Inggris. Batas akhir edisi ini adalah laman
-utama dan Pelajaran 00–12, sebanyak 14 dokumen.
+**Sebagian — 5 dari 14 dokumen lengkap.** Laman utama dan seluruh Pelajaran
+00–03 sudah diterjemahkan, dibangun, dan lulus pemeriksaan deterministik serta
+visual. Pelajaran 04–12 tetap tercantum dan untuk sementara menaut ke halaman
+resmi berbahasa Inggris. Batas akhir edisi ini adalah laman utama dan Pelajaran
+00–12, sebanyak 14 dokumen.
 
-- 744 segmen terjemahan lengkap;
-- 750 unit struktural sumber dengan ID stabil dan 748 unit turunan;
-- 500 permukaan matematika, semuanya terikat ke ID yang netral terhadap locale;
-- 20 koreksi turunan terverifikasi; byte sumber resmi tidak diubah;
-- pembaca HTML luring: 28 berkas / 2.598.449 byte.
+- 1.599 segmen terjemahan lengkap;
+- 1.399 unit struktural sumber dengan ID stabil dan 1.397 unit turunan;
+- 1.149 permukaan matematika, semuanya terikat ke ID yang netral terhadap locale;
+- 46 koreksi turunan terverifikasi; byte sumber resmi tidak diubah;
+- pembaca HTML luring: 32 berkas / 2.804.159 byte.
 
 Pembaca lokal tersedia di `build/html-id/index.html`. Riwayat sumber,
 identitas SHA-256, hak komponen, koreksi, backend modular, hasil build, dan
@@ -34,16 +34,20 @@ Gunakan Python 3.13 dan dependensi yang dipatok di `requirements.txt`, lalu
 jalankan:
 
 ```text
-python scripts/freeze_stat415.py --check-only
-python scripts/freeze_first_unit_assets.py --check-only
-python scripts/freeze_lesson01_assets.py --check-only
-python scripts/freeze_mathjax.py --check-only
-python scripts/normalize_first_unit.py --check-only
-python scripts/merge_first_unit_translations.py --check-only
-python scripts/normalize_lesson01.py --check-only
-python scripts/merge_lesson01_translations.py --check-only
-python scripts/build_through_lesson01.py --check-only
-python scripts/qa_through_lesson01.py --check-only
+python -B scripts/freeze_stat415.py --check-only
+python -B scripts/freeze_first_unit_assets.py --check-only
+python -B scripts/freeze_lesson01_assets.py --check-only
+python -B scripts/freeze_lesson02_assets.py --check-only
+python -B scripts/freeze_mathjax.py --check-only
+python -B scripts/normalize_first_unit.py --check-only
+python -B scripts/merge_first_unit_translations.py --check-only
+python -B scripts/normalize_lesson01.py --check-only
+python -B scripts/merge_lesson01_translations.py --check-only
+python -B scripts/normalize_lesson02.py --check-only
+python -B scripts/normalize_lesson03.py --check-only
+python -B scripts/merge_lesson03_translations.py --check-only
+python -B scripts/build_through_lesson03.py --check-only
+python -B scripts/qa_through_lesson03.py --check-only
 ```
 
 Untuk membaca secara lokal, layani `build/html-id` dengan peladen HTTP statis;

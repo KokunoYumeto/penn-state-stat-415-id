@@ -1,0 +1,170 @@
+{
+  "browser_surface": "Codex in-app browser",
+  "coverage": "landing/index plus complete Lesson00, Lesson01, Lesson02, and Lesson03",
+  "date": "2026-08-25",
+  "desktop": {
+    "console_errors_or_warnings": 0,
+    "page_client_width_css_px": 1265,
+    "routes": {
+      "Lesson00": {
+        "broken_images": 0,
+        "main_width_css_px": 1144.083,
+        "page_horizontal_overflow": false,
+        "rendered_math_containers": 331,
+        "source_math_nodes": 331
+      },
+      "Lesson01": {
+        "broken_images": 0,
+        "loaded_images": 5,
+        "main_width_css_px": 1144.083,
+        "page_horizontal_overflow": false,
+        "rendered_math_containers": 169,
+        "source_math_nodes": 169
+      },
+      "Lesson02": {
+        "broken_images": 0,
+        "loaded_images": 2,
+        "main_width_css_px": 1144.083,
+        "page_horizontal_overflow": false,
+        "rendered_math_containers": 209,
+        "source_math_nodes": 209
+      },
+      "Lesson03": {
+        "broken_images": 0,
+        "loaded_images": 0,
+        "main_width_css_px": 1144.083,
+        "page_horizontal_overflow": false,
+        "rendered_math_containers": 440,
+        "source_math_nodes": 440
+      },
+      "index": {
+        "broken_images": 0,
+        "course_card_images": 13,
+        "loaded_images_after_bounded_lazy_scroll": 13,
+        "main_width_css_px": 1144.083,
+        "page_horizontal_overflow": false,
+        "rendered_math_containers": 0,
+        "source_math_nodes": 0
+      },
+      "licenses": {
+        "broken_images": 0,
+        "main_width_css_px": 1144.083,
+        "page_horizontal_overflow": false,
+        "rendered_math_containers": 0,
+        "source_math_nodes": 0
+      }
+    },
+    "viewport_css_px": {
+      "height": 720,
+      "width": 1280
+    }
+  },
+  "evidence": {
+    "build_receipt": {
+      "bytes": 8363,
+      "sha256": "4ffb6a9963cc7581139a8f5123225b5fd3c6dc7fc8792f60dc0414bf1b371246"
+    },
+    "manifest": {
+      "bytes": 3167,
+      "sha256": "15e979bbd3b791b0a7d2a25873e9450030c5a1b7019455982b84e0dac6287831"
+    },
+    "qa_receipt": {
+      "bytes": 15481,
+      "sha256": "262b4143aecc4f4c546adcb5aaf7fec13832f071a2d5a5e43009a8a3204f7eda"
+    },
+    "reader_css": {
+      "bytes": 6213,
+      "path": "assets/reader-5of14.css",
+      "sha256": "37fc52f724e0ea76443dc12ef243bf874ab6fb8c3c0640e03ab8cf1a6939f989"
+    },
+    "translation_receipt": {
+      "bytes": 3131,
+      "sha256": "d120e1d1b8248070450a4e3d314a890e4b38b199faab364ce525638038676bc6"
+    }
+  },
+  "locale": "id-ID",
+  "mobile": {
+    "console_errors_or_warnings": 0,
+    "page_client_width_css_px": 375,
+    "routes": {
+      "Lesson00": {
+        "broken_images": 0,
+        "main_width_css_px": 343.111,
+        "navigation_horizontal_overflow": false,
+        "page_horizontal_overflow": false,
+        "rendered_math_containers": 331,
+        "source_math_nodes": 331
+      },
+      "Lesson01": {
+        "broken_images": 0,
+        "loaded_images": 5,
+        "main_width_css_px": 343.111,
+        "navigation_horizontal_overflow": false,
+        "page_horizontal_overflow": false,
+        "rendered_math_containers": 169,
+        "source_math_nodes": 169
+      },
+      "Lesson02": {
+        "broken_images": 0,
+        "loaded_images": 2,
+        "main_width_css_px": 343.111,
+        "navigation_horizontal_overflow": false,
+        "page_horizontal_overflow": false,
+        "rendered_math_containers": 209,
+        "source_math_nodes": 209
+      },
+      "Lesson03": {
+        "broken_images": 0,
+        "loaded_images": 0,
+        "main_width_css_px": 343.111,
+        "navigation_horizontal_overflow": false,
+        "page_horizontal_overflow": false,
+        "rendered_math_containers": 440,
+        "source_math_nodes": 440
+      },
+      "index": {
+        "broken_images": 0,
+        "course_card_images": 13,
+        "loaded_images_after_bounded_lazy_scroll": 13,
+        "main_width_css_px": 343.111,
+        "navigation_horizontal_overflow": false,
+        "page_horizontal_overflow": false,
+        "rendered_math_containers": 0,
+        "source_math_nodes": 0
+      },
+      "licenses": {
+        "broken_images": 0,
+        "main_width_css_px": 343.111,
+        "navigation_horizontal_overflow": false,
+        "page_horizontal_overflow": false,
+        "rendered_math_containers": 0,
+        "source_math_nodes": 0
+      }
+    },
+    "viewport_css_px": {
+      "height": 844,
+      "width": 390
+    }
+  },
+  "observations": [
+    "All six routes use reader-5of14.css and fill the centered content width without page-level or navigation horizontal overflow.",
+    "All 1,149 source mathematics nodes render as 1,149 MathJax containers across Lessons 00–03 at both tested viewports.",
+    "All 13 landing-page thumbnails, five Lesson 01 figures, and two Lesson 02 figures load; the landing-page lazy images were verified at the bottom of the bounded scroll.",
+    "The Lesson 03 likelihood-ratio counterexample in stable unit O006-PSU-004-U0127 was visually inspected at 390 by 844 CSS pixels and is legible, centered, and unclipped.",
+    "The Lesson 03 factor-versus-exponent correction in stable unit O006-PSU-004-U0140 was visually inspected at 390 by 844 CSS pixels; the prose distinguishes multiplying parameter-bearing factors from summing exponent terms and remains legible without clipping.",
+    "The complete Lesson 03 opening and navigation were visually inspected at 1280 by 720 CSS pixels and use the full centered reading column.",
+    "Fresh warning/error console logs were empty after the desktop and mobile route passes.",
+    "No audio surface is present or required."
+  ],
+  "provenance": "OpenAI Codex gpt-5.6-sol, Ultra",
+  "routes": [
+    "http://127.0.0.1:41846/index.html",
+    "http://127.0.0.1:41846/Lesson00.html",
+    "http://127.0.0.1:41846/Lesson01.html",
+    "http://127.0.0.1:41846/Lesson02.html",
+    "http://127.0.0.1:41846/Lesson03.html",
+    "http://127.0.0.1:41846/licenses/"
+  ],
+  "schema": "o006.stat415.through-lesson03-visual-qa.v1",
+  "status": "pass"
+}

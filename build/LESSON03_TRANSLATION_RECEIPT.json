@@ -1,0 +1,100 @@
+{
+  "bindings": {
+    "bytes": 215593,
+    "path": "backend/lesson03_translation_bindings.jsonl",
+    "sha256": "00202b65c0376c7065de20270980da6f0d14c50f38e7e946609e31981b903781"
+  },
+  "boundary_whitespace_rule": "exact source-node leading/trailing whitespace wrapped around translated prose core, except registered punctuation repairs and word-after-math leading-space repairs",
+  "document": "Lesson03",
+  "document_id": "O006-PSU-004",
+  "locale": "id-ID",
+  "parts": [
+    {
+      "bytes": 14050,
+      "part": "a",
+      "path": "working/lesson03_translation_part_a.json",
+      "segments": 177,
+      "sha256": "50f8c3f0a701c23e6398148d9853bcc381022bd3dac3292c1f87d9120d628755"
+    },
+    {
+      "bytes": 14082,
+      "part": "b",
+      "path": "working/lesson03_translation_part_b.json",
+      "segments": 177,
+      "sha256": "51dbdd39047ab537cc6d84f31f1c640ea695e51ee49f21c62039ed0b8fbca693"
+    },
+    {
+      "bytes": 14478,
+      "part": "c",
+      "path": "working/lesson03_translation_part_c.json",
+      "segments": 177,
+      "sha256": "5df93dda65d0703bf9a65271e20cfa769a2e6f07c5cad70a51f7708ed5daa1b7"
+    }
+  ],
+  "punctuation_boundary_exceptions": [
+    {
+      "punctuation": ",",
+      "segment_id": "O006-PSU-004-S0246"
+    },
+    {
+      "punctuation": ",",
+      "segment_id": "O006-PSU-004-S0248"
+    },
+    {
+      "punctuation": ".",
+      "segment_id": "O006-PSU-004-S0306"
+    },
+    {
+      "punctuation": ",",
+      "segment_id": "O006-PSU-004-S0419"
+    }
+  ],
+  "schema": "o006.stat415.lesson03-translation.v1",
+  "segment_count": 531,
+  "source_findings": {
+    "bytes": 6449,
+    "path": "working/lesson03_source_findings.md",
+    "sha256": "904b9e72ccb362402ec1ef47df5ab13a8afad0738720220b6d37c00995c86df2"
+  },
+  "status": "complete",
+  "template": {
+    "bytes": 94343,
+    "path": "working/lesson03_segments.csv",
+    "sha256": "ba6c4d7c905ec14babb1ac9a971a7195968978c581eeb0d4088d92889bdf8b8a"
+  },
+  "terminology_inputs": [
+    {
+      "bytes": 4774,
+      "path": "00_control/TERMINOLOGY_GLOSSARY_ID_ID.csv",
+      "sha256": "c1fe0f172a974c049973da3a9fcf40d724d8ce5f7ff2690e9ab8c78efbd35ae3"
+    },
+    {
+      "bytes": 2239,
+      "path": "working/lesson03_terminology_qa.md",
+      "sha256": "d46c722d4c9748a0f1df35231492f850dab4789869ff9d00c75e14fe8c53e23b"
+    }
+  ],
+  "terminology_rule": "component glossary plus the Lesson 03 continuity and precision decision",
+  "translation_csv": {
+    "bytes": 123145,
+    "path": "source/id-ID/lesson03_translation.csv",
+    "sha256": "ab96512a2b7f8eb5d86b60dbcc2ad6779f74623367e4537b04167ce22bc8215a"
+  },
+  "translation_provenance": "OpenAI Codex gpt-5.6-sol, Ultra",
+  "word_boundary_leading_space_exceptions": [
+    "O006-PSU-004-S0135",
+    "O006-PSU-004-S0137",
+    "O006-PSU-004-S0208",
+    "O006-PSU-004-S0209",
+    "O006-PSU-004-S0263",
+    "O006-PSU-004-S0501",
+    "O006-PSU-004-S0504",
+    "O006-PSU-004-S0521",
+    "O006-PSU-004-S0523"
+  ],
+  "zero_asset_closure": {
+    "bytes": 1800,
+    "path": "working/lesson03_zero_asset_closure.json",
+    "sha256": "e235e8ab499aa0ce542898d4aaf016e6932c807da8a06fdb9f0976f60547d705"
+  }
+}

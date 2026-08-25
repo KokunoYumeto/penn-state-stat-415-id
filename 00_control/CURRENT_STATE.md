@@ -1,52 +1,51 @@
 # Current state — Penn State STAT 415 id-ID component
 
-Updated: 2026-08-24
+Updated: 2026-08-25
 
 All fourteen official Penn State documents—landing/index plus Lessons 00–12—
-remain frozen at exactly 1,604,869 bytes. The source manifest SHA-256 is
+remain frozen at exactly 1,604,869 bytes. The source-manifest SHA-256 is
 `622c9ed2d82bb0f3f60f6855b341664233dd548b5d53dfaee2a488218a5da515`;
 the freeze-receipt SHA-256 is
 `2a63e37bb6b4637cfd2522e392b140f2b625f2a1cf5f76f267a53ba4fb2e119b`.
 
-The cumulative edition is complete through the landing page, Lesson 00, and
-Lesson 01: 3 of 14 documents. It contains 744 translated segments, 750
-normalized source units, 748 derivative units, and 500 protected mathematics
-surfaces. Exactly twenty proved source defects are corrected only in the
-derivative—fourteen from the first unit and six from Lesson 01—and every
-correction is bound to immutable evidence. Authority bytes remain unchanged.
+The cumulative local edition is complete through the landing page and Lessons
+00–03: 5 of 14 documents. It contains 1,599 translated segments, 1,399
+normalized source units, 1,397 derivative units, and 1,149 protected
+mathematics surfaces. Exactly 46 proved source defects are corrected only in
+the derivative—fourteen from the first unit, six from Lesson 01, nine from
+Lesson 02, and seventeen from Lesson 03. Authority bytes are unchanged.
 
-Lesson 01 is complete. Its immutable 84,567-byte authority was normalized into
-221 translation segments, 188 stable units, 169 protected mathematics nodes,
-and 579 catalogue records. Five same-origin SVG figures / 62,145 bytes are
-frozen and cleared under the page rights witness. Exact-topic Indonesian field
-evidence supports `statistik urutan`; the terminology decision is recorded in
-`TERMINOLOGY_QA_2026-08-24_LESSON01.md`. The final translation CSV SHA-256 is
-`f7c6cc3c2089f1e3f0fb500dddd93b803cb2c63007b30349a41e88c9d52e9eeb`.
+Lesson 03 is complete. Its 118,925-byte authority, SHA-256
+`26dd4efe75abc879a5316c215eaedbfe713c77e742898eb86e7f3d88cb0c04c9`,
+was normalized into 531 translation segments, 421 stable units, 440 protected
+mathematics nodes, zero content assets, and 1,393 catalogue records. The final
+translation CSV is 123,145 bytes with SHA-256
+`ab96512a2b7f8eb5d86b60dbcc2ad6779f74623367e4537b04167ce22bc8215a`;
+its bindings SHA-256 is
+`00202b65c0376c7065de20270980da6f0d14c50f38e7e946609e31981b903781`.
+An independent audit replayed all 531 mappings and found no missing or extra
+IDs, English leakage, terminology violations, metadata/order changes, or
+formula/text boundary defects.
 
-The deterministic cumulative reader contains 28 files / 2,598,449 bytes. Its
+The deterministic cumulative reader contains 32 files / 2,804,159 bytes. Its
 manifest SHA-256 is
-`6a047b981eeb71e740450678b4f802fb7ec3eb954cf92ffc3cebbaf8a050b5a7`;
-build receipt SHA-256 is
-`ae926ca4f9a3d0d1723b059fbc578365bfd5fc704521a7a990b98bdd4bc4a1c2`;
-QA receipt SHA-256 is
-`3143ff7a9f8127d76370c52e93567e74b1fa328c52f0916d31eb59a9f3a4548f`.
-The reader is offline-closed, all 500 math surfaces render, and fresh-load
-desktop/mobile inspection of all three routes found zero page-level horizontal
-overflow, broken loaded images, or console errors/warnings. The visual receipt
-SHA-256 is
-`74fc753f0191adfcc6545c3bf728c7feaba0f67ad2b5cf76b213fd871521401a`.
+`15e979bbd3b791b0a7d2a25873e9450030c5a1b7019455982b84e0dac6287831`;
+build-receipt SHA-256 is
+`4ffb6a9963cc7581139a8f5123225b5fd3c6dc7fc8792f60dc0414bf1b371246`;
+QA-receipt SHA-256 is
+`262b4143aecc4f4c546adcb5aaf7fec13832f071a2d5a5e43009a8a3204f7eda`.
+Normalization, merge, build, manifest, topology, mathematics, stable-ID,
+rights, privacy, asset, and internal-link checks replay in check-only mode.
 
-The hardened reader-first release contains nine files / 7,150,601 bytes;
-package-receipt SHA-256 is
-`923629a84df45f74404159efe6b007e2fe457924397e593e6c5f7bb268049dcd`.
-Its primary reader ZIP is 2,606,679 bytes with SHA-256
-`8e69e971eb44f318772e80ca22a759d97499e16d306d6172a676d79f3446bcfc`.
-Its source/backend ZIP is an explicit immutable 86-file closure, 4,520,133
-bytes, SHA-256
-`740fa491a223e0e8b6b01e21a06124ed9e38c734fcec3d74fc065f6c26888f40`.
-It excludes mutable publication state, caches, secret-like paths, and
-machine-local profile paths; a non-self-referential root receipt binds every
-other upload.
+Desktop/mobile inspection at 1280×720 and 390×844 confirmed no page-level or
+navigation overflow on the landing, Lessons 00–03, or licence route. The exact
+1,149 mathematics nodes rendered at both viewports; all twenty reader images
+loaded; fresh warning/error logs were empty. The repaired Lesson 03
+likelihood-ratio counterexample (U0127) and factor-versus-exponent explanation
+(U0140) were inspected in the mobile reader, and the full Lesson 03 opening was
+inspected at desktop width. The 6,042-byte visual receipt has SHA-256
+`f80ba6dc59e3ce4e869950b3b6175b75af5affb4a445a3f1881a129fba3f34f7`.
+The 5-of-14 boundary is release-ready; its public transaction remains pending.
 
 Rights remain component-separated: Penn State content is CC BY-NC 4.0 except
 where otherwise noted, MathJax 3.1.2 is Apache-2.0, and original repository
@@ -54,18 +53,12 @@ support remains CC BY-SA 4.0. No aggregate uniform relicensing is claimed. The
 translation provenance is exactly `OpenAI Codex gpt-5.6-sol, Ultra`; all source
 and human-contributor credits are preserved. No upstream message has been sent.
 
-This 3-of-14 boundary is public. Commit
-`4a1182fc9bd5a86942da5f7be6539f4dbf048921` passed workflow run
-`32739307538`; anonymous readback matched 168 public commit files, all 28 Pages
-files, and all nine GitHub release assets / 7,150,601 bytes. GitHub tag
-`v2026.08.24.3of14` is public. Zenodo version DOI
-`10.5281/zenodo.22083156` remains inside concept DOI
-`10.5281/zenodo.22077422`; all nine Zenodo files matched anonymously, and the
-authenticated lineage audit found one submitted target version and zero
-unpublished concept drafts.
+The last public checkpoint remains 3 of 14: commit
+`4a1182fc9bd5a86942da5f7be6539f4dbf048921`, GitHub release
+`v2026.08.24.3of14`, and Zenodo version DOI `10.5281/zenodo.22083156` inside
+concept DOI `10.5281/zenodo.22077422`. The next action is the exact 5-of-14
+GitHub/Pages/GitHub-release/Zenodo transaction with anonymous byte readback,
+followed immediately by Lesson 04 production.
 
-The next production document is Lesson 02. Its normalizer is present but has
-not yet been admitted or run; the immediate action is to validate it, freeze
-its two direct assets, adjudicate its nine source defects, and translate all
-segments contiguously. The independent completed Random edition remains in its
-separate sibling repository and is outside this component's write boundary.
+The independent completed Random edition remains in its separate sibling
+repository and is outside this component's write boundary.

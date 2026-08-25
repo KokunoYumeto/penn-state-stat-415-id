@@ -1,0 +1,235 @@
+{
+  "corrections": {
+    "bytes": 18084,
+    "count": 46,
+    "lesson03_count": 17,
+    "path": "backend/through_lesson03_corrections.jsonl",
+    "sha256": "07a58f960890e58bb90be43c8d90102fc8edfae7201750fc036036e67c0baa83",
+    "through_lesson02_count": 29
+  },
+  "coverage": {
+    "complete_count": 5,
+    "complete_documents": [
+      "index",
+      "Lesson00",
+      "Lesson01",
+      "Lesson02",
+      "Lesson03"
+    ],
+    "corpus_document_count": 14,
+    "next_document": "Lesson04"
+  },
+  "documents_backend": {
+    "bytes": 3356,
+    "path": "backend/through_lesson03_documents.jsonl",
+    "sha256": "333a00de60de75efb9231728eedd93df3746a7fa8f6c231dc171743abc05a81c"
+  },
+  "historical_lesson02_evidence": {
+    "backend/through_lesson02_corrections.jsonl": {
+      "bytes": 10143,
+      "sha256": "db6ec366a1461c545d4c1ca93b2a76664868bb4e99878a0719d8e9ab2a976c19"
+    },
+    "backend/through_lesson02_documents.jsonl": {
+      "bytes": 2680,
+      "sha256": "22f36e9a27466c271b8a9b507d356f73246b1484e1d9d13439329fc932bca474"
+    },
+    "build/THROUGH_LESSON02_BUILD_RECEIPT.json": {
+      "bytes": 6845,
+      "sha256": "f061911bb9dc8ab1c9f3a30701f00fcaf35ad96f260f49847d1c2d46cff4ee0e"
+    },
+    "build/THROUGH_LESSON02_MANIFEST.csv": {
+      "bytes": 3081,
+      "sha256": "e0fe3c91465284cb10cf0bc802c32102bccb0eb0c84f108405a66044faf9f7ef"
+    },
+    "build/THROUGH_LESSON02_QA_RECEIPT.json": {
+      "bytes": 11352,
+      "sha256": "79f83cf4e5690c1509c8c6fea415340c44b2513390955c62f42398bfe84dd14c"
+    },
+    "build/THROUGH_LESSON02_VISUAL_QA_RECEIPT.json": {
+      "bytes": 7262,
+      "sha256": "ff88c85188969656be6bebb9a82504c148506baca7fba8bcdbe1738583f69d8e"
+    }
+  },
+  "inputs": {
+    "builder": {
+      "bytes": 52227,
+      "path": "scripts/build_through_lesson03.py",
+      "sha256": "c153eaa35274a0fd5e72c51a8ca75849b9164f4a39f9941db00e2ef645298765"
+    },
+    "frozen": {
+      "00_control/TERMINOLOGY_GLOSSARY_ID_ID.csv": {
+        "bytes": 4774,
+        "sha256": "c1fe0f172a974c049973da3a9fcf40d724d8ce5f7ff2690e9ab8c78efbd35ae3"
+      },
+      "authority/upstream/stat415/Lesson03.html": {
+        "bytes": 118925,
+        "sha256": "26dd4efe75abc879a5316c215eaedbfe713c77e742898eb86e7f3d88cb0c04c9"
+      },
+      "backend/lesson03_source_catalogue.jsonl": {
+        "bytes": 654743,
+        "sha256": "6ee066954be5e3777a655d6c43440f7bb2a9379e665a5ba4997136aef509ed7a"
+      },
+      "backend/lesson03_translation_bindings.jsonl": {
+        "bytes": 215593,
+        "sha256": "00202b65c0376c7065de20270980da6f0d14c50f38e7e946609e31981b903781"
+      },
+      "backend/through_lesson02_corrections.jsonl": {
+        "bytes": 10143,
+        "sha256": "db6ec366a1461c545d4c1ca93b2a76664868bb4e99878a0719d8e9ab2a976c19"
+      },
+      "backend/through_lesson02_documents.jsonl": {
+        "bytes": 2680,
+        "sha256": "22f36e9a27466c271b8a9b507d356f73246b1484e1d9d13439329fc932bca474"
+      },
+      "build/LESSON03_NORMALIZATION_RECEIPT.json": {
+        "bytes": 12791,
+        "sha256": "693b5fbb2b410567e0c81e2232e46ad159a9958605b691b2badbd2f4b08d5fc6"
+      },
+      "build/LESSON03_TRANSLATION_RECEIPT.json": {
+        "bytes": 3131,
+        "sha256": "d120e1d1b8248070450a4e3d314a890e4b38b199faab364ce525638038676bc6"
+      },
+      "build/THROUGH_LESSON02_BUILD_RECEIPT.json": {
+        "bytes": 6845,
+        "sha256": "f061911bb9dc8ab1c9f3a30701f00fcaf35ad96f260f49847d1c2d46cff4ee0e"
+      },
+      "build/THROUGH_LESSON02_MANIFEST.csv": {
+        "bytes": 3081,
+        "sha256": "e0fe3c91465284cb10cf0bc802c32102bccb0eb0c84f108405a66044faf9f7ef"
+      },
+      "build/THROUGH_LESSON02_QA_RECEIPT.json": {
+        "bytes": 11352,
+        "sha256": "79f83cf4e5690c1509c8c6fea415340c44b2513390955c62f42398bfe84dd14c"
+      },
+      "build/THROUGH_LESSON02_VISUAL_QA_RECEIPT.json": {
+        "bytes": 7262,
+        "sha256": "ff88c85188969656be6bebb9a82504c148506baca7fba8bcdbe1738583f69d8e"
+      },
+      "scripts/build_through_lesson02.py": {
+        "bytes": 40684,
+        "sha256": "22d58702d08ca55c2301f0e3652fc9adc8d9469450c259413890854711cdc3b7"
+      },
+      "scripts/normalize_lesson03.py": {
+        "bytes": 35668,
+        "sha256": "0eeb260de05ebae694700cc2212966ee4ba19351f067bef49c095ec6fccd70e6"
+      },
+      "source/id-ID/lesson03_translation.csv": {
+        "bytes": 123145,
+        "sha256": "ab96512a2b7f8eb5d86b60dbcc2ad6779f74623367e4537b04167ce22bc8215a"
+      },
+      "source/normalized/en-US/Lesson03.html": {
+        "bytes": 98397,
+        "sha256": "b7bf8db106f1e38d478220284c39ce89e6a9eaaaa1ae98804217c1733b75b17b"
+      },
+      "working/lesson03_segments.csv": {
+        "bytes": 94343,
+        "sha256": "ba6c4d7c905ec14babb1ac9a971a7195968978c581eeb0d4088d92889bdf8b8a"
+      },
+      "working/lesson03_source_findings.md": {
+        "bytes": 6449,
+        "sha256": "904b9e72ccb362402ec1ef47df5ab13a8afad0738720220b6d37c00995c86df2"
+      },
+      "working/lesson03_terminology_qa.md": {
+        "bytes": 2239,
+        "sha256": "d46c722d4c9748a0f1df35231492f850dab4789869ff9d00c75e14fe8c53e23b"
+      },
+      "working/lesson03_zero_asset_closure.json": {
+        "bytes": 1800,
+        "sha256": "e235e8ab499aa0ce542898d4aaf016e6932c807da8a06fdb9f0976f60547d705"
+      }
+    },
+    "lesson03_translation": {
+      "bytes": 123145,
+      "path": "source/id-ID/lesson03_translation.csv",
+      "punctuation_boundary_exceptions": {
+        "O006-PSU-004-S0246": ",",
+        "O006-PSU-004-S0248": ",",
+        "O006-PSU-004-S0306": ".",
+        "O006-PSU-004-S0419": ","
+      },
+      "rows": 531,
+      "sha256": "ab96512a2b7f8eb5d86b60dbcc2ad6779f74623367e4537b04167ce22bc8215a",
+      "word_boundary_leading_space_exceptions": [
+        "O006-PSU-004-S0135",
+        "O006-PSU-004-S0137",
+        "O006-PSU-004-S0208",
+        "O006-PSU-004-S0209",
+        "O006-PSU-004-S0263",
+        "O006-PSU-004-S0501",
+        "O006-PSU-004-S0504",
+        "O006-PSU-004-S0521",
+        "O006-PSU-004-S0523"
+      ]
+    }
+  },
+  "layout": {
+    "reader_css_bytes": 6213,
+    "reader_css_path": "assets/reader-5of14.css",
+    "reader_css_sha256": "37fc52f724e0ea76443dc12ef243bf874ab6fb8c3c0640e03ab8cf1a6939f989",
+    "rule": "responsive instructional-media reflow rules preserved from the admitted 4-of-14 reader"
+  },
+  "locale": "id-ID",
+  "math_nodes": {
+    "Lesson00": 331,
+    "Lesson01": 169,
+    "Lesson02": 209,
+    "Lesson03": 440,
+    "index": 0,
+    "total": 1149
+  },
+  "offline": {
+    "analytics": false,
+    "cookies": false,
+    "external_runtime_requests": 0,
+    "local_mathjax": true
+  },
+  "reader": {
+    "bytes": 2804159,
+    "files": 32,
+    "manifest_bytes": 3167,
+    "manifest_path": "build/THROUGH_LESSON03_MANIFEST.csv",
+    "manifest_sha256": "15e979bbd3b791b0a7d2a25873e9450030c5a1b7019455982b84e0dac6287831",
+    "path": "build/html-id"
+  },
+  "rights": {
+    "Lesson01 figures": "CC BY-NC 4.0 under the official page notice; per-file creator metadata absent",
+    "Lesson02 figures": "CC BY-NC 4.0 under the official page notice; per-file creator metadata absent",
+    "Lesson03 assets": "verified zero main-content assets",
+    "MathJax 3.1.2": "Apache-2.0",
+    "Penn State content": "CC BY-NC 4.0 except where otherwise noted",
+    "aggregate_uniform_relicense": false
+  },
+  "schema": "o006.stat415.through-lesson03-build.v1",
+  "status": "built",
+  "structural_units_normalized": 1399,
+  "structural_units_target": 1397,
+  "target_documents": [
+    {
+      "bytes": 25750,
+      "path": "source/id-ID/index.html",
+      "sha256": "0c07c8e891484195c2d5a0342b6da4199ecb896c09ed6dd671c880155181b5f6"
+    },
+    {
+      "bytes": 80209,
+      "path": "source/id-ID/Lesson00.html",
+      "sha256": "ad4f4ea55f2919e1c955ed2475e97286c33c5d46ff893f27f9a47750ff251471"
+    },
+    {
+      "bytes": 47289,
+      "path": "source/id-ID/Lesson01.html",
+      "sha256": "051b13fee555e83383e95522f5cbe236873efe947bce9787420802ba3eeea8c8"
+    },
+    {
+      "bytes": 59033,
+      "path": "source/id-ID/Lesson02.html",
+      "sha256": "c49fc46b5f8d64998ced553c9e4959cd303a1bc8e47007e4f76d9adade9b3114"
+    },
+    {
+      "bytes": 102473,
+      "path": "source/id-ID/Lesson03.html",
+      "sha256": "85e9f7356c756435a251a54094f1c723bfb9efc0aae6eb3cec904b3f0654b9de"
+    }
+  ],
+  "translation_provenance": "OpenAI Codex gpt-5.6-sol, Ultra",
+  "translation_segments": 1599
+}

@@ -181,3 +181,23 @@ th { background: #f0f4f8; }
   details.solution { break-inside: avoid; }
   details.solution > * { display: block !important; }
 }
+
+
+/* Cumulative reader reflow admitted with Lesson 02. */
+main img:not(.card-img),
+main svg,
+main video,
+main canvas {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  margin-inline: auto;
+}
+
+main figure,
+main .quarto-figure,
+main .quarto-float,
+main .quarto-figure > *,
+main .quarto-float > * {
+  max-width: 100%;
+}

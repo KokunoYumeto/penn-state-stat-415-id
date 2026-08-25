@@ -1,0 +1,237 @@
+{
+  "schema_version": "o006.stat415.lesson_asset_rights_audit.v1",
+  "audit_id": "O006-PSU-LESSON02-ASSET-RIGHTS-20260824",
+  "generated_at_utc": "2026-08-24T15:22:40Z",
+  "scope": {
+    "component": "Penn State STAT 415 Lesson 02 — Estimation (Part I)",
+    "authority_file": "authority/upstream/stat415/Lesson02.html",
+    "authority_official_url": "https://online.stat.psu.edu/stat415/Lesson02",
+    "main_content_boundary": {
+      "html_element": "main#quarto-document-content",
+      "authority_line_start": 502,
+      "authority_line_end": 916
+    },
+    "included_dependency_classes": [
+      "direct non-library image"
+    ],
+    "excluded_dependency_classes": [
+      "site chrome outside main content",
+      "navigation-only links",
+      "analytics and cookie tooling",
+      "third-party and local JavaScript/CSS libraries"
+    ]
+  },
+  "authority_integrity": {
+    "bytes": 93418,
+    "sha256": "29890184a4f2ba91fcd10425e0a941e7eab0f3ac9ab158b2ba469d0744ec69e5"
+  },
+  "method": {
+    "discovery": "Parsed the exact frozen authority HTML and bounded the inventory to direct references inside main#quarto-document-content.",
+    "deduplication": "An img src and its same-URL lightbox href count as one dependency with two roles.",
+    "network_user_agent": "Codex-O006-STAT415-Lesson02-asset-freeze/1.0",
+    "network_behavior": "Fetched each official same-origin asset URL directly with redirects disabled; both returned HTTP 200 without redirect.",
+    "file_validation": "Verified PNG signatures, chunk boundaries and CRCs, IHDR dimensions, terminal IEND, absence of trailing bytes, and absence of animation or embedded text/EXIF/profile chunks.",
+    "visual_validation": "Inspected both images at original resolution and compared their visible mathematical content with the authority alt text and surrounding lesson context.",
+    "rights_rule": "Freeze only when the official page-level grant covers the same-origin asset and no page-level or embedded per-asset exception contradicts that grant."
+  },
+  "rights_evidence": [
+    {
+      "evidence_id": "R1",
+      "source": "authority/upstream/stat415/Lesson02.html",
+      "authority_line": 2170,
+      "source_sha256": "29890184a4f2ba91fcd10425e0a941e7eab0f3ac9ab158b2ba469d0744ec69e5",
+      "text": "Except where otherwise noted, content on this site is licensed under a CC BY-NC 4.0 license.",
+      "license_name": "Creative Commons Attribution-NonCommercial 4.0 International",
+      "license_identifier": "CC BY-NC 4.0",
+      "license_url": "https://creativecommons.org/licenses/by-nc/4.0/"
+    },
+    {
+      "evidence_id": "R2",
+      "source": "authority/upstream/stat415/Lesson02.html",
+      "source_sha256": "29890184a4f2ba91fcd10425e0a941e7eab0f3ac9ab158b2ba469d0744ec69e5",
+      "finding": "No per-figure source, credit, permission, copyright, licence exception, or attribution notice occurs in Lesson 02 main content. The global Penn State footer copyright link is outside the instructional main."
+    }
+  ],
+  "main_content_reference_census": {
+    "img_elements": 2,
+    "unique_img_src": 2,
+    "same_asset_lightbox_hrefs": 1,
+    "unique_direct_non_library_dependencies": 2,
+    "data_dependencies": 0,
+    "download_dependencies": 0,
+    "app_dependencies": 0,
+    "embed_object_video_audio_source_dependencies": 0,
+    "script_elements_inside_main": 0,
+    "non_library_runtime_dependencies": 0
+  },
+  "assets": [
+    {
+      "asset_id": "O006-PSU-003-A0001",
+      "source_reference": {
+        "authority_line": 778,
+        "relative_url": "assets/dartboard.png",
+        "roles": [
+          "img",
+          "lightbox_target"
+        ],
+        "context": "Figure 2.1: four dartboards illustrating bias and precision",
+        "alt_text": "4 different dartboards showing different types of bias"
+      },
+      "official_url": "https://online.stat.psu.edu/stat415/assets/dartboard.png",
+      "http": {
+        "final_url": "https://online.stat.psu.edu/stat415/assets/dartboard.png",
+        "redirected": false,
+        "status": 200,
+        "headers": {
+          "Date": "Mon, 24 Aug 2026 15:22:40 GMT",
+          "ETag": "\"7fbd-6596b5589cfdc\"",
+          "Last-Modified": "Wed, 19 Aug 2026 19:23:11 GMT",
+          "Content-Length": "32701",
+          "Content-Type": "image/png"
+        }
+      },
+      "integrity": {
+        "bytes": 32701,
+        "sha256": "c8ddb1d7befe425ac72efd04abd75c0835aae62c786765256f3f8d93ee3ec0cd",
+        "content_length_matches": true,
+        "local_bytes_match": true,
+        "local_sha256_matches": true
+      },
+      "png_validation": {
+        "width": 1753,
+        "height": 544,
+        "bit_depth": 8,
+        "color_type": 2,
+        "interlace": 0,
+        "chunk_crc_valid": true,
+        "animated": false,
+        "embedded_text_or_profile": false,
+        "trailing_bytes": 0
+      },
+      "rights": {
+        "applied_license": "CC BY-NC 4.0",
+        "evidence_ids": [
+          "R1",
+          "R2"
+        ],
+        "per_asset_exception_found": false,
+        "clearance": "cleared_for_noncommercial_derivative_freeze_under_official_page_notice"
+      },
+      "disposition": "freeze",
+      "local_path": "authority/assets/stat415/lesson02/dartboard.png"
+    },
+    {
+      "asset_id": "O006-PSU-003-A0002",
+      "source_reference": {
+        "authority_line": 829,
+        "relative_url": "Lesson02_files/figure-html/unnamed-chunk-1-1.png",
+        "roles": [
+          "img"
+        ],
+        "context": "comparison of two estimator sampling distributions around the true parameter",
+        "alt_text": "Graph of two estimators, theta_1 and theta_2 with different spread and centers."
+      },
+      "official_url": "https://online.stat.psu.edu/stat415/Lesson02_files/figure-html/unnamed-chunk-1-1.png",
+      "http": {
+        "final_url": "https://online.stat.psu.edu/stat415/Lesson02_files/figure-html/unnamed-chunk-1-1.png",
+        "redirected": false,
+        "status": 200,
+        "headers": {
+          "Date": "Mon, 24 Aug 2026 15:22:40 GMT",
+          "ETag": "\"2abe-6596b55889b44\"",
+          "Last-Modified": "Wed, 19 Aug 2026 19:23:11 GMT",
+          "Content-Length": "10942",
+          "Content-Type": "image/png"
+        }
+      },
+      "integrity": {
+        "bytes": 10942,
+        "sha256": "564048b4327b3a379fe9921efa9224760f6c6afd01135f17d941af393a8f4532",
+        "content_length_matches": true,
+        "local_bytes_match": true,
+        "local_sha256_matches": true
+      },
+      "png_validation": {
+        "width": 1344,
+        "height": 960,
+        "bit_depth": 8,
+        "color_type": 3,
+        "interlace": 0,
+        "chunk_crc_valid": true,
+        "animated": false,
+        "embedded_text_or_profile": false,
+        "trailing_bytes": 0
+      },
+      "rights": {
+        "applied_license": "CC BY-NC 4.0",
+        "evidence_ids": [
+          "R1",
+          "R2"
+        ],
+        "per_asset_exception_found": false,
+        "clearance": "cleared_for_noncommercial_derivative_freeze_under_official_page_notice"
+      },
+      "disposition": "freeze",
+      "local_path": "authority/assets/stat415/lesson02/unnamed-chunk-1-1.png"
+    }
+  ],
+  "explicitly_excluded_references": {
+    "outside_main_site_chrome": [
+      {
+        "url": "./assets/psulion.png",
+        "role": "favicon",
+        "reason": "head/site chrome, not main instructional content"
+      },
+      {
+        "url": "./PSU_Ecosshield.png",
+        "role": "sidebar institutional logo",
+        "reason": "site chrome outside main; possible trademark surface"
+      },
+      {
+        "url": "assets/by-nc.svg",
+        "role": "footer licence badge",
+        "reason": "footer evidence surface, not a Lesson 02 main-content dependency"
+      }
+    ],
+    "library_runtime": [
+      {
+        "url": "https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js",
+        "classification": "third-party MathJax library runtime",
+        "reason": "handled by the edition-wide offline runtime closure"
+      },
+      {
+        "url_pattern": "site_libs/**",
+        "classification": "Quarto/Bootstrap/search/lightbox local libraries",
+        "reason": "outside the requested non-library Lesson 02 closure"
+      }
+    ],
+    "analytics_and_consent": [
+      {
+        "url": "https://www.googletagmanager.com/gtag/js?id=G-XM6C7H9XCL",
+        "reason": "tracking outside main instructional content; not carried into the offline reader"
+      }
+    ]
+  },
+  "residual_rights_limitations": [
+    {
+      "scope": "both PNG figures",
+      "finding": "The official page grants CC BY-NC 4.0 to site content absent an exception, and no exception is present, but the PNG files contain no creator, source, copyright, or licence metadata.",
+      "effect": "Attribution must point to the Penn State STAT 415 Lesson 02 page and each exact official asset URL; this audit does not independently establish a deeper chain of title."
+    }
+  ],
+  "blocking_unresolved_rights": [],
+  "summary": {
+    "unique_main_content_dependencies": 2,
+    "frozen_assets": 2,
+    "frozen_bytes": 43643,
+    "linked_only": 0,
+    "replaced": 0,
+    "excluded_main_content_dependencies": 0,
+    "blocking_unresolved_rights": 0,
+    "all_http_status_200": true,
+    "all_content_type_png": true,
+    "all_local_bytes_and_sha256_verified": true,
+    "all_png_structures_and_crcs_valid": true,
+    "disposition": "Freeze both figures under CC BY-NC 4.0 with page and per-asset attribution; no Lesson 02 main-content dependency requires link, replacement, or exclusion."
+  }
+}

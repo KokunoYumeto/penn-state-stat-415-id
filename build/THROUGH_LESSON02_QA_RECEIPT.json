@@ -1,0 +1,339 @@
+{
+  "build_receipt": {
+    "bytes": 6845,
+    "path": "build/THROUGH_LESSON02_BUILD_RECEIPT.json",
+    "sha256": "f061911bb9dc8ab1c9f3a30701f00fcaf35ad96f260f49847d1c2d46cff4ee0e"
+  },
+  "coverage": {
+    "complete_count": 4,
+    "complete_documents": [
+      "index",
+      "Lesson00",
+      "Lesson01",
+      "Lesson02"
+    ],
+    "corpus_document_count": 14,
+    "next_document": "Lesson03"
+  },
+  "documents_semantics_and_language": {
+    "accessibility_text_localized": true,
+    "document_backend": {
+      "bytes": 2680,
+      "path": "backend/through_lesson02_documents.jsonl",
+      "sha256": "22f36e9a27466c271b8a9b507d356f73246b1484e1d9d13439329fc932bca474"
+    },
+    "documents": {
+      "Lesson00": {
+        "math_nodes": 331,
+        "segments": 446,
+        "source_units": 365,
+        "target_units": 363
+      },
+      "Lesson01": {
+        "math_nodes": 169,
+        "segments": 221,
+        "source_units": 188,
+        "target_units": 188
+      },
+      "Lesson02": {
+        "math_nodes": 209,
+        "segments": 324,
+        "source_units": 228,
+        "target_units": 228
+      },
+      "index": {
+        "math_nodes": 0,
+        "segments": 77,
+        "source_units": 197,
+        "target_units": 197
+      }
+    },
+    "lesson02_definitions": 3,
+    "lesson02_examples": 12,
+    "lesson02_worked_solutions": 6,
+    "visible_language": "id-ID"
+  },
+  "gates": [
+    "exact-31-file-reader-and-manifest",
+    "four-of-fourteen-document-coverage",
+    "exact-1068-translated-segments-and-bindings",
+    "exact-978-normalized-source-units",
+    "exact-709-math-nodes",
+    "exact-29-target-only-corrections-nine-for-lesson02",
+    "exact-ten-lesson02-changed-math-surfaces",
+    "preserved-historical-lesson01-evidence",
+    "unique-stable-unit-math-and-dom-identities",
+    "indonesian-semantics-terminology-and-alt-text",
+    "all-local-links-fragments-assets-and-runtime",
+    "two-frozen-rights-adjudicated-lesson02-pngs",
+    "versioned-responsive-reader-css",
+    "no-analytics-cookies-credentials-or-local-paths",
+    "component-rights-and-exact-model-provenance"
+  ],
+  "links_assets_and_reflow": {
+    "all_local_targets_manifested": true,
+    "asset_audit": {
+      "bytes": 9531,
+      "path": "working/lesson02_asset_rights_audit.json",
+      "sha256": "f142b7257b8b36417d2d1bb145c2bec13d02274d1ee61698a1a21993e4bc86b0"
+    },
+    "asset_manifest": {
+      "bytes": 681,
+      "path": "authority/LESSON02_ASSET_MANIFEST.csv",
+      "sha256": "ef3739fabe02a1e77258d559e6a20be48f727e9e55b05a93851b6a037b715407"
+    },
+    "asset_receipt": {
+      "bytes": 2064,
+      "path": "authority/LESSON02_ASSET_FREEZE_RECEIPT.json",
+      "sha256": "ebd00288c159889b7a255ad571735a5428ab9d431e4bc73b48c077bd6c4aaf05"
+    },
+    "external_anchor_edges": 25,
+    "lesson02_asset_bytes": 43643,
+    "lesson02_assets": 2,
+    "local_edges": 78,
+    "local_edges_sha256": "1dd62816d8fe2cea0d6bb00919a58c68b8646d769fee118703cc6e7d6d02b871",
+    "responsive_reader_css": {
+      "bytes": 6213,
+      "path": "build/html-id/assets/reader-4of14.css",
+      "sha256": "37fc52f724e0ea76443dc12ef243bf874ab6fb8c3c0640e03ab8cf1a6939f989"
+    }
+  },
+  "locale": "id-ID",
+  "normalization": {
+    "historical": {
+      "documents": 3,
+      "first_unit_receipt": {
+        "bytes": 1816,
+        "path": "build/FIRST_UNIT_NORMALIZATION_RECEIPT.json",
+        "sha256": "0e538acb38f082bf98bf02909f77c30afa817c51be56aa835325046bf054a980"
+      },
+      "lesson01_receipt": {
+        "bytes": 5150,
+        "path": "build/LESSON01_NORMALIZATION_RECEIPT.json",
+        "sha256": "bbc5354bf8106df11004f79c5d9f23ae502830841979995e266fd8dea7e2b9f0"
+      },
+      "source_defects_registered": [
+        "L01-D001",
+        "L01-D002",
+        "L01-D003",
+        "L01-D004",
+        "L01-D005",
+        "L01-D006"
+      ],
+      "structural_units": 750
+    },
+    "lesson02_counts": {
+      "assets": 2,
+      "catalogue_records": 764,
+      "code_nodes": 0,
+      "definitions": 3,
+      "examples": 12,
+      "figures": 3,
+      "images": 2,
+      "math_display": 48,
+      "math_inline": 161,
+      "math_nodes": 209,
+      "proofs": 0,
+      "solutions": 6,
+      "structural_units": 228,
+      "theorems": 0,
+      "translation_segments": 324
+    },
+    "lesson02_receipt": {
+      "bytes": 8821,
+      "path": "build/LESSON02_NORMALIZATION_RECEIPT.json",
+      "sha256": "fc667cbf322bde9cdc1b3a7dac816c5495f65f7419afe1ef8a8a43a29a3234cf"
+    },
+    "source_defects": [
+      "L02-D001",
+      "L02-D002",
+      "L02-D003",
+      "L02-D004",
+      "L02-D005",
+      "L02-D006",
+      "L02-D007",
+      "L02-D008",
+      "L02-D009"
+    ],
+    "source_structural_units": 978
+  },
+  "privacy_runtime_rights_and_provenance": {
+    "aggregate_uniform_relicense": false,
+    "analytics": false,
+    "cookies": false,
+    "credential_paths": false,
+    "external_runtime_requests": 0,
+    "inline_scripts": 0,
+    "local_absolute_paths": false,
+    "local_mathjax_only": true,
+    "mathjax_3_1_2": "Apache-2.0",
+    "penn_state": "CC BY-NC 4.0 except where otherwise noted",
+    "translation_provenance": "OpenAI Codex gpt-5.6-sol, Ultra"
+  },
+  "reader": {
+    "bytes": 2701521,
+    "files": 31,
+    "manifest_bytes": 3081,
+    "manifest_sha256": "e0fe3c91465284cb10cf0bc802c32102bccb0eb0c84f108405a66044faf9f7ef"
+  },
+  "schema": "o006.stat415.through-lesson02-qa.v1",
+  "status": "pass",
+  "structure_math_and_corrections": {
+    "correction_backend": {
+      "bytes": 10143,
+      "path": "backend/through_lesson02_corrections.jsonl",
+      "sha256": "db6ec366a1461c545d4c1ca93b2a76664868bb4e99878a0719d8e9ab2a976c19"
+    },
+    "corrections": 29,
+    "historical": {
+      "formula_differences": [
+        {
+          "document": "Lesson00.html",
+          "math_id": "",
+          "source_sha256": "e08e383328d5ce70c88aee66cd45ed4a1c8f52fc7efd25db52149158d5eb0e6c",
+          "target_sha256": "404d10601b0171e8486d867f41cc21ca41a25048f21a0ef90f851175bfb438b4"
+        },
+        {
+          "document": "Lesson00.html",
+          "math_id": "",
+          "source_sha256": "542cda3c4f38e375228d63872e4b587f1c7ccbe9be2b65d3898ea5ac1798b3c5",
+          "target_sha256": "d219b4fb59a84c06137825bcfebb31c9a7af29c12630eef5ef8c0c3b3afad350"
+        },
+        {
+          "document": "Lesson00.html",
+          "math_id": "",
+          "source_sha256": "04ce3eb3aa1c01048e58527c5563d8a5bd31043839a3f0c0a5b38066d729a8dc",
+          "target_sha256": "46fd48ca26dbc5040d9e43ffed6b8907ed8cf88b520dffc946a6be88fdc3d638"
+        },
+        {
+          "document": "Lesson00.html",
+          "math_id": "",
+          "source_sha256": "5bd0bb207e39e0456823d34139efd970a2dc2981b4cf855b4ea948e7effbbc27",
+          "target_sha256": "e29f420b01ef90629b55aa40c16c7a10a187ab2ddaff305498a88486b24806fc"
+        },
+        {
+          "document": "Lesson00.html",
+          "math_id": "",
+          "source_sha256": "5111cec9da7fd0a5f000addef33630c2455c1d3b4916fc0808a382b292fe36d4",
+          "target_sha256": "618aa72d872aabad0b2d095324a9a09a67814ea504e80ed735da96393238086c"
+        },
+        {
+          "document": "Lesson00.html",
+          "math_id": "",
+          "source_sha256": "804e638ecc5534b36883cc4bb9fcb86fa7738beb54428a6e6d59d97e1a48dbec",
+          "target_sha256": "761bf6c350cfd5aa4aff4220b4d2ad2d175ec2fd541f65b83dbcb2c78ebbbe7e"
+        },
+        {
+          "document": "Lesson00.html",
+          "math_id": "",
+          "source_sha256": "57daec5ae7a3e557cb4855d78732f7e9a58b27e2dfb51762dbb375b86ddd2f10",
+          "target_sha256": "6fe205a482b4be71cb56d75ba5aedd729384155df83bfb1c5112594053b28f87"
+        },
+        {
+          "document": "Lesson00.html",
+          "math_id": "",
+          "source_sha256": "e5a1365e0f6022bdfde7278c1b1658340b0589d7aadf97a07e0391938ef3daf1",
+          "target_sha256": "8cb34abae02bb378d8a8cbbad351a425bcdbc4995cb51df1be86bd9f6c41f1c0"
+        },
+        {
+          "document": "Lesson01.html",
+          "math_id": "O006-PSU-002-M0045",
+          "source_sha256": "c9eccc8de03a07ac181f06255160cf5cee1318b3924cf8d371f96c86d9cdfa38",
+          "target_sha256": "3ca5b0fd716505d3c1d5ac59f8ed56870fa62e063ff543d8be631e3f521ddf58"
+        },
+        {
+          "document": "Lesson01.html",
+          "math_id": "O006-PSU-002-M0065",
+          "source_sha256": "c9eccc8de03a07ac181f06255160cf5cee1318b3924cf8d371f96c86d9cdfa38",
+          "target_sha256": "3ca5b0fd716505d3c1d5ac59f8ed56870fa62e063ff543d8be631e3f521ddf58"
+        },
+        {
+          "document": "Lesson01.html",
+          "math_id": "O006-PSU-002-M0104",
+          "source_sha256": "a5fe9ea6c60f84fe50ba6064ce7a86085de3c4c6826df664b142e87216d63ced",
+          "target_sha256": "31c36637bee3411c5f143e986c4222a9036979fd35f8a99b08c1c182dd07c682"
+        },
+        {
+          "document": "Lesson01.html",
+          "math_id": "O006-PSU-002-M0127",
+          "source_sha256": "458493dd3844bad19613bc3f52a47e50f3a8427a41bf1dc9b2ce186ec0f0b0fc",
+          "target_sha256": "67e54c6b62ca7d7ee81e5b5f4236eb0d5d8c5f0a1b8b87a8d0e4ace1393c9628"
+        },
+        {
+          "document": "Lesson01.html",
+          "math_id": "O006-PSU-002-M0169",
+          "source_sha256": "6c135ce1a59419445fbbea9059b902bc86e5f0b4b03546cc818abebd614db467",
+          "target_sha256": "5ba53a1ca19e8a7a9ba90a611232b0d913a88e16fd1b85b61f74e61c5ba05acb"
+        }
+      ],
+      "math_nodes": 500,
+      "per_document": {
+        "Lesson00": {
+          "math_nodes": 331,
+          "source_stable_units": 365,
+          "target_stable_units": 363
+        },
+        "Lesson01": {
+          "math_nodes": 169,
+          "source_stable_units": 188,
+          "target_stable_units": 188
+        },
+        "index": {
+          "math_nodes": 0,
+          "source_stable_units": 197,
+          "target_stable_units": 197
+        }
+      },
+      "registered_formula_difference_occurrences": 13,
+      "removed_stable_units": [
+        "O006-PSU-001-U0342",
+        "O006-PSU-001-U0350"
+      ],
+      "source_stable_units": 750,
+      "target_stable_units": 748
+    },
+    "lesson02_changed_math_surfaces": [
+      "O006-PSU-003-M0062",
+      "O006-PSU-003-M0073",
+      "O006-PSU-003-M0075",
+      "O006-PSU-003-M0078",
+      "O006-PSU-003-M0102",
+      "O006-PSU-003-M0152",
+      "O006-PSU-003-M0160",
+      "O006-PSU-003-M0177",
+      "O006-PSU-003-M0200",
+      "O006-PSU-003-M0208"
+    ],
+    "lesson02_corrections": 9,
+    "math_nodes": 709,
+    "source_stable_units": 978,
+    "target_stable_units": 976
+  },
+  "translation": {
+    "bindings": {
+      "bytes": 132573,
+      "path": "backend/lesson02_translation_bindings.jsonl",
+      "sha256": "3c75bfc1cc9dc38213cf03d43c2b6b3e1ec106536a4e4ac1b04e836ef568c25f"
+    },
+    "boundary_whitespace_preserved": true,
+    "cumulative_segments": 1068,
+    "historical_segments": 744,
+    "lesson02_segments": 324,
+    "partition_counts": {
+      "a": 108,
+      "b": 108,
+      "c": 108
+    },
+    "receipt": {
+      "bytes": 2213,
+      "path": "build/LESSON02_TRANSLATION_RECEIPT.json",
+      "sha256": "bb4c79ea2511448ddd9d877d70c0f9fb6a64f597be3585f73990896b1feddd5b"
+    },
+    "source_bindings_exact": true,
+    "translation_csv": {
+      "bytes": 76070,
+      "path": "source/id-ID/lesson02_translation.csv",
+      "sha256": "26159d7d4beae3f16b83df0f51a7deb3afb5cd23fb5b1be1dd0056c527c3764a"
+    }
+  }
+}

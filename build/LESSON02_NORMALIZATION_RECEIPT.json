@@ -1,0 +1,204 @@
+{
+  "asset_inventory": [
+    {
+      "alt_texts": [
+        "4 different dartboards showing different types of bias"
+      ],
+      "asset_id": "O006-PSU-003-A0001",
+      "occurrences": 1,
+      "source_ref": "assets/dartboard.png",
+      "source_url": "https://online.stat.psu.edu/stat415/assets/dartboard.png"
+    },
+    {
+      "alt_texts": [
+        "Graph of two estimators, theta_1 and theta_2 with different spread and centers."
+      ],
+      "asset_id": "O006-PSU-003-A0002",
+      "occurrences": 1,
+      "source_ref": "Lesson02_files/figure-html/unnamed-chunk-1-1.png",
+      "source_url": "https://online.stat.psu.edu/stat415/Lesson02_files/figure-html/unnamed-chunk-1-1.png"
+    }
+  ],
+  "counts": {
+    "asset_occurrences": 2,
+    "assets": 2,
+    "catalogue_records": 764,
+    "code_nodes": 0,
+    "corollaries": 0,
+    "definitions": 3,
+    "examples": 12,
+    "figure_captions": 2,
+    "figures": 3,
+    "headings": 17,
+    "images": 2,
+    "links": 3,
+    "math_display": 48,
+    "math_inline": 161,
+    "math_nodes": 209,
+    "native_id_occurrences": 36,
+    "pre_nodes": 0,
+    "proofs": 0,
+    "sections": 16,
+    "solutions": 6,
+    "structural_units": 228,
+    "tables": 0,
+    "theorem_class_nodes": 15,
+    "theorems": 0,
+    "translation_segments": 324,
+    "unique_asset_sources": 2,
+    "unique_native_ids": 36
+  },
+  "document": {
+    "asset_count": 2,
+    "component_id": "Lesson02",
+    "document_id": "O006-PSU-003",
+    "duplicate_native_ids": [],
+    "entity_id": "O006-PSU-003",
+    "formula_count": 209,
+    "formula_sha256": "706125738918a64c0845ef93ea5a63ff2f331da5d1ae24dbdce4e441574b126b",
+    "locale": "en-US",
+    "native_id_occurrences": 36,
+    "normalized_bytes": 55530,
+    "normalized_path": "source/normalized/en-US/Lesson02.html",
+    "normalized_sha256": "efb5376be5d16d085bbc8d668b31839e0270c7a37e3a2abd52cd742a1410e646",
+    "ordinal": 3,
+    "record_type": "document",
+    "schema": "o006.stat415.source-catalogue.v1",
+    "segment_count": 324,
+    "source_bytes": 93418,
+    "source_path": "authority/upstream/stat415/Lesson02.html",
+    "source_sha256": "29890184a4f2ba91fcd10425e0a941e7eab0f3ac9ab158b2ba469d0744ec69e5",
+    "source_url": "https://online.stat.psu.edu/stat415/Lesson02",
+    "topology_sha256": "d34d44987f74be5be3f82365e93d7ed574455f94a5c705912c4e69421c96eb0b",
+    "unique_native_ids": 36,
+    "unit_count": 228
+  },
+  "duplicate_native_ids": [],
+  "outputs": {
+    "catalogue": {
+      "bytes": 366661,
+      "path": "backend/lesson02_source_catalogue.jsonl",
+      "records": 764,
+      "sha256": "68fa508f013003591d1a6e1394dfe704b56b4df7f437cc6d5864f759e46c74e9"
+    },
+    "normalized": {
+      "bytes": 55530,
+      "path": "source/normalized/en-US/Lesson02.html",
+      "sha256": "efb5376be5d16d085bbc8d668b31839e0270c7a37e3a2abd52cd742a1410e646"
+    },
+    "script": {
+      "bytes": 29964,
+      "path": "scripts/normalize_lesson02.py",
+      "sha256": "43045a9578c5643a519dec3d68a302bba93d422628f2f535b1050885529b90ec"
+    },
+    "segments": {
+      "bytes": 58537,
+      "path": "working/lesson02_segments.csv",
+      "rows": 324,
+      "sha256": "00e1e2a63b936c214ffd8ec6613268b0704d24b2552a8f44fe3b27b841edd7ec"
+    }
+  },
+  "parser": {
+    "beautifulsoup_version": "4.14.3",
+    "name": "beautifulsoup4/html.parser",
+    "source_decoding": "UTF-8 strict"
+  },
+  "preservation": {
+    "authority_mutated": false,
+    "formula_nodes_byte_preserved": true,
+    "formula_sha256": "706125738918a64c0845ef93ea5a63ff2f331da5d1ae24dbdce4e441574b126b",
+    "image_sequence_preserved": true,
+    "link_sequence_preserved": true,
+    "main_selector": "main#quarto-document-content",
+    "native_anchor_sequence_preserved": true,
+    "topology_sha256": "d34d44987f74be5be3f82365e93d7ed574455f94a5c705912c4e69421c96eb0b"
+  },
+  "role_counts": {
+    "definition": 3,
+    "example": 12,
+    "figure": 3,
+    "figure-caption": 2,
+    "heading": 12,
+    "image": 2,
+    "link": 3,
+    "section": 10,
+    "solution": 12,
+    "structure": 169
+  },
+  "schema": "o006.stat415.lesson02-normalization.v1",
+  "source_defect_count": 9,
+  "source_defects": [
+    {
+      "defect_id": "L02-D001",
+      "evidence": "\\[\\begin{aligned}\n\\hat{p}_1 = \\frac{X_1}{n} \\\\\n\\hat{p}_2 = \\frac{\\frac{X_1}{10} + \\frac{X_2}{10} + \\frac{X_3}{10}}{3} = \\frac{X_1 + X_2 + X_3}{30} \\\\\n\\hat{p}_3 = \\hat{p}_2 + 0.1 = \\frac{X_1 + X_2 + X_3}{30} + 0.1\n\\end{aligned}\\]",
+      "kind": "estimator-denominator",
+      "note": "The page fixes a sample of three Xi ~ Bin(10,p), so X1/n with n=3 does not estimate p. Every later occurrence and the worked expectation use X1/10."
+    },
+    {
+      "defect_id": "L02-D002",
+      "evidence": "\\[\\begin{aligned}\n&amp; \\hat{p}_1 = \\frac{X_1}{10} \\\\\n&amp; \\hat{p}_2 = \\frac{X_1 + X_2 + X_3}{30} \\\\\n&amp; \\hat{p}_3 = \\hat{p}_2 + 0.1 = \\frac{X_1 + X_2 + X_3}{30} + 0.1\n\\end{aligned}\\]",
+      "kind": "double-escaped-tex-alignment",
+      "note": "The aligned environment contains literal &amp; tokens instead of TeX alignment markers &.",
+      "occurrences": 3
+    },
+    {
+      "defect_id": "L02-D003",
+      "evidence": "\\(E(X) = p\\)",
+      "kind": "binomial-expectation",
+      "note": "For X ~ Bin(n,p), E(X)=np; the next derivation correctly substitutes E(X1)=10p."
+    },
+    {
+      "defect_id": "L02-D004",
+      "evidence": {
+        "missing": [
+          "Bias_2",
+          "Bias_3"
+        ],
+        "present": [
+          "Bias_1"
+        ],
+        "prompt": "What is the bias of the estimators?"
+      },
+      "kind": "incomplete-worked-solution",
+      "note": "Example 2.6 asks for all three biases but its solution ends after p-hat_1; the later page relies on p-hat_2 being unbiased and p-hat_3 having bias 0.1."
+    },
+    {
+      "defect_id": "L02-D005",
+      "evidence": "\\[\\begin{align*}\n\\hat{\\sigma}^2 &= \\frac{1}{n}\\sum_{i=1}^n (x_i - \\bar{x})^2 = \\frac{1}{n}\\left(x_i^2 - 2x_i\\bar{x} + \\bar{x}^2\\right)^2 \\\\&= \\frac{1}{n}\\sum_{i=1}^n x_i^2 - 2\\bar{x}\\sum_{i=1}^n x_i + \\frac{1}{n}(n\\bar{x}^2)\\\\ &= \\frac{1}{n}\\sum_{i=1}^n x_i^2 - \\bar{x}^2\n\\end{align*}\\]",
+      "kind": "sample-variance-algebra",
+      "note": "The expansion introduces an erroneous outer square, omits the summation over the expanded terms, and omits 1/n from the middle term. The valid identity is n^-1 sum (xi-xbar)^2 = n^-1 sum xi^2 - xbar^2."
+    },
+    {
+      "defect_id": "L02-D006",
+      "evidence": "\\[\n\\begin{align*}\nE(\\ln Y_i) = \\lim_{a \\rightarrow 0} \\left[ y^{1/\\theta} \\ln y - \\theta y^{1-\\theta} \\right]_a^1 = -\\theta\n\\end{align*}\n\\]",
+      "kind": "antiderivative-exponent",
+      "note": "With dv=(1/theta)y^(1/theta-1)dy, v=y^(1/theta), so integration by parts gives y^(1/theta) ln y - theta y^(1/theta), not theta y^(1-theta)."
+    },
+    {
+      "defect_id": "L02-D007",
+      "evidence": "where \\(X_i \\overset{iid}{\\sim} \\text{Bin}(10, p).\\) Recall from our previous work that \\(\\hat{p}_1\\) and \\(\\hat{p}_2\\) are unbiased estimators of \\(\\theta\\) , and \\(\\hat{p}_3\\) is a biased estimator. Find the variance of each estimator.",
+      "kind": "parameter-symbol",
+      "note": "The model and all three estimators concern the binomial parameter p, not a newly defined theta."
+    },
+    {
+      "defect_id": "L02-D008",
+      "evidence": "\\(\\text{Var}(\\hat{p}_1)>\\text{Var}(\\hat{p}_2.\\)",
+      "kind": "formula-delimiter",
+      "note": "The closing parenthesis of Var(p-hat_2) is missing; the period is inside the open call."
+    },
+    {
+      "defect_id": "L02-D009",
+      "evidence": {
+        "identity": "\\[\\begin{align*}\n        \\text{MSE}(\\hat{\\theta})=\\text{Var}(\\hat{\\theta})-\\left[\\text{Bias}(\\theta)\\right]^2\n    \\end{align*}\\]",
+        "missing_bias_closing_parentheses": 3,
+        "worked_example": "\\[\\begin{align*}\n    & MSE(\\hat{p}_1)=\\text{Var}(\\hat{p}_1)-\\left[\\text{Bias}(\\hat{p}_1\\right]^2=\\frac{p(1-p)}{10}\\\\\n    & MSE(\\hat{p}_2)=\\text{Var}(\\hat{p}_2)-\\left[\\text{Bias}(\\hat{p}_2\\right]^2=\\frac{p(1-p)}{30}\\\\\n    & MSE(\\hat{p}_3)=\\text{Var}(\\hat{p}_3)-\\left[\\text{Bias}(\\hat{p}_3\\right]^2=\\frac{p(1-p)}{30}-0.1^2=\\frac{p(1-p)}{30}-0.01\\\\\n\\end{align*}\\]",
+        "wrong_generic_bias_argument_occurrences": 1,
+        "wrong_minus_sign_occurrences": 4
+      },
+      "kind": "mean-squared-error-identity",
+      "note": "MSE(theta-hat)=Var(theta-hat)+Bias(theta-hat)^2. The source uses minus in the identity and all three applications, writes Bias(theta) in the generic identity, and omits ')' before right] in each worked bias term."
+    }
+  ],
+  "source_rule": "semantic main only; no authority correction; formulas/code protected; stable unit, math, asset, and segment IDs additive",
+  "status": "normalized-source-ready"
+}

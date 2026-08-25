@@ -1,0 +1,410 @@
+<!doctype html>
+<html lang="en-US">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>2  Estimation (Part I) – STAT 415 | Introduction to Mathematical Statistics</title>
+<meta name="source-url" content="https://online.stat.psu.edu/stat415/Lesson02">
+<meta name="translation-provenance" content="OpenAI Codex gpt-5.6-sol, Ultra">
+</head>
+<body>
+<main class="content" data-component-id="Lesson02" data-document-id="O006-PSU-003" data-source-url="https://online.stat.psu.edu/stat415/Lesson02" id="quarto-document-content">
+<header class="quarto-title-block default" data-o006-id="O006-PSU-003-U0001" id="title-block-header"><nav aria-label="breadcrumb" class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" data-o006-id="O006-PSU-003-U0002"><ol class="breadcrumb" data-o006-id="O006-PSU-003-U0003"><li class="breadcrumb-item" data-o006-id="O006-PSU-003-U0004"><a data-o006-id="O006-PSU-003-U0005" href="./Lesson00.html">Lessons</a></li><li class="breadcrumb-item" data-o006-id="O006-PSU-003-U0006"><a data-o006-id="O006-PSU-003-U0007" href="./Lesson02.html"><span class="chapter-number">2</span>  <span class="chapter-title">Estimation (Part I)</span></a></li></ol></nav>
+<div class="quarto-title" data-o006-id="O006-PSU-003-U0008">
+<h1 class="title" data-o006-id="O006-PSU-003-U0009"><span class="chapter-number">2</span>  <span class="chapter-title">Estimation (Part I)</span></h1>
+<div class="quarto-categories" data-o006-id="O006-PSU-003-U0010">
+<div class="quarto-category" data-o006-id="O006-PSU-003-U0011">Point Estimation</div>
+<div class="quarto-category" data-o006-id="O006-PSU-003-U0012">Unbiased Estimation</div>
+<div class="quarto-category" data-o006-id="O006-PSU-003-U0013">Bias</div>
+<div class="quarto-category" data-o006-id="O006-PSU-003-U0014">Variance and Mean Square</div>
+<div class="quarto-category" data-o006-id="O006-PSU-003-U0015">Factorization</div>
+<div class="quarto-category" data-o006-id="O006-PSU-003-U0016">Sufficiency</div>
+<div class="quarto-category" data-o006-id="O006-PSU-003-U0017">Method of Moments</div>
+</div>
+</div>
+<div class="quarto-title-meta" data-o006-id="O006-PSU-003-U0018">
+</div>
+</header>
+<section class="level2 unnumbered unlisted" data-o006-id="O006-PSU-003-U0019" id="overview">
+<h2 class="unnumbered unlisted anchored" data-anchor-id="overview" data-o006-id="O006-PSU-003-U0020">Overview</h2>
+<p data-o006-id="O006-PSU-003-U0021">This lesson introduces the fundamental concepts of point estimation, a cornerstone of statistical inference. You will learn how to estimate unknown population parameters, such as means and proportions, using sample data. Through this lesson, you will develop the skills to compute maximum likelihood estimates for various single-parameter models and evaluate the quality of estimators using key properties such as bias, variance, and mean square error. Practical examples, including estimating health insurance coverage among college students and analyzing COVID-19 death rates, will illustrate these concepts. By the end of this lesson, you will have a robust understanding of point estimation and be well-prepared for advanced topics in statistical estimation.</p>
+<section class="level3 unnumbered unlisted objectiveblock" data-o006-id="O006-PSU-003-U0022" id="objectives">
+<h3 class="unnumbered unlisted anchored" data-anchor-id="objectives" data-o006-id="O006-PSU-003-U0023"><i class="bi bi-check2-circle"></i>Objectives</h3>
+<p data-o006-id="O006-PSU-003-U0024">Upon completion of this lesson, you should be able to:</p>
+<ol data-o006-id="O006-PSU-003-U0025" type="1">
+<li data-o006-id="O006-PSU-003-U0026">Determine the distribution of estimators,</li>
+<li data-o006-id="O006-PSU-003-U0027">Calculate and interpret the bias of an estimator,</li>
+<li data-o006-id="O006-PSU-003-U0028">Calculate the variance and mean squared error of an estimator, and</li>
+<li data-o006-id="O006-PSU-003-U0029">Use estimator properties to compare and identify those that are better under certain criteria.</li>
+</ol>
+</section>
+</section>
+<section class="level2" data-number="2.1" data-o006-id="O006-PSU-003-U0030" id="point-estimation">
+<h2 class="anchored" data-anchor-id="point-estimation" data-number="2.1" data-o006-id="O006-PSU-003-U0031"><span class="header-section-number">2.1</span> Point Estimation</h2>
+<p data-o006-id="O006-PSU-003-U0032">Suppose we have an unknown population parameter, such as a population mean <span class="math inline" data-o006-math-id="O006-PSU-003-M0001">\(\mu\)</span> or a population proportion <span class="math inline" data-o006-math-id="O006-PSU-003-M0002">\(p\)</span>, which we’d like to estimate. For example, suppose we are interested in estimating:</p>
+<ul data-o006-id="O006-PSU-003-U0033">
+<li data-o006-id="O006-PSU-003-U0034"><span class="math inline" data-o006-math-id="O006-PSU-003-M0003">\(p\)</span> = the (unknown) proportion of American college students, 18-24, who have health insurance</li>
+<li data-o006-id="O006-PSU-003-U0035"><span class="math inline" data-o006-math-id="O006-PSU-003-M0004">\(\mu\)</span> = the (unknown) mean number of days it takes Alzheimer’s patients to achieve certain milestones</li>
+</ul>
+<p data-o006-id="O006-PSU-003-U0036">In either case, we can’t possibly survey the entire population. That is, we can’t survey all American college students between the ages of 18 and 24. Nor can we survey all patients with Alzheimer’s disease. So, of course, we do what comes naturally and take a random sample from the population, and use the resulting data to estimate the value of the population parameter. Of course, we want the estimate to be “good” in some way.</p>
+<p data-o006-id="O006-PSU-003-U0037">We’ll also learn ways of assessing whether a point estimate is “good.” We’ll do that by defining what it means for an estimate to be unbiased, defining what it means to be sufficient, finding the variance of the estimate, and the mean square error.</p>
+<section class="level3 unnumbered unlisted" data-o006-id="O006-PSU-003-U0038" id="definitions-and-notation">
+<h3 class="unnumbered unlisted anchored" data-anchor-id="definitions-and-notation" data-o006-id="O006-PSU-003-U0039">Definitions and Notation</h3>
+<p data-o006-id="O006-PSU-003-U0040">We’ll start the lesson with some formal definitions. In doing so, recall that we denote the <span class="math inline" data-o006-math-id="O006-PSU-003-M0005">\(n\)</span> random variables arising from a random sample as subscripted uppercase letters:</p>
+<p data-o006-id="O006-PSU-003-U0041"><span class="math display" data-o006-math-id="O006-PSU-003-M0006">\[X_1, X_2, \ldots, X_n\]</span></p>
+<p data-o006-id="O006-PSU-003-U0042">The corresponding observed values of a specific random sample are then denoted as subscripted lowercase letters:</p>
+<p data-o006-id="O006-PSU-003-U0043"><span class="math display" data-o006-math-id="O006-PSU-003-M0007">\[x_1, x_2, \ldots, x_n\]</span></p>
+<div class="ms-3 theorem definition" data-o006-id="O006-PSU-003-U0044" id="def-parameterspace">
+<p data-o006-id="O006-PSU-003-U0045"><span class="theorem-title"><strong>Def. 2.1 (Parameter Space)</strong></span> The range of possible values of the parameter <span class="math inline" data-o006-math-id="O006-PSU-003-M0008">\(\theta\)</span> is called the <strong>parameter space</strong> <span class="math inline" data-o006-math-id="O006-PSU-003-M0009">\(\Omega\)</span> (the Greek letter “omega”).</p>
+</div>
+<div class="theorem example" data-o006-id="O006-PSU-003-U0046" id="exm-meangpa">
+<p data-o006-id="O006-PSU-003-U0047"><span class="theorem-title"><strong>Example 2.1</strong></span> If <span class="math inline" data-o006-math-id="O006-PSU-003-M0010">\(\mu\)</span> denotes the mean grade point average of all college students, then the parameter space (assuming a 4-point grading scale):</p>
+<p data-o006-id="O006-PSU-003-U0048"><span class="math display" data-o006-math-id="O006-PSU-003-M0011">\[\Omega = \{\mu: 0 \le \mu \le 4\}\]</span></p>
+<p data-o006-id="O006-PSU-003-U0049">If <span class="math inline" data-o006-math-id="O006-PSU-003-M0012">\(p\)</span> is the proportion of students who smoke cigarettes, then the parameter space is:</p>
+<p data-o006-id="O006-PSU-003-U0050"><span class="math display" data-o006-math-id="O006-PSU-003-M0013">\[\Omega = \{p: 0 \le p \le 1\}\]</span></p>
+</div>
+</section>
+<section class="level3 ms-3" data-number="2.1.1" data-o006-id="O006-PSU-003-U0051" id="point-estimator">
+<h3 class="anchored" data-anchor-id="point-estimator" data-number="2.1.1" data-o006-id="O006-PSU-003-U0052"><span class="header-section-number">2.1.1</span> Point Estimator</h3>
+<p data-o006-id="O006-PSU-003-U0053">The function <span class="math inline" data-o006-math-id="O006-PSU-003-M0014">\(X_1, X_2, \ldots X_n\)</span>, that is, the statistic <span class="math inline" data-o006-math-id="O006-PSU-003-M0015">\(u(X_1, X_2, \ldots, X_n)\)</span>, used to estimate <span class="math inline" data-o006-math-id="O006-PSU-003-M0016">\(\theta\)</span> is called a <strong>point estimator</strong> of <span class="math inline" data-o006-math-id="O006-PSU-003-M0017">\(\theta.\)</span></p>
+</section>
+<div class="theorem example" data-o006-id="O006-PSU-003-U0054" id="exm-ptestimator">
+<p data-o006-id="O006-PSU-003-U0055"><span class="theorem-title"><strong>Example 2.2</strong></span> For example, the function:</p>
+<p data-o006-id="O006-PSU-003-U0056"><span class="math display" data-o006-math-id="O006-PSU-003-M0018">\[\bar{X} = \frac{1}{n} \sum_{i=1}^n X_i\]</span> is a point estimator of the population mean <span class="math inline" data-o006-math-id="O006-PSU-003-M0019">\(\mu.\)</span></p>
+<p data-o006-id="O006-PSU-003-U0057">When <span class="math inline" data-o006-math-id="O006-PSU-003-M0020">\(X_i = 0\)</span> or 1, the function:</p>
+<p data-o006-id="O006-PSU-003-U0058"><span class="math display" data-o006-math-id="O006-PSU-003-M0021">\[\hat{p} = \frac{1}{n} \sum_{i=1}^n X_i\]</span></p>
+<p data-o006-id="O006-PSU-003-U0059">is a point estimator of the population proportion <span class="math inline" data-o006-math-id="O006-PSU-003-M0022">\(p.\)</span></p>
+<p data-o006-id="O006-PSU-003-U0060">The function:</p>
+<p data-o006-id="O006-PSU-003-U0061"><span class="math display" data-o006-math-id="O006-PSU-003-M0023">\[S^2 = \frac{1}{n-1} \sum_{i=1}^n (X_i - \bar{X})^2\]</span></p>
+<p data-o006-id="O006-PSU-003-U0062">is a point estimator of the population variance <span class="math inline" data-o006-math-id="O006-PSU-003-M0024">\(\sigma^2.\)</span></p>
+</div>
+<section class="level3 ms-3" data-number="2.1.2" data-o006-id="O006-PSU-003-U0063" id="point-estimate">
+<h3 class="anchored" data-anchor-id="point-estimate" data-number="2.1.2" data-o006-id="O006-PSU-003-U0064"><span class="header-section-number">2.1.2</span> Point Estimate</h3>
+<p data-o006-id="O006-PSU-003-U0065">The function <span class="math inline" data-o006-math-id="O006-PSU-003-M0025">\(u(x_1, x_2, \ldots, x_n)\)</span> computed from a set of data is an observed <strong>point estimate</strong> of <span class="math inline" data-o006-math-id="O006-PSU-003-M0026">\(\theta.\)</span></p>
+</section>
+<div class="theorem example" data-o006-id="O006-PSU-003-U0066" id="exm-ptestimate">
+<p data-o006-id="O006-PSU-003-U0067"><span class="theorem-title"><strong>Example 2.3</strong></span> If <span class="math inline" data-o006-math-id="O006-PSU-003-M0027">\(x_i\)</span>, <span class="math inline" data-o006-math-id="O006-PSU-003-M0028">\(i = 1, \ldots, 88\)</span> are the observed grade point averages of a sample of 88 students, then,</p>
+<p data-o006-id="O006-PSU-003-U0068"><span class="math display" data-o006-math-id="O006-PSU-003-M0029">\[\bar{x} = \frac{1}{88} \sum_{i=1}^{88} x_i = 3.12\]</span> is a point estimate of <span class="math inline" data-o006-math-id="O006-PSU-003-M0030">\(\mu\)</span>, the mean grade point average of all students in the population.</p>
+<p data-o006-id="O006-PSU-003-U0069">Recall the probability density function (or the probability mass function) of a random variable has been defined as <span class="math inline" data-o006-math-id="O006-PSU-003-M0031">\(f(x).\)</span> We define a probability model for the data as:</p>
+<p data-o006-id="O006-PSU-003-U0070"><span class="math display" data-o006-math-id="O006-PSU-003-M0032">\[x_i \sim f_x(x_i|\theta)\]</span></p>
+<p data-o006-id="O006-PSU-003-U0071">where <span class="math inline" data-o006-math-id="O006-PSU-003-M0033">\(f_x\)</span> is the probability distribution and <span class="math inline" data-o006-math-id="O006-PSU-003-M0034">\(\theta\)</span> is the parameter (or parameters) in the model.</p>
+<p data-o006-id="O006-PSU-003-U0072">If <span class="math inline" data-o006-math-id="O006-PSU-003-M0035">\(\theta\)</span> is known, our work is done. The goal of this course is to understand what to do when <span class="math inline" data-o006-math-id="O006-PSU-003-M0036">\(\theta\)</span> is not known. We define the estimator of <span class="math inline" data-o006-math-id="O006-PSU-003-M0037">\(\theta\)</span> as <span class="math inline" data-o006-math-id="O006-PSU-003-M0038">\(\hat{\theta}.\)</span> <span class="math inline" data-o006-math-id="O006-PSU-003-M0039">\(\hat{\theta}\)</span> is a function of our data, i.e. <span class="math inline" data-o006-math-id="O006-PSU-003-M0040">\(\hat{\theta} = g(X_1, X_2, \ldots, X_n).\)</span> We will use this function of data to help us understand <span class="math inline" data-o006-math-id="O006-PSU-003-M0041">\(\theta.\)</span> We will be performing statistical inference. <strong>Statistical Inference</strong> is using data to infer properties of an underlying distribution.</p>
+</div>
+<p data-o006-id="O006-PSU-003-U0073">Let’s go through a motivational example that uses some of these terms and shows where we are going.</p>
+<div class="theorem example" data-o006-id="O006-PSU-003-U0074" id="exm-covid19">
+<p data-o006-id="O006-PSU-003-U0075"><span class="theorem-title"><strong>Example 2.4</strong></span> Suppose a researcher is interested in COVID-19. Let - <span class="math inline" data-o006-math-id="O006-PSU-003-M0042">\(n_{c,y} =\)</span> number of people with COVID in country <span class="math inline" data-o006-math-id="O006-PSU-003-M0043">\(c\)</span> and in year <span class="math inline" data-o006-math-id="O006-PSU-003-M0044">\(y\)</span> - <span class="math inline" data-o006-math-id="O006-PSU-003-M0045">\(d_{c,y} =\)</span> number of people who died of COVID in country <span class="math inline" data-o006-math-id="O006-PSU-003-M0046">\(c\)</span> and in year <span class="math inline" data-o006-math-id="O006-PSU-003-M0047">\(y\)</span></p>
+<p data-o006-id="O006-PSU-003-U0076">For example, <span class="math inline" data-o006-math-id="O006-PSU-003-M0048">\(n_{\text{USA}, 2021}\)</span> is the number of people with COVID in the United States of America in the year 2021.</p>
+<p data-o006-id="O006-PSU-003-U0077">Suppose we want to answer if COVID-19 death rates are lower in 2022 (after the vaccine) than in 2021 (before the vaccine) for a particular country. We need to define a probability model for <span class="math inline" data-o006-math-id="O006-PSU-003-M0049">\((n_{c,y}, d_{c,y}).\)</span> Suppose the model is:</p>
+<p data-o006-id="O006-PSU-003-U0078"><span class="math display" data-o006-math-id="O006-PSU-003-M0050">\[d_{c,y} \sim \text{Bin}(n_{c,y}, p_y)\]</span></p>
+<p data-o006-id="O006-PSU-003-U0079">In this model, the parameter is <span class="math inline" data-o006-math-id="O006-PSU-003-M0051">\(p_y\)</span>, the probability of a COVID death in year <span class="math inline" data-o006-math-id="O006-PSU-003-M0052">\(y.\)</span> Since we are interested in comparing 2022 and 2021, we have two parameters, <span class="math inline" data-o006-math-id="O006-PSU-003-M0053">\(p_{2021}\)</span> and <span class="math inline" data-o006-math-id="O006-PSU-003-M0054">\(p_{2022}.\)</span> If we knew the parameters, we would answer the question. Since we do not, we need to estimate <span class="math inline" data-o006-math-id="O006-PSU-003-M0055">\(\theta = (p_{2021}, p_{2022}).\)</span></p>
+<p data-o006-id="O006-PSU-003-U0080">Now what? What is <span class="math inline" data-o006-math-id="O006-PSU-003-M0056">\(\hat{\theta}\)</span>? How do we determine the estimator? Could there be more than one estimator? We will learn how to find an estimator of unknown parameters in a little while. For now, we will find out how to compare estimators.</p>
+</div>
+</section>
+<section class="level2" data-number="2.2" data-o006-id="O006-PSU-003-U0081" id="properties-of-estimators">
+<h2 class="anchored" data-anchor-id="properties-of-estimators" data-number="2.2" data-o006-id="O006-PSU-003-U0082"><span class="header-section-number">2.2</span> Properties of Estimators</h2>
+<p data-o006-id="O006-PSU-003-U0083">Suppose we are given multiple estimators of an unknown parameter, <span class="math inline" data-o006-math-id="O006-PSU-003-M0057">\(\theta.\)</span> How do we know which is the “better” choice? Consider the following example.</p>
+<div class="theorem example" data-o006-id="O006-PSU-003-U0084" id="exm-propertiesestimators">
+<p data-o006-id="O006-PSU-003-U0085"><span class="theorem-title"><strong>Example 2.5</strong></span> Suppose we have an independent and identically distributed (i.i.d) sample of size <span class="math inline" data-o006-math-id="O006-PSU-003-M0058">\(n=3\)</span> such that</p>
+<p data-o006-id="O006-PSU-003-U0086"><span class="math display" data-o006-math-id="O006-PSU-003-M0059">\[X_i \overset{iid}{\sim} \text{Bin}(10, p)\]</span></p>
+<p data-o006-id="O006-PSU-003-U0087">The unknown parameter in this case is <span class="math inline" data-o006-math-id="O006-PSU-003-M0060">\(p\)</span>, the probability of a success. Define three possible estimators of <span class="math inline" data-o006-math-id="O006-PSU-003-M0061">\(p\)</span> as:</p>
+<p data-o006-id="O006-PSU-003-U0088"><span class="math display" data-o006-math-id="O006-PSU-003-M0062">\[\begin{aligned}
+\hat{p}_1 = \frac{X_1}{n} \\
+\hat{p}_2 = \frac{\frac{X_1}{10} + \frac{X_2}{10} + \frac{X_3}{10}}{3} = \frac{X_1 + X_2 + X_3}{30} \\
+\hat{p}_3 = \hat{p}_2 + 0.1 = \frac{X_1 + X_2 + X_3}{30} + 0.1
+\end{aligned}\]</span></p>
+<p data-o006-id="O006-PSU-003-U0089">Which estimator does a better job estimating <span class="math inline" data-o006-math-id="O006-PSU-003-M0063">\(p\)</span>? We can start by defining the bias of an estimate.</p>
+</div>
+<div class="ms-3 theorem definition" data-o006-id="O006-PSU-003-U0090" id="def-unbiasedestimation">
+<p data-o006-id="O006-PSU-003-U0091"><span class="theorem-title"><strong>Def. 2.2 (Unbiased Estimation)</strong></span> One measure of a “good” estimator is “unbiasedness.” An estimator is said to be unbiased if the expected value of the estimator is the unknown parameter <span class="math inline" data-o006-math-id="O006-PSU-003-M0064">\(\theta.\)</span></p>
+</div>
+<section class="level3 ms-3" data-number="2.2.1" data-o006-id="O006-PSU-003-U0092" id="bias">
+<h3 class="anchored" data-anchor-id="bias" data-number="2.2.1" data-o006-id="O006-PSU-003-U0093"><span class="header-section-number">2.2.1</span> Bias</h3>
+<p data-o006-id="O006-PSU-003-U0094">If the following holds:</p>
+<p data-o006-id="O006-PSU-003-U0095"><span class="math display" data-o006-math-id="O006-PSU-003-M0065">\[E\left[u(X_1, X_2, \ldots, X_n)\right] = \theta\]</span></p>
+<p data-o006-id="O006-PSU-003-U0096">then the statistic <span class="math inline" data-o006-math-id="O006-PSU-003-M0066">\(u(X_1, X_2, \ldots, X_n)\)</span> is an <strong>unbiased estimator</strong> of the parameter <span class="math inline" data-o006-math-id="O006-PSU-003-M0067">\(\theta.\)</span> Otherwise, <span class="math inline" data-o006-math-id="O006-PSU-003-M0068">\(u(X_1, X_2, \ldots, X_n)\)</span> is a <strong>biased estimator</strong> of <span class="math inline" data-o006-math-id="O006-PSU-003-M0069">\(\theta.\)</span> The <strong>bias</strong> of the statistic is defined as:</p>
+<p data-o006-id="O006-PSU-003-U0097"><span class="math display" data-o006-math-id="O006-PSU-003-M0070">\[\text{Bias} = E(u(X_1, X_2, \ldots, X_n)) - \theta\]</span> Note that an unbiased estimator will have a bias of <span class="math inline" data-o006-math-id="O006-PSU-003-M0071">\(\text{Bias} = E(u(X_1, X_2, \ldots, X_n)) - \theta = 0.\)</span></p>
+</section>
+<div class="theorem example" data-o006-id="O006-PSU-003-U0098" id="exm-propest">
+<p data-o006-id="O006-PSU-003-U0099"><span class="theorem-title"><strong>Example 2.6</strong></span> Consider the previous example where we define our estimators of <span class="math inline" data-o006-math-id="O006-PSU-003-M0072">\(p\)</span> as:</p>
+<p data-o006-id="O006-PSU-003-U0100"><span class="math display" data-o006-math-id="O006-PSU-003-M0073">\[\begin{aligned}
+&amp;amp; \hat{p}_1 = \frac{X_1}{10} \\
+&amp;amp; \hat{p}_2 = \frac{X_1 + X_2 + X_3}{30} \\
+&amp;amp; \hat{p}_3 = \hat{p}_2 + 0.1 = \frac{X_1 + X_2 + X_3}{30} + 0.1
+\end{aligned}\]</span></p>
+<p data-o006-id="O006-PSU-003-U0101"><strong>What is the bias of the estimators?</strong></p>
+<section class="level4 card card-body bg-light ms-3 mb-3 pt-0" data-o006-id="O006-PSU-003-U0102" id="solution">
+<h4 class="anchored" data-anchor-id="solution" data-o006-id="O006-PSU-003-U0103">Solution</h4>
+<p data-o006-id="O006-PSU-003-U0104">To find the bias of each estimator, we need to find their expected values. Recall for a Binomial random variable, <span class="math inline" data-o006-math-id="O006-PSU-003-M0074">\(X\)</span>, we know <span class="math inline" data-o006-math-id="O006-PSU-003-M0075">\(E(X) = p\)</span> and <span class="math inline" data-o006-math-id="O006-PSU-003-M0076">\(\text{Var}(X) = np(1-p).\)</span> Let’s start with <span class="math inline" data-o006-math-id="O006-PSU-003-M0077">\(\hat{p}_1.\)</span></p>
+<p data-o006-id="O006-PSU-003-U0105"><span class="math display" data-o006-math-id="O006-PSU-003-M0078">\[\begin{align}\text{Bias}_1 &amp;= E(\hat{p}_1) - p\\ &amp;= E\left[\frac{X_1}{10}\right] - p\\ &amp;= \frac{E(X_1)}{10} - p\\ &amp;= \frac{10p}{10} - p\\ &amp;= p - p = 0 \end{align}\]</span></p>
+</section>
+</div>
+<div class="theorem example" data-o006-id="O006-PSU-003-U0106" id="exm-normal-distribution">
+<p data-o006-id="O006-PSU-003-U0107"><span class="theorem-title"><strong>Example 2.7</strong></span> If <span class="math inline" data-o006-math-id="O006-PSU-003-M0079">\(X_i\)</span> are normally distributed random variables with mean <span class="math inline" data-o006-math-id="O006-PSU-003-M0080">\(\mu\)</span> and variance <span class="math inline" data-o006-math-id="O006-PSU-003-M0081">\(\sigma^2\)</span>, then consider the two estimators of <span class="math inline" data-o006-math-id="O006-PSU-003-M0082">\(\mu\)</span> and <span class="math inline" data-o006-math-id="O006-PSU-003-M0083">\(\sigma^2\)</span>, respectively:</p>
+<span class="math display" data-o006-math-id="O006-PSU-003-M0084">\[\begin{align*}
+\hat{\mu} &amp;= \frac{1}{n}\sum_{i=1}^n X_i, \\ \quad \hat{\sigma}^2 &amp;= \frac{\sum_{i=1}^n(X_i - \bar{X})^2}{n}
+\end{align*}\]</span>
+<p data-o006-id="O006-PSU-003-U0108"><strong>Are the estimators unbiased for their respective parameters?</strong></p>
+<section class="level4 card card-body bg-light ms-3 mb-3 pt-0" data-o006-id="O006-PSU-003-U0109" id="solution-1">
+<h4 class="anchored" data-anchor-id="solution-1" data-o006-id="O006-PSU-003-U0110">Solution</h4>
+<p data-o006-id="O006-PSU-003-U0111">Recall that if <span class="math inline" data-o006-math-id="O006-PSU-003-M0085">\(X_i\)</span> is a normally distributed random variable with mean <span class="math inline" data-o006-math-id="O006-PSU-003-M0086">\(\mu\)</span> and variance <span class="math inline" data-o006-math-id="O006-PSU-003-M0087">\(\sigma^2\)</span>, then <span class="math inline" data-o006-math-id="O006-PSU-003-M0088">\(E(X_i) = \mu\)</span> and <span class="math inline" data-o006-math-id="O006-PSU-003-M0089">\(\text{Var}(X_i) = \sigma^2.\)</span> Therefore,</p>
+<span class="math display" data-o006-math-id="O006-PSU-003-M0090">\[\begin{align}
+E(\bar{X}) &amp;= E\left(\frac{1}{n}\sum_{i=1}^n X_i\right)\\ &amp;= \frac{1}{n}\sum_{i=1}^n E(X_i)\\ &amp;= \frac{1}{n}\sum_{i=1}^n \mu\\ &amp;= \frac{1}{n}(n\mu) = \mu
+\end{align}\]</span>
+<p data-o006-id="O006-PSU-003-U0112">The first equality holds because we’ve merely replaced <span class="math inline" data-o006-math-id="O006-PSU-003-M0091">\(\bar{X}\)</span> with its definition. The second equality holds by the rules of expectation for a linear combination. The third equality holds because <span class="math inline" data-o006-math-id="O006-PSU-003-M0092">\(E(X_i) = \mu.\)</span> The fourth equality holds because when you add the value <span class="math inline" data-o006-math-id="O006-PSU-003-M0093">\(\mu\)</span> up <span class="math inline" data-o006-math-id="O006-PSU-003-M0094">\(n\)</span> times, you get <span class="math inline" data-o006-math-id="O006-PSU-003-M0095">\(n\mu.\)</span> And, of course, the last equality is simple algebra.</p>
+<p data-o006-id="O006-PSU-003-U0113">In summary, we have shown that <span class="math inline" data-o006-math-id="O006-PSU-003-M0096">\(E(\bar{X}) = \mu.\)</span> Therefore, <span class="math inline" data-o006-math-id="O006-PSU-003-M0097">\(\hat{\mu}\)</span> is an unbiased estimator of <span class="math inline" data-o006-math-id="O006-PSU-003-M0098">\(\mu.\)</span> Now, let’s check the estimator for <span class="math inline" data-o006-math-id="O006-PSU-003-M0099">\(\sigma^2.\)</span> The estimator is:</p>
+<span class="math display" data-o006-math-id="O006-PSU-003-M0100">\[\begin{align*}
+\hat{\sigma}^2 = \frac{\sum_{i=1}^n (X_i - \bar{X})^2}{n}
+\end{align*}\]</span>
+<p data-o006-id="O006-PSU-003-U0114">We can rewrite the formula as:</p>
+<span class="math display" data-o006-math-id="O006-PSU-003-M0101">\[\begin{align*}
+\hat{\sigma}^2 = \left(\frac{1}{n}\sum_{i=1}^n {X_i}^2\right) - \bar{X}^2
+\end{align*}\]</span>
+<p data-o006-id="O006-PSU-003-U0115">because</p>
+<span class="math display" data-o006-math-id="O006-PSU-003-M0102">\[\begin{align*}
+\hat{\sigma}^2 &amp;= \frac{1}{n}\sum_{i=1}^n (x_i - \bar{x})^2 = \frac{1}{n}\left(x_i^2 - 2x_i\bar{x} + \bar{x}^2\right)^2 \\&amp;= \frac{1}{n}\sum_{i=1}^n x_i^2 - 2\bar{x}\sum_{i=1}^n x_i + \frac{1}{n}(n\bar{x}^2)\\ &amp;= \frac{1}{n}\sum_{i=1}^n x_i^2 - \bar{x}^2
+\end{align*}\]</span>
+<p data-o006-id="O006-PSU-003-U0116">Now, find the expectation,</p>
+<div data-o006-id="O006-PSU-003-U0117" style="overflow-x:auto;overflow-y:hidden;">
+<span class="math display" data-o006-math-id="O006-PSU-003-M0103">\[\begin{align*}
+E(\hat{\sigma}^2) = E\left[\frac{1}{n}\sum_{i=1}^n X_i^2 - \bar{X}^2\right] = \left[\frac{1}{n}\sum_{i=1}^n E(X_i^2)\right] - E(\bar{X}^2)
+\end{align*}\]</span>
+</div>
+<p data-o006-id="O006-PSU-003-U0118">Recall that <span class="math inline" data-o006-math-id="O006-PSU-003-M0104">\(\sigma^2 = E(X^2) - \mu^2\)</span> for a random variable <span class="math inline" data-o006-math-id="O006-PSU-003-M0105">\(X.\)</span> Algebraically, solving for <span class="math inline" data-o006-math-id="O006-PSU-003-M0106">\(E(X^2)\)</span>, we get <span class="math inline" data-o006-math-id="O006-PSU-003-M0107">\(E(X^2) = \sigma^2 + \mu^2.\)</span> Therefore,</p>
+<div data-o006-id="O006-PSU-003-U0119" style="overflow-x:auto;overflow-y:hidden;">
+<span class="math display" data-o006-math-id="O006-PSU-003-M0108">\[\begin{align*}
+E(\hat{\sigma}^2) = \left[\frac{1}{n}\sum_{i=1}^n E(X_i^2)\right] - E(\bar{X}^2) = \frac{1}{n}\sum_{i=1}^n (\sigma^2 + \mu^2) - \left(\frac{\sigma^2}{n} + \mu^2\right)
+\end{align*}\]</span>
+</div>
+<p data-o006-id="O006-PSU-003-U0120">The second equality holds because <span class="math inline" data-o006-math-id="O006-PSU-003-M0109">\(\text{Var}(\bar{X}) = \frac{\sigma^2}{n}\)</span> and <span class="math inline" data-o006-math-id="O006-PSU-003-M0110">\(E(\bar{X}) = \mu.\)</span> Now,</p>
+<span class="math display" data-o006-math-id="O006-PSU-003-M0111">\[\begin{align*}
+E(\hat{\sigma}^2) &amp;= \frac{1}{n}\sum_{i=1}^n (\sigma^2 + \mu^2) - \left(\frac{\sigma^2}{n} + \mu^2\right) \\&amp;= \frac{1}{n}(n\sigma^2 + n\mu^2) - \frac{\sigma^2}{n} - \mu^2\\ &amp;= \sigma^2 - \frac{\sigma^2}{n} \\&amp;= \frac{n\sigma^2 - \sigma^2}{n} = \frac{(n-1)\sigma^2}{n}
+\end{align*}\]</span>
+<p data-o006-id="O006-PSU-003-U0121">Therefore, we have shown that</p>
+<span class="math display" data-o006-math-id="O006-PSU-003-M0112">\[\begin{align*}
+E(\hat{\sigma}^2) \ne \sigma^2
+\end{align*}\]</span>
+<p data-o006-id="O006-PSU-003-U0122">The estimator for <span class="math inline" data-o006-math-id="O006-PSU-003-M0113">\(\hat{\sigma}^2\)</span> is a biased estimator of <span class="math inline" data-o006-math-id="O006-PSU-003-M0114">\(\sigma^2.\)</span></p>
+</section>
+</div>
+<div class="theorem example" data-o006-id="O006-PSU-003-U0123" id="exm-unbiased-estimator">
+<p data-o006-id="O006-PSU-003-U0124"><span class="theorem-title"><strong>Example 2.8</strong></span> If <span class="math inline" data-o006-math-id="O006-PSU-003-M0115">\(X_i\)</span> are normally distributed random variables with mean <span class="math inline" data-o006-math-id="O006-PSU-003-M0116">\(\mu\)</span> and variance <span class="math inline" data-o006-math-id="O006-PSU-003-M0117">\(\sigma^2\)</span>, is <span class="math inline" data-o006-math-id="O006-PSU-003-M0118">\(S^2 = \frac{\sum_{i=1}^n (X_i - \bar{X})^2}{n-1}\)</span> an unbiased estimator of <span class="math inline" data-o006-math-id="O006-PSU-003-M0119">\(\sigma^2\)</span>?</p>
+<section class="level4 card card-body bg-light ms-3 mb-3 pt-0" data-o006-id="O006-PSU-003-U0125" id="solution-2">
+<h4 class="anchored" data-anchor-id="solution-2" data-o006-id="O006-PSU-003-U0126">Solution</h4>
+<p data-o006-id="O006-PSU-003-U0127">Recall that if <span class="math inline" data-o006-math-id="O006-PSU-003-M0120">\(X_i\)</span> is a normally distributed random variable with mean <span class="math inline" data-o006-math-id="O006-PSU-003-M0121">\(\mu\)</span> and variance <span class="math inline" data-o006-math-id="O006-PSU-003-M0122">\(\sigma^2\)</span>, then:</p>
+<p data-o006-id="O006-PSU-003-U0128"><span class="math display" data-o006-math-id="O006-PSU-003-M0123">\[
+\begin{align*}
+\frac{(n-1)S^2}{\sigma^2} \sim \chi^2_{n-1}
+\end{align*}
+\]</span></p>
+<p data-o006-id="O006-PSU-003-U0129">Also, recall that the expected value of a chi-square random variable is its degrees of freedom. That is, if:</p>
+<p data-o006-id="O006-PSU-003-U0130"><span class="math display" data-o006-math-id="O006-PSU-003-M0124">\[
+\begin{align*}
+X \sim \chi^2_{(r)}
+\end{align*}
+\]</span></p>
+<p data-o006-id="O006-PSU-003-U0131">then <span class="math inline" data-o006-math-id="O006-PSU-003-M0125">\(E(X) = r.\)</span> Therefore,</p>
+<p data-o006-id="O006-PSU-003-U0132"><span class="math display" data-o006-math-id="O006-PSU-003-M0126">\[
+\begin{align*}
+E(S^2) &amp;= E\left[\frac{\sigma^2}{n-1} \cdot \frac{(n-1)S^2}{\sigma^2}\right] \\&amp;= \frac{\sigma^2}{n-1}E\left[\frac{(n-1)S^2}{\sigma^2}\right]\\ &amp;= \frac{\sigma^2}{n-1}(n-1) \\&amp;= \sigma^2
+\end{align*}
+\]</span></p>
+<p data-o006-id="O006-PSU-003-U0133">The first equality holds because we effectively multiplied the sample variance by 1. The second equality holds by the law of expectation that tells us we can pull a constant through the expectation. The third equality holds because of the two facts we recalled above. That is:</p>
+<p data-o006-id="O006-PSU-003-U0134"><span class="math display" data-o006-math-id="O006-PSU-003-M0127">\[
+\begin{align*}
+E\left[\frac{(n-1)S^2}{\sigma^2}\right] = n-1
+\end{align*}
+\]</span></p>
+<p data-o006-id="O006-PSU-003-U0135">And, the last equality is again simple algebra.</p>
+</section>
+</div>
+<p data-o006-id="O006-PSU-003-U0136">In summary, we have shown that, if <span class="math inline" data-o006-math-id="O006-PSU-003-M0128">\(X_i\)</span> is a normally distributed random variable with mean <span class="math inline" data-o006-math-id="O006-PSU-003-M0129">\(\mu\)</span> and variance <span class="math inline" data-o006-math-id="O006-PSU-003-M0130">\(\sigma^2\)</span>, then <span class="math inline" data-o006-math-id="O006-PSU-003-M0131">\(S^2\)</span> is an unbiased estimator of <span class="math inline" data-o006-math-id="O006-PSU-003-M0132">\(\sigma^2.\)</span> It turns out, however, that <span class="math inline" data-o006-math-id="O006-PSU-003-M0133">\(S^2\)</span> is <em>always</em> an unbiased estimator of <span class="math inline" data-o006-math-id="O006-PSU-003-M0134">\(\sigma^2\)</span>, that is, for <em>any</em> model, not just the normal model. Interestingly, although <span class="math inline" data-o006-math-id="O006-PSU-003-M0135">\(S^2\)</span> is always an unbiased estimator of <span class="math inline" data-o006-math-id="O006-PSU-003-M0136">\(\sigma^2\)</span>, <span class="math inline" data-o006-math-id="O006-PSU-003-M0137">\(S\)</span> is <em>not</em> an unbiased estimator of <span class="math inline" data-o006-math-id="O006-PSU-003-M0138">\(\sigma.\)</span></p>
+<p data-o006-id="O006-PSU-003-U0137">Next, let’s consider an example where the random variable does not have a named distribution we can recall.</p>
+<div class="theorem example" data-o006-id="O006-PSU-003-U0138" id="exm-unbiased-theta">
+<p data-o006-id="O006-PSU-003-U0139"><span class="theorem-title"><strong>Example 2.9</strong></span> Let <span class="math inline" data-o006-math-id="O006-PSU-003-M0139">\(Y_1, Y_2, \ldots, Y_n\)</span> be a random sample of size <span class="math inline" data-o006-math-id="O006-PSU-003-M0140">\(n\)</span> from a distribution with the following probability density function:</p>
+<p data-o006-id="O006-PSU-003-U0140"><span class="math display" data-o006-math-id="O006-PSU-003-M0141">\[
+\begin{align*}
+f(y) = \frac{1}{\theta} y^{\frac{1-\theta}{\theta}}, \qquad 0 &lt; y &lt; 1, \;\; 0 &lt; \theta
+\end{align*}
+\]</span></p>
+<p data-o006-id="O006-PSU-003-U0141">Determine if the statistic <span class="math inline" data-o006-math-id="O006-PSU-003-M0142">\(\hat{\theta} = -\frac{1}{n} \sum_{i=1}^n \ln Y_i\)</span> is an unbiased estimator of the unknown parameter, <span class="math inline" data-o006-math-id="O006-PSU-003-M0143">\(\theta.\)</span></p>
+<section class="level4 alert-light ms-3 mb-3 pt-1" data-o006-id="O006-PSU-003-U0142" id="solution-3">
+<h4 class="anchored" data-anchor-id="solution-3" data-o006-id="O006-PSU-003-U0143">Solution</h4>
+<p data-o006-id="O006-PSU-003-U0144">We can start with the properties of expectation.</p>
+<p data-o006-id="O006-PSU-003-U0145"><span class="math display" data-o006-math-id="O006-PSU-003-M0144">\[
+\begin{align*}
+E(\hat{\theta}) = E\left(-\frac{1}{n}\sum_{i=1}^n \ln Y_i\right) = -\frac{1}{n}\sum_{i=1}^n E(\ln Y_i)
+\end{align*}
+\]</span></p>
+<p data-o006-id="O006-PSU-003-U0146">Since we have a random sample, <span class="math inline" data-o006-math-id="O006-PSU-003-M0145">\(E(\ln Y_i)\)</span> is the same for all <span class="math inline" data-o006-math-id="O006-PSU-003-M0146">\(i = 1, \ldots, n.\)</span> Therefore, we have:</p>
+<p data-o006-id="O006-PSU-003-U0147"><span class="math display" data-o006-math-id="O006-PSU-003-M0147">\[
+\begin{align*}
+E(\hat{\theta}) &amp;= -\frac{1}{n}\sum_{i=1}^n E(\ln Y_i) \\&amp;= -\frac{1}{n}(n)E(\ln Y_i) \\&amp;= -E(\ln Y_i)
+\end{align*}
+\]</span></p>
+<p data-o006-id="O006-PSU-003-U0148">Therefore, we only need to find <span class="math inline" data-o006-math-id="O006-PSU-003-M0148">\(E(\ln Y_i).\)</span> Using the definition of expectation, we get:</p>
+<p data-o006-id="O006-PSU-003-U0149"><span class="math display" data-o006-math-id="O006-PSU-003-M0149">\[
+\begin{align*}
+E(\ln Y_i) = \int_0^1 \frac{\ln y}{\theta} y^{(1-\theta)/\theta} dy
+\end{align*}
+\]</span></p>
+<p data-o006-id="O006-PSU-003-U0150">Using integration by parts, with <span class="math inline" data-o006-math-id="O006-PSU-003-M0150">\(u = \ln y\)</span> and <span class="math inline" data-o006-math-id="O006-PSU-003-M0151">\(dv = \frac{1}{\theta} y^{1/\theta-1} dy\)</span>, we get</p>
+<p data-o006-id="O006-PSU-003-U0151"><span class="math display" data-o006-math-id="O006-PSU-003-M0152">\[
+\begin{align*}
+E(\ln Y_i) = \lim_{a \rightarrow 0} \left[ y^{1/\theta} \ln y - \theta y^{1-\theta} \right]_a^1 = -\theta
+\end{align*}
+\]</span></p>
+<p data-o006-id="O006-PSU-003-U0152">Putting this all together, we get:</p>
+<p data-o006-id="O006-PSU-003-U0153"><span class="math display" data-o006-math-id="O006-PSU-003-M0153">\[
+\begin{align*}
+E(\hat{\theta}) = -E(\ln Y_i) = -(-\theta) = \theta
+\end{align*}
+\]</span></p>
+<p data-o006-id="O006-PSU-003-U0154">Therefore, the statistic is an unbiased estimator of <span class="math inline" data-o006-math-id="O006-PSU-003-M0154">\(\theta.\)</span></p>
+</section>
+</div>
+<p data-o006-id="O006-PSU-003-U0155">It makes sense that unbiasedness is a desirable property of an estimator. However, as with our example, how do we determine the “better” estimator from multiple unbiased estimators? It seems logical that we would consider not only the expected value of the estimator but the variance of the estimator. In the next lesson, we will discuss the variance of an estimator and also the mean square error.</p>
+<section class="level3" data-number="2.2.2" data-o006-id="O006-PSU-003-U0156" id="variance-and-mean-squared-error">
+<h3 class="anchored" data-anchor-id="variance-and-mean-squared-error" data-number="2.2.2" data-o006-id="O006-PSU-003-U0157"><span class="header-section-number">2.2.2</span> Variance and Mean Squared Error</h3>
+<p data-o006-id="O006-PSU-003-U0158">In the last section, we defined bias and what it means for an estimator to be unbiased for an unknown parameter, <span class="math inline" data-o006-math-id="O006-PSU-003-M0155">\(\theta.\)</span> Although unbiasedness is a desirable property, that property alone does not define a “good estimator”. Consider the following dart example that illustrates the difference between <strong>accuracy</strong> and <strong>precision</strong>.</p>
+<p data-o006-id="O006-PSU-003-U0159">Accuracy is a term that refers to how close we are to our “true value”. For estimators, accuracy is analogous to being unbiased. Precision is a term that refers to how close we are to other measurements. Consider throwing darts at a dart board where our “true value” is the bulls-eye. Suppose four people throw four darts and we want to judge who is the “better” dart player, based on the true value. Their throws are illustrated below.</p>
+<div alt="4 different dartboards showing different types of bias" class="lightbox quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center" data-o006-id="O006-PSU-003-U0160" id="fig-dartboard">
+<figure class="quarto-float quarto-float-fig figure" data-o006-id="O006-PSU-003-U0161">
+<div aria-describedby="fig-dartboard-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca" data-o006-id="O006-PSU-003-U0162">
+<a class="lightbox" data-gallery="quarto-lightbox-gallery-1" data-o006-id="O006-PSU-003-U0163" href="assets/dartboard.png" title="Fig 2.1: "><img alt="4 different dartboards showing different types of bias" class="img-fluid quarto-figure quarto-figure-center figure-img" data-o006-asset-id="O006-PSU-003-A0001" data-o006-id="O006-PSU-003-U0164" src="assets/dartboard.png" style="width:70.0%"/></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" data-o006-id="O006-PSU-003-U0165" id="fig-dartboard-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Fig 2.1
+</figcaption>
+</figure>
+</div>
+<p data-o006-id="O006-PSU-003-U0166">Let’s look at each player. Player A does not have a high accuracy and the darts are spread out. Player B does not throw near the bulls-eye but their throws are close together. Therefore, Player B would have low accuracy but better precision. Player C seems to have a higher accuracy than Players A and B, but their precision is poor. Finally, Player D has a high accuracy and high precision. Based on the picture, I would judge that Player D is the better player.</p>
+<p data-o006-id="O006-PSU-003-U0167">The goal is to choose an estimator with accuracy and precision. We discussed that being unbiased is analogous to accuracy. If we consider the precision of the estimator, a good measurement is the variance of the estimator.</p>
+<div class="theorem example" data-o006-id="O006-PSU-003-U0168" id="exm-varianceestimator">
+<p data-o006-id="O006-PSU-003-U0169"><span class="theorem-title"><strong>Example 2.10</strong></span> Consider the previous example where we have three potential estimators:</p>
+<p data-o006-id="O006-PSU-003-U0170"><span class="math display" data-o006-math-id="O006-PSU-003-M0156">\[
+\begin{align*}
+&amp;\hat{p}_1 = \frac{X_1}{10}\\
+&amp;\hat{p}_2 = \frac{X_1 + X_2 + X_3}{30}\\
+&amp;\hat{p}_3 = \hat{p}_2 + 0.1
+\end{align*}
+\]</span></p>
+<p data-o006-id="O006-PSU-003-U0171">where <span class="math inline" data-o006-math-id="O006-PSU-003-M0157">\(X_i \overset{iid}{\sim} \text{Bin}(10, p).\)</span> Recall from our previous work that <span class="math inline" data-o006-math-id="O006-PSU-003-M0158">\(\hat{p}_1\)</span> and <span class="math inline" data-o006-math-id="O006-PSU-003-M0159">\(\hat{p}_2\)</span> are unbiased estimators of <span class="math inline" data-o006-math-id="O006-PSU-003-M0160">\(\theta\)</span>, and <span class="math inline" data-o006-math-id="O006-PSU-003-M0161">\(\hat{p}_3\)</span> is a biased estimator. Find the variance of each estimator.</p>
+<section class="level4 card card-body bg-light ms-3 mb-3 pt-0" data-o006-id="O006-PSU-003-U0172" id="solution-4">
+<h4 class="anchored" data-anchor-id="solution-4" data-o006-id="O006-PSU-003-U0173">Solution</h4>
+<p data-o006-id="O006-PSU-003-U0174">To find the variance of the estimators, we should recall three rules from STAT 414: - For a Binomial random variable <span class="math inline" data-o006-math-id="O006-PSU-003-M0162">\(X\)</span>, <span class="math inline" data-o006-math-id="O006-PSU-003-M0163">\(\text{Var}(X) = np(1-p).\)</span> - <span class="math inline" data-o006-math-id="O006-PSU-003-M0164">\(\text{Var}(aX+b) = a^2 \text{Var}(X)\)</span> for a random variable <span class="math inline" data-o006-math-id="O006-PSU-003-M0165">\(X.\)</span> - If random variables <span class="math inline" data-o006-math-id="O006-PSU-003-M0166">\(X\)</span> and <span class="math inline" data-o006-math-id="O006-PSU-003-M0167">\(Y\)</span> are independent, then <span class="math inline" data-o006-math-id="O006-PSU-003-M0168">\(\text{Var}(X+Y) = \text{Var}(X) + \text{Var}(Y).\)</span></p>
+<p data-o006-id="O006-PSU-003-U0175">Now, let’s find the variance of <span class="math inline" data-o006-math-id="O006-PSU-003-M0169">\(\hat{p}_1\)</span>: <span class="math display" data-o006-math-id="O006-PSU-003-M0170">\[
+\begin{align*}
+\text{Var}(\hat{p}_1) &amp;= \text{Var}\left(\frac{X_1}{10}\right)\\ &amp;= \left(\frac{1}{10}\right)^2 \text{Var}(X_1)\\&amp; = \frac{10p(1-p)}{100} \\&amp;= \frac{p(1-p)}{10}
+\end{align*}
+\]</span></p>
+<p data-o006-id="O006-PSU-003-U0176">Next, find the variance of <span class="math inline" data-o006-math-id="O006-PSU-003-M0171">\(\hat{p}_2\)</span>: <span class="math display" data-o006-math-id="O006-PSU-003-M0172">\[
+\begin{align*}
+\text{Var}(\hat{p}_2) &amp;= \text{Var}\left(\frac{X_1 + X_2 + X_3}{30}\right)\\&amp; = \frac{1}{30^2} \text{Var}(X_1 + X_2 + X_3) \\
+&amp;= \frac{\text{Var}(X_1) + \text{Var}(X_2) + \text{Var}(X_3)}{30^2} \\&amp;= \frac{10p(1-p) + 10p(1-p) + 10p(1-p)}{30^2} \\
+&amp;= \frac{30p(1-p)}{30^2}= \frac{p(1-p)}{30}
+\end{align*}
+\]</span></p>
+<p data-o006-id="O006-PSU-003-U0177">Finally, find the variance of <span class="math inline" data-o006-math-id="O006-PSU-003-M0173">\(\hat{p}_3\)</span>: <span class="math display" data-o006-math-id="O006-PSU-003-M0174">\[
+\begin{align*}
+\text{Var}(\hat{p}_3) &amp;= \text{Var}(\hat{p}_2 + 0.1) = \text{Var}(\hat{p}_2) = \frac{p(1-p)}{30}
+\end{align*}
+\]</span></p>
+<p data-o006-id="O006-PSU-003-U0178">So, we found that both <span class="math inline" data-o006-math-id="O006-PSU-003-M0175">\(\hat{p}_1\)</span> and <span class="math inline" data-o006-math-id="O006-PSU-003-M0176">\(\hat{p}_2\)</span> are unbiased estimators. We found above that <span class="math inline" data-o006-math-id="O006-PSU-003-M0177">\(\text{Var}(\hat{p}_1)&gt;\text{Var}(\hat{p}_2.\)</span> Based on the two properties of estimators we learned so far, it seems like <span class="math inline" data-o006-math-id="O006-PSU-003-M0178">\(\hat{p}_2\)</span> is the better estimator.</p>
+</section>
+</div>
+<p data-o006-id="O006-PSU-003-U0179">In the example above, we chose an unbiased estimator with the smallest variance. Would we ever use an estimator that is biased? And if so, why?</p>
+<p data-o006-id="O006-PSU-003-U0180">It can be the case that we can greatly reduce the variance by introducing a small amount of bias. For example, consider two estimators, <span class="math inline" data-o006-math-id="O006-PSU-003-M0179">\(\hat{\theta}_1\)</span> and <span class="math inline" data-o006-math-id="O006-PSU-003-M0180">\(\hat{\theta}_2.\)</span> Consider the graph of their pdfs.</p>
+<div class="quarto-float quarto-figure quarto-figure-center anchored" data-o006-id="O006-PSU-003-U0181" id="fig-estimatorspdf">
+<figure class="quarto-float quarto-float-fig figure" data-o006-id="O006-PSU-003-U0182">
+<div aria-describedby="fig-estimatorspdf-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca" data-o006-id="O006-PSU-003-U0183">
+<div class="cell" data-lightbox="true" data-o006-id="O006-PSU-003-U0184">
+<div class="cell-output-display" data-o006-id="O006-PSU-003-U0185">
+<div data-o006-id="O006-PSU-003-U0186">
+<figure class="figure" data-o006-id="O006-PSU-003-U0187">
+<p data-o006-id="O006-PSU-003-U0188"><img alt="Graph of two estimators, theta_1 and theta_2 with different spread and centers." class="img-fluid figure-img" data-o006-asset-id="O006-PSU-003-A0002" data-o006-id="O006-PSU-003-U0189" src="Lesson02_files/figure-html/unnamed-chunk-1-1.png" style="width:70.0%"/></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" data-o006-id="O006-PSU-003-U0190" id="fig-estimatorspdf-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Fig 2.2
+</figcaption>
+</figure>
+</div>
+<p data-o006-id="O006-PSU-003-U0191">We can see the pdf of <span class="math inline" data-o006-math-id="O006-PSU-003-M0181">\(\hat{\theta}_1\)</span> is centered around the true value of <span class="math inline" data-o006-math-id="O006-PSU-003-M0182">\(\theta.\)</span> However, <span class="math inline" data-o006-math-id="O006-PSU-003-M0183">\(\hat{\theta}_1\)</span> has a larger variance. However, <span class="math inline" data-o006-math-id="O006-PSU-003-M0184">\(\hat{\theta}_2\)</span> is not centered around the true value but has considerably lower variance.</p>
+<div class="theorem example" data-o006-id="O006-PSU-003-U0192" id="exm-asymptompicallybias">
+<p data-o006-id="O006-PSU-003-U0193"><span class="theorem-title"><strong>Example 2.11</strong></span> Consider the previous example where we have a random sample of size <span class="math inline" data-o006-math-id="O006-PSU-003-M0185">\(n\)</span> from a Normal distribution with mean <span class="math inline" data-o006-math-id="O006-PSU-003-M0186">\(\mu\)</span> and variance <span class="math inline" data-o006-math-id="O006-PSU-003-M0187">\(\sigma^2.\)</span> We have shown that</p>
+<p data-o006-id="O006-PSU-003-U0194"><span class="math display" data-o006-math-id="O006-PSU-003-M0188">\[\begin{align*}
+    \hat{\sigma}^2_1=\frac{\sum_{i=1}^n (X_i-\bar{X})^2}{n}
+\end{align*}\]</span></p>
+<p data-o006-id="O006-PSU-003-U0195">is a biased estimator of <span class="math inline" data-o006-math-id="O006-PSU-003-M0189">\(\sigma^2.\)</span> We also found that</p>
+<p data-o006-id="O006-PSU-003-U0196"><span class="math display" data-o006-math-id="O006-PSU-003-M0190">\[\begin{align*}
+    \hat{\sigma^2}_2=\frac{\sum_{i=1}^n(X_i-\bar{X})^2}{n-1}
+\end{align*}\]</span></p>
+<p data-o006-id="O006-PSU-003-U0197">is an unbiased estimator. We found that:</p>
+<p data-o006-id="O006-PSU-003-U0198"><span class="math display" data-o006-math-id="O006-PSU-003-M0191">\[\begin{align*}
+    E(\hat{\sigma^2}_1)=\frac{n-1}{n}\sigma^2
+\end{align*}\]</span></p>
+<p data-o006-id="O006-PSU-003-U0199">However, as <span class="math inline" data-o006-math-id="O006-PSU-003-M0192">\(n\)</span> approaches infinity, the expected value approaches <span class="math inline" data-o006-math-id="O006-PSU-003-M0193">\(\sigma^2.\)</span> Therefore, <span class="math inline" data-o006-math-id="O006-PSU-003-M0194">\(\hat{\sigma}^2_1\)</span> is <strong>asymptotically unbiased</strong>. Therefore, it may be the case that as the sample size gets larger, the bias of the estimator will go to 0.</p>
+</div>
+<p data-o006-id="O006-PSU-003-U0200">Is there a measure that could help us to find a good balance between the bias of the estimator and also its variance? The answer is yes. One measure is the <strong>mean square error</strong> (MSE).</p>
+<div class="ms-3 theorem definition" data-o006-id="O006-PSU-003-U0201" id="def-mseptestimator">
+<p data-o006-id="O006-PSU-003-U0202"><span class="theorem-title"><strong>Def. 2.3 (Mean Square Error of a point estimator <span class="math inline" data-o006-math-id="O006-PSU-003-M0195">\(\hat{\theta}\)</span>)</strong></span> The <strong>mean square error</strong> of a point estimator <span class="math inline" data-o006-math-id="O006-PSU-003-M0196">\(\hat{\theta}\)</span> is defined as</p>
+<p data-o006-id="O006-PSU-003-U0203"><span class="math display" data-o006-math-id="O006-PSU-003-M0197">\[\begin{align*}
+        \text{MSE}(\hat{\theta})=E\left[(\hat{\theta}-\theta)^2\right]
+    \end{align*}\]</span></p>
+<p data-o006-id="O006-PSU-003-U0204">The mean square error of an estimator is the average of the square of the distance between the estimator and the true parameter, <span class="math inline" data-o006-math-id="O006-PSU-003-M0198">\(\theta.\)</span></p>
+</div>
+<p data-o006-id="O006-PSU-003-U0205">Based on the definition of MSE, it is obvious that a desirable estimator has the smallest mean square error.</p>
+<p data-o006-id="O006-PSU-003-U0206">The mean square error of <span class="math inline" data-o006-math-id="O006-PSU-003-M0199">\(\hat{\theta}\)</span>, is a function of both the bias and the variance of an estimator. It can be shown that</p>
+<p data-o006-id="O006-PSU-003-U0207"><span class="math display" data-o006-math-id="O006-PSU-003-M0200">\[\begin{align*}
+        \text{MSE}(\hat{\theta})=\text{Var}(\hat{\theta})-\left[\text{Bias}(\theta)\right]^2
+    \end{align*}\]</span></p>
+<p data-o006-id="O006-PSU-003-U0208">where <span class="math inline" data-o006-math-id="O006-PSU-003-M0201">\(\text{Bias}(\hat{\theta})\)</span> is the bias of <span class="math inline" data-o006-math-id="O006-PSU-003-M0202">\(\hat{\theta}.\)</span> You should convince yourself that the above relationship holds. It may be asked on an assignment.</p>
+<div class="theorem example" data-o006-id="O006-PSU-003-U0209" id="exm-mseofestimators">
+<p data-o006-id="O006-PSU-003-U0210"><span class="theorem-title"><strong>Example 2.12</strong></span> Consider our previous example with the following three estimators for the binomial parameter <span class="math inline" data-o006-math-id="O006-PSU-003-M0203">\(p\)</span>, with <span class="math inline" data-o006-math-id="O006-PSU-003-M0204">\(n=10.\)</span> The estimators were: <span class="math display" data-o006-math-id="O006-PSU-003-M0205">\[\begin{align*}
+    &amp; \hat{p}_1=\frac{X_1}{10}\\
+    &amp; \hat{p}_2=\frac{X_1+X_2+X_3}{30}\\
+    &amp; \hat{p}_3=\hat{p}_2+0.1
+\end{align*}\]</span> Find the MSE for each of the estimators.</p>
+<section class="level4 card card-body bg-light ms-3 mb-3 pt-0" data-o006-id="O006-PSU-003-U0211" id="solution-5">
+<h4 class="anchored" data-anchor-id="solution-5" data-o006-id="O006-PSU-003-U0212">Solution</h4>
+<p data-o006-id="O006-PSU-003-U0213">Previously, we found the variance and expected value for each estimator. It is summarized here for convenience.</p>
+<p data-o006-id="O006-PSU-003-U0214"><span class="math display" data-o006-math-id="O006-PSU-003-M0206">\[\begin{align*}
+    &amp; E(\hat{p}_1)=p, \qquad \text{Var}(\hat{p}_1)=\frac{p(1-p)}{10}\\
+    &amp; E(\hat{p}_2)=p, \qquad \text{Var}(\hat{p}_2)=\frac{p(1-p)}{30}\\
+    &amp; E(\hat{p}_3)=p+0.1, \qquad \text{Var}(\hat{p}_3)=\frac{p(1-p)}{30}\\
+\end{align*} \]</span></p>
+<p data-o006-id="O006-PSU-003-U0215">To find the mean square errors, we need to find the bias of each estimator.</p>
+<p data-o006-id="O006-PSU-003-U0216"><span class="math display" data-o006-math-id="O006-PSU-003-M0207">\[\begin{align*}
+    &amp; \text{Bias}(\hat{p}_1)=E(\hat{p}_1)-p=0\\
+    &amp; \text{Bias}(\hat{p}_2)=E(\hat{p}_2)-p=0\\
+    &amp; \text{Bias}(\hat{p}_3)=E(\hat{p}_3)-p=p+0.1-p=0.1\\
+\end{align*}\]</span></p>
+<p data-o006-id="O006-PSU-003-U0217">Therefore, the MSEs are:</p>
+<p data-o006-id="O006-PSU-003-U0218"><span class="math display" data-o006-math-id="O006-PSU-003-M0208">\[\begin{align*}
+    &amp; MSE(\hat{p}_1)=\text{Var}(\hat{p}_1)-\left[\text{Bias}(\hat{p}_1\right]^2=\frac{p(1-p)}{10}\\
+    &amp; MSE(\hat{p}_2)=\text{Var}(\hat{p}_2)-\left[\text{Bias}(\hat{p}_2\right]^2=\frac{p(1-p)}{30}\\
+    &amp; MSE(\hat{p}_3)=\text{Var}(\hat{p}_3)-\left[\text{Bias}(\hat{p}_3\right]^2=\frac{p(1-p)}{30}-0.1^2=\frac{p(1-p)}{30}-0.01\\
+\end{align*}\]</span></p>
+<p data-o006-id="O006-PSU-003-U0219">Therefore, the estimator with the smallest MSE is <span class="math inline" data-o006-math-id="O006-PSU-003-M0209">\(\hat{p}_2.\)</span></p>
+</section>
+</div>
+<p data-o006-id="O006-PSU-003-U0220">In the next lesson, we will discuss another desirable property of an estimator, sufficiency.</p>
+</section>
+</section>
+<section class="level2" data-number="2.3" data-o006-id="O006-PSU-003-U0221" id="summary">
+<h2 class="anchored" data-anchor-id="summary" data-number="2.3" data-o006-id="O006-PSU-003-U0222"><span class="header-section-number">2.3</span> Summary</h2>
+<p data-o006-id="O006-PSU-003-U0223">This lesson introduced the idea of using sample data to estimate unknown population parameters. We focused on <strong>point estimation</strong> and explored what makes an estimator desirable by examining <strong>bias</strong>, <strong>variance</strong>, and <strong>mean squared error (MSE)</strong>. Through examples and derivations, we learned how to evaluate and compare estimators using these properties. The lesson built a foundation for judging estimator quality in both theoretical and applied contexts.</p>
+<p data-o006-id="O006-PSU-003-U0224"><strong>Key Takeaways</strong></p>
+<ul data-o006-id="O006-PSU-003-U0225">
+<li data-o006-id="O006-PSU-003-U0226"><strong>Bias</strong> measures how far an estimator’s average is from the true parameter.</li>
+<li data-o006-id="O006-PSU-003-U0227"><strong>Variance</strong> captures the variability of an estimator across samples.</li>
+<li data-o006-id="O006-PSU-003-U0228"><strong>Mean Squared Error (MSE)</strong> combines bias and variance to assess overall accuracy.<br/>
+Comparing MSE helps decide which estimator is better in practice.</li>
+</ul>
+</section>
+</main>
+</body>
+</html>

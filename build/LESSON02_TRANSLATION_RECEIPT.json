@@ -1,0 +1,66 @@
+{
+  "bindings": {
+    "bytes": 132573,
+    "path": "backend/lesson02_translation_bindings.jsonl",
+    "sha256": "3c75bfc1cc9dc38213cf03d43c2b6b3e1ec106536a4e4ac1b04e836ef568c25f"
+  },
+  "boundary_whitespace_rule": "exact source-node leading/trailing whitespace wrapped around translated prose core",
+  "document": "Lesson02",
+  "document_id": "O006-PSU-003",
+  "locale": "id-ID",
+  "parts": [
+    {
+      "bytes": 9654,
+      "part": "a",
+      "path": "working/lesson02_translation_part_a.json",
+      "segments": 108,
+      "sha256": "d0a0afd0f4084fb4b12fcbbb2e122fcc9df412148313a21a7a0c64450d14d0ea"
+    },
+    {
+      "bytes": 6594,
+      "part": "b",
+      "path": "working/lesson02_translation_part_b.json",
+      "segments": 108,
+      "sha256": "152f296bd3f0ab80beb9c0bf4e6c4205d96c0a36769e10a9f423ae3c526fdbc4"
+    },
+    {
+      "bytes": 9371,
+      "part": "c",
+      "path": "working/lesson02_translation_part_c.json",
+      "segments": 108,
+      "sha256": "cebab20a88dd16b7718e6e9652a6f3cb807414a1f0d57bcf94ef3dda766dd8c8"
+    }
+  ],
+  "schema": "o006.stat415.lesson02-translation.v1",
+  "segment_count": 324,
+  "source_findings": {
+    "bytes": 4684,
+    "path": "working/lesson02_source_findings.md",
+    "sha256": "b3ab5a3aa17a2c47aff1b4177ff64f5c7222c34b08d47a2bbee5fd69ef8897c9"
+  },
+  "status": "complete",
+  "template": {
+    "bytes": 58537,
+    "path": "working/lesson02_segments.csv",
+    "sha256": "00e1e2a63b936c214ffd8ec6613268b0704d24b2552a8f44fe3b27b841edd7ec"
+  },
+  "terminology_inputs": [
+    {
+      "bytes": 3160,
+      "path": "00_control/TERMINOLOGY_GLOSSARY_ID_ID.csv",
+      "sha256": "6911989a604c656575245e84cf22765591ee7ba9da6b2f1a7d738fde85956c54"
+    },
+    {
+      "bytes": 2330,
+      "path": "working/lesson02_terminology_qa.md",
+      "sha256": "204743e2737e38a508c2205fa0075f1240e7572f2425f9935f5175555a7845ee"
+    }
+  ],
+  "terminology_rule": "component glossary plus the Lesson 02 Indonesian field-evidence decision",
+  "translation_csv": {
+    "bytes": 76070,
+    "path": "source/id-ID/lesson02_translation.csv",
+    "sha256": "26159d7d4beae3f16b83df0f51a7deb3afb5cd23fb5b1be1dd0056c527c3764a"
+  },
+  "translation_provenance": "OpenAI Codex gpt-5.6-sol, Ultra"
+}
