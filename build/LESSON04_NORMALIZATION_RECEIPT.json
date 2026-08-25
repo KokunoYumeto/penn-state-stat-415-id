@@ -1,0 +1,282 @@
+{
+  "asset_closure": {
+    "asset_freezes_required": 1,
+    "offline_reader_build_blocked_until_asset_freeze": true,
+    "reference_inventory_complete": true
+  },
+  "asset_inventory": [
+    {
+      "alt_texts": [
+        "Natural logarithm graph"
+      ],
+      "asset_id": "O006-PSU-005-A0001",
+      "occurrences": 1,
+      "source_ref": "assets/STAT-415-SEC-1-15.svg",
+      "source_url": "https://online.stat.psu.edu/stat415/assets/STAT-415-SEC-1-15.svg"
+    }
+  ],
+  "counts": {
+    "asset_occurrences": 1,
+    "assets": 1,
+    "catalogue_records": 998,
+    "code_nodes": 0,
+    "corollaries": 0,
+    "definitions": 3,
+    "examples": 16,
+    "figure_captions": 1,
+    "figures": 1,
+    "headings": 25,
+    "images": 1,
+    "links": 3,
+    "math_display": 88,
+    "math_inline": 201,
+    "math_nodes": 289,
+    "native_id_occurrences": 46,
+    "pre_nodes": 0,
+    "proofs": 0,
+    "sections": 24,
+    "solutions": 15,
+    "structural_units": 335,
+    "tables": 0,
+    "theorem_class_nodes": 19,
+    "theorems": 0,
+    "translation_segments": 372,
+    "unique_asset_sources": 1,
+    "unique_native_ids": 46
+  },
+  "document": {
+    "asset_count": 1,
+    "component_id": "Lesson04",
+    "document_id": "O006-PSU-005",
+    "duplicate_native_ids": [],
+    "entity_id": "O006-PSU-005",
+    "formula_count": 289,
+    "formula_sha256": "9db0a8df5d03e74d42c486f68b917c94d1dad8f40cff5e8898373a2c33227a7c",
+    "locale": "en-US",
+    "native_id_occurrences": 46,
+    "normalized_bytes": 75719,
+    "normalized_path": "source/normalized/en-US/Lesson04.html",
+    "normalized_sha256": "bdc5c1255d3660d212a39165a7f3384057cb80dc603826fcdc4316bf052cf737",
+    "ordinal": 5,
+    "record_type": "document",
+    "schema": "o006.stat415.source-catalogue.v1",
+    "segment_count": 372,
+    "source_bytes": 106614,
+    "source_path": "authority/upstream/stat415/Lesson04.html",
+    "source_sha256": "9fe5790e577c6ce0b808c92683aea45442187f80f74d540b20bd4514bdefc060",
+    "source_url": "https://online.stat.psu.edu/stat415/Lesson04",
+    "topology_sha256": "e88b8863c4655b8f65975f7eb8f4d3a82c3e1abf518e9be23b1027cfead7d505",
+    "unique_native_ids": 46,
+    "unit_count": 335
+  },
+  "duplicate_native_ids": [],
+  "outputs": {
+    "asset_inventory": {
+      "bytes": 1980,
+      "path": "working/lesson04_asset_inventory.json",
+      "sha256": "8ad7f9640a7d428e6de275ea3b83ad8b1a57802a1b2ac759fcca7ee1e9e5ccb0"
+    },
+    "catalogue": {
+      "bytes": 480633,
+      "path": "backend/lesson04_source_catalogue.jsonl",
+      "records": 998,
+      "sha256": "6317ec726dd03d91c929b4f66799359aa8c74af67fc4f4580b9ead1b73111e74"
+    },
+    "helper_script": {
+      "bytes": 35668,
+      "path": "scripts/normalize_lesson03.py",
+      "sha256": "0eeb260de05ebae694700cc2212966ee4ba19351f067bef49c095ec6fccd70e6"
+    },
+    "normalized": {
+      "bytes": 75719,
+      "path": "source/normalized/en-US/Lesson04.html",
+      "sha256": "bdc5c1255d3660d212a39165a7f3384057cb80dc603826fcdc4316bf052cf737"
+    },
+    "script": {
+      "bytes": 28119,
+      "path": "scripts/normalize_lesson04.py",
+      "sha256": "3412dfc96526a7b5bad133cb32ac5f0600baa8a94946128c7838e74135d42d20"
+    },
+    "segments": {
+      "bytes": 67200,
+      "path": "working/lesson04_segments.csv",
+      "rows": 372,
+      "sha256": "9e8798eb42a03ebfb06d8e3fe26cba57c87d5989bd405dc26d46f92404b38efe"
+    }
+  },
+  "parser": {
+    "beautifulsoup_version": "4.14.3",
+    "name": "beautifulsoup4/html.parser",
+    "source_decoding": "UTF-8 strict"
+  },
+  "preservation": {
+    "authority_mutated": false,
+    "dependency_census_preserved": true,
+    "formula_nodes_byte_preserved": true,
+    "formula_sha256": "9db0a8df5d03e74d42c486f68b917c94d1dad8f40cff5e8898373a2c33227a7c",
+    "image_sequence_preserved": true,
+    "link_sequence_preserved": true,
+    "main_selector": "main#quarto-document-content",
+    "native_anchor_sequence_preserved": true,
+    "topology_sha256": "e88b8863c4655b8f65975f7eb8f4d3a82c3e1abf518e9be23b1027cfead7d505"
+  },
+  "role_counts": {
+    "definition": 3,
+    "example": 16,
+    "figure": 1,
+    "figure-caption": 1,
+    "heading": 11,
+    "image": 1,
+    "link": 3,
+    "section": 9,
+    "solution": 30,
+    "structure": 260
+  },
+  "schema": "o006.stat415.lesson04-normalization.v1",
+  "source_defect_count": 21,
+  "source_defects": [
+    {
+      "defect_id": "L04-D001",
+      "evidence": "\\[\\begin{align*}\n    \\frac{d}{dp}L(P)=\\left[\\prod_{i=1}^n {10\\choose x_i}\\right]\\left(\\sum x_i\\right)p^{\\sum x_i-1}(1-p)^{10n-\\sum x_i}-\\left[\\prod_{i=1}^n {10\\choose x_i}\\right]p^{\\sum x_i}\\left(10n-\\sum x_i\\right)(1-p)^{10n-\\sum x_i-1}\n\\end{align*}\\]",
+      "kind": "parameter-case-mismatch",
+      "note": "The likelihood is L(p), but its derivative is labeled dL(P)/dp with an uppercase P."
+    },
+    {
+      "defect_id": "L04-D002",
+      "evidence": "\\[\\begin{align*}\n         \\ell(\\theta)=\\ln L(\\theta)=\\ln \\prod_{i=1}^n f(x_i|\\theta)=\\sum_{i=1}^n \\ln f(x_i\\theta)\n     \\end{align*}\\]",
+      "kind": "conditional-density-delimiter",
+      "note": "The final log-likelihood summand drops the conditioning bar: f(x_i theta) should be f(x_i|theta)."
+    },
+    {
+      "defect_id": "L04-D003",
+      "evidence": "\\[\\begin{align*} L(p)=\\prod_{i=1}^n \\frac{1}{\\Gamma(\\alpha)\\theta^\\alpha}x_i^{\\alpha-1}e^{-x_i/\\theta}=\\left(\\frac{1}{\\Gamma(\\alpha)\\theta^\\alpha}\\right)^n\\left(\\prod_{i=1}^n x_i\\right)^{\\alpha-1}e^{-\\frac{\\sum x_i}{\\theta}} \\end{align*}\\]",
+      "kind": "likelihood-parameter-mismatch",
+      "note": "This Gamma model varies theta, so the likelihood must be L(theta), not L(p)."
+    },
+    {
+      "defect_id": "L04-D004",
+      "evidence": "\\[\\begin{align*}\n         \\ell(\\theta)=-n\\ln (\\Gamma(\\alpha))-n\\alpha\\ln (\\theta)+(\\alpha-1)\\ln \\left(\\ln \\prod x_i\\right)-\\frac{\\sum x_i}{\\theta}\n     \\end{align*}\\]",
+      "kind": "gamma-loglikelihood-extra-logarithm",
+      "note": "Taking logs of (product x_i)^(alpha-1) gives (alpha-1) ln(product x_i), not (alpha-1) ln(ln(product x_i))."
+    },
+    {
+      "defect_id": "L04-D005",
+      "evidence": "Example 4.6 asks for an estimate of theta but immediately applies the Geometric MLE for p.",
+      "kind": "geometric-parameter-name",
+      "note": "The requested parameter should be p, consistently with the stated model and solution."
+    },
+    {
+      "defect_id": "L04-D006",
+      "evidence": "\\[\\begin{align*}\n    \\hat{\\theta}=\\frac{\\sum x_i}{n\\alpha}=\\frac{3.4+8.1+5.5}{3(3)}=\n\\end{align*}\\]",
+      "kind": "unfinished-numerical-estimate",
+      "note": "The worked estimate ends after an equals sign; the exact value is 17/9."
+    },
+    {
+      "defect_id": "L04-D007",
+      "evidence": "\\[\\begin{align*}\n    \\ell(\\lambda)=-n\\lambda +\\left(\\sum x_i\\right)\\ln \\lambda +\\ln \\left(\\prod x_i!\\right)\n\\end{align*}\\]",
+      "kind": "poisson-loglikelihood-sign",
+      "note": "The factorial product is in the likelihood denominator, so its logarithm carries a minus sign."
+    },
+    {
+      "defect_id": "L04-D008",
+      "evidence": {
+        "derivative": "\\[\\begin{align*}\n    \\frac{d}{da}\\ell(a)=-\\frac{n}{a}\n\\end{align*}\\]",
+        "source_claims": [
+          "setting -n/a=0 gives a-hat=infinity",
+          "the likelihood a^(-n) is monotonic increasing"
+        ]
+      },
+      "kind": "uniform-monotonicity-and-critical-point",
+      "note": "For a>0, d[-n ln a]/da=-n/a is strictly negative and never zero: a^(-n) is decreasing, and solving the score equation does not yield infinity."
+    },
+    {
+      "defect_id": "L04-D009",
+      "evidence": "\\[\\begin{align*}\n    \\mathbf{1}_{\\{y \\in \\{0,1\\}\\}}=\\begin{cases}\n    1 & \\text{ if $y=$ or $y=1$}\\\\\n    0 & \\text{otherwise}\n    \\end{cases}\n\\end{align*}\\]",
+      "kind": "bernoulli-support-value-omission",
+      "note": "The first support value is missing; the indicator case must read y=0 or y=1."
+    },
+    {
+      "defect_id": "L04-D010",
+      "evidence": "\\[\\begin{align*}\n    L(p)=\\prod_{i=1}^n p^{y_1}(1-p)^{1-y_1}\\mathbf{1}_{\\{y\\in \\{0, 1\\}\\}}=p^{\\sum y_i}(1-p)^{n-\\sum y_i}\\prod \\mathbf{1}_{\\{y\\in \\{0, 1\\}\\}}\n\\end{align*}\\]",
+      "kind": "bernoulli-product-index",
+      "note": "Each product factor must use y_i; repeating y_1 cannot produce the displayed sums over y_i."
+    },
+    {
+      "defect_id": "L04-D011",
+      "evidence": [
+        "\\[\\begin{align*}\n    \\frac{d}{dp}=\\frac{\\sum y_1}{p}-\\frac{n-\\sum y_i}{1-p}\n\\end{align*}\\]",
+        "\\[\\begin{align*}\n    & \\frac{\\sum y_1}{p}=\\frac{n-\\sum y_i}{1-p}, \\qquad \\Rightarrow \\sum y_i-p\\sum y_i=np-p\\sum y_i\\\\\n    & \\Rightarrow \\sum y_i=np, \\qquad \\Rightarrow \\hat{p}=\\frac{\\sum y_i}{n}\n\\end{align*}\\]"
+      ],
+      "kind": "bernoulli-score-label-and-index",
+      "note": "The score's left side omits ell(p), and both displayed numerators use sum y_1 where the subsequent algebra requires sum y_i."
+    },
+    {
+      "defect_id": "L04-D012",
+      "evidence": "\\[\\begin{align*}\n    L(a)=\\prod_{i=1}^n \\frac{1}{a}\\mathbf{1}_{x\\in (0, a)}=a^{-n}\\prod_{i=1}^n \\mathbf{1}_{x\\in (0, a)}\n\\end{align*}\\]",
+      "kind": "uniform-product-index",
+      "note": "The indicator inside the product must depend on x_i, not an unindexed x."
+    },
+    {
+      "defect_id": "L04-D013",
+      "evidence": [
+        "\\[\\begin{align*}\n    f(x)=\\frac{1}{a}\\times\\mathbf{1}_{x\\in (0, a)}\n\\end{align*}\\]",
+        "\\[\\begin{align*}\n    \\hat{a}=\\max(X_i)=Y_n\n\\end{align*}\\]"
+      ],
+      "kind": "uniform-support-endpoint-inconsistency",
+      "note": "With the source's strict support x in (0,a), setting a=max(x_i) makes the largest observation fall on an excluded endpoint. The support must include the right endpoint or the result must be described as a supremum rather than an attained MLE."
+    },
+    {
+      "defect_id": "L04-D014",
+      "evidence": [
+        "\\[\\begin{align*}\n    f(x)=\\frac{\\alpha m^\\alpha}{x^{\\alpha+1}}=\\frac{2m^2}{x^3}, \\qquad x\\ge m\n\\end{align*}\\]",
+        "\\[\\begin{align*}\n    L(m)=\\prod_{i=1}^n \\frac{2m^2}{x_i^3}\\mathbf{1}_{\\{x_i>m\\}}=\\frac{2^nm^{2n}}{\\prod x_i^3}\\prod \\mathbf{1}_{\\{x_i>m\\}}\n\\end{align*}\\]"
+      ],
+      "kind": "pareto-support-inequality",
+      "note": "The density states x>=m, but the likelihood switches to x_i>m. The strict indicator would be zero at the claimed estimate m=min(x_i)."
+    },
+    {
+      "defect_id": "L04-D015",
+      "evidence": "\\(\\hat{\\underline{\\theta}}=(\\hat{\\theta}_1, \\ldots, \\hat{\\theta_p})\\)",
+      "kind": "vector-component-subscript",
+      "note": "The final component should be written hat(theta)_p, not a hat over the subscripted expression theta_p."
+    },
+    {
+      "defect_id": "L04-D016",
+      "evidence": "\\[\\begin{align*}\n    L(\\underline{\\theta})=\\prod_{i=1}^n \\frac{1}{2b}e^{\\frac{|x_i-\\mu|}{b}}=(2b)^{-n}e^{-\\frac{\\sum |x_i-\\mu|}{b}}\n\\end{align*}\\]",
+      "kind": "laplace-likelihood-exponent-sign",
+      "note": "The first product drops the negative sign from the stated Laplace density, contradicting the final equality."
+    },
+    {
+      "defect_id": "L04-D017",
+      "evidence": "\\[\\begin{align*}\n    \\frac{d}{d\\mu}|x_i-\\mu|=\\begin{cases}\n        -1 & \\text{if }x_i\\ge \\mu\\\\\n        1 & \\text{if }x_i\\le \\mu\n    \\end{cases}\n\\end{align*}\\]",
+      "kind": "absolute-value-derivative-at-kink",
+      "note": "At x_i=mu both stated cases apply but assign -1 and +1; the derivative is undefined there and the median argument requires a subgradient/set-valued treatment."
+    },
+    {
+      "defect_id": "L04-D018",
+      "evidence": "\\[\\begin{align*}\n    \\hat{\\theta}=(\\hat{\\mu}=\\text{median}(x_1, \\ldots, x_n), \\hat{b}=\\frac{1}{n}\\sum_{i=1}^n |x_i-\\text{median}(x_1, \\ldots, x_n))\n\\end{align*}\\]",
+      "kind": "laplace-estimator-delimiter",
+      "note": "The final absolute-value expression lacks its closing vertical bar and has mismatched closing parentheses."
+    },
+    {
+      "defect_id": "L04-D019",
+      "evidence": "Example 4.16 defines (alpha,beta) but every likelihood and score formula uses theta as the scale parameter.",
+      "kind": "gamma-scale-parameter-name",
+      "note": "The scale parameter must be named consistently throughout the example."
+    },
+    {
+      "defect_id": "L04-D020",
+      "evidence": "\\[\\begin{align*}\n    & \\frac{\\ell(\\underline{\\theta})}{d\\theta}=-\\frac{n\\alpha}{\\theta}+\\frac{\\sum x_i}{\\theta^2}=\\frac{-n\\alpha\\theta+\\sum x_i}{\\theta^2}\\\\\n    & \\frac{d\\ell(\\underline{\\theta})}{d\\alpha}=-\\frac{n}{\\Gamma(\\alpha)}\\left(\\frac{d}{d\\alpha}\\Gamma(\\alpha)\\right)+\\sum \\ln x_i\n\\end{align*}\\]",
+      "kind": "gamma-score-derivative-numerator",
+      "note": "The theta score's left side is missing the differential d in its numerator."
+    },
+    {
+      "defect_id": "L04-D021",
+      "evidence": "\\[\\begin{align*}\n    & \\frac{\\ell(\\underline{\\theta})}{d\\theta}=-\\frac{n\\alpha}{\\theta}+\\frac{\\sum x_i}{\\theta^2}=\\frac{-n\\alpha\\theta+\\sum x_i}{\\theta^2}\\\\\n    & \\frac{d\\ell(\\underline{\\theta})}{d\\alpha}=-\\frac{n}{\\Gamma(\\alpha)}\\left(\\frac{d}{d\\alpha}\\Gamma(\\alpha)\\right)+\\sum \\ln x_i\n\\end{align*}\\]",
+      "kind": "gamma-alpha-score-omitted-term",
+      "note": "Differentiating -n alpha ln(theta) with respect to alpha contributes -n ln(theta), which is omitted."
+    }
+  ],
+  "source_rule": "semantic main only; no authority correction; formulas/code protected; stable unit, math, asset, and segment IDs additive",
+  "status": "normalized-source-ready-asset-freeze-required-before-reader-build"
+}

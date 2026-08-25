@@ -1,0 +1,116 @@
+{
+  "asset_inputs": [
+    {
+      "bytes": 2514,
+      "path": "working/lesson04_asset_rights_audit.json",
+      "sha256": "85f95e4cb3ceb9d1793942aeb12c68469ae569a8e9ab8450248c8c0a74a27290"
+    },
+    {
+      "bytes": 2028,
+      "path": "authority/LESSON04_ASSET_FREEZE_RECEIPT.json",
+      "sha256": "ec5f767481088413891c1308bda043a76236e9357e657c6ca7fdc33eb20449b9"
+    }
+  ],
+  "bindings": {
+    "bytes": 153101,
+    "path": "backend/lesson04_translation_bindings.jsonl",
+    "sha256": "de0a7a2ed367413e621fcb982dff4ef32ba1c10a51c23d0fade1b02e7379239e"
+  },
+  "boundary_whitespace_rule": "exact source-node leading/trailing whitespace wrapped around translated prose core, except explicitly registered punctuation and word-boundary repairs",
+  "document": "Lesson04",
+  "document_id": "O006-PSU-005",
+  "independent_math_audit": {
+    "bytes": 7782,
+    "path": "working/lesson04_math_audit.md",
+    "sha256": "2dc8a995e75051ec3ea3bc8a227823fa117915efebe1df657ef2104249070ab6"
+  },
+  "locale": "id-ID",
+  "parts": [
+    {
+      "bytes": 10812,
+      "notes": {
+        "bytes": 3356,
+        "path": "working/lesson04_translation_part_a_notes.md",
+        "sha256": "032136d6fb8b01f50c0b32115046babe882de74e455e6d7ef6d119b546add211"
+      },
+      "part": "a",
+      "path": "working/lesson04_translation_part_a.json",
+      "range": [
+        "O006-PSU-005-S0001",
+        "O006-PSU-005-S0124"
+      ],
+      "segments": 124,
+      "sha256": "16f344620f3f59fb4a9a7ce5926627dccddd68448cc6fe2570e56e76ce1d735c"
+    },
+    {
+      "bytes": 8988,
+      "notes": {
+        "bytes": 5291,
+        "path": "working/lesson04_translation_part_b_notes.md",
+        "sha256": "a045f5b857f687a7526d5a83d132356ac83c2f921f588b5e6c76be6ad79fafc9"
+      },
+      "part": "b",
+      "path": "working/lesson04_translation_part_b.json",
+      "range": [
+        "O006-PSU-005-S0125",
+        "O006-PSU-005-S0248"
+      ],
+      "segments": 124,
+      "sha256": "92e55d1c86d3e8ee7d7c77932b948abdd0cca8852c3f2217601f967ef9bee8a7"
+    },
+    {
+      "bytes": 10448,
+      "notes": {
+        "bytes": 4753,
+        "path": "working/lesson04_translation_part_c_notes.md",
+        "sha256": "aa0f393de22365a1727ef04df128470045bb8e14a1442128b48730d133689c54"
+      },
+      "part": "c",
+      "path": "working/lesson04_translation_part_c.json",
+      "range": [
+        "O006-PSU-005-S0249",
+        "O006-PSU-005-S0372"
+      ],
+      "segments": 124,
+      "sha256": "0523d41ea5abb3a364dd08bdfea3bc5207d14c738fa01621146b2a26d180c4d1"
+    }
+  ],
+  "punctuation_boundary_exceptions": [],
+  "schema": "o006.stat415.lesson04-translation.v1",
+  "segment_count": 372,
+  "source_findings": {
+    "bytes": 14278,
+    "path": "working/lesson04_source_findings.md",
+    "sha256": "ddc79a36c39e60c3c46a23ba3479a28ca72b96f55c95d1b0b8a5141a44f24662"
+  },
+  "status": "complete",
+  "template": {
+    "bytes": 67200,
+    "path": "working/lesson04_segments.csv",
+    "sha256": "9e8798eb42a03ebfb06d8e3fe26cba57c87d5989bd405dc26d46f92404b38efe"
+  },
+  "terminology_inputs": [
+    {
+      "bytes": 5952,
+      "path": "00_control/TERMINOLOGY_GLOSSARY_ID_ID.csv",
+      "rows": 64,
+      "scope": "exact byte prefix used for Lesson04; later sequential glossary rows are additive",
+      "sha256": "3b421e17f0810ac614c9cd18e9eb14d74601f5665e52abf138ac773e3626afb1"
+    },
+    {
+      "bytes": 4985,
+      "path": "working/lesson04_terminology_qa.md",
+      "sha256": "7d6327dd71a7016ecefeb7146497921566298c9ddb512d4c2a1556f21cc87081"
+    }
+  ],
+  "terminology_rule": "component glossary plus the Lesson 04 continuity and precision decision",
+  "translation_csv": {
+    "bytes": 88417,
+    "path": "source/id-ID/lesson04_translation.csv",
+    "sha256": "24c086bb3509a870a0410baa1407a5116a93aae5074e0ea95a7c66eb2f09d8aa"
+  },
+  "translation_provenance": "OpenAI Codex gpt-5.6-sol, Ultra",
+  "word_boundary_leading_space_exceptions": [
+    "O006-PSU-005-S0088"
+  ]
+}

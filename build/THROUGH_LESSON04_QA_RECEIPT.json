@@ -1,0 +1,112 @@
+{
+  "asset": {
+    "authority": {
+      "bytes": 2259,
+      "path": "authority/assets/stat415/lesson04/STAT-415-SEC-1-15.svg",
+      "sha256": "5c6f266e5a56ef3aa37bed6a8af263e64cd235691100b38d7cdf3475812d268c"
+    },
+    "images": 1,
+    "lightbox_links": 1,
+    "reader": {
+      "bytes": 2259,
+      "path": "build/html-id/assets/lesson04/STAT-415-SEC-1-15.svg",
+      "sha256": "190a9508422964804260315513eeaae1bc8bce4af5be40d617d1020c9b26e595"
+    }
+  },
+  "build_receipt": {
+    "bytes": 4481,
+    "path": "build/THROUGH_LESSON04_BUILD_RECEIPT.json",
+    "sha256": "b465a0b0a564e9712b3fb363b39e3030cda3dbc9b4e8378810c786aba9db1585"
+  },
+  "checks": [
+    "exact-372-segment-source-target-binding-replay",
+    "natural-id-ID-and-glossary-continuity",
+    "exact-335-unit-289-math-Lesson04-topology",
+    "exact-81-correction-registry-with-35-Lesson04-findings",
+    "exact-34-changed-math-node-registry",
+    "offline-link-asset-rights-privacy-and-provenance-closure",
+    "responsive-reader-css-on-all-six-instructional-routes",
+    "deterministic-34-file-reader-replay"
+  ],
+  "coverage": {
+    "complete_documents": 6,
+    "corpus_documents": 14,
+    "next_document": "Lesson05"
+  },
+  "documents_backend": {
+    "bytes": 4031,
+    "path": "backend/through_lesson04_documents.jsonl",
+    "sha256": "471fdea5cef79bcc34c375ffcf4e9a4de9406833f92c3511f1d5bc58bcb1a84e"
+  },
+  "reader": {
+    "bytes": 2887908,
+    "files": 34,
+    "manifest": {
+      "bytes": 3360,
+      "path": "build/THROUGH_LESSON04_MANIFEST.csv",
+      "sha256": "410857e1bef10513f23b953fa51868110a724dab4ec4c54760da7e09cdc17d6a"
+    },
+    "math_nodes": 1438,
+    "stable_units": 1732
+  },
+  "schema": "o006.stat415.through-lesson04-qa.v1",
+  "status": "passed",
+  "structure_math_and_corrections": {
+    "changed_math_nodes": 34,
+    "correction_backend": {
+      "bytes": 68268,
+      "path": "backend/through_lesson04_corrections.jsonl",
+      "sha256": "de834cabd9dccf929d276ad5522e21c6374b88326b446af4f444db876c1bd647"
+    },
+    "corrections": 81,
+    "historical_prefix": 46,
+    "lesson04_corrections": 35
+  },
+  "translation": {
+    "bindings": 372,
+    "bindings_file": {
+      "bytes": 153101,
+      "path": "backend/lesson04_translation_bindings.jsonl",
+      "sha256": "de0a7a2ed367413e621fcb982dff4ef32ba1c10a51c23d0fade1b02e7379239e"
+    },
+    "forbidden_surfaces_absent": [
+      "maximum likelihood estimator",
+      "maximum likelihood estimate",
+      "log-likelihood function",
+      "indicator function",
+      "indication function",
+      "joint probability distribution",
+      "definition og",
+      "0ne parameter",
+      "the the",
+      "suppose we",
+      "find the mle",
+      "the likelihood",
+      "setting the derivative",
+      "is the median"
+    ],
+    "identical_allowed": [
+      "O006-PSU-005-S0004",
+      "O006-PSU-005-S0005"
+    ],
+    "required_terms": [
+      "fungsi kemungkinan",
+      "fungsi log-kemungkinan",
+      "penduga kemungkinan maksimum",
+      "nilai dugaan kemungkinan maksimum",
+      "fungsi indikator",
+      "himpunan dukungan",
+      "model berparameter tunggal",
+      "model multiparameter",
+      "statistik urutan",
+      "subgradien",
+      "supremum"
+    ],
+    "segments": 372,
+    "translation": {
+      "bytes": 88417,
+      "path": "source/id-ID/lesson04_translation.csv",
+      "sha256": "24c086bb3509a870a0410baa1407a5116a93aae5074e0ea95a7c66eb2f09d8aa"
+    }
+  }
+}

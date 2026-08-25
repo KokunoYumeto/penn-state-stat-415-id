@@ -22,7 +22,7 @@ import publish_zenodo_through_lesson01 as engine
 
 
 ROOT = Path(__file__).resolve().parents[1]
-TOKEN_FILE = Path(r"C:\Users\Floris\Documents\Obsidian notes\New zenodo token.md")
+TOKEN_FILE = Path.home() / "Documents" / "Obsidian notes" / "New zenodo token.md"
 RELEASE = ROOT / "release"
 PACKAGE_RECEIPT = ROOT / "build" / "THROUGH_LESSON03_PACKAGE_RECEIPT.json"
 DEFAULT_RECEIPT = ROOT / "00_control" / "ZENODO_PUBLICATION_RECEIPT_2026-08-25_THROUGH_LESSON03.json"

@@ -56,3 +56,30 @@ O006-TERM-0054,sample moment,momen sampel,sample analogue of a theoretical momen
 O006-TERM-0055,empirical distribution,distribusi empiris,standard statistical term
 O006-TERM-0056,gamma function,fungsi gamma,special function Gamma
 O006-TERM-0057,likelihood function,fungsi kemungkinan,retain likelihood parenthetically on first use where useful
+O006-TERM-0058,maximum likelihood estimator,penduga kemungkinan maksimum (MLE),random statistic; retain MLE to match source notation and distinguish it from the realized estimate
+O006-TERM-0059,maximum likelihood estimate,nilai dugaan kemungkinan maksimum,realized observed value; do not collapse it into the estimator
+O006-TERM-0060,log-likelihood function,fungsi log-kemungkinan,attested Indonesian field form; unhyphenated fungsi log kemungkinan is a documented variant
+O006-TERM-0061,indicator function,fungsi indikator,event indicator; preserve the bold-one notation and event subscript
+O006-TERM-0062,parameter-dependent support,himpunan dukungan yang bergantung pada parameter,precise replacement for the source's imprecise parameter-in-the-support wording; do not use parameter dukungan
+O006-TERM-0063,single-parameter model,model berparameter tunggal,continue the wording already used in Lesson 02; model satu parameter is an acceptable explanatory variant
+O006-TERM-0064,multiparameter model,model multiparameter,means more than one unknown parameter; use model dengan lebih dari satu parameter in explanatory prose and avoid berparameter ganda when p is unrestricted
+O006-TERM-0065,numerical optimization,optimisasi numerik,formal computational term; optimasi numerik is a documented variant
+O006-TERM-0066,grid search,pencarian grid,attested Indonesian technical usage; retain grid search parenthetically on first use
+O006-TERM-0067,grid-search approximation,hampiran berbasis pencarian grid,a maximizer over a finite grid is not automatically the exact MLE
+O006-TERM-0068,Newton–Raphson method,metode Newton–Raphson,root-finding method applied here to the likelihood score
+O006-TERM-0069,score function,fungsi skor,derivative of the log-likelihood; do not confuse with an assessment score
+O006-TERM-0070,root finding,pencarian akar,numerical solution of h(theta)=0
+O006-TERM-0071,negative log-likelihood,negatif fungsi log-kemungkinan (NLL),means minus the log-likelihood; not a likelihood that is negative
+O006-TERM-0072,objective function,fungsi objektif,function minimized or maximized by an optimizer
+O006-TERM-0073,starting value,nilai awal,initial numerical guess; not a domain constraint
+O006-TERM-0074,iteration,iterasi,one algorithmic update; distinguish from a function evaluation
+O006-TERM-0075,function evaluation,evaluasi fungsi,one call to the objective or derivative; not an iteration count
+O006-TERM-0076,convergence criterion,kriteria konvergensi,algorithmic stopping condition; not proof of a global optimum
+O006-TERM-0077,rate parameter,parameter laju,for the exponential model lambda is reciprocal to the mean or scale
+O006-TERM-0078,scale parameter,parameter skala,for the exponential mean parameterization theta equals the scale and 1 over the rate
+O006-TERM-0079,standard deviation,simpangan baku,do not confuse with standard error or galat baku
+O006-TERM-0080,scalar,skalar,single numerical object in mathematical or R context
+O006-TERM-0081,vector,vektor,ordered one-dimensional object; preserve executable R identifiers
+O006-TERM-0082,data frame,kerangka data (data frame),reader term; preserve data.frame as the executable R constructor
+O006-TERM-0083,quantile,kuantil,distribution quantile; preserve qXXX R function names
+O006-TERM-0084,summary statistics,statistik ringkasan,descriptive summaries such as minimum median mean and maximum

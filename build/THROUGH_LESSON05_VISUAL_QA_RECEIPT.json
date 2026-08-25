@@ -1,0 +1,69 @@
+{
+  "browser_surface": "Codex in-app browser",
+  "coverage": "landing/index plus complete Lesson00, Lesson01, Lesson02, Lesson03, Lesson04, and Lesson05",
+  "date": "2026-08-25",
+  "desktop": {
+    "console_errors_or_warnings": 0,
+    "page_client_width_css_px": 1265,
+    "routes": {
+      "Lesson00": {"broken_images": 0, "loaded_images": 0, "navigation_horizontal_overflow": false, "page_horizontal_overflow": false, "rendered_math_containers": 331, "source_math_nodes": 331},
+      "Lesson01": {"broken_images": 0, "loaded_images": 5, "navigation_horizontal_overflow": false, "page_horizontal_overflow": false, "rendered_math_containers": 169, "source_math_nodes": 169},
+      "Lesson02": {"broken_images": 0, "loaded_images": 2, "navigation_horizontal_overflow": false, "page_horizontal_overflow": false, "rendered_math_containers": 209, "source_math_nodes": 209},
+      "Lesson03": {"broken_images": 0, "loaded_images": 0, "navigation_horizontal_overflow": false, "page_horizontal_overflow": false, "rendered_math_containers": 440, "source_math_nodes": 440},
+      "Lesson04": {"broken_images": 0, "loaded_images": 1, "navigation_horizontal_overflow": false, "page_horizontal_overflow": false, "rendered_math_containers": 289, "source_math_nodes": 289},
+      "Lesson05": {"broken_images": 0, "loaded_images": 14, "navigation_horizontal_overflow": false, "page_horizontal_overflow": false, "rendered_math_containers": 108, "source_math_nodes": 108},
+      "index": {"broken_images": 0, "course_card_images": 13, "loaded_images": 13, "loaded_images_after_bounded_lazy_scroll": 13, "navigation_horizontal_overflow": false, "page_horizontal_overflow": false, "rendered_math_containers": 0, "source_math_nodes": 0},
+      "licenses": {"broken_images": 0, "loaded_images": 0, "navigation_horizontal_overflow": false, "page_horizontal_overflow": false, "rendered_math_containers": 0, "source_math_nodes": 0}
+    },
+    "viewport_css_px": {"height": 720, "width": 1280}
+  },
+  "evidence": {
+    "build_receipt": {"bytes": 14136, "sha256": "afe2b51786792ecfc88e556c9a5dd26e1ff45524f45799a64f1f694c77e322a0"},
+    "lesson04_translation_receipt": {"bytes": 3925, "sha256": "f3204eaa3af7ab8deaffc577129710677516bfb3f64fb8d18ca49551b197aa85"},
+    "lesson05_translation_receipt": {"bytes": 3730, "sha256": "56ce80c909c360a90e9cbf7b410480cf74e875093e5ada5d12333372c48d6506"},
+    "manifest": {"bytes": 5108, "sha256": "fb600bfedb1792d8b1c9ba8d72d3e5ef6bf94e7a9744a387e15b1d5a7b5f8e6f"},
+    "qa_receipt": {"bytes": 3703, "sha256": "462b7c15f3d506d5028ba2c2c4737dc2bba701bdb91acb0b967620f23c3b3f68"},
+    "reader_css": {"bytes": 7353, "path": "assets/reader-7of14.css", "sha256": "cb2364225b333e1f0284265466724b47b933b98df84532fc0aa2e8a3130425f8"},
+    "target_lesson04": {"bytes": 81207, "sha256": "e3fe6dfb8d3cdb5bb5c7f6f9ba53398279b93655f30917d53247326d7fb1fd54"},
+    "target_lesson05": {"bytes": 195351, "sha256": "254cc78ca7b633c15356c90ebb37d646d39a22acffd52fd965f07563e9722308"}
+  },
+  "locale": "id-ID",
+  "mobile": {
+    "console_errors_or_warnings": 0,
+    "page_client_width_css_px": 375,
+    "routes": {
+      "Lesson00": {"broken_images": 0, "navigation_horizontal_overflow": false, "page_horizontal_overflow": false, "rendered_math_containers": 331, "source_math_nodes": 331},
+      "Lesson01": {"broken_images": 0, "loaded_images": 5, "navigation_horizontal_overflow": false, "page_horizontal_overflow": false, "rendered_math_containers": 169, "source_math_nodes": 169},
+      "Lesson02": {"broken_images": 0, "loaded_images": 2, "navigation_horizontal_overflow": false, "page_horizontal_overflow": false, "rendered_math_containers": 209, "source_math_nodes": 209},
+      "Lesson03": {"broken_images": 0, "navigation_horizontal_overflow": false, "page_horizontal_overflow": false, "rendered_math_containers": 440, "source_math_nodes": 440},
+      "Lesson04": {"broken_images": 0, "loaded_images": 1, "navigation_horizontal_overflow": false, "page_horizontal_overflow": false, "rendered_math_containers": 289, "source_math_nodes": 289},
+      "Lesson05": {"broken_images": 0, "internal_scroll_code_and_output_blocks": 32, "loaded_images": 14, "navigation_horizontal_overflow": false, "page_horizontal_overflow": false, "rendered_math_containers": 108, "source_math_nodes": 108},
+      "index": {"broken_images": 0, "course_card_images": 13, "loaded_images_after_bounded_lazy_scroll": 13, "navigation_horizontal_overflow": false, "page_horizontal_overflow": false, "rendered_math_containers": 0, "source_math_nodes": 0},
+      "licenses": {"broken_images": 0, "navigation_horizontal_overflow": false, "page_horizontal_overflow": false, "rendered_math_containers": 0, "source_math_nodes": 0}
+    },
+    "viewport_css_px": {"height": 844, "width": 390}
+  },
+  "observations": [
+    "All eight reader routes fill the available centered content width and have no page-level or navigation horizontal overflow at either tested viewport.",
+    "All 1,546 source mathematics nodes render as 1,546 MathJax SVG containers across Lessons 00–05 at desktop and mobile widths.",
+    "The initially missing MathJax boldsymbol autoload dependency was frozen from MathJax 3.1.2, rebuilt into the offline reader, and verified with empty browser warning/error logs.",
+    "All 35 substantive images load, including all thirteen lazily loaded course cards after bounded scrolling and the seeded Indonesian exponential-simulation histogram.",
+    "Lesson 05 contains 176 reflowed code or output blocks; at 390 by 844 CSS pixels, the 32 long blocks scroll inside their own full-width containers without producing page-wide overflow.",
+    "Both unlicensed external video frames are absent and replaced by complete static Indonesian explanations; all 97 inert copy controls have localized titles and remain hidden because no copy runtime is bundled.",
+    "The grid approximation versus analytic MLE, Newton iteration, exponential parameter domain, optimizer-warning, bounded-optimization, and Normal variance repairs were visually inspected in rendered context.",
+    "Fresh warning/error console logs were empty after the complete desktop and mobile route passes. No audio surface is present or required."
+  ],
+  "provenance": "OpenAI Codex gpt-5.6-sol, Ultra",
+  "routes": [
+    "http://127.0.0.1:39415/index.html",
+    "http://127.0.0.1:39415/Lesson00.html",
+    "http://127.0.0.1:39415/Lesson01.html",
+    "http://127.0.0.1:39415/Lesson02.html",
+    "http://127.0.0.1:39415/Lesson03.html",
+    "http://127.0.0.1:39415/Lesson04.html",
+    "http://127.0.0.1:39415/Lesson05.html",
+    "http://127.0.0.1:39415/licenses/"
+  ],
+  "schema": "o006.stat415.through-lesson05-visual-qa.v1",
+  "status": "pass"
+}

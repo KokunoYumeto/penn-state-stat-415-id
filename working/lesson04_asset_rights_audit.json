@@ -1,0 +1,68 @@
+{
+  "asset": {
+    "alt_text": "Natural logarithm graph",
+    "asset_id": "O006-PSU-005-A0001",
+    "bytes": 2259,
+    "local_path": "authority/assets/stat415/lesson04/STAT-415-SEC-1-15.svg",
+    "media_type": "image/svg+xml",
+    "official_url": "https://online.stat.psu.edu/stat415/assets/STAT-415-SEC-1-15.svg",
+    "sha256": "5c6f266e5a56ef3aa37bed6a8af263e64cd235691100b38d7cdf3475812d268c",
+    "source_reference": "assets/STAT-415-SEC-1-15.svg",
+    "validation": {
+      "element_count": 30,
+      "embedded_or_external_resources": false,
+      "hrefs": [],
+      "intrinsic_height": 318.36,
+      "intrinsic_width": 442.19,
+      "registered_source_defect": {
+        "defect_id": "L04-D022",
+        "description": "The second horizontal-coordinate label repeats x_1; its position and the paired f(x_2) label prove that it should be x_2.",
+        "target_only_repair": "Change only the second coordinate subscript from 1 to 2 in the derivative reader asset."
+      },
+      "root": "svg",
+      "script_or_foreign_object": false,
+      "viewBox": "0 0 442.19 318.36",
+      "visible_text_sequence": [
+        "f(x",
+        "2",
+        ")",
+        "f(x",
+        "1",
+        ")",
+        "x",
+        "1",
+        "x",
+        "1",
+        "y = ln (x)"
+      ],
+      "well_formed_xml": true
+    }
+  },
+  "component_id": "Lesson04",
+  "document_id": "O006-PSU-005",
+  "retrieval": {
+    "content_length": 2259,
+    "content_type": "image/svg+xml",
+    "etag": "\"8d3-61b406befd2c0\"",
+    "http_status": 200,
+    "last_modified": "Wed, 19 Jun 2024 16:09:23 GMT",
+    "retrieved_utc": "2026-08-25T00:37:34Z",
+    "url": "https://online.stat.psu.edu/stat415/assets/STAT-415-SEC-1-15.svg"
+  },
+  "rights": {
+    "blocking_unresolved": [],
+    "disposition": "freeze and redistribute with the Lesson 04 page attribution/change notice; keep the authority asset byte-identical and disclose the derivative label repair",
+    "embedded_rights_or_creator_metadata": false,
+    "license_url": "https://creativecommons.org/licenses/by-nc/4.0/",
+    "page_license": "CC BY-NC 4.0",
+    "per_asset_exception_found": false
+  },
+  "schema": "o006.stat415.lesson04-asset-rights-audit.v1",
+  "source": {
+    "bytes": 106614,
+    "path": "authority/upstream/stat415/Lesson04.html",
+    "sha256": "9fe5790e577c6ce0b808c92683aea45442187f80f74d540b20bd4514bdefc060",
+    "url": "https://online.stat.psu.edu/stat415/Lesson04"
+  },
+  "status": "closed-for-offline-derivative-with-one-registered-target-only-label-repair"
+}

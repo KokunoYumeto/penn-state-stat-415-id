@@ -1,7 +1,7 @@
 {
   "component": "MathJax",
   "distribution": "official npm mathjax package served by jsDelivr",
-  "file_count": 5,
+  "file_count": 6,
   "files": [
     {
       "bytes": 1704911,
@@ -42,15 +42,23 @@
       "relative_path": "input/tex/extensions/cancel.js",
       "sha256": "6b5ede35a63fb92d69e0648755746867efdbaebbf452506ebd878c33568aadf0",
       "url": "https://cdn.jsdelivr.net/npm/mathjax@3.1.2/es5/input/tex/extensions/cancel.js"
+    },
+    {
+      "bytes": 4709,
+      "component": "MathJax 3.1.2",
+      "license": "Apache-2.0",
+      "relative_path": "input/tex/extensions/boldsymbol.js",
+      "sha256": "716cf8735d00abfb1627f8adbbf4aeb915ac9b5c55d47aeaf276e73dac6a2aa1",
+      "url": "https://cdn.jsdelivr.net/npm/mathjax@3.1.2/es5/input/tex/extensions/boldsymbol.js"
     }
   ],
   "license": "Apache-2.0",
   "manifest": {
-    "bytes": 987,
+    "bytes": 1199,
     "path": "authority/runtime/MathJax-3.1.2/URL_MANIFEST.csv",
-    "sha256": "ea74a936651bd0f0fce085bf6d9276f6c8bb1e18e1a4d547114fa014ac44270a"
+    "sha256": "4f9c8b167eedf6e12227274a9c4e93fe5c90a5504e3ef692113c9d6c6ced400c"
   },
   "schema": "o006.stat415.mathjax-freeze.v1",
-  "total_bytes": 1732561,
+  "total_bytes": 1737270,
   "version": "3.1.2"
 }

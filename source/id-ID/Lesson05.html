@@ -1,0 +1,1356 @@
+<!doctype html>
+<html lang="id-ID">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>5 Pendugaan Kemungkinan Maksimum (MLE) (Bagian II)</title>
+<meta name="source-url" content="https://online.stat.psu.edu/stat415/Lesson05">
+<meta name="translation-provenance" content="OpenAI Codex gpt-5.6-sol, Ultra">
+<meta name="edition-status" content="partial: 7 of 14 documents complete; landing and Lessons 00–05">
+<link rel="license" href="https://creativecommons.org/licenses/by-nc/4.0/">
+<link rel="stylesheet" href="assets/reader-7of14.css">
+<script defer src="assets/MathJax/tex-svg.js"></script>
+</head>
+<body>
+<a class="skip-link" href="#quarto-document-content">Lewati ke isi utama</a>
+<header class="site-header"><div class="site-header__inner"><div><p class="site-title">STAT 415 — Pengantar Statistika Matematis</p><p class="site-subtitle">Rekonstruksi dan terjemahan Bahasa Indonesia · O006/C140</p></div><nav class="site-nav" aria-label="Navigasi utama"><a href="index.html">Daftar pelajaran</a><a href="Lesson00.html">Pelajaran 00</a><a href="Lesson01.html">Pelajaran 01</a><a href="Lesson02.html">Pelajaran 02</a><a href="Lesson03.html">Pelajaran 03</a><a href="Lesson04.html">Pelajaran 04</a><a href="Lesson05.html">Pelajaran 05</a><a href="licenses/index.html">Lisensi</a></nav></div></header>
+<div class="page-shell"><aside class="edition-note" aria-label="Status edisi"><strong>Edisi Bahasa Indonesia — 7 dari 14 dokumen.</strong> Laman utama serta Pelajaran 00–05 telah diterjemahkan sepenuhnya. Pelajaran 06–12 masih menuju sumber resmi berbahasa Inggris sampai unit berikutnya selesai. <a href="https://online.stat.psu.edu/stat415/Lesson05">Sumber resmi halaman ini</a>. <a href="licenses/index.html">Atribusi, perubahan, dan lisensi</a>.</aside><main class="content" data-component-id="Lesson05" data-document-id="O006-PSU-006" data-source-url="https://online.stat.psu.edu/stat415/Lesson05" id="quarto-document-content">
+<header class="quarto-title-block default" data-o006-id="O006-PSU-006-U0001" id="title-block-header"><nav aria-label="Jejak navigasi" class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" data-o006-id="O006-PSU-006-U0002"><ol class="breadcrumb" data-o006-id="O006-PSU-006-U0003"><li class="breadcrumb-item" data-o006-id="O006-PSU-006-U0004"><a data-o006-id="O006-PSU-006-U0005" href="index.html#lessons">Pelajaran</a></li><li class="breadcrumb-item" data-o006-id="O006-PSU-006-U0006"><a data-o006-id="O006-PSU-006-U0007" href="Lesson05.html"><span class="chapter-number">5</span>  <span class="chapter-title">Pendugaan Kemungkinan Maksimum (MLE) (Bagian II)</span></a></li></ol></nav>
+<div class="quarto-title" data-o006-id="O006-PSU-006-U0008">
+<h1 class="title" data-o006-id="O006-PSU-006-U0009"><span class="chapter-number">5</span>  <span class="chapter-title">Pendugaan Kemungkinan Maksimum (MLE) (Bagian II)</span></h1>
+<div class="quarto-categories" data-o006-id="O006-PSU-006-U0010">
+<div class="quarto-category" data-o006-id="O006-PSU-006-U0011">Dasar-dasar R</div>
+<div class="quarto-category" data-o006-id="O006-PSU-006-U0012">Vektor dan Kerangka Data (Data Frame)</div>
+<div class="quarto-category" data-o006-id="O006-PSU-006-U0013">Statistik Ringkasan dan Grafik</div>
+<div class="quarto-category" data-o006-id="O006-PSU-006-U0014">Distribusi Statistik dalam R</div>
+<div class="quarto-category" data-o006-id="O006-PSU-006-U0015">Pencarian Grid</div>
+<div class="quarto-category" data-o006-id="O006-PSU-006-U0016">Metode Newton–Raphson</div>
+<div class="quarto-category" data-o006-id="O006-PSU-006-U0017">Optimisasi Numerik</div>
+</div>
+</div>
+<div class="quarto-title-meta" data-o006-id="O006-PSU-006-U0018">
+</div>
+</header>
+<section class="level2 unnumbered unlisted" data-o006-id="O006-PSU-006-U0019" id="overview">
+<h2 class="unnumbered unlisted anchored" data-anchor-id="overview" data-o006-id="O006-PSU-006-U0020">Ikhtisar</h2>
+<p data-o006-id="O006-PSU-006-U0021">Pelajaran ini memperdalam pemahaman Anda tentang pendugaan kemungkinan maksimum (MLE) dengan berfokus pada penerapan praktisnya, khususnya melalui metode numerik dalam R. Anda akan mempelajari cara menghitung MLE untuk model berparameter tunggal dan model multiparameter menggunakan teknik seperti pencarian grid dan algoritma Newton–Raphson, dengan penekanan pada fungsi optim dalam R. Selain itu, pelajaran ini memperkenalkan keterampilan pemrograman R yang penting, termasuk operasi dasar, manipulasi vektor dan kerangka data (data frame), statistik ringkasan, pembuatan grafik, serta penggunaan distribusi statistik seperti distribusi Normal dan Eksponensial. Melalui berbagai contoh, Anda akan mempelajari cara mengevaluasi fungsi kemungkinan dan fungsi log-kemungkinan, menyimulasikan peubah acak, serta menduga parameter secara numerik. Setelah menyelesaikan pelajaran ini, Anda akan mampu menerapkan MLE dalam situasi dunia nyata dan memanfaatkan R untuk analisis statistik sebagai landasan bagi teknik inferensi yang lebih lanjut.</p>
+<section class="level3 unnumbered unlisted objectiveblock" data-o006-id="O006-PSU-006-U0022" id="objectives">
+<h3 class="unnumbered unlisted anchored" data-anchor-id="objectives" data-o006-id="O006-PSU-006-U0023"><i class="bi bi-check2-circle"></i>Tujuan</h3>
+<p data-o006-id="O006-PSU-006-U0024">Setelah menyelesaikan pelajaran ini, Anda diharapkan mampu:</p>
+<ol data-o006-id="O006-PSU-006-U0025" type="1">
+<li data-o006-id="O006-PSU-006-U0026">Melakukan pendugaan kemungkinan maksimum (MLE) secara numerik untuk berbagai model berparameter tunggal dan model multiparameter menggunakan optim dalam R ketika nilai data tersedia, dan</li>
+<li data-o006-id="O006-PSU-006-U0027">Menggunakan R untuk menyimulasikan peubah acak secara numerik dari distribusi baku, serta menentukan PDF, CDF, dan kuantil distribusi baku, termasuk distribusi Normal, Eksponensial, Poisson, Geometrik, dan Binomial.</li>
+</ol>
+</section>
+</section>
+<section class="level2" data-number="5.1" data-o006-id="O006-PSU-006-U0028" id="introduction-to-r">
+<h2 class="anchored" data-anchor-id="introduction-to-r" data-number="5.1" data-o006-id="O006-PSU-006-U0029"><span class="header-section-number">5.1</span> Pengantar R</h2>
+<section class="level3" data-number="5.1.1" data-o006-id="O006-PSU-006-U0030" id="basic-operations-in-r">
+<h3 class="anchored" data-anchor-id="basic-operations-in-r" data-number="5.1.1" data-o006-id="O006-PSU-006-U0031"><span class="header-section-number">5.1.1</span> Operasi Dasar dalam R</h3>
+<p data-o006-id="O006-PSU-006-U0032">R dapat digunakan sebagai kalkulator ilmiah. Berikut ini ditunjukkan sebagian kecil operasi serupa kalkulator yang dapat dilakukan dalam R.</p>
+<div class="cell language-name-processed" data-o006-id="O006-PSU-006-U0033">
+<div class="codeblock-with-label r" data-o006-id="O006-PSU-006-U0034">
+<style>.codeblock-with-label pre.lang-label-1::before { content: "R"; }</style>
+<div class="code-copy-outer-scaffold" data-o006-id="O006-PSU-006-U0035"><div class="sourceCode cell-code" data-language-name-skip="true" data-o006-id="O006-PSU-006-U0036" id="cb1"><pre class="sourceCode r lang-label-1 code-with-copy" data-o006-id="O006-PSU-006-U0037"><code class="sourceCode r" data-o006-id="O006-PSU-006-U0038"><span id="cb1-1"><a aria-hidden="true" data-o006-id="O006-PSU-006-U0039" href="#cb1-1" tabindex="-1"></a><span class="dv">3</span><span class="sc">+</span><span class="dv">2</span></span>
+<span id="cb1-2"><a aria-hidden="true" data-o006-id="O006-PSU-006-U0040" href="#cb1-2" tabindex="-1"></a></span>
+<span id="cb1-3"><a aria-hidden="true" data-o006-id="O006-PSU-006-U0041" href="#cb1-3" tabindex="-1"></a><span class="dv">3-2</span></span>
+<span id="cb1-4"><a aria-hidden="true" data-o006-id="O006-PSU-006-U0042" href="#cb1-4" tabindex="-1"></a></span>
+<span id="cb1-5"><a aria-hidden="true" data-o006-id="O006-PSU-006-U0043" href="#cb1-5" tabindex="-1"></a><span class="dv">3</span><span class="sc">*</span><span class="dv">2</span></span>
+<span id="cb1-6"><a aria-hidden="true" data-o006-id="O006-PSU-006-U0044" href="#cb1-6" tabindex="-1"></a></span>
+<span id="cb1-7"><a aria-hidden="true" data-o006-id="O006-PSU-006-U0045" href="#cb1-7" tabindex="-1"></a><span class="dv">3</span><span class="sc">/</span><span class="dv">2</span></span>
+<span id="cb1-8"><a aria-hidden="true" data-o006-id="O006-PSU-006-U0046" href="#cb1-8" tabindex="-1"></a></span>
+<span id="cb1-9"><a aria-hidden="true" data-o006-id="O006-PSU-006-U0047" href="#cb1-9" tabindex="-1"></a><span class="dv">3</span><span class="sc">^</span><span class="dv">2</span></span>
+<span id="cb1-10"><a aria-hidden="true" data-o006-id="O006-PSU-006-U0048" href="#cb1-10" tabindex="-1"></a></span>
+<span id="cb1-11"><a aria-hidden="true" data-o006-id="O006-PSU-006-U0049" href="#cb1-11" tabindex="-1"></a><span class="fu">exp</span>(<span class="dv">3</span>)</span>
+<span id="cb1-12"><a aria-hidden="true" data-o006-id="O006-PSU-006-U0050" href="#cb1-12" tabindex="-1"></a></span>
+<span id="cb1-13"><a aria-hidden="true" data-o006-id="O006-PSU-006-U0051" href="#cb1-13" tabindex="-1"></a><span class="fu">sqrt</span>(<span class="dv">3</span>)</span>
+<span id="cb1-14"><a aria-hidden="true" data-o006-id="O006-PSU-006-U0052" href="#cb1-14" tabindex="-1"></a></span>
+<span id="cb1-15"><a aria-hidden="true" data-o006-id="O006-PSU-006-U0053" href="#cb1-15" tabindex="-1"></a><span class="fu">log</span>(<span class="dv">3</span>)</span></code></pre></div><button class="code-copy-button" data-o006-id="O006-PSU-006-U0054" title="Salin ke papan klip"><i class="bi"></i></button></div>
+</div>
+</div>
+<p data-o006-id="O006-PSU-006-U0055">Perhatikan bahwa dalam R, dan dalam statistika serta peluang secara umum, fungsi “log” secara bawaan adalah logaritma natural (berbasis <span class="math inline" data-o006-math-id="O006-PSU-006-M0001">\(e\)</span>). Dalam matematika, fungsi ini biasanya dinotasikan sebagai <span class="math inline" data-o006-math-id="O006-PSU-006-M0002">\(\ln(x)\)</span>, tetapi dalam statistika, fungsi ini hampir selalu dinotasikan hanya sebagai <span class="math inline" data-o006-math-id="O006-PSU-006-M0003">\(\log(x)\)</span>.</p>
+<p data-o006-id="O006-PSU-006-U0056">Hal ini dapat dilihat dari kode berikut:</p>
+<div class="cell language-name-processed" data-o006-id="O006-PSU-006-U0057">
+<div class="codeblock-with-label r" data-o006-id="O006-PSU-006-U0058">
+<style>.codeblock-with-label pre.lang-label-2::before { content: "R"; }</style>
+<div class="code-copy-outer-scaffold" data-o006-id="O006-PSU-006-U0059"><div class="sourceCode cell-code" data-language-name-skip="true" data-o006-id="O006-PSU-006-U0060" id="cb2"><pre class="sourceCode r lang-label-2 code-with-copy" data-o006-id="O006-PSU-006-U0061"><code class="sourceCode r" data-o006-id="O006-PSU-006-U0062"><span id="cb2-1"><a aria-hidden="true" data-o006-id="O006-PSU-006-U0063" href="#cb2-1" tabindex="-1"></a>e<span class="ot">=</span><span class="fu">exp</span>(<span class="dv">1</span>)</span>
+<span id="cb2-2"><a aria-hidden="true" data-o006-id="O006-PSU-006-U0064" href="#cb2-2" tabindex="-1"></a>e</span></code></pre></div><button class="code-copy-button" data-o006-id="O006-PSU-006-U0065" title="Salin ke papan klip"><i class="bi"></i></button></div>
+</div>
+<div class="cell-output cell-output-stdout" data-o006-id="O006-PSU-006-U0066">
+<pre data-o006-id="O006-PSU-006-U0067"><code data-o006-id="O006-PSU-006-U0068">[1] 2.718282</code></pre>
+</div>
+<div class="codeblock-with-label r" data-o006-id="O006-PSU-006-U0069">
+<style>.codeblock-with-label pre.lang-label-52::before { content: "R"; }</style>
+<div class="code-copy-outer-scaffold" data-o006-id="O006-PSU-006-U0070"><div class="sourceCode cell-code" data-o006-id="O006-PSU-006-U0071" id="cb4"><pre class="sourceCode r lang-label-52 code-with-copy" data-o006-id="O006-PSU-006-U0072"><code class="sourceCode r" data-o006-id="O006-PSU-006-U0073"><span id="cb4-1"><a aria-hidden="true" data-o006-id="O006-PSU-006-U0074" href="#cb4-1" tabindex="-1"></a><span class="do">## log basis e dari e = 1</span></span>
+<span id="cb4-2"><a aria-hidden="true" data-o006-id="O006-PSU-006-U0075" href="#cb4-2" tabindex="-1"></a><span class="fu">log</span>(e)</span></code></pre></div><button class="code-copy-button" data-o006-id="O006-PSU-006-U0076" title="Salin ke papan klip"><i class="bi"></i></button></div>
+</div>
+<div class="cell-output cell-output-stdout" data-o006-id="O006-PSU-006-U0077">
+<pre data-o006-id="O006-PSU-006-U0078"><code data-o006-id="O006-PSU-006-U0079">[1] 1</code></pre>
+</div>
+<div class="codeblock-with-label r" data-o006-id="O006-PSU-006-U0080">
+<style>.codeblock-with-label pre.lang-label-53::before { content: "R"; }</style>
+<div class="code-copy-outer-scaffold" data-o006-id="O006-PSU-006-U0081"><div class="sourceCode cell-code" data-o006-id="O006-PSU-006-U0082" id="cb6"><pre class="sourceCode r lang-label-53 code-with-copy" data-o006-id="O006-PSU-006-U0083"><code class="sourceCode r" data-o006-id="O006-PSU-006-U0084"><span id="cb6-1"><a aria-hidden="true" data-o006-id="O006-PSU-006-U0085" href="#cb6-1" tabindex="-1"></a><span class="do">## log basis e dari 10 TIDAK = 1</span></span>
+<span id="cb6-2"><a aria-hidden="true" data-o006-id="O006-PSU-006-U0086" href="#cb6-2" tabindex="-1"></a><span class="fu">log</span>(<span class="dv">10</span>)</span></code></pre></div><button class="code-copy-button" data-o006-id="O006-PSU-006-U0087" title="Salin ke papan klip"><i class="bi"></i></button></div>
+</div>
+<div class="cell-output cell-output-stdout" data-o006-id="O006-PSU-006-U0088">
+<pre data-o006-id="O006-PSU-006-U0089"><code data-o006-id="O006-PSU-006-U0090">[1] 2.302585</code></pre>
+</div>
+</div>
+</section>
+<section class="level3" data-number="5.1.2" data-o006-id="O006-PSU-006-U0091" id="defining-and-storing-scalars-and-vectors">
+<h3 class="anchored" data-anchor-id="defining-and-storing-scalars-and-vectors" data-number="5.1.2" data-o006-id="O006-PSU-006-U0092"><span class="header-section-number">5.1.2</span> Mendefinisikan dan menyimpan skalar serta vektor</h3>
+<p data-o006-id="O006-PSU-006-U0093">Secara umum, sebaiknya Anda mengetik kode R dalam berkas teks berekstensi “.r” atau “.R”, lalu mengirim baris atau blok kode tersebut ke konsol R. Dengan cara ini, Anda dapat mengubah kode dengan mudah, menyimpan pekerjaan, serta menyalin dan menempelkannya untuk digunakan dalam situasi lain.</p>
+<p data-o006-id="O006-PSU-006-U0094">Anda akan sering perlu menyimpan bilangan sebagai variabel. Variabel tersebut kemudian dapat digunakan dalam perhitungan. Berikut contoh yang sangat sederhana untuk mengalikan dua bilangan:</p>
+<div class="cell language-name-processed" data-o006-id="O006-PSU-006-U0095">
+<div class="codeblock-with-label r" data-o006-id="O006-PSU-006-U0096">
+<style>.codeblock-with-label pre.lang-label-3::before { content: "R"; }</style>
+<div class="code-copy-outer-scaffold" data-o006-id="O006-PSU-006-U0097"><div class="sourceCode cell-code" data-language-name-skip="true" data-o006-id="O006-PSU-006-U0098" id="cb8"><pre class="sourceCode r lang-label-3 code-with-copy" data-o006-id="O006-PSU-006-U0099"><code class="sourceCode r" data-o006-id="O006-PSU-006-U0100"><span id="cb8-1"><a aria-hidden="true" data-o006-id="O006-PSU-006-U0101" href="#cb8-1" tabindex="-1"></a>a<span class="ot">=</span><span class="dv">4</span></span>
+<span id="cb8-2"><a aria-hidden="true" data-o006-id="O006-PSU-006-U0102" href="#cb8-2" tabindex="-1"></a></span>
+<span id="cb8-3"><a aria-hidden="true" data-o006-id="O006-PSU-006-U0103" href="#cb8-3" tabindex="-1"></a>b<span class="ot">=</span><span class="dv">3</span></span>
+<span id="cb8-4"><a aria-hidden="true" data-o006-id="O006-PSU-006-U0104" href="#cb8-4" tabindex="-1"></a></span>
+<span id="cb8-5"><a aria-hidden="true" data-o006-id="O006-PSU-006-U0105" href="#cb8-5" tabindex="-1"></a>a<span class="sc">*</span>b</span></code></pre></div><button class="code-copy-button" data-o006-id="O006-PSU-006-U0106" title="Salin ke papan klip"><i class="bi"></i></button></div>
+</div>
+<div class="cell-output cell-output-stdout" data-o006-id="O006-PSU-006-U0107">
+<pre data-o006-id="O006-PSU-006-U0108"><code data-o006-id="O006-PSU-006-U0109">[1] 12</code></pre>
+</div>
+</div>
+<p data-o006-id="O006-PSU-006-U0110">Kita sering perlu bekerja dengan beberapa bilangan yang disimpan dalam sebuah “vektor” bilangan. R menangani vektor (dan matriks!) secara alami. Kita dapat membuat vektor menggunakan perintah <code data-o006-id="O006-PSU-006-U0111">c</code> dalam R (singkatan dari “concatenate” atau menggabungkan)</p>
+<div class="cell language-name-processed" data-o006-id="O006-PSU-006-U0112">
+<div class="codeblock-with-label r" data-o006-id="O006-PSU-006-U0113">
+<style>.codeblock-with-label pre.lang-label-4::before { content: "R"; }</style>
+<div class="code-copy-outer-scaffold" data-o006-id="O006-PSU-006-U0114"><div class="sourceCode cell-code" data-language-name-skip="true" data-o006-id="O006-PSU-006-U0115" id="cb10"><pre class="sourceCode r lang-label-4 code-with-copy" data-o006-id="O006-PSU-006-U0116"><code class="sourceCode r" data-o006-id="O006-PSU-006-U0117"><span id="cb10-1"><a aria-hidden="true" data-o006-id="O006-PSU-006-U0118" href="#cb10-1" tabindex="-1"></a><span class="do">## Vektor</span></span>
+<span id="cb10-2"><a aria-hidden="true" data-o006-id="O006-PSU-006-U0119" href="#cb10-2" tabindex="-1"></a></span>
+<span id="cb10-3"><a aria-hidden="true" data-o006-id="O006-PSU-006-U0120" href="#cb10-3" tabindex="-1"></a>v<span class="ot">=</span><span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">4</span>,<span class="dv">3</span>,<span class="dv">2</span>)</span>
+<span id="cb10-4"><a aria-hidden="true" data-o006-id="O006-PSU-006-U0121" href="#cb10-4" tabindex="-1"></a>v</span></code></pre></div><button class="code-copy-button" data-o006-id="O006-PSU-006-U0122" title="Salin ke papan klip"><i class="bi"></i></button></div>
+</div>
+<div class="cell-output cell-output-stdout" data-o006-id="O006-PSU-006-U0123">
+<pre data-o006-id="O006-PSU-006-U0124"><code data-o006-id="O006-PSU-006-U0125">[1] 1 4 3 2</code></pre>
+</div>
+<div class="codeblock-with-label r" data-o006-id="O006-PSU-006-U0126">
+<style>.codeblock-with-label pre.lang-label-54::before { content: "R"; }</style>
+<div class="code-copy-outer-scaffold" data-o006-id="O006-PSU-006-U0127"><div class="sourceCode cell-code" data-o006-id="O006-PSU-006-U0128" id="cb12"><pre class="sourceCode r lang-label-54 code-with-copy" data-o006-id="O006-PSU-006-U0129"><code class="sourceCode r" data-o006-id="O006-PSU-006-U0130"><span id="cb12-1"><a aria-hidden="true" data-o006-id="O006-PSU-006-U0131" href="#cb12-1" tabindex="-1"></a>u<span class="ot">=</span><span class="dv">1</span><span class="sc">:</span><span class="dv">4</span></span>
+<span id="cb12-2"><a aria-hidden="true" data-o006-id="O006-PSU-006-U0132" href="#cb12-2" tabindex="-1"></a>u</span></code></pre></div><button class="code-copy-button" data-o006-id="O006-PSU-006-U0133" title="Salin ke papan klip"><i class="bi"></i></button></div>
+</div>
+<div class="cell-output cell-output-stdout" data-o006-id="O006-PSU-006-U0134">
+<pre data-o006-id="O006-PSU-006-U0135"><code data-o006-id="O006-PSU-006-U0136">[1] 1 2 3 4</code></pre>
+</div>
+</div>
+<p data-o006-id="O006-PSU-006-U0137">Kode tersebut telah membuat dua vektor, u dan v, yang masing-masing memiliki empat elemen. Jika kita menerapkan operasi matematika baku pada vektor, perilaku bawaan R adalah menerapkan operasi tersebut pada setiap elemen. Kode berikut mengilustrasikan hal ini.</p>
+<div class="cell language-name-processed" data-o006-id="O006-PSU-006-U0138">
+<div class="codeblock-with-label r" data-o006-id="O006-PSU-006-U0139">
+<style>.codeblock-with-label pre.lang-label-5::before { content: "R"; }</style>
+<div class="code-copy-outer-scaffold" data-o006-id="O006-PSU-006-U0140"><div class="sourceCode cell-code" data-language-name-skip="true" data-o006-id="O006-PSU-006-U0141" id="cb14"><pre class="sourceCode r lang-label-5 code-with-copy" data-o006-id="O006-PSU-006-U0142"><code class="sourceCode r" data-o006-id="O006-PSU-006-U0143"><span id="cb14-1"><a aria-hidden="true" data-o006-id="O006-PSU-006-U0144" href="#cb14-1" tabindex="-1"></a><span class="do">## operasi per elemen</span></span>
+<span id="cb14-2"><a aria-hidden="true" data-o006-id="O006-PSU-006-U0145" href="#cb14-2" tabindex="-1"></a>v<span class="sc">+</span><span class="dv">2</span></span></code></pre></div><button class="code-copy-button" data-o006-id="O006-PSU-006-U0146" title="Salin ke papan klip"><i class="bi"></i></button></div>
+</div>
+<div class="cell-output cell-output-stdout" data-o006-id="O006-PSU-006-U0147">
+<pre data-o006-id="O006-PSU-006-U0148"><code data-o006-id="O006-PSU-006-U0149">[1] 3 6 5 4</code></pre>
+</div>
+<div class="codeblock-with-label r" data-o006-id="O006-PSU-006-U0150">
+<style>.codeblock-with-label pre.lang-label-55::before { content: "R"; }</style>
+<div class="code-copy-outer-scaffold" data-o006-id="O006-PSU-006-U0151"><div class="sourceCode cell-code" data-o006-id="O006-PSU-006-U0152" id="cb16"><pre class="sourceCode r lang-label-55 code-with-copy" data-o006-id="O006-PSU-006-U0153"><code class="sourceCode r" data-o006-id="O006-PSU-006-U0154"><span id="cb16-1"><a aria-hidden="true" data-o006-id="O006-PSU-006-U0155" href="#cb16-1" tabindex="-1"></a>v<span class="sc">*</span><span class="dv">2</span></span></code></pre></div><button class="code-copy-button" data-o006-id="O006-PSU-006-U0156" title="Salin ke papan klip"><i class="bi"></i></button></div>
+</div>
+<div class="cell-output cell-output-stdout" data-o006-id="O006-PSU-006-U0157">
+<pre data-o006-id="O006-PSU-006-U0158"><code data-o006-id="O006-PSU-006-U0159">[1] 2 8 6 4</code></pre>
+</div>
+<div class="codeblock-with-label r" data-o006-id="O006-PSU-006-U0160">
+<style>.codeblock-with-label pre.lang-label-56::before { content: "R"; }</style>
+<div class="code-copy-outer-scaffold" data-o006-id="O006-PSU-006-U0161"><div class="sourceCode cell-code" data-o006-id="O006-PSU-006-U0162" id="cb18"><pre class="sourceCode r lang-label-56 code-with-copy" data-o006-id="O006-PSU-006-U0163"><code class="sourceCode r" data-o006-id="O006-PSU-006-U0164"><span id="cb18-1"><a aria-hidden="true" data-o006-id="O006-PSU-006-U0165" href="#cb18-1" tabindex="-1"></a>u<span class="sc">^</span><span class="dv">2</span></span></code></pre></div><button class="code-copy-button" data-o006-id="O006-PSU-006-U0166" title="Salin ke papan klip"><i class="bi"></i></button></div>
+</div>
+<div class="cell-output cell-output-stdout" data-o006-id="O006-PSU-006-U0167">
+<pre data-o006-id="O006-PSU-006-U0168"><code data-o006-id="O006-PSU-006-U0169">[1]  1  4  9 16</code></pre>
+</div>
+<div class="codeblock-with-label r" data-o006-id="O006-PSU-006-U0170">
+<style>.codeblock-with-label pre.lang-label-57::before { content: "R"; }</style>
+<div class="code-copy-outer-scaffold" data-o006-id="O006-PSU-006-U0171"><div class="sourceCode cell-code" data-o006-id="O006-PSU-006-U0172" id="cb20"><pre class="sourceCode r lang-label-57 code-with-copy" data-o006-id="O006-PSU-006-U0173"><code class="sourceCode r" data-o006-id="O006-PSU-006-U0174"><span id="cb20-1"><a aria-hidden="true" data-o006-id="O006-PSU-006-U0175" href="#cb20-1" tabindex="-1"></a>u<span class="sc">+</span>v</span></code></pre></div><button class="code-copy-button" data-o006-id="O006-PSU-006-U0176" title="Salin ke papan klip"><i class="bi"></i></button></div>
+</div>
+<div class="cell-output cell-output-stdout" data-o006-id="O006-PSU-006-U0177">
+<pre data-o006-id="O006-PSU-006-U0178"><code data-o006-id="O006-PSU-006-U0179">[1] 2 6 6 6</code></pre>
+</div>
+<div class="codeblock-with-label r" data-o006-id="O006-PSU-006-U0180">
+<style>.codeblock-with-label pre.lang-label-58::before { content: "R"; }</style>
+<div class="code-copy-outer-scaffold" data-o006-id="O006-PSU-006-U0181"><div class="sourceCode cell-code" data-o006-id="O006-PSU-006-U0182" id="cb22"><pre class="sourceCode r lang-label-58 code-with-copy" data-o006-id="O006-PSU-006-U0183"><code class="sourceCode r" data-o006-id="O006-PSU-006-U0184"><span id="cb22-1"><a aria-hidden="true" data-o006-id="O006-PSU-006-U0185" href="#cb22-1" tabindex="-1"></a>u<span class="sc">*</span>v</span></code></pre></div><button class="code-copy-button" data-o006-id="O006-PSU-006-U0186" title="Salin ke papan klip"><i class="bi"></i></button></div>
+</div>
+<div class="cell-output cell-output-stdout" data-o006-id="O006-PSU-006-U0187">
+<pre data-o006-id="O006-PSU-006-U0188"><code data-o006-id="O006-PSU-006-U0189">[1] 1 8 9 8</code></pre>
+</div>
+</div>
+</section>
+<section class="level3" data-number="5.1.3" data-o006-id="O006-PSU-006-U0190" id="subsetting-vectors">
+<h3 class="anchored" data-anchor-id="subsetting-vectors" data-number="5.1.3" data-o006-id="O006-PSU-006-U0191"><span class="header-section-number">5.1.3</span> Membuat subset vektor</h3>
+<p data-o006-id="O006-PSU-006-U0192">Data atau parameter sering disimpan dalam sebuah vektor, tetapi kita mungkin hanya ingin mengakses satu atau beberapa elemen vektor tersebut. Pengindeksan dalam R dilakukan menggunakan tanda kurung siku: [ ]</p>
+<div class="cell language-name-processed" data-o006-id="O006-PSU-006-U0193">
+<div class="codeblock-with-label r" data-o006-id="O006-PSU-006-U0194">
+<style>.codeblock-with-label pre.lang-label-6::before { content: "R"; }</style>
+<div class="code-copy-outer-scaffold" data-o006-id="O006-PSU-006-U0195"><div class="sourceCode cell-code" data-language-name-skip="true" data-o006-id="O006-PSU-006-U0196" id="cb24"><pre class="sourceCode r lang-label-6 code-with-copy" data-o006-id="O006-PSU-006-U0197"><code class="sourceCode r" data-o006-id="O006-PSU-006-U0198"><span id="cb24-1"><a aria-hidden="true" data-o006-id="O006-PSU-006-U0199" href="#cb24-1" tabindex="-1"></a><span class="do">## Membuat subset vektor</span></span>
+<span id="cb24-2"><a aria-hidden="true" data-o006-id="O006-PSU-006-U0200" href="#cb24-2" tabindex="-1"></a>v</span></code></pre></div><button class="code-copy-button" data-o006-id="O006-PSU-006-U0201" title="Salin ke papan klip"><i class="bi"></i></button></div>
+</div>
+<div class="cell-output cell-output-stdout" data-o006-id="O006-PSU-006-U0202">
+<pre data-o006-id="O006-PSU-006-U0203"><code data-o006-id="O006-PSU-006-U0204">[1] 1 4 3 2</code></pre>
+</div>
+<div class="codeblock-with-label r" data-o006-id="O006-PSU-006-U0205">
+<style>.codeblock-with-label pre.lang-label-59::before { content: "R"; }</style>
+<div class="code-copy-outer-scaffold" data-o006-id="O006-PSU-006-U0206"><div class="sourceCode cell-code" data-o006-id="O006-PSU-006-U0207" id="cb26"><pre class="sourceCode r lang-label-59 code-with-copy" data-o006-id="O006-PSU-006-U0208"><code class="sourceCode r" data-o006-id="O006-PSU-006-U0209"><span id="cb26-1"><a aria-hidden="true" data-o006-id="O006-PSU-006-U0210" href="#cb26-1" tabindex="-1"></a>v[<span class="dv">1</span>]</span></code></pre></div><button class="code-copy-button" data-o006-id="O006-PSU-006-U0211" title="Salin ke papan klip"><i class="bi"></i></button></div>
+</div>
+<div class="cell-output cell-output-stdout" data-o006-id="O006-PSU-006-U0212">
+<pre data-o006-id="O006-PSU-006-U0213"><code data-o006-id="O006-PSU-006-U0214">[1] 1</code></pre>
+</div>
+<div class="codeblock-with-label r" data-o006-id="O006-PSU-006-U0215">
+<style>.codeblock-with-label pre.lang-label-60::before { content: "R"; }</style>
+<div class="code-copy-outer-scaffold" data-o006-id="O006-PSU-006-U0216"><div class="sourceCode cell-code" data-o006-id="O006-PSU-006-U0217" id="cb28"><pre class="sourceCode r lang-label-60 code-with-copy" data-o006-id="O006-PSU-006-U0218"><code class="sourceCode r" data-o006-id="O006-PSU-006-U0219"><span id="cb28-1"><a aria-hidden="true" data-o006-id="O006-PSU-006-U0220" href="#cb28-1" tabindex="-1"></a>v[<span class="dv">2</span>]</span></code></pre></div><button class="code-copy-button" data-o006-id="O006-PSU-006-U0221" title="Salin ke papan klip"><i class="bi"></i></button></div>
+</div>
+<div class="cell-output cell-output-stdout" data-o006-id="O006-PSU-006-U0222">
+<pre data-o006-id="O006-PSU-006-U0223"><code data-o006-id="O006-PSU-006-U0224">[1] 4</code></pre>
+</div>
+<div class="codeblock-with-label r" data-o006-id="O006-PSU-006-U0225">
+<style>.codeblock-with-label pre.lang-label-61::before { content: "R"; }</style>
+<div class="code-copy-outer-scaffold" data-o006-id="O006-PSU-006-U0226"><div class="sourceCode cell-code" data-o006-id="O006-PSU-006-U0227" id="cb30"><pre class="sourceCode r lang-label-61 code-with-copy" data-o006-id="O006-PSU-006-U0228"><code class="sourceCode r" data-o006-id="O006-PSU-006-U0229"><span id="cb30-1"><a aria-hidden="true" data-o006-id="O006-PSU-006-U0230" href="#cb30-1" tabindex="-1"></a>v[<span class="dv">3</span>]</span></code></pre></div><button class="code-copy-button" data-o006-id="O006-PSU-006-U0231" title="Salin ke papan klip"><i class="bi"></i></button></div>
+</div>
+<div class="cell-output cell-output-stdout" data-o006-id="O006-PSU-006-U0232">
+<pre data-o006-id="O006-PSU-006-U0233"><code data-o006-id="O006-PSU-006-U0234">[1] 3</code></pre>
+</div>
+<div class="codeblock-with-label r" data-o006-id="O006-PSU-006-U0235">
+<style>.codeblock-with-label pre.lang-label-62::before { content: "R"; }</style>
+<div class="code-copy-outer-scaffold" data-o006-id="O006-PSU-006-U0236"><div class="sourceCode cell-code" data-o006-id="O006-PSU-006-U0237" id="cb32"><pre class="sourceCode r lang-label-62 code-with-copy" data-o006-id="O006-PSU-006-U0238"><code class="sourceCode r" data-o006-id="O006-PSU-006-U0239"><span id="cb32-1"><a aria-hidden="true" data-o006-id="O006-PSU-006-U0240" href="#cb32-1" tabindex="-1"></a>v[<span class="dv">4</span>]</span></code></pre></div><button class="code-copy-button" data-o006-id="O006-PSU-006-U0241" title="Salin ke papan klip"><i class="bi"></i></button></div>
+</div>
+<div class="cell-output cell-output-stdout" data-o006-id="O006-PSU-006-U0242">
+<pre data-o006-id="O006-PSU-006-U0243"><code data-o006-id="O006-PSU-006-U0244">[1] 2</code></pre>
+</div>
+<div class="codeblock-with-label r" data-o006-id="O006-PSU-006-U0245">
+<style>.codeblock-with-label pre.lang-label-63::before { content: "R"; }</style>
+<div class="code-copy-outer-scaffold" data-o006-id="O006-PSU-006-U0246"><div class="sourceCode cell-code" data-o006-id="O006-PSU-006-U0247" id="cb34"><pre class="sourceCode r lang-label-63 code-with-copy" data-o006-id="O006-PSU-006-U0248"><code class="sourceCode r" data-o006-id="O006-PSU-006-U0249"><span id="cb34-1"><a aria-hidden="true" data-o006-id="O006-PSU-006-U0250" href="#cb34-1" tabindex="-1"></a>v[<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>]</span></code></pre></div><button class="code-copy-button" data-o006-id="O006-PSU-006-U0251" title="Salin ke papan klip"><i class="bi"></i></button></div>
+</div>
+<div class="cell-output cell-output-stdout" data-o006-id="O006-PSU-006-U0252">
+<pre data-o006-id="O006-PSU-006-U0253"><code data-o006-id="O006-PSU-006-U0254">[1] 1 4 3</code></pre>
+</div>
+<div class="codeblock-with-label r" data-o006-id="O006-PSU-006-U0255">
+<style>.codeblock-with-label pre.lang-label-64::before { content: "R"; }</style>
+<div class="code-copy-outer-scaffold" data-o006-id="O006-PSU-006-U0256"><div class="sourceCode cell-code" data-o006-id="O006-PSU-006-U0257" id="cb36"><pre class="sourceCode r lang-label-64 code-with-copy" data-o006-id="O006-PSU-006-U0258"><code class="sourceCode r" data-o006-id="O006-PSU-006-U0259"><span id="cb36-1"><a aria-hidden="true" data-o006-id="O006-PSU-006-U0260" href="#cb36-1" tabindex="-1"></a>v[<span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">4</span>)]</span></code></pre></div><button class="code-copy-button" data-o006-id="O006-PSU-006-U0261" title="Salin ke papan klip"><i class="bi"></i></button></div>
+</div>
+<div class="cell-output cell-output-stdout" data-o006-id="O006-PSU-006-U0262">
+<pre data-o006-id="O006-PSU-006-U0263"><code data-o006-id="O006-PSU-006-U0264">[1] 1 2</code></pre>
+</div>
+<div class="codeblock-with-label r" data-o006-id="O006-PSU-006-U0265">
+<style>.codeblock-with-label pre.lang-label-65::before { content: "R"; }</style>
+<div class="code-copy-outer-scaffold" data-o006-id="O006-PSU-006-U0266"><div class="sourceCode cell-code" data-o006-id="O006-PSU-006-U0267" id="cb38"><pre class="sourceCode r lang-label-65 code-with-copy" data-o006-id="O006-PSU-006-U0268"><code class="sourceCode r" data-o006-id="O006-PSU-006-U0269"><span id="cb38-1"><a aria-hidden="true" data-o006-id="O006-PSU-006-U0270" href="#cb38-1" tabindex="-1"></a>v[<span class="fu">c</span>(<span class="dv">3</span>,<span class="dv">4</span>)]</span></code></pre></div><button class="code-copy-button" data-o006-id="O006-PSU-006-U0271" title="Salin ke papan klip"><i class="bi"></i></button></div>
+</div>
+<div class="cell-output cell-output-stdout" data-o006-id="O006-PSU-006-U0272">
+<pre data-o006-id="O006-PSU-006-U0273"><code data-o006-id="O006-PSU-006-U0274">[1] 3 2</code></pre>
+</div>
+</div>
+</section>
+<section class="level3" data-number="5.1.4" data-o006-id="O006-PSU-006-U0275" id="logical-statements-and-the-which-command">
+<h3 class="anchored" data-anchor-id="logical-statements-and-the-which-command" data-number="5.1.4" data-o006-id="O006-PSU-006-U0276"><span class="header-section-number">5.1.4</span> Pernyataan logis dan perintah <code data-o006-id="O006-PSU-006-U0277">which</code> dalam R</h3>
+<p data-o006-id="O006-PSU-006-U0278">Salah satu cara penting untuk membuat subset vektor adalah melalui argumen logis. R memungkinkan kita memeriksa apakah suatu pernyataan logis bernilai TRUE atau FALSE. Pemeriksaan ini paling sering dilakukan menggunakan operator <code data-o006-id="O006-PSU-006-U0279">&lt;</code>, <code data-o006-id="O006-PSU-006-U0280">&gt;</code>, atau <code data-o006-id="O006-PSU-006-U0281">==</code> sebagai operator. Perhatikan bahwa pengujian apakah dua bilangan sama harus dilakukan menggunakan dua tanda sama dengan <code data-o006-id="O006-PSU-006-U0282">==</code>, bukan satu tanda sama dengan <code data-o006-id="O006-PSU-006-U0283">=</code>, yang digunakan untuk menetapkan nilai pada suatu variabel.</p>
+<p data-o006-id="O006-PSU-006-U0284">Berikut beberapa contoh pemeriksaan pernyataan logis dalam R. Perhatikan bahwa pernyataan logis dapat diterapkan per elemen pada vektor, sama seperti operasi matematika.</p>
+<div class="cell language-name-processed" data-o006-id="O006-PSU-006-U0285">
+<div class="codeblock-with-label r" data-o006-id="O006-PSU-006-U0286">
+<style>.codeblock-with-label pre.lang-label-7::before { content: "R"; }</style>
+<div class="code-copy-outer-scaffold" data-o006-id="O006-PSU-006-U0287"><div class="sourceCode cell-code" data-language-name-skip="true" data-o006-id="O006-PSU-006-U0288" id="cb40"><pre class="sourceCode r lang-label-7 code-with-copy" data-o006-id="O006-PSU-006-U0289"><code class="sourceCode r" data-o006-id="O006-PSU-006-U0290"><span id="cb40-1"><a aria-hidden="true" data-o006-id="O006-PSU-006-U0291" href="#cb40-1" tabindex="-1"></a><span class="do">## pernyataan logis</span></span>
+<span id="cb40-2"><a aria-hidden="true" data-o006-id="O006-PSU-006-U0292" href="#cb40-2" tabindex="-1"></a><span class="dv">3</span><span class="sc">&gt;</span><span class="dv">4</span></span></code></pre></div><button class="code-copy-button" data-o006-id="O006-PSU-006-U0293" title="Salin ke papan klip"><i class="bi"></i></button></div>
+</div>
+<div class="cell-output cell-output-stdout" data-o006-id="O006-PSU-006-U0294">
+<pre data-o006-id="O006-PSU-006-U0295"><code data-o006-id="O006-PSU-006-U0296">[1] FALSE</code></pre>
+</div>
+<div class="codeblock-with-label r" data-o006-id="O006-PSU-006-U0297">
+<style>.codeblock-with-label pre.lang-label-66::before { content: "R"; }</style>
+<div class="code-copy-outer-scaffold" data-o006-id="O006-PSU-006-U0298"><div class="sourceCode cell-code" data-o006-id="O006-PSU-006-U0299" id="cb42"><pre class="sourceCode r lang-label-66 code-with-copy" data-o006-id="O006-PSU-006-U0300"><code class="sourceCode r" data-o006-id="O006-PSU-006-U0301"><span id="cb42-1"><a aria-hidden="true" data-o006-id="O006-PSU-006-U0302" href="#cb42-1" tabindex="-1"></a><span class="dv">3</span><span class="sc">&gt;</span><span class="dv">2</span></span></code></pre></div><button class="code-copy-button" data-o006-id="O006-PSU-006-U0303" title="Salin ke papan klip"><i class="bi"></i></button></div>
+</div>
+<div class="cell-output cell-output-stdout" data-o006-id="O006-PSU-006-U0304">
+<pre data-o006-id="O006-PSU-006-U0305"><code data-o006-id="O006-PSU-006-U0306">[1] TRUE</code></pre>
+</div>
+<div class="codeblock-with-label r" data-o006-id="O006-PSU-006-U0307">
+<style>.codeblock-with-label pre.lang-label-67::before { content: "R"; }</style>
+<div class="code-copy-outer-scaffold" data-o006-id="O006-PSU-006-U0308"><div class="sourceCode cell-code" data-o006-id="O006-PSU-006-U0309" id="cb44"><pre class="sourceCode r lang-label-67 code-with-copy" data-o006-id="O006-PSU-006-U0310"><code class="sourceCode r" data-o006-id="O006-PSU-006-U0311"><span id="cb44-1"><a aria-hidden="true" data-o006-id="O006-PSU-006-U0312" href="#cb44-1" tabindex="-1"></a><span class="dv">3</span><span class="sc">==</span><span class="dv">4</span></span></code></pre></div><button class="code-copy-button" data-o006-id="O006-PSU-006-U0313" title="Salin ke papan klip"><i class="bi"></i></button></div>
+</div>
+<div class="cell-output cell-output-stdout" data-o006-id="O006-PSU-006-U0314">
+<pre data-o006-id="O006-PSU-006-U0315"><code data-o006-id="O006-PSU-006-U0316">[1] FALSE</code></pre>
+</div>
+<div class="codeblock-with-label r" data-o006-id="O006-PSU-006-U0317">
+<style>.codeblock-with-label pre.lang-label-68::before { content: "R"; }</style>
+<div class="code-copy-outer-scaffold" data-o006-id="O006-PSU-006-U0318"><div class="sourceCode cell-code" data-o006-id="O006-PSU-006-U0319" id="cb46"><pre class="sourceCode r lang-label-68 code-with-copy" data-o006-id="O006-PSU-006-U0320"><code class="sourceCode r" data-o006-id="O006-PSU-006-U0321"><span id="cb46-1"><a aria-hidden="true" data-o006-id="O006-PSU-006-U0322" href="#cb46-1" tabindex="-1"></a><span class="dv">3</span><span class="sc">==</span><span class="dv">3</span></span></code></pre></div><button class="code-copy-button" data-o006-id="O006-PSU-006-U0323" title="Salin ke papan klip"><i class="bi"></i></button></div>
+</div>
+<div class="cell-output cell-output-stdout" data-o006-id="O006-PSU-006-U0324">
+<pre data-o006-id="O006-PSU-006-U0325"><code data-o006-id="O006-PSU-006-U0326">[1] TRUE</code></pre>
+</div>
+<div class="codeblock-with-label r" data-o006-id="O006-PSU-006-U0327">
+<style>.codeblock-with-label pre.lang-label-69::before { content: "R"; }</style>
+<div class="code-copy-outer-scaffold" data-o006-id="O006-PSU-006-U0328"><div class="sourceCode cell-code" data-o006-id="O006-PSU-006-U0329" id="cb48"><pre class="sourceCode r lang-label-69 code-with-copy" data-o006-id="O006-PSU-006-U0330"><code class="sourceCode r" data-o006-id="O006-PSU-006-U0331"><span id="cb48-1"><a aria-hidden="true" data-o006-id="O006-PSU-006-U0332" href="#cb48-1" tabindex="-1"></a>v</span></code></pre></div><button class="code-copy-button" data-o006-id="O006-PSU-006-U0333" title="Salin ke papan klip"><i class="bi"></i></button></div>
+</div>
+<div class="cell-output cell-output-stdout" data-o006-id="O006-PSU-006-U0334">
+<pre data-o006-id="O006-PSU-006-U0335"><code data-o006-id="O006-PSU-006-U0336">[1] 1 4 3 2</code></pre>
+</div>
+<div class="codeblock-with-label r" data-o006-id="O006-PSU-006-U0337">
+<style>.codeblock-with-label pre.lang-label-70::before { content: "R"; }</style>
+<div class="code-copy-outer-scaffold" data-o006-id="O006-PSU-006-U0338"><div class="sourceCode cell-code" data-o006-id="O006-PSU-006-U0339" id="cb50"><pre class="sourceCode r lang-label-70 code-with-copy" data-o006-id="O006-PSU-006-U0340"><code class="sourceCode r" data-o006-id="O006-PSU-006-U0341"><span id="cb50-1"><a aria-hidden="true" data-o006-id="O006-PSU-006-U0342" href="#cb50-1" tabindex="-1"></a>v<span class="sc">&gt;</span><span class="dv">2</span></span></code></pre></div><button class="code-copy-button" data-o006-id="O006-PSU-006-U0343" title="Salin ke papan klip"><i class="bi"></i></button></div>
+</div>
+<div class="cell-output cell-output-stdout" data-o006-id="O006-PSU-006-U0344">
+<pre data-o006-id="O006-PSU-006-U0345"><code data-o006-id="O006-PSU-006-U0346">[1] FALSE  TRUE  TRUE FALSE</code></pre>
+</div>
+<div class="codeblock-with-label r" data-o006-id="O006-PSU-006-U0347">
+<style>.codeblock-with-label pre.lang-label-71::before { content: "R"; }</style>
+<div class="code-copy-outer-scaffold" data-o006-id="O006-PSU-006-U0348"><div class="sourceCode cell-code" data-o006-id="O006-PSU-006-U0349" id="cb52"><pre class="sourceCode r lang-label-71 code-with-copy" data-o006-id="O006-PSU-006-U0350"><code class="sourceCode r" data-o006-id="O006-PSU-006-U0351"><span id="cb52-1"><a aria-hidden="true" data-o006-id="O006-PSU-006-U0352" href="#cb52-1" tabindex="-1"></a>v<span class="sc">==</span><span class="dv">2</span></span></code></pre></div><button class="code-copy-button" data-o006-id="O006-PSU-006-U0353" title="Salin ke papan klip"><i class="bi"></i></button></div>
+</div>
+<div class="cell-output cell-output-stdout" data-o006-id="O006-PSU-006-U0354">
+<pre data-o006-id="O006-PSU-006-U0355"><code data-o006-id="O006-PSU-006-U0356">[1] FALSE FALSE FALSE  TRUE</code></pre>
+</div>
+<div class="codeblock-with-label r" data-o006-id="O006-PSU-006-U0357">
+<style>.codeblock-with-label pre.lang-label-72::before { content: "R"; }</style>
+<div class="code-copy-outer-scaffold" data-o006-id="O006-PSU-006-U0358"><div class="sourceCode cell-code" data-o006-id="O006-PSU-006-U0359" id="cb54"><pre class="sourceCode r lang-label-72 code-with-copy" data-o006-id="O006-PSU-006-U0360"><code class="sourceCode r" data-o006-id="O006-PSU-006-U0361"><span id="cb54-1"><a aria-hidden="true" data-o006-id="O006-PSU-006-U0362" href="#cb54-1" tabindex="-1"></a>v<span class="sc">&gt;=</span><span class="dv">2</span></span></code></pre></div><button class="code-copy-button" data-o006-id="O006-PSU-006-U0363" title="Salin ke papan klip"><i class="bi"></i></button></div>
+</div>
+<div class="cell-output cell-output-stdout" data-o006-id="O006-PSU-006-U0364">
+<pre data-o006-id="O006-PSU-006-U0365"><code data-o006-id="O006-PSU-006-U0366">[1] FALSE  TRUE  TRUE  TRUE</code></pre>
+</div>
+</div>
+<p data-o006-id="O006-PSU-006-U0367">Tugas yang umum dalam analisis statistik (lihat Bagian 4 sebagai contoh!) adalah menentukan elemen vektor mana yang memenuhi kriteria tertentu. Perintah R untuk melakukannya berpusat pada <code data-o006-id="O006-PSU-006-U0368">which</code> tersebut. Berikut beberapa contohnya:</p>
+<div class="cell language-name-processed" data-o006-id="O006-PSU-006-U0369">
+<div class="codeblock-with-label r" data-o006-id="O006-PSU-006-U0370">
+<style>.codeblock-with-label pre.lang-label-8::before { content: "R"; }</style>
+<div class="code-copy-outer-scaffold" data-o006-id="O006-PSU-006-U0371"><div class="sourceCode cell-code" data-language-name-skip="true" data-o006-id="O006-PSU-006-U0372" id="cb56"><pre class="sourceCode r lang-label-8 code-with-copy" data-o006-id="O006-PSU-006-U0373"><code class="sourceCode r" data-o006-id="O006-PSU-006-U0374"><span id="cb56-1"><a aria-hidden="true" data-o006-id="O006-PSU-006-U0375" href="#cb56-1" tabindex="-1"></a><span class="do">## membuat subset dengan argumen logis</span></span>
+<span id="cb56-2"><a aria-hidden="true" data-o006-id="O006-PSU-006-U0376" href="#cb56-2" tabindex="-1"></a>v</span></code></pre></div><button class="code-copy-button" data-o006-id="O006-PSU-006-U0377" title="Salin ke papan klip"><i class="bi"></i></button></div>
+</div>
+<div class="cell-output cell-output-stdout" data-o006-id="O006-PSU-006-U0378">
+<pre data-o006-id="O006-PSU-006-U0379"><code data-o006-id="O006-PSU-006-U0380">[1] 1 4 3 2</code></pre>
+</div>
+<div class="codeblock-with-label r" data-o006-id="O006-PSU-006-U0381">
+<style>.codeblock-with-label pre.lang-label-73::before { content: "R"; }</style>
+<div class="code-copy-outer-scaffold" data-o006-id="O006-PSU-006-U0382"><div class="sourceCode cell-code" data-o006-id="O006-PSU-006-U0383" id="cb58"><pre class="sourceCode r lang-label-73 code-with-copy" data-o006-id="O006-PSU-006-U0384"><code class="sourceCode r" data-o006-id="O006-PSU-006-U0385"><span id="cb58-1"><a aria-hidden="true" data-o006-id="O006-PSU-006-U0386" href="#cb58-1" tabindex="-1"></a><span class="fu">which</span>(v<span class="sc">&gt;</span><span class="dv">2</span>)</span></code></pre></div><button class="code-copy-button" data-o006-id="O006-PSU-006-U0387" title="Salin ke papan klip"><i class="bi"></i></button></div>
+</div>
+<div class="cell-output cell-output-stdout" data-o006-id="O006-PSU-006-U0388">
+<pre data-o006-id="O006-PSU-006-U0389"><code data-o006-id="O006-PSU-006-U0390">[1] 2 3</code></pre>
+</div>
+<div class="codeblock-with-label r" data-o006-id="O006-PSU-006-U0391">
+<style>.codeblock-with-label pre.lang-label-74::before { content: "R"; }</style>
+<div class="code-copy-outer-scaffold" data-o006-id="O006-PSU-006-U0392"><div class="sourceCode cell-code" data-o006-id="O006-PSU-006-U0393" id="cb60"><pre class="sourceCode r lang-label-74 code-with-copy" data-o006-id="O006-PSU-006-U0394"><code class="sourceCode r" data-o006-id="O006-PSU-006-U0395"><span id="cb60-1"><a aria-hidden="true" data-o006-id="O006-PSU-006-U0396" href="#cb60-1" tabindex="-1"></a>v[<span class="fu">which</span>(v<span class="sc">&gt;</span><span class="dv">2</span>)]</span></code></pre></div><button class="code-copy-button" data-o006-id="O006-PSU-006-U0397" title="Salin ke papan klip"><i class="bi"></i></button></div>
+</div>
+<div class="cell-output cell-output-stdout" data-o006-id="O006-PSU-006-U0398">
+<pre data-o006-id="O006-PSU-006-U0399"><code data-o006-id="O006-PSU-006-U0400">[1] 4 3</code></pre>
+</div>
+<div class="codeblock-with-label r" data-o006-id="O006-PSU-006-U0401">
+<style>.codeblock-with-label pre.lang-label-75::before { content: "R"; }</style>
+<div class="code-copy-outer-scaffold" data-o006-id="O006-PSU-006-U0402"><div class="sourceCode cell-code" data-o006-id="O006-PSU-006-U0403" id="cb62"><pre class="sourceCode r lang-label-75 code-with-copy" data-o006-id="O006-PSU-006-U0404"><code class="sourceCode r" data-o006-id="O006-PSU-006-U0405"><span id="cb62-1"><a aria-hidden="true" data-o006-id="O006-PSU-006-U0406" href="#cb62-1" tabindex="-1"></a>idx<span class="ot">=</span><span class="fu">which</span>(v<span class="sc">&gt;</span><span class="dv">2</span>)</span>
+<span id="cb62-2"><a aria-hidden="true" data-o006-id="O006-PSU-006-U0407" href="#cb62-2" tabindex="-1"></a>idx</span></code></pre></div><button class="code-copy-button" data-o006-id="O006-PSU-006-U0408" title="Salin ke papan klip"><i class="bi"></i></button></div>
+</div>
+<div class="cell-output cell-output-stdout" data-o006-id="O006-PSU-006-U0409">
+<pre data-o006-id="O006-PSU-006-U0410"><code data-o006-id="O006-PSU-006-U0411">[1] 2 3</code></pre>
+</div>
+<div class="codeblock-with-label r" data-o006-id="O006-PSU-006-U0412">
+<style>.codeblock-with-label pre.lang-label-76::before { content: "R"; }</style>
+<div class="code-copy-outer-scaffold" data-o006-id="O006-PSU-006-U0413"><div class="sourceCode cell-code" data-o006-id="O006-PSU-006-U0414" id="cb64"><pre class="sourceCode r lang-label-76 code-with-copy" data-o006-id="O006-PSU-006-U0415"><code class="sourceCode r" data-o006-id="O006-PSU-006-U0416"><span id="cb64-1"><a aria-hidden="true" data-o006-id="O006-PSU-006-U0417" href="#cb64-1" tabindex="-1"></a>v[idx]</span></code></pre></div><button class="code-copy-button" data-o006-id="O006-PSU-006-U0418" title="Salin ke papan klip"><i class="bi"></i></button></div>
+</div>
+<div class="cell-output cell-output-stdout" data-o006-id="O006-PSU-006-U0419">
+<pre data-o006-id="O006-PSU-006-U0420"><code data-o006-id="O006-PSU-006-U0421">[1] 4 3</code></pre>
+</div>
+</div>
+</section>
+<section class="level3" data-number="5.1.5" data-o006-id="O006-PSU-006-U0422" id="creating-data-frames">
+<h3 class="anchored" data-anchor-id="creating-data-frames" data-number="5.1.5" data-o006-id="O006-PSU-006-U0423"><span class="header-section-number">5.1.5</span> Membuat Kerangka Data</h3>
+<p data-o006-id="O006-PSU-006-U0424">Struktur <code data-o006-id="O006-PSU-006-U0425">data.frame</code> dalam R merupakan struktur data yang sangat penting. Struktur ini memungkinkan Anda menyimpan sebuah “matriks” data yang memadukan kolom numerik (seperti peubah respons) dan kolom karakter (seperti nama perlakuan yang mudah dibaca manusia). Pertimbangkan sebuah contoh pertanian dengan 10 petak yang diberi Pupuk X (petak 1-5) atau Pupuk Y (petak 6-10). Kita akan membuat sebuah kerangka data yang memuat informasi ini beserta responsnya (hasil panen jagung pada setiap petak).</p>
+<p data-o006-id="O006-PSU-006-U0426">Pertama, kita akan membuat vektor numerik berisi nomor petak. Kode berikut menunjukkan dua cara yang setara untuk melakukannya.</p>
+<div class="cell language-name-processed" data-o006-id="O006-PSU-006-U0427">
+<div class="codeblock-with-label r" data-o006-id="O006-PSU-006-U0428">
+<style>.codeblock-with-label pre.lang-label-9::before { content: "R"; }</style>
+<div class="code-copy-outer-scaffold" data-o006-id="O006-PSU-006-U0429"><div class="sourceCode cell-code" data-language-name-skip="true" data-o006-id="O006-PSU-006-U0430" id="cb66"><pre class="sourceCode r lang-label-9 code-with-copy" data-o006-id="O006-PSU-006-U0431"><code class="sourceCode r" data-o006-id="O006-PSU-006-U0432"><span id="cb66-1"><a aria-hidden="true" data-o006-id="O006-PSU-006-U0433" href="#cb66-1" tabindex="-1"></a>plot.ID<span class="ot">=</span><span class="dv">1</span><span class="sc">:</span><span class="dv">10</span></span>
+<span id="cb66-2"><a aria-hidden="true" data-o006-id="O006-PSU-006-U0434" href="#cb66-2" tabindex="-1"></a></span>
+<span id="cb66-3"><a aria-hidden="true" data-o006-id="O006-PSU-006-U0435" href="#cb66-3" tabindex="-1"></a>plot.ID<span class="ot">=</span><span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>,<span class="dv">5</span>,<span class="dv">6</span>,<span class="dv">7</span>,<span class="dv">8</span>,<span class="dv">9</span>,<span class="dv">10</span>)</span></code></pre></div><button class="code-copy-button" data-o006-id="O006-PSU-006-U0436" title="Salin ke papan klip"><i class="bi"></i></button></div>
+</div>
+</div>
+<p data-o006-id="O006-PSU-006-U0437">Selanjutnya, kita akan membuat vektor karakter untuk perlakuan. Perhatikan bahwa karakter harus ditulis di dalam tanda kutip; jika tidak, R akan menganggapnya sebagai nama vektor atau skalar yang telah didefinisikan dalam R. Lihat Subbagian 5.1.2 sebagai contoh.</p>
+<div class="cell language-name-processed" data-o006-id="O006-PSU-006-U0438">
+<div class="codeblock-with-label r" data-o006-id="O006-PSU-006-U0439">
+<style>.codeblock-with-label pre.lang-label-10::before { content: "R"; }</style>
+<div class="code-copy-outer-scaffold" data-o006-id="O006-PSU-006-U0440"><div class="sourceCode cell-code" data-language-name-skip="true" data-o006-id="O006-PSU-006-U0441" id="cb67"><pre class="sourceCode r lang-label-10 code-with-copy" data-o006-id="O006-PSU-006-U0442"><code class="sourceCode r" data-o006-id="O006-PSU-006-U0443"><span id="cb67-1"><a aria-hidden="true" data-o006-id="O006-PSU-006-U0444" href="#cb67-1" tabindex="-1"></a>treatment<span class="ot">=</span><span class="fu">c</span>(<span class="st">"X"</span>,<span class="st">"X"</span>,<span class="st">"X"</span>,<span class="st">"X"</span>,<span class="st">"X"</span>,<span class="st">"Y"</span>,<span class="st">"Y"</span>,<span class="st">"Y"</span>,<span class="st">"Y"</span>,<span class="st">"Y"</span>)</span>
+<span id="cb67-2"><a aria-hidden="true" data-o006-id="O006-PSU-006-U0445" href="#cb67-2" tabindex="-1"></a></span>
+<span id="cb67-3"><a aria-hidden="true" data-o006-id="O006-PSU-006-U0446" href="#cb67-3" tabindex="-1"></a>treatment<span class="ot">=</span><span class="fu">c</span>(<span class="fu">rep</span>(<span class="st">"X"</span>,<span class="dv">5</span>),<span class="fu">rep</span>(<span class="st">"Y"</span>,<span class="dv">5</span>))</span></code></pre></div><button class="code-copy-button" data-o006-id="O006-PSU-006-U0447" title="Salin ke papan klip"><i class="bi"></i></button></div>
+</div>
+</div>
+<p data-o006-id="O006-PSU-006-U0448">Sekarang kita akan membuat sebuah vektor respons</p>
+<div class="cell language-name-processed" data-o006-id="O006-PSU-006-U0449">
+<div class="codeblock-with-label r" data-o006-id="O006-PSU-006-U0450">
+<style>.codeblock-with-label pre.lang-label-11::before { content: "R"; }</style>
+<div class="code-copy-outer-scaffold" data-o006-id="O006-PSU-006-U0451"><div class="sourceCode cell-code" data-language-name-skip="true" data-o006-id="O006-PSU-006-U0452" id="cb68"><pre class="sourceCode r lang-label-11 code-with-copy" data-o006-id="O006-PSU-006-U0453"><code class="sourceCode r" data-o006-id="O006-PSU-006-U0454"><span id="cb68-1"><a aria-hidden="true" data-o006-id="O006-PSU-006-U0455" href="#cb68-1" tabindex="-1"></a>response<span class="ot">=</span><span class="fu">c</span>(<span class="dv">14</span>,<span class="dv">12</span>,<span class="dv">11</span>,<span class="dv">18</span>,<span class="dv">20</span>,<span class="dv">21</span>,<span class="dv">20</span>,<span class="dv">17</span>,<span class="dv">23</span>,<span class="dv">25</span>)</span></code></pre></div><button class="code-copy-button" data-o006-id="O006-PSU-006-U0456" title="Salin ke papan klip"><i class="bi"></i></button></div>
+</div>
+</div>
+<p data-o006-id="O006-PSU-006-U0457">Terakhir, kita akan menggabungkan semuanya ke dalam sebuah <code data-o006-id="O006-PSU-006-U0458">data.frame</code>.</p>
+<div class="cell language-name-processed" data-o006-id="O006-PSU-006-U0459">
+<div class="codeblock-with-label r" data-o006-id="O006-PSU-006-U0460">
+<style>.codeblock-with-label pre.lang-label-12::before { content: "R"; }</style>
+<div class="code-copy-outer-scaffold" data-o006-id="O006-PSU-006-U0461"><div class="sourceCode cell-code" data-language-name-skip="true" data-o006-id="O006-PSU-006-U0462" id="cb69"><pre class="sourceCode r lang-label-12 code-with-copy" data-o006-id="O006-PSU-006-U0463"><code class="sourceCode r" data-o006-id="O006-PSU-006-U0464"><span id="cb69-1"><a aria-hidden="true" data-o006-id="O006-PSU-006-U0465" href="#cb69-1" tabindex="-1"></a>corn.yield<span class="ot">=</span><span class="fu">data.frame</span>(plot.ID,treatment,response)</span>
+<span id="cb69-2"><a aria-hidden="true" data-o006-id="O006-PSU-006-U0466" href="#cb69-2" tabindex="-1"></a></span>
+<span id="cb69-3"><a aria-hidden="true" data-o006-id="O006-PSU-006-U0467" href="#cb69-3" tabindex="-1"></a>corn.yield</span></code></pre></div><button class="code-copy-button" data-o006-id="O006-PSU-006-U0468" title="Salin ke papan klip"><i class="bi"></i></button></div>
+</div>
+<div class="cell-output cell-output-stdout" data-o006-id="O006-PSU-006-U0469">
+<pre data-o006-id="O006-PSU-006-U0470"><code data-o006-id="O006-PSU-006-U0471">   plot.ID treatment response
+1        1         X       14
+2        2         X       12
+3        3         X       11
+4        4         X       18
+5        5         X       20
+6        6         Y       21
+7        7         Y       20
+8        8         Y       17
+9        9         Y       23
+10      10         Y       25</code></pre>
+</div>
+</div>
+</section>
+<section class="level3" data-number="5.1.6" data-o006-id="O006-PSU-006-U0472" id="summary-statistics-in-r">
+<h3 class="anchored" data-anchor-id="summary-statistics-in-r" data-number="5.1.6" data-o006-id="O006-PSU-006-U0473"><span class="header-section-number">5.1.6</span> Statistik ringkasan dalam R</h3>
+<p data-o006-id="O006-PSU-006-U0474">Fungsi <code data-o006-id="O006-PSU-006-U0475">summary</code> dapat memberikan banyak informasi tentang sebuah kerangka data karena fungsi ini menghitung nilai minimum, maksimum, rataan, dan median setiap kolom numerik.</p>
+<div class="cell language-name-processed" data-o006-id="O006-PSU-006-U0476">
+<div class="codeblock-with-label r" data-o006-id="O006-PSU-006-U0477">
+<style>.codeblock-with-label pre.lang-label-13::before { content: "R"; }</style>
+<div class="code-copy-outer-scaffold" data-o006-id="O006-PSU-006-U0478"><div class="sourceCode cell-code" data-language-name-skip="true" data-o006-id="O006-PSU-006-U0479" id="cb71"><pre class="sourceCode r lang-label-13 code-with-copy" data-o006-id="O006-PSU-006-U0480"><code class="sourceCode r" data-o006-id="O006-PSU-006-U0481"><span id="cb71-1"><a aria-hidden="true" data-o006-id="O006-PSU-006-U0482" href="#cb71-1" tabindex="-1"></a><span class="fu">summary</span>(corn.yield)</span></code></pre></div><button class="code-copy-button" data-o006-id="O006-PSU-006-U0483" title="Salin ke papan klip"><i class="bi"></i></button></div>
+</div>
+<div class="cell-output cell-output-stdout" data-o006-id="O006-PSU-006-U0484">
+<pre data-o006-id="O006-PSU-006-U0485"><code data-o006-id="O006-PSU-006-U0486">    plot.ID       treatment            response    
+ Min.   : 1.00   Length:10          Min.   :11.00  
+ 1st Qu.: 3.25   Class :character   1st Qu.:14.75  
+ Median : 5.50   Mode  :character   Median :19.00  
+ Mean   : 5.50                      Mean   :18.10  
+ 3rd Qu.: 7.75                      3rd Qu.:20.75  
+ Max.   :10.00                      Max.   :25.00  </code></pre>
+</div>
+</div>
+<p data-o006-id="O006-PSU-006-U0487">Anda juga dapat menggunakan R untuk memperoleh rataan, varians, dan simpangan baku seluruh vektor:</p>
+<div class="cell language-name-processed" data-o006-id="O006-PSU-006-U0488">
+<div class="codeblock-with-label r" data-o006-id="O006-PSU-006-U0489">
+<style>.codeblock-with-label pre.lang-label-14::before { content: "R"; }</style>
+<div class="code-copy-outer-scaffold" data-o006-id="O006-PSU-006-U0490"><div class="sourceCode cell-code" data-language-name-skip="true" data-o006-id="O006-PSU-006-U0491" id="cb73"><pre class="sourceCode r lang-label-14 code-with-copy" data-o006-id="O006-PSU-006-U0492"><code class="sourceCode r" data-o006-id="O006-PSU-006-U0493"><span id="cb73-1"><a aria-hidden="true" data-o006-id="O006-PSU-006-U0494" href="#cb73-1" tabindex="-1"></a><span class="fu">mean</span>(response)</span></code></pre></div><button class="code-copy-button" data-o006-id="O006-PSU-006-U0495" title="Salin ke papan klip"><i class="bi"></i></button></div>
+</div>
+<div class="cell-output cell-output-stdout" data-o006-id="O006-PSU-006-U0496">
+<pre data-o006-id="O006-PSU-006-U0497"><code data-o006-id="O006-PSU-006-U0498">[1] 18.1</code></pre>
+</div>
+<div class="codeblock-with-label r" data-o006-id="O006-PSU-006-U0499">
+<style>.codeblock-with-label pre.lang-label-77::before { content: "R"; }</style>
+<div class="code-copy-outer-scaffold" data-o006-id="O006-PSU-006-U0500"><div class="sourceCode cell-code" data-o006-id="O006-PSU-006-U0501" id="cb75"><pre class="sourceCode r lang-label-77 code-with-copy" data-o006-id="O006-PSU-006-U0502"><code class="sourceCode r" data-o006-id="O006-PSU-006-U0503"><span id="cb75-1"><a aria-hidden="true" data-o006-id="O006-PSU-006-U0504" href="#cb75-1" tabindex="-1"></a><span class="fu">var</span>(response)</span></code></pre></div><button class="code-copy-button" data-o006-id="O006-PSU-006-U0505" title="Salin ke papan klip"><i class="bi"></i></button></div>
+</div>
+<div class="cell-output cell-output-stdout" data-o006-id="O006-PSU-006-U0506">
+<pre data-o006-id="O006-PSU-006-U0507"><code data-o006-id="O006-PSU-006-U0508">[1] 21.43333</code></pre>
+</div>
+<div class="codeblock-with-label r" data-o006-id="O006-PSU-006-U0509">
+<style>.codeblock-with-label pre.lang-label-78::before { content: "R"; }</style>
+<div class="code-copy-outer-scaffold" data-o006-id="O006-PSU-006-U0510"><div class="sourceCode cell-code" data-o006-id="O006-PSU-006-U0511" id="cb77"><pre class="sourceCode r lang-label-78 code-with-copy" data-o006-id="O006-PSU-006-U0512"><code class="sourceCode r" data-o006-id="O006-PSU-006-U0513"><span id="cb77-1"><a aria-hidden="true" data-o006-id="O006-PSU-006-U0514" href="#cb77-1" tabindex="-1"></a><span class="fu">sd</span>(response)</span></code></pre></div><button class="code-copy-button" data-o006-id="O006-PSU-006-U0515" title="Salin ke papan klip"><i class="bi"></i></button></div>
+</div>
+<div class="cell-output cell-output-stdout" data-o006-id="O006-PSU-006-U0516">
+<pre data-o006-id="O006-PSU-006-U0517"><code data-o006-id="O006-PSU-006-U0518">[1] 4.629615</code></pre>
+</div>
+</div>
+<p data-o006-id="O006-PSU-006-U0519">atau bahkan subset vektor</p>
+<div class="cell language-name-processed" data-o006-id="O006-PSU-006-U0520">
+<div class="codeblock-with-label r" data-o006-id="O006-PSU-006-U0521">
+<style>.codeblock-with-label pre.lang-label-15::before { content: "R"; }</style>
+<div class="code-copy-outer-scaffold" data-o006-id="O006-PSU-006-U0522"><div class="sourceCode cell-code" data-language-name-skip="true" data-o006-id="O006-PSU-006-U0523" id="cb79"><pre class="sourceCode r lang-label-15 code-with-copy" data-o006-id="O006-PSU-006-U0524"><code class="sourceCode r" data-o006-id="O006-PSU-006-U0525"><span id="cb79-1"><a aria-hidden="true" data-o006-id="O006-PSU-006-U0526" href="#cb79-1" tabindex="-1"></a><span class="fu">mean</span>(response[treatment<span class="sc">==</span><span class="st">"X"</span>])</span></code></pre></div><button class="code-copy-button" data-o006-id="O006-PSU-006-U0527" title="Salin ke papan klip"><i class="bi"></i></button></div>
+</div>
+<div class="cell-output cell-output-stdout" data-o006-id="O006-PSU-006-U0528">
+<pre data-o006-id="O006-PSU-006-U0529"><code data-o006-id="O006-PSU-006-U0530">[1] 15</code></pre>
+</div>
+<div class="codeblock-with-label r" data-o006-id="O006-PSU-006-U0531">
+<style>.codeblock-with-label pre.lang-label-79::before { content: "R"; }</style>
+<div class="code-copy-outer-scaffold" data-o006-id="O006-PSU-006-U0532"><div class="sourceCode cell-code" data-o006-id="O006-PSU-006-U0533" id="cb81"><pre class="sourceCode r lang-label-79 code-with-copy" data-o006-id="O006-PSU-006-U0534"><code class="sourceCode r" data-o006-id="O006-PSU-006-U0535"><span id="cb81-1"><a aria-hidden="true" data-o006-id="O006-PSU-006-U0536" href="#cb81-1" tabindex="-1"></a><span class="fu">mean</span>(response[treatment<span class="sc">==</span><span class="st">"Y"</span>])</span></code></pre></div><button class="code-copy-button" data-o006-id="O006-PSU-006-U0537" title="Salin ke papan klip"><i class="bi"></i></button></div>
+</div>
+<div class="cell-output cell-output-stdout" data-o006-id="O006-PSU-006-U0538">
+<pre data-o006-id="O006-PSU-006-U0539"><code data-o006-id="O006-PSU-006-U0540">[1] 21.2</code></pre>
+</div>
+<div class="codeblock-with-label r" data-o006-id="O006-PSU-006-U0541">
+<style>.codeblock-with-label pre.lang-label-80::before { content: "R"; }</style>
+<div class="code-copy-outer-scaffold" data-o006-id="O006-PSU-006-U0542"><div class="sourceCode cell-code" data-o006-id="O006-PSU-006-U0543" id="cb83"><pre class="sourceCode r lang-label-80 code-with-copy" data-o006-id="O006-PSU-006-U0544"><code class="sourceCode r" data-o006-id="O006-PSU-006-U0545"><span id="cb83-1"><a aria-hidden="true" data-o006-id="O006-PSU-006-U0546" href="#cb83-1" tabindex="-1"></a><span class="fu">sd</span>(response[treatment<span class="sc">==</span><span class="st">"X"</span>])</span></code></pre></div><button class="code-copy-button" data-o006-id="O006-PSU-006-U0547" title="Salin ke papan klip"><i class="bi"></i></button></div>
+</div>
+<div class="cell-output cell-output-stdout" data-o006-id="O006-PSU-006-U0548">
+<pre data-o006-id="O006-PSU-006-U0549"><code data-o006-id="O006-PSU-006-U0550">[1] 3.872983</code></pre>
+</div>
+<div class="codeblock-with-label r" data-o006-id="O006-PSU-006-U0551">
+<style>.codeblock-with-label pre.lang-label-81::before { content: "R"; }</style>
+<div class="code-copy-outer-scaffold" data-o006-id="O006-PSU-006-U0552"><div class="sourceCode cell-code" data-o006-id="O006-PSU-006-U0553" id="cb85"><pre class="sourceCode r lang-label-81 code-with-copy" data-o006-id="O006-PSU-006-U0554"><code class="sourceCode r" data-o006-id="O006-PSU-006-U0555"><span id="cb85-1"><a aria-hidden="true" data-o006-id="O006-PSU-006-U0556" href="#cb85-1" tabindex="-1"></a><span class="fu">sd</span>(response[treatment<span class="sc">==</span><span class="st">"Y"</span>])</span></code></pre></div><button class="code-copy-button" data-o006-id="O006-PSU-006-U0557" title="Salin ke papan klip"><i class="bi"></i></button></div>
+</div>
+<div class="cell-output cell-output-stdout" data-o006-id="O006-PSU-006-U0558">
+<pre data-o006-id="O006-PSU-006-U0559"><code data-o006-id="O006-PSU-006-U0560">[1] 3.03315</code></pre>
+</div>
+</div>
+</section>
+<section class="level3" data-number="5.1.7" data-o006-id="O006-PSU-006-U0561" id="simple-plotting-in-r">
+<h3 class="anchored" data-anchor-id="simple-plotting-in-r" data-number="5.1.7" data-o006-id="O006-PSU-006-U0562"><span class="header-section-number">5.1.7</span> Pembuatan Grafik Sederhana dalam R</h3>
+<p data-o006-id="O006-PSU-006-U0563">R juga dapat digunakan untuk membuat grafik data. Menyimpan data dalam sebuah <code data-o006-id="O006-PSU-006-U0564">data.frame</code> dapat mempermudah pembuatan grafik dan analisis data. Sebagai contoh, kita dapat membuat boxplot data hasil panen jagung menggunakan perintah <code data-o006-id="O006-PSU-006-U0565">boxplot</code> tersebut</p>
+<div class="cell language-name-processed" data-o006-id="O006-PSU-006-U0566">
+<div class="codeblock-with-label r" data-o006-id="O006-PSU-006-U0567">
+<style>.codeblock-with-label pre.lang-label-16::before { content: "R"; }</style>
+<div class="code-copy-outer-scaffold" data-o006-id="O006-PSU-006-U0568"><div class="sourceCode cell-code" data-language-name-skip="true" data-o006-id="O006-PSU-006-U0569" id="cb87"><pre class="sourceCode r lang-label-16 code-with-copy" data-o006-id="O006-PSU-006-U0570"><code class="sourceCode r" data-o006-id="O006-PSU-006-U0571"><span id="cb87-1"><a aria-hidden="true" data-o006-id="O006-PSU-006-U0572" href="#cb87-1" tabindex="-1"></a><span class="fu">boxplot</span>(response<span class="sc">~</span>treatment,<span class="at">data=</span>corn.yield,</span>
+<span id="cb87-2"><a aria-hidden="true" data-o006-id="O006-PSU-006-U0573" href="#cb87-2" tabindex="-1"></a>        <span class="at">main=</span><span class="st">"Boxplot of Corn Yield With Different Fertilizers"</span>,</span>
+<span id="cb87-3"><a aria-hidden="true" data-o006-id="O006-PSU-006-U0574" href="#cb87-3" tabindex="-1"></a>        <span class="at">xlab=</span><span class="st">"Fertilizer"</span>,<span class="at">ylab=</span><span class="st">"Yield (kg)"</span>)</span></code></pre></div><button class="code-copy-button" data-o006-id="O006-PSU-006-U0575" title="Salin ke papan klip"><i class="bi"></i></button></div>
+</div>
+<div class="cell-output-display" data-o006-id="O006-PSU-006-U0576">
+<div alt="Two boxplots for X and Y from the corn yield data." class="quarto-float quarto-figure quarto-figure-center anchored" data-o006-id="O006-PSU-006-U0577" id="fig-boxplotcornyield" width="70%">
+<figure class="quarto-float quarto-float-fig figure" data-o006-id="O006-PSU-006-U0578">
+<div aria-describedby="fig-boxplotcornyield-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca" data-o006-id="O006-PSU-006-U0579">
+<a class="lightbox" data-gallery="quarto-lightbox-gallery-1" data-o006-id="O006-PSU-006-U0580" href="assets/lesson05/fig-boxplotcornyield-1.png" title="Gambar 5.1: "><img alt="Dua diagram kotak hasil panen jagung untuk Pupuk X dan Pupuk Y, dengan median dan sebaran kelompok ditampilkan berdampingan." class="img-fluid figure-img" data-o006-asset-id="O006-PSU-006-A0001" data-o006-id="O006-PSU-006-U0581" id="fig-boxplotcornyield-image" src="assets/lesson05/fig-boxplotcornyield-1.png" style="width:70.0%"/></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" data-o006-id="O006-PSU-006-U0582" id="fig-boxplotcornyield-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Gambar 5.1
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p data-o006-id="O006-PSU-006-U0583">Histogram dapat dibuat menggunakan perintah <code data-o006-id="O006-PSU-006-U0584">hist</code> tersebut.</p>
+<div class="cell language-name-processed" data-o006-id="O006-PSU-006-U0585">
+<div class="codeblock-with-label r" data-o006-id="O006-PSU-006-U0586">
+<style>.codeblock-with-label pre.lang-label-17::before { content: "R"; }</style>
+<div class="code-copy-outer-scaffold" data-o006-id="O006-PSU-006-U0587"><div class="sourceCode cell-code" data-language-name-skip="true" data-o006-id="O006-PSU-006-U0588" id="cb88"><pre class="sourceCode r lang-label-17 code-with-copy" data-o006-id="O006-PSU-006-U0589"><code class="sourceCode r" data-o006-id="O006-PSU-006-U0590"><span id="cb88-1"><a aria-hidden="true" data-o006-id="O006-PSU-006-U0591" href="#cb88-1" tabindex="-1"></a><span class="fu">hist</span>(response,<span class="at">main=</span><span class="st">"Histogram of Corn Yield (All Plots)"</span>)</span></code></pre></div><button class="code-copy-button" data-o006-id="O006-PSU-006-U0592" title="Salin ke papan klip"><i class="bi"></i></button></div>
+</div>
+<div class="cell-output-display" data-o006-id="O006-PSU-006-U0593">
+<div alt="Histogram of all plots in the corn yield data." class="quarto-float quarto-figure quarto-figure-center anchored" data-o006-id="O006-PSU-006-U0594" id="fig-histogramcornyield" width="70%">
+<figure class="quarto-float quarto-float-fig figure" data-o006-id="O006-PSU-006-U0595">
+<div aria-describedby="fig-histogramcornyield-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca" data-o006-id="O006-PSU-006-U0596">
+<a class="lightbox" data-gallery="quarto-lightbox-gallery-2" data-o006-id="O006-PSU-006-U0597" href="assets/lesson05/fig-histogramcornyield-1.png" title="Gambar 5.2: "><img alt="Histogram hasil panen jagung dari seluruh petak percobaan." class="img-fluid figure-img" data-o006-asset-id="O006-PSU-006-A0002" data-o006-id="O006-PSU-006-U0598" id="fig-histogramcornyield-image" src="assets/lesson05/fig-histogramcornyield-1.png" style="width:70.0%"/></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" data-o006-id="O006-PSU-006-U0599" id="fig-histogramcornyield-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Gambar 5.2
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p data-o006-id="O006-PSU-006-U0600">Data numerik juga dapat ditampilkan sebagai diagram pencar menggunakan perintah <code data-o006-id="O006-PSU-006-U0601">plot</code> tersebut.</p>
+<div class="cell language-name-processed" data-o006-id="O006-PSU-006-U0602">
+<div class="codeblock-with-label r" data-o006-id="O006-PSU-006-U0603">
+<style>.codeblock-with-label pre.lang-label-18::before { content: "R"; }</style>
+<div class="code-copy-outer-scaffold" data-o006-id="O006-PSU-006-U0604"><div class="sourceCode cell-code" data-language-name-skip="true" data-o006-id="O006-PSU-006-U0605" id="cb89"><pre class="sourceCode r lang-label-18 code-with-copy" data-o006-id="O006-PSU-006-U0606"><code class="sourceCode r" data-o006-id="O006-PSU-006-U0607"><span id="cb89-1"><a aria-hidden="true" data-o006-id="O006-PSU-006-U0608" href="#cb89-1" tabindex="-1"></a><span class="fu">plot</span>(<span class="at">x=</span>plot.ID,<span class="at">y=</span>response)</span></code></pre></div><button class="code-copy-button" data-o006-id="O006-PSU-006-U0609" title="Salin ke papan klip"><i class="bi"></i></button></div>
+</div>
+<div class="cell-output-display" data-o006-id="O006-PSU-006-U0610">
+<div alt="Scatterplot of response vs Plot ID in the corn yield data." class="quarto-float quarto-figure quarto-figure-center anchored" data-o006-id="O006-PSU-006-U0611" id="fig-scattercornyield" width="70%">
+<figure class="quarto-float quarto-float-fig figure" data-o006-id="O006-PSU-006-U0612">
+<div aria-describedby="fig-scattercornyield-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca" data-o006-id="O006-PSU-006-U0613">
+<a class="lightbox" data-gallery="quarto-lightbox-gallery-3" data-o006-id="O006-PSU-006-U0614" href="assets/lesson05/fig-scattercornyield-1.png" title="Gambar 5.3: "><img alt="Diagram pencar hasil panen terhadap nomor petak, dengan titik setiap petak percobaan." class="img-fluid figure-img" data-o006-asset-id="O006-PSU-006-A0003" data-o006-id="O006-PSU-006-U0615" id="fig-scattercornyield-image" src="assets/lesson05/fig-scattercornyield-1.png" style="width:70.0%"/></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" data-o006-id="O006-PSU-006-U0616" id="fig-scattercornyield-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Gambar 5.3
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p data-o006-id="O006-PSU-006-U0617">Anda akan sering perlu menyertakan grafik R dalam jawaban pekerjaan rumah. Setelah membuat grafik, Anda dapat mengeklik kanan gambar tersebut di RStudio, menyalinnya, lalu menempelkannya ke dokumen Word (atau dokumen sejenis).</p>
+</section>
+<section class="level3" data-number="5.1.8" data-o006-id="O006-PSU-006-U0618" id="statistical-distributions-in-r">
+<h3 class="anchored" data-anchor-id="statistical-distributions-in-r" data-number="5.1.8" data-o006-id="O006-PSU-006-U0619"><span class="header-section-number">5.1.8</span> Distribusi Statistik dalam R</h3>
+<section class="level4" data-o006-id="O006-PSU-006-U0620" id="help-files-in-r">
+<h4 class="anchored" data-anchor-id="help-files-in-r" data-o006-id="O006-PSU-006-U0621">Berkas bantuan dalam R</h4>
+<p data-o006-id="O006-PSU-006-U0622">Ada banyak fungsi dalam R - terlalu banyak untuk dihafal seluruhnya oleh siapa pun ketika melakukan sebagian besar analisis. R juga memiliki sistem dokumentasi yang sangat lengkap, asalkan Anda mengetahui apa yang perlu dicari. Khususnya, jika Anda mengetahui nama fungsi yang memerlukan bantuan, R dapat membantu dengan sangat mudah (lihat di bawah). Namun, jika Anda tidak mengetahui nama fungsi yang melakukan sesuatu yang ingin dikerjakan, pilihan terbaik adalah mencari fungsi tersebut di internet menggunakan mesin pencari pilihan Anda.</p>
+<p data-o006-id="O006-PSU-006-U0623">Sebagai contoh, jika ingin mengetahui cara memperoleh CDF distribusi Normal dalam R, pencarian seperti “CDF distribusi normal dalam R” akan segera memberikan banyak hasil yang mengarahkan Anda ke fungsi <code data-o006-id="O006-PSU-006-U0624">pnorm</code> dalam R.</p>
+<p data-o006-id="O006-PSU-006-U0625">Setelah mengetahui fungsi yang ingin digunakan, Anda dapat membuka berkas bantuan R untuk fungsi tersebut dengan mengetik <code data-o006-id="O006-PSU-006-U0626">help(pnorm)</code> atau <code data-o006-id="O006-PSU-006-U0627">?pnorm</code> pada konsol R. Perhatikan bahwa Anda harus mengganti <code data-o006-id="O006-PSU-006-U0628">pnorm</code> dengan nama fungsi yang ingin Anda cari bantuannya.</p>
+</section>
+<section class="level4" data-o006-id="O006-PSU-006-U0629" id="r-functions-for-statistical-distributions">
+<h4 class="anchored" data-anchor-id="r-functions-for-statistical-distributions" data-o006-id="O006-PSU-006-U0630">Fungsi R untuk Distribusi Statistik</h4>
+<p data-o006-id="O006-PSU-006-U0631">R merupakan perangkat lunak statistik yang sangat baik untuk bekerja dengan distribusi. Tiga tugas utama terkait peubah acak yang dapat ditangani R dengan sangat baik adalah:</p>
+<ol data-o006-id="O006-PSU-006-U0632" type="1">
+<li data-o006-id="O006-PSU-006-U0633"><p data-o006-id="O006-PSU-006-U0634">Membangkitkan peubah acak dari suatu distribusi tertentu</p></li>
+<li data-o006-id="O006-PSU-006-U0635"><p data-o006-id="O006-PSU-006-U0636">Menghitung nilai fungsi kepadatan peluang (PDF) untuk distribusi kontinu atau fungsi massa peluang (PMF) untuk distribusi diskret pada suatu nilai amatan</p></li>
+<li data-o006-id="O006-PSU-006-U0637"><p data-o006-id="O006-PSU-006-U0638">Menghitung kuantil dan CDF suatu distribusi.</p></li>
+</ol>
+<p data-o006-id="O006-PSU-006-U0639">Dalam R, fungsi-fungsi yang berkaitan dengan distribusi mengikuti suatu pola. Jika nama singkat suatu distribusi dalam R adalah “XXX”, maka “rXXX” membangkitkan peubah acak dari distribusi tersebut, “dXXX” menghitung nilai kepadatan untuk distribusi kontinu atau nilai massa peluang untuk distribusi diskret, “pXXX” menghitung fungsi distribusi kumulatif, dan “qXXX” menghitung kuantil. Dengan amatan yang ditetapkan dan parameter yang diperlakukan sebagai peubah, nilai dari “dXXX” dapat menjadi satu faktor dalam fungsi kemungkinan.</p>
+</section>
+<section class="level4" data-o006-id="O006-PSU-006-U0640" id="examples-from-the-gaussian-normal-distribution">
+<h4 class="anchored" data-anchor-id="examples-from-the-gaussian-normal-distribution" data-o006-id="O006-PSU-006-U0641">Contoh dari Distribusi Gaussian (Normal)</h4>
+<p data-o006-id="O006-PSU-006-U0642">Sebagai contoh, anggap bahwa setiap <span class="math inline" data-o006-math-id="O006-PSU-006-M0004">\(x_i \sim N(3,4)\)</span> merupakan peubah acak berdistribusi Normal yang saling bebas, dengan rataan 3 dan varians 4. Nama singkat peubah berdistribusi Normal dalam R adalah “norm”, sehingga kita dapat menggunakan kode berikut untuk membangkitkan satu peubah acak; seed 4150501 dicatat agar keluarannya dapat direproduksi:</p>
+<div class="cell language-name-processed" data-o006-id="O006-PSU-006-U0643">
+<div class="codeblock-with-label r" data-o006-id="O006-PSU-006-U0644">
+<style>.codeblock-with-label pre.lang-label-19::before { content: "R"; }</style>
+<div class="code-copy-outer-scaffold" data-o006-id="O006-PSU-006-U0645"><div class="sourceCode cell-code" data-language-name-skip="true" data-o006-id="O006-PSU-006-U0646" id="cb90"><pre class="sourceCode r lang-label-19 code-with-copy" data-o006-id="O006-PSU-006-U0647"><code class="sourceCode r" data-o006-id="O006-PSU-006-U0648"><span id="cb90-1"><a aria-hidden="true" data-o006-id="O006-PSU-006-U0649" href="#cb90-1" tabindex="-1"></a><span class="fu">set.seed(4150501)
+rnorm(n=1,mean=3,sd=2)</span><span class="at"></span><span class="dv"></span><span class="at"></span><span class="dv"></span><span class="at"></span><span class="dv"></span></span></code></pre></div><button class="code-copy-button" data-o006-id="O006-PSU-006-U0650" title="Salin ke papan klip"><i class="bi"></i></button></div>
+</div>
+<div class="cell-output cell-output-stdout" data-o006-id="O006-PSU-006-U0651">
+<pre data-o006-id="O006-PSU-006-U0652"><code data-o006-id="O006-PSU-006-U0653">[1] 6.688992</code></pre>
+</div>
+</div>
+<p data-o006-id="O006-PSU-006-U0654">Perhatikan bahwa R menggunakan simpangan baku <code data-o006-id="O006-PSU-006-U0655">sd</code> alih-alih varians. Jika ingin membangkitkan 10 peubah acak iid, saya dapat mengubah argumen <code data-o006-id="O006-PSU-006-U0656">n</code> pada rnorm; blok ini menggunakan seed 4150502:</p>
+<div class="cell language-name-processed" data-o006-id="O006-PSU-006-U0657">
+<div class="codeblock-with-label r" data-o006-id="O006-PSU-006-U0658">
+<style>.codeblock-with-label pre.lang-label-20::before { content: "R"; }</style>
+<div class="code-copy-outer-scaffold" data-o006-id="O006-PSU-006-U0659"><div class="sourceCode cell-code" data-language-name-skip="true" data-o006-id="O006-PSU-006-U0660" id="cb92"><pre class="sourceCode r lang-label-20 code-with-copy" data-o006-id="O006-PSU-006-U0661"><code class="sourceCode r" data-o006-id="O006-PSU-006-U0662"><span id="cb92-1"><a aria-hidden="true" data-o006-id="O006-PSU-006-U0663" href="#cb92-1" tabindex="-1"></a><span class="fu">set.seed(4150502)
+rnorm(n=10,mean=3,sd=2)</span><span class="at"></span><span class="dv"></span><span class="at"></span><span class="dv"></span><span class="at"></span><span class="dv"></span></span></code></pre></div><button class="code-copy-button" data-o006-id="O006-PSU-006-U0664" title="Salin ke papan klip"><i class="bi"></i></button></div>
+</div>
+<div class="cell-output cell-output-stdout" data-o006-id="O006-PSU-006-U0665">
+<pre data-o006-id="O006-PSU-006-U0666"><code data-o006-id="O006-PSU-006-U0667"> [1] -1.9913396  5.7018791  2.7175272  3.9104060  1.8026764  9.2187028
+ [7] -0.2472842  3.3046301  2.2024390 -0.6402799</code></pre>
+</div>
+</div>
+<p data-o006-id="O006-PSU-006-U0668">Saya juga dapat menyimpan satu nilai yang dibangkitkan ini dalam sebuah variabel untuk digunakan kemudian; blok berikut mencatat seed 4150503 sehingga nilai simulasinya dapat direproduksi</p>
+<div class="cell language-name-processed" data-o006-id="O006-PSU-006-U0669">
+<div class="codeblock-with-label r" data-o006-id="O006-PSU-006-U0670">
+<style>.codeblock-with-label pre.lang-label-21::before { content: "R"; }</style>
+<div class="code-copy-outer-scaffold" data-o006-id="O006-PSU-006-U0671"><div class="sourceCode cell-code" data-language-name-skip="true" data-o006-id="O006-PSU-006-U0672" id="cb94"><pre class="sourceCode r lang-label-21 code-with-copy" data-o006-id="O006-PSU-006-U0673"><code class="sourceCode r" data-o006-id="O006-PSU-006-U0674"><span id="cb94-1"><a aria-hidden="true" data-o006-id="O006-PSU-006-U0675" href="#cb94-1" tabindex="-1"></a>set.seed(4150503)
+x=rnorm(n=1,mean=3,sd=2)
+
+x<span class="ot"></span><span class="fu"></span><span class="at"></span><span class="dv"></span><span class="at"></span><span class="dv"></span><span class="at"></span><span class="dv"></span></span><span id="cb94-2"><a aria-hidden="true" data-o006-id="O006-PSU-006-U0676" href="#cb94-2" tabindex="-1"></a></span><span id="cb94-3"><a aria-hidden="true" data-o006-id="O006-PSU-006-U0677" href="#cb94-3" tabindex="-1"></a></span></code></pre></div><button class="code-copy-button" data-o006-id="O006-PSU-006-U0678" title="Salin ke papan klip"><i class="bi"></i></button></div>
+</div>
+<div class="cell-output cell-output-stdout" data-o006-id="O006-PSU-006-U0679">
+<pre data-o006-id="O006-PSU-006-U0680"><code data-o006-id="O006-PSU-006-U0681">[1] 3.880108</code></pre>
+</div>
+</div>
+<p data-o006-id="O006-PSU-006-U0682">Sekarang, jika ingin mengevaluasi PDF suatu peubah acak <span class="math inline" data-o006-math-id="O006-PSU-006-M0005">\(x \sim N(3,4)\)</span> pada nilai tertentu <span class="math inline" data-o006-math-id="O006-PSU-006-M0006">\(u=2\)</span>, saya dapat menggunakan <code data-o006-id="O006-PSU-006-U0683">dnorm</code> sebagai berikut:</p>
+<div class="cell language-name-processed" data-o006-id="O006-PSU-006-U0684">
+<div class="codeblock-with-label r" data-o006-id="O006-PSU-006-U0685">
+<style>.codeblock-with-label pre.lang-label-22::before { content: "R"; }</style>
+<div class="code-copy-outer-scaffold" data-o006-id="O006-PSU-006-U0686"><div class="sourceCode cell-code" data-language-name-skip="true" data-o006-id="O006-PSU-006-U0687" id="cb96"><pre class="sourceCode r lang-label-22 code-with-copy" data-o006-id="O006-PSU-006-U0688"><code class="sourceCode r" data-o006-id="O006-PSU-006-U0689"><span id="cb96-1"><a aria-hidden="true" data-o006-id="O006-PSU-006-U0690" href="#cb96-1" tabindex="-1"></a><span class="fu">dnorm</span>(<span class="dv">2</span>,<span class="at">mean=</span><span class="dv">3</span>,<span class="at">sd=</span><span class="dv">2</span>)</span></code></pre></div><button class="code-copy-button" data-o006-id="O006-PSU-006-U0691" title="Salin ke papan klip"><i class="bi"></i></button></div>
+</div>
+<div class="cell-output cell-output-stdout" data-o006-id="O006-PSU-006-U0692">
+<pre data-o006-id="O006-PSU-006-U0693"><code data-o006-id="O006-PSU-006-U0694">[1] 0.1760327</code></pre>
+</div>
+</div>
+<p data-o006-id="O006-PSU-006-U0695">Kode di atas menghasilkan <span class="math inline" data-o006-math-id="O006-PSU-006-M0007">\(f_X(2)\)</span>. Untuk memperoleh CDF, kita menggunakan <code data-o006-id="O006-PSU-006-U0696">pnorm</code> sebagai fungsi CDF, sedangkan <span class="math inline" data-o006-math-id="O006-PSU-006-M0008">\(F_X(2) = P(X\le 2)\)</span> diperoleh melalui:</p>
+<div class="cell language-name-processed" data-o006-id="O006-PSU-006-U0697">
+<div class="codeblock-with-label r" data-o006-id="O006-PSU-006-U0698">
+<style>.codeblock-with-label pre.lang-label-23::before { content: "R"; }</style>
+<div class="code-copy-outer-scaffold" data-o006-id="O006-PSU-006-U0699"><div class="sourceCode cell-code" data-language-name-skip="true" data-o006-id="O006-PSU-006-U0700" id="cb98"><pre class="sourceCode r lang-label-23 code-with-copy" data-o006-id="O006-PSU-006-U0701"><code class="sourceCode r" data-o006-id="O006-PSU-006-U0702"><span id="cb98-1"><a aria-hidden="true" data-o006-id="O006-PSU-006-U0703" href="#cb98-1" tabindex="-1"></a><span class="fu">pnorm</span>(<span class="dv">2</span>,<span class="at">mean=</span><span class="dv">3</span>,<span class="at">sd=</span><span class="dv">2</span>)</span></code></pre></div><button class="code-copy-button" data-o006-id="O006-PSU-006-U0704" title="Salin ke papan klip"><i class="bi"></i></button></div>
+</div>
+<div class="cell-output cell-output-stdout" data-o006-id="O006-PSU-006-U0705">
+<pre data-o006-id="O006-PSU-006-U0706"><code data-o006-id="O006-PSU-006-U0707">[1] 0.3085375</code></pre>
+</div>
+</div>
+<p data-o006-id="O006-PSU-006-U0708">Fungsi-fungsi ini juga bekerja pada vektor. Sebagai contoh, jika ingin mengevaluasi nilai kepadatan untuk data simulasi yang tersimpan dalam “x”, saya dapat melakukannya dengan</p>
+<div class="cell language-name-processed" data-o006-id="O006-PSU-006-U0709">
+<div class="codeblock-with-label r" data-o006-id="O006-PSU-006-U0710">
+<style>.codeblock-with-label pre.lang-label-24::before { content: "R"; }</style>
+<div class="code-copy-outer-scaffold" data-o006-id="O006-PSU-006-U0711"><div class="sourceCode cell-code" data-language-name-skip="true" data-o006-id="O006-PSU-006-U0712" id="cb100"><pre class="sourceCode r lang-label-24 code-with-copy" data-o006-id="O006-PSU-006-U0713"><code class="sourceCode r" data-o006-id="O006-PSU-006-U0714"><span id="cb100-1"><a aria-hidden="true" data-o006-id="O006-PSU-006-U0715" href="#cb100-1" tabindex="-1"></a><span class="fu">dnorm</span>(x,<span class="at">mean=</span><span class="dv">3</span>,<span class="at">sd=</span><span class="dv">2</span>)</span></code></pre></div><button class="code-copy-button" data-o006-id="O006-PSU-006-U0716" title="Salin ke papan klip"><i class="bi"></i></button></div>
+</div>
+<div class="cell-output cell-output-stdout" data-o006-id="O006-PSU-006-U0717">
+<pre data-o006-id="O006-PSU-006-U0718"><code data-o006-id="O006-PSU-006-U0719">[1] 0.1810632</code></pre>
+</div>
+</div>
+<p data-o006-id="O006-PSU-006-U0720">Kepadatan bersama untuk semua peubah acak simulasi <span class="math inline" data-o006-math-id="O006-PSU-006-M0009">\(L(\mu,\sigma;\mathbf{x})=\prod_{i=1}^{n}f(x_i\mid\mu,\sigma)\)</span> kemudian diberikan oleh</p>
+<div class="cell language-name-processed" data-o006-id="O006-PSU-006-U0721">
+<div class="codeblock-with-label r" data-o006-id="O006-PSU-006-U0722">
+<style>.codeblock-with-label pre.lang-label-25::before { content: "R"; }</style>
+<div class="code-copy-outer-scaffold" data-o006-id="O006-PSU-006-U0723"><div class="sourceCode cell-code" data-language-name-skip="true" data-o006-id="O006-PSU-006-U0724" id="cb102"><pre class="sourceCode r lang-label-25 code-with-copy" data-o006-id="O006-PSU-006-U0725"><code class="sourceCode r" data-o006-id="O006-PSU-006-U0726"><span id="cb102-1"><a aria-hidden="true" data-o006-id="O006-PSU-006-U0727" href="#cb102-1" tabindex="-1"></a><span class="fu">prod</span>(<span class="fu">dnorm</span>(x,<span class="at">mean=</span><span class="dv">3</span>,<span class="at">sd=</span><span class="dv">2</span>))</span></code></pre></div><button class="code-copy-button" data-o006-id="O006-PSU-006-U0728" title="Salin ke papan klip"><i class="bi"></i></button></div>
+</div>
+<div class="cell-output cell-output-stdout" data-o006-id="O006-PSU-006-U0729">
+<pre data-o006-id="O006-PSU-006-U0730"><code data-o006-id="O006-PSU-006-U0731">[1] 0.1810632</code></pre>
+</div>
+</div>
+<p data-o006-id="O006-PSU-006-U0732">dan log-kepadatan bersamanya <span class="math inline" data-o006-math-id="O006-PSU-006-M0010">\(\ell(\mu,\sigma;\mathbf{x})=\sum_{i=1}^{n}\log f(x_i\mid\mu,\sigma)\)</span> dapat dihitung dengan</p>
+<div class="cell language-name-processed" data-o006-id="O006-PSU-006-U0733">
+<div class="codeblock-with-label r" data-o006-id="O006-PSU-006-U0734">
+<style>.codeblock-with-label pre.lang-label-26::before { content: "R"; }</style>
+<div class="code-copy-outer-scaffold" data-o006-id="O006-PSU-006-U0735"><div class="sourceCode cell-code" data-language-name-skip="true" data-o006-id="O006-PSU-006-U0736" id="cb104"><pre class="sourceCode r lang-label-26 code-with-copy" data-o006-id="O006-PSU-006-U0737"><code class="sourceCode r" data-o006-id="O006-PSU-006-U0738"><span id="cb104-1"><a aria-hidden="true" data-o006-id="O006-PSU-006-U0739" href="#cb104-1" tabindex="-1"></a><span class="fu">sum</span>(<span class="fu">log</span>(<span class="fu">dnorm</span>(x,<span class="at">mean=</span><span class="dv">3</span>,<span class="at">sd=</span><span class="dv">2</span>)))</span></code></pre></div><button class="code-copy-button" data-o006-id="O006-PSU-006-U0740" title="Salin ke papan klip"><i class="bi"></i></button></div>
+</div>
+<div class="cell-output cell-output-stdout" data-o006-id="O006-PSU-006-U0741">
+<pre data-o006-id="O006-PSU-006-U0742"><code data-o006-id="O006-PSU-006-U0743">[1] -1.708909</code></pre>
+</div>
+</div>
+<p data-o006-id="O006-PSU-006-U0744">R menyediakan sebuah argumen untuk <code data-o006-id="O006-PSU-006-U0745">dnorm</code> guna memperoleh log-kepadatan alih-alih kepadatan:</p>
+<div class="cell language-name-processed" data-o006-id="O006-PSU-006-U0746">
+<div class="codeblock-with-label r" data-o006-id="O006-PSU-006-U0747">
+<style>.codeblock-with-label pre.lang-label-27::before { content: "R"; }</style>
+<div class="code-copy-outer-scaffold" data-o006-id="O006-PSU-006-U0748"><div class="sourceCode cell-code" data-language-name-skip="true" data-o006-id="O006-PSU-006-U0749" id="cb106"><pre class="sourceCode r lang-label-27 code-with-copy" data-o006-id="O006-PSU-006-U0750"><code class="sourceCode r" data-o006-id="O006-PSU-006-U0751"><span id="cb106-1"><a aria-hidden="true" data-o006-id="O006-PSU-006-U0752" href="#cb106-1" tabindex="-1"></a><span class="fu">dnorm</span>(x,<span class="at">mean=</span><span class="dv">3</span>,<span class="at">sd=</span><span class="dv">2</span>)</span></code></pre></div><button class="code-copy-button" data-o006-id="O006-PSU-006-U0753" title="Salin ke papan klip"><i class="bi"></i></button></div>
+</div>
+<div class="cell-output cell-output-stdout" data-o006-id="O006-PSU-006-U0754">
+<pre data-o006-id="O006-PSU-006-U0755"><code data-o006-id="O006-PSU-006-U0756">[1] 0.1810632</code></pre>
+</div>
+<div class="codeblock-with-label r" data-o006-id="O006-PSU-006-U0757">
+<style>.codeblock-with-label pre.lang-label-82::before { content: "R"; }</style>
+<div class="code-copy-outer-scaffold" data-o006-id="O006-PSU-006-U0758"><div class="sourceCode cell-code" data-o006-id="O006-PSU-006-U0759" id="cb108"><pre class="sourceCode r lang-label-82 code-with-copy" data-o006-id="O006-PSU-006-U0760"><code class="sourceCode r" data-o006-id="O006-PSU-006-U0761"><span id="cb108-1"><a aria-hidden="true" data-o006-id="O006-PSU-006-U0762" href="#cb108-1" tabindex="-1"></a><span class="fu">dnorm</span>(x,<span class="at">mean=</span><span class="dv">3</span>,<span class="at">sd=</span><span class="dv">2</span>,<span class="at">log=</span><span class="cn">TRUE</span>)</span></code></pre></div><button class="code-copy-button" data-o006-id="O006-PSU-006-U0763" title="Salin ke papan klip"><i class="bi"></i></button></div>
+</div>
+<div class="cell-output cell-output-stdout" data-o006-id="O006-PSU-006-U0764">
+<pre data-o006-id="O006-PSU-006-U0765"><code data-o006-id="O006-PSU-006-U0766">[1] -1.708909</code></pre>
+</div>
+</div>
+<p data-o006-id="O006-PSU-006-U0767">yang juga sering berguna.</p>
+</section>
+<section class="level4" data-o006-id="O006-PSU-006-U0768" id="examples-from-the-exponential-distribution">
+<h4 class="anchored" data-anchor-id="examples-from-the-exponential-distribution" data-o006-id="O006-PSU-006-U0769">Contoh dari distribusi Eksponensial</h4>
+<p data-o006-id="O006-PSU-006-U0770">Sebagai contoh kedua, pertimbangkan distribusi Eksponensial <span class="math inline" data-o006-math-id="O006-PSU-006-M0011">\(z_i\sim Exp(\lambda)\)</span>. Kita dapat membangkitkan 30 peubah acak, masing-masing dari <span class="math inline" data-o006-math-id="O006-PSU-006-M0012">\(z_i\sim Exp(2)\)</span> (sehingga <span class="math inline" data-o006-math-id="O006-PSU-006-M0013">\(E(z_i)=0.5\)</span>) dengan kode berikut; seed 4150504 dicatat untuk mengikat hasilnya</p>
+<div class="cell language-name-processed" data-o006-id="O006-PSU-006-U0771">
+<div class="codeblock-with-label r" data-o006-id="O006-PSU-006-U0772">
+<style>.codeblock-with-label pre.lang-label-28::before { content: "R"; }</style>
+<div class="code-copy-outer-scaffold" data-o006-id="O006-PSU-006-U0773"><div class="sourceCode cell-code" data-language-name-skip="true" data-o006-id="O006-PSU-006-U0774" id="cb110"><pre class="sourceCode r lang-label-28 code-with-copy" data-o006-id="O006-PSU-006-U0775"><code class="sourceCode r" data-o006-id="O006-PSU-006-U0776"><span id="cb110-1"><a aria-hidden="true" data-o006-id="O006-PSU-006-U0777" href="#cb110-1" tabindex="-1"></a>set.seed(4150504)
+z=rexp(n=30,rate=2)
+z<span class="ot"></span><span class="fu"></span><span class="at"></span><span class="dv"></span><span class="at"></span><span class="dv"></span></span><span id="cb110-2"><a aria-hidden="true" data-o006-id="O006-PSU-006-U0778" href="#cb110-2" tabindex="-1"></a></span></code></pre></div><button class="code-copy-button" data-o006-id="O006-PSU-006-U0779" title="Salin ke papan klip"><i class="bi"></i></button></div>
+</div>
+<div class="cell-output cell-output-stdout" data-o006-id="O006-PSU-006-U0780">
+<pre data-o006-id="O006-PSU-006-U0781"><code data-o006-id="O006-PSU-006-U0782"> [1] 0.902386372 0.279482659 0.013538371 0.169541551 0.516750996 0.221434825
+ [7] 0.437782802 0.364390418 0.012766121 0.104971642 0.097908754 0.007348964
+[13] 0.041360434 0.224170113 0.924014265 0.368705531 0.009524764 0.690829892
+[19] 0.046744257 0.500347289 0.624012383 0.841702328 0.019394894 0.621367328
+[25] 0.017981748 0.048043481 1.555176392 1.321141629 0.341612630 0.330359658</code></pre>
+</div>
+</div>
+<p data-o006-id="O006-PSU-006-U0783">Mari kita hitung rataan dan median data simulasi tersebut</p>
+<div class="cell language-name-processed" data-o006-id="O006-PSU-006-U0784">
+<div class="codeblock-with-label r" data-o006-id="O006-PSU-006-U0785">
+<style>.codeblock-with-label pre.lang-label-29::before { content: "R"; }</style>
+<div class="code-copy-outer-scaffold" data-o006-id="O006-PSU-006-U0786"><div class="sourceCode cell-code" data-language-name-skip="true" data-o006-id="O006-PSU-006-U0787" id="cb112"><pre class="sourceCode r lang-label-29 code-with-copy" data-o006-id="O006-PSU-006-U0788"><code class="sourceCode r" data-o006-id="O006-PSU-006-U0789"><span id="cb112-1"><a aria-hidden="true" data-o006-id="O006-PSU-006-U0790" href="#cb112-1" tabindex="-1"></a><span class="fu">mean</span>(z)</span></code></pre></div><button class="code-copy-button" data-o006-id="O006-PSU-006-U0791" title="Salin ke papan klip"><i class="bi"></i></button></div>
+</div>
+<div class="cell-output cell-output-stdout" data-o006-id="O006-PSU-006-U0792">
+<pre data-o006-id="O006-PSU-006-U0793"><code data-o006-id="O006-PSU-006-U0794">[1] 0.3884931</code></pre>
+</div>
+<div class="codeblock-with-label r" data-o006-id="O006-PSU-006-U0795">
+<style>.codeblock-with-label pre.lang-label-83::before { content: "R"; }</style>
+<div class="code-copy-outer-scaffold" data-o006-id="O006-PSU-006-U0796"><div class="sourceCode cell-code" data-o006-id="O006-PSU-006-U0797" id="cb114"><pre class="sourceCode r lang-label-83 code-with-copy" data-o006-id="O006-PSU-006-U0798"><code class="sourceCode r" data-o006-id="O006-PSU-006-U0799"><span id="cb114-1"><a aria-hidden="true" data-o006-id="O006-PSU-006-U0800" href="#cb114-1" tabindex="-1"></a><span class="fu">median</span>(z)</span></code></pre></div><button class="code-copy-button" data-o006-id="O006-PSU-006-U0801" title="Salin ke papan klip"><i class="bi"></i></button></div>
+</div>
+<div class="cell-output cell-output-stdout" data-o006-id="O006-PSU-006-U0802">
+<pre data-o006-id="O006-PSU-006-U0803"><code data-o006-id="O006-PSU-006-U0804">[1] 0.3049212</code></pre>
+</div>
+</div>
+<p data-o006-id="O006-PSU-006-U0805">yang mendekati rataan teoretis (sebesar <span class="math inline" data-o006-math-id="O006-PSU-006-M0014">\(1/\lambda=0.5\)</span>) dan median (sebesar <span class="math inline" data-o006-math-id="O006-PSU-006-M0015">\(\ln(2)/\lambda=0.34657\)</span>)</p>
+<p data-o006-id="O006-PSU-006-U0806">Sekarang, mari kita simulasikan 1000 peubah acak dengan seed 4150505</p>
+<div class="cell language-name-processed" data-o006-id="O006-PSU-006-U0807">
+<div class="codeblock-with-label r" data-o006-id="O006-PSU-006-U0808">
+<style>.codeblock-with-label pre.lang-label-30::before { content: "R"; }</style>
+<div class="code-copy-outer-scaffold" data-o006-id="O006-PSU-006-U0809"><div class="sourceCode cell-code" data-language-name-skip="true" data-o006-id="O006-PSU-006-U0810" id="cb116"><pre class="sourceCode r lang-label-30 code-with-copy" data-o006-id="O006-PSU-006-U0811"><code class="sourceCode r" data-o006-id="O006-PSU-006-U0812"><span id="cb116-1"><a aria-hidden="true" data-o006-id="O006-PSU-006-U0813" href="#cb116-1" tabindex="-1"></a>set.seed(4150505)
+z=rexp(n=1000,rate=2)<span class="ot"></span><span class="fu"></span><span class="at"></span><span class="dv"></span><span class="at"></span><span class="dv"></span></span></code></pre></div><button class="code-copy-button" data-o006-id="O006-PSU-006-U0814" title="Salin ke papan klip"><i class="bi"></i></button></div>
+</div>
+</div>
+<p data-o006-id="O006-PSU-006-U0815">Jumlah ini terlalu banyak untuk dicetak, jadi mari kita tampilkan dalam bentuk histogram</p>
+<div class="cell language-name-processed" data-o006-id="O006-PSU-006-U0816">
+<div class="codeblock-with-label r" data-o006-id="O006-PSU-006-U0817">
+<style>.codeblock-with-label pre.lang-label-31::before { content: "R"; }</style>
+<div class="code-copy-outer-scaffold" data-o006-id="O006-PSU-006-U0818"><div class="sourceCode cell-code" data-language-name-skip="true" data-o006-id="O006-PSU-006-U0819" id="cb117"><pre class="sourceCode r lang-label-31 code-with-copy" data-o006-id="O006-PSU-006-U0820"><code class="sourceCode r" data-o006-id="O006-PSU-006-U0821"><span id="cb117-1"><a aria-hidden="true" data-o006-id="O006-PSU-006-U0822" href="#cb117-1" tabindex="-1"></a><span class="fu">hist</span>(z)</span></code></pre></div><button class="code-copy-button" data-o006-id="O006-PSU-006-U0823" title="Salin ke papan klip"><i class="bi"></i></button></div>
+</div>
+<div class="cell-output-display" data-o006-id="O006-PSU-006-U0824">
+<div data-o006-id="O006-PSU-006-U0825">
+<figure class="figure" data-o006-id="O006-PSU-006-U0826">
+<p data-o006-id="O006-PSU-006-U0827"><img alt="Histogram deterministik 1.000 simulasi Eksponensial berlaju 2 dengan seed 4150505; frekuensi terbesar berada dekat nol dan menurun ke kanan." class="img-fluid figure-img" data-derivative-seed="4150505" data-o006-asset-id="O006-PSU-006-A0004" data-o006-id="O006-PSU-006-U0828" src="assets/lesson05/seeded-z1000.png" width="672"/></p>
+</figure>
+</div>
+</div>
+</div>
+<p data-o006-id="O006-PSU-006-U0829">Data ini tampak mengikuti distribusi Eksponensial, sebagaimana mestinya. Seed yang dicatat membuat kode, keluaran, dan histogram target dapat direproduksi. Selanjutnya, kita akan menghitung beberapa besaran teoretis peubah acak Eksponensial berlaju 2 dan membandingkannya dengan nilai dugaan besaran tersebut dari peubah acak simulasi <span class="math inline" data-o006-math-id="O006-PSU-006-M0016">\({z_i,i=1,2,...,1000}\)</span>.</p>
+<p data-o006-id="O006-PSU-006-U0830">Pertama, mari kita periksa nilai CDF - fungsi distribusi kumulatif. Peluang <span class="math inline" data-o006-math-id="O006-PSU-006-M0017">\(P(z&lt;1)\)</span> adalah <span class="math inline" data-o006-math-id="O006-PSU-006-M0018">\(F_Z(1)\)</span>, yang di R dihitung melalui pemanggilan <code data-o006-id="O006-PSU-006-U0831">pexp</code> tersebut</p>
+<div class="cell language-name-processed" data-o006-id="O006-PSU-006-U0832">
+<div class="codeblock-with-label r" data-o006-id="O006-PSU-006-U0833">
+<style>.codeblock-with-label pre.lang-label-32::before { content: "R"; }</style>
+<div class="code-copy-outer-scaffold" data-o006-id="O006-PSU-006-U0834"><div class="sourceCode cell-code" data-language-name-skip="true" data-o006-id="O006-PSU-006-U0835" id="cb118"><pre class="sourceCode r lang-label-32 code-with-copy" data-o006-id="O006-PSU-006-U0836"><code class="sourceCode r" data-o006-id="O006-PSU-006-U0837"><span id="cb118-1"><a aria-hidden="true" data-o006-id="O006-PSU-006-U0838" href="#cb118-1" tabindex="-1"></a><span class="fu">pexp</span>(<span class="dv">1</span>,<span class="at">rate=</span><span class="dv">2</span>)</span></code></pre></div><button class="code-copy-button" data-o006-id="O006-PSU-006-U0839" title="Salin ke papan klip"><i class="bi"></i></button></div>
+</div>
+<div class="cell-output cell-output-stdout" data-o006-id="O006-PSU-006-U0840">
+<pre data-o006-id="O006-PSU-006-U0841"><code data-o006-id="O006-PSU-006-U0842">[1] 0.8646647</code></pre>
+</div>
+</div>
+<p data-o006-id="O006-PSU-006-U0843">dan hampiran berbasis sampelnya diperoleh dari banyaknya nilai sampel <span class="math inline" data-o006-math-id="O006-PSU-006-M0019">\(z_i\)</span> yang kurang dari atau sama dengan 1, dibagi dengan jumlah sampel keseluruhan (di sini n=1000).</p>
+<div class="cell language-name-processed" data-o006-id="O006-PSU-006-U0844">
+<div class="codeblock-with-label r" data-o006-id="O006-PSU-006-U0845">
+<style>.codeblock-with-label pre.lang-label-33::before { content: "R"; }</style>
+<div class="code-copy-outer-scaffold" data-o006-id="O006-PSU-006-U0846"><div class="sourceCode cell-code" data-language-name-skip="true" data-o006-id="O006-PSU-006-U0847" id="cb120"><pre class="sourceCode r lang-label-33 code-with-copy" data-o006-id="O006-PSU-006-U0848"><code class="sourceCode r" data-o006-id="O006-PSU-006-U0849"><span id="cb120-1"><a aria-hidden="true" data-o006-id="O006-PSU-006-U0850" href="#cb120-1" tabindex="-1"></a>n.less.than<span class="fl">.1</span><span class="ot">=</span><span class="fu">length</span>(<span class="fu">which</span>(z<span class="sc">&lt;=</span><span class="dv">1</span>))</span>
+<span id="cb120-2"><a aria-hidden="true" data-o006-id="O006-PSU-006-U0851" href="#cb120-2" tabindex="-1"></a>n.less.than<span class="fl">.1</span></span></code></pre></div><button class="code-copy-button" data-o006-id="O006-PSU-006-U0852" title="Salin ke papan klip"><i class="bi"></i></button></div>
+</div>
+<div class="cell-output cell-output-stdout" data-o006-id="O006-PSU-006-U0853">
+<pre data-o006-id="O006-PSU-006-U0854"><code data-o006-id="O006-PSU-006-U0855">[1] 856</code></pre>
+</div>
+<div class="codeblock-with-label r" data-o006-id="O006-PSU-006-U0856">
+<style>.codeblock-with-label pre.lang-label-84::before { content: "R"; }</style>
+<div class="code-copy-outer-scaffold" data-o006-id="O006-PSU-006-U0857"><div class="sourceCode cell-code" data-o006-id="O006-PSU-006-U0858" id="cb122"><pre class="sourceCode r lang-label-84 code-with-copy" data-o006-id="O006-PSU-006-U0859"><code class="sourceCode r" data-o006-id="O006-PSU-006-U0860"><span id="cb122-1"><a aria-hidden="true" data-o006-id="O006-PSU-006-U0861" href="#cb122-1" tabindex="-1"></a>cdf.val<span class="ot">=</span>n.less.than<span class="fl">.1</span><span class="sc">/</span><span class="dv">1000</span></span>
+<span id="cb122-2"><a aria-hidden="true" data-o006-id="O006-PSU-006-U0862" href="#cb122-2" tabindex="-1"></a>cdf.val</span></code></pre></div><button class="code-copy-button" data-o006-id="O006-PSU-006-U0863" title="Salin ke papan klip"><i class="bi"></i></button></div>
+</div>
+<div class="cell-output cell-output-stdout" data-o006-id="O006-PSU-006-U0864">
+<pre data-o006-id="O006-PSU-006-U0865"><code data-o006-id="O006-PSU-006-U0866">[1] 0.856</code></pre>
+</div>
+</div>
+<p data-o006-id="O006-PSU-006-U0867">yang cukup mendekati nilai sebenarnya yang ditampilkan di atas.</p>
+<p data-o006-id="O006-PSU-006-U0868">Jika kita ingin menghitung nilai kepadatan bersama untuk <span class="math inline" data-o006-math-id="O006-PSU-006-M0020">\((z_1,z_2,...,z_1000)\)</span>, kita dapat memperolehnya dengan <span class="math inline" data-o006-math-id="O006-PSU-006-M0021">\(f_Z(z_1,z_2,...,z_1000)=\prod_{i=1}^{1000} f_Z(z_i)=\prod_{i=1}^{1000} \lambda e^{-\lambda z_i}\)</span>, yang dapat kita hitung langsung di R</p>
+<div class="cell language-name-processed" data-o006-id="O006-PSU-006-U0869">
+<div class="codeblock-with-label r" data-o006-id="O006-PSU-006-U0870">
+<style>.codeblock-with-label pre.lang-label-34::before { content: "R"; }</style>
+<div class="code-copy-outer-scaffold" data-o006-id="O006-PSU-006-U0871"><div class="sourceCode cell-code" data-language-name-skip="true" data-o006-id="O006-PSU-006-U0872" id="cb124"><pre class="sourceCode r lang-label-34 code-with-copy" data-o006-id="O006-PSU-006-U0873"><code class="sourceCode r" data-o006-id="O006-PSU-006-U0874"><span id="cb124-1"><a aria-hidden="true" data-o006-id="O006-PSU-006-U0875" href="#cb124-1" tabindex="-1"></a><span class="fu">prod</span>(<span class="dv">2</span><span class="sc">*</span><span class="fu">exp</span>(<span class="sc">-</span><span class="dv">2</span><span class="sc">*</span>z))</span></code></pre></div><button class="code-copy-button" data-o006-id="O006-PSU-006-U0876" title="Salin ke papan klip"><i class="bi"></i></button></div>
+</div>
+<div class="cell-output cell-output-stdout" data-o006-id="O006-PSU-006-U0877">
+<pre data-o006-id="O006-PSU-006-U0878"><code data-o006-id="O006-PSU-006-U0879">[1] 1.352596e-141</code></pre>
+</div>
+</div>
+<p data-o006-id="O006-PSU-006-U0880">atau dapat diperoleh melalui pemanggilan <code data-o006-id="O006-PSU-006-U0881">dexp</code> tersebut</p>
+<div class="cell language-name-processed" data-o006-id="O006-PSU-006-U0882">
+<div class="codeblock-with-label r" data-o006-id="O006-PSU-006-U0883">
+<style>.codeblock-with-label pre.lang-label-35::before { content: "R"; }</style>
+<div class="code-copy-outer-scaffold" data-o006-id="O006-PSU-006-U0884"><div class="sourceCode cell-code" data-language-name-skip="true" data-o006-id="O006-PSU-006-U0885" id="cb126"><pre class="sourceCode r lang-label-35 code-with-copy" data-o006-id="O006-PSU-006-U0886"><code class="sourceCode r" data-o006-id="O006-PSU-006-U0887"><span id="cb126-1"><a aria-hidden="true" data-o006-id="O006-PSU-006-U0888" href="#cb126-1" tabindex="-1"></a><span class="fu">prod</span>(<span class="fu">dexp</span>(z,<span class="at">rate=</span><span class="dv">2</span>))</span></code></pre></div><button class="code-copy-button" data-o006-id="O006-PSU-006-U0889" title="Salin ke papan klip"><i class="bi"></i></button></div>
+</div>
+<div class="cell-output cell-output-stdout" data-o006-id="O006-PSU-006-U0890">
+<pre data-o006-id="O006-PSU-006-U0891"><code data-o006-id="O006-PSU-006-U0892">[1] 1.352596e-141</code></pre>
+</div>
+</div>
+</section>
+</section>
+</section>
+<section class="level2" data-number="5.2" data-o006-id="O006-PSU-006-U0893" id="numeric-maximum-likelihood-estimation">
+<h2 class="anchored" data-anchor-id="numeric-maximum-likelihood-estimation" data-number="5.2" data-o006-id="O006-PSU-006-U0894"><span class="header-section-number">5.2</span> Pendugaan Kemungkinan Maksimum secara Numerik</h2>
+<p data-o006-id="O006-PSU-006-U0895">Sekarang mari kita kembali ke MLE!</p>
+<p data-o006-id="O006-PSU-006-U0896">Pada bagian sebelumnya, kita meninjau contoh ketika MLE tidak dapat diperoleh secara analitis sehingga diperlukan optimisasi numerik. Pada bagian ini, kita menyajikan dua metode untuk mencari nilai dugaan kemungkinan maksimum secara numerik. Metode pertama menggunakan pencarian grid (grid search) dalam R. Metode lainnya menggunakan fungsi <code data-o006-id="O006-PSU-006-U0897">optim</code> di R.</p>
+<section class="level3" data-number="5.2.1" data-o006-id="O006-PSU-006-U0898" id="mle-through-grid-search">
+<h3 class="anchored" data-anchor-id="mle-through-grid-search" data-number="5.2.1" data-o006-id="O006-PSU-006-U0899"><span class="header-section-number">5.2.1</span> MLE melalui Pencarian Grid</h3>
+<p data-o006-id="O006-PSU-006-U0900">Salah satu cara mencari MLE adalah melalui pencarian grid. Gagasannya ialah menggunakan perangkat lunak, seperti R, untuk melakukan perhitungan. Kita mengetahui distribusi yang mendasarinya sehingga dapat menentukan fungsi kemungkinan. Kemudian, berdasarkan sekumpulan data dan nilai-nilai yang mungkin bagi parameter yang tidak diketahui, <span class="math inline" data-o006-math-id="O006-PSU-006-M0022">\(\theta\)</span>, kita dapat mencari nilai <span class="math inline" data-o006-math-id="O006-PSU-006-M0023">\(\theta\)</span> yang memaksimumkan fungsi kemungkinan.</p>
+<p data-o006-id="O006-PSU-006-U0901">Untuk mengilustrasikannya, misalkan kita memiliki titik-titik data berikut. Anggaplah data berasal dari distribusi eksponensial dengan rataan yang tidak diketahui <span class="math inline" data-o006-math-id="O006-PSU-006-M0024">\(\theta\)</span>.</p>
+<div class="quarto-float quarto-figure quarto-figure-center anchored" data-o006-id="O006-PSU-006-U0902" id="fig-expdistunknownmean">
+<figure class="quarto-float quarto-float-fig figure" data-o006-id="O006-PSU-006-U0903">
+<div aria-describedby="fig-expdistunknownmean-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca" data-o006-id="O006-PSU-006-U0904">
+<div class="cell language-name-processed" data-lightbox="true" data-o006-id="O006-PSU-006-U0905">
+<div class="codeblock-with-label r" data-o006-id="O006-PSU-006-U0906">
+<style>.codeblock-with-label pre.lang-label-36::before { content: "R"; }</style>
+<div class="code-copy-outer-scaffold" data-o006-id="O006-PSU-006-U0907"><div class="sourceCode cell-code" data-language-name-skip="true" data-o006-id="O006-PSU-006-U0908" id="cb128"><pre class="sourceCode r lang-label-36 code-with-copy" data-o006-id="O006-PSU-006-U0909"><code class="sourceCode r" data-o006-id="O006-PSU-006-U0910"><span id="cb128-1"><a aria-hidden="true" data-o006-id="O006-PSU-006-U0911" href="#cb128-1" tabindex="-1"></a>x<span class="ot">=</span><span class="fu">c</span>(<span class="dv">1</span>,  <span class="dv">5</span>, <span class="dv">10</span>,  <span class="dv">1</span>,  <span class="dv">3</span>, <span class="dv">11</span>, <span class="dv">10</span>, <span class="dv">23</span>,  <span class="dv">2</span>,  <span class="dv">6</span>,  <span class="dv">1</span>, <span class="dv">24</span>,  <span class="dv">6</span>, <span class="dv">11</span>, <span class="dv">19</span>)</span>
+<span id="cb128-2"><a aria-hidden="true" data-o006-id="O006-PSU-006-U0912" href="#cb128-2" tabindex="-1"></a>x</span></code></pre></div><button class="code-copy-button" data-o006-id="O006-PSU-006-U0913" title="Salin ke papan klip"><i class="bi"></i></button></div>
+</div>
+<div class="cell-output cell-output-stdout" data-o006-id="O006-PSU-006-U0914">
+<pre data-o006-id="O006-PSU-006-U0915"><code data-o006-id="O006-PSU-006-U0916">&gt;  [1]  1  5 10  1  3 11 10 23  2  6  1 24  6 11 19</code></pre>
+</div>
+<div class="codeblock-with-label r" data-o006-id="O006-PSU-006-U0917">
+<style>.codeblock-with-label pre.lang-label-85::before { content: "R"; }</style>
+<div class="code-copy-outer-scaffold" data-o006-id="O006-PSU-006-U0918"><div class="sourceCode cell-code" data-o006-id="O006-PSU-006-U0919" id="cb130"><pre class="sourceCode r lang-label-85 code-with-copy" data-o006-id="O006-PSU-006-U0920"><code class="sourceCode r" data-o006-id="O006-PSU-006-U0921"><span id="cb130-1"><a aria-hidden="true" data-o006-id="O006-PSU-006-U0922" href="#cb130-1" tabindex="-1"></a><span class="fu">hist</span>(x,<span class="at">breaks=</span><span class="dv">7</span>)</span></code></pre></div><button class="code-copy-button" data-o006-id="O006-PSU-006-U0923" title="Salin ke papan klip"><i class="bi"></i></button></div>
+</div>
+<div class="cell-output-display" data-o006-id="O006-PSU-006-U0924">
+<div data-o006-id="O006-PSU-006-U0925">
+<figure class="figure" data-o006-id="O006-PSU-006-U0926">
+<p data-o006-id="O006-PSU-006-U0927"><img alt="Histogram 15 amatan Eksponensial yang digunakan untuk menduga parameter rataan atau skala theta." class="img-fluid figure-img" data-o006-asset-id="O006-PSU-006-A0005" data-o006-id="O006-PSU-006-U0928" src="assets/lesson05/unnamed-chunk-33-1.png" style="width:70.0%"/></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" data-o006-id="O006-PSU-006-U0929" id="fig-expdistunknownmean-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Gambar 5.4
+</figcaption>
+</figure>
+</div>
+<p data-o006-id="O006-PSU-006-U0930">Jika kita tidak mengetahui parameter <span class="math inline" data-o006-math-id="O006-PSU-006-M0025">\(\theta\)</span>, kita dapat mencoba menduganya dengan pendugaan kemungkinan maksimum (MLE), dengan nilai dugaan berupa nilai yang memaksimumkan fungsi kemungkinan <span class="math display" data-o006-math-id="O006-PSU-006-M0026">\[\hat{\theta}=\operatorname*{arg\,max}_{\theta&gt;0}L(\theta;\mathbf{x})\]</span> Kita dapat mencoba beberapa nilai <span class="math inline" data-o006-math-id="O006-PSU-006-M0027">\(\theta\)</span> untuk dicoba:</p>
+<div class="cell language-name-processed" data-o006-id="O006-PSU-006-U0931">
+<div class="codeblock-with-label r" data-o006-id="O006-PSU-006-U0932">
+<style>.codeblock-with-label pre.lang-label-37::before { content: "R"; }</style>
+<div class="code-copy-outer-scaffold" data-o006-id="O006-PSU-006-U0933"><div class="sourceCode cell-code" data-language-name-skip="true" data-o006-id="O006-PSU-006-U0934" id="cb131"><pre class="sourceCode r lang-label-37 code-with-copy" data-o006-id="O006-PSU-006-U0935"><code class="sourceCode r" data-o006-id="O006-PSU-006-U0936"><span id="cb131-1"><a aria-hidden="true" data-o006-id="O006-PSU-006-U0937" href="#cb131-1" tabindex="-1"></a>lik.exp<span class="fl">.2</span><span class="ot">=</span><span class="cf">function</span>(theta,x){</span>
+<span id="cb131-2"><a aria-hidden="true" data-o006-id="O006-PSU-006-U0938" href="#cb131-2" tabindex="-1"></a>  <span class="fu">prod</span>(<span class="fu">dexp</span>(x,<span class="at">rate=</span><span class="dv">1</span><span class="sc">/</span>theta))</span>
+<span id="cb131-3"><a aria-hidden="true" data-o006-id="O006-PSU-006-U0939" href="#cb131-3" tabindex="-1"></a>}</span>
+<span id="cb131-4"><a aria-hidden="true" data-o006-id="O006-PSU-006-U0940" href="#cb131-4" tabindex="-1"></a><span class="fu">lik.exp.2</span>(<span class="dv">2</span>,x)</span></code></pre></div><button class="code-copy-button" data-o006-id="O006-PSU-006-U0941" title="Salin ke papan klip"><i class="bi"></i></button></div>
+</div>
+<div class="cell-output cell-output-stdout" data-o006-id="O006-PSU-006-U0942">
+<pre data-o006-id="O006-PSU-006-U0943"><code data-o006-id="O006-PSU-006-U0944">[1] 4.017603e-34</code></pre>
+</div>
+<div class="codeblock-with-label r" data-o006-id="O006-PSU-006-U0945">
+<style>.codeblock-with-label pre.lang-label-86::before { content: "R"; }</style>
+<div class="code-copy-outer-scaffold" data-o006-id="O006-PSU-006-U0946"><div class="sourceCode cell-code" data-o006-id="O006-PSU-006-U0947" id="cb133"><pre class="sourceCode r lang-label-86 code-with-copy" data-o006-id="O006-PSU-006-U0948"><code class="sourceCode r" data-o006-id="O006-PSU-006-U0949"><span id="cb133-1"><a aria-hidden="true" data-o006-id="O006-PSU-006-U0950" href="#cb133-1" tabindex="-1"></a><span class="fu">lik.exp.2</span>(<span class="dv">10</span>,x)</span></code></pre></div><button class="code-copy-button" data-o006-id="O006-PSU-006-U0951" title="Salin ke papan klip"><i class="bi"></i></button></div>
+</div>
+<div class="cell-output cell-output-stdout" data-o006-id="O006-PSU-006-U0952">
+<pre data-o006-id="O006-PSU-006-U0953"><code data-o006-id="O006-PSU-006-U0954">[1] 1.674493e-21</code></pre>
+</div>
+<div class="codeblock-with-label r" data-o006-id="O006-PSU-006-U0955">
+<style>.codeblock-with-label pre.lang-label-87::before { content: "R"; }</style>
+<div class="code-copy-outer-scaffold" data-o006-id="O006-PSU-006-U0956"><div class="sourceCode cell-code" data-o006-id="O006-PSU-006-U0957" id="cb135"><pre class="sourceCode r lang-label-87 code-with-copy" data-o006-id="O006-PSU-006-U0958"><code class="sourceCode r" data-o006-id="O006-PSU-006-U0959"><span id="cb135-1"><a aria-hidden="true" data-o006-id="O006-PSU-006-U0960" href="#cb135-1" tabindex="-1"></a><span class="fu">lik.exp.2</span>(<span class="dv">20</span>,x)</span></code></pre></div><button class="code-copy-button" data-o006-id="O006-PSU-006-U0961" title="Salin ke papan klip"><i class="bi"></i></button></div>
+</div>
+<div class="cell-output cell-output-stdout" data-o006-id="O006-PSU-006-U0962">
+<pre data-o006-id="O006-PSU-006-U0963"><code data-o006-id="O006-PSU-006-U0964">[1] 3.949042e-23</code></pre>
+</div>
+</div>
+<p data-o006-id="O006-PSU-006-U0965">Di antara kumpulan kecil nilai tersebut, <span class="math inline" data-o006-math-id="O006-PSU-006-M0028">\(\theta=10\)</span> menghasilkan nilai fungsi kemungkinan tertinggi.</p>
+<p data-o006-id="O006-PSU-006-U0966">Untuk mencoba serangkaian nilai, kita akan membuat perulangan “for”. Tujuan kita adalah memperoleh vektor nilai fungsi kemungkinan bagi parameter <span class="math inline" data-o006-math-id="O006-PSU-006-M0029">\(\theta\)</span> pada serangkaian nilai. Kita mulai dengan menentukan nilai <span class="math inline" data-o006-math-id="O006-PSU-006-M0030">\(\theta\)</span> yang ingin kita pertimbangkan.</p>
+<div class="cell language-name-processed" data-o006-id="O006-PSU-006-U0967">
+<div class="codeblock-with-label r" data-o006-id="O006-PSU-006-U0968">
+<style>.codeblock-with-label pre.lang-label-38::before { content: "R"; }</style>
+<div class="code-copy-outer-scaffold" data-o006-id="O006-PSU-006-U0969"><div class="sourceCode cell-code" data-language-name-skip="true" data-o006-id="O006-PSU-006-U0970" id="cb137"><pre class="sourceCode r lang-label-38 code-with-copy" data-o006-id="O006-PSU-006-U0971"><code class="sourceCode r" data-o006-id="O006-PSU-006-U0972"><span id="cb137-1"><a aria-hidden="true" data-o006-id="O006-PSU-006-U0973" href="#cb137-1" tabindex="-1"></a>theta.vals<span class="ot">=</span><span class="fu">seq</span>(<span class="dv">1</span>,<span class="dv">100</span>,<span class="at">by=</span><span class="fl">0.1</span>)</span>
+<span id="cb137-2"><a aria-hidden="true" data-o006-id="O006-PSU-006-U0974" href="#cb137-2" tabindex="-1"></a>theta.vals</span></code></pre></div><button class="code-copy-button" data-o006-id="O006-PSU-006-U0975" title="Salin ke papan klip"><i class="bi"></i></button></div>
+</div>
+</div>
+<div class="cell" data-o006-id="O006-PSU-006-U0976">
+<div class="cell-output cell-output-stdout" data-o006-id="O006-PSU-006-U0977">
+<pre data-o006-id="O006-PSU-006-U0978"><code data-o006-id="O006-PSU-006-U0979"> [1] 1.0 1.1 1.2 1.3 1.4 1.5 1.6 1.7 1.8 1.9 2.0 2.1 2.2 2.3 2.4 2.5 2.6 2.7 2.8
+[20] 2.9 3.0 3.1 3.2 3.3 3.4
+...
+ [1]  97.6  97.7  97.8  97.9  98.0  98.1  98.2  98.3  98.4  98.5  98.6  98.7
+[13]  98.8  98.9  99.0  99.1  99.2  99.3  99.4  99.5  99.6  99.7  99.8  99.9
+[25] 100.0</code></pre>
+</div>
+</div>
+<p data-o006-id="O006-PSU-006-U0980">Selanjutnya, kita membuat vektor kosong untuk nilai fungsi kemungkinan (nilainya akan kita isi nanti)</p>
+<div class="cell language-name-processed" data-o006-id="O006-PSU-006-U0981">
+<div class="codeblock-with-label r" data-o006-id="O006-PSU-006-U0982">
+<style>.codeblock-with-label pre.lang-label-39::before { content: "R"; }</style>
+<div class="code-copy-outer-scaffold" data-o006-id="O006-PSU-006-U0983"><div class="sourceCode cell-code" data-language-name-skip="true" data-o006-id="O006-PSU-006-U0984" id="cb139"><pre class="sourceCode r lang-label-39 code-with-copy" data-o006-id="O006-PSU-006-U0985"><code class="sourceCode r" data-o006-id="O006-PSU-006-U0986"><span id="cb139-1"><a aria-hidden="true" data-o006-id="O006-PSU-006-U0987" href="#cb139-1" tabindex="-1"></a>lik.vals=rep(NA_real_,length(theta.vals))
+for(i in seq_along(theta.vals)){
+  lik.vals[i]=lik.exp.2(theta.vals[i],x)
+}<span class="ot"></span><span class="fu"></span><span class="cn"></span><span class="fu"></span></span></code></pre></div><button class="code-copy-button" data-o006-id="O006-PSU-006-U0988" title="Salin ke papan klip"><i class="bi"></i></button></div>
+</div>
+</div>
+<p data-o006-id="O006-PSU-006-U0989">Sebelum hasilnya digunakan, kita harus membuat perulangan for yang (1) mengevaluasi fungsi kemungkinan untuk setiap nilai theta, dan (2) menyimpan nilai tersebut pada posisi yang tepat di <code data-o006-id="O006-PSU-006-U0990">lik.vals</code>.</p>
+<div class="quarto-float quarto-figure quarto-figure-center anchored" data-o006-id="O006-PSU-006-U0991" id="fig-mleforeachtheta">
+<figure class="quarto-float quarto-float-fig figure" data-o006-id="O006-PSU-006-U0992">
+<div aria-describedby="fig-mleforeachtheta-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca" data-o006-id="O006-PSU-006-U0993">
+<div class="cell" data-lightbox="true" data-o006-id="O006-PSU-006-U0994">
+<div class="cell-output-display" data-o006-id="O006-PSU-006-U0995">
+<div data-o006-id="O006-PSU-006-U0996">
+<figure class="figure" data-o006-id="O006-PSU-006-U0997">
+<p data-o006-id="O006-PSU-006-U0998"><img alt="Kurva fungsi kemungkinan terhadap theta pada pencarian grid; puncaknya berada dekat theta sama dengan 8,9." class="img-fluid figure-img" data-o006-asset-id="O006-PSU-006-A0006" data-o006-id="O006-PSU-006-U0999" src="assets/lesson05/unnamed-chunk-38-1.png" style="width:70.0%"/></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" data-o006-id="O006-PSU-006-U1000" id="fig-mleforeachtheta-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Gambar 5.5
+</figcaption>
+</figure>
+</div>
+<p data-o006-id="O006-PSU-006-U1001">Pendekatan ini sering disebut “pencarian grid”, karena kita menelusuri rentang nilai parameter yang luas. Dari grafik, terlihat bahwa hampiran MLE pada grid berada di sekitar 10. Kita dapat mencari nilai <span class="math inline" data-o006-math-id="O006-PSU-006-M0031">\(\theta\)</span> terbaik di antara nilai yang kita coba dengan menerapkan <code data-o006-id="O006-PSU-006-U1002">which.max</code> pada vektor; perintah ini mencari indeks nilai maksimum.</p>
+<div class="cell language-name-processed" data-o006-id="O006-PSU-006-U1003">
+<div class="codeblock-with-label r" data-o006-id="O006-PSU-006-U1004">
+<style>.codeblock-with-label pre.lang-label-40::before { content: "R"; }</style>
+<div class="code-copy-outer-scaffold" data-o006-id="O006-PSU-006-U1005"><div class="sourceCode cell-code" data-language-name-skip="true" data-o006-id="O006-PSU-006-U1006" id="cb140"><pre class="sourceCode r lang-label-40 code-with-copy" data-o006-id="O006-PSU-006-U1007"><code class="sourceCode r" data-o006-id="O006-PSU-006-U1008"><span id="cb140-1"><a aria-hidden="true" data-o006-id="O006-PSU-006-U1009" href="#cb140-1" tabindex="-1"></a>idx.mle<span class="ot">=</span><span class="fu">which.max</span>(lik.vals)</span>
+<span id="cb140-2"><a aria-hidden="true" data-o006-id="O006-PSU-006-U1010" href="#cb140-2" tabindex="-1"></a>idx.mle</span></code></pre></div><button class="code-copy-button" data-o006-id="O006-PSU-006-U1011" title="Salin ke papan klip"><i class="bi"></i></button></div>
+</div>
+<div class="cell-output cell-output-stdout" data-o006-id="O006-PSU-006-U1012">
+<pre data-o006-id="O006-PSU-006-U1013"><code data-o006-id="O006-PSU-006-U1014">[1] 80</code></pre>
+</div>
+<div class="codeblock-with-label r" data-o006-id="O006-PSU-006-U1015">
+<style>.codeblock-with-label pre.lang-label-88::before { content: "R"; }</style>
+<div class="code-copy-outer-scaffold" data-o006-id="O006-PSU-006-U1016"><div class="sourceCode cell-code" data-o006-id="O006-PSU-006-U1017" id="cb142"><pre class="sourceCode r lang-label-88 code-with-copy" data-o006-id="O006-PSU-006-U1018"><code class="sourceCode r" data-o006-id="O006-PSU-006-U1019"><span id="cb142-1"><a aria-hidden="true" data-o006-id="O006-PSU-006-U1020" href="#cb142-1" tabindex="-1"></a>theta.hat.grid<span class="ot">=</span>theta.vals[idx.mle]</span>
+<span id="cb142-2"><a aria-hidden="true" data-o006-id="O006-PSU-006-U1021" href="#cb142-2" tabindex="-1"></a>theta.hat.grid</span></code></pre></div><button class="code-copy-button" data-o006-id="O006-PSU-006-U1022" title="Salin ke papan klip"><i class="bi"></i></button></div>
+</div>
+<div class="cell-output cell-output-stdout" data-o006-id="O006-PSU-006-U1023">
+<pre data-o006-id="O006-PSU-006-U1024"><code data-o006-id="O006-PSU-006-U1025">[1] 8.9</code></pre>
+</div>
+</div>
+<p data-o006-id="O006-PSU-006-U1026">Jadi, pencarian grid menghasilkan hampiran pertama berikut, sedangkan nilai kedua adalah MLE analitik sebagai pembanding: <span class="math inline" data-o006-math-id="O006-PSU-006-M0032">\(\hat{\theta}_{\mathrm{grid}}=8.9,\quad \hat{\theta}_{\mathrm{ML}}=133/15\approx8.866667\)</span>.</p>
+<p data-o006-id="O006-PSU-006-U1027">Ini merupakan metode kasar untuk menghampiri MLE. Metode berikutnya yang kita sajikan lebih menyeluruh.</p>
+</section>
+<section class="level3" data-number="5.2.2" data-o006-id="O006-PSU-006-U1028" id="numerical-mle-the-idea">
+<h3 class="anchored" data-anchor-id="numerical-mle-the-idea" data-number="5.2.2" data-o006-id="O006-PSU-006-U1029"><span class="header-section-number">5.2.2</span> MLE Numerik: Gagasan Dasar</h3>
+<p data-o006-id="O006-PSU-006-U1030">Alternatif yang lebih baik daripada pencarian grid di atas adalah menggunakan salah satu dari banyak metode iteratif untuk memaksimumkan suatu fungsi. Salah satunya disebut metode Newton–Raphson, yang juga kadang disebut metode Newton. Kita mulai dengan gagasan umum yang mendasari metode optimisasi numerik iteratif.</p>
+<p data-o006-id="O006-PSU-006-U1031">Optimisasi numerik merupakan bidang yang sangat luas! Tersedia banyak algoritma optimisasi. Sebagian besar algoritma optimisasi memiliki beberapa langkah umum. Langkah-langkah tersebut meliputi:</p>
+<ol data-o006-id="O006-PSU-006-U1032" type="1">
+<li data-o006-id="O006-PSU-006-U1033"><p data-o006-id="O006-PSU-006-U1034">Memerlukan nilai awal untuk parameter, <span class="math inline" data-o006-math-id="O006-PSU-006-M0033">\({\theta}=(\theta_1, \theta_2, \ldots, \theta_p)\)</span>, yang dinotasikan dengan <span class="math inline" data-o006-math-id="O006-PSU-006-M0034">\({\theta}_0\)</span>.</p></li>
+<li data-o006-id="O006-PSU-006-U1035"><p data-o006-id="O006-PSU-006-U1036">Mencari secara iteratif serangkaian parameter baru, <span class="math inline" data-o006-math-id="O006-PSU-006-M0035">\({\theta}^{(1)}, {\theta}^{(2)}, \ldots\)</span></p></li>
+<li data-o006-id="O006-PSU-006-U1037"><p data-o006-id="O006-PSU-006-U1038">Berhenti ketika <span class="math inline" data-o006-math-id="O006-PSU-006-M0036">\({\theta}^{(k)}\)</span> “dekat” dengan maksimum lokal.</p></li>
+</ol>
+<div alt="Graph showing normal curve with different theta values" class="lightbox quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center" data-o006-id="O006-PSU-006-U1039" id="fig-numerical_mle_1">
+<figure class="quarto-float quarto-float-fig figure" data-o006-id="O006-PSU-006-U1040">
+<div aria-describedby="fig-numerical_mle_1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca" data-o006-id="O006-PSU-006-U1041">
+<a class="lightbox" data-gallery="quarto-lightbox-gallery-4" data-o006-id="O006-PSU-006-U1042" href="assets/lesson05/numericalmle.png" title="Gambar 5.6: "><img alt="Beberapa kurva Normal untuk nilai theta yang berbeda, mengilustrasikan perubahan fungsi objektif saat parameter bergeser." class="img-fluid quarto-figure quarto-figure-center anchored figure-img" data-o006-asset-id="O006-PSU-006-A0007" data-o006-id="O006-PSU-006-U1043" id="fig-numericalmle" src="assets/lesson05/numericalmle.png" style="width:70.0%"/></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" data-o006-id="O006-PSU-006-U1044" id="fig-numerical_mle_1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Gambar 5.6
+</figcaption>
+</figure>
+</div>
+<p data-o006-id="O006-PSU-006-U1045">Pendekatan yang akan kita pelajari dalam mata kuliah ini adalah <strong>Metode Newton–Raphson</strong> atau <strong>Metode Newton</strong>.</p>
+</section>
+<section class="level3" data-number="5.2.3" data-o006-id="O006-PSU-006-U1046" id="newtons-method-approach-idea">
+<h3 class="anchored" data-anchor-id="newtons-method-approach-idea" data-number="5.2.3" data-o006-id="O006-PSU-006-U1047"><span class="header-section-number">5.2.3</span> Gagasan Dasar Metode Newton</h3>
+<div class="quarto-float quarto-figure quarto-figure-center anchored" data-o006-id="O006-PSU-006-U1048" id="vid-newtons1">
+<figure class="quarto-float quarto-float-vid figure" data-o006-id="O006-PSU-006-U1049">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-vid" data-o006-id="O006-PSU-006-U1050" id="vid-newtons1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Video 5.1: Metode Newton [tanpa suara]
+</figcaption>
+<div aria-describedby="vid-newtons1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca" data-o006-id="O006-PSU-006-U1051">
+<div class="text-center" data-o006-id="O006-PSU-006-U1052">
+<div class="static-video-container" data-o006-id="O006-PSU-006-U1053">
+<div class="static-video-fallback" data-o006-dependency-id="O006-PSU-006-D0001" data-video-occurrence="1" role="note">Pengganti statis Video 5.1: mulai dari nilai awal, evaluasi fungsi skor h, gambar garis singgung h, lalu gunakan titik potongnya dengan sumbu horizontal sebagai iterasi berikutnya.</div>
+</div>
+</div>
+</div>
+</figure>
+</div>
+<p data-o006-id="O006-PSU-006-U1054">Gagasannya adalah memaksimumkan fungsi log-kemungkinan, <span class="math inline" data-o006-math-id="O006-PSU-006-M0037">\(\ell(\theta)\)</span>. Hal ini kita lakukan dengan mencari <span class="math inline" data-o006-math-id="O006-PSU-006-M0038">\(\frac{d}{d\theta} \ell(\theta)=0\)</span>. Fungsi skor didefinisikan sebagai turunan fungsi log-kemungkinan; persamaan yang harus diselesaikan adalah <span class="math inline" data-o006-math-id="O006-PSU-006-M0039">\(\frac{d}{d\theta} \ell(\theta)=0\)</span> dan fungsi skor tersebut bergantung pada <span class="math inline" data-o006-math-id="O006-PSU-006-M0040">\(\theta\)</span>, sehingga kita mendefinisikannya sebagai <span class="math inline" data-o006-math-id="O006-PSU-006-M0041">\(h(\theta)=\frac{d}{d\theta}\ell(\theta)\)</span>.</p>
+<p data-o006-id="O006-PSU-006-U1055">Kita perlu mencari “akar” dari <span class="math inline" data-o006-math-id="O006-PSU-006-M0042">\(h(\theta)\)</span>. Dengan kata lain, kita perlu mencari suatu <span class="math inline" data-o006-math-id="O006-PSU-006-M0043">\(\theta\)</span> sedemikian sehingga <span class="math inline" data-o006-math-id="O006-PSU-006-M0044">\(h(\theta)=0\)</span>.</p>
+<p data-o006-id="O006-PSU-006-U1056">Kita mendekati akar (<span class="math inline" data-o006-math-id="O006-PSU-006-M0045">\(h(\theta)=0\)</span>) dengan menghampiri <span class="math inline" data-o006-math-id="O006-PSU-006-M0046">\(h(\theta)\)</span> dengan garis singgung pada nilai <span class="math inline" data-o006-math-id="O006-PSU-006-M0047">\(\theta\)</span>. Jadi, kita mulai dengan suatu nilai, <span class="math inline" data-o006-math-id="O006-PSU-006-M0048">\(\theta^{(0)}\)</span>. Kita mengevaluasi fungsi skor pada nilai awal, yaitu <span class="math inline" data-o006-math-id="O006-PSU-006-M0049">\(h(\theta^{(0)})=\frac{d}{d\theta}\ell(\theta^{(0)})\)</span>. Garis singgung pada <span class="math inline" data-o006-math-id="O006-PSU-006-M0050">\(\theta^{(0)}\)</span> adalah</p>
+<p data-o006-id="O006-PSU-006-U1057"><span class="math display" data-o006-math-id="O006-PSU-006-M0051">\[
+\begin{align*}
+y=h^\prime(\theta^{(0)})(\theta-\theta^{(0)})+h(\theta^{(0)})
+\end{align*}
+\]</span></p>
+<p data-o006-id="O006-PSU-006-U1058">Dengan menetapkan <span class="math inline" data-o006-math-id="O006-PSU-006-M0052">\(y=0\)</span> kita memperoleh titik tempat garis singgung ini memotong sumbu x.</p>
+<p data-o006-id="O006-PSU-006-U1059"><span class="math display" data-o006-math-id="O006-PSU-006-M0053">\[
+\begin{align*}
+0=h^\prime(\theta^{(0)})(\theta-\theta^{(0)})+h(\theta^{(0)})
+\end{align*}
+\]</span></p>
+<p data-o006-id="O006-PSU-006-U1060">Sekarang, kita selesaikan persamaan tersebut terhadap <span class="math inline" data-o006-math-id="O006-PSU-006-M0054">\(\theta\)</span> sehingga diperoleh:</p>
+<p data-o006-id="O006-PSU-006-U1061"><span class="math display" data-o006-math-id="O006-PSU-006-M0055">\[
+\begin{align*}
+\theta^{(1)}=\theta^{(0)}-\frac{h(\theta^{(0)})}{h^\prime(\theta^{(0)})}
+\end{align*}
+\]</span></p>
+<p data-o006-id="O006-PSU-006-U1062">Ringkasan statis berikut menunjukkan cara metode ini mencari akar. Kita mulai dengan nilai awal <span class="math inline" data-o006-math-id="O006-PSU-006-M0056">\(\theta\)</span>, <span class="math inline" data-o006-math-id="O006-PSU-006-M0057">\(\theta^{(0)}\)</span> (titik biru). Kita mengevaluasi fungsi skor pada nilai tersebut. Lalu kita menentukan garis singgung fungsi skor pada nilai awal. Kita cari titik potong garis singgung dengan sumbu x. Titik itu menjadi nilai “baru” untuk <span class="math inline" data-o006-math-id="O006-PSU-006-M0058">\(\theta\)</span>, <span class="math inline" data-o006-math-id="O006-PSU-006-M0059">\(\theta^{(1)}\)</span>. Kemudian, kita mengulangi langkah yang sama seperti untuk nilai awal <span class="math inline" data-o006-math-id="O006-PSU-006-M0060">\(\theta\)</span> tersebut. Iterasi dilanjutkan sampai diperoleh akar fungsi skor; akar itu kemudian harus diperiksa sebagai maksimum dalam domain parameter.</p>
+<div class="quarto-float quarto-figure quarto-figure-center anchored" data-o006-id="O006-PSU-006-U1063" id="vid-newtons2">
+<figure class="quarto-float quarto-float-vid figure" data-o006-id="O006-PSU-006-U1064">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-vid" data-o006-id="O006-PSU-006-U1065" id="vid-newtons2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Video 5.2: Metode Newton [tanpa suara]
+</figcaption>
+<div aria-describedby="vid-newtons2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca" data-o006-id="O006-PSU-006-U1066">
+<div class="text-center" data-o006-id="O006-PSU-006-U1067">
+<div class="static-video-container" data-o006-id="O006-PSU-006-U1068">
+<div class="static-video-fallback" data-o006-dependency-id="O006-PSU-006-D0001" data-video-occurrence="2" role="note">Pengganti statis Video 5.2: ulangi pembaruan Newton–Raphson pada fungsi skor hingga perubahan kecil; setelah itu tetap periksa domain dan bahwa akar tersebut memaksimumkan fungsi log-kemungkinan.</div>
+</div>
+</div>
+</div>
+</figure>
+</div>
+<p data-o006-id="O006-PSU-006-U1069">Langkah-langkahnya adalah:</p>
+<ol data-o006-id="O006-PSU-006-U1070" type="1">
+<li data-o006-id="O006-PSU-006-U1071"><p data-o006-id="O006-PSU-006-U1072">Tentukan nilai awal, <span class="math inline" data-o006-math-id="O006-PSU-006-M0061">\(\theta^{(0)}\)</span>.</p></li>
+<li data-o006-id="O006-PSU-006-U1073"><p data-o006-id="O006-PSU-006-U1074">Pada setiap <span class="math inline" data-o006-math-id="O006-PSU-006-M0062">\(t=0,1,2,\ldots\)</span> hitung pembaruan berikut: <span class="math display" data-o006-math-id="O006-PSU-006-M0063">\[\begin{aligned}
+             \theta^{(t+1)}=\theta^{(t)}-\frac{h(\theta^{(t)})}{h^\prime(\theta^{(t)})}=\theta^{(t)}-\frac{\frac{d}{d\theta}\ell(\theta^{(t)})}{\frac{d^2}{d\theta^2}\ell(\theta^{(t)})}\end{aligned}\]</span></p></li>
+</ol>
+</section>
+<section class="level3" data-number="5.2.4" data-o006-id="O006-PSU-006-U1075" id="numerical-optimization-in-r">
+<h3 class="anchored" data-anchor-id="numerical-optimization-in-r" data-number="5.2.4" data-o006-id="O006-PSU-006-U1076"><span class="header-section-number">5.2.4</span> Optimisasi Numerik di R</h3>
+<p data-o006-id="O006-PSU-006-U1077">Bagian ini bertujuan memberi Anda intuisi tentang cara kerja optimisasi numerik menggunakan fungsi <code data-o006-id="O006-PSU-006-U1078">optim</code>. Secara umum, kita cukup MENGGUNAKAN algoritma yang sudah ada, sehingga sebagian besar pekerjaan rumah Anda tidak akan berfokus pada cara kerja algoritma seperti metode Newton. Subbagian berikutnya (Optimisasi Numerik) memuat kode yang paling berguna untuk menerapkan algoritma optimisasi guna mencari MLE. Subbagian ini dimaksudkan untuk membantu Anda memahami apa yang terjadi di balik <code data-o006-id="O006-PSU-006-U1079">optim</code> dan rutinitas optimisasi numerik lainnya. Perhatikan bahwa secara default optim menjalankan Nelder–Mead, bukan langkah pembaruan metode Newton–Raphson yang dikodekan secara manual di atas.</p>
+<p data-o006-id="O006-PSU-006-U1080">Jika tujuan kita adalah memaksimumkan fungsi kemungkinan <span class="math inline" data-o006-math-id="O006-PSU-006-M0064">\(L(\theta,\mathbf{x})\)</span>, kita juga dapat memaksimumkan fungsi log-kemungkinan</p>
+<div data-o006-id="O006-PSU-006-U1081" style="overflow-x:auto;overflow-y:hidden;">
+<p data-o006-id="O006-PSU-006-U1082"><span class="math display" data-o006-math-id="O006-PSU-006-M0065">\[
+\ell(\theta;\mathbf{x})=\sum_{i=1}^{n}\log f(x_i\mid\theta)=\sum_{i=1}^{n}\left[-\log\theta-\frac{x_i}{\theta}\right],\qquad \theta&gt;0
+\]</span></p>
+</div>
+<p data-o006-id="O006-PSU-006-U1083">Maksimum ini dapat dicari dengan terlebih dahulu mengidentifikasi setiap titik kritis yang memenuhi <span class="math inline" data-o006-math-id="O006-PSU-006-M0066">\(\frac{d}{d\theta}\ell(\theta)=\ell'(\theta)=0\)</span> Oleh karena itu, kita perlu mencari nilai <span class="math inline" data-o006-math-id="O006-PSU-006-M0067">\(\theta\)</span> yang merupakan akar dari <span class="math inline" data-o006-math-id="O006-PSU-006-M0068">\(\ell'(\theta)\)</span> - yaitu nilai <span class="math inline" data-o006-math-id="O006-PSU-006-M0069">\(\theta\)</span> yang membuat fungsi <span class="math inline" data-o006-math-id="O006-PSU-006-M0070">\(\ell'(\theta)\)</span> sama dengan nol.</p>
+<p data-o006-id="O006-PSU-006-U1084">Metode Newton adalah algoritma pencarian akar yang bekerja dengan menghampiri fungsi skor secara iteratif menggunakan garis. Rincian metode Newton dibahas dalam kuliah, dengan algoritma sebagai berikut. Diberikan nilai awal <span class="math inline" data-o006-math-id="O006-PSU-006-M0071">\(\theta^{(0)}\)</span>, kita memperbarui <span class="math inline" data-o006-math-id="O006-PSU-006-M0072">\(\theta^{(t)}\)</span> secara iteratif sebagai berikut <span class="math display" data-o006-math-id="O006-PSU-006-M0073">\[ \theta^{(t+1)}=\theta^{(t)} - \frac{\ell'(\theta^{(t)})}{\ell''(\theta^{(t)})}\]</span> Mari kita tulis fungsi untuk mengevaluasi turunan pertama dan kedua dari fungsi log-kemungkinan. Dalam contoh ini, kita menurunkannya secara aljabar lalu mengodekan hasilnya sebagai fungsi R <span class="math display" data-o006-math-id="O006-PSU-006-M0074">\[ \ell'(\theta)=\sum_{i=1}^n\left(\frac{-\theta+x_i}{\theta^2} \right)=\sum_{i=1}^n (x_i-\theta)\theta^{-2}\]</span> <span class="math display" data-o006-math-id="O006-PSU-006-M0075">\[ \ell''(\theta)=\sum_{i=1}^n\left(\frac{-2x_i+\theta}{\theta^3} \right) \]</span></p>
+<p data-o006-id="O006-PSU-006-U1085">Fungsi R untuk mengevaluasi kedua turunan tersebut adalah</p>
+<div class="cell language-name-processed" data-o006-id="O006-PSU-006-U1086">
+<div class="codeblock-with-label r" data-o006-id="O006-PSU-006-U1087">
+<style>.codeblock-with-label pre.lang-label-41::before { content: "R"; }</style>
+<div class="code-copy-outer-scaffold" data-o006-id="O006-PSU-006-U1088"><div class="sourceCode cell-code" data-language-name-skip="true" data-o006-id="O006-PSU-006-U1089" id="cb144"><pre class="sourceCode r lang-label-41 code-with-copy" data-o006-id="O006-PSU-006-U1090"><code class="sourceCode r" data-o006-id="O006-PSU-006-U1091"><span id="cb144-1"><a aria-hidden="true" data-o006-id="O006-PSU-006-U1092" href="#cb144-1" tabindex="-1"></a>l.first.der<span class="ot">=</span><span class="cf">function</span>(theta,x){</span>
+<span id="cb144-2"><a aria-hidden="true" data-o006-id="O006-PSU-006-U1093" href="#cb144-2" tabindex="-1"></a>  <span class="fu">sum</span>((x<span class="sc">-</span>theta)<span class="sc">*</span>theta<span class="sc">^</span>(<span class="sc">-</span><span class="dv">2</span>))</span>
+<span id="cb144-3"><a aria-hidden="true" data-o006-id="O006-PSU-006-U1094" href="#cb144-3" tabindex="-1"></a>}</span>
+<span id="cb144-4"><a aria-hidden="true" data-o006-id="O006-PSU-006-U1095" href="#cb144-4" tabindex="-1"></a>l.scnd.der<span class="ot">=</span><span class="cf">function</span>(theta,x){</span>
+<span id="cb144-5"><a aria-hidden="true" data-o006-id="O006-PSU-006-U1096" href="#cb144-5" tabindex="-1"></a>  <span class="fu">sum</span>((<span class="sc">-</span><span class="dv">2</span><span class="sc">*</span>x<span class="sc">+</span>theta)<span class="sc">/</span>theta<span class="sc">^</span><span class="dv">3</span>)</span>
+<span id="cb144-6"><a aria-hidden="true" data-o006-id="O006-PSU-006-U1097" href="#cb144-6" tabindex="-1"></a>}</span>
+<span id="cb144-7"><a aria-hidden="true" data-o006-id="O006-PSU-006-U1098" href="#cb144-7" tabindex="-1"></a>sumx<span class="ot">=</span><span class="fu">sum</span>(x)</span>
+<span id="cb144-8"><a aria-hidden="true" data-o006-id="O006-PSU-006-U1099" href="#cb144-8" tabindex="-1"></a>n<span class="ot">=</span><span class="fu">length</span>(x)</span></code></pre></div><button class="code-copy-button" data-o006-id="O006-PSU-006-U1100" title="Salin ke papan klip"><i class="bi"></i></button></div>
+</div>
+</div>
+<p data-o006-id="O006-PSU-006-U1101">Kemudian, metode Newton dapat dijalankan dengan melakukan iterasi:</p>
+<div class="cell language-name-processed" data-o006-id="O006-PSU-006-U1102">
+<div class="codeblock-with-label r" data-o006-id="O006-PSU-006-U1103">
+<style>.codeblock-with-label pre.lang-label-42::before { content: "R"; }</style>
+<div class="code-copy-outer-scaffold" data-o006-id="O006-PSU-006-U1104"><div class="sourceCode cell-code" data-language-name-skip="true" data-o006-id="O006-PSU-006-U1105" id="cb145"><pre class="sourceCode r lang-label-42 code-with-copy" data-o006-id="O006-PSU-006-U1106"><code class="sourceCode r" data-o006-id="O006-PSU-006-U1107"><span id="cb145-1"><a aria-hidden="true" data-o006-id="O006-PSU-006-U1108" href="#cb145-1" tabindex="-1"></a><span class="do">## nilai awal</span></span>
+<span id="cb145-2"><a aria-hidden="true" data-o006-id="O006-PSU-006-U1109" href="#cb145-2" tabindex="-1"></a>theta0<span class="ot">=</span><span class="dv">5</span></span>
+<span id="cb145-3"><a aria-hidden="true" data-o006-id="O006-PSU-006-U1110" href="#cb145-3" tabindex="-1"></a><span class="do">## iterasi pertama</span></span>
+<span id="cb145-4"><a aria-hidden="true" data-o006-id="O006-PSU-006-U1111" href="#cb145-4" tabindex="-1"></a>theta1<span class="ot">=</span>theta0<span class="sc">-</span><span class="fu">l.first.der</span>(theta0,x)<span class="sc">/</span><span class="fu">l.scnd.der</span>(theta0,x)</span>
+<span id="cb145-5"><a aria-hidden="true" data-o006-id="O006-PSU-006-U1112" href="#cb145-5" tabindex="-1"></a>theta1</span></code></pre></div><button class="code-copy-button" data-o006-id="O006-PSU-006-U1113" title="Salin ke papan klip"><i class="bi"></i></button></div>
+</div>
+<div class="cell-output cell-output-stdout" data-o006-id="O006-PSU-006-U1114">
+<pre data-o006-id="O006-PSU-006-U1115"><code data-o006-id="O006-PSU-006-U1116">[1] 6.518325</code></pre>
+</div>
+<div class="codeblock-with-label r" data-o006-id="O006-PSU-006-U1117">
+<style>.codeblock-with-label pre.lang-label-89::before { content: "R"; }</style>
+<div class="code-copy-outer-scaffold" data-o006-id="O006-PSU-006-U1118"><div class="sourceCode cell-code" data-o006-id="O006-PSU-006-U1119" id="cb147"><pre class="sourceCode r lang-label-89 code-with-copy" data-o006-id="O006-PSU-006-U1120"><code class="sourceCode r" data-o006-id="O006-PSU-006-U1121"><span id="cb147-1"><a aria-hidden="true" data-o006-id="O006-PSU-006-U1122" href="#cb147-1" tabindex="-1"></a><span class="do">## iterasi ke-2</span></span>
+<span id="cb147-2"><a aria-hidden="true" data-o006-id="O006-PSU-006-U1123" href="#cb147-2" tabindex="-1"></a>theta2<span class="ot">=</span>theta1<span class="sc">-</span><span class="fu">l.first.der</span>(theta1,x)<span class="sc">/</span><span class="fu">l.scnd.der</span>(theta1,x)</span>
+<span id="cb147-3"><a aria-hidden="true" data-o006-id="O006-PSU-006-U1124" href="#cb147-3" tabindex="-1"></a>theta2</span></code></pre></div><button class="code-copy-button" data-o006-id="O006-PSU-006-U1125" title="Salin ke papan klip"><i class="bi"></i></button></div>
+</div>
+<div class="cell-output cell-output-stdout" data-o006-id="O006-PSU-006-U1126">
+<pre data-o006-id="O006-PSU-006-U1127"><code data-o006-id="O006-PSU-006-U1128">[1] 7.883215</code></pre>
+</div>
+<div class="codeblock-with-label r" data-o006-id="O006-PSU-006-U1129">
+<style>.codeblock-with-label pre.lang-label-90::before { content: "R"; }</style>
+<div class="code-copy-outer-scaffold" data-o006-id="O006-PSU-006-U1130"><div class="sourceCode cell-code" data-o006-id="O006-PSU-006-U1131" id="cb149"><pre class="sourceCode r lang-label-90 code-with-copy" data-o006-id="O006-PSU-006-U1132"><code class="sourceCode r" data-o006-id="O006-PSU-006-U1133"><span id="cb149-1"><a aria-hidden="true" data-o006-id="O006-PSU-006-U1134" href="#cb149-1" tabindex="-1"></a><span class="do">## iterasi ke-3</span></span>
+<span id="cb149-2"><a aria-hidden="true" data-o006-id="O006-PSU-006-U1135" href="#cb149-2" tabindex="-1"></a>theta3<span class="ot">=</span>theta2<span class="sc">-</span><span class="fu">l.first.der</span>(theta2,x)<span class="sc">/</span><span class="fu">l.scnd.der</span>(theta2,x)</span>
+<span id="cb149-3"><a aria-hidden="true" data-o006-id="O006-PSU-006-U1136" href="#cb149-3" tabindex="-1"></a>theta3</span></code></pre></div><button class="code-copy-button" data-o006-id="O006-PSU-006-U1137" title="Salin ke papan klip"><i class="bi"></i></button></div>
+</div>
+<div class="cell-output cell-output-stdout" data-o006-id="O006-PSU-006-U1138">
+<pre data-o006-id="O006-PSU-006-U1139"><code data-o006-id="O006-PSU-006-U1140">[1] 8.670288</code></pre>
+</div>
+<div class="codeblock-with-label r" data-o006-id="O006-PSU-006-U1141">
+<style>.codeblock-with-label pre.lang-label-91::before { content: "R"; }</style>
+<div class="code-copy-outer-scaffold" data-o006-id="O006-PSU-006-U1142"><div class="sourceCode cell-code" data-o006-id="O006-PSU-006-U1143" id="cb151"><pre class="sourceCode r lang-label-91 code-with-copy" data-o006-id="O006-PSU-006-U1144"><code class="sourceCode r" data-o006-id="O006-PSU-006-U1145"><span id="cb151-1"><a aria-hidden="true" data-o006-id="O006-PSU-006-U1146" href="#cb151-1" tabindex="-1"></a><span class="do">## iterasi ke-4</span></span>
+<span id="cb151-2"><a aria-hidden="true" data-o006-id="O006-PSU-006-U1147" href="#cb151-2" tabindex="-1"></a>theta4<span class="ot">=</span>theta3<span class="sc">-</span><span class="fu">l.first.der</span>(theta3,x)<span class="sc">/</span><span class="fu">l.scnd.der</span>(theta3,x)</span>
+<span id="cb151-3"><a aria-hidden="true" data-o006-id="O006-PSU-006-U1148" href="#cb151-3" tabindex="-1"></a>theta4</span></code></pre></div><button class="code-copy-button" data-o006-id="O006-PSU-006-U1149" title="Salin ke papan klip"><i class="bi"></i></button></div>
+</div>
+<div class="cell-output cell-output-stdout" data-o006-id="O006-PSU-006-U1150">
+<pre data-o006-id="O006-PSU-006-U1151"><code data-o006-id="O006-PSU-006-U1152">[1] 8.858156</code></pre>
+</div>
+<div class="codeblock-with-label r" data-o006-id="O006-PSU-006-U1153">
+<style>.codeblock-with-label pre.lang-label-92::before { content: "R"; }</style>
+<div class="code-copy-outer-scaffold" data-o006-id="O006-PSU-006-U1154"><div class="sourceCode cell-code" data-o006-id="O006-PSU-006-U1155" id="cb153"><pre class="sourceCode r lang-label-92 code-with-copy" data-o006-id="O006-PSU-006-U1156"><code class="sourceCode r" data-o006-id="O006-PSU-006-U1157"><span id="cb153-1"><a aria-hidden="true" data-o006-id="O006-PSU-006-U1158" href="#cb153-1" tabindex="-1"></a><span class="do">## iterasi ke-5</span></span>
+<span id="cb153-2"><a aria-hidden="true" data-o006-id="O006-PSU-006-U1159" href="#cb153-2" tabindex="-1"></a>theta5<span class="ot">=</span>theta4<span class="sc">-</span><span class="fu">l.first.der</span>(theta4,x)<span class="sc">/</span><span class="fu">l.scnd.der</span>(theta4,x)</span>
+<span id="cb153-3"><a aria-hidden="true" data-o006-id="O006-PSU-006-U1160" href="#cb153-3" tabindex="-1"></a>theta5</span></code></pre></div><button class="code-copy-button" data-o006-id="O006-PSU-006-U1161" title="Salin ke papan klip"><i class="bi"></i></button></div>
+</div>
+<div class="cell-output cell-output-stdout" data-o006-id="O006-PSU-006-U1162">
+<pre data-o006-id="O006-PSU-006-U1163"><code data-o006-id="O006-PSU-006-U1164">[1] 8.86665</code></pre>
+</div>
+<div class="codeblock-with-label r" data-o006-id="O006-PSU-006-U1165">
+<style>.codeblock-with-label pre.lang-label-93::before { content: "R"; }</style>
+<div class="code-copy-outer-scaffold" data-o006-id="O006-PSU-006-U1166"><div class="sourceCode cell-code" data-o006-id="O006-PSU-006-U1167" id="cb155"><pre class="sourceCode r lang-label-93 code-with-copy" data-o006-id="O006-PSU-006-U1168"><code class="sourceCode r" data-o006-id="O006-PSU-006-U1169"><span id="cb155-1"><a aria-hidden="true" data-o006-id="O006-PSU-006-U1170" href="#cb155-1" tabindex="-1"></a><span class="do">## iterasi ke-6</span></span>
+<span id="cb155-2"><a aria-hidden="true" data-o006-id="O006-PSU-006-U1171" href="#cb155-2" tabindex="-1"></a>theta6<span class="ot">=</span>theta5<span class="sc">-</span><span class="fu">l.first.der</span>(theta5,x)<span class="sc">/</span><span class="fu">l.scnd.der</span>(theta5,x)</span>
+<span id="cb155-3"><a aria-hidden="true" data-o006-id="O006-PSU-006-U1172" href="#cb155-3" tabindex="-1"></a>theta6</span></code></pre></div><button class="code-copy-button" data-o006-id="O006-PSU-006-U1173" title="Salin ke papan klip"><i class="bi"></i></button></div>
+</div>
+<div class="cell-output cell-output-stdout" data-o006-id="O006-PSU-006-U1174">
+<pre data-o006-id="O006-PSU-006-U1175"><code data-o006-id="O006-PSU-006-U1176">[1] 8.866667</code></pre>
+</div>
+<div class="codeblock-with-label r" data-o006-id="O006-PSU-006-U1177">
+<style>.codeblock-with-label pre.lang-label-94::before { content: "R"; }</style>
+<div class="code-copy-outer-scaffold" data-o006-id="O006-PSU-006-U1178"><div class="sourceCode cell-code" data-o006-id="O006-PSU-006-U1179" id="cb157"><pre class="sourceCode r lang-label-94 code-with-copy" data-o006-id="O006-PSU-006-U1180"><code class="sourceCode r" data-o006-id="O006-PSU-006-U1181"><span id="cb157-1"><a aria-hidden="true" data-o006-id="O006-PSU-006-U1182" href="#cb157-1" tabindex="-1"></a><span class="do">## iterasi ke-7</span></span>
+<span id="cb157-2"><a aria-hidden="true" data-o006-id="O006-PSU-006-U1183" href="#cb157-2" tabindex="-1"></a>theta7<span class="ot">=</span>theta6<span class="sc">-</span><span class="fu">l.first.der</span>(theta6,x)<span class="sc">/</span><span class="fu">l.scnd.der</span>(theta6,x)</span>
+<span id="cb157-3"><a aria-hidden="true" data-o006-id="O006-PSU-006-U1184" href="#cb157-3" tabindex="-1"></a>theta7</span></code></pre></div><button class="code-copy-button" data-o006-id="O006-PSU-006-U1185" title="Salin ke papan klip"><i class="bi"></i></button></div>
+</div>
+<div class="cell-output cell-output-stdout" data-o006-id="O006-PSU-006-U1186">
+<pre data-o006-id="O006-PSU-006-U1187"><code data-o006-id="O006-PSU-006-U1188">[1] 8.866667</code></pre>
+</div>
+<div class="codeblock-with-label r" data-o006-id="O006-PSU-006-U1189">
+<style>.codeblock-with-label pre.lang-label-95::before { content: "R"; }</style>
+<div class="code-copy-outer-scaffold" data-o006-id="O006-PSU-006-U1190"><div class="sourceCode cell-code" data-o006-id="O006-PSU-006-U1191" id="cb159"><pre class="sourceCode r lang-label-95 code-with-copy" data-o006-id="O006-PSU-006-U1192"><code class="sourceCode r" data-o006-id="O006-PSU-006-U1193"><span id="cb159-1"><a aria-hidden="true" data-o006-id="O006-PSU-006-U1194" href="#cb159-1" tabindex="-1"></a><span class="do">## iterasi ke-8</span></span>
+<span id="cb159-2"><a aria-hidden="true" data-o006-id="O006-PSU-006-U1195" href="#cb159-2" tabindex="-1"></a>theta8<span class="ot">=</span>theta7<span class="sc">-</span><span class="fu">l.first.der</span>(theta7,x)<span class="sc">/</span><span class="fu">l.scnd.der</span>(theta7,x)</span>
+<span id="cb159-3"><a aria-hidden="true" data-o006-id="O006-PSU-006-U1196" href="#cb159-3" tabindex="-1"></a>theta8</span></code></pre></div><button class="code-copy-button" data-o006-id="O006-PSU-006-U1197" title="Salin ke papan klip"><i class="bi"></i></button></div>
+</div>
+<div class="cell-output cell-output-stdout" data-o006-id="O006-PSU-006-U1198">
+<pre data-o006-id="O006-PSU-006-U1199"><code data-o006-id="O006-PSU-006-U1200">[1] 8.866667</code></pre>
+</div>
+</div>
+<p data-o006-id="O006-PSU-006-U1201">Terlihat bahwa iterasi berturut-turut tampaknya berkonvergensi ke nilai sekitar 8.866667, yang dekat dengan hampiran yang kita peroleh melalui pencarian grid.</p>
+<p data-o006-id="O006-PSU-006-U1202">Ilustrasi visual metode Newton tersedia dalam paket <code data-o006-id="O006-PSU-006-U1203">animation</code> untuk R. Kode berikut tidak akan ditampilkan secara daring, tetapi jika dijalankan di konsol R Anda, kode tersebut akan menghasilkan ilustrasi metode Newton yang menarik.</p>
+<div class="cell language-name-processed" data-o006-id="O006-PSU-006-U1204">
+<div class="codeblock-with-label r" data-o006-id="O006-PSU-006-U1205">
+<style>.codeblock-with-label pre.lang-label-43::before { content: "R"; }</style>
+<div class="code-copy-outer-scaffold" data-o006-id="O006-PSU-006-U1206"><div class="sourceCode cell-code" data-language-name-skip="true" data-o006-id="O006-PSU-006-U1207" id="cb161"><pre class="sourceCode r lang-label-43 code-with-copy" data-o006-id="O006-PSU-006-U1208"><code class="sourceCode r" data-o006-id="O006-PSU-006-U1209"><span id="cb161-1"><a aria-hidden="true" data-o006-id="O006-PSU-006-U1210" href="#cb161-1" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"animation"</span>)</span>
+<span id="cb161-2"><a aria-hidden="true" data-o006-id="O006-PSU-006-U1211" href="#cb161-2" tabindex="-1"></a><span class="fu">library</span>(animation)</span></code></pre></div><button class="code-copy-button" data-o006-id="O006-PSU-006-U1212" title="Salin ke papan klip"><i class="bi"></i></button></div>
+</div>
+</div>
+<div class="quarto-float quarto-figure quarto-figure-center anchored" data-o006-id="O006-PSU-006-U1213" id="fig-newtonmethodgraphs">
+<figure class="quarto-float quarto-float-fig figure" data-o006-id="O006-PSU-006-U1214">
+<div aria-describedby="fig-newtonmethodgraphs-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca" data-o006-id="O006-PSU-006-U1215">
+<div class="cell quarto-layout-panel" data-layout-ncol="2" data-lightbox="true" data-o006-id="O006-PSU-006-U1216">
+<div class="quarto-layout-row" data-o006-id="O006-PSU-006-U1217">
+<div class="quarto-layout-cell" data-o006-id="O006-PSU-006-U1218" style="flex-basis: 50.0%;justify-content: center;">
+<p data-o006-id="O006-PSU-006-U1219"><img alt="Bingkai Newton–Raphson 1: dari theta 5, garis singgung fungsi skor memotong sumbu pada theta sekitar 6,5183." class="img-fluid figure-img" data-o006-asset-id="O006-PSU-006-A0008" data-o006-id="O006-PSU-006-U1220" src="assets/lesson05/unnamed-chunk-44-1.png"/></p>
+</div>
+<div class="quarto-layout-cell" data-o006-id="O006-PSU-006-U1221" style="flex-basis: 50.0%;justify-content: center;">
+<p data-o006-id="O006-PSU-006-U1222"><img alt="Bingkai Newton–Raphson 2: pembaruan berikutnya bergerak dari sekitar 6,5183 ke 7,8832." class="img-fluid figure-img" data-o006-asset-id="O006-PSU-006-A0009" data-o006-id="O006-PSU-006-U1223" src="assets/lesson05/unnamed-chunk-44-2.png"/></p>
+</div>
+</div>
+<div class="quarto-layout-row" data-o006-id="O006-PSU-006-U1224">
+<div class="quarto-layout-cell" data-o006-id="O006-PSU-006-U1225" style="flex-basis: 50.0%;justify-content: center;">
+<p data-o006-id="O006-PSU-006-U1226"><img alt="Bingkai Newton–Raphson 3: pembaruan bergerak dari sekitar 7,8832 ke 8,6703, semakin dekat ke akar fungsi skor." class="img-fluid figure-img" data-o006-asset-id="O006-PSU-006-A0010" data-o006-id="O006-PSU-006-U1227" src="assets/lesson05/unnamed-chunk-44-3.png"/></p>
+</div>
+<div class="quarto-layout-cell" data-o006-id="O006-PSU-006-U1228" style="flex-basis: 50.0%;justify-content: center;">
+<p data-o006-id="O006-PSU-006-U1229"><img alt="Bingkai Newton–Raphson 4: pembaruan bergerak dari sekitar 8,6703 ke 8,8582." class="img-fluid figure-img" data-o006-asset-id="O006-PSU-006-A0011" data-o006-id="O006-PSU-006-U1230" src="assets/lesson05/unnamed-chunk-44-4.png"/></p>
+</div>
+</div>
+<div class="quarto-layout-row" data-o006-id="O006-PSU-006-U1231">
+<div class="quarto-layout-cell" data-o006-id="O006-PSU-006-U1232" style="flex-basis: 50.0%;justify-content: center;">
+<p data-o006-id="O006-PSU-006-U1233"><img alt="Bingkai Newton–Raphson 5: iterasi mencapai sekitar 8,8667 dan garis pembaruan hampir vertikal di dekat akar." class="img-fluid figure-img" data-o006-asset-id="O006-PSU-006-A0012" data-o006-id="O006-PSU-006-U1234" src="assets/lesson05/unnamed-chunk-44-5.png"/></p>
+</div>
+</div>
+</div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" data-o006-id="O006-PSU-006-U1235" id="fig-newtonmethodgraphs-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Gambar 5.7
+</figcaption>
+</figure>
+</div>
+</section>
+<section class="level3" data-number="5.2.5" data-o006-id="O006-PSU-006-U1236" id="numerical-mle-in-r">
+<h3 class="anchored" data-anchor-id="numerical-mle-in-r" data-number="5.2.5" data-o006-id="O006-PSU-006-U1237"><span class="header-section-number">5.2.5</span> MLE Numerik di R</h3>
+<p data-o006-id="O006-PSU-006-U1238">Bagian sebelumnya menjelaskan dan menerapkan dua pendekatan untuk menghampiri nilai dugaan kemungkinan maksimum secara numerik. Pada bagian ini, kita akan menjelaskan pendekatan optimisasi serbaguna yang lebih tangguh menggunakan <code data-o006-id="O006-PSU-006-U1239">optim</code> di R.</p>
+<p data-o006-id="O006-PSU-006-U1240"><code data-o006-id="O006-PSU-006-U1241">optim</code> di R melakukan optimisasi numerik serbaguna. Kita mulai dengan meninjau penggunaan <code data-o006-id="O006-PSU-006-U1242">optim</code>: menggunakan <code data-o006-id="O006-PSU-006-U1243">optim</code> untuk pendugaan kemungkinan maksimum. Tinjau kasus umum dengan <span class="math display" data-o006-math-id="O006-PSU-006-M0076">\[x_i\sim f_X(x_i;\boldsymbol\theta)\]</span> dengan <span class="math inline" data-o006-math-id="O006-PSU-006-M0077">\(\boldsymbol\theta=(\theta_1,\theta_2,...\theta_p)\)</span> merupakan vektor seluruh parameter dalam model. Tujuan kita adalah mencari MLE untuk <span class="math inline" data-o006-math-id="O006-PSU-006-M0078">\(\boldsymbol\theta\)</span>. Dalam situasi ini, <code data-o006-id="O006-PSU-006-U1244">optim</code> menerima masukan berikut</p>
+<ol data-o006-id="O006-PSU-006-U1245" type="1">
+<li data-o006-id="O006-PSU-006-U1246"><p data-o006-id="O006-PSU-006-U1247">Sekumpulan nilai awal untuk <span class="math inline" data-o006-math-id="O006-PSU-006-M0079">\(\boldsymbol\theta\)</span>. Ini merupakan vektor tebakan awal untuk setiap parameter dalam model. Dalam kebanyakan kasus, Anda TIDAK perlu terlalu memikirkan nilai awal, tetapi Anda HARUS memastikan bahwa nilai awal tersebut sah. Namun, nilai awal yang sah saja tidak membatasi seluruh lintasan optimisasi ke domain parameter. Sebagai contoh, jika <span class="math inline" data-o006-math-id="O006-PSU-006-M0080">\(x_i\sim N(\mu,\sigma^2)\)</span>, nilai awal untuk <span class="math inline" data-o006-math-id="O006-PSU-006-M0081">\(\sigma\)</span> harus berupa bilangan positif, sedangkan nilai awal untuk <span class="math inline" data-o006-math-id="O006-PSU-006-M0082">\(\mu\)</span> dapat berupa bilangan apa pun.</p></li>
+<li data-o006-id="O006-PSU-006-U1248"><p data-o006-id="O006-PSU-006-U1249">Fungsi untuk mengevaluasi negatif fungsi log-kemungkinan (NLL) data bagi suatu himpunan parameter. Perhatikan bahwa kita menggunakan NEGATIF fungsi log-kemungkinan, bukan fungsi log-kemungkinan biasa - hal ini karena <code data-o006-id="O006-PSU-006-U1250">optim</code> secara bawaan dirancang untuk meminimumkan, sehingga MLE bagi <span class="math inline" data-o006-math-id="O006-PSU-006-M0083">\(\boldsymbol\theta\)</span> akan memaksimumkan fungsi log-kemungkinan tetapi meminimumkan negatif fungsi log-kemungkinan.</p></li>
+</ol>
+<div class="callout-danger" data-appearance="minimal" data-o006-id="O006-PSU-006-U1251">
+<p data-o006-id="O006-PSU-006-U1252"><strong>Penting!</strong><br/>
+Masukan pertama fungsi ini HARUS berupa VEKTOR yang memuat SEMUA PARAMETER. Masukan lainnya dapat berformat apa pun.</p>
+</div>
+<p data-o006-id="O006-PSU-006-U1253">Pertama, kita akan melihat dua contoh yang sesuai dengan kerangka ini, lalu menyusun templat kode yang dapat digunakan untuk persoalan lain.</p>
+<div class="theorem example" data-o006-id="O006-PSU-006-U1254" id="exm-mle1">
+<p data-o006-id="O006-PSU-006-U1255"><span class="theorem-title"><strong>Contoh 5.1</strong></span> Untuk mengilustrasikan pencarian nilai dugaan kemungkinan maksimum secara numerik, mula-mula kita meninjau data dari distribusi eksponensial. Kita mengasumsikan bahwa 15 titik data berikut berasal dari distribusi eksponensial dengan parameter rataan/skala yang belum diketahui <span class="math inline" data-o006-math-id="O006-PSU-006-M0084">\(\theta\)</span>, sehingga lajunya adalah kebalikan parameter tersebut dan <span class="math inline" data-o006-math-id="O006-PSU-006-M0085">\(x_i\sim\operatorname{Exp}(\text{rate}=1/\theta),\qquad\theta&gt;0\)</span>, dengan data</p>
+<div class="quarto-float quarto-figure quarto-figure-center anchored" data-o006-id="O006-PSU-006-U1256" id="fig-histogrammle">
+<figure class="quarto-float quarto-float-fig figure" data-o006-id="O006-PSU-006-U1257">
+<div aria-describedby="fig-histogrammle-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca" data-o006-id="O006-PSU-006-U1258">
+<div class="cell language-name-processed" data-lightbox="true" data-o006-id="O006-PSU-006-U1259">
+<div class="codeblock-with-label r" data-o006-id="O006-PSU-006-U1260">
+<style>.codeblock-with-label pre.lang-label-44::before { content: "R"; }</style>
+<div class="code-copy-outer-scaffold" data-o006-id="O006-PSU-006-U1261"><div class="sourceCode cell-code" data-language-name-skip="true" data-o006-id="O006-PSU-006-U1262" id="cb162"><pre class="sourceCode r lang-label-44 code-with-copy" data-o006-id="O006-PSU-006-U1263"><code class="sourceCode r" data-o006-id="O006-PSU-006-U1264"><span id="cb162-1"><a aria-hidden="true" data-o006-id="O006-PSU-006-U1265" href="#cb162-1" tabindex="-1"></a>x<span class="ot">=</span><span class="fu">c</span>(<span class="dv">1</span>,  <span class="dv">5</span>, <span class="dv">10</span>,  <span class="dv">1</span>,  <span class="dv">3</span>, <span class="dv">11</span>, <span class="dv">10</span>, <span class="dv">23</span>,  <span class="dv">2</span>,  <span class="dv">6</span>,  <span class="dv">1</span>, <span class="dv">24</span>,  <span class="dv">6</span>, <span class="dv">11</span>, <span class="dv">19</span>)</span>
+<span id="cb162-2"><a aria-hidden="true" data-o006-id="O006-PSU-006-U1266" href="#cb162-2" tabindex="-1"></a>x</span></code></pre></div><button class="code-copy-button" data-o006-id="O006-PSU-006-U1267" title="Salin ke papan klip"><i class="bi"></i></button></div>
+</div>
+<div class="cell-output cell-output-stdout" data-o006-id="O006-PSU-006-U1268">
+<pre data-o006-id="O006-PSU-006-U1269"><code data-o006-id="O006-PSU-006-U1270"> [1]  1  5 10  1  3 11 10 23  2  6  1 24  6 11 19</code></pre>
+</div>
+<div class="codeblock-with-label r" data-o006-id="O006-PSU-006-U1271">
+<style>.codeblock-with-label pre.lang-label-96::before { content: "R"; }</style>
+<div class="code-copy-outer-scaffold" data-o006-id="O006-PSU-006-U1272"><div class="sourceCode cell-code" data-o006-id="O006-PSU-006-U1273" id="cb164"><pre class="sourceCode r lang-label-96 code-with-copy" data-o006-id="O006-PSU-006-U1274"><code class="sourceCode r" data-o006-id="O006-PSU-006-U1275"><span id="cb164-1"><a aria-hidden="true" data-o006-id="O006-PSU-006-U1276" href="#cb164-1" tabindex="-1"></a><span class="fu">hist</span>(x,<span class="at">breaks=</span><span class="dv">7</span>)</span></code></pre></div><button class="code-copy-button" data-o006-id="O006-PSU-006-U1277" title="Salin ke papan klip"><i class="bi"></i></button></div>
+</div>
+<div class="cell-output-display" data-o006-id="O006-PSU-006-U1278">
+<div data-o006-id="O006-PSU-006-U1279">
+<figure class="figure" data-o006-id="O006-PSU-006-U1280">
+<p data-o006-id="O006-PSU-006-U1281"><img alt="Histogram 15 titik data Eksponensial tetap yang digunakan dalam Contoh 5.1." class="img-fluid figure-img" data-o006-asset-id="O006-PSU-006-A0013" data-o006-id="O006-PSU-006-U1282" src="assets/lesson05/unnamed-chunk-45-1.png" style="width:70.0%"/></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" data-o006-id="O006-PSU-006-U1283" id="fig-histogrammle-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Gambar 5.8
+</figcaption>
+</figure>
+</div>
+<p data-o006-id="O006-PSU-006-U1284">Pertama, kita menulis fungsi R untuk mengevaluasi negatif fungsi log-kemungkinan data. Kita akan menggunakan <code data-o006-id="O006-PSU-006-U1285">dexp</code> dari R untuk mengevaluasi log kepadatan setiap observasi, dengan <code data-o006-id="O006-PSU-006-U1286">log=TRUE</code> opsi</p>
+<div class="cell language-name-processed" data-o006-id="O006-PSU-006-U1287">
+<div class="codeblock-with-label r" data-o006-id="O006-PSU-006-U1288">
+<style>.codeblock-with-label pre.lang-label-45::before { content: "R"; }</style>
+<div class="code-copy-outer-scaffold" data-o006-id="O006-PSU-006-U1289"><div class="sourceCode cell-code" data-language-name-skip="true" data-o006-id="O006-PSU-006-U1290" id="cb165"><pre class="sourceCode r lang-label-45 code-with-copy" data-o006-id="O006-PSU-006-U1291"><code class="sourceCode r" data-o006-id="O006-PSU-006-U1292"><span id="cb165-1"><a aria-hidden="true" data-o006-id="O006-PSU-006-U1293" href="#cb165-1" tabindex="-1"></a>nll.exp=function(theta,x){
+  if(!is.finite(theta) || theta&lt;=0) return(Inf)
+  -sum(dexp(x,rate=1/theta,log=TRUE))
+}<span class="ot"></span><span class="cf"></span></span><span id="cb165-2"><a aria-hidden="true" data-o006-id="O006-PSU-006-U1294" href="#cb165-2" tabindex="-1"></a><span class="sc"></span><span class="fu"></span><span class="fu"></span><span class="at"></span><span class="dv"></span><span class="sc"></span><span class="at"></span><span class="cn"></span></span><span id="cb165-3"><a aria-hidden="true" data-o006-id="O006-PSU-006-U1295" href="#cb165-3" tabindex="-1"></a></span></code></pre></div><button class="code-copy-button" data-o006-id="O006-PSU-006-U1296" title="Salin ke papan klip"><i class="bi"></i></button></div>
+</div>
+</div>
+<p data-o006-id="O006-PSU-006-U1297">Mari kita uraikan fungsi ini bagian demi bagian. Kode <code data-o006-id="O006-PSU-006-U1298">dexp(x,rate=1/theta)</code> akan mengevaluasi nilai fungsi kepadatan peluang (PDF) setiap titik data dalam x untuk suatu nilai theta, sehingga kode <code data-o006-id="O006-PSU-006-U1299">dexp(x,rate=1/theta,log=TRUE)</code> mengevaluasi log kepadatan setiap titik data. Untuk data yang dianggap tetap, penjumlahan semua nilai tersebut dengan perintah <code data-o006-id="O006-PSU-006-U1300">sum(...)</code> menghasilkan fungsi log-kemungkinan; tanda negatif di depannya menghasilkan negatif fungsi log-kemungkinan data.</p>
+<p data-o006-id="O006-PSU-006-U1301">Selanjutnya, kita dapat menggunakan <code data-o006-id="O006-PSU-006-U1302">optim</code> untuk memperoleh hampiran numerik terhadap nilai dugaan kemungkinan maksimum bagi <span class="math inline" data-o006-math-id="O006-PSU-006-M0086">\(\theta\)</span>. Pertama, kita tampilkan kodenya, lalu menguraikan setiap bagiannya.</p>
+<div class="cell language-name-processed" data-o006-id="O006-PSU-006-U1303">
+<div class="codeblock-with-label r" data-o006-id="O006-PSU-006-U1304">
+<style>.codeblock-with-label pre.lang-label-46::before { content: "R"; }</style>
+<div class="code-copy-outer-scaffold" data-o006-id="O006-PSU-006-U1305"><div class="sourceCode cell-code" data-language-name-skip="true" data-o006-id="O006-PSU-006-U1306" id="cb166"><pre class="sourceCode r lang-label-46 code-with-copy" data-o006-id="O006-PSU-006-U1307"><code class="sourceCode r" data-o006-id="O006-PSU-006-U1308"><span id="cb166-1"><a aria-hidden="true" data-o006-id="O006-PSU-006-U1309" href="#cb166-1" tabindex="-1"></a>out=optim(2,nll.exp,x=x,method="L-BFGS-B",lower=.Machine$double.eps)<span class="ot"></span><span class="fu"></span><span class="dv"></span><span class="at"></span></span></code></pre></div><button class="code-copy-button" data-o006-id="O006-PSU-006-U1310" title="Salin ke papan klip"><i class="bi"></i></button></div>
+</div>
+</div>
+<p data-o006-id="O006-PSU-006-U1311">Sintaks <code data-o006-id="O006-PSU-006-U1312">optim</code> adalah sebagai berikut. Masukan pertama harus berupa nilai awal untuk semua parameter. Karena hanya ada satu parameter, <span class="math inline" data-o006-math-id="O006-PSU-006-M0087">\(\theta\)</span>, kita memberikan satu nilai awal. Nilai ini dapat berupa bilangan apa pun yang sah untuk distribusi eksponensial. Karena parameter <span class="math inline" data-o006-math-id="O006-PSU-006-M0088">\(\theta\)</span> harus positif, kita memberikan nilai awal positif <span class="math inline" data-o006-math-id="O006-PSU-006-M0089">\(\theta^{(0)}=2\)</span> dalam kode di atas. Meskipun demikian, nilai awal positif tidak menegakkan domain positif selama optimisasi; gunakan parameterisasi log atau batas positif untuk itu.</p>
+<p data-o006-id="O006-PSU-006-U1313">Masukan kedua adalah <code data-o006-id="O006-PSU-006-U1314">nama</code> dari fungsi yang menghitung negatif fungsi log-kemungkinan yang baru saja kita tulis. Karena kita menamainya <code data-o006-id="O006-PSU-006-U1315">nll.exp</code>, nama inilah yang dimasukkan ke <code data-o006-id="O006-PSU-006-U1316">optim</code> pada posisi masukan kedua. Masukan ketiga (dan masukan lain jika diperlukan) untuk <code data-o006-id="O006-PSU-006-U1317">optim</code> merupakan masukan tambahan apa pun yang diperlukan oleh fungsi yang menghitung negatif <code data-o006-id="O006-PSU-006-U1318">log-kemungkinan</code> tersebut. Fungsi <code data-o006-id="O006-PSU-006-U1319">nll.exp</code> memerlukan dua masukan: <code data-o006-id="O006-PSU-006-U1320">theta</code> dan <code data-o006-id="O006-PSU-006-U1321">x</code>. Masukan pertama, <code data-o006-id="O006-PSU-006-U1322">theta</code>, pada dasarnya diberikan melalui nilai awal kita. Masukan kedua, <code data-o006-id="O006-PSU-006-U1323">x</code>, adalah vektor data. Untuk memberi tahu <code data-o006-id="O006-PSU-006-U1324">optim</code> nilai yang harus digunakan untuk <code data-o006-id="O006-PSU-006-U1325">x</code>, sebagai masukan ketiga untuk <code data-o006-id="O006-PSU-006-U1326">optim</code> kita memberikan argumen <code data-o006-id="O006-PSU-006-U1327">x=x</code>. Sisi kiri <code data-o006-id="O006-PSU-006-U1328">x</code> adalah nama masukan dalam fungsi nll.exp. Sisi kanan adalah nama nilai data (yang kita namai <code data-o006-id="O006-PSU-006-U1329">x</code> pula). Pada contoh berikutnya, kita akan mencoba memperjelas hal ini.</p>
+<p data-o006-id="O006-PSU-006-U1330">Keluaran <code data-o006-id="O006-PSU-006-U1331">optim</code> memuat beberapa peringatan. Dalam <code data-o006-id="O006-PSU-006-U1332">optim</code>, setiap peringatan harus diperiksa, bukan diabaikan. Peringatan di sini muncul karena <code data-o006-id="O006-PSU-006-U1333">optim</code>, sebagai bagian dari algoritma optimisasinya, mencoba beberapa nilai <span class="math inline" data-o006-math-id="O006-PSU-006-M0090">\(\theta\)</span> yang negatif. Nilai tersebut menghasilkan NA saat fungsi log-kemungkinan dievaluasi dan menunjukkan bahwa domain fungsi objektif belum ditegakkan. <code data-o006-id="O006-PSU-006-U1334">optim</code> mungkin terus mencoba nilai lain ketika hal ini terjadi. Namun, penyelesaiannya ialah menegakkan kepositifan, misalnya dengan parameterisasi log atau opsi batas dalam <code data-o006-id="O006-PSU-006-U1335">optim</code>; diagnosislah setiap peringatan dan jangan mengabaikan peringatan dari <code data-o006-id="O006-PSU-006-U1336">optim</code>.</p>
+<p data-o006-id="O006-PSU-006-U1337"><code data-o006-id="O006-PSU-006-U1338">optim</code> menghasilkan keluaran berikut</p>
+<div class="cell language-name-processed" data-o006-id="O006-PSU-006-U1339">
+<div class="codeblock-with-label r" data-o006-id="O006-PSU-006-U1340">
+<style>.codeblock-with-label pre.lang-label-47::before { content: "R"; }</style>
+<div class="code-copy-outer-scaffold" data-o006-id="O006-PSU-006-U1341"><div class="sourceCode cell-code" data-language-name-skip="true" data-o006-id="O006-PSU-006-U1342" id="cb167"><pre class="sourceCode r lang-label-47 code-with-copy" data-o006-id="O006-PSU-006-U1343"><code class="sourceCode r" data-o006-id="O006-PSU-006-U1344"><span id="cb167-1"><a aria-hidden="true" data-o006-id="O006-PSU-006-U1345" href="#cb167-1" tabindex="-1"></a>out</span></code></pre></div><button class="code-copy-button" data-o006-id="O006-PSU-006-U1346" title="Salin ke papan klip"><i class="bi"></i></button></div>
+</div>
+<div class="cell-output cell-output-stdout" data-o006-id="O006-PSU-006-U1347">
+<pre data-o006-id="O006-PSU-006-U1348"><code data-o006-id="O006-PSU-006-U1349">$par
+[1] 8.866665
+
+$value
+[1] 47.73448
+
+$counts
+function gradient 
+      12       12 
+
+$convergence
+[1] 0
+
+$message
+[1] "CONVERGENCE: REL_REDUCTION_OF_F &lt;= FACTR*EPSMCH"</code></pre>
+</div>
+</div>
+<p data-o006-id="O006-PSU-006-U1350">Ada beberapa bagian keluaran yang relevan.</p>
+<ol data-o006-id="O006-PSU-006-U1351" type="1">
+<li data-o006-id="O006-PSU-006-U1352"><p data-o006-id="O006-PSU-006-U1353"><code data-o006-id="O006-PSU-006-U1354">out\$par</code> merupakan hampiran numerik terhadap nilai dugaan kemungkinan maksimum, yaitu nilai parameter yang hampir memaksimumkan fungsi kemungkinan (dan dengan demikian hampir meminimumkan negatif fungsi log-kemungkinan) sesuai toleransi algoritma</p></li>
+<li data-o006-id="O006-PSU-006-U1355"><p data-o006-id="O006-PSU-006-U1356"><code data-o006-id="O006-PSU-006-U1357">out\$value</code> adalah negatif fungsi log-kemungkinan yang dievaluasi pada nilai parameter yang dilaporkan. Pemanggilan berikut mengevaluasi fungsi objektif pada parameter tersebut: <code data-o006-id="O006-PSU-006-U1358">nll.exp(out$par,x)</code> menghasilkan 47.73448. Nilai objektif ini berguna untuk memeriksa dan membandingkan hasil; jangan mengabaikannya secara otomatis.</p></li>
+<li data-o006-id="O006-PSU-006-U1359"><p data-o006-id="O006-PSU-006-U1360"><code data-o006-id="O006-PSU-006-U1361">out\$counts</code> mencatat jumlah evaluasi fungsi objektif dan gradien, bukan jumlah iterasi algoritma. Keluaran ini menunjukkan 12 evaluasi fungsi objektif dan 12 evaluasi gradien numerik. Informasi tersebut berguna untuk mendiagnosis perilaku dan efisiensi optimisasi.</p></li>
+<li data-o006-id="O006-PSU-006-U1362"><p data-o006-id="O006-PSU-006-U1363"><code data-o006-id="O006-PSU-006-U1364">out\$convergence</code> diberi nilai <code data-o006-id="O006-PSU-006-U1365">0</code> jika algoritma memenuhi kriteria konvergensi internalnya. Kode ini hanya menandakan bahwa kriteria penghentian terpenuhi; kode ini bukan bukti optimum global, domain yang sah, atau ketelitian numerik yang memadai. Jika <code data-o006-id="O006-PSU-006-U1366">convergence</code> bernilai <code data-o006-id="O006-PSU-006-U1367">1</code>, algoritma BELUM konvergen; penyebabnya harus didiagnosis dan nilai dugaan belum dapat dipercaya.</p></li>
+<li data-o006-id="O006-PSU-006-U1368"><p data-o006-id="O006-PSU-006-U1369"><code data-o006-id="O006-PSU-006-U1370">out\$message</code> dapat memberikan informasi diagnostik dan tidak boleh diabaikan secara otomatis.</p></li>
+</ol>
+<p data-o006-id="O006-PSU-006-U1371">Perhatikan bahwa nilai awal yang berbeda dapat memberikan hasil yang sedikit berbeda. Sebagai contoh, nilai awal <span class="math inline" data-o006-math-id="O006-PSU-006-M0091">\(\theta^{(0)}=0.5\)</span> menghasilkan</p>
+<div class="cell language-name-processed" data-o006-id="O006-PSU-006-U1372">
+<div class="codeblock-with-label r" data-o006-id="O006-PSU-006-U1373">
+<style>.codeblock-with-label pre.lang-label-48::before { content: "R"; }</style>
+<div class="code-copy-outer-scaffold" data-o006-id="O006-PSU-006-U1374"><div class="sourceCode cell-code" data-language-name-skip="true" data-o006-id="O006-PSU-006-U1375" id="cb169"><pre class="sourceCode r lang-label-48 code-with-copy" data-o006-id="O006-PSU-006-U1376"><code class="sourceCode r" data-o006-id="O006-PSU-006-U1377"><span id="cb169-1"><a aria-hidden="true" data-o006-id="O006-PSU-006-U1378" href="#cb169-1" tabindex="-1"></a>out2=optim(0.5,nll.exp,x=x,method="L-BFGS-B",lower=.Machine$double.eps)
+out2<span class="ot"></span><span class="fu"></span><span class="fl"></span><span class="at"></span></span><span id="cb169-2"><a aria-hidden="true" data-o006-id="O006-PSU-006-U1379" href="#cb169-2" tabindex="-1"></a></span></code></pre></div><button class="code-copy-button" data-o006-id="O006-PSU-006-U1380" title="Salin ke papan klip"><i class="bi"></i></button></div>
+</div>
+<div class="cell-output cell-output-stdout" data-o006-id="O006-PSU-006-U1381">
+<pre data-o006-id="O006-PSU-006-U1382"><code data-o006-id="O006-PSU-006-U1383">$par
+[1] 8.866664
+
+$value
+[1] 47.73448
+
+$counts
+function gradient 
+      15       15 
+
+$convergence
+[1] 0
+
+$message
+[1] "CONVERGENCE: REL_REDUCTION_OF_F &lt;= FACTR*EPSMCH"</code></pre>
+</div>
+</div>
+<p data-o006-id="O006-PSU-006-U1384">yang memberikan dua hampiran numerik yang sedikit berbeda, yaitu 8.866665 dan 8.866664. Keduanya dekat dengan MLE analitik 8.866666…. Jika selisihnya tidak sepele, pilih nilai dengan negatif fungsi log-kemungkinan yang LEBIH KECIL (ditampilkan dalam out$value), lalu periksa domain, konvergensi, dan kepekaannya terhadap nilai awal serta toleransi.</p>
+<p data-o006-id="O006-PSU-006-U1385">Secara umum, saat menelaah keluaran <code data-o006-id="O006-PSU-006-U1386">optim</code> lakukan langkah-langkah berikut:</p>
+<ol data-o006-id="O006-PSU-006-U1387" type="1">
+<li data-o006-id="O006-PSU-006-U1388">Periksa apakah <code data-o006-id="O006-PSU-006-U1389">convergence</code> sama dengan 0, lalu periksa domain parameter, keterhinggaan nilai objektif, kepekaan terhadap nilai awal, metode, dan toleransi, serta gradien atau tolok ukur analitik bila tersedia.</li>
+<li data-o006-id="O006-PSU-006-U1390">Setelah pemeriksaan tersebut lulus, baca hampiran numerik terhadap nilai dugaan kemungkinan maksimum dari <code data-o006-id="O006-PSU-006-U1391">par</code></li>
+</ol>
+</div>
+<div class="theorem example" data-o006-id="O006-PSU-006-U1392" id="exm-thenormaldistributionmle">
+<p data-o006-id="O006-PSU-006-U1393"><span class="theorem-title"><strong>Contoh 5.2 (Contoh MLE: Distribusi Normal)</strong></span> Sekarang kita berikan contoh lain dengan menggunakan distribusi Normal. Kali ini, kita akan menyimulasikan data dari parameter yang diketahui</p>
+<div class="quarto-float quarto-figure quarto-figure-center anchored" data-o006-id="O006-PSU-006-U1394" id="fig-histogrammlenormal">
+<figure class="quarto-float quarto-float-fig figure" data-o006-id="O006-PSU-006-U1395">
+<div aria-describedby="fig-histogrammlenormal-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca" data-o006-id="O006-PSU-006-U1396">
+<div class="cell language-name-processed" data-lightbox="true" data-o006-id="O006-PSU-006-U1397">
+<div class="codeblock-with-label r" data-o006-id="O006-PSU-006-U1398">
+<style>.codeblock-with-label pre.lang-label-49::before { content: "R"; }</style>
+<div class="code-copy-outer-scaffold" data-o006-id="O006-PSU-006-U1399"><div class="sourceCode cell-code" data-language-name-skip="true" data-o006-id="O006-PSU-006-U1400" id="cb171"><pre class="sourceCode r lang-label-49 code-with-copy" data-o006-id="O006-PSU-006-U1401"><code class="sourceCode r" data-o006-id="O006-PSU-006-U1402"><span id="cb171-1"><a aria-hidden="true" data-o006-id="O006-PSU-006-U1403" href="#cb171-1" tabindex="-1"></a>mu.true<span class="ot">=</span><span class="sc">-</span><span class="dv">3</span></span>
+<span id="cb171-2"><a aria-hidden="true" data-o006-id="O006-PSU-006-U1404" href="#cb171-2" tabindex="-1"></a>s2.true<span class="ot">=</span><span class="dv">16</span></span>
+<span id="cb171-3"><a aria-hidden="true" data-o006-id="O006-PSU-006-U1405" href="#cb171-3" tabindex="-1"></a></span>
+<span id="cb171-4"><a aria-hidden="true" data-o006-id="O006-PSU-006-U1406" href="#cb171-4" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
+<span id="cb171-5"><a aria-hidden="true" data-o006-id="O006-PSU-006-U1407" href="#cb171-5" tabindex="-1"></a>y<span class="ot">=</span><span class="fu">rnorm</span>(<span class="dv">30</span>,<span class="at">mean=</span>mu.true,<span class="at">sd=</span><span class="fu">sqrt</span>(s2.true))</span>
+<span id="cb171-6"><a aria-hidden="true" data-o006-id="O006-PSU-006-U1408" href="#cb171-6" tabindex="-1"></a></span>
+<span id="cb171-7"><a aria-hidden="true" data-o006-id="O006-PSU-006-U1409" href="#cb171-7" tabindex="-1"></a><span class="fu">hist</span>(y)</span></code></pre></div><button class="code-copy-button" data-o006-id="O006-PSU-006-U1410" title="Salin ke papan klip"><i class="bi"></i></button></div>
+</div>
+<div class="cell-output-display" data-o006-id="O006-PSU-006-U1411">
+<div data-o006-id="O006-PSU-006-U1412">
+<figure class="figure" data-o006-id="O006-PSU-006-U1413">
+<p data-o006-id="O006-PSU-006-U1414"><img alt="Histogram 30 amatan Normal yang dibangkitkan dengan seed 123, rataan benar minus 3, dan varians benar 16." class="img-fluid figure-img" data-o006-asset-id="O006-PSU-006-A0014" data-o006-id="O006-PSU-006-U1415" src="assets/lesson05/unnamed-chunk-50-1.png" style="width:70.0%"/></p>
+</figure>
+</div>
+</div>
+<div class="codeblock-with-label r" data-o006-id="O006-PSU-006-U1416">
+<style>.codeblock-with-label pre.lang-label-97::before { content: "R"; }</style>
+<div class="code-copy-outer-scaffold" data-o006-id="O006-PSU-006-U1417"><div class="sourceCode cell-code" data-o006-id="O006-PSU-006-U1418" id="cb172"><pre class="sourceCode r lang-label-97 code-with-copy" data-o006-id="O006-PSU-006-U1419"><code class="sourceCode r" data-o006-id="O006-PSU-006-U1420"><span id="cb172-1"><a aria-hidden="true" data-o006-id="O006-PSU-006-U1421" href="#cb172-1" tabindex="-1"></a>y</span></code></pre></div><button class="code-copy-button" data-o006-id="O006-PSU-006-U1422" title="Salin ke papan klip"><i class="bi"></i></button></div>
+</div>
+<div class="cell-output cell-output-stdout" data-o006-id="O006-PSU-006-U1423">
+<pre data-o006-id="O006-PSU-006-U1424"><code data-o006-id="O006-PSU-006-U1425"> [1]  -5.2419026  -3.9207100   3.2348333  -2.7179664  -2.4828491   3.8602599
+ [7]  -1.1563352  -8.0602449  -5.7474114  -4.7826479   1.8963272  -1.5607447
+[13]  -1.3969142  -2.5572691  -5.2233645   4.1476525  -1.0085981 -10.8664686
+[19]  -0.1945764  -4.8911656  -7.2712948  -3.8718997  -7.1040178  -5.9155649
+[25]  -5.5001571  -9.7467732   0.3511482  -2.3865075  -7.5525477   2.0152597</code></pre>
+</div>
+</div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" data-o006-id="O006-PSU-006-U1426" id="fig-histogrammlenormal-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Gambar 5.9
+</figcaption>
+</figure>
+</div>
+<p data-o006-id="O006-PSU-006-U1427">Hasilnya adalah 30 nilai yang masing-masing memenuhi <span class="math inline" data-o006-math-id="O006-PSU-006-M0092">\(y_i\sim N(-3,16)\)</span>. Sekarang kita akan berpura-pura TIDAK mengetahui rataan dan varians yang sebenarnya, lalu menduganya secara numerik. Pertama, kita menulis fungsi negatif fungsi log-kemungkinan dengan masukan pertama berupa vektor semua parameter</p>
+<div class="cell language-name-processed" data-o006-id="O006-PSU-006-U1428">
+<div class="codeblock-with-label r" data-o006-id="O006-PSU-006-U1429">
+<style>.codeblock-with-label pre.lang-label-50::before { content: "R"; }</style>
+<div class="code-copy-outer-scaffold" data-o006-id="O006-PSU-006-U1430"><div class="sourceCode cell-code" data-language-name-skip="true" data-o006-id="O006-PSU-006-U1431" id="cb174"><pre class="sourceCode r lang-label-50 code-with-copy" data-o006-id="O006-PSU-006-U1432"><code class="sourceCode r" data-o006-id="O006-PSU-006-U1433"><span id="cb174-1"><a aria-hidden="true" data-o006-id="O006-PSU-006-U1434" href="#cb174-1" tabindex="-1"></a>nll.norm &lt;- function(theta,y){
+    ## ambil parameter
+    mu=theta[1]
+    s2=theta[2]
+    if(!is.finite(s2) || s2&lt;=0) return(Inf)
+    ## hitung log-kemungkinan
+    loglik=sum(dnorm(y,mean=mu,sd=sqrt(s2),log=TRUE))
+    ## kembalikan negatif log-kemungkinan
+    -loglik
+}<span class="ot"></span><span class="cf"></span></span><span id="cb174-2"><a aria-hidden="true" data-o006-id="O006-PSU-006-U1435" href="#cb174-2" tabindex="-1"></a><span class="do"></span></span><span id="cb174-3"><a aria-hidden="true" data-o006-id="O006-PSU-006-U1436" href="#cb174-3" tabindex="-1"></a><span class="ot"></span><span class="dv"></span></span><span id="cb174-4"><a aria-hidden="true" data-o006-id="O006-PSU-006-U1437" href="#cb174-4" tabindex="-1"></a><span class="ot"></span><span class="dv"></span></span><span id="cb174-5"><a aria-hidden="true" data-o006-id="O006-PSU-006-U1438" href="#cb174-5" tabindex="-1"></a><span class="do"></span></span><span id="cb174-6"><a aria-hidden="true" data-o006-id="O006-PSU-006-U1439" href="#cb174-6" tabindex="-1"></a><span class="ot"></span><span class="fu"></span><span class="fu"></span><span class="at"></span><span class="at"></span><span class="fu"></span><span class="at"></span><span class="cn"></span></span><span id="cb174-7"><a aria-hidden="true" data-o006-id="O006-PSU-006-U1440" href="#cb174-7" tabindex="-1"></a><span class="do"></span></span><span id="cb174-8"><a aria-hidden="true" data-o006-id="O006-PSU-006-U1441" href="#cb174-8" tabindex="-1"></a><span class="sc"></span></span><span id="cb174-9"><a aria-hidden="true" data-o006-id="O006-PSU-006-U1442" href="#cb174-9" tabindex="-1"></a></span></code></pre></div><button class="code-copy-button" data-o006-id="O006-PSU-006-U1443" title="Salin ke papan klip"><i class="bi"></i></button></div>
+</div>
+</div>
+<p data-o006-id="O006-PSU-006-U1444">Perhatikan bahwa masukan pertama kita, yang dinamai <code data-o006-id="O006-PSU-006-U1445">theta</code>, merupakan vektor dengan unsur pertama berupa rataan <span class="math inline" data-o006-math-id="O006-PSU-006-M0093">\(\mu\)</span>, dan unsur kedua berupa varians <span class="math inline" data-o006-math-id="O006-PSU-006-M0094">\(\sigma^2\)</span>. Inilah parameter yang perlu kita duga. Pada contoh eksponensial di atas, kita hanya memiliki satu parameter, tetapi di sini kita memiliki dua parameter sehingga perlu terlebih dahulu “membongkar” parameter dari <code data-o006-id="O006-PSU-006-U1446">theta</code>.</p>
+<p data-o006-id="O006-PSU-006-U1447">Perhatikan juga bahwa kita ingin mencari nilai dugaan kemungkinan maksimum bagi <span class="math inline" data-o006-math-id="O006-PSU-006-M0095">\(\mu\)</span> dan <span class="math inline" data-o006-math-id="O006-PSU-006-M0096">\(\sigma^2\)</span>, tetapi fungsi R <code data-o006-id="O006-PSU-006-U1448">dnorm</code> menerima rataan (<span class="math inline" data-o006-math-id="O006-PSU-006-M0097">\(\mu\)</span>) dan SIMPANGAN BAKU (<span class="math inline" data-o006-math-id="O006-PSU-006-M0098">\(\sigma\)</span>), bukan varians <span class="math inline" data-o006-math-id="O006-PSU-006-M0099">\(\sigma^2\)</span>. Oleh karena itu, dalam pernyataan <code data-o006-id="O006-PSU-006-U1449">dnorm</code> kita menetapkan simpangan baku <code data-o006-id="O006-PSU-006-U1450">sd</code> sebagai <code data-o006-id="O006-PSU-006-U1451">sd=sqrt(s2)</code>, yaitu akar kuadrat varians.</p>
+<p data-o006-id="O006-PSU-006-U1452">Sekarang kita menggunakan <code data-o006-id="O006-PSU-006-U1453">optim</code> untuk memperoleh hampiran numerik terhadap nilai dugaan kemungkinan maksimum. Kita memerlukan vektor nilai awal. Untuk <span class="math inline" data-o006-math-id="O006-PSU-006-M0100">\(\mu\)</span> kita dapat menggunakan bilangan apa pun, sedangkan untuk <span class="math inline" data-o006-math-id="O006-PSU-006-M0101">\(\sigma^2\)</span> kita perlu memilih bilangan positif, sehingga kita memilih nilai awal <span class="math inline" data-o006-math-id="O006-PSU-006-M0102">\(\theta=(-1,1)\)</span>.</p>
+<div class="cell language-name-processed" data-o006-id="O006-PSU-006-U1454">
+<div class="codeblock-with-label r" data-o006-id="O006-PSU-006-U1455">
+<style>.codeblock-with-label pre.lang-label-51::before { content: "R"; }</style>
+<div class="code-copy-outer-scaffold" data-o006-id="O006-PSU-006-U1456"><div class="sourceCode cell-code" data-language-name-skip="true" data-o006-id="O006-PSU-006-U1457" id="cb175"><pre class="sourceCode r lang-label-51 code-with-copy" data-o006-id="O006-PSU-006-U1458"><code class="sourceCode r" data-o006-id="O006-PSU-006-U1459"><span id="cb175-1"><a aria-hidden="true" data-o006-id="O006-PSU-006-U1460" href="#cb175-1" tabindex="-1"></a>out=optim(c(-1,1),nll.norm,y=y,method="L-BFGS-B",
+          lower=c(-Inf,.Machine$double.eps))
+out<span class="ot"></span><span class="fu"></span><span class="fu"></span><span class="sc"></span><span class="dv"></span><span class="dv"></span><span class="at"></span></span><span id="cb175-2"><a aria-hidden="true" data-o006-id="O006-PSU-006-U1461" href="#cb175-2" tabindex="-1"></a></span></code></pre></div><button class="code-copy-button" data-o006-id="O006-PSU-006-U1462" title="Salin ke papan klip"><i class="bi"></i></button></div>
+</div>
+<div class="cell-output cell-output-stdout" data-o006-id="O006-PSU-006-U1463">
+<pre data-o006-id="O006-PSU-006-U1464"><code data-o006-id="O006-PSU-006-U1465">$par
+[1] -3.188414 14.885495
+
+$value
+[1] 83.07392
+
+$counts
+function gradient 
+      17       17 
+
+$convergence
+[1] 0
+
+$message
+[1] "CONVERGENCE: REL_REDUCTION_OF_F &lt;= FACTR*EPSMCH"</code></pre>
+</div>
+</div>
+<p data-o006-id="O006-PSU-006-U1466">Nilai awal positif saja tidak menegakkan domain varians selama optimisasi; fungsi objektif perlu menggunakan parameterisasi log-varians atau batas positif. Karena <code data-o006-id="O006-PSU-006-U1467">convergence</code> bernilai 0, kita mengetahui bahwa <code data-o006-id="O006-PSU-006-U1468">optim</code> telah memenuhi pemeriksaan konvergensi internalnya. Hal ini belum cukup untuk langsung memercayai hasil: periksa domain, nilai objektif, kepekaan numerik, dan bandingkan dengan MLE analitik. Setelah pemeriksaan tersebut, hampiran numerik berada dalam <code data-o006-id="O006-PSU-006-U1469">par</code>, dan urutan kedua nilai dugaan sama dengan urutan <span class="math inline" data-o006-math-id="O006-PSU-006-M0103">\(\theta\)</span> - vektor parameter kita. Karena <span class="math inline" data-o006-math-id="O006-PSU-006-M0104">\(\mu\)</span> ditempatkan pertama, nilai dugaan kemungkinan maksimum bagi <span class="math inline" data-o006-math-id="O006-PSU-006-M0105">\(\mu\)</span> merupakan bilangan pertama, yaitu <span class="math inline" data-o006-math-id="O006-PSU-006-M0106">\(\hat{\mu}_{\mathrm{ML}}=-3.188414\)</span>. Demikian pula, nilai dugaan kemungkinan maksimum bagi <span class="math inline" data-o006-math-id="O006-PSU-006-M0107">\(\sigma^2\)</span> adalah <span class="math inline" data-o006-math-id="O006-PSU-006-M0108">\(\widehat{\sigma^2}_{\mathrm{ML}}=14.885495\)</span>.</p>
+</div>
+</section>
+</section>
+<section class="level2" data-number="5.3" data-o006-id="O006-PSU-006-U1470" id="summary">
+<h2 class="anchored" data-anchor-id="summary" data-number="5.3" data-o006-id="O006-PSU-006-U1471"><span class="header-section-number">5.3</span> Ringkasan</h2>
+<p data-o006-id="O006-PSU-006-U1472">Pelajaran ini memperdalam pemahaman Anda tentang pendugaan kemungkinan maksimum (MLE) dengan berfokus pada penerapan numeriknya dan implementasi dalam R. Kita mempelajari cara menyusun dan memaksimumkan fungsi kemungkinan serta fungsi log-kemungkinan untuk model berparameter tunggal dan model multiparameter dengan menggunakan pendekatan analitik maupun numerik.</p>
+<p data-o006-id="O006-PSU-006-U1473">Teknik utama mencakup pencarian grid (grid search) dan metode Newton–Raphson. Secara terpisah, optimisasi praktis dilakukan melalui fungsi R <code data-o006-id="O006-PSU-006-U1474">optim</code> untuk memperoleh hampiran numerik terhadap nilai dugaan kemungkinan maksimum; tanpa argumen method, fungsi ini menggunakan Nelder–Mead, bukan pembaruan Newton–Raphson. Pelajaran ini juga memperkenalkan keterampilan pemrograman R yang penting, seperti melakukan operasi dasar, memanipulasi vektor dan kerangka data (data frame), menghasilkan statistik ringkasan, membuat visualisasi seperti histogram dan diagram kotak, serta menggunakan distribusi statistik (misalnya Normal dan Eksponensial) untuk menyimulasikan data dan menghitung peluang.</p>
+<p data-o006-id="O006-PSU-006-U1475">Melalui berbagai contoh, Anda belajar menangani skenario data dunia nyata, seperti menduga parameter distribusi eksponensial dan Normal. Keterampilan ini menjadi landasan yang kuat untuk menerapkan MLE dalam inferensi statistik dan mempersiapkan Anda mempelajari topik lanjut seperti selang kepercayaan dan pengujian hipotesis.</p>
+</section>
+</main></div>
+<footer class="site-footer"><div class="site-footer__inner">Konten sumber: Departemen Statistika Penn State, CC BY-NC 4.0 kecuali dinyatakan lain. Terjemahan dan rekonstruksi: OpenAI Codex gpt-5.6-sol, Ultra. Tidak ada dukungan atau pengesahan yang tersirat.</div></footer>
+</body>
+</html>

@@ -1,0 +1,123 @@
+{
+  "asset": {
+    "images": 14,
+    "reader_asset_bytes": 498847,
+    "reader_asset_files": 14,
+    "seeded_derivatives": 1,
+    "source_closure": {
+      "bytes": 25122,
+      "path": "working/lesson05_asset_closure.json",
+      "sha256": "dcd8ead3f43f7c646757297b431c3b05352c4575a048497e5f3873e224e65e30"
+    },
+    "static_video_fallbacks": 2
+  },
+  "build_receipt": {
+    "bytes": 14136,
+    "path": "build/THROUGH_LESSON05_BUILD_RECEIPT.json",
+    "sha256": "afe2b51786792ecfc88e556c9a5dd26e1ff45524f45799a64f1f694c77e322a0"
+  },
+  "checks": [
+    "exact-340-segment-source-target-binding-replay",
+    "natural-id-ID-and-glossary-continuity",
+    "exact-1475-unit-108-math-Lesson05-topology",
+    "exact-112-correction-registry-with-31-Lesson05-findings",
+    "exact-11-changed-math-node-registry",
+    "exact-seven-correction-surface-kind-closure",
+    "seeded-R-output-and-derived-plot-closure",
+    "exact-14-image-route-byte-alt-and-lightbox-closure",
+    "two-external-video-iframes-replaced-by-static-fallbacks",
+    "offline-link-asset-rights-privacy-and-provenance-closure",
+    "responsive-reader-css-on-all-seven-instructional-routes",
+    "deterministic-50-file-reader-replay"
+  ],
+  "coverage": {
+    "complete_documents": 7,
+    "corpus_documents": 14,
+    "next_document": "Lesson06"
+  },
+  "documents": {
+    "backend": {
+      "bytes": 4708,
+      "path": "backend/through_lesson05_documents.jsonl",
+      "sha256": "2ea18b7aec48ce59e888b2e806eba5518dc325427529ca9adf254fc0b73fcbf9"
+    },
+    "documents": 7
+  },
+  "reader": {
+    "bytes": 3588430,
+    "files": 50,
+    "manifest": {
+      "bytes": 5108,
+      "path": "build/THROUGH_LESSON05_MANIFEST.csv",
+      "sha256": "fb600bfedb1792d8b1c9ba8d72d3e5ef6bf94e7a9744a387e15b1d5a7b5f8e6f"
+    },
+    "math_nodes": 1546,
+    "stable_units": 3207
+  },
+  "schema": "o006.stat415.through-lesson05-qa.v1",
+  "status": "passed",
+  "structure_math_and_corrections": {
+    "changed_math_nodes": 11,
+    "correction_backend": {
+      "bytes": 154163,
+      "path": "backend/through_lesson05_corrections.jsonl",
+      "sha256": "f5ab9fb55f26245fe1e95a805c72c6020895aa0bf63e1f9e1b67200bec41bf5b"
+    },
+    "corrections": 112,
+    "historical_prefix": 81,
+    "lesson05_corrections": 31,
+    "surface_kinds": [
+      "asset",
+      "code-comment",
+      "dom-id",
+      "external-dependency",
+      "image-alternative",
+      "math",
+      "structural-unit-text",
+      "translation-segment",
+      "ui-attribute"
+    ]
+  },
+  "translation": {
+    "bindings": 340,
+    "bindings_file": {
+      "bytes": 141524,
+      "path": "backend/lesson05_translation_bindings.jsonl",
+      "sha256": "85821982f209874b0270d24fb9a3ac863139ab6d090e4c9ab34c88d262212f58"
+    },
+    "forbidden_surfaces_absent": [
+      "maximum likelihood estimation",
+      "maximum likelihood estimate",
+      "grid search method",
+      "numerical optimization",
+      "negative log-likelihood function",
+      "pencarian kisi",
+      "optimasi numerik",
+      "fungsi kemungkinan negatif"
+    ],
+    "identical_segments": [],
+    "required_terms": [
+      "pendugaan kemungkinan maksimum secara numerik",
+      "pencarian grid",
+      "optimisasi numerik",
+      "fungsi skor",
+      "newton–raphson",
+      "negatif fungsi log-kemungkinan",
+      "fungsi objektif",
+      "nilai awal",
+      "iterasi",
+      "evaluasi fungsi",
+      "kriteria konvergensi",
+      "rataan/skala",
+      "simpangan baku",
+      "kerangka data",
+      "kuantil"
+    ],
+    "segments": 340,
+    "translation": {
+      "bytes": 101032,
+      "path": "source/id-ID/lesson05_translation.csv",
+      "sha256": "9f9247ff3d7c66e164bc6691fee67da51fcdf88cd951a9582ff32dae3015e3ac"
+    }
+  }
+}

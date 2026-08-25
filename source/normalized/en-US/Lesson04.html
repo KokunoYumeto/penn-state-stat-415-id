@@ -1,0 +1,627 @@
+<!doctype html>
+<html lang="en-US">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>4  Maximum Likelihood Estimation (MLE) (Part I) – STAT 415 | Introduction to Mathematical Statistics</title>
+<meta name="source-url" content="https://online.stat.psu.edu/stat415/Lesson04">
+<meta name="translation-provenance" content="OpenAI Codex gpt-5.6-sol, Ultra">
+</head>
+<body>
+<main class="content" data-component-id="Lesson04" data-document-id="O006-PSU-005" data-source-url="https://online.stat.psu.edu/stat415/Lesson04" id="quarto-document-content">
+<header class="quarto-title-block default" data-o006-id="O006-PSU-005-U0001" id="title-block-header"><nav aria-label="breadcrumb" class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" data-o006-id="O006-PSU-005-U0002"><ol class="breadcrumb" data-o006-id="O006-PSU-005-U0003"><li class="breadcrumb-item" data-o006-id="O006-PSU-005-U0004"><a data-o006-id="O006-PSU-005-U0005" href="./Lesson00.html">Lessons</a></li><li class="breadcrumb-item" data-o006-id="O006-PSU-005-U0006"><a data-o006-id="O006-PSU-005-U0007" href="./Lesson04.html"><span class="chapter-number">4</span>  <span class="chapter-title">Maximum Likelihood Estimation (MLE) (Part I)</span></a></li></ol></nav>
+<div class="quarto-title" data-o006-id="O006-PSU-005-U0008">
+<h1 class="title" data-o006-id="O006-PSU-005-U0009"><span class="chapter-number">4</span>  <span class="chapter-title">Maximum Likelihood Estimation (MLE) (Part I)</span></h1>
+<div class="quarto-categories" data-o006-id="O006-PSU-005-U0010">
+<div class="quarto-category" data-o006-id="O006-PSU-005-U0011">MLE</div>
+<div class="quarto-category" data-o006-id="O006-PSU-005-U0012">R</div>
+</div>
+</div>
+<div class="quarto-title-meta" data-o006-id="O006-PSU-005-U0013">
+</div>
+</header>
+<section class="level2 unnumbered unlisted" data-o006-id="O006-PSU-005-U0014" id="overview">
+<h2 class="unnumbered unlisted anchored" data-anchor-id="overview" data-o006-id="O006-PSU-005-U0015">Overview</h2>
+<p data-o006-id="O006-PSU-005-U0016">In the last lesson, we introduced a way of finding an estimator using the Method of Moments. In this lesson, we will introduce another method to find an estimator, finding an estimator by maximizing the likelihood.</p>
+<section class="level3 unnumbered unlisted objectiveblock" data-o006-id="O006-PSU-005-U0017" id="objectives">
+<h3 class="unnumbered unlisted anchored" data-anchor-id="objectives" data-o006-id="O006-PSU-005-U0018"><i class="bi bi-check2-circle"></i>Objectives</h3>
+<p data-o006-id="O006-PSU-005-U0019">Upon completion of this lesson, you should be able to:</p>
+<ol data-o006-id="O006-PSU-005-U0020" type="1">
+<li data-o006-id="O006-PSU-005-U0021">Write out the likelihood and loglikelihood functions for data from a specified probability model,</li>
+<li data-o006-id="O006-PSU-005-U0022">Analytically calculate the maximum likelihood estimate (MLE) for a range of single parameter models where the data values are given,</li>
+<li data-o006-id="O006-PSU-005-U0023">Analytically calculate the maximum likelihood estimate for a range of single parameter models where the data are seen as unobservable random variables,</li>
+<li data-o006-id="O006-PSU-005-U0024">Analytically calculate the maximum likelihood estimate (MLE) for a range of single parameter models in situations where data values are given (i.e., x=(1.6,3.1,7.8)),</li>
+<li data-o006-id="O006-PSU-005-U0025">Analytically calculate the maximum likelihood estimate for multiple parameter models where the data are seen as unobservable random variables, and</li>
+<li data-o006-id="O006-PSU-005-U0026">Analytically calculate the maximum likelihood estimate for a range of single parameter models where the data are seen as unobservable random variables and the parameter is in the support.</li>
+</ol>
+</section>
+</section>
+<section class="level2" data-number="4.1" data-o006-id="O006-PSU-005-U0027" id="the-basic-idea">
+<h2 class="anchored" data-anchor-id="the-basic-idea" data-number="4.1" data-o006-id="O006-PSU-005-U0028"><span class="header-section-number">4.1</span> The Basic Idea</h2>
+<p data-o006-id="O006-PSU-005-U0029">It seems reasonable that a good estimate of the unknown parameter <span class="math inline" data-o006-math-id="O006-PSU-005-M0001">\(\theta\)</span> would be the value of <span class="math inline" data-o006-math-id="O006-PSU-005-M0002">\(\theta\)</span> that <strong>maximizes</strong> the probability, errrr….that is the ** likelihood**….of getting the data we observed. (So, do you see from where the name ‘maximum likelihood’ comes?)</p>
+<div class="ms-3 theorem definition" data-o006-id="O006-PSU-005-U0030" id="def-likelihoodfunction">
+<p data-o006-id="O006-PSU-005-U0031"><span class="theorem-title"><strong>Def. 4.1 (Likelihood Function)</strong></span> Let <span class="math inline" data-o006-math-id="O006-PSU-005-M0003">\(X_1, X_2, \ldots, X_n\)</span> be a random sample from a distribution with unknown parameters, <span class="math inline" data-o006-math-id="O006-PSU-005-M0004">\(\theta_1, \theta_2, \ldots, \theta_m\)</span>. Let the probability density (or mass) function be denoted <span class="math inline" data-o006-math-id="O006-PSU-005-M0005">\(f(x_i|\theta_1, \theta_2, \ldots, \theta_m)\)</span>. Suppose that <span class="math inline" data-o006-math-id="O006-PSU-005-M0006">\((\theta_1, \theta_2, \ldots, \theta_m)\)</span> is restricted to a given parameter space <span class="math inline" data-o006-math-id="O006-PSU-005-M0007">\(\Omega\)</span>. The <strong>likelihood function</strong>, <span class="math inline" data-o006-math-id="O006-PSU-005-M0008">\(L(\theta_1, \theta_2, \ldots, \theta_m)\)</span>, is defined as the joint probability distribution of the sample. That is:</p>
+<p data-o006-id="O006-PSU-005-U0032"><span class="math display" data-o006-math-id="O006-PSU-005-M0009">\[\begin{align*}
+    L(\theta_1, \theta_2, \ldots, \theta_m)=\prod_{i=1}^n f(x_i|\theta_1, \theta_2, \ldots, \theta_m)=f(x_1|\theta_1, \theta_2, \ldots, \theta_m)f(x_2|\theta_1, \theta_2, \ldots, \theta_m)\cdots f(x_n|\theta_1, \theta_2, \ldots, \theta_m)
+\end{align*}\]</span></p>
+<div class="callout callout-style-simple callout-caution no-icon" data-o006-id="O006-PSU-005-U0033">
+<div class="callout-body d-flex" data-o006-id="O006-PSU-005-U0034">
+<div class="callout-icon-container" data-o006-id="O006-PSU-005-U0035">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-body-container" data-o006-id="O006-PSU-005-U0036">
+<p data-o006-id="O006-PSU-005-U0037"><strong>Note!</strong><br/>
+the symbol <span class="math inline" data-o006-math-id="O006-PSU-005-M0010">\(\prod\)</span> means “the product”. Also note that we consider the likelihood function to be a function of <span class="math inline" data-o006-math-id="O006-PSU-005-M0011">\(\theta_1, \theta_2, \ldots, \theta_m\)</span>. We can multiply the individual probability distributions to find the joint distribution because the random variables are independent.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="theorem example" data-o006-id="O006-PSU-005-U0038" id="exm-likelihoodfn">
+<p data-o006-id="O006-PSU-005-U0039"><span class="theorem-title"><strong>Example 4.1</strong></span> Let <span class="math inline" data-o006-math-id="O006-PSU-005-M0012">\(X_i\overset{iid}{\sim} \text{Bin}(10, p)\)</span> for <span class="math inline" data-o006-math-id="O006-PSU-005-M0013">\(i=1, 2, 3, 4, 5\)</span>. That is, let <span class="math inline" data-o006-math-id="O006-PSU-005-M0014">\(X_1, X_2, \ldots, X_5\)</span> be an independent and identical sample from a Binomial distribution with parameters <span class="math inline" data-o006-math-id="O006-PSU-005-M0015">\(n=10\)</span> and <span class="math inline" data-o006-math-id="O006-PSU-005-M0016">\(p\)</span>. Find the likelihood function (often referred to as the likelihood).</p>
+<section class="level4 card card-body bg-light ms-3 mb-3 pt-0" data-o006-id="O006-PSU-005-U0040" id="solution">
+<h4 class="anchored" data-anchor-id="solution" data-o006-id="O006-PSU-005-U0041">Solution</h4>
+<p data-o006-id="O006-PSU-005-U0042">The likelihood function is a product of the individual probability mass functions. Therefore. <span class="math display" data-o006-math-id="O006-PSU-005-M0017">\[\begin{align*}
+    L(p)=\prod_{i=1}^n f(x_i|p)=\prod_{i=1}^n {10\choose x_i}p^{x_i}(1-p)^{10-x_i}=\left[\prod_{i=1}^n {10\choose x_i}\right]p^{\sum_{i=1}^n x_i}(1-p)^{10n-\sum_{i=1}^n x_i}
+\end{align*}\]</span></p>
+</section>
+</div>
+<p data-o006-id="O006-PSU-005-U0043">Now, that we have a formal definition of the likelihood, the basic idea of maximum likelihood estimation is to treat the likelihood function <span class="math inline" data-o006-math-id="O006-PSU-005-M0018">\(L(\theta)\)</span> as a function of <span class="math inline" data-o006-math-id="O006-PSU-005-M0019">\(\theta\)</span> and find the value of <span class="math inline" data-o006-math-id="O006-PSU-005-M0020">\(\theta\)</span> that maximizes it. For the moment, let’s consider the case with only one unknown parameter, <span class="math inline" data-o006-math-id="O006-PSU-005-M0021">\(\theta\)</span>. Recall from calculus, that to find the maximum of <span class="math inline" data-o006-math-id="O006-PSU-005-M0022">\(L(\theta)\)</span> (or <span class="math inline" data-o006-math-id="O006-PSU-005-M0023">\(\text{argmax}(L(\theta))\)</span>) we first take the derivative of the function with respect to <span class="math inline" data-o006-math-id="O006-PSU-005-M0024">\(\theta\)</span>. Next, we set the derivative equal to 0 and solve for <span class="math inline" data-o006-math-id="O006-PSU-005-M0025">\(\theta\)</span>. At this point, we know we have a critical point. Finally, we need to check the second derivative to show that it is a maximum.</p>
+<div class="theorem example" data-o006-id="O006-PSU-005-U0044" id="exm-likelihoodfn2">
+<p data-o006-id="O006-PSU-005-U0045"><span class="theorem-title"><strong>Example 4.2</strong></span> Consider the previous example where we have <span class="math inline" data-o006-math-id="O006-PSU-005-M0026">\(X_i\overset{iid}{\sim} \text{Bin}(10, p)\)</span> for <span class="math inline" data-o006-math-id="O006-PSU-005-M0027">\(i=1, 2, 3, 4, 5\)</span>. We found the likelihood function to be: <span class="math display" data-o006-math-id="O006-PSU-005-M0028">\[\begin{align*}
+    L(p)=\left[\prod_{i=1}^n {10\choose x_i}\right]p^{\sum_{i=1}^n x_i}(1-p)^{10n-\sum_{i=1}^n x_i}
+\end{align*}\]</span></p>
+<section class="level4 card card-body bg-light ms-3 mb-3 pt-0" data-o006-id="O006-PSU-005-U0046" id="solution-1">
+<h4 class="anchored" data-anchor-id="solution-1" data-o006-id="O006-PSU-005-U0047">Solution</h4>
+<p data-o006-id="O006-PSU-005-U0048">The first step is to find the likelihood, that we have. The next step is to find the first derivative of the likelihood function with respect to <span class="math inline" data-o006-math-id="O006-PSU-005-M0029">\(p\)</span>. Now it is time to put on our calculus hats.</p>
+<p data-o006-id="O006-PSU-005-U0049"><span class="math display" data-o006-math-id="O006-PSU-005-M0030">\[\begin{align*}
+    \frac{d}{dp}L(P)=\left[\prod_{i=1}^n {10\choose x_i}\right]\left(\sum x_i\right)p^{\sum x_i-1}(1-p)^{10n-\sum x_i}-\left[\prod_{i=1}^n {10\choose x_i}\right]p^{\sum x_i}\left(10n-\sum x_i\right)(1-p)^{10n-\sum x_i-1}
+\end{align*}\]</span></p>
+<p data-o006-id="O006-PSU-005-U0050">The next step is to set the derivative equal to 0 and solve for <span class="math inline" data-o006-math-id="O006-PSU-005-M0031">\(p\)</span>. WOW….wait! Is there an easier way to approach this problem?</p>
+</section>
+</div>
+<p data-o006-id="O006-PSU-005-U0051">We will use a “trick” that often makes the differentiation a bit easier. Note that the natural logarithm is an increasing function of <span class="math inline" data-o006-math-id="O006-PSU-005-M0032">\(x\)</span>.</p>
+<div alt="Natural logarithm graph" class="lightbox quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center" data-o006-id="O006-PSU-005-U0052" id="fig-STAT-415-SEC-1-15">
+<figure class="quarto-float quarto-float-fig figure" data-o006-id="O006-PSU-005-U0053">
+<div aria-describedby="fig-STAT-415-SEC-1-15-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca" data-o006-id="O006-PSU-005-U0054">
+<a class="lightbox" data-gallery="quarto-lightbox-gallery-1" data-o006-id="O006-PSU-005-U0055" href="assets/STAT-415-SEC-1-15.svg" title="Fig 4.1: "><img alt="Natural logarithm graph" class="img-fluid quarto-figure quarto-figure-center figure-img" data-o006-asset-id="O006-PSU-005-A0001" data-o006-id="O006-PSU-005-U0056" src="assets/STAT-415-SEC-1-15.svg" style="width:50.0%"/></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" data-o006-id="O006-PSU-005-U0057" id="fig-STAT-415-SEC-1-15-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Fig 4.1
+</figcaption>
+</figure>
+</div>
+<p data-o006-id="O006-PSU-005-U0058">That is, if <span class="math inline" data-o006-math-id="O006-PSU-005-M0033">\(x_1&lt;x_2\)</span>, then <span class="math inline" data-o006-math-id="O006-PSU-005-M0034">\(f(x_1)&lt;f(x_2)\)</span> for all <span class="math inline" data-o006-math-id="O006-PSU-005-M0035">\(x\)</span>. This means that the value of <span class="math inline" data-o006-math-id="O006-PSU-005-M0036">\(x\)</span> that maximizes <span class="math inline" data-o006-math-id="O006-PSU-005-M0037">\(f(x)\)</span> will also maximize the natural logarithm of the function. Now, let’s take this back to our previous example.</p>
+<div class="theorem example" data-o006-id="O006-PSU-005-U0059" id="exm-likelihoodfn3">
+<p data-o006-id="O006-PSU-005-U0060"><span class="theorem-title"><strong>Example 4.3</strong></span> Again, we have <span class="math inline" data-o006-math-id="O006-PSU-005-M0038">\(X_i\overset{iid}{\sim} \text{Bin}(10, p)\)</span> for <span class="math inline" data-o006-math-id="O006-PSU-005-M0039">\(i=1, 2, 3, 4, 5\)</span> and the likelihood function:</p>
+<p data-o006-id="O006-PSU-005-U0061"><span class="math display" data-o006-math-id="O006-PSU-005-M0040">\[\begin{align*}
+    L(p)=\left[\prod_{i=1}^n {10\choose x_i}\right]p^{\sum_{i=1}^n x_i}(1-p)^{10n-\sum_{i=1}^n x_i}
+\end{align*}\]</span></p>
+<p data-o006-id="O006-PSU-005-U0062">Find the value of <span class="math inline" data-o006-math-id="O006-PSU-005-M0041">\(p\)</span> that maximized the likelihood.</p>
+<section class="level4 card card-body bg-light ms-3 mb-3 pt-0" data-o006-id="O006-PSU-005-U0063" id="solution-2">
+<h4 class="anchored" data-anchor-id="solution-2" data-o006-id="O006-PSU-005-U0064">Solution</h4>
+<p data-o006-id="O006-PSU-005-U0065">Let’s consider the natural logarithm of <span class="math inline" data-o006-math-id="O006-PSU-005-M0042">\(L(p)\)</span>, called the <strong>log-likelihood function</strong>.</p>
+<p data-o006-id="O006-PSU-005-U0066"><span class="math display" data-o006-math-id="O006-PSU-005-M0043">\[\begin{align*}
+    \ell(p)=\ln L(p)=\ln \prod_{i=1}^n f(x_i|p)
+\end{align*}\]</span></p>
+<p data-o006-id="O006-PSU-005-U0067">By the rules of logarithms, we get</p>
+<p data-o006-id="O006-PSU-005-U0068"><span class="math display" data-o006-math-id="O006-PSU-005-M0044">\[\begin{align*}
+    \ell(p)=\ln \prod_{i=1}^n f(x_i|p)=\sum_{i=1}^n \ln f(x_i|p)=\sum_{i=1}^n\left[\ln {10\choose x_i} +x_i\ln p+(10-x_i)\ln (1-p)\right]
+\end{align*}\]</span></p>
+<p data-o006-id="O006-PSU-005-U0069">Now, take the derivative of <span class="math inline" data-o006-math-id="O006-PSU-005-M0045">\(\ell(p)\)</span> with respect to <span class="math inline" data-o006-math-id="O006-PSU-005-M0046">\(p\)</span>.</p>
+<p data-o006-id="O006-PSU-005-U0070"><span class="math display" data-o006-math-id="O006-PSU-005-M0047">\[\begin{align*}    
+    \frac{d}{dp}\ell(p)=\sum_{i=1}^n \left[0+\frac{x_i}{p}-\frac{(10-x_i)}{1-p}\right]=\frac{\sum x_i}{p}-\frac{\sum (10-x_i)}{1-p}
+\end{align*}\]</span></p>
+<p data-o006-id="O006-PSU-005-U0071">The next step is to set the derivative equal to 0 and solve for <span class="math inline" data-o006-math-id="O006-PSU-005-M0048">\(p\)</span>.</p>
+<p data-o006-id="O006-PSU-005-U0072"><span class="math display" data-o006-math-id="O006-PSU-005-M0049">\[\begin{align*}
+    &amp; 0=\frac{\sum x_i}{p}-\frac{\sum (10-x_i)}{1-p}, \qquad \Rightarrow \frac{\sum (10-x_i)}{1-p}=\frac{\sum x_i}{p}\\
+    &amp; \Rightarrow p\sum (10-x_i)=(1-p)\sum x_i\\
+    &amp; \Rightarrow 10np-\sum x_ip=\sum x_i -\sum x_ip\\
+    &amp; \Rightarrow 10np=\sum x_i\\
+    &amp; \Rightarrow p=\frac{\sum x_i}{10n}
+\end{align*}\]</span></p>
+<p data-o006-id="O006-PSU-005-U0073">Finally, we check that the value found above is a maximum. We take the second derivative with respect to <span class="math inline" data-o006-math-id="O006-PSU-005-M0050">\(p\)</span>.</p>
+<p data-o006-id="O006-PSU-005-U0074"><span class="math display" data-o006-math-id="O006-PSU-005-M0051">\[\begin{align*}
+    \frac{d^2}{dp^2}\ell(p)=-\frac{\sum x_i}{p^2}-\frac{\sum (10-x_i)}{(1-p)^2}
+\end{align*}\]</span></p>
+<p data-o006-id="O006-PSU-005-U0075">For <span class="math inline" data-o006-math-id="O006-PSU-005-M0052">\(p=\frac{\sum x_i}{10n}\)</span> to be a maximum, the value of the second derivative at this point needs to be less than 0.</p>
+<p data-o006-id="O006-PSU-005-U0076"><span class="math display" data-o006-math-id="O006-PSU-005-M0053">\[\begin{align*}
+    -\frac{\sum x_i}{\left(\frac{\sum x_i}{10n}\right)^2}-\frac{\sum (10-x_i)}{\left(1-\frac{\sum x_i}{10n}\right)^2}
+\end{align*}\]</span></p>
+<p data-o006-id="O006-PSU-005-U0077">Since all the <span class="math inline" data-o006-math-id="O006-PSU-005-M0054">\(x_i\)</span>’s range between 0 and 10, the value of the second derivative is less than 0, therefore, it is a maximum. When we find the value that maximizes the likelihood, it is the maximum likelihood estimator (MLE) and is denoted with a ‘hat’ symbol. Therefore, the MLE is <span class="math inline" data-o006-math-id="O006-PSU-005-M0055">\(\hat{p}=\frac{\sum x_i}{10n}\)</span>.</p>
+</section>
+</div>
+<div class="callout callout-style-simple callout-caution no-icon" data-o006-id="O006-PSU-005-U0078">
+<div class="callout-body d-flex" data-o006-id="O006-PSU-005-U0079">
+<div class="callout-icon-container" data-o006-id="O006-PSU-005-U0080">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-body-container" data-o006-id="O006-PSU-005-U0081">
+<p data-o006-id="O006-PSU-005-U0082"><strong>Note!</strong><br/>
+For almost all reasonable inference problems, <span class="math inline" data-o006-math-id="O006-PSU-005-M0056">\(\ell(\theta)\)</span> has only one critical point, and that point is a maximum. Therefore, in this class, you do NOT have to use the second derivative test to check if it is a maximum. Finding the critical point is enough.</p>
+</div>
+</div>
+</div>
+<p data-o006-id="O006-PSU-005-U0083">Now, we state the formal definition og the Maximum Likelihood Estimator (MLE).</p>
+<div class="theorem definition" data-o006-id="O006-PSU-005-U0084" id="def-MaximumLikelihoodEstimator.ms-3">
+<p data-o006-id="O006-PSU-005-U0085"><span class="theorem-title"><strong>Def. 4.2 (Maximum Likelihood Estimator)</strong></span> Let <span class="math inline" data-o006-math-id="O006-PSU-005-M0057">\(X_1, X_2, \ldots, X_n\)</span> be a random sample from a distribution with unknown parameters, <span class="math inline" data-o006-math-id="O006-PSU-005-M0058">\(\theta_1, \theta_2, \ldots, \theta_m\)</span>. Let the probability density (or mass) function be denoted <span class="math inline" data-o006-math-id="O006-PSU-005-M0059">\(f(x_i|\theta_1, \theta_2, \ldots, \theta_m)\)</span>. Suppose that <span class="math inline" data-o006-math-id="O006-PSU-005-M0060">\((\theta_1, \theta_2, \ldots, \theta_m)\)</span> is restricted to a given parameter space <span class="math inline" data-o006-math-id="O006-PSU-005-M0061">\(\Omega\)</span>. The likelihood function is defined as the joint probability distribution of the sample. That is: <span class="math display" data-o006-math-id="O006-PSU-005-M0062">\[\begin{align*}
+    L(\theta_1, \theta_2, \ldots, \theta_m)=\prod_{i=1}^n f(x_i|\theta_1, \theta_2, \ldots, \theta_m)
+\end{align*}\]</span> If <span class="math inline" data-o006-math-id="O006-PSU-005-M0063">\(\left[u_1(x_1, x_2, \ldots, x_n), u_2(x_1, x_2, \ldots, x_n), \ldots, u_m(x_1, x_2, \ldots, x_n)\right]\)</span> is the <span class="math inline" data-o006-math-id="O006-PSU-005-M0064">\(m\)</span>-tuple that maximizes the likelihood function then: <span class="math display" data-o006-math-id="O006-PSU-005-M0065">\[\begin{align*}
+    \hat{\theta}_i=u_i(x_1, x_2, \ldots, x_n), \qquad i=1, 2, \ldots, m
+\end{align*}\]</span> is the <strong>maximum likelihood estimator</strong> of <span class="math inline" data-o006-math-id="O006-PSU-005-M0066">\(\theta_i\)</span>. The corresponding observed value of the statistic, namely, <span class="math display" data-o006-math-id="O006-PSU-005-M0067">\[\begin{align*}
+    \left[u_1(x_1, x_2, \ldots, x_n), u_2(x_1, x_2, \ldots, x_n), \ldots, u_m(x_1, x_2, \ldots, x_n)\right]
+\end{align*}\]</span> are called the <strong>maximum likelihood estimates</strong> of <span class="math inline" data-o006-math-id="O006-PSU-005-M0068">\(\theta_i\)</span>, for <span class="math inline" data-o006-math-id="O006-PSU-005-M0069">\(i=1, 2, \ldots, m\)</span>.</p>
+</div>
+</section>
+<section class="level2" data-number="4.2" data-o006-id="O006-PSU-005-U0086" id="one-parameter-case">
+<h2 class="anchored" data-anchor-id="one-parameter-case" data-number="4.2" data-o006-id="O006-PSU-005-U0087"><span class="header-section-number">4.2</span> One Parameter Case</h2>
+<p data-o006-id="O006-PSU-005-U0088">In this section, we summarize the steps to find a maximum likelihood estimator in the one parameter case.</p>
+<section class="level4" data-o006-id="O006-PSU-005-U0089" id="steps-to-find-the-mle-0ne-parameter-case">
+<h4 class="anchored" data-anchor-id="steps-to-find-the-mle-0ne-parameter-case" data-o006-id="O006-PSU-005-U0090">Steps to Find the MLE (0ne Parameter Case)</h4>
+<ol data-o006-id="O006-PSU-005-U0091" type="1">
+<li data-o006-id="O006-PSU-005-U0092">Given a random sample <span class="math inline" data-o006-math-id="O006-PSU-005-M0070">\(X_1, X_2, \ldots, X_n\)</span> from a distribution with unknown parameter, <span class="math inline" data-o006-math-id="O006-PSU-005-M0071">\(\theta\)</span>, find the likelihood function: <span class="math display" data-o006-math-id="O006-PSU-005-M0072">\[\begin{align*}
+         L(\theta)=\prod_{i=1}^n f(x_i|\theta)
+     \end{align*}\]</span></li>
+<li data-o006-id="O006-PSU-005-U0093">Find the log-likelihood function: <span class="math display" data-o006-math-id="O006-PSU-005-M0073">\[\begin{align*}
+         \ell(\theta)=\ln L(\theta)=\ln \prod_{i=1}^n f(x_i|\theta)=\sum_{i=1}^n \ln f(x_i\theta)
+     \end{align*}\]</span></li>
+<li data-o006-id="O006-PSU-005-U0094">Take the first derivative of the log-likelihood function: <span class="math display" data-o006-math-id="O006-PSU-005-M0074">\[\begin{align*}
+         \ell^\prime(\theta)=\frac{d}{d\theta}\ell(\theta)
+     \end{align*}\]</span></li>
+<li data-o006-id="O006-PSU-005-U0095">Set <span class="math inline" data-o006-math-id="O006-PSU-005-M0075">\(\ell^\prime(\theta)=0\)</span> and solve for <span class="math inline" data-o006-math-id="O006-PSU-005-M0076">\(\theta\)</span>. This will give us a critical point.</li>
+<li data-o006-id="O006-PSU-005-U0096">The resulting critical value is the MLE of <span class="math inline" data-o006-math-id="O006-PSU-005-M0077">\(\theta\)</span>, denoted <span class="math inline" data-o006-math-id="O006-PSU-005-M0078">\(\hat{\theta}\)</span>.</li>
+</ol>
+<p data-o006-id="O006-PSU-005-U0097">Now that we have the formal definitions out of the way and our steps clearly defined, let us work on some examples.</p>
+<div class="theorem example" data-o006-id="O006-PSU-005-U0098" id="exm-mleonparam1">
+<p data-o006-id="O006-PSU-005-U0099"><span class="theorem-title"><strong>Example 4.4</strong></span> Let <span class="math inline" data-o006-math-id="O006-PSU-005-M0079">\(X_1, X_2, \ldots, X_n\)</span> be a random sample from a Geometric distribution, with unknown parameter <span class="math inline" data-o006-math-id="O006-PSU-005-M0080">\(p\)</span>. Find the MLE.</p>
+<section class="level4 card card-body bg-light ms-3 mb-3 pt-0" data-o006-id="O006-PSU-005-U0100" id="solution-3">
+<h4 class="anchored" data-anchor-id="solution-3" data-o006-id="O006-PSU-005-U0101">Solution</h4>
+<p data-o006-id="O006-PSU-005-U0102">The pmf of Geometric random variable is <span class="math inline" data-o006-math-id="O006-PSU-005-M0081">\(f(x)=(1-p)^{x-1}p\)</span> for <span class="math inline" data-o006-math-id="O006-PSU-005-M0082">\(x=1, 2, 3, \ldots\)</span>. Follow the steps above to find the MLE.</p>
+<ol data-o006-id="O006-PSU-005-U0103" type="1">
+<li data-o006-id="O006-PSU-005-U0104"><p data-o006-id="O006-PSU-005-U0105">The likelihood function is: <span class="math display" data-o006-math-id="O006-PSU-005-M0083">\[\begin{align*}
+         L(p)=\prod_{i=1}^n (1-p)^{x_i-1}p=(1-p)^{\sum_{i=1}^n (x_i-1)}p^n
+     \end{align*}\]</span></p></li>
+<li data-o006-id="O006-PSU-005-U0106"><p data-o006-id="O006-PSU-005-U0107">Find the log-likelihood function: <span class="math display" data-o006-math-id="O006-PSU-005-M0084">\[\begin{align*}
+         \ell(p)=\sum (x_i-1)\ln (1-p)+n\ln p
+     \end{align*}\]</span></p></li>
+<li data-o006-id="O006-PSU-005-U0108"><p data-o006-id="O006-PSU-005-U0109">Take the first derivative of <span class="math inline" data-o006-math-id="O006-PSU-005-M0085">\(\ell(p)\)</span> with respect to <span class="math inline" data-o006-math-id="O006-PSU-005-M0086">\(p\)</span>. <span class="math display" data-o006-math-id="O006-PSU-005-M0087">\[\begin{align*}
+         \frac{d}{dp}\ell(p)=-\frac{\sum (x_i-1)}{1-p}+\frac{n}{p}
+     \end{align*}\]</span></p></li>
+<li data-o006-id="O006-PSU-005-U0110"><p data-o006-id="O006-PSU-005-U0111">Set the derivative equal to 0 and solve for <span class="math inline" data-o006-math-id="O006-PSU-005-M0088">\(p\)</span>.</p>
+<p data-o006-id="O006-PSU-005-U0112"><span class="math display" data-o006-math-id="O006-PSU-005-M0089">\[\begin{align} &amp; 0=-\frac{\sum (x_i-1)}{1-p}+\frac{n}{p}, \qquad \Rightarrow 0=\frac{-p\sum   (x_i-1)+n(1-p)}{p(1-p)}=\frac{-p\sum x_i+np+n-np}{p(1-p)}\\ &amp; \Rightarrow 0=-p\sum x_i+n, \qquad \Rightarrow -n=-p\sum x_i\\ &amp; \Rightarrow p=\frac{n}{\sum x_i}\end{align}\]</span></p></li>
+<li data-o006-id="O006-PSU-005-U0113"><p data-o006-id="O006-PSU-005-U0114">The MLE for <span class="math inline" data-o006-math-id="O006-PSU-005-M0090">\(p\)</span> is <span class="math inline" data-o006-math-id="O006-PSU-005-M0091">\(\hat{p}=\frac{n}{\sum x_i}\)</span></p></li>
+</ol>
+</section>
+</div>
+<div class="theorem example" data-o006-id="O006-PSU-005-U0115" id="exm-mleonparam2">
+<p data-o006-id="O006-PSU-005-U0116"><span class="theorem-title"><strong>Example 4.5</strong></span> Let <span class="math inline" data-o006-math-id="O006-PSU-005-M0092">\(X_1, X_2, \ldots, X_n\)</span> be a random sample from a Gamma distribution, with unknown parameter <span class="math inline" data-o006-math-id="O006-PSU-005-M0093">\(\theta\)</span> and known parameter <span class="math inline" data-o006-math-id="O006-PSU-005-M0094">\(\alpha\)</span>. Find the MLE of <span class="math inline" data-o006-math-id="O006-PSU-005-M0095">\(\theta\)</span>.</p>
+<section class="level4 card card-body bg-light ms-3 mb-3 pt-0" data-o006-id="O006-PSU-005-U0117" id="solution-4">
+<h4 class="anchored" data-anchor-id="solution-4" data-o006-id="O006-PSU-005-U0118">Solution</h4>
+<p data-o006-id="O006-PSU-005-U0119">The pdf of Gamma random variable is <span class="math inline" data-o006-math-id="O006-PSU-005-M0096">\(f(x)=\frac{1}{\Gamma(\alpha)\theta^{\alpha}}x^{\alpha-1}e^{-x/\theta}\)</span> for <span class="math inline" data-o006-math-id="O006-PSU-005-M0097">\(x&gt;0\)</span>. Follow the steps to find the MLE.</p>
+<ol data-o006-id="O006-PSU-005-U0120" type="1">
+<li data-o006-id="O006-PSU-005-U0121"><p data-o006-id="O006-PSU-005-U0122">The likelihood function is:</p>
+<p data-o006-id="O006-PSU-005-U0123"><span class="math display" data-o006-math-id="O006-PSU-005-M0098">\[\begin{align*} L(p)=\prod_{i=1}^n \frac{1}{\Gamma(\alpha)\theta^\alpha}x_i^{\alpha-1}e^{-x_i/\theta}=\left(\frac{1}{\Gamma(\alpha)\theta^\alpha}\right)^n\left(\prod_{i=1}^n x_i\right)^{\alpha-1}e^{-\frac{\sum x_i}{\theta}} \end{align*}\]</span></p></li>
+<li data-o006-id="O006-PSU-005-U0124"><p data-o006-id="O006-PSU-005-U0125">Find the log-likelihood function:</p>
+<p data-o006-id="O006-PSU-005-U0126"><span class="math display" data-o006-math-id="O006-PSU-005-M0099">\[\begin{align*}
+         \ell(\theta)=-n\ln (\Gamma(\alpha))-n\alpha\ln (\theta)+(\alpha-1)\ln \left(\ln \prod x_i\right)-\frac{\sum x_i}{\theta}
+     \end{align*}\]</span></p></li>
+<li data-o006-id="O006-PSU-005-U0127"><p data-o006-id="O006-PSU-005-U0128">Take the first derivative of <span class="math inline" data-o006-math-id="O006-PSU-005-M0100">\(\ell(\theta)\)</span> with respect to <span class="math inline" data-o006-math-id="O006-PSU-005-M0101">\(\theta\)</span>. <span class="math display" data-o006-math-id="O006-PSU-005-M0102">\[\begin{align*}
+         \frac{d}{d\theta}\ell(\theta)=-\frac{n\alpha}{\theta}+\frac{\sum x_i}{\theta^2}
+     \end{align*}\]</span></p></li>
+<li data-o006-id="O006-PSU-005-U0129"><p data-o006-id="O006-PSU-005-U0130">Set the derivative equal to 0 and solve for <span class="math inline" data-o006-math-id="O006-PSU-005-M0103">\(p\)</span>. <span class="math display" data-o006-math-id="O006-PSU-005-M0104">\[\begin{align*}
+         &amp; 0=-\frac{n\alpha}{\theta}+\frac{\sum x_i}{\theta^2}=\frac{-n\alpha\theta+\sum x_i}{\theta^2}\\
+         &amp; \Rightarrow 0=-n\alpha\theta+\sum x_i, \qquad \Rightarrow n\alpha\theta=\sum x_i\\
+         &amp; \Rightarrow \theta=\frac{\sum x_i}{n\alpha}
+     \end{align*}\]</span></p></li>
+<li data-o006-id="O006-PSU-005-U0131"><p data-o006-id="O006-PSU-005-U0132">The MLE for <span class="math inline" data-o006-math-id="O006-PSU-005-M0105">\(\theta\)</span> is <span class="math inline" data-o006-math-id="O006-PSU-005-M0106">\(\hat{\theta}=\frac{\sum x_i}{n\alpha}\)</span></p></li>
+</ol>
+</section>
+</div>
+<p data-o006-id="O006-PSU-005-U0133">In the last two examples, we were given a random sample and we found maximum likelihood estimators for our unknown parameter. Let’s consider now some examples where find the maximum likelihood estimate when we are given a set of observations.</p>
+<div class="theorem example" data-o006-id="O006-PSU-005-U0134" id="exm-mleonparam3">
+<p data-o006-id="O006-PSU-005-U0135"><span class="theorem-title"><strong>Example 4.6</strong></span> Suppose we have three observations from a Geometric distribution. The observations are <span class="math inline" data-o006-math-id="O006-PSU-005-M0107">\(x_1=12, x_2=19, x_3=10\)</span>. Find the maximum likelihood estimate of <span class="math inline" data-o006-math-id="O006-PSU-005-M0108">\(\theta\)</span>.</p>
+<section class="level4 card card-body bg-light ms-3 mb-3 pt-0" data-o006-id="O006-PSU-005-U0136" id="solution-5">
+<h4 class="anchored" data-anchor-id="solution-5" data-o006-id="O006-PSU-005-U0137">Solution</h4>
+<p data-o006-id="O006-PSU-005-U0138">In the previous example, we found the MLE to be <span class="math inline" data-o006-math-id="O006-PSU-005-M0109">\(\hat{p}=\frac{n}{\sum x_i}\)</span>. Therefore, the maximum likelihood estimate is:</p>
+<p data-o006-id="O006-PSU-005-U0139"><span class="math display" data-o006-math-id="O006-PSU-005-M0110">\[\begin{align*}
+    \hat{p}=\frac{n}{\sum x_i}=\frac{3}{12+19+10}=\frac{3}{41}
+\end{align*}\]</span></p>
+</section>
+</div>
+<div class="theorem example" data-o006-id="O006-PSU-005-U0140" id="exm-mleonparam4">
+<p data-o006-id="O006-PSU-005-U0141"><span class="theorem-title"><strong>Example 4.7</strong></span> Suppose we have three observations from a Gamma distribution with <span class="math inline" data-o006-math-id="O006-PSU-005-M0111">\(\alpha=3\)</span> and unknown parameter <span class="math inline" data-o006-math-id="O006-PSU-005-M0112">\(\theta\)</span>. The observations are <span class="math inline" data-o006-math-id="O006-PSU-005-M0113">\(x_1=3.4, x_2=8.1, x_3=5.5\)</span>. Find the maximum likelihood estimate of <span class="math inline" data-o006-math-id="O006-PSU-005-M0114">\(\theta\)</span>.</p>
+<section class="level4 card card-body bg-light ms-3 mb-3 pt-0" data-o006-id="O006-PSU-005-U0142" id="solution-6">
+<h4 class="anchored" data-anchor-id="solution-6" data-o006-id="O006-PSU-005-U0143">Solution</h4>
+<p data-o006-id="O006-PSU-005-U0144">The the previous example, we found the MLE to be <span class="math inline" data-o006-math-id="O006-PSU-005-M0115">\(\hat{\theta}=\frac{\sum x_i}{n\alpha}\)</span>. Therefore, the maximum likelihood estimate is:</p>
+<p data-o006-id="O006-PSU-005-U0145"><span class="math display" data-o006-math-id="O006-PSU-005-M0116">\[\begin{align*}
+    \hat{\theta}=\frac{\sum x_i}{n\alpha}=\frac{3.4+8.1+5.5}{3(3)}=
+\end{align*}\]</span></p>
+</section>
+</div>
+<div class="theorem example" data-o006-id="O006-PSU-005-U0146" id="exm-mleonparam5">
+<p data-o006-id="O006-PSU-005-U0147"><span class="theorem-title"><strong>Example 4.8</strong></span> Suppose we have the following observations from a Poisson distribution with <span class="math inline" data-o006-math-id="O006-PSU-005-M0117">\(\lambda\)</span>. <span class="math display" data-o006-math-id="O006-PSU-005-M0118">\[\begin{align*}
+    &amp; 14, \qquad 21, \qquad 17\\
+    &amp; 11, \qquad 22
+\end{align*}\]</span> Find the maximum likelihood estimate of <span class="math inline" data-o006-math-id="O006-PSU-005-M0119">\(\lambda\)</span>.</p>
+<section class="level4 card card-body bg-light ms-3 mb-3 pt-0" data-o006-id="O006-PSU-005-U0148" id="solution-7">
+<h4 class="anchored" data-anchor-id="solution-7" data-o006-id="O006-PSU-005-U0149">Solution</h4>
+<p data-o006-id="O006-PSU-005-U0150">First, we need to have the MLE, using our usual steps. The likelihood function is:</p>
+<p data-o006-id="O006-PSU-005-U0151"><span class="math display" data-o006-math-id="O006-PSU-005-M0120">\[\begin{align*}
+    L(\lambda)=\prod_{i=1}^n \frac{e^{-\lambda}\lambda^{x_i}}{x_i!}=\frac{e^{-n\lambda}\lambda^{\sum x_i}}{\prod x_i!}
+\end{align*}\]</span></p>
+<p data-o006-id="O006-PSU-005-U0152">The log-likelihood is:</p>
+<p data-o006-id="O006-PSU-005-U0153"><span class="math display" data-o006-math-id="O006-PSU-005-M0121">\[\begin{align*}
+    \ell(\lambda)=-n\lambda +\left(\sum x_i\right)\ln \lambda +\ln \left(\prod x_i!\right)
+\end{align*}\]</span></p>
+<p data-o006-id="O006-PSU-005-U0154">The first derivative is:</p>
+<p data-o006-id="O006-PSU-005-U0155"><span class="math display" data-o006-math-id="O006-PSU-005-M0122">\[\begin{align*}
+    \frac{d}{d\lambda}=-n+\frac{\sum x_i}{\lambda}
+\end{align*}\]</span></p>
+<p data-o006-id="O006-PSU-005-U0156">Setting the derivative equal to 0 and solving for <span class="math inline" data-o006-math-id="O006-PSU-005-M0123">\(\lambda\)</span>, we get the following MLE:</p>
+<p data-o006-id="O006-PSU-005-U0157"><span class="math display" data-o006-math-id="O006-PSU-005-M0124">\[\begin{align*}
+    &amp; 0=-n+\frac{\sum x_i}{\lambda}, \qquad \Rightarrow n=\frac{\sum x_i}{\lambda}\\
+    &amp; \Rightarrow \hat{\lambda}=\frac{\sum x_i}{n}=\bar{x}
+\end{align*}\]</span></p>
+<p data-o006-id="O006-PSU-005-U0158">Therefore, the maximum likelihood estimate of <span class="math inline" data-o006-math-id="O006-PSU-005-M0125">\(\lambda\)</span> is <span class="math inline" data-o006-math-id="O006-PSU-005-M0126">\(\hat{\lambda}=\frac{14+21+17+11+22}{5}=\frac{85}{5}=17\)</span>.</p>
+</section>
+</div>
+</section>
+</section>
+<section class="level2" data-number="4.3" data-o006-id="O006-PSU-005-U0159" id="maximize-the-likelihood-directly-support-parameters">
+<h2 class="anchored" data-anchor-id="maximize-the-likelihood-directly-support-parameters" data-number="4.3" data-o006-id="O006-PSU-005-U0160"><span class="header-section-number">4.3</span> Maximize the Likelihood Directly: Support Parameters</h2>
+<p data-o006-id="O006-PSU-005-U0161">In this section, we will continue to explore maximum likelihood estimation. Consider the following example.</p>
+<div class="theorem example" data-o006-id="O006-PSU-005-U0162" id="exm-suppparam1">
+<p data-o006-id="O006-PSU-005-U0163"><span class="theorem-title"><strong>Example 4.9</strong></span> Suppose we have a random sample of size <span class="math inline" data-o006-math-id="O006-PSU-005-M0127">\(n\)</span> from a Uniform distribution over the interval <span class="math inline" data-o006-math-id="O006-PSU-005-M0128">\((0, a)\)</span>, where <span class="math inline" data-o006-math-id="O006-PSU-005-M0129">\(a\)</span> is an unknown real number. What is the MLE of <span class="math inline" data-o006-math-id="O006-PSU-005-M0130">\(a\)</span>?</p>
+<section class="level4 card card-body bg-light ms-3 mb-3 pt-0" data-o006-id="O006-PSU-005-U0164" id="solution-8">
+<h4 class="anchored" data-anchor-id="solution-8" data-o006-id="O006-PSU-005-U0165">Solution</h4>
+<p data-o006-id="O006-PSU-005-U0166">Let’s approach this problem using our usual steps. The pdf of this Uniform is <span class="math inline" data-o006-math-id="O006-PSU-005-M0131">\(f(x)=\frac{1}{a}\)</span>, for <span class="math inline" data-o006-math-id="O006-PSU-005-M0132">\(0&lt;x&lt;a\)</span>. The likelihood is:</p>
+<p data-o006-id="O006-PSU-005-U0167"><span class="math display" data-o006-math-id="O006-PSU-005-M0133">\[\begin{align*}
+    L(a)=\prod_{i=1}^n \frac{1}{a}=\frac{1}{a^n}=a^{-n}
+\end{align*}\]</span></p>
+<p data-o006-id="O006-PSU-005-U0168">The log-likelihood function is:</p>
+<p data-o006-id="O006-PSU-005-U0169"><span class="math display" data-o006-math-id="O006-PSU-005-M0134">\[\begin{align*}
+    \ell(a)=-n\ln a
+\end{align*}\]</span></p>
+<p data-o006-id="O006-PSU-005-U0170">The derivative is:</p>
+<p data-o006-id="O006-PSU-005-U0171"><span class="math display" data-o006-math-id="O006-PSU-005-M0135">\[\begin{align*}
+    \frac{d}{da}\ell(a)=-\frac{n}{a}
+\end{align*}\]</span></p>
+<p data-o006-id="O006-PSU-005-U0172">But what happens when we set the derivative equal to 0 and solve for <span class="math inline" data-o006-math-id="O006-PSU-005-M0136">\(a\)</span>? If we set <span class="math inline" data-o006-math-id="O006-PSU-005-M0137">\(-\frac{n}{a}=0\)</span>, then our MLE would be <span class="math inline" data-o006-math-id="O006-PSU-005-M0138">\(\hat{a}=\infty\)</span>!.</p>
+</section>
+</div>
+<p data-o006-id="O006-PSU-005-U0173">What is different about this example compared to the other MLE examples so far? It looks like the likelihood function is monotonic increasing. Therefore, it will not have a critical point.</p>
+<p data-o006-id="O006-PSU-005-U0174">In the above example, we did not account for the constraint that <span class="math inline" data-o006-math-id="O006-PSU-005-M0139">\(a\)</span> has on the data. In our previous examples from the last lesson, the unknown parameter is not in the support. For example, the support of <span class="math inline" data-o006-math-id="O006-PSU-005-M0140">\(X\)</span> is a Normal random variable is <span class="math inline" data-o006-math-id="O006-PSU-005-M0141">\(-\infty&lt;x&lt;\infty\)</span>. In the Gamma example, the support of <span class="math inline" data-o006-math-id="O006-PSU-005-M0142">\(X\)</span> is <span class="math inline" data-o006-math-id="O006-PSU-005-M0143">\(x&gt;0\)</span>, and so on.</p>
+<p data-o006-id="O006-PSU-005-U0175">In the case of the Uniform distribution, however, the unknown parameter <span class="math inline" data-o006-math-id="O006-PSU-005-M0144">\(a\)</span> is in the support and we did not account for the constraint that <span class="math inline" data-o006-math-id="O006-PSU-005-M0145">\(a\)</span> has on the data. So what do we do?</p>
+<p data-o006-id="O006-PSU-005-U0176">Let’s first define the indicator function.</p>
+<div class="ms-3 theorem definition" data-o006-id="O006-PSU-005-U0177" id="def-Indicatorfunction">
+<p data-o006-id="O006-PSU-005-U0178"><span class="theorem-title"><strong>Def. 4.3 (Indicator function)</strong></span> Suppose we have an event <span class="math inline" data-o006-math-id="O006-PSU-005-M0146">\(A\)</span>. The <strong>indicator function of</strong> <span class="math inline" data-o006-math-id="O006-PSU-005-M0147">\(A\)</span> is defined as:</p>
+<p data-o006-id="O006-PSU-005-U0179"><span class="math display" data-o006-math-id="O006-PSU-005-M0148">\[
+\begin{align*}
+    \mathbf{1}_{A}=\begin{cases}
+        1, &amp; \text{ if $A$ occurs}\\
+        0, &amp; \text{ if $A$ does not occur}
+    \end{cases}
+\end{align*}
+\]</span></p>
+</div>
+<p data-o006-id="O006-PSU-005-U0180">Let’s look at an example where we use the indicator function and find the maximum likelihood estimator.</p>
+<div class="theorem example" data-o006-id="O006-PSU-005-U0181" id="exm-suppparam2">
+<p data-o006-id="O006-PSU-005-U0182"><span class="theorem-title"><strong>Example 4.10</strong></span> Let <span class="math inline" data-o006-math-id="O006-PSU-005-M0149">\(Y_1, \ldots, Y_n\)</span> be a random sample from a Bernoulli distribution with parameter <span class="math inline" data-o006-math-id="O006-PSU-005-M0150">\(p\)</span>. The pdf of <span class="math inline" data-o006-math-id="O006-PSU-005-M0151">\(Y\)</span> is:</p>
+<p data-o006-id="O006-PSU-005-U0183"><span class="math display" data-o006-math-id="O006-PSU-005-M0152">\[\begin{align*}
+    f(y)=\begin{cases}
+    p^y(1-p)^{1-y} &amp; y=0, 1\\
+    0 &amp; \text{otherwise}
+    \end{cases}
+\end{align*}\]</span></p>
+<p data-o006-id="O006-PSU-005-U0184">There are other ways we could rewrite the pdf. Consider it as</p>
+<p data-o006-id="O006-PSU-005-U0185"><span class="math display" data-o006-math-id="O006-PSU-005-M0153">\[\begin{align*}
+    f(y)=\begin{cases}
+    p &amp; y=1\\
+    1-p &amp; y=0
+    \end{cases}
+\end{align*}\]</span></p>
+<p data-o006-id="O006-PSU-005-U0186">Still, another way we could rewrite the pdf is with the indicator function:</p>
+<p data-o006-id="O006-PSU-005-U0187"><span class="math display" data-o006-math-id="O006-PSU-005-M0154">\[\begin{align*}
+    f(y)=p^y(1-p)^{1-y}\mathbf{1}_{\{y\in \{0, 1\}\}}
+\end{align*}\]</span></p>
+<p data-o006-id="O006-PSU-005-U0188">where</p>
+<p data-o006-id="O006-PSU-005-U0189"><span class="math display" data-o006-math-id="O006-PSU-005-M0155">\[\begin{align*}
+    \mathbf{1}_{\{y \in \{0,1\}\}}=\begin{cases}
+    1 &amp; \text{ if $y=$ or $y=1$}\\
+    0 &amp; \text{otherwise}
+    \end{cases}
+\end{align*}\]</span></p>
+<p data-o006-id="O006-PSU-005-U0190">Using this version of the pdf, find the maximum likelihood estimator of <span class="math inline" data-o006-math-id="O006-PSU-005-M0156">\(p\)</span>.</p>
+<section class="level4 card card-body bg-light ms-3 mb-3 pt-0" data-o006-id="O006-PSU-005-U0191" id="solution-9">
+<h4 class="anchored" data-anchor-id="solution-9" data-o006-id="O006-PSU-005-U0192">Solution</h4>
+<p data-o006-id="O006-PSU-005-U0193">The likelihood is:</p>
+<p data-o006-id="O006-PSU-005-U0194"><span class="math display" data-o006-math-id="O006-PSU-005-M0157">\[\begin{align*}
+    L(p)=\prod_{i=1}^n p^{y_1}(1-p)^{1-y_1}\mathbf{1}_{\{y\in \{0, 1\}\}}=p^{\sum y_i}(1-p)^{n-\sum y_i}\prod \mathbf{1}_{\{y\in \{0, 1\}\}}
+\end{align*}\]</span></p>
+<p data-o006-id="O006-PSU-005-U0195">The log-likelihood function is:</p>
+<p data-o006-id="O006-PSU-005-U0196"><span class="math display" data-o006-math-id="O006-PSU-005-M0158">\[\begin{align*}
+    \ell(p)=\sum y_i\ln p+(n-\sum y_i)\ln (1-p)+\sum \ln \left(\mathbf{1}_{\{y\in \{0, 1\}\}}\right)
+\end{align*}\]</span></p>
+<p data-o006-id="O006-PSU-005-U0197">Next, take the derivative with respect to <span class="math inline" data-o006-math-id="O006-PSU-005-M0159">\(p\)</span>.</p>
+<p data-o006-id="O006-PSU-005-U0198"><span class="math display" data-o006-math-id="O006-PSU-005-M0160">\[\begin{align*}
+    \frac{d}{dp}=\frac{\sum y_1}{p}-\frac{n-\sum y_i}{1-p}
+\end{align*}\]</span></p>
+<p data-o006-id="O006-PSU-005-U0199">At this point, notice that the indicator function dropped out as it is a constant with respect to <span class="math inline" data-o006-math-id="O006-PSU-005-M0161">\(p\)</span>. Now, continue to find the MLE.</p>
+<p data-o006-id="O006-PSU-005-U0200"><span class="math display" data-o006-math-id="O006-PSU-005-M0162">\[\begin{align*}
+    &amp; \frac{\sum y_1}{p}=\frac{n-\sum y_i}{1-p}, \qquad \Rightarrow \sum y_i-p\sum y_i=np-p\sum y_i\\
+    &amp; \Rightarrow \sum y_i=np, \qquad \Rightarrow \hat{p}=\frac{\sum y_i}{n}
+\end{align*}\]</span></p>
+</section>
+</div>
+<p data-o006-id="O006-PSU-005-U0201">How does this help us in the Uniform <span class="math inline" data-o006-math-id="O006-PSU-005-M0163">\((0, a)\)</span> case? In the example above, we know <span class="math inline" data-o006-math-id="O006-PSU-005-M0164">\(X\)</span> is a Uniform random variable over the interval <span class="math inline" data-o006-math-id="O006-PSU-005-M0165">\((0, a)\)</span>. Therefore, instead of writing the pdf as</p>
+<p data-o006-id="O006-PSU-005-U0202"><span class="math display" data-o006-math-id="O006-PSU-005-M0166">\[\begin{align*}
+    f(x)=\begin{cases}
+        \frac{1}{a}, &amp; 0&lt;x&lt;a\\
+        0, &amp; \text{otherwise}
+        \end{cases}
+\end{align*}\]</span></p>
+<p data-o006-id="O006-PSU-005-U0203">we can rewrite it using the indicator function.</p>
+<p data-o006-id="O006-PSU-005-U0204"><span class="math display" data-o006-math-id="O006-PSU-005-M0167">\[\begin{align*}
+    f(x)=\frac{1}{a}\times\mathbf{1}_{x\in (0, a)}
+\end{align*}\]</span></p>
+<p data-o006-id="O006-PSU-005-U0205">where</p>
+<p data-o006-id="O006-PSU-005-U0206"><span class="math display" data-o006-math-id="O006-PSU-005-M0168">\[\begin{align*}
+    \mathbf{1}_{x\in (0, a)}=\begin{cases}
+    1, &amp; \text{ if $x\in (0, a)$}\\
+    0, &amp; \text{ if $x\notin (0, a)$}
+    \end{cases}
+\end{align*}\]</span></p>
+<div class="theorem example" data-o006-id="O006-PSU-005-U0207" id="exm-suppparam3">
+<p data-o006-id="O006-PSU-005-U0208"><span class="theorem-title"><strong>Example 4.11</strong></span> Find the maximum likelihood estimator for <span class="math inline" data-o006-math-id="O006-PSU-005-M0169">\(a\)</span> for the Uniform example.</p>
+<section class="level4 card card-body bg-light ms-3 mb-3 pt-0" data-o006-id="O006-PSU-005-U0209" id="solution-10">
+<h4 class="anchored" data-anchor-id="solution-10" data-o006-id="O006-PSU-005-U0210">Solution</h4>
+<p data-o006-id="O006-PSU-005-U0211">Again, we start with the likelihood</p>
+<p data-o006-id="O006-PSU-005-U0212"><span class="math display" data-o006-math-id="O006-PSU-005-M0170">\[\begin{align*}
+    L(a)=\prod_{i=1}^n \frac{1}{a}\mathbf{1}_{x\in (0, a)}=a^{-n}\prod_{i=1}^n \mathbf{1}_{x\in (0, a)}
+\end{align*}\]</span></p>
+<p data-o006-id="O006-PSU-005-U0213">Note that if <span class="math inline" data-o006-math-id="O006-PSU-005-M0171">\(x_i&gt;a\)</span>, then the likelihood is 0. In other words, <span class="math inline" data-o006-math-id="O006-PSU-005-M0172">\(a\)</span> cannot be any less than any <span class="math inline" data-o006-math-id="O006-PSU-005-M0173">\(x_i\)</span>. Therefore, to maximize <span class="math inline" data-o006-math-id="O006-PSU-005-M0174">\(L(a)\)</span>, we must make <span class="math inline" data-o006-math-id="O006-PSU-005-M0175">\(a\)</span> as small as possible. Therefore, the maximum likelihood estimator is</p>
+<p data-o006-id="O006-PSU-005-U0214"><span class="math display" data-o006-math-id="O006-PSU-005-M0176">\[\begin{align*}
+    \hat{a}=\max(X_i)=Y_n
+\end{align*}\]</span></p>
+<p data-o006-id="O006-PSU-005-U0215">Thus, the maximum likelihood estimator for <span class="math inline" data-o006-math-id="O006-PSU-005-M0177">\(a\)</span> is the maximum order statistic, <span class="math inline" data-o006-math-id="O006-PSU-005-M0178">\(Y_n\)</span>, as the likelihood is maximized when <span class="math inline" data-o006-math-id="O006-PSU-005-M0179">\(a=\max(x_i)\)</span>.</p>
+</section>
+</div>
+<div class="theorem example" data-o006-id="O006-PSU-005-U0216" id="exm-suppparam4">
+<p data-o006-id="O006-PSU-005-U0217"><span class="theorem-title"><strong>Example 4.12</strong></span> Suppose we have <span class="math inline" data-o006-math-id="O006-PSU-005-M0180">\(X_i\sim \text{Pareto}(m, \alpha=2)\)</span> be an iid sample of size <span class="math inline" data-o006-math-id="O006-PSU-005-M0181">\(n\)</span>, and let the parameter <span class="math inline" data-o006-math-id="O006-PSU-005-M0182">\(\alpha=2\)</span>. The pdf of a Pareto is:</p>
+<p data-o006-id="O006-PSU-005-U0218"><span class="math display" data-o006-math-id="O006-PSU-005-M0183">\[\begin{align*}
+    f(x)=\frac{\alpha m^\alpha}{x^{\alpha+1}}=\frac{2m^2}{x^3}, \qquad x\ge m
+\end{align*}\]</span></p>
+<p data-o006-id="O006-PSU-005-U0219">Find the maximum likelihood estimator of <span class="math inline" data-o006-math-id="O006-PSU-005-M0184">\(m\)</span>.</p>
+<section class="level4 card card-body bg-light ms-3 mb-3 pt-0" data-o006-id="O006-PSU-005-U0220" id="solution-11">
+<h4 class="anchored" data-anchor-id="solution-11" data-o006-id="O006-PSU-005-U0221">Solution</h4>
+<p data-o006-id="O006-PSU-005-U0222">The first step as always is to find the likelihood function:</p>
+<p data-o006-id="O006-PSU-005-U0223"><span class="math display" data-o006-math-id="O006-PSU-005-M0185">\[\begin{align*}
+    L(m)=\prod_{i=1}^n \frac{2m^2}{x_i^3}\mathbf{1}_{\{x_i&gt;m\}}=\frac{2^nm^{2n}}{\prod x_i^3}\prod \mathbf{1}_{\{x_i&gt;m\}}
+\end{align*}\]</span></p>
+<p data-o006-id="O006-PSU-005-U0224">To maximize the likelihood we consider the terms that include <span class="math inline" data-o006-math-id="O006-PSU-005-M0186">\(m\)</span>. Namely,</p>
+<p data-o006-id="O006-PSU-005-U0225"><span class="math display" data-o006-math-id="O006-PSU-005-M0187">\[\begin{align*}
+    m^{2n}\prod \mathbf{1}_{\{x_i&gt;m\}}
+\end{align*}\]</span></p>
+<p data-o006-id="O006-PSU-005-U0226">The only way that the product of the indicator function is equal to 1 is if <span class="math inline" data-o006-math-id="O006-PSU-005-M0188">\(x_1&gt;m\)</span>, <span class="math inline" data-o006-math-id="O006-PSU-005-M0189">\(x_2&gt;m\)</span>, …, <span class="math inline" data-o006-math-id="O006-PSU-005-M0190">\(x_n&gt;m\)</span>. It is the same thing as stating that the minimum order statistic is greater than <span class="math inline" data-o006-math-id="O006-PSU-005-M0191">\(m\)</span>. In other words, if <span class="math inline" data-o006-math-id="O006-PSU-005-M0192">\(Y_1\)</span> (the first order statistics or minimum) is greater than <span class="math inline" data-o006-math-id="O006-PSU-005-M0193">\(m\)</span>, then all of the observations are greater than <span class="math inline" data-o006-math-id="O006-PSU-005-M0194">\(m\)</span>. Therefore, the maximum likelihood estimator of <span class="math inline" data-o006-math-id="O006-PSU-005-M0195">\(m\)</span> is the first order statistic, <span class="math inline" data-o006-math-id="O006-PSU-005-M0196">\(Y_1\)</span>.</p>
+</section>
+</div>
+<div class="callout callout-style-simple callout-caution no-icon" data-o006-id="O006-PSU-005-U0227">
+<div class="callout-body d-flex" data-o006-id="O006-PSU-005-U0228">
+<div class="callout-icon-container" data-o006-id="O006-PSU-005-U0229">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-body-container" data-o006-id="O006-PSU-005-U0230">
+<p data-o006-id="O006-PSU-005-U0231"><strong>Note!</strong><br/>
+This approach is only needed when the likelihood is monotonic (Increasing or decreasing) when we ignore the support. When <span class="math inline" data-o006-math-id="O006-PSU-005-M0197">\(L(\theta)\)</span> is monotone increasing, it is often the MLE is <span class="math inline" data-o006-math-id="O006-PSU-005-M0198">\(\hat{\theta}=\min(x_i)\)</span>.Likewise, when <span class="math inline" data-o006-math-id="O006-PSU-005-M0199">\(L(\theta)\)</span> is monotone decreasing, it is often the MLE is <span class="math inline" data-o006-math-id="O006-PSU-005-M0200">\(\hat{\theta}=\max(x_i)\)</span>.</p>
+</div>
+</div>
+</div>
+<div class="theorem example" data-o006-id="O006-PSU-005-U0232" id="exm-suppparam5">
+<p data-o006-id="O006-PSU-005-U0233"><span class="theorem-title"><strong>Example 4.13</strong></span> Suppose we have a random sample <span class="math inline" data-o006-math-id="O006-PSU-005-M0201">\(X_1, \ldots, X_4\)</span> from a Uniform distribution over <span class="math inline" data-o006-math-id="O006-PSU-005-M0202">\((3c, 10)\)</span>. Find the maximum likelihood estimate of <span class="math inline" data-o006-math-id="O006-PSU-005-M0203">\(c\)</span> using the following observations.</p>
+<p data-o006-id="O006-PSU-005-U0234"><span class="math display" data-o006-math-id="O006-PSU-005-M0204">\[\begin{align*}
+    &amp; x_1=-5, \qquad x_2=6\\
+    &amp; x_3=-1, \qquad x_4=2
+\end{align*}\]</span></p>
+<section class="level4 card card-body bg-light ms-3 mb-3 pt-0" data-o006-id="O006-PSU-005-U0235" id="solution-12">
+<h4 class="anchored" data-anchor-id="solution-12" data-o006-id="O006-PSU-005-U0236">Solution</h4>
+<p data-o006-id="O006-PSU-005-U0237">The first step is to find the pdf of <span class="math inline" data-o006-math-id="O006-PSU-005-M0205">\(X_i\)</span>.</p>
+<p data-o006-id="O006-PSU-005-U0238"><span class="math display" data-o006-math-id="O006-PSU-005-M0206">\[\begin{align*}
+    f(x_i|c)=\frac{1}{10-3c}\mathbf{1}_{\{3c\le x_i\le10\}}, \qquad i=1, 2, 3, 4
+\end{align*}\]</span></p>
+<p data-o006-id="O006-PSU-005-U0239">Next, we find the likelihood function.</p>
+<p data-o006-id="O006-PSU-005-U0240"><span class="math display" data-o006-math-id="O006-PSU-005-M0207">\[\begin{align*}
+    L(c)&amp;=\prod_{i=1}^4 \frac{1}{10-3c}\mathbf{1}_{\{3c\le x_i\le10\}}\\
+    &amp; =\left(\frac{1}{10-3c}\right)^4\mathbf{1}_{\{3c\le x_1\le 10, 3c\le x_2\le 10, 3c\le x_3\le 10, 3c\le x_4\le 10\}}
+\end{align*}\]</span></p>
+<p data-o006-id="O006-PSU-005-U0241">We can show that <span class="math inline" data-o006-math-id="O006-PSU-005-M0208">\(\left(\frac{1}{10-3c}\right)^4\)</span> is a monotone increasing function. Now, let’s take a closer look at the indication function.</p>
+<p data-o006-id="O006-PSU-005-U0242"><span class="math display" data-o006-math-id="O006-PSU-005-M0209">\[\begin{align*}
+    \mathbf{1}_{\{3c\le x_1\le 10, 3c\le x_2\le 10, 3c\le x_3\le 10, 3c\le x_4\le 10\}}
+\end{align*}\]</span></p>
+<p data-o006-id="O006-PSU-005-U0243">See if you can convince yourself that the indication function can also be written as:</p>
+<p data-o006-id="O006-PSU-005-U0244"><span class="math display" data-o006-math-id="O006-PSU-005-M0210">\[\begin{align*}
+    \mathbf{1}_{\{3c\le x_1, 3c\le x_2, 3c\le x_3, 3c\le x_4\}}\times\mathbf{1}_{\{x_1\le 10, x_2\le 10, x_3\le 10, x_4\le 10\}}
+\end{align*}\]</span></p>
+<p data-o006-id="O006-PSU-005-U0245">The second term is not a function of <span class="math inline" data-o006-math-id="O006-PSU-005-M0211">\(c\)</span>. Therefore, we can ignore it. Let’s focus on the first term which is a function of <span class="math inline" data-o006-math-id="O006-PSU-005-M0212">\(c\)</span>.</p>
+<p data-o006-id="O006-PSU-005-U0246"><span class="math display" data-o006-math-id="O006-PSU-005-M0213">\[\begin{align*}
+    \mathbf{1}_{\{3c\le x_1, 3c\le x_2, 3c\le x_3, 3c\le x_4\}}
+\end{align*}\]</span></p>
+<p data-o006-id="O006-PSU-005-U0247">Similar to before, we can rewrite the indicator function as:</p>
+<p data-o006-id="O006-PSU-005-U0248"><span class="math display" data-o006-math-id="O006-PSU-005-M0214">\[\begin{align*}
+    \mathbf{1}_{\{3c\le \min(x_1, \ldots, x_4)\}}=\mathbf{1}_{\{c\le \frac{\min(x_1, \ldots, x_4)}{3}\}}
+\end{align*}\]</span></p>
+<p data-o006-id="O006-PSU-005-U0249">Therefore, the maximum likelihood estimator of <span class="math inline" data-o006-math-id="O006-PSU-005-M0215">\(c\)</span> is</p>
+<p data-o006-id="O006-PSU-005-U0250"><span class="math display" data-o006-math-id="O006-PSU-005-M0216">\[\begin{align*}
+    \hat{c}=\frac{\min(x_i)}{3}
+\end{align*}\]</span></p>
+<p data-o006-id="O006-PSU-005-U0251">Using our data, the maximum likelihood estimate is <span class="math inline" data-o006-math-id="O006-PSU-005-M0217">\(\hat{c}=\frac{-5}{3}\)</span>.</p>
+</section>
+</div>
+</section>
+<section class="level2" data-number="4.4" data-o006-id="O006-PSU-005-U0252" id="multiparameter-case">
+<h2 class="anchored" data-anchor-id="multiparameter-case" data-number="4.4" data-o006-id="O006-PSU-005-U0253"><span class="header-section-number">4.4</span> Multiparameter Case</h2>
+<p data-o006-id="O006-PSU-005-U0254">So far, we have learned the maximum likelihood estimator for distributions with one parameter. For example, <span class="math inline" data-o006-math-id="O006-PSU-005-M0218">\(\text{Unif}(0, \theta)\)</span> and <span class="math inline" data-o006-math-id="O006-PSU-005-M0219">\(\text{Bin}(10, p)\)</span>. We also considered the Normal distribution where only one of the parameters was unknown. In this lesson, we will learn how to find the estimators in situations where there is more than one unknown parameter. For example, <span class="math inline" data-o006-math-id="O006-PSU-005-M0220">\(N(\mu, \sigma^2)\)</span>, <span class="math inline" data-o006-math-id="O006-PSU-005-M0221">\(\text{Gamma}(\alpha, \beta)\)</span>, etc…</p>
+<p data-o006-id="O006-PSU-005-U0255">In general, we can follow a similar approach to the multiparameter models as we do for the single parameter case.</p>
+<section class="level4" data-o006-id="O006-PSU-005-U0256" id="notation">
+<h4 class="anchored" data-anchor-id="notation" data-o006-id="O006-PSU-005-U0257">Notation</h4>
+<p data-o006-id="O006-PSU-005-U0258">We will be using vector notation in this section. Scalars are not underlined and vectors will be underlined. For example, scalars will look like</p>
+<p data-o006-id="O006-PSU-005-U0259"><span class="math display" data-o006-math-id="O006-PSU-005-M0222">\[\begin{align*}
+&amp; a\in  \mathbb{R}\\
+&amp; \theta\in \mathbb{R}
+\end{align*}\]</span></p>
+<p data-o006-id="O006-PSU-005-U0260">When we reference vectors, the notation uses an underline. For example,</p>
+<p data-o006-id="O006-PSU-005-U0261"><span class="math display" data-o006-math-id="O006-PSU-005-M0223">\[\begin{align*}
+    &amp; \underline{x}\in \mathbb{R}^n, \qquad \underline{x}=(x_1, x_2, \ldots, x_n)\\
+    &amp;  \underline{\theta}\in \mathbb{R}^p, \qquad \underline{\theta}=(\theta_1, \theta_2, \ldots, \theta_p)
+\end{align*}\]</span></p>
+<p data-o006-id="O006-PSU-005-U0262">When we have more than one parameter, we can write the pdf (or pmf) as:</p>
+<p data-o006-id="O006-PSU-005-U0263"><span class="math display" data-o006-math-id="O006-PSU-005-M0224">\[\begin{align*}
+f(x|\underline{\theta})
+\end{align*}\]</span></p>
+<p data-o006-id="O006-PSU-005-U0264">the likelihood as:</p>
+<p data-o006-id="O006-PSU-005-U0265"><span class="math display" data-o006-math-id="O006-PSU-005-M0225">\[\begin{align*}
+    L(\underline{\theta})=\prod_{i=1}^n f(x_i|\underline{\theta})
+\end{align*}\]</span></p>
+<p data-o006-id="O006-PSU-005-U0266">The log-likelihood is:</p>
+<p data-o006-id="O006-PSU-005-U0267"><span class="math display" data-o006-math-id="O006-PSU-005-M0226">\[\begin{align*}
+    &amp; \ell(\underline{\theta})=\sum_{i=1}^n \log f(x_i|\underline{\theta})\\
+    &amp;=\ell(\theta_1, \ldots, \theta_p)=\sum_{i=1}^n \log f(x_i|\theta_1, \ldots, \theta_p)
+\end{align*}\]</span></p>
+<p data-o006-id="O006-PSU-005-U0268">The critical points occur when</p>
+<p data-o006-id="O006-PSU-005-U0269"><span class="math display" data-o006-math-id="O006-PSU-005-M0227">\[\begin{align*}
+    &amp; \frac{d}{d\theta_1}\ell(\underline{\theta})=0\\
+    &amp; \frac{d}{d\theta_2}\ell(\underline{\theta})=0\\
+    &amp; \vdots\\
+    &amp;  \frac{d}{d\theta_p}\ell(\underline{\theta})=0
+\end{align*}\]</span></p>
+<p data-o006-id="O006-PSU-005-U0270">Therefore, we have <span class="math inline" data-o006-math-id="O006-PSU-005-M0228">\(p\)</span> equations and <span class="math inline" data-o006-math-id="O006-PSU-005-M0229">\(p\)</span> unknowns. Solving this system of equations gives us <span class="math inline" data-o006-math-id="O006-PSU-005-M0230">\(\hat{\underline{\theta}}=(\hat{\theta}_1, \ldots, \hat{\theta_p})\)</span>.</p>
+<p data-o006-id="O006-PSU-005-U0271">Let’s take a look at an example for finding the MLE of multiple parameters.</p>
+<div class="theorem example" data-o006-id="O006-PSU-005-U0272" id="exm-multparam1">
+<p data-o006-id="O006-PSU-005-U0273"><span class="theorem-title"><strong>Example 4.14</strong></span> Suppose we have a random sample of size <span class="math inline" data-o006-math-id="O006-PSU-005-M0231">\(n\)</span> from a Normal distribution with unknown parameters <span class="math inline" data-o006-math-id="O006-PSU-005-M0232">\(\mu\)</span> and <span class="math inline" data-o006-math-id="O006-PSU-005-M0233">\(\sigma^2\)</span>. Find the MLE of <span class="math inline" data-o006-math-id="O006-PSU-005-M0234">\(\underline{\theta}=(\mu, \sigma^2)\)</span>.</p>
+<section class="level4 card card-body bg-light ms-3 mb-3 pt-0" data-o006-id="O006-PSU-005-U0274" id="solution-13">
+<h4 class="anchored" data-anchor-id="solution-13" data-o006-id="O006-PSU-005-U0275">Solution</h4>
+<p data-o006-id="O006-PSU-005-U0276">The likelihood function is:</p>
+<p data-o006-id="O006-PSU-005-U0277"><span class="math display" data-o006-math-id="O006-PSU-005-M0235">\[\begin{align*}
+    L(\underline{\theta})=\prod_{i=1}^n \frac{1}{\sqrt{2\pi\sigma^2}}e^{-\frac{1}{2\sigma^2}(x_i-\mu)^2}=\left(2\pi\sigma^2\right)^{-n/2}e^{\sum -\frac{1}{2\sigma^2}(x_i-\mu)^2}
+\end{align*}\]</span></p>
+<p data-o006-id="O006-PSU-005-U0278">The log-likelihood is:</p>
+<p data-o006-id="O006-PSU-005-U0279"><span class="math display" data-o006-math-id="O006-PSU-005-M0236">\[\begin{align*}
+    \ell(\underline{\theta})=-\frac{n}{2}\ln (2\pi)-\frac{n}{2}\ln (\sigma^2)-\sum_{i=1}^n \frac{1}{2\sigma^2}(x_i-\mu)^2
+\end{align*}\]</span></p>
+<p data-o006-id="O006-PSU-005-U0280">Let <span class="math inline" data-o006-math-id="O006-PSU-005-M0237">\(\nu=\sigma^2\)</span>. We have:</p>
+<p data-o006-id="O006-PSU-005-U0281"><span class="math display" data-o006-math-id="O006-PSU-005-M0238">\[\begin{align*}
+    \ell(\mu, \nu)=-\frac{n}{2}\ln (2\pi)-\frac{n}{2}\ln (\nu)-\sum_{i=1}^n \frac{1}{2\nu}(x_i-\mu)^2
+\end{align*}\]</span></p>
+<p data-o006-id="O006-PSU-005-U0282">Now, take the derivatives with respect to <span class="math inline" data-o006-math-id="O006-PSU-005-M0239">\(\mu\)</span> and <span class="math inline" data-o006-math-id="O006-PSU-005-M0240">\(\nu\)</span>.</p>
+<p data-o006-id="O006-PSU-005-U0283"><span class="math display" data-o006-math-id="O006-PSU-005-M0241">\[\begin{align*}
+    &amp; \frac{d\ell(\mu, \nu)}{d\mu}=-2\frac{1}{2\nu}\sum (x_i-\mu)(-1)=\frac{\sum x_i-n\mu}{\nu} \\
+    &amp; \frac{d\ell(\mu, \nu)}{d\nu}=-\frac{n}{2\nu}+\frac{\sum (x_i-\mu)^2}{2\nu^2}=\frac{-n\nu+\sum(x_i-\mu)^2}{2\nu^2}
+\end{align*}\]</span></p>
+<p data-o006-id="O006-PSU-005-U0284">Setting the derivatives equal to 0 and solving gives us:</p>
+<p data-o006-id="O006-PSU-005-U0285"><span class="math display" data-o006-math-id="O006-PSU-005-M0242">\[\begin{align*}
+    &amp; 0=\frac{\sum x_i-n\mu}{\nu}, \qquad \Rightarrow \mu=\frac{\sum x_i}{n}=\bar{x}\\
+    &amp; 0=\frac{-n\nu+\sum(x_i-\mu)^2}{2\nu^2}, \qquad \Rightarrow \nu=\frac{\sum (x_i-\mu)^2}{n}
+\end{align*}\]</span></p>
+<p data-o006-id="O006-PSU-005-U0286">We have two equations and two unknowns. Therefore, we can find the MLEs to be:</p>
+<p data-o006-id="O006-PSU-005-U0287"><span class="math display" data-o006-math-id="O006-PSU-005-M0243">\[\begin{align*}
+    &amp; \hat{\mu}=\bar{x}\\
+    &amp; \hat{\nu}=\hat{\sigma^2}=\frac{\sum_{i=1}^n (x_i-\bar{x})^2}{n}
+\end{align*}\]</span></p>
+</section>
+</div>
+<div class="theorem example" data-o006-id="O006-PSU-005-U0288" id="exm-multparam2">
+<p data-o006-id="O006-PSU-005-U0289"><span class="theorem-title"><strong>Example 4.15</strong></span> Let <span class="math inline" data-o006-math-id="O006-PSU-005-M0244">\(X_i\overset{iid}{\sim} \text{Laplace}(\mu, b)\)</span>, for <span class="math inline" data-o006-math-id="O006-PSU-005-M0245">\(i=1, \ldots, n\)</span>. Find the MLE of <span class="math inline" data-o006-math-id="O006-PSU-005-M0246">\(\underline{\theta}=(\mu, b)\)</span>.</p>
+<section class="level4 card card-body bg-light ms-3 mb-3 pt-0" data-o006-id="O006-PSU-005-U0290" id="solution-14">
+<h4 class="anchored" data-anchor-id="solution-14" data-o006-id="O006-PSU-005-U0291">Solution</h4>
+<p data-o006-id="O006-PSU-005-U0292">The pdf of <span class="math inline" data-o006-math-id="O006-PSU-005-M0247">\(X\)</span> is:</p>
+<p data-o006-id="O006-PSU-005-U0293"><span class="math display" data-o006-math-id="O006-PSU-005-M0248">\[\begin{align*}
+    f(x|\underline{\theta})=\frac{1}{2b}e^{-\frac{|x-\mu|}{b}}, \qquad -\infty&lt;x&lt;\infty
+\end{align*}\]</span> The likelihood function is:</p>
+<p data-o006-id="O006-PSU-005-U0294"><span class="math display" data-o006-math-id="O006-PSU-005-M0249">\[\begin{align*}
+    L(\underline{\theta})=\prod_{i=1}^n \frac{1}{2b}e^{\frac{|x_i-\mu|}{b}}=(2b)^{-n}e^{-\frac{\sum |x_i-\mu|}{b}}
+\end{align*}\]</span></p>
+<p data-o006-id="O006-PSU-005-U0295">The log-likelihood function is:</p>
+<p data-o006-id="O006-PSU-005-U0296"><span class="math display" data-o006-math-id="O006-PSU-005-M0250">\[\begin{align*}
+    \ell(\underline{\theta})=-n\ln 2-n\ln b-\frac{\sum |x_i-\mu|}{b}
+\end{align*}\]</span></p>
+<p data-o006-id="O006-PSU-005-U0297">Let’s start with taking the derivative with respect to <span class="math inline" data-o006-math-id="O006-PSU-005-M0251">\(b\)</span>.</p>
+<p data-o006-id="O006-PSU-005-U0298"><span class="math display" data-o006-math-id="O006-PSU-005-M0252">\[\begin{align*}
+    \frac{d\ell(\underline{\theta})}{db}=-\frac{n}{b}+\frac{\sum |x_i-\mu|}{b^2}=\frac{-nb+\sum |x_i-\mu|}{b^2}
+\end{align*}\]</span></p>
+<p data-o006-id="O006-PSU-005-U0299">Setting the derivative equal to 0, we get:</p>
+<p data-o006-id="O006-PSU-005-U0300"><span class="math display" data-o006-math-id="O006-PSU-005-M0253">\[\begin{align*}
+    0=\frac{-nb+\sum |x_i-\mu|}{b^2}, \qquad \Rightarrow \hat{b}=\frac{\sum |x_i-\mu|}{n}
+\end{align*}\]</span></p>
+<p data-o006-id="O006-PSU-005-U0301">Next, lets find the derivative of <span class="math inline" data-o006-math-id="O006-PSU-005-M0254">\(\ell(\underline{\theta})\)</span> with respect to <span class="math inline" data-o006-math-id="O006-PSU-005-M0255">\(\mu\)</span>.</p>
+<p data-o006-id="O006-PSU-005-U0302"><span class="math display" data-o006-math-id="O006-PSU-005-M0256">\[\begin{align*}
+    &amp; \frac{d\ell(\underline{\theta})}{d\mu}=-\sum_{i=1}^n \left(\frac{1}{b}\right)\frac{d}{d\mu} |x_i-\mu|
+\end{align*}\]</span></p>
+<p data-o006-id="O006-PSU-005-U0303">But what is <span class="math inline" data-o006-math-id="O006-PSU-005-M0257">\(\frac{d}{d\mu} |x_i-\mu|\)</span>? Well, we know</p>
+<p data-o006-id="O006-PSU-005-U0304"><span class="math display" data-o006-math-id="O006-PSU-005-M0258">\[\begin{align*}
+    |x_i-\mu|=\begin{cases}
+        x_i-\mu &amp; \text{if }x_i\ge \mu\\
+        -x_i+\mu &amp; \text{if }x_i\le \mu
+    \end{cases}
+\end{align*}\]</span></p>
+<p data-o006-id="O006-PSU-005-U0305">Therefore, the derivative would be</p>
+<p data-o006-id="O006-PSU-005-U0306"><span class="math display" data-o006-math-id="O006-PSU-005-M0259">\[\begin{align*}
+    \frac{d}{d\mu}|x_i-\mu|=\begin{cases}
+        -1 &amp; \text{if }x_i\ge \mu\\
+        1 &amp; \text{if }x_i\le \mu
+    \end{cases}
+\end{align*}\]</span></p>
+<p data-o006-id="O006-PSU-005-U0307">We could rewrite the derivative as an indicator function in the following way:</p>
+<p data-o006-id="O006-PSU-005-U0308"><span class="math display" data-o006-math-id="O006-PSU-005-M0260">\[\begin{align*}
+    \frac{d}{d\mu}|x_i-\mu|=\mathbf{1}_{\{x_i&lt;\mu\}}-\mathbf{1}_{\{x_i&gt;\mu\}}
+\end{align*}\]</span></p>
+<p data-o006-id="O006-PSU-005-U0309">Putting this in the log-likelihood, we get:</p>
+<p data-o006-id="O006-PSU-005-U0310"><span class="math display" data-o006-math-id="O006-PSU-005-M0261">\[\begin{align*}
+    \frac{d}{d\mu}\ell(\underline{\theta})=-\frac{1}{b}\sum_{i=1}^n\left(\mathbf{1}_{\{x_i&lt;\mu\}}-\mathbf{1}_{\{x_i&gt;\mu\}}\right)
+\end{align*}\]</span></p>
+<p data-o006-id="O006-PSU-005-U0311">Setting it equal to 0, we get:</p>
+<p data-o006-id="O006-PSU-005-U0312"><span class="math display" data-o006-math-id="O006-PSU-005-M0262">\[\begin{align*}
+    &amp; 0=\sum_{i=1}^n\left(\mathbf{1}_{\{x_i&lt;\mu\}}-\mathbf{1}_{\{x_i&gt;\mu\}}\right)=\sum \mathbf{1}_{\{x_i&lt;\mu\}}-\sum \mathbf{1}_{\{x_i&gt;\mu\}}\\
+    &amp; \Rightarrow \sum \mathbf{1}_{\{x_i&lt;\mu\}}=\sum \mathbf{1}_{\{x_i&gt;\mu\}}\\
+\end{align*}\]</span></p>
+<p data-o006-id="O006-PSU-005-U0313">Consider each of the terms in the last equation. <span class="math inline" data-o006-math-id="O006-PSU-005-M0263">\(\sum \mathbf{1}_{\{x_i&lt;\mu\}}\)</span> is the number of <span class="math inline" data-o006-math-id="O006-PSU-005-M0264">\(x_i\)</span>’s that are less than <span class="math inline" data-o006-math-id="O006-PSU-005-M0265">\(\mu\)</span>. Similarly, <span class="math inline" data-o006-math-id="O006-PSU-005-M0266">\(\sum \mathbf{1}_{\{x_i&gt;\mu\}}\)</span> is the number of <span class="math inline" data-o006-math-id="O006-PSU-005-M0267">\(x_i\)</span>’s that are greater than <span class="math inline" data-o006-math-id="O006-PSU-005-M0268">\(\mu\)</span>. The only way these two sums are equal is if <span class="math inline" data-o006-math-id="O006-PSU-005-M0269">\(\mu\)</span> is the median. Thus, the MLE for <span class="math inline" data-o006-math-id="O006-PSU-005-M0270">\(\mu\)</span> is <span class="math inline" data-o006-math-id="O006-PSU-005-M0271">\(\hat{\mu}=\text{median}(x_1, \ldots, x_n)\)</span>.</p>
+<p data-o006-id="O006-PSU-005-U0314">Therefore, with the two equations and the two unknowns, we get the MLE of <span class="math inline" data-o006-math-id="O006-PSU-005-M0272">\(\underline{\theta}\)</span> to be:</p>
+<p data-o006-id="O006-PSU-005-U0315"><span class="math display" data-o006-math-id="O006-PSU-005-M0273">\[\begin{align*}
+    \hat{\theta}=(\hat{\mu}=\text{median}(x_1, \ldots, x_n), \hat{b}=\frac{1}{n}\sum_{i=1}^n |x_i-\text{median}(x_1, \ldots, x_n))
+\end{align*}\]</span></p>
+</section>
+</div>
+<p data-o006-id="O006-PSU-005-U0316">One last example…</p>
+<div class="theorem example" data-o006-id="O006-PSU-005-U0317" id="exm-multparam3">
+<p data-o006-id="O006-PSU-005-U0318"><span class="theorem-title"><strong>Example 4.16</strong></span> Suppose <span class="math inline" data-o006-math-id="O006-PSU-005-M0274">\(X_1, X_2, \ldots, X_n\)</span> is a random sample from a Gamma distribution with parameters <span class="math inline" data-o006-math-id="O006-PSU-005-M0275">\(\alpha\)</span> and <span class="math inline" data-o006-math-id="O006-PSU-005-M0276">\(\beta\)</span>. Suppose we want to find the MLE of <span class="math inline" data-o006-math-id="O006-PSU-005-M0277">\(\underline{\theta}=(\alpha, \beta)\)</span>. We start, as usual, with the likelihood function.</p>
+<p data-o006-id="O006-PSU-005-U0319"><span class="math display" data-o006-math-id="O006-PSU-005-M0278">\[\begin{align*}
+    L(\underline{\theta})=\prod_{i=1}^n \frac{1}{\Gamma(\alpha)\theta^\alpha}x_i^{\alpha-1}e^{-\frac{x_i}{\theta}}=\left(\Gamma(\alpha)\right)^{-n}\left(\theta\right)^{-n\alpha}\left(\prod_{i=1}^n x_i^{\alpha-1}\right)e^{-\frac{\sum x_i}{\theta}}
+\end{align*}\]</span></p>
+<p data-o006-id="O006-PSU-005-U0320">The log-likelihood function is:</p>
+<p data-o006-id="O006-PSU-005-U0321"><span class="math display" data-o006-math-id="O006-PSU-005-M0279">\[\begin{align*}
+    \ell(\underline{\theta})=-n\ln \Gamma(\alpha)-n\alpha \ln \theta+(\alpha-1)\sum \ln x_i-\frac{\sum x_i}{\theta}
+\end{align*}\]</span></p>
+<p data-o006-id="O006-PSU-005-U0322">The next step is to take the derivatives with respect to <span class="math inline" data-o006-math-id="O006-PSU-005-M0280">\(\alpha\)</span> and <span class="math inline" data-o006-math-id="O006-PSU-005-M0281">\(\theta\)</span>.</p>
+<p data-o006-id="O006-PSU-005-U0323"><span class="math display" data-o006-math-id="O006-PSU-005-M0282">\[\begin{align*}
+    &amp; \frac{\ell(\underline{\theta})}{d\theta}=-\frac{n\alpha}{\theta}+\frac{\sum x_i}{\theta^2}=\frac{-n\alpha\theta+\sum x_i}{\theta^2}\\
+    &amp; \frac{d\ell(\underline{\theta})}{d\alpha}=-\frac{n}{\Gamma(\alpha)}\left(\frac{d}{d\alpha}\Gamma(\alpha)\right)+\sum \ln x_i
+\end{align*}\]</span></p>
+<p data-o006-id="O006-PSU-005-U0324">The next step, of course, is to set the derivatives equal to zero and solve for the parameter, where we have two equations and two unknowns. Before we do that, however, let’s look at <span class="math inline" data-o006-math-id="O006-PSU-005-M0283">\(\frac{d}{d\alpha}\Gamma(\alpha)\)</span>. Recall that the Gamma function at <span class="math inline" data-o006-math-id="O006-PSU-005-M0284">\(a\)</span> is</p>
+<p data-o006-id="O006-PSU-005-U0325"><span class="math display" data-o006-math-id="O006-PSU-005-M0285">\[\begin{align*}
+    \Gamma(a)=\int_0^\infty t^{a-1}e^{-t}dt
+\end{align*}\]</span></p>
+<p data-o006-id="O006-PSU-005-U0326">The Gamma function is not analytically tractable! Therefore, there is no possible Analytic solution to this system of equations. So what do we do? We need to numerically find the MLEs.</p>
+</div>
+<p data-o006-id="O006-PSU-005-U0327">We explore numerical maximum likelihood in the future but to numerically find the MLEs, we need to use software. We take a brief break from find MLEs to introduce R.</p>
+</section>
+</section>
+<section class="level2" data-number="4.5" data-o006-id="O006-PSU-005-U0328" id="summary">
+<h2 class="anchored" data-anchor-id="summary" data-number="4.5" data-o006-id="O006-PSU-005-U0329"><span class="header-section-number">4.5</span> Summary</h2>
+<p data-o006-id="O006-PSU-005-U0330">In this lesson, we were introduced to the method of maximum likelihood estimation (MLE) as a foundational tool in statistical inference. We learned how to construct the likelihood and log-likelihood functions based on a specified probability model, and how to analytically solve for the parameter value that maximizes the likelihood. We practiced deriving MLEs for both discrete and continuous distributions and explored cases where support restrictions require careful handling through indicator functions.</p>
+<p data-o006-id="O006-PSU-005-U0331"><strong>Key Takeaways:</strong></p>
+<ul data-o006-id="O006-PSU-005-U0332">
+<li data-o006-id="O006-PSU-005-U0333">The likelihood function <span class="math inline" data-o006-math-id="O006-PSU-005-M0286">\(L(\theta_1, \theta_2, \ldots, \theta_m)\)</span> is the joint probability distribution of the random sample.</li>
+<li data-o006-id="O006-PSU-005-U0334">The maximum likelihood estimator (MLE) is the value of <span class="math inline" data-o006-math-id="O006-PSU-005-M0287">\(\theta\)</span> that is the maximum of the likelihood <span class="math inline" data-o006-math-id="O006-PSU-005-M0288">\(L(\theta)\)</span>.</li>
+<li data-o006-id="O006-PSU-005-U0335">It is often easier to maximize <span class="math inline" data-o006-math-id="O006-PSU-005-M0289">\(\ell(\theta)=\ln L(\theta)\)</span>.</li>
+</ul>
+</section>
+</main>
+</body>
+</html>

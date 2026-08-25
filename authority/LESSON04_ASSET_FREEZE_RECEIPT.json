@@ -1,0 +1,69 @@
+{
+  "asset_bytes": 2259,
+  "assets": 1,
+  "audit": {
+    "bytes": 2514,
+    "path": "working/lesson04_asset_rights_audit.json",
+    "sha256": "85f95e4cb3ceb9d1793942aeb12c68469ae569a8e9ab8450248c8c0a74a27290"
+  },
+  "authority_asset": {
+    "bytes": 2259,
+    "path": "authority/assets/stat415/lesson04/STAT-415-SEC-1-15.svg",
+    "sha256": "5c6f266e5a56ef3aa37bed6a8af263e64cd235691100b38d7cdf3475812d268c"
+  },
+  "component_id": "Lesson04",
+  "document_id": "O006-PSU-005",
+  "manifest": {
+    "bytes": 444,
+    "path": "authority/LESSON04_ASSET_MANIFEST.csv",
+    "sha256": "4b4b137a82eb663a217c7fa57565624cea5385fc634fe7a0636a1cbb856a15ee"
+  },
+  "reference_census": {
+    "images": 1,
+    "other_main_dependencies": 0,
+    "same_asset_lightbox_links": 1,
+    "unique_assets": 1
+  },
+  "rights": {
+    "blocking_unresolved": 0,
+    "exception_found": false,
+    "license": "CC BY-NC 4.0"
+  },
+  "schema": "o006.stat415.lesson04-asset-freeze.v1",
+  "source": {
+    "bytes": 106614,
+    "path": "authority/upstream/stat415/Lesson04.html",
+    "sha256": "9fe5790e577c6ce0b808c92683aea45442187f80f74d540b20bd4514bdefc060",
+    "url": "https://online.stat.psu.edu/stat415/Lesson04"
+  },
+  "status": "frozen-and-verified",
+  "svg_validation": {
+    "element_count": 30,
+    "embedded_or_external_resources": false,
+    "hrefs": [],
+    "intrinsic_height": 318.36,
+    "intrinsic_width": 442.19,
+    "registered_source_defect": {
+      "defect_id": "L04-D022",
+      "description": "The second horizontal-coordinate label repeats x_1; its position and the paired f(x_2) label prove that it should be x_2.",
+      "target_only_repair": "Change only the second coordinate subscript from 1 to 2 in the derivative reader asset."
+    },
+    "root": "svg",
+    "script_or_foreign_object": false,
+    "viewBox": "0 0 442.19 318.36",
+    "visible_text_sequence": [
+      "f(x",
+      "2",
+      ")",
+      "f(x",
+      "1",
+      ")",
+      "x",
+      "1",
+      "x",
+      "1",
+      "y = ln (x)"
+    ],
+    "well_formed_xml": true
+  }
+}

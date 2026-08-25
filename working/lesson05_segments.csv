@@ -1,0 +1,364 @@
+segment_id,document_id,component_id,section_id,source_sha256,source_text,target_text,status
+O006-PSU-006-S0001,O006-PSU-006,Lesson05,,cb4ad503e340ebd1a921e3ed6dcbfc0a80660936d8bfc9d190f70694b9ccb51b,Lessons,,pending
+O006-PSU-006-S0002,O006-PSU-006,Lesson05,,cb8dcdf0ddc5a4c0a8c427c5a98d3fc1e990cc86bbf4758b526286fab1fdd6af,Maximum Likelihood Estimation (MLE) (Part II),,pending
+O006-PSU-006-S0003,O006-PSU-006,Lesson05,,cb8dcdf0ddc5a4c0a8c427c5a98d3fc1e990cc86bbf4758b526286fab1fdd6af,Maximum Likelihood Estimation (MLE) (Part II),,pending
+O006-PSU-006-S0004,O006-PSU-006,Lesson05,,2ba51b28da5b3a4e834a788db58084caf1b37e52630af7cd05852b315dcb817f,Point Estimation,,pending
+O006-PSU-006-S0005,O006-PSU-006,Lesson05,,3aa98e8fe10c2baf025b4f445d10a432701a6fd01f49a880d162a6bf3084df0c,Unbiased Estimation,,pending
+O006-PSU-006-S0006,O006-PSU-006,Lesson05,,5c2470002888bd8e7f0965f8d11c9e0ba6372a06eaad763b70d77b7dc029268d,Bias,,pending
+O006-PSU-006-S0007,O006-PSU-006,Lesson05,,6a99db7f7b3f908afd6b459725e38efdc31b65bc5fbc1abd3d9f2b76985ef088,Variance and Mean Square,,pending
+O006-PSU-006-S0008,O006-PSU-006,Lesson05,,183ebddaaa90c204b6bb019d6c78a043efafc4348d28f675b047abe015711282,Factorization,,pending
+O006-PSU-006-S0009,O006-PSU-006,Lesson05,,c375e59facbffc276c02435a035c9b8cf7a9acda90503a636cc9f03c333802b0,Sufficiency,,pending
+O006-PSU-006-S0010,O006-PSU-006,Lesson05,,6785164b561cbacfa7597f5e4af41d564dd21c0f54f04ca9094e07ecdd5bd644,Method of Moments,,pending
+O006-PSU-006-S0011,O006-PSU-006,Lesson05,overview,d4b1ea5708dd532930a85188b45aff6f0a3ed458500c7577e0127a538eb0d100,Overview,,pending
+O006-PSU-006-S0012,O006-PSU-006,Lesson05,overview,265a3aa4cef93cb2be0572be1e98c1ffc98922e029c4f44f0fbe6baf45dbd158,"This lesson advances your understanding of maximum likelihood estimation (MLE) by focusing on its practical implementation, particularly through numerical methods in R. You will learn to compute MLEs for single and multiple parameter models using techniques such as grid search and the Newton-Raphson algorithm, with an emphasis on the optim function in R. Additionally, this lesson introduces essential R programming skills, including basic operations, vector and data frame manipulation, summary statistics, plotting, and working with statistical distributions like the normal and exponential. Through examples, you will explore how to evaluate likelihood and log-likelihood functions, simulate random variables, and estimate parameters numerically. By the end of this lesson, you will be proficient in applying MLE in real-world scenarios and leveraging R for statistical analysis, setting the stage for more advanced inference techniques.",,pending
+O006-PSU-006-S0013,O006-PSU-006,Lesson05,objectives,eba92953899468e3f79c084370cc455f39c256e77b5277ff480e3384ff9ecc27,Objectives,,pending
+O006-PSU-006-S0014,O006-PSU-006,Lesson05,objectives,25aef8be8be2a587942663b20614423b057589f18636ba6d72bd7bf691a84629,"Upon completion of this lesson, you should be able to:",,pending
+O006-PSU-006-S0015,O006-PSU-006,Lesson05,objectives,5a681afcbde7412042ad0c7224bec94b254a52c8ad0b328b572e325c641d3ea3,"Numerically estimate MLEs for a range of single parameter models and multiple parameter models using optim in R in situations where data values are given, and",,pending
+O006-PSU-006-S0016,O006-PSU-006,Lesson05,objectives,4203340cd67859382884987e7da8099a909cb40ee0706357b3038dc20bd1ec9e,"Use R to numerically simulate random variables from standard distributions, and also find pdfs, CDFs, and quantiles of standard distributions, including the normal, exponential, Poisson, geometric, and binomial distributions.",,pending
+O006-PSU-006-S0017,O006-PSU-006,Lesson05,introduction-to-r,3cdbbcd65530f0daa850902535d6ee80e888bf84aa7f2593ecfe3021fa4d56c8, Introduction to R,,pending
+O006-PSU-006-S0018,O006-PSU-006,Lesson05,basic-operations-in-r,eb38c6d06fc5632b7c72aa185b17541a0c36447e82552ab742656eff4089dc1f, Basic Operations in R,,pending
+O006-PSU-006-S0019,O006-PSU-006,Lesson05,basic-operations-in-r,766ae9087a5e96a9a7866738dedebd2f8079a5b0ebaf756a913a0a69614ce2ad,R can be used as a scientific calculator. The following shows a small subset of the calculator like functions that can be done in R.,,pending
+O006-PSU-006-S0020,O006-PSU-006,Lesson05,basic-operations-in-r,5ab07ebfa3ba843552517ae06cbf89c4ef0b1c613f3eb2d75a061ba0a23c1a8f,"Note that in R, and statistics and probability in general, the “log” function is, by default, the natural logarithm (base ",,pending
+O006-PSU-006-S0021,O006-PSU-006,Lesson05,basic-operations-in-r,495c09adb4962814d13f9072c7bdeda245973f43f8081d68b6f778e17806ee4d,"). In mathematics, this is typically denoted by ",,pending
+O006-PSU-006-S0022,O006-PSU-006,Lesson05,basic-operations-in-r,5f5dadce86d06c279b4dc5299f3b74ce60142f8ce52e25713cc8fd92f10cf352,", but in statistics, this is almost always denoted simply by ",,pending
+O006-PSU-006-S0023,O006-PSU-006,Lesson05,basic-operations-in-r,e0487ad68329f6252f689aebc3ae3d3ba9fc7776f23acf7d0b50473e0390835c,One can see this from the following code:,,pending
+O006-PSU-006-S0024,O006-PSU-006,Lesson05,defining-and-storing-scalars-and-vectors,ae9d97b0763b59608d0ba9f091bd518baec9855782361e502310e44663e43981, Defining and storing scalars and vectors,,pending
+O006-PSU-006-S0025,O006-PSU-006,Lesson05,defining-and-storing-scalars-and-vectors,f1b3e268bf1bd6eccf841c4d70044023df04d7e58b7093757a095ce76cb13262,"In general, you want to type your R code in a text file with the “.r” or “.R” extension, and then send lines or blocks of code to the R console. This lets you change code easily, save your work, and copy/paste it for use in other scenarios.",,pending
+O006-PSU-006-S0026,O006-PSU-006,Lesson05,defining-and-storing-scalars-and-vectors,fb046cf5882fb275d1dc3bb3b27e3dd432898a60b5006c3919332fecafad81dd,You will often want to store numbers as variables. You can then use those variables for calculations. Here’s a very simple example of multiplying two numbers together:,,pending
+O006-PSU-006-S0027,O006-PSU-006,Lesson05,defining-and-storing-scalars-and-vectors,5cd41871cf0c096bb36f0108ab4a10f8cb16c9667a56f4225ef47aabdf61002c,"We often want to work with multiple numbers, stored in a “vector” of numbers. R handles vectors (and matrices!) naturally. We can create a vector by using the ",,pending
+O006-PSU-006-S0028,O006-PSU-006,Lesson05,defining-and-storing-scalars-and-vectors,fa4cbd8e8e77577c2d8e4898eecd02bac4311e49eed811b61e15ac598121d06a, command in R (which stands for “concatenate”),,pending
+O006-PSU-006-S0029,O006-PSU-006,Lesson05,defining-and-storing-scalars-and-vectors,bc19c482f94b22712ab0f72ba245ee898fe6e79a000da566518a30d51602d1e6,"This has created two vectors, u and v, each with four elements. If we apply standard math operations to vectors, R’s default behavior is to apply those operations to each element. The code below illustrates this.",,pending
+O006-PSU-006-S0030,O006-PSU-006,Lesson05,subsetting-vectors,8c57c983b90ce7267c131cf6438f2119f807ae2e7e89c519ac869691a277671b, Subsetting vectors,,pending
+O006-PSU-006-S0031,O006-PSU-006,Lesson05,subsetting-vectors,11930892a4d1fa69d2a9defc626496d0d73a8077992a71390bab6f98f50dcf0d,"We often have data or parameters stored in a vector, but only want to access one element, or a few elements, of that vector. Indexing in R is done using the square brackets: [ ]",,pending
+O006-PSU-006-S0032,O006-PSU-006,Lesson05,logical-statements-and-the-which-command,c580740be0591886f6b69a744c778d812a8fdf5f353d3516e11706d68df54d94, Logical statements and the ,,pending
+O006-PSU-006-S0033,O006-PSU-006,Lesson05,logical-statements-and-the-which-command,5626488f6c83859cf2990cd0e87498a219c0a2a5adf30d45086a4a3c9efffb83, command,,pending
+O006-PSU-006-S0034,O006-PSU-006,Lesson05,logical-statements-and-the-which-command,002e931939685c16ca1807c01e636da7dc2121992489442391421bebd5754cdf,One important way we will subset vectors is through logical arguments. R allows us to check whether a logical statement is TRUE or FALSE. This is most often done using the ,,pending
+O006-PSU-006-S0035,O006-PSU-006,Lesson05,logical-statements-and-the-which-command,a9e8673452d7bd36b792d18e852f52a535e9733589d8acc37f8f88e9d4b1b171,", or ",,pending
+O006-PSU-006-S0036,O006-PSU-006,Lesson05,logical-statements-and-the-which-command,48f1ad5347d2e69dac0bafc16a2af1e45557ac131a8e2f18740436c794284534, commands. Note that testing whether or not two numbers are equal must be done with double equal signs ,,pending
+O006-PSU-006-S0037,O006-PSU-006,Lesson05,logical-statements-and-the-which-command,18d35eaa0a07c216695b42a766fe64361768488cc8d1dacf6edd844b89fd7cfb,", not a single equal sign ",,pending
+O006-PSU-006-S0038,O006-PSU-006,Lesson05,logical-statements-and-the-which-command,ae0ba7a25d1711b636850d6305300238608fdca10d9ab71346bda60d010eebf6,", which is used to assign a value to a variable.",,pending
+O006-PSU-006-S0039,O006-PSU-006,Lesson05,logical-statements-and-the-which-command,89a4ed6dbfb75fbfaeca643d612f6e955a161e8d6ede2d355516e52450f30d5c,"Here are some examples of checking logical statements in R. Note that logical statements can be applied elementwise to vectors, just like mathematical operations can.",,pending
+O006-PSU-006-S0040,O006-PSU-006,Lesson05,logical-statements-and-the-which-command,2316e7f0087b048345f9f298318e1fabc02f2db9f3cc28b8650dfcffd512f3c9,A common task in statistical analyses (See Section 4 for examples!) is to find which elements of a vector satisfy certain criteria. The commands to do so in R revolve around the ,,pending
+O006-PSU-006-S0041,O006-PSU-006,Lesson05,logical-statements-and-the-which-command,c781aa482e8ba50b81d0454f46848c137051e4696c7ed42f158a9f20cb33bb6c, command. Here are some examples:,,pending
+O006-PSU-006-S0042,O006-PSU-006,Lesson05,creating-data-frames,bdbb648b37f5b024433f16057700f3a8172bd1355b7364f07462e54e95615153, Creating Data Frames,,pending
+O006-PSU-006-S0043,O006-PSU-006,Lesson05,creating-data-frames,53d3d94b02f9dca511d58bff5516670dbb54557ba465d91afb0c4dd7bb27209d,The R ,,pending
+O006-PSU-006-S0044,O006-PSU-006,Lesson05,creating-data-frames,c84d783c7230eb172c0c6d73c3b0dd382f8b466b6b2b37b26b85ebb150e7b10a," is a very important data structure. It allows you to store a “matrix” of data that is a mix of numeric columns (like response variables) and character columns (like human-readable names of treatments). Consider a farming example in which 10 plots were assigned either Fertilizer X (plots 1-5) or Fertilizer Y (plots 6-10). We will create a data frame that has this information in it, together with the response (corn yield at each plot).",,pending
+O006-PSU-006-S0045,O006-PSU-006,Lesson05,creating-data-frames,67ec5c37d8abbab3ec53bbf325f4dcf46c69bac2206b3fe46fe926b6a6f652a1,"First, we will create a numeric vector of the plot number. The code below shows you two equivalent ways to do this.",,pending
+O006-PSU-006-S0046,O006-PSU-006,Lesson05,creating-data-frames,6e8d98c308524344f3c01385205a12ac44a4566a203ad3743c4e66e6ab35fd74,"Next, we will create the character vector of treatments. Note that you need to put letters in parentheses, or R will assume that the letter is a name of a vector or scalar already defined in R. See Section 3.2 for examples.",,pending
+O006-PSU-006-S0047,O006-PSU-006,Lesson05,creating-data-frames,f1d21e7552f659e680384a0a94637d8428e55e5311d118ca408e4cabb509eb94,Now we will create a vector of responses,,pending
+O006-PSU-006-S0048,O006-PSU-006,Lesson05,creating-data-frames,97a850f955be46649d7de88962c99d9641f315d9f3657d15ae04346136abca9b,"And finally, we will put these all together into a ",,pending
+O006-PSU-006-S0049,O006-PSU-006,Lesson05,summary-statistics-in-r,56ffe1cbd93bd7f6891732974ca82723feb7b1269f54fb40e3b7e6c5a5997a46, Summary statistics in R,,pending
+O006-PSU-006-S0050,O006-PSU-006,Lesson05,summary-statistics-in-r,103c5169871d49be7a2ebf9e6fe4720244cbf1fdbccdbfaca489898ea069504c,The ,,pending
+O006-PSU-006-S0051,O006-PSU-006,Lesson05,summary-statistics-in-r,65bfe07c05c057247a824f0a76924bc1f6d0472963a3dd469ceaa8e118af1374," function can tell you a lot about a data frame, as it computes the minimum, maximum, mean, and median of each numeric column.",,pending
+O006-PSU-006-S0052,O006-PSU-006,Lesson05,summary-statistics-in-r,d531b206c00d0d952fc54efa035c99f1e8db8a19fd682fda7dc3f639a6294a29,"You can also use R to get means, variances, and standard deviations of whole vectors:",,pending
+O006-PSU-006-S0053,O006-PSU-006,Lesson05,summary-statistics-in-r,8f0f559f06971540be303e2976799a040c3a3abd6b962045cae90d61f4b7d5d9,or even subsets of vectors,,pending
+O006-PSU-006-S0054,O006-PSU-006,Lesson05,simple-plotting-in-r,43f50e110f17a6f3961d0444d6788de29380b6f627d3d89afd09ea3effe1e8e0, Simple Plotting in R,,pending
+O006-PSU-006-S0055,O006-PSU-006,Lesson05,simple-plotting-in-r,5aa8a659088b50d0394536ccd0419555e091597d551b3f74fb34bffb4187ddad,R can be used for plotting data as well. Having the data into a ,,pending
+O006-PSU-006-S0056,O006-PSU-006,Lesson05,simple-plotting-in-r,5798db4e117e1f6445aed532e7558b85a9938ff2b773ccdf3bcf3ca938d0cdbd," object can make plotting and data analysis easier. For example, we can plot a boxplot of the corn yield data using the ",,pending
+O006-PSU-006-S0057,O006-PSU-006,Lesson05,simple-plotting-in-r,5626488f6c83859cf2990cd0e87498a219c0a2a5adf30d45086a4a3c9efffb83, command,,pending
+O006-PSU-006-S0058,O006-PSU-006,Lesson05,simple-plotting-in-r,60989c5285d320bab1bc4745fc27de50b20cb12db6430d98f61e8b5fc839d494,"
+Fig 5.1
+",,pending
+O006-PSU-006-S0059,O006-PSU-006,Lesson05,simple-plotting-in-r,9fc4efbd9a1ced196aa28e7157ea3528ff27fbff4480295646b1fc2e67c74576,Histograms can be plotted using the ,,pending
+O006-PSU-006-S0060,O006-PSU-006,Lesson05,simple-plotting-in-r,86afd4fa503fefddaacb2edc97185cf31a4123414c5c89204372ed0f8f884592, command.,,pending
+O006-PSU-006-S0061,O006-PSU-006,Lesson05,simple-plotting-in-r,ad1bbf33678270f30c7f1ffd70b6eddb00b671fef8689bc26e588b83b3693e5c,"
+Fig 5.2
+",,pending
+O006-PSU-006-S0062,O006-PSU-006,Lesson05,simple-plotting-in-r,5bb61300eec70a5bcd64d03640fb80ce5598d4fb790bfd3e6de62b62de307b35,And numeric data can be plotted as a scatterplot using the ,,pending
+O006-PSU-006-S0063,O006-PSU-006,Lesson05,simple-plotting-in-r,86afd4fa503fefddaacb2edc97185cf31a4123414c5c89204372ed0f8f884592, command.,,pending
+O006-PSU-006-S0064,O006-PSU-006,Lesson05,simple-plotting-in-r,d923dc72d93ec59c0a604b51e682206e34e80b2737a9562c3445c8d7ec7ecc6d,"
+Fig 5.3
+",,pending
+O006-PSU-006-S0065,O006-PSU-006,Lesson05,simple-plotting-in-r,5c7e1b154d8a8a9e220b5f29eb03b9de6ede29bac7f2f538e7487fd793751623,"You will often need to include R graphics in your homework solutions. Once you have made the plot, you can right click on the figure in Rstudio, and then copy the image which can then be pasted into a Word document (or similar document).",,pending
+O006-PSU-006-S0066,O006-PSU-006,Lesson05,statistical-distributions-in-r,e1ef6df7cc3d037a1875f483204eafc83aff05ce43acfb1f94c75989471f8956, Statistical Distributions in R,,pending
+O006-PSU-006-S0067,O006-PSU-006,Lesson05,help-files-in-r,548d68bded7cbddfc3596f9ff1e9d85ef8992e76153d539cc35fe0688351714c,Help files in R,,pending
+O006-PSU-006-S0068,O006-PSU-006,Lesson05,help-files-in-r,bf67005fd27ec199892a813bd3b26665fcc5bf3ae24f32d394c9c95905893da0,"There are many functions in R - too many for any person to memorize all of the functions needed for most analyses. R also has a very robust system of documentation, as long as you know what to look for. In particular, if you know the name of a function that you need help with, R can help you very easily (see below). But if you don’t know what the name is for a function that does something you want to do, then your best bet is to search for that function on the internet using your favorite search engine.",,pending
+O006-PSU-006-S0069,O006-PSU-006,Lesson05,help-files-in-r,4f547fd4407288d03fb57b5c4852f57daea784b8c49004edad2d2cd8d5557383,"For example, if you want to know how to find the CDF of a Normal distribution in R, searching something like “CDF normal distribution in R” will quickly give you many results that point you to the ",,pending
+O006-PSU-006-S0070,O006-PSU-006,Lesson05,help-files-in-r,d6cd9e2afb4d7663ef36cf6ea8691ef3335991fef962add0467aeb941a97bc28, function.,,pending
+O006-PSU-006-S0071,O006-PSU-006,Lesson05,help-files-in-r,489019a76b1b023b8d0c824c0f036440638282305b96121b7eaf25dd0af10892,"Once you know the function you may want to use, you can access R’s help files for that function by typing ",,pending
+O006-PSU-006-S0072,O006-PSU-006,Lesson05,help-files-in-r,e1a3e78cb5c8858631bf81f94369a0be3fd2aebb9e852e66368b381c8feef91f, or ,,pending
+O006-PSU-006-S0073,O006-PSU-006,Lesson05,help-files-in-r,73542ea8008d5343fb440072a5e63986358eacf284373fc0002da7b1dd7750c3," into the R console. Note, that you should replace ",,pending
+O006-PSU-006-S0074,O006-PSU-006,Lesson05,help-files-in-r,4b14f92f9dca99c627f790d4884b444865734045178811bc27a5cc5e4749638b, with whatever function you are looking for help with.,,pending
+O006-PSU-006-S0075,O006-PSU-006,Lesson05,r-functions-for-statistical-distributions,d36783456ebf498ffbcfde9e55edd3c2dc520f075de3788e7e4fd8bd813a2278,R Functions for Statistical Distributions,,pending
+O006-PSU-006-S0076,O006-PSU-006,Lesson05,r-functions-for-statistical-distributions,1b455a9e65c2cbbd802490de39f17107739ead3b8495637eab6e56d061b3d765,R is a great statistical software for working with distributions. Three main tasks related to random variables that R is very good at are:,,pending
+O006-PSU-006-S0077,O006-PSU-006,Lesson05,r-functions-for-statistical-distributions,751cc13231152793f334ce2b8b1692c53279cd25b82fb1beb952f3f99baa51e7,Drawing random variables from a given distribution,,pending
+O006-PSU-006-S0078,O006-PSU-006,Lesson05,r-functions-for-statistical-distributions,3780a9f667daa4695259b480d736a4c647ab3e66756b04ba80d12199544ec8c2,Calculating the pdf or pmf or likelihood of a distribution at a given observed value,,pending
+O006-PSU-006-S0079,O006-PSU-006,Lesson05,r-functions-for-statistical-distributions,bbc6467b5e9eaa58a052382c6ea74d6e7af81f6eb050ffe63de156154b95f8f5,Calculating quantiles and cdfs of distributions.,,pending
+O006-PSU-006-S0080,O006-PSU-006,Lesson05,r-functions-for-statistical-distributions,9c78331a7189cb41985a1d31fb4e84895119bde15119db6bafb983fa78eb90a0,"In R, there is a pattern to functions related to a distribution. If a given distributions short name in R is “XXX”, then “rXXX” will draw a random variable from that distribution, “dXXX” will calculate the probability density function of that distribution, and “pXXX” will calculate the cumulative distribution function, and “qXXX” will calculate the quantile.",,pending
+O006-PSU-006-S0081,O006-PSU-006,Lesson05,examples-from-the-gaussian-normal-distribution,05644b8eb9cbdd8a30d0446b846fc32c731c38481aed517f463412b0995c2105,Examples from the Gaussian (Normal) Distribution,,pending
+O006-PSU-006-S0082,O006-PSU-006,Lesson05,examples-from-the-gaussian-normal-distribution,4316afc11c98d598e86d03604dd287e2f99193b96e5c4297318d5530cb07ab1e,"For example, let’s assume that each ",,pending
+O006-PSU-006-S0083,O006-PSU-006,Lesson05,examples-from-the-gaussian-normal-distribution,01a47b9da2c79fcab0d5305815f2567c99006f283d58a65be195f7e4b580a901," is an independent, normally-distributed random variable with mean 3 and variance 4. R’s normally-distributed variable “short name” is “norm”, so to draw one random variable we could use the following code:",,pending
+O006-PSU-006-S0084,O006-PSU-006,Lesson05,examples-from-the-gaussian-normal-distribution,81bde2af7e56293a5c1b50e9c814c4fe495cbca95d8a9eeb0d0616a597ecf547,Note that R uses the standard deviation ,,pending
+O006-PSU-006-S0085,O006-PSU-006,Lesson05,examples-from-the-gaussian-normal-distribution,68078c0ea6daa627a8e18f3b338e5d6784c6deee4cbe4936fea96b98ccb1700c," instead of the variance. If I wanted to draw 10 iid random variables, I could modify the ",,pending
+O006-PSU-006-S0086,O006-PSU-006,Lesson05,examples-from-the-gaussian-normal-distribution,9e7769a73a1beafae95bbe78d8f91ecca15a3a192e86af102e3fd388c0b250cc, argument to rnorm:,,pending
+O006-PSU-006-S0087,O006-PSU-006,Lesson05,examples-from-the-gaussian-normal-distribution,21f5a8356288fc65872de79fa2bd80219c045ff6e90b8ae80d516e16f77bda7f,I can also assign these values to a variable for future use”,,pending
+O006-PSU-006-S0088,O006-PSU-006,Lesson05,examples-from-the-gaussian-normal-distribution,0be68b46b61af799d29005f02f843b261f992767cd054db3d0da0a35d6cb7c55,Now if I wanted to evaluate the pdf of a ,,pending
+O006-PSU-006-S0089,O006-PSU-006,Lesson05,examples-from-the-gaussian-normal-distribution,4cd291cb3ae86757ae7a733972f46f2681e846a70ac48fddc973f3e1cafbd42b, at a particular value ,,pending
+O006-PSU-006-S0090,O006-PSU-006,Lesson05,examples-from-the-gaussian-normal-distribution,32ad133f54a47bb76a17e627dd8900930816f24abf24f90dacedddb07348342a,", I can use the ",,pending
+O006-PSU-006-S0091,O006-PSU-006,Lesson05,examples-from-the-gaussian-normal-distribution,88dea6b94effafd88913c54543e73978fd88662a1df363222c5859c28b8d5fd6, function:,,pending
+O006-PSU-006-S0092,O006-PSU-006,Lesson05,examples-from-the-gaussian-normal-distribution,d21a2e483aee2df6024fde28068e7e67d7e7728e5a8494cc1148c0a694dd336f,The code above returns ,,pending
+O006-PSU-006-S0093,O006-PSU-006,Lesson05,examples-from-the-gaussian-normal-distribution,73dec8e38a52c9d91da17f6e6041115d1811554ccc11ca474888d67204cbe88d,. To get the CDF we use the ,,pending
+O006-PSU-006-S0094,O006-PSU-006,Lesson05,examples-from-the-gaussian-normal-distribution,2f2cddd0a3e206b1bedaccaed964d11c3ef8ac613b5d09c8cc4fe95320f6c823," function, with ",,pending
+O006-PSU-006-S0095,O006-PSU-006,Lesson05,examples-from-the-gaussian-normal-distribution,d2eb05fb9af4b79170ebc7cfed6c94cee118d2cec73841d87b7023dec66f48ee, being obtained by:,,pending
+O006-PSU-006-S0096,O006-PSU-006,Lesson05,examples-from-the-gaussian-normal-distribution,30cd2f1d9a2f969bba415a5a9a07e1049d58b31de12361a98455f0c75560b9f4,"These functions all work on vectors as well. For example, if I wanted to evaluate the likelihood function of the ten simulated data points in “x”, I could do so by",,pending
+O006-PSU-006-S0097,O006-PSU-006,Lesson05,examples-from-the-gaussian-normal-distribution,c0abfbf398299bcc46bce43ad35bc37bfc56b753d0aed7f9475a2a5a62638294,The total likelihood of all the simulated random variables ,,pending
+O006-PSU-006-S0098,O006-PSU-006,Lesson05,examples-from-the-gaussian-normal-distribution,2c684997bb460f14f12b3b6b2c214d874572c2e599e21f58aeb3fb940720ddb6, would then be,,pending
+O006-PSU-006-S0099,O006-PSU-006,Lesson05,examples-from-the-gaussian-normal-distribution,7a29ac6667810c80e62b9b66028edccb990c1e32466490516c2f2b11524d5c1d,and the log-likelihood ,,pending
+O006-PSU-006-S0100,O006-PSU-006,Lesson05,examples-from-the-gaussian-normal-distribution,29484249e97f2bc8e8d49e77f2f629a8448d44f4adc36323a141b5dfd531b413, could be calculated by,,pending
+O006-PSU-006-S0101,O006-PSU-006,Lesson05,examples-from-the-gaussian-normal-distribution,26ac09b32bc3999f42220114c8fbe31cbc5c8346d39bac5479d4b94cff886013,R has an argument to ,,pending
+O006-PSU-006-S0102,O006-PSU-006,Lesson05,examples-from-the-gaussian-normal-distribution,33cd2a849c75eaefeae678e6c569e0077538d4f5796b30ce82012940690c7c23, to obtain the log-density instead of the density:,,pending
+O006-PSU-006-S0103,O006-PSU-006,Lesson05,examples-from-the-gaussian-normal-distribution,9afef8d1f95eabceb2a2aa4b0a1d59e3e17abc3ea60429e440dce56af1930a5e,which is also often helpful.,,pending
+O006-PSU-006-S0104,O006-PSU-006,Lesson05,examples-from-the-exponential-distribution,c5ab10f76d2042801da438659537aa1822d6f491264cfc698824f816867e986e,Examples from the Exponential distribution,,pending
+O006-PSU-006-S0105,O006-PSU-006,Lesson05,examples-from-the-exponential-distribution,ff17b5232c08366c2d14d3f3b085e76c6362c1ad20d70d44dba67dcf03ada2d2,"As a second example, consider the Exponential distribution ",,pending
+O006-PSU-006-S0106,O006-PSU-006,Lesson05,examples-from-the-exponential-distribution,475d18f98f98bd4c28b192de3536cd098f1b1a60b806febcb0d06412e93cf448,". We can draw 30 random variables, each from ",,pending
+O006-PSU-006-S0107,O006-PSU-006,Lesson05,examples-from-the-exponential-distribution,db5d012d94dd3788acdc293690669262fba7190c66cd966c9ed3069b957979f4, (so ,,pending
+O006-PSU-006-S0108,O006-PSU-006,Lesson05,examples-from-the-exponential-distribution,c9ae1a146e4c94c93bfb993db943d0f436d0942049bcccb8c1013887c8b65b38,) with the following,,pending
+O006-PSU-006-S0109,O006-PSU-006,Lesson05,examples-from-the-exponential-distribution,6b840b96499180f8a515c6a777fb38ed2a7777c00f27f21c4d76ecbd8c1b0185,Let’s get the mean and median of the simulated data,,pending
+O006-PSU-006-S0110,O006-PSU-006,Lesson05,examples-from-the-exponential-distribution,335a8cfa06978368e73ba3d17e00bfa43e03e0c886a9ecc5fb11b4ab0613bdac,which are similar to the theoretical mean (of ,,pending
+O006-PSU-006-S0111,O006-PSU-006,Lesson05,examples-from-the-exponential-distribution,64c49f16a2bd1edc171a419db9d47615bd87f36a8e1b1bb698dba60faa619bec,) and median (of ,,pending
+O006-PSU-006-S0112,O006-PSU-006,Lesson05,examples-from-the-exponential-distribution,e813e5b9017499a3441efea70f424d1cc6bf037b356384c8a7a2f870cd5f6ed7,Now let’s simulate 1000 random variables,,pending
+O006-PSU-006-S0113,O006-PSU-006,Lesson05,examples-from-the-exponential-distribution,6982f0bc872991890947902457a791917eb5185f27cd8554c37d81b2e36285c2,"This is too many to print, so let’s plot them with a histogram",,pending
+O006-PSU-006-S0114,O006-PSU-006,Lesson05,examples-from-the-exponential-distribution,1dd38b9fef2e2ef6450b9c40d0afe0c7c7967861fa1f60baf108cf3a2824356a,"These look exponentially-distributed, as they should. We will now calculate multiple theoretical quantities of exponential random variables with rate 2, and compare them with estimates of these quantities from the simulated random variables ",,pending
+O006-PSU-006-S0115,O006-PSU-006,Lesson05,examples-from-the-exponential-distribution,c9c83308cb327dcdae0f704270609641db8676a10a14c0325ece85b744345a0a,First let’s look at values of the CDF - the cumulative distribution function. The probability of ,,pending
+O006-PSU-006-S0116,O006-PSU-006,Lesson05,examples-from-the-exponential-distribution,81afb10b461acd8f2b7eee698fb0c314c454f7acb574a34baded7f6912fc7a0f, is ,,pending
+O006-PSU-006-S0117,O006-PSU-006,Lesson05,examples-from-the-exponential-distribution,a7c6d5ab04cd565810578171a97ddc56f683ade86df25eb56bd599d75c4d8c33,", which in R is found using the ",,pending
+O006-PSU-006-S0118,O006-PSU-006,Lesson05,examples-from-the-exponential-distribution,5626488f6c83859cf2990cd0e87498a219c0a2a5adf30d45086a4a3c9efffb83, command,,pending
+O006-PSU-006-S0119,O006-PSU-006,Lesson05,examples-from-the-exponential-distribution,86d7684d62c3897d785d0544ede208690db50ff2737ef8d59594e66f3d617b43,and the sample-based approximation to this is given by the number of sampled ,,pending
+O006-PSU-006-S0120,O006-PSU-006,Lesson05,examples-from-the-exponential-distribution,0ed95f47f02bf916d2824363e9a7345135c28291f26e8a564ea21b858bcd7e52," that are less than or equal to 1, divided by the total number of samples (n=1000 here).",,pending
+O006-PSU-006-S0121,O006-PSU-006,Lesson05,examples-from-the-exponential-distribution,851ec543ae104d403c1b017a6b8bd897722863de2df29bd89ff4bd40cf97ae2a,which is a close approximation to the true value shown above.,,pending
+O006-PSU-006-S0122,O006-PSU-006,Lesson05,examples-from-the-exponential-distribution,acf7a6b3d22d339a290a1353940d1cba30d4c2489ff94079ab6619a214a94509,If we wanted the joint likelihood of ,,pending
+O006-PSU-006-S0123,O006-PSU-006,Lesson05,examples-from-the-exponential-distribution,bc949f4761662ec8cd185648c9fdec0c9b0660efdcc66fdff7ced1873b09e809,", we could get it by ",,pending
+O006-PSU-006-S0124,O006-PSU-006,Lesson05,examples-from-the-exponential-distribution,ea9da76cda84c3552144ad65d071dc001b938017a0b6edcf910cee8abbc74346,", which we can obtain directly in R",,pending
+O006-PSU-006-S0125,O006-PSU-006,Lesson05,examples-from-the-exponential-distribution,1ca0af5a7acf486723aa29f61e105124d4959a0b12c7b930fd6d09fa1c8f1bb7,or can be obtained using the ,,pending
+O006-PSU-006-S0126,O006-PSU-006,Lesson05,examples-from-the-exponential-distribution,5626488f6c83859cf2990cd0e87498a219c0a2a5adf30d45086a4a3c9efffb83, command,,pending
+O006-PSU-006-S0127,O006-PSU-006,Lesson05,numeric-maximum-likelihood-estimation,f97534ad2f19a22fa4c54b6d802f666d6dea14273d6604930f7fa29d2f9fb0a4, Numeric Maximum Likelihood Estimation,,pending
+O006-PSU-006-S0128,O006-PSU-006,Lesson05,numeric-maximum-likelihood-estimation,4b2d1de37dbb5e2ca4ea19458b734078c032e18c0bf5f0a6fd8290c720a3509b,Now back to MLEs!,,pending
+O006-PSU-006-S0129,O006-PSU-006,Lesson05,numeric-maximum-likelihood-estimation,5dd64af347f207c4b35d8e867c0c7ad57e966868fb02bdd9e9008fbdb09813fb,"In the previous section, we showed an example where the maximum likelihood estimator could not be solved analytically and we require numerical optimization to solve the equation. In this section, we present two methods to find the maximum likelihood estimate numerically. The first method is to find it, using R, by a grid search. The other uses the ",,pending
+O006-PSU-006-S0130,O006-PSU-006,Lesson05,numeric-maximum-likelihood-estimation,85c39022b43fe47891bbe2ed2f7191bb8b66d8466730cd1a4823145d98336dc0, function in R.,,pending
+O006-PSU-006-S0131,O006-PSU-006,Lesson05,mle-through-grid-search,c609319c79a3cb9cbdf723f2d2b9885f457fdf97bc8e61e72f9204ee37e40f76, MLE Through Grid Search,,pending
+O006-PSU-006-S0132,O006-PSU-006,Lesson05,mle-through-grid-search,4c24186518e00cc2a61ce40b2ff355733611d8c5c61b1de8374353ee95e6441e,"One way to find the MLE is through a grid search. The idea is to use software, such as R, to make the calculations for you. We know the underlying distribution and thus can find the likelihood function. Then, given a set of data and possible values of the unknown parameter, ",,pending
+O006-PSU-006-S0133,O006-PSU-006,Lesson05,mle-through-grid-search,5ab2616bf64699ed44c53f12e1e5fe6067aa6dc1fc0bc84462b25f2c9b69965d,", we can find the value of ",,pending
+O006-PSU-006-S0134,O006-PSU-006,Lesson05,mle-through-grid-search,ae85bc3ccff9f334ad538666aad93f62834e0c8496c9e6406f9afcddfd4302ae, that maximizes the likelihood.,,pending
+O006-PSU-006-S0135,O006-PSU-006,Lesson05,mle-through-grid-search,f3f10000716b2ea091c05e64998f90e4325fe1a2ca0dca2ef1e776e4ecd3cfc4,"To illustrate this, let’s assume that we have the following data points. Suppose the data come from an exponential distribution with unknown mean ",,pending
+O006-PSU-006-S0136,O006-PSU-006,Lesson05,mle-through-grid-search,12387ab99ab0b37a673416545fdd85117e75f762aff0ba86260b89321032c391,"
+Fig 5.4
+",,pending
+O006-PSU-006-S0137,O006-PSU-006,Lesson05,mle-through-grid-search,54192b8fb13525925364368f9f8c0321994e61c7945cbaf1e1f3cbfd9ec724dc,If we don’t know the parameter ,,pending
+O006-PSU-006-S0138,O006-PSU-006,Lesson05,mle-through-grid-search,6b5c4842b18575ae1b011bb70f2c6eed5cb179b04ae0e44995794f7838e05f52,", we could try to estimate it with maximum likelihood estimation, where the estimate is the value that maximizes the likelihood function ",,pending
+O006-PSU-006-S0139,O006-PSU-006,Lesson05,mle-through-grid-search,57c5ab74784baedcc0ccd30f62d3f19820cdd06cbb15244c1d2ab9c388c8f020, We could try just picking a few values of ,,pending
+O006-PSU-006-S0140,O006-PSU-006,Lesson05,mle-through-grid-search,f1785fdfd0de36919d372c0e7f268287f01b5b93ae2cf0d3aa2457f83f1ff651, to try:,,pending
+O006-PSU-006-S0141,O006-PSU-006,Lesson05,mle-through-grid-search,4ff80510585145e8a3ec2ee7700776a434dfdc936c877920e5ec5a2cebc3b816,"Out of this small collection of values, ",,pending
+O006-PSU-006-S0142,O006-PSU-006,Lesson05,mle-through-grid-search,51113ae041a8e9b6d04564f413aef76977c1f0262d15efb1068cc1309e0d8fde, gives the highest likelihood.,,pending
+O006-PSU-006-S0143,O006-PSU-006,Lesson05,mle-through-grid-search,5bd4b661130a7b8479ce46001650ac183352a462744a45f91755973b9903ba6e,"To try a sequence of values, we’ll build a “for” loop. Our goal is to end up with a vector of likelihood values for a sequence of ",,pending
+O006-PSU-006-S0144,O006-PSU-006,Lesson05,mle-through-grid-search,f5963653a54c15749bbd406589d435c8e90a2b8f4239c807cf8ab6787457db3b, values. We start by specifying the ,,pending
+O006-PSU-006-S0145,O006-PSU-006,Lesson05,mle-through-grid-search,b5b9f34f66de0071164449fdefc73515ed0c2737c5ba134b1acfd822a3f0a916, values we want to consider.,,pending
+O006-PSU-006-S0146,O006-PSU-006,Lesson05,mle-through-grid-search,34810331a17e8b4bef34dadcd836d7c1a8b354192eddcc244b357406c91c3d7f,We then create an empty vector of likelihood values (we’ll fill in the values later),,pending
+O006-PSU-006-S0147,O006-PSU-006,Lesson05,mle-through-grid-search,eeddc99d2943a981db8d67217e3055bf08f463392e2a419c90f3f8b3f10e643f,"We can now make a for loop that (1) evaluates the likelihood function for each value of theta, and (2) saves that value in the correct spot in ",,pending
+O006-PSU-006-S0148,O006-PSU-006,Lesson05,mle-through-grid-search,b8c260f9cfdd35aa631e85e9e5a47ef23f8d9389fa415d29600b1e9f182a676c,"
+Fig 5.5
+",,pending
+O006-PSU-006-S0149,O006-PSU-006,Lesson05,mle-through-grid-search,4868c65321879be0feeaf317372a156925a686445bf7f44a87a512f644b48d8d,"This approach is often called a “grid search”, as we are searching over a wide range of values of our parameters. From the plot, we can see that the MLE is somewhere near 10. We can find the best value of ",,pending
+O006-PSU-006-S0150,O006-PSU-006,Lesson05,mle-through-grid-search,478a386abeaad8518e95f961b347e3620182aec70d6dbb1fc749d00a0dccfc33, out of those we tried by using the ,,pending
+O006-PSU-006-S0151,O006-PSU-006,Lesson05,mle-through-grid-search,7f3b508022ecce6e894d66e4b23059fa773876cfb6e352313c35b8a48ea6deea," command, which finds the index of the maximum value in a vector.",,pending
+O006-PSU-006-S0152,O006-PSU-006,Lesson05,mle-through-grid-search,2e4931abf99d9b80278ad0a4e20f761f094abb006cf6e45cc1935c6d9aab2ced,"Thus, given the values that we tried, our MLE is ",,pending
+O006-PSU-006-S0153,O006-PSU-006,Lesson05,mle-through-grid-search,d1333039646e7d2722967bf2f39fbc51a597d3a078eaf2dde10283dc250479c5,This is a crude method of finding the MLE. The next method we present is more comprehensive.,,pending
+O006-PSU-006-S0154,O006-PSU-006,Lesson05,numerical-mle-the-idea,ba1b9fcc20b15b1a616fc571792c30ef152c3ad96162c8c0e06b42cf87e3e8cb, Numerical MLE: The Idea,,pending
+O006-PSU-006-S0155,O006-PSU-006,Lesson05,numerical-mle-the-idea,60a02a67d1a9b227cc309ada2780d7b669ac7ee0c8ea0c76957680814971f00e,"A better alternative to the grid search above is to use one of many iterative methods for maximizing a function. One such method is called the Newton-Raphson algorithm, also sometimes called Newton’s Method. ",,pending
+O006-PSU-006-S0156,O006-PSU-006,Lesson05,numerical-mle-the-idea,820178cf95538bc1c0f97a26eb6bd9c391e9a60b201dec944fc0bce85e4c32cc,---I moved this from under the single header!--,,pending
+O006-PSU-006-S0157,O006-PSU-006,Lesson05,numerical-mle-the-idea,eebfbe1132db2926751b3e53caa8854e06f0384fd9ed75791ee028aa836e6f3f,Numerical optimization is a huge field! There are many optimization algorithms to choose from. Most of the optimization algorithms share some characteristic steps. They involve:,,pending
+O006-PSU-006-S0158,O006-PSU-006,Lesson05,numerical-mle-the-idea,f49180a2a0e2a5aed2ebb0574deca75ed6b6b715e37b8f76c0a8527bfe577a6c,"Requiring a starting value for the parameters, ",,pending
+O006-PSU-006-S0159,O006-PSU-006,Lesson05,numerical-mle-the-idea,9deaf6eb476815ea78df1ba58d7dd28e64e24afb9ff4170930ad5dde11474371,", denoted ",,pending
+O006-PSU-006-S0160,O006-PSU-006,Lesson05,numerical-mle-the-idea,a5416611e142b868b788311a7f546c28047b02c6c101604f528702e737060651,"Interactively finding a sequence of new parameters, ",,pending
+O006-PSU-006-S0161,O006-PSU-006,Lesson05,numerical-mle-the-idea,3f614dafe80420709f51609bcddf22e8661a156de99df091da6cb895030378f6,Stops when ,,pending
+O006-PSU-006-S0162,O006-PSU-006,Lesson05,numerical-mle-the-idea,d29f2cac2b5a1fdd512b4e1c4008640afd701f16dd899c2d3a9670bbc2944392, is “close” to a local maximum.,,pending
+O006-PSU-006-S0163,O006-PSU-006,Lesson05,numerical-mle-the-idea,e7136bc8120ddf7afec5d33b443d8e6fb88f5398d93b47dc67b1c81683c1b1b5,"
+Fig 5.6
+",,pending
+O006-PSU-006-S0164,O006-PSU-006,Lesson05,numerical-mle-the-idea,15800b673042a1d1b77b40fd20f2d33e3d92edfebb63950f9753736359cd08aa,The algorithm we will consider in this class is the ,,pending
+O006-PSU-006-S0165,O006-PSU-006,Lesson05,numerical-mle-the-idea,25ec1abe483bab685457ec070ae79299cc4be2556dca706535aca33cc0a53185,Newton-Raphson Algorithm,,pending
+O006-PSU-006-S0166,O006-PSU-006,Lesson05,numerical-mle-the-idea,e1a3e78cb5c8858631bf81f94369a0be3fd2aebb9e852e66368b381c8feef91f, or ,,pending
+O006-PSU-006-S0167,O006-PSU-006,Lesson05,numerical-mle-the-idea,4aff2cbc5490f5ccd232f94a05d0c740c8354cc8064ec74b4a2495ec4894ffbd,Newton’s Method,,pending
+O006-PSU-006-S0168,O006-PSU-006,Lesson05,newtons-method-approach-idea,c49d9989dc5e647079f9acdbb8fe079ddf6bdc14a76e2cd8570450c3af9424d6, Newton’s Method Approach Idea,,pending
+O006-PSU-006-S0169,O006-PSU-006,Lesson05,newtons-method-approach-idea,ad2cd020c8c181da16f972c7d4e2a1a67385567c46cf84b4aef3bb53fb9e56f2,"
+Video 5.1: Newton’s Method [no sound]
+",,pending
+O006-PSU-006-S0170,O006-PSU-006,Lesson05,newtons-method-approach-idea,46342e0ac3b8d8cd13ad5605835e1650d3dccb68397570a64ece2268f60b88e4,"The idea is maximizing the log likelihood function, ",,pending
+O006-PSU-006-S0171,O006-PSU-006,Lesson05,newtons-method-approach-idea,de4240576e873572e023909f210c992418781f4c2fd3580554585f8fd15ea188,. We do this by finding ,,pending
+O006-PSU-006-S0172,O006-PSU-006,Lesson05,newtons-method-approach-idea,737ea4c54a04f5d3c49fd7048624ddf373c15d7f1184b0f33031cc734a15caf5,". The derivative, ",,pending
+O006-PSU-006-S0173,O006-PSU-006,Lesson05,newtons-method-approach-idea,cd39645f9189abbb52b3e12e26979159c6403a72856b2c2358112263155523db, is just a function of ,,pending
+O006-PSU-006-S0174,O006-PSU-006,Lesson05,newtons-method-approach-idea,8b407257308f6223563a1a6cdf717ee993622936f9cd9115f1761c51e307a69d,", so let’s define it as ",,pending
+O006-PSU-006-S0175,O006-PSU-006,Lesson05,newtons-method-approach-idea,7a04602883c2a3d2966cc00dc67cf889ca3883aa7999c8544934c82f8c065351,We need to find the “root” of ,,pending
+O006-PSU-006-S0176,O006-PSU-006,Lesson05,newtons-method-approach-idea,6f35dd56dce982b2aeb2066c1686708e2308b6af2a835b15c028c8807198a108,". In other words, we need to find a ",,pending
+O006-PSU-006-S0177,O006-PSU-006,Lesson05,newtons-method-approach-idea,a29f644443203f3dfe6d6b549452af63374a1b67eba137865a9f6b6ffada2d3a, such that ,,pending
+O006-PSU-006-S0178,O006-PSU-006,Lesson05,newtons-method-approach-idea,d1cd18ea8ade8513ff039cf6980efe9abfb30450ba43b92b441bce76cd3f2e2e,We get closer to the root (,,pending
+O006-PSU-006-S0179,O006-PSU-006,Lesson05,newtons-method-approach-idea,004f5f78d1b6f4e6b542a71f5b290736cfdc662ca54c84b529652158911ea000,) by approximating ,,pending
+O006-PSU-006-S0180,O006-PSU-006,Lesson05,newtons-method-approach-idea,05d74863ac3e24874e20b9ae5858f9ccd077484b09e7daf464b73aa61ae3ebbb, with a tangent like at the current value of ,,pending
+O006-PSU-006-S0181,O006-PSU-006,Lesson05,newtons-method-approach-idea,a80cdea1924a9b176fb9ae89ac22b7aa16830ebeae48ce6b4653cc9a00a774e3,". So we start with a value, ",,pending
+O006-PSU-006-S0182,O006-PSU-006,Lesson05,newtons-method-approach-idea,686be29b2e7ddc774d025b8d6deb2da903657be7995e8a4cae97ff8e6f315a39,. We evaluate ,,pending
+O006-PSU-006-S0183,O006-PSU-006,Lesson05,newtons-method-approach-idea,35d9a8095e38c84575310ee25f95b5cc1bafbc68988e4e2a345a63df09db48ed,. The tangent line at ,,pending
+O006-PSU-006-S0184,O006-PSU-006,Lesson05,newtons-method-approach-idea,a8bdfde11f2443a17f53ad0c9eb033c86a916c4575fe9cbce4c6a0d5af432aed, is,,pending
+O006-PSU-006-S0185,O006-PSU-006,Lesson05,newtons-method-approach-idea,8a485ee31948da620a044663fa8f033b019ac1eaeadb61fe17175977cd897090,Setting ,,pending
+O006-PSU-006-S0186,O006-PSU-006,Lesson05,newtons-method-approach-idea,eb2d60e55b9688a90e9bea314a282474b8302d0018b8c4fe484ec0fe842b8f7b, gives us where this tangent line hits 0.,,pending
+O006-PSU-006-S0187,O006-PSU-006,Lesson05,newtons-method-approach-idea,38e748e9f8525b0b252afb693cd63310499e96b50a5b04fb2b05d9ac4a3581e7,"Now, we solve for ",,pending
+O006-PSU-006-S0188,O006-PSU-006,Lesson05,newtons-method-approach-idea,ea12b2317d821187b92c3b9e5b8c9c6e23648c4ff904f45ea71771f3c9955468, to get:,,pending
+O006-PSU-006-S0189,O006-PSU-006,Lesson05,newtons-method-approach-idea,cd236ea3cd98c824af92f8bfde7ffaa872a501f31e2747945673bb81a1f29af1,The following animation displays how this works to find the root. We start with an initial value of ,,pending
+O006-PSU-006-S0190,O006-PSU-006,Lesson05,newtons-method-approach-idea,6ec91e9ab49edc9746916dcefa7ceeff797f88a58acd8dd388df04a760ad4c3d, (blue dot). We evaluate the log likelihood function at that value. Then we find the tangent line for the initial value. Find where the tangent line crosses the x-axis. That point becomes our “new” value of ,,pending
+O006-PSU-006-S0191,O006-PSU-006,Lesson05,newtons-method-approach-idea,e99d95646a80714ff7959cc1e9167bd16da0abb53d4442993559c11f75203a49,". Then, we repeat the same steps we did for the initial ",,pending
+O006-PSU-006-S0192,O006-PSU-006,Lesson05,newtons-method-approach-idea,d2c1d826f4cc0e9e258630af6c70086e5b08a881588eacd099df48c82d4161b0, value. We keep going until we find the maximum.,,pending
+O006-PSU-006-S0193,O006-PSU-006,Lesson05,newtons-method-approach-idea,0d3413f9b40ac8eb852347b42386ad60457bd9a5a658b016028bee56e78a4dca,"
+Video 5.2: Newton’s Method [no sound]
+",,pending
+O006-PSU-006-S0194,O006-PSU-006,Lesson05,newtons-method-approach-idea,876fe851c7e2d69cced32c41c2b48571e7d07a63584c6afd949f04ba5e0ad191,The steps are:,,pending
+O006-PSU-006-S0195,O006-PSU-006,Lesson05,newtons-method-approach-idea,e2a63d99796648680ee6f9db0f2b9ce48d61f11357ff26a5d3e5d9a7d9be5c7d,"Specify a starting value, ",,pending
+O006-PSU-006-S0196,O006-PSU-006,Lesson05,newtons-method-approach-idea,98502e168ecfa9938373a100aaed266e66514d85abd288d1da77ae688bb087c0,For ,,pending
+O006-PSU-006-S0197,O006-PSU-006,Lesson05,newtons-method-approach-idea,6e406610e4485bff7e6983e41f01816211b3a6fb23746574ff037c01d7e42ca2, find: ,,pending
+O006-PSU-006-S0198,O006-PSU-006,Lesson05,numerical-optimization-in-r,bc05329a294d5a7a58ecba1b85823e7ddd5392b66e8ebfddd0e43f6ce82a623c, Numerical Optimization in R,,pending
+O006-PSU-006-S0199,O006-PSU-006,Lesson05,numerical-optimization-in-r,82f7a77a2c669601c4f2201b83f9901108bb1f760e0136b2cfb3897a47fadb38,"This section is meant to give you some intuition for how numerical optimization works using the R function, ",,pending
+O006-PSU-006-S0200,O006-PSU-006,Lesson05,numerical-optimization-in-r,30afb6507f4785e46d27402f3127ae89b130067efeb35b4559720e33f1f110a3,". In general, we will just USE existing algorithms, so most of your homework will not focus on understanding how algorithms like Newton’s method work. The next subsection (Numerical Optimization) contains the most useful code to use algorithms like Newton’s method to find MLEs. This subsection is meant to help you understand what is happening under the hood of ",,pending
+O006-PSU-006-S0201,O006-PSU-006,Lesson05,numerical-optimization-in-r,2386baab4691fd711b5fb1e2ca6df7c9646d3dc53a9c660789b9c623b9206b5a, and other numerical optimization routines.,,pending
+O006-PSU-006-S0202,O006-PSU-006,Lesson05,numerical-optimization-in-r,8a3f7c69b299ed0ff141aeeccb5eba1d30f38d02fbc7627af0983cc559a6d684,If our goal is to maximize the likelihood function ,,pending
+O006-PSU-006-S0203,O006-PSU-006,Lesson05,numerical-optimization-in-r,664188cf95103084dd7c143884a46e851cdc298e7032e3909573b048f0511419,", we could similarly maximize the log-likelihood function",,pending
+O006-PSU-006-S0204,O006-PSU-006,Lesson05,numerical-optimization-in-r,08d57c10a6286154c22662830e14c835a72cdfd514ec19deb957aac7b9dc6ea2,This maximum could be found by first identifying any critical points that satisfy ,,pending
+O006-PSU-006-S0205,O006-PSU-006,Lesson05,numerical-optimization-in-r,14c677cebfc6dd12458b7bfcb722ecfcde4f5adf5c9ea71245b0c891ac45deec," Thus, we need to find the values of ",,pending
+O006-PSU-006-S0206,O006-PSU-006,Lesson05,numerical-optimization-in-r,618fc15fd18f753145a0497a216864a03cf76181ec575feca788e3c68b159ce3, which are the roots of ,,pending
+O006-PSU-006-S0207,O006-PSU-006,Lesson05,numerical-optimization-in-r,6a99830f9e1a31267178e2fd92f86feaba19a9a59550a7431e7d3931b4685c43, - the values of ,,pending
+O006-PSU-006-S0208,O006-PSU-006,Lesson05,numerical-optimization-in-r,78a105f689db036f41ea144aa39fa353d31d9e3c5be14bb48136ba1a792e89b6, that make the function ,,pending
+O006-PSU-006-S0209,O006-PSU-006,Lesson05,numerical-optimization-in-r,9007885d89a128de520ee08ad773e06a4750cfaebe22b9dd3d42714b7d1111a1, equal zero.,,pending
+O006-PSU-006-S0210,O006-PSU-006,Lesson05,numerical-optimization-in-r,91ea7c41b1e548f45b6ab3d6f7d7afdf082ecade3f9564d20be398f7dda0b417,"Newton’s method is a root finding algorithm that works by iteratively approximating the function by a line. The details of Newton’s method are covered in the lectures, with the algorithm being as follows. Given a starting value ",,pending
+O006-PSU-006-S0211,O006-PSU-006,Lesson05,numerical-optimization-in-r,ccfb797a4c27fc551cea90d3cab8dbba8afb47290197ddfd30826ab208f3e8c2,", we iteratively update ",,pending
+O006-PSU-006-S0212,O006-PSU-006,Lesson05,numerical-optimization-in-r,44c9c63e20ffed4d60126d52185763a6d9e76c2738705a48197da6eff38f4506, as follows ,,pending
+O006-PSU-006-S0213,O006-PSU-006,Lesson05,numerical-optimization-in-r,ba34089217564450b33a4358a596d79e9d537341cb1e50652b08344288f86660," Let’s write functions to evaluate the first and second derivatives of the log-likelihood function. Note that R can’t directly calculate derivatives of a function, so we do the algebra and then code these into R functions ",,pending
+O006-PSU-006-S0214,O006-PSU-006,Lesson05,numerical-optimization-in-r,91724f6b3672c4ad79e8555edbf0cc52def9d940921b6c2929bc00b404d2ead5,R functions to evaluate these are,,pending
+O006-PSU-006-S0215,O006-PSU-006,Lesson05,numerical-optimization-in-r,3c1b745a1cb9b35a8d508fbaec254517729c7079fc3b873ed9066b6301b7c42d,And Newton’s method can be done by iterating:,,pending
+O006-PSU-006-S0216,O006-PSU-006,Lesson05,numerical-optimization-in-r,e5062a91ff2bc9c9d32e67a8fd6c9c2f2b34b5c7446a2919609e2458549e5dd3,"You can see that successive iterations seem to be converging on a value near 8.866667, which is similar to what we found in our grid search.",,pending
+O006-PSU-006-S0217,O006-PSU-006,Lesson05,numerical-optimization-in-r,534ca6bb6b49cf4e00717c3368ef7003470a4382e119be1699bc3481cce173fe,A visual illustration of Newton’s method is found in the ,,pending
+O006-PSU-006-S0218,O006-PSU-006,Lesson05,numerical-optimization-in-r,465af4dd624c3c70482ae62c33b69cb7ad569d715d2e8a386e658a8ebebef7d8," R package. The following code won’t display online, but if you run it in your R console it will produce a nice illustration of Newton’s method.",,pending
+O006-PSU-006-S0219,O006-PSU-006,Lesson05,numerical-optimization-in-r,f42583e4d429e58d555f250e9e37be48748bdd01ed7e3b824e908fffc75e56c8,"
+Fig 5.7
+",,pending
+O006-PSU-006-S0220,O006-PSU-006,Lesson05,numerical-mle-in-r,b0248df12c7e9c1854b02d7c8570b6e8753587ce1afc7b9929f011105b866e59, Numerical MLE in R,,pending
+O006-PSU-006-S0221,O006-PSU-006,Lesson05,numerical-mle-in-r,a9a98d034819420bfd894d05b7a1014d2339e2247e6053ebf09ceb5ed929d9ba,"The previous section described and implemented two approaches to numerically approximating the maximum likelihood estimate. In this section, we will describe a more robust, general purpose approach to optimization using ",,pending
+O006-PSU-006-S0222,O006-PSU-006,Lesson05,numerical-mle-in-r,980e10dafd790f98acbf0b31d33c1b93d3a3c8ee552a7f83bbfab594ced52f0d, in R.,,pending
+O006-PSU-006-S0223,O006-PSU-006,Lesson05,numerical-mle-in-r,4f4820857ba823de55405e07ff6055a46f0e217be80cf0b8ff3927377410c6a3," in R performs general numeric optimization. We will begin by considering a simple, contained use case for ",,pending
+O006-PSU-006-S0224,O006-PSU-006,Lesson05,numerical-mle-in-r,91eb39fdd7a1d70852a3ac72c07d74dd892d3343ef69a01d0ed9b1f38f270c55,: using ,,pending
+O006-PSU-006-S0225,O006-PSU-006,Lesson05,numerical-mle-in-r,4f47338a21f5a0605846b019868b3ba69e9e24f7dafe0c4ca09aa758af415064, for maximum likelihood estimation. Consider the general case where ,,pending
+O006-PSU-006-S0226,O006-PSU-006,Lesson05,numerical-mle-in-r,3458f758ca399139fd3d8915dddd39ce62d0109a1fb2314e401d2e21bb568103, where ,,pending
+O006-PSU-006-S0227,O006-PSU-006,Lesson05,numerical-mle-in-r,4e4021235dbf4592e29567d8534584351345b5deaf0046cfb75847790a9422a3, is a vector of all parameters in the model. Our goal is to find the MLEs of ,,pending
+O006-PSU-006-S0228,O006-PSU-006,Lesson05,numerical-mle-in-r,db6fcb93550fab3cb5444c4c5afc2bafffcef733c92bd57e1b193d84260b9bb7,". In this situation, ",,pending
+O006-PSU-006-S0229,O006-PSU-006,Lesson05,numerical-mle-in-r,16f8de0927884a7880996524a8fff42028c19086eeb1a51805df659fe2786aee, takes as inputs the following,,pending
+O006-PSU-006-S0230,O006-PSU-006,Lesson05,numerical-mle-in-r,a797afee0a9a8d880e035fe3397547136eda188be406bdf16d41039504326243,A set of initial values for ,,pending
+O006-PSU-006-S0231,O006-PSU-006,Lesson05,numerical-mle-in-r,3889482eeae3b43a570119e42f622f53fd764f7104ac0de9e57e0c8adaba9996,". This is a vector of initial guesses for each parameter in the model. In most cases, you do NOT need to think hard about the initial values, but you DO need to make sure that your initial values are valid. For example, if ",,pending
+O006-PSU-006-S0232,O006-PSU-006,Lesson05,numerical-mle-in-r,88132b95a626051066b0fb562fab90bcc9bd000430884dd0d14fcd069816f671,", then your initial value for ",,pending
+O006-PSU-006-S0233,O006-PSU-006,Lesson05,numerical-mle-in-r,304f07b7c2955ac96e4d338a9832245450fe890653615581ecdec9e25e79195c," must be a positive number, which your initial value for ",,pending
+O006-PSU-006-S0234,O006-PSU-006,Lesson05,numerical-mle-in-r,ffb860e33f99fbce6eed39a822637bda152e805b22e9bded62c4ee98121a06b5, could be any number.,,pending
+O006-PSU-006-S0235,O006-PSU-006,Lesson05,numerical-mle-in-r,34ae89009bcbab0753a9d414c77ea15f470776826cdac46d7cde93bf5b7f3e69,A function to evaluate the negative log-likelihood of the data for a set of parameters. Note that we are working with the NEGATIVE log-likelihood instead of the standard log-likelihood - this is because ,,pending
+O006-PSU-006-S0236,O006-PSU-006,Lesson05,numerical-mle-in-r,07d322daf7d5cb0b7489a9d1baed6bb73702b3bc538182c8ff89a8791a977689," is coded to minimize by default, so the MLE of ",,pending
+O006-PSU-006-S0237,O006-PSU-006,Lesson05,numerical-mle-in-r,3cf60ce4ed05e544e0dd5fc0d1c15ab4037abbb35503debeede29b34bcf82ca9, will maximize the log-likelihood but minimize the negative log-likelihood.,,pending
+O006-PSU-006-S0238,O006-PSU-006,Lesson05,numerical-mle-in-r,055881ac6763cba0a241e2a2641638859b8da04dded94119369252774bd62e71,Important!,,pending
+O006-PSU-006-S0239,O006-PSU-006,Lesson05,numerical-mle-in-r,170ecc0c7c24c375fcb95f11263b86a68d26d4bd681e61d182ac19eea69badcd,"
+This function MUST have as its first input a VECTOR of ALL PARAMETERS. Any other inputs can be in any format.",,pending
+O006-PSU-006-S0240,O006-PSU-006,Lesson05,numerical-mle-in-r,73e57ffec06c3f57c9084cc1ab7fb00c3ff980b29a6e706a4a582a8a51959ed4,"We will first look at two examples that fit this framework, and then we’ll put together a code template that can be used for other problems.",,pending
+O006-PSU-006-S0241,O006-PSU-006,Lesson05,numerical-mle-in-r,860716dcdcd705a4b553fe560430cac563b870b9f3678ddec922c4d701fb561d,Example 5.1,,pending
+O006-PSU-006-S0242,O006-PSU-006,Lesson05,numerical-mle-in-r,81c510da4bd5a05c82df684ee8171406149ffb06bea07d9b0ac0eb7743d03a0a," To illustrate finding numerical MLEs, we first consider data from an exponential distribution. We assume that the following 15 data points come from an exponential distribution with an unknown rate parameter ",,pending
+O006-PSU-006-S0243,O006-PSU-006,Lesson05,numerical-mle-in-r,ef7cc0a67d8a2a729cc48510201e22468e38fd260b8de3f5208553022e722904,", so ",,pending
+O006-PSU-006-S0244,O006-PSU-006,Lesson05,numerical-mle-in-r,00b380f414b54c9071065dfd718b1ae3c5e0c1af70a4fcb3515f67b758b5a7f7,", with data",,pending
+O006-PSU-006-S0245,O006-PSU-006,Lesson05,numerical-mle-in-r,c08e77b6234b326f7eda4596b1abfb371845b16fab10b5719e9545e0cb8f173d,"
+Fig 5.8
+",,pending
+O006-PSU-006-S0246,O006-PSU-006,Lesson05,numerical-mle-in-r,6d7ece9f00e76039fd19331819bbb55b7629bffce37c0212dc2befc83f564431,We first write an R function to evaluate the negative log-likelihood of the data. We’ll use ,,pending
+O006-PSU-006-S0247,O006-PSU-006,Lesson05,numerical-mle-in-r,5db6fd6b4ddaaa4d75d7eb32f4a06418f06c8d202099e5c57015d710afebda33," from R to evaluate the log-likelihood, with the ",,pending
+O006-PSU-006-S0248,O006-PSU-006,Lesson05,numerical-mle-in-r,b81685c1494688ffd0792de1497ed96e6138f9421106435e60232147b6a66137, option,,pending
+O006-PSU-006-S0249,O006-PSU-006,Lesson05,numerical-mle-in-r,7b723d6bc7f0dbbcce80e699c88fe1ad7ebfa63874f05d2a75ec97d2129a200e,We break down this function piece by piece. The code: ,,pending
+O006-PSU-006-S0250,O006-PSU-006,Lesson05,numerical-mle-in-r,c3a724493f748b408dd5f714c2d61ecabf1d287554cbc2520926c1aac6dae677," would evaluate the likelihood (PDF) of each data point in x given a value for theta, and so the code ",,pending
+O006-PSU-006-S0251,O006-PSU-006,Lesson05,numerical-mle-in-r,15e418e9b4611ea60de94d0bafa9086ec6d54680939d301f1bff66839be29bfd, evaluates the log-likelihood of each data point. Summing these up is done using the ,,pending
+O006-PSU-006-S0252,O006-PSU-006,Lesson05,numerical-mle-in-r,f2b9ca2ed54bc45bdd58e8a691b63b72e634d36a4a1154ef347a33f7a5b84b6c," command, and putting a negative sign in front returns the negative log-likelihood of the data.",,pending
+O006-PSU-006-S0253,O006-PSU-006,Lesson05,numerical-mle-in-r,b08a7bfe3a506b9458e7753c9f58b1a4a8ba7a5100a0cce0dac952d64676a242,We can then use ,,pending
+O006-PSU-006-S0254,O006-PSU-006,Lesson05,numerical-mle-in-r,cede8fb4ec505d59e5d056183308a008ed79f9b8426f2a15ad7fc6679d1c6612, to find the MLE of ,,pending
+O006-PSU-006-S0255,O006-PSU-006,Lesson05,numerical-mle-in-r,8df34d0c552b73d0346383407cd9aa2b3daea4e1e5c9d824172f9a84bdd4ab14,". We’ll first show the code, and then break down each piece.",,pending
+O006-PSU-006-S0256,O006-PSU-006,Lesson05,numerical-mle-in-r,0036131adb4ed735516897da88f2fc24a54afb40a1a0b6f1661535d3eccb4166,The syntax of ,,pending
+O006-PSU-006-S0257,O006-PSU-006,Lesson05,numerical-mle-in-r,3ff0c6bf2bc422209d06fcdb247f3ac4071088956815d29135e151c0ed34bf6b," is as follows. The first input needs to be a starting value for all parameters. As we only have one parameter, ",,pending
+O006-PSU-006-S0258,O006-PSU-006,Lesson05,numerical-mle-in-r,44b19ad6362e0415c1a23c944e4e07a481d1fdf62f0a6747de0e4230d1d0f104,", we supply one starting value. This could be any number that is valid for the exponential distribution. Since the parameter ",,pending
+O006-PSU-006-S0259,O006-PSU-006,Lesson05,numerical-mle-in-r,d03e3600cf7506abdfc40beff39244495bf03a74d8e1d28498ef1589a529efce," must be positive, we supply a positive initial value of ",,pending
+O006-PSU-006-S0260,O006-PSU-006,Lesson05,numerical-mle-in-r,24cb66d82a968b59ef5cb8d10df6cec084d7ec4d336d47f1cb9cacec113fb4d3, in the code above.,,pending
+O006-PSU-006-S0261,O006-PSU-006,Lesson05,numerical-mle-in-r,ae8fe7417c504f68d8ea3c831f2684844ff83610a13be61b53ee27c7bfb3a460,The second input is the ,,pending
+O006-PSU-006-S0262,O006-PSU-006,Lesson05,numerical-mle-in-r,60e5228f7bceb114935399de4a220d5f6015d486e0cf561cef37e1314b9b162a, of the negative loglikelihood function we just wrote. As we called this ,,pending
+O006-PSU-006-S0263,O006-PSU-006,Lesson05,numerical-mle-in-r,25dd9f018efc4048dd18c53a421269aff3c10e747a81c6f0bedf620e3faef092,", this is what goes into ",,pending
+O006-PSU-006-S0264,O006-PSU-006,Lesson05,numerical-mle-in-r,d2642d3579797de6f7d9659446ad24ececeba9b63182f5ca9fcc7c6a278fd72a, in the second input slot. The third (and others if needed) inputs to ,,pending
+O006-PSU-006-S0265,O006-PSU-006,Lesson05,numerical-mle-in-r,2d8e535af530f3d14cc01d3f4a31ae8366dfb10986a8cfe3d3719c9bca93d25d, are any extra inputs needed for the negative ,,pending
+O006-PSU-006-S0266,O006-PSU-006,Lesson05,numerical-mle-in-r,1f58399b6a88f065eb385e9f3cc71bd6b4f8d9da9ca8a9c3973632f79d10a708, function. Our ,,pending
+O006-PSU-006-S0267,O006-PSU-006,Lesson05,numerical-mle-in-r,b33c3444cbe59529104f7250885d28d1a9d4a285a0c2e26bc3589158fa38a6bc, function requires two inputs: ,,pending
+O006-PSU-006-S0268,O006-PSU-006,Lesson05,numerical-mle-in-r,e3ee915a8e8c7aa02d2fced443314522b20824abd2535d5959c41dc8ab8a09e4, and ,,pending
+O006-PSU-006-S0269,O006-PSU-006,Lesson05,numerical-mle-in-r,c87bc070a25ba3358542dd6b59621bc5c4bb4e0841fe6e3c8a2dd2c56ce6a853,". The first input, ",,pending
+O006-PSU-006-S0270,O006-PSU-006,Lesson05,numerical-mle-in-r,a7d1efe540bba0dda76ba896e80bbdf4e66847db7547990ec6719b0114881881,", is essentially supplied by our starting value. The second input, ",,pending
+O006-PSU-006-S0271,O006-PSU-006,Lesson05,numerical-mle-in-r,44e14a698582fa75de74e2dbc1695b962087dd8dde92715576a907e325b43caa,", is a vector of the data. To tell ",,pending
+O006-PSU-006-S0272,O006-PSU-006,Lesson05,numerical-mle-in-r,b66edd04e4850859c3d0f3426d30d56f9cb06643c67bb1ea8054a92b50b592de, what values to use for ,,pending
+O006-PSU-006-S0273,O006-PSU-006,Lesson05,numerical-mle-in-r,9bf633c5d3ac5a9585f1788fdad9f1ee28613123fdd9bff0e73fea892f9c7500,", we put as a third input into ",,pending
+O006-PSU-006-S0274,O006-PSU-006,Lesson05,numerical-mle-in-r,36f04a6e318ecf0a6fad9643dcb5c43ed0ad48cfbbfbb94a5eb2495591bd5837, the argument ,,pending
+O006-PSU-006-S0275,O006-PSU-006,Lesson05,numerical-mle-in-r,e760c2566829ff5c576f4991ca077bc5edfa6c52a1f983c51fc548eb32e736ac,. The left hand side ,,pending
+O006-PSU-006-S0276,O006-PSU-006,Lesson05,numerical-mle-in-r,7a6b95cd4e3e9e63490d2ad683067531be7e8b32ef72746b101503a303dcb690, is the name of the input in the nll.exp function. The right hand side is the name of the data values (we called these ,,pending
+O006-PSU-006-S0277,O006-PSU-006,Lesson05,numerical-mle-in-r,775a20ddd28b299cb28a2df454ede65620843bf8468b62e62add5f046749e7bd," as well). In our following example, we’ll try to make this more clear.",,pending
+O006-PSU-006-S0278,O006-PSU-006,Lesson05,numerical-mle-in-r,89ad69caa6383b210185d61600d240537651509ac083d9c29066bb6961849cc7,The output of ,,pending
+O006-PSU-006-S0279,O006-PSU-006,Lesson05,numerical-mle-in-r,27f62cbdd1c32b5cd81cfbe1e9766801682c2a9e6193dc04bf6c6987bdb5392c," has multiple warnings. In general, you can IGNORE MOST WARNINGS FROM ",,pending
+O006-PSU-006-S0280,O006-PSU-006,Lesson05,numerical-mle-in-r,84881d442e1c8575d24e27689ff1fc1ad499181dff7b6987ab4c1beece4bac26,! The warnings we have here are because ,,pending
+O006-PSU-006-S0281,O006-PSU-006,Lesson05,numerical-mle-in-r,d2185aec21930e2cf5ff673da045a298cc4238b9e8f5b3086c17b4661231061d,", as part of its optimization algorithm, tried some values of ",,pending
+O006-PSU-006-S0282,O006-PSU-006,Lesson05,numerical-mle-in-r,d92d609dbba1f883e9094642db951bbb6da433b8e6e38fd2aa063fbc05807a88," that were negative. These produced NA values when trying to evaluate the loglikelihood, but ",,pending
+O006-PSU-006-S0283,O006-PSU-006,Lesson05,numerical-mle-in-r,afd221b2fda06756839d4d293c4cb979748751b113754965fcea536e67ad15b4, is coded in a way to try different values when this happens. We could avoid these warnings by specifying some options in ,,pending
+O006-PSU-006-S0284,O006-PSU-006,Lesson05,numerical-mle-in-r,226544773446e474571a7d0187aae5fc785b498c26bd6ce9c71cab74df2b4154,", but for most simple cases, the result will NOT be different, and so we can almost always IGNORE WARNINGS FROM ",,pending
+O006-PSU-006-S0285,O006-PSU-006,Lesson05,numerical-mle-in-r,d85b76e744dd6b539bbd7bd15afe82e76b6a5814b23a8866d4a4da2c4202d874,s output is as follows,,pending
+O006-PSU-006-S0286,O006-PSU-006,Lesson05,numerical-mle-in-r,1d6f72893e30ebd7f957c504dcb4d8e3fd072dd297416020330c41c410f7592f,There are a few relevant pieces of this output.,,pending
+O006-PSU-006-S0287,O006-PSU-006,Lesson05,numerical-mle-in-r,c8bc6540191e8799e9cd5e5036813caf993c5975d5ee55ad62602f5bd2d08fd6, is the MLE - the value of the parameter(s) that maximize the likelihood (and thus minimize the negative loglikelihood),,pending
+O006-PSU-006-S0288,O006-PSU-006,Lesson05,numerical-mle-in-r,3b44a1cd74da7c970dc7c1099591ec6c8bf693ba7bf2147d582cf9457ab7eda7, is the actual negative loglikelihood when evaluated at the MLE. So if we ran ,,pending
+O006-PSU-006-S0289,O006-PSU-006,Lesson05,numerical-mle-in-r,fe8aea7dc0f5abfb4fb2b7dc7b85311bc27bc2609b74966ce5612262eae9c3cb," we would get 47.73448. In most applications, this can be ignored.",,pending
+O006-PSU-006-S0290,O006-PSU-006,Lesson05,numerical-mle-in-r,46bc770706d8f2434e27dfcb2c0b8f204da475c73ff912ba64608963286d3c72, is the number of iterations of the optimization algorithm run. Here we see that the algorithm ran for 32 iterations before meeting a stopping criteria. This can almost always be ignored.,,pending
+O006-PSU-006-S0291,O006-PSU-006,Lesson05,numerical-mle-in-r,c357befed72ae04ffb052b198fa1f7be30e859a18b42469db5a0b10e6de6ca0b, is given a value of ,,pending
+O006-PSU-006-S0292,O006-PSU-006,Lesson05,numerical-mle-in-r,ab774d443feaa5d550680f6eff3d75f094bfbef3d2d0ad19e8ad0aa76becffe2, if the algorithm converges to its internal criteria. This is the result you want. If ,,pending
+O006-PSU-006-S0293,O006-PSU-006,Lesson05,numerical-mle-in-r,a65fc3a402b75e5661010abb6e2bec1a984dc56c5f65fea1a60c11a196105ff9, has a value of ,,pending
+O006-PSU-006-S0294,O006-PSU-006,Lesson05,numerical-mle-in-r,227a388b635317da890440c6f4b62ac4388f01505796f4bfebe8af75d82c909e,", then the algorithm has NOT converged, and we should NOT trust the value of the MLE.",,pending
+O006-PSU-006-S0295,O006-PSU-006,Lesson05,numerical-mle-in-r,a7fb2fb0720d892e2a49019a8d727448a5a5db5bf08e8c9fd570a62423438194, can most often be ignored.,,pending
+O006-PSU-006-S0296,O006-PSU-006,Lesson05,numerical-mle-in-r,31fc4afe9d129646b43b3c4e975528b79b571acd0c8ec82cad11daff09834760,"Note that if we try different starting values, we may have slightly different results. For example, choosing a starting value of ",,pending
+O006-PSU-006-S0297,O006-PSU-006,Lesson05,numerical-mle-in-r,c997f51a7603ec487b3db45b0693ed44e4881d488ab65ea455233434b0b7a6e9, gives,,pending
+O006-PSU-006-S0298,O006-PSU-006,Lesson05,numerical-mle-in-r,066610ffd704b2288beb1805bc0f5f229e8eb98d091c5d8d734a3cd6e875270b,"which gives a very slightly different MLE (8.6875 vs 8.65625). If the difference is not trivial, one should take the value that gives the SMALLER negative log-likelihood value (shown in out$value).",,pending
+O006-PSU-006-S0299,O006-PSU-006,Lesson05,numerical-mle-in-r,6598b102f9b6f60286e9b93954237b9114fdee55940c6699e6746708ecf97092,"In general, when looking at ",,pending
+O006-PSU-006-S0300,O006-PSU-006,Lesson05,numerical-mle-in-r,9acf56ae107871b7e751bf6370ad48d629a92bd914cbd7040f2541f6979580d5," output, one should do the following:",,pending
+O006-PSU-006-S0301,O006-PSU-006,Lesson05,numerical-mle-in-r,bbc9d77eb28c76ca112591d6ccddbb462a16a6cbf1109cf455897919808ecb09,Check to see that ,,pending
+O006-PSU-006-S0302,O006-PSU-006,Lesson05,numerical-mle-in-r,6af6aa5213d692fe0e7e87d5594c05fb37e16dd8f5cb893bb2896b14879f7f12, equals 0.,,pending
+O006-PSU-006-S0303,O006-PSU-006,Lesson05,numerical-mle-in-r,4ea6dfbcdaee98a7ffb9ae8f12a5c5636a3fbf2001bf54ff25d171e3bc15af90,Then read off the MLEs from ,,pending
+O006-PSU-006-S0304,O006-PSU-006,Lesson05,numerical-mle-in-r,66bdf023d5b9303a6c81fc99f3299ce909beb38013af34a8e99a0360316dc4fe,Example 5.2 (MLE Example: The Normal Distribution),,pending
+O006-PSU-006-S0305,O006-PSU-006,Lesson05,numerical-mle-in-r,f2c942a2c923be11928bb03117c81ccf30a405279bb1630815c288343f972062, We’ll now give a different example using the Normal distribution. This time we will simulate some data from known parameters,,pending
+O006-PSU-006-S0306,O006-PSU-006,Lesson05,numerical-mle-in-r,352a3bf9bf161739cc1cb943ce17588e4e32e2c0dbb88eeb99851478b56080a5,"
+Fig 5.9
+",,pending
+O006-PSU-006-S0307,O006-PSU-006,Lesson05,numerical-mle-in-r,f64792c94ba92f70674ebe4a969440188bd5fae19bf0f9114bf695ad5bd337e5,"This results in 30 values, each satisfying ",,pending
+O006-PSU-006-S0308,O006-PSU-006,Lesson05,numerical-mle-in-r,5d69297191265c2bd50b5cbc9f54a64afbe58274ef50e96a4ec651adcd66a703,". We will now pretend that we do NOT know the true mean and variance, and numerically estimate these. We first write a negative log-likelihood function, with the first input being a vector of all parameters",,pending
+O006-PSU-006-S0309,O006-PSU-006,Lesson05,numerical-mle-in-r,3a5256c8d5bbccb58bcfc0e1d9b256c222c08e74cd01ec32bcc88ade0ab2b6f6,"Note that our first input, called ",,pending
+O006-PSU-006-S0310,O006-PSU-006,Lesson05,numerical-mle-in-r,1e06d53d7ef6aa9a1ceef94f19bf4a4699c36b71e098a1332b99128e6f815ba1,", is a vector with the first element the mean ",,pending
+O006-PSU-006-S0311,O006-PSU-006,Lesson05,numerical-mle-in-r,3a2b41aa278a964d7dbac41457faf09b5257ecbf7366b8c2903906c1d4074eda,", and the second element the variance ",,pending
+O006-PSU-006-S0312,O006-PSU-006,Lesson05,numerical-mle-in-r,765b7a5127ccccc09f420e338d92836aaede40b4737f0cb5cabfa7bd0903802f,". These are the parameters we need to estimate. In our exponential example above, we only had a single parameter, but here where we have two parameters, we need to first “unpack” the parameters from ",,pending
+O006-PSU-006-S0313,O006-PSU-006,Lesson05,numerical-mle-in-r,61d624c64aedd196726ef29654473674e9a7aa27383c527e4f115e3f7b7c550b,Note also that we wanted to find the MLE of ,,pending
+O006-PSU-006-S0314,O006-PSU-006,Lesson05,numerical-mle-in-r,e3ee915a8e8c7aa02d2fced443314522b20824abd2535d5959c41dc8ab8a09e4, and ,,pending
+O006-PSU-006-S0315,O006-PSU-006,Lesson05,numerical-mle-in-r,cfc0aa14cb1a1492895c29f8d4c02892164c432f24be53f8b5bf764dbf3ffdc3,", but R’s ",,pending
+O006-PSU-006-S0316,O006-PSU-006,Lesson05,numerical-mle-in-r,a517406ed4956ec6a610178a3d6f14d81ef1f3b3ca2d2ebb969bbfc52bd2b12a, function takes as an input the mean (,,pending
+O006-PSU-006-S0317,O006-PSU-006,Lesson05,numerical-mle-in-r,c035e43cf5a2589d62bb6e32231d255e27b224139b90f4204d52b52366882637,) and the STANDARD DEVIATION (,,pending
+O006-PSU-006-S0318,O006-PSU-006,Lesson05,numerical-mle-in-r,98762d7fabda7c02e2afca707bb401ce1fe8af2c9096b8f04525713b17eff29b,"), not the variance ",,pending
+O006-PSU-006-S0319,O006-PSU-006,Lesson05,numerical-mle-in-r,9e81dbc4d3b772051167a2edd801de3db7cb705b8792e4868f905c5e3f5eff7f,. So in the ,,pending
+O006-PSU-006-S0320,O006-PSU-006,Lesson05,numerical-mle-in-r,08a580b6cd5c740178a0d9543e99c50b5296eb6f97ba093cd1fd1cfe82ce77d1," statement, we specified the standard deviation ",,pending
+O006-PSU-006-S0321,O006-PSU-006,Lesson05,numerical-mle-in-r,fa21f62f1f1ff9d173e0f44f858bbe1f7cccd0d99afa818892430020802cf28c, as ,,pending
+O006-PSU-006-S0322,O006-PSU-006,Lesson05,numerical-mle-in-r,70ac1e3c26ead96d05fc9d306388245eb1b86c236c6b80e47b041974025ee818,", the square root of the variance.",,pending
+O006-PSU-006-S0323,O006-PSU-006,Lesson05,numerical-mle-in-r,56f5e7646df69db6f9deb3b17d56700ced19897dfec3c35fbfd9ed3b3fb8d60d,We now use ,,pending
+O006-PSU-006-S0324,O006-PSU-006,Lesson05,numerical-mle-in-r,1a14ef470c6fe5a95029f6733b8ed00dff1cb732d697a79dfb523df424fcd285, to find the MLEs. We need a vector of starting values. For ,,pending
+O006-PSU-006-S0325,O006-PSU-006,Lesson05,numerical-mle-in-r,5272ba0dd995d3cc949ef1519630b5a34631e05da48bb8a4833b12e260d9b15c," we can use anything, while for ",,pending
+O006-PSU-006-S0326,O006-PSU-006,Lesson05,numerical-mle-in-r,9b97bea0c35efd57360e980658cd861df763353ca78c914ad6a004a9e24c58f6," we should have a positive number, so we’ll choose a starting value of ",,pending
+O006-PSU-006-S0327,O006-PSU-006,Lesson05,numerical-mle-in-r,72f4f8b9f9c90217b0a5410b72a79e4dae73c8f9455547310471c4303232eda9,Since the ,,pending
+O006-PSU-006-S0328,O006-PSU-006,Lesson05,numerical-mle-in-r,105582d6a629f00499c0f9936fbd8a01e00ffa0588caa9fce67700dbd4550185," is 0, we know that ",,pending
+O006-PSU-006-S0329,O006-PSU-006,Lesson05,numerical-mle-in-r,df35a04ae99671608f8bf97072f36a6cd11ee75833ee883d1825cb2625316ff2," has passed its internal convergence checks, and we can trust the results. The MLEs are in ",,pending
+O006-PSU-006-S0330,O006-PSU-006,Lesson05,numerical-mle-in-r,cc869b44331d4a99064c2462a84a382c5bfcba8ade6a39ce3bd5f38fa64e76b3,", and the order of the two MLEs is the same as the order of ",,pending
+O006-PSU-006-S0331,O006-PSU-006,Lesson05,numerical-mle-in-r,1e7aa59a28859b7a90d359cd5086232066c2aad46a8bbf13359c4d28a740a709, - our vector of parameters. Since ,,pending
+O006-PSU-006-S0332,O006-PSU-006,Lesson05,numerical-mle-in-r,1576bab68c6a6e1b512d887acb0f44935653eb42d90eca33c476108b12c410c4," was first, the MLE for ",,pending
+O006-PSU-006-S0333,O006-PSU-006,Lesson05,numerical-mle-in-r,8bea48aed211d1e30fc678d4e4eb757ef1e697466afcf1433ee354b8493f0070," is the first number, and ",,pending
+O006-PSU-006-S0334,O006-PSU-006,Lesson05,numerical-mle-in-r,00d7fde82f9cf3397479747297657fb0ad49c23445fc13426dbef0961e392ec3,". Similarly, the MLE for ",,pending
+O006-PSU-006-S0335,O006-PSU-006,Lesson05,numerical-mle-in-r,81afb10b461acd8f2b7eee698fb0c314c454f7acb574a34baded7f6912fc7a0f, is ,,pending
+O006-PSU-006-S0336,O006-PSU-006,Lesson05,summary,1ef08bdefdb2fba4d4db153a477421a071a38cbc62cabd95702139270855caf1, Summary,,pending
+O006-PSU-006-S0337,O006-PSU-006,Lesson05,summary,dc651d145010d2c4d5f14674ed6e81e92e8bc0a93d601cfe00c90b42cfc719dc,"This lesson deepened your understanding of maximum likelihood estimation (MLE) by focusing on its numerical application and implementation in R. We explored how to construct and maximize likelihood and log-likelihood functions for single and multiple parameter models, using both analytical and numerical approaches.",,pending
+O006-PSU-006-S0338,O006-PSU-006,Lesson05,summary,7aea155685c149499f00dfd934dfa7d25670330829a34a88a3d0b99bea04e822,"Key techniques included the grid search method and the Newton-Raphson algorithm, with practical implementation through R’s ",,pending
+O006-PSU-006-S0339,O006-PSU-006,Lesson05,summary,eb31e85b767628ba3b2ae49997405ed03bd362b23146e98f68f34a556538ae70," function for finding MLEs. The lesson also introduced essential R programming skills, such as performing basic operations, manipulating vectors and data frames, generating summary statistics, creating visualizations like histograms and boxplots, and working with statistical distributions (e.g., normal and exponential) to simulate data and compute probabilities.",,pending
+O006-PSU-006-S0340,O006-PSU-006,Lesson05,summary,6538d8ea05d0efb7e8c8238928a34c8cdde9b1901ead9aa2ba8cb15976086519,"Through examples, you learned to handle real-world data scenarios, such as estimating parameters for exponential and normal distributions. These skills provide a robust foundation for applying MLE in statistical inference and prepare you for advanced topics like confidence intervals and hypothesis testing.",,pending

@@ -50,6 +50,12 @@ FILES = (
         4029,
         "6b5ede35a63fb92d69e0648755746867efdbaebbf452506ebd878c33568aadf0",
     ),
+    (
+        "input/tex/extensions/boldsymbol.js",
+        "https://cdn.jsdelivr.net/npm/mathjax@3.1.2/es5/input/tex/extensions/boldsymbol.js",
+        4709,
+        "716cf8735d00abfb1627f8adbbf4aeb915ac9b5c55d47aeaf276e73dac6a2aa1",
+    ),
 )
 
 

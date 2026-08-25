@@ -1,0 +1,141 @@
+{
+  "coverage": {
+    "complete_count": 7,
+    "complete_documents": [
+      "index",
+      "Lesson00",
+      "Lesson01",
+      "Lesson02",
+      "Lesson03",
+      "Lesson04",
+      "Lesson05"
+    ],
+    "corpus_document_count": 14,
+    "next_document": "Lesson06",
+    "statement": "landing/index plus complete Lesson00-Lesson05; 7 of 14 documents"
+  },
+  "file_count": 9,
+  "files": [
+    {
+      "bytes": 3603326,
+      "filename": "00_stat415-id-through-lesson05-offline-reader.zip",
+      "sha256": "89a4e458ee9aa30d2293cb95b9f0be3ecef947241ddd6dfca473ac568c6ceecf"
+    },
+    {
+      "bytes": 11782243,
+      "filename": "10_stat415-id-through-lesson05-source-backend.zip",
+      "sha256": "41b2dcc52ec736b1125e91f0d1d2f0a0e7570af191843204c943fe2e418cd189"
+    },
+    {
+      "bytes": 1828,
+      "filename": "20_THROUGH_LESSON05_RELEASE_NOTES.md",
+      "sha256": "a61fe89ead004222df2dd9a7c5774f4ca506b55cd488d3b15934aaeb1ef3c92b"
+    },
+    {
+      "bytes": 1515,
+      "filename": "30_THROUGH_LESSON05_LICENSE.md",
+      "sha256": "cea22cdb06aae5db47989d4daebbe3e36b7eac697e23a6726398744a9812a48d"
+    },
+    {
+      "bytes": 3703,
+      "filename": "40_THROUGH_LESSON05_QA_RECEIPT.json",
+      "sha256": "462b7c15f3d506d5028ba2c2c4737dc2bba701bdb91acb0b967620f23c3b3f68"
+    },
+    {
+      "bytes": 6691,
+      "filename": "41_THROUGH_LESSON05_VISUAL_QA_RECEIPT.json",
+      "sha256": "c595832f3a2efd8b83b3b0fb03051cf271e717a871023cceef0ef83d30a35245"
+    },
+    {
+      "bytes": 851,
+      "filename": "50_THROUGH_LESSON05_RELEASE_MANIFEST.csv",
+      "sha256": "f9105be9a9b5caa5de876a946ee603cf1ab27c435fddd81bc8f84d245180a0a3"
+    },
+    {
+      "bytes": 750,
+      "filename": "SHA256SUMS_THROUGH_LESSON05.txt",
+      "sha256": "2c4c5a325753cd46784c78f81f820b2c084090a768f611db861a84492ebb3667"
+    },
+    {
+      "bytes": 4610,
+      "filename": "60_THROUGH_LESSON05_RELEASE_ROOT_RECEIPT.json",
+      "sha256": "e7291f8cad59137387bebc09c3aabbbdfe80b57d494473afa7a362341ce5e514"
+    }
+  ],
+  "inputs": {
+    "build_receipt": {
+      "bytes": 14136,
+      "sha256": "afe2b51786792ecfc88e556c9a5dd26e1ff45524f45799a64f1f694c77e322a0"
+    },
+    "license": {
+      "bytes": 1515,
+      "sha256": "cea22cdb06aae5db47989d4daebbe3e36b7eac697e23a6726398744a9812a48d"
+    },
+    "qa_receipt": {
+      "bytes": 3703,
+      "sha256": "462b7c15f3d506d5028ba2c2c4737dc2bba701bdb91acb0b967620f23c3b3f68"
+    },
+    "reader_manifest": {
+      "bytes": 5108,
+      "sha256": "fb600bfedb1792d8b1c9ba8d72d3e5ef6bf94e7a9744a387e15b1d5a7b5f8e6f"
+    },
+    "visual_qa_receipt": {
+      "bytes": 6691,
+      "sha256": "c595832f3a2efd8b83b3b0fb03051cf271e717a871023cceef0ef83d30a35245"
+    }
+  },
+  "inventory_semantics": {
+    "release_manifest_excludes": [
+      "50_THROUGH_LESSON05_RELEASE_MANIFEST.csv",
+      "SHA256SUMS_THROUGH_LESSON05.txt",
+      "60_THROUGH_LESSON05_RELEASE_ROOT_RECEIPT.json"
+    ],
+    "root_receipt_excludes": [
+      "60_THROUGH_LESSON05_RELEASE_ROOT_RECEIPT.json"
+    ],
+    "sha256sums_excludes": [
+      "SHA256SUMS_THROUGH_LESSON05.txt",
+      "60_THROUGH_LESSON05_RELEASE_ROOT_RECEIPT.json"
+    ]
+  },
+  "locale": "id-ID",
+  "primary_file": "00_stat415-id-through-lesson05-offline-reader.zip",
+  "reader_zip": {
+    "archive_method": "ZIP_STORED",
+    "filename": "00_stat415-id-through-lesson05-offline-reader.zip",
+    "manifest_bytes": 5108,
+    "manifest_sha256": "fb600bfedb1792d8b1c9ba8d72d3e5ef6bf94e7a9744a387e15b1d5a7b5f8e6f",
+    "package_entries": 51,
+    "reader_bytes": 3588430,
+    "reader_files": 50,
+    "uncompressed_bytes": 3593538
+  },
+  "rights": {
+    "aggregate_uniform_relicense": false,
+    "mathjax_3_1_2": "Apache-2.0",
+    "original_repository_layer": "CC BY-SA 4.0",
+    "penn_state": "CC BY-NC 4.0 except where otherwise noted"
+  },
+  "schema": "o006.stat415.through-lesson05-package.v1",
+  "source_zip": {
+    "allowlist_manifest_sha256": "edaf57aee536a13f3e699f27c15eb4b72c562d3dab99add975bd2ac6f6061aaa",
+    "archive_method": "ZIP_STORED",
+    "entries": 230,
+    "filename": "10_stat415-id-through-lesson05-source-backend.zip",
+    "uncompressed_bytes": 11735329
+  },
+  "status": "ready",
+  "total_bytes": 15405517,
+  "translation_provenance": "OpenAI Codex gpt-5.6-sol, Ultra",
+  "upload_order": [
+    "00_stat415-id-through-lesson05-offline-reader.zip",
+    "10_stat415-id-through-lesson05-source-backend.zip",
+    "20_THROUGH_LESSON05_RELEASE_NOTES.md",
+    "30_THROUGH_LESSON05_LICENSE.md",
+    "40_THROUGH_LESSON05_QA_RECEIPT.json",
+    "41_THROUGH_LESSON05_VISUAL_QA_RECEIPT.json",
+    "50_THROUGH_LESSON05_RELEASE_MANIFEST.csv",
+    "SHA256SUMS_THROUGH_LESSON05.txt",
+    "60_THROUGH_LESSON05_RELEASE_ROOT_RECEIPT.json"
+  ]
+}

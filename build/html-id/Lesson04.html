@@ -1,0 +1,629 @@
+<!doctype html>
+<html lang="id-ID">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>4 Pendugaan Kemungkinan Maksimum (MLE) (Bagian I)</title>
+<meta name="source-url" content="https://online.stat.psu.edu/stat415/Lesson04">
+<meta name="translation-provenance" content="OpenAI Codex gpt-5.6-sol, Ultra">
+<meta name="edition-status" content="partial: 7 of 14 documents complete; landing and Lessons 00–05">
+<link rel="license" href="https://creativecommons.org/licenses/by-nc/4.0/">
+<link rel="stylesheet" href="assets/reader-7of14.css">
+<script defer src="assets/MathJax/tex-svg.js"></script>
+</head>
+<body>
+<a class="skip-link" href="#quarto-document-content">Lewati ke isi utama</a>
+<header class="site-header"><div class="site-header__inner"><div><p class="site-title">STAT 415 — Pengantar Statistika Matematis</p><p class="site-subtitle">Rekonstruksi dan terjemahan Bahasa Indonesia · O006/C140</p></div><nav class="site-nav" aria-label="Navigasi utama"><a href="index.html">Daftar pelajaran</a><a href="Lesson00.html">Pelajaran 00</a><a href="Lesson01.html">Pelajaran 01</a><a href="Lesson02.html">Pelajaran 02</a><a href="Lesson03.html">Pelajaran 03</a><a href="Lesson04.html">Pelajaran 04</a><a href="Lesson05.html">Pelajaran 05</a><a href="licenses/index.html">Lisensi</a></nav></div></header>
+<div class="page-shell"><aside class="edition-note" aria-label="Status edisi"><strong>Edisi Bahasa Indonesia — 7 dari 14 dokumen.</strong> Laman utama serta Pelajaran 00–05 telah diterjemahkan sepenuhnya. Pelajaran 06–12 masih menuju sumber resmi berbahasa Inggris sampai unit berikutnya selesai. <a href="https://online.stat.psu.edu/stat415/Lesson04">Sumber resmi halaman ini</a>. <a href="licenses/index.html">Atribusi, perubahan, dan lisensi</a>.</aside><main class="content" data-component-id="Lesson04" data-document-id="O006-PSU-005" data-source-url="https://online.stat.psu.edu/stat415/Lesson04" id="quarto-document-content">
+<header class="quarto-title-block default" data-o006-id="O006-PSU-005-U0001" id="title-block-header"><nav aria-label="Jejak navigasi" class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" data-o006-id="O006-PSU-005-U0002"><ol class="breadcrumb" data-o006-id="O006-PSU-005-U0003"><li class="breadcrumb-item" data-o006-id="O006-PSU-005-U0004"><a data-o006-id="O006-PSU-005-U0005" href="index.html#lessons">Pelajaran</a></li><li class="breadcrumb-item" data-o006-id="O006-PSU-005-U0006"><a data-o006-id="O006-PSU-005-U0007" href="Lesson04.html"><span class="chapter-number">4</span>  <span class="chapter-title">Pendugaan Kemungkinan Maksimum (MLE) (Bagian I)</span></a></li></ol></nav>
+<div class="quarto-title" data-o006-id="O006-PSU-005-U0008">
+<h1 class="title" data-o006-id="O006-PSU-005-U0009"><span class="chapter-number">4</span>  <span class="chapter-title">Pendugaan Kemungkinan Maksimum (MLE) (Bagian I)</span></h1>
+<div class="quarto-categories" data-o006-id="O006-PSU-005-U0010">
+<div class="quarto-category" data-o006-id="O006-PSU-005-U0011">MLE</div>
+<div class="quarto-category" data-o006-id="O006-PSU-005-U0012">R</div>
+</div>
+</div>
+<div class="quarto-title-meta" data-o006-id="O006-PSU-005-U0013">
+</div>
+</header>
+<section class="level2 unnumbered unlisted" data-o006-id="O006-PSU-005-U0014" id="overview">
+<h2 class="unnumbered unlisted anchored" data-anchor-id="overview" data-o006-id="O006-PSU-005-U0015">Gambaran Umum</h2>
+<p data-o006-id="O006-PSU-005-U0016">Pada pelajaran sebelumnya, kita memperkenalkan cara menentukan penduga dengan Metode Momen. Pada pelajaran ini, kita akan memperkenalkan cara lain untuk menentukan penduga, yaitu dengan memaksimumkan fungsi kemungkinan.</p>
+<section class="level3 unnumbered unlisted objectiveblock" data-o006-id="O006-PSU-005-U0017" id="objectives">
+<h3 class="unnumbered unlisted anchored" data-anchor-id="objectives" data-o006-id="O006-PSU-005-U0018"><i class="bi bi-check2-circle"></i>Tujuan</h3>
+<p data-o006-id="O006-PSU-005-U0019">Setelah menyelesaikan pelajaran ini, Anda diharapkan mampu:</p>
+<ol data-o006-id="O006-PSU-005-U0020" type="1">
+<li data-o006-id="O006-PSU-005-U0021">Menuliskan fungsi kemungkinan dan fungsi log-kemungkinan untuk data dari suatu model peluang tertentu,</li>
+<li data-o006-id="O006-PSU-005-U0022">Menghitung secara analitik nilai dugaan kemungkinan maksimum (MLE) untuk berbagai model berparameter tunggal ketika nilai datanya diberikan,</li>
+<li data-o006-id="O006-PSU-005-U0023">Menghitung secara analitik penduga kemungkinan maksimum untuk berbagai model berparameter tunggal ketika data dipandang sebagai peubah acak yang belum teramati,</li>
+<li data-o006-id="O006-PSU-005-U0024">Menghitung secara analitik nilai dugaan kemungkinan maksimum (MLE) untuk berbagai model berparameter tunggal ketika nilai datanya diberikan (misalnya, x=(1.6,3.1,7.8)),</li>
+<li data-o006-id="O006-PSU-005-U0025">Menghitung secara analitik penduga kemungkinan maksimum untuk model multiparameter ketika data dipandang sebagai peubah acak yang belum teramati, dan</li>
+<li data-o006-id="O006-PSU-005-U0026">Menghitung secara analitik penduga kemungkinan maksimum untuk berbagai model berparameter tunggal ketika data dipandang sebagai peubah acak yang belum teramati dan himpunan dukungannya bergantung pada parameter.</li>
+</ol>
+</section>
+</section>
+<section class="level2" data-number="4.1" data-o006-id="O006-PSU-005-U0027" id="the-basic-idea">
+<h2 class="anchored" data-anchor-id="the-basic-idea" data-number="4.1" data-o006-id="O006-PSU-005-U0028"><span class="header-section-number">4.1</span> Gagasan Dasar</h2>
+<p data-o006-id="O006-PSU-005-U0029">Wajar jika nilai dugaan yang baik bagi parameter tak diketahui <span class="math inline" data-o006-math-id="O006-PSU-005-M0001">\(\theta\)</span> adalah nilai <span class="math inline" data-o006-math-id="O006-PSU-005-M0002">\(\theta\)</span> yang <strong>memaksimumkan</strong> fungsi massa atau kepadatan peluang bersama pada data yang kita amati—yakni fungsi kemungkinannya. Dari sinilah nama ‘kemungkinan maksimum’ berasal.</p>
+<div class="ms-3 theorem definition" data-o006-id="O006-PSU-005-U0030" id="def-likelihoodfunction">
+<p data-o006-id="O006-PSU-005-U0031"><span class="theorem-title"><strong>Definisi 4.1 (Fungsi Kemungkinan)</strong></span> Misalkan <span class="math inline" data-o006-math-id="O006-PSU-005-M0003">\(X_1, X_2, \ldots, X_n\)</span> merupakan sampel acak dari suatu distribusi dengan parameter tak diketahui, <span class="math inline" data-o006-math-id="O006-PSU-005-M0004">\(\theta_1, \theta_2, \ldots, \theta_m\)</span>. Misalkan fungsi kepadatan peluang (atau fungsi massa peluang) dinotasikan dengan <span class="math inline" data-o006-math-id="O006-PSU-005-M0005">\(f(x_i|\theta_1, \theta_2, \ldots, \theta_m)\)</span>. Misalkan <span class="math inline" data-o006-math-id="O006-PSU-005-M0006">\((\theta_1, \theta_2, \ldots, \theta_m)\)</span> dibatasi pada suatu ruang parameter tertentu <span class="math inline" data-o006-math-id="O006-PSU-005-M0007">\(\Omega\)</span>. <strong>fungsi kemungkinan</strong>, <span class="math inline" data-o006-math-id="O006-PSU-005-M0008">\(L(\theta_1, \theta_2, \ldots, \theta_m)\)</span>, adalah fungsi massa atau kepadatan peluang bersama sampel yang dievaluasi pada data teramati dan kemudian dipandang sebagai fungsi dari parameter. Jadi:</p>
+<p data-o006-id="O006-PSU-005-U0032"><span class="math display" data-o006-math-id="O006-PSU-005-M0009">\[\begin{align*}
+    L(\theta_1, \theta_2, \ldots, \theta_m)=\prod_{i=1}^n f(x_i|\theta_1, \theta_2, \ldots, \theta_m)=f(x_1|\theta_1, \theta_2, \ldots, \theta_m)f(x_2|\theta_1, \theta_2, \ldots, \theta_m)\cdots f(x_n|\theta_1, \theta_2, \ldots, \theta_m)
+\end{align*}\]</span></p>
+<div class="callout callout-style-simple callout-caution no-icon" data-o006-id="O006-PSU-005-U0033">
+<div class="callout-body d-flex" data-o006-id="O006-PSU-005-U0034">
+<div class="callout-icon-container" data-o006-id="O006-PSU-005-U0035">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-body-container" data-o006-id="O006-PSU-005-U0036">
+<p data-o006-id="O006-PSU-005-U0037"><strong>Perhatikan!</strong><br/>
+simbol <span class="math inline" data-o006-math-id="O006-PSU-005-M0010">\(\prod\)</span> berarti ‘hasil kali’. Perhatikan pula bahwa fungsi kemungkinan kita pandang sebagai fungsi dari <span class="math inline" data-o006-math-id="O006-PSU-005-M0011">\(\theta_1, \theta_2, \ldots, \theta_m\)</span>. Karena peubah acaknya saling bebas, fungsi massa atau kepadatan peluang bersama sama dengan hasil kali fungsi individualnya.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="theorem example" data-o006-id="O006-PSU-005-U0038" id="exm-likelihoodfn">
+<p data-o006-id="O006-PSU-005-U0039"><span class="theorem-title"><strong>Contoh 4.1</strong></span> Misalkan <span class="math inline" data-o006-math-id="O006-PSU-005-M0012">\(X_i\overset{iid}{\sim} \text{Bin}(10, p)\)</span> untuk <span class="math inline" data-o006-math-id="O006-PSU-005-M0013">\(i=1, 2, 3, 4, 5\)</span>. Dengan kata lain, misalkan <span class="math inline" data-o006-math-id="O006-PSU-005-M0014">\(X_1, X_2, \ldots, X_5\)</span> merupakan sampel yang saling bebas dan berdistribusi identik dari distribusi binomial dengan parameter <span class="math inline" data-o006-math-id="O006-PSU-005-M0015">\(n=10\)</span> dan <span class="math inline" data-o006-math-id="O006-PSU-005-M0016">\(p\)</span>. Tentukan fungsi kemungkinan (yang sering disingkat sebagai kemungkinan).</p>
+<section class="level4 card card-body bg-light ms-3 mb-3 pt-0" data-o006-id="O006-PSU-005-U0040" id="solution">
+<h4 class="anchored" data-anchor-id="solution" data-o006-id="O006-PSU-005-U0041">Penyelesaian</h4>
+<p data-o006-id="O006-PSU-005-U0042">Fungsi kemungkinan adalah hasil kali fungsi massa peluang masing-masing pengamatan. Oleh karena itu, <span class="math display" data-o006-math-id="O006-PSU-005-M0017">\[\begin{align*}
+    L(p)=\prod_{i=1}^n f(x_i|p)=\prod_{i=1}^n {10\choose x_i}p^{x_i}(1-p)^{10-x_i}=\left[\prod_{i=1}^n {10\choose x_i}\right]p^{\sum_{i=1}^n x_i}(1-p)^{10n-\sum_{i=1}^n x_i}
+\end{align*}\]</span></p>
+</section>
+</div>
+<p data-o006-id="O006-PSU-005-U0043">Sekarang, setelah memiliki definisi formal tentang kemungkinan, gagasan dasar pendugaan kemungkinan maksimum adalah memperlakukan fungsi kemungkinan <span class="math inline" data-o006-math-id="O006-PSU-005-M0018">\(L(\theta)\)</span> sebagai fungsi dari <span class="math inline" data-o006-math-id="O006-PSU-005-M0019">\(\theta\)</span> lalu menentukan nilai <span class="math inline" data-o006-math-id="O006-PSU-005-M0020">\(\theta\)</span> yang memaksimumkannya. Untuk sementara, mari kita tinjau kasus dengan satu parameter tak diketahui saja, <span class="math inline" data-o006-math-id="O006-PSU-005-M0021">\(\theta\)</span>. Ingat kembali dari kalkulus bahwa untuk menentukan maksimum dari <span class="math inline" data-o006-math-id="O006-PSU-005-M0022">\(L(\theta)\)</span> (atau <span class="math inline" data-o006-math-id="O006-PSU-005-M0023">\(\text{argmax}(L(\theta))\)</span>), mula-mula kita ambil turunan fungsi tersebut terhadap <span class="math inline" data-o006-math-id="O006-PSU-005-M0024">\(\theta\)</span>. Berikutnya, kita samakan turunannya dengan 0 dan selesaikan terhadap <span class="math inline" data-o006-math-id="O006-PSU-005-M0025">\(\theta\)</span>. Dengan demikian kita memperoleh titik kritis; untuk menentukan apakah titik tersebut merupakan maksimum, kita masih harus menelaah bentuk fungsi—misalnya melalui turunan kedua—serta batas ruang parameter.</p>
+<div class="theorem example" data-o006-id="O006-PSU-005-U0044" id="exm-likelihoodfn2">
+<p data-o006-id="O006-PSU-005-U0045"><span class="theorem-title"><strong>Contoh 4.2</strong></span> Tinjau kembali contoh sebelumnya, dengan <span class="math inline" data-o006-math-id="O006-PSU-005-M0026">\(X_i\overset{iid}{\sim} \text{Bin}(10, p)\)</span> untuk <span class="math inline" data-o006-math-id="O006-PSU-005-M0027">\(i=1, 2, 3, 4, 5\)</span>. Kita telah memperoleh fungsi kemungkinan: <span class="math display" data-o006-math-id="O006-PSU-005-M0028">\[\begin{align*}
+    L(p)=\left[\prod_{i=1}^n {10\choose x_i}\right]p^{\sum_{i=1}^n x_i}(1-p)^{10n-\sum_{i=1}^n x_i}
+\end{align*}\]</span></p>
+<section class="level4 card card-body bg-light ms-3 mb-3 pt-0" data-o006-id="O006-PSU-005-U0046" id="solution-1">
+<h4 class="anchored" data-anchor-id="solution-1" data-o006-id="O006-PSU-005-U0047">Penyelesaian</h4>
+<p data-o006-id="O006-PSU-005-U0048">Langkah pertama adalah menentukan fungsi kemungkinan, yang sudah kita miliki. Berikutnya, kita tentukan turunan pertama fungsi kemungkinan terhadap <span class="math inline" data-o006-math-id="O006-PSU-005-M0029">\(p\)</span>. Sekarang saatnya menggunakan kalkulus.</p>
+<p data-o006-id="O006-PSU-005-U0049"><span class="math display" data-o006-math-id="O006-PSU-005-M0030">\[\begin{align*}
+    \frac{d}{dp}L(p)=\left[\prod_{i=1}^n {10\choose x_i}\right]\left(\sum x_i\right)p^{\sum x_i-1}(1-p)^{10n-\sum x_i}-\left[\prod_{i=1}^n {10\choose x_i}\right]p^{\sum x_i}\left(10n-\sum x_i\right)(1-p)^{10n-\sum x_i-1}
+\end{align*}\]</span></p>
+<p data-o006-id="O006-PSU-005-U0050">Langkah berikutnya adalah menyamakan turunan dengan 0 dan menyelesaikannya terhadap <span class="math inline" data-o006-math-id="O006-PSU-005-M0031">\(p\)</span>. Tunggu—adakah cara yang lebih mudah untuk menyelesaikan masalah ini?</p>
+</section>
+</div>
+<p data-o006-id="O006-PSU-005-U0051">Kita akan menggunakan sebuah ‘trik’ yang sering mempermudah proses diferensiasi. Perhatikan bahwa logaritma natural merupakan fungsi yang naik tegas pada <span class="math inline" data-o006-math-id="O006-PSU-005-M0032">\(x\)</span>.</p>
+<div alt="Natural logarithm graph" class="lightbox quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center" data-o006-id="O006-PSU-005-U0052" id="fig-STAT-415-SEC-1-15">
+<figure class="quarto-float quarto-float-fig figure" data-o006-id="O006-PSU-005-U0053">
+<div aria-describedby="fig-STAT-415-SEC-1-15-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca" data-o006-id="O006-PSU-005-U0054">
+<a class="lightbox" data-gallery="quarto-lightbox-gallery-1" data-o006-id="O006-PSU-005-U0055" href="assets/lesson04/STAT-415-SEC-1-15.svg" title="Fig 4.1: "><img alt="Grafik y = ln(x) yang monoton naik; x₁ &lt; x₂ menghasilkan f(x₁) &lt; f(x₂)." class="img-fluid quarto-figure quarto-figure-center figure-img" data-o006-asset-id="O006-PSU-005-A0001" data-o006-id="O006-PSU-005-U0056" src="assets/lesson04/STAT-415-SEC-1-15.svg" style="width:50.0%"/></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" data-o006-id="O006-PSU-005-U0057" id="fig-STAT-415-SEC-1-15-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Gambar 4.1
+</figcaption>
+</figure>
+</div>
+<p data-o006-id="O006-PSU-005-U0058">Artinya, untuk dua nilai positif dengan <span class="math inline" data-o006-math-id="O006-PSU-005-M0033">\(x_1&lt;x_2\)</span>, logaritma natural mempertahankan urutan; demikian pula, jika suatu fungsi positif memenuhi <span class="math inline" data-o006-math-id="O006-PSU-005-M0034">\(f(x_1)&lt;f(x_2)\)</span> maka logaritma fungsi itu mempertahankan urutan tersebut bagi setiap <span class="math inline" data-o006-math-id="O006-PSU-005-M0035">\(x\)</span>. Karena itu, nilai <span class="math inline" data-o006-math-id="O006-PSU-005-M0036">\(x\)</span> yang memaksimumkan <span class="math inline" data-o006-math-id="O006-PSU-005-M0037">\(f(x)\)</span> juga akan memaksimumkan logaritma natural fungsi tersebut. Sekarang, mari kita terapkan gagasan ini pada contoh sebelumnya.</p>
+<div class="theorem example" data-o006-id="O006-PSU-005-U0059" id="exm-likelihoodfn3">
+<p data-o006-id="O006-PSU-005-U0060"><span class="theorem-title"><strong>Contoh 4.3</strong></span> Sekali lagi, kita memiliki <span class="math inline" data-o006-math-id="O006-PSU-005-M0038">\(X_i\overset{iid}{\sim} \text{Bin}(10, p)\)</span> untuk <span class="math inline" data-o006-math-id="O006-PSU-005-M0039">\(i=1, 2, 3, 4, 5\)</span> dan fungsi kemungkinan:</p>
+<p data-o006-id="O006-PSU-005-U0061"><span class="math display" data-o006-math-id="O006-PSU-005-M0040">\[\begin{align*}
+    L(p)=\left[\prod_{i=1}^n {10\choose x_i}\right]p^{\sum_{i=1}^n x_i}(1-p)^{10n-\sum_{i=1}^n x_i}
+\end{align*}\]</span></p>
+<p data-o006-id="O006-PSU-005-U0062">Tentukan nilai <span class="math inline" data-o006-math-id="O006-PSU-005-M0041">\(p\)</span> yang memaksimumkan fungsi kemungkinan.</p>
+<section class="level4 card card-body bg-light ms-3 mb-3 pt-0" data-o006-id="O006-PSU-005-U0063" id="solution-2">
+<h4 class="anchored" data-anchor-id="solution-2" data-o006-id="O006-PSU-005-U0064">Penyelesaian</h4>
+<p data-o006-id="O006-PSU-005-U0065">Mari kita tinjau logaritma natural dari <span class="math inline" data-o006-math-id="O006-PSU-005-M0042">\(L(p)\)</span>, yang disebut <strong>fungsi log-kemungkinan</strong>.</p>
+<p data-o006-id="O006-PSU-005-U0066"><span class="math display" data-o006-math-id="O006-PSU-005-M0043">\[\begin{align*}
+    \ell(p)=\ln L(p)=\ln \prod_{i=1}^n f(x_i|p)
+\end{align*}\]</span></p>
+<p data-o006-id="O006-PSU-005-U0067">Dengan aturan logaritma, kita memperoleh</p>
+<p data-o006-id="O006-PSU-005-U0068"><span class="math display" data-o006-math-id="O006-PSU-005-M0044">\[\begin{align*}
+    \ell(p)=\ln \prod_{i=1}^n f(x_i|p)=\sum_{i=1}^n \ln f(x_i|p)=\sum_{i=1}^n\left[\ln {10\choose x_i} +x_i\ln p+(10-x_i)\ln (1-p)\right]
+\end{align*}\]</span></p>
+<p data-o006-id="O006-PSU-005-U0069">Sekarang, ambil turunan <span class="math inline" data-o006-math-id="O006-PSU-005-M0045">\(\ell(p)\)</span> terhadap <span class="math inline" data-o006-math-id="O006-PSU-005-M0046">\(p\)</span>.</p>
+<p data-o006-id="O006-PSU-005-U0070"><span class="math display" data-o006-math-id="O006-PSU-005-M0047">\[\begin{align*}    
+    \frac{d}{dp}\ell(p)=\sum_{i=1}^n \left[0+\frac{x_i}{p}-\frac{(10-x_i)}{1-p}\right]=\frac{\sum x_i}{p}-\frac{\sum (10-x_i)}{1-p}
+\end{align*}\]</span></p>
+<p data-o006-id="O006-PSU-005-U0071">Langkah berikutnya adalah menyamakan turunan dengan 0 dan menyelesaikannya terhadap <span class="math inline" data-o006-math-id="O006-PSU-005-M0048">\(p\)</span>.</p>
+<p data-o006-id="O006-PSU-005-U0072"><span class="math display" data-o006-math-id="O006-PSU-005-M0049">\[\begin{align*}
+    &amp; 0=\frac{\sum x_i}{p}-\frac{\sum (10-x_i)}{1-p}, \qquad \Rightarrow \frac{\sum (10-x_i)}{1-p}=\frac{\sum x_i}{p}\\
+    &amp; \Rightarrow p\sum (10-x_i)=(1-p)\sum x_i\\
+    &amp; \Rightarrow 10np-\sum x_ip=\sum x_i -\sum x_ip\\
+    &amp; \Rightarrow 10np=\sum x_i\\
+    &amp; \Rightarrow p=\frac{\sum x_i}{10n}
+\end{align*}\]</span></p>
+<p data-o006-id="O006-PSU-005-U0073">Akhirnya, kita periksa bahwa nilai yang diperoleh merupakan maksimum. Kita ambil turunan kedua terhadap <span class="math inline" data-o006-math-id="O006-PSU-005-M0050">\(p\)</span>.</p>
+<p data-o006-id="O006-PSU-005-U0074"><span class="math display" data-o006-math-id="O006-PSU-005-M0051">\[\begin{align*}
+    \frac{d^2}{dp^2}\ell(p)=-\frac{\sum x_i}{p^2}-\frac{\sum (10-x_i)}{(1-p)^2}
+\end{align*}\]</span></p>
+<p data-o006-id="O006-PSU-005-U0075">Agar <span class="math inline" data-o006-math-id="O006-PSU-005-M0052">\(p=\frac{\sum x_i}{10n}\)</span> merupakan maksimum interior, nilai turunan kedua pada titik tersebut harus kurang dari 0.</p>
+<p data-o006-id="O006-PSU-005-U0076"><span class="math display" data-o006-math-id="O006-PSU-005-M0053">\[\begin{align*}
+    -\frac{\sum x_i}{\left(\frac{\sum x_i}{10n}\right)^2}-\frac{\sum (10-x_i)}{\left(1-\frac{\sum x_i}{10n}\right)^2}
+\end{align*}\]</span></p>
+<p data-o006-id="O006-PSU-005-U0077">Karena setiap <span class="math inline" data-o006-math-id="O006-PSU-005-M0054">\(x_i\)</span> berada di antara 0 dan 10, turunan kedua bernilai negatif selama sampel bukan seluruhnya 0 dan bukan seluruhnya 10, sehingga nilai di atas merupakan maksimum interior. Jika seluruh pengamatan bernilai 0 atau 10, maksimum dicapai masing-masing pada batas parameter 0 atau 1. Jika data masih dipandang sebagai peubah acak, kaidah ini membentuk penduga kemungkinan maksimum (MLE); setelah data diamati, hasilnya adalah nilai dugaan kemungkinan maksimum. Keduanya dilambangkan dengan simbol ‘topi’. Untuk data teramati, nilai dugaannya adalah <span class="math inline" data-o006-math-id="O006-PSU-005-M0055">\(\hat{p}=\frac{\sum x_i}{10n}\)</span>.</p>
+</section>
+</div>
+<div class="callout callout-style-simple callout-caution no-icon" data-o006-id="O006-PSU-005-U0078">
+<div class="callout-body d-flex" data-o006-id="O006-PSU-005-U0079">
+<div class="callout-icon-container" data-o006-id="O006-PSU-005-U0080">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-body-container" data-o006-id="O006-PSU-005-U0081">
+<p data-o006-id="O006-PSU-005-U0082"><strong>Perhatikan!</strong><br/>
+Jika fungsi log-kemungkinan telah dibuktikan cekung tegas, atau unimodal dengan satu titik kritis di interior ruang parameter, <span class="math inline" data-o006-math-id="O006-PSU-005-M0056">\(\ell(\theta)\)</span> memiliki titik kritis tersebut sebagai maksimum global. Tanpa syarat tersebut, titik kritis saja tidak cukup: periksa batas ruang parameter, dukungan yang bergantung pada parameter, atau gunakan uji turunan kedua.</p>
+</div>
+</div>
+</div>
+<p data-o006-id="O006-PSU-005-U0083">Sekarang kita nyatakan definisi formal Penduga Kemungkinan Maksimum (MLE).</p>
+<div class="theorem definition" data-o006-id="O006-PSU-005-U0084" id="def-MaximumLikelihoodEstimator.ms-3">
+<p data-o006-id="O006-PSU-005-U0085"><span class="theorem-title"><strong>Definisi 4.2 (Penduga Kemungkinan Maksimum)</strong></span> Misalkan <span class="math inline" data-o006-math-id="O006-PSU-005-M0057">\(X_1, X_2, \ldots, X_n\)</span> merupakan sampel acak dari suatu distribusi dengan parameter tak diketahui, <span class="math inline" data-o006-math-id="O006-PSU-005-M0058">\(\theta_1, \theta_2, \ldots, \theta_m\)</span>. Misalkan fungsi kepadatan peluang (atau fungsi massa peluang) dinotasikan dengan <span class="math inline" data-o006-math-id="O006-PSU-005-M0059">\(f(x_i|\theta_1, \theta_2, \ldots, \theta_m)\)</span>. Misalkan <span class="math inline" data-o006-math-id="O006-PSU-005-M0060">\((\theta_1, \theta_2, \ldots, \theta_m)\)</span> dibatasi pada suatu ruang parameter tertentu <span class="math inline" data-o006-math-id="O006-PSU-005-M0061">\(\Omega\)</span>. Fungsi kemungkinan adalah fungsi massa atau kepadatan peluang bersama sampel yang dievaluasi pada data teramati dan dipandang sebagai fungsi parameter. Jadi: <span class="math display" data-o006-math-id="O006-PSU-005-M0062">\[\begin{align*}
+    L(\theta_1, \theta_2, \ldots, \theta_m)=\prod_{i=1}^n f(x_i|\theta_1, \theta_2, \ldots, \theta_m)
+\end{align*}\]</span> Jika <span class="math inline" data-o006-math-id="O006-PSU-005-M0063">\(\left[u_1(X_1, X_2, \ldots, X_n), u_2(X_1, X_2, \ldots, X_n), \ldots, u_m(X_1, X_2, \ldots, X_n)\right]\)</span> merupakan <span class="math inline" data-o006-math-id="O006-PSU-005-M0064">\(m\)</span>-tuple yang memaksimumkan fungsi kemungkinan, maka: <span class="math display" data-o006-math-id="O006-PSU-005-M0065">\[\begin{align*}
+    \hat{\theta}_i=u_i(X_1, X_2, \ldots, X_n), \qquad i=1, 2, \ldots, m
+\end{align*}\]</span> adalah <strong>penduga kemungkinan maksimum</strong> bagi <span class="math inline" data-o006-math-id="O006-PSU-005-M0066">\(\theta_i\)</span>. Nilai statistik tersebut yang bersesuaian setelah sampel diamati, yaitu, <span class="math display" data-o006-math-id="O006-PSU-005-M0067">\[\begin{align*}
+    \left[u_1(x_1, x_2, \ldots, x_n), u_2(x_1, x_2, \ldots, x_n), \ldots, u_m(x_1, x_2, \ldots, x_n)\right]
+\end{align*}\]</span> disebut <strong>nilai dugaan kemungkinan maksimum</strong> bagi <span class="math inline" data-o006-math-id="O006-PSU-005-M0068">\(\theta_i\)</span>, untuk <span class="math inline" data-o006-math-id="O006-PSU-005-M0069">\(i=1, 2, \ldots, m\)</span>.</p>
+</div>
+</section>
+<section class="level2" data-number="4.2" data-o006-id="O006-PSU-005-U0086" id="one-parameter-case">
+<h2 class="anchored" data-anchor-id="one-parameter-case" data-number="4.2" data-o006-id="O006-PSU-005-U0087"><span class="header-section-number">4.2</span> Kasus Satu Parameter</h2>
+<p data-o006-id="O006-PSU-005-U0088">Pada bagian ini, kita merangkum langkah-langkah untuk menentukan penduga kemungkinan maksimum pada kasus satu parameter.</p>
+<section class="level4" data-o006-id="O006-PSU-005-U0089" id="steps-to-find-the-mle-0ne-parameter-case">
+<h4 class="anchored" data-anchor-id="steps-to-find-the-mle-0ne-parameter-case" data-o006-id="O006-PSU-005-U0090">Langkah-Langkah Menentukan MLE (Kasus Satu Parameter)</h4>
+<ol data-o006-id="O006-PSU-005-U0091" type="1">
+<li data-o006-id="O006-PSU-005-U0092">Diberikan sampel acak <span class="math inline" data-o006-math-id="O006-PSU-005-M0070">\(X_1, X_2, \ldots, X_n\)</span> dari suatu distribusi dengan parameter tak diketahui, <span class="math inline" data-o006-math-id="O006-PSU-005-M0071">\(\theta\)</span>, tentukan fungsi kemungkinan: <span class="math display" data-o006-math-id="O006-PSU-005-M0072">\[\begin{align*}
+         L(\theta)=\prod_{i=1}^n f(x_i|\theta)
+     \end{align*}\]</span></li>
+<li data-o006-id="O006-PSU-005-U0093">Tentukan fungsi log-kemungkinan: <span class="math display" data-o006-math-id="O006-PSU-005-M0073">\[\begin{align*}
+         \ell(\theta)=\ln L(\theta)=\ln \prod_{i=1}^n f(x_i|\theta)=\sum_{i=1}^n \ln f(x_i|\theta)
+     \end{align*}\]</span></li>
+<li data-o006-id="O006-PSU-005-U0094">Ambil turunan pertama fungsi log-kemungkinan: <span class="math display" data-o006-math-id="O006-PSU-005-M0074">\[\begin{align*}
+         \ell^\prime(\theta)=\frac{d}{d\theta}\ell(\theta)
+     \end{align*}\]</span></li>
+<li data-o006-id="O006-PSU-005-U0095">Samakan <span class="math inline" data-o006-math-id="O006-PSU-005-M0075">\(\ell^\prime(\theta)=0\)</span> dan selesaikan terhadap <span class="math inline" data-o006-math-id="O006-PSU-005-M0076">\(\theta\)</span>. Langkah ini menghasilkan sebuah titik kritis; titik tersebut baru menjadi kandidat MLE dan masih harus diperiksa terhadap bentuk fungsi serta batas ruang parameter.</li>
+<li data-o006-id="O006-PSU-005-U0096">Nilai kritis yang telah diverifikasi sebagai maksimum merupakan MLE bagi <span class="math inline" data-o006-math-id="O006-PSU-005-M0077">\(\theta\)</span>, yang dinotasikan dengan <span class="math inline" data-o006-math-id="O006-PSU-005-M0078">\(\hat{\theta}\)</span>.</li>
+</ol>
+<p data-o006-id="O006-PSU-005-U0097">Setelah definisi formal dan langkah-langkahnya jelas, mari kita kerjakan beberapa contoh.</p>
+<div class="theorem example" data-o006-id="O006-PSU-005-U0098" id="exm-mleonparam1">
+<p data-o006-id="O006-PSU-005-U0099"><span class="theorem-title"><strong>Contoh 4.4</strong></span> Misalkan <span class="math inline" data-o006-math-id="O006-PSU-005-M0079">\(X_1, X_2, \ldots, X_n\)</span> merupakan sampel acak dari distribusi Geometrik dengan parameter tak diketahui <span class="math inline" data-o006-math-id="O006-PSU-005-M0080">\(p\)</span>. Carilah penduga kemungkinan maksimum (MLE).</p>
+<section class="level4 card card-body bg-light ms-3 mb-3 pt-0" data-o006-id="O006-PSU-005-U0100" id="solution-3">
+<h4 class="anchored" data-anchor-id="solution-3" data-o006-id="O006-PSU-005-U0101">Penyelesaian</h4>
+<p data-o006-id="O006-PSU-005-U0102">Fungsi massa peluang (PMF) peubah acak Geometrik adalah <span class="math inline" data-o006-math-id="O006-PSU-005-M0081">\(f(x)=(1-p)^{x-1}p\)</span> untuk <span class="math inline" data-o006-math-id="O006-PSU-005-M0082">\(x=1, 2, 3, \ldots\)</span>. Ikuti langkah-langkah di atas untuk mencari MLE.</p>
+<ol data-o006-id="O006-PSU-005-U0103" type="1">
+<li data-o006-id="O006-PSU-005-U0104"><p data-o006-id="O006-PSU-005-U0105">Fungsi kemungkinannya adalah: <span class="math display" data-o006-math-id="O006-PSU-005-M0083">\[\begin{align*}
+         L(p)=\prod_{i=1}^n (1-p)^{x_i-1}p=(1-p)^{\sum_{i=1}^n (x_i-1)}p^n
+     \end{align*}\]</span></p></li>
+<li data-o006-id="O006-PSU-005-U0106"><p data-o006-id="O006-PSU-005-U0107">Carilah fungsi log-kemungkinannya: <span class="math display" data-o006-math-id="O006-PSU-005-M0084">\[\begin{align*}
+         \ell(p)=\sum (x_i-1)\ln (1-p)+n\ln p
+     \end{align*}\]</span></p></li>
+<li data-o006-id="O006-PSU-005-U0108"><p data-o006-id="O006-PSU-005-U0109">Ambil turunan pertama dari <span class="math inline" data-o006-math-id="O006-PSU-005-M0085">\(\ell(p)\)</span> terhadap <span class="math inline" data-o006-math-id="O006-PSU-005-M0086">\(p\)</span>. <span class="math display" data-o006-math-id="O006-PSU-005-M0087">\[\begin{align*}
+         \frac{d}{dp}\ell(p)=-\frac{\sum (x_i-1)}{1-p}+\frac{n}{p}
+     \end{align*}\]</span></p></li>
+<li data-o006-id="O006-PSU-005-U0110"><p data-o006-id="O006-PSU-005-U0111">Samakan turunan tersebut dengan 0 dan selesaikan terhadap <span class="math inline" data-o006-math-id="O006-PSU-005-M0088">\(p\)</span>.</p>
+<p data-o006-id="O006-PSU-005-U0112"><span class="math display" data-o006-math-id="O006-PSU-005-M0089">\[\begin{align} &amp; 0=-\frac{\sum (x_i-1)}{1-p}+\frac{n}{p}, \qquad \Rightarrow 0=\frac{-p\sum   (x_i-1)+n(1-p)}{p(1-p)}=\frac{-p\sum x_i+np+n-np}{p(1-p)}\\ &amp; \Rightarrow 0=-p\sum x_i+n, \qquad \Rightarrow -n=-p\sum x_i\\ &amp; \Rightarrow p=\frac{n}{\sum x_i}\end{align}\]</span></p></li>
+<li data-o006-id="O006-PSU-005-U0113"><p data-o006-id="O006-PSU-005-U0114">MLE untuk <span class="math inline" data-o006-math-id="O006-PSU-005-M0090">\(p\)</span> adalah <span class="math inline" data-o006-math-id="O006-PSU-005-M0091">\(\hat{p}=\frac{n}{\sum x_i}\)</span></p></li>
+</ol>
+</section>
+</div>
+<div class="theorem example" data-o006-id="O006-PSU-005-U0115" id="exm-mleonparam2">
+<p data-o006-id="O006-PSU-005-U0116"><span class="theorem-title"><strong>Contoh 4.5</strong></span> Misalkan <span class="math inline" data-o006-math-id="O006-PSU-005-M0092">\(X_1, X_2, \ldots, X_n\)</span> merupakan sampel acak dari distribusi Gamma dengan parameter tak diketahui <span class="math inline" data-o006-math-id="O006-PSU-005-M0093">\(\theta\)</span> dan parameter diketahui <span class="math inline" data-o006-math-id="O006-PSU-005-M0094">\(\alpha\)</span>. Carilah MLE untuk <span class="math inline" data-o006-math-id="O006-PSU-005-M0095">\(\theta\)</span>.</p>
+<section class="level4 card card-body bg-light ms-3 mb-3 pt-0" data-o006-id="O006-PSU-005-U0117" id="solution-4">
+<h4 class="anchored" data-anchor-id="solution-4" data-o006-id="O006-PSU-005-U0118">Penyelesaian</h4>
+<p data-o006-id="O006-PSU-005-U0119">Fungsi kepadatan peluang (PDF) peubah acak Gamma adalah <span class="math inline" data-o006-math-id="O006-PSU-005-M0096">\(f(x)=\frac{1}{\Gamma(\alpha)\theta^{\alpha}}x^{\alpha-1}e^{-x/\theta}\)</span> untuk <span class="math inline" data-o006-math-id="O006-PSU-005-M0097">\(x&gt;0\)</span>. Ikuti langkah-langkah tersebut untuk mencari MLE.</p>
+<ol data-o006-id="O006-PSU-005-U0120" type="1">
+<li data-o006-id="O006-PSU-005-U0121"><p data-o006-id="O006-PSU-005-U0122">Fungsi kemungkinannya adalah:</p>
+<p data-o006-id="O006-PSU-005-U0123"><span class="math display" data-o006-math-id="O006-PSU-005-M0098">\[\begin{align*} L(\theta)=\prod_{i=1}^n \frac{1}{\Gamma(\alpha)\theta^\alpha}x_i^{\alpha-1}e^{-x_i/\theta}=\left(\frac{1}{\Gamma(\alpha)\theta^\alpha}\right)^n\left(\prod_{i=1}^n x_i\right)^{\alpha-1}e^{-\frac{\sum x_i}{\theta}} \end{align*}\]</span></p></li>
+<li data-o006-id="O006-PSU-005-U0124"><p data-o006-id="O006-PSU-005-U0125">Carilah fungsi log-kemungkinannya:</p>
+<p data-o006-id="O006-PSU-005-U0126"><span class="math display" data-o006-math-id="O006-PSU-005-M0099">\[\begin{align*}
+         \ell(\theta)=-n\ln \Gamma(\alpha)-n\alpha\ln \theta+(\alpha-1)\sum_{i=1}^n\ln x_i-\frac{\sum_{i=1}^n x_i}{\theta}
+     \end{align*}\]</span></p></li>
+<li data-o006-id="O006-PSU-005-U0127"><p data-o006-id="O006-PSU-005-U0128">Ambil turunan pertama dari <span class="math inline" data-o006-math-id="O006-PSU-005-M0100">\(\ell(\theta)\)</span> terhadap <span class="math inline" data-o006-math-id="O006-PSU-005-M0101">\(\theta\)</span>. <span class="math display" data-o006-math-id="O006-PSU-005-M0102">\[\begin{align*}
+         \frac{d}{d\theta}\ell(\theta)=-\frac{n\alpha}{\theta}+\frac{\sum x_i}{\theta^2}
+     \end{align*}\]</span></p></li>
+<li data-o006-id="O006-PSU-005-U0129"><p data-o006-id="O006-PSU-005-U0130">Samakan turunan tersebut dengan 0 dan selesaikan terhadap <span class="math inline" data-o006-math-id="O006-PSU-005-M0103">\(\theta\)</span>. <span class="math display" data-o006-math-id="O006-PSU-005-M0104">\[\begin{align*}
+         &amp; 0=-\frac{n\alpha}{\theta}+\frac{\sum x_i}{\theta^2}=\frac{-n\alpha\theta+\sum x_i}{\theta^2}\\
+         &amp; \Rightarrow 0=-n\alpha\theta+\sum x_i, \qquad \Rightarrow n\alpha\theta=\sum x_i\\
+         &amp; \Rightarrow \theta=\frac{\sum x_i}{n\alpha}
+     \end{align*}\]</span></p></li>
+<li data-o006-id="O006-PSU-005-U0131"><p data-o006-id="O006-PSU-005-U0132">MLE untuk <span class="math inline" data-o006-math-id="O006-PSU-005-M0105">\(\theta\)</span> adalah <span class="math inline" data-o006-math-id="O006-PSU-005-M0106">\(\hat{\theta}=\frac{\sum x_i}{n\alpha}\)</span></p></li>
+</ol>
+</section>
+</div>
+<p data-o006-id="O006-PSU-005-U0133">Pada dua contoh terakhir, kita diberi sampel acak dan memperoleh penduga kemungkinan maksimum bagi parameter yang tidak diketahui. Sekarang mari kita lihat beberapa contoh untuk mencari nilai dugaan kemungkinan maksimum ketika sekumpulan nilai pengamatan diberikan.</p>
+<div class="theorem example" data-o006-id="O006-PSU-005-U0134" id="exm-mleonparam3">
+<p data-o006-id="O006-PSU-005-U0135"><span class="theorem-title"><strong>Contoh 4.6</strong></span> Misalkan kita mempunyai tiga nilai pengamatan dari distribusi Geometrik. Nilai-nilai pengamatan itu adalah <span class="math inline" data-o006-math-id="O006-PSU-005-M0107">\(x_1=12, x_2=19, x_3=10\)</span>. Carilah nilai dugaan kemungkinan maksimum untuk <span class="math inline" data-o006-math-id="O006-PSU-005-M0108">\(p\)</span>.</p>
+<section class="level4 card card-body bg-light ms-3 mb-3 pt-0" data-o006-id="O006-PSU-005-U0136" id="solution-5">
+<h4 class="anchored" data-anchor-id="solution-5" data-o006-id="O006-PSU-005-U0137">Penyelesaian</h4>
+<p data-o006-id="O006-PSU-005-U0138">Pada contoh sebelumnya, MLE yang kita peroleh adalah <span class="math inline" data-o006-math-id="O006-PSU-005-M0109">\(\hat{p}=\frac{n}{\sum x_i}\)</span>. Jadi, nilai dugaan kemungkinan maksimumnya adalah:</p>
+<p data-o006-id="O006-PSU-005-U0139"><span class="math display" data-o006-math-id="O006-PSU-005-M0110">\[\begin{align*}
+    \hat{p}=\frac{n}{\sum x_i}=\frac{3}{12+19+10}=\frac{3}{41}
+\end{align*}\]</span></p>
+</section>
+</div>
+<div class="theorem example" data-o006-id="O006-PSU-005-U0140" id="exm-mleonparam4">
+<p data-o006-id="O006-PSU-005-U0141"><span class="theorem-title"><strong>Contoh 4.7</strong></span> Misalkan kita mempunyai tiga nilai pengamatan dari distribusi Gamma dengan <span class="math inline" data-o006-math-id="O006-PSU-005-M0111">\(\alpha=3\)</span> dan parameter tak diketahui <span class="math inline" data-o006-math-id="O006-PSU-005-M0112">\(\theta\)</span>. Nilai-nilai pengamatannya adalah <span class="math inline" data-o006-math-id="O006-PSU-005-M0113">\(x_1=3.4, x_2=8.1, x_3=5.5\)</span>. Carilah nilai dugaan kemungkinan maksimum untuk <span class="math inline" data-o006-math-id="O006-PSU-005-M0114">\(\theta\)</span>.</p>
+<section class="level4 card card-body bg-light ms-3 mb-3 pt-0" data-o006-id="O006-PSU-005-U0142" id="solution-6">
+<h4 class="anchored" data-anchor-id="solution-6" data-o006-id="O006-PSU-005-U0143">Penyelesaian</h4>
+<p data-o006-id="O006-PSU-005-U0144">Pada contoh sebelumnya, MLE yang kita peroleh adalah <span class="math inline" data-o006-math-id="O006-PSU-005-M0115">\(\hat{\theta}=\frac{\sum x_i}{n\alpha}\)</span>. Jadi, nilai dugaan kemungkinan maksimumnya adalah:</p>
+<p data-o006-id="O006-PSU-005-U0145"><span class="math display" data-o006-math-id="O006-PSU-005-M0116">\[\begin{align*}
+    \hat{\theta}=\frac{\sum x_i}{n\alpha}=\frac{3.4+8.1+5.5}{3(3)}=\frac{17}{9}\approx1.8889
+\end{align*}\]</span></p>
+</section>
+</div>
+<div class="theorem example" data-o006-id="O006-PSU-005-U0146" id="exm-mleonparam5">
+<p data-o006-id="O006-PSU-005-U0147"><span class="theorem-title"><strong>Contoh 4.8</strong></span> Misalkan kita mempunyai nilai-nilai pengamatan berikut dari distribusi Poisson dengan parameter <span class="math inline" data-o006-math-id="O006-PSU-005-M0117">\(\lambda\)</span>. <span class="math display" data-o006-math-id="O006-PSU-005-M0118">\[\begin{align*}
+    &amp; 14, \qquad 21, \qquad 17\\
+    &amp; 11, \qquad 22
+\end{align*}\]</span> Carilah nilai dugaan kemungkinan maksimum untuk <span class="math inline" data-o006-math-id="O006-PSU-005-M0119">\(\lambda\)</span>.</p>
+<section class="level4 card card-body bg-light ms-3 mb-3 pt-0" data-o006-id="O006-PSU-005-U0148" id="solution-7">
+<h4 class="anchored" data-anchor-id="solution-7" data-o006-id="O006-PSU-005-U0149">Penyelesaian</h4>
+<p data-o006-id="O006-PSU-005-U0150">Pertama-tama, kita perlu mencari MLE dengan langkah-langkah biasa. Fungsi kemungkinannya adalah:</p>
+<p data-o006-id="O006-PSU-005-U0151"><span class="math display" data-o006-math-id="O006-PSU-005-M0120">\[\begin{align*}
+    L(\lambda)=\prod_{i=1}^n \frac{e^{-\lambda}\lambda^{x_i}}{x_i!}=\frac{e^{-n\lambda}\lambda^{\sum x_i}}{\prod x_i!}
+\end{align*}\]</span></p>
+<p data-o006-id="O006-PSU-005-U0152">Fungsi log-kemungkinannya adalah:</p>
+<p data-o006-id="O006-PSU-005-U0153"><span class="math display" data-o006-math-id="O006-PSU-005-M0121">\[\begin{align*}
+    \ell(\lambda)=-n\lambda +\left(\sum x_i\right)\ln \lambda-\sum_{i=1}^n\ln(x_i!)
+\end{align*}\]</span></p>
+<p data-o006-id="O006-PSU-005-U0154">Turunan pertamanya adalah:</p>
+<p data-o006-id="O006-PSU-005-U0155"><span class="math display" data-o006-math-id="O006-PSU-005-M0122">\[\begin{align*}
+    \frac{d\ell(\lambda)}{d\lambda}=-n+\frac{\sum_i x_i}{\lambda}
+\end{align*}\]</span></p>
+<p data-o006-id="O006-PSU-005-U0156">Dengan menyamakan turunan tersebut dengan 0 dan menyelesaikannya terhadap <span class="math inline" data-o006-math-id="O006-PSU-005-M0123">\(\lambda\)</span>, kita memperoleh MLE berikut:</p>
+<p data-o006-id="O006-PSU-005-U0157"><span class="math display" data-o006-math-id="O006-PSU-005-M0124">\[\begin{align*}
+    &amp; 0=-n+\frac{\sum x_i}{\lambda}, \qquad \Rightarrow n=\frac{\sum x_i}{\lambda}\\
+    &amp; \Rightarrow \hat{\lambda}=\frac{\sum x_i}{n}=\bar{x}
+\end{align*}\]</span></p>
+<p data-o006-id="O006-PSU-005-U0158">Jadi, nilai dugaan kemungkinan maksimum untuk <span class="math inline" data-o006-math-id="O006-PSU-005-M0125">\(\lambda\)</span> adalah <span class="math inline" data-o006-math-id="O006-PSU-005-M0126">\(\hat{\lambda}=\frac{14+21+17+11+22}{5}=\frac{85}{5}=17\)</span>.</p>
+</section>
+</div>
+</section>
+</section>
+<section class="level2" data-number="4.3" data-o006-id="O006-PSU-005-U0159" id="maximize-the-likelihood-directly-support-parameters">
+<h2 class="anchored" data-anchor-id="maximize-the-likelihood-directly-support-parameters" data-number="4.3" data-o006-id="O006-PSU-005-U0160"><span class="header-section-number">4.3</span> Maksimalkan Fungsi Kemungkinan secara Langsung: Himpunan Dukungan yang Bergantung pada Parameter</h2>
+<p data-o006-id="O006-PSU-005-U0161">Pada bagian ini, kita akan melanjutkan pembahasan pendugaan kemungkinan maksimum. Perhatikan contoh berikut.</p>
+<div class="theorem example" data-o006-id="O006-PSU-005-U0162" id="exm-suppparam1">
+<p data-o006-id="O006-PSU-005-U0163"><span class="theorem-title"><strong>Contoh 4.9</strong></span> Misalkan kita mempunyai sampel acak berukuran <span class="math inline" data-o006-math-id="O006-PSU-005-M0127">\(n\)</span> dari distribusi Uniform pada interval <span class="math inline" data-o006-math-id="O006-PSU-005-M0128">\((0, a)\)</span>, dengan <span class="math inline" data-o006-math-id="O006-PSU-005-M0129">\(a\)</span> merupakan bilangan real yang tidak diketahui. Apa MLE untuk <span class="math inline" data-o006-math-id="O006-PSU-005-M0130">\(a\)</span>?</p>
+<section class="level4 card card-body bg-light ms-3 mb-3 pt-0" data-o006-id="O006-PSU-005-U0164" id="solution-8">
+<h4 class="anchored" data-anchor-id="solution-8" data-o006-id="O006-PSU-005-U0165">Penyelesaian</h4>
+<p data-o006-id="O006-PSU-005-U0166">Mari kita telaah masalah ini dengan langkah-langkah biasa. Fungsi kepadatan peluang (PDF) distribusi Uniform ini adalah <span class="math inline" data-o006-math-id="O006-PSU-005-M0131">\(f(x)=\frac{1}{a}\)</span>, untuk <span class="math inline" data-o006-math-id="O006-PSU-005-M0132">\(0&lt;x&lt;a\)</span>. Fungsi kemungkinannya adalah:</p>
+<p data-o006-id="O006-PSU-005-U0167"><span class="math display" data-o006-math-id="O006-PSU-005-M0133">\[\begin{align*}
+    L(a)=\prod_{i=1}^n \frac{1}{a}=\frac{1}{a^n}=a^{-n}
+\end{align*}\]</span></p>
+<p data-o006-id="O006-PSU-005-U0168">Fungsi log-kemungkinannya adalah:</p>
+<p data-o006-id="O006-PSU-005-U0169"><span class="math display" data-o006-math-id="O006-PSU-005-M0134">\[\begin{align*}
+    \ell(a)=-n\ln a
+\end{align*}\]</span></p>
+<p data-o006-id="O006-PSU-005-U0170">Turunannya adalah:</p>
+<p data-o006-id="O006-PSU-005-U0171"><span class="math display" data-o006-math-id="O006-PSU-005-M0135">\[\begin{align*}
+    \frac{d}{da}\ell(a)=-\frac{n}{a}
+\end{align*}\]</span></p>
+<p data-o006-id="O006-PSU-005-U0172">Namun, apa yang terjadi jika kita menyamakan turunan dengan 0 dan mencoba menyelesaikannya terhadap <span class="math inline" data-o006-math-id="O006-PSU-005-M0136">\(a\)</span>? Jika kita menetapkan <span class="math inline" data-o006-math-id="O006-PSU-005-M0137">\(-\frac{n}{a}=0\)</span>, persamaan tersebut tidak memiliki penyelesaian; jadi MLE-nya bukan <span class="math inline" data-o006-math-id="O006-PSU-005-M0138">\(\hat{a}=\infty\)</span>.</p>
+</section>
+</div>
+<p data-o006-id="O006-PSU-005-U0173">Apa yang membedakan contoh ini dari contoh-contoh MLE sebelumnya? Fungsi kemungkinan tersebut monoton turun, bukan monoton naik, sehingga tidak memiliki titik kritis interior. Maksimum atau supremumnya ditentukan oleh batas himpunan dukungan yang bergantung pada parameter.</p>
+<p data-o006-id="O006-PSU-005-U0174">Pada contoh di atas, kita belum memperhitungkan kendala yang ditetapkan oleh <span class="math inline" data-o006-math-id="O006-PSU-005-M0139">\(a\)</span> terhadap data. Dalam contoh-contoh sebelumnya, himpunan dukungan tidak bergantung pada parameter yang tidak diketahui. Sebagai contoh, himpunan dukungan <span class="math inline" data-o006-math-id="O006-PSU-005-M0140">\(X\)</span> sebagai peubah acak Normal adalah <span class="math inline" data-o006-math-id="O006-PSU-005-M0141">\(-\infty&lt;x&lt;\infty\)</span>. Pada contoh Gamma, himpunan dukungan <span class="math inline" data-o006-math-id="O006-PSU-005-M0142">\(X\)</span> adalah <span class="math inline" data-o006-math-id="O006-PSU-005-M0143">\(x&gt;0\)</span>, dan seterusnya.</p>
+<p data-o006-id="O006-PSU-005-U0175">Namun, untuk distribusi Uniform, himpunan dukungan bergantung pada parameter <span class="math inline" data-o006-math-id="O006-PSU-005-M0144">\(a\)</span> dan kita belum memperhitungkan kendala yang ditetapkan oleh <span class="math inline" data-o006-math-id="O006-PSU-005-M0145">\(a\)</span> terhadap data. Jadi, apa yang harus kita lakukan?</p>
+<p data-o006-id="O006-PSU-005-U0176">Mari kita definisikan dahulu fungsi indikator.</p>
+<div class="ms-3 theorem definition" data-o006-id="O006-PSU-005-U0177" id="def-Indicatorfunction">
+<p data-o006-id="O006-PSU-005-U0178"><span class="theorem-title"><strong>Def. 4.3 (Fungsi indikator)</strong></span> Misalkan terdapat suatu kejadian <span class="math inline" data-o006-math-id="O006-PSU-005-M0146">\(A\)</span>. <strong>Fungsi indikator untuk</strong> <span class="math inline" data-o006-math-id="O006-PSU-005-M0147">\(A\)</span> didefinisikan sebagai:</p>
+<p data-o006-id="O006-PSU-005-U0179"><span class="math display" data-o006-math-id="O006-PSU-005-M0148">\[
+\begin{align*}
+    \mathbf{1}_{A}=\begin{cases}
+        1, &amp; \text{ if $A$ occurs}\\
+        0, &amp; \text{ if $A$ does not occur}
+    \end{cases}
+\end{align*}
+\]</span></p>
+</div>
+<p data-o006-id="O006-PSU-005-U0180">Mari kita lihat contoh penggunaan fungsi indikator untuk mencari penduga kemungkinan maksimum.</p>
+<div class="theorem example" data-o006-id="O006-PSU-005-U0181" id="exm-suppparam2">
+<p data-o006-id="O006-PSU-005-U0182"><span class="theorem-title"><strong>Contoh 4.10</strong></span> Misalkan <span class="math inline" data-o006-math-id="O006-PSU-005-M0149">\(Y_1, \ldots, Y_n\)</span> merupakan sampel acak dari distribusi Bernoulli dengan parameter <span class="math inline" data-o006-math-id="O006-PSU-005-M0150">\(p\)</span>. Fungsi massa peluang (PMF) dari <span class="math inline" data-o006-math-id="O006-PSU-005-M0151">\(Y\)</span> adalah:</p>
+<p data-o006-id="O006-PSU-005-U0183"><span class="math display" data-o006-math-id="O006-PSU-005-M0152">\[\begin{align*}
+    f(y)=\begin{cases}
+    p^y(1-p)^{1-y} &amp; y=0, 1\\
+    0 &amp; \text{otherwise}
+    \end{cases}
+\end{align*}\]</span></p>
+<p data-o006-id="O006-PSU-005-U0184">PMF tersebut dapat ditulis dengan cara lain. Salah satu bentuknya adalah</p>
+<p data-o006-id="O006-PSU-005-U0185"><span class="math display" data-o006-math-id="O006-PSU-005-M0153">\[\begin{align*}
+    f(y)=\begin{cases}
+    p &amp; y=1\\
+    1-p &amp; y=0
+    \end{cases}
+\end{align*}\]</span></p>
+<p data-o006-id="O006-PSU-005-U0186">Bentuk lainnya menggunakan fungsi indikator:</p>
+<p data-o006-id="O006-PSU-005-U0187"><span class="math display" data-o006-math-id="O006-PSU-005-M0154">\[\begin{align*}
+    f(y)=p^y(1-p)^{1-y}\mathbf{1}_{\{y\in \{0, 1\}\}}
+\end{align*}\]</span></p>
+<p data-o006-id="O006-PSU-005-U0188">dengan</p>
+<p data-o006-id="O006-PSU-005-U0189"><span class="math display" data-o006-math-id="O006-PSU-005-M0155">\[\begin{align*}
+    \mathbf{1}_{\{y \in \{0,1\}\}}=\begin{cases}
+    1 &amp; \text{ if $y=0$ or $y=1$}\\
+    0 &amp; \text{otherwise}
+    \end{cases}
+\end{align*}\]</span></p>
+<p data-o006-id="O006-PSU-005-U0190">Dengan menggunakan bentuk PMF ini, carilah penduga kemungkinan maksimum untuk <span class="math inline" data-o006-math-id="O006-PSU-005-M0156">\(p\)</span>.</p>
+<section class="level4 card card-body bg-light ms-3 mb-3 pt-0" data-o006-id="O006-PSU-005-U0191" id="solution-9">
+<h4 class="anchored" data-anchor-id="solution-9" data-o006-id="O006-PSU-005-U0192">Penyelesaian</h4>
+<p data-o006-id="O006-PSU-005-U0193">Fungsi kemungkinannya adalah:</p>
+<p data-o006-id="O006-PSU-005-U0194"><span class="math display" data-o006-math-id="O006-PSU-005-M0157">\[\begin{align*}
+    L(p)=\prod_{i=1}^n p^{y_i}(1-p)^{1-y_i}\mathbf{1}_{\{y_i\in \{0,1\}\}}=p^{\sum_i y_i}(1-p)^{n-\sum_i y_i}\prod_{i=1}^n\mathbf{1}_{\{y_i\in \{0,1\}\}}
+\end{align*}\]</span></p>
+<p data-o006-id="O006-PSU-005-U0195">Fungsi log-kemungkinannya adalah:</p>
+<p data-o006-id="O006-PSU-005-U0196"><span class="math display" data-o006-math-id="O006-PSU-005-M0158">\[\begin{align*}
+    \ell(p)=\sum y_i\ln p+(n-\sum y_i)\ln (1-p)+\sum \ln \left(\mathbf{1}_{\{y\in \{0, 1\}\}}\right)
+\end{align*}\]</span></p>
+<p data-o006-id="O006-PSU-005-U0197">Selanjutnya, ambil turunan terhadap <span class="math inline" data-o006-math-id="O006-PSU-005-M0159">\(p\)</span>.</p>
+<p data-o006-id="O006-PSU-005-U0198"><span class="math display" data-o006-math-id="O006-PSU-005-M0160">\[\begin{align*}
+    \frac{d\ell(p)}{dp}=\frac{\sum_i y_i}{p}-\frac{n-\sum_i y_i}{1-p}
+\end{align*}\]</span></p>
+<p data-o006-id="O006-PSU-005-U0199">Pada tahap ini, perhatikan bahwa fungsi indikator tidak muncul lagi karena konstan terhadap <span class="math inline" data-o006-math-id="O006-PSU-005-M0161">\(p\)</span>. Sekarang, lanjutkan untuk mencari MLE.</p>
+<p data-o006-id="O006-PSU-005-U0200"><span class="math display" data-o006-math-id="O006-PSU-005-M0162">\[\begin{align*}
+    &amp; \frac{\sum_i y_i}{p}=\frac{n-\sum_i y_i}{1-p}, \qquad \Rightarrow \sum_i y_i-p\sum_i y_i=np-p\sum_i y_i\\
+    &amp; \Rightarrow \sum_i y_i=np, \qquad \Rightarrow \hat{p}=\frac{\sum_i y_i}{n}
+\end{align*}\]</span></p>
+</section>
+</div>
+<p data-o006-id="O006-PSU-005-U0201">Bagaimana hal ini membantu kita dalam kasus Uniform <span class="math inline" data-o006-math-id="O006-PSU-005-M0163">\((0, a)\)</span> tersebut? Pada contoh di atas, kita tahu bahwa <span class="math inline" data-o006-math-id="O006-PSU-005-M0164">\(X\)</span> merupakan peubah acak Uniform pada interval <span class="math inline" data-o006-math-id="O006-PSU-005-M0165">\((0, a)\)</span>. Jadi, alih-alih menuliskan PDF sebagai</p>
+<p data-o006-id="O006-PSU-005-U0202"><span class="math display" data-o006-math-id="O006-PSU-005-M0166">\[\begin{align*}
+    f(x)=\begin{cases}
+        \frac{1}{a}, &amp; 0&lt;x&lt;a\\
+        0, &amp; \text{otherwise}
+        \end{cases}
+\end{align*}\]</span></p>
+<p data-o006-id="O006-PSU-005-U0203">kita dapat menulisnya ulang dengan fungsi indikator.</p>
+<p data-o006-id="O006-PSU-005-U0204"><span class="math display" data-o006-math-id="O006-PSU-005-M0167">\[\begin{align*}
+    f(x)=\frac{1}{a}\times\mathbf{1}_{x\in (0, a)}
+\end{align*}\]</span></p>
+<p data-o006-id="O006-PSU-005-U0205">dengan</p>
+<p data-o006-id="O006-PSU-005-U0206"><span class="math display" data-o006-math-id="O006-PSU-005-M0168">\[\begin{align*}
+    \mathbf{1}_{x\in (0, a)}=\begin{cases}
+    1, &amp; \text{ if $x\in (0, a)$}\\
+    0, &amp; \text{ if $x\notin (0, a)$}
+    \end{cases}
+\end{align*}\]</span></p>
+<div class="theorem example" data-o006-id="O006-PSU-005-U0207" id="exm-suppparam3">
+<p data-o006-id="O006-PSU-005-U0208"><span class="theorem-title"><strong>Contoh 4.11</strong></span> Carilah penduga kemungkinan maksimum untuk <span class="math inline" data-o006-math-id="O006-PSU-005-M0169">\(a\)</span> pada contoh Uniform tersebut.</p>
+<section class="level4 card card-body bg-light ms-3 mb-3 pt-0" data-o006-id="O006-PSU-005-U0209" id="solution-10">
+<h4 class="anchored" data-anchor-id="solution-10" data-o006-id="O006-PSU-005-U0210">Penyelesaian</h4>
+<p data-o006-id="O006-PSU-005-U0211">Sekali lagi, kita mulai dengan fungsi kemungkinan</p>
+<p data-o006-id="O006-PSU-005-U0212"><span class="math display" data-o006-math-id="O006-PSU-005-M0170">\[\begin{align*}
+    L(a)=\prod_{i=1}^n \frac{1}{a}\mathbf{1}_{\{x_i\in(0,a)\}}=a^{-n}\prod_{i=1}^n\mathbf{1}_{\{x_i\in(0,a)\}}
+\end{align*}\]</span></p>
+<p data-o006-id="O006-PSU-005-U0213">Perhatikan bahwa jika <span class="math inline" data-o006-math-id="O006-PSU-005-M0171">\(x_i&gt;a\)</span>, maka fungsi kemungkinan bernilai 0. Dengan kata lain, <span class="math inline" data-o006-math-id="O006-PSU-005-M0172">\(a\)</span> tidak boleh lebih kecil daripada satu pun <span class="math inline" data-o006-math-id="O006-PSU-005-M0173">\(x_i\)</span>. Oleh karena itu, untuk memaksimalkan <span class="math inline" data-o006-math-id="O006-PSU-005-M0174">\(L(a)\)</span>, kita harus membuat <span class="math inline" data-o006-math-id="O006-PSU-005-M0175">\(a\)</span> sekecil mungkin sambil tetap lebih besar daripada maksimum sampel. Karena batas kanan himpunan dukungan ditulis terbuka, maksimum tidak tercapai; nilai berikut adalah batas supremumnya:</p>
+<p data-o006-id="O006-PSU-005-U0214"><span class="math display" data-o006-math-id="O006-PSU-005-M0176">\[\begin{align*}
+    a\downarrow X_{(n)}=Y_n
+\end{align*}\]</span></p>
+<p data-o006-id="O006-PSU-005-U0215">Jadi, untuk model dengan batas terbuka sebagaimana ditulis, batas supremum bagi <span class="math inline" data-o006-math-id="O006-PSU-005-M0177">\(a\)</span> diberikan oleh statistik urutan maksimum, <span class="math inline" data-o006-math-id="O006-PSU-005-M0178">\(Y_n\)</span>, karena supremum fungsi kemungkinan didekati ketika <span class="math inline" data-o006-math-id="O006-PSU-005-M0179">\(a\downarrow\max_i x_i\)</span>.</p>
+</section>
+</div>
+<div class="theorem example" data-o006-id="O006-PSU-005-U0216" id="exm-suppparam4">
+<p data-o006-id="O006-PSU-005-U0217"><span class="theorem-title"><strong>Contoh 4.12</strong></span> Misalkan kita mempunyai <span class="math inline" data-o006-math-id="O006-PSU-005-M0180">\(X_i\sim \text{Pareto}(m, \alpha=2)\)</span> merupakan sampel iid berukuran <span class="math inline" data-o006-math-id="O006-PSU-005-M0181">\(n\)</span>, dan misalkan parameter <span class="math inline" data-o006-math-id="O006-PSU-005-M0182">\(\alpha=2\)</span>. PDF distribusi Pareto adalah:</p>
+<p data-o006-id="O006-PSU-005-U0218"><span class="math display" data-o006-math-id="O006-PSU-005-M0183">\[\begin{align*}
+    f(x)=\frac{\alpha m^\alpha}{x^{\alpha+1}}=\frac{2m^2}{x^3}, \qquad x\ge m
+\end{align*}\]</span></p>
+<p data-o006-id="O006-PSU-005-U0219">Tentukan penduga kemungkinan maksimum bagi <span class="math inline" data-o006-math-id="O006-PSU-005-M0184">\(m\)</span>.</p>
+<section class="level4 card card-body bg-light ms-3 mb-3 pt-0" data-o006-id="O006-PSU-005-U0220" id="solution-11">
+<h4 class="anchored" data-anchor-id="solution-11" data-o006-id="O006-PSU-005-U0221">Penyelesaian</h4>
+<p data-o006-id="O006-PSU-005-U0222">Seperti biasa, langkah pertama adalah menentukan fungsi kemungkinan:</p>
+<p data-o006-id="O006-PSU-005-U0223"><span class="math display" data-o006-math-id="O006-PSU-005-M0185">\[\begin{align*}
+    L(m)=\prod_{i=1}^n \frac{2m^2}{x_i^3}\mathbf{1}_{\{x_i\ge m\}}=\frac{2^nm^{2n}}{\prod x_i^3}\prod_{i=1}^n\mathbf{1}_{\{x_i\ge m\}}
+\end{align*}\]</span></p>
+<p data-o006-id="O006-PSU-005-U0224">Untuk memaksimumkan fungsi kemungkinan, kita meninjau suku-suku yang memuat <span class="math inline" data-o006-math-id="O006-PSU-005-M0186">\(m\)</span>. Yaitu,</p>
+<p data-o006-id="O006-PSU-005-U0225"><span class="math display" data-o006-math-id="O006-PSU-005-M0187">\[\begin{align*}
+    m^{2n}\prod_{i=1}^n\mathbf{1}_{\{x_i\ge m\}}
+\end{align*}\]</span></p>
+<p data-o006-id="O006-PSU-005-U0226">Hasil kali fungsi indikator sama dengan 1 hanya jika <span class="math inline" data-o006-math-id="O006-PSU-005-M0188">\(x_1\ge m\)</span>, <span class="math inline" data-o006-math-id="O006-PSU-005-M0189">\(x_2\ge m\)</span>, …, <span class="math inline" data-o006-math-id="O006-PSU-005-M0190">\(x_n\ge m\)</span>. Ini setara dengan menyatakan bahwa statistik urutan minimum lebih besar daripada atau sama dengan <span class="math inline" data-o006-math-id="O006-PSU-005-M0191">\(m\)</span>. Dengan kata lain, jika <span class="math inline" data-o006-math-id="O006-PSU-005-M0192">\(Y_1\)</span> (statistik urutan pertama atau minimum) lebih besar daripada atau sama dengan <span class="math inline" data-o006-math-id="O006-PSU-005-M0193">\(m\)</span>, maka semua pengamatan lebih besar daripada atau sama dengan <span class="math inline" data-o006-math-id="O006-PSU-005-M0194">\(m\)</span>. Oleh karena itu, penduga kemungkinan maksimum bagi <span class="math inline" data-o006-math-id="O006-PSU-005-M0195">\(m\)</span> adalah statistik urutan pertama, <span class="math inline" data-o006-math-id="O006-PSU-005-M0196">\(Y_1\)</span>.</p>
+</section>
+</div>
+<div class="callout callout-style-simple callout-caution no-icon" data-o006-id="O006-PSU-005-U0227">
+<div class="callout-body d-flex" data-o006-id="O006-PSU-005-U0228">
+<div class="callout-icon-container" data-o006-id="O006-PSU-005-U0229">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-body-container" data-o006-id="O006-PSU-005-U0230">
+<p data-o006-id="O006-PSU-005-U0231"><strong>Catatan!</strong><br/>
+Pendekatan ini diperlukan ketika fungsi kemungkinan bersifat monoton setelah faktor himpunan dukungan dipisahkan, dan arah batas layak harus diperhatikan. Ketika <span class="math inline" data-o006-math-id="O006-PSU-005-M0197">\(L(\theta)\)</span> monoton naik dan himpunan dukungan memberi batas atas pada parameter, MLE sering kali adalah <span class="math inline" data-o006-math-id="O006-PSU-005-M0198">\(\hat{\theta}=\min(x_i)\)</span>. Demikian pula, ketika <span class="math inline" data-o006-math-id="O006-PSU-005-M0199">\(L(\theta)\)</span> monoton turun dan himpunan dukungan memberi batas bawah pada parameter, MLE sering kali adalah <span class="math inline" data-o006-math-id="O006-PSU-005-M0200">\(\hat{\theta}=\max(x_i)\)</span>.</p>
+</div>
+</div>
+</div>
+<div class="theorem example" data-o006-id="O006-PSU-005-U0232" id="exm-suppparam5">
+<p data-o006-id="O006-PSU-005-U0233"><span class="theorem-title"><strong>Contoh 4.13</strong></span> Misalkan kita mempunyai sampel acak <span class="math inline" data-o006-math-id="O006-PSU-005-M0201">\(X_1, \ldots, X_4\)</span> dari distribusi Seragam pada <span class="math inline" data-o006-math-id="O006-PSU-005-M0202">\([3c,10]\)</span>. Tentukan nilai dugaan kemungkinan maksimum bagi <span class="math inline" data-o006-math-id="O006-PSU-005-M0203">\(c\)</span> dengan menggunakan pengamatan berikut.</p>
+<p data-o006-id="O006-PSU-005-U0234"><span class="math display" data-o006-math-id="O006-PSU-005-M0204">\[\begin{align*}
+    &amp; x_1=-5, \qquad x_2=6\\
+    &amp; x_3=-1, \qquad x_4=2
+\end{align*}\]</span></p>
+<section class="level4 card card-body bg-light ms-3 mb-3 pt-0" data-o006-id="O006-PSU-005-U0235" id="solution-12">
+<h4 class="anchored" data-anchor-id="solution-12" data-o006-id="O006-PSU-005-U0236">Penyelesaian</h4>
+<p data-o006-id="O006-PSU-005-U0237">Langkah pertama adalah menentukan PDF dari <span class="math inline" data-o006-math-id="O006-PSU-005-M0205">\(X_i\)</span>.</p>
+<p data-o006-id="O006-PSU-005-U0238"><span class="math display" data-o006-math-id="O006-PSU-005-M0206">\[\begin{align*}
+    f(x_i|c)=\frac{1}{10-3c}\mathbf{1}_{\{3c\le x_i\le10\}},\qquad i=1,2,3,4,\quad c&lt;\frac{10}{3}.
+\end{align*}\]</span></p>
+<p data-o006-id="O006-PSU-005-U0239">Selanjutnya, kita menentukan fungsi kemungkinan.</p>
+<p data-o006-id="O006-PSU-005-U0240"><span class="math display" data-o006-math-id="O006-PSU-005-M0207">\[\begin{align*}
+    L(c)&amp;=\prod_{i=1}^4 \frac{1}{10-3c}\mathbf{1}_{\{3c\le x_i\le10\}}\\
+    &amp; =\left(\frac{1}{10-3c}\right)^4\mathbf{1}_{\{3c\le x_1\le 10, 3c\le x_2\le 10, 3c\le x_3\le 10, 3c\le x_4\le 10\}}
+\end{align*}\]</span></p>
+<p data-o006-id="O006-PSU-005-U0241">Kita dapat menunjukkan bahwa <span class="math inline" data-o006-math-id="O006-PSU-005-M0208">\(\left(\frac{1}{10-3c}\right)^4\)</span> merupakan fungsi yang monoton naik. Sekarang, mari kita cermati fungsi indikatornya.</p>
+<p data-o006-id="O006-PSU-005-U0242"><span class="math display" data-o006-math-id="O006-PSU-005-M0209">\[\begin{align*}
+    \mathbf{1}_{\{3c\le x_1\le 10, 3c\le x_2\le 10, 3c\le x_3\le 10, 3c\le x_4\le 10\}}
+\end{align*}\]</span></p>
+<p data-o006-id="O006-PSU-005-U0243">Cobalah yakinkan diri Anda bahwa fungsi indikator tersebut juga dapat ditulis sebagai:</p>
+<p data-o006-id="O006-PSU-005-U0244"><span class="math display" data-o006-math-id="O006-PSU-005-M0210">\[\begin{align*}
+    \mathbf{1}_{\{3c\le x_1, 3c\le x_2, 3c\le x_3, 3c\le x_4\}}\times\mathbf{1}_{\{x_1\le 10, x_2\le 10, x_3\le 10, x_4\le 10\}}
+\end{align*}\]</span></p>
+<p data-o006-id="O006-PSU-005-U0245">Suku kedua bukan fungsi dari <span class="math inline" data-o006-math-id="O006-PSU-005-M0211">\(c\)</span>. Karena itu, suku tersebut dapat kita abaikan. Mari kita berfokus pada suku pertama yang merupakan fungsi dari <span class="math inline" data-o006-math-id="O006-PSU-005-M0212">\(c\)</span>.</p>
+<p data-o006-id="O006-PSU-005-U0246"><span class="math display" data-o006-math-id="O006-PSU-005-M0213">\[\begin{align*}
+    \mathbf{1}_{\{3c\le x_1, 3c\le x_2, 3c\le x_3, 3c\le x_4\}}
+\end{align*}\]</span></p>
+<p data-o006-id="O006-PSU-005-U0247">Seperti sebelumnya, kita dapat menulis ulang fungsi indikator sebagai:</p>
+<p data-o006-id="O006-PSU-005-U0248"><span class="math display" data-o006-math-id="O006-PSU-005-M0214">\[\begin{align*}
+    \mathbf{1}_{\{3c\le \min(x_1, \ldots, x_4)\}}=\mathbf{1}_{\{c\le \frac{\min(x_1, \ldots, x_4)}{3}\}}
+\end{align*}\]</span></p>
+<p data-o006-id="O006-PSU-005-U0249">Oleh karena itu, penduga kemungkinan maksimum bagi <span class="math inline" data-o006-math-id="O006-PSU-005-M0215">\(c\)</span> adalah</p>
+<p data-o006-id="O006-PSU-005-U0250"><span class="math display" data-o006-math-id="O006-PSU-005-M0216">\[\begin{align*}
+    \hat{c}=\frac{\min(x_i)}{3}
+\end{align*}\]</span></p>
+<p data-o006-id="O006-PSU-005-U0251">Dengan menggunakan data kita, nilai dugaan kemungkinan maksimumnya adalah <span class="math inline" data-o006-math-id="O006-PSU-005-M0217">\(\hat{c}=\frac{-5}{3}\)</span>.</p>
+</section>
+</div>
+</section>
+<section class="level2" data-number="4.4" data-o006-id="O006-PSU-005-U0252" id="multiparameter-case">
+<h2 class="anchored" data-anchor-id="multiparameter-case" data-number="4.4" data-o006-id="O006-PSU-005-U0253"><span class="header-section-number">4.4</span> Kasus Multiparameter</h2>
+<p data-o006-id="O006-PSU-005-U0254">Sejauh ini, kita telah mempelajari penduga kemungkinan maksimum untuk distribusi berparameter tunggal. Sebagai contoh, <span class="math inline" data-o006-math-id="O006-PSU-005-M0218">\(\text{Unif}(0, \theta)\)</span> dan <span class="math inline" data-o006-math-id="O006-PSU-005-M0219">\(\text{Bin}(10, p)\)</span>. Kita juga telah meninjau distribusi Normal ketika hanya satu parameternya yang tidak diketahui. Dalam bagian ini, kita akan mempelajari cara menentukan penduga ketika terdapat lebih dari satu parameter yang tidak diketahui. Sebagai contoh, <span class="math inline" data-o006-math-id="O006-PSU-005-M0220">\(N(\mu, \sigma^2)\)</span>, <span class="math inline" data-o006-math-id="O006-PSU-005-M0221">\(\text{Gamma}(\alpha, \beta)\)</span>, dan sebagainya…</p>
+<p data-o006-id="O006-PSU-005-U0255">Secara umum, untuk model multiparameter kita dapat mengikuti pendekatan yang serupa dengan pendekatan pada kasus berparameter tunggal.</p>
+<section class="level4" data-o006-id="O006-PSU-005-U0256" id="notation">
+<h4 class="anchored" data-anchor-id="notation" data-o006-id="O006-PSU-005-U0257">Notasi</h4>
+<p data-o006-id="O006-PSU-005-U0258">Kita akan menggunakan notasi vektor dalam bagian ini. Skalar tidak diberi garis bawah, sedangkan vektor diberi garis bawah. Sebagai contoh, skalar ditulis seperti</p>
+<p data-o006-id="O006-PSU-005-U0259"><span class="math display" data-o006-math-id="O006-PSU-005-M0222">\[\begin{align*}
+&amp; a\in  \mathbb{R}\\
+&amp; \theta\in \mathbb{R}
+\end{align*}\]</span></p>
+<p data-o006-id="O006-PSU-005-U0260">Ketika merujuk pada vektor, kita menggunakan notasi bergaris bawah. Sebagai contoh,</p>
+<p data-o006-id="O006-PSU-005-U0261"><span class="math display" data-o006-math-id="O006-PSU-005-M0223">\[\begin{align*}
+    &amp; \underline{x}\in \mathbb{R}^n, \qquad \underline{x}=(x_1, x_2, \ldots, x_n)\\
+    &amp;  \underline{\theta}\in \mathbb{R}^p, \qquad \underline{\theta}=(\theta_1, \theta_2, \ldots, \theta_p)
+\end{align*}\]</span></p>
+<p data-o006-id="O006-PSU-005-U0262">Jika terdapat lebih dari satu parameter, kita dapat menulis PDF (atau PMF) sebagai:</p>
+<p data-o006-id="O006-PSU-005-U0263"><span class="math display" data-o006-math-id="O006-PSU-005-M0224">\[\begin{align*}
+f(x|\underline{\theta})
+\end{align*}\]</span></p>
+<p data-o006-id="O006-PSU-005-U0264">fungsi kemungkinannya sebagai:</p>
+<p data-o006-id="O006-PSU-005-U0265"><span class="math display" data-o006-math-id="O006-PSU-005-M0225">\[\begin{align*}
+    L(\underline{\theta})=\prod_{i=1}^n f(x_i|\underline{\theta})
+\end{align*}\]</span></p>
+<p data-o006-id="O006-PSU-005-U0266">Fungsi log-kemungkinannya adalah:</p>
+<p data-o006-id="O006-PSU-005-U0267"><span class="math display" data-o006-math-id="O006-PSU-005-M0226">\[\begin{align*}
+    &amp; \ell(\underline{\theta})=\sum_{i=1}^n \log f(x_i|\underline{\theta})\\
+    &amp;=\ell(\theta_1, \ldots, \theta_p)=\sum_{i=1}^n \log f(x_i|\theta_1, \ldots, \theta_p)
+\end{align*}\]</span></p>
+<p data-o006-id="O006-PSU-005-U0268">Titik-titik kritis terjadi ketika</p>
+<p data-o006-id="O006-PSU-005-U0269"><span class="math display" data-o006-math-id="O006-PSU-005-M0227">\[\begin{align*}
+    &amp; \frac{d}{d\theta_1}\ell(\underline{\theta})=0\\
+    &amp; \frac{d}{d\theta_2}\ell(\underline{\theta})=0\\
+    &amp; \vdots\\
+    &amp;  \frac{d}{d\theta_p}\ell(\underline{\theta})=0
+\end{align*}\]</span></p>
+<p data-o006-id="O006-PSU-005-U0270">Oleh karena itu, kita mempunyai <span class="math inline" data-o006-math-id="O006-PSU-005-M0228">\(p\)</span> persamaan dan <span class="math inline" data-o006-math-id="O006-PSU-005-M0229">\(p\)</span> peubah yang tidak diketahui. Penyelesaian sistem persamaan ini menghasilkan <span class="math inline" data-o006-math-id="O006-PSU-005-M0230">\(\hat{\underline{\theta}}=(\hat{\theta}_1,\ldots,\hat{\theta}_p)\)</span>.</p>
+<p data-o006-id="O006-PSU-005-U0271">Mari kita lihat contoh penentuan MLE untuk beberapa parameter.</p>
+<div class="theorem example" data-o006-id="O006-PSU-005-U0272" id="exm-multparam1">
+<p data-o006-id="O006-PSU-005-U0273"><span class="theorem-title"><strong>Contoh 4.14</strong></span> Misalkan kita mempunyai sampel acak berukuran <span class="math inline" data-o006-math-id="O006-PSU-005-M0231">\(n\)</span> dari distribusi Normal dengan parameter yang tidak diketahui <span class="math inline" data-o006-math-id="O006-PSU-005-M0232">\(\mu\)</span> dan <span class="math inline" data-o006-math-id="O006-PSU-005-M0233">\(\sigma^2\)</span>. Tentukan MLE bagi <span class="math inline" data-o006-math-id="O006-PSU-005-M0234">\(\underline{\theta}=(\mu, \sigma^2)\)</span>.</p>
+<section class="level4 card card-body bg-light ms-3 mb-3 pt-0" data-o006-id="O006-PSU-005-U0274" id="solution-13">
+<h4 class="anchored" data-anchor-id="solution-13" data-o006-id="O006-PSU-005-U0275">Penyelesaian</h4>
+<p data-o006-id="O006-PSU-005-U0276">Fungsi kemungkinannya adalah:</p>
+<p data-o006-id="O006-PSU-005-U0277"><span class="math display" data-o006-math-id="O006-PSU-005-M0235">\[\begin{align*}
+    L(\underline{\theta})=\prod_{i=1}^n \frac{1}{\sqrt{2\pi\sigma^2}}e^{-\frac{1}{2\sigma^2}(x_i-\mu)^2}=\left(2\pi\sigma^2\right)^{-n/2}e^{\sum -\frac{1}{2\sigma^2}(x_i-\mu)^2}
+\end{align*}\]</span></p>
+<p data-o006-id="O006-PSU-005-U0278">Fungsi log-kemungkinannya adalah:</p>
+<p data-o006-id="O006-PSU-005-U0279"><span class="math display" data-o006-math-id="O006-PSU-005-M0236">\[\begin{align*}
+    \ell(\underline{\theta})=-\frac{n}{2}\ln (2\pi)-\frac{n}{2}\ln (\sigma^2)-\sum_{i=1}^n \frac{1}{2\sigma^2}(x_i-\mu)^2
+\end{align*}\]</span></p>
+<p data-o006-id="O006-PSU-005-U0280">Misalkan <span class="math inline" data-o006-math-id="O006-PSU-005-M0237">\(\nu=\sigma^2\)</span>. Kita mempunyai:</p>
+<p data-o006-id="O006-PSU-005-U0281"><span class="math display" data-o006-math-id="O006-PSU-005-M0238">\[\begin{align*}
+    \ell(\mu, \nu)=-\frac{n}{2}\ln (2\pi)-\frac{n}{2}\ln (\nu)-\sum_{i=1}^n \frac{1}{2\nu}(x_i-\mu)^2
+\end{align*}\]</span></p>
+<p data-o006-id="O006-PSU-005-U0282">Sekarang, ambil turunan terhadap <span class="math inline" data-o006-math-id="O006-PSU-005-M0239">\(\mu\)</span> dan <span class="math inline" data-o006-math-id="O006-PSU-005-M0240">\(\nu\)</span>.</p>
+<p data-o006-id="O006-PSU-005-U0283"><span class="math display" data-o006-math-id="O006-PSU-005-M0241">\[\begin{align*}
+    &amp; \frac{d\ell(\mu, \nu)}{d\mu}=-2\frac{1}{2\nu}\sum (x_i-\mu)(-1)=\frac{\sum x_i-n\mu}{\nu} \\
+    &amp; \frac{d\ell(\mu, \nu)}{d\nu}=-\frac{n}{2\nu}+\frac{\sum (x_i-\mu)^2}{2\nu^2}=\frac{-n\nu+\sum(x_i-\mu)^2}{2\nu^2}
+\end{align*}\]</span></p>
+<p data-o006-id="O006-PSU-005-U0284">Dengan menyamakan turunan-turunan tersebut dengan 0 lalu menyelesaikannya, kita memperoleh:</p>
+<p data-o006-id="O006-PSU-005-U0285"><span class="math display" data-o006-math-id="O006-PSU-005-M0242">\[\begin{align*}
+    &amp; 0=\frac{\sum x_i-n\mu}{\nu}, \qquad \Rightarrow \mu=\frac{\sum x_i}{n}=\bar{x}\\
+    &amp; 0=\frac{-n\nu+\sum(x_i-\mu)^2}{2\nu^2}, \qquad \Rightarrow \nu=\frac{\sum (x_i-\mu)^2}{n}
+\end{align*}\]</span></p>
+<p data-o006-id="O006-PSU-005-U0286">Kita mempunyai dua persamaan dan dua peubah yang tidak diketahui. Oleh karena itu, MLE yang diperoleh adalah:</p>
+<p data-o006-id="O006-PSU-005-U0287"><span class="math display" data-o006-math-id="O006-PSU-005-M0243">\[\begin{align*}
+    &amp; \hat{\mu}=\bar{x}\\
+    &amp; \hat{\nu}=\hat{\sigma^2}=\frac{\sum_{i=1}^n (x_i-\bar{x})^2}{n}
+\end{align*}\]</span></p>
+</section>
+</div>
+<div class="theorem example" data-o006-id="O006-PSU-005-U0288" id="exm-multparam2">
+<p data-o006-id="O006-PSU-005-U0289"><span class="theorem-title"><strong>Contoh 4.15</strong></span> Misalkan <span class="math inline" data-o006-math-id="O006-PSU-005-M0244">\(X_i\overset{iid}{\sim} \text{Laplace}(\mu, b)\)</span>, untuk <span class="math inline" data-o006-math-id="O006-PSU-005-M0245">\(i=1, \ldots, n\)</span>. Tentukan MLE bagi <span class="math inline" data-o006-math-id="O006-PSU-005-M0246">\(\underline{\theta}=(\mu, b)\)</span>.</p>
+<section class="level4 card card-body bg-light ms-3 mb-3 pt-0" data-o006-id="O006-PSU-005-U0290" id="solution-14">
+<h4 class="anchored" data-anchor-id="solution-14" data-o006-id="O006-PSU-005-U0291">Penyelesaian</h4>
+<p data-o006-id="O006-PSU-005-U0292">PDF dari <span class="math inline" data-o006-math-id="O006-PSU-005-M0247">\(X\)</span> adalah:</p>
+<p data-o006-id="O006-PSU-005-U0293"><span class="math display" data-o006-math-id="O006-PSU-005-M0248">\[\begin{align*}
+    f(x|\underline{\theta})=\frac{1}{2b}e^{-\frac{|x-\mu|}{b}}, \qquad -\infty&lt;x&lt;\infty
+\end{align*}\]</span> Fungsi kemungkinannya adalah:</p>
+<p data-o006-id="O006-PSU-005-U0294"><span class="math display" data-o006-math-id="O006-PSU-005-M0249">\[\begin{align*}
+    L(\underline{\theta})=\prod_{i=1}^n \frac{1}{2b}e^{-\frac{|x_i-\mu|}{b}}=(2b)^{-n}e^{-\frac{\sum_i|x_i-\mu|}{b}}
+\end{align*}\]</span></p>
+<p data-o006-id="O006-PSU-005-U0295">Fungsi log-kemungkinannya adalah:</p>
+<p data-o006-id="O006-PSU-005-U0296"><span class="math display" data-o006-math-id="O006-PSU-005-M0250">\[\begin{align*}
+    \ell(\underline{\theta})=-n\ln 2-n\ln b-\frac{\sum |x_i-\mu|}{b}
+\end{align*}\]</span></p>
+<p data-o006-id="O006-PSU-005-U0297">Mari kita mulai dengan mengambil turunan terhadap <span class="math inline" data-o006-math-id="O006-PSU-005-M0251">\(b\)</span>.</p>
+<p data-o006-id="O006-PSU-005-U0298"><span class="math display" data-o006-math-id="O006-PSU-005-M0252">\[\begin{align*}
+    \frac{d\ell(\underline{\theta})}{db}=-\frac{n}{b}+\frac{\sum |x_i-\mu|}{b^2}=\frac{-nb+\sum |x_i-\mu|}{b^2}
+\end{align*}\]</span></p>
+<p data-o006-id="O006-PSU-005-U0299">Dengan menyamakan turunan tersebut dengan 0, kita memperoleh:</p>
+<p data-o006-id="O006-PSU-005-U0300"><span class="math display" data-o006-math-id="O006-PSU-005-M0253">\[\begin{align*}
+    0=\frac{-nb+\sum |x_i-\mu|}{b^2}, \qquad \Rightarrow \hat{b}=\frac{\sum |x_i-\mu|}{n}
+\end{align*}\]</span></p>
+<p data-o006-id="O006-PSU-005-U0301">Selanjutnya, mari kita tentukan turunan dari <span class="math inline" data-o006-math-id="O006-PSU-005-M0254">\(\ell(\underline{\theta})\)</span> terhadap <span class="math inline" data-o006-math-id="O006-PSU-005-M0255">\(\mu\)</span>.</p>
+<p data-o006-id="O006-PSU-005-U0302"><span class="math display" data-o006-math-id="O006-PSU-005-M0256">\[\begin{align*}
+    &amp; \frac{d\ell(\underline{\theta})}{d\mu}=-\sum_{i=1}^n \left(\frac{1}{b}\right)\frac{d}{d\mu} |x_i-\mu|
+\end{align*}\]</span></p>
+<p data-o006-id="O006-PSU-005-U0303">Namun, bagaimana bentuk <span class="math inline" data-o006-math-id="O006-PSU-005-M0257">\(\frac{d}{d\mu} |x_i-\mu|\)</span>? Di luar titik tekuk, kita mengetahui bahwa</p>
+<p data-o006-id="O006-PSU-005-U0304"><span class="math display" data-o006-math-id="O006-PSU-005-M0258">\[\begin{align*}
+    |x_i-\mu|=\begin{cases}
+        x_i-\mu &amp; \text{if }x_i\ge \mu\\
+        -x_i+\mu &amp; \text{if }x_i\le \mu
+    \end{cases}
+\end{align*}\]</span></p>
+<p data-o006-id="O006-PSU-005-U0305">Dengan demikian, jauh dari titik tekuk, turunannya adalah</p>
+<p data-o006-id="O006-PSU-005-U0306"><span class="math display" data-o006-math-id="O006-PSU-005-M0259">\[\partial_\mu|x_i-\mu|=\begin{cases}-1,&amp;\mu&lt;x_i,\\[-2pt] [-1,1],&amp;\mu=x_i,\\[-2pt] 1,&amp;\mu&gt;x_i.\end{cases}\]</span></p>
+<p data-o006-id="O006-PSU-005-U0307">Kita dapat merangkum kedua sisi dengan fungsi indikator berikut; pada titik tekuk, ekspresi ini harus dipahami melalui subgradien:</p>
+<p data-o006-id="O006-PSU-005-U0308"><span class="math display" data-o006-math-id="O006-PSU-005-M0260">\[\begin{align*}
+    \frac{d}{d\mu}|x_i-\mu|=\mathbf{1}_{\{x_i&lt;\mu\}}-\mathbf{1}_{\{x_i&gt;\mu\}}
+\end{align*}\]</span></p>
+<p data-o006-id="O006-PSU-005-U0309">Dengan memasukkan kondisi subgradien ini ke dalam fungsi log-kemungkinan, kita memperoleh:</p>
+<p data-o006-id="O006-PSU-005-U0310"><span class="math display" data-o006-math-id="O006-PSU-005-M0261">\[\begin{align*}
+    \frac{d}{d\mu}\ell(\underline{\theta})=-\frac{1}{b}\sum_{i=1}^n\left(\mathbf{1}_{\{x_i&lt;\mu\}}-\mathbf{1}_{\{x_i&gt;\mu\}}\right)
+\end{align*}\]</span></p>
+<p data-o006-id="O006-PSU-005-U0311">Dengan memilih subgradien yang sama dengan 0, kita memperoleh:</p>
+<p data-o006-id="O006-PSU-005-U0312"><span class="math display" data-o006-math-id="O006-PSU-005-M0262">\[\begin{align*}
+0\in\sum_{i=1}^n\partial_\mu|x_i-\mu|\quad\Longleftrightarrow\quad \#\{i:x_i&lt;\mu\}\le\frac n2,\ \#\{i:x_i&gt;\mu\}\le\frac n2.
+\end{align*}\]</span></p>
+<p data-o006-id="O006-PSU-005-U0313">Perhatikan setiap suku pada persamaan terakhir. <span class="math inline" data-o006-math-id="O006-PSU-005-M0263">\(\sum \mathbf{1}_{\{x_i&lt;\mu\}}\)</span> menyatakan banyaknya <span class="math inline" data-o006-math-id="O006-PSU-005-M0264">\(x_i\)</span>, yang nilainya lebih kecil daripada <span class="math inline" data-o006-math-id="O006-PSU-005-M0265">\(\mu\)</span>. Demikian pula, <span class="math inline" data-o006-math-id="O006-PSU-005-M0266">\(\sum \mathbf{1}_{\{x_i&gt;\mu\}}\)</span> menyatakan banyaknya <span class="math inline" data-o006-math-id="O006-PSU-005-M0267">\(x_i\)</span>, yang nilainya lebih besar daripada <span class="math inline" data-o006-math-id="O006-PSU-005-M0268">\(\mu\)</span>. Kondisi subgradien nol terpenuhi apabila <span class="math inline" data-o006-math-id="O006-PSU-005-M0269">\(\mu\)</span> merupakan salah satu median sampel; untuk ukuran sampel genap, setiap nilai di antara dua statistik urutan tengah dapat memaksimumkan fungsi kemungkinan. Dengan demikian, MLE bagi <span class="math inline" data-o006-math-id="O006-PSU-005-M0270">\(\mu\)</span> dapat dipilih sebagai <span class="math inline" data-o006-math-id="O006-PSU-005-M0271">\(\hat\mu\in\operatorname{Median}(x_1,\ldots,x_n)\)</span>.</p>
+<p data-o006-id="O006-PSU-005-U0314">Oleh karena itu, dengan kedua syarat optimalitas dan kedua parameter yang tidak diketahui tersebut, kita memperoleh MLE bagi <span class="math inline" data-o006-math-id="O006-PSU-005-M0272">\(\underline{\theta}\)</span> sebagai:</p>
+<p data-o006-id="O006-PSU-005-U0315"><span class="math display" data-o006-math-id="O006-PSU-005-M0273">\[\begin{align*}
+    \hat\mu&amp;\in\operatorname{Median}(x_1,\ldots,x_n),\\
+    \hat b&amp;=\frac1n\sum_{i=1}^n|x_i-\hat\mu|.
+\end{align*}\]</span></p>
+</section>
+</div>
+<p data-o006-id="O006-PSU-005-U0316">Satu contoh terakhir…</p>
+<div class="theorem example" data-o006-id="O006-PSU-005-U0317" id="exm-multparam3">
+<p data-o006-id="O006-PSU-005-U0318"><span class="theorem-title"><strong>Contoh 4.16</strong></span> Misalkan <span class="math inline" data-o006-math-id="O006-PSU-005-M0274">\(X_1, X_2, \ldots, X_n\)</span> merupakan sampel acak dari distribusi Gamma dengan parameter <span class="math inline" data-o006-math-id="O006-PSU-005-M0275">\(\alpha\)</span> dan <span class="math inline" data-o006-math-id="O006-PSU-005-M0276">\(\theta\)</span>. Misalkan kita hendak menentukan MLE bagi <span class="math inline" data-o006-math-id="O006-PSU-005-M0277">\(\underline{\theta}=(\alpha,\theta)\)</span>. Seperti biasa, kita mulai dengan fungsi kemungkinan.</p>
+<p data-o006-id="O006-PSU-005-U0319"><span class="math display" data-o006-math-id="O006-PSU-005-M0278">\[\begin{align*}
+    L(\underline{\theta})=\prod_{i=1}^n \frac{1}{\Gamma(\alpha)\theta^\alpha}x_i^{\alpha-1}e^{-\frac{x_i}{\theta}}=\left(\Gamma(\alpha)\right)^{-n}\left(\theta\right)^{-n\alpha}\left(\prod_{i=1}^n x_i^{\alpha-1}\right)e^{-\frac{\sum x_i}{\theta}}
+\end{align*}\]</span></p>
+<p data-o006-id="O006-PSU-005-U0320">Fungsi log-kemungkinannya adalah:</p>
+<p data-o006-id="O006-PSU-005-U0321"><span class="math display" data-o006-math-id="O006-PSU-005-M0279">\[\begin{align*}
+    \ell(\underline{\theta})=-n\ln \Gamma(\alpha)-n\alpha \ln \theta+(\alpha-1)\sum \ln x_i-\frac{\sum x_i}{\theta}
+\end{align*}\]</span></p>
+<p data-o006-id="O006-PSU-005-U0322">Langkah berikutnya adalah mengambil turunan terhadap <span class="math inline" data-o006-math-id="O006-PSU-005-M0280">\(\alpha\)</span> dan <span class="math inline" data-o006-math-id="O006-PSU-005-M0281">\(\theta\)</span>.</p>
+<p data-o006-id="O006-PSU-005-U0323"><span class="math display" data-o006-math-id="O006-PSU-005-M0282">\[\begin{align*}
+    \frac{\partial\ell}{\partial\theta}&amp;=-\frac{n\alpha}{\theta}+\frac{\sum_i x_i}{\theta^2},\\
+    \frac{\partial\ell}{\partial\alpha}&amp;=-n\psi(\alpha)-n\ln\theta+\sum_i\ln x_i.
+\end{align*}\]</span></p>
+<p data-o006-id="O006-PSU-005-U0324">Langkah berikutnya tentu menyamakan turunan-turunan tersebut dengan nol lalu menyelesaikan parameter, sebab kita mempunyai dua persamaan dan dua peubah yang tidak diketahui. Namun, sebelum melakukannya, mari kita tinjau <span class="math inline" data-o006-math-id="O006-PSU-005-M0283">\(\frac{d}{d\alpha}\Gamma(\alpha)\)</span>. Ingat bahwa fungsi gamma pada <span class="math inline" data-o006-math-id="O006-PSU-005-M0284">\(a\)</span> adalah</p>
+<p data-o006-id="O006-PSU-005-U0325"><span class="math display" data-o006-math-id="O006-PSU-005-M0285">\[\begin{align*}
+    \Gamma(a)=\int_0^\infty t^{a-1}e^{-t}dt
+\end{align*}\]</span></p>
+<p data-o006-id="O006-PSU-005-U0326">Fungsi gamma dan turunannya terdefinisi dengan baik, tetapi persamaan skor bagi parameter bentuk melibatkan fungsi digamma dan pada umumnya tidak mempunyai solusi bentuk tertutup elementer. Karena itu, setelah hubungan bagi parameter skala diturunkan, persamaan satu dimensi bagi parameter bentuk perlu diselesaikan secara numerik untuk memperoleh MLE.</p>
+</div>
+<p data-o006-id="O006-PSU-005-U0327">Kita akan membahas pendugaan kemungkinan maksimum numerik selanjutnya; untuk menentukan MLE secara numerik, kita menggunakan perangkat lunak. Sebelum itu, kita berhenti sejenak dari penentuan MLE untuk memperkenalkan R.</p>
+</section>
+</section>
+<section class="level2" data-number="4.5" data-o006-id="O006-PSU-005-U0328" id="summary">
+<h2 class="anchored" data-anchor-id="summary" data-number="4.5" data-o006-id="O006-PSU-005-U0329"><span class="header-section-number">4.5</span> Ringkasan</h2>
+<p data-o006-id="O006-PSU-005-U0330">Dalam pelajaran ini, kita diperkenalkan pada metode pendugaan kemungkinan maksimum (MLE) sebagai perangkat dasar dalam inferensi statistik. Kita mempelajari cara membentuk fungsi kemungkinan dan fungsi log-kemungkinan berdasarkan model peluang tertentu, serta, apabila memungkinkan, cara menentukan secara analitik nilai parameter yang memaksimumkan fungsi kemungkinan. Kita berlatih menurunkan MLE untuk distribusi diskret maupun kontinu dan meninjau kasus ketika pembatasan himpunan dukungan harus ditangani secara cermat menggunakan fungsi indikator.</p>
+<p data-o006-id="O006-PSU-005-U0331"><strong>Pokok-Pokok Penting:</strong></p>
+<ul data-o006-id="O006-PSU-005-U0332">
+<li data-o006-id="O006-PSU-005-U0333">Fungsi kemungkinan <span class="math inline" data-o006-math-id="O006-PSU-005-M0286">\(L(\theta_1, \theta_2, \ldots, \theta_m)\)</span> adalah fungsi massa atau kepadatan peluang bersama yang dievaluasi pada sampel teramati dan dipandang sebagai fungsi parameter; fungsi ini bukan distribusi peluang atas parameter.</li>
+<li data-o006-id="O006-PSU-005-U0334">Penduga kemungkinan maksimum (MLE) adalah statistik yang, sebagai fungsi sampel acak, memilih nilai parameter <span class="math inline" data-o006-math-id="O006-PSU-005-M0287">\(\theta\)</span> yang memaksimumkan fungsi kemungkinan <span class="math inline" data-o006-math-id="O006-PSU-005-M0288">\(L(\theta)\)</span>.</li>
+<li data-o006-id="O006-PSU-005-U0335">Sering kali lebih mudah memaksimumkan <span class="math inline" data-o006-math-id="O006-PSU-005-M0289">\(\ell(\theta)=\ln L(\theta)\)</span>.</li>
+</ul>
+</section>
+</main></div>
+<footer class="site-footer"><div class="site-footer__inner">Konten sumber: Departemen Statistika Penn State, CC BY-NC 4.0 kecuali dinyatakan lain. Terjemahan dan rekonstruksi: OpenAI Codex gpt-5.6-sol, Ultra. Tidak ada dukungan atau pengesahan yang tersirat.</div></footer>
+</body>
+</html>

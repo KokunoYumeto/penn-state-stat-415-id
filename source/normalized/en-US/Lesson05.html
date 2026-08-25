@@ -1,0 +1,1340 @@
+<!doctype html>
+<html lang="en-US">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>5  Maximum Likelihood Estimation (MLE) (Part II) – STAT 415 | Introduction to Mathematical Statistics</title>
+<meta name="source-url" content="https://online.stat.psu.edu/stat415/Lesson05">
+<meta name="translation-provenance" content="OpenAI Codex gpt-5.6-sol, Ultra">
+</head>
+<body>
+<main class="content" data-component-id="Lesson05" data-document-id="O006-PSU-006" data-source-url="https://online.stat.psu.edu/stat415/Lesson05" id="quarto-document-content">
+<header class="quarto-title-block default" data-o006-id="O006-PSU-006-U0001" id="title-block-header"><nav aria-label="breadcrumb" class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" data-o006-id="O006-PSU-006-U0002"><ol class="breadcrumb" data-o006-id="O006-PSU-006-U0003"><li class="breadcrumb-item" data-o006-id="O006-PSU-006-U0004"><a data-o006-id="O006-PSU-006-U0005" href="./Lesson00.html">Lessons</a></li><li class="breadcrumb-item" data-o006-id="O006-PSU-006-U0006"><a data-o006-id="O006-PSU-006-U0007" href="./Lesson05.html"><span class="chapter-number">5</span>  <span class="chapter-title">Maximum Likelihood Estimation (MLE) (Part II)</span></a></li></ol></nav>
+<div class="quarto-title" data-o006-id="O006-PSU-006-U0008">
+<h1 class="title" data-o006-id="O006-PSU-006-U0009"><span class="chapter-number">5</span>  <span class="chapter-title">Maximum Likelihood Estimation (MLE) (Part II)</span></h1>
+<div class="quarto-categories" data-o006-id="O006-PSU-006-U0010">
+<div class="quarto-category" data-o006-id="O006-PSU-006-U0011">Point Estimation</div>
+<div class="quarto-category" data-o006-id="O006-PSU-006-U0012">Unbiased Estimation</div>
+<div class="quarto-category" data-o006-id="O006-PSU-006-U0013">Bias</div>
+<div class="quarto-category" data-o006-id="O006-PSU-006-U0014">Variance and Mean Square</div>
+<div class="quarto-category" data-o006-id="O006-PSU-006-U0015">Factorization</div>
+<div class="quarto-category" data-o006-id="O006-PSU-006-U0016">Sufficiency</div>
+<div class="quarto-category" data-o006-id="O006-PSU-006-U0017">Method of Moments</div>
+</div>
+</div>
+<div class="quarto-title-meta" data-o006-id="O006-PSU-006-U0018">
+</div>
+</header>
+<section class="level2 unnumbered unlisted" data-o006-id="O006-PSU-006-U0019" id="overview">
+<h2 class="unnumbered unlisted anchored" data-anchor-id="overview" data-o006-id="O006-PSU-006-U0020">Overview</h2>
+<p data-o006-id="O006-PSU-006-U0021">This lesson advances your understanding of maximum likelihood estimation (MLE) by focusing on its practical implementation, particularly through numerical methods in R. You will learn to compute MLEs for single and multiple parameter models using techniques such as grid search and the Newton-Raphson algorithm, with an emphasis on the optim function in R. Additionally, this lesson introduces essential R programming skills, including basic operations, vector and data frame manipulation, summary statistics, plotting, and working with statistical distributions like the normal and exponential. Through examples, you will explore how to evaluate likelihood and log-likelihood functions, simulate random variables, and estimate parameters numerically. By the end of this lesson, you will be proficient in applying MLE in real-world scenarios and leveraging R for statistical analysis, setting the stage for more advanced inference techniques.</p>
+<section class="level3 unnumbered unlisted objectiveblock" data-o006-id="O006-PSU-006-U0022" id="objectives">
+<h3 class="unnumbered unlisted anchored" data-anchor-id="objectives" data-o006-id="O006-PSU-006-U0023"><i class="bi bi-check2-circle"></i>Objectives</h3>
+<p data-o006-id="O006-PSU-006-U0024">Upon completion of this lesson, you should be able to:</p>
+<ol data-o006-id="O006-PSU-006-U0025" type="1">
+<li data-o006-id="O006-PSU-006-U0026">Numerically estimate MLEs for a range of single parameter models and multiple parameter models using optim in R in situations where data values are given, and</li>
+<li data-o006-id="O006-PSU-006-U0027">Use R to numerically simulate random variables from standard distributions, and also find pdfs, CDFs, and quantiles of standard distributions, including the normal, exponential, Poisson, geometric, and binomial distributions.</li>
+</ol>
+</section>
+</section>
+<section class="level2" data-number="5.1" data-o006-id="O006-PSU-006-U0028" id="introduction-to-r">
+<h2 class="anchored" data-anchor-id="introduction-to-r" data-number="5.1" data-o006-id="O006-PSU-006-U0029"><span class="header-section-number">5.1</span> Introduction to R</h2>
+<section class="level3" data-number="5.1.1" data-o006-id="O006-PSU-006-U0030" id="basic-operations-in-r">
+<h3 class="anchored" data-anchor-id="basic-operations-in-r" data-number="5.1.1" data-o006-id="O006-PSU-006-U0031"><span class="header-section-number">5.1.1</span> Basic Operations in R</h3>
+<p data-o006-id="O006-PSU-006-U0032">R can be used as a scientific calculator. The following shows a small subset of the calculator like functions that can be done in R.</p>
+<div class="cell language-name-processed" data-o006-id="O006-PSU-006-U0033">
+<div class="codeblock-with-label r" data-o006-id="O006-PSU-006-U0034">
+<style>.codeblock-with-label pre.lang-label-1::before { content: "R"; }</style>
+<div class="code-copy-outer-scaffold" data-o006-id="O006-PSU-006-U0035"><div class="sourceCode cell-code" data-language-name-skip="true" data-o006-id="O006-PSU-006-U0036" id="cb1"><pre class="sourceCode r lang-label-1 code-with-copy" data-o006-id="O006-PSU-006-U0037"><code class="sourceCode r" data-o006-id="O006-PSU-006-U0038"><span id="cb1-1"><a aria-hidden="true" data-o006-id="O006-PSU-006-U0039" href="#cb1-1" tabindex="-1"></a><span class="dv">3</span><span class="sc">+</span><span class="dv">2</span></span>
+<span id="cb1-2"><a aria-hidden="true" data-o006-id="O006-PSU-006-U0040" href="#cb1-2" tabindex="-1"></a></span>
+<span id="cb1-3"><a aria-hidden="true" data-o006-id="O006-PSU-006-U0041" href="#cb1-3" tabindex="-1"></a><span class="dv">3-2</span></span>
+<span id="cb1-4"><a aria-hidden="true" data-o006-id="O006-PSU-006-U0042" href="#cb1-4" tabindex="-1"></a></span>
+<span id="cb1-5"><a aria-hidden="true" data-o006-id="O006-PSU-006-U0043" href="#cb1-5" tabindex="-1"></a><span class="dv">3</span><span class="sc">*</span><span class="dv">2</span></span>
+<span id="cb1-6"><a aria-hidden="true" data-o006-id="O006-PSU-006-U0044" href="#cb1-6" tabindex="-1"></a></span>
+<span id="cb1-7"><a aria-hidden="true" data-o006-id="O006-PSU-006-U0045" href="#cb1-7" tabindex="-1"></a><span class="dv">3</span><span class="sc">/</span><span class="dv">2</span></span>
+<span id="cb1-8"><a aria-hidden="true" data-o006-id="O006-PSU-006-U0046" href="#cb1-8" tabindex="-1"></a></span>
+<span id="cb1-9"><a aria-hidden="true" data-o006-id="O006-PSU-006-U0047" href="#cb1-9" tabindex="-1"></a><span class="dv">3</span><span class="sc">^</span><span class="dv">2</span></span>
+<span id="cb1-10"><a aria-hidden="true" data-o006-id="O006-PSU-006-U0048" href="#cb1-10" tabindex="-1"></a></span>
+<span id="cb1-11"><a aria-hidden="true" data-o006-id="O006-PSU-006-U0049" href="#cb1-11" tabindex="-1"></a><span class="fu">exp</span>(<span class="dv">3</span>)</span>
+<span id="cb1-12"><a aria-hidden="true" data-o006-id="O006-PSU-006-U0050" href="#cb1-12" tabindex="-1"></a></span>
+<span id="cb1-13"><a aria-hidden="true" data-o006-id="O006-PSU-006-U0051" href="#cb1-13" tabindex="-1"></a><span class="fu">sqrt</span>(<span class="dv">3</span>)</span>
+<span id="cb1-14"><a aria-hidden="true" data-o006-id="O006-PSU-006-U0052" href="#cb1-14" tabindex="-1"></a></span>
+<span id="cb1-15"><a aria-hidden="true" data-o006-id="O006-PSU-006-U0053" href="#cb1-15" tabindex="-1"></a><span class="fu">log</span>(<span class="dv">3</span>)</span></code></pre></div><button class="code-copy-button" data-o006-id="O006-PSU-006-U0054" title="Copy to Clipboard"><i class="bi"></i></button></div>
+</div>
+</div>
+<p data-o006-id="O006-PSU-006-U0055">Note that in R, and statistics and probability in general, the “log” function is, by default, the natural logarithm (base <span class="math inline" data-o006-math-id="O006-PSU-006-M0001">\(e\)</span>). In mathematics, this is typically denoted by <span class="math inline" data-o006-math-id="O006-PSU-006-M0002">\(\ln(x)\)</span>, but in statistics, this is almost always denoted simply by <span class="math inline" data-o006-math-id="O006-PSU-006-M0003">\(\log(x)\)</span>.</p>
+<p data-o006-id="O006-PSU-006-U0056">One can see this from the following code:</p>
+<div class="cell language-name-processed" data-o006-id="O006-PSU-006-U0057">
+<div class="codeblock-with-label r" data-o006-id="O006-PSU-006-U0058">
+<style>.codeblock-with-label pre.lang-label-2::before { content: "R"; }</style>
+<div class="code-copy-outer-scaffold" data-o006-id="O006-PSU-006-U0059"><div class="sourceCode cell-code" data-language-name-skip="true" data-o006-id="O006-PSU-006-U0060" id="cb2"><pre class="sourceCode r lang-label-2 code-with-copy" data-o006-id="O006-PSU-006-U0061"><code class="sourceCode r" data-o006-id="O006-PSU-006-U0062"><span id="cb2-1"><a aria-hidden="true" data-o006-id="O006-PSU-006-U0063" href="#cb2-1" tabindex="-1"></a>e<span class="ot">=</span><span class="fu">exp</span>(<span class="dv">1</span>)</span>
+<span id="cb2-2"><a aria-hidden="true" data-o006-id="O006-PSU-006-U0064" href="#cb2-2" tabindex="-1"></a>e</span></code></pre></div><button class="code-copy-button" data-o006-id="O006-PSU-006-U0065" title="Copy to Clipboard"><i class="bi"></i></button></div>
+</div>
+<div class="cell-output cell-output-stdout" data-o006-id="O006-PSU-006-U0066">
+<pre data-o006-id="O006-PSU-006-U0067"><code data-o006-id="O006-PSU-006-U0068">[1] 2.718282</code></pre>
+</div>
+<div class="codeblock-with-label r" data-o006-id="O006-PSU-006-U0069">
+<style>.codeblock-with-label pre.lang-label-52::before { content: "R"; }</style>
+<div class="code-copy-outer-scaffold" data-o006-id="O006-PSU-006-U0070"><div class="sourceCode cell-code" data-o006-id="O006-PSU-006-U0071" id="cb4"><pre class="sourceCode r lang-label-52 code-with-copy" data-o006-id="O006-PSU-006-U0072"><code class="sourceCode r" data-o006-id="O006-PSU-006-U0073"><span id="cb4-1"><a aria-hidden="true" data-o006-id="O006-PSU-006-U0074" href="#cb4-1" tabindex="-1"></a><span class="do">## log base e of e = 1</span></span>
+<span id="cb4-2"><a aria-hidden="true" data-o006-id="O006-PSU-006-U0075" href="#cb4-2" tabindex="-1"></a><span class="fu">log</span>(e)</span></code></pre></div><button class="code-copy-button" data-o006-id="O006-PSU-006-U0076" title="Copy to Clipboard"><i class="bi"></i></button></div>
+</div>
+<div class="cell-output cell-output-stdout" data-o006-id="O006-PSU-006-U0077">
+<pre data-o006-id="O006-PSU-006-U0078"><code data-o006-id="O006-PSU-006-U0079">[1] 1</code></pre>
+</div>
+<div class="codeblock-with-label r" data-o006-id="O006-PSU-006-U0080">
+<style>.codeblock-with-label pre.lang-label-53::before { content: "R"; }</style>
+<div class="code-copy-outer-scaffold" data-o006-id="O006-PSU-006-U0081"><div class="sourceCode cell-code" data-o006-id="O006-PSU-006-U0082" id="cb6"><pre class="sourceCode r lang-label-53 code-with-copy" data-o006-id="O006-PSU-006-U0083"><code class="sourceCode r" data-o006-id="O006-PSU-006-U0084"><span id="cb6-1"><a aria-hidden="true" data-o006-id="O006-PSU-006-U0085" href="#cb6-1" tabindex="-1"></a><span class="do">## log base e of 10 does NOT = 1</span></span>
+<span id="cb6-2"><a aria-hidden="true" data-o006-id="O006-PSU-006-U0086" href="#cb6-2" tabindex="-1"></a><span class="fu">log</span>(<span class="dv">10</span>)</span></code></pre></div><button class="code-copy-button" data-o006-id="O006-PSU-006-U0087" title="Copy to Clipboard"><i class="bi"></i></button></div>
+</div>
+<div class="cell-output cell-output-stdout" data-o006-id="O006-PSU-006-U0088">
+<pre data-o006-id="O006-PSU-006-U0089"><code data-o006-id="O006-PSU-006-U0090">[1] 2.302585</code></pre>
+</div>
+</div>
+</section>
+<section class="level3" data-number="5.1.2" data-o006-id="O006-PSU-006-U0091" id="defining-and-storing-scalars-and-vectors">
+<h3 class="anchored" data-anchor-id="defining-and-storing-scalars-and-vectors" data-number="5.1.2" data-o006-id="O006-PSU-006-U0092"><span class="header-section-number">5.1.2</span> Defining and storing scalars and vectors</h3>
+<p data-o006-id="O006-PSU-006-U0093">In general, you want to type your R code in a text file with the “.r” or “.R” extension, and then send lines or blocks of code to the R console. This lets you change code easily, save your work, and copy/paste it for use in other scenarios.</p>
+<p data-o006-id="O006-PSU-006-U0094">You will often want to store numbers as variables. You can then use those variables for calculations. Here’s a very simple example of multiplying two numbers together:</p>
+<div class="cell language-name-processed" data-o006-id="O006-PSU-006-U0095">
+<div class="codeblock-with-label r" data-o006-id="O006-PSU-006-U0096">
+<style>.codeblock-with-label pre.lang-label-3::before { content: "R"; }</style>
+<div class="code-copy-outer-scaffold" data-o006-id="O006-PSU-006-U0097"><div class="sourceCode cell-code" data-language-name-skip="true" data-o006-id="O006-PSU-006-U0098" id="cb8"><pre class="sourceCode r lang-label-3 code-with-copy" data-o006-id="O006-PSU-006-U0099"><code class="sourceCode r" data-o006-id="O006-PSU-006-U0100"><span id="cb8-1"><a aria-hidden="true" data-o006-id="O006-PSU-006-U0101" href="#cb8-1" tabindex="-1"></a>a<span class="ot">=</span><span class="dv">4</span></span>
+<span id="cb8-2"><a aria-hidden="true" data-o006-id="O006-PSU-006-U0102" href="#cb8-2" tabindex="-1"></a></span>
+<span id="cb8-3"><a aria-hidden="true" data-o006-id="O006-PSU-006-U0103" href="#cb8-3" tabindex="-1"></a>b<span class="ot">=</span><span class="dv">3</span></span>
+<span id="cb8-4"><a aria-hidden="true" data-o006-id="O006-PSU-006-U0104" href="#cb8-4" tabindex="-1"></a></span>
+<span id="cb8-5"><a aria-hidden="true" data-o006-id="O006-PSU-006-U0105" href="#cb8-5" tabindex="-1"></a>a<span class="sc">*</span>b</span></code></pre></div><button class="code-copy-button" data-o006-id="O006-PSU-006-U0106" title="Copy to Clipboard"><i class="bi"></i></button></div>
+</div>
+<div class="cell-output cell-output-stdout" data-o006-id="O006-PSU-006-U0107">
+<pre data-o006-id="O006-PSU-006-U0108"><code data-o006-id="O006-PSU-006-U0109">[1] 12</code></pre>
+</div>
+</div>
+<p data-o006-id="O006-PSU-006-U0110">We often want to work with multiple numbers, stored in a “vector” of numbers. R handles vectors (and matrices!) naturally. We can create a vector by using the <code data-o006-id="O006-PSU-006-U0111">c</code> command in R (which stands for “concatenate”)</p>
+<div class="cell language-name-processed" data-o006-id="O006-PSU-006-U0112">
+<div class="codeblock-with-label r" data-o006-id="O006-PSU-006-U0113">
+<style>.codeblock-with-label pre.lang-label-4::before { content: "R"; }</style>
+<div class="code-copy-outer-scaffold" data-o006-id="O006-PSU-006-U0114"><div class="sourceCode cell-code" data-language-name-skip="true" data-o006-id="O006-PSU-006-U0115" id="cb10"><pre class="sourceCode r lang-label-4 code-with-copy" data-o006-id="O006-PSU-006-U0116"><code class="sourceCode r" data-o006-id="O006-PSU-006-U0117"><span id="cb10-1"><a aria-hidden="true" data-o006-id="O006-PSU-006-U0118" href="#cb10-1" tabindex="-1"></a><span class="do">## Vectors</span></span>
+<span id="cb10-2"><a aria-hidden="true" data-o006-id="O006-PSU-006-U0119" href="#cb10-2" tabindex="-1"></a></span>
+<span id="cb10-3"><a aria-hidden="true" data-o006-id="O006-PSU-006-U0120" href="#cb10-3" tabindex="-1"></a>v<span class="ot">=</span><span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">4</span>,<span class="dv">3</span>,<span class="dv">2</span>)</span>
+<span id="cb10-4"><a aria-hidden="true" data-o006-id="O006-PSU-006-U0121" href="#cb10-4" tabindex="-1"></a>v</span></code></pre></div><button class="code-copy-button" data-o006-id="O006-PSU-006-U0122" title="Copy to Clipboard"><i class="bi"></i></button></div>
+</div>
+<div class="cell-output cell-output-stdout" data-o006-id="O006-PSU-006-U0123">
+<pre data-o006-id="O006-PSU-006-U0124"><code data-o006-id="O006-PSU-006-U0125">[1] 1 4 3 2</code></pre>
+</div>
+<div class="codeblock-with-label r" data-o006-id="O006-PSU-006-U0126">
+<style>.codeblock-with-label pre.lang-label-54::before { content: "R"; }</style>
+<div class="code-copy-outer-scaffold" data-o006-id="O006-PSU-006-U0127"><div class="sourceCode cell-code" data-o006-id="O006-PSU-006-U0128" id="cb12"><pre class="sourceCode r lang-label-54 code-with-copy" data-o006-id="O006-PSU-006-U0129"><code class="sourceCode r" data-o006-id="O006-PSU-006-U0130"><span id="cb12-1"><a aria-hidden="true" data-o006-id="O006-PSU-006-U0131" href="#cb12-1" tabindex="-1"></a>u<span class="ot">=</span><span class="dv">1</span><span class="sc">:</span><span class="dv">4</span></span>
+<span id="cb12-2"><a aria-hidden="true" data-o006-id="O006-PSU-006-U0132" href="#cb12-2" tabindex="-1"></a>u</span></code></pre></div><button class="code-copy-button" data-o006-id="O006-PSU-006-U0133" title="Copy to Clipboard"><i class="bi"></i></button></div>
+</div>
+<div class="cell-output cell-output-stdout" data-o006-id="O006-PSU-006-U0134">
+<pre data-o006-id="O006-PSU-006-U0135"><code data-o006-id="O006-PSU-006-U0136">[1] 1 2 3 4</code></pre>
+</div>
+</div>
+<p data-o006-id="O006-PSU-006-U0137">This has created two vectors, u and v, each with four elements. If we apply standard math operations to vectors, R’s default behavior is to apply those operations to each element. The code below illustrates this.</p>
+<div class="cell language-name-processed" data-o006-id="O006-PSU-006-U0138">
+<div class="codeblock-with-label r" data-o006-id="O006-PSU-006-U0139">
+<style>.codeblock-with-label pre.lang-label-5::before { content: "R"; }</style>
+<div class="code-copy-outer-scaffold" data-o006-id="O006-PSU-006-U0140"><div class="sourceCode cell-code" data-language-name-skip="true" data-o006-id="O006-PSU-006-U0141" id="cb14"><pre class="sourceCode r lang-label-5 code-with-copy" data-o006-id="O006-PSU-006-U0142"><code class="sourceCode r" data-o006-id="O006-PSU-006-U0143"><span id="cb14-1"><a aria-hidden="true" data-o006-id="O006-PSU-006-U0144" href="#cb14-1" tabindex="-1"></a><span class="do">## element-wise operations</span></span>
+<span id="cb14-2"><a aria-hidden="true" data-o006-id="O006-PSU-006-U0145" href="#cb14-2" tabindex="-1"></a>v<span class="sc">+</span><span class="dv">2</span></span></code></pre></div><button class="code-copy-button" data-o006-id="O006-PSU-006-U0146" title="Copy to Clipboard"><i class="bi"></i></button></div>
+</div>
+<div class="cell-output cell-output-stdout" data-o006-id="O006-PSU-006-U0147">
+<pre data-o006-id="O006-PSU-006-U0148"><code data-o006-id="O006-PSU-006-U0149">[1] 3 6 5 4</code></pre>
+</div>
+<div class="codeblock-with-label r" data-o006-id="O006-PSU-006-U0150">
+<style>.codeblock-with-label pre.lang-label-55::before { content: "R"; }</style>
+<div class="code-copy-outer-scaffold" data-o006-id="O006-PSU-006-U0151"><div class="sourceCode cell-code" data-o006-id="O006-PSU-006-U0152" id="cb16"><pre class="sourceCode r lang-label-55 code-with-copy" data-o006-id="O006-PSU-006-U0153"><code class="sourceCode r" data-o006-id="O006-PSU-006-U0154"><span id="cb16-1"><a aria-hidden="true" data-o006-id="O006-PSU-006-U0155" href="#cb16-1" tabindex="-1"></a>v<span class="sc">*</span><span class="dv">2</span></span></code></pre></div><button class="code-copy-button" data-o006-id="O006-PSU-006-U0156" title="Copy to Clipboard"><i class="bi"></i></button></div>
+</div>
+<div class="cell-output cell-output-stdout" data-o006-id="O006-PSU-006-U0157">
+<pre data-o006-id="O006-PSU-006-U0158"><code data-o006-id="O006-PSU-006-U0159">[1] 2 8 6 4</code></pre>
+</div>
+<div class="codeblock-with-label r" data-o006-id="O006-PSU-006-U0160">
+<style>.codeblock-with-label pre.lang-label-56::before { content: "R"; }</style>
+<div class="code-copy-outer-scaffold" data-o006-id="O006-PSU-006-U0161"><div class="sourceCode cell-code" data-o006-id="O006-PSU-006-U0162" id="cb18"><pre class="sourceCode r lang-label-56 code-with-copy" data-o006-id="O006-PSU-006-U0163"><code class="sourceCode r" data-o006-id="O006-PSU-006-U0164"><span id="cb18-1"><a aria-hidden="true" data-o006-id="O006-PSU-006-U0165" href="#cb18-1" tabindex="-1"></a>u<span class="sc">^</span><span class="dv">2</span></span></code></pre></div><button class="code-copy-button" data-o006-id="O006-PSU-006-U0166" title="Copy to Clipboard"><i class="bi"></i></button></div>
+</div>
+<div class="cell-output cell-output-stdout" data-o006-id="O006-PSU-006-U0167">
+<pre data-o006-id="O006-PSU-006-U0168"><code data-o006-id="O006-PSU-006-U0169">[1]  1  4  9 16</code></pre>
+</div>
+<div class="codeblock-with-label r" data-o006-id="O006-PSU-006-U0170">
+<style>.codeblock-with-label pre.lang-label-57::before { content: "R"; }</style>
+<div class="code-copy-outer-scaffold" data-o006-id="O006-PSU-006-U0171"><div class="sourceCode cell-code" data-o006-id="O006-PSU-006-U0172" id="cb20"><pre class="sourceCode r lang-label-57 code-with-copy" data-o006-id="O006-PSU-006-U0173"><code class="sourceCode r" data-o006-id="O006-PSU-006-U0174"><span id="cb20-1"><a aria-hidden="true" data-o006-id="O006-PSU-006-U0175" href="#cb20-1" tabindex="-1"></a>u<span class="sc">+</span>v</span></code></pre></div><button class="code-copy-button" data-o006-id="O006-PSU-006-U0176" title="Copy to Clipboard"><i class="bi"></i></button></div>
+</div>
+<div class="cell-output cell-output-stdout" data-o006-id="O006-PSU-006-U0177">
+<pre data-o006-id="O006-PSU-006-U0178"><code data-o006-id="O006-PSU-006-U0179">[1] 2 6 6 6</code></pre>
+</div>
+<div class="codeblock-with-label r" data-o006-id="O006-PSU-006-U0180">
+<style>.codeblock-with-label pre.lang-label-58::before { content: "R"; }</style>
+<div class="code-copy-outer-scaffold" data-o006-id="O006-PSU-006-U0181"><div class="sourceCode cell-code" data-o006-id="O006-PSU-006-U0182" id="cb22"><pre class="sourceCode r lang-label-58 code-with-copy" data-o006-id="O006-PSU-006-U0183"><code class="sourceCode r" data-o006-id="O006-PSU-006-U0184"><span id="cb22-1"><a aria-hidden="true" data-o006-id="O006-PSU-006-U0185" href="#cb22-1" tabindex="-1"></a>u<span class="sc">*</span>v</span></code></pre></div><button class="code-copy-button" data-o006-id="O006-PSU-006-U0186" title="Copy to Clipboard"><i class="bi"></i></button></div>
+</div>
+<div class="cell-output cell-output-stdout" data-o006-id="O006-PSU-006-U0187">
+<pre data-o006-id="O006-PSU-006-U0188"><code data-o006-id="O006-PSU-006-U0189">[1] 1 8 9 8</code></pre>
+</div>
+</div>
+</section>
+<section class="level3" data-number="5.1.3" data-o006-id="O006-PSU-006-U0190" id="subsetting-vectors">
+<h3 class="anchored" data-anchor-id="subsetting-vectors" data-number="5.1.3" data-o006-id="O006-PSU-006-U0191"><span class="header-section-number">5.1.3</span> Subsetting vectors</h3>
+<p data-o006-id="O006-PSU-006-U0192">We often have data or parameters stored in a vector, but only want to access one element, or a few elements, of that vector. Indexing in R is done using the square brackets: [ ]</p>
+<div class="cell language-name-processed" data-o006-id="O006-PSU-006-U0193">
+<div class="codeblock-with-label r" data-o006-id="O006-PSU-006-U0194">
+<style>.codeblock-with-label pre.lang-label-6::before { content: "R"; }</style>
+<div class="code-copy-outer-scaffold" data-o006-id="O006-PSU-006-U0195"><div class="sourceCode cell-code" data-language-name-skip="true" data-o006-id="O006-PSU-006-U0196" id="cb24"><pre class="sourceCode r lang-label-6 code-with-copy" data-o006-id="O006-PSU-006-U0197"><code class="sourceCode r" data-o006-id="O006-PSU-006-U0198"><span id="cb24-1"><a aria-hidden="true" data-o006-id="O006-PSU-006-U0199" href="#cb24-1" tabindex="-1"></a><span class="do">## Subsetting vectors</span></span>
+<span id="cb24-2"><a aria-hidden="true" data-o006-id="O006-PSU-006-U0200" href="#cb24-2" tabindex="-1"></a>v</span></code></pre></div><button class="code-copy-button" data-o006-id="O006-PSU-006-U0201" title="Copy to Clipboard"><i class="bi"></i></button></div>
+</div>
+<div class="cell-output cell-output-stdout" data-o006-id="O006-PSU-006-U0202">
+<pre data-o006-id="O006-PSU-006-U0203"><code data-o006-id="O006-PSU-006-U0204">[1] 1 4 3 2</code></pre>
+</div>
+<div class="codeblock-with-label r" data-o006-id="O006-PSU-006-U0205">
+<style>.codeblock-with-label pre.lang-label-59::before { content: "R"; }</style>
+<div class="code-copy-outer-scaffold" data-o006-id="O006-PSU-006-U0206"><div class="sourceCode cell-code" data-o006-id="O006-PSU-006-U0207" id="cb26"><pre class="sourceCode r lang-label-59 code-with-copy" data-o006-id="O006-PSU-006-U0208"><code class="sourceCode r" data-o006-id="O006-PSU-006-U0209"><span id="cb26-1"><a aria-hidden="true" data-o006-id="O006-PSU-006-U0210" href="#cb26-1" tabindex="-1"></a>v[<span class="dv">1</span>]</span></code></pre></div><button class="code-copy-button" data-o006-id="O006-PSU-006-U0211" title="Copy to Clipboard"><i class="bi"></i></button></div>
+</div>
+<div class="cell-output cell-output-stdout" data-o006-id="O006-PSU-006-U0212">
+<pre data-o006-id="O006-PSU-006-U0213"><code data-o006-id="O006-PSU-006-U0214">[1] 1</code></pre>
+</div>
+<div class="codeblock-with-label r" data-o006-id="O006-PSU-006-U0215">
+<style>.codeblock-with-label pre.lang-label-60::before { content: "R"; }</style>
+<div class="code-copy-outer-scaffold" data-o006-id="O006-PSU-006-U0216"><div class="sourceCode cell-code" data-o006-id="O006-PSU-006-U0217" id="cb28"><pre class="sourceCode r lang-label-60 code-with-copy" data-o006-id="O006-PSU-006-U0218"><code class="sourceCode r" data-o006-id="O006-PSU-006-U0219"><span id="cb28-1"><a aria-hidden="true" data-o006-id="O006-PSU-006-U0220" href="#cb28-1" tabindex="-1"></a>v[<span class="dv">2</span>]</span></code></pre></div><button class="code-copy-button" data-o006-id="O006-PSU-006-U0221" title="Copy to Clipboard"><i class="bi"></i></button></div>
+</div>
+<div class="cell-output cell-output-stdout" data-o006-id="O006-PSU-006-U0222">
+<pre data-o006-id="O006-PSU-006-U0223"><code data-o006-id="O006-PSU-006-U0224">[1] 4</code></pre>
+</div>
+<div class="codeblock-with-label r" data-o006-id="O006-PSU-006-U0225">
+<style>.codeblock-with-label pre.lang-label-61::before { content: "R"; }</style>
+<div class="code-copy-outer-scaffold" data-o006-id="O006-PSU-006-U0226"><div class="sourceCode cell-code" data-o006-id="O006-PSU-006-U0227" id="cb30"><pre class="sourceCode r lang-label-61 code-with-copy" data-o006-id="O006-PSU-006-U0228"><code class="sourceCode r" data-o006-id="O006-PSU-006-U0229"><span id="cb30-1"><a aria-hidden="true" data-o006-id="O006-PSU-006-U0230" href="#cb30-1" tabindex="-1"></a>v[<span class="dv">3</span>]</span></code></pre></div><button class="code-copy-button" data-o006-id="O006-PSU-006-U0231" title="Copy to Clipboard"><i class="bi"></i></button></div>
+</div>
+<div class="cell-output cell-output-stdout" data-o006-id="O006-PSU-006-U0232">
+<pre data-o006-id="O006-PSU-006-U0233"><code data-o006-id="O006-PSU-006-U0234">[1] 3</code></pre>
+</div>
+<div class="codeblock-with-label r" data-o006-id="O006-PSU-006-U0235">
+<style>.codeblock-with-label pre.lang-label-62::before { content: "R"; }</style>
+<div class="code-copy-outer-scaffold" data-o006-id="O006-PSU-006-U0236"><div class="sourceCode cell-code" data-o006-id="O006-PSU-006-U0237" id="cb32"><pre class="sourceCode r lang-label-62 code-with-copy" data-o006-id="O006-PSU-006-U0238"><code class="sourceCode r" data-o006-id="O006-PSU-006-U0239"><span id="cb32-1"><a aria-hidden="true" data-o006-id="O006-PSU-006-U0240" href="#cb32-1" tabindex="-1"></a>v[<span class="dv">4</span>]</span></code></pre></div><button class="code-copy-button" data-o006-id="O006-PSU-006-U0241" title="Copy to Clipboard"><i class="bi"></i></button></div>
+</div>
+<div class="cell-output cell-output-stdout" data-o006-id="O006-PSU-006-U0242">
+<pre data-o006-id="O006-PSU-006-U0243"><code data-o006-id="O006-PSU-006-U0244">[1] 2</code></pre>
+</div>
+<div class="codeblock-with-label r" data-o006-id="O006-PSU-006-U0245">
+<style>.codeblock-with-label pre.lang-label-63::before { content: "R"; }</style>
+<div class="code-copy-outer-scaffold" data-o006-id="O006-PSU-006-U0246"><div class="sourceCode cell-code" data-o006-id="O006-PSU-006-U0247" id="cb34"><pre class="sourceCode r lang-label-63 code-with-copy" data-o006-id="O006-PSU-006-U0248"><code class="sourceCode r" data-o006-id="O006-PSU-006-U0249"><span id="cb34-1"><a aria-hidden="true" data-o006-id="O006-PSU-006-U0250" href="#cb34-1" tabindex="-1"></a>v[<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>]</span></code></pre></div><button class="code-copy-button" data-o006-id="O006-PSU-006-U0251" title="Copy to Clipboard"><i class="bi"></i></button></div>
+</div>
+<div class="cell-output cell-output-stdout" data-o006-id="O006-PSU-006-U0252">
+<pre data-o006-id="O006-PSU-006-U0253"><code data-o006-id="O006-PSU-006-U0254">[1] 1 4 3</code></pre>
+</div>
+<div class="codeblock-with-label r" data-o006-id="O006-PSU-006-U0255">
+<style>.codeblock-with-label pre.lang-label-64::before { content: "R"; }</style>
+<div class="code-copy-outer-scaffold" data-o006-id="O006-PSU-006-U0256"><div class="sourceCode cell-code" data-o006-id="O006-PSU-006-U0257" id="cb36"><pre class="sourceCode r lang-label-64 code-with-copy" data-o006-id="O006-PSU-006-U0258"><code class="sourceCode r" data-o006-id="O006-PSU-006-U0259"><span id="cb36-1"><a aria-hidden="true" data-o006-id="O006-PSU-006-U0260" href="#cb36-1" tabindex="-1"></a>v[<span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">4</span>)]</span></code></pre></div><button class="code-copy-button" data-o006-id="O006-PSU-006-U0261" title="Copy to Clipboard"><i class="bi"></i></button></div>
+</div>
+<div class="cell-output cell-output-stdout" data-o006-id="O006-PSU-006-U0262">
+<pre data-o006-id="O006-PSU-006-U0263"><code data-o006-id="O006-PSU-006-U0264">[1] 1 2</code></pre>
+</div>
+<div class="codeblock-with-label r" data-o006-id="O006-PSU-006-U0265">
+<style>.codeblock-with-label pre.lang-label-65::before { content: "R"; }</style>
+<div class="code-copy-outer-scaffold" data-o006-id="O006-PSU-006-U0266"><div class="sourceCode cell-code" data-o006-id="O006-PSU-006-U0267" id="cb38"><pre class="sourceCode r lang-label-65 code-with-copy" data-o006-id="O006-PSU-006-U0268"><code class="sourceCode r" data-o006-id="O006-PSU-006-U0269"><span id="cb38-1"><a aria-hidden="true" data-o006-id="O006-PSU-006-U0270" href="#cb38-1" tabindex="-1"></a>v[<span class="fu">c</span>(<span class="dv">3</span>,<span class="dv">4</span>)]</span></code></pre></div><button class="code-copy-button" data-o006-id="O006-PSU-006-U0271" title="Copy to Clipboard"><i class="bi"></i></button></div>
+</div>
+<div class="cell-output cell-output-stdout" data-o006-id="O006-PSU-006-U0272">
+<pre data-o006-id="O006-PSU-006-U0273"><code data-o006-id="O006-PSU-006-U0274">[1] 3 2</code></pre>
+</div>
+</div>
+</section>
+<section class="level3" data-number="5.1.4" data-o006-id="O006-PSU-006-U0275" id="logical-statements-and-the-which-command">
+<h3 class="anchored" data-anchor-id="logical-statements-and-the-which-command" data-number="5.1.4" data-o006-id="O006-PSU-006-U0276"><span class="header-section-number">5.1.4</span> Logical statements and the <code data-o006-id="O006-PSU-006-U0277">which</code> command</h3>
+<p data-o006-id="O006-PSU-006-U0278">One important way we will subset vectors is through logical arguments. R allows us to check whether a logical statement is TRUE or FALSE. This is most often done using the <code data-o006-id="O006-PSU-006-U0279">&lt;</code>, <code data-o006-id="O006-PSU-006-U0280">&gt;</code>, or <code data-o006-id="O006-PSU-006-U0281">==</code> commands. Note that testing whether or not two numbers are equal must be done with double equal signs <code data-o006-id="O006-PSU-006-U0282">==</code>, not a single equal sign <code data-o006-id="O006-PSU-006-U0283">=</code>, which is used to assign a value to a variable.</p>
+<p data-o006-id="O006-PSU-006-U0284">Here are some examples of checking logical statements in R. Note that logical statements can be applied elementwise to vectors, just like mathematical operations can.</p>
+<div class="cell language-name-processed" data-o006-id="O006-PSU-006-U0285">
+<div class="codeblock-with-label r" data-o006-id="O006-PSU-006-U0286">
+<style>.codeblock-with-label pre.lang-label-7::before { content: "R"; }</style>
+<div class="code-copy-outer-scaffold" data-o006-id="O006-PSU-006-U0287"><div class="sourceCode cell-code" data-language-name-skip="true" data-o006-id="O006-PSU-006-U0288" id="cb40"><pre class="sourceCode r lang-label-7 code-with-copy" data-o006-id="O006-PSU-006-U0289"><code class="sourceCode r" data-o006-id="O006-PSU-006-U0290"><span id="cb40-1"><a aria-hidden="true" data-o006-id="O006-PSU-006-U0291" href="#cb40-1" tabindex="-1"></a><span class="do">## logical statements</span></span>
+<span id="cb40-2"><a aria-hidden="true" data-o006-id="O006-PSU-006-U0292" href="#cb40-2" tabindex="-1"></a><span class="dv">3</span><span class="sc">&gt;</span><span class="dv">4</span></span></code></pre></div><button class="code-copy-button" data-o006-id="O006-PSU-006-U0293" title="Copy to Clipboard"><i class="bi"></i></button></div>
+</div>
+<div class="cell-output cell-output-stdout" data-o006-id="O006-PSU-006-U0294">
+<pre data-o006-id="O006-PSU-006-U0295"><code data-o006-id="O006-PSU-006-U0296">[1] FALSE</code></pre>
+</div>
+<div class="codeblock-with-label r" data-o006-id="O006-PSU-006-U0297">
+<style>.codeblock-with-label pre.lang-label-66::before { content: "R"; }</style>
+<div class="code-copy-outer-scaffold" data-o006-id="O006-PSU-006-U0298"><div class="sourceCode cell-code" data-o006-id="O006-PSU-006-U0299" id="cb42"><pre class="sourceCode r lang-label-66 code-with-copy" data-o006-id="O006-PSU-006-U0300"><code class="sourceCode r" data-o006-id="O006-PSU-006-U0301"><span id="cb42-1"><a aria-hidden="true" data-o006-id="O006-PSU-006-U0302" href="#cb42-1" tabindex="-1"></a><span class="dv">3</span><span class="sc">&gt;</span><span class="dv">2</span></span></code></pre></div><button class="code-copy-button" data-o006-id="O006-PSU-006-U0303" title="Copy to Clipboard"><i class="bi"></i></button></div>
+</div>
+<div class="cell-output cell-output-stdout" data-o006-id="O006-PSU-006-U0304">
+<pre data-o006-id="O006-PSU-006-U0305"><code data-o006-id="O006-PSU-006-U0306">[1] TRUE</code></pre>
+</div>
+<div class="codeblock-with-label r" data-o006-id="O006-PSU-006-U0307">
+<style>.codeblock-with-label pre.lang-label-67::before { content: "R"; }</style>
+<div class="code-copy-outer-scaffold" data-o006-id="O006-PSU-006-U0308"><div class="sourceCode cell-code" data-o006-id="O006-PSU-006-U0309" id="cb44"><pre class="sourceCode r lang-label-67 code-with-copy" data-o006-id="O006-PSU-006-U0310"><code class="sourceCode r" data-o006-id="O006-PSU-006-U0311"><span id="cb44-1"><a aria-hidden="true" data-o006-id="O006-PSU-006-U0312" href="#cb44-1" tabindex="-1"></a><span class="dv">3</span><span class="sc">==</span><span class="dv">4</span></span></code></pre></div><button class="code-copy-button" data-o006-id="O006-PSU-006-U0313" title="Copy to Clipboard"><i class="bi"></i></button></div>
+</div>
+<div class="cell-output cell-output-stdout" data-o006-id="O006-PSU-006-U0314">
+<pre data-o006-id="O006-PSU-006-U0315"><code data-o006-id="O006-PSU-006-U0316">[1] FALSE</code></pre>
+</div>
+<div class="codeblock-with-label r" data-o006-id="O006-PSU-006-U0317">
+<style>.codeblock-with-label pre.lang-label-68::before { content: "R"; }</style>
+<div class="code-copy-outer-scaffold" data-o006-id="O006-PSU-006-U0318"><div class="sourceCode cell-code" data-o006-id="O006-PSU-006-U0319" id="cb46"><pre class="sourceCode r lang-label-68 code-with-copy" data-o006-id="O006-PSU-006-U0320"><code class="sourceCode r" data-o006-id="O006-PSU-006-U0321"><span id="cb46-1"><a aria-hidden="true" data-o006-id="O006-PSU-006-U0322" href="#cb46-1" tabindex="-1"></a><span class="dv">3</span><span class="sc">==</span><span class="dv">3</span></span></code></pre></div><button class="code-copy-button" data-o006-id="O006-PSU-006-U0323" title="Copy to Clipboard"><i class="bi"></i></button></div>
+</div>
+<div class="cell-output cell-output-stdout" data-o006-id="O006-PSU-006-U0324">
+<pre data-o006-id="O006-PSU-006-U0325"><code data-o006-id="O006-PSU-006-U0326">[1] TRUE</code></pre>
+</div>
+<div class="codeblock-with-label r" data-o006-id="O006-PSU-006-U0327">
+<style>.codeblock-with-label pre.lang-label-69::before { content: "R"; }</style>
+<div class="code-copy-outer-scaffold" data-o006-id="O006-PSU-006-U0328"><div class="sourceCode cell-code" data-o006-id="O006-PSU-006-U0329" id="cb48"><pre class="sourceCode r lang-label-69 code-with-copy" data-o006-id="O006-PSU-006-U0330"><code class="sourceCode r" data-o006-id="O006-PSU-006-U0331"><span id="cb48-1"><a aria-hidden="true" data-o006-id="O006-PSU-006-U0332" href="#cb48-1" tabindex="-1"></a>v</span></code></pre></div><button class="code-copy-button" data-o006-id="O006-PSU-006-U0333" title="Copy to Clipboard"><i class="bi"></i></button></div>
+</div>
+<div class="cell-output cell-output-stdout" data-o006-id="O006-PSU-006-U0334">
+<pre data-o006-id="O006-PSU-006-U0335"><code data-o006-id="O006-PSU-006-U0336">[1] 1 4 3 2</code></pre>
+</div>
+<div class="codeblock-with-label r" data-o006-id="O006-PSU-006-U0337">
+<style>.codeblock-with-label pre.lang-label-70::before { content: "R"; }</style>
+<div class="code-copy-outer-scaffold" data-o006-id="O006-PSU-006-U0338"><div class="sourceCode cell-code" data-o006-id="O006-PSU-006-U0339" id="cb50"><pre class="sourceCode r lang-label-70 code-with-copy" data-o006-id="O006-PSU-006-U0340"><code class="sourceCode r" data-o006-id="O006-PSU-006-U0341"><span id="cb50-1"><a aria-hidden="true" data-o006-id="O006-PSU-006-U0342" href="#cb50-1" tabindex="-1"></a>v<span class="sc">&gt;</span><span class="dv">2</span></span></code></pre></div><button class="code-copy-button" data-o006-id="O006-PSU-006-U0343" title="Copy to Clipboard"><i class="bi"></i></button></div>
+</div>
+<div class="cell-output cell-output-stdout" data-o006-id="O006-PSU-006-U0344">
+<pre data-o006-id="O006-PSU-006-U0345"><code data-o006-id="O006-PSU-006-U0346">[1] FALSE  TRUE  TRUE FALSE</code></pre>
+</div>
+<div class="codeblock-with-label r" data-o006-id="O006-PSU-006-U0347">
+<style>.codeblock-with-label pre.lang-label-71::before { content: "R"; }</style>
+<div class="code-copy-outer-scaffold" data-o006-id="O006-PSU-006-U0348"><div class="sourceCode cell-code" data-o006-id="O006-PSU-006-U0349" id="cb52"><pre class="sourceCode r lang-label-71 code-with-copy" data-o006-id="O006-PSU-006-U0350"><code class="sourceCode r" data-o006-id="O006-PSU-006-U0351"><span id="cb52-1"><a aria-hidden="true" data-o006-id="O006-PSU-006-U0352" href="#cb52-1" tabindex="-1"></a>v<span class="sc">==</span><span class="dv">2</span></span></code></pre></div><button class="code-copy-button" data-o006-id="O006-PSU-006-U0353" title="Copy to Clipboard"><i class="bi"></i></button></div>
+</div>
+<div class="cell-output cell-output-stdout" data-o006-id="O006-PSU-006-U0354">
+<pre data-o006-id="O006-PSU-006-U0355"><code data-o006-id="O006-PSU-006-U0356">[1] FALSE FALSE FALSE  TRUE</code></pre>
+</div>
+<div class="codeblock-with-label r" data-o006-id="O006-PSU-006-U0357">
+<style>.codeblock-with-label pre.lang-label-72::before { content: "R"; }</style>
+<div class="code-copy-outer-scaffold" data-o006-id="O006-PSU-006-U0358"><div class="sourceCode cell-code" data-o006-id="O006-PSU-006-U0359" id="cb54"><pre class="sourceCode r lang-label-72 code-with-copy" data-o006-id="O006-PSU-006-U0360"><code class="sourceCode r" data-o006-id="O006-PSU-006-U0361"><span id="cb54-1"><a aria-hidden="true" data-o006-id="O006-PSU-006-U0362" href="#cb54-1" tabindex="-1"></a>v<span class="sc">&gt;=</span><span class="dv">2</span></span></code></pre></div><button class="code-copy-button" data-o006-id="O006-PSU-006-U0363" title="Copy to Clipboard"><i class="bi"></i></button></div>
+</div>
+<div class="cell-output cell-output-stdout" data-o006-id="O006-PSU-006-U0364">
+<pre data-o006-id="O006-PSU-006-U0365"><code data-o006-id="O006-PSU-006-U0366">[1] FALSE  TRUE  TRUE  TRUE</code></pre>
+</div>
+</div>
+<p data-o006-id="O006-PSU-006-U0367">A common task in statistical analyses (See Section 4 for examples!) is to find which elements of a vector satisfy certain criteria. The commands to do so in R revolve around the <code data-o006-id="O006-PSU-006-U0368">which</code> command. Here are some examples:</p>
+<div class="cell language-name-processed" data-o006-id="O006-PSU-006-U0369">
+<div class="codeblock-with-label r" data-o006-id="O006-PSU-006-U0370">
+<style>.codeblock-with-label pre.lang-label-8::before { content: "R"; }</style>
+<div class="code-copy-outer-scaffold" data-o006-id="O006-PSU-006-U0371"><div class="sourceCode cell-code" data-language-name-skip="true" data-o006-id="O006-PSU-006-U0372" id="cb56"><pre class="sourceCode r lang-label-8 code-with-copy" data-o006-id="O006-PSU-006-U0373"><code class="sourceCode r" data-o006-id="O006-PSU-006-U0374"><span id="cb56-1"><a aria-hidden="true" data-o006-id="O006-PSU-006-U0375" href="#cb56-1" tabindex="-1"></a><span class="do">## subsetting using logical arguments</span></span>
+<span id="cb56-2"><a aria-hidden="true" data-o006-id="O006-PSU-006-U0376" href="#cb56-2" tabindex="-1"></a>v</span></code></pre></div><button class="code-copy-button" data-o006-id="O006-PSU-006-U0377" title="Copy to Clipboard"><i class="bi"></i></button></div>
+</div>
+<div class="cell-output cell-output-stdout" data-o006-id="O006-PSU-006-U0378">
+<pre data-o006-id="O006-PSU-006-U0379"><code data-o006-id="O006-PSU-006-U0380">[1] 1 4 3 2</code></pre>
+</div>
+<div class="codeblock-with-label r" data-o006-id="O006-PSU-006-U0381">
+<style>.codeblock-with-label pre.lang-label-73::before { content: "R"; }</style>
+<div class="code-copy-outer-scaffold" data-o006-id="O006-PSU-006-U0382"><div class="sourceCode cell-code" data-o006-id="O006-PSU-006-U0383" id="cb58"><pre class="sourceCode r lang-label-73 code-with-copy" data-o006-id="O006-PSU-006-U0384"><code class="sourceCode r" data-o006-id="O006-PSU-006-U0385"><span id="cb58-1"><a aria-hidden="true" data-o006-id="O006-PSU-006-U0386" href="#cb58-1" tabindex="-1"></a><span class="fu">which</span>(v<span class="sc">&gt;</span><span class="dv">2</span>)</span></code></pre></div><button class="code-copy-button" data-o006-id="O006-PSU-006-U0387" title="Copy to Clipboard"><i class="bi"></i></button></div>
+</div>
+<div class="cell-output cell-output-stdout" data-o006-id="O006-PSU-006-U0388">
+<pre data-o006-id="O006-PSU-006-U0389"><code data-o006-id="O006-PSU-006-U0390">[1] 2 3</code></pre>
+</div>
+<div class="codeblock-with-label r" data-o006-id="O006-PSU-006-U0391">
+<style>.codeblock-with-label pre.lang-label-74::before { content: "R"; }</style>
+<div class="code-copy-outer-scaffold" data-o006-id="O006-PSU-006-U0392"><div class="sourceCode cell-code" data-o006-id="O006-PSU-006-U0393" id="cb60"><pre class="sourceCode r lang-label-74 code-with-copy" data-o006-id="O006-PSU-006-U0394"><code class="sourceCode r" data-o006-id="O006-PSU-006-U0395"><span id="cb60-1"><a aria-hidden="true" data-o006-id="O006-PSU-006-U0396" href="#cb60-1" tabindex="-1"></a>v[<span class="fu">which</span>(v<span class="sc">&gt;</span><span class="dv">2</span>)]</span></code></pre></div><button class="code-copy-button" data-o006-id="O006-PSU-006-U0397" title="Copy to Clipboard"><i class="bi"></i></button></div>
+</div>
+<div class="cell-output cell-output-stdout" data-o006-id="O006-PSU-006-U0398">
+<pre data-o006-id="O006-PSU-006-U0399"><code data-o006-id="O006-PSU-006-U0400">[1] 4 3</code></pre>
+</div>
+<div class="codeblock-with-label r" data-o006-id="O006-PSU-006-U0401">
+<style>.codeblock-with-label pre.lang-label-75::before { content: "R"; }</style>
+<div class="code-copy-outer-scaffold" data-o006-id="O006-PSU-006-U0402"><div class="sourceCode cell-code" data-o006-id="O006-PSU-006-U0403" id="cb62"><pre class="sourceCode r lang-label-75 code-with-copy" data-o006-id="O006-PSU-006-U0404"><code class="sourceCode r" data-o006-id="O006-PSU-006-U0405"><span id="cb62-1"><a aria-hidden="true" data-o006-id="O006-PSU-006-U0406" href="#cb62-1" tabindex="-1"></a>idx<span class="ot">=</span><span class="fu">which</span>(v<span class="sc">&gt;</span><span class="dv">2</span>)</span>
+<span id="cb62-2"><a aria-hidden="true" data-o006-id="O006-PSU-006-U0407" href="#cb62-2" tabindex="-1"></a>idx</span></code></pre></div><button class="code-copy-button" data-o006-id="O006-PSU-006-U0408" title="Copy to Clipboard"><i class="bi"></i></button></div>
+</div>
+<div class="cell-output cell-output-stdout" data-o006-id="O006-PSU-006-U0409">
+<pre data-o006-id="O006-PSU-006-U0410"><code data-o006-id="O006-PSU-006-U0411">[1] 2 3</code></pre>
+</div>
+<div class="codeblock-with-label r" data-o006-id="O006-PSU-006-U0412">
+<style>.codeblock-with-label pre.lang-label-76::before { content: "R"; }</style>
+<div class="code-copy-outer-scaffold" data-o006-id="O006-PSU-006-U0413"><div class="sourceCode cell-code" data-o006-id="O006-PSU-006-U0414" id="cb64"><pre class="sourceCode r lang-label-76 code-with-copy" data-o006-id="O006-PSU-006-U0415"><code class="sourceCode r" data-o006-id="O006-PSU-006-U0416"><span id="cb64-1"><a aria-hidden="true" data-o006-id="O006-PSU-006-U0417" href="#cb64-1" tabindex="-1"></a>v[idx]</span></code></pre></div><button class="code-copy-button" data-o006-id="O006-PSU-006-U0418" title="Copy to Clipboard"><i class="bi"></i></button></div>
+</div>
+<div class="cell-output cell-output-stdout" data-o006-id="O006-PSU-006-U0419">
+<pre data-o006-id="O006-PSU-006-U0420"><code data-o006-id="O006-PSU-006-U0421">[1] 4 3</code></pre>
+</div>
+</div>
+</section>
+<section class="level3" data-number="5.1.5" data-o006-id="O006-PSU-006-U0422" id="creating-data-frames">
+<h3 class="anchored" data-anchor-id="creating-data-frames" data-number="5.1.5" data-o006-id="O006-PSU-006-U0423"><span class="header-section-number">5.1.5</span> Creating Data Frames</h3>
+<p data-o006-id="O006-PSU-006-U0424">The R <code data-o006-id="O006-PSU-006-U0425">data.frame</code> is a very important data structure. It allows you to store a “matrix” of data that is a mix of numeric columns (like response variables) and character columns (like human-readable names of treatments). Consider a farming example in which 10 plots were assigned either Fertilizer X (plots 1-5) or Fertilizer Y (plots 6-10). We will create a data frame that has this information in it, together with the response (corn yield at each plot).</p>
+<p data-o006-id="O006-PSU-006-U0426">First, we will create a numeric vector of the plot number. The code below shows you two equivalent ways to do this.</p>
+<div class="cell language-name-processed" data-o006-id="O006-PSU-006-U0427">
+<div class="codeblock-with-label r" data-o006-id="O006-PSU-006-U0428">
+<style>.codeblock-with-label pre.lang-label-9::before { content: "R"; }</style>
+<div class="code-copy-outer-scaffold" data-o006-id="O006-PSU-006-U0429"><div class="sourceCode cell-code" data-language-name-skip="true" data-o006-id="O006-PSU-006-U0430" id="cb66"><pre class="sourceCode r lang-label-9 code-with-copy" data-o006-id="O006-PSU-006-U0431"><code class="sourceCode r" data-o006-id="O006-PSU-006-U0432"><span id="cb66-1"><a aria-hidden="true" data-o006-id="O006-PSU-006-U0433" href="#cb66-1" tabindex="-1"></a>plot.ID<span class="ot">=</span><span class="dv">1</span><span class="sc">:</span><span class="dv">10</span></span>
+<span id="cb66-2"><a aria-hidden="true" data-o006-id="O006-PSU-006-U0434" href="#cb66-2" tabindex="-1"></a></span>
+<span id="cb66-3"><a aria-hidden="true" data-o006-id="O006-PSU-006-U0435" href="#cb66-3" tabindex="-1"></a>plot.ID<span class="ot">=</span><span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>,<span class="dv">5</span>,<span class="dv">6</span>,<span class="dv">7</span>,<span class="dv">8</span>,<span class="dv">9</span>,<span class="dv">10</span>)</span></code></pre></div><button class="code-copy-button" data-o006-id="O006-PSU-006-U0436" title="Copy to Clipboard"><i class="bi"></i></button></div>
+</div>
+</div>
+<p data-o006-id="O006-PSU-006-U0437">Next, we will create the character vector of treatments. Note that you need to put letters in parentheses, or R will assume that the letter is a name of a vector or scalar already defined in R. See Section 3.2 for examples.</p>
+<div class="cell language-name-processed" data-o006-id="O006-PSU-006-U0438">
+<div class="codeblock-with-label r" data-o006-id="O006-PSU-006-U0439">
+<style>.codeblock-with-label pre.lang-label-10::before { content: "R"; }</style>
+<div class="code-copy-outer-scaffold" data-o006-id="O006-PSU-006-U0440"><div class="sourceCode cell-code" data-language-name-skip="true" data-o006-id="O006-PSU-006-U0441" id="cb67"><pre class="sourceCode r lang-label-10 code-with-copy" data-o006-id="O006-PSU-006-U0442"><code class="sourceCode r" data-o006-id="O006-PSU-006-U0443"><span id="cb67-1"><a aria-hidden="true" data-o006-id="O006-PSU-006-U0444" href="#cb67-1" tabindex="-1"></a>treatment<span class="ot">=</span><span class="fu">c</span>(<span class="st">"X"</span>,<span class="st">"X"</span>,<span class="st">"X"</span>,<span class="st">"X"</span>,<span class="st">"X"</span>,<span class="st">"Y"</span>,<span class="st">"Y"</span>,<span class="st">"Y"</span>,<span class="st">"Y"</span>,<span class="st">"Y"</span>)</span>
+<span id="cb67-2"><a aria-hidden="true" data-o006-id="O006-PSU-006-U0445" href="#cb67-2" tabindex="-1"></a></span>
+<span id="cb67-3"><a aria-hidden="true" data-o006-id="O006-PSU-006-U0446" href="#cb67-3" tabindex="-1"></a>treatment<span class="ot">=</span><span class="fu">c</span>(<span class="fu">rep</span>(<span class="st">"X"</span>,<span class="dv">5</span>),<span class="fu">rep</span>(<span class="st">"Y"</span>,<span class="dv">5</span>))</span></code></pre></div><button class="code-copy-button" data-o006-id="O006-PSU-006-U0447" title="Copy to Clipboard"><i class="bi"></i></button></div>
+</div>
+</div>
+<p data-o006-id="O006-PSU-006-U0448">Now we will create a vector of responses</p>
+<div class="cell language-name-processed" data-o006-id="O006-PSU-006-U0449">
+<div class="codeblock-with-label r" data-o006-id="O006-PSU-006-U0450">
+<style>.codeblock-with-label pre.lang-label-11::before { content: "R"; }</style>
+<div class="code-copy-outer-scaffold" data-o006-id="O006-PSU-006-U0451"><div class="sourceCode cell-code" data-language-name-skip="true" data-o006-id="O006-PSU-006-U0452" id="cb68"><pre class="sourceCode r lang-label-11 code-with-copy" data-o006-id="O006-PSU-006-U0453"><code class="sourceCode r" data-o006-id="O006-PSU-006-U0454"><span id="cb68-1"><a aria-hidden="true" data-o006-id="O006-PSU-006-U0455" href="#cb68-1" tabindex="-1"></a>response<span class="ot">=</span><span class="fu">c</span>(<span class="dv">14</span>,<span class="dv">12</span>,<span class="dv">11</span>,<span class="dv">18</span>,<span class="dv">20</span>,<span class="dv">21</span>,<span class="dv">20</span>,<span class="dv">17</span>,<span class="dv">23</span>,<span class="dv">25</span>)</span></code></pre></div><button class="code-copy-button" data-o006-id="O006-PSU-006-U0456" title="Copy to Clipboard"><i class="bi"></i></button></div>
+</div>
+</div>
+<p data-o006-id="O006-PSU-006-U0457">And finally, we will put these all together into a <code data-o006-id="O006-PSU-006-U0458">data.frame</code>.</p>
+<div class="cell language-name-processed" data-o006-id="O006-PSU-006-U0459">
+<div class="codeblock-with-label r" data-o006-id="O006-PSU-006-U0460">
+<style>.codeblock-with-label pre.lang-label-12::before { content: "R"; }</style>
+<div class="code-copy-outer-scaffold" data-o006-id="O006-PSU-006-U0461"><div class="sourceCode cell-code" data-language-name-skip="true" data-o006-id="O006-PSU-006-U0462" id="cb69"><pre class="sourceCode r lang-label-12 code-with-copy" data-o006-id="O006-PSU-006-U0463"><code class="sourceCode r" data-o006-id="O006-PSU-006-U0464"><span id="cb69-1"><a aria-hidden="true" data-o006-id="O006-PSU-006-U0465" href="#cb69-1" tabindex="-1"></a>corn.yield<span class="ot">=</span><span class="fu">data.frame</span>(plot.ID,treatment,response)</span>
+<span id="cb69-2"><a aria-hidden="true" data-o006-id="O006-PSU-006-U0466" href="#cb69-2" tabindex="-1"></a></span>
+<span id="cb69-3"><a aria-hidden="true" data-o006-id="O006-PSU-006-U0467" href="#cb69-3" tabindex="-1"></a>corn.yield</span></code></pre></div><button class="code-copy-button" data-o006-id="O006-PSU-006-U0468" title="Copy to Clipboard"><i class="bi"></i></button></div>
+</div>
+<div class="cell-output cell-output-stdout" data-o006-id="O006-PSU-006-U0469">
+<pre data-o006-id="O006-PSU-006-U0470"><code data-o006-id="O006-PSU-006-U0471">   plot.ID treatment response
+1        1         X       14
+2        2         X       12
+3        3         X       11
+4        4         X       18
+5        5         X       20
+6        6         Y       21
+7        7         Y       20
+8        8         Y       17
+9        9         Y       23
+10      10         Y       25</code></pre>
+</div>
+</div>
+</section>
+<section class="level3" data-number="5.1.6" data-o006-id="O006-PSU-006-U0472" id="summary-statistics-in-r">
+<h3 class="anchored" data-anchor-id="summary-statistics-in-r" data-number="5.1.6" data-o006-id="O006-PSU-006-U0473"><span class="header-section-number">5.1.6</span> Summary statistics in R</h3>
+<p data-o006-id="O006-PSU-006-U0474">The <code data-o006-id="O006-PSU-006-U0475">summary</code> function can tell you a lot about a data frame, as it computes the minimum, maximum, mean, and median of each numeric column.</p>
+<div class="cell language-name-processed" data-o006-id="O006-PSU-006-U0476">
+<div class="codeblock-with-label r" data-o006-id="O006-PSU-006-U0477">
+<style>.codeblock-with-label pre.lang-label-13::before { content: "R"; }</style>
+<div class="code-copy-outer-scaffold" data-o006-id="O006-PSU-006-U0478"><div class="sourceCode cell-code" data-language-name-skip="true" data-o006-id="O006-PSU-006-U0479" id="cb71"><pre class="sourceCode r lang-label-13 code-with-copy" data-o006-id="O006-PSU-006-U0480"><code class="sourceCode r" data-o006-id="O006-PSU-006-U0481"><span id="cb71-1"><a aria-hidden="true" data-o006-id="O006-PSU-006-U0482" href="#cb71-1" tabindex="-1"></a><span class="fu">summary</span>(corn.yield)</span></code></pre></div><button class="code-copy-button" data-o006-id="O006-PSU-006-U0483" title="Copy to Clipboard"><i class="bi"></i></button></div>
+</div>
+<div class="cell-output cell-output-stdout" data-o006-id="O006-PSU-006-U0484">
+<pre data-o006-id="O006-PSU-006-U0485"><code data-o006-id="O006-PSU-006-U0486">    plot.ID       treatment            response    
+ Min.   : 1.00   Length:10          Min.   :11.00  
+ 1st Qu.: 3.25   Class :character   1st Qu.:14.75  
+ Median : 5.50   Mode  :character   Median :19.00  
+ Mean   : 5.50                      Mean   :18.10  
+ 3rd Qu.: 7.75                      3rd Qu.:20.75  
+ Max.   :10.00                      Max.   :25.00  </code></pre>
+</div>
+</div>
+<p data-o006-id="O006-PSU-006-U0487">You can also use R to get means, variances, and standard deviations of whole vectors:</p>
+<div class="cell language-name-processed" data-o006-id="O006-PSU-006-U0488">
+<div class="codeblock-with-label r" data-o006-id="O006-PSU-006-U0489">
+<style>.codeblock-with-label pre.lang-label-14::before { content: "R"; }</style>
+<div class="code-copy-outer-scaffold" data-o006-id="O006-PSU-006-U0490"><div class="sourceCode cell-code" data-language-name-skip="true" data-o006-id="O006-PSU-006-U0491" id="cb73"><pre class="sourceCode r lang-label-14 code-with-copy" data-o006-id="O006-PSU-006-U0492"><code class="sourceCode r" data-o006-id="O006-PSU-006-U0493"><span id="cb73-1"><a aria-hidden="true" data-o006-id="O006-PSU-006-U0494" href="#cb73-1" tabindex="-1"></a><span class="fu">mean</span>(response)</span></code></pre></div><button class="code-copy-button" data-o006-id="O006-PSU-006-U0495" title="Copy to Clipboard"><i class="bi"></i></button></div>
+</div>
+<div class="cell-output cell-output-stdout" data-o006-id="O006-PSU-006-U0496">
+<pre data-o006-id="O006-PSU-006-U0497"><code data-o006-id="O006-PSU-006-U0498">[1] 18.1</code></pre>
+</div>
+<div class="codeblock-with-label r" data-o006-id="O006-PSU-006-U0499">
+<style>.codeblock-with-label pre.lang-label-77::before { content: "R"; }</style>
+<div class="code-copy-outer-scaffold" data-o006-id="O006-PSU-006-U0500"><div class="sourceCode cell-code" data-o006-id="O006-PSU-006-U0501" id="cb75"><pre class="sourceCode r lang-label-77 code-with-copy" data-o006-id="O006-PSU-006-U0502"><code class="sourceCode r" data-o006-id="O006-PSU-006-U0503"><span id="cb75-1"><a aria-hidden="true" data-o006-id="O006-PSU-006-U0504" href="#cb75-1" tabindex="-1"></a><span class="fu">var</span>(response)</span></code></pre></div><button class="code-copy-button" data-o006-id="O006-PSU-006-U0505" title="Copy to Clipboard"><i class="bi"></i></button></div>
+</div>
+<div class="cell-output cell-output-stdout" data-o006-id="O006-PSU-006-U0506">
+<pre data-o006-id="O006-PSU-006-U0507"><code data-o006-id="O006-PSU-006-U0508">[1] 21.43333</code></pre>
+</div>
+<div class="codeblock-with-label r" data-o006-id="O006-PSU-006-U0509">
+<style>.codeblock-with-label pre.lang-label-78::before { content: "R"; }</style>
+<div class="code-copy-outer-scaffold" data-o006-id="O006-PSU-006-U0510"><div class="sourceCode cell-code" data-o006-id="O006-PSU-006-U0511" id="cb77"><pre class="sourceCode r lang-label-78 code-with-copy" data-o006-id="O006-PSU-006-U0512"><code class="sourceCode r" data-o006-id="O006-PSU-006-U0513"><span id="cb77-1"><a aria-hidden="true" data-o006-id="O006-PSU-006-U0514" href="#cb77-1" tabindex="-1"></a><span class="fu">sd</span>(response)</span></code></pre></div><button class="code-copy-button" data-o006-id="O006-PSU-006-U0515" title="Copy to Clipboard"><i class="bi"></i></button></div>
+</div>
+<div class="cell-output cell-output-stdout" data-o006-id="O006-PSU-006-U0516">
+<pre data-o006-id="O006-PSU-006-U0517"><code data-o006-id="O006-PSU-006-U0518">[1] 4.629615</code></pre>
+</div>
+</div>
+<p data-o006-id="O006-PSU-006-U0519">or even subsets of vectors</p>
+<div class="cell language-name-processed" data-o006-id="O006-PSU-006-U0520">
+<div class="codeblock-with-label r" data-o006-id="O006-PSU-006-U0521">
+<style>.codeblock-with-label pre.lang-label-15::before { content: "R"; }</style>
+<div class="code-copy-outer-scaffold" data-o006-id="O006-PSU-006-U0522"><div class="sourceCode cell-code" data-language-name-skip="true" data-o006-id="O006-PSU-006-U0523" id="cb79"><pre class="sourceCode r lang-label-15 code-with-copy" data-o006-id="O006-PSU-006-U0524"><code class="sourceCode r" data-o006-id="O006-PSU-006-U0525"><span id="cb79-1"><a aria-hidden="true" data-o006-id="O006-PSU-006-U0526" href="#cb79-1" tabindex="-1"></a><span class="fu">mean</span>(response[treatment<span class="sc">==</span><span class="st">"X"</span>])</span></code></pre></div><button class="code-copy-button" data-o006-id="O006-PSU-006-U0527" title="Copy to Clipboard"><i class="bi"></i></button></div>
+</div>
+<div class="cell-output cell-output-stdout" data-o006-id="O006-PSU-006-U0528">
+<pre data-o006-id="O006-PSU-006-U0529"><code data-o006-id="O006-PSU-006-U0530">[1] 15</code></pre>
+</div>
+<div class="codeblock-with-label r" data-o006-id="O006-PSU-006-U0531">
+<style>.codeblock-with-label pre.lang-label-79::before { content: "R"; }</style>
+<div class="code-copy-outer-scaffold" data-o006-id="O006-PSU-006-U0532"><div class="sourceCode cell-code" data-o006-id="O006-PSU-006-U0533" id="cb81"><pre class="sourceCode r lang-label-79 code-with-copy" data-o006-id="O006-PSU-006-U0534"><code class="sourceCode r" data-o006-id="O006-PSU-006-U0535"><span id="cb81-1"><a aria-hidden="true" data-o006-id="O006-PSU-006-U0536" href="#cb81-1" tabindex="-1"></a><span class="fu">mean</span>(response[treatment<span class="sc">==</span><span class="st">"Y"</span>])</span></code></pre></div><button class="code-copy-button" data-o006-id="O006-PSU-006-U0537" title="Copy to Clipboard"><i class="bi"></i></button></div>
+</div>
+<div class="cell-output cell-output-stdout" data-o006-id="O006-PSU-006-U0538">
+<pre data-o006-id="O006-PSU-006-U0539"><code data-o006-id="O006-PSU-006-U0540">[1] 21.2</code></pre>
+</div>
+<div class="codeblock-with-label r" data-o006-id="O006-PSU-006-U0541">
+<style>.codeblock-with-label pre.lang-label-80::before { content: "R"; }</style>
+<div class="code-copy-outer-scaffold" data-o006-id="O006-PSU-006-U0542"><div class="sourceCode cell-code" data-o006-id="O006-PSU-006-U0543" id="cb83"><pre class="sourceCode r lang-label-80 code-with-copy" data-o006-id="O006-PSU-006-U0544"><code class="sourceCode r" data-o006-id="O006-PSU-006-U0545"><span id="cb83-1"><a aria-hidden="true" data-o006-id="O006-PSU-006-U0546" href="#cb83-1" tabindex="-1"></a><span class="fu">sd</span>(response[treatment<span class="sc">==</span><span class="st">"X"</span>])</span></code></pre></div><button class="code-copy-button" data-o006-id="O006-PSU-006-U0547" title="Copy to Clipboard"><i class="bi"></i></button></div>
+</div>
+<div class="cell-output cell-output-stdout" data-o006-id="O006-PSU-006-U0548">
+<pre data-o006-id="O006-PSU-006-U0549"><code data-o006-id="O006-PSU-006-U0550">[1] 3.872983</code></pre>
+</div>
+<div class="codeblock-with-label r" data-o006-id="O006-PSU-006-U0551">
+<style>.codeblock-with-label pre.lang-label-81::before { content: "R"; }</style>
+<div class="code-copy-outer-scaffold" data-o006-id="O006-PSU-006-U0552"><div class="sourceCode cell-code" data-o006-id="O006-PSU-006-U0553" id="cb85"><pre class="sourceCode r lang-label-81 code-with-copy" data-o006-id="O006-PSU-006-U0554"><code class="sourceCode r" data-o006-id="O006-PSU-006-U0555"><span id="cb85-1"><a aria-hidden="true" data-o006-id="O006-PSU-006-U0556" href="#cb85-1" tabindex="-1"></a><span class="fu">sd</span>(response[treatment<span class="sc">==</span><span class="st">"Y"</span>])</span></code></pre></div><button class="code-copy-button" data-o006-id="O006-PSU-006-U0557" title="Copy to Clipboard"><i class="bi"></i></button></div>
+</div>
+<div class="cell-output cell-output-stdout" data-o006-id="O006-PSU-006-U0558">
+<pre data-o006-id="O006-PSU-006-U0559"><code data-o006-id="O006-PSU-006-U0560">[1] 3.03315</code></pre>
+</div>
+</div>
+</section>
+<section class="level3" data-number="5.1.7" data-o006-id="O006-PSU-006-U0561" id="simple-plotting-in-r">
+<h3 class="anchored" data-anchor-id="simple-plotting-in-r" data-number="5.1.7" data-o006-id="O006-PSU-006-U0562"><span class="header-section-number">5.1.7</span> Simple Plotting in R</h3>
+<p data-o006-id="O006-PSU-006-U0563">R can be used for plotting data as well. Having the data into a <code data-o006-id="O006-PSU-006-U0564">data.frame</code> object can make plotting and data analysis easier. For example, we can plot a boxplot of the corn yield data using the <code data-o006-id="O006-PSU-006-U0565">boxplot</code> command</p>
+<div class="cell language-name-processed" data-o006-id="O006-PSU-006-U0566">
+<div class="codeblock-with-label r" data-o006-id="O006-PSU-006-U0567">
+<style>.codeblock-with-label pre.lang-label-16::before { content: "R"; }</style>
+<div class="code-copy-outer-scaffold" data-o006-id="O006-PSU-006-U0568"><div class="sourceCode cell-code" data-language-name-skip="true" data-o006-id="O006-PSU-006-U0569" id="cb87"><pre class="sourceCode r lang-label-16 code-with-copy" data-o006-id="O006-PSU-006-U0570"><code class="sourceCode r" data-o006-id="O006-PSU-006-U0571"><span id="cb87-1"><a aria-hidden="true" data-o006-id="O006-PSU-006-U0572" href="#cb87-1" tabindex="-1"></a><span class="fu">boxplot</span>(response<span class="sc">~</span>treatment,<span class="at">data=</span>corn.yield,</span>
+<span id="cb87-2"><a aria-hidden="true" data-o006-id="O006-PSU-006-U0573" href="#cb87-2" tabindex="-1"></a>        <span class="at">main=</span><span class="st">"Boxplot of Corn Yield With Different Fertilizers"</span>,</span>
+<span id="cb87-3"><a aria-hidden="true" data-o006-id="O006-PSU-006-U0574" href="#cb87-3" tabindex="-1"></a>        <span class="at">xlab=</span><span class="st">"Fertilizer"</span>,<span class="at">ylab=</span><span class="st">"Yield (kg)"</span>)</span></code></pre></div><button class="code-copy-button" data-o006-id="O006-PSU-006-U0575" title="Copy to Clipboard"><i class="bi"></i></button></div>
+</div>
+<div class="cell-output-display" data-o006-id="O006-PSU-006-U0576">
+<div alt="Two boxplots for X and Y from the corn yield data." class="quarto-float quarto-figure quarto-figure-center anchored" data-o006-id="O006-PSU-006-U0577" id="fig-boxplotcornyield" width="70%">
+<figure class="quarto-float quarto-float-fig figure" data-o006-id="O006-PSU-006-U0578">
+<div aria-describedby="fig-boxplotcornyield-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca" data-o006-id="O006-PSU-006-U0579">
+<a class="lightbox" data-gallery="quarto-lightbox-gallery-1" data-o006-id="O006-PSU-006-U0580" href="Lesson05_files/figure-html/fig-boxplotcornyield-1.png" title="Fig 5.1: "><img alt="Two boxplots for X and Y from the corn yield data." class="img-fluid figure-img" data-o006-asset-id="O006-PSU-006-A0001" data-o006-id="O006-PSU-006-U0581" id="fig-boxplotcornyield" src="Lesson05_files/figure-html/fig-boxplotcornyield-1.png" style="width:70.0%"/></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" data-o006-id="O006-PSU-006-U0582" id="fig-boxplotcornyield-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Fig 5.1
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p data-o006-id="O006-PSU-006-U0583">Histograms can be plotted using the <code data-o006-id="O006-PSU-006-U0584">hist</code> command.</p>
+<div class="cell language-name-processed" data-o006-id="O006-PSU-006-U0585">
+<div class="codeblock-with-label r" data-o006-id="O006-PSU-006-U0586">
+<style>.codeblock-with-label pre.lang-label-17::before { content: "R"; }</style>
+<div class="code-copy-outer-scaffold" data-o006-id="O006-PSU-006-U0587"><div class="sourceCode cell-code" data-language-name-skip="true" data-o006-id="O006-PSU-006-U0588" id="cb88"><pre class="sourceCode r lang-label-17 code-with-copy" data-o006-id="O006-PSU-006-U0589"><code class="sourceCode r" data-o006-id="O006-PSU-006-U0590"><span id="cb88-1"><a aria-hidden="true" data-o006-id="O006-PSU-006-U0591" href="#cb88-1" tabindex="-1"></a><span class="fu">hist</span>(response,<span class="at">main=</span><span class="st">"Histogram of Corn Yield (All Plots)"</span>)</span></code></pre></div><button class="code-copy-button" data-o006-id="O006-PSU-006-U0592" title="Copy to Clipboard"><i class="bi"></i></button></div>
+</div>
+<div class="cell-output-display" data-o006-id="O006-PSU-006-U0593">
+<div alt="Histogram of all plots in the corn yield data." class="quarto-float quarto-figure quarto-figure-center anchored" data-o006-id="O006-PSU-006-U0594" id="fig-histogramcornyield" width="70%">
+<figure class="quarto-float quarto-float-fig figure" data-o006-id="O006-PSU-006-U0595">
+<div aria-describedby="fig-histogramcornyield-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca" data-o006-id="O006-PSU-006-U0596">
+<a class="lightbox" data-gallery="quarto-lightbox-gallery-2" data-o006-id="O006-PSU-006-U0597" href="Lesson05_files/figure-html/fig-histogramcornyield-1.png" title="Fig 5.2: "><img alt="Histogram of all plots in the corn yield data." class="img-fluid figure-img" data-o006-asset-id="O006-PSU-006-A0002" data-o006-id="O006-PSU-006-U0598" id="fig-histogramcornyield" src="Lesson05_files/figure-html/fig-histogramcornyield-1.png" style="width:70.0%"/></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" data-o006-id="O006-PSU-006-U0599" id="fig-histogramcornyield-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Fig 5.2
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p data-o006-id="O006-PSU-006-U0600">And numeric data can be plotted as a scatterplot using the <code data-o006-id="O006-PSU-006-U0601">plot</code> command.</p>
+<div class="cell language-name-processed" data-o006-id="O006-PSU-006-U0602">
+<div class="codeblock-with-label r" data-o006-id="O006-PSU-006-U0603">
+<style>.codeblock-with-label pre.lang-label-18::before { content: "R"; }</style>
+<div class="code-copy-outer-scaffold" data-o006-id="O006-PSU-006-U0604"><div class="sourceCode cell-code" data-language-name-skip="true" data-o006-id="O006-PSU-006-U0605" id="cb89"><pre class="sourceCode r lang-label-18 code-with-copy" data-o006-id="O006-PSU-006-U0606"><code class="sourceCode r" data-o006-id="O006-PSU-006-U0607"><span id="cb89-1"><a aria-hidden="true" data-o006-id="O006-PSU-006-U0608" href="#cb89-1" tabindex="-1"></a><span class="fu">plot</span>(<span class="at">x=</span>plot.ID,<span class="at">y=</span>response)</span></code></pre></div><button class="code-copy-button" data-o006-id="O006-PSU-006-U0609" title="Copy to Clipboard"><i class="bi"></i></button></div>
+</div>
+<div class="cell-output-display" data-o006-id="O006-PSU-006-U0610">
+<div alt="Scatterplot of response vs Plot ID in the corn yield data." class="quarto-float quarto-figure quarto-figure-center anchored" data-o006-id="O006-PSU-006-U0611" id="fig-scattercornyield" width="70%">
+<figure class="quarto-float quarto-float-fig figure" data-o006-id="O006-PSU-006-U0612">
+<div aria-describedby="fig-scattercornyield-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca" data-o006-id="O006-PSU-006-U0613">
+<a class="lightbox" data-gallery="quarto-lightbox-gallery-3" data-o006-id="O006-PSU-006-U0614" href="Lesson05_files/figure-html/fig-scattercornyield-1.png" title="Fig 5.3: "><img alt="Scatterplot of response vs Plot ID in the corn yield data." class="img-fluid figure-img" data-o006-asset-id="O006-PSU-006-A0003" data-o006-id="O006-PSU-006-U0615" id="fig-scattercornyield" src="Lesson05_files/figure-html/fig-scattercornyield-1.png" style="width:70.0%"/></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" data-o006-id="O006-PSU-006-U0616" id="fig-scattercornyield-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Fig 5.3
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p data-o006-id="O006-PSU-006-U0617">You will often need to include R graphics in your homework solutions. Once you have made the plot, you can right click on the figure in Rstudio, and then copy the image which can then be pasted into a Word document (or similar document).</p>
+</section>
+<section class="level3" data-number="5.1.8" data-o006-id="O006-PSU-006-U0618" id="statistical-distributions-in-r">
+<h3 class="anchored" data-anchor-id="statistical-distributions-in-r" data-number="5.1.8" data-o006-id="O006-PSU-006-U0619"><span class="header-section-number">5.1.8</span> Statistical Distributions in R</h3>
+<section class="level4" data-o006-id="O006-PSU-006-U0620" id="help-files-in-r">
+<h4 class="anchored" data-anchor-id="help-files-in-r" data-o006-id="O006-PSU-006-U0621">Help files in R</h4>
+<p data-o006-id="O006-PSU-006-U0622">There are many functions in R - too many for any person to memorize all of the functions needed for most analyses. R also has a very robust system of documentation, as long as you know what to look for. In particular, if you know the name of a function that you need help with, R can help you very easily (see below). But if you don’t know what the name is for a function that does something you want to do, then your best bet is to search for that function on the internet using your favorite search engine.</p>
+<p data-o006-id="O006-PSU-006-U0623">For example, if you want to know how to find the CDF of a Normal distribution in R, searching something like “CDF normal distribution in R” will quickly give you many results that point you to the <code data-o006-id="O006-PSU-006-U0624">pnorm</code> function.</p>
+<p data-o006-id="O006-PSU-006-U0625">Once you know the function you may want to use, you can access R’s help files for that function by typing <code data-o006-id="O006-PSU-006-U0626">help(pnorm)</code> or <code data-o006-id="O006-PSU-006-U0627">?pnorm</code> into the R console. Note, that you should replace <code data-o006-id="O006-PSU-006-U0628">pnorm</code> with whatever function you are looking for help with.</p>
+</section>
+<section class="level4" data-o006-id="O006-PSU-006-U0629" id="r-functions-for-statistical-distributions">
+<h4 class="anchored" data-anchor-id="r-functions-for-statistical-distributions" data-o006-id="O006-PSU-006-U0630">R Functions for Statistical Distributions</h4>
+<p data-o006-id="O006-PSU-006-U0631">R is a great statistical software for working with distributions. Three main tasks related to random variables that R is very good at are:</p>
+<ol data-o006-id="O006-PSU-006-U0632" type="1">
+<li data-o006-id="O006-PSU-006-U0633"><p data-o006-id="O006-PSU-006-U0634">Drawing random variables from a given distribution</p></li>
+<li data-o006-id="O006-PSU-006-U0635"><p data-o006-id="O006-PSU-006-U0636">Calculating the pdf or pmf or likelihood of a distribution at a given observed value</p></li>
+<li data-o006-id="O006-PSU-006-U0637"><p data-o006-id="O006-PSU-006-U0638">Calculating quantiles and cdfs of distributions.</p></li>
+</ol>
+<p data-o006-id="O006-PSU-006-U0639">In R, there is a pattern to functions related to a distribution. If a given distributions short name in R is “XXX”, then “rXXX” will draw a random variable from that distribution, “dXXX” will calculate the probability density function of that distribution, and “pXXX” will calculate the cumulative distribution function, and “qXXX” will calculate the quantile.</p>
+</section>
+<section class="level4" data-o006-id="O006-PSU-006-U0640" id="examples-from-the-gaussian-normal-distribution">
+<h4 class="anchored" data-anchor-id="examples-from-the-gaussian-normal-distribution" data-o006-id="O006-PSU-006-U0641">Examples from the Gaussian (Normal) Distribution</h4>
+<p data-o006-id="O006-PSU-006-U0642">For example, let’s assume that each <span class="math inline" data-o006-math-id="O006-PSU-006-M0004">\(x_i \sim N(3,4)\)</span> is an independent, normally-distributed random variable with mean 3 and variance 4. R’s normally-distributed variable “short name” is “norm”, so to draw one random variable we could use the following code:</p>
+<div class="cell language-name-processed" data-o006-id="O006-PSU-006-U0643">
+<div class="codeblock-with-label r" data-o006-id="O006-PSU-006-U0644">
+<style>.codeblock-with-label pre.lang-label-19::before { content: "R"; }</style>
+<div class="code-copy-outer-scaffold" data-o006-id="O006-PSU-006-U0645"><div class="sourceCode cell-code" data-language-name-skip="true" data-o006-id="O006-PSU-006-U0646" id="cb90"><pre class="sourceCode r lang-label-19 code-with-copy" data-o006-id="O006-PSU-006-U0647"><code class="sourceCode r" data-o006-id="O006-PSU-006-U0648"><span id="cb90-1"><a aria-hidden="true" data-o006-id="O006-PSU-006-U0649" href="#cb90-1" tabindex="-1"></a><span class="fu">rnorm</span>(<span class="at">n=</span><span class="dv">1</span>,<span class="at">mean=</span><span class="dv">3</span>,<span class="at">sd=</span><span class="dv">2</span>)</span></code></pre></div><button class="code-copy-button" data-o006-id="O006-PSU-006-U0650" title="Copy to Clipboard"><i class="bi"></i></button></div>
+</div>
+<div class="cell-output cell-output-stdout" data-o006-id="O006-PSU-006-U0651">
+<pre data-o006-id="O006-PSU-006-U0652"><code data-o006-id="O006-PSU-006-U0653">[1] 4.580174</code></pre>
+</div>
+</div>
+<p data-o006-id="O006-PSU-006-U0654">Note that R uses the standard deviation <code data-o006-id="O006-PSU-006-U0655">sd</code> instead of the variance. If I wanted to draw 10 iid random variables, I could modify the <code data-o006-id="O006-PSU-006-U0656">n</code> argument to rnorm:</p>
+<div class="cell language-name-processed" data-o006-id="O006-PSU-006-U0657">
+<div class="codeblock-with-label r" data-o006-id="O006-PSU-006-U0658">
+<style>.codeblock-with-label pre.lang-label-20::before { content: "R"; }</style>
+<div class="code-copy-outer-scaffold" data-o006-id="O006-PSU-006-U0659"><div class="sourceCode cell-code" data-language-name-skip="true" data-o006-id="O006-PSU-006-U0660" id="cb92"><pre class="sourceCode r lang-label-20 code-with-copy" data-o006-id="O006-PSU-006-U0661"><code class="sourceCode r" data-o006-id="O006-PSU-006-U0662"><span id="cb92-1"><a aria-hidden="true" data-o006-id="O006-PSU-006-U0663" href="#cb92-1" tabindex="-1"></a><span class="fu">rnorm</span>(<span class="at">n=</span><span class="dv">10</span>,<span class="at">mean=</span><span class="dv">3</span>,<span class="at">sd=</span><span class="dv">2</span>)</span></code></pre></div><button class="code-copy-button" data-o006-id="O006-PSU-006-U0664" title="Copy to Clipboard"><i class="bi"></i></button></div>
+</div>
+<div class="cell-output cell-output-stdout" data-o006-id="O006-PSU-006-U0665">
+<pre data-o006-id="O006-PSU-006-U0666"><code data-o006-id="O006-PSU-006-U0667"> [1] 2.6761275 1.8122462 4.9407564 3.5186309 1.7039966 2.8509964 3.2628886
+ [8] 2.7733769 0.2348553 3.2150708</code></pre>
+</div>
+</div>
+<p data-o006-id="O006-PSU-006-U0668">I can also assign these values to a variable for future use”</p>
+<div class="cell language-name-processed" data-o006-id="O006-PSU-006-U0669">
+<div class="codeblock-with-label r" data-o006-id="O006-PSU-006-U0670">
+<style>.codeblock-with-label pre.lang-label-21::before { content: "R"; }</style>
+<div class="code-copy-outer-scaffold" data-o006-id="O006-PSU-006-U0671"><div class="sourceCode cell-code" data-language-name-skip="true" data-o006-id="O006-PSU-006-U0672" id="cb94"><pre class="sourceCode r lang-label-21 code-with-copy" data-o006-id="O006-PSU-006-U0673"><code class="sourceCode r" data-o006-id="O006-PSU-006-U0674"><span id="cb94-1"><a aria-hidden="true" data-o006-id="O006-PSU-006-U0675" href="#cb94-1" tabindex="-1"></a>x<span class="ot">=</span><span class="fu">rnorm</span>(<span class="at">n=</span><span class="dv">1</span>,<span class="at">mean=</span><span class="dv">3</span>,<span class="at">sd=</span><span class="dv">2</span>)</span>
+<span id="cb94-2"><a aria-hidden="true" data-o006-id="O006-PSU-006-U0676" href="#cb94-2" tabindex="-1"></a></span>
+<span id="cb94-3"><a aria-hidden="true" data-o006-id="O006-PSU-006-U0677" href="#cb94-3" tabindex="-1"></a>x</span></code></pre></div><button class="code-copy-button" data-o006-id="O006-PSU-006-U0678" title="Copy to Clipboard"><i class="bi"></i></button></div>
+</div>
+<div class="cell-output cell-output-stdout" data-o006-id="O006-PSU-006-U0679">
+<pre data-o006-id="O006-PSU-006-U0680"><code data-o006-id="O006-PSU-006-U0681">[1] 3.265162</code></pre>
+</div>
+</div>
+<p data-o006-id="O006-PSU-006-U0682">Now if I wanted to evaluate the pdf of a <span class="math inline" data-o006-math-id="O006-PSU-006-M0005">\(x \sim N(3,4)\)</span> at a particular value <span class="math inline" data-o006-math-id="O006-PSU-006-M0006">\(u=2\)</span>, I can use the <code data-o006-id="O006-PSU-006-U0683">dnorm</code> function:</p>
+<div class="cell language-name-processed" data-o006-id="O006-PSU-006-U0684">
+<div class="codeblock-with-label r" data-o006-id="O006-PSU-006-U0685">
+<style>.codeblock-with-label pre.lang-label-22::before { content: "R"; }</style>
+<div class="code-copy-outer-scaffold" data-o006-id="O006-PSU-006-U0686"><div class="sourceCode cell-code" data-language-name-skip="true" data-o006-id="O006-PSU-006-U0687" id="cb96"><pre class="sourceCode r lang-label-22 code-with-copy" data-o006-id="O006-PSU-006-U0688"><code class="sourceCode r" data-o006-id="O006-PSU-006-U0689"><span id="cb96-1"><a aria-hidden="true" data-o006-id="O006-PSU-006-U0690" href="#cb96-1" tabindex="-1"></a><span class="fu">dnorm</span>(<span class="dv">2</span>,<span class="at">mean=</span><span class="dv">3</span>,<span class="at">sd=</span><span class="dv">2</span>)</span></code></pre></div><button class="code-copy-button" data-o006-id="O006-PSU-006-U0691" title="Copy to Clipboard"><i class="bi"></i></button></div>
+</div>
+<div class="cell-output cell-output-stdout" data-o006-id="O006-PSU-006-U0692">
+<pre data-o006-id="O006-PSU-006-U0693"><code data-o006-id="O006-PSU-006-U0694">[1] 0.1760327</code></pre>
+</div>
+</div>
+<p data-o006-id="O006-PSU-006-U0695">The code above returns <span class="math inline" data-o006-math-id="O006-PSU-006-M0007">\(f_X(2)\)</span>. To get the CDF we use the <code data-o006-id="O006-PSU-006-U0696">pnorm</code> function, with <span class="math inline" data-o006-math-id="O006-PSU-006-M0008">\(F_X(2) = P(X\le 2)\)</span> being obtained by:</p>
+<div class="cell language-name-processed" data-o006-id="O006-PSU-006-U0697">
+<div class="codeblock-with-label r" data-o006-id="O006-PSU-006-U0698">
+<style>.codeblock-with-label pre.lang-label-23::before { content: "R"; }</style>
+<div class="code-copy-outer-scaffold" data-o006-id="O006-PSU-006-U0699"><div class="sourceCode cell-code" data-language-name-skip="true" data-o006-id="O006-PSU-006-U0700" id="cb98"><pre class="sourceCode r lang-label-23 code-with-copy" data-o006-id="O006-PSU-006-U0701"><code class="sourceCode r" data-o006-id="O006-PSU-006-U0702"><span id="cb98-1"><a aria-hidden="true" data-o006-id="O006-PSU-006-U0703" href="#cb98-1" tabindex="-1"></a><span class="fu">pnorm</span>(<span class="dv">2</span>,<span class="at">mean=</span><span class="dv">3</span>,<span class="at">sd=</span><span class="dv">2</span>)</span></code></pre></div><button class="code-copy-button" data-o006-id="O006-PSU-006-U0704" title="Copy to Clipboard"><i class="bi"></i></button></div>
+</div>
+<div class="cell-output cell-output-stdout" data-o006-id="O006-PSU-006-U0705">
+<pre data-o006-id="O006-PSU-006-U0706"><code data-o006-id="O006-PSU-006-U0707">[1] 0.3085375</code></pre>
+</div>
+</div>
+<p data-o006-id="O006-PSU-006-U0708">These functions all work on vectors as well. For example, if I wanted to evaluate the likelihood function of the ten simulated data points in “x”, I could do so by</p>
+<div class="cell language-name-processed" data-o006-id="O006-PSU-006-U0709">
+<div class="codeblock-with-label r" data-o006-id="O006-PSU-006-U0710">
+<style>.codeblock-with-label pre.lang-label-24::before { content: "R"; }</style>
+<div class="code-copy-outer-scaffold" data-o006-id="O006-PSU-006-U0711"><div class="sourceCode cell-code" data-language-name-skip="true" data-o006-id="O006-PSU-006-U0712" id="cb100"><pre class="sourceCode r lang-label-24 code-with-copy" data-o006-id="O006-PSU-006-U0713"><code class="sourceCode r" data-o006-id="O006-PSU-006-U0714"><span id="cb100-1"><a aria-hidden="true" data-o006-id="O006-PSU-006-U0715" href="#cb100-1" tabindex="-1"></a><span class="fu">dnorm</span>(x,<span class="at">mean=</span><span class="dv">3</span>,<span class="at">sd=</span><span class="dv">2</span>)</span></code></pre></div><button class="code-copy-button" data-o006-id="O006-PSU-006-U0716" title="Copy to Clipboard"><i class="bi"></i></button></div>
+</div>
+<div class="cell-output cell-output-stdout" data-o006-id="O006-PSU-006-U0717">
+<pre data-o006-id="O006-PSU-006-U0718"><code data-o006-id="O006-PSU-006-U0719">[1] 0.1977257</code></pre>
+</div>
+</div>
+<p data-o006-id="O006-PSU-006-U0720">The total likelihood of all the simulated random variables <span class="math inline" data-o006-math-id="O006-PSU-006-M0009">\(L(X_1,\ldots,X_{10}) = \prod_i f_X(X_i)\)</span> would then be</p>
+<div class="cell language-name-processed" data-o006-id="O006-PSU-006-U0721">
+<div class="codeblock-with-label r" data-o006-id="O006-PSU-006-U0722">
+<style>.codeblock-with-label pre.lang-label-25::before { content: "R"; }</style>
+<div class="code-copy-outer-scaffold" data-o006-id="O006-PSU-006-U0723"><div class="sourceCode cell-code" data-language-name-skip="true" data-o006-id="O006-PSU-006-U0724" id="cb102"><pre class="sourceCode r lang-label-25 code-with-copy" data-o006-id="O006-PSU-006-U0725"><code class="sourceCode r" data-o006-id="O006-PSU-006-U0726"><span id="cb102-1"><a aria-hidden="true" data-o006-id="O006-PSU-006-U0727" href="#cb102-1" tabindex="-1"></a><span class="fu">prod</span>(<span class="fu">dnorm</span>(x,<span class="at">mean=</span><span class="dv">3</span>,<span class="at">sd=</span><span class="dv">2</span>))</span></code></pre></div><button class="code-copy-button" data-o006-id="O006-PSU-006-U0728" title="Copy to Clipboard"><i class="bi"></i></button></div>
+</div>
+<div class="cell-output cell-output-stdout" data-o006-id="O006-PSU-006-U0729">
+<pre data-o006-id="O006-PSU-006-U0730"><code data-o006-id="O006-PSU-006-U0731">[1] 0.1977257</code></pre>
+</div>
+</div>
+<p data-o006-id="O006-PSU-006-U0732">and the log-likelihood <span class="math inline" data-o006-math-id="O006-PSU-006-M0010">\(l(X_1,\ldots,X_10)=\sum_i log(f_X(X_i))\)</span> could be calculated by</p>
+<div class="cell language-name-processed" data-o006-id="O006-PSU-006-U0733">
+<div class="codeblock-with-label r" data-o006-id="O006-PSU-006-U0734">
+<style>.codeblock-with-label pre.lang-label-26::before { content: "R"; }</style>
+<div class="code-copy-outer-scaffold" data-o006-id="O006-PSU-006-U0735"><div class="sourceCode cell-code" data-language-name-skip="true" data-o006-id="O006-PSU-006-U0736" id="cb104"><pre class="sourceCode r lang-label-26 code-with-copy" data-o006-id="O006-PSU-006-U0737"><code class="sourceCode r" data-o006-id="O006-PSU-006-U0738"><span id="cb104-1"><a aria-hidden="true" data-o006-id="O006-PSU-006-U0739" href="#cb104-1" tabindex="-1"></a><span class="fu">sum</span>(<span class="fu">log</span>(<span class="fu">dnorm</span>(x,<span class="at">mean=</span><span class="dv">3</span>,<span class="at">sd=</span><span class="dv">2</span>)))</span></code></pre></div><button class="code-copy-button" data-o006-id="O006-PSU-006-U0740" title="Copy to Clipboard"><i class="bi"></i></button></div>
+</div>
+<div class="cell-output cell-output-stdout" data-o006-id="O006-PSU-006-U0741">
+<pre data-o006-id="O006-PSU-006-U0742"><code data-o006-id="O006-PSU-006-U0743">[1] -1.620875</code></pre>
+</div>
+</div>
+<p data-o006-id="O006-PSU-006-U0744">R has an argument to <code data-o006-id="O006-PSU-006-U0745">dnorm</code> to obtain the log-density instead of the density:</p>
+<div class="cell language-name-processed" data-o006-id="O006-PSU-006-U0746">
+<div class="codeblock-with-label r" data-o006-id="O006-PSU-006-U0747">
+<style>.codeblock-with-label pre.lang-label-27::before { content: "R"; }</style>
+<div class="code-copy-outer-scaffold" data-o006-id="O006-PSU-006-U0748"><div class="sourceCode cell-code" data-language-name-skip="true" data-o006-id="O006-PSU-006-U0749" id="cb106"><pre class="sourceCode r lang-label-27 code-with-copy" data-o006-id="O006-PSU-006-U0750"><code class="sourceCode r" data-o006-id="O006-PSU-006-U0751"><span id="cb106-1"><a aria-hidden="true" data-o006-id="O006-PSU-006-U0752" href="#cb106-1" tabindex="-1"></a><span class="fu">dnorm</span>(x,<span class="at">mean=</span><span class="dv">3</span>,<span class="at">sd=</span><span class="dv">2</span>)</span></code></pre></div><button class="code-copy-button" data-o006-id="O006-PSU-006-U0753" title="Copy to Clipboard"><i class="bi"></i></button></div>
+</div>
+<div class="cell-output cell-output-stdout" data-o006-id="O006-PSU-006-U0754">
+<pre data-o006-id="O006-PSU-006-U0755"><code data-o006-id="O006-PSU-006-U0756">[1] 0.1977257</code></pre>
+</div>
+<div class="codeblock-with-label r" data-o006-id="O006-PSU-006-U0757">
+<style>.codeblock-with-label pre.lang-label-82::before { content: "R"; }</style>
+<div class="code-copy-outer-scaffold" data-o006-id="O006-PSU-006-U0758"><div class="sourceCode cell-code" data-o006-id="O006-PSU-006-U0759" id="cb108"><pre class="sourceCode r lang-label-82 code-with-copy" data-o006-id="O006-PSU-006-U0760"><code class="sourceCode r" data-o006-id="O006-PSU-006-U0761"><span id="cb108-1"><a aria-hidden="true" data-o006-id="O006-PSU-006-U0762" href="#cb108-1" tabindex="-1"></a><span class="fu">dnorm</span>(x,<span class="at">mean=</span><span class="dv">3</span>,<span class="at">sd=</span><span class="dv">2</span>,<span class="at">log=</span><span class="cn">TRUE</span>)</span></code></pre></div><button class="code-copy-button" data-o006-id="O006-PSU-006-U0763" title="Copy to Clipboard"><i class="bi"></i></button></div>
+</div>
+<div class="cell-output cell-output-stdout" data-o006-id="O006-PSU-006-U0764">
+<pre data-o006-id="O006-PSU-006-U0765"><code data-o006-id="O006-PSU-006-U0766">[1] -1.620875</code></pre>
+</div>
+</div>
+<p data-o006-id="O006-PSU-006-U0767">which is also often helpful.</p>
+</section>
+<section class="level4" data-o006-id="O006-PSU-006-U0768" id="examples-from-the-exponential-distribution">
+<h4 class="anchored" data-anchor-id="examples-from-the-exponential-distribution" data-o006-id="O006-PSU-006-U0769">Examples from the Exponential distribution</h4>
+<p data-o006-id="O006-PSU-006-U0770">As a second example, consider the Exponential distribution <span class="math inline" data-o006-math-id="O006-PSU-006-M0011">\(z_i\sim Exp(\lambda)\)</span>. We can draw 30 random variables, each from <span class="math inline" data-o006-math-id="O006-PSU-006-M0012">\(z_i\sim Exp(2)\)</span> (so <span class="math inline" data-o006-math-id="O006-PSU-006-M0013">\(E(z_i)=0.5\)</span>) with the following</p>
+<div class="cell language-name-processed" data-o006-id="O006-PSU-006-U0771">
+<div class="codeblock-with-label r" data-o006-id="O006-PSU-006-U0772">
+<style>.codeblock-with-label pre.lang-label-28::before { content: "R"; }</style>
+<div class="code-copy-outer-scaffold" data-o006-id="O006-PSU-006-U0773"><div class="sourceCode cell-code" data-language-name-skip="true" data-o006-id="O006-PSU-006-U0774" id="cb110"><pre class="sourceCode r lang-label-28 code-with-copy" data-o006-id="O006-PSU-006-U0775"><code class="sourceCode r" data-o006-id="O006-PSU-006-U0776"><span id="cb110-1"><a aria-hidden="true" data-o006-id="O006-PSU-006-U0777" href="#cb110-1" tabindex="-1"></a>z<span class="ot">=</span><span class="fu">rexp</span>(<span class="at">n=</span><span class="dv">30</span>,<span class="at">rate=</span><span class="dv">2</span>)</span>
+<span id="cb110-2"><a aria-hidden="true" data-o006-id="O006-PSU-006-U0778" href="#cb110-2" tabindex="-1"></a>z</span></code></pre></div><button class="code-copy-button" data-o006-id="O006-PSU-006-U0779" title="Copy to Clipboard"><i class="bi"></i></button></div>
+</div>
+<div class="cell-output cell-output-stdout" data-o006-id="O006-PSU-006-U0780">
+<pre data-o006-id="O006-PSU-006-U0781"><code data-o006-id="O006-PSU-006-U0782"> [1] 0.46705460 0.13549008 0.59298057 0.15507703 0.48047756 0.05794372
+ [7] 2.49577748 0.16406064 0.06812573 0.86453227 0.20257271 0.75935034
+[13] 0.13467089 0.51720819 0.30552624 0.09729556 0.40618003 0.42356514
+[19] 0.77848292 1.26786815 0.20875659 0.67108327 0.01352500 0.57952264
+[25] 0.05873649 1.74906687 0.34446049 0.01367921 0.17598810 0.16136436</code></pre>
+</div>
+</div>
+<p data-o006-id="O006-PSU-006-U0783">Let’s get the mean and median of the simulated data</p>
+<div class="cell language-name-processed" data-o006-id="O006-PSU-006-U0784">
+<div class="codeblock-with-label r" data-o006-id="O006-PSU-006-U0785">
+<style>.codeblock-with-label pre.lang-label-29::before { content: "R"; }</style>
+<div class="code-copy-outer-scaffold" data-o006-id="O006-PSU-006-U0786"><div class="sourceCode cell-code" data-language-name-skip="true" data-o006-id="O006-PSU-006-U0787" id="cb112"><pre class="sourceCode r lang-label-29 code-with-copy" data-o006-id="O006-PSU-006-U0788"><code class="sourceCode r" data-o006-id="O006-PSU-006-U0789"><span id="cb112-1"><a aria-hidden="true" data-o006-id="O006-PSU-006-U0790" href="#cb112-1" tabindex="-1"></a><span class="fu">mean</span>(z)</span></code></pre></div><button class="code-copy-button" data-o006-id="O006-PSU-006-U0791" title="Copy to Clipboard"><i class="bi"></i></button></div>
+</div>
+<div class="cell-output cell-output-stdout" data-o006-id="O006-PSU-006-U0792">
+<pre data-o006-id="O006-PSU-006-U0793"><code data-o006-id="O006-PSU-006-U0794">[1] 0.4783474</code></pre>
+</div>
+<div class="codeblock-with-label r" data-o006-id="O006-PSU-006-U0795">
+<style>.codeblock-with-label pre.lang-label-83::before { content: "R"; }</style>
+<div class="code-copy-outer-scaffold" data-o006-id="O006-PSU-006-U0796"><div class="sourceCode cell-code" data-o006-id="O006-PSU-006-U0797" id="cb114"><pre class="sourceCode r lang-label-83 code-with-copy" data-o006-id="O006-PSU-006-U0798"><code class="sourceCode r" data-o006-id="O006-PSU-006-U0799"><span id="cb114-1"><a aria-hidden="true" data-o006-id="O006-PSU-006-U0800" href="#cb114-1" tabindex="-1"></a><span class="fu">median</span>(z)</span></code></pre></div><button class="code-copy-button" data-o006-id="O006-PSU-006-U0801" title="Copy to Clipboard"><i class="bi"></i></button></div>
+</div>
+<div class="cell-output cell-output-stdout" data-o006-id="O006-PSU-006-U0802">
+<pre data-o006-id="O006-PSU-006-U0803"><code data-o006-id="O006-PSU-006-U0804">[1] 0.3249934</code></pre>
+</div>
+</div>
+<p data-o006-id="O006-PSU-006-U0805">which are similar to the theoretical mean (of <span class="math inline" data-o006-math-id="O006-PSU-006-M0014">\(1/\lambda=0.5\)</span>) and median (of <span class="math inline" data-o006-math-id="O006-PSU-006-M0015">\(\ln(2)/\lambda=0.34657\)</span>)</p>
+<p data-o006-id="O006-PSU-006-U0806">Now let’s simulate 1000 random variables</p>
+<div class="cell language-name-processed" data-o006-id="O006-PSU-006-U0807">
+<div class="codeblock-with-label r" data-o006-id="O006-PSU-006-U0808">
+<style>.codeblock-with-label pre.lang-label-30::before { content: "R"; }</style>
+<div class="code-copy-outer-scaffold" data-o006-id="O006-PSU-006-U0809"><div class="sourceCode cell-code" data-language-name-skip="true" data-o006-id="O006-PSU-006-U0810" id="cb116"><pre class="sourceCode r lang-label-30 code-with-copy" data-o006-id="O006-PSU-006-U0811"><code class="sourceCode r" data-o006-id="O006-PSU-006-U0812"><span id="cb116-1"><a aria-hidden="true" data-o006-id="O006-PSU-006-U0813" href="#cb116-1" tabindex="-1"></a>z<span class="ot">=</span><span class="fu">rexp</span>(<span class="at">n=</span><span class="dv">1000</span>,<span class="at">rate=</span><span class="dv">2</span>)</span></code></pre></div><button class="code-copy-button" data-o006-id="O006-PSU-006-U0814" title="Copy to Clipboard"><i class="bi"></i></button></div>
+</div>
+</div>
+<p data-o006-id="O006-PSU-006-U0815">This is too many to print, so let’s plot them with a histogram</p>
+<div class="cell language-name-processed" data-o006-id="O006-PSU-006-U0816">
+<div class="codeblock-with-label r" data-o006-id="O006-PSU-006-U0817">
+<style>.codeblock-with-label pre.lang-label-31::before { content: "R"; }</style>
+<div class="code-copy-outer-scaffold" data-o006-id="O006-PSU-006-U0818"><div class="sourceCode cell-code" data-language-name-skip="true" data-o006-id="O006-PSU-006-U0819" id="cb117"><pre class="sourceCode r lang-label-31 code-with-copy" data-o006-id="O006-PSU-006-U0820"><code class="sourceCode r" data-o006-id="O006-PSU-006-U0821"><span id="cb117-1"><a aria-hidden="true" data-o006-id="O006-PSU-006-U0822" href="#cb117-1" tabindex="-1"></a><span class="fu">hist</span>(z)</span></code></pre></div><button class="code-copy-button" data-o006-id="O006-PSU-006-U0823" title="Copy to Clipboard"><i class="bi"></i></button></div>
+</div>
+<div class="cell-output-display" data-o006-id="O006-PSU-006-U0824">
+<div data-o006-id="O006-PSU-006-U0825">
+<figure class="figure" data-o006-id="O006-PSU-006-U0826">
+<p data-o006-id="O006-PSU-006-U0827"><img class="img-fluid figure-img" data-o006-asset-id="O006-PSU-006-A0004" data-o006-id="O006-PSU-006-U0828" src="Lesson05_files/figure-html/unnamed-chunk-28-1.png" width="672"/></p>
+</figure>
+</div>
+</div>
+</div>
+<p data-o006-id="O006-PSU-006-U0829">These look exponentially-distributed, as they should. We will now calculate multiple theoretical quantities of exponential random variables with rate 2, and compare them with estimates of these quantities from the simulated random variables <span class="math inline" data-o006-math-id="O006-PSU-006-M0016">\({z_i,i=1,2,...,1000}\)</span>.</p>
+<p data-o006-id="O006-PSU-006-U0830">First let’s look at values of the CDF - the cumulative distribution function. The probability of <span class="math inline" data-o006-math-id="O006-PSU-006-M0017">\(P(z&lt;1)\)</span> is <span class="math inline" data-o006-math-id="O006-PSU-006-M0018">\(F_Z(1)\)</span>, which in R is found using the <code data-o006-id="O006-PSU-006-U0831">pexp</code> command</p>
+<div class="cell language-name-processed" data-o006-id="O006-PSU-006-U0832">
+<div class="codeblock-with-label r" data-o006-id="O006-PSU-006-U0833">
+<style>.codeblock-with-label pre.lang-label-32::before { content: "R"; }</style>
+<div class="code-copy-outer-scaffold" data-o006-id="O006-PSU-006-U0834"><div class="sourceCode cell-code" data-language-name-skip="true" data-o006-id="O006-PSU-006-U0835" id="cb118"><pre class="sourceCode r lang-label-32 code-with-copy" data-o006-id="O006-PSU-006-U0836"><code class="sourceCode r" data-o006-id="O006-PSU-006-U0837"><span id="cb118-1"><a aria-hidden="true" data-o006-id="O006-PSU-006-U0838" href="#cb118-1" tabindex="-1"></a><span class="fu">pexp</span>(<span class="dv">1</span>,<span class="at">rate=</span><span class="dv">2</span>)</span></code></pre></div><button class="code-copy-button" data-o006-id="O006-PSU-006-U0839" title="Copy to Clipboard"><i class="bi"></i></button></div>
+</div>
+<div class="cell-output cell-output-stdout" data-o006-id="O006-PSU-006-U0840">
+<pre data-o006-id="O006-PSU-006-U0841"><code data-o006-id="O006-PSU-006-U0842">[1] 0.8646647</code></pre>
+</div>
+</div>
+<p data-o006-id="O006-PSU-006-U0843">and the sample-based approximation to this is given by the number of sampled <span class="math inline" data-o006-math-id="O006-PSU-006-M0019">\(z_i\)</span> that are less than or equal to 1, divided by the total number of samples (n=1000 here).</p>
+<div class="cell language-name-processed" data-o006-id="O006-PSU-006-U0844">
+<div class="codeblock-with-label r" data-o006-id="O006-PSU-006-U0845">
+<style>.codeblock-with-label pre.lang-label-33::before { content: "R"; }</style>
+<div class="code-copy-outer-scaffold" data-o006-id="O006-PSU-006-U0846"><div class="sourceCode cell-code" data-language-name-skip="true" data-o006-id="O006-PSU-006-U0847" id="cb120"><pre class="sourceCode r lang-label-33 code-with-copy" data-o006-id="O006-PSU-006-U0848"><code class="sourceCode r" data-o006-id="O006-PSU-006-U0849"><span id="cb120-1"><a aria-hidden="true" data-o006-id="O006-PSU-006-U0850" href="#cb120-1" tabindex="-1"></a>n.less.than<span class="fl">.1</span><span class="ot">=</span><span class="fu">length</span>(<span class="fu">which</span>(z<span class="sc">&lt;=</span><span class="dv">1</span>))</span>
+<span id="cb120-2"><a aria-hidden="true" data-o006-id="O006-PSU-006-U0851" href="#cb120-2" tabindex="-1"></a>n.less.than<span class="fl">.1</span></span></code></pre></div><button class="code-copy-button" data-o006-id="O006-PSU-006-U0852" title="Copy to Clipboard"><i class="bi"></i></button></div>
+</div>
+<div class="cell-output cell-output-stdout" data-o006-id="O006-PSU-006-U0853">
+<pre data-o006-id="O006-PSU-006-U0854"><code data-o006-id="O006-PSU-006-U0855">[1] 870</code></pre>
+</div>
+<div class="codeblock-with-label r" data-o006-id="O006-PSU-006-U0856">
+<style>.codeblock-with-label pre.lang-label-84::before { content: "R"; }</style>
+<div class="code-copy-outer-scaffold" data-o006-id="O006-PSU-006-U0857"><div class="sourceCode cell-code" data-o006-id="O006-PSU-006-U0858" id="cb122"><pre class="sourceCode r lang-label-84 code-with-copy" data-o006-id="O006-PSU-006-U0859"><code class="sourceCode r" data-o006-id="O006-PSU-006-U0860"><span id="cb122-1"><a aria-hidden="true" data-o006-id="O006-PSU-006-U0861" href="#cb122-1" tabindex="-1"></a>cdf.val<span class="ot">=</span>n.less.than<span class="fl">.1</span><span class="sc">/</span><span class="dv">1000</span></span>
+<span id="cb122-2"><a aria-hidden="true" data-o006-id="O006-PSU-006-U0862" href="#cb122-2" tabindex="-1"></a>cdf.val</span></code></pre></div><button class="code-copy-button" data-o006-id="O006-PSU-006-U0863" title="Copy to Clipboard"><i class="bi"></i></button></div>
+</div>
+<div class="cell-output cell-output-stdout" data-o006-id="O006-PSU-006-U0864">
+<pre data-o006-id="O006-PSU-006-U0865"><code data-o006-id="O006-PSU-006-U0866">[1] 0.87</code></pre>
+</div>
+</div>
+<p data-o006-id="O006-PSU-006-U0867">which is a close approximation to the true value shown above.</p>
+<p data-o006-id="O006-PSU-006-U0868">If we wanted the joint likelihood of <span class="math inline" data-o006-math-id="O006-PSU-006-M0020">\((z_1,z_2,...,z_1000)\)</span>, we could get it by <span class="math inline" data-o006-math-id="O006-PSU-006-M0021">\(f_Z(z_1,z_2,...,z_1000)=\prod_{i=1}^{1000} f_Z(z_i)=\prod_{i=1}^{1000} \lambda e^{-\lambda z_i}\)</span>, which we can obtain directly in R</p>
+<div class="cell language-name-processed" data-o006-id="O006-PSU-006-U0869">
+<div class="codeblock-with-label r" data-o006-id="O006-PSU-006-U0870">
+<style>.codeblock-with-label pre.lang-label-34::before { content: "R"; }</style>
+<div class="code-copy-outer-scaffold" data-o006-id="O006-PSU-006-U0871"><div class="sourceCode cell-code" data-language-name-skip="true" data-o006-id="O006-PSU-006-U0872" id="cb124"><pre class="sourceCode r lang-label-34 code-with-copy" data-o006-id="O006-PSU-006-U0873"><code class="sourceCode r" data-o006-id="O006-PSU-006-U0874"><span id="cb124-1"><a aria-hidden="true" data-o006-id="O006-PSU-006-U0875" href="#cb124-1" tabindex="-1"></a><span class="fu">prod</span>(<span class="dv">2</span><span class="sc">*</span><span class="fu">exp</span>(<span class="sc">-</span><span class="dv">2</span><span class="sc">*</span>z))</span></code></pre></div><button class="code-copy-button" data-o006-id="O006-PSU-006-U0876" title="Copy to Clipboard"><i class="bi"></i></button></div>
+</div>
+<div class="cell-output cell-output-stdout" data-o006-id="O006-PSU-006-U0877">
+<pre data-o006-id="O006-PSU-006-U0878"><code data-o006-id="O006-PSU-006-U0879">[1] 1.137955e-131</code></pre>
+</div>
+</div>
+<p data-o006-id="O006-PSU-006-U0880">or can be obtained using the <code data-o006-id="O006-PSU-006-U0881">dexp</code> command</p>
+<div class="cell language-name-processed" data-o006-id="O006-PSU-006-U0882">
+<div class="codeblock-with-label r" data-o006-id="O006-PSU-006-U0883">
+<style>.codeblock-with-label pre.lang-label-35::before { content: "R"; }</style>
+<div class="code-copy-outer-scaffold" data-o006-id="O006-PSU-006-U0884"><div class="sourceCode cell-code" data-language-name-skip="true" data-o006-id="O006-PSU-006-U0885" id="cb126"><pre class="sourceCode r lang-label-35 code-with-copy" data-o006-id="O006-PSU-006-U0886"><code class="sourceCode r" data-o006-id="O006-PSU-006-U0887"><span id="cb126-1"><a aria-hidden="true" data-o006-id="O006-PSU-006-U0888" href="#cb126-1" tabindex="-1"></a><span class="fu">prod</span>(<span class="fu">dexp</span>(z,<span class="at">rate=</span><span class="dv">2</span>))</span></code></pre></div><button class="code-copy-button" data-o006-id="O006-PSU-006-U0889" title="Copy to Clipboard"><i class="bi"></i></button></div>
+</div>
+<div class="cell-output cell-output-stdout" data-o006-id="O006-PSU-006-U0890">
+<pre data-o006-id="O006-PSU-006-U0891"><code data-o006-id="O006-PSU-006-U0892">[1] 1.137955e-131</code></pre>
+</div>
+</div>
+</section>
+</section>
+</section>
+<section class="level2" data-number="5.2" data-o006-id="O006-PSU-006-U0893" id="numeric-maximum-likelihood-estimation">
+<h2 class="anchored" data-anchor-id="numeric-maximum-likelihood-estimation" data-number="5.2" data-o006-id="O006-PSU-006-U0894"><span class="header-section-number">5.2</span> Numeric Maximum Likelihood Estimation</h2>
+<p data-o006-id="O006-PSU-006-U0895">Now back to MLEs!</p>
+<p data-o006-id="O006-PSU-006-U0896">In the previous section, we showed an example where the maximum likelihood estimator could not be solved analytically and we require numerical optimization to solve the equation. In this section, we present two methods to find the maximum likelihood estimate numerically. The first method is to find it, using R, by a grid search. The other uses the <code data-o006-id="O006-PSU-006-U0897">optim</code> function in R.</p>
+<section class="level3" data-number="5.2.1" data-o006-id="O006-PSU-006-U0898" id="mle-through-grid-search">
+<h3 class="anchored" data-anchor-id="mle-through-grid-search" data-number="5.2.1" data-o006-id="O006-PSU-006-U0899"><span class="header-section-number">5.2.1</span> MLE Through Grid Search</h3>
+<p data-o006-id="O006-PSU-006-U0900">One way to find the MLE is through a grid search. The idea is to use software, such as R, to make the calculations for you. We know the underlying distribution and thus can find the likelihood function. Then, given a set of data and possible values of the unknown parameter, <span class="math inline" data-o006-math-id="O006-PSU-006-M0022">\(\theta\)</span>, we can find the value of <span class="math inline" data-o006-math-id="O006-PSU-006-M0023">\(\theta\)</span> that maximizes the likelihood.</p>
+<p data-o006-id="O006-PSU-006-U0901">To illustrate this, let’s assume that we have the following data points. Suppose the data come from an exponential distribution with unknown mean <span class="math inline" data-o006-math-id="O006-PSU-006-M0024">\(\theta\)</span>.</p>
+<div class="quarto-float quarto-figure quarto-figure-center anchored" data-o006-id="O006-PSU-006-U0902" id="fig-expdistunknownmean">
+<figure class="quarto-float quarto-float-fig figure" data-o006-id="O006-PSU-006-U0903">
+<div aria-describedby="fig-expdistunknownmean-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca" data-o006-id="O006-PSU-006-U0904">
+<div class="cell language-name-processed" data-lightbox="true" data-o006-id="O006-PSU-006-U0905">
+<div class="codeblock-with-label r" data-o006-id="O006-PSU-006-U0906">
+<style>.codeblock-with-label pre.lang-label-36::before { content: "R"; }</style>
+<div class="code-copy-outer-scaffold" data-o006-id="O006-PSU-006-U0907"><div class="sourceCode cell-code" data-language-name-skip="true" data-o006-id="O006-PSU-006-U0908" id="cb128"><pre class="sourceCode r lang-label-36 code-with-copy" data-o006-id="O006-PSU-006-U0909"><code class="sourceCode r" data-o006-id="O006-PSU-006-U0910"><span id="cb128-1"><a aria-hidden="true" data-o006-id="O006-PSU-006-U0911" href="#cb128-1" tabindex="-1"></a>x<span class="ot">=</span><span class="fu">c</span>(<span class="dv">1</span>,  <span class="dv">5</span>, <span class="dv">10</span>,  <span class="dv">1</span>,  <span class="dv">3</span>, <span class="dv">11</span>, <span class="dv">10</span>, <span class="dv">23</span>,  <span class="dv">2</span>,  <span class="dv">6</span>,  <span class="dv">1</span>, <span class="dv">24</span>,  <span class="dv">6</span>, <span class="dv">11</span>, <span class="dv">19</span>)</span>
+<span id="cb128-2"><a aria-hidden="true" data-o006-id="O006-PSU-006-U0912" href="#cb128-2" tabindex="-1"></a>x</span></code></pre></div><button class="code-copy-button" data-o006-id="O006-PSU-006-U0913" title="Copy to Clipboard"><i class="bi"></i></button></div>
+</div>
+<div class="cell-output cell-output-stdout" data-o006-id="O006-PSU-006-U0914">
+<pre data-o006-id="O006-PSU-006-U0915"><code data-o006-id="O006-PSU-006-U0916">&gt;  [1]  1  5 10  1  3 11 10 23  2  6  1 24  6 11 19</code></pre>
+</div>
+<div class="codeblock-with-label r" data-o006-id="O006-PSU-006-U0917">
+<style>.codeblock-with-label pre.lang-label-85::before { content: "R"; }</style>
+<div class="code-copy-outer-scaffold" data-o006-id="O006-PSU-006-U0918"><div class="sourceCode cell-code" data-o006-id="O006-PSU-006-U0919" id="cb130"><pre class="sourceCode r lang-label-85 code-with-copy" data-o006-id="O006-PSU-006-U0920"><code class="sourceCode r" data-o006-id="O006-PSU-006-U0921"><span id="cb130-1"><a aria-hidden="true" data-o006-id="O006-PSU-006-U0922" href="#cb130-1" tabindex="-1"></a><span class="fu">hist</span>(x,<span class="at">breaks=</span><span class="dv">7</span>)</span></code></pre></div><button class="code-copy-button" data-o006-id="O006-PSU-006-U0923" title="Copy to Clipboard"><i class="bi"></i></button></div>
+</div>
+<div class="cell-output-display" data-o006-id="O006-PSU-006-U0924">
+<div data-o006-id="O006-PSU-006-U0925">
+<figure class="figure" data-o006-id="O006-PSU-006-U0926">
+<p data-o006-id="O006-PSU-006-U0927"><img alt="Histogram showing data from an exponential distribution with unknown mean theta." class="img-fluid figure-img" data-o006-asset-id="O006-PSU-006-A0005" data-o006-id="O006-PSU-006-U0928" src="Lesson05_files/figure-html/unnamed-chunk-33-1.png" style="width:70.0%"/></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" data-o006-id="O006-PSU-006-U0929" id="fig-expdistunknownmean-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Fig 5.4
+</figcaption>
+</figure>
+</div>
+<p data-o006-id="O006-PSU-006-U0930">If we don’t know the parameter <span class="math inline" data-o006-math-id="O006-PSU-006-M0025">\(\theta\)</span>, we could try to estimate it with maximum likelihood estimation, where the estimate is the value that maximizes the likelihood function <span class="math display" data-o006-math-id="O006-PSU-006-M0026">\[\hat{\theta}=\text{argmax}{L(\theta,\mathbf{x})}\]</span> We could try just picking a few values of <span class="math inline" data-o006-math-id="O006-PSU-006-M0027">\(\theta\)</span> to try:</p>
+<div class="cell language-name-processed" data-o006-id="O006-PSU-006-U0931">
+<div class="codeblock-with-label r" data-o006-id="O006-PSU-006-U0932">
+<style>.codeblock-with-label pre.lang-label-37::before { content: "R"; }</style>
+<div class="code-copy-outer-scaffold" data-o006-id="O006-PSU-006-U0933"><div class="sourceCode cell-code" data-language-name-skip="true" data-o006-id="O006-PSU-006-U0934" id="cb131"><pre class="sourceCode r lang-label-37 code-with-copy" data-o006-id="O006-PSU-006-U0935"><code class="sourceCode r" data-o006-id="O006-PSU-006-U0936"><span id="cb131-1"><a aria-hidden="true" data-o006-id="O006-PSU-006-U0937" href="#cb131-1" tabindex="-1"></a>lik.exp<span class="fl">.2</span><span class="ot">=</span><span class="cf">function</span>(theta,x){</span>
+<span id="cb131-2"><a aria-hidden="true" data-o006-id="O006-PSU-006-U0938" href="#cb131-2" tabindex="-1"></a>  <span class="fu">prod</span>(<span class="fu">dexp</span>(x,<span class="at">rate=</span><span class="dv">1</span><span class="sc">/</span>theta))</span>
+<span id="cb131-3"><a aria-hidden="true" data-o006-id="O006-PSU-006-U0939" href="#cb131-3" tabindex="-1"></a>}</span>
+<span id="cb131-4"><a aria-hidden="true" data-o006-id="O006-PSU-006-U0940" href="#cb131-4" tabindex="-1"></a><span class="fu">lik.exp.2</span>(<span class="dv">2</span>,x)</span></code></pre></div><button class="code-copy-button" data-o006-id="O006-PSU-006-U0941" title="Copy to Clipboard"><i class="bi"></i></button></div>
+</div>
+<div class="cell-output cell-output-stdout" data-o006-id="O006-PSU-006-U0942">
+<pre data-o006-id="O006-PSU-006-U0943"><code data-o006-id="O006-PSU-006-U0944">[1] 4.017603e-34</code></pre>
+</div>
+<div class="codeblock-with-label r" data-o006-id="O006-PSU-006-U0945">
+<style>.codeblock-with-label pre.lang-label-86::before { content: "R"; }</style>
+<div class="code-copy-outer-scaffold" data-o006-id="O006-PSU-006-U0946"><div class="sourceCode cell-code" data-o006-id="O006-PSU-006-U0947" id="cb133"><pre class="sourceCode r lang-label-86 code-with-copy" data-o006-id="O006-PSU-006-U0948"><code class="sourceCode r" data-o006-id="O006-PSU-006-U0949"><span id="cb133-1"><a aria-hidden="true" data-o006-id="O006-PSU-006-U0950" href="#cb133-1" tabindex="-1"></a><span class="fu">lik.exp.2</span>(<span class="dv">10</span>,x)</span></code></pre></div><button class="code-copy-button" data-o006-id="O006-PSU-006-U0951" title="Copy to Clipboard"><i class="bi"></i></button></div>
+</div>
+<div class="cell-output cell-output-stdout" data-o006-id="O006-PSU-006-U0952">
+<pre data-o006-id="O006-PSU-006-U0953"><code data-o006-id="O006-PSU-006-U0954">[1] 1.674493e-21</code></pre>
+</div>
+<div class="codeblock-with-label r" data-o006-id="O006-PSU-006-U0955">
+<style>.codeblock-with-label pre.lang-label-87::before { content: "R"; }</style>
+<div class="code-copy-outer-scaffold" data-o006-id="O006-PSU-006-U0956"><div class="sourceCode cell-code" data-o006-id="O006-PSU-006-U0957" id="cb135"><pre class="sourceCode r lang-label-87 code-with-copy" data-o006-id="O006-PSU-006-U0958"><code class="sourceCode r" data-o006-id="O006-PSU-006-U0959"><span id="cb135-1"><a aria-hidden="true" data-o006-id="O006-PSU-006-U0960" href="#cb135-1" tabindex="-1"></a><span class="fu">lik.exp.2</span>(<span class="dv">20</span>,x)</span></code></pre></div><button class="code-copy-button" data-o006-id="O006-PSU-006-U0961" title="Copy to Clipboard"><i class="bi"></i></button></div>
+</div>
+<div class="cell-output cell-output-stdout" data-o006-id="O006-PSU-006-U0962">
+<pre data-o006-id="O006-PSU-006-U0963"><code data-o006-id="O006-PSU-006-U0964">[1] 3.949042e-23</code></pre>
+</div>
+</div>
+<p data-o006-id="O006-PSU-006-U0965">Out of this small collection of values, <span class="math inline" data-o006-math-id="O006-PSU-006-M0028">\(\theta=10\)</span> gives the highest likelihood.</p>
+<p data-o006-id="O006-PSU-006-U0966">To try a sequence of values, we’ll build a “for” loop. Our goal is to end up with a vector of likelihood values for a sequence of <span class="math inline" data-o006-math-id="O006-PSU-006-M0029">\(\theta\)</span> values. We start by specifying the <span class="math inline" data-o006-math-id="O006-PSU-006-M0030">\(\theta\)</span> values we want to consider.</p>
+<div class="cell language-name-processed" data-o006-id="O006-PSU-006-U0967">
+<div class="codeblock-with-label r" data-o006-id="O006-PSU-006-U0968">
+<style>.codeblock-with-label pre.lang-label-38::before { content: "R"; }</style>
+<div class="code-copy-outer-scaffold" data-o006-id="O006-PSU-006-U0969"><div class="sourceCode cell-code" data-language-name-skip="true" data-o006-id="O006-PSU-006-U0970" id="cb137"><pre class="sourceCode r lang-label-38 code-with-copy" data-o006-id="O006-PSU-006-U0971"><code class="sourceCode r" data-o006-id="O006-PSU-006-U0972"><span id="cb137-1"><a aria-hidden="true" data-o006-id="O006-PSU-006-U0973" href="#cb137-1" tabindex="-1"></a>theta.vals<span class="ot">=</span><span class="fu">seq</span>(<span class="dv">1</span>,<span class="dv">100</span>,<span class="at">by=</span><span class="fl">0.1</span>)</span>
+<span id="cb137-2"><a aria-hidden="true" data-o006-id="O006-PSU-006-U0974" href="#cb137-2" tabindex="-1"></a>theta.vals</span></code></pre></div><button class="code-copy-button" data-o006-id="O006-PSU-006-U0975" title="Copy to Clipboard"><i class="bi"></i></button></div>
+</div>
+</div>
+<div class="cell" data-o006-id="O006-PSU-006-U0976">
+<div class="cell-output cell-output-stdout" data-o006-id="O006-PSU-006-U0977">
+<pre data-o006-id="O006-PSU-006-U0978"><code data-o006-id="O006-PSU-006-U0979"> [1] 1.0 1.1 1.2 1.3 1.4 1.5 1.6 1.7 1.8 1.9 2.0 2.1 2.2 2.3 2.4 2.5 2.6 2.7 2.8
+[20] 2.9 3.0 3.1 3.2 3.3 3.4
+...
+ [1]  97.6  97.7  97.8  97.9  98.0  98.1  98.2  98.3  98.4  98.5  98.6  98.7
+[13]  98.8  98.9  99.0  99.1  99.2  99.3  99.4  99.5  99.6  99.7  99.8  99.9
+[25] 100.0</code></pre>
+</div>
+</div>
+<p data-o006-id="O006-PSU-006-U0980">We then create an empty vector of likelihood values (we’ll fill in the values later)</p>
+<div class="cell language-name-processed" data-o006-id="O006-PSU-006-U0981">
+<div class="codeblock-with-label r" data-o006-id="O006-PSU-006-U0982">
+<style>.codeblock-with-label pre.lang-label-39::before { content: "R"; }</style>
+<div class="code-copy-outer-scaffold" data-o006-id="O006-PSU-006-U0983"><div class="sourceCode cell-code" data-language-name-skip="true" data-o006-id="O006-PSU-006-U0984" id="cb139"><pre class="sourceCode r lang-label-39 code-with-copy" data-o006-id="O006-PSU-006-U0985"><code class="sourceCode r" data-o006-id="O006-PSU-006-U0986"><span id="cb139-1"><a aria-hidden="true" data-o006-id="O006-PSU-006-U0987" href="#cb139-1" tabindex="-1"></a>lik.vals<span class="ot">=</span><span class="fu">rep</span>(<span class="cn">NA</span>,<span class="fu">length</span>(theta.vals))</span></code></pre></div><button class="code-copy-button" data-o006-id="O006-PSU-006-U0988" title="Copy to Clipboard"><i class="bi"></i></button></div>
+</div>
+</div>
+<p data-o006-id="O006-PSU-006-U0989">We can now make a for loop that (1) evaluates the likelihood function for each value of theta, and (2) saves that value in the correct spot in <code data-o006-id="O006-PSU-006-U0990">lik.vals</code>.</p>
+<div class="quarto-float quarto-figure quarto-figure-center anchored" data-o006-id="O006-PSU-006-U0991" id="fig-mleforeachtheta">
+<figure class="quarto-float quarto-float-fig figure" data-o006-id="O006-PSU-006-U0992">
+<div aria-describedby="fig-mleforeachtheta-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca" data-o006-id="O006-PSU-006-U0993">
+<div class="cell" data-lightbox="true" data-o006-id="O006-PSU-006-U0994">
+<div class="cell-output-display" data-o006-id="O006-PSU-006-U0995">
+<div data-o006-id="O006-PSU-006-U0996">
+<figure class="figure" data-o006-id="O006-PSU-006-U0997">
+<p data-o006-id="O006-PSU-006-U0998"><img alt="Graph of the likelihood function for each value of theta." class="img-fluid figure-img" data-o006-asset-id="O006-PSU-006-A0006" data-o006-id="O006-PSU-006-U0999" src="Lesson05_files/figure-html/unnamed-chunk-38-1.png" style="width:70.0%"/></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" data-o006-id="O006-PSU-006-U1000" id="fig-mleforeachtheta-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Fig 5.5
+</figcaption>
+</figure>
+</div>
+<p data-o006-id="O006-PSU-006-U1001">This approach is often called a “grid search”, as we are searching over a wide range of values of our parameters. From the plot, we can see that the MLE is somewhere near 10. We can find the best value of <span class="math inline" data-o006-math-id="O006-PSU-006-M0031">\(\theta\)</span> out of those we tried by using the <code data-o006-id="O006-PSU-006-U1002">which.max</code> command, which finds the index of the maximum value in a vector.</p>
+<div class="cell language-name-processed" data-o006-id="O006-PSU-006-U1003">
+<div class="codeblock-with-label r" data-o006-id="O006-PSU-006-U1004">
+<style>.codeblock-with-label pre.lang-label-40::before { content: "R"; }</style>
+<div class="code-copy-outer-scaffold" data-o006-id="O006-PSU-006-U1005"><div class="sourceCode cell-code" data-language-name-skip="true" data-o006-id="O006-PSU-006-U1006" id="cb140"><pre class="sourceCode r lang-label-40 code-with-copy" data-o006-id="O006-PSU-006-U1007"><code class="sourceCode r" data-o006-id="O006-PSU-006-U1008"><span id="cb140-1"><a aria-hidden="true" data-o006-id="O006-PSU-006-U1009" href="#cb140-1" tabindex="-1"></a>idx.mle<span class="ot">=</span><span class="fu">which.max</span>(lik.vals)</span>
+<span id="cb140-2"><a aria-hidden="true" data-o006-id="O006-PSU-006-U1010" href="#cb140-2" tabindex="-1"></a>idx.mle</span></code></pre></div><button class="code-copy-button" data-o006-id="O006-PSU-006-U1011" title="Copy to Clipboard"><i class="bi"></i></button></div>
+</div>
+<div class="cell-output cell-output-stdout" data-o006-id="O006-PSU-006-U1012">
+<pre data-o006-id="O006-PSU-006-U1013"><code data-o006-id="O006-PSU-006-U1014">[1] 80</code></pre>
+</div>
+<div class="codeblock-with-label r" data-o006-id="O006-PSU-006-U1015">
+<style>.codeblock-with-label pre.lang-label-88::before { content: "R"; }</style>
+<div class="code-copy-outer-scaffold" data-o006-id="O006-PSU-006-U1016"><div class="sourceCode cell-code" data-o006-id="O006-PSU-006-U1017" id="cb142"><pre class="sourceCode r lang-label-88 code-with-copy" data-o006-id="O006-PSU-006-U1018"><code class="sourceCode r" data-o006-id="O006-PSU-006-U1019"><span id="cb142-1"><a aria-hidden="true" data-o006-id="O006-PSU-006-U1020" href="#cb142-1" tabindex="-1"></a>theta.hat.grid<span class="ot">=</span>theta.vals[idx.mle]</span>
+<span id="cb142-2"><a aria-hidden="true" data-o006-id="O006-PSU-006-U1021" href="#cb142-2" tabindex="-1"></a>theta.hat.grid</span></code></pre></div><button class="code-copy-button" data-o006-id="O006-PSU-006-U1022" title="Copy to Clipboard"><i class="bi"></i></button></div>
+</div>
+<div class="cell-output cell-output-stdout" data-o006-id="O006-PSU-006-U1023">
+<pre data-o006-id="O006-PSU-006-U1024"><code data-o006-id="O006-PSU-006-U1025">[1] 8.9</code></pre>
+</div>
+</div>
+<p data-o006-id="O006-PSU-006-U1026">Thus, given the values that we tried, our MLE is <span class="math inline" data-o006-math-id="O006-PSU-006-M0032">\(\hat{\theta}_{grid}=8.9\)</span>.</p>
+<p data-o006-id="O006-PSU-006-U1027">This is a crude method of finding the MLE. The next method we present is more comprehensive.</p>
+</section>
+<section class="level3" data-number="5.2.2" data-o006-id="O006-PSU-006-U1028" id="numerical-mle-the-idea">
+<h3 class="anchored" data-anchor-id="numerical-mle-the-idea" data-number="5.2.2" data-o006-id="O006-PSU-006-U1029"><span class="header-section-number">5.2.2</span> Numerical MLE: The Idea</h3>
+<p data-o006-id="O006-PSU-006-U1030">A better alternative to the grid search above is to use one of many iterative methods for maximizing a function. One such method is called the Newton-Raphson algorithm, also sometimes called Newton’s Method. <!-----I moved this from under the single header!----></p>
+<p data-o006-id="O006-PSU-006-U1031">Numerical optimization is a huge field! There are many optimization algorithms to choose from. Most of the optimization algorithms share some characteristic steps. They involve:</p>
+<ol data-o006-id="O006-PSU-006-U1032" type="1">
+<li data-o006-id="O006-PSU-006-U1033"><p data-o006-id="O006-PSU-006-U1034">Requiring a starting value for the parameters, <span class="math inline" data-o006-math-id="O006-PSU-006-M0033">\({\theta}=(\theta_1, \theta_2, \ldots, \theta_p)\)</span>, denoted <span class="math inline" data-o006-math-id="O006-PSU-006-M0034">\({\theta}_0\)</span>.</p></li>
+<li data-o006-id="O006-PSU-006-U1035"><p data-o006-id="O006-PSU-006-U1036">Interactively finding a sequence of new parameters, <span class="math inline" data-o006-math-id="O006-PSU-006-M0035">\({\theta}^{(1)}, {\theta}^{(2)}, \ldots\)</span></p></li>
+<li data-o006-id="O006-PSU-006-U1037"><p data-o006-id="O006-PSU-006-U1038">Stops when <span class="math inline" data-o006-math-id="O006-PSU-006-M0036">\({\theta}^{(k)}\)</span> is “close” to a local maximum.</p></li>
+</ol>
+<div alt="Graph showing normal curve with different theta values" class="lightbox quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center" data-o006-id="O006-PSU-006-U1039" id="fig-numerical_mle_1">
+<figure class="quarto-float quarto-float-fig figure" data-o006-id="O006-PSU-006-U1040">
+<div aria-describedby="fig-numerical_mle_1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca" data-o006-id="O006-PSU-006-U1041">
+<a class="lightbox" data-gallery="quarto-lightbox-gallery-4" data-o006-id="O006-PSU-006-U1042" href="assets/numericalmle.png" title="Fig 5.6: "><img alt="Graph showing normal curve with different theta values" class="img-fluid quarto-figure quarto-figure-center anchored figure-img" data-o006-asset-id="O006-PSU-006-A0007" data-o006-id="O006-PSU-006-U1043" id="fig-numericalmle" src="assets/numericalmle.png" style="width:70.0%"/></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" data-o006-id="O006-PSU-006-U1044" id="fig-numerical_mle_1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Fig 5.6
+</figcaption>
+</figure>
+</div>
+<p data-o006-id="O006-PSU-006-U1045">The algorithm we will consider in this class is the <strong>Newton-Raphson Algorithm</strong> or <strong>Newton’s Method</strong>.</p>
+</section>
+<section class="level3" data-number="5.2.3" data-o006-id="O006-PSU-006-U1046" id="newtons-method-approach-idea">
+<h3 class="anchored" data-anchor-id="newtons-method-approach-idea" data-number="5.2.3" data-o006-id="O006-PSU-006-U1047"><span class="header-section-number">5.2.3</span> Newton’s Method Approach Idea</h3>
+<div class="quarto-float quarto-figure quarto-figure-center anchored" data-o006-id="O006-PSU-006-U1048" id="vid-newtons1">
+<figure class="quarto-float quarto-float-vid figure" data-o006-id="O006-PSU-006-U1049">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-vid" data-o006-id="O006-PSU-006-U1050" id="vid-newtons1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Video 5.1: Newton’s Method [no sound]
+</figcaption>
+<div aria-describedby="vid-newtons1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca" data-o006-id="O006-PSU-006-U1051">
+<div class="text-center" data-o006-id="O006-PSU-006-U1052">
+<div data-o006-id="O006-PSU-006-U1053" style="position:relative;padding-bottom:2 %&gt;% %">
+<iframe allow="autoplay *; fullscreen *; encrypted-media *" allowfullscreen="" data-o006-dependency-id="O006-PSU-006-D0001" id="kaltura_player" mozallowfullscreen="" sandbox="allow-downloads allow-forms allow-same-origin allow-scripts allow-top-navigation allow-pointer-lock allow-popups allow-modals allow-orientation-lock allow-popups-to-escape-sandbox allow-presentation allow-top-navigation-by-user-activation" src="https://cdnapisec.kaltura.com/p/2356971/embedPlaykitJs/uiconf_id/54679262?iframeembed=true&amp;entry_id=1_2xwqdqgj&amp;config%5Bprovider%5D=%7B%22widgetId%22%3A%221_4bkcltvd%22%7D&amp;config%5Bplayback%5D=%7B%22startTime%22%3A0%7D" style="width: 100%;height: 690px;border: 0;" title="STAT 415: Newton's Method [no sound]" webkitallowfullscreen="">
+</iframe>
+</div>
+</div>
+</div>
+</figure>
+</div>
+<p data-o006-id="O006-PSU-006-U1054">The idea is maximizing the log likelihood function, <span class="math inline" data-o006-math-id="O006-PSU-006-M0037">\(\ell(\theta)\)</span>. We do this by finding <span class="math inline" data-o006-math-id="O006-PSU-006-M0038">\(\frac{d}{d\theta} \ell(\theta)=0\)</span>. The derivative, <span class="math inline" data-o006-math-id="O006-PSU-006-M0039">\(\frac{d}{d\theta} \ell(\theta)=0\)</span> is just a function of <span class="math inline" data-o006-math-id="O006-PSU-006-M0040">\(\theta\)</span>, so let’s define it as <span class="math inline" data-o006-math-id="O006-PSU-006-M0041">\(h(\theta)=\frac{d}{d\theta} \ell(\theta)=0\)</span>.</p>
+<p data-o006-id="O006-PSU-006-U1055">We need to find the “root” of <span class="math inline" data-o006-math-id="O006-PSU-006-M0042">\(h(\theta)\)</span>. In other words, we need to find a <span class="math inline" data-o006-math-id="O006-PSU-006-M0043">\(\theta\)</span> such that <span class="math inline" data-o006-math-id="O006-PSU-006-M0044">\(h(\theta)=0\)</span>.</p>
+<p data-o006-id="O006-PSU-006-U1056">We get closer to the root (<span class="math inline" data-o006-math-id="O006-PSU-006-M0045">\(h(\theta)=0\)</span>) by approximating <span class="math inline" data-o006-math-id="O006-PSU-006-M0046">\(h(\theta)\)</span> with a tangent like at the current value of <span class="math inline" data-o006-math-id="O006-PSU-006-M0047">\(\theta\)</span>. So we start with a value, <span class="math inline" data-o006-math-id="O006-PSU-006-M0048">\(\theta^{(0)}\)</span>. We evaluate <span class="math inline" data-o006-math-id="O006-PSU-006-M0049">\(h(\theta^{(0)}=\frac{d}{d\theta}\ell(\theta^{(0)})\)</span>. The tangent line at <span class="math inline" data-o006-math-id="O006-PSU-006-M0050">\(\theta^{(0)}\)</span> is</p>
+<p data-o006-id="O006-PSU-006-U1057"><span class="math display" data-o006-math-id="O006-PSU-006-M0051">\[
+\begin{align*}
+y=h^\prime(\theta^{(0)})(\theta-\theta^{(0)})+h(\theta^{(0)})
+\end{align*}
+\]</span></p>
+<p data-o006-id="O006-PSU-006-U1058">Setting <span class="math inline" data-o006-math-id="O006-PSU-006-M0052">\(y=0\)</span> gives us where this tangent line hits 0.</p>
+<p data-o006-id="O006-PSU-006-U1059"><span class="math display" data-o006-math-id="O006-PSU-006-M0053">\[
+\begin{align*}
+0=h^\prime(\theta^{(0)})(\theta-\theta^{(0)})+h(\theta^{(0)})
+\end{align*}
+\]</span></p>
+<p data-o006-id="O006-PSU-006-U1060">Now, we solve for <span class="math inline" data-o006-math-id="O006-PSU-006-M0054">\(\theta\)</span> to get:</p>
+<p data-o006-id="O006-PSU-006-U1061"><span class="math display" data-o006-math-id="O006-PSU-006-M0055">\[
+\begin{align*}
+\theta^{(1)}=\theta^{(0)}-\frac{h(\theta^{(0)})}{h^\prime(\theta^{(0)})}
+\end{align*}
+\]</span></p>
+<p data-o006-id="O006-PSU-006-U1062">The following animation displays how this works to find the root. We start with an initial value of <span class="math inline" data-o006-math-id="O006-PSU-006-M0056">\(\theta\)</span>, <span class="math inline" data-o006-math-id="O006-PSU-006-M0057">\(\theta^{(0)}\)</span> (blue dot). We evaluate the log likelihood function at that value. Then we find the tangent line for the initial value. Find where the tangent line crosses the x-axis. That point becomes our “new” value of <span class="math inline" data-o006-math-id="O006-PSU-006-M0058">\(\theta\)</span>, <span class="math inline" data-o006-math-id="O006-PSU-006-M0059">\(\theta^{(1)}\)</span>. Then, we repeat the same steps we did for the initial <span class="math inline" data-o006-math-id="O006-PSU-006-M0060">\(\theta\)</span> value. We keep going until we find the maximum.</p>
+<div class="quarto-float quarto-figure quarto-figure-center anchored" data-o006-id="O006-PSU-006-U1063" id="vid-newtons2">
+<figure class="quarto-float quarto-float-vid figure" data-o006-id="O006-PSU-006-U1064">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-vid" data-o006-id="O006-PSU-006-U1065" id="vid-newtons2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Video 5.2: Newton’s Method [no sound]
+</figcaption>
+<div aria-describedby="vid-newtons2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca" data-o006-id="O006-PSU-006-U1066">
+<div class="text-center" data-o006-id="O006-PSU-006-U1067">
+<div data-o006-id="O006-PSU-006-U1068" style="position:relative;padding-bottom:2 %&gt;% %">
+<iframe allow="autoplay *; fullscreen *; encrypted-media *" allowfullscreen="" data-o006-dependency-id="O006-PSU-006-D0001" id="kaltura_player" mozallowfullscreen="" sandbox="allow-downloads allow-forms allow-same-origin allow-scripts allow-top-navigation allow-pointer-lock allow-popups allow-modals allow-orientation-lock allow-popups-to-escape-sandbox allow-presentation allow-top-navigation-by-user-activation" src="https://cdnapisec.kaltura.com/p/2356971/embedPlaykitJs/uiconf_id/54679262?iframeembed=true&amp;entry_id=1_2xwqdqgj&amp;config%5Bprovider%5D=%7B%22widgetId%22%3A%221_4bkcltvd%22%7D&amp;config%5Bplayback%5D=%7B%22startTime%22%3A0%7D" style="width: 100%;height: 690px;border: 0;" title="STAT 415: Newton's Method [no sound]" webkitallowfullscreen="">
+</iframe>
+</div>
+</div>
+</div>
+</figure>
+</div>
+<p data-o006-id="O006-PSU-006-U1069">The steps are:</p>
+<ol data-o006-id="O006-PSU-006-U1070" type="1">
+<li data-o006-id="O006-PSU-006-U1071"><p data-o006-id="O006-PSU-006-U1072">Specify a starting value, <span class="math inline" data-o006-math-id="O006-PSU-006-M0061">\(\theta^{(0)}\)</span>.</p></li>
+<li data-o006-id="O006-PSU-006-U1073"><p data-o006-id="O006-PSU-006-U1074">For <span class="math inline" data-o006-math-id="O006-PSU-006-M0062">\(t=1, 2, \ldots\)</span> find: <span class="math display" data-o006-math-id="O006-PSU-006-M0063">\[\begin{aligned}
+             \theta^{(t+1)}=\theta^{(t)}-\frac{h(\theta^{(t)})}{h^\prime(\theta^{(t)})}=\theta^{(t)}-\frac{\frac{d}{d\theta}\ell(\theta^{(t)})}{\frac{d^2}{d\theta^2}\ell(\theta^{(t)})}\end{aligned}\]</span></p></li>
+</ol>
+</section>
+<section class="level3" data-number="5.2.4" data-o006-id="O006-PSU-006-U1075" id="numerical-optimization-in-r">
+<h3 class="anchored" data-anchor-id="numerical-optimization-in-r" data-number="5.2.4" data-o006-id="O006-PSU-006-U1076"><span class="header-section-number">5.2.4</span> Numerical Optimization in R</h3>
+<p data-o006-id="O006-PSU-006-U1077">This section is meant to give you some intuition for how numerical optimization works using the R function, <code data-o006-id="O006-PSU-006-U1078">optim</code>. In general, we will just USE existing algorithms, so most of your homework will not focus on understanding how algorithms like Newton’s method work. The next subsection (Numerical Optimization) contains the most useful code to use algorithms like Newton’s method to find MLEs. This subsection is meant to help you understand what is happening under the hood of <code data-o006-id="O006-PSU-006-U1079">optim</code> and other numerical optimization routines.</p>
+<p data-o006-id="O006-PSU-006-U1080">If our goal is to maximize the likelihood function <span class="math inline" data-o006-math-id="O006-PSU-006-M0064">\(L(\theta,\mathbf{x})\)</span>, we could similarly maximize the log-likelihood function</p>
+<div data-o006-id="O006-PSU-006-U1081" style="overflow-x:auto;overflow-y:hidden;">
+<p data-o006-id="O006-PSU-006-U1082"><span class="math display" data-o006-math-id="O006-PSU-006-M0065">\[
+\ell(\theta)=\log(L(\theta))=\log\left(\prod_{i=1}^n f_X(x_i,\theta)\right)=\sum_{i=1}^n \log f_X(x_i)=\sum_{i=1}^n\left(-\log(\theta) -\frac{ x_i}{\theta}\right)
+\]</span></p>
+</div>
+<p data-o006-id="O006-PSU-006-U1083">This maximum could be found by first identifying any critical points that satisfy <span class="math inline" data-o006-math-id="O006-PSU-006-M0066">\(\frac{d}{d\theta}\ell(\theta)=\ell'(\theta)=0\)</span> Thus, we need to find the values of <span class="math inline" data-o006-math-id="O006-PSU-006-M0067">\(\theta\)</span> which are the roots of <span class="math inline" data-o006-math-id="O006-PSU-006-M0068">\(\ell'(\theta)\)</span> - the values of <span class="math inline" data-o006-math-id="O006-PSU-006-M0069">\(\theta\)</span> that make the function <span class="math inline" data-o006-math-id="O006-PSU-006-M0070">\(\ell'(\theta)\)</span> equal zero.</p>
+<p data-o006-id="O006-PSU-006-U1084">Newton’s method is a root finding algorithm that works by iteratively approximating the function by a line. The details of Newton’s method are covered in the lectures, with the algorithm being as follows. Given a starting value <span class="math inline" data-o006-math-id="O006-PSU-006-M0071">\(\theta^{(0)}\)</span>, we iteratively update <span class="math inline" data-o006-math-id="O006-PSU-006-M0072">\(\theta^{(t)}\)</span> as follows <span class="math display" data-o006-math-id="O006-PSU-006-M0073">\[ \theta^{(t+1)}=\theta^{(t)} - \frac{\ell'(\theta^{(t)})}{\ell''(\theta^{(t)})}\]</span> Let’s write functions to evaluate the first and second derivatives of the log-likelihood function. Note that R can’t directly calculate derivatives of a function, so we do the algebra and then code these into R functions <span class="math display" data-o006-math-id="O006-PSU-006-M0074">\[ \ell'(\theta)=\sum_{i=1}^n\left(\frac{-\theta+x_i}{\theta^2} \right)=\sum_{i=1}^n (x_i-\theta)\theta^{-2}\]</span> <span class="math display" data-o006-math-id="O006-PSU-006-M0075">\[ \ell''(\theta)=\sum_{i=1}^n\left(\frac{-2x_i+\theta}{\theta^3} \right) \]</span></p>
+<p data-o006-id="O006-PSU-006-U1085">R functions to evaluate these are</p>
+<div class="cell language-name-processed" data-o006-id="O006-PSU-006-U1086">
+<div class="codeblock-with-label r" data-o006-id="O006-PSU-006-U1087">
+<style>.codeblock-with-label pre.lang-label-41::before { content: "R"; }</style>
+<div class="code-copy-outer-scaffold" data-o006-id="O006-PSU-006-U1088"><div class="sourceCode cell-code" data-language-name-skip="true" data-o006-id="O006-PSU-006-U1089" id="cb144"><pre class="sourceCode r lang-label-41 code-with-copy" data-o006-id="O006-PSU-006-U1090"><code class="sourceCode r" data-o006-id="O006-PSU-006-U1091"><span id="cb144-1"><a aria-hidden="true" data-o006-id="O006-PSU-006-U1092" href="#cb144-1" tabindex="-1"></a>l.first.der<span class="ot">=</span><span class="cf">function</span>(theta,x){</span>
+<span id="cb144-2"><a aria-hidden="true" data-o006-id="O006-PSU-006-U1093" href="#cb144-2" tabindex="-1"></a>  <span class="fu">sum</span>((x<span class="sc">-</span>theta)<span class="sc">*</span>theta<span class="sc">^</span>(<span class="sc">-</span><span class="dv">2</span>))</span>
+<span id="cb144-3"><a aria-hidden="true" data-o006-id="O006-PSU-006-U1094" href="#cb144-3" tabindex="-1"></a>}</span>
+<span id="cb144-4"><a aria-hidden="true" data-o006-id="O006-PSU-006-U1095" href="#cb144-4" tabindex="-1"></a>l.scnd.der<span class="ot">=</span><span class="cf">function</span>(theta,x){</span>
+<span id="cb144-5"><a aria-hidden="true" data-o006-id="O006-PSU-006-U1096" href="#cb144-5" tabindex="-1"></a>  <span class="fu">sum</span>((<span class="sc">-</span><span class="dv">2</span><span class="sc">*</span>x<span class="sc">+</span>theta)<span class="sc">/</span>theta<span class="sc">^</span><span class="dv">3</span>)</span>
+<span id="cb144-6"><a aria-hidden="true" data-o006-id="O006-PSU-006-U1097" href="#cb144-6" tabindex="-1"></a>}</span>
+<span id="cb144-7"><a aria-hidden="true" data-o006-id="O006-PSU-006-U1098" href="#cb144-7" tabindex="-1"></a>sumx<span class="ot">=</span><span class="fu">sum</span>(x)</span>
+<span id="cb144-8"><a aria-hidden="true" data-o006-id="O006-PSU-006-U1099" href="#cb144-8" tabindex="-1"></a>n<span class="ot">=</span><span class="fu">length</span>(x)</span></code></pre></div><button class="code-copy-button" data-o006-id="O006-PSU-006-U1100" title="Copy to Clipboard"><i class="bi"></i></button></div>
+</div>
+</div>
+<p data-o006-id="O006-PSU-006-U1101">And Newton’s method can be done by iterating:</p>
+<div class="cell language-name-processed" data-o006-id="O006-PSU-006-U1102">
+<div class="codeblock-with-label r" data-o006-id="O006-PSU-006-U1103">
+<style>.codeblock-with-label pre.lang-label-42::before { content: "R"; }</style>
+<div class="code-copy-outer-scaffold" data-o006-id="O006-PSU-006-U1104"><div class="sourceCode cell-code" data-language-name-skip="true" data-o006-id="O006-PSU-006-U1105" id="cb145"><pre class="sourceCode r lang-label-42 code-with-copy" data-o006-id="O006-PSU-006-U1106"><code class="sourceCode r" data-o006-id="O006-PSU-006-U1107"><span id="cb145-1"><a aria-hidden="true" data-o006-id="O006-PSU-006-U1108" href="#cb145-1" tabindex="-1"></a><span class="do">## starting value</span></span>
+<span id="cb145-2"><a aria-hidden="true" data-o006-id="O006-PSU-006-U1109" href="#cb145-2" tabindex="-1"></a>theta0<span class="ot">=</span><span class="dv">5</span></span>
+<span id="cb145-3"><a aria-hidden="true" data-o006-id="O006-PSU-006-U1110" href="#cb145-3" tabindex="-1"></a><span class="do">## first iteration</span></span>
+<span id="cb145-4"><a aria-hidden="true" data-o006-id="O006-PSU-006-U1111" href="#cb145-4" tabindex="-1"></a>theta1<span class="ot">=</span>theta0<span class="sc">-</span><span class="fu">l.first.der</span>(theta0,x)<span class="sc">/</span><span class="fu">l.scnd.der</span>(theta0,x)</span>
+<span id="cb145-5"><a aria-hidden="true" data-o006-id="O006-PSU-006-U1112" href="#cb145-5" tabindex="-1"></a>theta1</span></code></pre></div><button class="code-copy-button" data-o006-id="O006-PSU-006-U1113" title="Copy to Clipboard"><i class="bi"></i></button></div>
+</div>
+<div class="cell-output cell-output-stdout" data-o006-id="O006-PSU-006-U1114">
+<pre data-o006-id="O006-PSU-006-U1115"><code data-o006-id="O006-PSU-006-U1116">[1] 6.518325</code></pre>
+</div>
+<div class="codeblock-with-label r" data-o006-id="O006-PSU-006-U1117">
+<style>.codeblock-with-label pre.lang-label-89::before { content: "R"; }</style>
+<div class="code-copy-outer-scaffold" data-o006-id="O006-PSU-006-U1118"><div class="sourceCode cell-code" data-o006-id="O006-PSU-006-U1119" id="cb147"><pre class="sourceCode r lang-label-89 code-with-copy" data-o006-id="O006-PSU-006-U1120"><code class="sourceCode r" data-o006-id="O006-PSU-006-U1121"><span id="cb147-1"><a aria-hidden="true" data-o006-id="O006-PSU-006-U1122" href="#cb147-1" tabindex="-1"></a><span class="do">## 2nd iteration</span></span>
+<span id="cb147-2"><a aria-hidden="true" data-o006-id="O006-PSU-006-U1123" href="#cb147-2" tabindex="-1"></a>theta2<span class="ot">=</span>theta1<span class="sc">-</span><span class="fu">l.first.der</span>(theta1,x)<span class="sc">/</span><span class="fu">l.scnd.der</span>(theta1,x)</span>
+<span id="cb147-3"><a aria-hidden="true" data-o006-id="O006-PSU-006-U1124" href="#cb147-3" tabindex="-1"></a>theta2</span></code></pre></div><button class="code-copy-button" data-o006-id="O006-PSU-006-U1125" title="Copy to Clipboard"><i class="bi"></i></button></div>
+</div>
+<div class="cell-output cell-output-stdout" data-o006-id="O006-PSU-006-U1126">
+<pre data-o006-id="O006-PSU-006-U1127"><code data-o006-id="O006-PSU-006-U1128">[1] 7.883215</code></pre>
+</div>
+<div class="codeblock-with-label r" data-o006-id="O006-PSU-006-U1129">
+<style>.codeblock-with-label pre.lang-label-90::before { content: "R"; }</style>
+<div class="code-copy-outer-scaffold" data-o006-id="O006-PSU-006-U1130"><div class="sourceCode cell-code" data-o006-id="O006-PSU-006-U1131" id="cb149"><pre class="sourceCode r lang-label-90 code-with-copy" data-o006-id="O006-PSU-006-U1132"><code class="sourceCode r" data-o006-id="O006-PSU-006-U1133"><span id="cb149-1"><a aria-hidden="true" data-o006-id="O006-PSU-006-U1134" href="#cb149-1" tabindex="-1"></a><span class="do">## 3rd iteration</span></span>
+<span id="cb149-2"><a aria-hidden="true" data-o006-id="O006-PSU-006-U1135" href="#cb149-2" tabindex="-1"></a>theta3<span class="ot">=</span>theta2<span class="sc">-</span><span class="fu">l.first.der</span>(theta2,x)<span class="sc">/</span><span class="fu">l.scnd.der</span>(theta2,x)</span>
+<span id="cb149-3"><a aria-hidden="true" data-o006-id="O006-PSU-006-U1136" href="#cb149-3" tabindex="-1"></a>theta3</span></code></pre></div><button class="code-copy-button" data-o006-id="O006-PSU-006-U1137" title="Copy to Clipboard"><i class="bi"></i></button></div>
+</div>
+<div class="cell-output cell-output-stdout" data-o006-id="O006-PSU-006-U1138">
+<pre data-o006-id="O006-PSU-006-U1139"><code data-o006-id="O006-PSU-006-U1140">[1] 8.670288</code></pre>
+</div>
+<div class="codeblock-with-label r" data-o006-id="O006-PSU-006-U1141">
+<style>.codeblock-with-label pre.lang-label-91::before { content: "R"; }</style>
+<div class="code-copy-outer-scaffold" data-o006-id="O006-PSU-006-U1142"><div class="sourceCode cell-code" data-o006-id="O006-PSU-006-U1143" id="cb151"><pre class="sourceCode r lang-label-91 code-with-copy" data-o006-id="O006-PSU-006-U1144"><code class="sourceCode r" data-o006-id="O006-PSU-006-U1145"><span id="cb151-1"><a aria-hidden="true" data-o006-id="O006-PSU-006-U1146" href="#cb151-1" tabindex="-1"></a><span class="do">## 4th iteration</span></span>
+<span id="cb151-2"><a aria-hidden="true" data-o006-id="O006-PSU-006-U1147" href="#cb151-2" tabindex="-1"></a>theta4<span class="ot">=</span>theta3<span class="sc">-</span><span class="fu">l.first.der</span>(theta3,x)<span class="sc">/</span><span class="fu">l.scnd.der</span>(theta3,x)</span>
+<span id="cb151-3"><a aria-hidden="true" data-o006-id="O006-PSU-006-U1148" href="#cb151-3" tabindex="-1"></a>theta4</span></code></pre></div><button class="code-copy-button" data-o006-id="O006-PSU-006-U1149" title="Copy to Clipboard"><i class="bi"></i></button></div>
+</div>
+<div class="cell-output cell-output-stdout" data-o006-id="O006-PSU-006-U1150">
+<pre data-o006-id="O006-PSU-006-U1151"><code data-o006-id="O006-PSU-006-U1152">[1] 8.858156</code></pre>
+</div>
+<div class="codeblock-with-label r" data-o006-id="O006-PSU-006-U1153">
+<style>.codeblock-with-label pre.lang-label-92::before { content: "R"; }</style>
+<div class="code-copy-outer-scaffold" data-o006-id="O006-PSU-006-U1154"><div class="sourceCode cell-code" data-o006-id="O006-PSU-006-U1155" id="cb153"><pre class="sourceCode r lang-label-92 code-with-copy" data-o006-id="O006-PSU-006-U1156"><code class="sourceCode r" data-o006-id="O006-PSU-006-U1157"><span id="cb153-1"><a aria-hidden="true" data-o006-id="O006-PSU-006-U1158" href="#cb153-1" tabindex="-1"></a><span class="do">## 5th iteration</span></span>
+<span id="cb153-2"><a aria-hidden="true" data-o006-id="O006-PSU-006-U1159" href="#cb153-2" tabindex="-1"></a>theta5<span class="ot">=</span>theta4<span class="sc">-</span><span class="fu">l.first.der</span>(theta4,x)<span class="sc">/</span><span class="fu">l.scnd.der</span>(theta4,x)</span>
+<span id="cb153-3"><a aria-hidden="true" data-o006-id="O006-PSU-006-U1160" href="#cb153-3" tabindex="-1"></a>theta5</span></code></pre></div><button class="code-copy-button" data-o006-id="O006-PSU-006-U1161" title="Copy to Clipboard"><i class="bi"></i></button></div>
+</div>
+<div class="cell-output cell-output-stdout" data-o006-id="O006-PSU-006-U1162">
+<pre data-o006-id="O006-PSU-006-U1163"><code data-o006-id="O006-PSU-006-U1164">[1] 8.86665</code></pre>
+</div>
+<div class="codeblock-with-label r" data-o006-id="O006-PSU-006-U1165">
+<style>.codeblock-with-label pre.lang-label-93::before { content: "R"; }</style>
+<div class="code-copy-outer-scaffold" data-o006-id="O006-PSU-006-U1166"><div class="sourceCode cell-code" data-o006-id="O006-PSU-006-U1167" id="cb155"><pre class="sourceCode r lang-label-93 code-with-copy" data-o006-id="O006-PSU-006-U1168"><code class="sourceCode r" data-o006-id="O006-PSU-006-U1169"><span id="cb155-1"><a aria-hidden="true" data-o006-id="O006-PSU-006-U1170" href="#cb155-1" tabindex="-1"></a><span class="do">## 6th iteration</span></span>
+<span id="cb155-2"><a aria-hidden="true" data-o006-id="O006-PSU-006-U1171" href="#cb155-2" tabindex="-1"></a>theta6<span class="ot">=</span>theta5<span class="sc">-</span><span class="fu">l.first.der</span>(theta5,x)<span class="sc">/</span><span class="fu">l.scnd.der</span>(theta5,x)</span>
+<span id="cb155-3"><a aria-hidden="true" data-o006-id="O006-PSU-006-U1172" href="#cb155-3" tabindex="-1"></a>theta6</span></code></pre></div><button class="code-copy-button" data-o006-id="O006-PSU-006-U1173" title="Copy to Clipboard"><i class="bi"></i></button></div>
+</div>
+<div class="cell-output cell-output-stdout" data-o006-id="O006-PSU-006-U1174">
+<pre data-o006-id="O006-PSU-006-U1175"><code data-o006-id="O006-PSU-006-U1176">[1] 8.866667</code></pre>
+</div>
+<div class="codeblock-with-label r" data-o006-id="O006-PSU-006-U1177">
+<style>.codeblock-with-label pre.lang-label-94::before { content: "R"; }</style>
+<div class="code-copy-outer-scaffold" data-o006-id="O006-PSU-006-U1178"><div class="sourceCode cell-code" data-o006-id="O006-PSU-006-U1179" id="cb157"><pre class="sourceCode r lang-label-94 code-with-copy" data-o006-id="O006-PSU-006-U1180"><code class="sourceCode r" data-o006-id="O006-PSU-006-U1181"><span id="cb157-1"><a aria-hidden="true" data-o006-id="O006-PSU-006-U1182" href="#cb157-1" tabindex="-1"></a><span class="do">## 7th iteration</span></span>
+<span id="cb157-2"><a aria-hidden="true" data-o006-id="O006-PSU-006-U1183" href="#cb157-2" tabindex="-1"></a>theta7<span class="ot">=</span>theta6<span class="sc">-</span><span class="fu">l.first.der</span>(theta6,x)<span class="sc">/</span><span class="fu">l.scnd.der</span>(theta6,x)</span>
+<span id="cb157-3"><a aria-hidden="true" data-o006-id="O006-PSU-006-U1184" href="#cb157-3" tabindex="-1"></a>theta7</span></code></pre></div><button class="code-copy-button" data-o006-id="O006-PSU-006-U1185" title="Copy to Clipboard"><i class="bi"></i></button></div>
+</div>
+<div class="cell-output cell-output-stdout" data-o006-id="O006-PSU-006-U1186">
+<pre data-o006-id="O006-PSU-006-U1187"><code data-o006-id="O006-PSU-006-U1188">[1] 8.866667</code></pre>
+</div>
+<div class="codeblock-with-label r" data-o006-id="O006-PSU-006-U1189">
+<style>.codeblock-with-label pre.lang-label-95::before { content: "R"; }</style>
+<div class="code-copy-outer-scaffold" data-o006-id="O006-PSU-006-U1190"><div class="sourceCode cell-code" data-o006-id="O006-PSU-006-U1191" id="cb159"><pre class="sourceCode r lang-label-95 code-with-copy" data-o006-id="O006-PSU-006-U1192"><code class="sourceCode r" data-o006-id="O006-PSU-006-U1193"><span id="cb159-1"><a aria-hidden="true" data-o006-id="O006-PSU-006-U1194" href="#cb159-1" tabindex="-1"></a><span class="do">## 8th iteration</span></span>
+<span id="cb159-2"><a aria-hidden="true" data-o006-id="O006-PSU-006-U1195" href="#cb159-2" tabindex="-1"></a>theta8<span class="ot">=</span>theta7<span class="sc">-</span><span class="fu">l.first.der</span>(theta7,x)<span class="sc">/</span><span class="fu">l.scnd.der</span>(theta7,x)</span>
+<span id="cb159-3"><a aria-hidden="true" data-o006-id="O006-PSU-006-U1196" href="#cb159-3" tabindex="-1"></a>theta8</span></code></pre></div><button class="code-copy-button" data-o006-id="O006-PSU-006-U1197" title="Copy to Clipboard"><i class="bi"></i></button></div>
+</div>
+<div class="cell-output cell-output-stdout" data-o006-id="O006-PSU-006-U1198">
+<pre data-o006-id="O006-PSU-006-U1199"><code data-o006-id="O006-PSU-006-U1200">[1] 8.866667</code></pre>
+</div>
+</div>
+<p data-o006-id="O006-PSU-006-U1201">You can see that successive iterations seem to be converging on a value near 8.866667, which is similar to what we found in our grid search.</p>
+<p data-o006-id="O006-PSU-006-U1202">A visual illustration of Newton’s method is found in the <code data-o006-id="O006-PSU-006-U1203">animation</code> R package. The following code won’t display online, but if you run it in your R console it will produce a nice illustration of Newton’s method.</p>
+<div class="cell language-name-processed" data-o006-id="O006-PSU-006-U1204">
+<div class="codeblock-with-label r" data-o006-id="O006-PSU-006-U1205">
+<style>.codeblock-with-label pre.lang-label-43::before { content: "R"; }</style>
+<div class="code-copy-outer-scaffold" data-o006-id="O006-PSU-006-U1206"><div class="sourceCode cell-code" data-language-name-skip="true" data-o006-id="O006-PSU-006-U1207" id="cb161"><pre class="sourceCode r lang-label-43 code-with-copy" data-o006-id="O006-PSU-006-U1208"><code class="sourceCode r" data-o006-id="O006-PSU-006-U1209"><span id="cb161-1"><a aria-hidden="true" data-o006-id="O006-PSU-006-U1210" href="#cb161-1" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"animation"</span>)</span>
+<span id="cb161-2"><a aria-hidden="true" data-o006-id="O006-PSU-006-U1211" href="#cb161-2" tabindex="-1"></a><span class="fu">library</span>(animation)</span></code></pre></div><button class="code-copy-button" data-o006-id="O006-PSU-006-U1212" title="Copy to Clipboard"><i class="bi"></i></button></div>
+</div>
+</div>
+<div class="quarto-float quarto-figure quarto-figure-center anchored" data-o006-id="O006-PSU-006-U1213" id="fig-newtonmethodgraphs">
+<figure class="quarto-float quarto-float-fig figure" data-o006-id="O006-PSU-006-U1214">
+<div aria-describedby="fig-newtonmethodgraphs-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca" data-o006-id="O006-PSU-006-U1215">
+<div class="cell quarto-layout-panel" data-layout-ncol="2" data-lightbox="true" data-o006-id="O006-PSU-006-U1216">
+<div class="quarto-layout-row" data-o006-id="O006-PSU-006-U1217">
+<div class="quarto-layout-cell" data-o006-id="O006-PSU-006-U1218" style="flex-basis: 50.0%;justify-content: center;">
+<p data-o006-id="O006-PSU-006-U1219"><img alt="A series of  graphs showing the Newton method." class="img-fluid figure-img" data-o006-asset-id="O006-PSU-006-A0008" data-o006-id="O006-PSU-006-U1220" src="Lesson05_files/figure-html/unnamed-chunk-44-1.png"/></p>
+</div>
+<div class="quarto-layout-cell" data-o006-id="O006-PSU-006-U1221" style="flex-basis: 50.0%;justify-content: center;">
+<p data-o006-id="O006-PSU-006-U1222"><img alt="A series of  graphs showing the Newton method." class="img-fluid figure-img" data-o006-asset-id="O006-PSU-006-A0009" data-o006-id="O006-PSU-006-U1223" src="Lesson05_files/figure-html/unnamed-chunk-44-2.png"/></p>
+</div>
+</div>
+<div class="quarto-layout-row" data-o006-id="O006-PSU-006-U1224">
+<div class="quarto-layout-cell" data-o006-id="O006-PSU-006-U1225" style="flex-basis: 50.0%;justify-content: center;">
+<p data-o006-id="O006-PSU-006-U1226"><img alt="A series of  graphs showing the Newton method." class="img-fluid figure-img" data-o006-asset-id="O006-PSU-006-A0010" data-o006-id="O006-PSU-006-U1227" src="Lesson05_files/figure-html/unnamed-chunk-44-3.png"/></p>
+</div>
+<div class="quarto-layout-cell" data-o006-id="O006-PSU-006-U1228" style="flex-basis: 50.0%;justify-content: center;">
+<p data-o006-id="O006-PSU-006-U1229"><img alt="A series of  graphs showing the Newton method." class="img-fluid figure-img" data-o006-asset-id="O006-PSU-006-A0011" data-o006-id="O006-PSU-006-U1230" src="Lesson05_files/figure-html/unnamed-chunk-44-4.png"/></p>
+</div>
+</div>
+<div class="quarto-layout-row" data-o006-id="O006-PSU-006-U1231">
+<div class="quarto-layout-cell" data-o006-id="O006-PSU-006-U1232" style="flex-basis: 50.0%;justify-content: center;">
+<p data-o006-id="O006-PSU-006-U1233"><img alt="A series of  graphs showing the Newton method." class="img-fluid figure-img" data-o006-asset-id="O006-PSU-006-A0012" data-o006-id="O006-PSU-006-U1234" src="Lesson05_files/figure-html/unnamed-chunk-44-5.png"/></p>
+</div>
+</div>
+</div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" data-o006-id="O006-PSU-006-U1235" id="fig-newtonmethodgraphs-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Fig 5.7
+</figcaption>
+</figure>
+</div>
+</section>
+<section class="level3" data-number="5.2.5" data-o006-id="O006-PSU-006-U1236" id="numerical-mle-in-r">
+<h3 class="anchored" data-anchor-id="numerical-mle-in-r" data-number="5.2.5" data-o006-id="O006-PSU-006-U1237"><span class="header-section-number">5.2.5</span> Numerical MLE in R</h3>
+<p data-o006-id="O006-PSU-006-U1238">The previous section described and implemented two approaches to numerically approximating the maximum likelihood estimate. In this section, we will describe a more robust, general purpose approach to optimization using <code data-o006-id="O006-PSU-006-U1239">optim</code> in R.</p>
+<p data-o006-id="O006-PSU-006-U1240"><code data-o006-id="O006-PSU-006-U1241">optim</code> in R performs general numeric optimization. We will begin by considering a simple, contained use case for <code data-o006-id="O006-PSU-006-U1242">optim</code>: using <code data-o006-id="O006-PSU-006-U1243">optim</code> for maximum likelihood estimation. Consider the general case where <span class="math display" data-o006-math-id="O006-PSU-006-M0076">\[x_i\sim f_X(x_i;\boldsymbol\theta)\]</span> where <span class="math inline" data-o006-math-id="O006-PSU-006-M0077">\(\boldsymbol\theta=(\theta_1,\theta_2,...\theta_p)\)</span> is a vector of all parameters in the model. Our goal is to find the MLEs of <span class="math inline" data-o006-math-id="O006-PSU-006-M0078">\(\boldsymbol\theta\)</span>. In this situation, <code data-o006-id="O006-PSU-006-U1244">optim</code> takes as inputs the following</p>
+<ol data-o006-id="O006-PSU-006-U1245" type="1">
+<li data-o006-id="O006-PSU-006-U1246"><p data-o006-id="O006-PSU-006-U1247">A set of initial values for <span class="math inline" data-o006-math-id="O006-PSU-006-M0079">\(\boldsymbol\theta\)</span>. This is a vector of initial guesses for each parameter in the model. In most cases, you do NOT need to think hard about the initial values, but you DO need to make sure that your initial values are valid. For example, if <span class="math inline" data-o006-math-id="O006-PSU-006-M0080">\(x_i\sim N(\mu,\sigma^2)\)</span>, then your initial value for <span class="math inline" data-o006-math-id="O006-PSU-006-M0081">\(\sigma\)</span> must be a positive number, which your initial value for <span class="math inline" data-o006-math-id="O006-PSU-006-M0082">\(\mu\)</span> could be any number.</p></li>
+<li data-o006-id="O006-PSU-006-U1248"><p data-o006-id="O006-PSU-006-U1249">A function to evaluate the negative log-likelihood of the data for a set of parameters. Note that we are working with the NEGATIVE log-likelihood instead of the standard log-likelihood - this is because <code data-o006-id="O006-PSU-006-U1250">optim</code> is coded to minimize by default, so the MLE of <span class="math inline" data-o006-math-id="O006-PSU-006-M0083">\(\boldsymbol\theta\)</span> will maximize the log-likelihood but minimize the negative log-likelihood.</p></li>
+</ol>
+<div class="callout-danger" data-appearance="minimal" data-o006-id="O006-PSU-006-U1251">
+<p data-o006-id="O006-PSU-006-U1252"><strong>Important!</strong><br/>
+This function MUST have as its first input a VECTOR of ALL PARAMETERS. Any other inputs can be in any format.</p>
+</div>
+<p data-o006-id="O006-PSU-006-U1253">We will first look at two examples that fit this framework, and then we’ll put together a code template that can be used for other problems.</p>
+<div class="theorem example" data-o006-id="O006-PSU-006-U1254" id="exm-mle1">
+<p data-o006-id="O006-PSU-006-U1255"><span class="theorem-title"><strong>Example 5.1</strong></span> To illustrate finding numerical MLEs, we first consider data from an exponential distribution. We assume that the following 15 data points come from an exponential distribution with an unknown rate parameter <span class="math inline" data-o006-math-id="O006-PSU-006-M0084">\(\theta\)</span>, so <span class="math inline" data-o006-math-id="O006-PSU-006-M0085">\(x_i\sim Exp(\theta)\)</span>, with data</p>
+<div class="quarto-float quarto-figure quarto-figure-center anchored" data-o006-id="O006-PSU-006-U1256" id="fig-histogrammle">
+<figure class="quarto-float quarto-float-fig figure" data-o006-id="O006-PSU-006-U1257">
+<div aria-describedby="fig-histogrammle-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca" data-o006-id="O006-PSU-006-U1258">
+<div class="cell language-name-processed" data-lightbox="true" data-o006-id="O006-PSU-006-U1259">
+<div class="codeblock-with-label r" data-o006-id="O006-PSU-006-U1260">
+<style>.codeblock-with-label pre.lang-label-44::before { content: "R"; }</style>
+<div class="code-copy-outer-scaffold" data-o006-id="O006-PSU-006-U1261"><div class="sourceCode cell-code" data-language-name-skip="true" data-o006-id="O006-PSU-006-U1262" id="cb162"><pre class="sourceCode r lang-label-44 code-with-copy" data-o006-id="O006-PSU-006-U1263"><code class="sourceCode r" data-o006-id="O006-PSU-006-U1264"><span id="cb162-1"><a aria-hidden="true" data-o006-id="O006-PSU-006-U1265" href="#cb162-1" tabindex="-1"></a>x<span class="ot">=</span><span class="fu">c</span>(<span class="dv">1</span>,  <span class="dv">5</span>, <span class="dv">10</span>,  <span class="dv">1</span>,  <span class="dv">3</span>, <span class="dv">11</span>, <span class="dv">10</span>, <span class="dv">23</span>,  <span class="dv">2</span>,  <span class="dv">6</span>,  <span class="dv">1</span>, <span class="dv">24</span>,  <span class="dv">6</span>, <span class="dv">11</span>, <span class="dv">19</span>)</span>
+<span id="cb162-2"><a aria-hidden="true" data-o006-id="O006-PSU-006-U1266" href="#cb162-2" tabindex="-1"></a>x</span></code></pre></div><button class="code-copy-button" data-o006-id="O006-PSU-006-U1267" title="Copy to Clipboard"><i class="bi"></i></button></div>
+</div>
+<div class="cell-output cell-output-stdout" data-o006-id="O006-PSU-006-U1268">
+<pre data-o006-id="O006-PSU-006-U1269"><code data-o006-id="O006-PSU-006-U1270"> [1]  1  5 10  1  3 11 10 23  2  6  1 24  6 11 19</code></pre>
+</div>
+<div class="codeblock-with-label r" data-o006-id="O006-PSU-006-U1271">
+<style>.codeblock-with-label pre.lang-label-96::before { content: "R"; }</style>
+<div class="code-copy-outer-scaffold" data-o006-id="O006-PSU-006-U1272"><div class="sourceCode cell-code" data-o006-id="O006-PSU-006-U1273" id="cb164"><pre class="sourceCode r lang-label-96 code-with-copy" data-o006-id="O006-PSU-006-U1274"><code class="sourceCode r" data-o006-id="O006-PSU-006-U1275"><span id="cb164-1"><a aria-hidden="true" data-o006-id="O006-PSU-006-U1276" href="#cb164-1" tabindex="-1"></a><span class="fu">hist</span>(x,<span class="at">breaks=</span><span class="dv">7</span>)</span></code></pre></div><button class="code-copy-button" data-o006-id="O006-PSU-006-U1277" title="Copy to Clipboard"><i class="bi"></i></button></div>
+</div>
+<div class="cell-output-display" data-o006-id="O006-PSU-006-U1278">
+<div data-o006-id="O006-PSU-006-U1279">
+<figure class="figure" data-o006-id="O006-PSU-006-U1280">
+<p data-o006-id="O006-PSU-006-U1281"><img alt="Histogram of 15 data points that come from an exponential distribution with an unknown parameter theta." class="img-fluid figure-img" data-o006-asset-id="O006-PSU-006-A0013" data-o006-id="O006-PSU-006-U1282" src="Lesson05_files/figure-html/unnamed-chunk-45-1.png" style="width:70.0%"/></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" data-o006-id="O006-PSU-006-U1283" id="fig-histogrammle-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Fig 5.8
+</figcaption>
+</figure>
+</div>
+<p data-o006-id="O006-PSU-006-U1284">We first write an R function to evaluate the negative log-likelihood of the data. We’ll use <code data-o006-id="O006-PSU-006-U1285">dexp</code> from R to evaluate the log-likelihood, with the <code data-o006-id="O006-PSU-006-U1286">log=TRUE</code> option</p>
+<div class="cell language-name-processed" data-o006-id="O006-PSU-006-U1287">
+<div class="codeblock-with-label r" data-o006-id="O006-PSU-006-U1288">
+<style>.codeblock-with-label pre.lang-label-45::before { content: "R"; }</style>
+<div class="code-copy-outer-scaffold" data-o006-id="O006-PSU-006-U1289"><div class="sourceCode cell-code" data-language-name-skip="true" data-o006-id="O006-PSU-006-U1290" id="cb165"><pre class="sourceCode r lang-label-45 code-with-copy" data-o006-id="O006-PSU-006-U1291"><code class="sourceCode r" data-o006-id="O006-PSU-006-U1292"><span id="cb165-1"><a aria-hidden="true" data-o006-id="O006-PSU-006-U1293" href="#cb165-1" tabindex="-1"></a>nll.exp<span class="ot">=</span><span class="cf">function</span>(theta,x){</span>
+<span id="cb165-2"><a aria-hidden="true" data-o006-id="O006-PSU-006-U1294" href="#cb165-2" tabindex="-1"></a>  <span class="sc">-</span><span class="fu">sum</span>(<span class="fu">dexp</span>(x,<span class="at">rate=</span><span class="dv">1</span><span class="sc">/</span>theta,<span class="at">log=</span><span class="cn">TRUE</span>))</span>
+<span id="cb165-3"><a aria-hidden="true" data-o006-id="O006-PSU-006-U1295" href="#cb165-3" tabindex="-1"></a>}</span></code></pre></div><button class="code-copy-button" data-o006-id="O006-PSU-006-U1296" title="Copy to Clipboard"><i class="bi"></i></button></div>
+</div>
+</div>
+<p data-o006-id="O006-PSU-006-U1297">We break down this function piece by piece. The code: <code data-o006-id="O006-PSU-006-U1298">dexp(x,rate=1/theta)</code> would evaluate the likelihood (PDF) of each data point in x given a value for theta, and so the code <code data-o006-id="O006-PSU-006-U1299">dexp(x,rate=1/theta,log=TRUE)</code> evaluates the log-likelihood of each data point. Summing these up is done using the <code data-o006-id="O006-PSU-006-U1300">sum(...)</code> command, and putting a negative sign in front returns the negative log-likelihood of the data.</p>
+<p data-o006-id="O006-PSU-006-U1301">We can then use <code data-o006-id="O006-PSU-006-U1302">optim</code> to find the MLE of <span class="math inline" data-o006-math-id="O006-PSU-006-M0086">\(\theta\)</span>. We’ll first show the code, and then break down each piece.</p>
+<div class="cell language-name-processed" data-o006-id="O006-PSU-006-U1303">
+<div class="codeblock-with-label r" data-o006-id="O006-PSU-006-U1304">
+<style>.codeblock-with-label pre.lang-label-46::before { content: "R"; }</style>
+<div class="code-copy-outer-scaffold" data-o006-id="O006-PSU-006-U1305"><div class="sourceCode cell-code" data-language-name-skip="true" data-o006-id="O006-PSU-006-U1306" id="cb166"><pre class="sourceCode r lang-label-46 code-with-copy" data-o006-id="O006-PSU-006-U1307"><code class="sourceCode r" data-o006-id="O006-PSU-006-U1308"><span id="cb166-1"><a aria-hidden="true" data-o006-id="O006-PSU-006-U1309" href="#cb166-1" tabindex="-1"></a>out<span class="ot">=</span><span class="fu">optim</span>(<span class="dv">2</span>,nll.exp,<span class="at">x=</span>x)</span></code></pre></div><button class="code-copy-button" data-o006-id="O006-PSU-006-U1310" title="Copy to Clipboard"><i class="bi"></i></button></div>
+</div>
+</div>
+<p data-o006-id="O006-PSU-006-U1311">The syntax of <code data-o006-id="O006-PSU-006-U1312">optim</code> is as follows. The first input needs to be a starting value for all parameters. As we only have one parameter, <span class="math inline" data-o006-math-id="O006-PSU-006-M0087">\(\theta\)</span>, we supply one starting value. This could be any number that is valid for the exponential distribution. Since the parameter <span class="math inline" data-o006-math-id="O006-PSU-006-M0088">\(\theta\)</span> must be positive, we supply a positive initial value of <span class="math inline" data-o006-math-id="O006-PSU-006-M0089">\(\theta^{(0)}=2\)</span> in the code above.</p>
+<p data-o006-id="O006-PSU-006-U1313">The second input is the <code data-o006-id="O006-PSU-006-U1314">NAME</code> of the negative loglikelihood function we just wrote. As we called this <code data-o006-id="O006-PSU-006-U1315">nll.exp</code>, this is what goes into <code data-o006-id="O006-PSU-006-U1316">optim</code> in the second input slot. The third (and others if needed) inputs to <code data-o006-id="O006-PSU-006-U1317">optim</code> are any extra inputs needed for the negative <code data-o006-id="O006-PSU-006-U1318">loglikelihood</code> function. Our <code data-o006-id="O006-PSU-006-U1319">nll.exp</code> function requires two inputs: <code data-o006-id="O006-PSU-006-U1320">theta</code> and <code data-o006-id="O006-PSU-006-U1321">x</code>. The first input, <code data-o006-id="O006-PSU-006-U1322">theta</code>, is essentially supplied by our starting value. The second input, <code data-o006-id="O006-PSU-006-U1323">x</code>, is a vector of the data. To tell <code data-o006-id="O006-PSU-006-U1324">optim</code> what values to use for <code data-o006-id="O006-PSU-006-U1325">x</code>, we put as a third input into <code data-o006-id="O006-PSU-006-U1326">optim</code> the argument <code data-o006-id="O006-PSU-006-U1327">x=x</code>. The left hand side <code data-o006-id="O006-PSU-006-U1328">x</code> is the name of the input in the nll.exp function. The right hand side is the name of the data values (we called these <code data-o006-id="O006-PSU-006-U1329">x</code> as well). In our following example, we’ll try to make this more clear.</p>
+<p data-o006-id="O006-PSU-006-U1330">The output of <code data-o006-id="O006-PSU-006-U1331">optim</code> has multiple warnings. In general, you can IGNORE MOST WARNINGS FROM <code data-o006-id="O006-PSU-006-U1332">OPTIM</code>! The warnings we have here are because <code data-o006-id="O006-PSU-006-U1333">optim</code>, as part of its optimization algorithm, tried some values of <span class="math inline" data-o006-math-id="O006-PSU-006-M0090">\(\theta\)</span> that were negative. These produced NA values when trying to evaluate the loglikelihood, but <code data-o006-id="O006-PSU-006-U1334">optim</code> is coded in a way to try different values when this happens. We could avoid these warnings by specifying some options in <code data-o006-id="O006-PSU-006-U1335">optim</code>, but for most simple cases, the result will NOT be different, and so we can almost always IGNORE WARNINGS FROM <code data-o006-id="O006-PSU-006-U1336">OPTIM</code>.</p>
+<p data-o006-id="O006-PSU-006-U1337"><code data-o006-id="O006-PSU-006-U1338">optim</code>s output is as follows</p>
+<div class="cell language-name-processed" data-o006-id="O006-PSU-006-U1339">
+<div class="codeblock-with-label r" data-o006-id="O006-PSU-006-U1340">
+<style>.codeblock-with-label pre.lang-label-47::before { content: "R"; }</style>
+<div class="code-copy-outer-scaffold" data-o006-id="O006-PSU-006-U1341"><div class="sourceCode cell-code" data-language-name-skip="true" data-o006-id="O006-PSU-006-U1342" id="cb167"><pre class="sourceCode r lang-label-47 code-with-copy" data-o006-id="O006-PSU-006-U1343"><code class="sourceCode r" data-o006-id="O006-PSU-006-U1344"><span id="cb167-1"><a aria-hidden="true" data-o006-id="O006-PSU-006-U1345" href="#cb167-1" tabindex="-1"></a>out</span></code></pre></div><button class="code-copy-button" data-o006-id="O006-PSU-006-U1346" title="Copy to Clipboard"><i class="bi"></i></button></div>
+</div>
+<div class="cell-output cell-output-stdout" data-o006-id="O006-PSU-006-U1347">
+<pre data-o006-id="O006-PSU-006-U1348"><code data-o006-id="O006-PSU-006-U1349">$par
+[1] 8.865625
+
+$value
+[1] 47.73448
+
+$counts
+function gradient 
+      30       NA 
+
+$convergence
+[1] 0
+
+$message
+NULL</code></pre>
+</div>
+</div>
+<p data-o006-id="O006-PSU-006-U1350">There are a few relevant pieces of this output.</p>
+<ol data-o006-id="O006-PSU-006-U1351" type="1">
+<li data-o006-id="O006-PSU-006-U1352"><p data-o006-id="O006-PSU-006-U1353"><code data-o006-id="O006-PSU-006-U1354">out\$par</code> is the MLE - the value of the parameter(s) that maximize the likelihood (and thus minimize the negative loglikelihood)</p></li>
+<li data-o006-id="O006-PSU-006-U1355"><p data-o006-id="O006-PSU-006-U1356"><code data-o006-id="O006-PSU-006-U1357">out\$value</code> is the actual negative loglikelihood when evaluated at the MLE. So if we ran <code data-o006-id="O006-PSU-006-U1358">nll.exp(0.112793,x)</code> we would get 47.73448. In most applications, this can be ignored.</p></li>
+<li data-o006-id="O006-PSU-006-U1359"><p data-o006-id="O006-PSU-006-U1360"><code data-o006-id="O006-PSU-006-U1361">out\$counts</code> is the number of iterations of the optimization algorithm run. Here we see that the algorithm ran for 32 iterations before meeting a stopping criteria. This can almost always be ignored.</p></li>
+<li data-o006-id="O006-PSU-006-U1362"><p data-o006-id="O006-PSU-006-U1363"><code data-o006-id="O006-PSU-006-U1364">out\$convergence</code> is given a value of <code data-o006-id="O006-PSU-006-U1365">0</code> if the algorithm converges to its internal criteria. This is the result you want. If <code data-o006-id="O006-PSU-006-U1366">convergence</code> has a value of <code data-o006-id="O006-PSU-006-U1367">1</code>, then the algorithm has NOT converged, and we should NOT trust the value of the MLE.</p></li>
+<li data-o006-id="O006-PSU-006-U1368"><p data-o006-id="O006-PSU-006-U1369"><code data-o006-id="O006-PSU-006-U1370">out\$message</code> can most often be ignored.</p></li>
+</ol>
+<p data-o006-id="O006-PSU-006-U1371">Note that if we try different starting values, we may have slightly different results. For example, choosing a starting value of <span class="math inline" data-o006-math-id="O006-PSU-006-M0091">\(\theta^{(0)}=0.5\)</span> gives</p>
+<div class="cell language-name-processed" data-o006-id="O006-PSU-006-U1372">
+<div class="codeblock-with-label r" data-o006-id="O006-PSU-006-U1373">
+<style>.codeblock-with-label pre.lang-label-48::before { content: "R"; }</style>
+<div class="code-copy-outer-scaffold" data-o006-id="O006-PSU-006-U1374"><div class="sourceCode cell-code" data-language-name-skip="true" data-o006-id="O006-PSU-006-U1375" id="cb169"><pre class="sourceCode r lang-label-48 code-with-copy" data-o006-id="O006-PSU-006-U1376"><code class="sourceCode r" data-o006-id="O006-PSU-006-U1377"><span id="cb169-1"><a aria-hidden="true" data-o006-id="O006-PSU-006-U1378" href="#cb169-1" tabindex="-1"></a>out2<span class="ot">=</span><span class="fu">optim</span>(<span class="fl">0.5</span>,nll.exp,<span class="at">x=</span>x)</span>
+<span id="cb169-2"><a aria-hidden="true" data-o006-id="O006-PSU-006-U1379" href="#cb169-2" tabindex="-1"></a>out2</span></code></pre></div><button class="code-copy-button" data-o006-id="O006-PSU-006-U1380" title="Copy to Clipboard"><i class="bi"></i></button></div>
+</div>
+<div class="cell-output cell-output-stdout" data-o006-id="O006-PSU-006-U1381">
+<pre data-o006-id="O006-PSU-006-U1382"><code data-o006-id="O006-PSU-006-U1383">$par
+[1] 8.86875
+
+$value
+[1] 47.73448
+
+$counts
+function gradient 
+      34       NA 
+
+$convergence
+[1] 0
+
+$message
+NULL</code></pre>
+</div>
+</div>
+<p data-o006-id="O006-PSU-006-U1384">which gives a very slightly different MLE (8.6875 vs 8.65625). If the difference is not trivial, one should take the value that gives the SMALLER negative log-likelihood value (shown in out$value).</p>
+<p data-o006-id="O006-PSU-006-U1385">In general, when looking at <code data-o006-id="O006-PSU-006-U1386">optim</code> output, one should do the following:</p>
+<ol data-o006-id="O006-PSU-006-U1387" type="1">
+<li data-o006-id="O006-PSU-006-U1388">Check to see that <code data-o006-id="O006-PSU-006-U1389">convergence</code> equals 0.</li>
+<li data-o006-id="O006-PSU-006-U1390">Then read off the MLEs from <code data-o006-id="O006-PSU-006-U1391">par</code></li>
+</ol>
+</div>
+<div class="theorem example" data-o006-id="O006-PSU-006-U1392" id="exm-thenormaldistributionmle">
+<p data-o006-id="O006-PSU-006-U1393"><span class="theorem-title"><strong>Example 5.2 (MLE Example: The Normal Distribution)</strong></span> We’ll now give a different example using the Normal distribution. This time we will simulate some data from known parameters</p>
+<div class="quarto-float quarto-figure quarto-figure-center anchored" data-o006-id="O006-PSU-006-U1394" id="fig-histogrammlenormal">
+<figure class="quarto-float quarto-float-fig figure" data-o006-id="O006-PSU-006-U1395">
+<div aria-describedby="fig-histogrammlenormal-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca" data-o006-id="O006-PSU-006-U1396">
+<div class="cell language-name-processed" data-lightbox="true" data-o006-id="O006-PSU-006-U1397">
+<div class="codeblock-with-label r" data-o006-id="O006-PSU-006-U1398">
+<style>.codeblock-with-label pre.lang-label-49::before { content: "R"; }</style>
+<div class="code-copy-outer-scaffold" data-o006-id="O006-PSU-006-U1399"><div class="sourceCode cell-code" data-language-name-skip="true" data-o006-id="O006-PSU-006-U1400" id="cb171"><pre class="sourceCode r lang-label-49 code-with-copy" data-o006-id="O006-PSU-006-U1401"><code class="sourceCode r" data-o006-id="O006-PSU-006-U1402"><span id="cb171-1"><a aria-hidden="true" data-o006-id="O006-PSU-006-U1403" href="#cb171-1" tabindex="-1"></a>mu.true<span class="ot">=</span><span class="sc">-</span><span class="dv">3</span></span>
+<span id="cb171-2"><a aria-hidden="true" data-o006-id="O006-PSU-006-U1404" href="#cb171-2" tabindex="-1"></a>s2.true<span class="ot">=</span><span class="dv">16</span></span>
+<span id="cb171-3"><a aria-hidden="true" data-o006-id="O006-PSU-006-U1405" href="#cb171-3" tabindex="-1"></a></span>
+<span id="cb171-4"><a aria-hidden="true" data-o006-id="O006-PSU-006-U1406" href="#cb171-4" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
+<span id="cb171-5"><a aria-hidden="true" data-o006-id="O006-PSU-006-U1407" href="#cb171-5" tabindex="-1"></a>y<span class="ot">=</span><span class="fu">rnorm</span>(<span class="dv">30</span>,<span class="at">mean=</span>mu.true,<span class="at">sd=</span><span class="fu">sqrt</span>(s2.true))</span>
+<span id="cb171-6"><a aria-hidden="true" data-o006-id="O006-PSU-006-U1408" href="#cb171-6" tabindex="-1"></a></span>
+<span id="cb171-7"><a aria-hidden="true" data-o006-id="O006-PSU-006-U1409" href="#cb171-7" tabindex="-1"></a><span class="fu">hist</span>(y)</span></code></pre></div><button class="code-copy-button" data-o006-id="O006-PSU-006-U1410" title="Copy to Clipboard"><i class="bi"></i></button></div>
+</div>
+<div class="cell-output-display" data-o006-id="O006-PSU-006-U1411">
+<div data-o006-id="O006-PSU-006-U1412">
+<figure class="figure" data-o006-id="O006-PSU-006-U1413">
+<p data-o006-id="O006-PSU-006-U1414"><img alt="Histogram showing the normal distribution with known parameters." class="img-fluid figure-img" data-o006-asset-id="O006-PSU-006-A0014" data-o006-id="O006-PSU-006-U1415" src="Lesson05_files/figure-html/unnamed-chunk-50-1.png" style="width:70.0%"/></p>
+</figure>
+</div>
+</div>
+<div class="codeblock-with-label r" data-o006-id="O006-PSU-006-U1416">
+<style>.codeblock-with-label pre.lang-label-97::before { content: "R"; }</style>
+<div class="code-copy-outer-scaffold" data-o006-id="O006-PSU-006-U1417"><div class="sourceCode cell-code" data-o006-id="O006-PSU-006-U1418" id="cb172"><pre class="sourceCode r lang-label-97 code-with-copy" data-o006-id="O006-PSU-006-U1419"><code class="sourceCode r" data-o006-id="O006-PSU-006-U1420"><span id="cb172-1"><a aria-hidden="true" data-o006-id="O006-PSU-006-U1421" href="#cb172-1" tabindex="-1"></a>y</span></code></pre></div><button class="code-copy-button" data-o006-id="O006-PSU-006-U1422" title="Copy to Clipboard"><i class="bi"></i></button></div>
+</div>
+<div class="cell-output cell-output-stdout" data-o006-id="O006-PSU-006-U1423">
+<pre data-o006-id="O006-PSU-006-U1424"><code data-o006-id="O006-PSU-006-U1425"> [1]  -5.2419026  -3.9207100   3.2348333  -2.7179664  -2.4828491   3.8602599
+ [7]  -1.1563352  -8.0602449  -5.7474114  -4.7826479   1.8963272  -1.5607447
+[13]  -1.3969142  -2.5572691  -5.2233645   4.1476525  -1.0085981 -10.8664686
+[19]  -0.1945764  -4.8911656  -7.2712948  -3.8718997  -7.1040178  -5.9155649
+[25]  -5.5001571  -9.7467732   0.3511482  -2.3865075  -7.5525477   2.0152597</code></pre>
+</div>
+</div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" data-o006-id="O006-PSU-006-U1426" id="fig-histogrammlenormal-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Fig 5.9
+</figcaption>
+</figure>
+</div>
+<p data-o006-id="O006-PSU-006-U1427">This results in 30 values, each satisfying <span class="math inline" data-o006-math-id="O006-PSU-006-M0092">\(y_i\sim N(-3,16)\)</span>. We will now pretend that we do NOT know the true mean and variance, and numerically estimate these. We first write a negative log-likelihood function, with the first input being a vector of all parameters</p>
+<div class="cell language-name-processed" data-o006-id="O006-PSU-006-U1428">
+<div class="codeblock-with-label r" data-o006-id="O006-PSU-006-U1429">
+<style>.codeblock-with-label pre.lang-label-50::before { content: "R"; }</style>
+<div class="code-copy-outer-scaffold" data-o006-id="O006-PSU-006-U1430"><div class="sourceCode cell-code" data-language-name-skip="true" data-o006-id="O006-PSU-006-U1431" id="cb174"><pre class="sourceCode r lang-label-50 code-with-copy" data-o006-id="O006-PSU-006-U1432"><code class="sourceCode r" data-o006-id="O006-PSU-006-U1433"><span id="cb174-1"><a aria-hidden="true" data-o006-id="O006-PSU-006-U1434" href="#cb174-1" tabindex="-1"></a>nll.norm <span class="ot">&lt;-</span> <span class="cf">function</span>(theta,y){</span>
+<span id="cb174-2"><a aria-hidden="true" data-o006-id="O006-PSU-006-U1435" href="#cb174-2" tabindex="-1"></a>    <span class="do">## get parameters</span></span>
+<span id="cb174-3"><a aria-hidden="true" data-o006-id="O006-PSU-006-U1436" href="#cb174-3" tabindex="-1"></a>    mu<span class="ot">=</span>theta[<span class="dv">1</span>]</span>
+<span id="cb174-4"><a aria-hidden="true" data-o006-id="O006-PSU-006-U1437" href="#cb174-4" tabindex="-1"></a>    s2<span class="ot">=</span>theta[<span class="dv">2</span>]</span>
+<span id="cb174-5"><a aria-hidden="true" data-o006-id="O006-PSU-006-U1438" href="#cb174-5" tabindex="-1"></a>    <span class="do">## calculate loglikelihood</span></span>
+<span id="cb174-6"><a aria-hidden="true" data-o006-id="O006-PSU-006-U1439" href="#cb174-6" tabindex="-1"></a>    loglik<span class="ot">=</span><span class="fu">sum</span>(<span class="fu">dnorm</span>(y,<span class="at">mean=</span>mu,<span class="at">sd=</span><span class="fu">sqrt</span>(s2),<span class="at">log=</span><span class="cn">TRUE</span>))</span>
+<span id="cb174-7"><a aria-hidden="true" data-o006-id="O006-PSU-006-U1440" href="#cb174-7" tabindex="-1"></a>    <span class="do">## return negative loglikelihood</span></span>
+<span id="cb174-8"><a aria-hidden="true" data-o006-id="O006-PSU-006-U1441" href="#cb174-8" tabindex="-1"></a>    <span class="sc">-</span>loglik</span>
+<span id="cb174-9"><a aria-hidden="true" data-o006-id="O006-PSU-006-U1442" href="#cb174-9" tabindex="-1"></a>}</span></code></pre></div><button class="code-copy-button" data-o006-id="O006-PSU-006-U1443" title="Copy to Clipboard"><i class="bi"></i></button></div>
+</div>
+</div>
+<p data-o006-id="O006-PSU-006-U1444">Note that our first input, called <code data-o006-id="O006-PSU-006-U1445">theta</code>, is a vector with the first element the mean <span class="math inline" data-o006-math-id="O006-PSU-006-M0093">\(\mu\)</span>, and the second element the variance <span class="math inline" data-o006-math-id="O006-PSU-006-M0094">\(\sigma^2\)</span>. These are the parameters we need to estimate. In our exponential example above, we only had a single parameter, but here where we have two parameters, we need to first “unpack” the parameters from <code data-o006-id="O006-PSU-006-U1446">theta</code>.</p>
+<p data-o006-id="O006-PSU-006-U1447">Note also that we wanted to find the MLE of <span class="math inline" data-o006-math-id="O006-PSU-006-M0095">\(\mu\)</span> and <span class="math inline" data-o006-math-id="O006-PSU-006-M0096">\(\sigma^2\)</span>, but R’s <code data-o006-id="O006-PSU-006-U1448">dnorm</code> function takes as an input the mean (<span class="math inline" data-o006-math-id="O006-PSU-006-M0097">\(\mu\)</span>) and the STANDARD DEVIATION (<span class="math inline" data-o006-math-id="O006-PSU-006-M0098">\(\sigma\)</span>), not the variance <span class="math inline" data-o006-math-id="O006-PSU-006-M0099">\(\sigma^2\)</span>. So in the <code data-o006-id="O006-PSU-006-U1449">dnorm</code> statement, we specified the standard deviation <code data-o006-id="O006-PSU-006-U1450">sd</code> as <code data-o006-id="O006-PSU-006-U1451">sd=sqrt(s2)</code>, the square root of the variance.</p>
+<p data-o006-id="O006-PSU-006-U1452">We now use <code data-o006-id="O006-PSU-006-U1453">optim</code> to find the MLEs. We need a vector of starting values. For <span class="math inline" data-o006-math-id="O006-PSU-006-M0100">\(\mu\)</span> we can use anything, while for <span class="math inline" data-o006-math-id="O006-PSU-006-M0101">\(\sigma^2\)</span> we should have a positive number, so we’ll choose a starting value of <span class="math inline" data-o006-math-id="O006-PSU-006-M0102">\(\theta=(-1,1)\)</span>.</p>
+<div class="cell language-name-processed" data-o006-id="O006-PSU-006-U1454">
+<div class="codeblock-with-label r" data-o006-id="O006-PSU-006-U1455">
+<style>.codeblock-with-label pre.lang-label-51::before { content: "R"; }</style>
+<div class="code-copy-outer-scaffold" data-o006-id="O006-PSU-006-U1456"><div class="sourceCode cell-code" data-language-name-skip="true" data-o006-id="O006-PSU-006-U1457" id="cb175"><pre class="sourceCode r lang-label-51 code-with-copy" data-o006-id="O006-PSU-006-U1458"><code class="sourceCode r" data-o006-id="O006-PSU-006-U1459"><span id="cb175-1"><a aria-hidden="true" data-o006-id="O006-PSU-006-U1460" href="#cb175-1" tabindex="-1"></a>out<span class="ot">=</span><span class="fu">optim</span>(<span class="fu">c</span>(<span class="sc">-</span><span class="dv">1</span>,<span class="dv">1</span>),nll.norm,<span class="at">y=</span>y)</span>
+<span id="cb175-2"><a aria-hidden="true" data-o006-id="O006-PSU-006-U1461" href="#cb175-2" tabindex="-1"></a>out</span></code></pre></div><button class="code-copy-button" data-o006-id="O006-PSU-006-U1462" title="Copy to Clipboard"><i class="bi"></i></button></div>
+</div>
+<div class="cell-output cell-output-stdout" data-o006-id="O006-PSU-006-U1463">
+<pre data-o006-id="O006-PSU-006-U1464"><code data-o006-id="O006-PSU-006-U1465">$par
+[1] -3.186135 14.885294
+
+$value
+[1] 83.07392
+
+$counts
+function gradient 
+      77       NA 
+
+$convergence
+[1] 0
+
+$message
+NULL</code></pre>
+</div>
+</div>
+<p data-o006-id="O006-PSU-006-U1466">Since the <code data-o006-id="O006-PSU-006-U1467">convergence</code> is 0, we know that <code data-o006-id="O006-PSU-006-U1468">optim</code> has passed its internal convergence checks, and we can trust the results. The MLEs are in <code data-o006-id="O006-PSU-006-U1469">par</code>, and the order of the two MLEs is the same as the order of <span class="math inline" data-o006-math-id="O006-PSU-006-M0103">\(\theta\)</span> - our vector of parameters. Since <span class="math inline" data-o006-math-id="O006-PSU-006-M0104">\(\mu\)</span> was first, the MLE for <span class="math inline" data-o006-math-id="O006-PSU-006-M0105">\(\mu\)</span> is the first number, and <span class="math inline" data-o006-math-id="O006-PSU-006-M0106">\(\hat{\theta}_{ML}=-3.186\)</span>. Similarly, the MLE for <span class="math inline" data-o006-math-id="O006-PSU-006-M0107">\(\sigma^2\)</span> is <span class="math inline" data-o006-math-id="O006-PSU-006-M0108">\(\hat{\sigma^2}_{ML}=14.885\)</span>.</p>
+</div>
+</section>
+</section>
+<section class="level2" data-number="5.3" data-o006-id="O006-PSU-006-U1470" id="summary">
+<h2 class="anchored" data-anchor-id="summary" data-number="5.3" data-o006-id="O006-PSU-006-U1471"><span class="header-section-number">5.3</span> Summary</h2>
+<p data-o006-id="O006-PSU-006-U1472">This lesson deepened your understanding of maximum likelihood estimation (MLE) by focusing on its numerical application and implementation in R. We explored how to construct and maximize likelihood and log-likelihood functions for single and multiple parameter models, using both analytical and numerical approaches.</p>
+<p data-o006-id="O006-PSU-006-U1473">Key techniques included the grid search method and the Newton-Raphson algorithm, with practical implementation through R’s <code data-o006-id="O006-PSU-006-U1474">optim</code> function for finding MLEs. The lesson also introduced essential R programming skills, such as performing basic operations, manipulating vectors and data frames, generating summary statistics, creating visualizations like histograms and boxplots, and working with statistical distributions (e.g., normal and exponential) to simulate data and compute probabilities.</p>
+<p data-o006-id="O006-PSU-006-U1475">Through examples, you learned to handle real-world data scenarios, such as estimating parameters for exponential and normal distributions. These skills provide a robust foundation for applying MLE in statistical inference and prepare you for advanced topics like confidence intervals and hypothesis testing.</p>
+</section>
+</main>
+</body>
+</html>

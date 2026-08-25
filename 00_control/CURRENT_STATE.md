@@ -9,58 +9,75 @@ the freeze-receipt SHA-256 is
 `2a63e37bb6b4637cfd2522e392b140f2b625f2a1cf5f76f267a53ba4fb2e119b`.
 
 The cumulative local edition is complete through the landing page and Lessons
-00–03: 5 of 14 documents. It contains 1,599 translated segments, 1,399
-normalized source units, 1,397 derivative units, and 1,149 protected
-mathematics surfaces. Exactly 46 proved source defects are corrected only in
-the derivative—fourteen from the first unit, six from Lesson 01, nine from
-Lesson 02, and seventeen from Lesson 03. Authority bytes are unchanged.
+00–05: 7 of 14 documents. It contains 2,311 translated segments, 3,209
+normalized source units, 3,207 derivative units, and 1,546 protected
+mathematics surfaces. Exactly 112 proved source defects are corrected only in
+the derivative: 81 through Lesson 04 and 31 in Lesson 05. Authority bytes are
+unchanged.
 
-Lesson 03 is complete. Its 118,925-byte authority, SHA-256
-`26dd4efe75abc879a5316c215eaedbfe713c77e742898eb86e7f3d88cb0c04c9`,
-was normalized into 531 translation segments, 421 stable units, 440 protected
-mathematics nodes, zero content assets, and 1,393 catalogue records. The final
-translation CSV is 123,145 bytes with SHA-256
-`ab96512a2b7f8eb5d86b60dbcc2ad6779f74623367e4537b04167ce22bc8215a`;
-its bindings SHA-256 is
-`00202b65c0376c7065de20270980da6f0d14c50f38e7e946609e31981b903781`.
-An independent audit replayed all 531 mappings and found no missing or extra
-IDs, English leakage, terminology violations, metadata/order changes, or
-formula/text boundary defects.
+Lesson 05 is complete. Its official 190,308-byte authority, SHA-256
+`dac6ce7c81922118cb9c03b47c2229cf2fa505db804aa45d7960dd166ef0ef8d`,
+was normalized into 340 translation segments, 1,475 structural units, 108
+protected math nodes, 267 code nodes, fourteen same-origin PNG assets, one
+external video dependency, and 1,939 catalogue records. Its normalized source
+is 187,687 bytes with SHA-256
+`d47e377a40f78ade8c83ae8cb0a3fcaa8dbf87555d5e0751d5316f0ec6e354dc`;
+the normalization-receipt SHA-256 is
+`d00f4238f3fe3b5104c0169a89c00aa940c25bff26ec311354b0651c443d03be`.
+The final translation CSV is 101,032 bytes with SHA-256
+`9f9247ff3d7c66e164bc6691fee67da51fcdf88cd951a9582ff32dae3015e3ac`;
+its 141,524-byte stable-ID bindings have SHA-256
+`85821982f209874b0270d24fb9a3ac863139ab6d090e4c9ab34c88d262212f58`.
+The translation-receipt SHA-256 is
+`56ce80c909c360a90e9cbf7b410480cf74e875093e5ada5d12333372c48d6506`.
+The target HTML is 195,351 bytes with SHA-256
+`254cc78ca7b633c15356c90ebb37d646d39a22acffd52fd965f07563e9722308`.
 
-The deterministic cumulative reader contains 32 files / 2,804,159 bytes. Its
+Lesson 05 has 31 high-confidence mathematical, computational, reproducibility,
+surface, DOM, interface, asset, and accessibility corrections. Its fourteen
+reader images total 498,847 bytes; thirteen preserve authority bytes and one
+simulation plot is a disclosed seeded derivative. Two external video iframe
+occurrences are excluded from the offline reader and replaced with complete
+static instructional fallbacks. The locally frozen MathJax 3.1.2 runtime now
+includes its exact `boldsymbol` autoload dependency.
+
+The deterministic cumulative reader contains 50 files / 3,588,430 bytes. Its
 manifest SHA-256 is
-`15e979bbd3b791b0a7d2a25873e9450030c5a1b7019455982b84e0dac6287831`;
+`fb600bfedb1792d8b1c9ba8d72d3e5ef6bf94e7a9744a387e15b1d5a7b5f8e6f`;
 build-receipt SHA-256 is
-`4ffb6a9963cc7581139a8f5123225b5fd3c6dc7fc8792f60dc0414bf1b371246`;
+`afe2b51786792ecfc88e556c9a5dd26e1ff45524f45799a64f1f694c77e322a0`;
 QA-receipt SHA-256 is
-`262b4143aecc4f4c546adcb5aaf7fec13832f071a2d5a5e43009a8a3204f7eda`.
+`462b7c15f3d506d5028ba2c2c4737dc2bba701bdb91acb0b967620f23c3b3f68`.
 Normalization, merge, build, manifest, topology, mathematics, stable-ID,
-rights, privacy, asset, and internal-link checks replay in check-only mode.
+correction, rights, privacy, asset, seeded-output, static-fallback, and
+internal-link checks replay in check-only mode.
 
-Desktop/mobile inspection at 1280×720 and 390×844 confirmed no page-level or
-navigation overflow on the landing, Lessons 00–03, or licence route. The exact
-1,149 mathematics nodes rendered at both viewports; all twenty reader images
-loaded; fresh warning/error logs were empty. The repaired Lesson 03
-likelihood-ratio counterexample (U0127) and factor-versus-exponent explanation
-(U0140) were inspected in the mobile reader, and the full Lesson 03 opening was
-inspected at desktop width. The 6,042-byte visual receipt has SHA-256
-`f80ba6dc59e3ce4e869950b3b6175b75af5affb4a445a3f1881a129fba3f34f7`.
-The 5-of-14 boundary is public and anonymously verified.
+Desktop and mobile browser QA passes all eight routes at 1,280 x 720 and
+390 x 844 CSS pixels. All 1,546 source mathematics nodes render exactly; all
+images load; no page or navigation overflows; and the console is clean. The
+visual-QA receipt is 6,691 bytes with SHA-256
+`c595832f3a2efd8b83b3b0fb03051cf271e717a871023cceef0ef83d30a35245`.
+
+The local 7-of-14 release package is ready: nine files / 15,405,517 bytes. Its
+primary 3,603,326-byte offline-reader ZIP has SHA-256
+`89a4e458ee9aa30d2293cb95b9f0be3ecef947241ddd6dfca473ac568c6ceecf`;
+the 11,782,243-byte resumable source/backend ZIP has SHA-256
+`41b2dcc52ec736b1125e91f0d1d2f0a0e7570af191843204c943fe2e418cd189`.
+The package receipt is 4,696 bytes with SHA-256
+`40d11b1df08c9568cf25188f1431943a7b7fed477eefb1798a7bae608f4674af`.
 
 Rights remain component-separated: Penn State content is CC BY-NC 4.0 except
 where otherwise noted, MathJax 3.1.2 is Apache-2.0, and original repository
-support remains CC BY-SA 4.0. No aggregate uniform relicensing is claimed. The
-translation provenance is exactly `OpenAI Codex gpt-5.6-sol, Ultra`; all source
-and human-contributor credits are preserved. No upstream message has been sent.
+support remains CC BY-SA 4.0. Translation provenance remains exactly
+`OpenAI Codex gpt-5.6-sol, Ultra`; all source and human-contributor credits are
+preserved. No upstream message has been sent.
 
-The public checkpoint is commit
-`5727d8fc056d9535ac5d75a4305166f7c027b13f`, GitHub release
+The last public checkpoint remains commit
+`5727d8fc056d9535ac5d75a4305166f7c027b13f`, GitHub tag
 `v2026.08.25.5of14`, and Zenodo version DOI `10.5281/zenodo.22088315` inside
-concept DOI `10.5281/zenodo.22077422`. Anonymous readback matched all 244
-commit files, all 32 Pages reader files, and all nine GitHub/Zenodo release
-files / 10,260,651 bytes. The Zenodo lineage audit reports one submitted latest
-version and zero drafts. The next action is Lesson 04 production in source
-order.
+concept DOI `10.5281/zenodo.22077422`. The locally complete 7-of-14 package is
+not represented as public until publication and anonymous byte readback pass.
+After that release, the next production document is Lesson 06.
 
 The independent completed Random edition remains in its separate sibling
 repository and is outside this component's write boundary.
