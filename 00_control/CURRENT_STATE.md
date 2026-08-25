@@ -72,12 +72,23 @@ support remains CC BY-SA 4.0. Translation provenance remains exactly
 `OpenAI Codex gpt-5.6-sol, Ultra`; all source and human-contributor credits are
 preserved. No upstream message has been sent.
 
-The last public checkpoint remains commit
-`5727d8fc056d9535ac5d75a4305166f7c027b13f`, GitHub tag
-`v2026.08.25.5of14`, and Zenodo version DOI `10.5281/zenodo.22088315` inside
-concept DOI `10.5281/zenodo.22077422`. The locally complete 7-of-14 package is
-not represented as public until publication and anonymous byte readback pass.
-After that release, the next production document is Lesson 06.
+The 7-of-14 checkpoint is public at content commit
+`119a516cd5f933d18aa1b548608208e1be539f6d`, tree
+`e6900190bd218f857cbb3e07946296c131e08ef1`, GitHub tag
+`v2026.08.25.7of14`, successful Pages run `32856448005`, and Zenodo version
+DOI `10.5281/zenodo.22097348` inside concept DOI
+`10.5281/zenodo.22077422`. Anonymous readback matched all 362 commit files /
+32,109,463 bytes, all 50 Pages files / 3,588,430 bytes, all nine GitHub release
+assets / 15,429,698 bytes, and the same nine Zenodo files / 15,429,698 bytes.
+The GitHub publication and release receipt SHA-256 values are respectively
+`72906372bcead09ac3e6d8b6f3a82fcc5b55ee631bcafddb16686eef4ff444a5` and
+`f9d6632e27a4ca66bfea436465cef458bfed3f1c7cdd96ea022a55b0c5947a1a`.
+The Zenodo publication, public-readback, and lineage-audit receipt SHA-256
+values are respectively
+`1d61e2795dc2d559a9fb1786006a9beed7ad5ac4582d62a31b8a858ee3187f1c`,
+`4a5b0420f442910ddcbeed03bf686028fd7c9e655b5230881db2421e1e622f94`, and
+`e0d2e7c41a822483521859f2755005f1eda8eadea991b37e4d4d06867c5791d7`.
+The next production document is Lesson 06.
 
 The independent completed Random edition remains in its separate sibling
 repository and is outside this component's write boundary.

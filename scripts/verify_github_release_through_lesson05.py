@@ -5,13 +5,16 @@ from __future__ import annotations
 
 import argparse
 import hashlib
+import html as html_module
 import json
+import os
 import re
+import subprocess
 import tempfile
 import time
 from concurrent.futures import ThreadPoolExecutor
 from pathlib import Path
-from urllib.parse import quote
+from urllib.parse import quote, unquote
 
 import requests
 import truststore
@@ -54,6 +57,10 @@ EXACT_FILES = (
 )
 
 
+class GitHubRestRateLimit(RuntimeError):
+    """The anonymous REST quota is exhausted; public non-REST proof remains usable."""
+
+
 def sha256(data: bytes) -> str:
     return hashlib.sha256(data).hexdigest()
 
@@ -65,6 +72,17 @@ def fetch(url: str) -> bytes:
         response = session.get(url, timeout=300, headers={"Cache-Control": "no-cache"})
         if response.status_code == 200:
             return response.content
+        if (
+            url.startswith("https://api.github.com/")
+            and response.status_code == 403
+            and (
+                response.headers.get("X-RateLimit-Remaining") == "0"
+                or "rate limit" in response.text.lower()
+            )
+        ):
+            raise GitHubRestRateLimit(
+                "anonymous GitHub REST quota is exhausted; using public fallback surfaces"
+            )
         if response.status_code not in {429, 500, 502, 503, 504} or attempt == 4:
             raise RuntimeError(
                 f"anonymous GitHub release readback failed with HTTP {response.status_code}: {url}"
@@ -111,6 +129,129 @@ def resolve_tag_commit(tag_ref: dict[str, object]) -> str:
     if not re.fullmatch(r"[0-9a-f]{40}", commit_sha):
         raise RuntimeError("annotated GitHub tag omits its commit SHA")
     return commit_sha
+
+
+def public_refs(commit_sha: str) -> dict[str, object]:
+    """Prove the public branch and immutable annotated checkpoint tag."""
+    remote = f"https://github.com/{OWNER}/{REPO}.git"
+    wanted = (
+        "refs/heads/main",
+        f"refs/tags/{TAG}",
+        f"refs/tags/{TAG}^{{}}",
+    )
+    env = os.environ.copy()
+    env["GIT_TERMINAL_PROMPT"] = "0"
+    result = subprocess.run(
+        [
+            "git",
+            "-c",
+            "credential.helper=",
+            "-c",
+            "http.extraHeader=",
+            "ls-remote",
+            remote,
+            *wanted,
+        ],
+        cwd=ROOT,
+        env=env,
+        check=True,
+        stdout=subprocess.PIPE,
+        stderr=subprocess.PIPE,
+    )
+    refs: dict[str, str] = {}
+    for line in result.stdout.decode("ascii").splitlines():
+        fields = line.split("\t")
+        if (
+            len(fields) != 2
+            or not re.fullmatch(r"[0-9a-f]{40}", fields[0])
+            or fields[1] in refs
+        ):
+            raise RuntimeError("public git ls-remote returned an invalid ref row")
+        refs[fields[1]] = fields[0]
+    if set(refs) != set(wanted):
+        raise RuntimeError("public git ls-remote omitted the main, tag, or peeled tag ref")
+    if refs[f"refs/tags/{TAG}^{{}}"] != commit_sha:
+        raise RuntimeError("public peeled release tag differs from the checkpoint")
+    if refs[f"refs/tags/{TAG}"] == commit_sha:
+        raise RuntimeError("release tag unexpectedly lacks its distinct annotated-tag object")
+    # Main may advance after this immutable content checkpoint when its
+    # publication receipts are committed.  Do not bake that moving ref into a
+    # deterministic checkpoint receipt.
+    return {
+        "main_present": True,
+        "annotated_tag_object": refs[f"refs/tags/{TAG}"],
+        "peeled_tag_commit": refs[f"refs/tags/{TAG}^{{}}"],
+    }
+
+
+def release_html_metadata(commit_sha: str) -> tuple[dict[str, object], bytes]:
+    """Read exact publication metadata from the public release HTML."""
+    url = f"https://github.com/{OWNER}/{REPO}/releases/tag/{quote(TAG, safe='')}"
+    payload = fetch(url)
+    try:
+        html = payload.decode("utf-8")
+    except UnicodeDecodeError as exc:
+        raise RuntimeError("public GitHub release page is not UTF-8") from exc
+    commit_href = f'href="/{OWNER}/{REPO}/commit/{commit_sha}"'
+    published = re.search(
+        r'released this\s*<relative-time[^>]*\sdatetime="([^"]+)"', html
+    )
+    prerelease = bool(re.search(r">\s*Pre-release\s*<", html, re.IGNORECASE))
+    if (
+        f"/{OWNER}/{REPO}/releases/tag/{TAG}" not in html
+        or f'href="/{OWNER}/{REPO}/tree/{TAG}"' not in html
+        or commit_href not in html
+        or published is None
+    ):
+        raise RuntimeError(
+            "public release HTML does not bind the tag, checkpoint commit, and publication"
+        )
+    return (
+        {
+            "draft": False,
+            "prerelease": prerelease,
+            "tag_name": TAG,
+            "target_commitish": commit_sha,
+            "published_at": published.group(1),
+            "html_url": url,
+        },
+        payload,
+    )
+
+
+def expanded_asset_inventory() -> tuple[dict[str, dict[str, object]], bytes, str]:
+    """Parse exact public asset names and GitHub digests from expanded-assets HTML."""
+    url = f"https://github.com/{OWNER}/{REPO}/releases/expanded_assets/{quote(TAG, safe='')}"
+    payload = fetch(url)
+    try:
+        html = payload.decode("utf-8")
+    except UnicodeDecodeError as exc:
+        raise RuntimeError("public expanded-assets page is not UTF-8") from exc
+    prefix = f'/{OWNER}/{REPO}/releases/download/{TAG}/'
+    link_pattern = re.compile(r'href="' + re.escape(prefix) + r'([^"]+)"')
+    assets: dict[str, dict[str, object]] = {}
+    for match in link_pattern.finditer(html):
+        filename = unquote(html_module.unescape(match.group(1)))
+        if filename in assets:
+            raise RuntimeError(f"expanded-assets inventory duplicates {filename}")
+        row_end = html.find("</li>", match.end())
+        if row_end < 0:
+            raise RuntimeError(f"expanded-assets row is unterminated: {filename}")
+        digest_match = re.search(r"sha256:([0-9a-f]{64})", html[match.end() : row_end])
+        if digest_match is None:
+            raise RuntimeError(f"expanded-assets row omits its SHA-256: {filename}")
+        assets[filename] = {
+            "name": filename,
+            "state": "uploaded",
+            "digest": f"sha256:{digest_match.group(1)}",
+            "browser_download_url": (
+                f"https://github.com/{OWNER}/{REPO}/releases/download/"
+                f"{quote(TAG, safe='')}/{quote(filename, safe='')}"
+            ),
+        }
+    if set(assets) != set(EXACT_FILES):
+        raise RuntimeError("public expanded-assets inventory names differ")
+    return assets, payload, url
 
 
 def load_package(
@@ -169,7 +310,43 @@ def load_package(
 
 def compute(commit_sha: str) -> bytes:
     truststore.inject_into_ssl()
-    release = release_metadata()
+    # REST remains a strict supplementary cross-check when its anonymous quota
+    # is available.  Stable public refs/release HTML form the receipt so a quota
+    # reset between --write and --check-only cannot change the result.
+    rest_release: dict[str, object] | None = None
+    rest_assets: dict[str, dict[str, object]] | None = None
+    rest_tag_commit: str | None = None
+    try:
+        rest_release = release_metadata()
+        tag_ref = fetch_json(
+            f"https://api.github.com/repos/{OWNER}/{REPO}/git/ref/tags/{quote(TAG, safe='')}"
+        )
+        rest_tag_commit = resolve_tag_commit(tag_ref)
+        asset_rows = rest_release.get("assets")
+        if not isinstance(asset_rows, list):
+            raise RuntimeError("GitHub release asset inventory is absent")
+        rest_assets = {
+            str(row.get("name")): row for row in asset_rows if isinstance(row, dict)
+        }
+        if len(rest_assets) != len(asset_rows) or set(rest_assets) != set(EXACT_FILES):
+            raise RuntimeError("GitHub release asset names differ")
+    except GitHubRestRateLimit:
+        rest_release = None
+        rest_assets = None
+        rest_tag_commit = None
+    ref_evidence = public_refs(commit_sha)
+    tag_commit = str(ref_evidence["peeled_tag_commit"])
+    release, _release_page_payload = release_html_metadata(commit_sha)
+    assets, _expanded_payload, expanded_url = expanded_asset_inventory()
+    release_page_evidence = {
+        "url": release["html_url"],
+        "tag_commit_and_publication_match": True,
+    }
+    expanded_evidence = {
+        "url": expanded_url,
+        "asset_count": len(assets),
+        "exact_asset_names_and_digests": True,
+    }
     if (
         release.get("draft") is not False
         or release.get("prerelease") is not False
@@ -178,37 +355,57 @@ def compute(commit_sha: str) -> bytes:
         or not release.get("published_at")
     ):
         raise RuntimeError("GitHub release is not the exact published checkpoint")
-
-    tag_ref = fetch_json(
-        f"https://api.github.com/repos/{OWNER}/{REPO}/git/ref/tags/{quote(TAG, safe='')}"
-    )
-    tag_commit = resolve_tag_commit(tag_ref)
     if tag_commit != commit_sha:
         raise RuntimeError("public release tag does not resolve to the checkpoint commit")
 
     package, expected, package_payload = load_package(commit_sha)
 
-    asset_rows = release.get("assets")
-    if not isinstance(asset_rows, list):
-        raise RuntimeError("GitHub release asset inventory is absent")
-    assets = {str(row.get("name")): row for row in asset_rows if isinstance(row, dict)}
-    if len(assets) != len(asset_rows) or set(assets) != set(EXACT_FILES):
-        raise RuntimeError("GitHub release asset names differ")
+    if rest_release is not None:
+        if (
+            rest_release.get("draft") is not False
+            or rest_release.get("prerelease") is not False
+            or rest_release.get("tag_name") != TAG
+            or rest_release.get("target_commitish") != commit_sha
+            or not rest_release.get("published_at")
+            or rest_tag_commit != commit_sha
+            or rest_assets is None
+        ):
+            raise RuntimeError("supplementary REST release metadata differs")
+        for filename in EXACT_FILES:
+            rest_asset = rest_assets[filename]
+            wanted = expected[filename]
+            expected_url = (
+                f"https://github.com/{OWNER}/{REPO}/releases/download/"
+                f"{quote(TAG, safe='')}/{quote(filename, safe='')}"
+            )
+            if (
+                rest_asset.get("state") != "uploaded"
+                or int(rest_asset.get("size", -1)) != int(wanted["bytes"])
+                or rest_asset.get("digest") != f"sha256:{wanted['sha256']}"
+                or rest_asset.get("browser_download_url") != expected_url
+            ):
+                raise RuntimeError(
+                    f"supplementary REST asset metadata differs: {filename}"
+                )
 
     def verify(filename: str) -> dict[str, object]:
         asset = assets[filename]
         wanted = expected[filename]
-        if asset.get("state") != "uploaded" or int(asset.get("size", -1)) != int(
-            wanted["bytes"]
-        ):
+        if asset.get("state") != "uploaded":
             raise RuntimeError(f"GitHub release asset metadata differs: {filename}")
         if asset.get("digest") != f"sha256:{wanted['sha256']}":
             raise RuntimeError(
                 f"GitHub release asset digest metadata differs: {filename}"
             )
+        expected_url = (
+            f"https://github.com/{OWNER}/{REPO}/releases/download/"
+            f"{quote(TAG, safe='')}/{quote(filename, safe='')}"
+        )
         url = str(asset.get("browser_download_url", ""))
-        if not url:
-            raise RuntimeError(f"GitHub release asset omits its download URL: {filename}")
+        if url != expected_url:
+            raise RuntimeError(
+                f"GitHub release asset download URL is not the predictable public URL: {filename}"
+            )
         data = fetch(url)
         digest = sha256(data)
         if len(data) != wanted["bytes"] or digest != wanted["sha256"]:
@@ -225,8 +422,11 @@ def compute(commit_sha: str) -> bytes:
         "tag": TAG,
         "commit": commit_sha,
         "tag_resolves_to_commit": True,
+        "public_refs": ref_evidence,
         "url": release.get("html_url"),
         "published_at": release.get("published_at"),
+        "release_page_evidence": release_page_evidence,
+        "expanded_assets_evidence": expanded_evidence,
         "package_receipt": {
             "path": PACKAGE_TREE_PATH,
             "bytes": len(package_payload),
@@ -239,8 +439,8 @@ def compute(commit_sha: str) -> bytes:
         "asset_count": len(verified),
         "asset_bytes": sum(int(row["bytes"]) for row in verified),
         "verification_transport": {
-            "release_and_tag_metadata": "anonymous GitHub REST API",
-            "release_assets": "anonymous HTTPS",
+            "release_and_tag_metadata": "anonymous git ls-remote and public GitHub release HTML",
+            "release_assets": "public expanded-assets HTML and predictable anonymous downloads",
             "credentials_used": False,
         },
         "anonymous_readback": True,

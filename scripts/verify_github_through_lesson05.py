@@ -8,6 +8,7 @@ import csv
 import hashlib
 import io
 import json
+import os
 import re
 import subprocess
 import tempfile
@@ -24,6 +25,7 @@ ROOT = Path(__file__).resolve().parents[1]
 OWNER = "KokunoYumeto"
 REPO = "penn-state-stat-415-id"
 PAGES = "https://kokunoyumeto.github.io/penn-state-stat-415-id"
+TAG = "v2026.08.25.7of14"
 RECEIPT = ROOT / "00_control" / "GITHUB_PUBLICATION_RECEIPT_2026-08-25_THROUGH_LESSON05.json"
 MANIFEST = ROOT / "build" / "THROUGH_LESSON05_MANIFEST.csv"
 MANIFEST_TREE_PATH = "build/THROUGH_LESSON05_MANIFEST.csv"
@@ -48,6 +50,10 @@ COMPLETE_DOCUMENTS = (
     "Lesson04",
     "Lesson05",
 )
+
+
+class GitHubRestRateLimit(RuntimeError):
+    """The anonymous REST quota is exhausted; public non-REST proof remains usable."""
 
 
 def sha256(data: bytes) -> str:
@@ -94,6 +100,17 @@ def fetch(url: str) -> bytes:
         response = session.get(url, timeout=300, headers={"Cache-Control": "no-cache"})
         if response.status_code == 200:
             return response.content
+        if (
+            url.startswith("https://api.github.com/")
+            and response.status_code == 403
+            and (
+                response.headers.get("X-RateLimit-Remaining") == "0"
+                or "rate limit" in response.text.lower()
+            )
+        ):
+            raise GitHubRestRateLimit(
+                "anonymous GitHub REST quota is exhausted; using public fallback surfaces"
+            )
         if response.status_code not in {429, 500, 502, 503, 504} or attempt == 4:
             raise RuntimeError(
                 f"anonymous readback failed with HTTP {response.status_code}: {url}"
@@ -186,6 +203,84 @@ def workflow_metadata(workflow_run: int) -> dict[str, object]:
     )
 
 
+def public_refs(commit_sha: str) -> dict[str, object]:
+    """Prove the public branch and immutable annotated checkpoint tag."""
+    remote = f"https://github.com/{OWNER}/{REPO}.git"
+    wanted = (
+        "refs/heads/main",
+        f"refs/tags/{TAG}",
+        f"refs/tags/{TAG}^{{}}",
+    )
+    env = os.environ.copy()
+    env["GIT_TERMINAL_PROMPT"] = "0"
+    result = subprocess.run(
+        [
+            "git",
+            "-c",
+            "credential.helper=",
+            "-c",
+            "http.extraHeader=",
+            "ls-remote",
+            remote,
+            *wanted,
+        ],
+        cwd=ROOT,
+        env=env,
+        check=True,
+        stdout=subprocess.PIPE,
+        stderr=subprocess.PIPE,
+    )
+    refs: dict[str, str] = {}
+    for line in result.stdout.decode("ascii").splitlines():
+        fields = line.split("\t")
+        if (
+            len(fields) != 2
+            or not re.fullmatch(r"[0-9a-f]{40}", fields[0])
+            or fields[1] in refs
+        ):
+            raise RuntimeError("public git ls-remote returned an invalid ref row")
+        refs[fields[1]] = fields[0]
+    if set(refs) != set(wanted):
+        raise RuntimeError("public git ls-remote omitted the main, tag, or peeled tag ref")
+    if refs[f"refs/tags/{TAG}^{{}}"] != commit_sha:
+        raise RuntimeError("public peeled release tag differs from the checkpoint")
+    if refs[f"refs/tags/{TAG}"] == commit_sha:
+        raise RuntimeError("release tag unexpectedly lacks its distinct annotated-tag object")
+    # Main may advance after this immutable content checkpoint when its
+    # publication receipts are committed.  Do not bake that moving ref into a
+    # deterministic checkpoint receipt.
+    return {
+        "main_present": True,
+        "annotated_tag_object": refs[f"refs/tags/{TAG}"],
+        "peeled_tag_commit": refs[f"refs/tags/{TAG}^{{}}"],
+    }
+
+
+def workflow_html_metadata(workflow_run: int, commit_sha: str) -> dict[str, object]:
+    """Verify the exact public workflow run from its anonymous HTML surface."""
+    url = f"https://github.com/{OWNER}/{REPO}/actions/runs/{workflow_run}"
+    try:
+        html = fetch(url).decode("utf-8")
+    except UnicodeDecodeError as exc:
+        raise RuntimeError("public workflow run page is not UTF-8") from exc
+    commit_href = f'href="/{OWNER}/{REPO}/commit/{commit_sha}"'
+    if (
+        f"/actions/runs/{workflow_run}" not in html
+        or commit_href not in html
+        or 'aria-label="completed successfully:' not in html
+        or "octicon-check-circle-fill color-fg-success" not in html
+    ):
+        raise RuntimeError(
+            "public workflow run HTML does not bind the run, checkpoint commit, and success"
+        )
+    return {
+        "head_sha": commit_sha,
+        "status": "completed",
+        "conclusion": "success",
+        "html_url": url,
+    }
+
+
 def compute(commit_sha: str, workflow_run: int) -> bytes:
     truststore.inject_into_ssl()
     tree_sha = git("rev-parse", f"{commit_sha}^{{tree}}").decode("ascii").strip()
@@ -193,18 +288,34 @@ def compute(commit_sha: str, workflow_run: int) -> bytes:
         raise RuntimeError("local checkpoint commit omits its tree identity")
     local_paths = tree_files(commit_sha)
 
-    public_commit = fetch_json(
-        f"https://api.github.com/repos/{OWNER}/{REPO}/git/commits/{commit_sha}"
-    )
-    public_tree = public_commit.get("tree")
-    if (
-        public_commit.get("sha") != commit_sha
-        or not isinstance(public_tree, dict)
-        or public_tree.get("sha") != tree_sha
-    ):
-        raise RuntimeError("public commit or tree identity differs from the local checkpoint")
-
-    run = workflow_metadata(workflow_run)
+    # REST remains a strict supplementary cross-check when its anonymous quota
+    # is available.  The receipt itself is deliberately based on stable public
+    # refs and HTML so --check-only does not change meaning when that quota rolls
+    # over between invocations.
+    try:
+        public_commit = fetch_json(
+            f"https://api.github.com/repos/{OWNER}/{REPO}/git/commits/{commit_sha}"
+        )
+        public_tree = public_commit.get("tree")
+        if (
+            public_commit.get("sha") != commit_sha
+            or not isinstance(public_tree, dict)
+            or public_tree.get("sha") != tree_sha
+        ):
+            raise RuntimeError(
+                "public commit or tree identity differs from the local checkpoint"
+            )
+        rest_run = workflow_metadata(workflow_run)
+        if (
+            rest_run.get("head_sha") != commit_sha
+            or rest_run.get("status") != "completed"
+            or rest_run.get("conclusion") != "success"
+        ):
+            raise RuntimeError("public REST workflow run did not succeed at the checkpoint")
+    except GitHubRestRateLimit:
+        pass
+    ref_evidence = public_refs(commit_sha)
+    run = workflow_html_metadata(workflow_run, commit_sha)
     if (
         run.get("head_sha") != commit_sha
         or run.get("status") != "completed"
@@ -274,7 +385,9 @@ def compute(commit_sha: str, workflow_run: int) -> bytes:
         "commit_tree": {
             "sha": tree_sha,
             "files": len(local_paths),
-            "public_commit_api_match": True,
+            "public_commit_api_match": False,
+            "public_ref_match": True,
+            "public_refs": ref_evidence,
             "all_blobs_read_back_at_exact_public_commit": True,
         },
         "workflow": {
@@ -310,7 +423,7 @@ def compute(commit_sha: str, workflow_run: int) -> bytes:
             "exact_commit_match": True,
         },
         "verification_transport": {
-            "workflow_and_commit_metadata": "anonymous GitHub REST API",
+            "workflow_and_commit_metadata": "anonymous git ls-remote and public GitHub workflow HTML",
             "raw_commit_and_pages_bytes": "anonymous HTTPS",
             "credentials_used": False,
         },

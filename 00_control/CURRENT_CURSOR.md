@@ -53,27 +53,41 @@ Updated: 2026-08-25
   `7db3e2a7699e2f5441ebd0db14189efb9fa5cb4649ae02eab6f8b6cc45664fe0`.
 - Rights remain component-separated: Penn State CC BY-NC 4.0 except where
   otherwise noted; MathJax Apache-2.0; original repository layer CC BY-SA 4.0.
-- Last public boundary remains 5 of 14 at commit
-  `5727d8fc056d9535ac5d75a4305166f7c027b13f`, tag
-  `v2026.08.25.5of14`, and Zenodo version DOI `10.5281/zenodo.22088315`.
-  The 7-of-14 package is complete locally but is not recorded as public until
-  its public-byte readback succeeds.
+- The 7-of-14 boundary is public at content commit
+  `119a516cd5f933d18aa1b548608208e1be539f6d`, tree
+  `e6900190bd218f857cbb3e07946296c131e08ef1`, tag
+  `v2026.08.25.7of14`, and successful Pages workflow run `32856448005`.
+  Anonymous readback matched all 362 commit files / 32,109,463 bytes, all 50
+  Pages files / 3,588,430 bytes, and all nine GitHub release assets /
+  15,429,698 bytes. GitHub publication-receipt SHA-256:
+  `72906372bcead09ac3e6d8b6f3a82fcc5b55ee631bcafddb16686eef4ff444a5`;
+  release-receipt SHA-256:
+  `f9d6632e27a4ca66bfea436465cef458bfed3f1c7cdd96ea022a55b0c5947a1a`.
+- The same exact nine-file checkpoint is public in the existing Zenodo lineage
+  at version DOI `10.5281/zenodo.22097348`, concept DOI
+  `10.5281/zenodo.22077422`. Anonymous readback matched all 15,429,698 bytes;
+  publication-receipt SHA-256:
+  `1d61e2795dc2d559a9fb1786006a9beed7ad5ac4582d62a31b8a858ee3187f1c`;
+  public-readback SHA-256:
+  `4a5b0420f442910ddcbeed03bf686028fd7c9e655b5230881db2421e1e622f94`;
+  lineage-audit SHA-256:
+  `e0d2e7c41a822483521859f2755005f1eda8eadea991b37e4d4d06867c5791d7`.
 - No upstream message has been sent.
 
 ## Next executable action
 
-Publish the completed 7-of-14 package to the dedicated repository and existing
-Zenodo concept lineage, then anonymously verify every public byte and record
-the receipts. Continue immediately with Lesson 06 in source order: normalize
-its exact authority and asset closure, translate all admitted segments into
-natural `id-ID`, preserve code and mathematics, apply only proved target-side
+Continue immediately with Lesson 06 in source order: normalize its exact
+authority and asset closure, translate all admitted segments into natural
+`id-ID`, preserve code and mathematics, apply only proved target-side
 corrections, and advance the cumulative reader without reopening Lessons
 00–05.
 
 ## Recovery
 
-Read `WORKFLOW.md`, this file, `CURRENT_STATE.md`, `COMPONENT_BOUNDARY.md`,
-`CHECKPOINT_2026-08-25_THROUGH_LESSON05_LOCAL.md`, the Lesson 05 normalization,
-translation, build, QA, visual-QA, and package receipts, and the Lesson 05 math
-audit, terminology QA, source findings, and asset closure. Conversation
-summaries are not state. Do not broaden the filesystem or Git scope.
+Read `00_control/WORKFLOW.md`, this file, `CURRENT_STATE.md`,
+`COMPONENT_BOUNDARY.md`,
+`CHECKPOINT_2026-08-25_THROUGH_LESSON05_PUBLICATION_COMPLETE.md`, the Lesson 05
+normalization, translation, build, QA, visual-QA, package and publication
+receipts, and the Lesson 05 math audit, terminology QA, source findings, and
+asset closure. Conversation summaries are not state. Do not broaden the
+filesystem or Git scope.
