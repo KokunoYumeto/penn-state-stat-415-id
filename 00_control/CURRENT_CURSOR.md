@@ -51,14 +51,14 @@ Updated: 2026-08-26
   `2450673f606d7a308dd7490cd811f81dcd3c42cc382b1eefe2b21d3dbb2f2032`.
 - Rights remain component-separated: Penn State CC BY-NC 4.0 except where
   otherwise noted; MathJax Apache-2.0; original repository layer CC BY-SA 4.0.
-- Current public archive: Zenodo DOI `10.5281/zenodo.22103203`, concept DOI
-  `10.5281/zenodo.22077422`; all nine files / 30,362,116 bytes matched by
+- Current public archive: Zenodo DOI `10.5281/zenodo.22104074`, concept DOI
+  `10.5281/zenodo.22077422`; all nine files / 49,769,118 bytes matched by
   anonymous readback and the final concept audit found one submitted matching
   version and zero drafts.
 - Current GitHub/Pages boundary: commit
-  `57170f9f7d914f3d13c716d19818ec64c3896df5`, tree
-  `d94da2ca46268c1d93201e036d91d38132228669`, run `32906124668`, tag
-  `v2026.08.26.11of14`. Anonymous readback matched 526 commit files, 71 Pages
+  `a342a4cf4de7464f42d6a3f2aa97bfcdf66293a1`, tree
+  `0f399d4efef53c29f5e0123a7febf8eb2305f869`, run `32917215255`, tag
+  `v2026.08.26.12of14`. Anonymous readback matched 611 commit files, 94 Pages
   files, and nine release assets.
 - Lesson 10 normalization passes: 540 segments / 625 units / 369 math / 22
   assets; normalization-receipt SHA-256
@@ -70,11 +70,10 @@ Updated: 2026-08-26
 
 ## Next executable action
 
-Package the verified 12-of-14 reader and compact source/backend evidence, push
-the dedicated GitHub repository and Pages, publish the next version in the
-existing Zenodo concept, and anonymously verify every public byte. Do not ask
-for another authorization. Then translate Lessons 11 and 12 contiguously,
-reusing the same stable-ID/backend/build/QA workflow and preserving the public
+Translate Lesson 11 contiguously from its frozen authority page, preserving all
+structure, mathematics, code, assets, attribution, and stable IDs; register only
+proved target-only corrections. Then merge, build, and validate the cumulative
+13-of-14 reader before continuing immediately to Lesson 12. Preserve the public
 12-of-14 boundary unless a proved defect requires a correction.
 
 ## Recovery

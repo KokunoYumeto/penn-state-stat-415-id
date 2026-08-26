@@ -115,33 +115,33 @@ preserved. No upstream message has been sent.
 
 ## Publication state and next work
 
-The 11-of-14 boundary is public and anonymously verified. GitHub commit
-`57170f9f7d914f3d13c716d19818ec64c3896df5`, tree
-`d94da2ca46268c1d93201e036d91d38132228669`, Pages run `32906124668`, and tag
-`v2026.08.26.11of14` are public. All 526 commit-tree files, all 71 Pages files,
-and all nine release assets matched their local byte counts and SHA-256 values
-without credentials. The commit/Pages receipt SHA-256 is
-`c29b263e2e131c224da7cb34c3835f221dd496475e4827055f73b48c97b1a7da`;
+The 12-of-14 boundary is public and anonymously verified. GitHub commit
+`a342a4cf4de7464f42d6a3f2aa97bfcdf66293a1`, tree
+`0f399d4efef53c29f5e0123a7febf8eb2305f869`, Pages run `32917215255`, tag
+`v2026.08.26.12of14`, and the corresponding release are public. All 611
+commit-tree files, all 94 Pages files, and all nine release assets matched
+their local byte counts and SHA-256 values without credentials. The
+commit/Pages receipt SHA-256 is
+`89989d0eefbb59f4591eab929045a4bbb07451b07de272f9c4ab85be2455128d`;
 the release-asset receipt SHA-256 is
-`32099aeaa755ef97b793e987b0000d58218bbda44fa8841a4862b4e295f0c807`.
+`668f570a4e4daaadcbb36e34083e1dfc0d7df90d4b473d20046979927864b598`.
 
-Zenodo DOI `10.5281/zenodo.22103203` is the one submitted 11-of-14 version in
+Zenodo DOI `10.5281/zenodo.22104074` is the one submitted 12-of-14 version in
 concept DOI `10.5281/zenodo.22077422`; zero draft remains. Its anonymous
-readback matched all nine files / 30,362,116 bytes. The publication, public
+readback matched all nine files / 49,769,118 bytes. The publication, public
 readback, and final lineage-audit receipt SHA-256 values are respectively
-`b377bab6f477e06a79a118a53d58dafa0e04967a31068addf105bf84960cba80`,
-`347069df9554f24b85ef83ad9fa32628038dd6109252b2da8db9659ec1158bff`,
-and `21ff308362a8aa6ac1d194d697f7b803482766f503113e902920ed3202933ad3`.
+`73dd8c11d02c51dba254c6b49d070ae5398410cd6e659035a55fd04d32f61f02`,
+`e6c071838a0f350ea559fb4113b38c5bbcc549c126bf8015473bd206f3417dfe`,
+and `87147a07c7dc5bc3c33e985c07bb803d1fe5b9f700f351b354b3ad7e1d6f6d39`.
+The lineage pointer SHA-256 is
+`270223022aa3a8f8bcd1bbed25190f0b4337bd3646a58f64ea1d13cdb65b0cd6`.
 
-The deterministic reader-first 12-of-14 package is ready and passes write and
-check-only replay: nine files / 49,769,118 bytes, 94 reader files, and 432
-bounded source entries. Its package receipt is
-`build/THROUGH_LESSON10_PACKAGE_RECEIPT.json`; that receipt carries the exact
-asset inventory and hashes. Its self-hash is intentionally kept out of this
-source-package closure so the ZIP remains reproducible rather than circular.
-The next release action is explicitly authorized: push the dedicated GitHub
-repository and Pages, publish the next version in the existing Zenodo concept,
-and anonymously verify every public byte. No upstream message has been sent.
-After that release, continue in source order with Lessons 11–12; the
-independent completed Random edition remains outside this repository's write
-boundary.
+The published deterministic reader-first package contains nine files /
+49,769,118 bytes, 94 reader files, and 432 bounded source entries. Its package
+receipt is `build/THROUGH_LESSON10_PACKAGE_RECEIPT.json`; that receipt carries
+the exact asset inventory and hashes. Its self-hash is intentionally kept out
+of this source-package closure so the ZIP remains reproducible rather than
+circular. Continue now in source order with Lesson 11 and then Lesson 12,
+reusing the same stable-ID, translation, correction, build, QA, and publication
+workflow. No upstream message has been sent. The independent completed Random
+edition remains outside this repository's write boundary.
