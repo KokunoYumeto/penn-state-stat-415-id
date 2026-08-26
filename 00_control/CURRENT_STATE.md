@@ -11,13 +11,16 @@ the freeze-receipt SHA-256 is
 `2a63e37bb6b4637cfd2522e392b140f2b625f2a1cf5f76f267a53ba4fb2e119b`.
 Authority bytes are immutable and unchanged.
 
-The cumulative local edition is complete through the landing page and Lessons
-00–11: 13 of 14 documents. It contains 4,352 translated segments, 5,664
-normalized source units, 5,652 derivative units, and 2,804 protected
-mathematics surfaces. The twelve removed derivative units are the two already
-registered Lesson 00 source defects plus the complete nested closure of two
+The validated cumulative reader is complete through the landing page and
+Lessons 00–11: 13 of 14 documents. It contains 4,352 admitted translation
+segments, 5,664 normalized source units, 5,652 derivative units, and 2,804
+protected mathematics surfaces. The twelve removed derivative units are the
+two registered Lesson 00 source defects plus the complete nested closure of two
 visible Lesson 08 internal authoring notes; no instructional unit was removed.
-Lesson 12 is the only pending source document.
+Lesson 12's 580 translation segments are also complete locally, but its
+cumulative build, correction closure, deterministic QA, and visual QA remain
+pending. The full local translation layer therefore has 4,932 segments; the
+verified reader boundary remains 13 of 14 until Lesson 12 integration passes.
 
 ## Lessons 07–09 contiguous batch
 
@@ -77,7 +80,7 @@ target title, captions, alts, duplicate-ID repairs, table associations, runtime
 disclosure, and responsive reflow passed its deterministic QA gate.
 Translation provenance remains exactly `OpenAI Codex gpt-5.6-sol, Ultra`.
 
-## Lesson 11 local boundary
+## Lesson 11 published boundary
 
 Lesson 11 freezes 99,359 authority bytes at SHA-256
 `4a007ab235242a27f000a8e8865fab06d2b8507a2e2e7400faf6112ce83a7c32`.
@@ -116,6 +119,28 @@ is 313,335 bytes, SHA-256
 the durable adverse-ledger prefix through Lesson 11 is 315,281 bytes, SHA-256
 `376515c286f48ee5f648097cfa093b2b305e7dec9c67e6ca986300815fc2c17d`.
 All repairs are target-only; authority bytes remain unchanged.
+
+## Lesson 12 translation layer
+
+Lesson 12 freezes 144,220 authority bytes at SHA-256
+`89569622b8fea9bcfc17d51717002ab9840b44e6d80a34ee476d94acd45b515d`.
+Its normalized source has 580 translation segments, 846 structural units, 352
+protected mathematics surfaces, nine frozen image assets totaling 233,075
+bytes, and three external-video provenance records. The normalization receipt
+is 9,727 bytes, SHA-256
+`d9b97395f9cae5412879fa63d8e16f59241d3883b4a90f7931c13cfcd47d3283`.
+
+All 580 segments are translated in three canonical contiguous batches. The
+merged translation CSV is 140,789 bytes, SHA-256
+`a87a42c2aebb2ae38910c75ae354d07b862f6113cb063474bfbb7c8a1ac00531`;
+the 580-record binding backend is 279,013 bytes, SHA-256
+`f6c64c31aa0514f4b386efa182cfcac128076b3e58f2ddf0bee75d51f229730c`.
+The translation receipt is 3,748 bytes, SHA-256
+`8343d09c7490394a0ed373791b72e910c1d42b0a293c9ab30af922d1fcd4489b`.
+`source/id-ID/Lesson12.html` is a 146,789-byte generated working target at
+SHA-256
+`6cd3218f6d1a613f1ea9d1459c5506ea8b24f37340a3ee26f17bc18504dd5965`;
+it is not yet claimed as cumulatively built or QA-verified.
 
 ## Deterministic and browser evidence
 
@@ -162,38 +187,34 @@ preserved. No upstream message has been sent.
 
 ## Publication state and next work
 
-The 12-of-14 boundary is public and anonymously verified. GitHub commit
-`a342a4cf4de7464f42d6a3f2aa97bfcdf66293a1`, tree
-`0f399d4efef53c29f5e0123a7febf8eb2305f869`, Pages run `32917215255`, tag
-`v2026.08.26.12of14`, and the corresponding release are public. All 611
-commit-tree files, all 94 Pages files, and all nine release assets matched
-their local byte counts and SHA-256 values without credentials. The
-commit/Pages receipt SHA-256 is
-`89989d0eefbb59f4591eab929045a4bbb07451b07de272f9c4ab85be2455128d`;
-the release-asset receipt SHA-256 is
-`668f570a4e4daaadcbb36e34083e1dfc0d7df90d4b473d20046979927864b598`.
+The 13-of-14 boundary is public and anonymously verified. GitHub commit
+`8222b6a84cc7592ddfce16dabcbc392533fa50eb`, tree
+`03887f51eaba4357bf997b1db2691f46f6c47105`, successful Pages run
+`32923342205`, tag `v2026.08.26.13of14`, and the corresponding release are
+public. Anonymous readback matched all 668 commit-tree blobs / 150,369,151
+bytes, all 96 Pages files / 17,232,761 bytes, and all nine release assets /
+51,832,274 bytes. The GitHub checkpoint and release receipt SHA-256 values are
+respectively
+`d6e1918a8f3b888ec3eecfa27d0d876a2541792aa1fddfbe0dd57e82b2970d26`
+and `cd61daa5633890738efed0a57773c4fe385aba87df4a66b59ed7273ee01a12f7`.
 
-Zenodo DOI `10.5281/zenodo.22104074` is the one submitted 12-of-14 version in
-concept DOI `10.5281/zenodo.22077422`; zero draft remains. Its anonymous
-readback matched all nine files / 49,769,118 bytes. The publication, public
-readback, and final lineage-audit receipt SHA-256 values are respectively
-`73dd8c11d02c51dba254c6b49d070ae5398410cd6e659035a55fd04d32f61f02`,
-`e6c071838a0f350ea559fb4113b38c5bbcc549c126bf8015473bd206f3417dfe`,
-and `87147a07c7dc5bc3c33e985c07bb803d1fe5b9f700f351b354b3ad7e1d6f6d39`.
-The lineage pointer SHA-256 is
-`270223022aa3a8f8bcd1bbed25190f0b4337bd3646a58f64ea1d13cdb65b0cd6`.
+Zenodo record `22104871`, DOI `10.5281/zenodo.22104871`, is the submitted
+13-of-14 version in concept record `22077422` / concept DOI
+`10.5281/zenodo.22077422`. Its anonymous readback matched the same reader-first
+nine files / 51,832,274 bytes. The final concept audit found one submitted
+matching version and zero unsubmitted matching drafts. The publication,
+anonymous readback, final lineage-audit, and lineage-pointer receipt SHA-256
+values are respectively
+`53541d8f6651b36211cc202a5ffc2460822ecf7da12d2c9f71d33aa9a2764233`,
+`29c5e0dbcb4ec747402535606fa0137e6955ab046f651554a8d9152961247e07`,
+`b8174c42818f1b5a6fe163920b23428a7278ce3983517291b064c153b96100a2`,
+and `eac3ed7fb2f403bd89e145e2039446399dcb0512ea93797493ba83102d3559da`.
+The exact public evidence is consolidated in
+`CHECKPOINT_2026-08-26_THROUGH_LESSON11_PUBLICATION_COMPLETE.md`.
 
-The published deterministic reader-first package contains nine files /
-49,769,118 bytes, 94 reader files, and 432 bounded source entries. Its package
-receipt is `build/THROUGH_LESSON10_PACKAGE_RECEIPT.json`; that receipt carries
-the exact asset inventory and hashes. Its self-hash is intentionally kept out
-of this source-package closure so the ZIP remains reproducible rather than
-circular.
-
-The next authorized operation is to package and publish the validated local
-13-of-14 boundary in the existing GitHub and Zenodo lineages, then verify its
-public bytes anonymously. Continue immediately afterward with Lesson 12, the
-only pending source document, using the same stable-ID, translation,
-correction, build, QA, and publication workflow. No upstream message has been
-sent. The independent completed Random edition remains outside this
-repository's write boundary.
+Continue now with the already complete Lesson 12 translation layer: close its
+proved target-only corrections and offline media equivalents, integrate it
+into the cumulative reader, then run deterministic and browser QA before the
+14-of-14 publication transaction. Do not redo or replace the verified Lesson
+11 release. No upstream message has been sent. The independent completed
+Random edition remains outside this repository's write boundary.

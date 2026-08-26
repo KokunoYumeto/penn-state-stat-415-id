@@ -6,17 +6,23 @@ komponen O006/C140.
 
 ## Status
 
-**Sebagian — 13 dari 14 dokumen lengkap secara lokal.** Laman utama dan seluruh
-Pelajaran 00–11 sudah diterjemahkan, dibangun, dan lulus pemeriksaan
-deterministik serta visual. Hanya Pelajaran 12 yang masih tercantum sebagai
-tautan sementara ke halaman resmi berbahasa Inggris. Batas akhir edisi ini
-adalah laman utama dan Pelajaran 00–12, sebanyak 14 dokumen.
+**Sebagian — 13 dari 14 dokumen sudah dibangun dan dipublikasikan; lapisan
+terjemahan seluruh 14 dokumen sudah lengkap.** Laman utama dan Pelajaran 00–11
+sudah diterjemahkan, dibangun, dipublikasikan, dan lulus pemeriksaan
+deterministik serta visual. Seluruh 580 segmen Pelajaran 12 juga sudah
+diterjemahkan secara lokal, tetapi integrasi build, koreksi, dan QA kumulatifnya
+belum selesai; pembaca saat ini masih menaut ke halaman resmi untuk pelajaran
+tersebut.
 
-- 4.352 segmen terjemahan lengkap;
-- 5.664 unit struktural sumber dengan ID stabil dan 5.652 unit turunan;
-- 2.804 permukaan matematika, semuanya terikat ke ID yang netral terhadap locale;
-- 218 koreksi turunan terverifikasi; byte sumber resmi tidak diubah;
-- pembaca HTML luring: 96 berkas / 17.232.761 byte.
+- 4.932 segmen terjemahan lengkap secara lokal; 4.352 sudah masuk pembaca
+  terverifikasi;
+- pembaca 13-dari-14 memiliki 5.664 unit struktural sumber dengan ID stabil dan
+  5.652 unit turunan;
+- 2.804 permukaan matematika sudah terverifikasi dalam pembaca; Pelajaran 12
+  menambahkan 352 permukaan yang masih menunggu integrasi kumulatif;
+- 218 koreksi turunan terverifikasi sampai Pelajaran 11; byte sumber resmi tidak
+  diubah;
+- pembaca HTML luring terverifikasi: 96 berkas / 17.232.761 byte.
 
 Pembaca lokal tersedia di `build/html-id/index.html`. Riwayat sumber,
 identitas SHA-256, hak komponen, koreksi, backend modular, hasil build, dan
@@ -26,12 +32,13 @@ bukti QA disimpan bersama edisi.
 - Pembaca web: https://kokunoyumeto.github.io/penn-state-stat-415-id/
 - Rilis publik terbaru: https://github.com/KokunoYumeto/penn-state-stat-415-id/releases
 - Konsep preservasi: https://doi.org/10.5281/zenodo.22077422
-- Preservasi publik terverifikasi saat ini, hingga Pelajaran 10:
-  https://doi.org/10.5281/zenodo.22104074
-- Paket preservasi reader-first 12-dari-14 (49.769.118 byte, sembilan berkas)
+- Preservasi publik terverifikasi saat ini, hingga Pelajaran 11:
+  https://doi.org/10.5281/zenodo.22104871
+- Paket preservasi reader-first 13-dari-14 (51.832.274 byte, sembilan berkas)
   telah diterbitkan pada konsep DOI yang sama dan seluruh byte publiknya telah
-  dibaca kembali secara anonim. Batas 13-dari-14 di atas adalah batas lokal
-  terverifikasi berikutnya dan belum diklaim sebagai rilis publik.
+  dibaca kembali secara anonim. Commit, Pages, tag/rilis, berkas Zenodo, dan
+  garis keturunan konsepnya cocok dengan bukti lokal; tidak ada draf Zenodo
+  yang tersisa untuk versi ini.
 
 ## Reproduksi
 
