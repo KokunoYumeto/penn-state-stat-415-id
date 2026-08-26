@@ -62,9 +62,9 @@ The cumulative build has 94 files / 17,020,141 bytes; its manifest is 10,100
 bytes with SHA-256
 `08e171f7b87a1ad33d063ed536fca566873d93993a191d0ad1812fe7259e3663`.
 The build receipt is 24,978 bytes, SHA-256
-`b31ed728f1b66dc257000aac334fdb5a0240a646777295db1c99396a6884538d`; the
+`4c8e4afa3f4911f085cf2d9b081cd2a373b0492eeca34241b8a79e1ea34db02d`; the
 deterministic QA receipt is 6,118 bytes, SHA-256
-`c6a1fcf4a2318e2e783f806214dc824fd73da104f19c81fe6965263b1ec7066e`.
+`7d3ab72db92504e536125130308aa46901764974886e50c17d4d2e87f853266a`.
 Both write and check-only replays pass. The cumulative correction backend now
 has the ordered IDs `O006-PSU-ADV-0001` through `O006-PSU-ADV-0198`; the
 Lesson 10 suffix is 300,910 bytes, SHA-256
@@ -82,9 +82,9 @@ The cumulative offline reader through Lesson 10 contains 94 files /
 17,020,141 bytes. Its manifest is 10,100 bytes with SHA-256
 `08e171f7b87a1ad33d063ed536fca566873d93993a191d0ad1812fe7259e3663`.
 The build receipt is 24,978 bytes with SHA-256
-`b31ed728f1b66dc257000aac334fdb5a0240a646777295db1c99396a6884538d`; the
+`4c8e4afa3f4911f085cf2d9b081cd2a373b0492eeca34241b8a79e1ea34db02d`; the
 deterministic QA receipt is 6,118 bytes with SHA-256
-`c6a1fcf4a2318e2e783f806214dc824fd73da104f19c81fe6965263b1ec7066e`.
+`7d3ab72db92504e536125130308aa46901764974886e50c17d4d2e87f853266a`.
 Build and QA write/check-only replays pass. The QA gate covers 12-of-14
 metadata/navigation, all 2,540 math nodes, 56 substantive images, seven
 semantic tables, 22 Lesson 10 assets, 198 corrections, code/runtime
@@ -99,7 +99,7 @@ the reader, and fresh console warning/error logs are empty. Four deferred
 index thumbnails were additionally verified with same-origin HTTP checks. The
 12-of-14 visual receipt is
 `build/THROUGH_LESSON10_VISUAL_QA_RECEIPT.json`, 13,129 bytes, SHA-256
-`386428d44a9d59f30f2a0b5a263144b0203a233f9c53e63c94ad3229832c76e9`.
+`abdef5b956b5937675865b96edb8ca6614ab6ef0b0b50d2dec21a06b64c1c455`.
 
 The 198-row adverse/correction backend now shares the exact ordered IDs
 `O006-PSU-ADV-0001` through `O006-PSU-ADV-0198`. The twelve-row translation

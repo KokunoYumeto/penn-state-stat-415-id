@@ -30,9 +30,9 @@ Updated: 2026-08-26
 - Cumulative reader through Lesson 10: 94 files / 17,020,141 bytes; manifest
   SHA-256 `08e171f7b87a1ad33d063ed536fca566873d93993a191d0ad1812fe7259e3663`.
 - Deterministic build-receipt SHA-256:
-  `b31ed728f1b66dc257000aac334fdb5a0240a646777295db1c99396a6884538d`.
+  `4c8e4afa3f4911f085cf2d9b081cd2a373b0492eeca34241b8a79e1ea34db02d`.
 - Deterministic QA-receipt SHA-256:
-  `c6a1fcf4a2318e2e783f806214dc824fd73da104f19c81fe6965263b1ec7066e`.
+  `7d3ab72db92504e536125130308aa46901764974886e50c17d4d2e87f853266a`.
   Write and check-only replays pass.
 - Deterministic nine-file reader-first 12-of-14 release package passes
   write/check-only replay: 49,763,980 bytes, 94 reader files, and 432 bounded
@@ -43,7 +43,7 @@ Updated: 2026-08-26
   1,280 × 720 and 390 × 844. All 2,540 math surfaces render, all 56
   substantive figures are centered and full-width, mobile code/table reflow is
   internal, and console warning/error logs are empty. Visual-QA receipt
-  SHA-256: `386428d44a9d59f30f2a0b5a263144b0203a233f9c53e63c94ad3229832c76e9`.
+  SHA-256: `abdef5b956b5937675865b96edb8ca6614ab6ef0b0b50d2dec21a06b64c1c455`.
 - Twelve-row translation ledger now resolves Lesson 10; merged Lesson 10
   translation SHA-256 is
   `27305c36d540f63db6dbf925de6caa93dc544fbc0268a863979ac410edad0b51`.

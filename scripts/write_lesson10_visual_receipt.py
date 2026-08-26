@@ -33,6 +33,7 @@ def main() -> None:
     qa_path = ROOT / "build" / "THROUGH_LESSON10_QA_RECEIPT.json"
     manifest_path = ROOT / "build" / "THROUGH_LESSON10_MANIFEST.csv"
     out_path = ROOT / "build" / "THROUGH_LESSON10_VISUAL_QA_RECEIPT.json"
+    mirror_path = ROOT / "00_control" / "VISUAL_QA_2026-08-26_THROUGH_LESSON10.json"
 
     prior = json.loads(prior_path.read_text(encoding="utf-8"))
     build = json.loads(build_path.read_text(encoding="utf-8"))
@@ -118,8 +119,10 @@ def main() -> None:
         "schema": "o006.stat415.through-lesson10-visual-qa.v1",
         "status": "pass",
     }
-    out_path.write_text(json.dumps(receipt, ensure_ascii=False, indent=2) + "\n", encoding="utf-8", newline="\n")
-    print(f"wrote {out_path} ({bytes_of(out_path)} bytes, sha256 {sha256(out_path)})")
+    payload = json.dumps(receipt, ensure_ascii=False, indent=2) + "\n"
+    out_path.write_text(payload, encoding="utf-8", newline="\n")
+    mirror_path.write_text(payload, encoding="utf-8", newline="\n")
+    print(f"wrote {out_path} and {mirror_path} ({bytes_of(out_path)} bytes, sha256 {sha256(out_path)})")
 
 
 if __name__ == "__main__":
