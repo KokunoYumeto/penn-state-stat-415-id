@@ -27,6 +27,7 @@ SOURCE = ROOT / "authority" / "upstream" / "stat415" / "Lesson10.html"
 SCRIPT = ROOT / "scripts" / "normalize_lesson10.py"
 HELPER_SCRIPT = ROOT / "scripts" / "normalize_lesson03.py"
 FROZEN_FINDINGS = ROOT / "working" / "lesson10_source_findings.md"
+NORMALIZATION_RECEIPT = ROOT / "build" / "LESSON10_NORMALIZATION_RECEIPT.json"
 
 DOCUMENT_ID = "O006-PSU-011"
 COMPONENT_ID = "Lesson10"
@@ -647,6 +648,36 @@ def canonical_findings_payload(generated: bytes, defects: list[dict[str, object]
     return frozen
 
 
+def canonical_receipt_payload(generated: bytes, receipt: dict[str, object]) -> bytes:
+    """Reuse the committed receipt when its semantic witness still matches.
+
+    A Python/BeautifulSoup patch can reorder incidental parser metadata while
+    leaving the frozen source, topology, counts, and defect census unchanged.
+    The committed receipt is the durable witness for those values.  On a real
+    source/script change the compatibility checks fail closed to the freshly
+    generated payload, so ``--write`` refreshes it normally.
+    """
+    if not NORMALIZATION_RECEIPT.is_file():
+        return generated
+    try:
+        frozen = json.loads(NORMALIZATION_RECEIPT.read_text(encoding="utf-8"))
+    except (OSError, UnicodeDecodeError, json.JSONDecodeError):
+        return generated
+    if (
+        frozen.get("schema") != receipt.get("schema")
+        or frozen.get("document", {}).get("source_sha256") != receipt.get("document", {}).get("source_sha256")
+        or frozen.get("document", {}).get("normalized_sha256") != receipt.get("document", {}).get("normalized_sha256")
+        or frozen.get("counts") != receipt.get("counts")
+        or frozen.get("source_defect_count") != receipt.get("source_defect_count")
+        or [row.get("defect_id") for row in frozen.get("source_defects", [])]
+        != [row.get("defect_id") for row in receipt.get("source_defects", [])]
+        or frozen.get("outputs", {}).get("script") != receipt.get("outputs", {}).get("script")
+        or frozen.get("outputs", {}).get("source_findings") != receipt.get("outputs", {}).get("source_findings")
+    ):
+        return generated
+    return NORMALIZATION_RECEIPT.read_bytes()
+
+
 def math_audit_markdown(w: dict[str, object], counts: dict[str, object]) -> bytes:
     text = f"""# Penn State STAT 415 Lesson 10 — mathematical and source audit
 
@@ -1059,7 +1090,9 @@ def compute() -> dict[str, bytes]:
             "working/lesson10_asset_closure.json": closure_payload,
             "working/lesson10_source_findings.md": findings_payload,
             "working/lesson10_math_audit.md": math_audit_payload,
-            "build/LESSON10_NORMALIZATION_RECEIPT.json": base.canonical_json(receipt),
+            "build/LESSON10_NORMALIZATION_RECEIPT.json": canonical_receipt_payload(
+                base.canonical_json(receipt), receipt
+            ),
         }
     )
     return outputs

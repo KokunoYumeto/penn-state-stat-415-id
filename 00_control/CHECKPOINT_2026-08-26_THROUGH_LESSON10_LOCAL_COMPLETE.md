@@ -27,11 +27,11 @@ Status: deterministic build and QA complete; 12-of-14 public release next
 - Manifest: 10,100 bytes, SHA-256
   `08e171f7b87a1ad33d063ed536fca566873d93993a191d0ad1812fe7259e3663`.
 - Build receipt: 24,978 bytes, SHA-256
-  `4c8e4afa3f4911f085cf2d9b081cd2a373b0492eeca34241b8a79e1ea34db02d`.
+  `4b852de891294648f52de4024856a26f5464a88f851d1bba1ca802166208b4de`.
 - QA receipt: 6,118 bytes, SHA-256
-  `7d3ab72db92504e536125130308aa46901764974886e50c17d4d2e87f853266a`.
+  `2e14901a52da7782231c4ab1eaaf8f4fbd74375be846dfec80615fcbffed2cca`.
 - Visual receipt: 13,129 bytes, SHA-256
-  `abdef5b956b5937675865b96edb8ca6614ab6ef0b0b50d2dec21a06b64c1c455`.
+  `6474733ee1ee19e78623433181cd3330285378d3e1e2623b16dd6e516928d607`.
 - Write and check-only replays pass. QA covers source/target bindings,
   topology/math, correction registry, 22 byte-preserved assets and rights,
   19 duplicate native IDs, 22 linked alts/captions, two semantic tables,
