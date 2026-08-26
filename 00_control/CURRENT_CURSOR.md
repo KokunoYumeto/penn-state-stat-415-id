@@ -37,8 +37,8 @@ Updated: 2026-08-26
 - Deterministic nine-file reader-first 12-of-14 release package passes
   write/check-only replay: 49,763,980 bytes, 94 reader files, and 432 bounded
   source entries. Exact identities are in
-  `build/THROUGH_LESSON10_PACKAGE_RECEIPT.json`; its SHA-256 is
-  `02c50f2af1f752130b6999048f2d3caa242c22906fd09ae836251136a27415cc`.
+  `build/THROUGH_LESSON10_PACKAGE_RECEIPT.json`; its self-hash is deliberately
+  excluded from the source closure to keep the package non-circular.
 - Desktop/mobile visual QA passes index, Lessons 00–10, and licenses at
   1,280 × 720 and 390 × 844. All 2,540 math surfaces render, all 56
   substantive figures are centered and full-width, mobile code/table reflow is

@@ -136,8 +136,9 @@ and `21ff308362a8aa6ac1d194d697f7b803482766f503113e902920ed3202933ad3`.
 The deterministic reader-first 12-of-14 package is ready and passes write and
 check-only replay: nine files / 49,763,980 bytes, 94 reader files, and 432
 bounded source entries. Its package receipt is
-`build/THROUGH_LESSON10_PACKAGE_RECEIPT.json`, SHA-256
-`02c50f2af1f752130b6999048f2d3caa242c22906fd09ae836251136a27415cc`.
+`build/THROUGH_LESSON10_PACKAGE_RECEIPT.json`; that receipt carries the exact
+asset inventory and hashes. Its self-hash is intentionally kept out of this
+source-package closure so the ZIP remains reproducible rather than circular.
 The next release action is explicitly authorized: push the dedicated GitHub
 repository and Pages, publish the next version in the existing Zenodo concept,
 and anonymously verify every public byte. No upstream message has been sent.
