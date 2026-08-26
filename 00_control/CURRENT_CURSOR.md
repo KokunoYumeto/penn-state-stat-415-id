@@ -38,7 +38,7 @@ Updated: 2026-08-26
   write/check-only replay: 49,763,980 bytes, 94 reader files, and 432 bounded
   source entries. Exact identities are in
   `build/THROUGH_LESSON10_PACKAGE_RECEIPT.json`; its SHA-256 is
-  `36e37eeecd403c2f87aef6ac865f4a82f25f60d4ba5e72ba30840c9d1a738e74`.
+  `02c50f2af1f752130b6999048f2d3caa242c22906fd09ae836251136a27415cc`.
 - Desktop/mobile visual QA passes index, Lessons 00–10, and licenses at
   1,280 × 720 and 390 × 844. All 2,540 math surfaces render, all 56
   substantive figures are centered and full-width, mobile code/table reflow is

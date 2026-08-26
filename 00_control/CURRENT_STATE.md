@@ -137,7 +137,7 @@ The deterministic reader-first 12-of-14 package is ready and passes write and
 check-only replay: nine files / 49,763,980 bytes, 94 reader files, and 432
 bounded source entries. Its package receipt is
 `build/THROUGH_LESSON10_PACKAGE_RECEIPT.json`, SHA-256
-`36e37eeecd403c2f87aef6ac865f4a82f25f60d4ba5e72ba30840c9d1a738e74`.
+`02c50f2af1f752130b6999048f2d3caa242c22906fd09ae836251136a27415cc`.
 The next release action is explicitly authorized: push the dedicated GitHub
 repository and Pages, publish the next version in the existing Zenodo concept,
 and anonymously verify every public byte. No upstream message has been sent.
