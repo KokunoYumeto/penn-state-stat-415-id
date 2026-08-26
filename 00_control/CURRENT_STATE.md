@@ -126,7 +126,7 @@ Its normalized source has 580 translation segments, 846 structural units, 352
 protected mathematics surfaces, nine frozen image assets totaling 233,075
 bytes, and three external-video provenance records. The normalization receipt
 is 9,727 bytes, SHA-256
-`d9b97395f9cae5412879fa63d8e16f59241d3883b4a90f7931c13cfcd47d3283`.
+`ef7b86ff5d6e46237688051fe1ffd867d2a2006d2c8393370b697abe2fae8156`.
 
 All 580 segments are translated in three canonical contiguous batches. The
 merged translation CSV is 140,789 bytes, SHA-256
@@ -134,7 +134,7 @@ merged translation CSV is 140,789 bytes, SHA-256
 the 580-record binding backend is 279,013 bytes, SHA-256
 `f6c64c31aa0514f4b386efa182cfcac128076b3e58f2ddf0bee75d51f229730c`.
 The translation receipt is 3,748 bytes, SHA-256
-`8343d09c7490394a0ed373791b72e910c1d42b0a293c9ab30af922d1fcd4489b`.
+`5514555698cd07737d12e3b91e440af9f9302dc32de5df49716c8b532f248364`.
 `source/id-ID/Lesson12.html` is the admitted 146,789-byte generated target at
 SHA-256
 `6cd3218f6d1a613f1ea9d1459c5506ea8b24f37340a3ee26f17bc18504dd5965`;
@@ -150,9 +150,9 @@ The complete cumulative offline reader contains 106 files / 17,614,553 bytes.
 Its 11,573-byte manifest has SHA-256
 `697c9ee8e23cc10469fea4d1894e16471ffb4276edd1f0d25bebfb5be0dbe79e`.
 The 17,276-byte build receipt has SHA-256
-`f56a90f2be1b463f481aca0ddf00fb6214b45c4b45927fa142ae43a01d608935`;
+`d7bae677a7d93023322773806a96418b3d96af19bae39bfd5fe967c327d01954`;
 the 12,428-byte deterministic QA receipt has SHA-256
-`e64f9dc9ef3eb041287b0c88be48c1dc6a4833000651cbdceed2185a1999bd19`.
+`44a0fd8e432f81da65776b45f33cccda0e462db32bb04bf8ecdb6d11eeca5560`.
 Asset freeze, normalization, merge, materialization, cumulative build, and QA
 write/check-only replays pass. The gate covers all 14 documents, 4,932
 segments, 6,510/6,498 source/target units, 3,156 protected math surfaces, 242
@@ -170,7 +170,7 @@ tables, twelve captioned and two historical source tables without captions;
 all six Lesson 12 tables are captioned and fully scoped. Its three offline
 video equivalents are expanded, readable, and unclipped. The 21,702-byte
 visual receipt has SHA-256
-`5dd1dd0ddfa4249ef08f2a70f070a8fc8532734656cd146ec5235c37a8baa345`;
+`2fe1f40b8748b0dcc67e08e6a87e6ba402b5323b581744f73e35c787ae583d5f`;
 its write and check-only modes both pass.
 
 The 242-row correction backend has exact ordered IDs
@@ -187,6 +187,14 @@ support remains CC BY-SA 4.0. Translation provenance remains exactly
 `OpenAI Codex gpt-5.6-sol, Ultra`; all source and human-contributor credits are
 preserved. No upstream message has been sent.
 
+The one cross-platform defect discovered by the first 14-of-14 GitHub run is
+closed locally: `working/lesson12_source_findings.md` is canonically LF at
+8,203 bytes and SHA-256
+`8b087fb8e545f14ba323afd1caa5672117d60878c3c5924a0b0455136078109c`.
+The previous 8,209-byte identity represented CRLF bytes. The two binding
+scripts and all downstream receipts now bind the canonical LF identity; the
+complete workflow replay passes and the reader manifest remains unchanged.
+
 ## Publication state and next work
 
 The 13-of-14 boundary is public and anonymously verified. GitHub commit
@@ -200,24 +208,25 @@ respectively
 `d6e1918a8f3b888ec3eecfa27d0d876a2541792aa1fddfbe0dd57e82b2970d26`
 and `cd61daa5633890738efed0a57773c4fe385aba87df4a66b59ed7273ee01a12f7`.
 
-Zenodo record `22104871`, DOI `10.5281/zenodo.22104871`, is the submitted
-13-of-14 version in concept record `22077422` / concept DOI
-`10.5281/zenodo.22077422`. Its anonymous readback matched the same reader-first
-nine files / 51,832,274 bytes. The final concept audit found one submitted
-matching version and zero unsubmitted matching drafts. The publication,
-anonymous readback, final lineage-audit, and lineage-pointer receipt SHA-256
-values are respectively
-`53541d8f6651b36211cc202a5ffc2460822ecf7da12d2c9f71d33aa9a2764233`,
-`29c5e0dbcb4ec747402535606fa0137e6955ab046f651554a8d9152961247e07`,
-`b8174c42818f1b5a6fe163920b23428a7278ce3983517291b064c153b96100a2`,
-and `eac3ed7fb2f403bd89e145e2039446399dcb0512ea93797493ba83102d3559da`.
-The exact public evidence is consolidated in
-`CHECKPOINT_2026-08-26_THROUGH_LESSON11_PUBLICATION_COMPLETE.md`.
+Zenodo record `22105226`, DOI `10.5281/zenodo.22105226`, is the submitted
+14-of-14 version in concept record `22077422` / concept DOI
+`10.5281/zenodo.22077422`. Anonymous readback matched all nine reader-first
+files / 55,308,347 bytes. The final concept audit found one submitted matching
+version and zero unsubmitted matching drafts. The publication, anonymous
+readback, final lineage-audit, and lineage-pointer receipt SHA-256 values are
+respectively
+`e7b96fa525e416cf49d332eafb701b9f91797e298654c768bec09f02891d9b1e`,
+`b2db8839ca366d03bef9387b2266bd57d5cc4288c94835ec6ca8ebb020299db0`,
+`c5b88758ca760e778fd90e7c8196821a454a5dc9ecc7ca3cc43dfbe7af09b826`,
+and `716318c875a2871cc460681c218dda7ca6983d40ffc337ea4fcf0d05e9f6cb42`.
+Because that immutable source package preceded discovery of the six-byte LF
+binding mismatch, publish one corrected source-reproducibility version in the
+same concept after the repaired GitHub gate; do not create a competing concept.
 
-Publish the complete 14-of-14 HTML package to the existing GitHub/Pages and
-Zenodo lineages, then anonymously read back every public byte and record the
-receipts. After that boundary is closed, produce the consolidated PDF/EPUB
-surfaces and then move to the distinct exact Random completeness donor and
-original C140 companion. Do not redo or replace the verified Lesson 11 release.
-No upstream message has been sent. The independent completed Random edition
-remains outside this repository's write boundary.
+Commit and push the LF/workflow repair, close the complete GitHub/Pages
+deployment and release with anonymous byte readback, then publish and verify
+the corrected Zenodo package version. After that boundary is closed, produce
+the consolidated PDF/EPUB surfaces and then move to the distinct exact Random
+completeness donor and original C140 companion. No upstream message has been
+sent. The independent completed Random edition remains outside this
+repository's write boundary.

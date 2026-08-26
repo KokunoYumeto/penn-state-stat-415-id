@@ -8,8 +8,9 @@ komponen O006/C140.
 
 **Lengkap secara lokal — seluruh 14 dari 14 dokumen sudah diterjemahkan,
 dibangun, dan lulus QA.** Laman utama serta Pelajaran 00–12 kini membentuk satu
-pembaca luring lengkap. Batas publik terakhir masih 13-dari-14 sampai transaksi
-rilis lengkap dan pembacaan balik byte publik selesai.
+pembaca luring lengkap. Preservasi Zenodo 14-dari-14 telah terbit dan dibaca
+kembali secara anonim; penerapan GitHub/Pages 14-dari-14 sedang menutup satu
+perbaikan reproduksibilitas LF yang tidak mengubah byte pembaca.
 
 - 4.932 segmen terjemahan di dalam pembaca lengkap;
 - 6.510 unit struktural sumber dengan ID stabil dan 6.498 unit turunan;
@@ -29,13 +30,14 @@ bukti QA disimpan bersama edisi.
 - Pembaca web: https://kokunoyumeto.github.io/penn-state-stat-415-id/
 - Rilis publik terbaru: https://github.com/KokunoYumeto/penn-state-stat-415-id/releases
 - Konsep preservasi: https://doi.org/10.5281/zenodo.22077422
-- Preservasi publik terverifikasi saat ini, hingga Pelajaran 11:
-  https://doi.org/10.5281/zenodo.22104871
-- Paket preservasi reader-first 13-dari-14 (51.832.274 byte, sembilan berkas)
+- Preservasi publik lengkap 14-dari-14:
+  https://doi.org/10.5281/zenodo.22105226
+- Paket preservasi reader-first lengkap (55.308.347 byte, sembilan berkas)
   telah diterbitkan pada konsep DOI yang sama dan seluruh byte publiknya telah
-  dibaca kembali secara anonim. Commit, Pages, tag/rilis, berkas Zenodo, dan
-  garis keturunan konsepnya cocok dengan bukti lokal; tidak ada draf Zenodo
-  yang tersisa untuk versi ini.
+  dibaca kembali secara anonim. Audit konsep menemukan tepat satu versi cocok
+  yang dikirim dan nol draf. Perbaikan identitas LF 8.209→8.203 byte pada satu
+  berkas temuan Markdown sedang disiapkan sebagai revisi reproduksibilitas;
+  konten dan 17.614.553 byte pembaca tidak berubah.
 
 ## Reproduksi
 

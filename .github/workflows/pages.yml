@@ -41,6 +41,7 @@ jobs:
           python -B scripts/freeze_lesson02_assets.py --check-only
           python -B scripts/freeze_lesson04_assets.py --check-only
           python -B scripts/freeze_lesson11_asset.py --check-only
+          python -B scripts/freeze_lesson12_assets.py --check-only
           python -B scripts/freeze_mathjax.py --check-only
           python -B scripts/normalize_lesson04.py --check-only
           python -B scripts/merge_lesson04_translations.py --check-only
@@ -58,8 +59,12 @@ jobs:
           python -B scripts/merge_lesson10_translations.py --check-only
           python -B scripts/normalize_lesson11.py --check-only
           python -B scripts/merge_lesson11_translations.py --check-only
-          python -B scripts/build_through_lesson11.py --check-only
-          python -B scripts/qa_through_lesson11.py --check-only
+          python -B scripts/normalize_lesson12.py --check-only
+          python -B scripts/build_lesson12_translation_batches.py --check-only
+          python -B scripts/merge_lesson12_translations.py --check-only
+          python -B scripts/materialize_lesson12_translation.py --check-only
+          python -B scripts/build_through_lesson12.py --check-only
+          python -B scripts/qa_through_lesson12.py --check-only
 
       - name: Configure Pages
         uses: actions/configure-pages@45bfe0192ca1faeb007ade9deae92b16b8254a0d # v6.0.0

@@ -23,30 +23,38 @@ Updated: 2026-08-26
   expanded offline video equivalents / 24 correction records. Target SHA-256
   `6cd3218f6d1a613f1ea9d1459c5506ea8b24f37340a3ee26f17bc18504dd5965`;
   translation receipt SHA-256
-  `8343d09c7490394a0ed373791b72e910c1d42b0a293c9ab30af922d1fcd4489b`.
+  `5514555698cd07737d12e3b91e440af9f9302dc32de5df49716c8b532f248364`.
 - Complete reader: 106 files / 17,614,553 bytes; manifest SHA-256
   `697c9ee8e23cc10469fea4d1894e16471ffb4276edd1f0d25bebfb5be0dbe79e`.
 - Build receipt SHA-256
-  `f56a90f2be1b463f481aca0ddf00fb6214b45c4b45927fa142ae43a01d608935`;
+  `d7bae677a7d93023322773806a96418b3d96af19bae39bfd5fe967c327d01954`;
   deterministic QA receipt SHA-256
-  `e64f9dc9ef3eb041287b0c88be48c1dc6a4833000651cbdceed2185a1999bd19`.
+  `44a0fd8e432f81da65776b45f33cccda0e462db32bb04bf8ecdb6d11eeca5560`.
   All write/check-only replays pass.
+- Cross-platform repair: `working/lesson12_source_findings.md` is canonically
+  LF at 8,203 bytes / SHA-256
+  `8b087fb8e545f14ba323afd1caa5672117d60878c3c5924a0b0455136078109c`;
+  scripts and downstream receipts no longer bind the obsolete 8,209-byte CRLF
+  identity. The complete CI command chain passes locally and the reader bytes
+  and manifest are unchanged.
 - Visual QA passes fifteen routes at 1,280 × 720 and 390 × 844: 86/86 local
   resources, 3,156 protected MathJax containers, 67 images, 14 tables, zero
   `merror`, broken images, iframes, console warnings/errors, or page/navigation
   overflow. Visual receipt SHA-256
-  `5dd1dd0ddfa4249ef08f2a70f070a8fc8532734656cd146ec5235c37a8baa345`.
+  `2fe1f40b8748b0dcc67e08e6a87e6ba402b5323b581744f73e35c787ae583d5f`.
 - Complete translation ledger: fourteen data rows / 5,821 bytes / SHA-256
   `c5ba07e250360af2a97957aa957278f43348c05bb44a208a2a2898fc6b034660`.
 - Complete terminology glossary: 192 data rows / 20,340 bytes / SHA-256
   `554dcbfb5161df6f0eb86027822eabbf4fae9179bb152947a8ad6c196cb34b05`.
 - Rights remain component-separated: Penn State CC BY-NC 4.0 except where
   otherwise noted; MathJax Apache-2.0; original repository layer CC BY-SA 4.0.
-- Current public archive: Zenodo record `22104871`, DOI
-  `10.5281/zenodo.22104871`, in concept record `22077422` / concept DOI
-  `10.5281/zenodo.22077422`. All nine files / 51,832,274 bytes matched by
+- Current public archive: Zenodo record `22105226`, DOI
+  `10.5281/zenodo.22105226`, in concept record `22077422` / concept DOI
+  `10.5281/zenodo.22077422`. All nine files / 55,308,347 bytes matched by
   anonymous readback; the final concept audit found one submitted matching
-  version and zero drafts.
+  version and zero drafts. One corrected source-reproducibility version must
+  supersede it in the same concept after the repaired GitHub gate because the
+  immutable package predates the six-byte LF binding repair.
 - Current GitHub/Pages boundary: commit
   `8222b6a84cc7592ddfce16dabcbc392533fa50eb`, tree
   `03887f51eaba4357bf997b1db2691f46f6c47105`, successful run `32923342205`,
@@ -57,32 +65,37 @@ Updated: 2026-08-26
   `d6e1918a8f3b888ec3eecfa27d0d876a2541792aa1fddfbe0dd57e82b2970d26`;
   GitHub release
   `cd61daa5633890738efed0a57773c4fe385aba87df4a66b59ed7273ee01a12f7`;
-  Zenodo publication
-  `53541d8f6651b36211cc202a5ffc2460822ecf7da12d2c9f71d33aa9a2764233`;
+  Zenodo 14-of-14 publication
+  `e7b96fa525e416cf49d332eafb701b9f91797e298654c768bec09f02891d9b1e`;
   anonymous Zenodo readback
-  `29c5e0dbcb4ec747402535606fa0137e6955ab046f651554a8d9152961247e07`;
+  `b2db8839ca366d03bef9387b2266bd57d5cc4288c94835ec6ca8ebb020299db0`;
   final lineage audit
-  `b8174c42818f1b5a6fe163920b23428a7278ce3983517291b064c153b96100a2`.
+  `c5b88758ca760e778fd90e7c8196821a454a5dc9ecc7ca3cc43dfbe7af09b826`.
 - No upstream message has been sent.
 
 ## Next executable action
 
-Finish the deterministic reader-first 14-of-14 HTML release package, publish it
-to the existing GitHub/Pages and Zenodo lineages, and anonymously verify
-commit, Pages, release, DOI inventory, and every public release byte. Then
-produce and validate the consolidated PDF/EPUB surfaces before beginning the
-distinct exact Random completeness donor and original C140 companion.
+Commit and push the repaired deterministic 14-of-14 boundary, wait for the
+exact GitHub/Pages workflow to pass, publish tag/release
+`v2026.08.26.14of14`, and anonymously verify commit, Pages, release, and every
+public byte. Rebuild the same reader-first package with the repaired source
+identities, publish one corrected version in existing Zenodo concept
+`22077422`, and anonymously verify it. Then produce and validate the
+consolidated PDF/EPUB surfaces before beginning the distinct exact Random
+completeness donor and original C140 companion.
 
 ## Recovery
 
 Read `00_control/WORKFLOW.md`, this file, `CURRENT_STATE.md`,
-`CHECKPOINT_2026-08-26_THROUGH_LESSON11_PUBLICATION_COMPLETE.md`,
+`CHECKPOINT_2026-08-26_THROUGH_LESSON12_LF_REPAIR.md`,
 `COMPONENT_BOUNDARY.md`, the fourteen-document authority manifest/freeze
 receipt, `TRANSLATION_LEDGER.csv`, `ADVERSE_LEDGER.jsonl`, the final glossary,
 `build/LESSON12_MATERIALIZATION_RECEIPT.json`,
 `build/THROUGH_LESSON12_BUILD_RECEIPT.json`,
 `build/THROUGH_LESSON12_QA_RECEIPT.json`, and
-`build/THROUGH_LESSON12_VISUAL_QA_RECEIPT.json`. Until the 14-of-14 public
-transaction is complete, preserve the six through-Lesson11 public receipts as
-the last verified public state. Conversation summaries are not state. Do not
-broaden the filesystem or Git scope.
+`build/THROUGH_LESSON12_VISUAL_QA_RECEIPT.json`, and the three through-Lesson12
+Zenodo receipts. Until the repaired 14-of-14 GitHub and corrected Zenodo
+transactions are complete, preserve the through-Lesson11 GitHub receipts and
+record `22105226` as the last independently verified public states.
+Conversation summaries are not state. Do not broaden the filesystem or Git
+scope.
