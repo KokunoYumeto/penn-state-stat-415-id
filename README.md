@@ -6,11 +6,11 @@ komponen O006/C140.
 
 ## Status
 
-**Lengkap secara lokal — seluruh 14 dari 14 dokumen sudah diterjemahkan,
-dibangun, dan lulus QA.** Laman utama serta Pelajaran 00–12 kini membentuk satu
-pembaca luring lengkap. Preservasi Zenodo 14-dari-14 telah terbit dan dibaca
-kembali secara anonim; penerapan GitHub/Pages 14-dari-14 sedang menutup satu
-perbaikan reproduksibilitas LF yang tidak mengubah byte pembaca.
+**Lengkap dan terbit — seluruh 14 dari 14 dokumen sudah diterjemahkan,
+dibangun, lulus QA, dan dibaca kembali dari repositori publik.** Laman utama
+serta Pelajaran 00–12 membentuk satu pembaca luring lengkap. GitHub/Pages,
+rilis GitHub, dan versi preservasi Zenodo yang mengikat perbaikan
+reproduksibilitas LF semuanya sudah publik dan terverifikasi secara anonim.
 
 - 4.932 segmen terjemahan di dalam pembaca lengkap;
 - 6.510 unit struktural sumber dengan ID stabil dan 6.498 unit turunan;
@@ -28,16 +28,17 @@ bukti QA disimpan bersama edisi.
 
 - Repositori publik: https://github.com/KokunoYumeto/penn-state-stat-415-id
 - Pembaca web: https://kokunoyumeto.github.io/penn-state-stat-415-id/
-- Rilis publik terbaru: https://github.com/KokunoYumeto/penn-state-stat-415-id/releases
+- Rilis publik lengkap 14-dari-14:
+  https://github.com/KokunoYumeto/penn-state-stat-415-id/releases/tag/v2026.08.26.14of14
 - Konsep preservasi: https://doi.org/10.5281/zenodo.22077422
 - Preservasi publik lengkap 14-dari-14:
-  https://doi.org/10.5281/zenodo.22105226
-- Paket preservasi reader-first lengkap (55.308.347 byte, sembilan berkas)
-  telah diterbitkan pada konsep DOI yang sama dan seluruh byte publiknya telah
-  dibaca kembali secara anonim. Audit konsep menemukan tepat satu versi cocok
-  yang dikirim dan nol draf. Perbaikan identitas LF 8.209→8.203 byte pada satu
-  berkas temuan Markdown sedang disiapkan sebagai revisi reproduksibilitas;
-  konten dan 17.614.553 byte pembaca tidak berubah.
+  https://doi.org/10.5281/zenodo.22105616
+- Paket preservasi reader-first lengkap (55.312.500 byte, sembilan berkas)
+  telah diterbitkan pada konsep DOI yang sama dan seluruh byte publiknya cocok
+  pada pembacaan kembali anonim. Audit konsep menemukan tepat satu versi cocok
+  yang dikirim dan nol draf. Identitas LF kanonis 8.203 byte untuk berkas
+  temuan Markdown sudah terikat dalam paket sumber; konten dan 17.614.553 byte
+  pembaca tidak berubah.
 
 ## Reproduksi
 

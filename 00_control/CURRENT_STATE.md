@@ -157,6 +157,8 @@ Asset freeze, normalization, merge, materialization, cumulative build, and QA
 write/check-only replays pass. The gate covers all 14 documents, 4,932
 segments, 6,510/6,498 source/target units, 3,156 protected math surfaces, 242
 corrections, stable IDs, links, rights, privacy, and byte-deterministic replay.
+The exact 32-command repository CI chain was freshly replayed on 2026-08-26;
+all commands passed and reproduced the recorded build and QA receipt hashes.
 
 Fresh browser inspection passes all fifteen routes—index, Lessons 00–12, and
 licenses—at 1,280 × 720 and 390 × 844. All 86 referenced same-origin resources
@@ -197,36 +199,35 @@ complete workflow replay passes and the reader manifest remains unchanged.
 
 ## Publication state and next work
 
-The 13-of-14 boundary is public and anonymously verified. GitHub commit
-`8222b6a84cc7592ddfce16dabcbc392533fa50eb`, tree
-`03887f51eaba4357bf997b1db2691f46f6c47105`, successful Pages run
-`32923342205`, tag `v2026.08.26.13of14`, and the corresponding release are
-public. Anonymous readback matched all 668 commit-tree blobs / 150,369,151
-bytes, all 96 Pages files / 17,232,761 bytes, and all nine release assets /
-51,832,274 bytes. The GitHub checkpoint and release receipt SHA-256 values are
+The complete 14-of-14 boundary is public and anonymously verified. GitHub
+content commit `13767f55f739ad7dd058fc1dcb55cf5334ab097c`, tree
+`dbf8abf4f729ddca46f69547bcf38d0b71f27f07`, successful Pages run
+`32930770236`, tag `v2026.08.26.14of14`, and the corresponding release are
+public. Anonymous readback matched all 746 commit-tree blobs / 154,064,493
+bytes, all 106 Pages files / 17,614,553 bytes, and all nine release assets /
+55,312,500 bytes. The GitHub checkpoint and release receipt SHA-256 values are
 respectively
-`d6e1918a8f3b888ec3eecfa27d0d876a2541792aa1fddfbe0dd57e82b2970d26`
-and `cd61daa5633890738efed0a57773c4fe385aba87df4a66b59ed7273ee01a12f7`.
+`de0a44ae013f72198b32948a3c5b7f245cdefd2cdeffd902dba615cfb770f752`
+and `e3b620272dff1b40f5d2ae8d3707e5e8a57940771f93c22ccd87c7a153052e17`.
 
-Zenodo record `22105226`, DOI `10.5281/zenodo.22105226`, is the submitted
-14-of-14 version in concept record `22077422` / concept DOI
-`10.5281/zenodo.22077422`. Anonymous readback matched all nine reader-first
-files / 55,308,347 bytes. The final concept audit found one submitted matching
-version and zero unsubmitted matching drafts. The publication, anonymous
-readback, final lineage-audit, and lineage-pointer receipt SHA-256 values are
-respectively
-`e7b96fa525e416cf49d332eafb701b9f91797e298654c768bec09f02891d9b1e`,
-`b2db8839ca366d03bef9387b2266bd57d5cc4288c94835ec6ca8ebb020299db0`,
-`c5b88758ca760e778fd90e7c8196821a454a5dc9ecc7ca3cc43dfbe7af09b826`,
-and `716318c875a2871cc460681c218dda7ca6983d40ffc337ea4fcf0d05e9f6cb42`.
-Because that immutable source package preceded discovery of the six-byte LF
-binding mismatch, publish one corrected source-reproducibility version in the
-same concept after the repaired GitHub gate; do not create a competing concept.
+Corrected Zenodo record `22105616`, DOI `10.5281/zenodo.22105616`, version
+`2026.08.26.14of14-r1`, is submitted in concept record `22077422` / concept
+DOI `10.5281/zenodo.22077422`. Anonymous readback matched all nine
+reader-first files / 55,312,500 bytes. The final concept audit found one
+submitted matching version and zero unsubmitted matching drafts. The
+publication, anonymous readback, final lineage-audit, and lineage-pointer
+SHA-256 values are respectively
+`11a047fc561e1e27f31b3bc800d9de1cf5e78b2e63001ec18563efb7c5ad5cf1`,
+`a386fa3539d0366d8890669ddfeaff1853fab10f90c2f24533c0242887897c41`,
+`e476b7bb1b447478db30cb6954b6c6cda179cc255923d0bffb7a08eab39f3f92`,
+and `80689f675838b69be6636680eb0fef1c3ff8b01fb07386b752c3b4a4620cfe90`.
+This version binds the canonical 8,203-byte LF findings file; no duplicate
+concept or pending matching draft exists.
 
-Commit and push the LF/workflow repair, close the complete GitHub/Pages
-deployment and release with anonymous byte readback, then publish and verify
-the corrected Zenodo package version. After that boundary is closed, produce
-the consolidated PDF/EPUB surfaces and then move to the distinct exact Random
-completeness donor and original C140 companion. No upstream message has been
+The next production boundary is the consolidated, deterministic PDF and EPUB
+for all fourteen translated documents. After those surfaces pass structural,
+formula, asset, accessibility, and full visual checks and are publicly
+preserved, continue to the distinct exact Random completeness donor and the
+original C140 rigor/simulation/mastery companion. No upstream message has been
 sent. The independent completed Random edition remains outside this
 repository's write boundary.
