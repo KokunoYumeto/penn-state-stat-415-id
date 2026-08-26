@@ -1,0 +1,298 @@
+{
+  "asset_boundary": {
+    "asset_occurrences": 10,
+    "binary_bytes_frozen": true,
+    "blocking_unresolved_image_assets": 0,
+    "freeze_receipt": {
+      "bytes": 7044,
+      "path": "authority/LESSON12_ASSET_FREEZE_RECEIPT.json",
+      "sha256": "75e46dc6b87346fd898aad96fd59f0045aaeb43fab2a6942a731a3f6b0805559"
+    },
+    "freeze_script": {
+      "bytes": 16680,
+      "path": "scripts/freeze_lesson12_assets.py",
+      "sha256": "a605b1311dd831232d261246d6cf87b29de66601dd728350c7dbb7e5bf6b1188"
+    },
+    "manifest": {
+      "bytes": 5007,
+      "path": "authority/LESSON12_ASSET_MANIFEST.csv",
+      "sha256": "47dc68c12a8eedc0a10a0010c7c73346dd2b8a8e4ef5f3ff9d769c24a9764c2a"
+    },
+    "references_inventoried": true,
+    "source_refs": [
+      "Lesson12_files/figure-html/fig-lesson9_1-1.png",
+      "Lesson12_files/figure-html/fig-skin-cancer-1.png",
+      "Lesson12_files/figure-html/fig-htwt1-1.png",
+      "Lesson12_files/figure-html/fig-gpavsentrance3-1.png",
+      "Lesson12_files/figure-html/fig-samplegpaentrance4-1.png",
+      "assets/lesson9_11.png",
+      "Lesson12_files/figure-html/fig-scattertemp-1.png",
+      "Lesson12_files/figure-html/fig-scattertemp2-1.png",
+      "Lesson12_files/figure-html/fig-iqnormal-1.png"
+    ],
+    "total_binary_bytes": 233075,
+    "unique_assets": 9
+  },
+  "audits": {
+    "math": {
+      "bytes": 2521,
+      "path": "working/lesson12_math_audit.md",
+      "sha256": "ed14d3e7c210a2c0025ea9eda55f56c2f8da3f23e7b70242d8aa7dd7cf72d14e"
+    },
+    "source_findings": {
+      "bytes": 8209,
+      "path": "working/lesson12_source_findings.md",
+      "sha256": "00f7d25202cc08717a57969e1174e88c4521531a0fc0514da8a4fd5cfff3a0e5"
+    },
+    "terminology": {
+      "bytes": 3727,
+      "path": "working/lesson12_terminology_qa.md",
+      "sha256": "31b7f946de0b7a1756d482d48ee9951b136df228a41ee0e341b5cd6c76174d5c"
+    }
+  },
+  "counts": {
+    "asset_occurrences": 10,
+    "assets": 9,
+    "catalogue_records": 1788,
+    "code_nodes": 0,
+    "corollaries": 0,
+    "definitions": 1,
+    "examples": 4,
+    "external_video_provenance_records": 3,
+    "figure_captions": 15,
+    "figures": 15,
+    "headings": 25,
+    "images": 10,
+    "inline_style_nodes": 0,
+    "links": 12,
+    "math_display": 86,
+    "math_inline": 266,
+    "math_nodes": 352,
+    "native_id_occurrences": 76,
+    "pre_nodes": 0,
+    "proofs": 0,
+    "sections": 24,
+    "solutions": 4,
+    "structural_units": 846,
+    "tables": 6,
+    "theorem_class_nodes": 14,
+    "theorems": 9,
+    "translation_segments": 580,
+    "unique_asset_sources": 9,
+    "unique_native_ids": 67
+  },
+  "dependency_census": {
+    "audio": 0,
+    "downloads": 0,
+    "embeds": 0,
+    "iframes": 3,
+    "images": 10,
+    "media_sources": 0,
+    "objects": 0,
+    "scripts": 0,
+    "videos": 0
+  },
+  "document": {
+    "asset_count": 9,
+    "code_node_count": 0,
+    "code_text_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "component_id": "Lesson12",
+    "dependency_count": 13,
+    "document_id": "O006-PSU-013",
+    "duplicate_native_ids": {
+      "fig-bidsgraph": 4,
+      "fig-bidsgraph-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca": 2,
+      "fig-iqnormal": 2,
+      "fig-lesson9_1": 2,
+      "fig-scattertemp": 2,
+      "fig-scattertemp2": 2,
+      "fig-skin-cancer": 2
+    },
+    "entity_id": "O006-PSU-013",
+    "external_video_count": 3,
+    "formula_count": 352,
+    "formula_sha256": "1e5b97f1531ce06c3a150184c29694dcf08fb80e2e100517c032a10ad76e71a4",
+    "inline_style_count": 0,
+    "inline_style_text_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "locale": "en-US",
+    "native_id_occurrences": 76,
+    "normalized_bytes": 131257,
+    "normalized_path": "source/normalized/en-US/Lesson12.html",
+    "normalized_sha256": "6487d64f7ccd1f041357c6d18ec95036bc50eeffcd5eb9068b556775ded373dc",
+    "ordinal": 13,
+    "pre_node_count": 0,
+    "record_type": "document",
+    "schema": "o006.stat415.source-catalogue.v1",
+    "segment_count": 580,
+    "semantic_text_sha256": "13b074b39f5969f4c792c49af0abb757610014bc7aeeff691b6c8101f7452ce6",
+    "source_bytes": 144220,
+    "source_path": "authority/upstream/stat415/Lesson12.html",
+    "source_sha256": "89569622b8fea9bcfc17d51717002ab9840b44e6d80a34ee476d94acd45b515d",
+    "source_url": "https://online.stat.psu.edu/stat415/Lesson12.html",
+    "topology_sha256": "2adf6ef893702fdf0eb7094f26bffb728f2cab5a271cb9e21de00607cfc1ddca",
+    "unique_native_ids": 67,
+    "unit_count": 846
+  },
+  "external_video_boundary": {
+    "binary_bytes_downloaded": false,
+    "binary_bytes_redistributed": false,
+    "freeze_receipt_witness": {
+      "binary_bytes_downloaded": false,
+      "binary_bytes_redistributed": false,
+      "count": 3,
+      "disposition": "provenance links only; derivative requires offline textual/static equivalents",
+      "provenance_bytes": 959,
+      "provenance_path": "authority/LESSON12_VIDEO_PROVENANCE.csv",
+      "provenance_sha256": "f240f2e9c8aa502eebf712d037c13a9b28331e7045a4582a5bbc46e75d0c3fd2",
+      "source_urls": [
+        "https://www.youtube.com/embed/oAaPR1qVedw",
+        "https://www.youtube.com/embed/pWMp1vhStDE",
+        "https://www.youtube.com/embed/mdzP-v6vl74"
+      ]
+    },
+    "offline_text_or_static_equivalent_present": false,
+    "provenance": {
+      "bytes": 959,
+      "path": "authority/LESSON12_VIDEO_PROVENANCE.csv",
+      "sha256": "f240f2e9c8aa502eebf712d037c13a9b28331e7045a4582a5bbc46e75d0c3fd2"
+    },
+    "repair_required_in_derivative": true,
+    "source_urls": [
+      "https://www.youtube.com/embed/oAaPR1qVedw",
+      "https://www.youtube.com/embed/pWMp1vhStDE",
+      "https://www.youtube.com/embed/mdzP-v6vl74"
+    ]
+  },
+  "helper_script": {
+    "bytes": 35668,
+    "path": "scripts/normalize_lesson03.py",
+    "sha256": "0eeb260de05ebae694700cc2212966ee4ba19351f067bef49c095ec6fccd70e6"
+  },
+  "outputs": {
+    "backend/lesson12_source_catalogue.jsonl": {
+      "bytes": 874114,
+      "path": "backend/lesson12_source_catalogue.jsonl",
+      "records": 1788,
+      "sha256": "b24a922fb4123bf9b86c816b977fb99474d9e0ae5bcb16203e498ce60f1a273f"
+    },
+    "source/normalized/en-US/Lesson12.html": {
+      "bytes": 131257,
+      "path": "source/normalized/en-US/Lesson12.html",
+      "sha256": "6487d64f7ccd1f041357c6d18ec95036bc50eeffcd5eb9068b556775ded373dc"
+    },
+    "working/lesson12_asset_inventory.csv": {
+      "bytes": 6956,
+      "path": "working/lesson12_asset_inventory.csv",
+      "rows": 9,
+      "sha256": "371cd332778ae4af0952ef591cb9e07647d86cf20d872d3504403af4765d74aa"
+    },
+    "working/lesson12_segments.csv": {
+      "bytes": 111957,
+      "path": "working/lesson12_segments.csv",
+      "rows": 580,
+      "sha256": "1483c0c63173980995a18461d94f0eb019cf0af4a7146e623d621794d67b6d23"
+    },
+    "working/lesson12_video_inventory.csv": {
+      "bytes": 1357,
+      "path": "working/lesson12_video_inventory.csv",
+      "rows": 3,
+      "sha256": "00adb7f4b5fb5593bfd9c8784aeb780f500e396366e34b916ce88f50317bbe37"
+    }
+  },
+  "parser": {
+    "beautifulsoup_version": "4.14.3",
+    "name": "beautifulsoup4/html.parser",
+    "source_decoding": "UTF-8 strict"
+  },
+  "preservation": {
+    "authority_mutated": false,
+    "code_text_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "formula_nodes_byte_preserved": true,
+    "formula_sha256": "1e5b97f1531ce06c3a150184c29694dcf08fb80e2e100517c032a10ad76e71a4",
+    "iframe_sequence_preserved": true,
+    "image_sequence_preserved": true,
+    "inline_style_text_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "link_sequence_preserved": true,
+    "main_selector": "main#quarto-document-content",
+    "native_anchor_sequence_preserved": true,
+    "semantic_main_text_preserved": true,
+    "semantic_text_sha256": "13b074b39f5969f4c792c49af0abb757610014bc7aeeff691b6c8101f7452ce6",
+    "topology_sha256": "2adf6ef893702fdf0eb7094f26bffb728f2cab5a271cb9e21de00607cfc1ddca"
+  },
+  "role_counts": {
+    "definition": 1,
+    "example": 4,
+    "figure": 15,
+    "figure-caption": 15,
+    "heading": 22,
+    "image": 10,
+    "link": 12,
+    "section": 20,
+    "solution": 8,
+    "structure": 730,
+    "theorem": 9
+  },
+  "schema": "o006.stat415.lesson12-normalization.v1",
+  "script": {
+    "bytes": 29685,
+    "path": "scripts/normalize_lesson12.py",
+    "sha256": "8116d39f80c9735d3ea1bb6b462320089416a95ff9beeeb354402d39ec21c4c5"
+  },
+  "source_defect_count": 24,
+  "source_defect_ids": [
+    "L12-D001",
+    "L12-D002",
+    "L12-D003",
+    "L12-D004",
+    "L12-D005",
+    "L12-D006",
+    "L12-D007",
+    "L12-D008",
+    "L12-D009",
+    "L12-D010",
+    "L12-D011",
+    "L12-D012",
+    "L12-D013",
+    "L12-D014",
+    "L12-D015",
+    "L12-D016",
+    "L12-D017",
+    "L12-D018",
+    "L12-D019",
+    "L12-D020",
+    "L12-D021",
+    "L12-D022",
+    "L12-D023",
+    "L12-D024"
+  ],
+  "source_rule": "semantic main only; authority immutable; formulas, tables, anchors, links, images, and iframe provenance protected; stable IDs additive",
+  "stable_id_ranges": {
+    "assets": [
+      "O006-PSU-013-A0001",
+      "O006-PSU-013-A0009"
+    ],
+    "external_videos": [
+      "O006-PSU-013-V0001",
+      "O006-PSU-013-V0003"
+    ],
+    "math": [
+      "O006-PSU-013-M0001",
+      "O006-PSU-013-M0352"
+    ],
+    "segments": [
+      "O006-PSU-013-S0001",
+      "O006-PSU-013-S0580"
+    ],
+    "units": [
+      "O006-PSU-013-U0001",
+      "O006-PSU-013-U0846"
+    ]
+  },
+  "status": "normalized-source-and-media-ready; translation-not-started",
+  "translation": {
+    "glossary_candidates_appended": false,
+    "pending_source_segments": 580,
+    "status": "not-started",
+    "target_text_fields_nonempty": 0
+  }
+}

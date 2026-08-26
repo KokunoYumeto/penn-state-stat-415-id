@@ -1,0 +1,1130 @@
+<!doctype html>
+<html lang="en-US">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>12  Simple Linear Regression – STAT 415 | Introduction to Mathematical Statistics</title>
+<meta name="source-url" content="https://online.stat.psu.edu/stat415/Lesson12.html">
+<meta name="translation-provenance" content="OpenAI Codex gpt-5.6-sol, Ultra">
+</head>
+<body>
+<main class="content" data-component-id="Lesson12" data-document-id="O006-PSU-013" data-source-url="https://online.stat.psu.edu/stat415/Lesson12.html" id="quarto-document-content">
+<header class="quarto-title-block default" data-o006-id="O006-PSU-013-U0001" id="title-block-header"><nav aria-label="breadcrumb" class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" data-o006-id="O006-PSU-013-U0002"><ol class="breadcrumb" data-o006-id="O006-PSU-013-U0003"><li class="breadcrumb-item" data-o006-id="O006-PSU-013-U0004"><a data-o006-id="O006-PSU-013-U0005" href="./Lesson00.html">Lessons</a></li><li class="breadcrumb-item" data-o006-id="O006-PSU-013-U0006"><a data-o006-id="O006-PSU-013-U0007" href="./Lesson12.html"><span class="chapter-number">12</span>  <span class="chapter-title">Simple Linear Regression</span></a></li></ol></nav>
+<div class="quarto-title" data-o006-id="O006-PSU-013-U0008">
+<h1 class="title" data-o006-id="O006-PSU-013-U0009"><span class="chapter-number">12</span>  <span class="chapter-title">Simple Linear Regression</span></h1>
+<div class="quarto-categories" data-o006-id="O006-PSU-013-U0010">
+<div class="quarto-category" data-o006-id="O006-PSU-013-U0011">Regression</div>
+</div>
+</div>
+<div class="quarto-title-meta" data-o006-id="O006-PSU-013-U0012">
+</div>
+</header>
+<section class="level2 unnumbered unlisted" data-o006-id="O006-PSU-013-U0013" id="overview">
+<h2 class="unnumbered unlisted anchored" data-anchor-id="overview" data-o006-id="O006-PSU-013-U0014">Overview</h2>
+<p data-o006-id="O006-PSU-013-U0015">Simple linear regression is a way of evaluating the relationship between two continuous variables. One variable is regarded as the predictor variable, explanatory variable, or independent variable ( ). The other variable is regarded as the response variable, outcome variable, or dependent variable.</p>
+<p data-o006-id="O006-PSU-013-U0016">For example, we might we interested in investigating the (linear?) relationship between:</p>
+<ul data-o006-id="O006-PSU-013-U0017">
+<li data-o006-id="O006-PSU-013-U0018">heights and weights</li>
+<li data-o006-id="O006-PSU-013-U0019">high school grade point average and college grade point average</li>
+<li data-o006-id="O006-PSU-013-U0020">speed and gas mileage</li>
+<li data-o006-id="O006-PSU-013-U0021">outdoor temperature and evaporation rate</li>
+<li data-o006-id="O006-PSU-013-U0022">the Dow Jones industrial average and the consumer confidence index</li>
+</ul>
+<section class="level3 unnumbered unlisted objectiveblock" data-o006-id="O006-PSU-013-U0023" id="objectives">
+<h3 class="unnumbered unlisted anchored" data-anchor-id="objectives" data-o006-id="O006-PSU-013-U0024"><i class="bi bi-check2-circle"></i>Objectives</h3>
+<p data-o006-id="O006-PSU-013-U0025">Upon completion of this lesson, you should be able to:</p>
+<ol data-o006-id="O006-PSU-013-U0026" type="1">
+<li data-o006-id="O006-PSU-013-U0027">Formulate and interpret linear regression models for predicting outcomes based on one predictor variable,</li>
+<li data-o006-id="O006-PSU-013-U0028">Find the distribution of the least square parameters,</li>
+<li data-o006-id="O006-PSU-013-U0029">Conduct a hypothesis test or construct a confidence interval for the least square parameters, and</li>
+<li data-o006-id="O006-PSU-013-U0030">Construct a confidence interval or a conduct a hypothesis test for the correlation parameter <span class="math inline" data-o006-math-id="O006-PSU-013-M0001">\(\rho\)</span>.</li>
+</ol>
+</section>
+</section>
+<section class="level2" data-number="12.1" data-o006-id="O006-PSU-013-U0031" id="types-of-relationships">
+<h2 class="anchored" data-anchor-id="types-of-relationships" data-number="12.1" data-o006-id="O006-PSU-013-U0032"><span class="header-section-number">12.1</span> Types of Relationships</h2>
+<p data-o006-id="O006-PSU-013-U0033">Before we dig into the methods of simple linear regression, we need to distinguish between two different type of relationships, namely:</p>
+<ul data-o006-id="O006-PSU-013-U0034">
+<li data-o006-id="O006-PSU-013-U0035">deterministic relationships</li>
+<li data-o006-id="O006-PSU-013-U0036">statistical relationships</li>
+</ul>
+<p data-o006-id="O006-PSU-013-U0037">As we’ll soon see, simple linear regression concerns statistical relationships.</p>
+<section class="level3" data-number="12.1.1" data-o006-id="O006-PSU-013-U0038" id="deterministic-or-functional-relationships">
+<h3 class="anchored" data-anchor-id="deterministic-or-functional-relationships" data-number="12.1.1" data-o006-id="O006-PSU-013-U0039"><span class="header-section-number">12.1.1</span> Deterministic (or Functional Relationships)</h3>
+<p data-o006-id="O006-PSU-013-U0040">A <strong>deterministic</strong> (or <strong>functional</strong>) <strong>relationship</strong> is an exact relationship between the predictor <span class="math inline" data-o006-math-id="O006-PSU-013-M0002">\(x\)</span> and the response <span class="math inline" data-o006-math-id="O006-PSU-013-M0003">\(y\)</span>. Take, for instance, the conversion relationship between temperature in degrees Celsius (<span class="math inline" data-o006-math-id="O006-PSU-013-M0004">\(C\)</span>) and temperature in degrees Fahrenheit (<span class="math inline" data-o006-math-id="O006-PSU-013-M0005">\(F\)</span>). We know the relationship is:</p>
+<p data-o006-id="O006-PSU-013-U0041"><span class="math display" data-o006-math-id="O006-PSU-013-M0006">\[F=\dfrac{9}{5}C+32\]</span></p>
+<p data-o006-id="O006-PSU-013-U0042">Therefore, if we know that it is 10 degrees Celsius, we also know that it is 50 degrees Fahrenheit:</p>
+<p data-o006-id="O006-PSU-013-U0043"><span class="math display" data-o006-math-id="O006-PSU-013-M0007">\[F=\dfrac{9}{5}(10)+32=50\]</span></p>
+<p data-o006-id="O006-PSU-013-U0044">This is what the exact (linear) relationship between degrees Celsius and degrees Fahrenheit looks like graphically:</p>
+<div class="cell" data-o006-id="O006-PSU-013-U0045">
+<div class="cell-output-display" data-o006-id="O006-PSU-013-U0046">
+<div alt="Scatter plot of Fahrenheit vs Celsius with a connecting line" class="quarto-float quarto-figure quarto-figure-center anchored" data-o006-id="O006-PSU-013-U0047" id="fig-lesson9_1" width="70%">
+<figure class="quarto-float quarto-float-fig figure" data-o006-id="O006-PSU-013-U0048">
+<div aria-describedby="fig-lesson9_1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca" data-o006-id="O006-PSU-013-U0049">
+<a class="lightbox" data-gallery="quarto-lightbox-gallery-1" data-o006-id="O006-PSU-013-U0050" href="Lesson12_files/figure-html/fig-lesson9_1-1.png" title="Fig 12.1: "><img alt="Scatter plot of Fahrenheit vs Celsius with a connecting line" class="img-fluid figure-img" data-o006-asset-id="O006-PSU-013-A0001" data-o006-id="O006-PSU-013-U0051" id="fig-lesson9_1" src="Lesson12_files/figure-html/fig-lesson9_1-1.png" style="width:70.0%"/></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" data-o006-id="O006-PSU-013-U0052" id="fig-lesson9_1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Fig 12.1
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p data-o006-id="O006-PSU-013-U0053">Other examples of deterministic relationships include…</p>
+<ul data-o006-id="O006-PSU-013-U0054">
+<li data-o006-id="O006-PSU-013-U0055"><p data-o006-id="O006-PSU-013-U0056">the relationship between the diameter (<span class="math inline" data-o006-math-id="O006-PSU-013-M0008">\(d\)</span>) and circumference of a circle (<span class="math inline" data-o006-math-id="O006-PSU-013-M0009">\(C\)</span>): <span class="math inline" data-o006-math-id="O006-PSU-013-M0010">\(C=\pi d\)</span></p></li>
+<li data-o006-id="O006-PSU-013-U0057"><p data-o006-id="O006-PSU-013-U0058">the relationship between the applied weight (<span class="math inline" data-o006-math-id="O006-PSU-013-M0011">\(X\)</span>) and the amount of stretch in a spring (<span class="math inline" data-o006-math-id="O006-PSU-013-M0012">\(Y\)</span>) (known as Hooke’s Law): <span class="math inline" data-o006-math-id="O006-PSU-013-M0013">\(Y=\alpha+\beta X\)</span></p></li>
+<li data-o006-id="O006-PSU-013-U0059"><p data-o006-id="O006-PSU-013-U0060">the relationship between the voltage applied (<span class="math inline" data-o006-math-id="O006-PSU-013-M0014">\(V\)</span>), the resistance (<span class="math inline" data-o006-math-id="O006-PSU-013-M0015">\(r\)</span>) and the current (<span class="math inline" data-o006-math-id="O006-PSU-013-M0016">\(I\)</span>) (known as Ohm’s Law): <span class="math inline" data-o006-math-id="O006-PSU-013-M0017">\(I=\dfrac{V}{r}\)</span></p></li>
+<li data-o006-id="O006-PSU-013-U0061"><p data-o006-id="O006-PSU-013-U0062">and, for a constant temperature, the relationship between pressure (<span class="math inline" data-o006-math-id="O006-PSU-013-M0018">\(P\)</span>) and volume of gas (<span class="math inline" data-o006-math-id="O006-PSU-013-M0019">\(V\)</span>) (known as Boyle’s Law): <span class="math inline" data-o006-math-id="O006-PSU-013-M0020">\(P=\dfrac{\alpha}{V}\)</span> where <span class="math inline" data-o006-math-id="O006-PSU-013-M0021">\(\alpha\)</span> is a known constant for each gas.</p></li>
+</ul>
+</section>
+<section class="level3" data-number="12.1.2" data-o006-id="O006-PSU-013-U0063" id="statistical-relationships">
+<h3 class="anchored" data-anchor-id="statistical-relationships" data-number="12.1.2" data-o006-id="O006-PSU-013-U0064"><span class="header-section-number">12.1.2</span> Statistical Relationships</h3>
+<p data-o006-id="O006-PSU-013-U0065">A <strong>statistical relationship</strong>, on the other hand, is not an exact relationship. It is instead a relationship in which “<strong>trend</strong>” exists between the predictor <span class="math inline" data-o006-math-id="O006-PSU-013-M0022">\(x\)</span> and the response <span class="math inline" data-o006-math-id="O006-PSU-013-M0023">\(y\)</span>, but there is also some “<strong>scatter</strong>.” Here’s a graph illustrating how a statistical relationship might look:</p>
+<div class="cell" data-o006-id="O006-PSU-013-U0066">
+<div class="cell-output-display" data-o006-id="O006-PSU-013-U0067">
+<div alt="Scatter plot of skin cancer mortality versus state latitude with regression line" class="quarto-float quarto-figure quarto-figure-center anchored" data-o006-id="O006-PSU-013-U0068" id="fig-skin-cancer" width="70%">
+<figure class="quarto-float quarto-float-fig figure" data-o006-id="O006-PSU-013-U0069">
+<div aria-describedby="fig-skin-cancer-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca" data-o006-id="O006-PSU-013-U0070">
+<a class="lightbox" data-gallery="quarto-lightbox-gallery-2" data-o006-id="O006-PSU-013-U0071" href="Lesson12_files/figure-html/fig-skin-cancer-1.png" title="Fig 12.2: "><img alt="Scatter plot of skin cancer mortality versus state latitude with regression line" class="img-fluid figure-img" data-o006-asset-id="O006-PSU-013-A0002" data-o006-id="O006-PSU-013-U0072" id="fig-skin-cancer" src="Lesson12_files/figure-html/fig-skin-cancer-1.png" style="width:70.0%"/></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" data-o006-id="O006-PSU-013-U0073" id="fig-skin-cancer-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Fig 12.2
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p data-o006-id="O006-PSU-013-U0074">In this case, researchers investigated the relationship between the latitude (in degrees) at the center of each of the 50 U.S. states and the mortality (in deaths per 10 million) due to skin cancer in each of the 50 U.S. states. Perhaps we shouldn’t be surprised to see a downward trend, but not an exact relationship, between latitude and skin cancer mortality. That is, as the latitude increases for the northern states, in which sun exposure is less prevalent and less intense, mortality due to skin cancer decreases, but not perfectly so.</p>
+<p data-o006-id="O006-PSU-013-U0075">Other examples of statistical relationships include:</p>
+<ul data-o006-id="O006-PSU-013-U0076">
+<li data-o006-id="O006-PSU-013-U0077">the positive relationship between height and weight</li>
+<li data-o006-id="O006-PSU-013-U0078">the positive relationship between alcohol consumed and blood alcohol content</li>
+<li data-o006-id="O006-PSU-013-U0079">the negative relationship between vital lung capacity and pack-years of smoking</li>
+<li data-o006-id="O006-PSU-013-U0080">the negative relationship between driving speed and gas mileage</li>
+</ul>
+<p data-o006-id="O006-PSU-013-U0081">It is these type of less-than-perfect statistical relationships that we are interested in when we investigate the methods of simple linear regression.</p>
+</section>
+</section>
+<section class="level2" data-number="12.2" data-o006-id="O006-PSU-013-U0082" id="least-squares-the-idea">
+<h2 class="anchored" data-anchor-id="least-squares-the-idea" data-number="12.2" data-o006-id="O006-PSU-013-U0083"><span class="header-section-number">12.2</span> Least Squares: The Idea</h2>
+<p data-o006-id="O006-PSU-013-U0084">Before delving into the theory of least squares, let’s motivate the idea behind the method of least squares by way of example.</p>
+<div class="theorem example" data-o006-id="O006-PSU-013-U0085" id="exm-leastsquares">
+<p data-o006-id="O006-PSU-013-U0086"><span class="theorem-title"><strong>Example 12.1</strong></span> A student was interested in quantifying the (linear) relationship between height (in inches) and weight (in pounds), so she measured the height and weight of ten randomly selected students in her class. After taking the measurements, she created the adjacent scatterplot of the obtained heights and weights. Wanting to summarize the relationship between height and weight, she eyeballed what she thought were two good lines (solid and dashed), but couldn’t decide between:</p>
+<ul data-o006-id="O006-PSU-013-U0087">
+<li data-o006-id="O006-PSU-013-U0088"><p data-o006-id="O006-PSU-013-U0089"><span class="math inline" data-o006-math-id="O006-PSU-013-M0024">\(\text{weight} = −266.5 + 6.1\times \text{height}\)</span></p></li>
+<li data-o006-id="O006-PSU-013-U0090"><p data-o006-id="O006-PSU-013-U0091"><span class="math inline" data-o006-math-id="O006-PSU-013-M0025">\(\text{weight} = −331.2 + 7.1\times \text{height}\)</span></p></li>
+</ul>
+<p data-o006-id="O006-PSU-013-U0092"><span class="bi bi-question-circle-fill fs-4 text-success"></span> <strong>Which is the “best fitting line”?</strong></p>
+<section class="level4 card card-body bg-light ms-3 mb-3 pt-0" data-o006-id="O006-PSU-013-U0093" id="solution">
+<h4 class="anchored" data-anchor-id="solution" data-o006-id="O006-PSU-013-U0094">Solution</h4>
+<p data-o006-id="O006-PSU-013-U0095">In order to facilitate finding the best fitting line, let’s define some notation. Recalling that an experimental unit is the thing being measured (in this case, a student):</p>
+<ul data-o006-id="O006-PSU-013-U0096">
+<li data-o006-id="O006-PSU-013-U0097"><p data-o006-id="O006-PSU-013-U0098">let <span class="math inline" data-o006-math-id="O006-PSU-013-M0026">\(y_i\)</span> denote the <strong>observed response</strong> for the <span class="math inline" data-o006-math-id="O006-PSU-013-M0027">\(i^{th}\)</span> experimental unit</p></li>
+<li data-o006-id="O006-PSU-013-U0099"><p data-o006-id="O006-PSU-013-U0100">let <span class="math inline" data-o006-math-id="O006-PSU-013-M0028">\(x_i\)</span> denote the <strong>predictor value</strong> for the <span class="math inline" data-o006-math-id="O006-PSU-013-M0029">\(i^{th}\)</span> experimental unit</p></li>
+</ul>
+<p data-o006-id="O006-PSU-013-U0101">-let <span class="math inline" data-o006-math-id="O006-PSU-013-M0030">\(\hat{y}_i\)</span> denote the <strong>predicted response</strong> (or <strong>fitted value</strong>) for the <span class="math inline" data-o006-math-id="O006-PSU-013-M0031">\(i^{th}\)</span> experimental unit</p>
+<p data-o006-id="O006-PSU-013-U0102">Therefore, for the data point circled in red:</p>
+<div class="cell fig-cap-location-bottom" data-layout-align="center" data-o006-id="O006-PSU-013-U0103">
+<div class="cell-output-display" data-o006-id="O006-PSU-013-U0104">
+<div alt="Scatter Plot of Height and Weight from the student height and weight data set." class="quarto-float quarto-figure quarto-figure-center anchored" data-cap-location="bottom" data-fig-align="center" data-o006-id="O006-PSU-013-U0105" id="fig-htwt1">
+<figure class="quarto-float quarto-float-fig figure" data-o006-id="O006-PSU-013-U0106">
+<div aria-describedby="fig-htwt1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca" data-o006-id="O006-PSU-013-U0107">
+<a class="lightbox" data-gallery="quarto-lightbox-gallery-3" data-o006-id="O006-PSU-013-U0108" href="Lesson12_files/figure-html/fig-htwt1-1.png" title="Fig 12.3: Scatter Plot of Height and Weight"><img alt="Scatter Plot of Height and Weight from the student height and weight data set." class="img-fluid quarto-figure quarto-figure-center figure-img" data-o006-asset-id="O006-PSU-013-A0003" data-o006-id="O006-PSU-013-U0109" src="Lesson12_files/figure-html/fig-htwt1-1.png" style="width:70.0%"/></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" data-o006-id="O006-PSU-013-U0110" id="fig-htwt1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Fig 12.3: Scatter Plot of Height and Weight
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p data-o006-id="O006-PSU-013-U0111">we have:</p>
+<p data-o006-id="O006-PSU-013-U0112"><span class="math display" data-o006-math-id="O006-PSU-013-M0032">\[x_i=75 \text{ and }y_i=208\]</span></p>
+<p data-o006-id="O006-PSU-013-U0113">And, using the unrounded version of the proposed line, the predicted weight of a randomly selected 75-inch tall student is:</p>
+<p data-o006-id="O006-PSU-013-U0114"><span class="math display" data-o006-math-id="O006-PSU-013-M0033">\[\hat{y}_i=-266.534+6.13758(75)=193.8\text{ pounds}\]</span></p>
+<p data-o006-id="O006-PSU-013-U0115">Now, of course, the estimated line does not predict the weight of a 75-inch tall student perfectly. In this case, the prediction is 193.8 pounds, when the reality is 208 pounds. We have made an error in our prediction. That is, in using <span class="math inline" data-o006-math-id="O006-PSU-013-M0034">\(\hat{y_i}\)</span> to predict the actual response <span class="math inline" data-o006-math-id="O006-PSU-013-M0035">\(y_i\)</span> we make a <strong>prediction error</strong> (or a <strong>residual error</strong>) of size: <span class="math display" data-o006-math-id="O006-PSU-013-M0036">\[
+e_i=y_i-\hat{y}_i
+\]</span> Now, a line that fits the data well will be one for which the <span class="math inline" data-o006-math-id="O006-PSU-013-M0037">\(n\)</span> prediction errors (one for each of the <span class="math inline" data-o006-math-id="O006-PSU-013-M0038">\(n\)</span> data points — <span class="math inline" data-o006-math-id="O006-PSU-013-M0039">\(n=10\)</span>, in this case) are as small as possible in some overall sense. This idea is called the “least squares criterion.” In short, the <strong>least squares criterion</strong> tells us that in order to find the equation of the best fitting line:</p>
+<p data-o006-id="O006-PSU-013-U0116"><span class="math display" data-o006-math-id="O006-PSU-013-M0040">\[\hat{y}_i=a_1+bx_i\]</span></p>
+<p data-o006-id="O006-PSU-013-U0117">we need to choose the values <span class="math inline" data-o006-math-id="O006-PSU-013-M0041">\(a_1\)</span> and <span class="math inline" data-o006-math-id="O006-PSU-013-M0042">\(b\)</span> that minimize the sum of the squared prediction errors. That is, find <span class="math inline" data-o006-math-id="O006-PSU-013-M0043">\(a_1\)</span> and <span class="math inline" data-o006-math-id="O006-PSU-013-M0044">\(b\)</span> that minimize:</p>
+<p data-o006-id="O006-PSU-013-U0118"><span class="math display" data-o006-math-id="O006-PSU-013-M0045">\[Q=\sum\limits_{i=1}^n (y_i-\hat{y}_i)^2=\sum\limits_{i=1}^n (y_i-(a_1+bx_i))^2\]</span></p>
+<p data-o006-id="O006-PSU-013-U0119">So, using the least squares criterion to determine which of the two lines:</p>
+<ul data-o006-id="O006-PSU-013-U0120">
+<li data-o006-id="O006-PSU-013-U0121"><p data-o006-id="O006-PSU-013-U0122"><span class="math inline" data-o006-math-id="O006-PSU-013-M0046">\(\text{weight} = −266.5 + 6.1 \times\text{height}\)</span></p></li>
+<li data-o006-id="O006-PSU-013-U0123"><p data-o006-id="O006-PSU-013-U0124"><span class="math inline" data-o006-math-id="O006-PSU-013-M0047">\(\text{weight} = −331.2 + 7.1 \times \text{height}\)</span></p></li>
+</ul>
+<p data-o006-id="O006-PSU-013-U0125">is the best fitting line, we just need to determine <span class="math inline" data-o006-math-id="O006-PSU-013-M0048">\(Q\)</span>, the sum of the squared prediction errors for each of the two lines, and choose the line that has the smallest value of <span class="math inline" data-o006-math-id="O006-PSU-013-M0049">\(Q\)</span>. For the dashed line, that is, for the line:</p>
+<p data-o006-id="O006-PSU-013-U0126"><span class="math display" data-o006-math-id="O006-PSU-013-M0050">\[\text{weight} = −331.2 + 7.1\times\text{height}\]</span></p>
+<p data-o006-id="O006-PSU-013-U0127">here’s what the work would look like:</p>
+<div class="w-75 mx-auto" data-o006-id="O006-PSU-013-U0128">
+<div class="cell quarto-float quarto-figure quarto-figure-center anchored" data-o006-id="O006-PSU-013-U0129" id="tbl-studenthtwt2">
+<figure class="quarto-float quarto-float-tbl figure" data-o006-id="O006-PSU-013-U0130">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl quarto-uncaptioned" data-o006-id="O006-PSU-013-U0131" id="tbl-studenthtwt2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table 12.1
+</figcaption>
+<div aria-describedby="tbl-studenthtwt2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca" data-o006-id="O006-PSU-013-U0132">
+<table class="table table-striped table-hover caption-top table-sm small" data-o006-id="O006-PSU-013-U0133">
+<thead data-o006-id="O006-PSU-013-U0134">
+<tr class="header" data-o006-id="O006-PSU-013-U0135">
+<th data-o006-id="O006-PSU-013-U0136" data-quarto-table-cell-role="th" style="text-align: right;">\(i\)</th>
+<th data-o006-id="O006-PSU-013-U0137" data-quarto-table-cell-role="th" style="text-align: right;">\(x_i\)</th>
+<th data-o006-id="O006-PSU-013-U0138" data-quarto-table-cell-role="th" style="text-align: right;">\(y_i\)</th>
+<th data-o006-id="O006-PSU-013-U0139" data-quarto-table-cell-role="th" style="text-align: right;">\(\hat{y}_i\)</th>
+<th data-o006-id="O006-PSU-013-U0140" data-quarto-table-cell-role="th" style="text-align: right;">\((y_i - \hat{y}_i)\)</th>
+<th data-o006-id="O006-PSU-013-U0141" data-quarto-table-cell-role="th" style="text-align: right;">\((y_i - \hat{y}_i)^2 \)</th>
+</tr>
+</thead>
+<tbody data-o006-id="O006-PSU-013-U0142">
+<tr class="odd" data-o006-id="O006-PSU-013-U0143">
+<td data-o006-id="O006-PSU-013-U0144" style="text-align: right;">1</td>
+<td data-o006-id="O006-PSU-013-U0145" style="text-align: right;">63</td>
+<td data-o006-id="O006-PSU-013-U0146" style="text-align: right;">127</td>
+<td data-o006-id="O006-PSU-013-U0147" style="text-align: right;">116.1</td>
+<td data-o006-id="O006-PSU-013-U0148" style="text-align: right;">10.9</td>
+<td data-o006-id="O006-PSU-013-U0149" style="text-align: right;">118.8</td>
+</tr>
+<tr class="even" data-o006-id="O006-PSU-013-U0150">
+<td data-o006-id="O006-PSU-013-U0151" style="text-align: right;">2</td>
+<td data-o006-id="O006-PSU-013-U0152" style="text-align: right;">64</td>
+<td data-o006-id="O006-PSU-013-U0153" style="text-align: right;">121</td>
+<td data-o006-id="O006-PSU-013-U0154" style="text-align: right;">123.2</td>
+<td data-o006-id="O006-PSU-013-U0155" style="text-align: right;">-2.2</td>
+<td data-o006-id="O006-PSU-013-U0156" style="text-align: right;">4.8</td>
+</tr>
+<tr class="odd" data-o006-id="O006-PSU-013-U0157">
+<td data-o006-id="O006-PSU-013-U0158" style="text-align: right;">3</td>
+<td data-o006-id="O006-PSU-013-U0159" style="text-align: right;">66</td>
+<td data-o006-id="O006-PSU-013-U0160" style="text-align: right;">142</td>
+<td data-o006-id="O006-PSU-013-U0161" style="text-align: right;">137.4</td>
+<td data-o006-id="O006-PSU-013-U0162" style="text-align: right;">4.6</td>
+<td data-o006-id="O006-PSU-013-U0163" style="text-align: right;">21.2</td>
+</tr>
+<tr class="even" data-o006-id="O006-PSU-013-U0164">
+<td data-o006-id="O006-PSU-013-U0165" style="text-align: right;">4</td>
+<td data-o006-id="O006-PSU-013-U0166" style="text-align: right;">69</td>
+<td data-o006-id="O006-PSU-013-U0167" style="text-align: right;">157</td>
+<td data-o006-id="O006-PSU-013-U0168" style="text-align: right;">158.7</td>
+<td data-o006-id="O006-PSU-013-U0169" style="text-align: right;">-1.7</td>
+<td data-o006-id="O006-PSU-013-U0170" style="text-align: right;">2.9</td>
+</tr>
+<tr class="odd" data-o006-id="O006-PSU-013-U0171">
+<td data-o006-id="O006-PSU-013-U0172" style="text-align: right;">5</td>
+<td data-o006-id="O006-PSU-013-U0173" style="text-align: right;">69</td>
+<td data-o006-id="O006-PSU-013-U0174" style="text-align: right;">162</td>
+<td data-o006-id="O006-PSU-013-U0175" style="text-align: right;">158.7</td>
+<td data-o006-id="O006-PSU-013-U0176" style="text-align: right;">3.3</td>
+<td data-o006-id="O006-PSU-013-U0177" style="text-align: right;">10.9</td>
+</tr>
+<tr class="even" data-o006-id="O006-PSU-013-U0178">
+<td data-o006-id="O006-PSU-013-U0179" style="text-align: right;">6</td>
+<td data-o006-id="O006-PSU-013-U0180" style="text-align: right;">71</td>
+<td data-o006-id="O006-PSU-013-U0181" style="text-align: right;">156</td>
+<td data-o006-id="O006-PSU-013-U0182" style="text-align: right;">172.9</td>
+<td data-o006-id="O006-PSU-013-U0183" style="text-align: right;">-16.9</td>
+<td data-o006-id="O006-PSU-013-U0184" style="text-align: right;">285.6</td>
+</tr>
+<tr class="odd" data-o006-id="O006-PSU-013-U0185">
+<td data-o006-id="O006-PSU-013-U0186" style="text-align: right;">7</td>
+<td data-o006-id="O006-PSU-013-U0187" style="text-align: right;">71</td>
+<td data-o006-id="O006-PSU-013-U0188" style="text-align: right;">169</td>
+<td data-o006-id="O006-PSU-013-U0189" style="text-align: right;">172.9</td>
+<td data-o006-id="O006-PSU-013-U0190" style="text-align: right;">-3.9</td>
+<td data-o006-id="O006-PSU-013-U0191" style="text-align: right;">15.2</td>
+</tr>
+<tr class="even" data-o006-id="O006-PSU-013-U0192">
+<td data-o006-id="O006-PSU-013-U0193" style="text-align: right;">8</td>
+<td data-o006-id="O006-PSU-013-U0194" style="text-align: right;">72</td>
+<td data-o006-id="O006-PSU-013-U0195" style="text-align: right;">165</td>
+<td data-o006-id="O006-PSU-013-U0196" style="text-align: right;">180</td>
+<td data-o006-id="O006-PSU-013-U0197" style="text-align: right;">-15</td>
+<td data-o006-id="O006-PSU-013-U0198" style="text-align: right;">225.0</td>
+</tr>
+<tr class="odd" data-o006-id="O006-PSU-013-U0199">
+<td data-o006-id="O006-PSU-013-U0200" style="text-align: right;">9</td>
+<td data-o006-id="O006-PSU-013-U0201" style="text-align: right;">73</td>
+<td data-o006-id="O006-PSU-013-U0202" style="text-align: right;">181</td>
+<td data-o006-id="O006-PSU-013-U0203" style="text-align: right;">187.1</td>
+<td data-o006-id="O006-PSU-013-U0204" style="text-align: right;">-6.1</td>
+<td data-o006-id="O006-PSU-013-U0205" style="text-align: right;">37.2</td>
+</tr>
+<tr class="even" data-o006-id="O006-PSU-013-U0206">
+<td data-o006-id="O006-PSU-013-U0207" style="text-align: right;">10</td>
+<td data-o006-id="O006-PSU-013-U0208" style="text-align: right;">75</td>
+<td data-o006-id="O006-PSU-013-U0209" style="text-align: right;">208</td>
+<td data-o006-id="O006-PSU-013-U0210" style="text-align: right;">201.3</td>
+<td data-o006-id="O006-PSU-013-U0211" style="text-align: right;">6.7</td>
+<td data-o006-id="O006-PSU-013-U0212" style="text-align: right;">44.9</td>
+</tr>
+<tr class="odd" data-o006-id="O006-PSU-013-U0213">
+<td data-o006-id="O006-PSU-013-U0214" style="text-align: right;">Total</td>
+<td data-o006-id="O006-PSU-013-U0215" style="text-align: right;"></td>
+<td data-o006-id="O006-PSU-013-U0216" style="text-align: right;"></td>
+<td data-o006-id="O006-PSU-013-U0217" style="text-align: right;"></td>
+<td data-o006-id="O006-PSU-013-U0218" style="text-align: right;"></td>
+<td data-o006-id="O006-PSU-013-U0219" style="text-align: right;">766.5</td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+</div>
+<p data-o006-id="O006-PSU-013-U0220">The first column labeled <span class="math inline" data-o006-math-id="O006-PSU-013-M0051">\(i\)</span> just keeps track of the index of the data points, <span class="math inline" data-o006-math-id="O006-PSU-013-M0052">\(i=1, 2, \ldots, 10\)</span>. The columns labeled <span class="math inline" data-o006-math-id="O006-PSU-013-M0053">\(x_i\)</span> and <span class="math inline" data-o006-math-id="O006-PSU-013-M0054">\(y_i\)</span> contain the original data points. For example, the first student measured is 64 inches tall and weighs 121 pounds. The fourth column, labeled <span class="math inline" data-o006-math-id="O006-PSU-013-M0055">\(\hat{y}_i\)</span>, contains the predicted weight of each student. For example, the predicted weight of the second student, who is 64 inches tall, is:</p>
+<p data-o006-id="O006-PSU-013-U0221"><span class="math display" data-o006-math-id="O006-PSU-013-M0056">\[\hat{y}_1=-331.2+7.1(64)=123.2 \text{ pounds}\]</span></p>
+<p data-o006-id="O006-PSU-013-U0222">The fifth column contains the errors in using <span class="math inline" data-o006-math-id="O006-PSU-013-M0057">\(\hat{y}_i\)</span> to predict <span class="math inline" data-o006-math-id="O006-PSU-013-M0058">\(y_i\)</span>. For the second student, the prediction error is:</p>
+<p data-o006-id="O006-PSU-013-U0223"><span class="math display" data-o006-math-id="O006-PSU-013-M0059">\[e_1=121-123.3=-2.2\]</span></p>
+<p data-o006-id="O006-PSU-013-U0224">And, the last column contains the squared prediction errors. The squared prediction error for the second student is:</p>
+<p data-o006-id="O006-PSU-013-U0225"><span class="math display" data-o006-math-id="O006-PSU-013-M0060">\[e^2_1=(-2.2)^2=4.84\]</span></p>
+<p data-o006-id="O006-PSU-013-U0226">By summing up the last column, that is, the column containing the squared prediction errors, we see that <span class="math inline" data-o006-math-id="O006-PSU-013-M0061">\(Q=766.51\)</span> for the dashed line. Now, for the solid line, that is, for the line:</p>
+<p data-o006-id="O006-PSU-013-U0227"><span class="math display" data-o006-math-id="O006-PSU-013-M0062">\[\text{weight} = −266.5 + 6.1\times\text{height}\]</span></p>
+<p data-o006-id="O006-PSU-013-U0228">here’s what the work would look like:</p>
+<div class="w-75 mx-auto" data-o006-id="O006-PSU-013-U0229">
+<div class="cell quarto-float quarto-figure quarto-figure-center anchored" data-o006-id="O006-PSU-013-U0230" id="tbl-studenthtwt3">
+<figure class="quarto-float quarto-float-tbl figure" data-o006-id="O006-PSU-013-U0231">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl quarto-uncaptioned" data-o006-id="O006-PSU-013-U0232" id="tbl-studenthtwt3-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table 12.2
+</figcaption>
+<div aria-describedby="tbl-studenthtwt3-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca" data-o006-id="O006-PSU-013-U0233">
+<table class="table caption-top table-sm table-striped small" data-o006-id="O006-PSU-013-U0234">
+<thead data-o006-id="O006-PSU-013-U0235">
+<tr class="header" data-o006-id="O006-PSU-013-U0236">
+<th data-o006-id="O006-PSU-013-U0237" data-quarto-table-cell-role="th" style="text-align: right;">\(i\)</th>
+<th data-o006-id="O006-PSU-013-U0238" data-quarto-table-cell-role="th" style="text-align: right;">\(x_i\)</th>
+<th data-o006-id="O006-PSU-013-U0239" data-quarto-table-cell-role="th" style="text-align: right;">\(y_i\)</th>
+<th data-o006-id="O006-PSU-013-U0240" data-quarto-table-cell-role="th" style="text-align: right;">\(\hat{y}_i\)</th>
+<th data-o006-id="O006-PSU-013-U0241" data-quarto-table-cell-role="th" style="text-align: right;">\((y_i - \hat{y}_i)\)</th>
+<th data-o006-id="O006-PSU-013-U0242" data-quarto-table-cell-role="th" style="text-align: right;">\((y_i - \hat{y}_i)^2 \)</th>
+</tr>
+</thead>
+<tbody data-o006-id="O006-PSU-013-U0243">
+<tr class="odd" data-o006-id="O006-PSU-013-U0244">
+<td data-o006-id="O006-PSU-013-U0245" style="text-align: right;">1</td>
+<td data-o006-id="O006-PSU-013-U0246" style="text-align: right;">63</td>
+<td data-o006-id="O006-PSU-013-U0247" style="text-align: right;">127</td>
+<td data-o006-id="O006-PSU-013-U0248" style="text-align: right;">117.8</td>
+<td data-o006-id="O006-PSU-013-U0249" style="text-align: right;">9.2</td>
+<td data-o006-id="O006-PSU-013-U0250" style="text-align: right;">84.6</td>
+</tr>
+<tr class="even" data-o006-id="O006-PSU-013-U0251">
+<td data-o006-id="O006-PSU-013-U0252" style="text-align: right;">2</td>
+<td data-o006-id="O006-PSU-013-U0253" style="text-align: right;">64</td>
+<td data-o006-id="O006-PSU-013-U0254" style="text-align: right;">121</td>
+<td data-o006-id="O006-PSU-013-U0255" style="text-align: right;">123.9</td>
+<td data-o006-id="O006-PSU-013-U0256" style="text-align: right;">-2.9</td>
+<td data-o006-id="O006-PSU-013-U0257" style="text-align: right;">8.4</td>
+</tr>
+<tr class="odd" data-o006-id="O006-PSU-013-U0258">
+<td data-o006-id="O006-PSU-013-U0259" style="text-align: right;">3</td>
+<td data-o006-id="O006-PSU-013-U0260" style="text-align: right;">66</td>
+<td data-o006-id="O006-PSU-013-U0261" style="text-align: right;">142</td>
+<td data-o006-id="O006-PSU-013-U0262" style="text-align: right;">136.1</td>
+<td data-o006-id="O006-PSU-013-U0263" style="text-align: right;">5.9</td>
+<td data-o006-id="O006-PSU-013-U0264" style="text-align: right;">34.8</td>
+</tr>
+<tr class="even" data-o006-id="O006-PSU-013-U0265">
+<td data-o006-id="O006-PSU-013-U0266" style="text-align: right;">4</td>
+<td data-o006-id="O006-PSU-013-U0267" style="text-align: right;">69</td>
+<td data-o006-id="O006-PSU-013-U0268" style="text-align: right;">157</td>
+<td data-o006-id="O006-PSU-013-U0269" style="text-align: right;">154.4</td>
+<td data-o006-id="O006-PSU-013-U0270" style="text-align: right;">2.6</td>
+<td data-o006-id="O006-PSU-013-U0271" style="text-align: right;">6.8</td>
+</tr>
+<tr class="odd" data-o006-id="O006-PSU-013-U0272">
+<td data-o006-id="O006-PSU-013-U0273" style="text-align: right;">5</td>
+<td data-o006-id="O006-PSU-013-U0274" style="text-align: right;">69</td>
+<td data-o006-id="O006-PSU-013-U0275" style="text-align: right;">162</td>
+<td data-o006-id="O006-PSU-013-U0276" style="text-align: right;">154.4</td>
+<td data-o006-id="O006-PSU-013-U0277" style="text-align: right;">7.6</td>
+<td data-o006-id="O006-PSU-013-U0278" style="text-align: right;">57.8</td>
+</tr>
+<tr class="even" data-o006-id="O006-PSU-013-U0279">
+<td data-o006-id="O006-PSU-013-U0280" style="text-align: right;">6</td>
+<td data-o006-id="O006-PSU-013-U0281" style="text-align: right;">71</td>
+<td data-o006-id="O006-PSU-013-U0282" style="text-align: right;">156</td>
+<td data-o006-id="O006-PSU-013-U0283" style="text-align: right;">166.6</td>
+<td data-o006-id="O006-PSU-013-U0284" style="text-align: right;">-10.6</td>
+<td data-o006-id="O006-PSU-013-U0285" style="text-align: right;">112.4</td>
+</tr>
+<tr class="odd" data-o006-id="O006-PSU-013-U0286">
+<td data-o006-id="O006-PSU-013-U0287" style="text-align: right;">7</td>
+<td data-o006-id="O006-PSU-013-U0288" style="text-align: right;">71</td>
+<td data-o006-id="O006-PSU-013-U0289" style="text-align: right;">169</td>
+<td data-o006-id="O006-PSU-013-U0290" style="text-align: right;">166.6</td>
+<td data-o006-id="O006-PSU-013-U0291" style="text-align: right;">2.4</td>
+<td data-o006-id="O006-PSU-013-U0292" style="text-align: right;">5.8</td>
+</tr>
+<tr class="even" data-o006-id="O006-PSU-013-U0293">
+<td data-o006-id="O006-PSU-013-U0294" style="text-align: right;">8</td>
+<td data-o006-id="O006-PSU-013-U0295" style="text-align: right;">72</td>
+<td data-o006-id="O006-PSU-013-U0296" style="text-align: right;">165</td>
+<td data-o006-id="O006-PSU-013-U0297" style="text-align: right;">172.7</td>
+<td data-o006-id="O006-PSU-013-U0298" style="text-align: right;">-7.7</td>
+<td data-o006-id="O006-PSU-013-U0299" style="text-align: right;">59.3</td>
+</tr>
+<tr class="odd" data-o006-id="O006-PSU-013-U0300">
+<td data-o006-id="O006-PSU-013-U0301" style="text-align: right;">9</td>
+<td data-o006-id="O006-PSU-013-U0302" style="text-align: right;">73</td>
+<td data-o006-id="O006-PSU-013-U0303" style="text-align: right;">181</td>
+<td data-o006-id="O006-PSU-013-U0304" style="text-align: right;">178.8</td>
+<td data-o006-id="O006-PSU-013-U0305" style="text-align: right;">2.2</td>
+<td data-o006-id="O006-PSU-013-U0306" style="text-align: right;">4.8</td>
+</tr>
+<tr class="even" data-o006-id="O006-PSU-013-U0307">
+<td data-o006-id="O006-PSU-013-U0308" style="text-align: right;">10</td>
+<td data-o006-id="O006-PSU-013-U0309" style="text-align: right;">75</td>
+<td data-o006-id="O006-PSU-013-U0310" style="text-align: right;">208</td>
+<td data-o006-id="O006-PSU-013-U0311" style="text-align: right;">191</td>
+<td data-o006-id="O006-PSU-013-U0312" style="text-align: right;">17</td>
+<td data-o006-id="O006-PSU-013-U0313" style="text-align: right;">289.0</td>
+</tr>
+<tr class="odd" data-o006-id="O006-PSU-013-U0314">
+<td data-o006-id="O006-PSU-013-U0315" style="text-align: right;">Total</td>
+<td data-o006-id="O006-PSU-013-U0316" style="text-align: right;"></td>
+<td data-o006-id="O006-PSU-013-U0317" style="text-align: right;"></td>
+<td data-o006-id="O006-PSU-013-U0318" style="text-align: right;"></td>
+<td data-o006-id="O006-PSU-013-U0319" style="text-align: right;"></td>
+<td data-o006-id="O006-PSU-013-U0320" style="text-align: right;">663.7</td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+</div>
+<p data-o006-id="O006-PSU-013-U0321">The calculations for each column are just as described previously. In this case, the sum of the last column, that is, the sum of the squared prediction errors for the solid line is <span class="math inline" data-o006-math-id="O006-PSU-013-M0063">\(Q= 663.7\)</span>. Choosing the equation that minimizes <span class="math inline" data-o006-math-id="O006-PSU-013-M0064">\(Q\)</span>, we can conclude that the solid line, that is:</p>
+<p data-o006-id="O006-PSU-013-U0322"><span class="math display" data-o006-math-id="O006-PSU-013-M0065">\[\text{weight} = −266.5 + 6.1\times\text{height}\]</span></p>
+<p data-o006-id="O006-PSU-013-U0323">is the best fitting line.</p>
+</section>
+</div>
+<p data-o006-id="O006-PSU-013-U0324">In the preceding example, there’s one major problem with concluding that the solid line is the best fitting line! We’ve only considered two possible candidates. There are, in fact, an infinite number of possible candidates for best fitting line. The approach we used above clearly won’t work in practice. On the next page, we’ll instead derive some formulas for the slope and the intercept for least squares regression line.</p>
+</section>
+<section class="level2" data-number="12.3" data-o006-id="O006-PSU-013-U0325" id="least-squares-the-theory">
+<h2 class="anchored" data-anchor-id="least-squares-the-theory" data-number="12.3" data-o006-id="O006-PSU-013-U0326"><span class="header-section-number">12.3</span> Least Squares: The Theory</h2>
+<p data-o006-id="O006-PSU-013-U0327">Now that we have the idea of least squares behind us, let’s make the method more practical by finding a formula for the intercept <span class="math inline" data-o006-math-id="O006-PSU-013-M0066">\(a_1\)</span> and slope <span class="math inline" data-o006-math-id="O006-PSU-013-M0067">\(b\)</span>. We learned that in order to find the least squares regression line, we need to minimize the sum of the squared prediction errors, that is:</p>
+<p data-o006-id="O006-PSU-013-U0328"><span class="math display" data-o006-math-id="O006-PSU-013-M0068">\[Q=\sum\limits_{i=1}^n (y_i-\hat{y}_i)^2\]</span></p>
+<p data-o006-id="O006-PSU-013-U0329">We just need to replace that <span class="math inline" data-o006-math-id="O006-PSU-013-M0069">\(\hat{y}_i\)</span> with the formula for the equation of a line:</p>
+<p data-o006-id="O006-PSU-013-U0330"><span class="math display" data-o006-math-id="O006-PSU-013-M0070">\[\hat{y}_i=a_1+bx_i\]</span></p>
+<p data-o006-id="O006-PSU-013-U0331">to get:</p>
+<p data-o006-id="O006-PSU-013-U0332"><span class="math display" data-o006-math-id="O006-PSU-013-M0071">\[Q=\sum\limits_{i=1}^n (y_i-\hat{y}_i)^2=\sum\limits_{i=1}^n (y_i-(a_1+bx_i))^2\]</span></p>
+<p data-o006-id="O006-PSU-013-U0333">We could go ahead and minimize <span class="math inline" data-o006-math-id="O006-PSU-013-M0072">\(Q\)</span> as such, but our textbook authors have opted to use a different form of the equation for a line, namely:</p>
+<p data-o006-id="O006-PSU-013-U0334"><span class="math display" data-o006-math-id="O006-PSU-013-M0073">\[\hat{y}_i=a+b(x_i-\bar{x})\]</span></p>
+<p data-o006-id="O006-PSU-013-U0335">each form of the equation for a line has its advantages and disadvantages. Statistical software, such as R or Minitab, will typically calculate the least squares regression line using the form: <span class="math display" data-o006-math-id="O006-PSU-013-M0074">\[\hat{y}_i=a_1+bx_i\]</span></p>
+<p data-o006-id="O006-PSU-013-U0336">Clearly a plus if you can get some computer to do the dirty work for you. A (minor) disadvantage of using this form of the equation, though, is that the intercept <span class="math inline" data-o006-math-id="O006-PSU-013-M0075">\(a_1\)</span> is the predicted value of the response <span class="math inline" data-o006-math-id="O006-PSU-013-M0076">\(y\)</span> when the predictor <span class="math inline" data-o006-math-id="O006-PSU-013-M0077">\(x=0\)</span>, which is typically not very meaningful. For example, if <span class="math inline" data-o006-math-id="O006-PSU-013-M0078">\(x\)</span> is a student’s height (in inches) and <span class="math inline" data-o006-math-id="O006-PSU-013-M0079">\(y\)</span> is a student’s weight (in pounds), then the intercept is the predicted weight of a student who is 0 inches tall….. errrr…. you get the idea. On the other hand, if we use the equation:</p>
+<p data-o006-id="O006-PSU-013-U0337"><span class="math display" data-o006-math-id="O006-PSU-013-M0080">\[\hat{y}_i=a+b(x_i-\bar{x})\]</span></p>
+<p data-o006-id="O006-PSU-013-U0338">then the intercept <span class="math inline" data-o006-math-id="O006-PSU-013-M0081">\(a\)</span> is the predicted value of the response <span class="math inline" data-o006-math-id="O006-PSU-013-M0082">\(y\)</span> when the predictor <span class="math inline" data-o006-math-id="O006-PSU-013-M0083">\(x_i=\bar{x}\)</span>, that is, the average of the <span class="math inline" data-o006-math-id="O006-PSU-013-M0084">\(x\)</span> values. For example, if <span class="math inline" data-o006-math-id="O006-PSU-013-M0085">\(x\)</span> is a student’s height (in inches) and <span class="math inline" data-o006-math-id="O006-PSU-013-M0086">\(y\)</span> is a student’s weight (in pounds), then the intercept <span class="math inline" data-o006-math-id="O006-PSU-013-M0087">\(a\)</span> is the predicted weight of a student who is average in height. Much better, much more meaningful! The good news is that it is easy enough to get statistical software, such as R or Minitab, to calculate the least squares regression line in this form as well.</p>
+<p data-o006-id="O006-PSU-013-U0339">Okay, with that aside behind us, time to get to the punchline.</p>
+<section class="level3" data-number="12.3.1" data-o006-id="O006-PSU-013-U0340" id="least-squares-estimates">
+<h3 class="anchored" data-anchor-id="least-squares-estimates" data-number="12.3.1" data-o006-id="O006-PSU-013-U0341"><span class="header-section-number">12.3.1</span> Least Squares Estimates</h3>
+<div class="callout callout-style-simple callout-caution no-icon" data-o006-id="O006-PSU-013-U0342">
+<div class="callout-body d-flex" data-o006-id="O006-PSU-013-U0343">
+<div class="callout-icon-container" data-o006-id="O006-PSU-013-U0344">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-body-container" data-o006-id="O006-PSU-013-U0345">
+<p data-o006-id="O006-PSU-013-U0346"><strong>Note!</strong><br/>
+Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. <span class="math display" data-o006-math-id="O006-PSU-013-M0088">\[b=\dfrac{\sum\limits_{i=1}^n (x_i-\bar{x})y_i}{\sum\limits_{i=1}^n (x_i-\bar{x})^2}=\dfrac{\sum\limits_{i=1}^n x_iy_i-\left(\dfrac{1}{n}\right) \left(\sum\limits_{i=1}^n x_i\right) \left(\sum\limits_{i=1}^n y_i\right)}{\sum\limits_{i=1}^n x^2_i-\left(\dfrac{1}{n}\right) \left(\sum\limits_{i=1}^n x_i\right)^2}\]</span></p>
+</div>
+</div>
+</div>
+<div class="callout callout-style-simple callout-note no-icon" data-o006-id="O006-PSU-013-U0347">
+<div class="callout-body d-flex" data-o006-id="O006-PSU-013-U0348">
+<div class="callout-icon-container" data-o006-id="O006-PSU-013-U0349">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-body-container" data-o006-id="O006-PSU-013-U0350">
+<div class="theorem" data-o006-id="O006-PSU-013-U0351" id="thm-lsrline">
+<p data-o006-id="O006-PSU-013-U0352"><span class="theorem-title"><strong>Theorem 12.1</strong></span> The <strong>least squares regression line</strong> is:</p>
+<p data-o006-id="O006-PSU-013-U0353"><span class="math display" data-o006-math-id="O006-PSU-013-M0089">\[\hat{y}_i=a+b(x_i-\bar{x})\]</span></p>
+<p data-o006-id="O006-PSU-013-U0354">with <strong>least squares estimates</strong>:</p>
+<p data-o006-id="O006-PSU-013-U0355"><span class="math display" data-o006-math-id="O006-PSU-013-M0090">\[a=\bar{y} \text{ and }b=\dfrac{\sum\limits_{i=1}^n (x_i-\bar{x})(y_i-\bar{y})}{\sum\limits_{i=1}^n (x_i-\bar{x})^2}\]</span></p>
+<p data-o006-id="O006-PSU-013-U0356"><strong>Proof</strong></p>
+<p data-o006-id="O006-PSU-013-U0357">In order to derive the formulas for the intercept <span class="math inline" data-o006-math-id="O006-PSU-013-M0091">\(a\)</span> and slope <span class="math inline" data-o006-math-id="O006-PSU-013-M0092">\(b\)</span>, we need to minimize:</p>
+<p data-o006-id="O006-PSU-013-U0358"><span class="math display" data-o006-math-id="O006-PSU-013-M0093">\[Q=\sum\limits_{i=1}^n (y_i-(a+b(x_i-\bar{x})))^2\]</span></p>
+<p data-o006-id="O006-PSU-013-U0359">Time to put on your calculus cap, as minimizing <span class="math inline" data-o006-math-id="O006-PSU-013-M0094">\(Q\)</span> involves taking the derivative of <span class="math inline" data-o006-math-id="O006-PSU-013-M0095">\(Q\)</span> with respect to <span class="math inline" data-o006-math-id="O006-PSU-013-M0096">\(a\)</span> and <span class="math inline" data-o006-math-id="O006-PSU-013-M0097">\(b\)</span>, setting to 0, and then solving for <span class="math inline" data-o006-math-id="O006-PSU-013-M0098">\(a\)</span> and <span class="math inline" data-o006-math-id="O006-PSU-013-M0099">\(b\)</span>. Let’s do that. Starting with the derivative of <span class="math inline" data-o006-math-id="O006-PSU-013-M0100">\(Q\)</span> with respect to <span class="math inline" data-o006-math-id="O006-PSU-013-M0101">\(a\)</span>, we get:</p>
+<div class="w-75 mx-auto quarto-float quarto-figure quarto-figure-center anchored" data-o006-id="O006-PSU-013-U0360" id="vid-lsr1">
+<figure class="quarto-float quarto-float-vid figure" data-o006-id="O006-PSU-013-U0361">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-vid" data-o006-id="O006-PSU-013-U0362" id="vid-lsr1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Video 12.1: Proof: Deriving the formulas for the intercept a and slope b
+</figcaption>
+<div aria-describedby="vid-lsr1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca" data-o006-id="O006-PSU-013-U0363">
+<div class="quarto-video ratio ratio-16x9" data-o006-id="O006-PSU-013-U0364"><iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="" data-external="1" data-o006-video-id="O006-PSU-013-V0001" frameborder="0" src="https://www.youtube.com/embed/oAaPR1qVedw" title=""></iframe></div>
+</div>
+</figure>
+</div>
+<p data-o006-id="O006-PSU-013-U0365">Now knowing that <span class="math inline" data-o006-math-id="O006-PSU-013-M0102">\(a\)</span> is <span class="math inline" data-o006-math-id="O006-PSU-013-M0103">\(\bar{y}\)</span>, the average of the responses, let’s replace <span class="math inline" data-o006-math-id="O006-PSU-013-M0104">\(a\)</span> with <span class="math inline" data-o006-math-id="O006-PSU-013-M0105">\(\bar{y}\)</span> in the formula for <span class="math inline" data-o006-math-id="O006-PSU-013-M0106">\(Q\)</span>:</p>
+<p data-o006-id="O006-PSU-013-U0366"><span class="math display" data-o006-math-id="O006-PSU-013-M0107">\[Q=\sum\limits_{i=1}^n (y_i-(\bar{y}+b(x_i-\bar{x})))^2\]</span></p>
+<p data-o006-id="O006-PSU-013-U0367">and take the derivative of <span class="math inline" data-o006-math-id="O006-PSU-013-M0108">\(Q\)</span> with respect to <span class="math inline" data-o006-math-id="O006-PSU-013-M0109">\(b\)</span>. Doing so, we get:</p>
+<div class="w-75 mx-auto quarto-float quarto-figure quarto-figure-center anchored" data-o006-id="O006-PSU-013-U0368" id="vid-lsr2">
+<figure class="quarto-float quarto-float-vid figure" data-o006-id="O006-PSU-013-U0369">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-vid" data-o006-id="O006-PSU-013-U0370" id="vid-lsr2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Video 12.2: Proof: Deriving formulas for the intercept and slope, Part 2
+</figcaption>
+<div aria-describedby="vid-lsr2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca" data-o006-id="O006-PSU-013-U0371">
+<div class="quarto-video ratio ratio-16x9" data-o006-id="O006-PSU-013-U0372"><iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="" data-external="1" data-o006-video-id="O006-PSU-013-V0002" frameborder="0" src="https://www.youtube.com/embed/pWMp1vhStDE" title=""></iframe></div>
+</div>
+</figure>
+</div>
+<p data-o006-id="O006-PSU-013-U0373">As was to be proved.</p>
+</div>
+</div>
+</div>
+</div>
+<p data-o006-id="O006-PSU-013-U0374">By the way, you might want to note that the only assumption relied on for the above calculations is that the relationship between the response <span class="math inline" data-o006-math-id="O006-PSU-013-M0110">\(y\)</span> and the predictor <span class="math inline" data-o006-math-id="O006-PSU-013-M0111">\(x\)</span> is linear.</p>
+<p data-o006-id="O006-PSU-013-U0375">Another thing you might note is that the formula for the slope <span class="math inline" data-o006-math-id="O006-PSU-013-M0112">\(b\)</span> is just fine providing you have statistical software to make the calculations. But, what would you do if you were stranded on a desert island, and were in need of finding the least squares regression line for the relationship between the depth of the tide and the time of day? You’d probably appreciate having a simpler calculation formula! You might also appreciate understanding the relationship between the slope <span class="math inline" data-o006-math-id="O006-PSU-013-M0113">\(b\)</span> and the sample correlation coefficient <span class="math inline" data-o006-math-id="O006-PSU-013-M0114">\(r\)</span>.</p>
+<p data-o006-id="O006-PSU-013-U0376">With that lame motivation behind us, let’s derive alternative calculation formulas for the slope <span class="math inline" data-o006-math-id="O006-PSU-013-M0115">\(b\)</span>.</p>
+<div class="callout callout-style-simple callout-note no-icon" data-o006-id="O006-PSU-013-U0377">
+<div class="callout-body d-flex" data-o006-id="O006-PSU-013-U0378">
+<div class="callout-icon-container" data-o006-id="O006-PSU-013-U0379">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-body-container" data-o006-id="O006-PSU-013-U0380">
+<div class="theorem" data-o006-id="O006-PSU-013-U0381" id="thm-lsralt">
+<p data-o006-id="O006-PSU-013-U0382"><span class="theorem-title"><strong>Theorem 12.2</strong></span> An alternative formula for the slope <span class="math inline" data-o006-math-id="O006-PSU-013-M0116">\(b\)</span> of the least squares regression line:</p>
+<p data-o006-id="O006-PSU-013-U0383"><span class="math display" data-o006-math-id="O006-PSU-013-M0117">\[\hat{y}_i=a+b(x_i-\bar{x})\]</span></p>
+<p data-o006-id="O006-PSU-013-U0384">is:</p>
+<p data-o006-id="O006-PSU-013-U0385"><span class="math display" data-o006-math-id="O006-PSU-013-M0118">\[b=\dfrac{\sum\limits_{i=1}^n (x_i-\bar{x})y_i}{\sum\limits_{i=1}^n (x_i-\bar{x})^2}=\dfrac{\sum\limits_{i=1}^n x_iy_i-\left(\dfrac{1}{n}\right) \left(\sum\limits_{i=1}^n x_i\right) \left(\sum\limits_{i=1}^n y_i\right)}{\sum\limits_{i=1}^n x^2_i-\left(\dfrac{1}{n}\right) \left(\sum\limits_{i=1}^n x_i\right)^2}\]</span></p>
+<p data-o006-id="O006-PSU-013-U0386"><strong>Proof</strong></p>
+<p data-o006-id="O006-PSU-013-U0387">The proof, which may or may not show up on a quiz or exam, is left for you as an exercise.</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section class="level2" data-number="12.4" data-o006-id="O006-PSU-013-U0388" id="the-model">
+<h2 class="anchored" data-anchor-id="the-model" data-number="12.4" data-o006-id="O006-PSU-013-U0389"><span class="header-section-number">12.4</span> The Model</h2>
+<section class="level3" data-number="12.4.1" data-o006-id="O006-PSU-013-U0390" id="what-do-a-and-b-estimate">
+<h3 class="anchored" data-anchor-id="what-do-a-and-b-estimate" data-number="12.4.1" data-o006-id="O006-PSU-013-U0391"><span class="header-section-number">12.4.1</span> What Do <span class="math inline" data-o006-math-id="O006-PSU-013-M0119">\(a\)</span> and <span class="math inline" data-o006-math-id="O006-PSU-013-M0120">\(b\)</span> Estimate?</h3>
+<p data-o006-id="O006-PSU-013-U0392">So far, we’ve formulated the idea, as well as the theory, behind least squares estimation. But, now we have a little problem. When we derived formulas for the least squares estimates of the intercept <span class="math inline" data-o006-math-id="O006-PSU-013-M0121">\(a\)</span> and the slope <span class="math inline" data-o006-math-id="O006-PSU-013-M0122">\(b\)</span>, we never addressed for what parameters <span class="math inline" data-o006-math-id="O006-PSU-013-M0123">\(a\)</span> and <span class="math inline" data-o006-math-id="O006-PSU-013-M0124">\(b\)</span> serve as estimates. It is a crucial topic that deserves our attention. Let’s investigate the answer by considering the (linear) relationship between high school grade point averages (GPAs) and scores on a college entrance exam, such as the ACT exam. Well, let’s actually center the high school GPAs so that if <span class="math inline" data-o006-math-id="O006-PSU-013-M0125">\(x\)</span> denotes the high school GPA, then <span class="math inline" data-o006-math-id="O006-PSU-013-M0126">\(x-\bar{x}\)</span> is the centered high school GPA. Here’s what a plot of <span class="math inline" data-o006-math-id="O006-PSU-013-M0127">\(x-\bar{x}\)</span>, the centered high school GPA, and <span class="math inline" data-o006-math-id="O006-PSU-013-M0128">\(y\)</span>, the college entrance test score might look like:</p>
+<div class="cell" data-layout-align="center" data-o006-id="O006-PSU-013-U0393">
+<div class="cell-output-display" data-o006-id="O006-PSU-013-U0394">
+<div alt="Scatter plot of high school gpa vs college entrance test scores" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center" data-o006-id="O006-PSU-013-U0395" id="fig-gpavsentrance3">
+<figure class="quarto-float quarto-float-fig figure" data-o006-id="O006-PSU-013-U0396">
+<div aria-describedby="fig-gpavsentrance3-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca" data-o006-id="O006-PSU-013-U0397">
+<a class="lightbox" data-gallery="quarto-lightbox-gallery-4" data-o006-id="O006-PSU-013-U0398" href="Lesson12_files/figure-html/fig-gpavsentrance3-1.png" title="Fig 12.4: High school gpa vs College entrance test scores"><img alt="Scatter plot of high school gpa vs college entrance test scores" class="img-fluid quarto-figure quarto-figure-center figure-img" data-o006-asset-id="O006-PSU-013-A0004" data-o006-id="O006-PSU-013-U0399" src="Lesson12_files/figure-html/fig-gpavsentrance3-1.png" style="width:70.0%"/></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" data-o006-id="O006-PSU-013-U0400" id="fig-gpavsentrance3-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Fig 12.4: High school gpa vs College entrance test scores
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p data-o006-id="O006-PSU-013-U0401">Well, okay, so that plot deserves some explanation:</p>
+<div class="w-75 mx-auto quarto-float quarto-figure quarto-figure-center anchored" data-o006-id="O006-PSU-013-U0402" id="vid-">
+<figure class="quarto-float quarto-float-vid figure" data-o006-id="O006-PSU-013-U0403">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-vid" data-o006-id="O006-PSU-013-U0404" id="vid--caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Video 12.3: Example: Test scores and GPA, understanding the parameters
+</figcaption>
+<div aria-describedby="vid--caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca" data-o006-id="O006-PSU-013-U0405">
+<div class="quarto-video ratio ratio-16x9" data-o006-id="O006-PSU-013-U0406"><iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="" data-external="1" data-o006-video-id="O006-PSU-013-V0003" frameborder="0" src="https://www.youtube.com/embed/mdzP-v6vl74" title=""></iframe></div>
+</div>
+</figure>
+</div>
+<p data-o006-id="O006-PSU-013-U0407">So far, in summary, we are assuming two things. First, among the entire population of college students, there is some unknown linear relationship between <span class="math inline" data-o006-math-id="O006-PSU-013-M0129">\(\mu_y\)</span>, (or alternatively <span class="math inline" data-o006-math-id="O006-PSU-013-M0130">\(E(Y)\)</span>), the average college entrance score, and <span class="math inline" data-o006-math-id="O006-PSU-013-M0131">\(x-\bar{x}\)</span>, centered high school GPA. That is:</p>
+<p data-o006-id="O006-PSU-013-U0408"><span class="math display" data-o006-math-id="O006-PSU-013-M0132">\[\mu_Y=E(Y)=\alpha+\beta(x-\bar{x})\]</span></p>
+<p data-o006-id="O006-PSU-013-U0409">Second, individual students deviate from the mean college entrance test score of the population of students having the same centered high school GPA by some unknown amount <span class="math inline" data-o006-math-id="O006-PSU-013-M0133">\(\epsilon_i\)</span>. That is, if <span class="math inline" data-o006-math-id="O006-PSU-013-M0134">\(Y_i\)</span> denotes the college entrance test score for student <span class="math inline" data-o006-math-id="O006-PSU-013-M0135">\(i\)</span>, then:</p>
+<p data-o006-id="O006-PSU-013-U0410"><span class="math display" data-o006-math-id="O006-PSU-013-M0136">\[Y_i=\alpha+\beta(x-\bar{x})+\epsilon_i\]</span></p>
+<p data-o006-id="O006-PSU-013-U0411">Unfortunately, we don’t have the luxury of collecting data on all of the college students in the population. So, we can never know the population intercept <span class="math inline" data-o006-math-id="O006-PSU-013-M0137">\(\alpha\)</span> or the population slope <span class="math inline" data-o006-math-id="O006-PSU-013-M0138">\(\beta\)</span>. The best we can do is estimate <span class="math inline" data-o006-math-id="O006-PSU-013-M0139">\(\alpha\)</span> and <span class="math inline" data-o006-math-id="O006-PSU-013-M0140">\(\beta\)</span> by taking a random sample from the population of college students. Suppose we randomly select fifteen students from the population, in which three students have a centered high school GPA of −2, three students have a centered high school GPA of −1, and so on. We can use those fifteen data points to determine the best fitting (least squares) line:</p>
+<p data-o006-id="O006-PSU-013-U0412"><span class="math display" data-o006-math-id="O006-PSU-013-M0141">\[\hat{y}_i=a+b(x_i-\bar{x})\]</span></p>
+<p data-o006-id="O006-PSU-013-U0413">Now, our least squares line isn’t going to be perfect, but it should do a pretty good job of estimating the true unknown population line:</p>
+<div class="cell" data-o006-id="O006-PSU-013-U0414">
+<div class="cell-output-display" data-o006-id="O006-PSU-013-U0415">
+<div alt="Sample scatter plot of high school gpa vs college entrance test scores" class="quarto-float quarto-figure quarto-figure-center anchored" data-o006-id="O006-PSU-013-U0416" id="fig-samplegpaentrance4">
+<figure class="quarto-float quarto-float-fig figure" data-o006-id="O006-PSU-013-U0417">
+<div aria-describedby="fig-samplegpaentrance4-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca" data-o006-id="O006-PSU-013-U0418">
+<a class="lightbox" data-gallery="quarto-lightbox-gallery-5" data-o006-id="O006-PSU-013-U0419" href="Lesson12_files/figure-html/fig-samplegpaentrance4-1.png" title="Fig 12.5: Sample of High school gpa vs College entrance test scores"><img alt="Sample scatter plot of high school gpa vs college entrance test scores" class="img-fluid figure-img" data-o006-asset-id="O006-PSU-013-A0005" data-o006-id="O006-PSU-013-U0420" src="Lesson12_files/figure-html/fig-samplegpaentrance4-1.png" style="width:70.0%"/></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" data-o006-id="O006-PSU-013-U0421" id="fig-samplegpaentrance4-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Fig 12.5: Sample of High school gpa vs College entrance test scores
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-important callout-empty-content callout-titled" data-o006-id="O006-PSU-013-U0422">
+<div class="callout-header d-flex align-content-center" data-o006-id="O006-PSU-013-U0423">
+<div class="callout-icon-container" data-o006-id="O006-PSU-013-U0424">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill" data-o006-id="O006-PSU-013-U0425">
+<span class="screen-reader-only">Important</span>John: Fix the parameter equation above to match the old notes
+</div>
+</div>
+<div class="callout-body-container callout-body" data-o006-id="O006-PSU-013-U0426">
+</div>
+</div>
+<p data-o006-id="O006-PSU-013-U0427">That’s it in a nutshell. The intercept <span class="math inline" data-o006-math-id="O006-PSU-013-M0142">\(a\)</span> and the slope <span class="math inline" data-o006-math-id="O006-PSU-013-M0143">\(b\)</span> of the least squares regression line estimate, respectively, the intercept <span class="math inline" data-o006-math-id="O006-PSU-013-M0144">\(\alpha\)</span> and the slope <span class="math inline" data-o006-math-id="O006-PSU-013-M0145">\(\beta\)</span> of the unknown population line. The only assumption we make in doing so is that the relationship between the predictor <span class="math inline" data-o006-math-id="O006-PSU-013-M0146">\(x\)</span> and the response <span class="math inline" data-o006-math-id="O006-PSU-013-M0147">\(y\)</span> is linear.</p>
+<p data-o006-id="O006-PSU-013-U0428">Now, if we want to derive confidence intervals for <span class="math inline" data-o006-math-id="O006-PSU-013-M0148">\(\alpha\)</span> and <span class="math inline" data-o006-math-id="O006-PSU-013-M0149">\(\beta\)</span>, as we are going to want to do on the next page, we are going to have to make a few more assumptions. That’s where the simple linear regression model comes to the rescue.</p>
+</section>
+<section class="level3" data-number="12.4.2" data-o006-id="O006-PSU-013-U0429" id="the-simple-linear-regression-model">
+<h3 class="anchored" data-anchor-id="the-simple-linear-regression-model" data-number="12.4.2" data-o006-id="O006-PSU-013-U0430"><span class="header-section-number">12.4.2</span> The Simple Linear Regression Model</h3>
+<p data-o006-id="O006-PSU-013-U0431">So that we can have properly drawn normal curves, let’s borrow (steal?) an example from the textbook called Applied Linear Regression Models (4th edition, by Kutner, Nachtsheim, and Neter). Consider the relationship between <span class="math inline" data-o006-math-id="O006-PSU-013-M0150">\(x\)</span>, the number of bids contracting companies prepare, and <span class="math inline" data-o006-math-id="O006-PSU-013-M0151">\(y\)</span>, the number of hours it takes to prepare the bids:</p>
+<div alt="Regression of line for hours vs number of bids" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-scap="A statistical graph showing the relationship between the number of bids prepared (X-axis, 0 to 45) and hours (Y-axis, 0 to 100). The graph includes two dashed probability density curves peaking around 25 and 45 bids, with a line labeled E(Y) = 9.5 + 2.1X. At 45 bids, annotations indicate Y_i = 108, ε_i = +4, and E(Y_i) = 104." data-o006-id="O006-PSU-013-U0432" id="fig-bidsgraph" width="60%">
+<figure class="quarto-float quarto-float-fig figure" data-o006-id="O006-PSU-013-U0433">
+<div aria-describedby="fig-bidsgraph-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca" data-o006-id="O006-PSU-013-U0434">
+<a class="lightbox" data-gallery="quarto-lightbox-gallery-6" data-o006-id="O006-PSU-013-U0435" href="assets/lesson9_11.png" title="Fig 12.6: "><img alt="Regression of line for hours vs number of bids" class="mx-auto d-block img-fluid figure-img" data-fig-scap="A statistical graph showing the relationship between the number of bids prepared (X-axis, 0 to 45) and hours (Y-axis, 0 to 100). The graph includes two dashed probability density curves peaking around 25 and 45 bids, with a line labeled E(Y) = 9.5 + 2.1X. At 45 bids, annotations indicate Y_i = 108, ε_i = +4, and E(Y_i) = 104." data-o006-asset-id="O006-PSU-013-A0006" data-o006-id="O006-PSU-013-U0436" id="fig-bidsgraph" src="assets/lesson9_11.png" style="width:60.0%"/></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" data-o006-id="O006-PSU-013-U0437" id="fig-bidsgraph-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Fig 12.6
+</figcaption>
+</figure>
+</div>
+<p data-o006-id="O006-PSU-013-U0438">A couple of things to note about this graph. Note that again, the mean number of hours, <span class="math inline" data-o006-math-id="O006-PSU-013-M0152">\(E(Y)\)</span>, is assumed to be <strong>linearly related</strong> to <span class="math inline" data-o006-math-id="O006-PSU-013-M0153">\(X\)</span>, the number of bids prepared. That’s the first assumption. The textbook authors even go as far as to specify the values of typically unknown <span class="math inline" data-o006-math-id="O006-PSU-013-M0154">\(\alpha\)</span> and <span class="math inline" data-o006-math-id="O006-PSU-013-M0155">\(\beta\)</span>. In this case, <span class="math inline" data-o006-math-id="O006-PSU-013-M0156">\(\alpha\)</span> is 9.5 and <span class="math inline" data-o006-math-id="O006-PSU-013-M0157">\(\beta\)</span> is 2.1.</p>
+<p data-o006-id="O006-PSU-013-U0439">Note that if <span class="math inline" data-o006-math-id="O006-PSU-013-M0158">\(X=45\)</span> bids are prepared, then the expected number of hours it took to prepare the bids is: <span class="math display" data-o006-math-id="O006-PSU-013-M0159">\[
+\mu_Y=E(Y)=9.5+2.1(45)=104
+\]</span> In one case, it took a contracting company 108 hours to prepare 45 bids. In that case, the error <span class="math inline" data-o006-math-id="O006-PSU-013-M0160">\(\epsilon_i\)</span> is 4. That is:</p>
+<p data-o006-id="O006-PSU-013-U0440"><span class="math display" data-o006-math-id="O006-PSU-013-M0161">\[Y_i=108=E(Y)+\epsilon_i=104+4\]</span></p>
+<p data-o006-id="O006-PSU-013-U0441">The normal curves drawn for each value of <span class="math inline" data-o006-math-id="O006-PSU-013-M0162">\(X\)</span> are meant to suggest that the error terms <span class="math inline" data-o006-math-id="O006-PSU-013-M0163">\(\epsilon_i\)</span>, and therefore the responses <span class="math inline" data-o006-math-id="O006-PSU-013-M0164">\(Y_i\)</span>, are <strong>normally distributed</strong>. That’s a second assumption.</p>
+<p data-o006-id="O006-PSU-013-U0442">Did you also notice that the two normal curves in the plot are drawn to have the same shape? That suggests that each population (as defined by <span class="math inline" data-o006-math-id="O006-PSU-013-M0165">\(X\)</span>) has a common variance. That’s a third assumption. That is, the errors, <span class="math inline" data-o006-math-id="O006-PSU-013-M0166">\(\epsilon_i\)</span>, and therefore the responses <span class="math inline" data-o006-math-id="O006-PSU-013-M0167">\(Y_i\)</span>, have <strong>equal variances</strong> for all <span class="math inline" data-o006-math-id="O006-PSU-013-M0168">\(x\)</span> values.</p>
+<p data-o006-id="O006-PSU-013-U0443">There’s one more assumption that is made that is difficult to depict on a graph. That’s the one that concerns the <strong>independence</strong> of the error terms. Let’s summarize!</p>
+<p data-o006-id="O006-PSU-013-U0444">In short, the simple linear regression model states that the following four conditions must hold:</p>
+<ul data-o006-id="O006-PSU-013-U0445">
+<li data-o006-id="O006-PSU-013-U0446">The mean of the responses, <span class="math inline" data-o006-math-id="O006-PSU-013-M0169">\(E(Y_i)\)</span>, is a <span class="math inline" data-o006-math-id="O006-PSU-013-M0170">\(\textcolor{red}{L}\)</span>inear function of the <span class="math inline" data-o006-math-id="O006-PSU-013-M0171">\(x_i\)</span>.</li>
+<li data-o006-id="O006-PSU-013-U0447">The errors, <span class="math inline" data-o006-math-id="O006-PSU-013-M0172">\(\epsilon_i\)</span>, and hence the responses <span class="math inline" data-o006-math-id="O006-PSU-013-M0173">\(Y_i\)</span>, are <span class="math inline" data-o006-math-id="O006-PSU-013-M0174">\(\textcolor{red}{I}\)</span>ndependent.</li>
+<li data-o006-id="O006-PSU-013-U0448">The errors, <span class="math inline" data-o006-math-id="O006-PSU-013-M0175">\(\epsilon_i\)</span>, and hence the responses <span class="math inline" data-o006-math-id="O006-PSU-013-M0176">\(Y_i\)</span>, are <span class="math inline" data-o006-math-id="O006-PSU-013-M0177">\(\textcolor{red}{N}\)</span>ormally distributed.</li>
+<li data-o006-id="O006-PSU-013-U0449">The errors, <span class="math inline" data-o006-math-id="O006-PSU-013-M0178">\(\epsilon_i\)</span>, and hence the responses <span class="math inline" data-o006-math-id="O006-PSU-013-M0179">\(Y_i\)</span>, have <span class="math inline" data-o006-math-id="O006-PSU-013-M0180">\(\textcolor{red}{E}\)</span>qual variances (<span class="math inline" data-o006-math-id="O006-PSU-013-M0181">\(\sigma^2\)</span>)) for all <span class="math inline" data-o006-math-id="O006-PSU-013-M0182">\(x\)</span> values.</li>
+</ul>
+<p data-o006-id="O006-PSU-013-U0450">Did you happen to notice that each of the four conditions is capitalized and emphasized in red? And, did you happen to notice that the capital letters spell <span class="math inline" data-o006-math-id="O006-PSU-013-M0183">\(\textcolor{red}{L-I-N-E}\)</span>? Do you get it? We are investigating least squares regression lines, and the model effectively spells the word line! You might find this mnemonic an easy way to remember the four conditions.</p>
+</section>
+<section class="level3" data-number="12.4.3" data-o006-id="O006-PSU-013-U0451" id="maximum-likelihood-estimates-of-alpha-and-beta">
+<h3 class="anchored" data-anchor-id="maximum-likelihood-estimates-of-alpha-and-beta" data-number="12.4.3" data-o006-id="O006-PSU-013-U0452"><span class="header-section-number">12.4.3</span> Maximum Likelihood Estimates of <span class="math inline" data-o006-math-id="O006-PSU-013-M0184">\(\alpha\)</span> and <span class="math inline" data-o006-math-id="O006-PSU-013-M0185">\(\beta\)</span></h3>
+<p data-o006-id="O006-PSU-013-U0453">We know that <span class="math inline" data-o006-math-id="O006-PSU-013-M0186">\(a\)</span> and <span class="math inline" data-o006-math-id="O006-PSU-013-M0187">\(b\)</span>:</p>
+<p data-o006-id="O006-PSU-013-U0454"><span class="math display" data-o006-math-id="O006-PSU-013-M0188">\[\displaystyle{a=\bar{y} \text{ and } b=\dfrac{\sum\limits_{i=1}^n (x_i-\bar{x})(y_i-\bar{y})}{\sum\limits_{i=1}^n (x_i-\bar{x})^2}}\]</span></p>
+<p data-o006-id="O006-PSU-013-U0455">are (“least squares”) estimators of <span class="math inline" data-o006-math-id="O006-PSU-013-M0189">\(\alpha\)</span> and <span class="math inline" data-o006-math-id="O006-PSU-013-M0190">\(\beta\)</span> that minimize the sum of the squared prediction errors. It turns out though that <span class="math inline" data-o006-math-id="O006-PSU-013-M0191">\(a\)</span> and <span class="math inline" data-o006-math-id="O006-PSU-013-M0192">\(b\)</span> are also maximum likelihood estimators of <span class="math inline" data-o006-math-id="O006-PSU-013-M0193">\(\alpha\)</span> and <span class="math inline" data-o006-math-id="O006-PSU-013-M0194">\(\beta\)</span> <strong>providing the four conditions of the simple linear regression model hold true.</strong></p>
+<div class="callout callout-style-simple callout-note no-icon" data-o006-id="O006-PSU-013-U0456">
+<div class="callout-body d-flex" data-o006-id="O006-PSU-013-U0457">
+<div class="callout-icon-container" data-o006-id="O006-PSU-013-U0458">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-body-container" data-o006-id="O006-PSU-013-U0459">
+<div class="theorem" data-o006-id="O006-PSU-013-U0460" id="thm-lsrMLE">
+<p data-o006-id="O006-PSU-013-U0461"><span class="theorem-title"><strong>Theorem 12.3</strong></span> If the four conditions of the simple linear regression model hold true, then:</p>
+<p data-o006-id="O006-PSU-013-U0462"><span class="math display" data-o006-math-id="O006-PSU-013-M0195">\[\displaystyle{a=\bar{y}\text{ and }b=\dfrac{\sum\limits_{i=1}^n (x_i-\bar{x})(y_i-\bar{y})}{\sum\limits_{i=1}^n (x_i-\bar{x})^2}}\]</span></p>
+<p data-o006-id="O006-PSU-013-U0463">are maximum likelihood estimators of <span class="math inline" data-o006-math-id="O006-PSU-013-M0196">\(\alpha\)</span> and <span class="math inline" data-o006-math-id="O006-PSU-013-M0197">\(\beta\)</span>.</p>
+<p data-o006-id="O006-PSU-013-U0464"><strong>Proof</strong></p>
+<p data-o006-id="O006-PSU-013-U0465">The simple linear regression model, in short, states that the errors <span class="math inline" data-o006-math-id="O006-PSU-013-M0198">\(\epsilon_i\)</span> are independent and normally distributed with mean 0 and variance <span class="math inline" data-o006-math-id="O006-PSU-013-M0199">\(\sigma^2\)</span>. That is:</p>
+<p data-o006-id="O006-PSU-013-U0466"><span class="math display" data-o006-math-id="O006-PSU-013-M0200">\[\epsilon_i \sim N(0,\sigma^2)\]</span></p>
+<p data-o006-id="O006-PSU-013-U0467">The linearity condition:</p>
+<p data-o006-id="O006-PSU-013-U0468"><span class="math display" data-o006-math-id="O006-PSU-013-M0201">\[Y_i=\alpha+\beta(x_i-\bar{x})+\epsilon_i\]</span></p>
+<p data-o006-id="O006-PSU-013-U0469">therefore implies that:</p>
+<p data-o006-id="O006-PSU-013-U0470"><span class="math display" data-o006-math-id="O006-PSU-013-M0202">\[Y_i \sim N(\alpha+\beta(x_i-\bar{x}),\sigma^2)\]</span></p>
+<p data-o006-id="O006-PSU-013-U0471">Therefore, the likelihood function is:</p>
+<p data-o006-id="O006-PSU-013-U0472"><span class="math display" data-o006-math-id="O006-PSU-013-M0203">\[\displaystyle{L_{Y_i}(\alpha,\beta,\sigma^2)=\prod\limits_{i=1}^n \dfrac{1}{\sqrt{2\pi}\sigma} \text{exp}\left[-\dfrac{(Y_i-\alpha-\beta(x_i-\bar{x}))^2}{2\sigma^2}\right]}\]</span></p>
+<p data-o006-id="O006-PSU-013-U0473">which can be rewritten as:</p>
+<p data-o006-id="O006-PSU-013-U0474"><span class="math display" data-o006-math-id="O006-PSU-013-M0204">\[\displaystyle{L=(2\pi)^{-n/2}(\sigma^2)^{-n/2}\text{exp}\left[-\dfrac{1}{2\sigma^2} \sum\limits_{i=1}^n (Y_i-\alpha-\beta(x_i-\bar{x}))^2\right]}\]</span></p>
+<p data-o006-id="O006-PSU-013-U0475">Taking the log of both sides, we get:</p>
+<p data-o006-id="O006-PSU-013-U0476"><span class="math display" data-o006-math-id="O006-PSU-013-M0205">\[\displaystyle{\text{log}L=-\dfrac{n}{2}\text{log}(2\pi)-\dfrac{n}{2}\text{log}(\sigma^2)-\dfrac{1}{2\sigma^2} \sum\limits_{i=1}^n (Y_i-\alpha-\beta(x_i-\bar{x}))^2}\]</span></p>
+<p data-o006-id="O006-PSU-013-U0477">Now, that negative sign in front of that summation on the right hand side:</p>
+<p data-o006-id="O006-PSU-013-U0478"><span class="math display" data-o006-math-id="O006-PSU-013-M0206">\[\color{black}\text{log}L=-\dfrac{n}{2} \text{log} (2\pi)-\dfrac{n}{2}\text{log}\left(\sigma^{2}\right)\color{blue}\boxed{\color{black}-}\color{black}\dfrac{1}{2\sigma^{2}} \color{blue}\boxed{\color{black}\sum\limits_{i=1}^{n}\left(Y_{i}-\alpha-\beta\left(x_{i}-\bar{x}\right)\right)^{2}}\]</span></p>
+<p data-o006-id="O006-PSU-013-U0479">tells us that the only way we can maximize <span class="math inline" data-o006-math-id="O006-PSU-013-M0207">\(\log L(\alpha, \beta, \sigma^2)\)</span> with respect to <span class="math inline" data-o006-math-id="O006-PSU-013-M0208">\(\alpha\)</span> and <span class="math inline" data-o006-math-id="O006-PSU-013-M0209">\(\beta\)</span> is if we minimize:</p>
+<p data-o006-id="O006-PSU-013-U0480"><span class="math display" data-o006-math-id="O006-PSU-013-M0210">\[\displaystyle{a=\bar{y}\text{ and }b=\dfrac{\sum\limits_{i=1}^n (x_i-\bar{x})(y_i-\bar{y})}{\sum\limits_{i=1}^n (x_i-\bar{x})^2}}\]</span></p>
+<p data-o006-id="O006-PSU-013-U0481">are maximum likelihood estimators of <span class="math inline" data-o006-math-id="O006-PSU-013-M0211">\(\alpha\)</span> and <span class="math inline" data-o006-math-id="O006-PSU-013-M0212">\(\beta\)</span> under the assumption that the error terms are independent, normally distributed with mean 0 and variance <span class="math inline" data-o006-math-id="O006-PSU-013-M0213">\(\sigma^2\)</span>. As was to be proved!</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section class="level3" data-number="12.4.4" data-o006-id="O006-PSU-013-U0482" id="what-about-the-unknown-variance-sigma2">
+<h3 class="anchored" data-anchor-id="what-about-the-unknown-variance-sigma2" data-number="12.4.4" data-o006-id="O006-PSU-013-U0483"><span class="header-section-number">12.4.4</span> What About The (Unknown) Variance <span class="math inline" data-o006-math-id="O006-PSU-013-M0214">\(\sigma^2\)</span>?</h3>
+<p data-o006-id="O006-PSU-013-U0484">In short, the variance <span class="math inline" data-o006-math-id="O006-PSU-013-M0215">\(\sigma^2\)</span> quantifies how much the responses (<span class="math inline" data-o006-math-id="O006-PSU-013-M0216">\(y\)</span>) vary around the (unknown) mean regression line <span class="math inline" data-o006-math-id="O006-PSU-013-M0217">\(E(Y)\)</span>. Now, why should we care about the magnitude of the variance <span class="math inline" data-o006-math-id="O006-PSU-013-M0218">\(\sigma^2\)</span>? The following example might help to illuminate the answer to that question.</p>
+<div class="theorem example" data-o006-id="O006-PSU-013-U0485" id="exm-degrees">
+<p data-o006-id="O006-PSU-013-U0486"><span class="theorem-title"><strong>Example 12.2</strong></span> We know that there is a perfect relationship between degrees Celsius (<span class="math inline" data-o006-math-id="O006-PSU-013-M0219">\(C\)</span>) and degrees Fahrenheit (<span class="math inline" data-o006-math-id="O006-PSU-013-M0220">\(F\)</span>), namely:</p>
+<p data-o006-id="O006-PSU-013-U0487"><span class="math display" data-o006-math-id="O006-PSU-013-M0221">\[F=\dfrac{9}{5}C+32\]</span></p>
+<p data-o006-id="O006-PSU-013-U0488">Suppose we are unfortunate, however, and therefore don’t know the relationship. We might attempt to learn about the relationship by collecting some temperature data and calculating a least squares regression line. When all is said and done, which brand of thermometers do you think would yield more precise future predictions of the temperature in Fahrenheit? The one whose data are plotted on the left? Or the one whose data are plotted on the right?</p>
+<div class="grid" data-o006-id="O006-PSU-013-U0489">
+<div class="g-col-lg-6 g-col-md-6 g-col-sm-12" data-o006-id="O006-PSU-013-U0490">
+<div class="cell" data-o006-id="O006-PSU-013-U0491">
+<div class="cell-output-display" data-o006-id="O006-PSU-013-U0492">
+<div alt="Scatter plot of Celsius vs Fahrenheit temperatures with regression line." class="quarto-float quarto-figure quarto-figure-center anchored" data-o006-id="O006-PSU-013-U0493" id="fig-scattertemp" width="90%">
+<figure class="quarto-float quarto-float-fig figure" data-o006-id="O006-PSU-013-U0494">
+<div aria-describedby="fig-scattertemp-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca" data-o006-id="O006-PSU-013-U0495">
+<a class="lightbox" data-gallery="quarto-lightbox-gallery-7" data-o006-id="O006-PSU-013-U0496" href="Lesson12_files/figure-html/fig-scattertemp-1.png" title="Fig 12.7: "><img alt="Scatter plot of Celsius vs Fahrenheit temperatures with regression line." class="img-fluid figure-img" data-o006-asset-id="O006-PSU-013-A0007" data-o006-id="O006-PSU-013-U0497" id="fig-scattertemp" src="Lesson12_files/figure-html/fig-scattertemp-1.png" style="width:90.0%"/></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" data-o006-id="O006-PSU-013-U0498" id="fig-scattertemp-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Fig 12.7
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</div>
+<div class="g-col-lg-6 g-col-md-6 g-col-sm-12" data-o006-id="O006-PSU-013-U0499">
+<div class="cell" data-o006-id="O006-PSU-013-U0500">
+<div class="cell-output-display" data-o006-id="O006-PSU-013-U0501">
+<div alt="Scatter plot of Celsius vs Fahrenheit temperatures with regression line (with points more scattered)" class="quarto-float quarto-figure quarto-figure-center anchored" data-o006-id="O006-PSU-013-U0502" id="fig-scattertemp2" width="90%">
+<figure class="quarto-float quarto-float-fig figure" data-o006-id="O006-PSU-013-U0503">
+<div aria-describedby="fig-scattertemp2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca" data-o006-id="O006-PSU-013-U0504">
+<a class="lightbox" data-gallery="quarto-lightbox-gallery-8" data-o006-id="O006-PSU-013-U0505" href="Lesson12_files/figure-html/fig-scattertemp2-1.png" title="Fig 12.8: "><img alt="Scatter plot of Celsius vs Fahrenheit temperatures with regression line (with points more scattered)" class="img-fluid figure-img" data-o006-asset-id="O006-PSU-013-A0008" data-o006-id="O006-PSU-013-U0506" id="fig-scattertemp2" src="Lesson12_files/figure-html/fig-scattertemp2-1.png" style="width:90.0%"/></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" data-o006-id="O006-PSU-013-U0507" id="fig-scattertemp2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Fig 12.8
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</div>
+<section class="level4 card card-body bg-light ms-3 mb-3 pt-0" data-o006-id="O006-PSU-013-U0508" id="solution-1">
+<h4 class="anchored" data-anchor-id="solution-1" data-o006-id="O006-PSU-013-U0509">Solution</h4>
+<p data-o006-id="O006-PSU-013-U0510">As you can see, for the plot on the left, the Fahrenheit temperatures do not vary or “bounce” much around the estimated regression line. For the plot on the right, on the other hand, the Fahrenheit temperatures do vary or “bounce” quite a bit around the estimated regression line. It seems reasonable to conclude then that the brand of thermometers on the left will yield more precise future predictions of the temperature in Fahrenheit.</p>
+<p data-o006-id="O006-PSU-013-U0511">Now, the variance <span class="math inline" data-o006-math-id="O006-PSU-013-M0222">\(\sigma^2\)</span> is, of course, an unknown population parameter. The only way we can attempt to quantify the variance is to estimate it. In the case in which we had one population, say the (normal) population of IQ scores:</p>
+<div class="cell" data-o006-id="O006-PSU-013-U0512">
+<div class="cell-output-display" data-o006-id="O006-PSU-013-U0513">
+<div alt="Normal curve of IQ scores" class="quarto-float quarto-figure quarto-figure-center anchored" data-o006-id="O006-PSU-013-U0514" id="fig-iqnormal" width="70%">
+<figure class="quarto-float quarto-float-fig figure" data-o006-id="O006-PSU-013-U0515">
+<div aria-describedby="fig-iqnormal-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca" data-o006-id="O006-PSU-013-U0516">
+<a class="lightbox" data-gallery="quarto-lightbox-gallery-9" data-o006-id="O006-PSU-013-U0517" href="Lesson12_files/figure-html/fig-iqnormal-1.png" title="Fig 12.9: "><img alt="Normal curve of IQ scores" class="img-fluid figure-img" data-o006-asset-id="O006-PSU-013-A0009" data-o006-id="O006-PSU-013-U0518" id="fig-iqnormal" src="Lesson12_files/figure-html/fig-iqnormal-1.png" style="width:70.0%"/></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" data-o006-id="O006-PSU-013-U0519" id="fig-iqnormal-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Fig 12.9
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p data-o006-id="O006-PSU-013-U0520">we would estimate the population variance <span class="math inline" data-o006-math-id="O006-PSU-013-M0223">\(\sigma^2\)</span> using the sample variance:</p>
+<p data-o006-id="O006-PSU-013-U0521"><span class="math display" data-o006-math-id="O006-PSU-013-M0224">\[s^2=\dfrac{\sum\limits_{i=1}^n (Y_i-\bar{Y})^2}{n-1}\]</span></p>
+<p data-o006-id="O006-PSU-013-U0522">We have learned that <span class="math inline" data-o006-math-id="O006-PSU-013-M0225">\(s^2\)</span> is an unbiased estimator of <span class="math inline" data-o006-math-id="O006-PSU-013-M0226">\(\sigma^2\)</span>, the variance of the one population. But what if we no longer have just one population, but instead have many populations? In our bids and hours example, there is a population for every value of <span class="math inline" data-o006-math-id="O006-PSU-013-M0227">\(x\)</span>:</p>
+<div alt="Regression of line for hours vs number of bids" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-scap="A statistical graph showing the relationship between the number of bids prepared (X-axis, 0 to 45) and hours (Y-axis, 0 to 100). The graph includes two dashed probability density curves peaking around 25 and 45 bids, with a line labeled E(Y) = 9.5 + 2.1X. At 45 bids, annotations indicate Y_i = 108, ε_i = +4, and E(Y_i) = 104." data-o006-id="O006-PSU-013-U0523" id="fig-bidsgraph" width="60%">
+<figure class="quarto-float quarto-float-fig figure" data-o006-id="O006-PSU-013-U0524">
+<div aria-describedby="fig-bidsgraph-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca" data-o006-id="O006-PSU-013-U0525">
+<a class="lightbox" data-gallery="quarto-lightbox-gallery-10" data-o006-id="O006-PSU-013-U0526" href="assets/lesson9_11.png" title="Fig 12.10: "><img alt="Regression of line for hours vs number of bids" class="mx-auto d-block img-fluid figure-img" data-fig-scap="A statistical graph showing the relationship between the number of bids prepared (X-axis, 0 to 45) and hours (Y-axis, 0 to 100). The graph includes two dashed probability density curves peaking around 25 and 45 bids, with a line labeled E(Y) = 9.5 + 2.1X. At 45 bids, annotations indicate Y_i = 108, ε_i = +4, and E(Y_i) = 104." data-o006-asset-id="O006-PSU-013-A0006" data-o006-id="O006-PSU-013-U0527" id="fig-bidsgraph" src="assets/lesson9_11.png" style="width:60.0%"/></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" data-o006-id="O006-PSU-013-U0528" id="fig-bidsgraph-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Fig 12.10
+</figcaption>
+</figure>
+</div>
+<p data-o006-id="O006-PSU-013-U0529">In this case, we have to estimate <span class="math inline" data-o006-math-id="O006-PSU-013-M0228">\(\sigma^2\)</span>, the (common) variance of the many populations. There are two possibilities − one is a biased estimator, and one is an unbiased estimator.</p>
+</section>
+</div>
+<div class="callout callout-style-simple callout-note no-icon" data-o006-id="O006-PSU-013-U0530">
+<div class="callout-body d-flex" data-o006-id="O006-PSU-013-U0531">
+<div class="callout-icon-container" data-o006-id="O006-PSU-013-U0532">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-body-container" data-o006-id="O006-PSU-013-U0533">
+<div class="theorem" data-o006-id="O006-PSU-013-U0534" id="thm-lsrMLE2">
+<p data-o006-id="O006-PSU-013-U0535"><span class="theorem-title"><strong>Theorem 12.4</strong></span> The maximum likelihood estimator of <span class="math inline" data-o006-math-id="O006-PSU-013-M0229">\(\sigma^2\)</span> is:</p>
+<p data-o006-id="O006-PSU-013-U0536"><span class="math display" data-o006-math-id="O006-PSU-013-M0230">\[\hat{\sigma}^2=\dfrac{\sum\limits_{i=1}^n (Y_i-\hat{Y}_i)^2}{n}\]</span></p>
+<p data-o006-id="O006-PSU-013-U0537">It is a biased estimator of <span class="math inline" data-o006-math-id="O006-PSU-013-M0231">\(\sigma^2\)</span>, the common variance of the <strong>many</strong> populations.</p>
+<p data-o006-id="O006-PSU-013-U0538"><strong>Proof</strong></p>
+<p data-o006-id="O006-PSU-013-U0539">We have previously shown that the log of the likelihood function is:</p>
+<p data-o006-id="O006-PSU-013-U0540"><span class="math display" data-o006-math-id="O006-PSU-013-M0232">\[\text{log}L=-\dfrac{n}{2}\text{log}(2\pi)-\dfrac{n}{2}\text{log}(\sigma^2)-\dfrac{1}{2\sigma^2} \sum\limits_{i=1}^n (Y_i-\alpha-\beta(x_i-\bar{x}))^2\]</span></p>
+<p data-o006-id="O006-PSU-013-U0541">To maximize the log likelihood, we have to take the partial derivative of the log likelihood with respect to <span class="math inline" data-o006-math-id="O006-PSU-013-M0233">\(\sigma^2\)</span>. Doing so, we get:</p>
+<p data-o006-id="O006-PSU-013-U0542"><span class="math display" data-o006-math-id="O006-PSU-013-M0234">\[\dfrac{\partial L_{Y_i}(\alpha,\beta,\sigma^2)}{\partial \sigma^2}=-\dfrac{n}{2\sigma^2}-\dfrac{1}{2}\sum (Y_i-\alpha-\beta(x_i-\bar{x}))^2 \cdot \left(- \dfrac{1}{(\sigma^2)^2}\right)\]</span></p>
+<p data-o006-id="O006-PSU-013-U0543">Setting the derivative equal to 0, and multiplying through by <span class="math inline" data-o006-math-id="O006-PSU-013-M0235">\(2\sigma^4\)</span>:</p>
+<p data-o006-id="O006-PSU-013-U0544"><span class="math display" data-o006-math-id="O006-PSU-013-M0236">\[\frac{\partial L_{Y_{i}}\left(\alpha, \beta, \sigma^{2}\right)}{\partial \sigma^{2}}=\left[-\frac{n}{2 \sigma^{2}}-\frac{1}{2} \sum\left(Y_{i}-\alpha-\beta\left(x_{i}-\bar{x}\right)\right)^{2} \cdot-\frac{1}{\left(\sigma^{2}\right)^{2}} \stackrel{\operatorname{SET}}{\equiv} 0\right] 2\left(\sigma^{2}\right)^{2}\]</span></p>
+<p data-o006-id="O006-PSU-013-U0545">we get:</p>
+<p data-o006-id="O006-PSU-013-U0546"><span class="math display" data-o006-math-id="O006-PSU-013-M0237">\[-n\sigma^2+\sum (Y_i-\alpha-\beta(x_i-\bar{x}))^2 =0\]</span></p>
+<p data-o006-id="O006-PSU-013-U0547">And, solving for and putting a hat on <span class="math inline" data-o006-math-id="O006-PSU-013-M0238">\(\sigma^2\)</span>, as well as replacing <span class="math inline" data-o006-math-id="O006-PSU-013-M0239">\(\alpha\)</span> and <span class="math inline" data-o006-math-id="O006-PSU-013-M0240">\(\beta\)</span> with their ML estimators, we get:</p>
+<p data-o006-id="O006-PSU-013-U0548"><span class="math display" data-o006-math-id="O006-PSU-013-M0241">\[\hat{\sigma}^2=\dfrac{\sum (Y_i-\alpha-\beta(x_i-\bar{x}))^2 }{n}=\dfrac{\sum(Y_i-\hat{Y}_i)^2}{n}\]</span></p>
+<p data-o006-id="O006-PSU-013-U0549">As was to be proved.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="ms-3 theorem definition" data-o006-id="O006-PSU-013-U0550" id="def-name">
+<p data-o006-id="O006-PSU-013-U0551"><span class="theorem-title"><strong>Def. 12.1 (Mean Square Error)</strong></span> The <strong>mean square error</strong>, on the other hand:</p>
+<p data-o006-id="O006-PSU-013-U0552"><span class="math display" data-o006-math-id="O006-PSU-013-M0242">\[MSE=\dfrac{\sum\limits_{i=1}^n(Y_i-\hat{Y}_i)^2}{n-2}\]</span></p>
+<p data-o006-id="O006-PSU-013-U0553">is an <strong>unbiased estimator</strong> of <span class="math inline" data-o006-math-id="O006-PSU-013-M0243">\(\sigma^2\)</span>, the common variance of the <strong>many</strong> populations.</p>
+</div>
+<p data-o006-id="O006-PSU-013-U0554">We’ll need to use these estimators of <span class="math inline" data-o006-math-id="O006-PSU-013-M0244">\(\sigma^2\)</span> when we derive confidence intervals for <span class="math inline" data-o006-math-id="O006-PSU-013-M0245">\(\alpha\)</span> and <span class="math inline" data-o006-math-id="O006-PSU-013-M0246">\(\beta\)</span> in the next section.</p>
+</section>
+</section>
+<section class="level2" data-number="12.5" data-o006-id="O006-PSU-013-U0555" id="confidence-intervals-for-regression-parameters">
+<h2 class="anchored" data-anchor-id="confidence-intervals-for-regression-parameters" data-number="12.5" data-o006-id="O006-PSU-013-U0556"><span class="header-section-number">12.5</span> Confidence Intervals for Regression Parameters</h2>
+<p data-o006-id="O006-PSU-013-U0557">Before we can derive confidence intervals for <span class="math inline" data-o006-math-id="O006-PSU-013-M0247">\(\alpha\)</span> and <span class="math inline" data-o006-math-id="O006-PSU-013-M0248">\(\beta\)</span>, we first need to derive the probability distributions of <span class="math inline" data-o006-math-id="O006-PSU-013-M0249">\(a\)</span>, <span class="math inline" data-o006-math-id="O006-PSU-013-M0250">\(b\)</span> and <span class="math inline" data-o006-math-id="O006-PSU-013-M0251">\(\hat{\sigma}^2\)</span>. In the process of doing so, let’s adopt the more traditional estimator notation of putting a hat on greek letters. That is, here we’ll use:</p>
+<p data-o006-id="O006-PSU-013-U0558"><span class="math display" data-o006-math-id="O006-PSU-013-M0252">\[a=\hat{\alpha} \text{ and }b=\hat{\beta}\]</span></p>
+<div class="callout callout-style-simple callout-note no-icon" data-o006-id="O006-PSU-013-U0559">
+<div class="callout-body d-flex" data-o006-id="O006-PSU-013-U0560">
+<div class="callout-icon-container" data-o006-id="O006-PSU-013-U0561">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-body-container" data-o006-id="O006-PSU-013-U0562">
+<div class="theorem" data-o006-id="O006-PSU-013-U0563" id="thm-lsrprobdist">
+<p data-o006-id="O006-PSU-013-U0564"><span class="theorem-title"><strong>Theorem 12.5</strong></span> Under the assumptions of the simple linear regression model:</p>
+<p data-o006-id="O006-PSU-013-U0565"><span class="math display" data-o006-math-id="O006-PSU-013-M0253">\[\hat{\alpha}\sim N\left(\alpha,\dfrac{\sigma^2}{n}\right)\]</span></p>
+<p data-o006-id="O006-PSU-013-U0566"><strong>Proof</strong></p>
+<p data-o006-id="O006-PSU-013-U0567">Recall that the ML (and least squares!) estimator of <span class="math inline" data-o006-math-id="O006-PSU-013-M0254">\(\alpha\)</span> is:</p>
+<p data-o006-id="O006-PSU-013-U0568"><span class="math display" data-o006-math-id="O006-PSU-013-M0255">\[a=\hat{\alpha}=\bar{Y}\]</span></p>
+<p data-o006-id="O006-PSU-013-U0569">where the responses <span class="math inline" data-o006-math-id="O006-PSU-013-M0256">\(Y_i\)</span> are independent and normally distributed. More specifically:</p>
+<p data-o006-id="O006-PSU-013-U0570"><span class="math display" data-o006-math-id="O006-PSU-013-M0257">\[Y_i \sim N(\alpha+\beta(x_i-\bar{x}),\sigma^2)\]</span></p>
+<p data-o006-id="O006-PSU-013-U0571">The expected value of <span class="math inline" data-o006-math-id="O006-PSU-013-M0258">\(\hat{\alpha}\)</span> is <span class="math inline" data-o006-math-id="O006-PSU-013-M0259">\(\alpha\)</span>, as shown here:</p>
+<p data-o006-id="O006-PSU-013-U0572"><span class="math display" data-o006-math-id="O006-PSU-013-M0260">\[E(\hat{\alpha})=E(\bar{Y})=\frac{1}{n}\sum E(Y_i)=\frac{1}{n}\sum E(\alpha+\beta(x_i-\bar{x})=\frac{1}{n}\left[n\alpha+\beta \sum(x_i-\bar{x})\right]=\frac{1}{n}(n\alpha)=\alpha\]</span></p>
+<p data-o006-id="O006-PSU-013-U0573">Because <span class="math inline" data-o006-math-id="O006-PSU-013-M0261">\(\sum (x_i-\bar{x})=0\)</span>.</p>
+<p data-o006-id="O006-PSU-013-U0574">The variance of <span class="math inline" data-o006-math-id="O006-PSU-013-M0262">\(\hat{\alpha}\)</span> follow directly from what we know about the variance of a sample mean, namely:</p>
+<p data-o006-id="O006-PSU-013-U0575"><span class="math display" data-o006-math-id="O006-PSU-013-M0263">\[Var(\hat{\alpha})=Var(\bar{Y})=\dfrac{\sigma^2}{n}\]</span></p>
+<p data-o006-id="O006-PSU-013-U0576">Therefore, since a linear combination of normal random variables is also normally distributed, we have:</p>
+<p data-o006-id="O006-PSU-013-U0577"><span class="math display" data-o006-math-id="O006-PSU-013-M0264">\[\hat{\alpha} \sim N\left(\alpha,\dfrac{\sigma^2}{n}\right)\]</span></p>
+<p data-o006-id="O006-PSU-013-U0578">as was to be proved!</p>
+</div>
+</div>
+</div>
+</div>
+<div class="callout callout-style-simple callout-note no-icon" data-o006-id="O006-PSU-013-U0579">
+<div class="callout-body d-flex" data-o006-id="O006-PSU-013-U0580">
+<div class="callout-icon-container" data-o006-id="O006-PSU-013-U0581">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-body-container" data-o006-id="O006-PSU-013-U0582">
+<div class="theorem" data-o006-id="O006-PSU-013-U0583" id="thm-lsrvariance">
+<p data-o006-id="O006-PSU-013-U0584"><span class="theorem-title"><strong>Theorem 12.6</strong></span> Under the assumptions of the simple linear regression model:</p>
+<p data-o006-id="O006-PSU-013-U0585"><span class="math display" data-o006-math-id="O006-PSU-013-M0265">\[\hat{\beta}\sim N\left(\beta,\dfrac{\sigma^2}{\sum_{i=1}^n (x_i-\bar{x})^2}\right)\]</span></p>
+<p data-o006-id="O006-PSU-013-U0586"><strong>Proof</strong></p>
+<p data-o006-id="O006-PSU-013-U0587">Recalling one of the shortcut formulas for the ML (and least squares!) estimator of <span class="math inline" data-o006-math-id="O006-PSU-013-M0266">\(\beta\)</span></p>
+<p data-o006-id="O006-PSU-013-U0588"><span class="math display" data-o006-math-id="O006-PSU-013-M0267">\[b=\hat{\beta}=\dfrac{\sum_{i=1}^n (x_i-\bar{x})Y_i}{\sum_{i=1}^n (x_i-\bar{x})^2}\]</span></p>
+<p data-o006-id="O006-PSU-013-U0589">we see that the ML estimator is a linear combination of independent normal random variables <span class="math inline" data-o006-math-id="O006-PSU-013-M0268">\(Y_i\)</span> with:</p>
+<p data-o006-id="O006-PSU-013-U0590"><span class="math display" data-o006-math-id="O006-PSU-013-M0269">\[Y_i \sim N(\alpha+\beta(x_i-\bar{x}),\sigma^2)\]</span></p>
+<p data-o006-id="O006-PSU-013-U0591">The expected value of <span class="math inline" data-o006-math-id="O006-PSU-013-M0270">\(\hat{\beta}\)</span> is <span class="math inline" data-o006-math-id="O006-PSU-013-M0271">\(\beta\)</span>, as shown here:</p>
+<p data-o006-id="O006-PSU-013-U0592"><span class="math display" data-o006-math-id="O006-PSU-013-M0272">\[E(\hat{\beta})=\frac{1}{\sum (x_i-\bar{x})^2}\sum E\left[(x_i-\bar{x})Y_i\right]=\frac{1}{\sum (x_i-\bar{x})^2}\sum (x_i-\bar{x})(\alpha +\beta(x_i-\bar{x}) =\frac{1}{\sum (x_i-\bar{x})^2}\left[ \alpha\sum (x_i-\bar{x}) +\beta \sum (x_i-\bar{x})^2 \right] \\=\beta\]</span></p>
+<p data-o006-id="O006-PSU-013-U0593">because <span class="math inline" data-o006-math-id="O006-PSU-013-M0273">\(\sum (x_i-\bar{x})=0\)</span>.</p>
+<p data-o006-id="O006-PSU-013-U0594">And, the variance of <span class="math inline" data-o006-math-id="O006-PSU-013-M0274">\(\hat{\beta}\)</span> is:</p>
+<p data-o006-id="O006-PSU-013-U0595"><span class="math display" data-o006-math-id="O006-PSU-013-M0275">\[\text{Var}(\hat{\beta})=\left[\frac{1}{\sum (x_i-\bar{x})^2}\right]^2\sum (x_i-\bar{x})^2(\text{Var}(Y_i))=\frac{\sigma^2}{\sum (x_i-\bar{x})^2}\]</span></p>
+<p data-o006-id="O006-PSU-013-U0596">Therefore, since a linear combination of normal random variables is also normally distributed, we have:</p>
+<p data-o006-id="O006-PSU-013-U0597"><span class="math display" data-o006-math-id="O006-PSU-013-M0276">\[\hat{\beta}\sim N\left(\beta,\dfrac{\sigma^2}{\sum_{i=1}^n (x_i-\bar{x})^2}\right)\]</span></p>
+<p data-o006-id="O006-PSU-013-U0598">As was to be proved!</p>
+</div>
+</div>
+</div>
+</div>
+<div class="callout callout-style-simple callout-note no-icon" data-o006-id="O006-PSU-013-U0599">
+<div class="callout-body d-flex" data-o006-id="O006-PSU-013-U0600">
+<div class="callout-icon-container" data-o006-id="O006-PSU-013-U0601">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-body-container" data-o006-id="O006-PSU-013-U0602">
+<div class="theorem" data-o006-id="O006-PSU-013-U0603" id="thm-lsrindependent">
+<p data-o006-id="O006-PSU-013-U0604"><span class="theorem-title"><strong>Theorem 12.7</strong></span> Under the assumptions of the simple linear regression model:</p>
+<p data-o006-id="O006-PSU-013-U0605"><span class="math display" data-o006-math-id="O006-PSU-013-M0277">\[\dfrac{n\hat{\sigma}^2}{\sigma^2}\sim \chi^2_{(n-2)}\]</span></p>
+<p data-o006-id="O006-PSU-013-U0606">and <span class="math inline" data-o006-math-id="O006-PSU-013-M0278">\(a=\hat{\alpha}\)</span>, <span class="math inline" data-o006-math-id="O006-PSU-013-M0279">\(b=\hat{\beta}\)</span>, and <span class="math inline" data-o006-math-id="O006-PSU-013-M0280">\(\hat{\sigma}^2\)</span> are mutually independent.</p>
+<p data-o006-id="O006-PSU-013-U0607"><strong>Argument</strong></p>
+<p data-o006-id="O006-PSU-013-U0608">First, note that the heading here says Argument, not Proof. That’s because we are going to be doing some hand-waving and pointing to another reference, as the proof is beyond the scope of this course. That said, let’s start our hand-waving. For homework, you are asked to show that:</p>
+<p data-o006-id="O006-PSU-013-U0609"><span class="math display" data-o006-math-id="O006-PSU-013-M0281">\[\sum\limits_{i=1}^n (Y_i-\alpha-\beta(x_i-\bar{x}))^2=n(\hat{\alpha}-\alpha)^2+(\hat{\beta}-\beta)^2\sum\limits_{i=1}^n (x_i-\bar{x})^2+\sum\limits_{i=1}^n (Y_i-\hat{Y})^2\]</span></p>
+<p data-o006-id="O006-PSU-013-U0610">Now, if we divide through both sides of the equation by the population variance <span class="math inline" data-o006-math-id="O006-PSU-013-M0282">\(\sigma^2\)</span>, we get:</p>
+<p data-o006-id="O006-PSU-013-U0611"><span class="math display" data-o006-math-id="O006-PSU-013-M0283">\[\dfrac{\sum_{i=1}^n (Y_i-\alpha-\beta(x_i-\bar{x}))^2 }{\sigma^2}=\dfrac{n(\hat{\alpha}-\alpha)^2}{\sigma^2}+\dfrac{(\hat{\beta}-\beta)^2\sum\limits_{i=1}^n (x_i-\bar{x})^2}{\sigma^2}+\dfrac{\sum (Y_i-\hat{Y})^2}{\sigma^2}\]</span></p>
+<p data-o006-id="O006-PSU-013-U0612">Rewriting a few of those terms just a bit, we get:</p>
+<p data-o006-id="O006-PSU-013-U0613"><span class="math display" data-o006-math-id="O006-PSU-013-M0284">\[\dfrac{\sum_{i=1}^n (Y_i-\alpha-\beta(x_i-\bar{x}))^2 }{\sigma^2}=\dfrac{(\hat{\alpha}-\alpha)^2}{\sigma^2/n}+\dfrac{(\hat{\beta}-\beta)^2}{\sigma^2/\sum\limits_{i=1}^n (x_i-\bar{x})^2}+\dfrac{n\hat{\sigma}^2}{\sigma^2}\]</span></p>
+<p data-o006-id="O006-PSU-013-U0614">Now, the terms are written so that we should be able to readily identify the distributions of each of the terms. The distributions are:</p>
+<p data-o006-id="O006-PSU-013-U0615"><span class="math display" data-o006-math-id="O006-PSU-013-M0285">\[\underbrace{\color{black}\frac{\sum\left(Y_{i}-\alpha-\beta\left(x_{i}-\bar{x}\right)\right)^{2}}{\sigma^2}}_{\underset{\text{}}{{\color{blue}x^2_{(n)}}}}=\underbrace{\color{black}\frac{(\hat{\alpha}-\alpha)^{2}}{\sigma^{2}/n}}_{\underset{\text{}}{{\color{blue}x^2_{(1)}}}}+\underbrace{\color{black}\frac{(\hat{\beta}-\beta)^{2}}{\sigma^{2}/\sum\left(x_{i}-\bar{x}\right)^{2}}}_{\underset{\text{}}{{\color{blue}x^2_{(1)}}}}+\underbrace{\color{black}\frac{n\hat{\sigma}^{2}}{\sigma^{2}}}_{\underset{\text{ }}{\color{red}\text{?}}}\]</span></p>
+<p data-o006-id="O006-PSU-013-U0616">Now, it might seem reasonable that the last term is a chi-square random variable with <span class="math inline" data-o006-math-id="O006-PSU-013-M0286">\(n-2\)</span> degrees of freedom. That is:</p>
+<p data-o006-id="O006-PSU-013-U0617"><span class="math display" data-o006-math-id="O006-PSU-013-M0287">\[\dfrac{n\hat{\sigma}^2}{\sigma^2} \sim \chi^2_{(n-2)}\]</span></p>
+<p data-o006-id="O006-PSU-013-U0618">and furthermore, <span class="math inline" data-o006-math-id="O006-PSU-013-M0288">\(a=\hat{\alpha}\)</span>, <span class="math inline" data-o006-math-id="O006-PSU-013-M0289">\(b=\hat{\beta}\)</span>, and <span class="math inline" data-o006-math-id="O006-PSU-013-M0290">\(\hat{\sigma^2}\)</span> are mutually independent. (For a proof, you can refer to any number of mathematical statistics textbooks).</p>
+<p data-o006-id="O006-PSU-013-U0619">With the distributional results behind us, we can now derive <span class="math inline" data-o006-math-id="O006-PSU-013-M0291">\((1-\alpha)100\%\)</span> confidence intervals for <span class="math inline" data-o006-math-id="O006-PSU-013-M0292">\(\alpha\)</span> and <span class="math inline" data-o006-math-id="O006-PSU-013-M0293">\(\beta\)</span>!</p>
+</div>
+</div>
+</div>
+</div>
+<div class="callout callout-style-simple callout-note no-icon" data-o006-id="O006-PSU-013-U0620">
+<div class="callout-body d-flex" data-o006-id="O006-PSU-013-U0621">
+<div class="callout-icon-container" data-o006-id="O006-PSU-013-U0622">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-body-container" data-o006-id="O006-PSU-013-U0623">
+<div class="theorem" data-o006-id="O006-PSU-013-U0624" id="thm-cislope">
+<p data-o006-id="O006-PSU-013-U0625"><span class="theorem-title"><strong>Theorem 12.8</strong></span> Under the assumptions of the simple linear regression model, a <span class="math inline" data-o006-math-id="O006-PSU-013-M0294">\((1-\alpha)100\%\)</span> <strong>confidence interval for the slope parameter</strong> <span class="math inline" data-o006-math-id="O006-PSU-013-M0295">\(\beta\)</span> is:</p>
+<p data-o006-id="O006-PSU-013-U0626"><span class="math display" data-o006-math-id="O006-PSU-013-M0296">\[b \pm t_{\alpha/2,n-2}\times \left(\dfrac{\sqrt{n}\hat{\sigma}}{\sqrt{n-2} \sqrt{\sum (x_i-\bar{x})^2}}\right)\]</span></p>
+<p data-o006-id="O006-PSU-013-U0627">or equivalently:</p>
+<p data-o006-id="O006-PSU-013-U0628"><span class="math display" data-o006-math-id="O006-PSU-013-M0297">\[\hat{\beta} \pm t_{\alpha/2,n-2}\times \sqrt{\dfrac{MSE}{\sum (x_i-\bar{x})^2}}\]</span> <strong>Proof</strong></p>
+<p data-o006-id="O006-PSU-013-U0629">Recall the definition of a <span class="math inline" data-o006-math-id="O006-PSU-013-M0298">\(T\)</span> random variable. That is, recall that if:</p>
+<ol data-o006-id="O006-PSU-013-U0630" type="1">
+<li data-o006-id="O006-PSU-013-U0631"><span class="math inline" data-o006-math-id="O006-PSU-013-M0299">\(Z\)</span> is a standard normal (<span class="math inline" data-o006-math-id="O006-PSU-013-M0300">\(N(0,1)\)</span>)) random variable</li>
+<li data-o006-id="O006-PSU-013-U0632"><span class="math inline" data-o006-math-id="O006-PSU-013-M0301">\(U\)</span> is a chi-square random variable with <span class="math inline" data-o006-math-id="O006-PSU-013-M0302">\(r\)</span> degrees of freedom</li>
+<li data-o006-id="O006-PSU-013-U0633"><span class="math inline" data-o006-math-id="O006-PSU-013-M0303">\(Z\)</span> and <span class="math inline" data-o006-math-id="O006-PSU-013-M0304">\(U\)</span> are independent, then:</li>
+</ol>
+<p data-o006-id="O006-PSU-013-U0634"><span class="math display" data-o006-math-id="O006-PSU-013-M0305">\[T=\dfrac{Z}{\sqrt{U/r}}\]</span></p>
+<p data-o006-id="O006-PSU-013-U0635">follows a <span class="math inline" data-o006-math-id="O006-PSU-013-M0306">\(T\)</span> distribution with <span class="math inline" data-o006-math-id="O006-PSU-013-M0307">\(r\)</span> degrees of freedom. Now, our work above tells us that:</p>
+<p data-o006-id="O006-PSU-013-U0636"><span class="math display" data-o006-math-id="O006-PSU-013-M0308">\[\dfrac{\hat{\beta}-\beta}{\sigma/\sqrt{\sum (x_i-\bar{x})^2}} \sim N(0,1) \text{ and }\dfrac{n\hat{\sigma}^2}{\sigma^2} \sim \chi^2_{(n-2)} \text{ are independent}\]</span></p>
+<p data-o006-id="O006-PSU-013-U0637">Therefore, we have that:</p>
+<p data-o006-id="O006-PSU-013-U0638"><span class="math display" data-o006-math-id="O006-PSU-013-M0309">\[T=\dfrac{\dfrac{\hat{\beta}-\beta}{\sigma/\sqrt{\sum (x_i-\bar{x})^2}}}{\sqrt{\dfrac{n\hat{\sigma}^2}{\sigma^2}/(n-2)}}=\dfrac{\hat{\beta}-\beta}{\sqrt{\dfrac{n\hat{\sigma}^2}{n-2}/\sum (x_i-\bar{x})^2}}=\dfrac{\hat{\beta}-\beta}{\sqrt{MSE/\sum (x_i-\bar{x})^2}} \sim t_{n-2}\]</span></p>
+<p data-o006-id="O006-PSU-013-U0639">follows a <span class="math inline" data-o006-math-id="O006-PSU-013-M0310">\(T\)</span> distribution with <span class="math inline" data-o006-math-id="O006-PSU-013-M0311">\(n-2\)</span> degrees of freedom. Now, deriving a confidence interval for <span class="math inline" data-o006-math-id="O006-PSU-013-M0312">\(\beta\)</span> reduces to the usual manipulation of the inside of a probability statement:</p>
+<p data-o006-id="O006-PSU-013-U0640"><span class="math display" data-o006-math-id="O006-PSU-013-M0313">\[P\left(-t_{\alpha/2} \leq \dfrac{\hat{\beta}-\beta}{\sqrt{MSE/\sum (x_i-\bar{x})^2}} \leq t_{\alpha/2}\right)=1-\alpha\]</span></p>
+<p data-o006-id="O006-PSU-013-U0641">as was to be proved!</p>
+<p data-o006-id="O006-PSU-013-U0642">Now, for the confidence interval for the intercept parameter <span class="math inline" data-o006-math-id="O006-PSU-013-M0314">\(\alpha\)</span>.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="callout callout-style-simple callout-note no-icon" data-o006-id="O006-PSU-013-U0643">
+<div class="callout-body d-flex" data-o006-id="O006-PSU-013-U0644">
+<div class="callout-icon-container" data-o006-id="O006-PSU-013-U0645">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-body-container" data-o006-id="O006-PSU-013-U0646">
+<div class="theorem" data-o006-id="O006-PSU-013-U0647" id="thm-ciintercept">
+<p data-o006-id="O006-PSU-013-U0648"><span class="theorem-title"><strong>Theorem 12.9</strong></span> Under the assumptions of the simple linear regression model, a <span class="math inline" data-o006-math-id="O006-PSU-013-M0315">\((1-\alpha)100\%\)</span> confidence interval for the intercept parameter <span class="math inline" data-o006-math-id="O006-PSU-013-M0316">\(\alpha\)</span> is:</p>
+<p data-o006-id="O006-PSU-013-U0649"><span class="math display" data-o006-math-id="O006-PSU-013-M0317">\[a \pm t_{\alpha/2,n-2}\times \left(\sqrt{\dfrac{\hat{\sigma}^2}{n-2}}\right)\]</span></p>
+<p data-o006-id="O006-PSU-013-U0650">or equivalently:</p>
+<p data-o006-id="O006-PSU-013-U0651"><span class="math display" data-o006-math-id="O006-PSU-013-M0318">\[a \pm t_{\alpha/2,n-2}\times \left(\sqrt{\dfrac{MSE}{n}}\right)\]</span></p>
+<p data-o006-id="O006-PSU-013-U0652"><strong>Proof</strong></p>
+<p data-o006-id="O006-PSU-013-U0653">The proof, which again may or may not appear on a future assessment, is left for you for practice.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="theorem example" data-o006-id="O006-PSU-013-U0654" id="exm-anchovies">
+<p data-o006-id="O006-PSU-013-U0655"><span class="theorem-title"><strong>Example 12.3</strong></span> The following table shows <span class="math inline" data-o006-math-id="O006-PSU-013-M0319">\(x\)</span>, the catches of Peruvian anchovies (in millions of metric tons) and <span class="math inline" data-o006-math-id="O006-PSU-013-M0320">\(y\)</span>, the prices of fish meal (in current dollars per ton) for 14 consecutive years. (Data from Bardach, JE and Santerre, RM, Climate and the Fish in the Sea, Bioscience 31(3), 1981).</p>
+<table class="w-auto table-sm mx-auto row-header small caption-top table" data-o006-id="O006-PSU-013-U0656">
+<thead data-o006-id="O006-PSU-013-U0657">
+<tr class="header" data-o006-id="O006-PSU-013-U0658">
+<th data-o006-id="O006-PSU-013-U0659">Row</th>
+<th data-o006-id="O006-PSU-013-U0660">Price</th>
+<th data-o006-id="O006-PSU-013-U0661">Catch</th>
+</tr>
+</thead>
+<tbody data-o006-id="O006-PSU-013-U0662">
+<tr class="odd" data-o006-id="O006-PSU-013-U0663">
+<td data-o006-id="O006-PSU-013-U0664">1</td>
+<td data-o006-id="O006-PSU-013-U0665">190</td>
+<td data-o006-id="O006-PSU-013-U0666">7.23</td>
+</tr>
+<tr class="even" data-o006-id="O006-PSU-013-U0667">
+<td data-o006-id="O006-PSU-013-U0668">2</td>
+<td data-o006-id="O006-PSU-013-U0669">160</td>
+<td data-o006-id="O006-PSU-013-U0670">8.53</td>
+</tr>
+<tr class="odd" data-o006-id="O006-PSU-013-U0671">
+<td data-o006-id="O006-PSU-013-U0672">3</td>
+<td data-o006-id="O006-PSU-013-U0673">134</td>
+<td data-o006-id="O006-PSU-013-U0674">9.82</td>
+</tr>
+<tr class="even" data-o006-id="O006-PSU-013-U0675">
+<td data-o006-id="O006-PSU-013-U0676">4</td>
+<td data-o006-id="O006-PSU-013-U0677">129</td>
+<td data-o006-id="O006-PSU-013-U0678">10.26</td>
+</tr>
+<tr class="odd" data-o006-id="O006-PSU-013-U0679">
+<td data-o006-id="O006-PSU-013-U0680">5</td>
+<td data-o006-id="O006-PSU-013-U0681">172</td>
+<td data-o006-id="O006-PSU-013-U0682">8.96</td>
+</tr>
+<tr class="even" data-o006-id="O006-PSU-013-U0683">
+<td data-o006-id="O006-PSU-013-U0684">6</td>
+<td data-o006-id="O006-PSU-013-U0685">197</td>
+<td data-o006-id="O006-PSU-013-U0686">12.27</td>
+</tr>
+<tr class="odd" data-o006-id="O006-PSU-013-U0687">
+<td data-o006-id="O006-PSU-013-U0688">7</td>
+<td data-o006-id="O006-PSU-013-U0689">167</td>
+<td data-o006-id="O006-PSU-013-U0690">10.28</td>
+</tr>
+<tr class="even" data-o006-id="O006-PSU-013-U0691">
+<td data-o006-id="O006-PSU-013-U0692">8</td>
+<td data-o006-id="O006-PSU-013-U0693">239</td>
+<td data-o006-id="O006-PSU-013-U0694">4.45</td>
+</tr>
+<tr class="odd" data-o006-id="O006-PSU-013-U0695">
+<td data-o006-id="O006-PSU-013-U0696">9</td>
+<td data-o006-id="O006-PSU-013-U0697">542</td>
+<td data-o006-id="O006-PSU-013-U0698">1.87</td>
+</tr>
+<tr class="even" data-o006-id="O006-PSU-013-U0699">
+<td data-o006-id="O006-PSU-013-U0700">10</td>
+<td data-o006-id="O006-PSU-013-U0701">372</td>
+<td data-o006-id="O006-PSU-013-U0702">4.00</td>
+</tr>
+<tr class="odd" data-o006-id="O006-PSU-013-U0703">
+<td data-o006-id="O006-PSU-013-U0704">11</td>
+<td data-o006-id="O006-PSU-013-U0705">245</td>
+<td data-o006-id="O006-PSU-013-U0706">3.30</td>
+</tr>
+<tr class="even" data-o006-id="O006-PSU-013-U0707">
+<td data-o006-id="O006-PSU-013-U0708">12</td>
+<td data-o006-id="O006-PSU-013-U0709">376</td>
+<td data-o006-id="O006-PSU-013-U0710">4.30</td>
+</tr>
+<tr class="odd" data-o006-id="O006-PSU-013-U0711">
+<td data-o006-id="O006-PSU-013-U0712">13</td>
+<td data-o006-id="O006-PSU-013-U0713">454</td>
+<td data-o006-id="O006-PSU-013-U0714">0.80</td>
+</tr>
+<tr class="even" data-o006-id="O006-PSU-013-U0715">
+<td data-o006-id="O006-PSU-013-U0716">14</td>
+<td data-o006-id="O006-PSU-013-U0717">410</td>
+<td data-o006-id="O006-PSU-013-U0718">0.50</td>
+</tr>
+</tbody>
+</table>
+<p data-o006-id="O006-PSU-013-U0719">Find a 95% confidence interval for the slope parameter <span class="math inline" data-o006-math-id="O006-PSU-013-M0321">\(\beta\)</span>.</p>
+<div class="card card-body bg-light ms-3 mb-3 pt-0" data-o006-id="O006-PSU-013-U0720">
+<section class="level4" data-o006-id="O006-PSU-013-U0721" id="solution-2">
+<h4 class="anchored" data-anchor-id="solution-2" data-o006-id="O006-PSU-013-U0722">Solution</h4>
+<p data-o006-id="O006-PSU-013-U0723">The following portion of output was obtained using Minitab’s regression analysis package, with the parts useful to us here outlined (<span class="math inline" data-o006-math-id="O006-PSU-013-M0322">\(\hat{\beta} = -29.39\)</span> and <span class="math inline" data-o006-math-id="O006-PSU-013-M0323">\(MSE = 5202\)</span>):</p>
+</section>
+<div class="minitab_output" data-o006-id="O006-PSU-013-U0724">
+<section class="level4" data-o006-id="O006-PSU-013-U0725" id="regression-equation">
+<h4 class="anchored" data-anchor-id="regression-equation" data-o006-id="O006-PSU-013-U0726">Regression Equation</h4>
+<p data-o006-id="O006-PSU-013-U0727">Price = 452.3-29.39 Catch</p>
+</section>
+<section class="level4" data-o006-id="O006-PSU-013-U0728" id="coefficients">
+<h4 class="anchored" data-anchor-id="coefficients" data-o006-id="O006-PSU-013-U0729">Coefficients</h4>
+<table class="w-auto table-sm row-header small caption-top table" data-o006-id="O006-PSU-013-U0730">
+<colgroup>
+<col style="width: 19%"/>
+<col style="width: 15%"/>
+<col style="width: 17%"/>
+<col style="width: 17%"/>
+<col style="width: 17%"/>
+<col style="width: 11%"/>
+</colgroup>
+<thead data-o006-id="O006-PSU-013-U0731">
+<tr class="header" data-o006-id="O006-PSU-013-U0732">
+<th data-o006-id="O006-PSU-013-U0733">Term</th>
+<th data-o006-id="O006-PSU-013-U0734" style="text-align: right;">Coef</th>
+<th data-o006-id="O006-PSU-013-U0735" style="text-align: right;">SE Coef</th>
+<th data-o006-id="O006-PSU-013-U0736" style="text-align: right;">T-Value</th>
+<th data-o006-id="O006-PSU-013-U0737" style="text-align: right;">P-Value</th>
+<th data-o006-id="O006-PSU-013-U0738" style="text-align: right;">VIF</th>
+</tr>
+</thead>
+<tbody data-o006-id="O006-PSU-013-U0739">
+<tr class="odd" data-o006-id="O006-PSU-013-U0740">
+<td data-o006-id="O006-PSU-013-U0741">Constant</td>
+<td data-o006-id="O006-PSU-013-U0742" style="text-align: right;">452.3</td>
+<td data-o006-id="O006-PSU-013-U0743" style="text-align: right;">37.1</td>
+<td data-o006-id="O006-PSU-013-U0744" style="text-align: right;">12.18</td>
+<td data-o006-id="O006-PSU-013-U0745" style="text-align: right;">0.000</td>
+<td data-o006-id="O006-PSU-013-U0746" style="text-align: right;"></td>
+</tr>
+<tr class="even" data-o006-id="O006-PSU-013-U0747">
+<td data-o006-id="O006-PSU-013-U0748">Catch</td>
+<td data-o006-id="O006-PSU-013-U0749" style="text-align: right;"><span style="border: 1px solid blue; padding: 4px;"> -29.39 </span></td>
+<td data-o006-id="O006-PSU-013-U0750" style="text-align: right;">5.13</td>
+<td data-o006-id="O006-PSU-013-U0751" style="text-align: right;">-5.73</td>
+<td data-o006-id="O006-PSU-013-U0752" style="text-align: right;">0.000</td>
+<td data-o006-id="O006-PSU-013-U0753" style="text-align: right;">1.00</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section class="level4" data-o006-id="O006-PSU-013-U0754" id="model-summary">
+<h4 class="anchored" data-anchor-id="model-summary" data-o006-id="O006-PSU-013-U0755">Model Summary</h4>
+<table class="w-auto table-sm small caption-top table" data-o006-id="O006-PSU-013-U0756">
+<thead data-o006-id="O006-PSU-013-U0757">
+<tr class="header" data-o006-id="O006-PSU-013-U0758">
+<th data-o006-id="O006-PSU-013-U0759" style="text-align: right;">S</th>
+<th data-o006-id="O006-PSU-013-U0760" style="text-align: right;">R-sq</th>
+<th data-o006-id="O006-PSU-013-U0761" style="text-align: right;">R-sq(adj)</th>
+<th data-o006-id="O006-PSU-013-U0762" style="text-align: right;">R-sq(pred)</th>
+</tr>
+</thead>
+<tbody data-o006-id="O006-PSU-013-U0763">
+<tr class="odd" data-o006-id="O006-PSU-013-U0764">
+<td data-o006-id="O006-PSU-013-U0765" style="text-align: right;">72.1265</td>
+<td data-o006-id="O006-PSU-013-U0766" style="text-align: right;">73.22%</td>
+<td data-o006-id="O006-PSU-013-U0767" style="text-align: right;">70.98%</td>
+<td data-o006-id="O006-PSU-013-U0768" style="text-align: right;">61.97%</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section class="level4" data-o006-id="O006-PSU-013-U0769" id="analysis-of-variance">
+<h4 class="anchored" data-anchor-id="analysis-of-variance" data-o006-id="O006-PSU-013-U0770">Analysis of Variance</h4>
+<table class="w-auto table-sm row-header small caption-top table" data-o006-id="O006-PSU-013-U0771">
+<colgroup>
+<col style="width: 22%"/>
+<col style="width: 11%"/>
+<col style="width: 17%"/>
+<col style="width: 17%"/>
+<col style="width: 15%"/>
+<col style="width: 15%"/>
+</colgroup>
+<thead data-o006-id="O006-PSU-013-U0772">
+<tr class="header" data-o006-id="O006-PSU-013-U0773">
+<th data-o006-id="O006-PSU-013-U0774">Source</th>
+<th data-o006-id="O006-PSU-013-U0775" style="text-align: right;">DF</th>
+<th data-o006-id="O006-PSU-013-U0776" style="text-align: right;">Adj SS</th>
+<th data-o006-id="O006-PSU-013-U0777" style="text-align: right;">Adj MS</th>
+<th data-o006-id="O006-PSU-013-U0778" style="text-align: right;">F-Value</th>
+<th data-o006-id="O006-PSU-013-U0779" style="text-align: right;">P-Value</th>
+</tr>
+</thead>
+<tbody data-o006-id="O006-PSU-013-U0780">
+<tr class="odd" data-o006-id="O006-PSU-013-U0781">
+<td data-o006-id="O006-PSU-013-U0782"><strong>Regression</strong></td>
+<td data-o006-id="O006-PSU-013-U0783" style="text-align: right;"><strong>1</strong></td>
+<td data-o006-id="O006-PSU-013-U0784" style="text-align: right;"><strong>170655</strong></td>
+<td data-o006-id="O006-PSU-013-U0785" style="text-align: right;"><strong>170655</strong></td>
+<td data-o006-id="O006-PSU-013-U0786" style="text-align: right;"><strong>32.80</strong></td>
+<td data-o006-id="O006-PSU-013-U0787" style="text-align: right;"><strong>0.000</strong></td>
+</tr>
+<tr class="even" data-o006-id="O006-PSU-013-U0788">
+<td data-o006-id="O006-PSU-013-U0789"> Catch</td>
+<td data-o006-id="O006-PSU-013-U0790" style="text-align: right;">1</td>
+<td data-o006-id="O006-PSU-013-U0791" style="text-align: right;">170655</td>
+<td data-o006-id="O006-PSU-013-U0792" style="text-align: right;">170655</td>
+<td data-o006-id="O006-PSU-013-U0793" style="text-align: right;">32.80</td>
+<td data-o006-id="O006-PSU-013-U0794" style="text-align: right;">0.000</td>
+</tr>
+<tr class="odd" data-o006-id="O006-PSU-013-U0795">
+<td data-o006-id="O006-PSU-013-U0796"><strong>Error</strong></td>
+<td data-o006-id="O006-PSU-013-U0797" style="text-align: right;"><strong>12</strong></td>
+<td data-o006-id="O006-PSU-013-U0798" style="text-align: right;"><strong>62427</strong></td>
+<td data-o006-id="O006-PSU-013-U0799" style="text-align: right;"><span style="border: 1px solid blue; padding: 4px;"> <strong>5202</strong> </span></td>
+<td data-o006-id="O006-PSU-013-U0800" style="text-align: right;"></td>
+<td data-o006-id="O006-PSU-013-U0801" style="text-align: right;"></td>
+</tr>
+<tr class="even" data-o006-id="O006-PSU-013-U0802">
+<td data-o006-id="O006-PSU-013-U0803"><strong>Total</strong></td>
+<td data-o006-id="O006-PSU-013-U0804" style="text-align: right;"><strong>13</strong></td>
+<td data-o006-id="O006-PSU-013-U0805" style="text-align: right;"><strong>233082</strong></td>
+<td data-o006-id="O006-PSU-013-U0806" style="text-align: right;"></td>
+<td data-o006-id="O006-PSU-013-U0807" style="text-align: right;"></td>
+<td data-o006-id="O006-PSU-013-U0808" style="text-align: right;"></td>
+</tr>
+</tbody>
+</table>
+</section>
+</div>
+<p data-o006-id="O006-PSU-013-U0809">Minitab’s basic descriptive analysis can also calculate the standard deviation of the <span class="math inline" data-o006-math-id="O006-PSU-013-M0324">\(x\)</span>-values, 3.91, for us. Therefore, the formula for the sample variance tells us that:</p>
+<p data-o006-id="O006-PSU-013-U0810"><span class="math display" data-o006-math-id="O006-PSU-013-M0325">\[\sum\limits_{i=1}^n (x_i-\bar{x})^2=(n-1)s^2=(13)(3.91)^2=198.7453\]</span></p>
+<p data-o006-id="O006-PSU-013-U0811">Putting the parts together, along with the fact that <span class="math inline" data-o006-math-id="O006-PSU-013-M0326">\(t_{0.025, 12}=2.179\)</span>, we get:</p>
+<p data-o006-id="O006-PSU-013-U0812"><span class="math display" data-o006-math-id="O006-PSU-013-M0327">\[-29.402 \pm 2.179 \sqrt{\dfrac{5139}{198.7453}}\]</span></p>
+<p data-o006-id="O006-PSU-013-U0813">which simplifies to: <span class="math inline" data-o006-math-id="O006-PSU-013-M0328">\(-29.402 \pm 11.08.\)</span> That is, we can be 95% confident that the slope parameter falls between −40.482 and −18.322. That is, we can be 95% confident that the average price of fish meal decreases between 18.322 and 40.482 dollars per ton for every one unit (one million metric ton) increase in the Peruvian anchovy catch.</p>
+</div>
+</div>
+<div class="theorem example" data-o006-id="O006-PSU-013-U0814" id="exm-intercept">
+<p data-o006-id="O006-PSU-013-U0815"><span class="theorem-title"><strong>Example 12.4</strong></span> Find a 95% confidence interval for the intercept parameter <span class="math inline" data-o006-math-id="O006-PSU-013-M0329">\(\alpha\)</span>.</p>
+<section class="level4 card card-body bg-light ms-3 mb-3 pt-0" data-o006-id="O006-PSU-013-U0816" id="solution-3">
+<h4 class="anchored" data-anchor-id="solution-3" data-o006-id="O006-PSU-013-U0817">Solution</h4>
+<p data-o006-id="O006-PSU-013-U0818">We can use Minitab (or our calculator) to determine that the mean of the 14 responses is:</p>
+<p data-o006-id="O006-PSU-013-U0819"><span class="math display" data-o006-math-id="O006-PSU-013-M0330">\[\dfrac{190+160+\cdots +410}{14}=270.5\]</span></p>
+<p data-o006-id="O006-PSU-013-U0820">Using that, as well as the <span class="math inline" data-o006-math-id="O006-PSU-013-M0331">\(MSE = 5139\)</span> obtained from the output above, along with the fact that <span class="math inline" data-o006-math-id="O006-PSU-013-M0332">\(t_{0.025,12} = 2.179\)</span>, we get:</p>
+<p data-o006-id="O006-PSU-013-U0821"><span class="math display" data-o006-math-id="O006-PSU-013-M0333">\[270.5 \pm 2.179 \sqrt{\dfrac{5139}{14}}\]</span></p>
+<p data-o006-id="O006-PSU-013-U0822">which simplifies to <span class="math inline" data-o006-math-id="O006-PSU-013-M0334">\(270.5 \pm 41.75.\)</span> That is, we can be 95% confident that the intercept parameter falls between 228.75 and 312.25 dollars per ton.</p>
+</section>
+</div>
+</section>
+<section class="level2" data-number="12.6" data-o006-id="O006-PSU-013-U0823" id="hypothesis-tests-concerning-slope">
+<h2 class="anchored" data-anchor-id="hypothesis-tests-concerning-slope" data-number="12.6" data-o006-id="O006-PSU-013-U0824"><span class="header-section-number">12.6</span> Hypothesis Tests Concerning Slope</h2>
+<p data-o006-id="O006-PSU-013-U0825">Previously, we learned how to calculate point and interval estimates of the intercept and slope parameters, <span class="math inline" data-o006-math-id="O006-PSU-013-M0335">\(\alpha\)</span> and <span class="math inline" data-o006-math-id="O006-PSU-013-M0336">\(\beta\)</span>, of a simple linear regression model:</p>
+<p data-o006-id="O006-PSU-013-U0826"><span class="math display" data-o006-math-id="O006-PSU-013-M0337">\[Y_i=\alpha+\beta(x_i-\bar{x})+\epsilon_i\]</span></p>
+<p data-o006-id="O006-PSU-013-U0827">with the random errors <span class="math inline" data-o006-math-id="O006-PSU-013-M0338">\(\epsilon_i\)</span> following a normal distribution with mean 0 and variance <span class="math inline" data-o006-math-id="O006-PSU-013-M0339">\(\sigma^2\)</span>. In this lesson, we’ll learn how to conduct a hypothesis test for testing the null hypothesis that the slope parameter equals some value, <span class="math inline" data-o006-math-id="O006-PSU-013-M0340">\(\beta_0\)</span>, say. Specifically, we’ll learn how to test the null hypothesis <span class="math inline" data-o006-math-id="O006-PSU-013-M0341">\(H_0:\beta=\beta_0\)</span> using a <span class="math inline" data-o006-math-id="O006-PSU-013-M0342">\(T\)</span>-statistic.</p>
+<p data-o006-id="O006-PSU-013-U0828">Once again we’ve already done the bulk of the theoretical work in developing a hypothesis test for the slope parameter <span class="math inline" data-o006-math-id="O006-PSU-013-M0343">\(\beta\)</span> of a simple linear regression model when we developed a <span class="math inline" data-o006-math-id="O006-PSU-013-M0344">\((1-\alpha)100\%\)</span> confidence interval for <span class="math inline" data-o006-math-id="O006-PSU-013-M0345">\(\beta\)</span>. We had shown then that:</p>
+<p data-o006-id="O006-PSU-013-U0829"><span class="math display" data-o006-math-id="O006-PSU-013-M0346">\[T=\dfrac{\hat{\beta}-\beta}{\sqrt{\frac{MSE}{\sum(x_i-\bar{x})^2}}}\]</span></p>
+<p data-o006-id="O006-PSU-013-U0830">follows a <span class="math inline" data-o006-math-id="O006-PSU-013-M0347">\(t_{n-2}\)</span> distribution. Therefore, if we’re interested in testing the null hypothesis:</p>
+<p data-o006-id="O006-PSU-013-U0831"><span class="math display" data-o006-math-id="O006-PSU-013-M0348">\[H_0:\beta=\beta_0\]</span></p>
+<p data-o006-id="O006-PSU-013-U0832">against any of the alternative hypotheses:</p>
+<p data-o006-id="O006-PSU-013-U0833"><span class="math display" data-o006-math-id="O006-PSU-013-M0349">\[H_A:\beta &gt; \beta_0, \qquad H_A:\beta &lt; \beta_0,\qquad H_A:\beta \ne \beta_0\]</span></p>
+<p data-o006-id="O006-PSU-013-U0834">we can use the test statistic:</p>
+<p data-o006-id="O006-PSU-013-U0835"><span class="math display" data-o006-math-id="O006-PSU-013-M0350">\[t=\dfrac{\hat{\beta}-\beta_0}{\sqrt{\frac{MSE}{\sum(x_i-\bar{x})^2}}}\]</span></p>
+<p data-o006-id="O006-PSU-013-U0836">and follow the standard hypothesis testing procedures.</p>
+</section>
+<section class="level2" data-number="12.7" data-o006-id="O006-PSU-013-U0837" id="summary">
+<h2 class="anchored" data-anchor-id="summary" data-number="12.7" data-o006-id="O006-PSU-013-U0838"><span class="header-section-number">12.7</span> Summary</h2>
+<p data-o006-id="O006-PSU-013-U0839">This lesson covered the essentials of simple linear regression, a method to model linear relationships between a predictor (x) and response (y).</p>
+<p data-o006-id="O006-PSU-013-U0840">Key Takeaways include:</p>
+<ul data-o006-id="O006-PSU-013-U0841">
+<li data-o006-id="O006-PSU-013-U0842">Model linear trends with scatter using the least squares method to find the best-fitting line.</li>
+<li data-o006-id="O006-PSU-013-U0843">Estimate intercept (a) and slope (b) to approximate population parameters <span class="math inline" data-o006-math-id="O006-PSU-013-M0351">\(\alpha\)</span> and <span class="math inline" data-o006-math-id="O006-PSU-013-M0352">\(\beta\)</span>.</li>
+<li data-o006-id="O006-PSU-013-U0844">Assumptions (LINE): (L)inearity, (I)ndependence, (N)ormality, (E)qual variances.</li>
+<li data-o006-id="O006-PSU-013-U0845">Use confidence intervals and t-tests for inference on regression parameters.</li>
+<li data-o006-id="O006-PSU-013-U0846">Apply tools like R/Minitab to analyze real-world data and interpret results.</li>
+</ul>
+</section>
+</main>
+</body>
+</html>

@@ -11,16 +11,14 @@ the freeze-receipt SHA-256 is
 `2a63e37bb6b4637cfd2522e392b140f2b625f2a1cf5f76f267a53ba4fb2e119b`.
 Authority bytes are immutable and unchanged.
 
-The validated cumulative reader is complete through the landing page and
-Lessons 00–11: 13 of 14 documents. It contains 4,352 admitted translation
-segments, 5,664 normalized source units, 5,652 derivative units, and 2,804
-protected mathematics surfaces. The twelve removed derivative units are the
-two registered Lesson 00 source defects plus the complete nested closure of two
+The validated cumulative reader is complete: landing/index plus Lessons 00–12,
+all 14 of 14 documents and all 4,932 admitted translation segments. It has
+6,510 normalized source units, 6,498 derivative units, and 3,156 protected
+source-mathematics surfaces. The twelve removed derivative units remain the two
+registered Lesson 00 source defects plus the complete nested closure of two
 visible Lesson 08 internal authoring notes; no instructional unit was removed.
-Lesson 12's 580 translation segments are also complete locally, but its
-cumulative build, correction closure, deterministic QA, and visual QA remain
-pending. The full local translation layer therefore has 4,932 segments; the
-verified reader boundary remains 13 of 14 until Lesson 12 integration passes.
+The cumulative correction/disposition ledger now contains 242 target-only
+records. Authority bytes remain immutable.
 
 ## Lessons 07–09 contiguous batch
 
@@ -137,47 +135,51 @@ the 580-record binding backend is 279,013 bytes, SHA-256
 `f6c64c31aa0514f4b386efa182cfcac128076b3e58f2ddf0bee75d51f229730c`.
 The translation receipt is 3,748 bytes, SHA-256
 `8343d09c7490394a0ed373791b72e910c1d42b0a293c9ab30af922d1fcd4489b`.
-`source/id-ID/Lesson12.html` is a 146,789-byte generated working target at
+`source/id-ID/Lesson12.html` is the admitted 146,789-byte generated target at
 SHA-256
 `6cd3218f6d1a613f1ea9d1459c5506ea8b24f37340a3ee26f17bc18504dd5965`;
-it is not yet claimed as cumulatively built or QA-verified.
+its materialization, cumulative build, deterministic QA, and visual QA all
+pass. Twenty-four Lesson 12 correction/disposition records extend the ordered
+suffix through `O006-PSU-ADV-0242`. Nine images are frozen byte-for-byte and
+used in ten occurrences; the three external video runtimes are not
+redistributed and instead have complete, expanded offline textual equivalents.
 
 ## Deterministic and browser evidence
 
-The cumulative offline reader through Lesson 11 contains 96 files /
-17,232,761 bytes. Its manifest is 10,290 bytes with SHA-256
-`026ac69ce34ceb77d3174ff167621043bd9ff5d2e5ce82124b8bec3faf365173`.
-The build receipt is 8,116 bytes with SHA-256
-`421d60b88849d9f800d4dc1691d28e59f01c86ac4d892c01f797d7114ee4b98d`; the
-deterministic QA receipt is 7,503 bytes with SHA-256
-`d715c53a6bd48992a1bca49937adfbdf917f38c7ac1c864b76d52c0e9e104f39`.
-Asset freeze, normalization, translation merge, cumulative build, and QA
-check-only replays pass. The QA gate covers 13-of-14 metadata/navigation, all
-2,804 math nodes, 57 substantive images, eight semantic tables, the
-142,195-byte Lesson 11 asset, 218 corrections, code/runtime disclosure,
-responsive reflow, privacy, and deterministic 96-file replay.
+The complete cumulative offline reader contains 106 files / 17,614,553 bytes.
+Its 11,573-byte manifest has SHA-256
+`697c9ee8e23cc10469fea4d1894e16471ffb4276edd1f0d25bebfb5be0dbe79e`.
+The 17,276-byte build receipt has SHA-256
+`f56a90f2be1b463f481aca0ddf00fb6214b45c4b45927fa142ae43a01d608935`;
+the 12,428-byte deterministic QA receipt has SHA-256
+`e64f9dc9ef3eb041287b0c88be48c1dc6a4833000651cbdceed2185a1999bd19`.
+Asset freeze, normalization, merge, materialization, cumulative build, and QA
+write/check-only replays pass. The gate covers all 14 documents, 4,932
+segments, 6,510/6,498 source/target units, 3,156 protected math surfaces, 242
+corrections, stable IDs, links, rights, privacy, and byte-deterministic replay.
 
-The prior 12-of-14 visual receipt remains historical evidence at
-`7c1377982b1cadbd7dbd69de84a63d8bbeb6df0961758c5c8e52f25cc1fc75a5`.
-The current bounded browser inspection passes at 1,280 × 720 and 390 × 844
-for index, Lessons 00–11, and licenses: 14 routes and all 77 referenced local
-resources return HTTP 200, all 2,804 math surfaces render, all 57 substantive
-images load, all eight tables remain inside the reader, the Lesson 11 portrait
-is centered and full-width, and fresh console warning/error logs are empty.
-The 13-of-14 visual receipt is
-`build/THROUGH_LESSON11_VISUAL_QA_RECEIPT.json`, 17,818 bytes, SHA-256
-`4b7644108b5423c83ec049c6710622c1605dc4b46901c9fae9c579a1a4a1e5bc`;
-the durable control copy is byte-identical.
+Fresh browser inspection passes all fifteen routes—index, Lessons 00–12, and
+licenses—at 1,280 × 720 and 390 × 844. All 86 referenced same-origin resources
+return HTTP 200. All 3,156 protected source-math containers render; Lesson 12
+also renders twenty registered target-native/additive containers, giving 372
+MathJax containers on that route. There are zero `merror` nodes, console
+warnings/errors, page or navigation overflows, broken images, or external
+iframes. All 67 substantive image occurrences load; all ten Lesson 12 images
+are centered and fill their figure containers. The cumulative reader has 14
+tables, twelve captioned and two historical source tables without captions;
+all six Lesson 12 tables are captioned and fully scoped. Its three offline
+video equivalents are expanded, readable, and unclipped. The 21,702-byte
+visual receipt has SHA-256
+`5dd1dd0ddfa4249ef08f2a70f070a8fc8532734656cd146ec5235c37a8baa345`;
+its write and check-only modes both pass.
 
-The 218-row correction backend has the exact ordered IDs
-`O006-PSU-ADV-0001` through `O006-PSU-ADV-0218`. The translation-ledger prefix
-through Lesson 11 contains thirteen rows and resolves every target byte count
-and SHA-256 against this build; its 5,417-byte prefix SHA-256 is
-`d674909cce4e6ed9a144eda1808fff6634f1b0d91748df94241dfedd6a278a2f`.
-The admitted Lesson 11 glossary prefix contains 168 decisions through
-`O006-TERM-0168`; its first 17,727 bytes have SHA-256
-`1bbc59cbd21477d7f030471bcd2d47001c37cdb4d7781b7a7e24dc2aa3c80b65`.
-Later additive rows do not mutate this frozen boundary.
+The 242-row correction backend has exact ordered IDs
+`O006-PSU-ADV-0001` through `O006-PSU-ADV-0242`; SHA-256 is
+`2b709bfe05dce6aa84c67513f1679faac0d1c38da987509a558b1dbba1cb0837`.
+The complete fourteen-row translation ledger is 5,821 bytes, SHA-256
+`c5ba07e250360af2a97957aa957278f43348c05bb44a208a2a2898fc6b034660`.
+The 192-row terminology glossary is 20,340 bytes, SHA-256
+`554dcbfb5161df6f0eb86027822eabbf4fae9179bb152947a8ad6c196cb34b05`.
 
 Rights remain component-separated: Penn State content is CC BY-NC 4.0 except
 where otherwise noted, MathJax 3.1.2 is Apache-2.0, and original repository
@@ -212,9 +214,10 @@ and `eac3ed7fb2f403bd89e145e2039446399dcb0512ea93797493ba83102d3559da`.
 The exact public evidence is consolidated in
 `CHECKPOINT_2026-08-26_THROUGH_LESSON11_PUBLICATION_COMPLETE.md`.
 
-Continue now with the already complete Lesson 12 translation layer: close its
-proved target-only corrections and offline media equivalents, integrate it
-into the cumulative reader, then run deterministic and browser QA before the
-14-of-14 publication transaction. Do not redo or replace the verified Lesson
-11 release. No upstream message has been sent. The independent completed
-Random edition remains outside this repository's write boundary.
+Publish the complete 14-of-14 HTML package to the existing GitHub/Pages and
+Zenodo lineages, then anonymously read back every public byte and record the
+receipts. After that boundary is closed, produce the consolidated PDF/EPUB
+surfaces and then move to the distinct exact Random completeness donor and
+original C140 companion. Do not redo or replace the verified Lesson 11 release.
+No upstream message has been sent. The independent completed Random edition
+remains outside this repository's write boundary.

@@ -1,0 +1,431 @@
+{
+  "additive_derived_math_nodes": 8,
+  "corrections": {
+    "bytes": 339627,
+    "count": 242,
+    "lesson12_count": 24,
+    "path": "backend/through_lesson12_corrections.jsonl",
+    "sha256": "2b709bfe05dce6aa84c67513f1679faac0d1c38da987509a558b1dbba1cb0837",
+    "through_lesson11_count": 218
+  },
+  "coverage": {
+    "complete_count": 14,
+    "complete_documents": [
+      "index",
+      "Lesson00",
+      "Lesson01",
+      "Lesson02",
+      "Lesson03",
+      "Lesson04",
+      "Lesson05",
+      "Lesson06",
+      "Lesson07",
+      "Lesson08",
+      "Lesson09",
+      "Lesson10",
+      "Lesson11",
+      "Lesson12"
+    ],
+    "corpus_document_count": 14,
+    "next_document": null,
+    "pending_documents": []
+  },
+  "documents_backend": {
+    "bytes": 9446,
+    "path": "backend/through_lesson12_documents.jsonl",
+    "sha256": "fa1f2fe90748937ec3760dfd625255fd2d683be006b4ad990b0b4d273701689f"
+  },
+  "inputs": {
+    "asset_freeze_receipt": {
+      "bytes": 7044,
+      "path": "authority/LESSON12_ASSET_FREEZE_RECEIPT.json",
+      "sha256": "75e46dc6b87346fd898aad96fd59f0045aaeb43fab2a6942a731a3f6b0805559"
+    },
+    "asset_manifest": {
+      "bytes": 5007,
+      "path": "authority/LESSON12_ASSET_MANIFEST.csv",
+      "sha256": "47dc68c12a8eedc0a10a0010c7c73346dd2b8a8e4ef5f3ff9d769c24a9764c2a"
+    },
+    "builder": {
+      "bytes": 36106,
+      "path": "scripts/build_through_lesson12.py",
+      "sha256": "edd9512f5825c59e93e4a8a55e4e46db3c293f0b11d876dc23344995b2de07a6"
+    },
+    "correction_module": {
+      "bytes": 32234,
+      "path": "scripts/lesson12_corrections.py",
+      "sha256": "3e5c344b418083d0b545b4e477030a9c5a2539d20e6dcda312effa5c0020d5ba"
+    },
+    "glossary": {
+      "bytes": 20340,
+      "path": "00_control/TERMINOLOGY_GLOSSARY_ID_ID.csv",
+      "rows": 192,
+      "scope": "immutable cumulative glossary through Lesson12",
+      "sha256": "554dcbfb5161df6f0eb86027822eabbf4fae9179bb152947a8ad6c196cb34b05"
+    },
+    "materialization": {
+      "bytes": 3911,
+      "path": "build/LESSON12_MATERIALIZATION_RECEIPT.json",
+      "sha256": "65623cba1358226eaf3af95d34af67bfdc6fbeb0b2ca3fe59bb1353e79ced70e"
+    },
+    "materializer": {
+      "bytes": 17698,
+      "path": "scripts/materialize_lesson12_translation.py",
+      "sha256": "21b919f95a2378632217d7e3e06bbd6b1b10d1b5df09bd37b26ca7a39ae13d21"
+    },
+    "normalization": {
+      "bytes": 9727,
+      "path": "build/LESSON12_NORMALIZATION_RECEIPT.json",
+      "sha256": "d9b97395f9cae5412879fa63d8e16f59241d3883b4a90f7931c13cfcd47d3283"
+    },
+    "prior_build_receipt": {
+      "bytes": 8116,
+      "path": "build/THROUGH_LESSON11_BUILD_RECEIPT.json",
+      "sha256": "421d60b88849d9f800d4dc1691d28e59f01c86ac4d892c01f797d7114ee4b98d"
+    },
+    "translation": {
+      "bytes": 3748,
+      "path": "build/LESSON12_TRANSLATION_RECEIPT.json",
+      "sha256": "8343d09c7490394a0ed373791b72e910c1d42b0a293c9ab30af922d1fcd4489b"
+    },
+    "translation_bindings": {
+      "bytes": 279013,
+      "path": "backend/lesson12_translation_bindings.jsonl",
+      "sha256": "f6c64c31aa0514f4b386efa182cfcac128076b3e58f2ddf0bee75d51f229730c"
+    },
+    "translation_csv": {
+      "bytes": 140789,
+      "path": "source/id-ID/lesson12_translation.csv",
+      "sha256": "a87a42c2aebb2ae38910c75ae354d07b862f6113cb063474bfbb7c8a1ac00531"
+    },
+    "video_provenance": {
+      "bytes": 959,
+      "path": "authority/LESSON12_VIDEO_PROVENANCE.csv",
+      "sha256": "f240f2e9c8aa502eebf712d037c13a9b28331e7045a4582a5bbc46e75d0c3fd2"
+    }
+  },
+  "layout": {
+    "lesson12_full_width_image_occurrences": 10,
+    "lesson12_responsive_tables": 6,
+    "reader_css_bytes": 9571,
+    "reader_css_path": "assets/reader-14of14.css",
+    "reader_css_sha256": "ae779a6e0daf6d4fef1a443809b2a7ce994359929f5084733a62b03fc377617f",
+    "rule": "all cumulative reader figures fill and center within the reader width; tables, code, source mathematics, and additive derivations reflow without page overflow"
+  },
+  "locale": "id-ID",
+  "materialization": {
+    "authority_unchanged": true,
+    "native_id_map": {
+      "bytes": 4848,
+      "path": "backend/lesson12_target_native_id_map.jsonl",
+      "records": 16,
+      "sha256": "2717f9b954a6db45fe2ff638d995ecbb6f231f9e4e1954a16bcdb34dbf9800cc"
+    },
+    "receipt": {
+      "bytes": 3911,
+      "path": "build/LESSON12_MATERIALIZATION_RECEIPT.json",
+      "sha256": "65623cba1358226eaf3af95d34af67bfdc6fbeb0b2ca3fe59bb1353e79ced70e"
+    },
+    "target": {
+      "bytes": 146789,
+      "path": "source/id-ID/Lesson12.html",
+      "sha256": "6cd3218f6d1a613f1ea9d1459c5506ea8b24f37340a3ee26f17bc18504dd5965"
+    },
+    "target_corrections": {
+      "bytes": 26292,
+      "path": "backend/lesson12_target_corrections.jsonl",
+      "sha256": "7e89a78da57d69d7524128cc79685f46e8001c1b886a213229364df28261f34e"
+    }
+  },
+  "math_nodes": {
+    "Lesson00": 331,
+    "Lesson01": 169,
+    "Lesson02": 209,
+    "Lesson03": 440,
+    "Lesson04": 289,
+    "Lesson05": 108,
+    "Lesson06": 102,
+    "Lesson07": 148,
+    "Lesson08": 156,
+    "Lesson09": 219,
+    "Lesson10": 369,
+    "Lesson11": 264,
+    "Lesson12": 352,
+    "index": 0,
+    "total": 3156
+  },
+  "new_assets": {
+    "all_byte_preserving": true,
+    "bytes": 233075,
+    "count": 9,
+    "inventory": [
+      {
+        "asset_id": "O006-PSU-013-A0001",
+        "height": 960,
+        "license": "CC BY-NC 4.0 except where otherwise noted (page-level witness)",
+        "media_type": "image/png",
+        "occurrences": 1,
+        "official_url": "https://online.stat.psu.edu/stat415/Lesson12_files/figure-html/fig-lesson9_1-1.png",
+        "source_bytes": 13405,
+        "source_path": "authority/assets/stat415/lesson12/Lesson12_files/figure-html/fig-lesson9_1-1.png",
+        "source_sha256": "57bc330a84ba949ab460ce4d50492a3792a20b66cb8c26849cff86372c48a3cc",
+        "target_bytes": 13405,
+        "target_is_byte_preserving": true,
+        "target_path": "assets/lesson12/Lesson12_files/figure-html/fig-lesson9_1-1.png",
+        "target_sha256": "57bc330a84ba949ab460ce4d50492a3792a20b66cb8c26849cff86372c48a3cc",
+        "width": 1344
+      },
+      {
+        "asset_id": "O006-PSU-013-A0002",
+        "height": 960,
+        "license": "CC BY-NC 4.0 except where otherwise noted (page-level witness)",
+        "media_type": "image/png",
+        "occurrences": 1,
+        "official_url": "https://online.stat.psu.edu/stat415/Lesson12_files/figure-html/fig-skin-cancer-1.png",
+        "source_bytes": 17916,
+        "source_path": "authority/assets/stat415/lesson12/Lesson12_files/figure-html/fig-skin-cancer-1.png",
+        "source_sha256": "4d239855552a56a136f002906cd7ed057096b3cb27127ce22d309aa4cdfc71a9",
+        "target_bytes": 17916,
+        "target_is_byte_preserving": true,
+        "target_path": "assets/lesson12/Lesson12_files/figure-html/fig-skin-cancer-1.png",
+        "target_sha256": "4d239855552a56a136f002906cd7ed057096b3cb27127ce22d309aa4cdfc71a9",
+        "width": 1344
+      },
+      {
+        "asset_id": "O006-PSU-013-A0003",
+        "height": 960,
+        "license": "CC BY-NC 4.0 except where otherwise noted (page-level witness)",
+        "media_type": "image/png",
+        "occurrences": 1,
+        "official_url": "https://online.stat.psu.edu/stat415/Lesson12_files/figure-html/fig-htwt1-1.png",
+        "source_bytes": 14851,
+        "source_path": "authority/assets/stat415/lesson12/Lesson12_files/figure-html/fig-htwt1-1.png",
+        "source_sha256": "3bf6c1015f516ec2249e7ac8676cd4258b14db4c5097d2aebc8937eceb16c449",
+        "target_bytes": 14851,
+        "target_is_byte_preserving": true,
+        "target_path": "assets/lesson12/Lesson12_files/figure-html/fig-htwt1-1.png",
+        "target_sha256": "3bf6c1015f516ec2249e7ac8676cd4258b14db4c5097d2aebc8937eceb16c449",
+        "width": 1344
+      },
+      {
+        "asset_id": "O006-PSU-013-A0004",
+        "height": 960,
+        "license": "CC BY-NC 4.0 except where otherwise noted (page-level witness)",
+        "media_type": "image/png",
+        "occurrences": 1,
+        "official_url": "https://online.stat.psu.edu/stat415/Lesson12_files/figure-html/fig-gpavsentrance3-1.png",
+        "source_bytes": 42716,
+        "source_path": "authority/assets/stat415/lesson12/Lesson12_files/figure-html/fig-gpavsentrance3-1.png",
+        "source_sha256": "f2e1adb76725be49ed02f701d798afead28b8b977fafe15f0db55a98b58cd0fb",
+        "target_bytes": 42716,
+        "target_is_byte_preserving": true,
+        "target_path": "assets/lesson12/Lesson12_files/figure-html/fig-gpavsentrance3-1.png",
+        "target_sha256": "f2e1adb76725be49ed02f701d798afead28b8b977fafe15f0db55a98b58cd0fb",
+        "width": 1344
+      },
+      {
+        "asset_id": "O006-PSU-013-A0005",
+        "height": 960,
+        "license": "CC BY-NC 4.0 except where otherwise noted (page-level witness)",
+        "media_type": "image/png",
+        "occurrences": 1,
+        "official_url": "https://online.stat.psu.edu/stat415/Lesson12_files/figure-html/fig-samplegpaentrance4-1.png",
+        "source_bytes": 19117,
+        "source_path": "authority/assets/stat415/lesson12/Lesson12_files/figure-html/fig-samplegpaentrance4-1.png",
+        "source_sha256": "ac3f75e1cff2554fa5b6da07fc00a4d7a92d72cb6e503288c36f018cdda1582c",
+        "target_bytes": 19117,
+        "target_is_byte_preserving": true,
+        "target_path": "assets/lesson12/Lesson12_files/figure-html/fig-samplegpaentrance4-1.png",
+        "target_sha256": "ac3f75e1cff2554fa5b6da07fc00a4d7a92d72cb6e503288c36f018cdda1582c",
+        "width": 1344
+      },
+      {
+        "asset_id": "O006-PSU-013-A0006",
+        "height": 582,
+        "license": "CC BY-NC 4.0 except where otherwise noted (page-level witness)",
+        "media_type": "image/png",
+        "occurrences": 2,
+        "official_url": "https://online.stat.psu.edu/stat415/assets/lesson9_11.png",
+        "source_bytes": 72948,
+        "source_path": "authority/assets/stat415/lesson12/assets/lesson9_11.png",
+        "source_sha256": "91988678ff539a42d6e9e8d24a5710e444e7f40aeb2f132b0b2b6dbdf21b052d",
+        "target_bytes": 72948,
+        "target_is_byte_preserving": true,
+        "target_path": "assets/lesson12/assets/lesson9_11.png",
+        "target_sha256": "91988678ff539a42d6e9e8d24a5710e444e7f40aeb2f132b0b2b6dbdf21b052d",
+        "width": 944
+      },
+      {
+        "asset_id": "O006-PSU-013-A0007",
+        "height": 960,
+        "license": "CC BY-NC 4.0 except where otherwise noted (page-level witness)",
+        "media_type": "image/png",
+        "occurrences": 1,
+        "official_url": "https://online.stat.psu.edu/stat415/Lesson12_files/figure-html/fig-scattertemp-1.png",
+        "source_bytes": 16153,
+        "source_path": "authority/assets/stat415/lesson12/Lesson12_files/figure-html/fig-scattertemp-1.png",
+        "source_sha256": "b20ba0424f94a88a120cbfec3c77a62ff5a1f5bd2339034e449d6272683468af",
+        "target_bytes": 16153,
+        "target_is_byte_preserving": true,
+        "target_path": "assets/lesson12/Lesson12_files/figure-html/fig-scattertemp-1.png",
+        "target_sha256": "b20ba0424f94a88a120cbfec3c77a62ff5a1f5bd2339034e449d6272683468af",
+        "width": 1344
+      },
+      {
+        "asset_id": "O006-PSU-013-A0008",
+        "height": 960,
+        "license": "CC BY-NC 4.0 except where otherwise noted (page-level witness)",
+        "media_type": "image/png",
+        "occurrences": 1,
+        "official_url": "https://online.stat.psu.edu/stat415/Lesson12_files/figure-html/fig-scattertemp2-1.png",
+        "source_bytes": 17373,
+        "source_path": "authority/assets/stat415/lesson12/Lesson12_files/figure-html/fig-scattertemp2-1.png",
+        "source_sha256": "fe9f05fdb5d00e24dd20f727b67230385f3b3ecdee954d224488d8cae4ae89bd",
+        "target_bytes": 17373,
+        "target_is_byte_preserving": true,
+        "target_path": "assets/lesson12/Lesson12_files/figure-html/fig-scattertemp2-1.png",
+        "target_sha256": "fe9f05fdb5d00e24dd20f727b67230385f3b3ecdee954d224488d8cae4ae89bd",
+        "width": 1344
+      },
+      {
+        "asset_id": "O006-PSU-013-A0009",
+        "height": 960,
+        "license": "CC BY-NC 4.0 except where otherwise noted (page-level witness)",
+        "media_type": "image/png",
+        "occurrences": 1,
+        "official_url": "https://online.stat.psu.edu/stat415/Lesson12_files/figure-html/fig-iqnormal-1.png",
+        "source_bytes": 18596,
+        "source_path": "authority/assets/stat415/lesson12/Lesson12_files/figure-html/fig-iqnormal-1.png",
+        "source_sha256": "1e1ecda44208f545e38e8298f62c338fe5dbf2af265e7f60db1738903fca67ce",
+        "target_bytes": 18596,
+        "target_is_byte_preserving": true,
+        "target_path": "assets/lesson12/Lesson12_files/figure-html/fig-iqnormal-1.png",
+        "target_sha256": "1e1ecda44208f545e38e8298f62c338fe5dbf2af265e7f60db1738903fca67ce",
+        "width": 1344
+      }
+    ],
+    "occurrences": 10
+  },
+  "offline": {
+    "analytics": false,
+    "cookies": false,
+    "external_runtime_requests": 0,
+    "local_mathjax": true,
+    "offline_video_equivalents": 3,
+    "third_party_iframes": 0,
+    "video_bytes_redistributed": false
+  },
+  "reader": {
+    "bytes": 17614553,
+    "files": 106,
+    "manifest_bytes": 11573,
+    "manifest_path": "build/THROUGH_LESSON12_MANIFEST.csv",
+    "manifest_sha256": "697c9ee8e23cc10469fea4d1894e16471ffb4276edd1f0d25bebfb5be0dbe79e",
+    "path": "build/html-id"
+  },
+  "rights": {
+    "Lesson12 assets": "nine same-origin PNG files in ten occurrences frozen and redistributed byte-for-byte under the official page notice; component exceptions remain binding",
+    "Lesson12 external videos": "three external iframe runtimes removed; no video bytes downloaded or redistributed; source links retained beside complete offline textual equivalents",
+    "MathJax 3.1.2": "Apache-2.0",
+    "Penn State content": "CC BY-NC 4.0 except where otherwise noted",
+    "aggregate_uniform_relicense": false
+  },
+  "runtime_closure": {
+    "MathJax 3.1.2": {
+      "added_autoload_dependency": {
+        "bytes": 4709,
+        "path": "assets/MathJax/input/tex/extensions/boldsymbol.js",
+        "reason": "tex-svg autoloads the boldsymbol extension when source mathematics uses its macros",
+        "sha256": "716cf8735d00abfb1627f8adbbf4aeb915ac9b5c55d47aeaf276e73dac6a2aa1"
+      },
+      "freeze_receipt": {
+        "bytes": 2376,
+        "path": "authority/runtime/MathJax-3.1.2/FREEZE_RECEIPT.json",
+        "sha256": "22cb63be3a81e70f645c71a5ae93ce618c460ea9b99c63eac55fd7d14e03e043"
+      },
+      "url_manifest": {
+        "bytes": 1199,
+        "path": "authority/runtime/MathJax-3.1.2/URL_MANIFEST.csv",
+        "sha256": "4f9c8b167eedf6e12227274a9c4e93fe5c90a5504e3ef692113c9d6c6ced400c"
+      }
+    }
+  },
+  "schema": "o006.stat415.through-lesson12-build.v1",
+  "status": "built",
+  "structural_units_normalized": 6510,
+  "structural_units_target": 6498,
+  "target_documents": [
+    {
+      "bytes": 24947,
+      "path": "source/id-ID/index.html",
+      "sha256": "055bca74a3068a619ef9fb01dd3038c0e1b5b33da0b9de6f84337710047b48bb"
+    },
+    {
+      "bytes": 80541,
+      "path": "source/id-ID/Lesson00.html",
+      "sha256": "72670fe86c6f2ee5d51ecaab8d8e08e531b118d8ff624e9728426681e8db12b0"
+    },
+    {
+      "bytes": 47621,
+      "path": "source/id-ID/Lesson01.html",
+      "sha256": "80f81cefda8964f01995104e181c2bba9332fa4bb62a837b2ccc7b5af17eb034"
+    },
+    {
+      "bytes": 59365,
+      "path": "source/id-ID/Lesson02.html",
+      "sha256": "e3695c83f7d306baaaca09b8b4fcc98e92e2b2423d283c2cc55da0793fa87d45"
+    },
+    {
+      "bytes": 102805,
+      "path": "source/id-ID/Lesson03.html",
+      "sha256": "1ab1b06544a0176b4bbdfe7879a8b2cad7083ea6c9037e474611539c39ada059"
+    },
+    {
+      "bytes": 81439,
+      "path": "source/id-ID/Lesson04.html",
+      "sha256": "1cebf9f4097a26be5ca2ea71cde4834af0f5175dfef8358f2a9c26a53dd7b84d"
+    },
+    {
+      "bytes": 195443,
+      "path": "source/id-ID/Lesson05.html",
+      "sha256": "5595a4b7a194086abd77b8793a14cafbae5492807c044271a92e217753f4a2c1"
+    },
+    {
+      "bytes": 36704,
+      "path": "source/id-ID/Lesson06.html",
+      "sha256": "e9cade5664e88c6b20688d7245649140e98fd487b890ef987d1295059f0d13a5"
+    },
+    {
+      "bytes": 74168,
+      "path": "source/id-ID/Lesson07.html",
+      "sha256": "4f25b38c02f524493ea2368e147ba1dc5b049b0e8402496d9418d233cd178eb1"
+    },
+    {
+      "bytes": 113297,
+      "path": "source/id-ID/Lesson08.html",
+      "sha256": "abedbe06fa9134c430a32f236ad05cb6a5570a8b40d73346e6ee3fdb14c8b3ef"
+    },
+    {
+      "bytes": 95364,
+      "path": "source/id-ID/Lesson09.html",
+      "sha256": "b4623b38c3ef5476628612a8887c6e3278cbb6cd7cde35d624000c63a2ffe7a7"
+    },
+    {
+      "bytes": 153817,
+      "path": "source/id-ID/Lesson10.html",
+      "sha256": "c4e6282d4fd860da55cd16561bae1ef59e7abdfe020e9a758e6bb0f64d4248d7"
+    },
+    {
+      "bytes": 69875,
+      "path": "source/id-ID/Lesson11.html",
+      "sha256": "dedba38a37713ee05f04041a230d0676893de4140b171f6c33e3d1c978f6ebb7"
+    },
+    {
+      "bytes": 146789,
+      "path": "source/id-ID/Lesson12.html",
+      "sha256": "6cd3218f6d1a613f1ea9d1459c5506ea8b24f37340a3ee26f17bc18504dd5965"
+    }
+  ],
+  "translation_provenance": "OpenAI Codex gpt-5.6-sol, Ultra",
+  "translation_segments": 4932
+}

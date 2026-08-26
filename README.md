@@ -6,23 +6,20 @@ komponen O006/C140.
 
 ## Status
 
-**Sebagian — 13 dari 14 dokumen sudah dibangun dan dipublikasikan; lapisan
-terjemahan seluruh 14 dokumen sudah lengkap.** Laman utama dan Pelajaran 00–11
-sudah diterjemahkan, dibangun, dipublikasikan, dan lulus pemeriksaan
-deterministik serta visual. Seluruh 580 segmen Pelajaran 12 juga sudah
-diterjemahkan secara lokal, tetapi integrasi build, koreksi, dan QA kumulatifnya
-belum selesai; pembaca saat ini masih menaut ke halaman resmi untuk pelajaran
-tersebut.
+**Lengkap secara lokal — seluruh 14 dari 14 dokumen sudah diterjemahkan,
+dibangun, dan lulus QA.** Laman utama serta Pelajaran 00–12 kini membentuk satu
+pembaca luring lengkap. Batas publik terakhir masih 13-dari-14 sampai transaksi
+rilis lengkap dan pembacaan balik byte publik selesai.
 
-- 4.932 segmen terjemahan lengkap secara lokal; 4.352 sudah masuk pembaca
-  terverifikasi;
-- pembaca 13-dari-14 memiliki 5.664 unit struktural sumber dengan ID stabil dan
-  5.652 unit turunan;
-- 2.804 permukaan matematika sudah terverifikasi dalam pembaca; Pelajaran 12
-  menambahkan 352 permukaan yang masih menunggu integrasi kumulatif;
-- 218 koreksi turunan terverifikasi sampai Pelajaran 11; byte sumber resmi tidak
+- 4.932 segmen terjemahan di dalam pembaca lengkap;
+- 6.510 unit struktural sumber dengan ID stabil dan 6.498 unit turunan;
+- 3.156 permukaan matematika sumber terlindungi terverifikasi; Pelajaran 12 juga
+  memuat 20 permukaan MathJax target-native/aditif yang tercatat;
+- 242 koreksi atau disposisi turunan terverifikasi; byte sumber resmi tidak
   diubah;
-- pembaca HTML luring terverifikasi: 96 berkas / 17.232.761 byte.
+- pembaca HTML luring: 106 berkas / 17.614.553 byte;
+- QA visual: 15 rute pada 1.280 × 720 dan 390 × 844, 67 kejadian gambar,
+  14 tabel, tiga padanan video luring, tanpa luapan halaman atau galat MathJax.
 
 Pembaca lokal tersedia di `build/html-id/index.html`. Riwayat sumber,
 identitas SHA-256, hak komponen, koreksi, backend modular, hasil build, dan
@@ -52,6 +49,7 @@ python -B scripts/freeze_lesson01_assets.py --check-only
 python -B scripts/freeze_lesson02_assets.py --check-only
 python -B scripts/freeze_lesson04_assets.py --check-only
 python -B scripts/freeze_lesson11_asset.py --check-only
+python -B scripts/freeze_lesson12_assets.py --check-only
 python -B scripts/freeze_mathjax.py --check-only
 python -B scripts/normalize_first_unit.py --check-only
 python -B scripts/merge_first_unit_translations.py --check-only
@@ -77,8 +75,11 @@ python -B scripts/normalize_lesson10.py --check-only
 python -B scripts/merge_lesson10_translations.py --check-only
 python -B scripts/normalize_lesson11.py --check-only
 python -B scripts/merge_lesson11_translations.py --check-only
-python -B scripts/build_through_lesson11.py --check-only
-python -B scripts/qa_through_lesson11.py --check-only
+python -B scripts/normalize_lesson12.py --check-only
+python -B scripts/merge_lesson12_translations.py --check-only
+python -B scripts/materialize_lesson12_translation.py --check-only
+python -B scripts/build_through_lesson12.py --check-only
+python -B scripts/qa_through_lesson12.py --check-only
 ```
 
 Untuk membaca secara lokal, layani `build/html-id` dengan peladen HTTP statis;

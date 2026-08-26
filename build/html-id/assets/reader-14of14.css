@@ -275,7 +275,7 @@ main pre {
 }
 
 
-/* Lessons 07–11: readable, centered, full-width instructional surfaces. */
+/* Lessons 07–12: readable, centered, full-width instructional surfaces. */
 main#quarto-document-content figure,
 main#quarto-document-content .quarto-figure,
 main#quarto-document-content .cell-output-display,
@@ -305,6 +305,41 @@ main#quarto-document-content .cell-output {
 }
 
 main#quarto-document-content table {
+  display: block;
+  width: max-content;
+  max-width: 100%;
+  overflow-x: auto;
+  margin-inline: auto;
+}
+
+
+/* Lesson 12: complete offline regression surfaces and additive repair notes. */
+main#quarto-document-content .target-only-note,
+main#quarto-document-content .target-only-proof,
+main#quarto-document-content .target-only-reproducibility,
+main#quarto-document-content .offline-video-equivalent,
+main#quarto-document-content .component-provenance {
+  width: 100%;
+  max-width: 100%;
+  margin: 1rem 0;
+  padding: 0.85rem 1rem;
+  overflow-wrap: anywhere;
+  background: #f7f9fb;
+  border: 1px solid #cfd8e1;
+  border-radius: 0.4rem;
+}
+
+main#quarto-document-content .target-only-note {
+  border-inline-start: 0.35rem solid var(--brand);
+}
+
+main#quarto-document-content .target-derived-math {
+  max-width: 100%;
+  overflow-x: auto;
+  overflow-y: hidden;
+}
+
+main#quarto-document-content table.reader-responsive-table {
   display: block;
   width: max-content;
   max-width: 100%;

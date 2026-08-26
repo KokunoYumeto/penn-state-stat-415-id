@@ -1,0 +1,1124 @@
+<!doctype html>
+<html lang="id-ID">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>12 Regresi Linear Sederhana</title>
+<meta name="source-url" content="https://online.stat.psu.edu/stat415/Lesson12.html">
+<meta name="translation-provenance" content="OpenAI Codex gpt-5.6-sol, Ultra">
+<meta name="edition-status" content="complete: 14 of 14 documents; landing and Lessons 00–12">
+<link rel="license" href="https://creativecommons.org/licenses/by-nc/4.0/">
+<link rel="stylesheet" href="assets/reader-14of14.css">
+<script defer src="assets/MathJax/tex-svg.js"></script>
+</head>
+<body>
+<a class="skip-link" href="#quarto-document-content">Lewati ke isi utama</a>
+<header class="site-header"><div class="site-header__inner"><div><p class="site-title">STAT 415 — Pengantar Statistika Matematis</p><p class="site-subtitle">Rekonstruksi dan terjemahan Bahasa Indonesia · O006/C140</p></div><nav class="site-nav" aria-label="Navigasi utama"><a href="index.html">Daftar pelajaran</a><a href="Lesson00.html">Pelajaran 00</a><a href="Lesson01.html">Pelajaran 01</a><a href="Lesson02.html">Pelajaran 02</a><a href="Lesson03.html">Pelajaran 03</a><a href="Lesson04.html">Pelajaran 04</a><a href="Lesson05.html">Pelajaran 05</a><a href="Lesson06.html">Pelajaran 06</a><a href="Lesson07.html">Pelajaran 07</a><a href="Lesson08.html">Pelajaran 08</a><a href="Lesson09.html">Pelajaran 09</a><a href="Lesson10.html">Pelajaran 10</a><a href="Lesson11.html">Pelajaran 11</a><a href="Lesson12.html">Pelajaran 12</a><a href="licenses/index.html">Lisensi</a></nav></div></header>
+<div class="page-shell"><aside class="edition-note" aria-label="Status edisi"><strong>Edisi Bahasa Indonesia — 14 dari 14 dokumen.</strong> Laman utama serta Pelajaran 00–12 telah diterjemahkan sepenuhnya. Seluruh empat belas dokumen dalam batas sumber edisi ini kini lengkap. <a href="https://online.stat.psu.edu/stat415/Lesson12.html">Sumber resmi halaman ini</a>. <a href="licenses/index.html">Atribusi, perubahan, dan lisensi</a>.</aside><main class="content" data-component-id="Lesson12" data-document-id="O006-PSU-013" data-source-formula-count="352" data-source-url="https://online.stat.psu.edu/stat415/Lesson12.html" data-target-correction-count="24" data-translation-provenance="OpenAI Codex gpt-5.6-sol, Ultra" data-translation-status="complete" id="quarto-document-content" lang="id-ID">
+<header class="quarto-title-block default" data-o006-id="O006-PSU-013-U0001" id="title-block-header"><nav aria-label="Jejak navigasi" class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" data-o006-id="O006-PSU-013-U0002"><ol class="breadcrumb" data-o006-id="O006-PSU-013-U0003"><li class="breadcrumb-item" data-o006-id="O006-PSU-013-U0004"><a data-o006-id="O006-PSU-013-U0005" href="index.html#lessons">Pelajaran</a></li><li class="breadcrumb-item" data-o006-id="O006-PSU-013-U0006"><a data-o006-id="O006-PSU-013-U0007" href="Lesson12.html"><span class="chapter-number">12</span>  <span class="chapter-title">Regresi Linear Sederhana</span></a></li></ol></nav>
+<div class="quarto-title" data-o006-id="O006-PSU-013-U0008">
+<h1 class="title" data-o006-id="O006-PSU-013-U0009"><span class="chapter-number">12</span>  <span class="chapter-title">Regresi Linear Sederhana</span></h1>
+<div class="quarto-categories" data-o006-id="O006-PSU-013-U0010">
+<div class="quarto-category" data-o006-id="O006-PSU-013-U0011">Regresi</div>
+</div>
+</div>
+<div class="quarto-title-meta" data-o006-id="O006-PSU-013-U0012">
+</div>
+</header>
+<section class="level2 unnumbered unlisted" data-o006-id="O006-PSU-013-U0013" id="overview">
+<h2 class="unnumbered unlisted anchored" data-anchor-id="overview" data-o006-id="O006-PSU-013-U0014">Gambaran Umum</h2>
+<p data-o006-id="O006-PSU-013-U0015">Regresi linear sederhana merupakan cara untuk mengevaluasi hubungan antara dua peubah kontinu. Satu peubah dipandang sebagai peubah prediktor, peubah penjelas, atau peubah bebas (x). Peubah lainnya dipandang sebagai peubah respons, peubah hasil, atau peubah terikat (y).</p>
+<p data-o006-id="O006-PSU-013-U0016">Sebagai contoh, kita mungkin tertarik untuk menyelidiki hubungan (linear?) antara:</p>
+<ul data-o006-id="O006-PSU-013-U0017">
+<li data-o006-id="O006-PSU-013-U0018">tinggi badan dan berat badan</li>
+<li data-o006-id="O006-PSU-013-U0019">indeks prestasi kumulatif di sekolah menengah dan indeks prestasi kumulatif di perguruan tinggi</li>
+<li data-o006-id="O006-PSU-013-U0020">kecepatan dan efisiensi bahan bakar</li>
+<li data-o006-id="O006-PSU-013-U0021">suhu luar ruang dan laju penguapan</li>
+<li data-o006-id="O006-PSU-013-U0022">indeks rata-rata industri Dow Jones dan indeks kepercayaan konsumen</li>
+</ul>
+<section class="level3 unnumbered unlisted objectiveblock" data-o006-id="O006-PSU-013-U0023" id="objectives">
+<h3 class="unnumbered unlisted anchored" data-anchor-id="objectives" data-o006-id="O006-PSU-013-U0024"><i class="bi bi-check2-circle"></i>Tujuan</h3>
+<p data-o006-id="O006-PSU-013-U0025">Setelah menyelesaikan pelajaran ini, Anda diharapkan mampu:</p>
+<ol data-o006-id="O006-PSU-013-U0026" type="1">
+<li data-o006-id="O006-PSU-013-U0027">Merumuskan dan menafsirkan model regresi linear untuk memprediksi hasil berdasarkan satu peubah prediktor;</li>
+<li data-o006-id="O006-PSU-013-U0028">Menentukan distribusi parameter kuadrat terkecil;</li>
+<li data-o006-id="O006-PSU-013-U0029">Melakukan uji hipotesis atau membangun selang kepercayaan untuk parameter kuadrat terkecil; dan</li>
+<li data-o006-id="O006-PSU-013-U0030">Membangun selang kepercayaan atau melakukan uji hipotesis untuk parameter korelasi <span class="math inline" data-o006-math-id="O006-PSU-013-M0001">\(\rho\)</span>.<aside class="target-only-note coverage-gap-note" data-o006-correction-id="O006-PSU-ADV-0220" role="note">Batas cakupan sumber: tujuan inferensi untuk koefisien korelasi ρ tidak dipenuhi oleh isi Pelajaran 12. Prosedur tersebut tetap menjadi unit wajib dalam pendamping orisinal C140 dan tidak boleh dianggap tercakup di sini.</aside></li>
+</ol>
+</section>
+</section>
+<section class="level2" data-number="12.1" data-o006-id="O006-PSU-013-U0031" id="types-of-relationships">
+<h2 class="anchored" data-anchor-id="types-of-relationships" data-number="12.1" data-o006-id="O006-PSU-013-U0032"><span class="header-section-number">12.1</span> Jenis Hubungan</h2>
+<p data-o006-id="O006-PSU-013-U0033">Sebelum membahas metode regresi linear sederhana, kita perlu membedakan dua jenis hubungan, yaitu:</p>
+<ul data-o006-id="O006-PSU-013-U0034">
+<li data-o006-id="O006-PSU-013-U0035">hubungan deterministik</li>
+<li data-o006-id="O006-PSU-013-U0036">hubungan statistis</li>
+</ul>
+<p data-o006-id="O006-PSU-013-U0037">Seperti akan segera kita lihat, regresi linear sederhana membahas hubungan statistis.</p>
+<section class="level3" data-number="12.1.1" data-o006-id="O006-PSU-013-U0038" id="deterministic-or-functional-relationships">
+<h3 class="anchored" data-anchor-id="deterministic-or-functional-relationships" data-number="12.1.1" data-o006-id="O006-PSU-013-U0039"><span class="header-section-number">12.1.1</span> Hubungan Deterministik (atau Fungsional)</h3>
+<p data-o006-id="O006-PSU-013-U0040">Sebuah <strong>hubungan deterministik</strong> (atau <strong>hubungan fungsional</strong>) <strong>—</strong> merupakan hubungan eksak antara prediktor <span class="math inline" data-o006-math-id="O006-PSU-013-M0002">\(x\)</span> dan respons <span class="math inline" data-o006-math-id="O006-PSU-013-M0003">\(y\)</span>. Sebagai contoh, perhatikan hubungan konversi antara suhu dalam derajat Celsius (<span class="math inline" data-o006-math-id="O006-PSU-013-M0004">\(C\)</span>) dan suhu dalam derajat Fahrenheit (<span class="math inline" data-o006-math-id="O006-PSU-013-M0005">\(F\)</span>). Kita mengetahui bahwa hubungannya adalah:</p>
+<p data-o006-id="O006-PSU-013-U0041"><span class="math display" data-o006-math-id="O006-PSU-013-M0006">\[F=\dfrac{9}{5}C+32\]</span></p>
+<p data-o006-id="O006-PSU-013-U0042">Karena itu, jika suhunya 10 derajat Celsius, kita juga mengetahui bahwa suhunya 50 derajat Fahrenheit:</p>
+<p data-o006-id="O006-PSU-013-U0043"><span class="math display" data-o006-math-id="O006-PSU-013-M0007">\[F=\dfrac{9}{5}(10)+32=50\]</span></p>
+<p data-o006-id="O006-PSU-013-U0044">Secara grafis, beginilah bentuk hubungan (linear) eksak antara derajat Celsius dan derajat Fahrenheit:</p>
+<div class="cell" data-o006-id="O006-PSU-013-U0045">
+<div class="cell-output-display" data-o006-id="O006-PSU-013-U0046">
+<div alt="Scatter plot of Fahrenheit vs Celsius with a connecting line" class="quarto-float quarto-figure quarto-figure-center anchored" data-o006-id="O006-PSU-013-U0047" data-o006-source-native-id="fig-lesson9_1" data-o006-source-native-occurrence="1" id="fig-lesson9_1--source-occurrence-01" width="70%">
+<figure class="figure quarto-float quarto-float-fig reader-full-width-figure" data-o006-id="O006-PSU-013-U0048">
+<div aria-describedby="fig-lesson9_1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca" data-o006-id="O006-PSU-013-U0049">
+<a class="lightbox" data-gallery="quarto-lightbox-gallery-1" data-o006-id="O006-PSU-013-U0050" href="assets/lesson12/Lesson12_files/figure-html/fig-lesson9_1-1.png" title="Gambar 12.1 — Hubungan deterministik suhu Celsius dan Fahrenheit."><img alt="Diagram pencar suhu Fahrenheit terhadap Celsius; semua titik terletak pada satu garis naik lurus." class="figure-img img-fluid reader-full-width-image reader-responsive-image" data-o006-asset-id="O006-PSU-013-A0001" data-o006-id="O006-PSU-013-U0051" data-o006-source-native-id="fig-lesson9_1" data-o006-source-native-occurrence="2" decoding="async" height="960" id="fig-lesson9_1--source-occurrence-02" loading="lazy" src="assets/lesson12/Lesson12_files/figure-html/fig-lesson9_1-1.png" width="1344"/></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" data-o006-id="O006-PSU-013-U0052" id="fig-lesson9_1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">Gambar 12.1 — Hubungan deterministik suhu Celsius dan Fahrenheit.</figcaption>
+</figure><aside class="target-only-note asset-rights-note" data-o006-correction-id="O006-PSU-ADV-0240" role="note">Hak komponen gambar: sembilan PNG resmi dibekukan dan didistribusikan kembali di bawah saksi lisensi tingkat laman CC BY-NC 4.0, kecuali jika dinyatakan lain; tidak ada pengecualian aset khusus yang diklaim tanpa bukti terpisah.</aside>
+</div>
+</div>
+</div>
+<p data-o006-id="O006-PSU-013-U0053">Contoh lain hubungan deterministik mencakup</p>
+<ul data-o006-id="O006-PSU-013-U0054">
+<li data-o006-id="O006-PSU-013-U0055"><p data-o006-id="O006-PSU-013-U0056">hubungan antara diameter (<span class="math inline" data-o006-math-id="O006-PSU-013-M0008">\(d\)</span>) dan keliling lingkaran (<span class="math inline" data-o006-math-id="O006-PSU-013-M0009">\(C\)</span>): <span class="math inline" data-o006-math-id="O006-PSU-013-M0010">\(C=\pi d\)</span></p></li>
+<li data-o006-id="O006-PSU-013-U0057"><p data-o006-id="O006-PSU-013-U0058">hubungan antara beban yang diberikan (<span class="math inline" data-o006-math-id="O006-PSU-013-M0011">\(X\)</span>) dan pertambahan panjang pegas (<span class="math inline" data-o006-math-id="O006-PSU-013-M0012">\(Y\)</span>) (dikenal sebagai Hukum Hooke): <span class="math inline" data-o006-math-id="O006-PSU-013-M0013">\(Y=\alpha+\beta X\)</span></p></li>
+<li data-o006-id="O006-PSU-013-U0059"><p data-o006-id="O006-PSU-013-U0060">hubungan antara tegangan yang diberikan (<span class="math inline" data-o006-math-id="O006-PSU-013-M0014">\(V\)</span>), hambatan (<span class="math inline" data-o006-math-id="O006-PSU-013-M0015">\(r\)</span>), dan arus (<span class="math inline" data-o006-math-id="O006-PSU-013-M0016">\(I\)</span>) (dikenal sebagai Hukum Ohm): <span class="math inline" data-o006-math-id="O006-PSU-013-M0017">\(I=\dfrac{V}{r}\)</span></p></li>
+<li data-o006-id="O006-PSU-013-U0061"><p data-o006-id="O006-PSU-013-U0062">dan, pada suhu tetap, hubungan antara tekanan (<span class="math inline" data-o006-math-id="O006-PSU-013-M0018">\(P\)</span>) dan volume gas (<span class="math inline" data-o006-math-id="O006-PSU-013-M0019">\(V\)</span>) (dikenal sebagai Hukum Boyle): <span class="math inline" data-o006-math-id="O006-PSU-013-M0020">\(P=\dfrac{\alpha}{V}\)</span> dengan <span class="math inline" data-o006-math-id="O006-PSU-013-M0021">\(\alpha\)</span> merupakan konstanta yang diketahui untuk setiap gas.</p></li>
+</ul>
+</section>
+<section class="level3" data-number="12.1.2" data-o006-id="O006-PSU-013-U0063" id="statistical-relationships">
+<h3 class="anchored" data-anchor-id="statistical-relationships" data-number="12.1.2" data-o006-id="O006-PSU-013-U0064"><span class="header-section-number">12.1.2</span> Hubungan Statistis</h3>
+<p data-o006-id="O006-PSU-013-U0065">Sebuah <strong>hubungan statistis</strong>, sebaliknya, bukanlah hubungan eksak. Hubungan ini memiliki suatu “<strong>tren</strong>” antara prediktor <span class="math inline" data-o006-math-id="O006-PSU-013-M0022">\(x\)</span> dan respons <span class="math inline" data-o006-math-id="O006-PSU-013-M0023">\(y\)</span>, tetapi juga memiliki sejumlah “<strong>pencaran</strong>”. Berikut grafik yang menggambarkan kemungkinan bentuk hubungan statistis:</p>
+<div class="cell" data-o006-id="O006-PSU-013-U0066">
+<div class="cell-output-display" data-o006-id="O006-PSU-013-U0067">
+<div alt="Scatter plot of skin cancer mortality versus state latitude with regression line" class="quarto-float quarto-figure quarto-figure-center anchored" data-o006-id="O006-PSU-013-U0068" data-o006-source-native-id="fig-skin-cancer" data-o006-source-native-occurrence="1" id="fig-skin-cancer--source-occurrence-01" width="70%">
+<figure class="figure quarto-float quarto-float-fig reader-full-width-figure" data-o006-id="O006-PSU-013-U0069">
+<div aria-describedby="fig-skin-cancer-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca" data-o006-id="O006-PSU-013-U0070">
+<a class="lightbox" data-gallery="quarto-lightbox-gallery-2" data-o006-id="O006-PSU-013-U0071" href="assets/lesson12/Lesson12_files/figure-html/fig-skin-cancer-1.png" title="Gambar 12.2 — Hubungan statistis garis lintang dan mortalitas kanker kulit."><img alt="Diagram pencar mortalitas kanker kulit terhadap garis lintang negara bagian; garis regresi menurun saat garis lintang bertambah." class="figure-img img-fluid reader-full-width-image reader-responsive-image" data-o006-asset-id="O006-PSU-013-A0002" data-o006-id="O006-PSU-013-U0072" data-o006-source-native-id="fig-skin-cancer" data-o006-source-native-occurrence="2" decoding="async" height="960" id="fig-skin-cancer--source-occurrence-02" loading="lazy" src="assets/lesson12/Lesson12_files/figure-html/fig-skin-cancer-1.png" width="1344"/></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" data-o006-id="O006-PSU-013-U0073" id="fig-skin-cancer-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">Gambar 12.2 — Hubungan statistis garis lintang dan mortalitas kanker kulit.</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p data-o006-id="O006-PSU-013-U0074">Dalam kasus ini, peneliti menyelidiki hubungan antara garis lintang (dalam derajat) pada pusat masing-masing dari 50 negara bagian Amerika Serikat dan mortalitas akibat kanker kulit (dalam kematian per 10 juta penduduk) di setiap negara bagian tersebut. Barangkali tidak mengherankan bahwa terdapat tren menurun, tetapi bukan hubungan eksak, antara garis lintang dan mortalitas kanker kulit. Artinya, ketika garis lintang meningkat menuju negara bagian yang lebih utara—tempat paparan sinar matahari lebih jarang dan kurang kuat—mortalitas akibat kanker kulit menurun, tetapi tidak secara sempurna.</p>
+<p data-o006-id="O006-PSU-013-U0075">Contoh lain hubungan statistis mencakup:</p>
+<ul data-o006-id="O006-PSU-013-U0076">
+<li data-o006-id="O006-PSU-013-U0077">hubungan positif antara tinggi badan dan berat badan</li>
+<li data-o006-id="O006-PSU-013-U0078">hubungan positif antara jumlah alkohol yang dikonsumsi dan kadar alkohol dalam darah</li>
+<li data-o006-id="O006-PSU-013-U0079">hubungan negatif antara kapasitas vital paru-paru dan pak-tahun merokok</li>
+<li data-o006-id="O006-PSU-013-U0080">hubungan negatif antara kecepatan berkendara dan efisiensi bahan bakar</li>
+</ul>
+<p data-o006-id="O006-PSU-013-U0081">Jenis hubungan statistis yang tidak sempurna inilah yang menjadi perhatian kita ketika menyelidiki metode regresi linear sederhana.</p>
+</section>
+</section>
+<section class="level2" data-number="12.2" data-o006-id="O006-PSU-013-U0082" id="least-squares-the-idea">
+<h2 class="anchored" data-anchor-id="least-squares-the-idea" data-number="12.2" data-o006-id="O006-PSU-013-U0083"><span class="header-section-number">12.2</span> Kuadrat Terkecil: Gagasan</h2>
+<p data-o006-id="O006-PSU-013-U0084">Sebelum mendalami teori kuadrat terkecil, mari kita bangun intuisi mengenai metode kuadrat terkecil melalui sebuah contoh.</p>
+<div class="theorem example" data-o006-id="O006-PSU-013-U0085" id="exm-leastsquares">
+<p data-o006-id="O006-PSU-013-U0086"><span class="theorem-title"><strong>Contoh 12.1</strong></span> Seorang mahasiswa ingin mengukur hubungan (linear) antara tinggi badan (dalam inci) dan berat badan (dalam pon). Ia mengukur tinggi dan berat sepuluh mahasiswa yang dipilih secara acak dari kelasnya. Setelah pengukuran, ia membuat diagram pencar di samping dari data tinggi dan berat yang diperoleh. Untuk merangkum hubungan antara tinggi dan berat, ia memperkirakan secara visual dua garis yang dianggap baik (garis utuh dan garis putus-putus), tetapi tidak dapat memilih di antara keduanya:</p>
+<ul data-o006-id="O006-PSU-013-U0087">
+<li data-o006-id="O006-PSU-013-U0088"><p data-o006-id="O006-PSU-013-U0089"><span class="math inline" data-o006-math-id="O006-PSU-013-M0024">\(\text{weight} = −266.5 + 6.1\times \text{height}\)</span></p></li>
+<li data-o006-id="O006-PSU-013-U0090"><p data-o006-id="O006-PSU-013-U0091"><span class="math inline" data-o006-math-id="O006-PSU-013-M0025">\(\text{weight} = −331.2 + 7.1\times \text{height}\)</span></p></li>
+</ul>
+<p data-o006-id="O006-PSU-013-U0092"><span class="bi bi-question-circle-fill fs-4 text-success"></span> <strong>Manakah “garis dengan suaian terbaik” tersebut?</strong></p>
+<section class="level4 card card-body bg-light ms-3 mb-3 pt-0" data-o006-id="O006-PSU-013-U0093" id="solution">
+<h4 class="anchored" data-anchor-id="solution" data-o006-id="O006-PSU-013-U0094">Solusi</h4>
+<p data-o006-id="O006-PSU-013-U0095">Untuk memudahkan pencarian garis dengan suaian terbaik, mari kita tetapkan beberapa notasi. Ingat bahwa unit eksperimen adalah objek yang diukur (dalam kasus ini, seorang mahasiswa):</p>
+<ul data-o006-id="O006-PSU-013-U0096">
+<li data-o006-id="O006-PSU-013-U0097"><p data-o006-id="O006-PSU-013-U0098">misalkan <span class="math inline" data-o006-math-id="O006-PSU-013-M0026">\(y_i\)</span> menyatakan <strong>respons teramati</strong> untuk unit eksperimen ke- <span class="math inline" data-o006-math-id="O006-PSU-013-M0027">\(i^{th}\)</span> ;</p></li>
+<li data-o006-id="O006-PSU-013-U0099"><p data-o006-id="O006-PSU-013-U0100">misalkan <span class="math inline" data-o006-math-id="O006-PSU-013-M0028">\(x_i\)</span> menyatakan <strong>nilai prediktor</strong> untuk unit eksperimen ke- <span class="math inline" data-o006-math-id="O006-PSU-013-M0029">\(i^{th}\)</span> ;</p></li>
+</ul>
+<p data-o006-id="O006-PSU-013-U0101">misalkan <span class="math inline" data-o006-math-id="O006-PSU-013-M0030">\(\hat{y}_i\)</span> menyatakan <strong>respons terprediksi</strong> (atau <strong>nilai suaian</strong>) untuk unit eksperimen ke- <span class="math inline" data-o006-math-id="O006-PSU-013-M0031">\(i^{th}\)</span> .</p>
+<p data-o006-id="O006-PSU-013-U0102">Dengan demikian, untuk titik data yang dilingkari merah:</p>
+<div class="cell fig-cap-location-bottom" data-layout-align="center" data-o006-id="O006-PSU-013-U0103">
+<div class="cell-output-display" data-o006-id="O006-PSU-013-U0104">
+<div alt="Scatter Plot of Height and Weight from the student height and weight data set." class="quarto-float quarto-figure quarto-figure-center anchored" data-cap-location="bottom" data-fig-align="center" data-o006-id="O006-PSU-013-U0105" id="fig-htwt1">
+<figure class="figure quarto-float quarto-float-fig reader-full-width-figure" data-o006-id="O006-PSU-013-U0106">
+<div aria-describedby="fig-htwt1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca" data-o006-id="O006-PSU-013-U0107">
+<a class="lightbox" data-gallery="quarto-lightbox-gallery-3" data-o006-id="O006-PSU-013-U0108" href="assets/lesson12/Lesson12_files/figure-html/fig-htwt1-1.png" title="Gambar 12.3 — Tinggi dan berat badan dengan dua kandidat garis suaian."><img alt="Diagram pencar tinggi dan berat sepuluh mahasiswa dengan dua kandidat garis regresi, utuh dan putus-putus." class="figure-img img-fluid quarto-figure quarto-figure-center reader-full-width-image reader-responsive-image" data-o006-asset-id="O006-PSU-013-A0003" data-o006-id="O006-PSU-013-U0109" decoding="async" height="960" loading="lazy" src="assets/lesson12/Lesson12_files/figure-html/fig-htwt1-1.png" width="1344"/></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" data-o006-id="O006-PSU-013-U0110" id="fig-htwt1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">Gambar 12.3 — Tinggi dan berat badan dengan dua kandidat garis suaian.</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p data-o006-id="O006-PSU-013-U0111">kita memperoleh:</p>
+<p data-o006-id="O006-PSU-013-U0112"><span class="math display" data-o006-math-id="O006-PSU-013-M0032">\[x_i=75 \text{ and }y_i=208\]</span></p>
+<p data-o006-id="O006-PSU-013-U0113">Dengan menggunakan versi tak dibulatkan dari garis yang diusulkan, berat terprediksi bagi mahasiswa yang dipilih secara acak dan memiliki tinggi 75 inci adalah:</p>
+<p data-o006-id="O006-PSU-013-U0114"><span class="math display" data-o006-math-id="O006-PSU-013-M0033">\[\hat{y}_i=-266.534+6.13758(75)=193.8\text{ pounds}\]</span></p>
+<p data-o006-id="O006-PSU-013-U0115">Tentu saja, garis hasil pendugaan tersebut tidak memprediksi berat mahasiswa setinggi 75 inci dengan sempurna. Dalam kasus ini, prediksinya 193,8 pon, sedangkan berat sebenarnya 208 pon. Prediksi kita memiliki galat. Artinya, ketika menggunakan <span class="math inline" data-o006-math-id="O006-PSU-013-M0034">\(\hat{y_i}\)</span> untuk memprediksi respons aktual <span class="math inline" data-o006-math-id="O006-PSU-013-M0035">\(y_i\)</span> kita menghasilkan <strong>galat prediksi</strong> (atau <strong>galat sisaan</strong>) sebesar: <span class="math display" data-o006-math-id="O006-PSU-013-M0036">\[
+e_i=y_i-\hat{y}_i
+\]</span> Garis yang menyuai data dengan baik adalah garis yang <span class="math inline" data-o006-math-id="O006-PSU-013-M0037">\(n\)</span> galat prediksinya (satu untuk setiap <span class="math inline" data-o006-math-id="O006-PSU-013-M0038">\(n\)</span> titik data— <span class="math inline" data-o006-math-id="O006-PSU-013-M0039">\(n=10\)</span>dalam kasus ini) sekecil mungkin menurut suatu ukuran keseluruhan. Gagasan ini disebut “kriteria kuadrat terkecil”. Singkatnya, <strong>kriteria kuadrat terkecil</strong> menyatakan bahwa untuk menemukan persamaan garis dengan suaian terbaik:</p>
+<p data-o006-id="O006-PSU-013-U0116"><span class="math display" data-o006-math-id="O006-PSU-013-M0040">\[\hat{y}_i=a_1+bx_i\]</span></p>
+<p data-o006-id="O006-PSU-013-U0117">kita perlu memilih nilai <span class="math inline" data-o006-math-id="O006-PSU-013-M0041">\(a_1\)</span> dan <span class="math inline" data-o006-math-id="O006-PSU-013-M0042">\(b\)</span> yang meminimumkan jumlah kuadrat galat prediksi. Artinya, carilah <span class="math inline" data-o006-math-id="O006-PSU-013-M0043">\(a_1\)</span> dan <span class="math inline" data-o006-math-id="O006-PSU-013-M0044">\(b\)</span> yang meminimumkan:</p>
+<p data-o006-id="O006-PSU-013-U0118"><span class="math display" data-o006-math-id="O006-PSU-013-M0045">\[Q=\sum\limits_{i=1}^n (y_i-\hat{y}_i)^2=\sum\limits_{i=1}^n (y_i-(a_1+bx_i))^2\]</span></p>
+<p data-o006-id="O006-PSU-013-U0119">Jadi, untuk menentukan dengan kriteria kuadrat terkecil garis mana di antara dua garis berikut:</p>
+<ul data-o006-id="O006-PSU-013-U0120">
+<li data-o006-id="O006-PSU-013-U0121"><p data-o006-id="O006-PSU-013-U0122"><span class="math inline" data-o006-math-id="O006-PSU-013-M0046">\(\text{weight} = −266.5 + 6.1 \times\text{height}\)</span></p></li>
+<li data-o006-id="O006-PSU-013-U0123"><p data-o006-id="O006-PSU-013-U0124"><span class="math inline" data-o006-math-id="O006-PSU-013-M0047">\(\text{weight} = −331.2 + 7.1 \times \text{height}\)</span></p></li>
+</ul>
+<p data-o006-id="O006-PSU-013-U0125">yang paling baik menyuai data, kita hanya perlu menentukan <span class="math inline" data-o006-math-id="O006-PSU-013-M0048">\(Q\)</span>, yaitu jumlah kuadrat galat prediksi untuk masing-masing garis, lalu memilih garis dengan nilai <span class="math inline" data-o006-math-id="O006-PSU-013-M0049">\(Q\)</span>terkecil. Untuk garis putus-putus, yaitu garis:</p>
+<p data-o006-id="O006-PSU-013-U0126"><span class="math display" data-o006-math-id="O006-PSU-013-M0050">\[\text{weight} = −331.2 + 7.1\times\text{height}\]</span></p>
+<p data-o006-id="O006-PSU-013-U0127">perhitungannya adalah sebagai berikut:</p>
+<div class="w-75 mx-auto" data-o006-id="O006-PSU-013-U0128">
+<div class="cell quarto-float quarto-figure quarto-figure-center anchored" data-o006-id="O006-PSU-013-U0129" id="tbl-studenthtwt2">
+<figure class="quarto-float quarto-float-tbl figure" data-o006-id="O006-PSU-013-U0130">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl quarto-uncaptioned" data-o006-id="O006-PSU-013-U0131" id="tbl-studenthtwt2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Tabel 12.1
+</figcaption>
+<div aria-describedby="tbl-studenthtwt2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca" data-o006-id="O006-PSU-013-U0132">
+<table aria-describedby="lesson12-table-1-caption" class="caption-top reader-responsive-table small table table-hover table-sm table-striped" data-o006-id="O006-PSU-013-U0133"><caption id="lesson12-table-1-caption">Tabel 12.1 — Galat dan kuadrat galat untuk garis putus-putus pada data tinggi–berat.</caption>
+<thead data-o006-id="O006-PSU-013-U0134">
+<tr class="header" data-o006-id="O006-PSU-013-U0135">
+<th data-o006-id="O006-PSU-013-U0136" data-quarto-table-cell-role="th" id="lesson12-table-1-col-1" scope="col" style="text-align: right;">\(i\)</th>
+<th data-o006-id="O006-PSU-013-U0137" data-quarto-table-cell-role="th" id="lesson12-table-1-col-2" scope="col" style="text-align: right;">\(x_i\)</th>
+<th data-o006-id="O006-PSU-013-U0138" data-quarto-table-cell-role="th" id="lesson12-table-1-col-3" scope="col" style="text-align: right;">\(y_i\)</th>
+<th data-o006-id="O006-PSU-013-U0139" data-quarto-table-cell-role="th" id="lesson12-table-1-col-4" scope="col" style="text-align: right;">\(\hat{y}_i\)</th>
+<th data-o006-id="O006-PSU-013-U0140" data-quarto-table-cell-role="th" id="lesson12-table-1-col-5" scope="col" style="text-align: right;">\((y_i - \hat{y}_i)\)</th>
+<th data-o006-id="O006-PSU-013-U0141" data-quarto-table-cell-role="th" id="lesson12-table-1-col-6" scope="col" style="text-align: right;">\((y_i - \hat{y}_i)^2 \)</th>
+</tr>
+</thead>
+<tbody data-o006-id="O006-PSU-013-U0142">
+<tr class="odd" data-o006-id="O006-PSU-013-U0143">
+<th data-o006-id="O006-PSU-013-U0144" scope="row" style="text-align: right;">1</th>
+<td data-o006-id="O006-PSU-013-U0145" style="text-align: right;">63</td>
+<td data-o006-id="O006-PSU-013-U0146" style="text-align: right;">127</td>
+<td data-o006-id="O006-PSU-013-U0147" style="text-align: right;">116.1</td>
+<td data-o006-id="O006-PSU-013-U0148" style="text-align: right;">10.9</td>
+<td data-o006-id="O006-PSU-013-U0149" style="text-align: right;">118.8</td>
+</tr>
+<tr class="even" data-o006-id="O006-PSU-013-U0150">
+<th data-o006-id="O006-PSU-013-U0151" scope="row" style="text-align: right;">2</th>
+<td data-o006-id="O006-PSU-013-U0152" style="text-align: right;">64</td>
+<td data-o006-id="O006-PSU-013-U0153" style="text-align: right;">121</td>
+<td data-o006-id="O006-PSU-013-U0154" style="text-align: right;">123.2</td>
+<td data-o006-id="O006-PSU-013-U0155" style="text-align: right;">-2.2</td>
+<td data-o006-id="O006-PSU-013-U0156" style="text-align: right;">4.8</td>
+</tr>
+<tr class="odd" data-o006-id="O006-PSU-013-U0157">
+<th data-o006-id="O006-PSU-013-U0158" scope="row" style="text-align: right;">3</th>
+<td data-o006-id="O006-PSU-013-U0159" style="text-align: right;">66</td>
+<td data-o006-id="O006-PSU-013-U0160" style="text-align: right;">142</td>
+<td data-o006-id="O006-PSU-013-U0161" style="text-align: right;">137.4</td>
+<td data-o006-id="O006-PSU-013-U0162" style="text-align: right;">4.6</td>
+<td data-o006-id="O006-PSU-013-U0163" style="text-align: right;">21.2</td>
+</tr>
+<tr class="even" data-o006-id="O006-PSU-013-U0164">
+<th data-o006-id="O006-PSU-013-U0165" scope="row" style="text-align: right;">4</th>
+<td data-o006-id="O006-PSU-013-U0166" style="text-align: right;">69</td>
+<td data-o006-id="O006-PSU-013-U0167" style="text-align: right;">157</td>
+<td data-o006-id="O006-PSU-013-U0168" style="text-align: right;">158.7</td>
+<td data-o006-id="O006-PSU-013-U0169" style="text-align: right;">-1.7</td>
+<td data-o006-id="O006-PSU-013-U0170" style="text-align: right;">2.9</td>
+</tr>
+<tr class="odd" data-o006-id="O006-PSU-013-U0171">
+<th data-o006-id="O006-PSU-013-U0172" scope="row" style="text-align: right;">5</th>
+<td data-o006-id="O006-PSU-013-U0173" style="text-align: right;">69</td>
+<td data-o006-id="O006-PSU-013-U0174" style="text-align: right;">162</td>
+<td data-o006-id="O006-PSU-013-U0175" style="text-align: right;">158.7</td>
+<td data-o006-id="O006-PSU-013-U0176" style="text-align: right;">3.3</td>
+<td data-o006-id="O006-PSU-013-U0177" style="text-align: right;">10.9</td>
+</tr>
+<tr class="even" data-o006-id="O006-PSU-013-U0178">
+<th data-o006-id="O006-PSU-013-U0179" scope="row" style="text-align: right;">6</th>
+<td data-o006-id="O006-PSU-013-U0180" style="text-align: right;">71</td>
+<td data-o006-id="O006-PSU-013-U0181" style="text-align: right;">156</td>
+<td data-o006-id="O006-PSU-013-U0182" style="text-align: right;">172.9</td>
+<td data-o006-id="O006-PSU-013-U0183" style="text-align: right;">-16.9</td>
+<td data-o006-id="O006-PSU-013-U0184" style="text-align: right;">285.6</td>
+</tr>
+<tr class="odd" data-o006-id="O006-PSU-013-U0185">
+<th data-o006-id="O006-PSU-013-U0186" scope="row" style="text-align: right;">7</th>
+<td data-o006-id="O006-PSU-013-U0187" style="text-align: right;">71</td>
+<td data-o006-id="O006-PSU-013-U0188" style="text-align: right;">169</td>
+<td data-o006-id="O006-PSU-013-U0189" style="text-align: right;">172.9</td>
+<td data-o006-id="O006-PSU-013-U0190" style="text-align: right;">-3.9</td>
+<td data-o006-id="O006-PSU-013-U0191" style="text-align: right;">15.2</td>
+</tr>
+<tr class="even" data-o006-id="O006-PSU-013-U0192">
+<th data-o006-id="O006-PSU-013-U0193" scope="row" style="text-align: right;">8</th>
+<td data-o006-id="O006-PSU-013-U0194" style="text-align: right;">72</td>
+<td data-o006-id="O006-PSU-013-U0195" style="text-align: right;">165</td>
+<td data-o006-id="O006-PSU-013-U0196" style="text-align: right;">180</td>
+<td data-o006-id="O006-PSU-013-U0197" style="text-align: right;">-15</td>
+<td data-o006-id="O006-PSU-013-U0198" style="text-align: right;">225.0</td>
+</tr>
+<tr class="odd" data-o006-id="O006-PSU-013-U0199">
+<th data-o006-id="O006-PSU-013-U0200" scope="row" style="text-align: right;">9</th>
+<td data-o006-id="O006-PSU-013-U0201" style="text-align: right;">73</td>
+<td data-o006-id="O006-PSU-013-U0202" style="text-align: right;">181</td>
+<td data-o006-id="O006-PSU-013-U0203" style="text-align: right;">187.1</td>
+<td data-o006-id="O006-PSU-013-U0204" style="text-align: right;">-6.1</td>
+<td data-o006-id="O006-PSU-013-U0205" style="text-align: right;">37.2</td>
+</tr>
+<tr class="even" data-o006-id="O006-PSU-013-U0206">
+<th data-o006-id="O006-PSU-013-U0207" scope="row" style="text-align: right;">10</th>
+<td data-o006-id="O006-PSU-013-U0208" style="text-align: right;">75</td>
+<td data-o006-id="O006-PSU-013-U0209" style="text-align: right;">208</td>
+<td data-o006-id="O006-PSU-013-U0210" style="text-align: right;">201.3</td>
+<td data-o006-id="O006-PSU-013-U0211" style="text-align: right;">6.7</td>
+<td data-o006-id="O006-PSU-013-U0212" style="text-align: right;">44.9</td>
+</tr>
+<tr class="odd" data-o006-id="O006-PSU-013-U0213">
+<th data-o006-id="O006-PSU-013-U0214" scope="row" style="text-align: right;">Total</th>
+<td data-o006-id="O006-PSU-013-U0215" style="text-align: right;"></td>
+<td data-o006-id="O006-PSU-013-U0216" style="text-align: right;"></td>
+<td data-o006-id="O006-PSU-013-U0217" style="text-align: right;"></td>
+<td data-o006-id="O006-PSU-013-U0218" style="text-align: right;"></td>
+<td data-o006-id="O006-PSU-013-U0219" style="text-align: right;">766.5</td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+</div>
+<p data-o006-id="O006-PSU-013-U0220">Kolom pertama yang berlabel <span class="math inline" data-o006-math-id="O006-PSU-013-M0051">\(i\)</span> sekadar mencatat indeks titik data, <span class="math inline" data-o006-math-id="O006-PSU-013-M0052">\(i=1, 2, \ldots, 10\)</span>. Kolom yang berlabel <span class="math inline" data-o006-math-id="O006-PSU-013-M0053">\(x_i\)</span> dan <span class="math inline" data-o006-math-id="O006-PSU-013-M0054">\(y_i\)</span> memuat titik data asli. Sebagai contoh, mahasiswa pertama yang diukur memiliki tinggi 64 inci dan berat 121 pon. Kolom keempat, berlabel <span class="math inline" data-o006-math-id="O006-PSU-013-M0055">\(\hat{y}_i\)</span>, memuat berat terprediksi setiap mahasiswa. Sebagai contoh, berat terprediksi mahasiswa kedua, yang tingginya 64 inci, adalah:</p>
+<p data-o006-id="O006-PSU-013-U0221"><span class="math display" data-o006-math-id="O006-PSU-013-M0056">\[\hat{y}_2=-331.2+7.1(64)=123.2 \text{ pounds}\]</span></p>
+<p data-o006-id="O006-PSU-013-U0222">Kolom kelima memuat galat ketika <span class="math inline" data-o006-math-id="O006-PSU-013-M0057">\(\hat{y}_i\)</span> digunakan untuk memprediksi <span class="math inline" data-o006-math-id="O006-PSU-013-M0058">\(y_i\)</span>. Untuk mahasiswa kedua, galat prediksinya adalah:</p>
+<p data-o006-id="O006-PSU-013-U0223"><span class="math display" data-o006-math-id="O006-PSU-013-M0059">\[e_2=121-123.2=-2.2\]</span></p>
+<p data-o006-id="O006-PSU-013-U0224">Kolom terakhir memuat kuadrat galat prediksi. Kuadrat galat prediksi untuk mahasiswa kedua adalah:</p>
+<p data-o006-id="O006-PSU-013-U0225"><span class="math display" data-o006-math-id="O006-PSU-013-M0060">\[e^2_2=(-2.2)^2=4.84\]</span></p>
+<p data-o006-id="O006-PSU-013-U0226">Dengan menjumlahkan kolom terakhir, yakni kolom kuadrat galat prediksi, kita memperoleh <span class="math inline" data-o006-math-id="O006-PSU-013-M0061">\(Q=766.51\)</span> untuk garis putus-putus. Sekarang, untuk garis utuh, yaitu garis:</p>
+<p data-o006-id="O006-PSU-013-U0227"><span class="math display" data-o006-math-id="O006-PSU-013-M0062">\[\text{weight} = −266.5 + 6.1\times\text{height}\]</span></p>
+<p data-o006-id="O006-PSU-013-U0228">perhitungannya adalah sebagai berikut:</p>
+<div class="w-75 mx-auto" data-o006-id="O006-PSU-013-U0229">
+<div class="cell quarto-float quarto-figure quarto-figure-center anchored" data-o006-id="O006-PSU-013-U0230" id="tbl-studenthtwt3">
+<figure class="quarto-float quarto-float-tbl figure" data-o006-id="O006-PSU-013-U0231">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl quarto-uncaptioned" data-o006-id="O006-PSU-013-U0232" id="tbl-studenthtwt3-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Tabel 12.2
+</figcaption>
+<div aria-describedby="tbl-studenthtwt3-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca" data-o006-id="O006-PSU-013-U0233">
+<table aria-describedby="lesson12-table-2-caption" class="caption-top reader-responsive-table small table table-sm table-striped" data-o006-id="O006-PSU-013-U0234"><caption id="lesson12-table-2-caption">Tabel 12.2 — Galat dan kuadrat galat untuk garis utuh pada data tinggi–berat.</caption>
+<thead data-o006-id="O006-PSU-013-U0235">
+<tr class="header" data-o006-id="O006-PSU-013-U0236">
+<th data-o006-id="O006-PSU-013-U0237" data-quarto-table-cell-role="th" id="lesson12-table-2-col-1" scope="col" style="text-align: right;">\(i\)</th>
+<th data-o006-id="O006-PSU-013-U0238" data-quarto-table-cell-role="th" id="lesson12-table-2-col-2" scope="col" style="text-align: right;">\(x_i\)</th>
+<th data-o006-id="O006-PSU-013-U0239" data-quarto-table-cell-role="th" id="lesson12-table-2-col-3" scope="col" style="text-align: right;">\(y_i\)</th>
+<th data-o006-id="O006-PSU-013-U0240" data-quarto-table-cell-role="th" id="lesson12-table-2-col-4" scope="col" style="text-align: right;">\(\hat{y}_i\)</th>
+<th data-o006-id="O006-PSU-013-U0241" data-quarto-table-cell-role="th" id="lesson12-table-2-col-5" scope="col" style="text-align: right;">\((y_i - \hat{y}_i)\)</th>
+<th data-o006-id="O006-PSU-013-U0242" data-quarto-table-cell-role="th" id="lesson12-table-2-col-6" scope="col" style="text-align: right;">\((y_i - \hat{y}_i)^2 \)</th>
+</tr>
+</thead>
+<tbody data-o006-id="O006-PSU-013-U0243">
+<tr class="odd" data-o006-id="O006-PSU-013-U0244">
+<th data-o006-id="O006-PSU-013-U0245" scope="row" style="text-align: right;">1</th>
+<td data-o006-id="O006-PSU-013-U0246" style="text-align: right;">63</td>
+<td data-o006-id="O006-PSU-013-U0247" style="text-align: right;">127</td>
+<td data-o006-id="O006-PSU-013-U0248" style="text-align: right;">117.8</td>
+<td data-o006-id="O006-PSU-013-U0249" style="text-align: right;">9.2</td>
+<td data-o006-id="O006-PSU-013-U0250" style="text-align: right;">84.6</td>
+</tr>
+<tr class="even" data-o006-id="O006-PSU-013-U0251">
+<th data-o006-id="O006-PSU-013-U0252" scope="row" style="text-align: right;">2</th>
+<td data-o006-id="O006-PSU-013-U0253" style="text-align: right;">64</td>
+<td data-o006-id="O006-PSU-013-U0254" style="text-align: right;">121</td>
+<td data-o006-id="O006-PSU-013-U0255" style="text-align: right;">123.9</td>
+<td data-o006-id="O006-PSU-013-U0256" style="text-align: right;">-2.9</td>
+<td data-o006-id="O006-PSU-013-U0257" style="text-align: right;">8.4</td>
+</tr>
+<tr class="odd" data-o006-id="O006-PSU-013-U0258">
+<th data-o006-id="O006-PSU-013-U0259" scope="row" style="text-align: right;">3</th>
+<td data-o006-id="O006-PSU-013-U0260" style="text-align: right;">66</td>
+<td data-o006-id="O006-PSU-013-U0261" style="text-align: right;">142</td>
+<td data-o006-id="O006-PSU-013-U0262" style="text-align: right;">136.1</td>
+<td data-o006-id="O006-PSU-013-U0263" style="text-align: right;">5.9</td>
+<td data-o006-id="O006-PSU-013-U0264" style="text-align: right;">34.8</td>
+</tr>
+<tr class="even" data-o006-id="O006-PSU-013-U0265">
+<th data-o006-id="O006-PSU-013-U0266" scope="row" style="text-align: right;">4</th>
+<td data-o006-id="O006-PSU-013-U0267" style="text-align: right;">69</td>
+<td data-o006-id="O006-PSU-013-U0268" style="text-align: right;">157</td>
+<td data-o006-id="O006-PSU-013-U0269" style="text-align: right;">154.4</td>
+<td data-o006-id="O006-PSU-013-U0270" style="text-align: right;">2.6</td>
+<td data-o006-id="O006-PSU-013-U0271" style="text-align: right;">6.8</td>
+</tr>
+<tr class="odd" data-o006-id="O006-PSU-013-U0272">
+<th data-o006-id="O006-PSU-013-U0273" scope="row" style="text-align: right;">5</th>
+<td data-o006-id="O006-PSU-013-U0274" style="text-align: right;">69</td>
+<td data-o006-id="O006-PSU-013-U0275" style="text-align: right;">162</td>
+<td data-o006-id="O006-PSU-013-U0276" style="text-align: right;">154.4</td>
+<td data-o006-id="O006-PSU-013-U0277" style="text-align: right;">7.6</td>
+<td data-o006-id="O006-PSU-013-U0278" style="text-align: right;">57.8</td>
+</tr>
+<tr class="even" data-o006-id="O006-PSU-013-U0279">
+<th data-o006-id="O006-PSU-013-U0280" scope="row" style="text-align: right;">6</th>
+<td data-o006-id="O006-PSU-013-U0281" style="text-align: right;">71</td>
+<td data-o006-id="O006-PSU-013-U0282" style="text-align: right;">156</td>
+<td data-o006-id="O006-PSU-013-U0283" style="text-align: right;">166.6</td>
+<td data-o006-id="O006-PSU-013-U0284" style="text-align: right;">-10.6</td>
+<td data-o006-id="O006-PSU-013-U0285" style="text-align: right;">112.4</td>
+</tr>
+<tr class="odd" data-o006-id="O006-PSU-013-U0286">
+<th data-o006-id="O006-PSU-013-U0287" scope="row" style="text-align: right;">7</th>
+<td data-o006-id="O006-PSU-013-U0288" style="text-align: right;">71</td>
+<td data-o006-id="O006-PSU-013-U0289" style="text-align: right;">169</td>
+<td data-o006-id="O006-PSU-013-U0290" style="text-align: right;">166.6</td>
+<td data-o006-id="O006-PSU-013-U0291" style="text-align: right;">2.4</td>
+<td data-o006-id="O006-PSU-013-U0292" style="text-align: right;">5.8</td>
+</tr>
+<tr class="even" data-o006-id="O006-PSU-013-U0293">
+<th data-o006-id="O006-PSU-013-U0294" scope="row" style="text-align: right;">8</th>
+<td data-o006-id="O006-PSU-013-U0295" style="text-align: right;">72</td>
+<td data-o006-id="O006-PSU-013-U0296" style="text-align: right;">165</td>
+<td data-o006-id="O006-PSU-013-U0297" style="text-align: right;">172.7</td>
+<td data-o006-id="O006-PSU-013-U0298" style="text-align: right;">-7.7</td>
+<td data-o006-id="O006-PSU-013-U0299" style="text-align: right;">59.3</td>
+</tr>
+<tr class="odd" data-o006-id="O006-PSU-013-U0300">
+<th data-o006-id="O006-PSU-013-U0301" scope="row" style="text-align: right;">9</th>
+<td data-o006-id="O006-PSU-013-U0302" style="text-align: right;">73</td>
+<td data-o006-id="O006-PSU-013-U0303" style="text-align: right;">181</td>
+<td data-o006-id="O006-PSU-013-U0304" style="text-align: right;">178.8</td>
+<td data-o006-id="O006-PSU-013-U0305" style="text-align: right;">2.2</td>
+<td data-o006-id="O006-PSU-013-U0306" style="text-align: right;">4.8</td>
+</tr>
+<tr class="even" data-o006-id="O006-PSU-013-U0307">
+<th data-o006-id="O006-PSU-013-U0308" scope="row" style="text-align: right;">10</th>
+<td data-o006-id="O006-PSU-013-U0309" style="text-align: right;">75</td>
+<td data-o006-id="O006-PSU-013-U0310" style="text-align: right;">208</td>
+<td data-o006-id="O006-PSU-013-U0311" style="text-align: right;">191</td>
+<td data-o006-id="O006-PSU-013-U0312" style="text-align: right;">17</td>
+<td data-o006-id="O006-PSU-013-U0313" style="text-align: right;">289.0</td>
+</tr>
+<tr class="odd" data-o006-id="O006-PSU-013-U0314">
+<th data-o006-id="O006-PSU-013-U0315" scope="row" style="text-align: right;">Total</th>
+<td data-o006-id="O006-PSU-013-U0316" style="text-align: right;"></td>
+<td data-o006-id="O006-PSU-013-U0317" style="text-align: right;"></td>
+<td data-o006-id="O006-PSU-013-U0318" style="text-align: right;"></td>
+<td data-o006-id="O006-PSU-013-U0319" style="text-align: right;"></td>
+<td data-o006-id="O006-PSU-013-U0320" style="text-align: right;">663.7</td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+</div>
+<p data-o006-id="O006-PSU-013-U0321">Perhitungan setiap kolom sama seperti yang telah dijelaskan. Dalam kasus ini, jumlah kolom terakhir, yaitu jumlah kuadrat galat prediksi untuk garis utuh, adalah <span class="math inline" data-o006-math-id="O006-PSU-013-M0063">\(Q= 663.7\)</span>. Dengan memilih persamaan yang meminimumkan <span class="math inline" data-o006-math-id="O006-PSU-013-M0064">\(Q\)</span>, kita dapat menyimpulkan bahwa garis utuh, yaitu:</p>
+<p data-o006-id="O006-PSU-013-U0322"><span class="math display" data-o006-math-id="O006-PSU-013-M0065">\[\text{weight} = −266.5 + 6.1\times\text{height}\]</span></p>
+<p data-o006-id="O006-PSU-013-U0323">merupakan garis dengan suaian terbaik.</p>
+</section>
+</div>
+<p data-o006-id="O006-PSU-013-U0324">Contoh sebelumnya menyisakan satu masalah besar jika kita menyimpulkan bahwa garis utuh adalah garis dengan suaian terbaik: kita hanya mempertimbangkan dua kandidat. Padahal, terdapat tak terhingga banyak kandidat garis dengan suaian terbaik. Pendekatan di atas jelas tidak dapat digunakan dalam praktik. Pada halaman berikutnya, kita akan menurunkan rumus kemiringan dan intersep garis regresi kuadrat terkecil.</p>
+</section>
+<section class="level2" data-number="12.3" data-o006-id="O006-PSU-013-U0325" id="least-squares-the-theory">
+<h2 class="anchored" data-anchor-id="least-squares-the-theory" data-number="12.3" data-o006-id="O006-PSU-013-U0326"><span class="header-section-number">12.3</span> Kuadrat Terkecil: Teori</h2>
+<p data-o006-id="O006-PSU-013-U0327">Setelah memahami gagasan kuadrat terkecil, mari kita buat metodenya lebih praktis dengan mencari rumus intersep <span class="math inline" data-o006-math-id="O006-PSU-013-M0066">\(a_1\)</span> dan kemiringan <span class="math inline" data-o006-math-id="O006-PSU-013-M0067">\(b\)</span>. Kita telah mempelajari bahwa untuk menemukan garis regresi kuadrat terkecil, kita perlu meminimumkan jumlah kuadrat galat prediksi, yaitu:</p>
+<p data-o006-id="O006-PSU-013-U0328"><span class="math display" data-o006-math-id="O006-PSU-013-M0068">\[Q=\sum\limits_{i=1}^n (y_i-\hat{y}_i)^2\]</span></p>
+<p data-o006-id="O006-PSU-013-U0329">Kita hanya perlu mengganti <span class="math inline" data-o006-math-id="O006-PSU-013-M0069">\(\hat{y}_i\)</span> tersebut dengan rumus persamaan garis:</p>
+<p data-o006-id="O006-PSU-013-U0330"><span class="math display" data-o006-math-id="O006-PSU-013-M0070">\[\hat{y}_i=a_1+bx_i\]</span></p>
+<p data-o006-id="O006-PSU-013-U0331">sehingga diperoleh:</p>
+<p data-o006-id="O006-PSU-013-U0332"><span class="math display" data-o006-math-id="O006-PSU-013-M0071">\[Q=\sum\limits_{i=1}^n (y_i-\hat{y}_i)^2=\sum\limits_{i=1}^n (y_i-(a_1+bx_i))^2\]</span></p>
+<p data-o006-id="O006-PSU-013-U0333">Kita dapat langsung meminimumkan <span class="math inline" data-o006-math-id="O006-PSU-013-M0072">\(Q\)</span> dalam bentuk itu, tetapi penulis buku teks memilih bentuk lain persamaan garis, yaitu:</p>
+<p data-o006-id="O006-PSU-013-U0334"><span class="math display" data-o006-math-id="O006-PSU-013-M0073">\[\hat{y}_i=a+b(x_i-\bar{x})\]</span></p>
+<p data-o006-id="O006-PSU-013-U0335">Setiap bentuk persamaan garis memiliki kelebihan dan kekurangan. Perangkat lunak statistik, seperti R atau Minitab, biasanya menghitung garis regresi kuadrat terkecil menggunakan bentuk: <span class="math display" data-o006-math-id="O006-PSU-013-M0074">\[\hat{y}_i=a_1+bx_i\]</span></p>
+<p data-o006-id="O006-PSU-013-U0336">Hal ini jelas menguntungkan jika komputer dapat mengerjakan perhitungannya. Namun, salah satu kekurangan kecil bentuk ini adalah bahwa intersep <span class="math inline" data-o006-math-id="O006-PSU-013-M0075">\(a_1\)</span> merupakan nilai respons terprediksi <span class="math inline" data-o006-math-id="O006-PSU-013-M0076">\(y\)</span> ketika prediktor <span class="math inline" data-o006-math-id="O006-PSU-013-M0077">\(x=0\)</span>, yang biasanya tidak terlalu bermakna. Sebagai contoh, jika <span class="math inline" data-o006-math-id="O006-PSU-013-M0078">\(x\)</span> adalah tinggi mahasiswa (dalam inci) dan <span class="math inline" data-o006-math-id="O006-PSU-013-M0079">\(y\)</span> adalah berat mahasiswa (dalam pon), intersepnya merupakan berat terprediksi seorang mahasiswa yang tingginya 0 inci—Anda tentu memahami persoalannya. Sebaliknya, jika kita menggunakan persamaan:</p>
+<p data-o006-id="O006-PSU-013-U0337"><span class="math display" data-o006-math-id="O006-PSU-013-M0080">\[\hat{y}_i=a+b(x_i-\bar{x})\]</span></p>
+<p data-o006-id="O006-PSU-013-U0338">maka intersep <span class="math inline" data-o006-math-id="O006-PSU-013-M0081">\(a\)</span> merupakan nilai respons terprediksi <span class="math inline" data-o006-math-id="O006-PSU-013-M0082">\(y\)</span> ketika prediktor <span class="math inline" data-o006-math-id="O006-PSU-013-M0083">\(x_i=\bar{x}\)</span>, yaitu rata-rata nilai <span class="math inline" data-o006-math-id="O006-PSU-013-M0084">\(x\)</span> . Sebagai contoh, jika <span class="math inline" data-o006-math-id="O006-PSU-013-M0085">\(x\)</span> adalah tinggi mahasiswa (dalam inci) dan <span class="math inline" data-o006-math-id="O006-PSU-013-M0086">\(y\)</span> adalah berat mahasiswa (dalam pon), maka intersep <span class="math inline" data-o006-math-id="O006-PSU-013-M0087">\(a\)</span> merupakan berat terprediksi mahasiswa dengan tinggi rata-rata. Jauh lebih baik dan lebih bermakna. Kabar baiknya, perangkat lunak statistik seperti R atau Minitab juga mudah digunakan untuk menghitung garis regresi kuadrat terkecil dalam bentuk ini.</p>
+<p data-o006-id="O006-PSU-013-U0339">Baiklah, setelah penjelasan tersebut, sekarang kita sampai pada hasil utamanya.</p>
+<section class="level3" data-number="12.3.1" data-o006-id="O006-PSU-013-U0340" id="least-squares-estimates">
+<h3 class="anchored" data-anchor-id="least-squares-estimates" data-number="12.3.1" data-o006-id="O006-PSU-013-U0341"><span class="header-section-number">12.3.1</span> Nilai Dugaan Kuadrat Terkecil</h3>
+<div class="callout callout-style-simple callout-caution no-icon" data-o006-id="O006-PSU-013-U0342">
+<div class="callout-body d-flex" data-o006-id="O006-PSU-013-U0343">
+<div class="callout-icon-container" data-o006-id="O006-PSU-013-U0344">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-body-container" data-o006-id="O006-PSU-013-U0345">
+<p data-o006-id="O006-PSU-013-U0346"><strong>Perhatikan!</strong><br/>
+Rumus berikut memberikan bentuk komputasi alternatif bagi kemiringan garis regresi kuadrat terkecil. <span class="math display" data-o006-math-id="O006-PSU-013-M0088">\[b=\dfrac{\sum\limits_{i=1}^n (x_i-\bar{x})y_i}{\sum\limits_{i=1}^n (x_i-\bar{x})^2}=\dfrac{\sum\limits_{i=1}^n x_iy_i-\left(\dfrac{1}{n}\right) \left(\sum\limits_{i=1}^n x_i\right) \left(\sum\limits_{i=1}^n y_i\right)}{\sum\limits_{i=1}^n x^2_i-\left(\dfrac{1}{n}\right) \left(\sum\limits_{i=1}^n x_i\right)^2}\]</span></p>
+</div>
+</div>
+</div>
+<div class="callout callout-style-simple callout-note no-icon" data-o006-id="O006-PSU-013-U0347">
+<div class="callout-body d-flex" data-o006-id="O006-PSU-013-U0348">
+<div class="callout-icon-container" data-o006-id="O006-PSU-013-U0349">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-body-container" data-o006-id="O006-PSU-013-U0350">
+<div class="theorem" data-o006-id="O006-PSU-013-U0351" id="thm-lsrline">
+<p data-o006-id="O006-PSU-013-U0352"><span class="theorem-title"><strong>Teorema 12.1</strong></span> Garis <strong>regresi kuadrat terkecil</strong> adalah:</p>
+<p data-o006-id="O006-PSU-013-U0353"><span class="math display" data-o006-math-id="O006-PSU-013-M0089">\[\hat{y}_i=a+b(x_i-\bar{x})\]</span></p>
+<p data-o006-id="O006-PSU-013-U0354">dengan <strong>nilai dugaan kuadrat terkecil</strong>:</p>
+<p data-o006-id="O006-PSU-013-U0355"><span class="math display" data-o006-math-id="O006-PSU-013-M0090">\[a=\bar{y} \text{ and }b=\dfrac{\sum\limits_{i=1}^n (x_i-\bar{x})(y_i-\bar{y})}{\sum\limits_{i=1}^n (x_i-\bar{x})^2}\]</span></p>
+<p data-o006-id="O006-PSU-013-U0356"><strong>Bukti</strong></p>
+<p data-o006-id="O006-PSU-013-U0357">Untuk menurunkan rumus intersep <span class="math inline" data-o006-math-id="O006-PSU-013-M0091">\(a\)</span> dan kemiringan <span class="math inline" data-o006-math-id="O006-PSU-013-M0092">\(b\)</span>, kita perlu meminimumkan:</p>
+<p data-o006-id="O006-PSU-013-U0358"><span class="math display" data-o006-math-id="O006-PSU-013-M0093">\[Q=\sum\limits_{i=1}^n (y_i-(a+b(x_i-\bar{x})))^2\]</span></p>
+<p data-o006-id="O006-PSU-013-U0359">Saatnya menggunakan kalkulus, sebab meminimumkan <span class="math inline" data-o006-math-id="O006-PSU-013-M0094">\(Q\)</span> melibatkan penurunan <span class="math inline" data-o006-math-id="O006-PSU-013-M0095">\(Q\)</span> terhadap <span class="math inline" data-o006-math-id="O006-PSU-013-M0096">\(a\)</span> dan <span class="math inline" data-o006-math-id="O006-PSU-013-M0097">\(b\)</span>, menyamakannya dengan 0, lalu menyelesaikannya untuk <span class="math inline" data-o006-math-id="O006-PSU-013-M0098">\(a\)</span> dan <span class="math inline" data-o006-math-id="O006-PSU-013-M0099">\(b\)</span>. Mari kita lakukan. Dimulai dengan turunan <span class="math inline" data-o006-math-id="O006-PSU-013-M0100">\(Q\)</span> terhadap <span class="math inline" data-o006-math-id="O006-PSU-013-M0101">\(a\)</span>, kita memperoleh:</p>
+<div class="w-75 mx-auto quarto-float quarto-figure quarto-figure-center anchored" data-o006-id="O006-PSU-013-U0360" id="vid-lsr1">
+<figure class="quarto-float quarto-float-vid figure" data-o006-id="O006-PSU-013-U0361">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-vid" data-o006-id="O006-PSU-013-U0362" id="vid-lsr1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Video 12.1: Bukti—Menurunkan rumus intersep a dan kemiringan b
+</figcaption>
+<div aria-describedby="vid-lsr1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca" data-o006-id="O006-PSU-013-U0363">
+<div class="quarto-video ratio ratio-16x9" data-o006-id="O006-PSU-013-U0364"><details class="offline-video-equivalent" data-o006-correction-id="O006-PSU-ADV-0225" data-o006-video-id="O006-PSU-013-V0001" open=""><summary>Padanan teks luring untuk Video 12.1</summary><p>Mulai dari jumlah kuadrat sisaan pada parameterisasi terpusat. Turunan terhadap intersep memberi persamaan normal pertama.</p><div class="target-derived-math" data-o006-derived-math-id="O006-PSU-ADV-0225-M01">\[Q(a,b)=\sum_{i=1}^{n}\{y_i-a-b(x_i-\bar{x})\}^2\]</div><div class="target-derived-math" data-o006-derived-math-id="O006-PSU-ADV-0225-M02">\[\frac{\partial Q}{\partial a}=-2\sum_{i=1}^{n}\{y_i-a-b(x_i-\bar{x})\}=0\]</div><p>Karena jumlah deviasi prediktor dari rata-ratanya adalah nol, persamaan ini menjadi n(ȳ−a)=0, sehingga a=ȳ.</p><p><a href="https://www.youtube.com/embed/oAaPR1qVedw" rel="external noopener">Tautan provenance ke rekaman sumber eksternal</a>; byte video tidak disalin atau didistribusikan dalam edisi ini.</p></details></div>
+</div>
+</figure>
+</div>
+<p data-o006-id="O006-PSU-013-U0365">Sekarang, karena diketahui bahwa <span class="math inline" data-o006-math-id="O006-PSU-013-M0102">\(a\)</span> adalah <span class="math inline" data-o006-math-id="O006-PSU-013-M0103">\(\bar{y}\)</span>, rata-rata respons, gantilah <span class="math inline" data-o006-math-id="O006-PSU-013-M0104">\(a\)</span> dengan <span class="math inline" data-o006-math-id="O006-PSU-013-M0105">\(\bar{y}\)</span> dalam rumus untuk <span class="math inline" data-o006-math-id="O006-PSU-013-M0106">\(Q\)</span>:</p>
+<p data-o006-id="O006-PSU-013-U0366"><span class="math display" data-o006-math-id="O006-PSU-013-M0107">\[Q=\sum\limits_{i=1}^n (y_i-(\bar{y}+b(x_i-\bar{x})))^2\]</span></p>
+<p data-o006-id="O006-PSU-013-U0367">lalu ambil turunan <span class="math inline" data-o006-math-id="O006-PSU-013-M0108">\(Q\)</span> terhadap <span class="math inline" data-o006-math-id="O006-PSU-013-M0109">\(b\)</span>. Dengan demikian, kita memperoleh:</p>
+<div class="w-75 mx-auto quarto-float quarto-figure quarto-figure-center anchored" data-o006-id="O006-PSU-013-U0368" id="vid-lsr2">
+<figure class="quarto-float quarto-float-vid figure" data-o006-id="O006-PSU-013-U0369">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-vid" data-o006-id="O006-PSU-013-U0370" id="vid-lsr2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Video 12.2: Bukti—Menurunkan rumus intersep dan kemiringan, Bagian 2
+</figcaption>
+<div aria-describedby="vid-lsr2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca" data-o006-id="O006-PSU-013-U0371">
+<div class="quarto-video ratio ratio-16x9" data-o006-id="O006-PSU-013-U0372"><details class="offline-video-equivalent" data-o006-correction-id="O006-PSU-ADV-0225" data-o006-video-id="O006-PSU-013-V0002" open=""><summary>Padanan teks luring untuk Video 12.2</summary><p>Substitusikan a=ȳ, lalu turunkan jumlah kuadrat sisaan terhadap b. Persamaan normal kedua dan solusinya adalah:</p><div class="target-derived-math" data-o006-derived-math-id="O006-PSU-ADV-0225-M01">\[0=\sum_{i=1}^{n}(x_i-\bar{x})\{(y_i-\bar{y})-b(x_i-\bar{x})\}\]</div><div class="target-derived-math" data-o006-derived-math-id="O006-PSU-ADV-0225-M02">\[b=\frac{\sum_{i=1}^{n}(x_i-\bar{x})(y_i-\bar{y})}{\sum_{i=1}^{n}(x_i-\bar{x})^2},\qquad \hat y_i=\bar y+b(x_i-\bar x)\]</div><p>Syarat aljabarnya adalah Sxx&gt;0, yakni nilai prediktor tidak semuanya sama.</p><p><a href="https://www.youtube.com/embed/pWMp1vhStDE" rel="external noopener">Tautan provenance ke rekaman sumber eksternal</a>; byte video tidak disalin atau didistribusikan dalam edisi ini.</p></details></div>
+</div>
+</figure>
+</div>
+<p data-o006-id="O006-PSU-013-U0373">Seperti yang hendak dibuktikan.</p>
+</div>
+</div>
+</div>
+</div>
+<p data-o006-id="O006-PSU-013-U0374">Perhatikan bahwa perhitungan aljabar di atas tidak memerlukan asumsi bahwa hubungan antara respons <span class="math inline" data-o006-math-id="O006-PSU-013-M0110">\(y\)</span> dan prediktor <span class="math inline" data-o006-math-id="O006-PSU-013-M0111">\(x\)</span> benar-benar linear; keberadaan kemiringan hanya memerlukan Sxx &gt; 0, sedangkan linearitas diperlukan untuk interpretasi model dan inferensi.</p>
+<p data-o006-id="O006-PSU-013-U0375">Hal lain yang dapat diperhatikan adalah bahwa rumus kemiringan <span class="math inline" data-o006-math-id="O006-PSU-013-M0112">\(b\)</span> mudah digunakan jika tersedia perangkat lunak statistik untuk melakukan perhitungannya. Namun, apa yang akan Anda lakukan jika terdampar di pulau terpencil dan perlu mencari garis regresi kuadrat terkecil bagi hubungan antara kedalaman pasang dan waktu? Anda mungkin menginginkan rumus perhitungan yang lebih sederhana. Anda mungkin juga ingin memahami hubungan antara kemiringan <span class="math inline" data-o006-math-id="O006-PSU-013-M0113">\(b\)</span> dan koefisien korelasi sampel <span class="math inline" data-o006-math-id="O006-PSU-013-M0114">\(r\)</span>.</p>
+<p data-o006-id="O006-PSU-013-U0376">. Dengan motivasi tersebut, mari kita turunkan rumus perhitungan alternatif untuk kemiringan <span class="math inline" data-o006-math-id="O006-PSU-013-M0115">\(b\)</span>.</p>
+<div class="callout callout-style-simple callout-note no-icon" data-o006-id="O006-PSU-013-U0377">
+<div class="callout-body d-flex" data-o006-id="O006-PSU-013-U0378">
+<div class="callout-icon-container" data-o006-id="O006-PSU-013-U0379">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-body-container" data-o006-id="O006-PSU-013-U0380">
+<div class="theorem" data-o006-id="O006-PSU-013-U0381" id="thm-lsralt">
+<p data-o006-id="O006-PSU-013-U0382"><span class="theorem-title"><strong>Teorema 12.2</strong></span> Rumus alternatif untuk kemiringan <span class="math inline" data-o006-math-id="O006-PSU-013-M0116">\(b\)</span> garis regresi kuadrat terkecil:</p>
+<p data-o006-id="O006-PSU-013-U0383"><span class="math display" data-o006-math-id="O006-PSU-013-M0117">\[\hat{y}_i=a+b(x_i-\bar{x})\]</span></p>
+<p data-o006-id="O006-PSU-013-U0384">adalah:</p>
+<p data-o006-id="O006-PSU-013-U0385"><span class="math display" data-o006-math-id="O006-PSU-013-M0118">\[b=\dfrac{\sum\limits_{i=1}^n (x_i-\bar{x})y_i}{\sum\limits_{i=1}^n (x_i-\bar{x})^2}=\dfrac{\sum\limits_{i=1}^n x_iy_i-\left(\dfrac{1}{n}\right) \left(\sum\limits_{i=1}^n x_i\right) \left(\sum\limits_{i=1}^n y_i\right)}{\sum\limits_{i=1}^n x^2_i-\left(\dfrac{1}{n}\right) \left(\sum\limits_{i=1}^n x_i\right)^2}\]</span></p>
+<p data-o006-id="O006-PSU-013-U0386"><strong>Bukti</strong></p>
+<p data-o006-id="O006-PSU-013-U0387">Buktinya, yang mungkin muncul atau tidak muncul dalam kuis atau ujian, diserahkan kepada Anda sebagai latihan.</p><details class="target-only-proof" data-o006-correction-id="O006-PSU-ADV-0226" open=""><summary>Penurunan lengkap Teorema 12.2</summary><p>Karena jumlah (xᵢ−x̄) adalah nol, pembilang dapat dipusatkan terhadap y tanpa mengubah nilainya. Mengembangkan kedua jumlah terpusat kemudian memberi bentuk komputasi.</p><div class="target-derived-math" data-o006-derived-math-id="O006-PSU-ADV-0226-M01">\[\sum_i(x_i-\bar{x})y_i=\sum_i(x_i-\bar{x})(y_i-\bar{y})\]</div><div class="target-derived-math" data-o006-derived-math-id="O006-PSU-ADV-0226-M02">\[\sum_i(x_i-\bar{x})(y_i-\bar{y})=\sum_i x_i y_i-\frac{1}{n}\Big(\sum_i x_i\Big)\Big(\sum_i y_i\Big)\]</div><div class="target-derived-math" data-o006-derived-math-id="O006-PSU-ADV-0226-M03">\[\sum_i(x_i-\bar{x})^2=\sum_i x_i^2-\frac{1}{n}\Big(\sum_i x_i\Big)^2\]</div><p>Membagi identitas kedua dengan identitas ketiga menghasilkan rumus alternatif yang dinyatakan dalam teorema, dengan syarat Sxx&gt;0.</p></details>
+</div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section class="level2" data-number="12.4" data-o006-id="O006-PSU-013-U0388" id="the-model">
+<h2 class="anchored" data-anchor-id="the-model" data-number="12.4" data-o006-id="O006-PSU-013-U0389"><span class="header-section-number">12.4</span> Model</h2>
+<section class="level3" data-number="12.4.1" data-o006-id="O006-PSU-013-U0390" id="what-do-a-and-b-estimate">
+<h3 class="anchored" data-anchor-id="what-do-a-and-b-estimate" data-number="12.4.1" data-o006-id="O006-PSU-013-U0391"><span class="header-section-number">12.4.1</span> Apa yang Diduga oleh <span class="math inline" data-o006-math-id="O006-PSU-013-M0119">\(a\)</span> dan <span class="math inline" data-o006-math-id="O006-PSU-013-M0120">\(b\)</span> ?</h3>
+<p data-o006-id="O006-PSU-013-U0392">Sejauh ini, kita telah merumuskan gagasan dan teori di balik pendugaan kuadrat terkecil. Namun, kini muncul sebuah persoalan. Ketika menurunkan rumus nilai dugaan kuadrat terkecil untuk intersep <span class="math inline" data-o006-math-id="O006-PSU-013-M0121">\(a\)</span> dan kemiringan <span class="math inline" data-o006-math-id="O006-PSU-013-M0122">\(b\)</span>, kita belum membahas parameter apa yang diduga oleh <span class="math inline" data-o006-math-id="O006-PSU-013-M0123">\(a\)</span> dan <span class="math inline" data-o006-math-id="O006-PSU-013-M0124">\(b\)</span> . Topik penting ini perlu diperhatikan. Mari kita selidiki jawabannya dengan mempertimbangkan hubungan (linear) antara indeks prestasi kumulatif (IPK) sekolah menengah dan skor ujian masuk perguruan tinggi, seperti ujian ACT. Kita pusatkan IPK sekolah menengah: jika <span class="math inline" data-o006-math-id="O006-PSU-013-M0125">\(x\)</span> menyatakan IPK sekolah menengah, maka <span class="math inline" data-o006-math-id="O006-PSU-013-M0126">\(x-\bar{x}\)</span> adalah IPK sekolah menengah terpusat. Diagram <span class="math inline" data-o006-math-id="O006-PSU-013-M0127">\(x-\bar{x}\)</span>, yakni IPK sekolah menengah terpusat, terhadap <span class="math inline" data-o006-math-id="O006-PSU-013-M0128">\(y\)</span>, yakni skor ujian masuk perguruan tinggi, dapat berbentuk seperti berikut:</p>
+<div class="cell" data-layout-align="center" data-o006-id="O006-PSU-013-U0393">
+<div class="cell-output-display" data-o006-id="O006-PSU-013-U0394">
+<div alt="Scatter plot of high school gpa vs college entrance test scores" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center" data-o006-id="O006-PSU-013-U0395" id="fig-gpavsentrance3">
+<figure class="figure quarto-float quarto-float-fig reader-full-width-figure" data-o006-id="O006-PSU-013-U0396">
+<div aria-describedby="fig-gpavsentrance3-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca" data-o006-id="O006-PSU-013-U0397">
+<a class="lightbox" data-gallery="quarto-lightbox-gallery-4" data-o006-id="O006-PSU-013-U0398" href="assets/lesson12/Lesson12_files/figure-html/fig-gpavsentrance3-1.png" title="Gambar 12.4 — IPK sekolah menengah terpusat dan skor ujian masuk pada populasi."><img alt="Skor ujian masuk terhadap IPK sekolah menengah terpusat dengan kelompok respons pada beberapa nilai prediktor." class="figure-img img-fluid quarto-figure quarto-figure-center reader-full-width-image reader-responsive-image" data-o006-asset-id="O006-PSU-013-A0004" data-o006-id="O006-PSU-013-U0399" decoding="async" height="960" loading="lazy" src="assets/lesson12/Lesson12_files/figure-html/fig-gpavsentrance3-1.png" width="1344"/></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" data-o006-id="O006-PSU-013-U0400" id="fig-gpavsentrance3-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">Gambar 12.4 — IPK sekolah menengah terpusat dan skor ujian masuk pada populasi.</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p data-o006-id="O006-PSU-013-U0401">Diagram tersebut memerlukan penjelasan:</p>
+<div class="w-75 mx-auto quarto-float quarto-figure quarto-figure-center anchored" data-o006-id="O006-PSU-013-U0402" id="vid-">
+<figure class="quarto-float quarto-float-vid figure" data-o006-id="O006-PSU-013-U0403">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-vid" data-o006-id="O006-PSU-013-U0404" id="vid--caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Video 12.3: Contoh—Skor ujian dan IPK, memahami parameter
+</figcaption>
+<div aria-describedby="vid--caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca" data-o006-id="O006-PSU-013-U0405">
+<div class="quarto-video ratio ratio-16x9" data-o006-id="O006-PSU-013-U0406"><details class="offline-video-equivalent" data-o006-correction-id="O006-PSU-ADV-0241" data-o006-video-id="O006-PSU-013-V0003" open=""><summary>Padanan teks luring untuk Video 12.3</summary><p>Untuk prediktor terpusat, rataan bersyarat skor ujian adalah α+β(xᵢ−x̄). Intersep α adalah rataan skor pada xᵢ=x̄, sedangkan β adalah perubahan rataan skor untuk setiap kenaikan satu unit prediktor. Pengamatan individual berbeda dari rataan itu sebesar εᵢ. Garis sampel mengganti α dan β dengan nilai dugaan kuadrat terkecil a dan b.</p><div class="target-derived-math" data-o006-derived-math-id="O006-PSU-ADV-0241-M01">\[E(Y_i\mid x_i)=\alpha+\beta(x_i-\bar{x}),\qquad Y_i=E(Y_i\mid x_i)+\epsilon_i\]</div><p><a href="https://www.youtube.com/embed/mdzP-v6vl74" rel="external noopener">Tautan provenance ke rekaman sumber eksternal</a>; byte video tidak disalin atau didistribusikan dalam edisi ini.</p></details></div>
+</div>
+</figure>
+</div>
+<p data-o006-id="O006-PSU-013-U0407">Ringkasnya, sejauh ini kita membuat dua asumsi. Pertama, dalam seluruh populasi mahasiswa terdapat suatu hubungan linear tak diketahui antara <span class="math inline" data-o006-math-id="O006-PSU-013-M0129">\(\mu_y\)</span>(atau, sebagai alternatif, <span class="math inline" data-o006-math-id="O006-PSU-013-M0130">\(E(Y)\)</span>), yaitu rata-rata skor ujian masuk perguruan tinggi, dan <span class="math inline" data-o006-math-id="O006-PSU-013-M0131">\(x-\bar{x}\)</span>, yaitu IPK sekolah menengah terpusat. Artinya:</p>
+<p data-o006-id="O006-PSU-013-U0408"><span class="math display" data-o006-math-id="O006-PSU-013-M0132">\[\mu_Y=E(Y)=\alpha+\beta(x-\bar{x})\]</span></p>
+<p data-o006-id="O006-PSU-013-U0409">Kedua, setiap mahasiswa menyimpang dari skor ujian masuk perguruan tinggi rata-rata pada populasi mahasiswa dengan IPK sekolah menengah terpusat yang sama sebesar suatu nilai tak diketahui <span class="math inline" data-o006-math-id="O006-PSU-013-M0133">\(\epsilon_i\)</span>. Artinya, jika <span class="math inline" data-o006-math-id="O006-PSU-013-M0134">\(Y_i\)</span> menyatakan skor ujian masuk perguruan tinggi untuk mahasiswa ke- <span class="math inline" data-o006-math-id="O006-PSU-013-M0135">\(i\)</span>, maka:</p>
+<p data-o006-id="O006-PSU-013-U0410"><span class="math display" data-o006-math-id="O006-PSU-013-M0136">\[Y_i=\alpha+\beta(x_i-\bar{x})+\epsilon_i\]</span></p>
+<p data-o006-id="O006-PSU-013-U0411">Sayangnya, kita tidak mungkin mengumpulkan data seluruh mahasiswa dalam populasi. Karena itu, kita tidak pernah dapat mengetahui intersep populasi <span class="math inline" data-o006-math-id="O006-PSU-013-M0137">\(\alpha\)</span> atau kemiringan populasi <span class="math inline" data-o006-math-id="O006-PSU-013-M0138">\(\beta\)</span>. Hal terbaik yang dapat dilakukan adalah menduga <span class="math inline" data-o006-math-id="O006-PSU-013-M0139">\(\alpha\)</span> dan <span class="math inline" data-o006-math-id="O006-PSU-013-M0140">\(\beta\)</span> dengan mengambil sampel acak dari populasi mahasiswa. Misalkan kita memilih secara acak lima belas mahasiswa: tiga mahasiswa memiliki IPK sekolah menengah terpusat −2, tiga mahasiswa memiliki IPK terpusat −1, dan seterusnya. Kelima belas titik data tersebut dapat digunakan untuk menentukan garis dengan suaian terbaik (kuadrat terkecil):</p>
+<p data-o006-id="O006-PSU-013-U0412"><span class="math display" data-o006-math-id="O006-PSU-013-M0141">\[\hat{y}_i=a+b(x_i-\bar{x})\]</span></p>
+<p data-o006-id="O006-PSU-013-U0413">Garis kuadrat terkecil kita tidak akan sempurna, tetapi semestinya menduga garis populasi sejati yang tak diketahui dengan cukup baik:</p>
+<div class="cell" data-o006-id="O006-PSU-013-U0414">
+<div class="cell-output-display" data-o006-id="O006-PSU-013-U0415">
+<div alt="Sample scatter plot of high school gpa vs college entrance test scores" class="quarto-float quarto-figure quarto-figure-center anchored" data-o006-id="O006-PSU-013-U0416" id="fig-samplegpaentrance4">
+<figure class="figure quarto-float quarto-float-fig reader-full-width-figure" data-o006-id="O006-PSU-013-U0417">
+<div aria-describedby="fig-samplegpaentrance4-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca" data-o006-id="O006-PSU-013-U0418">
+<a class="lightbox" data-gallery="quarto-lightbox-gallery-5" data-o006-id="O006-PSU-013-U0419" href="assets/lesson12/Lesson12_files/figure-html/fig-samplegpaentrance4-1.png" title="Gambar 12.5 — Sampel IPK terpusat dan skor ujian masuk beserta garis suaian."><img alt="Sampel diagram pencar skor ujian masuk terhadap IPK sekolah menengah terpusat beserta garis kuadrat terkecil." class="figure-img img-fluid reader-full-width-image reader-responsive-image" data-o006-asset-id="O006-PSU-013-A0005" data-o006-id="O006-PSU-013-U0420" decoding="async" height="960" loading="lazy" src="assets/lesson12/Lesson12_files/figure-html/fig-samplegpaentrance4-1.png" width="1344"/></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" data-o006-id="O006-PSU-013-U0421" id="fig-samplegpaentrance4-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">Gambar 12.5 — Sampel IPK terpusat dan skor ujian masuk beserta garis suaian.</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-important callout-empty-content callout-titled" data-o006-id="O006-PSU-013-U0422">
+<div class="callout-header d-flex align-content-center" data-o006-id="O006-PSU-013-U0423">
+<div class="callout-icon-container" data-o006-id="O006-PSU-013-U0424">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill" data-o006-id="O006-PSU-013-U0425">
+<span class="screen-reader-only">Penting</span>Catatan penyunting sumber: perbaiki persamaan parameter di atas agar sesuai dengan catatan lama.
+</div>
+</div>
+<div class="callout-body-container callout-body" data-o006-id="O006-PSU-013-U0426">
+</div>
+</div>
+<p data-o006-id="O006-PSU-013-U0427">Itulah inti pembahasannya. Intersep <span class="math inline" data-o006-math-id="O006-PSU-013-M0142">\(a\)</span> dan kemiringan <span class="math inline" data-o006-math-id="O006-PSU-013-M0143">\(b\)</span> garis regresi kuadrat terkecil masing-masing menduga intersep <span class="math inline" data-o006-math-id="O006-PSU-013-M0144">\(\alpha\)</span> dan kemiringan <span class="math inline" data-o006-math-id="O006-PSU-013-M0145">\(\beta\)</span> garis populasi yang tak diketahui. Untuk menghitung garis kuadrat terkecil, kita tidak perlu mengasumsikan bahwa hubungan antara prediktor <span class="math inline" data-o006-math-id="O006-PSU-013-M0146">\(x\)</span> dan respons <span class="math inline" data-o006-math-id="O006-PSU-013-M0147">\(y\)</span> benar-benar linear; syarat aljabarnya adalah Sxx &gt; 0. Model linear diperlukan untuk menafsirkan parameter populasi dan melakukan inferensi.</p>
+<p data-o006-id="O006-PSU-013-U0428">Jika kita hendak menurunkan selang kepercayaan untuk <span class="math inline" data-o006-math-id="O006-PSU-013-M0148">\(\alpha\)</span> dan <span class="math inline" data-o006-math-id="O006-PSU-013-M0149">\(\beta\)</span>, seperti yang akan dilakukan pada halaman berikutnya, kita perlu membuat beberapa asumsi tambahan. Di sinilah model regresi linear sederhana berperan.</p>
+</section>
+<section class="level3" data-number="12.4.2" data-o006-id="O006-PSU-013-U0429" id="the-simple-linear-regression-model">
+<h3 class="anchored" data-anchor-id="the-simple-linear-regression-model" data-number="12.4.2" data-o006-id="O006-PSU-013-U0430"><span class="header-section-number">12.4.2</span> Model Regresi Linear Sederhana</h3>
+<p data-o006-id="O006-PSU-013-U0431">Agar kurva normal dapat digambar dengan baik, mari kita gunakan sebuah contoh dari buku Applied Linear Regression Models (edisi keempat, oleh Kutner, Nachtsheim, dan Neter). Pertimbangkan hubungan antara <span class="math inline" data-o006-math-id="O006-PSU-013-M0150">\(x\)</span>, yaitu jumlah proposal penawaran yang disiapkan perusahaan kontraktor, dan <span class="math inline" data-o006-math-id="O006-PSU-013-M0151">\(y\)</span>, yaitu jumlah jam yang diperlukan untuk menyiapkan proposal tersebut:</p>
+<div alt="Regression of line for hours vs number of bids" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-scap="A statistical graph showing the relationship between the number of bids prepared (X-axis, 0 to 45) and hours (Y-axis, 0 to 100). The graph includes two dashed probability density curves peaking around 25 and 45 bids, with a line labeled E(Y) = 9.5 + 2.1X. At 45 bids, annotations indicate Y_i = 108, ε_i = +4, and E(Y_i) = 104." data-o006-id="O006-PSU-013-U0432" data-o006-source-native-id="fig-bidsgraph" data-o006-source-native-occurrence="1" id="fig-bidsgraph--source-occurrence-01" width="60%">
+<figure class="figure quarto-float quarto-float-fig reader-full-width-figure" data-o006-id="O006-PSU-013-U0433">
+<div aria-describedby="fig-bidsgraph-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca--source-occurrence-01" data-o006-id="O006-PSU-013-U0434">
+<a class="lightbox" data-gallery="quarto-lightbox-gallery-6" data-o006-id="O006-PSU-013-U0435" href="assets/lesson12/assets/lesson9_11.png" title="Gambar 12.6 — Model jumlah jam terhadap jumlah proposal yang disiapkan."><img alt="Rataan jam penyiapan proposal meningkat linear terhadap jumlah proposal; kurva normal vertikal menunjukkan variasi respons yang sama." class="d-block figure-img img-fluid mx-auto reader-full-width-image reader-responsive-image" data-fig-scap="A statistical graph showing the relationship between the number of bids prepared (X-axis, 0 to 45) and hours (Y-axis, 0 to 100). The graph includes two dashed probability density curves peaking around 25 and 45 bids, with a line labeled E(Y) = 9.5 + 2.1X. At 45 bids, annotations indicate Y_i = 108, ε_i = +4, and E(Y_i) = 104." data-o006-asset-id="O006-PSU-013-A0006" data-o006-id="O006-PSU-013-U0436" data-o006-source-native-id="fig-bidsgraph" data-o006-source-native-occurrence="2" decoding="async" height="582" id="fig-bidsgraph--source-occurrence-02" loading="lazy" src="assets/lesson12/assets/lesson9_11.png" width="944"/></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" data-o006-id="O006-PSU-013-U0437" data-o006-source-native-id="fig-bidsgraph-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca" data-o006-source-native-occurrence="1" id="fig-bidsgraph-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca--source-occurrence-01">Gambar 12.6 — Model jumlah jam terhadap jumlah proposal yang disiapkan.</figcaption>
+</figure>
+</div>
+<p data-o006-id="O006-PSU-013-U0438">Ada beberapa hal yang perlu diperhatikan pada grafik ini. Sekali lagi, rata-rata jumlah jam, <span class="math inline" data-o006-math-id="O006-PSU-013-M0152">\(E(Y)\)</span>, diasumsikan <strong>berhubungan secara linear</strong> dengan <span class="math inline" data-o006-math-id="O006-PSU-013-M0153">\(X\)</span>, jumlah proposal yang disiapkan. Itulah asumsi pertama. Penulis buku teks bahkan menetapkan nilai <span class="math inline" data-o006-math-id="O006-PSU-013-M0154">\(\alpha\)</span> dan <span class="math inline" data-o006-math-id="O006-PSU-013-M0155">\(\beta\)</span>yang biasanya tidak diketahui. Dalam kasus ini, <span class="math inline" data-o006-math-id="O006-PSU-013-M0156">\(\alpha\)</span> adalah 9,5 dan <span class="math inline" data-o006-math-id="O006-PSU-013-M0157">\(\beta\)</span> adalah 2,1.</p>
+<p data-o006-id="O006-PSU-013-U0439">Perhatikan bahwa jika <span class="math inline" data-o006-math-id="O006-PSU-013-M0158">\(X=45\)</span> proposal disiapkan, jumlah jam yang diharapkan untuk menyiapkannya adalah: <span class="math display" data-o006-math-id="O006-PSU-013-M0159">\[
+\mu_Y=E(Y)=9.5+2.1(45)=104
+\]</span> Dalam satu kasus, sebuah perusahaan kontraktor memerlukan 108 jam untuk menyiapkan 45 proposal. Dalam kasus tersebut, suku galat <span class="math inline" data-o006-math-id="O006-PSU-013-M0160">\(\epsilon_i\)</span> bernilai 4. Artinya:</p>
+<p data-o006-id="O006-PSU-013-U0440"><span class="math display" data-o006-math-id="O006-PSU-013-M0161">\[Y_i=108=E(Y)+\epsilon_i=104+4\]</span></p>
+<p data-o006-id="O006-PSU-013-U0441">Kurva normal yang digambar untuk setiap nilai <span class="math inline" data-o006-math-id="O006-PSU-013-M0162">\(X\)</span> dimaksudkan untuk menunjukkan bahwa suku galat <span class="math inline" data-o006-math-id="O006-PSU-013-M0163">\(\epsilon_i\)</span>, dan karena itu respons <span class="math inline" data-o006-math-id="O006-PSU-013-M0164">\(Y_i\)</span>, <strong>berdistribusi normal</strong>. Itulah asumsi kedua.</p>
+<p data-o006-id="O006-PSU-013-U0442">Apakah Anda juga memperhatikan bahwa kedua kurva normal dalam diagram digambar dengan bentuk yang sama? Hal itu menunjukkan bahwa setiap populasi (yang ditentukan oleh <span class="math inline" data-o006-math-id="O006-PSU-013-M0165">\(X\)</span>) memiliki varians yang sama. Itulah asumsi ketiga. Artinya, suku galat <span class="math inline" data-o006-math-id="O006-PSU-013-M0166">\(\epsilon_i\)</span>, dan karena itu respons <span class="math inline" data-o006-math-id="O006-PSU-013-M0167">\(Y_i\)</span>, memiliki <strong>varians yang sama</strong> untuk semua nilai <span class="math inline" data-o006-math-id="O006-PSU-013-M0168">\(x\)</span> .</p>
+<p data-o006-id="O006-PSU-013-U0443">Masih ada satu asumsi yang sulit digambarkan dalam grafik, yaitu <strong>kebebasan</strong> suku galat. Mari kita rangkum.</p>
+<p data-o006-id="O006-PSU-013-U0444">Singkatnya, model regresi linear sederhana menyatakan bahwa empat kondisi berikut harus dipenuhi:</p><aside class="target-only-note fixed-design-note" data-o006-correction-id="O006-PSU-ADV-0228" role="note">Kondisi inferensi eksak: nilai x₁,…,xₙ diperlakukan tetap (atau semua pernyataan peluang dikondisikan pada X), Sxx = Σ(xᵢ−x̄)² &gt; 0, suku galat saling bebas dan berdistribusi Normal dengan rataan 0 serta varians bersama σ².</aside>
+<ul data-o006-id="O006-PSU-013-U0445">
+<li data-o006-id="O006-PSU-013-U0446">Rataan respons, <span class="math inline" data-o006-math-id="O006-PSU-013-M0169">\(E(Y_i)\)</span>, merupakan fungsi <span class="math inline" data-o006-math-id="O006-PSU-013-M0170">\(\textcolor{red}{L}\)</span>inear terhadap <span class="math inline" data-o006-math-id="O006-PSU-013-M0171">\(x_i\)</span>.</li>
+<li data-o006-id="O006-PSU-013-U0447">Suku galat, <span class="math inline" data-o006-math-id="O006-PSU-013-M0172">\(\epsilon_i\)</span>, dan karenanya respons <span class="math inline" data-o006-math-id="O006-PSU-013-M0173">\(Y_i\)</span>, bersifat <span class="math inline" data-o006-math-id="O006-PSU-013-M0174">\(\textcolor{red}{I}\)</span>ndependen.</li>
+<li data-o006-id="O006-PSU-013-U0448">Suku galat, <span class="math inline" data-o006-math-id="O006-PSU-013-M0175">\(\epsilon_i\)</span>, dan karenanya respons <span class="math inline" data-o006-math-id="O006-PSU-013-M0176">\(Y_i\)</span>, berdistribusi <span class="math inline" data-o006-math-id="O006-PSU-013-M0177">\(\textcolor{red}{N}\)</span>ormal.</li>
+<li data-o006-id="O006-PSU-013-U0449">Suku galat, <span class="math inline" data-o006-math-id="O006-PSU-013-M0178">\(\epsilon_i\)</span>, dan karenanya respons <span class="math inline" data-o006-math-id="O006-PSU-013-M0179">\(Y_i\)</span>, mempunyai <span class="math inline" data-o006-math-id="O006-PSU-013-M0180">\(\textcolor{red}{E}\)</span>qual variances, yakni varians yang sama (<span class="math inline" data-o006-math-id="O006-PSU-013-M0181">\(\sigma^2\)</span>) untuk semua nilai <span class="math inline" data-o006-math-id="O006-PSU-013-M0182">\(x\)</span> .</li>
+</ul>
+<p data-o006-id="O006-PSU-013-U0450">Apakah Anda memperhatikan bahwa keempat kondisi tersebut diawali huruf kapital dan ditandai merah? Huruf awalnya membentuk kata <span class="math inline" data-o006-math-id="O006-PSU-013-M0183">\(\textcolor{red}{L-I-N-E}\)</span>. Kita sedang menyelidiki garis regresi kuadrat terkecil, dan modelnya mengeja kata LINE. Mnemonik ini dapat membantu Anda mengingat keempat kondisi tersebut.</p>
+</section>
+<section class="level3" data-number="12.4.3" data-o006-id="O006-PSU-013-U0451" id="maximum-likelihood-estimates-of-alpha-and-beta">
+<h3 class="anchored" data-anchor-id="maximum-likelihood-estimates-of-alpha-and-beta" data-number="12.4.3" data-o006-id="O006-PSU-013-U0452"><span class="header-section-number">12.4.3</span> Penduga Kemungkinan Maksimum bagi <span class="math inline" data-o006-math-id="O006-PSU-013-M0184">\(\alpha\)</span> dan <span class="math inline" data-o006-math-id="O006-PSU-013-M0185">\(\beta\)</span></h3>
+<p data-o006-id="O006-PSU-013-U0453">Kita mengetahui bahwa <span class="math inline" data-o006-math-id="O006-PSU-013-M0186">\(a\)</span> dan <span class="math inline" data-o006-math-id="O006-PSU-013-M0187">\(b\)</span>:</p>
+<p data-o006-id="O006-PSU-013-U0454"><span class="math display" data-o006-math-id="O006-PSU-013-M0188">\[\displaystyle{a=\bar{y} \text{ and } b=\dfrac{\sum\limits_{i=1}^n (x_i-\bar{x})(y_i-\bar{y})}{\sum\limits_{i=1}^n (x_i-\bar{x})^2}}\]</span></p>
+<p data-o006-id="O006-PSU-013-U0455">merupakan penduga (“kuadrat terkecil”) bagi <span class="math inline" data-o006-math-id="O006-PSU-013-M0189">\(\alpha\)</span> dan <span class="math inline" data-o006-math-id="O006-PSU-013-M0190">\(\beta\)</span> yang meminimumkan jumlah kuadrat galat prediksi. Ternyata, <span class="math inline" data-o006-math-id="O006-PSU-013-M0191">\(a\)</span> dan <span class="math inline" data-o006-math-id="O006-PSU-013-M0192">\(b\)</span> juga merupakan penduga kemungkinan maksimum bagi <span class="math inline" data-o006-math-id="O006-PSU-013-M0193">\(\alpha\)</span> dan <span class="math inline" data-o006-math-id="O006-PSU-013-M0194">\(\beta\)</span> <strong>asalkan keempat kondisi model regresi linear sederhana berlaku.</strong></p>
+<div class="callout callout-style-simple callout-note no-icon" data-o006-id="O006-PSU-013-U0456">
+<div class="callout-body d-flex" data-o006-id="O006-PSU-013-U0457">
+<div class="callout-icon-container" data-o006-id="O006-PSU-013-U0458">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-body-container" data-o006-id="O006-PSU-013-U0459">
+<div class="theorem" data-o006-id="O006-PSU-013-U0460" id="thm-lsrMLE">
+<p data-o006-id="O006-PSU-013-U0461"><span class="theorem-title"><strong>Teorema 12.3</strong></span> Jika keempat kondisi model regresi linear sederhana berlaku, maka:</p>
+<p data-o006-id="O006-PSU-013-U0462"><span class="math display" data-o006-math-id="O006-PSU-013-M0195">\[\displaystyle{a=\bar{y}\text{ and }b=\dfrac{\sum\limits_{i=1}^n (x_i-\bar{x})(y_i-\bar{y})}{\sum\limits_{i=1}^n (x_i-\bar{x})^2}}\]</span></p>
+<p data-o006-id="O006-PSU-013-U0463">merupakan penduga kemungkinan maksimum bagi <span class="math inline" data-o006-math-id="O006-PSU-013-M0196">\(\alpha\)</span> dan <span class="math inline" data-o006-math-id="O006-PSU-013-M0197">\(\beta\)</span>.</p>
+<p data-o006-id="O006-PSU-013-U0464"><strong>Bukti</strong></p>
+<p data-o006-id="O006-PSU-013-U0465">Singkatnya, model regresi linear sederhana menyatakan bahwa suku galat <span class="math inline" data-o006-math-id="O006-PSU-013-M0198">\(\epsilon_i\)</span> saling bebas dan berdistribusi normal dengan rataan 0 dan varians <span class="math inline" data-o006-math-id="O006-PSU-013-M0199">\(\sigma^2\)</span>. Artinya:</p>
+<p data-o006-id="O006-PSU-013-U0466"><span class="math display" data-o006-math-id="O006-PSU-013-M0200">\[\epsilon_i \sim N(0,\sigma^2)\]</span></p>
+<p data-o006-id="O006-PSU-013-U0467">Kondisi linearitas:</p>
+<p data-o006-id="O006-PSU-013-U0468"><span class="math display" data-o006-math-id="O006-PSU-013-M0201">\[Y_i=\alpha+\beta(x_i-\bar{x})+\epsilon_i\]</span></p>
+<p data-o006-id="O006-PSU-013-U0469">dengan demikian menyiratkan bahwa:</p>
+<p data-o006-id="O006-PSU-013-U0470"><span class="math display" data-o006-math-id="O006-PSU-013-M0202">\[Y_i \sim N(\alpha+\beta(x_i-\bar{x}),\sigma^2)\]</span></p>
+<p data-o006-id="O006-PSU-013-U0471">Karena itu, fungsi kemungkinan adalah:</p>
+<p data-o006-id="O006-PSU-013-U0472"><span class="math display" data-o006-math-id="O006-PSU-013-M0203">\[\displaystyle{L_{Y_i}(\alpha,\beta,\sigma^2)=\prod\limits_{i=1}^n \dfrac{1}{\sqrt{2\pi}\sigma} \text{exp}\left[-\dfrac{(Y_i-\alpha-\beta(x_i-\bar{x}))^2}{2\sigma^2}\right]}\]</span></p>
+<p data-o006-id="O006-PSU-013-U0473">yang dapat ditulis ulang sebagai:</p>
+<p data-o006-id="O006-PSU-013-U0474"><span class="math display" data-o006-math-id="O006-PSU-013-M0204">\[\displaystyle{L=(2\pi)^{-n/2}(\sigma^2)^{-n/2}\text{exp}\left[-\dfrac{1}{2\sigma^2} \sum\limits_{i=1}^n (Y_i-\alpha-\beta(x_i-\bar{x}))^2\right]}\]</span></p>
+<p data-o006-id="O006-PSU-013-U0475">Dengan mengambil logaritma kedua ruas, diperoleh:</p>
+<p data-o006-id="O006-PSU-013-U0476"><span class="math display" data-o006-math-id="O006-PSU-013-M0205">\[\displaystyle{\text{log}L=-\dfrac{n}{2}\text{log}(2\pi)-\dfrac{n}{2}\text{log}(\sigma^2)-\dfrac{1}{2\sigma^2} \sum\limits_{i=1}^n (Y_i-\alpha-\beta(x_i-\bar{x}))^2}\]</span></p>
+<p data-o006-id="O006-PSU-013-U0477">Tanda negatif di depan penjumlahan pada ruas kanan:</p>
+<p data-o006-id="O006-PSU-013-U0478"><span class="math display" data-o006-math-id="O006-PSU-013-M0206">\[\color{black}\text{log}L=-\dfrac{n}{2} \text{log} (2\pi)-\dfrac{n}{2}\text{log}\left(\sigma^{2}\right)\color{blue}\boxed{\color{black}-}\color{black}\dfrac{1}{2\sigma^{2}} \color{blue}\boxed{\color{black}\sum\limits_{i=1}^{n}\left(Y_{i}-\alpha-\beta\left(x_{i}-\bar{x}\right)\right)^{2}}\]</span></p>
+<p data-o006-id="O006-PSU-013-U0479">menunjukkan bahwa satu-satunya cara untuk memaksimumkan <span class="math inline" data-o006-math-id="O006-PSU-013-M0207">\(\log L(\alpha, \beta, \sigma^2)\)</span> terhadap <span class="math inline" data-o006-math-id="O006-PSU-013-M0208">\(\alpha\)</span> dan <span class="math inline" data-o006-math-id="O006-PSU-013-M0209">\(\beta\)</span> adalah dengan meminimumkan:</p>
+<p data-o006-id="O006-PSU-013-U0480"><span class="math display" data-o006-math-id="O006-PSU-013-M0210">\[\sum_{i=1}^n\left(Y_i-\alpha-\beta(x_i-\bar{x})\right)^2\]</span></p>
+<p data-o006-id="O006-PSU-013-U0481">merupakan penduga kemungkinan maksimum bagi <span class="math inline" data-o006-math-id="O006-PSU-013-M0211">\(\alpha\)</span> dan <span class="math inline" data-o006-math-id="O006-PSU-013-M0212">\(\beta\)</span> dengan asumsi bahwa suku galat saling bebas, berdistribusi normal dengan rataan 0 dan varians <span class="math inline" data-o006-math-id="O006-PSU-013-M0213">\(\sigma^2\)</span>. Seperti yang hendak dibuktikan.</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section class="level3" data-number="12.4.4" data-o006-id="O006-PSU-013-U0482" id="what-about-the-unknown-variance-sigma2">
+<h3 class="anchored" data-anchor-id="what-about-the-unknown-variance-sigma2" data-number="12.4.4" data-o006-id="O006-PSU-013-U0483"><span class="header-section-number">12.4.4</span> Bagaimana dengan Varians (Tak Diketahui) <span class="math inline" data-o006-math-id="O006-PSU-013-M0214">\(\sigma^2\)</span>?</h3>
+<p data-o006-id="O006-PSU-013-U0484">Singkatnya, varians <span class="math inline" data-o006-math-id="O006-PSU-013-M0215">\(\sigma^2\)</span> mengukur seberapa besar respons (<span class="math inline" data-o006-math-id="O006-PSU-013-M0216">\(y\)</span>) bervariasi di sekitar garis regresi rataan (tak diketahui) <span class="math inline" data-o006-math-id="O006-PSU-013-M0217">\(E(Y)\)</span>. Mengapa besar varians <span class="math inline" data-o006-math-id="O006-PSU-013-M0218">\(\sigma^2\)</span>perlu diperhatikan? Contoh berikut dapat membantu menjawab pertanyaan tersebut.</p>
+<div class="theorem example" data-o006-id="O006-PSU-013-U0485" id="exm-degrees">
+<p data-o006-id="O006-PSU-013-U0486"><span class="theorem-title"><strong>Contoh 12.2</strong></span> Kita mengetahui adanya hubungan sempurna antara derajat Celsius (<span class="math inline" data-o006-math-id="O006-PSU-013-M0219">\(C\)</span>) dan derajat Fahrenheit (<span class="math inline" data-o006-math-id="O006-PSU-013-M0220">\(F\)</span>), yaitu:</p>
+<p data-o006-id="O006-PSU-013-U0487"><span class="math display" data-o006-math-id="O006-PSU-013-M0221">\[F=\dfrac{9}{5}C+32\]</span></p>
+<p data-o006-id="O006-PSU-013-U0488">Namun, andaikan kita tidak mengetahui hubungan tersebut. Kita dapat mencoba mempelajarinya dengan mengumpulkan data suhu dan menghitung garis regresi kuadrat terkecil. Setelah itu, merek termometer mana yang menurut Anda akan menghasilkan prediksi suhu Fahrenheit mendatang yang lebih presisi: termometer yang datanya diplot di kiri atau di kanan?</p>
+<div class="grid" data-o006-id="O006-PSU-013-U0489">
+<div class="g-col-lg-6 g-col-md-6 g-col-sm-12" data-o006-id="O006-PSU-013-U0490">
+<div class="cell" data-o006-id="O006-PSU-013-U0491">
+<div class="cell-output-display" data-o006-id="O006-PSU-013-U0492">
+<div alt="Scatter plot of Celsius vs Fahrenheit temperatures with regression line." class="quarto-float quarto-figure quarto-figure-center anchored" data-o006-id="O006-PSU-013-U0493" data-o006-source-native-id="fig-scattertemp" data-o006-source-native-occurrence="1" id="fig-scattertemp--source-occurrence-01" width="90%">
+<figure class="figure quarto-float quarto-float-fig reader-full-width-figure" data-o006-id="O006-PSU-013-U0494">
+<div aria-describedby="fig-scattertemp-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca" data-o006-id="O006-PSU-013-U0495">
+<a class="lightbox" data-gallery="quarto-lightbox-gallery-7" data-o006-id="O006-PSU-013-U0496" href="assets/lesson12/Lesson12_files/figure-html/fig-scattertemp-1.png" title="Gambar 12.7 — Pengukuran suhu dengan pencaran kecil di sekitar garis regresi."><img alt="Suhu Fahrenheit terhadap Celsius mengelompok rapat di sekitar garis regresi." class="figure-img img-fluid reader-full-width-image reader-responsive-image" data-o006-asset-id="O006-PSU-013-A0007" data-o006-id="O006-PSU-013-U0497" data-o006-source-native-id="fig-scattertemp" data-o006-source-native-occurrence="2" decoding="async" height="960" id="fig-scattertemp--source-occurrence-02" loading="lazy" src="assets/lesson12/Lesson12_files/figure-html/fig-scattertemp-1.png" width="1344"/></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" data-o006-id="O006-PSU-013-U0498" id="fig-scattertemp-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">Gambar 12.7 — Pengukuran suhu dengan pencaran kecil di sekitar garis regresi.</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</div>
+<div class="g-col-lg-6 g-col-md-6 g-col-sm-12" data-o006-id="O006-PSU-013-U0499">
+<div class="cell" data-o006-id="O006-PSU-013-U0500">
+<div class="cell-output-display" data-o006-id="O006-PSU-013-U0501">
+<div alt="Scatter plot of Celsius vs Fahrenheit temperatures with regression line (with points more scattered)" class="quarto-float quarto-figure quarto-figure-center anchored" data-o006-id="O006-PSU-013-U0502" data-o006-source-native-id="fig-scattertemp2" data-o006-source-native-occurrence="1" id="fig-scattertemp2--source-occurrence-01" width="90%">
+<figure class="figure quarto-float quarto-float-fig reader-full-width-figure" data-o006-id="O006-PSU-013-U0503">
+<div aria-describedby="fig-scattertemp2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca" data-o006-id="O006-PSU-013-U0504">
+<a class="lightbox" data-gallery="quarto-lightbox-gallery-8" data-o006-id="O006-PSU-013-U0505" href="assets/lesson12/Lesson12_files/figure-html/fig-scattertemp2-1.png" title="Gambar 12.8 — Pengukuran suhu dengan pencaran besar di sekitar garis regresi."><img alt="Suhu Fahrenheit terhadap Celsius berpencar lebar di sekitar garis regresi." class="figure-img img-fluid reader-full-width-image reader-responsive-image" data-o006-asset-id="O006-PSU-013-A0008" data-o006-id="O006-PSU-013-U0506" data-o006-source-native-id="fig-scattertemp2" data-o006-source-native-occurrence="2" decoding="async" height="960" id="fig-scattertemp2--source-occurrence-02" loading="lazy" src="assets/lesson12/Lesson12_files/figure-html/fig-scattertemp2-1.png" width="1344"/></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" data-o006-id="O006-PSU-013-U0507" id="fig-scattertemp2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">Gambar 12.8 — Pengukuran suhu dengan pencaran besar di sekitar garis regresi.</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</div>
+<section class="level4 card card-body bg-light ms-3 mb-3 pt-0" data-o006-id="O006-PSU-013-U0508" id="solution-1">
+<h4 class="anchored" data-anchor-id="solution-1" data-o006-id="O006-PSU-013-U0509">Solusi</h4>
+<p data-o006-id="O006-PSU-013-U0510">Seperti terlihat, pada diagram kiri suhu Fahrenheit tidak banyak bervariasi atau “memantul” di sekitar garis regresi hasil pendugaan. Sebaliknya, pada diagram kanan suhu Fahrenheit cukup banyak bervariasi di sekitar garis regresi hasil pendugaan. Karena itu, wajar disimpulkan bahwa merek termometer di kiri akan memberikan prediksi suhu Fahrenheit mendatang yang lebih presisi.</p>
+<p data-o006-id="O006-PSU-013-U0511">Tentu saja, varians <span class="math inline" data-o006-math-id="O006-PSU-013-M0222">\(\sigma^2\)</span> merupakan parameter populasi yang tidak diketahui. Satu-satunya cara untuk mengukur varians itu adalah dengan menduganya. Dalam kasus satu populasi, misalnya populasi (normal) skor IQ:</p>
+<div class="cell" data-o006-id="O006-PSU-013-U0512">
+<div class="cell-output-display" data-o006-id="O006-PSU-013-U0513">
+<div alt="Normal curve of IQ scores" class="quarto-float quarto-figure quarto-figure-center anchored" data-o006-id="O006-PSU-013-U0514" data-o006-source-native-id="fig-iqnormal" data-o006-source-native-occurrence="1" id="fig-iqnormal--source-occurrence-01" width="70%">
+<figure class="figure quarto-float quarto-float-fig reader-full-width-figure" data-o006-id="O006-PSU-013-U0515">
+<div aria-describedby="fig-iqnormal-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca" data-o006-id="O006-PSU-013-U0516">
+<a class="lightbox" data-gallery="quarto-lightbox-gallery-9" data-o006-id="O006-PSU-013-U0517" href="assets/lesson12/Lesson12_files/figure-html/fig-iqnormal-1.png" title="Gambar 12.9 — Distribusi normal skor IQ."><img alt="Kurva normal berbentuk lonceng untuk distribusi skor IQ." class="figure-img img-fluid reader-full-width-image reader-responsive-image" data-o006-asset-id="O006-PSU-013-A0009" data-o006-id="O006-PSU-013-U0518" data-o006-source-native-id="fig-iqnormal" data-o006-source-native-occurrence="2" decoding="async" height="960" id="fig-iqnormal--source-occurrence-02" loading="lazy" src="assets/lesson12/Lesson12_files/figure-html/fig-iqnormal-1.png" width="1344"/></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" data-o006-id="O006-PSU-013-U0519" id="fig-iqnormal-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">Gambar 12.9 — Distribusi normal skor IQ.</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p data-o006-id="O006-PSU-013-U0520">kita akan menduga varians populasi <span class="math inline" data-o006-math-id="O006-PSU-013-M0223">\(\sigma^2\)</span> menggunakan varians sampel:</p>
+<p data-o006-id="O006-PSU-013-U0521"><span class="math display" data-o006-math-id="O006-PSU-013-M0224">\[s^2=\dfrac{\sum\limits_{i=1}^n (Y_i-\bar{Y})^2}{n-1}\]</span></p>
+<p data-o006-id="O006-PSU-013-U0522">Kita telah mempelajari bahwa <span class="math inline" data-o006-math-id="O006-PSU-013-M0225">\(s^2\)</span> merupakan penduga tak bias bagi <span class="math inline" data-o006-math-id="O006-PSU-013-M0226">\(\sigma^2\)</span>, varians satu populasi tersebut. Namun, bagaimana jika kita tidak lagi hanya memiliki satu populasi, melainkan banyak populasi? Dalam contoh proposal dan jam kerja, terdapat satu populasi untuk setiap nilai <span class="math inline" data-o006-math-id="O006-PSU-013-M0227">\(x\)</span>:</p>
+<div alt="Regression of line for hours vs number of bids" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-scap="A statistical graph showing the relationship between the number of bids prepared (X-axis, 0 to 45) and hours (Y-axis, 0 to 100). The graph includes two dashed probability density curves peaking around 25 and 45 bids, with a line labeled E(Y) = 9.5 + 2.1X. At 45 bids, annotations indicate Y_i = 108, ε_i = +4, and E(Y_i) = 104." data-o006-id="O006-PSU-013-U0523" data-o006-source-native-id="fig-bidsgraph" data-o006-source-native-occurrence="3" id="fig-bidsgraph--source-occurrence-03" width="60%">
+<figure class="figure quarto-float quarto-float-fig reader-full-width-figure" data-o006-id="O006-PSU-013-U0524">
+<div aria-describedby="fig-bidsgraph-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca--source-occurrence-02" data-o006-id="O006-PSU-013-U0525">
+<a class="lightbox" data-gallery="quarto-lightbox-gallery-10" data-o006-id="O006-PSU-013-U0526" href="assets/lesson12/assets/lesson9_11.png" title="Gambar 12.10 — Banyak populasi respons pada nilai prediktor yang berbeda."><img alt="Rataan jam penyiapan proposal meningkat linear terhadap jumlah proposal; kurva normal vertikal menunjukkan variasi respons yang sama." class="d-block figure-img img-fluid mx-auto reader-full-width-image reader-responsive-image" data-fig-scap="A statistical graph showing the relationship between the number of bids prepared (X-axis, 0 to 45) and hours (Y-axis, 0 to 100). The graph includes two dashed probability density curves peaking around 25 and 45 bids, with a line labeled E(Y) = 9.5 + 2.1X. At 45 bids, annotations indicate Y_i = 108, ε_i = +4, and E(Y_i) = 104." data-o006-asset-id="O006-PSU-013-A0006" data-o006-id="O006-PSU-013-U0527" data-o006-source-native-id="fig-bidsgraph" data-o006-source-native-occurrence="4" decoding="async" height="582" id="fig-bidsgraph--source-occurrence-04" loading="lazy" src="assets/lesson12/assets/lesson9_11.png" width="944"/></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" data-o006-id="O006-PSU-013-U0528" data-o006-source-native-id="fig-bidsgraph-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca" data-o006-source-native-occurrence="2" id="fig-bidsgraph-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca--source-occurrence-02">Gambar 12.10 — Banyak populasi respons pada nilai prediktor yang berbeda.</figcaption>
+</figure>
+</div>
+<p data-o006-id="O006-PSU-013-U0529">Dalam kasus ini, kita harus menduga <span class="math inline" data-o006-math-id="O006-PSU-013-M0228">\(\sigma^2\)</span>, yaitu varians (bersama) dari banyak populasi. Ada dua kemungkinan: satu penduga bias dan satu penduga tak bias.</p>
+</section>
+</div>
+<div class="callout callout-style-simple callout-note no-icon" data-o006-id="O006-PSU-013-U0530">
+<div class="callout-body d-flex" data-o006-id="O006-PSU-013-U0531">
+<div class="callout-icon-container" data-o006-id="O006-PSU-013-U0532">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-body-container" data-o006-id="O006-PSU-013-U0533">
+<div class="theorem" data-o006-id="O006-PSU-013-U0534" id="thm-lsrMLE2">
+<p data-o006-id="O006-PSU-013-U0535"><span class="theorem-title"><strong>Teorema 12.4</strong></span> Penduga kemungkinan maksimum bagi <span class="math inline" data-o006-math-id="O006-PSU-013-M0229">\(\sigma^2\)</span> adalah:</p>
+<p data-o006-id="O006-PSU-013-U0536"><span class="math display" data-o006-math-id="O006-PSU-013-M0230">\[\hat{\sigma}^2=\dfrac{\sum\limits_{i=1}^n (Y_i-\hat{Y}_i)^2}{n}\]</span></p>
+<p data-o006-id="O006-PSU-013-U0537">Penduga ini merupakan penduga bias bagi <span class="math inline" data-o006-math-id="O006-PSU-013-M0231">\(\sigma^2\)</span>, yaitu varians bersama dari <strong>banyak</strong> populasi.</p>
+<p data-o006-id="O006-PSU-013-U0538"><strong>Bukti</strong></p>
+<p data-o006-id="O006-PSU-013-U0539">Sebelumnya telah ditunjukkan bahwa logaritma fungsi kemungkinan adalah:</p>
+<p data-o006-id="O006-PSU-013-U0540"><span class="math display" data-o006-math-id="O006-PSU-013-M0232">\[\text{log}L=-\dfrac{n}{2}\text{log}(2\pi)-\dfrac{n}{2}\text{log}(\sigma^2)-\dfrac{1}{2\sigma^2} \sum\limits_{i=1}^n (Y_i-\alpha-\beta(x_i-\bar{x}))^2\]</span></p>
+<p data-o006-id="O006-PSU-013-U0541">Untuk memaksimumkan log-kemungkinan, kita harus mengambil turunan parsial log-kemungkinan terhadap <span class="math inline" data-o006-math-id="O006-PSU-013-M0233">\(\sigma^2\)</span>. Dengan demikian, diperoleh:</p>
+<p data-o006-id="O006-PSU-013-U0542"><span class="math display" data-o006-math-id="O006-PSU-013-M0234">\[\dfrac{\partial \log L_{Y_i}(\alpha,\beta,\sigma^2)}{\partial \sigma^2}=-\dfrac{n}{2\sigma^2}-\dfrac{1}{2}\sum (Y_i-\alpha-\beta(x_i-\bar{x}))^2 \cdot \left(- \dfrac{1}{(\sigma^2)^2}\right)\]</span></p>
+<p data-o006-id="O006-PSU-013-U0543">Dengan menyamakan turunannya dengan 0 dan mengalikan kedua ruas dengan <span class="math inline" data-o006-math-id="O006-PSU-013-M0235">\(2\sigma^4\)</span>:</p>
+<p data-o006-id="O006-PSU-013-U0544"><span class="math display" data-o006-math-id="O006-PSU-013-M0236">\[\frac{\partial \log L_{Y_{i}}\left(\alpha, \beta, \sigma^{2}\right)}{\partial \sigma^{2}}=\left[-\frac{n}{2 \sigma^{2}}-\frac{1}{2} \sum\left(Y_{i}-\alpha-\beta\left(x_{i}-\bar{x}\right)\right)^{2} \cdot-\frac{1}{\left(\sigma^{2}\right)^{2}} \stackrel{\operatorname{SET}}{\equiv} 0\right] 2\left(\sigma^{2}\right)^{2}\]</span></p>
+<p data-o006-id="O006-PSU-013-U0545">, diperoleh:</p>
+<p data-o006-id="O006-PSU-013-U0546"><span class="math display" data-o006-math-id="O006-PSU-013-M0237">\[-n\sigma^2+\sum (Y_i-\alpha-\beta(x_i-\bar{x}))^2 =0\]</span></p>
+<p data-o006-id="O006-PSU-013-U0547">Setelah menyelesaikannya dan menambahkan topi pada <span class="math inline" data-o006-math-id="O006-PSU-013-M0238">\(\sigma^2\)</span>, serta mengganti <span class="math inline" data-o006-math-id="O006-PSU-013-M0239">\(\alpha\)</span> dan <span class="math inline" data-o006-math-id="O006-PSU-013-M0240">\(\beta\)</span> dengan penduga kemungkinan maksimumnya, diperoleh:</p>
+<p data-o006-id="O006-PSU-013-U0548"><span class="math display" data-o006-math-id="O006-PSU-013-M0241">\[\hat{\sigma}^2=\dfrac{\sum (Y_i-\hat{\alpha}-\hat{\beta}(x_i-\bar{x}))^2}{n}=\dfrac{\sum(Y_i-\hat{Y}_i)^2}{n}\]</span></p>
+<p data-o006-id="O006-PSU-013-U0549">Seperti yang hendak dibuktikan.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="ms-3 theorem definition" data-o006-id="O006-PSU-013-U0550" id="def-name">
+<p data-o006-id="O006-PSU-013-U0551"><span class="theorem-title"><strong>Def. 12.1 (Rataan Kuadrat Galat)</strong></span> Sebaliknya, <strong>rataan kuadrat galat</strong>:</p>
+<p data-o006-id="O006-PSU-013-U0552"><span class="math display" data-o006-math-id="O006-PSU-013-M0242">\[MSE=\dfrac{\sum\limits_{i=1}^n(Y_i-\hat{Y}_i)^2}{n-2}\]</span></p>
+<p data-o006-id="O006-PSU-013-U0553">merupakan <strong>penduga tak bias</strong> bagi <span class="math inline" data-o006-math-id="O006-PSU-013-M0243">\(\sigma^2\)</span>, yaitu varians bersama dari <strong>banyak</strong> populasi.</p>
+</div>
+<p data-o006-id="O006-PSU-013-U0554">Kita perlu menggunakan penduga <span class="math inline" data-o006-math-id="O006-PSU-013-M0244">\(\sigma^2\)</span> ini ketika menurunkan selang kepercayaan untuk <span class="math inline" data-o006-math-id="O006-PSU-013-M0245">\(\alpha\)</span> dan <span class="math inline" data-o006-math-id="O006-PSU-013-M0246">\(\beta\)</span> pada bagian berikutnya.</p>
+</section>
+</section>
+<section class="level2" data-number="12.5" data-o006-id="O006-PSU-013-U0555" id="confidence-intervals-for-regression-parameters">
+<h2 class="anchored" data-anchor-id="confidence-intervals-for-regression-parameters" data-number="12.5" data-o006-id="O006-PSU-013-U0556"><span class="header-section-number">12.5</span> Selang Kepercayaan bagi Parameter Regresi</h2>
+<p data-o006-id="O006-PSU-013-U0557">Sebelum menurunkan selang kepercayaan untuk <span class="math inline" data-o006-math-id="O006-PSU-013-M0247">\(\alpha\)</span> dan <span class="math inline" data-o006-math-id="O006-PSU-013-M0248">\(\beta\)</span>, pertama-tama kita perlu menurunkan distribusi peluang <span class="math inline" data-o006-math-id="O006-PSU-013-M0249">\(a\)</span>, <span class="math inline" data-o006-math-id="O006-PSU-013-M0250">\(b\)</span> dan <span class="math inline" data-o006-math-id="O006-PSU-013-M0251">\(\hat{\sigma}^2\)</span>. Selama proses ini, mari gunakan notasi penduga yang lebih tradisional dengan menambahkan topi pada huruf Yunani. Jadi, di sini kita menggunakan:</p>
+<p data-o006-id="O006-PSU-013-U0558"><span class="math display" data-o006-math-id="O006-PSU-013-M0252">\[a=\hat{\alpha} \text{ and }b=\hat{\beta}\]</span></p>
+<div class="callout callout-style-simple callout-note no-icon" data-o006-id="O006-PSU-013-U0559">
+<div class="callout-body d-flex" data-o006-id="O006-PSU-013-U0560">
+<div class="callout-icon-container" data-o006-id="O006-PSU-013-U0561">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-body-container" data-o006-id="O006-PSU-013-U0562">
+<div class="theorem" data-o006-id="O006-PSU-013-U0563" id="thm-lsrprobdist">
+<p data-o006-id="O006-PSU-013-U0564"><span class="theorem-title"><strong>Teorema 12.5</strong></span> Di bawah asumsi model regresi linear sederhana:</p>
+<p data-o006-id="O006-PSU-013-U0565"><span class="math display" data-o006-math-id="O006-PSU-013-M0253">\[\hat{\alpha}\sim N\left(\alpha,\dfrac{\sigma^2}{n}\right)\]</span></p>
+<p data-o006-id="O006-PSU-013-U0566"><strong>Bukti</strong></p>
+<p data-o006-id="O006-PSU-013-U0567">Ingat bahwa penduga kemungkinan maksimum (dan kuadrat terkecil) bagi <span class="math inline" data-o006-math-id="O006-PSU-013-M0254">\(\alpha\)</span> adalah:</p>
+<p data-o006-id="O006-PSU-013-U0568"><span class="math display" data-o006-math-id="O006-PSU-013-M0255">\[a=\hat{\alpha}=\bar{Y}\]</span></p>
+<p data-o006-id="O006-PSU-013-U0569">dengan respons <span class="math inline" data-o006-math-id="O006-PSU-013-M0256">\(Y_i\)</span> saling bebas dan berdistribusi normal. Secara lebih khusus:</p>
+<p data-o006-id="O006-PSU-013-U0570"><span class="math display" data-o006-math-id="O006-PSU-013-M0257">\[Y_i \sim N(\alpha+\beta(x_i-\bar{x}),\sigma^2)\]</span></p>
+<p data-o006-id="O006-PSU-013-U0571">Nilai harapan <span class="math inline" data-o006-math-id="O006-PSU-013-M0258">\(\hat{\alpha}\)</span> adalah <span class="math inline" data-o006-math-id="O006-PSU-013-M0259">\(\alpha\)</span>, seperti ditunjukkan berikut:</p>
+<p data-o006-id="O006-PSU-013-U0572"><span class="math display" data-o006-math-id="O006-PSU-013-M0260">\[E(\hat{\alpha})=E(\bar{Y})=\frac{1}{n}\sum E(Y_i)=\frac{1}{n}\sum E(\alpha+\beta(x_i-\bar{x}))=\frac{1}{n}\left[n\alpha+\beta \sum(x_i-\bar{x})\right]=\frac{1}{n}(n\alpha)=\alpha\]</span></p>
+<p data-o006-id="O006-PSU-013-U0573">Karena <span class="math inline" data-o006-math-id="O006-PSU-013-M0261">\(\sum (x_i-\bar{x})=0\)</span>.</p>
+<p data-o006-id="O006-PSU-013-U0574">Varians <span class="math inline" data-o006-math-id="O006-PSU-013-M0262">\(\hat{\alpha}\)</span> diperoleh langsung dari varians rataan sampel, yaitu:</p>
+<p data-o006-id="O006-PSU-013-U0575"><span class="math display" data-o006-math-id="O006-PSU-013-M0263">\[Var(\hat{\alpha})=Var(\bar{Y})=\dfrac{\sigma^2}{n}\]</span></p>
+<p data-o006-id="O006-PSU-013-U0576">Oleh karena kombinasi linear peubah acak normal juga berdistribusi normal, kita memperoleh:</p>
+<p data-o006-id="O006-PSU-013-U0577"><span class="math display" data-o006-math-id="O006-PSU-013-M0264">\[\hat{\alpha} \sim N\left(\alpha,\dfrac{\sigma^2}{n}\right)\]</span></p>
+<p data-o006-id="O006-PSU-013-U0578">seperti yang hendak dibuktikan.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="callout callout-style-simple callout-note no-icon" data-o006-id="O006-PSU-013-U0579">
+<div class="callout-body d-flex" data-o006-id="O006-PSU-013-U0580">
+<div class="callout-icon-container" data-o006-id="O006-PSU-013-U0581">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-body-container" data-o006-id="O006-PSU-013-U0582">
+<div class="theorem" data-o006-id="O006-PSU-013-U0583" id="thm-lsrvariance">
+<p data-o006-id="O006-PSU-013-U0584"><span class="theorem-title"><strong>Teorema 12.6</strong></span> Di bawah asumsi model regresi linear sederhana:</p>
+<p data-o006-id="O006-PSU-013-U0585"><span class="math display" data-o006-math-id="O006-PSU-013-M0265">\[\hat{\beta}\sim N\left(\beta,\dfrac{\sigma^2}{\sum_{i=1}^n (x_i-\bar{x})^2}\right)\]</span></p>
+<p data-o006-id="O006-PSU-013-U0586"><strong>Bukti</strong></p>
+<p data-o006-id="O006-PSU-013-U0587">Dengan mengingat salah satu rumus singkat penduga kemungkinan maksimum (dan kuadrat terkecil) bagi <span class="math inline" data-o006-math-id="O006-PSU-013-M0266">\(\beta\)</span></p>
+<p data-o006-id="O006-PSU-013-U0588"><span class="math display" data-o006-math-id="O006-PSU-013-M0267">\[b=\hat{\beta}=\dfrac{\sum_{i=1}^n (x_i-\bar{x})Y_i}{\sum_{i=1}^n (x_i-\bar{x})^2}\]</span></p>
+<p data-o006-id="O006-PSU-013-U0589">, kita melihat bahwa penduga kemungkinan maksimum tersebut merupakan kombinasi linear peubah acak normal yang saling bebas <span class="math inline" data-o006-math-id="O006-PSU-013-M0268">\(Y_i\)</span> dengan:</p>
+<p data-o006-id="O006-PSU-013-U0590"><span class="math display" data-o006-math-id="O006-PSU-013-M0269">\[Y_i \sim N(\alpha+\beta(x_i-\bar{x}),\sigma^2)\]</span></p>
+<p data-o006-id="O006-PSU-013-U0591">Nilai harapan <span class="math inline" data-o006-math-id="O006-PSU-013-M0270">\(\hat{\beta}\)</span> adalah <span class="math inline" data-o006-math-id="O006-PSU-013-M0271">\(\beta\)</span>, seperti ditunjukkan berikut:</p>
+<p data-o006-id="O006-PSU-013-U0592"><span class="math display" data-o006-math-id="O006-PSU-013-M0272">\[E(\hat{\beta})=\frac{1}{\sum (x_i-\bar{x})^2}\sum E\left[(x_i-\bar{x})Y_i\right]=\frac{1}{\sum (x_i-\bar{x})^2}\sum (x_i-\bar{x})(\alpha +\beta(x_i-\bar{x}))=\frac{1}{\sum (x_i-\bar{x})^2}\left[ \alpha\sum (x_i-\bar{x}) +\beta \sum (x_i-\bar{x})^2 \right] \\=\beta\]</span></p>
+<p data-o006-id="O006-PSU-013-U0593">karena <span class="math inline" data-o006-math-id="O006-PSU-013-M0273">\(\sum (x_i-\bar{x})=0\)</span>.</p>
+<p data-o006-id="O006-PSU-013-U0594">Dan varians <span class="math inline" data-o006-math-id="O006-PSU-013-M0274">\(\hat{\beta}\)</span> adalah:</p>
+<p data-o006-id="O006-PSU-013-U0595"><span class="math display" data-o006-math-id="O006-PSU-013-M0275">\[\text{Var}(\hat{\beta})=\left[\frac{1}{\sum (x_i-\bar{x})^2}\right]^2\sum (x_i-\bar{x})^2(\text{Var}(Y_i))=\frac{\sigma^2}{\sum (x_i-\bar{x})^2}\]</span></p>
+<p data-o006-id="O006-PSU-013-U0596">Oleh karena kombinasi linear peubah acak normal juga berdistribusi normal, kita memperoleh:</p>
+<p data-o006-id="O006-PSU-013-U0597"><span class="math display" data-o006-math-id="O006-PSU-013-M0276">\[\hat{\beta}\sim N\left(\beta,\dfrac{\sigma^2}{\sum_{i=1}^n (x_i-\bar{x})^2}\right)\]</span></p>
+<p data-o006-id="O006-PSU-013-U0598">Seperti yang hendak dibuktikan.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="callout callout-style-simple callout-note no-icon" data-o006-id="O006-PSU-013-U0599">
+<div class="callout-body d-flex" data-o006-id="O006-PSU-013-U0600">
+<div class="callout-icon-container" data-o006-id="O006-PSU-013-U0601">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-body-container" data-o006-id="O006-PSU-013-U0602">
+<div class="theorem" data-o006-id="O006-PSU-013-U0603" id="thm-lsrindependent">
+<p data-o006-id="O006-PSU-013-U0604"><span class="theorem-title"><strong>Teorema 12.7</strong></span> Di bawah asumsi model regresi linear sederhana:</p>
+<p data-o006-id="O006-PSU-013-U0605"><span class="math display" data-o006-math-id="O006-PSU-013-M0277">\[\dfrac{n\hat{\sigma}^2}{\sigma^2}\sim \chi^2_{(n-2)}\]</span></p>
+<p data-o006-id="O006-PSU-013-U0606">dan <span class="math inline" data-o006-math-id="O006-PSU-013-M0278">\(a=\hat{\alpha}\)</span>, <span class="math inline" data-o006-math-id="O006-PSU-013-M0279">\(b=\hat{\beta}\)</span>, serta <span class="math inline" data-o006-math-id="O006-PSU-013-M0280">\(\hat{\sigma}^2\)</span> saling bebas.</p>
+<p data-o006-id="O006-PSU-013-U0607"><strong>Argumen</strong></p>
+<p data-o006-id="O006-PSU-013-U0608">Perhatikan bahwa judul bagian ini adalah Argumen, bukan Bukti. Alasannya, kita akan menggunakan penjelasan informal dan merujuk ke sumber lain karena buktinya berada di luar cakupan mata kuliah ini. Mari kita mulai. Sebagai tugas, Anda diminta menunjukkan bahwa:</p>
+<p data-o006-id="O006-PSU-013-U0609"><span class="math display" data-o006-math-id="O006-PSU-013-M0281">\[\sum\limits_{i=1}^n (Y_i-\alpha-\beta(x_i-\bar{x}))^2=n(\hat{\alpha}-\alpha)^2+(\hat{\beta}-\beta)^2\sum\limits_{i=1}^n (x_i-\bar{x})^2+\sum\limits_{i=1}^n (Y_i-\hat{Y}_i)^2\]</span></p>
+<p data-o006-id="O006-PSU-013-U0610">Jika kedua ruas persamaan dibagi dengan varians populasi <span class="math inline" data-o006-math-id="O006-PSU-013-M0282">\(\sigma^2\)</span>, diperoleh:</p>
+<p data-o006-id="O006-PSU-013-U0611"><span class="math display" data-o006-math-id="O006-PSU-013-M0283">\[\dfrac{\sum_{i=1}^n (Y_i-\alpha-\beta(x_i-\bar{x}))^2}{\sigma^2}=\dfrac{n(\hat{\alpha}-\alpha)^2}{\sigma^2}+\dfrac{(\hat{\beta}-\beta)^2\sum\limits_{i=1}^n (x_i-\bar{x})^2}{\sigma^2}+\dfrac{\sum (Y_i-\hat{Y}_i)^2}{\sigma^2}\]</span></p>
+<p data-o006-id="O006-PSU-013-U0612">Dengan menulis ulang beberapa suku, diperoleh:</p>
+<p data-o006-id="O006-PSU-013-U0613"><span class="math display" data-o006-math-id="O006-PSU-013-M0284">\[\dfrac{\sum_{i=1}^n (Y_i-\alpha-\beta(x_i-\bar{x}))^2 }{\sigma^2}=\dfrac{(\hat{\alpha}-\alpha)^2}{\sigma^2/n}+\dfrac{(\hat{\beta}-\beta)^2}{\sigma^2/\sum\limits_{i=1}^n (x_i-\bar{x})^2}+\dfrac{n\hat{\sigma}^2}{\sigma^2}\]</span></p>
+<p data-o006-id="O006-PSU-013-U0614">Kini suku-suku tersebut ditulis sehingga distribusi masing-masing dapat dikenali. Distribusinya adalah:</p>
+<p data-o006-id="O006-PSU-013-U0615"><span class="math display" data-o006-math-id="O006-PSU-013-M0285">\[\underbrace{\color{black}\frac{\sum\left(Y_{i}-\alpha-\beta\left(x_{i}-\bar{x}\right)\right)^{2}}{\sigma^2}}_{\underset{\text{}}{{\color{blue}\chi^2_{(n)}}}}=\underbrace{\color{black}\frac{(\hat{\alpha}-\alpha)^{2}}{\sigma^{2}/n}}_{\underset{\text{}}{{\color{blue}\chi^2_{(1)}}}}+\underbrace{\color{black}\frac{(\hat{\beta}-\beta)^{2}}{\sigma^{2}/\sum\left(x_{i}-\bar{x}\right)^{2}}}_{\underset{\text{}}{{\color{blue}\chi^2_{(1)}}}}+\underbrace{\color{black}\frac{n\hat{\sigma}^{2}}{\sigma^{2}}}_{\underset{\text{ }}{\color{red}\text{?}}}\]</span></p>
+<p data-o006-id="O006-PSU-013-U0616">Tampaknya wajar bahwa suku terakhir merupakan peubah acak khi-kuadrat dengan <span class="math inline" data-o006-math-id="O006-PSU-013-M0286">\(n-2\)</span> derajat kebebasan. Artinya:</p>
+<p data-o006-id="O006-PSU-013-U0617"><span class="math display" data-o006-math-id="O006-PSU-013-M0287">\[\dfrac{n\hat{\sigma}^2}{\sigma^2} \sim \chi^2_{(n-2)}\]</span></p>
+<p data-o006-id="O006-PSU-013-U0618">dan, lebih lanjut, <span class="math inline" data-o006-math-id="O006-PSU-013-M0288">\(a=\hat{\alpha}\)</span>, <span class="math inline" data-o006-math-id="O006-PSU-013-M0289">\(b=\hat{\beta}\)</span>serta <span class="math inline" data-o006-math-id="O006-PSU-013-M0290">\(\hat{\sigma^2}\)</span> saling bebas. (Buktinya dapat ditemukan dalam berbagai buku teks statistika matematis.)</p><aside class="target-only-note proof-boundary-note" data-o006-correction-id="O006-PSU-ADV-0235" role="note">Batas rigor: argumen sumber belum membuktikan dekomposisi ortogonal, peringkat ruang proyeksi, atau kebebasan komponen. Bukti matriks lengkap beserta syarat peringkat tetap menjadi unit wajib pendamping rigor orisinal C140; paragraf sumber ini tidak dipromosikan menjadi bukti lengkap.</aside>
+<p data-o006-id="O006-PSU-013-U0619">Dengan hasil distribusional tersebut, kini kita dapat menurunkan selang kepercayaan <span class="math inline" data-o006-math-id="O006-PSU-013-M0291">\((1-\alpha)100\%\)</span> untuk <span class="math inline" data-o006-math-id="O006-PSU-013-M0292">\(\alpha\)</span> dan <span class="math inline" data-o006-math-id="O006-PSU-013-M0293">\(\beta\)</span>!</p>
+</div>
+</div>
+</div>
+</div>
+<div class="callout callout-style-simple callout-note no-icon" data-o006-id="O006-PSU-013-U0620">
+<div class="callout-body d-flex" data-o006-id="O006-PSU-013-U0621">
+<div class="callout-icon-container" data-o006-id="O006-PSU-013-U0622">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-body-container" data-o006-id="O006-PSU-013-U0623">
+<div class="theorem" data-o006-id="O006-PSU-013-U0624" id="thm-cislope">
+<p data-o006-id="O006-PSU-013-U0625"><span class="theorem-title"><strong>Teorema 12.8</strong></span> Di bawah asumsi model regresi linear sederhana, sebuah <span class="math inline" data-o006-math-id="O006-PSU-013-M0294">\((1-\alpha)100\%\)</span> <strong>selang kepercayaan bagi parameter kemiringan</strong> <span class="math inline" data-o006-math-id="O006-PSU-013-M0295">\(\beta\)</span> adalah:</p>
+<p data-o006-id="O006-PSU-013-U0626"><span class="math display" data-o006-math-id="O006-PSU-013-M0296">\[b \pm t_{\alpha/2,n-2}\times \left(\dfrac{\sqrt{n}\hat{\sigma}}{\sqrt{n-2} \sqrt{\sum (x_i-\bar{x})^2}}\right)\]</span></p>
+<p data-o006-id="O006-PSU-013-U0627">atau, secara ekuivalen:</p>
+<p data-o006-id="O006-PSU-013-U0628"><span class="math display" data-o006-math-id="O006-PSU-013-M0297">\[\hat{\beta} \pm t_{\alpha/2,n-2}\times \sqrt{\dfrac{MSE}{\sum (x_i-\bar{x})^2}}\]</span> <strong>Bukti</strong></p>
+<p data-o006-id="O006-PSU-013-U0629">Ingat kembali definisi peubah acak <span class="math inline" data-o006-math-id="O006-PSU-013-M0298">\(T\)</span> . Yaitu, jika:</p>
+<ol data-o006-id="O006-PSU-013-U0630" type="1">
+<li data-o006-id="O006-PSU-013-U0631"><span class="math inline" data-o006-math-id="O006-PSU-013-M0299">\(Z\)</span> merupakan peubah acak normal baku (<span class="math inline" data-o006-math-id="O006-PSU-013-M0300">\(N(0,1)\)</span>);</li>
+<li data-o006-id="O006-PSU-013-U0632"><span class="math inline" data-o006-math-id="O006-PSU-013-M0301">\(U\)</span> merupakan peubah acak khi-kuadrat dengan <span class="math inline" data-o006-math-id="O006-PSU-013-M0302">\(r\)</span> derajat kebebasan;</li>
+<li data-o006-id="O006-PSU-013-U0633"><span class="math inline" data-o006-math-id="O006-PSU-013-M0303">\(Z\)</span> serta <span class="math inline" data-o006-math-id="O006-PSU-013-M0304">\(U\)</span> saling bebas, maka:</li>
+</ol>
+<p data-o006-id="O006-PSU-013-U0634"><span class="math display" data-o006-math-id="O006-PSU-013-M0305">\[T=\dfrac{Z}{\sqrt{U/r}}\]</span></p>
+<p data-o006-id="O006-PSU-013-U0635">mengikuti distribusi <span class="math inline" data-o006-math-id="O006-PSU-013-M0306">\(T\)</span> dengan <span class="math inline" data-o006-math-id="O006-PSU-013-M0307">\(r\)</span> derajat kebebasan. Hasil kita di atas menyatakan bahwa:</p>
+<p data-o006-id="O006-PSU-013-U0636"><span class="math display" data-o006-math-id="O006-PSU-013-M0308">\[\dfrac{\hat{\beta}-\beta}{\sigma/\sqrt{\sum (x_i-\bar{x})^2}} \sim N(0,1) \text{ and }\dfrac{n\hat{\sigma}^2}{\sigma^2} \sim \chi^2_{(n-2)} \text{ are independent}\]</span></p>
+<p data-o006-id="O006-PSU-013-U0637">Karena itu, kita memperoleh bahwa:</p>
+<p data-o006-id="O006-PSU-013-U0638"><span class="math display" data-o006-math-id="O006-PSU-013-M0309">\[T=\dfrac{\dfrac{\hat{\beta}-\beta}{\sigma/\sqrt{\sum (x_i-\bar{x})^2}}}{\sqrt{\dfrac{n\hat{\sigma}^2}{\sigma^2}/(n-2)}}=\dfrac{\hat{\beta}-\beta}{\sqrt{\dfrac{n\hat{\sigma}^2}{n-2}/\sum (x_i-\bar{x})^2}}=\dfrac{\hat{\beta}-\beta}{\sqrt{MSE/\sum (x_i-\bar{x})^2}} \sim t_{n-2}\]</span></p>
+<p data-o006-id="O006-PSU-013-U0639">mengikuti distribusi <span class="math inline" data-o006-math-id="O006-PSU-013-M0310">\(T\)</span> dengan <span class="math inline" data-o006-math-id="O006-PSU-013-M0311">\(n-2\)</span> derajat kebebasan. Sekarang, penurunan selang kepercayaan bagi <span class="math inline" data-o006-math-id="O006-PSU-013-M0312">\(\beta\)</span> cukup dilakukan dengan manipulasi biasa pada bagian dalam pernyataan peluang:</p>
+<p data-o006-id="O006-PSU-013-U0640"><span class="math display" data-o006-math-id="O006-PSU-013-M0313">\[P\left(-t_{\alpha/2} \leq \dfrac{\hat{\beta}-\beta}{\sqrt{MSE/\sum (x_i-\bar{x})^2}} \leq t_{\alpha/2}\right)=1-\alpha\]</span></p>
+<p data-o006-id="O006-PSU-013-U0641">seperti yang hendak dibuktikan.</p>
+<p data-o006-id="O006-PSU-013-U0642">Selanjutnya, untuk selang kepercayaan bagi parameter intersep <span class="math inline" data-o006-math-id="O006-PSU-013-M0314">\(\alpha\)</span>.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="callout callout-style-simple callout-note no-icon" data-o006-id="O006-PSU-013-U0643">
+<div class="callout-body d-flex" data-o006-id="O006-PSU-013-U0644">
+<div class="callout-icon-container" data-o006-id="O006-PSU-013-U0645">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-body-container" data-o006-id="O006-PSU-013-U0646">
+<div class="theorem" data-o006-id="O006-PSU-013-U0647" id="thm-ciintercept">
+<p data-o006-id="O006-PSU-013-U0648"><span class="theorem-title"><strong>Teorema 12.9</strong></span> Di bawah asumsi model regresi linear sederhana, sebuah <span class="math inline" data-o006-math-id="O006-PSU-013-M0315">\((1-\alpha)100\%\)</span> selang kepercayaan bagi parameter intersep <span class="math inline" data-o006-math-id="O006-PSU-013-M0316">\(\alpha\)</span> adalah:</p>
+<p data-o006-id="O006-PSU-013-U0649"><span class="math display" data-o006-math-id="O006-PSU-013-M0317">\[a \pm t_{\alpha/2,n-2}\times \left(\sqrt{\dfrac{\hat{\sigma}^2}{n-2}}\right)\]</span></p>
+<p data-o006-id="O006-PSU-013-U0650">atau, secara ekuivalen:</p>
+<p data-o006-id="O006-PSU-013-U0651"><span class="math display" data-o006-math-id="O006-PSU-013-M0318">\[a \pm t_{\alpha/2,n-2}\times \left(\sqrt{\dfrac{MSE}{n}}\right)\]</span></p>
+<p data-o006-id="O006-PSU-013-U0652"><strong>Bukti</strong></p>
+<p data-o006-id="O006-PSU-013-U0653">Buktinya, yang mungkin muncul atau tidak muncul pada penilaian mendatang, diserahkan kepada Anda sebagai latihan.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="theorem example" data-o006-id="O006-PSU-013-U0654" id="exm-anchovies">
+<p data-o006-id="O006-PSU-013-U0655"><span class="theorem-title"><strong>Contoh 12.3</strong></span> Tabel berikut menunjukkan <span class="math inline" data-o006-math-id="O006-PSU-013-M0319">\(x\)</span>, yaitu hasil tangkapan ikan teri Peru (dalam juta ton metrik), dan <span class="math inline" data-o006-math-id="O006-PSU-013-M0320">\(y\)</span>, yaitu harga tepung ikan (dalam dolar berjalan per ton) selama 14 tahun berturut-turut. (Data dari Bardach, J. E. dan Santerre, R. M., “Climate and the Fish in the Sea”, Bioscience 31(3), 1981.)</p>
+<table aria-describedby="lesson12-table-3-caption" class="caption-top mx-auto reader-responsive-table row-header small table table-sm w-auto" data-o006-id="O006-PSU-013-U0656"><caption id="lesson12-table-3-caption">Tabel 12.3 — Harga tepung ikan dan hasil tangkapan ikan teri Peru selama 14 tahun.</caption>
+<thead data-o006-id="O006-PSU-013-U0657">
+<tr class="header" data-o006-id="O006-PSU-013-U0658">
+<th data-o006-id="O006-PSU-013-U0659" id="lesson12-table-3-col-1" scope="col">Baris</th>
+<th data-o006-id="O006-PSU-013-U0660" id="lesson12-table-3-col-2" scope="col">Harga</th>
+<th data-o006-id="O006-PSU-013-U0661" id="lesson12-table-3-col-3" scope="col">Tangkapan</th>
+</tr>
+</thead>
+<tbody data-o006-id="O006-PSU-013-U0662">
+<tr class="odd" data-o006-id="O006-PSU-013-U0663">
+<th data-o006-id="O006-PSU-013-U0664" scope="row">1</th>
+<td data-o006-id="O006-PSU-013-U0665">190</td>
+<td data-o006-id="O006-PSU-013-U0666">7.23</td>
+</tr>
+<tr class="even" data-o006-id="O006-PSU-013-U0667">
+<th data-o006-id="O006-PSU-013-U0668" scope="row">2</th>
+<td data-o006-id="O006-PSU-013-U0669">160</td>
+<td data-o006-id="O006-PSU-013-U0670">8.53</td>
+</tr>
+<tr class="odd" data-o006-id="O006-PSU-013-U0671">
+<th data-o006-id="O006-PSU-013-U0672" scope="row">3</th>
+<td data-o006-id="O006-PSU-013-U0673">134</td>
+<td data-o006-id="O006-PSU-013-U0674">9.82</td>
+</tr>
+<tr class="even" data-o006-id="O006-PSU-013-U0675">
+<th data-o006-id="O006-PSU-013-U0676" scope="row">4</th>
+<td data-o006-id="O006-PSU-013-U0677">129</td>
+<td data-o006-id="O006-PSU-013-U0678">10.26</td>
+</tr>
+<tr class="odd" data-o006-id="O006-PSU-013-U0679">
+<th data-o006-id="O006-PSU-013-U0680" scope="row">5</th>
+<td data-o006-id="O006-PSU-013-U0681">172</td>
+<td data-o006-id="O006-PSU-013-U0682">8.96</td>
+</tr>
+<tr class="even" data-o006-id="O006-PSU-013-U0683">
+<th data-o006-id="O006-PSU-013-U0684" scope="row">6</th>
+<td data-o006-id="O006-PSU-013-U0685">197</td>
+<td data-o006-id="O006-PSU-013-U0686">12.27</td>
+</tr>
+<tr class="odd" data-o006-id="O006-PSU-013-U0687">
+<th data-o006-id="O006-PSU-013-U0688" scope="row">7</th>
+<td data-o006-id="O006-PSU-013-U0689">167</td>
+<td data-o006-id="O006-PSU-013-U0690">10.28</td>
+</tr>
+<tr class="even" data-o006-id="O006-PSU-013-U0691">
+<th data-o006-id="O006-PSU-013-U0692" scope="row">8</th>
+<td data-o006-id="O006-PSU-013-U0693">239</td>
+<td data-o006-id="O006-PSU-013-U0694">4.45</td>
+</tr>
+<tr class="odd" data-o006-id="O006-PSU-013-U0695">
+<th data-o006-id="O006-PSU-013-U0696" scope="row">9</th>
+<td data-o006-id="O006-PSU-013-U0697">542</td>
+<td data-o006-id="O006-PSU-013-U0698">1.87</td>
+</tr>
+<tr class="even" data-o006-id="O006-PSU-013-U0699">
+<th data-o006-id="O006-PSU-013-U0700" scope="row">10</th>
+<td data-o006-id="O006-PSU-013-U0701">372</td>
+<td data-o006-id="O006-PSU-013-U0702">4.00</td>
+</tr>
+<tr class="odd" data-o006-id="O006-PSU-013-U0703">
+<th data-o006-id="O006-PSU-013-U0704" scope="row">11</th>
+<td data-o006-id="O006-PSU-013-U0705">245</td>
+<td data-o006-id="O006-PSU-013-U0706">3.30</td>
+</tr>
+<tr class="even" data-o006-id="O006-PSU-013-U0707">
+<th data-o006-id="O006-PSU-013-U0708" scope="row">12</th>
+<td data-o006-id="O006-PSU-013-U0709">376</td>
+<td data-o006-id="O006-PSU-013-U0710">4.30</td>
+</tr>
+<tr class="odd" data-o006-id="O006-PSU-013-U0711">
+<th data-o006-id="O006-PSU-013-U0712" scope="row">13</th>
+<td data-o006-id="O006-PSU-013-U0713">454</td>
+<td data-o006-id="O006-PSU-013-U0714">0.80</td>
+</tr>
+<tr class="even" data-o006-id="O006-PSU-013-U0715">
+<th data-o006-id="O006-PSU-013-U0716" scope="row">14</th>
+<td data-o006-id="O006-PSU-013-U0717">410</td>
+<td data-o006-id="O006-PSU-013-U0718">0.50</td>
+</tr>
+</tbody>
+</table>
+<p data-o006-id="O006-PSU-013-U0719">Tentukan selang kepercayaan 95% bagi parameter kemiringan <span class="math inline" data-o006-math-id="O006-PSU-013-M0321">\(\beta\)</span>.</p>
+<div class="card card-body bg-light ms-3 mb-3 pt-0" data-o006-id="O006-PSU-013-U0720">
+<section class="level4" data-o006-id="O006-PSU-013-U0721" id="solution-2">
+<h4 class="anchored" data-anchor-id="solution-2" data-o006-id="O006-PSU-013-U0722">Solusi</h4>
+<p data-o006-id="O006-PSU-013-U0723">Bagian keluaran berikut diperoleh menggunakan paket analisis regresi Minitab, dengan komponen yang berguna bagi kita ditandai (<span class="math inline" data-o006-math-id="O006-PSU-013-M0322">\(\hat{\beta} = -29.39\)</span> dan <span class="math inline" data-o006-math-id="O006-PSU-013-M0323">\(MSE = 5202\)</span>):</p>
+</section>
+<div class="minitab_output" data-o006-id="O006-PSU-013-U0724">
+<section class="level4" data-o006-id="O006-PSU-013-U0725" id="regression-equation">
+<h4 class="anchored" data-anchor-id="regression-equation" data-o006-id="O006-PSU-013-U0726">Persamaan Regresi</h4>
+<p data-o006-id="O006-PSU-013-U0727">Harga = 452,3 − 29,39 Tangkapan</p>
+</section>
+<section class="level4" data-o006-id="O006-PSU-013-U0728" id="coefficients">
+<h4 class="anchored" data-anchor-id="coefficients" data-o006-id="O006-PSU-013-U0729">Koefisien</h4>
+<table aria-describedby="lesson12-table-4-caption" class="caption-top reader-responsive-table row-header small table table-sm w-auto" data-o006-id="O006-PSU-013-U0730"><caption id="lesson12-table-4-caption">Tabel 12.4 — Koefisien regresi Minitab untuk contoh ikan teri.</caption>
+<colgroup>
+<col style="width: 19%"/>
+<col style="width: 15%"/>
+<col style="width: 17%"/>
+<col style="width: 17%"/>
+<col style="width: 17%"/>
+<col style="width: 11%"/>
+</colgroup>
+<thead data-o006-id="O006-PSU-013-U0731">
+<tr class="header" data-o006-id="O006-PSU-013-U0732">
+<th data-o006-id="O006-PSU-013-U0733" id="lesson12-table-4-col-1" scope="col">Suku</th>
+<th data-o006-id="O006-PSU-013-U0734" id="lesson12-table-4-col-2" scope="col" style="text-align: right;">Koef</th>
+<th data-o006-id="O006-PSU-013-U0735" id="lesson12-table-4-col-3" scope="col" style="text-align: right;">GB Koef</th>
+<th data-o006-id="O006-PSU-013-U0736" id="lesson12-table-4-col-4" scope="col" style="text-align: right;">Nilai-t</th>
+<th data-o006-id="O006-PSU-013-U0737" id="lesson12-table-4-col-5" scope="col" style="text-align: right;">Nilai-p</th>
+<th data-o006-id="O006-PSU-013-U0738" id="lesson12-table-4-col-6" scope="col" style="text-align: right;">VIF</th>
+</tr>
+</thead>
+<tbody data-o006-id="O006-PSU-013-U0739">
+<tr class="odd" data-o006-id="O006-PSU-013-U0740">
+<th data-o006-id="O006-PSU-013-U0741" scope="row">Konstanta</th>
+<td data-o006-id="O006-PSU-013-U0742" style="text-align: right;">452.3</td>
+<td data-o006-id="O006-PSU-013-U0743" style="text-align: right;">37.1</td>
+<td data-o006-id="O006-PSU-013-U0744" style="text-align: right;">12.18</td>
+<td data-o006-id="O006-PSU-013-U0745" style="text-align: right;">0.000</td>
+<td data-o006-id="O006-PSU-013-U0746" style="text-align: right;"></td>
+</tr>
+<tr class="even" data-o006-id="O006-PSU-013-U0747">
+<th data-o006-id="O006-PSU-013-U0748" scope="row">Tangkapan</th>
+<td data-o006-id="O006-PSU-013-U0749" style="text-align: right;"><span style="border: 1px solid blue; padding: 4px;"> -29.39 </span></td>
+<td data-o006-id="O006-PSU-013-U0750" style="text-align: right;">5.13</td>
+<td data-o006-id="O006-PSU-013-U0751" style="text-align: right;">-5.73</td>
+<td data-o006-id="O006-PSU-013-U0752" style="text-align: right;">0.000</td>
+<td data-o006-id="O006-PSU-013-U0753" style="text-align: right;">1.00</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section class="level4" data-o006-id="O006-PSU-013-U0754" id="model-summary">
+<h4 class="anchored" data-anchor-id="model-summary" data-o006-id="O006-PSU-013-U0755">Ringkasan Model</h4>
+<table aria-describedby="lesson12-table-5-caption" class="caption-top reader-responsive-table small table table-sm w-auto" data-o006-id="O006-PSU-013-U0756"><caption id="lesson12-table-5-caption">Tabel 12.5 — Ringkasan model regresi Minitab untuk contoh ikan teri.</caption>
+<thead data-o006-id="O006-PSU-013-U0757">
+<tr class="header" data-o006-id="O006-PSU-013-U0758">
+<th data-o006-id="O006-PSU-013-U0759" id="lesson12-table-5-col-1" scope="col" style="text-align: right;">S</th>
+<th data-o006-id="O006-PSU-013-U0760" id="lesson12-table-5-col-2" scope="col" style="text-align: right;">R-kuadrat</th>
+<th data-o006-id="O006-PSU-013-U0761" id="lesson12-table-5-col-3" scope="col" style="text-align: right;">R-kuadrat (disesuaikan)</th>
+<th data-o006-id="O006-PSU-013-U0762" id="lesson12-table-5-col-4" scope="col" style="text-align: right;">R-kuadrat (prediksi)</th>
+</tr>
+</thead>
+<tbody data-o006-id="O006-PSU-013-U0763">
+<tr class="odd" data-o006-id="O006-PSU-013-U0764">
+<td data-o006-id="O006-PSU-013-U0765" style="text-align: right;">72.1265</td>
+<td data-o006-id="O006-PSU-013-U0766" style="text-align: right;">73.22%</td>
+<td data-o006-id="O006-PSU-013-U0767" style="text-align: right;">70.98%</td>
+<td data-o006-id="O006-PSU-013-U0768" style="text-align: right;">61.97%</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section class="level4" data-o006-id="O006-PSU-013-U0769" id="analysis-of-variance">
+<h4 class="anchored" data-anchor-id="analysis-of-variance" data-o006-id="O006-PSU-013-U0770">Analisis Varians</h4>
+<table aria-describedby="lesson12-table-6-caption" class="caption-top reader-responsive-table row-header small table table-sm w-auto" data-o006-id="O006-PSU-013-U0771"><caption id="lesson12-table-6-caption">Tabel 12.6 — Analisis varians regresi Minitab untuk contoh ikan teri.</caption>
+<colgroup>
+<col style="width: 22%"/>
+<col style="width: 11%"/>
+<col style="width: 17%"/>
+<col style="width: 17%"/>
+<col style="width: 15%"/>
+<col style="width: 15%"/>
+</colgroup>
+<thead data-o006-id="O006-PSU-013-U0772">
+<tr class="header" data-o006-id="O006-PSU-013-U0773">
+<th data-o006-id="O006-PSU-013-U0774" id="lesson12-table-6-col-1" scope="col">Sumber</th>
+<th data-o006-id="O006-PSU-013-U0775" id="lesson12-table-6-col-2" scope="col" style="text-align: right;">DK</th>
+<th data-o006-id="O006-PSU-013-U0776" id="lesson12-table-6-col-3" scope="col" style="text-align: right;">JK Disesuaikan</th>
+<th data-o006-id="O006-PSU-013-U0777" id="lesson12-table-6-col-4" scope="col" style="text-align: right;">RK Disesuaikan</th>
+<th data-o006-id="O006-PSU-013-U0778" id="lesson12-table-6-col-5" scope="col" style="text-align: right;">Nilai-F</th>
+<th data-o006-id="O006-PSU-013-U0779" id="lesson12-table-6-col-6" scope="col" style="text-align: right;">Nilai-p</th>
+</tr>
+</thead>
+<tbody data-o006-id="O006-PSU-013-U0780">
+<tr class="odd" data-o006-id="O006-PSU-013-U0781">
+<th data-o006-id="O006-PSU-013-U0782" scope="row"><strong>Regresi</strong></th>
+<td data-o006-id="O006-PSU-013-U0783" style="text-align: right;"><strong>1</strong></td>
+<td data-o006-id="O006-PSU-013-U0784" style="text-align: right;"><strong>170655</strong></td>
+<td data-o006-id="O006-PSU-013-U0785" style="text-align: right;"><strong>170655</strong></td>
+<td data-o006-id="O006-PSU-013-U0786" style="text-align: right;"><strong>32.80</strong></td>
+<td data-o006-id="O006-PSU-013-U0787" style="text-align: right;"><strong>0.000</strong></td>
+</tr>
+<tr class="even" data-o006-id="O006-PSU-013-U0788">
+<th data-o006-id="O006-PSU-013-U0789" scope="row"> Tangkapan</th>
+<td data-o006-id="O006-PSU-013-U0790" style="text-align: right;">1</td>
+<td data-o006-id="O006-PSU-013-U0791" style="text-align: right;">170655</td>
+<td data-o006-id="O006-PSU-013-U0792" style="text-align: right;">170655</td>
+<td data-o006-id="O006-PSU-013-U0793" style="text-align: right;">32.80</td>
+<td data-o006-id="O006-PSU-013-U0794" style="text-align: right;">0.000</td>
+</tr>
+<tr class="odd" data-o006-id="O006-PSU-013-U0795">
+<th data-o006-id="O006-PSU-013-U0796" scope="row"><strong>Galat</strong></th>
+<td data-o006-id="O006-PSU-013-U0797" style="text-align: right;"><strong>12</strong></td>
+<td data-o006-id="O006-PSU-013-U0798" style="text-align: right;"><strong>62427</strong></td>
+<td data-o006-id="O006-PSU-013-U0799" style="text-align: right;"><span style="border: 1px solid blue; padding: 4px;"> <strong>5202</strong> </span></td>
+<td data-o006-id="O006-PSU-013-U0800" style="text-align: right;"></td>
+<td data-o006-id="O006-PSU-013-U0801" style="text-align: right;"></td>
+</tr>
+<tr class="even" data-o006-id="O006-PSU-013-U0802">
+<th data-o006-id="O006-PSU-013-U0803" scope="row"><strong>Total</strong></th>
+<td data-o006-id="O006-PSU-013-U0804" style="text-align: right;"><strong>13</strong></td>
+<td data-o006-id="O006-PSU-013-U0805" style="text-align: right;"><strong>233082</strong></td>
+<td data-o006-id="O006-PSU-013-U0806" style="text-align: right;"></td>
+<td data-o006-id="O006-PSU-013-U0807" style="text-align: right;"></td>
+<td data-o006-id="O006-PSU-013-U0808" style="text-align: right;"></td>
+</tr>
+</tbody>
+</table>
+</section>
+</div>
+<p data-o006-id="O006-PSU-013-U0809">Analisis deskriptif dasar Minitab juga dapat menghitung simpangan baku nilai <span class="math inline" data-o006-math-id="O006-PSU-013-M0324">\(x\)</span>, yaitu 3,91. Karena itu, rumus varians sampel memberi:</p>
+<p data-o006-id="O006-PSU-013-U0810"><span class="math display" data-o006-math-id="O006-PSU-013-M0325">\[\sum\limits_{i=1}^n (x_i-\bar{x})^2=197.5043214285714\]</span></p>
+<p data-o006-id="O006-PSU-013-U0811">Dengan menggabungkan semua komponen tersebut dan menggunakan fakta bahwa <span class="math inline" data-o006-math-id="O006-PSU-013-M0326">\(t_{0.025, 12}=2.179\)</span>, diperoleh:</p>
+<p data-o006-id="O006-PSU-013-U0812"><span class="math display" data-o006-math-id="O006-PSU-013-M0327">\[-29.3948251765 \pm 2.178812829 \sqrt{\dfrac{5202.2296650893}{197.5043214286}}\]</span></p>
+<p data-o006-id="O006-PSU-013-U0813">yang menyederhana menjadi: <span class="math inline" data-o006-math-id="O006-PSU-013-M0328">\(-29.3948251765 \pm 11.182177536\)</span> Artinya, kita dapat yakin 95% bahwa parameter kemiringan berada di antara −40,5770 dan −18,2126. Dengan kata lain, prosedur ini menghasilkan selang yang menyatakan penurunan harga rata-rata tepung ikan antara 18,2126 dan 40,5770 dolar per ton untuk setiap kenaikan satu unit (satu juta ton metrik) hasil tangkapan ikan teri Peru.</p><details class="target-only-reproducibility" data-o006-correction-id="O006-PSU-ADV-0237" open=""><summary>Reproduksi terbuka untuk data ikan teri yang ditampilkan</summary><pre><code class="language-r" data-o006-code-id="O006-PSU-ADV-0237-CODE01">catch &lt;- c(7.23,8.53,9.82,10.26,8.96,12.27,10.28,4.45,1.87,4.00,3.30,4.30,0.80,0.50)
+price &lt;- c(190,160,134,129,172,197,167,239,542,372,245,376,454,410)
+fit &lt;- lm(price ~ catch)
+sxx &lt;- sum((catch - mean(catch))^2)
+mse &lt;- deviance(fit) / df.residual(fit)
+tc &lt;- qt(0.975, df.residual(fit))
+c(slope=coef(fit)[2], Sxx=sxx, MSE=mse, slope_lo=coef(fit)[2]-tc*sqrt(mse/sxx), slope_hi=coef(fit)[2]+tc*sqrt(mse/sxx), intercept_lo=mean(price)-tc*sqrt(mse/length(price)), intercept_hi=mean(price)+tc*sqrt(mse/length(price)))
+</code></pre><p>Kontrak keluaran Base R: slope = −29,3948251765; Sxx = 197,5043214286; MSE = 5202,2296650893; selang kemiringan [−40,577002713; −18,212647640]; selang intersep terpusat [228,499866913; 312,500133087]. Perhitungan deterministik ini tidak memakai bilangan acak sehingga seed tidak diperlukan.</p></details>
+</div>
+</div>
+<div class="theorem example" data-o006-id="O006-PSU-013-U0814" id="exm-intercept">
+<p data-o006-id="O006-PSU-013-U0815"><span class="theorem-title"><strong>Contoh 12.4</strong></span> Tentukan selang kepercayaan 95% bagi parameter intersep <span class="math inline" data-o006-math-id="O006-PSU-013-M0329">\(\alpha\)</span>.</p>
+<section class="level4 card card-body bg-light ms-3 mb-3 pt-0" data-o006-id="O006-PSU-013-U0816" id="solution-3">
+<h4 class="anchored" data-anchor-id="solution-3" data-o006-id="O006-PSU-013-U0817">Solusi</h4>
+<p data-o006-id="O006-PSU-013-U0818">Kita dapat menggunakan Minitab (atau kalkulator) untuk menentukan bahwa rataan 14 respons adalah:</p>
+<p data-o006-id="O006-PSU-013-U0819"><span class="math display" data-o006-math-id="O006-PSU-013-M0330">\[\dfrac{190+160+\cdots +410}{14}=270.5\]</span></p>
+<p data-o006-id="O006-PSU-013-U0820">Dengan menggunakan nilai tersebut dan <span class="math inline" data-o006-math-id="O006-PSU-013-M0331">\(MSE = 5202.2296650893\)</span> yang diperoleh dari keluaran di atas, serta fakta bahwa <span class="math inline" data-o006-math-id="O006-PSU-013-M0332">\(t_{0.025,12} = 2.179\)</span>, diperoleh:</p>
+<p data-o006-id="O006-PSU-013-U0821"><span class="math display" data-o006-math-id="O006-PSU-013-M0333">\[270.5 \pm 2.178812829 \sqrt{\dfrac{5202.2296650893}{14}}\]</span></p>
+<p data-o006-id="O006-PSU-013-U0822">yang menyederhana menjadi <span class="math inline" data-o006-math-id="O006-PSU-013-M0334">\(270.5 \pm 42.000133087\)</span> Artinya, kita dapat yakin 95% bahwa parameter intersep berada di antara 228,4999 dan 312,5001 dolar per ton.</p>
+</section>
+</div>
+</section>
+<section class="level2" data-number="12.6" data-o006-id="O006-PSU-013-U0823" id="hypothesis-tests-concerning-slope">
+<h2 class="anchored" data-anchor-id="hypothesis-tests-concerning-slope" data-number="12.6" data-o006-id="O006-PSU-013-U0824"><span class="header-section-number">12.6</span> Uji Hipotesis Mengenai Kemiringan</h2>
+<p data-o006-id="O006-PSU-013-U0825">Sebelumnya, kita telah mempelajari cara menghitung nilai dugaan titik dan selang bagi parameter intersep dan kemiringan, <span class="math inline" data-o006-math-id="O006-PSU-013-M0335">\(\alpha\)</span> dan <span class="math inline" data-o006-math-id="O006-PSU-013-M0336">\(\beta\)</span>, dari model regresi linear sederhana:</p>
+<p data-o006-id="O006-PSU-013-U0826"><span class="math display" data-o006-math-id="O006-PSU-013-M0337">\[Y_i=\alpha+\beta(x_i-\bar{x})+\epsilon_i\]</span></p>
+<p data-o006-id="O006-PSU-013-U0827">dengan galat acak <span class="math inline" data-o006-math-id="O006-PSU-013-M0338">\(\epsilon_i\)</span> mengikuti distribusi normal dengan rataan 0 dan varians <span class="math inline" data-o006-math-id="O006-PSU-013-M0339">\(\sigma^2\)</span>. Dalam pelajaran ini, kita akan mempelajari cara melakukan uji hipotesis untuk menguji hipotesis nol bahwa parameter kemiringan sama dengan suatu nilai, misalnya <span class="math inline" data-o006-math-id="O006-PSU-013-M0340">\(\beta_0\)</span>. Secara khusus, kita akan mempelajari cara menguji hipotesis nol <span class="math inline" data-o006-math-id="O006-PSU-013-M0341">\(H_0:\beta=\beta_0\)</span> menggunakan statistik <span class="math inline" data-o006-math-id="O006-PSU-013-M0342">\(T\)</span>-t.</p>
+<p data-o006-id="O006-PSU-013-U0828">Sekali lagi, sebagian besar landasan teoretis untuk mengembangkan uji hipotesis bagi parameter kemiringan <span class="math inline" data-o006-math-id="O006-PSU-013-M0343">\(\beta\)</span> dari model regresi linear sederhana telah dikerjakan ketika kita mengembangkan selang kepercayaan <span class="math inline" data-o006-math-id="O006-PSU-013-M0344">\((1-\alpha)100\%\)</span> bagi <span class="math inline" data-o006-math-id="O006-PSU-013-M0345">\(\beta\)</span>. Saat itu, kita telah menunjukkan bahwa:</p>
+<p data-o006-id="O006-PSU-013-U0829"><span class="math display" data-o006-math-id="O006-PSU-013-M0346">\[T=\dfrac{\hat{\beta}-\beta}{\sqrt{\frac{MSE}{\sum(x_i-\bar{x})^2}}}\]</span></p>
+<p data-o006-id="O006-PSU-013-U0830">mengikuti distribusi <span class="math inline" data-o006-math-id="O006-PSU-013-M0347">\(t_{n-2}\)</span> . Karena itu, jika kita ingin menguji hipotesis nol:</p>
+<p data-o006-id="O006-PSU-013-U0831"><span class="math display" data-o006-math-id="O006-PSU-013-M0348">\[H_0:\beta=\beta_0\]</span></p>
+<p data-o006-id="O006-PSU-013-U0832">terhadap salah satu hipotesis alternatif:</p>
+<p data-o006-id="O006-PSU-013-U0833"><span class="math display" data-o006-math-id="O006-PSU-013-M0349">\[H_A:\beta &gt; \beta_0, \qquad H_A:\beta &lt; \beta_0,\qquad H_A:\beta \ne \beta_0\]</span></p>
+<p data-o006-id="O006-PSU-013-U0834">kita dapat menggunakan statistik uji:</p>
+<p data-o006-id="O006-PSU-013-U0835"><span class="math display" data-o006-math-id="O006-PSU-013-M0350">\[t=\dfrac{\hat{\beta}-\beta_0}{\sqrt{\frac{MSE}{\sum(x_i-\bar{x})^2}}}\]</span></p>
+<p data-o006-id="O006-PSU-013-U0836">dan mengikuti prosedur pengujian hipotesis baku.</p>
+</section>
+<section class="level2" data-number="12.7" data-o006-id="O006-PSU-013-U0837" id="summary">
+<h2 class="anchored" data-anchor-id="summary" data-number="12.7" data-o006-id="O006-PSU-013-U0838"><span class="header-section-number">12.7</span> Ringkasan</h2><aside class="target-only-note mastery-companion-note" data-o006-correction-id="O006-PSU-ADV-0242" role="note">Batas pendamping: sumber ini tidak menyediakan korpus latihan mandiri, diagnostik sisaan, selang rataan-respons/prediksi, regresi berganda, maupun kontrak R/Minitab yang lengkap. Permukaan tersebut tetap wajib dalam pendamping orisinal C140 dan tidak diatribusikan kepada Penn State.</aside>
+<p data-o006-id="O006-PSU-013-U0839">Pelajaran ini membahas pokok-pokok regresi linear sederhana, yaitu metode untuk memodelkan hubungan linear antara prediktor (x) dan respons (y).</p>
+<p data-o006-id="O006-PSU-013-U0840">Pokok-pokok pentingnya meliputi:</p>
+<ul data-o006-id="O006-PSU-013-U0841">
+<li data-o006-id="O006-PSU-013-U0842">Memodelkan tren linear yang memiliki pencaran dengan metode kuadrat terkecil untuk menemukan garis dengan suaian terbaik.</li>
+<li data-o006-id="O006-PSU-013-U0843">Menduga intersep (a) dan kemiringan (b) untuk menghampiri parameter populasi <span class="math inline" data-o006-math-id="O006-PSU-013-M0351">\(\alpha\)</span> dan <span class="math inline" data-o006-math-id="O006-PSU-013-M0352">\(\beta\)</span>.</li>
+<li data-o006-id="O006-PSU-013-U0844">Asumsi (LINE): (L)inearitas, (I)ndependensi, (N)ormalitas, dan (E)qual variances atau varians yang sama.</li>
+<li data-o006-id="O006-PSU-013-U0845">Menggunakan selang kepercayaan dan uji-t untuk inferensi parameter regresi.</li>
+<li data-o006-id="O006-PSU-013-U0846">Menggunakan alat seperti R atau Minitab untuk menganalisis data dunia nyata dan menafsirkan hasilnya.</li>
+</ul>
+</section>
+<section class="component-provenance" data-o006-component-provenance-id="O006-PSU-013-PROV"><h2 id="lesson12-provenance-rights">Provenance, hak, dan perubahan</h2><p>Sumber resmi: Penn State STAT 415, Pelajaran 12, “Simple Linear Regression”, <a href="https://online.stat.psu.edu/stat415/Lesson12.html" rel="external noopener">laman sumber</a>. Isi tingkat laman berlisensi CC BY-NC 4.0 kecuali jika dinyatakan lain; setiap pengecualian komponen tetap berlaku.</p><p>Edisi Bahasa Indonesia ini merupakan karya turunan: struktur, rumus, tabel, gambar, sitasi, dan identitas sumber dipertahankan; 24 koreksi atau disposisi target-only dicatat secara terpisah. Tidak ada dukungan atau pengesahan oleh sumber yang tersirat.</p><p>Provenance terjemahan dan rekonstruksi: OpenAI Codex gpt-5.6-sol, Ultra. Kredit sumber dan kontributor manusia tetap dipertahankan.</p></section></main></div>
+<footer class="site-footer"><div class="site-footer__inner">Konten sumber: Departemen Statistika Penn State, CC BY-NC 4.0 kecuali dinyatakan lain. Terjemahan dan rekonstruksi: OpenAI Codex gpt-5.6-sol, Ultra. Tidak ada dukungan atau pengesahan yang tersirat.</div></footer>
+</body>
+</html>

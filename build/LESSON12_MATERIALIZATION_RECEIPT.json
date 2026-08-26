@@ -1,0 +1,120 @@
+{
+  "component_id": "Lesson12",
+  "counts": {
+    "component_provenance_blocks": 1,
+    "external_video_runtimes": 0,
+    "image_occurrences": 10,
+    "native_id_map_records": 16,
+    "offline_video_equivalents": 3,
+    "registered_repaired_source_math": 19,
+    "registered_target_corrections": 24,
+    "semantic_tables": 6,
+    "stable_source_math": 352,
+    "stable_source_units": 846,
+    "table_captions": 6,
+    "translation_segments": 580,
+    "unique_frozen_images": 9
+  },
+  "document_id": "O006-PSU-013",
+  "inputs": [
+    {
+      "bytes": 131257,
+      "path": "source/normalized/en-US/Lesson12.html",
+      "sha256": "6487d64f7ccd1f041357c6d18ec95036bc50eeffcd5eb9068b556775ded373dc"
+    },
+    {
+      "bytes": 140789,
+      "path": "source/id-ID/lesson12_translation.csv",
+      "sha256": "a87a42c2aebb2ae38910c75ae354d07b862f6113cb063474bfbb7c8a1ac00531"
+    },
+    {
+      "bytes": 279013,
+      "path": "backend/lesson12_translation_bindings.jsonl",
+      "sha256": "f6c64c31aa0514f4b386efa182cfcac128076b3e58f2ddf0bee75d51f229730c"
+    },
+    {
+      "bytes": 3748,
+      "path": "build/LESSON12_TRANSLATION_RECEIPT.json",
+      "sha256": "8343d09c7490394a0ed373791b72e910c1d42b0a293c9ab30af922d1fcd4489b"
+    },
+    {
+      "bytes": 9727,
+      "path": "build/LESSON12_NORMALIZATION_RECEIPT.json",
+      "sha256": "d9b97395f9cae5412879fa63d8e16f59241d3883b4a90f7931c13cfcd47d3283"
+    },
+    {
+      "bytes": 5007,
+      "path": "authority/LESSON12_ASSET_MANIFEST.csv",
+      "sha256": "47dc68c12a8eedc0a10a0010c7c73346dd2b8a8e4ef5f3ff9d769c24a9764c2a"
+    },
+    {
+      "bytes": 17698,
+      "path": "scripts/materialize_lesson12_translation.py",
+      "sha256": "21b919f95a2378632217d7e3e06bbd6b1b10d1b5df09bd37b26ca7a39ae13d21"
+    },
+    {
+      "bytes": 32234,
+      "path": "scripts/lesson12_corrections.py",
+      "sha256": "3e5c344b418083d0b545b4e477030a9c5a2539d20e6dcda312effa5c0020d5ba"
+    }
+  ],
+  "locale": "id-ID",
+  "outputs": {
+    "backend/lesson12_target_corrections.jsonl": {
+      "bytes": 26292,
+      "records": 24,
+      "sha256": "7e89a78da57d69d7524128cc79685f46e8001c1b886a213229364df28261f34e"
+    },
+    "backend/lesson12_target_native_id_map.jsonl": {
+      "bytes": 4848,
+      "records": 16,
+      "sha256": "2717f9b954a6db45fe2ff638d995ecbb6f231f9e4e1954a16bcdb34dbf9800cc"
+    },
+    "source/id-ID/Lesson12.html": {
+      "bytes": 146789,
+      "sha256": "6cd3218f6d1a613f1ea9d1459c5506ea8b24f37340a3ee26f17bc18504dd5965"
+    }
+  },
+  "registered_repaired_math_ids": [
+    "O006-PSU-013-M0056",
+    "O006-PSU-013-M0059",
+    "O006-PSU-013-M0060",
+    "O006-PSU-013-M0136",
+    "O006-PSU-013-M0210",
+    "O006-PSU-013-M0234",
+    "O006-PSU-013-M0236",
+    "O006-PSU-013-M0241",
+    "O006-PSU-013-M0260",
+    "O006-PSU-013-M0272",
+    "O006-PSU-013-M0281",
+    "O006-PSU-013-M0283",
+    "O006-PSU-013-M0285",
+    "O006-PSU-013-M0325",
+    "O006-PSU-013-M0327",
+    "O006-PSU-013-M0328",
+    "O006-PSU-013-M0331",
+    "O006-PSU-013-M0333",
+    "O006-PSU-013-M0334"
+  ],
+  "schema": "o006.stat415.lesson12-materialization.v1",
+  "status": "pass",
+  "translation_provenance": "OpenAI Codex gpt-5.6-sol, Ultra",
+  "validation": {
+    "all_registered_repairs_dispositioned": true,
+    "authority_unchanged": true,
+    "duplicate_target_ids_removed_with_reversible_map": true,
+    "external_video_runtime_removed": true,
+    "frozen_images_byte_bound": true,
+    "images_centered_responsive_and_dimensioned": true,
+    "numerical_recalculation_reproducible": true,
+    "source_credit_license_and_change_notice_visible": true,
+    "source_math_ids_preserved": true,
+    "source_segment_bindings_exact": true,
+    "source_stable_ids_preserved": true,
+    "tables_captioned_and_scoped": true,
+    "target_id_references_resolve": true,
+    "target_local_paths_resolve": true,
+    "unregistered_source_math_unchanged": true,
+    "video_bytes_redistributed": false
+  }
+}

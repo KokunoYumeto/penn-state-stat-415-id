@@ -1,0 +1,613 @@
+segment_id,document_id,component_id,section_id,source_sha256,source_text,target_text,status
+O006-PSU-013-S0001,O006-PSU-013,Lesson12,,cb4ad503e340ebd1a921e3ed6dcbfc0a80660936d8bfc9d190f70694b9ccb51b,Lessons,,pending
+O006-PSU-013-S0002,O006-PSU-013,Lesson12,,82f4d4283b7c817a0802025cad2cce76ae39f51dd420403bdb58b1987f473159,Simple Linear Regression,,pending
+O006-PSU-013-S0003,O006-PSU-013,Lesson12,,82f4d4283b7c817a0802025cad2cce76ae39f51dd420403bdb58b1987f473159,Simple Linear Regression,,pending
+O006-PSU-013-S0004,O006-PSU-013,Lesson12,,f9f0955ea4a62478023055e8ef7ad1dde05e6742688eb5e5bc8990a2f4295815,Regression,,pending
+O006-PSU-013-S0005,O006-PSU-013,Lesson12,overview,d4b1ea5708dd532930a85188b45aff6f0a3ed458500c7577e0127a538eb0d100,Overview,,pending
+O006-PSU-013-S0006,O006-PSU-013,Lesson12,overview,6e3fca4873438106ff20ad22a342e7f9e0915a304f1c76120e7d61704ed9d395,"Simple linear regression is a way of evaluating the relationship between two continuous variables. One variable is regarded as the predictor variable, explanatory variable, or independent variable ( ). The other variable is regarded as the response variable, outcome variable, or dependent variable.",,pending
+O006-PSU-013-S0007,O006-PSU-013,Lesson12,overview,eb9c18d37054088cba5c61aaf30c95846eaf2b89e69da1d3b80ab360fcd83352,"For example, we might we interested in investigating the (linear?) relationship between:",,pending
+O006-PSU-013-S0008,O006-PSU-013,Lesson12,overview,a17cc1ea601088540377117f3f2d83ee779273d5280f9159e6bce8c54de816e5,heights and weights,,pending
+O006-PSU-013-S0009,O006-PSU-013,Lesson12,overview,6e15f4b8cd31a55f1e73deb34a9ecb7b9e9cb4a90f27e5faaec368698655e520,high school grade point average and college grade point average,,pending
+O006-PSU-013-S0010,O006-PSU-013,Lesson12,overview,12dab18df7b6a84c047d2101d9e6c5f53c6ac33d61da938a0f8c3247b8506197,speed and gas mileage,,pending
+O006-PSU-013-S0011,O006-PSU-013,Lesson12,overview,916c36a109bab2ca906fdb8f63b5e9dd39a31759f24d92f415f3f3a677187bc8,outdoor temperature and evaporation rate,,pending
+O006-PSU-013-S0012,O006-PSU-013,Lesson12,overview,d46336aa3039a8920f338a8e12266fac9950cf0503dd2f7589a62669091a86a6,the Dow Jones industrial average and the consumer confidence index,,pending
+O006-PSU-013-S0013,O006-PSU-013,Lesson12,objectives,eba92953899468e3f79c084370cc455f39c256e77b5277ff480e3384ff9ecc27,Objectives,,pending
+O006-PSU-013-S0014,O006-PSU-013,Lesson12,objectives,25aef8be8be2a587942663b20614423b057589f18636ba6d72bd7bf691a84629,"Upon completion of this lesson, you should be able to:",,pending
+O006-PSU-013-S0015,O006-PSU-013,Lesson12,objectives,a9bd48a87fff5dedb334dcdb68d45bf472b7d67ef346ee004dba46474981c196,"Formulate and interpret linear regression models for predicting outcomes based on one predictor variable,",,pending
+O006-PSU-013-S0016,O006-PSU-013,Lesson12,objectives,49b2a47869120015528e2e2483d2bd143527e7494983ff20efecd1294659035d,"Find the distribution of the least square parameters,",,pending
+O006-PSU-013-S0017,O006-PSU-013,Lesson12,objectives,706cdd2eb7fb02ca66d1b9a9c105d1f4a732f6e2d910fed7ab46e93bd1a95731,"Conduct a hypothesis test or construct a confidence interval for the least square parameters, and",,pending
+O006-PSU-013-S0018,O006-PSU-013,Lesson12,objectives,38628776fd5c65662c77c14a99a537c6c9c79b15f346c12a71baf3bc689de7ce,Construct a confidence interval or a conduct a hypothesis test for the correlation parameter ,,pending
+O006-PSU-013-S0019,O006-PSU-013,Lesson12,types-of-relationships,0013205ef2377a8c134cedfd31f1548a62fd91ce9eab35dff93249cfba617f2f, Types of Relationships,,pending
+O006-PSU-013-S0020,O006-PSU-013,Lesson12,types-of-relationships,5f1820b19027c01df000a38bdbe9c77cebf08bb7d8071378f98da7aad720b087,"Before we dig into the methods of simple linear regression, we need to distinguish between two different type of relationships, namely:",,pending
+O006-PSU-013-S0021,O006-PSU-013,Lesson12,types-of-relationships,1e67e94414f2e10ea5e249f42707e5d24dfedcbc653d4734e1d357ed8e81c3db,deterministic relationships,,pending
+O006-PSU-013-S0022,O006-PSU-013,Lesson12,types-of-relationships,e0665ba839e2ab730ead96d8bd7934728b9aa7c5641252f325624fabc4b5f973,statistical relationships,,pending
+O006-PSU-013-S0023,O006-PSU-013,Lesson12,types-of-relationships,c070fb5ccd04ceed3ac4d37c174223345244ebc01e6fc88699b9d5b69eb0c2a7,"As we’ll soon see, simple linear regression concerns statistical relationships.",,pending
+O006-PSU-013-S0024,O006-PSU-013,Lesson12,deterministic-or-functional-relationships,a96a4f422ae66a3a1ba924ec84135981007f7971a25cd3950334650760fbcdc5, Deterministic (or Functional Relationships),,pending
+O006-PSU-013-S0025,O006-PSU-013,Lesson12,deterministic-or-functional-relationships,7a7202fb1b53105f00a4308223160a22fd287678fcc8cf3681a36a57ee85e75a,A ,,pending
+O006-PSU-013-S0026,O006-PSU-013,Lesson12,deterministic-or-functional-relationships,0badac3c6df445ad3aea62da1350683923aba37c685978afed96a515d12921a3,deterministic,,pending
+O006-PSU-013-S0027,O006-PSU-013,Lesson12,deterministic-or-functional-relationships,0eeec5825598ae58e7dfc491e25c4304be9f82d83d110b5d1fb1630950bfd608, (or ,,pending
+O006-PSU-013-S0028,O006-PSU-013,Lesson12,deterministic-or-functional-relationships,3b637864e75ab14ebba72b7f39d73be2ec309d571e807fc1170290353b214d78,functional,,pending
+O006-PSU-013-S0029,O006-PSU-013,Lesson12,deterministic-or-functional-relationships,28d9e7bbbf81137ec80d8e02241329c02d7f629960e3afd7379d4e3855d7d662,relationship,,pending
+O006-PSU-013-S0030,O006-PSU-013,Lesson12,deterministic-or-functional-relationships,c85d354ae47f067d28aad58c9244daccb471cdf46b15ffeb2f9d2447f771a331, is an exact relationship between the predictor ,,pending
+O006-PSU-013-S0031,O006-PSU-013,Lesson12,deterministic-or-functional-relationships,a1c36603dca3b837c365d28458418812b27125de75ee26044edfbdf479716810, and the response ,,pending
+O006-PSU-013-S0032,O006-PSU-013,Lesson12,deterministic-or-functional-relationships,733563db509e5e14047eca9edd7ba36209969ab599660d4975ab9328610f3fca,". Take, for instance, the conversion relationship between temperature in degrees Celsius (",,pending
+O006-PSU-013-S0033,O006-PSU-013,Lesson12,deterministic-or-functional-relationships,3919521e625685e55cabb2515c3c7ffacbf6f59899c05c2b149a12d94edae432,) and temperature in degrees Fahrenheit (,,pending
+O006-PSU-013-S0034,O006-PSU-013,Lesson12,deterministic-or-functional-relationships,797de4607e2c7e87de8204855ca9968b22239a548c478720121b0789adde14e3,). We know the relationship is:,,pending
+O006-PSU-013-S0035,O006-PSU-013,Lesson12,deterministic-or-functional-relationships,d5c79a30312bd7b86c7ce204982ae07fa00927880aa960e8dc4e316e7e3e58c6,"Therefore, if we know that it is 10 degrees Celsius, we also know that it is 50 degrees Fahrenheit:",,pending
+O006-PSU-013-S0036,O006-PSU-013,Lesson12,deterministic-or-functional-relationships,93c82b8441a2cd774f7e80c71909c4f4488fb7eb8850d3886ddd9c4553a02b19,This is what the exact (linear) relationship between degrees Celsius and degrees Fahrenheit looks like graphically:,,pending
+O006-PSU-013-S0037,O006-PSU-013,Lesson12,deterministic-or-functional-relationships,557476b1f82c03c07bfee8a108db2cf802bbdfc9a95ec50bb718dd67eaafc114,"
+Fig 12.1
+",,pending
+O006-PSU-013-S0038,O006-PSU-013,Lesson12,deterministic-or-functional-relationships,189d3885ef185c82c761997f67d5b927891527b84d7cc015aa8ddec63c5089cd,Other examples of deterministic relationships include…,,pending
+O006-PSU-013-S0039,O006-PSU-013,Lesson12,deterministic-or-functional-relationships,8169305f2cbc534cdf390a1d55b511bbba315e894763b481be25e083645ac92b,the relationship between the diameter (,,pending
+O006-PSU-013-S0040,O006-PSU-013,Lesson12,deterministic-or-functional-relationships,6a797dc1129cc8303f0659e91ac0a69d2c476a9bb427e653fa5de887c7c63c90,) and circumference of a circle (,,pending
+O006-PSU-013-S0041,O006-PSU-013,Lesson12,deterministic-or-functional-relationships,afdeeaf6b6c5cab12cec684fa9dc890ed047c5fc5ef8b3bf6f45ab7e74ee457f,the relationship between the applied weight (,,pending
+O006-PSU-013-S0042,O006-PSU-013,Lesson12,deterministic-or-functional-relationships,ced539df6326d23e35726c14f7e89045e834b63d7e0dc020e6132265d0a1a19e,) and the amount of stretch in a spring (,,pending
+O006-PSU-013-S0043,O006-PSU-013,Lesson12,deterministic-or-functional-relationships,119a983ae25b03a06d22f8bc90ee37efab983237ba226e5fc7c07959887b443c,) (known as Hooke’s Law): ,,pending
+O006-PSU-013-S0044,O006-PSU-013,Lesson12,deterministic-or-functional-relationships,dd44e48834a6c9adecf05862951c781282d4fc0cdb53d3c5fc11b9c4780a33d5,the relationship between the voltage applied (,,pending
+O006-PSU-013-S0045,O006-PSU-013,Lesson12,deterministic-or-functional-relationships,2111364531f71b80675993866070cfeb78ff9fa3333d86fef6f9b5497a7d6605,"), the resistance (",,pending
+O006-PSU-013-S0046,O006-PSU-013,Lesson12,deterministic-or-functional-relationships,881a52ba13b4dd5baf32718d23f2ca574a1d05c17a32ff390d7aca90abc2768b,) and the current (,,pending
+O006-PSU-013-S0047,O006-PSU-013,Lesson12,deterministic-or-functional-relationships,bee3c825191f447976acb8be2d0e6bd8e8b5d18be86705b649272e181c38f64e,) (known as Ohm’s Law): ,,pending
+O006-PSU-013-S0048,O006-PSU-013,Lesson12,deterministic-or-functional-relationships,c11da90bc5bc6f6010af3ffddbbc38116853fcdb8b57c4cfc2a4431d75729da3,"and, for a constant temperature, the relationship between pressure (",,pending
+O006-PSU-013-S0049,O006-PSU-013,Lesson12,deterministic-or-functional-relationships,fda29b585e0a3a747dbef5f905de14a1dd558a25504eeaab6946c2b050a6c054,) and volume of gas (,,pending
+O006-PSU-013-S0050,O006-PSU-013,Lesson12,deterministic-or-functional-relationships,3dcbf919fe92175fa815cd41df8c6d27c03377d39bab8334ca76785587b26248,) (known as Boyle’s Law): ,,pending
+O006-PSU-013-S0051,O006-PSU-013,Lesson12,deterministic-or-functional-relationships,3458f758ca399139fd3d8915dddd39ce62d0109a1fb2314e401d2e21bb568103, where ,,pending
+O006-PSU-013-S0052,O006-PSU-013,Lesson12,deterministic-or-functional-relationships,22c6d2a9e0549b6e01ae2bd8677907e136675b2b5b17ab6f066b7071fd2bf4ea, is a known constant for each gas.,,pending
+O006-PSU-013-S0053,O006-PSU-013,Lesson12,statistical-relationships,54040ba6b401199a1bfc6093bccaa6c3456b739af49cbb9e3144db8313c10e56, Statistical Relationships,,pending
+O006-PSU-013-S0054,O006-PSU-013,Lesson12,statistical-relationships,7a7202fb1b53105f00a4308223160a22fd287678fcc8cf3681a36a57ee85e75a,A ,,pending
+O006-PSU-013-S0055,O006-PSU-013,Lesson12,statistical-relationships,46b0df9cefdf21e8a86d1396ff4b2aa5a9e8083d4c1829781d4d6c4e8372b0be,statistical relationship,,pending
+O006-PSU-013-S0056,O006-PSU-013,Lesson12,statistical-relationships,083268d9f752e019a79022a3f5b29ef0bca1c32b0215d7bfefaf747134a2337b,", on the other hand, is not an exact relationship. It is instead a relationship in which “",,pending
+O006-PSU-013-S0057,O006-PSU-013,Lesson12,statistical-relationships,2ab022d82080f5d941e001194e7e9d7c49a84eaafd644b02344f4fdc985ca1e4,trend,,pending
+O006-PSU-013-S0058,O006-PSU-013,Lesson12,statistical-relationships,0bcf030d7501b63c1b0cd66da2f87cc1ca071d7460a32a49c1fc9647fe33b61a,” exists between the predictor ,,pending
+O006-PSU-013-S0059,O006-PSU-013,Lesson12,statistical-relationships,a1c36603dca3b837c365d28458418812b27125de75ee26044edfbdf479716810, and the response ,,pending
+O006-PSU-013-S0060,O006-PSU-013,Lesson12,statistical-relationships,f40202783c11ff8cf5d0026f0af3df0e7dbcbcf10e66b425e58fbb8ad2316c6a,", but there is also some “",,pending
+O006-PSU-013-S0061,O006-PSU-013,Lesson12,statistical-relationships,e1f92433f754e9f1213d5bdcc3c1b89881a89e9ab4ce8b06c09dcdbfc41f287e,scatter,,pending
+O006-PSU-013-S0062,O006-PSU-013,Lesson12,statistical-relationships,316ad179d3d263c962d30a7dbb1b0b8e689a69e762c062243e49dc016f0c63cd,.” Here’s a graph illustrating how a statistical relationship might look:,,pending
+O006-PSU-013-S0063,O006-PSU-013,Lesson12,statistical-relationships,9947979c105f429e33ee0b8cc45105412c149f198bd19296d998e18d8468223b,"
+Fig 12.2
+",,pending
+O006-PSU-013-S0064,O006-PSU-013,Lesson12,statistical-relationships,398b1c3173d6dfd48020b9bb59731e0629148804517054b986fddb1534333b93,"In this case, researchers investigated the relationship between the latitude (in degrees) at the center of each of the 50 U.S. states and the mortality (in deaths per 10 million) due to skin cancer in each of the 50 U.S. states. Perhaps we shouldn’t be surprised to see a downward trend, but not an exact relationship, between latitude and skin cancer mortality. That is, as the latitude increases for the northern states, in which sun exposure is less prevalent and less intense, mortality due to skin cancer decreases, but not perfectly so.",,pending
+O006-PSU-013-S0065,O006-PSU-013,Lesson12,statistical-relationships,e25778402e91eb746e0b85144120facc7dbc1c1ed678c1bab3cd802bd08a148e,Other examples of statistical relationships include:,,pending
+O006-PSU-013-S0066,O006-PSU-013,Lesson12,statistical-relationships,077fd37d5b91f0eda738c54ad8425e762baf80b452a3cbb3b217e0dfe7c5c092,the positive relationship between height and weight,,pending
+O006-PSU-013-S0067,O006-PSU-013,Lesson12,statistical-relationships,3beb8fb781f7f20864414ec27d03544974142cc708cdb9be501c29787a008ad0,the positive relationship between alcohol consumed and blood alcohol content,,pending
+O006-PSU-013-S0068,O006-PSU-013,Lesson12,statistical-relationships,84b8817e351af08306693bc19596d77860b7fac43da2b489e2e3fb6f1172b4db,the negative relationship between vital lung capacity and pack-years of smoking,,pending
+O006-PSU-013-S0069,O006-PSU-013,Lesson12,statistical-relationships,0d2b180d92c53c269333a09978ad50c877c245ce185929899be82c4d681a852c,the negative relationship between driving speed and gas mileage,,pending
+O006-PSU-013-S0070,O006-PSU-013,Lesson12,statistical-relationships,edd387f4e80862aaa8795610d237e98e4188e52fac2681f9f2e45736a32f930a,It is these type of less-than-perfect statistical relationships that we are interested in when we investigate the methods of simple linear regression.,,pending
+O006-PSU-013-S0071,O006-PSU-013,Lesson12,least-squares-the-idea,46e481da4d00a0c41ba662809495d9a473756bcabdd7ebd94875e3f57e44f6e5, Least Squares: The Idea,,pending
+O006-PSU-013-S0072,O006-PSU-013,Lesson12,least-squares-the-idea,70b60e639bb514fe0539058664e461e2cc4aef7f3736930fd709897d5f287dab,"Before delving into the theory of least squares, let’s motivate the idea behind the method of least squares by way of example.",,pending
+O006-PSU-013-S0073,O006-PSU-013,Lesson12,least-squares-the-idea,b21d05f3df97565ba66e2fb2c4054bd5397accdaac77a4e35ee19d057f7d343d,Example 12.1,,pending
+O006-PSU-013-S0074,O006-PSU-013,Lesson12,least-squares-the-idea,cd766c28848be34997fe680939298a77afa11ca3f1f7141c4026b5a679a1bf1d," A student was interested in quantifying the (linear) relationship between height (in inches) and weight (in pounds), so she measured the height and weight of ten randomly selected students in her class. After taking the measurements, she created the adjacent scatterplot of the obtained heights and weights. Wanting to summarize the relationship between height and weight, she eyeballed what she thought were two good lines (solid and dashed), but couldn’t decide between:",,pending
+O006-PSU-013-S0075,O006-PSU-013,Lesson12,least-squares-the-idea,52d96f8fa2358932d1d5e35f8a9f946310a081e7e7321555ba5dedfb2540cad5,Which is the “best fitting line”?,,pending
+O006-PSU-013-S0076,O006-PSU-013,Lesson12,solution,22927695994eab589c7601a6b15df4d9dc67c5aceb9a74cdb965444b9b8362a6,Solution,,pending
+O006-PSU-013-S0077,O006-PSU-013,Lesson12,solution,2d2c7a71fe4c0ebbe8ed50e773d210601dc366944a2a92dc157fd52dcd7516b5,"In order to facilitate finding the best fitting line, let’s define some notation. Recalling that an experimental unit is the thing being measured (in this case, a student):",,pending
+O006-PSU-013-S0078,O006-PSU-013,Lesson12,solution,de0cf562a5028b2217038060a94d3ba105fc33e07f2d47ff4669e58f39691cca,let ,,pending
+O006-PSU-013-S0079,O006-PSU-013,Lesson12,solution,6d1a30259f46c3a854bdf39787e523cd617ca3e53921744831005e8f6583122d, denote the ,,pending
+O006-PSU-013-S0080,O006-PSU-013,Lesson12,solution,8364d2c1373516da29bae5c90374deb87984677ae6adae55e79240fe98af7ded,observed response,,pending
+O006-PSU-013-S0081,O006-PSU-013,Lesson12,solution,d44b47d1ec83cdb1edb8ce581a07cdcb3b5dc1d7c45688483dda9c79e7c39f7f, for the ,,pending
+O006-PSU-013-S0082,O006-PSU-013,Lesson12,solution,374dbfebd0d7e94c62fe8dd74c38994d5aac839cef791e69b8a03ee6a1a878bd, experimental unit,,pending
+O006-PSU-013-S0083,O006-PSU-013,Lesson12,solution,de0cf562a5028b2217038060a94d3ba105fc33e07f2d47ff4669e58f39691cca,let ,,pending
+O006-PSU-013-S0084,O006-PSU-013,Lesson12,solution,6d1a30259f46c3a854bdf39787e523cd617ca3e53921744831005e8f6583122d, denote the ,,pending
+O006-PSU-013-S0085,O006-PSU-013,Lesson12,solution,4ebcc6a45ff9eee6c0097c872e0c16af8a445fbaf153f2632ec64ad703915e26,predictor value,,pending
+O006-PSU-013-S0086,O006-PSU-013,Lesson12,solution,d44b47d1ec83cdb1edb8ce581a07cdcb3b5dc1d7c45688483dda9c79e7c39f7f, for the ,,pending
+O006-PSU-013-S0087,O006-PSU-013,Lesson12,solution,374dbfebd0d7e94c62fe8dd74c38994d5aac839cef791e69b8a03ee6a1a878bd, experimental unit,,pending
+O006-PSU-013-S0088,O006-PSU-013,Lesson12,solution,14088569c05e83beb7ca08f3186a1240b199e2654c8075c5a7d55d1f00e00d4c,-let ,,pending
+O006-PSU-013-S0089,O006-PSU-013,Lesson12,solution,6d1a30259f46c3a854bdf39787e523cd617ca3e53921744831005e8f6583122d, denote the ,,pending
+O006-PSU-013-S0090,O006-PSU-013,Lesson12,solution,f2cc078983c702eea90278e121e8d3f2d6d0f20d793c534241c287d0209df94f,predicted response,,pending
+O006-PSU-013-S0091,O006-PSU-013,Lesson12,solution,0eeec5825598ae58e7dfc491e25c4304be9f82d83d110b5d1fb1630950bfd608, (or ,,pending
+O006-PSU-013-S0092,O006-PSU-013,Lesson12,solution,4cc3f5361e50158df9b0aa3eea01f1f428f0d94d55be0db69eaee2a99f28f6a2,fitted value,,pending
+O006-PSU-013-S0093,O006-PSU-013,Lesson12,solution,1b709eba473bc873ff226fb579ffa1d039d1cec9e1babce09645b611667db3d8,) for the ,,pending
+O006-PSU-013-S0094,O006-PSU-013,Lesson12,solution,374dbfebd0d7e94c62fe8dd74c38994d5aac839cef791e69b8a03ee6a1a878bd, experimental unit,,pending
+O006-PSU-013-S0095,O006-PSU-013,Lesson12,solution,95a8a78efbb995b264976f010af657274128223835139182b74988229c373892,"Therefore, for the data point circled in red:",,pending
+O006-PSU-013-S0096,O006-PSU-013,Lesson12,solution,f627d424ef9840a414fca8e9d169ede63e72bc685be17c903644043aa9273c2c,"
+Fig 12.3: Scatter Plot of Height and Weight
+",,pending
+O006-PSU-013-S0097,O006-PSU-013,Lesson12,solution,74d6f911deb3ab80be87cb200c1eceba26f9dabb26d2dfcd24ac5db114f003e7,we have:,,pending
+O006-PSU-013-S0098,O006-PSU-013,Lesson12,solution,fd4a1acf3f09eda61751ab34e9f98d754585e94f5809cfe0a5d3e49d56a80ddd,"And, using the unrounded version of the proposed line, the predicted weight of a randomly selected 75-inch tall student is:",,pending
+O006-PSU-013-S0099,O006-PSU-013,Lesson12,solution,cb70b3cbb5b5330027861813c919addfc1786603a7a177331a8b8ee8d0440199,"Now, of course, the estimated line does not predict the weight of a 75-inch tall student perfectly. In this case, the prediction is 193.8 pounds, when the reality is 208 pounds. We have made an error in our prediction. That is, in using ",,pending
+O006-PSU-013-S0100,O006-PSU-013,Lesson12,solution,f87273cc2dd00abb8f158dae2219b50aa03645828fa58e461db83595a8f6987b, to predict the actual response ,,pending
+O006-PSU-013-S0101,O006-PSU-013,Lesson12,solution,e08b9f855effd964b255f047188472c82931203974104f47642cb89f64ba917f, we make a ,,pending
+O006-PSU-013-S0102,O006-PSU-013,Lesson12,solution,82d7a258b9d4f5a8dc1b8d4955ebaef5885de4c27ba12ab7bb745d0895595f06,prediction error,,pending
+O006-PSU-013-S0103,O006-PSU-013,Lesson12,solution,e759b410d4c62968428a615155c8105723a98c06e9cf8b83e6cce73bab21985e, (or a ,,pending
+O006-PSU-013-S0104,O006-PSU-013,Lesson12,solution,b144d704be5ce88307bd9ecf51987e97ccac67a25b44f0c21cc31793a22095af,residual error,,pending
+O006-PSU-013-S0105,O006-PSU-013,Lesson12,solution,a07d397e0f0b2bad5f2cff8e458498350bbf7de0bb69985647eb24f2764c2c2b,) of size: ,,pending
+O006-PSU-013-S0106,O006-PSU-013,Lesson12,solution,d39da49bfcc2ccb49c6506a65a0f9478c7a1452996b39bd3c23f194038f96f55," Now, a line that fits the data well will be one for which the ",,pending
+O006-PSU-013-S0107,O006-PSU-013,Lesson12,solution,2631ef3dd825050d57d4b6275a6733a173ac50e6f1d898a1771f174eaf256e41, prediction errors (one for each of the ,,pending
+O006-PSU-013-S0108,O006-PSU-013,Lesson12,solution,2f227c892fb7decc8c5a54ca0633a0c653fc956d5d3fe6fa71e985b620ad8fde, data points — ,,pending
+O006-PSU-013-S0109,O006-PSU-013,Lesson12,solution,f53826c768aa0cccded4c682d06770f1629a2d4378fe188b632a70ed1bce5b69,", in this case) are as small as possible in some overall sense. This idea is called the “least squares criterion.” In short, the ",,pending
+O006-PSU-013-S0110,O006-PSU-013,Lesson12,solution,7670400005a5b6a4213f01e29dbe14693d184c04787555c9d88dc8f0e4ad54a8,least squares criterion,,pending
+O006-PSU-013-S0111,O006-PSU-013,Lesson12,solution,f20e427bc636101bcb42e39de96065730e8fc7b242dac6dfd19ce29d3c43f336, tells us that in order to find the equation of the best fitting line:,,pending
+O006-PSU-013-S0112,O006-PSU-013,Lesson12,solution,de62073434f7ce1c931b4a4176516dd5b6c86d897ab73238a2fa5b9e48d1d77c,we need to choose the values ,,pending
+O006-PSU-013-S0113,O006-PSU-013,Lesson12,solution,e3ee915a8e8c7aa02d2fced443314522b20824abd2535d5959c41dc8ab8a09e4, and ,,pending
+O006-PSU-013-S0114,O006-PSU-013,Lesson12,solution,2fcd8e212026fefbb5ab32d005e6b5c35a3240f887507b8dfa04f8601968219b," that minimize the sum of the squared prediction errors. That is, find ",,pending
+O006-PSU-013-S0115,O006-PSU-013,Lesson12,solution,e3ee915a8e8c7aa02d2fced443314522b20824abd2535d5959c41dc8ab8a09e4, and ,,pending
+O006-PSU-013-S0116,O006-PSU-013,Lesson12,solution,041874016e4e7e535a7df67277e1ee4bcbe8619dce325864263e629a53baaf01, that minimize:,,pending
+O006-PSU-013-S0117,O006-PSU-013,Lesson12,solution,16c14129da953fd753a9255c19f34d81da05a8c8d53136fb2b12d0f720aaa613,"So, using the least squares criterion to determine which of the two lines:",,pending
+O006-PSU-013-S0118,O006-PSU-013,Lesson12,solution,acae4be981088556067ab49de3220a1b2597a03c054c36641623db835cf02383,"is the best fitting line, we just need to determine ",,pending
+O006-PSU-013-S0119,O006-PSU-013,Lesson12,solution,ece12873567c630fcde4956746580e4172d67d04e14cd4ce6c5c447c06cea0ba,", the sum of the squared prediction errors for each of the two lines, and choose the line that has the smallest value of ",,pending
+O006-PSU-013-S0120,O006-PSU-013,Lesson12,solution,419c82c1bc3131e4b2a6f8c21a5a6b32b089e955af08afae3e2c989aa58ac1bf,". For the dashed line, that is, for the line:",,pending
+O006-PSU-013-S0121,O006-PSU-013,Lesson12,solution,8d8a7745ba12e43c42628bc57585636da5e81e355e5aff03304d16afa13b47d0,here’s what the work would look like:,,pending
+O006-PSU-013-S0122,O006-PSU-013,Lesson12,solution,7fe7df3a59b63e94f182021aae0924011458847a0efa5314661d3c2e04c4bca7,"
+Table 12.1
+",,pending
+O006-PSU-013-S0123,O006-PSU-013,Lesson12,solution,8ef93edee320f8550adee0fb3c19ab077eddc853d144453e84c923ba7d591dde,\(i\),,pending
+O006-PSU-013-S0124,O006-PSU-013,Lesson12,solution,27b4d440593fb7fa9b055f45851291d720a5e5834e113e4d50fd95a538a476f6,\(x_i\),,pending
+O006-PSU-013-S0125,O006-PSU-013,Lesson12,solution,d279ea93be569912b8e18bc4a307e8085d3308ce09f204d247037b79aa1ef075,\(y_i\),,pending
+O006-PSU-013-S0126,O006-PSU-013,Lesson12,solution,6008e5be20ffc1e7a95992c71a2d4dad982a3a0d133122128cd546ed90fdab60,\(\hat{y}_i\),,pending
+O006-PSU-013-S0127,O006-PSU-013,Lesson12,solution,15f60915195b94c23869ed437e09b44ef08d955d6a3637e95d873e3c363561ae,\((y_i - \hat{y}_i)\),,pending
+O006-PSU-013-S0128,O006-PSU-013,Lesson12,solution,a81971251e46e0c43ff9c4e3297f67a100acc1102f4dededdcd8f55969fbe79b,\((y_i - \hat{y}_i)^2 \),,pending
+O006-PSU-013-S0129,O006-PSU-013,Lesson12,solution,c9b3c38247f744e17dd26fda097d6a9ba9332586b6bdaa038bf8f313a863f2b8,Total,,pending
+O006-PSU-013-S0130,O006-PSU-013,Lesson12,solution,4782bf1ead4cef5a3aa07a338c848072cc57b081f6f4e31fe3717bc226f18a9c,The first column labeled ,,pending
+O006-PSU-013-S0131,O006-PSU-013,Lesson12,solution,5eedbe6b76db3223bbdf0a679c8354a92c77f60c45c968ce086a54fbb3bfc17c," just keeps track of the index of the data points, ",,pending
+O006-PSU-013-S0132,O006-PSU-013,Lesson12,solution,381905a9c156044a5c04e972f3d1398ff1f5c590e393e31607577337cb8dd185,. The columns labeled ,,pending
+O006-PSU-013-S0133,O006-PSU-013,Lesson12,solution,e3ee915a8e8c7aa02d2fced443314522b20824abd2535d5959c41dc8ab8a09e4, and ,,pending
+O006-PSU-013-S0134,O006-PSU-013,Lesson12,solution,b8c152080cd0b88fa5f3f6b4f3f108e71e454795d9003412c85b3822309370b8," contain the original data points. For example, the first student measured is 64 inches tall and weighs 121 pounds. The fourth column, labeled ",,pending
+O006-PSU-013-S0135,O006-PSU-013,Lesson12,solution,3ae382be1427d3fd72d13c6374f51f737f411bac5f88a3ece88d89f039562e61,", contains the predicted weight of each student. For example, the predicted weight of the second student, who is 64 inches tall, is:",,pending
+O006-PSU-013-S0136,O006-PSU-013,Lesson12,solution,698047e93c7bafd1f0df378ee50d634394683db16a669ee76be5b64834179094,The fifth column contains the errors in using ,,pending
+O006-PSU-013-S0137,O006-PSU-013,Lesson12,solution,773fb73307c03bcac101dba1b58749bfc6d6f1d3e52afe25d592c31e1ecd5335, to predict ,,pending
+O006-PSU-013-S0138,O006-PSU-013,Lesson12,solution,041b453dd624cdea41f40c637df1adf3bad878a3fa250b72a4254cc671eb4fea,". For the second student, the prediction error is:",,pending
+O006-PSU-013-S0139,O006-PSU-013,Lesson12,solution,6e944b6f23a47bd8ecf29ba6c72c91d8b7469d0d365c7cbf5fccee0b2cbb3237,"And, the last column contains the squared prediction errors. The squared prediction error for the second student is:",,pending
+O006-PSU-013-S0140,O006-PSU-013,Lesson12,solution,a6656c7bfb9c448d282323439b770bf44c8f5ea0a51fc744390734b62378e19a,"By summing up the last column, that is, the column containing the squared prediction errors, we see that ",,pending
+O006-PSU-013-S0141,O006-PSU-013,Lesson12,solution,f58c0b9eee7ccc36790768a3d6d593eda91a8209dcd7cab02f47677ccf3f0cb1," for the dashed line. Now, for the solid line, that is, for the line:",,pending
+O006-PSU-013-S0142,O006-PSU-013,Lesson12,solution,8d8a7745ba12e43c42628bc57585636da5e81e355e5aff03304d16afa13b47d0,here’s what the work would look like:,,pending
+O006-PSU-013-S0143,O006-PSU-013,Lesson12,solution,d85c38b08e1e51101c1274216cba21b229e10ccdc35dbfd91124c5461ba13cb0,"
+Table 12.2
+",,pending
+O006-PSU-013-S0144,O006-PSU-013,Lesson12,solution,8ef93edee320f8550adee0fb3c19ab077eddc853d144453e84c923ba7d591dde,\(i\),,pending
+O006-PSU-013-S0145,O006-PSU-013,Lesson12,solution,27b4d440593fb7fa9b055f45851291d720a5e5834e113e4d50fd95a538a476f6,\(x_i\),,pending
+O006-PSU-013-S0146,O006-PSU-013,Lesson12,solution,d279ea93be569912b8e18bc4a307e8085d3308ce09f204d247037b79aa1ef075,\(y_i\),,pending
+O006-PSU-013-S0147,O006-PSU-013,Lesson12,solution,6008e5be20ffc1e7a95992c71a2d4dad982a3a0d133122128cd546ed90fdab60,\(\hat{y}_i\),,pending
+O006-PSU-013-S0148,O006-PSU-013,Lesson12,solution,15f60915195b94c23869ed437e09b44ef08d955d6a3637e95d873e3c363561ae,\((y_i - \hat{y}_i)\),,pending
+O006-PSU-013-S0149,O006-PSU-013,Lesson12,solution,a81971251e46e0c43ff9c4e3297f67a100acc1102f4dededdcd8f55969fbe79b,\((y_i - \hat{y}_i)^2 \),,pending
+O006-PSU-013-S0150,O006-PSU-013,Lesson12,solution,c9b3c38247f744e17dd26fda097d6a9ba9332586b6bdaa038bf8f313a863f2b8,Total,,pending
+O006-PSU-013-S0151,O006-PSU-013,Lesson12,solution,c3e2df61de000b4eee30990da76bfa6c9ccf391f1e1ec4980b6e3d8294ca1d42,"The calculations for each column are just as described previously. In this case, the sum of the last column, that is, the sum of the squared prediction errors for the solid line is ",,pending
+O006-PSU-013-S0152,O006-PSU-013,Lesson12,solution,7d22cb5f38efc7077344118df06f50d68a542846970b044f6ef4595d1e61ef3c,. Choosing the equation that minimizes ,,pending
+O006-PSU-013-S0153,O006-PSU-013,Lesson12,solution,fbe03e0fe19265c314f6609f8c43b9c032a6f06d39e73c84aa1549e3a407d075,", we can conclude that the solid line, that is:",,pending
+O006-PSU-013-S0154,O006-PSU-013,Lesson12,solution,20748cd7241d0a941e5c8daf291c17e260119f0dd9856d3e437b66b4cf312d0d,is the best fitting line.,,pending
+O006-PSU-013-S0155,O006-PSU-013,Lesson12,least-squares-the-idea,edbe92e60d8268b162f4ca4d14966c7ed5e0ed4528e9dd0e1caf4be3b3d86525,"In the preceding example, there’s one major problem with concluding that the solid line is the best fitting line! We’ve only considered two possible candidates. There are, in fact, an infinite number of possible candidates for best fitting line. The approach we used above clearly won’t work in practice. On the next page, we’ll instead derive some formulas for the slope and the intercept for least squares regression line.",,pending
+O006-PSU-013-S0156,O006-PSU-013,Lesson12,least-squares-the-theory,4d2ed309537fef8991b0ccc3b166a666fc6d96861459d093066e2106fcfd9032, Least Squares: The Theory,,pending
+O006-PSU-013-S0157,O006-PSU-013,Lesson12,least-squares-the-theory,47b7c980433625dbbbd0f9cee9c31722cc21d810a12763ee51aee6d9b25e06b9,"Now that we have the idea of least squares behind us, let’s make the method more practical by finding a formula for the intercept ",,pending
+O006-PSU-013-S0158,O006-PSU-013,Lesson12,least-squares-the-theory,97874e8b9d3f8b67caccfc344e18443f6ddd943a1949e126f85a4b5f6fca0f89, and slope ,,pending
+O006-PSU-013-S0159,O006-PSU-013,Lesson12,least-squares-the-theory,26e6f5f9d96f5b4c49bf863f901c30026711fe47ebd8079729043aba3dabb56f,". We learned that in order to find the least squares regression line, we need to minimize the sum of the squared prediction errors, that is:",,pending
+O006-PSU-013-S0160,O006-PSU-013,Lesson12,least-squares-the-theory,e037cf2501f3cf3b627775b5e8422b133be4ae87310901d03b70d70d1decc688,We just need to replace that ,,pending
+O006-PSU-013-S0161,O006-PSU-013,Lesson12,least-squares-the-theory,c848f7d26946287ec263a8d730f035b94b7fea8d11ca52e494138be3ac50dfd2, with the formula for the equation of a line:,,pending
+O006-PSU-013-S0162,O006-PSU-013,Lesson12,least-squares-the-theory,00e2ec0ed5a8b576418a0e1e83fab3a2577d1218070c06ea529e04f70b67f8ff,to get:,,pending
+O006-PSU-013-S0163,O006-PSU-013,Lesson12,least-squares-the-theory,47d897ac1b50e4943e161f143b40a776a8cc9bc68f9f348c1d39abcf58b395f4,We could go ahead and minimize ,,pending
+O006-PSU-013-S0164,O006-PSU-013,Lesson12,least-squares-the-theory,e0808e89f7f8c96686ba08c5627ba84a0556d42487bd8351511a60c8f4bd9699," as such, but our textbook authors have opted to use a different form of the equation for a line, namely:",,pending
+O006-PSU-013-S0165,O006-PSU-013,Lesson12,least-squares-the-theory,389775d2638aeee878f25fc3c823e66ec789eb5d5d599a761e6716a768107b55,"each form of the equation for a line has its advantages and disadvantages. Statistical software, such as R or Minitab, will typically calculate the least squares regression line using the form: ",,pending
+O006-PSU-013-S0166,O006-PSU-013,Lesson12,least-squares-the-theory,0163ba3f9dd2e412e59b0dd7d4a461cafd9d2ce9e07146d085b8786c53ad0269,"Clearly a plus if you can get some computer to do the dirty work for you. A (minor) disadvantage of using this form of the equation, though, is that the intercept ",,pending
+O006-PSU-013-S0167,O006-PSU-013,Lesson12,least-squares-the-theory,f4591d4ccedc6fc91e2c08faccc4bc399a386e7aa3aeb98d1c3848c7b2378809, is the predicted value of the response ,,pending
+O006-PSU-013-S0168,O006-PSU-013,Lesson12,least-squares-the-theory,10a47bf3ef7eb29e3285ee9374bf077bd2932c0b4817915e970116e496516718, when the predictor ,,pending
+O006-PSU-013-S0169,O006-PSU-013,Lesson12,least-squares-the-theory,3d00c2a40eede6ab0409322fbdd261a2b6344a99540d0d6706636dee46e83cde,", which is typically not very meaningful. For example, if ",,pending
+O006-PSU-013-S0170,O006-PSU-013,Lesson12,least-squares-the-theory,1ea024e448012c5b217c31815416af2f68e011827788a18de751594010708d3a, is a student’s height (in inches) and ,,pending
+O006-PSU-013-S0171,O006-PSU-013,Lesson12,least-squares-the-theory,67ace68046c7c7c86c880b219a68fe3be6bf739df53238c805e02bc7728a0238," is a student’s weight (in pounds), then the intercept is the predicted weight of a student who is 0 inches tall….. errrr…. you get the idea. On the other hand, if we use the equation:",,pending
+O006-PSU-013-S0172,O006-PSU-013,Lesson12,least-squares-the-theory,a1a4bde8cdae59c828277a0bb718ec7fab86c188eec8d2a482ad6b5fe8fbae10,then the intercept ,,pending
+O006-PSU-013-S0173,O006-PSU-013,Lesson12,least-squares-the-theory,f4591d4ccedc6fc91e2c08faccc4bc399a386e7aa3aeb98d1c3848c7b2378809, is the predicted value of the response ,,pending
+O006-PSU-013-S0174,O006-PSU-013,Lesson12,least-squares-the-theory,10a47bf3ef7eb29e3285ee9374bf077bd2932c0b4817915e970116e496516718, when the predictor ,,pending
+O006-PSU-013-S0175,O006-PSU-013,Lesson12,least-squares-the-theory,1be33d51fcce3f863a819b68d22b63d7796144f20831828035dde22950d8f0d8,", that is, the average of the ",,pending
+O006-PSU-013-S0176,O006-PSU-013,Lesson12,least-squares-the-theory,0d53396cf24e5f5eec7b9439c459c300dacf80ee559c6d45dbe7fff308cd88b1," values. For example, if ",,pending
+O006-PSU-013-S0177,O006-PSU-013,Lesson12,least-squares-the-theory,1ea024e448012c5b217c31815416af2f68e011827788a18de751594010708d3a, is a student’s height (in inches) and ,,pending
+O006-PSU-013-S0178,O006-PSU-013,Lesson12,least-squares-the-theory,91db561e59ee43a9bcf6027f762817d8671c96581d8397ee4d454510d58df42e," is a student’s weight (in pounds), then the intercept ",,pending
+O006-PSU-013-S0179,O006-PSU-013,Lesson12,least-squares-the-theory,56c394046ae270184a8d13b70f1d2199355d090baf7721e8b526eb83aab705ef," is the predicted weight of a student who is average in height. Much better, much more meaningful! The good news is that it is easy enough to get statistical software, such as R or Minitab, to calculate the least squares regression line in this form as well.",,pending
+O006-PSU-013-S0180,O006-PSU-013,Lesson12,least-squares-the-theory,9e355e5f5cba9a76fe1d1fb06d6ea0a6e2c0abe48bd6b5f8930dd21ca618684a,"Okay, with that aside behind us, time to get to the punchline.",,pending
+O006-PSU-013-S0181,O006-PSU-013,Lesson12,least-squares-estimates,bafc61b4122022f60983be8e100341f1420b3b6d8eefafd97ed70fb0222f51b5, Least Squares Estimates,,pending
+O006-PSU-013-S0182,O006-PSU-013,Lesson12,least-squares-estimates,2b5fbae52b9d0819e0c2bec456b8f47bc7f3e3d87d03b9ed2a24e010193937cf,Note!,,pending
+O006-PSU-013-S0183,O006-PSU-013,Lesson12,least-squares-estimates,859ec6e2b9e3da609076fec1d95d3b4ab200d7462068728aa561b300545ebe12,"
+Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. ",,pending
+O006-PSU-013-S0184,O006-PSU-013,Lesson12,least-squares-estimates,489f895aa99bf6748755fa382c89ad8f7b02f6906ca72a1823587e1d1355dce1,Theorem 12.1,,pending
+O006-PSU-013-S0185,O006-PSU-013,Lesson12,least-squares-estimates,79e3f2a55928f9be8e9bf79254ff7e3ef670540a1c5ca07cfe875827d89757e0, The ,,pending
+O006-PSU-013-S0186,O006-PSU-013,Lesson12,least-squares-estimates,6081c150fd5a3d44cac4089ae4ec0894d7d0aba9c3cf511828b4e2de905f678f,least squares regression line,,pending
+O006-PSU-013-S0187,O006-PSU-013,Lesson12,least-squares-estimates,ccd4554f9c2a0a240cbe274a4447ae7d6933d28a26c80815a1475dff5ad731bd, is:,,pending
+O006-PSU-013-S0188,O006-PSU-013,Lesson12,least-squares-estimates,9faea861308f5b1fd8c392ba1efe7121f2c5c53d0db8052ab70ce66bfb31d09b,with ,,pending
+O006-PSU-013-S0189,O006-PSU-013,Lesson12,least-squares-estimates,f61760682428cee01e71f067a69683b134bc794c1fd7e800a0369ff16a9bdc7c,least squares estimates,,pending
+O006-PSU-013-S0190,O006-PSU-013,Lesson12,least-squares-estimates,7fbb3ccf9640651f69af3626de6836fb302a0a088c7cd27721c367b8b530e502,Proof,,pending
+O006-PSU-013-S0191,O006-PSU-013,Lesson12,least-squares-estimates,6820a970b55ce2b374f8fad759f63570154270ad5da38138a741563b6b415cd2,In order to derive the formulas for the intercept ,,pending
+O006-PSU-013-S0192,O006-PSU-013,Lesson12,least-squares-estimates,97874e8b9d3f8b67caccfc344e18443f6ddd943a1949e126f85a4b5f6fca0f89, and slope ,,pending
+O006-PSU-013-S0193,O006-PSU-013,Lesson12,least-squares-estimates,791c664c16dbafd87953e1239423daf0df132b3f8b77524fcf78262460797a97,", we need to minimize:",,pending
+O006-PSU-013-S0194,O006-PSU-013,Lesson12,least-squares-estimates,e07353f3f0d40858cefaed9d2ef46b659b92424056017c7a329d7dcbad582ef5,"Time to put on your calculus cap, as minimizing ",,pending
+O006-PSU-013-S0195,O006-PSU-013,Lesson12,least-squares-estimates,63c196057c4d686a0b80a637bc08cc3f938e2550faeb001a51dd5be7691a68b7, involves taking the derivative of ,,pending
+O006-PSU-013-S0196,O006-PSU-013,Lesson12,least-squares-estimates,8a390729a748b48918a197fb2c96c761332b6bb11a3dd7c5fc4bfde4da0695d9, with respect to ,,pending
+O006-PSU-013-S0197,O006-PSU-013,Lesson12,least-squares-estimates,e3ee915a8e8c7aa02d2fced443314522b20824abd2535d5959c41dc8ab8a09e4, and ,,pending
+O006-PSU-013-S0198,O006-PSU-013,Lesson12,least-squares-estimates,7ef5c2a15a3523736fccfb81c85b8582096885e6961754bd39614b04d2f5f868,", setting to 0, and then solving for ",,pending
+O006-PSU-013-S0199,O006-PSU-013,Lesson12,least-squares-estimates,e3ee915a8e8c7aa02d2fced443314522b20824abd2535d5959c41dc8ab8a09e4, and ,,pending
+O006-PSU-013-S0200,O006-PSU-013,Lesson12,least-squares-estimates,c28d01d7a1ee995c5680c254971765be111951e074ad41651008dddee3414b89,. Let’s do that. Starting with the derivative of ,,pending
+O006-PSU-013-S0201,O006-PSU-013,Lesson12,least-squares-estimates,8a390729a748b48918a197fb2c96c761332b6bb11a3dd7c5fc4bfde4da0695d9, with respect to ,,pending
+O006-PSU-013-S0202,O006-PSU-013,Lesson12,least-squares-estimates,fb3ac6ea6572280cdc47b1e3ad8fcd262984901b6cd596138547cd23f4a29661,", we get:",,pending
+O006-PSU-013-S0203,O006-PSU-013,Lesson12,least-squares-estimates,9e5975676f594d06e34c9c4aa3aaa6f2b6036c4fc76f0147782fa2b1e030a1e4,"
+Video 12.1: Proof: Deriving the formulas for the intercept a and slope b
+",,pending
+O006-PSU-013-S0204,O006-PSU-013,Lesson12,least-squares-estimates,65a50547152266cf54c5e4ebcbaad8fb75e1b1200989f91ca84c217682687373,Now knowing that ,,pending
+O006-PSU-013-S0205,O006-PSU-013,Lesson12,least-squares-estimates,81afb10b461acd8f2b7eee698fb0c314c454f7acb574a34baded7f6912fc7a0f, is ,,pending
+O006-PSU-013-S0206,O006-PSU-013,Lesson12,least-squares-estimates,d2003dfdace70755d77b9e42b72869ecd9e1a7e5bce319f9544d356574eddecf,", the average of the responses, let’s replace ",,pending
+O006-PSU-013-S0207,O006-PSU-013,Lesson12,least-squares-estimates,92f1a79f3c70a37bce065d51a9853bc2230306a5fcecf4ddb9fce9e1e935324c, with ,,pending
+O006-PSU-013-S0208,O006-PSU-013,Lesson12,least-squares-estimates,fd3b6112fd245f157dab93f862684fe71797894825126b52fd5e0706f087e975, in the formula for ,,pending
+O006-PSU-013-S0209,O006-PSU-013,Lesson12,least-squares-estimates,b150cac179282114bcc5f28e44f3edaf9a9845e1134085686d5ed9501347b1e8,and take the derivative of ,,pending
+O006-PSU-013-S0210,O006-PSU-013,Lesson12,least-squares-estimates,8a390729a748b48918a197fb2c96c761332b6bb11a3dd7c5fc4bfde4da0695d9, with respect to ,,pending
+O006-PSU-013-S0211,O006-PSU-013,Lesson12,least-squares-estimates,dc6a7021f506c406f42b68a7d0cc79afd46e8c9701408f5c6adcd4f132251836,". Doing so, we get:",,pending
+O006-PSU-013-S0212,O006-PSU-013,Lesson12,least-squares-estimates,eb421a4242ecedc539092296298db26c706243ab80fc39c87c3d33095e5e565f,"
+Video 12.2: Proof: Deriving formulas for the intercept and slope, Part 2
+",,pending
+O006-PSU-013-S0213,O006-PSU-013,Lesson12,least-squares-estimates,7172df269290630ba276ef9a19bed6b5e883b22c00f31097b24004c33e74ae81,As was to be proved.,,pending
+O006-PSU-013-S0214,O006-PSU-013,Lesson12,least-squares-estimates,64141da1f2e32d61e3a4864c58e615553bdb6bf77b9c3f4e5952ff74cc48a5fa,"By the way, you might want to note that the only assumption relied on for the above calculations is that the relationship between the response ",,pending
+O006-PSU-013-S0215,O006-PSU-013,Lesson12,least-squares-estimates,9cb9dad7376e08bfe8619d8866a3c9369962e6a7d15ff2d1c6485f92a2cba771, and the predictor ,,pending
+O006-PSU-013-S0216,O006-PSU-013,Lesson12,least-squares-estimates,05e19d8cfe386d4aa7c3a1ba6f310e4d66666e1abf4b0bf843f57cfbf8dfebd2, is linear.,,pending
+O006-PSU-013-S0217,O006-PSU-013,Lesson12,least-squares-estimates,061bfb81f0fda71b45ef4e8ece85fc583d1517fda89b3ddd292edf1217faa078,Another thing you might note is that the formula for the slope ,,pending
+O006-PSU-013-S0218,O006-PSU-013,Lesson12,least-squares-estimates,a8701fd96038955f904fe7b46ac65fec5afb1411afc431d0f9bfddd62d5b525d," is just fine providing you have statistical software to make the calculations. But, what would you do if you were stranded on a desert island, and were in need of finding the least squares regression line for the relationship between the depth of the tide and the time of day? You’d probably appreciate having a simpler calculation formula! You might also appreciate understanding the relationship between the slope ",,pending
+O006-PSU-013-S0219,O006-PSU-013,Lesson12,least-squares-estimates,79f153a63facd58565f58bfdb868ff176fa4982a6afb86d9126f71f040d85c01, and the sample correlation coefficient ,,pending
+O006-PSU-013-S0220,O006-PSU-013,Lesson12,least-squares-estimates,9f88c7fe440e27cb2c032bb7d67f6f0131e789cd7308bffcd7342a7f340ebe70,"With that lame motivation behind us, let’s derive alternative calculation formulas for the slope ",,pending
+O006-PSU-013-S0221,O006-PSU-013,Lesson12,least-squares-estimates,9b16c9caaa22ab19dd2b5fbd3bd82b2c6f60f14016c1920a2da592807e4a7ad2,Theorem 12.2,,pending
+O006-PSU-013-S0222,O006-PSU-013,Lesson12,least-squares-estimates,d8b0b00e16fb0655b3962952ae0876ca5209d97bde7637397042b609c0e48059, An alternative formula for the slope ,,pending
+O006-PSU-013-S0223,O006-PSU-013,Lesson12,least-squares-estimates,d5024266e37017616278c19e10f4e289cf84b8c1c9e4f94cbff9c4ed4d6046da, of the least squares regression line:,,pending
+O006-PSU-013-S0224,O006-PSU-013,Lesson12,least-squares-estimates,c3838a4c8b5c260cea7daa08b1bbbe3fd8c3cf14f632807577886a933f0b97b4,is:,,pending
+O006-PSU-013-S0225,O006-PSU-013,Lesson12,least-squares-estimates,7fbb3ccf9640651f69af3626de6836fb302a0a088c7cd27721c367b8b530e502,Proof,,pending
+O006-PSU-013-S0226,O006-PSU-013,Lesson12,least-squares-estimates,a99edb6b61208699d1739e6a60d4e9616364c1cb587e6cc1bcc0fd06ab496e51,"The proof, which may or may not show up on a quiz or exam, is left for you as an exercise.",,pending
+O006-PSU-013-S0227,O006-PSU-013,Lesson12,the-model,d70022ba6ecb7b9b7521b6631dbde1ec5f64e105e72f27be9b444b5a5043d897, The Model,,pending
+O006-PSU-013-S0228,O006-PSU-013,Lesson12,what-do-a-and-b-estimate,eb4d8fdfd09e62c62719afc011d9181f5ecece853e364222157360434840e1e7, What Do ,,pending
+O006-PSU-013-S0229,O006-PSU-013,Lesson12,what-do-a-and-b-estimate,e3ee915a8e8c7aa02d2fced443314522b20824abd2535d5959c41dc8ab8a09e4, and ,,pending
+O006-PSU-013-S0230,O006-PSU-013,Lesson12,what-do-a-and-b-estimate,cffec6f279e3671a4602e96eff0d5cd9cadd339ec729b1a19cde14c21acd6151, Estimate?,,pending
+O006-PSU-013-S0231,O006-PSU-013,Lesson12,what-do-a-and-b-estimate,a48dcd6afa0cf3ec4fc3badc2eee179881ebf030a376e1d38235b650241e2041,"So far, we’ve formulated the idea, as well as the theory, behind least squares estimation. But, now we have a little problem. When we derived formulas for the least squares estimates of the intercept ",,pending
+O006-PSU-013-S0232,O006-PSU-013,Lesson12,what-do-a-and-b-estimate,19fb3fb816f3ecfed75d0a4cb1990a79a0b85a00cfbe2b936a7c933d18213a66, and the slope ,,pending
+O006-PSU-013-S0233,O006-PSU-013,Lesson12,what-do-a-and-b-estimate,8ce6f73f294a5a45c09dba921fcc8d0b2cedd3e2f810b35d4c283ac23693ea3a,", we never addressed for what parameters ",,pending
+O006-PSU-013-S0234,O006-PSU-013,Lesson12,what-do-a-and-b-estimate,e3ee915a8e8c7aa02d2fced443314522b20824abd2535d5959c41dc8ab8a09e4, and ,,pending
+O006-PSU-013-S0235,O006-PSU-013,Lesson12,what-do-a-and-b-estimate,a084ef1d09aed02628ba013ce92b4b37b9741f687d97e63831d0a1862a079971," serve as estimates. It is a crucial topic that deserves our attention. Let’s investigate the answer by considering the (linear) relationship between high school grade point averages (GPAs) and scores on a college entrance exam, such as the ACT exam. Well, let’s actually center the high school GPAs so that if ",,pending
+O006-PSU-013-S0236,O006-PSU-013,Lesson12,what-do-a-and-b-estimate,d09d9fd0d69b9388fa5d061a7352ee5be58eed15e4d687a60d3fd3c4b159401c," denotes the high school GPA, then ",,pending
+O006-PSU-013-S0237,O006-PSU-013,Lesson12,what-do-a-and-b-estimate,22799ac4ae6794a83ce23fcc79dee5b27125c2fb1feee244ac58a73d881a65b3, is the centered high school GPA. Here’s what a plot of ,,pending
+O006-PSU-013-S0238,O006-PSU-013,Lesson12,what-do-a-and-b-estimate,c7e47a5ba0dfdadf731b5d48ae5987a55a45d8ae21382bcb0a1d29b3c77531ec,", the centered high school GPA, and ",,pending
+O006-PSU-013-S0239,O006-PSU-013,Lesson12,what-do-a-and-b-estimate,e55991bce72685ba492d1b56f821b3bf2978cac1eb6a47541ce2cdd3a38dedf0,", the college entrance test score might look like:",,pending
+O006-PSU-013-S0240,O006-PSU-013,Lesson12,what-do-a-and-b-estimate,b6212f0b490bbbd990f2f1b198008b0c1b8f56307fdda7102f2ad63b88245bf8,"
+Fig 12.4: High school gpa vs College entrance test scores
+",,pending
+O006-PSU-013-S0241,O006-PSU-013,Lesson12,what-do-a-and-b-estimate,4ef5d44698e9aa79eee3b40ec1b9369c26d4e7258bec669460a871e630c43088,"Well, okay, so that plot deserves some explanation:",,pending
+O006-PSU-013-S0242,O006-PSU-013,Lesson12,what-do-a-and-b-estimate,cd6a057f68024ec32e725f5f9a591d9c04a96fd68c0b663bf98ed77c75a99fe9,"
+Video 12.3: Example: Test scores and GPA, understanding the parameters
+",,pending
+O006-PSU-013-S0243,O006-PSU-013,Lesson12,what-do-a-and-b-estimate,6d06dd79cccf276afc45187bf51e576aa9ca29e44f67fbbd7f355bf6a98dcaba,"So far, in summary, we are assuming two things. First, among the entire population of college students, there is some unknown linear relationship between ",,pending
+O006-PSU-013-S0244,O006-PSU-013,Lesson12,what-do-a-and-b-estimate,c015393c4d092e9c614e09f0c8b32decf3a94baacd8c2a1a0a66914570139bb1,", (or alternatively ",,pending
+O006-PSU-013-S0245,O006-PSU-013,Lesson12,what-do-a-and-b-estimate,d1c6cc5cce210137190fa171bbd6c04e69f18a528a223afbc1fb0451c4f22c90,"), the average college entrance score, and ",,pending
+O006-PSU-013-S0246,O006-PSU-013,Lesson12,what-do-a-and-b-estimate,a28114b869c6352c646d25c4604ca40617cbdef799a7000d71538ed7cd1907b7,", centered high school GPA. That is:",,pending
+O006-PSU-013-S0247,O006-PSU-013,Lesson12,what-do-a-and-b-estimate,3c90c7fd35a7329a69b0bea3448da13b3fdfd970fd829ccf7e628564ac53f86b,"Second, individual students deviate from the mean college entrance test score of the population of students having the same centered high school GPA by some unknown amount ",,pending
+O006-PSU-013-S0248,O006-PSU-013,Lesson12,what-do-a-and-b-estimate,085bd443559be819f72bdf0fd4bb365e3114440fe3e83f541a85d2a6c51c302d,". That is, if ",,pending
+O006-PSU-013-S0249,O006-PSU-013,Lesson12,what-do-a-and-b-estimate,e310fdf30903129bc9b27a0bb40f6533fb5fc56c630569e4643c7db8b819635f, denotes the college entrance test score for student ,,pending
+O006-PSU-013-S0250,O006-PSU-013,Lesson12,what-do-a-and-b-estimate,1e418b2e58442c47b79d7ba71f9bf054a47809f3782303b84bb12321f961a698,", then:",,pending
+O006-PSU-013-S0251,O006-PSU-013,Lesson12,what-do-a-and-b-estimate,223826e8f954a8b5e3ca15c0668c2147004dbc7389438d8ee1068fded53cfa4f,"Unfortunately, we don’t have the luxury of collecting data on all of the college students in the population. So, we can never know the population intercept ",,pending
+O006-PSU-013-S0252,O006-PSU-013,Lesson12,what-do-a-and-b-estimate,2adccfc91f2e9f7dfd4dfbbbab7c13f9f0eedd06eef0eeec1035b9843b14e9a8, or the population slope ,,pending
+O006-PSU-013-S0253,O006-PSU-013,Lesson12,what-do-a-and-b-estimate,310c6b7145487850072b943d10302be0b400b072731e70b767be60d9b0bb590d,. The best we can do is estimate ,,pending
+O006-PSU-013-S0254,O006-PSU-013,Lesson12,what-do-a-and-b-estimate,e3ee915a8e8c7aa02d2fced443314522b20824abd2535d5959c41dc8ab8a09e4, and ,,pending
+O006-PSU-013-S0255,O006-PSU-013,Lesson12,what-do-a-and-b-estimate,057b0358d2c7648c9088877c2b9affa3ef97b8a6d36d3a029e6746b298e9d762," by taking a random sample from the population of college students. Suppose we randomly select fifteen students from the population, in which three students have a centered high school GPA of −2, three students have a centered high school GPA of −1, and so on. We can use those fifteen data points to determine the best fitting (least squares) line:",,pending
+O006-PSU-013-S0256,O006-PSU-013,Lesson12,what-do-a-and-b-estimate,341fcde7bf438b9793f4cc51059c42c3808780f1df170c5a4b26e9392963fd6d,"Now, our least squares line isn’t going to be perfect, but it should do a pretty good job of estimating the true unknown population line:",,pending
+O006-PSU-013-S0257,O006-PSU-013,Lesson12,what-do-a-and-b-estimate,8a843e780ef66ae4ce6814edc1cc3a013a298ff63c105e5b53a09981abc5e002,"
+Fig 12.5: Sample of High school gpa vs College entrance test scores
+",,pending
+O006-PSU-013-S0258,O006-PSU-013,Lesson12,what-do-a-and-b-estimate,ddca9a57e6760d266f27063c26072c168671f416b9b11762895fce04be4d98b5,Important,,pending
+O006-PSU-013-S0259,O006-PSU-013,Lesson12,what-do-a-and-b-estimate,10ebf09e07a6f780983e39f84eee8def77e1ec6d1f27d15ea7d9da39384f4019,"John: Fix the parameter equation above to match the old notes
+",,pending
+O006-PSU-013-S0260,O006-PSU-013,Lesson12,what-do-a-and-b-estimate,40d09f4a8b5e75257fbb0b3848183956e0ae34510586d3609072e3bf1cc649f6,That’s it in a nutshell. The intercept ,,pending
+O006-PSU-013-S0261,O006-PSU-013,Lesson12,what-do-a-and-b-estimate,19fb3fb816f3ecfed75d0a4cb1990a79a0b85a00cfbe2b936a7c933d18213a66, and the slope ,,pending
+O006-PSU-013-S0262,O006-PSU-013,Lesson12,what-do-a-and-b-estimate,bac220d9904f7e999ac8d64ddde9152ca9852359cdae22aabe6f3584335bb9b0," of the least squares regression line estimate, respectively, the intercept ",,pending
+O006-PSU-013-S0263,O006-PSU-013,Lesson12,what-do-a-and-b-estimate,19fb3fb816f3ecfed75d0a4cb1990a79a0b85a00cfbe2b936a7c933d18213a66, and the slope ,,pending
+O006-PSU-013-S0264,O006-PSU-013,Lesson12,what-do-a-and-b-estimate,16e8d6cd35abe209e1320ea53384db1d340acca3add3cabef72ae87a8060a3ca, of the unknown population line. The only assumption we make in doing so is that the relationship between the predictor ,,pending
+O006-PSU-013-S0265,O006-PSU-013,Lesson12,what-do-a-and-b-estimate,a1c36603dca3b837c365d28458418812b27125de75ee26044edfbdf479716810, and the response ,,pending
+O006-PSU-013-S0266,O006-PSU-013,Lesson12,what-do-a-and-b-estimate,05e19d8cfe386d4aa7c3a1ba6f310e4d66666e1abf4b0bf843f57cfbf8dfebd2, is linear.,,pending
+O006-PSU-013-S0267,O006-PSU-013,Lesson12,what-do-a-and-b-estimate,1befec25b789bab4f858202734408fa74416ce402ad617d5d8b6c64b6f57b61c,"Now, if we want to derive confidence intervals for ",,pending
+O006-PSU-013-S0268,O006-PSU-013,Lesson12,what-do-a-and-b-estimate,e3ee915a8e8c7aa02d2fced443314522b20824abd2535d5959c41dc8ab8a09e4, and ,,pending
+O006-PSU-013-S0269,O006-PSU-013,Lesson12,what-do-a-and-b-estimate,59b673af1d36bf0e39b173904a7750825599e8fbb7d45566b7ef837fe8c9fa4c,", as we are going to want to do on the next page, we are going to have to make a few more assumptions. That’s where the simple linear regression model comes to the rescue.",,pending
+O006-PSU-013-S0270,O006-PSU-013,Lesson12,the-simple-linear-regression-model,a1228fe3fe03e2c983f6445d05fcd4837077b549c932180acc6009c877a3417c, The Simple Linear Regression Model,,pending
+O006-PSU-013-S0271,O006-PSU-013,Lesson12,the-simple-linear-regression-model,bad504c3b5b4bf0cd36dd3a806f191a55a96cdc12f4113d80b6343acfb33151c,"So that we can have properly drawn normal curves, let’s borrow (steal?) an example from the textbook called Applied Linear Regression Models (4th edition, by Kutner, Nachtsheim, and Neter). Consider the relationship between ",,pending
+O006-PSU-013-S0272,O006-PSU-013,Lesson12,the-simple-linear-regression-model,651f0fc1c763d828c79d92d709ae92728174b492db1f5d35d45a4b69c51309a1,", the number of bids contracting companies prepare, and ",,pending
+O006-PSU-013-S0273,O006-PSU-013,Lesson12,the-simple-linear-regression-model,c97342576f0be8a9bd33267e70d8c6c6d3e30f5260ed58daf89cd36e5136caa5,", the number of hours it takes to prepare the bids:",,pending
+O006-PSU-013-S0274,O006-PSU-013,Lesson12,the-simple-linear-regression-model,666dc5c4c1c8b11bc166dc1831d5f7d72968eae1e6eb76e046b3f34e15f7dbb1,"
+Fig 12.6
+",,pending
+O006-PSU-013-S0275,O006-PSU-013,Lesson12,the-simple-linear-regression-model,44bba901252627981ce345df16f65a7ee05e2e05b1494b1313121e869473ddef,"A couple of things to note about this graph. Note that again, the mean number of hours, ",,pending
+O006-PSU-013-S0276,O006-PSU-013,Lesson12,the-simple-linear-regression-model,a4b45cc410b3ebf04cdf349f39aa7945434e03b33af71c8df87490c000d01c04,", is assumed to be ",,pending
+O006-PSU-013-S0277,O006-PSU-013,Lesson12,the-simple-linear-regression-model,e58b16495e8a66206474cdcc08b1bd64631d04993c54d1ad86cc66f33c33783b,linearly related,,pending
+O006-PSU-013-S0278,O006-PSU-013,Lesson12,the-simple-linear-regression-model,87721689ee42f4415e4afe0d0f0a84d4cd837dd0c66635bd0734127ee0e0b5b7, to ,,pending
+O006-PSU-013-S0279,O006-PSU-013,Lesson12,the-simple-linear-regression-model,592996513c6df81feb03532249f5d160fda5d6d428969878542e55a991f80c8c,", the number of bids prepared. That’s the first assumption. The textbook authors even go as far as to specify the values of typically unknown ",,pending
+O006-PSU-013-S0280,O006-PSU-013,Lesson12,the-simple-linear-regression-model,e3ee915a8e8c7aa02d2fced443314522b20824abd2535d5959c41dc8ab8a09e4, and ,,pending
+O006-PSU-013-S0281,O006-PSU-013,Lesson12,the-simple-linear-regression-model,4876c71e1c42854df748a41a2c78d3a335f7941da73b2529a6755bc7aaa1e6c3,". In this case, ",,pending
+O006-PSU-013-S0282,O006-PSU-013,Lesson12,the-simple-linear-regression-model,18799a8cd3c78c165b9f63d41b1f0399c9a38af5fdff9520d62b5f3b59609b40, is 9.5 and ,,pending
+O006-PSU-013-S0283,O006-PSU-013,Lesson12,the-simple-linear-regression-model,ba3867f9d4a7b905fb1436ec8d945d5ea7fca40f801ef785fb669dacb38d86be, is 2.1.,,pending
+O006-PSU-013-S0284,O006-PSU-013,Lesson12,the-simple-linear-regression-model,7fd72489d69e8c4a51baf81e573b2b8ea4497bdf51ca82628f9697e5ab46019f,Note that if ,,pending
+O006-PSU-013-S0285,O006-PSU-013,Lesson12,the-simple-linear-regression-model,5a924da2807fcf2c6f7b22d823a117bcea5800d73af5d570902d665a9cd0d990," bids are prepared, then the expected number of hours it took to prepare the bids is: ",,pending
+O006-PSU-013-S0286,O006-PSU-013,Lesson12,the-simple-linear-regression-model,3641cee855066ce58310d44ae2d757b7e4c719ef2138428192c63f35e6f16d67," In one case, it took a contracting company 108 hours to prepare 45 bids. In that case, the error ",,pending
+O006-PSU-013-S0287,O006-PSU-013,Lesson12,the-simple-linear-regression-model,5236da318a63d0abf5c4c8ab77f6df758df0712795f189b8f4c18af34089b9c0, is 4. That is:,,pending
+O006-PSU-013-S0288,O006-PSU-013,Lesson12,the-simple-linear-regression-model,f8ab4e07292152ca4918906026313720c91a7e0b0da15e01ac48b53804ef02d2,The normal curves drawn for each value of ,,pending
+O006-PSU-013-S0289,O006-PSU-013,Lesson12,the-simple-linear-regression-model,4c607751c838e5e88781e694f42a137931e24eba1a4d54a97e8294cc518d7b94, are meant to suggest that the error terms ,,pending
+O006-PSU-013-S0290,O006-PSU-013,Lesson12,the-simple-linear-regression-model,0f78582ee5e7d2d04169c9e4f05aaacd60cfb1faba3e60fed3f63cf47d58d5b7,", and therefore the responses ",,pending
+O006-PSU-013-S0291,O006-PSU-013,Lesson12,the-simple-linear-regression-model,b110daa1dacedde760fc8ce340bab10a0ed1c9fcd0bb5f15f4f506fe3bb97922,", are ",,pending
+O006-PSU-013-S0292,O006-PSU-013,Lesson12,the-simple-linear-regression-model,a3b99e038538b03ea35f990155aef137fa182b0703dcece0d75dfa779fc1fc19,normally distributed,,pending
+O006-PSU-013-S0293,O006-PSU-013,Lesson12,the-simple-linear-regression-model,af4870885978e1db48e7c71457bfbd4c0a7565f6f18f32248c5ca811e1c0224a,. That’s a second assumption.,,pending
+O006-PSU-013-S0294,O006-PSU-013,Lesson12,the-simple-linear-regression-model,5164eefd1e7385215dbddbf2dc3ce34799ab64bb0901842a57736490b4b92283,Did you also notice that the two normal curves in the plot are drawn to have the same shape? That suggests that each population (as defined by ,,pending
+O006-PSU-013-S0295,O006-PSU-013,Lesson12,the-simple-linear-regression-model,e56d183fc59aaa72b83798d2eadf2745ea8e36def405a63c29a35ff7adcaf647,") has a common variance. That’s a third assumption. That is, the errors, ",,pending
+O006-PSU-013-S0296,O006-PSU-013,Lesson12,the-simple-linear-regression-model,0f78582ee5e7d2d04169c9e4f05aaacd60cfb1faba3e60fed3f63cf47d58d5b7,", and therefore the responses ",,pending
+O006-PSU-013-S0297,O006-PSU-013,Lesson12,the-simple-linear-regression-model,3760416ec40abf8b1bd13ba7b5f11145481fa4ff0aba91f45da0bca46c0b5239,", have ",,pending
+O006-PSU-013-S0298,O006-PSU-013,Lesson12,the-simple-linear-regression-model,cb5e514d670db536f3e4b3af28d8d2c0e163198b1c1aeec1267a85bdfcc84abe,equal variances,,pending
+O006-PSU-013-S0299,O006-PSU-013,Lesson12,the-simple-linear-regression-model,0804d52fa969ace6234836909e7ecd796ffb8760ec1c707d3f9a86f1733fbf7e, for all ,,pending
+O006-PSU-013-S0300,O006-PSU-013,Lesson12,the-simple-linear-regression-model,8ace317b8026918c7347b4df4ce8dbab127885e1904d626967ee05e1403763ba, values.,,pending
+O006-PSU-013-S0301,O006-PSU-013,Lesson12,the-simple-linear-regression-model,6182d8f32da5f91e8b876650f950f81695095f8242fe22f6b9d77109a401d388,There’s one more assumption that is made that is difficult to depict on a graph. That’s the one that concerns the ,,pending
+O006-PSU-013-S0302,O006-PSU-013,Lesson12,the-simple-linear-regression-model,fbb6337a2ba75d089e1ebff3ed2f65bf831b74393c9a4867115f047678b0d639,independence,,pending
+O006-PSU-013-S0303,O006-PSU-013,Lesson12,the-simple-linear-regression-model,a610a02e109b5b8deaf47e81c40872046792242c7d2283b9d4d76e75187e3947, of the error terms. Let’s summarize!,,pending
+O006-PSU-013-S0304,O006-PSU-013,Lesson12,the-simple-linear-regression-model,a5095b4fce5ceb9976824727dd531bb6f9f1c9325a04ea0a22dc28dfbc876626,"In short, the simple linear regression model states that the following four conditions must hold:",,pending
+O006-PSU-013-S0305,O006-PSU-013,Lesson12,the-simple-linear-regression-model,e4bbe517343d1e7a4e83c38e915e85f3c064a032dae2ed0c12a14ea5074a68dd,"The mean of the responses, ",,pending
+O006-PSU-013-S0306,O006-PSU-013,Lesson12,the-simple-linear-regression-model,a4bd090c390c2762428b660a2e3534f6665a323d2ee69cecdece1a8a915978ab,", is a ",,pending
+O006-PSU-013-S0307,O006-PSU-013,Lesson12,the-simple-linear-regression-model,ab5e20f3abde8ceea55acf43f592e73097dabe9da4b8fb903d4962b9cbbb01cf,inear function of the ,,pending
+O006-PSU-013-S0308,O006-PSU-013,Lesson12,the-simple-linear-regression-model,b82e5893534ecc182a7b0e19c3a251b510046604b8722c41ca82ffcb54ed07ee,"The errors, ",,pending
+O006-PSU-013-S0309,O006-PSU-013,Lesson12,the-simple-linear-regression-model,3d23f11d7705559b3d5d6e8609ffdee691160e21183bcb4f9df1af502369a6ca,", and hence the responses ",,pending
+O006-PSU-013-S0310,O006-PSU-013,Lesson12,the-simple-linear-regression-model,b110daa1dacedde760fc8ce340bab10a0ed1c9fcd0bb5f15f4f506fe3bb97922,", are ",,pending
+O006-PSU-013-S0311,O006-PSU-013,Lesson12,the-simple-linear-regression-model,68a474e9943c98cafc3eba7d08e655e9a8a14641dabbfd613af204d5b1c34851,ndependent.,,pending
+O006-PSU-013-S0312,O006-PSU-013,Lesson12,the-simple-linear-regression-model,b82e5893534ecc182a7b0e19c3a251b510046604b8722c41ca82ffcb54ed07ee,"The errors, ",,pending
+O006-PSU-013-S0313,O006-PSU-013,Lesson12,the-simple-linear-regression-model,3d23f11d7705559b3d5d6e8609ffdee691160e21183bcb4f9df1af502369a6ca,", and hence the responses ",,pending
+O006-PSU-013-S0314,O006-PSU-013,Lesson12,the-simple-linear-regression-model,b110daa1dacedde760fc8ce340bab10a0ed1c9fcd0bb5f15f4f506fe3bb97922,", are ",,pending
+O006-PSU-013-S0315,O006-PSU-013,Lesson12,the-simple-linear-regression-model,b314561fc1f3392ab18aace3c48005f138ad2a08c4378f9f11888c9a5da579e2,ormally distributed.,,pending
+O006-PSU-013-S0316,O006-PSU-013,Lesson12,the-simple-linear-regression-model,b82e5893534ecc182a7b0e19c3a251b510046604b8722c41ca82ffcb54ed07ee,"The errors, ",,pending
+O006-PSU-013-S0317,O006-PSU-013,Lesson12,the-simple-linear-regression-model,3d23f11d7705559b3d5d6e8609ffdee691160e21183bcb4f9df1af502369a6ca,", and hence the responses ",,pending
+O006-PSU-013-S0318,O006-PSU-013,Lesson12,the-simple-linear-regression-model,3760416ec40abf8b1bd13ba7b5f11145481fa4ff0aba91f45da0bca46c0b5239,", have ",,pending
+O006-PSU-013-S0319,O006-PSU-013,Lesson12,the-simple-linear-regression-model,ba64e04e88b8a06f42ae14623279e061b9a2885403efe8b6826c3162d7c95275,qual variances (,,pending
+O006-PSU-013-S0320,O006-PSU-013,Lesson12,the-simple-linear-regression-model,e69761d1f88166d757c91c57f06c275e1044d71ecb8f1f051a1c9d72778dfd93,)) for all ,,pending
+O006-PSU-013-S0321,O006-PSU-013,Lesson12,the-simple-linear-regression-model,8ace317b8026918c7347b4df4ce8dbab127885e1904d626967ee05e1403763ba, values.,,pending
+O006-PSU-013-S0322,O006-PSU-013,Lesson12,the-simple-linear-regression-model,b18661506ccc344a419e0ec25412d78d16373d6c94de664c887304b4ff2fa551,"Did you happen to notice that each of the four conditions is capitalized and emphasized in red? And, did you happen to notice that the capital letters spell ",,pending
+O006-PSU-013-S0323,O006-PSU-013,Lesson12,the-simple-linear-regression-model,9e193378bce506846d48ba21ba3a72e7f33460cd544e79629490dd441d80e25d,"? Do you get it? We are investigating least squares regression lines, and the model effectively spells the word line! You might find this mnemonic an easy way to remember the four conditions.",,pending
+O006-PSU-013-S0324,O006-PSU-013,Lesson12,maximum-likelihood-estimates-of-alpha-and-beta,46e3ab00c8e88284ca040d6f62d3553536324a4c3edc9b5cf4d10d956c3c354f, Maximum Likelihood Estimates of ,,pending
+O006-PSU-013-S0325,O006-PSU-013,Lesson12,maximum-likelihood-estimates-of-alpha-and-beta,e3ee915a8e8c7aa02d2fced443314522b20824abd2535d5959c41dc8ab8a09e4, and ,,pending
+O006-PSU-013-S0326,O006-PSU-013,Lesson12,maximum-likelihood-estimates-of-alpha-and-beta,7ca430eef657a97cff2f5bbacc3725fb2fb3b7be60c84578ab70018058a7d25a,We know that ,,pending
+O006-PSU-013-S0327,O006-PSU-013,Lesson12,maximum-likelihood-estimates-of-alpha-and-beta,e3ee915a8e8c7aa02d2fced443314522b20824abd2535d5959c41dc8ab8a09e4, and ,,pending
+O006-PSU-013-S0328,O006-PSU-013,Lesson12,maximum-likelihood-estimates-of-alpha-and-beta,f71a5b3877c7399d5ff17845884639ae83d93344c8bbc5ee8253a760966b3f56,are (“least squares”) estimators of ,,pending
+O006-PSU-013-S0329,O006-PSU-013,Lesson12,maximum-likelihood-estimates-of-alpha-and-beta,e3ee915a8e8c7aa02d2fced443314522b20824abd2535d5959c41dc8ab8a09e4, and ,,pending
+O006-PSU-013-S0330,O006-PSU-013,Lesson12,maximum-likelihood-estimates-of-alpha-and-beta,83e8bb2fbd21cd92613c1e560730f9dff4421130e240bde7b9f919fd32d41dbf, that minimize the sum of the squared prediction errors. It turns out though that ,,pending
+O006-PSU-013-S0331,O006-PSU-013,Lesson12,maximum-likelihood-estimates-of-alpha-and-beta,e3ee915a8e8c7aa02d2fced443314522b20824abd2535d5959c41dc8ab8a09e4, and ,,pending
+O006-PSU-013-S0332,O006-PSU-013,Lesson12,maximum-likelihood-estimates-of-alpha-and-beta,df6d2767a7c72f106cf82c0d45b3e686f029e0b3dbdb7192cae3490604f6a660, are also maximum likelihood estimators of ,,pending
+O006-PSU-013-S0333,O006-PSU-013,Lesson12,maximum-likelihood-estimates-of-alpha-and-beta,e3ee915a8e8c7aa02d2fced443314522b20824abd2535d5959c41dc8ab8a09e4, and ,,pending
+O006-PSU-013-S0334,O006-PSU-013,Lesson12,maximum-likelihood-estimates-of-alpha-and-beta,cf68cf57d021c2e8afe658ffa20c63fd3683f62157990bdac3de6c6037e37126,providing the four conditions of the simple linear regression model hold true.,,pending
+O006-PSU-013-S0335,O006-PSU-013,Lesson12,maximum-likelihood-estimates-of-alpha-and-beta,77a354c8d81a27f73d3456af8710dac728569a204c2dd39dcdf2d8ae207b9a9e,Theorem 12.3,,pending
+O006-PSU-013-S0336,O006-PSU-013,Lesson12,maximum-likelihood-estimates-of-alpha-and-beta,4835fadec7a01044426728bed9ab6eafe696990fdfdd86067e853ce66a06b239," If the four conditions of the simple linear regression model hold true, then:",,pending
+O006-PSU-013-S0337,O006-PSU-013,Lesson12,maximum-likelihood-estimates-of-alpha-and-beta,2f7845b0b664afe703d3481611169549996627621af2361f67e8f68634ecb022,are maximum likelihood estimators of ,,pending
+O006-PSU-013-S0338,O006-PSU-013,Lesson12,maximum-likelihood-estimates-of-alpha-and-beta,e3ee915a8e8c7aa02d2fced443314522b20824abd2535d5959c41dc8ab8a09e4, and ,,pending
+O006-PSU-013-S0339,O006-PSU-013,Lesson12,maximum-likelihood-estimates-of-alpha-and-beta,7fbb3ccf9640651f69af3626de6836fb302a0a088c7cd27721c367b8b530e502,Proof,,pending
+O006-PSU-013-S0340,O006-PSU-013,Lesson12,maximum-likelihood-estimates-of-alpha-and-beta,e7ddbff16088ea02f7ca86adef578f3dadfdb85e671021156b69f0e63cada00a,"The simple linear regression model, in short, states that the errors ",,pending
+O006-PSU-013-S0341,O006-PSU-013,Lesson12,maximum-likelihood-estimates-of-alpha-and-beta,4e5999948248f61554365fef7a7887618569f1bfbf9b50e8d1f34277c95a5313, are independent and normally distributed with mean 0 and variance ,,pending
+O006-PSU-013-S0342,O006-PSU-013,Lesson12,maximum-likelihood-estimates-of-alpha-and-beta,deb44499eba48c74c2d981c532e78b27ecfafd4e59fb31f647bc616e686ba4fe,. That is:,,pending
+O006-PSU-013-S0343,O006-PSU-013,Lesson12,maximum-likelihood-estimates-of-alpha-and-beta,d153f28399ca9d1a081c97b71d66bda5611e2010da90f8a28c0e78ffa0eee059,The linearity condition:,,pending
+O006-PSU-013-S0344,O006-PSU-013,Lesson12,maximum-likelihood-estimates-of-alpha-and-beta,b281c974629b25b0dec644f5c601a5a2de23e191f4a257804ff6f07f729329a6,therefore implies that:,,pending
+O006-PSU-013-S0345,O006-PSU-013,Lesson12,maximum-likelihood-estimates-of-alpha-and-beta,eacfdd15b22f2341a07557c0fa136414d37a1a4806966439a46d37b076e12ed6,"Therefore, the likelihood function is:",,pending
+O006-PSU-013-S0346,O006-PSU-013,Lesson12,maximum-likelihood-estimates-of-alpha-and-beta,99fb06ecc326ede2d70be2ea6841b8b423eb94c62e2c25e7edf15926550a4b15,which can be rewritten as:,,pending
+O006-PSU-013-S0347,O006-PSU-013,Lesson12,maximum-likelihood-estimates-of-alpha-and-beta,0f17b8ae339072f0336d3e91d606b316cb46be136f3aa56eb6a49d23b0e232b7,"Taking the log of both sides, we get:",,pending
+O006-PSU-013-S0348,O006-PSU-013,Lesson12,maximum-likelihood-estimates-of-alpha-and-beta,3a959b2c457c86fa38934e5944fa1bcd18f9be9a95391d5827a48799b9832e83,"Now, that negative sign in front of that summation on the right hand side:",,pending
+O006-PSU-013-S0349,O006-PSU-013,Lesson12,maximum-likelihood-estimates-of-alpha-and-beta,ba591be5f0360a52a6b658bc12279ceb43a9afabbede0583a2cc01a458e786c7,tells us that the only way we can maximize ,,pending
+O006-PSU-013-S0350,O006-PSU-013,Lesson12,maximum-likelihood-estimates-of-alpha-and-beta,8a390729a748b48918a197fb2c96c761332b6bb11a3dd7c5fc4bfde4da0695d9, with respect to ,,pending
+O006-PSU-013-S0351,O006-PSU-013,Lesson12,maximum-likelihood-estimates-of-alpha-and-beta,e3ee915a8e8c7aa02d2fced443314522b20824abd2535d5959c41dc8ab8a09e4, and ,,pending
+O006-PSU-013-S0352,O006-PSU-013,Lesson12,maximum-likelihood-estimates-of-alpha-and-beta,3de83842eb479bc79799b027c331db728026db93f50b249edddb1632339e51e1, is if we minimize:,,pending
+O006-PSU-013-S0353,O006-PSU-013,Lesson12,maximum-likelihood-estimates-of-alpha-and-beta,2f7845b0b664afe703d3481611169549996627621af2361f67e8f68634ecb022,are maximum likelihood estimators of ,,pending
+O006-PSU-013-S0354,O006-PSU-013,Lesson12,maximum-likelihood-estimates-of-alpha-and-beta,e3ee915a8e8c7aa02d2fced443314522b20824abd2535d5959c41dc8ab8a09e4, and ,,pending
+O006-PSU-013-S0355,O006-PSU-013,Lesson12,maximum-likelihood-estimates-of-alpha-and-beta,b5d15921ea345f92b86944dcd08af59692da37f78461905cfdd7e6aa941fa8ea," under the assumption that the error terms are independent, normally distributed with mean 0 and variance ",,pending
+O006-PSU-013-S0356,O006-PSU-013,Lesson12,maximum-likelihood-estimates-of-alpha-and-beta,4e0f46e4d308142a2a176a972e0653dcb9cd75ad3c49191286a25ddc604b8ce6,. As was to be proved!,,pending
+O006-PSU-013-S0357,O006-PSU-013,Lesson12,what-about-the-unknown-variance-sigma2,85f73c70f5f908682065c23183ecf8b93260706ee5445bf0250192a4115b0d4b, What About The (Unknown) Variance ,,pending
+O006-PSU-013-S0358,O006-PSU-013,Lesson12,what-about-the-unknown-variance-sigma2,d285b1baeb3b29419e94b7b46daacbd03331217a49f6af36e1ffed9e7b407bbc,"In short, the variance ",,pending
+O006-PSU-013-S0359,O006-PSU-013,Lesson12,what-about-the-unknown-variance-sigma2,ca520e37c100310db07eea284c295e20db72a50531aed0b3bf351b1f02c78513, quantifies how much the responses (,,pending
+O006-PSU-013-S0360,O006-PSU-013,Lesson12,what-about-the-unknown-variance-sigma2,4591c54a3eab4d8efe1d7403de15b04b1cdd10525852f7c3b7fe1096de8ac3ce,) vary around the (unknown) mean regression line ,,pending
+O006-PSU-013-S0361,O006-PSU-013,Lesson12,what-about-the-unknown-variance-sigma2,adc5e0e2ab03fdf2ebeb98fe419699a1be1897636f6d3640747d329c2677d5b0,". Now, why should we care about the magnitude of the variance ",,pending
+O006-PSU-013-S0362,O006-PSU-013,Lesson12,what-about-the-unknown-variance-sigma2,bacdd0cf8215c9c0b5fa9a03ab1c9bab617ef5bcc3717ac0fda0143879f27d1c,? The following example might help to illuminate the answer to that question.,,pending
+O006-PSU-013-S0363,O006-PSU-013,Lesson12,what-about-the-unknown-variance-sigma2,69006f3039834ff6af3990db025c1fe328902e7302199a7be43172e0e9e30bd4,Example 12.2,,pending
+O006-PSU-013-S0364,O006-PSU-013,Lesson12,what-about-the-unknown-variance-sigma2,26cf6aacaf04d2515f3f7c7d02da85d0255a91e1d3f2aae445a64f6e80ed6477, We know that there is a perfect relationship between degrees Celsius (,,pending
+O006-PSU-013-S0365,O006-PSU-013,Lesson12,what-about-the-unknown-variance-sigma2,cb64b7b1777b6d2f02423d624625ab7b32ec7b9fae9cfab71b721c8aff55e939,) and degrees Fahrenheit (,,pending
+O006-PSU-013-S0366,O006-PSU-013,Lesson12,what-about-the-unknown-variance-sigma2,77c169a922cc424b52b71af0fea1f7e8a55771cc3d748c19282018f795299e59,"), namely:",,pending
+O006-PSU-013-S0367,O006-PSU-013,Lesson12,what-about-the-unknown-variance-sigma2,053f44d27a650d5d231b52920d5829d87f65f3020af9ba4044150c8f8e32a5e0,"Suppose we are unfortunate, however, and therefore don’t know the relationship. We might attempt to learn about the relationship by collecting some temperature data and calculating a least squares regression line. When all is said and done, which brand of thermometers do you think would yield more precise future predictions of the temperature in Fahrenheit? The one whose data are plotted on the left? Or the one whose data are plotted on the right?",,pending
+O006-PSU-013-S0368,O006-PSU-013,Lesson12,what-about-the-unknown-variance-sigma2,7c9e9f8aec5e4c53d9002a6ca45bad9de6237659887206b4e9c996632f9fab1b,"
+Fig 12.7
+",,pending
+O006-PSU-013-S0369,O006-PSU-013,Lesson12,what-about-the-unknown-variance-sigma2,4d4451746ab06e330c2fd476e33773eccdbdd12794b88c65f43fb5a5fc70cb36,"
+Fig 12.8
+",,pending
+O006-PSU-013-S0370,O006-PSU-013,Lesson12,solution-1,22927695994eab589c7601a6b15df4d9dc67c5aceb9a74cdb965444b9b8362a6,Solution,,pending
+O006-PSU-013-S0371,O006-PSU-013,Lesson12,solution-1,00ef9c8f56d63fc866f04f8726b206e08c7df978b09bab750283b244d7625f3c,"As you can see, for the plot on the left, the Fahrenheit temperatures do not vary or “bounce” much around the estimated regression line. For the plot on the right, on the other hand, the Fahrenheit temperatures do vary or “bounce” quite a bit around the estimated regression line. It seems reasonable to conclude then that the brand of thermometers on the left will yield more precise future predictions of the temperature in Fahrenheit.",,pending
+O006-PSU-013-S0372,O006-PSU-013,Lesson12,solution-1,7917d191447f7e82dc77471c6cdeb3f4a8614d716d8575beb6957072b2251c79,"Now, the variance ",,pending
+O006-PSU-013-S0373,O006-PSU-013,Lesson12,solution-1,69e17df027d712d70cf314a760888ed5b0a2a5cc3151c1251538957a43f39821," is, of course, an unknown population parameter. The only way we can attempt to quantify the variance is to estimate it. In the case in which we had one population, say the (normal) population of IQ scores:",,pending
+O006-PSU-013-S0374,O006-PSU-013,Lesson12,solution-1,3340c380d855e10f4c22c095ed15dc470c39c3429ae33dbc58bbb34665e99db8,"
+Fig 12.9
+",,pending
+O006-PSU-013-S0375,O006-PSU-013,Lesson12,solution-1,9ec95eb78edada3322f851bee08f98697daecc4da18a023bf3760499883e8e41,we would estimate the population variance ,,pending
+O006-PSU-013-S0376,O006-PSU-013,Lesson12,solution-1,a34001c18f4d3e76c75fb80cfa13fdb9b396ec2d63e0c8788a9ae870064f1fae, using the sample variance:,,pending
+O006-PSU-013-S0377,O006-PSU-013,Lesson12,solution-1,056c907b32d31a79798e7023624186c8f9e9ac9f36f4d80c01f60ce6c82721f9,We have learned that ,,pending
+O006-PSU-013-S0378,O006-PSU-013,Lesson12,solution-1,42b1cc7c522489551f8c52ec88d1523c181769363c777f7db6311c9b1bf854fd, is an unbiased estimator of ,,pending
+O006-PSU-013-S0379,O006-PSU-013,Lesson12,solution-1,319cdeb6086be6a649c26d7ec5f997a98acbf5e06dca48657fc4c15fb8a9632a,", the variance of the one population. But what if we no longer have just one population, but instead have many populations? In our bids and hours example, there is a population for every value of ",,pending
+O006-PSU-013-S0380,O006-PSU-013,Lesson12,solution-1,33020a87c60140bd0681443877fccd990720fcd8e1efc044f5b6e99d36474968,"
+Fig 12.10
+",,pending
+O006-PSU-013-S0381,O006-PSU-013,Lesson12,solution-1,c73cab00528b59b21fa065876025d9f169f9438c4643a59a4ede6f4574b7dfa6,"In this case, we have to estimate ",,pending
+O006-PSU-013-S0382,O006-PSU-013,Lesson12,solution-1,f6696b05d26699ed165817820fd99fc8ec6dd2ebba1976dec52bef8c2eca8645,", the (common) variance of the many populations. There are two possibilities − one is a biased estimator, and one is an unbiased estimator.",,pending
+O006-PSU-013-S0383,O006-PSU-013,Lesson12,what-about-the-unknown-variance-sigma2,d1426f6808a5a4f94d0275d2002592013484dfc2972403c895f4e9a696488a10,Theorem 12.4,,pending
+O006-PSU-013-S0384,O006-PSU-013,Lesson12,what-about-the-unknown-variance-sigma2,e4234a91ee4b430f265c50a6ca0951e5db10fda5dd697c646dc23ebd47f53c1f, The maximum likelihood estimator of ,,pending
+O006-PSU-013-S0385,O006-PSU-013,Lesson12,what-about-the-unknown-variance-sigma2,ccd4554f9c2a0a240cbe274a4447ae7d6933d28a26c80815a1475dff5ad731bd, is:,,pending
+O006-PSU-013-S0386,O006-PSU-013,Lesson12,what-about-the-unknown-variance-sigma2,63d4dced35a24f1fd146ff227928c82edbeb4e93750d414cf2f8012a0240cd1e,It is a biased estimator of ,,pending
+O006-PSU-013-S0387,O006-PSU-013,Lesson12,what-about-the-unknown-variance-sigma2,9386c1d58cb8faba399d5591581045bfe6eabe0166090de227635da64c85d19c,", the common variance of the ",,pending
+O006-PSU-013-S0388,O006-PSU-013,Lesson12,what-about-the-unknown-variance-sigma2,1137b15c7797aa84ec24e8dca5cb966dd016624374a09cb2ecaa9ac3229f5ccc,many,,pending
+O006-PSU-013-S0389,O006-PSU-013,Lesson12,what-about-the-unknown-variance-sigma2,e1b6c001120f0bc4536fd375c53024b31a330c5c7ef39ff2001e602f3507135f, populations.,,pending
+O006-PSU-013-S0390,O006-PSU-013,Lesson12,what-about-the-unknown-variance-sigma2,7fbb3ccf9640651f69af3626de6836fb302a0a088c7cd27721c367b8b530e502,Proof,,pending
+O006-PSU-013-S0391,O006-PSU-013,Lesson12,what-about-the-unknown-variance-sigma2,7c91ebf5af7d7a689eb71f3916b5df473299fb398848901a92832c020b7381d4,We have previously shown that the log of the likelihood function is:,,pending
+O006-PSU-013-S0392,O006-PSU-013,Lesson12,what-about-the-unknown-variance-sigma2,a56b7f7a64d514154aa7781a3e42acd44418b37ba67ab529f496cacbc6f70d0a,"To maximize the log likelihood, we have to take the partial derivative of the log likelihood with respect to ",,pending
+O006-PSU-013-S0393,O006-PSU-013,Lesson12,what-about-the-unknown-variance-sigma2,dc6a7021f506c406f42b68a7d0cc79afd46e8c9701408f5c6adcd4f132251836,". Doing so, we get:",,pending
+O006-PSU-013-S0394,O006-PSU-013,Lesson12,what-about-the-unknown-variance-sigma2,c79087012d27a27d0b03cffb0b41fce481445497a8b98948a3b222fd1863e3d1,"Setting the derivative equal to 0, and multiplying through by ",,pending
+O006-PSU-013-S0395,O006-PSU-013,Lesson12,what-about-the-unknown-variance-sigma2,34b29cbfa94bdbed0512816d3289505cdda42bcfb3e41a866bc3b3b9830d092f,we get:,,pending
+O006-PSU-013-S0396,O006-PSU-013,Lesson12,what-about-the-unknown-variance-sigma2,b6308b5ad470212d4143c7d766ccb4db6d9dfc826ee6af004bfe5b2ae8c6cb05,"And, solving for and putting a hat on ",,pending
+O006-PSU-013-S0397,O006-PSU-013,Lesson12,what-about-the-unknown-variance-sigma2,9e785f6916cddc8923de91cd3ee1a85ac1dcc9014a6dbc5a0436ae9853244056,", as well as replacing ",,pending
+O006-PSU-013-S0398,O006-PSU-013,Lesson12,what-about-the-unknown-variance-sigma2,e3ee915a8e8c7aa02d2fced443314522b20824abd2535d5959c41dc8ab8a09e4, and ,,pending
+O006-PSU-013-S0399,O006-PSU-013,Lesson12,what-about-the-unknown-variance-sigma2,5b6f4e202bca8662d5927c8f8a916688753465e7345e25635c567949596ea7b9," with their ML estimators, we get:",,pending
+O006-PSU-013-S0400,O006-PSU-013,Lesson12,what-about-the-unknown-variance-sigma2,7172df269290630ba276ef9a19bed6b5e883b22c00f31097b24004c33e74ae81,As was to be proved.,,pending
+O006-PSU-013-S0401,O006-PSU-013,Lesson12,what-about-the-unknown-variance-sigma2,c5a4b71ec5eb22695d845d6aa5e9a9e0528ca828950ba00975f8fcb6a42eb8c9,Def. 12.1 (Mean Square Error),,pending
+O006-PSU-013-S0402,O006-PSU-013,Lesson12,what-about-the-unknown-variance-sigma2,79e3f2a55928f9be8e9bf79254ff7e3ef670540a1c5ca07cfe875827d89757e0, The ,,pending
+O006-PSU-013-S0403,O006-PSU-013,Lesson12,what-about-the-unknown-variance-sigma2,25f62065ccfb080db81852475d1d8b4d883b736821722f812e07a15aac0c321b,mean square error,,pending
+O006-PSU-013-S0404,O006-PSU-013,Lesson12,what-about-the-unknown-variance-sigma2,5b8be3a2955370249b7e0f6cf407e47991ab704d2f8174643b88043325bcb63c,", on the other hand:",,pending
+O006-PSU-013-S0405,O006-PSU-013,Lesson12,what-about-the-unknown-variance-sigma2,875f0d7cbc1f51d3c0bd55c61656e4a5e3a43b5637b7fd396f076b330b74b239,is an ,,pending
+O006-PSU-013-S0406,O006-PSU-013,Lesson12,what-about-the-unknown-variance-sigma2,d8bbbfc5661bd9a4175d2b87cadd9d8466e7f0c7b0975bd65a60d8198ae1ec7c,unbiased estimator,,pending
+O006-PSU-013-S0407,O006-PSU-013,Lesson12,what-about-the-unknown-variance-sigma2,a4282e4b2298b90b56f7eea346da65668a968621448c899a2a3ea5cf15655ddc, of ,,pending
+O006-PSU-013-S0408,O006-PSU-013,Lesson12,what-about-the-unknown-variance-sigma2,9386c1d58cb8faba399d5591581045bfe6eabe0166090de227635da64c85d19c,", the common variance of the ",,pending
+O006-PSU-013-S0409,O006-PSU-013,Lesson12,what-about-the-unknown-variance-sigma2,1137b15c7797aa84ec24e8dca5cb966dd016624374a09cb2ecaa9ac3229f5ccc,many,,pending
+O006-PSU-013-S0410,O006-PSU-013,Lesson12,what-about-the-unknown-variance-sigma2,e1b6c001120f0bc4536fd375c53024b31a330c5c7ef39ff2001e602f3507135f, populations.,,pending
+O006-PSU-013-S0411,O006-PSU-013,Lesson12,what-about-the-unknown-variance-sigma2,96a6fb5dffc3a0a566d3e5b1b9b696111d9da9c452cb5342b952fdde2927e2ec,We’ll need to use these estimators of ,,pending
+O006-PSU-013-S0412,O006-PSU-013,Lesson12,what-about-the-unknown-variance-sigma2,ce6db3445b1bd3bdb0d0469e7d901fb1fdbd6dd49993b45d7e3845f54f02adbd, when we derive confidence intervals for ,,pending
+O006-PSU-013-S0413,O006-PSU-013,Lesson12,what-about-the-unknown-variance-sigma2,e3ee915a8e8c7aa02d2fced443314522b20824abd2535d5959c41dc8ab8a09e4, and ,,pending
+O006-PSU-013-S0414,O006-PSU-013,Lesson12,what-about-the-unknown-variance-sigma2,aa825c524192062e7126244f8b44bb8e34d697f6c79daaf787e9fc47ff78394d, in the next section.,,pending
+O006-PSU-013-S0415,O006-PSU-013,Lesson12,confidence-intervals-for-regression-parameters,e61f2b4af6c6934c6fb20f16c8dcc44846e66728359075ccfa0098340ac52fe5, Confidence Intervals for Regression Parameters,,pending
+O006-PSU-013-S0416,O006-PSU-013,Lesson12,confidence-intervals-for-regression-parameters,151084179e7e8b7b50d4a2ccde239ef460d516b42733e26943b853ef7136dff2,Before we can derive confidence intervals for ,,pending
+O006-PSU-013-S0417,O006-PSU-013,Lesson12,confidence-intervals-for-regression-parameters,e3ee915a8e8c7aa02d2fced443314522b20824abd2535d5959c41dc8ab8a09e4, and ,,pending
+O006-PSU-013-S0418,O006-PSU-013,Lesson12,confidence-intervals-for-regression-parameters,0087fd3f24670242335bf19482b3da0c2318edd9d2c581984e04bcbe4dd5e726,", we first need to derive the probability distributions of ",,pending
+O006-PSU-013-S0419,O006-PSU-013,Lesson12,confidence-intervals-for-regression-parameters,e3ee915a8e8c7aa02d2fced443314522b20824abd2535d5959c41dc8ab8a09e4, and ,,pending
+O006-PSU-013-S0420,O006-PSU-013,Lesson12,confidence-intervals-for-regression-parameters,283f423fcb3471e349837287e679d527ef4ea986c99649785c1daa3809a6f972,". In the process of doing so, let’s adopt the more traditional estimator notation of putting a hat on greek letters. That is, here we’ll use:",,pending
+O006-PSU-013-S0421,O006-PSU-013,Lesson12,confidence-intervals-for-regression-parameters,3b431f14fba74fd59f95d8093c18a5e44273856c9bf7477eae1f84815dce741d,Theorem 12.5,,pending
+O006-PSU-013-S0422,O006-PSU-013,Lesson12,confidence-intervals-for-regression-parameters,ffc8aa03f91dd659b606d2ef014ba809543560f4a530d97e3a6d3d264df72333, Under the assumptions of the simple linear regression model:,,pending
+O006-PSU-013-S0423,O006-PSU-013,Lesson12,confidence-intervals-for-regression-parameters,7fbb3ccf9640651f69af3626de6836fb302a0a088c7cd27721c367b8b530e502,Proof,,pending
+O006-PSU-013-S0424,O006-PSU-013,Lesson12,confidence-intervals-for-regression-parameters,0b900ed6f9c598590141e78c0466c5e959639309922078406882eadb7f8e6f3b,Recall that the ML (and least squares!) estimator of ,,pending
+O006-PSU-013-S0425,O006-PSU-013,Lesson12,confidence-intervals-for-regression-parameters,ccd4554f9c2a0a240cbe274a4447ae7d6933d28a26c80815a1475dff5ad731bd, is:,,pending
+O006-PSU-013-S0426,O006-PSU-013,Lesson12,confidence-intervals-for-regression-parameters,e7028818418549a1219f93811ffbb5bb929765e67bb9aa446073d12cc93048d3,where the responses ,,pending
+O006-PSU-013-S0427,O006-PSU-013,Lesson12,confidence-intervals-for-regression-parameters,126424e9432ac2302578d7af234edfb796445fa686e35c275f672f5f267fbe66, are independent and normally distributed. More specifically:,,pending
+O006-PSU-013-S0428,O006-PSU-013,Lesson12,confidence-intervals-for-regression-parameters,e84b2e2a82b522539603d95fe86b4908c2876a0f09b7068c92623944dd4b4ecd,The expected value of ,,pending
+O006-PSU-013-S0429,O006-PSU-013,Lesson12,confidence-intervals-for-regression-parameters,81afb10b461acd8f2b7eee698fb0c314c454f7acb574a34baded7f6912fc7a0f, is ,,pending
+O006-PSU-013-S0430,O006-PSU-013,Lesson12,confidence-intervals-for-regression-parameters,d83cba173cbfcd8048f7485905f3f479720ca987ce8edc3531d25b1be6c06048,", as shown here:",,pending
+O006-PSU-013-S0431,O006-PSU-013,Lesson12,confidence-intervals-for-regression-parameters,b2d8eb756ebd5335a7919742604c521fc1b1c38fe2ab91f51af5ab31a376f396,Because ,,pending
+O006-PSU-013-S0432,O006-PSU-013,Lesson12,confidence-intervals-for-regression-parameters,1cc57ff54dc5d30c6eda3004ee5d0c10c008dc2732b5f601ed41c1576946dc18,The variance of ,,pending
+O006-PSU-013-S0433,O006-PSU-013,Lesson12,confidence-intervals-for-regression-parameters,3937c3b21666c6ced69e1434df55a8dae54f290bce316a99574b6ad65eb2731b," follow directly from what we know about the variance of a sample mean, namely:",,pending
+O006-PSU-013-S0434,O006-PSU-013,Lesson12,confidence-intervals-for-regression-parameters,ad0bb8852a8acbaf2aeeb59afa47f5ae2c28da7c43ea82c18910e0ab44efbec6,"Therefore, since a linear combination of normal random variables is also normally distributed, we have:",,pending
+O006-PSU-013-S0435,O006-PSU-013,Lesson12,confidence-intervals-for-regression-parameters,fdd3caab221e24950a37c047cffefda7ea0c0ec4b6f64e6a9177ee653b50e961,as was to be proved!,,pending
+O006-PSU-013-S0436,O006-PSU-013,Lesson12,confidence-intervals-for-regression-parameters,ea31b495b4942d0b42259eebc8df37be83c866bd9345e383d8e4f718fcfabb33,Theorem 12.6,,pending
+O006-PSU-013-S0437,O006-PSU-013,Lesson12,confidence-intervals-for-regression-parameters,ffc8aa03f91dd659b606d2ef014ba809543560f4a530d97e3a6d3d264df72333, Under the assumptions of the simple linear regression model:,,pending
+O006-PSU-013-S0438,O006-PSU-013,Lesson12,confidence-intervals-for-regression-parameters,7fbb3ccf9640651f69af3626de6836fb302a0a088c7cd27721c367b8b530e502,Proof,,pending
+O006-PSU-013-S0439,O006-PSU-013,Lesson12,confidence-intervals-for-regression-parameters,1610f853f1e718f6b96723c9d64c7a493e228aa62795f4ffdebcbdc342e1c9ae,Recalling one of the shortcut formulas for the ML (and least squares!) estimator of ,,pending
+O006-PSU-013-S0440,O006-PSU-013,Lesson12,confidence-intervals-for-regression-parameters,4bcff69d8350e62d385486e39c65f87dfca996b66f9f782ba1cd2d4f0ca71a52,we see that the ML estimator is a linear combination of independent normal random variables ,,pending
+O006-PSU-013-S0441,O006-PSU-013,Lesson12,confidence-intervals-for-regression-parameters,351c8d749d699825488f92d34f6aff1513f87c42f7a408088d62218e375b563c, with:,,pending
+O006-PSU-013-S0442,O006-PSU-013,Lesson12,confidence-intervals-for-regression-parameters,e84b2e2a82b522539603d95fe86b4908c2876a0f09b7068c92623944dd4b4ecd,The expected value of ,,pending
+O006-PSU-013-S0443,O006-PSU-013,Lesson12,confidence-intervals-for-regression-parameters,81afb10b461acd8f2b7eee698fb0c314c454f7acb574a34baded7f6912fc7a0f, is ,,pending
+O006-PSU-013-S0444,O006-PSU-013,Lesson12,confidence-intervals-for-regression-parameters,d83cba173cbfcd8048f7485905f3f479720ca987ce8edc3531d25b1be6c06048,", as shown here:",,pending
+O006-PSU-013-S0445,O006-PSU-013,Lesson12,confidence-intervals-for-regression-parameters,681ee6c8494bfd414a884023fab2c9047605424e3b146577281fc34736d996cc,because ,,pending
+O006-PSU-013-S0446,O006-PSU-013,Lesson12,confidence-intervals-for-regression-parameters,3fc63e6c1216e140fa5f27e682bdff931e575151d32bd4499ddefb1ed27e87d2,"And, the variance of ",,pending
+O006-PSU-013-S0447,O006-PSU-013,Lesson12,confidence-intervals-for-regression-parameters,ccd4554f9c2a0a240cbe274a4447ae7d6933d28a26c80815a1475dff5ad731bd, is:,,pending
+O006-PSU-013-S0448,O006-PSU-013,Lesson12,confidence-intervals-for-regression-parameters,ad0bb8852a8acbaf2aeeb59afa47f5ae2c28da7c43ea82c18910e0ab44efbec6,"Therefore, since a linear combination of normal random variables is also normally distributed, we have:",,pending
+O006-PSU-013-S0449,O006-PSU-013,Lesson12,confidence-intervals-for-regression-parameters,a6a65f7259b4725f28b74d9f3adaa302f8bb2e10389ace874d257f0179059f13,As was to be proved!,,pending
+O006-PSU-013-S0450,O006-PSU-013,Lesson12,confidence-intervals-for-regression-parameters,40b5fe713a2c3e04a677bd5fa7cddef58c46da3d97d7dea5c6bfb98b02d84252,Theorem 12.7,,pending
+O006-PSU-013-S0451,O006-PSU-013,Lesson12,confidence-intervals-for-regression-parameters,ffc8aa03f91dd659b606d2ef014ba809543560f4a530d97e3a6d3d264df72333, Under the assumptions of the simple linear regression model:,,pending
+O006-PSU-013-S0452,O006-PSU-013,Lesson12,confidence-intervals-for-regression-parameters,427a379ae3e6b749a8893bac35e20ab8dadb124ee64a5c615c3548f05ae44017,and ,,pending
+O006-PSU-013-S0453,O006-PSU-013,Lesson12,confidence-intervals-for-regression-parameters,0a63e3f63f232f0c18f3bfe678607aad0b9f7ac6c73e037f74c79c0b2ba103f8,", and ",,pending
+O006-PSU-013-S0454,O006-PSU-013,Lesson12,confidence-intervals-for-regression-parameters,5ddd0bbd1b71df8409beb880a2f51bbb38911a787c7d0c03087cc9c8c98b405b, are mutually independent.,,pending
+O006-PSU-013-S0455,O006-PSU-013,Lesson12,confidence-intervals-for-regression-parameters,481da3a767b1d5439ffb4b0e25b6958533c113d5492236705f4bdd4296b500e4,Argument,,pending
+O006-PSU-013-S0456,O006-PSU-013,Lesson12,confidence-intervals-for-regression-parameters,80dcfedbcc770de1297a520fbf1db1d433c4489630300687ef974e227f823fab,"First, note that the heading here says Argument, not Proof. That’s because we are going to be doing some hand-waving and pointing to another reference, as the proof is beyond the scope of this course. That said, let’s start our hand-waving. For homework, you are asked to show that:",,pending
+O006-PSU-013-S0457,O006-PSU-013,Lesson12,confidence-intervals-for-regression-parameters,5a2f4d6e81750f4602706577ca8e455399268fef96d8876a993961836a66f1ae,"Now, if we divide through both sides of the equation by the population variance ",,pending
+O006-PSU-013-S0458,O006-PSU-013,Lesson12,confidence-intervals-for-regression-parameters,fb3ac6ea6572280cdc47b1e3ad8fcd262984901b6cd596138547cd23f4a29661,", we get:",,pending
+O006-PSU-013-S0459,O006-PSU-013,Lesson12,confidence-intervals-for-regression-parameters,f0ce3ddc3a1418aad782da691f472f91c3d7f4a62e7ebaca405caf71f23cf6a9,"Rewriting a few of those terms just a bit, we get:",,pending
+O006-PSU-013-S0460,O006-PSU-013,Lesson12,confidence-intervals-for-regression-parameters,9b1937647854e7e14f03d10661b1b1780caa881fd28ad08c479cb831b6a1fd8a,"Now, the terms are written so that we should be able to readily identify the distributions of each of the terms. The distributions are:",,pending
+O006-PSU-013-S0461,O006-PSU-013,Lesson12,confidence-intervals-for-regression-parameters,ff5b4672ed94e052b0a068afe9a31ad0d22d9b51a68c4cef0e4f2c03decec7cd,"Now, it might seem reasonable that the last term is a chi-square random variable with ",,pending
+O006-PSU-013-S0462,O006-PSU-013,Lesson12,confidence-intervals-for-regression-parameters,486487f695f1106dae0f94addc8bd1bdc268ad1564461f9e20b4c3e499fe84d2, degrees of freedom. That is:,,pending
+O006-PSU-013-S0463,O006-PSU-013,Lesson12,confidence-intervals-for-regression-parameters,60a6796269ffe9a249754cd1211ab29be8959f74894152087af7b0fe347513a4,"and furthermore, ",,pending
+O006-PSU-013-S0464,O006-PSU-013,Lesson12,confidence-intervals-for-regression-parameters,0a63e3f63f232f0c18f3bfe678607aad0b9f7ac6c73e037f74c79c0b2ba103f8,", and ",,pending
+O006-PSU-013-S0465,O006-PSU-013,Lesson12,confidence-intervals-for-regression-parameters,34b9d20323945734db829b33e60e5fc95ef2413bf669e868a4aad073b0d2c318," are mutually independent. (For a proof, you can refer to any number of mathematical statistics textbooks).",,pending
+O006-PSU-013-S0466,O006-PSU-013,Lesson12,confidence-intervals-for-regression-parameters,730a11ffc41ea87277ef055d5de4e87afac0c11742bc0f1a99a1d8f24b98e956,"With the distributional results behind us, we can now derive ",,pending
+O006-PSU-013-S0467,O006-PSU-013,Lesson12,confidence-intervals-for-regression-parameters,212e3cf8adfab797064d0bc25f07e14ab7d7dc3030ea716c0858816a19e16d69, confidence intervals for ,,pending
+O006-PSU-013-S0468,O006-PSU-013,Lesson12,confidence-intervals-for-regression-parameters,e3ee915a8e8c7aa02d2fced443314522b20824abd2535d5959c41dc8ab8a09e4, and ,,pending
+O006-PSU-013-S0469,O006-PSU-013,Lesson12,confidence-intervals-for-regression-parameters,a836bd9b03fc3708e51047db65c6592280c7c3af5d97ccb035e6f74a4873a1e5,Theorem 12.8,,pending
+O006-PSU-013-S0470,O006-PSU-013,Lesson12,confidence-intervals-for-regression-parameters,18a084220bed0db947745ae5af1672f60da67baf765b96fc19106f387008d3d0," Under the assumptions of the simple linear regression model, a ",,pending
+O006-PSU-013-S0471,O006-PSU-013,Lesson12,confidence-intervals-for-regression-parameters,953d7ba4639cbf674613390ffb15425916c362594992cf41d218ef196d08cad3,confidence interval for the slope parameter,,pending
+O006-PSU-013-S0472,O006-PSU-013,Lesson12,confidence-intervals-for-regression-parameters,ccd4554f9c2a0a240cbe274a4447ae7d6933d28a26c80815a1475dff5ad731bd, is:,,pending
+O006-PSU-013-S0473,O006-PSU-013,Lesson12,confidence-intervals-for-regression-parameters,e0e5ee88cd11428ea4581e6cb769a5c7fcacca26349efd8b78c6c82284c100d8,or equivalently:,,pending
+O006-PSU-013-S0474,O006-PSU-013,Lesson12,confidence-intervals-for-regression-parameters,7fbb3ccf9640651f69af3626de6836fb302a0a088c7cd27721c367b8b530e502,Proof,,pending
+O006-PSU-013-S0475,O006-PSU-013,Lesson12,confidence-intervals-for-regression-parameters,18228941834e5d6df572f62a2b91eb825ba0dc06b27baf172cfd97b2f6ccfbcd,Recall the definition of a ,,pending
+O006-PSU-013-S0476,O006-PSU-013,Lesson12,confidence-intervals-for-regression-parameters,61f7d222d309afd61fe37100b5649298568b9ea0e75d7caac45edd67d4c235e3," random variable. That is, recall that if:",,pending
+O006-PSU-013-S0477,O006-PSU-013,Lesson12,confidence-intervals-for-regression-parameters,7c95650ba592775bb22d766615fdc07aab72ed4299f67d72a8258060cd58c805, is a standard normal (,,pending
+O006-PSU-013-S0478,O006-PSU-013,Lesson12,confidence-intervals-for-regression-parameters,f5fda3f868d240649903f2a3faa96a88cc553f43facff5ca6c3743a563d9cc3c,)) random variable,,pending
+O006-PSU-013-S0479,O006-PSU-013,Lesson12,confidence-intervals-for-regression-parameters,730315e5dedcad6646b722c5d7034abd56a91b53218266292557da173d463aed, is a chi-square random variable with ,,pending
+O006-PSU-013-S0480,O006-PSU-013,Lesson12,confidence-intervals-for-regression-parameters,742be6d7d06c080b911099d16bb7d72da56facb746b1599afc9ab4452ec6da00, degrees of freedom,,pending
+O006-PSU-013-S0481,O006-PSU-013,Lesson12,confidence-intervals-for-regression-parameters,e3ee915a8e8c7aa02d2fced443314522b20824abd2535d5959c41dc8ab8a09e4, and ,,pending
+O006-PSU-013-S0482,O006-PSU-013,Lesson12,confidence-intervals-for-regression-parameters,d27e3d29c8305ffda9af6097e082692157f402f7048bcf9788b1995b5b928eae," are independent, then:",,pending
+O006-PSU-013-S0483,O006-PSU-013,Lesson12,confidence-intervals-for-regression-parameters,c6d9019f0047ed7805316dee458ce5c60960cb26148a30c18397a068659d8518,follows a ,,pending
+O006-PSU-013-S0484,O006-PSU-013,Lesson12,confidence-intervals-for-regression-parameters,29d504a17f98b2e2c5ab76e0624d611621c4e464de355e040467e2ccfbade4c5, distribution with ,,pending
+O006-PSU-013-S0485,O006-PSU-013,Lesson12,confidence-intervals-for-regression-parameters,f1aabbe8a7869df0397caac42986f38bf5e19b95e24d257a245bb0c46625ccf8," degrees of freedom. Now, our work above tells us that:",,pending
+O006-PSU-013-S0486,O006-PSU-013,Lesson12,confidence-intervals-for-regression-parameters,c62867a31c320f7cb64f75a5f3861bc62d22686f2b5574f902590cce2dea76a4,"Therefore, we have that:",,pending
+O006-PSU-013-S0487,O006-PSU-013,Lesson12,confidence-intervals-for-regression-parameters,c6d9019f0047ed7805316dee458ce5c60960cb26148a30c18397a068659d8518,follows a ,,pending
+O006-PSU-013-S0488,O006-PSU-013,Lesson12,confidence-intervals-for-regression-parameters,29d504a17f98b2e2c5ab76e0624d611621c4e464de355e040467e2ccfbade4c5, distribution with ,,pending
+O006-PSU-013-S0489,O006-PSU-013,Lesson12,confidence-intervals-for-regression-parameters,1fbed218e50ee09d5ed4eb628cb0751d4ac7ef2df22c6ca8790f50809ea96502," degrees of freedom. Now, deriving a confidence interval for ",,pending
+O006-PSU-013-S0490,O006-PSU-013,Lesson12,confidence-intervals-for-regression-parameters,c90ceb492642b185590dd4745a3e9f5835768d9910fe8f9d8a6585423f5432a6, reduces to the usual manipulation of the inside of a probability statement:,,pending
+O006-PSU-013-S0491,O006-PSU-013,Lesson12,confidence-intervals-for-regression-parameters,fdd3caab221e24950a37c047cffefda7ea0c0ec4b6f64e6a9177ee653b50e961,as was to be proved!,,pending
+O006-PSU-013-S0492,O006-PSU-013,Lesson12,confidence-intervals-for-regression-parameters,3b7f948380023f72fbbb85e0ae2b0707fa4888c46b4f25e9c716361d4a69fa15,"Now, for the confidence interval for the intercept parameter ",,pending
+O006-PSU-013-S0493,O006-PSU-013,Lesson12,confidence-intervals-for-regression-parameters,4c72f09bcdfb49c780dce540791fc360160bce0928869ba927ffb0680a0d4270,Theorem 12.9,,pending
+O006-PSU-013-S0494,O006-PSU-013,Lesson12,confidence-intervals-for-regression-parameters,18a084220bed0db947745ae5af1672f60da67baf765b96fc19106f387008d3d0," Under the assumptions of the simple linear regression model, a ",,pending
+O006-PSU-013-S0495,O006-PSU-013,Lesson12,confidence-intervals-for-regression-parameters,108ce75c81c0ce48b64964e34b7a425615527d34815857c20064874718264a63, confidence interval for the intercept parameter ,,pending
+O006-PSU-013-S0496,O006-PSU-013,Lesson12,confidence-intervals-for-regression-parameters,ccd4554f9c2a0a240cbe274a4447ae7d6933d28a26c80815a1475dff5ad731bd, is:,,pending
+O006-PSU-013-S0497,O006-PSU-013,Lesson12,confidence-intervals-for-regression-parameters,e0e5ee88cd11428ea4581e6cb769a5c7fcacca26349efd8b78c6c82284c100d8,or equivalently:,,pending
+O006-PSU-013-S0498,O006-PSU-013,Lesson12,confidence-intervals-for-regression-parameters,7fbb3ccf9640651f69af3626de6836fb302a0a088c7cd27721c367b8b530e502,Proof,,pending
+O006-PSU-013-S0499,O006-PSU-013,Lesson12,confidence-intervals-for-regression-parameters,623a6883c2507df744563a7ee39d495bfbd5f83830b332fe53f5872738434c58,"The proof, which again may or may not appear on a future assessment, is left for you for practice.",,pending
+O006-PSU-013-S0500,O006-PSU-013,Lesson12,confidence-intervals-for-regression-parameters,65f1cca9826c3da2f4115833a158a5c6a73afb2941c5585abc1fcee412955409,Example 12.3,,pending
+O006-PSU-013-S0501,O006-PSU-013,Lesson12,confidence-intervals-for-regression-parameters,0d1f2079ecba48a4ebc779bcccfb0cc51d2e1bd1dfdb7d25e958ea1cb234e8aa, The following table shows ,,pending
+O006-PSU-013-S0502,O006-PSU-013,Lesson12,confidence-intervals-for-regression-parameters,0aa6fbd5535a76867b26f885ba9e2fa0598c9d2da2b8f2c67443c8bde0128130,", the catches of Peruvian anchovies (in millions of metric tons) and ",,pending
+O006-PSU-013-S0503,O006-PSU-013,Lesson12,confidence-intervals-for-regression-parameters,b650727a842331a26f0790ebb828ba5888aa97e1dccd3ef51d23cb938497da2b,", the prices of fish meal (in current dollars per ton) for 14 consecutive years. (Data from Bardach, JE and Santerre, RM, Climate and the Fish in the Sea, Bioscience 31(3), 1981).",,pending
+O006-PSU-013-S0504,O006-PSU-013,Lesson12,confidence-intervals-for-regression-parameters,95110d74c4c009126c967cac38ab0454d73e337c4fdafc280c04f67e66e5fe95,Row,,pending
+O006-PSU-013-S0505,O006-PSU-013,Lesson12,confidence-intervals-for-regression-parameters,93c91c851e7acc17d881c9b89ea954be1183070254014be03a93d169cf52dbbd,Price,,pending
+O006-PSU-013-S0506,O006-PSU-013,Lesson12,confidence-intervals-for-regression-parameters,5b4cd3a7f0698dafc3267aad68dcf439acdb2b7d0bccb134a3d3ec677f5f8625,Catch,,pending
+O006-PSU-013-S0507,O006-PSU-013,Lesson12,confidence-intervals-for-regression-parameters,f58fd29b3afe9f44f7a3bceae8898e01d13566a2a6fdeb928a7162a9d4c3997e,Find a 95% confidence interval for the slope parameter ,,pending
+O006-PSU-013-S0508,O006-PSU-013,Lesson12,solution-2,22927695994eab589c7601a6b15df4d9dc67c5aceb9a74cdb965444b9b8362a6,Solution,,pending
+O006-PSU-013-S0509,O006-PSU-013,Lesson12,solution-2,bdc47d16143b5c157a647b2c828833ea23af2c31c6b1b577fc6a93f00c201bf4,"The following portion of output was obtained using Minitab’s regression analysis package, with the parts useful to us here outlined (",,pending
+O006-PSU-013-S0510,O006-PSU-013,Lesson12,solution-2,e3ee915a8e8c7aa02d2fced443314522b20824abd2535d5959c41dc8ab8a09e4, and ,,pending
+O006-PSU-013-S0511,O006-PSU-013,Lesson12,regression-equation,67c57a3bdb24af1f19a4261577945837c321434b262f008c0795494dfd08fd67,Regression Equation,,pending
+O006-PSU-013-S0512,O006-PSU-013,Lesson12,regression-equation,68563472eb55a15ff7e1e5d56608ce4891653a62cc368950d419a25004f184b8,Price = 452.3-29.39 Catch,,pending
+O006-PSU-013-S0513,O006-PSU-013,Lesson12,coefficients,9f587149e6a09799bd4dd6287ac8cf21b305946a51c7c02c9b00ea010d543305,Coefficients,,pending
+O006-PSU-013-S0514,O006-PSU-013,Lesson12,coefficients,c6f3bfd45614178abb5730fa5acd9aa446f914c4ebfea3574dd281b19d437f07,Term,,pending
+O006-PSU-013-S0515,O006-PSU-013,Lesson12,coefficients,e0ea7a1752815888f19ce1e992127030885e5f7e08487b0457ee29d2fce5f100,Coef,,pending
+O006-PSU-013-S0516,O006-PSU-013,Lesson12,coefficients,27241c77f9a314a6451e4c2c89d2cd3a9e305977888612bf44679ea4993f9da2,SE Coef,,pending
+O006-PSU-013-S0517,O006-PSU-013,Lesson12,coefficients,fc1f1435e5e2a7d9073a9529c657fb266ae4f468e1f289815f2711c11d0a431f,T-Value,,pending
+O006-PSU-013-S0518,O006-PSU-013,Lesson12,coefficients,a1d5b41c5f658bf4fd746c0637618ed68f32959799894b502b32d8a5bc294156,P-Value,,pending
+O006-PSU-013-S0519,O006-PSU-013,Lesson12,coefficients,88c63a7c28092b407e75fdc3d0f800f8a33b05f5a73fff94c65b1dd7bc876b52,VIF,,pending
+O006-PSU-013-S0520,O006-PSU-013,Lesson12,coefficients,8ab253e4aab66e2a0838e12978c5d9ce05c5fc54eb10cb82d7e5e53ef0135951,Constant,,pending
+O006-PSU-013-S0521,O006-PSU-013,Lesson12,coefficients,5b4cd3a7f0698dafc3267aad68dcf439acdb2b7d0bccb134a3d3ec677f5f8625,Catch,,pending
+O006-PSU-013-S0522,O006-PSU-013,Lesson12,model-summary,eadbe671b375c7790c79ad16a86cdd00872127f048420ba4fd14348f8441c91f,Model Summary,,pending
+O006-PSU-013-S0523,O006-PSU-013,Lesson12,model-summary,8de0b3c47f112c59745f717a626932264c422a7563954872e237b223af4ad643,S,,pending
+O006-PSU-013-S0524,O006-PSU-013,Lesson12,model-summary,acc55d2789a97c4199684caf6d0646951d8c4d11950898f93c2c934efb4b20ac,R-sq,,pending
+O006-PSU-013-S0525,O006-PSU-013,Lesson12,model-summary,8f8442ee8eab2e9309849490903babe6cc7535f2a99fd35a5eb2e570090e36b0,R-sq(adj),,pending
+O006-PSU-013-S0526,O006-PSU-013,Lesson12,model-summary,c8a7c2e427f2bdcc42fa220c6f209c438d231edb4d4d2f8c58d711949dd46fcf,R-sq(pred),,pending
+O006-PSU-013-S0527,O006-PSU-013,Lesson12,analysis-of-variance,d41e12f0663b09c1ea766c1e91af44b601bf77ddc2bb378b430c3f8dbf85b067,Analysis of Variance,,pending
+O006-PSU-013-S0528,O006-PSU-013,Lesson12,analysis-of-variance,0e570ca6fabe24f94e52c1833f3ffd25567022beb826fa16891f3322051bc221,Source,,pending
+O006-PSU-013-S0529,O006-PSU-013,Lesson12,analysis-of-variance,4a3161bbf086290c039884f6f10782fb645fb9fec970f97c42012c1816b899e5,DF,,pending
+O006-PSU-013-S0530,O006-PSU-013,Lesson12,analysis-of-variance,2b3aadbc646667a0225abf54ca26035c8453f90f9f7dbbedbfcb440c90c4b12d,Adj SS,,pending
+O006-PSU-013-S0531,O006-PSU-013,Lesson12,analysis-of-variance,114ac426108b76c4d178d9a31d66ae8c1302fba651da8b019d67c6ef9411808c,Adj MS,,pending
+O006-PSU-013-S0532,O006-PSU-013,Lesson12,analysis-of-variance,284d1d5fa13b5e608c1c35734d20f2656df0885054d77f72877d62f862f3dea9,F-Value,,pending
+O006-PSU-013-S0533,O006-PSU-013,Lesson12,analysis-of-variance,a1d5b41c5f658bf4fd746c0637618ed68f32959799894b502b32d8a5bc294156,P-Value,,pending
+O006-PSU-013-S0534,O006-PSU-013,Lesson12,analysis-of-variance,f9f0955ea4a62478023055e8ef7ad1dde05e6742688eb5e5bc8990a2f4295815,Regression,,pending
+O006-PSU-013-S0535,O006-PSU-013,Lesson12,analysis-of-variance,9b6845fd6f075b6c7722c07ea71799c690dadb4c151b8e1b34ea1164382964f0, Catch,,pending
+O006-PSU-013-S0536,O006-PSU-013,Lesson12,analysis-of-variance,54a0e8c17ebb21a11f8a25b8042786ef7efe52441e6cc87e92c67e0c4c0c6e78,Error,,pending
+O006-PSU-013-S0537,O006-PSU-013,Lesson12,analysis-of-variance,c9b3c38247f744e17dd26fda097d6a9ba9332586b6bdaa038bf8f313a863f2b8,Total,,pending
+O006-PSU-013-S0538,O006-PSU-013,Lesson12,confidence-intervals-for-regression-parameters,8a3bdbd9d1fc953ceb8fb681f68969b35f8add86e66e981d00f2e4af2f57619b,Minitab’s basic descriptive analysis can also calculate the standard deviation of the ,,pending
+O006-PSU-013-S0539,O006-PSU-013,Lesson12,confidence-intervals-for-regression-parameters,bbf73707f9e187419eb6d7e182267ed5ca9cb95423bcad6ce72b2d060baba549,"-values, 3.91, for us. Therefore, the formula for the sample variance tells us that:",,pending
+O006-PSU-013-S0540,O006-PSU-013,Lesson12,confidence-intervals-for-regression-parameters,7bcad9b21e2964292added7f3c20ec52d51795699c3489e31b48792f96d029fd,"Putting the parts together, along with the fact that ",,pending
+O006-PSU-013-S0541,O006-PSU-013,Lesson12,confidence-intervals-for-regression-parameters,fb3ac6ea6572280cdc47b1e3ad8fcd262984901b6cd596138547cd23f4a29661,", we get:",,pending
+O006-PSU-013-S0542,O006-PSU-013,Lesson12,confidence-intervals-for-regression-parameters,760a82e4f350eb2c0cd21c0b425e60467d0302a206d651f00579b395687b63c9,which simplifies to: ,,pending
+O006-PSU-013-S0543,O006-PSU-013,Lesson12,confidence-intervals-for-regression-parameters,25187d3517900b3c1f0d3c9ef34a5a3c9163c6df8e8185a9bc803f9836336afa," That is, we can be 95% confident that the slope parameter falls between −40.482 and −18.322. That is, we can be 95% confident that the average price of fish meal decreases between 18.322 and 40.482 dollars per ton for every one unit (one million metric ton) increase in the Peruvian anchovy catch.",,pending
+O006-PSU-013-S0544,O006-PSU-013,Lesson12,confidence-intervals-for-regression-parameters,00335861774bbf055aeb30c7f1f1bdbb7e2c388ad12037c571eb6d821151f1c6,Example 12.4,,pending
+O006-PSU-013-S0545,O006-PSU-013,Lesson12,confidence-intervals-for-regression-parameters,a638b3ceb1cf0fbdb65f7e21ed315615aad44ad91a70a71e040717866612d9c7, Find a 95% confidence interval for the intercept parameter ,,pending
+O006-PSU-013-S0546,O006-PSU-013,Lesson12,solution-3,22927695994eab589c7601a6b15df4d9dc67c5aceb9a74cdb965444b9b8362a6,Solution,,pending
+O006-PSU-013-S0547,O006-PSU-013,Lesson12,solution-3,6a8577d3eea10655bc61fc13e2d35f45574a4451a0c133cf3369ef5ef8153133,We can use Minitab (or our calculator) to determine that the mean of the 14 responses is:,,pending
+O006-PSU-013-S0548,O006-PSU-013,Lesson12,solution-3,3edf3814aa933382638006fcf45a118010a578df379921f1e390af68190832b4,"Using that, as well as the ",,pending
+O006-PSU-013-S0549,O006-PSU-013,Lesson12,solution-3,63551cfe30a5d507a021eef332d2599cdfc3d0185d894d0a4e8b32935f6ff995," obtained from the output above, along with the fact that ",,pending
+O006-PSU-013-S0550,O006-PSU-013,Lesson12,solution-3,fb3ac6ea6572280cdc47b1e3ad8fcd262984901b6cd596138547cd23f4a29661,", we get:",,pending
+O006-PSU-013-S0551,O006-PSU-013,Lesson12,solution-3,050e3ca40d5f4fb0fe88429cc764ff1ee920ff2481d331891b1fc56b85de4687,which simplifies to ,,pending
+O006-PSU-013-S0552,O006-PSU-013,Lesson12,solution-3,39d89add8571569fcafddd1897544666e6b9a8c3d76d6932c346f481c3a0a73b," That is, we can be 95% confident that the intercept parameter falls between 228.75 and 312.25 dollars per ton.",,pending
+O006-PSU-013-S0553,O006-PSU-013,Lesson12,hypothesis-tests-concerning-slope,69edff62d430b2080ad130fe4a68d1794eec00c1754fe2155db3a62665568492, Hypothesis Tests Concerning Slope,,pending
+O006-PSU-013-S0554,O006-PSU-013,Lesson12,hypothesis-tests-concerning-slope,84130f255d3371a8f553a86cc62c4873c6b714ac549a549118ca896e04904335,"Previously, we learned how to calculate point and interval estimates of the intercept and slope parameters, ",,pending
+O006-PSU-013-S0555,O006-PSU-013,Lesson12,hypothesis-tests-concerning-slope,e3ee915a8e8c7aa02d2fced443314522b20824abd2535d5959c41dc8ab8a09e4, and ,,pending
+O006-PSU-013-S0556,O006-PSU-013,Lesson12,hypothesis-tests-concerning-slope,dcb14bd5ea18e9d84a5c1e30f878460ac40e62b57450f499af0acbf7ab98770d,", of a simple linear regression model:",,pending
+O006-PSU-013-S0557,O006-PSU-013,Lesson12,hypothesis-tests-concerning-slope,a87b4d3065c31bf7fa89b7090a920fd23553b725d85d7fa9b9f670581b19538e,with the random errors ,,pending
+O006-PSU-013-S0558,O006-PSU-013,Lesson12,hypothesis-tests-concerning-slope,e38c6aa5ade29db2efef86129910549e480a73f0cdaa5ef7931b8f2b229f2f9e, following a normal distribution with mean 0 and variance ,,pending
+O006-PSU-013-S0559,O006-PSU-013,Lesson12,hypothesis-tests-concerning-slope,1689a5da4f905fa85032ddf1b3e100754179a1a04192cd55955d20c350001528,". In this lesson, we’ll learn how to conduct a hypothesis test for testing the null hypothesis that the slope parameter equals some value, ",,pending
+O006-PSU-013-S0560,O006-PSU-013,Lesson12,hypothesis-tests-concerning-slope,ebeb9577062b6dc44505345587f59e810fc18ff83cf06fb8962fce771576a427,", say. Specifically, we’ll learn how to test the null hypothesis ",,pending
+O006-PSU-013-S0561,O006-PSU-013,Lesson12,hypothesis-tests-concerning-slope,beaf81a8d93f15338477102304c5924b369c209cbf32aeb61d481f000270645f, using a ,,pending
+O006-PSU-013-S0562,O006-PSU-013,Lesson12,hypothesis-tests-concerning-slope,a5d369796a908c6793c81cf8bceefb61fdf132b2c12f07a17da738d3b9cb9639,-statistic.,,pending
+O006-PSU-013-S0563,O006-PSU-013,Lesson12,hypothesis-tests-concerning-slope,285e84d14268212945d3010ca054236bb2405f8b89520d9bbb42efd93293b534,Once again we’ve already done the bulk of the theoretical work in developing a hypothesis test for the slope parameter ,,pending
+O006-PSU-013-S0564,O006-PSU-013,Lesson12,hypothesis-tests-concerning-slope,21122dfa4f5756d1cfa61bdd7f2ccfb3d16ef6c085ebf3e3debf151d35e85358, of a simple linear regression model when we developed a ,,pending
+O006-PSU-013-S0565,O006-PSU-013,Lesson12,hypothesis-tests-concerning-slope,befc1ffa66755aac4fd9811069d212b9278d65715509c76a5ffb9ad52b29a35a, confidence interval for ,,pending
+O006-PSU-013-S0566,O006-PSU-013,Lesson12,hypothesis-tests-concerning-slope,21bffcba65a9bbc15433a5a2710ab32c7c9c747ce2d4b39fa7e95d558cb2c741,. We had shown then that:,,pending
+O006-PSU-013-S0567,O006-PSU-013,Lesson12,hypothesis-tests-concerning-slope,c6d9019f0047ed7805316dee458ce5c60960cb26148a30c18397a068659d8518,follows a ,,pending
+O006-PSU-013-S0568,O006-PSU-013,Lesson12,hypothesis-tests-concerning-slope,51416f5999e619fb0873bfd6832e5101ab65c99f6ff0257c635118f1c61e59bc," distribution. Therefore, if we’re interested in testing the null hypothesis:",,pending
+O006-PSU-013-S0569,O006-PSU-013,Lesson12,hypothesis-tests-concerning-slope,3d023c0792f8f91fb04bb1ffb9bb68e1978071ad2403179428b48df657d02817,against any of the alternative hypotheses:,,pending
+O006-PSU-013-S0570,O006-PSU-013,Lesson12,hypothesis-tests-concerning-slope,69f336904929c640a6a959e12acf7118ba6d51309beec940c03b123cfeaa1b99,we can use the test statistic:,,pending
+O006-PSU-013-S0571,O006-PSU-013,Lesson12,hypothesis-tests-concerning-slope,7d4c59dd3868e9c37e6013499144ee58ad88b8ab3b296e76bfe885de0575c8f9,and follow the standard hypothesis testing procedures.,,pending
+O006-PSU-013-S0572,O006-PSU-013,Lesson12,summary,1ef08bdefdb2fba4d4db153a477421a071a38cbc62cabd95702139270855caf1, Summary,,pending
+O006-PSU-013-S0573,O006-PSU-013,Lesson12,summary,39f2b6fa2ccc64a7dc8907ae74f1c12b70e4eaf377457b0f08ae722f35c3aac1,"This lesson covered the essentials of simple linear regression, a method to model linear relationships between a predictor (x) and response (y).",,pending
+O006-PSU-013-S0574,O006-PSU-013,Lesson12,summary,37b4c98536385cdedfb6dd2fd47d5513343e3fe92476a2dccc6a03c5800d06b6,Key Takeaways include:,,pending
+O006-PSU-013-S0575,O006-PSU-013,Lesson12,summary,c89d5a124a5690d5f82c4312e0fcea68c4697e545270ddbb4ce9403fb25f384d,Model linear trends with scatter using the least squares method to find the best-fitting line.,,pending
+O006-PSU-013-S0576,O006-PSU-013,Lesson12,summary,401419a219781ae40272fe1fb3fb222b68bb3168c65b569752bda97b0b421700,Estimate intercept (a) and slope (b) to approximate population parameters ,,pending
+O006-PSU-013-S0577,O006-PSU-013,Lesson12,summary,e3ee915a8e8c7aa02d2fced443314522b20824abd2535d5959c41dc8ab8a09e4, and ,,pending
+O006-PSU-013-S0578,O006-PSU-013,Lesson12,summary,c60bb9610d9a4b331fa9e316e41789c56a7b13331541a4daf8ab6f2de3c2f686,"Assumptions (LINE): (L)inearity, (I)ndependence, (N)ormality, (E)qual variances.",,pending
+O006-PSU-013-S0579,O006-PSU-013,Lesson12,summary,79643fe6d036acba4c58f22ea6a6ff47b7d497f813adac72468aef7f56b0db72,Use confidence intervals and t-tests for inference on regression parameters.,,pending
+O006-PSU-013-S0580,O006-PSU-013,Lesson12,summary,a3a4dc0c4177fde4653cc37d029585159c2d838201d4334c923ab69e926b57f3,Apply tools like R/Minitab to analyze real-world data and interpret results.,,pending
