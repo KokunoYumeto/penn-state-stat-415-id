@@ -53,6 +53,7 @@ jobs:
           python -B scripts/merge_lesson08_translations.py --check-only
           python -B scripts/normalize_lesson09.py --check-only
           python -B scripts/merge_lesson09_translations.py --check-only
+          python -B -c "import sys,hashlib,bs4; from pathlib import Path; sys.path.insert(0, 'scripts'); import normalize_lesson10 as n; out=n.compute(); p=out['working/lesson10_source_findings.md']; print('Lesson10 diagnostic',sys.version,bs4.__version__,len(p),hashlib.sha256(p).hexdigest(),Path('working/lesson10_source_findings.md').stat().st_size,hashlib.sha256(Path('working/lesson10_source_findings.md').read_bytes()).hexdigest())"
           python -B scripts/normalize_lesson10.py --check-only
           python -B scripts/merge_lesson10_translations.py --check-only
           python -B scripts/build_through_lesson10.py --check-only
