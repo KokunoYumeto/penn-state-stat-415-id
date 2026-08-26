@@ -1,0 +1,547 @@
+{
+  "corrections": {
+    "bytes": 300910,
+    "count": 198,
+    "lesson10_count": 28,
+    "path": "backend/through_lesson10_corrections.jsonl",
+    "sha256": "2450673f606d7a308dd7490cd811f81dcd3c42cc382b1eefe2b21d3dbb2f2032",
+    "through_lesson09_count": 170
+  },
+  "coverage": {
+    "complete_count": 12,
+    "complete_documents": [
+      "index",
+      "Lesson00",
+      "Lesson01",
+      "Lesson02",
+      "Lesson03",
+      "Lesson04",
+      "Lesson05",
+      "Lesson06",
+      "Lesson07",
+      "Lesson08",
+      "Lesson09",
+      "Lesson10"
+    ],
+    "corpus_document_count": 14,
+    "next_document": "Lesson11"
+  },
+  "documents_backend": {
+    "bytes": 8085,
+    "path": "backend/through_lesson10_documents.jsonl",
+    "sha256": "1156ec479054ddc740897d8fafd390a3609f7457fdd718835b42b3e2fda0c4a7"
+  },
+  "inputs": {
+    "asset_closure": {
+      "bytes": 32235,
+      "path": "working/lesson10_asset_closure.json",
+      "sha256": "174b2b04807774f5bc51edf5f6c9543bbf93d2aaaf38b5188e879aa087a93776"
+    },
+    "asset_manifest": {
+      "bytes": 7968,
+      "path": "authority/LESSON10_ASSET_MANIFEST.csv",
+      "sha256": "ac8db64cf192ee43e5ffd6b51d796cbc06fd7eb2d1e20b5acb47379ab666cb2a"
+    },
+    "builder": {
+      "bytes": 34091,
+      "path": "scripts/build_through_lesson10.py",
+      "sha256": "73e46b2239a80e80b4c079e380505056cc01182d8abaa5cae30e789c56fa8b70"
+    },
+    "correction_module": {
+      "bytes": 53238,
+      "path": "scripts/lesson10_corrections.py",
+      "sha256": "ce73706f1d4d4ab89ff408636c763baeab22237744fbf8b04748c6d182067a48"
+    },
+    "glossary": {
+      "bytes": 15519,
+      "path": "00_control/TERMINOLOGY_GLOSSARY_ID_ID.csv",
+      "rows": 150,
+      "scope": "admitted cumulative glossary prefix through Lesson10",
+      "sha256": "68e65dbf862ed9e1c1f1d6e5fca857f2112fbb08dc4f9fa9ba86419992425a67"
+    },
+    "normalization": {
+      "bytes": 27270,
+      "path": "build/LESSON10_NORMALIZATION_RECEIPT.json",
+      "sha256": "666ac6cca2a26f38391c31ac10084955a34e2b6f7eb5eb0c792604966fc575f2"
+    },
+    "prior_build_receipt": {
+      "bytes": 19452,
+      "path": "build/THROUGH_LESSON09_BUILD_RECEIPT.json",
+      "sha256": "00199cebee641d78b09e8aab1b1c7ac8c687fdad93dca848444d698bc20443a1"
+    },
+    "translation": {
+      "bytes": 3436,
+      "path": "build/LESSON10_TRANSLATION_RECEIPT.json",
+      "sha256": "30f6c2d59ec0f882e32a0ce0875d6f0e1a55d6222f47ae093133bf206e7f3dd1"
+    }
+  },
+  "layout": {
+    "lesson10_inline_width_constraints_removed": 8,
+    "reader_css_bytes": 8655,
+    "reader_css_path": "assets/reader-12of14.css",
+    "reader_css_sha256": "d2ed3a72651c21b4a98aeadc42066b9965436501c8e3b100bf93657536ac1d4a",
+    "rule": "all cumulative reader figures fill and center within the available reader width; code and tables reflow horizontally without page overflow"
+  },
+  "locale": "id-ID",
+  "math_nodes": {
+    "Lesson00": 331,
+    "Lesson01": 169,
+    "Lesson02": 209,
+    "Lesson03": 440,
+    "Lesson04": 289,
+    "Lesson05": 108,
+    "Lesson06": 102,
+    "Lesson07": 148,
+    "Lesson08": 156,
+    "Lesson09": 219,
+    "Lesson10": 369,
+    "index": 0,
+    "total": 2540
+  },
+  "new_assets": {
+    "all_byte_preserving": true,
+    "bytes": 8313758,
+    "count": 22,
+    "inventory": [
+      {
+        "asset_id": "O006-PSU-011-A0001",
+        "media_type": "image/jpeg",
+        "official_url": "https://online.stat.psu.edu/stat415/assets/ht_example1.jpg",
+        "source_bytes": 1235994,
+        "source_inline_style": null,
+        "source_path": "authority/assets/stat415/lesson10/assets/ht_example1.jpg",
+        "source_sha256": "c6e286a0ddf17d3cce788af2f3e7cd8d4fe42d074118516f67f8d1f012b01f10",
+        "target_alt_sha256": "b9d9dec584ec14acb68b2ab4d9d3f1fa628296c7312b1d6cbee9ee2fe6156b8e",
+        "target_bytes": 1235994,
+        "target_inline_style": null,
+        "target_is_byte_preserving": true,
+        "target_path": "assets/lesson10/assets/ht_example1.jpg",
+        "target_sha256": "c6e286a0ddf17d3cce788af2f3e7cd8d4fe42d074118516f67f8d1f012b01f10"
+      },
+      {
+        "asset_id": "O006-PSU-011-A0002",
+        "media_type": "image/png",
+        "official_url": "https://online.stat.psu.edu/stat415/assets/415_rttailengineer.png",
+        "source_bytes": 238928,
+        "source_inline_style": null,
+        "source_path": "authority/assets/stat415/lesson10/assets/415_rttailengineer.png",
+        "source_sha256": "096f21204d5577576a619894a01c48951f945de3577253dab6023a729d7ce8e9",
+        "target_alt_sha256": "4187735b7f3dbb012c46da18d2ae1e85fd2305af1d665d29109b75c1045c014b",
+        "target_bytes": 238928,
+        "target_inline_style": null,
+        "target_is_byte_preserving": true,
+        "target_path": "assets/lesson10/assets/415_rttailengineer.png",
+        "target_sha256": "096f21204d5577576a619894a01c48951f945de3577253dab6023a729d7ce8e9"
+      },
+      {
+        "asset_id": "O006-PSU-011-A0003",
+        "media_type": "image/png",
+        "official_url": "https://online.stat.psu.edu/stat415/assets/STAT-415-SEC-5-02.png",
+        "source_bytes": 284394,
+        "source_inline_style": null,
+        "source_path": "authority/assets/stat415/lesson10/assets/STAT-415-SEC-5-02.png",
+        "source_sha256": "fd35d62eb48313462357ba46d25aed6270c5e0418dd633368a453cd324302dfa",
+        "target_alt_sha256": "46cb89e3abac709775394e15ee2481d095e216008fc2971b33ee9f973807e68c",
+        "target_bytes": 284394,
+        "target_inline_style": null,
+        "target_is_byte_preserving": true,
+        "target_path": "assets/lesson10/assets/STAT-415-SEC-5-02.png",
+        "target_sha256": "fd35d62eb48313462357ba46d25aed6270c5e0418dd633368a453cd324302dfa"
+      },
+      {
+        "asset_id": "O006-PSU-011-A0004",
+        "media_type": "image/png",
+        "official_url": "https://online.stat.psu.edu/stat415/assets/415_engineertype1.png",
+        "source_bytes": 371865,
+        "source_inline_style": null,
+        "source_path": "authority/assets/stat415/lesson10/assets/415_engineertype1.png",
+        "source_sha256": "e8881365c8d47bebe9e6e80a0627d9216215a9c4b6c59c13eba660ef14e41ee3",
+        "target_alt_sha256": "75c1d4b6e92131038085f8da1840fc3ed5092bd6182025c8cc7d6b880bed5a6d",
+        "target_bytes": 371865,
+        "target_inline_style": null,
+        "target_is_byte_preserving": true,
+        "target_path": "assets/lesson10/assets/415_engineertype1.png",
+        "target_sha256": "e8881365c8d47bebe9e6e80a0627d9216215a9c4b6c59c13eba660ef14e41ee3"
+      },
+      {
+        "asset_id": "O006-PSU-011-A0005",
+        "media_type": "image/png",
+        "official_url": "https://online.stat.psu.edu/stat415/assets/415_engineertype1-B.png",
+        "source_bytes": 431675,
+        "source_inline_style": null,
+        "source_path": "authority/assets/stat415/lesson10/assets/415_engineertype1-B.png",
+        "source_sha256": "81650903aca6ff41a20a8bb18a56c450e2fca646171d9f81dd9448e3219d3430",
+        "target_alt_sha256": "c348c389e5386eda42ab714870e0d552e829782a1e1d019639715bcbd584ecd1",
+        "target_bytes": 431675,
+        "target_inline_style": null,
+        "target_is_byte_preserving": true,
+        "target_path": "assets/lesson10/assets/415_engineertype1-B.png",
+        "target_sha256": "81650903aca6ff41a20a8bb18a56c450e2fca646171d9f81dd9448e3219d3430"
+      },
+      {
+        "asset_id": "O006-PSU-011-A0006",
+        "media_type": "image/jpeg",
+        "official_url": "https://online.stat.psu.edu/stat415/assets/halfemptyglass.jpg",
+        "source_bytes": 4861,
+        "source_inline_style": null,
+        "source_path": "authority/assets/stat415/lesson10/assets/halfemptyglass.jpg",
+        "source_sha256": "e4227d5c12111e31fa2b03ad38dda779c1940baee0c350d47394233d83babbb1",
+        "target_alt_sha256": "8c8bc5c792f3398d45a58ce62c7b16b7547b4026ca2fe56ac9f026eaa4831f2f",
+        "target_bytes": 4861,
+        "target_inline_style": null,
+        "target_is_byte_preserving": true,
+        "target_path": "assets/lesson10/assets/halfemptyglass.jpg",
+        "target_sha256": "e4227d5c12111e31fa2b03ad38dda779c1940baee0c350d47394233d83babbb1"
+      },
+      {
+        "asset_id": "O006-PSU-011-A0007",
+        "media_type": "image/png",
+        "official_url": "https://online.stat.psu.edu/stat415/assets/415_engineerpower.png",
+        "source_bytes": 1011231,
+        "source_inline_style": null,
+        "source_path": "authority/assets/stat415/lesson10/assets/415_engineerpower.png",
+        "source_sha256": "fee17848b6080821d30f96c783dde9631516e81083cb4d44f567852ac8e561eb",
+        "target_alt_sha256": "ce17383eaf8ce6b3e95c81eab4567b4eae6d757bee282943707f9b329dd08be9",
+        "target_bytes": 1011231,
+        "target_inline_style": null,
+        "target_is_byte_preserving": true,
+        "target_path": "assets/lesson10/assets/415_engineerpower.png",
+        "target_sha256": "fee17848b6080821d30f96c783dde9631516e81083cb4d44f567852ac8e561eb"
+      },
+      {
+        "asset_id": "O006-PSU-011-A0008",
+        "media_type": "image/svg+xml",
+        "official_url": "https://online.stat.psu.edu/stat415/assets/STAT-415-SEC-5-06.svg",
+        "source_bytes": 4059,
+        "source_inline_style": null,
+        "source_path": "authority/assets/stat415/lesson10/assets/STAT-415-SEC-5-06.svg",
+        "source_sha256": "f0644653362587911ae2f678568c80941e9cefcc62a093c9a29015c0632e65d7",
+        "target_alt_sha256": "b6a2d29fa25ff25ec660476a1a4f995d2a625e75a9f721296c8d0de4dc04abb3",
+        "target_bytes": 4059,
+        "target_inline_style": null,
+        "target_is_byte_preserving": true,
+        "target_path": "assets/lesson10/assets/STAT-415-SEC-5-06.svg",
+        "target_sha256": "f0644653362587911ae2f678568c80941e9cefcc62a093c9a29015c0632e65d7"
+      },
+      {
+        "asset_id": "O006-PSU-011-A0009",
+        "media_type": "image/png",
+        "official_url": "https://online.stat.psu.edu/stat415/assets/415_IQpower.png",
+        "source_bytes": 852961,
+        "source_inline_style": null,
+        "source_path": "authority/assets/stat415/lesson10/assets/415_IQpower.png",
+        "source_sha256": "f4f776f7174885294f478aa51691423c591826c0687121744907404741271b69",
+        "target_alt_sha256": "b9f5e97c44cf8020c003c238fb78800fa22bf2921acba296836fdeb75c6140ae",
+        "target_bytes": 852961,
+        "target_inline_style": null,
+        "target_is_byte_preserving": true,
+        "target_path": "assets/lesson10/assets/415_IQpower.png",
+        "target_sha256": "f4f776f7174885294f478aa51691423c591826c0687121744907404741271b69"
+      },
+      {
+        "asset_id": "O006-PSU-011-A0010",
+        "media_type": "image/png",
+        "official_url": "https://online.stat.psu.edu/stat415/assets/415_IQpowerB.png",
+        "source_bytes": 933948,
+        "source_inline_style": null,
+        "source_path": "authority/assets/stat415/lesson10/assets/415_IQpowerB.png",
+        "source_sha256": "96d1ab3d7e043b26fd3df04d9dfc6a54cf476d4c8d9b0fb5e629d7310ae605d0",
+        "target_alt_sha256": "47b97c753795c9cf800b8a957eb8552a86ba685426eeab319ab575769f149818",
+        "target_bytes": 933948,
+        "target_inline_style": null,
+        "target_is_byte_preserving": true,
+        "target_path": "assets/lesson10/assets/415_IQpowerB.png",
+        "target_sha256": "96d1ab3d7e043b26fd3df04d9dfc6a54cf476d4c8d9b0fb5e629d7310ae605d0"
+      },
+      {
+        "asset_id": "O006-PSU-011-A0011",
+        "media_type": "image/png",
+        "official_url": "https://online.stat.psu.edu/stat415/assets/415_IQpowerC.png",
+        "source_bytes": 938178,
+        "source_inline_style": null,
+        "source_path": "authority/assets/stat415/lesson10/assets/415_IQpowerC.png",
+        "source_sha256": "8bb3c005528a2813c575edb0cbf199fbc508d43ed40834895b72a29461cecdf3",
+        "target_alt_sha256": "85b652ca74d6e3421aab5c824818f918b8aa64427bb5bbc929db9f5bb0c2d2d0",
+        "target_bytes": 938178,
+        "target_inline_style": null,
+        "target_is_byte_preserving": true,
+        "target_path": "assets/lesson10/assets/415_IQpowerC.png",
+        "target_sha256": "8bb3c005528a2813c575edb0cbf199fbc508d43ed40834895b72a29461cecdf3"
+      },
+      {
+        "asset_id": "O006-PSU-011-A0012",
+        "media_type": "image/svg+xml",
+        "official_url": "https://online.stat.psu.edu/stat415/assets/STAT-415-SEC-5-10.svg",
+        "source_bytes": 4235,
+        "source_inline_style": "width:60.0%",
+        "source_path": "authority/assets/stat415/lesson10/assets/STAT-415-SEC-5-10.svg",
+        "source_sha256": "b4a78d4adb43cb9ed84fc35181208df4b8d3b4fe007f804f9c3f7063f4117120",
+        "target_alt_sha256": "d674d8deb3ad61c00caf3632532d9945b1d7b6bf1058969451038ac726bd7b11",
+        "target_bytes": 4235,
+        "target_inline_style": null,
+        "target_is_byte_preserving": true,
+        "target_path": "assets/lesson10/assets/STAT-415-SEC-5-10.svg",
+        "target_sha256": "b4a78d4adb43cb9ed84fc35181208df4b8d3b4fe007f804f9c3f7063f4117120"
+      },
+      {
+        "asset_id": "O006-PSU-011-A0013",
+        "media_type": "image/svg+xml",
+        "official_url": "https://online.stat.psu.edu/stat415/assets/STAT-415-SEC-5-11.svg",
+        "source_bytes": 5240,
+        "source_inline_style": "width:60.0%",
+        "source_path": "authority/assets/stat415/lesson10/assets/STAT-415-SEC-5-11.svg",
+        "source_sha256": "4f3bc5286c97634bd81a1f6db1ab1e9109e1f090590676beb11bcb26c73d6202",
+        "target_alt_sha256": "d08e71b8ce24c108b3c410533cbc5aabfc314a5c83adc6e1a95448ba6cbfba8a",
+        "target_bytes": 5240,
+        "target_inline_style": null,
+        "target_is_byte_preserving": true,
+        "target_path": "assets/lesson10/assets/STAT-415-SEC-5-11.svg",
+        "target_sha256": "4f3bc5286c97634bd81a1f6db1ab1e9109e1f090590676beb11bcb26c73d6202"
+      },
+      {
+        "asset_id": "O006-PSU-011-A0014",
+        "media_type": "image/png",
+        "official_url": "https://online.stat.psu.edu/stat415/assets/415_IQtypeI.png",
+        "source_bytes": 269540,
+        "source_inline_style": null,
+        "source_path": "authority/assets/stat415/lesson10/assets/415_IQtypeI.png",
+        "source_sha256": "50b301face607b91dce418704d16a07d3c56ecb771a14d84060d8c4f5b0c383c",
+        "target_alt_sha256": "d270acaec18c8506a979db30294e6350db636fec96bc3a99cd4371aaefa1ec8a",
+        "target_bytes": 269540,
+        "target_inline_style": null,
+        "target_is_byte_preserving": true,
+        "target_path": "assets/lesson10/assets/415_IQtypeI.png",
+        "target_sha256": "50b301face607b91dce418704d16a07d3c56ecb771a14d84060d8c4f5b0c383c"
+      },
+      {
+        "asset_id": "O006-PSU-011-A0015",
+        "media_type": "image/png",
+        "official_url": "https://online.stat.psu.edu/stat415/assets/STAT-415-SEC-5-13%20Version%207.png",
+        "source_bytes": 1042181,
+        "source_inline_style": "width:75.0%",
+        "source_path": "authority/assets/stat415/lesson10/assets/STAT-415-SEC-5-13 Version 7.png",
+        "source_sha256": "330c07620cd978ee9eb50b8a8c3c3b3afda9756f5ebc03e461d722d89c2ecf93",
+        "target_alt_sha256": "f7e5addaa4f12668688d353d2a1cf5e8aa85d159fba2cc91d8f5d7000a0c4f2d",
+        "target_bytes": 1042181,
+        "target_inline_style": null,
+        "target_is_byte_preserving": true,
+        "target_path": "assets/lesson10/assets/STAT-415-SEC-5-13 Version 7.png",
+        "target_sha256": "330c07620cd978ee9eb50b8a8c3c3b3afda9756f5ebc03e461d722d89c2ecf93"
+      },
+      {
+        "asset_id": "O006-PSU-011-A0016",
+        "media_type": "image/svg+xml",
+        "official_url": "https://online.stat.psu.edu/stat415/assets/STAT-415-SEC-5-14.svg",
+        "source_bytes": 4409,
+        "source_inline_style": "width:60.0%",
+        "source_path": "authority/assets/stat415/lesson10/assets/STAT-415-SEC-5-14.svg",
+        "source_sha256": "4ad7fe521819d6ffbed1298ff5b638beaf3ff440f7dc3ba71d143cb829b01683",
+        "target_alt_sha256": "8d8a86fb5ed598edd0cea12c69560eb4da3bc6e1bb8b23721dbd56d4a3ca07a0",
+        "target_bytes": 4409,
+        "target_inline_style": null,
+        "target_is_byte_preserving": true,
+        "target_path": "assets/lesson10/assets/STAT-415-SEC-5-14.svg",
+        "target_sha256": "4ad7fe521819d6ffbed1298ff5b638beaf3ff440f7dc3ba71d143cb829b01683"
+      },
+      {
+        "asset_id": "O006-PSU-011-A0017",
+        "media_type": "image/png",
+        "official_url": "https://online.stat.psu.edu/stat415/assets/415_IQtypeIB.png",
+        "source_bytes": 274542,
+        "source_inline_style": null,
+        "source_path": "authority/assets/stat415/lesson10/assets/415_IQtypeIB.png",
+        "source_sha256": "3af8a412f25253065ea738266a54e535e08d70a219e7be3ff2011117a0900406",
+        "target_alt_sha256": "881f8c2eba2b5593de1bde6e402111c88be8975e114f3d6d9276cc4c6b44a280",
+        "target_bytes": 274542,
+        "target_inline_style": null,
+        "target_is_byte_preserving": true,
+        "target_path": "assets/lesson10/assets/415_IQtypeIB.png",
+        "target_sha256": "3af8a412f25253065ea738266a54e535e08d70a219e7be3ff2011117a0900406"
+      },
+      {
+        "asset_id": "O006-PSU-011-A0018",
+        "media_type": "image/svg+xml",
+        "official_url": "https://online.stat.psu.edu/stat415/assets/STAT-415-SEC-5-16.svg",
+        "source_bytes": 4436,
+        "source_inline_style": "width:60.0%",
+        "source_path": "authority/assets/stat415/lesson10/assets/STAT-415-SEC-5-16.svg",
+        "source_sha256": "6908ed8bee319762fb24c5282067b67e6960829c91f9a643080816e2f2d4d8a3",
+        "target_alt_sha256": "b15087eef9e120692b954e6e1e9e5d81d0c54a16e4d4ad13922d7b9dcfcc2536",
+        "target_bytes": 4436,
+        "target_inline_style": null,
+        "target_is_byte_preserving": true,
+        "target_path": "assets/lesson10/assets/STAT-415-SEC-5-16.svg",
+        "target_sha256": "6908ed8bee319762fb24c5282067b67e6960829c91f9a643080816e2f2d4d8a3"
+      },
+      {
+        "asset_id": "O006-PSU-011-A0019",
+        "media_type": "image/png",
+        "official_url": "https://online.stat.psu.edu/stat415/assets/STAT-415-SEC-5-17.png",
+        "source_bytes": 391485,
+        "source_inline_style": null,
+        "source_path": "authority/assets/stat415/lesson10/assets/STAT-415-SEC-5-17.png",
+        "source_sha256": "cfd735029345a014871b326b7999013b58512a856deb7f8e0ceed21e02b09a19",
+        "target_alt_sha256": "fabcc04dfe62583233bc9a066f585826a98bd129a788ea1f5beeca905ef5ab7a",
+        "target_bytes": 391485,
+        "target_inline_style": null,
+        "target_is_byte_preserving": true,
+        "target_path": "assets/lesson10/assets/STAT-415-SEC-5-17.png",
+        "target_sha256": "cfd735029345a014871b326b7999013b58512a856deb7f8e0ceed21e02b09a19"
+      },
+      {
+        "asset_id": "O006-PSU-011-A0020",
+        "media_type": "image/svg+xml",
+        "official_url": "https://online.stat.psu.edu/stat415/assets/STAT-415-SEC-5-18.svg",
+        "source_bytes": 3633,
+        "source_inline_style": "width:60.0%",
+        "source_path": "authority/assets/stat415/lesson10/assets/STAT-415-SEC-5-18.svg",
+        "source_sha256": "11e5b5dd8f8780be30f384d4c7ec57c1e98d0fab17f1f03305feec5448947631",
+        "target_alt_sha256": "3ac4fb92edc0d1f966aed9c93b78d67300862b76cba3563be90412253a22ec39",
+        "target_bytes": 3633,
+        "target_inline_style": null,
+        "target_is_byte_preserving": true,
+        "target_path": "assets/lesson10/assets/STAT-415-SEC-5-18.svg",
+        "target_sha256": "11e5b5dd8f8780be30f384d4c7ec57c1e98d0fab17f1f03305feec5448947631"
+      },
+      {
+        "asset_id": "O006-PSU-011-A0021",
+        "media_type": "image/svg+xml",
+        "official_url": "https://online.stat.psu.edu/stat415/assets/STAT-415-SEC-5-19.svg",
+        "source_bytes": 2529,
+        "source_inline_style": "width:60.0%",
+        "source_path": "authority/assets/stat415/lesson10/assets/STAT-415-SEC-5-19.svg",
+        "source_sha256": "f55fd40a2b22b380a099a79332a0bfc81c4c315786453e70414c8d6493ea373b",
+        "target_alt_sha256": "d2c7122d549cd0056e845af84c0594a97d00d9a6c52dece858054f900c568bf2",
+        "target_bytes": 2529,
+        "target_inline_style": null,
+        "target_is_byte_preserving": true,
+        "target_path": "assets/lesson10/assets/STAT-415-SEC-5-19.svg",
+        "target_sha256": "f55fd40a2b22b380a099a79332a0bfc81c4c315786453e70414c8d6493ea373b"
+      },
+      {
+        "asset_id": "O006-PSU-011-A0022",
+        "media_type": "image/svg+xml",
+        "official_url": "https://online.stat.psu.edu/stat415/assets/STAT-415-SEC-5-20.svg",
+        "source_bytes": 3434,
+        "source_inline_style": "width:60.0%",
+        "source_path": "authority/assets/stat415/lesson10/assets/STAT-415-SEC-5-20.svg",
+        "source_sha256": "b28e5b35a02b6ae62cb9cbc608c9d2f9861044668d0721dc8fe0d0c207c8b050",
+        "target_alt_sha256": "889cec2fcf7ffc27e5712d8ea0e8a5b3b5d02d2926639d9ca458a6c61b70ca21",
+        "target_bytes": 3434,
+        "target_inline_style": null,
+        "target_is_byte_preserving": true,
+        "target_path": "assets/lesson10/assets/STAT-415-SEC-5-20.svg",
+        "target_sha256": "b28e5b35a02b6ae62cb9cbc608c9d2f9861044668d0721dc8fe0d0c207c8b050"
+      }
+    ]
+  },
+  "offline": {
+    "analytics": false,
+    "cookies": false,
+    "external_runtime_requests": 0,
+    "local_mathjax": true,
+    "third_party_iframes": 0
+  },
+  "reader": {
+    "bytes": 17020141,
+    "files": 94,
+    "manifest_bytes": 10100,
+    "manifest_path": "build/THROUGH_LESSON10_MANIFEST.csv",
+    "manifest_sha256": "08e171f7b87a1ad33d063ed536fca566873d93993a191d0ad1812fe7259e3663",
+    "path": "build/html-id"
+  },
+  "rights": {
+    "Lesson10 assets": "fourteen same-origin raster assets and eight same-origin SVG assets frozen and redistributed byte-for-byte under the official page notice; derivative HTML supplies accessibility, semantic-table, correction-note, computation-disclosure, and responsive-layout repairs",
+    "MathJax 3.1.2": "Apache-2.0",
+    "Penn State content": "CC BY-NC 4.0 except where otherwise noted",
+    "aggregate_uniform_relicense": false
+  },
+  "runtime_closure": {
+    "MathJax 3.1.2": {
+      "added_autoload_dependency": {
+        "bytes": 4709,
+        "path": "assets/MathJax/input/tex/extensions/boldsymbol.js",
+        "reason": "tex-svg autoloads the boldsymbol extension when source mathematics uses its macros",
+        "sha256": "716cf8735d00abfb1627f8adbbf4aeb915ac9b5c55d47aeaf276e73dac6a2aa1"
+      },
+      "freeze_receipt": {
+        "bytes": 2376,
+        "path": "authority/runtime/MathJax-3.1.2/FREEZE_RECEIPT.json",
+        "sha256": "22cb63be3a81e70f645c71a5ae93ce618c460ea9b99c63eac55fd7d14e03e043"
+      },
+      "url_manifest": {
+        "bytes": 1199,
+        "path": "authority/runtime/MathJax-3.1.2/URL_MANIFEST.csv",
+        "sha256": "4f9c8b167eedf6e12227274a9c4e93fe5c90a5504e3ef692113c9d6c6ced400c"
+      }
+    }
+  },
+  "schema": "o006.stat415.through-lesson10-build.v1",
+  "status": "built",
+  "structural_units_normalized": 5400,
+  "structural_units_target": 5388,
+  "target_documents": [
+    {
+      "bytes": 25150,
+      "path": "source/id-ID/index.html",
+      "sha256": "1386429afa4824fc4852ab679e3e9e681f1a23d5e25b88a934946257553a97bf"
+    },
+    {
+      "bytes": 80492,
+      "path": "source/id-ID/Lesson00.html",
+      "sha256": "1a077b589f5c1aabafab2a80e012b9bf5d14bd02cb69470354a5d26bca14f560"
+    },
+    {
+      "bytes": 47572,
+      "path": "source/id-ID/Lesson01.html",
+      "sha256": "4b33809f9e1d7564ac49f14fbe7c61d4cbfb637a78826185d430102549411287"
+    },
+    {
+      "bytes": 59316,
+      "path": "source/id-ID/Lesson02.html",
+      "sha256": "7bfd45597d2e4917c3479b7291cb35f24355b78efc72c9bb56d1eda87413cd04"
+    },
+    {
+      "bytes": 102756,
+      "path": "source/id-ID/Lesson03.html",
+      "sha256": "1e1875c6859a857a66aa4d987814d1776e4cce24ffa59177def8ea66b72fb346"
+    },
+    {
+      "bytes": 81390,
+      "path": "source/id-ID/Lesson04.html",
+      "sha256": "a508e71ba57653c79566e0d6183b99deb15bfd5eaa8f404e4b4ba28cc9b16042"
+    },
+    {
+      "bytes": 195394,
+      "path": "source/id-ID/Lesson05.html",
+      "sha256": "4dd2a59b7ebe059b12ffc8dba0ca4e3c155933add3973fabe67528a150d168ba"
+    },
+    {
+      "bytes": 36655,
+      "path": "source/id-ID/Lesson06.html",
+      "sha256": "96d9d3e664a3b4e53c847bab4c8e59d9b9eef4a5049a9ddf22176749892a3521"
+    },
+    {
+      "bytes": 74119,
+      "path": "source/id-ID/Lesson07.html",
+      "sha256": "dbcc596c036349ff027a7042ab2cf6b27bfa8081bf52c01adcc9b009337f1839"
+    },
+    {
+      "bytes": 113248,
+      "path": "source/id-ID/Lesson08.html",
+      "sha256": "b1c21a76c6e973966ea6b299747f3fb3ce91c006cead36adbb02c8a65c1dffc3"
+    },
+    {
+      "bytes": 95315,
+      "path": "source/id-ID/Lesson09.html",
+      "sha256": "32380b9c6f768a37b96b1c5002803be40bacd7b95e326133916c7ec1605f568e"
+    },
+    {
+      "bytes": 153768,
+      "path": "source/id-ID/Lesson10.html",
+      "sha256": "8fb91a9fc5ef0b5a163767aec5e760d19c3e56f6c3dee35ee58323d6c45359c5"
+    }
+  ],
+  "translation_provenance": "OpenAI Codex gpt-5.6-sol, Ultra",
+  "translation_segments": 3998
+}

@@ -1,0 +1,364 @@
+{
+  "browser_surface": "Chromium browser against a bounded local static server",
+  "coverage": "landing/index plus complete Lesson00 through Lesson10",
+  "date": "2026-08-26",
+  "desktop": {
+    "console_errors_or_warnings": 0,
+    "page_client_width_css_px": 1280,
+    "routes": {
+      "Lesson00": {
+        "broken_images": 0,
+        "loaded_images": 0,
+        "navigation_horizontal_overflow": false,
+        "page_horizontal_overflow": false,
+        "rendered_math_containers": 331,
+        "source_math_nodes": 331
+      },
+      "Lesson01": {
+        "broken_images": 0,
+        "loaded_images": 5,
+        "navigation_horizontal_overflow": false,
+        "page_horizontal_overflow": false,
+        "rendered_math_containers": 169,
+        "source_math_nodes": 169
+      },
+      "Lesson02": {
+        "broken_images": 0,
+        "centered_substantive_images": 2,
+        "full_width_substantive_images": 2,
+        "loaded_images": 2,
+        "maximum_figure_center_delta_css_px": 0,
+        "navigation_horizontal_overflow": false,
+        "page_horizontal_overflow": false,
+        "rendered_math_containers": 209,
+        "source_math_nodes": 209
+      },
+      "Lesson03": {
+        "broken_images": 0,
+        "loaded_images": 0,
+        "navigation_horizontal_overflow": false,
+        "page_horizontal_overflow": false,
+        "rendered_math_containers": 440,
+        "source_math_nodes": 440
+      },
+      "Lesson04": {
+        "broken_images": 0,
+        "centered_substantive_images": 1,
+        "full_width_substantive_images": 1,
+        "loaded_images": 1,
+        "maximum_figure_center_delta_css_px": 0,
+        "navigation_horizontal_overflow": false,
+        "page_horizontal_overflow": false,
+        "rendered_math_containers": 289,
+        "source_math_nodes": 289
+      },
+      "Lesson05": {
+        "broken_images": 0,
+        "centered_substantive_images": 14,
+        "full_width_substantive_images": 14,
+        "loaded_images": 14,
+        "maximum_figure_center_delta_css_px": 0,
+        "navigation_horizontal_overflow": false,
+        "page_horizontal_overflow": false,
+        "rendered_math_containers": 108,
+        "source_math_nodes": 108
+      },
+      "Lesson06": {
+        "broken_images": 0,
+        "centered_substantive_images": 1,
+        "full_width_substantive_images": 1,
+        "loaded_images": 1,
+        "maximum_figure_center_delta_css_px": 0,
+        "navigation_horizontal_overflow": false,
+        "page_horizontal_overflow": false,
+        "rendered_math_containers": 102,
+        "source_math_nodes": 102
+      },
+      "Lesson07": {
+        "broken_images": 0,
+        "centered_substantive_images": 2,
+        "code_surfaces": 28,
+        "full_width_substantive_images": 2,
+        "hidden_code_surfaces": 0,
+        "loaded_images": 2,
+        "maximum_figure_center_delta_css_px": 0,
+        "navigation_horizontal_overflow": false,
+        "page_horizontal_overflow": false,
+        "rendered_math_containers": 148,
+        "source_math_nodes": 148
+      },
+      "Lesson08": {
+        "broken_images": 0,
+        "centered_substantive_images": 4,
+        "code_surfaces": 28,
+        "full_width_substantive_images": 4,
+        "hidden_code_surfaces": 0,
+        "loaded_images": 4,
+        "maximum_figure_center_delta_css_px": 0,
+        "navigation_horizontal_overflow": false,
+        "page_horizontal_overflow": false,
+        "rendered_math_containers": 156,
+        "source_math_nodes": 156
+      },
+      "Lesson09": {
+        "broken_images": 0,
+        "captioned_tables": 3,
+        "centered_substantive_images": 10,
+        "full_width_substantive_images": 10,
+        "loaded_images": 10,
+        "maximum_figure_center_delta_css_px": 0,
+        "navigation_horizontal_overflow": false,
+        "page_horizontal_overflow": false,
+        "rendered_math_containers": 219,
+        "source_math_nodes": 219,
+        "tables": 3,
+        "tables_with_complete_header_scopes": 3
+      },
+      "index": {
+        "broken_images": 0,
+        "course_card_images": 13,
+        "navigation_horizontal_overflow": false,
+        "page_horizontal_overflow": false,
+        "rendered_math_containers": 0,
+        "source_math_nodes": 0,
+        "network_verified_asset_urls": 13,
+        "deferred_lazy_assets_network_verified": 4
+      },
+      "licenses": {
+        "broken_images": 0,
+        "loaded_images": 0,
+        "navigation_horizontal_overflow": false,
+        "page_horizontal_overflow": false,
+        "rendered_math_containers": 0,
+        "source_math_nodes": 0
+      },
+      "Lesson10": {
+        "broken_images": 0,
+        "captioned_tables": 2,
+        "centered_substantive_images": 22,
+        "code_surfaces": 5,
+        "full_width_substantive_images": 22,
+        "hidden_code_surfaces": 0,
+        "loaded_images": 22,
+        "maximum_figure_center_delta_css_px": 0,
+        "navigation_horizontal_overflow": false,
+        "page_horizontal_overflow": false,
+        "rendered_math_containers": 369,
+        "source_math_nodes": 369,
+        "tables": 2,
+        "tables_with_complete_header_scopes": 2
+      }
+    },
+    "viewport_css_px": {
+      "height": 720,
+      "width": 1280
+    }
+  },
+  "evidence": {
+    "build_receipt": {
+      "bytes": 24978,
+      "path": "build/THROUGH_LESSON10_BUILD_RECEIPT.json",
+      "sha256": "b31ed728f1b66dc257000aac334fdb5a0240a646777295db1c99396a6884538d"
+    },
+    "manifest": {
+      "bytes": 10100,
+      "path": "build/THROUGH_LESSON10_MANIFEST.csv",
+      "sha256": "08e171f7b87a1ad33d063ed536fca566873d93993a191d0ad1812fe7259e3663"
+    },
+    "qa_receipt": {
+      "bytes": 6118,
+      "path": "build/THROUGH_LESSON10_QA_RECEIPT.json",
+      "sha256": "c6a1fcf4a2318e2e783f806214dc824fd73da104f19c81fe6965263b1ec7066e"
+    },
+    "target_lesson10": {
+      "bytes": 153768,
+      "path": "source/id-ID/Lesson10.html",
+      "sha256": "8fb91a9fc5ef0b5a163767aec5e760d19c3e56f6c3dee35ee58323d6c45359c5"
+    }
+  },
+  "locale": "id-ID",
+  "mobile": {
+    "console_errors_or_warnings": 0,
+    "page_client_width_css_px": 390,
+    "routes": {
+      "Lesson00": {
+        "broken_images": 0,
+        "loaded_images": 0,
+        "navigation_horizontal_overflow": false,
+        "page_horizontal_overflow": false,
+        "rendered_math_containers": 331,
+        "source_math_nodes": 331
+      },
+      "Lesson01": {
+        "broken_images": 0,
+        "loaded_images": 5,
+        "navigation_horizontal_overflow": false,
+        "page_horizontal_overflow": false,
+        "rendered_math_containers": 169,
+        "source_math_nodes": 169
+      },
+      "Lesson02": {
+        "broken_images": 0,
+        "centered_substantive_images": 2,
+        "full_width_substantive_images": 2,
+        "loaded_images": 2,
+        "maximum_figure_center_delta_css_px": 0,
+        "navigation_horizontal_overflow": false,
+        "page_horizontal_overflow": false,
+        "rendered_math_containers": 209,
+        "source_math_nodes": 209
+      },
+      "Lesson03": {
+        "broken_images": 0,
+        "loaded_images": 0,
+        "navigation_horizontal_overflow": false,
+        "page_horizontal_overflow": false,
+        "rendered_math_containers": 440,
+        "source_math_nodes": 440
+      },
+      "Lesson04": {
+        "broken_images": 0,
+        "centered_substantive_images": 1,
+        "full_width_substantive_images": 1,
+        "loaded_images": 1,
+        "maximum_figure_center_delta_css_px": 0,
+        "navigation_horizontal_overflow": false,
+        "page_horizontal_overflow": false,
+        "rendered_math_containers": 289,
+        "source_math_nodes": 289
+      },
+      "Lesson05": {
+        "broken_images": 0,
+        "centered_substantive_images": 14,
+        "code_surfaces_with_internal_horizontal_scroll": 32,
+        "full_width_substantive_images": 14,
+        "loaded_images": 14,
+        "maximum_figure_center_delta_css_px": 0,
+        "navigation_horizontal_overflow": false,
+        "page_horizontal_overflow": false,
+        "rendered_math_containers": 108,
+        "source_math_nodes": 108
+      },
+      "Lesson06": {
+        "broken_images": 0,
+        "centered_substantive_images": 1,
+        "full_width_substantive_images": 1,
+        "loaded_images": 1,
+        "maximum_figure_center_delta_css_px": 0,
+        "navigation_horizontal_overflow": false,
+        "page_horizontal_overflow": false,
+        "rendered_math_containers": 102,
+        "source_math_nodes": 102
+      },
+      "Lesson07": {
+        "broken_images": 0,
+        "centered_substantive_images": 2,
+        "code_surfaces": 28,
+        "code_surfaces_with_internal_horizontal_scroll": 7,
+        "full_width_substantive_images": 2,
+        "hidden_code_surfaces": 0,
+        "loaded_images": 2,
+        "maximum_figure_center_delta_css_px": 0,
+        "navigation_horizontal_overflow": false,
+        "page_horizontal_overflow": false,
+        "rendered_math_containers": 148,
+        "source_math_nodes": 148
+      },
+      "Lesson08": {
+        "broken_images": 0,
+        "centered_substantive_images": 4,
+        "code_surfaces": 28,
+        "code_surfaces_with_internal_horizontal_scroll": 20,
+        "full_width_substantive_images": 4,
+        "hidden_code_surfaces": 0,
+        "loaded_images": 4,
+        "maximum_figure_center_delta_css_px": 0,
+        "navigation_horizontal_overflow": false,
+        "page_horizontal_overflow": false,
+        "rendered_math_containers": 156,
+        "source_math_nodes": 156
+      },
+      "Lesson09": {
+        "broken_images": 0,
+        "captioned_tables": 3,
+        "centered_substantive_images": 10,
+        "full_width_substantive_images": 10,
+        "loaded_images": 10,
+        "maximum_figure_center_delta_css_px": 0,
+        "navigation_horizontal_overflow": false,
+        "page_horizontal_overflow": false,
+        "rendered_math_containers": 219,
+        "source_math_nodes": 219,
+        "tables": 3,
+        "tables_with_complete_header_scopes": 3,
+        "tables_with_internal_horizontal_scroll": 3
+      },
+      "index": {
+        "broken_images": 0,
+        "course_card_images": 13,
+        "navigation_horizontal_overflow": false,
+        "page_horizontal_overflow": false,
+        "rendered_math_containers": 0,
+        "source_math_nodes": 0,
+        "network_verified_asset_urls": 13,
+        "deferred_lazy_assets_network_verified": 4
+      },
+      "licenses": {
+        "broken_images": 0,
+        "loaded_images": 0,
+        "navigation_horizontal_overflow": false,
+        "page_horizontal_overflow": false,
+        "rendered_math_containers": 0,
+        "source_math_nodes": 0
+      },
+      "Lesson10": {
+        "broken_images": 0,
+        "captioned_tables": 2,
+        "centered_substantive_images": 22,
+        "code_surfaces": 5,
+        "full_width_substantive_images": 22,
+        "hidden_code_surfaces": 0,
+        "loaded_images": 22,
+        "maximum_figure_center_delta_css_px": 0,
+        "navigation_horizontal_overflow": false,
+        "page_horizontal_overflow": false,
+        "rendered_math_containers": 369,
+        "source_math_nodes": 369,
+        "tables": 2,
+        "tables_with_complete_header_scopes": 2,
+        "code_surfaces_with_intentional_internal_horizontal_scroll": true,
+        "tables_with_internal_horizontal_scroll": false
+      }
+    },
+    "viewport_css_px": {
+      "height": 844,
+      "width": 390
+    }
+  },
+  "observations": [
+    "All twelve reader routes (index plus Lesson00–Lesson10) and licenses were opened at desktop and mobile widths; page and navigation horizontal overflow remained absent.",
+    "All 2,540 protected source mathematics nodes render as 2,540 MathJax containers across Lessons 00–10 at both tested widths.",
+    "All 56 substantive images load, are centered, and fill their available reader surface; the thirteen index thumbnails were additionally verified by bounded same-origin HTTP HEAD/GET checks, including four deferred lazy assets.",
+    "Lesson 10 exposes five source-code surfaces and three published output snapshots; long mobile code remains intentionally internally scrollable while the page itself stays fixed-width.",
+    "Both Lesson 10 tables have captions and complete header associations; mobile table layout remains inside the reader without page overflow.",
+    "Fresh browser console warning/error logs were empty at both viewports, and the reader remained offline-closed with local MathJax."
+  ],
+  "provenance": "OpenAI Codex gpt-5.6-sol, Ultra",
+  "routes": [
+    "http://127.0.0.1:49873/index.html",
+    "http://127.0.0.1:49873/Lesson00.html",
+    "http://127.0.0.1:49873/Lesson01.html",
+    "http://127.0.0.1:49873/Lesson02.html",
+    "http://127.0.0.1:49873/Lesson03.html",
+    "http://127.0.0.1:49873/Lesson04.html",
+    "http://127.0.0.1:49873/Lesson05.html",
+    "http://127.0.0.1:49873/Lesson06.html",
+    "http://127.0.0.1:49873/Lesson07.html",
+    "http://127.0.0.1:49873/Lesson08.html",
+    "http://127.0.0.1:49873/Lesson09.html",
+    "http://127.0.0.1:49873/Lesson10.html",
+    "http://127.0.0.1:49873/licenses/"
+  ],
+  "schema": "o006.stat415.through-lesson10-visual-qa.v1",
+  "status": "pass"
+}

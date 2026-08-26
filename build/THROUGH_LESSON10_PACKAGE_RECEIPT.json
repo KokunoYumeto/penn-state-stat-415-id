@@ -1,0 +1,132 @@
+{
+  "coverage": {
+    "complete_count": 12,
+    "complete_documents": [
+      "index",
+      "Lesson00",
+      "Lesson01",
+      "Lesson02",
+      "Lesson03",
+      "Lesson04",
+      "Lesson05",
+      "Lesson06",
+      "Lesson07",
+      "Lesson08",
+      "Lesson09",
+      "Lesson10"
+    ],
+    "corpus_document_count": 14,
+    "next_document": "Lesson11",
+    "statement": "landing/index plus complete Lesson00-Lesson10; 12 of 14 documents"
+  },
+  "file_count": 9,
+  "files": [
+    {
+      "bytes": 17049455,
+      "filename": "00_stat415-id-through-lesson10-offline-reader.zip",
+      "sha256": "1d36fcf41ccc8ac906943015fc3a390e5695ee8ea004a48894dab1c9d699da7f"
+    },
+    {
+      "bytes": 32686515,
+      "filename": "10_stat415-id-through-lesson10-source-backend.zip",
+      "sha256": "7994e367cac606e2d15d3e45d556361619e5694d7b861b9783799dc52a985dba"
+    },
+    {
+      "bytes": 944,
+      "filename": "20_THROUGH_LESSON10_RELEASE_NOTES.md",
+      "sha256": "bc45940858bde6964737c9b9d8b2c750c60ae457156cc7979ca9488aeb1dfa11"
+    },
+    {
+      "bytes": 1515,
+      "filename": "30_THROUGH_LESSON10_LICENSE.md",
+      "sha256": "cea22cdb06aae5db47989d4daebbe3e36b7eac697e23a6726398744a9812a48d"
+    },
+    {
+      "bytes": 6118,
+      "filename": "40_THROUGH_LESSON10_QA_RECEIPT.json",
+      "sha256": "c6a1fcf4a2318e2e783f806214dc824fd73da104f19c81fe6965263b1ec7066e"
+    },
+    {
+      "bytes": 13129,
+      "filename": "41_THROUGH_LESSON10_VISUAL_QA_RECEIPT.json",
+      "sha256": "386428d44a9d59f30f2a0b5a263144b0203a233f9c53e63c94ad3229832c76e9"
+    },
+    {
+      "bytes": 852,
+      "filename": "50_THROUGH_LESSON10_RELEASE_MANIFEST.csv",
+      "sha256": "605fa5809d98a8ca54af3c2cf7b9c108195dfbd6f307ca04674507ccf4566596"
+    },
+    {
+      "bytes": 750,
+      "filename": "SHA256SUMS_THROUGH_LESSON10.txt",
+      "sha256": "eee93f31aa58266e2f7787004abe622bb7cf6d0ddbde24d3a5b6920ba52bd786"
+    },
+    {
+      "bytes": 4702,
+      "filename": "60_THROUGH_LESSON10_RELEASE_ROOT_RECEIPT.json",
+      "sha256": "d66cd451aedbcad675ce9379ed9ba18f1fcf58adaad8fe4696a11bf346502410"
+    }
+  ],
+  "inputs": {
+    "build_receipt": {
+      "bytes": 24978,
+      "sha256": "b31ed728f1b66dc257000aac334fdb5a0240a646777295db1c99396a6884538d"
+    },
+    "license": {
+      "bytes": 1515,
+      "sha256": "cea22cdb06aae5db47989d4daebbe3e36b7eac697e23a6726398744a9812a48d"
+    },
+    "qa_receipt": {
+      "bytes": 6118,
+      "sha256": "c6a1fcf4a2318e2e783f806214dc824fd73da104f19c81fe6965263b1ec7066e"
+    },
+    "reader_manifest": {
+      "bytes": 10100,
+      "sha256": "08e171f7b87a1ad33d063ed536fca566873d93993a191d0ad1812fe7259e3663"
+    },
+    "visual_qa_receipt": {
+      "bytes": 13129,
+      "sha256": "386428d44a9d59f30f2a0b5a263144b0203a233f9c53e63c94ad3229832c76e9"
+    }
+  },
+  "locale": "id-ID",
+  "primary_file": "00_stat415-id-through-lesson10-offline-reader.zip",
+  "reader_zip": {
+    "archive_method": "ZIP_STORED",
+    "filename": "00_stat415-id-through-lesson10-offline-reader.zip",
+    "manifest_bytes": 10100,
+    "manifest_sha256": "08e171f7b87a1ad33d063ed536fca566873d93993a191d0ad1812fe7259e3663",
+    "package_entries": 95,
+    "reader_bytes": 17020141,
+    "reader_files": 94,
+    "uncompressed_bytes": 17030241
+  },
+  "rights": {
+    "aggregate_uniform_relicense": false,
+    "mathjax_3_1_2": "Apache-2.0",
+    "original_repository_layer": "CC BY-SA 4.0",
+    "penn_state": "CC BY-NC 4.0 except where otherwise noted"
+  },
+  "schema": "o006.stat415.through-lesson10-package.v1",
+  "source_zip": {
+    "allowlist_manifest_sha256": "d1a1c924bd25ed01d7b9b964d86d7508bf2734991134f26fe7a830c44dfc3481",
+    "archive_method": "ZIP_STORED",
+    "entries": 432,
+    "filename": "10_stat415-id-through-lesson10-source-backend.zip",
+    "uncompressed_bytes": 32597711
+  },
+  "status": "ready",
+  "total_bytes": 49763980,
+  "translation_provenance": "OpenAI Codex gpt-5.6-sol, Ultra",
+  "upload_order": [
+    "00_stat415-id-through-lesson10-offline-reader.zip",
+    "10_stat415-id-through-lesson10-source-backend.zip",
+    "20_THROUGH_LESSON10_RELEASE_NOTES.md",
+    "30_THROUGH_LESSON10_LICENSE.md",
+    "40_THROUGH_LESSON10_QA_RECEIPT.json",
+    "41_THROUGH_LESSON10_VISUAL_QA_RECEIPT.json",
+    "50_THROUGH_LESSON10_RELEASE_MANIFEST.csv",
+    "SHA256SUMS_THROUGH_LESSON10.txt",
+    "60_THROUGH_LESSON10_RELEASE_ROOT_RECEIPT.json"
+  ]
+}

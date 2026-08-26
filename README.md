@@ -6,17 +6,17 @@ komponen O006/C140.
 
 ## Status
 
-**Sebagian — 11 dari 14 dokumen lengkap.** Laman utama dan seluruh Pelajaran
-00–09 sudah diterjemahkan, dibangun, dan lulus pemeriksaan deterministik serta
-visual. Pelajaran 10–12 tetap tercantum dan untuk sementara menaut ke halaman
+**Sebagian — 12 dari 14 dokumen lengkap.** Laman utama dan seluruh Pelajaran
+00–10 sudah diterjemahkan, dibangun, dan lulus pemeriksaan deterministik serta
+visual. Pelajaran 11–12 tetap tercantum dan untuk sementara menaut ke halaman
 resmi berbahasa Inggris. Batas akhir edisi ini adalah laman utama dan Pelajaran
 00–12, sebanyak 14 dokumen.
 
-- 3.458 segmen terjemahan lengkap;
-- 4.775 unit struktural sumber dengan ID stabil dan 4.763 unit turunan;
-- 2.171 permukaan matematika, semuanya terikat ke ID yang netral terhadap locale;
-- 170 koreksi turunan terverifikasi; byte sumber resmi tidak diubah;
-- pembaca HTML luring: 71 berkas / 8.551.979 byte.
+- 3.998 segmen terjemahan lengkap;
+- 5.400 unit struktural sumber dengan ID stabil dan 5.388 unit turunan;
+- 2.540 permukaan matematika, semuanya terikat ke ID yang netral terhadap locale;
+- 198 koreksi turunan terverifikasi; byte sumber resmi tidak diubah;
+- pembaca HTML luring: 94 berkas / 17.020.141 byte.
 
 Pembaca lokal tersedia di `build/html-id/index.html`. Riwayat sumber,
 identitas SHA-256, hak komponen, koreksi, backend modular, hasil build, dan
@@ -26,7 +26,10 @@ bukti QA disimpan bersama edisi.
 - Pembaca web: https://kokunoyumeto.github.io/penn-state-stat-415-id/
 - Rilis publik terbaru: https://github.com/KokunoYumeto/penn-state-stat-415-id/releases
 - Konsep preservasi: https://doi.org/10.5281/zenodo.22077422
-- Preservasi terverifikasi sebelumnya, hingga Pelajaran 05: https://doi.org/10.5281/zenodo.22097348
+- Preservasi terverifikasi, hingga Pelajaran 09: https://doi.org/10.5281/zenodo.22103203
+- Paket preservasi reader-first 12-dari-14 (49.763.827 byte, sembilan berkas)
+  sudah lulus pemeriksaan lokal; versi berikutnya akan diterbitkan pada konsep
+  DOI yang sama dan dibaca kembali secara anonim setelah push.
 
 ## Reproduksi
 
@@ -59,8 +62,10 @@ python -B scripts/normalize_lesson08.py --check-only
 python -B scripts/merge_lesson08_translations.py --check-only
 python -B scripts/normalize_lesson09.py --check-only
 python -B scripts/merge_lesson09_translations.py --check-only
-python -B scripts/build_through_lesson09.py --check-only
-python -B scripts/qa_through_lesson09.py --check-only
+python -B scripts/merge_lesson10_translations.py --check-only
+python -B scripts/normalize_lesson10.py --check-only
+python -B scripts/build_through_lesson10.py --check-only
+python -B scripts/qa_through_lesson10.py --check-only
 ```
 
 Untuk membaca secara lokal, layani `build/html-id` dengan peladen HTTP statis;

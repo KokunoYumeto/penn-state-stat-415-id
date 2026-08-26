@@ -9,13 +9,13 @@ Updated: 2026-08-26
 - Frozen corpus: landing/index plus Lessons 00–12, fourteen official documents,
   1,604,869 bytes; source-manifest SHA-256
   `622c9ed2d82bb0f3f60f6855b341664233dd548b5d53dfaee2a488218a5da515`.
-- Translation complete locally: landing/index plus Lessons 00–09, 11 of 14
-  documents and 3,458 admitted segments.
-- Structure and mathematics: 4,775 normalized source units, 4,763 derivative
-  units, and 2,171 protected mathematics surfaces. Every intentional target
+- Translation complete locally: landing/index plus Lessons 00–10, 12 of 14
+  documents and 3,998 admitted segments.
+- Structure and mathematics: 5,400 normalized source units, 5,388 derivative
+  units, and 2,540 protected mathematics surfaces. Every intentional target
   removal is registered; all other topology is preserved.
-- Corrections: 170 target-only proved repairs, ordered
-  `O006-PSU-ADV-0001` through `O006-PSU-ADV-0170`. Authority bytes remain
+- Corrections: 198 target-only proved repairs, ordered
+  `O006-PSU-ADV-0001` through `O006-PSU-ADV-0198`. Authority bytes remain
   unchanged.
 - Lesson 07: 237 segments / 399 units / 148 math / two assets / twelve
   corrections; target 74,079 bytes, SHA-256
@@ -27,52 +27,64 @@ Updated: 2026-08-26
 - Lesson 09: 443 segments / 414 units / 219 math / ten assets / three semantic
   tables / nineteen corrections; target 95,275 bytes, SHA-256
   `539cf8f248e654ccb70bf12c98318ece8ac9de7281ae1f1ea5bb3d364d134f64`.
-- Cumulative reader: 71 files / 8,551,979 bytes; manifest SHA-256
-  `fa29f2df5f34e441d976280696ef2433845a65fe4ec478674346e56e2f50ffc8`.
+- Cumulative reader through Lesson 10: 94 files / 17,020,141 bytes; manifest
+  SHA-256 `08e171f7b87a1ad33d063ed536fca566873d93993a191d0ad1812fe7259e3663`.
 - Deterministic build-receipt SHA-256:
-  `00199cebee641d78b09e8aab1b1c7ac8c687fdad93dca848444d698bc20443a1`.
+  `b31ed728f1b66dc257000aac334fdb5a0240a646777295db1c99396a6884538d`.
 - Deterministic QA-receipt SHA-256:
-  `431f74cc685b73220ae7559d0299bec5e08b1637d239c901dd31280503878db3`.
+  `c6a1fcf4a2318e2e783f806214dc824fd73da104f19c81fe6965263b1ec7066e`.
   Write and check-only replays pass.
-- Deterministic nine-file reader-first release package passes write/check-only
-  replay. Exact non-self-referential identities are in
-  `build/THROUGH_LESSON09_PACKAGE_RECEIPT.json` and the release root receipt.
-- Desktop/mobile visual QA passes all twelve routes at 1,280 × 720 and
-  390 × 844. All 2,171 math surfaces render, all 34 substantive figures are
-  centered and full-width, mobile code/table reflow is internal, and console
-  warning/error logs are empty. Visual-QA receipt SHA-256:
-  `fa3ffb355a15dbeb50da1651037c1a66e85eba87617864427981ed4c9338006d`.
-- Eleven-row translation ledger SHA-256:
-  `b951e2260b5b0ba2100e8ffab7fd2a8a96674f2e18481a71bb233104563900b2`.
-  Adverse-ledger SHA-256:
-  `d45a8f458d64e1c64c185b8f27beb7dafdef6e7d0abb8286d1729a5da398090b`.
+- Deterministic nine-file reader-first 12-of-14 release package passes
+  write/check-only replay: 49,763,980 bytes, 94 reader files, and 432 bounded
+  source entries. Exact identities are in
+  `build/THROUGH_LESSON10_PACKAGE_RECEIPT.json`; its SHA-256 is
+  `36e37eeecd403c2f87aef6ac865f4a82f25f60d4ba5e72ba30840c9d1a738e74`.
+- Desktop/mobile visual QA passes index, Lessons 00–10, and licenses at
+  1,280 × 720 and 390 × 844. All 2,540 math surfaces render, all 56
+  substantive figures are centered and full-width, mobile code/table reflow is
+  internal, and console warning/error logs are empty. Visual-QA receipt
+  SHA-256: `386428d44a9d59f30f2a0b5a263144b0203a233f9c53e63c94ad3229832c76e9`.
+- Twelve-row translation ledger now resolves Lesson 10; merged Lesson 10
+  translation SHA-256 is
+  `27305c36d540f63db6dbf925de6caa93dc544fbc0268a863979ac410edad0b51`.
+  Cumulative correction backend SHA-256 is
+  `2450673f606d7a308dd7490cd811f81dcd3c42cc382b1eefe2b21d3dbb2f2032`.
 - Rights remain component-separated: Penn State CC BY-NC 4.0 except where
   otherwise noted; MathJax Apache-2.0; original repository layer CC BY-SA 4.0.
-- Last public archive: Zenodo DOI `10.5281/zenodo.22097348`, concept DOI
-  `10.5281/zenodo.22077422`. Last compact GitHub/Pages checkpoint: commit
-  `abbadb33755be935e0b5753313f3c2967b0994e0`, run `32866078986`.
+- Current public archive: Zenodo DOI `10.5281/zenodo.22103203`, concept DOI
+  `10.5281/zenodo.22077422`; all nine files / 30,362,116 bytes matched by
+  anonymous readback and the final concept audit found one submitted matching
+  version and zero drafts.
+- Current GitHub/Pages boundary: commit
+  `57170f9f7d914f3d13c716d19818ec64c3896df5`, tree
+  `d94da2ca46268c1d93201e036d91d38132228669`, run `32906124668`, tag
+  `v2026.08.26.11of14`. Anonymous readback matched 526 commit files, 71 Pages
+  files, and nine release assets.
+- Lesson 10 normalization passes: 540 segments / 625 units / 369 math / 22
+  assets; normalization-receipt SHA-256
+  `666ac6cca2a26f38391c31ac10084955a34e2b6f7eb5eb0c792604966fc575f2`.
+- Lesson 10 complete: four canonical batches S0001–S0540 merged, corrected,
+  built, and QA-verified. The target is 153,768 bytes, SHA-256
+  `8fb91a9fc5ef0b5a163767aec5e760d19c3e56f6c3dee35ee58323d6c45359c5`.
 - No upstream message has been sent.
 
 ## Next executable action
 
-Commit and push the exact cumulative source/backend/reader boundary, wait for
-the Pages workflow, then anonymously verify the commit tree, all 71 Pages
-files, the release tag and every release asset. Publish the same nine release
-files as a new version of the existing Zenodo concept and anonymously read back
-the public inventory and bytes. Do not create another concept.
-
-Immediately after the public boundary is closed, continue contiguously with
-Lesson 10: normalize and audit its exact frozen authority, then translate its
-complete segment ledger in source order. Do not reopen Lessons 00–09 except to
-repair a proved release or deterministic-replay defect.
+Package the verified 12-of-14 reader and compact source/backend evidence, push
+the dedicated GitHub repository and Pages, publish the next version in the
+existing Zenodo concept, and anonymously verify every public byte. Do not ask
+for another authorization. Then translate Lessons 11 and 12 contiguously,
+reusing the same stable-ID/backend/build/QA workflow and preserving the public
+12-of-14 boundary unless a proved defect requires a correction.
 
 ## Recovery
 
 Read `00_control/WORKFLOW.md`, this file, `CURRENT_STATE.md`,
 `COMPONENT_BOUNDARY.md`, the fourteen-document authority manifest/freeze
 receipt, `TRANSLATION_LEDGER.csv`, `ADVERSE_LEDGER.jsonl`, the final glossary
-rows, `build/THROUGH_LESSON09_BUILD_RECEIPT.json`,
-`build/THROUGH_LESSON09_QA_RECEIPT.json`,
-`build/THROUGH_LESSON09_VISUAL_QA_RECEIPT.json`, and the latest package/public
+rows, `build/THROUGH_LESSON10_BUILD_RECEIPT.json`,
+`build/THROUGH_LESSON10_QA_RECEIPT.json`,
+`build/THROUGH_LESSON10_VISUAL_QA_RECEIPT.json`,
+`build/THROUGH_LESSON10_PACKAGE_RECEIPT.json`, and the latest package/public
 verification receipts. Conversation summaries are not state. Do not broaden
 the filesystem or Git scope.

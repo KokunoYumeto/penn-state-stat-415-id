@@ -1,0 +1,590 @@
+segment_id,document_id,component_id,section_id,source_sha256,source_text,target_text,status
+O006-PSU-011-S0001,O006-PSU-011,Lesson10,,cb4ad503e340ebd1a921e3ed6dcbfc0a80660936d8bfc9d190f70694b9ccb51b,Lessons,,pending
+O006-PSU-011-S0002,O006-PSU-011,Lesson10,,fb0fad0a0dd59fdc6128ecd78dfb597754f2c409ef3ea5a90d0b5345b6fef761,Hypothesis Tests (Part II),,pending
+O006-PSU-011-S0003,O006-PSU-011,Lesson10,,fb0fad0a0dd59fdc6128ecd78dfb597754f2c409ef3ea5a90d0b5345b6fef761,Hypothesis Tests (Part II),,pending
+O006-PSU-011-S0004,O006-PSU-011,Lesson10,,848e96567d6b48d54c0b53017bd6123cefa97d6e0fab0f14c621ec3fd92178f4,Power,,pending
+O006-PSU-011-S0005,O006-PSU-011,Lesson10,,8bb034a8cc37ca12e31eeed460fac5cda3646444d523a82c55ac8996c4b822e4,Confidence Intervals,,pending
+O006-PSU-011-S0006,O006-PSU-011,Lesson10,,33db1c9f0bca03d6a9536a5e0f4340f0387a61975be8bc12ba4bec43000b8d0b,Wald Test,,pending
+O006-PSU-011-S0007,O006-PSU-011,Lesson10,,ebf11f927da2029a49cbac75d5b1ef4d542ad7e20354b2d878d0093600092c7c,Hypothesis Tests,,pending
+O006-PSU-011-S0008,O006-PSU-011,Lesson10,overview,d4b1ea5708dd532930a85188b45aff6f0a3ed458500c7577e0127a538eb0d100,Overview,,pending
+O006-PSU-011-S0009,O006-PSU-011,Lesson10,overview,0595a96118c61a6df284d87d07bf434f1314198dbd6129309130d66d450b2f5d,"This lesson picks up where our first look at hypothesis testing left off. We move beyond single‑sample tests to compare two populations, explore lesser‑known examples, and show how confidence intervals and hypothesis tests are two sides of the same coin. You’ll also learn why test quality hinges on power—the probability of catching a real effect—and how factors like sample size, significance level (",,pending
+O006-PSU-011-S0010,O006-PSU-011,Lesson10,overview,811d1ecad67ed6c2ce96841b098967fbfb6285c7ac9861fbd0baf1de19c458a6,"), and effect size work together. Finally, we preview the Wald test, a general method that leverages maximum‑likelihood estimators when classic test statistics are hard to derive.",,pending
+O006-PSU-011-S0011,O006-PSU-011,Lesson10,objectives,eba92953899468e3f79c084370cc455f39c256e77b5277ff480e3384ff9ecc27,Objectives,,pending
+O006-PSU-011-S0012,O006-PSU-011,Lesson10,objectives,25aef8be8be2a587942663b20614423b057589f18636ba6d72bd7bf691a84629,"Upon completion of this lesson, you should be able to:",,pending
+O006-PSU-011-S0013,O006-PSU-011,Lesson10,objectives,de0558f39584477ba30c658de02edb29e3b8c1dd5dac0902cbd8695e957eaf07,"Link confidence intervals to hypothesis tests,",,pending
+O006-PSU-011-S0014,O006-PSU-011,Lesson10,objectives,b20bb67a4d0a9ff2825894ba4eb49515a19f3bcd324a2d885afb8aa26986175a,"Determine the Power of a test,",,pending
+O006-PSU-011-S0015,O006-PSU-011,Lesson10,objectives,a90b8394a31c68e941f28424571718ed2e2350efdb099f3f3cf88425340f9286,"Find the sample size required for a given significance level and desired power,",,pending
+O006-PSU-011-S0016,O006-PSU-011,Lesson10,objectives,1fda481783b435a7d7b56dcda97c95f862e2014d0e0349e1431040f2014d95a3,Numerically construct simple hypothesis tests focused on parameters estimated using numerical maximum likelihood inference in R,,pending
+O006-PSU-011-S0017,O006-PSU-011,Lesson10,other-hypothesis-test-examples,0bdc2a99a9c19272bab19c387503e7df43380618908da51fbdbf1014240d3ec2, Other Hypothesis Test Examples,,pending
+O006-PSU-011-S0018,O006-PSU-011,Lesson10,other-hypothesis-test-examples,82c0b84d9e5c48e3638d7dfcffcbb87a92f337e6c0334630bb32e2ae4c2ae26b,"In this section, we will continue with some examples of hypothesis tests that may not be as familiar as the ones we have seen so far.",,pending
+O006-PSU-011-S0019,O006-PSU-011,Lesson10,other-hypothesis-test-examples,3560563e5397f0257826add6e1b68ae7d7c80b0ddc41029ff2e86545db34bb0b,Example 10.1,,pending
+O006-PSU-011-S0020,O006-PSU-011,Lesson10,other-hypothesis-test-examples,5c0114a68e34a23e9411f13e3c48fb9b6c4bdfe757a316450df5d593ef16d87c,Part I,,pending
+O006-PSU-011-S0021,O006-PSU-011,Lesson10,other-hypothesis-test-examples,b3e50cac6aca53270efdd7ee75dfd7780bcd27488425595062d95c389f460378,"
+Suppose we have a random sample of size ",,pending
+O006-PSU-011-S0022,O006-PSU-011,Lesson10,other-hypothesis-test-examples,34d48753a351c243349cd9e10605e57798bb719598080dc25b94b43b3bb57c7f, from a Uniform distribution over the interval ,,pending
+O006-PSU-011-S0023,O006-PSU-011,Lesson10,other-hypothesis-test-examples,1324187b5d66db55fef80a495df6d2bf711491b8dd33cabb80ed2765d4da7116,. We wish to test the following hypotheses:,,pending
+O006-PSU-011-S0024,O006-PSU-011,Lesson10,other-hypothesis-test-examples,33d71c485bae9ca2900b32add035078b7b88d62b26af6e5198005558bc7a4c5a,Derive a statistical test for these hypotheses.,,pending
+O006-PSU-011-S0025,O006-PSU-011,Lesson10,other-hypothesis-test-examples,dd8661198427a6f574cde6995b71a884a2c8443985ce958e33141b5cda31ab38,"
+    Solution
+",,pending
+O006-PSU-011-S0026,O006-PSU-011,Lesson10,solution,22927695994eab589c7601a6b15df4d9dc67c5aceb9a74cdb965444b9b8362a6,Solution,,pending
+O006-PSU-011-S0027,O006-PSU-011,Lesson10,solution,a3474a9c3800da11cf24fa5351bad61c9692858cc112f7778deee81767a1161d,We have step 1 already defined for us. The next step is to set a significance level. Let’s set the probability of a Type I error to be ,,pending
+O006-PSU-011-S0028,O006-PSU-011,Lesson10,solution,773e691430758b8e7609c843e6094dea21a240cde1f574ac8d5a8db02846f284,"The next step is to find the test statistic. We need to know the distribution of the test statistic. A logical choice for the statistic would be the maximum order statistic. If the null hypothesis is true, the largest order statistic, ",,pending
+O006-PSU-011-S0029,O006-PSU-011,Lesson10,solution,c197d8adc429c4abb807540bc004f7763f820c971a6b2c908c7dcf49fd66d7ea,", will be “close” to ",,pending
+O006-PSU-011-S0030,O006-PSU-011,Lesson10,solution,1b6a70a1da0f49e7e72777d44810d0ca562da48dcf4b1bc774b2b62fb7a35770,", and values of ",,pending
+O006-PSU-011-S0031,O006-PSU-011,Lesson10,solution,e16a8ba21d41c15e76f45d813f8a138a41712f752c69aedebac43252fe92908a, that are much ,,pending
+O006-PSU-011-S0032,O006-PSU-011,Lesson10,solution,e823da61abfbd317f8fd39727af67cead1a5f82ce52e11be72a1efa1be34c5cf,smaller,,pending
+O006-PSU-011-S0033,O006-PSU-011,Lesson10,solution,ffd338c2808c175e57025c8e8b4d343d84abe9c4a2a5774d1d143468a3074218, than ,,pending
+O006-PSU-011-S0034,O006-PSU-011,Lesson10,solution,e53712175c2ffbc55bf810813f8d36e13ed12753036e07e26ed3c3f3419ff89d," would be evidence in favor of the alternative hypothesis, ",,pending
+O006-PSU-011-S0035,O006-PSU-011,Lesson10,solution,26eef53424c2cbbc3235f210c04da9c9137828ead938b2b0c37af16e6e235782,The decision rule would be something like reject ,,pending
+O006-PSU-011-S0036,O006-PSU-011,Lesson10,solution,b97c329094dd29378717bd4f50662c1b4ea2fd20ac90478ebda9f935252989da, if ,,pending
+O006-PSU-011-S0037,O006-PSU-011,Lesson10,solution,3458f758ca399139fd3d8915dddd39ce62d0109a1fb2314e401d2e21bb568103, where ,,pending
+O006-PSU-011-S0038,O006-PSU-011,Lesson10,solution,5e55c076cfdedfaa22c382bd6d87f0dce66ee88923932361ea09310858bb5109,We know that the order statistic has the following distribution:,,pending
+O006-PSU-011-S0039,O006-PSU-011,Lesson10,solution,f5f0a2a3ccb1a569528f7943755dd5154d09da91e7e306fc700331a368a80d38,"Under the null hypothesis, the distribution is: ",,pending
+O006-PSU-011-S0040,O006-PSU-011,Lesson10,solution,e329f20f1d0490a1a8673304c93f349dd5a106b5aaba37415f36785ee0c8fa58,"Going back to our decision rule, we reject if ",,pending
+O006-PSU-011-S0041,O006-PSU-011,Lesson10,solution,f18e725a6745494a6d533109c14342e1c4fa1e8663f444213d849bea9b5a7c62,". Putting this all together, we can find ",,pending
+O006-PSU-011-S0042,O006-PSU-011,Lesson10,solution,9daca44a23c4716ccf115a6fd5dafd31124a3b081c5bc5d950579c1cff1cfb37,Solving for ,,pending
+O006-PSU-011-S0043,O006-PSU-011,Lesson10,solution,8aedafd69e8a8b5b1146bdbe0a2fdd282db81b30164578c1712b575bcfd2d1c9,", we get: ",,pending
+O006-PSU-011-S0044,O006-PSU-011,Lesson10,solution,531f8309b076fd972814f5c5caaf9320ddd492a9797f148b0b2257937669ec11,"Thus, we reject the null hypothesis, at the ",,pending
+O006-PSU-011-S0045,O006-PSU-011,Lesson10,solution,8dd2eab95d20f11aef09fa9873c691ba63851d42b92055b9858469b5fc7e1e34," level, if ",,pending
+O006-PSU-011-S0046,O006-PSU-011,Lesson10,other-hypothesis-test-examples,148b65833777b97f6433ce9a80e5c91dad1c433692614f647cb2357ff8eb09c4,Part II,,pending
+O006-PSU-011-S0047,O006-PSU-011,Lesson10,other-hypothesis-test-examples,bec1c88a5035b72540313199f1934f8dcf5687f85d39cbf9711ccc25bf4766d5,We have the following observations from a Uniform distribution over the interval ,,pending
+O006-PSU-011-S0048,O006-PSU-011,Lesson10,other-hypothesis-test-examples,b7d7af0b19b26834a5016580b405b96c76c045195e4a475f464c26e4c5c5b91c,Test the hypotheses ,,pending
+O006-PSU-011-S0049,O006-PSU-011,Lesson10,other-hypothesis-test-examples,c0585199e95a8c6c034523f236b011f1e2fdd68e8a63ed2ecd6a1e998ef9c2f4, vs. ,,pending
+O006-PSU-011-S0050,O006-PSU-011,Lesson10,other-hypothesis-test-examples,dd8661198427a6f574cde6995b71a884a2c8443985ce958e33141b5cda31ab38,"
+    Solution
+",,pending
+O006-PSU-011-S0051,O006-PSU-011,Lesson10,solution-1,22927695994eab589c7601a6b15df4d9dc67c5aceb9a74cdb965444b9b8362a6,Solution,,pending
+O006-PSU-011-S0052,O006-PSU-011,Lesson10,solution-1,634c2b70169bcd855b8e6eb5f9fac3e91f594dbe4d98e7908a678754c261bfbe,"The maximum order statistic is 0.8519. Since it is less than 1.4998, we reject the null hypothesis. We conclude, that at the ",,pending
+O006-PSU-011-S0053,O006-PSU-011,Lesson10,solution-1,cd47177c9859c76d7b4ddaac791d0cb900b9538e0548752e738387709975ce8f," level, there is sufficient evidence the population parameter ",,pending
+O006-PSU-011-S0054,O006-PSU-011,Lesson10,solution-1,86bc9fbbe5ed57f937f15b67ca3109a33c8ae128468658d2cf8028692e2bf110, is less than 2.,,pending
+O006-PSU-011-S0055,O006-PSU-011,Lesson10,other-hypothesis-test-examples,1e1c3e8b26cfcf02b3ebf796653b409a527a63e4287b2a450f331fbdabd13f38,Example 10.2,,pending
+O006-PSU-011-S0056,O006-PSU-011,Lesson10,other-hypothesis-test-examples,be33bee4f9a634a77203fb96125113af481f86df64d4fc192e20a80c5c9583a6," Four measurements, 2, 0, 1, 0, are taken on a Poisson random variable ",,pending
+O006-PSU-011-S0057,O006-PSU-011,Lesson10,other-hypothesis-test-examples,719e5150385425dd32909e671f8b0edf896de1917eb7aa8b7a28a2d72844e66c, for the purpose of testing ,,pending
+O006-PSU-011-S0058,O006-PSU-011,Lesson10,other-hypothesis-test-examples,b3ef0fa247718e4b1caa0a5dece5dbc5b5ed88af5d7b098c82b9680960aa8414,Derive a statistical test for these hypotheses at the significance level of 10%.,,pending
+O006-PSU-011-S0059,O006-PSU-011,Lesson10,other-hypothesis-test-examples,dd8661198427a6f574cde6995b71a884a2c8443985ce958e33141b5cda31ab38,"
+    Solution
+",,pending
+O006-PSU-011-S0060,O006-PSU-011,Lesson10,solution-2,22927695994eab589c7601a6b15df4d9dc67c5aceb9a74cdb965444b9b8362a6,Solution,,pending
+O006-PSU-011-S0061,O006-PSU-011,Lesson10,solution-2,43344beb51d32f3ca4fc33179eaffe032d3d2e90805db5770be23b32035601a0,"The first two steps for hypothesis testing are given in the problem. Therefore, the next step is to calculate the test statistic. We have seen before that ",,pending
+O006-PSU-011-S0062,O006-PSU-011,Lesson10,solution-2,90fe1c308793693034c49874053eee72e52766b3cfe2c33ce020e826f7f6f47c, is a sufficient statistic for ,,pending
+O006-PSU-011-S0063,O006-PSU-011,Lesson10,solution-2,54817ac95849c1420e901f15a9af49a8fe830a1d4b7ddf608d730ce2b886e7c5,. We have also found in 414 that ,,pending
+O006-PSU-011-S0064,O006-PSU-011,Lesson10,solution-2,83b9d55e98d955d5bd83744e98aeb335d51e5421b4b8266dece23f19fa426367, is a Poisson random variable with parameter ,,pending
+O006-PSU-011-S0065,O006-PSU-011,Lesson10,solution-2,10f2323ab0509669e373d876750387851d9a4b38feb306840506de4322f0ae28,". For this example, let’s consider the sum as the test statistic.",,pending
+O006-PSU-011-S0066,O006-PSU-011,Lesson10,solution-2,8403275813c1de4cd80cf42fe1b9a0f70e27ea281b6fb143441e236aff6e14c2,If the distribution of the sum is Poisson ,,pending
+O006-PSU-011-S0067,O006-PSU-011,Lesson10,solution-2,f209df977cee25496ef0cc94f0a40911f552350965edcda27742a3c81b5bcc6c,", then we can translate our original hypotheses to:",,pending
+O006-PSU-011-S0068,O006-PSU-011,Lesson10,solution-2,794dc6a57d0334f36d5e19ff69df711d0203a27380c19cbd64fa4fbe3cb63591,"Setting up the decision rule, we want to reject the null hypothesis if ",,pending
+O006-PSU-011-S0069,O006-PSU-011,Lesson10,solution-2,26c472d80e077c4b113da6c98d96b3d9fb63d21e6f3dade0707057b4a47a483c,", where ",,pending
+O006-PSU-011-S0070,O006-PSU-011,Lesson10,solution-2,c094e810c9a1ef38ff25f2078a01f0ee6dbe06fb082d4496f51f6e55e3a6335d,"Recall that the Poisson distribution. Therefore, we may not get the exact ",,pending
+O006-PSU-011-S0071,O006-PSU-011,Lesson10,solution-2,c40271c3d77cbceec131a279bb5a13bf49ca693585d845482562db7929d488fe, level we desire. The table below shows the pmf of a Poisson random variable with ,,pending
+O006-PSU-011-S0072,O006-PSU-011,Lesson10,solution-2,b9686326cae40d73f80a7b64fc5390aaf8ae98f89b0ff05d8509f1ddccdf7a91,. The third column is the ,,pending
+O006-PSU-011-S0073,O006-PSU-011,Lesson10,solution-2,228f04ff961be9582fce959b5a7d39e7dbede8d72f22d86c337816f85217c1b7, for the value ,,pending
+O006-PSU-011-S0074,O006-PSU-011,Lesson10,solution-2,a4da27f0201d3ad80829eb87c65733e7f9bae84f50daa8f2d04a15bd2af19f33,We want to get as close to ,,pending
+O006-PSU-011-S0075,O006-PSU-011,Lesson10,solution-2,e80cbff45a5467d0e862a3ab3058c44a90966f742afb1cd80e5e109331cb79c2, as possible. The value that is closest is ,,pending
+O006-PSU-011-S0076,O006-PSU-011,Lesson10,solution-2,12ac98caac237be5a43e3588d45b8673280a88ea4c5929331dce0ecd0018dd69,". Therefore, at a significance level of ",,pending
+O006-PSU-011-S0077,O006-PSU-011,Lesson10,solution-2,b2820f75e8278675dd80f952035086eee58605f632dc5da82368335a4463d4e7,", the decision rule to reject the null hypothesis is when ",,pending
+O006-PSU-011-S0078,O006-PSU-011,Lesson10,solution-2,f2debaa2ce68793c847a67c15f1f5e300e666ed475c45d882e40c8fd35834808,"Using the given data, the sum is ",,pending
+O006-PSU-011-S0079,O006-PSU-011,Lesson10,solution-2,13e51a42c6f1edb61a8f804846f8f880de1f541da3b0d8d8900768d9f9d225b7,". Since the sum is not greater than or equal to 6, we fail to reject the null hypothesis. At the ",,pending
+O006-PSU-011-S0080,O006-PSU-011,Lesson10,solution-2,54b168ad81d468886b64f0a6d103e0c3bb511c6451ee826bcd9e862f189ade6b," level, there is insufficient evidence to conclude that ",,pending
+O006-PSU-011-S0081,O006-PSU-011,Lesson10,solution-2,74b0540c1f555c779f81f229040809f2b606473d52013b246a0d11a3e4782cae," or equivalently, ",,pending
+O006-PSU-011-S0082,O006-PSU-011,Lesson10,linking-confidence-intervals-to-hypothesis-tests,187dd2b62ea6a7c59ef886cece7df94d959871311021c407d48cf05db24158fd, Linking Confidence Intervals to Hypothesis Tests,,pending
+O006-PSU-011-S0083,O006-PSU-011,Lesson10,linking-confidence-intervals-to-hypothesis-tests,dea904905a4cb01ee9e46b16fa7f348ac6db375289beff14b53fcc5a0815dbca,"At this point, we have demonstrated how to find interval estimates for unknown parameters and how to test for specific values of the unknown parameters. Is there any connection between the interval estimates and hypothesis tests? The answer is yes!",,pending
+O006-PSU-011-S0084,O006-PSU-011,Lesson10,linking-confidence-intervals-to-hypothesis-tests,d43a628ec7288ac2ea49cccebfc34969bb8f07438f2f9cb9286f10eb4b08c90f,"So far in this class, we have discussed only two-sided confidence intervals, i.e. intervals with an upper bound and a lower bound. We will focus our discussion on these intervals and two-sided tests. However, we can apply what we learn here to right-tailed or left-tailed confidence intervals and one-sided hypothesis tests.",,pending
+O006-PSU-011-S0085,O006-PSU-011,Lesson10,linking-confidence-intervals-to-hypothesis-tests,b500c3c1967bd50af41c023db693150a7aecae4997ee9e9792cb29572065e7e4,"As usual, lets consider an example.",,pending
+O006-PSU-011-S0086,O006-PSU-011,Lesson10,linking-confidence-intervals-to-hypothesis-tests,59cbb688ae4818c938c0aebbe59fc88809ec3c7e03be006a2430c7910b7389f2,Example 10.3,,pending
+O006-PSU-011-S0087,O006-PSU-011,Lesson10,linking-confidence-intervals-to-hypothesis-tests,005edec90a319a50643664d27d51c0006e0d7642d2c1ed18fc151863227f5e37, Let’s revisit a previous example. It is assumed that the mean systolic blood pressure is ,,pending
+O006-PSU-011-S0088,O006-PSU-011,Lesson10,linking-confidence-intervals-to-hypothesis-tests,8ac4989b4e6d1f46320e16b2c7bdacf45760873a2cf77c75172384f309abb166," mm Hg. In the Honolulu Heart Study, a sample of ",,pending
+O006-PSU-011-S0089,O006-PSU-011,Lesson10,linking-confidence-intervals-to-hypothesis-tests,58890f269aa4693dc92ff12b45ed26e8a35fb41ae5ee1d4c873fb88323e8749a, people had an average systolic blood pressure of 130.1 mm Hg with a standard deviation of 21.21 mm Hg. Find a 95% confidence interval for the population mean systolic blood pressure.,,pending
+O006-PSU-011-S0090,O006-PSU-011,Lesson10,solution-3,22927695994eab589c7601a6b15df4d9dc67c5aceb9a74cdb965444b9b8362a6,Solution,,pending
+O006-PSU-011-S0091,O006-PSU-011,Lesson10,solution-3,e62a156cf5352ff8595e327fd9ae703be034fd99a3082912074579aa75ad8a12,The 95% confidence interval is: ,,pending
+O006-PSU-011-S0092,O006-PSU-011,Lesson10,solution-3,a97f8e97eb90a20c5d681407b6875c50388d1b514f4d96e6f8a8d3e596fd8d07,"With the given information, we know, the interval is: ",,pending
+O006-PSU-011-S0093,O006-PSU-011,Lesson10,solution-3,722f8a527f8ca587bccb225710b39fb14381d658ab5cc9a46bbd88bb55bb8a05,We are 95% confident that the population mean systolic blood pressure is between ,,pending
+O006-PSU-011-S0094,O006-PSU-011,Lesson10,solution-3,9a9f008230515ef54c6f20f1836b967cd9eb107fe23ba6e44874bcee96055dfb,"Previously, we asked: Is the group significantly different (with respect to systolic blood pressure!) from the regular population? We tested the hypotheses: ",,pending
+O006-PSU-011-S0095,O006-PSU-011,Lesson10,solution-3,81141ce09e718f7b64454040c2a14fd84efc0ff70e202f8a13cabce41fb9fc9a,The test statistic was ,,pending
+O006-PSU-011-S0096,O006-PSU-011,Lesson10,solution-3,40e00d88bd69c1e3c1b97b9fbe7c1974a22177878386032dcc3a78c3e548d6a6,. The p-value for this test ,,pending
+O006-PSU-011-S0097,O006-PSU-011,Lesson10,solution-3,5b6eaf74e694ca4f408738c9778d0eaae62a6b58ca5ff3108ca962fc29ddd111,".Therefore, we rejected the null hypothesis at the ",,pending
+O006-PSU-011-S0098,O006-PSU-011,Lesson10,solution-3,f4752cb02dffbdb1dbdb6e22725ed67a9913ecb1939ac666cae03302ad8b9f71, level.,,pending
+O006-PSU-011-S0099,O006-PSU-011,Lesson10,solution-3,ee31569912583fc0373e133cb406b4bbed34c4353e6fe8267375625a0a4d5194,"If we look at the confidence interval, we see that the value of 120 is NOT in the confidence interval. Is this a coincidence?",,pending
+O006-PSU-011-S0100,O006-PSU-011,Lesson10,solution-3,39f2463e564e45cd4b38fb36016bf73cd858ff173a600e480da6d512de2215be,The critical region approach for the ,,pending
+O006-PSU-011-S0101,O006-PSU-011,Lesson10,solution-3,7021c2d3ef4b6295d0f417ff46d0ce4632c3a1612802d2954c5478359a1b9fcb, hypothesis test tells us to reject the null hypothesis that ,,pending
+O006-PSU-011-S0102,O006-PSU-011,Lesson10,solution-3,dc36da27e5eb6da6ad0bccb13fecd6c5fdbee2cf600dc37d6274e1ee3099d638,which is equivalent to rejecting: ,,pending
+O006-PSU-011-S0103,O006-PSU-011,Lesson10,solution-3,dc36da27e5eb6da6ad0bccb13fecd6c5fdbee2cf600dc37d6274e1ee3099d638,which is equivalent to rejecting: ,,pending
+O006-PSU-011-S0104,O006-PSU-011,Lesson10,solution-3,4b20d7ac997a0aa8125a19b058f15b68761f969d13ccdafa9d44ed2ddd8adb5c,"which, upon inserting the data for this particular example, is equivalent to rejecting: ",,pending
+O006-PSU-011-S0105,O006-PSU-011,Lesson10,solution-3,4c465a6fd08af19f58e607f7f7eeb07ec500dd06790215accc32e9200493bbc6,"which just happen to be (!) the endpoints of the 95% confidence interval for the mean. Indeed, the results are consistent!",,pending
+O006-PSU-011-S0106,O006-PSU-011,Lesson10,power-of-a-test,1612639e1faeae7826dbd7b3e5b113ca63d179ea71d305052b2a4981bbd0ac12, Power of a Test,,pending
+O006-PSU-011-S0107,O006-PSU-011,Lesson10,power-of-a-test,5f7597014520f87761c89a04fd7520da867e2c6ae28910d4f2614b9770f4f0f0,"Whenever we conduct a hypothesis test, we’d like to make sure that it is a test of high quality. One way of quantifying the quality of a hypothesis test is to ensure that it is a “powerful” test. In this lesson, we’ll learn what it means to have a powerful hypothesis test, as well as how we can determine the sample size n necessary to ensure that the hypothesis test we are conducting has high power. Our discussions and examples focus on the case of testing for an unknown population mean from a Normal distribution.",,pending
+O006-PSU-011-S0108,O006-PSU-011,Lesson10,definition-of-power,5446e6fab57a6ccf35a4dceb2526cf0a7fbf99d4328ccc7a8b366c940d6e554a, Definition of Power,,pending
+O006-PSU-011-S0109,O006-PSU-011,Lesson10,definition-of-power,10abfea34fc67726ba318b72d6e07fa1a95ce9daa2c7ff2d14acc8bb1bf0de7b,Let’s start our discussion of statistical power by recalling two definitions we learned when we first introduced hypothesis testing:,,pending
+O006-PSU-011-S0110,O006-PSU-011,Lesson10,definition-of-power,4e30e96d1755f72c4120c98716a69cfffd8f1449a55b55a3e9a1d23e9f7ffb89,A Type I error occurs if we reject the null hypothesis ,,pending
+O006-PSU-011-S0111,O006-PSU-011,Lesson10,definition-of-power,420a880977ebc0a23fb67c0738cc106b45e97ee660f465030ede02d113b5995a, (in favor of the alternative ,,pending
+O006-PSU-011-S0112,O006-PSU-011,Lesson10,definition-of-power,ddd9385c8aa3a7d352bf1146a55f1912640c045f26c27390d06134b12cdc5002,) when the null hypothesis ,,pending
+O006-PSU-011-S0113,O006-PSU-011,Lesson10,definition-of-power,aeb3bbbc4938bd8e792a3ea5a2e4930a97897542197809c71b62a57e4763161d, is true. We denote ,,pending
+O006-PSU-011-S0114,O006-PSU-011,Lesson10,definition-of-power,3b94e91a6a8868254ae1cd2eec2927661dc752feee062d30101dfb58de478998,A Type II error occurs if we fail to reject the null hypothesis ,,pending
+O006-PSU-011-S0115,O006-PSU-011,Lesson10,definition-of-power,69f8d0c6e9e8e8c949d323df3eb9a46b69b0ea78e0bce2ded3ba70f863597383, when the null hypothesis ,,pending
+O006-PSU-011-S0116,O006-PSU-011,Lesson10,definition-of-power,ba1d84c1810c79ef78c8d633e6c68d49b44916d8dac093b7c5738e1f30f0d68c, is false (or the alternative is true). We denote ,,pending
+O006-PSU-011-S0117,O006-PSU-011,Lesson10,definition-of-power,1f40bcaa7ff0798081ba4afe92603bef3d1288928719aa8db21cfe72c1487df3,"You’ll certainly need to know these two definitions inside and out, as you’ll be thinking about them a lot in this lesson, and at any time in the future when you need to calculate a sample size either for yourself or for someone else.",,pending
+O006-PSU-011-S0118,O006-PSU-011,Lesson10,definition-of-power,917ada94d03969cb126db25e66ab402a5d77c68cf8dfb77fd2723c683d3bd06f,Example 10.4,,pending
+O006-PSU-011-S0119,O006-PSU-011,Lesson10,definition-of-power,5c0114a68e34a23e9411f13e3c48fb9b6c4bdfe757a316450df5d593ef16d87c,Part I,,pending
+O006-PSU-011-S0120,O006-PSU-011,Lesson10,definition-of-power,8801070c6d5e072582aa8e5b2956d6b04e0e907f77e65313034d075708b98be3,"
+The Brinell hardness scale is one of several definitions used in the field of materials science to quantify the hardness of a piece of metal. The Brinell hardness measurement of a certain type of rebar used for reinforcing concrete and masonry structures was assumed to be normally distributed with a standard deviation of 10 kilograms of force per square millimeter. Using a random sample of ",,pending
+O006-PSU-011-S0121,O006-PSU-011,Lesson10,definition-of-power,b4de57244955a16f3a355b2c0d808446c90de521661d94d6c1ce53f83797beb8," bars, an engineer is interested in performing the following hypothesis test:",,pending
+O006-PSU-011-S0122,O006-PSU-011,Lesson10,definition-of-power,2b0559f868bafd69493fca0fe04297aa26bd6acd9e6ae5d4045a5c79ac9889bb,the null hypothesis ,,pending
+O006-PSU-011-S0123,O006-PSU-011,Lesson10,definition-of-power,2c3ee84eb1366c09053f640ad0be4382d783cd04fc84efb8dc0a677db18bf480,against the alternative hypothesis ,,pending
+O006-PSU-011-S0124,O006-PSU-011,Lesson10,definition-of-power,b32aa73d553760a3ab863b7286135d59fc1f4be0ab35a26260139a17a5cbcf4e,"If the engineer decides to reject the null hypothesis if the sample mean is 172 or greater, that is, ",,pending
+O006-PSU-011-S0125,O006-PSU-011,Lesson10,definition-of-power,c1ce65aa481ed6e36aba9d9e4efb3cfe36f6e12d0f0e5325cd25be11c1407372,", what is the probability that the engineer commits a Type I error?",,pending
+O006-PSU-011-S0126,O006-PSU-011,Lesson10,solution-4,22927695994eab589c7601a6b15df4d9dc67c5aceb9a74cdb965444b9b8362a6,Solution,,pending
+O006-PSU-011-S0127,O006-PSU-011,Lesson10,solution-4,e61a15978205b14de8b6619912d8aa91002682444867b47b82498ab110414378,"In this case, the engineer commits a Type I error if his observed sample mean falls in the rejection region, that is, if it is 172 or greater, when the true (unknown) population mean is indeed 170. Graphically, ",,pending
+O006-PSU-011-S0128,O006-PSU-011,Lesson10,solution-4,b987505c1ba84a9d521dfbf320e7a47a8c993f0d00b864bdd864842945ba4ae0,", the engineer’s probability of committing a Type I error looks like this:",,pending
+O006-PSU-011-S0129,O006-PSU-011,Lesson10,solution-4,bce0c9eb3a6ef56b744608c4cdfcb904c3621c7b43557411467503ba48c210e0,"
+Fig 10.1
+",,pending
+O006-PSU-011-S0130,O006-PSU-011,Lesson10,solution-4,6f706752b12f0d6785e5e11733e8e3d56345c1001961ae98659566a5fa2dcd39,"Now, we can calculate the engineer’s value of ",,pending
+O006-PSU-011-S0131,O006-PSU-011,Lesson10,solution-4,45cfb8395658ec9c07052e1f1f2b66503a8895cf84df03672f499e58e4b6b1ab, by making the transformation from a normal distribution with a mean of 170 and a standard deviation of 10 to that of ,,pending
+O006-PSU-011-S0132,O006-PSU-011,Lesson10,solution-4,e829c2183a5970dd3ced9b50dee83fb514ffc187abbe09219add829ddc8d3c6f,", the standard normal distribution using:",,pending
+O006-PSU-011-S0133,O006-PSU-011,Lesson10,solution-4,4a383aad4b3a2192613a11a48217b575c217c7f39dbbe7c61d7a5bd495845643,"Doing so, we get:",,pending
+O006-PSU-011-S0134,O006-PSU-011,Lesson10,solution-4,2b41d37b82d114084bc2d59e2e0a0e6aba99ef86ee6d1b16d22b04a968ddef77,"
+Fig 10.2
+",,pending
+O006-PSU-011-S0135,O006-PSU-011,Lesson10,solution-4,0f49964a558d807d69f6197e682c39a0dbba09af64e18f1f16f1e48996a0010b,"So, calculating the engineer’s probability of committing a Type I error reduces to making a normal probability calculation. The probability is 0.1587 as illustrated here:",,pending
+O006-PSU-011-S0136,O006-PSU-011,Lesson10,solution-4,16090be8e1915a846dadbe900436c4eaf4dc58b4a975c453177d692221a8e8b7,A probability of 0.1587 is a bit high. We’ll learn in this lesson how the engineer could reduce his probability of committing a Type I error.,,pending
+O006-PSU-011-S0137,O006-PSU-011,Lesson10,definition-of-power,148b65833777b97f6433ce9a80e5c91dad1c433692614f647cb2357ff8eb09c4,Part II,,pending
+O006-PSU-011-S0138,O006-PSU-011,Lesson10,definition-of-power,e834000e61f4b83d4c77d67116048edadef27d719d70c24239c22732edc1fb13,"
+Continuing on with this example, if, unknown to the engineer, the true population mean were ",,pending
+O006-PSU-011-S0139,O006-PSU-011,Lesson10,definition-of-power,296046d6d503797b010a7112e4d7edb7941104ae71239ce9fdd2dbb422692d84,", what is the probability that the engineer commits a Type II error?",,pending
+O006-PSU-011-S0140,O006-PSU-011,Lesson10,solution-5,22927695994eab589c7601a6b15df4d9dc67c5aceb9a74cdb965444b9b8362a6,Solution,,pending
+O006-PSU-011-S0141,O006-PSU-011,Lesson10,solution-5,fd9de206151d4757bb464c7448cadd16139fb0725c780273f568232921a052cc,"In this case, the engineer commits a Type II error if his observed sample mean does not fall in the rejection region, that is, if it is less than 172, when the true (unknown) population mean is 173. Graphically, ",,pending
+O006-PSU-011-S0142,O006-PSU-011,Lesson10,solution-5,65b9bc4921be4cd9f1a622ad307f12e1606cbaaaf76b1198e1760c738c449fc9,", the engineer’s probability of committing a Type II error looks like this:",,pending
+O006-PSU-011-S0143,O006-PSU-011,Lesson10,solution-5,e1c5d8dd5de329d0a8a4caeb263f0a2efe061626601bbe801a1115ca55d2657a,"
+Fig 10.3
+",,pending
+O006-PSU-011-S0144,O006-PSU-011,Lesson10,solution-5,2780f2d95c08d3fbcda62c1bf21f5d3be7d609c72d0c0be8ae2374aeba82a87b,"Again, we can calculate the engineer’s value of ",,pending
+O006-PSU-011-S0145,O006-PSU-011,Lesson10,solution-5,2de722f2c6114493c501c6f4c7ab75935ef9aa2809dcc5d4edede16789fddeb2, by making the transformation from a normal distribution with a mean of 173 and a standard deviation of 10 to that of ,,pending
+O006-PSU-011-S0146,O006-PSU-011,Lesson10,solution-5,ca4d5facf1f4f5dfaf8a605d6bca1fcaa8ff177e5e600d06344402ab98210f59,", the standard normal distribution. Doing so, we get:",,pending
+O006-PSU-011-S0147,O006-PSU-011,Lesson10,solution-5,20db097ce6b742291b581b25706d589b0994f37fa465b39ab35f2fec2b79e9e0,"
+Fig 10.4
+",,pending
+O006-PSU-011-S0148,O006-PSU-011,Lesson10,solution-5,336738835a40277ba4129984cd50257d67c7378806e231558c3138c4f05e4a2a,"So, calculating the engineer’s probability of committing a Type II error again reduces to making a normal probability calculation. The probability is 0.3085 as illustrated here: ",,pending
+O006-PSU-011-S0149,O006-PSU-011,Lesson10,solution-5,26298db9bc19e0e3db66c26693a1f50e010f7565e386ae9c7c66fcac52a598ca,A probability of 0.3085 is a bit high. We’ll learn in this lesson how the engineer could reduce his probability of committing a Type II error.,,pending
+O006-PSU-011-S0150,O006-PSU-011,Lesson10,definition-of-power,7964c1c8dee8fd2c7835d90e60d71dc053baa44a9982cccf290a33185b6f8376,"If you think about it, considering the probability of committing a Type II error is quite similar to looking at a glass that is half empty. That is, rather than considering the probability that the engineer commits an error, perhaps we could consider the probability that the engineer makes the correct decision. Doing so involves calculating what is called the power of the hypothesis test.",,pending
+O006-PSU-011-S0151,O006-PSU-011,Lesson10,definition-of-power,2e2125373c50b67265f566618a3dee68038e70188229a2940265a21f9f2103e7,Def. 10.1 (Power of a Test),,pending
+O006-PSU-011-S0152,O006-PSU-011,Lesson10,definition-of-power,79e3f2a55928f9be8e9bf79254ff7e3ef670540a1c5ca07cfe875827d89757e0, The ,,pending
+O006-PSU-011-S0153,O006-PSU-011,Lesson10,definition-of-power,07d715edb696fb5f628f7298e5d7217ed4d2bdfc5347a1c55fee30832267f21d,power,,pending
+O006-PSU-011-S0154,O006-PSU-011,Lesson10,definition-of-power,7fc97dc243a1a18532414d82f24f335e07330f3e05f354e1350067b68d760fe4," of a hypothesis test is the probability of making the correct decision if the alternative hypothesis is true. That is, the power of a hypothesis test is the probability of rejecting the null hypothesis ",,pending
+O006-PSU-011-S0155,O006-PSU-011,Lesson10,definition-of-power,5214bc563482eb21f7b6f42b120e0cf00d7c719a9feac8b973d78b4cd91b958e, when the alternative hypothesis ,,pending
+O006-PSU-011-S0156,O006-PSU-011,Lesson10,definition-of-power,038b337e60331bad5ff1e904e3ca67607d8577c4ab9f7311ab6050bdb921f7e9, is the hypothesis that is true.,,pending
+O006-PSU-011-S0157,O006-PSU-011,Lesson10,definition-of-power,342158f44169a5010f55d37c6895665a7d81454465831308c5f9ea0ab7b7d2be,Let’s return to our engineer’s problem to see if we can instead look at the glass as being half full!,,pending
+O006-PSU-011-S0158,O006-PSU-011,Lesson10,definition-of-power,7681b4ebe68174787589564d6c8f5a531ee28278fed405ea152b8b71d154f075,Example 10.5,,pending
+O006-PSU-011-S0159,O006-PSU-011,Lesson10,definition-of-power,edba147312cd2d520458f25dad712b3dd25fe2c9654d7eb39fcfa7f58fa60a06," Continuing with our previous example, if, unknown to the engineer, the true population mean was ",,pending
+O006-PSU-011-S0160,O006-PSU-011,Lesson10,definition-of-power,910df739bdf324881b633d7f9eccec8745dc2800bbab39eaabeca86c414914d6,", what is the probability that the engineer makes the correct decision by rejecting the null hypothesis in favor of the alternative hypothesis?",,pending
+O006-PSU-011-S0161,O006-PSU-011,Lesson10,solution-6,22927695994eab589c7601a6b15df4d9dc67c5aceb9a74cdb965444b9b8362a6,Solution,,pending
+O006-PSU-011-S0162,O006-PSU-011,Lesson10,solution-6,7df4f9039be018076d725c857eb8f376c3cf1e9af12653899f55a6a3f6cfc38b,"In this case, the engineer makes the correct decision if his observed sample mean falls in the rejection region, that is, if it is greater than 172 when the true (unknown) population mean is 173. Graphically, the power of the engineer’s hypothesis test looks like this:",,pending
+O006-PSU-011-S0163,O006-PSU-011,Lesson10,solution-6,3bc9face0c6e61071b842213007cd5ec6ee63d99d7358078aa4ccfe08c457b58,"
+Fig 10.5
+",,pending
+O006-PSU-011-S0164,O006-PSU-011,Lesson10,solution-6,af88738c5e7b0317f2fa800ef9e4e644ec76981e1487614cbe8c253b3b0a7268,That makes the power of the engineer’s hypothesis test 0.6915 as illustrated here: ,,pending
+O006-PSU-011-S0165,O006-PSU-011,Lesson10,solution-6,cb9d4e64b9fda73f487bcc2982876c7f6f346ecf318de6cdf6a2509dd6610060," which of course could have alternatively been calculated by simply subtracting the probability of committing a Type II error from 1, as shown here: ",,pending
+O006-PSU-011-S0166,O006-PSU-011,Lesson10,solution-6,7c1e70c87a58f83b37ce42ca01a488e16052eae8483628800adefae761d3a5cc,"At any rate, if the unknown population mean were 173, the engineer’s hypothesis test would be at least a bit better than flipping a fair coin, in which he’d have but a 50% chance of choosing the correct hypothesis. In this case, he has a 69.15% chance. He could still do a bit better.",,pending
+O006-PSU-011-S0167,O006-PSU-011,Lesson10,definition-of-power,7f5d4d97323f4f3d58b223742b4e69566474cc869db8b20498b938ddc375aa51,"In general, for every hypothesis test that we conduct, we’ll want to do the following:",,pending
+O006-PSU-011-S0168,O006-PSU-011,Lesson10,definition-of-power,739ddad6ed88e66cfa72fa00459b9f65f7c39d06ea56a14cebd215b7c93e426a,Minimize the probability of committing a Type I error,,pending
+O006-PSU-011-S0169,O006-PSU-011,Lesson10,definition-of-power,5ea89fb3e2358fbf4d82f8cad69a2109747ed96ebee1469cc2933985bccedd6d,". That, is minimize ",,pending
+O006-PSU-011-S0170,O006-PSU-011,Lesson10,definition-of-power,adfad4327aaca775c594f960d08da5d8f600001493ecfd20002b1a7750496fe2,". Typically, a significance level of ",,pending
+O006-PSU-011-S0171,O006-PSU-011,Lesson10,definition-of-power,b7e3b6949162d64de91e6a3025ce0cdaf95eb2b220f80308a798292162b0a110, is desired.,,pending
+O006-PSU-011-S0172,O006-PSU-011,Lesson10,definition-of-power,1f2c37063d9403f3e13beeddbeb20e88003bfee5e64a95db192bd36a71685da8,Maximize the power,,pending
+O006-PSU-011-S0173,O006-PSU-011,Lesson10,definition-of-power,3f6db37a4169fc6b14748d0deaadd72f7d5dd539922ee4f24f67637fca26dcca," (at a value of the parameter under the alternative hypothesis that is scientifically meaningful). Typically, we desire power to be 0.80 or greater. Alternatively, we could minimize ",,pending
+O006-PSU-011-S0174,O006-PSU-011,Lesson10,definition-of-power,9f88f4a3b5010d0e340ad72e52e02674d249307c85b2519fcf202580ae3d1a45, aiming for a type II error rate of 0.20 or less.,,pending
+O006-PSU-011-S0175,O006-PSU-011,Lesson10,definition-of-power,b31ad29c9ca66d3318f677702dc182f2ba78cc1d6c34c0a23f00b078391b0a5b,"By the way, in the second point, what exactly does “at a value of the parameter under the alternative hypothesis that is scientifically meaningful” mean? Well, let’s suppose that a medical researcher is interested in testing the null hypothesis that the mean total blood cholesterol in a population of patients is 200 mg/dl against the alternative hypothesis that the mean total blood cholesterol is greater than 200 mg/dl. Well, the alternative hypothesis contains an infinite number of possible values of the mean. Under the alternative hypothesis, the mean of the population could be, among other values, 201, 202, or 210. Suppose the medical researcher rejected the null hypothesis because the mean was 201. Whoopdy-do…would that be a rocking conclusion? No, probably not. On the other hand, suppose the medical researcher rejected the null hypothesis, because the mean was 215. In that case, the mean is substantially different enough from the assumed mean under the null hypothesis, that we’d probably get excited about the result. In summary, in this example, we could probably all agree to consider a mean of 215 to be “scientifically meaningful,” whereas we could not do the same for a mean of 201.",,pending
+O006-PSU-011-S0176,O006-PSU-011,Lesson10,definition-of-power,08c0d10d420df5d4bf00e4ee9ffe2b87e3d791abe0f04751067ce3b3d58aca21,"Now, of course, all of this talk is a bit of gibberish, because we’d never really know whether the true unknown population mean was 201 or 215, otherwise, we wouldn’t have to be going through the process of conducting a hypothesis test about the mean. We can do something though. We can plan our scientific studies so that our hypothesis tests have enough power to reject the null hypothesis in favor of values of the parameter under the alternative hypothesis that is scientifically meaningful.",,pending
+O006-PSU-011-S0177,O006-PSU-011,Lesson10,power-functions,3b4c34d17dcf90ab8d7f863b4235c48b8c1e43c07ffc217c399ffa0ad9a6071f, Power Functions,,pending
+O006-PSU-011-S0178,O006-PSU-011,Lesson10,power-functions,48d25a002ace4837bf6e25d11113d9291644f2c96a5b416e342444795faf3a77,Let’s take a look at another example that involves calculating the power of a hypothesis test.,,pending
+O006-PSU-011-S0179,O006-PSU-011,Lesson10,power-functions,cd7e09de34efa6dc54532d84401315ce0f61cb803d9049992e12400db3c22396,Example 10.6,,pending
+O006-PSU-011-S0180,O006-PSU-011,Lesson10,power-functions,c99daa81da9a1194c3f4d33c7020a3736d3fa7de6904b5d7f1bd07ecffaf45cb, Let ,,pending
+O006-PSU-011-S0181,O006-PSU-011,Lesson10,power-functions,9a9a55599f86cbc51bf5e30241fe5b0791f389c621e1fa27f25a9cbaa4f6448b," denote the IQ of a randomly selected adult American. Assume, a bit unrealistically, that ",,pending
+O006-PSU-011-S0182,O006-PSU-011,Lesson10,power-functions,ee7b864bc17caba2df1e466d7d55c474d0a27e6e89a84dd7221482d1b5014193, is normally distributed with unknown mean ,,pending
+O006-PSU-011-S0183,O006-PSU-011,Lesson10,power-functions,a2b49be777a2bf5d92785b7442e605dec448d1ac49b6d13bc6b873fdbcefe529, and standard deviation 16. Take a random sample of ,,pending
+O006-PSU-011-S0184,O006-PSU-011,Lesson10,power-functions,50295d67a6f19cecba31c52731527e2b74a56ef9a48fd3fabedec601b174590b," students, so that, after setting the probability of committing a Type I error at ",,pending
+O006-PSU-011-S0185,O006-PSU-011,Lesson10,power-functions,91a4a2ab2bebb9bbefad494ce74776ef8e87dc573baf4d4514e0f7cc7a0c0e3e,", we can test the null hypothesis ",,pending
+O006-PSU-011-S0186,O006-PSU-011,Lesson10,power-functions,9fc058d33411fe0cf3b8d653abba53966d19222781be9fcd6ea257288f5704e9, against the alternative hypothesis that ,,pending
+O006-PSU-011-S0187,O006-PSU-011,Lesson10,power-functions,9e9c78bc90fced92cb6ead217c70ee6dbb15cf7026dc937b86c85cb1e4ba00db,What is the power of the hypothesis test if the true population mean was ,,pending
+O006-PSU-011-S0188,O006-PSU-011,Lesson10,solution-7,22927695994eab589c7601a6b15df4d9dc67c5aceb9a74cdb965444b9b8362a6,Solution,,pending
+O006-PSU-011-S0189,O006-PSU-011,Lesson10,solution-7,8a485ee31948da620a044663fa8f033b019ac1eaeadb61fe17175977cd897090,Setting ,,pending
+O006-PSU-011-S0190,O006-PSU-011,Lesson10,solution-7,d156b8ac23cf9fd199a4d46e4f1988c38d3190436481f04f3489bd5c710319a1,", the probability of committing a Type I error, to 0.05, implies that we should reject the null hypothesis when the test statistics ",,pending
+O006-PSU-011-S0191,O006-PSU-011,Lesson10,solution-7,0e560013878a4f25f6c02ea820f5df8eafa99ddbfbf8744d533e584734f1f841,", or equivalently, when the observed sample mean is 106.58 or greater:",,pending
+O006-PSU-011-S0192,O006-PSU-011,Lesson10,solution-7,e89d584efe794a02f3b51341a4ff8a7cde9957b4331b2c80bbfe8260c26a81d8,"
+Fig 10.6
+",,pending
+O006-PSU-011-S0193,O006-PSU-011,Lesson10,solution-7,3f1d7d6911861a32d5af942e4ac19d9c84bd08414320390dbc71f7822614b2b8,because we transform the test statistic ,,pending
+O006-PSU-011-S0194,O006-PSU-011,Lesson10,solution-7,ce504eb6e00c06e451039b4053fb9e0b64f726b344c97ad8df0a6a75fca6d41f, to the sample mean by way of: ,,pending
+O006-PSU-011-S0195,O006-PSU-011,Lesson10,solution-7,e8ada7a7779af230714fb3e11c0334b2a468484bd022a8795f8f2f18c53cf5a3,"Now, that implies that the power, that is, the probability of rejecting the null hypothesis, when ",,pending
+O006-PSU-011-S0196,O006-PSU-011,Lesson10,solution-7,4a137a9a727d538734ab591306120477a271c58c16229a2c6893e6a7d84cfe09, is 0.6406 as calculated here (recalling that ,,pending
+O006-PSU-011-S0197,O006-PSU-011,Lesson10,solution-7,b7f59f062a4d892e35f5023306c112847f8a67a90f959e40c9488ccb1523e027, is standard notation for the cumulative distribution function of the standard normal random variable):,,pending
+O006-PSU-011-S0198,O006-PSU-011,Lesson10,solution-7,c5f7cdba706e56ba798504babcb87130e07a212c5e1d2ee2c007fcceb2590142,and illustrated here:,,pending
+O006-PSU-011-S0199,O006-PSU-011,Lesson10,solution-7,a84e1cde002a531c59dedd4abf5743b3b5325177d9156a7d653144afb136d916,"
+Fig 10.7
+",,pending
+O006-PSU-011-S0200,O006-PSU-011,Lesson10,solution-7,038ba7eae345e141df9b91c539b3caabd8d5812e220c2d4b91bb0396792aa263,"In summary, we have determined that we have (only) a 64.06% chance of rejecting the null hypothesis ",,pending
+O006-PSU-011-S0201,O006-PSU-011,Lesson10,solution-7,4b5223aef1fcd6bf8cfb16ac478ede93abe0c13c560a87de9b9bfe2949e5c31a, in favor of the alternative hypothesis ,,pending
+O006-PSU-011-S0202,O006-PSU-011,Lesson10,solution-7,6cdb900d33ee3081a9fb688bbd087140190d5c03c8d123efd88f6520eeccf5c1,", if the true unknown population mean, is in reality ",,pending
+O006-PSU-011-S0203,O006-PSU-011,Lesson10,power-functions,148b65833777b97f6433ce9a80e5c91dad1c433692614f647cb2357ff8eb09c4,Part II,,pending
+O006-PSU-011-S0204,O006-PSU-011,Lesson10,power-functions,40dc0951d6c8c7d24686e40c513f103d346ca9acc96e519a089226bc8c5284eb,"
+Continuing with this example, what is the power of the hypothesis test if the true population mean were ",,pending
+O006-PSU-011-S0205,O006-PSU-011,Lesson10,solution-8,22927695994eab589c7601a6b15df4d9dc67c5aceb9a74cdb965444b9b8362a6,Solution,,pending
+O006-PSU-011-S0206,O006-PSU-011,Lesson10,solution-8,bd3b0e843e8eaba53dbe5dbf89e8604534090b151bf8fb16a0783860198fc90a,Because we are setting ,,pending
+O006-PSU-011-S0207,O006-PSU-011,Lesson10,solution-8,afc7a959288a942090d7cefaa2de7c90f537151d71625075a5181d29e6957092,", the probability of committing a Type I error, to 0.05, we again reject the null hypothesis when the test statistic ",,pending
+O006-PSU-011-S0208,O006-PSU-011,Lesson10,solution-8,485aa17e153c2d36ca62e77b31b484e19d925ab5e2e6084df8bddc3cc477e0be,", or equivalently, when the observed sample mean is 106.58 or greater. That means that the probability of rejecting the null hypothesis, when ",,pending
+O006-PSU-011-S0209,O006-PSU-011,Lesson10,solution-8,2277dbf1135a1b8fb46c75161f59dbe21eeda0325828a905b9c00c64ac25b8db,", is 0.9131 as calculated here:",,pending
+O006-PSU-011-S0210,O006-PSU-011,Lesson10,solution-8,c5f7cdba706e56ba798504babcb87130e07a212c5e1d2ee2c007fcceb2590142,and illustrated here:,,pending
+O006-PSU-011-S0211,O006-PSU-011,Lesson10,solution-8,7891a8b68170a2885377ca6ae1b1ca1367b7e7067de26dfd64ab4033a59e35d7,"
+Fig 10.8
+",,pending
+O006-PSU-011-S0212,O006-PSU-011,Lesson10,solution-8,526cdafcec846d311d9146897d82ab4e8c8aac8c7d3fef17e74e9b0d4122e800,"In summary, we have determined that we now have a 91.31% chance of rejecting the null hypothesis ",,pending
+O006-PSU-011-S0213,O006-PSU-011,Lesson10,solution-8,4b5223aef1fcd6bf8cfb16ac478ede93abe0c13c560a87de9b9bfe2949e5c31a, in favor of the alternative hypothesis ,,pending
+O006-PSU-011-S0214,O006-PSU-011,Lesson10,solution-8,09d0e86608e1cf8bd9dc8de5e3a8a50bf360857dda2cbbb6e6acae4f399eefc7, if the true unknown population mean is in reality ,,pending
+O006-PSU-011-S0215,O006-PSU-011,Lesson10,solution-8,107478ea5ce2033242abce2a34c45927be2e706ef576eeb2555d4935dcf52b08,". Hmm…. it should make sense that the probability of rejecting the null hypothesis is larger for values of the mean, such as 112, that are far away from the assumed mean under the null hypothesis.",,pending
+O006-PSU-011-S0216,O006-PSU-011,Lesson10,power-functions,90042264c40322f32695570a8b1e8adfd5e96ca93226df6f546741bd6b8995b2,Part III,,pending
+O006-PSU-011-S0217,O006-PSU-011,Lesson10,power-functions,9e1b4a9af75f321e78bec7da81b47aaf3e8451a42f86fd438cb7f0682e6bef8a,"
+Again, continuing on with the previous example. What is the power of the hypothesis test if the true population mean were ",,pending
+O006-PSU-011-S0218,O006-PSU-011,Lesson10,solution-9,22927695994eab589c7601a6b15df4d9dc67c5aceb9a74cdb965444b9b8362a6,Solution,,pending
+O006-PSU-011-S0219,O006-PSU-011,Lesson10,solution-9,00d7f8d0e505cdaf29bfe01380276f498421d0b846dc98369f9f4a0e5d87b7c5,"Again, because we are setting ",,pending
+O006-PSU-011-S0220,O006-PSU-011,Lesson10,solution-9,b022d9430acb04724d551c759c219240b25c7156bfde6616ae89b246105bbc5b,", the probability of committing a Type I error, to 0.05, we reject the null hypothesis when the test statistic ",,pending
+O006-PSU-011-S0221,O006-PSU-011,Lesson10,solution-9,485aa17e153c2d36ca62e77b31b484e19d925ab5e2e6084df8bddc3cc477e0be,", or equivalently, when the observed sample mean is 106.58 or greater. That means that the probability of rejecting the null hypothesis, when ",,pending
+O006-PSU-011-S0222,O006-PSU-011,Lesson10,solution-9,7f538c6d406d06d6c530760958b68e590b20e13476f1276c180fcf54ade32c24, is 0.9909 as calculated here:,,pending
+O006-PSU-011-S0223,O006-PSU-011,Lesson10,solution-9,c5f7cdba706e56ba798504babcb87130e07a212c5e1d2ee2c007fcceb2590142,and illustrated here:,,pending
+O006-PSU-011-S0224,O006-PSU-011,Lesson10,solution-9,f88d8ee11c7af4376ba13f184bf2ee36c0bed26dfc556adb07a4321ae7963292,"
+Fig 10.9
+",,pending
+O006-PSU-011-S0225,O006-PSU-011,Lesson10,solution-9,187c98c3c375594da575dff230f9f4670d6ed3429c5e6720b58a54493429dd2a,"In summary, we have determined that, in this case, we have a 99.09% chance of rejecting the null hypothesis ",,pending
+O006-PSU-011-S0226,O006-PSU-011,Lesson10,solution-9,4b5223aef1fcd6bf8cfb16ac478ede93abe0c13c560a87de9b9bfe2949e5c31a, in favor of the alternative hypothesis ,,pending
+O006-PSU-011-S0227,O006-PSU-011,Lesson10,solution-9,09d0e86608e1cf8bd9dc8de5e3a8a50bf360857dda2cbbb6e6acae4f399eefc7, if the true unknown population mean is in reality ,,pending
+O006-PSU-011-S0228,O006-PSU-011,Lesson10,solution-9,7e4feae63ccf80ad6a28a4c4d096309e6f265df90aa1dc728932c34d068a43d5,". The probability of rejecting the null hypothesis is the largest yet of those we calculated, because the mean, 116, is the farthest away from the assumed mean under the null hypothesis.",,pending
+O006-PSU-011-S0229,O006-PSU-011,Lesson10,power-functions,d7760d785b9f6b5502c0cc04de1898bb1a2a85a62e05d0f12d5564327fd4b826,Are you growing weary of this? Let’s summarize a few things we’ve learned from engaging in this exercise:,,pending
+O006-PSU-011-S0230,O006-PSU-011,Lesson10,power-functions,71bb0203451cc4ec4bced21ac9c3139e68224301b06dda265c5ac50525c8a912,"First and foremost, my instructor can be tedious at times….. errrr, I mean, first and foremost, the power of a hypothesis test depends on the value of the parameter being investigated. In the above, example, the power of the hypothesis test depends on the value of the mean ",,pending
+O006-PSU-011-S0231,O006-PSU-011,Lesson10,power-functions,1c835e2294bca23e53b4f0c51b9f13e6ab011869645481ea5854f71fec75b653,As the actual mean ,,pending
+O006-PSU-011-S0232,O006-PSU-011,Lesson10,power-functions,0599420e56c5230cff0c42cb004826413fa1020ec1601503dfaa3138824732a1, moves further away from the value of the mean ,,pending
+O006-PSU-011-S0233,O006-PSU-011,Lesson10,power-functions,fc076c5a804ec0c4a803239809ede58ef53f8dcb9b93574dc7961e853d686fc0," under the null hypothesis, the power of the hypothesis test increases.",,pending
+O006-PSU-011-S0234,O006-PSU-011,Lesson10,power-functions,e8c89a2550224244ac66134c122b3b1b214f36fca70dc359feef43af790efe8e,It’s that first point that leads us to what is called the ,,pending
+O006-PSU-011-S0235,O006-PSU-011,Lesson10,power-functions,7d71442aa37a209befe3b60a00cb74ae671980539eb1c266e1dda3647e74f825,power function of the hypothesis test,,pending
+O006-PSU-011-S0236,O006-PSU-011,Lesson10,power-functions,d92dac8f30ef2ad72c69efae0f6edce180c50c9df624444bd88c87ff42d8529b,". If you go back and take a look, you’ll see that in each case our calculation of the power involved a step that looks like this:",,pending
+O006-PSU-011-S0237,O006-PSU-011,Lesson10,power-functions,adc8ca2eeb804214eb5b1ef4ea3e7bb862fbb5af990a22e7895ddd8da2f92e7a,"That is, if we use the standard notation ",,pending
+O006-PSU-011-S0238,O006-PSU-011,Lesson10,power-functions,cec1ef2110c1b2e86cedf5b9bbe905113ce3ee61a849b12c1fce5f8cec6669f7," to denote the power function, as it depends on ",,pending
+O006-PSU-011-S0239,O006-PSU-011,Lesson10,power-functions,c95d7a842d9ac146f175cf30d03b524c6c69ea80c052325ea019860d4c0eea58,", we have: ",,pending
+O006-PSU-011-S0240,O006-PSU-011,Lesson10,power-functions,d8aeb50bf86f57bcf2533c5d7171dc95b510d72f1d8cec3d0afd2866c5ed9152,"So, the reality is your instructor could have been a whole lot more tedious by calculating the power for ",,pending
+O006-PSU-011-S0241,O006-PSU-011,Lesson10,power-functions,66a424a9a958b152c1c3ba65a2ac6c33ad03333e2e41e7d770b5758d46dd3ef5,every,,pending
+O006-PSU-011-S0242,O006-PSU-011,Lesson10,power-functions,65a2adaec284ca3faf8bfb0a1e41dc2422b7bca42080d951fe14357441e14c61, possible value of ,,pending
+O006-PSU-011-S0243,O006-PSU-011,Lesson10,power-functions,53c4bd53420ed56b7258e25ea553bb5198beb8fee6e6af7599f89c731552c4d4," under the alternative hypothesis! What we can do instead is create a plot of the power function, with the mean ",,pending
+O006-PSU-011-S0244,O006-PSU-011,Lesson10,power-functions,7a73009cdd0978e4775d050c6983c8782e9088425b07f2323ce3485652fc0fca, on the horizontal axis and the power ,,pending
+O006-PSU-011-S0245,O006-PSU-011,Lesson10,power-functions,4536261019c7d526a2ad04b28195e45615d67997442a493235860f370a279fdb," on the vertical axis. Doing so, we get a plot in this case that looks like this:",,pending
+O006-PSU-011-S0246,O006-PSU-011,Lesson10,power-functions,366a2b4952ade239c85e11d3e21b5737f5dd304d9d66e7c8e6ed0d70fec4fa10,"
+Fig 10.10
+",,pending
+O006-PSU-011-S0247,O006-PSU-011,Lesson10,power-functions,083d9582d3d1a37f88b0450cc9cb67021ac703aeb98fbe9a1aa7c05d233d0c34,"Now, what can we learn from this plot?",,pending
+O006-PSU-011-S0248,O006-PSU-011,Lesson10,power-functions,980084aaac21629a9a5c08a435e0527ff56d52290b9c427d715245bae30ff86e,Well:,,pending
+O006-PSU-011-S0249,O006-PSU-011,Lesson10,power-functions,c2a3e8de8e8f41fc7942b055739d1e3d23f70251ba988ce61ba569554222fb4d,We can see that ,,pending
+O006-PSU-011-S0250,O006-PSU-011,Lesson10,power-functions,043329acf42320ddd2928db55bbd22dbb45a290398363c0abfc495453b4319ab," (the probability of a Type I error), ",,pending
+O006-PSU-011-S0251,O006-PSU-011,Lesson10,power-functions,06a86c6cf6f22122123c220f73d4252bed53712e7eb2ebec8d167bf67311f92a," (the probability of a Type II error), and ",,pending
+O006-PSU-011-S0252,O006-PSU-011,Lesson10,power-functions,2a3ffe7d1c6c7ec79f0a14cdad06463c3bf7b05b28002864d5631429c54d4a12," are all represented on a power function plot, as illustrated here:",,pending
+O006-PSU-011-S0253,O006-PSU-011,Lesson10,power-functions,63e5037d9903429cdcab086835eae437c6cffdd66cb9ed1438f1347779f73192,"
+Fig 10.11
+",,pending
+O006-PSU-011-S0254,O006-PSU-011,Lesson10,power-functions,96d4ccb8a8bdceb40af550b5dc8860eb1bcd7c862ef4a282f11d9b66031f7876,We can see that the probability of a Type I error is ,,pending
+O006-PSU-011-S0255,O006-PSU-011,Lesson10,power-functions,68c92cb3de921f1c25927b58328fbd6af733bce7034c4ae25d469d854d8fe6b8,", that is, the probability of rejecting the null hypothesis when the null hypothesis is true is 0.05.",,pending
+O006-PSU-011-S0256,O006-PSU-011,Lesson10,power-functions,9a0dc47f591156d139392750fbffb8e13babcad79d78371a66dd4be8d9d52a32,We can see the power of a test ,,pending
+O006-PSU-011-S0257,O006-PSU-011,Lesson10,power-functions,db9268dbdaf2f56d1598598b238411b102f99b64562021f33852ca0c1ceec4f9,", as well as the probability of a Type II error ",,pending
+O006-PSU-011-S0258,O006-PSU-011,Lesson10,power-functions,2ab17ddbe6cbffbe72620156f4efa41cf067ef76e96550cf906fe2677a8d90e9,", for each possible value of ",,pending
+O006-PSU-011-S0259,O006-PSU-011,Lesson10,power-functions,c2a3e8de8e8f41fc7942b055739d1e3d23f70251ba988ce61ba569554222fb4d,We can see that ,,pending
+O006-PSU-011-S0260,O006-PSU-011,Lesson10,power-functions,f56796948994c33a9a6a5d90597e635e660485c1812687215a303b32ae25b7c3," and vice versa, that is, ",,pending
+O006-PSU-011-S0261,O006-PSU-011,Lesson10,power-functions,142e644a97c2cb30d03adbc0c92be226a42e01515cfbddd8a689195687ee987a,"And we can see graphically that, indeed, as the actual mean ",,pending
+O006-PSU-011-S0262,O006-PSU-011,Lesson10,power-functions,50c1f421ee19c38825702b67eb8588ed441d27cfd2c01bbc7b8ac7d630a49631, moves further away from the null mean ,,pending
+O006-PSU-011-S0263,O006-PSU-011,Lesson10,power-functions,43435558294999c47b987f121164a590b66dc74adc4a80d9c7a6e9b9da12357d,", the power of the hypothesis test increases.",,pending
+O006-PSU-011-S0264,O006-PSU-011,Lesson10,power-functions,89d275187ed6c15aa6019ef0828353e394a191c18065f40b1f01be42ae715121,"Now, what would you suppose would happen to the power of our hypothesis test if we were to change our willingness to commit a Type I error? Would the power for a given value of ",,pending
+O006-PSU-011-S0265,O006-PSU-011,Lesson10,power-functions,7687dd9015719ed9c8d99bbc6e3aa20f7e339c693dd96bcdd81f0e78229b4973," increase, decrease, or remain unchanged? Suppose, for example, that we wanted to set ",,pending
+O006-PSU-011-S0266,O006-PSU-011,Lesson10,power-functions,b07cd4757468a5463511a9045ebbdae04df058c959bbe61175bbee2f98f33a78, instead of ,,pending
+O006-PSU-011-S0267,O006-PSU-011,Lesson10,power-functions,b5a560cc229c313a5d51aa40dc78b56ab31decda9465927f5717486d7bc95b95,. Let’s return to our example to explore this question.,,pending
+O006-PSU-011-S0268,O006-PSU-011,Lesson10,power-functions,f2f29aa50a84ce169e61c1e90672b3329088f3c9327dadb88937a05c8fdab767,Example 10.7,,pending
+O006-PSU-011-S0269,O006-PSU-011,Lesson10,power-functions,c99daa81da9a1194c3f4d33c7020a3736d3fa7de6904b5d7f1bd07ecffaf45cb, Let ,,pending
+O006-PSU-011-S0270,O006-PSU-011,Lesson10,power-functions,9a9a55599f86cbc51bf5e30241fe5b0791f389c621e1fa27f25a9cbaa4f6448b," denote the IQ of a randomly selected adult American. Assume, a bit unrealistically, that ",,pending
+O006-PSU-011-S0271,O006-PSU-011,Lesson10,power-functions,ee7b864bc17caba2df1e466d7d55c474d0a27e6e89a84dd7221482d1b5014193, is normally distributed with unknown mean ,,pending
+O006-PSU-011-S0272,O006-PSU-011,Lesson10,power-functions,a2b49be777a2bf5d92785b7442e605dec448d1ac49b6d13bc6b873fdbcefe529, and standard deviation 16. Take a random sample of ,,pending
+O006-PSU-011-S0273,O006-PSU-011,Lesson10,power-functions,50295d67a6f19cecba31c52731527e2b74a56ef9a48fd3fabedec601b174590b," students, so that, after setting the probability of committing a Type I error at ",,pending
+O006-PSU-011-S0274,O006-PSU-011,Lesson10,power-functions,91a4a2ab2bebb9bbefad494ce74776ef8e87dc573baf4d4514e0f7cc7a0c0e3e,", we can test the null hypothesis ",,pending
+O006-PSU-011-S0275,O006-PSU-011,Lesson10,power-functions,9fc058d33411fe0cf3b8d653abba53966d19222781be9fcd6ea257288f5704e9, against the alternative hypothesis that ,,pending
+O006-PSU-011-S0276,O006-PSU-011,Lesson10,power-functions,5ad7740c4b21847ea2f0ed8a4908e86a18bde45550d66684294695f47079869c,What is the power of the hypothesis test if the true population mean were ,,pending
+O006-PSU-011-S0277,O006-PSU-011,Lesson10,solution-10,22927695994eab589c7601a6b15df4d9dc67c5aceb9a74cdb965444b9b8362a6,Solution,,pending
+O006-PSU-011-S0278,O006-PSU-011,Lesson10,solution-10,8a485ee31948da620a044663fa8f033b019ac1eaeadb61fe17175977cd897090,Setting ,,pending
+O006-PSU-011-S0279,O006-PSU-011,Lesson10,solution-10,3b0e80d8c87db41657efa7a73f9c83bab1b8a72a4605296003c6eb36d9ae6e9c,", the probability of committing a Type I error, to 0.01, implies that we should reject the null hypothesis when the test statistic ",,pending
+O006-PSU-011-S0280,O006-PSU-011,Lesson10,solution-10,1f7823c50f5418febb1c4006caddc03a3ac723186178fd46c0249cd0d6f2c92a,", or equivalently, when the observed sample mean is 109.304 or greater:",,pending
+O006-PSU-011-S0281,O006-PSU-011,Lesson10,solution-10,6291def4ca6e9b98cf7220dd58cf096e61f09c1d4f7cd1c1313449da191432e9,"
+Fig 10.12
+",,pending
+O006-PSU-011-S0282,O006-PSU-011,Lesson10,solution-10,51a02e74a4903eff4bce93be0b0db22a5761bca28646371f74696d1480ec1c2b,"That means that the probability of rejecting the null hypothesis, when ",,pending
+O006-PSU-011-S0283,O006-PSU-011,Lesson10,solution-10,0eb3f652c58c2c8588e7bb40b69fd77f47f227ba4293acaf68c217312b574f3e, is 0.3722 as calculated here:,,pending
+O006-PSU-011-S0284,O006-PSU-011,Lesson10,solution-10,37a0c788452ab09b11b66991da99c24c8dbeb51d346a9dcc8976c9f70586bef2,"So, the power when ",,pending
+O006-PSU-011-S0285,O006-PSU-011,Lesson10,solution-10,e3ee915a8e8c7aa02d2fced443314522b20824abd2535d5959c41dc8ab8a09e4, and ,,pending
+O006-PSU-011-S0286,O006-PSU-011,Lesson10,solution-10,918e17baa892de71d82efd4c9c42684344ee50f31e3a09c40969d066088755af, is smaller (0.3722) than the power when ,,pending
+O006-PSU-011-S0287,O006-PSU-011,Lesson10,solution-10,e3ee915a8e8c7aa02d2fced443314522b20824abd2535d5959c41dc8ab8a09e4, and ,,pending
+O006-PSU-011-S0288,O006-PSU-011,Lesson10,solution-10,49b21963472dd24c1480e32549dc2b66956a9a1bce50eb084248090ceb7bd947, (0.6406)! Perhaps we can see this graphically:,,pending
+O006-PSU-011-S0289,O006-PSU-011,Lesson10,solution-10,cb7681d6abfa0ae8d46fbb1a968af0137fea74694f2960d3152abb0f6b3a7a87,"
+Fig 10.13
+",,pending
+O006-PSU-011-S0290,O006-PSU-011,Lesson10,solution-10,6f63b2c1b69dc7320887d112f3799ae205d6a43005fdfa557ace87d2c7d20a06,"By the way, we could again alternatively look at the glass as being half-empty. In that case, the probability of a Type II error when ",,pending
+O006-PSU-011-S0291,O006-PSU-011,Lesson10,solution-10,e3ee915a8e8c7aa02d2fced443314522b20824abd2535d5959c41dc8ab8a09e4, and ,,pending
+O006-PSU-011-S0292,O006-PSU-011,Lesson10,solution-10,81afb10b461acd8f2b7eee698fb0c314c454f7acb574a34baded7f6912fc7a0f, is ,,pending
+O006-PSU-011-S0293,O006-PSU-011,Lesson10,solution-10,a1a92c52e5c14926197adbeda4def61fdd7322929a448604f022e8560db492f0,". In this case, the probability of a Type II error is greater than the probability of a Type II error when ",,pending
+O006-PSU-011-S0294,O006-PSU-011,Lesson10,solution-10,e3ee915a8e8c7aa02d2fced443314522b20824abd2535d5959c41dc8ab8a09e4, and ,,pending
+O006-PSU-011-S0295,O006-PSU-011,Lesson10,solution-10,ce3f1fbc6403639458aeb4c6d2ba1a86dc14aa20f27215f8010a8d525c56ef39,"All of this can be seen graphically by plotting the two power functions, one where ",,pending
+O006-PSU-011-S0296,O006-PSU-011,Lesson10,solution-10,ff174f775cb301287858325d432d57ce2880810d52cc4ba027d9179f52bcb80c, and the other where ,,pending
+O006-PSU-011-S0297,O006-PSU-011,Lesson10,solution-10,904dcfa516b607a6004a285cf09577cd2b4fc92088ad69695e59f0bbb121e361,", simultaneously. Doing so, we get a plot that looks like this:",,pending
+O006-PSU-011-S0298,O006-PSU-011,Lesson10,power-functions,68a70ad06ab3110d01996b3dc2ae4c4e6d3074fc60c08d8e6b1e208b02474cd5,This last example illustrates that providing the sample size ,,pending
+O006-PSU-011-S0299,O006-PSU-011,Lesson10,power-functions,0416ce5ec33da3abb7340018a956ccdbca0bb5fa3875e65e49204eb1707d0277," remains unchanged, a decrease in ",,pending
+O006-PSU-011-S0300,O006-PSU-011,Lesson10,power-functions,a7194bca5a706f9cf0160b1af04ff0d652565f4a5054394fe0870db7a3ddcb82, causes an increase in ,,pending
+O006-PSU-011-S0301,O006-PSU-011,Lesson10,power-functions,e53c2044ad42485abddcd8b319ea637db17d896ea51c00d963c9f3bd019559f1,", and at least theoretically, if not practically, a decrease in ",,pending
+O006-PSU-011-S0302,O006-PSU-011,Lesson10,power-functions,a7194bca5a706f9cf0160b1af04ff0d652565f4a5054394fe0870db7a3ddcb82, causes an increase in ,,pending
+O006-PSU-011-S0303,O006-PSU-011,Lesson10,power-functions,7b3f937cd11a58a65061d4c3d93f7c4158cfefef26ec25f1813edd7e5ad94133,. It turns out that the only way that ,,pending
+O006-PSU-011-S0304,O006-PSU-011,Lesson10,power-functions,e3ee915a8e8c7aa02d2fced443314522b20824abd2535d5959c41dc8ab8a09e4, and ,,pending
+O006-PSU-011-S0305,O006-PSU-011,Lesson10,power-functions,31112ef6afaea2866d10c58f78a554fb33bba4bacd8b0022bb6292d442bde3dc, can be decreased simultaneously is by increasing the sample size ,,pending
+O006-PSU-011-S0306,O006-PSU-011,Lesson10,calculating-sample-size,542356a8e8cc4051887418c8c1a30e1e85760847247ff0895f624d651eb1d3d5, Calculating Sample Size,,pending
+O006-PSU-011-S0307,O006-PSU-011,Lesson10,calculating-sample-size,08b7e0560ea526a052d989dff42760e7b7c8da75c71dafe409c899b5a374976b,"Before we learn how to calculate the sample size that is necessary to achieve a hypothesis test with a certain power, it might behoove us to understand the effect that sample size has on power. Let’s investigate by returning to our IQ example.",,pending
+O006-PSU-011-S0308,O006-PSU-011,Lesson10,calculating-sample-size,424550070a9ed9c5e631d19c25f47fcea7969e364e94a25e85844c2af2c77b04,Example 10.8,,pending
+O006-PSU-011-S0309,O006-PSU-011,Lesson10,calculating-sample-size,c99daa81da9a1194c3f4d33c7020a3736d3fa7de6904b5d7f1bd07ecffaf45cb, Let ,,pending
+O006-PSU-011-S0310,O006-PSU-011,Lesson10,calculating-sample-size,f3922553a8a18c52798f90b4714357010e9b3882e0b909f04fea37db025bb842," denote the IQ of a randomly selected adult American. Assume, a bit unrealistically again, that ",,pending
+O006-PSU-011-S0311,O006-PSU-011,Lesson10,calculating-sample-size,ee7b864bc17caba2df1e466d7d55c474d0a27e6e89a84dd7221482d1b5014193, is normally distributed with unknown mean ,,pending
+O006-PSU-011-S0312,O006-PSU-011,Lesson10,calculating-sample-size,ea7d32a601daa60143c0dab0d6a7d6e377b70b69a9f1ea442951b29c6c247602," and (a strangely known) standard deviation of 16. This time, instead of taking a random sample of ",,pending
+O006-PSU-011-S0313,O006-PSU-011,Lesson10,calculating-sample-size,4d2d9a98d5c89dbc7dfa6153e87334124c3566a5d0c89fd2064cf6b6cb8d2f23," students, let’s increase the sample size to ",,pending
+O006-PSU-011-S0314,O006-PSU-011,Lesson10,calculating-sample-size,54ec1df51e34924533cdedd8ba6466e631df22c95589da93bec103ad441ef2cc,". And, while setting the probability of committing a Type I error to ",,pending
+O006-PSU-011-S0315,O006-PSU-011,Lesson10,calculating-sample-size,a03b5462b6b691509adb432e7fd3f8ece5859341e2546406a305ef83e359daed,", test the null hypothesis ",,pending
+O006-PSU-011-S0316,O006-PSU-011,Lesson10,calculating-sample-size,9fc058d33411fe0cf3b8d653abba53966d19222781be9fcd6ea257288f5704e9, against the alternative hypothesis that ,,pending
+O006-PSU-011-S0317,O006-PSU-011,Lesson10,calculating-sample-size,ae21c2336460b23cd9a67060e53a7ec695e89c5665d5ca62f3c996a3d9520a62,What is the power of the hypothesis test when ,,pending
+O006-PSU-011-S0318,O006-PSU-011,Lesson10,calculating-sample-size,0a63e3f63f232f0c18f3bfe678607aad0b9f7ac6c73e037f74c79c0b2ba103f8,", and ",,pending
+O006-PSU-011-S0319,O006-PSU-011,Lesson10,solution-11,22927695994eab589c7601a6b15df4d9dc67c5aceb9a74cdb965444b9b8362a6,Solution,,pending
+O006-PSU-011-S0320,O006-PSU-011,Lesson10,solution-11,8a485ee31948da620a044663fa8f033b019ac1eaeadb61fe17175977cd897090,Setting ,,pending
+O006-PSU-011-S0321,O006-PSU-011,Lesson10,solution-11,c2f95a566865f085e318df359077f89e0449e00f35098be379c194ffdbfac9c1,", the probability of committing a Type I error, to 0.05, implies that we should reject the null hypothesis when the test statistic ",,pending
+O006-PSU-011-S0322,O006-PSU-011,Lesson10,solution-11,6128bd84206ccb079e0b2a81ad1bb3b31e83f2bcc1dc7968ebead18c18e93d9c,", or equivalently, when the observed sample mean is 103.29 or greater:",,pending
+O006-PSU-011-S0323,O006-PSU-011,Lesson10,solution-11,a01dd12f71b126f1c0b6a78e7821ed1851ed19b9e74aae95d29c76ac72b5c56d,"
+Fig 10.14
+",,pending
+O006-PSU-011-S0324,O006-PSU-011,Lesson10,solution-11,35f0ec30103e61b6dd096b18a8fcdef5c21abf7945c5a2b1e74519b6f28e4223,because:,,pending
+O006-PSU-011-S0325,O006-PSU-011,Lesson10,solution-11,00ae4def25ddff32e292cecb86c97d94b5899d74315ead4dcec7a60b928be2b9,"Therefore, the power function ",,pending
+O006-PSU-011-S0326,O006-PSU-011,Lesson10,solution-11,475c479db7f1f95444365c70d990b0da4e6b4b96dc0d608ab41a8ea0a981d74e,", when ",,pending
+O006-PSU-011-S0327,O006-PSU-011,Lesson10,solution-11,769ddbb93c03cb0e4f59ed356e556bed522184eb48f79c8468e04ec684dbc906," is the true value, is:",,pending
+O006-PSU-011-S0328,O006-PSU-011,Lesson10,solution-11,adf41b7441922d8cb62cef4a69a26b6b398b2bb06f0ff0eb684d07d6fc02b7c9,"Therefore, the probability of rejecting the null hypothesis at the ",,pending
+O006-PSU-011-S0329,O006-PSU-011,Lesson10,solution-11,e6a71ce1a90286f9b87361fc0d2b502c6c0545ea0a18003983c10f2f8dbcd3fe, level when ,,pending
+O006-PSU-011-S0330,O006-PSU-011,Lesson10,solution-11,c4ea50ae68b62ce854da8e016060f4c40e31ae590faf1ab23ca9e297195e99b0," is 0.9907, as calculated here:",,pending
+O006-PSU-011-S0331,O006-PSU-011,Lesson10,solution-11,d5199cfcfefa8bf93e3b2a648ecd63af78152bf10f0aaefd49f3bd27190aaf5f,"And, the probability of rejecting the null hypothesis at the ",,pending
+O006-PSU-011-S0332,O006-PSU-011,Lesson10,solution-11,e6a71ce1a90286f9b87361fc0d2b502c6c0545ea0a18003983c10f2f8dbcd3fe, level when ,,pending
+O006-PSU-011-S0333,O006-PSU-011,Lesson10,solution-11,ff24d61f3ce22be43507a19a6e794e9089be3518c66f2257e5b220ebbcf8f3a7," is greater than 0.9999, as calculated here:",,pending
+O006-PSU-011-S0334,O006-PSU-011,Lesson10,solution-11,d5199cfcfefa8bf93e3b2a648ecd63af78152bf10f0aaefd49f3bd27190aaf5f,"And, the probability of rejecting the null hypothesis at the ",,pending
+O006-PSU-011-S0335,O006-PSU-011,Lesson10,solution-11,e6a71ce1a90286f9b87361fc0d2b502c6c0545ea0a18003983c10f2f8dbcd3fe, level when ,,pending
+O006-PSU-011-S0336,O006-PSU-011,Lesson10,solution-11,ee4bc3f2d0efc41249c923fd59d2142db2e1faec0a445f6ff60d48e30408eae4," is greater than 0.999999, as calculated here:",,pending
+O006-PSU-011-S0337,O006-PSU-011,Lesson10,calculating-sample-size,077c3f876b19f391f0f87f14545dfa96e3af46f5aaf8d922a7f6c73d41ac4589,"In summary, in the various examples throughout this lesson, we have calculated the power of testing ",,pending
+O006-PSU-011-S0338,O006-PSU-011,Lesson10,calculating-sample-size,17976f0fa963833aad82c9253e162645f8d906f67cf92575faaddba1458918ff, against ,,pending
+O006-PSU-011-S0339,O006-PSU-011,Lesson10,calculating-sample-size,41acfdd48600b892fe26c8ed219044dcbe96e9e3ecbe8114c7284bb9d7b02afa, for two sample sizes (,,pending
+O006-PSU-011-S0340,O006-PSU-011,Lesson10,calculating-sample-size,e3ee915a8e8c7aa02d2fced443314522b20824abd2535d5959c41dc8ab8a09e4, and ,,pending
+O006-PSU-011-S0341,O006-PSU-011,Lesson10,calculating-sample-size,8dc055a57b740ed9ad94e13d4cd406538f6f3f0b704f54eb825f323e61dd1b7b,) and for three possible values of the mean ( ,,pending
+O006-PSU-011-S0342,O006-PSU-011,Lesson10,calculating-sample-size,0a63e3f63f232f0c18f3bfe678607aad0b9f7ac6c73e037f74c79c0b2ba103f8,", and ",,pending
+O006-PSU-011-S0343,O006-PSU-011,Lesson10,calculating-sample-size,62ac15662eddb1c45e26a308213388c6fbabab632f90fb37a5195fecb55619e2,). Here’s a summary of our power calculations:,,pending
+O006-PSU-011-S0344,O006-PSU-011,Lesson10,calculating-sample-size,848e96567d6b48d54c0b53017bd6123cefa97d6e0fab0f14c621ec3fd92178f4,Power,,pending
+O006-PSU-011-S0345,O006-PSU-011,Lesson10,calculating-sample-size,71ec9a1f85e788eddeacc59213de88829643e7da58314936ae3eddea45a5e322,"As you can see, our work suggests that for a given value of the mean ",,pending
+O006-PSU-011-S0346,O006-PSU-011,Lesson10,calculating-sample-size,269d68bf4512129ebb1f2ba537398055e1386d2fe1b34222ed681cb8233cb5fb," under the alternative hypothesis, the larger the sample size ",,pending
+O006-PSU-011-S0347,O006-PSU-011,Lesson10,calculating-sample-size,9ce0bf1cbc1991345985c338622c6952125034b34b1925599c7a12fbac3bf3ad,", the greater the power ",,pending
+O006-PSU-011-S0348,O006-PSU-011,Lesson10,calculating-sample-size,76b84bb39a5e29c8a97c0ef37c23d998512bc7123c7c3898d7ee5cb426807818,". Perhaps there is no better way to see this than graphically by plotting the two power functions simultaneously, one when ",,pending
+O006-PSU-011-S0349,O006-PSU-011,Lesson10,calculating-sample-size,72947fafd427b92b695738e646b80d7146b2bad077b47962d0dd1c3a7a90a87d, and the other when ,,pending
+O006-PSU-011-S0350,O006-PSU-011,Lesson10,calculating-sample-size,13fb7f98451b94dc500147c45812fac1006214bbc681ea14482ba787876f642d,"
+Fig 10.15
+",,pending
+O006-PSU-011-S0351,O006-PSU-011,Lesson10,calculating-sample-size,03106f4b8ea6344b7fb8124a3c2411e965289e848690ca29b6192da1d10ac104,"As this plot suggests, if we are interested in increasing our chance of rejecting the null hypothesis when the alternative hypothesis is true, we can do so by increasing our sample size ",,pending
+O006-PSU-011-S0352,O006-PSU-011,Lesson10,calculating-sample-size,e6fc54f172d88d5e2a397a2ae3cdaf58b3134d6c0daf2de8b0addf2c75be50ef,. This benefit is perhaps even greatest for values of the mean that are close to the value of the mean assumed under the null hypothesis. Let’s take a look at two examples that illustrate the kind of sample size calculation we can make to ensure our hypothesis test has sufficient power.,,pending
+O006-PSU-011-S0353,O006-PSU-011,Lesson10,calculating-sample-size,c3471c47070e581d1c3779a7d15bf4f2d69aa36d3f659ec9141365ab6210eccc,Example 10.9,,pending
+O006-PSU-011-S0354,O006-PSU-011,Lesson10,calculating-sample-size,c99daa81da9a1194c3f4d33c7020a3736d3fa7de6904b5d7f1bd07ecffaf45cb, Let ,,pending
+O006-PSU-011-S0355,O006-PSU-011,Lesson10,calculating-sample-size,59de60d0292d62fd7a9ecf1bd171d656010bd2c9c24bd2aaa73475a43428df51, denote the crop yield of corn measured in the number of bushels per acre. Assume (unrealistically) that ,,pending
+O006-PSU-011-S0356,O006-PSU-011,Lesson10,calculating-sample-size,ee7b864bc17caba2df1e466d7d55c474d0a27e6e89a84dd7221482d1b5014193, is normally distributed with unknown mean ,,pending
+O006-PSU-011-S0357,O006-PSU-011,Lesson10,calculating-sample-size,173d43a3d2a5adc37d2395d9e601e2aa7c2da8eceba2a57ae72c35f15f2cfdbc, and standard deviation ,,pending
+O006-PSU-011-S0358,O006-PSU-011,Lesson10,calculating-sample-size,3927485528a95c85e08a5e550a19bd728f552c0354a033a1582ae558f7a3d083,". An agricultural researcher is working to increase the current average yield from 40 bushels per acre. Therefore, he is interested in testing, at the ",,pending
+O006-PSU-011-S0359,O006-PSU-011,Lesson10,calculating-sample-size,9f2839d9c8fd6127a41708022fd9c84583fe63058187876a5a7664b29153cceb," level, the null hypothesis ",,pending
+O006-PSU-011-S0360,O006-PSU-011,Lesson10,calculating-sample-size,9fc058d33411fe0cf3b8d653abba53966d19222781be9fcd6ea257288f5704e9, against the alternative hypothesis that ,,pending
+O006-PSU-011-S0361,O006-PSU-011,Lesson10,calculating-sample-size,62cdcb187d3c31ed04f99a3d53db5b6a1fe509fc029a0e596be9f00786ddc6ea,. Find the sample size ,,pending
+O006-PSU-011-S0362,O006-PSU-011,Lesson10,calculating-sample-size,f7f62a26b172272868d1097f3f200a0723d9a404f75981563176b01ebeddf54f, that is necessary to achieve 0.90 power at the alternative ,,pending
+O006-PSU-011-S0363,O006-PSU-011,Lesson10,solution-12,22927695994eab589c7601a6b15df4d9dc67c5aceb9a74cdb965444b9b8362a6,Solution,,pending
+O006-PSU-011-S0364,O006-PSU-011,Lesson10,solution-12,c247c8382315d23f1dff9e08d3d40316907e5ad103fa2cc6718989acaedeea4b,"As is always the case, we need to start by finding a threshold value ",,pending
+O006-PSU-011-S0365,O006-PSU-011,Lesson10,solution-12,edc671e6e67099e97587fec15c68e6395b3bcb589057fad42da6ba1cc25076bc,", such that if the sample mean is larger than ",,pending
+O006-PSU-011-S0366,O006-PSU-011,Lesson10,solution-12,41638a47411405c8e1f61f6ad762cbb30d4ff7da1f8b0533001979cdd7ea4471,", we’ll reject the null hypothesis:",,pending
+O006-PSU-011-S0367,O006-PSU-011,Lesson10,solution-12,61e86d41ffe45380410f6eae506de06e35e8109d4a013c446c6c3d4d24d5a6b0,"
+Fig 10.16
+",,pending
+O006-PSU-011-S0368,O006-PSU-011,Lesson10,solution-12,a2894cbe027874bc51c27492a8412a2f13292677329734d58fe2b417258a0600,"That is, in order for our hypothesis test to be conducted at the ",,pending
+O006-PSU-011-S0369,O006-PSU-011,Lesson10,solution-12,13967ba14ce9f034893bc6964377ad7717b6f932c67b5b36f0661f0a5d67ee52," level, the following statement must hold (using our typical ",,pending
+O006-PSU-011-S0370,O006-PSU-011,Lesson10,solution-12,bf9988b5f03556732181728601f666e26f6843802e193627f18b2b7c6e81433b, transformation):,,pending
+O006-PSU-011-S0371,O006-PSU-011,Lesson10,solution-12,8ad6676bb1c9520cde171be9c21bce40863a903fb5d48dd36dd07df028f4e0d1,"But, that’s not the only condition that ",,pending
+O006-PSU-011-S0372,O006-PSU-011,Lesson10,solution-12,58a52fd1583d5af9a7d0983dad8fb72ca41aa47a279e26d3ca5077ff14ef097a," must meet, because ",,pending
+O006-PSU-011-S0373,O006-PSU-011,Lesson10,solution-12,57e99e9d54a9f49486d33ce90aa876cd4736a4c124e9df960cd13d7948fd9f9d," also needs to be defined to ensure that our power is 0.90 or, alternatively, that the probability of a Type II error is 0.10. That would happen if there was a 10% chance that our test statistic fell short of ",,pending
+O006-PSU-011-S0374,O006-PSU-011,Lesson10,solution-12,3342bc4f8f5279c2c3198a558f1c98ebdc2562d2f733a16143de5bd4956cef25, when ,,pending
+O006-PSU-011-S0375,O006-PSU-011,Lesson10,solution-12,8ee9f1a5345cecdec4ed37cbf56718018c2aa753c4e59df40e33be2968b9a3e3,", as the following drawing illustrates in blue:",,pending
+O006-PSU-011-S0376,O006-PSU-011,Lesson10,solution-12,30633f94eeb3012c4eeb2a83cd2ed91a99ca82cfa34157a521a1ac05cb5b9bd7,"
+Fig 10.17
+",,pending
+O006-PSU-011-S0377,O006-PSU-011,Lesson10,solution-12,682c16701bb5e1b705b61a698929a6f233c713dfd5a03b2018b15947c22be96b,"This illustration suggests that in order for our hypothesis test to have 0.90 power, the following statement must hold (using our usual ",,pending
+O006-PSU-011-S0378,O006-PSU-011,Lesson10,solution-12,bf9988b5f03556732181728601f666e26f6843802e193627f18b2b7c6e81433b, transformation):,,pending
+O006-PSU-011-S0379,O006-PSU-011,Lesson10,solution-12,dd3581e0943b845198b7dab21027e110989c590d240c5fe6144fea2e8d41de1c,Aha! We have two ((1) and (2)) equations and two unknowns! All we need to do is equate the equations and solve for ,,pending
+O006-PSU-011-S0380,O006-PSU-011,Lesson10,solution-12,dc6a7021f506c406f42b68a7d0cc79afd46e8c9701408f5c6adcd4f132251836,". Doing so, we get:",,pending
+O006-PSU-011-S0381,O006-PSU-011,Lesson10,solution-12,2fafcb8e516b1bef14e85e5f0f12ed6a967ff018a523df5343e92062346cb8c6,Now that we know we will set ,,pending
+O006-PSU-011-S0382,O006-PSU-011,Lesson10,solution-12,276a8a5547aba8bd03715e8a2a2217cf2bbda584d6103ef0b330704bd647c5ed,", we can solve for our threshold value ",,pending
+O006-PSU-011-S0383,O006-PSU-011,Lesson10,solution-12,6d8db64220808db8f3ddb95fba22ebc2d1c0b5b8177f2152201c4bfada1a7355,"So, in summary, if the agricultural researcher collects data on ",,pending
+O006-PSU-011-S0384,O006-PSU-011,Lesson10,solution-12,8f88dd19e691abe2a278461a77665c2fdcb66410f86d8510cad2f3328f65babb," corn plots, and rejects his null hypothesis ",,pending
+O006-PSU-011-S0385,O006-PSU-011,Lesson10,solution-12,147547311dd5756842eb6af0b12d99e6290f0dcc328fcce7ecbf3868d42ed231," if the average crop yield of the 13 plots is greater than 42.737 bushels per acre, he will have a 5% chance of committing a Type I error and a 10% chance of committing a Type II error if the population mean ",,pending
+O006-PSU-011-S0386,O006-PSU-011,Lesson10,solution-12,0f0b773dce06d3cbafe8873fbc345ea7da4dee6a0a6e8a47a12743766e287ddf, were actually 45 bushels per acre.,,pending
+O006-PSU-011-S0387,O006-PSU-011,Lesson10,calculating-sample-size,148b65833777b97f6433ce9a80e5c91dad1c433692614f647cb2357ff8eb09c4,Part II,,pending
+O006-PSU-011-S0388,O006-PSU-011,Lesson10,calculating-sample-size,064cd8430fb78b25bc8f8ca5d1e7cc1a3ff11ca5f895bff245252f73aa1dc9fe,Consider ,,pending
+O006-PSU-011-S0389,O006-PSU-011,Lesson10,calculating-sample-size,7bc1ff6bf5ca5dfdcaff52aa448ea91effa4b9e833c2810901e326eae26a4850,", the true proportion of voters who favor a particular political candidate. A pollster is interested in testing at the ",,pending
+O006-PSU-011-S0390,O006-PSU-011,Lesson10,calculating-sample-size,9f2839d9c8fd6127a41708022fd9c84583fe63058187876a5a7664b29153cceb," level, the null hypothesis ",,pending
+O006-PSU-011-S0391,O006-PSU-011,Lesson10,calculating-sample-size,9fc058d33411fe0cf3b8d653abba53966d19222781be9fcd6ea257288f5704e9, against the alternative hypothesis that ,,pending
+O006-PSU-011-S0392,O006-PSU-011,Lesson10,calculating-sample-size,62cdcb187d3c31ed04f99a3d53db5b6a1fe509fc029a0e596be9f00786ddc6ea,. Find the sample size ,,pending
+O006-PSU-011-S0393,O006-PSU-011,Lesson10,calculating-sample-size,d41437996c9a13d537de9b277074dc6fabb55ffbedb796026d3d401e8a216eda, that is necessary to achieve 0.80 power at the alternative ,,pending
+O006-PSU-011-S0394,O006-PSU-011,Lesson10,calculating-sample-size,22927695994eab589c7601a6b15df4d9dc67c5aceb9a74cdb965444b9b8362a6,Solution,,pending
+O006-PSU-011-S0395,O006-PSU-011,Lesson10,calculating-sample-size,bc5b67e7c13d455b48e7f0898727b50a5a0c58d35368cf899d4097b527dffb6d,"In this case, because we are interested in performing a hypothesis test about a population proportion ",,pending
+O006-PSU-011-S0396,O006-PSU-011,Lesson10,calculating-sample-size,5872f513bf96e0413a02f091f9ba2c960090545af03cf73565828d3ca7711c6a,", we use the ",,pending
+O006-PSU-011-S0397,O006-PSU-011,Lesson10,calculating-sample-size,c13fe580b83286c211466a9891deea2f81562d49b2b5d28a8ebd9b00ae7373da,-statistic:,,pending
+O006-PSU-011-S0398,O006-PSU-011,Lesson10,calculating-sample-size,f313f79e02c9059ab7c878b7a263d05bca9b2213e84d2592fa123863b50ff5bf,"Again, we start by finding a threshold value ",,pending
+O006-PSU-011-S0399,O006-PSU-011,Lesson10,calculating-sample-size,e4caeaa00ae7bea169fa1da5cced3183da4c89c150c3d60ca359430049e6a138,", such that if the observed sample proportion is larger than ",,pending
+O006-PSU-011-S0400,O006-PSU-011,Lesson10,calculating-sample-size,41638a47411405c8e1f61f6ad762cbb30d4ff7da1f8b0533001979cdd7ea4471,", we’ll reject the null hypothesis:",,pending
+O006-PSU-011-S0401,O006-PSU-011,Lesson10,calculating-sample-size,997edcea877b1c0ac56119c4a355d8b90c4e2d5fa933eb2aa9e9d620866d8c0c,"
+Fig 10.18
+",,pending
+O006-PSU-011-S0402,O006-PSU-011,Lesson10,calculating-sample-size,a2894cbe027874bc51c27492a8412a2f13292677329734d58fe2b417258a0600,"That is, in order for our hypothesis test to be conducted at the ",,pending
+O006-PSU-011-S0403,O006-PSU-011,Lesson10,calculating-sample-size,360c0056eedfcc6c925fc8e547b43e999ac7838a2fc96d687f51157082ed8f20," level, the following statement must hold:",,pending
+O006-PSU-011-S0404,O006-PSU-011,Lesson10,calculating-sample-size,83113fed38132b49c1079fcf439a7f4b21f3d10368bc28685f97012a65b0037b,"But, again, that’s not the only condition that c must meet, because ",,pending
+O006-PSU-011-S0405,O006-PSU-011,Lesson10,calculating-sample-size,dde731c88ebf0a3b2e1c66bd9b3e941cdf780a462b5ee49d20f5d8dd3c6cb274," also needs to be defined to ensure that our power is 0.80 or, alternatively, that the probability of a Type II error is 0.20. That would happen if there was a 20% chance that our test statistic fell short of ",,pending
+O006-PSU-011-S0406,O006-PSU-011,Lesson10,calculating-sample-size,3342bc4f8f5279c2c3198a558f1c98ebdc2562d2f733a16143de5bd4956cef25, when ,,pending
+O006-PSU-011-S0407,O006-PSU-011,Lesson10,calculating-sample-size,8ee9f1a5345cecdec4ed37cbf56718018c2aa753c4e59df40e33be2968b9a3e3,", as the following drawing illustrates in blue:",,pending
+O006-PSU-011-S0408,O006-PSU-011,Lesson10,calculating-sample-size,c7a874e299508d0fb3de783fe501b3ac0a208d7de19db3ccbb9cb6967bb29985,"
+Fig 10.19
+",,pending
+O006-PSU-011-S0409,O006-PSU-011,Lesson10,calculating-sample-size,321c847d59af2fdf1b50402b31a234eec0550d16cc7ad05b881711854651adf9,"This illustration suggests that in order for our hypothesis test to have 0.80 power, the following statement must hold:",,pending
+O006-PSU-011-S0410,O006-PSU-011,Lesson10,calculating-sample-size,6d1f98eaf6394aca889e29c94e51e7382cca7b5f0ba0ce4eb604d8646ba42045,"Again, we have two ((3) and (4)) equations and two unknowns! All we need to do is equate the equations, and solve for ",,pending
+O006-PSU-011-S0411,O006-PSU-011,Lesson10,calculating-sample-size,dc6a7021f506c406f42b68a7d0cc79afd46e8c9701408f5c6adcd4f132251836,". Doing so, we get:",,pending
+O006-PSU-011-S0412,O006-PSU-011,Lesson10,calculating-sample-size,2fafcb8e516b1bef14e85e5f0f12ed6a967ff018a523df5343e92062346cb8c6,Now that we know we will set ,,pending
+O006-PSU-011-S0413,O006-PSU-011,Lesson10,calculating-sample-size,276a8a5547aba8bd03715e8a2a2217cf2bbda584d6103ef0b330704bd647c5ed,", we can solve for our threshold value ",,pending
+O006-PSU-011-S0414,O006-PSU-011,Lesson10,calculating-sample-size,d333d5ae1bcbf896e9a9c8edb561b84232c8dc5269ba1b19b7c8b2cecf6dafc3,"So, in summary, if the pollster collects data on ",,pending
+O006-PSU-011-S0415,O006-PSU-011,Lesson10,calculating-sample-size,f351db3295c971478576412bb8cf25579f75544e75325113209a4dd93401c12d," voters, and rejects his null hypothesis ",,pending
+O006-PSU-011-S0416,O006-PSU-011,Lesson10,calculating-sample-size,7eb46d5a3ea28d24d1fdd291a4f2cb08f1f021cf01e19c81d0b02a6e190516fa," if the proportion of sampled voters who favor the political candidate is greater than 0.5367, he will have a 1% chance of committing a Type I error and a 20% chance of committing a Type II error if the population proportion ",,pending
+O006-PSU-011-S0417,O006-PSU-011,Lesson10,calculating-sample-size,aa03b3899f34caa2b15cb5277e05d7505494a41cb0e4b4af184f8a167f2ab3ad, were actually 0.55.,,pending
+O006-PSU-011-S0418,O006-PSU-011,Lesson10,calculating-sample-size,8b5772df986c41c6362532efda4a0bf51ad42df258b3ebead53791609fd55763,"Incidentally, we can always check our work! Conducting the survey and subsequent hypothesis test as described above, the probability of committing a Type I error is:",,pending
+O006-PSU-011-S0419,O006-PSU-011,Lesson10,calculating-sample-size,fda00da0f9e8bd0418618137a2058e9e2548e76decab3f66a9980c95da684f6f,and the probability of committing a Type II error is:,,pending
+O006-PSU-011-S0420,O006-PSU-011,Lesson10,calculating-sample-size,0e19fbb45f97a3bd11309e22c23a8331fa84c24792c926e947dd898727026c15,just as the pollster had desired.,,pending
+O006-PSU-011-S0421,O006-PSU-011,Lesson10,calculating-sample-size,7ba27d14002d2e6a00d6787fc5fd3e2d87ab87a8dcbec193514643a4cd204b8c,"We’ve illustrated several sample size calculations. Now, let’s summarize the information that goes into a sample size calculation. In order to determine a sample size for a given hypothesis test, you need to specify:",,pending
+O006-PSU-011-S0422,O006-PSU-011,Lesson10,calculating-sample-size,5c05ae18ebf9843c1d6a894e7e06e6651b8e26b205dec71acfddd1c5cb1604cb,The desired ,,pending
+O006-PSU-011-S0423,O006-PSU-011,Lesson10,calculating-sample-size,d6697f41b8715af6fab7ad802960b2e33e44417b6b8bf9285ea5dc1f269f8058," level, that is, your willingness to commit a Type I error.",,pending
+O006-PSU-011-S0424,O006-PSU-011,Lesson10,calculating-sample-size,2a45971bcb9e8ce86ca704b9d83c34fdfa7a296614186ec37da108cacf9d7bec,"The desired power or, equivalently, the desired ",,pending
+O006-PSU-011-S0425,O006-PSU-011,Lesson10,calculating-sample-size,2be5b2d2efc272ea1feebe3940691ba43eef59be09132fbb4e2743a8e9861842," level, that is, your willingness to commit a Type II error.",,pending
+O006-PSU-011-S0426,O006-PSU-011,Lesson10,calculating-sample-size,2792552d6e285e3b85aae12d5a5aafe5ec267437d87effaa6bb456033be858be,A meaningful difference from the value of the parameter that is specified in the null hypothesis.,,pending
+O006-PSU-011-S0427,O006-PSU-011,Lesson10,calculating-sample-size,23395c57df237640facac7ae86af820eb1d2c626253ae84f05d44c092c95cdb7,"The standard deviation of the sample statistic or, at least, an estimate of the standard deviation (the “standard error”) of the sample statistic.",,pending
+O006-PSU-011-S0428,O006-PSU-011,Lesson10,approximate-wald-test,ae4dcb666edb5c17ebcd29235df270e1a1a4f63f1e4379c2f7d745a14c10001f, Approximate Wald Test,,pending
+O006-PSU-011-S0429,O006-PSU-011,Lesson10,approximate-wald-test,5ebad9a1de584322d5b1b207da8f69432fd093972bf48d7dd7d5a4c9861c03a2,"In the hypothesis tests we have developed so far, we need to find a test statistic and know the distribution of the test statistic under the null hypothesis. However, how do we choose the test statistic? Can we always find the distribution of the test statistic? Is the test statistic based on a statistic (or estimator) that has desirable properties?",,pending
+O006-PSU-011-S0430,O006-PSU-011,Lesson10,approximate-wald-test,b2efbf4b32ce57b0216cdd6c3656e63c8fccd2adce1dfa49d5978a5b0b45c87a,"Based on what we learned so far in this class, we know the MLE has desirable properties, especially under certain conditions. We present in this lesson the Wald test. It is a test generally applicable with using the MLE and relies on the asymptotic normality of the MLE.",,pending
+O006-PSU-011-S0431,O006-PSU-011,Lesson10,the-step-up,a507974558c2cfd6658799f80fd8d8d893d24758989ed7390d54f1ba06ca3add, The Step Up,,pending
+O006-PSU-011-S0432,O006-PSU-011,Lesson10,the-step-up,ac701f918548868f1cd98db8b712ff2bcee1b39d6defa7bc4c3d1d0af9664f60,"As we have noted before, if we consider each data point ",,pending
+O006-PSU-011-S0433,O006-PSU-011,Lesson10,the-step-up,3f5f44ce27a9f00d77006f547bfe1ef5e5de73d2f92d1356a520de5f49ae1732," as a random variable, with ",,pending
+O006-PSU-011-S0434,O006-PSU-011,Lesson10,the-step-up,e224f8e72a6c783b5b8d8230a01b45b2c79d0e1aa42b704f5e35d9b05a863da5," then any function of these data points is a random variable. In particular, the MLE ",,pending
+O006-PSU-011-S0435,O006-PSU-011,Lesson10,the-step-up,03159ff7a20e47f6513f8d05337c9c6ff4ae22d9caca0e85d46f321e19f31bdc," is a function of the data, and so it is a random variable. In some simple cases, we can work out the distribution of ",,pending
+O006-PSU-011-S0436,O006-PSU-011,Lesson10,the-step-up,72d30a5036a47bc05f3a84c365d3586acbe8179900804bafae7e2dfbfea7156b," directly, but in many cases we cannot. Fortunately, there is a result that, for any MLE, regardless of the distribution ",,pending
+O006-PSU-011-S0437,O006-PSU-011,Lesson10,the-step-up,fdf66901afa7f41d49561803a3e3a49b8403ae13c02a18aec7e9fd696e4cb0a7," that the data come from, the MLE is normally-distributed.",,pending
+O006-PSU-011-S0438,O006-PSU-011,Lesson10,the-step-up,52e1616d5fa3ce50c8ee5216a7bbf37fc0189edb41b20afa606218c4d8f3bab8,"For single parameter models, the result is as follows:",,pending
+O006-PSU-011-S0439,O006-PSU-011,Lesson10,the-step-up,53c0d3d6c8055e9a2a658bdc93afdef61d9a2cc261da9c105ca706feed48f7ee,If ,,pending
+O006-PSU-011-S0440,O006-PSU-011,Lesson10,the-step-up,cd9ce27efa5707162c58c0d93a238951f36422dc16b7522b66bd80f66194ffb7, is the likelihood function and ,,pending
+O006-PSU-011-S0441,O006-PSU-011,Lesson10,the-step-up,90aee359200a85426794c279c365b5d62cc57a797f86cc6032c141b54e402e00," is the MLE, then, as ",,pending
+O006-PSU-011-S0442,O006-PSU-011,Lesson10,the-step-up,3458f758ca399139fd3d8915dddd39ce62d0109a1fb2314e401d2e21bb568103, where ,,pending
+O006-PSU-011-S0443,O006-PSU-011,Lesson10,the-step-up,d8a92b2c868bcd5001d7d34e2cf9f59888655c8a39e42fdd61ba472e02e5efd4," is the “Fisher Information”, defined by ",,pending
+O006-PSU-011-S0444,O006-PSU-011,Lesson10,the-step-up,3458f758ca399139fd3d8915dddd39ce62d0109a1fb2314e401d2e21bb568103, where ,,pending
+O006-PSU-011-S0445,O006-PSU-011,Lesson10,the-step-up,b435c002fcb879ebcbee867e857f0bcef9d44926dd6bacdcea32f79761a46648, and the expectation is taken over all ,,pending
+O006-PSU-011-S0446,O006-PSU-011,Lesson10,the-step-up,2619b3d4248f783e9d247480a4d9be998c124ff284a904883ade1de54b9a288b,"In the multivariate case, where there are two or more parameters to be estimated, ",,pending
+O006-PSU-011-S0447,O006-PSU-011,Lesson10,the-step-up,93304ce1e40bbebda0f2cd9f00a5c4858187bc7b771c3851fd7f5f85ebbf846f, is the vector of ,,pending
+O006-PSU-011-S0448,O006-PSU-011,Lesson10,the-step-up,f46c60ad4a161c7f972ac0848ff2d7dcc6dd273603f5266a73aaffd0434bc5d2, parameters to be estimated and the asymptotic distribution is as follows. as ,,pending
+O006-PSU-011-S0449,O006-PSU-011,Lesson10,the-step-up,2a8cbd075a36c54e845e09e26de107837aee337843deb58d43e35b16d7f00c7e,where ,,pending
+O006-PSU-011-S0450,O006-PSU-011,Lesson10,the-step-up,3f22163c0bd74af91c686521f9b6f63990787bff61c3ed77d2ba887d8705e87c," is the “Fisher Information Matrix”, defined by",,pending
+O006-PSU-011-S0451,O006-PSU-011,Lesson10,the-step-up,4c79bb35b14eb7c7a79c282316ccc69474da7ce67537b9bd30cbcc91d0b89f56, where again ,,pending
+O006-PSU-011-S0452,O006-PSU-011,Lesson10,the-step-up,b435c002fcb879ebcbee867e857f0bcef9d44926dd6bacdcea32f79761a46648, and the expectation is taken over all ,,pending
+O006-PSU-011-S0453,O006-PSU-011,Lesson10,the-step-up,a208da916b98a233c3270a526317c35917467134564c9a6fc5e53d8035a91328,". This result details the approximate joint distribution of the MLEs of all of the parameters. For many situations (including for most hypothesis tests), a more useful result is the resulting marginal distribution of each individual MLE. If the ",,pending
+O006-PSU-011-S0454,O006-PSU-011,Lesson10,the-step-up,89d5f3ec40a059319b318d0a09a7b8b08f945e573ee9ab2909db0ed80a83c941,-th parameter is ,,pending
+O006-PSU-011-S0455,O006-PSU-011,Lesson10,the-step-up,54dfe91c0adbbcf5086d6e1dca4c2308ad07fee695209460dd2af940dfb5094e,", and the MLE for this parameter is ",,pending
+O006-PSU-011-S0456,O006-PSU-011,Lesson10,the-step-up,59469767c03e1442b7faf42eb090489dd0c496c733b70f5ab6384fca725f61b5,", then a direct result of the joint distribution above is that the marginal distribution of ",,pending
+O006-PSU-011-S0457,O006-PSU-011,Lesson10,the-step-up,c6043eb83497f170cb79ce53102d247fdc3cffa590b61989a45b3585fbf413e0," is asymptotically approximately Gaussian, with ",,pending
+O006-PSU-011-S0458,O006-PSU-011,Lesson10,the-step-up,16e1dfa22ebf6a1111616c3251b7a1adafe8e4b137bd63f8fad3e9b3e7035de1," That is, the MLE ",,pending
+O006-PSU-011-S0459,O006-PSU-011,Lesson10,the-step-up,82e5053285476632a61e301eb4b43d0c15587e8b658ea00d1fa3e3eeae06129d," is approximately univariate normally distributed, with mean the true parameter ",,pending
+O006-PSU-011-S0460,O006-PSU-011,Lesson10,the-step-up,fcbc4721d98244fce8f9d02576eaf07c96461249978beb403e65429c941c6908, and variance equal to the ,,pending
+O006-PSU-011-S0461,O006-PSU-011,Lesson10,the-step-up,5cc290afa66850a42bbb17966c07245494aeb7d29826500095a8b2c4a68ca2ce,-th diagonal entry of the inverse ,,pending
+O006-PSU-011-S0462,O006-PSU-011,Lesson10,the-step-up,68eaa57659e660b071e2164984e9ba40908c25b4a4a971cfc7fac433ba6c2e19, of the Fisher information matrix.,,pending
+O006-PSU-011-S0463,O006-PSU-011,Lesson10,the-step-up,ce55f1c2c0ac83fef06d0af4b78e85043d35690beeb08879eb5d69309d46d840,We can use the asymptotic approximate Gaussian distribution of MLEs described previously to construct test statistics that are useful for testing ,,pending
+O006-PSU-011-S0464,O006-PSU-011,Lesson10,the-step-up,260a3cb76123ccecca24b703c8956ae4f4c68455ae19269095eef948f979bdbb, versus ,,pending
+O006-PSU-011-S0465,O006-PSU-011,Lesson10,the-step-up,a50f307d2ecdc4a3d6863743b0cbab6cafe559561c1ba44c2b6c4e163fd0848a,Since we know that,,pending
+O006-PSU-011-S0466,O006-PSU-011,Lesson10,the-step-up,0c91d49f91d0d714954f3f638cd269ea9f0df0a8b136d8917c5d7af0dc0aba39, if the null hypothesis is that ,,pending
+O006-PSU-011-S0467,O006-PSU-011,Lesson10,the-step-up,4d324a14010134406d661865ae3c5186d9eedff263475755de4e084fea967076,", then under ",,pending
+O006-PSU-011-S0468,O006-PSU-011,Lesson10,the-step-up,fdf663c42dd2c83c1a793ecf771e9a72fe2da7a01b48f34c1e95d66bb392748b,", the distribution of the MLE is ",,pending
+O006-PSU-011-S0469,O006-PSU-011,Lesson10,the-step-up,72eb677b9e0e2228c055ca0926f33581dc98232bbf88920a0a0de32715171b12,"Following our notation above, we have a test statistic (we’re calling it ",,pending
+O006-PSU-011-S0470,O006-PSU-011,Lesson10,the-step-up,d3ef2932093daacb6a2beffa849f57f6fc662cbfd3ae662099ad6221bbc5c3df," here, while in the general description above we called it ",,pending
+O006-PSU-011-S0471,O006-PSU-011,Lesson10,the-step-up,bf95b469dcab21cf721bafa7eec72ed898d1ed08314f8e59b8856da15e7eba49,"), and we know the (approximate) distribution of this statistic (",,pending
+O006-PSU-011-S0472,O006-PSU-011,Lesson10,the-step-up,d956272badf34d646156290581cd744c31b8b76b8027a3f174fe89e67ac07be2, under the null hypothesis. A p-value would then be,,pending
+O006-PSU-011-S0473,O006-PSU-011,Lesson10,the-step-up,aabdc9608a6453a1f57d9a89dc7d3f42ec7f023d6d5f51297077bb4f3a92a628,We could simplify this a little. If we first define the ,,pending
+O006-PSU-011-S0474,O006-PSU-011,Lesson10,the-step-up,5d99864fa43351bfb57de4bc9761f2991cccd275707fae60e75c1cefcd48b982,-th standard error ,,pending
+O006-PSU-011-S0475,O006-PSU-011,Lesson10,the-step-up,7efce6a15e82a94b954bc1731fdbfc95926f70388c82fcbc5fa9183e74395ada, as,,pending
+O006-PSU-011-S0476,O006-PSU-011,Lesson10,the-step-up,8135f5237388d7824026e9f891126bcdef2a74e18b0329bc2b25ab862e3e6436, then by subtracting the mean and dividing by ,,pending
+O006-PSU-011-S0477,O006-PSU-011,Lesson10,the-step-up,bcf5eea555efe0bc6a9f48776e973e91d5ec883bed4dbfe899db609f55f83724, we obtain,,pending
+O006-PSU-011-S0478,O006-PSU-011,Lesson10,the-step-up,3458f758ca399139fd3d8915dddd39ce62d0109a1fb2314e401d2e21bb568103, where ,,pending
+O006-PSU-011-S0479,O006-PSU-011,Lesson10,the-step-up,44512f322968d2362cfc9987a23bb2d3ca7709e68c47b2bfea610e593308b32a,. The p-value (probability of observing a more extreme value if the null hypothesis is true) can then be written as ,,pending
+O006-PSU-011-S0480,O006-PSU-011,Lesson10,the-step-up,28606433a588e6c0ee2c16994b1fb8608043acb3696105b23aa221b8ad81ea96,"which, by the symmetry of a standard normal distribution, is equal to",,pending
+O006-PSU-011-S0481,O006-PSU-011,Lesson10,the-step-up,31fda45f9ff2384be1a0a8418c93caf7e26d377efeb28b0987361b98c224d5c0," This sort of test, based on the asymptotic approximate gaussian distribution of the MLE, is called a ",,pending
+O006-PSU-011-S0482,O006-PSU-011,Lesson10,the-step-up,7af5b8baaec8e1b4f26483d52cbbba4b7866942a5ae2efd2bad3a53d40ef6b7e,Wald test,,pending
+O006-PSU-011-S0483,O006-PSU-011,Lesson10,a-recipe-for-wald-tests,10f4d6e01a1f0da3f09a716e501538ee9e9a7501aea9c892d964c800fdf6a8f2, A Recipe for Wald Tests,,pending
+O006-PSU-011-S0484,O006-PSU-011,Lesson10,a-recipe-for-wald-tests,1ce1588a215ebb4a60c0f5c628b49d8f097820b580516f9a9bf7800e7028574a,"To summarize the above results, if ",,pending
+O006-PSU-011-S0485,O006-PSU-011,Lesson10,a-recipe-for-wald-tests,ba36fac9d06b08d2b573b25d20020174777d69c27bb1844f505fc12bd3a78f74," are independent random variables, and we want to test the null hypothesis that ",,pending
+O006-PSU-011-S0486,O006-PSU-011,Lesson10,a-recipe-for-wald-tests,3a3973c9041976f82943093f2312f1267c9195461f57bec14401289b58f4f640, versus the alternate that ,,pending
+O006-PSU-011-S0487,O006-PSU-011,Lesson10,a-recipe-for-wald-tests,a3e6b101200297d4cb4f33837307b2b18242d83ef22eb28b063276dfef3f43ed,", then a Wald test of this hypothesis is conducted by the following:",,pending
+O006-PSU-011-S0488,O006-PSU-011,Lesson10,a-recipe-for-wald-tests,d152d70ee88e4ba0b1dd2cca6f6eeee0270a0608d7e4c1575677f9ed8ac1baf6,We first find the MLE of all parameters ,,pending
+O006-PSU-011-S0489,O006-PSU-011,Lesson10,a-recipe-for-wald-tests,0ae4051a6586ebdb87889e83069491986c19a40d086f7d60cf4bb35c71515fa7," in the model, and the corresponding Fisher information ",,pending
+O006-PSU-011-S0490,O006-PSU-011,Lesson10,a-recipe-for-wald-tests,16af376acca2dc8d7966dc0e56a4083bbabffedd1d66d968fe36709e0b93e3d1,We then find the ,,pending
+O006-PSU-011-S0491,O006-PSU-011,Lesson10,a-recipe-for-wald-tests,5d99864fa43351bfb57de4bc9761f2991cccd275707fae60e75c1cefcd48b982,-th standard error ,,pending
+O006-PSU-011-S0492,O006-PSU-011,Lesson10,a-recipe-for-wald-tests,d231229bb0e846052f56321e6e3a99f3c3a4d120c0d0b0efc1893fd884e69de9, and construct the test statistic ,,pending
+O006-PSU-011-S0493,O006-PSU-011,Lesson10,a-recipe-for-wald-tests,e7aff0a9d4c3d2ce1f70dc15e05cb304bd6646200d8b1f3b81bc1839b9fb6680,A Wald p-value for this test is then ,,pending
+O006-PSU-011-S0494,O006-PSU-011,Lesson10,a-recipe-for-wald-tests,02b7f7b1d429f8a0f5806cbc05ea5d973ee11c4af8f8967325b0d7fd9c5e4681,If the above calculated p-value is ,,pending
+O006-PSU-011-S0495,O006-PSU-011,Lesson10,a-recipe-for-wald-tests,e68d2a692cfeb45d607b19ed4a5bda3016778935c1ae1858835c971f37aca593, then we reject ,,pending
+O006-PSU-011-S0496,O006-PSU-011,Lesson10,a-recipe-for-wald-tests,c34a312b9628f73936040938093d848d1c9ec9b7c61f5282813395f208c1de2b, and accept ,,pending
+O006-PSU-011-S0497,O006-PSU-011,Lesson10,a-recipe-for-wald-tests,8e8925734c04a20ee9d8033b055bddfdb1307a2f83a560f225f2cd82a28f248a,. If the above calculated p-value is ,,pending
+O006-PSU-011-S0498,O006-PSU-011,Lesson10,a-recipe-for-wald-tests,079720f2db5b0f912f81b64436b296db7e0387c55d5329987ff466d34e2a8bb5, then we fail to reject ,,pending
+O006-PSU-011-S0499,O006-PSU-011,Lesson10,a-recipe-for-wald-tests,c9aedaba9b39b6bda1ff2ea081e71553e08cc613c3295d7187638f8115d32b00, and conclude that there is not sufficient evidence to disprove ,,pending
+O006-PSU-011-S0500,O006-PSU-011,Lesson10,examples-of-hypothesis-testing,28541697dd721fe8e597502271179134f3c447e984fc2761aca18cf972457c0f, Examples of Hypothesis Testing,,pending
+O006-PSU-011-S0501,O006-PSU-011,Lesson10,examples-of-hypothesis-testing,c9e2fe129e69cec6b2fe5c303d62d13d16f50cc0aad5d4f790cef9d29ba12344,"In this section, we present an example of hypothesis testing, focusing on Wald tests for MLEs.",,pending
+O006-PSU-011-S0502,O006-PSU-011,Lesson10,examples-of-hypothesis-testing,cd1dc9620e0fbf49c714911885324274d33e19fd57498d8b97f85ce6fbe3a8a0,Example 10.10 (A Bernoulli/Binomial Example of Hypothesis Testing),,pending
+O006-PSU-011-S0503,O006-PSU-011,Lesson10,examples-of-hypothesis-testing,32adcfc80e125da0fcea68e7e70fac7979f1229d2abdebf87914c5be465c1f3b," Assume that a casino has a game of chance that has a published probability of winning of 0.25. Assume that a person plays the game of chance 20 times, and wins the game exactly once. From that experience, is there enough evidence to conclude that the game of chance does not, in fact, have a win rate of 25%?",,pending
+O006-PSU-011-S0504,O006-PSU-011,Lesson10,examples-of-hypothesis-testing,b758e602f6c6bde374154401f06333504133612a9b46dc1de63785f81d851dd1,"To frame this as a hypothesis test, we first need a parametric statistical model for the observed data. We assume that each of the 20 games played is independent of each other, and each has a probability ",,pending
+O006-PSU-011-S0505,O006-PSU-011,Lesson10,examples-of-hypothesis-testing,f6f6814a00eefc79a2b75a98895037fdc9645d91db86f9fc02437330badf2611, of resulting in a “win”. So ,,pending
+O006-PSU-011-S0506,O006-PSU-011,Lesson10,examples-of-hypothesis-testing,c269713e0c3815bcd8f30042016199439752bbc952234c5e774596d77818736a," With the actual observed data including exactly one win (without loss of generality, let ",,pending
+O006-PSU-011-S0507,O006-PSU-011,Lesson10,examples-of-hypothesis-testing,6cc2f757f72e47be7540ab839860d684c42faed7c8b8b37794925ebeafd418b7,) and 19 losses (let ,,pending
+O006-PSU-011-S0508,O006-PSU-011,Lesson10,examples-of-hypothesis-testing,d4cffc8be3f30b4d9b3a6dc086f8aa5defdbefdce10db0436a4a72a991afe386,Our goal is to determine if we have enough evidence to conclude that the win rate is NOT 25%. We thus specify a null hypothesis that ,,pending
+O006-PSU-011-S0509,O006-PSU-011,Lesson10,examples-of-hypothesis-testing,8bda8f2a2b6cab9d664326d8089e7bb6bbfc9c0df719ff39edad7fa17f36a96b, with the corresponding alternative hypothesis that ,,pending
+O006-PSU-011-S0510,O006-PSU-011,Lesson10,examples-of-hypothesis-testing,8b5446ab850ec9fe97931ab6af18197423abbd30e179f5bc5649c1b13c1efa05,". We will consider a Wald test of this hypothesis. Before constructing the test, we set the level of the test to be ",,pending
+O006-PSU-011-S0511,O006-PSU-011,Lesson10,examples-of-hypothesis-testing,a7aae682a66d7d4b82084c48d82a949361c9a6020e33e5274cb4e68fb4d4d9ee,", so we are willing to conclude that the null hypothesis is false if the probability (under ",,pending
+O006-PSU-011-S0512,O006-PSU-011,Lesson10,examples-of-hypothesis-testing,44e337cc0e65bdc669981d8998e1ba9572e8ea2057253642df021866c461a523,) of observing the test statistic we will construct is 5% or less.,,pending
+O006-PSU-011-S0513,O006-PSU-011,Lesson10,an-analytic-wald-hypothesis-test-for-bernoulli-data,ff906b505fe3ff2c50991bf523cd473ceef4c75e52d3cf9127a6693999f66eeb,An Analytic Wald Hypothesis Test for Bernoulli Data,,pending
+O006-PSU-011-S0514,O006-PSU-011,Lesson10,an-analytic-wald-hypothesis-test-for-bernoulli-data,9fcb864dacff2a8dc2138d013e0fd189ce73aee6372631d2b9847de1f768ee5c,"We first illustrate constructing a Wald hypothesis test analytically, following the procedure outlined above.",,pending
+O006-PSU-011-S0515,O006-PSU-011,Lesson10,an-analytic-wald-hypothesis-test-for-bernoulli-data,4caf7f04e108424f66fb9eeb6818e6fc23942e7bc90b8226f340c77baa202530,We first find the MLE and Fisher Information of the parameter ,,pending
+O006-PSU-011-S0516,O006-PSU-011,Lesson10,an-analytic-wald-hypothesis-test-for-bernoulli-data,0f74bf812829ecdc92da7d015753e9fb1f8dd079a7c032f3df9d3e3b858dd1e9,"From previous examples in class, we know that the MLE is ",,pending
+O006-PSU-011-S0517,O006-PSU-011,Lesson10,an-analytic-wald-hypothesis-test-for-bernoulli-data,bb90d84e40de61f276047ab36734fb033255b61e9bdbb26e19065377c4d7d356, and that the Fisher Information is ,,pending
+O006-PSU-011-S0518,O006-PSU-011,Lesson10,an-analytic-wald-hypothesis-test-for-bernoulli-data,5b18ded68a3e5ee8b9d2625da3051ea88bafd106bbdac7542342d60973773891,We then find the standard error ,,pending
+O006-PSU-011-S0519,O006-PSU-011,Lesson10,an-analytic-wald-hypothesis-test-for-bernoulli-data,8a86b0474bd19804079eea45ff4a93e123097e9b090204e40213cf67feedc2a1, and construct the Wald test statistic ,,pending
+O006-PSU-011-S0520,O006-PSU-011,Lesson10,an-analytic-wald-hypothesis-test-for-bernoulli-data,328a81b64f21e0d49201410f2757c038c124a1093e61fc875a8d2f4911644397,We then find the p-value of this test statistic under the null hypothesis ,,pending
+O006-PSU-011-S0521,O006-PSU-011,Lesson10,an-analytic-wald-hypothesis-test-for-bernoulli-data,067801a8466d77a9401bee84943de0fa6dd7f7aad9d60f3145ac713ac8359a23, which we evaluate in R:,,pending
+O006-PSU-011-S0522,O006-PSU-011,Lesson10,an-analytic-wald-hypothesis-test-for-bernoulli-data,ea6e1aa4887c9f13e3d09d4388a78e6cc4b3d5ce32ee5a16e61ce8e06d61e554,which results in a p-value of 0.0000406,,pending
+O006-PSU-011-S0523,O006-PSU-011,Lesson10,an-analytic-wald-hypothesis-test-for-bernoulli-data,94d8b3b29b711c00a1225b32978e9277c290cc4855c98606bace3df671ae809f,As this p-value is much smaller than the level ,,pending
+O006-PSU-011-S0524,O006-PSU-011,Lesson10,an-analytic-wald-hypothesis-test-for-bernoulli-data,1d31de2bcc2d985d1c48de243f90a75465ab9d56f35cb70ce552b13ae3d115c4,", we reject ",,pending
+O006-PSU-011-S0525,O006-PSU-011,Lesson10,an-analytic-wald-hypothesis-test-for-bernoulli-data,f2fe5e295b94922379d4131a336a0c5b3f96d88b37987c8cc392fe402c1e830b, and conclude that the win rate for the game of chance is very unlikely to be the stated rate of .025.,,pending
+O006-PSU-011-S0526,O006-PSU-011,Lesson10,a-numeric-wald-hypothesis-test,6418ddabdda6a2df07d11aae7b6433c5bc31c7e1df2d1858862449fbeff79281,A Numeric Wald Hypothesis Test,,pending
+O006-PSU-011-S0527,O006-PSU-011,Lesson10,a-numeric-wald-hypothesis-test,a33c13a2abfa42537457d10ed92a15c6568b772e7ce6819b881f3d91146ae5a4,We now construct the same hypothesis test using numeric maximum likelihood analysis. We first enter the data,,pending
+O006-PSU-011-S0528,O006-PSU-011,Lesson10,a-numeric-wald-hypothesis-test,1a3f5644b486a8ccdd23402bb8f99bb1cf0b9dbc49cd0747ee2d621a7e71ece4,We then write a function to evaluate the negative log likelihood and find the MLE and Fisher Information using ,,pending
+O006-PSU-011-S0529,O006-PSU-011,Lesson10,a-numeric-wald-hypothesis-test,717466917091904d8e37048fcee17d8bde57f26510812dbbb163d2f0a42ba5a3,"Using these, we find our standard error and then the Wald Test Statistic",,pending
+O006-PSU-011-S0530,O006-PSU-011,Lesson10,a-numeric-wald-hypothesis-test,afc4cdfdfba7a3f4edefd002fce3b03dbff40fd8ab33ef5fe4e5f59545907c7a,And then the p-value is,,pending
+O006-PSU-011-S0531,O006-PSU-011,Lesson10,a-numeric-wald-hypothesis-test,1382f568ec07602f5705d7a0315e5b2fb9fd9f571ce6be66af8ecd2a91b7967e,which again is much smaller than the level ,,pending
+O006-PSU-011-S0532,O006-PSU-011,Lesson10,a-numeric-wald-hypothesis-test,1d31de2bcc2d985d1c48de243f90a75465ab9d56f35cb70ce552b13ae3d115c4,", we reject ",,pending
+O006-PSU-011-S0533,O006-PSU-011,Lesson10,a-numeric-wald-hypothesis-test,f2fe5e295b94922379d4131a336a0c5b3f96d88b37987c8cc392fe402c1e830b, and conclude that the win rate for the game of chance is very unlikely to be the stated rate of .025.,,pending
+O006-PSU-011-S0534,O006-PSU-011,Lesson10,summary,1ef08bdefdb2fba4d4db153a477421a071a38cbc62cabd95702139270855caf1, Summary,,pending
+O006-PSU-011-S0535,O006-PSU-011,Lesson10,summary,5800db2bed86d571ebb3774cbf429f129ae3c8f19c24ead872862f67d0c9f4f1,"In this lesson we deepened our hypothesis‑testing toolkit by explicitly connecting confidence intervals to their companion tests, examining the tug‑of‑war between Type I and II errors through the lens of power, and meeting the Wald test—a versatile large‑sample method built on maximum‑likelihood estimators. You will also see how design choices such as sample size, significance level (), and effect size interact when planning a study.",,pending
+O006-PSU-011-S0536,O006-PSU-011,Lesson10,summary,fb023e65132f6abce00bd24c2d6e98e036f585c6038785e1b2643cce93b980fe,Key takeaways:,,pending
+O006-PSU-011-S0537,O006-PSU-011,Lesson10,summary,9526b319ef3304cc43e1e0f63b624c0c1e697008a217190066f16542b3482ada,A two‑sided null value that lies outside its corresponding confidence interval is automatically rejected by the matching test.,,pending
+O006-PSU-011-S0538,O006-PSU-011,Lesson10,summary,cfa7ef0c4b0b6951aa8246019ffc94c84043571d203f2e7270aa3f3ec5f4b61f,Increasing sample size tightens confidence intervals and boosts power without altering .,,pending
+O006-PSU-011-S0539,O006-PSU-011,Lesson10,summary,e60c9c614db402cc17178f5f841699b0222f31122dd0f11eda3f0e20743e472f,Power calculations let you choose a sample size that has a high probability of detecting effects that matter.,,pending
+O006-PSU-011-S0540,O006-PSU-011,Lesson10,summary,9e264ddd9f86d667762e1e2f9637d55265d33b645b6c81264334d49f9b75425a,"The Wald test furnishes an approximate ‑test for any parameter whose MLE is asymptotically normal, extending hypothesis‑testing tools to models where classical formulas are unwieldy.",,pending

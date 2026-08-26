@@ -1,0 +1,842 @@
+<!doctype html>
+<html lang="id-ID">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>10 Uji Hipotesis (Bagian II)</title>
+<meta name="source-url" content="https://online.stat.psu.edu/stat415/Lesson10">
+<meta name="translation-provenance" content="OpenAI Codex gpt-5.6-sol, Ultra">
+<meta name="edition-status" content="partial: 12 of 14 documents complete; landing and Lessons 00–10">
+<link rel="license" href="https://creativecommons.org/licenses/by-nc/4.0/">
+<link rel="stylesheet" href="assets/reader-12of14.css">
+<script defer src="assets/MathJax/tex-svg.js"></script>
+</head>
+<body>
+<a class="skip-link" href="#quarto-document-content">Lewati ke isi utama</a>
+<header class="site-header"><div class="site-header__inner"><div><p class="site-title">STAT 415 — Pengantar Statistika Matematis</p><p class="site-subtitle">Rekonstruksi dan terjemahan Bahasa Indonesia · O006/C140</p></div><nav class="site-nav" aria-label="Navigasi utama"><a href="index.html">Daftar pelajaran</a><a href="Lesson00.html">Pelajaran 00</a><a href="Lesson01.html">Pelajaran 01</a><a href="Lesson02.html">Pelajaran 02</a><a href="Lesson03.html">Pelajaran 03</a><a href="Lesson04.html">Pelajaran 04</a><a href="Lesson05.html">Pelajaran 05</a><a href="Lesson06.html">Pelajaran 06</a><a href="Lesson07.html">Pelajaran 07</a><a href="Lesson08.html">Pelajaran 08</a><a href="Lesson09.html">Pelajaran 09</a><a href="Lesson10.html">Pelajaran 10</a><a href="licenses/index.html">Lisensi</a></nav></div></header>
+<div class="page-shell"><aside class="edition-note" aria-label="Status edisi"><strong>Edisi Bahasa Indonesia — 12 dari 14 dokumen.</strong> Laman utama serta Pelajaran 00–10 telah diterjemahkan sepenuhnya. Pelajaran 11–12 masih menuju sumber resmi berbahasa Inggris sampai unit berikutnya selesai. <a href="https://online.stat.psu.edu/stat415/Lesson10">Sumber resmi halaman ini</a>. <a href="licenses/index.html">Atribusi, perubahan, dan lisensi</a>.</aside><main class="content page-columns page-full" data-component-id="Lesson10" data-document-id="O006-PSU-011" data-source-url="https://online.stat.psu.edu/stat415/Lesson10" id="quarto-document-content">
+<header class="quarto-title-block default" data-o006-id="O006-PSU-011-U0001" id="title-block-header"><nav aria-label="Jejak navigasi" class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" data-o006-id="O006-PSU-011-U0002"><ol class="breadcrumb" data-o006-id="O006-PSU-011-U0003"><li class="breadcrumb-item" data-o006-id="O006-PSU-011-U0004"><a data-o006-id="O006-PSU-011-U0005" href="index.html#lessons">Pelajaran</a></li><li class="breadcrumb-item" data-o006-id="O006-PSU-011-U0006"><a data-o006-id="O006-PSU-011-U0007" href="Lesson10.html"><span class="chapter-number">10</span>  <span class="chapter-title">Uji Hipotesis (Bagian II)</span></a></li></ol></nav>
+<div class="quarto-title" data-o006-id="O006-PSU-011-U0008">
+<h1 class="title" data-o006-id="O006-PSU-011-U0009"><span class="chapter-number">10</span>  <span class="chapter-title">Uji Hipotesis (Bagian II)</span></h1>
+<div class="quarto-categories" data-o006-id="O006-PSU-011-U0010">
+<div class="quarto-category" data-o006-id="O006-PSU-011-U0011">Kuasa</div>
+<div class="quarto-category" data-o006-id="O006-PSU-011-U0012">Selang Kepercayaan</div>
+<div class="quarto-category" data-o006-id="O006-PSU-011-U0013">Uji Wald</div>
+<div class="quarto-category" data-o006-id="O006-PSU-011-U0014">Uji Hipotesis</div>
+</div>
+</div>
+<div class="quarto-title-meta" data-o006-id="O006-PSU-011-U0015">
+</div>
+</header>
+<section class="level2 unnumbered unlisted" data-o006-id="O006-PSU-011-U0016" id="overview">
+<h2 class="unnumbered unlisted anchored" data-anchor-id="overview" data-o006-id="O006-PSU-011-U0017">Gambaran Umum</h2>
+<p data-o006-id="O006-PSU-011-U0018">Pelajaran ini melanjutkan pembahasan awal kita tentang pengujian hipotesis melalui beragam contoh yang kurang dikenal serta menunjukkan bagaimana selang kepercayaan dan uji hipotesis merupakan dua sisi dari hal yang sama. Anda juga akan mempelajari mengapa mutu uji bergantung pada kuasa—peluang mendeteksi efek yang nyata—dan bagaimana faktor-faktor seperti ukuran sampel, tingkat signifikansi (<span class="math inline" data-o006-math-id="O006-PSU-011-M0001">\(\alpha\)</span>), dan ukuran efek saling berkaitan. Terakhir, kita meninjau sekilas uji Wald, suatu metode umum yang memanfaatkan penduga kemungkinan maksimum ketika statistik uji klasik sulit diturunkan.</p>
+<section class="level3 unnumbered unlisted objectiveblock" data-o006-id="O006-PSU-011-U0019" id="objectives">
+<h3 class="unnumbered unlisted anchored" data-anchor-id="objectives" data-o006-id="O006-PSU-011-U0020"><i class="bi bi-check2-circle"></i>Tujuan</h3>
+<p data-o006-id="O006-PSU-011-U0021">Setelah menyelesaikan pelajaran ini, Anda diharapkan mampu:</p>
+<ol data-o006-id="O006-PSU-011-U0022" type="1">
+<li data-o006-id="O006-PSU-011-U0023">Menghubungkan selang kepercayaan dengan uji hipotesis,</li>
+<li data-o006-id="O006-PSU-011-U0024">Menentukan kuasa suatu uji,</li>
+<li data-o006-id="O006-PSU-011-U0025">Menentukan ukuran sampel yang diperlukan untuk suatu tingkat signifikansi dan kuasa yang diinginkan,</li>
+<li data-o006-id="O006-PSU-011-U0026">Menyusun secara numerik uji hipotesis sederhana untuk parameter yang diduga melalui pendugaan kemungkinan maksimum numerik di R</li>
+</ol>
+</section>
+</section>
+<section class="level2" data-number="10.1" data-o006-id="O006-PSU-011-U0027" id="other-hypothesis-test-examples">
+<h2 class="anchored" data-anchor-id="other-hypothesis-test-examples" data-number="10.1" data-o006-id="O006-PSU-011-U0028"><span class="header-section-number">10.1</span> Contoh Uji Hipotesis Lain</h2>
+<p data-o006-id="O006-PSU-011-U0029">Pada bagian ini, kita akan melanjutkan dengan beberapa contoh uji hipotesis yang mungkin tidak seakrab contoh-contoh yang telah kita lihat sejauh ini.</p>
+<div class="theorem example" data-o006-id="O006-PSU-011-U0030" id="exm-uniformhyptest">
+<p data-o006-id="O006-PSU-011-U0031"><span class="theorem-title"><strong>Contoh 10.1</strong></span> <strong>Bagian I</strong><br/>
+Misalkan kita memiliki sampel acak berukuran <span class="math inline" data-o006-math-id="O006-PSU-011-M0002">\(n=8\)</span> dari distribusi Seragam pada selang <span class="math inline" data-o006-math-id="O006-PSU-011-M0003">\((0, \theta)\)</span>. Kita ingin menguji hipotesis berikut:</p>
+<p data-o006-id="O006-PSU-011-U0032"><span class="math display" data-o006-math-id="O006-PSU-011-M0004">\[
+\begin{align*}
+  H_0:\theta=2 \text{ versus }H_a:\theta&lt;2
+\end{align*}
+\]</span></p>
+<p data-o006-id="O006-PSU-011-U0033">Turunkan suatu uji statistik untuk hipotesis-hipotesis ini.</p>
+<button aria-controls="collapseExample" aria-expanded="false" class="btn btn-outline-success collapsed" data-o006-id="O006-PSU-011-U0034" type="button">
+    Jawaban
+</button>
+<div class="collapse" data-o006-id="O006-PSU-011-U0035" id="collapseExample">
+<div class="card" data-o006-id="O006-PSU-011-U0036">
+<section class="level4 card-body bg-light ms-0 mb-0 pt-0" data-o006-id="O006-PSU-011-U0037" id="solution">
+<h4 class="anchored" data-anchor-id="solution" data-o006-id="O006-PSU-011-U0038">Solusi</h4>
+<p data-o006-id="O006-PSU-011-U0039">Langkah 1 telah ditentukan dalam soal. Langkah berikutnya adalah menetapkan tingkat signifikansi. Mari kita tetapkan peluang galat tipe I sebesar <span class="math inline" data-o006-math-id="O006-PSU-011-M0005">\(\alpha=0.10\)</span>.</p>
+<p data-o006-id="O006-PSU-011-U0040">Langkah selanjutnya adalah menentukan statistik uji. Kita perlu mengetahui distribusi statistik uji tersebut. Pilihan yang logis adalah statistik urutan maksimum. Jika hipotesis nol benar, statistik urutan terbesar, <span class="math inline" data-o006-math-id="O006-PSU-011-M0006">\(Y_n=Y_8\)</span>, akan “dekat” dengan <span class="math inline" data-o006-math-id="O006-PSU-011-M0007">\(\theta=2\)</span>, dan nilai <span class="math inline" data-o006-math-id="O006-PSU-011-M0008">\(Y_8\)</span> yang jauh lebih <strong>kecil</strong> daripada <span class="math inline" data-o006-math-id="O006-PSU-011-M0009">\(\theta=2\)</span> akan menjadi bukti yang mendukung hipotesis alternatif, <span class="math inline" data-o006-math-id="O006-PSU-011-M0010">\(H_a:\theta&lt;2\)</span>.</p>
+<p data-o006-id="O006-PSU-011-U0041">Aturan keputusannya kira-kira berbentuk: tolak <span class="math inline" data-o006-math-id="O006-PSU-011-M0011">\(H_0:\theta=2\)</span> jika <span class="math inline" data-o006-math-id="O006-PSU-011-M0012">\(Y_8\le c\)</span> , dengan <span class="math display" data-o006-math-id="O006-PSU-011-M0013">\[\begin{align*}
+  \alpha=0.1=P(Y_8\le c|H_0\text{ is true})
+\end{align*}\]</span></p>
+<p data-o006-id="O006-PSU-011-U0042">Kita mengetahui bahwa statistik urutan tersebut memiliki distribusi berikut:</p>
+<p data-o006-id="O006-PSU-011-U0043"><span class="math display" data-o006-math-id="O006-PSU-011-M0014">\[\begin{align*}
+  f_{y_n}(y)=\frac{n}{\theta^n}y^{n-1}=\frac{8}{\theta^8}y^7, \qquad 0\le y\le \theta
+\end{align*}\]</span></p>
+<p data-o006-id="O006-PSU-011-U0044">Di bawah hipotesis nol, distribusinya adalah: <span class="math display" data-o006-math-id="O006-PSU-011-M0015">\[\begin{align*}
+  f_{y_8}(y)=\frac{n}{2^n}y^{n-1}=\frac{8}{2^8}y^7=\frac{1}{32}y^7, \qquad 0\le y\le 2
+\end{align*}\]</span></p>
+<p data-o006-id="O006-PSU-011-U0045">Kembali ke aturan keputusan kita, kita menolak jika <span class="math inline" data-o006-math-id="O006-PSU-011-M0016">\(P(Y_8\le c|H_0)=0.1\)</span>. Dengan menggabungkan semuanya, kita dapat menentukan <span class="math inline" data-o006-math-id="O006-PSU-011-M0017">\(c\)</span>.</p>
+<p data-o006-id="O006-PSU-011-U0046"><span class="math display" data-o006-math-id="O006-PSU-011-M0018">\[\begin{align*}
+  0.1=\int_0^c \frac{1}{32}y^7dy=\frac{1}{256}c^8
+\end{align*}\]</span></p>
+<p data-o006-id="O006-PSU-011-U0047">Dengan menyelesaikan persamaan untuk <span class="math inline" data-o006-math-id="O006-PSU-011-M0019">\(c\)</span>, kita peroleh: <span class="math display" data-o006-math-id="O006-PSU-011-M0020">\[\begin{align*}
+  c=\sqrt[8]{25.6}\approx 1.4998
+\end{align*}\]</span></p>
+<p data-o006-id="O006-PSU-011-U0048">Dengan demikian, kita menolak hipotesis nol pada tingkat <span class="math inline" data-o006-math-id="O006-PSU-011-M0021">\(\alpha=0.1\)</span> , jika <span class="math inline" data-o006-math-id="O006-PSU-011-M0022">\(Y_8\le 1.4998\)</span>.</p>
+</section>
+</div>
+</div>
+<p data-o006-id="O006-PSU-011-U0049"><br/>
+<strong>Bagian II</strong></p>
+<p data-o006-id="O006-PSU-011-U0050">Kita memiliki pengamatan berikut dari distribusi Seragam pada selang <span class="math inline" data-o006-math-id="O006-PSU-011-M0023">\((0, \theta)\)</span>.</p>
+<p data-o006-id="O006-PSU-011-U0051"><span class="math display" data-o006-math-id="O006-PSU-011-M0024">\[0.3977\  0.9518\   0.4598\   0.3963\   0.5222\   0.8519\   0.5270\  0.2767\]</span></p>
+<p data-o006-id="O006-PSU-011-U0052">Uji hipotesis <span class="math inline" data-o006-math-id="O006-PSU-011-M0025">\(H_0: \theta=2\)</span> melawan <span class="math inline" data-o006-math-id="O006-PSU-011-M0026">\(H_a: \theta&lt;2\)</span>.</p>
+<button aria-controls="collapseExample1" aria-expanded="false" class="btn btn-outline-success collapsed" data-o006-id="O006-PSU-011-U0053" type="button">
+    Jawaban
+</button>
+<div class="collapse" data-o006-id="O006-PSU-011-U0054" id="collapseExample1">
+<div class="card" data-o006-id="O006-PSU-011-U0055">
+<section class="level4 card-body bg-light ms-0 mb-0 pt-0" data-o006-id="O006-PSU-011-U0056" id="solution-1">
+<h4 class="anchored" data-anchor-id="solution-1" data-o006-id="O006-PSU-011-U0057">Solusi</h4>
+<p data-o006-id="O006-PSU-011-U0058">Statistik urutan maksimum adalah 0,8519. Karena nilainya kurang dari 1,4998, kita menolak hipotesis nol. Kita menyimpulkan bahwa pada tingkat <span class="math inline" data-o006-math-id="O006-PSU-011-M0027">\(\alpha=0.1\)</span> terdapat cukup bukti bahwa parameter populasi <span class="math inline" data-o006-math-id="O006-PSU-011-M0028">\(\theta\)</span> lebih kecil daripada 2.</p>
+</section>
+</div>
+</div>
+</div>
+<div class="theorem example" data-o006-id="O006-PSU-011-U0059" id="exm-poissonhyptest">
+<p data-o006-id="O006-PSU-011-U0060"><span class="theorem-title"><strong>Contoh 10.2</strong></span> Empat pengukuran, 2, 0, 1, 0, dilakukan pada peubah acak Poisson <span class="math inline" data-o006-math-id="O006-PSU-011-M0029">\(X\)</span> untuk menguji <span class="math display" data-o006-math-id="O006-PSU-011-M0030">\[\begin{align*}
+  H_0:\lambda=0.8 \text{ versus } H_a: \lambda&gt;0.8
+\end{align*}\]</span></p>
+<p data-o006-id="O006-PSU-011-U0061">Turunkan suatu uji statistik untuk hipotesis-hipotesis ini pada tingkat signifikansi 10%.</p>
+<button aria-controls="collapseExample2" aria-expanded="false" class="btn btn-outline-success collapsed" data-o006-id="O006-PSU-011-U0062" type="button">
+    Jawaban
+</button>
+<div class="collapse" data-o006-id="O006-PSU-011-U0063" id="collapseExample2">
+<div class="card" data-o006-id="O006-PSU-011-U0064">
+<section class="level4 card-body bg-light ms-0 mb-0 pt-0" data-o006-id="O006-PSU-011-U0065" id="solution-2">
+<h4 class="anchored" data-anchor-id="solution-2" data-o006-id="O006-PSU-011-U0066">Solusi</h4>
+<p data-o006-id="O006-PSU-011-U0067">Dua langkah pertama pengujian hipotesis telah diberikan dalam soal. Oleh karena itu, langkah berikutnya adalah menghitung statistik uji. Kita telah mengetahui sebelumnya bahwa <span class="math inline" data-o006-math-id="O006-PSU-011-M0031">\(\bar{X}\)</span> merupakan statistik cukup bagi <span class="math inline" data-o006-math-id="O006-PSU-011-M0032">\(\lambda\)</span>. Kita juga telah mengetahui dalam STAT 414 bahwa <span class="math inline" data-o006-math-id="O006-PSU-011-M0033">\(\sum_{i=1}^4 X_i\)</span> merupakan peubah acak Poisson dengan parameter <span class="math inline" data-o006-math-id="O006-PSU-011-M0034">\(\sum_{i=1}^4 \lambda=4\lambda\)</span>. Untuk contoh ini, mari kita gunakan jumlah tersebut sebagai statistik uji.</p>
+<p data-o006-id="O006-PSU-011-U0068">Jika distribusi jumlah tersebut adalah Poisson <span class="math inline" data-o006-math-id="O006-PSU-011-M0035">\(4\lambda\)</span>, maka hipotesis awal kita dapat dituliskan kembali sebagai:</p>
+<p data-o006-id="O006-PSU-011-U0069"><span class="math display" data-o006-math-id="O006-PSU-011-M0036">\[\begin{align*}
+  H_0: 4\lambda=4(0.8)=3.2 \text{ versus }H_a: 4\lambda&gt;3.2
+\end{align*}\]</span></p>
+<p data-o006-id="O006-PSU-011-U0070">Dalam menyusun aturan keputusan, kita ingin menolak hipotesis nol jika <span class="math inline" data-o006-math-id="O006-PSU-011-M0037">\(\sum x_i&gt;c\)</span>, dengan <span class="math display" data-o006-math-id="O006-PSU-011-M0038">\[P_0(Y&gt;c)\leq 0.10\]</span></p>
+<p data-o006-id="O006-PSU-011-U0071">Ingatlah bahwa distribusi Poisson bersifat diskret. Oleh karena itu, tingkat <span class="math inline" data-o006-math-id="O006-PSU-011-M0039">\(\alpha\)</span> yang kita inginkan mungkin tidak dapat dicapai secara tepat. Tabel di bawah menunjukkan fungsi massa peluang (PMF) suatu peubah acak Poisson dengan <span class="math inline" data-o006-math-id="O006-PSU-011-M0040">\(\lambda=3.2\)</span>. Kolom ketiga adalah <span class="math inline" data-o006-math-id="O006-PSU-011-M0041">\(P(\sum X_i&gt;x)\)</span> untuk nilai <span class="math inline" data-o006-math-id="O006-PSU-011-M0042">\(x\)</span>.</p>
+<table aria-describedby="o006-psu-011-table-1-caption" class="w-auto table-sm mx-auto small caption-top table" data-o006-id="O006-PSU-011-U0072"><caption data-o006-correction-id="O006-PSU-ADV-0193" id="o006-psu-011-table-1-caption">Peluang massa dan peluang ekor atas untuk peubah Poisson dengan parameter 3,2.</caption>
+<thead data-o006-id="O006-PSU-011-U0073">
+<tr class="header" data-o006-id="O006-PSU-011-U0074">
+<th data-o006-id="O006-PSU-011-U0075" id="o006-psu-011-table-1-column-1" scope="col"><span class="math inline" data-o006-math-id="O006-PSU-011-M0043">\(x\)</span></th>
+<th data-o006-id="O006-PSU-011-U0076" id="o006-psu-011-table-1-column-2" scope="col"><span class="math inline" data-o006-math-id="O006-PSU-011-M0044">\(P(X=x)\)</span></th>
+<th data-o006-id="O006-PSU-011-U0077" id="o006-psu-011-table-1-column-3" scope="col"><span class="math inline" data-o006-math-id="O006-PSU-011-M0045">\(P(X&gt;x)=1-P(X\le x)\)</span></th>
+</tr>
+</thead>
+<tbody data-o006-id="O006-PSU-011-U0078">
+<tr class="odd" data-o006-id="O006-PSU-011-U0079">
+<th data-o006-id="O006-PSU-011-U0080" id="o006-psu-011-table-1-row-1" scope="row">0</th>
+<td data-o006-id="O006-PSU-011-U0081" headers="o006-psu-011-table-1-row-1 o006-psu-011-table-1-column-2">0.0408</td>
+<td data-o006-id="O006-PSU-011-U0082" headers="o006-psu-011-table-1-row-1 o006-psu-011-table-1-column-3">0.9592</td>
+</tr>
+<tr class="even" data-o006-id="O006-PSU-011-U0083">
+<th data-o006-id="O006-PSU-011-U0084" id="o006-psu-011-table-1-row-2" scope="row">1</th>
+<td data-o006-id="O006-PSU-011-U0085" headers="o006-psu-011-table-1-row-2 o006-psu-011-table-1-column-2">0.1304</td>
+<td data-o006-id="O006-PSU-011-U0086" headers="o006-psu-011-table-1-row-2 o006-psu-011-table-1-column-3">0.8288</td>
+</tr>
+<tr class="odd" data-o006-id="O006-PSU-011-U0087">
+<th data-o006-id="O006-PSU-011-U0088" id="o006-psu-011-table-1-row-3" scope="row">2</th>
+<td data-o006-id="O006-PSU-011-U0089" headers="o006-psu-011-table-1-row-3 o006-psu-011-table-1-column-2">0.2087</td>
+<td data-o006-id="O006-PSU-011-U0090" headers="o006-psu-011-table-1-row-3 o006-psu-011-table-1-column-3">0.6201</td>
+</tr>
+<tr class="even" data-o006-id="O006-PSU-011-U0091">
+<th data-o006-id="O006-PSU-011-U0092" id="o006-psu-011-table-1-row-4" scope="row">3</th>
+<td data-o006-id="O006-PSU-011-U0093" headers="o006-psu-011-table-1-row-4 o006-psu-011-table-1-column-2">0.2226</td>
+<td data-o006-id="O006-PSU-011-U0094" headers="o006-psu-011-table-1-row-4 o006-psu-011-table-1-column-3">0.3975</td>
+</tr>
+<tr class="odd" data-o006-id="O006-PSU-011-U0095">
+<th data-o006-id="O006-PSU-011-U0096" id="o006-psu-011-table-1-row-5" scope="row">4</th>
+<td data-o006-id="O006-PSU-011-U0097" headers="o006-psu-011-table-1-row-5 o006-psu-011-table-1-column-2">0.1781</td>
+<td data-o006-id="O006-PSU-011-U0098" headers="o006-psu-011-table-1-row-5 o006-psu-011-table-1-column-3">0.2194</td>
+</tr>
+<tr class="even" data-o006-id="O006-PSU-011-U0099">
+<th data-o006-id="O006-PSU-011-U0100" id="o006-psu-011-table-1-row-6" scope="row">5</th>
+<td data-o006-id="O006-PSU-011-U0101" headers="o006-psu-011-table-1-row-6 o006-psu-011-table-1-column-2">0.1140</td>
+<td data-o006-id="O006-PSU-011-U0102" headers="o006-psu-011-table-1-row-6 o006-psu-011-table-1-column-3">0.1054</td>
+</tr>
+<tr class="odd" data-o006-id="O006-PSU-011-U0103">
+<th data-o006-id="O006-PSU-011-U0104" id="o006-psu-011-table-1-row-7" scope="row">6</th>
+<td data-o006-id="O006-PSU-011-U0105" headers="o006-psu-011-table-1-row-7 o006-psu-011-table-1-column-2">0.0608</td>
+<td data-o006-id="O006-PSU-011-U0106" headers="o006-psu-011-table-1-row-7 o006-psu-011-table-1-column-3">0.0446</td>
+</tr>
+<tr class="even" data-o006-id="O006-PSU-011-U0107">
+<th data-o006-id="O006-PSU-011-U0108" id="o006-psu-011-table-1-row-8" scope="row">7</th>
+<td data-o006-id="O006-PSU-011-U0109" headers="o006-psu-011-table-1-row-8 o006-psu-011-table-1-column-2">0.0278</td>
+<td data-o006-id="O006-PSU-011-U0110" headers="o006-psu-011-table-1-row-8 o006-psu-011-table-1-column-3">0.0168</td>
+</tr>
+<tr class="odd" data-o006-id="O006-PSU-011-U0111">
+<th data-o006-id="O006-PSU-011-U0112" id="o006-psu-011-table-1-row-9" scope="row">8</th>
+<td data-o006-id="O006-PSU-011-U0113" headers="o006-psu-011-table-1-row-9 o006-psu-011-table-1-column-2">0.0111</td>
+<td data-o006-id="O006-PSU-011-U0114" headers="o006-psu-011-table-1-row-9 o006-psu-011-table-1-column-3">0.0057</td>
+</tr>
+<tr class="even" data-o006-id="O006-PSU-011-U0115">
+<th data-o006-id="O006-PSU-011-U0116" id="o006-psu-011-table-1-row-10" scope="row">9</th>
+<td data-o006-id="O006-PSU-011-U0117" headers="o006-psu-011-table-1-row-10 o006-psu-011-table-1-column-2">0.0040</td>
+<td data-o006-id="O006-PSU-011-U0118" headers="o006-psu-011-table-1-row-10 o006-psu-011-table-1-column-3">0.0018</td>
+</tr>
+<tr class="odd" data-o006-id="O006-PSU-011-U0119">
+<th data-o006-id="O006-PSU-011-U0120" id="o006-psu-011-table-1-row-11" scope="row">10</th>
+<td data-o006-id="O006-PSU-011-U0121" headers="o006-psu-011-table-1-row-11 o006-psu-011-table-1-column-2">0.0013</td>
+<td data-o006-id="O006-PSU-011-U0122" headers="o006-psu-011-table-1-row-11 o006-psu-011-table-1-column-3">0.0005</td>
+</tr>
+<tr class="even" data-o006-id="O006-PSU-011-U0123">
+<th data-o006-id="O006-PSU-011-U0124" id="o006-psu-011-table-1-row-12" scope="row">11</th>
+<td data-o006-id="O006-PSU-011-U0125" headers="o006-psu-011-table-1-row-12 o006-psu-011-table-1-column-2">0.0004</td>
+<td data-o006-id="O006-PSU-011-U0126" headers="o006-psu-011-table-1-row-12 o006-psu-011-table-1-column-3">0.0001</td>
+</tr>
+<tr class="odd" data-o006-id="O006-PSU-011-U0127">
+<th data-o006-id="O006-PSU-011-U0128" id="o006-psu-011-table-1-row-13" scope="row">12</th>
+<td data-o006-id="O006-PSU-011-U0129" headers="o006-psu-011-table-1-row-13 o006-psu-011-table-1-column-2">0.0001</td>
+<td data-o006-id="O006-PSU-011-U0130" headers="o006-psu-011-table-1-row-13 o006-psu-011-table-1-column-3">0.0000</td>
+</tr>
+<tr class="even" data-o006-id="O006-PSU-011-U0131">
+<th data-o006-id="O006-PSU-011-U0132" id="o006-psu-011-table-1-row-14" scope="row">13</th>
+<td data-o006-id="O006-PSU-011-U0133" headers="o006-psu-011-table-1-row-14 o006-psu-011-table-1-column-2">0.0000</td>
+<td data-o006-id="O006-PSU-011-U0134" headers="o006-psu-011-table-1-row-14 o006-psu-011-table-1-column-3">0.0000</td>
+</tr>
+</tbody>
+</table>
+<p data-o006-id="O006-PSU-011-U0135">Kita ingin memperoleh nilai sedekat mungkin dengan <span class="math inline" data-o006-math-id="O006-PSU-011-M0046">\(\alpha=0.1\)</span> . Nilai yang paling dekat dalam tabel adalah <span class="math inline" data-o006-math-id="O006-PSU-011-M0047">\(P_0(Y\geq 6)=0.105408105469177\approx 0.1054&gt;0.10\)</span>. Akan tetapi, nilai ini melebihi tingkat signifikansi nominal 0,10. Pernyataan sumber berikut menggunakan tingkat signifikansi <span class="math inline" data-o006-math-id="O006-PSU-011-M0048">\(P_0(Y\geq 7)=0.044619100955301\approx 0.0446\leq 0.10\)</span>, yang bahkan tidak konsisten dengan nilai tabel 0,1054. Aturan sumber untuk menolak hipotesis nol adalah ketika <span class="math inline" data-o006-math-id="O006-PSU-011-M0049">\(Y\geq 7\)</span>.</p>
+<p data-o006-id="O006-PSU-011-U0136">Aturan tersebut berukuran 0,105408..., sehingga bukan uji bertingkat 0,10. Uji tak teracak yang konservatif menolak ketika jumlah sekurang-kurangnya 7; ukuran tepat 0,10 diperoleh dengan aturan yang sama serta penolakan dengan peluang 0,9110348 ketika jumlah sama dengan 6. Dengan data yang diberikan, jumlahnya adalah <span class="math inline" data-o006-math-id="O006-PSU-011-M0050">\(Y=2+0+1+0=3\)</span>. Karena jumlah tersebut kurang dari 6 (dan juga kurang dari ambang konservatif 7), kita gagal menolak hipotesis nol. Sumber melaporkan kesimpulan ini pada <span class="math inline" data-o006-math-id="O006-PSU-011-M0051">\(\operatorname{size}=0.044619100955301\approx 0.0446\)</span> ; dengan uji bertingkat 0,10 yang telah dikoreksi, tetap tidak terdapat cukup bukti untuk menyimpulkan bahwa <span class="math inline" data-o006-math-id="O006-PSU-011-M0052">\(4\lambda&gt;3.2\)</span> atau, secara ekuivalen, <span class="math inline" data-o006-math-id="O006-PSU-011-M0053">\(\lambda&gt;0.8\)</span>.</p><p class="target-only-correction poisson-exact-level-note" data-o006-correction-id="O006-PSU-ADV-0172" role="note">Catatan tingkat eksak: aturan nonacak Y ≥ 7 bersifat konservatif dengan ukuran 0,044619100955301. Ukuran tepat 0,10 diperoleh dengan menolak ketika Y ≥ 7 dan, ketika Y = 6, menolak dengan peluang 0,911034807817211.</p>
+</section>
+</div>
+</div>
+</div>
+</section>
+<section class="level2" data-number="10.2" data-o006-id="O006-PSU-011-U0137" id="linking-confidence-intervals-to-hypothesis-tests">
+<h2 class="anchored" data-anchor-id="linking-confidence-intervals-to-hypothesis-tests" data-number="10.2" data-o006-id="O006-PSU-011-U0138"><span class="header-section-number">10.2</span> Menghubungkan Selang Kepercayaan dengan Uji Hipotesis</h2>
+<p data-o006-id="O006-PSU-011-U0139">Sampai di sini, kita telah menunjukkan cara melakukan pendugaan selang bagi parameter yang tidak diketahui dan cara menguji nilai tertentu dari parameter tersebut. Adakah hubungan antara pendugaan selang dan uji hipotesis? Jawabannya: ada!</p>
+<p data-o006-id="O006-PSU-011-U0140">Sejauh ini, kita hanya membahas selang kepercayaan dua sisi, yaitu selang yang memiliki batas atas dan batas bawah. Pembahasan kita akan berfokus pada selang dan uji dua sisi tersebut. Namun, hal yang kita pelajari di sini juga dapat diterapkan pada selang kepercayaan satu sisi kanan atau kiri dan uji hipotesis satu sisi.</p>
+<p data-o006-id="O006-PSU-011-U0141">Seperti biasa, mari kita perhatikan sebuah contoh.</p>
+<div class="theorem example" data-o006-id="O006-PSU-011-U0142" id="exm-systbp2">
+<p data-o006-id="O006-PSU-011-U0143"><span class="theorem-title"><strong>Contoh 10.3</strong></span> Mari kita tinjau kembali contoh sebelumnya. Rataan tekanan darah sistolik diasumsikan sebesar <span class="math inline" data-o006-math-id="O006-PSU-011-M0054">\(\mu = 120\)</span> mm Hg. Dalam Honolulu Heart Study, sampel sebanyak <span class="math inline" data-o006-math-id="O006-PSU-011-M0055">\(n=100\)</span> orang memiliki rataan tekanan darah sistolik 130,1 mm Hg dengan simpangan baku 21,21 mm Hg. Tentukan selang kepercayaan 95% bagi rataan tekanan darah sistolik populasi.</p>
+<section class="level4 card card-body bg-light ms-3 mb-3 pt-0" data-o006-id="O006-PSU-011-U0144" id="solution-3">
+<h4 class="anchored" data-anchor-id="solution-3" data-o006-id="O006-PSU-011-U0145">Solusi</h4>
+<p data-o006-id="O006-PSU-011-U0146">Selang kepercayaan 95% adalah: <span class="math display" data-o006-math-id="O006-PSU-011-M0056">\[\begin{align*}
+  \bar{x}\pm t_{0.025, 99}\frac{s}{\sqrt{n}}
+\end{align*}\]</span></p>
+<p data-o006-id="O006-PSU-011-U0147">Dengan informasi yang diberikan, kita memperoleh selang: <span class="math display" data-o006-math-id="O006-PSU-011-M0057">\[\begin{align*}
+130.1\pm 1.984\left(\frac{21.21}{\sqrt{100}}\right)=130.1\pm 4.2081=(125.8919, 134.3081)
+\end{align*}\]</span></p>
+<p data-o006-id="O006-PSU-011-U0148">Kita yakin 95% bahwa rataan tekanan darah sistolik populasi berada di antara <span class="math inline" data-o006-math-id="O006-PSU-011-M0058">\((125.8919, 134.3081)\)</span>.</p>
+<p data-o006-id="O006-PSU-011-U0149">Sebelumnya, kita bertanya: Apakah kelompok tersebut berbeda secara signifikan (dalam hal tekanan darah sistolik!) dari populasi umum? Kita menguji hipotesis: <span class="math display" data-o006-math-id="O006-PSU-011-M0059">\[\begin{align*}
+  H_0: \mu=120 \text{ versus }H_a: \mu\ne 120
+\end{align*}\]</span></p>
+<p data-o006-id="O006-PSU-011-U0150">Statistik ujinya adalah <span class="math inline" data-o006-math-id="O006-PSU-011-M0060">\(t=4.76\)</span>. Nilai-p untuk uji ini adalah <span class="math inline" data-o006-math-id="O006-PSU-011-M0061">\(p=2P(T_{99}\geq 4.761904\ldots)\approx 0.00000656270&gt;0\)</span>. Nilai-p dua sisi yang lebih teliti adalah sekitar 0,00000656. Oleh karena itu, kita menolak hipotesis nol pada tingkat <span class="math inline" data-o006-math-id="O006-PSU-011-M0062">\(\alpha=0.05\)</span> .</p>
+<p data-o006-id="O006-PSU-011-U0151">Jika kita melihat selang kepercayaan tersebut, tampak bahwa nilai 120 TIDAK berada di dalamnya. Apakah ini suatu kebetulan?</p>
+<p data-o006-id="O006-PSU-011-U0152">Pendekatan daerah penolakan untuk uji hipotesis <span class="math inline" data-o006-math-id="O006-PSU-011-M0063">\(\alpha=0.05\)</span> menyatakan bahwa kita menolak hipotesis nol bahwa <span class="math inline" data-o006-math-id="O006-PSU-011-M0064">\(\mu=120\)</span>:</p>
+<p data-o006-id="O006-PSU-011-U0153"><span class="math display" data-o006-math-id="O006-PSU-011-M0065">\[\begin{align*}
+  \text{ if }t=\dfrac{\bar{x}-\mu_0}{s/\sqrt{n}}\geq 1.9842 \text{ or if }t=\dfrac{\bar{x}-\mu_0}{s/\sqrt{n}}\leq -1.9842
+\end{align*}\]</span></p>
+<p data-o006-id="O006-PSU-011-U0154">yang ekuivalen dengan menolak jika: <span class="math display" data-o006-math-id="O006-PSU-011-M0066">\[\begin{align*}
+  \text{ if }\bar{x}-\mu_0 \geq 1.9842\left(\dfrac{s}{\sqrt{n}}\right) \text{ or if }\bar{x}-\mu_0 \leq -1.9842\left(\dfrac{s}{\sqrt{n}}\right)
+\end{align*}\]</span></p>
+<p data-o006-id="O006-PSU-011-U0155">yang ekuivalen dengan menolak jika: <span class="math display" data-o006-math-id="O006-PSU-011-M0067">\[\begin{align*}
+  \text{ if }\mu_0 \leq \bar{x}-1.9842\left(\dfrac{s}{\sqrt{n}}\right)\text{ or if }\mu_0 \geq \bar{x}+1.9842\left(\dfrac{s}{\sqrt{n}}\right)
+\end{align*}\]</span></p>
+<p data-o006-id="O006-PSU-011-U0156">yang, setelah data untuk contoh ini dimasukkan, ekuivalen dengan menolak jika: <span class="math display" data-o006-math-id="O006-PSU-011-M0068">\[\begin{align*}
+  \text{if }\mu_0 \leq 125.89\text{ or if }\mu_0 \geq 134.31
+\end{align*}\]</span></p>
+<p data-o006-id="O006-PSU-011-U0157">yang ternyata (!) merupakan titik-titik ujung selang kepercayaan 95% bagi rataan. Jadi, hasilnya memang konsisten! Dengan selang tertutup 95% dan aturan penolakan nilai-p &lt; α yang lazim, hipotesis nol ditolak tepat ketika nilai parameter yang ditetapkannya berada di luar selang; jika aturan nilai-p ≤ α digunakan, perlakuan pada titik ujung harus dinyatakan secara eksplisit.</p>
+</section>
+</div>
+</section>
+<section class="level2 page-columns page-full" data-number="10.3" data-o006-id="O006-PSU-011-U0158" id="power-of-a-test">
+<h2 class="anchored" data-anchor-id="power-of-a-test" data-number="10.3" data-o006-id="O006-PSU-011-U0159"><span class="header-section-number">10.3</span> Kuasa Uji</h2>
+<p data-o006-id="O006-PSU-011-U0160">Setiap kali melakukan uji hipotesis, kita ingin memastikan bahwa uji tersebut bermutu tinggi. Salah satu cara mengukur mutunya adalah memastikan bahwa uji itu memiliki kuasa yang tinggi. Dalam pelajaran ini, kita akan mempelajari arti uji dengan kuasa tinggi dan cara menentukan ukuran sampel n yang diperlukan agar uji hipotesis yang kita lakukan memiliki kuasa tinggi. Pembahasan dan contoh kita berfokus pada pengujian rataan populasi yang tidak diketahui dari suatu distribusi Normal.</p>
+<section class="level3 page-columns page-full" data-number="10.3.1" data-o006-id="O006-PSU-011-U0161" id="definition-of-power">
+<h3 class="anchored" data-anchor-id="definition-of-power" data-number="10.3.1" data-o006-id="O006-PSU-011-U0162"><span class="header-section-number">10.3.1</span> Definisi Kuasa</h3>
+<p data-o006-id="O006-PSU-011-U0163">Mari kita mulai pembahasan kuasa statistik dengan mengingat kembali dua definisi yang kita pelajari ketika pertama kali memperkenalkan pengujian hipotesis:</p>
+<ul data-o006-id="O006-PSU-011-U0164">
+<li data-o006-id="O006-PSU-011-U0165">Galat tipe I terjadi jika kita menolak hipotesis nol <span class="math inline" data-o006-math-id="O006-PSU-011-M0069">\(H_0\)</span> (untuk mendukung hipotesis alternatif <span class="math inline" data-o006-math-id="O006-PSU-011-M0070">\(H_a\)</span>) ketika hipotesis nol <span class="math inline" data-o006-math-id="O006-PSU-011-M0071">\(H_0\)</span> benar. Kita lambangkan <span class="math inline" data-o006-math-id="O006-PSU-011-M0072">\(\alpha=P(\text{Type I error})\)</span>.</li>
+<li data-o006-id="O006-PSU-011-U0166">Galat tipe II terjadi jika kita gagal menolak hipotesis nol <span class="math inline" data-o006-math-id="O006-PSU-011-M0073">\(H_0\)</span> ketika hipotesis nol <span class="math inline" data-o006-math-id="O006-PSU-011-M0074">\(H_0\)</span> salah (atau hipotesis alternatif benar). Kita lambangkan <span class="math inline" data-o006-math-id="O006-PSU-011-M0075">\(\beta=P(\text{Type II error})\)</span>.</li>
+</ul>
+<p data-o006-id="O006-PSU-011-U0167">Anda benar-benar perlu memahami kedua definisi ini secara menyeluruh karena keduanya akan sering digunakan dalam pelajaran ini dan setiap kali kelak Anda perlu menghitung ukuran sampel, baik untuk diri sendiri maupun untuk orang lain.</p>
+<div class="theorem example page-columns page-full" data-o006-id="O006-PSU-011-U0168" id="exm-brinellhardness">
+<p data-o006-id="O006-PSU-011-U0169"><span class="theorem-title"><strong>Contoh 10.4</strong></span> <strong>Bagian I</strong><br/>
+Skala kekerasan Brinell adalah salah satu dari beberapa definisi yang digunakan dalam ilmu material untuk mengukur kekerasan sepotong logam. Pengukuran kekerasan Brinell untuk jenis batang tulangan tertentu yang digunakan untuk memperkuat struktur beton dan pasangan bata diasumsikan berdistribusi Normal dengan simpangan baku 10 kilogram-gaya per milimeter persegi. Dengan menggunakan sampel acak sebanyak <span class="math inline" data-o006-math-id="O006-PSU-011-M0076">\(n=25\)</span> batang, seorang insinyur hendak melakukan uji hipotesis berikut:</p>
+<div class="no-row-height column-margin column-container" data-o006-id="O006-PSU-011-U0170"><div class="margin-aside" data-o006-id="O006-PSU-011-U0171">
+<figure class="figure target-only-figure"><p data-o006-id="O006-PSU-011-U0172"><img alt="Foto tumpukan batang baja tulangan yang digunakan untuk memperkuat beton dan pasangan batu." aria-describedby="o006-psu-011-a0001-caption" class="rounded img-fluid" data-o006-asset-id="O006-PSU-011-A0001" data-o006-id="O006-PSU-011-U0173" src="assets/lesson10/assets/ht_example1.jpg"/></p><figcaption class="figure-caption" data-o006-correction-id="O006-PSU-ADV-0192" id="o006-psu-011-a0001-caption">Batang baja tulangan yang menjadi konteks pengukuran kekerasan Brinell pada Contoh 10.4.</figcaption></figure>
+</div></div><ul data-o006-id="O006-PSU-011-U0174">
+<li data-o006-id="O006-PSU-011-U0175">hipotesis nol <span class="math inline" data-o006-math-id="O006-PSU-011-M0077">\(H_0:\mu=170\)</span></li>
+<li data-o006-id="O006-PSU-011-U0176">melawan hipotesis alternatif <span class="math inline" data-o006-math-id="O006-PSU-011-M0078">\(H_a: \mu&gt;170\)</span></li>
+</ul>
+<p data-o006-id="O006-PSU-011-U0177">Jika insinyur tersebut memutuskan untuk menolak hipotesis nol apabila rataan sampel sekurang-kurangnya 172, yaitu <span class="math inline" data-o006-math-id="O006-PSU-011-M0079">\(\bar{X}\ge 172\)</span>, berapakah peluang bahwa insinyur tersebut melakukan galat tipe I?</p>
+<section class="level4 card card-body bg-light ms-3 mb-3 pt-0" data-o006-id="O006-PSU-011-U0178" id="solution-4">
+<h4 class="anchored" data-anchor-id="solution-4" data-o006-id="O006-PSU-011-U0179">Solusi</h4>
+<p data-o006-id="O006-PSU-011-U0180">Dalam kasus ini, insinyur tersebut melakukan galat tipe I jika rataan sampel yang diamatinya berada di daerah penolakan, yaitu sekurang-kurangnya 172, padahal rataan populasi yang sebenarnya (dan tidak diketahui) adalah 170. Secara grafis, <span class="math inline" data-o006-math-id="O006-PSU-011-M0080">\(\alpha\)</span>, peluang insinyur tersebut melakukan galat tipe I tampak seperti berikut:</p>
+<div alt="Normal curve with center at 0 showing two-tail critical area for alpha of .05." class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center" data-o006-id="O006-PSU-011-U0181" id="fig-415_rttailengineer">
+<figure class="quarto-float quarto-float-fig figure" data-o006-id="O006-PSU-011-U0182">
+<div aria-describedby="fig-415_rttailengineer-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca" data-o006-id="O006-PSU-011-U0183">
+<a class="lightbox" data-gallery="quarto-lightbox-gallery-1" data-o006-id="O006-PSU-011-U0184" href="assets/lesson10/assets/415_rttailengineer.png" title="Gambar 10.1 — Di bawah H₀: μ = 170, rataan sampel sekurang-kurangnya 172 berada di daerah penolakan ekor kanan; luasnya adalah α = 0,1587."><img alt="Kurva Normal untuk rataan sampel ketika μ = 170; batas 172 memisahkan daerah gagal menolak di kiri dari daerah galat tipe I di ekor kanan, yang luasnya 0,1587." aria-describedby="fig-415_rttailengineer-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca" class="w-75 img-fluid quarto-figure quarto-figure-center anchored figure-img" data-o006-asset-id="O006-PSU-011-A0002" data-o006-id="O006-PSU-011-U0185" data-o006-source-native-id="fig-415_rttailengineer" id="fig-415_rttailengineer-image" src="assets/lesson10/assets/415_rttailengineer.png"/></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" data-o006-correction-id="O006-PSU-ADV-0192" data-o006-id="O006-PSU-011-U0186" id="fig-415_rttailengineer-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">Gambar 10.1 — Di bawah H₀: μ = 170, rataan sampel sekurang-kurangnya 172 berada di daerah penolakan ekor kanan; luasnya adalah α = 0,1587.</figcaption>
+</figure>
+</div>
+<p data-o006-id="O006-PSU-011-U0187">Sekarang, kita dapat menghitung nilai <span class="math inline" data-o006-math-id="O006-PSU-011-M0081">\(\alpha\)</span> bagi insinyur tersebut dengan mentransformasikan distribusi Normal yang memiliki rataan 170 dan simpangan baku 10 menjadi <span class="math inline" data-o006-math-id="O006-PSU-011-M0082">\(Z\)</span>, distribusi Normal baku, dengan menggunakan:</p>
+<p data-o006-id="O006-PSU-011-U0188"><span class="math display" data-o006-math-id="O006-PSU-011-M0083">\[\begin{align*}
+  Z=\frac{\bar{X}-\mu}{\frac{\sigma}{\sqrt{n}}}
+\end{align*}\]</span></p>
+<p data-o006-id="O006-PSU-011-U0189">Dengan demikian, kita peroleh:</p>
+<div alt="Normal curve showing the alpha area in the right tail along with the z-score calculation." class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center" data-o006-id="O006-PSU-011-U0190" id="fig-STAT-415-SEC-5-02">
+<figure class="quarto-float quarto-float-fig figure" data-o006-id="O006-PSU-011-U0191">
+<div aria-describedby="fig-STAT-415-SEC-5-02-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca" data-o006-id="O006-PSU-011-U0192">
+<a class="lightbox" data-gallery="quarto-lightbox-gallery-2" data-o006-id="O006-PSU-011-U0193" href="assets/lesson10/assets/STAT-415-SEC-5-02.png" title="Gambar 10.2 — Transformasi batas rataan sampel 172 memberi Z = 1; peluang ekor kanannya adalah 0,1587."><img alt="Kurva Normal baku yang menunjukkan batas Z = 1 dan luas ekor kanan 0,1587 untuk galat tipe I." aria-describedby="fig-STAT-415-SEC-5-02-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca" class="w-75 img-fluid quarto-figure quarto-figure-center anchored figure-img" data-o006-asset-id="O006-PSU-011-A0003" data-o006-id="O006-PSU-011-U0194" data-o006-source-native-id="fig-STAT-415-SEC-5-02" id="fig-STAT-415-SEC-5-02-image" src="assets/lesson10/assets/STAT-415-SEC-5-02.png"/></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" data-o006-correction-id="O006-PSU-ADV-0192" data-o006-id="O006-PSU-011-U0195" id="fig-STAT-415-SEC-5-02-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">Gambar 10.2 — Transformasi batas rataan sampel 172 memberi Z = 1; peluang ekor kanannya adalah 0,1587.</figcaption>
+</figure>
+</div>
+<p data-o006-id="O006-PSU-011-U0196">Dengan demikian, peluang insinyur melakukan galat tipe I dapat dihitung sebagai suatu peluang Normal. Nilainya adalah 0,1587, seperti diilustrasikan berikut:</p>
+<p data-o006-id="O006-PSU-011-U0197"><span class="math display" data-o006-math-id="O006-PSU-011-M0084">\[\begin{align*}
+  \alpha=P(\bar{X}\ge 172 \text{ if }\mu=170)=P(Z\ge 1.00)=0.1587
+\end{align*}\]</span></p>
+<p data-o006-id="O006-PSU-011-U0198">Peluang 0,1587 agak tinggi. Dalam pelajaran ini, kita akan mempelajari cara insinyur tersebut dapat memperkecil peluang melakukan galat tipe I.</p>
+</section>
+<p data-o006-id="O006-PSU-011-U0199"><strong>Bagian II</strong><br/>
+Melanjutkan contoh ini, jika—tanpa diketahui insinyur tersebut—rataan populasi yang sebenarnya adalah <span class="math inline" data-o006-math-id="O006-PSU-011-M0085">\(\mu=173\)</span>, berapakah peluang bahwa insinyur tersebut melakukan galat tipe II?</p>
+<section class="level4 card card-body bg-light ms-3 mb-3 pt-0" data-o006-id="O006-PSU-011-U0200" id="solution-5">
+<h4 class="anchored" data-anchor-id="solution-5" data-o006-id="O006-PSU-011-U0201">Solusi</h4>
+<p data-o006-id="O006-PSU-011-U0202">Dalam kasus ini, insinyur tersebut melakukan galat tipe II jika rataan sampel yang diamatinya tidak berada di daerah penolakan, yaitu jika kurang dari 172, padahal rataan populasi yang sebenarnya (dan tidak diketahui) adalah 173. Secara grafis, <span class="math inline" data-o006-math-id="O006-PSU-011-M0086">\(\beta\)</span>, peluang insinyur tersebut melakukan galat tipe II tampak seperti berikut:</p>
+<div alt="Normal curve with center at 0 showing two-tail critical area for alpha of .05." class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center" data-o006-id="O006-PSU-011-U0203" id="fig-415_engineertype1">
+<figure class="quarto-float quarto-float-fig figure" data-o006-id="O006-PSU-011-U0204">
+<div aria-describedby="fig-415_engineertype1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca" data-o006-id="O006-PSU-011-U0205">
+<a class="lightbox" data-gallery="quarto-lightbox-gallery-3" data-o006-id="O006-PSU-011-U0206" href="assets/lesson10/assets/415_engineertype1.png" title="Gambar 10.3 — Ketika μ = 173, gagal menolak H₀ terjadi untuk rataan sampel kurang dari 172; luas daerah itu adalah β = 0,3085."><img alt="Kurva Normal untuk rataan sampel ketika μ = 173; daerah di bawah 172 adalah galat tipe II dengan peluang 0,3085." aria-describedby="fig-415_engineertype1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca" class="w-75 img-fluid quarto-figure quarto-figure-center anchored figure-img" data-o006-asset-id="O006-PSU-011-A0004" data-o006-id="O006-PSU-011-U0207" data-o006-source-native-id="fig-415_engineertype1" id="fig-415_engineertype1-image" src="assets/lesson10/assets/415_engineertype1.png"/></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" data-o006-correction-id="O006-PSU-ADV-0192" data-o006-id="O006-PSU-011-U0208" id="fig-415_engineertype1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">Gambar 10.3 — Ketika μ = 173, gagal menolak H₀ terjadi untuk rataan sampel kurang dari 172; luas daerah itu adalah β = 0,3085.</figcaption>
+</figure>
+</div>
+<p data-o006-id="O006-PSU-011-U0209">Sekali lagi, kita dapat menghitung nilai <span class="math inline" data-o006-math-id="O006-PSU-011-M0087">\(\beta\)</span> bagi insinyur tersebut dengan mentransformasikan distribusi Normal yang memiliki rataan 173 dan simpangan baku 10 menjadi <span class="math inline" data-o006-math-id="O006-PSU-011-M0088">\(Z\)</span>, distribusi Normal baku. Dengan demikian, kita peroleh:</p>
+<div alt="Normal curves showing the area for beta, a type II error with the z test statistic shown." class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center" data-o006-id="O006-PSU-011-U0210" id="fig-415_engineertype1-B">
+<figure class="quarto-float quarto-float-fig figure" data-o006-id="O006-PSU-011-U0211">
+<div aria-describedby="fig-415_engineertype1-B-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca" data-o006-id="O006-PSU-011-U0212">
+<a class="lightbox" data-gallery="quarto-lightbox-gallery-4" data-o006-id="O006-PSU-011-U0213" href="assets/lesson10/assets/415_engineertype1-B.png" title="Gambar 10.4 — Setelah standardisasi di bawah μ = 173, peluang berada di bawah batas penolakan 172 adalah 0,3085."><img alt="Kurva Normal baku yang menunjukkan batas terstandar untuk rataan sampel 172 dan luas galat tipe II 0,3085 ketika μ = 173." aria-describedby="fig-415_engineertype1-B-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca" class="w-75 img-fluid quarto-figure quarto-figure-center anchored figure-img" data-o006-asset-id="O006-PSU-011-A0005" data-o006-id="O006-PSU-011-U0214" data-o006-source-native-id="fig-415_engineertype1-B" id="fig-415_engineertype1-B-image" src="assets/lesson10/assets/415_engineertype1-B.png"/></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" data-o006-correction-id="O006-PSU-ADV-0192" data-o006-id="O006-PSU-011-U0215" id="fig-415_engineertype1-B-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">Gambar 10.4 — Setelah standardisasi di bawah μ = 173, peluang berada di bawah batas penolakan 172 adalah 0,3085.</figcaption>
+</figure>
+</div>
+<p data-o006-id="O006-PSU-011-U0216">Dengan demikian, peluang insinyur melakukan galat tipe II sekali lagi dapat dihitung sebagai suatu peluang Normal. Nilainya adalah 0,3085, seperti diilustrasikan berikut: <span class="math display" data-o006-math-id="O006-PSU-011-M0089">\[\begin{align*}
+  \beta=P(\bar{X}&lt; 172 \text{ if }\mu=173)=P(Z&lt;-0.50)=0.3085
+\end{align*}\]</span></p>
+<p data-o006-id="O006-PSU-011-U0217">Peluang 0,3085 agak tinggi. Dalam pelajaran ini, kita akan mempelajari cara insinyur tersebut dapat memperkecil peluang melakukan galat tipe II.</p>
+</section>
+</div>
+<div class="no-row-height column-margin column-container" data-o006-id="O006-PSU-011-U0218"><div class="margin-aside" data-o006-id="O006-PSU-011-U0219">
+<div class="quarto-figure quarto-figure-center" data-o006-id="O006-PSU-011-U0220">
+<figure class="figure" data-o006-id="O006-PSU-011-U0221">
+<p data-o006-id="O006-PSU-011-U0222"><img alt="Foto sebuah gelas yang terisi kira-kira setengah, sebagai metafora untuk membandingkan galat tipe II dengan kuasa uji." aria-describedby="o006-psu-011-a0006-caption" class="img-fluid quarto-figure quarto-figure-center figure-img" data-o006-asset-id="O006-PSU-011-A0006" data-o006-id="O006-PSU-011-U0223" src="assets/lesson10/assets/halfemptyglass.jpg"/></p>
+<figcaption class="figure-caption" data-o006-correction-id="O006-PSU-ADV-0192" id="o006-psu-011-a0006-caption">Metafora gelas setengah kosong atau setengah penuh: kuasa uji adalah komplemen peluang galat tipe II.</figcaption></figure>
+</div>
+</div></div><p data-o006-id="O006-PSU-011-U0224">Jika dipikirkan, memperhatikan peluang melakukan galat tipe II mirip dengan memandang gelas sebagai setengah kosong. Alih-alih memperhatikan peluang bahwa insinyur tersebut melakukan galat, kita dapat memperhatikan peluang bahwa ia mengambil keputusan yang benar. Untuk itu, kita menghitung besaran yang disebut kuasa uji hipotesis.</p>
+<div class="ms-3 theorem definition" data-o006-id="O006-PSU-011-U0225" id="def-name">
+<p data-o006-id="O006-PSU-011-U0226"><span class="theorem-title"><strong>Def. 10.1 (Kuasa Uji)</strong></span> Besarnya <strong>kuasa</strong> suatu uji hipotesis adalah peluang mengambil keputusan yang benar jika hipotesis alternatif benar. Artinya, kuasa uji hipotesis adalah peluang menolak hipotesis nol <span class="math inline" data-o006-math-id="O006-PSU-011-M0090">\(H_0\)</span> ketika hipotesis alternatif <span class="math inline" data-o006-math-id="O006-PSU-011-M0091">\(H_a\)</span> merupakan hipotesis yang benar.</p>
+</div>
+<p data-o006-id="O006-PSU-011-U0227">Mari kita kembali ke masalah insinyur tadi untuk melihat apakah kita dapat memandang gelas sebagai setengah penuh!</p>
+<div class="theorem example" data-o006-id="O006-PSU-011-U0228" id="exm-steelrebarcontd">
+<p data-o006-id="O006-PSU-011-U0229"><span class="theorem-title"><strong>Contoh 10.5</strong></span> Melanjutkan contoh sebelumnya, jika—tanpa diketahui insinyur tersebut—rataan populasi yang sebenarnya adalah <span class="math inline" data-o006-math-id="O006-PSU-011-M0092">\(\mu=173\)</span>, berapakah peluang bahwa insinyur tersebut mengambil keputusan yang benar dengan menolak hipotesis nol untuk mendukung hipotesis alternatif?</p>
+<section class="level4 card card-body bg-light ms-3 mb-3 pt-0" data-o006-id="O006-PSU-011-U0230" id="solution-6">
+<h4 class="anchored" data-anchor-id="solution-6" data-o006-id="O006-PSU-011-U0231">Solusi</h4>
+<p data-o006-id="O006-PSU-011-U0232">Dalam kasus ini, insinyur tersebut mengambil keputusan yang benar jika rataan sampel yang diamatinya berada di daerah penolakan, yaitu jika sekurang-kurangnya 172, ketika rataan populasi yang sebenarnya (dan tidak diketahui) adalah 173. Secara grafis, kuasa uji hipotesis insinyur tersebut tampak seperti berikut:</p>
+<div alt="Normal curves showing the area for beta, a type II error with the z test statistic shown." class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center" data-o006-id="O006-PSU-011-U0233" id="fig-415_engineerpower">
+<figure class="quarto-float quarto-float-fig figure" data-o006-id="O006-PSU-011-U0234">
+<div aria-describedby="fig-415_engineerpower-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca" data-o006-id="O006-PSU-011-U0235">
+<a class="lightbox" data-gallery="quarto-lightbox-gallery-5" data-o006-id="O006-PSU-011-U0236" href="assets/lesson10/assets/415_engineerpower.png" title="Gambar 10.5 — Ketika μ = 173, peluang rataan sampel masuk ke daerah penolakan mulai 172 adalah kuasa 0,6915 = 1 − 0,3085."><img alt="Kurva Normal untuk rataan sampel ketika μ = 173; daerah sekurang-kurangnya 172 adalah kuasa uji sebesar 0,6915." aria-describedby="fig-415_engineerpower-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca" class="w-75 img-fluid quarto-figure quarto-figure-center anchored figure-img" data-o006-asset-id="O006-PSU-011-A0007" data-o006-id="O006-PSU-011-U0237" data-o006-source-native-id="fig-415_engineerpower" id="fig-415_engineerpower-image" src="assets/lesson10/assets/415_engineerpower.png"/></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" data-o006-correction-id="O006-PSU-ADV-0192" data-o006-id="O006-PSU-011-U0238" id="fig-415_engineerpower-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">Gambar 10.5 — Ketika μ = 173, peluang rataan sampel masuk ke daerah penolakan mulai 172 adalah kuasa 0,6915 = 1 − 0,3085.</figcaption>
+</figure>
+</div>
+<p data-o006-id="O006-PSU-011-U0239">Dengan demikian, kuasa uji hipotesis insinyur tersebut adalah 0,6915, seperti diilustrasikan berikut: <span class="math display" data-o006-math-id="O006-PSU-011-M0093">\[\begin{align*}
+\text{Power}=P(\bar{X}\ge 172 \text{ if }\mu=173)=P(Z\ge -0.50)=0.6915
+\end{align*}\]</span> yang tentu saja juga dapat dihitung dengan mengurangkan peluang melakukan galat tipe II dari 1, seperti berikut: <span class="math display" data-o006-math-id="O006-PSU-011-M0094">\[\begin{align*}
+\text{Power}=1-\beta=1-0.3085=0.6915
+\end{align*}\]</span></p>
+<p data-o006-id="O006-PSU-011-U0240">Bagaimanapun, jika rataan populasi yang tidak diketahui adalah 173, uji hipotesis insinyur tersebut setidaknya sedikit lebih baik daripada melempar koin seimbang, yang hanya memberinya peluang 50% untuk memilih hipotesis yang benar. Dalam kasus ini, peluangnya adalah 69,15%. Ia masih dapat memperbaikinya.</p>
+</section>
+</div>
+<p data-o006-id="O006-PSU-011-U0241">Secara umum, untuk setiap uji hipotesis yang kita lakukan, kita ingin:</p>
+<ol data-o006-id="O006-PSU-011-U0242" type="1">
+<li data-o006-id="O006-PSU-011-U0243"><p data-o006-id="O006-PSU-011-U0244"><strong>Meminimumkan peluang melakukan galat tipe I</strong>. Artinya, meminimumkan <span class="math inline" data-o006-math-id="O006-PSU-011-M0095">\(\alpha=P(\text{Type I error})\)</span>. Umumnya, tingkat signifikansi sebesar <span class="math inline" data-o006-math-id="O006-PSU-011-M0096">\(\alpha\le 0.10\)</span> diinginkan.</p></li>
+<li data-o006-id="O006-PSU-011-U0245"><p data-o006-id="O006-PSU-011-U0246"><strong>Memaksimumkan kuasa</strong> (pada nilai parameter di bawah hipotesis alternatif yang bermakna secara ilmiah). Umumnya, kita menginginkan kuasa sebesar 0,80 atau lebih. Sebagai alternatif, kita dapat meminimumkan <span class="math inline" data-o006-math-id="O006-PSU-011-M0097">\(\beta=P(\text{Type II error})\)</span> , dengan menargetkan tingkat galat tipe II sebesar 0,20 atau kurang.</p></li>
+</ol>
+<p data-o006-id="O006-PSU-011-U0247">Omong-omong, pada butir kedua, apa sebenarnya arti “pada nilai parameter di bawah hipotesis alternatif yang bermakna secara ilmiah”? Misalkan seorang peneliti medis ingin menguji hipotesis nol bahwa rataan kadar kolesterol total dalam darah pada suatu populasi pasien adalah 200 mg/dl melawan hipotesis alternatif bahwa rataan kadar kolesterol total dalam darah lebih besar daripada 200 mg/dl. Hipotesis alternatif tersebut memuat tak terhingga banyak kemungkinan nilai rataan. Di bawah hipotesis alternatif, rataan populasi dapat bernilai 201, 202, 210, dan nilai-nilai lainnya. Misalkan peneliti medis itu menolak hipotesis nol karena rataannya 201. Lalu apa istimewanya—apakah itu akan menjadi kesimpulan yang menggemparkan? Mungkin tidak. Sebaliknya, misalkan peneliti medis itu menolak hipotesis nol karena rataannya 215. Dalam kasus tersebut, rataannya cukup jauh berbeda dari rataan yang diasumsikan di bawah hipotesis nol sehingga kita mungkin akan menganggap hasilnya menarik. Singkatnya, dalam contoh ini, kita mungkin semua sepakat menganggap rataan 215 “bermakna secara ilmiah”, sedangkan rataan 201 tidak.</p>
+<p data-o006-id="O006-PSU-011-U0248">Tentu saja, seluruh pembicaraan ini terdengar agak tidak masuk akal karena kita tidak akan pernah benar-benar mengetahui apakah rataan populasi yang sebenarnya dan tidak diketahui adalah 201 atau 215; jika mengetahuinya, kita tidak perlu menjalani proses pengujian hipotesis tentang rataan tersebut. Namun, ada hal yang dapat kita lakukan. Kita dapat merencanakan penelitian ilmiah agar uji hipotesis kita memiliki kuasa yang memadai untuk menolak hipotesis nol guna mendukung nilai-nilai parameter di bawah hipotesis alternatif yang bermakna secara ilmiah.</p>
+</section>
+<section class="level3" data-number="10.3.2" data-o006-id="O006-PSU-011-U0249" id="power-functions">
+<h3 class="anchored" data-anchor-id="power-functions" data-number="10.3.2" data-o006-id="O006-PSU-011-U0250"><span class="header-section-number">10.3.2</span> Fungsi Kuasa</h3>
+<p data-o006-id="O006-PSU-011-U0251">Mari kita lihat contoh lain yang melibatkan penghitungan kuasa uji hipotesis.</p>
+<div class="theorem example" data-o006-id="O006-PSU-011-U0252" id="exm-IQamericans">
+<p data-o006-id="O006-PSU-011-U0253"><span class="theorem-title"><strong>Contoh 10.6</strong></span> Misalkan <span class="math inline" data-o006-math-id="O006-PSU-011-M0098">\(X\)</span> menyatakan IQ seorang warga Amerika dewasa yang dipilih secara acak. Anggaplah, meskipun agak tidak realistis, bahwa <span class="math inline" data-o006-math-id="O006-PSU-011-M0099">\(X\)</span> berdistribusi Normal dengan rataan yang tidak diketahui <span class="math inline" data-o006-math-id="O006-PSU-011-M0100">\(\mu\)</span> dan simpangan baku 16. Ambil sampel acak sebanyak <span class="math inline" data-o006-math-id="O006-PSU-011-M0101">\(n=16\)</span> mahasiswa; namun, mahasiswa bukan dengan sendirinya kerangka sampel acak bagi populasi warga Amerika dewasa. Dengan keterbatasan itu, setelah menetapkan peluang melakukan galat tipe I sebesar <span class="math inline" data-o006-math-id="O006-PSU-011-M0102">\(\alpha=0.05\)</span>, kita dapat menguji hipotesis nol <span class="math inline" data-o006-math-id="O006-PSU-011-M0103">\(H_0:\mu=100\)</span> terhadap hipotesis alternatif bahwa <span class="math inline" data-o006-math-id="O006-PSU-011-M0104">\(H_a: \mu&gt;100\)</span>.</p>
+<p data-o006-id="O006-PSU-011-U0254">Berapakah kuasa uji hipotesis jika rataan populasi yang sebenarnya adalah <span class="math inline" data-o006-math-id="O006-PSU-011-M0105">\(\mu=108\)</span>?</p>
+<section class="level4 card card-body bg-light ms-3 mb-3 pt-0" data-o006-id="O006-PSU-011-U0255" id="solution-7">
+<h4 class="anchored" data-anchor-id="solution-7" data-o006-id="O006-PSU-011-U0256">Solusi</h4>
+<p data-o006-id="O006-PSU-011-U0257">Dengan menetapkan <span class="math inline" data-o006-math-id="O006-PSU-011-M0106">\(\alpha\)</span>, yaitu peluang melakukan galat tipe I, sebesar 0,05, berarti bahwa kita harus menolak hipotesis nol ketika statistik uji <span class="math inline" data-o006-math-id="O006-PSU-011-M0107">\(Z\ge 1.645\)</span>, atau secara ekuivalen, ketika rataan sampel teramati sebesar 106,58 atau lebih:</p>
+<div alt="Normal plot showing a right tail critical area for alpha of 0.05." class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center" data-o006-id="O006-PSU-011-U0258" id="fig-rttailcritical">
+<figure class="quarto-float quarto-float-fig figure" data-o006-id="O006-PSU-011-U0259">
+<div aria-describedby="fig-rttailcritical-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca" data-o006-id="O006-PSU-011-U0260">
+<a class="lightbox" data-gallery="quarto-lightbox-gallery-6" data-o006-id="O006-PSU-011-U0261" href="assets/lesson10/assets/STAT-415-SEC-5-06.svg" title="Gambar 10.6 — Batas Z = 1,645, yang setara dengan rataan sampel 106,58, menentukan daerah penolakan ekor kanan bertaraf 0,05."><img alt="Kurva Normal baku untuk uji ekor kanan dengan batas Z = 1,645 dan luas ekor α = 0,05." aria-describedby="fig-rttailcritical-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca" class="w-50 img-fluid quarto-figure quarto-figure-center anchored figure-img" data-o006-asset-id="O006-PSU-011-A0008" data-o006-id="O006-PSU-011-U0262" data-o006-source-native-id="fig-rttailcritical" id="fig-rttailcritical-image" src="assets/lesson10/assets/STAT-415-SEC-5-06.svg"/></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" data-o006-correction-id="O006-PSU-ADV-0192" data-o006-id="O006-PSU-011-U0263" id="fig-rttailcritical-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">Gambar 10.6 — Batas Z = 1,645, yang setara dengan rataan sampel 106,58, menentukan daerah penolakan ekor kanan bertaraf 0,05.</figcaption>
+</figure>
+</div>
+<p data-o006-id="O006-PSU-011-U0264">karena kita mentransformasikan statistik uji <span class="math inline" data-o006-math-id="O006-PSU-011-M0108">\(Z\)</span> ke rataan sampel melalui: <span class="math display" data-o006-math-id="O006-PSU-011-M0109">\[\begin{aligned}Z&amp;=\frac{\bar X-\mu}{\sigma/\sqrt n},\qquad \bar X=\mu+Z\frac{\sigma}{\sqrt n}\\\bar X&amp;=100+1.645\left(\frac{16}{\sqrt{16}}\right)=106.58\end{aligned}\]</span></p>
+<p data-o006-id="O006-PSU-011-U0265">Sekarang, hal itu berarti bahwa kuasa, yaitu peluang menolak hipotesis nol, ketika <span class="math inline" data-o006-math-id="O006-PSU-011-M0110">\(\mu=108\)</span> adalah 0,6406 sebagaimana dihitung di sini (ingat bahwa <span class="math inline" data-o006-math-id="O006-PSU-011-M0111">\(\Phi(z)\)</span> merupakan notasi baku untuk fungsi distribusi kumulatif peubah acak Normal baku):</p>
+<p data-o006-id="O006-PSU-011-U0266"><span class="math display" data-o006-math-id="O006-PSU-011-M0112">\[\begin{aligned}\operatorname{Power}&amp;=P(\bar X\geq106.58\mid\mu=108)=P\!\left(Z\geq\frac{106.58-108}{16/\sqrt{16}}\right)\\&amp;=P(Z\geq-0.36)=1-P(Z&lt;-0.36)=1-\Phi(-0.36)\end{aligned}\]</span></p>
+<p data-o006-id="O006-PSU-011-U0267">dan diilustrasikan di sini:</p>
+<div alt="Normal plots showing the power of 0.6406." class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center" data-o006-id="O006-PSU-011-U0268" id="fig-415_IQpower">
+<figure class="quarto-float quarto-float-fig figure" data-o006-id="O006-PSU-011-U0269">
+<div aria-describedby="fig-415_IQpower-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca" data-o006-id="O006-PSU-011-U0270">
+<a class="lightbox" data-gallery="quarto-lightbox-gallery-7" data-o006-id="O006-PSU-011-U0271" href="assets/lesson10/assets/415_IQpower.png" title="Gambar 10.7 — Untuk μ = 108, peluang rataan sampel sekurang-kurangnya 106,58 adalah kuasa 0,6406."><img alt="Kurva Normal ketika μ = 108 dengan batas rataan sampel 106,58; luas di kanan batas adalah kuasa 0,6406." aria-describedby="fig-415_IQpower-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca" class="w-75 img-fluid quarto-figure quarto-figure-center anchored figure-img" data-o006-asset-id="O006-PSU-011-A0009" data-o006-id="O006-PSU-011-U0272" data-o006-source-native-id="fig-415_IQpower" id="fig-415_IQpower-image" src="assets/lesson10/assets/415_IQpower.png"/></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" data-o006-correction-id="O006-PSU-ADV-0192" data-o006-id="O006-PSU-011-U0273" id="fig-415_IQpower-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">Gambar 10.7 — Untuk μ = 108, peluang rataan sampel sekurang-kurangnya 106,58 adalah kuasa 0,6406.</figcaption>
+</figure>
+</div>
+<p data-o006-id="O006-PSU-011-U0274">Singkatnya, kita telah menentukan bahwa kita (hanya) memiliki peluang 64,06% untuk menolak hipotesis nol <span class="math inline" data-o006-math-id="O006-PSU-011-M0113">\(H_0:\mu=100\)</span> demi mendukung hipotesis alternatif <span class="math inline" data-o006-math-id="O006-PSU-011-M0114">\(H_a: \mu&gt;100\)</span>, jika rataan populasi sebenarnya yang tidak diketahui pada kenyataannya adalah <span class="math inline" data-o006-math-id="O006-PSU-011-M0115">\(\mu=108\)</span>.</p>
+</section>
+<p data-o006-id="O006-PSU-011-U0275"><strong>Bagian II</strong><br/>
+Melanjutkan contoh ini, berapakah kuasa uji hipotesis jika rataan populasi yang sebenarnya adalah <span class="math inline" data-o006-math-id="O006-PSU-011-M0116">\(\mu=112\)</span>?</p>
+<section class="level4 card card-body bg-light ms-3 mb-3 pt-0" data-o006-id="O006-PSU-011-U0276" id="solution-8">
+<h4 class="anchored" data-anchor-id="solution-8" data-o006-id="O006-PSU-011-U0277">Solusi</h4>
+<p data-o006-id="O006-PSU-011-U0278">Karena kita menetapkan <span class="math inline" data-o006-math-id="O006-PSU-011-M0117">\(\alpha\)</span>, yaitu peluang melakukan galat tipe I, sebesar 0,05, kita kembali menolak hipotesis nol ketika statistik uji <span class="math inline" data-o006-math-id="O006-PSU-011-M0118">\(Z\ge 1.645\)</span>, atau secara ekuivalen, ketika rataan sampel teramati sebesar 106,58 atau lebih. Artinya, peluang menolak hipotesis nol ketika <span class="math inline" data-o006-math-id="O006-PSU-011-M0119">\(\mu=112\)</span>, adalah 0,9131 sebagaimana dihitung di sini:</p>
+<p data-o006-id="O006-PSU-011-U0279"><span class="math display" data-o006-math-id="O006-PSU-011-M0120">\[\begin{align*}
+  \text{Power}&amp;=P(\bar{X}\ge 106.58\text{ when }\mu=112)\\&amp;=P\left(Z\ge \frac{106.58-112}{\frac{16}{\sqrt{16}}}\right) \\ &amp;= P(Z\ge -1.36)\\&amp;=1-P(Z&lt;-1.36)\\&amp;=1-\Phi(-1.36)\\&amp;=1-0.0869=0.9131
+\end{align*}\]</span></p>
+<p data-o006-id="O006-PSU-011-U0280">dan diilustrasikan di sini:</p>
+<div alt="Normal plots showing the power of 0.9131." class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center" data-o006-id="O006-PSU-011-U0281" id="fig-415_IQpowerB">
+<figure class="quarto-float quarto-float-fig figure" data-o006-id="O006-PSU-011-U0282">
+<div aria-describedby="fig-415_IQpowerB-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca" data-o006-id="O006-PSU-011-U0283">
+<a class="lightbox" data-gallery="quarto-lightbox-gallery-8" data-o006-id="O006-PSU-011-U0284" href="assets/lesson10/assets/415_IQpowerB.png" title="Gambar 10.8 — Untuk μ = 112, peluang rataan sampel sekurang-kurangnya 106,58 adalah kuasa 0,9131."><img alt="Kurva Normal ketika μ = 112 dengan batas rataan sampel 106,58; luas di kanan batas adalah kuasa 0,9131." aria-describedby="fig-415_IQpowerB-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca" class="w-75 img-fluid quarto-figure quarto-figure-center anchored figure-img" data-o006-asset-id="O006-PSU-011-A0010" data-o006-id="O006-PSU-011-U0285" data-o006-source-native-id="fig-415_IQpowerB" id="fig-415_IQpowerB-image" src="assets/lesson10/assets/415_IQpowerB.png"/></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" data-o006-correction-id="O006-PSU-ADV-0192" data-o006-id="O006-PSU-011-U0286" id="fig-415_IQpowerB-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">Gambar 10.8 — Untuk μ = 112, peluang rataan sampel sekurang-kurangnya 106,58 adalah kuasa 0,9131.</figcaption>
+</figure>
+</div>
+<p data-o006-id="O006-PSU-011-U0287">Singkatnya, kita telah menentukan bahwa sekarang kita memiliki peluang 91,31% untuk menolak hipotesis nol <span class="math inline" data-o006-math-id="O006-PSU-011-M0121">\(H_0: \mu=100\)</span> demi mendukung hipotesis alternatif <span class="math inline" data-o006-math-id="O006-PSU-011-M0122">\(H_a: \mu&gt;100\)</span> jika rataan populasi sebenarnya yang tidak diketahui pada kenyataannya adalah <span class="math inline" data-o006-math-id="O006-PSU-011-M0123">\(\mu=112\)</span>. Hmm…. seharusnya masuk akal bahwa peluang menolak hipotesis nol lebih besar untuk nilai rataan, seperti 112, yang jauh dari rataan yang diasumsikan di bawah hipotesis nol.</p>
+</section>
+<p data-o006-id="O006-PSU-011-U0288"><strong>Bagian III</strong><br/>
+Sekali lagi, melanjutkan contoh sebelumnya. Berapakah kuasa uji hipotesis jika rataan populasi yang sebenarnya adalah <span class="math inline" data-o006-math-id="O006-PSU-011-M0124">\(\mu=116\)</span>?</p>
+<section class="level4 card card-body bg-light ms-3 mb-3 pt-0" data-o006-id="O006-PSU-011-U0289" id="solution-9">
+<h4 class="anchored" data-anchor-id="solution-9" data-o006-id="O006-PSU-011-U0290">Solusi</h4>
+<p data-o006-id="O006-PSU-011-U0291">Sekali lagi, karena kita menetapkan <span class="math inline" data-o006-math-id="O006-PSU-011-M0125">\(\alpha\)</span>, yaitu peluang melakukan galat tipe I, sebesar 0,05, kita menolak hipotesis nol ketika statistik uji <span class="math inline" data-o006-math-id="O006-PSU-011-M0126">\(Z\ge 1.645\)</span>, atau secara ekuivalen, ketika rataan sampel teramati sebesar 106,58 atau lebih. Artinya, peluang menolak hipotesis nol ketika <span class="math inline" data-o006-math-id="O006-PSU-011-M0127">\(\mu=116\)</span> adalah 0,9909 sebagaimana dihitung di sini:</p>
+<p data-o006-id="O006-PSU-011-U0292"><span class="math display" data-o006-math-id="O006-PSU-011-M0128">\[\begin{align*}
+  \text{Power}&amp;=P(\bar{X}\ge 106.58\text{ when }\mu\\&amp;=116) =P\left(Z\ge \dfrac{106.58-116}{\frac{16}{\sqrt{16}}}\right)\\ &amp;= P(Z\ge -2.36)\\&amp;=1-P(Z&lt;-2.36)\\&amp;= 1-\Phi(-2.36)\\&amp;=1-0.0091=0.9909
+\end{align*}\]</span></p>
+<p data-o006-id="O006-PSU-011-U0293">dan diilustrasikan di sini:</p>
+<div alt="Normal plots showing the power of 0.9909." class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center" data-o006-id="O006-PSU-011-U0294" id="fig-415_IQpowerC">
+<figure class="quarto-float quarto-float-fig figure" data-o006-id="O006-PSU-011-U0295">
+<div aria-describedby="fig-415_IQpowerC-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca" data-o006-id="O006-PSU-011-U0296">
+<a class="lightbox" data-gallery="quarto-lightbox-gallery-9" data-o006-id="O006-PSU-011-U0297" href="assets/lesson10/assets/415_IQpowerC.png" title="Gambar 10.9 — Untuk μ = 116, peluang rataan sampel sekurang-kurangnya 106,58 adalah kuasa 0,9909."><img alt="Kurva Normal ketika μ = 116 dengan batas rataan sampel 106,58; luas di kanan batas adalah kuasa 0,9909." aria-describedby="fig-415_IQpowerC-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca" class="w-75 img-fluid quarto-figure quarto-figure-center anchored figure-img" data-o006-asset-id="O006-PSU-011-A0011" data-o006-id="O006-PSU-011-U0298" data-o006-source-native-id="fig-415_IQpowerC" id="fig-415_IQpowerC-image" src="assets/lesson10/assets/415_IQpowerC.png"/></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" data-o006-correction-id="O006-PSU-ADV-0192" data-o006-id="O006-PSU-011-U0299" id="fig-415_IQpowerC-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">Gambar 10.9 — Untuk μ = 116, peluang rataan sampel sekurang-kurangnya 106,58 adalah kuasa 0,9909.</figcaption>
+</figure>
+</div>
+<p data-o006-id="O006-PSU-011-U0300">Singkatnya, kita telah menentukan bahwa dalam kasus ini kita memiliki peluang 99,09% untuk menolak hipotesis nol <span class="math inline" data-o006-math-id="O006-PSU-011-M0129">\(H_0: \mu=100\)</span> demi mendukung hipotesis alternatif <span class="math inline" data-o006-math-id="O006-PSU-011-M0130">\(H_a: \mu&gt;100\)</span> jika rataan populasi sebenarnya yang tidak diketahui pada kenyataannya adalah <span class="math inline" data-o006-math-id="O006-PSU-011-M0131">\(\mu=116\)</span>. Peluang menolak hipotesis nol adalah yang terbesar di antara semua peluang yang telah kita hitung, karena rataan 116 paling jauh dari rataan yang diasumsikan di bawah hipotesis nol.</p>
+</section>
+</div>
+<p data-o006-id="O006-PSU-011-U0301">Apakah Anda mulai jenuh dengan pembahasan ini? Mari kita rangkum beberapa hal yang telah kita pelajari dari latihan ini:</p>
+<ol data-o006-id="O006-PSU-011-U0302" type="1">
+<li data-o006-id="O006-PSU-011-U0303"><p data-o006-id="O006-PSU-011-U0304">Pertama dan terutama, pengajar saya terkadang bisa menjemukan….. eh, maksud saya, pertama dan terutama, kuasa uji hipotesis bergantung pada nilai parameter yang dikaji. Dalam contoh di atas, kuasa uji hipotesis bergantung pada nilai rataan <span class="math inline" data-o006-math-id="O006-PSU-011-M0132">\(\mu\)</span>.</p></li>
+<li data-o006-id="O006-PSU-011-U0305"><p data-o006-id="O006-PSU-011-U0306">Ketika rataan sebenarnya <span class="math inline" data-o006-math-id="O006-PSU-011-M0133">\(\mu\)</span> bergerak semakin jauh ke kanan dari nilai rataan <span class="math inline" data-o006-math-id="O006-PSU-011-M0134">\(\mu=100\)</span> di bawah hipotesis nol, kuasa uji hipotesis meningkat.</p></li>
+</ol>
+<p data-o006-id="O006-PSU-011-U0307">Pokok pertama itulah yang membawa kita pada sesuatu yang disebut <strong>fungsi kuasa uji hipotesis</strong>. Jika kembali melihat uraian di atas, Anda akan melihat bahwa setiap penghitungan kuasa yang kita lakukan melibatkan sebuah langkah yang tampak seperti ini:</p>
+<p data-o006-id="O006-PSU-011-U0308"><span class="math display" data-o006-math-id="O006-PSU-011-M0135">\[\begin{align*}
+  \text{Power } =1 - \Phi (z)
+\end{align*}\]</span></p>
+<p data-o006-id="O006-PSU-011-U0309">Artinya, jika kita menggunakan notasi baku <span class="math inline" data-o006-math-id="O006-PSU-011-M0136">\(K(\mu)\)</span> untuk menyatakan fungsi kuasa yang bergantung pada <span class="math inline" data-o006-math-id="O006-PSU-011-M0137">\(\mu\)</span>, kita memperoleh: <span class="math display" data-o006-math-id="O006-PSU-011-M0138">\[\begin{align*}
+  K(\mu) = 1- \Phi \left( \frac{106.58 - \mu}{16 / \sqrt{16}} \right)
+\end{align*}\]</span></p>
+<p data-o006-id="O006-PSU-011-U0310">Jadi, sebenarnya pengajar Anda bisa saja jauh lebih menjemukan dengan menghitung kuasa untuk <strong>setiap</strong> nilai yang mungkin dari <span class="math inline" data-o006-math-id="O006-PSU-011-M0139">\(\mu\)</span> di bawah hipotesis alternatif! Sebagai gantinya, kita dapat membuat grafik fungsi kuasa, dengan rataan <span class="math inline" data-o006-math-id="O006-PSU-011-M0140">\(\mu\)</span> pada sumbu horizontal dan kuasa <span class="math inline" data-o006-math-id="O006-PSU-011-M0141">\(K(\mu)\)</span> pada sumbu vertikal. Dengan melakukannya, dalam kasus ini kita memperoleh grafik yang tampak seperti berikut:</p>
+<div alt="The power function of K(mu)" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center" data-o006-id="O006-PSU-011-U0311" id="fig-powerfunofkmu1" width="60%">
+<figure class="quarto-float quarto-float-fig figure" data-o006-id="O006-PSU-011-U0312">
+<div aria-describedby="fig-powerfunofkmu1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca" data-o006-id="O006-PSU-011-U0313">
+<a class="lightbox" data-gallery="quarto-lightbox-gallery-10" data-o006-id="O006-PSU-011-U0314" href="assets/lesson10/assets/STAT-415-SEC-5-10.svg" title="Gambar 10.10 — Fungsi kuasa K(μ) bagi uji H₀: μ = 100 melawan Hₐ: μ &gt; 100 dengan n = 16 dan α = 0,05."><img alt="Grafik fungsi kuasa K(μ) untuk uji ekor kanan; kuasa meningkat ketika μ bergerak ke kanan dari 100." aria-describedby="fig-powerfunofkmu1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca" class="img-fluid quarto-figure quarto-figure-center anchored figure-img" data-o006-asset-id="O006-PSU-011-A0012" data-o006-id="O006-PSU-011-U0315" data-o006-source-native-id="fig-powerfunofkmu1" id="fig-powerfunofkmu1-image" src="assets/lesson10/assets/STAT-415-SEC-5-10.svg"/></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" data-o006-correction-id="O006-PSU-ADV-0192" data-o006-id="O006-PSU-011-U0316" id="fig-powerfunofkmu1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">Gambar 10.10 — Fungsi kuasa K(μ) bagi uji H₀: μ = 100 melawan Hₐ: μ &gt; 100 dengan n = 16 dan α = 0,05.</figcaption>
+</figure>
+</div>
+<p data-o006-id="O006-PSU-011-U0317">Sekarang, apa yang dapat kita pelajari dari grafik ini?</p>
+<p data-o006-id="O006-PSU-011-U0318">Nah:</p>
+<ol data-o006-id="O006-PSU-011-U0319" type="1">
+<li data-o006-id="O006-PSU-011-U0320">Kita dapat melihat bahwa <span class="math inline" data-o006-math-id="O006-PSU-011-M0142">\(\alpha\)</span> (peluang terjadinya galat tipe I), <span class="math inline" data-o006-math-id="O006-PSU-011-M0143">\(\beta\)</span> (peluang terjadinya galat tipe II), dan <span class="math inline" data-o006-math-id="O006-PSU-011-M0144">\(K(\mu)\)</span> semuanya ditampilkan pada grafik fungsi kuasa, seperti diilustrasikan di sini:</li>
+</ol>
+<div alt="Power function of K(mu) with the probabilities of type 1 and 2 errors shown" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center" data-o006-id="O006-PSU-011-U0321" id="fig-powerfunofkmu2" width="60%">
+<figure class="quarto-float quarto-float-fig figure" data-o006-id="O006-PSU-011-U0322">
+<div aria-describedby="fig-powerfunofkmu2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca" data-o006-id="O006-PSU-011-U0323">
+<a class="lightbox" data-gallery="quarto-lightbox-gallery-11" data-o006-id="O006-PSU-011-U0324" href="assets/lesson10/assets/STAT-415-SEC-5-11.svg" title="Gambar 10.11 — Pada fungsi kuasa, K(100) = α; untuk μ alternatif, K(μ) adalah kuasa dan β(μ) = 1 − K(μ)."><img alt="Grafik fungsi kuasa K(μ) yang menandai α pada μ = 100 serta kuasa dan β untuk nilai μ alternatif." aria-describedby="fig-powerfunofkmu2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca" class="img-fluid quarto-figure quarto-figure-center anchored figure-img" data-o006-asset-id="O006-PSU-011-A0013" data-o006-id="O006-PSU-011-U0325" data-o006-source-native-id="fig-powerfunofkmu2" id="fig-powerfunofkmu2-image" src="assets/lesson10/assets/STAT-415-SEC-5-11.svg"/></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" data-o006-correction-id="O006-PSU-ADV-0192" data-o006-id="O006-PSU-011-U0326" id="fig-powerfunofkmu2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">Gambar 10.11 — Pada fungsi kuasa, K(100) = α; untuk μ alternatif, K(μ) adalah kuasa dan β(μ) = 1 − K(μ).</figcaption>
+</figure>
+</div>
+<ol data-o006-id="O006-PSU-011-U0327" start="2" type="1">
+<li data-o006-id="O006-PSU-011-U0328"><p data-o006-id="O006-PSU-011-U0329">Kita dapat melihat bahwa peluang terjadinya galat tipe I adalah <span class="math inline" data-o006-math-id="O006-PSU-011-M0145">\(\alpha=K(100)=0.05\)</span>, yaitu peluang menolak hipotesis nol ketika hipotesis nol benar adalah 0,05.</p></li>
+<li data-o006-id="O006-PSU-011-U0330"><p data-o006-id="O006-PSU-011-U0331">Kita dapat melihat kuasa uji <span class="math inline" data-o006-math-id="O006-PSU-011-M0146">\(K(\mu)\)</span>, serta peluang terjadinya galat tipe II <span class="math inline" data-o006-math-id="O006-PSU-011-M0147">\(\beta(\mu)\)</span>, untuk setiap nilai yang mungkin dari <span class="math inline" data-o006-math-id="O006-PSU-011-M0148">\(\mu\)</span>.</p></li>
+<li data-o006-id="O006-PSU-011-U0332"><p data-o006-id="O006-PSU-011-U0333">Kita dapat melihat bahwa <span class="math inline" data-o006-math-id="O006-PSU-011-M0149">\(\beta(\mu)=1-K(\mu)\)</span> dan sebaliknya, yakni <span class="math inline" data-o006-math-id="O006-PSU-011-M0150">\(K(\mu)=1-\beta(\mu)\)</span>.</p></li>
+<li data-o006-id="O006-PSU-011-U0334"><p data-o006-id="O006-PSU-011-U0335">Dan secara grafis kita dapat melihat bahwa, memang, ketika rataan sebenarnya <span class="math inline" data-o006-math-id="O006-PSU-011-M0151">\(\mu\)</span> bergerak semakin jauh ke kanan dari rataan di bawah hipotesis nol <span class="math inline" data-o006-math-id="O006-PSU-011-M0152">\(\mu=100\)</span>, kuasa uji hipotesis meningkat.</p></li>
+</ol>
+<p data-o006-id="O006-PSU-011-U0336">Sekarang, menurut Anda apa yang akan terjadi pada kuasa uji hipotesis jika kita mengubah besarnya peluang galat tipe I yang bersedia kita tanggung? Apakah kuasa untuk nilai <span class="math inline" data-o006-math-id="O006-PSU-011-M0153">\(\mu\)</span> tertentu akan meningkat, menurun, atau tetap sama? Sebagai contoh, misalkan kita ingin menetapkan <span class="math inline" data-o006-math-id="O006-PSU-011-M0154">\(\alpha=0.01\)</span> alih-alih <span class="math inline" data-o006-math-id="O006-PSU-011-M0155">\(\alpha=0.05\)</span>. Mari kita kembali ke contoh untuk menelaah pertanyaan ini.</p>
+<div class="theorem example" data-o006-id="O006-PSU-011-U0337" id="exm-iqamericans">
+<p data-o006-id="O006-PSU-011-U0338"><span class="theorem-title"><strong>Contoh 10.7</strong></span> Misalkan <span class="math inline" data-o006-math-id="O006-PSU-011-M0156">\(X\)</span> menyatakan IQ seorang warga Amerika dewasa yang dipilih secara acak. Anggaplah, meskipun agak tidak realistis, bahwa <span class="math inline" data-o006-math-id="O006-PSU-011-M0157">\(X\)</span> berdistribusi Normal dengan rataan yang tidak diketahui <span class="math inline" data-o006-math-id="O006-PSU-011-M0158">\(\mu\)</span> dan simpangan baku 16. Ambil sampel acak sebanyak <span class="math inline" data-o006-math-id="O006-PSU-011-M0159">\(n=16\)</span> mahasiswa; namun, mahasiswa bukan dengan sendirinya kerangka sampel acak bagi populasi warga Amerika dewasa. Dengan keterbatasan itu, setelah menetapkan peluang melakukan galat tipe I sebesar <span class="math inline" data-o006-math-id="O006-PSU-011-M0160">\(\alpha=0.01\)</span>, kita dapat menguji hipotesis nol <span class="math inline" data-o006-math-id="O006-PSU-011-M0161">\(H_0:\mu=100\)</span> terhadap hipotesis alternatif bahwa <span class="math inline" data-o006-math-id="O006-PSU-011-M0162">\(H_a: \mu&gt;100\)</span>.</p>
+<p data-o006-id="O006-PSU-011-U0339">Berapakah kuasa uji hipotesis jika rataan populasi yang sebenarnya adalah <span class="math inline" data-o006-math-id="O006-PSU-011-M0163">\(\mu=108\)</span>?</p>
+<section class="level4 card card-body bg-light ms-3 mb-3 pt-0" data-o006-id="O006-PSU-011-U0340" id="solution-10">
+<h4 class="anchored" data-anchor-id="solution-10" data-o006-id="O006-PSU-011-U0341">Solusi</h4>
+<p data-o006-id="O006-PSU-011-U0342">Dengan menetapkan <span class="math inline" data-o006-math-id="O006-PSU-011-M0164">\(\alpha\)</span>, yaitu peluang melakukan galat tipe I, sebesar 0,01, berarti bahwa kita harus menolak hipotesis nol ketika statistik uji <span class="math inline" data-o006-math-id="O006-PSU-011-M0165">\(Z\ge 2.326\)</span>, atau secara ekuivalen, ketika rataan sampel teramati sebesar 109,304 atau lebih:</p>
+<div alt="Right tail area above critical value of 2.326." class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center" data-o006-id="O006-PSU-011-U0343" id="fig-415_IQtypeI">
+<figure class="quarto-float quarto-float-fig figure" data-o006-id="O006-PSU-011-U0344">
+<div aria-describedby="fig-415_IQtypeI-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca" data-o006-id="O006-PSU-011-U0345">
+<a class="lightbox" data-gallery="quarto-lightbox-gallery-12" data-o006-id="O006-PSU-011-U0346" href="assets/lesson10/assets/415_IQtypeI.png" title="Gambar 10.12 — Batas Z = 2,326, atau rataan sampel 109,304, menentukan daerah penolakan ekor kanan bertaraf 0,01."><img alt="Kurva Normal baku untuk uji ekor kanan dengan batas Z = 2,326 dan luas ekor α = 0,01." aria-describedby="fig-415_IQtypeI-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca" class="w-75 img-fluid quarto-figure quarto-figure-center anchored figure-img" data-o006-asset-id="O006-PSU-011-A0014" data-o006-id="O006-PSU-011-U0347" data-o006-source-native-id="fig-415_IQtypeI" id="fig-415_IQtypeI-image" src="assets/lesson10/assets/415_IQtypeI.png"/></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" data-o006-correction-id="O006-PSU-ADV-0192" data-o006-id="O006-PSU-011-U0348" id="fig-415_IQtypeI-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">Gambar 10.12 — Batas Z = 2,326, atau rataan sampel 109,304, menentukan daerah penolakan ekor kanan bertaraf 0,01.</figcaption>
+</figure>
+</div>
+<p data-o006-id="O006-PSU-011-U0349"><span class="math display" data-o006-math-id="O006-PSU-011-M0166">\[\begin{align*}
+  \bar{x} = \mu + z \left( \frac{\sigma}{\sqrt{n}} \right) =100 + 2.326\left( \frac{16}{\sqrt{16}} \right)=109.304
+\end{align*}\]</span></p>
+<p data-o006-id="O006-PSU-011-U0350">Artinya, peluang menolak hipotesis nol ketika <span class="math inline" data-o006-math-id="O006-PSU-011-M0167">\(\mu=108\)</span> adalah 0,3722 sebagaimana dihitung di sini:</p>
+<p data-o006-id="O006-PSU-011-U0351"><span class="math display" data-o006-math-id="O006-PSU-011-M0168">\[\begin{align*}
+  \text{Power}&amp;=P(\bar{X}\ge 109.304 \text{ when }\mu=108)=P\left(Z\ge \frac{109.304-108}{\frac{16}{\sqrt{16}}}\right)\\
+  &amp; = P(Z\ge 0.326)=1-P(Z&lt;0.326)=1-\Phi(0.326)\\
+  &amp; = 1-0.6278=0.3722
+\end{align*}\]</span></p>
+<p data-o006-id="O006-PSU-011-U0352">Jadi, kuasa ketika <span class="math inline" data-o006-math-id="O006-PSU-011-M0169">\(\mu=108\)</span> dan <span class="math inline" data-o006-math-id="O006-PSU-011-M0170">\(\alpha=0.01\)</span> lebih kecil (0,3722) daripada kuasa ketika <span class="math inline" data-o006-math-id="O006-PSU-011-M0171">\(\mu=108\)</span> dan <span class="math inline" data-o006-math-id="O006-PSU-011-M0172">\(\alpha=0.05\)</span> (0,6406)! Mungkin kita dapat melihatnya secara grafis:</p>
+<div alt="Power for alpha = .01 and alpha = .05 shown on overlapping normal curves" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center" data-o006-id="O006-PSU-011-U0353" id="fig-STAT-415-SEC-5-13Version7" width="75%">
+<figure class="quarto-float quarto-float-fig figure" data-o006-id="O006-PSU-011-U0354">
+<div aria-describedby="fig-STAT-415-SEC-5-13Version7-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca" data-o006-id="O006-PSU-011-U0355">
+<a class="lightbox" data-gallery="quarto-lightbox-gallery-13" data-o006-id="O006-PSU-011-U0356" href="assets/lesson10/assets/STAT-415-SEC-5-13 Version 7.png" title="Gambar 10.13 — Pada μ = 108, kuasa adalah 0,3722 untuk α = 0,01 dan 0,6406 untuk α = 0,05."><img alt="Dua kurva Normal yang membandingkan kuasa pada μ = 108 untuk α = 0,01 dan α = 0,05." aria-describedby="fig-STAT-415-SEC-5-13Version7-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca" class="img-fluid quarto-figure quarto-figure-center anchored figure-img" data-o006-asset-id="O006-PSU-011-A0015" data-o006-id="O006-PSU-011-U0357" data-o006-source-native-id="fig-STAT-415-SEC-5-13Version7" id="fig-STAT-415-SEC-5-13Version7-image" src="assets/lesson10/assets/STAT-415-SEC-5-13 Version 7.png"/></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" data-o006-correction-id="O006-PSU-ADV-0192" data-o006-id="O006-PSU-011-U0358" id="fig-STAT-415-SEC-5-13Version7-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">Gambar 10.13 — Pada μ = 108, kuasa adalah 0,3722 untuk α = 0,01 dan 0,6406 untuk α = 0,05.</figcaption>
+</figure>
+</div>
+<p data-o006-id="O006-PSU-011-U0359">Omong-omong, sebagai alternatif kita dapat kembali memandang gelas sebagai setengah kosong. Dalam hal ini, peluang terjadinya galat tipe II ketika <span class="math inline" data-o006-math-id="O006-PSU-011-M0173">\(\mu=108\)</span> dan <span class="math inline" data-o006-math-id="O006-PSU-011-M0174">\(\alpha=0.01\)</span> adalah <span class="math inline" data-o006-math-id="O006-PSU-011-M0175">\(1-0.3722=0.6278\)</span>. Dalam kasus ini, peluang terjadinya galat tipe II lebih besar daripada peluang terjadinya galat tipe II ketika <span class="math inline" data-o006-math-id="O006-PSU-011-M0176">\(\mu=108\)</span> dan <span class="math inline" data-o006-math-id="O006-PSU-011-M0177">\(\alpha=0.05\)</span>.</p>
+<p data-o006-id="O006-PSU-011-U0360">Semua ini dapat dilihat secara grafis dengan memplot kedua fungsi kuasa, yang satu ketika <span class="math inline" data-o006-math-id="O006-PSU-011-M0178">\(\alpha=0.01\)</span> dan yang lain ketika <span class="math inline" data-o006-math-id="O006-PSU-011-M0179">\(\alpha=0.05\)</span>, secara bersamaan. Dengan melakukannya, kita memperoleh grafik yang tampak seperti ini:</p>
+<div class="quarto-figure quarto-figure-center" data-o006-id="O006-PSU-011-U0361">
+<figure class="figure" data-o006-id="O006-PSU-011-U0362">
+<p data-o006-id="O006-PSU-011-U0363"><a class="lightbox" data-gallery="quarto-lightbox-gallery-14" data-o006-id="O006-PSU-011-U0364" href="assets/lesson10/assets/STAT-415-SEC-5-14.svg" title="Perbandingan fungsi kuasa untuk α = 0,01 dan α = 0,05 pada ukuran sampel yang sama."><img alt="Dua fungsi kuasa K(μ) untuk α = 0,01 dan α = 0,05; kurva dengan α lebih besar memiliki kuasa lebih besar pada μ alternatif." aria-describedby="o006-psu-011-a0016-caption" class="img-fluid quarto-figure quarto-figure-center figure-img" data-o006-asset-id="O006-PSU-011-A0016" data-o006-id="O006-PSU-011-U0365" src="assets/lesson10/assets/STAT-415-SEC-5-14.svg"/></a></p>
+<figcaption class="figure-caption" data-o006-correction-id="O006-PSU-ADV-0192" id="o006-psu-011-a0016-caption">Perbandingan fungsi kuasa untuk α = 0,01 dan α = 0,05 pada ukuran sampel yang sama.</figcaption></figure>
+</div>
+</section>
+</div>
+<p data-o006-id="O006-PSU-011-U0366">Contoh terakhir ini mengilustrasikan bahwa dengan syarat ukuran sampel <span class="math inline" data-o006-math-id="O006-PSU-011-M0180">\(n\)</span> tetap, penurunan <span class="math inline" data-o006-math-id="O006-PSU-011-M0181">\(\alpha\)</span> menyebabkan peningkatan <span class="math inline" data-o006-math-id="O006-PSU-011-M0182">\(\beta\)</span>, dan, setidaknya secara teoretis, kalaupun tidak secara praktis, penurunan <span class="math inline" data-o006-math-id="O006-PSU-011-M0183">\(\beta\)</span> menyebabkan peningkatan <span class="math inline" data-o006-math-id="O006-PSU-011-M0184">\(\alpha\)</span>. Dalam pengaturan uji rataan Normal ini, dengan faktor lain tetap, <span class="math inline" data-o006-math-id="O006-PSU-011-M0185">\(\alpha\)</span> dan <span class="math inline" data-o006-math-id="O006-PSU-011-M0186">\(\beta\)</span> dapat dikurangi secara bersamaan dengan meningkatkan ukuran sampel dalam rancangan ini. Di luar rancangan tetap tersebut, pengukuran yang lebih baik, varians yang lebih kecil, rancangan yang lebih kuat, atau uji yang lebih efisien juga dapat memperbaiki kedua galat. <span class="math inline" data-o006-math-id="O006-PSU-011-M0187">\(n\)</span>.</p>
+</section>
+<section class="level3" data-number="10.3.3" data-o006-id="O006-PSU-011-U0367" id="calculating-sample-size">
+<h3 class="anchored" data-anchor-id="calculating-sample-size" data-number="10.3.3" data-o006-id="O006-PSU-011-U0368"><span class="header-section-number">10.3.3</span> Menghitung Ukuran Sampel</h3>
+<p data-o006-id="O006-PSU-011-U0369">Sebelum mempelajari cara menghitung ukuran sampel yang diperlukan agar suatu uji hipotesis memiliki kuasa uji tertentu, ada baiknya kita memahami pengaruh ukuran sampel terhadap kuasa uji. Mari kita selidiki dengan kembali ke contoh IQ kita.</p>
+<div class="theorem example" data-o006-id="O006-PSU-011-U0370" id="exm-iqamericans2">
+<p data-o006-id="O006-PSU-011-U0371"><span class="theorem-title"><strong>Contoh 10.8</strong></span> Misalkan <span class="math inline" data-o006-math-id="O006-PSU-011-M0188">\(X\)</span> menyatakan IQ seorang warga Amerika dewasa yang dipilih secara acak. Asumsikan, sekali lagi dengan sedikit tidak realistis, bahwa <span class="math inline" data-o006-math-id="O006-PSU-011-M0189">\(X\)</span> berdistribusi Normal dengan rataan yang tidak diketahui <span class="math inline" data-o006-math-id="O006-PSU-011-M0190">\(\mu\)</span> dan simpangan baku (yang anehnya diketahui) sebesar 16. Kali ini, alih-alih mengambil sampel acak sebanyak <span class="math inline" data-o006-math-id="O006-PSU-011-M0191">\(n=16\)</span> mahasiswa—dengan catatan bahwa mahasiswa bukan dengan sendirinya kerangka sampel acak bagi populasi warga Amerika dewasa—mari kita tingkatkan ukuran sampel menjadi <span class="math inline" data-o006-math-id="O006-PSU-011-M0192">\(n=64\)</span>. Sementara itu, dengan menetapkan peluang melakukan galat tipe I sebesar <span class="math inline" data-o006-math-id="O006-PSU-011-M0193">\(\alpha=0.05\)</span>, ujilah hipotesis nol <span class="math inline" data-o006-math-id="O006-PSU-011-M0194">\(H_0:\mu=100\)</span> terhadap hipotesis alternatif bahwa <span class="math inline" data-o006-math-id="O006-PSU-011-M0195">\(H_a:\mu&gt;100\)</span>.</p>
+<p data-o006-id="O006-PSU-011-U0372">Berapakah kuasa uji hipotesis ketika <span class="math inline" data-o006-math-id="O006-PSU-011-M0196">\(\mu=108\)</span>, <span class="math inline" data-o006-math-id="O006-PSU-011-M0197">\(\mu=112\)</span>, dan <span class="math inline" data-o006-math-id="O006-PSU-011-M0198">\(\mu=116\)</span>?</p>
+<section class="level4 card card-body bg-light ms-3 mb-3 pt-0" data-o006-id="O006-PSU-011-U0373" id="solution-11">
+<h4 class="anchored" data-anchor-id="solution-11" data-o006-id="O006-PSU-011-U0374">Solusi</h4>
+<p data-o006-id="O006-PSU-011-U0375">Menetapkan <span class="math inline" data-o006-math-id="O006-PSU-011-M0199">\(\alpha\)</span>, yaitu peluang melakukan galat tipe I, sebesar 0,05 berarti bahwa kita harus menolak hipotesis nol ketika statistik uji <span class="math inline" data-o006-math-id="O006-PSU-011-M0200">\(Z\ge 1.645\)</span>, atau secara ekuivalen, ketika rataan sampel teramati sebesar 103,29 atau lebih:</p>
+<div alt="Right tail area above critical value of 1.645." class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center" data-o006-id="O006-PSU-011-U0376" id="fig-415_IQtypeIB">
+<figure class="quarto-float quarto-float-fig figure" data-o006-id="O006-PSU-011-U0377">
+<div aria-describedby="fig-415_IQtypeIB-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca" data-o006-id="O006-PSU-011-U0378">
+<a class="lightbox" data-gallery="quarto-lightbox-gallery-15" data-o006-id="O006-PSU-011-U0379" href="assets/lesson10/assets/415_IQtypeIB.png" title="Gambar 10.14 — Dengan n = 64 dan α = 0,05, daerah penolakan dimulai pada rataan sampel 103,29."><img alt="Kurva Normal baku untuk n = 64 dengan batas Z = 1,645, yang setara dengan rataan sampel 103,29." aria-describedby="fig-415_IQtypeIB-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca" class="w-75 img-fluid quarto-figure quarto-figure-center anchored figure-img" data-o006-asset-id="O006-PSU-011-A0017" data-o006-id="O006-PSU-011-U0380" data-o006-source-native-id="fig-415_IQtypeIB" id="fig-415_IQtypeIB-image" src="assets/lesson10/assets/415_IQtypeIB.png"/></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" data-o006-correction-id="O006-PSU-ADV-0192" data-o006-id="O006-PSU-011-U0381" id="fig-415_IQtypeIB-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">Gambar 10.14 — Dengan n = 64 dan α = 0,05, daerah penolakan dimulai pada rataan sampel 103,29.</figcaption>
+</figure>
+</div>
+<p data-o006-id="O006-PSU-011-U0382">karena:</p>
+<p data-o006-id="O006-PSU-011-U0383"><span class="math display" data-o006-math-id="O006-PSU-011-M0201">\[\begin{align*}
+  \bar{x} &amp;= \mu + z \left(\dfrac{\sigma}{\sqrt{n}} \right)\\ &amp;= 100 +1.645\left(\dfrac{16}{\sqrt{64}} \right) = 103.29
+\end{align*}\]</span></p>
+<p data-o006-id="O006-PSU-011-U0384">Oleh karena itu, fungsi kuasa <span class="math inline" data-o006-math-id="O006-PSU-011-M0202">\(K(\mu)\)</span>, ketika <span class="math inline" data-o006-math-id="O006-PSU-011-M0203">\(\mu&gt;100\)</span> merupakan nilai sebenarnya, adalah:</p>
+<p data-o006-id="O006-PSU-011-U0385"><span class="math display" data-o006-math-id="O006-PSU-011-M0204">\[\begin{align*}
+  K(\mu) &amp;= P(\bar{X} \ge 103.29 | \mu)\\ &amp;= P \left(Z \ge \dfrac{103.29 - \mu}{16 / \sqrt{64}} \right)\\ &amp;= 1 - \Phi \left(\dfrac{103.29 - \mu}{2} \right)
+\end{align*}\]</span></p>
+<p data-o006-id="O006-PSU-011-U0386">Oleh karena itu, peluang menolak hipotesis nol pada tingkat <span class="math inline" data-o006-math-id="O006-PSU-011-M0205">\(\alpha=0.05\)</span> ketika <span class="math inline" data-o006-math-id="O006-PSU-011-M0206">\(\mu=108\)</span> bernilai 0,9907, sebagaimana dihitung di sini:</p>
+<p data-o006-id="O006-PSU-011-U0387"><span class="math display" data-o006-math-id="O006-PSU-011-M0207">\[\begin{align*}
+  K(108) &amp;= 1 - \Phi \left( \dfrac{103.29-108}{2} \right) = 1- \Phi(-2.355) = 0.9907
+\end{align*}\]</span></p>
+<p data-o006-id="O006-PSU-011-U0388">Selanjutnya, peluang menolak hipotesis nol pada tingkat <span class="math inline" data-o006-math-id="O006-PSU-011-M0208">\(\alpha=0.05\)</span> ketika <span class="math inline" data-o006-math-id="O006-PSU-011-M0209">\(\mu=112\)</span> bernilai lebih besar dari 0,9999, sebagaimana dihitung di sini:</p>
+<p data-o006-id="O006-PSU-011-U0389"><span class="math display" data-o006-math-id="O006-PSU-011-M0210">\[\begin{align*}    
+  K(112) &amp;= 1 - \Phi \left( \dfrac{103.29-112}{2} \right)\\ &amp;= 1- \Phi(-4.355)\\ &amp;= 0.9999\ldots
+\end{align*}\]</span></p>
+<p data-o006-id="O006-PSU-011-U0390">Selanjutnya, peluang menolak hipotesis nol pada tingkat <span class="math inline" data-o006-math-id="O006-PSU-011-M0211">\(\alpha=0.05\)</span> ketika <span class="math inline" data-o006-math-id="O006-PSU-011-M0212">\(\mu=116\)</span> bernilai lebih besar dari 0,999999, sebagaimana dihitung di sini:</p>
+<p data-o006-id="O006-PSU-011-U0391"><span class="math display" data-o006-math-id="O006-PSU-011-M0213">\[\begin{align*}
+  K(116) &amp;= 1 - \Phi \left( \dfrac{103.29-116}{2} \right)\\ &amp;= 1- \Phi(-6.355)\\ &amp;= 0.999999...
+\end{align*}\]</span></p>
+</section>
+</div>
+<p data-o006-id="O006-PSU-011-U0392">Singkatnya, dalam berbagai contoh di sepanjang pelajaran ini, kita telah menghitung kuasa uji untuk <span class="math inline" data-o006-math-id="O006-PSU-011-M0214">\(H_0:\mu=100\)</span> terhadap <span class="math inline" data-o006-math-id="O006-PSU-011-M0215">\(H_a:\mu&gt;100\)</span> untuk dua ukuran sampel (<span class="math inline" data-o006-math-id="O006-PSU-011-M0216">\(n=16\)</span> dan <span class="math inline" data-o006-math-id="O006-PSU-011-M0217">\(n=64\)</span>) dan untuk tiga nilai rataan yang mungkin ( <span class="math inline" data-o006-math-id="O006-PSU-011-M0218">\(\mu=108\)</span>, <span class="math inline" data-o006-math-id="O006-PSU-011-M0219">\(\mu=112\)</span>, dan <span class="math inline" data-o006-math-id="O006-PSU-011-M0220">\(\mu=116\)</span>). Berikut ringkasan perhitungan kuasa uji kita:</p>
+<table aria-describedby="o006-psu-011-table-2-caption" class="w-auto mx-auto table-sm small caption-top table" data-o006-id="O006-PSU-011-U0393"><caption data-o006-correction-id="O006-PSU-ADV-0193" id="o006-psu-011-table-2-caption">Kuasa K(μ) untuk n = 16 dan n = 64 pada μ = 108, 112, dan 116.</caption>
+<thead data-o006-id="O006-PSU-011-U0394">
+<tr class="header" data-o006-id="O006-PSU-011-U0395">
+<th data-o006-id="O006-PSU-011-U0396" id="o006-psu-011-table-2-column-1" scope="col">Kuasa Uji</th>
+<th data-o006-id="O006-PSU-011-U0397" id="o006-psu-011-table-2-column-2" scope="col"><span class="math inline" data-o006-math-id="O006-PSU-011-M0221">\(K(108)\)</span></th>
+<th data-o006-id="O006-PSU-011-U0398" id="o006-psu-011-table-2-column-3" scope="col"><span class="math inline" data-o006-math-id="O006-PSU-011-M0222">\(K(112)\)</span></th>
+<th data-o006-id="O006-PSU-011-U0399" id="o006-psu-011-table-2-column-4" scope="col"><span class="math inline" data-o006-math-id="O006-PSU-011-M0223">\(K(116)\)</span></th>
+</tr>
+</thead>
+<tbody data-o006-id="O006-PSU-011-U0400">
+<tr class="odd" data-o006-id="O006-PSU-011-U0401">
+<th data-o006-id="O006-PSU-011-U0402" id="o006-psu-011-table-2-row-1" scope="row"><span class="math inline" data-o006-math-id="O006-PSU-011-M0224">\(n=16\)</span></th>
+<td data-o006-id="O006-PSU-011-U0403" headers="o006-psu-011-table-2-row-1 o006-psu-011-table-2-column-2">0.6406</td>
+<td data-o006-id="O006-PSU-011-U0404" headers="o006-psu-011-table-2-row-1 o006-psu-011-table-2-column-3">0.9131</td>
+<td data-o006-id="O006-PSU-011-U0405" headers="o006-psu-011-table-2-row-1 o006-psu-011-table-2-column-4">0.9909</td>
+</tr>
+<tr class="even" data-o006-id="O006-PSU-011-U0406">
+<th data-o006-id="O006-PSU-011-U0407" id="o006-psu-011-table-2-row-2" scope="row"><span class="math inline" data-o006-math-id="O006-PSU-011-M0225">\(n=64\)</span></th>
+<td data-o006-id="O006-PSU-011-U0408" headers="o006-psu-011-table-2-row-2 o006-psu-011-table-2-column-2">0.9907</td>
+<td data-o006-id="O006-PSU-011-U0409" headers="o006-psu-011-table-2-row-2 o006-psu-011-table-2-column-3">0.9999…</td>
+<td data-o006-id="O006-PSU-011-U0410" headers="o006-psu-011-table-2-row-2 o006-psu-011-table-2-column-4">0.999999…</td>
+</tr>
+</tbody>
+</table>
+<p data-o006-id="O006-PSU-011-U0411">Seperti terlihat, hasil kita menunjukkan bahwa untuk nilai rataan tertentu <span class="math inline" data-o006-math-id="O006-PSU-011-M0226">\(\mu\)</span> di bawah hipotesis alternatif, makin besar ukuran sampel <span class="math inline" data-o006-math-id="O006-PSU-011-M0227">\(n\)</span>, makin besar kuasa uji <span class="math inline" data-o006-math-id="O006-PSU-011-M0228">\(K(u)\)</span>. Barangkali tidak ada cara yang lebih baik untuk melihat hal ini daripada secara grafis dengan memplot kedua fungsi kuasa secara bersamaan, yang satu ketika <span class="math inline" data-o006-math-id="O006-PSU-011-M0229">\(n=16\)</span> dan yang lain ketika <span class="math inline" data-o006-math-id="O006-PSU-011-M0230">\(n=64\)</span>:</p>
+<div alt="Power function of K(mu) with curves for n = 64 and n = 16." class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center" data-o006-id="O006-PSU-011-U0412" id="fig-powerfnkmu3" width="60%">
+<figure class="quarto-float quarto-float-fig figure" data-o006-id="O006-PSU-011-U0413">
+<div aria-describedby="fig-powerfnkmu3-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca" data-o006-id="O006-PSU-011-U0414">
+<a class="lightbox" data-gallery="quarto-lightbox-gallery-16" data-o006-id="O006-PSU-011-U0415" href="assets/lesson10/assets/STAT-415-SEC-5-16.svg" title="Gambar 10.15 — Pada α yang sama, memperbesar ukuran sampel dari 16 menjadi 64 meningkatkan kuasa untuk μ &gt; 100."><img alt="Dua fungsi kuasa K(μ) untuk n = 16 dan n = 64; kurva n = 64 lebih tinggi pada nilai μ alternatif." aria-describedby="fig-powerfnkmu3-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca" class="img-fluid quarto-figure quarto-figure-center anchored figure-img" data-o006-asset-id="O006-PSU-011-A0018" data-o006-id="O006-PSU-011-U0416" data-o006-source-native-id="fig-powerfnkmu3" id="fig-powerfnkmu3-image" src="assets/lesson10/assets/STAT-415-SEC-5-16.svg"/></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" data-o006-correction-id="O006-PSU-ADV-0192" data-o006-id="O006-PSU-011-U0417" id="fig-powerfnkmu3-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">Gambar 10.15 — Pada α yang sama, memperbesar ukuran sampel dari 16 menjadi 64 meningkatkan kuasa untuk μ &gt; 100.</figcaption>
+</figure>
+</div>
+<p data-o006-id="O006-PSU-011-U0418">Seperti ditunjukkan oleh grafik ini, jika kita ingin meningkatkan peluang menolak hipotesis nol ketika hipotesis alternatif benar, kita dapat melakukannya dengan meningkatkan ukuran sampel <span class="math inline" data-o006-math-id="O006-PSU-011-M0231">\(n\)</span>. Manfaat ini mungkin paling besar untuk nilai rataan yang dekat dengan nilai rataan yang diasumsikan di bawah hipotesis nol. Mari kita lihat dua contoh yang menggambarkan perhitungan ukuran sampel yang dapat kita lakukan untuk memastikan uji hipotesis kita memiliki kuasa uji yang memadai.</p>
+<div class="theorem example" data-o006-id="O006-PSU-011-U0419" id="exm-cornyield">
+<p data-o006-id="O006-PSU-011-U0420"><span class="theorem-title"><strong>Contoh 10.9</strong></span> Misalkan <span class="math inline" data-o006-math-id="O006-PSU-011-M0232">\(X\)</span> menyatakan hasil panen jagung yang diukur sebagai banyaknya bushel per ekar. Asumsikan (secara tidak realistis) bahwa <span class="math inline" data-o006-math-id="O006-PSU-011-M0233">\(X\)</span> berdistribusi Normal dengan rataan yang tidak diketahui <span class="math inline" data-o006-math-id="O006-PSU-011-M0234">\(\mu\)</span> dan simpangan baku <span class="math inline" data-o006-math-id="O006-PSU-011-M0235">\(\sigma=6\)</span>. Seorang peneliti pertanian sedang berupaya meningkatkan hasil panen rata-rata yang saat ini sebesar 40 bushel per ekar. Oleh karena itu, ia ingin menguji, dengan <span class="math inline" data-o006-math-id="O006-PSU-011-M0236">\(\alpha=0.05\)</span> sebagai tingkat signifikansi, hipotesis nol <span class="math inline" data-o006-math-id="O006-PSU-011-M0237">\(H_0:\mu=40\)</span> terhadap hipotesis alternatif bahwa <span class="math inline" data-o006-math-id="O006-PSU-011-M0238">\(H_a:\mu&gt;40\)</span>. Tentukan ukuran sampel <span class="math inline" data-o006-math-id="O006-PSU-011-M0239">\(n\)</span> yang diperlukan untuk mencapai kuasa uji 0,90 pada nilai alternatif <span class="math inline" data-o006-math-id="O006-PSU-011-M0240">\(\mu=45\)</span>.</p>
+<section class="level4 card card-body bg-light ms-3 mb-3 pt-0" data-o006-id="O006-PSU-011-U0421" id="solution-12">
+<h4 class="anchored" data-anchor-id="solution-12" data-o006-id="O006-PSU-011-U0422">Solusi</h4>
+<p data-o006-id="O006-PSU-011-U0423">Seperti biasa, kita perlu memulai dengan menentukan nilai ambang <span class="math inline" data-o006-math-id="O006-PSU-011-M0241">\(c\)</span>, sedemikian sehingga jika rataan sampel lebih besar daripada <span class="math inline" data-o006-math-id="O006-PSU-011-M0242">\(c\)</span>, kita akan menolak hipotesis nol:</p>
+<div alt="Normal curves showing the threshold, c, where we'll reject the null." class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center" data-o006-id="O006-PSU-011-U0424" id="fig-STAT-415-SEC-5-17">
+<figure class="quarto-float quarto-float-fig figure" data-o006-id="O006-PSU-011-U0425">
+<div aria-describedby="fig-STAT-415-SEC-5-17-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca" data-o006-id="O006-PSU-011-U0426">
+<a class="lightbox" data-gallery="quarto-lightbox-gallery-17" data-o006-id="O006-PSU-011-U0427" href="assets/lesson10/assets/STAT-415-SEC-5-17.png" title="Gambar 10.16 — Batas c dipilih agar peluang ekor kanan di bawah H₀: μ = 40 sama dengan taraf yang ditentukan."><img alt="Kurva Normal untuk rataan hasil panen di bawah μ = 40 dengan batas penolakan c di ekor kanan." aria-describedby="fig-STAT-415-SEC-5-17-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca" class="w-75 img-fluid quarto-figure quarto-figure-center anchored figure-img" data-o006-asset-id="O006-PSU-011-A0019" data-o006-id="O006-PSU-011-U0428" data-o006-source-native-id="fig-STAT-415-SEC-5-17" id="fig-STAT-415-SEC-5-17-image" src="assets/lesson10/assets/STAT-415-SEC-5-17.png"/></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" data-o006-correction-id="O006-PSU-ADV-0192" data-o006-id="O006-PSU-011-U0429" id="fig-STAT-415-SEC-5-17-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">Gambar 10.16 — Batas c dipilih agar peluang ekor kanan di bawah H₀: μ = 40 sama dengan taraf yang ditentukan.</figcaption>
+</figure>
+</div>
+<p data-o006-id="O006-PSU-011-U0430">Dengan kata lain, agar uji hipotesis kita dilakukan dengan <span class="math inline" data-o006-math-id="O006-PSU-011-M0243">\(\alpha=0.05\)</span> sebagai tingkat signifikansi, pernyataan berikut harus berlaku (dengan menggunakan transformasi <span class="math inline" data-o006-math-id="O006-PSU-011-M0244">\(Z\)</span> yang biasa kita gunakan):</p>
+<p data-o006-id="O006-PSU-011-U0431"><span class="math display" data-o006-math-id="O006-PSU-011-M0245">\[\begin{align}
+c = 40 + 1.645 \left( \dfrac{6}{\sqrt{n}} \right)
+\end{align}\]</span></p>
+<p data-o006-id="O006-PSU-011-U0432">Namun, itu bukan satu-satunya syarat yang harus <span class="math inline" data-o006-math-id="O006-PSU-011-M0246">\(c\)</span> penuhi, karena <span class="math inline" data-o006-math-id="O006-PSU-011-M0247">\(c\)</span> juga perlu ditentukan untuk memastikan bahwa kuasa uji kita sebesar 0,90 atau, secara ekuivalen, bahwa peluang galat tipe II sebesar 0,10. Hal itu akan terjadi jika ada peluang 10% bahwa statistik uji kita kurang dari <span class="math inline" data-o006-math-id="O006-PSU-011-M0248">\(c\)</span> ketika <span class="math inline" data-o006-math-id="O006-PSU-011-M0249">\(\mu=45\)</span>, sebagaimana ditunjukkan dengan warna biru pada gambar berikut:</p>
+<div alt="Critical areas on normal curves for type I and II errors." class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center" data-o006-id="O006-PSU-011-U0433" id="fig-alphabeta1" width="60%">
+<figure class="quarto-float quarto-float-fig figure" data-o006-id="O006-PSU-011-U0434">
+<div aria-describedby="fig-alphabeta1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca" data-o006-id="O006-PSU-011-U0435">
+<a class="lightbox" data-gallery="quarto-lightbox-gallery-18" data-o006-id="O006-PSU-011-U0436" href="assets/lesson10/assets/STAT-415-SEC-5-18.svg" title="Gambar 10.17 — Satu batas c memenuhi sasaran galat tipe I di bawah μ = 40 dan galat tipe II di bawah μ = 45."><img alt="Dua kurva Normal untuk μ = 40 dan μ = 45 dengan batas bersama c; ekor kanan di bawah μ = 40 mewakili α dan daerah kiri di bawah μ = 45 mewakili β." aria-describedby="fig-alphabeta1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca" class="img-fluid quarto-figure quarto-figure-center anchored figure-img" data-o006-asset-id="O006-PSU-011-A0020" data-o006-id="O006-PSU-011-U0437" data-o006-source-native-id="fig-alphabeta1" id="fig-alphabeta1-image" src="assets/lesson10/assets/STAT-415-SEC-5-18.svg"/></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" data-o006-correction-id="O006-PSU-ADV-0192" data-o006-id="O006-PSU-011-U0438" id="fig-alphabeta1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">Gambar 10.17 — Satu batas c memenuhi sasaran galat tipe I di bawah μ = 40 dan galat tipe II di bawah μ = 45.</figcaption>
+</figure>
+</div>
+<p data-o006-id="O006-PSU-011-U0439">Ilustrasi ini menunjukkan bahwa agar uji hipotesis kita memiliki kuasa uji 0,90, pernyataan berikut harus berlaku (dengan menggunakan transformasi <span class="math inline" data-o006-math-id="O006-PSU-011-M0250">\(Z\)</span> yang biasa kita gunakan):</p>
+<p data-o006-id="O006-PSU-011-U0440"><span class="math display" data-o006-math-id="O006-PSU-011-M0251">\[\begin{align}
+  c = 45 - 1.28 \left( \dfrac{6}{\sqrt{n}} \right)
+\end{align}\]</span></p>
+<p data-o006-id="O006-PSU-011-U0441">Aha! Kita memiliki dua persamaan ((1) dan (2)) dan dua variabel yang tidak diketahui! Kita hanya perlu menyamakan kedua persamaan itu dan menyelesaikannya untuk <span class="math inline" data-o006-math-id="O006-PSU-011-M0252">\(n\)</span>. Dengan demikian, kita memperoleh:</p>
+<p data-o006-id="O006-PSU-011-U0442"><span class="math display" data-o006-math-id="O006-PSU-011-M0253">\[\begin{align*}
+  &amp; 40+1.645\left(\frac{6}{\sqrt{n}}\right)=45-1.28\left(\frac{6}{\sqrt{n}}\right)\\
+  &amp; \Rightarrow 5=(1.645+1.28)\left(\frac{6}{\sqrt{n}}\right), \qquad \Rightarrow 5=\frac{17.55}{\sqrt{n}}, \qquad n=(3.51)^2=12.3201\approx 13
+\end{align*}\]</span></p>
+<p data-o006-id="O006-PSU-011-U0443">Setelah mengetahui bahwa kita akan menetapkan <span class="math inline" data-o006-math-id="O006-PSU-011-M0254">\(n=13\)</span>, kita dapat menentukan nilai ambang <span class="math inline" data-o006-math-id="O006-PSU-011-M0255">\(c\)</span>:</p>
+<p data-o006-id="O006-PSU-011-U0444"><span class="math display" data-o006-math-id="O006-PSU-011-M0256">\[\begin{align*}
+  c = 40 + 1.645 \left( \dfrac{6}{\sqrt{13}} \right)=42.737
+\end{align*}\]</span></p>
+<p data-o006-id="O006-PSU-011-U0445">Jadi, singkatnya, jika peneliti pertanian tersebut mengumpulkan data dari <span class="math inline" data-o006-math-id="O006-PSU-011-M0257">\(n=13\)</span> petak jagung, dan menolak hipotesis nolnya <span class="math inline" data-o006-math-id="O006-PSU-011-M0258">\(H_0:\mu=40\)</span> jika rataan hasil panen dari 13 petak tersebut lebih besar daripada 42,737445 bushel per ekar, ia akan memiliki peluang galat tipe I sekitar 4,9985% dan peluang galat tipe II sekitar 8,6974% (kuasa sekitar 91,3026%) jika rataan populasi <span class="math inline" data-o006-math-id="O006-PSU-011-M0259">\(\mu\)</span> benar-benar sebesar 45 bushel per ekar.</p>
+</section>
+<p data-o006-id="O006-PSU-011-U0446"><strong>Bagian II</strong><br/>
+</p>
+<p data-o006-id="O006-PSU-011-U0447">Misalkan <span class="math inline" data-o006-math-id="O006-PSU-011-M0260">\(p\)</span>, yaitu proporsi sebenarnya pemilih yang mendukung kandidat politik tertentu. Seorang pelaksana jajak pendapat ingin menguji, dengan <span class="math inline" data-o006-math-id="O006-PSU-011-M0261">\(\alpha=0.01\)</span> sebagai tingkat signifikansi, hipotesis nol <span class="math inline" data-o006-math-id="O006-PSU-011-M0262">\(H_0:p=0.5\)</span> terhadap hipotesis alternatif bahwa <span class="math inline" data-o006-math-id="O006-PSU-011-M0263">\(H_a:p&gt;0.5\)</span>. Tentukan ukuran sampel <span class="math inline" data-o006-math-id="O006-PSU-011-M0264">\(n\)</span> yang diperlukan untuk mencapai kuasa uji 0,80 pada nilai alternatif <span class="math inline" data-o006-math-id="O006-PSU-011-M0265">\(p=0.55\)</span>.</p>
+<p data-o006-id="O006-PSU-011-U0448"><strong>Solusi</strong></p>
+<p data-o006-id="O006-PSU-011-U0449">Dalam kasus ini, karena kita ingin melakukan uji hipotesis mengenai proporsi populasi <span class="math inline" data-o006-math-id="O006-PSU-011-M0266">\(p\)</span>, kita menggunakan statistik <span class="math inline" data-o006-math-id="O006-PSU-011-M0267">\(Z\)</span>:</p>
+<p data-o006-id="O006-PSU-011-U0450"><span class="math display" data-o006-math-id="O006-PSU-011-M0268">\[\begin{align*}
+  Z = \dfrac{\hat{p}-p_0}{\sqrt{\frac{p_0(1-p_0)}{n}}}
+\end{align*}\]</span></p>
+<p data-o006-id="O006-PSU-011-U0451">Sekali lagi, kita mulai dengan menentukan nilai ambang <span class="math inline" data-o006-math-id="O006-PSU-011-M0269">\(c\)</span>, sedemikian sehingga jika proporsi sampel teramati lebih besar daripada <span class="math inline" data-o006-math-id="O006-PSU-011-M0270">\(c\)</span>, kita akan menolak hipotesis nol:</p>
+<div alt="Normal plots showing alpha for 2.326 critical value." class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center" data-o006-id="O006-PSU-011-U0452" id="fig-alphacriticalp55" width="60%">
+<figure class="quarto-float quarto-float-fig figure" data-o006-id="O006-PSU-011-U0453">
+<div aria-describedby="fig-alphacriticalp55-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca" data-o006-id="O006-PSU-011-U0454">
+<a class="lightbox" data-gallery="quarto-lightbox-gallery-19" data-o006-id="O006-PSU-011-U0455" href="assets/lesson10/assets/STAT-415-SEC-5-19.svg" title="Gambar 10.18 — Dalam rancangan hampiran, batas p-hat = 0,5367 menentukan daerah penolakan ekor kanan bertarget α = 0,01."><img alt="Kurva Normal hampiran di bawah p = 0,50 dengan batas Z = 2,326 atau p-hat = 0,5367 di ekor kanan." aria-describedby="fig-alphacriticalp55-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca" class="img-fluid quarto-figure quarto-figure-center anchored figure-img" data-o006-asset-id="O006-PSU-011-A0021" data-o006-id="O006-PSU-011-U0456" data-o006-source-native-id="fig-alphacriticalp55" id="fig-alphacriticalp55-image" src="assets/lesson10/assets/STAT-415-SEC-5-19.svg"/></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" data-o006-correction-id="O006-PSU-ADV-0192" data-o006-id="O006-PSU-011-U0457" id="fig-alphacriticalp55-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">Gambar 10.18 — Dalam rancangan hampiran, batas p-hat = 0,5367 menentukan daerah penolakan ekor kanan bertarget α = 0,01.</figcaption>
+</figure>
+</div>
+<p data-o006-id="O006-PSU-011-U0458">Dengan kata lain, agar uji hipotesis kita dilakukan dengan <span class="math inline" data-o006-math-id="O006-PSU-011-M0271">\(\alpha=0.01\)</span> sebagai tingkat signifikansi, pernyataan berikut harus berlaku:</p>
+<p data-o006-id="O006-PSU-011-U0459"><span class="math display" data-o006-math-id="O006-PSU-011-M0272">\[\begin{align}
+  c = 0.5 + 2.326 \sqrt{ \dfrac{(0.5)(0.5)}{n}}
+\end{align}\]</span></p>
+<p data-o006-id="O006-PSU-011-U0460">Namun, sekali lagi, c tidak hanya harus memenuhi syarat itu, karena <span class="math inline" data-o006-math-id="O006-PSU-011-M0273">\(c\)</span> juga perlu ditentukan untuk memastikan bahwa kuasa uji kita sebesar 0,80 atau, secara ekuivalen, bahwa peluang galat tipe II sebesar 0,20. Hal itu akan terjadi jika ada peluang 20% bahwa statistik uji kita kurang dari <span class="math inline" data-o006-math-id="O006-PSU-011-M0274">\(c\)</span> ketika <span class="math inline" data-o006-math-id="O006-PSU-011-M0275">\(p=0.55\)</span>, sebagaimana ditunjukkan dengan warna biru pada gambar berikut:</p>
+<div alt="Normal plots showing alpha and beta for 2.326 critical value." class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center" data-o006-id="O006-PSU-011-U0461" id="fig-alphabeta3" width="60%">
+<figure class="quarto-float quarto-float-fig figure" data-o006-id="O006-PSU-011-U0462">
+<div aria-describedby="fig-alphabeta3-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca" data-o006-id="O006-PSU-011-U0463">
+<a class="lightbox" data-gallery="quarto-lightbox-gallery-20" data-o006-id="O006-PSU-011-U0464" href="assets/lesson10/assets/STAT-415-SEC-5-20.svg" title="Gambar 10.19 — Batas p-hat = 0,5367 menghubungkan sasaran hampiran α di bawah p = 0,50 dan β di bawah p = 0,55."><img alt="Dua kurva Normal hampiran untuk p = 0,50 dan p = 0,55 dengan batas p-hat = 0,5367; daerahnya menunjukkan α dan β." aria-describedby="fig-alphabeta3-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca" class="img-fluid quarto-figure quarto-figure-center anchored figure-img" data-o006-asset-id="O006-PSU-011-A0022" data-o006-id="O006-PSU-011-U0465" data-o006-source-native-id="fig-alphabeta3" id="fig-alphabeta3-image" src="assets/lesson10/assets/STAT-415-SEC-5-20.svg"/></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" data-o006-correction-id="O006-PSU-ADV-0192" data-o006-id="O006-PSU-011-U0466" id="fig-alphabeta3-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">Gambar 10.19 — Batas p-hat = 0,5367 menghubungkan sasaran hampiran α di bawah p = 0,50 dan β di bawah p = 0,55.</figcaption>
+</figure>
+</div>
+<p data-o006-id="O006-PSU-011-U0467">Ilustrasi ini menunjukkan bahwa agar uji hipotesis kita memiliki kuasa uji 0,80, pernyataan berikut harus berlaku:</p>
+<p data-o006-id="O006-PSU-011-U0468"><span class="math display" data-o006-math-id="O006-PSU-011-M0276">\[\begin{align}
+  c = 0.55 - 0.842 \sqrt{ \dfrac{(0.55)(0.45)}{n}}
+\end{align}\]</span></p>
+<p data-o006-id="O006-PSU-011-U0469">Sekali lagi, kita memiliki dua persamaan ((3) dan (4)) dan dua variabel yang tidak diketahui! Kita hanya perlu menyamakan kedua persamaan itu dan menyelesaikannya untuk <span class="math inline" data-o006-math-id="O006-PSU-011-M0277">\(n\)</span>. Dengan demikian, kita memperoleh:</p>
+<p data-o006-id="O006-PSU-011-U0470"><span class="math display" data-o006-math-id="O006-PSU-011-M0278">\[\begin{align*}
+  0.5+2.326\sqrt{\dfrac{0.5(0.5)}{n}}&amp;=0.55-0.842\sqrt{\dfrac{0.55(0.45)}{n}} \\ 2.326\dfrac{\sqrt{0.25}}{\sqrt{n}}+0.842\dfrac{\sqrt{0.2475}}{\sqrt{n}}&amp;=0.55-0.5 \\ \dfrac{1}{\sqrt{n}}(1.5818897)&amp;=0.05 \qquad\\ &amp;\Rightarrow n\approx \left(\dfrac{1.5818897}{0.05}\right)^2\\ &amp;= 1000.95 \approx 1001
+\end{align*}\]</span></p>
+<p data-o006-id="O006-PSU-011-U0471">Setelah mengetahui bahwa kita akan menetapkan <span class="math inline" data-o006-math-id="O006-PSU-011-M0279">\(n=1001\)</span>, kita dapat menentukan nilai ambang <span class="math inline" data-o006-math-id="O006-PSU-011-M0280">\(c\)</span>:</p>
+<p data-o006-id="O006-PSU-011-U0472"><span class="math display" data-o006-math-id="O006-PSU-011-M0281">\[\begin{align*}
+  c = 0.5 + 2.326 \sqrt{\dfrac{(0.5)(0.5)}{1001}}= 0.5367
+\end{align*}\]</span></p>
+<p data-o006-id="O006-PSU-011-U0473">Jadi, singkatnya, jika pelaksana jajak pendapat tersebut mengumpulkan data dari <span class="math inline" data-o006-math-id="O006-PSU-011-M0282">\(n=1001\)</span> pemilih, dan menolak hipotesis nolnya <span class="math inline" data-o006-math-id="O006-PSU-011-M0283">\(H_0:p=0.5\)</span> jika proporsi pemilih dalam sampel yang mendukung kandidat politik tersebut lebih besar daripada 0,5367 (yakni sekurang-kurangnya 538 dari 1001 pemilih), rancangan hampiran Normal ini menargetkan peluang galat tipe I 1% dan peluang galat tipe II 20%; secara Binomial eksak, peluangnya masing-masing sekitar 0,9647% dan 20,3437% jika proporsi populasi <span class="math inline" data-o006-math-id="O006-PSU-011-M0284">\(p\)</span> benar-benar sebesar 0,55.</p>
+<p data-o006-id="O006-PSU-011-U0474">Sebagai catatan, kita selalu dapat memeriksa perhitungan hampiran Normal tersebut! Jika survei dan uji hipotesis selanjutnya dilakukan sebagaimana dijelaskan di atas, peluang hampiran melakukan galat tipe I adalah:</p>
+<p data-o006-id="O006-PSU-011-U0475"><span class="math display" data-o006-math-id="O006-PSU-011-M0285">\[\begin{aligned}\hat p&gt;0.5367&amp;\Longleftrightarrow X\geq538,\\\alpha_{\mathrm{Normal}}&amp;\approx0.01,\\\alpha_{\mathrm{exact}}&amp;=P_{p=0.50}(X\geq538)=0.009647335485396\end{aligned}\]</span></p>
+<p data-o006-id="O006-PSU-011-U0476">dan peluang hampiran melakukan galat tipe II adalah:</p>
+<p data-o006-id="O006-PSU-011-U0477"><span class="math display" data-o006-math-id="O006-PSU-011-M0286">\[\begin{aligned}\beta_{\mathrm{Normal}}&amp;\approx0.199,\\\beta_{\mathrm{exact}}&amp;=P_{p=0.55}(X\leq537)=0.203436671383695\end{aligned}\]</span></p>
+<p data-o006-id="O006-PSU-011-U0478">sesuai dengan target hampiran Normal yang diinginkan oleh pelaksana jajak pendapat tersebut, tetapi bukan nilai Binomial eksak.</p>
+<p data-o006-id="O006-PSU-011-U0479">Kita telah mengilustrasikan beberapa perhitungan ukuran sampel. Sekarang, mari kita rangkum informasi yang digunakan dalam perhitungan ukuran sampel. Untuk menentukan ukuran sampel bagi suatu uji hipotesis, Anda perlu menetapkan:</p>
+<ol data-o006-id="O006-PSU-011-U0480" type="1">
+<li data-o006-id="O006-PSU-011-U0481"><p data-o006-id="O006-PSU-011-U0482">Tingkat signifikansi <span class="math inline" data-o006-math-id="O006-PSU-011-M0287">\(\alpha\)</span> yang diinginkan, yaitu kesediaan Anda untuk melakukan galat tipe I.</p></li>
+<li data-o006-id="O006-PSU-011-U0483"><p data-o006-id="O006-PSU-011-U0484">Kuasa uji yang diinginkan atau, secara ekuivalen, tingkat <span class="math inline" data-o006-math-id="O006-PSU-011-M0288">\(\beta\)</span> yang diinginkan, yaitu kesediaan Anda untuk melakukan galat tipe II.</p></li>
+<li data-o006-id="O006-PSU-011-U0485"><p data-o006-id="O006-PSU-011-U0486">Perbedaan yang bermakna dari nilai parameter yang ditentukan dalam hipotesis nol.</p></li>
+<li data-o006-id="O006-PSU-011-U0487"><p data-o006-id="O006-PSU-011-U0488">Simpangan baku statistik sampel atau, setidaknya, suatu nilai dugaan bagi simpangan baku (“galat baku”) statistik sampel.</p></li>
+</ol>
+</div>
+</section>
+</section>
+<section class="level2" data-number="10.4" data-o006-id="O006-PSU-011-U0489" id="approximate-wald-test">
+<h2 class="anchored" data-anchor-id="approximate-wald-test" data-number="10.4" data-o006-id="O006-PSU-011-U0490"><span class="header-section-number">10.4</span> Uji Wald Hampiran</h2>
+<p data-o006-id="O006-PSU-011-U0491">Dalam uji hipotesis yang telah kita kembangkan sejauh ini, kita perlu menentukan statistik uji dan mengetahui distribusi statistik uji tersebut di bawah hipotesis nol. Namun, bagaimana kita memilih statistik uji? Dapatkah kita selalu menentukan distribusinya? Apakah statistik uji itu didasarkan pada suatu statistik (atau penduga) yang memiliki sifat-sifat yang diinginkan?</p>
+<p data-o006-id="O006-PSU-011-U0492">Berdasarkan apa yang telah kita pelajari sejauh ini dalam mata kuliah ini, kita mengetahui bahwa MLE memiliki sifat-sifat yang diinginkan, khususnya di bawah syarat tertentu. Dalam pelajaran ini, kita memperkenalkan uji Wald. Uji ini secara umum dapat diterapkan dengan menggunakan MLE dan bertumpu pada normalitas asimtotik MLE.</p>
+<section class="level3" data-number="10.4.1" data-o006-id="O006-PSU-011-U0493" id="the-step-up">
+<h3 class="anchored" data-anchor-id="the-step-up" data-number="10.4.1" data-o006-id="O006-PSU-011-U0494"><span class="header-section-number">10.4.1</span> Langkah Berikutnya</h3>
+<p data-o006-id="O006-PSU-011-U0495">Seperti telah kita catat sebelumnya, jika setiap titik data <span class="math inline" data-o006-math-id="O006-PSU-011-M0289">\(x_i\)</span> dipandang sebagai peubah acak, dengan <span class="math display" data-o006-math-id="O006-PSU-011-M0290">\[\begin{align*}
+x_i \sim f_X(x|\theta)
+\end{align*}\]</span> maka setiap fungsi dari titik-titik data tersebut merupakan peubah acak. Secara khusus, MLE <span class="math inline" data-o006-math-id="O006-PSU-011-M0291">\(\hat{\theta}=\text{argmax}(L(\theta))\)</span> merupakan fungsi dari data sehingga juga merupakan peubah acak. Dalam beberapa kasus sederhana, kita dapat menentukan distribusi <span class="math inline" data-o006-math-id="O006-PSU-011-M0292">\(\hat{\theta}\)</span> secara langsung, tetapi dalam banyak kasus kita tidak dapat melakukannya. Untungnya, di bawah syarat keteraturan yang sesuai terdapat hasil normalitas asimtotik untuk MLE pada model dengan distribusi <span class="math inline" data-o006-math-id="O006-PSU-011-M0293">\(f_X\)</span> yang menghasilkan data tersebut; hasil ini memerlukan keteridentifikasian, parameter sebenarnya di bagian dalam ruang parameter, konsistensi, informasi nonsingular, serta syarat diferensiasi dan pertukaran yang sesuai, dan dapat gagal pada kasus tak teratur atau batas.</p>
+<p data-o006-id="O006-PSU-011-U0496">Untuk model berparameter tunggal, hasilnya adalah sebagai berikut:</p>
+<p data-o006-id="O006-PSU-011-U0497">Jika <span class="math inline" data-o006-math-id="O006-PSU-011-M0294">\(L(\theta|x_1,x_2,\ldots,x_n)\)</span> adalah fungsi kemungkinan dan <span class="math inline" data-o006-math-id="O006-PSU-011-M0295">\(\hat{\theta}=\text{argmax}(L(\theta))\)</span> adalah MLE, maka, ketika <span class="math inline" data-o006-math-id="O006-PSU-011-M0296">\(n\rightarrow \infty\)</span>, <span class="math display" data-o006-math-id="O006-PSU-011-M0297">\[\sqrt n(\hat\theta_{ML}-\theta_0)\xrightarrow{d}N\!\left(0,I_1(\theta_0)^{-1}\right)\]</span> dengan <span class="math inline" data-o006-math-id="O006-PSU-011-M0298">\(I(\theta)\)</span> adalah “informasi Fisher”, yang didefinisikan sebagai <span class="math display" data-o006-math-id="O006-PSU-011-M0299">\[I(\theta) = -E_x\left[\frac{\partial^2}{\partial \theta^2}\ell(\theta)\right]\]</span> dengan <span class="math inline" data-o006-math-id="O006-PSU-011-M0300">\(\ell(\theta)=log(L(\theta))\)</span> dan nilai harapan diambil atas semua <span class="math inline" data-o006-math-id="O006-PSU-011-M0301">\(x_1,x_2,\ldots,x_n\)</span>.</p>
+<p data-o006-id="O006-PSU-011-U0498">Dalam kasus multivariat, ketika ada dua parameter atau lebih yang akan diduga, <span class="math inline" data-o006-math-id="O006-PSU-011-M0302">\(\boldsymbol\theta=(\theta_1,\theta_2,\ldots,\theta_p)\)</span> adalah vektor dari <span class="math inline" data-o006-math-id="O006-PSU-011-M0303">\(p\)</span> parameter yang akan diduga, dan distribusi asimtotiknya adalah sebagai berikut. Ketika <span class="math inline" data-o006-math-id="O006-PSU-011-M0304">\(n\rightarrow \infty\)</span>,</p>
+<p data-o006-id="O006-PSU-011-U0499"><span class="math display" data-o006-math-id="O006-PSU-011-M0305">\[\sqrt n(\hat{\boldsymbol\theta}_{ML}-\boldsymbol\theta_0)\xrightarrow{d}N_p\!\left(\mathbf0,\mathbf I_1(\boldsymbol\theta_0)^{-1}\right)\]</span></p>
+<p data-o006-id="O006-PSU-011-U0500">dengan <span class="math inline" data-o006-math-id="O006-PSU-011-M0306">\(\mathbf{I}(\boldsymbol\theta)\)</span> adalah “matriks informasi Fisher”, yang didefinisikan sebagai</p>
+<p data-o006-id="O006-PSU-011-U0501"><span class="math display" data-o006-math-id="O006-PSU-011-M0307">\[\mathbf{I}(\boldsymbol\theta) = \left[\begin{array}{cccc}
+-E_x\left[\frac{\partial^2}{\partial \theta_1^2}\ell(\theta)\right] &amp; -E_x\left[\frac{\partial^2}{\partial \theta_1\partial\theta_2}\ell(\theta)\right] &amp; \cdots &amp; -E_x\left[\frac{\partial^2}{\partial \theta_1\partial\theta_p}\ell(\theta)\right]\\
+-E_x\left[\frac{\partial^2}{\partial \theta_2\partial\theta_1}\ell(\theta)\right] &amp; -E_x\left[\frac{\partial^2}{\partial\theta_2^2}\ell(\theta)\right] &amp; \cdots &amp; -E_x\left[\frac{\partial^2}{\partial \theta_2\partial\theta_p}\ell(\theta)\right] \\
+\vdots &amp; \vdots &amp;  &amp; \vdots \\
+-E_x\left[\frac{\partial^2}{\partial \theta_p\partial\theta_1}\ell(\theta)\right] &amp; -E_x\left[\frac{\partial^2}{\partial \theta_p\partial\theta_2}\ell(\theta)\right] &amp; \cdots &amp; -E_x\left[\frac{\partial^2}{\partial \theta_p^2}\ell(\theta)\right] \end{array}\right]
+\]</span> di mana, sekali lagi, <span class="math inline" data-o006-math-id="O006-PSU-011-M0308">\(\ell(\theta)=log(L(\theta))\)</span> dan nilai harapan diambil atas semua <span class="math inline" data-o006-math-id="O006-PSU-011-M0309">\(x_1,x_2,\ldots,x_n\)</span>. Hasil ini menjelaskan distribusi bersama hampiran dari MLE semua parameter. Dalam banyak situasi (termasuk sebagian besar uji hipotesis), hasil yang lebih berguna adalah distribusi marginal yang dihasilkan bagi setiap MLE. Jika komponen <span class="math inline" data-o006-math-id="O006-PSU-011-M0310">\(k\)</span>-nya adalah <span class="math inline" data-o006-math-id="O006-PSU-011-M0311">\(\theta_k\)</span>, dan MLE untuk parameter ini adalah <span class="math inline" data-o006-math-id="O006-PSU-011-M0312">\(\hat{\theta}_k\)</span>, maka langsung dari distribusi bersama di atas diperoleh bahwa distribusi marginal <span class="math inline" data-o006-math-id="O006-PSU-011-M0313">\(\hat{\theta}_k\)</span> secara asimtotik mendekati distribusi Gaussian, dengan <span class="math display" data-o006-math-id="O006-PSU-011-M0314">\[\hat\theta_k\approx N\!\left(\theta_{0,k},[\mathbf I_n(\hat{\boldsymbol\theta})^{-1}]_{kk}\right)\]</span> Artinya, MLE <span class="math inline" data-o006-math-id="O006-PSU-011-M0315">\(\hat{\theta}_k\)</span> secara hampiran berdistribusi Normal univariat, dengan rataan berupa parameter sebenarnya <span class="math inline" data-o006-math-id="O006-PSU-011-M0316">\(\theta_k\)</span> dan varians yang sama dengan entri diagonal nomor <span class="math inline" data-o006-math-id="O006-PSU-011-M0317">\(k\)</span>—yang terdapat pada invers <span class="math inline" data-o006-math-id="O006-PSU-011-M0318">\(\mathbf{I}^{-1}(\hat{\boldsymbol\theta})\)</span> dari matriks informasi Fisher.</p>
+<p data-o006-id="O006-PSU-011-U0502">Kita dapat menggunakan distribusi Gaussian hampiran asimtotik dari MLE yang dijelaskan sebelumnya untuk membentuk statistik uji yang berguna dalam menguji <span class="math inline" data-o006-math-id="O006-PSU-011-M0319">\(H_0:\theta_k=c\)</span> terhadap <span class="math inline" data-o006-math-id="O006-PSU-011-M0320">\(H_A:\theta_k \neq c\)</span>.</p>
+<p data-o006-id="O006-PSU-011-U0503">Karena kita mengetahui bahwa</p>
+<p data-o006-id="O006-PSU-011-U0504"><span class="math display" data-o006-math-id="O006-PSU-011-M0321">\[\hat\theta_k\approx N\!\left(\theta_{0,k},[\mathbf I_n(\hat{\boldsymbol\theta})^{-1}]_{kk}\right)\]</span> jika hipotesis nol menyatakan bahwa <span class="math inline" data-o006-math-id="O006-PSU-011-M0322">\(\theta_k=c\)</span>, maka di bawah <span class="math inline" data-o006-math-id="O006-PSU-011-M0323">\(H_0\)</span>, distribusi MLE adalah <span class="math display" data-o006-math-id="O006-PSU-011-M0324">\[\hat\theta_k\approx N\!\left(c,[\mathbf I_n(\hat{\boldsymbol\theta})^{-1}]_{kk}\right)\quad\text{under }H_0\]</span></p>
+<p data-o006-id="O006-PSU-011-U0505">Mengikuti notasi di atas, kita memiliki statistik uji (yang kita tuliskan sebagai <span class="math inline" data-o006-math-id="O006-PSU-011-M0325">\(\hat{\theta}_k\)</span> di sini, sedangkan dalam uraian umum di atas kita menyebutnya <span class="math inline" data-o006-math-id="O006-PSU-011-M0326">\(T^*\)</span>), dan kita mengetahui distribusi (hampiran) statistik ini (<span class="math inline" data-o006-math-id="O006-PSU-011-M0327">\(T\sim N(c,\mathbf{I}^{-1}(\hat{\boldsymbol\theta})_{[k,k]})\)</span> di bawah hipotesis nol). Namun, nilai-p yang benar harus didasarkan pada jarak T dan nilai MLE teramati dari c; rumus sumber berikut tidak terpusat pada c dan tidak benar jika c ≠ 0.</p>
+<p data-o006-id="O006-PSU-011-U0506"><span class="math display" data-o006-math-id="O006-PSU-011-M0328">\[p=P_0\!\left(|T-c|\geq|\hat\theta_k-c|\right),\qquad T\sim N(c,\widehat{se}_k^{\,2})\]</span></p>
+<p data-o006-id="O006-PSU-011-U0507">Kita dapat menyederhanakannya sedikit. Jika terlebih dahulu kita mendefinisikan galat baku bernomor <span class="math inline" data-o006-math-id="O006-PSU-011-M0329">\(k\)</span>, yaitu <span class="math inline" data-o006-math-id="O006-PSU-011-M0330">\(se_k\)</span> sebagai</p>
+<p data-o006-id="O006-PSU-011-U0508"><span class="math display" data-o006-math-id="O006-PSU-011-M0331">\[se_k=\sqrt{\mathbf{I}^{-1}(\hat{\boldsymbol\theta})_{[k,k]}}\]</span> kemudian, dengan mengurangkan rataan dan membaginya dengan <span class="math inline" data-o006-math-id="O006-PSU-011-M0332">\(se_k\)</span> kita memperoleh</p>
+<p data-o006-id="O006-PSU-011-U0509"><span class="math display" data-o006-math-id="O006-PSU-011-M0333">\[ Z^*=\frac{\hat{\theta}_k-c}{se_k}\sim N(0,1)\]</span> dengan <span class="math inline" data-o006-math-id="O006-PSU-011-M0334">\(Z^*\approx N(0,1)\)</span>. Nilai-p (peluang mengamati nilai yang sekurang-kurangnya sama ekstrem jika hipotesis nol benar) kemudian dapat ditulis sebagai <span class="math display" data-o006-math-id="O006-PSU-011-M0335">\[p=P(|Z|\geq|Z^*|)=P(Z\leq-|Z^*|)+P(Z\geq|Z^*|)\]</span></p>
+<p data-o006-id="O006-PSU-011-U0510">yang, dengan perlakuan batas kesamaan yang konsisten dan karena simetri distribusi Normal baku, sama dengan</p>
+<p data-o006-id="O006-PSU-011-U0511"><span class="math display" data-o006-math-id="O006-PSU-011-M0336">\[p=2*P(Z\leq -|Z^*|)=2\Phi(-|Z^*|)\]</span> Uji semacam ini, yang didasarkan pada distribusi Gaussian hampiran asimtotik dari MLE, disebut <strong>uji Wald</strong>.</p>
+</section>
+<section class="level3" data-number="10.4.2" data-o006-id="O006-PSU-011-U0512" id="a-recipe-for-wald-tests">
+<h3 class="anchored" data-anchor-id="a-recipe-for-wald-tests" data-number="10.4.2" data-o006-id="O006-PSU-011-U0513"><span class="header-section-number">10.4.2</span> Langkah-langkah Uji Wald</h3>
+<p data-o006-id="O006-PSU-011-U0514">Untuk merangkum hasil di atas, jika <span class="math inline" data-o006-math-id="O006-PSU-011-M0337">\(x_i \sim f_X(x|\boldsymbol\theta)\)</span> merupakan peubah acak yang saling bebas, dan kita ingin menguji hipotesis nol bahwa <span class="math inline" data-o006-math-id="O006-PSU-011-M0338">\(H_0:\theta_k=c\)</span> terhadap hipotesis alternatif bahwa <span class="math inline" data-o006-math-id="O006-PSU-011-M0339">\(H_A:\theta_k \neq c\)</span>, maka uji Wald untuk hipotesis ini dilakukan dengan langkah-langkah berikut:</p>
+<ol data-o006-id="O006-PSU-011-U0515" type="1">
+<li data-o006-id="O006-PSU-011-U0516">Pertama, kita menentukan MLE semua parameter <span class="math inline" data-o006-math-id="O006-PSU-011-M0340">\(\hat{\boldsymbol\theta}\)</span> dalam model dan informasi Fisher yang bersesuaian <span class="math inline" data-o006-math-id="O006-PSU-011-M0341">\(\mathbf{I}(\hat{\boldsymbol\theta})\)</span>.</li>
+<li data-o006-id="O006-PSU-011-U0517">Kemudian kita menentukan galat baku bernomor <span class="math inline" data-o006-math-id="O006-PSU-011-M0342">\(k\)</span>, yaitu <span class="math inline" data-o006-math-id="O006-PSU-011-M0343">\(se_k=\sqrt{\mathbf{I}^{-1}(\hat{\boldsymbol\theta})_{[k,k]}}\)</span> dan membentuk statistik uji <span class="math display" data-o006-math-id="O006-PSU-011-M0344">\[Z^*=\frac{\hat{\theta}_k-c}{se_k}\]</span></li>
+<li data-o006-id="O006-PSU-011-U0518">Nilai-p Wald untuk uji ini adalah <span class="math display" data-o006-math-id="O006-PSU-011-M0345">\[p=2*P(Z\leq -|Z^*|)=2\Phi(-|Z^*|)\]</span></li>
+<li data-o006-id="O006-PSU-011-U0519">Jika nilai-p yang dihitung di atas adalah <span class="math inline" data-o006-math-id="O006-PSU-011-M0346">\(p\leq\alpha\)</span> maka kita menolak <span class="math inline" data-o006-math-id="O006-PSU-011-M0347">\(H_0\)</span> dan menyatakan bahwa hasil uji konsisten dengan <span class="math inline" data-o006-math-id="O006-PSU-011-M0348">\(H_A\)</span>. Jika nilai-p sama dengan α, tindakan pada batas harus ditetapkan secara eksplisit. Jika nilai-p yang dihitung di atas adalah <span class="math inline" data-o006-math-id="O006-PSU-011-M0349">\(p&gt;\alpha\)</span> maka kita gagal menolak <span class="math inline" data-o006-math-id="O006-PSU-011-M0350">\(H_0\)</span> dan menyimpulkan bahwa bukti yang tersedia tidak cukup untuk menolak <span class="math inline" data-o006-math-id="O006-PSU-011-M0351">\(H_0\)</span>.</li>
+</ol>
+</section>
+<section class="level3" data-number="10.4.3" data-o006-id="O006-PSU-011-U0520" id="examples-of-hypothesis-testing">
+<h3 class="anchored" data-anchor-id="examples-of-hypothesis-testing" data-number="10.4.3" data-o006-id="O006-PSU-011-U0521"><span class="header-section-number">10.4.3</span> Contoh Pengujian Hipotesis</h3>
+<p data-o006-id="O006-PSU-011-U0522">Pada bagian ini, kita menyajikan contoh pengujian hipotesis dengan berfokus pada uji Wald untuk MLE.</p>
+<div class="theorem example" data-o006-id="O006-PSU-011-U0523" id="exm-binomialex">
+<p data-o006-id="O006-PSU-011-U0524"><span class="theorem-title"><strong>Contoh 10.10 (Contoh Pengujian Hipotesis Bernoulli/Binomial)</strong></span> Anggaplah sebuah kasino memiliki permainan peluang dengan peluang menang yang diumumkan sebesar 0.25. Anggaplah seseorang memainkan permainan peluang itu 20 kali dan menang tepat sekali. Berdasarkan pengalaman tersebut, apakah ada cukup bukti untuk menyimpulkan bahwa permainan peluang itu sebenarnya tidak memiliki tingkat kemenangan 25%?</p>
+<p data-o006-id="O006-PSU-011-U0525">Untuk merumuskan masalah ini sebagai uji hipotesis, terlebih dahulu kita memerlukan model statistika parametrik untuk data teramati. Kita mengasumsikan bahwa masing-masing dari 20 permainan yang dimainkan saling bebas dan masing-masing memiliki peluang <span class="math inline" data-o006-math-id="O006-PSU-011-M0352">\(p\)</span> untuk menghasilkan “kemenangan”. Jadi <span class="math display" data-o006-math-id="O006-PSU-011-M0353">\[ x_i \sim Bern(p),\ \ i=1,2,\ldots,20\]</span> Data yang benar-benar teramati mencakup tepat satu kemenangan (tanpa mengurangi keumuman, misalkan <span class="math inline" data-o006-math-id="O006-PSU-011-M0354">\(x_1=1\)</span>) dan 19 kekalahan (misalkan <span class="math inline" data-o006-math-id="O006-PSU-011-M0355">\(x_2=0,\ x_3=0,\ \ldots,x_20=0\)</span>).</p>
+<p data-o006-id="O006-PSU-011-U0526">Tujuan kita adalah menentukan apakah ada cukup bukti untuk menyimpulkan bahwa tingkat kemenangan BUKAN 25%. Karena itu, kita menetapkan hipotesis nol bahwa <span class="math display" data-o006-math-id="O006-PSU-011-M0356">\[H_0:p=0.25\]</span> dengan hipotesis alternatif yang bersesuaian bahwa <span class="math inline" data-o006-math-id="O006-PSU-011-M0357">\(H_A:p\neq 0.25\)</span>. Kita akan mempertimbangkan uji Wald untuk hipotesis ini. Sebelum menyusun uji tersebut, kita menetapkan tingkat signifikansi uji sebesar <span class="math inline" data-o006-math-id="O006-PSU-011-M0358">\(\alpha=0.05\)</span>, sehingga kita bersedia menolak hipotesis nol jika peluang (di bawah <span class="math inline" data-o006-math-id="O006-PSU-011-M0359">\(H_0\)</span>) untuk mengamati statistik uji yang akan kita bentuk adalah 5% atau kurang.</p>
+</div>
+<section class="level4" data-o006-id="O006-PSU-011-U0527" id="an-analytic-wald-hypothesis-test-for-bernoulli-data">
+<h4 class="anchored" data-anchor-id="an-analytic-wald-hypothesis-test-for-bernoulli-data" data-o006-id="O006-PSU-011-U0528">Uji Hipotesis Wald Analitik untuk Data Bernoulli</h4>
+<p data-o006-id="O006-PSU-011-U0529">Pertama-tama, kita mengilustrasikan cara menyusun uji hipotesis Wald secara analitik dengan mengikuti prosedur yang diuraikan di atas.</p>
+<ol data-o006-id="O006-PSU-011-U0530" type="1">
+<li data-o006-id="O006-PSU-011-U0531"><p data-o006-id="O006-PSU-011-U0532">Pertama, kita menentukan MLE dan informasi Fisher untuk parameter <span class="math inline" data-o006-math-id="O006-PSU-011-M0360">\(p\)</span>.</p>
+<p data-o006-id="O006-PSU-011-U0533">Dari contoh-contoh sebelumnya di kelas, kita mengetahui bahwa MLE-nya adalah <span class="math display" data-o006-math-id="O006-PSU-011-M0361">\[\hat{p}=\frac{\sum_{i=1}^{20} x_i}{20}=\frac{1}{20}=0.05\]</span> dan bahwa informasi Fisher adalah <span class="math display" data-o006-math-id="O006-PSU-011-M0362">\[I(\hat{p})=-E_x(\ell''(\hat{p})))=\frac{20}{\hat{p}(1-\hat{p})}=\frac{20}{.05(.95)}=421.0526\]</span></p></li>
+<li data-o006-id="O006-PSU-011-U0534"><p data-o006-id="O006-PSU-011-U0535">Kemudian kita menentukan galat baku <span class="math display" data-o006-math-id="O006-PSU-011-M0363">\[ se=\sqrt{1/I(\hat{p})}=\sqrt{1/421.0526}=0.0487\]</span> dan membentuk statistik uji Wald <span class="math display" data-o006-math-id="O006-PSU-011-M0364">\[ Z^*=\frac{\hat{p}-0.25}{se}=\frac{0.05-0.25}{0.0487}=-4.104\]</span></p></li>
+<li data-o006-id="O006-PSU-011-U0536"><p data-o006-id="O006-PSU-011-U0537">Kemudian kita menentukan nilai-p statistik uji ini di bawah hipotesis nol <span class="math display" data-o006-math-id="O006-PSU-011-M0365">\[pval=2*P(Z\leq-|Z^*|)=2*P(Z\leq-4.104)\]</span> yang kita evaluasi di R (kode sumber mengasumsikan R dasar, tetapi tidak menyatakan versi atau lingkungan eksekusinya):</p>
+<div class="cell language-name-processed" data-o006-id="O006-PSU-011-U0538">
+<div class="codeblock-with-label r" data-o006-id="O006-PSU-011-U0539">
+<style>.codeblock-with-label pre.lang-label-1::before { content: "R"; }</style>
+<div class="code-copy-outer-scaffold" data-o006-id="O006-PSU-011-U0540"><div class="sourceCode cell-code" data-language-name-skip="true" data-o006-id="O006-PSU-011-U0541" id="cb1"><pre class="sourceCode r lang-label-1 code-with-copy" data-o006-id="O006-PSU-011-U0542"><code class="sourceCode r" data-o006-id="O006-PSU-011-U0543"><span id="cb1-1"><a aria-hidden="true" data-o006-id="O006-PSU-011-U0544" href="#cb1-1" tabindex="-1"></a> phat<span class="ot">=</span>.<span class="dv">05</span></span>
+<span id="cb1-2"><a aria-hidden="true" data-o006-id="O006-PSU-011-U0545" href="#cb1-2" tabindex="-1"></a> I<span class="ot">=</span><span class="fl">421.0526</span></span>
+<span id="cb1-3"><a aria-hidden="true" data-o006-id="O006-PSU-011-U0546" href="#cb1-3" tabindex="-1"></a> se<span class="ot">=</span><span class="fu">sqrt</span>(<span class="dv">1</span><span class="sc">/</span>I)</span>
+<span id="cb1-4"><a aria-hidden="true" data-o006-id="O006-PSU-011-U0547" href="#cb1-4" tabindex="-1"></a> Z.star<span class="ot">=</span>(.<span class="dv">05</span><span class="fl">-.25</span>)<span class="sc">/</span>se</span>
+<span id="cb1-5"><a aria-hidden="true" data-o006-id="O006-PSU-011-U0548" href="#cb1-5" tabindex="-1"></a> pval<span class="ot">=</span><span class="dv">2</span><span class="sc">*</span><span class="fu">pnorm</span>(<span class="sc">-</span><span class="fu">abs</span>(Z.star))</span>
+<span id="cb1-6"><a aria-hidden="true" data-o006-id="O006-PSU-011-U0549" href="#cb1-6" tabindex="-1"></a> pval</span></code></pre></div><button class="code-copy-button" data-o006-id="O006-PSU-011-U0550" title="Copy to Clipboard"><i class="bi"></i></button></div>
+</div>
+<div class="cell-output cell-output-stdout" data-o006-id="O006-PSU-011-U0551">
+<pre data-o006-id="O006-PSU-011-U0552"><code data-o006-id="O006-PSU-011-U0553">[1] 4.062198e-05</code></pre>
+</div>
+</div>
+<p data-o006-id="O006-PSU-011-U0554">yang menghasilkan nilai-p sebesar 0.0000406. Untuk n=20 dengan hanya satu kemenangan dan parameter di dekat batas, hampiran Wald ini sangat tidak andal: nilai-p eksak dua sisi adalah sekitar 0.048625249730321 jika ekor kiri digandakan atau 0.038177041808922 jika hasil diurutkan menurut peluang.</p></li>
+<li data-o006-id="O006-PSU-011-U0555"><p data-o006-id="O006-PSU-011-U0556">Karena nilai-p Wald ini jauh lebih kecil daripada tingkat <span class="math inline" data-o006-math-id="O006-PSU-011-M0366">\(\alpha=0.05\)</span>, kita menolak <span class="math inline" data-o006-math-id="O006-PSU-011-M0367">\(H_0:p=0.25\)</span> dan menyimpulkan bahwa data memberikan bukti bahwa tingkat kemenangan permainan peluang tersebut berbeda dari tingkat 0.25 yang dinyatakan (angka .025 dalam sumber merupakan salah ketik).</p></li>
+</ol>
+</section>
+<section class="level4" data-o006-id="O006-PSU-011-U0557" id="a-numeric-wald-hypothesis-test">
+<h4 class="anchored" data-anchor-id="a-numeric-wald-hypothesis-test" data-o006-id="O006-PSU-011-U0558">Uji Hipotesis Wald Numerik</h4>
+<p data-o006-id="O006-PSU-011-U0559">Sekarang kita menyusun uji hipotesis yang sama dengan analisis kemungkinan maksimum numerik. Pertama, kita memasukkan data</p>
+<div class="cell language-name-processed" data-o006-id="O006-PSU-011-U0560">
+<div class="codeblock-with-label r" data-o006-id="O006-PSU-011-U0561">
+<style>.codeblock-with-label pre.lang-label-2::before { content: "R"; }</style>
+<div class="code-copy-outer-scaffold" data-o006-id="O006-PSU-011-U0562"><div class="sourceCode cell-code" data-language-name-skip="true" data-o006-id="O006-PSU-011-U0563" id="cb3"><pre class="sourceCode r lang-label-2 code-with-copy" data-o006-id="O006-PSU-011-U0564"><code class="sourceCode r" data-o006-id="O006-PSU-011-U0565"><span id="cb3-1"><a aria-hidden="true" data-o006-id="O006-PSU-011-U0566" href="#cb3-1" tabindex="-1"></a>x<span class="ot">=</span><span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>)</span>
+<span id="cb3-2"><a aria-hidden="true" data-o006-id="O006-PSU-011-U0567" href="#cb3-2" tabindex="-1"></a>n<span class="ot">=</span><span class="fu">length</span>(x)</span></code></pre></div><button class="code-copy-button" data-o006-id="O006-PSU-011-U0568" title="Copy to Clipboard"><i class="bi"></i></button></div>
+</div>
+</div>
+<p data-o006-id="O006-PSU-011-U0569">Selanjutnya kita menulis fungsi untuk mengevaluasi negatif fungsi log-kemungkinan. Perhatikan bahwa kode sumber berikut tidak membatasi p pada (0,1) atau menangani nilai fungsi kemungkinan yang tidak valid; Hessian numerik yang dikembalikan merupakan informasi teramati, bukan informasi Fisher harapan. Kode tersebut mencari MLE menggunakan <code data-o006-id="O006-PSU-011-U0570">optim</code>.</p>
+<div class="cell language-name-processed" data-o006-id="O006-PSU-011-U0571">
+<div class="codeblock-with-label r" data-o006-id="O006-PSU-011-U0572">
+<style>.codeblock-with-label pre.lang-label-3::before { content: "R"; }</style>
+<div class="code-copy-outer-scaffold" data-o006-id="O006-PSU-011-U0573"><div class="sourceCode cell-code" data-language-name-skip="true" data-o006-id="O006-PSU-011-U0574" id="cb4"><pre class="sourceCode r lang-label-3 code-with-copy" data-o006-id="O006-PSU-011-U0575"><code class="sourceCode r" data-o006-id="O006-PSU-011-U0576"><span id="cb4-1"><a aria-hidden="true" data-o006-id="O006-PSU-011-U0577" href="#cb4-1" tabindex="-1"></a><span class="do">## negative log likelihood function</span></span>
+<span id="cb4-2"><a aria-hidden="true" data-o006-id="O006-PSU-011-U0578" href="#cb4-2" tabindex="-1"></a>nll.bern<span class="ot">=</span><span class="cf">function</span>(p,x){</span>
+<span id="cb4-3"><a aria-hidden="true" data-o006-id="O006-PSU-011-U0579" href="#cb4-3" tabindex="-1"></a>    if (!is.finite(p) || p &lt;= 0 || p &gt;= 1) return(Inf)</span>
+<span id="cb4-4"><a aria-hidden="true" data-o006-id="O006-PSU-011-U0580" href="#cb4-4" tabindex="-1"></a>    -sum(dbinom(x, size=1, prob=p, log=TRUE))
+}</span>
+<span id="cb4-5"><a aria-hidden="true" data-o006-id="O006-PSU-011-U0581" href="#cb4-5" tabindex="-1"></a><span class="do">## run optim</span></span>
+<span id="cb4-6"><a aria-hidden="true" data-o006-id="O006-PSU-011-U0582" href="#cb4-6" tabindex="-1"></a>out=optim(.5,nll.bern,x=x,method="L-BFGS-B",lower=.Machine$double.eps,upper=1-.Machine$double.eps,hessian=TRUE)</span>
+<span id="cb4-7"><a aria-hidden="true" data-o006-id="O006-PSU-011-U0583" href="#cb4-7" tabindex="-1"></a><span class="do">## save MLE</span></span>
+<span id="cb4-8"><a aria-hidden="true" data-o006-id="O006-PSU-011-U0584" href="#cb4-8" tabindex="-1"></a>p.hat<span class="ot">=</span>out<span class="sc">$</span>par</span>
+<span id="cb4-9"><a aria-hidden="true" data-o006-id="O006-PSU-011-U0585" href="#cb4-9" tabindex="-1"></a>## distinguish numerical observed information from expected Fisher information</span>
+<span id="cb4-10"><a aria-hidden="true" data-o006-id="O006-PSU-011-U0586" href="#cb4-10" tabindex="-1"></a>I.obs=as.numeric(out$hessian)
+I.expected=n/(p.hat*(1-p.hat))
+stopifnot(isTRUE(all.equal(I.obs,I.expected,tolerance=1e-3)))
+I=I.expected</span></code></pre></div><button class="code-copy-button" data-o006-id="O006-PSU-011-U0587" title="Copy to Clipboard"><i class="bi"></i></button></div>
+</div>
+</div>
+<p data-o006-id="O006-PSU-011-U0588">Dengan hasil tersebut, kita menentukan galat baku, lalu statistik uji Wald</p>
+<div class="cell language-name-processed" data-o006-id="O006-PSU-011-U0589">
+<div class="codeblock-with-label r" data-o006-id="O006-PSU-011-U0590">
+<style>.codeblock-with-label pre.lang-label-4::before { content: "R"; }</style>
+<div class="code-copy-outer-scaffold" data-o006-id="O006-PSU-011-U0591"><div class="sourceCode cell-code" data-language-name-skip="true" data-o006-id="O006-PSU-011-U0592" id="cb5"><pre class="sourceCode r lang-label-4 code-with-copy" data-o006-id="O006-PSU-011-U0593"><code class="sourceCode r" data-o006-id="O006-PSU-011-U0594"><span id="cb5-1"><a aria-hidden="true" data-o006-id="O006-PSU-011-U0595" href="#cb5-1" tabindex="-1"></a>se<span class="ot">=</span><span class="fu">sqrt</span>(<span class="dv">1</span><span class="sc">/</span>I)</span>
+<span id="cb5-2"><a aria-hidden="true" data-o006-id="O006-PSU-011-U0596" href="#cb5-2" tabindex="-1"></a><span class="do">## get Wald test statistic</span></span>
+<span id="cb5-3"><a aria-hidden="true" data-o006-id="O006-PSU-011-U0597" href="#cb5-3" tabindex="-1"></a>T.star<span class="ot">=</span>(p.hat<span class="fl">-0.25</span>)<span class="sc">/</span>se</span>
+<span id="cb5-4"><a aria-hidden="true" data-o006-id="O006-PSU-011-U0598" href="#cb5-4" tabindex="-1"></a>T.star</span></code></pre></div><button class="code-copy-button" data-o006-id="O006-PSU-011-U0599" title="Copy to Clipboard"><i class="bi"></i></button></div>
+</div>
+<div class="cell-output cell-output-stdout" data-o006-id="O006-PSU-011-U0600">
+<pre data-o006-id="O006-PSU-011-U0601"><code data-o006-id="O006-PSU-011-U0602">[1] -4.103913</code></pre>
+</div>
+</div>
+<p data-o006-id="O006-PSU-011-U0603">Kemudian nilai-p-nya adalah</p>
+<div class="cell language-name-processed" data-o006-id="O006-PSU-011-U0604">
+<div class="codeblock-with-label r" data-o006-id="O006-PSU-011-U0605">
+<style>.codeblock-with-label pre.lang-label-5::before { content: "R"; }</style>
+<div class="code-copy-outer-scaffold" data-o006-id="O006-PSU-011-U0606"><div class="sourceCode cell-code" data-language-name-skip="true" data-o006-id="O006-PSU-011-U0607" id="cb7"><pre class="sourceCode r lang-label-5 code-with-copy" data-o006-id="O006-PSU-011-U0608"><code class="sourceCode r" data-o006-id="O006-PSU-011-U0609"><span id="cb7-1"><a aria-hidden="true" data-o006-id="O006-PSU-011-U0610" href="#cb7-1" tabindex="-1"></a>pval<span class="ot">=</span><span class="dv">2</span><span class="sc">*</span><span class="fu">pnorm</span>(<span class="sc">-</span><span class="fu">abs</span>(T.star),<span class="at">mean=</span><span class="dv">0</span>,<span class="at">sd=</span><span class="dv">1</span>)</span>
+<span id="cb7-2"><a aria-hidden="true" data-o006-id="O006-PSU-011-U0611" href="#cb7-2" tabindex="-1"></a>pval</span></code></pre></div><button class="code-copy-button" data-o006-id="O006-PSU-011-U0612" title="Copy to Clipboard"><i class="bi"></i></button></div>
+</div>
+<div class="cell-output cell-output-stdout" data-o006-id="O006-PSU-011-U0613">
+<pre data-o006-id="O006-PSU-011-U0614"><code data-o006-id="O006-PSU-011-U0615">[1] 4.062196e-05</code></pre>
+</div>
+</div>
+<p data-o006-id="O006-PSU-011-U0616">yang sekali lagi jauh lebih kecil daripada tingkat <span class="math inline" data-o006-math-id="O006-PSU-011-M0368">\(\alpha=0.05\)</span>, kita menolak <span class="math inline" data-o006-math-id="O006-PSU-011-M0369">\(H_0:p=0.25\)</span> dan menyimpulkan bahwa data memberikan bukti bahwa tingkat kemenangan permainan peluang tersebut berbeda dari tingkat 0.25 yang dinyatakan (angka .025 dalam sumber merupakan salah ketik).</p><p class="target-only-correction runtime-disclosure" data-o006-correction-id="O006-PSU-ADV-0194" role="note">Catatan reproduktibilitas: sumber resmi tidak menetapkan versi R, keadaan sesi, atau kontrak keluaran. Kode ini hanya memakai fungsi R dasar dari paket stats. Edisi turunan harus menjalankannya dalam runtime R yang dipatok dan mencatat R.version.string, platform, sessionInfo(), hash setiap blok kode, serta kecocokan numerik keluaran. Blok pengoptimalan dan dua keluarannya adalah koreksi terdaftar D019.</p>
+</section>
+</section>
+</section>
+<section class="level2" data-number="10.5" data-o006-id="O006-PSU-011-U0617" id="summary">
+<h2 class="anchored" data-anchor-id="summary" data-number="10.5" data-o006-id="O006-PSU-011-U0618"><span class="header-section-number">10.5</span> Ringkasan</h2>
+<p data-o006-id="O006-PSU-011-U0619">Dalam pelajaran ini, kita memperdalam perangkat pengujian hipotesis dengan menghubungkan selang kepercayaan secara eksplisit dengan uji pasangannya, menelaah tarik-menarik antara galat tipe I dan II melalui kuasa uji, serta mengenal uji Wald—metode serbaguna untuk sampel besar yang dibangun di atas penduga kemungkinan maksimum (MLE). Anda juga akan melihat bagaimana pilihan rancangan seperti ukuran sampel, tingkat signifikansi (α), dan ukuran efek saling berinteraksi ketika merencanakan penelitian.</p>
+<p data-o006-id="O006-PSU-011-U0620"><strong>Pokok-pokok utama:</strong></p>
+<ul data-o006-id="O006-PSU-011-U0621">
+<li data-o006-id="O006-PSU-011-U0622">Dengan selang kepercayaan tertutup dan aturan nilai-p &lt; α yang lazim, nilai parameter pada hipotesis nol dalam uji dua sisi ditolak tepat ketika berada di luar selang pasangannya; aturan nilai-p ≤ α memerlukan perlakuan titik ujung yang eksplisit.</li>
+<li data-o006-id="O006-PSU-011-U0623">Memperbesar ukuran sampel mempersempit selang kepercayaan dan meningkatkan kuasa uji tanpa mengubah α.</li>
+<li data-o006-id="O006-PSU-011-U0624">Perhitungan kuasa uji memungkinkan Anda memilih ukuran sampel yang memiliki peluang tinggi untuk mendeteksi efek yang bermakna.</li>
+<li data-o006-id="O006-PSU-011-U0625">Uji Wald menyediakan uji-z hampiran untuk setiap parameter yang MLE-nya secara asimtotik berdistribusi Normal, sehingga memperluas perangkat pengujian hipotesis ke model-model yang rumus klasiknya sulit digunakan.</li>
+</ul>
+</section>
+</main></div>
+<footer class="site-footer"><div class="site-footer__inner">Konten sumber: Departemen Statistika Penn State, CC BY-NC 4.0 kecuali dinyatakan lain. Terjemahan dan rekonstruksi: OpenAI Codex gpt-5.6-sol, Ultra. Tidak ada dukungan atau pengesahan yang tersirat.</div></footer>
+</body>
+</html>

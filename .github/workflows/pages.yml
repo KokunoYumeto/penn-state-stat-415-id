@@ -53,8 +53,10 @@ jobs:
           python -B scripts/merge_lesson08_translations.py --check-only
           python -B scripts/normalize_lesson09.py --check-only
           python -B scripts/merge_lesson09_translations.py --check-only
-          python -B scripts/build_through_lesson09.py --check-only
-          python -B scripts/qa_through_lesson09.py --check-only
+          python -B scripts/normalize_lesson10.py --check-only
+          python -B scripts/merge_lesson10_translations.py --check-only
+          python -B scripts/build_through_lesson10.py --check-only
+          python -B scripts/qa_through_lesson10.py --check-only
 
       - name: Configure Pages
         uses: actions/configure-pages@45bfe0192ca1faeb007ade9deae92b16b8254a0d # v6.0.0

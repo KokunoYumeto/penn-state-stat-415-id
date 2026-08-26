@@ -1,0 +1,722 @@
+{
+  "asset_closure": {
+    "external_dependencies": 0,
+    "jpeg_files": 2,
+    "offline_reader_asset_gate_passed": true,
+    "png_files": 12,
+    "same_origin_image_bytes": 8313758,
+    "same_origin_image_bytes_closed": true,
+    "same_origin_image_files": 22,
+    "svg_files": 8
+  },
+  "counts": {
+    "asset_occurrences": 22,
+    "assets": 22,
+    "catalogue_records": 1557,
+    "code_nodes": 9,
+    "corollaries": 0,
+    "definitions": 1,
+    "dependencies": 0,
+    "examples": 10,
+    "figure_captions": 19,
+    "figures": 21,
+    "headings": 29,
+    "images": 22,
+    "inline_style_nodes": 5,
+    "links": 46,
+    "math_display": 68,
+    "math_inline": 301,
+    "math_nodes": 369,
+    "native_id_occurrences": 129,
+    "pre_nodes": 8,
+    "proofs": 0,
+    "sections": 28,
+    "solutions": 13,
+    "structural_units": 625,
+    "tables": 2,
+    "theorem_class_nodes": 11,
+    "theorems": 0,
+    "translation_segments": 540,
+    "unique_asset_sources": 22,
+    "unique_native_ids": 110
+  },
+  "document": {
+    "asset_count": 22,
+    "code_node_count": 9,
+    "code_text_sha256": "2e15a302bfc3bd2cf0e8b9cfb3d8bcb7b5d84f4b9a09a173d0641a487c7db617",
+    "component_id": "Lesson10",
+    "dependency_count": 0,
+    "document_id": "O006-PSU-011",
+    "duplicate_native_ids": [
+      "fig-415_IQpower",
+      "fig-415_IQpowerB",
+      "fig-415_IQpowerC",
+      "fig-415_IQtypeI",
+      "fig-415_IQtypeIB",
+      "fig-415_engineerpower",
+      "fig-415_engineertype1",
+      "fig-415_engineertype1-B",
+      "fig-415_rttailengineer",
+      "fig-STAT-415-SEC-5-02",
+      "fig-STAT-415-SEC-5-13Version7",
+      "fig-STAT-415-SEC-5-17",
+      "fig-alphabeta1",
+      "fig-alphabeta3",
+      "fig-alphacriticalp55",
+      "fig-powerfnkmu3",
+      "fig-powerfunofkmu1",
+      "fig-powerfunofkmu2",
+      "fig-rttailcritical"
+    ],
+    "entity_id": "O006-PSU-011",
+    "formula_count": 369,
+    "formula_sha256": "b6941e909257de35fcf2cfa76582e4c3e14bf87c6f54feb660d078c58b78a2e3",
+    "inline_style_count": 5,
+    "inline_style_text_sha256": "7d2ca81b31ca2128afe5c1266ecde97d4d173d0506dd39b4870532e9aed92906",
+    "locale": "en-US",
+    "native_id_occurrences": 129,
+    "normalized_bytes": 132877,
+    "normalized_path": "source/normalized/en-US/Lesson10.html",
+    "normalized_sha256": "4b9f7c54d9606298dac3772a55f08db39e0494f8960b8ebdcd468ed0ff27c354",
+    "ordinal": 11,
+    "pre_node_count": 8,
+    "record_type": "document",
+    "schema": "o006.stat415.source-catalogue.v1",
+    "segment_count": 540,
+    "semantic_text_sha256": "a749b509755e7ec5cdcaa29bb8b02a631e054b4daad6238c897d54eb8c12cd31",
+    "source_bytes": 152767,
+    "source_path": "authority/upstream/stat415/Lesson10.html",
+    "source_sha256": "0cb938a114d27b03ef3196c24a2e87b79a1a466b9dcbe370e6e6553947446bf5",
+    "source_url": "https://online.stat.psu.edu/stat415/Lesson10",
+    "topology_sha256": "ca09bb625d14127436cf713e11237222a9555fa284c6afe917ddc22d23711d2b",
+    "unique_native_ids": 110,
+    "unit_count": 625
+  },
+  "duplicate_native_ids": [
+    "fig-415_IQpower",
+    "fig-415_IQpowerB",
+    "fig-415_IQpowerC",
+    "fig-415_IQtypeI",
+    "fig-415_IQtypeIB",
+    "fig-415_engineerpower",
+    "fig-415_engineertype1",
+    "fig-415_engineertype1-B",
+    "fig-415_rttailengineer",
+    "fig-STAT-415-SEC-5-02",
+    "fig-STAT-415-SEC-5-13Version7",
+    "fig-STAT-415-SEC-5-17",
+    "fig-alphabeta1",
+    "fig-alphabeta3",
+    "fig-alphacriticalp55",
+    "fig-powerfnkmu3",
+    "fig-powerfunofkmu1",
+    "fig-powerfunofkmu2",
+    "fig-rttailcritical"
+  ],
+  "instructional_surface": {
+    "definitions": 1,
+    "figures": 21,
+    "proofs": 0,
+    "published_output_blocks": 3,
+    "solution_sections": 13,
+    "source_code_blocks": 5,
+    "tables": 2,
+    "theorems": 0,
+    "worked_examples": 10
+  },
+  "mathematical_audit_scope": {
+    "all_math_nodes_audited": true,
+    "bernoulli_exact_comparators_recalculated": true,
+    "confidence_interval_test_duality_audited": true,
+    "discrete_test_level_recalculated": true,
+    "numerical_witnesses": {
+      "bernoulli_doubled_left_tail": 0.04862524973032123,
+      "bernoulli_left_tail": 0.024312624865160615,
+      "bernoulli_probability_ordered_two_sided": 0.038177041808921786,
+      "binomial_alpha": 0.009647335485395895,
+      "binomial_beta_at_055": 0.20343667138369453,
+      "binomial_reject_from": 538,
+      "n13_alpha": 0.049984905539121494,
+      "n13_beta_at_45": 0.0869741431142243,
+      "n13_cutoff": 42.737445468371504,
+      "poisson_boundary_randomization_at_6": 0.911034807817211,
+      "poisson_ge_6": 0.10540810546917745,
+      "poisson_ge_7": 0.04461910095530105
+    },
+    "power_and_sample_size_claims_recalculated": true,
+    "wald_asymptotics_and_p_value_audited": true
+  },
+  "next_translation_batches": [
+    {
+      "batch": "A",
+      "boundary": "document opening through complete 10.3.1 Definition of Power",
+      "range": [
+        "O006-PSU-011-S0001",
+        "O006-PSU-011-S0176"
+      ]
+    },
+    {
+      "batch": "B",
+      "boundary": "complete 10.3.2 Power Functions",
+      "range": [
+        "O006-PSU-011-S0177",
+        "O006-PSU-011-S0305"
+      ]
+    },
+    {
+      "batch": "C",
+      "boundary": "complete 10.3.3 Calculating Sample Size",
+      "range": [
+        "O006-PSU-011-S0306",
+        "O006-PSU-011-S0427"
+      ]
+    },
+    {
+      "batch": "D",
+      "boundary": "complete 10.4 Approximate Wald Test and 10.5 Summary",
+      "range": [
+        "O006-PSU-011-S0428",
+        "O006-PSU-011-S0540"
+      ]
+    }
+  ],
+  "next_translation_range": [
+    "O006-PSU-011-S0001",
+    "O006-PSU-011-S0540"
+  ],
+  "outputs": {
+    "asset_closure": {
+      "bytes": 32235,
+      "path": "working/lesson10_asset_closure.json",
+      "sha256": "174b2b04807774f5bc51edf5f6c9543bbf93d2aaaf38b5188e879aa087a93776"
+    },
+    "asset_manifest": {
+      "bytes": 7968,
+      "path": "authority/LESSON10_ASSET_MANIFEST.csv",
+      "rows": 22,
+      "sha256": "ac8db64cf192ee43e5ffd6b51d796cbc06fd7eb2d1e20b5acb47379ab666cb2a"
+    },
+    "assets": [
+      {
+        "bytes": 1235994,
+        "path": "authority/assets/stat415/lesson10/assets/ht_example1.jpg",
+        "sha256": "c6e286a0ddf17d3cce788af2f3e7cd8d4fe42d074118516f67f8d1f012b01f10"
+      },
+      {
+        "bytes": 238928,
+        "path": "authority/assets/stat415/lesson10/assets/415_rttailengineer.png",
+        "sha256": "096f21204d5577576a619894a01c48951f945de3577253dab6023a729d7ce8e9"
+      },
+      {
+        "bytes": 284394,
+        "path": "authority/assets/stat415/lesson10/assets/STAT-415-SEC-5-02.png",
+        "sha256": "fd35d62eb48313462357ba46d25aed6270c5e0418dd633368a453cd324302dfa"
+      },
+      {
+        "bytes": 371865,
+        "path": "authority/assets/stat415/lesson10/assets/415_engineertype1.png",
+        "sha256": "e8881365c8d47bebe9e6e80a0627d9216215a9c4b6c59c13eba660ef14e41ee3"
+      },
+      {
+        "bytes": 431675,
+        "path": "authority/assets/stat415/lesson10/assets/415_engineertype1-B.png",
+        "sha256": "81650903aca6ff41a20a8bb18a56c450e2fca646171d9f81dd9448e3219d3430"
+      },
+      {
+        "bytes": 4861,
+        "path": "authority/assets/stat415/lesson10/assets/halfemptyglass.jpg",
+        "sha256": "e4227d5c12111e31fa2b03ad38dda779c1940baee0c350d47394233d83babbb1"
+      },
+      {
+        "bytes": 1011231,
+        "path": "authority/assets/stat415/lesson10/assets/415_engineerpower.png",
+        "sha256": "fee17848b6080821d30f96c783dde9631516e81083cb4d44f567852ac8e561eb"
+      },
+      {
+        "bytes": 4059,
+        "path": "authority/assets/stat415/lesson10/assets/STAT-415-SEC-5-06.svg",
+        "sha256": "f0644653362587911ae2f678568c80941e9cefcc62a093c9a29015c0632e65d7"
+      },
+      {
+        "bytes": 852961,
+        "path": "authority/assets/stat415/lesson10/assets/415_IQpower.png",
+        "sha256": "f4f776f7174885294f478aa51691423c591826c0687121744907404741271b69"
+      },
+      {
+        "bytes": 933948,
+        "path": "authority/assets/stat415/lesson10/assets/415_IQpowerB.png",
+        "sha256": "96d1ab3d7e043b26fd3df04d9dfc6a54cf476d4c8d9b0fb5e629d7310ae605d0"
+      },
+      {
+        "bytes": 938178,
+        "path": "authority/assets/stat415/lesson10/assets/415_IQpowerC.png",
+        "sha256": "8bb3c005528a2813c575edb0cbf199fbc508d43ed40834895b72a29461cecdf3"
+      },
+      {
+        "bytes": 4235,
+        "path": "authority/assets/stat415/lesson10/assets/STAT-415-SEC-5-10.svg",
+        "sha256": "b4a78d4adb43cb9ed84fc35181208df4b8d3b4fe007f804f9c3f7063f4117120"
+      },
+      {
+        "bytes": 5240,
+        "path": "authority/assets/stat415/lesson10/assets/STAT-415-SEC-5-11.svg",
+        "sha256": "4f3bc5286c97634bd81a1f6db1ab1e9109e1f090590676beb11bcb26c73d6202"
+      },
+      {
+        "bytes": 269540,
+        "path": "authority/assets/stat415/lesson10/assets/415_IQtypeI.png",
+        "sha256": "50b301face607b91dce418704d16a07d3c56ecb771a14d84060d8c4f5b0c383c"
+      },
+      {
+        "bytes": 1042181,
+        "path": "authority/assets/stat415/lesson10/assets/STAT-415-SEC-5-13 Version 7.png",
+        "sha256": "330c07620cd978ee9eb50b8a8c3c3b3afda9756f5ebc03e461d722d89c2ecf93"
+      },
+      {
+        "bytes": 4409,
+        "path": "authority/assets/stat415/lesson10/assets/STAT-415-SEC-5-14.svg",
+        "sha256": "4ad7fe521819d6ffbed1298ff5b638beaf3ff440f7dc3ba71d143cb829b01683"
+      },
+      {
+        "bytes": 274542,
+        "path": "authority/assets/stat415/lesson10/assets/415_IQtypeIB.png",
+        "sha256": "3af8a412f25253065ea738266a54e535e08d70a219e7be3ff2011117a0900406"
+      },
+      {
+        "bytes": 4436,
+        "path": "authority/assets/stat415/lesson10/assets/STAT-415-SEC-5-16.svg",
+        "sha256": "6908ed8bee319762fb24c5282067b67e6960829c91f9a643080816e2f2d4d8a3"
+      },
+      {
+        "bytes": 391485,
+        "path": "authority/assets/stat415/lesson10/assets/STAT-415-SEC-5-17.png",
+        "sha256": "cfd735029345a014871b326b7999013b58512a856deb7f8e0ceed21e02b09a19"
+      },
+      {
+        "bytes": 3633,
+        "path": "authority/assets/stat415/lesson10/assets/STAT-415-SEC-5-18.svg",
+        "sha256": "11e5b5dd8f8780be30f384d4c7ec57c1e98d0fab17f1f03305feec5448947631"
+      },
+      {
+        "bytes": 2529,
+        "path": "authority/assets/stat415/lesson10/assets/STAT-415-SEC-5-19.svg",
+        "sha256": "f55fd40a2b22b380a099a79332a0bfc81c4c315786453e70414c8d6493ea373b"
+      },
+      {
+        "bytes": 3434,
+        "path": "authority/assets/stat415/lesson10/assets/STAT-415-SEC-5-20.svg",
+        "sha256": "b28e5b35a02b6ae62cb9cbc608c9d2f9861044668d0721dc8fe0d0c207c8b050"
+      }
+    ],
+    "catalogue": {
+      "bytes": 761475,
+      "path": "backend/lesson10_source_catalogue.jsonl",
+      "records": 1557,
+      "sha256": "58efb46b0b4d02afa2f4135258923bb40de5e009bb2be3eeecf0b472a35f7aa3"
+    },
+    "helper_script": {
+      "bytes": 35668,
+      "path": "scripts/normalize_lesson03.py",
+      "sha256": "0eeb260de05ebae694700cc2212966ee4ba19351f067bef49c095ec6fccd70e6"
+    },
+    "math_audit": {
+      "bytes": 4896,
+      "path": "working/lesson10_math_audit.md",
+      "sha256": "75e97dc5481067c65b663bffa927595eda0cf025b427078e159d51978648a8a7"
+    },
+    "normalized": {
+      "bytes": 132877,
+      "path": "source/normalized/en-US/Lesson10.html",
+      "sha256": "4b9f7c54d9606298dac3772a55f08db39e0494f8960b8ebdcd468ed0ff27c354"
+    },
+    "script": {
+      "bytes": 61450,
+      "path": "scripts/normalize_lesson10.py",
+      "sha256": "a603cb72fb0a9a86b1f74364b2e88782559b98a50f72ca1ea39ed494dc970886"
+    },
+    "segments": {
+      "bytes": 107563,
+      "path": "working/lesson10_segments.csv",
+      "rows": 540,
+      "sha256": "2a490ab61c079979e4d71f064c5732f147c86b13bf958b51fafb30227aaee25c"
+    },
+    "source_findings": {
+      "bytes": 11251,
+      "path": "working/lesson10_source_findings.md",
+      "sha256": "5c7ec3ed66144b197f1fc9705775d761ae02396a5c11c82e34502077f4593842"
+    }
+  },
+  "parser": {
+    "beautifulsoup_version": "4.14.3",
+    "name": "beautifulsoup4/html.parser",
+    "source_decoding": "UTF-8 strict"
+  },
+  "preservation": {
+    "authority_mutated": false,
+    "code_nodes_text_preserved": true,
+    "code_text_sha256": "2e15a302bfc3bd2cf0e8b9cfb3d8bcb7b5d84f4b9a09a173d0641a487c7db617",
+    "dependency_census_preserved": true,
+    "formula_nodes_byte_preserved": true,
+    "formula_sha256": "b6941e909257de35fcf2cfa76582e4c3e14bf87c6f54feb660d078c58b78a2e3",
+    "image_sequence_preserved": true,
+    "inline_code_label_styles_preserved": true,
+    "inline_style_text_sha256": "7d2ca81b31ca2128afe5c1266ecde97d4d173d0506dd39b4870532e9aed92906",
+    "link_sequence_preserved": true,
+    "main_selector": "main#quarto-document-content",
+    "native_anchor_sequence_preserved": true,
+    "semantic_main_text_preserved": true,
+    "semantic_text_sha256": "a749b509755e7ec5cdcaa29bb8b02a631e054b4daad6238c897d54eb8c12cd31",
+    "topology_sha256": "ca09bb625d14127436cf713e11237222a9555fa284c6afe917ddc22d23711d2b"
+  },
+  "role_counts": {
+    "code": 17,
+    "definition": 1,
+    "example": 10,
+    "figure": 21,
+    "figure-caption": 19,
+    "heading": 17,
+    "image": 22,
+    "link": 46,
+    "section": 15,
+    "solution": 26,
+    "structure": 431
+  },
+  "schema": "o006.stat415.lesson10-normalization.v1",
+  "source_defect_classification_counts": {
+    "accessibility-defect": 2,
+    "approximation-qualification-omission": 2,
+    "boundary-and-inference-defect": 1,
+    "boundary-definition-defect": 1,
+    "boundary-qualification-omission": 1,
+    "coverage-surface-defect": 1,
+    "direction-qualification-omission": 1,
+    "encoding-surface-defect": 1,
+    "outright-formula-surface-defect": 1,
+    "outright-level-defect": 1,
+    "outright-mathematical-defect": 1,
+    "outright-mathematical-overclaim": 1,
+    "outright-mechanical-defect": 2,
+    "outright-notation-defect": 1,
+    "outright-numerical-defect": 2,
+    "outright-overgeneralization": 1,
+    "outright-parameter-typo": 1,
+    "outright-surface-defect": 1,
+    "precision-defect": 1,
+    "reproducibility-and-method-defect": 1,
+    "reproducibility-omission": 1,
+    "rounding-qualification-omission": 1,
+    "sampling-frame-defect": 1,
+    "topology-accessibility-defect": 1
+  },
+  "source_defect_count": 28,
+  "source_defects": [
+    {
+      "classification": "coverage-surface-defect",
+      "defect_id": "L10-D001",
+      "evidence": "move beyond single-sample tests to compare two populations",
+      "kind": "overview-promises-two-population-comparisons-not-present",
+      "note": "The instructional main contains only one-sample/order-statistic, power, sample-size, and Wald examples; translate the actual scope without repeating the unsupported promise."
+    },
+    {
+      "classification": "outright-level-defect",
+      "defect_id": "L10-D002",
+      "evidence": {
+        "actual_size": 0.10540810546917745,
+        "largest_nonrandomized_size_below_point_one": 0.04461910095530105,
+        "randomize_at_sum_eq_6": 0.911034807817211,
+        "source_rule": "reject sum>=6"
+      },
+      "kind": "poisson-test-exceeds-nominal-point-one-level",
+      "note": "Rejecting at a sum of 6 has size 0.105408..., not level 0.10. Use sum>=7 for a conservative nonrandomized test, or randomize at sum=6 with the recorded probability for exact size 0.10."
+    },
+    {
+      "classification": "outright-numerical-defect",
+      "defect_id": "L10-D003",
+      "evidence": {
+        "conclusion": "0.1055",
+        "table_and_calculation": "0.1054"
+      },
+      "kind": "poisson-tail-rounded-inconsistently",
+      "note": "Use the same rounded value, while retaining the more important exact-level correction."
+    },
+    {
+      "classification": "boundary-qualification-omission",
+      "defect_id": "L10-D004",
+      "evidence": {
+        "source_interval": "closed reported interval",
+        "source_test": "reject at t>=critical or t<=-critical"
+      },
+      "kind": "confidence-interval-test-duality-boundary-unspecified",
+      "note": "State a consistent equality convention: a closed 1-alpha interval corresponds to rejection when the null value lies outside it under the usual p<alpha rule; p<=alpha changes endpoint treatment."
+    },
+    {
+      "classification": "precision-defect",
+      "defect_id": "L10-D005",
+      "evidence": "p-value ... approximately 0.000",
+      "kind": "nonzero-p-value-written-as-approximately-zero",
+      "note": "Report a positive bound or adequate digits; a continuous-test p-value here is not zero."
+    },
+    {
+      "classification": "outright-mechanical-defect",
+      "defect_id": "L10-D006",
+      "evidence": [
+        "P(Type I erro)",
+        "P(Type II erro)"
+      ],
+      "kind": "type-error-label-truncated-twice",
+      "note": "Restore 'error' in both definitions."
+    },
+    {
+      "classification": "sampling-frame-defect",
+      "defect_id": "L10-D007",
+      "evidence": "X is an adult-American IQ, followed by a random sample of students",
+      "kind": "adult-population-student-sample-mismatch",
+      "note": "A student sample is not automatically a random sample of adult Americans; align the target population and sampling frame or state the limitation."
+    },
+    {
+      "classification": "outright-formula-surface-defect",
+      "defect_id": "L10-D008",
+      "evidence": [
+        "1.645(16/sqrt(16)=106.58)",
+        "next aligned probability line lacks an equals sign"
+      ],
+      "kind": "power-example-parenthesis-and-equality-malformed",
+      "note": "Close the scale-factor parenthesis before '=106.58' and retain the equality at the start of the following probability line."
+    },
+    {
+      "classification": "outright-notation-defect",
+      "defect_id": "L10-D009",
+      "evidence": [
+        "K(mu)",
+        "K(u)",
+        "beta(u)"
+      ],
+      "kind": "power-function-argument-switches-between-mu-and-u",
+      "note": "Use the declared parameter mu consistently."
+    },
+    {
+      "classification": "outright-numerical-defect",
+      "defect_id": "L10-D010",
+      "evidence": "1-0.326=0.6278",
+      "kind": "type-two-error-subtracts-z-score-instead-of-power",
+      "note": "The correct complement is 1-0.3722=0.6278; 0.326 is the standardized cutoff."
+    },
+    {
+      "classification": "outright-overgeneralization",
+      "defect_id": "L10-D011",
+      "evidence": "only way alpha and beta can be decreased simultaneously is increasing n",
+      "kind": "sample-size-called-only-way-to-reduce-both-errors",
+      "note": "Within the fixed Normal-mean design increasing n does so, but better measurements, lower variance, stronger design, or a more efficient test can also improve both errors."
+    },
+    {
+      "classification": "rounding-qualification-omission",
+      "defect_id": "L10-D012",
+      "evidence": {
+        "actual_beta": 0.0869741431142243,
+        "cutoff": 42.737445468371504,
+        "n": 13
+      },
+      "kind": "rounded-up-mean-sample-size-does-not-retain-beta-point-one",
+      "note": "After rounding n up to 13 and recalculating the alpha-based cutoff, beta is about 0.08697 and power about 0.91303, not exactly 0.10 and 0.90."
+    },
+    {
+      "classification": "approximation-qualification-omission",
+      "defect_id": "L10-D013",
+      "evidence": {
+        "exact_alpha": 0.009647335485395895,
+        "exact_beta": 0.20343667138369453,
+        "rule": "phat>0.5367, hence X>=538"
+      },
+      "kind": "proportion-sample-size-results-presented-as-exact",
+      "note": "The derivation is a Normal approximation. Under Binomial sampling the displayed rule has alpha about 0.009647 and beta about 0.203437, so label the design approximate."
+    },
+    {
+      "classification": "outright-mathematical-overclaim",
+      "defect_id": "L10-D014",
+      "evidence": "for any MLE, regardless of the distribution",
+      "kind": "any-mle-claimed-asymptotically-normal",
+      "note": "MLE asymptotic normality requires regularity, identifiability, an interior true parameter, nonsingular information, consistency, and appropriate differentiation/interchange conditions; nonregular and boundary cases fail."
+    },
+    {
+      "classification": "outright-mathematical-defect",
+      "defect_id": "L10-D015",
+      "evidence": "P(|T|>=|theta-hat|) for T~N(c,se^2)",
+      "kind": "unstandardized-wald-p-value-not-centered-at-null",
+      "note": "Use P(|T-c|>=|theta-hat-c|), or standardize first. The source expression is wrong whenever c is nonzero."
+    },
+    {
+      "classification": "boundary-and-inference-defect",
+      "defect_id": "L10-D016",
+      "evidence": [
+        "p<alpha",
+        "p>alpha",
+        "accept H_A",
+        "disprove H_0"
+      ],
+      "kind": "wald-recipe-omits-p-equals-alpha-and-says-accept-disprove",
+      "note": "State the p=alpha action explicitly and describe rejection as evidence against H0, not proof or acceptance of HA."
+    },
+    {
+      "classification": "outright-parameter-typo",
+      "defect_id": "L10-D017",
+      "evidence": {
+        "conclusion": 0.025,
+        "tested": 0.25
+      },
+      "kind": "bernoulli-conclusion-changes-point-two-five-to-point-zero-two-five",
+      "note": "The stated game rate must remain 0.25."
+    },
+    {
+      "classification": "approximation-qualification-omission",
+      "defect_id": "L10-D018",
+      "evidence": {
+        "exact_doubled_left_tail": 0.04862524973032123,
+        "exact_probability_ordered_two_sided": 0.038177041808921786,
+        "wald_p": "about 0.000040"
+      },
+      "kind": "small-boundary-bernoulli-wald-test-unqualified",
+      "note": "With n=20, one success, and a parameter near the boundary, the Wald approximation is severely unreliable. Label it as a cautionary approximation and compare an exact or score procedure."
+    },
+    {
+      "classification": "reproducibility-and-method-defect",
+      "defect_id": "L10-D019",
+      "evidence": "optim(.5, ..., hessian=TRUE) without bounds; out$hessian called Fisher Information",
+      "kind": "numeric-optimizer-unconstrained-and-hessian-mislabeled",
+      "note": "Constrain p to (0,1), handle invalid likelihood values, and call the numerical Hessian observed information; expected Fisher information is a distinct expectation even though they coincide here at the Bernoulli MLE."
+    },
+    {
+      "classification": "outright-surface-defect",
+      "defect_id": "L10-D020",
+      "evidence": [
+        "significance level ()",
+        "without altering .",
+        "approximate -test"
+      ],
+      "kind": "summary-drops-three-mathematical-symbols",
+      "note": "Restore alpha in the first two locations and z in 'approximate z-test'."
+    },
+    {
+      "classification": "topology-accessibility-defect",
+      "defect_id": "L10-D021",
+      "evidence": [
+        "fig-415_IQpower",
+        "fig-415_IQpowerB",
+        "fig-415_IQpowerC",
+        "fig-415_IQtypeI",
+        "fig-415_IQtypeIB",
+        "fig-415_engineerpower",
+        "fig-415_engineertype1",
+        "fig-415_engineertype1-B",
+        "fig-415_rttailengineer",
+        "fig-STAT-415-SEC-5-02",
+        "fig-STAT-415-SEC-5-13Version7",
+        "fig-STAT-415-SEC-5-17",
+        "fig-alphabeta1",
+        "fig-alphabeta3",
+        "fig-alphacriticalp55",
+        "fig-powerfnkmu3",
+        "fig-powerfunofkmu1",
+        "fig-powerfunofkmu2",
+        "fig-rttailcritical"
+      ],
+      "kind": "nineteen-figure-image-identifiers-duplicated",
+      "note": "Preserve source topology in normalization; mint unique reader DOM ids while retaining stable catalogue bindings."
+    },
+    {
+      "classification": "accessibility-defect",
+      "defect_id": "L10-D022",
+      "evidence": {
+        "incorrect_alts": {
+          "assets/415_engineerpower.png": "Normal curves showing the area for beta, a type II error with the z test statistic shown.",
+          "assets/415_engineertype1.png": "Normal curve with center at 0 showing two-tail critical area for alpha of .05.",
+          "assets/415_rttailengineer.png": "Normal curve with center at 0 showing two-tail critical area for alpha of .05."
+        },
+        "label_only_captions": 19,
+        "uncaptioned_images": 3
+      },
+      "kind": "three-incorrect-alts-and-label-only-captions",
+      "note": "The first two named alts call one-tailed error regions two-tailed; the power figure calls its region beta. Add correct non-color-dependent descriptions and meaningful captions."
+    },
+    {
+      "classification": "accessibility-defect",
+      "defect_id": "L10-D023",
+      "evidence": [
+        {
+          "caption": false,
+          "th": 3,
+          "th_with_scope": 0
+        },
+        {
+          "caption": false,
+          "th": 4,
+          "th_with_scope": 0
+        }
+      ],
+      "kind": "tables-lack-captions-and-header-scope",
+      "note": "Add captions and explicit row/column header scope without changing values."
+    },
+    {
+      "classification": "reproducibility-omission",
+      "defect_id": "L10-D024",
+      "evidence": {
+        "inline_code_nodes": 1,
+        "label_style_nodes": 5,
+        "output_blocks": 3,
+        "source_code_blocks": 5
+      },
+      "kind": "r-code-has-no-environment-or-expected-output-contract",
+      "note": "Preserve code and outputs byte-for-byte in normalized source; the derivative should identify base-R/runtime assumptions and verify expected outputs."
+    },
+    {
+      "classification": "encoding-surface-defect",
+      "defect_id": "L10-D025",
+      "evidence": "10� Hypothesis Tests (Part II) � STAT 415",
+      "kind": "page-title-contains-replacement-characters",
+      "note": "Use a clean reader title while retaining the frozen source-title witness in provenance."
+    },
+    {
+      "classification": "boundary-definition-defect",
+      "defect_id": "L10-D026",
+      "evidence": [
+        "P(|Z|>|Z*|)",
+        "P(Z<=-|Z*|)"
+      ],
+      "kind": "wald-p-value-switches-strict-and-nonstrict-extremeness",
+      "note": "Define the p-value with outcomes at least as extreme and use a consistent boundary convention."
+    },
+    {
+      "classification": "direction-qualification-omission",
+      "defect_id": "L10-D027",
+      "evidence": "as mu moves further away from 100, power increases",
+      "kind": "one-sided-power-described-by-absolute-distance",
+      "note": "For this right-tailed test, power increases as mu moves to the right; moving equally far below 100 decreases power."
+    },
+    {
+      "classification": "outright-mechanical-defect",
+      "defect_id": "L10-D028",
+      "evidence": "Recall that the Poisson distribution.",
+      "kind": "poisson-transition-is-incomplete-sentence",
+      "note": "Complete the sentence by stating that the distribution is discrete and may not attain the nominal size with a nonrandomized cutoff."
+    }
+  ],
+  "source_rule": "semantic main only; authority immutable; formulas, code, styles, tables, anchors, and assets protected; stable IDs additive",
+  "stable_id_ranges": {
+    "assets": [
+      "O006-PSU-011-A0001",
+      "O006-PSU-011-A0022"
+    ],
+    "math": [
+      "O006-PSU-011-M0001",
+      "O006-PSU-011-M0369"
+    ],
+    "segments": [
+      "O006-PSU-011-S0001",
+      "O006-PSU-011-S0540"
+    ],
+    "units": [
+      "O006-PSU-011-U0001",
+      "O006-PSU-011-U0625"
+    ]
+  },
+  "status": "normalized-source-ready-assets-closed-audit-complete"
+}
