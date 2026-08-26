@@ -62,9 +62,9 @@ The cumulative build has 94 files / 17,020,141 bytes; its manifest is 10,100
 bytes with SHA-256
 `08e171f7b87a1ad33d063ed536fca566873d93993a191d0ad1812fe7259e3663`.
 The build receipt is 24,978 bytes, SHA-256
-`4b852de891294648f52de4024856a26f5464a88f851d1bba1ca802166208b4de`; the
+`0f440e56bf71e172815ac0933e752e3f3f12383573e4c501db8fe5aa1922a520`; the
 deterministic QA receipt is 6,118 bytes, SHA-256
-`2e14901a52da7782231c4ab1eaaf8f4fbd74375be846dfec80615fcbffed2cca`.
+`6bc589012a12e93d9418fe9f26029ca8b58b6de61235a4d6181114afa2300180`.
 Both write and check-only replays pass. The cumulative correction backend now
 has the ordered IDs `O006-PSU-ADV-0001` through `O006-PSU-ADV-0198`; the
 Lesson 10 suffix is 300,910 bytes, SHA-256
@@ -82,9 +82,9 @@ The cumulative offline reader through Lesson 10 contains 94 files /
 17,020,141 bytes. Its manifest is 10,100 bytes with SHA-256
 `08e171f7b87a1ad33d063ed536fca566873d93993a191d0ad1812fe7259e3663`.
 The build receipt is 24,978 bytes with SHA-256
-`4b852de891294648f52de4024856a26f5464a88f851d1bba1ca802166208b4de`; the
+`0f440e56bf71e172815ac0933e752e3f3f12383573e4c501db8fe5aa1922a520`; the
 deterministic QA receipt is 6,118 bytes with SHA-256
-`2e14901a52da7782231c4ab1eaaf8f4fbd74375be846dfec80615fcbffed2cca`.
+`6bc589012a12e93d9418fe9f26029ca8b58b6de61235a4d6181114afa2300180`.
 Build and QA write/check-only replays pass. The QA gate covers 12-of-14
 metadata/navigation, all 2,540 math nodes, 56 substantive images, seven
 semantic tables, 22 Lesson 10 assets, 198 corrections, code/runtime
@@ -99,7 +99,7 @@ the reader, and fresh console warning/error logs are empty. Four deferred
 index thumbnails were additionally verified with same-origin HTTP checks. The
 12-of-14 visual receipt is
 `build/THROUGH_LESSON10_VISUAL_QA_RECEIPT.json`, 13,129 bytes, SHA-256
-`6474733ee1ee19e78623433181cd3330285378d3e1e2623b16dd6e516928d607`.
+`7c1377982b1cadbd7dbd69de84a63d8bbeb6df0961758c5c8e52f25cc1fc75a5`.
 
 The 198-row adverse/correction backend now shares the exact ordered IDs
 `O006-PSU-ADV-0001` through `O006-PSU-ADV-0198`. The twelve-row translation
@@ -134,7 +134,7 @@ readback, and final lineage-audit receipt SHA-256 values are respectively
 and `21ff308362a8aa6ac1d194d697f7b803482766f503113e902920ed3202933ad3`.
 
 The deterministic reader-first 12-of-14 package is ready and passes write and
-check-only replay: nine files / 49,763,980 bytes, 94 reader files, and 432
+check-only replay: nine files / 49,769,118 bytes, 94 reader files, and 432
 bounded source entries. Its package receipt is
 `build/THROUGH_LESSON10_PACKAGE_RECEIPT.json`; that receipt carries the exact
 asset inventory and hashes. Its self-hash is intentionally kept out of this

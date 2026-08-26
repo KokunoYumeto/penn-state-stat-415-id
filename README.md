@@ -27,7 +27,7 @@ bukti QA disimpan bersama edisi.
 - Rilis publik terbaru: https://github.com/KokunoYumeto/penn-state-stat-415-id/releases
 - Konsep preservasi: https://doi.org/10.5281/zenodo.22077422
 - Preservasi terverifikasi, hingga Pelajaran 09: https://doi.org/10.5281/zenodo.22103203
-- Paket preservasi reader-first 12-dari-14 (49.763.827 byte, sembilan berkas)
+- Paket preservasi reader-first 12-dari-14 (49.769.118 byte, sembilan berkas)
   sudah lulus pemeriksaan lokal; versi berikutnya akan diterbitkan pada konsep
   DOI yang sama dan dibaca kembali secara anonim setelah push.
 
