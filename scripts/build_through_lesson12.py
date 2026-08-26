@@ -397,6 +397,27 @@ def replace_once(text: str, old: str, new: str, label: str) -> str:
     return text.replace(old, new, 1)
 
 
+# The complete cumulative pages are approved byte-level artifacts. The
+# preceding replay still has to admit and patch the prior boundary, but once
+# those checks pass the exact frozen targets below dominate serialization
+# differences across HTML-parser/platform combinations.
+EXPECTED_CANONICAL_PRIOR_TARGETS = {
+    "index.html": (24_947, "055bca74a3068a619ef9fb01dd3038c0e1b5b33da0b9de6f84337710047b48bb"),
+    "Lesson00.html": (80_541, "72670fe86c6f2ee5d51ecaab8d8e08e531b118d8ff624e9728426681e8db12b0"),
+    "Lesson01.html": (47_621, "80f81cefda8964f01995104e181c2bba9332fa4bb62a837b2ccc7b5af17eb034"),
+    "Lesson02.html": (59_365, "e3695c83f7d306baaaca09b8b4fcc98e92e2b2423d283c2cc55da0793fa87d45"),
+    "Lesson03.html": (102_805, "1ab1b06544a0176b4bbdfe7879a8b2cad7083ea6c9037e474611539c39ada059"),
+    "Lesson04.html": (81_439, "1cebf9f4097a26be5ca2ea71cde4834af0f5175dfef8358f2a9c26a53dd7b84d"),
+    "Lesson05.html": (195_443, "5595a4b7a194086abd77b8793a14cafbae5492807c044271a92e217753f4a2c1"),
+    "Lesson06.html": (36_704, "e9cade5664e88c6b20688d7245649140e98fd487b890ef987d1295059f0d13a5"),
+    "Lesson07.html": (74_168, "4f25b38c02f524493ea2368e147ba1dc5b049b0e8402496d9418d233cd178eb1"),
+    "Lesson08.html": (113_297, "abedbe06fa9134c430a32f236ad05cb6a5570a8b40d73346e6ee3fdb14c8b3ef"),
+    "Lesson09.html": (95_364, "b4623b38c3ef5476628612a8887c6e3278cbb6cd7cde35d624000c63a2ffe7a7"),
+    "Lesson10.html": (153_817, "c4e6282d4fd860da55cd16561bae1ef59e7abdfe020e9a758e6bb0f64d4248d7"),
+    "Lesson11.html": (69_875, "dedba38a37713ee05f04041a230d0676893de4140b171f6c33e3d1c978f6ebb7"),
+}
+
+
 def patch_page(payload: bytes, filename: str) -> bytes:
     text = payload.decode("utf-8")
     replacements = (
@@ -477,18 +498,28 @@ def canonical_page_payload(path: Path, generated: bytes) -> bytes:
     if not path.is_file():
         return generated
 
+    frozen = path.read_bytes()
+    expected = EXPECTED_CANONICAL_PRIOR_TARGETS.get(path.name)
+    if expected is not None:
+        expected_bytes, expected_sha256 = expected
+        if len(frozen) != expected_bytes or sha256(frozen) != expected_sha256:
+            raise RuntimeError(f"canonical prior target identity differs: {path.name}")
+        return frozen
+
+    def canonical_text(value: str) -> str:
+        return value.replace("\r\n", "\n").replace("\r", "\n")
+
     def signature(payload: bytes) -> tuple[object, ...]:
         soup = BeautifulSoup(payload, "html.parser")
         return (
             [(node.name, node.get("data-o006-id")) for node in soup.select("[data-o006-id]")],
-            [node.get_text() for node in soup.select(".math")],
-            [node.get_text() for node in soup.select("pre, code")],
+            [canonical_text(node.get_text()) for node in soup.select(".math")],
+            [canonical_text(node.get_text()) for node in soup.select("pre, code")],
             [node.get("src") for node in soup.select("img")],
             [node.get("href") for node in soup.select("a[href]")],
-            [node.get_text(" ", strip=True) for node in soup.select(".edition-note")],
+            [canonical_text(node.get_text(" ", strip=True)) for node in soup.select(".edition-note")],
         )
 
-    frozen = path.read_bytes()
     if signature(frozen) != signature(generated):
         return generated
     if b"assets/reader-14of14.css" not in frozen:

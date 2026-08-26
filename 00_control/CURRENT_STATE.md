@@ -150,9 +150,9 @@ The complete cumulative offline reader contains 106 files / 17,614,553 bytes.
 Its 11,573-byte manifest has SHA-256
 `697c9ee8e23cc10469fea4d1894e16471ffb4276edd1f0d25bebfb5be0dbe79e`.
 The 17,276-byte build receipt has SHA-256
-`d7bae677a7d93023322773806a96418b3d96af19bae39bfd5fe967c327d01954`;
+`b08693e28595bf51814c3cbd6654223f024cb22512b07e849a557e73a27dd328`;
 the 12,428-byte deterministic QA receipt has SHA-256
-`44a0fd8e432f81da65776b45f33cccda0e462db32bb04bf8ecdb6d11eeca5560`.
+`d12c9dcb4293de0ec929cc2d2c330e197d936a86e17e27adc20dede10bef15db`.
 Asset freeze, normalization, merge, materialization, cumulative build, and QA
 write/check-only replays pass. The gate covers all 14 documents, 4,932
 segments, 6,510/6,498 source/target units, 3,156 protected math surfaces, 242
@@ -170,7 +170,7 @@ tables, twelve captioned and two historical source tables without captions;
 all six Lesson 12 tables are captioned and fully scoped. Its three offline
 video equivalents are expanded, readable, and unclipped. The 21,702-byte
 visual receipt has SHA-256
-`2fe1f40b8748b0dcc67e08e6a87e6ba402b5323b581744f73e35c787ae583d5f`;
+`02583cecceba1db5f8a9f7561f567ebd98585c441a6e4cae5ba1ef92f8710d6e`;
 its write and check-only modes both pass.
 
 The 242-row correction backend has exact ordered IDs

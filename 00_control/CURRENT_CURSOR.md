@@ -27,9 +27,9 @@ Updated: 2026-08-26
 - Complete reader: 106 files / 17,614,553 bytes; manifest SHA-256
   `697c9ee8e23cc10469fea4d1894e16471ffb4276edd1f0d25bebfb5be0dbe79e`.
 - Build receipt SHA-256
-  `d7bae677a7d93023322773806a96418b3d96af19bae39bfd5fe967c327d01954`;
+  `b08693e28595bf51814c3cbd6654223f024cb22512b07e849a557e73a27dd328`;
   deterministic QA receipt SHA-256
-  `44a0fd8e432f81da65776b45f33cccda0e462db32bb04bf8ecdb6d11eeca5560`.
+  `d12c9dcb4293de0ec929cc2d2c330e197d936a86e17e27adc20dede10bef15db`.
   All write/check-only replays pass.
 - Cross-platform repair: `working/lesson12_source_findings.md` is canonically
   LF at 8,203 bytes / SHA-256
@@ -41,7 +41,7 @@ Updated: 2026-08-26
   resources, 3,156 protected MathJax containers, 67 images, 14 tables, zero
   `merror`, broken images, iframes, console warnings/errors, or page/navigation
   overflow. Visual receipt SHA-256
-  `2fe1f40b8748b0dcc67e08e6a87e6ba402b5323b581744f73e35c787ae583d5f`.
+  `02583cecceba1db5f8a9f7561f567ebd98585c441a6e4cae5ba1ef92f8710d6e`.
 - Complete translation ledger: fourteen data rows / 5,821 bytes / SHA-256
   `c5ba07e250360af2a97957aa957278f43348c05bb44a208a2a2898fc6b034660`.
 - Complete terminology glossary: 192 data rows / 20,340 bytes / SHA-256

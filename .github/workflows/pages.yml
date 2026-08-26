@@ -63,6 +63,8 @@ jobs:
           python -B scripts/build_lesson12_translation_batches.py --check-only
           python -B scripts/merge_lesson12_translations.py --check-only
           python -B scripts/materialize_lesson12_translation.py --check-only
+          python -B scripts/extend_adverse_ledger_lesson12.py --check-only
+          python -B scripts/update_lesson12_translation_ledger.py --check-only
           python -B scripts/build_through_lesson12.py --check-only
           python -B scripts/qa_through_lesson12.py --check-only
 

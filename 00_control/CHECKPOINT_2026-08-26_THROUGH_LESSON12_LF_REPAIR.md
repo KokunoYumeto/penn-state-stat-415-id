@@ -24,15 +24,15 @@ are:
 - Lesson 12 materialization: 3,911 bytes, SHA-256
   `e55f6154cf8555edbed8eda452aa058186d3067b5e2e1b4061a5fd697b91fa67`;
 - cumulative build: 17,276 bytes, SHA-256
-  `d7bae677a7d93023322773806a96418b3d96af19bae39bfd5fe967c327d01954`;
+  `b08693e28595bf51814c3cbd6654223f024cb22512b07e849a557e73a27dd328`;
 - cumulative deterministic QA: 12,428 bytes, SHA-256
-  `44a0fd8e432f81da65776b45f33cccda0e462db32bb04bf8ecdb6d11eeca5560`.
+  `d12c9dcb4293de0ec929cc2d2c330e197d936a86e17e27adc20dede10bef15db`.
 
 The exact full GitHub Actions command chain passes locally after the workflow
 was advanced from the obsolete through-Lesson11 replay to the complete Lesson
 12 freeze/normalize/translate/materialize/ledger/build/QA chain. Browser QA is
 still bound to the unchanged reader: 21,702 bytes, SHA-256
-`2fe1f40b8748b0dcc67e08e6a87e6ba402b5323b581744f73e35c787ae583d5f`.
+`02583cecceba1db5f8a9f7561f567ebd98585c441a6e4cae5ba1ef92f8710d6e`.
 
 Zenodo record `22105226`, DOI `10.5281/zenodo.22105226`, is public in concept
 `22077422`; anonymous readback matched its nine files / 55,308,347 bytes, and
