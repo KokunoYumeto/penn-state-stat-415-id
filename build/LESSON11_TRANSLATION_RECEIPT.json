@@ -1,0 +1,106 @@
+{
+  "batches": [
+    {
+      "batch": "A",
+      "bytes": 16731,
+      "path": "working/lesson11_translation_batch_A.csv",
+      "range": [
+        "O006-PSU-012-S0001",
+        "O006-PSU-012-S0048"
+      ],
+      "segments": 48,
+      "sha256": "9816d5226b94436bff2e90ccf7351acad849a11b4a78925eab83ded65c8e88e1"
+    },
+    {
+      "batch": "B",
+      "bytes": 54144,
+      "path": "working/lesson11_translation_batch_B.csv",
+      "range": [
+        "O006-PSU-012-S0049",
+        "O006-PSU-012-S0286"
+      ],
+      "segments": 238,
+      "sha256": "a960935a46e5ede60c827073d5176184d24e09b685795f32542e404022798a4d"
+    },
+    {
+      "batch": "C",
+      "bytes": 15551,
+      "path": "working/lesson11_translation_batch_C.csv",
+      "range": [
+        "O006-PSU-012-S0287",
+        "O006-PSU-012-S0354"
+      ],
+      "segments": 68,
+      "sha256": "864700e249ddaaa76fd6921c13eddf39106a5ec1ec178fa5f73d60db245ee282"
+    }
+  ],
+  "bindings": {
+    "bytes": 165244,
+    "path": "backend/lesson11_translation_bindings.jsonl",
+    "records": 354,
+    "sha256": "dbf90c6a2ed2bc7b31c0df808b28351a08ef61e14ddd73fc048562e1e350ed8f"
+  },
+  "document": "Lesson11",
+  "document_id": "O006-PSU-012",
+  "identical_segments": [
+    "O006-PSU-012-S0004",
+    "O006-PSU-012-S0025",
+    "O006-PSU-012-S0026",
+    "O006-PSU-012-S0027",
+    "O006-PSU-012-S0028",
+    "O006-PSU-012-S0029"
+  ],
+  "locale": "id-ID",
+  "merge_script": {
+    "bytes": 14749,
+    "path": "scripts/merge_lesson11_translations.py",
+    "sha256": "d894105eeef4b2f5abdd9e24c49bf90d3bc16305c93bbbc52d1bcf2cdc19e2f2"
+  },
+  "normalization_inputs": [
+    {
+      "bytes": 8194,
+      "path": "build/LESSON11_NORMALIZATION_RECEIPT.json",
+      "schema": "o006.stat415.lesson11-normalization.v1",
+      "sha256": "448773792cfad18d52fb883d3dba4a298d5271948fdbedd2d9e01d7d2a70cdd4",
+      "source_sha256": "4a007ab235242a27f000a8e8865fab06d2b8507a2e2e7400faf6112ce83a7c32"
+    },
+    {
+      "bytes": 640,
+      "path": "working/lesson11_asset_inventory.csv",
+      "sha256": "e47569a3484f5763437bb2955092a9611bddbb6df3fa5c0a58616528107df21c"
+    }
+  ],
+  "schema": "o006.stat415.lesson11-translation.v1",
+  "segment_count": 354,
+  "status": "complete",
+  "template": {
+    "bytes": 65078,
+    "path": "working/lesson11_segments.csv",
+    "sha256": "cc44665c54d689a584c28631b69c3f7209163d035a9be582a6b93839847dde1f"
+  },
+  "terminology_inputs": [
+    {
+      "bytes": 17727,
+      "last_term_id": "O006-TERM-0168",
+      "path": "00_control/TERMINOLOGY_GLOSSARY_ID_ID.csv",
+      "rows": 168,
+      "scope": "immutable cumulative glossary prefix through the 18 Lesson 11 decisions",
+      "sha256": "1bbc59cbd21477d7f030471bcd2d47001c37cdb4d7781b7a7e24dc2aa3c80b65"
+    }
+  ],
+  "translated_status_count": 354,
+  "translation_csv": {
+    "bytes": 86242,
+    "path": "source/id-ID/lesson11_translation.csv",
+    "sha256": "1b54aa89f765f3befbd9464d4382aa68551f7278947a06d01621fd26b632c20c"
+  },
+  "translation_provenance": "OpenAI Codex gpt-5.6-sol, Ultra",
+  "validation": {
+    "all_segments_translated": true,
+    "boundary_whitespace_exact": true,
+    "canonical_utf8_lf": true,
+    "replacement_character_absent_from_targets": true,
+    "source_fields_exact": true,
+    "source_hashes_recomputed": true
+  }
+}

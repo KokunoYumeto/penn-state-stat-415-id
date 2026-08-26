@@ -1,0 +1,357 @@
+segment_id,document_id,component_id,section_id,source_sha256,source_text,target_text,status
+O006-PSU-012-S0001,O006-PSU-012,Lesson11,,cb4ad503e340ebd1a921e3ed6dcbfc0a80660936d8bfc9d190f70694b9ccb51b,Lessons,,pending
+O006-PSU-012-S0002,O006-PSU-012,Lesson11,,82a1329a86f4d45267a5e6bfb19952b94f0fcf88505f592e19d3bfdf7ff90fcf,Bayesian Methods,,pending
+O006-PSU-012-S0003,O006-PSU-012,Lesson11,,82a1329a86f4d45267a5e6bfb19952b94f0fcf88505f592e19d3bfdf7ff90fcf,Bayesian Methods,,pending
+O006-PSU-012-S0004,O006-PSU-012,Lesson11,,f290b2f6383f0e98c2ee85771b45bb08b4a8145a1171294c776f227310deb7c8,Bayesian,,pending
+O006-PSU-012-S0005,O006-PSU-012,Lesson11,,482eb96e7e8d75a707f126ddd0134259e6ae73f11d0163f0b13d143326b369d3,Subjective Probability,,pending
+O006-PSU-012-S0006,O006-PSU-012,Lesson11,,3baf0ce1cc6d5e7e23f24a5168a33865e012b03b37aac0390987aa7982904243,Credible Intervals,,pending
+O006-PSU-012-S0007,O006-PSU-012,Lesson11,overview,d4b1ea5708dd532930a85188b45aff6f0a3ed458500c7577e0127a538eb0d100,Overview,,pending
+O006-PSU-012-S0008,O006-PSU-012,Lesson11,overview,61670aeb1e2bc3dfda008f56dd53e0b84c26f82c79256b0624d4bac572ab717b,"
+Fig 11.1: Thomas Bayes
+",,pending
+O006-PSU-012-S0009,O006-PSU-012,Lesson11,overview,7fd1bfc8556930e534019b0a7299faad8e0d4bdbb8480bf01dcf3952fe87643f,"All of the methods we have developed and used thus far in this course have been developed using what statisticians would call a “frequentist” approach. In this section, we revisit some of those methods using what statisticians would call a “Bayesian” approach. Specifically, we will:",,pending
+O006-PSU-012-S0010,O006-PSU-012,Lesson11,overview,cbe72f3cd98f2e2be5f8e43e6a18f0b0cc3bd4a7e7adf95d18de9556974cba5d,learn how a Bayesian would assign probabilities to certain events,,pending
+O006-PSU-012-S0011,O006-PSU-012,Lesson11,overview,a450d6d790a738a7149a6fa62f6eb00b46d5d4537c9dd35b0607f2c9ec4ba343,learn how a Bayesian would tackle the estimation of a parameter,,pending
+O006-PSU-012-S0012,O006-PSU-012,Lesson11,overview,466e2b989fde831bb3a037f09396b59d19cb172b72d5f0afdbb852c3c387396e,learn how a Bayesian would update the prior information they have about the value of a parameter,,pending
+O006-PSU-012-S0013,O006-PSU-012,Lesson11,overview,d4615f6a129fcdb18501b29f099857c107694927fae58a879306b0ac53edeeb7,"In case you are wondering, the picture to the right is that of the Reverend Thomas Bayes, after which the field of Bayesian statistics is aptly named.",,pending
+O006-PSU-012-S0014,O006-PSU-012,Lesson11,overview,c8d84b2abec33c2862f66c6cc614d5ebc88e08734036d2986d779e8d72b9450a,"We’d need at least an entire semester, and perhaps more, to truly do any justice to the study of Bayesian statistics. The best we can do in this course is to dabble a bit and in doing so take just a tiny peek at the world through the eyes of a Bayesian. First, we’ll take a look at an example that illustrates how a Bayesian might assign a (subjective) probability to an event given the information he or she has available. Then, we’ll investigate how a Bayesian might estimate a parameter. Finally, we’ll explore how a Bayesian might update the prior information he or she has about the value of a parameter.",,pending
+O006-PSU-012-S0015,O006-PSU-012,Lesson11,objectives,eba92953899468e3f79c084370cc455f39c256e77b5277ff480e3384ff9ecc27,Objectives,,pending
+O006-PSU-012-S0016,O006-PSU-012,Lesson11,objectives,25aef8be8be2a587942663b20614423b057589f18636ba6d72bd7bf691a84629,"Upon completion of this lesson, you should be able to:",,pending
+O006-PSU-012-S0017,O006-PSU-012,Lesson11,objectives,5e3a5422f2cf1d51b7439b18eb8ebfbfc4272468dfbb6d83e4f23b768387e8ff,"Analytically find Bayesian posterior distributions for single parameter models with a given prior distribution, both in situations where data values are given and in situations where the data are seen as unobservable random variables, and",,pending
+O006-PSU-012-S0018,O006-PSU-012,Lesson11,objectives,21d766f72edc671352dba01683b973ed5e2b8bcc0ab2d85ac97569fc22c7850b,"Calculate a credible interval for unknown parameter, .",,pending
+O006-PSU-012-S0019,O006-PSU-012,Lesson11,subjective-probability,4d403688bc2bbc1852d10d1de71502303880bd937e1a6e463ac8768d26e670cd, Subjective Probability,,pending
+O006-PSU-012-S0020,O006-PSU-012,Lesson11,subjective-probability,b7bbf826e291099843085184fb08ebf3a99b6847b6de4dcf2c072669c66b0d72,Let’s go through an example that illustrates how a Bayesian might use available data to assign probabilities to particular events.,,pending
+O006-PSU-012-S0021,O006-PSU-012,Lesson11,subjective-probability,123bd03c8dc3be57e2ab3f0c6b7a8729292fb201ec386657e9ea13a3a4f52de7,Example 11.1,,pending
+O006-PSU-012-S0022,O006-PSU-012,Lesson11,subjective-probability,eb65fa1e37d981e0a83ea348291a7c05367384a859442eab9d908810abc37427," The following amounts, in dollars, are bet on horses A, B, C, and D to win a local race:",,pending
+O006-PSU-012-S0023,O006-PSU-012,Lesson11,subjective-probability,edc5134033662b11f124eb353016838b04709f972e27355d7ed1c5686671e47f,Horse,,pending
+O006-PSU-012-S0024,O006-PSU-012,Lesson11,subjective-probability,49e96d7cdf58069cc793555324e2226642f2f7f8bfff4cebe0c11a61eecef60a,Amount,,pending
+O006-PSU-012-S0025,O006-PSU-012,Lesson11,subjective-probability,559aead08264d5795d3909718cdd05abd49572e84fe55590eef31a88a08fdffd,A,,pending
+O006-PSU-012-S0026,O006-PSU-012,Lesson11,subjective-probability,df7e70e5021544f4834bbee64a9e3789febc4be81470df629cad6ddb03320a5c,B,,pending
+O006-PSU-012-S0027,O006-PSU-012,Lesson11,subjective-probability,6b23c0d5f35d1b11f9b683f0b0a617355deb11277d91ae091d399c655b87940d,C,,pending
+O006-PSU-012-S0028,O006-PSU-012,Lesson11,subjective-probability,3f39d5c348e5b79d06e842c114e6cc571583bbf44e4b0ebfda1a01ec05745d43,D,,pending
+O006-PSU-012-S0029,O006-PSU-012,Lesson11,subjective-probability,c9b3c38247f744e17dd26fda097d6a9ba9332586b6bdaa038bf8f313a863f2b8,Total,,pending
+O006-PSU-012-S0030,O006-PSU-012,Lesson11,subjective-probability,60b6a38aeec28d406fe83fcc86fdd0901f9a2b726fc3cecfafaa8beb0810c3fb,"Determine the payout for winning with a $2 bet on each of the four horses, if the track wants to take 17%, or $17,000, from the amount collected.",,pending
+O006-PSU-012-S0031,O006-PSU-012,Lesson11,solution,22927695994eab589c7601a6b15df4d9dc67c5aceb9a74cdb965444b9b8362a6,Solution,,pending
+O006-PSU-012-S0032,O006-PSU-012,Lesson11,solution,e74b4bc0936cde70e1f0fc354d8baf5535b3e8bc1872767893db9c909e831570,"The first thing we need to do is to determine the likelihood, that is, probability, that each of the horses wins. We could assign the probabilities based on our own “gut feeling.” Geez…. I think horse A is gonna win today. In general, that’s probably not a good idea. We’d probably be much better served if we used the information we have available, namely the “gut feeling” of all of the bettors! That is, if $38,000 worth of bets came in for Horse D and only $10,000 came in for Horse A, that tells us that more people think that Horse D is going to win than Horse A. It would behoove us, therefore, to use the amounts bet to assign the probabilities. That said, the probability that Horse A will win is then:",,pending
+O006-PSU-012-S0033,O006-PSU-012,Lesson11,solution,6766e6f7eb21cb7f479c888f937227892dac9b87e0b33f77527f6c72cae51703,"And, the probability that Horse B will win is:",,pending
+O006-PSU-012-S0034,O006-PSU-012,Lesson11,solution,f57f639f83f4902e46e23544aa758dd3c4ec930ea045afa1eae67be42a4ebf75,"And, the probability that Horse C will win is:",,pending
+O006-PSU-012-S0035,O006-PSU-012,Lesson11,solution,7c9dfc033b20c9fe72b224f503d47c68f86564afbc6577a220c7858d72a68fa6,"And, the probability that Horse D will win is:",,pending
+O006-PSU-012-S0036,O006-PSU-012,Lesson11,solution,323d5d0e92737f20e427fb76c4fecd084df20a44d27d6f7b24fdac8928b520b0,"Now having assigned a probability to the event that Horse A wins, we can determine the odds against horse A winning. It is:",,pending
+O006-PSU-012-S0037,O006-PSU-012,Lesson11,solution,2ededa67af07374bbc2a45ee9edf9fb91ab89415300881653a1e5967b22ef26b,"The odds against A tells us that the track will payout $9 on a $1 bet. Now, the odds against Horse B winning is:",,pending
+O006-PSU-012-S0038,O006-PSU-012,Lesson11,solution,507b72694edb35480e01274847dc655c410700a36e9dc4540697ca589cb67b10,The odds against B tells us that the track will payout ,,pending
+O006-PSU-012-S0039,O006-PSU-012,Lesson11,solution,98bd0210881e14c6039e1d98a3a4e3e5284f1380c49333ef068f547bd190d435," on a $1 bet. Now, the odds against Horse C winning is:",,pending
+O006-PSU-012-S0040,O006-PSU-012,Lesson11,solution,a7ed50e4cc3442cc9a1b486288c441c08cbef68163929f52ba90ab0e7cb3e76f,The odds against C tell us that the track will payout ,,pending
+O006-PSU-012-S0041,O006-PSU-012,Lesson11,solution,aae0e25013312dc0a920d4cde4f2066573ae14727290e6c0d9019eec0f3b1ad0," on a $1 bet. Finally, the odds against Horse D winning is:",,pending
+O006-PSU-012-S0042,O006-PSU-012,Lesson11,solution,879cdc8d55bfe9bd40ea094a0180b4c1962d4729198ce93f6a1a760ddbc24f49,The odds against D tell us that they track will payout ,,pending
+O006-PSU-012-S0043,O006-PSU-012,Lesson11,solution,4ae0884dd8b57c799bf8f6a2d579c41f25f1bd3fdf97c13fba1a28b3fbdcd958," on a $1 bet. Now, using the odds against Horse A winning, we can determine that the amount the track pays out on a $2 bet on Horse A is:",,pending
+O006-PSU-012-S0044,O006-PSU-012,Lesson11,solution,9a70eb97cdefc616be5c08d401c96f35ed9de61ecf16c10cdc51245f043925e5,"That is, the bettor gets $9 for each $1 bet, that is, $18, plus the $2 he or she originally bet. Now, using the odds against Horse B winning, we can determine that the amount the track pays out on a $2 bet on Horse B is:",,pending
+O006-PSU-012-S0045,O006-PSU-012,Lesson11,solution,ddc3bb304926c4b573173c842bccb9d6d51e85d47ce3df21b542dd14d5c24b65,"And, using the odds against Horse C winning, we can determine that the amount the track pays out on a $2 bet on Horse C is:",,pending
+O006-PSU-012-S0046,O006-PSU-012,Lesson11,solution,4dbb50e3717512bbdf1a1c46c2286fddf98f84653173969b862b1ee2fb29c5b0,"And, using the odds against Horse D winning, we can determine that the amount the track pays out on a $2 bet on Horse D is:",,pending
+O006-PSU-012-S0047,O006-PSU-012,Lesson11,solution,083370f216f1ec7314ea4cb0ad4702acce1357af808be82ad43dd3b82ea52ae4,"We’re almost there. We just need to skim the 17% off for the race track to make sure that it makes some money off of the bettors. Multiplying each of the calculated payouts by 0.83, we get:",,pending
+O006-PSU-012-S0048,O006-PSU-012,Lesson11,subjective-probability,37033d072d115aa49fdc4c34ef3546ba4a336b945e4879ab81f38774ca8278d0,"We can always check our work, too. Suppose, for example, that Horse A wins. Then the track would payout $16.60 to the 5000 bettors who bet $2 on Horse A, costing the track $16.60(5000) = $83,000. Given that that track brought in $100,000 in bets, the track would indeed make its desired $17,000. A similar check of our work can be made for Horses B, C, and D, although there may be some round-off errors because we did do some rounding in our payout calculations. Should still be very close to $83,000 in each case though!",,pending
+O006-PSU-012-S0049,O006-PSU-012,Lesson11,bayesian-estimation,5bf94c1ff5bcf1cf053dea0cee7a0bdaa9231c4d7f307e60e16b546548485406, Bayesian Estimation,,pending
+O006-PSU-012-S0050,O006-PSU-012,Lesson11,bayesian-estimation,951162427527b766c2429e67bd2b3b98b27c6954a790fdc21f010f9bc17c62e9,There’s one key difference between frequentist statisticians and Bayesian statisticians that we first need to acknowledge before we can even begin to talk about how a Bayesian might estimate a population parameter ,,pending
+O006-PSU-012-S0051,O006-PSU-012,Lesson11,bayesian-estimation,1b79c41470f0bbdd6e5313cbc629ba9443e8a0a35bfe099caf3f47917b0d4ae0,. The difference has to do with whether a statistician thinks of a parameter as some unknown constant or as a random variable. Let’s take a look at a simple example in an attempt to emphasize the difference.,,pending
+O006-PSU-012-S0052,O006-PSU-012,Lesson11,bayesian-estimation,903fad01fbf271565130a7c1b6f58b2a02456abe54679693ee89021eed06fa8a,Example 11.2,,pending
+O006-PSU-012-S0053,O006-PSU-012,Lesson11,bayesian-estimation,2b69c2e1d77a4096fa4d4de5164200961fa97e4940375d7b5798f63e4e2bd8fb, A traffic control engineer believes that the cars passing through a particular intersection arrive at a mean rate ,,pending
+O006-PSU-012-S0054,O006-PSU-012,Lesson11,bayesian-estimation,2f2d7dd7bc29b55f5f9046fe1d13daccb288843f25631c0a358c350d98ee51bb," equal to either 3 or 5 for a given time interval. Prior to collecting any data, the engineer believes that it is much more likely that the rate ",,pending
+O006-PSU-012-S0055,O006-PSU-012,Lesson11,bayesian-estimation,ffd338c2808c175e57025c8e8b4d343d84abe9c4a2a5774d1d143468a3074218, than ,,pending
+O006-PSU-012-S0056,O006-PSU-012,Lesson11,bayesian-estimation,a91371dcf78572503c75d8f5ebdcd3b873c633eed4fe9e6b01b2a2e60ef64842,". In fact, the engineer believes that the prior probabilities are:",,pending
+O006-PSU-012-S0057,O006-PSU-012,Lesson11,bayesian-estimation,defd907d3f28723be15e700df9af2220cbb13d50a32db6fd74ac07ef3939a31f,"One day, during a a randomly selected time interval, the engineer observes ",,pending
+O006-PSU-012-S0058,O006-PSU-012,Lesson11,bayesian-estimation,4ae1e5fa65002c3e837d128371ea75954cc5beac0b277c4d0bb8089f8d3ad8ac," cars pass through the intersection. In light of the engineer’s observation, what is the probability that ",,pending
+O006-PSU-012-S0059,O006-PSU-012,Lesson11,bayesian-estimation,3df269b3050b3ece93326e64725acf68b394f516b168147ecd78fc7fba71fc4c, And what is the probability that ,,pending
+O006-PSU-012-S0060,O006-PSU-012,Lesson11,solution-1,22927695994eab589c7601a6b15df4d9dc67c5aceb9a74cdb965444b9b8362a6,Solution,,pending
+O006-PSU-012-S0061,O006-PSU-012,Lesson11,solution-1,15e6e160e1048c8d9659fd884661e732577102342a0db7593b8f4d0409ff3c55,The first thing you should notice in this example is that we are talking about finding the probability that a parameter ,,pending
+O006-PSU-012-S0062,O006-PSU-012,Lesson11,solution-1,4a3a5ac8c0b3110b8de4c9881c656b34092f3a782f92ceecf5bbc4ef5d03bebd," takes on a particular value. In one fell swoop, we’ve just turned everything that we’ve learned in Stat 414 and Stat 415 on its head! The next thing you should notice, after recovering from the dizziness of your headstand, is that we already have the tools necessary to calculate the desired probabilities. Just stick your hand in your probability tool box, and pull out Bayes’ Theorem.",,pending
+O006-PSU-012-S0063,O006-PSU-012,Lesson11,solution-1,1f44e69b1152623ca06ebc86e3a0baae38891f0a2ef3d2639759cb590c755604,"Now, simply by using the definition of conditional probability, we know that the probability that ",,pending
+O006-PSU-012-S0064,O006-PSU-012,Lesson11,solution-1,04330d9437e30d607038a30d8318be86d219eac3e29dbce719a85d2bd5121a79, given that ,,pending
+O006-PSU-012-S0065,O006-PSU-012,Lesson11,solution-1,ccd4554f9c2a0a240cbe274a4447ae7d6933d28a26c80815a1475dff5ad731bd, is:,,pending
+O006-PSU-012-S0066,O006-PSU-012,Lesson11,solution-1,34396d2a43360498f30ff24b86c60455e9491fa4dd514e27c2657296e6f3e811,which can be written using Bayes’ Theorem as:,,pending
+O006-PSU-012-S0067,O006-PSU-012,Lesson11,solution-1,6f16e9d6d181519de5b96638073dea11eb8c12591bfc55839ada82f0fe2d35bc,We can use the Poisson cumulative probability table in the back of our text book to find,,pending
+O006-PSU-012-S0068,O006-PSU-012,Lesson11,solution-1,46fa046e14f9b4065899b5e604fdb79fb32a352ad4e8cb1d542b79f5cc7528ea, They are:,,pending
+O006-PSU-012-S0069,O006-PSU-012,Lesson11,solution-1,fcc7b8bec7df790940294e5fc810ef3cb947a1e22a4beb49861617b606bcdbea,"Now, we have everything we need to finalize our calculation of the desired probability:",,pending
+O006-PSU-012-S0070,O006-PSU-012,Lesson11,bayesian-estimation,6a5110c6d77a961cb89b9d47d56a3b3389274df12df33faf788edce227ade4e6,"Hmmm. Let’s summarize. The initial probability, in this case, ",,pending
+O006-PSU-012-S0071,O006-PSU-012,Lesson11,bayesian-estimation,cf5ce383e9175589c08050914732f9fb1ee2e629bacd1310b491291989d73607, is called the ,,pending
+O006-PSU-012-S0072,O006-PSU-012,Lesson11,bayesian-estimation,f0d64be3e187752f97d447d5f58cbc8c9397bd402725eef1bab1c1590ea24982,prior probability,,pending
+O006-PSU-012-S0073,O006-PSU-012,Lesson11,bayesian-estimation,b40d51b3027667285e491e80755b9f775fccb20f1120f3d1c1dd1dc664b27c04,". That’s because it is the probability that the parameter takes on a particular value prior to taking into account any new information. The newly calculated probability, that is:",,pending
+O006-PSU-012-S0074,O006-PSU-012,Lesson11,bayesian-estimation,69714dc9b73d2bccf0c0f51e3126f43df23044cd23007a6993cf41632ace83af,is called the ,,pending
+O006-PSU-012-S0075,O006-PSU-012,Lesson11,bayesian-estimation,e9aa01f0eb71de3abcbb7ef36c18cc07a07ee80f0bd4bff60eae23bcc5f7992a,posterior probability,,pending
+O006-PSU-012-S0076,O006-PSU-012,Lesson11,bayesian-estimation,3006e1f147c7a2584143e0aae9d2637e606a17f74f93b81ae1f6cf9fe18a6a8b,". That’s because it is the probability that the parameter takes on a particular value posterior to, that is, after, taking into account the new information. In this case, we have seen that the probability that ",,pending
+O006-PSU-012-S0077,O006-PSU-012,Lesson11,bayesian-estimation,0844fe5e95567da05a4286978e380433a70daf326bacb8735b7cf5127b9c3bc5, has decreased from 0.7 (the prior probability) to 0.328 (the posterior probability) with the information obtained from the observation ,,pending
+O006-PSU-012-S0078,O006-PSU-012,Lesson11,bayesian-estimation,25de3bc0677cb3cee6a229885711620d27acec6379c2ba850feecf418581094a,A similar calculation can be made in finding ,,pending
+O006-PSU-012-S0079,O006-PSU-012,Lesson11,bayesian-estimation,b40dd4def905335596dee41d9afe81cdf0f0583929323c24e0b5c6b7411d47f3,". In doing so, we see:",,pending
+O006-PSU-012-S0080,O006-PSU-012,Lesson11,bayesian-estimation,adcde6824e5f9584e40f141e5880d9fc3ad086242543e77eb20870cb8fbe1d91,"In this case, we see that the probability that ",,pending
+O006-PSU-012-S0081,O006-PSU-012,Lesson11,bayesian-estimation,2c4b0dcdf32794697c87c86ee7500a3f5280d64c6e97c1eb9e6af48e4e173f87, has increased from 0.3 (the prior probability) to 0.672 (the posterior probability) with the information obtained from the observation ,,pending
+O006-PSU-012-S0082,O006-PSU-012,Lesson11,bayesian-estimation,d88099fdc555609f135d4a755fc0cd3e2d793619e3cf983fc2ba2b7ebf2d90be,"That last example is good for illustrating the distinction between prior probabilities and posterior probabilities, but it falls a bit short as a practical example in the real world. That’s because the parameter in the example is assumed to take on only two possible values, namely ",,pending
+O006-PSU-012-S0083,O006-PSU-012,Lesson11,bayesian-estimation,e1a3e78cb5c8858631bf81f94369a0be3fd2aebb9e852e66368b381c8feef91f, or ,,pending
+O006-PSU-012-S0084,O006-PSU-012,Lesson11,bayesian-estimation,0191120d5a90706b8ca5acb27f0ce45d56d6066c663d819676c430dfe036f8e4,. In the case where the parameter space for a parameter ,,pending
+O006-PSU-012-S0085,O006-PSU-012,Lesson11,bayesian-estimation,3d6e8bd697274141f8beaca0f7ba218d54079f5beb44a112b5fe475912421c7d," takes on an infinite number of possible values, a Bayesian must specify a ",,pending
+O006-PSU-012-S0086,O006-PSU-012,Lesson11,bayesian-estimation,05e951b9ce7804510f90c096bba11a1880214dd9e59885323ffa220297d1f14b,prior probability density function,,pending
+O006-PSU-012-S0087,O006-PSU-012,Lesson11,bayesian-estimation,e32922f9131849f16f0b5a4dd2e6dbc3803f6e6597f123a03cae3ca3e6e46285,", say. Entire courses have been devoted to the topic of choosing a good prior p.d.f., so naturally, we won’t go there! We’ll instead assume we are given a good prior p.d.f. ",,pending
+O006-PSU-012-S0088,O006-PSU-012,Lesson11,bayesian-estimation,2a76557e6e3f5e342e0265064cc094a5b7711f7ac865b72e55d8830feac9b988, and focus our attention instead on how to find a ,,pending
+O006-PSU-012-S0089,O006-PSU-012,Lesson11,bayesian-estimation,1d921d29ce4169d941c4a079a72178a44585db14537ded0de20d919ebaa1d6fc,posterior probability density function,,pending
+O006-PSU-012-S0090,O006-PSU-012,Lesson11,bayesian-estimation,806acfef2ed494c412f1e4e1697c8d139baebf5b1f456c3ae3991b58711900a4,", say, if we know the probability density function ",,pending
+O006-PSU-012-S0091,O006-PSU-012,Lesson11,bayesian-estimation,dfd10a006fc797c373538e71a50143c2c3c6c3610a3a1b4d2126158e698ab0df, of the statistic ,,pending
+O006-PSU-012-S0092,O006-PSU-012,Lesson11,bayesian-estimation,5020d013b7f1dc7f3eaf45c5e81aafc774b716ab263d74a6778879de51d8fda4,"Well, if we knew ",,pending
+O006-PSU-012-S0093,O006-PSU-012,Lesson11,bayesian-estimation,e3ee915a8e8c7aa02d2fced443314522b20824abd2535d5959c41dc8ab8a09e4, and ,,pending
+O006-PSU-012-S0094,O006-PSU-012,Lesson11,bayesian-estimation,4afbda08bfa6b580302c6b75e61b7c514fd63fb588acd31a13db3e4e786bd818,", we can treat: ",,pending
+O006-PSU-012-S0095,O006-PSU-012,Lesson11,bayesian-estimation,da4f4d281944caadbc9f9cba76ce9894d1548aac6d7cabc649012f8355822294, as the joint p.d.f. of the statistic ,,pending
+O006-PSU-012-S0096,O006-PSU-012,Lesson11,bayesian-estimation,398f9d1d6edbee2230bd0d78fdbc0beb94a89ff94a71f8cdcd51e1d8810dc1ff, and parameter ,,pending
+O006-PSU-012-S0097,O006-PSU-012,Lesson11,bayesian-estimation,068da710c4f9bc54bd21d06f6f8ffb83eab368b5cf4c51168bb3aadb1ef4389c,". Then, we can find the marginal distribution of ",,pending
+O006-PSU-012-S0098,O006-PSU-012,Lesson11,bayesian-estimation,56fed57f1856d526c79da158b998672b27872e7555fb57059dbdc181eaa3cf82, from the joint distribution ,,pending
+O006-PSU-012-S0099,O006-PSU-012,Lesson11,bayesian-estimation,18416453fc69fb64d32b9e62600199ddb211470703574692a86e5d7d49cd5fdb, by integrating over the parameter space of ,,pending
+O006-PSU-012-S0100,O006-PSU-012,Lesson11,bayesian-estimation,3489ab84e421a391e973e3342ca2362f1276d4ce73b0078651706e50e53fe0f0,"And then, we can find the posterior p.d.f. of ",,pending
+O006-PSU-012-S0101,O006-PSU-012,Lesson11,bayesian-estimation,faa86cdc1f9186d8c16a19930d81d45c64008b8e1092e3f95df1462929f17df6,", given that ",,pending
+O006-PSU-012-S0102,O006-PSU-012,Lesson11,bayesian-estimation,6af6e00586b8c2335f9a9bfa6d22135590cc18a4518af5dbfc76fd55540cca2f,", by using Bayes’ theorem. That is:",,pending
+O006-PSU-012-S0103,O006-PSU-012,Lesson11,bayesian-estimation,975400d0a95202928cf460b4a6700638fb09899e6edbfaf690067c0336268bf6,Let’s make this discussion more concrete by taking a look at an example.,,pending
+O006-PSU-012-S0104,O006-PSU-012,Lesson11,bayesian-estimation,fda05bf216c4f21888241bc9080dca0bd4d7219ef1f6d01868a98e26639e5fa4,Example 11.3,,pending
+O006-PSU-012-S0105,O006-PSU-012,Lesson11,bayesian-estimation,e49b84aade154e771d6e4e390afaa96da75a4e5f7f6d96c7b5840da29f7e0b79, Suppose that ,,pending
+O006-PSU-012-S0106,O006-PSU-012,Lesson11,bayesian-estimation,d08008c2bebe10fe1b451d34f996613e007c791939d2d069b767163d36cc9e19, follows a binomial distribution with parameters ,,pending
+O006-PSU-012-S0107,O006-PSU-012,Lesson11,bayesian-estimation,e3ee915a8e8c7aa02d2fced443314522b20824abd2535d5959c41dc8ab8a09e4, and ,,pending
+O006-PSU-012-S0108,O006-PSU-012,Lesson11,bayesian-estimation,333194752115efbd4651baeed72c0c3ed684cd9d34ddbad52bd70fe3eb211f9d,", so that the p.m.f. of ",,pending
+O006-PSU-012-S0109,O006-PSU-012,Lesson11,bayesian-estimation,c268d7c22458414a581a855c1cbec0d47685d6579669aecb82da281a80ce32f8, given ,,pending
+O006-PSU-012-S0110,O006-PSU-012,Lesson11,bayesian-estimation,ccd4554f9c2a0a240cbe274a4447ae7d6933d28a26c80815a1475dff5ad731bd, is:,,pending
+O006-PSU-012-S0111,O006-PSU-012,Lesson11,bayesian-estimation,ccb2f8fb3cff62792429cade2a71f2a237c36549ad99bb5d30f328d9a5dfdee3, for ,,pending
+O006-PSU-012-S0112,O006-PSU-012,Lesson11,bayesian-estimation,1d2c3fe7117ae7d8f14bfbc7e9992d05c44506ede5f40cf53456a92e46f23518,. Suppose that the prior p.d.f. of the parameter ,,pending
+O006-PSU-012-S0113,O006-PSU-012,Lesson11,bayesian-estimation,a64240fbd940523c7218650c8189e1e7f4ba62cd340bb86fe3ffbc2e994adf43," is the beta p.d.f., that is: ",,pending
+O006-PSU-012-S0114,O006-PSU-012,Lesson11,bayesian-estimation,21f4c696f93fb96f5f71545f752d435f4a46341ea57dc4558b6c2795bd97604d,for ,,pending
+O006-PSU-012-S0115,O006-PSU-012,Lesson11,bayesian-estimation,9439c54bc33d9eac31ba457a41fb76145db17198f835060f71e10992e73d7690,. Find the posterior p.d.f. of ,,pending
+O006-PSU-012-S0116,O006-PSU-012,Lesson11,bayesian-estimation,3d9ced6ab9039f8e48737dc031b1218c86328f45cc3cc0a9a2317c42574c7a83,", given ",,pending
+O006-PSU-012-S0117,O006-PSU-012,Lesson11,bayesian-estimation,da886ca1a61842510ea7fc3e9eecb56575fe1ae165a356c633d83c2dbf800184,". That is, find ",,pending
+O006-PSU-012-S0118,O006-PSU-012,Lesson11,solution-2,22927695994eab589c7601a6b15df4d9dc67c5aceb9a74cdb965444b9b8362a6,Solution,,pending
+O006-PSU-012-S0119,O006-PSU-012,Lesson11,solution-2,523dfe1dfbcd67c85bf038d21e12aba34be9657fce44680fd7f76441b67bd36a,"First, we find the joint p.d.f. of the statistic ",,pending
+O006-PSU-012-S0120,O006-PSU-012,Lesson11,solution-2,a26145b7060ea379360e0a0c8299cd43788a19b41e02aaa285f623cb20c24c4f, and the parameter ,,pending
+O006-PSU-012-S0121,O006-PSU-012,Lesson11,solution-2,7e6605357b10ffdb1bcdc89e8290efdddcaca4175232e01e6959262fe9f12587, by multiplying the prior p.d.f. ,,pending
+O006-PSU-012-S0122,O006-PSU-012,Lesson11,solution-2,5ed4b399e3e689e377418e7b0661f736f9f6348dfa49e2731a1ea5670bb74082, and the conditional p.m.f. of the statistic ,,pending
+O006-PSU-012-S0123,O006-PSU-012,Lesson11,solution-2,a26145b7060ea379360e0a0c8299cd43788a19b41e02aaa285f623cb20c24c4f, and the parameter ,,pending
+O006-PSU-012-S0124,O006-PSU-012,Lesson11,solution-2,f8e64d72bbaf46fb61ac0d8e72ede239f5f1946e9c2a06dfc36ce760fb22d971, is: ,,pending
+O006-PSU-012-S0125,O006-PSU-012,Lesson11,solution-2,9c557d92a84a52b65eb23137292d54eb83ed3395a4fee240a06d9edcf1267d2f,over the support ,,pending
+O006-PSU-012-S0126,O006-PSU-012,Lesson11,solution-2,e3ee915a8e8c7aa02d2fced443314522b20824abd2535d5959c41dc8ab8a09e4, and ,,pending
+O006-PSU-012-S0127,O006-PSU-012,Lesson11,solution-2,76b411b0b6451e1e2cc30bb4c057edeb997e4741080b0a4935b62dceeba791b4,"Then, we find the marginal p.d.f. of ",,pending
+O006-PSU-012-S0128,O006-PSU-012,Lesson11,solution-2,28c3e12a700868ee396bb6ecdccb709ea305bbdbca755f52e18af36c7c1dd197, by integrating ,,pending
+O006-PSU-012-S0129,O006-PSU-012,Lesson11,solution-2,d9ee970805fd692948e64e4722168c90b28d07516b51ac2316ff834d690061c8, over the parameter space of ,,pending
+O006-PSU-012-S0130,O006-PSU-012,Lesson11,solution-2,6798f184cdb5872f511c353f60ee825db8b098da046aae10f9582370e442756f,"Now, if we multiply the integrand by 1 in a special way:",,pending
+O006-PSU-012-S0131,O006-PSU-012,Lesson11,solution-2,2cebde36028fb4fbd3f57052f6fe3efb33ca531c09357fecb007f5b257ad0310,we see that we get a beta p.d.f. with parameters ,,pending
+O006-PSU-012-S0132,O006-PSU-012,Lesson11,solution-2,e3ee915a8e8c7aa02d2fced443314522b20824abd2535d5959c41dc8ab8a09e4, and ,,pending
+O006-PSU-012-S0133,O006-PSU-012,Lesson11,solution-2,9799fde399beeca5ccce3459b02fb530910df5c8a94d2f052fc2573183e07e28," that therefore, by the definition of a valid p.d.f., must integrate to 1. Simplifying we therefore get that the marginal p.d.f. of ",,pending
+O006-PSU-012-S0134,O006-PSU-012,Lesson11,solution-2,ccd4554f9c2a0a240cbe274a4447ae7d6933d28a26c80815a1475dff5ad731bd, is:,,pending
+O006-PSU-012-S0135,O006-PSU-012,Lesson11,solution-2,8cc5d09cae519cd8085425f6ee681809e9bce8179e851ee752d9992d7343172d,on the support ,,pending
+O006-PSU-012-S0136,O006-PSU-012,Lesson11,solution-2,f6334b18311482c878e783ba093d1c7e61abfb6fb9c52153bd90a3b0d737005d,". Then, the posterior p.d.f. of ",,pending
+O006-PSU-012-S0137,O006-PSU-012,Lesson11,solution-2,faa86cdc1f9186d8c16a19930d81d45c64008b8e1092e3f95df1462929f17df6,", given that ",,pending
+O006-PSU-012-S0138,O006-PSU-012,Lesson11,solution-2,ccd4554f9c2a0a240cbe274a4447ae7d6933d28a26c80815a1475dff5ad731bd, is:,,pending
+O006-PSU-012-S0139,O006-PSU-012,Lesson11,solution-2,ea3f1569293e808cc3e6180c3501e812cd3695e472a3e7456ee6e3ff0c3cd9f8,"Because some things cancel out, we see that the posterior p.d.f. of ",,pending
+O006-PSU-012-S0140,O006-PSU-012,Lesson11,solution-2,3d9ced6ab9039f8e48737dc031b1218c86328f45cc3cc0a9a2317c42574c7a83,", given ",,pending
+O006-PSU-012-S0141,O006-PSU-012,Lesson11,solution-2,ccd4554f9c2a0a240cbe274a4447ae7d6933d28a26c80815a1475dff5ad731bd, is:,,pending
+O006-PSU-012-S0142,O006-PSU-012,Lesson11,solution-2,21f4c696f93fb96f5f71545f752d435f4a46341ea57dc4558b6c2795bd97604d,for ,,pending
+O006-PSU-012-S0143,O006-PSU-012,Lesson11,solution-2,824412888f8380368a7ed666300185aff74aab67e46e21f368ae9b15529bd024,", which you might recognize as a beta p.d.f. with parameters ",,pending
+O006-PSU-012-S0144,O006-PSU-012,Lesson11,solution-2,e3ee915a8e8c7aa02d2fced443314522b20824abd2535d5959c41dc8ab8a09e4, and ,,pending
+O006-PSU-012-S0145,O006-PSU-012,Lesson11,bayesian-estimation,a166549c72e2fd2ef199d1b92fd063abdd47ecd131a57d3b5c03b146217840d8,Let’s consider another example.,,pending
+O006-PSU-012-S0146,O006-PSU-012,Lesson11,bayesian-estimation,3323803eb7796a894d3ba6b9ccd3f623fd1b00759b561312dccaae95c1f85836,Example 11.4,,pending
+O006-PSU-012-S0147,O006-PSU-012,Lesson11,bayesian-estimation,2522d5d13ecbd136d702ed96755b0673bc168e7805e4f2852f1a76a47e06b7f8, For fixed ,,pending
+O006-PSU-012-S0148,O006-PSU-012,Lesson11,bayesian-estimation,055c04a78f6eb4c0af573178fc5b06f497355231728abef35f3327c1c1c1382c,", suppose we observe a single observation ",,pending
+O006-PSU-012-S0149,O006-PSU-012,Lesson11,bayesian-estimation,b0733841379918b67c589ceb2417bca8caf04e903186d67f0ec6d3835092a1c4, for a distribution with pdf ,,pending
+O006-PSU-012-S0150,O006-PSU-012,Lesson11,bayesian-estimation,1f406326921bec79f45d42910b78358c2d0f5b66470bd5e3fcfbe7f342f4edb9,", for ",,pending
+O006-PSU-012-S0151,O006-PSU-012,Lesson11,bayesian-estimation,7e99b1e06c5448e876f732e5ec7c69810a8ed4c3a5d82fe0f2ed75aff118b8a3,", Also, prior information on ",,pending
+O006-PSU-012-S0152,O006-PSU-012,Lesson11,bayesian-estimation,15e7ce7a4ec213e57071107dd9e48beb542aa57f14ee52493352d545e694efa8, indicates that ,,pending
+O006-PSU-012-S0153,O006-PSU-012,Lesson11,bayesian-estimation,53cd35def1b75a757f0ad6abf1d5cfff8c35a9a427df638ec57722b727932d0b, has a pdf ,,pending
+O006-PSU-012-S0154,O006-PSU-012,Lesson11,bayesian-estimation,ccb2f8fb3cff62792429cade2a71f2a237c36549ad99bb5d30f328d9a5dfdee3, for ,,pending
+O006-PSU-012-S0155,O006-PSU-012,Lesson11,bayesian-estimation,28f197305dfe3b71e3c622b4fad5dd48ad6f725631762fd5c176c11283f104f2,. Find the posterior distribution of ,,pending
+O006-PSU-012-S0156,O006-PSU-012,Lesson11,bayesian-estimation,c268d7c22458414a581a855c1cbec0d47685d6579669aecb82da281a80ce32f8, given ,,pending
+O006-PSU-012-S0157,O006-PSU-012,Lesson11,solution-3,22927695994eab589c7601a6b15df4d9dc67c5aceb9a74cdb965444b9b8362a6,Solution,,pending
+O006-PSU-012-S0158,O006-PSU-012,Lesson11,solution-3,9dbbf356163a32016bc8f47ec0d2b3e5fdf0846d81a1f28f48289b00402fe55d,We need to find the posterior distribution of ,,pending
+O006-PSU-012-S0159,O006-PSU-012,Lesson11,solution-3,04330d9437e30d607038a30d8318be86d219eac3e29dbce719a85d2bd5121a79, given that ,,pending
+O006-PSU-012-S0160,O006-PSU-012,Lesson11,solution-3,7acbbe85198055457eafb14b3f065e9560300897f2d14bd925cac1e0a8b3bc37,. We can find the joint distribution by:,,pending
+O006-PSU-012-S0161,O006-PSU-012,Lesson11,solution-3,c28550f5f72724157e4c198be1bc723550c1c0c1679798e87dd41dd33ff08846,The next step would be to find ,,pending
+O006-PSU-012-S0162,O006-PSU-012,Lesson11,solution-3,1d2fbda5748ecc0a4aa78706ee467bfe699d09ff695c383ae1dea210ed6516cc, by:,,pending
+O006-PSU-012-S0163,O006-PSU-012,Lesson11,solution-3,199d8dba0afb9905c5d1fdf026b08522f73308131d113af9306ba10be651c5d1,"Instead of doing this, let’s recognize that ",,pending
+O006-PSU-012-S0164,O006-PSU-012,Lesson11,solution-3,05347eb3de3a442cd8e00767982b9d5c48c63fa5c0b1f0bd5d33c6e7637e7996, is a constant in regards to ,,pending
+O006-PSU-012-S0165,O006-PSU-012,Lesson11,solution-3,133c7d9243fdc9cbbddf24249d0c198d39b01547f99e8bfec40e0d49efb832ce,. Lets denote ,,pending
+O006-PSU-012-S0166,O006-PSU-012,Lesson11,solution-3,fa21f62f1f1ff9d173e0f44f858bbe1f7cccd0d99afa818892430020802cf28c, as ,,pending
+O006-PSU-012-S0167,O006-PSU-012,Lesson11,solution-3,cd80cfc7a970ce341655823d91698fcadd074841951ddb0e4118682a0f685afd,"Now, we need to find ",,pending
+O006-PSU-012-S0168,O006-PSU-012,Lesson11,solution-3,ceb943472879ff40000eada8db5aeda34bdf002998deb590d3ce07701a202105,"The term in the parentheses, ",,pending
+O006-PSU-012-S0169,O006-PSU-012,Lesson11,solution-3,9d8c147ab6b78f91280308ff7e70610204d238cdfc6b8a3d1d00353385feb597,", is a constant with respect to ",,pending
+O006-PSU-012-S0170,O006-PSU-012,Lesson11,solution-3,15c9857ca8e5db52e10a245dc6f62610d4ef6f87755ac9064cfef4bbcd3551f2,. Let’s denote that constant as ,,pending
+O006-PSU-012-S0171,O006-PSU-012,Lesson11,solution-3,d8e345758cf96ed742249c4f054c825dd2c57091171aa6d7e1809ea1c9299bbf,". Therefore, we have:",,pending
+O006-PSU-012-S0172,O006-PSU-012,Lesson11,solution-3,7ca430eef657a97cff2f5bbacc3725fb2fb3b7be60c84578ab70018058a7d25a,We know that ,,pending
+O006-PSU-012-S0173,O006-PSU-012,Lesson11,solution-3,0e9b96f1a4af44b733bbf8f8aaef09a4cf696400730297e544bffb83972d391a, is a valid pdf. We also know that ,,pending
+O006-PSU-012-S0174,O006-PSU-012,Lesson11,solution-3,15d5b992ef04555389bdb4038c1fc83f820e45b7a3065ddf5c94253f82df6bd3, has support ,,pending
+O006-PSU-012-S0175,O006-PSU-012,Lesson11,solution-3,d44fe14df7fee3c14abee4c6bd04e9da3302cfee2f3de0c6d9b1a07a3d310af6, and that ,,pending
+O006-PSU-012-S0176,O006-PSU-012,Lesson11,solution-3,f92abb1cc42c2a8ec6075a42c730fee7da595629d7ad9a6ab9014d81e192a9cf," integrates to 1 over the support. Therefore, the posterior distribution of ",,pending
+O006-PSU-012-S0177,O006-PSU-012,Lesson11,solution-3,c268d7c22458414a581a855c1cbec0d47685d6579669aecb82da281a80ce32f8, given ,,pending
+O006-PSU-012-S0178,O006-PSU-012,Lesson11,solution-3,7bb1ce7ced9e9854974c4318da4f3fce10713f7066bb1afffec0da7980d8cc27, has to be a beta distribution with parameters ,,pending
+O006-PSU-012-S0179,O006-PSU-012,Lesson11,solution-3,e3ee915a8e8c7aa02d2fced443314522b20824abd2535d5959c41dc8ab8a09e4, and ,,pending
+O006-PSU-012-S0180,O006-PSU-012,Lesson11,solution-3,0cbac8c0d95c679cc184d1ac4d0c58e940418f06771d9ad8e1bb3cb4f7aaac1f,". In other words,",,pending
+O006-PSU-012-S0181,O006-PSU-012,Lesson11,solution-3,f2bd75e40f273c95d442e7f92b9fda31e7439982034650a6f08977949362b03f,We found the posterior distribution of ,,pending
+O006-PSU-012-S0182,O006-PSU-012,Lesson11,solution-3,c268d7c22458414a581a855c1cbec0d47685d6579669aecb82da281a80ce32f8, given ,,pending
+O006-PSU-012-S0183,O006-PSU-012,Lesson11,solution-3,4db0009bd21570d911669a4af38b673711aeb769ab6b65276ca84f3c89a6a6c0, without any integration! We just recognized lumped together all of the constants with respect to ,,pending
+O006-PSU-012-S0184,O006-PSU-012,Lesson11,solution-3,47268a6284cf5a5752ef69d3a09210dde490185c5bf3ddbfdc08e32f0b1d70c0, and used our knowledge of what makes a function a valid pdf.,,pending
+O006-PSU-012-S0185,O006-PSU-012,Lesson11,solution-3,2b5fbae52b9d0819e0c2bec456b8f47bc7f3e3d87d03b9ed2a24e010193937cf,Note!,,pending
+O006-PSU-012-S0186,O006-PSU-012,Lesson11,solution-3,362ed11234328cc3a9cdfffd022ee43b2565d7daa6ae7b532fd7877259f72135, Since ,,pending
+O006-PSU-012-S0187,O006-PSU-012,Lesson11,solution-3,8ffe5266cc908828eaa6fd84a1614ebbfe831ef933c50b0fecdfed9ade964667, is a constant with respect to ,,pending
+O006-PSU-012-S0188,O006-PSU-012,Lesson11,solution-3,05777ae8715f4af9ec054262f186aff45dd449098295ae2e6ef25a04658a6a8d,", we can say that ",,pending
+O006-PSU-012-S0189,O006-PSU-012,Lesson11,solution-3,81afb10b461acd8f2b7eee698fb0c314c454f7acb574a34baded7f6912fc7a0f, is ,,pending
+O006-PSU-012-S0190,O006-PSU-012,Lesson11,solution-3,f0ebfdc551e4a90e8b54f7d3b9e6dfd3dd6a1c5705ba7ae6baa8eb8116153afc,proportional to,,pending
+O006-PSU-012-S0191,O006-PSU-012,Lesson11,solution-3,fdab34fdb9ff93dff62c3e370c9e5d85e5138b44e2027d1bf666fae720cfc243,. We denote this as:,,pending
+O006-PSU-012-S0192,O006-PSU-012,Lesson11,solution-3,5c7a9b7c658b47885f39ce20b0464ad5730566257b9679f3f481319a5e3dc79e,"This technique is helpful to find the posteriors quicker. However, it only works if we can recognize the posterior distribution, just as we recognized that ",,pending
+O006-PSU-012-S0193,O006-PSU-012,Lesson11,solution-3,a2e99be8452946e60da88d176a9f5568f170f6872e52e3d7e2df99ef99b8f914, is a beta distribution.,,pending
+O006-PSU-012-S0194,O006-PSU-012,Lesson11,solution-3,eea4825b20fc22d2a974195668bdd3fd118be60fb9bec155799ed7cdef433956,"To demonstrate the long way, test your calculus and algebra skills to find",,pending
+O006-PSU-012-S0195,O006-PSU-012,Lesson11,solution-3,841e6f312ff4beaa20897eb382cc3e83b10b5b7c1b39a075089f57d140fd917d,"The constant, ",,pending
+O006-PSU-012-S0196,O006-PSU-012,Lesson11,solution-3,e91d2dd71586e0e353d31a08869f6ec2220590cf1cda3187863e12c3a5db9e1c,", is equal to",,pending
+O006-PSU-012-S0197,O006-PSU-012,Lesson11,solution-3,163a57dc9c3a5c274ba1dfb96c17460ef7c9a7e629efd13465ccc89c2606f37a,Compare this to the constant of the beta distribution we found as the posterior:,,pending
+O006-PSU-012-S0198,O006-PSU-012,Lesson11,solution-3,35bcefaa424a419bd3305eff0ed3e5dee42687375c0f9559c07f47ef74d4d790,"They are exactly the same! Again, this is because we recognized the posterior distribution is a beta and only one constant can make the pdf of a beta distribution integrate to one over the support.",,pending
+O006-PSU-012-S0199,O006-PSU-012,Lesson11,solution-3,ec0c2c2264040e936be5789699bd114776faca75dd2edca73e1aa0195dddd26a,"In the examples so far, we have considered only one observation. We can begin with a sample of observations, say ",,pending
+O006-PSU-012-S0200,O006-PSU-012,Lesson11,solution-3,817431f5c705c7152dab86d4e00dbea099359638a222ab72ee85ad4e69dfe523, or we can begin with a sample statistic.,,pending
+O006-PSU-012-S0201,O006-PSU-012,Lesson11,solution-3,18a2ce1bfe1e3eb69c74e09d0bec9538d484df322b36f955b2abd4f4097e892b,"If we begin with a sample, we could replace ",,pending
+O006-PSU-012-S0202,O006-PSU-012,Lesson11,solution-3,9a993acd26cf021b5462d3143bfdbbd58d4957a0e3ff2c57a623e3cc99b3bd90, by the likelihood function,,pending
+O006-PSU-012-S0203,O006-PSU-012,Lesson11,solution-3,8764c5f0ef068d4829b57bc4617166cf41f481add4dda0575e09f4652152a135,which is just the joint distribution of ,,pending
+O006-PSU-012-S0204,O006-PSU-012,Lesson11,solution-3,60bd82fd308a57db211b46cf1917d01a71fe46c4d00d7bbf9ab9048603a65ccd, given the parameter ,,pending
+O006-PSU-012-S0205,O006-PSU-012,Lesson11,solution-3,ae6f26803f4f1c014973e334cfae64e7f74e97efaec135208e8d3c89ea08af1d,". Therefore, we can find",,pending
+O006-PSU-012-S0206,O006-PSU-012,Lesson11,solution-3,6b4c6dcea938c816dbf5b5028d6e1114ae7ca0cb57de5eae1f241d09d37a827d,"If we begin with a statistic, say ",,pending
+O006-PSU-012-S0207,O006-PSU-012,Lesson11,solution-3,933a6532649a7297dbad0f63207cf519ec1c2b79bd81b68394b7b8abc6d75899,", then we need to find the distribution of ",,pending
+O006-PSU-012-S0208,O006-PSU-012,Lesson11,solution-3,26b286b471ef36115142bf976e967cf7ba20c3a11c79d6ed70224a36193c2561, and proceed as usual.,,pending
+O006-PSU-012-S0209,O006-PSU-012,Lesson11,bayesian-estimation,c03ae5bd5d088da12e7d715b4f5c773ee3c630422d508a86d5483e4ff5962e92,Example 11.5,,pending
+O006-PSU-012-S0210,O006-PSU-012,Lesson11,bayesian-estimation,c99daa81da9a1194c3f4d33c7020a3736d3fa7de6904b5d7f1bd07ecffaf45cb, Let ,,pending
+O006-PSU-012-S0211,O006-PSU-012,Lesson11,bayesian-estimation,30ee496c23bf810580e66a5f34d7d48ffbf82a822cef60045e3c50848d355288, be a random sample from a Bernouli distribution with pmf ,,pending
+O006-PSU-012-S0212,O006-PSU-012,Lesson11,bayesian-estimation,9cfa8214b8d8fd49d0c39ff8e651c2333cd994b8063bffc162dd384af1cb6637, Prior information tells us ,,pending
+O006-PSU-012-S0213,O006-PSU-012,Lesson11,bayesian-estimation,d30a78931b60e08b17ab12d0dcbc680611cc8d03f868c7748f716fe3f657cadf, follows a beta distribution with parameters ,,pending
+O006-PSU-012-S0214,O006-PSU-012,Lesson11,bayesian-estimation,e3ee915a8e8c7aa02d2fced443314522b20824abd2535d5959c41dc8ab8a09e4, and ,,pending
+O006-PSU-012-S0215,O006-PSU-012,Lesson11,bayesian-estimation,a295d7044217450fcc629f2f72defd57bc04eb1cc7ee3a577fc53eea3f0bc7eb,. Find the posteriour distribution of ,,pending
+O006-PSU-012-S0216,O006-PSU-012,Lesson11,bayesian-estimation,65a15ba46035b1f91b163b640da506b5f730295a8b699e4cd15702ce6f792e1e, given the data.,,pending
+O006-PSU-012-S0217,O006-PSU-012,Lesson11,solution-4,22927695994eab589c7601a6b15df4d9dc67c5aceb9a74cdb965444b9b8362a6,Solution,,pending
+O006-PSU-012-S0218,O006-PSU-012,Lesson11,solution-4,49abb7501fe2927546772dd06504eb5d9ebe382f17e50b2387d6c6753c436753,"First, we need to find the likelihood function:",,pending
+O006-PSU-012-S0219,O006-PSU-012,Lesson11,solution-4,f9a8198b245560ec7955aef48fc214a6666a5598d207d7645b98dfbb3761b927,The next step is to find the joint distribution of ,,pending
+O006-PSU-012-S0220,O006-PSU-012,Lesson11,solution-4,56c9ac988eb6e784b7414a31bebb4cd0c5eaa29fde0cbd68c7c97185efe973ad, and the data.,,pending
+O006-PSU-012-S0221,O006-PSU-012,Lesson11,solution-4,7b73d88d1909c1f53d53860a31754912df99875a4ba26aceced8abd5b989850c,"Remember, when we say ",,pending
+O006-PSU-012-S0222,O006-PSU-012,Lesson11,solution-4,f24dd8a8c03940e7c8beb19bab84226eff16ab52d044038ff981210dab42be04," is proportional to the expression on the right hand side, we are ignoring all the terms that are constant with respect to ",,pending
+O006-PSU-012-S0223,O006-PSU-012,Lesson11,solution-4,26d8f88b06fdf21f17ca05cf9312396d1cfb84c675209447683fb01ceef9866a,". Simplifying, we get:",,pending
+O006-PSU-012-S0224,O006-PSU-012,Lesson11,solution-4,7897a2df133e19bf630f668600d68aff86dfd1b2d2a004dd081fd9d1e54a85fe,We can recognize that ,,pending
+O006-PSU-012-S0225,O006-PSU-012,Lesson11,solution-4,e09c19635e274e3daa3038910b44be921424bd7248049c6162d52ddb50716d0d, is proportional to a beta distribution with parameters ,,pending
+O006-PSU-012-S0226,O006-PSU-012,Lesson11,solution-4,e3ee915a8e8c7aa02d2fced443314522b20824abd2535d5959c41dc8ab8a09e4, and ,,pending
+O006-PSU-012-S0227,O006-PSU-012,Lesson11,bayesian-estimation,390be2a5820815eda6a64b3d8db7a571a8d6c4b931075adc5b65fe18e90215d1,"Okay now, are you scratching your head wondering what this all has to do with Bayesian estimation, as the title of this page suggests it should? Well, let’s talk about that then! Bayesians believe that everything you need to know about a parameter ",,pending
+O006-PSU-012-S0228,O006-PSU-012,Lesson11,bayesian-estimation,2a9c033e2705d4be5741a30c76acd0efbdedb0285ff24afcb7cfb29823c81df1, can be found in its posterior p.d.f. ,,pending
+O006-PSU-012-S0229,O006-PSU-012,Lesson11,bayesian-estimation,d2d78e979a28c6f9a766abc6c0b17b901349b58bded1c49f24b055b4a20fceef,". So, if a Bayesian is asked to make a point estimate of ",,pending
+O006-PSU-012-S0230,O006-PSU-012,Lesson11,bayesian-estimation,70226a2728034e434fadf068a9d02d5d6bc0c0fbdc2dfcc11185b38c14d241bc,", he or she is going to naturally turn to ",,pending
+O006-PSU-012-S0231,O006-PSU-012,Lesson11,bayesian-estimation,939a87519de94bd10f02eceac2c065d42abe94e7469a8a3c5ddadc5dca80906b," for the answer. But how? Well, the logical thing to do would be to use ",,pending
+O006-PSU-012-S0232,O006-PSU-012,Lesson11,bayesian-estimation,d22c6266042f4d875ca9e167717356143b4ab0ebda78f1d1fa4de6f3c01d0823, to calculate the mean or median of ,,pending
+O006-PSU-012-S0233,O006-PSU-012,Lesson11,bayesian-estimation,aeb93ba0704f023c5b017b8850282b97878ab579c8b3ca935517b07ddfaa3f67,", as they would all be reasonable guesses of the value of ",,pending
+O006-PSU-012-S0234,O006-PSU-012,Lesson11,bayesian-estimation,064a979a7879b7f53db9b64a61c8030bd75ce6d7e9c85291f00f068863e5414c,". But, hmmm! Should he or she …. errrr, let’s get rid of this he or she stuff…. let’s make it a she for now… okay… should she calculate the mean or the median? Well, that depends on what it will cost her for using either. Huh? Cost? We’re talking about estimating a parameter not buying groceries. Well, let’s suppose she gets charged a certain amount for estimating the real value of the parameter ",,pending
+O006-PSU-012-S0235,O006-PSU-012,Lesson11,bayesian-estimation,cab662c277fc13533a6b0ef551aff6e6e987d39680377421e68875deb3dc097e, with her guess ,,pending
+O006-PSU-012-S0236,O006-PSU-012,Lesson11,bayesian-estimation,3fc5e68ca164ecc5673ca1f672622a46047b4079af9d18e919b7457faf003271,". Well, this Bayesian woman would probably want the cost of her error to be as small as possible. Suppose, she is charged the square of the error between ",,pending
+O006-PSU-012-S0237,O006-PSU-012,Lesson11,bayesian-estimation,bc88df6e1482fd7a1309d27dba0976c8d6dae672874a60aa05a2676c188c13f4, and we guess ,,pending
+O006-PSU-012-S0238,O006-PSU-012,Lesson11,bayesian-estimation,12c7f740d3b366611db39cf5f53eb1bbe1edf9a83db69e85367897292a1cd6a5,". That is, suppose her cost is:",,pending
+O006-PSU-012-S0239,O006-PSU-012,Lesson11,bayesian-estimation,89de60b7911da947ee4946b4d6e1e5eaccdcef9027cbe9533d79b8ac73158abe,"Aha… there we have it! Because she wants her cost to be as small as possible, she should make her guess ",,pending
+O006-PSU-012-S0240,O006-PSU-012,Lesson11,bayesian-estimation,2230a68799a6014bd2a9e91a8997b7fdca3bc93019b802574e61b0d57d4f9e9b, be the conditional mean ,,pending
+O006-PSU-012-S0241,O006-PSU-012,Lesson11,bayesian-estimation,49de6db25bc2551646db845fcb86ceece17e64867bf32a06ab1099bd4d579e12,". Thats because way back in STAT 414, we showed that if ",,pending
+O006-PSU-012-S0242,O006-PSU-012,Lesson11,bayesian-estimation,3bbb1dc38434cdf16fa3b1ffbfcda0a9157e8cada2829290e5722553e5149ac3," is a random variable, then the expected value of the squared error, that is, ",,pending
+O006-PSU-012-S0243,O006-PSU-012,Lesson11,bayesian-estimation,43ee0a5bf6027da20afdbba8e0076f494249a4686857bc665e980595c4b95659, is minimized at ,,pending
+O006-PSU-012-S0244,O006-PSU-012,Lesson11,bayesian-estimation,df4e97b8b099eda9a18dfd16d09a7cfa007b454b2285d1c6ac031876445a9390,". In her case, the ",,pending
+O006-PSU-012-S0245,O006-PSU-012,Lesson11,bayesian-estimation,2b7e84e534a190a7942050b85337a6c400d74cbb874a6b770f6c2846c946824d, is the ,,pending
+O006-PSU-012-S0246,O006-PSU-012,Lesson11,bayesian-estimation,9aa92d19a36be80af81c957f6bf48036cd4185a46afb242346a432d8fa4e2e69, and the ,,pending
+O006-PSU-012-S0247,O006-PSU-012,Lesson11,bayesian-estimation,2b7e84e534a190a7942050b85337a6c400d74cbb874a6b770f6c2846c946824d, is the ,,pending
+O006-PSU-012-S0248,O006-PSU-012,Lesson11,bayesian-estimation,0f5634bb5a8ce93217c76f8c5508ea58395302d495d7852163182d1009751e4b,"On the other hand, if she is charged the absolute value of the error between ",,pending
+O006-PSU-012-S0249,O006-PSU-012,Lesson11,bayesian-estimation,ed727ed7d46a0951ba6bc984ada592494049ea49f0ceb1407492f77cea8efb96, and her guess ,,pending
+O006-PSU-012-S0250,O006-PSU-012,Lesson11,bayesian-estimation,f2543463d1ca6804f436c4b2e8ac8bf2cbdd8ada063c22ca8bf0dc3166163838,", that is: ",,pending
+O006-PSU-012-S0251,O006-PSU-012,Lesson11,bayesian-estimation,b86eb700545b5aa7dbf5f6831a5740d8ad76953ab4882f1ea4ad80e49a85ab63," then in order to make her cost be as small as possible, she’ll want to make her guess ",,pending
+O006-PSU-012-S0252,O006-PSU-012,Lesson11,bayesian-estimation,eee00b9dd045f8634e9e1b72f5703dd39c7133be592ef431da0aa32f3e105481," be the conditional median. That’s because, again, way back in STAT 414, we showed that if ",,pending
+O006-PSU-012-S0253,O006-PSU-012,Lesson11,bayesian-estimation,ff905be90abaad33e57929e113136e4a30b8d0cdfef95afe8bd0efdf51650cd1," is a random variable, then the expected value of the absolute value of the error, that is ",,pending
+O006-PSU-012-S0254,O006-PSU-012,Lesson11,bayesian-estimation,e55e3e2154bff63064ffd92de5cf0fc2a5bd51fe9867cc4c46f7fdef2c4ce542, is minimized when ,,pending
+O006-PSU-012-S0255,O006-PSU-012,Lesson11,bayesian-estimation,2d4cef8b5c30074f78dce5460f45550441fcfdca7614881f59f5f4572b1d529b, equals the median of the distribution.,,pending
+O006-PSU-012-S0256,O006-PSU-012,Lesson11,bayesian-estimation,e0a25a83844165dfdbb852b2bd33e4981663dd45c4fc0393bc62a54f30e81bda,Let’s make this discussion concrete by returning to our binomial example.,,pending
+O006-PSU-012-S0257,O006-PSU-012,Lesson11,bayesian-estimation,f0653fec3c33a36c0847d7215ce04f3c0f71bec71eea187252f947677ebebf7a,Example 11.6,,pending
+O006-PSU-012-S0258,O006-PSU-012,Lesson11,bayesian-estimation,e49b84aade154e771d6e4e390afaa96da75a4e5f7f6d96c7b5840da29f7e0b79, Suppose that ,,pending
+O006-PSU-012-S0259,O006-PSU-012,Lesson11,bayesian-estimation,d08008c2bebe10fe1b451d34f996613e007c791939d2d069b767163d36cc9e19, follows a binomial distribution with parameters ,,pending
+O006-PSU-012-S0260,O006-PSU-012,Lesson11,bayesian-estimation,e3ee915a8e8c7aa02d2fced443314522b20824abd2535d5959c41dc8ab8a09e4, and ,,pending
+O006-PSU-012-S0261,O006-PSU-012,Lesson11,bayesian-estimation,79b277222495ad4a849c5f63b64c201224cf0dcc45c348c09df49ebe4b663a02,", so that the pmf of ",,pending
+O006-PSU-012-S0262,O006-PSU-012,Lesson11,bayesian-estimation,c268d7c22458414a581a855c1cbec0d47685d6579669aecb82da281a80ce32f8, given ,,pending
+O006-PSU-012-S0263,O006-PSU-012,Lesson11,bayesian-estimation,ccd4554f9c2a0a240cbe274a4447ae7d6933d28a26c80815a1475dff5ad731bd, is:,,pending
+O006-PSU-012-S0264,O006-PSU-012,Lesson11,bayesian-estimation,ccb2f8fb3cff62792429cade2a71f2a237c36549ad99bb5d30f328d9a5dfdee3, for ,,pending
+O006-PSU-012-S0265,O006-PSU-012,Lesson11,bayesian-estimation,d2b594ee68f8396989ec9241f847163f4e1d5642862bd3753a15369fe32a3c7d,. Suppose that the prior pdf of the parameter ,,pending
+O006-PSU-012-S0266,O006-PSU-012,Lesson11,bayesian-estimation,e2825f9b1fbbeebc549dfee2ce737980c1df3708b9781dcb6aef8a3808d1e96c," is the beta pdf, that is:",,pending
+O006-PSU-012-S0267,O006-PSU-012,Lesson11,bayesian-estimation,ccb2f8fb3cff62792429cade2a71f2a237c36549ad99bb5d30f328d9a5dfdee3, for ,,pending
+O006-PSU-012-S0268,O006-PSU-012,Lesson11,bayesian-estimation,fac1f7fe1dea395bbdd8b1299eeb3b7b9bae2c333e3fafcf628e91ffb255e282,. Estimate the parameter ,,pending
+O006-PSU-012-S0269,O006-PSU-012,Lesson11,bayesian-estimation,7f149bf2425866e929be86280d9b404ac40df0518d7b3af56f4b8c46c7cfdd43, using the squared error loss function.,,pending
+O006-PSU-012-S0270,O006-PSU-012,Lesson11,bayesian-estimation,e59bbda11fb9244cf27614329563ee2b77fcf2eefd4a19c31e9867a4b66dfb39,We’ve previously shown that the posterior p.d.f. of ,,pending
+O006-PSU-012-S0271,O006-PSU-012,Lesson11,bayesian-estimation,c268d7c22458414a581a855c1cbec0d47685d6579669aecb82da281a80ce32f8, given ,,pending
+O006-PSU-012-S0272,O006-PSU-012,Lesson11,bayesian-estimation,1e77057e7ab0254f5f34eface389ee1dadba34ba89022a6cf82b57c98217d268, is the bets p.d.f. with parameters ,,pending
+O006-PSU-012-S0273,O006-PSU-012,Lesson11,bayesian-estimation,e3ee915a8e8c7aa02d2fced443314522b20824abd2535d5959c41dc8ab8a09e4, and ,,pending
+O006-PSU-012-S0274,O006-PSU-012,Lesson11,bayesian-estimation,32abeffd05b1dcb152c804cc79167e2ce027c3d23e6b8a476d83100403164212,. The previous discussion tell us that in order to minimize the squared error loss function:,,pending
+O006-PSU-012-S0275,O006-PSU-012,Lesson11,bayesian-estimation,1c7d6a3511fce0c787cc74c2bb152fb389634ba121cc28bb990c6a4258ad44ce,we should use the conditional mean ,,pending
+O006-PSU-012-S0276,O006-PSU-012,Lesson11,bayesian-estimation,8016f29855972001ee56db9321dbddc3169d75e0b50c96b67a39db24d6c6b603, as an estimate of the parameter ,,pending
+O006-PSU-012-S0277,O006-PSU-012,Lesson11,bayesian-estimation,3f9bfd79994bc7285af0b2d427dff74ab91130fa0da394771c99b776df562354,". Well, in general, the mean of a beta p.d.f. with parameters ",,pending
+O006-PSU-012-S0278,O006-PSU-012,Lesson11,bayesian-estimation,e3ee915a8e8c7aa02d2fced443314522b20824abd2535d5959c41dc8ab8a09e4, and ,,pending
+O006-PSU-012-S0279,O006-PSU-012,Lesson11,bayesian-estimation,ccd4554f9c2a0a240cbe274a4447ae7d6933d28a26c80815a1475dff5ad731bd, is:,,pending
+O006-PSU-012-S0280,O006-PSU-012,Lesson11,bayesian-estimation,288f5a96ac567797b4af83e6880b23f38731e330f046d72d5f6c3b5ef2f6de80,"In our case, the posterior p.d.f. of ",,pending
+O006-PSU-012-S0281,O006-PSU-012,Lesson11,bayesian-estimation,c268d7c22458414a581a855c1cbec0d47685d6579669aecb82da281a80ce32f8, given ,,pending
+O006-PSU-012-S0282,O006-PSU-012,Lesson11,bayesian-estimation,a3f5d95ef92e2e566f23adc4d8e8f465368f1d41f172f715cb5ec93d2c29dd43, is the beta p.d.f. with parameters ,,pending
+O006-PSU-012-S0283,O006-PSU-012,Lesson11,bayesian-estimation,e3ee915a8e8c7aa02d2fced443314522b20824abd2535d5959c41dc8ab8a09e4, and ,,pending
+O006-PSU-012-S0284,O006-PSU-012,Lesson11,bayesian-estimation,3e25bdf1592539e9ccf60cb936b8a706e15b69274b4e05d2b050f1aaf26d9503,". Therefore, the conditional mean is:",,pending
+O006-PSU-012-S0285,O006-PSU-012,Lesson11,bayesian-estimation,9d7d70e006e747cfd0ec99038deccf3c440b8eb8a145af1de49d759434ba243e,"And, it serves, in this situation, as a Bayesian’s best estimate of ",,pending
+O006-PSU-012-S0286,O006-PSU-012,Lesson11,bayesian-estimation,848b19d569c74930acd1298f98815adc0ed2fb89d6842a1a5a6d6eb2f8a9130f, when using the squared error loss function.,,pending
+O006-PSU-012-S0287,O006-PSU-012,Lesson11,credible-intervals,5b85d60b9c9aa61166bbeb7dc50a03df0af97eaef89617983ea9dd39ac72497b, Credible Intervals,,pending
+O006-PSU-012-S0288,O006-PSU-012,Lesson11,credible-intervals,c965df7cfa77da52c6bed15810f7ee74518e491a2fc9a3f80d7a9bd6802f0d16,"Previously, when we assumed the known parameter was a constant, we found a point estimate or point estimator for ",,pending
+O006-PSU-012-S0289,O006-PSU-012,Lesson11,credible-intervals,1199f3d4958657468d2e27c0585de88c6a169dac05ff8352a2eccdc43c70a448,. We have done something similar in the Bayesian setting this section by find the value that minimizes the squared error loss function or by minimizing the absolute value of the error.,,pending
+O006-PSU-012-S0290,O006-PSU-012,Lesson11,credible-intervals,a6875769c6b6379be6c638e49eaa6c235af9e6c688959669b1326c49e689dad8,"However, in the frequentist setting, we did not stop at a point estimate. We constructed (using our probability tools) confidence intervals for the unknown parameter. Can we do something similar here with the Bayesian estimate?",,pending
+O006-PSU-012-S0291,O006-PSU-012,Lesson11,credible-intervals,e7fd32268ec0310cbfc5a5f84f3ca6cd339e14ddec148327c6a9106e5571877c,The answer is yes. We can find what is called a ,,pending
+O006-PSU-012-S0292,O006-PSU-012,Lesson11,credible-intervals,9fd888b6cc4bef536edc8fa54e447f5532e2e6a7e17651366981b87b427da723,credible interval,,pending
+O006-PSU-012-S0293,O006-PSU-012,Lesson11,credible-intervals,53d8f1e32b78f61d7045e8dcecbebd5dcfffbe83f26bc1fe829b600a771766c5,. We can construct the credible interval by finding two value of ,,pending
+O006-PSU-012-S0294,O006-PSU-012,Lesson11,credible-intervals,9f94dc23a28f68a74c47a2cfa4ccea974e3b0ee8d7fc8713e9c81db3c97126e8,", say ",,pending
+O006-PSU-012-S0295,O006-PSU-012,Lesson11,credible-intervals,e3ee915a8e8c7aa02d2fced443314522b20824abd2535d5959c41dc8ab8a09e4, and ,,pending
+O006-PSU-012-S0296,O006-PSU-012,Lesson11,credible-intervals,71cfc07d1fc80cb0d8a5ba090791c100c3759f20d6c58f25d9e4982a9c96fabb, such that:,,pending
+O006-PSU-012-S0297,O006-PSU-012,Lesson11,credible-intervals,2a8cbd075a36c54e845e09e26de107837aee337843deb58d43e35b16d7f00c7e,where ,,pending
+O006-PSU-012-S0298,O006-PSU-012,Lesson11,credible-intervals,b1f2b3703d677f5b492980860fe909db539d72b6903731969bd187052ff52b67," is small, say ",,pending
+O006-PSU-012-S0299,O006-PSU-012,Lesson11,credible-intervals,f30fde803231576743f8894c919872f0586b426bf70b7f69a36664ffcbc5199f,. The resulting interval from ,,pending
+O006-PSU-012-S0300,O006-PSU-012,Lesson11,credible-intervals,87721689ee42f4415e4afe0d0f0a84d4cd837dd0c66635bd0734127ee0e0b5b7, to ,,pending
+O006-PSU-012-S0301,O006-PSU-012,Lesson11,credible-intervals,d9748b17e7b7ff7596854bfad3c1c7a82818813b1e4bcc890937c3b13ca0bed8, could be an interval estimate for ,,pending
+O006-PSU-012-S0302,O006-PSU-012,Lesson11,credible-intervals,47bf71c13a807de93e02fefbad2aaf56b81698e5b869f07219838ca9e0ab3e3f, such that the posterior probability of ,,pending
+O006-PSU-012-S0303,O006-PSU-012,Lesson11,credible-intervals,3ca7c78c6d119ba2a710a66b6076915140440393a659ecde44f2b843d576eeb9, being in that interval is ,,pending
+O006-PSU-012-S0304,O006-PSU-012,Lesson11,credible-intervals,9bbeb9cb3b6f9b800bf62e3eaee33795d51a485b6f8e9e88c54aa56a668c167a,"It is common for the interval to have equal probability on each tail. Therefore, the interval should be set up such that: ",,pending
+O006-PSU-012-S0305,O006-PSU-012,Lesson11,credible-intervals,23c05c3eff9e60c6aaffb936455daec727caf142f3069407c8a12cc5f1241dd8,Example 11.7,,pending
+O006-PSU-012-S0306,O006-PSU-012,Lesson11,credible-intervals,51aa4886d3b5e4d8c24c2d6df4fb1611557873e8be6529f440e1ccfadfcf500c," Consider the previous example where we have one observation, ",,pending
+O006-PSU-012-S0307,O006-PSU-012,Lesson11,credible-intervals,99e205e4f7b6da846f19bf9d07c99b01589a39324e4ce47d72b207f709372840,", from a distribution with pdf ",,pending
+O006-PSU-012-S0308,O006-PSU-012,Lesson11,credible-intervals,ccb2f8fb3cff62792429cade2a71f2a237c36549ad99bb5d30f328d9a5dfdee3, for ,,pending
+O006-PSU-012-S0309,O006-PSU-012,Lesson11,credible-intervals,4a1c6c33741cd8dd3f42932fc4b0a25fb9417a95e375a43d64b88678e2cf2e1d, and a unknown parameter ,,pending
+O006-PSU-012-S0310,O006-PSU-012,Lesson11,credible-intervals,06482eba1d927385009fbeb267ae226c869d94623b7439f1a6e9deb8c7406244, with a prior distribution ,,pending
+O006-PSU-012-S0311,O006-PSU-012,Lesson11,credible-intervals,1f406326921bec79f45d42910b78358c2d0f5b66470bd5e3fcfbe7f342f4edb9,", for ",,pending
+O006-PSU-012-S0312,O006-PSU-012,Lesson11,credible-intervals,196b915b31b37eaa2929a4fe7e5a903da25adf81676afbb4c484991adc0ab4a5,. Find a 90% credible interval for ,,pending
+O006-PSU-012-S0313,O006-PSU-012,Lesson11,credible-intervals,92f1a79f3c70a37bce065d51a9853bc2230306a5fcecf4ddb9fce9e1e935324c, with ,,pending
+O006-PSU-012-S0314,O006-PSU-012,Lesson11,solution-5,22927695994eab589c7601a6b15df4d9dc67c5aceb9a74cdb965444b9b8362a6,Solution,,pending
+O006-PSU-012-S0315,O006-PSU-012,Lesson11,solution-5,e85dad7302836ad7c32f0f632607a7b269f1dfdf24e9faf48c92046e1ba64ffc,We know the posterior distribution is a beta distribution with parameters ,,pending
+O006-PSU-012-S0316,O006-PSU-012,Lesson11,solution-5,e3ee915a8e8c7aa02d2fced443314522b20824abd2535d5959c41dc8ab8a09e4, and ,,pending
+O006-PSU-012-S0317,O006-PSU-012,Lesson11,solution-5,4876c71e1c42854df748a41a2c78d3a335f7941da73b2529a6755bc7aaa1e6c3,". In this case, ",,pending
+O006-PSU-012-S0318,O006-PSU-012,Lesson11,solution-5,813af3be0ee4edf3e4762dbf4314f8a55ec6b235c0a5c6239dd5720952ae2cb2,", making ",,pending
+O006-PSU-012-S0319,O006-PSU-012,Lesson11,solution-5,3cbc4c5a117989aaaed0b4ae64ddc59c41ebab2567d4b44376b13d7d9f687b5f,"To find the 90% credible interval, we need to find ",,pending
+O006-PSU-012-S0320,O006-PSU-012,Lesson11,solution-5,e3ee915a8e8c7aa02d2fced443314522b20824abd2535d5959c41dc8ab8a09e4, and ,,pending
+O006-PSU-012-S0321,O006-PSU-012,Lesson11,solution-5,d7984263ec632e6abee8c84c4d09eea5f42ffc559387b357f5200cc11902a3e5, such that,,pending
+O006-PSU-012-S0322,O006-PSU-012,Lesson11,solution-5,d26f263c1d47c0af74d8266a948ed0b6b24531f390489a026fbcfe5ab4617406,We can use R to help us find this interval. We can find the ,,pending
+O006-PSU-012-S0323,O006-PSU-012,Lesson11,solution-5,f2fea10750debab1ae86cfca26402067327f5cfc0ba612621f47dfb312e869b7, percentile and the ,,pending
+O006-PSU-012-S0324,O006-PSU-012,Lesson11,solution-5,6ab8cfe57130fa2f4127335b0529f393704b30887d016982c8afeda4cf115ff9, of a beta distribution with parameters ,,pending
+O006-PSU-012-S0325,O006-PSU-012,Lesson11,solution-5,e3ee915a8e8c7aa02d2fced443314522b20824abd2535d5959c41dc8ab8a09e4, and ,,pending
+O006-PSU-012-S0326,O006-PSU-012,Lesson11,solution-5,feb036eab3e9e7da8d070e31e66472050094c2a0a6dcb4059083a0dc5581b408, by using the following commands.,,pending
+O006-PSU-012-S0327,O006-PSU-012,Lesson11,solution-5,fec5a47c3098ffd513bc30c841ac39867ee1522392e20433142f9ffac5fafd8a,"Therefore, the 90% credible interval for ",,pending
+O006-PSU-012-S0328,O006-PSU-012,Lesson11,solution-5,3d9ced6ab9039f8e48737dc031b1218c86328f45cc3cc0a9a2317c42574c7a83,", given ",,pending
+O006-PSU-012-S0329,O006-PSU-012,Lesson11,solution-5,413b7da94c02a9c678b182087c861326f74b8076e6a23a0148ac3f11aaaffae0,", is ",,pending
+O006-PSU-012-S0330,O006-PSU-012,Lesson11,summary,1ef08bdefdb2fba4d4db153a477421a071a38cbc62cabd95702139270855caf1, Summary,,pending
+O006-PSU-012-S0331,O006-PSU-012,Lesson11,summary,20e23f5907732f13432c68f4dccd54ba0aaf1d5aaa54441050937459464e0515,"In this lesson, we shifted perspectives from frequentist to Bayesian thinking. While frequentist methods treat parameters as fixed but unknown values, Bayesian methods treat parameters as random variables with probability distributions. This shift allows us to incorporate prior beliefs and update them with data using Bayes’ Theorem.",,pending
+O006-PSU-012-S0332,O006-PSU-012,Lesson11,summary,7b6c6ade0246d47d83513c5a52ba9c9b55c7a1bd749783a9dbbc1e98ed08322b,We started by understanding ,,pending
+O006-PSU-012-S0333,O006-PSU-012,Lesson11,summary,b8cf2f49997f32414a19eec821f0415662c1fc77b73f7a5d2445cb2acd8aa3f7,subjective probability,,pending
+O006-PSU-012-S0334,O006-PSU-012,Lesson11,summary,8629d5ee973aedd9a4f8226d45fc88e2130338ca6eb00e606422160c96753275,", where a Bayesian uses available information (like betting amounts on horses) to assign probabilities to uncertain events. Then we explored how Bayesians estimate parameters using a ",,pending
+O006-PSU-012-S0335,O006-PSU-012,Lesson11,summary,383ca78ffe9fe3110c58c4d2216e0f27895802777703708662937220bd1e547a,prior distribution,,pending
+O006-PSU-012-S0336,O006-PSU-012,Lesson11,summary,e3ee915a8e8c7aa02d2fced443314522b20824abd2535d5959c41dc8ab8a09e4, and ,,pending
+O006-PSU-012-S0337,O006-PSU-012,Lesson11,summary,f7d11e18f3d131a54fddfc1f9ed2ed53ebc5b6fdc3e0d14146098a2a81cfa5e6,likelihood,,pending
+O006-PSU-012-S0338,O006-PSU-012,Lesson11,summary,701b9ec4b061112c7358f1225a06645053e451faabaf82d36caf32d7534bf47a, to derive a ,,pending
+O006-PSU-012-S0339,O006-PSU-012,Lesson11,summary,20567a2c361c86bb39f16e21921ef8ded63640e450e2d2d1191d32d02c1aed2b,posterior distribution,,pending
+O006-PSU-012-S0340,O006-PSU-012,Lesson11,summary,125a454e9273cd33456ab0524bc5709f0b2adf0e63885c46dbf3fce1aef6f68f,We also saw that Bayesian estimation often leads to posterior distributions with familiar forms—like a ,,pending
+O006-PSU-012-S0341,O006-PSU-012,Lesson11,summary,372b10633a06c1bb85dd18e76ad67d1a1cad80ccd2b1cd320165e0c7bd10733c,beta distribution,,pending
+O006-PSU-012-S0342,O006-PSU-012,Lesson11,summary,9e13f65c455ce1868be576a83f5a6048f263de75ce10bdd994920602ff717c00, for binomial data with a beta prior. A Bayesian point estimate depends on the chosen ,,pending
+O006-PSU-012-S0343,O006-PSU-012,Lesson11,summary,2f0b4053abf14cdb0fc79b1aa47ec5ca48c69ae34a57141092e731babe34d3d1,loss function,,pending
+O006-PSU-012-S0344,O006-PSU-012,Lesson11,summary,087750db83dcd224437baca59b9d17d5ddff9095dd5c0de497fd9b60aeedbb9d,. If minimizing ,,pending
+O006-PSU-012-S0345,O006-PSU-012,Lesson11,summary,87eec728f30347424daa120c4620129c841f9d0ec2d151dbd734a7014d4ac0ae,squared error,,pending
+O006-PSU-012-S0346,O006-PSU-012,Lesson11,summary,3d40a5e3dc27be9cb17a37b9c1017f68c577d7a113a5d64bc6acdc354c59c397,", the best estimate is the ",,pending
+O006-PSU-012-S0347,O006-PSU-012,Lesson11,summary,0c50926005191254f870ac4914c7ce484e47e4211550e3d5c4f352956139d3ca,posterior mean.,,pending
+O006-PSU-012-S0348,O006-PSU-012,Lesson11,summary,88a8e7a01c0c3ca6837e558e5868a08dd8c90fa78478ceecfbf7543053c87163,"This lesson introduced the Bayesian view of learning from data: combining prior beliefs with observed evidence to make probabilistic statements about unknown parameters. While this was just a glimpse into the Bayesian world, it showed how flexible and intuitive the approach can be.",,pending
+O006-PSU-012-S0349,O006-PSU-012,Lesson11,summary,f8f524ac84858a71ae59eade1128d7a281c2fc3a7f1d3975137e5c875022b277,Key Takeways:,,pending
+O006-PSU-012-S0350,O006-PSU-012,Lesson11,summary,3b65ba15e94885af7da9ff6380b85612cdfdd95bc90cc9caea779dc01ac06b7f,"Mathematically, if ",,pending
+O006-PSU-012-S0351,O006-PSU-012,Lesson11,summary,b09fc79f90430506a7c78d3b71b39e9c8763ac5441b517f8c8a9b907422ecda8, is the parameter and ,,pending
+O006-PSU-012-S0352,O006-PSU-012,Lesson11,summary,d740690e996ebe1839011ecf06858db32869dde0b03dac65bb17c4ba34ec5988," is the data, the posterior distribution is: ",,pending
+O006-PSU-012-S0353,O006-PSU-012,Lesson11,summary,7276f7946e697b66ffc95f119c758d75b370b793eb2fa9299b1c0167b3748677,Credible intervals,,pending
+O006-PSU-012-S0354,O006-PSU-012,Lesson11,summary,294a7e292d2bd9aa54d1ea6e809e517f90b67825f954f2653b76ee20c5463a0d,", which are Bayesian counterparts to confidence intervals, satisfies: ",,pending

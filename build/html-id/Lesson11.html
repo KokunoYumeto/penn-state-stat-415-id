@@ -1,0 +1,408 @@
+<!doctype html>
+<html lang="id-ID">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>11 Metode Bayesian</title>
+<meta name="source-url" content="https://online.stat.psu.edu/stat415/Lesson11">
+<meta name="translation-provenance" content="OpenAI Codex gpt-5.6-sol, Ultra">
+<meta name="edition-status" content="partial: 13 of 14 documents complete; landing and Lessons 00–11">
+<link rel="license" href="https://creativecommons.org/licenses/by-nc/4.0/">
+<link rel="stylesheet" href="assets/reader-13of14.css">
+<script defer src="assets/MathJax/tex-svg.js"></script>
+</head>
+<body>
+<a class="skip-link" href="#quarto-document-content">Lewati ke isi utama</a>
+<header class="site-header"><div class="site-header__inner"><div><p class="site-title">STAT 415 — Pengantar Statistika Matematis</p><p class="site-subtitle">Rekonstruksi dan terjemahan Bahasa Indonesia · O006/C140</p></div><nav class="site-nav" aria-label="Navigasi utama"><a href="index.html">Daftar pelajaran</a><a href="Lesson00.html">Pelajaran 00</a><a href="Lesson01.html">Pelajaran 01</a><a href="Lesson02.html">Pelajaran 02</a><a href="Lesson03.html">Pelajaran 03</a><a href="Lesson04.html">Pelajaran 04</a><a href="Lesson05.html">Pelajaran 05</a><a href="Lesson06.html">Pelajaran 06</a><a href="Lesson07.html">Pelajaran 07</a><a href="Lesson08.html">Pelajaran 08</a><a href="Lesson09.html">Pelajaran 09</a><a href="Lesson10.html">Pelajaran 10</a><a href="Lesson11.html">Pelajaran 11</a><a href="licenses/index.html">Lisensi</a></nav></div></header>
+<div class="page-shell"><aside class="edition-note" aria-label="Status edisi"><strong>Edisi Bahasa Indonesia — 13 dari 14 dokumen.</strong> Laman utama serta Pelajaran 00–11 telah diterjemahkan sepenuhnya. Pelajaran 12 masih menuju sumber resmi berbahasa Inggris sampai unit berikutnya selesai. <a href="https://online.stat.psu.edu/stat415/Lesson11">Sumber resmi halaman ini</a>. <a href="licenses/index.html">Atribusi, perubahan, dan lisensi</a>.</aside><main class="content" data-component-id="Lesson11" data-document-id="O006-PSU-012" data-source-url="https://online.stat.psu.edu/stat415/Lesson11.html" id="quarto-document-content">
+<header class="quarto-title-block default" data-o006-id="O006-PSU-012-U0001" id="title-block-header"><nav aria-label="Jejak navigasi" class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" data-o006-id="O006-PSU-012-U0002"><ol class="breadcrumb" data-o006-id="O006-PSU-012-U0003"><li class="breadcrumb-item" data-o006-id="O006-PSU-012-U0004"><a data-o006-id="O006-PSU-012-U0005" href="index.html#lessons">Pelajaran</a></li><li class="breadcrumb-item" data-o006-id="O006-PSU-012-U0006"><a data-o006-id="O006-PSU-012-U0007" href="Lesson11.html"><span class="chapter-number">11</span>  <span class="chapter-title">Metode Bayesian</span></a></li></ol></nav>
+<div class="quarto-title" data-o006-id="O006-PSU-012-U0008">
+<h1 class="title" data-o006-id="O006-PSU-012-U0009"><span class="chapter-number">11</span>  <span class="chapter-title">Metode Bayesian</span></h1>
+<div class="quarto-categories" data-o006-id="O006-PSU-012-U0010">
+<div class="quarto-category" data-o006-id="O006-PSU-012-U0011">Bayesian</div>
+<div class="quarto-category" data-o006-id="O006-PSU-012-U0012">Peluang Subjektif</div>
+<div class="quarto-category" data-o006-id="O006-PSU-012-U0013">Selang Kredibel</div>
+</div>
+</div>
+<div class="quarto-title-meta" data-o006-id="O006-PSU-012-U0014">
+</div>
+</header>
+<section class="level2 unnumbered unlisted" data-o006-id="O006-PSU-012-U0015" id="overview">
+<h2 class="unnumbered unlisted anchored" data-anchor-id="overview" data-o006-id="O006-PSU-012-U0016">Ikhtisar</h2>
+<div alt="Portrait of Thomas Bayes" class="lightbox float-lg-end w-50 ps-3 quarto-float quarto-figure quarto-figure-center anchored" data-o006-id="O006-PSU-012-U0017" id="fig-bayes">
+<figure class="figure quarto-float quarto-float-fig reader-full-width-figure" data-o006-id="O006-PSU-012-U0018">
+<div aria-describedby="fig-bayes-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca" data-o006-id="O006-PSU-012-U0019">
+<a class="lightbox" data-gallery="quarto-lightbox-gallery-1" data-o006-id="O006-PSU-012-U0020" href="assets/lesson11/assets/bayes.png" title="Gambar 11.1: Thomas Bayes"><img alt="Potret hitam-putih Thomas Bayes dalam bingkai oval, menghadap sedikit ke kiri." class="figure-img img-fluid lesson11-portrait reader-responsive-image" data-o006-asset-id="O006-PSU-012-A0001" data-o006-id="O006-PSU-012-U0021" src="assets/lesson11/assets/bayes.png"/></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" data-o006-id="O006-PSU-012-U0022" id="fig-bayes-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">Gambar 11.1 — Potret Thomas Bayes, tokoh yang namanya digunakan untuk metode Bayesian.</figcaption>
+</figure><p class="target-only-correction asset-rights-note" data-o006-correction-id="O006-PSU-ADV-0216" role="note">Hak komponen: gambar resmi ini dibekukan byte demi byte dari laman sumber dan dipertahankan di bawah pemberitahuan CC BY-NC 4.0 tingkat laman; tidak ditemukan pengecualian khusus aset.</p>
+</div>
+<p data-o006-id="O006-PSU-012-U0023">Semua metode yang sejauh ini telah kita kembangkan dan gunakan dalam mata kuliah ini dikembangkan dengan pendekatan yang oleh para statistisi disebut “frekuentis”. Pada bagian ini, kita meninjau kembali sebagian metode tersebut menggunakan pendekatan yang oleh para statistisi disebut “Bayesian”. Secara khusus, kita akan:</p>
+<ul data-o006-id="O006-PSU-012-U0024">
+<li data-o006-id="O006-PSU-012-U0025">mempelajari bagaimana seorang Bayesian menetapkan peluang bagi kejadian tertentu</li>
+<li data-o006-id="O006-PSU-012-U0026">mempelajari bagaimana seorang Bayesian menangani pendugaan suatu parameter</li>
+<li data-o006-id="O006-PSU-012-U0027">mempelajari bagaimana seorang Bayesian memperbarui informasi prior yang dimilikinya tentang nilai suatu parameter</li>
+</ul>
+<p data-o006-id="O006-PSU-012-U0028">Jika Anda penasaran, gambar di sebelah kanan menampilkan Pendeta Thomas Bayes, yang namanya diabadikan dengan tepat pada bidang statistika Bayesian.</p>
+<p data-o006-id="O006-PSU-012-U0029">Kita memerlukan setidaknya satu semester penuh, mungkin bahkan lebih, untuk membahas statistika Bayesian secara layak. Dalam mata kuliah ini, kita paling jauh hanya dapat mencicipinya dan melihat sepintas dunia dari sudut pandang seorang Bayesian. Pertama, kita akan mengkaji contoh yang memperlihatkan cara seorang Bayesian menetapkan peluang (subjektif) pada suatu kejadian berdasarkan informasi yang tersedia. Selanjutnya, kita akan menyelidiki cara seorang Bayesian menduga suatu parameter. Terakhir, kita akan membahas cara seorang Bayesian memperbarui informasi prior yang dimilikinya tentang nilai suatu parameter.</p>
+<section class="level3 unnumbered unlisted objectiveblock" data-o006-id="O006-PSU-012-U0030" id="objectives">
+<h3 class="unnumbered unlisted anchored" data-anchor-id="objectives" data-o006-id="O006-PSU-012-U0031"><i class="bi bi-check2-circle"></i>Tujuan</h3>
+<p data-o006-id="O006-PSU-012-U0032">Setelah menyelesaikan pelajaran ini, Anda diharapkan mampu:</p>
+<ol data-o006-id="O006-PSU-012-U0033" type="1">
+<li data-o006-id="O006-PSU-012-U0034">Menentukan secara analitis distribusi posterior Bayesian bagi model berparameter tunggal dengan distribusi prior yang diberikan, baik ketika nilai data diketahui maupun ketika data dipandang sebagai peubah acak yang tidak teramati; dan</li>
+<li data-o006-id="O006-PSU-012-U0035">Menghitung selang kredibel untuk parameter tak diketahui, θ.</li>
+</ol>
+</section>
+</section>
+<section class="level2" data-number="11.1" data-o006-id="O006-PSU-012-U0036" id="subjective-probability">
+<h2 class="anchored" data-anchor-id="subjective-probability" data-number="11.1" data-o006-id="O006-PSU-012-U0037"><span class="header-section-number">11.1</span> Peluang Subjektif</h2>
+<p data-o006-id="O006-PSU-012-U0038">Mari kita telaah sebuah contoh yang memperlihatkan cara seorang Bayesian menggunakan data yang tersedia untuk menetapkan peluang bagi kejadian-kejadian tertentu.</p>
+<div class="theorem example" data-o006-id="O006-PSU-012-U0039" id="exm-bayes1">
+<p data-o006-id="O006-PSU-012-U0040"><span class="theorem-title"><strong>Contoh 11.1</strong></span> Besaran taruhan, dalam dolar, yang dipasang pada kuda A, B, C, dan D untuk memenangi sebuah pacuan lokal adalah sebagai berikut:</p>
+<table aria-describedby="lesson11-horse-table-caption" class="w-auto table-sm mx-auto small caption-top table" data-o006-id="O006-PSU-012-U0041"><caption id="lesson11-horse-table-caption">Jumlah taruhan pada tiap kuda sebelum pengurangan 17% untuk pengelola arena.</caption>
+<thead data-o006-id="O006-PSU-012-U0042">
+<tr class="header" data-o006-id="O006-PSU-012-U0043">
+<th data-o006-id="O006-PSU-012-U0044" id="lesson11-horse-col-1" scope="col">Kuda</th>
+<th data-o006-id="O006-PSU-012-U0045" id="lesson11-horse-col-2" scope="col">Jumlah taruhan</th>
+</tr>
+</thead>
+<tbody data-o006-id="O006-PSU-012-U0046">
+<tr class="odd" data-o006-id="O006-PSU-012-U0047">
+<th data-o006-id="O006-PSU-012-U0048" scope="row">A</th>
+<td data-o006-id="O006-PSU-012-U0049">10,000</td>
+</tr>
+<tr class="even" data-o006-id="O006-PSU-012-U0050">
+<th data-o006-id="O006-PSU-012-U0051" scope="row">B</th>
+<td data-o006-id="O006-PSU-012-U0052">30,000</td>
+</tr>
+<tr class="odd" data-o006-id="O006-PSU-012-U0053">
+<th data-o006-id="O006-PSU-012-U0054" scope="row">C</th>
+<td data-o006-id="O006-PSU-012-U0055">22,000</td>
+</tr>
+<tr class="even" data-o006-id="O006-PSU-012-U0056">
+<th data-o006-id="O006-PSU-012-U0057" scope="row">D</th>
+<td data-o006-id="O006-PSU-012-U0058">38,000</td>
+</tr>
+<tr class="odd" data-o006-id="O006-PSU-012-U0059">
+<th data-o006-id="O006-PSU-012-U0060" scope="row"><strong>Total</strong></th>
+<td data-o006-id="O006-PSU-012-U0061">100,000</td>
+</tr>
+</tbody>
+</table>
+<p data-o006-id="O006-PSU-012-U0062">Tentukan pembayaran kemenangan untuk taruhan $2 pada masing-masing dari keempat kuda jika pengelola arena pacuan ingin mengambil 17%, atau $17,000, dari jumlah yang terkumpul.</p>
+<section class="level4 card card-body bg-light ms-3 mb-3 pt-0" data-o006-id="O006-PSU-012-U0063" id="solution">
+<h4 class="anchored" data-anchor-id="solution" data-o006-id="O006-PSU-012-U0064">Penyelesaian</h4>
+<p data-o006-id="O006-PSU-012-U0065">Hal pertama yang perlu kita lakukan adalah menetapkan peluang subjektif, setiap kuda untuk menang. Kita dapat menetapkan peluang tersebut berdasarkan “firasat” sendiri. Wah… saya rasa Kuda A akan menang hari ini. Secara umum, itu mungkin bukan gagasan yang baik. Hasil kita barangkali jauh lebih baik jika memanfaatkan informasi yang tersedia, yaitu gabungan “firasat” seluruh petaruh! Artinya, jika taruhan senilai $38,000 masuk untuk Kuda D sedangkan hanya $10,000 untuk Kuda A, hal itu menunjukkan bahwa lebih banyak orang memperkirakan Kuda D akan menang daripada Kuda A. Karena itu, sebaiknya kita menggunakan jumlah taruhan untuk menetapkan peluang. Dengan demikian, peluang Kuda A menang adalah:</p>
+<p data-o006-id="O006-PSU-012-U0066"><span class="math display" data-o006-math-id="O006-PSU-012-M0001">\[\begin{align*}
+  P(A)=\frac{10000}{100000}=0.10
+\end{align*}\]</span></p>
+<p data-o006-id="O006-PSU-012-U0067">Selanjutnya, peluang Kuda B menang adalah:</p>
+<p data-o006-id="O006-PSU-012-U0068"><span class="math display" data-o006-math-id="O006-PSU-012-M0002">\[\begin{align*}
+  P(B)=\frac{30000}{100000}=0.30
+\end{align*}\]</span></p>
+<p data-o006-id="O006-PSU-012-U0069">Selanjutnya, peluang Kuda C menang adalah:</p>
+<p data-o006-id="O006-PSU-012-U0070"><span class="math display" data-o006-math-id="O006-PSU-012-M0003">\[\begin{align*}
+  P(C)=\frac{22000}{100000}=0.22
+\end{align*}\]</span></p>
+<p data-o006-id="O006-PSU-012-U0071">Selanjutnya, peluang Kuda D menang adalah:</p>
+<p data-o006-id="O006-PSU-012-U0072"><span class="math display" data-o006-math-id="O006-PSU-012-M0004">\[\begin{align*}
+  P(D)=\frac{38000}{100000}=0.38
+\end{align*}\]</span></p>
+<p data-o006-id="O006-PSU-012-U0073">Setelah menetapkan peluang kejadian Kuda A menang, kita dapat menentukan odds melawan kemenangan Kuda A. Nilainya adalah:</p><p class="target-only-correction odds-definition-note" data-o006-correction-id="O006-PSU-ADV-0200" role="note">Istilah odds melawan kemenangan A menyatakan rasio P(A tidak menang)/P(A menang) = (1 − P(A))/P(A); pembayaran total berikutnya juga mengembalikan nilai taruhan awal.</p>
+<p data-o006-id="O006-PSU-012-U0074"><span class="math display" data-o006-math-id="O006-PSU-012-M0005">\[\begin{align*}
+  \text{Odds against }A=\frac{1-0.1}{0.1}=9 \text{ to }1
+\end{align*}\]</span></p>
+<p data-o006-id="O006-PSU-012-U0075">Odds melawan A menunjukkan bahwa pengelola arena akan membayar $9 untuk taruhan $1. Selanjutnya, odds melawan kemenangan Kuda B adalah:</p>
+<p data-o006-id="O006-PSU-012-U0076"><span class="math display" data-o006-math-id="O006-PSU-012-M0006">\[\begin{align*}
+  \text{Odds against }B=\frac{1-0.3}{0.3}=\frac{7}{3} \text{ to }1
+\end{align*}\]</span></p>
+<p data-o006-id="O006-PSU-012-U0077">Odds melawan B menunjukkan bahwa pengelola arena akan membayar <span class="math inline" data-o006-math-id="O006-PSU-012-M0007">\(\frac{\$7}{3}=\$2.33\)</span> untuk taruhan $1. Selanjutnya, odds melawan kemenangan Kuda C adalah:</p>
+<p data-o006-id="O006-PSU-012-U0078"><span class="math display" data-o006-math-id="O006-PSU-012-M0008">\[\begin{align*}
+  \text{Odds against }C=\frac{1-0.22}{0.22}=\frac{39}{11} \text{ to }1
+\end{align*}\]</span></p>
+<p data-o006-id="O006-PSU-012-U0079">Odds melawan C menunjukkan bahwa pengelola arena akan membayar <span class="math inline" data-o006-math-id="O006-PSU-012-M0009">\(\frac{\$39}{11}=\$3.55\)</span> untuk taruhan $1. Terakhir, odds melawan kemenangan Kuda D adalah:</p>
+<p data-o006-id="O006-PSU-012-U0080"><span class="math display" data-o006-math-id="O006-PSU-012-M0010">\[\begin{align*}
+  \text{Odds against }D=\frac{1-0.38}{0.38}=\frac{31}{19} \text{ to }1
+\end{align*}\]</span></p>
+<p data-o006-id="O006-PSU-012-U0081">Odds melawan D menunjukkan bahwa pengelola arena akan membayar <span class="math inline" data-o006-math-id="O006-PSU-012-M0011">\(\frac{\$31}{19}=\$1.63\)</span> untuk taruhan $1. Dengan menggunakan odds melawan kemenangan Kuda A, kita sekarang dapat menentukan jumlah yang dibayarkan pengelola arena untuk taruhan $2 pada Kuda A, yaitu:</p>
+<p data-o006-id="O006-PSU-012-U0082"><span class="math display" data-o006-math-id="O006-PSU-012-M0012">\[\begin{align*}
+  \text{Payout for }A=\$2+\$9(\$2)=\$20
+\end{align*}\]</span></p>
+<p data-o006-id="O006-PSU-012-U0083">Dengan kata lain, petaruh menerima $9 untuk setiap taruhan $1, sehingga menerima $18, ditambah $2 yang semula dipertaruhkan. Selanjutnya, dengan menggunakan odds melawan kemenangan Kuda B, kita dapat menentukan jumlah yang dibayarkan pengelola arena untuk taruhan $2 pada Kuda B, yaitu:</p>
+<p data-o006-id="O006-PSU-012-U0084"><span class="math display" data-o006-math-id="O006-PSU-012-M0013">\[\begin{align*}
+  \text{Payout for }B=\$2+\frac{\$7}{3}(\$2)=\$6.67
+\end{align*}\]</span></p>
+<p data-o006-id="O006-PSU-012-U0085">Selanjutnya, dengan menggunakan odds melawan kemenangan Kuda C, kita dapat menentukan jumlah yang dibayarkan pengelola arena untuk taruhan $2 pada Kuda C, yaitu:</p>
+<p data-o006-id="O006-PSU-012-U0086"><span class="math display" data-o006-math-id="O006-PSU-012-M0014">\[\begin{align*}
+  \text{Payout for }C=\$2+\frac{\$39}{11}(\$2)=\$9.09
+\end{align*}\]</span></p>
+<p data-o006-id="O006-PSU-012-U0087">Selanjutnya, dengan menggunakan odds melawan kemenangan Kuda D, kita dapat menentukan jumlah yang dibayarkan pengelola arena untuk taruhan $2 pada Kuda D, yaitu:</p>
+<p data-o006-id="O006-PSU-012-U0088"><span class="math display" data-o006-math-id="O006-PSU-012-M0015">\[\begin{align*}
+  \text{Payout for }D=\$2+\frac{\$31}{19}(\$2)=\$5.26
+\end{align*}\]</span></p>
+<p data-o006-id="O006-PSU-012-U0089">Kita hampir selesai. Kita tinggal memotong 17% untuk pengelola arena pacuan agar ia memperoleh keuntungan dari para petaruh. Dengan mengalikan setiap pembayaran yang telah dihitung dengan 0.83, kita memperoleh:</p>
+<p data-o006-id="O006-PSU-012-U0090"><span class="math display" data-o006-math-id="O006-PSU-012-M0016">\[\begin{align*}
+  &amp; \text{Absolute Payout for }A=\$20.00(0.83)=\$16.60\\
+  &amp; \text{Absolute Payout for }B=\$6.67(0.83)=\$5.54\\
+  &amp; \text{Absolute Payout for }C=\$9.09(0.83)=\$7.54\\
+  &amp; \text{Absolute Payout for }D=\$5.26(0.83)=\$4.37\\
+\end{align*}\]</span></p>
+</section>
+<p data-o006-id="O006-PSU-012-U0091">Kita juga selalu dapat memeriksa hasil. Misalkan, sebagai contoh, Kuda A menang. Arena kemudian akan membayarkan $16.60 kepada 5000 petaruh yang masing-masing memasang $2 pada Kuda A, sehingga biaya bagi arena adalah $16.60(5000) = $83,000. Karena arena menerima $100,000 dalam taruhan, arena memang memperoleh $17,000 seperti yang diinginkan. Pemeriksaan serupa dapat dilakukan untuk Kuda B, C, dan D, meskipun mungkin terdapat galat pembulatan karena kita memang membulatkan hasil perhitungan pembayaran. Namun, hasilnya tetap seharusnya sangat dekat dengan $83,000 pada setiap kasus!</p>
+</div>
+</section>
+<section class="level2" data-number="11.2" data-o006-id="O006-PSU-012-U0092" id="bayesian-estimation">
+<h2 class="anchored" data-anchor-id="bayesian-estimation" data-number="11.2" data-o006-id="O006-PSU-012-U0093"><span class="header-section-number">11.2</span> Pendugaan Bayesian</h2>
+<p data-o006-id="O006-PSU-012-U0094">Ada satu perbedaan utama antara statistikawan frekuentis dan statistikawan Bayesian yang perlu kita akui sebelum kita bahkan dapat mulai membahas bagaimana seorang Bayesian dapat menduga suatu parameter populasi <span class="math inline" data-o006-math-id="O006-PSU-012-M0017">\(\theta\)</span>. Perbedaan itu berkaitan dengan apakah seorang statistikawan memandang parameter sebagai suatu konstanta yang tidak diketahui atau sebagai peubah acak. Mari kita lihat sebuah contoh sederhana untuk menegaskan perbedaan tersebut.</p>
+<div class="theorem example" data-o006-id="O006-PSU-012-U0095" id="exm-bayes2">
+<p data-o006-id="O006-PSU-012-U0096"><span class="theorem-title"><strong>Contoh 11.2</strong></span> Seorang insinyur pengendalian lalu lintas meyakini bahwa mobil yang melewati suatu persimpangan tertentu tiba dengan laju rataan <span class="math inline" data-o006-math-id="O006-PSU-012-M0018">\(\lambda\)</span> yang sama dengan 3 atau 5 untuk suatu selang waktu tertentu. Sebelum mengumpulkan data apa pun, insinyur tersebut meyakini bahwa laju <span class="math inline" data-o006-math-id="O006-PSU-012-M0019">\(\lambda=3\)</span> lebih mungkin daripada <span class="math inline" data-o006-math-id="O006-PSU-012-M0020">\(\lambda=5\)</span>. Bahkan, insinyur tersebut meyakini bahwa peluang priornya adalah:</p>
+<p data-o006-id="O006-PSU-012-U0097"><span class="math display" data-o006-math-id="O006-PSU-012-M0021">\[\begin{align*}
+  P(\lambda=3)=0.7\;\text{and }P(\lambda=5)=0.3
+\end{align*}\]</span></p>
+<p data-o006-id="O006-PSU-012-U0098">Pada suatu hari, selama selang waktu yang dipilih secara acak, insinyur tersebut mengamati <span class="math inline" data-o006-math-id="O006-PSU-012-M0022">\(x=7\)</span> mobil melewati persimpangan itu. Berdasarkan pengamatan insinyur tersebut, berapakah peluang bahwa <span class="math inline" data-o006-math-id="O006-PSU-012-M0023">\(\lambda=3\)</span> Dan berapakah peluang bahwa <span class="math inline" data-o006-math-id="O006-PSU-012-M0024">\(\lambda=5\)</span>?</p>
+<section class="level4 card card-body bg-light ms-3 mb-3 pt-0" data-o006-id="O006-PSU-012-U0099" id="solution-1">
+<h4 class="anchored" data-anchor-id="solution-1" data-o006-id="O006-PSU-012-U0100">Penyelesaian</h4>
+<p data-o006-id="O006-PSU-012-U0101">Hal pertama yang perlu Anda perhatikan dalam contoh ini adalah bahwa kita sedang membahas cara mencari peluang bahwa suatu parameter <span class="math inline" data-o006-math-id="O006-PSU-012-M0025">\(\lambda\)</span> mengambil nilai tertentu. Dalam sekejap, kita baru saja membalikkan seluruh hal yang telah kita pelajari dalam Stat 414 dan Stat 415! Hal berikutnya yang perlu Anda perhatikan, setelah pulih dari rasa pusing akibat keadaan terbalik itu, adalah bahwa kita sebenarnya sudah memiliki perangkat yang diperlukan untuk menghitung peluang yang diinginkan. Cukup ambil Teorema Bayes dari kotak perangkat peluang kita.</p>
+<p data-o006-id="O006-PSU-012-U0102">Sekarang, hanya dengan menggunakan definisi peluang bersyarat, kita mengetahui bahwa peluang <span class="math inline" data-o006-math-id="O006-PSU-012-M0026">\(\lambda=3\)</span> dengan syarat <span class="math inline" data-o006-math-id="O006-PSU-012-M0027">\(X=7\)</span> adalah:</p>
+<p data-o006-id="O006-PSU-012-U0103"><span class="math display" data-o006-math-id="O006-PSU-012-M0028">\[\begin{align*}
+  P(\lambda=3|X=7)=\frac{P(\lambda=3, X=7)}{P(X=7)}
+\end{align*}\]</span></p>
+<p data-o006-id="O006-PSU-012-U0104">yang dapat dituliskan dengan menggunakan Teorema Bayes sebagai:</p>
+<div data-o006-id="O006-PSU-012-U0105" style="overflow-x:auto;overflow-y:hidden;">
+<p data-o006-id="O006-PSU-012-U0106"><span class="math display" data-o006-math-id="O006-PSU-012-M0029">\[\begin{align*}
+  P(\lambda=3|X=7)=\frac{P(X=7|\lambda=3)P(\lambda=3)}{P(X=7|\lambda =3)P(\lambda=3)+P(X=7|\lambda=5)P(\lambda=5)}
+\end{align*}\]</span></p>
+</div>
+<p data-o006-id="O006-PSU-012-U0107">Kita dapat menggunakan tabel peluang kumulatif Poisson di bagian belakang buku teks untuk mencari</p>
+<p data-o006-id="O006-PSU-012-U0108"><span class="math display" data-o006-math-id="O006-PSU-012-M0030">\[\begin{align*}
+&amp;P(X=7|\lambda=3)\\
+&amp; P(X=7|\lambda=5)
+\end{align*}\]</span> Nilainya adalah:</p>
+<p data-o006-id="O006-PSU-012-U0109"><span class="math display" data-o006-math-id="O006-PSU-012-M0031">\[\begin{align*}
+&amp;P(X=7|\lambda=3)=0.988-0.966=0.022\\
+&amp; P(X=7|\lambda=5)=0.867-0.762=0.105
+\end{align*}\]</span></p>
+<p data-o006-id="O006-PSU-012-U0110">Sekarang kita memiliki semua yang diperlukan untuk menuntaskan penghitungan peluang yang diinginkan:</p>
+<div data-o006-id="O006-PSU-012-U0111" style="overflow-x:auto;overflow-y:hidden;">
+<p data-o006-id="O006-PSU-012-U0112"><span class="math display" data-o006-math-id="O006-PSU-012-M0032">\[\begin{align*}
+  P(\lambda=3|X=7)=\frac{0.7(0.022)}{0.7(0.022)+0.3(0.105)}=\frac{0.0154}{0.0154+0.0315}=0.328
+\end{align*}\]</span></p>
+</div>
+</section>
+</div>
+<p data-o006-id="O006-PSU-012-U0113">Hmm. Mari kita rangkum. Peluang awal, dalam kasus ini, <span class="math inline" data-o006-math-id="O006-PSU-012-M0033">\(P(\lambda=3)=0.7\)</span> disebut <strong>peluang prior</strong>. Hal itu karena peluang tersebut menyatakan peluang parameter mengambil nilai tertentu sebelum informasi baru diperhitungkan. Peluang yang baru dihitung, yaitu:</p>
+<p data-o006-id="O006-PSU-012-U0114"><span class="math display" data-o006-math-id="O006-PSU-012-M0034">\[\begin{align*}
+  P(\lambda=3|X=7)
+\end{align*}\]</span></p>
+<p data-o006-id="O006-PSU-012-U0115">disebut <strong>peluang posterior</strong>. Hal itu karena peluang tersebut menyatakan peluang parameter mengambil nilai tertentu setelah informasi baru diperhitungkan. Dalam kasus ini, kita telah melihat bahwa peluang <span class="math inline" data-o006-math-id="O006-PSU-012-M0035">\(\lambda=3\)</span> turun dari 0,7 (peluang prior) menjadi 0,328 (peluang posterior) setelah informasi dari pengamatan <span class="math inline" data-o006-math-id="O006-PSU-012-M0036">\(x=7\)</span>.</p>
+<p data-o006-id="O006-PSU-012-U0116">Penghitungan serupa dapat dilakukan untuk mencari <span class="math inline" data-o006-math-id="O006-PSU-012-M0037">\(P(\lambda=5|X=7)\)</span>. Dengan melakukannya, kita memperoleh:</p>
+<div data-o006-id="O006-PSU-012-U0117" style="overflow-x:auto;overflow-y:hidden;">
+<p data-o006-id="O006-PSU-012-U0118"><span class="math display" data-o006-math-id="O006-PSU-012-M0038">\[\begin{align*}
+P(\lambda=5|X=7)=\frac{0.3(0.105)}{0.7(0.022)+0.3(0.105)}=\frac{0.0315}{0.0154+0.0315}=0.672
+\end{align*}\]</span></p>
+</div>
+<p data-o006-id="O006-PSU-012-U0119">Dalam kasus ini, kita melihat bahwa peluang <span class="math inline" data-o006-math-id="O006-PSU-012-M0039">\(\lambda=5\)</span> naik dari 0,3 (peluang prior) menjadi 0,672 (peluang posterior) setelah informasi dari pengamatan <span class="math inline" data-o006-math-id="O006-PSU-012-M0040">\(x=7\)</span>.</p><p class="target-only-correction poisson-rounding-note" data-o006-correction-id="O006-PSU-ADV-0201" role="note">Catatan ketelitian: nilai eksak massa Poisson adalah 0,02160403145 untuk λ = 3 dan 0,10444486296 untuk λ = 5; nilai itu memberi peluang posterior P(λ = 3 | X = 7) = 0,32552803889. Angka 0,328 di atas berasal dari massa yang terlebih dahulu dibulatkan menjadi 0,022 dan 0,105.</p>
+<p data-o006-id="O006-PSU-012-U0120">Contoh terakhir tersebut baik untuk menggambarkan perbedaan antara peluang prior dan peluang posterior, tetapi kurang memadai sebagai contoh praktis di dunia nyata. Alasannya, parameter dalam contoh tersebut diasumsikan hanya dapat mengambil dua nilai, yaitu <span class="math inline" data-o006-math-id="O006-PSU-012-M0041">\(\lambda=3\)</span> atau <span class="math inline" data-o006-math-id="O006-PSU-012-M0042">\(\lambda=5\)</span>. Jika ruang parameter bagi suatu parameter <span class="math inline" data-o006-math-id="O006-PSU-012-M0043">\(\theta\)</span> memuat tak terhingga banyak nilai yang mungkin, seorang Bayesian harus menentukan suatu <strong>fungsi kepadatan peluang prior</strong> <span class="math inline" data-o006-math-id="O006-PSU-012-M0044">\(h(\theta)\)</span>, misalnya. Seluruh mata kuliah telah dikhususkan untuk topik pemilihan PDF prior yang baik, jadi tentu saja kita tidak akan membahasnya di sini! Sebagai gantinya, kita akan mengasumsikan bahwa kita diberi PDF prior yang baik <span class="math inline" data-o006-math-id="O006-PSU-012-M0045">\(h(\theta)\)</span> dan memusatkan perhatian pada cara mencari suatu <strong>fungsi kepadatan peluang posterior</strong> <span class="math inline" data-o006-math-id="O006-PSU-012-M0046">\(k(\theta|y)\)</span>, misalnya, jika kita mengetahui fungsi kepadatan peluang <span class="math inline" data-o006-math-id="O006-PSU-012-M0047">\(g(y|\theta)\)</span> dari statistik <span class="math inline" data-o006-math-id="O006-PSU-012-M0048">\(Y\)</span>.</p>
+<p data-o006-id="O006-PSU-012-U0121">Jika kita mengetahui <span class="math inline" data-o006-math-id="O006-PSU-012-M0049">\(h(\theta)\)</span> dan <span class="math inline" data-o006-math-id="O006-PSU-012-M0050">\(g(y|\theta)\)</span>, kita dapat memperlakukan: <span class="math display" data-o006-math-id="O006-PSU-012-M0051">\[k(y, \theta)=g(y|\theta)h(\theta)\]</span> sebagai hukum bersama campuran dari statistik <span class="math inline" data-o006-math-id="O006-PSU-012-M0052">\(Y\)</span> dan parameter <span class="math inline" data-o006-math-id="O006-PSU-012-M0053">\(\theta\)</span>. Kemudian, kita dapat mencari distribusi marginal <span class="math inline" data-o006-math-id="O006-PSU-012-M0054">\(Y\)</span> dari distribusi bersama <span class="math inline" data-o006-math-id="O006-PSU-012-M0055">\(k(y, \theta)\)</span> dengan mengintegralkan terhadap ruang parameter <span class="math inline" data-o006-math-id="O006-PSU-012-M0056">\(\theta\)</span>:</p>
+<p data-o006-id="O006-PSU-012-U0122"><span class="math display" data-o006-math-id="O006-PSU-012-M0057">\[k_1(y)=\int_{\Theta} k(y, \theta)d\theta=\int_{\Theta} g(y|\theta)h(\theta)d\theta\]</span></p>
+<p data-o006-id="O006-PSU-012-U0123">Selanjutnya, kita dapat mencari PDF posterior dari <span class="math inline" data-o006-math-id="O006-PSU-012-M0058">\(\theta\)</span>, dengan syarat <span class="math inline" data-o006-math-id="O006-PSU-012-M0059">\(Y=y\)</span>, dengan menggunakan Teorema Bayes. Yaitu:</p>
+<p data-o006-id="O006-PSU-012-U0124"><span class="math display" data-o006-math-id="O006-PSU-012-M0060">\[k(\theta|y)=\frac{k(y, \theta)}{k_1(y)}=\frac{g(y|\theta)h(\theta)}{k_1(y)}\]</span></p>
+<p data-o006-id="O006-PSU-012-U0125">Mari kita buat pembahasan ini lebih konkret dengan melihat sebuah contoh.</p>
+<div class="theorem example" data-o006-id="O006-PSU-012-U0126" id="exm-bayes3">
+<p data-o006-id="O006-PSU-012-U0127"><span class="theorem-title"><strong>Contoh 11.3</strong></span> Misalkan <span class="math inline" data-o006-math-id="O006-PSU-012-M0061">\(Y\)</span> mengikuti distribusi binomial dengan parameter <span class="math inline" data-o006-math-id="O006-PSU-012-M0062">\(n\)</span> dan <span class="math inline" data-o006-math-id="O006-PSU-012-M0063">\(p=\theta\)</span>, sehingga PMF dari <span class="math inline" data-o006-math-id="O006-PSU-012-M0064">\(Y\)</span> dengan syarat <span class="math inline" data-o006-math-id="O006-PSU-012-M0065">\(\theta\)</span> adalah:</p>
+<p data-o006-id="O006-PSU-012-U0128"><span class="math inline" data-o006-math-id="O006-PSU-012-M0066">\(g(y|\theta)={n\choose y}\theta^y(1-\theta)^{n-y}\)</span> untuk <span class="math inline" data-o006-math-id="O006-PSU-012-M0067">\(y=0, 1, \ldots, n\)</span>. Misalkan PDF prior dari parameter <span class="math inline" data-o006-math-id="O006-PSU-012-M0068">\(\theta\)</span> adalah PDF beta, yaitu: <span class="math inline" data-o006-math-id="O006-PSU-012-M0069">\(h(\theta)=\frac{\Gamma(\alpha+\beta)}{\Gamma(\alpha)\Gamma(\beta)}\theta^{\alpha-1}(1-\theta)^{\beta-1}\)</span></p>
+<p data-o006-id="O006-PSU-012-U0129">untuk <span class="math inline" data-o006-math-id="O006-PSU-012-M0070">\(0&lt;\theta&lt;1\)</span>. Carilah PDF posterior dari <span class="math inline" data-o006-math-id="O006-PSU-012-M0071">\(\theta\)</span>, dengan syarat <span class="math inline" data-o006-math-id="O006-PSU-012-M0072">\(Y=y\)</span>. Dengan kata lain, carilah <span class="math inline" data-o006-math-id="O006-PSU-012-M0073">\(k(\theta|y)\)</span>.</p>
+<section class="level4 card card-body bg-light ms-3 mb-3 pt-0" data-o006-id="O006-PSU-012-U0130" id="solution-2">
+<h4 class="anchored" data-anchor-id="solution-2" data-o006-id="O006-PSU-012-U0131">Penyelesaian</h4>
+<p data-o006-id="O006-PSU-012-U0132">Pertama, kita mencari hukum bersama campuran dari statistik <span class="math inline" data-o006-math-id="O006-PSU-012-M0074">\(Y\)</span> dan parameter <span class="math inline" data-o006-math-id="O006-PSU-012-M0075">\(\theta\)</span> dengan mengalikan PDF prior <span class="math inline" data-o006-math-id="O006-PSU-012-M0076">\(h(\theta)\)</span> dan PMF bersyarat dari statistik <span class="math inline" data-o006-math-id="O006-PSU-012-M0077">\(Y\)</span> dan parameter <span class="math inline" data-o006-math-id="O006-PSU-012-M0078">\(\theta\)</span> adalah: <span class="math display" data-o006-math-id="O006-PSU-012-M0079">\[k(y, \theta)={n\choose y}\left(\frac{\Gamma(\alpha+\beta)}{\Gamma(\alpha)\Gamma(\beta)}\right)\theta^{y+\alpha-1}(1-\theta)^{n-y+\beta-1}\]</span></p>
+<p data-o006-id="O006-PSU-012-U0133">pada himpunan dukungan <span class="math inline" data-o006-math-id="O006-PSU-012-M0080">\(y=0, 1, 2, \ldots, n\)</span> dan <span class="math inline" data-o006-math-id="O006-PSU-012-M0081">\(0&lt;\theta&lt;1\)</span>.</p>
+<p data-o006-id="O006-PSU-012-U0134">Kemudian, kita mencari fungsi massa peluang marginal dari <span class="math inline" data-o006-math-id="O006-PSU-012-M0082">\(Y\)</span> dengan mengintegralkan <span class="math inline" data-o006-math-id="O006-PSU-012-M0083">\(k(y, \theta)\)</span> terhadap ruang parameter <span class="math inline" data-o006-math-id="O006-PSU-012-M0084">\(\theta\)</span>:</p>
+<div data-o006-id="O006-PSU-012-U0135" style="overflow-x:auto;overflow-y:hidden;">
+<p data-o006-id="O006-PSU-012-U0136"><span class="math display" data-o006-math-id="O006-PSU-012-M0085">\[k_1(y)=\int_0^1 k(y, \theta)d\theta={n\choose y}\frac{\Gamma(\alpha+\beta)}{\Gamma(\alpha)\Gamma(\beta)}\int_0^1 \theta^{y+\alpha-1}(1-\theta)^{n-y+\beta-1}d\theta\]</span></p>
+</div>
+<p data-o006-id="O006-PSU-012-U0137">Sekarang, jika kita mengalikan integran dengan 1 dalam suatu cara khusus:</p>
+<div data-o006-id="O006-PSU-012-U0138" style="overflow-x:auto;overflow-y:hidden;">
+<p data-o006-id="O006-PSU-012-U0139"><span class="math display" data-o006-math-id="O006-PSU-012-M0086">\[k_1(y)={n\choose y}\frac{\Gamma(\alpha+\beta)}{\Gamma(\alpha)\Gamma(\beta)}\left(\frac{\Gamma(y+\alpha)\Gamma(n-y+\beta)}{\Gamma(y+\alpha+n-y+\beta)}\right)\int_0^1 \left(\frac{\Gamma(y+\alpha+n-y+\beta)}{\Gamma(y+\alpha)\Gamma(n-y+\beta)}\right)\theta^{y+\alpha-1}(1-\theta)^{n-y+\beta-1}d\theta\]</span></p>
+</div>
+<p data-o006-id="O006-PSU-012-U0140">kita melihat bahwa kita memperoleh PDF beta dengan parameter <span class="math inline" data-o006-math-id="O006-PSU-012-M0087">\(y+\alpha\)</span> dan <span class="math inline" data-o006-math-id="O006-PSU-012-M0088">\(n-y+\beta\)</span> yang, berdasarkan definisi PDF yang sah, harus berintegral 1. Dengan menyederhanakannya, kita memperoleh bahwa fungsi massa peluang marginal dari <span class="math inline" data-o006-math-id="O006-PSU-012-M0089">\(Y\)</span> adalah:</p>
+<p data-o006-id="O006-PSU-012-U0141"><span class="math display" data-o006-math-id="O006-PSU-012-M0090">\[k_1(y)={n\choose y}\frac{\Gamma(\alpha+\beta)}{\Gamma(\alpha)\Gamma(\beta)}\left(\frac{\Gamma(y+\alpha)\Gamma(n-y+\beta)}{\Gamma(y+\alpha+n-y+\beta)}\right)\]</span></p>
+<p data-o006-id="O006-PSU-012-U0142">pada himpunan dukungan <span class="math inline" data-o006-math-id="O006-PSU-012-M0091">\(y=0, 1, 2, \ldots, n\)</span>. Kemudian, PDF posterior dari <span class="math inline" data-o006-math-id="O006-PSU-012-M0092">\(\theta\)</span>, dengan syarat <span class="math inline" data-o006-math-id="O006-PSU-012-M0093">\(Y=y\)</span> adalah:</p>
+<p data-o006-id="O006-PSU-012-U0143"><span class="math display" data-o006-math-id="O006-PSU-012-M0094">\[\begin{align*}
+k(\theta|y)=\frac{{n\choose y}\frac{\Gamma(\alpha+\beta)}{\Gamma(\alpha)\Gamma(\beta)}\theta^{y+\alpha-1}(1-\theta)^{n-y+\beta-1}}{{n\choose y}\frac{\Gamma(\alpha+\beta)}{\Gamma(\alpha)\Gamma(\beta)}\left(\frac{\Gamma(y+\alpha)\Gamma(n-y+\beta)}{\Gamma(y+\alpha+n-y+\beta)}\right)}
+\end{align*}\]</span></p>
+<p data-o006-id="O006-PSU-012-U0144">Karena beberapa faktor saling menghilangkan, kita melihat bahwa PDF posterior dari <span class="math inline" data-o006-math-id="O006-PSU-012-M0095">\(\theta\)</span>, dengan syarat <span class="math inline" data-o006-math-id="O006-PSU-012-M0096">\(Y=y\)</span> adalah:</p>
+<p data-o006-id="O006-PSU-012-U0145"><span class="math display" data-o006-math-id="O006-PSU-012-M0097">\[k(\theta|y)=\frac{\Gamma(n+\alpha+\beta)}{\Gamma(\alpha+y)\Gamma(n+\beta-y)}\theta^{y+\alpha-1}(1-\theta)^{n-y+\beta-1}\]</span></p>
+<p data-o006-id="O006-PSU-012-U0146">untuk <span class="math inline" data-o006-math-id="O006-PSU-012-M0098">\(0&lt;\theta&lt;1\)</span>, yang mungkin Anda kenali sebagai PDF beta dengan parameter <span class="math inline" data-o006-math-id="O006-PSU-012-M0099">\(y+\alpha\)</span> dan <span class="math inline" data-o006-math-id="O006-PSU-012-M0100">\(n-y+\beta\)</span>.</p>
+</section>
+</div>
+<p data-o006-id="O006-PSU-012-U0147">Mari kita pertimbangkan contoh lain.</p>
+<div class="theorem example" data-o006-id="O006-PSU-012-U0148" id="exm-bayes4">
+<p data-o006-id="O006-PSU-012-U0149"><span class="theorem-title"><strong>Contoh 11.4</strong></span> Untuk <span class="math inline" data-o006-math-id="O006-PSU-012-M0101">\(p\)</span>yang tetap, misalkan kita mengamati satu pengamatan <span class="math inline" data-o006-math-id="O006-PSU-012-M0102">\(Y=y\)</span> dari suatu distribusi dengan PDF <span class="math inline" data-o006-math-id="O006-PSU-012-M0103">\(p(1-p)^y\)</span>, untuk <span class="math inline" data-o006-math-id="O006-PSU-012-M0104">\(y=0, 1, \ldots\)</span>. Selain itu, informasi prior mengenai <span class="math inline" data-o006-math-id="O006-PSU-012-M0105">\(p\)</span> menunjukkan bahwa <span class="math inline" data-o006-math-id="O006-PSU-012-M0106">\(p\)</span> memiliki PDF <span class="math inline" data-o006-math-id="O006-PSU-012-M0107">\(3p^2\)</span> untuk <span class="math inline" data-o006-math-id="O006-PSU-012-M0108">\(0&lt;p&lt;1\)</span>. Carilah distribusi posterior dari <span class="math inline" data-o006-math-id="O006-PSU-012-M0109">\(p\)</span> dengan syarat <span class="math inline" data-o006-math-id="O006-PSU-012-M0110">\(Y=y\)</span>.</p>
+<section class="level4 card card-body bg-light ms-3 mb-3 pt-0" data-o006-id="O006-PSU-012-U0150" id="solution-3">
+<h4 class="anchored" data-anchor-id="solution-3" data-o006-id="O006-PSU-012-U0151">Penyelesaian</h4>
+<p data-o006-id="O006-PSU-012-U0152">Kita perlu mencari distribusi posterior dari <span class="math inline" data-o006-math-id="O006-PSU-012-M0111">\(p\)</span> dengan syarat <span class="math inline" data-o006-math-id="O006-PSU-012-M0112">\(Y=y\)</span>. Kita dapat mencari distribusi bersamanya melalui:</p>
+<p data-o006-id="O006-PSU-012-U0153"><span class="math display" data-o006-math-id="O006-PSU-012-M0113">\[\begin{align*}
+  k(p, y)=g(y|p)h(p)=p(1-p)^y\left(3p^2\right)=3p^3(1-p)^y
+\end{align*}\]</span></p>
+<p data-o006-id="O006-PSU-012-U0154">Langkah berikutnya adalah mencari <span class="math inline" data-o006-math-id="O006-PSU-012-M0114">\(k_1(y)\)</span> melalui:</p>
+<p data-o006-id="O006-PSU-012-U0155"><span class="math display" data-o006-math-id="O006-PSU-012-M0115">\[\begin{align*}
+  k_1(y)=\int_0^1 3p^3(1-p)^ydp
+\end{align*}\]</span></p>
+<p data-o006-id="O006-PSU-012-U0156">Alih-alih melakukan ini, mari kita perhatikan bahwa <span class="math inline" data-o006-math-id="O006-PSU-012-M0116">\(k_1(y)\)</span> adalah konstanta terhadap <span class="math inline" data-o006-math-id="O006-PSU-012-M0117">\(p\)</span>. Mari kita nyatakan <span class="math inline" data-o006-math-id="O006-PSU-012-M0118">\(k_1(y)\)</span> sebagai <span class="math inline" data-o006-math-id="O006-PSU-012-M0119">\(c\)</span>.</p>
+<p data-o006-id="O006-PSU-012-U0157">Sekarang, kita perlu mencari <span class="math inline" data-o006-math-id="O006-PSU-012-M0120">\(k(p|y)=\frac{k(p, y)}{k_1(y)}\)</span>.</p>
+<p data-o006-id="O006-PSU-012-U0158"><span class="math display" data-o006-math-id="O006-PSU-012-M0121">\[\begin{align*}k(p|y)=\frac{k(p, y)}{k_1(y)}=\frac{3p^3(1-p)^y}{c}=\left(\frac{3}{c}\right)p^3(1-p)^y
+\end{align*}\]</span></p>
+<p data-o006-id="O006-PSU-012-U0159">Suku di dalam tanda kurung, <span class="math inline" data-o006-math-id="O006-PSU-012-M0122">\(\left(\frac{3}{c}\right)\)</span>, adalah konstanta terhadap <span class="math inline" data-o006-math-id="O006-PSU-012-M0123">\(p\)</span>. Mari kita nyatakan konstanta tersebut sebagai <span class="math inline" data-o006-math-id="O006-PSU-012-M0124">\(\kappa\)</span>. Oleh karena itu, kita memperoleh:</p>
+<p data-o006-id="O006-PSU-012-U0160"><span class="math display" data-o006-math-id="O006-PSU-012-M0125">\[k(p|y)=\kappa p^3(1-p)^y\]</span></p>
+<p data-o006-id="O006-PSU-012-U0161">Kita mengetahui bahwa <span class="math inline" data-o006-math-id="O006-PSU-012-M0126">\(k(p|y)\)</span> adalah PDF yang sah. Kita juga mengetahui bahwa <span class="math inline" data-o006-math-id="O006-PSU-012-M0127">\(p\)</span> memiliki himpunan dukungan <span class="math inline" data-o006-math-id="O006-PSU-012-M0128">\(0&lt;p&lt;1\)</span> dan bahwa <span class="math inline" data-o006-math-id="O006-PSU-012-M0129">\(k(p|y)\)</span> berintegral 1 pada himpunan dukungan tersebut. Oleh karena itu, distribusi posterior dari <span class="math inline" data-o006-math-id="O006-PSU-012-M0130">\(p\)</span> dengan syarat <span class="math inline" data-o006-math-id="O006-PSU-012-M0131">\(Y=y\)</span> harus berupa distribusi beta dengan parameter <span class="math inline" data-o006-math-id="O006-PSU-012-M0132">\(\alpha=4\)</span> dan <span class="math inline" data-o006-math-id="O006-PSU-012-M0133">\(\beta=y+1\)</span>. Dengan kata lain,</p>
+<p data-o006-id="O006-PSU-012-U0162"><span class="math display" data-o006-math-id="O006-PSU-012-M0134">\[\begin{align*}\n  k(p|y)=\frac{\Gamma(5+y)}{\Gamma(4)\Gamma(y+1)}p^{4-1}(1-p)^{(y+1)-1}\n\end{align*}\]</span></p>
+<p data-o006-id="O006-PSU-012-U0163">Kita menemukan distribusi posterior dari <span class="math inline" data-o006-math-id="O006-PSU-012-M0135">\(p\)</span> dengan syarat <span class="math inline" data-o006-math-id="O006-PSU-012-M0136">\(Y=y\)</span> tanpa melakukan integrasi apa pun! Kita hanya mengenali dan mengelompokkan semua konstanta terhadap <span class="math inline" data-o006-math-id="O006-PSU-012-M0137">\(p\)</span> serta menggunakan pengetahuan kita tentang syarat suatu fungsi menjadi PDF yang sah.</p>
+<div class="callout callout-style-simple callout-caution no-icon" data-o006-id="O006-PSU-012-U0164">
+<div class="callout-body d-flex" data-o006-id="O006-PSU-012-U0165">
+<div class="callout-icon-container" data-o006-id="O006-PSU-012-U0166">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-body-container" data-o006-id="O006-PSU-012-U0167">
+<p data-o006-id="O006-PSU-012-U0168"><strong>Perhatikan!</strong> Karena <span class="math inline" data-o006-math-id="O006-PSU-012-M0138">\(\kappa\)</span> adalah konstanta terhadap <span class="math inline" data-o006-math-id="O006-PSU-012-M0139">\(p\)</span>, kita dapat mengatakan bahwa <span class="math inline" data-o006-math-id="O006-PSU-012-M0140">\(k(p|y)\)</span> adalah <strong>sebanding dengan</strong> <span class="math inline" data-o006-math-id="O006-PSU-012-M0141">\(p^3(1-p)^y\)</span>. Kita menyatakannya sebagai:</p>
+<p data-o006-id="O006-PSU-012-U0169"><span class="math display" data-o006-math-id="O006-PSU-012-M0142">\[k(p|y)\propto p^3(1-p)^y\]</span></p>
+</div>
+</div>
+</div>
+<p data-o006-id="O006-PSU-012-U0170">Teknik ini membantu kita mencari posterior dengan lebih cepat. Namun, teknik ini hanya dapat digunakan jika kita dapat mengenali distribusi posterior tersebut, sebagaimana kita mengenali bahwa <span class="math inline" data-o006-math-id="O006-PSU-012-M0143">\(k(p|y)\)</span> adalah distribusi beta.</p>
+<p data-o006-id="O006-PSU-012-U0171">Untuk memperagakan cara yang panjang, ujilah keterampilan kalkulus dan aljabar Anda untuk mencari</p>
+<div data-o006-id="O006-PSU-012-U0172" style="overflow-x:auto;overflow-y:hidden;">
+<p data-o006-id="O006-PSU-012-U0173"><span class="math display" data-o006-math-id="O006-PSU-012-M0144">\[\begin{align*}
+  c=k_1(y)=\int_0^1 3p^3(1-p)^ydp=\frac{18}{(y+1)(y+2)(y+3)(y+4)}
+\end{align*}\]</span></p>
+</div>
+<p data-o006-id="O006-PSU-012-U0174">Konstanta <span class="math inline" data-o006-math-id="O006-PSU-012-M0145">\(\kappa\)</span>sama dengan</p>
+<p data-o006-id="O006-PSU-012-U0175"><span class="math display" data-o006-math-id="O006-PSU-012-M0146">\[\begin{align*}
+\frac{3}{c}=\frac{3}{\frac{18}{(y+1)(y+2)(y+3)(y+4)}}=\frac{(y+1)(y+2)(y+3)(y+4)}{6}
+\end{align*}\]</span></p>
+<p data-o006-id="O006-PSU-012-U0176">Bandingkan konstanta ini dengan konstanta distribusi beta yang kita peroleh sebagai posterior:</p>
+<div data-o006-id="O006-PSU-012-U0177" style="overflow-x:auto;overflow-y:hidden;">
+<p data-o006-id="O006-PSU-012-U0178"><span class="math display" data-o006-math-id="O006-PSU-012-M0147">\[\begin{align*}
+\frac{\Gamma(5+y)}{\Gamma(4)\Gamma(y+1)}=\frac{(y+4)(y+3)(y+2)(y+1)y!}{3!(y!)}=\frac{(y+4)(y+3)(y+2)(y+1)}{6}
+\end{align*}\]</span></p>
+</div>
+<p data-o006-id="O006-PSU-012-U0179">Keduanya tepat sama! Sekali lagi, hal ini terjadi karena kita mengenali bahwa distribusi posterior tersebut adalah distribusi beta dan hanya ada satu konstanta yang dapat membuat PDF distribusi beta berintegral satu pada himpunan dukungannya.</p>
+<p data-o006-id="O006-PSU-012-U0180">Dalam contoh-contoh sejauh ini, kita hanya mempertimbangkan satu pengamatan. Kita dapat memulai dengan suatu sampel pengamatan, misalnya <span class="math inline" data-o006-math-id="O006-PSU-012-M0148">\(X_1, X_2, \ldots, X_n\)</span> atau kita dapat memulai dengan suatu statistik sampel.</p>
+<p data-o006-id="O006-PSU-012-U0181">Jika kita memulai dengan suatu sampel, kita dapat mengganti <span class="math inline" data-o006-math-id="O006-PSU-012-M0149">\(g(y|\theta)\)</span> dengan fungsi kemungkinan</p>
+<p data-o006-id="O006-PSU-012-U0182"><span class="math display" data-o006-math-id="O006-PSU-012-M0150">\[\begin{align*}
+  L(\theta)=f(x_1|\theta)f(x_2|\theta)\cdots f(x_n|\theta)
+\end{align*}\]</span></p>
+<p data-o006-id="O006-PSU-012-U0183">yang tidak lain adalah distribusi bersama dari <span class="math inline" data-o006-math-id="O006-PSU-012-M0151">\(X_1, X_2, \ldots, X_n\)</span> dengan syarat parameter <span class="math inline" data-o006-math-id="O006-PSU-012-M0152">\(\theta\)</span>. Oleh karena itu, kita dapat mencari</p>
+<p data-o006-id="O006-PSU-012-U0184"><span class="math display" data-o006-math-id="O006-PSU-012-M0153">\[\begin{align*}
+k(\theta|x_1, \ldots, x_n)\propto h(\theta)L(\theta)
+\end{align*}\]</span></p>
+<p data-o006-id="O006-PSU-012-U0185">Jika kita memulai dengan suatu statistik, misalnya <span class="math inline" data-o006-math-id="O006-PSU-012-M0154">\(W\)</span>, kita perlu mencari distribusi dari <span class="math inline" data-o006-math-id="O006-PSU-012-M0155">\(g(w|\theta)\)</span> dan melanjutkan seperti biasa.</p>
+</section>
+</div>
+<div class="theorem example" data-o006-id="O006-PSU-012-U0186" id="exm-bayes5">
+<p data-o006-id="O006-PSU-012-U0187"><span class="theorem-title"><strong>Contoh 11.5</strong></span> Misalkan <span class="math inline" data-o006-math-id="O006-PSU-012-M0156">\(X_1, X_2, \ldots, X_n\)</span> adalah sampel acak dari distribusi Bernoulli dengan PMF <span class="math display" data-o006-math-id="O006-PSU-012-M0157">\[\begin{align*}
+  f(x|\theta)=\theta^x(1-\theta)^{1-x}, \qquad x=0, 1
+\end{align*}\]</span> Informasi prior memberi tahu kita bahwa <span class="math inline" data-o006-math-id="O006-PSU-012-M0158">\(\theta\)</span> mengikuti distribusi beta dengan parameter <span class="math inline" data-o006-math-id="O006-PSU-012-M0159">\(\alpha\)</span> dan <span class="math inline" data-o006-math-id="O006-PSU-012-M0160">\(\beta\)</span>. Carilah distribusi posterior dari <span class="math inline" data-o006-math-id="O006-PSU-012-M0161">\(\theta\)</span> dengan syarat data tersebut.</p>
+<section class="level4 card card-body bg-light ms-3 mb-3 pt-0" data-o006-id="O006-PSU-012-U0188" id="solution-4">
+<h4 class="anchored" data-anchor-id="solution-4" data-o006-id="O006-PSU-012-U0189">Penyelesaian</h4>
+<p data-o006-id="O006-PSU-012-U0190">Pertama, kita perlu mencari fungsi kemungkinan:</p>
+<div data-o006-id="O006-PSU-012-U0191" style="overflow-x:auto;overflow-y:hidden;">
+<p data-o006-id="O006-PSU-012-U0192"><span class="math display" data-o006-math-id="O006-PSU-012-M0162">\[\begin{align*}
+  L(\theta)=\prod_{i=1}^n f(x_i|\theta)=\prod_{i=1}^n\theta^{x_i}(1-\theta)^{1-x_i}=\theta^{\sum x_i}(1-\theta)^{n-\sum x_i}
+\end{align*}\]</span></p>
+</div>
+<p data-o006-id="O006-PSU-012-U0193">Langkah berikutnya adalah membentuk kernel bersama dari <span class="math inline" data-o006-math-id="O006-PSU-012-M0163">\(\theta\)</span> dan data tersebut.</p>
+<div data-o006-id="O006-PSU-012-U0194" style="overflow-x:auto;overflow-y:hidden;">
+<p data-o006-id="O006-PSU-012-U0195"><span class="math display" data-o006-math-id="O006-PSU-012-M0164">\[\begin{align*}k(\theta|x_1, \ldots, x_n)\propto h(\theta)L(\theta)=\theta^{\alpha-1}(1-\theta)^{\beta-1}\theta^{\sum x_i}(1-\theta)^{n-\sum x_i}
+\end{align*}\]</span></p>
+</div>
+<p data-o006-id="O006-PSU-012-U0196">Ingatlah, ketika kita mengatakan bahwa <span class="math inline" data-o006-math-id="O006-PSU-012-M0165">\(k(\theta|x_1, \ldots, x_n)\)</span> sebanding dengan ruas kanan, kita mengabaikan semua suku yang konstan terhadap <span class="math inline" data-o006-math-id="O006-PSU-012-M0166">\(\theta\)</span>. Dengan menyederhanakannya, kita memperoleh:</p>
+<p data-o006-id="O006-PSU-012-U0197"><span class="math display" data-o006-math-id="O006-PSU-012-M0167">\[\begin{align*}
+  k(\theta|x_1, \ldots, x_n)\propto \theta^{\alpha+\sum x_i -1}(1-\theta)^{n-\sum x_i+\beta-1}
+\end{align*}\]</span></p>
+<p data-o006-id="O006-PSU-012-U0198">Kita dapat mengenali bahwa <span class="math inline" data-o006-math-id="O006-PSU-012-M0168">\(\theta^{\alpha+\sum x_i -1}(1-\theta)^{n-\sum x_i+\beta-1}\)</span> sebanding dengan distribusi beta dengan parameter <span class="math inline" data-o006-math-id="O006-PSU-012-M0169">\(\alpha^*=\alpha+\sum x_i\)</span> dan <span class="math inline" data-o006-math-id="O006-PSU-012-M0170">\(\beta^*=n-\sum x_i +\beta\)</span>.</p>
+</section>
+</div>
+<p data-o006-id="O006-PSU-012-U0199">Sekarang, apakah Anda bertanya-tanya apa kaitan semua ini dengan pendugaan Bayesian, sebagaimana tersirat oleh judul halaman ini? Mari kita bahas! Seorang Bayesian meyakini bahwa segala sesuatu yang perlu diketahui tentang suatu parameter <span class="math inline" data-o006-math-id="O006-PSU-012-M0171">\(\theta\)</span> dapat ditemukan dalam PDF posteriornya <span class="math inline" data-o006-math-id="O006-PSU-012-M0172">\(k(\theta|y)\)</span>. Jadi, jika seorang Bayesian diminta membuat nilai dugaan titik bagi <span class="math inline" data-o006-math-id="O006-PSU-012-M0173">\(\theta\)</span>, secara wajar ia akan merujuk pada <span class="math inline" data-o006-math-id="O006-PSU-012-M0174">\(k(\theta|y)\)</span> untuk memperoleh jawabannya. Namun, bagaimana caranya? Hal yang logis adalah menggunakan <span class="math inline" data-o006-math-id="O006-PSU-012-M0175">\(k(\theta|y)\)</span> untuk menghitung rataan atau median dari <span class="math inline" data-o006-math-id="O006-PSU-012-M0176">\(\theta\)</span>, karena keduanya merupakan dugaan yang masuk akal bagi nilai <span class="math inline" data-o006-math-id="O006-PSU-012-M0177">\(\theta\)</span>. Namun, hmm! Haruskah ia menghitung rataan atau median? Hal itu bergantung pada kerugian yang harus ditanggung akibat menggunakan salah satunya. Kerugian? Kita sedang membahas pendugaan parameter, bukan membeli bahan makanan. Misalkan ia dikenai kerugian tertentu karena menduga nilai sebenarnya dari parameter <span class="math inline" data-o006-math-id="O006-PSU-012-M0178">\(\theta\)</span> dengan dugaannya <span class="math inline" data-o006-math-id="O006-PSU-012-M0179">\(w(y)\)</span>. Seorang perempuan Bayesian ini mungkin menginginkan agar kerugian akibat galatnya sekecil mungkin. Misalkan ia dikenai kerugian sebesar kuadrat galat antara <span class="math inline" data-o006-math-id="O006-PSU-012-M0180">\(\theta\)</span> dan dugaannya <span class="math inline" data-o006-math-id="O006-PSU-012-M0181">\(w(y)\)</span>. Dengan kata lain, misalkan kerugiannya adalah:</p>
+<p data-o006-id="O006-PSU-012-U0200"><span class="math display" data-o006-math-id="O006-PSU-012-M0182">\[(\theta-w(y))^2\]</span></p>
+<p data-o006-id="O006-PSU-012-U0201">Nah, itulah jawabannya! Karena ia ingin meminimumkan kerugiannya, ia harus menetapkan dugaannya <span class="math inline" data-o006-math-id="O006-PSU-012-M0183">\(w(y)\)</span> sebagai rataan bersyarat <span class="math inline" data-o006-math-id="O006-PSU-012-M0184">\(E(\theta|y)\)</span>. Hal itu karena dalam STAT 414 kita telah menunjukkan bahwa jika <span class="math inline" data-o006-math-id="O006-PSU-012-M0185">\(Z\)</span> adalah peubah acak, maka nilai harapan galat kuadrat, yaitu <span class="math inline" data-o006-math-id="O006-PSU-012-M0186">\(E[(Z-b)^2]\)</span> diminimumkan pada <span class="math inline" data-o006-math-id="O006-PSU-012-M0187">\(b=E(Z)\)</span>. Dalam kasusnya, <span class="math inline" data-o006-math-id="O006-PSU-012-M0188">\(Z\)</span> adalah <span class="math inline" data-o006-math-id="O006-PSU-012-M0189">\(\theta\)</span> dan <span class="math inline" data-o006-math-id="O006-PSU-012-M0190">\(b\)</span> adalah <span class="math inline" data-o006-math-id="O006-PSU-012-M0191">\(w(y)=E(\theta|y)\)</span>.</p>
+<p data-o006-id="O006-PSU-012-U0202">Di sisi lain, jika ia dikenai kerugian berupa nilai absolut galat antara <span class="math inline" data-o006-math-id="O006-PSU-012-M0192">\(\theta\)</span> dan dugaannya <span class="math inline" data-o006-math-id="O006-PSU-012-M0193">\(w(y)\)</span>, yaitu: <span class="math display" data-o006-math-id="O006-PSU-012-M0194">\[|\theta-w(y)|\]</span> maka, untuk membuat kerugiannya sekecil mungkin, ia harus menetapkan dugaannya <span class="math inline" data-o006-math-id="O006-PSU-012-M0195">\(w(y)\)</span> sebagai median bersyarat. Hal itu karena, sekali lagi, dalam STAT 414 kita telah menunjukkan bahwa jika <span class="math inline" data-o006-math-id="O006-PSU-012-M0196">\(Z\)</span> adalah peubah acak, maka nilai harapan dari nilai absolut galat, yaitu <span class="math inline" data-o006-math-id="O006-PSU-012-M0197">\(E[|Z-b|]\)</span> diminimumkan ketika <span class="math inline" data-o006-math-id="O006-PSU-012-M0198">\(b\)</span> sama dengan median distribusi tersebut.</p><p class="target-only-correction loss-regularity-note" data-o006-correction-id="O006-PSU-ADV-0208" role="note">Catatan keputusan: rataan posterior meminimumkan kerugian posterior harapan untuk galat kuadrat jika momen kedua yang diperlukan hingga; untuk galat absolut, setiap median posterior merupakan peminimum, dan peminimum tidak harus tunggal.</p>
+<p data-o006-id="O006-PSU-012-U0203">Mari kita buat pembahasan ini konkret dengan kembali ke contoh binomial kita.</p>
+<div class="theorem example" data-o006-id="O006-PSU-012-U0204" id="exm-bayes6">
+<p data-o006-id="O006-PSU-012-U0205"><span class="theorem-title"><strong>Contoh 11.6</strong></span> Misalkan <span class="math inline" data-o006-math-id="O006-PSU-012-M0199">\(Y\)</span> mengikuti distribusi binomial dengan parameter <span class="math inline" data-o006-math-id="O006-PSU-012-M0200">\(n\)</span> dan <span class="math inline" data-o006-math-id="O006-PSU-012-M0201">\(p=\theta\)</span>, sehingga PMF dari <span class="math inline" data-o006-math-id="O006-PSU-012-M0202">\(Y\)</span> dengan syarat <span class="math inline" data-o006-math-id="O006-PSU-012-M0203">\(\theta\)</span> adalah:</p>
+<p data-o006-id="O006-PSU-012-U0206"><span class="math display" data-o006-math-id="O006-PSU-012-M0204">\[g(y|\theta)={n\choose y}\theta^y(1-\theta)^{n-y}\]</span> untuk <span class="math inline" data-o006-math-id="O006-PSU-012-M0205">\(y=0, 1, \ldots, n\)</span>. Misalkan PDF prior dari parameter <span class="math inline" data-o006-math-id="O006-PSU-012-M0206">\(\theta\)</span> adalah PDF beta, yaitu:</p>
+<p data-o006-id="O006-PSU-012-U0207"><span class="math display" data-o006-math-id="O006-PSU-012-M0207">\[h(\theta)=\frac{\Gamma(\alpha+\beta)}{\Gamma(\alpha)\Gamma(\beta)}\theta^{\alpha-1}(1-\theta)^{\beta-1}\]</span> untuk <span class="math inline" data-o006-math-id="O006-PSU-012-M0208">\(0&lt;\theta&lt;1\)</span>. Dugalah parameter <span class="math inline" data-o006-math-id="O006-PSU-012-M0209">\(\theta\)</span> dengan menggunakan fungsi kerugian galat kuadrat.</p>
+<div class="card card-body bg-light ms-3 mb-3 pt-0" data-o006-id="O006-PSU-012-U0208">
+<h4 class="anchored target-only-solution-heading" data-o006-correction-id="O006-PSU-ADV-0209" id="solusi-contoh-11-6">Solusi</h4><p data-o006-id="O006-PSU-012-U0209">Sebelumnya, kita telah menunjukkan bahwa PDF posterior dari <span class="math inline" data-o006-math-id="O006-PSU-012-M0210">\(\theta\)</span> dengan syarat <span class="math inline" data-o006-math-id="O006-PSU-012-M0211">\(Y=y\)</span> adalah PDF beta dengan parameter <span class="math inline" data-o006-math-id="O006-PSU-012-M0212">\(y+\alpha\)</span> dan <span class="math inline" data-o006-math-id="O006-PSU-012-M0213">\(n-y+\beta\)</span>. Pembahasan sebelumnya memberi tahu kita bahwa untuk meminimumkan fungsi kerugian galat kuadrat:</p>
+<p data-o006-id="O006-PSU-012-U0210"><span class="math display" data-o006-math-id="O006-PSU-012-M0214">\[\begin{align*}
+  (\theta-w(y))^2
+\end{align*}\]</span></p>
+<p data-o006-id="O006-PSU-012-U0211">kita harus menggunakan rataan bersyarat <span class="math inline" data-o006-math-id="O006-PSU-012-M0215">\(w(y)=E(\theta|y)\)</span> sebagai nilai dugaan bagi parameter <span class="math inline" data-o006-math-id="O006-PSU-012-M0216">\(\theta\)</span>. Secara umum, rataan PDF beta dengan parameter <span class="math inline" data-o006-math-id="O006-PSU-012-M0217">\(\alpha\)</span> dan <span class="math inline" data-o006-math-id="O006-PSU-012-M0218">\(\beta\)</span> adalah:</p>
+<p data-o006-id="O006-PSU-012-U0212"><span class="math display" data-o006-math-id="O006-PSU-012-M0219">\[\begin{align*}
+  \frac{\alpha}{\alpha+\beta}
+\end{align*}\]</span></p>
+<p data-o006-id="O006-PSU-012-U0213">Dalam kasus kita, PDF posterior dari <span class="math inline" data-o006-math-id="O006-PSU-012-M0220">\(\theta\)</span> dengan syarat <span class="math inline" data-o006-math-id="O006-PSU-012-M0221">\(Y=y\)</span> adalah PDF beta dengan parameter <span class="math inline" data-o006-math-id="O006-PSU-012-M0222">\(y+\alpha\)</span> dan <span class="math inline" data-o006-math-id="O006-PSU-012-M0223">\(n-y+\beta\)</span>. Oleh karena itu, rataan bersyaratnya adalah:</p>
+<p data-o006-id="O006-PSU-012-U0214"><span class="math display" data-o006-math-id="O006-PSU-012-M0224">\[\begin{align*}w(y)=E(\theta|y)=\frac{\alpha+y}{\alpha+y+n-y+\beta}=\frac{\alpha+y}{\alpha+n+\beta}
+\end{align*}\]</span></p>
+<p data-o006-id="O006-PSU-012-U0215">Dalam situasi ini, nilai tersebut merupakan nilai dugaan terbaik seorang Bayesian bagi <span class="math inline" data-o006-math-id="O006-PSU-012-M0225">\(\theta\)</span> ketika menggunakan fungsi kerugian galat kuadrat.</p>
+</div>
+</div>
+</section>
+<section class="level2" data-number="11.3" data-o006-id="O006-PSU-012-U0216" id="credible-intervals">
+<h2 class="anchored" data-anchor-id="credible-intervals" data-number="11.3" data-o006-id="O006-PSU-012-U0217"><span class="header-section-number">11.3</span> Selang Kredibel</h2>
+<p data-o006-id="O006-PSU-012-U0218">Sebelumnya, ketika kita mengasumsikan bahwa parameter yang tetap tetapi tidak diketahui adalah suatu konstanta, kita memperoleh nilai dugaan titik atau penduga titik untuk <span class="math inline" data-o006-math-id="O006-PSU-012-M0226">\(\theta\)</span>. Kita telah melakukan hal serupa dalam kerangka Bayesian pada bagian ini dengan mencari nilai yang meminimumkan fungsi kerugian galat kuadrat atau dengan meminimumkan nilai absolut galat.</p>
+<p data-o006-id="O006-PSU-012-U0219">Namun, dalam kerangka frekuentis, kita tidak berhenti pada nilai dugaan titik. Dengan menggunakan perangkat peluang, kita menyusun selang kepercayaan untuk parameter yang tidak diketahui. Dapatkah kita melakukan hal serupa di sini dengan dugaan Bayes?</p>
+<p data-o006-id="O006-PSU-012-U0220">Jawabannya ya. Kita dapat memperoleh apa yang disebut <strong>selang kredibel</strong>. Kita dapat menyusun selang kredibel dengan mencari dua batas parameter yang bergantung pada data <span class="math inline" data-o006-math-id="O006-PSU-012-M0227">\(y\)</span>, misalkan <span class="math inline" data-o006-math-id="O006-PSU-012-M0228">\(a(y)\)</span> dan <span class="math inline" data-o006-math-id="O006-PSU-012-M0229">\(b(y)\)</span> sedemikian sehingga:</p>
+<p data-o006-id="O006-PSU-012-U0221"><span class="math display" data-o006-math-id="O006-PSU-012-M0230">\[\begin{align*}
+  \int_{a(y)}^{b(y)}k(\theta|y)d\theta=1-\alpha
+\end{align*}\]</span></p>
+<p data-o006-id="O006-PSU-012-U0222">dengan <span class="math inline" data-o006-math-id="O006-PSU-012-M0231">\(\alpha\)</span> kecil, misalnya <span class="math inline" data-o006-math-id="O006-PSU-012-M0232">\(\alpha=0.05\)</span>. Selang yang dihasilkan dari <span class="math inline" data-o006-math-id="O006-PSU-012-M0233">\(a(y)\)</span> hingga <span class="math inline" data-o006-math-id="O006-PSU-012-M0234">\(b(y)\)</span> dapat menjadi nilai dugaan selang untuk <span class="math inline" data-o006-math-id="O006-PSU-012-M0235">\(\theta\)</span> sehingga peluang posterior bahwa <span class="math inline" data-o006-math-id="O006-PSU-012-M0236">\(\theta\)</span> berada dalam selang tersebut adalah <span class="math inline" data-o006-math-id="O006-PSU-012-M0237">\(1-\alpha\)</span>.</p>
+<p data-o006-id="O006-PSU-012-U0223">Peluang pada setiap ekor lazimnya dibuat sama. Oleh karena itu, selang harus disusun sedemikian sehingga: <span class="math display" data-o006-math-id="O006-PSU-012-M0238">\[\begin{align*}
+  &amp; \frac{\alpha}{2}=\int_{-\infty}^{a(y)}k(\theta|y)d\theta\\
+  &amp; \frac{\alpha}{2}=\int_{b(y)}^\infty k(\theta|y)d\theta
+\end{align*}\]</span></p>
+<div class="theorem example" data-o006-id="O006-PSU-012-U0224" id="exm-bayes7">
+<p data-o006-id="O006-PSU-012-U0225"><span class="theorem-title"><strong>Contoh 11.7</strong></span> Perhatikan contoh sebelumnya, ketika kita memiliki satu pengamatan, <span class="math inline" data-o006-math-id="O006-PSU-012-M0239">\(Y\)</span>, dari suatu distribusi dengan PMF <span class="math inline" data-o006-math-id="O006-PSU-012-M0240">\(p(1-p)^y\)</span> untuk <span class="math inline" data-o006-math-id="O006-PSU-012-M0241">\(y=0, 1, \ldots\)</span> dan sebuah parameter tak diketahui <span class="math inline" data-o006-math-id="O006-PSU-012-M0242">\(p\)</span> dengan distribusi prior <span class="math inline" data-o006-math-id="O006-PSU-012-M0243">\(3p^2\)</span>, untuk <span class="math inline" data-o006-math-id="O006-PSU-012-M0244">\(0&lt;p&lt;1\)</span>. Tentukan selang kredibel 90% untuk <span class="math inline" data-o006-math-id="O006-PSU-012-M0245">\(p\)</span> dengan <span class="math inline" data-o006-math-id="O006-PSU-012-M0246">\(Y=3\)</span>.</p>
+<section class="level4 card card-body bg-light ms-3 mb-3 pt-0" data-o006-id="O006-PSU-012-U0226" id="solution-5">
+<h4 class="anchored" data-anchor-id="solution-5" data-o006-id="O006-PSU-012-U0227">Solusi</h4>
+<p data-o006-id="O006-PSU-012-U0228">Kita mengetahui bahwa distribusi posteriornya adalah distribusi beta dengan parameter <span class="math inline" data-o006-math-id="O006-PSU-012-M0247">\(\alpha=4\)</span> dan <span class="math inline" data-o006-math-id="O006-PSU-012-M0248">\(\beta=y+1\)</span>. Dalam kasus ini, <span class="math inline" data-o006-math-id="O006-PSU-012-M0249">\(Y=3\)</span>, sehingga <span class="math inline" data-o006-math-id="O006-PSU-012-M0250">\(\beta=4\)</span>.</p>
+<p data-o006-id="O006-PSU-012-U0229">Untuk menentukan selang kredibel 90%, kita perlu menentukan <span class="math inline" data-o006-math-id="O006-PSU-012-M0251">\(a(y)\)</span> dan <span class="math inline" data-o006-math-id="O006-PSU-012-M0252">\(b(y)\)</span> sedemikian sehingga</p>
+<div data-o006-id="O006-PSU-012-U0230" style="overflow-x:auto;overflow-y:hidden;">
+<p data-o006-id="O006-PSU-012-U0231"><span class="math display" data-o006-math-id="O006-PSU-012-M0253">\[0.90=\int_{a(y)}^{b(y)}\frac{\Gamma(8)}{\Gamma(4)\Gamma(4)}p^3(1-p)^3dp=\int_{a(y)}^{b(y)}140p^3(1-p)^3dp\]</span></p>
+</div>
+<p data-o006-id="O006-PSU-012-U0232">Kita dapat menggunakan R untuk membantu menentukan selang ini. Kita dapat mencari persentil <span class="math inline" data-o006-math-id="O006-PSU-012-M0254">\(5^{th}\)</span> dan persentil <span class="math inline" data-o006-math-id="O006-PSU-012-M0255">\(95^{th}\)</span> dari distribusi beta dengan parameter <span class="math inline" data-o006-math-id="O006-PSU-012-M0256">\(\alpha=4\)</span> dan <span class="math inline" data-o006-math-id="O006-PSU-012-M0257">\(\beta=4\)</span> dengan menggunakan perintah berikut.</p>
+<div class="cell language-name-processed" data-o006-id="O006-PSU-012-U0233">
+<div class="codeblock-with-label r" data-o006-id="O006-PSU-012-U0234">
+<style>.codeblock-with-label pre.lang-label-1::before { content: "R"; }</style>
+<div class="code-copy-outer-scaffold" data-o006-id="O006-PSU-012-U0235"><div class="sourceCode cell-code" data-language-name-skip="true" data-o006-id="O006-PSU-012-U0236" id="cb1"><pre class="sourceCode r lang-label-1 code-with-copy" data-o006-id="O006-PSU-012-U0237"><code class="sourceCode r" data-o006-id="O006-PSU-012-U0238"><span id="cb1-1"><a aria-hidden="true" data-o006-id="O006-PSU-012-U0239" href="#cb1-1" tabindex="-1"></a><span class="fu">qbeta</span>(<span class="fl">0.05</span>, <span class="at">shape1=</span><span class="dv">4</span>, <span class="at">shape2=</span><span class="dv">4</span>) </span></code></pre></div><button class="code-copy-button" data-o006-id="O006-PSU-012-U0240" title="Copy to Clipboard"><i class="bi"></i></button></div>
+</div>
+<div class="cell-output cell-output-stdout" data-o006-id="O006-PSU-012-U0241">
+<pre data-o006-id="O006-PSU-012-U0242"><code data-o006-id="O006-PSU-012-U0243">[1] 0.2253216</code></pre>
+</div>
+<div class="codeblock-with-label r" data-o006-id="O006-PSU-012-U0244">
+<style>.codeblock-with-label pre.lang-label-2::before { content: "R"; }</style>
+<div class="code-copy-outer-scaffold" data-o006-id="O006-PSU-012-U0245"><div class="sourceCode cell-code" data-o006-id="O006-PSU-012-U0246" id="cb3"><pre class="sourceCode r lang-label-2 code-with-copy" data-o006-id="O006-PSU-012-U0247"><code class="sourceCode r" data-o006-id="O006-PSU-012-U0248"><span id="cb3-1"><a aria-hidden="true" data-o006-id="O006-PSU-012-U0249" href="#cb3-1" tabindex="-1"></a><span class="fu">qbeta</span>(<span class="fl">0.95</span>, <span class="at">shape1=</span><span class="dv">4</span>, <span class="at">shape2=</span><span class="dv">4</span>)</span></code></pre></div><button class="code-copy-button" data-o006-id="O006-PSU-012-U0250" title="Copy to Clipboard"><i class="bi"></i></button></div>
+</div>
+<div class="cell-output cell-output-stdout" data-o006-id="O006-PSU-012-U0251">
+<pre data-o006-id="O006-PSU-012-U0252"><code data-o006-id="O006-PSU-012-U0253">[1] 0.7746784</code><p class="target-only-correction r-runtime-note" data-o006-correction-id="O006-PSU-ADV-0217" role="note">Kontrak reproduksi: kedua perintah memakai fungsi stats::qbeta dalam Base R. Keluaran yang diharapkan adalah 0,2253216 dan 0,7746784 (nilai lebih lengkap 0,2253215840 dan 0,7746784160); tidak ada bilangan acak sehingga seed tidak diperlukan.</p></pre>
+</div>
+</div>
+<p data-o006-id="O006-PSU-012-U0254">Dengan demikian, selang kredibel 90% untuk <span class="math inline" data-o006-math-id="O006-PSU-012-M0258">\(p\)</span>, dengan syarat <span class="math inline" data-o006-math-id="O006-PSU-012-M0259">\(Y=3\)</span>, adalah <span class="math inline" data-o006-math-id="O006-PSU-012-M0260">\((0.2253, 0.7747)\)</span>.</p>
+</section>
+</div>
+<section class="level3" data-number="11.3.1" data-o006-id="O006-PSU-012-U0255" id="summary">
+<h3 class="anchored" data-anchor-id="summary" data-number="11.3.1" data-o006-id="O006-PSU-012-U0256"><span class="header-section-number">11.3.1</span> Ringkasan</h3>
+<p data-o006-id="O006-PSU-012-U0257">Dalam pelajaran ini, kita beralih dari cara pandang frekuentis ke cara berpikir Bayesian. Meskipun metode frekuentis memperlakukan parameter sebagai nilai yang tetap tetapi tidak diketahui, metode Bayesian memperlakukan parameter sebagai peubah acak yang memiliki distribusi peluang. Pergeseran ini memungkinkan kita memasukkan keyakinan prior dan memperbaruinya dengan data menggunakan Teorema Bayes.</p>
+<p data-o006-id="O006-PSU-012-U0258">Kita memulai dengan memahami <strong>peluang subjektif</strong>, yakni seorang statistisi Bayesian menggunakan informasi yang tersedia (seperti jumlah taruhan pada kuda) untuk menetapkan peluang bagi kejadian yang tidak pasti. Kemudian, kita menelaah cara statistisi Bayesian menduga parameter menggunakan suatu <strong>distribusi prior</strong> dan <strong>fungsi kemungkinan</strong> untuk memperoleh <strong>distribusi posterior</strong>.</p>
+<p data-o006-id="O006-PSU-012-U0259">Kita juga melihat bahwa pendugaan Bayesian sering menghasilkan distribusi posterior dengan bentuk yang sudah dikenal—seperti <strong>distribusi beta</strong> untuk data binomial dengan prior beta. Nilai dugaan titik Bayes bergantung pada <strong>fungsi kerugian</strong>. Jika yang diminimumkan adalah <strong>galat kuadrat</strong>, dugaan terbaiknya adalah <strong>rataan posterior.</strong></p>
+<p data-o006-id="O006-PSU-012-U0260">Pelajaran ini memperkenalkan pandangan Bayesian tentang pembelajaran dari data: menggabungkan keyakinan prior dengan bukti yang diamati untuk membuat pernyataan probabilistik tentang parameter yang tidak diketahui. Walaupun ini baru sekilas tentang dunia Bayesian, pelajaran ini menunjukkan betapa fleksibel dan intuitifnya pendekatan tersebut.</p>
+<p data-o006-id="O006-PSU-012-U0261"><strong>Pokok-Pokok Penting:</strong></p>
+<ul data-o006-id="O006-PSU-012-U0262">
+<li data-o006-id="O006-PSU-012-U0263">Secara matematis, jika <span class="math inline" data-o006-math-id="O006-PSU-012-M0261">\(\theta\)</span> adalah parameter dan <span class="math inline" data-o006-math-id="O006-PSU-012-M0262">\(y\)</span> adalah data, distribusi posteriornya adalah: <span class="math inline" data-o006-math-id="O006-PSU-012-M0263">\(k(\theta|y)=\frac{g(y|\theta)h(\theta)}{k_1(y)}\)</span></li>
+<li data-o006-id="O006-PSU-012-U0264"><strong>Selang kredibel</strong>, yang memakai peluang posterior—berbeda dari cakupan pengulangan-sampel pada selang kepercayaan, memenuhi: <span class="math inline" data-o006-math-id="O006-PSU-012-M0264">\(\int_{a(y)}^{b(y)} k(\theta|y)d\theta=1-\alpha\)</span></li>
+</ul>
+</section>
+</section>
+</main></div>
+<footer class="site-footer"><div class="site-footer__inner">Konten sumber: Departemen Statistika Penn State, CC BY-NC 4.0 kecuali dinyatakan lain. Terjemahan dan rekonstruksi: OpenAI Codex gpt-5.6-sol, Ultra. Tidak ada dukungan atau pengesahan yang tersirat.</div></footer>
+</body>
+</html>

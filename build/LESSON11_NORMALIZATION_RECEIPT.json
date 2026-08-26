@@ -1,0 +1,260 @@
+{
+  "asset_boundary": {
+    "asset": {
+      "bytes": 142195,
+      "path": "authority/assets/stat415/lesson11/assets/bayes.png",
+      "sha256": "2c9265d7c2dde44cd20968f73c051e18169d67e07fe7d66010fd78900e98dd22"
+    },
+    "binary_bytes_frozen": true,
+    "blocking_unresolved_assets": 0,
+    "freeze_receipt": {
+      "bytes": 1062,
+      "path": "authority/LESSON11_ASSET_FREEZE_RECEIPT.json",
+      "sha256": "2d128b3d4b4635aa45855b8d5ba82cbec408f139a1ac51bcddcbd7682221f3e2"
+    },
+    "manifest": {
+      "bytes": 434,
+      "path": "authority/LESSON11_ASSET_MANIFEST.csv",
+      "sha256": "a10a6bc2c5ba7738916eeb2ac1cb12d2ed52a77d505e9843190ffa39a726379b"
+    },
+    "references_inventoried": true,
+    "source_refs": [
+      "assets/bayes.png"
+    ]
+  },
+  "audits": {
+    "math": {
+      "bytes": 1228,
+      "path": "working/lesson11_math_audit.md",
+      "sha256": "5d97555b9526f82c028a231846b61221b5825692b5fbc7f0c14b95f2871202b5"
+    },
+    "source_findings": {
+      "bytes": 4908,
+      "path": "working/lesson11_source_findings.md",
+      "sha256": "72de17541e6e76d2e28ab64c47b21e0fffd7a46fae2eabb37d11c1e7aabc397f"
+    },
+    "terminology": {
+      "bytes": 942,
+      "path": "working/lesson11_terminology_qa.md",
+      "sha256": "1f760ac99bfd9f112438ce2cb6fd205150c0e2dae5eb638e52625a922ab6c52c"
+    }
+  },
+  "counts": {
+    "asset_occurrences": 1,
+    "assets": 1,
+    "catalogue_records": 884,
+    "code_nodes": 4,
+    "corollaries": 0,
+    "definitions": 0,
+    "examples": 7,
+    "figure_captions": 1,
+    "figures": 1,
+    "headings": 13,
+    "images": 1,
+    "inline_style_nodes": 2,
+    "links": 5,
+    "math_display": 55,
+    "math_inline": 209,
+    "math_nodes": 264,
+    "native_id_occurrences": 26,
+    "pre_nodes": 4,
+    "proofs": 0,
+    "sections": 12,
+    "solutions": 6,
+    "structural_units": 264,
+    "tables": 1,
+    "theorem_class_nodes": 7,
+    "theorems": 0,
+    "translation_segments": 354,
+    "unique_asset_sources": 1,
+    "unique_native_ids": 26
+  },
+  "dependency_census": {
+    "audio": 0,
+    "downloads": 0,
+    "embeds": 0,
+    "iframes": 0,
+    "images": 1,
+    "media_sources": 0,
+    "objects": 0,
+    "scripts": 0,
+    "videos": 0
+  },
+  "document": {
+    "asset_count": 1,
+    "code_node_count": 4,
+    "code_text_sha256": "4ad48e48d37e566da85447efcc47257cc667427ba8a9de1e624eeecb528b2d83",
+    "component_id": "Lesson11",
+    "dependency_count": 1,
+    "document_id": "O006-PSU-012",
+    "duplicate_native_ids": [],
+    "entity_id": "O006-PSU-012",
+    "formula_count": 264,
+    "formula_sha256": "cadc74feeb0269a091b90cdd8f6e1cfc13065dfd4dbec72dab008a03e681a0a7",
+    "inline_style_count": 2,
+    "inline_style_text_sha256": "ae5c8e57160dcb78f6e4958172fee8ba69698cf5603338693684dbf5f71d8551",
+    "locale": "en-US",
+    "native_id_occurrences": 26,
+    "normalized_bytes": 64019,
+    "normalized_path": "source/normalized/en-US/Lesson11.html",
+    "normalized_sha256": "5f009b3812125b8d969a2661d99ebebfd2874b660352fe7b23338ccb6b8a9663",
+    "ordinal": 12,
+    "pre_node_count": 4,
+    "record_type": "document",
+    "schema": "o006.stat415.source-catalogue.v1",
+    "segment_count": 354,
+    "semantic_text_sha256": "f6a5f814d6ab012db44cb82e092da4b64c19ba285fbf45ade699bdc1f9671a2a",
+    "source_bytes": 99359,
+    "source_path": "authority/upstream/stat415/Lesson11.html",
+    "source_sha256": "4a007ab235242a27f000a8e8865fab06d2b8507a2e2e7400faf6112ce83a7c32",
+    "source_url": "https://online.stat.psu.edu/stat415/Lesson11.html",
+    "topology_sha256": "9dc34953c3bbddbe8d4001d3fa76547ab0f8d85f226bbbf6fca1edd63a87efcd",
+    "unique_native_ids": 26,
+    "unit_count": 264
+  },
+  "helper_script": {
+    "bytes": 35668,
+    "path": "scripts/normalize_lesson03.py",
+    "sha256": "0eeb260de05ebae694700cc2212966ee4ba19351f067bef49c095ec6fccd70e6"
+  },
+  "outputs": {
+    "backend/lesson11_source_catalogue.jsonl": {
+      "bytes": 417966,
+      "path": "backend/lesson11_source_catalogue.jsonl",
+      "sha256": "dd0baf2ed2e8ad4ea1bfd922cb073e830893efce420c71dd844a613f49c8bc48"
+    },
+    "source/normalized/en-US/Lesson11.html": {
+      "bytes": 64019,
+      "path": "source/normalized/en-US/Lesson11.html",
+      "sha256": "5f009b3812125b8d969a2661d99ebebfd2874b660352fe7b23338ccb6b8a9663"
+    },
+    "working/lesson11_asset_inventory.csv": {
+      "bytes": 640,
+      "path": "working/lesson11_asset_inventory.csv",
+      "sha256": "e47569a3484f5763437bb2955092a9611bddbb6df3fa5c0a58616528107df21c"
+    },
+    "working/lesson11_segments.csv": {
+      "bytes": 65078,
+      "path": "working/lesson11_segments.csv",
+      "rows": 354,
+      "sha256": "cc44665c54d689a584c28631b69c3f7209163d035a9be582a6b93839847dde1f"
+    }
+  },
+  "parser": {
+    "beautifulsoup_version": "4.14.3",
+    "name": "beautifulsoup4/html.parser",
+    "source_decoding": "UTF-8 strict"
+  },
+  "preservation": {
+    "authority_mutated": false,
+    "code_nodes_text_preserved": true,
+    "code_text_sha256": "4ad48e48d37e566da85447efcc47257cc667427ba8a9de1e624eeecb528b2d83",
+    "formula_nodes_byte_preserved": true,
+    "formula_sha256": "cadc74feeb0269a091b90cdd8f6e1cfc13065dfd4dbec72dab008a03e681a0a7",
+    "image_sequence_preserved": true,
+    "inline_code_label_styles_preserved": true,
+    "inline_style_text_sha256": "ae5c8e57160dcb78f6e4958172fee8ba69698cf5603338693684dbf5f71d8551",
+    "link_sequence_preserved": true,
+    "main_selector": "main#quarto-document-content",
+    "native_anchor_sequence_preserved": true,
+    "semantic_main_text_preserved": true,
+    "semantic_text_sha256": "f6a5f814d6ab012db44cb82e092da4b64c19ba285fbf45ade699bdc1f9671a2a",
+    "topology_sha256": "9dc34953c3bbddbe8d4001d3fa76547ab0f8d85f226bbbf6fca1edd63a87efcd"
+  },
+  "role_counts": {
+    "code": 8,
+    "example": 7,
+    "figure": 1,
+    "figure-caption": 1,
+    "heading": 8,
+    "image": 1,
+    "link": 5,
+    "section": 6,
+    "solution": 12,
+    "structure": 215
+  },
+  "schema": "o006.stat415.lesson11-normalization.v1",
+  "script": {
+    "bytes": 24008,
+    "path": "scripts/normalize_lesson11.py",
+    "sha256": "fb90384a2ec00e08c4229ed88186b4c2f2cf7e4ad092153225120818680bef40"
+  },
+  "source_defect_count": 20,
+  "source_defect_ids": [
+    "L11-D001",
+    "L11-D002",
+    "L11-D003",
+    "L11-D004",
+    "L11-D005",
+    "L11-D006",
+    "L11-D007",
+    "L11-D008",
+    "L11-D009",
+    "L11-D010",
+    "L11-D011",
+    "L11-D012",
+    "L11-D013",
+    "L11-D014",
+    "L11-D015",
+    "L11-D016",
+    "L11-D017",
+    "L11-D018",
+    "L11-D019",
+    "L11-D020"
+  ],
+  "source_rule": "semantic main only; authority immutable; formulas, code, styles, tables, anchors, links, and asset references protected; stable IDs additive",
+  "stable_id_ranges": {
+    "assets": [
+      "O006-PSU-012-A0001",
+      "O006-PSU-012-A0001"
+    ],
+    "math": [
+      "O006-PSU-012-M0001",
+      "O006-PSU-012-M0264"
+    ],
+    "segments": [
+      "O006-PSU-012-S0001",
+      "O006-PSU-012-S0354"
+    ],
+    "units": [
+      "O006-PSU-012-U0001",
+      "O006-PSU-012-U0264"
+    ]
+  },
+  "status": "normalized-source-and-asset-ready; translation-batches-initialized",
+  "translation_batches": [
+    {
+      "batch": "A",
+      "boundary": "opening, overview, objectives, and complete 11.1",
+      "range": [
+        "O006-PSU-012-S0001",
+        "O006-PSU-012-S0048"
+      ],
+      "rows": 48,
+      "status": "initialized; target status validated separately",
+      "template_sha256": "f5406f7008c34e8f7db1e24539fc145bef307124887fab4984dbad091c691bff"
+    },
+    {
+      "batch": "B",
+      "boundary": "complete 11.2 Bayesian Estimation",
+      "range": [
+        "O006-PSU-012-S0049",
+        "O006-PSU-012-S0286"
+      ],
+      "rows": 238,
+      "status": "initialized; target status validated separately",
+      "template_sha256": "6e00806d496d00a43f44c70bae9d2f3f55d2546ce927fc07eab6e1f8aaf8385e"
+    },
+    {
+      "batch": "C",
+      "boundary": "complete 11.3 Credible Intervals and summary",
+      "range": [
+        "O006-PSU-012-S0287",
+        "O006-PSU-012-S0354"
+      ],
+      "rows": 68,
+      "status": "initialized; target status validated separately",
+      "template_sha256": "2fa453909aac517a61d317809920faa9043dac787a94d58f8c2b9df3a7370d37"
+    }
+  ]
+}

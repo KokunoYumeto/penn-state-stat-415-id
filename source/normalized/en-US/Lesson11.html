@@ -1,0 +1,405 @@
+<!doctype html>
+<html lang="en-US">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>11  Bayesian Methods – STAT 415 | Introduction to Mathematical Statistics</title>
+<meta name="source-url" content="https://online.stat.psu.edu/stat415/Lesson11.html">
+<meta name="translation-provenance" content="OpenAI Codex gpt-5.6-sol, Ultra">
+</head>
+<body>
+<main class="content" data-component-id="Lesson11" data-document-id="O006-PSU-012" data-source-url="https://online.stat.psu.edu/stat415/Lesson11.html" id="quarto-document-content">
+<header class="quarto-title-block default" data-o006-id="O006-PSU-012-U0001" id="title-block-header"><nav aria-label="breadcrumb" class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" data-o006-id="O006-PSU-012-U0002"><ol class="breadcrumb" data-o006-id="O006-PSU-012-U0003"><li class="breadcrumb-item" data-o006-id="O006-PSU-012-U0004"><a data-o006-id="O006-PSU-012-U0005" href="./Lesson00.html">Lessons</a></li><li class="breadcrumb-item" data-o006-id="O006-PSU-012-U0006"><a data-o006-id="O006-PSU-012-U0007" href="./Lesson11.html"><span class="chapter-number">11</span>  <span class="chapter-title">Bayesian Methods</span></a></li></ol></nav>
+<div class="quarto-title" data-o006-id="O006-PSU-012-U0008">
+<h1 class="title" data-o006-id="O006-PSU-012-U0009"><span class="chapter-number">11</span>  <span class="chapter-title">Bayesian Methods</span></h1>
+<div class="quarto-categories" data-o006-id="O006-PSU-012-U0010">
+<div class="quarto-category" data-o006-id="O006-PSU-012-U0011">Bayesian</div>
+<div class="quarto-category" data-o006-id="O006-PSU-012-U0012">Subjective Probability</div>
+<div class="quarto-category" data-o006-id="O006-PSU-012-U0013">Credible Intervals</div>
+</div>
+</div>
+<div class="quarto-title-meta" data-o006-id="O006-PSU-012-U0014">
+</div>
+</header>
+<section class="level2 unnumbered unlisted" data-o006-id="O006-PSU-012-U0015" id="overview">
+<h2 class="unnumbered unlisted anchored" data-anchor-id="overview" data-o006-id="O006-PSU-012-U0016">Overview</h2>
+<div alt="Portrait of Thomas Bayes" class="lightbox float-lg-end w-50 ps-3 quarto-float quarto-figure quarto-figure-center anchored" data-o006-id="O006-PSU-012-U0017" id="fig-bayes">
+<figure class="quarto-float quarto-float-fig figure" data-o006-id="O006-PSU-012-U0018">
+<div aria-describedby="fig-bayes-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca" data-o006-id="O006-PSU-012-U0019">
+<a class="lightbox" data-gallery="quarto-lightbox-gallery-1" data-o006-id="O006-PSU-012-U0020" href="assets/bayes.png" title="Fig 11.1: Thomas Bayes"><img alt="Portrait of Thomas Bayes" class="float-lg-end w-50 ps-3 img-fluid figure-img" data-o006-asset-id="O006-PSU-012-A0001" data-o006-id="O006-PSU-012-U0021" src="assets/bayes.png" style="width:70.0%"/></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" data-o006-id="O006-PSU-012-U0022" id="fig-bayes-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Fig 11.1: Thomas Bayes
+</figcaption>
+</figure>
+</div>
+<p data-o006-id="O006-PSU-012-U0023">All of the methods we have developed and used thus far in this course have been developed using what statisticians would call a “frequentist” approach. In this section, we revisit some of those methods using what statisticians would call a “Bayesian” approach. Specifically, we will:</p>
+<ul data-o006-id="O006-PSU-012-U0024">
+<li data-o006-id="O006-PSU-012-U0025">learn how a Bayesian would assign probabilities to certain events</li>
+<li data-o006-id="O006-PSU-012-U0026">learn how a Bayesian would tackle the estimation of a parameter</li>
+<li data-o006-id="O006-PSU-012-U0027">learn how a Bayesian would update the prior information they have about the value of a parameter</li>
+</ul>
+<p data-o006-id="O006-PSU-012-U0028">In case you are wondering, the picture to the right is that of the Reverend Thomas Bayes, after which the field of Bayesian statistics is aptly named.</p>
+<p data-o006-id="O006-PSU-012-U0029">We’d need at least an entire semester, and perhaps more, to truly do any justice to the study of Bayesian statistics. The best we can do in this course is to dabble a bit and in doing so take just a tiny peek at the world through the eyes of a Bayesian. First, we’ll take a look at an example that illustrates how a Bayesian might assign a (subjective) probability to an event given the information he or she has available. Then, we’ll investigate how a Bayesian might estimate a parameter. Finally, we’ll explore how a Bayesian might update the prior information he or she has about the value of a parameter.</p>
+<section class="level3 unnumbered unlisted objectiveblock" data-o006-id="O006-PSU-012-U0030" id="objectives">
+<h3 class="unnumbered unlisted anchored" data-anchor-id="objectives" data-o006-id="O006-PSU-012-U0031"><i class="bi bi-check2-circle"></i>Objectives</h3>
+<p data-o006-id="O006-PSU-012-U0032">Upon completion of this lesson, you should be able to:</p>
+<ol data-o006-id="O006-PSU-012-U0033" type="1">
+<li data-o006-id="O006-PSU-012-U0034">Analytically find Bayesian posterior distributions for single parameter models with a given prior distribution, both in situations where data values are given and in situations where the data are seen as unobservable random variables, and</li>
+<li data-o006-id="O006-PSU-012-U0035">Calculate a credible interval for unknown parameter, .</li>
+</ol>
+</section>
+</section>
+<section class="level2" data-number="11.1" data-o006-id="O006-PSU-012-U0036" id="subjective-probability">
+<h2 class="anchored" data-anchor-id="subjective-probability" data-number="11.1" data-o006-id="O006-PSU-012-U0037"><span class="header-section-number">11.1</span> Subjective Probability</h2>
+<p data-o006-id="O006-PSU-012-U0038">Let’s go through an example that illustrates how a Bayesian might use available data to assign probabilities to particular events.</p>
+<div class="theorem example" data-o006-id="O006-PSU-012-U0039" id="exm-bayes1">
+<p data-o006-id="O006-PSU-012-U0040"><span class="theorem-title"><strong>Example 11.1</strong></span> The following amounts, in dollars, are bet on horses A, B, C, and D to win a local race:</p>
+<table class="w-auto table-sm mx-auto small caption-top table" data-o006-id="O006-PSU-012-U0041">
+<thead data-o006-id="O006-PSU-012-U0042">
+<tr class="header" data-o006-id="O006-PSU-012-U0043">
+<th data-o006-id="O006-PSU-012-U0044">Horse</th>
+<th data-o006-id="O006-PSU-012-U0045">Amount</th>
+</tr>
+</thead>
+<tbody data-o006-id="O006-PSU-012-U0046">
+<tr class="odd" data-o006-id="O006-PSU-012-U0047">
+<td data-o006-id="O006-PSU-012-U0048">A</td>
+<td data-o006-id="O006-PSU-012-U0049">10,000</td>
+</tr>
+<tr class="even" data-o006-id="O006-PSU-012-U0050">
+<td data-o006-id="O006-PSU-012-U0051">B</td>
+<td data-o006-id="O006-PSU-012-U0052">30,000</td>
+</tr>
+<tr class="odd" data-o006-id="O006-PSU-012-U0053">
+<td data-o006-id="O006-PSU-012-U0054">C</td>
+<td data-o006-id="O006-PSU-012-U0055">22,000</td>
+</tr>
+<tr class="even" data-o006-id="O006-PSU-012-U0056">
+<td data-o006-id="O006-PSU-012-U0057">D</td>
+<td data-o006-id="O006-PSU-012-U0058">38,000</td>
+</tr>
+<tr class="odd" data-o006-id="O006-PSU-012-U0059">
+<td data-o006-id="O006-PSU-012-U0060"><strong>Total</strong></td>
+<td data-o006-id="O006-PSU-012-U0061">100,000</td>
+</tr>
+</tbody>
+</table>
+<p data-o006-id="O006-PSU-012-U0062">Determine the payout for winning with a $2 bet on each of the four horses, if the track wants to take 17%, or $17,000, from the amount collected.</p>
+<section class="level4 card card-body bg-light ms-3 mb-3 pt-0" data-o006-id="O006-PSU-012-U0063" id="solution">
+<h4 class="anchored" data-anchor-id="solution" data-o006-id="O006-PSU-012-U0064">Solution</h4>
+<p data-o006-id="O006-PSU-012-U0065">The first thing we need to do is to determine the likelihood, that is, probability, that each of the horses wins. We could assign the probabilities based on our own “gut feeling.” Geez…. I think horse A is gonna win today. In general, that’s probably not a good idea. We’d probably be much better served if we used the information we have available, namely the “gut feeling” of all of the bettors! That is, if $38,000 worth of bets came in for Horse D and only $10,000 came in for Horse A, that tells us that more people think that Horse D is going to win than Horse A. It would behoove us, therefore, to use the amounts bet to assign the probabilities. That said, the probability that Horse A will win is then:</p>
+<p data-o006-id="O006-PSU-012-U0066"><span class="math display" data-o006-math-id="O006-PSU-012-M0001">\[\begin{align*}
+  P(A)=\frac{10000}{100000}=0.10
+\end{align*}\]</span></p>
+<p data-o006-id="O006-PSU-012-U0067">And, the probability that Horse B will win is:</p>
+<p data-o006-id="O006-PSU-012-U0068"><span class="math display" data-o006-math-id="O006-PSU-012-M0002">\[\begin{align*}
+  P(B)=\frac{30000}{100000}=0.30
+\end{align*}\]</span></p>
+<p data-o006-id="O006-PSU-012-U0069">And, the probability that Horse C will win is:</p>
+<p data-o006-id="O006-PSU-012-U0070"><span class="math display" data-o006-math-id="O006-PSU-012-M0003">\[\begin{align*}
+  P(C)=\frac{22000}{100000}=0.22
+\end{align*}\]</span></p>
+<p data-o006-id="O006-PSU-012-U0071">And, the probability that Horse D will win is:</p>
+<p data-o006-id="O006-PSU-012-U0072"><span class="math display" data-o006-math-id="O006-PSU-012-M0004">\[\begin{align*}
+  P(D)=\frac{38000}{100000}=0.38
+\end{align*}\]</span></p>
+<p data-o006-id="O006-PSU-012-U0073">Now having assigned a probability to the event that Horse A wins, we can determine the odds against horse A winning. It is:</p>
+<p data-o006-id="O006-PSU-012-U0074"><span class="math display" data-o006-math-id="O006-PSU-012-M0005">\[\begin{align*}
+  \text{Odds against }A=\frac{1-0.1}{0.1}=9 \text{ to }1
+\end{align*}\]</span></p>
+<p data-o006-id="O006-PSU-012-U0075">The odds against A tells us that the track will payout $9 on a $1 bet. Now, the odds against Horse B winning is:</p>
+<p data-o006-id="O006-PSU-012-U0076"><span class="math display" data-o006-math-id="O006-PSU-012-M0006">\[\begin{align*}
+  \text{Odds against }B=\frac{1-0.3}{0.3}=\frac{7}{3} \text{ to }1
+\end{align*}\]</span></p>
+<p data-o006-id="O006-PSU-012-U0077">The odds against B tells us that the track will payout <span class="math inline" data-o006-math-id="O006-PSU-012-M0007">\(\frac{\$7}{3}=\$2.33\)</span> on a $1 bet. Now, the odds against Horse C winning is:</p>
+<p data-o006-id="O006-PSU-012-U0078"><span class="math display" data-o006-math-id="O006-PSU-012-M0008">\[\begin{align*}
+  \text{Odds against }C=\frac{1-0.22}{0.22}=\frac{39}{11} \text{ to }1
+\end{align*}\]</span></p>
+<p data-o006-id="O006-PSU-012-U0079">The odds against C tell us that the track will payout <span class="math inline" data-o006-math-id="O006-PSU-012-M0009">\(\frac{\$39}{11}=\$3.55\)</span> on a $1 bet. Finally, the odds against Horse D winning is:</p>
+<p data-o006-id="O006-PSU-012-U0080"><span class="math display" data-o006-math-id="O006-PSU-012-M0010">\[\begin{align*}
+  \text{Odds against }D=\frac{1-0.38}{0.38}=\frac{31}{19} \text{ to }1
+\end{align*}\]</span></p>
+<p data-o006-id="O006-PSU-012-U0081">The odds against D tell us that they track will payout <span class="math inline" data-o006-math-id="O006-PSU-012-M0011">\(\frac{\$31}{19}=\$1.63\)</span> on a $1 bet. Now, using the odds against Horse A winning, we can determine that the amount the track pays out on a $2 bet on Horse A is:</p>
+<p data-o006-id="O006-PSU-012-U0082"><span class="math display" data-o006-math-id="O006-PSU-012-M0012">\[\begin{align*}
+  \text{Payout for }A=\$2+\$9(\$2)=\$20
+\end{align*}\]</span></p>
+<p data-o006-id="O006-PSU-012-U0083">That is, the bettor gets $9 for each $1 bet, that is, $18, plus the $2 he or she originally bet. Now, using the odds against Horse B winning, we can determine that the amount the track pays out on a $2 bet on Horse B is:</p>
+<p data-o006-id="O006-PSU-012-U0084"><span class="math display" data-o006-math-id="O006-PSU-012-M0013">\[\begin{align*}
+  \text{Payout for }B=\$2+\frac{\$7}{3}(\$2)=\$6.67
+\end{align*}\]</span></p>
+<p data-o006-id="O006-PSU-012-U0085">And, using the odds against Horse C winning, we can determine that the amount the track pays out on a $2 bet on Horse C is:</p>
+<p data-o006-id="O006-PSU-012-U0086"><span class="math display" data-o006-math-id="O006-PSU-012-M0014">\[\begin{align*}
+  \text{Payout for }C=\$2+\frac{\$39}{11}(\$2)=\$9.09
+\end{align*}\]</span></p>
+<p data-o006-id="O006-PSU-012-U0087">And, using the odds against Horse D winning, we can determine that the amount the track pays out on a $2 bet on Horse D is:</p>
+<p data-o006-id="O006-PSU-012-U0088"><span class="math display" data-o006-math-id="O006-PSU-012-M0015">\[\begin{align*}
+  \text{Payout for }D=\$2+\frac{\$31}{19}(\$2)=\$5.26
+\end{align*}\]</span></p>
+<p data-o006-id="O006-PSU-012-U0089">We’re almost there. We just need to skim the 17% off for the race track to make sure that it makes some money off of the bettors. Multiplying each of the calculated payouts by 0.83, we get:</p>
+<p data-o006-id="O006-PSU-012-U0090"><span class="math display" data-o006-math-id="O006-PSU-012-M0016">\[\begin{align*}
+  &amp; \text{Absolute Payout for }A=\$20.00(0.83)=\$16.60\\
+  &amp; \text{Absolute Payout for }B=\$6.67(0.83)=\$5.54\\
+  &amp; \text{Absolute Payout for }C=\$9.09(0.83)=\$7.54\\
+  &amp; \text{Absolute Payout for }D=\$5.26(0.83)=\$4.37\\
+\end{align*}\]</span></p>
+</section>
+<p data-o006-id="O006-PSU-012-U0091">We can always check our work, too. Suppose, for example, that Horse A wins. Then the track would payout $16.60 to the 5000 bettors who bet $2 on Horse A, costing the track $16.60(5000) = $83,000. Given that that track brought in $100,000 in bets, the track would indeed make its desired $17,000. A similar check of our work can be made for Horses B, C, and D, although there may be some round-off errors because we did do some rounding in our payout calculations. Should still be very close to $83,000 in each case though!</p>
+</div>
+</section>
+<section class="level2" data-number="11.2" data-o006-id="O006-PSU-012-U0092" id="bayesian-estimation">
+<h2 class="anchored" data-anchor-id="bayesian-estimation" data-number="11.2" data-o006-id="O006-PSU-012-U0093"><span class="header-section-number">11.2</span> Bayesian Estimation</h2>
+<p data-o006-id="O006-PSU-012-U0094">There’s one key difference between frequentist statisticians and Bayesian statisticians that we first need to acknowledge before we can even begin to talk about how a Bayesian might estimate a population parameter <span class="math inline" data-o006-math-id="O006-PSU-012-M0017">\(\theta\)</span>. The difference has to do with whether a statistician thinks of a parameter as some unknown constant or as a random variable. Let’s take a look at a simple example in an attempt to emphasize the difference.</p>
+<div class="theorem example" data-o006-id="O006-PSU-012-U0095" id="exm-bayes2">
+<p data-o006-id="O006-PSU-012-U0096"><span class="theorem-title"><strong>Example 11.2</strong></span> A traffic control engineer believes that the cars passing through a particular intersection arrive at a mean rate <span class="math inline" data-o006-math-id="O006-PSU-012-M0018">\(\lambda\)</span> equal to either 3 or 5 for a given time interval. Prior to collecting any data, the engineer believes that it is much more likely that the rate <span class="math inline" data-o006-math-id="O006-PSU-012-M0019">\(\lambda=3\)</span> than <span class="math inline" data-o006-math-id="O006-PSU-012-M0020">\(\lambda=5\)</span>. In fact, the engineer believes that the prior probabilities are:</p>
+<p data-o006-id="O006-PSU-012-U0097"><span class="math display" data-o006-math-id="O006-PSU-012-M0021">\[\begin{align*}
+  P(\lambda=3)=0.7\;\text{and }P(\lambda=5)=0.3
+\end{align*}\]</span></p>
+<p data-o006-id="O006-PSU-012-U0098">One day, during a a randomly selected time interval, the engineer observes <span class="math inline" data-o006-math-id="O006-PSU-012-M0022">\(x=7\)</span> cars pass through the intersection. In light of the engineer’s observation, what is the probability that <span class="math inline" data-o006-math-id="O006-PSU-012-M0023">\(\lambda=3\)</span> And what is the probability that <span class="math inline" data-o006-math-id="O006-PSU-012-M0024">\(\lambda=5\)</span>?</p>
+<section class="level4 card card-body bg-light ms-3 mb-3 pt-0" data-o006-id="O006-PSU-012-U0099" id="solution-1">
+<h4 class="anchored" data-anchor-id="solution-1" data-o006-id="O006-PSU-012-U0100">Solution</h4>
+<p data-o006-id="O006-PSU-012-U0101">The first thing you should notice in this example is that we are talking about finding the probability that a parameter <span class="math inline" data-o006-math-id="O006-PSU-012-M0025">\(\lambda\)</span> takes on a particular value. In one fell swoop, we’ve just turned everything that we’ve learned in Stat 414 and Stat 415 on its head! The next thing you should notice, after recovering from the dizziness of your headstand, is that we already have the tools necessary to calculate the desired probabilities. Just stick your hand in your probability tool box, and pull out Bayes’ Theorem.</p>
+<p data-o006-id="O006-PSU-012-U0102">Now, simply by using the definition of conditional probability, we know that the probability that <span class="math inline" data-o006-math-id="O006-PSU-012-M0026">\(\lambda=3\)</span> given that <span class="math inline" data-o006-math-id="O006-PSU-012-M0027">\(X=7\)</span> is:</p>
+<p data-o006-id="O006-PSU-012-U0103"><span class="math display" data-o006-math-id="O006-PSU-012-M0028">\[\begin{align*}
+  P(\lambda=3|X=7)=\frac{P(\lambda=3, X=7)}{P(X=7)}
+\end{align*}\]</span></p>
+<p data-o006-id="O006-PSU-012-U0104">which can be written using Bayes’ Theorem as:</p>
+<div data-o006-id="O006-PSU-012-U0105" style="overflow-x:auto;overflow-y:hidden;">
+<p data-o006-id="O006-PSU-012-U0106"><span class="math display" data-o006-math-id="O006-PSU-012-M0029">\[\begin{align*}
+  P(\lambda=3|X=7)=\frac{P(X=7|\lambda=3)P(\lambda=3)}{P(X=7|\lambda =3)P(\lambda=3)+P(X=7|\lambda=5)P(\lambda=5)}
+\end{align*}\]</span></p>
+</div>
+<p data-o006-id="O006-PSU-012-U0107">We can use the Poisson cumulative probability table in the back of our text book to find</p>
+<p data-o006-id="O006-PSU-012-U0108"><span class="math display" data-o006-math-id="O006-PSU-012-M0030">\[\begin{align*}
+&amp;P(X=7|\lambda=3)\\
+&amp; P(X=7|\lambda=5)
+\end{align*}\]</span> They are:</p>
+<p data-o006-id="O006-PSU-012-U0109"><span class="math display" data-o006-math-id="O006-PSU-012-M0031">\[\begin{align*}
+&amp;P(X=7|\lambda=3)=0.988-0.966=0.022\\
+&amp; P(X=7|\lambda=5)=0.867-0.762=0.105
+\end{align*}\]</span></p>
+<p data-o006-id="O006-PSU-012-U0110">Now, we have everything we need to finalize our calculation of the desired probability:</p>
+<div data-o006-id="O006-PSU-012-U0111" style="overflow-x:auto;overflow-y:hidden;">
+<p data-o006-id="O006-PSU-012-U0112"><span class="math display" data-o006-math-id="O006-PSU-012-M0032">\[\begin{align*}
+  P(\lambda=3|X=7)=\frac{0.7(0.022)}{0.7(0.022)+0.3(0.105)}=\frac{0.0154}{0.0154+0.0315}=0.328
+\end{align*}\]</span></p>
+</div>
+</section>
+</div>
+<p data-o006-id="O006-PSU-012-U0113">Hmmm. Let’s summarize. The initial probability, in this case, <span class="math inline" data-o006-math-id="O006-PSU-012-M0033">\(P(\lambda=3)=0.7\)</span> is called the <strong>prior probability</strong>. That’s because it is the probability that the parameter takes on a particular value prior to taking into account any new information. The newly calculated probability, that is:</p>
+<p data-o006-id="O006-PSU-012-U0114"><span class="math display" data-o006-math-id="O006-PSU-012-M0034">\[\begin{align*}
+  P(\lambda=3|X=7)
+\end{align*}\]</span></p>
+<p data-o006-id="O006-PSU-012-U0115">is called the <strong>posterior probability</strong>. That’s because it is the probability that the parameter takes on a particular value posterior to, that is, after, taking into account the new information. In this case, we have seen that the probability that <span class="math inline" data-o006-math-id="O006-PSU-012-M0035">\(\lambda=3\)</span> has decreased from 0.7 (the prior probability) to 0.328 (the posterior probability) with the information obtained from the observation <span class="math inline" data-o006-math-id="O006-PSU-012-M0036">\(x=7\)</span>.</p>
+<p data-o006-id="O006-PSU-012-U0116">A similar calculation can be made in finding <span class="math inline" data-o006-math-id="O006-PSU-012-M0037">\(P(\lambda=5|X=7)\)</span>. In doing so, we see:</p>
+<div data-o006-id="O006-PSU-012-U0117" style="overflow-x:auto;overflow-y:hidden;">
+<p data-o006-id="O006-PSU-012-U0118"><span class="math display" data-o006-math-id="O006-PSU-012-M0038">\[\begin{align*}
+P(\lambda=5|X=7)=\frac{0.3(0.105)}{0.7(0.022)+0.3(0.105)}=\frac{0.0315}{0.0154+0.0315}=0.672
+\end{align*}\]</span></p>
+</div>
+<p data-o006-id="O006-PSU-012-U0119">In this case, we see that the probability that <span class="math inline" data-o006-math-id="O006-PSU-012-M0039">\(\lambda=5\)</span> has increased from 0.3 (the prior probability) to 0.672 (the posterior probability) with the information obtained from the observation <span class="math inline" data-o006-math-id="O006-PSU-012-M0040">\(x=7\)</span>.</p>
+<p data-o006-id="O006-PSU-012-U0120">That last example is good for illustrating the distinction between prior probabilities and posterior probabilities, but it falls a bit short as a practical example in the real world. That’s because the parameter in the example is assumed to take on only two possible values, namely <span class="math inline" data-o006-math-id="O006-PSU-012-M0041">\(\lambda=3\)</span> or <span class="math inline" data-o006-math-id="O006-PSU-012-M0042">\(\lambda=5\)</span>. In the case where the parameter space for a parameter <span class="math inline" data-o006-math-id="O006-PSU-012-M0043">\(\theta\)</span> takes on an infinite number of possible values, a Bayesian must specify a <strong>prior probability density function</strong> <span class="math inline" data-o006-math-id="O006-PSU-012-M0044">\(h(\theta)\)</span>, say. Entire courses have been devoted to the topic of choosing a good prior p.d.f., so naturally, we won’t go there! We’ll instead assume we are given a good prior p.d.f. <span class="math inline" data-o006-math-id="O006-PSU-012-M0045">\(h(\theta)\)</span> and focus our attention instead on how to find a <strong>posterior probability density function</strong> <span class="math inline" data-o006-math-id="O006-PSU-012-M0046">\(k(\theta|y)\)</span>, say, if we know the probability density function <span class="math inline" data-o006-math-id="O006-PSU-012-M0047">\(g(y|\theta)\)</span> of the statistic <span class="math inline" data-o006-math-id="O006-PSU-012-M0048">\(Y\)</span>.</p>
+<p data-o006-id="O006-PSU-012-U0121">Well, if we knew <span class="math inline" data-o006-math-id="O006-PSU-012-M0049">\(h(\theta)\)</span> and <span class="math inline" data-o006-math-id="O006-PSU-012-M0050">\(g(y|\theta)\)</span>, we can treat: <span class="math display" data-o006-math-id="O006-PSU-012-M0051">\[k(y, \theta)=g(y|\theta)h(\theta)\]</span> as the joint p.d.f. of the statistic <span class="math inline" data-o006-math-id="O006-PSU-012-M0052">\(Y\)</span> and parameter <span class="math inline" data-o006-math-id="O006-PSU-012-M0053">\(\theta\)</span>. Then, we can find the marginal distribution of <span class="math inline" data-o006-math-id="O006-PSU-012-M0054">\(Y\)</span> from the joint distribution <span class="math inline" data-o006-math-id="O006-PSU-012-M0055">\(k(y, \theta)\)</span> by integrating over the parameter space of <span class="math inline" data-o006-math-id="O006-PSU-012-M0056">\(\theta\)</span>:</p>
+<p data-o006-id="O006-PSU-012-U0122"><span class="math display" data-o006-math-id="O006-PSU-012-M0057">\[k_1(y)=\int_{-\infty}^\infty k(y, \theta)d\theta=\int_{-\infty}^\infty g(y|\theta)h(\theta)d\theta\]</span></p>
+<p data-o006-id="O006-PSU-012-U0123">And then, we can find the posterior p.d.f. of <span class="math inline" data-o006-math-id="O006-PSU-012-M0058">\(\theta\)</span>, given that <span class="math inline" data-o006-math-id="O006-PSU-012-M0059">\(Y=y\)</span>, by using Bayes’ theorem. That is:</p>
+<p data-o006-id="O006-PSU-012-U0124"><span class="math display" data-o006-math-id="O006-PSU-012-M0060">\[k(\theta|y)=\frac{k(y, \theta)}{k_1(y)}=\frac{g(y|\theta)h(\theta)}{k_1(y)}\]</span></p>
+<p data-o006-id="O006-PSU-012-U0125">Let’s make this discussion more concrete by taking a look at an example.</p>
+<div class="theorem example" data-o006-id="O006-PSU-012-U0126" id="exm-bayes3">
+<p data-o006-id="O006-PSU-012-U0127"><span class="theorem-title"><strong>Example 11.3</strong></span> Suppose that <span class="math inline" data-o006-math-id="O006-PSU-012-M0061">\(Y\)</span> follows a binomial distribution with parameters <span class="math inline" data-o006-math-id="O006-PSU-012-M0062">\(n\)</span> and <span class="math inline" data-o006-math-id="O006-PSU-012-M0063">\(p=\theta\)</span>, so that the p.m.f. of <span class="math inline" data-o006-math-id="O006-PSU-012-M0064">\(Y\)</span> given <span class="math inline" data-o006-math-id="O006-PSU-012-M0065">\(\theta\)</span> is:</p>
+<p data-o006-id="O006-PSU-012-U0128"><span class="math inline" data-o006-math-id="O006-PSU-012-M0066">\(g(y|\theta)={n\choose y}\theta^y(1-\theta)^{n-y}\)</span> for <span class="math inline" data-o006-math-id="O006-PSU-012-M0067">\(y=0, 1, \ldots, n\)</span>. Suppose that the prior p.d.f. of the parameter <span class="math inline" data-o006-math-id="O006-PSU-012-M0068">\(\theta\)</span> is the beta p.d.f., that is: <span class="math inline" data-o006-math-id="O006-PSU-012-M0069">\(h(\theta)=\frac{\Gamma(\alpha+\beta)}{\Gamma(\alpha)\Gamma(\beta)}\theta^{\alpha-1}(1-\theta)^{\beta-1}\)</span></p>
+<p data-o006-id="O006-PSU-012-U0129">for <span class="math inline" data-o006-math-id="O006-PSU-012-M0070">\(0&lt;\theta&lt;1\)</span>. Find the posterior p.d.f. of <span class="math inline" data-o006-math-id="O006-PSU-012-M0071">\(\theta\)</span>, given <span class="math inline" data-o006-math-id="O006-PSU-012-M0072">\(Y=y\)</span>. That is, find <span class="math inline" data-o006-math-id="O006-PSU-012-M0073">\(k(\theta|y)\)</span>.</p>
+<section class="level4 card card-body bg-light ms-3 mb-3 pt-0" data-o006-id="O006-PSU-012-U0130" id="solution-2">
+<h4 class="anchored" data-anchor-id="solution-2" data-o006-id="O006-PSU-012-U0131">Solution</h4>
+<p data-o006-id="O006-PSU-012-U0132">First, we find the joint p.d.f. of the statistic <span class="math inline" data-o006-math-id="O006-PSU-012-M0074">\(Y\)</span> and the parameter <span class="math inline" data-o006-math-id="O006-PSU-012-M0075">\(\theta\)</span> by multiplying the prior p.d.f. <span class="math inline" data-o006-math-id="O006-PSU-012-M0076">\(h(\theta)\)</span> and the conditional p.m.f. of the statistic <span class="math inline" data-o006-math-id="O006-PSU-012-M0077">\(Y\)</span> and the parameter <span class="math inline" data-o006-math-id="O006-PSU-012-M0078">\(\theta\)</span> is: <span class="math display" data-o006-math-id="O006-PSU-012-M0079">\[k(y, \theta)={n\choose y}\left(\frac{\Gamma(\alpha+\beta)}{\Gamma(\alpha)\Gamma(\beta)}\right)\theta^{y+\alpha-1}(1-\theta)^{n-y+\beta-1}\]</span></p>
+<p data-o006-id="O006-PSU-012-U0133">over the support <span class="math inline" data-o006-math-id="O006-PSU-012-M0080">\(y=0, 1, 2, \ldots, n\)</span> and <span class="math inline" data-o006-math-id="O006-PSU-012-M0081">\(0&lt;\theta&lt;1\)</span>.</p>
+<p data-o006-id="O006-PSU-012-U0134">Then, we find the marginal p.d.f. of <span class="math inline" data-o006-math-id="O006-PSU-012-M0082">\(Y\)</span> by integrating <span class="math inline" data-o006-math-id="O006-PSU-012-M0083">\(k(y, \theta)\)</span> over the parameter space of <span class="math inline" data-o006-math-id="O006-PSU-012-M0084">\(\theta\)</span>:</p>
+<div data-o006-id="O006-PSU-012-U0135" style="overflow-x:auto;overflow-y:hidden;">
+<p data-o006-id="O006-PSU-012-U0136"><span class="math display" data-o006-math-id="O006-PSU-012-M0085">\[k_1(y)=\int_0^1 k(y, \theta)d\theta={n\choose y}\frac{\Gamma(\alpha+\beta)}{\Gamma(\alpha)\Gamma(\beta)}\int_0^1 \theta^{y+\alpha-1}(1-\theta)^{n-y+\beta-1}d\theta\]</span></p>
+</div>
+<p data-o006-id="O006-PSU-012-U0137">Now, if we multiply the integrand by 1 in a special way:</p>
+<div data-o006-id="O006-PSU-012-U0138" style="overflow-x:auto;overflow-y:hidden;">
+<p data-o006-id="O006-PSU-012-U0139"><span class="math display" data-o006-math-id="O006-PSU-012-M0086">\[k_1(y)={n\choose y}\frac{\Gamma(\alpha+\beta)}{\Gamma(\alpha)\Gamma(\beta)}\left(\frac{\Gamma(y+\alpha)\Gamma(n-y+\beta)}{\Gamma(y+\alpha+n-y+\beta)}\right)\int_0^1 \left(\frac{\Gamma(y+\alpha+n-y+\beta)}{\Gamma(y+\alpha)\Gamma(n-y+\beta)}\right)\theta^{y+\alpha-1}(1-\theta)^{n-y+\beta-1}d\theta\]</span></p>
+</div>
+<p data-o006-id="O006-PSU-012-U0140">we see that we get a beta p.d.f. with parameters <span class="math inline" data-o006-math-id="O006-PSU-012-M0087">\(y+\alpha\)</span> and <span class="math inline" data-o006-math-id="O006-PSU-012-M0088">\(n-y+\beta\)</span> that therefore, by the definition of a valid p.d.f., must integrate to 1. Simplifying we therefore get that the marginal p.d.f. of <span class="math inline" data-o006-math-id="O006-PSU-012-M0089">\(Y\)</span> is:</p>
+<p data-o006-id="O006-PSU-012-U0141"><span class="math display" data-o006-math-id="O006-PSU-012-M0090">\[k_1(y)={n\choose y}\frac{\Gamma(\alpha+\beta)}{\Gamma(\alpha)\Gamma(\beta)}\left(\frac{\Gamma(y+\alpha)\Gamma(n-y+\beta)}{\Gamma(y+\alpha+n-y+\beta)}\right)\]</span></p>
+<p data-o006-id="O006-PSU-012-U0142">on the support <span class="math inline" data-o006-math-id="O006-PSU-012-M0091">\(y=0, 1, 2, \ldots, n\)</span>. Then, the posterior p.d.f. of <span class="math inline" data-o006-math-id="O006-PSU-012-M0092">\(\theta\)</span>, given that <span class="math inline" data-o006-math-id="O006-PSU-012-M0093">\(Y=y\)</span> is:</p>
+<p data-o006-id="O006-PSU-012-U0143"><span class="math display" data-o006-math-id="O006-PSU-012-M0094">\[\begin{align*}
+k(\theta|y)=\frac{{n\choose y}\frac{\Gamma(\alpha+\beta)}{\Gamma(\alpha)\Gamma(\beta)}\theta^{y+\alpha-1}(1-\theta)^{n-y+\beta-1}}{{n\choose y}\frac{\Gamma(\alpha+\beta)}{\Gamma(\alpha)\Gamma(\beta)}\left(\frac{\Gamma(y+\alpha)\Gamma(n-y+\beta)}{\Gamma(y+\alpha+n-y+\beta)}\right)}
+\end{align*}\]</span></p>
+<p data-o006-id="O006-PSU-012-U0144">Because some things cancel out, we see that the posterior p.d.f. of <span class="math inline" data-o006-math-id="O006-PSU-012-M0095">\(\theta\)</span>, given <span class="math inline" data-o006-math-id="O006-PSU-012-M0096">\(Y=y\)</span> is:</p>
+<p data-o006-id="O006-PSU-012-U0145"><span class="math display" data-o006-math-id="O006-PSU-012-M0097">\[k(\theta|y)=\frac{\Gamma(n+\alpha+\beta)}{\Gamma(\alpha+y)\Gamma(n+\beta-y)}\theta^{y+\alpha-1}(1-\theta)^{n-y+\beta-1}\]</span></p>
+<p data-o006-id="O006-PSU-012-U0146">for <span class="math inline" data-o006-math-id="O006-PSU-012-M0098">\(0&lt;\theta&lt;1\)</span>, which you might recognize as a beta p.d.f. with parameters <span class="math inline" data-o006-math-id="O006-PSU-012-M0099">\(y+\alpha\)</span> and <span class="math inline" data-o006-math-id="O006-PSU-012-M0100">\(n-y+\beta\)</span>.</p>
+</section>
+</div>
+<p data-o006-id="O006-PSU-012-U0147">Let’s consider another example.</p>
+<div class="theorem example" data-o006-id="O006-PSU-012-U0148" id="exm-bayes4">
+<p data-o006-id="O006-PSU-012-U0149"><span class="theorem-title"><strong>Example 11.4</strong></span> For fixed <span class="math inline" data-o006-math-id="O006-PSU-012-M0101">\(p\)</span>, suppose we observe a single observation <span class="math inline" data-o006-math-id="O006-PSU-012-M0102">\(Y=y\)</span> for a distribution with pdf <span class="math inline" data-o006-math-id="O006-PSU-012-M0103">\(p(1-p)^y\)</span>, for <span class="math inline" data-o006-math-id="O006-PSU-012-M0104">\(y=0, 1, \ldots\)</span>, Also, prior information on <span class="math inline" data-o006-math-id="O006-PSU-012-M0105">\(p\)</span> indicates that <span class="math inline" data-o006-math-id="O006-PSU-012-M0106">\(p\)</span> has a pdf <span class="math inline" data-o006-math-id="O006-PSU-012-M0107">\(3p^2\)</span> for <span class="math inline" data-o006-math-id="O006-PSU-012-M0108">\(0&lt;p&lt;1\)</span>. Find the posterior distribution of <span class="math inline" data-o006-math-id="O006-PSU-012-M0109">\(p\)</span> given <span class="math inline" data-o006-math-id="O006-PSU-012-M0110">\(Y=y\)</span>.</p>
+<section class="level4 card card-body bg-light ms-3 mb-3 pt-0" data-o006-id="O006-PSU-012-U0150" id="solution-3">
+<h4 class="anchored" data-anchor-id="solution-3" data-o006-id="O006-PSU-012-U0151">Solution</h4>
+<p data-o006-id="O006-PSU-012-U0152">We need to find the posterior distribution of <span class="math inline" data-o006-math-id="O006-PSU-012-M0111">\(p\)</span> given that <span class="math inline" data-o006-math-id="O006-PSU-012-M0112">\(Y=y\)</span>. We can find the joint distribution by:</p>
+<p data-o006-id="O006-PSU-012-U0153"><span class="math display" data-o006-math-id="O006-PSU-012-M0113">\[\begin{align*}
+  k(p, y)=g(y|p)h(p)=p(1-p)^y\left(3p^2\right)=3p^3(1-p)^y
+\end{align*}\]</span></p>
+<p data-o006-id="O006-PSU-012-U0154">The next step would be to find <span class="math inline" data-o006-math-id="O006-PSU-012-M0114">\(k_1(y)\)</span> by:</p>
+<p data-o006-id="O006-PSU-012-U0155"><span class="math display" data-o006-math-id="O006-PSU-012-M0115">\[\begin{align*}
+  k_1(y)=\int_0^1 3p^3(1-p)^ydp
+\end{align*}\]</span></p>
+<p data-o006-id="O006-PSU-012-U0156">Instead of doing this, let’s recognize that <span class="math inline" data-o006-math-id="O006-PSU-012-M0116">\(k_1(y)\)</span> is a constant in regards to <span class="math inline" data-o006-math-id="O006-PSU-012-M0117">\(p\)</span>. Lets denote <span class="math inline" data-o006-math-id="O006-PSU-012-M0118">\(k_1(p)\)</span> as <span class="math inline" data-o006-math-id="O006-PSU-012-M0119">\(c\)</span>.</p>
+<p data-o006-id="O006-PSU-012-U0157">Now, we need to find <span class="math inline" data-o006-math-id="O006-PSU-012-M0120">\(k(p|y)=\frac{k(p, y)}{k_1(y)}\)</span>.</p>
+<p data-o006-id="O006-PSU-012-U0158"><span class="math display" data-o006-math-id="O006-PSU-012-M0121">\[\begin{align*}k(p|y)=\frac{k(p, y)}{k_1(y)}=\frac{3p^3(1-p)^y}{c}=\left(\frac{3}{c}\right)p^3(1-p)^y
+\end{align*}\]</span></p>
+<p data-o006-id="O006-PSU-012-U0159">The term in the parentheses, <span class="math inline" data-o006-math-id="O006-PSU-012-M0122">\(\left(\frac{3}{c}\right)\)</span>, is a constant with respect to <span class="math inline" data-o006-math-id="O006-PSU-012-M0123">\(p\)</span>. Let’s denote that constant as <span class="math inline" data-o006-math-id="O006-PSU-012-M0124">\(\kappa\)</span>. Therefore, we have:</p>
+<p data-o006-id="O006-PSU-012-U0160"><span class="math display" data-o006-math-id="O006-PSU-012-M0125">\[k(p|y)=\kappa p^3(1-p)^y\]</span></p>
+<p data-o006-id="O006-PSU-012-U0161">We know that <span class="math inline" data-o006-math-id="O006-PSU-012-M0126">\(k(p|y)\)</span> is a valid pdf. We also know that <span class="math inline" data-o006-math-id="O006-PSU-012-M0127">\(p\)</span> has support <span class="math inline" data-o006-math-id="O006-PSU-012-M0128">\(0&lt;p&lt;1\)</span> and that <span class="math inline" data-o006-math-id="O006-PSU-012-M0129">\(k(p|y)\)</span> integrates to 1 over the support. Therefore, the posterior distribution of <span class="math inline" data-o006-math-id="O006-PSU-012-M0130">\(p\)</span> given <span class="math inline" data-o006-math-id="O006-PSU-012-M0131">\(Y=y\)</span> has to be a beta distribution with parameters <span class="math inline" data-o006-math-id="O006-PSU-012-M0132">\(\alpha=4\)</span> and <span class="math inline" data-o006-math-id="O006-PSU-012-M0133">\(\beta=y+1\)</span>. In other words,</p>
+<p data-o006-id="O006-PSU-012-U0162"><span class="math display" data-o006-math-id="O006-PSU-012-M0134">\[\begin{align*}
+  k(p|y)=\frac{\Gamma(4+y)}{\Gamma(4)\Gamma(y+1)}p^{4-1}(1-p)^{(y+1)-1}
+\end{align*}\]</span></p>
+<p data-o006-id="O006-PSU-012-U0163">We found the posterior distribution of <span class="math inline" data-o006-math-id="O006-PSU-012-M0135">\(p\)</span> given <span class="math inline" data-o006-math-id="O006-PSU-012-M0136">\(Y=y\)</span> without any integration! We just recognized lumped together all of the constants with respect to <span class="math inline" data-o006-math-id="O006-PSU-012-M0137">\(p\)</span> and used our knowledge of what makes a function a valid pdf.</p>
+<div class="callout callout-style-simple callout-caution no-icon" data-o006-id="O006-PSU-012-U0164">
+<div class="callout-body d-flex" data-o006-id="O006-PSU-012-U0165">
+<div class="callout-icon-container" data-o006-id="O006-PSU-012-U0166">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-body-container" data-o006-id="O006-PSU-012-U0167">
+<p data-o006-id="O006-PSU-012-U0168"><strong>Note!</strong> Since <span class="math inline" data-o006-math-id="O006-PSU-012-M0138">\(\kappa\)</span> is a constant with respect to <span class="math inline" data-o006-math-id="O006-PSU-012-M0139">\(p\)</span>, we can say that <span class="math inline" data-o006-math-id="O006-PSU-012-M0140">\(k(p|y)\)</span> is <strong>proportional to</strong> <span class="math inline" data-o006-math-id="O006-PSU-012-M0141">\(p^3(1-p)^y\)</span>. We denote this as:</p>
+<p data-o006-id="O006-PSU-012-U0169"><span class="math display" data-o006-math-id="O006-PSU-012-M0142">\[k(p|y)\propto p^3(1-p)^y\]</span></p>
+</div>
+</div>
+</div>
+<p data-o006-id="O006-PSU-012-U0170">This technique is helpful to find the posteriors quicker. However, it only works if we can recognize the posterior distribution, just as we recognized that <span class="math inline" data-o006-math-id="O006-PSU-012-M0143">\(k(p|y)\)</span> is a beta distribution.</p>
+<p data-o006-id="O006-PSU-012-U0171">To demonstrate the long way, test your calculus and algebra skills to find</p>
+<div data-o006-id="O006-PSU-012-U0172" style="overflow-x:auto;overflow-y:hidden;">
+<p data-o006-id="O006-PSU-012-U0173"><span class="math display" data-o006-math-id="O006-PSU-012-M0144">\[\begin{align*}
+  c=k_1(y)=\int_0^1 3p^3(1-p)^ydp=\frac{18}{(y+1)(y+2)(y+3)(y+4)}
+\end{align*}\]</span></p>
+</div>
+<p data-o006-id="O006-PSU-012-U0174">The constant, <span class="math inline" data-o006-math-id="O006-PSU-012-M0145">\(\kappa\)</span>, is equal to</p>
+<p data-o006-id="O006-PSU-012-U0175"><span class="math display" data-o006-math-id="O006-PSU-012-M0146">\[\begin{align*}
+\frac{3}{c}=\frac{3}{\frac{18}{(y+1)(y+2)(y+3)(y+4)}}=\frac{(y+1)(y+2)(y+3)(y+4)}{6}
+\end{align*}\]</span></p>
+<p data-o006-id="O006-PSU-012-U0176">Compare this to the constant of the beta distribution we found as the posterior:</p>
+<div data-o006-id="O006-PSU-012-U0177" style="overflow-x:auto;overflow-y:hidden;">
+<p data-o006-id="O006-PSU-012-U0178"><span class="math display" data-o006-math-id="O006-PSU-012-M0147">\[\begin{align*}
+\frac{\Gamma(5+y)}{\Gamma(4)\Gamma(y+1)}=\frac{(y+4)(y+3)(y+2)(y+1)y!}{3!(y!)}=\frac{(y+4)(y+3)(y+2)(y+1)}{6}
+\end{align*}\]</span></p>
+</div>
+<p data-o006-id="O006-PSU-012-U0179">They are exactly the same! Again, this is because we recognized the posterior distribution is a beta and only one constant can make the pdf of a beta distribution integrate to one over the support.</p>
+<p data-o006-id="O006-PSU-012-U0180">In the examples so far, we have considered only one observation. We can begin with a sample of observations, say <span class="math inline" data-o006-math-id="O006-PSU-012-M0148">\(X_1, X_2, \ldots, X_n\)</span> or we can begin with a sample statistic.</p>
+<p data-o006-id="O006-PSU-012-U0181">If we begin with a sample, we could replace <span class="math inline" data-o006-math-id="O006-PSU-012-M0149">\(g(y|\theta)\)</span> by the likelihood function</p>
+<p data-o006-id="O006-PSU-012-U0182"><span class="math display" data-o006-math-id="O006-PSU-012-M0150">\[\begin{align*}
+  L(\theta)=f(x_1|\theta)f(x_2|\theta)\cdots f(x_n|\theta)
+\end{align*}\]</span></p>
+<p data-o006-id="O006-PSU-012-U0183">which is just the joint distribution of <span class="math inline" data-o006-math-id="O006-PSU-012-M0151">\(X_1, X_2, \ldots, X_n\)</span> given the parameter <span class="math inline" data-o006-math-id="O006-PSU-012-M0152">\(\theta\)</span>. Therefore, we can find</p>
+<p data-o006-id="O006-PSU-012-U0184"><span class="math display" data-o006-math-id="O006-PSU-012-M0153">\[\begin{align*}
+k(\theta|x_1, \ldots, x_n)\propto h(\theta)L(\theta)
+\end{align*}\]</span></p>
+<p data-o006-id="O006-PSU-012-U0185">If we begin with a statistic, say <span class="math inline" data-o006-math-id="O006-PSU-012-M0154">\(W\)</span>, then we need to find the distribution of <span class="math inline" data-o006-math-id="O006-PSU-012-M0155">\(g(w|\theta)\)</span> and proceed as usual.</p>
+</section>
+</div>
+<div class="theorem example" data-o006-id="O006-PSU-012-U0186" id="exm-bayes5">
+<p data-o006-id="O006-PSU-012-U0187"><span class="theorem-title"><strong>Example 11.5</strong></span> Let <span class="math inline" data-o006-math-id="O006-PSU-012-M0156">\(X_1, X_2, \ldots, X_n\)</span> be a random sample from a Bernouli distribution with pmf <span class="math display" data-o006-math-id="O006-PSU-012-M0157">\[\begin{align*}
+  f(x|\theta)=\theta^x(1-\theta)^{1-x}, \qquad x=0, 1
+\end{align*}\]</span> Prior information tells us <span class="math inline" data-o006-math-id="O006-PSU-012-M0158">\(\theta\)</span> follows a beta distribution with parameters <span class="math inline" data-o006-math-id="O006-PSU-012-M0159">\(\alpha\)</span> and <span class="math inline" data-o006-math-id="O006-PSU-012-M0160">\(\beta\)</span>. Find the posteriour distribution of <span class="math inline" data-o006-math-id="O006-PSU-012-M0161">\(\theta\)</span> given the data.</p>
+<section class="level4 card card-body bg-light ms-3 mb-3 pt-0" data-o006-id="O006-PSU-012-U0188" id="solution-4">
+<h4 class="anchored" data-anchor-id="solution-4" data-o006-id="O006-PSU-012-U0189">Solution</h4>
+<p data-o006-id="O006-PSU-012-U0190">First, we need to find the likelihood function:</p>
+<div data-o006-id="O006-PSU-012-U0191" style="overflow-x:auto;overflow-y:hidden;">
+<p data-o006-id="O006-PSU-012-U0192"><span class="math display" data-o006-math-id="O006-PSU-012-M0162">\[\begin{align*}
+  L(\theta)=\prod_{i=1}^n f(x_i|\theta)=\prod_{i=1}^n\theta^{x_i}(1-\theta)^{1-x_i}=\theta^{\sum x_i}(1-\theta)^{n-\sum x_i}
+\end{align*}\]</span></p>
+</div>
+<p data-o006-id="O006-PSU-012-U0193">The next step is to find the joint distribution of <span class="math inline" data-o006-math-id="O006-PSU-012-M0163">\(\theta\)</span> and the data.</p>
+<div data-o006-id="O006-PSU-012-U0194" style="overflow-x:auto;overflow-y:hidden;">
+<p data-o006-id="O006-PSU-012-U0195"><span class="math display" data-o006-math-id="O006-PSU-012-M0164">\[\begin{align*}k(\theta|x_1, \ldots, x_n)\propto h(\theta)L(\theta)=\theta^{\alpha-1}(1-\theta)^{\beta-1}\theta^{\sum x_i}(1-\theta)^{n-\sum x_i}
+\end{align*}\]</span></p>
+</div>
+<p data-o006-id="O006-PSU-012-U0196">Remember, when we say <span class="math inline" data-o006-math-id="O006-PSU-012-M0165">\(k(\theta|x_1, \ldots, x_n)\)</span> is proportional to the expression on the right hand side, we are ignoring all the terms that are constant with respect to <span class="math inline" data-o006-math-id="O006-PSU-012-M0166">\(\theta\)</span>. Simplifying, we get:</p>
+<p data-o006-id="O006-PSU-012-U0197"><span class="math display" data-o006-math-id="O006-PSU-012-M0167">\[\begin{align*}
+  k(\theta|x_1, \ldots, x_n)\propto \theta^{\alpha+\sum x_i -1}(1-\theta)^{n-\sum x_i+\beta-1}
+\end{align*}\]</span></p>
+<p data-o006-id="O006-PSU-012-U0198">We can recognize that <span class="math inline" data-o006-math-id="O006-PSU-012-M0168">\(\theta^{\alpha+\sum x_i -1}(1-\theta)^{n-\sum x_i+\beta-1}\)</span> is proportional to a beta distribution with parameters <span class="math inline" data-o006-math-id="O006-PSU-012-M0169">\(\alpha^*=\alpha+\sum x_i\)</span> and <span class="math inline" data-o006-math-id="O006-PSU-012-M0170">\(\beta^*=n-\sum x_i +\beta\)</span>.</p>
+</section>
+</div>
+<p data-o006-id="O006-PSU-012-U0199">Okay now, are you scratching your head wondering what this all has to do with Bayesian estimation, as the title of this page suggests it should? Well, let’s talk about that then! Bayesians believe that everything you need to know about a parameter <span class="math inline" data-o006-math-id="O006-PSU-012-M0171">\(\theta\)</span> can be found in its posterior p.d.f. <span class="math inline" data-o006-math-id="O006-PSU-012-M0172">\(k(\theta|y)\)</span>. So, if a Bayesian is asked to make a point estimate of <span class="math inline" data-o006-math-id="O006-PSU-012-M0173">\(\theta\)</span>, he or she is going to naturally turn to <span class="math inline" data-o006-math-id="O006-PSU-012-M0174">\(k(\theta|y)\)</span> for the answer. But how? Well, the logical thing to do would be to use <span class="math inline" data-o006-math-id="O006-PSU-012-M0175">\(k(\theta|y)\)</span> to calculate the mean or median of <span class="math inline" data-o006-math-id="O006-PSU-012-M0176">\(\theta\)</span>, as they would all be reasonable guesses of the value of <span class="math inline" data-o006-math-id="O006-PSU-012-M0177">\(\theta\)</span>. But, hmmm! Should he or she …. errrr, let’s get rid of this he or she stuff…. let’s make it a she for now… okay… should she calculate the mean or the median? Well, that depends on what it will cost her for using either. Huh? Cost? We’re talking about estimating a parameter not buying groceries. Well, let’s suppose she gets charged a certain amount for estimating the real value of the parameter <span class="math inline" data-o006-math-id="O006-PSU-012-M0178">\(\theta\)</span> with her guess <span class="math inline" data-o006-math-id="O006-PSU-012-M0179">\(w(y)\)</span>. Well, this Bayesian woman would probably want the cost of her error to be as small as possible. Suppose, she is charged the square of the error between <span class="math inline" data-o006-math-id="O006-PSU-012-M0180">\(\theta\)</span> and we guess <span class="math inline" data-o006-math-id="O006-PSU-012-M0181">\(w(y)\)</span>. That is, suppose her cost is:</p>
+<p data-o006-id="O006-PSU-012-U0200"><span class="math display" data-o006-math-id="O006-PSU-012-M0182">\[(\theta-w(y))^2\]</span></p>
+<p data-o006-id="O006-PSU-012-U0201">Aha… there we have it! Because she wants her cost to be as small as possible, she should make her guess <span class="math inline" data-o006-math-id="O006-PSU-012-M0183">\(w(y)\)</span> be the conditional mean <span class="math inline" data-o006-math-id="O006-PSU-012-M0184">\(E(\theta|y)\)</span>. Thats because way back in STAT 414, we showed that if <span class="math inline" data-o006-math-id="O006-PSU-012-M0185">\(Z\)</span> is a random variable, then the expected value of the squared error, that is, <span class="math inline" data-o006-math-id="O006-PSU-012-M0186">\(E[(Z-b)^2]\)</span> is minimized at <span class="math inline" data-o006-math-id="O006-PSU-012-M0187">\(b=E(Z)\)</span>. In her case, the <span class="math inline" data-o006-math-id="O006-PSU-012-M0188">\(Z\)</span> is the <span class="math inline" data-o006-math-id="O006-PSU-012-M0189">\(\theta\)</span> and the <span class="math inline" data-o006-math-id="O006-PSU-012-M0190">\(b\)</span> is the <span class="math inline" data-o006-math-id="O006-PSU-012-M0191">\(w(y)=E(\theta|y)\)</span>.</p>
+<p data-o006-id="O006-PSU-012-U0202">On the other hand, if she is charged the absolute value of the error between <span class="math inline" data-o006-math-id="O006-PSU-012-M0192">\(\theta\)</span> and her guess <span class="math inline" data-o006-math-id="O006-PSU-012-M0193">\(w(y)\)</span>, that is: <span class="math display" data-o006-math-id="O006-PSU-012-M0194">\[|\theta-w(y)|\]</span> then in order to make her cost be as small as possible, she’ll want to make her guess <span class="math inline" data-o006-math-id="O006-PSU-012-M0195">\(w(y)\)</span> be the conditional median. That’s because, again, way back in STAT 414, we showed that if <span class="math inline" data-o006-math-id="O006-PSU-012-M0196">\(Z\)</span> is a random variable, then the expected value of the absolute value of the error, that is <span class="math inline" data-o006-math-id="O006-PSU-012-M0197">\(E[|Z-b|]\)</span> is minimized when <span class="math inline" data-o006-math-id="O006-PSU-012-M0198">\(b\)</span> equals the median of the distribution.</p>
+<p data-o006-id="O006-PSU-012-U0203">Let’s make this discussion concrete by returning to our binomial example.</p>
+<div class="theorem example" data-o006-id="O006-PSU-012-U0204" id="exm-bayes6">
+<p data-o006-id="O006-PSU-012-U0205"><span class="theorem-title"><strong>Example 11.6</strong></span> Suppose that <span class="math inline" data-o006-math-id="O006-PSU-012-M0199">\(Y\)</span> follows a binomial distribution with parameters <span class="math inline" data-o006-math-id="O006-PSU-012-M0200">\(n\)</span> and <span class="math inline" data-o006-math-id="O006-PSU-012-M0201">\(p=\theta\)</span>, so that the pmf of <span class="math inline" data-o006-math-id="O006-PSU-012-M0202">\(Y\)</span> given <span class="math inline" data-o006-math-id="O006-PSU-012-M0203">\(\theta\)</span> is:</p>
+<p data-o006-id="O006-PSU-012-U0206"><span class="math display" data-o006-math-id="O006-PSU-012-M0204">\[g(y|\theta)={n\choose y}\theta^y(1-\theta)^{n-y}\]</span> for <span class="math inline" data-o006-math-id="O006-PSU-012-M0205">\(y=0, 1, \ldots, n\)</span>. Suppose that the prior pdf of the parameter <span class="math inline" data-o006-math-id="O006-PSU-012-M0206">\(\theta\)</span> is the beta pdf, that is:</p>
+<p data-o006-id="O006-PSU-012-U0207"><span class="math display" data-o006-math-id="O006-PSU-012-M0207">\[h(\theta)=\frac{\Gamma(\alpha+\beta)}{\Gamma(\alpha)\Gamma(\beta)}\theta^{\alpha-1}(1-\theta)^{\beta-1}\]</span> for <span class="math inline" data-o006-math-id="O006-PSU-012-M0208">\(0&lt;\theta&lt;1\)</span>. Estimate the parameter <span class="math inline" data-o006-math-id="O006-PSU-012-M0209">\(\theta\)</span> using the squared error loss function.</p>
+<div class="card card-body bg-light ms-3 mb-3 pt-0" data-o006-id="O006-PSU-012-U0208">
+<p data-o006-id="O006-PSU-012-U0209">We’ve previously shown that the posterior p.d.f. of <span class="math inline" data-o006-math-id="O006-PSU-012-M0210">\(\theta\)</span> given <span class="math inline" data-o006-math-id="O006-PSU-012-M0211">\(Y=y\)</span> is the bets p.d.f. with parameters <span class="math inline" data-o006-math-id="O006-PSU-012-M0212">\(y+\alpha\)</span> and <span class="math inline" data-o006-math-id="O006-PSU-012-M0213">\(n-y+\beta\)</span>. The previous discussion tell us that in order to minimize the squared error loss function:</p>
+<p data-o006-id="O006-PSU-012-U0210"><span class="math display" data-o006-math-id="O006-PSU-012-M0214">\[\begin{align*}
+  (\theta-w(y))^2
+\end{align*}\]</span></p>
+<p data-o006-id="O006-PSU-012-U0211">we should use the conditional mean <span class="math inline" data-o006-math-id="O006-PSU-012-M0215">\(w(y)=E(\theta|y)\)</span> as an estimate of the parameter <span class="math inline" data-o006-math-id="O006-PSU-012-M0216">\(\theta\)</span>. Well, in general, the mean of a beta p.d.f. with parameters <span class="math inline" data-o006-math-id="O006-PSU-012-M0217">\(\alpha\)</span> and <span class="math inline" data-o006-math-id="O006-PSU-012-M0218">\(\beta\)</span> is:</p>
+<p data-o006-id="O006-PSU-012-U0212"><span class="math display" data-o006-math-id="O006-PSU-012-M0219">\[\begin{align*}
+  \frac{\alpha}{\alpha+\beta}
+\end{align*}\]</span></p>
+<p data-o006-id="O006-PSU-012-U0213">In our case, the posterior p.d.f. of <span class="math inline" data-o006-math-id="O006-PSU-012-M0220">\(\theta\)</span> given <span class="math inline" data-o006-math-id="O006-PSU-012-M0221">\(Y=y\)</span> is the beta p.d.f. with parameters <span class="math inline" data-o006-math-id="O006-PSU-012-M0222">\(y+\alpha\)</span> and <span class="math inline" data-o006-math-id="O006-PSU-012-M0223">\(n-y+\beta\)</span>. Therefore, the conditional mean is:</p>
+<p data-o006-id="O006-PSU-012-U0214"><span class="math display" data-o006-math-id="O006-PSU-012-M0224">\[\begin{align*}w(y)=E(\theta|y)=\frac{\alpha+y}{\alpha+y+n-y+\beta}=\frac{\alpha+y}{\alpha+n+\beta}
+\end{align*}\]</span></p>
+<p data-o006-id="O006-PSU-012-U0215">And, it serves, in this situation, as a Bayesian’s best estimate of <span class="math inline" data-o006-math-id="O006-PSU-012-M0225">\(\theta\)</span> when using the squared error loss function.</p>
+</div>
+</div>
+</section>
+<section class="level2" data-number="11.3" data-o006-id="O006-PSU-012-U0216" id="credible-intervals">
+<h2 class="anchored" data-anchor-id="credible-intervals" data-number="11.3" data-o006-id="O006-PSU-012-U0217"><span class="header-section-number">11.3</span> Credible Intervals</h2>
+<p data-o006-id="O006-PSU-012-U0218">Previously, when we assumed the known parameter was a constant, we found a point estimate or point estimator for <span class="math inline" data-o006-math-id="O006-PSU-012-M0226">\(\theta\)</span>. We have done something similar in the Bayesian setting this section by find the value that minimizes the squared error loss function or by minimizing the absolute value of the error.</p>
+<p data-o006-id="O006-PSU-012-U0219">However, in the frequentist setting, we did not stop at a point estimate. We constructed (using our probability tools) confidence intervals for the unknown parameter. Can we do something similar here with the Bayesian estimate?</p>
+<p data-o006-id="O006-PSU-012-U0220">The answer is yes. We can find what is called a <strong>credible interval</strong>. We can construct the credible interval by finding two value of <span class="math inline" data-o006-math-id="O006-PSU-012-M0227">\(y\)</span>, say <span class="math inline" data-o006-math-id="O006-PSU-012-M0228">\(a(y)\)</span> and <span class="math inline" data-o006-math-id="O006-PSU-012-M0229">\(b(y)\)</span> such that:</p>
+<p data-o006-id="O006-PSU-012-U0221"><span class="math display" data-o006-math-id="O006-PSU-012-M0230">\[\begin{align*}
+  \int_{a(y)}^{b(y)}k(\theta|y)d\theta=1-\alpha
+\end{align*}\]</span></p>
+<p data-o006-id="O006-PSU-012-U0222">where <span class="math inline" data-o006-math-id="O006-PSU-012-M0231">\(\alpha\)</span> is small, say <span class="math inline" data-o006-math-id="O006-PSU-012-M0232">\(\alpha=0.05\)</span>. The resulting interval from <span class="math inline" data-o006-math-id="O006-PSU-012-M0233">\(a(y)\)</span> to <span class="math inline" data-o006-math-id="O006-PSU-012-M0234">\(b(y)\)</span> could be an interval estimate for <span class="math inline" data-o006-math-id="O006-PSU-012-M0235">\(\theta\)</span> such that the posterior probability of <span class="math inline" data-o006-math-id="O006-PSU-012-M0236">\(\theta\)</span> being in that interval is <span class="math inline" data-o006-math-id="O006-PSU-012-M0237">\(1-\alpha\)</span>.</p>
+<p data-o006-id="O006-PSU-012-U0223">It is common for the interval to have equal probability on each tail. Therefore, the interval should be set up such that: <span class="math display" data-o006-math-id="O006-PSU-012-M0238">\[\begin{align*}
+  &amp; \frac{\alpha}{2}=\int_{-\infty}^{a(y)}k(\theta|y)d\theta\\
+  &amp; \frac{\alpha}{2}=\int_{b(y)}^\infty k(\theta|y)d\theta
+\end{align*}\]</span></p>
+<div class="theorem example" data-o006-id="O006-PSU-012-U0224" id="exm-bayes7">
+<p data-o006-id="O006-PSU-012-U0225"><span class="theorem-title"><strong>Example 11.7</strong></span> Consider the previous example where we have one observation, <span class="math inline" data-o006-math-id="O006-PSU-012-M0239">\(Y\)</span>, from a distribution with pdf <span class="math inline" data-o006-math-id="O006-PSU-012-M0240">\(p(1-p)^y\)</span> for <span class="math inline" data-o006-math-id="O006-PSU-012-M0241">\(y=0, 1, \ldots\)</span> and a unknown parameter <span class="math inline" data-o006-math-id="O006-PSU-012-M0242">\(p\)</span> with a prior distribution <span class="math inline" data-o006-math-id="O006-PSU-012-M0243">\(3p^2\)</span>, for <span class="math inline" data-o006-math-id="O006-PSU-012-M0244">\(0&lt;p&lt;1\)</span>. Find a 90% credible interval for <span class="math inline" data-o006-math-id="O006-PSU-012-M0245">\(p\)</span> with <span class="math inline" data-o006-math-id="O006-PSU-012-M0246">\(Y=3\)</span>.</p>
+<section class="level4 card card-body bg-light ms-3 mb-3 pt-0" data-o006-id="O006-PSU-012-U0226" id="solution-5">
+<h4 class="anchored" data-anchor-id="solution-5" data-o006-id="O006-PSU-012-U0227">Solution</h4>
+<p data-o006-id="O006-PSU-012-U0228">We know the posterior distribution is a beta distribution with parameters <span class="math inline" data-o006-math-id="O006-PSU-012-M0247">\(\alpha=4\)</span> and <span class="math inline" data-o006-math-id="O006-PSU-012-M0248">\(\beta=y+1\)</span>. In this case, <span class="math inline" data-o006-math-id="O006-PSU-012-M0249">\(Y=3\)</span>, making <span class="math inline" data-o006-math-id="O006-PSU-012-M0250">\(\beta=4\)</span>.</p>
+<p data-o006-id="O006-PSU-012-U0229">To find the 90% credible interval, we need to find <span class="math inline" data-o006-math-id="O006-PSU-012-M0251">\(a(y)\)</span> and <span class="math inline" data-o006-math-id="O006-PSU-012-M0252">\(b(y)\)</span> such that</p>
+<div data-o006-id="O006-PSU-012-U0230" style="overflow-x:auto;overflow-y:hidden;">
+<p data-o006-id="O006-PSU-012-U0231"><span class="math display" data-o006-math-id="O006-PSU-012-M0253">\[0.90=\int_{a(y)}^{b(y)}\frac{\Gamma(8)}{\Gamma(4)\Gamma(4)}p^3(1-p)^3dp=\int_{a(y)}^{b(y)}\frac{35}{4}p^3(1-p)^3dp\]</span></p>
+</div>
+<p data-o006-id="O006-PSU-012-U0232">We can use R to help us find this interval. We can find the <span class="math inline" data-o006-math-id="O006-PSU-012-M0254">\(5^{th}\)</span> percentile and the <span class="math inline" data-o006-math-id="O006-PSU-012-M0255">\(95^{th}\)</span> of a beta distribution with parameters <span class="math inline" data-o006-math-id="O006-PSU-012-M0256">\(\alpha=4\)</span> and <span class="math inline" data-o006-math-id="O006-PSU-012-M0257">\(\beta=4\)</span> by using the following commands.</p>
+<div class="cell language-name-processed" data-o006-id="O006-PSU-012-U0233">
+<div class="codeblock-with-label r" data-o006-id="O006-PSU-012-U0234">
+<style>.codeblock-with-label pre.lang-label-1::before { content: "R"; }</style>
+<div class="code-copy-outer-scaffold" data-o006-id="O006-PSU-012-U0235"><div class="sourceCode cell-code" data-language-name-skip="true" data-o006-id="O006-PSU-012-U0236" id="cb1"><pre class="sourceCode r lang-label-1 code-with-copy" data-o006-id="O006-PSU-012-U0237"><code class="sourceCode r" data-o006-id="O006-PSU-012-U0238"><span id="cb1-1"><a aria-hidden="true" data-o006-id="O006-PSU-012-U0239" href="#cb1-1" tabindex="-1"></a><span class="fu">qbeta</span>(<span class="fl">0.05</span>, <span class="at">shape1=</span><span class="dv">4</span>, <span class="at">shape2=</span><span class="dv">4</span>) </span></code></pre></div><button class="code-copy-button" data-o006-id="O006-PSU-012-U0240" title="Copy to Clipboard"><i class="bi"></i></button></div>
+</div>
+<div class="cell-output cell-output-stdout" data-o006-id="O006-PSU-012-U0241">
+<pre data-o006-id="O006-PSU-012-U0242"><code data-o006-id="O006-PSU-012-U0243">[1] 0.2253216</code></pre>
+</div>
+<div class="codeblock-with-label r" data-o006-id="O006-PSU-012-U0244">
+<style>.codeblock-with-label pre.lang-label-2::before { content: "R"; }</style>
+<div class="code-copy-outer-scaffold" data-o006-id="O006-PSU-012-U0245"><div class="sourceCode cell-code" data-o006-id="O006-PSU-012-U0246" id="cb3"><pre class="sourceCode r lang-label-2 code-with-copy" data-o006-id="O006-PSU-012-U0247"><code class="sourceCode r" data-o006-id="O006-PSU-012-U0248"><span id="cb3-1"><a aria-hidden="true" data-o006-id="O006-PSU-012-U0249" href="#cb3-1" tabindex="-1"></a><span class="fu">qbeta</span>(<span class="fl">0.95</span>, <span class="at">shape1=</span><span class="dv">4</span>, <span class="at">shape2=</span><span class="dv">4</span>)</span></code></pre></div><button class="code-copy-button" data-o006-id="O006-PSU-012-U0250" title="Copy to Clipboard"><i class="bi"></i></button></div>
+</div>
+<div class="cell-output cell-output-stdout" data-o006-id="O006-PSU-012-U0251">
+<pre data-o006-id="O006-PSU-012-U0252"><code data-o006-id="O006-PSU-012-U0253">[1] 0.7746784</code></pre>
+</div>
+</div>
+<p data-o006-id="O006-PSU-012-U0254">Therefore, the 90% credible interval for <span class="math inline" data-o006-math-id="O006-PSU-012-M0258">\(p\)</span>, given <span class="math inline" data-o006-math-id="O006-PSU-012-M0259">\(Y=3\)</span>, is <span class="math inline" data-o006-math-id="O006-PSU-012-M0260">\((0.2253, 0.7747)\)</span>.</p>
+</section>
+</div>
+<section class="level3" data-number="11.3.1" data-o006-id="O006-PSU-012-U0255" id="summary">
+<h3 class="anchored" data-anchor-id="summary" data-number="11.3.1" data-o006-id="O006-PSU-012-U0256"><span class="header-section-number">11.3.1</span> Summary</h3>
+<p data-o006-id="O006-PSU-012-U0257">In this lesson, we shifted perspectives from frequentist to Bayesian thinking. While frequentist methods treat parameters as fixed but unknown values, Bayesian methods treat parameters as random variables with probability distributions. This shift allows us to incorporate prior beliefs and update them with data using Bayes’ Theorem.</p>
+<p data-o006-id="O006-PSU-012-U0258">We started by understanding <strong>subjective probability</strong>, where a Bayesian uses available information (like betting amounts on horses) to assign probabilities to uncertain events. Then we explored how Bayesians estimate parameters using a <strong>prior distribution</strong> and <strong>likelihood</strong> to derive a <strong>posterior distribution</strong>.</p>
+<p data-o006-id="O006-PSU-012-U0259">We also saw that Bayesian estimation often leads to posterior distributions with familiar forms—like a <strong>beta distribution</strong> for binomial data with a beta prior. A Bayesian point estimate depends on the chosen <strong>loss function</strong>. If minimizing <strong>squared error</strong>, the best estimate is the <strong>posterior mean.</strong></p>
+<p data-o006-id="O006-PSU-012-U0260">This lesson introduced the Bayesian view of learning from data: combining prior beliefs with observed evidence to make probabilistic statements about unknown parameters. While this was just a glimpse into the Bayesian world, it showed how flexible and intuitive the approach can be.</p>
+<p data-o006-id="O006-PSU-012-U0261"><strong>Key Takeways:</strong></p>
+<ul data-o006-id="O006-PSU-012-U0262">
+<li data-o006-id="O006-PSU-012-U0263">Mathematically, if <span class="math inline" data-o006-math-id="O006-PSU-012-M0261">\(\theta\)</span> is the parameter and <span class="math inline" data-o006-math-id="O006-PSU-012-M0262">\(y\)</span> is the data, the posterior distribution is: <span class="math inline" data-o006-math-id="O006-PSU-012-M0263">\(k(\theta|y)=\frac{g(y|\theta)}{k_1(y)}\)</span></li>
+<li data-o006-id="O006-PSU-012-U0264"><strong>Credible intervals</strong>, which are Bayesian counterparts to confidence intervals, satisfies: <span class="math inline" data-o006-math-id="O006-PSU-012-M0264">\(\int_{a(y)}^{b(y)} k(\theta|y)d\theta=1-\alpha\)</span></li>
+</ul>
+</section>
+</section>
+</main>
+</body>
+</html>
