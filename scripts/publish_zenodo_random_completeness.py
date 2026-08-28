@@ -448,10 +448,10 @@ def metadata() -> dict[str, object]:
                 "scheme": "url",
             },
             {
-                "identifier": "https://doi.org/10.5281/zenodo.22076539",
+                "identifier": "10.5281/zenodo.22076539",
                 "relation": "isSupplementedBy",
                 "resource_type": "publication-book",
-                "scheme": "url",
+                "scheme": "doi",
             },
             {
                 "identifier": "https://github.com/KokunoYumeto/penn-state-stat-415-id",
