@@ -13,6 +13,11 @@ Batch pertama menghubungkan Pelajaran 07–10 ke teori likelihood reguler yang
 eksplisit, contoh nonreguler, teori uji optimal, risiko/efisiensi, simulasi
 reproduktif, set penguasaan lengkap, dan asesmen kumulatif.
 
+Batch kedua mengembangkan Pelajaran 12 menjadi model linear Gaussian desain
+tetap dalam bentuk matriks. Ia memisahkan geometri OLS, teorema Gauss–Markov,
+likelihood Gaussian, inferensi eksak, dan diagnostik menurut asumsi yang benar,
+lalu mengujinya melalui simulasi seeded dan satu set penguasaan lengkap.
+
 <a id="O006-C140-CMP-INDEX-SEC002"></a>
 ## Urutan teori C1
 
@@ -46,6 +51,28 @@ SVG statis, serta assertion numerik. Tidak ada runtime jaringan atau browser.
 
 Setiap masalah memiliki prasyarat, tujuan, tingkat kesulitan, tag miskonsepsi,
 petunjuk bertahap, jawaban singkat, dan solusi lengkap. C1 adalah checkpoint
-substansial, bukan akhir pendamping: model linear matriks, perbandingan
-Bayesian–frequentist, set penguasaan serta asesmen sisanya, dan dua capstone
-masih mengikuti urutan pada kontrol hidup.
+substansial, bukan akhir pendamping. C2 di bawah menutup model linear matriks;
+perbandingan Bayesian–frequentist, set penguasaan serta asesmen sisanya, dan dua
+capstone masih mengikuti urutan pada kontrol hidup.
+
+<a id="O006-C140-CMP-INDEX-SEC005"></a>
+## Model linear matriks C2
+
+1. [ref:O006-C140-CMP-D008] — ruang kolom, proyeksi, rank, dan keterestimasi;
+2. [ref:O006-C140-CMP-D009] — OLS, MLE Gaussian, dan Gauss–Markov;
+3. [ref:O006-C140-CMP-D010] — hukum eksak, uji t/F, ANOVA, interval, dan prediksi;
+4. [ref:O006-C140-CMP-D011] — residual, leverage, pengaruh, misspesifikasi,
+   heteroskedastisitas, dan batas inferensi pascaseleksi.
+
+<a id="O006-C140-CMP-INDEX-SEC006"></a>
+## Laboratorium dan penguasaan C2
+
+- [ref:O006-C140-CMP-SIM005] menguji coverage Gaussian eksak, kegagalan galat
+  baku klasik di bawah heteroskedastisitas, perbaikan HC3, dan pengaruh titik
+  ber-leverage tinggi.
+- [ref:O006-C140-CMP-MS12] menyediakan delapan masalah nontrivial dengan
+  petunjuk bertahap, jawaban singkat, dan solusi penuh.
+
+C2 menutup batas regresi matriks yang ditetapkan untuk pendamping. Pendamping
+tetap berstatus produksi sampai perbandingan Bayesian–frequentist, set
+penguasaan yang tersisa, empat asesmen kumulatif, dan dua capstone selesai.

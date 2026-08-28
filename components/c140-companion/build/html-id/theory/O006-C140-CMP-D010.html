@@ -1,0 +1,706 @@
+<!doctype html>
+<html lang="id-ID">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="generator" content="OpenAI Codex gpt-5.6-sol, Ultra">
+<title>Inferensi Gaussian eksak: proyeksi, t, F, ANOVA, dan prediksi</title>
+<link rel="stylesheet" href="../assets/style.css">
+<script>window.MathJax={loader:{load:['[tex]/boldsymbol']},tex:{packages:{'[+]':['boldsymbol']},inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']]},svg:{fontCache:'local'}};</script>
+<script defer src="../assets/MathJax/tex-svg.js"></script>
+</head>
+<body>
+<div class="shell">
+<nav class="sidebar" aria-label="Daftar isi pendamping"><h2>Isi pendamping</h2><ol><li><a href="../index.html">Pendamping Orisinal Statistika Matematis</a></li><li><a href="O006-C140-CMP-D001.html">Model parametrik reguler, skor, dan informasi Fisher</a></li><li><a href="O006-C140-CMP-D002.html">Konsistensi MLE: identifikasi Kullback–Leibler dan teorema argmax</a></li><li><a href="O006-C140-CMP-D003.html">Likelihood kuadratik lokal, normalitas asimtotik, dan delta method</a></li><li><a href="O006-C140-CMP-D004.html">Prosedur Wald, skor, dan rasio likelihood</a></li><li><a href="O006-C140-CMP-D005.html">Likelihood nonreguler: empat mekanisme kegagalan</a></li><li><a href="O006-C140-CMP-D006.html">Optimalitas pengujian: Neyman–Pearson, MP, UMP, dan rasio likelihood monoton</a></li><li><a href="O006-C140-CMP-D007.html">Loss, risk, efisiensi, Rao–Blackwell, dan Lehmann–Scheffé</a></li><li><a href="O006-C140-CMP-D008.html">Model linear Gaussian desain tetap dan geometri proyeksi</a></li><li><a href="O006-C140-CMP-D009.html">OLS, MLE Gaussian, dan teorema Gauss–Markov pada rancangan tetap</a></li><li><a href="O006-C140-CMP-D010.html">Inferensi Gaussian eksak: proyeksi, t, F, ANOVA, dan prediksi</a></li><li><a href="O006-C140-CMP-D011.html">Diagnostik, leverage, misspesifikasi, dan inferensi pascaseleksi</a></li><li><a href="../simulations/O006-C140-CMP-SIM001.html">Model lokasi normal: MLE, coverage, dan tiga statistik uji</a></li><li><a href="../simulations/O006-C140-CMP-SIM002.html">Delta method pada titik reguler dan titik dengan turunan nol</a></li><li><a href="../simulations/O006-C140-CMP-SIM003.html">Endpoint Uniform: laju nonreguler dan kegagalan bootstrap biasa</a></li><li><a href="../simulations/O006-C140-CMP-SIM004.html">Uji Neyman–Pearson teracak dengan size tepat</a></li><li><a href="../simulations/O006-C140-CMP-SIM005.html">Model linear matriks: coverage, heteroskedastisitas, dan pengaruh</a></li><li><a href="../mastery/O006-C140-CMP-MS07.html">Set penguasaan 07 — regularitas, konsistensi, dan normalitas MLE</a></li><li><a href="../mastery/O006-C140-CMP-MS08.html">Set penguasaan 08 — Wald, skor, rasio likelihood, dan diagnosis nonregular</a></li><li><a href="../mastery/O006-C140-CMP-MS09.html">Set penguasaan 09 — pengujian eksak dan optimalitas Neyman–Pearson</a></li><li><a href="../mastery/O006-C140-CMP-MS10.html">Set penguasaan 10 — uji likelihood asimtotik, risk, dan perbaikan estimator</a></li><li><a href="../mastery/O006-C140-CMP-MS12.html">Set penguasaan 12 — model linear Gaussian matriks, inferensi eksak, dan diagnostik</a></li><li><a href="../assessments/O006-C140-CMP-CA01.html">Asesmen kumulatif C1: likelihood, optimalitas, dan keputusan statistik</a></li></ol></nav>
+<main>
+<div class="metadata"><strong>O006-C140-CMP-D010</strong> · id-ID · CC BY-SA 4.0 · OpenAI Codex gpt-5.6-sol, Ultra</div>
+<p><a id="O006-C140-CMP-D010-SEC01"></a></p>
+<h1>Inferensi hingga-sampel dari geometri Gaussian</h1>
+<p>Inferensi regresi yang disebut “eksak” bukanlah kumpulan rumus terpisah.
+Semua hukum <span class="math-inline" role="math">\(t\)</span>, <span class="math-inline" role="math">\(F\)</span>, chi-kuadrat, ANOVA, interval kepercayaan, dan interval
+prediksi dalam bab ini berasal dari satu fakta geometris: vektor normal
+sferis yang diproyeksikan ke subruang ortogonal menghasilkan komponen normal
+yang independen. Rank setiap proyeksi menjadi derajat bebasnya.</p>
+<p>Kata <strong>eksak</strong> di sini berarti distribusi hingga-sampel, bersyarat pada matriks
+desain yang tetap. Ia tidak berarti tahan terhadap salah spesifikasi. Setiap
+hasil akan menyebut syarat rank, ruang mean, kenormalan, homoskedastisitas,
+dan independensi yang membuat distribusinya benar.</p>
+<p><a id="O006-C140-CMP-D010-ASM01"></a></p>
+<h2>Model, rank, dan ruang yang diproyeksikan</h2>
+<p>Ambil model linear Gaussian berdesain tetap</p>
+<div class="math-display" role="math">\[Y=X\beta+\varepsilon,
+\qquad
+\varepsilon\sim N_n(0,\sigma^2I_n),
+\qquad \sigma^2&gt;0,\]</div>
+<p>dengan <span class="math-inline" role="math">\(Y\in\mathbb R^n\)</span>, matriks nonacak <span class="math-inline" role="math">\(X\in\mathbb R^{n\times p}\)</span>,
+dan</p>
+<div class="math-display" role="math">\[r=\operatorname{rank}(X),\qquad 1\le r&lt;n.\]</div>
+<p>Ketaksamaan <span class="math-inline" role="math">\(r&lt;n\)</span> wajib untuk mengestimasi <span class="math-inline" role="math">\(\sigma^2\)</span> dari residual. Kita
+tidak langsung mengasumsikan <span class="math-inline" role="math">\(r=p\)</span>: bentuk proyeksi tetap sah ketika kolom
+<span class="math-inline" role="math">\(X\)</span> berdependensi linear, sedangkan rumus koefisien biasa akan diberi syarat
+rank penuh secara terpisah.</p>
+<p>Tuliskan <span class="math-inline" role="math">\(\mathcal S=\mathcal C(X)\)</span> untuk ruang kolom <span class="math-inline" role="math">\(X\)</span>,
+<span class="math-inline" role="math">\(X^+\)</span> untuk invers Moore–Penrose, dan</p>
+<div class="math-display" role="math">\[P_X=XX^+,
+\qquad
+M_X=I_n-P_X.\]</div>
+<p><span class="math-inline" role="math">\(P_X\)</span> adalah proyektor ortogonal ke <span class="math-inline" role="math">\(\mathcal S\)</span> dan <span class="math-inline" role="math">\(M_X\)</span> proyektor
+ortogonal ke <span class="math-inline" role="math">\(\mathcal S^\perp\)</span>. Karena itu</p>
+<div class="math-display" role="math">\[P_X^\top=P_X,\qquad P_X^2=P_X,\qquad
+M_X^\top=M_X,\qquad M_X^2=M_X,\qquad P_XM_X=0,\]</div>
+<p>dengan <span class="math-inline" role="math">\(\operatorname{rank}(P_X)=r\)</span> dan
+<span class="math-inline" role="math">\(\operatorname{rank}(M_X)=n-r\)</span>.</p>
+<p><a id="O006-C140-CMP-D010-DEF01"></a></p>
+<h2>Nilai suaian unik dan fungsi linear yang terestimasi</h2>
+<p>Jika <span class="math-inline" role="math">\(r&lt;p\)</span>, parameter <span class="math-inline" role="math">\(\beta\)</span> tidak teridentifikasi secara unik: dua vektor
+yang berbeda dapat memberi mean <span class="math-inline" role="math">\(X\beta\)</span> yang sama. Namun nilai suaian dan
+residual selalu unik,</p>
+<div class="math-display" role="math">\[\widehat\mu=P_XY,
+\qquad
+e=M_XY=Y-\widehat\mu.\]</div>
+<p>Fungsi <span class="math-inline" role="math">\(c^\top\beta\)</span> disebut <strong>terestimasi</strong> (<em>estimable</em>) tepat ketika</p>
+<div class="math-display" role="math">\[c\in\mathcal C(X^\top).\]</div>
+<p>Ekuivalennya, terdapat <span class="math-inline" role="math">\(a\in\mathbb R^n\)</span> sehingga <span class="math-inline" role="math">\(c=X^\top a\)</span>; lalu
+<span class="math-inline" role="math">\(c^\top\beta=a^\top X\beta\)</span> hanya bergantung pada mean teridentifikasi.
+Apabila <span class="math-inline" role="math">\(c\notin\mathcal C(X^\top)\)</span>, tidak ada data dari model ini yang dapat
+membedakan seluruh nilai <span class="math-inline" role="math">\(c^\top\beta\)</span> yang mungkin. Interval kepercayaan
+untuk target semacam itu bukan sekadar sulit: targetnya tidak teridentifikasi.</p>
+<p><a id="O006-C140-CMP-D010-THM01"></a></p>
+<h2>Hukum proyeksi normal dan kuadrat panjangnya</h2>
+<p>Misalkan secara lebih umum</p>
+<div class="math-display" role="math">\[Y\sim N_n(\mu,\sigma^2I_n)\]</div>
+<p>dan <span class="math-inline" role="math">\(P\)</span> matriks simetris-idempoten dengan rank <span class="math-inline" role="math">\(k\)</span>. Maka</p>
+<div class="math-display" role="math">\[PY\sim N_n(P\mu,\sigma^2P)\]</div>
+<p>sebagai normal yang mungkin degenerat, dan</p>
+<div class="math-display" role="math">\[\frac{Y^\top PY}{\sigma^2}
+=\frac{\lVert PY\rVert^2}{\sigma^2}
+\sim\chi^2_k(\lambda),
+\qquad
+\lambda=\frac{\mu^\top P\mu}{\sigma^2}.\]</div>
+<p>Distribusi itu sentral tepat ketika <span class="math-inline" role="math">\(P\mu=0\)</span>. Jika <span class="math-inline" role="math">\(P\)</span> dan <span class="math-inline" role="math">\(Q\)</span> keduanya
+proyektor ortogonal dan <span class="math-inline" role="math">\(PQ=0\)</span>, maka <span class="math-inline" role="math">\(PY\)</span> dan <span class="math-inline" role="math">\(QY\)</span> independen; akibatnya
+<span class="math-inline" role="math">\(Y^\top PY\)</span> dan <span class="math-inline" role="math">\(Y^\top QY\)</span> juga independen.</p>
+<p><a id="O006-C140-CMP-D010-PRF01"></a></p>
+<h3>Bukti</h3>
+<p>Pilih matriks <span class="math-inline" role="math">\(U\in\mathbb R^{n\times k}\)</span> dengan kolom ortonormal yang
+merentang range <span class="math-inline" role="math">\(P\)</span>. Maka <span class="math-inline" role="math">\(P=UU^\top\)</span>. Lengkapi <span class="math-inline" role="math">\(U\)</span> menjadi matriks ortogonal
+<span class="math-inline" role="math">\(O=[U\;U_\perp]\)</span>. Karena transformasi ortogonal mempertahankan kovarians
+sferis,</p>
+<div class="math-display" role="math">\[O^\top Y\sim N_n(O^\top\mu,\sigma^2I_n).\]</div>
+<p>Jadi koordinat <span class="math-inline" role="math">\(Z=U^\top Y/\sigma\)</span> saling independen dan</p>
+<div class="math-display" role="math">\[Z\sim N_k(U^\top\mu/\sigma,I_k).\]</div>
+<p>Selanjutnya</p>
+<div class="math-display" role="math">\[\frac{Y^\top PY}{\sigma^2}
+=\frac{Y^\top UU^\top Y}{\sigma^2}
+=Z^\top Z.\]</div>
+<p>Jumlah kuadrat <span class="math-inline" role="math">\(k\)</span> normal independen dengan mean
+<span class="math-inline" role="math">\(U^\top\mu/\sigma\)</span> adalah chi-kuadrat noncentral dengan parameter</p>
+<div class="math-display" role="math">\[\lVert U^\top\mu/\sigma\rVert^2
+=\mu^\top UU^\top\mu/\sigma^2
+=\mu^\top P\mu/\sigma^2.\]</div>
+<p>Untuk bagian independensi, <span class="math-inline" role="math">\(PQ=0\)</span> memberi</p>
+<div class="math-display" role="math">\[\operatorname{Cov}(PY,QY)=\sigma^2PQ=0.\]</div>
+<p>Vektor gabungan <span class="math-inline" role="math">\((PY,QY)\)</span> normal multivariat. Bagi vektor normal bersama,
+kovarians silang nol mengimplikasikan independensi, termasuk pada support
+linear yang degenerat. Fungsi terukur dari dua vektor independen juga
+independen, sehingga kedua bentuk kuadratik independen. ∎</p>
+<p><a id="O006-C140-CMP-D010-THM02"></a></p>
+<h2>Teorema Cochran dalam bentuk proyeksi</h2>
+<p>Misalkan <span class="math-inline" role="math">\(P_1,\ldots,P_m\)</span> proyektor ortogonal yang range-nya saling
+ortogonal:</p>
+<div class="math-display" role="math">\[P_iP_j=0\quad(i\ne j).\]</div>
+<p>Jika <span class="math-inline" role="math">\(Y\sim N_n(\mu,\sigma^2I_n)\)</span> dan
+<span class="math-inline" role="math">\(k_j=\operatorname{rank}(P_j)\)</span>, maka bentuk-bentuk</p>
+<div class="math-display" role="math">\[\frac{Y^\top P_jY}{\sigma^2}
+\sim\chi^2_{k_j}
+\left(\frac{\mu^\top P_j\mu}{\sigma^2}\right),
+\qquad j=1,\ldots,m,\]</div>
+<p>saling independen. Jika juga <span class="math-inline" role="math">\(\sum_{j=1}^mP_j=I_n\)</span>, maka
+<span class="math-inline" role="math">\(\sum_jk_j=n\)</span> dan</p>
+<div class="math-display" role="math">\[\lVert Y\rVert^2=\sum_{j=1}^mY^\top P_jY.\]</div>
+<p>Inilah versi Teorema Cochran yang diperlukan di seluruh bab. Versi sentral
+diperoleh bila <span class="math-inline" role="math">\(P_j\mu=0\)</span> untuk setiap kuadrat yang sedang dipakai sebagai
+noise murni.</p>
+<p><a id="O006-C140-CMP-D010-PRF02"></a></p>
+<h3>Bukti</h3>
+<p>Gabungkan basis ortonormal bagi range <span class="math-inline" role="math">\(P_1,\ldots,P_m\)</span>. Karena range-range
+itu ortogonal, semua vektor basis gabungan tetap ortonormal. Lengkapi menjadi
+basis ortonormal <span class="math-inline" role="math">\(\mathbb R^n\)</span>. Dalam koordinat basis ini, setiap
+<span class="math-inline" role="math">\(Y^\top P_jY\)</span> adalah jumlah kuadrat dari satu blok koordinat normal yang
+tidak bertumpang tindih. Blok-blok koordinat normal tersebut independen,
+sehingga hukum marginal dan independensinya mengikuti bukti
+<a class="xref" data-target-id="O006-C140-CMP-D010-PRF01" href="O006-C140-CMP-D010.html#O006-C140-CMP-D010-PRF01">Bukti</a>.</p>
+<p>Jika jumlah proyektor adalah <span class="math-inline" role="math">\(I_n\)</span>, range-range itu membentuk jumlah langsung
+ortogonal seluruh <span class="math-inline" role="math">\(\mathbb R^n\)</span>. Dimensi menjumlah menjadi <span class="math-inline" role="math">\(n\)</span>, dan identitas
+Pythagoras memberi dekomposisi kuadrat panjang. ∎</p>
+<p><a id="O006-C140-CMP-D010-THM03"></a></p>
+<h2>Hukum eksak nilai suaian, residual, dan penduga varians residual</h2>
+<p>Di bawah model <a class="xref" data-target-id="O006-C140-CMP-D010-ASM01" href="O006-C140-CMP-D010.html#O006-C140-CMP-D010-ASM01">Model, rank, dan ruang yang diproyeksikan</a>, berlaku</p>
+<div class="math-display" role="math">\[\widehat\mu=P_XY\sim N_n(X\beta,\sigma^2P_X),\]</div>
+<div class="math-display" role="math">\[e=M_XY\sim N_n(0,\sigma^2M_X),\]</div>
+<p>dan <span class="math-inline" role="math">\(\widehat\mu\)</span> independen dari <span class="math-inline" role="math">\(e\)</span>. Lebih lanjut, dengan</p>
+<div class="math-display" role="math">\[\operatorname{SSE}=e^\top e=Y^\top M_XY,
+\qquad
+\nu=n-r,
+\qquad
+s^2=\frac{\operatorname{SSE}}{\nu},\]</div>
+<p>kita mempunyai</p>
+<div class="math-display" role="math">\[\frac{\operatorname{SSE}}{\sigma^2}\sim\chi^2_\nu,
+\qquad
+E(s^2)=\sigma^2,
+\qquad
+\operatorname{Var}(s^2)=\frac{2\sigma^4}{\nu}.\]</div>
+<p><span class="math-inline" role="math">\(s^2\)</span> independen dari setiap fungsi terukur <span class="math-inline" role="math">\(P_XY\)</span>, termasuk setiap
+estimator linear terestimasi yang dibentuk dari nilai suaian.</p>
+<p><a id="O006-C140-CMP-D010-PRF03"></a></p>
+<h3>Bukti</h3>
+<p>Karena <span class="math-inline" role="math">\(X\beta\in\mathcal C(X)\)</span>,</p>
+<div class="math-display" role="math">\[P_XX\beta=X\beta,
+\qquad
+M_XX\beta=0.\]</div>
+<p>Maka</p>
+<div class="math-display" role="math">\[P_XY=X\beta+P_X\varepsilon,
+\qquad
+M_XY=M_X\varepsilon.\]</div>
+<p>Transformasi linear normal memberi kedua hukum normal yang dinyatakan.
+Selain itu <span class="math-inline" role="math">\(P_XM_X=0\)</span>, sehingga independensi mengikuti
+<a class="xref" data-target-id="O006-C140-CMP-D010-THM01" href="O006-C140-CMP-D010.html#O006-C140-CMP-D010-THM01">Hukum proyeksi normal dan kuadrat panjangnya</a>. Proyektor <span class="math-inline" role="math">\(M_X\)</span> ber-rank <span class="math-inline" role="math">\(n-r=\nu\)</span> dan
+menghilangkan mean. Teorema yang sama memberi
+<span class="math-inline" role="math">\(\operatorname{SSE}/\sigma^2\sim\chi^2_\nu\)</span>.</p>
+<p>Jika <span class="math-inline" role="math">\(U\sim\chi^2_\nu\)</span>, maka <span class="math-inline" role="math">\(E(U)=\nu\)</span> dan
+<span class="math-inline" role="math">\(\operatorname{Var}(U)=2\nu\)</span>. Karena
+<span class="math-inline" role="math">\(s^2=\sigma^2U/\nu\)</span>, dua momen yang dinyatakan segera mengikuti. ∎</p>
+<p><a id="O006-C140-CMP-D010-CTR01"></a></p>
+<h2>Apa yang terjadi bila ruang mean salah</h2>
+<p>Anggap kovarians masih <span class="math-inline" role="math">\(\sigma^2I_n\)</span> dan data masih normal, tetapi mean
+sebenarnya <span class="math-inline" role="math">\(\mu\)</span> tidak harus berada dalam <span class="math-inline" role="math">\(\mathcal C(X)\)</span>. Proyeksi tetap
+independen, tetapi residual tidak lagi noise sentral:</p>
+<div class="math-display" role="math">\[\frac{\operatorname{SSE}}{\sigma^2}
+\sim\chi^2_{n-r}(\lambda_{\mathrm{mis}}),
+\qquad
+\lambda_{\mathrm{mis}}
+=\frac{\lVert M_X\mu\rVert^2}{\sigma^2}.\]</div>
+<p>Akibatnya</p>
+<div class="math-display" role="math">\[E(s^2)
+=\sigma^2+\frac{\lVert M_X\mu\rVert^2}{n-r}.\]</div>
+<p>Jadi membagi SSE dengan derajat bebas tidak “memperbaiki” salah spesifikasi.
+Ia tak-bias bagi <span class="math-inline" role="math">\(\sigma^2\)</span> hanya ketika mean benar-benar berada di ruang
+model. Bentuk noncentral ini juga menjelaskan mengapa uji lack-of-fit
+memerlukan replikasi atau struktur pembanding: satu SSE mencampur variasi
+acak dengan komponen mean yang tidak tertangkap model.</p>
+<p><a id="O006-C140-CMP-D010-DEF02"></a></p>
+<h2>Spesialisasi rank kolom penuh</h2>
+<p>Untuk rumus koefisien eksplisit, mulai sekarang andaikan</p>
+<div class="math-display" role="math">\[\operatorname{rank}(X)=p&lt;n.\]</div>
+<p>Maka</p>
+<div class="math-display" role="math">\[\widehat\beta=(X^\top X)^{-1}X^\top Y,
+\qquad
+\widehat\beta\sim
+N_p\{\beta,\sigma^2(X^\top X)^{-1}\},\]</div>
+<p>dan <span class="math-inline" role="math">\(\widehat\beta\)</span> independen dari <span class="math-inline" role="math">\(s^2\)</span>. Untuk <span class="math-inline" role="math">\(c\in\mathbb R^p\)</span> yang
+tidak nol, definisikan</p>
+<div class="math-display" role="math">\[v_c=c^\top(X^\top X)^{-1}c&gt;0.\]</div>
+<p>Jika <span class="math-inline" role="math">\(X\)</span> tidak ber-rank kolom penuh, semua hasil koefisien di bawah tetap
+dapat dinyatakan bagi fungsi yang terestimasi dengan suatu generalized
+inverse. Namun koefisien individual yang tidak terestimasi tidak memperoleh
+makna hanya karena perangkat lunak memilih satu invers umum.</p>
+<p><a id="O006-C140-CMP-D010-THM04"></a></p>
+<h2>Hukum t dan interval kepercayaan bagi satu kontras</h2>
+<p>Di bawah <a class="xref" data-target-id="O006-C140-CMP-D010-ASM01" href="O006-C140-CMP-D010.html#O006-C140-CMP-D010-ASM01">Model, rank, dan ruang yang diproyeksikan</a> dan
+<a class="xref" data-target-id="O006-C140-CMP-D010-DEF02" href="O006-C140-CMP-D010.html#O006-C140-CMP-D010-DEF02">Spesialisasi rank kolom penuh</a>, untuk setiap <span class="math-inline" role="math">\(c\ne0\)</span>,</p>
+<div class="math-display" role="math">\[T_c=
+\frac{c^\top\widehat\beta-c^\top\beta}
+{s\sqrt{v_c}}
+\sim t_\nu,
+\qquad \nu=n-p.\]</div>
+<p>Karena itu interval kepercayaan dua-sisi dengan peluang cakupan tepat
+<span class="math-inline" role="math">\(1-\alpha\)</span> bagi <span class="math-inline" role="math">\(c^\top\beta\)</span> adalah</p>
+<div class="math-display" role="math">\[c^\top\widehat\beta
+\;\pm\;
+t_{\nu,1-\alpha/2}\,s\sqrt{v_c}.\]</div>
+<p>Peluang cakupan ini bersyarat pada <span class="math-inline" role="math">\(X\)</span> dan berlaku sebelum data dipakai untuk
+memilih <span class="math-inline" role="math">\(c\)</span>.</p>
+<p><a id="O006-C140-CMP-D010-PRF04"></a></p>
+<h3>Bukti</h3>
+<p>Dari hukum normal <span class="math-inline" role="math">\(\widehat\beta\)</span>,</p>
+<div class="math-display" role="math">\[Z=
+\frac{c^\top\widehat\beta-c^\top\beta}
+{\sigma\sqrt{v_c}}
+\sim N(0,1).\]</div>
+<p>Menurut <a class="xref" data-target-id="O006-C140-CMP-D010-THM03" href="O006-C140-CMP-D010.html#O006-C140-CMP-D010-THM03">Hukum eksak nilai suaian, residual, dan penduga varians residual</a>,</p>
+<div class="math-display" role="math">\[U=\frac{\nu s^2}{\sigma^2}
+=\frac{\operatorname{SSE}}{\sigma^2}
+\sim\chi^2_\nu\]</div>
+<p>dan <span class="math-inline" role="math">\(U\)</span> independen dari <span class="math-inline" role="math">\(Z\)</span>. Jadi</p>
+<div class="math-display" role="math">\[T_c=\frac{Z}{\sqrt{U/\nu}}\sim t_\nu\]</div>
+<p>menurut definisi distribusi t. Membalik kejadian
+<span class="math-inline" role="math">\(-t_{\nu,1-\alpha/2}\le T_c\le t_{\nu,1-\alpha/2}\)</span> menghasilkan interval
+yang dinyatakan dan probabilitas tepat <span class="math-inline" role="math">\(1-\alpha\)</span>. ∎</p>
+<p><a id="O006-C140-CMP-D010-EX01"></a></p>
+<h2>Kontras dan satu koefisien bukan selalu hal yang sama</h2>
+<p>Dalam model dengan intercept, indikator perlakuan, dan kovariat, efek
+perlakuan bersyarat mungkin koefisien satu kolom. Dalam parameterisasi lain,
+efek yang sama dapat menjadi selisih dua koefisien. Yang invarian terhadap
+parameterisasi adalah fungsi mean yang terestimasi, bukan nama koefisien.</p>
+<p>Misalnya, jika target adalah selisih mean suaian pada dua baris desain
+<span class="math-inline" role="math">\(x_a^\top\)</span> dan <span class="math-inline" role="math">\(x_b^\top\)</span>, ambil</p>
+<div class="math-display" role="math">\[c=x_a-x_b.\]</div>
+<p>Targetnya <span class="math-inline" role="math">\(c^\top\beta\)</span>, dan galat bakunya</p>
+<div class="math-display" role="math">\[s\sqrt{(x_a-x_b)^\top(X^\top X)^{-1}(x_a-x_b)}.\]</div>
+<p>Rumus ini juga menunjukkan bahwa memperlakukan dua mean suaian sebagai
+independen biasanya salah; kovarians keduanya sudah tercakup oleh bentuk
+kuadratik tersebut.</p>
+<p><a id="O006-C140-CMP-D010-DEF03"></a></p>
+<h2>Hipotesis linear umum</h2>
+<p>Pertimbangkan hipotesis</p>
+<div class="math-display" role="math">\[H_0:C\beta=d,\]</div>
+<p>dengan <span class="math-inline" role="math">\(C\in\mathbb R^{q\times p}\)</span> ber-rank baris penuh <span class="math-inline" role="math">\(q\)</span>, <span class="math-inline" role="math">\(1\le q\le p\)</span>,
+dan <span class="math-inline" role="math">\(d\in\mathbb R^q\)</span>. Di bawah rank kolom penuh <span class="math-inline" role="math">\(X\)</span>, matriks</p>
+<div class="math-display" role="math">\[V_C=C(X^\top X)^{-1}C^\top\]</div>
+<p>positif definit. Definisikan jumlah kuadrat hipotesis</p>
+<div class="math-display" role="math">\[Q_H=(C\widehat\beta-d)^\top
+V_C^{-1}(C\widehat\beta-d).\]</div>
+<p><span class="math-inline" role="math">\(Q_H\)</span> berdimensi kuadrat respons; pembagian dengan <span class="math-inline" role="math">\(s^2\)</span> membuat statistik
+tak berdimensi. Syarat rank penuh <span class="math-inline" role="math">\(C\)</span> mencegah pembatasan yang sama dihitung
+dua kali.</p>
+<p><a id="O006-C140-CMP-D010-THM05"></a></p>
+<h2>Uji F eksak untuk hipotesis linear umum</h2>
+<p>Di bawah model, rank, dan <span class="math-inline" role="math">\(H_0\)</span> pada <a class="xref" data-target-id="O006-C140-CMP-D010-DEF03" href="O006-C140-CMP-D010.html#O006-C140-CMP-D010-DEF03">Hipotesis linear umum</a>,</p>
+<div class="math-display" role="math">\[F_H=\frac{Q_H/q}{s^2}\sim F_{q,\nu},
+\qquad \nu=n-p.\]</div>
+<p>Di bawah alternatif tetap <span class="math-inline" role="math">\(C\beta\ne d\)</span>,</p>
+<div class="math-display" role="math">\[F_H\sim F_{q,\nu}(\lambda),
+\qquad
+\lambda=
+\frac{(C\beta-d)^\top V_C^{-1}(C\beta-d)}{\sigma^2}.\]</div>
+<p>Karena itu power eksak pada alternatif tertentu dapat dihitung dari ekor
+distribusi F noncentral, bukan dengan mengganti <span class="math-inline" role="math">\(\sigma^2\)</span> secara diam-diam
+dengan nilai yang dipilih setelah melihat data.</p>
+<p><a id="O006-C140-CMP-D010-PRF05"></a></p>
+<h3>Bukti</h3>
+<p>Kita mempunyai</p>
+<div class="math-display" role="math">\[C\widehat\beta-d
+\sim N_q(C\beta-d,\sigma^2V_C).\]</div>
+<p>Ambil akar positif definit <span class="math-inline" role="math">\(V_C^{-1/2}\)</span> dan definisikan</p>
+<div class="math-display" role="math">\[W=\frac{V_C^{-1/2}(C\widehat\beta-d)}{\sigma}.\]</div>
+<p>Di bawah <span class="math-inline" role="math">\(H_0\)</span>, <span class="math-inline" role="math">\(W\sim N_q(0,I_q)\)</span>, sehingga</p>
+<div class="math-display" role="math">\[\frac{Q_H}{\sigma^2}=W^\top W\sim\chi^2_q.\]</div>
+<p>Di bawah alternatif, mean <span class="math-inline" role="math">\(W\)</span> adalah
+<span class="math-inline" role="math">\(V_C^{-1/2}(C\beta-d)/\sigma\)</span>, sehingga kuadrat panjangnya mempunyai
+chi-kuadrat noncentral dengan parameter <span class="math-inline" role="math">\(\lambda\)</span> yang dinyatakan.</p>
+<p><span class="math-inline" role="math">\(C\widehat\beta\)</span> adalah fungsi <span class="math-inline" role="math">\(P_XY\)</span>, sedangkan <span class="math-inline" role="math">\(s^2\)</span> adalah fungsi
+<span class="math-inline" role="math">\(M_XY\)</span>. Keduanya independen menurut
+<a class="xref" data-target-id="O006-C140-CMP-D010-THM03" href="O006-C140-CMP-D010.html#O006-C140-CMP-D010-THM03">Hukum eksak nilai suaian, residual, dan penduga varians residual</a>. Karena
+<span class="math-inline" role="math">\(\nu s^2/\sigma^2\sim\chi^2_\nu\)</span>, rasio</p>
+<div class="math-display" role="math">\[\frac{(Q_H/\sigma^2)/q}{(\nu s^2/\sigma^2)/\nu}
+=\frac{Q_H/q}{s^2}\]</div>
+<p>mempunyai hukum F sentral di bawah nol dan F noncentral di bawah alternatif. ∎</p>
+<p><a id="O006-C140-CMP-D010-REM01"></a></p>
+<h2>Pembatasan terestimasi ketika desain ber-rank tak penuh</h2>
+<p>Jika <span class="math-inline" role="math">\(\operatorname{rank}(X)=r&lt;p\)</span>, hipotesis <span class="math-inline" role="math">\(C\beta=d\)</span> mempunyai makna
+data hanya bila setiap baris <span class="math-inline" role="math">\(C\)</span> berada dalam <span class="math-inline" role="math">\(\mathcal C(X^\top)\)</span>. Ambil
+invers umum (<em>generalized inverse</em>) <span class="math-inline" role="math">\(G\)</span> dari <span class="math-inline" role="math">\(X^\top X\)</span> dan bentuk</p>
+<div class="math-display" role="math">\[V_C=CGC^\top.\]</div>
+<p>Untuk pembatasan terestimasi, bentuk ini tidak bergantung pada pilihan
+invers umum pada subruang yang relevan. Hapus baris pembatasan yang
+redundan sampai <span class="math-inline" role="math">\(q=\operatorname{rank}(V_C)\)</span> dan <span class="math-inline" role="math">\(V_C\)</span> positif definit;
+barulah rumus <a class="xref" data-target-id="O006-C140-CMP-D010-THM05" href="O006-C140-CMP-D010.html#O006-C140-CMP-D010-THM05">Uji F eksak untuk hipotesis linear umum</a> berlaku dengan
+<span class="math-inline" role="math">\(\nu=n-r\)</span>. Secara ekuivalen, gunakan pseudoinvers <span class="math-inline" role="math">\(V_C^+\)</span> dan tetapkan
+<span class="math-inline" role="math">\(q=\operatorname{rank}(V_C)\)</span>, tetapi <span class="math-inline" role="math">\(d\)</span> harus kompatibel dengan relasi linear
+di antara pembatasan. Menggunakan jumlah baris mentah sebagai <span class="math-inline" role="math">\(q\)</span> dapat
+menghasilkan derajat bebas salah.</p>
+<p><a id="O006-C140-CMP-D010-THM06"></a></p>
+<h2>Uji F sebagai perbandingan dua ruang model bersarang</h2>
+<p>Misalkan <span class="math-inline" role="math">\(\mathcal S_0\subset\mathcal S_1\subset\mathbb R^n\)</span> adalah dua ruang
+mean linear dengan proyektor ortogonal <span class="math-inline" role="math">\(P_0,P_1\)</span> dan rank</p>
+<div class="math-display" role="math">\[r_0&lt;r_1&lt;n.\]</div>
+<p>Andaikan model penuh benar, <span class="math-inline" role="math">\(\mu\in\mathcal S_1\)</span>, dan galat
+<span class="math-inline" role="math">\(N_n(0,\sigma^2I_n)\)</span>. Definisikan</p>
+<div class="math-display" role="math">\[q=r_1-r_0,
+\qquad
+\nu=n-r_1,\]</div>
+<div class="math-display" role="math">\[\operatorname{SS}_{\mathrm{extra}}
+=Y^\top(P_1-P_0)Y
+=\operatorname{SSE}_0-\operatorname{SSE}_1,\]</div>
+<div class="math-display" role="math">\[\operatorname{SSE}_1=Y^\top(I_n-P_1)Y.\]</div>
+<p>Untuk <span class="math-inline" role="math">\(H_0:\mu\in\mathcal S_0\)</span>,</p>
+<div class="math-display" role="math">\[F_{\mathrm{nested}}
+=\frac{\operatorname{SS}_{\mathrm{extra}}/q}
+{\operatorname{SSE}_1/\nu}
+\sim F_{q,\nu}.\]</div>
+<p>Di bawah <span class="math-inline" role="math">\(\mu\in\mathcal S_1\setminus\mathcal S_0\)</span>, hukum itu noncentral
+dengan</p>
+<div class="math-display" role="math">\[\lambda=
+\frac{\lVert(P_1-P_0)\mu\rVert^2}{\sigma^2}.\]</div>
+<p><a id="O006-C140-CMP-D010-PRF06"></a></p>
+<h3>Bukti</h3>
+<p>Karena ruang bersarang,</p>
+<div class="math-display" role="math">\[P_1P_0=P_0P_1=P_0.\]</div>
+<p>Maka <span class="math-inline" role="math">\(A=P_1-P_0\)</span> simetris dan</p>
+<div class="math-display" role="math">\[A^2=P_1-P_1P_0-P_0P_1+P_0=P_1-P_0=A.\]</div>
+<p>Jadi <span class="math-inline" role="math">\(A\)</span> adalah proyektor ke
+<span class="math-inline" role="math">\(\mathcal S_1\cap\mathcal S_0^\perp\)</span> dengan rank <span class="math-inline" role="math">\(r_1-r_0=q\)</span>.
+Proyektor <span class="math-inline" role="math">\(B=I_n-P_1\)</span> mempunyai rank <span class="math-inline" role="math">\(n-r_1=\nu\)</span>, dan</p>
+<div class="math-display" role="math">\[AB=(P_1-P_0)(I_n-P_1)=0.\]</div>
+<p>Di bawah <span class="math-inline" role="math">\(H_0\)</span>, <span class="math-inline" role="math">\(A\mu=0\)</span>; karena <span class="math-inline" role="math">\(\mu\in\mathcal S_1\)</span>, juga <span class="math-inline" role="math">\(B\mu=0\)</span>.
+Teorema Cochran <a class="xref" data-target-id="O006-C140-CMP-D010-THM02" href="O006-C140-CMP-D010.html#O006-C140-CMP-D010-THM02">Teorema Cochran dalam bentuk proyeksi</a> memberi</p>
+<div class="math-display" role="math">\[\frac{Y^\top AY}{\sigma^2}\sim\chi^2_q,
+\qquad
+\frac{Y^\top BY}{\sigma^2}\sim\chi^2_\nu,\]</div>
+<p>secara independen. Rasionya adalah F yang dinyatakan. Di bawah alternatif
+dalam ruang penuh, hanya kuadrat pertama menjadi noncentral, dengan parameter
+<span class="math-inline" role="math">\(\mu^\top A\mu/\sigma^2=\lVert A\mu\rVert^2/\sigma^2\)</span>. ∎</p>
+<p><a id="O006-C140-CMP-D010-SEC02"></a></p>
+<h1>ANOVA sebagai identitas proyeksi</h1>
+<p>Istilah ANOVA tidak menambah asumsi baru pada model linear Gaussian. Ia
+menamai dekomposisi kuadrat panjang ke komponen ortogonal dan memasangkan
+setiap komponen dengan rank-nya. Namun dekomposisi <strong>terpusat</strong> yang lazim
+memerlukan intercept; tanpa syarat ini, rumus yang tampak familier dapat salah.</p>
+<p><a id="O006-C140-CMP-D010-THM07"></a></p>
+<h2>Dekomposisi ANOVA dengan intercept</h2>
+<p>Andaikan <span class="math-inline" role="math">\(\mathbf1_n\in\mathcal C(X)\)</span> dan
+<span class="math-inline" role="math">\(r=\operatorname{rank}(X)&lt;n\)</span>. Definisikan</p>
+<div class="math-display" role="math">\[J=\frac1n\mathbf1_n\mathbf1_n^\top,
+\qquad
+\bar Y=\frac1n\mathbf1_n^\top Y,\]</div>
+<div class="math-display" role="math">\[\operatorname{SST}
+=\sum_{i=1}^n(Y_i-\bar Y)^2
+=Y^\top(I_n-J)Y,\]</div>
+<div class="math-display" role="math">\[\operatorname{SSR}
+=\sum_{i=1}^n(\widehat Y_i-\bar Y)^2
+=Y^\top(P_X-J)Y,\]</div>
+<p>dan <span class="math-inline" role="math">\(\operatorname{SSE}=Y^\top(I_n-P_X)Y\)</span>. Maka</p>
+<div class="math-display" role="math">\[\operatorname{SST}=\operatorname{SSR}+\operatorname{SSE},\]</div>
+<p>dengan derajat bebas</p>
+<div class="math-display" role="math">\[n-1=(r-1)+(n-r).\]</div>
+<p>Jika <span class="math-inline" role="math">\(r&gt;1\)</span> dan hipotesis nol menyatakan bahwa mean konstan,
+<span class="math-inline" role="math">\(H_0:\mu\in\operatorname{span}(\mathbf1_n)\)</span>, maka</p>
+<div class="math-display" role="math">\[\frac{\operatorname{SSR}}{\sigma^2}\sim\chi^2_{r-1},
+\qquad
+\frac{\operatorname{SSE}}{\sigma^2}\sim\chi^2_{n-r},\]</div>
+<p>secara independen, sehingga</p>
+<div class="math-display" role="math">\[F_{\mathrm{overall}}
+=\frac{\operatorname{SSR}/(r-1)}
+{\operatorname{SSE}/(n-r)}
+\sim F_{r-1,n-r}.\]</div>
+<p><a id="O006-C140-CMP-D010-PRF07"></a></p>
+<h3>Bukti</h3>
+<p>Karena <span class="math-inline" role="math">\(\operatorname{span}(\mathbf1_n)\subseteq\mathcal C(X)\)</span>,
+<span class="math-inline" role="math">\(P_XJ=JP_X=J\)</span>. Dengan argumen yang sama seperti
+<a class="xref" data-target-id="O006-C140-CMP-D010-PRF06" href="O006-C140-CMP-D010.html#O006-C140-CMP-D010-PRF06">Bukti</a>, <span class="math-inline" role="math">\(P_X-J\)</span> adalah proyektor ber-rank <span class="math-inline" role="math">\(r-1\)</span>.
+Selain itu</p>
+<div class="math-display" role="math">\[I_n-J=(P_X-J)+(I_n-P_X),\]</div>
+<p>dan kedua proyektor di ruas kanan ortogonal karena</p>
+<div class="math-display" role="math">\[(P_X-J)(I_n-P_X)=0.\]</div>
+<p>Mengalikan identitas matriks oleh <span class="math-inline" role="math">\(Y^\top\)</span> dan <span class="math-inline" role="math">\(Y\)</span> memberi dekomposisi jumlah
+kuadrat. Rank yang menjumlah memberi identitas derajat bebas.</p>
+<p>Di bawah hipotesis nol, <span class="math-inline" role="math">\((P_X-J)\mu=0\)</span> karena <span class="math-inline" role="math">\(\mu\)</span> berada di ruang citra
+<span class="math-inline" role="math">\(J\)</span>, dan <span class="math-inline" role="math">\((I_n-P_X)\mu=0\)</span> karena ruang model nol merupakan subruang
+<span class="math-inline" role="math">\(\mathcal C(X)\)</span>. Teorema
+Cochran kemudian memberi dua chi-kuadrat sentral independen dan rasio F. ∎</p>
+<p><a id="O006-C140-CMP-D010-REM02"></a></p>
+<h2>Batas interpretasi tabel ANOVA</h2>
+<p>Beberapa pembedaan harus dipertahankan.</p>
+<ol>
+<li>Identitas tak terpusat
+<span class="math-inline" role="math">\(\lVert Y\rVert^2=\lVert P_XY\rVert^2+\lVert M_XY\rVert^2\)</span> selalu benar,
+tetapi bukan dekomposisi SST terpusat. Tanpa intercept,
+<span class="math-inline" role="math">\(P_X-J\)</span> umumnya bukan proyektor dan “<span class="math-inline" role="math">\(R^2=1-\mathrm{SSE}/\mathrm{SST}\)</span>”
+tidak mempunyai interpretasi geometris standar yang sama.</li>
+<li>Pada desain tak ortogonal, jumlah kuadrat sekuensial bergantung urutan
+penambahan term. Uji parsial yang terdefinisi dengan baik harus menyebut
+dua ruang bersarang yang dibandingkan. Label “Type I”, “Type II”, atau
+“Type III” tidak menggantikan definisi ruang nol dan ruang penuh.</li>
+<li>Dekomposisi geometri tidak memerlukan desain seimbang. Keseimbangan dapat
+membuat subruang term ortogonal dan interpretasi lebih sederhana, tetapi
+bukan syarat Teorema Cochran.</li>
+<li>Kuadrat tengah (<em>mean square</em>) bukan otomatis estimator <span class="math-inline" role="math">\(\sigma^2\)</span>. Ia
+menjadi noise murni hanya jika proyektor komponen menghilangkan mean di
+bawah model yang sedang dipakai.</li>
+</ol>
+<p><a id="O006-C140-CMP-D010-SEC03"></a></p>
+<h1>Interval kepercayaan dan interval prediksi</h1>
+<p>Interval kepercayaan bagi mean bersyarat dan interval prediksi bagi satu
+respons baru menjawab pertanyaan berbeda. Keduanya menggunakan distribusi t,
+tetapi varians prediksi mempunyai tambahan <span class="math-inline" role="math">\(\sigma^2\)</span> karena observasi
+baru membawa galat baru.</p>
+<p><a id="O006-C140-CMP-D010-THM08"></a></p>
+<h2>Interval kepercayaan eksak bagi mean pada <span class="math-inline" role="math">\(x_0\)</span></h2>
+<p>Di bawah rank kolom penuh, ambil vektor desain tetap <span class="math-inline" role="math">\(x_0\in\mathbb R^p\)</span> dan
+target</p>
+<div class="math-display" role="math">\[m_0=x_0^\top\beta.\]</div>
+<p>Definisikan leverage prediksi</p>
+<div class="math-display" role="math">\[h_0=x_0^\top(X^\top X)^{-1}x_0.\]</div>
+<p>Jika <span class="math-inline" role="math">\(x_0\ne0\)</span>, maka <span class="math-inline" role="math">\(h_0&gt;0\)</span> dan</p>
+<div class="math-display" role="math">\[\frac{x_0^\top\widehat\beta-m_0}{s\sqrt{h_0}}
+\sim t_\nu,
+\qquad \nu=n-p.\]</div>
+<p>Jadi interval kepercayaan titik demi titik dengan cakupan tepat <span class="math-inline" role="math">\(1-\alpha\)</span>
+bagi mean respons adalah</p>
+<div class="math-display" role="math">\[x_0^\top\widehat\beta
+\;\pm\;
+t_{\nu,1-\alpha/2}s\sqrt{h_0}.\]</div>
+<p><a id="O006-C140-CMP-D010-PRF08"></a></p>
+<h3>Bukti</h3>
+<p>Ambil <span class="math-inline" role="math">\(c=x_0\)</span> dalam <a class="xref" data-target-id="O006-C140-CMP-D010-THM04" href="O006-C140-CMP-D010.html#O006-C140-CMP-D010-THM04">Hukum t dan interval kepercayaan bagi satu kontras</a>. Karena target adalah
+fungsi linear yang sama, <span class="math-inline" role="math">\(v_c=h_0\)</span> dan hasil mengikuti langsung. Secara
+mandiri,</p>
+<div class="math-display" role="math">\[x_0^\top\widehat\beta
+\sim N(m_0,\sigma^2h_0)\]</div>
+<p>dan independen dari <span class="math-inline" role="math">\(s^2\)</span>, sehingga standardisasi oleh akar chi-kuadrat
+independen menghasilkan t. ∎</p>
+<p><a id="O006-C140-CMP-D010-THM09"></a></p>
+<h2>Interval prediksi eksak bagi satu observasi baru</h2>
+<p>Selain asumsi sebelumnya, misalkan</p>
+<div class="math-display" role="math">\[Y_0=x_0^\top\beta+\varepsilon_0,
+\qquad
+\varepsilon_0\sim N(0,\sigma^2),\]</div>
+<p>dengan <span class="math-inline" role="math">\(\varepsilon_0\)</span> independen dari data pelatihan. Maka</p>
+<div class="math-display" role="math">\[\frac{Y_0-x_0^\top\widehat\beta}
+{s\sqrt{1+h_0}}
+\sim t_\nu,\]</div>
+<p>dan interval prediksi titik demi titik dengan cakupan tepat <span class="math-inline" role="math">\(1-\alpha\)</span> adalah</p>
+<div class="math-display" role="math">\[x_0^\top\widehat\beta
+\;\pm\;
+t_{\nu,1-\alpha/2}s\sqrt{1+h_0}.\]</div>
+<p><a id="O006-C140-CMP-D010-PRF09"></a></p>
+<h3>Bukti</h3>
+<p>Selisih prediksi dapat ditulis</p>
+<div class="math-display" role="math">\[Y_0-x_0^\top\widehat\beta
+=\varepsilon_0-x_0^\top(\widehat\beta-\beta).\]</div>
+<p>Dua suku di ruas kanan independen, normal, dan masing-masing mempunyai
+varians <span class="math-inline" role="math">\(\sigma^2\)</span> dan <span class="math-inline" role="math">\(\sigma^2h_0\)</span>. Jadi selisihnya normal dengan mean nol
+dan varians <span class="math-inline" role="math">\(\sigma^2(1+h_0)\)</span>. Ia independen dari <span class="math-inline" role="math">\(s^2\)</span>: galat baru
+independen dari seluruh data, dan <span class="math-inline" role="math">\(\widehat\beta\)</span> independen dari SSE.
+Pembagian oleh <span class="math-inline" role="math">\(\sigma\sqrt{1+h_0}\)</span> menghasilkan normal baku; mengganti
+<span class="math-inline" role="math">\(\sigma\)</span> dengan akar chi-kuadrat independen <span class="math-inline" role="math">\(s\)</span> menghasilkan <span class="math-inline" role="math">\(t_\nu\)</span>. ∎</p>
+<p><a id="O006-C140-CMP-D010-REM03"></a></p>
+<h2>Mean suaian, residual teramati, dan respons baru</h2>
+<p>Untuk baris desain teramati ke-<span class="math-inline" role="math">\(i\)</span>, leverage biasa adalah
+<span class="math-inline" role="math">\(h_{ii}=(P_X)_{ii}\)</span>. Tiga varians yang sering tertukar adalah</p>
+<div class="math-display" role="math">\[\operatorname{Var}(\widehat Y_i)=\sigma^2h_{ii},\]</div>
+<div class="math-display" role="math">\[\operatorname{Var}(e_i)=\sigma^2(1-h_{ii}),\]</div>
+<p>dan, bagi respons baru independen pada baris yang sama,</p>
+<div class="math-display" role="math">\[\operatorname{Var}(Y_{0i}-\widehat Y_i)=\sigma^2(1+h_{ii}).\]</div>
+<p>Tanda minus pada residual bukan alasan memakai <span class="math-inline" role="math">\(1+h_{ii}\)</span>: <span class="math-inline" role="math">\(Y_i\)</span> dan
+<span class="math-inline" role="math">\(\widehat Y_i\)</span> dibentuk dari data yang sama dan berkorelasi. Respons baru
+independen, sehingga variansnya justru menjumlah. Residual internal yang
+dibagi <span class="math-inline" role="math">\(s\sqrt{1-h_{ii}}\)</span> juga tidak persis <span class="math-inline" role="math">\(t_\nu\)</span>, sebab <span class="math-inline" role="math">\(e_i\)</span> ikut
+membentuk <span class="math-inline" role="math">\(s^2\)</span>. Klaim hukum t bagi residual memerlukan bentuk
+studentization eksternal dan derajat bebas yang diturunkan khusus.</p>
+<p>Untuk desain ber-rank tak penuh, target <span class="math-inline" role="math">\(x_0^\top\beta\)</span> hanya sah bila
+<span class="math-inline" role="math">\(x_0\in\mathcal C(X^\top)\)</span>. Untuk desain acak, semua hasil tetap eksak secara
+bersyarat pada <span class="math-inline" role="math">\(X\)</span> bila hukum galat bersyarat memenuhi asumsi Gaussian yang
+sama dan <span class="math-inline" role="math">\(X\)</span> mempunyai rank yang disyaratkan hampir pasti.</p>
+<p><a id="O006-C140-CMP-D010-SEC04"></a></p>
+<h1>Inferensi simultan dan multiplicity</h1>
+<p>Peluang cakupan <span class="math-inline" role="math">\(1-\alpha\)</span> untuk setiap interval secara terpisah tidak berarti semua
+interval menutup targetnya secara bersama dengan probabilitas
+<span class="math-inline" role="math">\(1-\alpha\)</span>. Pemilihan kontras setelah melihat data juga mengubah kejadian
+yang harus dikendalikan.</p>
+<p><a id="O006-C140-CMP-D010-THM10"></a></p>
+<h2>Daerah Scheffé bagi semua kontras dalam satu subruang</h2>
+<p>Di bawah rank kolom penuh, pilih <span class="math-inline" role="math">\(L\in\mathbb R^{q\times p}\)</span> ber-rank baris
+penuh, tetapkan</p>
+<div class="math-display" role="math">\[\theta=L\beta,
+\qquad
+\widehat\theta=L\widehat\beta,
+\qquad
+V_L=L(X^\top X)^{-1}L^\top,\]</div>
+<p>dengan <span class="math-inline" role="math">\(1\le q\le p\)</span>. Untuk setiap <span class="math-inline" role="math">\(a\in\mathbb R^q\)</span>, seluruh ketaksamaan</p>
+<div class="math-display" role="math">\[\left|a^\top(\widehat\theta-\theta)\right|
+\le
+s\sqrt{qF_{q,\nu;1-\alpha}}
+\sqrt{a^\top V_La}\]</div>
+<p>berlaku <strong>secara simultan</strong> dengan probabilitas <span class="math-inline" role="math">\(1-\alpha\)</span>, dengan konvensi
+bahwa kedua ruas nol untuk <span class="math-inline" role="math">\(a=0\)</span>. Jadi pemilihan <span class="math-inline" role="math">\(a\)</span> setelah melihat data
+tetap tercakup selama <span class="math-inline" role="math">\(a\)</span> berada dalam subruang <span class="math-inline" role="math">\(q\)</span>-dimensional yang telah
+ditentukan melalui <span class="math-inline" role="math">\(L\)</span> sebelum analisis.</p>
+<p><a id="O006-C140-CMP-D010-PRF10"></a></p>
+<h3>Bukti</h3>
+<p>Tuliskan <span class="math-inline" role="math">\(\Delta=\widehat\theta-\theta\)</span>. Menurut ketaksamaan Cauchy–Schwarz
+dalam metrik <span class="math-inline" role="math">\(V_L\)</span>,</p>
+<div class="math-display" role="math">\[\{a^\top\Delta\}^2
+=\{(V_L^{1/2}a)^\top(V_L^{-1/2}\Delta)\}^2
+\le
+(a^\top V_La)(\Delta^\top V_L^{-1}\Delta).\]</div>
+<p>Dari <a class="xref" data-target-id="O006-C140-CMP-D010-THM05" href="O006-C140-CMP-D010.html#O006-C140-CMP-D010-THM05">Uji F eksak untuk hipotesis linear umum</a> dengan hipotesis pada nilai benar
+<span class="math-inline" role="math">\(L\beta\)</span>, statistik</p>
+<div class="math-display" role="math">\[\frac{\Delta^\top V_L^{-1}\Delta/q}{s^2}
+\sim F_{q,\nu}.\]</div>
+<p>Dengan probabilitas <span class="math-inline" role="math">\(1-\alpha\)</span>,</p>
+<div class="math-display" role="math">\[\Delta^\top V_L^{-1}\Delta
+\le q s^2F_{q,\nu;1-\alpha}.\]</div>
+<p>Memasukkan batas ini ke ketaksamaan Cauchy–Schwarz memberi seluruh interval
+sekaligus. Sebaliknya, supremum rasio kuadrat atas semua <span class="math-inline" role="math">\(a\ne0\)</span> mencapai
+<span class="math-inline" role="math">\(\Delta^\top V_L^{-1}\Delta\)</span>, sehingga konstanta ini bukan hasil union bound
+yang longgar untuk keluarga tersebut. ∎</p>
+<p><a id="O006-C140-CMP-D010-REM04"></a></p>
+<h2>Bonferroni, keluarga yang dipilih, dan batas klaim</h2>
+<p>Untuk <span class="math-inline" role="math">\(m\)</span> kontras yang telah ditentukan, interval Bonferroni</p>
+<div class="math-display" role="math">\[c_j^\top\widehat\beta
+\;\pm\;
+t_{\nu,1-\alpha/(2m)}
+s\sqrt{c_j^\top(X^\top X)^{-1}c_j},
+\qquad j=1,\ldots,m,\]</div>
+<p>mempunyai cakupan serentak-keluarga sekurangnya <span class="math-inline" role="math">\(1-\alpha\)</span>, tanpa memerlukan
+independensi antarkontras. Ia dapat lebih sempit atau lebih lebar daripada
+Scheffé, bergantung jumlah dan geometri kontras; tidak ada metode yang selalu
+dominan.</p>
+<p>Metode Tukey mempunyai sasaran khusus bagi perbandingan berpasangan mean
+dalam struktur ANOVA tertentu. Ia bukan pengganti otomatis untuk semua
+hipotesis linear umum. Demikian pula, laju penemuan palsu (<em>false discovery
+rate</em>), laju galat serentak-keluarga, cakupan simultan, dan cakupan selektif
+adalah target berbeda. Metode harus dipilih dari target galat yang dinyatakan,
+bukan dari nilai kritis yang paling kecil setelah hasil terlihat.</p>
+<p>Jika model, variabel, subkelompok, atau kontras dipilih karena tampak menarik
+pada data yang sama, interval dan p-value biasa tidak lagi memperoleh jaminan
+nominal dari teorema di atas. Pemisahan data, prosedur selektif yang sah, atau
+validasi independen diperlukan untuk klaim pascaseleksi.</p>
+<p><a id="O006-C140-CMP-D010-SEC05"></a></p>
+<h1>Asumsi yang menopang hukum eksak</h1>
+<p>Setiap bagian asumsi <a class="xref" data-target-id="O006-C140-CMP-D010-ASM01" href="O006-C140-CMP-D010.html#O006-C140-CMP-D010-ASM01">Model, rank, dan ruang yang diproyeksikan</a> mempunyai pekerjaan
+matematis tertentu. Menghapus satu bagian tidak selalu merusak estimasi OLS,
+tetapi dapat merusak tepat hukum inferensinya.</p>
+<p><a id="O006-C140-CMP-D010-REM05"></a></p>
+<h2>Konsekuensi kegagalan asumsi</h2>
+<ol>
+<li><strong>Mean linear benar.</strong> Jika <span class="math-inline" role="math">\(E(Y\mid X)\)</span> tidak berada di
+<span class="math-inline" role="math">\(\mathcal C(X)\)</span>, SSE mempunyai komponen noncentral seperti
+<a class="xref" data-target-id="O006-C140-CMP-D010-CTR01" href="O006-C140-CMP-D010.html#O006-C140-CMP-D010-CTR01">Apa yang terjadi bila ruang mean salah</a>. Koefisien OLS menargetkan proyeksi mean,
+bukan otomatis efek ilmiah yang dimaksud.</li>
+<li><strong>Varians sama dan kovarians nol.</strong> Jika
+<span class="math-inline" role="math">\(\operatorname{Cov}(\varepsilon\mid X)=\Sigma\ne\sigma^2I_n\)</span>, proyeksi
+Euclidean yang ortogonal tidak umumnya menghasilkan komponen independen
+atau varians <span class="math-inline" role="math">\(\sigma^2P\)</span>. Galat baku homoskedastik, chi-kuadrat SSE, dan
+uji F eksak dapat salah. GLS menjadi eksak setelah pemutihan (<em>whitening</em>)
+hanya bila struktur <span class="math-inline" role="math">\(\Sigma\)</span> diketahui dengan benar; galat baku sandwich
+biasanya bersifat asimtotik, bukan perbaikan hingga-sampel Gaussian yang
+identik.</li>
+<li><strong>Kenormalan.</strong> Dengan mean nol dan varians <span class="math-inline" role="math">\(\sigma^2I_n\)</span>, OLS tetap
+tak-bias dan fitted value tetap tak berkorelasi dengan residual. Namun
+ketakkorelasian tidak mengimplikasikan independensi di luar keluarga normal;
+bentuk kuadratik tidak harus chi-kuadrat, sehingga rasio tidak harus t atau
+F. Kenormalan diperlukan di sini untuk klaim eksak, bukan untuk menghitung
+OLS.</li>
+<li><strong>Desain tetap atau pengondisian yang sah.</strong> Untuk desain acak, inferensi
+bersyarat tetap berlaku bila <span class="math-inline" role="math">\(\varepsilon\mid X\)</span> Gaussian sferis dengan
+mean nol dan rank terpenuhi. Endogenitas, yaitu
+<span class="math-inline" role="math">\(E(\varepsilon\mid X)\ne0\)</span>, merusak target dan tidak diselesaikan dengan
+galat baku tahan-heteroskedastisitas.</li>
+<li><strong>Rank dan derajat bebas.</strong> Kolom redundan menurunkan <span class="math-inline" role="math">\(r\)</span>; derajat bebas
+residual selalu <span class="math-inline" role="math">\(n-r\)</span>, bukan <span class="math-inline" role="math">\(n-p\)</span> secara mekanis. Hipotesis dengan
+pembatasan redundan memakai rank pembatasan efektif, bukan jumlah baris
+input.</li>
+<li><strong>Observasi baru independen.</strong> Interval prediksi
+<a class="xref" data-target-id="O006-C140-CMP-D010-THM09" href="O006-C140-CMP-D010.html#O006-C140-CMP-D010-THM09">Interval prediksi eksak bagi satu observasi baru</a> tidak mencakup respons berkorelasi dalam
+klaster, pengukuran ulang subjek yang sama, atau ketidakpastian bahwa model
+akan tetap berlaku pada populasi baru.</li>
+<li><strong>Keluarga klaim ditetapkan.</strong> Uji titik demi titik tidak mengendalikan
+pencarian banyak model, penghentian opsional, atau pelaporan hanya hasil
+signifikan.</li>
+</ol>
+<p><a id="O006-C140-CMP-D010-CTR02"></a></p>
+<h2>Ortogonal tidak berarti independen tanpa Gaussian</h2>
+<p>Ambil vektor acak dua dimensi</p>
+<div class="math-display" role="math">\[\varepsilon=R(\cos\Theta,\sin\Theta)^\top,\]</div>
+<p>dengan <span class="math-inline" role="math">\(\Theta\)</span> seragam pada <span class="math-inline" role="math">\(\{0,\pi/2,\pi,3\pi/2\}\)</span> dan <span class="math-inline" role="math">\(R=\sqrt2\sigma\)</span>.
+Maka <span class="math-inline" role="math">\(E(\varepsilon)=0\)</span> dan
+<span class="math-inline" role="math">\(\operatorname{Cov}(\varepsilon)=\sigma^2I_2\)</span>. Proyeksi ke dua sumbu
+mempunyai kovarians nol. Tetapi tepat satu dari dua koordinat mempunyai
+kuadrat <span class="math-inline" role="math">\(2\sigma^2\)</span> dan yang lain nol; mengetahui kuadrat koordinat pertama
+menentukan kuadrat koordinat kedua. Jadi keduanya tidak independen dan jumlah
+kuadrat proyeksi tidak tersusun dari chi-kuadrat independen.</p>
+<p>Contoh ini memisahkan dua klaim: geometri OLS memberi ortogonalitas aljabar,
+sedangkan kenormalan bersama mengubah kovarians silang nol menjadi
+independensi probabilistik.</p>
+<p><a id="O006-C140-CMP-D010-REM06"></a></p>
+<h2>Pemeriksaan model yang bertanggung jawab</h2>
+<p>Plot residual, pemeriksaan quantile, residual-versus-fitted, dan ukuran
+leverage dapat menemukan pola besar, tetapi tidak membuktikan asumsi. Residual
+adalah <span class="math-inline" role="math">\(M_X\varepsilon\)</span>, bukan salinan iid langsung dari galat: variansnya
+<span class="math-inline" role="math">\(\sigma^2(1-h_{ii})\)</span> dan residual berbeda berkorelasi melalui entri luar
+diagonal <span class="math-inline" role="math">\(-\sigma^2h_{ij}\)</span>.</p>
+<p>Karena itu pemeriksaan harus menggabungkan konteks pengumpulan data dan
+struktur model:</p>
+<ul>
+<li>periksa apakah observasi benar-benar independen atau terklaster/berurutan;</li>
+<li>cari pola mean yang tertinggal, varians yang berubah, dan titik berleverage
+tinggi;</li>
+<li>bandingkan residual terstandardisasi dengan ketidakpastian yang sesuai,
+bukan dengan satu ambang universal;</li>
+<li>bedakan interpolasi dari ekstrapolasi melalui posisi <span class="math-inline" role="math">\(x_0\)</span> relatif terhadap
+desain;</li>
+<li>laporkan analisis sensitivitas bila satu observasi atau satu pilihan model
+mengubah kesimpulan;</li>
+<li>gunakan metode robust atau model kovarians lain dengan label inferensi yang
+benar—asimtotik, bootstrap, GLS, atau model hierarkis—alih-alih tetap
+menyebutnya uji t/F eksak.</li>
+</ul>
+<p>Dalam model satu-sampel <span class="math-inline" role="math">\(N(\mu,\sigma^2)\)</span> dengan <span class="math-inline" role="math">\(\sigma^2\)</span> diperlakukan
+diketahui dan hanya <span class="math-inline" role="math">\(\mu\)</span> yang menjadi parameter, <span class="math-inline" role="math">\(\bar Y\)</span> lengkap-cukup bagi
+<span class="math-inline" role="math">\(\mu\)</span>, sedangkan SSE yang diskalakan bersifat ancillary terhadap <span class="math-inline" role="math">\(\mu\)</span>.
+Independensinya juga mengikuti Teorema Basu yang dibahas di
+<a class="xref" data-target-id="O006-C140-CMP-D007-THM06" href="O006-C140-CMP-D007.html#O006-C140-CMP-D007-THM06">Basu sebagai pemisah informasi dan variasi ancillary</a>. Jika <span class="math-inline" role="math">\(\sigma^2\)</span> turut menjadi parameter, SSE
+tidak ancillary bagi pasangan <span class="math-inline" role="math">\((\mu,\sigma^2)\)</span>, sehingga argumen Basu itu
+tidak dapat dipindahkan begitu saja. Bukti proyeksi di sini lebih langsung dan
+berlaku sekaligus untuk seluruh model linear Gaussian.</p>
+<p><a id="O006-C140-CMP-D010-ALG01"></a></p>
+<h2>Audit sebelum memakai t, F, atau ANOVA</h2>
+<ol>
+<li>Nyatakan unit observasi, respons, matriks desain, dan apakah inferensi
+bersyarat pada <span class="math-inline" role="math">\(X\)</span>.</li>
+<li>Hitung rank numerik dan rank struktural <span class="math-inline" role="math">\(X\)</span>; gunakan <span class="math-inline" role="math">\(\nu=n-r\)</span>, bukan
+jumlah kolom mentah.</li>
+<li>Pastikan target koefisien atau kontras terestimasi. Untuk desain ber-rank
+tak penuh,
+periksa bahwa baris pembatasan berada dalam <span class="math-inline" role="math">\(\mathcal C(X^\top)\)</span>.</li>
+<li>Tulis ruang model nol dan penuh. Untuk uji bersarang, buktikan
+<span class="math-inline" role="math">\(\mathcal S_0\subset\mathcal S_1\)</span> dan catat <span class="math-inline" role="math">\(q=r_1-r_0\)</span>.</li>
+<li>Periksa apakah mean linear, kovarians <span class="math-inline" role="math">\(\sigma^2I\)</span>, dan kenormalan masuk
+akal bagi klaim hingga-sampel. Catat pelanggaran yang terdeteksi dan metode
+pengganti yang dipakai.</li>
+<li>Untuk ANOVA terpusat, verifikasi bahwa intercept ada. Jangan memberi df
+<span class="math-inline" role="math">\(r-1\)</span> kepada regresi bila <span class="math-inline" role="math">\(\mathbf1_n\notin\mathcal C(X)\)</span>.</li>
+<li>Bedakan interval mean dari interval prediksi dan verifikasi independensi
+observasi baru.</li>
+<li>Tentukan keluarga kontras sebelum memilih koreksi multiplikitas. Nyatakan
+apakah jaminannya titik demi titik, serentak-keluarga, simultan, atau
+selektif.</li>
+<li>Laporkan estimasi, galat baku, df, interval, statistik uji, dan definisi
+ruang hipotesis; p-value sendiri tidak mengidentifikasi target estimasi.</li>
+<li>Simpan pemeriksaan leverage, residual, dan sensitivitas sebagai bukti
+diagnostik, bukan sebagai sertifikat bahwa model pasti benar.</li>
+</ol>
+<p><a id="O006-C140-CMP-D010-SEC06"></a></p>
+<h1>Ringkasan</h1>
+<ul>
+<li>Proyeksi ortogonal dari normal sferis memberi komponen normal independen;
+rank proyeksi menjadi derajat bebas bentuk kuadratik.</li>
+<li>Dalam model mean yang benar, SSE dibagi <span class="math-inline" role="math">\(\sigma^2\)</span> adalah
+<span class="math-inline" role="math">\(\chi^2_{n-r}\)</span>, sehingga <span class="math-inline" role="math">\(s^2=\mathrm{SSE}/(n-r)\)</span> tak-bias dan independen
+dari nilai suaian. Salah spesifikasi mean membuat hukum itu noncentral.</li>
+<li>Satu kontras terestimasi menghasilkan hukum t; <span class="math-inline" role="math">\(q\)</span> pembatasan independen
+menghasilkan hukum F dengan rank pembilang <span class="math-inline" role="math">\(q\)</span> dan df penyebut <span class="math-inline" role="math">\(n-r\)</span>.</li>
+<li>Hipotesis linear umum dan perbandingan model bersarang adalah dua
+koordinatisasi dari geometri proyeksi yang sama.</li>
+<li>ANOVA terpusat memerlukan intercept; dalam desain tak ortogonal, hipotesis
+harus didefinisikan melalui ruang yang dibandingkan, bukan hanya label tipe
+jumlah kuadrat.</li>
+<li>Interval kepercayaan bagi mean memakai <span class="math-inline" role="math">\(h_0\)</span>, sedangkan interval prediksi
+bagi respons baru memakai <span class="math-inline" role="math">\(1+h_0\)</span>.</li>
+<li>Interval titik demi titik tidak otomatis simultan. Scheffé dan Bonferroni
+mengendalikan keluarga yang berbeda dan harus ditetapkan sebelum melihat
+hasil.</li>
+<li>Kenormalan, homoskedastisitas, independensi, mean linear, rank, dan desain
+pengondisian adalah syarat matematis, bukan formalitas perangkat lunak.</li>
+</ul>
+<p>Materi ini adalah prosa orisinal CC BY-SA 4.0. Provenance model:
+OpenAI Codex gpt-5.6-sol, Ultra. Hubungan ke bab lain memakai ID stabil untuk
+navigasi dan tidak mengubah atribusi maupun lisensi komponen lain.</p>
+
+<footer class="license">Materi pendamping orisinal berlisensi CC BY-SA 4.0. Komponen Penn State dan Random tetap berada di bawah lisensinya masing-masing dan tidak direlisensikan oleh halaman ini.</footer>
+</main>
+</div>
+</body>
+</html>

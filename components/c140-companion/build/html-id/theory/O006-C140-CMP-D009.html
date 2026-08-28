@@ -1,0 +1,453 @@
+<!doctype html>
+<html lang="id-ID">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="generator" content="OpenAI Codex gpt-5.6-sol, Ultra">
+<title>OLS, MLE Gaussian, dan teorema Gauss–Markov pada rancangan tetap</title>
+<link rel="stylesheet" href="../assets/style.css">
+<script>window.MathJax={loader:{load:['[tex]/boldsymbol']},tex:{packages:{'[+]':['boldsymbol']},inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']]},svg:{fontCache:'local'}};</script>
+<script defer src="../assets/MathJax/tex-svg.js"></script>
+</head>
+<body>
+<div class="shell">
+<nav class="sidebar" aria-label="Daftar isi pendamping"><h2>Isi pendamping</h2><ol><li><a href="../index.html">Pendamping Orisinal Statistika Matematis</a></li><li><a href="O006-C140-CMP-D001.html">Model parametrik reguler, skor, dan informasi Fisher</a></li><li><a href="O006-C140-CMP-D002.html">Konsistensi MLE: identifikasi Kullback–Leibler dan teorema argmax</a></li><li><a href="O006-C140-CMP-D003.html">Likelihood kuadratik lokal, normalitas asimtotik, dan delta method</a></li><li><a href="O006-C140-CMP-D004.html">Prosedur Wald, skor, dan rasio likelihood</a></li><li><a href="O006-C140-CMP-D005.html">Likelihood nonreguler: empat mekanisme kegagalan</a></li><li><a href="O006-C140-CMP-D006.html">Optimalitas pengujian: Neyman–Pearson, MP, UMP, dan rasio likelihood monoton</a></li><li><a href="O006-C140-CMP-D007.html">Loss, risk, efisiensi, Rao–Blackwell, dan Lehmann–Scheffé</a></li><li><a href="O006-C140-CMP-D008.html">Model linear Gaussian desain tetap dan geometri proyeksi</a></li><li><a href="O006-C140-CMP-D009.html">OLS, MLE Gaussian, dan teorema Gauss–Markov pada rancangan tetap</a></li><li><a href="O006-C140-CMP-D010.html">Inferensi Gaussian eksak: proyeksi, t, F, ANOVA, dan prediksi</a></li><li><a href="O006-C140-CMP-D011.html">Diagnostik, leverage, misspesifikasi, dan inferensi pascaseleksi</a></li><li><a href="../simulations/O006-C140-CMP-SIM001.html">Model lokasi normal: MLE, coverage, dan tiga statistik uji</a></li><li><a href="../simulations/O006-C140-CMP-SIM002.html">Delta method pada titik reguler dan titik dengan turunan nol</a></li><li><a href="../simulations/O006-C140-CMP-SIM003.html">Endpoint Uniform: laju nonreguler dan kegagalan bootstrap biasa</a></li><li><a href="../simulations/O006-C140-CMP-SIM004.html">Uji Neyman–Pearson teracak dengan size tepat</a></li><li><a href="../simulations/O006-C140-CMP-SIM005.html">Model linear matriks: coverage, heteroskedastisitas, dan pengaruh</a></li><li><a href="../mastery/O006-C140-CMP-MS07.html">Set penguasaan 07 — regularitas, konsistensi, dan normalitas MLE</a></li><li><a href="../mastery/O006-C140-CMP-MS08.html">Set penguasaan 08 — Wald, skor, rasio likelihood, dan diagnosis nonregular</a></li><li><a href="../mastery/O006-C140-CMP-MS09.html">Set penguasaan 09 — pengujian eksak dan optimalitas Neyman–Pearson</a></li><li><a href="../mastery/O006-C140-CMP-MS10.html">Set penguasaan 10 — uji likelihood asimtotik, risk, dan perbaikan estimator</a></li><li><a href="../mastery/O006-C140-CMP-MS12.html">Set penguasaan 12 — model linear Gaussian matriks, inferensi eksak, dan diagnostik</a></li><li><a href="../assessments/O006-C140-CMP-CA01.html">Asesmen kumulatif C1: likelihood, optimalitas, dan keputusan statistik</a></li></ol></nav>
+<main>
+<div class="metadata"><strong>O006-C140-CMP-D009</strong> · id-ID · CC BY-SA 4.0 · OpenAI Codex gpt-5.6-sol, Ultra</div>
+<p><a id="O006-C140-CMP-D009-SEC-OVERVIEW"></a></p>
+<h1>OLS, MLE Gaussian, dan teorema Gauss–Markov pada rancangan tetap</h1>
+<p>Tiga alasan yang berbeda dapat menghasilkan rumus koefisien yang sama. Pertama,
+<strong>kuadrat terkecil biasa</strong> (<em>ordinary least squares</em>, OLS) memilih titik pada
+ruang kolom matriks rancangan yang paling dekat dengan data. Kedua, di bawah
+asumsi momen orde satu dan dua, teorema Gauss–Markov menyatakan bahwa OLS adalah
+penduga linear tak bias terbaik. Ketiga, bila galat benar-benar Gaussian, OLS
+juga merupakan penduga likelihood maksimum untuk koefisien regresi.</p>
+<p>Kesamaan rumus tidak membuat ketiga pembenaran itu dapat dipertukarkan.
+Geometri OLS tidak memerlukan model probabilitas. Gauss–Markov memerlukan
+rataan nol dan kovarians sferis, tetapi tidak memerlukan distribusi Normal atau
+independensi penuh. Interpretasi sebagai MLE, distribusi khi-kuadrat eksak untuk
+jumlah kuadrat residual, dan independensi eksak antara koefisien dan residual
+memerlukan asumsi Gaussian tambahan. Bab ini mempertahankan batas logis tersebut
+pada setiap teorema.</p>
+<p><a id="O006-C140-CMP-D009-SEC-SETUP"></a></p>
+<h2>Model rancangan tetap dan tiga lapisan asumsi</h2>
+<p><a id="O006-C140-CMP-D009-ASM-FIXED-DESIGN"></a></p>
+<h3>Asumsi FD1–FD4</h3>
+<p>Untuk ukuran sampel <span class="math-inline" role="math">\(n\)</span> dan jumlah koefisien <span class="math-inline" role="math">\(p\)</span>, tulis</p>
+<div class="math-display" role="math">\[Y=X\beta+\varepsilon,\]</div>
+<p>dengan ketentuan berikut.</p>
+<ol>
+<li><strong>FD1 (rancangan tetap).</strong> <span class="math-inline" role="math">\(X\in\mathbb R^{n\times p}\)</span> adalah matriks
+nonacak yang diketahui. Semua pernyataan probabilistik di bawah bersyarat
+pada matriks ini.</li>
+<li><strong>FD2 (rank kolom penuh).</strong> <span class="math-inline" role="math">\(\operatorname{rank}(X)=p\)</span>, sehingga
+<span class="math-inline" role="math">\(n\ge p\)</span> dan <span class="math-inline" role="math">\(X^{\mathsf T}X\)</span> definit positif. Untuk mengestimasi
+varians residual, kita akan memakai syarat lebih kuat <span class="math-inline" role="math">\(n&gt;p\)</span>.</li>
+<li><strong>FD3 (rataan galat nol).</strong> <span class="math-inline" role="math">\(E(\varepsilon)=0\)</span>.</li>
+<li><strong>FD4 (kovarians sferis).</strong> Untuk suatu <span class="math-inline" role="math">\(0&lt;\sigma^2&lt;\infty\)</span>,</li>
+</ol>
+<div class="math-display" role="math">\[\operatorname{Cov}(\varepsilon)=\sigma^2I_n.\]</div>
+<p>FD1–FD2 sudah cukup untuk mendefinisikan OLS secara unik dari data yang
+diamati. FD3–FD4 menambahkan lapisan Gauss–Markov. FD4 menyatakan varians yang
+sama dan kovarians silang nol; ia tidak dengan sendirinya menyatakan bahwa
+komponen galat independen atau Gaussian.</p>
+<p><a id="O006-C140-CMP-D009-ASM-GAUSSIAN"></a></p>
+<h3>Asumsi G</h3>
+<p>Lapisan likelihood Gaussian menambahkan</p>
+<div class="math-display" role="math">\[\varepsilon\sim N_n(0,\sigma^2I_n).\]</div>
+<p>Asumsi G menyiratkan FD3–FD4 dan independensi komponen galat, tetapi jauh lebih
+kuat daripada yang diperlukan oleh teorema Gauss–Markov. Setiap kali G dipakai,
+hal itu akan dinyatakan secara eksplisit.</p>
+<p><a id="O006-C140-CMP-D009-SEC-GEOMETRY"></a></p>
+<h2>Geometri ruang kolom, matriks topi, dan residual</h2>
+<p><a id="O006-C140-CMP-D009-DEF-PROJECTIONS"></a></p>
+<h3>Definisi: proyeksi kecocokan dan residual</h3>
+<p>Karena <span class="math-inline" role="math">\(X^{\mathsf T}X\)</span> dapat diinvers, definisikan</p>
+<div class="math-display" role="math">\[H=X(X^{\mathsf T}X)^{-1}X^{\mathsf T},
+\qquad
+M=I_n-H.\]</div>
+<p>Matriks <span class="math-inline" role="math">\(H\)</span> sering disebut <strong>matriks topi</strong> karena mengubah <span class="math-inline" role="math">\(Y\)</span> menjadi
+nilai kecocokan <span class="math-inline" role="math">\(\widehat Y=HY\)</span>. Matriks <span class="math-inline" role="math">\(M\)</span> mengubah <span class="math-inline" role="math">\(Y\)</span> menjadi vektor
+residual <span class="math-inline" role="math">\(e=MY\)</span>. Ruang kolom <span class="math-inline" role="math">\(X\)</span>, ditulis <span class="math-inline" role="math">\(\mathcal C(X)\)</span>, adalah ruang
+semua vektor rataan yang dapat dihasilkan model.</p>
+<p><a id="O006-C140-CMP-D009-THM-PROJECTION-GEOMETRY"></a></p>
+<h3>Teorema: dekomposisi ortogonal data</h3>
+<p>Di bawah FD1–FD2,</p>
+<div class="math-display" role="math">\[H^{\mathsf T}=H,\quad H^2=H,\quad
+M^{\mathsf T}=M,\quad M^2=M,\quad HM=MH=0,\]</div>
+<p>dan</p>
+<div class="math-display" role="math">\[\mathcal C(H)=\mathcal C(X),\qquad
+\mathcal C(M)=\mathcal C(X)^\perp.\]</div>
+<p>Selain itu,</p>
+<div class="math-display" role="math">\[\operatorname{rank}(H)=\operatorname{tr}(H)=p,\qquad
+\operatorname{rank}(M)=\operatorname{tr}(M)=n-p.\]</div>
+<p>Setiap <span class="math-inline" role="math">\(y\in\mathbb R^n\)</span> mempunyai dekomposisi unik</p>
+<div class="math-display" role="math">\[y=Hy+My,\qquad (Hy)^{\mathsf T}(My)=0.\]</div>
+<p><a id="O006-C140-CMP-D009-PRF-PROJECTION-GEOMETRY"></a></p>
+<h3>Bukti</h3>
+<p>Transposisi langsung menunjukkan bahwa <span class="math-inline" role="math">\(H\)</span> simetris. Dengan
+<span class="math-inline" role="math">\(G=(X^{\mathsf T}X)^{-1}\)</span>,</p>
+<div class="math-display" role="math">\[H^2=XGX^{\mathsf T}XGX^{\mathsf T}
+=XG(X^{\mathsf T}X)GX^{\mathsf T}=XGX^{\mathsf T}=H.\]</div>
+<p>Jadi <span class="math-inline" role="math">\(H\)</span> adalah proyeksi ortogonal. Karena <span class="math-inline" role="math">\(HX=X\)</span>, ruang kolom <span class="math-inline" role="math">\(X\)</span>
+termuat dalam ruang citra <span class="math-inline" role="math">\(H\)</span>; sebaliknya, setiap <span class="math-inline" role="math">\(Hv\)</span> berbentuk
+<span class="math-inline" role="math">\(X(GX^{\mathsf T}v)\)</span>, sehingga ruang keduanya sama. Identitas untuk <span class="math-inline" role="math">\(M\)</span>
+mengikuti dari <span class="math-inline" role="math">\(M=I-H\)</span>, dan <span class="math-inline" role="math">\(HM=H-H^2=0\)</span>. Karena proyeksi simetris
+mempunyai nilai eigen hanya nol atau satu, rank sama dengan trace. Citra <span class="math-inline" role="math">\(H\)</span>
+berdimensi <span class="math-inline" role="math">\(p\)</span>, sehingga rank <span class="math-inline" role="math">\(H=p\)</span> dan rank <span class="math-inline" role="math">\(M=n-p\)</span>. Terakhir,
+<span class="math-inline" role="math">\(y=Hy+My\)</span>, sedangkan keortogonalan mengikuti dari
+<span class="math-inline" role="math">\((Hy)^{\mathsf T}My=y^{\mathsf T}HMy=0\)</span>. Keunikan mengikuti dari irisan
+<span class="math-inline" role="math">\(\mathcal C(X)\cap\mathcal C(X)^\perp=\{0\}\)</span>. □</p>
+<p><a id="O006-C140-CMP-D009-REM-LEVERAGE"></a></p>
+<h3>Catatan: leverage sebagai geometri kovarians</h3>
+<p>Tuliskan <span class="math-inline" role="math">\(h_{ij}\)</span> untuk elemen <span class="math-inline" role="math">\(H\)</span>. Karena <span class="math-inline" role="math">\(H\)</span> adalah proyeksi ortogonal,</p>
+<div class="math-display" role="math">\[0\le h_{ii}\le1,\qquad \sum_{i=1}^nh_{ii}=p.\]</div>
+<p>Besaran <span class="math-inline" role="math">\(h_{ii}\)</span> adalah leverage observasi ke-<span class="math-inline" role="math">\(i\)</span>, sepenuhnya ditentukan
+oleh rancangan tetap. Di bawah FD3–FD4, nanti akan diperoleh</p>
+<div class="math-display" role="math">\[\operatorname{Var}(\widehat Y_i)=\sigma^2h_{ii},\qquad
+\operatorname{Var}(e_i)=\sigma^2(1-h_{ii}).\]</div>
+<p>Jadi leverage bukan probabilitas dan bukan hasil melihat respons; ia mengukur
+berapa besar ruang rancangan memungkinkan observasi tersebut memengaruhi
+komponen kecocokan.</p>
+<p><a id="O006-C140-CMP-D009-SEC-OLS"></a></p>
+<h2>OLS, persamaan normal, dan keunikan</h2>
+<p><a id="O006-C140-CMP-D009-DEF-OLS"></a></p>
+<h3>Definisi: kriteria kuadrat terkecil</h3>
+<p>Untuk data teramati <span class="math-inline" role="math">\(y\)</span>, OLS meminimumkan</p>
+<div class="math-display" role="math">\[S(b)=\|y-Xb\|_2^2\]</div>
+<p>atas <span class="math-inline" role="math">\(b\in\mathbb R^p\)</span>. Definisi ini deterministik: belum ada nilai harapan,
+varians, atau distribusi galat.</p>
+<p><a id="O006-C140-CMP-D009-THM-OLS-SOLUTION"></a></p>
+<h3>Teorema: solusi unik dan persamaan normal</h3>
+<p>Di bawah FD1–FD2, peminimum unik kriteria OLS adalah</p>
+<div class="math-display" role="math">\[\widehat\beta=(X^{\mathsf T}X)^{-1}X^{\mathsf T}y.\]</div>
+<p>Ia memenuhi persamaan normal</p>
+<div class="math-display" role="math">\[X^{\mathsf T}(y-X\widehat\beta)=0,\]</div>
+<p>dan menghasilkan</p>
+<div class="math-display" role="math">\[\widehat y=X\widehat\beta=Hy,\qquad
+e=y-X\widehat\beta=My.\]</div>
+<p><a id="O006-C140-CMP-D009-PRF-OLS-SOLUTION"></a></p>
+<h3>Bukti</h3>
+<p>Gradien dan Hessian kriteria adalah</p>
+<div class="math-display" role="math">\[\nabla_bS(b)=-2X^{\mathsf T}(y-Xb),\qquad
+\nabla_b^2S(b)=2X^{\mathsf T}X.\]</div>
+<p>FD2 membuat Hessian definit positif, sehingga setiap titik stasioner adalah
+peminimum global unik. Persamaan stasioner memberi
+<span class="math-inline" role="math">\(X^{\mathsf T}X\widehat\beta=X^{\mathsf T}y\)</span>, lalu formula di atas.</p>
+<p>Argumen geometri memperlihatkan lebih banyak. Karena
+<span class="math-inline" role="math">\(e=y-X\widehat\beta\)</span> ortogonal terhadap setiap kolom <span class="math-inline" role="math">\(X\)</span>, untuk sembarang
+<span class="math-inline" role="math">\(b\)</span>,</p>
+<div class="math-display" role="math">\[y-Xb=e+X(\widehat\beta-b)\]</div>
+<p>adalah jumlah dua vektor ortogonal. Maka</p>
+<div class="math-display" role="math">\[S(b)=\|e\|^2+(b-\widehat\beta)^{\mathsf T}
+X^{\mathsf T}X(b-\widehat\beta).\]</div>
+<p>Suku kedua nonnegatif dan sama dengan nol hanya bila
+<span class="math-inline" role="math">\(b=\widehat\beta\)</span>. Identitas untuk kecocokan dan residual mengikuti dari
+definisi <span class="math-inline" role="math">\(H\)</span> dan <span class="math-inline" role="math">\(M\)</span>. □</p>
+<p><a id="O006-C140-CMP-D009-DEF-RSS"></a></p>
+<h3>Definisi: jumlah kuadrat residual</h3>
+<p>Jumlah kuadrat residual adalah</p>
+<div class="math-display" role="math">\[\operatorname{RSS}=\|e\|^2=e^{\mathsf T}e
+=Y^{\mathsf T}MY,\]</div>
+<p>karena <span class="math-inline" role="math">\(M^{\mathsf T}M=M\)</span>. Derajat bebas residual <span class="math-inline" role="math">\(n-p\)</span> berasal dari rank
+proyeksi <span class="math-inline" role="math">\(M\)</span>, bukan dari kebiasaan membagi dengan suatu angka tertentu.</p>
+<p><a id="O006-C140-CMP-D009-SEC-MOMENTS"></a></p>
+<h2>Ketakbiasan dan geometri kovarians OLS</h2>
+<p><a id="O006-C140-CMP-D009-THM-OLS-MOMENTS"></a></p>
+<h3>Teorema: rataan dan kovarians koefisien OLS</h3>
+<p>Di bawah FD1–FD4,</p>
+<div class="math-display" role="math">\[E(\widehat\beta)=\beta,
+\qquad
+\operatorname{Cov}(\widehat\beta)
+=\sigma^2(X^{\mathsf T}X)^{-1}.\]</div>
+<p>Untuk setiap kontras tetap <span class="math-inline" role="math">\(c\in\mathbb R^p\)</span>,</p>
+<div class="math-display" role="math">\[E(c^{\mathsf T}\widehat\beta)=c^{\mathsf T}\beta,\qquad
+\operatorname{Var}(c^{\mathsf T}\widehat\beta)
+=\sigma^2c^{\mathsf T}(X^{\mathsf T}X)^{-1}c.\]</div>
+<p><a id="O006-C140-CMP-D009-PRF-OLS-MOMENTS"></a></p>
+<h3>Bukti</h3>
+<p>Definisikan</p>
+<div class="math-display" role="math">\[A_0=(X^{\mathsf T}X)^{-1}X^{\mathsf T}.\]</div>
+<p>Karena <span class="math-inline" role="math">\(A_0X=I_p\)</span>,</p>
+<div class="math-display" role="math">\[\widehat\beta=A_0Y=\beta+A_0\varepsilon.\]</div>
+<p>FD3 langsung memberi ketakbiasan. Dengan FD4,</p>
+<div class="math-display" role="math">\[\begin{aligned}
+\operatorname{Cov}(\widehat\beta)
+&amp;=A_0(\sigma^2I_n)A_0^{\mathsf T}\\
+&amp;=\sigma^2(X^{\mathsf T}X)^{-1}X^{\mathsf T}X\,
+(X^{\mathsf T}X)^{-1}\\
+&amp;=\sigma^2(X^{\mathsf T}X)^{-1}.
+\end{aligned}\]</div>
+<p>Hasil kontras mengikuti dengan mengalikan rataan dan kovarians oleh
+<span class="math-inline" role="math">\(c^{\mathsf T}\)</span> dan <span class="math-inline" role="math">\(c\)</span>. Tidak ada langkah yang memakai normalitas. □</p>
+<p><a id="O006-C140-CMP-D009-THM-FITTED-RESIDUAL-COVARIANCE"></a></p>
+<h3>Teorema: kovarians kecocokan dan residual</h3>
+<p>Di bawah FD1–FD4,</p>
+<div class="math-display" role="math">\[E(\widehat Y)=X\beta,\qquad E(e)=0,\]</div>
+<div class="math-display" role="math">\[\operatorname{Cov}(\widehat Y)=\sigma^2H,\qquad
+\operatorname{Cov}(e)=\sigma^2M,\qquad
+\operatorname{Cov}(\widehat Y,e)=0.\]</div>
+<p>Selain itu,</p>
+<div class="math-display" role="math">\[\operatorname{Cov}(\widehat\beta,e)=0.\]</div>
+<p><a id="O006-C140-CMP-D009-PRF-FITTED-RESIDUAL-COVARIANCE"></a></p>
+<h3>Bukti</h3>
+<p>Karena <span class="math-inline" role="math">\(HX=X\)</span> dan <span class="math-inline" role="math">\(MX=0\)</span>,</p>
+<div class="math-display" role="math">\[\widehat Y=X\beta+H\varepsilon,\qquad e=M\varepsilon.\]</div>
+<p>Rataan mengikuti FD3. Simetri dan idempotensi proyeksi memberi</p>
+<div class="math-display" role="math">\[\operatorname{Cov}(H\varepsilon)=\sigma^2HH^{\mathsf T}=\sigma^2H,
+\qquad
+\operatorname{Cov}(M\varepsilon)=\sigma^2MM^{\mathsf T}=\sigma^2M.\]</div>
+<p>Kovarians silang sama dengan <span class="math-inline" role="math">\(\sigma^2HM=0\)</span>. Terakhir,</p>
+<div class="math-display" role="math">\[\operatorname{Cov}(\widehat\beta,e)
+=\sigma^2A_0M
+=\sigma^2(X^{\mathsf T}X)^{-1}X^{\mathsf T}M=0,\]</div>
+<p>sebab <span class="math-inline" role="math">\(MX=0\)</span> dan <span class="math-inline" role="math">\(M\)</span> simetris. □</p>
+<p>Nol kovarians hanya berarti <strong>tak berkorelasi</strong> di bawah FD1–FD4. Ia menjadi
+independensi pada model Gaussian karena transformasi linear bersama dari
+vektor Gaussian yang tak berkorelasi adalah independen. Tanpa G, independensi
+tidak boleh disimpulkan.</p>
+<p><a id="O006-C140-CMP-D009-SEC-GAUSS-MARKOV"></a></p>
+<h2>Teorema Gauss–Markov dan arti BLUE</h2>
+<p><a id="O006-C140-CMP-D009-DEF-BLUE"></a></p>
+<h3>Definisi: penduga linear tak bias terbaik</h3>
+<p>Suatu penduga koefisien disebut linear bila berbentuk <span class="math-inline" role="math">\(AY\)</span>, dengan
+<span class="math-inline" role="math">\(A\in\mathbb R^{p\times n}\)</span> tidak bergantung pada <span class="math-inline" role="math">\(Y\)</span>. Di bawah FD3,
+penduga ini tak bias untuk setiap <span class="math-inline" role="math">\(\beta\)</span> jika dan hanya jika</p>
+<div class="math-display" role="math">\[AX=I_p.\]</div>
+<p>Kata <strong>terbaik</strong> pada BLUE (<em>best linear unbiased estimator</em>) memakai urutan
+Loewner: <span class="math-inline" role="math">\(V_1\preceq V_2\)</span> bila <span class="math-inline" role="math">\(V_2-V_1\)</span> positif semidefinit. Dengan kata
+lain, setiap kombinasi linear koefisien mempunyai varians yang tidak lebih
+besar di bawah penduga terbaik.</p>
+<p><a id="O006-C140-CMP-D009-THM-GAUSS-MARKOV"></a></p>
+<h3>Teorema Gauss–Markov</h3>
+<p>Di bawah FD1–FD4, <span class="math-inline" role="math">\(\widehat\beta=A_0Y\)</span> adalah BLUE untuk <span class="math-inline" role="math">\(\beta\)</span>. Lebih
+tepat, untuk setiap penduga linear <span class="math-inline" role="math">\(\widetilde\beta=AY\)</span> yang tak bias bagi
+semua <span class="math-inline" role="math">\(\beta\)</span>,</p>
+<div class="math-display" role="math">\[\operatorname{Cov}(\widetilde\beta)
+-\operatorname{Cov}(\widehat\beta)\succeq0.\]</div>
+<p>Untuk setiap <span class="math-inline" role="math">\(c\in\mathbb R^p\)</span>,</p>
+<div class="math-display" role="math">\[\operatorname{Var}(c^{\mathsf T}\widetilde\beta)
+-\operatorname{Var}(c^{\mathsf T}\widehat\beta)\ge0.\]</div>
+<p><a id="O006-C140-CMP-D009-PRF-GAUSS-MARKOV"></a></p>
+<h3>Bukti</h3>
+<p>Ketakbiasan <span class="math-inline" role="math">\(AY\)</span> untuk semua <span class="math-inline" role="math">\(\beta\)</span> ekuivalen dengan <span class="math-inline" role="math">\(AX=I_p\)</span>. Tulis</p>
+<div class="math-display" role="math">\[D=A-A_0.\]</div>
+<p>Karena <span class="math-inline" role="math">\(AX=A_0X=I_p\)</span>, kita mempunyai <span class="math-inline" role="math">\(DX=0\)</span>. Selanjutnya,</p>
+<div class="math-display" role="math">\[A_0D^{\mathsf T}
+=(X^{\mathsf T}X)^{-1}X^{\mathsf T}D^{\mathsf T}
+=(X^{\mathsf T}X)^{-1}(DX)^{\mathsf T}=0,\]</div>
+<p>dan demikian pula <span class="math-inline" role="math">\(DA_0^{\mathsf T}=0\)</span>. FD4 memberi</p>
+<div class="math-display" role="math">\[\begin{aligned}
+\operatorname{Cov}(AY)
+&amp;=\sigma^2AA^{\mathsf T}\\
+&amp;=\sigma^2(A_0+D)(A_0+D)^{\mathsf T}\\
+&amp;=\sigma^2A_0A_0^{\mathsf T}+\sigma^2DD^{\mathsf T}\\
+&amp;=\operatorname{Cov}(\widehat\beta)+\sigma^2DD^{\mathsf T}.
+\end{aligned}\]</div>
+<p>Matriks <span class="math-inline" role="math">\(DD^{\mathsf T}\)</span> positif semidefinit karena untuk setiap <span class="math-inline" role="math">\(c\)</span>,</p>
+<div class="math-display" role="math">\[c^{\mathsf T}DD^{\mathsf T}c=\|D^{\mathsf T}c\|^2\ge0.\]</div>
+<p>Ini sekaligus membuktikan pernyataan varians kontras. Bahkan, kesamaan matriks
+kovarians hanya mungkin bila <span class="math-inline" role="math">\(DD^{\mathsf T}=0\)</span>, yang memaksa <span class="math-inline" role="math">\(D=0\)</span> dan
+<span class="math-inline" role="math">\(A=A_0\)</span>. Jadi OLS unik dalam kelas penduga linear tak bias dengan kovarians
+minimum. □</p>
+<p><a id="O006-C140-CMP-D009-THM-GAUSS-MARKOV-LINEAR-TARGET"></a></p>
+<h3>Korolari: target linear umum</h3>
+<p>Untuk matriks tetap <span class="math-inline" role="math">\(L\in\mathbb R^{q\times p}\)</span>, penduga
+<span class="math-inline" role="math">\(L\widehat\beta\)</span> adalah BLUE bagi <span class="math-inline" role="math">\(L\beta\)</span>. Jika <span class="math-inline" role="math">\(CY\)</span> adalah penduga
+linear lain dengan <span class="math-inline" role="math">\(CX=L\)</span>, tulis <span class="math-inline" role="math">\(C=LA_0+D\)</span>. Karena <span class="math-inline" role="math">\(DX=0\)</span>, argumen
+yang sama memberi</p>
+<div class="math-display" role="math">\[\operatorname{Cov}(CY)-\operatorname{Cov}(L\widehat\beta)
+=\sigma^2DD^{\mathsf T}\succeq0.\]</div>
+<p>Korolari ini mencakup satu kontras <span class="math-inline" role="math">\(c^{\mathsf T}\beta\)</span>, beberapa kontras
+sekaligus, dan rataan kecocokan <span class="math-inline" role="math">\(X\beta\)</span>.</p>
+<p><a id="O006-C140-CMP-D009-REM-GM-SCOPE"></a></p>
+<h3>Apa yang tidak dikatakan Gauss–Markov</h3>
+<p>Teorema ini “bebas bentuk distribusi” hanya dalam arti tidak memilih keluarga
+parametrik seperti Normal, Laplace, atau <span class="math-inline" role="math">\(t\)</span>. Ia tetap memerlukan struktur
+momen FD3–FD4, rancangan ber-rank penuh, dan pembatasan kelas pembanding pada
+penduga <strong>linear</strong> yang <strong>tak bias</strong>. Teorema ini tidak menyatakan bahwa OLS
+mempunyai varians terkecil di antara semua penduga, tidak menjamin interval
+Normal eksak, dan tidak menyebut likelihood. Penduga nonlinear yang bias dapat
+mempunyai MSE lebih kecil; itu pertanyaan risiko yang berbeda.</p>
+<p><a id="O006-C140-CMP-D009-SEC-GAUSSIAN-MLE"></a></p>
+<h2>Likelihood Gaussian dan MLE bersama</h2>
+<p><a id="O006-C140-CMP-D009-THM-GAUSSIAN-MLE"></a></p>
+<h3>Teorema: MLE koefisien dan varians</h3>
+<p>Andaikan FD1–FD2, <span class="math-inline" role="math">\(n&gt;p\)</span>, dan asumsi G. Untuk realisasi dengan
+<span class="math-inline" role="math">\(\operatorname{RSS}&gt;0\)</span>, MLE bersama adalah</p>
+<div class="math-display" role="math">\[\widehat\beta_{\mathrm{MLE}}=\widehat\beta
+=(X^{\mathsf T}X)^{-1}X^{\mathsf T}Y,
+\qquad
+\widehat\sigma^2_{\mathrm{MLE}}=\frac{\operatorname{RSS}}{n}.\]</div>
+<p>Di bawah model Gaussian dengan <span class="math-inline" role="math">\(n&gt;p\)</span>, peristiwa
+<span class="math-inline" role="math">\(\operatorname{RSS}=0\)</span> berprobabilitas nol.</p>
+<p><a id="O006-C140-CMP-D009-PRF-GAUSSIAN-MLE"></a></p>
+<h3>Bukti</h3>
+<p>Log-likelihood, hingga konstanta yang tidak bergantung pada parameter, adalah</p>
+<div class="math-display" role="math">\[\ell(\beta,\sigma^2)
+=-\frac n2\log(\sigma^2)
+-\frac{1}{2\sigma^2}\|Y-X\beta\|^2.\]</div>
+<p>Untuk setiap <span class="math-inline" role="math">\(\sigma^2&gt;0\)</span> tetap, memaksimumkan <span class="math-inline" role="math">\(\ell\)</span> terhadap <span class="math-inline" role="math">\(\beta\)</span>
+ekuivalen dengan meminimumkan jumlah kuadrat. Teorema OLS
+<a class="xref" data-target-id="O006-C140-CMP-D009-THM-OLS-SOLUTION" href="O006-C140-CMP-D009.html#O006-C140-CMP-D009-THM-OLS-SOLUTION">Teorema: solusi unik dan persamaan normal</a> memberi pemaksimum unik
+<span class="math-inline" role="math">\(\widehat\beta\)</span>. Setelah disubstitusikan, log-likelihood profil adalah</p>
+<div class="math-display" role="math">\[\ell_p(\sigma^2)
+=-\frac n2\log(\sigma^2)-\frac{\operatorname{RSS}}{2\sigma^2}+C.\]</div>
+<p>Turunannya</p>
+<div class="math-display" role="math">\[\ell_p'(\sigma^2)
+=-\frac{n}{2\sigma^2}
++\frac{\operatorname{RSS}}{2(\sigma^2)^2}\]</div>
+<p>bernilai nol hanya pada
+<span class="math-inline" role="math">\(\sigma^2=\operatorname{RSS}/n\)</span>. Jika RSS positif, log-likelihood menuju
+<span class="math-inline" role="math">\(-\infty\)</span> ketika <span class="math-inline" role="math">\(\sigma^2\downarrow0\)</span> maupun
+<span class="math-inline" role="math">\(\sigma^2\to\infty\)</span>, sehingga titik itu adalah maksimum global unik.
+Di bawah G, residual berada pada subruang berdimensi <span class="math-inline" role="math">\(n-p&gt;0\)</span> dan mempunyai
+densitas kontinu nonsingular di subruang tersebut; peluang seluruh koordinat
+residual sama dengan nol adalah nol. □</p>
+<p>Jika <span class="math-inline" role="math">\(\operatorname{RSS}=0\)</span> sementara ruang parameter mensyaratkan
+<span class="math-inline" role="math">\(\sigma^2&gt;0\)</span>, likelihood tidak mempunyai maksimum interior: nilainya tak
+terbatas ketika <span class="math-inline" role="math">\(\sigma^2\downarrow0\)</span>. Kasus <span class="math-inline" role="math">\(n=p\)</span> membuat RSS selalu nol,
+sehingga syarat <span class="math-inline" role="math">\(n&gt;p\)</span> bukan kosmetik untuk estimasi varians bersama.</p>
+<p><a id="O006-C140-CMP-D009-REM-MLE-VS-GM"></a></p>
+<h3>MLE bukan konsekuensi Gauss–Markov</h3>
+<p>Formula koefisien MLE sama dengan OLS karena log-densitas Normal mempunyai
+kerugian kuadratik. Bila distribusi galat bukan Normal, likelihood sebenarnya
+dapat menghasilkan estimator lain. Sebaliknya, selama FD3–FD4 tetap berlaku,
+ketakbiasan dan sifat BLUE OLS tetap sah walaupun distribusi galat miring,
+diskret, atau berekor berat dengan varians hingga. Jadi normalitas dibutuhkan
+untuk klaim likelihood di bagian ini, bukan untuk bukti Gauss–Markov.</p>
+<p><a id="O006-C140-CMP-D009-SEC-SIGMA2"></a></p>
+<h2>Estimasi <span class="math-inline" role="math">\(\sigma^2\)</span> dan dekomposisi Gaussian eksak</h2>
+<p><a id="O006-C140-CMP-D009-THM-SIGMA-UNBIASED"></a></p>
+<h3>Teorema: estimator varians tak bias</h3>
+<p>Di bawah FD1–FD4 dan <span class="math-inline" role="math">\(n&gt;p\)</span>,</p>
+<div class="math-display" role="math">\[s^2=\frac{\operatorname{RSS}}{n-p}\]</div>
+<p>adalah estimator tak bias bagi <span class="math-inline" role="math">\(\sigma^2\)</span>. Besaran
+<span class="math-inline" role="math">\(\widehat\sigma^2_{\mathrm{MLE}}=\operatorname{RSS}/n\)</span>, yang merupakan MLE
+hanya di bawah asumsi G, memenuhi</p>
+<div class="math-display" role="math">\[E(\widehat\sigma^2_{\mathrm{MLE}})
+=\frac{n-p}{n}\sigma^2,\]</div>
+<p>sehingga MLE varians bias ke bawah pada sampel hingga.</p>
+<p><a id="O006-C140-CMP-D009-PRF-SIGMA-UNBIASED"></a></p>
+<h3>Bukti</h3>
+<p>Karena <span class="math-inline" role="math">\(MX=0\)</span>, residual sama dengan <span class="math-inline" role="math">\(M\varepsilon\)</span>, sehingga</p>
+<div class="math-display" role="math">\[\operatorname{RSS}=\varepsilon^{\mathsf T}M\varepsilon.\]</div>
+<p>Untuk setiap vektor acak <span class="math-inline" role="math">\(Z\)</span> dengan rataan nol dan kovarians <span class="math-inline" role="math">\(\Sigma\)</span>,
+<span class="math-inline" role="math">\(E(Z^{\mathsf T}AZ)=\operatorname{tr}(A\Sigma)\)</span>. Terapkan identitas ini
+dengan <span class="math-inline" role="math">\(A=M\)</span> dan <span class="math-inline" role="math">\(\Sigma=\sigma^2I_n\)</span>:</p>
+<div class="math-display" role="math">\[E(\operatorname{RSS})
+=\sigma^2\operatorname{tr}(M)
+=\sigma^2(n-p).\]</div>
+<p>Membagi dengan <span class="math-inline" role="math">\(n-p\)</span> memberi ketakbiasan <span class="math-inline" role="math">\(s^2\)</span>; membagi dengan <span class="math-inline" role="math">\(n\)</span>
+memberi rataan MLE yang dinyatakan. Bukti ini hanya memakai momen FD3–FD4,
+bukan normalitas. □</p>
+<p><a id="O006-C140-CMP-D009-THM-GAUSSIAN-DECOMPOSITION"></a></p>
+<h3>Teorema: distribusi eksak dan independensi di bawah G</h3>
+<p>Di bawah FD1–FD2, <span class="math-inline" role="math">\(n&gt;p\)</span>, dan asumsi G,</p>
+<div class="math-display" role="math">\[\widehat\beta\sim
+N_p\!\left(\beta,\sigma^2(X^{\mathsf T}X)^{-1}\right),\]</div>
+<div class="math-display" role="math">\[\frac{\operatorname{RSS}}{\sigma^2}\sim\chi^2_{n-p},\]</div>
+<p>dan <span class="math-inline" role="math">\(\widehat\beta\)</span> independen dari <span class="math-inline" role="math">\(e\)</span>, RSS, dan <span class="math-inline" role="math">\(s^2\)</span>.</p>
+<p><a id="O006-C140-CMP-D009-PRF-GAUSSIAN-DECOMPOSITION"></a></p>
+<h3>Bukti</h3>
+<p>Pilih matriks ortogonal <span class="math-inline" role="math">\(Q=(Q_1\;Q_2)\)</span>, dengan kolom <span class="math-inline" role="math">\(Q_1\)</span> membentuk
+basis ortonormal <span class="math-inline" role="math">\(\mathcal C(X)\)</span> dan kolom <span class="math-inline" role="math">\(Q_2\)</span> membentuk basis
+ortonormal komplemennya. Maka</p>
+<div class="math-display" role="math">\[H=Q_1Q_1^{\mathsf T},\qquad M=Q_2Q_2^{\mathsf T}.\]</div>
+<p>Asumsi G dan invariansi Normal terhadap transformasi ortogonal memberi</p>
+<div class="math-display" role="math">\[Q^{\mathsf T}\varepsilon
+=\begin{pmatrix}Q_1^{\mathsf T}\varepsilon\\Q_2^{\mathsf T}\varepsilon\end{pmatrix}
+\sim N_n(0,\sigma^2I_n).\]</div>
+<p>Dua blok koordinat itu independen. Galat koefisien
+<span class="math-inline" role="math">\(\widehat\beta-\beta=A_0\varepsilon\)</span> hanya bergantung pada komponen
+<span class="math-inline" role="math">\(H\varepsilon=Q_1Q_1^{\mathsf T}\varepsilon\)</span>, sedangkan</p>
+<div class="math-display" role="math">\[e=M\varepsilon=Q_2Q_2^{\mathsf T}\varepsilon\]</div>
+<p>hanya bergantung pada blok kedua. Karena itu koefisien dan seluruh residual
+independen. Distribusi Normal koefisien mengikuti transformasi linear dan
+kovarians yang telah dihitung. Selanjutnya,</p>
+<div class="math-display" role="math">\[\frac{\operatorname{RSS}}{\sigma^2}
+=\left\|\frac{Q_2^{\mathsf T}\varepsilon}{\sigma}\right\|^2\]</div>
+<p>adalah jumlah kuadrat <span class="math-inline" role="math">\(n-p\)</span> Normal baku independen, sehingga berdistribusi
+<span class="math-inline" role="math">\(\chi^2_{n-p}\)</span>. RSS dan <span class="math-inline" role="math">\(s^2\)</span> adalah fungsi blok residual, jadi keduanya
+independen dari <span class="math-inline" role="math">\(\widehat\beta\)</span>. □</p>
+<p>Teorema ini menyediakan dasar untuk statistik <span class="math-inline" role="math">\(t\)</span> dan <span class="math-inline" role="math">\(F\)</span> eksak. Dasar itu
+tidak boleh dipertahankan secara otomatis ketika normalitas dihapus: nol
+kovarians pada
+<a class="xref" data-target-id="O006-C140-CMP-D009-THM-FITTED-RESIDUAL-COVARIANCE" href="O006-C140-CMP-D009.html#O006-C140-CMP-D009-THM-FITTED-RESIDUAL-COVARIANCE">Teorema: kovarians kecocokan dan residual</a> masih berlaku, tetapi
+independensi dan hukum khi-kuadrat tidak dijamin.</p>
+<p><a id="O006-C140-CMP-D009-SEC-FAILURES"></a></p>
+<h2>Apa yang berubah ketika asumsi gagal</h2>
+<p><a id="O006-C140-CMP-D009-CTR-RANK"></a></p>
+<h3>Rank tidak penuh</h3>
+<p>Jika <span class="math-inline" role="math">\(\operatorname{rank}(X)&lt;p\)</span>, ada <span class="math-inline" role="math">\(d\ne0\)</span> dengan <span class="math-inline" role="math">\(Xd=0\)</span>. Maka
+<span class="math-inline" role="math">\(X\beta=X(\beta+d)\)</span>, sehingga seluruh koefisien <span class="math-inline" role="math">\(\beta\)</span> tidak
+teridentifikasi. Nilai kecocokan proyeksi ke <span class="math-inline" role="math">\(\mathcal C(X)\)</span> masih unik,
+tetapi representasi koefisiennya tidak. Menggunakan pseudoinvers memilih satu
+representasi; ia tidak memulihkan identifiabilitas yang hilang. Hanya fungsi
+linear yang terestimasi (<em>estimable</em>) yang boleh diberi inferensi tanpa kendala
+tambahan.</p>
+<p><a id="O006-C140-CMP-D009-CTR-NONZERO-MEAN"></a></p>
+<h3>Rataan galat tidak nol</h3>
+<p>Jika <span class="math-inline" role="math">\(E(\varepsilon)=m\ne0\)</span>,</p>
+<div class="math-display" role="math">\[E(\widehat\beta)-\beta=A_0m.\]</div>
+<p>Bias menghilang hanya bila <span class="math-inline" role="math">\(X^{\mathsf T}m=0\)</span>, suatu kondisi khusus yang
+tidak boleh diasumsikan. Menambah kolom intercept dapat menangkap pergeseran
+konstan tertentu, tetapi tidak memperbaiki setiap salah spesifikasi rataan.</p>
+<p><a id="O006-C140-CMP-D009-CTR-NONSPHERICAL"></a></p>
+<h3>Kovarians tidak sferis</h3>
+<p>Jika</p>
+<div class="math-display" role="math">\[\operatorname{Cov}(\varepsilon)=\sigma^2\Omega\]</div>
+<p>dengan <span class="math-inline" role="math">\(\Omega\ne I_n\)</span>, OLS tetap tak bias selama FD3 berlaku, tetapi</p>
+<div class="math-display" role="math">\[\operatorname{Cov}(\widehat\beta)
+=\sigma^2(X^{\mathsf T}X)^{-1}X^{\mathsf T}\Omega X\,
+(X^{\mathsf T}X)^{-1}.\]</div>
+<p>Suku silang pada bukti Gauss–Markov biasa tidak lagi harus nol, sehingga OLS
+tidak dijamin BLUE. Bila <span class="math-inline" role="math">\(\Omega\)</span> diketahui dan positif definit, transformasi
+pemutihan menghasilkan kuadrat terkecil terumumkan; itu adalah teorema lain,
+bukan konsekuensi formula OLS dengan simpangan baku lama.</p>
+<p><a id="O006-C140-CMP-D009-CTR-NONGAUSSIAN"></a></p>
+<h3>Galat non-Gaussian dengan momen yang benar</h3>
+<p>Bila FD3–FD4 berlaku tetapi G gagal, formula OLS, ketakbiasan, kovarians, dan
+BLUE tetap berlaku. Namun OLS belum tentu MLE, residual tak berkorelasi belum
+tentu independen dari koefisien, dan RSS dibagi <span class="math-inline" role="math">\(\sigma^2\)</span> belum tentu
+khi-kuadrat. Inferensi dapat memakai teorema limit atau metode robust yang
+syaratnya harus dinyatakan terpisah.</p>
+<p><a id="O006-C140-CMP-D009-ALG-AUDIT"></a></p>
+<h2>Daftar periksa penerapan</h2>
+<ol>
+<li>Nyatakan apakah <span class="math-inline" role="math">\(X\)</span> diperlakukan tetap atau acak; untuk bab ini seluruh
+probabilitas bersyarat pada <span class="math-inline" role="math">\(X\)</span>.</li>
+<li>Verifikasi rank kolom <span class="math-inline" role="math">\(p\)</span>, bukan hanya bahwa perangkat lunak mengeluarkan
+koefisien.</li>
+<li>Pisahkan identitas geometri <span class="math-inline" role="math">\(H^2=H\)</span> dan persamaan normal dari asumsi
+probabilistik.</li>
+<li>Untuk ketakbiasan, periksa <span class="math-inline" role="math">\(E(\varepsilon)=0\)</span>; untuk kovarians OLS dan
+Gauss–Markov biasa, periksa <span class="math-inline" role="math">\(\operatorname{Cov}(\varepsilon)=\sigma^2I\)</span>.</li>
+<li>Saat menyebut BLUE, tulis kelas pembanding: linear, tak bias untuk setiap
+<span class="math-inline" role="math">\(\beta\)</span>, dan dibandingkan melalui urutan Loewner atau setiap kontras.</li>
+<li>Gunakan <span class="math-inline" role="math">\(\operatorname{RSS}/n\)</span> hanya sebagai MLE Gaussian varians;
+gunakan <span class="math-inline" role="math">\(\operatorname{RSS}/(n-p)\)</span> untuk estimator tak bias di bawah
+asumsi momen.</li>
+<li>Klaim distribusi Normal koefisien, khi-kuadrat residual, atau independensi
+eksak hanya setelah asumsi G dinyatakan.</li>
+<li>Jika kovarians tidak sferis, hitung ulang kovarians dan gunakan teorema
+robust atau GLS yang sesuai; jangan mempertahankan bukti Gauss–Markov dengan
+mengganti satu simbol saja.</li>
+</ol>
+<p><a id="O006-C140-CMP-D009-SEC-SUMMARY"></a></p>
+<h2>Ringkasan</h2>
+<p>OLS adalah proyeksi ortogonal <span class="math-inline" role="math">\(Y\)</span> ke ruang kolom rancangan. Di bawah rataan
+galat nol dan kovarians <span class="math-inline" role="math">\(\sigma^2I\)</span>, ia tak bias, mempunyai kovarians
+<span class="math-inline" role="math">\(\sigma^2(X^{\mathsf T}X)^{-1}\)</span>, dan merupakan BLUE melalui dekomposisi
+kovarians dengan suku positif semidefinit. Semua hasil itu tidak memerlukan
+normalitas. Asumsi Gaussian menambahkan interpretasi likelihood, MLE varians
+<span class="math-inline" role="math">\(\operatorname{RSS}/n\)</span>, hukum eksak
+<span class="math-inline" role="math">\(\operatorname{RSS}/\sigma^2\sim\chi^2_{n-p}\)</span>, dan independensi antara
+koefisien serta residual. Mempertahankan pemisahan ini mencegah formula yang
+benar dipakai dengan alasan yang salah.</p>
+
+<footer class="license">Materi pendamping orisinal berlisensi CC BY-SA 4.0. Komponen Penn State dan Random tetap berada di bawah lisensinya masing-masing dan tidak direlisensikan oleh halaman ini.</footer>
+</main>
+</div>
+</body>
+</html>

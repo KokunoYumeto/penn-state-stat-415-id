@@ -1,6 +1,35 @@
 # Current state — original C140 companion
 
-Updated: 2026-08-28
+Updated: 2026-08-29
+
+## C2 matrix-linear-model boundary — local deterministic closure
+
+Batch C2 is locally complete and awaiting cumulative publication. It adds
+`D008`–`D011`, `SIM005`, and `MS12` without replacing C1. The cumulative
+reader now contains 23 documents / 422,089 source bytes / 640 stable anchors /
+221 resolved body references. Five mastery sets and `CA01` contain 50 problems;
+every problem has metadata, two or more staged hints, a short answer, and a
+complete worked solution.
+
+The C2 seeded simulation produces three substantive CSV/SVG outputs plus its
+manifest: 4 files / 3,873 bytes. Its receipt SHA-256 is
+`4e54d8a5e169022de110c80240945c00a4b8f388dd94c5f10ffe09e2115db7b8`.
+Together, C1+C2 cover five simulation families and 12 substantive generated
+assets. The cumulative browser-free HTML closure contains 47 files / 2,509,563
+bytes; manifest SHA-256
+`e1e7b2de782a5d49ad9c34d681e6b503bf610c8a8c69e346bba604d80fc07c6c`.
+The backend contains 679 entities and 917 relations in four files / 225,463
+bytes; manifest SHA-256
+`d86114d3ee468de1a45e3e54d45dbf73015b60ab61578e3a73476528717695ea`.
+
+Build receipt SHA-256 is
+`198df17c460d1dcd4523bcd3fd90230ff9429e1ac44f93565eb61c6950c50644`;
+QA receipt SHA-256 is
+`7e05934a8c28643a210b2ae833b3ef49bfefb988e9ada2e50a6786bd9ddd16f8`.
+Both write/check-only replays pass with browser and network use false. A bounded
+post-authoring audit repaired hidden control-character damage in two formulas,
+restored missing TeX commands, reconciled SIM005 notation and replication
+counts, and independently checked the theory and all eight MS12 solutions.
 
 Batch C1 is publicly preserved as a coherent partial checkpoint. The admitted
 reader contains 17 documents: index, `D001`–`D007`, `SIM001`–`SIM004`, mastery
@@ -68,6 +97,7 @@ separate. Provenance remains exactly `OpenAI Codex gpt-5.6-sol, Ultra`.
 Permanent gate: no Chrome, Chromium, Playwright, Puppeteer, Electron, WebView,
 DAISY Ace, or other browser process may be launched.
 
-Overall C140 remains incomplete after C1. Matrix Gaussian linear models,
-Bayesian–frequentist comparison, remaining simulations, nine mastery sets,
-three cumulative assessments, and two capstones remain.
+Overall C140 remains incomplete after C2. The matrix Gaussian linear-model
+bridge is closed. Bayesian–frequentist comparison, remaining scheduled
+simulations, eight mastery sets, three cumulative assessments, and two capstones
+remain.

@@ -25,10 +25,17 @@ from markdown_it import MarkdownIt
 ROOT = Path(__file__).resolve().parents[1]
 REPO = ROOT.parent.parent
 SOURCE = ROOT / "source" / "id-ID"
-GENERATED = ROOT / "generated" / "simulations" / "c1"
+GENERATED_BATCHES = {
+    "c1": ROOT / "generated" / "simulations" / "c1",
+    "c2": ROOT / "generated" / "simulations" / "c2",
+}
+SIMULATION_RECEIPTS = {
+    "c1": ROOT / "build" / "C1_SIMULATION_RECEIPT.json",
+    "c2": ROOT / "build" / "C2_SIMULATION_RECEIPT.json",
+}
 HTML_TARGET = ROOT / "build" / "html-id"
 BACKEND_TARGET = ROOT / "backend"
-RECEIPT_TARGET = ROOT / "build" / "C1_BUILD_RECEIPT.json"
+RECEIPT_TARGET = ROOT / "build" / "C2_BUILD_RECEIPT.json"
 MATHJAX_SOURCE = REPO / "build" / "html-id" / "assets" / "MathJax"
 MATHJAX_LICENSE = REPO / "build" / "html-id" / "licenses" / "MathJax-3.1.2-LICENSE.txt"
 
@@ -50,6 +57,11 @@ REQUIRED_C1 = {
     *(f"O006-C140-CMP-SIM{i:03d}" for i in range(1, 5)),
     *(f"O006-C140-CMP-MS{i:02d}" for i in range(7, 11)),
     "O006-C140-CMP-CA01",
+}
+REQUIRED_CUMULATIVE_C2 = REQUIRED_C1 | {
+    *(f"O006-C140-CMP-D{i:03d}" for i in range(8, 12)),
+    "O006-C140-CMP-SIM005",
+    "O006-C140-CMP-MS12",
 }
 ANCHOR_RE = re.compile(r'<a\s+id="([A-Za-z0-9._:-]+)"\s*></a>')
 REF_RE = re.compile(r"\[ref:([A-Za-z0-9._:-]+)\]")
@@ -170,9 +182,12 @@ def load_documents() -> list[Document]:
     ids = [str(item.metadata["id"]) for item in documents]
     if len(ids) != len(set(ids)):
         raise RuntimeError("Duplicate document ID")
-    missing = sorted(REQUIRED_C1 - set(ids))
+    missing = sorted(REQUIRED_CUMULATIVE_C2 - set(ids))
     if missing:
-        raise RuntimeError(f"C1 source boundary incomplete; missing {missing}")
+        raise RuntimeError(f"Cumulative C2 source boundary incomplete; missing {missing}")
+    unexpected = sorted(set(ids) - REQUIRED_CUMULATIVE_C2)
+    if unexpected:
+        raise RuntimeError(f"Cumulative C2 source boundary has unexpected documents {unexpected}")
     all_anchors = [anchor for item in documents for anchor in item.anchors]
     duplicates = sorted({anchor for anchor in all_anchors if all_anchors.count(anchor) > 1})
     if duplicates:
@@ -308,10 +323,10 @@ def page_template(document: Document, body_html: str, documents: list[Document])
     return page.encode("utf-8")
 
 
-def generated_asset_id(path: Path) -> str:
+def generated_asset_id(batch: str, path: Path) -> str:
     name = path.name
     if name == "MANIFEST.csv":
-        return "O006-C140-CMP-C1-SIM-MANIFEST"
+        return f"O006-C140-CMP-{batch.upper()}-SIM-MANIFEST"
     stem = path.stem.upper()
     prefix = stem.split("_", 1)[0]
     suffix = stem.split("_", 1)[1] if "_" in stem else "OUTPUT"
@@ -319,20 +334,44 @@ def generated_asset_id(path: Path) -> str:
     return f"O006-C140-CMP-{prefix}-ASSET-{suffix}-{path.suffix[1:].upper()}"
 
 
+def generated_output_rel(batch: str, path: Path) -> str:
+    if path.name == "MANIFEST.csv":
+        return f"assets/simulations/manifests/{batch}.csv"
+    return f"assets/simulations/{path.name}"
+
+
+def iter_generated_assets() -> list[tuple[str, Path, str]]:
+    rows: list[tuple[str, Path, str]] = []
+    output_paths: set[str] = set()
+    for batch, directory in GENERATED_BATCHES.items():
+        if not directory.is_dir():
+            raise RuntimeError(f"{batch.upper()} simulation outputs are missing")
+        for path in sorted(directory.iterdir()):
+            if not path.is_file():
+                continue
+            output_rel = generated_output_rel(batch, path)
+            if output_rel in output_paths:
+                raise RuntimeError(f"Simulation output collision: {output_rel}")
+            output_paths.add(output_rel)
+            rows.append((batch, path, output_rel))
+    return rows
+
+
 def collect_static_payloads() -> dict[str, bytes]:
     if not MATHJAX_SOURCE.is_dir() or not MATHJAX_LICENSE.is_file():
         raise RuntimeError("Frozen local MathJax closure is missing")
-    if not GENERATED.is_dir():
-        raise RuntimeError("C1 simulation outputs are missing")
     payloads: dict[str, bytes] = {"assets/style.css": STYLE.encode("utf-8")}
     for path in sorted(MATHJAX_SOURCE.rglob("*")):
         if path.is_file():
             suffix = path.relative_to(MATHJAX_SOURCE).as_posix()
             payloads[f"assets/MathJax/{suffix}"] = path.read_bytes()
     payloads["licenses/MathJax-3.1.2-LICENSE.txt"] = MATHJAX_LICENSE.read_bytes()
-    for path in sorted(GENERATED.iterdir()):
-        if path.is_file():
-            payloads[f"assets/simulations/{path.name}"] = path.read_bytes()
+    for _batch, path, output_rel in iter_generated_assets():
+        payloads[output_rel] = path.read_bytes()
+    for batch, path in SIMULATION_RECEIPTS.items():
+        if not path.is_file():
+            raise RuntimeError(f"{batch.upper()} simulation receipt is missing")
+        payloads[f"assets/simulations/receipts/{path.name}"] = path.read_bytes()
     return payloads
 
 
@@ -416,24 +455,44 @@ def build_payloads(documents: list[Document]) -> tuple[dict[str, bytes], dict[st
                 raise RuntimeError(f"Unresolved body reference {target} in {document.source_rel}")
             relations.add((document_id, "references", target, scope))
 
-    for path in sorted(GENERATED.iterdir()):
-        if not path.is_file():
-            continue
-        asset_id = generated_asset_id(path)
+    for batch, path, output_rel in iter_generated_assets():
+        asset_id = generated_asset_id(batch, path)
         payload = path.read_bytes()
         entities.append({
+            "batch": batch,
             "bytes": len(payload),
             "entity_id": asset_id,
             "entity_type": "simulation_asset",
             "license": "CC-BY-SA-4.0",
             "locale": "id-ID",
-            "output_path": f"assets/simulations/{path.name}",
+            "output_path": output_rel,
             "sha256": sha256(payload),
-            "source_path": f"generated/simulations/c1/{path.name}",
+            "source_path": f"generated/simulations/{batch}/{path.name}",
         })
         match = re.match(r"(SIM\d{3})_", path.name)
         if match:
             relations.add((asset_id, "generated_by", f"O006-C140-CMP-{match.group(1)}", "local"))
+
+    batch_simulations = {
+        "c1": [f"O006-C140-CMP-SIM{i:03d}" for i in range(1, 5)],
+        "c2": ["O006-C140-CMP-SIM005"],
+    }
+    for batch, path in SIMULATION_RECEIPTS.items():
+        payload = path.read_bytes()
+        receipt_id = f"O006-C140-CMP-{batch.upper()}-SIM-RECEIPT"
+        entities.append({
+            "batch": batch,
+            "bytes": len(payload),
+            "entity_id": receipt_id,
+            "entity_type": "simulation_receipt",
+            "license": "CC-BY-SA-4.0",
+            "locale": "id-ID",
+            "output_path": f"assets/simulations/receipts/{path.name}",
+            "sha256": sha256(payload),
+            "source_path": f"build/{path.name}",
+        })
+        for simulation_id in batch_simulations[batch]:
+            relations.add((receipt_id, "evidences", simulation_id, "local"))
 
     entity_lines = "".join(json.dumps(row, ensure_ascii=False, sort_keys=True, separators=(",", ":")) + "\n" for row in sorted(entities, key=lambda row: str(row["entity_id"])))
     relation_rows = [
@@ -465,15 +524,25 @@ def build_payloads(documents: list[Document]) -> tuple[dict[str, bytes], dict[st
             "relations": len(relation_rows),
         },
         "browser_processes_used": False,
-        "c1_documents": len(documents),
-        "c1_required_ids": sorted(REQUIRED_C1),
+        "boundary": "cumulative-through-c2",
+        "cumulative_documents": len(documents),
+        "cumulative_required_ids": sorted(REQUIRED_CUMULATIVE_C2),
         "html": {
             "bytes": sum(len(value) for value in html_payloads.values()),
             "files": len(html_payloads),
             "manifest_sha256": sha256(html_payloads["MANIFEST.csv"]),
         },
         "network_access": False,
-        "schema": "o006.c140.companion-c1-build.v1",
+        "schema": "o006.c140.companion-cumulative-c2-build.v1",
+        "simulation_receipts": [
+            {
+                "batch": batch,
+                "bytes": path.stat().st_size,
+                "path": f"build/{path.name}",
+                "sha256": sha256(path.read_bytes()),
+            }
+            for batch, path in SIMULATION_RECEIPTS.items()
+        ],
         "source": source_rows,
         "status": "pass",
         "translation_provenance": "OpenAI Codex gpt-5.6-sol, Ultra",
@@ -520,9 +589,9 @@ def main() -> None:
         errors = compare_payloads(HTML_TARGET, html_payloads)
         errors.extend(f"backend/{item}" for item in compare_payloads(BACKEND_TARGET, backend_payloads))
         if not RECEIPT_TARGET.is_file():
-            errors.append("missing:C1_BUILD_RECEIPT.json")
+            errors.append("missing:C2_BUILD_RECEIPT.json")
         elif RECEIPT_TARGET.read_bytes() != receipt:
-            errors.append("mismatch:C1_BUILD_RECEIPT.json")
+            errors.append("mismatch:C2_BUILD_RECEIPT.json")
         if errors:
             raise RuntimeError("Deterministic replay failed: " + ", ".join(errors[:40]))
         mode_name = "verified"

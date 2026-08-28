@@ -1,0 +1,72 @@
+{
+  "bit_generator": "PCG64",
+  "browser_processes_used": false,
+  "network_access": false,
+  "numpy": "2.4.4",
+  "outputs": [
+    {
+      "bytes": 345,
+      "path": "generated/simulations/c2/MANIFEST.csv",
+      "sha256": "49d4b956a278c251458932dc9fcbdf66ef5e73d187f69398620601cf39b3c1b1"
+    },
+    {
+      "bytes": 331,
+      "path": "generated/simulations/c2/SIM005_matrix_regression_coverage.csv",
+      "sha256": "f612308b5d579a5b3821dec844a9b0deefbf2bc9554b1a1b0315f9851bb10ebf"
+    },
+    {
+      "bytes": 2922,
+      "path": "generated/simulations/c2/SIM005_matrix_regression_coverage.svg",
+      "sha256": "14f9935db7d95efc02a0d5c2d221ffc54b2ebb42f03b76da37d831342f16c9ac"
+    },
+    {
+      "bytes": 275,
+      "path": "generated/simulations/c2/SIM005_matrix_regression_influence.csv",
+      "sha256": "d2beb1d4bfabe9850ba69c8bea76332316f5a8b5576f0c41480a067fb8e2bdf9"
+    }
+  ],
+  "python": "3.13.9",
+  "schema": "o006.c140.companion-c2-simulations.v1",
+  "status": "pass",
+  "summary": {
+    "assertions": {
+      "classical_heteroskedastic_undercoverage": true,
+      "exact_t_coverage_near_nominal": true,
+      "hc3_improves_coverage": true,
+      "high_leverage_influence_detected": true,
+      "ols_bias_small": true,
+      "projection_idempotent": true,
+      "projection_symmetric": true
+    },
+    "design": {
+      "df_residual": 77,
+      "n": 80,
+      "p": 3,
+      "rank": 3
+    },
+    "gaussian": {
+      "empirical_sd": 0.095539784102017,
+      "exact_t_coverage_95": 0.9479166666666666,
+      "mean_classical_se": 0.09515237170785258,
+      "slope_bias": 0.0003595306342605298
+    },
+    "heteroskedastic": {
+      "classical_t_coverage_95": 0.8395833333333333,
+      "empirical_sd": 0.13953395212753547,
+      "hc3_normal_coverage_95": 0.9431666666666667,
+      "mean_classical_se": 0.09913284031304204,
+      "mean_hc3_se": 0.13859597777295862,
+      "slope_bias": -0.0006364560710944156
+    },
+    "influence": {
+      "cook_distance": 105.90366577846592,
+      "index_zero_based": 40,
+      "leverage": 0.8931717031954155,
+      "residual": 0.48223388852428783,
+      "slope_with_point": 1.7277095864201188,
+      "slope_without_point": 1.1544871794871794
+    },
+    "replications": 12000,
+    "seed": 2026082805
+  }
+}

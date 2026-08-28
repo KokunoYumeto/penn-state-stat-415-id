@@ -1,0 +1,112 @@
+{
+  "backend": {
+    "documents": 23,
+    "entities": 679,
+    "manifest_sha256": "d86114d3ee468de1a45e3e54d45dbf73015b60ab61578e3a73476528717695ea",
+    "relations": 917
+  },
+  "browser_processes_used": false,
+  "build_receipt_sha256": "198df17c460d1dcd4523bcd3fd90230ff9429e1ac44f93565eb61c6950c50644",
+  "environment_sha256": "3c5c8901ca9582e42d84ffae3aab3d9505988be6ad16eaac04d4791c601260b0",
+  "html": {
+    "external_links": 22,
+    "files": 47,
+    "images": 5,
+    "local_links": 786,
+    "manifest_sha256": "e1e7b2de782a5d49ad9c34d681e6b503bf610c8a8c69e346bba604d80fc07c6c",
+    "pages": 23,
+    "unique_html_ids": 640
+  },
+  "network_access": false,
+  "schema": "o006.c140.companion-cumulative-c2-qa.v1",
+  "scripts": [
+    {
+      "path": "scripts/build_companion.py",
+      "sha256": "9d9dd6b3582243698d436a187f904450d8be90e21e184bd2f07a7971550541a3"
+    },
+    {
+      "path": "scripts/qa_companion.py",
+      "sha256": "217a616c9fea6c18227ea81b4aef36b369f2b13a5aaef38b5256cc6fca5b4fe2"
+    },
+    {
+      "path": "simulations/run_c1_simulations.py",
+      "sha256": "f924aa482c6a59faa20b9da547096bc1921c9cf7331be2a3708ad448892ebd44"
+    },
+    {
+      "path": "simulations/run_c2_simulations.py",
+      "sha256": "25758a5578b6c089ed848719700e50817bd98a7bbdfb6fc9cdb24be993f1ad39"
+    }
+  ],
+  "simulations": {
+    "batches": [
+      {
+        "batch": "c1",
+        "files": 9,
+        "manifest_sha256": "8644723b24a1afa06076d77ac55e96d93540a726df18f449b6f2efc3808d8fb8",
+        "receipt_sha256": "834c8a20025d51bf53ef4e8d0f7d805489af21c34065238131366a734df7e213",
+        "simulations": 4
+      },
+      {
+        "batch": "c2",
+        "files": 3,
+        "manifest_sha256": "49d4b956a278c251458932dc9fcbdf66ef5e73d187f69398620601cf39b3c1b1",
+        "receipt_sha256": "4e54d8a5e169022de110c80240945c00a4b8f388dd94c5f10ffe09e2115db7b8",
+        "simulations": 1
+      }
+    ],
+    "files": 12,
+    "simulation_ids": [
+      "O006-C140-CMP-SIM001",
+      "O006-C140-CMP-SIM002",
+      "O006-C140-CMP-SIM003",
+      "O006-C140-CMP-SIM004",
+      "O006-C140-CMP-SIM005"
+    ],
+    "simulations": 5
+  },
+  "source": {
+    "anchors": 640,
+    "assessments": [
+      {
+        "document_id": "O006-C140-CMP-CA01",
+        "problems": 10,
+        "rubrics": 11,
+        "solution_words": 2615
+      }
+    ],
+    "documents": 23,
+    "headings": 640,
+    "mastery_sets": [
+      {
+        "document_id": "O006-C140-CMP-MS07",
+        "problems": 8,
+        "solution_words": 1704
+      },
+      {
+        "document_id": "O006-C140-CMP-MS08",
+        "problems": 8,
+        "solution_words": 1652
+      },
+      {
+        "document_id": "O006-C140-CMP-MS09",
+        "problems": 8,
+        "solution_words": 1226
+      },
+      {
+        "document_id": "O006-C140-CMP-MS10",
+        "problems": 8,
+        "solution_words": 1378
+      },
+      {
+        "document_id": "O006-C140-CMP-MS12",
+        "problems": 8,
+        "solution_words": 1214
+      }
+    ],
+    "problems": 50,
+    "references": 221,
+    "source_bytes": 422089
+  },
+  "status": "pass",
+  "translation_provenance": "OpenAI Codex gpt-5.6-sol, Ultra"
+}

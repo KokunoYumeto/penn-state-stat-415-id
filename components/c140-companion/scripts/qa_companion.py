@@ -22,8 +22,8 @@ import build_companion as build
 ROOT = build.ROOT
 HTML = build.HTML_TARGET
 BACKEND = build.BACKEND_TARGET
-RECEIPT = ROOT / "build" / "C1_QA_RECEIPT.json"
-SIM_RECEIPT = ROOT / "build" / "C1_SIMULATION_RECEIPT.json"
+RECEIPT = ROOT / "build" / "C2_QA_RECEIPT.json"
+SIM_RECEIPTS = build.SIMULATION_RECEIPTS
 ENVIRONMENT = ROOT / "environment.lock.json"
 PROBLEM_META_RE = re.compile(r"<!--PROBLEM_META\s+(\{[^\n]+\})-->")
 PROHIBITED_IMPORTS = {"playwright", "selenium", "pyppeteer", "requests", "httpx", "socket"}
@@ -44,7 +44,11 @@ def fail(message: str) -> None:
 
 def check_source_scripts() -> list[dict[str, object]]:
     rows = []
-    for path in sorted((ROOT / "scripts").glob("*.py")) + [ROOT / "simulations" / "run_c1_simulations.py"]:
+    paths = sorted((ROOT / "scripts").glob("*.py")) + [
+        ROOT / "simulations" / "run_c1_simulations.py",
+        ROOT / "simulations" / "run_c2_simulations.py",
+    ]
+    for path in paths:
         source = path.read_text(encoding="utf-8")
         tree = ast.parse(source, filename=str(path))
         imports: set[str] = set()
@@ -128,7 +132,7 @@ def check_sources(documents: list[build.Document]) -> dict[str, object]:
     for document in documents:
         document_id = str(document.metadata["id"])
         if document_id != "O006-C140-CMP-INDEX" and document.metadata["status"] != "complete":
-            fail(f"Non-complete C1 document {document_id}")
+            fail(f"Non-complete cumulative C2 document {document_id}")
         heading_count += heading_anchors(document)
         for anchor in document.anchors:
             if not anchor.startswith(document_id + "-"):
@@ -155,50 +159,131 @@ def check_sources(documents: list[build.Document]) -> dict[str, object]:
                 fail(f"Assessment lacks rubric: {document_id}")
             row["rubrics"] = len(rubrics)
             assessment_rows.append(row)
-    if len(mastery_rows) != 4 or len(assessment_rows) != 1:
-        fail("C1 mastery/assessment document census mismatch")
+    mastery_ids = [str(row["document_id"]) for row in mastery_rows]
+    expected_mastery_ids = [
+        "O006-C140-CMP-MS07",
+        "O006-C140-CMP-MS08",
+        "O006-C140-CMP-MS09",
+        "O006-C140-CMP-MS10",
+        "O006-C140-CMP-MS12",
+    ]
+    if mastery_ids != expected_mastery_ids or len(assessment_rows) != 1:
+        fail("Cumulative C2 mastery/assessment document census mismatch")
+    problem_count = sum(int(row["problems"]) for row in mastery_rows + assessment_rows)
+    if problem_count != 50:
+        fail(f"Cumulative C2 problem census mismatch: {problem_count}, expected 50")
     return {
         "anchors": len(anchors),
         "assessments": assessment_rows,
         "documents": len(documents),
         "headings": heading_count,
         "mastery_sets": mastery_rows,
+        "problems": problem_count,
         "references": sum(len(item.references) for item in documents),
         "source_bytes": sum(len(item.raw) for item in documents),
     }
 
 
 def check_simulations() -> dict[str, object]:
-    if not SIM_RECEIPT.is_file():
-        fail("Missing simulation receipt")
-    receipt = json.loads(SIM_RECEIPT.read_text(encoding="utf-8"))
-    if receipt.get("status") != "pass" or not receipt.get("all_assertions_pass"):
-        fail("Simulation receipt does not pass")
-    if receipt.get("browser_processes_used") is not False or receipt.get("network_access") is not False:
-        fail("Simulation receipt browser/network claim mismatch")
-    ids = [row["id"] for row in receipt.get("simulations", [])]
-    expected = [f"O006-C140-CMP-SIM{i:03d}" for i in range(1, 5)]
-    if ids != expected:
-        fail(f"Simulation ID order mismatch: {ids}")
-    if not all(all(row["assertions"].values()) for row in receipt["simulations"]):
-        fail("A numerical simulation assertion failed")
-    manifest_path = ROOT / "generated" / "simulations" / "c1" / "MANIFEST.csv"
-    rows = list(csv.DictReader(manifest_path.read_text(encoding="utf-8").splitlines()))
-    for row in rows:
-        path = ROOT / PurePosixPath(row["path"])
-        payload = path.read_bytes()
-        if len(payload) != int(row["bytes"]) or sha256(payload) != row["sha256"]:
-            fail(f"Simulation manifest mismatch: {row['path']}")
-        if path.suffix == ".svg":
-            root = ElementTree.fromstring(payload)
-            namespace = "{http://www.w3.org/2000/svg}"
-            if root.find(namespace + "title") is None or root.find(namespace + "desc") is None:
-                fail(f"Accessible SVG title/desc missing: {row['path']}")
+    batch_rows: list[dict[str, object]] = []
+    simulation_ids: list[str] = []
+    total_files = 0
+    for batch, receipt_path in SIM_RECEIPTS.items():
+        if not receipt_path.is_file():
+            fail(f"Missing {batch.upper()} simulation receipt")
+        receipt = json.loads(receipt_path.read_text(encoding="utf-8"))
+        if receipt.get("status") != "pass":
+            fail(f"{batch.upper()} simulation receipt does not pass")
+        if receipt.get("browser_processes_used") is not False or receipt.get("network_access") is not False:
+            fail(f"{batch.upper()} simulation receipt browser/network claim mismatch")
+        if batch == "c1":
+            if receipt.get("schema") != "o006.c140.companion-c1-simulations.v1":
+                fail("C1 simulation receipt schema mismatch")
+            ids = [row["id"] for row in receipt.get("simulations", [])]
+            expected = [f"O006-C140-CMP-SIM{i:03d}" for i in range(1, 5)]
+            if receipt.get("all_assertions_pass") is not True:
+                fail("C1 aggregate simulation assertion failed")
+            if not all(all(row["assertions"].values()) for row in receipt.get("simulations", [])):
+                fail("A C1 numerical simulation assertion failed")
+        elif batch == "c2":
+            if receipt.get("schema") != "o006.c140.companion-c2-simulations.v1":
+                fail("C2 simulation receipt schema mismatch")
+            ids = ["O006-C140-CMP-SIM005"]
+            expected = ids
+            assertions = receipt.get("summary", {}).get("assertions", {})
+            if not assertions or not all(assertions.values()):
+                fail("A C2 numerical simulation assertion failed")
+        else:
+            fail(f"Unknown simulation batch {batch}")
+        if ids != expected:
+            fail(f"{batch.upper()} simulation ID order mismatch: {ids}")
+        simulation_ids.extend(ids)
+
+        manifest_path = build.GENERATED_BATCHES[batch] / "MANIFEST.csv"
+        manifest_rows = list(csv.DictReader(manifest_path.read_text(encoding="utf-8").splitlines()))
+        expected_files = 9 if batch == "c1" else 3
+        if len(manifest_rows) != expected_files:
+            fail(f"{batch.upper()} simulation file census mismatch: {len(manifest_rows)}")
+        for row in manifest_rows:
+            relative = row.get("path") or row.get("filename")
+            if not relative:
+                fail(f"{batch.upper()} simulation manifest lacks a path column")
+            path = ROOT / PurePosixPath(relative) if row.get("path") else build.GENERATED_BATCHES[batch] / relative
+            payload = path.read_bytes()
+            if len(payload) != int(row["bytes"]) or sha256(payload) != row["sha256"]:
+                fail(f"Simulation manifest mismatch: {relative}")
+            if path.suffix == ".svg":
+                svg_root = ElementTree.fromstring(payload)
+                namespace = "{http://www.w3.org/2000/svg}"
+                if svg_root.find(namespace + "title") is None or svg_root.find(namespace + "desc") is None:
+                    fail(f"Accessible SVG title/desc missing: {relative}")
+            built_path = HTML / "assets" / "simulations" / path.name
+            if not built_path.is_file() or built_path.read_bytes() != payload:
+                fail(f"Built simulation asset mismatch: {relative}")
+        built_manifest = HTML / "assets" / "simulations" / "manifests" / f"{batch}.csv"
+        if not built_manifest.is_file() or built_manifest.read_bytes() != manifest_path.read_bytes():
+            fail(f"Built {batch.upper()} simulation manifest mismatch")
+        built_receipt = HTML / "assets" / "simulations" / "receipts" / receipt_path.name
+        if not built_receipt.is_file() or built_receipt.read_bytes() != receipt_path.read_bytes():
+            fail(f"Built {batch.upper()} simulation receipt mismatch")
+        if batch == "c1":
+            manifest_record = receipt.get("manifest", {})
+            if (
+                manifest_record.get("bytes") != len(manifest_path.read_bytes())
+                or manifest_record.get("sha256") != sha256(manifest_path.read_bytes())
+                or receipt.get("files") != len(manifest_rows) + 1
+            ):
+                fail("C1 simulation receipt inventory mismatch")
+        else:
+            expected_outputs = [
+                {
+                    "bytes": path.stat().st_size,
+                    "path": path.relative_to(ROOT).as_posix(),
+                    "sha256": sha256(path.read_bytes()),
+                }
+                for path in [manifest_path] + [
+                    build.GENERATED_BATCHES[batch] / str(row["filename"])
+                    for row in manifest_rows
+                ]
+            ]
+            if receipt.get("outputs") != expected_outputs:
+                fail("C2 simulation receipt inventory mismatch")
+        total_files += len(manifest_rows)
+        batch_rows.append({
+            "batch": batch,
+            "files": len(manifest_rows),
+            "manifest_sha256": sha256(manifest_path.read_bytes()),
+            "receipt_sha256": sha256(receipt_path.read_bytes()),
+            "simulations": len(ids),
+        })
+    expected_all = [f"O006-C140-CMP-SIM{i:03d}" for i in range(1, 6)]
+    if simulation_ids != expected_all:
+        fail(f"Cumulative simulation census mismatch: {simulation_ids}")
     return {
-        "files": len(rows),
-        "manifest_sha256": sha256(manifest_path.read_bytes()),
-        "receipt_sha256": sha256(SIM_RECEIPT.read_bytes()),
-        "simulations": len(ids),
+        "batches": batch_rows,
+        "files": total_files,
+        "simulation_ids": simulation_ids,
+        "simulations": len(simulation_ids),
     }
 
 
@@ -320,7 +405,7 @@ def compute_receipt() -> bytes:
         "schema": "o006.c140.companion-environment.v1",
         "status": "locked",
     }:
-        fail("Environment lock differs from the admitted C1 environment")
+        fail("Environment lock differs from the admitted cumulative C2 environment")
     documents = build.load_documents()
     receipt = {
         "backend": check_backend(documents),
@@ -329,7 +414,7 @@ def compute_receipt() -> bytes:
         "environment_sha256": sha256(ENVIRONMENT.read_bytes()),
         "html": check_html(documents),
         "network_access": False,
-        "schema": "o006.c140.companion-c1-qa.v1",
+        "schema": "o006.c140.companion-cumulative-c2-qa.v1",
         "scripts": check_source_scripts(),
         "simulations": check_simulations(),
         "source": check_sources(documents),
@@ -352,14 +437,14 @@ def main() -> None:
         mode_name = "written"
     else:
         if not RECEIPT.is_file() or RECEIPT.read_bytes() != payload:
-            fail("C1 QA receipt deterministic replay mismatch")
+            fail("C2 QA receipt deterministic replay mismatch")
         mode_name = "verified"
     receipt = json.loads(payload)
     print(json.dumps({
         "documents": receipt["source"]["documents"],
         "entities": receipt["backend"]["entities"],
         "mode": mode_name,
-        "problems": sum(row["problems"] for row in receipt["source"]["mastery_sets"]) + sum(row["problems"] for row in receipt["source"]["assessments"]),
+        "problems": receipt["source"]["problems"],
         "receipt_sha256": sha256(payload),
         "status": "pass",
     }, sort_keys=True))

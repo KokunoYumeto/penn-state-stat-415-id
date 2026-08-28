@@ -1,6 +1,21 @@
 # Production cursor — original C140 companion
 
-Updated: 2026-08-28
+Updated: 2026-08-29
+
+Current live boundary: C2 matrix Gaussian linear models are locally complete.
+The exact cumulative scope is `D001`–`D011`, `SIM001`–`SIM005`, `MS07`–`MS10`,
+`MS12`, and `CA01`. Static write/check replay passes for 23 documents, 47 HTML
+files, 679 backend entities, 917 relations, five simulations, and 50 fully
+solved problems. Build and QA receipt SHA-256 values are
+`198df17c460d1dcd4523bcd3fd90230ff9429e1ac44f93565eb61c6950c50644`
+and `7e05934a8c28643a210b2ae833b3ef49bfefb988e9ada2e50a6786bd9ddd16f8`.
+
+Next executable action: package this cumulative C2 closure, integrate the 47
+companion files into the existing Pages union without changing Penn or donor
+bytes, commit/push, publish to the existing GitHub release and Zenodo concept
+lineages, and anonymously read every new public byte back. After publication,
+begin the Bayesian–frequentist comparison batch and its mastery/simulation
+surface. Do not rebuild C2 merely to update postpublication controls.
 
 Current boundary: C1 reader/backend/simulation/QA and cumulative publication
 complete. Exact admitted scope is `D001`–`D007`, `SIM001`–`SIM004`,
@@ -16,16 +31,10 @@ DOI `10.5281/zenodo.22148810` in existing concept `22077422`. Every one of the
 159 Pages files and 33 cumulative release files matched by credential-free
 readback; the Zenodo lineage has zero unpublished drafts.
 
-Next executable action: begin the matrix Gaussian linear-model batch without
-changing component ownership or paths. Produce projection geometry, OLS/MLE,
-Gauss–Markov, exact sampling laws, variance estimation, standard errors, t/F
-inference, confidence and prediction intervals, ANOVA, and model checks as one
-contiguous reader-first batch with seeded regression simulations and the next
-mastery set. Do not reopen or repackage C1 merely to update live controls.
-
 Recovery: read `WORKFLOW.md`, `CONTENT_CONTRACT.md`, this cursor,
 `CURRENT_STATE.md`, `CHECKPOINT_2026-08-28_C1_LOCAL_COMPLETE.md`,
 `CHECKPOINT_2026-08-28_C1_PUBLICATION_COMPLETE.md`, README/LICENSE,
-the exact C1 sources, `build/C1_*_RECEIPT.json`, backend manifests, latest
+`CHECKPOINT_2026-08-29_C2_LOCAL_COMPLETE.md`, the exact cumulative sources,
+`build/C1_*_RECEIPT.json`, `build/C2_*_RECEIPT.json`, backend manifests, latest
 package/publication receipts, and repository-level state/cursor. Conversation
 summaries are not state. Do not broaden filesystem or Git scope.

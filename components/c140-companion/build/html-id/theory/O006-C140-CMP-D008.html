@@ -1,0 +1,662 @@
+<!doctype html>
+<html lang="id-ID">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="generator" content="OpenAI Codex gpt-5.6-sol, Ultra">
+<title>Model linear Gaussian desain tetap dan geometri proyeksi</title>
+<link rel="stylesheet" href="../assets/style.css">
+<script>window.MathJax={loader:{load:['[tex]/boldsymbol']},tex:{packages:{'[+]':['boldsymbol']},inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']]},svg:{fontCache:'local'}};</script>
+<script defer src="../assets/MathJax/tex-svg.js"></script>
+</head>
+<body>
+<div class="shell">
+<nav class="sidebar" aria-label="Daftar isi pendamping"><h2>Isi pendamping</h2><ol><li><a href="../index.html">Pendamping Orisinal Statistika Matematis</a></li><li><a href="O006-C140-CMP-D001.html">Model parametrik reguler, skor, dan informasi Fisher</a></li><li><a href="O006-C140-CMP-D002.html">Konsistensi MLE: identifikasi Kullback–Leibler dan teorema argmax</a></li><li><a href="O006-C140-CMP-D003.html">Likelihood kuadratik lokal, normalitas asimtotik, dan delta method</a></li><li><a href="O006-C140-CMP-D004.html">Prosedur Wald, skor, dan rasio likelihood</a></li><li><a href="O006-C140-CMP-D005.html">Likelihood nonreguler: empat mekanisme kegagalan</a></li><li><a href="O006-C140-CMP-D006.html">Optimalitas pengujian: Neyman–Pearson, MP, UMP, dan rasio likelihood monoton</a></li><li><a href="O006-C140-CMP-D007.html">Loss, risk, efisiensi, Rao–Blackwell, dan Lehmann–Scheffé</a></li><li><a href="O006-C140-CMP-D008.html">Model linear Gaussian desain tetap dan geometri proyeksi</a></li><li><a href="O006-C140-CMP-D009.html">OLS, MLE Gaussian, dan teorema Gauss–Markov pada rancangan tetap</a></li><li><a href="O006-C140-CMP-D010.html">Inferensi Gaussian eksak: proyeksi, t, F, ANOVA, dan prediksi</a></li><li><a href="O006-C140-CMP-D011.html">Diagnostik, leverage, misspesifikasi, dan inferensi pascaseleksi</a></li><li><a href="../simulations/O006-C140-CMP-SIM001.html">Model lokasi normal: MLE, coverage, dan tiga statistik uji</a></li><li><a href="../simulations/O006-C140-CMP-SIM002.html">Delta method pada titik reguler dan titik dengan turunan nol</a></li><li><a href="../simulations/O006-C140-CMP-SIM003.html">Endpoint Uniform: laju nonreguler dan kegagalan bootstrap biasa</a></li><li><a href="../simulations/O006-C140-CMP-SIM004.html">Uji Neyman–Pearson teracak dengan size tepat</a></li><li><a href="../simulations/O006-C140-CMP-SIM005.html">Model linear matriks: coverage, heteroskedastisitas, dan pengaruh</a></li><li><a href="../mastery/O006-C140-CMP-MS07.html">Set penguasaan 07 — regularitas, konsistensi, dan normalitas MLE</a></li><li><a href="../mastery/O006-C140-CMP-MS08.html">Set penguasaan 08 — Wald, skor, rasio likelihood, dan diagnosis nonregular</a></li><li><a href="../mastery/O006-C140-CMP-MS09.html">Set penguasaan 09 — pengujian eksak dan optimalitas Neyman–Pearson</a></li><li><a href="../mastery/O006-C140-CMP-MS10.html">Set penguasaan 10 — uji likelihood asimtotik, risk, dan perbaikan estimator</a></li><li><a href="../mastery/O006-C140-CMP-MS12.html">Set penguasaan 12 — model linear Gaussian matriks, inferensi eksak, dan diagnostik</a></li><li><a href="../assessments/O006-C140-CMP-CA01.html">Asesmen kumulatif C1: likelihood, optimalitas, dan keputusan statistik</a></li></ol></nav>
+<main>
+<div class="metadata"><strong>O006-C140-CMP-D008</strong> · id-ID · CC BY-SA 4.0 · OpenAI Codex gpt-5.6-sol, Ultra</div>
+<p><a id="O006-C140-CMP-D008-SEC01"></a></p>
+<h1>Model linear Gaussian desain tetap dan geometri proyeksi</h1>
+<p>Model linear bukan sekadar rumus koefisien
+<span class="math-inline" role="math">\((X^{\mathsf T}X)^{-1}X^{\mathsf T}Y\)</span>. Rumus itu hanya tersedia ketika
+kolom-kolom desain bebas linear. Objek yang selalu teridentifikasi adalah
+rataan <span class="math-inline" role="math">\(X\beta\)</span>, sedangkan representasi rataan oleh koefisien <span class="math-inline" role="math">\(\beta\)</span>
+dapat tidak tunggal. Geometri ruang kolom membuat perbedaan ini tampak jelas:
+nilai pas (<em>fitted values</em>) adalah proyeksi data ke ruang rataan yang diizinkan
+model, dan residual adalah komponen ortogonalnya.</p>
+<p>Bab ini memulai dari ruang bagian dan proyeksi, bukan dari invers matriks.
+Dengan urutan itu, kasus rank penuh dan rank-defisien dapat ditangani dalam
+satu kerangka tanpa berpura-pura bahwa invers yang tidak ada dapat dipakai.
+Asumsi Gaussian baru digunakan setelah hasil kuadrat-terkecil yang murni
+geometris selesai. Karena itu setiap klaim dapat dibedakan sebagai identitas
+aljabar, pernyataan estimasi, atau hasil distribusi eksak.</p>
+<p><a id="O006-C140-CMP-D008-ASM01"></a></p>
+<h2>Model dan asumsi dasar</h2>
+<p>Misalkan <span class="math-inline" role="math">\(Y\in\mathbb R^n\)</span> adalah vektor respons dan
+<span class="math-inline" role="math">\(X\in\mathbb R^{n\times p}\)</span> adalah matriks desain <strong>tetap</strong> yang diketahui.
+Modelnya</p>
+<div class="math-display" role="math">\[Y=X\beta+\varepsilon,
+\qquad
+\varepsilon\sim N_n(0,\sigma^2I_n),
+\qquad \sigma^2&gt;0.\]</div>
+<p>Parameter koefisien adalah <span class="math-inline" role="math">\(\beta\in\mathbb R^p\)</span>, dan rataan observasi
+adalah <span class="math-inline" role="math">\(\mu=X\beta\)</span>. Tulis</p>
+<div class="math-display" role="math">\[\mathcal C=\mathcal C(X)=\{Xb:b\in\mathbb R^p\},
+\qquad r=\operatorname{rank}(X).\]</div>
+<p>Jadi himpunan semua rataan yang diizinkan adalah ruang kolom
+<span class="math-inline" role="math">\(\mathcal C\)</span>, yang berdimensi <span class="math-inline" role="math">\(r\)</span>. Pernyataan “desain tetap” berarti
+seluruh peluang dan ekspektasi dalam bab ini dihitung dengan menahan <span class="math-inline" role="math">\(X\)</span>
+tetap. Jika desain asalnya acak, hasil yang sama berlaku secara bersyarat pada
+realisasi <span class="math-inline" role="math">\(X\)</span> hanya bila mekanisme pengambilan desain membenarkan
+pengondisian tersebut.</p>
+<p>Normalitas, homoskedastisitas, dan kovariansi <span class="math-inline" role="math">\(\sigma^2I_n\)</span> tidak diperlukan
+untuk mendefinisikan proyeksi atau memecahkan kuadrat terkecil. Ketiganya
+diperlukan untuk distribusi eksak dan independensi yang diturunkan pada
+<a class="xref" data-target-id="O006-C140-CMP-D008-THM07" href="O006-C140-CMP-D008.html#O006-C140-CMP-D008-THM07">Teorema distribusi nilai pas dan residual</a>. Bila kovariansi bukan kelipatan identitas,
+geometri Euclid ini harus diganti oleh geometri berbobot; mengganti nama
+estimator tanpa mengganti metrik tidak sah.</p>
+<p><a id="O006-C140-CMP-D008-DEF01"></a></p>
+<h2>Ruang kolom, ruang nol, dan dua rezim rank</h2>
+<p>Ruang nol desain dan ruang barisnya adalah</p>
+<div class="math-display" role="math">\[\mathcal N(X)=\{v\in\mathbb R^p:Xv=0\},
+\qquad
+\mathcal C(X^{\mathsf T})\subseteq\mathbb R^p.\]</div>
+<p>Teorema dasar aljabar linear memberi dekomposisi ortogonal</p>
+<div class="math-display" role="math">\[\mathbb R^p
+=\mathcal C(X^{\mathsf T})\oplus\mathcal N(X),
+\qquad
+\mathcal C(X^{\mathsf T})=\mathcal N(X)^\perp.\]</div>
+<p>Dua rezim berikut tidak boleh dicampur.</p>
+<ol>
+<li><strong>Rank kolom penuh:</strong> <span class="math-inline" role="math">\(r=p\)</span>. Maka <span class="math-inline" role="math">\(p\le n\)</span>,
+<span class="math-inline" role="math">\(\mathcal N(X)=\{0\}\)</span>, <span class="math-inline" role="math">\(X^{\mathsf T}X\)</span> definit positif, dan
+koefisien <span class="math-inline" role="math">\(\beta\)</span> teridentifikasi.</li>
+<li><strong>Rank-defisien:</strong> <span class="math-inline" role="math">\(r&lt;p\)</span>. Maka ada <span class="math-inline" role="math">\(v\ne0\)</span> dengan <span class="math-inline" role="math">\(Xv=0\)</span>, sehingga
+<span class="math-inline" role="math">\(X(\beta+v)=X\beta\)</span>. Data tidak dapat membedakan <span class="math-inline" role="math">\(\beta\)</span> dan
+<span class="math-inline" role="math">\(\beta+v\)</span>. Rataan <span class="math-inline" role="math">\(\mu=X\beta\)</span> tetap teridentifikasi, tetapi tidak
+semua fungsi koefisien teridentifikasi.</li>
+</ol>
+<p>Rank adalah sifat ruang rataan, bukan sifat algoritme. Menghapus sebuah kolom,
+memilih kendala koefisien, atau memakai pseudoinvers dapat memilih satu wakil
+dari kelas koefisien ekuivalen, tetapi tidak menciptakan informasi yang tidak
+ada dalam distribusi data.</p>
+<p><a id="O006-C140-CMP-D008-THM01"></a></p>
+<h2>Teorema proyeksi ortogonal pada ruang desain</h2>
+<p>Ambil matriks <span class="math-inline" role="math">\(Q\in\mathbb R^{n\times r}\)</span> yang kolom-kolomnya membentuk
+basis ortonormal bagi <span class="math-inline" role="math">\(\mathcal C\)</span>, sehingga
+<span class="math-inline" role="math">\(Q^{\mathsf T}Q=I_r\)</span>. Definisikan</p>
+<div class="math-display" role="math">\[P_X=QQ^{\mathsf T},
+\qquad
+M_X=I_n-P_X.\]</div>
+<p>Maka:</p>
+<ol>
+<li><span class="math-inline" role="math">\(P_X^{\mathsf T}=P_X\)</span> dan <span class="math-inline" role="math">\(P_X^2=P_X\)</span>;</li>
+<li><span class="math-inline" role="math">\(\mathcal C(P_X)=\mathcal C(X)\)</span> dan
+<span class="math-inline" role="math">\(\mathcal N(P_X)=\mathcal C(X)^\perp\)</span>;</li>
+<li><span class="math-inline" role="math">\(M_X^{\mathsf T}=M_X\)</span>, <span class="math-inline" role="math">\(M_X^2=M_X\)</span>, dan
+<span class="math-inline" role="math">\(P_XM_X=M_XP_X=0\)</span>;</li>
+<li>setiap <span class="math-inline" role="math">\(y\in\mathbb R^n\)</span> mempunyai dekomposisi unik
+<span class="math-inline" role="math">\(y=P_Xy+M_Xy\)</span>, dengan
+<span class="math-inline" role="math">\(P_Xy\in\mathcal C(X)\)</span> dan
+<span class="math-inline" role="math">\(M_Xy\in\mathcal C(X)^\perp\)</span>; dan</li>
+<li><span class="math-inline" role="math">\(P_X\)</span> tidak bergantung pada pilihan basis ortonormal <span class="math-inline" role="math">\(Q\)</span>.</li>
+</ol>
+<p><a id="O006-C140-CMP-D008-PRF01"></a></p>
+<h3>Bukti</h3>
+<p>Simetri langsung mengikuti
+<span class="math-inline" role="math">\((QQ^{\mathsf T})^{\mathsf T}=QQ^{\mathsf T}\)</span>. Idempotensi mengikuti</p>
+<div class="math-display" role="math">\[P_X^2=QQ^{\mathsf T}QQ^{\mathsf T}
+=Q(Q^{\mathsf T}Q)Q^{\mathsf T}=QQ^{\mathsf T}=P_X.\]</div>
+<p>Setiap <span class="math-inline" role="math">\(P_Xy=Q(Q^{\mathsf T}y)\)</span> berada dalam ruang yang direntang kolom
+<span class="math-inline" role="math">\(Q\)</span>. Sebaliknya, jika <span class="math-inline" role="math">\(z=Qa\in\mathcal C(X)\)</span>, maka
+<span class="math-inline" role="math">\(P_Xz=QQ^{\mathsf T}Qa=Qa=z\)</span>, sehingga citra <span class="math-inline" role="math">\(P_X\)</span> tepat
+<span class="math-inline" role="math">\(\mathcal C(X)\)</span>. Selanjutnya,</p>
+<div class="math-display" role="math">\[P_Xy=0
+\iff Q^{\mathsf T}y=0
+\iff y\perp\mathcal C(X).\]</div>
+<p>Sifat <span class="math-inline" role="math">\(M_X\)</span> diperoleh dari <span class="math-inline" role="math">\(M_X=I-P_X\)</span>:</p>
+<div class="math-display" role="math">\[M_X^2=I-2P_X+P_X^2=I-P_X=M_X,
+\quad
+P_XM_X=P_X-P_X^2=0.\]</div>
+<p>Identitas <span class="math-inline" role="math">\(y=P_Xy+M_Xy\)</span> sudah jelas. Kedua suku ortogonal karena
+<span class="math-inline" role="math">\((P_Xy)^{\mathsf T}M_Xy=y^{\mathsf T}P_XM_Xy=0\)</span>. Jika
+<span class="math-inline" role="math">\(y=u+v\)</span> adalah dekomposisi lain dengan
+<span class="math-inline" role="math">\(u\in\mathcal C(X)\)</span> dan <span class="math-inline" role="math">\(v\in\mathcal C(X)^\perp\)</span>, proyeksi oleh
+<span class="math-inline" role="math">\(P_X\)</span> memberi <span class="math-inline" role="math">\(P_Xy=u\)</span>, sehingga <span class="math-inline" role="math">\(u\)</span> dan <span class="math-inline" role="math">\(v\)</span> unik.</p>
+<p>Akhirnya, setiap basis ortonormal lain bagi ruang yang sama menghasilkan
+operator yang menahan semua vektor dalam <span class="math-inline" role="math">\(\mathcal C(X)\)</span> dan mematikan
+semua vektor dalam komplemen ortogonalnya. Keunikan dekomposisi tadi memaksa
+operator itu sama dengan <span class="math-inline" role="math">\(P_X\)</span>. ∎</p>
+<p><a id="O006-C140-CMP-D008-THM02"></a></p>
+<h2>Teorema jarak minimum dan Pythagoras</h2>
+<p>Untuk setiap <span class="math-inline" role="math">\(y\in\mathbb R^n\)</span>, vektor <span class="math-inline" role="math">\(P_Xy\)</span> adalah satu-satunya titik
+dalam <span class="math-inline" role="math">\(\mathcal C(X)\)</span> yang meminimumkan jarak Euclid ke <span class="math-inline" role="math">\(y\)</span>. Lebih tepat,
+untuk setiap <span class="math-inline" role="math">\(z\in\mathcal C(X)\)</span>,</p>
+<div class="math-display" role="math">\[\|y-z\|^2
+=\|M_Xy\|^2+\|P_Xy-z\|^2.\]</div>
+<p>Karena itu nilai minimum adalah <span class="math-inline" role="math">\(\|M_Xy\|^2\)</span>, dicapai hanya pada
+<span class="math-inline" role="math">\(z=P_Xy\)</span>.</p>
+<p><a id="O006-C140-CMP-D008-PRF02"></a></p>
+<h3>Bukti</h3>
+<p>Tulis</p>
+<div class="math-display" role="math">\[y-z=M_Xy+(P_Xy-z).\]</div>
+<p>Suku pertama berada dalam <span class="math-inline" role="math">\(\mathcal C(X)^\perp\)</span>, sedangkan suku kedua
+berada dalam <span class="math-inline" role="math">\(\mathcal C(X)\)</span>. Keduanya ortogonal, sehingga teorema
+Pythagoras memberi identitas. Suku kedua tidak negatif dan nol tepat ketika
+<span class="math-inline" role="math">\(z=P_Xy\)</span>. ∎</p>
+<p><a id="O006-C140-CMP-D008-THM03"></a></p>
+<h2>Teorema persamaan normal</h2>
+<p>Untuk data tetap <span class="math-inline" role="math">\(y\)</span>, pernyataan berikut ekuivalen bagi
+<span class="math-inline" role="math">\(\widehat\beta\in\mathbb R^p\)</span>.</p>
+<ol>
+<li><span class="math-inline" role="math">\(\widehat\beta\)</span> meminimumkan
+<span class="math-inline" role="math">\(S(b)=\|y-Xb\|^2\)</span> atas semua <span class="math-inline" role="math">\(b\in\mathbb R^p\)</span>.</li>
+<li>Residual <span class="math-inline" role="math">\(y-X\widehat\beta\)</span> ortogonal terhadap setiap kolom <span class="math-inline" role="math">\(X\)</span>.</li>
+<li>Persamaan normal berlaku:</li>
+</ol>
+<div class="math-display" role="math">\[X^{\mathsf T}X\widehat\beta=X^{\mathsf T}y.\]</div>
+<ol start="4">
+<li>Nilai pasnya adalah proyeksi unik
+<span class="math-inline" role="math">\(X\widehat\beta=P_Xy\)</span>.</li>
+</ol>
+<p>Persamaan normal selalu mempunyai sedikitnya satu solusi, termasuk ketika
+<span class="math-inline" role="math">\(X\)</span> rank-defisien. Semua solusinya menghasilkan nilai pas dan residual yang
+sama.</p>
+<p><a id="O006-C140-CMP-D008-PRF03"></a></p>
+<h3>Bukti</h3>
+<p>Menurut <a class="xref" data-target-id="O006-C140-CMP-D008-THM02" href="O006-C140-CMP-D008.html#O006-C140-CMP-D008-THM02">Teorema jarak minimum dan Pythagoras</a>, meminimumkan
+<span class="math-inline" role="math">\(\|y-Xb\|^2\)</span> atas <span class="math-inline" role="math">\(b\)</span> sama dengan memilih titik terdekat dari
+<span class="math-inline" role="math">\(\mathcal C(X)\)</span>, yaitu <span class="math-inline" role="math">\(P_Xy\)</span>. Karena
+<span class="math-inline" role="math">\(P_Xy\in\mathcal C(X)\)</span>, ada sedikitnya satu
+<span class="math-inline" role="math">\(\widehat\beta\)</span> dengan <span class="math-inline" role="math">\(X\widehat\beta=P_Xy\)</span>. Ini sekaligus membuktikan
+eksistensi solusi kuadrat-terkecil dan ekuivalensi pernyataan 1 dan 4.</p>
+<p>Jika 4 berlaku, residualnya <span class="math-inline" role="math">\(M_Xy\)</span>, yang ortogonal terhadap ruang kolom;
+maka 2 berlaku. Pernyataan 2 berarti</p>
+<div class="math-display" role="math">\[X^{\mathsf T}(y-X\widehat\beta)=0,\]</div>
+<p>yang tepat sama dengan 3. Sebaliknya, 3 membuat residual ortogonal terhadap
+ruang kolom, sehingga dekomposisi unik pada <a class="xref" data-target-id="O006-C140-CMP-D008-THM01" href="O006-C140-CMP-D008.html#O006-C140-CMP-D008-THM01">Teorema proyeksi ortogonal pada ruang desain</a>
+memaksa <span class="math-inline" role="math">\(X\widehat\beta=P_Xy\)</span>. Jadi keempatnya ekuivalen.</p>
+<p>Jika <span class="math-inline" role="math">\(b_1\)</span> dan <span class="math-inline" role="math">\(b_2\)</span> sama-sama solusi, maka
+<span class="math-inline" role="math">\(Xb_1=Xb_2=P_Xy\)</span>. Sebaliknya, setiap <span class="math-inline" role="math">\(b_2=b_1+v\)</span> dengan
+<span class="math-inline" role="math">\(v\in\mathcal N(X)\)</span> memberi nilai pas yang sama dan juga solusi. Jadi
+himpunan solusi adalah <span class="math-inline" role="math">\(b_1+\mathcal N(X)\)</span>. ∎</p>
+<p><a id="O006-C140-CMP-D008-THM03A"></a></p>
+<h2>Korolari likelihood Gaussian</h2>
+<p>Untuk <span class="math-inline" role="math">\(\sigma^2&gt;0\)</span> tetap, pemaksimum likelihood terhadap <span class="math-inline" role="math">\(\beta\)</span> tepat
+sama dengan seluruh solusi kuadrat-terkecil. Jika desain ber-rank kolom penuh,
+MLE <span class="math-inline" role="math">\(\beta\)</span> tunggal. Jika desain rank-defisien, likelihood mempunyai nilai
+maksimum yang sama pada seluruh kelas
+<span class="math-inline" role="math">\(\widehat\beta+\mathcal N(X)\)</span>; hanya rataan MLE
+<span class="math-inline" role="math">\(X\widehat\beta=P_XY\)</span> yang tunggal.</p>
+<p><a id="O006-C140-CMP-D008-PRF03A"></a></p>
+<h3>Bukti</h3>
+<p>Log-likelihood, selain konstanta yang tidak bergantung pada parameter, adalah</p>
+<div class="math-display" role="math">\[\ell(\beta,\sigma^2;Y)
+=-\frac n2\log\sigma^2
+-\frac1{2\sigma^2}\|Y-X\beta\|^2.\]</div>
+<p>Untuk <span class="math-inline" role="math">\(\sigma^2\)</span> tetap, memaksimalkan ekspresi ini sama dengan meminimumkan
+<span class="math-inline" role="math">\(\|Y-X\beta\|^2\)</span>. Karakterisasi dan himpunan solusi pada
+<a class="xref" data-target-id="O006-C140-CMP-D008-THM03" href="O006-C140-CMP-D008.html#O006-C140-CMP-D008-THM03">Teorema persamaan normal</a> memberi seluruh kesimpulan. ∎</p>
+<p><a id="O006-C140-CMP-D008-REM04"></a></p>
+<h2>Skor, informasi Fisher, dan rank</h2>
+<p>Untuk <span class="math-inline" role="math">\(\sigma^2\)</span> diketahui, skor koefisien dan informasi Fishernya adalah</p>
+<div class="math-display" role="math">\[U_\beta(\beta)
+=\frac1{\sigma^2}X^{\mathsf T}(Y-X\beta),
+\qquad
+I_{\beta\beta}
+=\frac1{\sigma^2}X^{\mathsf T}X.\]</div>
+<p>Jadi persamaan skor tepat sama dengan persamaan normal. Informasi
+<span class="math-inline" role="math">\(I_{\beta\beta}\)</span> nonsingular jika dan hanya jika <span class="math-inline" role="math">\(X\)</span> ber-rank kolom
+penuh. Pada rank-defisien, setiap <span class="math-inline" role="math">\(v\in\mathcal N(X)\)</span> memenuhi
+<span class="math-inline" role="math">\(I_{\beta\beta}v=0\)</span>: likelihood datar pada arah koefisien yang tidak
+teridentifikasi. Ini adalah bentuk konkret informasi singular pada definisi
+<a class="xref" data-target-id="O006-C140-CMP-D001-DEF-FISHER" href="O006-C140-CMP-D001.html#O006-C140-CMP-D001-DEF-FISHER">Definisi: informasi yang diharapkan dan diamati</a>, bukan kegagalan numerik yang boleh
+disembunyikan dengan invers toleransi.</p>
+<p><a id="O006-C140-CMP-D008-SEC02"></a></p>
+<h2>Kasus rank kolom penuh</h2>
+<p><a id="O006-C140-CMP-D008-THM04"></a></p>
+<h3>Teorema solusi tunggal rank penuh</h3>
+<p>Jika <span class="math-inline" role="math">\(\operatorname{rank}(X)=p\)</span>, maka <span class="math-inline" role="math">\(X^{\mathsf T}X\)</span> definit positif
+dan dapat dibalik. Solusi kuadrat-terkecil tunggal, nilai pas, dan residual
+adalah</p>
+<div class="math-display" role="math">\[\widehat\beta
+=(X^{\mathsf T}X)^{-1}X^{\mathsf T}y,
+\qquad
+\widehat y=P_Xy,
+\qquad
+e=M_Xy,\]</div>
+<p>dengan</p>
+<div class="math-display" role="math">\[P_X=X(X^{\mathsf T}X)^{-1}X^{\mathsf T}.\]</div>
+<p><a id="O006-C140-CMP-D008-PRF04"></a></p>
+<h3>Bukti</h3>
+<p>Untuk setiap <span class="math-inline" role="math">\(v\ne0\)</span>, rank kolom penuh memberi <span class="math-inline" role="math">\(Xv\ne0\)</span>, sehingga</p>
+<div class="math-display" role="math">\[v^{\mathsf T}X^{\mathsf T}Xv=\|Xv\|^2&gt;0.\]</div>
+<p>Jadi <span class="math-inline" role="math">\(X^{\mathsf T}X\)</span> definit positif dan inversnya ada. Mengalikan
+persamaan normal oleh invers memberi solusi yang dinyatakan. Nilai pasnya
+adalah hasil kali <span class="math-inline" role="math">\(X\widehat\beta\)</span>, sehingga matriks yang memetakan <span class="math-inline" role="math">\(y\)</span>
+ke nilai pas adalah formula <span class="math-inline" role="math">\(P_X\)</span> di atas. Formula itu simetris,
+idempoten, dan citranya <span class="math-inline" role="math">\(\mathcal C(X)\)</span>, jadi sama dengan proyektor unik
+pada <a class="xref" data-target-id="O006-C140-CMP-D008-THM01" href="O006-C140-CMP-D008.html#O006-C140-CMP-D008-THM01">Teorema proyeksi ortogonal pada ruang desain</a>. ∎</p>
+<p><a id="O006-C140-CMP-D008-EX01"></a></p>
+<h2>Contoh rank penuh: regresi sederhana dengan prediktor terpusat</h2>
+<p>Ambil</p>
+<div class="math-display" role="math">\[X=
+\begin{pmatrix}
+1&amp;-1\\
+1&amp;0\\
+1&amp;1
+\end{pmatrix},
+\qquad
+y=
+\begin{pmatrix}1\\2\\4\end{pmatrix}.\]</div>
+<p>Kedua kolom ortogonal dan</p>
+<div class="math-display" role="math">\[X^{\mathsf T}X=
+\begin{pmatrix}3&amp;0\\0&amp;2\end{pmatrix},
+\qquad
+X^{\mathsf T}y=
+\begin{pmatrix}7\\3\end{pmatrix}.\]</div>
+<p>Maka</p>
+<div class="math-display" role="math">\[\widehat\beta=
+\begin{pmatrix}7/3\\3/2\end{pmatrix},
+\quad
+\widehat y=
+\begin{pmatrix}5/6\\7/3\\23/6\end{pmatrix},
+\quad
+e=
+\begin{pmatrix}1/6\\-1/3\\1/6\end{pmatrix}.\]</div>
+<p>Persamaan normal dapat dilihat tanpa perkalian matriks tambahan:
+<span class="math-inline" role="math">\(\sum_i e_i=0\)</span> dan <span class="math-inline" role="math">\(\sum_i x_ie_i=0\)</span>. Jadi residual ortogonal terhadap
+kolom intersep dan kolom prediktor. Jumlah kuadrat residual adalah <span class="math-inline" role="math">\(1/6\)</span>.
+Karena prediktor terpusat, intersep taksiran sama dengan <span class="math-inline" role="math">\(\bar y=7/3\)</span>.</p>
+<p><a id="O006-C140-CMP-D008-REM01"></a></p>
+<h2>Rank penuh bukan berarti terkondisi baik</h2>
+<p>Invers dapat ada tetapi sangat tidak stabil. Misalkan dua kolom
+<span class="math-inline" role="math">\(x_1,x_2\)</span> telah diskalakan sehingga <span class="math-inline" role="math">\(\|x_1\|=\|x_2\|=1\)</span>, dan
+<span class="math-inline" role="math">\(x_1^{\mathsf T}x_2=\rho\)</span>. Blok Gramnya adalah</p>
+<div class="math-display" role="math">\[G=
+\begin{pmatrix}1&amp;\rho\\\rho&amp;1\end{pmatrix},\]</div>
+<p>dengan nilai eigen <span class="math-inline" role="math">\(1+\rho\)</span> dan <span class="math-inline" role="math">\(1-\rho\)</span>. Ketika
+<span class="math-inline" role="math">\(|\rho|\)</span> mendekati satu, nilai eigen terkecil mendekati nol dan varians
+koefisien pada arah hampir-kolinear membesar seperti
+<span class="math-inline" role="math">\(1/(1-|\rho|)\)</span>. Jadi pemeriksaan biner “invers ada” tidak cukup; spektrum,
+angka kondisi, skala kolom, dan tujuan estimasi juga perlu dilaporkan.</p>
+<p><a id="O006-C140-CMP-D008-SEC03"></a></p>
+<h2>Kasus rank-defisien dan pseudoinvers</h2>
+<p>Ambil dekomposisi nilai singular tipis</p>
+<div class="math-display" role="math">\[X=U_rD_rV_r^{\mathsf T},\]</div>
+<p>dengan <span class="math-inline" role="math">\(U_r^{\mathsf T}U_r=I_r\)</span>,
+<span class="math-inline" role="math">\(V_r^{\mathsf T}V_r=I_r\)</span>, dan <span class="math-inline" role="math">\(D_r\)</span> diagonal dengan entri positif.
+Pseudoinvers Moore--Penrose adalah</p>
+<div class="math-display" role="math">\[X^+=V_rD_r^{-1}U_r^{\mathsf T}.\]</div>
+<p>Definisi ini juga berlaku pada kasus rank penuh. Dua proyektor pentingnya
+adalah</p>
+<div class="math-display" role="math">\[XX^+=U_rU_r^{\mathsf T}=P_X,
+\qquad
+X^+X=V_rV_r^{\mathsf T}=P_{\mathrm{row}},\]</div>
+<p>di mana <span class="math-inline" role="math">\(P_{\mathrm{row}}\)</span> memproyeksikan <span class="math-inline" role="math">\(\mathbb R^p\)</span> ke
+<span class="math-inline" role="math">\(\mathcal C(X^{\mathsf T})\)</span>.</p>
+<p><a id="O006-C140-CMP-D008-THM05"></a></p>
+<h2>Teorema seluruh solusi kuadrat-terkecil</h2>
+<p>Untuk desain rank berapa pun, seluruh solusi persamaan normal dapat ditulis</p>
+<div class="math-display" role="math">\[\widehat\beta_z
+=X^+y+(I_p-X^+X)z,
+\qquad z\in\mathbb R^p.\]</div>
+<p>Semua solusi menghasilkan nilai pas <span class="math-inline" role="math">\(P_Xy\)</span>. Pilihan
+<span class="math-inline" role="math">\(\widehat\beta^+=X^+y\)</span> adalah satu-satunya solusi dengan norma Euclid
+terkecil dan satu-satunya solusi yang berada dalam
+<span class="math-inline" role="math">\(\mathcal C(X^{\mathsf T})\)</span>.</p>
+<p><a id="O006-C140-CMP-D008-PRF05"></a></p>
+<h3>Bukti</h3>
+<p>Karena <span class="math-inline" role="math">\(I_p-X^+X\)</span> adalah proyektor ke <span class="math-inline" role="math">\(\mathcal N(X)\)</span>,</p>
+<div class="math-display" role="math">\[X\widehat\beta_z
+=XX^+y+X(I_p-X^+X)z
+=P_Xy.\]</div>
+<p>Jadi setiap vektor yang ditampilkan adalah solusi. Sebaliknya, jika <span class="math-inline" role="math">\(b\)</span>
+solusi, <a class="xref" data-target-id="O006-C140-CMP-D008-THM03" href="O006-C140-CMP-D008.html#O006-C140-CMP-D008-THM03">Teorema persamaan normal</a> memberi <span class="math-inline" role="math">\(Xb=P_Xy=XX^+y\)</span>, sehingga
+<span class="math-inline" role="math">\(b-X^+y\in\mathcal N(X)\)</span>. Setiap vektor dalam ruang nol adalah hasil
+<span class="math-inline" role="math">\((I_p-X^+X)z\)</span>, jadi bentuk di atas mencakup seluruh solusi.</p>
+<p>Vektor <span class="math-inline" role="math">\(X^+y\)</span> berada di ruang baris, sedangkan
+<span class="math-inline" role="math">\((I_p-X^+X)z\)</span> berada di ruang nol. Kedua ruang itu ortogonal. Karena itu</p>
+<div class="math-display" role="math">\[\|\widehat\beta_z\|^2
+=\|X^+y\|^2+\|(I_p-X^+X)z\|^2,\]</div>
+<p>yang minimum tepat ketika komponen ruang nol sama dengan nol. ∎</p>
+<p><a id="O006-C140-CMP-D008-DEF02"></a></p>
+<h2>Keterestimasi fungsi linear</h2>
+<p>Fungsi linear <span class="math-inline" role="math">\(a^{\mathsf T}\beta\)</span>, dengan <span class="math-inline" role="math">\(a\in\mathbb R^p\)</span>, disebut
+<strong>terestimasi secara linear</strong> bila ada <span class="math-inline" role="math">\(c\in\mathbb R^n\)</span> sehingga
+<span class="math-inline" role="math">\(c^{\mathsf T}Y\)</span> tak-bias untuk <span class="math-inline" role="math">\(a^{\mathsf T}\beta\)</span> bagi setiap
+<span class="math-inline" role="math">\(\beta\)</span>:</p>
+<div class="math-display" role="math">\[E_\beta(c^{\mathsf T}Y)=a^{\mathsf T}\beta.\]</div>
+<p>Istilah ini menyatakan bahwa target ditentukan oleh distribusi observasi.
+Pada desain rank penuh setiap <span class="math-inline" role="math">\(a\)</span> memenuhi syarat; pada desain
+rank-defisien hanya arah tertentu yang memenuhi.</p>
+<p><a id="O006-C140-CMP-D008-THM06"></a></p>
+<h2>Teorema kriteria keterestimasi</h2>
+<p>Untuk <span class="math-inline" role="math">\(a\in\mathbb R^p\)</span>, pernyataan berikut ekuivalen.</p>
+<ol>
+<li><span class="math-inline" role="math">\(a^{\mathsf T}\beta\)</span> terestimasi secara linear.</li>
+<li><span class="math-inline" role="math">\(a\in\mathcal C(X^{\mathsf T})\)</span>.</li>
+<li><span class="math-inline" role="math">\(a\perp\mathcal N(X)\)</span>.</li>
+<li><span class="math-inline" role="math">\(a^{\mathsf T}\beta\)</span> mempunyai nilai yang sama untuk setiap pasangan
+<span class="math-inline" role="math">\(\beta_1,\beta_2\)</span> yang memenuhi <span class="math-inline" role="math">\(X\beta_1=X\beta_2\)</span>.</li>
+</ol>
+<p>Jika syarat ini berlaku, <span class="math-inline" role="math">\(a^{\mathsf T}\widehat\beta\)</span> sama untuk setiap
+solusi kuadrat-terkecil dan dapat dihitung sebagai</p>
+<div class="math-display" role="math">\[\widehat\tau_a=a^{\mathsf T}X^+Y.\]</div>
+<p><a id="O006-C140-CMP-D008-PRF06"></a></p>
+<h3>Bukti</h3>
+<p>Estimator <span class="math-inline" role="math">\(c^{\mathsf T}Y\)</span> tak-bias bagi target untuk setiap <span class="math-inline" role="math">\(\beta\)</span>
+tepat ketika</p>
+<div class="math-display" role="math">\[c^{\mathsf T}X\beta=a^{\mathsf T}\beta
+\quad\text{untuk setiap }\beta,\]</div>
+<p>atau, secara ekuivalen, <span class="math-inline" role="math">\(X^{\mathsf T}c=a\)</span>. Jadi 1 ekuivalen dengan
+<span class="math-inline" role="math">\(a\in\mathcal C(X^{\mathsf T})\)</span>, yaitu 2. Dekomposisi ortogonal pada
+<a class="xref" data-target-id="O006-C140-CMP-D008-DEF01" href="O006-C140-CMP-D008.html#O006-C140-CMP-D008-DEF01">Ruang kolom, ruang nol, dan dua rezim rank</a> membuat 2 ekuivalen dengan 3.</p>
+<p>Jika <span class="math-inline" role="math">\(X\beta_1=X\beta_2\)</span>, selisih
+<span class="math-inline" role="math">\(v=\beta_1-\beta_2\)</span> berada di <span class="math-inline" role="math">\(\mathcal N(X)\)</span>. Maka target sama pada
+kedua representasi tepat ketika <span class="math-inline" role="math">\(a^{\mathsf T}v=0\)</span> bagi setiap
+<span class="math-inline" role="math">\(v\in\mathcal N(X)\)</span>, yang ekuivalen dengan 3. Ini membuktikan 4.</p>
+<p>Untuk solusi kuadrat-terkecil apa pun,
+<span class="math-inline" role="math">\(\widehat\beta=X^+Y+v\)</span> dengan <span class="math-inline" role="math">\(v\in\mathcal N(X)\)</span>. Jika <span class="math-inline" role="math">\(a\)</span> terestimasi,
+<span class="math-inline" role="math">\(a^{\mathsf T}v=0\)</span>, sehingga semua solusi memberi
+<span class="math-inline" role="math">\(a^{\mathsf T}\widehat\beta=a^{\mathsf T}X^+Y\)</span>. ∎</p>
+<p><a id="O006-C140-CMP-D008-EX02"></a></p>
+<h2>Contoh rank-defisien: intersep dan seluruh indikator kelompok</h2>
+<p>Misalkan observasi berasal dari dua kelompok yang masing-masing mempunyai
+sedikitnya satu observasi, dengan indikator <span class="math-inline" role="math">\(g_0\)</span> dan <span class="math-inline" role="math">\(g_1\)</span>. Desain
+memakai tiga kolom</p>
+<div class="math-display" role="math">\[X=(\mathbf1, g_0,g_1).\]</div>
+<p>Karena <span class="math-inline" role="math">\(\mathbf1=g_0+g_1\)</span>, rank <span class="math-inline" role="math">\(X\)</span> hanya dua. Vektor</p>
+<div class="math-display" role="math">\[v=(1,-1,-1)^{\mathsf T}\]</div>
+<p>berada dalam <span class="math-inline" role="math">\(\mathcal N(X)\)</span>. Jadi intersep dan dua efek kelompok secara
+individual tidak teridentifikasi. Menambahkan <span class="math-inline" role="math">\(t v\)</span> pada koefisien tidak
+mengubah satu pun nilai pas.</p>
+<p>Namun rataan kelompok 0 mempunyai vektor target
+<span class="math-inline" role="math">\(a_0=(1,1,0)^{\mathsf T}\)</span>, rataan kelompok 1 mempunyai
+<span class="math-inline" role="math">\(a_1=(1,0,1)^{\mathsf T}\)</span>, dan kontrasnya mempunyai
+<span class="math-inline" role="math">\(a_1-a_0=(0,-1,1)^{\mathsf T}\)</span>. Ketiganya ortogonal terhadap <span class="math-inline" role="math">\(v\)</span>, jadi
+terestimasi menurut <a class="xref" data-target-id="O006-C140-CMP-D008-THM06" href="O006-C140-CMP-D008.html#O006-C140-CMP-D008-THM06">Teorema kriteria keterestimasi</a>. Taksirannya adalah dua
+rataan sampel kelompok dan selisih kedua rataan tersebut, tidak bergantung
+pada apakah perangkat lunak menghapus intersep, menghapus satu indikator, atau
+memilih solusi norma-minimum.</p>
+<p><a id="O006-C140-CMP-D008-CTR01"></a></p>
+<h2>Kontraeksempel: koefisien yang dicetak bukan otomatis target teridentifikasi</h2>
+<p>Ambil dua kolom desain yang identik, <span class="math-inline" role="math">\(X=(x,x)\)</span>. Rataan model adalah</p>
+<div class="math-display" role="math">\[X\beta=x(\beta_1+\beta_2).\]</div>
+<p>Hanya jumlah <span class="math-inline" role="math">\(\beta_1+\beta_2\)</span> yang teridentifikasi. Jika suatu algoritme
+memilih <span class="math-inline" role="math">\(\widehat\beta_2=0\)</span>, pilihan itu tidak membuktikan bahwa efek kedua
+nol; algoritme hanya memilih satu wakil dari garis solusi. Vektor target bagi
+<span class="math-inline" role="math">\(\beta_1\)</span> adalah <span class="math-inline" role="math">\((1,0)^{\mathsf T}\)</span>, yang tidak ortogonal terhadap
+<span class="math-inline" role="math">\((1,-1)^{\mathsf T}\in\mathcal N(X)\)</span>, sehingga <span class="math-inline" role="math">\(\beta_1\)</span> tidak
+terestimasi. Sebaliknya, <span class="math-inline" role="math">\((1,1)^{\mathsf T}\beta\)</span> terestimasi. Galat baku
+atau nilai-p untuk satu koefisien arbitrer tidak memperbaiki kegagalan
+identifikasi ini.</p>
+<p><a id="O006-C140-CMP-D008-SEC04"></a></p>
+<h2>Distribusi Gaussian dari nilai pas dan residual</h2>
+<p><a id="O006-C140-CMP-D008-THM07"></a></p>
+<h3>Teorema distribusi nilai pas dan residual</h3>
+<p>Di bawah <a class="xref" data-target-id="O006-C140-CMP-D008-ASM01" href="O006-C140-CMP-D008.html#O006-C140-CMP-D008-ASM01">Model dan asumsi dasar</a>, untuk rank
+<span class="math-inline" role="math">\(r=\operatorname{rank}(X)\)</span>,</p>
+<div class="math-display" role="math">\[\widehat\mu=P_XY\sim N_n(X\beta,\sigma^2P_X),\]</div>
+<div class="math-display" role="math">\[e=M_XY\sim N_n(0,\sigma^2M_X).\]</div>
+<p>Vektor <span class="math-inline" role="math">\(\widehat\mu\)</span> dan <span class="math-inline" role="math">\(e\)</span> independen. Selanjutnya,</p>
+<div class="math-display" role="math">\[\operatorname{SSE}=e^{\mathsf T}e=Y^{\mathsf T}M_XY,
+\qquad
+\frac{\operatorname{SSE}}{\sigma^2}\sim\chi^2_{n-r}.\]</div>
+<p>Jika <span class="math-inline" role="math">\(r&lt;n\)</span>, maka</p>
+<div class="math-display" role="math">\[s^2=\frac{\operatorname{SSE}}{n-r}\]</div>
+<p>tak-bias bagi <span class="math-inline" role="math">\(\sigma^2\)</span> dan independen dari setiap fungsi terukur nilai
+pas.</p>
+<p><a id="O006-C140-CMP-D008-PRF07"></a></p>
+<h3>Bukti</h3>
+<p>Karena <span class="math-inline" role="math">\(X\beta\in\mathcal C(X)\)</span>,
+<span class="math-inline" role="math">\(P_XX\beta=X\beta\)</span> dan <span class="math-inline" role="math">\(M_XX\beta=0\)</span>. Transformasi linear dari vektor
+Gaussian memberi</p>
+<div class="math-display" role="math">\[P_XY=X\beta+P_X\varepsilon,
+\qquad
+M_XY=M_X\varepsilon,\]</div>
+<p>dengan kovariansi yang dinyatakan. Kovariansi silang keduanya adalah</p>
+<div class="math-display" role="math">\[\operatorname{Cov}(P_XY,M_XY)
+=\sigma^2P_XM_X=0.\]</div>
+<p>Karena keduanya bersama-sama Gaussian, kovariansi nol menyiratkan independensi.</p>
+<p>Pilih matriks ortogonal <span class="math-inline" role="math">\(U\)</span> yang mendiagonalkan proyektor simetris
+<span class="math-inline" role="math">\(M_X\)</span>. Nilai eigennya hanya nol atau satu; trace dan ranknya adalah
+<span class="math-inline" role="math">\(n-r\)</span>. Jadi</p>
+<div class="math-display" role="math">\[U^{\mathsf T}M_XU=
+\operatorname{diag}(I_{n-r},0_r).\]</div>
+<p>Dengan <span class="math-inline" role="math">\(Z=U^{\mathsf T}\varepsilon/\sigma\sim N_n(0,I_n)\)</span>,</p>
+<div class="math-display" role="math">\[\frac{\operatorname{SSE}}{\sigma^2}
+=\frac{\varepsilon^{\mathsf T}M_X\varepsilon}{\sigma^2}
+=\sum_{j=1}^{n-r}Z_j^2
+\sim\chi^2_{n-r}.\]</div>
+<p>Harapan SSE adalah <span class="math-inline" role="math">\((n-r)\sigma^2\)</span>, sehingga <span class="math-inline" role="math">\(s^2\)</span> tak-bias. Karena SSE
+fungsi residual dan residual independen dari nilai pas, pernyataan
+independensi terakhir juga berlaku. ∎</p>
+<p><a id="O006-C140-CMP-D008-THM08"></a></p>
+<h2>Teorema distribusi koefisien dan fungsi terestimasi</h2>
+<p>Jika <span class="math-inline" role="math">\(X\)</span> ber-rank kolom penuh,</p>
+<div class="math-display" role="math">\[\widehat\beta
+=(X^{\mathsf T}X)^{-1}X^{\mathsf T}Y
+\sim N_p\!\left(\beta,
+\sigma^2(X^{\mathsf T}X)^{-1}\right).\]</div>
+<p>Jika <span class="math-inline" role="math">\(X\)</span> rank-defisien dan <span class="math-inline" role="math">\(a^{\mathsf T}\beta\)</span> terestimasi, maka nilai
+yang sama dari setiap solusi kuadrat-terkecil mempunyai distribusi</p>
+<div class="math-display" role="math">\[\widehat\tau_a=a^{\mathsf T}X^+Y
+\sim N\!\left(a^{\mathsf T}\beta,
+\sigma^2a^{\mathsf T}(X^{\mathsf T}X)^+a\right).\]</div>
+<p>Tanpa keterestimasi, <span class="math-inline" role="math">\(a^{\mathsf T}X^+Y\)</span> umumnya menaksir
+<span class="math-inline" role="math">\(a^{\mathsf T}X^+X\beta\)</span>, bukan <span class="math-inline" role="math">\(a^{\mathsf T}\beta\)</span>.</p>
+<p><a id="O006-C140-CMP-D008-PRF08"></a></p>
+<h3>Bukti</h3>
+<p>Pada rank penuh,</p>
+<div class="math-display" role="math">\[\widehat\beta
+=\beta+(X^{\mathsf T}X)^{-1}X^{\mathsf T}\varepsilon.\]</div>
+<p>Transformasi linear Gaussian memberi rataan <span class="math-inline" role="math">\(\beta\)</span> dan kovariansi</p>
+<div class="math-display" role="math">\[\sigma^2(X^{\mathsf T}X)^{-1}X^{\mathsf T}X
+(X^{\mathsf T}X)^{-1}
+=\sigma^2(X^{\mathsf T}X)^{-1}.\]</div>
+<p>Pada rank-defisien, keterestimasi memberi
+<span class="math-inline" role="math">\(a\in\mathcal C(X^{\mathsf T})\)</span>, sehingga
+<span class="math-inline" role="math">\(a^{\mathsf T}X^+X=a^{\mathsf T}\)</span>. Maka</p>
+<div class="math-display" role="math">\[E(a^{\mathsf T}X^+Y)
+=a^{\mathsf T}X^+X\beta
+=a^{\mathsf T}\beta.\]</div>
+<p>Dari SVD,
+<span class="math-inline" role="math">\(X^+(X^+)^{\mathsf T}=(X^{\mathsf T}X)^+\)</span>. Karena itu variansnya adalah</p>
+<div class="math-display" role="math">\[\sigma^2a^{\mathsf T}X^+(X^+)^{\mathsf T}a
+=\sigma^2a^{\mathsf T}(X^{\mathsf T}X)^+a.\]</div>
+<p>Normalitas kembali mengikuti transformasi linear. Jika <span class="math-inline" role="math">\(a\)</span> tidak berada
+di ruang baris, identitas rataan pertama gagal tepat pada komponen
+<span class="math-inline" role="math">\(a\)</span> di ruang nol. ∎</p>
+<p><a id="O006-C140-CMP-D008-REM02"></a></p>
+<h2>MLE varians dan derajat bebas</h2>
+<p>Untuk <span class="math-inline" role="math">\(r&lt;n\)</span> dan SSE positif, memaksimalkan likelihood Gaussian setelah
+memasang rataan memberi</p>
+<div class="math-display" role="math">\[\widehat\sigma^2_{\mathrm{MLE}}=\frac{\operatorname{SSE}}n.\]</div>
+<p>Nilai ini berbeda dari estimator tak-bias
+<span class="math-inline" role="math">\(s^2=\operatorname{SSE}/(n-r)\)</span>. Memang,</p>
+<div class="math-display" role="math">\[E(\widehat\sigma^2_{\mathrm{MLE}})
+=\frac{n-r}{n}\sigma^2.\]</div>
+<p>Perbedaan penyebut bukan salah ketik: MLE tidak wajib tak-bias. Jika
+<span class="math-inline" role="math">\(r=n\)</span>, model rataan jenuh memberi SSE nol untuk setiap data dan likelihood
+meningkat tanpa batas saat <span class="math-inline" role="math">\(\sigma^2\downarrow0\)</span>; tidak ada MLE interior
+positif bagi varians. Derajat bebas residual nol juga berarti data tidak
+menyediakan penaksir varians internal.</p>
+<p><a id="O006-C140-CMP-D008-SEC05"></a></p>
+<h2>Dekomposisi geometri jumlah kuadrat</h2>
+<p><a id="O006-C140-CMP-D008-THM09"></a></p>
+<h3>Teorema dekomposisi tak-terpusat</h3>
+<p>Untuk desain dan data apa pun,</p>
+<div class="math-display" role="math">\[\|Y\|^2
+=\|P_XY\|^2+\|M_XY\|^2.\]</div>
+<p>Identitas ini selalu benar, termasuk tanpa intersep dan pada desain
+rank-defisien.</p>
+<p><a id="O006-C140-CMP-D008-PRF09"></a></p>
+<h3>Bukti</h3>
+<p>Dekomposisi <span class="math-inline" role="math">\(Y=P_XY+M_XY\)</span> mempunyai dua komponen ortogonal menurut
+<a class="xref" data-target-id="O006-C140-CMP-D008-THM01" href="O006-C140-CMP-D008.html#O006-C140-CMP-D008-THM01">Teorema proyeksi ortogonal pada ruang desain</a>. Menguadratkan norma dan menghapus suku silang
+memberi hasil. ∎</p>
+<p><a id="O006-C140-CMP-D008-THM10"></a></p>
+<h2>Teorema dekomposisi ANOVA terpusat</h2>
+<p>Andaikan kolom konstan <span class="math-inline" role="math">\(\mathbf1_n\)</span> berada dalam <span class="math-inline" role="math">\(\mathcal C(X)\)</span>.
+Tuliskan <span class="math-inline" role="math">\(\bar Y=n^{-1}\mathbf1_n^{\mathsf T}Y\)</span>. Maka</p>
+<div class="math-display" role="math">\[\underbrace{\|Y-\bar Y\mathbf1_n\|^2}_{\mathrm{SST}}
+=
+\underbrace{\|P_XY-\bar Y\mathbf1_n\|^2}_{\mathrm{SSR}}
++
+\underbrace{\|M_XY\|^2}_{\mathrm{SSE}}.\]</div>
+<p>Dimensi geometris yang bersesuaian adalah
+<span class="math-inline" role="math">\(n-1=(r-1)+(n-r)\)</span>. Identitas ini tetap benar bila representasi koefisien
+rank-defisien, selama ruang kolom memuat intersep.</p>
+<p><a id="O006-C140-CMP-D008-PRF10"></a></p>
+<h3>Bukti</h3>
+<p>Karena <span class="math-inline" role="math">\(\mathbf1_n\in\mathcal C(X)\)</span>, residual ortogonal terhadap
+<span class="math-inline" role="math">\(\mathbf1_n\)</span>, sehingga
+<span class="math-inline" role="math">\(\mathbf1_n^{\mathsf T}M_XY=0\)</span>. Selain itu,</p>
+<div class="math-display" role="math">\[Y-\bar Y\mathbf1_n
+=(P_XY-\bar Y\mathbf1_n)+M_XY.\]</div>
+<p>Suku pertama berada dalam <span class="math-inline" role="math">\(\mathcal C(X)\)</span>, sedangkan suku kedua berada
+dalam komplemen ortogonalnya. Pythagoras memberi identitas jumlah kuadrat.
+Setelah arah konstan berdimensi satu dipisahkan dari ruang kolom, subruang
+nilai pas terpusat berdimensi <span class="math-inline" role="math">\(r-1\)</span>, sedangkan ruang residual berdimensi
+<span class="math-inline" role="math">\(n-r\)</span>. Jumlahnya <span class="math-inline" role="math">\(n-1\)</span>, dimensi ruang semua vektor terpusat. ∎</p>
+<p>Pada data <a class="xref" data-target-id="O006-C140-CMP-D008-EX01" href="O006-C140-CMP-D008.html#O006-C140-CMP-D008-EX01">Contoh rank penuh: regresi sederhana dengan prediktor terpusat</a>,</p>
+<div class="math-display" role="math">\[\mathrm{SST}=\frac{14}{3},
+\qquad
+\mathrm{SSR}=\frac92,
+\qquad
+\mathrm{SSE}=\frac16,\]</div>
+<p>dan <span class="math-inline" role="math">\(14/3=9/2+1/6\)</span>.</p>
+<p><a id="O006-C140-CMP-D008-CTR02"></a></p>
+<h2>Kontraeksempel: dekomposisi terpusat tanpa intersep</h2>
+<p>Ambil</p>
+<div class="math-display" role="math">\[X=\begin{pmatrix}1\\0\end{pmatrix},
+\qquad
+y=\begin{pmatrix}1\\1\end{pmatrix}.\]</div>
+<p>Maka <span class="math-inline" role="math">\(P_Xy=(1,0)^{\mathsf T}\)</span>, residual
+<span class="math-inline" role="math">\(e=(0,1)^{\mathsf T}\)</span>, dan dekomposisi tak-terpusat benar:
+<span class="math-inline" role="math">\(\|y\|^2=2=1+1\)</span>. Namun <span class="math-inline" role="math">\(\bar y=1\)</span>, sehingga SST terpusat nol, sementara
+SSE sama dengan satu. Jadi rumus
+<span class="math-inline" role="math">\(\mathrm{SST}=\mathrm{SSR}+\mathrm{SSE}\)</span> terpusat tidak mungkin berlaku.
+Kegagalannya berasal dari <span class="math-inline" role="math">\(\mathbf1_2\notin\mathcal C(X)\)</span>, bukan dari
+pembulatan. Melaporkan <span class="math-inline" role="math">\(R^2=1-\mathrm{SSE}/\mathrm{SST}\)</span> dalam contoh ini
+bahkan tidak terdefinisi.</p>
+<p><a id="O006-C140-CMP-D008-THM11"></a></p>
+<h2>Teorema dekomposisi model bersarang</h2>
+<p>Misalkan <span class="math-inline" role="math">\(\mathcal C_0\subseteq\mathcal C_1\)</span> adalah dua ruang model dengan
+rank <span class="math-inline" role="math">\(r_0\le r_1\)</span>, proyektor <span class="math-inline" role="math">\(P_0,P_1\)</span>, dan
+<span class="math-inline" role="math">\(M_j=I-P_j\)</span>. Maka</p>
+<div class="math-display" role="math">\[D=P_1-P_0\]</div>
+<p>adalah proyektor ortogonal ber-rank <span class="math-inline" role="math">\(r_1-r_0\)</span> ke
+<span class="math-inline" role="math">\(\mathcal C_1\cap\mathcal C_0^\perp\)</span>. Selain itu,</p>
+<div class="math-display" role="math">\[M_0=D+M_1,
+\qquad
+DM_1=M_1D=0,\]</div>
+<p>dan</p>
+<div class="math-display" role="math">\[\operatorname{SSE}_0
+-\operatorname{SSE}_1
+=Y^{\mathsf T}(P_1-P_0)Y
+=\|DY\|^2.\]</div>
+<p>Di bawah model Gaussian dan hipotesis nol <span class="math-inline" role="math">\(E(Y)\in\mathcal C_0\)</span>,</p>
+<div class="math-display" role="math">\[\frac{Y^{\mathsf T}DY}{\sigma^2}
+\sim\chi^2_{r_1-r_0},
+\qquad
+\frac{Y^{\mathsf T}M_1Y}{\sigma^2}
+\sim\chi^2_{n-r_1},\]</div>
+<p>dan kedua jumlah kuadrat independen.</p>
+<p><a id="O006-C140-CMP-D008-PRF11"></a></p>
+<h3>Bukti</h3>
+<p>Inklusi ruang memberi
+<span class="math-inline" role="math">\(P_1P_0=P_0P_1=P_0\)</span>. Maka <span class="math-inline" role="math">\(D\)</span> simetris dan</p>
+<div class="math-display" role="math">\[D^2
+=P_1-P_1P_0-P_0P_1+P_0
+=P_1-P_0=D.\]</div>
+<p>Jadi <span class="math-inline" role="math">\(D\)</span> proyektor ortogonal. Ia menahan komponen dalam
+<span class="math-inline" role="math">\(\mathcal C_1\)</span> yang ortogonal terhadap <span class="math-inline" role="math">\(\mathcal C_0\)</span> dan mematikan
+<span class="math-inline" role="math">\(\mathcal C_0\)</span> serta <span class="math-inline" role="math">\(\mathcal C_1^\perp\)</span>; ranknya selisih dimensi.
+Identitas <span class="math-inline" role="math">\(M_0=D+M_1\)</span> diperoleh dengan menjumlahkan
+<span class="math-inline" role="math">\(P_1-P_0\)</span> dan <span class="math-inline" role="math">\(I-P_1\)</span>. Perkalian langsung memberi <span class="math-inline" role="math">\(DM_1=0\)</span>, sehingga</p>
+<div class="math-display" role="math">\[\|M_0Y\|^2=\|DY\|^2+\|M_1Y\|^2.\]</div>
+<p>Ini sama dengan identitas SSE. Di bawah nol,
+<span class="math-inline" role="math">\(DE(Y)=0\)</span> dan <span class="math-inline" role="math">\(M_1E(Y)=0\)</span>. Argumen diagonal proyektor pada
+<a class="xref" data-target-id="O006-C140-CMP-D008-PRF07" href="O006-C140-CMP-D008.html#O006-C140-CMP-D008-PRF07">Bukti</a> memberi dua hukum khi-kuadrat dengan rank
+masing-masing. Kovariansi silang transformasi Gaussian adalah
+<span class="math-inline" role="math">\(\sigma^2DM_1=0\)</span>, sehingga keduanya independen. ∎</p>
+<p><a id="O006-C140-CMP-D008-CTR03"></a></p>
+<h2>Kontraeksempel: “lebih banyak kolom” belum tentu model lebih besar</h2>
+<p>Menambahkan sebuah kolom yang sudah merupakan kombinasi linear kolom lama
+tidak mengubah <span class="math-inline" role="math">\(\mathcal C(X)\)</span>, proyektor, nilai pas, SSE, atau likelihood
+maksimum. Jumlah kolom <span class="math-inline" role="math">\(p\)</span> bertambah, tetapi rank <span class="math-inline" role="math">\(r\)</span> tetap. Karena itu
+derajat bebas pembanding model adalah selisih rank, bukan selisih jumlah nama
+koefisien. Menghitung satu derajat bebas tambahan untuk kolom redundan akan
+mengarang arah data yang tidak ada.</p>
+<p><a id="O006-C140-CMP-D008-ALG01"></a></p>
+<h2>Prosedur audit model linear desain tetap</h2>
+<ol>
+<li>Bekukan matriks desain yang benar-benar digunakan, termasuk intersep,
+pengodean kategori, interaksi, bobot, dan baris yang dibuang.</li>
+<li>Hitung rank dan ruang nol; jangan mulai dengan invers
+<span class="math-inline" role="math">\(X^{\mathsf T}X\)</span>.</li>
+<li>Nyatakan ruang rataan <span class="math-inline" role="math">\(\mathcal C(X)\)</span>. Dua parameterisasi dengan ruang
+kolom sama adalah model distribusi yang sama meskipun koefisiennya berbeda.</li>
+<li>Bangun proyektor dari QR/SVD yang stabil. Gunakan formula invers hanya
+setelah rank penuh dan kondisi numerik diperiksa.</li>
+<li>Verifikasi persamaan normal melalui ortogonalitas residual, bukan hanya
+pesan “optimisasi berhasil”.</li>
+<li>Pada rank-defisien, nyatakan ruang nol dan buktikan setiap target koefisien
+berada dalam <span class="math-inline" role="math">\(\mathcal C(X^{\mathsf T})\)</span> sebelum memberi taksiran atau
+galat baku.</li>
+<li>Bedakan nilai pas unik, residual unik, solusi koefisien yang mungkin tidak
+unik, dan solusi pseudoinvers norma-minimum.</li>
+<li>Sebelum memakai hukum eksak, periksa rataan linear, desain tetap,
+Gaussianitas, kovariansi <span class="math-inline" role="math">\(\sigma^2I\)</span>, dan derajat bebas residual positif.</li>
+<li>Gunakan dekomposisi terpusat hanya bila intersep berada dalam ruang kolom.
+Untuk model bersarang, gunakan selisih rank.</li>
+<li>Laporkan apakah kesimpulan merupakan identitas aljabar, hasil bersyarat
+pada desain, atau inferensi distribusional. Ketiganya bukan sinonim.</li>
+</ol>
+<p><a id="O006-C140-CMP-D008-REM03"></a></p>
+<h2>Kesalahan penalaran yang harus dihindari</h2>
+<ol>
+<li><strong>“Pseudoinvers membuat semua koefisien teridentifikasi.”</strong> Salah.
+Pseudoinvers memilih solusi; keterestimasi tetap ditentukan oleh ruang
+baris pada <a class="xref" data-target-id="O006-C140-CMP-D008-THM06" href="O006-C140-CMP-D008.html#O006-C140-CMP-D008-THM06">Teorema kriteria keterestimasi</a>.</li>
+<li><strong>“Nilai pas tidak unik jika koefisien tidak unik.”</strong> Salah. Semua solusi
+persamaan normal menghasilkan proyeksi unik <span class="math-inline" role="math">\(P_XY\)</span>.</li>
+<li><strong>“Rank penuh menjamin galat baku kecil.”</strong> Salah. Desain hampir-kolinear
+dapat mempunyai invers dengan nilai eigen sangat besar.</li>
+<li><strong>“Residual Gaussian otomatis independen dari data.”</strong> Salah. Residual
+adalah fungsi data. Ia independen dari nilai pas karena proyeksi
+ortogonal dan Gaussianitas, bukan independen dari <span class="math-inline" role="math">\(Y\)</span> sendiri.</li>
+<li><strong>“Penyebut MLE varians harus <span class="math-inline" role="math">\(n-r\)</span>.”</strong> Salah. <span class="math-inline" role="math">\(n-r\)</span> menghasilkan
+estimator tak-bias; MLE memakai <span class="math-inline" role="math">\(n\)</span> dalam model biasa dengan SSE positif.</li>
+<li><strong>“ANOVA terpusat selalu berlaku.”</strong> Salah tanpa intersep atau syarat
+ekuivalen <span class="math-inline" role="math">\(\mathbf1_n\in\mathcal C(X)\)</span>.</li>
+<li><strong>“Jumlah kolom adalah dimensi model.”</strong> Salah pada rank-defisien;
+dimensinya adalah rank ruang kolom.</li>
+</ol>
+<p><a id="O006-C140-CMP-D008-SEC06"></a></p>
+<h2>Ringkasan</h2>
+<ul>
+<li>Kuadrat terkecil adalah proyeksi ortogonal data ke ruang kolom desain.</li>
+<li>Persamaan normal menyatakan bahwa residual ortogonal terhadap seluruh arah
+rataan yang dapat dipasang.</li>
+<li>Pada rank penuh, koefisien unik dan formula invers biasa sah; pada
+rank-defisien, hanya nilai pas serta fungsi koefisien yang berada di ruang
+baris yang teridentifikasi.</li>
+<li>Pseudoinvers memberi solusi norma-minimum dan proyektor yang benar, tetapi
+tidak menambah informasi statistik.</li>
+<li>Di bawah Gaussianitas, nilai pas dan residual independen, SSE berskala
+khi-kuadrat dengan <span class="math-inline" role="math">\(n-r\)</span> derajat bebas, dan setiap fungsi terestimasi
+mempunyai distribusi Normal eksak.</li>
+<li>Dekomposisi tak-terpusat selalu berlaku; dekomposisi ANOVA terpusat
+memerlukan intersep; dekomposisi model bersarang memakai selisih rank.</li>
+</ul>
+<p>Materi ini adalah prosa orisinal CC BY-SA 4.0. Ia memakai hasil aljabar linear
+B40 dan fondasi inferensi C1, tetapi tidak menyalin atau menyamarkan prosa Penn
+State maupun donor <em>Random</em>.</p>
+
+<footer class="license">Materi pendamping orisinal berlisensi CC BY-SA 4.0. Komponen Penn State dan Random tetap berada di bawah lisensinya masing-masing dan tidak direlisensikan oleh halaman ini.</footer>
+</main>
+</div>
+</body>
+</html>

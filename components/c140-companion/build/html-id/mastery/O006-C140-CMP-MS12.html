@@ -1,0 +1,435 @@
+<!doctype html>
+<html lang="id-ID">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="generator" content="OpenAI Codex gpt-5.6-sol, Ultra">
+<title>Set penguasaan 12 — model linear Gaussian matriks, inferensi eksak, dan diagnostik</title>
+<link rel="stylesheet" href="../assets/style.css">
+<script>window.MathJax={loader:{load:['[tex]/boldsymbol']},tex:{packages:{'[+]':['boldsymbol']},inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']]},svg:{fontCache:'local'}};</script>
+<script defer src="../assets/MathJax/tex-svg.js"></script>
+</head>
+<body>
+<div class="shell">
+<nav class="sidebar" aria-label="Daftar isi pendamping"><h2>Isi pendamping</h2><ol><li><a href="../index.html">Pendamping Orisinal Statistika Matematis</a></li><li><a href="../theory/O006-C140-CMP-D001.html">Model parametrik reguler, skor, dan informasi Fisher</a></li><li><a href="../theory/O006-C140-CMP-D002.html">Konsistensi MLE: identifikasi Kullback–Leibler dan teorema argmax</a></li><li><a href="../theory/O006-C140-CMP-D003.html">Likelihood kuadratik lokal, normalitas asimtotik, dan delta method</a></li><li><a href="../theory/O006-C140-CMP-D004.html">Prosedur Wald, skor, dan rasio likelihood</a></li><li><a href="../theory/O006-C140-CMP-D005.html">Likelihood nonreguler: empat mekanisme kegagalan</a></li><li><a href="../theory/O006-C140-CMP-D006.html">Optimalitas pengujian: Neyman–Pearson, MP, UMP, dan rasio likelihood monoton</a></li><li><a href="../theory/O006-C140-CMP-D007.html">Loss, risk, efisiensi, Rao–Blackwell, dan Lehmann–Scheffé</a></li><li><a href="../theory/O006-C140-CMP-D008.html">Model linear Gaussian desain tetap dan geometri proyeksi</a></li><li><a href="../theory/O006-C140-CMP-D009.html">OLS, MLE Gaussian, dan teorema Gauss–Markov pada rancangan tetap</a></li><li><a href="../theory/O006-C140-CMP-D010.html">Inferensi Gaussian eksak: proyeksi, t, F, ANOVA, dan prediksi</a></li><li><a href="../theory/O006-C140-CMP-D011.html">Diagnostik, leverage, misspesifikasi, dan inferensi pascaseleksi</a></li><li><a href="../simulations/O006-C140-CMP-SIM001.html">Model lokasi normal: MLE, coverage, dan tiga statistik uji</a></li><li><a href="../simulations/O006-C140-CMP-SIM002.html">Delta method pada titik reguler dan titik dengan turunan nol</a></li><li><a href="../simulations/O006-C140-CMP-SIM003.html">Endpoint Uniform: laju nonreguler dan kegagalan bootstrap biasa</a></li><li><a href="../simulations/O006-C140-CMP-SIM004.html">Uji Neyman–Pearson teracak dengan size tepat</a></li><li><a href="../simulations/O006-C140-CMP-SIM005.html">Model linear matriks: coverage, heteroskedastisitas, dan pengaruh</a></li><li><a href="O006-C140-CMP-MS07.html">Set penguasaan 07 — regularitas, konsistensi, dan normalitas MLE</a></li><li><a href="O006-C140-CMP-MS08.html">Set penguasaan 08 — Wald, skor, rasio likelihood, dan diagnosis nonregular</a></li><li><a href="O006-C140-CMP-MS09.html">Set penguasaan 09 — pengujian eksak dan optimalitas Neyman–Pearson</a></li><li><a href="O006-C140-CMP-MS10.html">Set penguasaan 10 — uji likelihood asimtotik, risk, dan perbaikan estimator</a></li><li><a href="O006-C140-CMP-MS12.html">Set penguasaan 12 — model linear Gaussian matriks, inferensi eksak, dan diagnostik</a></li><li><a href="../assessments/O006-C140-CMP-CA01.html">Asesmen kumulatif C1: likelihood, optimalitas, dan keputusan statistik</a></li></ol></nav>
+<main>
+<div class="metadata"><strong>O006-C140-CMP-MS12</strong> · id-ID · CC BY-SA 4.0 · OpenAI Codex gpt-5.6-sol, Ultra</div>
+<p><a id="O006-C140-CMP-MS12-SEC01"></a></p>
+<h1>Set penguasaan 12 — model linear Gaussian matriks</h1>
+<p>Set ini menilai satu rantai penalaran utuh: ruang kolom menentukan apa yang
+dapat diidentifikasi; asumsi momen menentukan ketakbiasan dan Gauss–Markov;
+normalitas memberi hukum <span class="math-inline" role="math">\(t\)</span> dan <span class="math-inline" role="math">\(F\)</span> eksak; dan diagnostik memeriksa asumsi,
+bukan mengeluarkan perintah penghapusan otomatis. Kerjakan setiap masalah
+sebelum membuka petunjuk. Sebutkan asumsi tepat pada langkah tempat asumsi itu
+dipakai.</p>
+<p><a id="O006-C140-CMP-MS12-P01"></a></p>
+<h2>Masalah 1 — rank-defisien, nilai suaian unik, dan target terestimasi</h2>
+<!--PROBLEM_META {"id":"O006-C140-CMP-MS12-P01","prerequisites":["O006-C140-CMP-D008-DEF02","O006-C140-CMP-D008-THM05","O006-C140-CMP-D008-THM06"],"objective":"mencirikan solusi kuadrat-terkecil dan fungsi terestimasi pada desain rank-defisien","difficulty":"lanjut","misconceptions":["koefisien yang tidak unik membuat nilai suaian tidak unik","setiap koefisien individual tetap terestimasi","pseudoinvers menghilangkan masalah identifikasi"]}-->
+<p>Pertimbangkan model <span class="math-inline" role="math">\(Y=X\beta+\varepsilon\)</span> dengan</p>
+<div class="math-display" role="math">\[X=\begin{pmatrix}
+1&amp;1&amp;0\\
+1&amp;1&amp;0\\
+1&amp;0&amp;1\\
+1&amp;0&amp;1
+\end{pmatrix},\qquad
+\beta=(\beta_0,\beta_A,\beta_B)^\mathsf T,qquad
+Y=(2,4,5,7)^\mathsf T.\]</div>
+<ol>
+<li>Tentukan rank <span class="math-inline" role="math">\(X\)</span> dan satu vektor taknol dalam <span class="math-inline" role="math">\(\mathcal N(X)\)</span>.</li>
+<li>Tentukan seluruh solusi kuadrat-terkecil.</li>
+<li>Buktikan bahwa nilai suaian unik walaupun koefisien tidak unik.</li>
+<li>Putuskan apakah <span class="math-inline" role="math">\(\beta_0\)</span>, <span class="math-inline" role="math">\(\beta_A-\beta_B\)</span>, dan
+<span class="math-inline" role="math">\(\beta_0+\beta_A\)</span> terestimasi. Berikan estimasinya bila terestimasi.</li>
+</ol>
+<p><a id="O006-C140-CMP-MS12-P01-H01"></a></p>
+<h3>Petunjuk 1</h3>
+<p>Kolom pertama sama dengan jumlah kolom kedua dan ketiga. Rataan respons dalam
+kelompok A dan B masing-masing adalah 3 dan 6.</p>
+<p><a id="O006-C140-CMP-MS12-P01-H02"></a></p>
+<h3>Petunjuk 2</h3>
+<p>Semua solusi harus memenuhi <span class="math-inline" role="math">\(\beta_0+\beta_A=3\)</span> dan
+<span class="math-inline" role="math">\(\beta_0+\beta_B=6\)</span>. Untuk keterestimasi, periksa apakah koefisien fungsi
+linear ortogonal terhadap <span class="math-inline" role="math">\(\mathcal N(X)\)</span>.</p>
+<p><a id="O006-C140-CMP-MS12-P01-ANS"></a></p>
+<h3>Jawaban singkat</h3>
+<p><span class="math-inline" role="math">\(\operatorname{rank}(X)=2\)</span> dan <span class="math-inline" role="math">\((-1,1,1)^\mathsf T\in\mathcal N(X)\)</span>.
+Seluruh solusi adalah <span class="math-inline" role="math">\((t,3-t,6-t)^\mathsf T\)</span>. Nilai suaian selalu
+<span class="math-inline" role="math">\((3,3,6,6)^\mathsf T\)</span>. <span class="math-inline" role="math">\(\beta_0\)</span> tidak terestimasi, sedangkan
+<span class="math-inline" role="math">\(\beta_A-\beta_B=-3\)</span> dan <span class="math-inline" role="math">\(\beta_0+\beta_A=3\)</span> terestimasi.</p>
+<p><a id="O006-C140-CMP-MS12-P01-SOL"></a></p>
+<h3>Solusi lengkap</h3>
+<p>Karena <span class="math-inline" role="math">\(X_{\cdot 1}=X_{\cdot 2}+X_{\cdot 3}\)</span> dan dua kolom indikator bebas,
+rank <span class="math-inline" role="math">\(X\)</span> adalah 2. Perkalian langsung memberi
+<span class="math-inline" role="math">\(X(-1,1,1)^\mathsf T=0\)</span>; ruang nol berdimensi satu, sehingga vektor itu
+merentangnya. Kuadrat residual terpisah menurut kelompok dan diminimumkan oleh
+rataan kelompok. Karena itu persamaan normal hanya menetapkan</p>
+<div class="math-display" role="math">\[\beta_0+\beta_A=3,
+\qquad
+\beta_0+\beta_B=6.\]</div>
+<p>Dengan <span class="math-inline" role="math">\(\beta_0=t\)</span>, seluruh solusi ialah
+<span class="math-inline" role="math">\(\widehat\beta(t)=(t,3-t,6-t)^\mathsf T\)</span>. Untuk setiap <span class="math-inline" role="math">\(t\)</span>,</p>
+<div class="math-display" role="math">\[X\widehat\beta(t)=(3,3,6,6)^\mathsf T=P_XY;\]</div>
+<p>jadi yang unik adalah proyeksi ke <span class="math-inline" role="math">\(\mathcal C(X)\)</span>, bukan representasi
+koordinatnya. Fungsi <span class="math-inline" role="math">\(c^\mathsf T\beta\)</span> terestimasi tepat ketika
+<span class="math-inline" role="math">\(c^\mathsf Tv=0\)</span> untuk setiap <span class="math-inline" role="math">\(v\in\mathcal N(X)\)</span>. Untuk <span class="math-inline" role="math">\(\beta_0\)</span>,
+<span class="math-inline" role="math">\(c=(1,0,0)^\mathsf T\)</span> memberi <span class="math-inline" role="math">\(c^\mathsf T(-1,1,1)=-1\)</span>, maka tidak
+terestimasi. Untuk <span class="math-inline" role="math">\(\beta_A-\beta_B\)</span>, <span class="math-inline" role="math">\(c=(0,1,-1)^\mathsf T\)</span> dan hasil kali
+itu nol; estimasinya <span class="math-inline" role="math">\((3-t)-(6-t)=-3\)</span>. Untuk <span class="math-inline" role="math">\(\beta_0+\beta_A\)</span>,
+<span class="math-inline" role="math">\(c=(1,1,0)^\mathsf T\)</span> juga ortogonal terhadap ruang nol dan estimasinya 3.
+Memilih satu pseudoinvers hanya memilih satu <span class="math-inline" role="math">\(t\)</span>; pilihan itu tidak menciptakan
+identifikasi baru.</p>
+<p><a id="O006-C140-CMP-MS12-P02"></a></p>
+<h2>Masalah 2 — OLS, MLE Gaussian, dan penaksir varians</h2>
+<!--PROBLEM_META {"id":"O006-C140-CMP-MS12-P02","prerequisites":["O006-C140-CMP-D009-THM-OLS-SOLUTION","O006-C140-CMP-D009-THM-GAUSSIAN-MLE","O006-C140-CMP-D009-THM-SIGMA-UNBIASED"],"objective":"menghitung OLS dan membedakan MLE varians dari penaksir tak bias","difficulty":"menengah","misconceptions":["OLS memerlukan normalitas","MLE varians selalu tak bias","MLE Gaussian dan Gauss–Markov adalah teorema yang sama"]}-->
+<p>Untuk regresi dengan intersep, amati pasangan
+<span class="math-inline" role="math">\((-1,1),(0,1),(1,4)\)</span>. Asumsikan desain tetap.</p>
+<ol>
+<li>Hitung <span class="math-inline" role="math">\(\widehat\beta_0\)</span>, <span class="math-inline" role="math">\(\widehat\beta_1\)</span>, residual, dan RSS.</li>
+<li>Di bawah galat Gaussian iid <span class="math-inline" role="math">\(N(0,\sigma^2)\)</span>, hitung MLE <span class="math-inline" role="math">\(\sigma^2\)</span> dan
+penaksir tak biasnya.</li>
+<li>Nyatakan bagian jawaban yang tetap berlaku bila normalitas dihapus tetapi
+<span class="math-inline" role="math">\(E(\varepsilon\mid X)=0\)</span> dan
+<span class="math-inline" role="math">\(\operatorname{Cov}(\varepsilon\mid X)=\sigma^2I\)</span> dipertahankan.</li>
+</ol>
+<p><a id="O006-C140-CMP-MS12-P02-H01"></a></p>
+<h3>Petunjuk 1</h3>
+<p>Prediktor sudah terpusat, sehingga <span class="math-inline" role="math">\(\widehat\beta_0=\bar y\)</span> dan
+<span class="math-inline" role="math">\(\widehat\beta_1=\sum_i x_i y_i/\sum_i x_i^2\)</span>.</p>
+<p><a id="O006-C140-CMP-MS12-P02-H02"></a></p>
+<h3>Petunjuk 2</h3>
+<p>MLE membagi RSS dengan <span class="math-inline" role="math">\(n\)</span>; penaksir tak bias membaginya dengan <span class="math-inline" role="math">\(n-p\)</span>, dengan
+<span class="math-inline" role="math">\(p=2\)</span>.</p>
+<p><a id="O006-C140-CMP-MS12-P02-ANS"></a></p>
+<h3>Jawaban singkat</h3>
+<p><span class="math-inline" role="math">\(\widehat\beta=(2,3/2)^\mathsf T\)</span>, residual
+<span class="math-inline" role="math">\((1/2,-1,1/2)^\mathsf T\)</span>, dan <span class="math-inline" role="math">\(\mathrm{RSS}=3/2\)</span>. MLE varians adalah
+<span class="math-inline" role="math">\(1/2\)</span>, sedangkan penaksir tak bias adalah <span class="math-inline" role="math">\(3/2\)</span>. OLS, ketakbiasan, kovarians
+<span class="math-inline" role="math">\(\sigma^2(X^\mathsf TX)^{-1}\)</span>, dan sifat BLUE tetap berlaku tanpa normalitas;
+interpretasi likelihood dan hukum eksak Gaussian tidak.</p>
+<p><a id="O006-C140-CMP-MS12-P02-SOL"></a></p>
+<h3>Solusi lengkap</h3>
+<p>Karena <span class="math-inline" role="math">\(\bar x=0\)</span> dan <span class="math-inline" role="math">\(\bar y=2\)</span>,</p>
+<div class="math-display" role="math">\[\widehat\beta_0=2,\qquad
+\widehat\beta_1=
+\frac{(-1)(1)+(0)(1)+(1)(4)}{(-1)^2+0^2+1^2}
+=\frac32.\]</div>
+<p>Nilai suaian adalah <span class="math-inline" role="math">\((1/2,2,7/2)^\mathsf T\)</span>, sehingga residualnya
+<span class="math-inline" role="math">\((1/2,-1,1/2)^\mathsf T\)</span> dan
+<span class="math-inline" role="math">\(\mathrm{RSS}=1/4+1+1/4=3/2\)</span>. Di bawah model Gaussian, memaksimumkan
+likelihood bersama memberi</p>
+<div class="math-display" role="math">\[\widehat\sigma^2_{\mathrm{MLE}}=\frac{\mathrm{RSS}}n=\frac12.\]</div>
+<p>Karena rank <span class="math-inline" role="math">\(p=2\)</span> dan <span class="math-inline" role="math">\(n-p=1\)</span>, penaksir tak bias adalah
+<span class="math-inline" role="math">\(s^2=\mathrm{RSS}/(n-p)=3/2\)</span>. Rumus OLS sendiri adalah hasil minimisasi dan
+tidak memerlukan distribusi. Dengan mean nol dan kovarians sferis, OLS tak bias,
+berkovarians <span class="math-inline" role="math">\(\sigma^2(X^\mathsf TX)^{-1}\)</span>, dan BLUE di antara penaksir linear
+tak bias. Normalitas baru diperlukan untuk menyebut rumus yang sama sebagai MLE
+Gaussian dan untuk inferensi <span class="math-inline" role="math">\(t/F\)</span> eksak.</p>
+<p><a id="O006-C140-CMP-MS12-P03"></a></p>
+<h2>Masalah 3 — membuktikan Gauss–Markov tanpa menyelundupkan Gaussian</h2>
+<!--PROBLEM_META {"id":"O006-C140-CMP-MS12-P03","prerequisites":["O006-C140-CMP-D009-DEF-BLUE","O006-C140-CMP-D009-THM-GAUSS-MARKOV"],"objective":"membuktikan dominasi kovarians OLS dalam kelas penaksir linear tak bias","difficulty":"lanjut","misconceptions":["Gauss–Markov memerlukan galat normal","BLUE berarti terbaik di antara semua penaksir","matriks kovarians dibandingkan elemen demi elemen"]}-->
+<p>Misalkan <span class="math-inline" role="math">\(X\)</span> ber-rank kolom penuh dan
+<span class="math-inline" role="math">\(Y=X\beta+\varepsilon\)</span>, dengan <span class="math-inline" role="math">\(E\varepsilon=0\)</span> serta
+<span class="math-inline" role="math">\(\operatorname{Cov}(\varepsilon)=\sigma^2I\)</span>. Ambil sembarang penaksir linear
+tak bias <span class="math-inline" role="math">\(\widetilde\beta=AY\)</span>.</p>
+<ol>
+<li>Tunjukkan bahwa <span class="math-inline" role="math">\(AX=I\)</span>.</li>
+<li>Dengan <span class="math-inline" role="math">\(A_0=(X^\mathsf TX)^{-1}X^\mathsf T\)</span> dan <span class="math-inline" role="math">\(D=A-A_0\)</span>, buktikan
+<span class="math-inline" role="math">\(DX=0\)</span> dan <span class="math-inline" role="math">\(A_0D^\mathsf T=0\)</span>.</li>
+<li>Buktikan
+$\operatorname{Cov}(\widetilde\beta)-
+\operatorname{Cov}(\widehat\beta)=\sigma^2DD^\mathsf T\succeq0$.</li>
+<li>Jelaskan tepat apa yang dibuktikan dan apa yang tidak dibuktikan.</li>
+</ol>
+<p><a id="O006-C140-CMP-MS12-P03-H01"></a></p>
+<h3>Petunjuk 1</h3>
+<p>Gunakan <span class="math-inline" role="math">\(E(AY)=AX\beta\)</span> untuk setiap <span class="math-inline" role="math">\(\beta\)</span>. Lalu hitung
+<span class="math-inline" role="math">\(A_0D^\mathsf T=(X^\mathsf TX)^{-1}X^\mathsf TD^\mathsf T\)</span>.</p>
+<p><a id="O006-C140-CMP-MS12-P03-H02"></a></p>
+<h3>Petunjuk 2</h3>
+<p>Kembangkan <span class="math-inline" role="math">\((A_0+D)(A_0+D)^\mathsf T\)</span>. Untuk urutan Loewner, uji bentuk
+kuadratik <span class="math-inline" role="math">\(u^\mathsf TDD^\mathsf Tu\)</span>.</p>
+<p><a id="O006-C140-CMP-MS12-P03-ANS"></a></p>
+<h3>Jawaban singkat</h3>
+<p>Ketakbiasan bagi setiap <span class="math-inline" role="math">\(\beta\)</span> memaksa <span class="math-inline" role="math">\(AX=I\)</span>, sehingga <span class="math-inline" role="math">\(DX=0\)</span> dan suku
+silang hilang. Selisih kovarians adalah <span class="math-inline" role="math">\(\sigma^2DD^\mathsf T\)</span>, yang
+semidefinit positif. Ini membuktikan OLS BLUE di kelas penaksir linear tak bias
+di bawah kovarians sferis; tidak diperlukan normalitas dan tidak ada klaim
+optimalitas atas semua penaksir atau di bawah heteroskedastisitas.</p>
+<p><a id="O006-C140-CMP-MS12-P03-SOL"></a></p>
+<h3>Solusi lengkap</h3>
+<p>Karena <span class="math-inline" role="math">\(E(AY)=AX\beta\)</span> harus sama dengan <span class="math-inline" role="math">\(\beta\)</span> untuk setiap
+<span class="math-inline" role="math">\(\beta\in\mathbb R^p\)</span>, maka <span class="math-inline" role="math">\(AX=I_p\)</span>. Juga <span class="math-inline" role="math">\(A_0X=I_p\)</span>, sehingga
+<span class="math-inline" role="math">\(DX=(A-A_0)X=0\)</span>. Akibatnya</p>
+<div class="math-display" role="math">\[A_0D^\mathsf T
+=(X^\mathsf TX)^{-1}X^\mathsf TD^\mathsf T
+=(X^\mathsf TX)^{-1}(DX)^\mathsf T=0,\]</div>
+<p>dan transposenya juga nol. Karena kovarians galat sferis,</p>
+<div class="math-display" role="math">\[\operatorname{Cov}(AY)=\sigma^2AA^\mathsf T
+=\sigma^2(A_0A_0^\mathsf T+DD^\mathsf T).\]</div>
+<p>Suku pertama adalah kovarians OLS. Untuk setiap <span class="math-inline" role="math">\(u\)</span>,
+<span class="math-inline" role="math">\(u^\mathsf TDD^\mathsf Tu=\lVert D^\mathsf Tu\rVert^2\geq0\)</span>, sehingga
+selisihnya semidefinit positif dalam urutan Loewner. Bukti memakai linearitas,
+ketakbiasan, rank penuh, dan kovarians <span class="math-inline" role="math">\(\sigma^2I\)</span>, tetapi tidak memakai
+normalitas. “Terbaik” hanya berarti varians tidak lebih besar bagi setiap
+kontras linear dalam kelas penaksir linear tak bias; teorema tidak membandingkan
+OLS dengan penaksir nonlinear atau bias, dan tidak bertahan dengan rumus yang
+sama bila kovarians galat nonsferis.</p>
+<p><a id="O006-C140-CMP-MS12-P04"></a></p>
+<h2>Masalah 4 — uji t eksak dan interval kontras</h2>
+<!--PROBLEM_META {"id":"O006-C140-CMP-MS12-P04","prerequisites":["O006-C140-CMP-D010-THM03","O006-C140-CMP-D010-THM04"],"objective":"menghitung uji t dan interval kepercayaan eksak untuk kontras pada model Gaussian","difficulty":"menengah","misconceptions":["konsistensi OLS cukup untuk hukum t eksak","derajat bebas sama dengan n","koefisien signifikan berarti efek kausal"]}-->
+<p>Dalam model Gaussian desain tetap ber-rank penuh dengan <span class="math-inline" role="math">\(n=6\)</span>, <span class="math-inline" role="math">\(p=2\)</span>, diperoleh
+<span class="math-inline" role="math">\(\widehat\beta_1=0{,}8\)</span>, <span class="math-inline" role="math">\(s=0{,}5\)</span>, dan
+<span class="math-inline" role="math">\([(X^\mathsf TX)^{-1}]_{22}=1/10\)</span>. Uji dua sisi
+<span class="math-inline" role="math">\(H_0:\beta_1=0{,}5\)</span> dan bentuk interval kepercayaan 95% bagi <span class="math-inline" role="math">\(\beta_1\)</span>.
+Gunakan <span class="math-inline" role="math">\(t_{0{,}975;4}=2{,}776\)</span>. Nyatakan mengapa hasilnya eksak dan batas
+interpretasinya.</p>
+<p><a id="O006-C140-CMP-MS12-P04-H01"></a></p>
+<h3>Petunjuk 1</h3>
+<p>Standard error kemiringan adalah
+<span class="math-inline" role="math">\(s\sqrt{[(X^\mathsf TX)^{-1}]_{22}}\)</span> dan derajat bebas residual <span class="math-inline" role="math">\(n-p\)</span>.</p>
+<p><a id="O006-C140-CMP-MS12-P04-H02"></a></p>
+<h3>Petunjuk 2</h3>
+<p>Bandingkan nilai absolut statistik dengan 2,776. Interval memakai pusat
+<span class="math-inline" role="math">\(\widehat\beta_1\)</span>, bukan nilai nol 0,5.</p>
+<p><a id="O006-C140-CMP-MS12-P04-ANS"></a></p>
+<h3>Jawaban singkat</h3>
+<p><span class="math-inline" role="math">\(\mathrm{SE}=0{,}5/\sqrt{10}\approx0{,}1581\)</span>,
+<span class="math-inline" role="math">\(t\approx1{,}897\)</span> dengan 4 derajat bebas, sehingga hipotesis nol tidak ditolak
+pada 5%.
+Interval 95% adalah kira-kira <span class="math-inline" role="math">\((0{,}361,1{,}239)\)</span>.</p>
+<p><a id="O006-C140-CMP-MS12-P04-SOL"></a></p>
+<h3>Solusi lengkap</h3>
+<p>Di bawah <span class="math-inline" role="math">\(H_0\)</span>, statistik</p>
+<div class="math-display" role="math">\[T=\frac{\widehat\beta_1-0{,}5}
+{s\sqrt{[(X^\mathsf TX)^{-1}]_{22}}}
+=\frac{0{,}3}{0{,}5/\sqrt{10}}
+=0{,}6\sqrt{10}\approx1{,}897\]</div>
+<p>berdistribusi <span class="math-inline" role="math">\(t_4\)</span> secara eksak. Karena <span class="math-inline" role="math">\(1{,}897&lt;2{,}776\)</span>, kita tidak
+menolak <span class="math-inline" role="math">\(H_0\)</span> pada taraf 5%. Margin interval ialah
+<span class="math-inline" role="math">\(2{,}776(0{,}5/\sqrt{10})\approx0{,}4389\)</span>, jadi intervalnya
+<span class="math-inline" role="math">\(0{,}8\pm0{,}4389=(0{,}3611,1{,}2389)\)</span>. Keeksakan berasal dari galat Gaussian,
+desain tetap, rank penuh, dan independensi proyeksi koefisien dari RSS; momen
+hingga saja tidak cukup. Interval menjelaskan parameter proyeksi mean dalam
+model yang ditetapkan. Ia bukan bukti kausal tanpa desain atau asumsi kausal
+tambahan.</p>
+<p><a id="O006-C140-CMP-MS12-P05"></a></p>
+<h2>Masalah 5 — F model bersarang dan ANOVA sebagai geometri</h2>
+<!--PROBLEM_META {"id":"O006-C140-CMP-MS12-P05","prerequisites":["O006-C140-CMP-D010-THM05","O006-C140-CMP-D010-THM06","O006-C140-CMP-D010-THM07"],"objective":"menghubungkan pengurangan RSS, uji F, tabel ANOVA, dan koefisien determinasi","difficulty":"lanjut","misconceptions":["ANOVA membuktikan kausalitas","SSR selalu bermakna tanpa intersep","F besar menunjukkan setiap koefisien nonnol"]}-->
+<p>Sebuah model Gaussian dengan intersep memiliki <span class="math-inline" role="math">\(n=10\)</span>, rank <span class="math-inline" role="math">\(p=3\)</span>,
+<span class="math-inline" role="math">\(\mathrm{SST}=90\)</span>, dan <span class="math-inline" role="math">\(\mathrm{RSS}=18\)</span>. Model nol hanya memuat intersep.</p>
+<ol>
+<li>Susun derajat bebas dan mean square untuk regresi serta residual.</li>
+<li>Hitung statistik F untuk menguji bahwa kedua kemiringan serentak nol.</li>
+<li>Hitung <span class="math-inline" role="math">\(R^2\)</span>.</li>
+<li>Buktikan bahwa jumlah kuadrat pada pembilang F berasal dari pengurangan RSS
+antara dua proyeksi bersarang, lalu jelaskan apa yang tidak dapat
+disimpulkan dari F besar.</li>
+</ol>
+<p><a id="O006-C140-CMP-MS12-P05-H01"></a></p>
+<h3>Petunjuk 1</h3>
+<p>Dengan intersep, <span class="math-inline" role="math">\(\mathrm{SSR}=\mathrm{SST}-\mathrm{RSS}\)</span>, derajat bebas
+regresi <span class="math-inline" role="math">\(p-1\)</span>, dan derajat bebas residual <span class="math-inline" role="math">\(n-p\)</span>.</p>
+<p><a id="O006-C140-CMP-MS12-P05-H02"></a></p>
+<h3>Petunjuk 2</h3>
+<p>Jika <span class="math-inline" role="math">\(P_0\)</span> dan <span class="math-inline" role="math">\(P_1\)</span> memproyeksikan ke ruang model nol dan penuh,
+<span class="math-inline" role="math">\(P_1-P_0\)</span> adalah proyektor ber-rank <span class="math-inline" role="math">\(p-1\)</span> karena ruangnya bersarang.</p>
+<p><a id="O006-C140-CMP-MS12-P05-ANS"></a></p>
+<h3>Jawaban singkat</h3>
+<p><span class="math-inline" role="math">\(\mathrm{SSR}=72\)</span> dengan 2 df dan <span class="math-inline" role="math">\(\mathrm{MSR}=36\)</span>; residual memiliki 7 df
+dan <span class="math-inline" role="math">\(\mathrm{MSE}=18/7\)</span>. Maka <span class="math-inline" role="math">\(F=14\)</span> dengan df <span class="math-inline" role="math">\((2,7)\)</span> dan <span class="math-inline" role="math">\(R^2=0{,}8\)</span>.
+F menguji subruang dua pembatasan serentak, bukan setiap koefisien secara
+terpisah dan bukan kausalitas.</p>
+<p><a id="O006-C140-CMP-MS12-P05-SOL"></a></p>
+<h3>Solusi lengkap</h3>
+<p>Karena model memuat intersep,
+<span class="math-inline" role="math">\(\mathrm{SSR}=90-18=72\)</span>. Derajat bebas regresi adalah <span class="math-inline" role="math">\(3-1=2\)</span> dan residual
+<span class="math-inline" role="math">\(10-3=7\)</span>, sehingga</p>
+<div class="math-display" role="math">\[\mathrm{MSR}=\frac{72}{2}=36,\qquad
+\mathrm{MSE}=\frac{18}{7},\qquad
+F=\frac{36}{18/7}=14.\]</div>
+<p>Selain itu <span class="math-inline" role="math">\(R^2=72/90=0{,}8\)</span>. Secara geometrik, bila
+<span class="math-inline" role="math">\(\mathcal C(X_0)\subset\mathcal C(X_1)\)</span>, maka</p>
+<div class="math-display" role="math">\[\mathrm{RSS}_0-\mathrm{RSS}_1
+=Y^\mathsf T(P_1-P_0)Y.\]</div>
+<p>Matriks <span class="math-inline" role="math">\(P_1-P_0\)</span> adalah proyektor ortogonal ke bagian ruang penuh yang baru,
+ber-rank 2. Di bawah nol Gaussian, kuadrat itu dibagi <span class="math-inline" role="math">\(\sigma^2\)</span> berdistribusi
+<span class="math-inline" role="math">\(\chi^2_2\)</span> dan independen dari RSS penuh. Karena jumlah pembatasan <span class="math-inline" role="math">\(q=2\)</span>,
+pembilang statistik F adalah
+<span class="math-inline" role="math">\((\mathrm{RSS}_0-\mathrm{RSS}_1)/q=72/2\)</span>; inilah sumber hukum <span class="math-inline" role="math">\(F_{2,7}\)</span>.
+Statistik besar menentang hipotesis gabungan bahwa kedua kemiringan nol. Ia
+tidak menyatakan keduanya masing-masing nonnol, tidak memvalidasi asumsi model,
+dan tidak mengubah asosiasi menjadi sebab-akibat.</p>
+<p><a id="O006-C140-CMP-MS12-P06"></a></p>
+<h2>Masalah 6 — interval mean bukan interval prediksi</h2>
+<!--PROBLEM_META {"id":"O006-C140-CMP-MS12-P06","prerequisites":["O006-C140-CMP-D010-THM08","O006-C140-CMP-D010-THM09"],"objective":"membedakan ketidakpastian mean kondisional dari variasi observasi baru","difficulty":"menengah","misconceptions":["interval mean dan prediksi memiliki lebar sama","observasi baru tidak menambahkan galat baru","interval titik demi titik berlaku serentak untuk semua x"]}-->
+<p>Pada desain baru <span class="math-inline" role="math">\(x_0\)</span>, suatu model Gaussian memberi
+<span class="math-inline" role="math">\(\widehat m(x_0)=10\)</span>, <span class="math-inline" role="math">\(s^2=4\)</span>, leverage prediksi mean
+<span class="math-inline" role="math">\(h_0=x_0^\mathsf T(X^\mathsf TX)^{-1}x_0=0{,}10\)</span>, dan 20 derajat bebas.
+Gunakan <span class="math-inline" role="math">\(t_{0{,}975;20}=2{,}086\)</span>.</p>
+<ol>
+<li>Hitung interval kepercayaan 95% untuk mean <span class="math-inline" role="math">\(m(x_0)\)</span>.</li>
+<li>Hitung interval prediksi 95% untuk satu respons baru di <span class="math-inline" role="math">\(x_0\)</span>.</li>
+<li>Jelaskan asal suku tambahan 1 dan ruang lingkup cakupannya.</li>
+</ol>
+<p><a id="O006-C140-CMP-MS12-P06-H01"></a></p>
+<h3>Petunjuk 1</h3>
+<p>Varians taksiran mean adalah <span class="math-inline" role="math">\(s^2h_0\)</span>; varians galat prediksi respons baru
+adalah <span class="math-inline" role="math">\(s^2(1+h_0)\)</span>.</p>
+<p><a id="O006-C140-CMP-MS12-P06-H02"></a></p>
+<h3>Petunjuk 2</h3>
+<p>Kedua interval berpusat di 10. Hitung margin sebagai kuantil t dikali akar
+varians yang sesuai.</p>
+<p><a id="O006-C140-CMP-MS12-P06-ANS"></a></p>
+<h3>Jawaban singkat</h3>
+<p>Interval mean adalah kira-kira <span class="math-inline" role="math">\((8{,}681,11{,}319)\)</span>; interval prediksi adalah
+kira-kira <span class="math-inline" role="math">\((5{,}624,14{,}376)\)</span>. Suku 1 mewakili galat baru yang independen.</p>
+<p><a id="O006-C140-CMP-MS12-P06-SOL"></a></p>
+<h3>Solusi lengkap</h3>
+<p>Standard error mean ialah
+<span class="math-inline" role="math">\(s\sqrt{h_0}=2\sqrt{0{,}1}\approx0{,}63246\)</span>, sehingga marginnya
+<span class="math-inline" role="math">\(2{,}086(0{,}63246)\approx1{,}319\)</span>. Jadi</p>
+<div class="math-display" role="math">\[I_{\text{mean}}=(8{,}681,11{,}319).\]</div>
+<p>Respons baru <span class="math-inline" role="math">\(Y_0=x_0^\mathsf T\beta+\varepsilon_0\)</span> mengandung galat baru
+<span class="math-inline" role="math">\(\varepsilon_0\)</span> yang independen dari data pelatihan. Karena itu standard error
+prediksi adalah <span class="math-inline" role="math">\(s\sqrt{1+h_0}=2\sqrt{1{,}1}\approx2{,}0976\)</span> dan marginnya
+sekitar <span class="math-inline" role="math">\(4{,}376\)</span>. Maka</p>
+<div class="math-display" role="math">\[I_{\text{pred}}=(5{,}624,14{,}376).\]</div>
+<p>Kedua cakupan bersifat titik demi titik pada <span class="math-inline" role="math">\(x_0\)</span> yang ditetapkan dan eksak
+di bawah model Gaussian yang benar. Keduanya bukan pita simultan untuk semua
+<span class="math-inline" role="math">\(x\)</span>, dan ekstrapolasi jauh dari desain dapat membuat <span class="math-inline" role="math">\(h_0\)</span> besar serta klaim
+model rapuh.</p>
+<p><a id="O006-C140-CMP-MS12-P07"></a></p>
+<h2>Masalah 7 — leverage, Cook distance, dan bias variabel terlewat</h2>
+<!--PROBLEM_META {"id":"O006-C140-CMP-MS12-P07","prerequisites":["O006-C140-CMP-D011-DEF01","O006-C140-CMP-D011-THM03","O006-C140-CMP-D011-DEF02","O006-C140-CMP-D011-THM04"],"objective":"menghitung ukuran diagnostik dan memisahkan pengaruh numerik dari bias struktural","difficulty":"lanjut","misconceptions":["leverage tinggi berarti residual besar","Cook distance memerintahkan penghapusan","standard error robust memperbaiki bias variabel terlewat"]}-->
+<p>Dalam suatu regresi dengan <span class="math-inline" role="math">\(p=3\)</span>, sebuah observasi mempunyai
+<span class="math-inline" role="math">\(h_{ii}=0{,}8\)</span>, residual <span class="math-inline" role="math">\(e_i=1\)</span>, dan <span class="math-inline" role="math">\(s=2\)</span>.</p>
+<ol>
+<li>Hitung residual terstandar internal
+<span class="math-inline" role="math">\(r_i=e_i/[s\sqrt{1-h_{ii}}]\)</span>, residual penghapusan-satu
+<span class="math-inline" role="math">\(e_i/(1-h_{ii})\)</span>, dan
+<span class="math-inline" role="math">\(D_i=e_i^2h_{ii}/[ps^2(1-h_{ii})^2]\)</span>.</li>
+<li>Jelaskan mengapa hasil itu tidak otomatis membenarkan penghapusan.</li>
+<li>Kini model benar adalah <span class="math-inline" role="math">\(Y=\alpha+\beta x+\gamma z+\varepsilon\)</span>, tetapi
+<span class="math-inline" role="math">\(z\)</span> dihilangkan. Prediktor telah dipusatkan dan
+<span class="math-inline" role="math">\(x^\mathsf Tz/x^\mathsf Tx=2\)</span>, sedangkan <span class="math-inline" role="math">\(\gamma=3\)</span>. Hitung bias bersyarat
+kemiringan regresi pendek. Apakah kovarians sandwich dapat menghapusnya?</li>
+</ol>
+<p><a id="O006-C140-CMP-MS12-P07-H01"></a></p>
+<h3>Petunjuk 1</h3>
+<p><span class="math-inline" role="math">\(1-h_{ii}=0{,}2\)</span>. Cook distance menggabungkan residual dengan faktor leverage
+<span class="math-inline" role="math">\(h_{ii}/(1-h_{ii})^2\)</span>.</p>
+<p><a id="O006-C140-CMP-MS12-P07-H02"></a></p>
+<h3>Petunjuk 2</h3>
+<p>Untuk satu prediktor terpusat, bias variabel terlewat adalah
+<span class="math-inline" role="math">\(\gamma(x^\mathsf Tz)/(x^\mathsf Tx)\)</span>. Sandwich mengubah estimasi kovarians,
+bukan pusat estimasi OLS.</p>
+<p><a id="O006-C140-CMP-MS12-P07-ANS"></a></p>
+<h3>Jawaban singkat</h3>
+<p><span class="math-inline" role="math">\(r_i\approx1{,}118\)</span>, residual penghapusan-satu 5, dan
+<span class="math-inline" role="math">\(D_i=5/3\approx1{,}667\)</span>. Nilai itu meminta audit data dan sensitivitas, bukan
+penghapusan otomatis. Bias kemiringan adalah <span class="math-inline" role="math">\(3(2)=6\)</span>; sandwich tidak
+memperbaiki bias mean tersebut.</p>
+<p><a id="O006-C140-CMP-MS12-P07-SOL"></a></p>
+<h3>Solusi lengkap</h3>
+<p>Perhitungan langsung memberi</p>
+<div class="math-display" role="math">\[r_i=\frac1{2\sqrt{0{,}2}}\approx1{,}118,\qquad
+e_{i,(i)}=\frac1{0{,}2}=5,\]</div>
+<p>dan</p>
+<div class="math-display" role="math">\[D_i=\frac{1^2(0{,}8)}{3(2^2)(0{,}2)^2}
+=\frac{0{,}8}{0{,}48}=\frac53.\]</div>
+<p>Residual biasa tidak ekstrem, tetapi leverage tinggi memperbesar perubahan
+kecocokan saat titik dihapus. Ini adalah diagnosis sensitivitas. Titik tersebut
+bisa merupakan data sah yang membawa informasi tentang wilayah desain yang
+jarang, kesalahan pencatatan, atau tanda bentuk mean salah; angka Cook sendiri
+tidak membedakannya dan tidak membuktikan kausalitas.</p>
+<p>Jika <span class="math-inline" role="math">\(z\)</span> dihilangkan, ekspektasi bersyarat kemiringan pendek adalah</p>
+<div class="math-display" role="math">\[E(\widehat\beta_{\text{pendek}}\mid X,z)
+=\beta+\gamma\frac{x^\mathsf Tz}{x^\mathsf Tx}
+=\beta+3(2)=\beta+6.\]</div>
+<p>Jadi biasnya 6. Kovarians sandwich dapat memperkirakan varians OLS di bawah
+heteroskedastisitas dengan syarat yang sesuai, tetapi tetap berpusat pada
+parameter proyeksi model pendek. Ia tidak memasukkan kembali <span class="math-inline" role="math">\(z\)</span> dan tidak
+menghapus bias mean yang terlewat.</p>
+<p><a id="O006-C140-CMP-MS12-P08"></a></p>
+<h2>Masalah 8 — audit SIM005: cakupan, HC3, dan pengaruh</h2>
+<!--PROBLEM_META {"id":"O006-C140-CMP-MS12-P08","prerequisites":["O006-C140-CMP-SIM005","O006-C140-CMP-D010-THM04","O006-C140-CMP-D011-THM05"],"objective":"menafsirkan eksperimen simulasi deterministik dengan ketidakpastian Monte Carlo dan menghubungkannya ke asumsi teori","difficulty":"lanjut","misconceptions":["cakupan simulasi tepat 0,95 harus muncul sebagai 0,950000","HC3 membuktikan model mean benar","Cook distance besar membuktikan observasi salah"]}-->
+<p>SIM005 memakai 12.000 replikasi dan melaporkan cakupan interval 95% berikut:</p>
+<p>| Skenario | Metode | Cakupan |
+|---|---|---:|
+| Gaussian homoskedastik | t klasik | 0,94791667 |
+| heteroskedastik | t klasik | 0,83958333 |
+| heteroskedastik | HC3 | 0,94316667 |</p>
+<p>Eksperimen pengaruhnya memberi <span class="math-inline" role="math">\(h=0{,}89317170\)</span>,
+<span class="math-inline" role="math">\(D=105{,}90366578\)</span>, kemiringan dengan titik <span class="math-inline" role="math">\(1{,}72770959\)</span>, dan tanpa titik
+<span class="math-inline" role="math">\(1{,}15448718\)</span>.</p>
+<ol>
+<li>Hitung standard error Monte Carlo perkiraan cakupan bila probabilitas
+sebenarnya 0,95. Nilai mana yang jelas tidak cocok dengan variasi Monte
+Carlo biasa di sekitar 0,95?</li>
+<li>Hitung perubahan kemiringan karena titik berpengaruh.</li>
+<li>Kaitkan tiga hasil cakupan dengan asumsi teori C2.</li>
+<li>Nyatakan dua kesimpulan yang <em>tidak</em> boleh ditarik dari eksperimen ini.</li>
+</ol>
+<p><a id="O006-C140-CMP-MS12-P08-H01"></a></p>
+<h3>Petunjuk 1</h3>
+<p>Untuk proporsi dari <span class="math-inline" role="math">\(R\)</span> replikasi,
+<span class="math-inline" role="math">\(\operatorname{SE}_{MC}=\sqrt{p(1-p)/R}\)</span>. Bandingkan selisih terhadap 0,95
+dalam satuan standard error.</p>
+<p><a id="O006-C140-CMP-MS12-P08-H02"></a></p>
+<h3>Petunjuk 2</h3>
+<p>HC3 mengubah estimasi kovarians ketika varians tidak konstan. Ia tidak
+memperbaiki bentuk mean, dependensi, seleksi model, atau salah pencatatan.</p>
+<p><a id="O006-C140-CMP-MS12-P08-ANS"></a></p>
+<h3>Jawaban singkat</h3>
+<p><span class="math-inline" role="math">\(\operatorname{SE}_{MC}\approx0{,}00199\)</span>. Cakupan Gaussian berada sekitar
+1,05 standard error di bawah 0,95 dan sesuai dengan variasi Monte Carlo biasa.
+Cakupan HC3 masih 3,43 standard error di bawah target, sedangkan cakupan klasik
+heteroskedastik berada sekitar 55,50 standard error di bawah target. Perubahan
+kemiringan adalah sekitar 0,57322. Eksperimen mendukung kegagalan standard
+error klasik dan perbaikan besar—tetapi bukan pemulihan eksak—oleh HC3 pada
+desain ini; ia tidak membuktikan validitas universal HC3 atau membenarkan
+penghapusan otomatis titik berpengaruh.</p>
+<p><a id="O006-C140-CMP-MS12-P08-SOL"></a></p>
+<h3>Solusi lengkap</h3>
+<p>Dengan <span class="math-inline" role="math">\(R=12000\)</span>,</p>
+<div class="math-display" role="math">\[\operatorname{SE}_{MC}
+=\sqrt{\frac{0{,}95(0{,}05)}{12000}}
+\approx0{,}00199.\]</div>
+<p>Selisih cakupan Gaussian klasik dari 0,95 ialah <span class="math-inline" role="math">\(-0{,}00208333\)</span>, sekitar
+<span class="math-inline" role="math">\(-1{,}05\)</span> standard error dan konsisten dengan fluktuasi Monte Carlo biasa.
+Selisih HC3 ialah <span class="math-inline" role="math">\(-0{,}00683333\)</span>, sekitar <span class="math-inline" role="math">\(-3{,}43\)</span> standard error; jadi
+replay ini mendeteksi sisa undercoverage, meskipun besarnya jauh lebih kecil
+daripada metode klasik. Selisih klasik heteroskedastik adalah
+<span class="math-inline" role="math">\(-0{,}11041667\)</span>, sekitar <span class="math-inline" role="math">\(-55{,}50\)</span> standard error; variasi simulasi biasa
+jelas tidak menjelaskannya.</p>
+<p>Perubahan kemiringan adalah</p>
+<div class="math-display" role="math">\[1{,}72770959-1{,}15448718=0{,}57322241.\]</div>
+<p>Pada skenario Gaussian homoskedastik, asumsi yang menopang hukum t klasik
+dipenuhi dan cakupan dekat nominal. Ketika varians berubah terhadap desain,
+rumus kovarians klasik <span class="math-inline" role="math">\(s^2(X^\mathsf TX)^{-1}\)</span> salah dan cakupan runtuh. HC3
+menyesuaikan kontribusi residual menurut leverage dan pada eksperimen ini
+mengembalikan cakupan jauh lebih dekat ke nominal, tetapi tidak tepat 0,95.
+Satu simulasi tidak membuktikan performa HC3 untuk semua ukuran sampel dan
+desain. Demikian pula leverage dan
+Cook distance yang besar membuktikan sensitivitas numerik pada data ini, bukan
+bahwa observasi salah atau harus dihapus. Audit harus memeriksa sumber data,
+spesifikasi mean, dan stabilitas kesimpulan.</p>
+<p><a id="O006-C140-CMP-MS12-SEC02"></a></p>
+<h2>Checklist kelulusan</h2>
+<p>Set ini dikuasai bila pembelajar dapat:</p>
+<ol>
+<li>menyatakan target yang terestimasi sebelum menafsirkan koefisien;</li>
+<li>memisahkan asumsi OLS, Gauss–Markov, MLE Gaussian, dan inferensi eksak;</li>
+<li>menurunkan jumlah kuadrat dan mean square pembilang uji F dari proyeksi
+model bersarang;</li>
+<li>membedakan ketidakpastian mean dari galat observasi baru;</li>
+<li>memakai diagnostik sebagai audit asumsi dan sensitivitas, bukan aturan
+penghapusan; dan</li>
+<li>menafsirkan cakupan simulasi bersama ketidakpastian Monte Carlo.</li>
+</ol>
+
+<footer class="license">Materi pendamping orisinal berlisensi CC BY-SA 4.0. Komponen Penn State dan Random tetap berada di bawah lisensinya masing-masing dan tidak direlisensikan oleh halaman ini.</footer>
+</main>
+</div>
+</body>
+</html>
