@@ -1,0 +1,73 @@
+{
+  "schema": "o006.source-authority.v1",
+  "role_id": "O006",
+  "course_id": "C140",
+  "locale": "id-ID",
+  "work": {
+    "title": "Random: Probability, Mathematical Statistics, and Stochastic Processes",
+    "creator": "Kyle Siegrist",
+    "official_url": "https://www.randomservices.org/random/",
+    "edition_identity": "unversioned live semantic HTML snapshot retrieved 2026-08-21; per-file URL, headers, bytes, and SHA-256 are authoritative",
+    "upstream_repository": null,
+    "upstream_commit": null,
+    "upstream_tag": null,
+    "upstream_archive": null
+  },
+  "selection": {
+    "chapters": [5, 6, 7, 8],
+    "files": 29,
+    "instructional_pages": 25,
+    "chapter_indexes": 4,
+    "bytes": 1003900,
+    "structural_units": 760,
+    "exercise_designated_units": 260,
+    "exercise_designation_rule": "unit first-p native type is app/stat or an ancestor h1-h4 source heading contains whole-word exercise/exercises, case-insensitively",
+    "exercise_designation_basis_counts": {
+      "both": 123,
+      "exercise-section": 95,
+      "native-unit-type": 42,
+      "not-designated": 500
+    },
+    "exercise_designation_note": "The literal union is 165 native app/stat plus 218 section-designated minus 123 overlapping units. The prior 258 claim excluded two math units below the mixed heading 'Exercises and Special Cases' despite the stated whole-word rule.",
+    "details_disclosures": 451,
+    "source_order": "authority/SOURCE_FREEZE_RECEIPT.json#/core_paths"
+  },
+  "freeze": {
+    "files": 205,
+    "bytes": 4867084,
+    "source_manifest": "authority/SOURCE_URL_MANIFEST.csv",
+    "source_manifest_sha256": "d36e0f8bf9fa44a38a7504f9688a08af6787d88ede99298316a3e022b6f799f5",
+    "reference_manifest": "authority/REFERENCE_URL_MANIFEST.csv",
+    "reference_manifest_sha256": "ffb82f5cded17f48b40be83f582d908be69f6f2ff1f64a262cb8dd661cd95004",
+    "receipt": "authority/SOURCE_FREEZE_RECEIPT.json",
+    "receipt_sha256": "a2acff91b787c87bb7e14925ef854521c582a2ef5735777f967ac2e44b64f232",
+    "replay": "python scripts/freeze_random_core.py --check-only"
+  },
+  "license_witnesses": [
+    {
+      "surface": "official landing page",
+      "license": "CC BY 2.0",
+      "url": "https://creativecommons.org/licenses/by/2.0/"
+    },
+    {
+      "surface": "official Credits.html",
+      "license": "CC BY 1.0",
+      "url": "https://creativecommons.org/licenses/by/1.0/"
+    }
+  ],
+  "rights_scope_note": "A frozen byte is not automatically a redistributable component. Public-reader admission is decided per file in RIGHTS_AND_COMPONENTS.md and the build receipt; uncleared biography media and datasets remain excluded.",
+  "component_closure": {
+    "dynamic_card_svgs": 53,
+    "dynamic_card_bytes": 578752,
+    "dynamic_card_manifest_sha256": "842e0a5232d4432ca6a84da18f494356b27e5c36279e5788ea176a416ea3f194",
+    "license_authority_files": 4,
+    "license_authority_bytes": 55064,
+    "license_manifest_sha256": "8a06fecb45a9696c8308e268cbbdacb5d3685ab48a2e10f9d2b4d534395cb777",
+    "license_receipt_sha256": "55460a73c59f38992c38cfd0e54407cbcb57713c070104b248d040edcab220f6",
+    "replay": "python scripts/freeze_component_assets.py --check-only"
+  },
+  "admission": "Random-first",
+  "admission_decision": "00_control/DECISION_LOG.md#o006-d001--random-first-source-spine",
+  "overlap_boundary": "00_control/CROSS_LANE_BOUNDARY.md",
+  "immutable_authority": true
+}

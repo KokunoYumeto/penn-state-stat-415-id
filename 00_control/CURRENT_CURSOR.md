@@ -101,14 +101,24 @@ Updated: 2026-08-28
 
 ## Next executable action
 
-Freeze and localize the distinct exact Random completeness donor as a separate
-licensed component. First inspect the exact completed sibling-edition controls
-and determine whether its `Sufficient.html` translation can be reused by
-stable identity without modifying that repository. Reverify the official page
-bytes and the landing/Credits licence discrepancy, then create the donor only
-in a separate component path. Continue afterward to the original C140
-companion. Do not launch any browser process and do not send an upstream
-message.
+Commit and push the locally complete exact Random completeness donor. Wait for
+the deterministic Pages workflow, anonymously verify the public donor
+inventory and unchanged Penn reader, persist the sanitized public receipt,
+then begin original C140 rigor/simulation/mastery-companion production. The
+donor authority is 57,507 bytes / SHA-256
+`4d7402f2a960ea2b4232e57e4ee5992ac29801b9269f300f17f8e83074d5a0e4`;
+the canonical id-ID target is 60,895 bytes / SHA-256
+`255ac88f235727301ee341eef79b9578910be88b7e2e038d4dfecc0ed686513c`.
+The 18-file reader is 1,798,250 bytes with 325 entities / 474 relations;
+build-receipt SHA-256 is
+`455afd0c425260517857bc61e108d08b2abf0548dcb880095b3a2d95bdc3ac2d`
+and QA-receipt SHA-256 is
+`5868ed14ecc03094f6fea848d927738f0fe459443c5a5c49afe2a2abbe93c83f`.
+The combined 124-file Pages tree is 19,412,803 bytes, manifest SHA-256
+`c7e31332d0401ad149185af3fc2ab2b39baf54a2b37f84dbc0f2720edd8241fa`,
+and receipt SHA-256
+`17b60a65cfb181d170f3302fb5f527608e026fcdbcab39839bcc3aad119f329a`.
+Do not launch any browser process and do not send an upstream message.
 
 ## Recovery
 
@@ -130,5 +140,7 @@ receipt, `TRANSLATION_LEDGER.csv`, `ADVERSE_LEDGER.jsonl`, the final glossary,
 GitHub checkpoint/release receipts, the three LF-repair Zenodo receipts,
 `CHECKPOINT_2026-08-28_CONSOLIDATED_READERS_PUBLICATION_COMPLETE.md`, the two
 consolidated GitHub receipts, the three consolidated Zenodo receipts, and
-`ZENODO_LINEAGE.json`. Conversation summaries are not state. Do not broaden
-the filesystem or Git scope.
+`ZENODO_LINEAGE.json`; then read
+`CHECKPOINT_2026-08-28_RANDOM_COMPLETENESS_DONOR_READY.md`, the donor import,
+build and QA receipts, and `build/PAGES_COLLECTION_RECEIPT.json`. Conversation
+summaries are not state. Do not broaden the filesystem or Git scope.

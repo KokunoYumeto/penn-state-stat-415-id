@@ -36,8 +36,11 @@ reader:
 
 ## Other collection components
 
-The exact Random completeness donor remains subject to its own recorded CC BY
-licence discrepancy and is not relabelled as Penn State content. The original
-rigor/simulation/regression/mastery companion is CC BY-SA 4.0 and is never
-presented as Penn State prose. The eventual C140 collection preserves these
-component identities; it has no single uniform licence.
+The exact Random completeness donor is now present at
+`components/random-completeness/`. It preserves the official landing-page CC
+BY 2.0 statement and the conflicting Credits-page CC BY 1.0 link, attribution
+to Kyle Siegrist and *Random*, modification and non-endorsement notices, and a
+separate Apache-2.0 MathJax licence. It is not relabelled as Penn State
+content. The original rigor/simulation/regression/mastery companion is CC
+BY-SA 4.0 and is never presented as Penn State prose. The C140 collection
+preserves these component identities; it has no single uniform licence.

@@ -43,6 +43,27 @@ bukti QA disimpan bersama edisi.
   byte serta SHA-256; audit konsep Zenodo menemukan nol draf yang belum
   dikirim.
 
+## Komponen donor kelengkapan C140
+
+Donor *Random* satu halaman untuk kecukupan, kelengkapan, ancillary,
+Rao–Blackwell, Lehmann–Scheffé, dan Basu sekarang lengkap dalam jalur komponen
+terpisah. Target id-ID kanonis tetap byte-identik dengan halaman pada edisi
+*Random* lengkap; salinan integrasi hanya menambahkan identitas komponen dan
+mengarahkan tautan lintas-halaman ke edisi lengkap.
+
+- pembaca donor: 18 berkas / 1.798.250 byte;
+- struktur: 804 rentang TeX, 39 unit, dan 26 rincian/derivasi;
+- backend: 325 entitas / 474 relasi;
+- QA statis dan replay deterministik: lulus;
+- pembaca publik:
+  https://kokunoyumeto.github.io/penn-state-stat-415-id/components/random-completeness/;
+- sumber, backend, hak, dan receipt:
+  `components/random-completeness/`.
+
+Hak donor tetap terpisah dari CC BY-NC 4.0 Penn State. Saksi laman utama
+*Random* menyatakan CC BY 2.0, sedangkan `Credits.html` menautkan CC BY 1.0;
+keduanya dipertahankan dan tidak disamakan secara diam-diam.
+
 ## Reproduksi
 
 Gunakan Python 3.13 dan dependensi yang dipatok di `requirements.txt`, lalu

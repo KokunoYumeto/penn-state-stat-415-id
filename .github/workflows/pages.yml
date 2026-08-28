@@ -68,13 +68,23 @@ jobs:
           python -B scripts/build_through_lesson12.py --check-only
           python -B scripts/qa_through_lesson12.py --check-only
 
+      - name: Verify isolated Random completeness donor
+        run: |
+          python -B scripts/build_random_completeness_donor.py --check-only
+          python -B scripts/qa_random_completeness_donor.py --check-only
+
+      - name: Assemble byte-preserving Pages collection
+        run: |
+          python -B scripts/assemble_pages_collection.py --write
+          python -B scripts/assemble_pages_collection.py --check-only
+
       - name: Configure Pages
         uses: actions/configure-pages@45bfe0192ca1faeb007ade9deae92b16b8254a0d # v6.0.0
 
       - name: Upload exact reader artifact
         uses: actions/upload-pages-artifact@fc324d3547104276b827a68afc52ff2a11cc49c9 # v5.0.0
         with:
-          path: build/html-id
+          path: build/pages
 
       - name: Deploy Pages
         id: deployment

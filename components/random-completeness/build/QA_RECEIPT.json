@@ -1,0 +1,110 @@
+{
+  "browser_processes_used": false,
+  "component": "O006/C140 Random completeness donor",
+  "deterministic_build_replay": {
+    "build_receipt": {
+      "bytes": 2147,
+      "path": "build/BUILD_RECEIPT.json",
+      "sha256": "455afd0c425260517857bc61e108d08b2abf0548dcb880095b3a2d95bdc3ac2d"
+    },
+    "canonical_import_preserved": true,
+    "outputs_replayed": 20,
+    "relative_html_href_rewrites": 31
+  },
+  "gates": [
+    "exact-authority-and-canonical-target-identities",
+    "436-source-and-444-canonical-target-elements",
+    "804-tex-spans",
+    "39-units-and-26-disclosures",
+    "stable-ids-and-fragments",
+    "deterministic-build-replay",
+    "manifest-identities-and-exact-inventory",
+    "local-html-css-and-dynamic-mathjax-closure",
+    "https-external-links",
+    "accessible-index-rights-and-controls",
+    "cc-by-2.0-and-1.0-discrepancy-preserved",
+    "mathjax-apache-2.0-license",
+    "325-entity-and-474-relation-backend",
+    "translation-target-bindings",
+    "relative-path-and-sensitive-value-scan-clear",
+    "browser-free-static-qa"
+  ],
+  "links_and_dependency_closure": {
+    "all_external_references_https": true,
+    "css_dependency_edges": 11,
+    "dynamic_mathjax_boldsymbol_closed": true,
+    "html_pages": 3,
+    "https_external_references": 81,
+    "local_html_dependency_edges": 58,
+    "rewritten_published_random_html_links": 31
+  },
+  "locale": "id-ID",
+  "modular_backend": {
+    "entities": 325,
+    "entity_ids_unique": true,
+    "entity_types": {
+      "asset": 8,
+      "disclosure": 26,
+      "document": 1,
+      "internal_link": 116,
+      "math_text": 117,
+      "section": 18,
+      "unit": 39
+    },
+    "relations": 474,
+    "source_orders_contiguous": true,
+    "translation_ledger_rows": 1,
+    "translation_target_bindings_complete": true
+  },
+  "privacy": {
+    "machine_local_paths_found": 0,
+    "receipt_paths_relative": true,
+    "sensitive_values_found": 0,
+    "text_files_scanned": 21
+  },
+  "reader": {
+    "bytes": 1798250,
+    "files": 18,
+    "manifest": {
+      "bytes": 2171,
+      "path": "build/MANIFEST.csv",
+      "sha256": "f672755c5d7a36a13ff117d091ca95b777533e11ea0050cb60a0b7ecf7167159"
+    }
+  },
+  "rights": {
+    "MathJax_3.1.2": "Apache-2.0",
+    "Random_Credits_witness": "CC BY 1.0",
+    "Random_landing_witness": "CC BY 2.0",
+    "aggregate_uniform_relicense": false,
+    "discrepancy_preserved": true
+  },
+  "schema": "o006.c140.random-completeness.qa.v1",
+  "semantics_accessibility_and_provenance": {
+    "accessible_disclosures": 26,
+    "accessible_expand_contract_buttons": 4,
+    "component_index_accessible": true,
+    "derived_donor_elements": 448,
+    "derived_donor_unique_dom_ids": 52,
+    "exact_model_provenance_present": true,
+    "images_with_alt": 4,
+    "rights_page_accessible": true,
+    "stable_component_notice_id": "o006.c140.random-completeness.component-notice"
+  },
+  "status": "pass",
+  "structure_and_math": {
+    "canonical_target": {
+      "disclosures": 26,
+      "elements_before_additive_wrapper": 444,
+      "local_fragment_references": 44,
+      "tex_spans": 804,
+      "unique_dom_ids": 51,
+      "units": 39
+    },
+    "source": {
+      "disclosures": 26,
+      "elements": 436,
+      "tex_spans": 804,
+      "units": 39
+    }
+  }
+}

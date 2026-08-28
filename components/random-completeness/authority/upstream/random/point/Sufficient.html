@@ -1,0 +1,583 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<title>Sufficient, Complete and Ancillary Statistics</title>
+	<meta name="author" content="Kyle Siegrist">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="keywords" content="probability, statistics, point estimation, sufficient statistic, ancillary statistic, complete statistic, Lehmann-Scheffe theorem, Basu's theorem, Bernoulli distribution, Poisson distribution, normal distribution, gamma distribution, beta distribution, Pareto distribution, uniform distribution, hypergeometric distribution, exponential family">
+	<link rel="icon" href="../icons/Icon.svg" type="image/svg">
+	<link rel="stylesheet" href="../Screen.css" type="text/css" media="screen">
+	<link rel="next" href="../interval/index.html">
+	<script src="../Basic.js"></script>
+	<script src="../../MathJax/tex-svg.js" id="MathJax-script" async></script>
+</head>
+
+<body>
+
+<div class="latex">
+	\(\newcommand{\R}{\mathbb{R}}\)
+	\(\newcommand{\N}{\mathbb{N}}\)
+	\(\newcommand{\Z}{\mathbb{Z}}\)
+	\(\newcommand{\E}{\mathbb{E}}\)
+	\(\newcommand{\P}{\mathbb{P}}\)
+	\(\newcommand{\var}{\text{var}}\)
+	\(\newcommand{\sd}{\text{sd}}\)
+	\(\newcommand{\cov}{\text{cov}}\)
+	\(\newcommand{\cor}{\text{cor}}\)
+	\(\newcommand{\bias}{\text{bias}}\)
+	\(\newcommand{\MSE}{\text{MSE}}\)
+	\(\newcommand{\bs}{\boldsymbol}\)
+</div>
+
+<header>
+	<ol class="map">
+		<li class="parent"><a href="../index.html">Random</a></li>
+		<li class="parent"><a href="index.html">6. Point Estimation</a></li>
+		<li class="child"><a href="Estimators.html" title="Estimators">1</a></li>
+		<li class="child"><a href="Moments.html" title="The Method of Moments">2</a></li>
+		<li class="child"><a href="Likelihood.html" title="Maximum Likelihood">3</a></li>
+		<li class="child"><a href="Bayes.html" title="Bayes' Estimators">4</a></li>
+		<li class="child"><a href="Unbiased.html" title="Best Unbiased Estimators">5</a></li>
+		<li class="current">6</li>
+		<li class="details"><button type="button" title="Expand Details" onclick="expandDetails(true);"><img src="../icons/Plus.svg" alt="Expand"></button></li>
+		<li class="details"><button type="button" title="Contract Details" onclick="expandDetails(false);"><img src="../icons/Minus.svg" alt="Contract"></button></li>
+	</ol>
+	<h2>6. Sufficient, Complete, and Ancillary Statistics</h2>
+</header>
+
+<h3>Basic Theory</h3>
+
+<h4>The Basic Statistical Model</h4>
+
+<p>Consider again the <a href="../sample/Introduction.html">basic statistical model</a>, in which we have a <a href="../prob/Experiments.html">random experiment</a> with an observable <a href="../prob/Probability.html">random variable</a> \(\bs{X}\) with values in a set \(S\). Once again, the experiment is typically to sample \(n\) objects from a population and record one or more measurements for each item. In this case, the outcome variable has the form
+\[ \bs{X} = (X_1, X_2, \ldots, X_n) \]
+where \(X_i\) is the vector of measurements for the \(i\)th item. In general, we suppose that the distribution of \(\bs X\) depends on a parameter \(\theta\) with values in a parameter set \(T\). The parameter \(\theta\) may also be vector-valued. We will sometimes use subscripts in probability density functions, expected values, etc. to denote the dependence on \(\theta\).</p>
+
+<p>As usual, the most important special case is when \(\bs X\) is a sequence of independent, identically distributed random variables.  In this case \(\bs X\) is a <a href="../sample/Introduction.html">random sample</a> from the common distribution.</p>
+
+<h4>Sufficient Statistics</h4>
+
+<p>Let \(U = u(\bs X)\) be a statistic with values in a set \(R\). Intuitively, \(U\) is sufficient for \(\theta\) if \(U\) contains all of the information about \(\theta\) that is available in the entire data variable \(\bs X\). Here is the formal definition:</p>
+
+<div class="unit" id="suf1">
+	<p class="dfn">A statistic \(U\) is <dfn>sufficient</dfn> for \(\theta\) if the <a href="../dist/Conditional.html">conditional distribution</a> of \(\bs X\) given \(U\) does not depend on \(\theta \in T\).</p>
+</div>
+
+<p>Sufficiency is related to the concept of <dfn>data reduction</dfn>. Suppose that \(\bs X\) takes values in \(\R^n\). If we can find a sufficient statistic \(\bs U\) that takes values in \(\R^j\), then we can reduce the original data vector \(\bs X\) (whose dimension \(n\) is usually large) to the vector of statistics \(\bs U\) (whose dimension \(j\) is usually much smaller) with no loss of information about the parameter \(\theta\).</p>
+
+<p>The following result gives a condition for sufficiency that is equivalent to this definition.</p>
+
+<div class="unit">
+	<p class="math">Let \(U = u(\bs X)\) be a statistic taking values in \(R\), and let \(f_\theta\) and \(h_\theta\) denote the <a href="../dist/Discrete.html">probability density functions</a> of \(\bs X\) and \(U\) respectively. Then \(U\) is suffcient for \(\theta\) if and only if the function on \( S \) given below does not depend on \( \theta \in T \): 
+	\[ \bs x \mapsto \frac{f_\theta(\bs x)}{h_\theta[u(\bs x)]} \]</p>
+	<details>
+		<summary>Details:</summary>
+		<p>The joint distribution of \((\bs X, U)\) is concentrated on the set \(\{(\bs x, y): \bs x \in S, y = u(\bs x)\} \subseteq S \times R\). The conditional PDF of \(\bs X\) given \(U = u(\bs x)\) is \(f_\theta(\bs x) \big/ h_\theta[u(\bs x)]\) on this set, and is 0 otherwise.</p>
+	</details>
+</div>
+
+<p>Definition <a href="#suf1" class="ref"></a> precisely captures the intuitive notion of sufficiency given above, but can be difficult to apply. We must know in advance a candidate statistic \(U\), and then we must be able to compute the conditional distribution of \(\bs X\) given \(U\). The <dfn>Fisher-Neyman factorization theorem</dfn> given next often allows the identification of a sufficient statistic from the form of the probability density function of \(\bs X\). It is named for <a href="JavaScript:openAncillary('../biographies/Fisher.html')" class="ancillary">Ronald Fisher</a> and <a href="JavaScript:openAncillary('../biographies/Neyman.html')" class="ancillary">Jerzy Neyman</a>.</p>
+
+<div class="unit" id="fac">
+	<p class="math"><strong>Fisher-Neyman Factorization Theorem</strong>. Let \(f_\theta\) denote the probability density function of \(\bs X\) and suppose that \(U = u(\bs X)\) is a statistic taking values in \(R\). Then \(U\) is sufficient for \(\theta\) if and only if there exists \(G: R \times T \to [0, \infty)\) and \(r: S \to [0, \infty)\) such that
+	\[ f_\theta(\bs x) = G[u(\bs x), \theta] r(\bs x); \quad \bs x \in S, \; \theta \in T \]</p>
+	<details>
+		<summary>Details:</summary>
+		<p>Let \( h_\theta \) denote the PDF of \( U \) for \( \theta \in T \). If \( U \) is sufficient for \( \theta \), then from the previous theorem, the function \( r(\bs x) = f_\theta(\bs x) \big/ h_\theta[u(\bs x)] \) for \( \bs x  \in S\) does not depend on \( \theta \in T \). Hence \( f_\theta(\bs x) = h_\theta[u(\bs x)] r(\bs x) \) for \( (\bs x, \theta) \in S \times T \) and so \((\bs x, \theta) \mapsto f_\theta(\bs x) \) has the form given in the theorem. Conversely, suppose that \( (\bs x, \theta) \mapsto f_\theta(\bs x) \) has the form given in the theorem. Then there exists a positive constant \( C \)  such that \( h_\theta(y) = C G(y, \theta) \) for \( \theta \in T \) and \( y \in R \). Hence \( f_\theta(\bs x) \big/ h_\theta[u(x)] = r(\bs x) / C\) for \( \bs x \in S \), independent of \( \theta \in T \).</p>
+	</details>
+</div>
+
+<p>Note that \(r\) depends only on the data \(\bs x\) but not on the parameter \(\theta\). Less technically, \(u(\bs X)\) is sufficient for \(\theta\) if the probability density function \(f_\theta(\bs x)\) depends on the data vector \(\bs x\) and the parameter \(\theta\) only through \(u(\bs x)\).</p>
+
+<div class="unit">
+	<p class="math">If \(U\) and \(V\) are <a href="../sample/Introduction.html">equivalent statistics</a> and \(U\) is sufficient for \(\theta\) then \(V\) is sufficient for \(\theta\).</p>
+</div>
+
+<h4>Minimal Sufficient Statistics</h4>
+
+<p>The entire data variable \(\bs X\) is trivially sufficient for \(\theta\). However, as noted above, there usually exists a statistic \(U\) that is sufficient for \(\theta\) and has smaller dimension, so that we can achieve real data reduction. Naturally, we would like to find the statistic \(U\) that has the smallest dimension possible. In many cases, this smallest dimension \(j\) will be the same as the dimension \(k\) of the parameter vector \(\theta\). However, as we will see, this is not necessarily the case; \(j\) can be smaller or larger than \(k\). An example based on the uniform distribution is given in <a href="#uni2" class="ref"></a>.</p>
+
+<div class="unit" id="min1">
+<p class="dfn">Suppose that a statistic \(U\) is sufficient for \(\theta\). Then \(U\) is <dfn>minimally sufficient</dfn> if \(U\) is a function of any other statistic \(V\) that is sufficient for \(\theta\).</p>
+</div>
+
+<p>Once again, definition <a href="#min1" class="ref"></a> precisely captures the notion of minimal sufficiency, but is hard to apply. The following result <a href="#min2" class="ref"></a> gives an equivalent condition.</p>
+
+<div class="unit" id="min2">
+	<p class="math">Let \(f_\theta\) denote the probability density function of \(\bs X\) corresponding to the parameter value \(\theta \in T\) and suppose that \(U = u(\bs X)\) is a statistic taking values in \(R\). Then \(U\) is minimally sufficient for \(\theta\) if the following condition holds: for \(\bs x \in S\) and \(\bs y \in S\)
+	\[ \frac{f_\theta(\bs x)}{f_\theta(\bs{y})} \text{ is independent of } \theta \text{ if and only if } u(\bs x) = u(\bs{y}) \]</p>
+	<details>
+		<summary>Details:</summary>
+		<p>Suppose that the condition in the theorem is satisfied. Then the PDF \(f_\theta\) of \( \bs X \) must have the form given in the factorization theorem <a href="#fac" class="ref"></a> so \(U\) is sufficient for \(\theta\). Next, suppose that \(V = v(\bs X)\) is another sufficient statistic for \( \theta \), taking values in \( R \).  From the factorization theorem, there exists \( G: R \times T \to [0, \infty) \) and \( r: S \to [0, \infty) \) such that \( f_\theta(\bs x) = G[v(\bs x), \theta] r(\bs x) \) for \( (\bs x, \theta) \in S \times T \). Hence if \( \bs x, \bs y \in S \) and \( v(\bs x) = v(\bs y) \) then
+		\[\frac{f_\theta(\bs x)}{f_\theta(\bs{y})} = \frac{G[v(\bs x), \theta] r(\bs x)}{G[v(\bs{y}), \theta] r(\bs{y})} = \frac{r(\bs x)}{r(\bs y)}\]
+		does not depend on \( \theta \in \Theta \). Hence from the condition in the theorem, \( u(\bs x) = u(\bs y) \) and it follows that \( U \) is a function of \( V \).</p>
+	</details>
+</div>
+
+<div class="unit">
+	<p class="math">If \(U\) and \(V\) are equivalent statistics and \(U\) is minimally sufficient for \(\theta\) then \(V\) is minimally sufficient for \(\theta\).</p>
+</div>
+
+<h4>Properties of Sufficient Statistics</h4>
+
+<p>Sufficiency is related to several of the methods of constructing estimators that we have studied.</p>
+
+<div class="unit" id="mle">
+	<p class="math">Suppose that \(U\) is sufficient for \(\theta\) and that there exists a <a href="Likelihood.html">maximum likelihood estimator</a> of \(\theta\). Then there exists a maximum likelihood estimator \(V\) that is a function of \(U\).</p>
+	<details>
+		<summary>Details:</summary>
+		<p>From the factorization theorem <a href="#fac" class="ref"></a>, the log likelihood function for \( \bs x \in S \) is 
+		\[\theta \mapsto \ln G[u(\bs x), \theta] + \ln r(\bs x)\]
+		Hence a value of \(\theta\) that maximizes this function, if it exists, must be a function of \(u(\bs x)\).</p>
+	</details>
+</div>
+
+<p>In particular, suppose that \(V\) is the unique maximum likelihood estimator of \(\theta\) and that \(V\) is sufficient for \(\theta\). If \(U\) is sufficient for \(\theta\) then \(V\) is a function of \(U\) by <a href="#mle" class="ref"></a>. Hence it follows that \(V\) is minimally sufficient for \(\theta\). Our next result applies to <a href="Bayes.html">Bayesian analysis</a>.</p>
+
+<div class="unit" id="bay">
+	<p class="math">Suppose that the statistic \(U = u(\bs X)\) is sufficient for the parameter \(\theta\) and that \( \theta \) is modeled by a random variable \( \Theta \) with values in \( T \). Then the posterior distribution of \( \Theta \) given \( \bs X = \bs x \in S \) is a function of \( u(\bs x) \).</p>
+	<details>
+		<summary>Details:</summary>
+		<p>Let \( h \) denote the prior PDF of \( \Theta \) and \( f(\cdot \mid \theta) \) the conditional PDF of \( \bs X \) given \( \Theta = \theta \in T \). By the factorization theorem <a href="#fac" class="ref"></a>, this conditional PDF has the form \( f(\bs x \mid \theta) = G[u(\bs x), \theta] r(\bs x) \) for \( \bs x \in S \) and \( \theta \in T \). The posterior PDF of \( \Theta \) given \( \bs X = \bs x \in S \) is
+		\[ h(\theta \mid \bs x) = \frac{h(\theta) f(\bs x \mid \theta)}{f(\bs x)}, \quad \theta \in T \]
+		where the function in the denominator is the marginal PDF of \( \bs X \), or simply the normalizing constant for the function of \( \theta \) in the numerator. Let's suppose that \( \Theta \) has a continuous distribution on \( T \), so that \( f(\bs x) = \int_T h(t) G[u(\bs x), t] r(\bs x) dt \) for \( \bs x \in S \). Then the posterior PDF simplifies to
+		\[ h(\theta \mid \bs x) = \frac{h(\theta) G[u(\bs x), \theta]}{\int_T h(t) G[u(\bs x), t] dt} \]
+		which depends on \(\bs x \in S \) only through \( u(\bs x) \).</p>
+	</details>
+</div>
+
+<p>Continuing with the setting of Bayesian analysis, suppose that \( \theta \) is a real-valued parameter. If we use the usual mean-square loss function, then the Bayesian estimator is \( V = \E(\Theta \mid \bs X) \). By <a href="#bay" class="ref"></a>, \( V \) is a function of the sufficient statistics \( U \). That is, \( \E(\Theta \mid \bs X) = \E(\Theta \mid U) \).</p>
+
+<p>Theorem <a href="#rbt" class="ref"></a> given next is the <dfn>Rao-Blackwell theorem</dfn>, named for <a href="JavaScript:openAncillary('../biographies/Rao.html')" class="ancillary" >CR Rao</a> and <a href="JavaScript:openAncillary('../biographies/Blackwell.html')" class="ancillary" >David Blackwell</a>. The theorem shows how a sufficient statistic can be used to improve an unbiased estimator.</p>
+
+<div class="unit" id="rbt">
+	<p class="math"><strong>Rao-Blackwell Theorem</strong>. Suppose that \(U\) is sufficient for \(\theta\) and that \(V\) is an unbiased estimator of a real parameter \(\lambda = \lambda(\theta)\). Then \(\E_\theta(V \mid U)\) is also an unbiased estimator of \( \lambda \) and is uniformly better than \(V\).</p>
+	<details>
+		<summary>Details:</summary>
+		<p>This follows from basic properties of <a href="../expect/Conditional.html">conditional expected value</a> and conditional variance. First, since \(V\) is a function of \(\bs X\) and \(U\) is sufficient for \(\theta\), \(\E_\theta(V \mid U)\) is a valid statistic; that is, it does not depend on \(\theta\), in spite of the formal dependence on \(\theta\) in the expected value. Next, \(\E_\theta(V \mid U)\) is a function of \(U\) and \(\E_\theta[\E_\theta(V \mid U)] = \E_\theta(V) = \lambda\) for \(\theta \in \Theta\). Thus \(\E_\theta(V \mid U)\) is an unbiased estimator of \(\lambda\). Finally \(\var_\theta[\E_\theta(V \mid U)] = \var_\theta(V) - \E_\theta[\var_\theta(V \mid U)] \le \var_\theta(V)\) for any \(\theta \in T\).</p>
+	</details>
+</div>
+
+<h4>Complete Statistics</h4>
+
+<div class="unit">
+	<p class="dfn">Suppose that \(U = u(\bs X)\) is a statistic taking values in a set \(R\). Then \(U\) is a <dfn>complete</dfn> statistic for \(\theta\) if for any function \(r: R \to \R\)
+	\[ \E_\theta\left[r(U)\right] = 0 \text{ for all } \theta \in T \implies \P_\theta\left[r(U) = 0\right] = 1 \text{ for all } \theta \in T \]</p>
+</div>
+
+<p>To understand this rather strange looking condition, suppose that \(r(U)\) is a statistic constructed from \(U\) that is being used as an estimator of 0 (thought of as a function of \(\theta\)). The completeness condition means that the only such unbiased estimator is the statistic that is 0 with probability 1.</p>
+
+<div class="unit">
+	<p class="math">If \(U\) and \(V\) are equivalent statistics and \(U\) is complete for \(\theta\) then \(V\) is complete for \(\theta\).</p>
+</div>
+
+<p>Theorem <a href="#lst" class="ref"></a> given next shows the importance of statistics that are both complete and sufficient; it is known as the <dfn>Lehmann-Scheff&eacute; theorem</dfn>, named for <a href="JavaScript:openAncillary('../biographies/Lehmann.html')" class="ancillary" >Erich Lehmann</a> and <a href="JavaScript:openAncillary('../biographies/Scheffe.html')" class="ancillary" >Henry Scheff&eacute;</a>.</p>
+
+<div class="unit" id="lst">
+	<p class="math"><strong>Lehmann-Scheff&eacute; Theorem</strong>. Suppose that \(U\) is sufficient and complete for \(\theta\) and that \(V = r(U)\) is an unbiased estimator of a real parameter \(\lambda = \lambda(\theta)\). Then \(V\) is a <a href="Unbiased.html">uniformly minimum variance unbiased estimator</a> (UMVUE) of \(\lambda\).</p>
+	<details>
+		<summary>Details:</summary>
+		<p>Suppose that \(W\) is an unbiased estimator of \(\lambda\). By the Rao-Blackwell theorem <a href="#rbt" class="ref"></a>, \(\E(W \mid U)\) is also an unbiased estimator of \(\lambda\) and is uniformly better than \(W\). Since \(\E(W \mid U)\) is a function of \(U\), it follows from completeness that \(V = \E(W \mid U)\) with probability 1.</p>
+	</details>
+</div>
+
+<h4>Ancillary Statistics</h4>
+
+<div class="unit">
+	<p class="dfn">Suppose that \(V = v(\bs X)\) is a statistic with values in a set \(R\). If the distribution of \(V\) does not depend on \(\theta\), then \(V\) is called an <dfn>ancillary</dfn> statistic for \(\theta\).</p>
+</div>
+
+<p>Thus, the notion of an ancillary statistic is complementary to the notion of a sufficient statistic. A sufficient statistic contains all available information about the parameter; an ancillary statistic contains no information about the parameter. Theorem <a href="#bas" class="ref"></a>, known as <dfn>Basu's Theorem</dfn> and named for Debabrata Basu, makes this point more precisely.</p>
+
+<div class="unit" id="bas">
+	<p class="math"><strong>Basu's Theorem</strong>. Suppose that \(U\) is complete and sufficient for a parameter \(\theta\) and that \(V\) is an ancillary statistic for \( \theta \). Then \(U\) and \(V\) are independent.</p>
+	<details>
+		<summary>Details:</summary>
+		<p>Let \(g\) denote the probability density function of \(V\) and let \(v \mapsto g(v \mid U)\) denote the conditional probability density function of \(V\) given \(U\). From properties of conditional expected value, \(\E[g(v \mid U)]  = g(v)\) for \(v \in R\). But then from completeness, \(g(v \mid U) = g(v)\) with probability 1.</p>
+	</details>
+</div>
+
+<div class="unit">
+	<p class="math">If \(U\) and \(V\) are equivalent statistics and \(U\) is ancillary for \(\theta\) then \(V\) is ancillary for \(\theta\).</p>
+</div>
+
+<h3>Applications and Special Distributions</h3>
+
+<p>In this subsection, we will explore sufficient, complete, and ancillary statistics for a number of special distributions. As always, be sure to try the problems yourself before looking at the solutions.</p>
+
+<h4 id="ber">The Bernoulli Distribution</h4>
+
+<p>Recall that the <a href="../bernoulli/Introduction.html">Bernoulli distribution</a> with parameter \(p \in (0, 1)\) is a discrete distribution on \( \{0, 1\} \) with probability density function \( g \) defined by
+\[ g(x) = p^x (1 - p)^{1-x}, \quad x \in \{0, 1\} \]
+Suppose that \(\bs X = (X_1, X_2, \ldots, X_n)\) is a random sample of size \(n\) from the Bernoulli distribution with parameter \(p\). Equivalently, \(\bs X\) is a sequence of <a href="../bernoulli/index.html">Bernoulli trials</a>, named for <a href="JavaScript:openAncillary('../biographies/Bernoulli.html')" class="ancillary">Jacob Bernoulli</a>. In the usual langauage of reliability, \(X_i = 1\) if trial \(i\) is a success, and \(X_i = 0\) if trial \(i\) is a failure. Let \(Y = \sum_{i=1}^n X_i\) denote the number of successes. Recall that \(Y\) has the <a href="../bernoulli/Binomial.html">binomial distribution</a> with parameters \(n\) and \(p\), and has probability density function \( h \) defined by
+\[ h(y) = \binom{n}{y} p^y (1 - p)^{n-y}, \quad y \in \{0, 1, \ldots, n\} \]</p>
+
+<div class="unit" id="ber1">
+	<p class="math">\(Y\) is sufficient for \(p\). Specifically, for \( y \in \{0, 1, \ldots, n\} \), the conditional distribution of \(\bs X\) given \(Y = y\) is uniform on the set of points
+	\[ D_y = \left\{(x_1, x_2, \ldots, x_n) \in \{0, 1\}^n: x_1 + x_2 + \cdots + x_n = y\right\} \]</p>
+	<details>
+		<summary>Details:</summary>
+		<p>The joint PDF \( f \) of \( \bs X \) is defined by
+		\[ f(\bs x) = g(x_1) g(x_2) \cdots g(x_n) = p^y (1 - p)^{n-y}, \quad \bs x = (x_1, x_2, \ldots, x_n) \in \{0, 1\}^n \]
+		where \( y = \sum_{i=1}^n x_i \). Now let \( y \in \{0, 1, \ldots, n\} \). Given \( Y = y \), \( \bs X \) is concentrated on \( D_y \) and
+		\[ \P(\bs X = \bs x \mid Y = y) = \frac{\P(\bs X = \bs x)}{\P(Y = y)} = \frac{p^y (1 - p)^{n-y}}{\binom{n}{y} p^y (1 - p)^{n-y}} = \frac{1}{\binom{n}{y}}, \quad \bs x \in D_y \]
+		Of course, \( \binom{n}{y} \) is the cardinality of \(D_y\).</p>
+	</details>
+</div>
+
+<p>This result is intuitively appealing: in a sequence of Bernoulli trials, all of the information about the probability of success \(p\) is contained in the number of successes \(Y\). The particular <em>order</em> of the successes and failures provides no additional information.  Of course, the sufficiency of \(Y\) follows more easily from the factorization theorem <a href="#fac" class="ref"></a>, but the conditional distribution provides additional insight.</p>
+
+<div class="unit" id="ber2">
+	<p class="math">\(Y\) is complete for \(p\) on the parameter set \( (0, 1) \).</p>
+	<details>
+		<summary>Details:</summary>
+		<p>If \(r: \{0, 1, \ldots, n\} \to \R\), then 
+		\[\E[r(Y)] = \sum_{y=0}^n r(y) \binom{n}{k} p^y (1 - p)^{n-y} = (1 - p)^n \sum_{y=0}^n r(y) \binom{n}{y} \left(\frac{p}{1 - p}\right)^y\]
+		The last sum is a polynomial in the variable \(t = \frac{p}{1 - p} \in (0, \infty)\). If this polynomial is 0 for all \(t \in (0, \infty)\), then all of the coefficients must be 0. Hence we must have \( r(y) = 0 \) for \( y \in \{0, 1, \ldots, n\} \).</p>
+	</details>
+</div>
+
+<p>The proof <a href="#ber2" class="ref"></a> actually shows that if the parameter set is any subset of \( (0, 1) \) containing an interval of positive length, then \( Y \) is complete for \( p \). But the notion of completeness depends very much on the parameter set. The following result considers the case where \(p\) has a finite set of values.</p>
+
+<div class="unit">
+	<p class="math">Suppose that the parameter set \( T \subset (0, 1) \) is a finite set with \( k \in \N_+ \) elements. If the sample size \(n \) is at least \( k \), then \(Y\) is not complete for \(p\).</p>
+	<details>
+		<summary>Details:</summary>
+		<p>Suppose that \( r: \{0, 1, \ldots, n\} \to \R \) and that \( \E[r(Y)] = 0 \) for \( p \in T \). Then we have
+		\[ \sum_{y=0}^n \binom{n}{y} p^y (1 - p)^{n-y} r(y) = 0, \quad p \in T \]
+		This is a set of \( k \) linear, homogenous equations in the variables \( (r(0), r(1), \ldots, r(n)) \). Since \( n \ge k \), we have at least \( k + 1 \) variables, so there are infinitely many nontrivial solutions.</p>
+</details>
+</div>
+
+<p>The sample mean \(M = Y / n\) (the sample proportion of successes) is clearly equivalent to \( Y \) (the number of successes), and hence is also sufficient for \( p \) and is complete for \(p \in (0, 1)\). Recall that the sample mean \( M \) is the <a href="Moments.html#ber">method of moments</a> estimator of \( p \), and is the <a href="Likelihood.html#ber">maximum likelihood</a>0\ estimator of \( p \) on the parameter set \( (0, 1) \).</p>
+
+<p>In <a href="Bayes.html#ber">Bayesian analysis</a>, the usual approach is to model \( p \) with a random variable \( P \) that has a prior <a href="../special/Beta.html">beta distribution</a> with left parameter \( a \in (0, \infty) \) and right parameter \( b \in (0, \infty) \). Then the posterior distribution of \( P \) given \( \bs X \) is beta with left parameter \( a + Y \) and right parameter \( b + (n - Y) \). The posterior distribution depends on the data only through the sufficient statistic \( Y \), as guaranteed by <a href="#bay" class="ref"></a>.</p>
+
+
+<div class="unit">
+	<p class="math">The sample variance \( S^2 \) is an UMVUE of the distribution variance \( p (1 - p) \) for \( p \in (0, 1) \), and can be written as
+	\[ S^2 = \frac{Y}{n - 1} \left(1 - \frac{Y}{n}\right) \]</p>
+	<details>
+		<summary>Details:</summary>
+		<p>Recall that the sample variance can be written as
+		\[S^2 = \frac{1}{n - 1} \sum_{i=1}^n X_i^2 - \frac{n}{n - 1} M^2\]
+		But \(X_i^2 = X_i\) since \(X_i\) is an indicator variable, and \(M = Y / n\). Substituting gives the representation above.  In general, \(S^2\) is an unbiased estimator of the distribution variance \(\sigma^2\). But in this case, \(S^2\) is a function of the complete, sufficient statistic \(Y\), and hence by the Lehmann Scheff&eacute; <a href="#lst" class="ref"></a>, \(S^2\) is an UMVUE of \(\sigma^2 = p (1 - p)\).</p>
+	</details>
+</div>
+
+<h4 id="poi">The Poisson Distribution</h4>
+
+<p>Recall that the <a href="../poisson/Poisson.html">Poisson distribution</a> with parameter \(\theta \in (0, \infty)\) is a discrete distribution on \( \N \) with probability density function \( g \) defined by
+\[ g(x) = e^{-\theta} \frac{\theta^x}{x!}, \quad x \in \N \]
+The distribution is named for <a href="JavaScript:openAncillary('../biographies/Poisson.html')" class="ancillary">Simeon Poisson</a> and is used to model the number of <q>random points</q> in region of time or space, particularly in the context of the <a href="../poisson/index.html">Poisson process</a>. The parameter \(\theta\) is proportional to the size of the region, and is both the mean and the variance of the distribution.</p>
+
+<p>Suppose now that \(\bs X = (X_1, X_2, \ldots, X_n)\) is a random sample of size \(n\) from the Poisson distribution with parameter \(\theta\). Recall that the sum of the scores \(Y = \sum_{i=1}^n X_i\) also has the Poisson distribution, but with parameter \(n \theta\).</p>
+
+<div class="unit">
+	<p class="math">The statistic \(Y\) is sufficient for \(\theta\). Specifically, for \( y \in \N \), the conditional distribution of \( \bs X \) given \( Y = y \) is the <a href="../bernoulli/Multinomial.html">multinomial distribution</a> with \( y \) trials, \( n \) trial values, and uniform trial probabilities.</p>
+	<details>
+		<summary>Details:</summary>
+		<p>The joint PDF \( f \) of \( \bs X \) is defined by
+		\[ f(\bs x) = g(x_1) g(x_2) \cdot g(x_n) = \frac{e^{-n \theta} \theta^y}{x_1! x_2! \cdots x_n!}, \quad \bs x = (x_1, x_2, \ldots, x_n) \in \N^n \]
+		where \( y = \sum_{i=1}^n x_i \). Given \( Y = y \in \N \), random vector \( \bs X \) takes values in the set \(D_y = \left\{\bs x = (x_1, x_2, \ldots, x_n) \in \N^n: \sum_{i=1}^n x_i = y\right\}\). Moreover,
+		\[\P(\bs X = \bs x \mid Y = y) = \frac{\P(\bs X = \bs x)}{\P(Y = y)} = \frac{e^{-n \theta} \theta^y / (x_1! x_2! \cdots x_n!)}{e^{-n \theta} (n \theta)^y / y!} = \frac{y!}{x_1! x_2! \cdots x_n!} \frac{1}{n^y}, \quad \bs x \in D_y\]
+		The last expression is the PDF of the multinomial distribution stated in the theorem. Of course, the important point is that the conditional distribution does not depend on \( \theta \).</p>
+	</details>
+</div>
+
+<p>As before, it's easier to use the factorization theorem <a href="#fac" class="ref"></a> to prove the sufficiency of \( Y \), but the conditional distribution gives some additional insight.</p>
+
+<div class="unit">
+	<p class="math">\(Y\) is complete for \(\theta \in (0, \infty)\).</p>
+	<details>
+		<summary>Details:</summary>
+		<p>If \(r: \N \to \R\) then 
+		\[\E\left[r(Y)\right] = \sum_{y=0}^\infty e^{-n \theta} \frac{(n \theta)^y}{y!} r(y) = e^{-n \theta} \sum_{y=0}^\infty \frac{n^y}{y!} r(y) \theta^y\]
+		The last sum is a power series in \(\theta\) with coefficients \( n^y r(y) / y! \) for \( y \in \N \). If this series is 0 for all \(\theta\) in an open interval, then the coefficients must be 0 and hence \( r(y) = 0 \) for \( y \in \N \).</p>
+	</details>
+</div>
+
+<p>As with our discussion of Bernoulli trials, the sample mean \( M = Y / n \) is clearly equivalent to \( Y \) and hence is also sufficient for \( \theta \) and complete for \( \theta \in (0, \infty) \). Recall that \( M \) is the <a href="Moments.html#poi">method of moments</a> estimator of \( \theta \) and is the <a href="Likelihood.html#poi">maximum likelihood</a> estimator on the parameter space \( (0, \infty) \).</p>
+
+<div class="unit">
+	<p class="math">An UMVUE of the parameter \(\P(X = 0) = e^{-\theta}\) for \( \theta \in (0, \infty) \) is
+	\[ U = \left( \frac{n-1}{n} \right)^Y \]</p>
+	<details>
+		<summary>Details:</summary>
+		<p>The <a href="../expect/Generating.html#pgf">probability generating function</a> of \(Y\) is
+		\[ P(t) = \E(t^Y) = e^{n \theta(t - 1)}, \quad t \in \R \]
+		Hence
+		\[ \E\left[\left(\frac{n - 1}{n}\right)^Y\right] = \exp \left[n \theta \left(\frac{n - 1}{n} - 1\right)\right] = e^{-\theta}, \quad \theta \in (0, \infty) \]
+		So \( U = [(n - 1) / n]^Y \) is an unbiased estimator of \( e^{-\theta} \). Since \( U \) is a function of the complete, sufficient statistic \( Y \), it follows from the Lehmann Scheff&eacute; <a href="#lst" class="ref"></a> that \( U \) is an UMVUE of \( e^{-\theta} \).</p>
+	</details>
+</div>
+
+<h4 id="nor">The Normal Distribution</h4>
+
+<p>Recall that the <a href="../special/Normal.html">normal distribution</a> with mean \(\mu \in \R\) and variance \(\sigma^2 \in (0, \infty)\) is a continuous distribution on \( \R \) with probability density function \( g \) defined by
+\[ g(x) = \frac{1}{\sqrt{2 \, \pi} \sigma} \exp\left[-\frac{1}{2}\left(\frac{x - \mu}{\sigma}\right)^2\right], \quad x \in \R \]
+The distribution is often used to model physical quantities subject to small, random errors, and because of the <a href="../sample/CLT.html">central limit theorem</a>, is perhaps the most important distribution in statistics.</p>
+
+<div class="unit" id="nor1">
+	<p class="math">Suppose that \(\bs X = (X_1, X_2, \ldots, X_n)\) is a random sample from the normal distribution with mean \(\mu\) and variance \(\sigma^2\). Then each of the following pairs of statistics is minimally sufficient for \( (\mu, \sigma^2) \)</p>
+	<ol class="sub">
+		<li>\((Y, V)\) where \(Y = \sum_{i=1}^n X_i\) and \(V = \sum_{i=1}^n X_i^2\).</li>
+		<li>\(\left(M, S^2\right)\) where \(M = \frac{1}{n} \sum_{i=1}^n X_i\) is the sample mean and \(S^2 = \frac{1}{n - 1} \sum_{i=1}^n (X_i - M)^2\) is the sample variance.</li>
+		<li>\( (M, T^2) \) where \( T^2 = \frac{1}{n} \sum_{i=1}^n (X_i - M)^2 \) is the biased sample variance.</li>
+	</ol>
+	<details>
+		<summary>Details:</summary>
+		<ol class="sub">
+			<li>The joint PDF \( f \) of \( \bs X \) is given by
+			\[ f(\bs x) = g(x_1) g(x_2) \cdots g(x_n) = \frac{1}{(2 \pi)^{n/2} \sigma^n} \exp\left[-\frac{1}{2 \sigma^2} \sum_{i=1}^n (x_i - \mu)^2\right], \quad \bs x = (x_1, x_2 \ldots, x_n) \in \R^n \]
+			After some algebra, this can be written as
+			\[ f(\bs x) = \frac{1}{(2 \pi)^{n/2} \sigma^n} e^{-n \mu^2 / \sigma^2} \exp\left(-\frac{1}{2 \sigma^2}  \sum_{i=1}^n x_i^2 + \frac{2 \mu}{\sigma^2} \sum_{i=1}^n x_i \right), \quad \bs x = (x_1, x_2 \ldots, x_n) \in \R^n\]
+			It follows from the factorization theorem <a href="#fac" class="ref"></a> that \( (Y, V) \) is sufficient for \(\left(\mu, \sigma^2\right)\). Minimal sufficiency follows from <a href="#min2" class="ref"></a>.</li>
+			<li>Note that \( M = \frac{1}{n} Y, \; S^2 = \frac{1}{n - 1} V - \frac{n}{n - 1} M^2\). Hence \(\left(M, S^2\right)\) is equivalent to \( (Y, V) \) and so \(\left(M, S^2\right)\) is also minimally sufficient for \(\left(\mu, \sigma^2\right)\).</li>
+			<li>Similarly, \( M = \frac{1}{n} Y \) and \( T^2 = \frac{1}{n} V - M^2 \). Hence \( (M, T^2) \) is equivalent to \( (Y, V) \) and so \( (M, T^2) \) is also minimally sufficient for \( (\mu, \sigma^2) \).</li>
+		</ol>
+	</details>
+</div>
+
+<p>Recall that \( M \) and \( T^2 \) are the method of moments estimators of \( \mu \) and \( \sigma^2 \), respectively, and are also the maximum likelihood estimators on the parameter space \( \R \times (0, \infty) \).</p>
+
+<div class="unit">
+	<p class="app">Run the <a href="JavaScript:openAncillary('../apps/NormalEstimate.html')" class="ancillary">normal estimation experiment</a> 1000 times with various values of the parameters. Compare the estimates of the parameters in terms of bias and mean square error.</p>
+</div>
+
+<p>Sometimes the variance \( \sigma^2 \) of the normal distribution is known, but not the mean  \( \mu \). It's rarely the case that \( \mu \) is known but not \( \sigma^2 \). Nonetheless we can give sufficient statistics in both cases.</p>
+
+<div class="unit" id="nor2">
+	<p class="math">Suppose again that \( \bs X = (X_1, X_2, \ldots, X_n) \) is a random sample from the normal distribution with mean \( \mu \in \R \) and variance \( \sigma^2 \in (0, \infty)\). If </p>
+	<ol class="sub">
+		<li>If \( \sigma^2 \) is known then \( Y = \sum_{i=1}^n X_i \) is minimally sufficient for \( \mu \).</li>
+		<li>If \( \mu \) is known then \( U = \sum_{i=1}^n (X_i - \mu)^2 \) is sufficient for \( \sigma^2 \).</li>
+	</ol>
+	<details>
+		<summary>Details:</summary>
+		<ol class="sub">
+			<li>This results follow from the second displayed equation for the PDF \( f(\bs x) \) of \( \bs X \) in the proof of <a href="#nor1" class="ref"></a>.</li>
+			<li>This result follows from the first displayed equation for the PDF \( f(\bs x) \) of \( \bs X \) in the proof of theoren <a href="#nor1" class="ref"></a>.</li>
+		</ol>
+	</details>
+</div>
+
+<p>Of course by equivalence, in part (a) the sample mean \( M = Y / n \) is minimally sufficient for \( \mu \), and in part (b) the special sample variance \( W = U / n \) is minimally sufficient for \( \sigma^2 \). Moreover, in part (a), \( M \) is complete for \( \mu \) on the parameter space \( \R \) and the sample variance \( S^2 \) is ancillary for \( \mu \) (Recall that \( (n - 1) S^2 / \sigma^2 \) has the <a href="../special/ChiSquare.html">chi-square distribution</a> with \( n - 1 \) degrees of freedom.) It follows from Basu's <a href="#bas" class="ref"></a> that the sample mean \( M \) and the sample variance \( S^2 \) are independent. We proved this by more direct means in the section on <a href="../sample/Normal.html">special properties of normal samples</a>, but the formulation in terms of sufficient and ancillary statistics gives additional insight.</p>
+
+<h4 id="gam">The Gamma Distribution</h4>
+
+<p>Recall that the <a href="../special/Gamma.html">gamma distribution</a> with shape parameter \(k \in (0, \infty)\) and scale parameter  \(b \in (0, \infty)\) is a continuous distribution on \( (0, \infty) \) with probability density function \( g \) given by
+\[ g(x) = \frac{1}{\Gamma(k) b^k} x^{k-1} e^{-x / b}, \quad x \in (0, \infty) \]
+The gamma distribution is often used to model random times, particularly in the context of the <a href="../poisson/index.html">Poisson proccess</a>, and certain other types of positive random variables.</p>
+
+<div class="unit" id="gam1">
+	<p class="math">Suppose that \(\bs X = (X_1, X_2, \ldots, X_n)\) is a random sample from the gamma distribution with shape parameter \(k\) and scale parameter \(b\). Each of the following pairs of statistics is minimally sufficient for \((k, b)\)</p>
+	<ol class="sub">
+		<li>\((Y, V)\) where \(Y = \sum_{i=1}^n X_i\) is the sum of the scores and \(V = \prod_{i=1}^n X_i\) is the product of the scores.</li>
+		<li>\((M, U)\) where \(M = Y / n\) is the sample (arithmetic) mean of \(\bs X\) and \(U = V^{1/n}\) is the sample geometric mean of \(\bs X\).</li>
+	</ol>
+	<details>
+		<summary>Details:</summary>
+		<ol class="sub">
+			<li>The joint PDF \( f \) of \( \bs X \) is given by 
+			\[ f(\bs x) = g(x_1) g(x_2) \cdots g(x_n) = \frac{1}{\Gamma^n(k) b^{nk}} (x_1 x_2 \ldots x_n)^{k-1} e^{-(x_1 + x_2 + \cdots + x_n) / b}, \quad \bs x = (x_1, x_2, \ldots, x_n) \in (0, \infty)^n \]
+			From the factorization theorem <a href="#fac" class="ref"></a>, \( (Y, V) \) is sufficient for \( (k, b) \). Minimal sufficiency follows from <a href="#min2" class="ref"></a>.</li>
+			<li>Clearly \( M = Y / n \) is equivalent to \( Y \) and \( U = V^{1/n} \) is equivalent to \( V \). Hence \( (M, U) \) is also minimally sufficient for \( (k, b) \).</li>
+		</ol>
+	</details>
+</div>
+
+<p>Recall that the method of moments estimators of \( k \) and \( b \) are \( M^2 / T^2 \) and \( T^2 / M \), respectively, where \( M = \frac{1}{n} \sum_{i=1}^n X_i \) is the sample mean and \( T^2 = \frac{1}{n} \sum_{i=1}^n (X_i - M)^2 \) is the biased sample variance. If the shape parameter \( k \) is known, \( \frac{1}{k} M \) is both the method of moments estimator of \( b \) and the maximum likelihood estimator on the parameter space \( (0, \infty) \). Note that \( T^2 \) is not a function of the sufficient statistics \( (Y, V) \), and hence estimators based on \( T^2 \) suffer from a loss of information.</p>
+
+<div class="unit">
+	<p class="app">Run the <a href="JavaScript:openAncillary('../apps/GammaEstimate.html')" class="ancillary">gamma estimation experiment</a> 1000 times with various values of the parameters and the sample size \( n \). Compare the estimates of the parameters in terms of bias and mean square error.</p>
+</div>
+
+<p>The proof of <a href="#gam1" class="ref"></a> actually shows that \( Y \) is sufficient for \( b \) if \( k \) is known, and that \( V \) is sufficient for \( k \) if \( b \) is known. </p>
+
+<div class="unit" id="gam2">
+	<p class="math">Suppose again that \(\bs X = (X_1, X_2, \ldots, X_n)\) is a random sample of size \(n\) from the gamma distribution with shape parameter \( k \in (0, \infty)  \) and scale parameter \(b \in (0, \infty)\). Then \(Y = \sum_{i=1}^n X_i\) is complete for \(b\).</p>
+	<details>
+		<summary>Details:</summary>
+		<p>\( Y \) has the gamma distribution with shape parameter \( n k \) and scale parameter \( b \). Hence, if \(r: [0, \infty) \to \R\), then
+		\[\E\left[r(Y)\right] = \int_0^\infty \frac{1}{\Gamma(n k) b^{n k}} y^{n k-1} e^{-y/b} r(y) \, dy = \frac{1}{\Gamma(n k) b^{n k}} \int_0^\infty y^{n k - 1} r(y) e^{-y / b} \, dy\]
+		The last integral can be interpreted as the Laplace transform of the function \( y \mapsto y^{n k - 1} r(y) \) evaluated at \( 1 / b \). If this transform is 0 for all \(b\) in an open interval, then \( r(y) = 0 \) almost everywhere in \( (0, \infty) \).</p>
+	</details>
+</div>
+
+<div class="unit" id="gam2">
+	<p class="math">Suppose again that \(\bs X = (X_1, X_2, \ldots, X_n)\) is a random sample from the gamma distribution on \( (0, \infty) \) with shape parameter \( k \in (0, \infty) \) and scale parameter \(b \in (0, \infty)\). Let \( M = \frac{1}{n} \sum_{i=1}^n X_i \) denote the sample mean and \( U = (X_1 X_2 \ldots X_n)^{1/n} \) the sample geometric mean, as before. Then</p>
+	<ol class="sub">
+		<li>\( M / U \) is ancillary for \( b \).</li>
+		<li>\( M \) and \( M / U \) are independent.</li>
+	</ol> 
+	<details>
+		<summary>Details:</summary>
+		<ol class="sub">
+			<li>We can take \( X_i = b Z_i \) for \( i \in \{1, 2, \ldots, n\} \) where \( \bs{Z} = (Z_1, X_2, \ldots, Z_n) \) is a random sample of size \( n \) from the gamma distribution with shape parameter \( k \) and scale parameter 1 (the <dfn>standard</dfn> gamma distribution with shape parameter \( k \)). Then
+			\[ \frac{M}{U} = \frac{1}{n} \sum_{i=1}^n \frac{X_i}{(X_1 X_2 \cdots X_n)^{1/n}} = \frac{1}{n} \sum_{i=1}^n \left(\frac{X_i^n}{X_1 X_2 \cdots X_n}\right)^{1/n} = \frac{1}{n} \sum_{i=1}^n \left(\prod_{j \ne i} \frac{X_i}{X_j}\right)^{1/n}  \]
+			But \( X_i / X_j = Z_i / Z_j\) for \( i \ne j \), and the distribution of \( \left\{Z_i / Z_j: i, j \in \{1, 2, \ldots, n\}, \; i \ne j\right\} \) does not depend on \( b \). Hence the distribution of \( M / U \) does not depend on \( b \).
+			<li>This follows from Basu's <a href="#bas" class="ref"></a>, since \( M \) is complete and sufficient for \( b \) and \( M / U \) is ancillary for \( b \).</li>
+		</ol>
+	</details>
+</div>
+
+<h4 id="bet">The Beta Distribution</h4>
+
+<p>Recall that the <a href="../special/Beta.html">beta distribution</a> with left parameter \(a \in (0, \infty)\) and right parameter \(b \in (0, \infty)\) is a continuous distribution on \( (0, 1) \) with probability density function \( g \) given by
+\[ g(x) = \frac{1}{B(a, b)} x^{a-1} (1 - x)^{b-1}, \quad  x \in (0, 1)\]
+where \( B \) is the beta function. The beta distribution is often used to model random proportions and other random variables that take values in bounded intervals.</p>
+
+<div class="unit" id="bet1">
+	<p class="math">Suppose that \(\bs X = (X_1, X_2, \ldots, X_n)\) is a random sample from the beta distribution with left parameter \(a\) and right parameter \(b\). Then \((P, Q)\) is minimally sufficient for \((a, b)\) where \(P = \prod_{i=1}^n X_i\) and \(Q = \prod_{i=1}^n (1 - X_i)\).</p>
+	<details>
+		<summary>Details:</summary>
+		<p>The joint PDF \( f \) of \( \bs X \) is given by
+		\[ f(\bs x) = g(x_1) g(x_2) \cdots g(x_n) = \frac{1}{B^n(a, b)} (x_1 x_2 \cdots x_n)^{a - 1} [(1 - x_1) (1 - x_2) \cdots (1 - x_n)]^{b-1}, \quad \bs x = (x_1, x_2, \ldots, x_n) \in (0, 1)^n \]
+		From the factorization theorem <a href="#fac" class="ref"></a>, it follows that \( (U, V) \) is sufficient for \( (a, b) \). Minimal sufficiency follows from <a href="#min2" class="ref"></a>.</p>
+	</details>
+</div>
+
+<p>The proof of <a href="#bet1" class="ref"></a> also shows that \( P \) is sufficient for \( a \) if \( b \) is known, and that \( Q \) is sufficient for \( b \) if \( a \) is known. Recall that the <a href="Moments.html#bet">method of moments</a> estimators of \( a \) and \( b \) are 
+\[ U = \frac{M\left(M - M^{(2)}\right)}{M^{(2)} - M^2}, \quad V = \frac{(1 - M)\left(M - M^{(2)}\right)}{M^{(2)} - M^2} \]
+respectively, where \( M = \frac{1}{n} \sum_{i=1}^n X_i \) is the sample mean and \( M^{(2)} = \frac{1}{n} \sum_{i=1}^n X_i^2 \) is the second order sample mean. If \( b \) is known, the method of moments estimator of \( a \) is \( U_b = b M / (1 - M) \), while if \( a \) is known, the method of moments estimator of \( b \) is \( V_a = a (1 - M) / M \). None of these estimators is a function of the sufficient statistics \( (P, Q) \) and so all suffer from a loss of information. On the other hand, if \( b = 1 \), the <a href="Likelihood.html#bet">maximum likelihood estimator</a> of \( a \) on the interval \( (0, \infty) \) is \( W = -n / \sum_{i=1}^n \ln X_i \), which is a function of \( P \) (as it must be).
+
+<div class="unit">
+	<p class="app">Run the <a href="JavaScript:openAncillary('../apps/BetaEstimate.html')" class="ancillary">beta estimation experiment</a> 1000 times with various values of the parameters. Compare the estimates of the parameters.</p>
+</div>
+
+<h4 id="par">The Pareto Distribution</h4>
+
+<p>Recall that the <a href="../special/Pareto.html">Pareto distribution</a> with shape parameter \(a \in (0, \infty)\) and scale parameter \(b \in (0, \infty)\) is a continuous distribution on \( [b, \infty) \) with probability density function \( g \) given by
+\[ g(x) = \frac{a b^a}{x^{a+1}}, \quad b \le x \lt \infty \]
+The Pareto distribution, named for <a href="JavaScript:openAncillary('../biographies/Pareto.html')" class="ancillary">Vilfredo Pareto</a>, is a heavy-tailed distribution often used to model income and certain other types of random variables.</p>
+
+<div class="unit" id="par1">
+	<p class="math">Suppose that \(\bs X = (X_1, X_2, \ldots, X_n)\) is a random sample from the Pareto distribution with shape parameter \(a\) and scale parameter \( b \). Then \( \left(P, X_{(1)}\right) \) is minimally sufficient for \( (a, b) \) where \(P = \prod_{i=1}^n X_i\) is the product of the sample variables and where \( X_{(1)} = \min\{X_1, X_2, \ldots, X_n\} \) is the first <a href="../sample/OrderStatistics.html">order statistic</a>.</p>
+	<details>
+	<summary>Details:</summary>
+		<p>The joint PDF \( f \) of \( \bs X \) at \( \bs x = (x_1, x_2, \ldots, x_n) \) is given by
+		\[ f(\bs x) = g(x_1) g(x_2) \cdots g(x_n) = \frac{a^n b^{n a}}{(x_1 x_2 \cdots x_n)^{a + 1}}, \quad x_1 \ge b, x_2 \ge b, \ldots, x_n \ge b  \]
+		which can be rewritten as
+		\[ f(\bs x) = g(x_1) g(x_2) \cdots g(x_n) = \frac{a^n b^{n a}}{(x_1 x_2 \cdots x_n)^{a + 1}} \bs{1}\left(x_{(n)} \ge b\right), \quad (x_1, x_2, \ldots, x_n) \in (0, \infty)^n  \]
+		So the result follows from the factorization theorem <a href="#fac" class="ref"></a>. Minimal sufficiency follows from <a href="#min2" class="ref"></a>.</p>
+	</details>
+</div>
+
+<p>The proof of <a href="#par1" class="ref"></a> also shows that \( P \) is sufficient for \( a \) if \( b \) is known (which is often the case), and that \( X_{(1)} \) is sufficient for \( b \) if \( a \) is known (much less likely). Recall that the method of moments estimators of \( a \)  and \( b \) are
+\[U = 1 + \sqrt{\frac{M^{(2)}}{M^{(2)} - M^2}}, \quad V = \frac{M^{(2)}}{M} \left( 1 - \sqrt{\frac{M^{(2)} - M^2}{M^{(2)}}} \right)\]
+respectively, where as before \( M = \frac{1}{n} \sum_{i=1}^n X_i \) is the sample mean and \( M^{(2)} = \sum_{i=1}^n X_i^2 \) the second order sample mean. These estimators are not functions of the sufficient statistics and hence suffers from loss of information. On the other hand, the maximum likelihood estimators of \( a \) and \( b \) on the interval \( (0, \infty) \) are
+\[W = \frac{n}{\sum_{i=1}^n \ln X_i - n \ln X_{(1)}}, \quad X_{(1)}\]
+respectively. These are functions of the sufficient statistics, as they must be.</p>
+
+<div class="unit">
+	<p class="app">Run the <a href="JavaScript:openAncillary('../apps/ParetoEstimate.html')" class="ancillary">Pareto estimation experiment</a> 1000 times with various values of the parameters \( a \) and \( b \) and the sample size \( n \). Compare the method of moments estimates of the parameters with the maximum likelihood estimates in terms of the empirical bias and mean square error.</p>
+</div>
+
+<h4 id="uni">The Uniform Distribution</h4>
+
+<p>Recall that the <a href="../special/UniformContinuous.html">continuous uniform distribution</a> on the interval \( [a, a + h] \), where \( a \in \R \) is the location parameter and \( h \in (0, \infty) \) is the scale parameter, has probability density function \( g \) given by
+\[ g(x) = \frac{1}{h}, \quad x \in [a, a + h] \]
+Continuous uniform distributions are widely used in applications to model a number chosen <q>at random</q> from an interval. Let's first consider the case where both parameters are unknown.</p>
+
+<div class="unit" id="uni1">
+	<p class="math">Suppose that \(\bs X = (X_1, X_2, \ldots, X_n)\) is a random sample from the uniform distribution on the interval \([a, a + h]\). Then \(\left(X_{(1)}, X_{(n)}\right)\) is minimally sufficient for \((a, h)\), where \( X_{(1)} = \min\{X_1, X_2, \ldots, X_n\} \) is the first <a href="../sample/OrderStatistics.html" class="mian">order statistic</a> and \( X_{(n)} = \max\{X_1, X_2, \ldots, X_n\} \) is the last order statistic.</p>
+	<details>
+		<summary>Details:</summary>
+		<p>The PDF \( f \) of \( \bs X \) is given by 
+		\[ f(\bs x) = g(x_1) g(x_2) \cdots g(x_n) = \frac{1}{h^n}, \quad \bs x = (x_1, x_2, \ldots x_n) \in [a, a + h]^n \]
+		We can rewrite the PDF as
+		\[ f(\bs x) = \frac{1}{h^n} \bs{1}[x_{(1)} \ge a] \bs{1}[x_{(n)} \le a + h], \quad \bs x = (x_1, x_2, \ldots, x_n) \in \R^n \]
+		It then follows from the factorization theorem <a href="#fac" class="ref"></a> that \(\left(X_{(1)},  X_{(n)}\right) \) is sufficient for \( (a, h) \). Next, suppose that \( \bs x, \, \bs y \in \R^n \) and that \( x_{(1)} \ne y_{(1)} \) or \( x_{(n)} \ne y_{(n)} \). For a given \( h \in (0, \infty) \), we can easily find values of \( a \in \R \) such that \( f(\bs x) = 0 \) and \( f(\bs y) = 1 / h^n \), and other values of \( a \in \R \) such that \( f(\bs x) = f(\bs y) = 1 / h^n \). By <a href="#min2" class="ref"></a>, \(\left(X_{(1)},  X_{(n)}\right) \) is minimally sufficient.</p>
+	</details>
+</div>
+
+<p>If the location parameter \( a \) is known, then the largest order statistic is sufficient for the scale parameter \( h \). But if the scale parameter \( h \) is known, we still need both order statistics for the location parameter \( a \). So in this case, we have a single real-valued parameter, but the minimally sufficient statistic is a pair of real-valued random variables.</p>
+
+<div class="unit" id="uni2">
+	<p class="math">Suppose again that \( \bs X = (X_1, X_2, \ldots, X_n) \) is a random sample from the uniform distribution on the interval \( [a, a + h] \).</p>
+	<ol class="sub">
+		<li>If \( a \in \R \) is known, then \( X_{(n)} \) is sufficient for \( h \).</li>
+		<li>If \( h \in (0, \infty) \) is known, then \( \left(X_{(1)}, X_{(n)}\right) \) is minimally sufficient for \( a \).</li>
+	</ol>
+	<details>
+		<summary>Details:</summary>
+		<p>Both parts follow easily from the analysis given in the proof <a href="#uni1" class="ref"></a>.</p>
+	</details>
+</div>
+
+<div class="unit">
+	<p class="app">Run the <a href="JavaScript:openAncillary('../apps/UniformEstimate.html')" class="ancillary">uniform estimation experiment</a> 1000 times with various values of the parameter. Compare the estimates of the parameter.</p>
+</div>
+
+<p>Recall that if both parameters are unknown, the <a href="Moments.html#uni">method of moments</a> estimators of \( a \) and \( h \) are \( U = 2 M - \sqrt{3} T \) and \( V = 2 \sqrt{3} T \), respectively, where \( M = \frac{1}{n} \sum_{i=1}^n X_i \) is the sample mean and \( T^2 = \frac{1}{n} \sum_{i=1}^n (X_i - M)^2 \) is the biased sample variance. If \( a \) is known, the method of moments estimator of \( h \) is \( V_a = 2 (M - a) \), while if \( h \) is known, the method of moments estimator of \( h \) is \( U_h = M - \frac{1}{2} h \). None of these estimators are functions of the minimally sufficient statistics, and hence result in loss of information.</p>
+
+<h4 id="hyp">The Hypergeometric Model</h4>
+
+<p>So far, in all of our examples, the basic variables have formed a random sample from a distribution. In this subsection, our basic variables will be dependent.</p>
+
+<p>Recall that in the <dfn>hypergeometric model</dfn>, we have a population of \( N \) objects, and that \( r \) of the objects are <dfn>type 1</dfn> and the remaining \( N - r \) are <dfn>type 0</dfn>. The population size \( N \) is a positive integer and the type 1 size \( r \) is a nonnegative integer with \( r \le N \). Typically one or both parameters are unknown. We select a random sample of \( n \) objects, without replacement from the population, and let \( X_i \) be the type of the \( i \)th object chosen. So our basic sequence of random variables is \( \bs X = (X_1, X_2, \ldots, X_n) \). The variables are identically distributed indicator variables with \( \P(X_i = 1) = r / N \) for \( i \in \{1, 2, \ldots, n\} \), but are dependent. Of course, the sample size \( n \) is a positive integer with \( n \le N \).</p>
+
+<p>The variable \( Y = \sum_{i=1}^n X_i \) is the number of type 1 objects in the sample. This variable has the <a href="../urn/Hypergeometric.html">hypergeometric distribution</a> with parameters \( N \), \( r \), and \( n \), and has probability density function \( h \) given by
+\[ h(y) = \frac{\binom{r}{y} \binom{N - r}{n - y}}{\binom{N}{n}} = \binom{n}{y} \frac{r^{(y)} (N - r)^{(n - y)}}{N^{(n)}}, \quad y \in \{\max\{0, N - n + r\}, \ldots, \min\{n, r\}\} \]
+(Recall the <dfn>falling power</dfn> notation \( x^{(k)} = x (x - 1) \cdots (x - k + 1) \)).</p>
+
+<div class="unit">
+	<p class="math">\( Y \) is sufficient for \( (N, r) \). Specifically, for \( y \in \{\max\{0, N - n + r\}, \ldots, \min\{n, r\}\} \), the conditional distribution of \( \bs X \) given \( Y = y \) is uniform on the set of points
+	\[ D_y = \left\{(x_1, x_2, \ldots, x_n) \in \{0, 1\}^n: x_1 + x_2 + \cdots + x_n = y\right\} \]</p>
+	<details>
+		<summary>Details:</summary>
+		<p>By a simple application of the multiplication rule of combinatorics, the PDF \( f \) of \( \bs X \) is given by
+		\[ f(\bs x) = \frac{r^{(y)} (N - r)^{(n - y)}}{N^{(n)}}, \quad \bs x = (x_1, x_2, \ldots, x_n) \in \{0, 1\}^n \]
+		where \( y = \sum_{i=1}^n x_i \). If \( y \in \{\max\{0, N - n + r\}, \ldots, \min\{n, r\}\} \), the conditional distribution of \( \bs X \) given \( Y = y \) is concentrated on \( D_y \) and
+		\[ \P(\bs X = \bs x \mid Y = y) = \frac{\P(\bs X = \bs x)}{\P(Y = y)} = \frac{r^{(y)} (N - r)^{(n-y)}/N^{(n)}}{\binom{n}{y} r^{(y)} (N - r)^{(n - y)} / N^{(n)}} = \frac{1}{\binom{n}{y}}, \quad \bs x \in D_y  \]
+		Of course, \( \binom{n}{y} \) is the cardinality of \( D_y \).</p>
+	</details>
+</div>
+
+<p>There are clearly strong similarities between the hypergeometric model and the Bernoulli trials model above. Indeed if the sampling were <em>with</em> replacement, the Bernoulli trials model with \( p = r / N \) would apply rather than the hypergeometric model. It's also interesting to note that we have a single real-valued statistic that is sufficient for two real-valued parameters.</p>
+
+<p>Once again, the sample mean \( M = Y / n \) is equivalent to \( Y \) and hence is also sufficient for \( (N, r) \). Recall that the method of moments estimator of \( r \) with \( N \) known is \( N M \) and the method of moment estimator of \( N \) with \( r \) known is \( r / M \). The estimator of \( r \) is the one that is used in the capture-recapture experiment.</p>
+
+<h4>Exponential Families</h4>
+
+<p>Suppose now that our data vector \(\bs X\) takes values in a set \(S\), and that the distribution of \(\bs X\) depends on a parameter vector \(\bs{\theta}\) taking values in a parameter space \(\Theta\). The distribution of \(\bs X\) is a \(k\)-parameter <a href="../special/GeneralExponential.html">exponential family</a> if \(S\) does not depend on \(\bs{\theta}\) and if the probability density function of \(\bs X\) can be written as
+\[ f_\bs{\theta}(\bs x) = \alpha(\bs{\theta}) r(\bs x) \exp\left(\sum_{i=1}^k \beta_i(\bs{\theta}) u_i(\bs x) \right); \quad \bs x \in S, \; \bs{\theta} \in \Theta \]
+where \(\alpha\) and \(\left(\beta_1, \beta_2, \ldots, \beta_k\right)\) are real-valued functions on \(\Theta\), and where \(r\) and \(\left(u_1, u_2, \ldots, u_k\right)\) are real-valued functions on \(S\). Moreover, \(k\) is assumed to be the smallest such integer. The parameter vector \(\bs{\beta} = \left(\beta_1(\bs{\theta}), \beta_2(\bs{\theta}), \ldots, \beta_k(\bs{\theta})\right)\) is sometimes called the <dfn>natural parameter</dfn> of the distribution, and the random vector \(\bs U = \left(u_1(\bs X), u_2(\bs X), \ldots, u_k(\bs X)\right)\) is sometimes called the <dfn>natural statistic</dfn> of the distribution. Although the definition may look intimidating, exponential families are useful because they have many nice mathematical properties, and because many special parametric families are exponential families. In particular, the sampling distributions from the Bernoulli in <a href="#ber" class="ref"></a>, Poisson in <a href="#poi" class="ref"></a>, gamma in <a href="#gam" class="ref"></a>, normal in <a href="#nor" class="ref"></a>, beta in <a href="#bet" class="ref"></a>, and Pareto in <a href="#ber" class="ref"></a> considered above are exponential families.</p>
+
+<div class="unit">
+	<p class="math">\(\bs U\) is minimally sufficient for \(\bs{\theta}\).</p>
+	<details>
+		<summary>Details:</summary>
+		<p>That \( U \) is sufficient for \( \theta \) follows immediately from the factorization theorem <a href="#fac" class="ref"></a>. That \( U \) is minimally sufficient follows since \( k \) is the smallest integer in the exponential formulation.</p>
+	</details>
+</div>
+
+<p>It turns out that \(\bs U\) is complete for \(\bs{\theta}\) as well, although the proof is more difficult. </p>
+
+<footer>
+	<ol class="map">
+		<li class="parent"><a href="../index.html">Random</a></li>
+		<li class="parent"><a href="index.html">6. Point Estimation</a></li>
+		<li class="child"><a href="Estimators.html" title="Estimators">1</a></li>
+		<li class="child"><a href="Moments.html" title="The Method of Moments">2</a></li>
+		<li class="child"><a href="Likelihood.html" title="Maximum Likelihood">3</a></li>
+		<li class="child"><a href="Bayes.html" title="Bayes' Estimators">4</a></li>
+		<li class="child"><a href="Unbiased.html" title="Best Unbiased Estimators">5</a></li>
+		<li class="current">6</li>
+		<li class="details"><button type="button" title="Expand Details" onclick="expandDetails(true);"><img src="../icons/Plus.svg" alt="Expand"></button></li>
+		<li class="details"><button type="button" title="Contract Details" onclick="expandDetails(false);"><img src="../icons/Minus.svg" alt="Contract"></button></li>
+	</ol>
+	<ul class="map">
+		<li class="sister"><a href="JavaScript:openAncillary('../apps/index.html')" class="ancillary">Apps</a></li>
+		<li class="sister"><a href="JavaScript:openAncillary('../data/index.html')" class="ancillary">Data Sets</a></li>
+		<li class="child"><a href="JavaScript:openAncillary('../biographies/index.html')" class="ancillary"> Biographies</a></li>
+	</ul>
+</footer>
+
+<script>getReferences();</script>
+
+</body>
+</html>

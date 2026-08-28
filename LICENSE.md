@@ -17,6 +17,21 @@ Mathematical Statistics*, https://online.stat.psu.edu/stat415/. Edisi ini
 merupakan terjemahan dan rekonstruksi tidak resmi. Perubahan dicatat di
 repositori. Tidak ada dukungan atau pengesahan oleh Penn State yang tersirat.
 
+## Donor kelengkapan Random
+
+Komponen tepat satu halaman di `components/random-completeness/` mengadaptasi
+Kyle Siegrist, *Random*, “Sufficient, Complete, and Ancillary Statistics”:
+
+https://www.randomservices.org/random/point/Sufficient.html
+
+Saksi resmi tidak konsisten. Laman utama *Random* menyatakan dan menautkan CC
+BY 2.0, sedangkan `Credits.html` memberi pemberitahuan substantif yang sama
+tetapi menautkan CC BY 1.0. Edisi ini mempertahankan kedua saksi, atribusi
+kepada Kyle Siegrist dan *Random*, tautan sumber, pemberitahuan perubahan, dan
+non-pengesahan. Komponen itu tidak direlisensi sebagai konten Penn State atau
+sebagai satu karya CC BY-SA. Rincian ada di
+`components/random-completeness/LICENSE_AND_ATTRIBUTION.md`.
+
 ## MathJax
 
 MathJax 3.1.2 berada di bawah **Apache License 2.0**. Teks lisensi persisnya
@@ -33,4 +48,5 @@ Attribution–ShareAlike 4.0 International (CC BY-SA 4.0)**:
 https://creativecommons.org/licenses/by-sa/4.0/
 
 Ketentuan ini tidak mengubah atau menggantikan CC BY-NC 4.0 pada konten Penn
-State maupun Apache-2.0 pada MathJax. Gunakan setiap komponen sesuai lisensinya.
+State, kedua saksi CC BY pada donor *Random*, maupun Apache-2.0 pada MathJax.
+Gunakan setiap komponen sesuai lisensinya.

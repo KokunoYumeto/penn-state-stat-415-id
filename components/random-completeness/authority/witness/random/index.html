@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<title>Random: Probability, Mathematical Statistics, Stochastic Processes</title>
+	<meta name="author" content="Kyle Siegrist">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="keywords" content="probability, statistics, stochastic process, random process, mathematics education, foundations, probability spaces, distributions, expected value, special distributions, random samples, point estimation, set estimation, hypothesis testing, geometric models, Bernoulli trials, finite sampling models, games of chance, Poisson process, renewal processes, Markov processes, martingales, Brownian motion, app, data set, biographical sketch, art">
+	<link rel="icon" href="icons/Icon.svg" type="image/svg">
+	<link rel="stylesheet" type="text/css" href="Screen.css" media="screen">
+	<script src="Basic.js"></script>
+	<script async src="https://www.googletagmanager.com/gtag/js?id=UA-65822159-1"></script>
+	<style>
+		h2 {
+			background: white;
+			color: black;
+			font-style: italic;
+			text-align: center;
+			border: none;
+			padding-top: 0px;
+		}
+		summary { font-style: normal; }
+	</style>
+</head>
+
+<body>
+
+<header>
+	<h1>Random</h1>
+	<h2>Probability, Mathematical Statistics, Stochastic Processes</h2>
+</header>
+
+<div class="contents">
+	<ol class="map">
+		<li class="details"><button type="button" title="Expand Contents" onclick="expandDetails(true);"><img src="icons/Plus.svg" alt="Expand"></button></li>
+		<li class="details"><button type="button" title="Contract Contents" onclick="expandDetails(false);"><img src="icons/Minus.svg" alt="Contract"></button></li>
+	</ol>
+	<h3>Contents</h3>
+	<h4>Preface</h4>
+	<ul class="information">
+		<li><a href="Introduction.html">Introduction</a></li>
+		<li><a href="Credits.html">Credits</a></li>
+		<li><a href="Resources.html">External Resources</a></li>
+	</ul>
+	<h4>Expository Chapters</h4>
+	<ol start="0">
+		<li>
+			<details>
+				<summary><a href="foundations/index.html">Foundations</a></summary>
+				<ol>
+					<li><a href="foundations/Sets.html">Sets</a></li>
+					<li><a href="foundations/Functions.html">Functions</a></li>
+					<li><a href="foundations/Relations.html">Relations</a></li>
+					<li><a href="foundations/Order.html">Partial Orders</a></li>
+					<li><a href="foundations/Equivalence.html">Equivalence Relations</a></li>
+					<li><a href="foundations/Cardinality.html">Cardinality</a></li>
+					<li><a href="foundations/Counting.html">Counting Measure</a></li>
+					<li><a href="foundations/Structures.html">Combinatorial Structures</a></li>
+					<li><a href="foundations/Topology.html">Topological Spaces</a></li>
+					<li><a href="foundations/Metric.html">Metric Spaces</a></li>
+					<li><a href="foundations/Measurable.html">Measurable Spaces</a></li>
+					<li><a href="foundations/Measure.html">Measure Spaces</a></li>
+					<li><a href="foundations/Other.html">Special Set Structures</a></li>
+					<li><a href="foundations/Existence.html">Existence and Uniqueness</a></li>
+					<li><a href="foundations/Integral.html">The Integral With Respect to a Measure</a></li>
+					<li><a href="foundations/Properties.html">Properties of the Integral</a></li>
+					<li><a href="foundations/General.html">General Measures</a></li>
+					<li><a href="foundations/Density.html">Absolute Continuity and Density Functions</a></li>
+					<li><a href="foundations/Spaces.html">Function Spaces</a></li>
+				</ol>
+			</details>
+		</li>
+		<li>
+			<details>
+				<summary><a href="prob/index.html"> Probability Spaces</a></summary>
+				<ol>
+					<li><a href="prob/Experiments.html">Random Experiments</a></li>
+					<li><a href="prob/Events.html">Events and Random Variables</a></li>
+					<li><a href="prob/Probability.html">Probability Measures</a></li>
+					<li><a href="prob/Conditional.html">Conditional Probability</a></li>
+					<li><a href="prob/Independence.html">Independence</a></li>
+					<li><a href="prob/Convergence.html">Convergence</a></li>
+					<li><a href="prob/Probability2.html">Probability Spaces Revisited</a></li>
+					<li><a href="prob/Processes.html">Stochastic Processes</a></li>
+					<li><a href="prob/Stop.html">Filtrations and Stopping Times</a></li>
+				</ol>
+			</details>
+		</li>
+		<li>
+			<details>
+				<summary><a href="dist/index.html">Distributions</a></summary>
+				<ol>
+					<li><a href="dist/Introduction.html">Introduction</a></li>
+					<li><a href="dist/Discrete.html">Discrete Distributions</a></li>
+					<li><a href="dist/Continuous.html">Continuous Distributions</a></li>
+					<li><a href="dist/Mixed.html">Mixed Distributions</a></li>
+					<li><a href="dist/Joint.html">Joint Distributions</a></li>
+					<li><a href="dist/Conditional.html">Conditional Distributions</a></li>
+					<li><a href="dist/CDF.html">Distribution and Quantile Functions</a></li>
+					<li><a href="dist/Transformations.html">Transformations of Random Variables</a></li>
+					<li><a href="dist/Convergence.html">Convergence in Distribution</a></li>
+				</ol>
+			</details>
+		</li>
+		<li>
+			<details>
+				<summary><a href="expect/index.html">Expected Value</a></summary>
+				<ol>
+					<li><a href="expect/Properties.html">Definitions and Basic Properties</a></li>
+					<li><a href="expect/Properties2.html">Additional Properties</a></li>
+					<li><a href="expect/Variance.html">Variance</a></li>
+					<li><a href="expect/Skew.html">Skewness and Kurtosis</a></li>
+					<li><a href="expect/Covariance.html">Covariance and Correlation</a></li>
+					<li><a href="expect/Generating.html">Generating Functions</a></li>
+					<li><a href="expect/Conditional.html">Conditional Expected Value</a></li>
+					<li><a href="expect/Matrices.html">Expected Value and Covariance Matrices</a></li>
+					<li><a href="expect/Integral.html">Expected Value as an Integral</a></li>
+					<li><a href="expect/Conditional2.html">Conditional Expected Value Revisited</a></li>
+					<li><a href="expect/Spaces.html">Vector Spaces of Random Variables</a></li>
+					<li><a href="expect/Uniform.html">Uniformly Integrable Variables</a></li>
+					<li><a href="expect/Kernels.html">Kernels and Operators</a></li>
+				</ol>
+			</details>
+		</li>
+		<li>
+			<details>
+				<summary><a href="special/index.html">Special Distributions</a></summary>
+				<ul>
+					<li><a href="special/LocationScale.html">Location-Scale Families</a></li>
+					<li><a href="special/GeneralExponential.html">General Exponential Families</a></li>
+					<li><a href="special/Stable.html">Stable Distributions</a></li>
+					<li><a href="special/Divisible.html">Infinitely Divisible Distributions</a></li>
+					<li><a href="special/PowerSeries.html">Power Series Distributions</a></li>
+					<li><a href="special/Normal.html">The Normal Distribution</a></li>
+					<li><a href="special/MultiNormal.html">The Multivariate Normal Distribution</a></li>
+					<li><a href="special/Gamma.html">The Gamma Distribution</a></li>
+					<li><a href="special/ChiSquare.html">Chi-Square and Related Distribution</a></li>
+					<li><a href="special/Student.html">The Student <var>t</var> Distribution</a></li>
+					<li><a href="special/Fisher.html">The <var>F</var> Distribution</a></li>
+					<li><a href="special/LogNormal.html">The Lognormal Distribution</a></li>
+					<li><a href="special/FoldedNormal.html">The Folded Normal Distribution</a></li>
+					<li><a href="special/Rayleigh.html">The Rayleigh Distribution</a></li>
+					<li><a href="special/Maxwell.html">The Maxwell Distribution</a></li>
+					<li><a href="special/Levy.html">The L&eacute;vy Distribution</a></li>
+					<li><a href="special/Beta.html">The Beta Distribution</a></li>
+					<li><a href="special/BetaPrime.html">The Beta Prime Distribution</a></li>
+					<li><a href="special/Arcsine.html">The Arcsine Distribution</a></li>
+					<li><a href="special/Uniform.html">General Uniform Distributions</a></li>
+					<li><a href="special/UniformContinuous.html">The Uniform Distribution on an Interval</a></li>
+					<li><a href="special/UniformDiscrete.html">Discrete Uniform Distributions</a></li>
+					<li><a href="special/Semicircle.html">The Semicircle Distribution</a></li>
+					<li><a href="special/Triangle.html">The Triangle Distribution</a></li>
+					<li><a href="special/IrwinHall.html">The Irwin-Hall Distribution</a></li>
+					<li><a href="special/UPower.html">The U-Power Distribution</a></li>
+					<li><a href="special/Sine.html">Sine Distributions</a></li>
+					<li><a href="special/Laplace.html">The Laplace Distribution</a></li>
+					<li><a href="special/Logistic.html">The Logistic Distribution</a></li>
+					<li><a href="special/ExtremeValue.html">The Extreme Value Distribution</a></li>
+					<li><a href="special/HyperbolicSecant.html">The Hyperbolic Secant Distribution</a></li>
+					<li><a href="special/Cauchy.html">The Cauchy Distribution</a></li>
+					<li><a href="special/ExponentialLogarithmic.html">The Exponential-Logarithmic Distribution</a></li>
+					<li><a href="special/Gompertz.html">The Gompertz Distribution</a></li>
+					<li><a href="special/LogLogistic.html">The Log-Logistic Distribution</a></li>
+					<li><a href="special/Pareto.html">The Pareto Distribution</a></li>
+					<li><a href="special/Wald.html">The Wald Distribution</a></li>
+					<li><a href="special/Weibull.html">The Weibull Distribution</a></li>
+					<li><a href="special/Benford.html">Benford's Law</a></li>
+					<li><a href="special/Zeta.html">The Zeta Distribution</a></li>
+					<li><a href="special/Logarithmic.html">The Logarithmic Series Distribution</a></li>
+				</ul>
+			</details>
+		</li>
+		<li>
+			<details>
+				<summary><a href="sample/index.html">Random Samples</a></summary>
+				<ol>
+					<li><a href="sample/Introduction.html">Introduction</a></li>
+					<li><a href="sample/Mean.html">The Sample Mean</a></li>
+					<li><a href="sample/LLN.html">The Law of Large Numbers</a></li>
+					<li><a href="sample/CLT.html">The Central Limit Theorem</a></li>
+					<li><a href="sample/Variance.html">The Sample Variance</a></li>
+					<li><a href="sample/OrderStatistics.html">Order Statistics</a></li>
+					<li><a href="sample/Covariance.html">Sample Correlation and Regression</a></li>
+					<li><a href="sample/Normal.html">Special Properties of Normal Samples</a></li>
+				</ol>
+			</details>
+		</li>
+		<li>
+			<details>
+				<summary><a href="point/index.html">Point Estimation</a></summary>
+				<ol>
+					<li><a href="point/Estimators.html">Estimators</a></li>
+					<li><a href="point/Moments.html">The Method of Moments</a></li>
+					<li><a href="point/Likelihood.html">Maximum Likelihood</a></li>
+					<li><a href="point/Bayes.html">Bayesian Estimation</a></li>
+					<li><a href="point/Unbiased.html">Best Unbiased Estimators</a></li>
+					<li><a href="point/Sufficient.html">Sufficient, Complete and Ancillary Statistics</a></li>
+				</ol>
+			</details>
+		</li>
+		<li>
+			<details>
+				<summary><a href="interval/index.html">Set Estimation</a></summary>
+				<ol>
+					<li><a href="interval/Introduction.html">Introduction</a></li>
+					<li><a href="interval/Normal.html">Estimation the Normal Model</a></li>
+					<li><a href="interval/Bernoulli.html">Estimation in the Bernoulli Model</a></li>
+					<li><a href="interval/BivariateNormal.html">Estimation in the Two-Sample Normal Model</a></li>
+					<li><a href="interval/Bayes.html">Bayesian Set Estimation</a></li>
+				</ol>
+			</details>
+		</li>
+		<li>
+			<details>
+				<summary><a href="hypothesis/index.html">Hypothesis Testing</a></summary>
+				<ol>
+					<li><a href="hypothesis/Introduction.html">Introduction</a></li>
+					<li><a href="hypothesis/Normal.html">Tests in the Normal Model</a></li>
+					<li><a href="hypothesis/Bernoulli.html">Tests in the Bernoulli Model</a></li>
+					<li><a href="hypothesis/BivariateNormal.html">Tests in the Two-Sample Normal Model</a></li>
+					<li><a href="hypothesis/Likelihood.html">Likelihood Ratio Tests</a></li>
+					<li><a href="hypothesis/ChiSquare.html">Chi-Square Tests</a></li>
+				</ol>
+			</details>
+		</li>
+		<li>
+			<details>
+				<summary><a href="buffon/index.html">Geometric Models</a></summary>
+				<ol>
+					<li><a href="buffon/Buffon.html">Buffon's Problems</a></li>
+					<li><a href="buffon/Bertrand.html">Bertrand's Paradox</a></li>
+					<li><a href="buffon/Triangles.html">Random Triangles</a></li>
+				</ol>
+			</details>
+		</li>
+		<li>
+			<details>
+				<summary><a href="bernoulli/index.html">Bernoulli Trials</a></summary>
+				<ol>
+					<li><a href="bernoulli/Introduction.html">Introduction</a></li>
+					<li><a href="bernoulli/Binomial.html">The Binomial Distribution</a></li>
+					<li><a href="bernoulli/Geometric.html">The Geometric Distribution</a></li>
+					<li><a href="bernoulli/NegativeBinomial.html">The Negative Binomial Distribution</a></li>
+					<li><a href="bernoulli/Multinomial.html">The Multinomial Distribution</a></li>
+					<li><a href="bernoulli/Walk.html">The Simple Random Walk</a></li>
+					<li><a href="bernoulli/BetaBernoulli.html">The Beta-Bernoulli Process</a></li>
+				</ol>
+			</details>
+		</li>
+		<li>
+			<details>
+				<summary><a href="urn/index.html">Finite Sampling Models</a></summary>
+				<ol>
+					<li><a href="urn/Introduction.html">Introduction</a></li>
+					<li><a href="urn/Hypergeometric.html">The Hypergeometric Distribution</a></li>
+					<li><a href="urn/MultiHypergeometric.html">The Multivariate Hypergeometric	Distribution</a></li>
+					<li><a href="urn/OrderStatistics.html">Order Statistics</a></li>
+					<li><a href="urn/Matching.html">The Matching Problem</a></li>
+					<li><a href="urn/Birthday.html">The Birthday Problem</a></li>
+					<li><a href="urn/Coupon.html">The Coupon Collector Problem</a></li>
+					<li><a href="urn/Polya.html">P&oacute;lya's Urn Process</a></li>
+					<li><a href="urn/Secretary.html">The Secretary Problem</a></li>
+				</ol>
+			</details>
+		</li>
+		<li>
+			<details>
+				<summary><a href="games/index.html">Games of Chance</a></summary>
+				<ol>
+					<li><a href="games/Introduction.html">Introduction</a></li>
+					<li><a href="games/Poker.html">Poker</a></li>
+					<li><a href="games/Bridge.html">Bridge</a></li>
+					<li><a href="games/PokerDice.html">Simple Dice Games</a></li>
+					<li><a href="games/Craps.html">Craps</a></li>
+					<li><a href="games/Roulette.html">Roulette</a></li>
+					<li><a href="games/MontyHall.html">The Monty Hall Problem</a></li>
+					<li><a href="games/Lotteries.html">Lotteries</a></li>
+					<li><a href="games/RedBlack.html">The Red and Black Game</a></li>
+					<li><a href="games/Timid.html">Timid Play</a></li>
+					<li><a href="games/Bold.html">Bold Play</a></li>
+					<li><a href="games/Optimal.html">Optimal Strategies</a></li>
+				</ol>
+			</details>
+		</li>
+		<li>
+			<details>
+				<summary><a href="poisson/index.html">The Poisson Process</a></summary>
+				<ol>
+					<li><a href="poisson/Introduction.html">Introduction</a></li>
+					<li><a href="poisson/Exponential.html">The Exponential Distribution</a></li>
+					<li><a href="poisson/Gamma.html">The Gamma Distribution</a></li>
+					<li><a href="poisson/Poisson.html">The Poisson Distribution</a></li>
+					<li><a href="poisson/Splitting.html">Thinning and Superpositon</a></li>
+					<li><a href="poisson/Nonhomogeneous.html">Non-homogeneous Poisson Processes</a></li>
+					<li><a href="poisson/Compound.html">Compound Poisson Processes</a></li>
+					<li><a href="poisson/General.html">Poisson Processes on General Spaces</a></li>
+				</ol>
+			</details>
+		</li>
+		<li>
+			<details>
+				<summary><a href="renewal/index.html">Renewal Processes</a></summary>
+				<ol>
+					<li><a href="renewal/Introduction.html">Introduction</a></li>
+					<li><a href="renewal/Equations.html">Renewal Equations</a></li>
+					<li><a href="renewal/LimitTheorems.html">Renewal Limit Theorems</a></li>
+					<li><a href="renewal/Delayed.html">Delayed Renewal Processes</a></li>
+					<li><a href="renewal/Alternating.html">Alternating Renewal Processes</a></li>
+					<li><a href="renewal/Reward.html">Renewal Reward Processes</a></li>
+				</ol>
+			</details>
+		</li>
+		<li>
+			<details>
+				<summary><a href="markov/index.html">Markov Processes</a></summary>
+				<ol>
+					<li><a href="markov/General.html">Introduction</a></li>
+					<li><a href="markov/Potentials.html">Potentials and Generators</a></li>
+					<li><a href="markov/Discrete.html">Introduction to Discrete Time Chains</a></li>
+					<li><a href="markov/Recurrence.html">Recurrence and Transience</a></li>
+					<li><a href="markov/Periodicity.html">Periodicity</a></li>
+					<li><a href="markov/Limiting.html">Stationary and Limiting Distributions</a></li>
+					<li><a href="markov/TimeReversal.html">Time Reversal in Discrete Time Chains</a></li>
+					<li><a href="markov/Ehrenfest.html">The Ehrenfest Chains</a></li>
+					<li><a href="markov/BernoulliLaplace.html">The Bernoulli-Laplace Chain</a></li>
+					<li><a href="markov/Reliability.html">Reliability Chains</a></li>
+					<li><a href="markov/Branching.html">Discrete Time Branching Chains</a></li>
+					<li><a href="markov/Queuing.html">Queuing Chains</a></li>
+					<li><a href="markov/BirthDeath.html">Discrete Time Birth Death Chains</a></li>
+					<li><a href="markov/WalkGraph.html">Random Walks on Graphs</a></li>
+					<li><a href="markov/Continuous.html">Introduction to Continuous Time Chains</a></li>
+					<li><a href="markov/Transition.html">Transition Matrices and Generators</a></li>
+					<li><a href="markov/Potentials2.html">Potential Matrices</a></li>
+					<li><a href="markov/Limiting2.html">Stationary and Limiting Distributions</a></li>
+					<li><a href="markov/TimeReversal2.html">Time Reversal in Continuous Time Chains</a></li>
+					<li><a href="markov/Poisson.html">Chains Subordinate to the Poisson Process</a></li>
+					<li><a href="markov/BirthDeath2.html">Continuous Time Birth-Death Chains</a></li>
+					<li><a href="markov/Queuing2.html">Queuing Chains</a></li>
+					<li><a href="markov/Branching2.html">Continuous Time Branching Chains</a></li>
+				</ol>
+			</details>
+		</li>
+		<li>
+			<details>
+				<summary><a href="martingales/index.html">Martingales</a></summary>
+				<ol>
+					<li><a href="martingales/Introduction.html">Introduction</a></li>
+					<li><a href="martingales/Properties.html">Properties and Constructions</a></li>
+					<li><a href="martingales/Stop.html">Stopping Times</a></li>
+					<li><a href="martingales/Inequalities.html">Inequalities</a></li>
+					<li><a href="martingales/Convergence.html">Convergence</a></li>
+					<li><a href="martingales/Backwards.html">Backwards Martingales</a></li>
+				</ol>
+			</details>
+		</li>
+		<li>
+			<details>
+				<summary><a href="brown/index.html">Brownian Motion</a></summary>
+				<ol>
+					<li><a href="brown/Standard.html">Standard Brownian Motion</a></li>
+					<li><a href="brown/Drift.html">Brownian Motion with Drift and Scaling</a></li>
+					<li><a href="brown/Bridge.html">The Brownian Bridge</a></li>
+					<li><a href="brown/Geometric.html">Geometric Brownian Motion</a></li>
+				</ol>
+			</details>
+		</li>
+	</ol>
+	<h4>Ancillary Materials</h4>
+	<ul class="ancillary">
+		<li><a href="JavaScript:openAncillary('apps/index.html')" class="ancillary">Apps</a></li>
+		<li><a href="JavaScript:openAncillary('data/index.html')" class="ancillary">Data Sets</a></li>
+		<li><a href="JavaScript:openAncillary('biographies/index.html')" class="ancillary">Biographical Sketches</a></li>
+		<li><a href="JavaScript:openAncillary('art/index.html')" class="ancillary">Art</a></li>
+	</ul>
+</div>
+
+<div class="description">
+	<h3>Welcome!</h3>
+
+	<p><em>Random</em> is a website devoted to probability, mathematical statistics, and stochastic processes, and is intended for teachers and students of these subjects. The site consists of an integrated set of components that includes expository text, interactive web apps, data sets, and biographical sketches. Please read the <a href="Introduction.html">introduction</a> for more information about the content, structure, mathematical prerequisites, technologies, and organization of the project.</p>
+
+	<h4>Technologies and Browser Requirements</h4>
+
+	<p>This site uses a number of open and standard technologies, including HTML5, CSS, and JavaScript. To use this project properly, you will need a modern browser that supports these technologies. Display of mathematical notation is handled by the open source <a href="http://www.mathjax.org" class="external" target="external">MathJax project</a>.</p>
+
+	<h4>Support and Partnerships</h4>
+
+	<p>This project was partially supported by a two grants from the Course and Curriculum Development Program of the <a href="http://www.nsf.gov" target="external" class="external" >National Science Foundation</a> (award numbers DUE-9652870 and DUE-0089377). This project was also partially supported by the <a href="http://www.uah.edu/" target="external" class="external" >University of Alabama in Huntsville</a>. Please see the <a href="Credits.html">credits</a> for additional information. </p>
+
+	<h4>Rights and Permissions</h4>
+
+	<p>This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/2.0/" class="external" target="external">Creative Commons License</a>. Basically, you are free to copy, distribute, and display this work, to make derivative works, and to make commercial use of the work. However you must give proper attribution and provide a link to the home site: <a href="http://www.randomservices.org/random/">http://www.randomservices.org/random/</a>. Click on the Creative Commons link above for more information.</p>
+
+	<h4>Author</h4>
+
+	<address>
+		Kyle Siegrist<br>
+		Department of Mathematical Sciences<br>
+		University of Alabama in Huntsville<br>
+		<a href="mailto:kyle@randomservices.org" target="email">kyle@randomservices.org</a>
+	</address>
+
+	<h4>Quote</h4>
+
+	<blockquote>
+		<q>Mathematics ... is indispensable as an intellectual technique. In many subjects, to think at all is to think like a mathematician.</q>&mdash;<a href="JavaScript:openAncillary('biographies/Hutchins.html')" class="ancillary">Robert M. Hutchins</a>, <cite>The Learning Society</cite>
+	</blockquote>
+</div>
+
+</body>
+</html>

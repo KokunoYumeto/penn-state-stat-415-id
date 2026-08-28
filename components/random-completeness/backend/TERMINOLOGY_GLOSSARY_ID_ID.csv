@@ -1,0 +1,43 @@
+term_id,en_term,id_id_canonical,accepted_aliases,usage_note,evidence_status
+random_variable,random variable,variabel acak,peubah acak,"Gunakan konsisten dalam edisi Random; alias lazim tetapi tidak memerlukan churn.",retained
+probability,probability,probabilitas,peluang,"Gunakan konsisten dalam edisi; peluang tetap wajar dalam frasa yang sudah mapan.",retained
+probability_density_function,probability density function,fungsi kepadatan probabilitas,"fungsi densitas probabilitas|fungsi kepekatan peluang","Kanonis untuk fungsi kepadatan diskret atau kontinu dalam terminologi Random; jangan campur dengan massa jenis fisik.",normalized-2026-08-22
+probability_mass_function,probability mass function,fungsi massa probabilitas,fungsi peluang,"Pertahankan sebagai istilah khusus PMF ketika sumber membedakannya dari density.",retained
+empirical_density,empirical density,kepadatan empiris,densitas empiris,"Gunakan pada grafik atau simulasi empiris.",normalized-2026-08-22
+estimator,estimator,penduga,"penaksir|estimator","Statistik acak sebelum data diamati.",normalized-2026-08-22
+estimate,estimate,dugaan,taksiran,"Nilai penduga setelah data diamati; taksiran boleh dipakai untuk nilai prediksi atau konteks nonformal.",retained-and-clarified
+estimation,estimation,pendugaan,estimasi,"Proses atau metode untuk membangun penduga; estimasi diterima sebagai alias bidang.",retained-and-clarified
+unbiased,unbiased,tak bias,takbias,"Selalu dua kata dalam prosa pembaca.",normalized-2026-08-22
+unbiasedness,unbiasedness,ketakbiasan,ketidakbiasan,"Sifat sebuah penduga; kedua bentuk ditemukan dalam sumber institusional.",retained
+sampling_distribution,sampling distribution,distribusi sampling,"distribusi pensampelan|sebaran penarikan sampel","Khusus distribusi suatu statistik/penduga di bawah pengambilan sampel berulang.",field-convention-2026-08-22
+source_distribution,underlying distribution,distribusi asal sampel,"distribusi populasi yang mendasari|distribusi yang disampel","Gunakan ketika yang dimaksud adalah distribusi populasi/data tempat sampel ditarik, bukan distribusi suatu statistik.",clarified-2026-08-22
+likelihood_function,likelihood function,fungsi kemungkinan (likelihood),fungsi likelihood,"Berikan padanan Inggris pada definisi pertama; sesudahnya fungsi kemungkinan boleh berdiri sendiri.",retained-after-review
+maximum_likelihood,maximum likelihood,kemungkinan maksimum,likelihood maksimum,"Pertahankan keluarga istilah yang sama dengan fungsi kemungkinan.",retained-after-review
+maximum_likelihood_estimator,maximum likelihood estimator,penduga kemungkinan maksimum,"estimator likelihood maksimum|penduga likelihood maksimum","Penduga yang memaksimumkan fungsi kemungkinan pada ruang parameter.",retained-after-review
+log_likelihood,log-likelihood,fungsi log-kemungkinan,log-likelihood,"Gunakan konsisten dengan fungsi kemungkinan.",retained-after-review
+confidence_interval,confidence interval,interval kepercayaan,"selang kepercayaan|interval keyakinan","Nama objek interval; bedakan dari proses pendugaan interval.",normalized-2026-08-22
+interval_estimation,interval estimation,pendugaan interval,estimasi interval,"Nama proses atau topik konstruksi interval.",clarified-2026-08-22
+set_estimation,set estimation,pendugaan himpunan,estimasi himpunan,"Nama proses umum yang menghasilkan himpunan bagian ruang parameter; pendugaan interval adalah kasus parameter bernilai real.",clarified-2026-08-23
+confidence_set,confidence set,himpunan kepercayaan,set kepercayaan,"Gunakan himpunan kepercayaan untuk statistik bernilai himpunan C(X); jangan samakan dengan realisasi C(x).",clarified-2026-08-23
+confidence_level,confidence level,tingkat kepercayaan,taraf kepercayaan,"Gunakan tingkat kepercayaan untuk batas bawah peluang cakupan yang seragam atas ruang parameter.",clarified-2026-08-23
+pivot_variable,pivot variable,variabel pivot,peubah pivot,"Variabel yang dibentuk dari data dan parameter tetapi distribusinya bebas dari parameter tak diketahui.",clarified-2026-08-23
+confidence_lower_bound,confidence lower bound,batas bawah kepercayaan,batas kepercayaan bawah,"Batas acak satu sisi yang menghasilkan himpunan parameter di atas batas tersebut.",clarified-2026-08-23
+confidence_upper_bound,confidence upper bound,batas atas kepercayaan,batas kepercayaan atas,"Batas acak satu sisi yang menghasilkan himpunan parameter di bawah batas tersebut.",clarified-2026-08-23
+equal_tailed,equal-tailed,berekor sama,ekor sama,"Gunakan untuk interval yang membagi alpha sama besar di kedua ekor distribusi pivot.",clarified-2026-08-23
+robustness,robustness,robustitas,"ketahanan terhadap pelanggaran asumsi|kekekaran","Pada penggunaan substantif pertama tulis robust (tahan terhadap pelanggaran asumsi); gunakan robustitas untuk nama sifat. Jangan menyiratkan jaminan tanpa syarat.",provisional-2026-08-23
+hypothesis_test,hypothesis test,uji hipotesis,pengujian hipotesis,"Uji hipotesis untuk objek/prosedur; pengujian hipotesis untuk proses atau topik.",retained-and-clarified
+sufficient_statistic,sufficient statistic,statistik cukup,statistik sufficient,"Gunakan cukup untuk konsep formal.",retained
+completeness,completeness,kelengkapan,kekompletan,"Sifat keluarga/statistik; jangan samakan dengan kelengkapan korpus.",retained
+ancillary_statistic,ancillary statistic,statistik ancillary,ancillary statistic,"Pinjaman Inggris dipertahankan secara eksplisit karena padanan Indonesia yang mapan belum dibuktikan; definisikan pada penggunaan substantif pertama.",provisional-2026-08-22
+prior_distribution,prior distribution,distribusi prior,prior,"Pertahankan sebagai istilah Bayes baku.",retained
+posterior_distribution,posterior distribution,distribusi posterior,posterior,"Pertahankan sebagai istilah Bayes baku.",retained
+bayesian_credible_set,Bayesian credible set,himpunan kredibel Bayes,himpunan kepercayaan Bayes,"Objek posterior-probability; jangan samakan dengan himpunan kepercayaan frequentis yang cakupannya diulang pada parameter tetap.",clarified-2026-08-23
+bayesian_credible_interval,Bayesian credible interval,interval kredibel Bayes,interval kepercayaan Bayes,"Interval posterior-probability; berekor sama tidak berarti simetris kecuali distribusi posterior simetris.",clarified-2026-08-23
+bayes_estimator,Bayes estimator,penduga Bayes,estimator Bayes,"Penduga sebelum data; gunakan dugaan Bayes untuk nilai sesudah data.",retained
+loss_function,loss function,fungsi kerugian,fungsi loss,"Kerugian titik demi titik; jangan samakan dengan risiko posterior.",retained
+posterior_risk,posterior risk,risiko posterior,kerugian posterior harapan,"Nilai harapan posterior dari fungsi kerugian.",retained
+mean_squared_error,mean squared error,galat kuadrat rata-rata,"kuadrat tengah galat|mean squared error","Pertahankan singkatan matematika MSE bila membantu keterlacakan.",retained
+expected_value,expected value,nilai harapan,ekspektasi,"Gunakan nilai harapan dalam prosa utama.",retained
+variance,variance,varians,ragam,"Gunakan varians dalam edisi Random; ragam adalah alias bidang.",retained
+standard_deviation,standard deviation,simpangan baku,deviasi standar,"Gunakan simpangan baku.",retained
+order_statistic,order statistic,statistik terurut,statistik urutan,"Gunakan istilah terurut untuk objek; judul bab yang sudah mapan dapat dipertahankan sampai audit judul global.",retained-and-clarified

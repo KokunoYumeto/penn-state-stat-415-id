@@ -13,3 +13,11 @@ build/** -text
 *.txt text eol=lf
 .gitignore text eol=lf
 .gitattributes text eol=lf
+
+# Preserve the imported donor authority, canonical target, backend subsets,
+# sibling provenance, and deterministic reader artifacts byte-for-byte.
+components/random-completeness/authority/** -text -whitespace
+components/random-completeness/source/** -text -whitespace
+components/random-completeness/backend/** -text -whitespace
+components/random-completeness/provenance/sibling/** -text -whitespace
+components/random-completeness/build/** -text -whitespace

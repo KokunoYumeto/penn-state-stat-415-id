@@ -291,7 +291,47 @@ and
 `f56ef5c4adc990bb08a394830df85a653c254ec106d2a67b60478e9137b7b8fc`.
 The public PDF and EPUB identities remain exactly those recorded above.
 
-The next executable action is to freeze and localize the distinct exact Random
-completeness donor without modifying the independent 29-page Random edition,
-then continue the original C140 companion. No browser process may be launched,
-and no upstream message has been sent.
+## Exact Random completeness donor — complete local boundary
+
+The selected one-page donor is now a separate component at
+`components/random-completeness/`; the independent 29-page Random repository
+was read but not modified. The official page remains 57,507 bytes at SHA-256
+`4d7402f2a960ea2b4232e57e4ee5992ac29801b9269f300f17f8e83074d5a0e4`.
+The canonical id-ID target is imported byte-for-byte at 60,895 bytes / SHA-256
+`255ac88f235727301ee341eef79b9578910be88b7e2e038d4dfecc0ed686513c`
+from public sibling commit
+`f2aab7b9a0578dd76624e183fc47e3c1faa664e8`; credential-free public readback
+matched both source and target identities.
+
+Live static HTTP revalidation matched the donor, landing and Credits rights
+witnesses, all six direct source assets, and the official MathJax 3.1.2
+`boldsymbol.js` dependency. The landing witness remains CC BY 2.0 while
+Credits links CC BY 1.0; both are frozen and disclosed. The 5,720-byte import
+receipt has SHA-256
+`f8965757775c4aa0f294aac1a7fe7bd04dece9b82f755bd63d1f39abdd52c214`.
+
+The canonical source/target preserve 436/444 elements, 804 delimited TeX
+spans, 39 instructional units, 26 derivation disclosures, and 51 canonical
+target IDs. The donor backend contains 325 exact stable entities, 474 outgoing
+relations, one complete translation-ledger row, and nineteen relevant adverse
+records. The derived standalone reader contains 18 files / 1,798,250 bytes.
+Its build and static-QA receipt SHA-256 values are respectively
+`455afd0c425260517857bc61e108d08b2abf0548dcb880095b3a2d95bdc3ac2d`
+and
+`5868ed14ecc03094f6fea848d927738f0fe459443c5a5c49afe2a2abbe93c83f`.
+All local HTML/CSS/runtime dependencies close, all external links are HTTPS,
+all fragments resolve, privacy scans are clear, and check-only replay passes.
+
+The deterministic Pages collection preserves all 106 Penn reader files /
+17,614,553 bytes byte-for-byte and mounts the 18 donor files without a
+collision. The resulting 124-file / 19,412,803-byte tree has manifest SHA-256
+`c7e31332d0401ad149185af3fc2ab2b39baf54a2b37f84dbc0f2720edd8241fa`;
+the Pages collection receipt SHA-256 is
+`17b60a65cfb181d170f3302fb5f527608e026fcdbcab39839bcc3aad119f329a`.
+No browser process was used.
+
+The next executable action is to commit and push this complete donor boundary,
+wait for the deterministic Pages workflow, anonymously verify every donor
+route/file and the unchanged Penn reader, persist the public receipt, then
+begin the original C140 rigor/simulation/mastery companion. No upstream message
+has been sent.

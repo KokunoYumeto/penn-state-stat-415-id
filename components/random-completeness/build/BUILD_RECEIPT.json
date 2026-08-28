@@ -1,0 +1,64 @@
+{
+  "authority": {
+    "freeze_manifest": {
+      "bytes": 2973,
+      "path": "authority/FREEZE_MANIFEST.csv",
+      "sha256": "5ffa3ff689b62ab17e70e67a7d500402fa899698df0b124e818da56a8ad257e6"
+    },
+    "import_receipt": {
+      "bytes": 5720,
+      "path": "IMPORT_RECEIPT.json",
+      "sha256": "f8965757775c4aa0f294aac1a7fe7bd04dece9b82f755bd63d1f39abdd52c214"
+    },
+    "source": {
+      "bytes": 57507,
+      "path": "authority/upstream/random/point/Sufficient.html",
+      "sha256": "4d7402f2a960ea2b4232e57e4ee5992ac29801b9269f300f17f8e83074d5a0e4",
+      "url": "https://www.randomservices.org/random/point/Sufficient.html"
+    },
+    "target": {
+      "bytes": 60895,
+      "path": "source/id-ID/random/point/Sufficient.html",
+      "sha256": "255ac88f235727301ee341eef79b9578910be88b7e2e038d4dfecc0ed686513c"
+    }
+  },
+  "backend": {
+    "entities": 325,
+    "relations": 474
+  },
+  "canonical_import_preserved": true,
+  "component_id": "O006-C140-RANDOM-COMPLETENESS",
+  "locale": "id-ID",
+  "offline": {
+    "analytics": false,
+    "browser_used": false,
+    "direct_local_dependencies_closed": true,
+    "dynamic_mathjax_boldsymbol_closed": true
+  },
+  "reader": {
+    "build_only_css_fallbacks": 7,
+    "bytes": 1798250,
+    "files": 18,
+    "manifest_bytes": 2171,
+    "manifest_path": "build/MANIFEST.csv",
+    "manifest_sha256": "f672755c5d7a36a13ff117d091ca95b777533e11ea0050cb60a0b7ecf7167159",
+    "path": "build/html-id"
+  },
+  "rights": {
+    "MathJax 3.1.2": "Apache-2.0",
+    "Random Credits witness": "CC BY 1.0",
+    "Random landing witness": "CC BY 2.0",
+    "aggregate_uniform_relicense": false,
+    "discrepancy_preserved": true
+  },
+  "schema": "o006.c140.random-completeness.build.v1",
+  "status": "built",
+  "transformation": {
+    "component_notice_id": "o006.c140.random-completeness.component-notice",
+    "derived_page": "build/html-id/random/point/Sufficient.html",
+    "other_canonical_target_mutations": 0,
+    "relative_html_href_rewrites": 31,
+    "rewrite_destination": "https://kokunoyumeto.github.io/mathematical-statistics-id/"
+  },
+  "translation_provenance": "OpenAI Codex gpt-5.6-sol, Ultra"
+}

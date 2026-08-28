@@ -1,0 +1,587 @@
+<!DOCTYPE html>
+<html lang="id-ID">
+
+<head>
+	<meta charset="utf-8">
+	<title>Statistik Cukup, Lengkap, dan Ancillary</title>
+	<meta name="author" content="Kyle Siegrist">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="keywords" content="probabilitas, statistika, pendugaan titik, statistik cukup, statistik lengkap, statistik ancillary, teorema faktorisasi Fisher-Neyman, teorema Rao-Blackwell, teorema Lehmann-Scheffe, teorema Basu, distribusi Bernoulli, distribusi Poisson, distribusi normal, distribusi gamma, distribusi beta, distribusi Pareto, distribusi seragam, model hipergeometrik, keluarga eksponensial">
+	<link rel="icon" href="../icons/Icon.svg" type="image/svg">
+	<link rel="stylesheet" href="../Screen.css" type="text/css" media="screen">
+	<link rel="next" href="../interval/index.html">
+	<script src="../Basic.js"></script>
+	<script src="../../MathJax/tex-svg.js" id="MathJax-script" async></script>
+</head>
+
+<body>
+
+<div class="latex">
+	\(\newcommand{\R}{\mathbb{R}}\)
+	\(\newcommand{\N}{\mathbb{N}}\)
+	\(\newcommand{\Z}{\mathbb{Z}}\)
+	\(\newcommand{\E}{\mathbb{E}}\)
+	\(\newcommand{\P}{\mathbb{P}}\)
+	\(\newcommand{\var}{\text{var}}\)
+	\(\newcommand{\sd}{\text{sd}}\)
+	\(\newcommand{\cov}{\text{cov}}\)
+	\(\newcommand{\cor}{\text{cor}}\)
+	\(\newcommand{\bias}{\text{bias}}\)
+	\(\newcommand{\MSE}{\text{MSE}}\)
+	\(\newcommand{\bs}{\boldsymbol}\)
+</div>
+
+<header>
+	<ol class="map">
+		<li class="parent"><a href="https://www.randomservices.org/random/index.html">Random</a></li>
+		<li class="parent"><a href="index.html">6. Pendugaan Titik</a></li>
+		<li class="child"><a href="Estimators.html" title="Penduga">1</a></li>
+		<li class="child"><a href="Moments.html" title="Metode Momen">2</a></li>
+		<li class="child"><a href="Likelihood.html" title="Kemungkinan Maksimum">3</a></li>
+		<li class="child"><a href="Bayes.html" title="Penduga Bayes">4</a></li>
+		<li class="child"><a href="Unbiased.html" title="Penduga Tak Bias Terbaik">5</a></li>
+		<li class="current">6</li>
+		<li class="details"><button type="button" title="Perluas Rincian" onclick="expandDetails(true);"><img src="../icons/Plus.svg" alt="Perluas"></button></li>
+		<li class="details"><button type="button" title="Ciutkan Rincian" onclick="expandDetails(false);"><img src="../icons/Minus.svg" alt="Ciutkan"></button></li>
+	</ol>
+	<h2 id="o006.random.point.sufficient.page">6. Statistik Cukup, Lengkap, dan Ancillary</h2>
+</header>
+
+<h3 id="the">Teori Dasar</h3>
+
+<h4>Model Statistika Dasar</h4>
+
+<p>Tinjau kembali <a href="../sample/Introduction.html">model statistika dasar</a>, yang memuat <a href="https://www.randomservices.org/random/prob/Experiments.html">eksperimen acak</a> dengan <a href="https://www.randomservices.org/random/prob/Probability.html">variabel acak</a> teramati \(\bs{X}\) yang nilainya berada dalam himpunan \(S\). Sekali lagi, eksperimen itu biasanya berupa pengambilan sampel \(n\) objek dari suatu populasi dan pencatatan satu atau beberapa pengukuran untuk setiap objek. Dalam hal ini, peubah hasil berbentuk
+\[ \bs{X} = (X_1, X_2, \ldots, X_n) \]
+dengan \(X_i\) sebagai vektor pengukuran untuk objek ke-\(i\). Secara umum, kita menganggap distribusi \(\bs X\) bergantung pada parameter \(\theta\) yang nilainya berada dalam himpunan parameter \(T\). Parameter \(\theta\) juga dapat berupa vektor. Kadang-kadang kita memakai subskrip pada fungsi kepadatan probabilitas, nilai harapan, dan sebagainya untuk menyatakan ketergantungannya pada \(\theta\).</p>
+
+<p>Seperti biasa, kasus khusus yang paling penting adalah ketika \(\bs X\) merupakan barisan variabel acak yang saling bebas dan berdistribusi identik. Dalam hal ini \(\bs X\) merupakan <a href="../sample/Introduction.html">sampel acak</a> dari distribusi bersama.</p>
+
+<h4>Statistik Cukup</h4>
+
+<p>Misalkan \(U = u(\bs X)\) merupakan statistik dengan nilai di suatu himpunan \(R\). Secara intuitif, \(U\) cukup untuk \(\theta\) jika \(U\) memuat seluruh informasi tentang \(\theta\) yang tersedia dalam seluruh peubah data \(\bs X\). Berikut definisi formalnya:</p>
+
+<div class="unit" id="suf1">
+	<p class="dfn">Statistik \(U\) <dfn>cukup</dfn> untuk \(\theta\) jika <a href="https://www.randomservices.org/random/dist/Conditional.html">distribusi bersyarat</a> \(\bs X\) yang diberikan \(U\) tidak bergantung pada \(\theta \in T\).</p>
+</div>
+
+<p>Kecukupan berkaitan dengan konsep <dfn>reduksi data</dfn>. Misalkan \(\bs X\) bernilai di \(\R^n\). Jika kita dapat menemukan statistik cukup \(\bs U\) yang bernilai di \(\R^j\), kita dapat mereduksi vektor data asli \(\bs X\) (yang berdimensi \(n\) dan biasanya besar) menjadi vektor statistik \(\bs U\) (yang berdimensi \(j\) dan biasanya jauh lebih kecil) tanpa kehilangan informasi tentang parameter \(\theta\).</p>
+
+<p>Hasil berikut memberikan syarat kecukupan yang ekuivalen dengan definisi ini.</p>
+
+<div class="unit" id="o006.random.point.sufficient.unit-02">
+	<p class="math">Misalkan \(U = u(\bs X)\) merupakan statistik yang bernilai di \(R\), dan misalkan \(f_\theta\) serta \(h_\theta\) berturut-turut menyatakan <a href="https://www.randomservices.org/random/dist/Discrete.html">fungsi kepadatan probabilitas</a> \(\bs X\) dan \(U\). Maka \(U\) cukup untuk \(\theta\) jika dan hanya jika fungsi pada \( S \) yang diberikan di bawah tidak bergantung pada \( \theta \in T \):
+	\[ \bs x \mapsto \frac{f_\theta(\bs x)}{h_\theta[u(\bs x)]} \]</p>
+	<details>
+		<summary>Rincian:</summary>
+		<p>Distribusi bersama \((\bs X, U)\) terkonsentrasi pada himpunan \(\{(\bs x, y): \bs x \in S, y = u(\bs x)\} \subseteq S \times R\). PDF bersyarat \(\bs X\) yang diberikan \(U = u(\bs x)\) adalah \(f_\theta(\bs x) \big/ h_\theta[u(\bs x)]\) pada himpunan ini, dan 0 di luar himpunan tersebut.</p>
+	</details>
+</div>
+
+<p>Definisi <a href="#suf1" class="ref"></a> tepat menangkap gagasan intuitif tentang kecukupan di atas, tetapi sulit diterapkan. Kita harus mengetahui terlebih dahulu kandidat statistik \(U\), lalu dapat menghitung distribusi bersyarat \(\bs X\) yang diberikan \(U\). <dfn>Teorema faktorisasi Fisher-Neyman</dfn> berikut sering memungkinkan kita mengenali statistik cukup dari bentuk fungsi kepadatan probabilitas \(\bs X\). Teorema ini dinamai menurut <a href="https://www.randomservices.org/random/biographies/Fisher.html" class="ancillary">Ronald Fisher</a> dan <a href="https://www.randomservices.org/random/biographies/Neyman.html" class="ancillary">Jerzy Neyman</a>.</p>
+
+<div class="unit" id="fac">
+	<p class="math"><strong>Teorema Faktorisasi Fisher-Neyman</strong>. Misalkan \(f_\theta\) menyatakan fungsi kepadatan probabilitas \(\bs X\) dan misalkan \(U = u(\bs X)\) merupakan statistik yang bernilai di \(R\). Maka \(U\) cukup untuk \(\theta\) jika dan hanya jika terdapat \(G: R \times T \to [0, \infty)\) dan \(r: S \to [0, \infty)\) sedemikian sehingga
+	\[ f_\theta(\bs x) = G[u(\bs x), \theta] r(\bs x); \quad \bs x \in S, \; \theta \in T \]</p>
+	<details>
+		<summary>Rincian:</summary>
+		<p>Misalkan \( h_\theta \) menyatakan PDF \( U \) untuk \( \theta \in T \). Jika \( U \) cukup untuk \( \theta \), maka menurut teorema sebelumnya fungsi \( r(\bs x) = f_\theta(\bs x) \big/ h_\theta[u(\bs x)] \) untuk \( \bs x  \in S\) tidak bergantung pada \( \theta \in T \). Jadi \( f_\theta(\bs x) = h_\theta[u(\bs x)] r(\bs x) \) untuk \( (\bs x, \theta) \in S \times T \), dan pemetaan \((\bs x, \theta) \mapsto f_\theta(\bs x) \) berbentuk seperti dalam teorema. Sebaliknya, andaikan pemetaan \( (\bs x, \theta) \mapsto f_\theta(\bs x) \) berbentuk seperti dalam teorema. Maka terdapat fungsi positif \( c(y) \) sedemikian sehingga \( h_\theta(y) = c(y) G(y, \theta) \) untuk \( \theta \in T \) dan \( y \in R \). Dengan demikian \( f_\theta(\bs x) \big/ h_\theta[u(\bs{x})] = r(\bs x) / c[u(\bs{x})]\) untuk \( \bs x \in S \), yang tidak bergantung pada \( \theta \in T \).</p>
+	</details>
+</div>
+
+<p>Perhatikan bahwa \(r\) hanya bergantung pada data \(\bs x\), bukan pada parameter \(\theta\). Dengan bahasa yang tidak terlalu teknis, \(u(\bs X)\) cukup untuk \(\theta\) jika fungsi kepadatan probabilitas \(f_\theta(\bs x)\) bergantung pada vektor data \(\bs x\) dan parameter \(\theta\) hanya melalui \(u(\bs x)\).</p>
+
+<div class="unit" id="o006.random.point.sufficient.unit-04">
+	<p class="math">Jika \(U\) dan \(V\) merupakan <a href="../sample/Introduction.html">statistik ekuivalen</a> dan \(U\) cukup untuk \(\theta\), maka \(V\) juga cukup untuk \(\theta\).</p>
+</div>
+
+<h4>Statistik Cukup Minimal</h4>
+
+<p>Peubah data seluruhnya \(\bs X\) cukup untuk \(\theta\). Namun, seperti telah dicatat di atas, biasanya ada statistik \(U\) yang cukup untuk \(\theta\) dan berdimensi lebih kecil, sehingga kita benar-benar dapat mereduksi data. Secara wajar, kita ingin menemukan statistik \(U\) dengan dimensi sekecil mungkin. Dalam banyak kasus, dimensi terkecil \(j\) ini sama dengan dimensi \(k\) vektor parameter \(\theta\). Namun, seperti akan kita lihat, hal ini tidak selalu terjadi; \(j\) dapat lebih kecil atau lebih besar daripada \(k\). Contoh berdasarkan distribusi seragam diberikan pada <a href="#uni2" class="ref"></a>.</p>
+
+<div class="unit" id="min1">
+<p class="dfn">Misalkan statistik \(U\) cukup untuk \(\theta\). Maka \(U\) <dfn>cukup minimal</dfn> jika \(U\) merupakan fungsi dari setiap statistik lain \(V\) yang cukup untuk \(\theta\).</p>
+</div>
+
+<p>Sekali lagi, definisi <a href="#min1" class="ref"></a> tepat menangkap gagasan kecukupan minimal, tetapi sulit diterapkan. Hasil berikut pada <a href="#min2" class="ref"></a> memberikan syarat yang ekuivalen.</p>
+
+<div class="unit" id="min2">
+	<p class="math">Misalkan \(f_\theta\) menyatakan fungsi kepadatan probabilitas \(\bs X\) yang bersesuaian dengan nilai parameter \(\theta \in T\), dan misalkan \(U = u(\bs X)\) merupakan statistik yang bernilai di \(R\). Maka \(U\) cukup minimal untuk \(\theta\) jika syarat berikut berlaku: untuk \(\bs x \in S\) dan \(\bs y \in S\)
+	\[ \frac{f_\theta(\bs x)}{f_\theta(\bs{y})} \text{ tidak bergantung pada } \theta \text{ jika dan hanya jika } u(\bs x) = u(\bs{y}) \]</p>
+	<details>
+		<summary>Rincian:</summary>
+		<p>Andaikan syarat dalam teorema terpenuhi. Maka PDF \(f_\theta\) dari \( \bs X \) harus berbentuk seperti dalam teorema faktorisasi <a href="#fac" class="ref"></a>, sehingga \(U\) cukup untuk \(\theta\). Selanjutnya, misalkan \(V = v(\bs X)\) merupakan statistik cukup lain untuk \( \theta \) yang bernilai di \( R \). Dari teorema faktorisasi, terdapat \( G: R \times T \to [0, \infty) \) dan \( r: S \to [0, \infty) \) sedemikian sehingga \( f_\theta(\bs x) = G[v(\bs x), \theta] r(\bs x) \) untuk \( (\bs x, \theta) \in S \times T \). Jadi, jika \( \bs x, \bs y \in S \) dan \( v(\bs x) = v(\bs y) \), maka
+		\[\frac{f_\theta(\bs x)}{f_\theta(\bs{y})} = \frac{G[v(\bs x), \theta] r(\bs x)}{G[v(\bs{y}), \theta] r(\bs{y})} = \frac{r(\bs x)}{r(\bs y)}\]
+			dan tidak bergantung pada \( \theta \in T \). Oleh karena itu, dari syarat dalam teorema \( u(\bs x) = u(\bs y) \), statistik yang didefinisikan oleh \( U \) merupakan fungsi dari statistik lain \( V \).</p>
+	</details>
+</div>
+
+<div class="unit" id="o006.random.point.sufficient.unit-07">
+	<p class="math">Jika \(U\) dan \(V\) merupakan statistik ekuivalen dan \(U\) cukup minimal untuk \(\theta\), maka \(V\) juga cukup minimal untuk \(\theta\).</p>
+</div>
+
+<h4>Sifat-Sifat Statistik Cukup</h4>
+
+<p>Kecukupan berkaitan dengan beberapa metode konstruksi penduga yang telah kita pelajari.</p>
+
+<div class="unit" id="mle">
+	<p class="math">Misalkan \(U\) cukup untuk \(\theta\) dan terdapat <a href="Likelihood.html">penduga kemungkinan maksimum</a> untuk \(\theta\). Maka terdapat penduga kemungkinan maksimum \(V\) yang merupakan fungsi dari \(U\).</p>
+	<details>
+		<summary>Rincian:</summary>
+		<p>Dari teorema faktorisasi <a href="#fac" class="ref"></a>, fungsi log-kemungkinan untuk \( \bs x \in S \) adalah
+		\[\theta \mapsto \ln G[u(\bs x), \theta] + \ln r(\bs x)\]
+		Dengan demikian, nilai \(\theta\) yang memaksimumkan fungsi ini, jika ada, harus merupakan fungsi dari \(u(\bs x)\).</p>
+	</details>
+</div>
+
+<p>Secara khusus, misalkan \(V\) merupakan penduga kemungkinan maksimum tunggal untuk \(\theta\) dan \(V\) cukup untuk \(\theta\). Jika \(U\) cukup untuk \(\theta\), maka \(V\) merupakan fungsi dari \(U\) menurut <a href="#mle" class="ref"></a>. Jadi \(V\) cukup minimal untuk \(\theta\). Hasil berikut berlaku untuk <a href="Bayes.html">analisis Bayes</a>.</p>
+
+<div class="unit" id="bay">
+	<p class="math">Misalkan statistik \(U = u(\bs X)\) cukup untuk parameter \(\theta\) dan \( \theta \) dimodelkan sebagai variabel acak \( \Theta \) dengan nilai di \( T \). Maka distribusi posterior \( \Theta \) yang diberikan \( \bs X = \bs x \in S \) merupakan fungsi dari \( u(\bs x) \).</p>
+	<details>
+		<summary>Rincian:</summary>
+		<p>Misalkan \( h \) menyatakan PDF prior \( \Theta \) dan \( f(\cdot \mid \theta) \) PDF bersyarat \( \bs X \) yang diberikan \( \Theta = \theta \in T \). Menurut teorema faktorisasi <a href="#fac" class="ref"></a>, PDF bersyarat ini berbentuk \( f(\bs x \mid \theta) = G[u(\bs x), \theta] r(\bs x) \) untuk \( \bs x \in S \) dan \( \theta \in T \). PDF posterior \( \Theta \) yang diberikan \( \bs X = \bs x \in S \) adalah
+		\[ h(\theta \mid \bs x) = \frac{h(\theta) f(\bs x \mid \theta)}{f(\bs x)}, \quad \theta \in T \]
+		Di sini fungsi pada penyebut adalah PDF marginal \( \bs X \), atau cukup konstanta normalisasi untuk fungsi \( \theta \) pada pembilang. Misalkan \( \Theta \) mempunyai distribusi kontinu pada \( T \), sehingga \( f(\bs x) = \int_T h(t) G[u(\bs x), t] r(\bs x) dt \) untuk \( \bs x \in S \). Maka PDF posterior menyederhana menjadi
+		\[ h(\theta \mid \bs x) = \frac{h(\theta) G[u(\bs x), \theta]}{\int_T h(t) G[u(\bs x), t] dt} \]
+			yang bergantung pada \(\bs x \in S \) hanya melalui \( u(\bs x) \).</p>
+	</details>
+</div>
+
+<p>Dalam kerangka analisis Bayes yang sama, misalkan \( \theta \) merupakan parameter bernilai riil. Jika kita memakai fungsi kerugian kuadrat rata-rata yang lazim, penduga Bayes adalah \( V = \E(\Theta \mid \bs X) \). Menurut <a href="#bay" class="ref"></a>, \( V \) merupakan fungsi dari statistik cukup \( U \). Artinya, \( \E(\Theta \mid \bs X) = \E(\Theta \mid U) \).</p>
+
+<p>Teorema <a href="#rbt" class="ref"></a> berikut adalah <dfn>teorema Rao-Blackwell</dfn>, dinamai menurut <a href="https://www.randomservices.org/random/biographies/Rao.html" class="ancillary">CR Rao</a> dan <a href="https://www.randomservices.org/random/biographies/Blackwell.html" class="ancillary">David Blackwell</a>. Teorema ini menunjukkan cara memakai statistik cukup untuk memperbaiki penduga tak bias.</p>
+
+<div class="unit" id="rbt">
+	<p class="math"><strong>Teorema Rao-Blackwell</strong>. Misalkan \(U\) cukup untuk \(\theta\) dan \(V\) merupakan penduga tak bias bagi parameter riil \(\lambda = \lambda(\theta)\). Maka \(\E_\theta(V \mid U)\) juga merupakan penduga tak bias bagi \( \lambda \) dan secara seragam lebih baik daripada \(V\).</p>
+	<details>
+		<summary>Rincian:</summary>
+		<p>Hal ini mengikuti sifat dasar <a href="https://www.randomservices.org/random/expect/Conditional.html">nilai harapan bersyarat</a> dan varians bersyarat. Pertama, karena \(V\) merupakan fungsi dari \(\bs X\) dan \(U\) cukup untuk \(\theta\), \(\E_\theta(V \mid U)\) merupakan statistik yang sah; artinya, ia tidak bergantung pada \(\theta\), meskipun nilai harapan secara formal memuat ketergantungan pada \(\theta\). Selanjutnya, \(\E_\theta(V \mid U)\) merupakan fungsi dari \(U\) dan \(\E_\theta[\E_\theta(V \mid U)] = \E_\theta(V) = \lambda\) untuk \(\theta \in T\). Jadi \(\E_\theta(V \mid U)\) merupakan penduga tak bias bagi \(\lambda\). Terakhir, \(\var_\theta[\E_\theta(V \mid U)] = \var_\theta(V) - \E_\theta[\var_\theta(V \mid U)] \le \var_\theta(V)\) untuk setiap \(\theta \in T\).</p>
+	</details>
+</div>
+
+<h4>Statistik Lengkap</h4>
+
+<div class="unit" id="o006.random.point.sufficient.unit-11">
+	<p class="dfn">Misalkan \(U = u(\bs X)\) merupakan statistik yang bernilai di himpunan \(R\). Maka \(U\) <dfn>lengkap</dfn> untuk \(\theta\) jika untuk setiap fungsi \(r: R \to \R\)
+	\[ \E_\theta\left[r(U)\right] = 0 \text{ untuk semua } \theta \in T \implies \P_\theta\left[r(U) = 0\right] = 1 \text{ untuk semua } \theta \in T \]</p>
+</div>
+
+<p>Untuk memahami syarat yang tampak agak ganjil ini, misalkan \(r(U)\) merupakan statistik yang dibangun dari \(U\) dan digunakan sebagai penduga untuk 0 (dipandang sebagai fungsi dari \(\theta\)). Syarat kelengkapan berarti satu-satunya penduga tak bias semacam itu adalah statistik yang bernilai 0 dengan probabilitas 1.</p>
+
+<div class="unit" id="o006.random.point.sufficient.unit-12">
+	<p class="math">Jika \(U\) dan \(V\) merupakan statistik ekuivalen dan \(U\) lengkap untuk \(\theta\), maka \(V\) juga lengkap untuk \(\theta\).</p>
+</div>
+
+<p>Teorema <a href="#lst" class="ref"></a> berikut menunjukkan pentingnya statistik yang sekaligus lengkap dan cukup; teorema ini dikenal sebagai <dfn>teorema Lehmann-Scheffé</dfn>, dinamai menurut <a href="https://www.randomservices.org/random/biographies/Lehmann.html" class="ancillary">Erich Lehmann</a> dan <a href="https://www.randomservices.org/random/biographies/Scheffe.html" class="ancillary">Henry Scheffé</a>.</p>
+
+<div class="unit" id="lst">
+	<p class="math"><strong>Teorema Lehmann-Scheffé</strong>. Misalkan \(U\) cukup dan lengkap untuk \(\theta\), dan \(V = r(U)\) merupakan penduga tak bias bagi parameter riil \(\lambda = \lambda(\theta)\). Maka \(V\) merupakan <a href="Unbiased.html">penduga tak bias bervarians minimum seragam</a> (UMVUE) bagi \(\lambda\).</p>
+	<details>
+		<summary>Rincian:</summary>
+		<p>Misalkan \(W\) merupakan penduga tak bias bagi \(\lambda\). Menurut teorema Rao-Blackwell <a href="#rbt" class="ref"></a>, \(\E(W \mid U)\) juga merupakan penduga tak bias bagi \(\lambda\) dan secara seragam lebih baik daripada \(W\). Karena \(\E(W \mid U)\) merupakan fungsi dari \(U\), kelengkapan menyiratkan bahwa \(V = \E(W \mid U)\) dengan probabilitas 1.</p>
+	</details>
+</div>
+
+<h4>Statistik Ancillary</h4>
+
+<div class="unit" id="o006.random.point.sufficient.unit-14">
+	<p class="dfn">Misalkan \(V = v(\bs X)\) merupakan statistik dengan nilai di suatu himpunan \(R\). Jika distribusi \(V\) tidak bergantung pada \(\theta\), maka \(V\) disebut <dfn>statistik ancillary</dfn> untuk \(\theta\).</p>
+</div>
+
+<p>Dengan demikian, gagasan statistik ancillary melengkapi gagasan statistik cukup. Statistik cukup memuat seluruh informasi yang tersedia tentang parameter; statistik ancillary tidak memuat informasi tentang parameter. Teorema <a href="#bas" class="ref"></a>, yang dikenal sebagai <dfn>teorema Basu</dfn> dan dinamai menurut Debabrata Basu, memperjelas hal ini.</p>
+
+<div class="unit" id="bas">
+	<p class="math"><strong>Teorema Basu</strong>. Misalkan \(U\) lengkap dan cukup untuk parameter \(\theta\), dan \(V\) merupakan statistik ancillary untuk \( \theta \). Maka \(U\) dan \(V\) saling bebas.</p>
+	<details>
+		<summary>Rincian:</summary>
+		<p>Misalkan \(g\) menyatakan fungsi kepadatan probabilitas \(V\) dan \(v \mapsto g(v \mid U)\) menyatakan fungsi kepadatan probabilitas bersyarat \(V\) yang diberikan \(U\). Dari sifat nilai harapan bersyarat, \(\E[g(v \mid U)]  = g(v)\) untuk \(v \in R\). Namun, kelengkapan menyiratkan \(g(v \mid U) = g(v)\) dengan probabilitas 1.</p>
+	</details>
+</div>
+
+<div class="unit" id="o006.random.point.sufficient.unit-16">
+	<p class="math">Jika \(U\) dan \(V\) merupakan statistik ekuivalen dan \(U\) ancillary untuk \(\theta\), maka \(V\) juga ancillary untuk \(\theta\).</p>
+</div>
+
+<h3 id="exa">Penerapan dan Distribusi Khusus</h3>
+
+<p>Dalam subbagian ini, kita akan menelaah statistik cukup, lengkap, dan ancillary untuk sejumlah distribusi khusus. Seperti biasa, cobalah mengerjakan masalahnya sendiri sebelum melihat solusinya.</p>
+
+<h4 id="ber">Distribusi Bernoulli</h4>
+
+<p>Ingat bahwa <a href="https://www.randomservices.org/random/bernoulli/Introduction.html">distribusi Bernoulli</a> dengan parameter \(p \in (0, 1)\) merupakan distribusi diskret pada \( \{0, 1\} \) dengan fungsi kepadatan probabilitas \( g \) yang didefinisikan oleh
+\[ g(x) = p^x (1 - p)^{1-x}, \quad x \in \{0, 1\} \]
+Misalkan \(\bs X = (X_1, X_2, \ldots, X_n)\) merupakan sampel acak berukuran \(n\) dari distribusi Bernoulli dengan parameter \(p\). Secara ekuivalen, \(\bs X\) merupakan barisan <a href="https://www.randomservices.org/random/bernoulli/index.html">percobaan Bernoulli</a>, dinamai menurut <a href="https://www.randomservices.org/random/biographies/Bernoulli.html" class="ancillary">Jacob Bernoulli</a>. Dalam bahasa keandalan yang lazim, \(X_i = 1\) jika percobaan ke-\(i\) berhasil, dan \(X_i = 0\) jika percobaan ke-\(i\) gagal. Misalkan \(Y = \sum_{i=1}^n X_i\) menyatakan banyaknya keberhasilan. Ingat bahwa \(Y\) memiliki <a href="https://www.randomservices.org/random/bernoulli/Binomial.html">distribusi binomial</a> dengan parameter \(n\) dan \(p\), serta fungsi kepadatan probabilitas \( h \) yang didefinisikan oleh
+\[ h(y) = \binom{n}{y} p^y (1 - p)^{n-y}, \quad y \in \{0, 1, \ldots, n\} \]</p>
+
+<div class="unit" id="ber1">
+	<p class="math">\(Y\) cukup untuk \(p\). Secara khusus, untuk \( y \in \{0, 1, \ldots, n\} \), distribusi bersyarat \(\bs X\) yang diberikan \(Y = y\) seragam pada himpunan titik
+	\[ D_y = \left\{(x_1, x_2, \ldots, x_n) \in \{0, 1\}^n: x_1 + x_2 + \cdots + x_n = y\right\} \]</p>
+	<details>
+		<summary>Rincian:</summary>
+		<p>PDF bersama \( f \) dari \( \bs X \) didefinisikan oleh
+		\[ f(\bs x) = g(x_1) g(x_2) \cdots g(x_n) = p^y (1 - p)^{n-y}, \quad \bs x = (x_1, x_2, \ldots, x_n) \in \{0, 1\}^n \]
+		Di sini \( y = \sum_{i=1}^n x_i \). Sekarang ambil \( y \in \{0, 1, \ldots, n\} \). Jika \( Y = y \), \( \bs X \) terkonsentrasi pada \( D_y \) dan
+		\[ \P(\bs X = \bs x \mid Y = y) = \frac{\P(\bs X = \bs x)}{\P(Y = y)} = \frac{p^y (1 - p)^{n-y}}{\binom{n}{y} p^y (1 - p)^{n-y}} = \frac{1}{\binom{n}{y}}, \quad \bs x \in D_y \]
+		Tentu saja, \( \binom{n}{y} \) adalah kardinalitas \(D_y\).</p>
+	</details>
+</div>
+
+<p>Hasil ini secara intuitif masuk akal: dalam barisan percobaan Bernoulli, seluruh informasi tentang probabilitas keberhasilan \(p\) terkandung dalam banyaknya keberhasilan \(Y\). <em>Urutan</em> khusus keberhasilan dan kegagalan tidak memberikan informasi tambahan. Tentu saja, kecukupan \(Y\) lebih mudah dibuktikan melalui teorema faktorisasi <a href="#fac" class="ref"></a>, tetapi distribusi bersyarat memberikan wawasan tambahan.</p>
+
+<div class="unit" id="ber2">
+	<p class="math">\(Y\) lengkap untuk \(p\) pada himpunan parameter \( (0, 1) \).</p>
+	<details>
+		<summary>Rincian:</summary>
+		<p>Jika \(r: \{0, 1, \ldots, n\} \to \R\), maka
+		\[\E[r(Y)] = \sum_{y=0}^n r(y) \binom{n}{y} p^y (1 - p)^{n-y} = (1 - p)^n \sum_{y=0}^n r(y) \binom{n}{y} \left(\frac{p}{1 - p}\right)^y\]
+		Jumlah terakhir merupakan polinom dalam variabel \(t = \frac{p}{1 - p} \in (0, \infty)\). Jika polinom ini 0 untuk semua \(t \in (0, \infty)\), semua koefisiennya harus 0. Jadi \( r(y) = 0 \) untuk \( y \in \{0, 1, \ldots, n\} \).</p>
+	</details>
+</div>
+
+<p>Bukti <a href="#ber2" class="ref"></a> sebenarnya menunjukkan bahwa jika himpunan parameter merupakan sembarang himpunan bagian dari \( (0, 1) \) yang memuat interval dengan panjang positif, maka \( Y \) lengkap untuk \( p \). Namun, gagasan kelengkapan sangat bergantung pada himpunan parameter. Hasil berikut membahas kasus ketika \(p\) memiliki himpunan nilai berhingga.</p>
+
+<div class="unit" id="o006.random.point.sufficient.unit-19">
+	<p class="math">Misalkan himpunan parameter \( T \subset (0, 1) \) merupakan himpunan berhingga dengan \( k \in \N_+ \) elemen. Jika ukuran sampel \(n \) setidaknya \( k \), maka \(Y\) tidak lengkap untuk \(p\).</p>
+	<details>
+		<summary>Rincian:</summary>
+		<p>Misalkan \( r: \{0, 1, \ldots, n\} \to \R \) dan \( \E[r(Y)] = 0 \) untuk \( p \in T \). Maka
+		\[ \sum_{y=0}^n \binom{n}{y} p^y (1 - p)^{n-y} r(y) = 0, \quad p \in T \]
+		Ini merupakan himpunan \( k \) persamaan linear homogen dalam variabel \( (r(0), r(1), \ldots, r(n)) \). Karena \( n \ge k \), kita memiliki sedikitnya \( k + 1 \) variabel, sehingga terdapat tak hingga banyak solusi nontrivial.</p>
+</details>
+</div>
+
+<p>Rata-rata sampel \(M = Y / n\) (proporsi keberhasilan dalam sampel) jelas ekuivalen dengan \( Y \) (banyaknya keberhasilan), sehingga juga cukup untuk \( p \) dan lengkap untuk \(p \in (0, 1)\). Ingat bahwa rata-rata sampel \( M \) merupakan <a href="Moments.html#ber">penduga metode momen</a> bagi \( p \) dan juga <a href="Likelihood.html#ber">penduga kemungkinan maksimum</a> bagi \( p \) pada himpunan parameter \( (0, 1) \).</p>
+
+<p>Dalam <a href="Bayes.html#ber">analisis Bayes</a>, pendekatan lazim adalah memodelkan \( p \) dengan variabel acak \( P \) yang memiliki <a href="https://www.randomservices.org/random/special/Beta.html">distribusi beta</a> prior dengan parameter kiri \( a \in (0, \infty) \) dan parameter kanan \( b \in (0, \infty) \). Maka distribusi posterior \( P \) yang diberikan \( \bs X \) adalah beta dengan parameter kiri \( a + Y \) dan parameter kanan \( b + (n - Y) \). Distribusi posterior hanya bergantung pada data melalui statistik cukup \( Y \), sebagaimana dijamin oleh <a href="#bay" class="ref"></a>.</p>
+
+
+<div class="unit" id="o006.random.point.sufficient.unit-20">
+	<p class="math">Varians sampel \( S^2 \) merupakan UMVUE dari varians distribusi \( p (1 - p) \) untuk \( p \in (0, 1) \), dan dapat ditulis sebagai
+	\[ S^2 = \frac{Y}{n - 1} \left(1 - \frac{Y}{n}\right) \]</p>
+	<details>
+		<summary>Rincian:</summary>
+		<p>Ingat bahwa varians sampel dapat ditulis sebagai
+		\[S^2 = \frac{1}{n - 1} \sum_{i=1}^n X_i^2 - \frac{n}{n - 1} M^2\]
+		Namun \(X_i^2 = X_i\) karena \(X_i\) merupakan variabel indikator, dan \(M = Y / n\). Substitusi menghasilkan representasi di atas. Secara umum, \(S^2\) merupakan penduga tak bias bagi varians distribusi \(\sigma^2\). Tetapi dalam kasus ini, \(S^2\) merupakan fungsi dari statistik cukup dan lengkap \(Y\), sehingga menurut <a href="#lst" class="ref"></a>, \(S^2\) merupakan UMVUE dari \(\sigma^2 = p (1 - p)\).</p>
+	</details>
+</div>
+
+<h4 id="poi">Distribusi Poisson</h4>
+
+<p>Ingat bahwa <a href="https://www.randomservices.org/random/poisson/Poisson.html">distribusi Poisson</a> dengan parameter \(\theta \in (0, \infty)\) merupakan distribusi diskret pada \( \N \) dengan fungsi kepadatan probabilitas \( g \) yang didefinisikan oleh
+\[ g(x) = e^{-\theta} \frac{\theta^x}{x!}, \quad x \in \N \]
+Distribusi ini dinamai menurut <a href="https://www.randomservices.org/random/biographies/Poisson.html" class="ancillary">Simeon Poisson</a> dan digunakan untuk memodelkan banyaknya <q>titik acak</q> dalam wilayah waktu atau ruang, khususnya dalam konteks <a href="https://www.randomservices.org/random/poisson/index.html">proses Poisson</a>. Parameter \(\theta\) sebanding dengan ukuran wilayah tersebut, dan sekaligus merupakan rata-rata serta varians distribusi.</p>
+
+<p>Sekarang misalkan \(\bs X = (X_1, X_2, \ldots, X_n)\) merupakan sampel acak berukuran \(n\) dari distribusi Poisson dengan parameter \(\theta\). Ingat bahwa jumlah pengamatan \(Y = \sum_{i=1}^n X_i\) juga berdistribusi Poisson, tetapi dengan parameter \(n \theta\).</p>
+
+<div class="unit" id="o006.random.point.sufficient.unit-21">
+	<p class="math">Statistik \(Y\) cukup untuk \(\theta\). Secara khusus, untuk \( y \in \N \), distribusi bersyarat \( \bs X \) yang diberikan \( Y = y \) adalah <a href="https://www.randomservices.org/random/bernoulli/Multinomial.html">distribusi multinomial</a> dengan \( y \) percobaan, \( n \) kategori, dan probabilitas percobaan seragam.</p>
+	<details>
+		<summary>Rincian:</summary>
+		<p>PDF bersama \( f \) dari \( \bs X \) didefinisikan oleh
+		\[ f(\bs x) = g(x_1) g(x_2) \cdots g(x_n) = \frac{e^{-n \theta} \theta^y}{x_1! x_2! \cdots x_n!}, \quad \bs x = (x_1, x_2, \ldots, x_n) \in \N^n \]
+		Dengan \( y = \sum_{i=1}^n x_i \). Untuk \( Y = y \in \N \), vektor acak \( \bs X \) bernilai di himpunan \(D_y = \left\{\bs x = (x_1, x_2, \ldots, x_n) \in \N^n: \sum_{i=1}^n x_i = y\right\}\). Selain itu,
+		\[\P(\bs X = \bs x \mid Y = y) = \frac{\P(\bs X = \bs x)}{\P(Y = y)} = \frac{e^{-n \theta} \theta^y / (x_1! x_2! \cdots x_n!)}{e^{-n \theta} (n \theta)^y / y!} = \frac{y!}{x_1! x_2! \cdots x_n!} \frac{1}{n^y}, \quad \bs x \in D_y\]
+		Ungkapan terakhir merupakan PDF distribusi multinomial yang dinyatakan dalam teorema. Yang penting, distribusi bersyarat tersebut tidak bergantung pada \( \theta \).</p>
+	</details>
+</div>
+
+<p>Seperti sebelumnya, teorema faktorisasi <a href="#fac" class="ref"></a> lebih mudah digunakan untuk membuktikan kecukupan \( Y \), tetapi distribusi bersyarat memberikan wawasan tambahan.</p>
+
+<div class="unit" id="o006.random.point.sufficient.unit-22">
+	<p class="math">\(Y\) lengkap untuk \(\theta \in (0, \infty)\).</p>
+	<details>
+		<summary>Rincian:</summary>
+		<p>Jika \(r: \N \to \R\), maka
+		\[\E\left[r(Y)\right] = \sum_{y=0}^\infty e^{-n \theta} \frac{(n \theta)^y}{y!} r(y) = e^{-n \theta} \sum_{y=0}^\infty \frac{n^y}{y!} r(y) \theta^y\]
+		Jumlah terakhir merupakan deret pangkat dalam \(\theta\) dengan koefisien \( n^y r(y) / y! \) untuk \( y \in \N \). Jika deret ini 0 untuk semua \(\theta\) dalam suatu interval terbuka, koefisiennya harus 0 sehingga \( r(y) = 0 \) untuk \( y \in \N \).</p>
+	</details>
+</div>
+
+<p>Seperti pada pembahasan percobaan Bernoulli, rata-rata sampel \( M = Y / n \) jelas ekuivalen dengan \( Y \), sehingga juga cukup untuk \( \theta \) dan lengkap untuk \( \theta \in (0, \infty) \). Ingat bahwa \( M \) merupakan <a href="Moments.html#o006.random.point.moments.section.poisson">penduga metode momen</a> bagi \( \theta \) dan merupakan <a href="Likelihood.html#poi">penduga kemungkinan maksimum</a> pada ruang parameter \( (0, \infty) \).</p>
+
+<div class="unit" id="o006.random.point.sufficient.unit-23">
+	<p class="math">UMVUE untuk parameter \(\P(X = 0) = e^{-\theta}\) pada \( \theta \in (0, \infty) \) adalah
+	\[ U = \left( \frac{n-1}{n} \right)^Y \]</p>
+	<details>
+		<summary>Rincian:</summary>
+		<p> <a href="https://www.randomservices.org/random/expect/Generating.html#pgf">Fungsi pembangkit probabilitas</a> \(Y\) adalah
+		\[ P(t) = \E(t^Y) = e^{n \theta(t - 1)}, \quad t \in \R \]
+		Jadi
+		\[ \E\left[\left(\frac{n - 1}{n}\right)^Y\right] = \exp \left[n \theta \left(\frac{n - 1}{n} - 1\right)\right] = e^{-\theta}, \quad \theta \in (0, \infty) \]
+		Jadi \( U = [(n - 1) / n]^Y \) merupakan penduga tak bias bagi \( e^{-\theta} \). Karena \( U \) merupakan fungsi dari statistik cukup dan lengkap \( Y \), teorema Lehmann-Scheffé <a href="#lst" class="ref"></a> menyatakan bahwa \( U \) merupakan UMVUE bagi \( e^{-\theta} \).</p>
+	</details>
+</div>
+
+<h4 id="nor">Distribusi Normal</h4>
+
+<p>Ingat bahwa <a href="https://www.randomservices.org/random/special/Normal.html">distribusi normal</a> dengan rata-rata \(\mu \in \R\) dan varians \(\sigma^2 \in (0, \infty)\) merupakan distribusi kontinu pada \( \R \) dengan fungsi kepadatan probabilitas \( g \) yang didefinisikan oleh
+\[ g(x) = \frac{1}{\sqrt{2 \, \pi} \sigma} \exp\left[-\frac{1}{2}\left(\frac{x - \mu}{\sigma}\right)^2\right], \quad x \in \R \]
+Distribusi ini sering digunakan untuk memodelkan besaran fisik yang dipengaruhi galat acak kecil, dan karena <a href="../sample/CLT.html">teorema limit pusat</a>, mungkin merupakan distribusi terpenting dalam statistika.</p>
+
+<div class="unit" id="nor1">
+	<p class="math">Misalkan \(\bs X = (X_1, X_2, \ldots, X_n)\) merupakan sampel acak dari distribusi normal dengan rata-rata \(\mu\) dan varians \(\sigma^2\). Maka setiap pasangan statistik berikut cukup minimal untuk \( (\mu, \sigma^2) \)</p>
+	<ol class="sub">
+		<li>\((Y, V)\) dengan \(Y = \sum_{i=1}^n X_i\) dan \(V = \sum_{i=1}^n X_i^2\).</li>
+		<li>\(\left(M, S^2\right)\) dengan \(M = \frac{1}{n} \sum_{i=1}^n X_i\) sebagai rata-rata sampel dan \(S^2 = \frac{1}{n - 1} \sum_{i=1}^n (X_i - M)^2\) sebagai varians sampel.</li>
+		<li>\( (M, T^2) \) dengan \( T^2 = \frac{1}{n} \sum_{i=1}^n (X_i - M)^2 \) sebagai varians sampel berbias.</li>
+	</ol>
+	<details>
+		<summary>Rincian:</summary>
+		<ol class="sub">
+			<li>PDF bersama \( f \) dari \( \bs X \) diberikan oleh
+			\[ f(\bs x) = g(x_1) g(x_2) \cdots g(x_n) = \frac{1}{(2 \pi)^{n/2} \sigma^n} \exp\left[-\frac{1}{2 \sigma^2} \sum_{i=1}^n (x_i - \mu)^2\right], \quad \bs x = (x_1, x_2, \ldots, x_n) \in \R^n \]
+			Setelah sedikit aljabar, ini dapat ditulis sebagai
+			\[ f(\bs x) = \frac{1}{(2 \pi)^{n/2} \sigma^n} e^{-n \mu^2 / (2 \sigma^2)} \exp\left(-\frac{1}{2 \sigma^2}  \sum_{i=1}^n x_i^2 + \frac{\mu}{\sigma^2} \sum_{i=1}^n x_i \right), \quad \bs x = (x_1, x_2, \ldots, x_n) \in \R^n\]
+			Dari teorema faktorisasi <a href="#fac" class="ref"></a>, \( (Y, V) \) cukup untuk \(\left(\mu, \sigma^2\right)\). Kecukupan minimal mengikuti dari <a href="#min2" class="ref"></a>.</li>
+			<li>Perhatikan bahwa \( M = \frac{1}{n} Y, \; S^2 = \frac{1}{n - 1} V - \frac{n}{n - 1} M^2\). Jadi \(\left(M, S^2\right)\) ekuivalen dengan \( (Y, V) \), sehingga \(\left(M, S^2\right)\) juga cukup minimal untuk \(\left(\mu, \sigma^2\right)\).</li>
+			<li>Demikian pula, \( M = \frac{1}{n} Y \) dan \( T^2 = \frac{1}{n} V - M^2 \). Jadi \( (M, T^2) \) ekuivalen dengan \( (Y, V) \) dan \( (M, T^2) \) juga cukup minimal untuk \( (\mu, \sigma^2) \).</li>
+		</ol>
+	</details>
+</div>
+
+<p>Ingat bahwa \( M \) dan \( T^2 \) merupakan penduga metode momen bagi \( \mu \) dan \( \sigma^2 \), berturut-turut, dan juga penduga kemungkinan maksimum pada ruang parameter \( \R \times (0, \infty) \).</p>
+
+<div class="unit" id="o006.random.point.sufficient.unit-25">
+	<p class="app">Jalankan <a href="https://www.randomservices.org/random/apps/NormalEstimate.html" class="ancillary">eksperimen pendugaan normal</a> 1000 kali dengan berbagai nilai parameter. Bandingkan dugaan parameter berdasarkan bias dan galat kuadrat rata-rata.</p>
+</div>
+
+<p>Kadang-kadang varians \( \sigma^2 \) distribusi normal diketahui, tetapi rata-rata \( \mu \) tidak diketahui. Jarang terjadi sebaliknya, yaitu \( \mu \) diketahui tetapi \( \sigma^2 \) tidak diketahui. Namun, kita dapat memberikan statistik cukup untuk kedua kasus tersebut.</p>
+
+<div class="unit" id="nor2">
+	<p class="math">Misalkan lagi \( \bs X = (X_1, X_2, \ldots, X_n) \) merupakan sampel acak dari distribusi normal dengan rata-rata \( \mu \in \R \) dan varians \( \sigma^2 \in (0, \infty)\).</p>
+	<ol class="sub">
+		<li>Jika \( \sigma^2 \) diketahui, maka \( Y = \sum_{i=1}^n X_i \) cukup minimal untuk \( \mu \).</li>
+		<li>Jika \( \mu \) diketahui, maka \( U = \sum_{i=1}^n (X_i - \mu)^2 \) cukup untuk \( \sigma^2 \).</li>
+	</ol>
+	<details>
+		<summary>Rincian:</summary>
+		<ol class="sub">
+			<li>Hasil ini mengikuti persamaan tampilan kedua untuk PDF \( f(\bs x) \) dari \( \bs X \) dalam bukti <a href="#nor1" class="ref"></a>.</li>
+			<li>Hasil ini mengikuti persamaan tampilan pertama untuk PDF \( f(\bs x) \) dari \( \bs X \) dalam bukti teorema <a href="#nor1" class="ref"></a>.</li>
+		</ol>
+	</details>
+</div>
+
+<p>Dengan ekuivalensi, pada bagian (a) rata-rata sampel \( M = Y / n \) cukup minimal untuk \( \mu \), sedangkan pada bagian (b) varians sampel khusus \( W = U / n \) cukup minimal untuk \( \sigma^2 \). Selain itu, pada bagian (a), \( M \) lengkap untuk \( \mu \) pada ruang parameter \( \R \) dan varians sampel \( S^2 \) ancillary untuk \( \mu \) (ingat bahwa \( (n - 1) S^2 / \sigma^2 \) berdistribusi <a href="https://www.randomservices.org/random/special/ChiSquare.html">khi-kuadrat</a> dengan \( n - 1 \) derajat bebas). Teorema Basu <a href="#bas" class="ref"></a> kemudian menyatakan bahwa rata-rata sampel \( M \) dan varians sampel \( S^2 \) saling bebas. Kita telah membuktikan hal ini dengan cara yang lebih langsung dalam bagian <a href="../sample/Normal.html">sifat khusus sampel normal</a>, tetapi rumusan melalui statistik cukup dan ancillary memberikan wawasan tambahan.</p>
+
+<h4 id="gam">Distribusi Gamma</h4>
+
+<p>Ingat bahwa <a href="https://www.randomservices.org/random/special/Gamma.html">distribusi gamma</a> dengan parameter bentuk \(k \in (0, \infty)\) dan parameter skala \(b \in (0, \infty)\) merupakan distribusi kontinu pada \( (0, \infty) \) dengan fungsi kepadatan probabilitas \( g \) yang didefinisikan oleh
+\[ g(x) = \frac{1}{\Gamma(k) b^k} x^{k-1} e^{-x / b}, \quad x \in (0, \infty) \]
+Distribusi gamma sering digunakan untuk memodelkan waktu acak, khususnya dalam konteks <a href="https://www.randomservices.org/random/poisson/index.html">proses Poisson</a>, serta jenis variabel acak positif lainnya.</p>
+
+<div class="unit" id="gam1">
+	<p class="math">Misalkan \(\bs X = (X_1, X_2, \ldots, X_n)\) merupakan sampel acak dari distribusi gamma dengan parameter bentuk \(k\) dan parameter skala \(b\). Setiap pasangan statistik berikut cukup minimal untuk \((k, b)\)</p>
+	<ol class="sub">
+		<li>\((Y, V)\) dengan \(Y = \sum_{i=1}^n X_i\) sebagai jumlah pengamatan dan \(V = \prod_{i=1}^n X_i\) sebagai hasil kali pengamatan.</li>
+		<li>\((M, U)\) dengan \(M = Y / n\) sebagai rata-rata aritmetika sampel dari \(\bs X\) dan \(U = V^{1/n}\) sebagai rata-rata geometrik sampel dari \(\bs X\).</li>
+	</ol>
+	<details>
+		<summary>Rincian:</summary>
+		<ol class="sub">
+			<li>PDF bersama \( f \) dari \( \bs X \) diberikan oleh
+			\[ f(\bs x) = g(x_1) g(x_2) \cdots g(x_n) = \frac{1}{\Gamma^n(k) b^{nk}} (x_1 x_2 \ldots x_n)^{k-1} e^{-(x_1 + x_2 + \cdots + x_n) / b}, \quad \bs x = (x_1, x_2, \ldots, x_n) \in (0, \infty)^n \]
+			Dari teorema faktorisasi <a href="#fac" class="ref"></a>, \( (Y, V) \) cukup untuk \( (k, b) \). Kecukupan minimal mengikuti dari <a href="#min2" class="ref"></a>.</li>
+			<li>Jelas bahwa \( M = Y / n \) ekuivalen dengan \( Y \) dan \( U = V^{1/n} \) ekuivalen dengan \( V \). Jadi \( (M, U) \) juga cukup minimal untuk \( (k, b) \).</li>
+		</ol>
+	</details>
+</div>
+
+<p>Ingat bahwa penduga metode momen untuk \( k \) dan \( b \) masing-masing adalah \( M^2 / T^2 \) dan \( T^2 / M \), dengan \( M = \frac{1}{n} \sum_{i=1}^n X_i \) sebagai rata-rata sampel dan \( T^2 = \frac{1}{n} \sum_{i=1}^n (X_i - M)^2 \) sebagai varians sampel berbias. Jika parameter bentuk \( k \) diketahui, \( \frac{1}{k} M \) merupakan penduga metode momen sekaligus penduga kemungkinan maksimum bagi \( b \) pada ruang parameter \( (0, \infty) \). Perhatikan bahwa \( T^2 \) bukan fungsi dari statistik cukup \( (Y, V) \), sehingga penduga yang didasarkan pada \( T^2 \) kehilangan informasi.</p>
+
+<div class="unit" id="o006.random.point.sufficient.unit-28">
+	<p class="app">Jalankan <a href="https://www.randomservices.org/random/apps/GammaEstimate.html" class="ancillary">eksperimen pendugaan gamma</a> 1000 kali dengan berbagai nilai parameter dan ukuran sampel \( n \). Bandingkan dugaan parameter berdasarkan bias dan galat kuadrat rata-rata.</p>
+</div>
+
+<p>Bukti <a href="#gam1" class="ref"></a> juga menunjukkan bahwa \( Y \) cukup untuk \( b \) jika \( k \) diketahui, dan bahwa \( V \) cukup untuk \( k \) jika \( b \) diketahui.</p>
+
+<div class="unit" id="gam2">
+	<p class="math">Misalkan lagi \(\bs X = (X_1, X_2, \ldots, X_n)\) merupakan sampel acak berukuran \(n\) dari distribusi gamma dengan parameter bentuk \( k \in (0, \infty)  \) tetap dan parameter skala \(b \in (0, \infty)\). Maka \(Y = \sum_{i=1}^n X_i\) lengkap untuk \(b\).</p>
+	<details>
+		<summary>Rincian:</summary>
+		<p>\( Y \) berdistribusi gamma dengan parameter bentuk \( n k \) dan parameter skala \( b \). Jadi, jika \(r: [0, \infty) \to \R\), maka
+		\[\E\left[r(Y)\right] = \int_0^\infty \frac{1}{\Gamma(n k) b^{n k}} y^{n k-1} e^{-y/b} r(y) \, dy = \frac{1}{\Gamma(n k) b^{n k}} \int_0^\infty y^{n k - 1} r(y) e^{-y / b} \, dy\]
+		Integral terakhir dapat ditafsirkan sebagai transformasi Laplace dari fungsi \( y \mapsto y^{n k - 1} r(y) \) yang dievaluasi pada \( 1 / b \). Jika transformasi ini 0 untuk semua \(b\) dalam suatu interval terbuka, maka \( r(y) = 0 \) hampir di mana-mana pada \( (0, \infty) \).</p>
+	</details>
+</div>
+
+<div class="unit" id="gam3">
+	<p class="math">Misalkan lagi \(\bs X = (X_1, X_2, \ldots, X_n)\) merupakan sampel acak dari distribusi gamma pada \( (0, \infty) \) dengan parameter bentuk \( k \in (0, \infty) \) tetap dan parameter skala \(b \in (0, \infty)\). Misalkan \( M = \frac{1}{n} \sum_{i=1}^n X_i \) menyatakan rata-rata sampel dan \( U = (X_1 X_2 \ldots X_n)^{1/n} \) rata-rata geometrik sampel, seperti sebelumnya. Maka</p>
+	<ol class="sub">
+		<li>\( M / U \) ancillary untuk \( b \).</li>
+		<li>\( M \) dan \( M / U \) saling bebas.</li>
+	</ol> 
+	<details>
+		<summary>Rincian:</summary>
+		<ol class="sub">
+			<li>Kita dapat mengambil \( X_i = b Z_i \) untuk \( i \in \{1, 2, \ldots, n\} \), dengan \( \bs{Z} = (Z_1, Z_2, \ldots, Z_n) \) merupakan sampel acak berukuran \( n \) dari distribusi gamma dengan parameter bentuk \( k \) dan parameter skala 1 (distribusi gamma <dfn>standar</dfn> dengan parameter bentuk \( k \)). Kemudian
+			\[ \frac{M}{U} = \frac{1}{n} \sum_{i=1}^n \frac{X_i}{(X_1 X_2 \cdots X_n)^{1/n}} = \frac{1}{n} \sum_{i=1}^n \left(\frac{X_i^n}{X_1 X_2 \cdots X_n}\right)^{1/n} = \frac{1}{n} \sum_{i=1}^n \left(\prod_{j \ne i} \frac{X_i}{X_j}\right)^{1/n}  \]
+			\( X_i / X_j = Z_i / Z_j\) untuk \( i \ne j \), dan distribusi \( \left\{Z_i / Z_j: i, j \in \{1, 2, \ldots, n\}, \; i \ne j\right\} \) tidak bergantung pada \( b \). Oleh karena itu distribusi \( M / U \) tidak bergantung pada \( b \).</li>
+			<li>Hal ini mengikuti <a href="#bas" class="ref"></a> milik Basu, karena \( M \) lengkap dan cukup untuk \( b \) dan \( M / U \) ancillary untuk \( b \).</li>
+		</ol>
+	</details>
+</div>
+
+<h4 id="bet">Distribusi Beta</h4>
+
+<p>Ingat bahwa <a href="https://www.randomservices.org/random/special/Beta.html">distribusi beta</a> dengan parameter kiri \(a \in (0, \infty)\) dan parameter kanan \(b \in (0, \infty)\) merupakan distribusi kontinu pada \( (0, 1) \) dengan fungsi kepadatan probabilitas \( g \) yang diberikan oleh
+\[ g(x) = \frac{1}{B(a, b)} x^{a-1} (1 - x)^{b-1}, \quad  x \in (0, 1)\]
+dengan \( B \) sebagai fungsi beta. Distribusi beta sering digunakan untuk memodelkan proporsi acak dan variabel acak lain yang nilainya berada pada interval terbatas.</p>
+
+<div class="unit" id="bet1">
+	<p class="math">Misalkan \(\bs X = (X_1, X_2, \ldots, X_n)\) merupakan sampel acak dari distribusi beta dengan parameter kiri \(a\) dan parameter kanan \(b\). Maka \((P, Q)\) cukup minimal untuk \((a, b)\), dengan \(P = \prod_{i=1}^n X_i\) dan \(Q = \prod_{i=1}^n (1 - X_i)\).</p>
+	<details>
+		<summary>Rincian:</summary>
+		<p>PDF bersama \( f \) dari \( \bs X \) diberikan oleh
+		\[ f(\bs x) = g(x_1) g(x_2) \cdots g(x_n) = \frac{1}{B^n(a, b)} (x_1 x_2 \cdots x_n)^{a - 1} [(1 - x_1) (1 - x_2) \cdots (1 - x_n)]^{b-1}, \quad \bs x = (x_1, x_2, \ldots, x_n) \in (0, 1)^n \]
+		Dari teorema faktorisasi <a href="#fac" class="ref"></a>, \( (P, Q) \) cukup untuk \( (a, b) \). Kecukupan minimal mengikuti dari <a href="#min2" class="ref"></a>.</p>
+	</details>
+</div>
+
+<p>Bukti <a href="#bet1" class="ref"></a> juga menunjukkan bahwa \( P \) cukup untuk \( a \) jika \( b \) diketahui, dan \( Q \) cukup untuk \( b \) jika \( a \) diketahui. Ingat bahwa <a href="Moments.html#bet">penduga metode momen</a> untuk \( a \) dan \( b \) adalah
+\[ U = \frac{M\left(M - M^{(2)}\right)}{M^{(2)} - M^2}, \quad V = \frac{(1 - M)\left(M - M^{(2)}\right)}{M^{(2)} - M^2} \]
+berturut-turut, dengan \( M = \frac{1}{n} \sum_{i=1}^n X_i \) sebagai rata-rata sampel dan \( M^{(2)} = \frac{1}{n} \sum_{i=1}^n X_i^2 \) sebagai momen sampel orde kedua. Jika \( b \) diketahui, penduga metode momen untuk \( a \) adalah \( U_b = b M / (1 - M) \), sedangkan jika \( a \) diketahui, penduga metode momen untuk \( b \) adalah \( V_a = a (1 - M) / M \). Tak satu pun penduga ini merupakan fungsi dari statistik cukup \( (P, Q) \) sehingga semuanya kehilangan informasi. Sebaliknya, jika \( b = 1 \), <a href="Likelihood.html#bet">penduga kemungkinan maksimum</a> \( a \) pada interval \( (0, \infty) \) adalah \( W = -n / \sum_{i=1}^n \ln X_i \), yang merupakan fungsi dari \( P \) (sebagaimana mestinya).</p>
+
+<div class="unit" id="o006.random.point.sufficient.unit-32">
+	<p class="app">Jalankan <a href="https://www.randomservices.org/random/apps/BetaEstimate.html" class="ancillary">eksperimen pendugaan beta</a> 1000 kali dengan berbagai nilai parameter. Bandingkan dugaan parameter.</p>
+</div>
+
+<h4 id="par">Distribusi Pareto</h4>
+
+<p>Ingat bahwa <a href="https://www.randomservices.org/random/special/Pareto.html">distribusi Pareto</a> dengan parameter bentuk \(a \in (0, \infty)\) dan parameter skala \(b \in (0, \infty)\) merupakan distribusi kontinu pada \( [b, \infty) \) dengan fungsi kepadatan probabilitas \( g \) yang diberikan oleh
+\[ g(x) = \frac{a b^a}{x^{a+1}}, \quad b \le x \lt \infty \]
+Distribusi Pareto, dinamai menurut <a href="https://www.randomservices.org/random/biographies/Pareto.html" class="ancillary">Vilfredo Pareto</a>, berekor berat dan sering digunakan untuk memodelkan pendapatan serta beberapa jenis variabel acak lain.</p>
+
+<div class="unit" id="par1">
+	<p class="math">Misalkan \(\bs X = (X_1, X_2, \ldots, X_n)\) merupakan sampel acak dari distribusi Pareto dengan parameter bentuk \(a\) dan parameter skala \( b \). Maka \( \left(P, X_{(1)}\right) \) cukup minimal untuk \( (a, b) \), dengan \(P = \prod_{i=1}^n X_i\) merupakan hasil kali peubah sampel dan \( X_{(1)} = \min\{X_1, X_2, \ldots, X_n\} \) merupakan <a href="../sample/OrderStatistics.html">statistik terurut</a> pertama.</p>
+	<details>
+		<summary>Rincian:</summary>
+		<p>PDF bersama \( f \) pada \( \bs X \) di titik \( \bs x = (x_1, x_2, \ldots, x_n) \) diberikan oleh
+		\[ f(\bs x) = g(x_1) g(x_2) \cdots g(x_n) = \frac{a^n b^{n a}}{(x_1 x_2 \cdots x_n)^{a + 1}}, \quad x_1 \ge b, x_2 \ge b, \ldots, x_n \ge b  \]
+			yang dapat ditulis ulang sebagai
+		\[ f(\bs x) = g(x_1) g(x_2) \cdots g(x_n) = \frac{a^n b^{n a}}{(x_1 x_2 \cdots x_n)^{a + 1}} \bs{1}\left(x_{(1)} \ge b\right), \quad (x_1, x_2, \ldots, x_n) \in (0, \infty)^n  \]
+			Jadi hasilnya mengikuti teorema faktorisasi <a href="#fac" class="ref"></a>. Kecukupan minimal mengikuti dari <a href="#min2" class="ref"></a>.</p>
+	</details>
+</div>
+
+<p>Bukti <a href="#par1" class="ref"></a> juga menunjukkan bahwa \( P \) cukup untuk \( a \) jika \( b \) diketahui (yang sering terjadi), dan \( X_{(1)} \) cukup untuk \( b \) jika \( a \) diketahui (jauh lebih jarang). Ingat bahwa penduga metode momen untuk \( a \) dan \( b \) adalah
+\[U = 1 + \sqrt{\frac{M^{(2)}}{M^{(2)} - M^2}}, \quad V = \frac{M^{(2)}}{M} \left( 1 - \sqrt{\frac{M^{(2)} - M^2}{M^{(2)}}} \right)\]
+berturut-turut, dengan \( M = \frac{1}{n} \sum_{i=1}^n X_i \) sebagai rata-rata sampel dan \( M^{(2)} = \frac{1}{n} \sum_{i=1}^n X_i^2 \) sebagai momen sampel orde kedua. Kedua penduga ini bukan fungsi dari statistik cukup sehingga kehilangan informasi. Sebaliknya, penduga kemungkinan maksimum untuk \( a \) dan \( b \) pada interval \( (0, \infty) \) adalah
+\[W = \frac{n}{\sum_{i=1}^n \ln X_i - n \ln X_{(1)}}, \quad X_{(1)}\]
+berturut-turut (baris pertama untuk (a), baris kedua untuk (b)). Penduga-penduga ini merupakan fungsi dari statistik cukup, sebagaimana mestinya.</p>
+
+<div class="unit" id="o006.random.point.sufficient.unit-34">
+	<p class="app">Jalankan <a href="https://www.randomservices.org/random/apps/ParetoEstimate.html" class="ancillary">eksperimen pendugaan Pareto</a> 1000 kali dengan berbagai nilai parameter \( a \) dan \( b \) serta ukuran sampel \( n \). Bandingkan penduga metode momen dengan penduga kemungkinan maksimum berdasarkan bias empiris dan galat kuadrat rata-rata.</p>
+</div>
+
+<h4 id="uni">Distribusi Seragam</h4>
+
+<p>Ingat bahwa <a href="https://www.randomservices.org/random/special/UniformContinuous.html">distribusi seragam kontinu</a> pada interval \( [a, a + h] \), dengan \( a \in \R \) sebagai parameter lokasi dan \( h \in (0, \infty) \) sebagai parameter skala, memiliki fungsi kepadatan probabilitas \( g \) yang diberikan oleh
+\[ g(x) = \frac{1}{h}, \quad x \in [a, a + h] \]
+Distribusi seragam kontinu banyak digunakan dalam penerapan untuk memodelkan bilangan yang dipilih <q>secara acak</q> dari suatu interval. Pertama-tama, pertimbangkan kasus ketika kedua parameter tidak diketahui.</p>
+
+<div class="unit" id="uni1">
+	<p class="math">Misalkan \(\bs X = (X_1, X_2, \ldots, X_n)\) merupakan sampel acak dari distribusi seragam pada interval \([a, a + h]\). Maka \(\left(X_{(1)}, X_{(n)}\right)\) cukup minimal untuk \((a, h)\), dengan \( X_{(1)} = \min\{X_1, X_2, \ldots, X_n\} \) merupakan <a href="../sample/OrderStatistics.html" class="main">statistik terurut</a> pertama dan \( X_{(n)} = \max\{X_1, X_2, \ldots, X_n\} \) merupakan statistik terurut terakhir.</p>
+	<details>
+		<summary>Rincian:</summary>
+		<p>PDF \( f \) dari \( \bs X \) diberikan oleh
+		\[ f(\bs x) = g(x_1) g(x_2) \cdots g(x_n) = \frac{1}{h^n}, \quad \bs x = (x_1, x_2, \ldots, x_n) \in [a, a + h]^n \]
+		Kita dapat menulis ulang PDF tersebut sebagai
+		\[ f(\bs x) = \frac{1}{h^n} \bs{1}[x_{(1)} \ge a] \bs{1}[x_{(n)} \le a + h], \quad \bs x = (x_1, x_2, \ldots, x_n) \in \R^n \]
+		Dari teorema faktorisasi <a href="#fac" class="ref"></a>, \(\left(X_{(1)},  X_{(n)}\right) \) cukup untuk \( (a, h) \). Selanjutnya, misalkan \( \bs x, \, \bs y \in \R^n \), dengan \( x_{(1)} \ne y_{(1)} \) atau \( x_{(n)} \ne y_{(n)} \). Untuk suatu \( h \in (0, \infty) \), kita dapat dengan mudah menemukan nilai \( a \in \R \) sehingga \( f(\bs x) = 0 \) dan \( f(\bs y) = 1 / h^n \), serta nilai \( a \in \R \) lain sehingga \( f(\bs x) = f(\bs y) = 1 / h^n \). Menurut <a href="#min2" class="ref"></a>, \(\left(X_{(1)},  X_{(n)}\right) \) cukup minimal.</p>
+	</details>
+</div>
+
+<p>Jika parameter lokasi \( a \) diketahui, statistik terurut terbesar cukup untuk parameter skala \( h \). Namun, jika parameter skala \( h \) diketahui, kita tetap memerlukan kedua statistik terurut untuk parameter lokasi \( a \). Jadi dalam kasus ini hanya ada satu parameter bernilai riil, tetapi statistik cukup minimalnya merupakan pasangan variabel acak bernilai riil.</p>
+
+<div class="unit" id="uni2">
+	<p class="math">Misalkan lagi \( \bs X = (X_1, X_2, \ldots, X_n) \) merupakan sampel acak dari distribusi seragam pada interval \( [a, a + h] \).</p>
+	<ol class="sub">
+		<li>Jika \( a \in \R \) diketahui, maka \( X_{(n)} \) cukup untuk \( h \).</li>
+		<li>Jika \( h \in (0, \infty) \) diketahui, maka \( \left(X_{(1)}, X_{(n)}\right) \) cukup minimal untuk \( a \).</li>
+	</ol>
+	<details>
+		<summary>Rincian:</summary>
+		<p>Kedua bagian mengikuti langsung dari analisis dalam bukti <a href="#uni1" class="ref"></a>.</p>
+	</details>
+</div>
+
+<div class="unit" id="o006.random.point.sufficient.unit-37">
+	<p class="app">Jalankan <a href="https://www.randomservices.org/random/apps/UniformEstimate.html" class="ancillary">eksperimen pendugaan seragam</a> 1000 kali dengan berbagai nilai parameter. Bandingkan dugaan parameter.</p>
+</div>
+
+<p>Ingat bahwa jika kedua parameter tidak diketahui, <a href="Moments.html#uni">penduga metode momen</a> untuk \( a \) dan \( h \) adalah \( U = 2 M - \sqrt{3} T \) dan \( V = 2 \sqrt{3} T \), berturut-turut, dengan \( M = \frac{1}{n} \sum_{i=1}^n X_i \) sebagai rata-rata sampel dan \( T^2 = \frac{1}{n} \sum_{i=1}^n (X_i - M)^2 \) sebagai varians sampel berbias. Jika \( a \) diketahui, penduga metode momen untuk \( h \) adalah \( V_a = 2 (M - a) \), sedangkan jika \( h \) diketahui, penduga metode momen untuk \( a \) adalah \( U_h = M - \frac{1}{2} h \). Tak satu pun penduga ini merupakan fungsi dari statistik cukup minimal, sehingga mengakibatkan kehilangan informasi.</p>
+
+<h4 id="hyp">Model Hipergeometrik</h4>
+
+<p>Sejauh ini, dalam semua contoh kita, peubah dasar membentuk sampel acak dari suatu distribusi. Dalam subbagian ini, peubah dasar kita akan saling bergantung.</p>
+
+<p>Ingat bahwa dalam <dfn>model hipergeometrik</dfn> terdapat populasi berisi \( N \) objek; \( r \) objek <dfn>tipe 1</dfn> dan sisanya \( N - r \) <dfn>tipe 0</dfn>. Ukuran populasi \( N \) merupakan bilangan bulat positif dan ukuran tipe 1 \( r \) merupakan bilangan bulat nonnegatif dengan \( r \le N \). Biasanya salah satu atau kedua parameter tidak diketahui. Kita memilih sampel acak \( n \) objek tanpa pengembalian dari populasi, dan \( X_i \) menyatakan tipe objek yang terpilih pada posisi \( i \). Jadi barisan dasar variabel acak kita adalah \( \bs X = (X_1, X_2, \ldots, X_n) \). Peubah-peubah ini merupakan variabel indikator berdistribusi identik dengan \( \P(X_i = 1) = r / N \) untuk \( i \in \{1, 2, \ldots, n\} \), tetapi saling bergantung. Tentu saja ukuran sampel \( n \) merupakan bilangan bulat positif dengan \( n \le N \).</p>
+
+<p>Peubah \( Y = \sum_{i=1}^n X_i \) menyatakan banyaknya objek tipe 1 dalam sampel. Peubah ini berdistribusi <a href="https://www.randomservices.org/random/urn/Hypergeometric.html">hipergeometrik</a> dengan parameter \( N \), \( r \), dan \( n \), serta memiliki fungsi kepadatan probabilitas \( h \) yang diberikan oleh
+\[ h(y) = \frac{\binom{r}{y} \binom{N - r}{n - y}}{\binom{N}{n}} = \binom{n}{y} \frac{r^{(y)} (N - r)^{(n - y)}}{N^{(n)}}, \quad y \in \{\max\{0, n - N + r\}, \ldots, \min\{n, r\}\} \]
+(Ingat notasi <dfn>pangkat turun</dfn> \( x^{(k)} = x (x - 1) \cdots (x - k + 1) \).)</p>
+
+<div class="unit" id="o006.random.point.sufficient.unit-38">
+	<p class="math">\( Y \) cukup untuk \( (N, r) \). Secara khusus, untuk \( y \in \{\max\{0, n - N + r\}, \ldots, \min\{n, r\}\} \), distribusi bersyarat \( \bs X \) yang diberikan \( Y = y \) seragam pada himpunan titik
+	\[ D_y = \left\{(x_1, x_2, \ldots, x_n) \in \{0, 1\}^n: x_1 + x_2 + \cdots + x_n = y\right\} \]</p>
+	<details>
+		<summary>Rincian:</summary>
+		<p>Dengan menerapkan aturan perkalian kombinatorika secara langsung, PDF \( f \) dari \( \bs X \) diberikan oleh
+		\[ f(\bs x) = \frac{r^{(y)} (N - r)^{(n - y)}}{N^{(n)}}, \quad \bs x = (x_1, x_2, \ldots, x_n) \in \{0, 1\}^n \]
+		Dengan \( y = \sum_{i=1}^n x_i \). Jika \( y \in \{\max\{0, n - N + r\}, \ldots, \min\{n, r\}\} \), distribusi bersyarat \( \bs X \) yang diberikan \( Y = y \) terkonsentrasi pada \( D_y \) dan
+		\[ \P(\bs X = \bs x \mid Y = y) = \frac{\P(\bs X = \bs x)}{\P(Y = y)} = \frac{r^{(y)} (N - r)^{(n-y)}/N^{(n)}}{\binom{n}{y} r^{(y)} (N - r)^{(n - y)} / N^{(n)}} = \frac{1}{\binom{n}{y}}, \quad \bs x \in D_y  \]
+		Tentu saja, \( \binom{n}{y} \) adalah kardinalitas \( D_y \).</p>
+	</details>
+</div>
+
+<p>Terdapat kemiripan kuat antara model hipergeometrik dan model percobaan Bernoulli di atas. Jika pengambilan sampel dilakukan <em>dengan pengembalian</em>, model percobaan Bernoulli dengan \( p = r / N \) akan berlaku, bukan model hipergeometrik. Menarik pula bahwa satu statistik bernilai riil cukup untuk dua parameter bernilai riil.</p>
+
+<p>Sekali lagi, rata-rata sampel \( M = Y / n \) ekuivalen dengan \( Y \) sehingga juga cukup untuk \( (N, r) \). Ingat bahwa penduga metode momen bagi \( r \) ketika \( N \) diketahui adalah \( N M \), sedangkan penduga metode momen bagi \( N \) ketika \( r \) diketahui adalah \( r / M \). Penduga \( r \) digunakan dalam eksperimen tangkap-tangkap kembali.</p>
+
+<h4>Keluarga Eksponensial</h4>
+
+<p>Misalkan sekarang vektor data \(\bs X\) bernilai di himpunan \(S\), dan distribusi \(\bs X\) bergantung pada vektor parameter \(\bs{\theta}\) yang bernilai di ruang parameter \(\Theta\). Distribusi \(\bs X\) merupakan <a href="https://www.randomservices.org/random/special/GeneralExponential.html">keluarga eksponensial</a> dengan \(k\) parameter jika \(S\) tidak bergantung pada \(\bs{\theta}\) dan fungsi kepadatan probabilitas dari \(\bs X\) dapat ditulis sebagai
+\[ f_\bs{\theta}(\bs x) = \alpha(\bs{\theta}) r(\bs x) \exp\left(\sum_{i=1}^k \beta_i(\bs{\theta}) u_i(\bs x) \right); \quad \bs x \in S, \; \bs{\theta} \in \Theta \]
+dengan \(\alpha\) dan \(\left(\beta_1, \beta_2, \ldots, \beta_k\right)\) merupakan fungsi bernilai riil pada \(\Theta\), sedangkan \(r\) dan \(\left(u_1, u_2, \ldots, u_k\right)\) merupakan fungsi bernilai riil pada \(S\). Selain itu, \(k\) dianggap sebagai bilangan bulat terkecil yang memenuhi bentuk tersebut. Vektor parameter \(\bs{\beta} = \left(\beta_1(\bs{\theta}), \beta_2(\bs{\theta}), \ldots, \beta_k(\bs{\theta})\right)\) kadang disebut <dfn>parameter alami</dfn> distribusi, sedangkan vektor acak \(\bs U = \left(u_1(\bs X), u_2(\bs X), \ldots, u_k(\bs X)\right)\) kadang disebut <dfn>statistik alami</dfn>. Walaupun definisinya tampak mengintimidasi, keluarga eksponensial berguna karena memiliki banyak sifat matematis yang baik dan karena banyak keluarga parametrik khusus merupakan keluarga eksponensial. Contoh keluarga yang dibahas di atas adalah Bernoulli pada <a href="#ber" class="ref"></a>, Poisson pada <a href="#poi" class="ref"></a>, gamma pada <a href="#gam" class="ref"></a>, normal pada <a href="#nor" class="ref"></a>, dan beta pada <a href="#bet" class="ref"></a>. Pareto pada <a href="#par" class="ref"></a> dibahas di atas, tetapi tidak termasuk dalam klaim keluarga eksponensial bersupport tetap karena dukungannya bergantung pada parameter. Untuk klaim kecukupan minimal berikut, kita memakai keluarga eksponensial penuh dengan ruang parameter alami yang memuat himpunan terbuka.</p>
+
+<div class="unit" id="o006.random.point.sufficient.unit-39">
+	<p class="math">Dalam keluarga eksponensial penuh tersebut, \(\bs U\) cukup minimal untuk \(\bs{\theta}\).</p>
+	<details>
+		<summary>Rincian:</summary>
+		<p>Bahwa \( U \) cukup untuk \( \theta \) segera mengikuti dari teorema faktorisasi <a href="#fac" class="ref"></a>. Untuk keluarga eksponensial penuh dengan ruang parameter alami yang memuat himpunan terbuka, kecukupan minimal bagi \( U \) mengikuti kriteria rasio pada teorema kecukupan minimal; sekadar memilih jumlah parameter \( k \) sebagai bilangan bulat terkecil tidak cukup tanpa syarat ini. Klaim tersebut harus dibaca dalam kondisi tersebut.</p>
+	</details>
+</div>
+
+<p>Dalam keluarga eksponensial penuh dengan ruang parameter alami yang memuat himpunan terbuka, \(\bs U\) juga lengkap untuk \(\bs{\theta}\), meskipun buktinya lebih sulit. Tanpa syarat ruang parameter tersebut, kelengkapan tidak otomatis.</p>
+
+<footer>
+	<ol class="map">
+		<li class="parent"><a href="https://www.randomservices.org/random/index.html">Random</a></li>
+		<li class="parent"><a href="index.html">6. Pendugaan Titik</a></li>
+		<li class="child"><a href="Estimators.html" title="Penduga">1</a></li>
+		<li class="child"><a href="Moments.html" title="Metode Momen">2</a></li>
+		<li class="child"><a href="Likelihood.html" title="Kemungkinan Maksimum">3</a></li>
+		<li class="child"><a href="Bayes.html" title="Penduga Bayes">4</a></li>
+		<li class="child"><a href="Unbiased.html" title="Penduga Tak Bias Terbaik">5</a></li>
+		<li class="current">6</li>
+		<li class="details"><button type="button" title="Perluas Rincian" onclick="expandDetails(true);"><img src="../icons/Plus.svg" alt="Perluas"></button></li>
+		<li class="details"><button type="button" title="Ciutkan Rincian" onclick="expandDetails(false);"><img src="../icons/Minus.svg" alt="Ciutkan"></button></li>
+	</ol>
+	<ul class="map">
+		<li class="sister"><a href="https://www.randomservices.org/random/apps/index.html" class="ancillary">Aplikasi</a></li>
+		<li class="sister"><a href="https://www.randomservices.org/random/data/index.html" class="ancillary">Himpunan Data</a></li>
+		<li class="child"><a href="https://www.randomservices.org/random/biographies/index.html" class="ancillary">Biografi</a></li>
+	</ul>
+    <section class="edition-notice" data-o006-edition-notice="v1">
+        <p><strong>Pemberitahuan edisi.</strong> Terjemahan Bahasa Indonesia ini mengadaptasi <a href="https://www.randomservices.org/random/">Random: Probabilitas, Statistika Matematis, dan Proses Stokastik</a> karya Kyle Siegrist. Perubahan pada halaman ini mencakup penerjemahan, penambahan ID stabil, pengalihan tautan inti yang telah diterjemahkan ke edisi lokal, pengalihan tautan inti yang belum diterjemahkan ke sumber resmi, pengubahan tautan pelengkap menjadi tautan HTTPS resmi, serta koreksi terbatas terhadap kekeliruan matematis, ejaan, dan struktur yang dicatat dalam daftar koreksi edisi.</p>
+        <p>Situs asal menyatakan <a href="https://creativecommons.org/licenses/by/2.0/">CC BY 2.0</a>, sedangkan halaman <a href="https://www.randomservices.org/random/Credits.html">Kredit</a> menautkan <a href="https://creativecommons.org/licenses/by/1.0/">CC BY 1.0</a>; perbedaan ini dipertahankan. Edisi independen ini tidak didukung maupun disahkan oleh Kyle Siegrist atau Random Services. Tautan ke aplikasi, data, dan biografi pihak ketiga tidak menyatakan hak untuk mendistribusikan ulang materi tersebut.</p>
+     </section>
+</footer>
+
+<script>getReferences();</script>
+
+</body>
+</html>
