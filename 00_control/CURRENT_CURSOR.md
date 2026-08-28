@@ -1,6 +1,6 @@
 # Production cursor
 
-Updated: 2026-08-26
+Updated: 2026-08-28
 
 ## Current boundary
 
@@ -76,14 +76,21 @@ Updated: 2026-08-26
 
 ## Next executable action
 
-Produce one consolidated, deterministic PDF and one EPUB from the complete
-fourteen-document reader. Preserve stable anchors, mathematics, figures,
-tables, code, worked solutions, attribution, and component rights; validate
-text/structure, render and inspect every PDF page, and perform EPUB package and
-representative browser checks. Record exact manifests and receipts, then
-publish the passing surfaces in the existing repository and Zenodo lineage
-with anonymous byte readback before beginning the distinct exact Random
-completeness donor and original C140 companion.
+Commit and push the release-ready consolidated-reader source and receipts,
+then publish the 17-file union under GitHub tag
+`v2026.08.28.14of14-pdf-epub` and Zenodo version
+`2026.08.28.14of14-pdf-epub` in the existing concept. The primary PDF is 219
+pages / 20,170,549 bytes / SHA-256
+`f39c1c438cc3e793fe9522eb11f5b02704d89fcdc7aecb2207a599087d458964`;
+the EPUB is 12,301,415 bytes / SHA-256
+`e122d65348971b91a5ac0c7a8219e0fa3e0eabedb92d130c661648e399e3c574`.
+The ordered union is 17 files / 87,848,426 bytes and its package-receipt
+SHA-256 is
+`934f9484dd7fd25a2436c80914c68d9627ba4009da07900a975e168d91d01694`.
+After anonymous byte-and-hash readback and sanitized receipt persistence,
+begin the distinct exact Random completeness donor and then the original C140
+companion. Do not launch any browser process and do not send an upstream
+message.
 
 ## Recovery
 
@@ -95,6 +102,12 @@ receipt, `TRANSLATION_LEDGER.csv`, `ADVERSE_LEDGER.jsonl`, the final glossary,
 `build/THROUGH_LESSON12_BUILD_RECEIPT.json`,
 `build/THROUGH_LESSON12_QA_RECEIPT.json`, and
 `build/THROUGH_LESSON12_VISUAL_QA_RECEIPT.json`,
+`build/CONSOLIDATED_PDF_QA_RECEIPT.json`,
+`build/CONSOLIDATED_PDF_VISUAL_QA_RECEIPT.json`,
+`build/CONSOLIDATED_EPUB_BUILD_RECEIPT.json`,
+`build/CONSOLIDATED_EPUB_QA_RECEIPT.json`,
+`build/CONSOLIDATED_EPUB_STATIC_REFLOW_QA_RECEIPT.json`,
+`build/CONSOLIDATED_READERS_PACKAGE_RECEIPT.json`,
 `CHECKPOINT_2026-08-26_THROUGH_LESSON12_PUBLICATION_COMPLETE.md`, the complete
 GitHub checkpoint/release receipts, the three LF-repair Zenodo receipts, and
 `ZENODO_LINEAGE.json`. Conversation summaries are not state. Do not broaden

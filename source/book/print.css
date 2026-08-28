@@ -1,0 +1,422 @@
+@page {
+  size: A4;
+}
+
+html {
+  background: #ffffff;
+  color: #182334;
+  font-family: "Noto Serif", "DejaVu Serif", serif;
+  font-size: 10pt;
+}
+
+body {
+  background: #ffffff;
+  line-height: 1.43;
+  margin: 0;
+}
+
+.book-cover {
+  align-items: center;
+  break-after: page;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-height: 245mm;
+  page-break-after: always;
+  text-align: center;
+}
+
+.book-cover h1 {
+  border: 0;
+  color: #183d5d;
+  font-size: 34pt;
+  margin: 8mm auto 4mm;
+  max-width: 150mm;
+  padding: 0;
+}
+
+.book-cover-kicker {
+  color: #537a9c;
+  font-family: "Noto Sans", "DejaVu Sans", sans-serif;
+  font-size: 17pt;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  margin: 0;
+}
+
+.book-cover-subtitle {
+  color: #315b7d;
+  font-family: "Noto Sans", "DejaVu Sans", sans-serif;
+  font-size: 19pt;
+  margin: 0;
+}
+
+.book-cover-scope {
+  color: #526272;
+  font-size: 12pt;
+  margin: 4mm 0 14mm;
+}
+
+.book-cover-credit {
+  border-top: 1pt solid #8aa6bd;
+  color: #34485a;
+  font-size: 9.5pt;
+  max-width: 145mm;
+  padding-top: 6mm;
+}
+
+.book-cover-credit p {
+  margin: 2.5pt 0;
+}
+
+.book-print-toc {
+  break-after: page;
+  min-height: 245mm;
+  page-break-after: always;
+}
+
+.book-print-toc ol {
+  columns: 2;
+  column-gap: 12mm;
+  font-family: "Noto Sans", "DejaVu Sans", sans-serif;
+  font-size: 10pt;
+  line-height: 1.35;
+  padding-left: 7mm;
+}
+
+.book-print-toc li {
+  break-inside: avoid;
+  margin: 0 0 5pt;
+}
+
+.book-print-toc a {
+  color: #23466a;
+  text-decoration: none;
+}
+
+.book-document {
+  break-before: page;
+}
+
+.book-document:first-child {
+  break-before: auto;
+}
+
+/* The landing-page lesson entries are anchor-wrapped cards. Keep each card as
+   one print unit so its thumbnail is not bisected at the top of a new page and
+   its footer metadata cannot fall through the page footer. */
+#index--document .quarto-grid-link,
+#index--document .quarto-grid-item.card {
+  break-inside: avoid-page;
+  page-break-inside: avoid;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5 {
+  break-after: avoid-page;
+  color: #23466a;
+  font-family: "Noto Sans", "DejaVu Sans", sans-serif;
+  line-height: 1.18;
+  page-break-after: avoid;
+}
+
+h1 {
+  border-bottom: 1.4pt solid #7f9db8;
+  font-size: 23pt;
+  margin: 0 0 15pt;
+  padding-bottom: 7pt;
+}
+
+h2 {
+  font-size: 17pt;
+  margin: 18pt 0 8pt;
+}
+
+h3 {
+  font-size: 13.5pt;
+  margin: 14pt 0 6pt;
+}
+
+h4,
+h5 {
+  font-size: 11.2pt;
+  margin: 11pt 0 5pt;
+}
+
+p,
+li,
+dd,
+dt {
+  orphans: 3;
+  widows: 3;
+}
+
+/* Keep MathJax display wrappers wholly on one printed page. Chromium can
+   otherwise leave a stray glyph or rule behind when the containing paragraph
+   crosses a page boundary, even when the generated mjx-container itself has
+   break-inside: avoid. */
+p:has(> span.math.display),
+p:has(> mjx-container[display="true"]),
+span.math.display {
+  break-inside: avoid-page;
+  page-break-inside: avoid;
+}
+
+/* Keep a prose lead-in with the display that immediately follows it. Some
+   normalized source surfaces retain the display as a standalone sibling,
+   while others wrap it in its own paragraph or overflow container. Without
+   this rule Chromium can leave a stray MathJax stroke above the page footer. */
+p:has(+ span.math.display),
+p:has(+ p > span.math.display),
+p:has(+ div span.math.display) {
+  break-after: avoid-page;
+  page-break-after: avoid;
+}
+
+a {
+  color: #244f78;
+  text-decoration-thickness: 0.5pt;
+}
+
+figure {
+  break-inside: avoid-page;
+  margin: 10pt auto 13pt;
+  max-width: 100%;
+  page-break-inside: avoid;
+  text-align: center;
+}
+
+img,
+svg:not(mjx-container svg) {
+  display: block;
+  height: auto !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+  max-height: 222mm;
+  max-width: 100% !important;
+  object-fit: contain;
+}
+
+figcaption,
+caption {
+  color: #34495e;
+  font-size: 8.7pt;
+  line-height: 1.3;
+  margin: 5pt auto 0;
+  text-align: center;
+}
+
+table {
+  border-collapse: collapse;
+  break-inside: auto;
+  font-size: 8.4pt;
+  margin: 10pt auto;
+  max-width: 100%;
+  page-break-inside: auto;
+  width: auto;
+}
+
+tr {
+  break-inside: avoid-page;
+  page-break-inside: avoid;
+}
+
+thead {
+  display: table-header-group;
+}
+
+th,
+td {
+  border: 0.55pt solid #8c9cad;
+  overflow-wrap: anywhere;
+  padding: 3.2pt 4.2pt;
+  vertical-align: top;
+}
+
+th {
+  background: #eaf1f6;
+  color: #1b3853;
+  font-family: "Noto Sans", "DejaVu Sans", sans-serif;
+  font-weight: 700;
+}
+
+table.book-table-wide {
+  font-size: 7pt;
+  table-layout: fixed;
+  width: 100%;
+}
+
+pre {
+  background: #f3f6f8;
+  border-left: 2.8pt solid #5f83a3;
+  break-inside: auto;
+  font-family: "DejaVu Sans Mono", monospace;
+  font-size: 7.2pt;
+  line-height: 1.32;
+  margin: 8pt 0;
+  overflow-wrap: anywhere;
+  padding: 6pt 7pt;
+  page-break-inside: auto;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+code {
+  font-family: "DejaVu Sans Mono", monospace;
+  overflow-wrap: anywhere;
+}
+
+.expanded-disclosure,
+.callout {
+  background: #f7fafc;
+  border-left: 3pt solid #4e7598;
+  break-inside: auto;
+  margin: 9pt 0;
+  padding: 5pt 8pt 5pt 10pt;
+}
+
+/* Bounded short blocks that fit on one page and otherwise split badly. */
+[data-o006-id="O006-PSU-001-U0225"],
+[data-o006-id="O006-PSU-005-U0033"],
+[data-o006-id="O006-PSU-006-U0037"],
+[data-o006-id="O006-PSU-007-U0058"],
+[data-o006-id="O006-PSU-008-U0039"] {
+  break-inside: avoid-page;
+  page-break-inside: avoid;
+}
+
+#exm-bivariate_cont > p:first-child {
+  break-after: avoid-page;
+  page-break-after: avoid;
+}
+
+#exm-bivariate_cont > ol {
+  break-inside: avoid-page;
+  page-break-inside: avoid;
+}
+
+[data-o006-id="O006-PSU-005-U0316"] {
+  break-after: avoid-page;
+  page-break-after: avoid;
+}
+
+.expanded-disclosure-title {
+  break-after: avoid-page;
+  color: #23466a;
+  margin: 0 0 4pt;
+  page-break-after: avoid;
+}
+
+mjx-container {
+  color: #111820;
+  max-width: 100%;
+}
+
+mjx-container[display="true"] {
+  break-inside: avoid-page;
+  margin: 0.72em auto !important;
+  overflow: visible;
+  page-break-inside: avoid;
+  text-align: center !important;
+}
+
+mjx-container.book-math-scaled {
+  transform-origin: center center;
+}
+
+.book-rights {
+  font-size: 9.3pt;
+}
+
+.book-rights code {
+  font-size: 8.2pt;
+}
+
+.source-correction,
+.derivative-note {
+  background: #fff8df;
+  border-left: 3pt solid #c49b2f;
+  padding: 5pt 8pt;
+}
+
+/* The final four-item Lesson 10 summary otherwise leaves its last bullet alone
+   on the page immediately before Lesson 11. A modest, local print compaction
+   keeps the complete summary together without changing the reader text. */
+#lesson10--summary {
+  font-size: 9.4pt;
+  line-height: 1.35;
+}
+
+#lesson10--summary h2 {
+  margin-bottom: 6pt;
+  margin-top: 12pt;
+}
+
+#lesson10--summary p,
+#lesson10--summary ul {
+  margin-bottom: 4pt;
+  margin-top: 4pt;
+}
+
+/* The official Lesson 07 page supplies an objective heading and lead-in but no
+   objective list. Its translated overview already states the actual coverage;
+   omit the otherwise dangling empty shell in this print rendition. */
+#lesson07--document [data-o006-id="O006-PSU-008-U0020"] {
+  display: none;
+}
+
+/* Short, bounded list and code surfaces that fit on one page. */
+[data-o006-id="O006-PSU-004-U0320"],
+[data-o006-id="O006-PSU-006-U0632"],
+[data-o006-id="O006-PSU-009-U0065"],
+[data-o006-id="O006-PSU-009-U0433"] {
+  break-inside: avoid-page;
+  page-break-inside: avoid;
+}
+
+[data-o006-id="O006-PSU-004-U0319"],
+[data-o006-id="O006-PSU-006-U0631"],
+[data-o006-id="O006-PSU-011-U0559"] {
+  break-after: avoid-page;
+  page-break-after: avoid;
+}
+
+/* Two prose units otherwise leave a one-word continuation at the top of the
+   next page. Each unit is short enough to remain intact. */
+[data-o006-id="O006-PSU-009-U0243"],
+[data-o006-id="O006-PSU-010-U0181"] {
+  break-inside: avoid-page;
+  page-break-inside: avoid;
+}
+
+/* Keep proof/argument labels with the first substantive line while allowing
+   the long theorem bodies themselves to continue naturally across pages. */
+[data-o006-id="O006-PSU-013-U0356"],
+[data-o006-id="O006-PSU-013-U0386"],
+[data-o006-id="O006-PSU-013-U0464"],
+[data-o006-id="O006-PSU-013-U0538"],
+[data-o006-id="O006-PSU-013-U0566"],
+[data-o006-id="O006-PSU-013-U0586"],
+[data-o006-id="O006-PSU-013-U0607"],
+[data-o006-id="O006-PSU-013-U0628"],
+[data-o006-id="O006-PSU-013-U0652"] {
+  break-after: avoid-page;
+  page-break-after: avoid;
+}
+
+/* Table 12.3 is small enough to keep its caption, header, and body together. */
+[data-o006-id="O006-PSU-013-U0656"],
+[data-o006-id="O006-PSU-013-U0771"] {
+  break-inside: avoid-page;
+  page-break-inside: avoid;
+}
+
+/* Keep Lesson 12's own provenance block coherent instead of spilling two
+   unheaded paragraphs onto an otherwise empty page. */
+#lesson12--document > .component-provenance {
+  break-before: page;
+  page-break-before: always;
+}

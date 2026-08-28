@@ -1,0 +1,1702 @@
+{
+  "book_source_sha256": "0c924340d9330c802506af0221e2c58e33f9e93125c43b76bf458cb1dc2254eb",
+  "bytes": 12301415,
+  "entries": 111,
+  "epub_css_sha256": "f4ba7af84c1a4ba58a84f60bfa5b7a8e89eb94dc40fa5865ff5802458703837a",
+  "image_alt_repairs": [
+    {
+      "expected": "Coordinate graph of f(x) = 1/2x",
+      "replacement": "Grafik koordinat f(x) = 1/2x.",
+      "source_element_id": "O006-PSU-002-U0048",
+      "target_evidence_ids": [
+        "O006-PSU-002-U0046",
+        "O006-PSU-002-U0049"
+      ]
+    },
+    {
+      "expected": "Number line showing 6 values less than 1.",
+      "replacement": "Garis bilangan yang menunjukkan enam nilai kurang dari satu.",
+      "source_element_id": "O006-PSU-002-U0068",
+      "target_evidence_ids": [
+        "O006-PSU-002-U0063"
+      ]
+    },
+    {
+      "expected": "Number line showing four values less than and two greater than one.",
+      "replacement": "Garis bilangan yang menunjukkan empat nilai kurang dari satu dan dua nilai lebih dari satu.",
+      "source_element_id": "O006-PSU-002-U0075",
+      "target_evidence_ids": [
+        "O006-PSU-002-U0070"
+      ]
+    },
+    {
+      "expected": "Density plot for r = 1, 4, 6",
+      "replacement": "Plot kepadatan untuk r = 1, 4, 6.",
+      "source_element_id": "O006-PSU-002-U0177",
+      "target_evidence_ids": [
+        "O006-PSU-002-S0206",
+        "O006-PSU-002-U0178"
+      ]
+    }
+  ],
+  "known_source_limitations": {
+    "heading_hierarchy": {
+      "audit": "Adjacent h1-h6 elements in DOM order; forward skip when the next numeric heading level increases by more than one.",
+      "disposition": "Recorded before EPUB-only repair; the id-ID HTML source remains unchanged, while the rendition normalizes the lesson-card, proof, solution, definition, and notation headings to h3.",
+      "forward_skip_count": 21,
+      "heading_count": 272,
+      "per_source_document": {
+        "Lesson01.html": 2,
+        "Lesson03.html": 2,
+        "Lesson04.html": 4,
+        "Lesson06.html": 2,
+        "Lesson07.html": 1,
+        "Lesson09.html": 2,
+        "Lesson10.html": 2,
+        "Lesson11.html": 3,
+        "Lesson12.html": 2,
+        "index.html": 1
+      },
+      "records": [
+        {
+          "from_id": "O006-PSU-000-U0014",
+          "from_level": 2,
+          "source_document": "index.html",
+          "to_id": "O006-PSU-000-U0023",
+          "to_level": 5
+        },
+        {
+          "from_id": "O006-PSU-002-U0025",
+          "from_level": 2,
+          "source_document": "Lesson01.html",
+          "to_id": "O006-PSU-002-U0032",
+          "to_level": 4
+        },
+        {
+          "from_id": "O006-PSU-002-U0117",
+          "from_level": 2,
+          "source_document": "Lesson01.html",
+          "to_id": "O006-PSU-002-U0130",
+          "to_level": 4
+        },
+        {
+          "from_id": "O006-PSU-004-U0030",
+          "from_level": 2,
+          "source_document": "Lesson03.html",
+          "to_id": "O006-PSU-004-U0033",
+          "to_level": 4
+        },
+        {
+          "from_id": "O006-PSU-004-U0302",
+          "from_level": 2,
+          "source_document": "Lesson03.html",
+          "to_id": "O006-PSU-004-U0307",
+          "to_level": 4
+        },
+        {
+          "from_id": "O006-PSU-005-U0028",
+          "from_level": 2,
+          "source_document": "Lesson04.html",
+          "to_id": "O006-PSU-005-U0041",
+          "to_level": 4
+        },
+        {
+          "from_id": "O006-PSU-005-U0087",
+          "from_level": 2,
+          "source_document": "Lesson04.html",
+          "to_id": "O006-PSU-005-U0090",
+          "to_level": 4
+        },
+        {
+          "from_id": "O006-PSU-005-U0160",
+          "from_level": 2,
+          "source_document": "Lesson04.html",
+          "to_id": "O006-PSU-005-U0165",
+          "to_level": 4
+        },
+        {
+          "from_id": "O006-PSU-005-U0253",
+          "from_level": 2,
+          "source_document": "Lesson04.html",
+          "to_id": "O006-PSU-005-U0257",
+          "to_level": 4
+        },
+        {
+          "from_id": "O006-PSU-007-U0042",
+          "from_level": 2,
+          "source_document": "Lesson06.html",
+          "to_id": "O006-PSU-007-U0068",
+          "to_level": 4
+        },
+        {
+          "from_id": "O006-PSU-007-U0121",
+          "from_level": 2,
+          "source_document": "Lesson06.html",
+          "to_id": "O006-PSU-007-U0133",
+          "to_level": 4
+        },
+        {
+          "from_id": "O006-PSU-008-U0024",
+          "from_level": 2,
+          "source_document": "Lesson07.html",
+          "to_id": "O006-PSU-008-U0049",
+          "to_level": 4
+        },
+        {
+          "from_id": "O006-PSU-010-U0195",
+          "from_level": 2,
+          "source_document": "Lesson09.html",
+          "to_id": "O006-PSU-010-U0210",
+          "to_level": 4
+        },
+        {
+          "from_id": "O006-PSU-010-U0291",
+          "from_level": 2,
+          "source_document": "Lesson09.html",
+          "to_id": "O006-PSU-010-U0296",
+          "to_level": 4
+        },
+        {
+          "from_id": "O006-PSU-011-U0028",
+          "from_level": 2,
+          "source_document": "Lesson10.html",
+          "to_id": "O006-PSU-011-U0038",
+          "to_level": 4
+        },
+        {
+          "from_id": "O006-PSU-011-U0138",
+          "from_level": 2,
+          "source_document": "Lesson10.html",
+          "to_id": "O006-PSU-011-U0145",
+          "to_level": 4
+        },
+        {
+          "from_id": "O006-PSU-012-U0037",
+          "from_level": 2,
+          "source_document": "Lesson11.html",
+          "to_id": "O006-PSU-012-U0064",
+          "to_level": 4
+        },
+        {
+          "from_id": "O006-PSU-012-U0093",
+          "from_level": 2,
+          "source_document": "Lesson11.html",
+          "to_id": "O006-PSU-012-U0100",
+          "to_level": 4
+        },
+        {
+          "from_id": "O006-PSU-012-U0217",
+          "from_level": 2,
+          "source_document": "Lesson11.html",
+          "to_id": "O006-PSU-012-U0227",
+          "to_level": 4
+        },
+        {
+          "from_id": "O006-PSU-013-U0083",
+          "from_level": 2,
+          "source_document": "Lesson12.html",
+          "to_id": "O006-PSU-013-U0094",
+          "to_level": 4
+        },
+        {
+          "from_id": "O006-PSU-013-U0556",
+          "from_level": 2,
+          "source_document": "Lesson12.html",
+          "to_id": "O006-PSU-013-U0722",
+          "to_level": 4
+        }
+      ]
+    },
+    "historical_source_tables": [
+      {
+        "caption_count": 0,
+        "row_count": 2,
+        "scope_attribute_count": 0,
+        "source_element_id": "O006-PSU-001-U0334",
+        "source_path": "source/id-ID/Lesson00.html",
+        "summary": "Historical two-row PMF table has column header cells but no caption or explicit scope associations; surrounding source prose introduces it.",
+        "table_header_count": 5
+      },
+      {
+        "caption_count": 0,
+        "row_count": 2,
+        "scope_attribute_count": 0,
+        "source_element_id": "O006-PSU-008-U0100",
+        "source_path": "source/id-ID/Lesson07.html",
+        "summary": "Historical two-row inline display of ten Bernoulli observations uses table layout without caption or header cells.",
+        "table_header_count": 0
+      }
+    ]
+  },
+  "math_fallback_render_receipt": {
+    "bytes": 4050,
+    "path": "build/EPUB_MATH_FALLBACK_RENDER_RECEIPT.json",
+    "sha256": "39cbf384589ce1246bbd9833a3871fff940fae082998210860a10afdb7555e60"
+  },
+  "math_reflow": {
+    "candidate_count": 125,
+    "candidate_inventory": [
+      {
+        "epub_document": "EPUB/text/ch001.xhtml",
+        "kind": "display",
+        "math_id": "O006-PSU-001-M0085",
+        "max_mtable_row_cells": 2,
+        "max_mtable_row_token_chars": 38,
+        "reasons": [
+          "long-display"
+        ],
+        "tex_chars": 278
+      },
+      {
+        "epub_document": "EPUB/text/ch001.xhtml",
+        "kind": "display",
+        "math_id": "O006-PSU-001-M0106",
+        "max_mtable_row_cells": 2,
+        "max_mtable_row_token_chars": 37,
+        "reasons": [
+          "long-display"
+        ],
+        "tex_chars": 245
+      },
+      {
+        "epub_document": "EPUB/text/ch001.xhtml",
+        "kind": "display",
+        "math_id": "O006-PSU-001-M0270",
+        "max_mtable_row_cells": 2,
+        "max_mtable_row_token_chars": 44,
+        "reasons": [
+          "wide-structural-mtable",
+          "long-display"
+        ],
+        "tex_chars": 198
+      },
+      {
+        "epub_document": "EPUB/text/ch001.xhtml",
+        "kind": "inline",
+        "math_id": "O006-PSU-001-M0276",
+        "max_mtable_row_cells": 2,
+        "max_mtable_row_token_chars": 48,
+        "reasons": [
+          "wide-structural-mtable",
+          "long-inline"
+        ],
+        "tex_chars": 171
+      },
+      {
+        "epub_document": "EPUB/text/ch001.xhtml",
+        "kind": "inline",
+        "math_id": "O006-PSU-001-M0277",
+        "max_mtable_row_cells": 1,
+        "max_mtable_row_token_chars": 56,
+        "reasons": [
+          "wide-structural-mtable",
+          "long-inline"
+        ],
+        "tex_chars": 181
+      },
+      {
+        "epub_document": "EPUB/text/ch001.xhtml",
+        "kind": "inline",
+        "math_id": "O006-PSU-001-M0278",
+        "max_mtable_row_cells": 2,
+        "max_mtable_row_token_chars": 72,
+        "reasons": [
+          "wide-structural-mtable",
+          "long-inline"
+        ],
+        "tex_chars": 236
+      },
+      {
+        "epub_document": "EPUB/text/ch001.xhtml",
+        "kind": "inline",
+        "math_id": "O006-PSU-001-M0279",
+        "max_mtable_row_cells": 1,
+        "max_mtable_row_token_chars": 34,
+        "reasons": [
+          "long-inline"
+        ],
+        "tex_chars": 161
+      },
+      {
+        "epub_document": "EPUB/text/ch001.xhtml",
+        "kind": "inline",
+        "math_id": "O006-PSU-001-M0287",
+        "max_mtable_row_cells": 2,
+        "max_mtable_row_token_chars": 49,
+        "reasons": [
+          "wide-structural-mtable",
+          "long-inline"
+        ],
+        "tex_chars": 278
+      },
+      {
+        "epub_document": "EPUB/text/ch001.xhtml",
+        "kind": "inline",
+        "math_id": "O006-PSU-001-M0288",
+        "max_mtable_row_cells": 2,
+        "max_mtable_row_token_chars": 37,
+        "reasons": [
+          "long-inline"
+        ],
+        "tex_chars": 178
+      },
+      {
+        "epub_document": "EPUB/text/ch001.xhtml",
+        "kind": "inline",
+        "math_id": "O006-PSU-001-M0289",
+        "max_mtable_row_cells": 1,
+        "max_mtable_row_token_chars": 62,
+        "reasons": [
+          "wide-structural-mtable",
+          "long-inline"
+        ],
+        "tex_chars": 137
+      },
+      {
+        "epub_document": "EPUB/text/ch001.xhtml",
+        "kind": "display",
+        "math_id": "O006-PSU-001-M0314",
+        "max_mtable_row_cells": 1,
+        "max_mtable_row_token_chars": 44,
+        "reasons": [
+          "wide-structural-mtable"
+        ],
+        "tex_chars": 174
+      },
+      {
+        "epub_document": "EPUB/text/ch001.xhtml",
+        "kind": "display",
+        "math_id": "O006-PSU-001-M0316",
+        "max_mtable_row_cells": 2,
+        "max_mtable_row_token_chars": 48,
+        "reasons": [
+          "wide-structural-mtable",
+          "long-display"
+        ],
+        "tex_chars": 255
+      },
+      {
+        "epub_document": "EPUB/text/ch001.xhtml",
+        "kind": "display",
+        "math_id": "O006-PSU-002-M0079",
+        "max_mtable_row_cells": 0,
+        "max_mtable_row_token_chars": 0,
+        "reasons": [
+          "long-display"
+        ],
+        "tex_chars": 243
+      },
+      {
+        "epub_document": "EPUB/text/ch001.xhtml",
+        "kind": "display",
+        "math_id": "O006-PSU-002-M0127",
+        "max_mtable_row_cells": 2,
+        "max_mtable_row_token_chars": 44,
+        "reasons": [
+          "wide-structural-mtable",
+          "long-display"
+        ],
+        "tex_chars": 194
+      },
+      {
+        "epub_document": "EPUB/text/ch001.xhtml",
+        "kind": "inline",
+        "math_id": "O006-PSU-002-M0169",
+        "max_mtable_row_cells": 0,
+        "max_mtable_row_token_chars": 0,
+        "reasons": [
+          "long-inline"
+        ],
+        "tex_chars": 83
+      },
+      {
+        "epub_document": "EPUB/text/ch001.xhtml",
+        "kind": "display",
+        "math_id": "O006-PSU-003-M0062",
+        "max_mtable_row_cells": 1,
+        "max_mtable_row_token_chars": 30,
+        "reasons": [
+          "long-display"
+        ],
+        "tex_chars": 225
+      },
+      {
+        "epub_document": "EPUB/text/ch001.xhtml",
+        "kind": "display",
+        "math_id": "O006-PSU-003-M0078",
+        "max_mtable_row_cells": 2,
+        "max_mtable_row_token_chars": 32,
+        "reasons": [
+          "long-display"
+        ],
+        "tex_chars": 234
+      },
+      {
+        "epub_document": "EPUB/text/ch001.xhtml",
+        "kind": "display",
+        "math_id": "O006-PSU-003-M0102",
+        "max_mtable_row_cells": 2,
+        "max_mtable_row_token_chars": 27,
+        "reasons": [
+          "long-display"
+        ],
+        "tex_chars": 279
+      },
+      {
+        "epub_document": "EPUB/text/ch001.xhtml",
+        "kind": "display",
+        "math_id": "O006-PSU-003-M0103",
+        "max_mtable_row_cells": 1,
+        "max_mtable_row_token_chars": 47,
+        "reasons": [
+          "wide-structural-mtable"
+        ],
+        "tex_chars": 166
+      },
+      {
+        "epub_document": "EPUB/text/ch001.xhtml",
+        "kind": "display",
+        "math_id": "O006-PSU-003-M0108",
+        "max_mtable_row_cells": 1,
+        "max_mtable_row_token_chars": 53,
+        "reasons": [
+          "wide-structural-mtable",
+          "long-display"
+        ],
+        "tex_chars": 195
+      },
+      {
+        "epub_document": "EPUB/text/ch001.xhtml",
+        "kind": "display",
+        "math_id": "O006-PSU-003-M0111",
+        "max_mtable_row_cells": 2,
+        "max_mtable_row_token_chars": 30,
+        "reasons": [
+          "long-display"
+        ],
+        "tex_chars": 296
+      },
+      {
+        "epub_document": "EPUB/text/ch001.xhtml",
+        "kind": "display",
+        "math_id": "O006-PSU-003-M0126",
+        "max_mtable_row_cells": 2,
+        "max_mtable_row_token_chars": 24,
+        "reasons": [
+          "long-display"
+        ],
+        "tex_chars": 214
+      },
+      {
+        "epub_document": "EPUB/text/ch001.xhtml",
+        "kind": "display",
+        "math_id": "O006-PSU-003-M0170",
+        "max_mtable_row_cells": 2,
+        "max_mtable_row_token_chars": 18,
+        "reasons": [
+          "long-display"
+        ],
+        "tex_chars": 188
+      },
+      {
+        "epub_document": "EPUB/text/ch001.xhtml",
+        "kind": "display",
+        "math_id": "O006-PSU-003-M0172",
+        "max_mtable_row_cells": 2,
+        "max_mtable_row_token_chars": 30,
+        "reasons": [
+          "long-display"
+        ],
+        "tex_chars": 317
+      },
+      {
+        "epub_document": "EPUB/text/ch001.xhtml",
+        "kind": "display",
+        "math_id": "O006-PSU-003-M0206",
+        "max_mtable_row_cells": 2,
+        "max_mtable_row_token_chars": 30,
+        "reasons": [
+          "long-display"
+        ],
+        "tex_chars": 232
+      },
+      {
+        "epub_document": "EPUB/text/ch001.xhtml",
+        "kind": "display",
+        "math_id": "O006-PSU-003-M0208",
+        "max_mtable_row_cells": 2,
+        "max_mtable_row_token_chars": 58,
+        "reasons": [
+          "wide-structural-mtable",
+          "long-display"
+        ],
+        "tex_chars": 347
+      },
+      {
+        "epub_document": "EPUB/text/ch001.xhtml",
+        "kind": "display",
+        "math_id": "O006-PSU-004-M0130",
+        "max_mtable_row_cells": 2,
+        "max_mtable_row_token_chars": 75,
+        "reasons": [
+          "wide-structural-mtable",
+          "long-display"
+        ],
+        "tex_chars": 292
+      },
+      {
+        "epub_document": "EPUB/text/ch001.xhtml",
+        "kind": "display",
+        "math_id": "O006-PSU-004-M0132",
+        "max_mtable_row_cells": 0,
+        "max_mtable_row_token_chars": 0,
+        "reasons": [
+          "long-display"
+        ],
+        "tex_chars": 195
+      },
+      {
+        "epub_document": "EPUB/text/ch001.xhtml",
+        "kind": "display",
+        "math_id": "O006-PSU-004-M0134",
+        "max_mtable_row_cells": 0,
+        "max_mtable_row_token_chars": 0,
+        "reasons": [
+          "long-display"
+        ],
+        "tex_chars": 205
+      },
+      {
+        "epub_document": "EPUB/text/ch001.xhtml",
+        "kind": "display",
+        "math_id": "O006-PSU-004-M0137",
+        "max_mtable_row_cells": 0,
+        "max_mtable_row_token_chars": 0,
+        "reasons": [
+          "long-display"
+        ],
+        "tex_chars": 357
+      },
+      {
+        "epub_document": "EPUB/text/ch001.xhtml",
+        "kind": "display",
+        "math_id": "O006-PSU-004-M0138",
+        "max_mtable_row_cells": 0,
+        "max_mtable_row_token_chars": 0,
+        "reasons": [
+          "long-display"
+        ],
+        "tex_chars": 206
+      },
+      {
+        "epub_document": "EPUB/text/ch001.xhtml",
+        "kind": "display",
+        "math_id": "O006-PSU-004-M0143",
+        "max_mtable_row_cells": 0,
+        "max_mtable_row_token_chars": 0,
+        "reasons": [
+          "long-display"
+        ],
+        "tex_chars": 384
+      },
+      {
+        "epub_document": "EPUB/text/ch001.xhtml",
+        "kind": "display",
+        "math_id": "O006-PSU-004-M0164",
+        "max_mtable_row_cells": 0,
+        "max_mtable_row_token_chars": 0,
+        "reasons": [
+          "long-display"
+        ],
+        "tex_chars": 221
+      },
+      {
+        "epub_document": "EPUB/text/ch001.xhtml",
+        "kind": "display",
+        "math_id": "O006-PSU-004-M0173",
+        "max_mtable_row_cells": 0,
+        "max_mtable_row_token_chars": 0,
+        "reasons": [
+          "long-display"
+        ],
+        "tex_chars": 299
+      },
+      {
+        "epub_document": "EPUB/text/ch001.xhtml",
+        "kind": "display",
+        "math_id": "O006-PSU-004-M0216",
+        "max_mtable_row_cells": 0,
+        "max_mtable_row_token_chars": 0,
+        "reasons": [
+          "long-display"
+        ],
+        "tex_chars": 331
+      },
+      {
+        "epub_document": "EPUB/text/ch001.xhtml",
+        "kind": "display",
+        "math_id": "O006-PSU-004-M0302",
+        "max_mtable_row_cells": 0,
+        "max_mtable_row_token_chars": 0,
+        "reasons": [
+          "long-display"
+        ],
+        "tex_chars": 260
+      },
+      {
+        "epub_document": "EPUB/text/ch001.xhtml",
+        "kind": "display",
+        "math_id": "O006-PSU-004-M0304",
+        "max_mtable_row_cells": 0,
+        "max_mtable_row_token_chars": 0,
+        "reasons": [
+          "long-display"
+        ],
+        "tex_chars": 231
+      },
+      {
+        "epub_document": "EPUB/text/ch001.xhtml",
+        "kind": "display",
+        "math_id": "O006-PSU-004-M0305",
+        "max_mtable_row_cells": 0,
+        "max_mtable_row_token_chars": 0,
+        "reasons": [
+          "long-display"
+        ],
+        "tex_chars": 227
+      },
+      {
+        "epub_document": "EPUB/text/ch001.xhtml",
+        "kind": "display",
+        "math_id": "O006-PSU-004-M0311",
+        "max_mtable_row_cells": 0,
+        "max_mtable_row_token_chars": 0,
+        "reasons": [
+          "long-display"
+        ],
+        "tex_chars": 405
+      },
+      {
+        "epub_document": "EPUB/text/ch001.xhtml",
+        "kind": "display",
+        "math_id": "O006-PSU-004-M0318",
+        "max_mtable_row_cells": 2,
+        "max_mtable_row_token_chars": 20,
+        "reasons": [
+          "long-display"
+        ],
+        "tex_chars": 200
+      },
+      {
+        "epub_document": "EPUB/text/ch001.xhtml",
+        "kind": "display",
+        "math_id": "O006-PSU-005-M0009",
+        "max_mtable_row_cells": 1,
+        "max_mtable_row_token_chars": 85,
+        "reasons": [
+          "wide-structural-mtable",
+          "long-display"
+        ],
+        "tex_chars": 262
+      },
+      {
+        "epub_document": "EPUB/text/ch001.xhtml",
+        "kind": "display",
+        "math_id": "O006-PSU-005-M0017",
+        "max_mtable_row_cells": 1,
+        "max_mtable_row_token_chars": 80,
+        "reasons": [
+          "wide-structural-mtable",
+          "long-display"
+        ],
+        "tex_chars": 197
+      },
+      {
+        "epub_document": "EPUB/text/ch001.xhtml",
+        "kind": "display",
+        "math_id": "O006-PSU-005-M0028",
+        "max_mtable_row_cells": 1,
+        "max_mtable_row_token_chars": 42,
+        "reasons": [
+          "wide-structural-mtable"
+        ],
+        "tex_chars": 123
+      },
+      {
+        "epub_document": "EPUB/text/ch001.xhtml",
+        "kind": "display",
+        "math_id": "O006-PSU-005-M0030",
+        "max_mtable_row_cells": 1,
+        "max_mtable_row_token_chars": 85,
+        "reasons": [
+          "wide-structural-mtable",
+          "long-display"
+        ],
+        "tex_chars": 244
+      },
+      {
+        "epub_document": "EPUB/text/ch001.xhtml",
+        "kind": "display",
+        "math_id": "O006-PSU-005-M0040",
+        "max_mtable_row_cells": 1,
+        "max_mtable_row_token_chars": 42,
+        "reasons": [
+          "wide-structural-mtable"
+        ],
+        "tex_chars": 123
+      },
+      {
+        "epub_document": "EPUB/text/ch001.xhtml",
+        "kind": "display",
+        "math_id": "O006-PSU-005-M0044",
+        "max_mtable_row_cells": 1,
+        "max_mtable_row_token_chars": 73,
+        "reasons": [
+          "wide-structural-mtable"
+        ],
+        "tex_chars": 161
+      },
+      {
+        "epub_document": "EPUB/text/ch001.xhtml",
+        "kind": "display",
+        "math_id": "O006-PSU-005-M0047",
+        "max_mtable_row_cells": 1,
+        "max_mtable_row_token_chars": 48,
+        "reasons": [
+          "wide-structural-mtable"
+        ],
+        "tex_chars": 155
+      },
+      {
+        "epub_document": "EPUB/text/ch001.xhtml",
+        "kind": "display",
+        "math_id": "O006-PSU-005-M0049",
+        "max_mtable_row_cells": 2,
+        "max_mtable_row_token_chars": 36,
+        "reasons": [
+          "long-display"
+        ],
+        "tex_chars": 306
+      },
+      {
+        "epub_document": "EPUB/text/ch001.xhtml",
+        "kind": "inline",
+        "math_id": "O006-PSU-005-M0063",
+        "max_mtable_row_cells": 0,
+        "max_mtable_row_token_chars": 0,
+        "reasons": [
+          "long-inline"
+        ],
+        "tex_chars": 103
+      },
+      {
+        "epub_document": "EPUB/text/ch001.xhtml",
+        "kind": "display",
+        "math_id": "O006-PSU-005-M0067",
+        "max_mtable_row_cells": 1,
+        "max_mtable_row_token_chars": 48,
+        "reasons": [
+          "wide-structural-mtable"
+        ],
+        "tex_chars": 131
+      },
+      {
+        "epub_document": "EPUB/text/ch001.xhtml",
+        "kind": "display",
+        "math_id": "O006-PSU-005-M0073",
+        "max_mtable_row_cells": 1,
+        "max_mtable_row_token_chars": 44,
+        "reasons": [
+          "wide-structural-mtable"
+        ],
+        "tex_chars": 117
+      },
+      {
+        "epub_document": "EPUB/text/ch001.xhtml",
+        "kind": "display",
+        "math_id": "O006-PSU-005-M0089",
+        "max_mtable_row_cells": 2,
+        "max_mtable_row_token_chars": 62,
+        "reasons": [
+          "wide-structural-mtable",
+          "long-display"
+        ],
+        "tex_chars": 261
+      },
+      {
+        "epub_document": "EPUB/text/ch001.xhtml",
+        "kind": "display",
+        "math_id": "O006-PSU-005-M0098",
+        "max_mtable_row_cells": 1,
+        "max_mtable_row_token_chars": 57,
+        "reasons": [
+          "wide-structural-mtable",
+          "long-display"
+        ],
+        "tex_chars": 240
+      },
+      {
+        "epub_document": "EPUB/text/ch001.xhtml",
+        "kind": "display",
+        "math_id": "O006-PSU-005-M0099",
+        "max_mtable_row_cells": 1,
+        "max_mtable_row_token_chars": 46,
+        "reasons": [
+          "wide-structural-mtable"
+        ],
+        "tex_chars": 141
+      },
+      {
+        "epub_document": "EPUB/text/ch001.xhtml",
+        "kind": "display",
+        "math_id": "O006-PSU-005-M0104",
+        "max_mtable_row_cells": 2,
+        "max_mtable_row_token_chars": 23,
+        "reasons": [
+          "long-display"
+        ],
+        "tex_chars": 255
+      },
+      {
+        "epub_document": "EPUB/text/ch001.xhtml",
+        "kind": "display",
+        "math_id": "O006-PSU-005-M0157",
+        "max_mtable_row_cells": 1,
+        "max_mtable_row_token_chars": 66,
+        "reasons": [
+          "wide-structural-mtable"
+        ],
+        "tex_chars": 177
+      },
+      {
+        "epub_document": "EPUB/text/ch001.xhtml",
+        "kind": "display",
+        "math_id": "O006-PSU-005-M0158",
+        "max_mtable_row_cells": 1,
+        "max_mtable_row_token_chars": 45,
+        "reasons": [
+          "wide-structural-mtable"
+        ],
+        "tex_chars": 124
+      },
+      {
+        "epub_document": "EPUB/text/ch001.xhtml",
+        "kind": "display",
+        "math_id": "O006-PSU-005-M0162",
+        "max_mtable_row_cells": 2,
+        "max_mtable_row_token_chars": 36,
+        "reasons": [
+          "long-display"
+        ],
+        "tex_chars": 212
+      },
+      {
+        "epub_document": "EPUB/text/ch001.xhtml",
+        "kind": "display",
+        "math_id": "O006-PSU-005-M0170",
+        "max_mtable_row_cells": 1,
+        "max_mtable_row_token_chars": 43,
+        "reasons": [
+          "wide-structural-mtable"
+        ],
+        "tex_chars": 134
+      },
+      {
+        "epub_document": "EPUB/text/ch001.xhtml",
+        "kind": "display",
+        "math_id": "O006-PSU-005-M0185",
+        "max_mtable_row_cells": 1,
+        "max_mtable_row_token_chars": 45,
+        "reasons": [
+          "wide-structural-mtable"
+        ],
+        "tex_chars": 158
+      },
+      {
+        "epub_document": "EPUB/text/ch001.xhtml",
+        "kind": "display",
+        "math_id": "O006-PSU-005-M0206",
+        "max_mtable_row_cells": 1,
+        "max_mtable_row_token_chars": 42,
+        "reasons": [
+          "wide-structural-mtable"
+        ],
+        "tex_chars": 122
+      },
+      {
+        "epub_document": "EPUB/text/ch001.xhtml",
+        "kind": "display",
+        "math_id": "O006-PSU-005-M0207",
+        "max_mtable_row_cells": 2,
+        "max_mtable_row_token_chars": 48,
+        "reasons": [
+          "wide-structural-mtable",
+          "long-display"
+        ],
+        "tex_chars": 213
+      },
+      {
+        "epub_document": "EPUB/text/ch001.xhtml",
+        "kind": "display",
+        "math_id": "O006-PSU-005-M0210",
+        "max_mtable_row_cells": 1,
+        "max_mtable_row_token_chars": 53,
+        "reasons": [
+          "wide-structural-mtable"
+        ],
+        "tex_chars": 152
+      },
+      {
+        "epub_document": "EPUB/text/ch001.xhtml",
+        "kind": "display",
+        "math_id": "O006-PSU-005-M0223",
+        "max_mtable_row_cells": 2,
+        "max_mtable_row_token_chars": 21,
+        "reasons": [
+          "long-display"
+        ],
+        "tex_chars": 210
+      },
+      {
+        "epub_document": "EPUB/text/ch001.xhtml",
+        "kind": "display",
+        "math_id": "O006-PSU-005-M0226",
+        "max_mtable_row_cells": 2,
+        "max_mtable_row_token_chars": 34,
+        "reasons": [
+          "long-display"
+        ],
+        "tex_chars": 187
+      },
+      {
+        "epub_document": "EPUB/text/ch001.xhtml",
+        "kind": "display",
+        "math_id": "O006-PSU-005-M0227",
+        "max_mtable_row_cells": 2,
+        "max_mtable_row_token_chars": 11,
+        "reasons": [
+          "long-display"
+        ],
+        "tex_chars": 186
+      },
+      {
+        "epub_document": "EPUB/text/ch001.xhtml",
+        "kind": "display",
+        "math_id": "O006-PSU-005-M0235",
+        "max_mtable_row_cells": 1,
+        "max_mtable_row_token_chars": 54,
+        "reasons": [
+          "wide-structural-mtable",
+          "long-display"
+        ],
+        "tex_chars": 201
+      },
+      {
+        "epub_document": "EPUB/text/ch001.xhtml",
+        "kind": "display",
+        "math_id": "O006-PSU-005-M0236",
+        "max_mtable_row_cells": 1,
+        "max_mtable_row_token_chars": 43,
+        "reasons": [
+          "wide-structural-mtable"
+        ],
+        "tex_chars": 145
+      },
+      {
+        "epub_document": "EPUB/text/ch001.xhtml",
+        "kind": "display",
+        "math_id": "O006-PSU-005-M0238",
+        "max_mtable_row_cells": 1,
+        "max_mtable_row_token_chars": 42,
+        "reasons": [
+          "wide-structural-mtable"
+        ],
+        "tex_chars": 125
+      },
+      {
+        "epub_document": "EPUB/text/ch001.xhtml",
+        "kind": "display",
+        "math_id": "O006-PSU-005-M0241",
+        "max_mtable_row_cells": 2,
+        "max_mtable_row_token_chars": 42,
+        "reasons": [
+          "wide-structural-mtable",
+          "long-display"
+        ],
+        "tex_chars": 238
+      },
+      {
+        "epub_document": "EPUB/text/ch001.xhtml",
+        "kind": "display",
+        "math_id": "O006-PSU-005-M0242",
+        "max_mtable_row_cells": 2,
+        "max_mtable_row_token_chars": 30,
+        "reasons": [
+          "long-display"
+        ],
+        "tex_chars": 202
+      },
+      {
+        "epub_document": "EPUB/text/ch001.xhtml",
+        "kind": "display",
+        "math_id": "O006-PSU-005-M0249",
+        "max_mtable_row_cells": 1,
+        "max_mtable_row_token_chars": 41,
+        "reasons": [
+          "wide-structural-mtable"
+        ],
+        "tex_chars": 140
+      },
+      {
+        "epub_document": "EPUB/text/ch001.xhtml",
+        "kind": "display",
+        "math_id": "O006-PSU-005-M0262",
+        "max_mtable_row_cells": 1,
+        "max_mtable_row_token_chars": 42,
+        "reasons": [
+          "wide-structural-mtable"
+        ],
+        "tex_chars": 151
+      },
+      {
+        "epub_document": "EPUB/text/ch001.xhtml",
+        "kind": "display",
+        "math_id": "O006-PSU-005-M0278",
+        "max_mtable_row_cells": 1,
+        "max_mtable_row_token_chars": 61,
+        "reasons": [
+          "wide-structural-mtable",
+          "long-display"
+        ],
+        "tex_chars": 270
+      },
+      {
+        "epub_document": "EPUB/text/ch001.xhtml",
+        "kind": "display",
+        "math_id": "O006-PSU-005-M0282",
+        "max_mtable_row_cells": 2,
+        "max_mtable_row_token_chars": 26,
+        "reasons": [
+          "long-display"
+        ],
+        "tex_chars": 197
+      },
+      {
+        "epub_document": "EPUB/text/ch001.xhtml",
+        "kind": "inline",
+        "math_id": "O006-PSU-006-M0021",
+        "max_mtable_row_cells": 0,
+        "max_mtable_row_token_chars": 0,
+        "reasons": [
+          "long-inline"
+        ],
+        "tex_chars": 95
+      },
+      {
+        "epub_document": "EPUB/text/ch001.xhtml",
+        "kind": "inline",
+        "math_id": "O006-PSU-006-M0032",
+        "max_mtable_row_cells": 0,
+        "max_mtable_row_token_chars": 0,
+        "reasons": [
+          "long-inline"
+        ],
+        "tex_chars": 87
+      },
+      {
+        "epub_document": "EPUB/text/ch001.xhtml",
+        "kind": "display",
+        "math_id": "O006-PSU-006-M0063",
+        "max_mtable_row_cells": 1,
+        "max_mtable_row_token_chars": 55,
+        "reasons": [
+          "wide-structural-mtable",
+          "long-display"
+        ],
+        "tex_chars": 200
+      },
+      {
+        "epub_document": "EPUB/text/ch001.xhtml",
+        "kind": "display",
+        "math_id": "O006-PSU-007-M0041",
+        "max_mtable_row_cells": 2,
+        "max_mtable_row_token_chars": 28,
+        "reasons": [
+          "long-display"
+        ],
+        "tex_chars": 483
+      },
+      {
+        "epub_document": "EPUB/text/ch001.xhtml",
+        "kind": "display",
+        "math_id": "O006-PSU-007-M0046",
+        "max_mtable_row_cells": 0,
+        "max_mtable_row_token_chars": 0,
+        "reasons": [
+          "long-display"
+        ],
+        "tex_chars": 187
+      },
+      {
+        "epub_document": "EPUB/text/ch001.xhtml",
+        "kind": "display",
+        "math_id": "O006-PSU-007-M0067",
+        "max_mtable_row_cells": 2,
+        "max_mtable_row_token_chars": 56,
+        "reasons": [
+          "wide-structural-mtable",
+          "long-display"
+        ],
+        "tex_chars": 251
+      },
+      {
+        "epub_document": "EPUB/text/ch001.xhtml",
+        "kind": "display",
+        "math_id": "O006-PSU-008-M0053",
+        "max_mtable_row_cells": 2,
+        "max_mtable_row_token_chars": 41,
+        "reasons": [
+          "wide-structural-mtable",
+          "long-display"
+        ],
+        "tex_chars": 197
+      },
+      {
+        "epub_document": "EPUB/text/ch001.xhtml",
+        "kind": "display",
+        "math_id": "O006-PSU-008-M0058",
+        "max_mtable_row_cells": 2,
+        "max_mtable_row_token_chars": 24,
+        "reasons": [
+          "long-display"
+        ],
+        "tex_chars": 264
+      },
+      {
+        "epub_document": "EPUB/text/ch001.xhtml",
+        "kind": "display",
+        "math_id": "O006-PSU-008-M0060",
+        "max_mtable_row_cells": 2,
+        "max_mtable_row_token_chars": 28,
+        "reasons": [
+          "long-display"
+        ],
+        "tex_chars": 272
+      },
+      {
+        "epub_document": "EPUB/text/ch001.xhtml",
+        "kind": "inline",
+        "math_id": "O006-PSU-008-M0062",
+        "max_mtable_row_cells": 0,
+        "max_mtable_row_token_chars": 0,
+        "reasons": [
+          "long-inline"
+        ],
+        "tex_chars": 135
+      },
+      {
+        "epub_document": "EPUB/text/ch001.xhtml",
+        "kind": "display",
+        "math_id": "O006-PSU-008-M0088",
+        "max_mtable_row_cells": 1,
+        "max_mtable_row_token_chars": 64,
+        "reasons": [
+          "wide-structural-mtable"
+        ],
+        "tex_chars": 150
+      },
+      {
+        "epub_document": "EPUB/text/ch001.xhtml",
+        "kind": "display",
+        "math_id": "O006-PSU-008-M0102",
+        "max_mtable_row_cells": 2,
+        "max_mtable_row_token_chars": 26,
+        "reasons": [
+          "long-display"
+        ],
+        "tex_chars": 298
+      },
+      {
+        "epub_document": "EPUB/text/ch001.xhtml",
+        "kind": "display",
+        "math_id": "O006-PSU-008-M0110",
+        "max_mtable_row_cells": 4,
+        "max_mtable_row_token_chars": 50,
+        "reasons": [
+          "wide-structural-mtable",
+          "long-display"
+        ],
+        "tex_chars": 845
+      },
+      {
+        "epub_document": "EPUB/text/ch001.xhtml",
+        "kind": "display",
+        "math_id": "O006-PSU-010-M0099",
+        "max_mtable_row_cells": 2,
+        "max_mtable_row_token_chars": 49,
+        "reasons": [
+          "wide-structural-mtable"
+        ],
+        "tex_chars": 160
+      },
+      {
+        "epub_document": "EPUB/text/ch001.xhtml",
+        "kind": "display",
+        "math_id": "O006-PSU-010-M0107",
+        "max_mtable_row_cells": 1,
+        "max_mtable_row_token_chars": 46,
+        "reasons": [
+          "wide-structural-mtable"
+        ],
+        "tex_chars": 136
+      },
+      {
+        "epub_document": "EPUB/text/ch001.xhtml",
+        "kind": "display",
+        "math_id": "O006-PSU-010-M0144",
+        "max_mtable_row_cells": 1,
+        "max_mtable_row_token_chars": 47,
+        "reasons": [
+          "wide-structural-mtable"
+        ],
+        "tex_chars": 97
+      },
+      {
+        "epub_document": "EPUB/text/ch001.xhtml",
+        "kind": "display",
+        "math_id": "O006-PSU-011-M0057",
+        "max_mtable_row_cells": 1,
+        "max_mtable_row_token_chars": 54,
+        "reasons": [
+          "wide-structural-mtable"
+        ],
+        "tex_chars": 116
+      },
+      {
+        "epub_document": "EPUB/text/ch001.xhtml",
+        "kind": "display",
+        "math_id": "O006-PSU-011-M0065",
+        "max_mtable_row_cells": 1,
+        "max_mtable_row_token_chars": 41,
+        "reasons": [
+          "wide-structural-mtable"
+        ],
+        "tex_chars": 147
+      },
+      {
+        "epub_document": "EPUB/text/ch001.xhtml",
+        "kind": "display",
+        "math_id": "O006-PSU-011-M0093",
+        "max_mtable_row_cells": 1,
+        "max_mtable_row_token_chars": 40,
+        "reasons": [
+          "wide-structural-mtable"
+        ],
+        "tex_chars": 98
+      },
+      {
+        "epub_document": "EPUB/text/ch001.xhtml",
+        "kind": "display",
+        "math_id": "O006-PSU-011-M0112",
+        "max_mtable_row_cells": 2,
+        "max_mtable_row_token_chars": 45,
+        "reasons": [
+          "wide-structural-mtable"
+        ],
+        "tex_chars": 177
+      },
+      {
+        "epub_document": "EPUB/text/ch001.xhtml",
+        "kind": "display",
+        "math_id": "O006-PSU-011-M0120",
+        "max_mtable_row_cells": 2,
+        "max_mtable_row_token_chars": 27,
+        "reasons": [
+          "long-display"
+        ],
+        "tex_chars": 216
+      },
+      {
+        "epub_document": "EPUB/text/ch001.xhtml",
+        "kind": "display",
+        "math_id": "O006-PSU-011-M0128",
+        "max_mtable_row_cells": 2,
+        "max_mtable_row_token_chars": 25,
+        "reasons": [
+          "long-display"
+        ],
+        "tex_chars": 218
+      },
+      {
+        "epub_document": "EPUB/text/ch001.xhtml",
+        "kind": "display",
+        "math_id": "O006-PSU-011-M0168",
+        "max_mtable_row_cells": 2,
+        "max_mtable_row_token_chars": 49,
+        "reasons": [
+          "wide-structural-mtable",
+          "long-display"
+        ],
+        "tex_chars": 213
+      },
+      {
+        "epub_document": "EPUB/text/ch001.xhtml",
+        "kind": "display",
+        "math_id": "O006-PSU-011-M0204",
+        "max_mtable_row_cells": 2,
+        "max_mtable_row_token_chars": 19,
+        "reasons": [
+          "long-display"
+        ],
+        "tex_chars": 181
+      },
+      {
+        "epub_document": "EPUB/text/ch001.xhtml",
+        "kind": "display",
+        "math_id": "O006-PSU-011-M0207",
+        "max_mtable_row_cells": 2,
+        "max_mtable_row_token_chars": 42,
+        "reasons": [
+          "wide-structural-mtable"
+        ],
+        "tex_chars": 110
+      },
+      {
+        "epub_document": "EPUB/text/ch001.xhtml",
+        "kind": "display",
+        "math_id": "O006-PSU-011-M0253",
+        "max_mtable_row_cells": 2,
+        "max_mtable_row_token_chars": 50,
+        "reasons": [
+          "wide-structural-mtable",
+          "long-display"
+        ],
+        "tex_chars": 252
+      },
+      {
+        "epub_document": "EPUB/text/ch001.xhtml",
+        "kind": "display",
+        "math_id": "O006-PSU-011-M0278",
+        "max_mtable_row_cells": 2,
+        "max_mtable_row_token_chars": 40,
+        "reasons": [
+          "wide-structural-mtable",
+          "long-display"
+        ],
+        "tex_chars": 324
+      },
+      {
+        "epub_document": "EPUB/text/ch001.xhtml",
+        "kind": "display",
+        "math_id": "O006-PSU-011-M0307",
+        "max_mtable_row_cells": 4,
+        "max_mtable_row_token_chars": 50,
+        "reasons": [
+          "wide-structural-mtable",
+          "long-display"
+        ],
+        "tex_chars": 845
+      },
+      {
+        "epub_document": "EPUB/text/ch001.xhtml",
+        "kind": "display",
+        "math_id": "O006-PSU-012-M0016",
+        "max_mtable_row_cells": 2,
+        "max_mtable_row_token_chars": 38,
+        "reasons": [
+          "long-display"
+        ],
+        "tex_chars": 241
+      },
+      {
+        "epub_document": "EPUB/text/ch001.xhtml",
+        "kind": "display",
+        "math_id": "O006-PSU-012-M0029",
+        "max_mtable_row_cells": 1,
+        "max_mtable_row_token_chars": 60,
+        "reasons": [
+          "wide-structural-mtable"
+        ],
+        "tex_chars": 140
+      },
+      {
+        "epub_document": "EPUB/text/ch001.xhtml",
+        "kind": "display",
+        "math_id": "O006-PSU-012-M0032",
+        "max_mtable_row_cells": 1,
+        "max_mtable_row_token_chars": 68,
+        "reasons": [
+          "wide-structural-mtable"
+        ],
+        "tex_chars": 120
+      },
+      {
+        "epub_document": "EPUB/text/ch001.xhtml",
+        "kind": "display",
+        "math_id": "O006-PSU-012-M0038",
+        "max_mtable_row_cells": 1,
+        "max_mtable_row_token_chars": 68,
+        "reasons": [
+          "wide-structural-mtable"
+        ],
+        "tex_chars": 120
+      },
+      {
+        "epub_document": "EPUB/text/ch001.xhtml",
+        "kind": "inline",
+        "math_id": "O006-PSU-012-M0069",
+        "max_mtable_row_cells": 0,
+        "max_mtable_row_token_chars": 0,
+        "reasons": [
+          "long-inline"
+        ],
+        "tex_chars": 103
+      },
+      {
+        "epub_document": "EPUB/text/ch001.xhtml",
+        "kind": "display",
+        "math_id": "O006-PSU-012-M0086",
+        "max_mtable_row_cells": 0,
+        "max_mtable_row_token_chars": 0,
+        "reasons": [
+          "long-display"
+        ],
+        "tex_chars": 296
+      },
+      {
+        "epub_document": "EPUB/text/ch001.xhtml",
+        "kind": "display",
+        "math_id": "O006-PSU-012-M0094",
+        "max_mtable_row_cells": 1,
+        "max_mtable_row_token_chars": 89,
+        "reasons": [
+          "wide-structural-mtable",
+          "long-display"
+        ],
+        "tex_chars": 309
+      },
+      {
+        "epub_document": "EPUB/text/ch001.xhtml",
+        "kind": "display",
+        "math_id": "O006-PSU-012-M0113",
+        "max_mtable_row_cells": 1,
+        "max_mtable_row_token_chars": 40,
+        "reasons": [
+          "wide-structural-mtable"
+        ],
+        "tex_chars": 84
+      },
+      {
+        "epub_document": "EPUB/text/ch001.xhtml",
+        "kind": "display",
+        "math_id": "O006-PSU-012-M0121",
+        "max_mtable_row_cells": 1,
+        "max_mtable_row_token_chars": 42,
+        "reasons": [
+          "wide-structural-mtable"
+        ],
+        "tex_chars": 113
+      },
+      {
+        "epub_document": "EPUB/text/ch001.xhtml",
+        "kind": "display",
+        "math_id": "O006-PSU-012-M0144",
+        "max_mtable_row_cells": 1,
+        "max_mtable_row_token_chars": 45,
+        "reasons": [
+          "wide-structural-mtable"
+        ],
+        "tex_chars": 91
+      },
+      {
+        "epub_document": "EPUB/text/ch001.xhtml",
+        "kind": "display",
+        "math_id": "O006-PSU-012-M0146",
+        "max_mtable_row_cells": 1,
+        "max_mtable_row_token_chars": 48,
+        "reasons": [
+          "wide-structural-mtable"
+        ],
+        "tex_chars": 112
+      },
+      {
+        "epub_document": "EPUB/text/ch001.xhtml",
+        "kind": "display",
+        "math_id": "O006-PSU-012-M0147",
+        "max_mtable_row_cells": 1,
+        "max_mtable_row_token_chars": 67,
+        "reasons": [
+          "wide-structural-mtable"
+        ],
+        "tex_chars": 137
+      },
+      {
+        "epub_document": "EPUB/text/ch001.xhtml",
+        "kind": "display",
+        "math_id": "O006-PSU-012-M0162",
+        "max_mtable_row_cells": 1,
+        "max_mtable_row_token_chars": 50,
+        "reasons": [
+          "wide-structural-mtable"
+        ],
+        "tex_chars": 150
+      },
+      {
+        "epub_document": "EPUB/text/ch001.xhtml",
+        "kind": "display",
+        "math_id": "O006-PSU-012-M0164",
+        "max_mtable_row_cells": 1,
+        "max_mtable_row_token_chars": 48,
+        "reasons": [
+          "wide-structural-mtable"
+        ],
+        "tex_chars": 157
+      },
+      {
+        "epub_document": "EPUB/text/ch001.xhtml",
+        "kind": "display",
+        "math_id": "O006-PSU-013-M0088",
+        "max_mtable_row_cells": 0,
+        "max_mtable_row_token_chars": 0,
+        "reasons": [
+          "long-display"
+        ],
+        "tex_chars": 310
+      },
+      {
+        "epub_document": "EPUB/text/ch001.xhtml",
+        "kind": "display",
+        "math_id": "O006-PSU-013-M0118",
+        "max_mtable_row_cells": 0,
+        "max_mtable_row_token_chars": 0,
+        "reasons": [
+          "long-display"
+        ],
+        "tex_chars": 310
+      },
+      {
+        "epub_document": "EPUB/text/ch001.xhtml",
+        "kind": "display",
+        "math_id": "O006-PSU-013-M0234",
+        "max_mtable_row_cells": 0,
+        "max_mtable_row_token_chars": 0,
+        "reasons": [
+          "long-display"
+        ],
+        "tex_chars": 189
+      },
+      {
+        "epub_document": "EPUB/text/ch001.xhtml",
+        "kind": "display",
+        "math_id": "O006-PSU-013-M0236",
+        "max_mtable_row_cells": 0,
+        "max_mtable_row_token_chars": 0,
+        "reasons": [
+          "long-display"
+        ],
+        "tex_chars": 317
+      },
+      {
+        "epub_document": "EPUB/text/ch001.xhtml",
+        "kind": "display",
+        "math_id": "O006-PSU-013-M0272",
+        "max_mtable_row_cells": 2,
+        "max_mtable_row_token_chars": 33,
+        "reasons": [
+          "long-display"
+        ],
+        "tex_chars": 294
+      },
+      {
+        "epub_document": "EPUB/text/ch001.xhtml",
+        "kind": "display",
+        "math_id": "O006-PSU-013-M0283",
+        "max_mtable_row_cells": 0,
+        "max_mtable_row_token_chars": 0,
+        "reasons": [
+          "long-display"
+        ],
+        "tex_chars": 223
+      },
+      {
+        "epub_document": "EPUB/text/ch001.xhtml",
+        "kind": "display",
+        "math_id": "O006-PSU-013-M0284",
+        "max_mtable_row_cells": 0,
+        "max_mtable_row_token_chars": 0,
+        "reasons": [
+          "long-display"
+        ],
+        "tex_chars": 219
+      },
+      {
+        "epub_document": "EPUB/text/ch001.xhtml",
+        "kind": "display",
+        "math_id": "O006-PSU-013-M0309",
+        "max_mtable_row_cells": 0,
+        "max_mtable_row_token_chars": 0,
+        "reasons": [
+          "long-display"
+        ],
+        "tex_chars": 275
+      }
+    ],
+    "css_containment_scope": "all .math.display and .math.inline wrappers",
+    "focus_rule": {
+      "display_min_tex_chars": 180,
+      "inline_min_tex_chars": 80,
+      "mtable_max_row_cells_min": 5,
+      "mtable_max_row_token_chars_min": 40,
+      "version": "static-width-v1"
+    }
+  },
+  "mathml_nodes": 3159,
+  "navigation": {
+    "epub_landmark_links": 4,
+    "epub_toc_links": 19,
+    "lesson_links": 13,
+    "ncx_navpoints": 19
+  },
+  "output": "output/epub/stat415-pengantar-statistika-matematis-id.epub",
+  "postprocess_script_sha256": "06b9dc9ee59229c526f808f07022babc5bd959b8d90badd7339788eb9c5b9d92",
+  "raw_epub": {
+    "bytes": 12232453,
+    "path": "build/book/stat415-id-book.raw.epub",
+    "sha256": "9deedbfebf750749bc66459d188c852d2582c358a728cd2028cbd81c1286675c"
+  },
+  "raw_tex_remaining": 0,
+  "rendition_specific_omissions": [
+    {
+      "epub_document": "EPUB/text/ch001.xhtml",
+      "reason": "The primary Lesson 07 source contains the objectives heading and introductory sentence but no objective list; the empty reader-facing block is omitted and no objectives are synthesized.",
+      "source_element_id": "O006-PSU-008-U0020"
+    }
+  ],
+  "schema": "o006.stat415.consolidated-epub.v1",
+  "sha256": "e122d65348971b91a5ac0c7a8219e0fa3e0eabedb92d130c661648e399e3c574",
+  "status": "passed",
+  "svg_math_fallbacks": 17,
+  "svg_math_fallbacks_with_indonesian_spoken_alternatives": 17,
+  "translation_provenance": "OpenAI Codex gpt-5.6-sol, Ultra",
+  "validation": {
+    "parsed_xml_surfaces": 36,
+    "xhtml_documents": 4
+  },
+  "xhtml_repairs": {
+    "aria_dangling_removed": 98,
+    "aria_targets_restored": 12,
+    "duplicate_ids_renamed": 86,
+    "empty_table_headers_labeled": 22,
+    "heading_levels_repaired": 33,
+    "illegal_attributes_removed": 64,
+    "image_alt_texts_localized": 4,
+    "lesson07_empty_objectives_omitted": 1,
+    "lesson_card_links_labeled": 13,
+    "lightbox_links_rewritten": 49,
+    "math_reflow_regions_focusable": 125,
+    "scrollable_code_regions_focusable": 1,
+    "static_tab_aria_flattened": 4,
+    "table_headers_restored": 2
+  },
+  "zip_timestamp": "1980-01-01T00:00:00"
+}

@@ -1,0 +1,161 @@
+@namespace epub "http://www.idpf.org/2007/ops";
+
+body {
+  color: #172033;
+  font-family: serif;
+  line-height: 1.5;
+  margin: 5%;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  color: #23466a;
+  font-family: sans-serif;
+  line-height: 1.2;
+}
+
+h1 {
+  break-before: page;
+}
+
+figure {
+  margin: 1em auto;
+  text-align: center;
+}
+
+img,
+svg {
+  display: block;
+  height: auto;
+  margin: 0 auto;
+  max-width: 100%;
+}
+
+figcaption,
+caption {
+  font-size: 0.9em;
+  text-align: center;
+}
+
+table {
+  border-collapse: collapse;
+  display: table;
+  font-size: 0.88em;
+  margin: 1em auto;
+  max-width: 100%;
+}
+
+th,
+td {
+  border: 1px solid #8b99a8;
+  padding: 0.3em 0.45em;
+  vertical-align: top;
+}
+
+pre {
+  background: #eef2f6;
+  border-left: 0.25em solid #2f5d8a;
+  box-sizing: border-box;
+  color: #111820;
+  font-size: 0.9em;
+  line-height: 1.4;
+  overflow-wrap: anywhere;
+  padding: 0.7em;
+  white-space: pre-wrap;
+}
+
+pre code,
+pre code > span {
+  max-width: 100%;
+  overflow-wrap: anywhere;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+code {
+  overflow-wrap: anywhere;
+}
+
+/* Native MathML may retain a wider intrinsic layout than its containing
+   reading-system viewport. Keep the equation at full legible size and reflow
+   only its stable-ID wrapper into a local horizontal scroll surface. */
+.math.display {
+  box-sizing: border-box;
+  display: block;
+  max-width: 100%;
+  overflow-x: auto;
+  overflow-y: hidden;
+}
+
+.math.inline {
+  box-sizing: border-box;
+  display: inline-block;
+  max-width: 100%;
+  overflow-x: auto;
+  overflow-y: hidden;
+  vertical-align: middle;
+}
+
+.math[tabindex="0"]:focus {
+  outline: 0.14em solid #2f5d8a;
+  outline-offset: 0.12em;
+}
+
+.expanded-disclosure {
+  border-left: 0.25em solid #2f5d8a;
+  margin: 1em 0;
+  padding-left: 0.8em;
+}
+
+.expanded-disclosure-title {
+  color: #23466a;
+}
+
+.book-rights {
+  font-size: 0.92em;
+}
+
+.math-fallback-display {
+  display: block;
+  margin: 0.8em auto;
+  text-align: center;
+}
+
+.math-fallback-inline {
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.math-fallback-image {
+  display: inline-block;
+  height: auto;
+  margin: 0 auto;
+  max-width: 100%;
+}
+
+/* Pandoc's default light-theme number and attribute colors do not meet
+   WCAG AA contrast on the EPUB code-block background. */
+code span.bn,
+code span.dv,
+code span.fl {
+  color: #005a30;
+}
+
+code span.at {
+  color: #5a4a00;
+}
+
+.epub-sr-only {
+  border: 0;
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  white-space: nowrap;
+  width: 1px;
+}

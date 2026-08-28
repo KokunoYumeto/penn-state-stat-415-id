@@ -1,0 +1,123 @@
+{
+  "artifact": {
+    "bytes": 12301415,
+    "path": "output/epub/stat415-pengantar-statistika-matematis-id.epub",
+    "sha256": "e122d65348971b91a5ac0c7a8219e0fa3e0eabedb92d130c661648e399e3c574"
+  },
+  "build_receipt": {
+    "bytes": 47810,
+    "path": "build/CONSOLIDATED_EPUB_BUILD_RECEIPT.json",
+    "sha256": "bd0db2d244d854a025caf904d1b1b773a37fe4b17513985c3543963dfa453d00"
+  },
+  "checks": {
+    "candidate_inventory_sha256": "7bf25c10121e6a5b7543f4cf9694afe445e13b678f60ad6a2c992b1762c0b0bd",
+    "css_containment_and_focus_contract": "passed",
+    "delta_from_prior_ace_tested_candidate": {
+      "artifact_byte_delta": 1756,
+      "final_reflow_surfaces": {
+        "css_sha256": "f4ba7af84c1a4ba58a84f60bfa5b7a8e89eb94dc40fa5865ff5802458703837a",
+        "focusable_code_regions": 1,
+        "focusable_math_candidate_count": 125,
+        "focusable_math_candidate_inventory_sha256": "7bf25c10121e6a5b7543f4cf9694afe445e13b678f60ad6a2c992b1762c0b0bd"
+      },
+      "package_topology_and_content_surface_invariants": {
+        "entries": 111,
+        "headings": 271,
+        "image_occurrences": 102,
+        "manifest_items": 107,
+        "mathml_nodes": 3159,
+        "spine_items": 4,
+        "svg_math_fallbacks": 17,
+        "xhtml_documents": 4
+      },
+      "proof_scope": "Exact base/final identities plus preserved package invariants and a complete final reflow inventory; this is not an Ace or browser validation of the final hash."
+    },
+    "epubcheck_messages": 0,
+    "epubcheck_release": "5.3.0",
+    "epubcheck_status": "Well-formed",
+    "fixed_zip_timestamps": 111,
+    "math_reflow_candidate_count": 125,
+    "math_reflow_rule": {
+      "display_min_tex_chars": 180,
+      "inline_min_tex_chars": 80,
+      "mtable_max_row_cells_min": 5,
+      "mtable_max_row_token_chars_min": 40,
+      "version": "static-width-v1"
+    },
+    "math_wrapper_count": 3139,
+    "mathml_count": 3159,
+    "package_entry_manifest_sha256": "f216555c3fc5abb7085be6570c154d6874c8a915d87ff3f4008ab6a57f542107",
+    "threshold_census": {
+      "display_tex_chars": {
+        "100": 253,
+        "120": 196,
+        "160": 104,
+        "180": 74,
+        "80": 317
+      },
+      "inline_tex_chars": {
+        "100": 10,
+        "60": 35,
+        "80": 13
+      },
+      "mtable_max_row_token_chars": {
+        "32": 110,
+        "40": 67
+      }
+    },
+    "zip_crc": "passed"
+  },
+  "prior_ace_tested_candidate": {
+    "ace_report": {
+      "bytes": 117127,
+      "path": "tmp/epubqa/ace-official-20260828/report.json",
+      "sha256": "c6fa76293f5c179050aa19d8b6288ed5f6ffa218b74fcfc4d0c72f5441304c35"
+    },
+    "ace_revision": "1.4.6",
+    "ace_status": "passed",
+    "artifact": {
+      "bytes": 12299659,
+      "sha256": "acf81b8aa62ef77cd574d45d04490ebe173539ea3f8419c5c5e1ffcea5536729"
+    },
+    "failed_assertions": 0,
+    "prior_qa_receipt_sha256": "5ffa18a600633848edbda52873c69b235524382d9b690fc89b849fc83bdd824f",
+    "scope_note": "Ace applies only to the exact prior artifact hash; no Ace or browser claim is made for the final hash."
+  },
+  "qa_receipt": {
+    "bytes": 3296,
+    "path": "build/CONSOLIDATED_EPUB_QA_RECEIPT.json",
+    "sha256": "5068b217da737f1a24118360828725c7afc724de1648771c2698c6467ea70537"
+  },
+  "replays": [
+    {
+      "bytes": 12301415,
+      "path": "tmp/epubqa/final-replay-A-2026-08-28.epub",
+      "sha256": "e122d65348971b91a5ac0c7a8219e0fa3e0eabedb92d130c661648e399e3c574"
+    },
+    {
+      "bytes": 12301415,
+      "path": "tmp/epubqa/final-replay-B-2026-08-28.epub",
+      "sha256": "e122d65348971b91a5ac0c7a8219e0fa3e0eabedb92d130c661648e399e3c574"
+    }
+  ],
+  "schema": "o006.stat415.consolidated-epub-static-reflow-qa.v1",
+  "status": "passed",
+  "validation_scope": {
+    "final_hash": [
+      "deterministic replay A",
+      "deterministic replay B",
+      "EPUBCheck 5.3.0",
+      "static XML/link/package audit",
+      "static CSS/reflow/focusability audit"
+    ],
+    "not_run_for_final_hash": [
+      "Ace",
+      "Chrome",
+      "Chromium",
+      "Playwright",
+      "Puppeteer",
+      "Electron",
+      "WebView"
+    ]
+  }
+}

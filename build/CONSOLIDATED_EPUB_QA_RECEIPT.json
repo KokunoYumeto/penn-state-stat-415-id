@@ -1,0 +1,90 @@
+{
+  "artifact": {
+    "bytes": 12301415,
+    "path": "output/epub/stat415-pengantar-statistika-matematis-id.epub",
+    "sha256": "e122d65348971b91a5ac0c7a8219e0fa3e0eabedb92d130c661648e399e3c574"
+  },
+  "build_receipt": {
+    "bytes": 47810,
+    "path": "build/CONSOLIDATED_EPUB_BUILD_RECEIPT.json",
+    "sha256": "bd0db2d244d854a025caf904d1b1b773a37fe4b17513985c3543963dfa453d00"
+  },
+  "deterministic_replays": [
+    {
+      "bytes": 12301415,
+      "path": "tmp/epubqa/final-replay-A-2026-08-28.epub",
+      "sha256": "e122d65348971b91a5ac0c7a8219e0fa3e0eabedb92d130c661648e399e3c574"
+    },
+    {
+      "bytes": 12301415,
+      "path": "tmp/epubqa/final-replay-B-2026-08-28.epub",
+      "sha256": "e122d65348971b91a5ac0c7a8219e0fa3e0eabedb92d130c661648e399e3c574"
+    }
+  ],
+  "epubcheck": {
+    "messages": 0,
+    "release": "5.3.0",
+    "report_sha256": "9d8223c3edfd38406ef4a114de74c6a339ddd9ae25893bd42772d8b5bad2db91",
+    "status": "Well-formed"
+  },
+  "final_hash_validation_scope": {
+    "browser_or_ace_run": false,
+    "epubcheck_and_static_package_audit": true,
+    "restriction": "No Chrome, Chromium, Playwright, Puppeteer, Ace, Electron, or WebView process was launched for the final hash."
+  },
+  "metadata": {
+    "accessibility_summary": "Publikasi ini menyediakan navigasi struktural, teks alternatif gambar, MathML, dan fallback SVG berteks alternatif. Anomali tingkat judul sumber diperbaiki hanya dalam rendisi EPUB; dua tabel historis mempertahankan keterbatasan sumber yang didokumentasikan dalam bukti build.",
+    "creators": [
+      "Departemen Statistika, The Pennsylvania State University (sumber)",
+      "OpenAI Codex gpt-5.6-sol, Ultra (terjemahan dan rekonstruksi)"
+    ],
+    "identifier": "https://doi.org/10.5281/zenodo.22077422",
+    "language": "id-ID",
+    "title": "STAT 415: Pengantar Statistika Matematis - edisi Bahasa Indonesia"
+  },
+  "package": {
+    "entries": 111,
+    "fixed_zip_timestamps": 111,
+    "manifest_items": 107,
+    "mimetype_first_and_stored": true,
+    "spine_items": 4,
+    "zip_crc": "passed"
+  },
+  "prior_candidate_automated_accessibility": {
+    "ace_missing_certification_metadata": [
+      "a11y:certifiedBy",
+      "a11y:certifierCredential",
+      "a11y:certifierReport",
+      "dcterms:conformsTo"
+    ],
+    "ace_revision": "1.4.6",
+    "ace_status": "passed",
+    "artifact": {
+      "bytes": 12299659,
+      "sha256": "acf81b8aa62ef77cd574d45d04490ebe173539ea3f8419c5c5e1ffcea5536729"
+    },
+    "failed_assertions": 0,
+    "report_sha256": "c6fa76293f5c179050aa19d8b6288ed5f6ffa218b74fcfc4d0c72f5441304c35",
+    "scope_note": "Ace evidence applies only to the named prior artifact, not the final EPUB hash."
+  },
+  "privacy": {
+    "sensitive_or_local_markers": []
+  },
+  "schema": "o006.stat415.consolidated-epub-qa.v1",
+  "status": "passed",
+  "structure": {
+    "epub_toc_links": 19,
+    "heading_forward_skips_after_rendition_repair": 0,
+    "headings": 271,
+    "image_occurrences": 102,
+    "images_with_nonempty_alternatives": 102,
+    "landmark_links": 4,
+    "math_reflow_focusable_display_regions": 112,
+    "math_reflow_focusable_inline_regions": 13,
+    "math_reflow_focusable_regions": 125,
+    "mathml_nodes": 3159,
+    "ncx_navpoints": 19,
+    "svg_math_fallbacks": 17,
+    "xhtml_documents": 4
+  }
+}

@@ -1,0 +1,60 @@
+html {
+  color: #172033;
+  font-family: serif;
+}
+
+body {
+  line-height: 1.5;
+}
+
+.book-document {
+  break-before: page;
+}
+
+.book-document:first-child {
+  break-before: auto;
+}
+
+.expanded-disclosure {
+  border-left: 0.25rem solid #2f5d8a;
+  margin: 1rem 0;
+  padding: 0.35rem 0 0.35rem 1rem;
+}
+
+.expanded-disclosure-title {
+  color: #23466a;
+}
+
+figure,
+img,
+table,
+pre {
+  max-width: 100%;
+}
+
+figure,
+img {
+  break-inside: avoid;
+  height: auto;
+}
+
+table {
+  border-collapse: collapse;
+}
+
+th,
+td {
+  border: 1px solid #9aa7b5;
+  padding: 0.3rem 0.45rem;
+  vertical-align: top;
+}
+
+pre,
+code {
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+
+.book-rights {
+  font-size: 0.95em;
+}

@@ -19,6 +19,9 @@ reproduksibilitas LF semuanya sudah publik dan terverifikasi secara anonim.
 - 242 koreksi atau disposisi turunan terverifikasi; byte sumber resmi tidak
   diubah;
 - pembaca HTML luring: 106 berkas / 17.614.553 byte;
+- pembaca PDF lengkap: 219 halaman / 20.170.549 byte, dengan replay byte-identik;
+- pembaca EPUB lengkap: 12.301.415 byte / 111 entri, 3.159 simpul MathML,
+  17 fallback SVG, dan 125 kawasan rumus berisiko lebar yang dapat difokuskan;
 - QA visual: 15 rute pada 1.280 × 720 dan 390 × 844, 67 kejadian gambar,
   14 tabel, tiga padanan video luring, tanpa luapan halaman atau galat MathJax.
 
@@ -83,10 +86,23 @@ python -B scripts/merge_lesson12_translations.py --check-only
 python -B scripts/materialize_lesson12_translation.py --check-only
 python -B scripts/build_through_lesson12.py --check-only
 python -B scripts/qa_through_lesson12.py --check-only
+python -B scripts/normalize_consolidated_book.py --check-only
+python -B scripts/audit_consolidated_pdf.py --check-only
+python -B scripts/write_consolidated_pdf_visual_receipt.py --check-only
+python -B scripts/audit_consolidated_epub.py --check-only
+python -B scripts/audit_consolidated_epub_static_reflow.py --check-only
+python -B scripts/package_consolidated_readers_release.py --check-only
+python -B scripts/publish_github_consolidated_readers_release.py --local-preflight
+python -B scripts/publish_zenodo_consolidated_readers.py --local-preflight
 ```
 
 Untuk membaca secara lokal, layani `build/html-id` dengan peladen HTTP statis;
 misalnya `python -m http.server` dari direktori tersebut.
+
+QA EPUB final menggunakan EPUBCheck dan audit XML/CSS/paket deterministik.
+Laporan Ace yang disertakan adalah bukti historis untuk hash kandidat yang
+disebutkan secara eksplisit, bukan validasi hash EPUB final. Sesuai kendala
+eksekusi edisi ini, rangkaian final tidak meluncurkan proses peramban.
 
 ## Sumber, perubahan, dan lisensi
 

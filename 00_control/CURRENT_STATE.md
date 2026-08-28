@@ -1,6 +1,6 @@
 # Current state — Penn State STAT 415 id-ID component
 
-Updated: 2026-08-26
+Updated: 2026-08-28
 
 ## Authority and boundary
 
@@ -231,3 +231,45 @@ preserved, continue to the distinct exact Random completeness donor and the
 original C140 rigor/simulation/mastery companion. No upstream message has been
 sent. The independent completed Random edition remains outside this
 repository's write boundary.
+
+## Consolidated PDF and EPUB release-ready boundary
+
+The consolidated fourteen-document PDF is complete at 219 A4 pages and
+20,170,549 bytes, SHA-256
+`f39c1c438cc3e793fe9522eb11f5b02704d89fcdc7aecb2207a599087d458964`.
+Its canonical replay is byte-identical. The structural QA receipt is 10,208
+bytes, SHA-256
+`3512a6b05daa115967aa96bdaacba0b7820b7d02b8f9523d2ef8ba27155fed1c`;
+the all-page visual receipt is 64,720 bytes, SHA-256
+`bf27e907326128653d09bb7417b307c5e226cfac82b7781cdf71f7f1b4f38898`.
+The latter binds 219 final page rasters and eleven contact sheets covering the
+entire reader; only pages 217-218 changed in the last layout repair.
+
+The final EPUB and its two independent replays are byte-identical at
+12,301,415 bytes, SHA-256
+`e122d65348971b91a5ac0c7a8219e0fa3e0eabedb92d130c661648e399e3c574`.
+EPUBCheck 5.3.0 reports zero messages. The package contains 111 deterministic
+entries, 107 manifest items, four spine items, 3,159 MathML nodes, 17
+Indonesian-labelled SVG math fallbacks, 102 nonempty image alternatives, and
+nineteen navigation entries. CSS containment covers every MathML wrapper;
+exactly 125 stable-ID width-risk candidates receive keyboard-focus semantics.
+The build, final QA, and static-reflow receipt SHA-256 values are respectively
+`bd0db2d244d854a025caf904d1b1b773a37fe4b17513985c3543963dfa453d00`,
+`5068b217da737f1a24118360828725c7afc724de1648771c2698c6467ea70537`,
+and `27f46841986869f97f73980fc870205627c9ff9ff4c36d9751140000d7457eeb`.
+The final EPUB gate used only browser-free static/package tooling. The earlier
+Ace 1.4.6 pass remains explicitly scoped to prior artifact
+`acf81b8aa62ef77cd574d45d04490ebe173539ea3f8419c5c5e1ffcea5536729`;
+it is not represented as final-hash validation.
+
+The deterministic preservation union contains 17 ordered files / 87,848,426
+bytes. It preserves all nine files from Zenodo record `22105616` byte-for-byte
+and adds the PDF, EPUB, concise rights/status notes, compact labelled QA
+evidence, full manifest, checksums, and cryptographic root. Package-receipt
+SHA-256 is
+`934f9484dd7fd25a2436c80914c68d9627ba4009da07900a975e168d91d01694`.
+The next executable action is to commit and push the exact reader sources and
+receipts, publish tag `v2026.08.28.14of14-pdf-epub` and Zenodo version
+`2026.08.28.14of14-pdf-epub` in the existing lineages, anonymously hash every
+public asset, persist sanitized receipts, then begin the distinct Random
+completeness donor. No upstream message has been sent.

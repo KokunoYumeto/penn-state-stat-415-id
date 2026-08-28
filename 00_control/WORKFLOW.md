@@ -55,6 +55,13 @@ assuming the page notice covers them.
    Hard-fail missing or extra main content, formulas, anchors, examples,
    solutions, code, and figures. Fix material findings once, record exact
    counts/hashes, then advance; do not loop on QA.
+   Effective 2026-08-28, no step in this lane may launch Chrome, Chromium,
+   Playwright, WebView, or any other browser process, whether visible or
+   headless. Use only browser-free static/package validators and renderers
+   (for example XML/CSS inspection, EPUBCheck, and Poppler), and inspect
+   already-generated browser evidence without regenerating it. DAISY Ace is
+   excluded because this installed release invokes Puppeteer/Chromium. Never
+   touch the user's existing browser processes.
 7. The separate original companion closes rather than disguises source gaps:
    regular-likelihood conditions/proofs, optimality, matrix simple/multiple
    regression, reproducible simulations, thirteen mastery sets, four

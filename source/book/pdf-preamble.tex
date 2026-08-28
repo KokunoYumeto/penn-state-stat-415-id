@@ -1,0 +1,49 @@
+% Deterministic print styling for the consolidated STAT 415 id-ID edition.
+\usepackage{microtype}
+\usepackage{fvextra}
+\usepackage{xurl}
+\usepackage{bookmark}
+\usepackage{needspace}
+\usepackage{caption}
+\usepackage{float}
+\usepackage{array}
+\usepackage{booktabs}
+\usepackage{longtable}
+\usepackage{multirow}
+\usepackage{mathtools}
+\usepackage{cancel}
+\usepackage{xcolor}
+
+\setmainfont{TeX Gyre Pagella}
+\setsansfont{TeX Gyre Heros}
+\setmonofont{Latin Modern Mono}
+\setmathfont{TeX Gyre Pagella Math}
+
+\definecolor{statblue}{HTML}{23466A}
+\definecolor{statlight}{HTML}{EEF4F8}
+\hypersetup{
+  colorlinks=true,
+  linkcolor=statblue,
+  urlcolor=statblue,
+  citecolor=statblue,
+  pdflang={id-ID}
+}
+
+\setlength{\emergencystretch}{3em}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0.45em}
+\widowpenalty=10000
+\clubpenalty=10000
+\displaywidowpenalty=10000
+\raggedbottom
+
+\captionsetup{font=small,labelfont=bf,justification=centering}
+\setlength{\LTpre}{0.65em}
+\setlength{\LTpost}{0.65em}
+\renewcommand{\arraystretch}{1.12}
+
+\RecustomVerbatimEnvironment{Highlighting}{Verbatim}{
+  breaklines,
+  breakanywhere,
+  commandchars=\\\{\}
+}
