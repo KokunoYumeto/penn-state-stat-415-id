@@ -389,7 +389,7 @@ def metadata() -> dict[str, object]:
             "byte demi byte, 17 berkas dari versi lengkap Penn State STAT 415 sebelumnya "
             "(laman utama dan Pelajaran 00–12; PDF, EPUB, pembaca luring, sumber/backend, "
             "manifes, checksum, dan bukti QA), lalu menambahkan tepat satu donor eksternal: "
-            "Kyle Siegrist, Random, ‘Sufficient, Complete, and Ancillary Statistics’. Donor "
+            "Kyle Siegrist, Random, 'Sufficient, Complete, and Ancillary Statistics'. Donor "
             "mencakup kecukupan, kelengkapan, ancillary statistics, Rao–Blackwell, "
             "Lehmann–Scheffé, dan Basu, beserta pembaca luring, sumber/backend, hak, manifes, "
             "checksum, dan bukti QA statis. Status lengkap berlaku bagi tulang punggung Penn "
