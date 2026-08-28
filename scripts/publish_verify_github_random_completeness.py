@@ -552,9 +552,10 @@ def api_json_or_missing(
 
 
 def read_token() -> str:
-    candidate = os.environ.get("GITHUB_TOKEN", "").strip()
-    if TOKEN_RE.fullmatch(candidate):
-        return candidate
+    for variable in ("O006_GITHUB_TOKEN", "GITHUB_TOKEN"):
+        candidate = os.environ.get(variable, "").strip()
+        if TOKEN_RE.fullmatch(candidate):
+            return candidate
     if not TOKEN_FILE.is_file() or TOKEN_FILE.is_symlink():
         raise RuntimeError("bounded GitHub credential source is unavailable")
     matches = TOKEN_RE.findall(TOKEN_FILE.read_text("utf-8"))
