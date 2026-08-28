@@ -121,7 +121,7 @@ downloaded without credentials and matched. Zenodo record `22143454`, DOI
 anonymous replay matched all 25 files, and the authenticated lineage audit
 found zero unpublished drafts.
 
-Original companion C1 is locally complete: `D001`–`D007`, `SIM001`–`SIM004`,
+Original companion C1 is publicly preserved: `D001`–`D007`, `SIM001`–`SIM004`,
 `MS07`–`MS10`, `CA01`, and the component index comprise seventeen documents,
 442 stable anchors, 173 resolved body references, 42 fully solved problems,
 and four locked seeded simulations. The offline reader has 35 files /
@@ -136,21 +136,27 @@ Build, QA, and simulation receipt SHA-256 values are
 and `834c8a20025d51bf53ef4e8d0f7d805489af21c34065238131366a734df7e213`.
 All deterministic replays and two post-fix mathematical audits pass.
 
-The cumulative Pages tree is locally ready at 159 files / 21,677,818 bytes,
+The cumulative Pages tree is public at 159 files / 21,677,818 bytes,
 manifest SHA-256
 `e73658619391a5eab4d5fab997cce5cfb206fff942138bca92d38a5a22e1ac6f`.
-The cumulative release package is ready at 33 files / 90,175,090 bytes; its
+The cumulative release package is public at 33 files / 90,175,090 bytes; its
 19,580-byte receipt has SHA-256
 `8e7043ee5d7085941f7b30e589af23440db0c67a1ba47754494eaa07e970b181`.
 It preserves the 25-file donor boundary byte-for-byte and adds eight C1 files.
 
-Next, replay the static C1/package/Pages gates, commit and push only the exact
-component/integration paths, wait for the Pages workflow, and anonymously match
-all 159 public files. Publish the 33-file union to the next GitHub release and
-the existing Zenodo concept, anonymously match all 90,175,090 public bytes,
-audit zero Zenodo drafts, and persist sanitized receipts. Then begin the matrix
-Gaussian linear-model batch, followed by Bayesian comparison, remaining
-mastery/assessment sets, and capstones. The overall C140 goal remains active.
+Public C1 boundary: Pages run `33188506179` at commit
+`be8f189a9fbb922795492eab8cadbe81cd58d2b4` matched 159 files; GitHub release
+`378644493`, tag `v2026.08.28.c140-companion-c1`, at commit
+`cfcfb5b172f04f6b77b98fa04fb093520cdb8881` matched 33 assets; Zenodo record
+`22148810`, DOI `10.5281/zenodo.22148810`, matched 33 files and has zero drafts
+in concept `22077422`.
+
+Next, produce the matrix Gaussian linear-model batch: projection geometry,
+OLS/MLE, Gauss–Markov, exact sampling laws, variance estimation, standard
+errors, t/F inference, confidence/prediction intervals, ANOVA, simple/multiple
+regression, and model checks; add seeded static regression simulation and the
+next mastery set. Then continue Bayesian comparison, remaining mastery and
+assessment sets, and capstones. The overall C140 goal remains active.
 
 The donor authority is 57,507 bytes / SHA-256
 `4d7402f2a960ea2b4232e57e4ee5992ac29801b9269f300f17f8e83074d5a0e4`;
@@ -205,3 +211,6 @@ Then read `components/c140-companion/00_control/WORKFLOW.md`,
 `CHECKPOINT_2026-08-28_C1_LOCAL_COMPLETE.md`, the C1 source/backend/build/QA
 receipts, `build/PAGES_COLLECTION_RECEIPT.json`, and
 `build/C140_COMPANION_C1_RELEASE_PACKAGE_RECEIPT.json`.
+Then read `CHECKPOINT_2026-08-28_C1_PUBLICATION_COMPLETE.md`, the C1
+Pages/GitHub/Zenodo receipts, and
+`ZENODO_LINEAGE_2026-08-28_C140_COMPANION_C1.json`.

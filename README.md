@@ -77,8 +77,8 @@ keduanya dipertahankan dan tidak disamakan secara diam-diam.
 
 ## Pendamping orisinal C140 — batch C1
 
-Batch C1 pendamping orisinal CC BY-SA 4.0 sudah lengkap secara lokal dan siap
-sebagai checkpoint parsial yang koheren. Isinya tujuh unit teori rigor,
+Batch C1 pendamping orisinal CC BY-SA 4.0 sudah terbit sebagai checkpoint
+parsial yang koheren dan terverifikasi secara anonim. Isinya tujuh unit teori rigor,
 empat simulasi seeded, empat set penguasaan, satu asesmen kumulatif, dan indeks:
 
 - 17 dokumen / 288.436 byte sumber;
@@ -89,8 +89,12 @@ empat simulasi seeded, empat set penguasaan, satu asesmen kumulatif, dan indeks:
 - simulasi: 10 keluaran deterministik / 17.645 byte;
 - build, QA statis, replay byte-identik, serta dua audit matematika pasca-fix:
   lulus;
-- rute pembaca setelah deployment Pages:
+- pembaca web publik:
   https://kokunoyumeto.github.io/penn-state-stat-415-id/components/c140-companion/;
+- rilis GitHub kumulatif:
+  https://github.com/KokunoYumeto/penn-state-stat-415-id/releases/tag/v2026.08.28.c140-companion-c1;
+- preservasi Zenodo kumulatif:
+  https://doi.org/10.5281/zenodo.22148810;
 - sumber, kontrak, backend, simulasi, hak, dan receipt:
   `components/c140-companion/`.
 
@@ -99,6 +103,11 @@ optimalitas estimator/uji, dan risiko. Ia belum menutup keseluruhan C140: model
 linear Gaussian matriks, perbandingan Bayesian–frequentist, sembilan set
 penguasaan, tiga asesmen, dan dua capstone masih berlanjut. Hak Penn, donor
 *Random*, dan pendamping orisinal tetap dipisahkan.
+
+Paket kumulatif memuat 33 berkas / 90.175.090 byte: seluruh 25 berkas batas
+sebelumnya dipertahankan byte demi byte dan hanya delapan berkas C1 ditambahkan.
+Seluruh 159 berkas Pages dan 33 aset GitHub/Zenodo cocok pada pembacaan kembali
+anonim; audit konsep Zenodo menemukan nol draf yang belum dikirim.
 
 ## Reproduksi
 

@@ -2,7 +2,7 @@
 
 Updated: 2026-08-28
 
-Batch C1 is locally complete and awaiting cumulative publication. The admitted
+Batch C1 is publicly preserved as a coherent partial checkpoint. The admitted
 reader contains 17 documents: index, `D001`–`D007`, `SIM001`–`SIM004`, mastery
 sets `MS07`–`MS10`, and cumulative assessment `CA01`. The source is 288,436
 bytes with 442 stable anchors and 173 resolved body references. The four
@@ -34,11 +34,34 @@ optimality/decision surfaces. Proved theorem-hypothesis gaps, malformed TeX,
 one wrong simulation reference, and two circular simulation checks were fixed.
 Both post-fix read-only audits report no remaining high-confidence defect.
 
-The cumulative Pages tree is assembled locally at 159 files / 21,677,818 bytes
+The cumulative Pages tree is public at 159 files / 21,677,818 bytes
 with manifest SHA-256
 `e73658619391a5eab4d5fab997cce5cfb206fff942138bca92d38a5a22e1ac6f`.
 It preserves the 106 Penn and 18 donor files byte-for-byte and adds the 35 C1
-files. Publication has not yet occurred, so no public C1 claim is made.
+files. Static workflow run `33188506179` passed at content commit
+`be8f189a9fbb922795492eab8cadbe81cd58d2b4`; two credential-free readbacks
+matched every public file. The 57,970-byte Pages receipt has SHA-256
+`a176d7fcbf272757d9130ce6d5211661bab0e1a8645efb571ed8f09a54d16ebb`.
+
+The cumulative preservation union has 33 files / 90,175,090 bytes. It keeps all
+25 prior files byte-for-byte and appends only eight C1 reader/source/rights/QA
+and manifest artifacts. GitHub release `378644493`, annotated tag
+`v2026.08.28.c140-companion-c1`, points to commit
+`cfcfb5b172f04f6b77b98fa04fb093520cdb8881`; anonymous readback matched all
+33 assets. Its publication and independent readback receipt SHA-256 values are
+`09da3a9d356c06295058e6b581a245f175ec64f7514f716d95560b433190779b`
+and `46fc2b4bdf39b36e26cf4c000528b74b1a59d71965d9576e7e0910487af2eb70`.
+
+Zenodo record `22148810`, DOI `10.5281/zenodo.22148810`, version
+`2026.08.28.c140-companion-c1`, is public in concept record `22077422` /
+concept DOI `10.5281/zenodo.22077422`. Independent anonymous readback matched
+all 33 files / 90,175,090 bytes and the final lineage audit found zero
+unpublished drafts. Publication, readback, lineage-audit, and lineage-pointer
+receipt SHA-256 values are
+`c19afd7a4de6fcb9cc163d2f57067cb32571d64801102cb6cc9b4bbd0869fc5c`,
+`3e11aa7dd86726d01ec63aa92a9c4ebdbfc860ece7841881611b2dd2197c1a38`,
+`f1ecaa62696db901c49ad10d92c029136a4a84bbd68fdc89c73816ba1b67f441`,
+and `c16fc96521afbee4cdcb4d63ea8d868e3760007532687414b82db2a40fa246a9`.
 
 All original companion content is CC BY-SA 4.0. Penn and Random rights remain
 separate. Provenance remains exactly `OpenAI Codex gpt-5.6-sol, Ultra`.

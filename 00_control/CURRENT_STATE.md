@@ -376,7 +376,7 @@ and
 `089281b6358dfbd5e90e8b3251efd1091851f5ea2a0bf8ad85b75ba76f7880c7`.
 There are zero unpublished drafts.
 
-## Original C140 companion — C1 local publication boundary
+## Original C140 companion — C1 public preservation boundary
 
 The original CC BY-SA 4.0 companion now has a coherent first batch under
 `components/c140-companion/`. It contains seventeen reader documents:
@@ -400,20 +400,37 @@ Build, QA, and simulation receipt SHA-256 values are respectively
 and `834c8a20025d51bf53ef4e8d0f7d805489af21c34065238131366a734df7e213`.
 All write/check-only and two independent post-fix mathematical audits pass.
 
-The locally assembled Pages collection now has 159 files / 21,677,818 bytes:
+The public Pages collection has 159 files / 21,677,818 bytes:
 all 106 Penn and 18 donor files are preserved byte-for-byte and 35 C1 files are
 added. Its manifest SHA-256 is
 `e73658619391a5eab4d5fab997cce5cfb206fff942138bca92d38a5a22e1ac6f`.
-The cumulative preservation package is ready at 33 files / 90,175,090 bytes;
+The cumulative preservation package is public at 33 files / 90,175,090 bytes;
 its package receipt is 19,580 bytes with SHA-256
 `8e7043ee5d7085941f7b30e589af23440db0c67a1ba47754494eaa07e970b181`.
 It preserves all 25 prior release files byte-for-byte and appends eight C1
-reader/source/rights/QA/manifest files. Publication has not yet occurred, so
-this section makes no public C1 claim.
+reader/source/rights/QA/manifest files.
 
-The next executable action is the exact static replay, narrow commit/push,
-credential-free Pages readback, and cumulative GitHub/Zenodo publication and
-readback for this C1 boundary. After its sanitized receipts are persisted,
-production continues with the matrix Gaussian linear-model batch. Overall C140
-remains incomplete. No upstream message has been sent, and no browser process
-may be launched.
+Pages workflow run `33188506179` passed at commit
+`be8f189a9fbb922795492eab8cadbe81cd58d2b4`. Two credential-free passes matched
+all 159 files; Pages receipt SHA-256 is
+`a176d7fcbf272757d9130ce6d5211661bab0e1a8645efb571ed8f09a54d16ebb`.
+GitHub release `378644493`, annotated tag
+`v2026.08.28.c140-companion-c1`, points to commit
+`cfcfb5b172f04f6b77b98fa04fb093520cdb8881`; all 33 assets matched
+anonymously. Publication/readback receipt SHA-256 values are
+`09da3a9d356c06295058e6b581a245f175ec64f7514f716d95560b433190779b`
+and `46fc2b4bdf39b36e26cf4c000528b74b1a59d71965d9576e7e0910487af2eb70`.
+
+Zenodo record `22148810`, DOI `10.5281/zenodo.22148810`, is public as version
+`2026.08.28.c140-companion-c1` in concept `22077422` / DOI
+`10.5281/zenodo.22077422`. Independent anonymous readback matched all 33 files /
+90,175,090 bytes and the final lineage audit found zero drafts. Publication,
+readback, audit, and lineage-pointer receipt SHA-256 values are
+`c19afd7a4de6fcb9cc163d2f57067cb32571d64801102cb6cc9b4bbd0869fc5c`,
+`3e11aa7dd86726d01ec63aa92a9c4ebdbfc860ece7841881611b2dd2197c1a38`,
+`f1ecaa62696db901c49ad10d92c029136a4a84bbd68fdc89c73816ba1b67f441`,
+and `c16fc96521afbee4cdcb4d63ea8d868e3760007532687414b82db2a40fa246a9`.
+
+The next executable action is the matrix Gaussian linear-model batch. Overall
+C140 remains incomplete. No upstream message has been sent, and no browser
+process may be launched.
