@@ -1,0 +1,167 @@
+{
+  "all_assertions_pass": true,
+  "browser_processes_used": false,
+  "bytes": 17645,
+  "environment": {
+    "generator": "numpy.random.Generator(PCG64)",
+    "numpy": "2.4.4",
+    "python": "3.13.9"
+  },
+  "files": 10,
+  "manifest": {
+    "bytes": 1128,
+    "path": "generated/simulations/c1/MANIFEST.csv",
+    "sha256": "8644723b24a1afa06076d77ac55e96d93540a726df18f449b6f2efc3808d8fb8"
+  },
+  "network_access": false,
+  "schema": "o006.c140.companion-c1-simulations.v1",
+  "simulations": [
+    {
+      "assertions": {
+        "absolute_bias_below_0_01": true,
+        "coverage_between_0_945_and_0_955": true,
+        "scaled_variance_between_0_97_and_1_03": true,
+        "wald_score_lr_max_difference_below_5e_14": true
+      },
+      "id": "O006-C140-CMP-SIM001",
+      "replications": 120000,
+      "rows": [
+        {
+          "bias_mle": 0.0003820177,
+          "max_statistic_difference_wald_score_lr": 7.1e-15,
+          "n": 10,
+          "n_times_variance": 1.0007609594,
+          "replications": 120000,
+          "variance_mle": 0.1000760959,
+          "wald_95_coverage": 0.95055
+        },
+        {
+          "bias_mle": 0.0010615206,
+          "max_statistic_difference_wald_score_lr": 3.6e-15,
+          "n": 30,
+          "n_times_variance": 0.9998666715,
+          "replications": 120000,
+          "variance_mle": 0.033328889,
+          "wald_95_coverage": 0.9506666667
+        },
+        {
+          "bias_mle": 0.0007128821,
+          "max_statistic_difference_wald_score_lr": 3.6e-15,
+          "n": 100,
+          "n_times_variance": 0.9936405498,
+          "replications": 120000,
+          "variance_mle": 0.0099364055,
+          "wald_95_coverage": 0.950725
+        }
+      ],
+      "seed": 140001
+    },
+    {
+      "assertions": {
+        "first_order_delta_degenerate_at_theta_0": true,
+        "regular_theta_1_variance_ratio_between_0_96_and_1_05": true,
+        "theta_0_scaled_mean_between_0_98_and_1_02": true,
+        "theta_0_scaled_q95_between_3_75_and_3_93": true
+      },
+      "id": "O006-C140-CMP-SIM002",
+      "replications": 160000,
+      "rows": [
+        {
+          "empirical_variance_sqrt_n_g_error": 0.039404672,
+          "first_order_delta_variance": 0.0,
+          "mean_n_times_g_at_theta_zero": 0.9965517116,
+          "n": 50,
+          "q95_n_times_g_at_theta_zero": 3.8203318636,
+          "replications": 160000,
+          "theta": 0.0,
+          "variance_ratio_empirical_to_delta": "undefined"
+        },
+        {
+          "empirical_variance_sqrt_n_g_error": 0.1996398024,
+          "first_order_delta_variance": 0.16,
+          "mean_n_times_g_at_theta_zero": "not-applicable",
+          "n": 50,
+          "q95_n_times_g_at_theta_zero": "not-applicable",
+          "replications": 160000,
+          "theta": 0.2,
+          "variance_ratio_empirical_to_delta": 1.247748765
+        },
+        {
+          "empirical_variance_sqrt_n_g_error": 4.0176202775,
+          "first_order_delta_variance": 4.0,
+          "mean_n_times_g_at_theta_zero": "not-applicable",
+          "n": 50,
+          "q95_n_times_g_at_theta_zero": "not-applicable",
+          "replications": 160000,
+          "theta": 1.0,
+          "variance_ratio_empirical_to_delta": 1.0044050694
+        }
+      ],
+      "seed": 140002
+    },
+    {
+      "assertions": {
+        "bootstrap_zero_mass_between_0_61_and_0_66": true,
+        "endpoint_n_rate_mean_between_0_90_and_1_02": true,
+        "endpoint_q95_matches_exact_within_0_08": true,
+        "sqrt_n_gap_decreases": true
+      },
+      "id": "O006-C140-CMP-SIM003",
+      "replications": 160000,
+      "rows": [
+        {
+          "bootstrap_mass_at_zero_empirical": 0.65025,
+          "bootstrap_mass_at_zero_exact": 0.6513215599,
+          "mean_n_times_endpoint_gap": 0.9090711466,
+          "mean_sqrt_n_times_endpoint_gap": 0.2874735379,
+          "n": 10,
+          "q95_n_times_endpoint_gap": 2.5930755049,
+          "q95_n_times_endpoint_gap_exact": 2.5886555089,
+          "replications": 160000
+        },
+        {
+          "bootstrap_mass_at_zero_empirical": 0.638775,
+          "bootstrap_mass_at_zero_exact": 0.6383384865,
+          "mean_n_times_endpoint_gap": 0.9669038794,
+          "mean_sqrt_n_times_endpoint_gap": 0.1765316886,
+          "n": 30,
+          "q95_n_times_endpoint_gap": 2.8442975597,
+          "q95_n_times_endpoint_gap_exact": 2.8510155857,
+          "replications": 160000
+        },
+        {
+          "bootstrap_mass_at_zero_empirical": 0.63085,
+          "bootstrap_mass_at_zero_exact": 0.6339676587,
+          "mean_n_times_endpoint_gap": 0.9901718265,
+          "mean_sqrt_n_times_endpoint_gap": 0.0990171827,
+          "n": 100,
+          "q95_n_times_endpoint_gap": 2.9565095252,
+          "q95_n_times_endpoint_gap_exact": 2.9513049607,
+          "replications": 160000
+        }
+      ],
+      "seed": 140003
+    },
+    {
+      "assertions": {
+        "empirical_power_within_0_002": true,
+        "empirical_size_within_0_002": true,
+        "exact_size_equals_alpha": true,
+        "gamma_in_unit_interval": true,
+        "power_at_p1_exceeds_size": true
+      },
+      "empirical": {
+        "alternative": 0.555968,
+        "null": 0.099694
+      },
+      "exact_power_at_p1": 0.55584,
+      "exact_size": 0.1,
+      "gamma": 0.2333333333,
+      "id": "O006-C140-CMP-SIM004",
+      "replications": 500000,
+      "seed": 140004
+    }
+  ],
+  "status": "pass",
+  "translation_provenance": "OpenAI Codex gpt-5.6-sol, Ultra"
+}

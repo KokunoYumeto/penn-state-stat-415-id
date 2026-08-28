@@ -1,0 +1,81 @@
+{
+  "backend": {
+    "documents": 17,
+    "entities": 469,
+    "manifest_sha256": "a4ff6674dc9c35bff0baf488fbccee195a73d0a2d0ccc9739ac8faa18e05ba0c",
+    "relations": 648
+  },
+  "browser_processes_used": false,
+  "build_receipt_sha256": "1f9c746e723259ec46419586ac2c6f4b6ef7684deb9427e3eeb9cbc488e9ba35",
+  "environment_sha256": "3c5c8901ca9582e42d84ffae3aab3d9505988be6ad16eaac04d4791c601260b0",
+  "html": {
+    "external_links": 22,
+    "files": 35,
+    "images": 4,
+    "local_links": 483,
+    "manifest_sha256": "4f6eaee5df63a2bf37e6f88a36794fa01c200e38a37fe85076e5008ce7b4d36d",
+    "pages": 17,
+    "unique_html_ids": 442
+  },
+  "network_access": false,
+  "schema": "o006.c140.companion-c1-qa.v1",
+  "scripts": [
+    {
+      "path": "scripts/build_companion.py",
+      "sha256": "1f684febf5b61dd688e9b95f55e4a0bb179aa4f93addedd398e5930e79e7327c"
+    },
+    {
+      "path": "scripts/qa_companion.py",
+      "sha256": "b948b872ace8356bbabce7ae8699a87dc28aaa135d53139da281577ba2751f97"
+    },
+    {
+      "path": "simulations/run_c1_simulations.py",
+      "sha256": "f924aa482c6a59faa20b9da547096bc1921c9cf7331be2a3708ad448892ebd44"
+    }
+  ],
+  "simulations": {
+    "files": 9,
+    "manifest_sha256": "8644723b24a1afa06076d77ac55e96d93540a726df18f449b6f2efc3808d8fb8",
+    "receipt_sha256": "834c8a20025d51bf53ef4e8d0f7d805489af21c34065238131366a734df7e213",
+    "simulations": 4
+  },
+  "source": {
+    "anchors": 442,
+    "assessments": [
+      {
+        "document_id": "O006-C140-CMP-CA01",
+        "problems": 10,
+        "rubrics": 11,
+        "solution_words": 2615
+      }
+    ],
+    "documents": 17,
+    "headings": 442,
+    "mastery_sets": [
+      {
+        "document_id": "O006-C140-CMP-MS07",
+        "problems": 8,
+        "solution_words": 1704
+      },
+      {
+        "document_id": "O006-C140-CMP-MS08",
+        "problems": 8,
+        "solution_words": 1652
+      },
+      {
+        "document_id": "O006-C140-CMP-MS09",
+        "problems": 8,
+        "solution_words": 1226
+      },
+      {
+        "document_id": "O006-C140-CMP-MS10",
+        "problems": 8,
+        "solution_words": 1378
+      }
+    ],
+    "references": 173,
+    "source_bytes": 288436
+  },
+  "status": "pass",
+  "translation_provenance": "OpenAI Codex gpt-5.6-sol, Ultra"
+}

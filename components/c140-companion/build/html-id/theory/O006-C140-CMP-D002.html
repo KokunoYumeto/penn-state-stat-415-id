@@ -1,0 +1,359 @@
+<!doctype html>
+<html lang="id-ID">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="generator" content="OpenAI Codex gpt-5.6-sol, Ultra">
+<title>Konsistensi MLE: identifikasi Kullback–Leibler dan teorema argmax</title>
+<link rel="stylesheet" href="../assets/style.css">
+<script>window.MathJax={loader:{load:['[tex]/boldsymbol']},tex:{packages:{'[+]':['boldsymbol']},inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']]},svg:{fontCache:'local'}};</script>
+<script defer src="../assets/MathJax/tex-svg.js"></script>
+</head>
+<body>
+<div class="shell">
+<nav class="sidebar" aria-label="Daftar isi pendamping"><h2>Isi pendamping</h2><ol><li><a href="../index.html">Pendamping Orisinal Statistika Matematis</a></li><li><a href="O006-C140-CMP-D001.html">Model parametrik reguler, skor, dan informasi Fisher</a></li><li><a href="O006-C140-CMP-D002.html">Konsistensi MLE: identifikasi Kullback–Leibler dan teorema argmax</a></li><li><a href="O006-C140-CMP-D003.html">Likelihood kuadratik lokal, normalitas asimtotik, dan delta method</a></li><li><a href="O006-C140-CMP-D004.html">Prosedur Wald, skor, dan rasio likelihood</a></li><li><a href="O006-C140-CMP-D005.html">Likelihood nonreguler: empat mekanisme kegagalan</a></li><li><a href="O006-C140-CMP-D006.html">Optimalitas pengujian: Neyman–Pearson, MP, UMP, dan rasio likelihood monoton</a></li><li><a href="O006-C140-CMP-D007.html">Loss, risk, efisiensi, Rao–Blackwell, dan Lehmann–Scheffé</a></li><li><a href="../simulations/O006-C140-CMP-SIM001.html">Model lokasi normal: MLE, coverage, dan tiga statistik uji</a></li><li><a href="../simulations/O006-C140-CMP-SIM002.html">Delta method pada titik reguler dan titik dengan turunan nol</a></li><li><a href="../simulations/O006-C140-CMP-SIM003.html">Endpoint Uniform: laju nonreguler dan kegagalan bootstrap biasa</a></li><li><a href="../simulations/O006-C140-CMP-SIM004.html">Uji Neyman–Pearson teracak dengan size tepat</a></li><li><a href="../mastery/O006-C140-CMP-MS07.html">Set penguasaan 07 — regularitas, konsistensi, dan normalitas MLE</a></li><li><a href="../mastery/O006-C140-CMP-MS08.html">Set penguasaan 08 — Wald, skor, rasio likelihood, dan diagnosis nonregular</a></li><li><a href="../mastery/O006-C140-CMP-MS09.html">Set penguasaan 09 — pengujian eksak dan optimalitas Neyman–Pearson</a></li><li><a href="../mastery/O006-C140-CMP-MS10.html">Set penguasaan 10 — uji likelihood asimtotik, risk, dan perbaikan estimator</a></li><li><a href="../assessments/O006-C140-CMP-CA01.html">Asesmen kumulatif C1: likelihood, optimalitas, dan keputusan statistik</a></li></ol></nav>
+<main>
+<div class="metadata"><strong>O006-C140-CMP-D002</strong> · id-ID · CC BY-SA 4.0 · OpenAI Codex gpt-5.6-sol, Ultra</div>
+<p><a id="O006-C140-CMP-D002-SEC-OVERVIEW"></a></p>
+<h1>Konsistensi MLE</h1>
+<p>Konsistensi menjawab pertanyaan global: ketika ukuran sampel bertambah, apakah
+estimator menuju parameter pembangkit data? Untuk MLE, bentuk buktinya terdiri
+dari tiga lapisan yang harus dibedakan.</p>
+<ol>
+<li>Kriteria populasi harus memiliki pemaksimum unik pada parameter benar.</li>
+<li>Kriteria sampel harus mendekati kriteria populasi <strong>secara seragam</strong>, bukan
+hanya pada setiap parameter tetap.</li>
+<li>Pemaksimum kriteria sampel kemudian harus berada dekat pemaksimum populasi.</li>
+</ol>
+<p>Identifiabilitas saja menyelesaikan lapisan pertama hanya setelah integrabilitas
+log-likelihood diperiksa. Hukum bilangan besar titik demi titik saja tidak
+menyelesaikan lapisan kedua, sebab MLE memilih parameter yang juga berubah
+bersama sampel. Unit ini membuktikan versi konkret dari ketiga lapisan tersebut.</p>
+<p><a id="O006-C140-CMP-D002-SEC-M-ESTIMATION"></a></p>
+<h2>MLE sebagai estimator-M</h2>
+<p><a id="O006-C140-CMP-D002-DEF-CRITERIA"></a></p>
+<h3>Definisi: kriteria sampel dan populasi</h3>
+<p>Untuk model terdominasi <a class="xref" data-target-id="O006-C140-CMP-D001-DEF-DOMINATED-MODEL" href="O006-C140-CMP-D001.html#O006-C140-CMP-D001-DEF-DOMINATED-MODEL">Definisi: model parametrik terdominasi</a>,
+definisikan</p>
+<div class="math-display" role="math">\[m_\theta(x)=\log f_\theta(x),
+\qquad
+M_n(\theta)=\frac1n\sum_{i=1}^n m_\theta(X_i),
+\qquad
+M(\theta)=E_{\theta_0}\{m_\theta(X)\}.\]</div>
+<p>MLE memaksimumkan <span class="math-inline" role="math">\(M_n\)</span> karena pembagian dengan <span class="math-inline" role="math">\(n\)</span> tidak mengubah lokasi
+maksimum. Normalisasi itu penting: <span class="math-inline" role="math">\(M_n\)</span> biasanya mempunyai limit populasi
+hingga, sedangkan log-likelihood total tumbuh sebanding dengan <span class="math-inline" role="math">\(n\)</span>.</p>
+<p>Estimator <span class="math-inline" role="math">\(\widehat\theta_n\)</span> disebut <strong>pemaksimum hampiran</strong> bila</p>
+<div class="math-display" role="math">\[M_n(\widehat\theta_n)
+\ge \sup_{\theta\in\Theta}M_n(\theta)-r_n,
+\qquad r_n\xrightarrow{P}0.\]</div>
+<p>Definisi ini mencakup galat optimisasi numerik yang hilang secara asimtotik.
+Konsistensi tidak memerlukan algoritme menemukan maksimum persis untuk setiap
+<span class="math-inline" role="math">\(n\)</span>.</p>
+<p><a id="O006-C140-CMP-D002-DEF-KL"></a></p>
+<h3>Definisi: divergensi Kullback–Leibler</h3>
+<p>Jika <span class="math-inline" role="math">\(P\)</span> dan <span class="math-inline" role="math">\(Q\)</span> mempunyai densitas <span class="math-inline" role="math">\(p\)</span> dan <span class="math-inline" role="math">\(q\)</span> terhadap ukuran dominan yang
+sama dan <span class="math-inline" role="math">\(P\ll Q\)</span>, definisikan</p>
+<div class="math-display" role="math">\[D_{\mathrm{KL}}(P\|Q)
+=\int p(x)\log\frac{p(x)}{q(x)}\,d\mu(x),\]</div>
+<p>dengan nilai dalam <span class="math-inline" role="math">\([0,\infty]\)</span>. Bila <span class="math-inline" role="math">\(P\)</span> memberi massa positif pada daerah
+tempat <span class="math-inline" role="math">\(q=0\)</span>, divergensi didefinisikan sebagai <span class="math-inline" role="math">\(+\infty\)</span>. Divergensi ini bukan
+metrik: ia tidak simetris dan tidak memenuhi pertidaksamaan segitiga.</p>
+<p><a id="O006-C140-CMP-D002-THM-GIBBS"></a></p>
+<h3>Teorema: pertidaksamaan Gibbs</h3>
+<p>Untuk setiap pasangan distribusi <span class="math-inline" role="math">\(P,Q\)</span>,</p>
+<div class="math-display" role="math">\[D_{\mathrm{KL}}(P\|Q)\ge0,\]</div>
+<p>dan kesamaan berlaku jika dan hanya jika <span class="math-inline" role="math">\(P=Q\)</span> hingga himpunan nol.</p>
+<p><a id="O006-C140-CMP-D002-PRF-GIBBS"></a></p>
+<h3>Bukti</h3>
+<p>Kasus <span class="math-inline" role="math">\(P\not\ll Q\)</span> langsung memberi <span class="math-inline" role="math">\(+\infty\)</span>. Anggap <span class="math-inline" role="math">\(P\ll Q\)</span> dan tulis
+<span class="math-inline" role="math">\(Z=q(X)/p(X)\)</span> pada daerah <span class="math-inline" role="math">\(p&gt;0\)</span>, dengan <span class="math-inline" role="math">\(X\sim P\)</span>. Pertidaksamaan
+<span class="math-inline" role="math">\(\log z\le z-1\)</span> untuk <span class="math-inline" role="math">\(z&gt;0\)</span> memberi</p>
+<div class="math-display" role="math">\[-D_{\mathrm{KL}}(P\|Q)=E_P\log Z
+\le E_P(Z-1)
+=\int_{\{p&gt;0\}}q\,d\mu-1\le0.\]</div>
+<p>Jadi divergensi tidak negatif. Kesamaan pada <span class="math-inline" role="math">\(\log z\le z-1\)</span> hanya terjadi
+bila <span class="math-inline" role="math">\(z=1\)</span>. Agar seluruh rantai menjadi kesamaan, <span class="math-inline" role="math">\(q/p=1\)</span> <span class="math-inline" role="math">\(P\)</span>-hampir pasti dan
+<span class="math-inline" role="math">\(Q\)</span> tidak boleh mempunyai massa tersisa di luar support <span class="math-inline" role="math">\(P\)</span>. Maka <span class="math-inline" role="math">\(p=q\)</span>
+hampir di mana-mana. Kebalikannya jelas: densitas yang sama memberi divergensi
+nol. <span class="math-inline" role="math">\(\square\)</span></p>
+<p><a id="O006-C140-CMP-D002-THM-KL-IDENTIFICATION"></a></p>
+<h3>Teorema: identifikasi kriteria populasi</h3>
+<p>Andaikan <span class="math-inline" role="math">\(E_{\theta_0}|\log f_{\theta_0}(X)|&lt;\infty\)</span>, dan untuk setiap
+<span class="math-inline" role="math">\(\theta\)</span> yang dipertimbangkan, selisih log-likelihood mempunyai harapan yang
+terdefinisi. Maka</p>
+<div class="math-display" role="math">\[M(\theta)-M(\theta_0)
+=-D_{\mathrm{KL}}(P_{\theta_0}\|P_\theta)\le0.\]</div>
+<p>Jika model teridentifikasi <a class="xref" data-target-id="O006-C140-CMP-D001-DEF-IDENTIFIABILITY" href="O006-C140-CMP-D001.html#O006-C140-CMP-D001-DEF-IDENTIFIABILITY">Definisi: identifiabilitas</a>,
+<span class="math-inline" role="math">\(\theta_0\)</span> adalah pemaksimum unik <span class="math-inline" role="math">\(M\)</span>.</p>
+<p><a id="O006-C140-CMP-D002-PRF-KL-IDENTIFICATION"></a></p>
+<h3>Bukti</h3>
+<p>Dengan definisi harapan dan divergensi,</p>
+<div class="math-display" role="math">\[M(\theta)-M(\theta_0)
+=E_{\theta_0}\log\frac{f_\theta(X)}{f_{\theta_0}(X)}
+=-D_{\mathrm{KL}}(P_{\theta_0}\|P_\theta).\]</div>
+<p>Pertidaksamaan Gibbs <a class="xref" data-target-id="O006-C140-CMP-D002-THM-GIBBS" href="O006-C140-CMP-D002.html#O006-C140-CMP-D002-THM-GIBBS">Teorema: pertidaksamaan Gibbs</a> memberi tanda
+nonpositif. Kesamaan hanya bila <span class="math-inline" role="math">\(P_\theta=P_{\theta_0}\)</span>; identifiabilitas
+kemudian memaksa <span class="math-inline" role="math">\(\theta=\theta_0\)</span>. <span class="math-inline" role="math">\(\square\)</span></p>
+<p>Teorema ini tidak mengatakan bahwa <span class="math-inline" role="math">\(M_n\)</span> telah dekat dengan <span class="math-inline" role="math">\(M\)</span>. Ia hanya
+menunjukkan sasaran populasi yang benar. Lapisan seragam dibangun berikutnya.</p>
+<p><a id="O006-C140-CMP-D002-SEC-ULLN"></a></p>
+<h2>Hukum bilangan besar seragam</h2>
+<p><a id="O006-C140-CMP-D002-ASM-ULLN"></a></p>
+<h3>Asumsi U1--U3</h3>
+<p>Untuk suatu ruang parameter <span class="math-inline" role="math">\(\Theta\subseteq\mathbb R^p\)</span>, andaikan:</p>
+<ol>
+<li><strong>U1.</strong> <span class="math-inline" role="math">\(\Theta\)</span> kompak.</li>
+<li><strong>U2.</strong> Ada peubah acak <span class="math-inline" role="math">\(L(X)\)</span> dengan <span class="math-inline" role="math">\(E_{\theta_0}L(X)&lt;\infty\)</span> sehingga
+untuk semua <span class="math-inline" role="math">\(\theta,\eta\in\Theta\)</span>,</li>
+</ol>
+<div class="math-display" role="math">\[|m_\theta(X)-m_\eta(X)|\le L(X)\|\theta-\eta\|\]</div>
+<p>hampir pasti.
+3. <strong>U3.</strong> Untuk satu (dan karenanya setiap) <span class="math-inline" role="math">\(\theta_\star\in\Theta\)</span>,
+<span class="math-inline" role="math">\(E_{\theta_0}|m_{\theta_\star}(X)|&lt;\infty\)</span>.</p>
+<p>U2 adalah syarat Lipschitz acak. Bersama U3, ia menyiratkan integrabilitas
+<span class="math-inline" role="math">\(m_\theta\)</span> untuk setiap <span class="math-inline" role="math">\(\theta\)</span>, sebab diameter himpunan kompak terbatas.
+Syarat yang lebih umum dapat memakai kontinuitas hampir pasti dan selubung
+terintegralkan; versi Lipschitz dipakai agar bukti dapat diberikan lengkap.</p>
+<p><a id="O006-C140-CMP-D002-THM-ULLN"></a></p>
+<h3>Teorema: ULLN Lipschitz pada himpunan kompak</h3>
+<p>Di bawah U1--U3, untuk sampel iid dari <span class="math-inline" role="math">\(P_{\theta_0}\)</span>,</p>
+<div class="math-display" role="math">\[\sup_{\theta\in\Theta}|M_n(\theta)-M(\theta)|
+\xrightarrow{\text{a.s.}}0.\]</div>
+<p><a id="O006-C140-CMP-D002-PRF-ULLN"></a></p>
+<h3>Bukti</h3>
+<p>Tetapkan <span class="math-inline" role="math">\(\delta&gt;0\)</span>. Kekompakan memberi jaring hingga
+<span class="math-inline" role="math">\(\theta_1,\ldots,\theta_K\)</span> sehingga setiap <span class="math-inline" role="math">\(\theta\in\Theta\)</span> berjarak kurang
+dari <span class="math-inline" role="math">\(\delta\)</span> dari sedikitnya satu <span class="math-inline" role="math">\(\theta_k\)</span>. Untuk pasangan tersebut,</p>
+<div class="math-display" role="math">\[|M_n(\theta)-M_n(\theta_k)|
+\le \delta\,\frac1n\sum_{i=1}^nL(X_i),\]</div>
+<p>dan, setelah mengambil harapan pada ketaksamaan U2,</p>
+<div class="math-display" role="math">\[|M(\theta)-M(\theta_k)|\le\delta E L(X).\]</div>
+<p>Maka</p>
+<div class="math-display" role="math">\[\sup_{\theta\in\Theta}|M_n(\theta)-M(\theta)|
+\le
+\max_{1\le k\le K}|M_n(\theta_k)-M(\theta_k)|
++\delta\left\{\frac1n\sum_{i=1}^nL(X_i)+EL(X)\right\}.\]</div>
+<p>Jaring itu hingga. Hukum bilangan besar kuat yang diterapkan pada setiap
+<span class="math-inline" role="math">\(m_{\theta_k}(X)\)</span> membuat suku maksimum pertama menuju nol hampir pasti.
+Hukum yang sama membuat rata-rata <span class="math-inline" role="math">\(L(X_i)\)</span> menuju <span class="math-inline" role="math">\(EL(X)\)</span> hampir pasti. Oleh
+karena itu limit superior ruas kiri tidak melebihi <span class="math-inline" role="math">\(2\delta EL(X)\)</span> hampir
+pasti. Ambil barisan rasional <span class="math-inline" role="math">\(\delta\downarrow0\)</span>; irisan kejadian berpeluang
+satu tetap berpeluang satu, sehingga limit superior sama dengan nol.
+<span class="math-inline" role="math">\(\square\)</span></p>
+<p>Perbedaan mendasar dari hukum titik demi titik terlihat pada maksimum. Dari
+<span class="math-inline" role="math">\(M_n(\theta)\to M(\theta)\)</span> untuk setiap <span class="math-inline" role="math">\(\theta\)</span> tetap tidak otomatis mengikuti
+<span class="math-inline" role="math">\(M_n(\widehat\theta_n)-M(\widehat\theta_n)\to0\)</span>, karena
+<span class="math-inline" role="math">\(\widehat\theta_n\)</span> dipilih setelah seluruh kurva acak <span class="math-inline" role="math">\(M_n\)</span> dilihat. Supremum
+seragam menutup celah tersebut.</p>
+<p><a id="O006-C140-CMP-D002-SEC-ARGMAX"></a></p>
+<h2>Teorema argmax</h2>
+<p><a id="O006-C140-CMP-D002-ASM-SEPARATION"></a></p>
+<h3>Asumsi pemisahan</h3>
+<p>Untuk setiap <span class="math-inline" role="math">\(\varepsilon&gt;0\)</span>, andaikan</p>
+<div class="math-display" role="math">\[\Delta_\varepsilon
+=M(\theta_0)-
+\sup_{\theta:\|\theta-\theta_0\|\ge\varepsilon}M(\theta)&gt;0.\]</div>
+<p>Jika <span class="math-inline" role="math">\(\Theta\)</span> kompak, <span class="math-inline" role="math">\(M\)</span> kontinu, dan <span class="math-inline" role="math">\(\theta_0\)</span> pemaksimum unik, syarat ini
+otomatis. Memang, himpunan tertutup di luar bola <span class="math-inline" role="math">\(\varepsilon\)</span> juga kompak;
+<span class="math-inline" role="math">\(M\)</span> mencapai maksimum di sana, dan keunikan membuat maksimum itu lebih kecil
+dari <span class="math-inline" role="math">\(M(\theta_0)\)</span>.</p>
+<p><a id="O006-C140-CMP-D002-THM-ARGMAX"></a></p>
+<h3>Teorema: konsistensi pemaksimum hampiran</h3>
+<p>Andaikan:</p>
+<ol>
+<li><span class="math-inline" role="math">\(\theta_0\)</span> memenuhi pemisahan
+<a class="xref" data-target-id="O006-C140-CMP-D002-ASM-SEPARATION" href="O006-C140-CMP-D002.html#O006-C140-CMP-D002-ASM-SEPARATION">Asumsi pemisahan</a>;</li>
+<li><span class="math-inline" role="math">\(\sup_{\theta\in\Theta}|M_n(\theta)-M(\theta)|\xrightarrow{P}0\)</span>; dan</li>
+<li><span class="math-inline" role="math">\(\widehat\theta_n\)</span> memenuhi
+<span class="math-inline" role="math">\(M_n(\widehat\theta_n)\ge\sup_\Theta M_n-r_n\)</span> dengan
+<span class="math-inline" role="math">\(r_n\xrightarrow{P}0\)</span>.</li>
+</ol>
+<p>Maka <span class="math-inline" role="math">\(\widehat\theta_n\xrightarrow{P}\theta_0\)</span>.</p>
+<p><a id="O006-C140-CMP-D002-PRF-ARGMAX"></a></p>
+<h3>Bukti</h3>
+<p>Tetapkan <span class="math-inline" role="math">\(\varepsilon&gt;0\)</span> dan tulis $A_\varepsilon=
+{\theta:|\theta-\theta_0|\ge\varepsilon}$. Pada kejadian</p>
+<div class="math-display" role="math">\[2\sup_\Theta|M_n-M|+r_n&lt;\Delta_\varepsilon,\]</div>
+<p>untuk setiap <span class="math-inline" role="math">\(\theta\in A_\varepsilon\)</span> berlaku</p>
+<div class="math-display" role="math">\[M_n(\theta)
+\le M(\theta)+\sup_\Theta|M_n-M|
+\le M(\theta_0)-\Delta_\varepsilon+\sup_\Theta|M_n-M|,\]</div>
+<p>sedangkan</p>
+<div class="math-display" role="math">\[M_n(\theta_0)
+\ge M(\theta_0)-\sup_\Theta|M_n-M|.\]</div>
+<p>Jadi <span class="math-inline" role="math">\(M_n(\theta)&lt;M_n(\theta_0)-r_n\)</span> untuk semua
+<span class="math-inline" role="math">\(\theta\in A_\varepsilon\)</span>. Pemaksimum hampiran tidak mungkin berada di
+<span class="math-inline" role="math">\(A_\varepsilon\)</span>. Probabilitas kejadian yang digunakan menuju satu karena kedua
+suku acak menuju nol dalam probabilitas. Maka
+<span class="math-inline" role="math">\(P(\|\widehat\theta_n-\theta_0\|\ge\varepsilon)\to0\)</span>. <span class="math-inline" role="math">\(\square\)</span></p>
+<p><a id="O006-C140-CMP-D002-THM-MLE-CONSISTENCY"></a></p>
+<h3>Korolari: konsistensi MLE pada parameter kompak</h3>
+<p>Andaikan model teridentifikasi, kriteria populasi hingga dan kontinu,
+<span class="math-inline" role="math">\(\Theta\)</span> kompak, <span class="math-inline" role="math">\(\theta_0\in\Theta\)</span>, serta U2--U3
+<a class="xref" data-target-id="O006-C140-CMP-D002-ASM-ULLN" href="O006-C140-CMP-D002.html#O006-C140-CMP-D002-ASM-ULLN">Asumsi U1--U3</a>. Setiap MLE atau pemaksimum likelihood
+hampiran dengan <span class="math-inline" role="math">\(r_n\to0\)</span> dalam probabilitas konsisten untuk <span class="math-inline" role="math">\(\theta_0\)</span>.</p>
+<p><a id="O006-C140-CMP-D002-PRF-MLE-CONSISTENCY"></a></p>
+<h3>Bukti</h3>
+<p>Identifikasi Kullback--Leibler
+<a class="xref" data-target-id="O006-C140-CMP-D002-THM-KL-IDENTIFICATION" href="O006-C140-CMP-D002.html#O006-C140-CMP-D002-THM-KL-IDENTIFICATION">Teorema: identifikasi kriteria populasi</a> memberi pemaksimum populasi
+unik. Kontinuitas dan kekompakan memberi pemisahan. ULLN
+<a class="xref" data-target-id="O006-C140-CMP-D002-THM-ULLN" href="O006-C140-CMP-D002.html#O006-C140-CMP-D002-THM-ULLN">Teorema: ULLN Lipschitz pada himpunan kompak</a> memberi konvergensi seragam hampir pasti,
+yang lebih kuat daripada konvergensi dalam probabilitas. Terapkan teorema
+argmax <a class="xref" data-target-id="O006-C140-CMP-D002-THM-ARGMAX" href="O006-C140-CMP-D002.html#O006-C140-CMP-D002-THM-ARGMAX">Teorema: konsistensi pemaksimum hampiran</a>. <span class="math-inline" role="math">\(\square\)</span></p>
+<p><a id="O006-C140-CMP-D002-EX-BERNOULLI"></a></p>
+<h2>Contoh: MLE Bernoulli</h2>
+<p>Ambil <span class="math-inline" role="math">\(X_i\sim\operatorname{Bernoulli}(p_0)\)</span> dan, mula-mula, ruang parameter
+<span class="math-inline" role="math">\(\Theta=[a,1-a]\)</span> dengan <span class="math-inline" role="math">\(0&lt;a&lt;p_0&lt;1-a\)</span>. Kriteria per observasi ialah</p>
+<div class="math-display" role="math">\[m_p(x)=x\log p+(1-x)\log(1-p).\]</div>
+<p>Turunannya terhadap <span class="math-inline" role="math">\(p\)</span> dibatasi pada <span class="math-inline" role="math">\([a,1-a]\)</span>:</p>
+<div class="math-display" role="math">\[\left|\frac{\partial}{\partial p}m_p(x)\right|
+=\left|\frac{x}{p}-\frac{1-x}{1-p}\right|
+\le\frac1a.\]</div>
+<p>Jadi U2 berlaku dengan <span class="math-inline" role="math">\(L(X)=1/a\)</span>. Model teridentifikasi, sehingga korolari
+berlaku. MLE tak terbatasnya adalah <span class="math-inline" role="math">\(\bar X_n\)</span>; pada ruang kompak, MLE adalah
+proyeksi <span class="math-inline" role="math">\(\bar X_n\)</span> ke <span class="math-inline" role="math">\([a,1-a]\)</span>. Karena <span class="math-inline" role="math">\(p_0\)</span> interior dan
+<span class="math-inline" role="math">\(\bar X_n\to p_0\)</span>, proyeksi akhirnya tidak aktif dengan probabilitas menuju
+satu.</p>
+<p>Contoh ini juga dapat dibuktikan langsung dengan hukum bilangan besar, tetapi
+kerangka argmax tetap berguna untuk model yang tidak memiliki formula MLE
+tertutup.</p>
+<p><a id="O006-C140-CMP-D002-EX-NORMAL-MEAN"></a></p>
+<h2>Contoh: lokasi Normal pada ruang tak kompak</h2>
+<p>Untuk <span class="math-inline" role="math">\(X_i\sim N(\mu_0,\sigma^2)\)</span> dengan <span class="math-inline" role="math">\(\sigma^2\)</span> diketahui,</p>
+<div class="math-display" role="math">\[M_n(\mu)=C_n-\frac{1}{2\sigma^2}
+\left\{\mu^2-2\mu\bar X_n\right\},\]</div>
+<p>sehingga <span class="math-inline" role="math">\(\widehat\mu_n=\bar X_n\to\mu_0\)</span> hampir pasti. Ruang parameter
+<span class="math-inline" role="math">\(\mathbb R\)</span> tidak kompak, jadi korolari kompak tidak berlaku secara literal.
+Namun kriteria kuadratik bersifat <strong>koersif</strong>: ia menuju <span class="math-inline" role="math">\(-\infty\)</span> saat
+<span class="math-inline" role="math">\(|\mu|\to\infty\)</span>. Dengan probabilitas menuju satu, pemaksimum berada pada satu
+himpunan kompak tetap di sekitar <span class="math-inline" role="math">\(\mu_0\)</span>; argumen ULLN dan argmax lalu dapat
+diterapkan pada himpunan itu.</p>
+<p>Pelajaran umumnya: kekompakan adalah alat untuk mencegah pemaksimum “lari ke
+tak hingga”. Pada ruang tak kompak, ia dapat diganti dengan syarat tightness
+atau koersivitas yang membuktikan hal yang sama.</p>
+<p><a id="O006-C140-CMP-D002-CTR-POINTWISE"></a></p>
+<h2>Mengapa konvergensi titik demi titik tidak cukup</h2>
+<p>Pertimbangkan fungsi deterministik pada <span class="math-inline" role="math">\(\Theta=[0,1]\)</span>,</p>
+<div class="math-display" role="math">\[M_n(\theta)=\mathbf 1\{0&lt;\theta&lt;1/n\},
+\qquad M(\theta)=0.\]</div>
+<p>Untuk setiap <span class="math-inline" role="math">\(\theta\)</span> tetap, <span class="math-inline" role="math">\(M_n(\theta)\to0\)</span>. Namun
+<span class="math-inline" role="math">\(\sup_\theta|M_n(\theta)-M(\theta)|=1\)</span> untuk semua <span class="math-inline" role="math">\(n\)</span>. Setiap pemaksimum
+<span class="math-inline" role="math">\(M_n\)</span> berada pada interval yang bergerak; perilaku pemaksimum tidak dikontrol
+oleh limit titik demi titik. Contoh ini bukan likelihood tertentu, tetapi ia
+menunjukkan celah logis yang harus ditutup oleh ULLN atau argumen model-spesifik.</p>
+<p><a id="O006-C140-CMP-D002-CTR-NONIDENTIFIED"></a></p>
+<h2>Kegagalan identifikasi: konsistensi hanya menuju himpunan</h2>
+<p>Pada model <span class="math-inline" role="math">\(N(\theta^2,1)\)</span> dari
+<a class="xref" data-target-id="O006-C140-CMP-D001-CTR-NONIDENTIFIABLE" href="O006-C140-CMP-D001.html#O006-C140-CMP-D001-CTR-NONIDENTIFIABLE">Kontraeksempel: parameter kuadrat yang tidak teridentifikasi</a>, kriteria populasi mempunyai dua
+pemaksimum <span class="math-inline" role="math">\(\theta_0\)</span> dan <span class="math-inline" role="math">\(-\theta_0\)</span> bila <span class="math-inline" role="math">\(\theta_0\ne0\)</span>. ULLN yang sempurna
+tidak dapat memilih tanda yang tidak hadir dalam distribusi data. Teorema
+argmax dapat dimodifikasi untuk menyimpulkan bahwa jarak estimator ke himpunan
+<span class="math-inline" role="math">\(\{-|\theta_0|,|\theta_0|\}\)</span> menuju nol, tetapi bukan bahwa estimator menuju
+satu anggota tertentu. Jadi identifikasi dan konvergensi seragam menyelesaikan
+dua persoalan yang berbeda.</p>
+<p><a id="O006-C140-CMP-D002-CTR-NONREGULAR-CONSISTENT"></a></p>
+<h2>Regularitas tidak perlu untuk konsistensi</h2>
+<p>Untuk model <span class="math-inline" role="math">\(\operatorname{Unif}(0,\theta_0)\)</span>, MLE
+<span class="math-inline" role="math">\(\widehat\theta_n=X_{(n)}\)</span> melanggar support bersama
+<a class="xref" data-target-id="O006-C140-CMP-D001-CTR-MOVING-SUPPORT" href="O006-C140-CMP-D001.html#O006-C140-CMP-D001-CTR-MOVING-SUPPORT">Kontraeksempel nonreguler: support bergerak</a>. Namun untuk setiap
+<span class="math-inline" role="math">\(0&lt;\varepsilon&lt;\theta_0\)</span>,</p>
+<div class="math-display" role="math">\[P_{\theta_0}(|X_{(n)}-\theta_0|&gt;\varepsilon)
+=P_{\theta_0}(X_{(n)}&lt;\theta_0-\varepsilon)
+=\left(1-\frac{\varepsilon}{\theta_0}\right)^n\to0.\]</div>
+<p>MLE tetap konsisten. Yang gagal adalah paket bukti regular berbasis skor serta
+limit Normal <span class="math-inline" role="math">\(\sqrt n\)</span>, bukan konsistensinya. Selalu bedakan “teorema ini tidak
+berlaku” dari “kesimpulan pasti salah”.</p>
+<p><a id="O006-C140-CMP-D002-SEC-EXPECTATIONS"></a></p>
+<h2>Konsistensi bukan konvergensi nilai harapan</h2>
+<p><a id="O006-C140-CMP-D002-DEF-CONSISTENCY"></a></p>
+<h3>Definisi: konsistensi dan bias asimtotik</h3>
+<p>Estimator <span class="math-inline" role="math">\(T_n\)</span> konsisten untuk konstanta <span class="math-inline" role="math">\(t\)</span> bila
+<span class="math-inline" role="math">\(T_n\xrightarrow{P}t\)</span>. Pernyataan ini mengontrol probabilitas galat yang lebih
+besar dari setiap ambang tetap. Ia <strong>tidak</strong> dengan sendirinya menyatakan
+<span class="math-inline" role="math">\(E(T_n)\to t\)</span>, <span class="math-inline" role="math">\(E|T_n-t|\to0\)</span>, atau
+<span class="math-inline" role="math">\(\operatorname{Var}(T_n)\to0\)</span>.</p>
+<p>Mengatakan “konsistensi menyebabkan nilai harapan estimator menuju parameter”
+tanpa syarat tambahan adalah salah. Konvergensi nilai harapan adalah pernyataan
+integral dan peka terhadap kejadian sangat jarang dengan nilai sangat besar.</p>
+<p><a id="O006-C140-CMP-D002-CTR-PROB-NOT-MEAN"></a></p>
+<h3>Kontraeksempel: konvergensi dalam probabilitas tanpa konvergensi harapan</h3>
+<p>Definisikan</p>
+<div class="math-display" role="math">\[T_n=
+\begin{cases}
+n,&amp;\text{dengan probabilitas }1/n,\\
+0,&amp;\text{dengan probabilitas }1-1/n.
+\end{cases}\]</div>
+<p>Untuk setiap <span class="math-inline" role="math">\(\varepsilon&gt;0\)</span> dan <span class="math-inline" role="math">\(n&gt;\varepsilon\)</span>,
+<span class="math-inline" role="math">\(P(|T_n|&gt;\varepsilon)=1/n\to0\)</span>, sehingga <span class="math-inline" role="math">\(T_n\xrightarrow{P}0\)</span>. Akan tetapi
+<span class="math-inline" role="math">\(E(T_n)=1\)</span> untuk semua <span class="math-inline" role="math">\(n\)</span>. Massa probabilitas yang mengecil membawa nilai yang
+membesar tepat cukup cepat untuk mempertahankan harapan.</p>
+<p><a id="O006-C140-CMP-D002-DEF-UI"></a></p>
+<h3>Definisi: uniform integrability</h3>
+<p>Keluarga peubah acak <span class="math-inline" role="math">\(\{Y_n\}\)</span> disebut <strong>uniformly integrable</strong> (UI) bila</p>
+<div class="math-display" role="math">\[\lim_{K\to\infty}
+\sup_n E\bigl(|Y_n|\mathbf 1\{|Y_n|&gt;K\}\bigr)=0.\]</div>
+<p>UI melarang sejumlah harapan yang berarti “bersembunyi” di ekor yang makin
+jarang tetapi makin besar. Keterbatasan seragam <span class="math-inline" role="math">\(|Y_n|\le C\)</span> membuat UI
+otomatis. Syarat momen yang sedikit lebih kuat juga cukup: jika untuk suatu
+<span class="math-inline" role="math">\(\delta&gt;0\)</span>, <span class="math-inline" role="math">\(\sup_n E|Y_n|^{1+\delta}&lt;\infty\)</span>, maka ketaksamaan
+<span class="math-inline" role="math">\(|Y_n|\mathbf 1\{|Y_n|&gt;K\}\le |Y_n|^{1+\delta}/K^\delta\)</span> memberi UI.</p>
+<p><a id="O006-C140-CMP-D002-THM-UI-EXPECTATION"></a></p>
+<h3>Teorema: UI mengangkat konvergensi probabilitas menjadi konvergensi harapan</h3>
+<p>Jika <span class="math-inline" role="math">\(T_n\xrightarrow{P}t\)</span> untuk konstanta hingga <span class="math-inline" role="math">\(t\)</span> dan keluarga
+<span class="math-inline" role="math">\(\{T_n\}\)</span> UI, maka</p>
+<div class="math-display" role="math">\[E|T_n-t|\to0
+\quad\text{dan karena itu}\quad
+E(T_n)\to t.\]</div>
+<p><a id="O006-C140-CMP-D002-PRF-UI-EXPECTATION"></a></p>
+<h3>Bukti</h3>
+<p>Tetapkan <span class="math-inline" role="math">\(A&gt;2|t|\)</span> dan tulis</p>
+<div class="math-display" role="math">\[E|T_n-t|
+=E\{|T_n-t|\mathbf 1(|T_n|\le A)\}
++E\{|T_n-t|\mathbf 1(|T_n|&gt;A)\}.\]</div>
+<p>Untuk suku pertama dan setiap <span class="math-inline" role="math">\(\varepsilon&gt;0\)</span>,</p>
+<div class="math-display" role="math">\[E\{|T_n-t|\mathbf 1(|T_n|\le A)\}
+\le \varepsilon+(A+|t|)P(|T_n-t|&gt;\varepsilon),\]</div>
+<p>sehingga limit superiornya paling besar <span class="math-inline" role="math">\(\varepsilon\)</span>. Untuk suku kedua,
+<span class="math-inline" role="math">\(|T_n|&gt;A&gt;2|t|\)</span> menyiratkan <span class="math-inline" role="math">\(|T_n-t|\le |T_n|+|t|&lt;\tfrac32|T_n|\)</span>, jadi</p>
+<div class="math-display" role="math">\[E\{|T_n-t|\mathbf 1(|T_n|&gt;A)\}
+\le\frac32E\{|T_n|\mathbf 1(|T_n|&gt;A)\}.\]</div>
+<p>UI membuat supremum ruas kanan sekecil yang diinginkan dengan memilih <span class="math-inline" role="math">\(A\)</span>
+besar, seragam terhadap <span class="math-inline" role="math">\(n\)</span>. Setelah itu ambil <span class="math-inline" role="math">\(n\to\infty\)</span>, lalu
+<span class="math-inline" role="math">\(\varepsilon\downarrow0\)</span>. Maka <span class="math-inline" role="math">\(E|T_n-t|\to0\)</span>. Terakhir,
+<span class="math-inline" role="math">\(|ET_n-t|\le E|T_n-t|\)</span> memberi konvergensi harapan. <span class="math-inline" role="math">\(\square\)</span></p>
+<p><a id="O006-C140-CMP-D002-REM-BOUNDED-MLE"></a></p>
+<h3>Catatan: kapan UI tersedia untuk MLE</h3>
+<p>Jika ruang parameter <span class="math-inline" role="math">\(\Theta\)</span> terbatas dan estimator selalu mengambil nilai di
+<span class="math-inline" role="math">\(\Theta\)</span>, konsistensi langsung disertai UI. Maka <span class="math-inline" role="math">\(E\widehat\theta_n\to\theta_0\)</span>
+untuk parameter skalar, atau komponen demi komponen untuk parameter vektor.
+Pada ruang tak terbatas, konsistensi saja belum cukup; diperlukan kontrol momen,
+truncation, tail bound, atau argumen UI lain.</p>
+<p>Karena itu urutan logis yang benar adalah:</p>
+<ol>
+<li>buktikan konsistensi dengan identifikasi, ULLN, dan argmax;</li>
+<li>bila klaim tentang bias atau risiko memerlukan harapan, buktikan UI atau
+syarat pengganti secara terpisah;</li>
+<li>jangan menyisipkan klaim <span class="math-inline" role="math">\(E\widehat\theta_n\to\theta_0\)</span> ke dalam definisi
+konsistensi.</li>
+</ol>
+<p><a id="O006-C140-CMP-D002-REM-ROADMAP"></a></p>
+<h2>Dari konsistensi ke normalitas asimtotik</h2>
+<p>Konsistensi menempatkan <span class="math-inline" role="math">\(\widehat\theta_n\)</span> di lingkungan parameter benar dengan
+probabilitas menuju satu. Ia belum menentukan laju atau bentuk distribusi
+galat. Untuk mendapatkan aproksimasi Normal, kita memerlukan:</p>
+<ul>
+<li>CLT untuk skor pada <span class="math-inline" role="math">\(\theta_0\)</span>;</li>
+<li>hukum bilangan besar lokal untuk Hessian;</li>
+<li>informasi nonsingular;</li>
+<li>ekspansi Taylor yang sisaannya terkendali; dan</li>
+<li>solusi likelihood yang memang konsisten.</li>
+</ul>
+<p>Semua unsur ini dipadukan dalam ekspansi kuadratik lokal dan teorema normalitas
+MLE <a class="xref" data-target-id="O006-C140-CMP-D003-THM-MLE-AN" href="O006-C140-CMP-D003.html#O006-C140-CMP-D003-THM-MLE-AN">Teorema: normalitas asimtotik MLE</a>.</p>
+
+<footer class="license">Materi pendamping orisinal berlisensi CC BY-SA 4.0. Komponen Penn State dan Random tetap berada di bawah lisensinya masing-masing dan tidak direlisensikan oleh halaman ini.</footer>
+</main>
+</div>
+</body>
+</html>

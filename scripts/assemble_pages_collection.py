@@ -1,10 +1,10 @@
 #!/usr/bin/env python3
-"""Assemble the Penn reader and isolated Random donor for GitHub Pages.
+"""Assemble Penn, the Random donor, and the original companion for Pages.
 
 The Penn reader is selected from the files tracked below ``build/html-id`` and
-copied byte-for-byte to ``build/pages``.  The donor is mounted below the
-collision-resistant ``components/random-completeness`` prefix.  No HTML, CSS,
-JavaScript, image, or other reader payload is transformed by this script.
+copied byte-for-byte to ``build/pages``.  The two component readers are mounted
+below collision-resistant ``components`` prefixes.  No HTML, CSS, JavaScript,
+image, or other reader payload is transformed by this script.
 """
 
 from __future__ import annotations
@@ -22,9 +22,11 @@ from pathlib import Path, PurePosixPath
 ROOT = Path(__file__).resolve().parents[1]
 PENN_SOURCE = ROOT / "build" / "html-id"
 DONOR_SOURCE = ROOT / "components" / "random-completeness" / "build" / "html-id"
+COMPANION_SOURCE = ROOT / "components" / "c140-companion" / "build" / "html-id"
 DESTINATION = ROOT / "build" / "pages"
 RECEIPT = ROOT / "build" / "PAGES_COLLECTION_RECEIPT.json"
 DONOR_MOUNT = PurePosixPath("components/random-completeness")
+COMPANION_MOUNT = PurePosixPath("components/c140-companion")
 
 
 def sha256(payload: bytes) -> str:
@@ -105,6 +107,31 @@ def donor_files() -> list[tuple[PurePosixPath, Path]]:
     return sorted(result, key=lambda item: item[0].as_posix())
 
 
+def companion_files() -> list[tuple[PurePosixPath, Path]]:
+    if COMPANION_SOURCE.is_symlink() or not COMPANION_SOURCE.is_dir():
+        raise RuntimeError(
+            "original companion reader is missing or unsafe: "
+            "components/c140-companion/build/html-id"
+        )
+
+    result: list[tuple[PurePosixPath, Path]] = []
+    for candidate in COMPANION_SOURCE.rglob("*"):
+        if candidate.is_symlink():
+            raise RuntimeError(
+                "original companion reader contains a symlink: "
+                f"{candidate.relative_to(ROOT).as_posix()}"
+            )
+        if not candidate.is_file():
+            continue
+        relative = PurePosixPath(candidate.relative_to(COMPANION_SOURCE).as_posix())
+        validate_relative(relative, label="companion reader path")
+        result.append((relative, candidate))
+
+    if not result:
+        raise RuntimeError("the original companion reader contains no files")
+    return sorted(result, key=lambda item: item[0].as_posix())
+
+
 def file_identity(path: Path) -> tuple[int, str]:
     payload = path.read_bytes()
     return len(payload), sha256(payload)
@@ -121,11 +148,13 @@ def manifest_sha256(entries: list[dict[str, object]]) -> str:
 def compute() -> tuple[dict[PurePosixPath, Path], bytes]:
     penn = tracked_penn_files()
     donor = donor_files()
+    companion = companion_files()
 
     collection: dict[PurePosixPath, Path] = {}
     records: list[dict[str, object]] = []
     penn_records: list[dict[str, object]] = []
     donor_records: list[dict[str, object]] = []
+    companion_records: list[dict[str, object]] = []
 
     def register(
         collection_relative: PurePosixPath,
@@ -161,8 +190,10 @@ def compute() -> tuple[dict[PurePosixPath, Path], bytes]:
         records.append(collection_record)
         if source_name == "penn-reader":
             penn_records.append(source_record)
-        else:
+        elif source_name == "random-completeness-donor":
             donor_records.append(source_record)
+        else:
+            companion_records.append(source_record)
 
     for relative, source in penn:
         register(
@@ -178,12 +209,20 @@ def compute() -> tuple[dict[PurePosixPath, Path], bytes]:
             source_name="random-completeness-donor",
             source_relative=relative,
         )
+    for relative, source in companion:
+        register(
+            COMPANION_MOUNT / relative,
+            source,
+            source_name="c140-original-companion",
+            source_relative=relative,
+        )
 
     records.sort(key=lambda item: str(item["path"]))
     penn_records.sort(key=lambda item: str(item["path"]))
     donor_records.sort(key=lambda item: str(item["path"]))
+    companion_records.sort(key=lambda item: str(item["path"]))
     receipt = {
-        "schema": "o006.c140.pages-collection.v1",
+        "schema": "o006.c140.pages-collection.v2",
         "status": "assembled",
         "generated_by": "scripts/assemble_pages_collection.py",
         "browser_used": False,
@@ -202,6 +241,13 @@ def compute() -> tuple[dict[PurePosixPath, Path], bytes]:
                 "bytes": sum(int(item["bytes"]) for item in donor_records),
                 "manifest_sha256": manifest_sha256(donor_records),
             },
+            "c140_original_companion": {
+                "path": "components/c140-companion/build/html-id",
+                "mount": COMPANION_MOUNT.as_posix(),
+                "files": len(companion_records),
+                "bytes": sum(int(item["bytes"]) for item in companion_records),
+                "manifest_sha256": manifest_sha256(companion_records),
+            },
         },
         "collection": {
             "path": "build/pages",
@@ -214,6 +260,7 @@ def compute() -> tuple[dict[PurePosixPath, Path], bytes]:
             "case_insensitive_collisions": 0,
             "penn_reader_files_byte_identical": True,
             "random_completeness_files_byte_identical": True,
+            "c140_original_companion_files_byte_identical": True,
             "payload_transformations": 0,
         },
         "files": records,

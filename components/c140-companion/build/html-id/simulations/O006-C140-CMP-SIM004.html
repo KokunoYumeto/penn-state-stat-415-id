@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="id-ID">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="generator" content="OpenAI Codex gpt-5.6-sol, Ultra">
+<title>Uji Neyman–Pearson teracak dengan size tepat</title>
+<link rel="stylesheet" href="../assets/style.css">
+<script>window.MathJax={loader:{load:['[tex]/boldsymbol']},tex:{packages:{'[+]':['boldsymbol']},inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']]},svg:{fontCache:'local'}};</script>
+<script defer src="../assets/MathJax/tex-svg.js"></script>
+</head>
+<body>
+<div class="shell">
+<nav class="sidebar" aria-label="Daftar isi pendamping"><h2>Isi pendamping</h2><ol><li><a href="../index.html">Pendamping Orisinal Statistika Matematis</a></li><li><a href="../theory/O006-C140-CMP-D001.html">Model parametrik reguler, skor, dan informasi Fisher</a></li><li><a href="../theory/O006-C140-CMP-D002.html">Konsistensi MLE: identifikasi Kullback–Leibler dan teorema argmax</a></li><li><a href="../theory/O006-C140-CMP-D003.html">Likelihood kuadratik lokal, normalitas asimtotik, dan delta method</a></li><li><a href="../theory/O006-C140-CMP-D004.html">Prosedur Wald, skor, dan rasio likelihood</a></li><li><a href="../theory/O006-C140-CMP-D005.html">Likelihood nonreguler: empat mekanisme kegagalan</a></li><li><a href="../theory/O006-C140-CMP-D006.html">Optimalitas pengujian: Neyman–Pearson, MP, UMP, dan rasio likelihood monoton</a></li><li><a href="../theory/O006-C140-CMP-D007.html">Loss, risk, efisiensi, Rao–Blackwell, dan Lehmann–Scheffé</a></li><li><a href="O006-C140-CMP-SIM001.html">Model lokasi normal: MLE, coverage, dan tiga statistik uji</a></li><li><a href="O006-C140-CMP-SIM002.html">Delta method pada titik reguler dan titik dengan turunan nol</a></li><li><a href="O006-C140-CMP-SIM003.html">Endpoint Uniform: laju nonreguler dan kegagalan bootstrap biasa</a></li><li><a href="O006-C140-CMP-SIM004.html">Uji Neyman–Pearson teracak dengan size tepat</a></li><li><a href="../mastery/O006-C140-CMP-MS07.html">Set penguasaan 07 — regularitas, konsistensi, dan normalitas MLE</a></li><li><a href="../mastery/O006-C140-CMP-MS08.html">Set penguasaan 08 — Wald, skor, rasio likelihood, dan diagnosis nonregular</a></li><li><a href="../mastery/O006-C140-CMP-MS09.html">Set penguasaan 09 — pengujian eksak dan optimalitas Neyman–Pearson</a></li><li><a href="../mastery/O006-C140-CMP-MS10.html">Set penguasaan 10 — uji likelihood asimtotik, risk, dan perbaikan estimator</a></li><li><a href="../assessments/O006-C140-CMP-CA01.html">Asesmen kumulatif C1: likelihood, optimalitas, dan keputusan statistik</a></li></ol></nav>
+<main>
+<div class="metadata"><strong>O006-C140-CMP-SIM004</strong> · id-ID · CC BY-SA 4.0 · OpenAI Codex gpt-5.6-sol, Ultra</div>
+<p><a id="O006-C140-CMP-SIM004-SEC001"></a></p>
+<h1>Uji Neyman–Pearson teracak dengan <em>size</em> tepat</h1>
+<p>Ambil <span class="math-inline" role="math">\(X\sim\operatorname{Binomial}(4,p)\)</span> dan uji sederhana
+<span class="math-inline" role="math">\(H_0:p=0{,}25\)</span> melawan <span class="math-inline" role="math">\(H_1:p=0{,}60\)</span> pada <span class="math-inline" role="math">\(\alpha=0{,}10\)</span>. Rasio
+likelihood naik terhadap <span class="math-inline" role="math">\(x\)</span>, sehingga bentuk uji Neyman–Pearson adalah:
+tolak bila <span class="math-inline" role="math">\(X\ge3\)</span>, terima bila <span class="math-inline" role="math">\(X\le1\)</span>, dan ketika <span class="math-inline" role="math">\(X=2\)</span> tolak dengan
+peluang <span class="math-inline" role="math">\(\gamma\)</span>. Randomisasi pada himpunan kesamaan merupakan bagian dari
+teorema, bukan tambalan numerik; lihat <a class="xref" data-target-id="O006-C140-CMP-D006" href="../theory/O006-C140-CMP-D006.html">Optimalitas pengujian: Neyman–Pearson, MP, UMP, dan rasio likelihood monoton</a>.</p>
+<p><a id="O006-C140-CMP-SIM004-ALG001"></a></p>
+<h2>Menentukan peluang randomisasi</h2>
+<p>Pilih <span class="math-inline" role="math">\(\gamma\)</span> agar</p>
+<div class="math-display" role="math">\[P_{0.25}(X\ge3)+\gamma P_{0.25}(X=2)=0{,}10.\]</div>
+<p>Perhitungan eksak memberi <span class="math-inline" role="math">\(\gamma=0{,}2333333333\)</span>. Dengan nilai itu, size
+eksak sama dengan 0,10 hingga galat aritmetika mesin. Power eksak pada
+<span class="math-inline" role="math">\(p=0{,}60\)</span> adalah 0,55584.</p>
+<p><a id="O006-C140-CMP-SIM004-SIM001"></a></p>
+<h2>Pemeriksaan Monte Carlo</h2>
+<ul>
+<li>Seed PCG64: <code>140004</code>.</li>
+<li>Replikasi untuk null dan alternatif: masing-masing 500.000.</li>
+<li>Size empiris: 0,099694.</li>
+<li>Power empiris pada <span class="math-inline" role="math">\(p=0{,}60\)</span>: 0,555968.</li>
+<li>Kedua hasil harus berjarak kurang dari 0,002 dari probabilitas eksaknya.</li>
+</ul>
+<p>Monte Carlo memeriksa implementasi, sedangkan size dan power analitis tetap
+ditentukan oleh penjumlahan peluang binomial. Dengan demikian, fluktuasi acak
+tidak boleh dipakai untuk mengubah <span class="math-inline" role="math">\(\gamma\)</span>.</p>
+<figure>
+<img src="../assets/simulations/SIM004_neyman_pearson_power.svg" alt="Kurva power eksak uji binomial teracak sebagai fungsi p dari nol sampai satu, dengan garis horizontal alpha 0,10; power meningkat dan bernilai sekitar 0,556 pada p 0,60.">
+<figcaption>Fungsi power eksak dari uji teracak.</figcaption>
+</figure>
+<p>Data: <a href="../assets/simulations/SIM004_neyman_pearson_summary.csv">ringkasan CSV</a> dan
+<a href="../assets/simulations/SIM004_neyman_pearson_power.csv">kurva power CSV</a>.</p>
+
+<footer class="license">Materi pendamping orisinal berlisensi CC BY-SA 4.0. Komponen Penn State dan Random tetap berada di bawah lisensinya masing-masing dan tidak direlisensikan oleh halaman ini.</footer>
+</main>
+</div>
+</body>
+</html>

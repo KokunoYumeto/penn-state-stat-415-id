@@ -1,0 +1,336 @@
+<!doctype html>
+<html lang="id-ID">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="generator" content="OpenAI Codex gpt-5.6-sol, Ultra">
+<title>Model parametrik reguler, skor, dan informasi Fisher</title>
+<link rel="stylesheet" href="../assets/style.css">
+<script>window.MathJax={loader:{load:['[tex]/boldsymbol']},tex:{packages:{'[+]':['boldsymbol']},inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']]},svg:{fontCache:'local'}};</script>
+<script defer src="../assets/MathJax/tex-svg.js"></script>
+</head>
+<body>
+<div class="shell">
+<nav class="sidebar" aria-label="Daftar isi pendamping"><h2>Isi pendamping</h2><ol><li><a href="../index.html">Pendamping Orisinal Statistika Matematis</a></li><li><a href="O006-C140-CMP-D001.html">Model parametrik reguler, skor, dan informasi Fisher</a></li><li><a href="O006-C140-CMP-D002.html">Konsistensi MLE: identifikasi Kullback–Leibler dan teorema argmax</a></li><li><a href="O006-C140-CMP-D003.html">Likelihood kuadratik lokal, normalitas asimtotik, dan delta method</a></li><li><a href="O006-C140-CMP-D004.html">Prosedur Wald, skor, dan rasio likelihood</a></li><li><a href="O006-C140-CMP-D005.html">Likelihood nonreguler: empat mekanisme kegagalan</a></li><li><a href="O006-C140-CMP-D006.html">Optimalitas pengujian: Neyman–Pearson, MP, UMP, dan rasio likelihood monoton</a></li><li><a href="O006-C140-CMP-D007.html">Loss, risk, efisiensi, Rao–Blackwell, dan Lehmann–Scheffé</a></li><li><a href="../simulations/O006-C140-CMP-SIM001.html">Model lokasi normal: MLE, coverage, dan tiga statistik uji</a></li><li><a href="../simulations/O006-C140-CMP-SIM002.html">Delta method pada titik reguler dan titik dengan turunan nol</a></li><li><a href="../simulations/O006-C140-CMP-SIM003.html">Endpoint Uniform: laju nonreguler dan kegagalan bootstrap biasa</a></li><li><a href="../simulations/O006-C140-CMP-SIM004.html">Uji Neyman–Pearson teracak dengan size tepat</a></li><li><a href="../mastery/O006-C140-CMP-MS07.html">Set penguasaan 07 — regularitas, konsistensi, dan normalitas MLE</a></li><li><a href="../mastery/O006-C140-CMP-MS08.html">Set penguasaan 08 — Wald, skor, rasio likelihood, dan diagnosis nonregular</a></li><li><a href="../mastery/O006-C140-CMP-MS09.html">Set penguasaan 09 — pengujian eksak dan optimalitas Neyman–Pearson</a></li><li><a href="../mastery/O006-C140-CMP-MS10.html">Set penguasaan 10 — uji likelihood asimtotik, risk, dan perbaikan estimator</a></li><li><a href="../assessments/O006-C140-CMP-CA01.html">Asesmen kumulatif C1: likelihood, optimalitas, dan keputusan statistik</a></li></ol></nav>
+<main>
+<div class="metadata"><strong>O006-C140-CMP-D001</strong> · id-ID · CC BY-SA 4.0 · OpenAI Codex gpt-5.6-sol, Ultra</div>
+<p><a id="O006-C140-CMP-D001-SEC-OVERVIEW"></a></p>
+<h1>Model parametrik reguler, skor, dan informasi Fisher</h1>
+<p>Teori likelihood yang bersih berdiri di atas beberapa syarat yang sering
+disembunyikan oleh notasi. Turunan dari log-likelihood belum tentu boleh
+dipindahkan melewati tanda integral; nilai parameter yang berbeda belum tentu
+menghasilkan distribusi yang berbeda; dan support distribusi dapat bergerak
+bersama parameter. Jika salah satu persoalan ini diabaikan, rumus yang tampak
+familier dapat memberikan kesimpulan yang keliru.</p>
+<p>Unit ini membangun fondasi tersebut secara eksplisit. Kita memakai sampel acak
+independen dan berdistribusi identik (iid) <span class="math-inline" role="math">\(X_1,\ldots,X_n\)</span> dari distribusi
+<span class="math-inline" role="math">\(P_{\theta_0}\)</span>, dengan parameter benar <span class="math-inline" role="math">\(\theta_0\)</span>. Parameter dapat berupa skalar
+atau vektor. Semua pernyataan asimtotik pada unit berikutnya bergantung pada
+pemeriksaan regularitas yang dilakukan di sini.</p>
+<p><a id="O006-C140-CMP-D001-SEC-DOMINATION"></a></p>
+<h2>Model terdominasi dan likelihood</h2>
+<p><a id="O006-C140-CMP-D001-DEF-DOMINATED-MODEL"></a></p>
+<h3>Definisi: model parametrik terdominasi</h3>
+<p>Misalkan <span class="math-inline" role="math">\((\mathcal X,\mathcal A)\)</span> adalah ruang terukur dan
+<span class="math-inline" role="math">\(\Theta\subseteq\mathbb R^p\)</span>. Keluarga distribusi
+<span class="math-inline" role="math">\(\mathcal P=\{P_\theta:\theta\in\Theta\}\)</span> disebut <strong>terdominasi</strong> apabila ada
+satu ukuran <span class="math-inline" role="math">\(\sigma\)</span>-hingga <span class="math-inline" role="math">\(\mu\)</span> sehingga <span class="math-inline" role="math">\(P_\theta\ll\mu\)</span> untuk setiap
+<span class="math-inline" role="math">\(\theta\)</span>. Menurut teorema Radon--Nikodym, terdapat densitas</p>
+<div class="math-display" role="math">\[f_\theta(x)=\frac{dP_\theta}{d\mu}(x),
+\qquad
+P_\theta(A)=\int_A f_\theta(x)\,d\mu(x).\]</div>
+<p>Ukuran dominan harus sama untuk seluruh <span class="math-inline" role="math">\(\theta\)</span>. Untuk peubah diskret kita
+dapat memakai ukuran pencacahan; untuk model kontinu biasa kita memakai ukuran
+Lebesgue. Pilihan <span class="math-inline" role="math">\(\mu\)</span> tidak unik, tetapi rasio likelihood tidak berubah bila
+kita mengganti <span class="math-inline" role="math">\(\mu\)</span> dengan ukuran dominan ekuivalen yang tidak bergantung pada
+<span class="math-inline" role="math">\(\theta\)</span>.</p>
+<p>Untuk pengamatan <span class="math-inline" role="math">\(x_1,\ldots,x_n\)</span> iid, likelihood dan log-likelihood adalah</p>
+<div class="math-display" role="math">\[L_n(\theta)=\prod_{i=1}^n f_\theta(x_i),
+\qquad
+\ell_n(\theta)=\sum_{i=1}^n\log f_\theta(x_i),\]</div>
+<p>dengan konvensi <span class="math-inline" role="math">\(\log 0=-\infty\)</span>. Likelihood adalah fungsi parameter setelah
+data ditahan tetap; ia bukan densitas probabilitas atas <span class="math-inline" role="math">\(\theta\)</span>.</p>
+<p><a id="O006-C140-CMP-D001-DEF-SUPPORT"></a></p>
+<h3>Definisi: support esensial dan support bersama</h3>
+<p>Support esensial relatif terhadap <span class="math-inline" role="math">\(\mu\)</span> dapat ditulis</p>
+<div class="math-display" role="math">\[S_\theta=\{x\in\mathcal X:f_\theta(x)&gt;0\}\]</div>
+<p>hingga himpunan berukuran <span class="math-inline" role="math">\(\mu\)</span> nol. Suatu lingkungan <span class="math-inline" role="math">\(N\)</span> dari <span class="math-inline" role="math">\(\theta_0\)</span>
+memiliki <strong>support bersama</strong> apabila ada <span class="math-inline" role="math">\(S\)</span> sehingga
+<span class="math-inline" role="math">\(S_\theta=S\)</span> hingga himpunan nol untuk semua <span class="math-inline" role="math">\(\theta\in N\)</span>. Syarat lokal ini
+lebih penting daripada kesamaan support di seluruh ruang parameter: teori
+lokal hanya memerlukan perilaku yang terkendali di sekitar <span class="math-inline" role="math">\(\theta_0\)</span>.</p>
+<p>Dominasi dan support bersama adalah konsep berbeda. Keluarga
+<span class="math-inline" role="math">\(\operatorname{Unif}(0,\theta)\)</span> terdominasi oleh ukuran Lebesgue, tetapi
+<span class="math-inline" role="math">\(S_\theta=(0,\theta)\)</span> berubah bersama <span class="math-inline" role="math">\(\theta\)</span>. Dominasi memungkinkan kita
+menuliskan likelihood pada satu skala; support bersama mencegah turunan
+likelihood kehilangan massa pada batas yang bergerak.</p>
+<p><a id="O006-C140-CMP-D001-SEC-IDENTIFICATION"></a></p>
+<h2>Identifiabilitas</h2>
+<p><a id="O006-C140-CMP-D001-DEF-IDENTIFIABILITY"></a></p>
+<h3>Definisi: identifiabilitas</h3>
+<p>Model disebut <strong>teridentifikasi</strong> apabila</p>
+<div class="math-display" role="math">\[P_\theta=P_\eta \quad\Longrightarrow\quad \theta=\eta.\]</div>
+<p>Identifiabilitas adalah sifat distribusi, bukan sifat algoritme estimasi. Data
+sebesar apa pun tidak dapat membedakan dua nilai parameter yang menghasilkan
+hukum observasi persis sama. Untuk analisis lokal, kita kadang hanya memerlukan
+identifiabilitas pada suatu lingkungan dari <span class="math-inline" role="math">\(\theta_0\)</span>, tetapi konsistensi
+global memerlukan pemisahan global atau pembatasan ruang parameter.</p>
+<p><a id="O006-C140-CMP-D001-CTR-NONIDENTIFIABLE"></a></p>
+<h3>Kontraeksempel: parameter kuadrat yang tidak teridentifikasi</h3>
+<p>Ambil <span class="math-inline" role="math">\(X\sim N(\theta^2,1)\)</span> dengan <span class="math-inline" role="math">\(\Theta=\mathbb R\)</span>. Karena
+<span class="math-inline" role="math">\(P_\theta=P_{-\theta}\)</span>, tanda <span class="math-inline" role="math">\(\theta\)</span> tidak teridentifikasi. Likelihood dapat
+memiliki dua maksimum simetris. Tidak ada estimator yang konsisten untuk
+<span class="math-inline" role="math">\(\theta\)</span> di seluruh <span class="math-inline" role="math">\(\mathbb R\)</span>: bila <span class="math-inline" role="math">\(T_n\to\theta\)</span> dalam probabilitas di bawah
+<span class="math-inline" role="math">\(P_\theta\)</span>, distribusi <span class="math-inline" role="math">\(T_n\)</span> di bawah <span class="math-inline" role="math">\(P_{-\theta}\)</span> sama persis, sehingga ia
+tidak sekaligus dapat menuju <span class="math-inline" role="math">\(-\theta\)</span> untuk <span class="math-inline" role="math">\(\theta\ne0\)</span>.</p>
+<p>Masalah dapat diperbaiki dengan mengubah target menjadi <span class="math-inline" role="math">\(\psi=\theta^2\)</span> atau
+membatasi <span class="math-inline" role="math">\(\Theta=[0,\infty)\)</span>. Perbaikan itu mengubah parameter ilmiah yang
+diestimasi; ia bukan sekadar pilihan numerik. Identifiabilitas akan menjadi
+syarat pemisahan Kullback--Leibler pada konsistensi MLE
+<a class="xref" data-target-id="O006-C140-CMP-D002-THM-KL-IDENTIFICATION" href="O006-C140-CMP-D002.html#O006-C140-CMP-D002-THM-KL-IDENTIFICATION">Teorema: identifikasi kriteria populasi</a>.</p>
+<p><a id="O006-C140-CMP-D001-SEC-REGULARITY"></a></p>
+<h2>Paket regularitas lokal</h2>
+<p><a id="O006-C140-CMP-D001-ASM-R1-R6"></a></p>
+<h3>Asumsi R1--R6</h3>
+<p>Berikut satu paket syarat yang cukup untuk identitas skor dan informasi di
+<span class="math-inline" role="math">\(\theta_0\)</span>. Paket ini bukan satu-satunya paket yang mungkin, tetapi setiap
+langkah bukti di bawah dapat ditelusuri ke syarat tertentu.</p>
+<ol>
+<li><strong>R1 (titik interior).</strong> <span class="math-inline" role="math">\(\theta_0\)</span> berada di interior himpunan terbuka
+<span class="math-inline" role="math">\(N\subseteq\Theta\subseteq\mathbb R^p\)</span>.</li>
+<li><strong>R2 (dominasi dan support bersama).</strong> Semua <span class="math-inline" role="math">\(P_\theta\)</span>, <span class="math-inline" role="math">\(\theta\in N\)</span>,
+mempunyai densitas terhadap satu ukuran <span class="math-inline" role="math">\(\sigma\)</span>-hingga <span class="math-inline" role="math">\(\mu\)</span>, dan terdapat
+support bersama <span class="math-inline" role="math">\(S\)</span>.</li>
+<li><strong>R3 (diferensiabilitas).</strong> Untuk <span class="math-inline" role="math">\(\mu\)</span>-hampir semua <span class="math-inline" role="math">\(x\in S\)</span>, fungsi
+<span class="math-inline" role="math">\(\theta\mapsto f_\theta(x)\)</span> dua kali terdiferensial kontinu pada <span class="math-inline" role="math">\(N\)</span> dan
+<span class="math-inline" role="math">\(f_\theta(x)&gt;0\)</span>.</li>
+<li><strong>R4 (selubung turunan pertama).</strong> Untuk setiap komponen <span class="math-inline" role="math">\(j\)</span>, ada fungsi
+terintegralkan <span class="math-inline" role="math">\(G_j\)</span> sehingga
+<span class="math-inline" role="math">\(|\partial f_\theta(x)/\partial\theta_j|\le G_j(x)\)</span> untuk semua
+<span class="math-inline" role="math">\(\theta\in N\)</span> dan hampir semua <span class="math-inline" role="math">\(x\)</span>.</li>
+<li><strong>R5 (selubung turunan kedua).</strong> Untuk setiap <span class="math-inline" role="math">\(j,k\)</span>, ada fungsi
+terintegralkan <span class="math-inline" role="math">\(H_{jk}\)</span> yang mendominasi
+<span class="math-inline" role="math">\(|\partial^2 f_\theta(x)/(\partial\theta_j\partial\theta_k)|\)</span> pada <span class="math-inline" role="math">\(N\)</span>.</li>
+<li><strong>R6 (momen skor).</strong> Skor pada <span class="math-inline" role="math">\(\theta_0\)</span> memiliki momen kedua hingga, dan
+matriks informasinya hingga. Bila invers informasi hendak dipakai, matriks
+tersebut juga harus positif definit.</li>
+</ol>
+<p>R4 dan R5 adalah syarat nyaman, bukan minimal. Teori yang lebih umum dapat
+memakai diferensiabilitas dalam kuadrat rata-rata atau syarat uniform
+integrability. Namun, menulis hanya “cukup reguler” tidak menjelaskan operasi
+analitis apa yang sah.</p>
+<p><a id="O006-C140-CMP-D001-THM-DIFFERENTIATION"></a></p>
+<h3>Teorema: menurunkan di bawah tanda integral</h3>
+<p>Misalkan <span class="math-inline" role="math">\(g(\theta,x)\)</span> terdiferensial terhadap komponen <span class="math-inline" role="math">\(\theta_j\)</span> pada
+lingkungan <span class="math-inline" role="math">\(N\)</span> dari <span class="math-inline" role="math">\(\theta_0\)</span>. Andaikan <span class="math-inline" role="math">\(g(\theta,\cdot)\)</span> terintegralkan dan
+ada <span class="math-inline" role="math">\(G\)</span> terintegralkan dengan
+<span class="math-inline" role="math">\(|\partial_j g(\theta,x)|\le G(x)\)</span> untuk semua <span class="math-inline" role="math">\(\theta\in N\)</span> dan hampir semua
+<span class="math-inline" role="math">\(x\)</span>. Maka</p>
+<div class="math-display" role="math">\[\partial_j\int g(\theta,x)\,d\mu(x)
+=\int\partial_j g(\theta,x)\,d\mu(x).\]</div>
+<p><a id="O006-C140-CMP-D001-PRF-DIFFERENTIATION"></a></p>
+<h3>Bukti</h3>
+<p>Ambil barisan <span class="math-inline" role="math">\(h_m\to0\)</span> dengan <span class="math-inline" role="math">\(\theta+h_me_j\in N\)</span>. Untuk hampir semua <span class="math-inline" role="math">\(x\)</span>,
+teorema nilai rata-rata satu dimensi memberi suatu <span class="math-inline" role="math">\(t_m(x)\)</span> di antara <span class="math-inline" role="math">\(0\)</span> dan
+<span class="math-inline" role="math">\(h_m\)</span> sehingga</p>
+<div class="math-display" role="math">\[\frac{g(\theta+h_me_j,x)-g(\theta,x)}{h_m}
+=\partial_jg(\theta+t_m(x)e_j,x).\]</div>
+<p>Nilai mutlak ruas kanan dibatasi oleh <span class="math-inline" role="math">\(G(x)\)</span>, sedangkan diferensiabilitas
+memberi konvergensi titik demi titik ke <span class="math-inline" role="math">\(\partial_jg(\theta,x)\)</span>. Teorema
+konvergensi terdominasi mengizinkan limit dipindahkan melewati integral.
+Integral hasil bagi selisih adalah hasil bagi selisih dari integral, sehingga
+limitnya merupakan turunan integral. Karena kesimpulan sama untuk setiap
+barisan <span class="math-inline" role="math">\(h_m\to0\)</span>, hasil berlaku. <span class="math-inline" role="math">\(\square\)</span></p>
+<p><a id="O006-C140-CMP-D001-SEC-SCORE"></a></p>
+<h2>Skor dan identitas skor</h2>
+<p><a id="O006-C140-CMP-D001-DEF-SCORE"></a></p>
+<h3>Definisi: skor observasi tunggal</h3>
+<p>Skor untuk satu observasi adalah vektor kolom</p>
+<div class="math-display" role="math">\[s_\theta(x)=\nabla_\theta\log f_\theta(x).\]</div>
+<p>Pada titik dengan <span class="math-inline" role="math">\(f_\theta(x)&gt;0\)</span>,</p>
+<div class="math-display" role="math">\[s_\theta(x)f_\theta(x)=\nabla_\theta f_\theta(x).\]</div>
+<p>Skor sampel iid adalah
+<span class="math-inline" role="math">\(U_n(\theta)=\nabla\ell_n(\theta)=\sum_{i=1}^n s_\theta(X_i)\)</span>.
+Persamaan skor <span class="math-inline" role="math">\(U_n(\theta)=0\)</span> sering menghasilkan kandidat MLE, tetapi titik
+maksimum pada batas atau titik nondiferensiabel tidak wajib memenuhi persamaan
+itu.</p>
+<p><a id="O006-C140-CMP-D001-THM-ZERO-SCORE"></a></p>
+<h3>Teorema: nilai harapan skor adalah nol</h3>
+<p>Di bawah R1--R4 <a class="xref" data-target-id="O006-C140-CMP-D001-ASM-R1-R6" href="O006-C140-CMP-D001.html#O006-C140-CMP-D001-ASM-R1-R6">Asumsi R1--R6</a>,</p>
+<div class="math-display" role="math">\[E_\theta\{s_\theta(X)\}=0,
+\qquad \theta\in N.\]</div>
+<p><a id="O006-C140-CMP-D001-PRF-ZERO-SCORE"></a></p>
+<h3>Bukti</h3>
+<p>Untuk komponen <span class="math-inline" role="math">\(j\)</span>, support bersama mengizinkan integral selalu dilakukan pada
+<span class="math-inline" role="math">\(S\)</span>, tanpa suku batas yang bergantung pada <span class="math-inline" role="math">\(\theta\)</span>. Identitas aljabar skor dan
+teorema pertukaran turunan <a class="xref" data-target-id="O006-C140-CMP-D001-THM-DIFFERENTIATION" href="O006-C140-CMP-D001.html#O006-C140-CMP-D001-THM-DIFFERENTIATION">Teorema: menurunkan di bawah tanda integral</a>
+memberi</p>
+<div class="math-display" role="math">\[E_\theta\{s_{\theta,j}(X)\}
+=\int_S \frac{\partial_j f_\theta(x)}{f_\theta(x)}f_\theta(x)\,d\mu(x)
+=\partial_j\int_S f_\theta(x)\,d\mu(x)
+=\partial_j 1=0.\]</div>
+<p>Karena ini berlaku untuk semua komponen, vektor harapannya nol. <span class="math-inline" role="math">\(\square\)</span></p>
+<p>Nilai harapan nol tidak berarti skor yang diamati nol. Skor adalah peubah acak;
+ia menyeimbangkan arah perubahan log-likelihood secara rata-rata bila data
+benar-benar berasal dari parameter yang sedang dievaluasi.</p>
+<p><a id="O006-C140-CMP-D001-SEC-INFORMATION"></a></p>
+<h2>Informasi Fisher</h2>
+<p><a id="O006-C140-CMP-D001-DEF-FISHER"></a></p>
+<h3>Definisi: informasi yang diharapkan dan diamati</h3>
+<p>Informasi Fisher per observasi pada <span class="math-inline" role="math">\(\theta\)</span> adalah</p>
+<div class="math-display" role="math">\[I(\theta)=E_\theta\{s_\theta(X)s_\theta(X)^\mathsf T\}.\]</div>
+<p>Karena <span class="math-inline" role="math">\(E_\theta s_\theta(X)=0\)</span>, matriks ini juga merupakan kovarians skor.
+Ia simetris dan positif semidefinit. Informasi sampel yang diharapkan adalah
+<span class="math-inline" role="math">\(nI(\theta)\)</span>. Informasi yang diamati adalah</p>
+<div class="math-display" role="math">\[J_n(\theta)=-\nabla_\theta^2\ell_n(\theta).\]</div>
+<p><span class="math-inline" role="math">\(J_n(\theta)\)</span> bergantung pada data dan tidak harus positif definit jauh dari
+titik maksimum. Hubungan asimtotik keduanya dibahas di
+<a class="xref" data-target-id="O006-C140-CMP-D003-THM-INFO-CONVERGENCE" href="O006-C140-CMP-D003.html#O006-C140-CMP-D003-THM-INFO-CONVERGENCE">Teorema: konsistensi informasi plug-in</a>.</p>
+<p><a id="O006-C140-CMP-D001-THM-INFO-IDENTITY"></a></p>
+<h3>Teorema: identitas informasi kedua</h3>
+<p>Di bawah R1--R6 <a class="xref" data-target-id="O006-C140-CMP-D001-ASM-R1-R6" href="O006-C140-CMP-D001.html#O006-C140-CMP-D001-ASM-R1-R6">Asumsi R1--R6</a>, dan bila semua harapan di
+bawah hingga,</p>
+<div class="math-display" role="math">\[I(\theta)=-E_\theta\{\nabla_\theta^2\log f_\theta(X)\}.\]</div>
+<p><a id="O006-C140-CMP-D001-PRF-INFO-IDENTITY"></a></p>
+<h3>Bukti</h3>
+<p>Untuk komponen <span class="math-inline" role="math">\(j,k\)</span>, turunkan identitas
+<span class="math-inline" role="math">\(\partial_j f_\theta=f_\theta s_{\theta,j}\)</span> terhadap <span class="math-inline" role="math">\(\theta_k\)</span>:</p>
+<div class="math-display" role="math">\[\partial_{kj}^2 f_\theta
+=f_\theta s_{\theta,k}s_{\theta,j}
++f_\theta\,\partial_k s_{\theta,j}.\]</div>
+<p>Bagi dengan <span class="math-inline" role="math">\(f_\theta\)</span>, integralkan, dan gunakan pertukaran turunan kedua yang
+dijamin R5:</p>
+<div class="math-display" role="math">\[0=\partial_{kj}^2\int_S f_\theta\,d\mu
+=E_\theta(s_{\theta,j}s_{\theta,k})
++E_\theta(\partial_{kj}^2\log f_\theta).\]</div>
+<p>Memindahkan suku kedua dan menyusun seluruh komponen menghasilkan identitas
+matriks yang dinyatakan. <span class="math-inline" role="math">\(\square\)</span></p>
+<p><a id="O006-C140-CMP-D001-THM-IID-ADDITIVITY"></a></p>
+<h3>Teorema: aditivitas informasi untuk sampel iid</h3>
+<p>Jika <span class="math-inline" role="math">\(X_1,\ldots,X_n\)</span> iid dan skor mempunyai momen kedua hingga, maka</p>
+<div class="math-display" role="math">\[\operatorname{Var}_\theta\{U_n(\theta)\}=nI(\theta).\]</div>
+<p><a id="O006-C140-CMP-D001-PRF-IID-ADDITIVITY"></a></p>
+<h3>Bukti</h3>
+<p>Skor sampel adalah jumlah skor individual. Setiap suku mempunyai nilai harapan
+nol menurut <a class="xref" data-target-id="O006-C140-CMP-D001-THM-ZERO-SCORE" href="O006-C140-CMP-D001.html#O006-C140-CMP-D001-THM-ZERO-SCORE">Teorema: nilai harapan skor adalah nol</a>. Independensi membuat
+kovarians silang antarsuku nol. Karena itu kovarians jumlah sama dengan jumlah
+kovarians, yakni <span class="math-inline" role="math">\(nI(\theta)\)</span>. <span class="math-inline" role="math">\(\square\)</span></p>
+<p><a id="O006-C140-CMP-D001-THM-REPARAMETERIZATION"></a></p>
+<h3>Teorema: transformasi informasi</h3>
+<p>Misalkan <span class="math-inline" role="math">\(\theta=h(\eta)\)</span> adalah reparametrisasi terdiferensial dengan matriks
+Jacobian <span class="math-inline" role="math">\(H(\eta)=\partial\theta/\partial\eta^\mathsf T\)</span>. Maka</p>
+<div class="math-display" role="math">\[s_\eta(x)=H(\eta)^\mathsf T s_\theta(x),
+\qquad
+I_\eta(\eta)=H(\eta)^\mathsf T I_\theta(h(\eta))H(\eta).\]</div>
+<p><a id="O006-C140-CMP-D001-PRF-REPARAMETERIZATION"></a></p>
+<h3>Bukti</h3>
+<p>Aturan rantai memberi identitas skor. Kalikan skor baru dengan transposenya,
+ambil harapan pada distribusi yang sama, lalu keluarkan matriks Jacobian yang
+tidak acak dari harapan. <span class="math-inline" role="math">\(\square\)</span></p>
+<p>Jika <span class="math-inline" role="math">\(H\)</span> berperingkat penuh dan <span class="math-inline" role="math">\(I_\theta\)</span> positif definit, <span class="math-inline" role="math">\(I_\eta\)</span> juga
+positif definit. Bila Jacobian singular, hilangnya informasi dapat mencerminkan
+parametrisasi yang tidak satu-ke-satu, bukan kekurangan data.</p>
+<p><a id="O006-C140-CMP-D001-EX-BERNOULLI"></a></p>
+<h2>Contoh lengkap: model Bernoulli</h2>
+<p>Ambil <span class="math-inline" role="math">\(X\sim\operatorname{Bernoulli}(p)\)</span> dan batasi sementara
+<span class="math-inline" role="math">\(p\in(0,1)\)</span>. Terhadap ukuran pencacahan pada <span class="math-inline" role="math">\(\{0,1\}\)</span>,</p>
+<div class="math-display" role="math">\[f_p(x)=p^x(1-p)^{1-x},
+\qquad
+\log f_p(x)=x\log p+(1-x)\log(1-p).\]</div>
+<p>Support <span class="math-inline" role="math">\(\{0,1\}\)</span> tidak bergantung pada <span class="math-inline" role="math">\(p\)</span>, model teridentifikasi karena
+<span class="math-inline" role="math">\(P_p(X=1)=p\)</span>, dan semua pertukaran integral hanyalah pertukaran dengan jumlah
+hingga. Skor dan turunan keduanya ialah</p>
+<div class="math-display" role="math">\[s_p(x)=\frac{x}{p}-\frac{1-x}{1-p}
+=\frac{x-p}{p(1-p)},\]</div>
+<div class="math-display" role="math">\[\frac{\partial^2}{\partial p^2}\log f_p(x)
+=-\frac{x}{p^2}-\frac{1-x}{(1-p)^2}.\]</div>
+<p>Karena <span class="math-inline" role="math">\(E_pX=p\)</span> dan <span class="math-inline" role="math">\(\operatorname{Var}_p(X)=p(1-p)\)</span>,</p>
+<div class="math-display" role="math">\[E_p s_p(X)=0,
+\qquad
+I(p)=\frac{1}{p(1-p)}.\]</div>
+<p>Bentuk Hessian memberi jawaban sama:</p>
+<div class="math-display" role="math">\[-E_p\left\{\frac{\partial^2}{\partial p^2}\log f_p(X)\right\}
+=\frac{p}{p^2}+\frac{1-p}{(1-p)^2}
+=\frac{1}{p(1-p)}.\]</div>
+<p>Pada himpunan kompak <span class="math-inline" role="math">\([\varepsilon,1-\varepsilon]\)</span>, semua turunan terkontrol
+seragam. Di batas <span class="math-inline" role="math">\(p=0\)</span> atau <span class="math-inline" role="math">\(p=1\)</span>, titik interior dan informasi hingga gagal;
+normalitas asimtotik standar tidak boleh diterapkan secara mekanis.</p>
+<p><a id="O006-C140-CMP-D001-EX-NORMAL"></a></p>
+<h2>Contoh lengkap: lokasi dan skala Normal</h2>
+<p>Parametrisasikan <span class="math-inline" role="math">\(X\sim N(\mu,v)\)</span> dengan <span class="math-inline" role="math">\(v&gt;0\)</span> dan
+<span class="math-inline" role="math">\(\theta=(\mu,v)^\mathsf T\)</span>. Log-densitas per observasi adalah</p>
+<div class="math-display" role="math">\[\ell(\mu,v;x)=-\frac12\log(2\pi v)-\frac{(x-\mu)^2}{2v}.\]</div>
+<p>Skornya</p>
+<div class="math-display" role="math">\[s_\mu=\frac{x-\mu}{v},
+\qquad
+s_v=-\frac{1}{2v}+\frac{(x-\mu)^2}{2v^2}.\]</div>
+<p>Gunakan <span class="math-inline" role="math">\(E(X-\mu)=0\)</span>, <span class="math-inline" role="math">\(E(X-\mu)^2=v\)</span>, momen ketiga terpusat nol, dan
+<span class="math-inline" role="math">\(E(X-\mu)^4=3v^2\)</span>. Maka</p>
+<div class="math-display" role="math">\[I(\mu,v)=
+\begin{pmatrix}
+1/v &amp; 0\\
+0 &amp; 1/(2v^2)
+\end{pmatrix}.\]</div>
+<p>Elemen luar diagonal nol bukan karena <span class="math-inline" role="math">\(\mu\)</span> dan <span class="math-inline" role="math">\(v\)</span> bebas sebagai peubah acak,
+melainkan karena skor keduanya tak berkorelasi pada model Normal. Parameter
+seperti ini disebut ortogonal dalam arti informasi lokal.</p>
+<p><a id="O006-C140-CMP-D001-CTR-MOVING-SUPPORT"></a></p>
+<h2>Kontraeksempel nonreguler: support bergerak</h2>
+<p>Ambil <span class="math-inline" role="math">\(X\sim\operatorname{Unif}(0,\theta)\)</span>, <span class="math-inline" role="math">\(\theta&gt;0\)</span>. Densitasnya</p>
+<div class="math-display" role="math">\[f_\theta(x)=\theta^{-1}\mathbf 1\{0&lt;x&lt;\theta\}.\]</div>
+<p>Jika indikator secara keliru dianggap konstan saat menurunkan, kita memperoleh
+<span class="math-inline" role="math">\(s_\theta(x)=-1/\theta\)</span> untuk <span class="math-inline" role="math">\(0&lt;x&lt;\theta\)</span>, sehingga
+<span class="math-inline" role="math">\(E_\theta s_\theta(X)=-1/\theta\ne0\)</span>. Ini tidak membantah teorema skor. R2 gagal:
+support bergantung pada <span class="math-inline" role="math">\(\theta\)</span>, dan menurunkan integral
+<span class="math-inline" role="math">\(\int_0^\theta \theta^{-1} dx\)</span> menghasilkan suku batas yang dihilangkan oleh
+perhitungan naif.</p>
+<p>MLE adalah <span class="math-inline" role="math">\(\widehat\theta_n=X_{(n)}\)</span>, maksimum sampel. Galatnya berorde
+<span class="math-inline" role="math">\(n^{-1}\)</span>, bukan <span class="math-inline" role="math">\(n^{-1/2}\)</span>:</p>
+<div class="math-display" role="math">\[P_\theta\left\{n\left(1-\frac{X_{(n)}}{\theta}\right)&gt;t\right\}
+=\left(1-\frac{t}{n}\right)^n\longrightarrow e^{-t},
+\qquad t\ge0.\]</div>
+<p>Jadi limitnya eksponensial, bukan Normal. Kegagalan support bersama merusak
+identitas skor, bentuk informasi Hessian, ekspansi likelihood lokal biasa, dan
+normalitas <span class="math-inline" role="math">\(\sqrt n\)</span> sekaligus. Walaupun demikian, MLE tetap konsisten; syarat
+reguler adalah syarat cukup untuk teori tertentu, bukan syarat perlu bagi semua
+bentuk konsistensi.</p>
+<p><a id="O006-C140-CMP-D001-CTR-SINGULAR-INFORMATION"></a></p>
+<h2>Kontraeksempel nonreguler: informasi singular</h2>
+<p>Kembali ke <span class="math-inline" role="math">\(X\sim N(\theta^2,1)\)</span>. Skor adalah</p>
+<div class="math-display" role="math">\[s_\theta(x)=2\theta(x-\theta^2),
+\qquad I(\theta)=4\theta^2.\]</div>
+<p>Pada <span class="math-inline" role="math">\(\theta_0=0\)</span>, informasi sama dengan nol. Selain kegagalan identifiabilitas
+global, peta parameter ke distribusi datar sampai orde pertama. Matriks
+informasi tidak dapat diinvers, dan skala <span class="math-inline" role="math">\(\sqrt n\)</span> untuk mengestimasi
+<span class="math-inline" role="math">\(\theta\)</span> tidak didukung oleh aproksimasi linear. Membatasi <span class="math-inline" role="math">\(\theta\ge0\)</span>
+memperbaiki identifiabilitas tetapi menempatkan <span class="math-inline" role="math">\(0\)</span> pada batas dan tidak
+memperbaiki turunan pertama yang nol. Dengan demikian, R1 dan bagian
+nonsingular dari R6 tetap gagal.</p>
+<p><a id="O006-C140-CMP-D001-REM-CHECKLIST"></a></p>
+<h2>Daftar periksa sebelum memakai rumus informasi</h2>
+<p>Sebelum menyatakan <span class="math-inline" role="math">\(E(s)=0\)</span>, <span class="math-inline" role="math">\(I=-E(H)\)</span>, atau varians asimtotik <span class="math-inline" role="math">\(I^{-1}\)</span>,
+periksa hal berikut.</p>
+<ol>
+<li>Apakah seluruh keluarga ditulis terhadap satu ukuran dominan?</li>
+<li>Apakah support tetap pada lingkungan parameter benar?</li>
+<li>Apakah parameter teridentifikasi, setidaknya pada target yang hendak
+diestimasi?</li>
+<li>Apakah parameter benar merupakan titik interior?</li>
+<li>Apakah turunan densitas/log-densitas ada hampir di mana-mana?</li>
+<li>Apa alasan matematis yang mengizinkan pertukaran turunan dan integral?</li>
+<li>Apakah skor bermomen kedua hingga dan informasi nonsingular?</li>
+<li>Bila parameter diubah, apakah transformasinya satu-ke-satu dan Jacobian
+berperingkat penuh?</li>
+</ol>
+<p>Jawaban “tidak” tidak selalu membuat inferensi mustahil. Jawaban itu berarti
+teorema reguler tertentu belum berlaku dan kita harus mencari skala, limit,
+atau parametr ruang yang sesuai. Konsistensi MLE dibangun selanjutnya dari
+identifikasi dan prinsip argmax <a class="xref" data-target-id="O006-C140-CMP-D002-SEC-OVERVIEW" href="O006-C140-CMP-D002.html#O006-C140-CMP-D002-SEC-OVERVIEW">Konsistensi MLE</a>, sedangkan
+normalitas asimtotik memerlukan struktur lokal yang lebih kuat
+<a class="xref" data-target-id="O006-C140-CMP-D003-SEC-OVERVIEW" href="O006-C140-CMP-D003.html#O006-C140-CMP-D003-SEC-OVERVIEW">Likelihood kuadratik lokal dan normalitas asimtotik</a>.</p>
+
+<footer class="license">Materi pendamping orisinal berlisensi CC BY-SA 4.0. Komponen Penn State dan Random tetap berada di bawah lisensinya masing-masing dan tidak direlisensikan oleh halaman ini.</footer>
+</main>
+</div>
+</body>
+</html>

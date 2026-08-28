@@ -1,0 +1,490 @@
+<!doctype html>
+<html lang="id-ID">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="generator" content="OpenAI Codex gpt-5.6-sol, Ultra">
+<title>Set penguasaan 08 — Wald, skor, rasio likelihood, dan diagnosis nonregular</title>
+<link rel="stylesheet" href="../assets/style.css">
+<script>window.MathJax={loader:{load:['[tex]/boldsymbol']},tex:{packages:{'[+]':['boldsymbol']},inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']]},svg:{fontCache:'local'}};</script>
+<script defer src="../assets/MathJax/tex-svg.js"></script>
+</head>
+<body>
+<div class="shell">
+<nav class="sidebar" aria-label="Daftar isi pendamping"><h2>Isi pendamping</h2><ol><li><a href="../index.html">Pendamping Orisinal Statistika Matematis</a></li><li><a href="../theory/O006-C140-CMP-D001.html">Model parametrik reguler, skor, dan informasi Fisher</a></li><li><a href="../theory/O006-C140-CMP-D002.html">Konsistensi MLE: identifikasi Kullback–Leibler dan teorema argmax</a></li><li><a href="../theory/O006-C140-CMP-D003.html">Likelihood kuadratik lokal, normalitas asimtotik, dan delta method</a></li><li><a href="../theory/O006-C140-CMP-D004.html">Prosedur Wald, skor, dan rasio likelihood</a></li><li><a href="../theory/O006-C140-CMP-D005.html">Likelihood nonreguler: empat mekanisme kegagalan</a></li><li><a href="../theory/O006-C140-CMP-D006.html">Optimalitas pengujian: Neyman–Pearson, MP, UMP, dan rasio likelihood monoton</a></li><li><a href="../theory/O006-C140-CMP-D007.html">Loss, risk, efisiensi, Rao–Blackwell, dan Lehmann–Scheffé</a></li><li><a href="../simulations/O006-C140-CMP-SIM001.html">Model lokasi normal: MLE, coverage, dan tiga statistik uji</a></li><li><a href="../simulations/O006-C140-CMP-SIM002.html">Delta method pada titik reguler dan titik dengan turunan nol</a></li><li><a href="../simulations/O006-C140-CMP-SIM003.html">Endpoint Uniform: laju nonreguler dan kegagalan bootstrap biasa</a></li><li><a href="../simulations/O006-C140-CMP-SIM004.html">Uji Neyman–Pearson teracak dengan size tepat</a></li><li><a href="O006-C140-CMP-MS07.html">Set penguasaan 07 — regularitas, konsistensi, dan normalitas MLE</a></li><li><a href="O006-C140-CMP-MS08.html">Set penguasaan 08 — Wald, skor, rasio likelihood, dan diagnosis nonregular</a></li><li><a href="O006-C140-CMP-MS09.html">Set penguasaan 09 — pengujian eksak dan optimalitas Neyman–Pearson</a></li><li><a href="O006-C140-CMP-MS10.html">Set penguasaan 10 — uji likelihood asimtotik, risk, dan perbaikan estimator</a></li><li><a href="../assessments/O006-C140-CMP-CA01.html">Asesmen kumulatif C1: likelihood, optimalitas, dan keputusan statistik</a></li></ol></nav>
+<main>
+<div class="metadata"><strong>O006-C140-CMP-MS08</strong> · id-ID · CC BY-SA 4.0 · OpenAI Codex gpt-5.6-sol, Ultra</div>
+<p><a id="O006-C140-CMP-MS08-SEC-OVERVIEW"></a></p>
+<h1>Set penguasaan 08 — Wald, skor, rasio likelihood, dan diagnosis nonregular</h1>
+<p>Set ini memisahkan dua pertanyaan yang mudah tercampur: bagaimana tiga uji
+likelihood bekerja di bawah model reguler, dan bagaimana mengenali saat
+aproksimasi reguler tidak lagi memiliki dasar. Definisi statistik mengikuti
+<a class="xref" data-target-id="O006-C140-CMP-D004-DEF002" href="../theory/O006-C140-CMP-D004.html#O006-C140-CMP-D004-DEF002">Statistik Wald</a>,
+<a class="xref" data-target-id="O006-C140-CMP-D004-DEF003" href="../theory/O006-C140-CMP-D004.html#O006-C140-CMP-D004-DEF003">Statistik skor untuk nol komposit</a>, dan
+<a class="xref" data-target-id="O006-C140-CMP-D004-DEF004" href="../theory/O006-C140-CMP-D004.html#O006-C140-CMP-D004-DEF004">Statistik rasio likelihood</a>. Empat mekanisme kegagalan dibandingkan di
+<a class="xref" data-target-id="O006-C140-CMP-D005-SEC002" href="../theory/O006-C140-CMP-D005.html#O006-C140-CMP-D005-SEC002">Perbandingan empat mekanisme</a>.</p>
+<p><a id="O006-C140-CMP-MS08-P01"></a></p>
+<h2>Soal 1 — Tiga statistik yang sama persis pada model Normal</h2>
+<!--PROBLEM_META {"id":"O006-C140-CMP-MS08-P01","prerequisites":["O006-C140-CMP-D004-DEF002","O006-C140-CMP-D004-DEF003","O006-C140-CMP-D004-DEF004"],"objective":"menurunkan Wald, skor, dan LR dari definisinya dan mengenali kesetaraan eksak","difficulty":"menengah","misconceptions":["ketiga statistik hanya dapat dibandingkan secara numerik","informasi pada MLE dan pada nol selalu berbeda"]}-->
+<p>Misalkan <span class="math-inline" role="math">\(X_1,\ldots,X_n\)</span> iid <span class="math-inline" role="math">\(N(\mu,\sigma^2)\)</span> dengan <span class="math-inline" role="math">\(\sigma^2\)</span> diketahui.
+Uji <span class="math-inline" role="math">\(H_0:\mu=\mu_0\)</span> terhadap alternatif dua sisi.</p>
+<ol>
+<li>Turunkan statistik Wald dengan kovarians MLE.</li>
+<li>Turunkan statistik skor pada parameter nol.</li>
+<li>Turunkan dua kali log-rasio likelihood.</li>
+<li>Tunjukkan bahwa ketiganya sama persis untuk setiap sampel.</li>
+<li>Tentukan distribusi nolnya tanpa memakai teorema asimtotik.</li>
+</ol>
+<p><a id="O006-C140-CMP-MS08-P01-H01"></a></p>
+<h3>Petunjuk 1</h3>
+<p><span class="math-inline" role="math">\(\widehat\mu=\bar X\)</span> dan informasi sampel untuk <span class="math-inline" role="math">\(\mu\)</span> adalah
+<span class="math-inline" role="math">\(n/\sigma^2\)</span>, tidak bergantung pada nilai <span class="math-inline" role="math">\(\mu\)</span>.</p>
+<p><a id="O006-C140-CMP-MS08-P01-H02"></a></p>
+<h3>Petunjuk 2</h3>
+<p>Gunakan dekomposisi
+<span class="math-inline" role="math">\(\sum_i(X_i-\mu_0)^2=\sum_i(X_i-\bar X)^2+n(\bar X-\mu_0)^2\)</span>.</p>
+<p><a id="O006-C140-CMP-MS08-P01-ANS"></a></p>
+<h3>Jawaban singkat</h3>
+<p>Ketiga statistik sama dengan
+<span class="math-inline" role="math">\(n(\bar X-\mu_0)^2/\sigma^2\)</span>. Di bawah nol,
+<span class="math-inline" role="math">\(\sqrt n(\bar X-\mu_0)/\sigma\sim N(0,1)\)</span> secara eksak, sehingga statistik
+bersama itu berdistribusi <span class="math-inline" role="math">\(\chi_1^2\)</span> secara eksak.</p>
+<p><a id="O006-C140-CMP-MS08-P01-SOL"></a></p>
+<h3>Solusi lengkap</h3>
+<p>Varians <span class="math-inline" role="math">\(\widehat\mu\)</span> adalah <span class="math-inline" role="math">\(\sigma^2/n\)</span>. Maka statistik Wald</p>
+<div class="math-display" role="math">\[W=\frac{(\widehat\mu-\mu_0)^2}{\sigma^2/n}
+=\frac n{\sigma^2}(\bar X-\mu_0)^2.\]</div>
+<p>Skor pada nol</p>
+<div class="math-display" role="math">\[U_n(\mu_0)=\frac1{\sigma^2}\sum_i(X_i-\mu_0)
+=\frac n{\sigma^2}(\bar X-\mu_0).\]</div>
+<p>Informasi sampelnya <span class="math-inline" role="math">\(n/\sigma^2\)</span>, sehingga bentuk kuadratik skor</p>
+<div class="math-display" role="math">\[S=U_n(\mu_0)^2\left(\frac n{\sigma^2}\right)^{-1}
+=\frac n{\sigma^2}(\bar X-\mu_0)^2.\]</div>
+<p>Terakhir,</p>
+<div class="math-display" role="math">\[2\{\ell_n(\bar X)-\ell_n(\mu_0)\}
+=\frac1{\sigma^2}
+\left[
+\sum_i(X_i-\mu_0)^2-\sum_i(X_i-\bar X)^2
+\right]
+=\frac n{\sigma^2}(\bar X-\mu_0)^2.\]</div>
+<p>Kesetaraan eksak terjadi karena log-likelihood kuadratik dengan kelengkungan
+konstan. Di bawah <span class="math-inline" role="math">\(H_0\)</span>,
+<span class="math-inline" role="math">\(Z=\sqrt n(\bar X-\mu_0)/\sigma\)</span> tepat Normal baku, jadi
+<span class="math-inline" role="math">\(W=S=LR=Z^2\sim\chi_1^2\)</span>. Teorema Wilks tidak diperlukan dalam contoh ini.</p>
+<p><a id="O006-C140-CMP-MS08-P02"></a></p>
+<h2>Soal 2 — Binomial: berbeda pada sampel hingga, setara pada orde pertama</h2>
+<!--PROBLEM_META {"id":"O006-C140-CMP-MS08-P02","prerequisites":["O006-C140-CMP-D004-THM006","O006-C140-CMP-D001-EX-BERNOULLI"],"objective":"menghitung tiga statistik likelihood dan membuktikan kesetaraan orde pertamanya","difficulty":"lanjut","misconceptions":["ekuivalensi asimtotik berarti nilai sampel hingga identik","statistik Wald memakai informasi nol"]}-->
+<p>Misalkan <span class="math-inline" role="math">\(X\sim\operatorname{Binomial}(n,p)\)</span> dan uji
+<span class="math-inline" role="math">\(H_0:p=p_0\)</span>, <span class="math-inline" role="math">\(0&lt;p_0&lt;1\)</span>. Tuliskan <span class="math-inline" role="math">\(\widehat p=X/n\)</span>.</p>
+<ol>
+<li>Turunkan statistik Wald menggunakan varians plug-in di <span class="math-inline" role="math">\(\widehat p\)</span>.</li>
+<li>Turunkan statistik skor menggunakan informasi di <span class="math-inline" role="math">\(p_0\)</span>.</li>
+<li>Turunkan statistik LR.</li>
+<li>Untuk <span class="math-inline" role="math">\(n=100\)</span>, <span class="math-inline" role="math">\(X=60\)</span>, dan <span class="math-inline" role="math">\(p_0=0.5\)</span>, hitung ketiganya.</li>
+<li>Dengan <span class="math-inline" role="math">\(\delta=\widehat p-p_0=O_P(n^{-1/2})\)</span>, gunakan Taylor untuk
+menunjukkan bahwa selisih antarketiganya adalah <span class="math-inline" role="math">\(o_P(1)\)</span> di bawah nol.</li>
+</ol>
+<p><a id="O006-C140-CMP-MS08-P02-H01"></a></p>
+<h3>Petunjuk 1</h3>
+<p>Rumusnya adalah</p>
+<div class="math-display" role="math">\[W=\frac{n(\widehat p-p_0)^2}{\widehat p(1-\widehat p)},
+\quad
+S=\frac{n(\widehat p-p_0)^2}{p_0(1-p_0)}.\]</div>
+<p><a id="O006-C140-CMP-MS08-P02-H02"></a></p>
+<h3>Petunjuk 2</h3>
+<p>Untuk LR, ekspansikan
+<span class="math-inline" role="math">\(p_0\log(p_0+\delta)+(1-p_0)\log(1-p_0-\delta)\)</span>
+atau, secara ekuivalen, divergensi Bernoulli di sekitar <span class="math-inline" role="math">\(\delta=0\)</span>.</p>
+<p><a id="O006-C140-CMP-MS08-P02-ANS"></a></p>
+<h3>Jawaban singkat</h3>
+<p>Untuk data yang diberikan,
+<span class="math-inline" role="math">\(W=4.1667\)</span>, <span class="math-inline" role="math">\(S=4.0000\)</span>, dan
+<span class="math-inline" role="math">\(LR=2\{60\log(1.2)+40\log(0.8)\}\approx4.0271\)</span>.
+Ketiganya sama dengan
+<span class="math-inline" role="math">\(n\delta^2/\{p_0(1-p_0)\}+o_P(1)\)</span> di bawah nol.</p>
+<p><a id="O006-C140-CMP-MS08-P02-SOL"></a></p>
+<h3>Solusi lengkap</h3>
+<p>Informasi per pengamatan Bernoulli adalah <span class="math-inline" role="math">\(1/\{p(1-p)\}\)</span>. Varians plug-in MLE
+<span class="math-inline" role="math">\(\widehat p\)</span> adalah <span class="math-inline" role="math">\(\widehat p(1-\widehat p)/n\)</span>, sehingga</p>
+<div class="math-display" role="math">\[W=\frac{n(\widehat p-p_0)^2}{\widehat p(1-\widehat p)}.\]</div>
+<p>Skor untuk <span class="math-inline" role="math">\(n\)</span> pengamatan pada <span class="math-inline" role="math">\(p_0\)</span> adalah
+<span class="math-inline" role="math">\(n(\widehat p-p_0)/\{p_0(1-p_0)\}\)</span>. Membaginya secara kuadratik dengan informasi
+<span class="math-inline" role="math">\(n/\{p_0(1-p_0)\}\)</span> memberi</p>
+<div class="math-display" role="math">\[S=\frac{n(\widehat p-p_0)^2}{p_0(1-p_0)}.\]</div>
+<p>Statistik LR adalah</p>
+<div class="math-display" role="math">\[LR=2n\left[
+\widehat p\log\frac{\widehat p}{p_0}
++(1-\widehat p)\log\frac{1-\widehat p}{1-p_0}
+\right].\]</div>
+<p>Untuk <span class="math-inline" role="math">\(\widehat p=0.6\)</span> dan <span class="math-inline" role="math">\(p_0=0.5\)</span>,</p>
+<div class="math-display" role="math">\[W=\frac{100(0.1)^2}{0.6(0.4)}=4.1667,
+\qquad
+S=\frac{100(0.1)^2}{0.25}=4,\]</div>
+<p>dan</p>
+<div class="math-display" role="math">\[LR=2\{60\log(1.2)+40\log(0.8)\}\approx4.0271.\]</div>
+<p>Di bawah nol, <span class="math-inline" role="math">\(\delta=O_P(n^{-1/2})\)</span>. Kontinuitas penyebut memberi
+<span class="math-inline" role="math">\(\widehat p(1-\widehat p)=p_0(1-p_0)+O_P(n^{-1/2})\)</span>, sehingga
+<span class="math-inline" role="math">\(W=n\delta^2/\{p_0(1-p_0)\}+o_P(1)\)</span>. Ekspansi Taylor divergensi Bernoulli
+memberi</p>
+<div class="math-display" role="math">\[D_{\mathrm{KL}}\{\operatorname{Bern}(p_0+\delta)\|
+\operatorname{Bern}(p_0)\}
+=\frac{\delta^2}{2p_0(1-p_0)}+O(\delta^3).\]</div>
+<p>Karena <span class="math-inline" role="math">\(n\delta^3=O_P(n^{-1/2})\)</span>, LR memiliki bentuk utama yang sama. Skor
+sudah sama persis dengan bentuk utama itu. Ini adalah ekuivalensi orde pertama
+<a class="xref" data-target-id="O006-C140-CMP-D004-THM006" href="../theory/O006-C140-CMP-D004.html#O006-C140-CMP-D004-THM006">Ekuivalensi orde pertama dan alternatif lokal</a>, bukan identitas sampel hingga.</p>
+<p><a id="O006-C140-CMP-MS08-P03"></a></p>
+<h2>Soal 3 — Nol linear multivariat dan derajat kebebasan Wilks</h2>
+<!--PROBLEM_META {"id":"O006-C140-CMP-MS08-P03","prerequisites":["O006-C140-CMP-D004-THM005","B40"],"objective":"menghubungkan geometri kendala dengan derajat kebebasan uji","difficulty":"lanjut","misconceptions":["derajat kebebasan selalu sama dengan dimensi parameter penuh","kendala redundan menambah derajat kebebasan"]}-->
+<p>Misalkan <span class="math-inline" role="math">\(X_1,\ldots,X_n\)</span> iid <span class="math-inline" role="math">\(N_p(\mu,\Sigma)\)</span>, dengan <span class="math-inline" role="math">\(\Sigma\)</span> positif
+definit dan diketahui. Uji</p>
+<div class="math-display" role="math">\[H_0:A\mu=b,\]</div>
+<p>dengan <span class="math-inline" role="math">\(A\)</span> matriks <span class="math-inline" role="math">\(r\times p\)</span> berperingkat baris penuh <span class="math-inline" role="math">\(r\)</span>.</p>
+<ol>
+<li>Temukan MLE tak berkendala dan MLE berkendala.</li>
+<li>Turunkan statistik LR.</li>
+<li>Tunjukkan bahwa Wald dan skor memberikan statistik yang sama.</li>
+<li>Tentukan distribusi nol secara eksak dan jelaskan mengapa derajat
+kebebasannya <span class="math-inline" role="math">\(r\)</span>, bukan <span class="math-inline" role="math">\(p\)</span>.</li>
+<li>Apa yang berubah bila baris <span class="math-inline" role="math">\(A\)</span> tidak bebas linear?</li>
+</ol>
+<p><a id="O006-C140-CMP-MS08-P03-H01"></a></p>
+<h3>Petunjuk 1</h3>
+<p>MLE tak berkendala adalah <span class="math-inline" role="math">\(\bar X\)</span>. Proyeksikan <span class="math-inline" role="math">\(\bar X\)</span> ke bidang
+<span class="math-inline" role="math">\(A\mu=b\)</span> dalam norma informasi <span class="math-inline" role="math">\(\Sigma^{-1}\)</span>.</p>
+<p><a id="O006-C140-CMP-MS08-P03-H02"></a></p>
+<h3>Petunjuk 2</h3>
+<p><span class="math-inline" role="math">\(\sqrt n(A\bar X-b)\)</span> berdistribusi
+<span class="math-inline" role="math">\(N_r(0,A\Sigma A^\mathsf T)\)</span> di bawah nol.</p>
+<p><a id="O006-C140-CMP-MS08-P03-ANS"></a></p>
+<h3>Jawaban singkat</h3>
+<p>MLE berkendala</p>
+<div class="math-display" role="math">\[\widetilde\mu=\bar X-\Sigma A^\mathsf T
+(A\Sigma A^\mathsf T)^{-1}(A\bar X-b).\]</div>
+<p>Ketiga statistik sama dengan
+<span class="math-inline" role="math">\(n(A\bar X-b)^\mathsf T(A\Sigma A^\mathsf T)^{-1}(A\bar X-b)\)</span> dan tepat
+<span class="math-inline" role="math">\(\chi_r^2\)</span> di bawah nol. Bila <span class="math-inline" role="math">\(A\)</span> tidak berperingkat penuh, gunakan hanya
+peringkat kendala independen dan invers umum yang sesuai.</p>
+<p><a id="O006-C140-CMP-MS08-P03-SOL"></a></p>
+<h3>Solusi lengkap</h3>
+<p>Log-likelihood, selain konstanta, adalah</p>
+<div class="math-display" role="math">\[-\frac n2(\bar X-\mu)^\mathsf T\Sigma^{-1}(\bar X-\mu).\]</div>
+<p>MLE tak berkendala <span class="math-inline" role="math">\(\widehat\mu=\bar X\)</span>. Untuk kendala, bentuk Lagrangian</p>
+<div class="math-display" role="math">\[Q(\mu,\lambda)
+=(\bar X-\mu)^\mathsf T\Sigma^{-1}(\bar X-\mu)
++2\lambda^\mathsf T(A\mu-b).\]</div>
+<p>Persamaan stasioner memberi
+<span class="math-inline" role="math">\(\mu=\bar X-\Sigma A^\mathsf T\lambda\)</span>. Substitusi ke kendala menghasilkan
+<span class="math-inline" role="math">\(\lambda=(A\Sigma A^\mathsf T)^{-1}(A\bar X-b)\)</span>, jadi rumus
+<span class="math-inline" role="math">\(\widetilde\mu\)</span> pada jawaban singkat.</p>
+<p>Kenaikan minimum bentuk kuadratik dari <span class="math-inline" role="math">\(\bar X\)</span> ke bidang nol adalah</p>
+<div class="math-display" role="math">\[LR=n(A\bar X-b)^\mathsf T
+(A\Sigma A^\mathsf T)^{-1}(A\bar X-b).\]</div>
+<p>Statistik Wald untuk fungsi kendala <span class="math-inline" role="math">\(h(\mu)=A\mu-b\)</span> memakai kovarians
+<span class="math-inline" role="math">\(A(\Sigma/n)A^\mathsf T\)</span>, sehingga memberi ekspresi sama. Skor berkendala
+adalah proyeksi skor pada ruang normal kendala dan juga memberi kuadrat yang
+sama karena likelihood tepat kuadratik.</p>
+<p>Di bawah nol,</p>
+<div class="math-display" role="math">\[Z=(A\Sigma A^\mathsf T)^{-1/2}
+\sqrt n(A\bar X-b)\sim N_r(0,I_r),\]</div>
+<p>sehingga statistik <span class="math-inline" role="math">\(Z^\mathsf TZ\sim\chi_r^2\)</span> secara eksak. Hanya <span class="math-inline" role="math">\(r\)</span> arah
+independen yang dihapus oleh kendala; dimensi nuisance <span class="math-inline" role="math">\(p-r\)</span> tetap bebas.
+Jika baris <span class="math-inline" role="math">\(A\)</span> redundan, <span class="math-inline" role="math">\(A\Sigma A^\mathsf T\)</span> singular dan <span class="math-inline" role="math">\(r\)</span> harus diganti
+dengan <span class="math-inline" role="math">\(\operatorname{rank}(A)\)</span>. Menghitung baris redundan sebagai kendala baru
+akan melebihkan derajat kebebasan.</p>
+<p><a id="O006-C140-CMP-MS08-P04"></a></p>
+<h2>Soal 4 — Ketidak-invariansian Wald pada sampel hingga</h2>
+<!--PROBLEM_META {"id":"O006-C140-CMP-MS08-P04","prerequisites":["O006-C140-CMP-D004-REM001","O006-C140-CMP-MS07-P06"],"objective":"membandingkan Wald di bawah dua koordinat dan membedakannya dari LR","difficulty":"menengah","misconceptions":["Wald invariant terhadap semua reparametrisasi","dua statistik yang ekuivalen asimtotik harus sama untuk data yang sama"]}-->
+<p>Untuk sampel eksponensial berlaju <span class="math-inline" role="math">\(\lambda\)</span>, uji <span class="math-inline" role="math">\(H_0:\lambda=\lambda_0\)</span>.
+Bandingkan statistik Wald dalam dua parameterisasi:</p>
+<div class="math-display" role="math">\[\lambda
+\quad\text{dan}\quad
+\eta=\log\lambda.\]</div>
+<ol>
+<li>Gunakan informasi plug-in pada MLE untuk menurunkan <span class="math-inline" role="math">\(W_\lambda\)</span>.</li>
+<li>Gunakan informasi dalam koordinat <span class="math-inline" role="math">\(\eta\)</span> untuk menurunkan <span class="math-inline" role="math">\(W_\eta\)</span>.</li>
+<li>Evaluasi keduanya ketika <span class="math-inline" role="math">\(\widehat\lambda=2\lambda_0\)</span>.</li>
+<li>Tunjukkan melalui ekspansi Taylor bahwa
+<span class="math-inline" role="math">\(W_\lambda-W_\eta=o_P(1)\)</span> di bawah nol.</li>
+<li>Jelaskan mengapa statistik LR tidak mengalami masalah koordinat ini.</li>
+</ol>
+<p><a id="O006-C140-CMP-MS08-P04-H01"></a></p>
+<h3>Petunjuk 1</h3>
+<p>Informasi per observasi dalam <span class="math-inline" role="math">\(\lambda\)</span> adalah <span class="math-inline" role="math">\(1/\lambda^2\)</span>. Dalam
+<span class="math-inline" role="math">\(\eta\)</span>, gunakan <span class="math-inline" role="math">\(d\lambda/d\eta=\lambda\)</span>.</p>
+<p><a id="O006-C140-CMP-MS08-P04-H02"></a></p>
+<h3>Petunjuk 2</h3>
+<p>Di bawah nol,
+<span class="math-inline" role="math">\(u=(\widehat\lambda-\lambda_0)/\lambda_0=O_P(n^{-1/2})\)</span> dan
+<span class="math-inline" role="math">\(\log(1+u)=u-u^2/2+O(u^3)\)</span>.</p>
+<p><a id="O006-C140-CMP-MS08-P04-ANS"></a></p>
+<h3>Jawaban singkat</h3>
+<div class="math-display" role="math">\[W_\lambda=n\frac{(\widehat\lambda-\lambda_0)^2}{\widehat\lambda^2},
+\qquad
+W_\eta=n\{\log(\widehat\lambda/\lambda_0)\}^2.\]</div>
+<p>Pada <span class="math-inline" role="math">\(\widehat\lambda=2\lambda_0\)</span>, nilainya <span class="math-inline" role="math">\(n/4\)</span> dan
+<span class="math-inline" role="math">\(n(\log2)^2\)</span>. Keduanya berbeda pada sampel hingga tetapi berselisih
+<span class="math-inline" role="math">\(o_P(1)\)</span> di bawah nol. LR invariant karena hanya membandingkan nilai maksimum
+likelihood pada dua himpunan distribusi yang sama.</p>
+<p><a id="O006-C140-CMP-MS08-P04-SOL"></a></p>
+<h3>Solusi lengkap</h3>
+<p>Kovarians plug-in MLE laju adalah <span class="math-inline" role="math">\(\widehat\lambda^2/n\)</span>, sehingga</p>
+<div class="math-display" role="math">\[W_\lambda
+=\frac{(\widehat\lambda-\lambda_0)^2}{\widehat\lambda^2/n}
+=n\frac{(\widehat\lambda-\lambda_0)^2}{\widehat\lambda^2}.\]</div>
+<p>Transformasi informasi memberi
+<span class="math-inline" role="math">\(I_\eta=(d\lambda/d\eta)^2I_\lambda=\lambda^2(1/\lambda^2)=1\)</span> per observasi.
+Jadi kovarians asimtotik <span class="math-inline" role="math">\(\widehat\eta\)</span> adalah <span class="math-inline" role="math">\(1/n\)</span>, dan</p>
+<div class="math-display" role="math">\[W_\eta=n(\widehat\eta-\eta_0)^2
+=n\{\log(\widehat\lambda/\lambda_0)\}^2.\]</div>
+<p>Bila <span class="math-inline" role="math">\(\widehat\lambda=2\lambda_0\)</span>,
+<span class="math-inline" role="math">\(W_\lambda=n(1/2)^2=n/4\)</span>, sedangkan
+<span class="math-inline" role="math">\(W_\eta=n(\log2)^2\approx0.48045n\)</span>. Perbedaan itu nyata.</p>
+<p>Di bawah nol, tulis
+<span class="math-inline" role="math">\(u=(\widehat\lambda-\lambda_0)/\lambda_0=O_P(n^{-1/2})\)</span>. Maka</p>
+<div class="math-display" role="math">\[W_\lambda=n\frac{u^2}{(1+u)^2}
+=nu^2+O_P(n|u|^3),\]</div>
+<div class="math-display" role="math">\[W_\eta=n\{\log(1+u)\}^2
+=nu^2+O_P(n|u|^3).\]</div>
+<p>Karena <span class="math-inline" role="math">\(n|u|^3=O_P(n^{-1/2})=o_P(1)\)</span>, selisihnya hilang pada orde pertama.
+Kelemahan geometri Wald ini dibahas di
+<a class="xref" data-target-id="O006-C140-CMP-D004-REM001" href="../theory/O006-C140-CMP-D004.html#O006-C140-CMP-D004-REM001">Kelemahan geometri Wald pada sampel hingga</a>. LR memakai rasio supremum likelihood;
+relabeling satu-ke-satu parameter tidak mengubah distribusi yang dioptimalkan
+atau nilai likelihood, sehingga LR invariant secara eksak.</p>
+<p><a id="O006-C140-CMP-MS08-P05"></a></p>
+<h2>Soal 5 — Endpoint uniform: LR eksak dan bootstrap yang salah</h2>
+<!--PROBLEM_META {"id":"O006-C140-CMP-MS08-P05","prerequisites":["O006-C140-CMP-D005-CTR001","O006-C140-CMP-D005-THM001","O006-C140-CMP-D005-THM002"],"objective":"menurunkan hukum LR endpoint dan mendiagnosis kegagalan Wilks serta bootstrap nonparametrik","difficulty":"lanjut","misconceptions":["setiap nol satu dimensi memberi limit chi-kuadrat satu","bootstrap nonparametrik selalu mereplikasi hukum statistik maksimum"]}-->
+<p>Misalkan <span class="math-inline" role="math">\(X_i\)</span> iid <span class="math-inline" role="math">\(\operatorname{Unif}(0,\theta)\)</span> dan uji
+<span class="math-inline" role="math">\(H_0:\theta=\theta_0\)</span> terhadap alternatif <span class="math-inline" role="math">\(\theta&gt;0\)</span> tak berkendala.</p>
+<ol>
+<li>Temukan MLE dan statistik LR pada data yang mungkin di bawah nol.</li>
+<li>Turunkan distribusi eksak LR di bawah nol.</li>
+<li>Bandingkan kuantil 95% yang benar dengan kuantil Wilks <span class="math-inline" role="math">\(\chi_1^2\)</span>.</li>
+<li>Jelaskan mengapa bootstrap nonparametrik dari distribusi empiris tidak
+dapat mereplikasi perilaku endpoint secara konsisten.</li>
+<li>Berikan satu prosedur bootstrap yang sah untuk mengalibrasi uji nol ini.</li>
+</ol>
+<p><a id="O006-C140-CMP-MS08-P05-H01"></a></p>
+<h3>Petunjuk 1</h3>
+<p><span class="math-inline" role="math">\(\widehat\theta=X_{(n)}\)</span> dan
+<span class="math-inline" role="math">\((X_{(n)}/\theta_0)^n\sim\operatorname{Unif}(0,1)\)</span> di bawah nol.</p>
+<p><a id="O006-C140-CMP-MS08-P05-H02"></a></p>
+<h3>Petunjuk 2</h3>
+<p>Dalam bootstrap nonparametrik, setiap resample mempunyai maksimum tidak lebih
+besar dari maksimum sampel. Peluang resample memuat setidaknya satu salinan
+maksimum sampel menuju <span class="math-inline" role="math">\(1-e^{-1}\)</span>.</p>
+<p><a id="O006-C140-CMP-MS08-P05-ANS"></a></p>
+<h3>Jawaban singkat</h3>
+<div class="math-display" role="math">\[LR=2n\log(\theta_0/X_{(n)})\sim\chi_2^2\]</div>
+<p>secara eksak di bawah nol. Kuantil 95% yang benar adalah
+<span class="math-inline" role="math">\(\chi_{2,0.95}^2\approx5.991\)</span>, bukan
+<span class="math-inline" role="math">\(\chi_{1,0.95}^2\approx3.841\)</span>. Bootstrap nonparametrik terkunci di bawah
+<span class="math-inline" role="math">\(X_{(n)}\)</span> dan mempunyai atom besar pada maksimum itu. Bootstrap parametrik
+di bawah nol, <span class="math-inline" role="math">\(X_i^*\sim\operatorname{Unif}(0,\theta_0)\)</span>, sah.</p>
+<p><a id="O006-C140-CMP-MS08-P05-SOL"></a></p>
+<h3>Solusi lengkap</h3>
+<p>Likelihood
+<span class="math-inline" role="math">\(L(\theta)=\theta^{-n}\mathbf1\{\theta\ge X_{(n)}\}\)</span> menurun pada daerah
+yang memungkinkan, sehingga <span class="math-inline" role="math">\(\widehat\theta=X_{(n)}\)</span>. Di bawah <span class="math-inline" role="math">\(H_0\)</span>, semua
+data memenuhi <span class="math-inline" role="math">\(X_{(n)}\le\theta_0\)</span> hampir pasti dan</p>
+<div class="math-display" role="math">\[LR=2\{\ell(\widehat\theta)-\ell(\theta_0)\}
+=2n\log\frac{\theta_0}{X_{(n)}}.\]</div>
+<p>Untuk <span class="math-inline" role="math">\(0&lt;u&lt;1\)</span>,</p>
+<div class="math-display" role="math">\[P_{\theta_0}\left\{\left(\frac{X_{(n)}}{\theta_0}\right)^n\le u\right\}
+=P\{X_{(n)}\le\theta_0u^{1/n}\}=u.\]</div>
+<p>Jadi <span class="math-inline" role="math">\(V=(X_{(n)}/\theta_0)^n\)</span> seragam pada <span class="math-inline" role="math">\((0,1)\)</span> dan
+<span class="math-inline" role="math">\(LR=-2\log V\sim\chi_2^2\)</span> tepat. Wilks berdimensi satu tidak berlaku karena
+support bergantung pada parameter, seperti dijelaskan di
+<a class="xref" data-target-id="O006-C140-CMP-D005-THM002" href="../theory/O006-C140-CMP-D005.html#O006-C140-CMP-D005-THM002">Rasio likelihood bukan Wilks berdimensi satu</a>.</p>
+<p>Kuantil 0.95 <span class="math-inline" role="math">\(\chi_2^2\)</span> sekitar 5.991; memakai 3.841 membuat uji terlalu mudah
+menolak. Pada bootstrap nonparametrik, support empiris berhenti pada
+<span class="math-inline" role="math">\(X_{(n)}\)</span>. Maksimum bootstrap tidak pernah melebihi endpoint sampel dan sama
+dengan <span class="math-inline" role="math">\(X_{(n)}\)</span> bila resample mengambil observasi maksimum setidaknya sekali,
+dengan peluang</p>
+<div class="math-display" role="math">\[1-\left(1-\frac1n\right)^n\to1-e^{-1}.\]</div>
+<p>Hukum endpoint sebenarnya kontinu pada skala <span class="math-inline" role="math">\(n\)</span> dan harus memungkinkan
+perilaku relatif terhadap <span class="math-inline" role="math">\(\theta_0\)</span>, bukan atom buatan pada endpoint empiris.
+Sebaliknya, bootstrap parametrik yang menerapkan nol—menghasilkan data iid
+<span class="math-inline" role="math">\(\operatorname{Unif}(0,\theta_0)\)</span> dan menghitung ulang LR—mereplikasi hukum
+nol yang benar; dalam contoh ini hukum eksak bahkan membuat simulasi tidak
+diperlukan.</p>
+<p><a id="O006-C140-CMP-MS08-P06"></a></p>
+<h2>Soal 6 — Parameter batas dan campuran LR</h2>
+<!--PROBLEM_META {"id":"O006-C140-CMP-MS08-P06","prerequisites":["O006-C140-CMP-D005-CTR002","O006-C140-CMP-D005-THM003"],"objective":"menurunkan distribusi campuran LR pada batas dan kuantil uji satu sisi","difficulty":"lanjut","misconceptions":["parameter nol pada batas tetap memenuhi Wilks biasa","massa titik nol dapat diabaikan saat memilih nilai kritis"]}-->
+<p>Misalkan <span class="math-inline" role="math">\(X_i\)</span> iid <span class="math-inline" role="math">\(N(\mu,1)\)</span> dengan ruang parameter <span class="math-inline" role="math">\(\mu\ge0\)</span>. Uji
+<span class="math-inline" role="math">\(H_0:\mu=0\)</span> terhadap <span class="math-inline" role="math">\(\mu&gt;0\)</span>.</p>
+<ol>
+<li>Temukan MLE berkendala.</li>
+<li>Turunkan statistik LR sebagai fungsi
+<span class="math-inline" role="math">\(Z_n=\sqrt n\,\bar X\)</span>.</li>
+<li>Turunkan distribusi nolnya.</li>
+<li>Temukan nilai kritis asimtotik untuk uji berukuran 5%.</li>
+<li>Jelaskan tepat asumsi Wilks biasa yang gagal.</li>
+</ol>
+<p><a id="O006-C140-CMP-MS08-P06-H01"></a></p>
+<h3>Petunjuk 1</h3>
+<p>Proyeksi <span class="math-inline" role="math">\(\bar X\)</span> ke <span class="math-inline" role="math">\([0,\infty)\)</span> adalah
+<span class="math-inline" role="math">\(\widehat\mu=\max(\bar X,0)\)</span>.</p>
+<p><a id="O006-C140-CMP-MS08-P06-H02"></a></p>
+<h3>Petunjuk 2</h3>
+<p>Di bawah nol, <span class="math-inline" role="math">\(Z_n\sim N(0,1)\)</span> dan
+<span class="math-inline" role="math">\(LR=\{\max(Z_n,0)\}^2\)</span>. Separuh massa Normal berada pada sisi negatif.</p>
+<p><a id="O006-C140-CMP-MS08-P06-ANS"></a></p>
+<h3>Jawaban singkat</h3>
+<p><span class="math-inline" role="math">\(\widehat\mu=\max(\bar X,0)\)</span> dan
+<span class="math-inline" role="math">\(LR=\{\max(Z_n,0)\}^2\)</span>. Di bawah nol,
+<span class="math-inline" role="math">\(LR\sim\tfrac12\delta_0+\tfrac12\chi_1^2\)</span> secara eksak. Nilai kritis 5%
+adalah kuantil 90% <span class="math-inline" role="math">\(\chi_1^2\)</span>, sekitar 2.706. Titik nol bukan interior ruang
+parameter; ruang singgungnya kerucut, bukan ruang linear penuh.</p>
+<p><a id="O006-C140-CMP-MS08-P06-SOL"></a></p>
+<h3>Solusi lengkap</h3>
+<p>Likelihood Normal dimaksimumkan tanpa kendala pada <span class="math-inline" role="math">\(\bar X\)</span>. Proyeksi ke ruang
+parameter memberi</p>
+<div class="math-display" role="math">\[\widehat\mu=\max(\bar X,0).\]</div>
+<p>Dekomposisi jumlah kuadrat seperti pada Soal 1 memberi</p>
+<div class="math-display" role="math">\[LR=2\{\ell(\widehat\mu)-\ell(0)\}
+=n\{\max(\bar X,0)\}^2
+=\{\max(Z_n,0)\}^2.\]</div>
+<p>Di bawah nol, <span class="math-inline" role="math">\(Z_n\sim N(0,1)\)</span> tepat. Bila <span class="math-inline" role="math">\(Z_n\le0\)</span>, yang terjadi dengan
+peluang <span class="math-inline" role="math">\(1/2\)</span>, LR sama dengan nol. Bila <span class="math-inline" role="math">\(Z_n&gt;0\)</span>, kuadratnya memiliki bagian
+positif yang sama dengan bagian positif hukum <span class="math-inline" role="math">\(\chi_1^2\)</span>. Karena kuadrat Normal
+tidak mengingat tanda,</p>
+<div class="math-display" role="math">\[LR\sim\frac12\delta_0+\frac12\chi_1^2.\]</div>
+<p>Untuk nilai kritis <span class="math-inline" role="math">\(c&gt;0\)</span> pada ukuran <span class="math-inline" role="math">\(\alpha=0.05\)</span>,</p>
+<div class="math-display" role="math">\[P_0(LR&gt;c)=\frac12P(\chi_1^2&gt;c)=0.05.\]</div>
+<p>Jadi <span class="math-inline" role="math">\(P(\chi_1^2&gt;c)=0.10\)</span> dan
+<span class="math-inline" role="math">\(c=\chi_{1,0.90}^2\approx2.706\)</span>. Kuantil Wilks biasa 3.841 akan konservatif.
+Asumsi titik interior pada <a class="xref" data-target-id="O006-C140-CMP-D004-ASM001" href="../theory/O006-C140-CMP-D004.html#O006-C140-CMP-D004-ASM001">Syarat regularitas yang dipakai</a> gagal. Di nol,
+arah lokal yang diizinkan hanya nonnegatif, sehingga proyeksi skor pada
+kerucut singgung menghasilkan massa titik.</p>
+<p><a id="O006-C140-CMP-MS08-P07"></a></p>
+<h2>Soal 7 — Informasi singular versus nonidentifiabilitas</h2>
+<!--PROBLEM_META {"id":"O006-C140-CMP-MS08-P07","prerequisites":["O006-C140-CMP-D005-CTR003","O006-C140-CMP-D005-CTR004"],"objective":"membedakan parameter teridentifikasi dengan informasi nol dari label global yang tidak teridentifikasi","difficulty":"lanjut","misconceptions":["informasi nol berarti model tidak teridentifikasi","informasi positif berarti identifikasi global"]}-->
+<p>Bandingkan:</p>
+<div class="math-display" role="math">\[\text{A: }X_i\sim N(\theta^3,1),\quad\theta\in\mathbb R,\]</div>
+<div class="math-display" role="math">\[\text{B: }Y_i\sim N(\cos\phi,1),\quad\phi\in[0,2\pi).\]</div>
+<ol>
+<li>Tentukan identifiabilitas global kedua model.</li>
+<li>Hitung informasi Fisher.</li>
+<li>Untuk A pada <span class="math-inline" role="math">\(\theta_0=0\)</span>, temukan MLE, laju, dan limitnya.</li>
+<li>Untuk B, bandingkan <span class="math-inline" role="math">\(\phi_0=\pi/2\)</span> dan <span class="math-inline" role="math">\(\phi_1=3\pi/2\)</span>; buktikan tidak ada
+uji yang memiliki daya melebihi ukuran untuk membedakan kedua label.</li>
+<li>Jelaskan mengapa “informasi singular” dan “nonidentifiabilitas” memerlukan
+perbaikan yang berbeda.</li>
+</ol>
+<p><a id="O006-C140-CMP-MS08-P07-H01"></a></p>
+<h3>Petunjuk 1</h3>
+<p>Peta kubik satu-ke-satu tetapi turunannya nol di asal. Peta kosinus mempunyai
+turunan tak nol pada kedua titik yang dipilih tetapi bukan satu-ke-satu secara
+global.</p>
+<p><a id="O006-C140-CMP-MS08-P07-H02"></a></p>
+<h3>Petunjuk 2</h3>
+<p>Untuk A, <span class="math-inline" role="math">\(\widehat\theta=\operatorname{cbrt}(\bar X)\)</span> dan
+<span class="math-inline" role="math">\(\sqrt n\bar X\sim N(0,1)\)</span> di nol. Untuk B, hukum seluruh sampel identik pada
+<span class="math-inline" role="math">\(\phi_0\)</span> dan <span class="math-inline" role="math">\(\phi_1\)</span>.</p>
+<p><a id="O006-C140-CMP-MS08-P07-ANS"></a></p>
+<h3>Jawaban singkat</h3>
+<p>A teridentifikasi tetapi <span class="math-inline" role="math">\(I_A(\theta)=9\theta^4\)</span> singular di nol;
+<span class="math-inline" role="math">\(n^{1/6}\widehat\theta\Rightarrow\operatorname{cbrt}(Z)\)</span>. B tidak
+teridentifikasi karena kedua label memberi rataan nol, walaupun
+<span class="math-inline" role="math">\(I_B(\phi)=\sin^2\phi=1\)</span> pada kedua titik. Setiap uji mempunyai harapan sama
+di bawah kedua label, sehingga dayanya sama dengan ukurannya.</p>
+<p><a id="O006-C140-CMP-MS08-P07-SOL"></a></p>
+<h3>Solusi lengkap</h3>
+<p>Pada A, peta <span class="math-inline" role="math">\(\theta\mapsto\theta^3\)</span> bijektif, jadi model teridentifikasi.
+Skor</p>
+<div class="math-display" role="math">\[s_\theta(X)=3\theta^2(X-\theta^3)\]</div>
+<p>memberi
+<span class="math-inline" role="math">\(I_A(\theta)=9\theta^4\)</span>. Di nol informasi sama dengan nol. Likelihood sebagai
+fungsi rataan <span class="math-inline" role="math">\(m=\theta^3\)</span> dimaksimumkan pada <span class="math-inline" role="math">\(\widehat m=\bar X\)</span>, sehingga</p>
+<div class="math-display" role="math">\[\widehat\theta=\operatorname{cbrt}(\bar X).\]</div>
+<p>Di bawah nol, <span class="math-inline" role="math">\(\sqrt n\bar X\sim N(0,1)\)</span>, dan</p>
+<div class="math-display" role="math">\[n^{1/6}\widehat\theta
+=\operatorname{cbrt}(\sqrt n\bar X)
+\Rightarrow\operatorname{cbrt}(Z),\qquad Z\sim N(0,1).\]</div>
+<p>Hasil ini sama dengan <a class="xref" data-target-id="O006-C140-CMP-D005-THM005" href="../theory/O006-C140-CMP-D005.html#O006-C140-CMP-D005-THM005">Laju dan limit MLE pada titik singular</a>. Kegagalannya lokal:
+koordinat <span class="math-inline" role="math">\(\theta\)</span> terlalu datar pada nol, sehingga laju akar-<span class="math-inline" role="math">\(n\)</span> tidak tepat.</p>
+<p>Pada B, <span class="math-inline" role="math">\(\cos(\pi/2)=\cos(3\pi/2)=0\)</span>, maka
+<span class="math-inline" role="math">\(P_{\phi_0}=P_{\phi_1}\)</span>. Namun</p>
+<div class="math-display" role="math">\[s_\phi(Y)=-\sin\phi\,(Y-\cos\phi),
+\qquad
+I_B(\phi)=\sin^2\phi,\]</div>
+<p>sehingga informasi sama dengan satu pada kedua label. Untuk setiap uji
+<span class="math-inline" role="math">\(0\le\varphi_n\le1\)</span>,</p>
+<div class="math-display" role="math">\[E_{\phi_0}\varphi_n=E_{\phi_1}\varphi_n\]</div>
+<p>karena ukuran probabilitas seluruh sampel sama. Jika harapan pertama adalah
+ukuran uji, harapan kedua—daya pada label alternatif—persis sama.</p>
+<p>Model A diperbaiki dengan memakai koordinat reguler <span class="math-inline" role="math">\(m=\theta^3\)</span> dan
+mentransformasikan kembali dengan laju yang benar. Model B memerlukan target
+teridentifikasi <span class="math-inline" role="math">\(m=\cos\phi\)</span> atau pembatasan cabang yang ditetapkan sebelumnya.
+Reparametrisasi lokal tidak dapat menciptakan informasi tentang label global
+yang tidak hadir dalam distribusi.</p>
+<p><a id="O006-C140-CMP-MS08-P08"></a></p>
+<h2>Soal 8 — Delta method orde pertama dan bootstrap pada titik kritis</h2>
+<!--PROBLEM_META {"id":"O006-C140-CMP-MS08-P08","prerequisites":["O006-C140-CMP-D003-THM-DELTA-SCALAR","O006-C140-CMP-D005-ALG001"],"objective":"mendiagnosis turunan nol, memilih skala orde kedua, dan menguji konsistensi bootstrap","difficulty":"lanjut","misconceptions":["limit delta yang degenerat berarti galat tepat nol","bootstrap berpusat otomatis konsisten untuk transformasi tak reguler"]}-->
+<p>Misalkan <span class="math-inline" role="math">\(X_i\)</span> iid <span class="math-inline" role="math">\(N(\mu,1)\)</span> dan target
+<span class="math-inline" role="math">\(\psi=g(\mu)=\mu^2\)</span>. Gunakan estimator
+<span class="math-inline" role="math">\(\widehat\psi=\bar X^2\)</span> pada titik <span class="math-inline" role="math">\(\mu_0=0\)</span>.</p>
+<ol>
+<li>Tunjukkan mengapa delta method orde pertama hanya memberi limit degenerat.</li>
+<li>Temukan skala dan distribusi limit nondegenerat yang benar.</li>
+<li>Dalam bootstrap nonparametrik biasa, tulis
+<span class="math-inline" role="math">\(Z_n=\sqrt n\bar X\)</span> dan
+<span class="math-inline" role="math">\(W_n^*=\sqrt n(\bar X^*-\bar X)\)</span>. Turunkan bentuk statistik bootstrap
+berpusat
+<span class="math-inline" role="math">\(n\{(\bar X^*)^2-\bar X^2\}\)</span>.</li>
+<li>Jelaskan mengapa distribusi kondisional statistik itu tidak konsisten untuk
+hukum target <span class="math-inline" role="math">\(n\bar X^2\)</span> di bawah nol.</li>
+<li>Berikan dua cara inferensi yang sah dan bandingkan dengan transformasi
+reguler <span class="math-inline" role="math">\(h(\mu)=e^\mu\)</span>.</li>
+</ol>
+<p><a id="O006-C140-CMP-MS08-P08-H01"></a></p>
+<h3>Petunjuk 1</h3>
+<p><span class="math-inline" role="math">\(g'(0)=0\)</span> tetapi <span class="math-inline" role="math">\(g''(0)=2\)</span>. Di bawah nol,
+<span class="math-inline" role="math">\(\sqrt n\bar X\sim N(0,1)\)</span>.</p>
+<p><a id="O006-C140-CMP-MS08-P08-H02"></a></p>
+<h3>Petunjuk 2</h3>
+<p>Gunakan</p>
+<div class="math-display" role="math">\[\sqrt n\bar X^*=Z_n+W_n^*.\]</div>
+<p>Distribusi kondisional <span class="math-inline" role="math">\(W_n^*\)</span> mendekati Normal baku, tetapi <span class="math-inline" role="math">\(Z_n\)</span> sendiri
+tidak menuju suatu konstanta.</p>
+<p><a id="O006-C140-CMP-MS08-P08-ANS"></a></p>
+<h3>Jawaban singkat</h3>
+<p>Delta orde pertama memberi nol karena <span class="math-inline" role="math">\(g'(0)=0\)</span>. Skala benar adalah <span class="math-inline" role="math">\(n\)</span> dan
+<span class="math-inline" role="math">\(n\bar X^2=Z_n^2\sim\chi_1^2\)</span>. Statistik bootstrap berpusat adalah
+<span class="math-inline" role="math">\(2Z_nW_n^*+(W_n^*)^2\)</span>; hukum kondisionalnya bergantung pada <span class="math-inline" role="math">\(Z_n\)</span> yang tetap
+acak, sehingga tidak menuju <span class="math-inline" role="math">\(\chi_1^2\)</span>. Gunakan limit orde kedua langsung atau
+bootstrap parametrik yang menerapkan nol.</p>
+<p><a id="O006-C140-CMP-MS08-P08-SOL"></a></p>
+<h3>Solusi lengkap</h3>
+<p>Delta method orde pertama menyatakan, pada skala <span class="math-inline" role="math">\(\sqrt n\)</span>,</p>
+<div class="math-display" role="math">\[\sqrt n\{g(\bar X)-g(0)\}
+\approx g'(0)\sqrt n\bar X=0.\]</div>
+<p>Kesimpulan degenerat itu hanya mengatakan bahwa galat lebih kecil daripada
+<span class="math-inline" role="math">\(n^{-1/2}\)</span>; ia tidak mengatakan galat identik nol. Ekspansi orde kedua memberi</p>
+<div class="math-display" role="math">\[g(\bar X)-g(0)
+=\frac12g''(0)\bar X^2=\bar X^2.\]</div>
+<p>Karena <span class="math-inline" role="math">\(Z_n=\sqrt n\bar X\sim N(0,1)\)</span> secara eksak di bawah nol,</p>
+<div class="math-display" role="math">\[n(\widehat\psi-\psi_0)=n\bar X^2=Z_n^2\sim\chi_1^2.\]</div>
+<p>Dalam bootstrap,
+<span class="math-inline" role="math">\(\sqrt n\bar X^*=Z_n+W_n^*\)</span>, sehingga</p>
+<div class="math-display" role="math">\[n\{(\bar X^*)^2-\bar X^2\}
+=(Z_n+W_n^*)^2-Z_n^2
+=2Z_nW_n^*+(W_n^*)^2.\]</div>
+<p>Secara kondisional pada data, <span class="math-inline" role="math">\(W_n^*\)</span> mendekati <span class="math-inline" role="math">\(N(0,1)\)</span>, tetapi koefisien
+<span class="math-inline" role="math">\(Z_n\)</span> tidak menuju nol atau konstanta; di bawah nol ia tetap memiliki limit
+<span class="math-inline" role="math">\(N(0,1)\)</span>. Karena itu hukum kondisional ekspresi terakhir mempunyai limit acak
+yang bergantung pada realisasi <span class="math-inline" role="math">\(Z_n\)</span>, bukan hukum tetap <span class="math-inline" role="math">\(\chi_1^2\)</span> dari target.
+Bootstrap berpusat biasa tidak konsisten pada titik kritis ini.</p>
+<p>Dua prosedur sah adalah: (i) gunakan hasil orde kedua
+<span class="math-inline" role="math">\(n\bar X^2\sim\chi_1^2\)</span>; atau (ii) untuk uji nol, lakukan bootstrap parametrik
+yang benar-benar menerapkan <span class="math-inline" role="math">\(\mu=0\)</span>, hasilkan
+<span class="math-inline" role="math">\(X_i^*\sim N(0,1)\)</span>, dan pakai <span class="math-inline" role="math">\(n(\bar X^*)^2\)</span>. Prosedur kedua mereplikasi
+<span class="math-inline" role="math">\(\chi_1^2\)</span> tepat. Sebaliknya, untuk <span class="math-inline" role="math">\(h(\mu)=e^\mu\)</span>, <span class="math-inline" role="math">\(h'(0)=1\ne0\)</span>; delta method
+orde pertama berlaku pada skala <span class="math-inline" role="math">\(\sqrt n\)</span>, dan bootstrap biasa tidak mengalami
+ketidakregularan turunan nol yang sama.</p>
+
+<footer class="license">Materi pendamping orisinal berlisensi CC BY-SA 4.0. Komponen Penn State dan Random tetap berada di bawah lisensinya masing-masing dan tidak direlisensikan oleh halaman ini.</footer>
+</main>
+</div>
+</body>
+</html>

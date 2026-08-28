@@ -121,18 +121,36 @@ downloaded without credentials and matched. Zenodo record `22143454`, DOI
 anonymous replay matched all 25 files, and the authenticated lineage audit
 found zero unpublished drafts.
 
-Next, create `components/c140-companion/` as original CC BY-SA 4.0 content and
-produce the first coherent batch, C1: seven linked regular-likelihood,
-asymptotic-testing, nonregularity, optimality, and risk units
-`O006-C140-CMP-D001` through `D007`; four seeded static simulations `SIM001`
-through `SIM004`; mastery sets `MS07` through `MS10` with eight complete
-problems each; and cumulative assessment `CA01` with ten complete problems and
-rubric. Every theorem exposes hypotheses and proof; every problem has tags,
-staged hints, short answer, and full solution; all IDs and cross-component
-links are locale-neutral and machine-resolvable. Build and replay offline HTML
-with static validators only. Then continue matrix regression, Bayesian
-comparison, the remaining nine mastery sets, three cumulative assessments,
-and two capstones. The overall C140 goal remains active.
+Original companion C1 is locally complete: `D001`–`D007`, `SIM001`–`SIM004`,
+`MS07`–`MS10`, `CA01`, and the component index comprise seventeen documents,
+442 stable anchors, 173 resolved body references, 42 fully solved problems,
+and four locked seeded simulations. The offline reader has 35 files /
+2,265,015 bytes; its manifest SHA-256 is
+`4f6eaee5df63a2bf37e6f88a36794fa01c200e38a37fe85076e5008ce7b4d36d`.
+The backend has 469 entities / 648 relations / four files / 157,004 bytes;
+manifest SHA-256 is
+`a4ff6674dc9c35bff0baf488fbccee195a73d0a2d0ccc9739ac8faa18e05ba0c`.
+Build, QA, and simulation receipt SHA-256 values are
+`1f9c746e723259ec46419586ac2c6f4b6ef7684deb9427e3eeb9cbc488e9ba35`,
+`c6b5977feb035d0f1425438dfd88b12cf8fc876820ddb04287fd62b6c37cfd67`,
+and `834c8a20025d51bf53ef4e8d0f7d805489af21c34065238131366a734df7e213`.
+All deterministic replays and two post-fix mathematical audits pass.
+
+The cumulative Pages tree is locally ready at 159 files / 21,677,818 bytes,
+manifest SHA-256
+`e73658619391a5eab4d5fab997cce5cfb206fff942138bca92d38a5a22e1ac6f`.
+The cumulative release package is ready at 33 files / 90,175,090 bytes; its
+19,580-byte receipt has SHA-256
+`8e7043ee5d7085941f7b30e589af23440db0c67a1ba47754494eaa07e970b181`.
+It preserves the 25-file donor boundary byte-for-byte and adds eight C1 files.
+
+Next, replay the static C1/package/Pages gates, commit and push only the exact
+component/integration paths, wait for the Pages workflow, and anonymously match
+all 159 public files. Publish the 33-file union to the next GitHub release and
+the existing Zenodo concept, anonymously match all 90,175,090 public bytes,
+audit zero Zenodo drafts, and persist sanitized receipts. Then begin the matrix
+Gaussian linear-model batch, followed by Bayesian comparison, remaining
+mastery/assessment sets, and capstones. The overall C140 goal remains active.
 
 The donor authority is 57,507 bytes / SHA-256
 `4d7402f2a960ea2b4232e57e4ee5992ac29801b9269f300f17f8e83074d5a0e4`;
@@ -174,7 +192,7 @@ consolidated GitHub receipts, the three consolidated Zenodo receipts, and
 build and QA receipts, `build/PAGES_COLLECTION_RECEIPT.json`,
 `CHECKPOINT_2026-08-28_RANDOM_COMPLETENESS_DONOR_PAGES_PUBLICATION_COMPLETE.md`,
 and
-`GITHUB_PAGES_RECEIPT_2026-08-28_RANDOM_COMPLETENESS_DONOR.json`. Conversation
+`GITHUB_PAGES_RECEIPT_2026-08-28_RANDOM_COMPLETENESS_DONOR.json`.
 Then read
 `CHECKPOINT_2026-08-28_RANDOM_COMPLETENESS_DONOR_PRESERVATION_COMPLETE.md`,
 `build/RANDOM_COMPLETENESS_RELEASE_PACKAGE_RECEIPT.json`, the two Random-donor
@@ -182,3 +200,8 @@ GitHub release receipts, the Random-donor Zenodo base/publication/readback/
 lineage-audit receipts, and
 `ZENODO_LINEAGE_2026-08-28_RANDOM_COMPLETENESS.json`. Conversation summaries
 are not state. Do not broaden the filesystem or Git scope.
+Then read `components/c140-companion/00_control/WORKFLOW.md`,
+`CONTENT_CONTRACT.md`, `CURRENT_STATE.md`, `CURRENT_CURSOR.md`,
+`CHECKPOINT_2026-08-28_C1_LOCAL_COMPLETE.md`, the C1 source/backend/build/QA
+receipts, `build/PAGES_COLLECTION_RECEIPT.json`, and
+`build/C140_COMPANION_C1_RELEASE_PACKAGE_RECEIPT.json`.

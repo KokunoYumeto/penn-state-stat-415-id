@@ -376,8 +376,44 @@ and
 `089281b6358dfbd5e90e8b3251efd1091851f5ea2a0bf8ad85b75ba76f7880c7`.
 There are zero unpublished drafts.
 
-The next executable action is original C140 companion batch C1 under
-`components/c140-companion/`: documents `D001`–`D007`, simulations
-`SIM001`–`SIM004`, complete mastery sets `MS07`–`MS10`, and cumulative
-assessment `CA01`, with stable backend IDs and deterministic browser-free
-offline HTML. No upstream message has been sent.
+## Original C140 companion — C1 local publication boundary
+
+The original CC BY-SA 4.0 companion now has a coherent first batch under
+`components/c140-companion/`. It contains seventeen reader documents:
+`D001`–`D007`, `SIM001`–`SIM004`, mastery sets `MS07`–`MS10`, cumulative
+assessment `CA01`, and its index. The seven theory units cover regular
+likelihood, likelihood asymptotics and testing, nonregular cases, estimator
+and test optimality, and risk. The four mastery sets contain 32 problems and
+CA01 contains ten problems with a 100-point rubric; every problem has metadata,
+two staged hints, a short answer, and a complete worked solution.
+
+The source has 442 stable anchors and 173 resolved body references. Four locked,
+seeded simulations generate ten files / 17,645 bytes. The deterministic offline
+reader has 35 files / 2,265,015 bytes with manifest SHA-256
+`4f6eaee5df63a2bf37e6f88a36794fa01c200e38a37fe85076e5008ce7b4d36d`.
+Its modular backend contains 469 entities and 648 relations in four files /
+157,004 bytes, with manifest SHA-256
+`a4ff6674dc9c35bff0baf488fbccee195a73d0a2d0ccc9739ac8faa18e05ba0c`.
+Build, QA, and simulation receipt SHA-256 values are respectively
+`1f9c746e723259ec46419586ac2c6f4b6ef7684deb9427e3eeb9cbc488e9ba35`,
+`c6b5977feb035d0f1425438dfd88b12cf8fc876820ddb04287fd62b6c37cfd67`,
+and `834c8a20025d51bf53ef4e8d0f7d805489af21c34065238131366a734df7e213`.
+All write/check-only and two independent post-fix mathematical audits pass.
+
+The locally assembled Pages collection now has 159 files / 21,677,818 bytes:
+all 106 Penn and 18 donor files are preserved byte-for-byte and 35 C1 files are
+added. Its manifest SHA-256 is
+`e73658619391a5eab4d5fab997cce5cfb206fff942138bca92d38a5a22e1ac6f`.
+The cumulative preservation package is ready at 33 files / 90,175,090 bytes;
+its package receipt is 19,580 bytes with SHA-256
+`8e7043ee5d7085941f7b30e589af23440db0c67a1ba47754494eaa07e970b181`.
+It preserves all 25 prior release files byte-for-byte and appends eight C1
+reader/source/rights/QA/manifest files. Publication has not yet occurred, so
+this section makes no public C1 claim.
+
+The next executable action is the exact static replay, narrow commit/push,
+credential-free Pages readback, and cumulative GitHub/Zenodo publication and
+readback for this C1 boundary. After its sanitized receipts are persisted,
+production continues with the matrix Gaussian linear-model batch. Overall C140
+remains incomplete. No upstream message has been sent, and no browser process
+may be launched.

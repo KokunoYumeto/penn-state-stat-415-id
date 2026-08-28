@@ -73,6 +73,12 @@ jobs:
           python -B scripts/build_random_completeness_donor.py --check-only
           python -B scripts/qa_random_completeness_donor.py --check-only
 
+      - name: Verify original C140 companion C1 boundary
+        run: |
+          python -B components/c140-companion/simulations/run_c1_simulations.py --check-only
+          python -B components/c140-companion/scripts/build_companion.py --check-only
+          python -B components/c140-companion/scripts/qa_companion.py --check-only
+
       - name: Assemble byte-preserving Pages collection
         run: |
           python -B scripts/assemble_pages_collection.py --write

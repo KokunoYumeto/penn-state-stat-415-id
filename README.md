@@ -6,11 +6,13 @@ komponen O006/C140.
 
 ## Status
 
-**Lengkap dan terbit — seluruh 14 dari 14 dokumen sudah diterjemahkan,
-dibangun, lulus QA, dan dibaca kembali dari repositori publik.** Laman utama
-serta Pelajaran 00–12 membentuk satu pembaca luring lengkap. GitHub/Pages,
-rilis GitHub, dan versi preservasi Zenodo yang mengikat perbaikan
-reproduksibilitas LF semuanya sudah publik dan terverifikasi secara anonim.
+**Tulang punggung Penn State lengkap dan terbit — seluruh 14 dari 14 dokumen
+sudah diterjemahkan, dibangun, lulus QA, dan dibaca kembali dari repositori
+publik.** Laman utama serta Pelajaran 00–12 membentuk satu pembaca luring
+lengkap. GitHub/Pages, rilis GitHub, dan versi preservasi Zenodo yang mengikat
+perbaikan reproduksibilitas LF semuanya sudah publik dan terverifikasi secara
+anonim. Komponen pendamping orisinal C140 masih berjalan sebagaimana dirinci
+di bawah.
 
 - 4.932 segmen terjemahan di dalam pembaca lengkap;
 - 6.510 unit struktural sumber dengan ID stabil dan 6.498 unit turunan;
@@ -73,6 +75,31 @@ Hak donor tetap terpisah dari CC BY-NC 4.0 Penn State. Saksi laman utama
 *Random* menyatakan CC BY 2.0, sedangkan `Credits.html` menautkan CC BY 1.0;
 keduanya dipertahankan dan tidak disamakan secara diam-diam.
 
+## Pendamping orisinal C140 — batch C1
+
+Batch C1 pendamping orisinal CC BY-SA 4.0 sudah lengkap secara lokal dan siap
+sebagai checkpoint parsial yang koheren. Isinya tujuh unit teori rigor,
+empat simulasi seeded, empat set penguasaan, satu asesmen kumulatif, dan indeks:
+
+- 17 dokumen / 288.436 byte sumber;
+- 42 soal lengkap: metadata, dua petunjuk bertahap, jawaban singkat, dan solusi;
+- 442 anchor stabil / 173 referensi isi yang terselesaikan;
+- pembaca HTML luring: 35 berkas / 2.265.015 byte;
+- backend modular: 469 entitas / 648 relasi;
+- simulasi: 10 keluaran deterministik / 17.645 byte;
+- build, QA statis, replay byte-identik, serta dua audit matematika pasca-fix:
+  lulus;
+- rute pembaca setelah deployment Pages:
+  https://kokunoyumeto.github.io/penn-state-stat-415-id/components/c140-companion/;
+- sumber, kontrak, backend, simulasi, hak, dan receipt:
+  `components/c140-companion/`.
+
+Checkpoint ini menutup likelihood reguler dan nonreguler, pengujian asimtotik,
+optimalitas estimator/uji, dan risiko. Ia belum menutup keseluruhan C140: model
+linear Gaussian matriks, perbandingan Bayesian–frequentist, sembilan set
+penguasaan, tiga asesmen, dan dua capstone masih berlanjut. Hak Penn, donor
+*Random*, dan pendamping orisinal tetap dipisahkan.
+
 ## Reproduksi
 
 Gunakan Python 3.13 dan dependensi yang dipatok di `requirements.txt`, lalu
@@ -122,6 +149,11 @@ python -B scripts/write_consolidated_pdf_visual_receipt.py --check-only
 python -B scripts/audit_consolidated_epub.py --check-only
 python -B scripts/audit_consolidated_epub_static_reflow.py --check-only
 python -B scripts/package_consolidated_readers_release.py --check-only
+python -B components/c140-companion/simulations/run_c1_simulations.py --check-only
+python -B components/c140-companion/scripts/build_companion.py --check-only
+python -B components/c140-companion/scripts/qa_companion.py --check-only
+python -B scripts/assemble_pages_collection.py --check-only
+python -B scripts/package_c140_companion_c1_release.py --check-only
 python -B scripts/publish_github_consolidated_readers_release.py --local-preflight
 python -B scripts/publish_zenodo_consolidated_readers.py --local-preflight
 ```

@@ -1,0 +1,568 @@
+<!doctype html>
+<html lang="id-ID">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="generator" content="OpenAI Codex gpt-5.6-sol, Ultra">
+<title>Set penguasaan 07 — regularitas, konsistensi, dan normalitas MLE</title>
+<link rel="stylesheet" href="../assets/style.css">
+<script>window.MathJax={loader:{load:['[tex]/boldsymbol']},tex:{packages:{'[+]':['boldsymbol']},inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']]},svg:{fontCache:'local'}};</script>
+<script defer src="../assets/MathJax/tex-svg.js"></script>
+</head>
+<body>
+<div class="shell">
+<nav class="sidebar" aria-label="Daftar isi pendamping"><h2>Isi pendamping</h2><ol><li><a href="../index.html">Pendamping Orisinal Statistika Matematis</a></li><li><a href="../theory/O006-C140-CMP-D001.html">Model parametrik reguler, skor, dan informasi Fisher</a></li><li><a href="../theory/O006-C140-CMP-D002.html">Konsistensi MLE: identifikasi Kullback–Leibler dan teorema argmax</a></li><li><a href="../theory/O006-C140-CMP-D003.html">Likelihood kuadratik lokal, normalitas asimtotik, dan delta method</a></li><li><a href="../theory/O006-C140-CMP-D004.html">Prosedur Wald, skor, dan rasio likelihood</a></li><li><a href="../theory/O006-C140-CMP-D005.html">Likelihood nonreguler: empat mekanisme kegagalan</a></li><li><a href="../theory/O006-C140-CMP-D006.html">Optimalitas pengujian: Neyman–Pearson, MP, UMP, dan rasio likelihood monoton</a></li><li><a href="../theory/O006-C140-CMP-D007.html">Loss, risk, efisiensi, Rao–Blackwell, dan Lehmann–Scheffé</a></li><li><a href="../simulations/O006-C140-CMP-SIM001.html">Model lokasi normal: MLE, coverage, dan tiga statistik uji</a></li><li><a href="../simulations/O006-C140-CMP-SIM002.html">Delta method pada titik reguler dan titik dengan turunan nol</a></li><li><a href="../simulations/O006-C140-CMP-SIM003.html">Endpoint Uniform: laju nonreguler dan kegagalan bootstrap biasa</a></li><li><a href="../simulations/O006-C140-CMP-SIM004.html">Uji Neyman–Pearson teracak dengan size tepat</a></li><li><a href="O006-C140-CMP-MS07.html">Set penguasaan 07 — regularitas, konsistensi, dan normalitas MLE</a></li><li><a href="O006-C140-CMP-MS08.html">Set penguasaan 08 — Wald, skor, rasio likelihood, dan diagnosis nonregular</a></li><li><a href="O006-C140-CMP-MS09.html">Set penguasaan 09 — pengujian eksak dan optimalitas Neyman–Pearson</a></li><li><a href="O006-C140-CMP-MS10.html">Set penguasaan 10 — uji likelihood asimtotik, risk, dan perbaikan estimator</a></li><li><a href="../assessments/O006-C140-CMP-CA01.html">Asesmen kumulatif C1: likelihood, optimalitas, dan keputusan statistik</a></li></ol></nav>
+<main>
+<div class="metadata"><strong>O006-C140-CMP-MS07</strong> · id-ID · CC BY-SA 4.0 · OpenAI Codex gpt-5.6-sol, Ultra</div>
+<p><a id="O006-C140-CMP-MS07-SEC-OVERVIEW"></a></p>
+<h1>Set penguasaan 07 — regularitas, konsistensi, dan normalitas MLE</h1>
+<p>Delapan soal ini menguji rantai penalaran lengkap dari definisi model
+terdominasi sampai inferensi delta method. Dalam setiap solusi, kesimpulan
+asimtotik baru dipakai setelah hipotesis yang relevan diperiksa. Notasi skor,
+informasi Fisher, ULLN, dan ekspansi likelihood mengikuti
+<a class="xref" data-target-id="O006-C140-CMP-D001-DEF-SCORE" href="../theory/O006-C140-CMP-D001.html#O006-C140-CMP-D001-DEF-SCORE">Definisi: skor observasi tunggal</a>,
+<a class="xref" data-target-id="O006-C140-CMP-D002-THM-ULLN" href="../theory/O006-C140-CMP-D002.html#O006-C140-CMP-D002-THM-ULLN">Teorema: ULLN Lipschitz pada himpunan kompak</a>, dan
+<a class="xref" data-target-id="O006-C140-CMP-D003-THM-MLE-AN" href="../theory/O006-C140-CMP-D003.html#O006-C140-CMP-D003-THM-MLE-AN">Teorema: normalitas asimtotik MLE</a>.</p>
+<p><a id="O006-C140-CMP-MS07-P01"></a></p>
+<h2>Soal 1 — Dominasi, pertukaran turunan, dan support</h2>
+<!--PROBLEM_META {"id":"O006-C140-CMP-MS07-P01","prerequisites":["O006-C140-CMP-D001-DEF-DOMINATED-MODEL","O006-C140-CMP-D001-ASM-R1-R6"],"objective":"membedakan dominasi dari support bersama dan membenarkan identitas skor","difficulty":"menengah","misconceptions":["model terdominasi otomatis mempunyai support bersama","turunan densitas selalu boleh dipindahkan melewati integral"]}-->
+<p>Bandingkan dua model berikut untuk satu observasi.</p>
+<div class="math-display" role="math">\[\text{A: } f_\lambda(x)=\lambda e^{-\lambda x}\mathbf 1\{x\ge0\},
+\quad \lambda&gt;0,\]</div>
+<div class="math-display" role="math">\[\text{B: } g_\theta(x)=\theta^{-1}\mathbf 1\{0&lt;x&lt;\theta\},
+\quad \theta&gt;0.\]</div>
+<p>Untuk masing-masing model:</p>
+<ol>
+<li>tentukan ukuran dominan dan support;</li>
+<li>tentukan apakah support bersama tersedia pada lingkungan setiap parameter
+interior;</li>
+<li>hitung skor formal; dan</li>
+<li>putuskan apakah identitas <span class="math-inline" role="math">\(E(s)=0\)</span> sah.</li>
+</ol>
+<p>Untuk model A, berikan selubung terintegralkan yang membenarkan pertukaran
+turunan dan integral pada lingkungan kompak
+<span class="math-inline" role="math">\([\lambda_0/2,3\lambda_0/2]\)</span>. Untuk model B, tunjukkan secara eksplisit suku
+batas yang hilang jika indikator diturunkan secara naif.</p>
+<p><a id="O006-C140-CMP-MS07-P01-H01"></a></p>
+<h3>Petunjuk 1</h3>
+<p>Kedua model terdominasi oleh ukuran Lebesgue. Namun dominasi hanya menyatakan
+bahwa seluruh densitas ditulis terhadap satu ukuran; ia tidak menyatakan bahwa
+daerah tempat densitas positif tetap.</p>
+<p><a id="O006-C140-CMP-MS07-P01-H02"></a></p>
+<h3>Petunjuk 2</h3>
+<p>Untuk model A,
+<span class="math-inline" role="math">\(\partial_\lambda f_\lambda(x)=e^{-\lambda x}(1-\lambda x)\)</span>.
+Pada lingkungan yang diberikan, gunakan
+<span class="math-inline" role="math">\(e^{-\lambda x}\le e^{-\lambda_0x/2}\)</span> dan
+<span class="math-inline" role="math">\(|1-\lambda x|\le1+(3\lambda_0/2)x\)</span>.
+Untuk model B, turunkan langsung
+<span class="math-inline" role="math">\(\int_0^\theta\theta^{-1}\,dx\)</span> dengan aturan Leibniz.</p>
+<p><a id="O006-C140-CMP-MS07-P01-ANS"></a></p>
+<h3>Jawaban singkat</h3>
+<p>Model A mempunyai support bersama <span class="math-inline" role="math">\([0,\infty)\)</span>, skor
+<span class="math-inline" role="math">\(s_\lambda(x)=1/\lambda-x\)</span>, dan <span class="math-inline" role="math">\(E_\lambda s_\lambda=0\)</span>. Model B mempunyai
+support <span class="math-inline" role="math">\((0,\theta)\)</span> yang bergerak; skor interior formalnya <span class="math-inline" role="math">\(-1/\theta\)</span>
+bernilai harapan <span class="math-inline" role="math">\(-1/\theta\)</span>, sehingga identitas skor reguler tidak sah. Suku
+batas pada endpoint atas tepat membatalkan integral turunan interior.</p>
+<p><a id="O006-C140-CMP-MS07-P01-SOL"></a></p>
+<h3>Solusi lengkap</h3>
+<p>Ukuran Lebesgue mendominasi kedua keluarga. Pada A, support esensial adalah
+<span class="math-inline" role="math">\([0,\infty)\)</span> untuk setiap <span class="math-inline" role="math">\(\lambda&gt;0\)</span>, jadi support bersama tersedia. Turunan
+densitasnya</p>
+<div class="math-display" role="math">\[\partial_\lambda f_\lambda(x)
+=e^{-\lambda x}(1-\lambda x)\mathbf 1\{x\ge0\}.\]</div>
+<p>Pada <span class="math-inline" role="math">\(N=[\lambda_0/2,3\lambda_0/2]\)</span>,</p>
+<div class="math-display" role="math">\[|\partial_\lambda f_\lambda(x)|
+\le
+e^{-\lambda_0x/2}
+\frac{3\lambda_0}{2}x e^{-\lambda_0x/2}
+=:G(x).\]</div>
+<p>Kedua suku <span class="math-inline" role="math">\(G\)</span> terintegralkan pada <span class="math-inline" role="math">\([0,\infty)\)</span>, sehingga teorema pertukaran
+turunan <a class="xref" data-target-id="O006-C140-CMP-D001-THM-DIFFERENTIATION" href="../theory/O006-C140-CMP-D001.html#O006-C140-CMP-D001-THM-DIFFERENTIATION">Teorema: menurunkan di bawah tanda integral</a> berlaku. Skor</p>
+<div class="math-display" role="math">\[s_\lambda(x)=\partial_\lambda\log f_\lambda(x)
+=\frac1\lambda-x\]</div>
+<p>mempunyai harapan <span class="math-inline" role="math">\(1/\lambda-E_\lambda X=0\)</span>.</p>
+<p>Pada B, support esensial <span class="math-inline" role="math">\((0,\theta)\)</span> berubah dengan <span class="math-inline" role="math">\(\theta\)</span>. Jika hanya
+bagian <span class="math-inline" role="math">\(\theta^{-1}\)</span> diturunkan, skor formal adalah <span class="math-inline" role="math">\(-1/\theta\)</span>, yang
+berharapan <span class="math-inline" role="math">\(-1/\theta\)</span>. Perhitungan benar memakai aturan Leibniz:</p>
+<div class="math-display" role="math">\[\frac d{d\theta}\int_0^\theta\frac1\theta\,dx
+=\int_0^\theta\left(-\frac1{\theta^2}\right)\,dx
++\frac1\theta\frac d{d\theta}(\theta)
+=-\frac1\theta+\frac1\theta=0.\]</div>
+<p>Suku kedua berasal dari batas support yang bergerak. Ia tidak termuat dalam
+skor interior. Jadi dominasi berlaku, tetapi syarat support bersama pada
+<a class="xref" data-target-id="O006-C140-CMP-D001-ASM-R1-R6" href="../theory/O006-C140-CMP-D001.html#O006-C140-CMP-D001-ASM-R1-R6">Asumsi R1--R6</a> gagal dan teorema nilai harapan skor nol
+tidak dapat diterapkan pada B.</p>
+<p><a id="O006-C140-CMP-MS07-P02"></a></p>
+<h2>Soal 2 — Identifiabilitas dan informasi singular</h2>
+<!--PROBLEM_META {"id":"O006-C140-CMP-MS07-P02","prerequisites":["O006-C140-CMP-D001-DEF-IDENTIFIABILITY","O006-C140-CMP-D001-DEF-FISHER"],"objective":"mendiagnosis kegagalan identifiabilitas dan memisahkannya dari informasi lokal","difficulty":"menengah","misconceptions":["informasi Fisher positif menjamin identifiabilitas global","MLE yang memiliki dua maksimum tetap konsisten untuk label parameter"]}-->
+<p>Misalkan <span class="math-inline" role="math">\(X_1,\ldots,X_n\)</span> iid dengan</p>
+<div class="math-display" role="math">\[X_i\sim N(\theta^2,1),\qquad \theta\in\mathbb R.\]</div>
+<ol>
+<li>Tunjukkan bahwa model tidak teridentifikasi.</li>
+<li>Hitung skor dan informasi Fisher per observasi.</li>
+<li>Tentukan himpunan MLE ketika <span class="math-inline" role="math">\(\bar X&gt;0\)</span> dan ketika <span class="math-inline" role="math">\(\bar X\le0\)</span>.</li>
+<li>Buktikan bahwa tidak ada estimator yang konsisten untuk label <span class="math-inline" role="math">\(\theta\)</span> pada
+kedua titik <span class="math-inline" role="math">\(\theta_0=a\)</span> dan <span class="math-inline" role="math">\(\theta_0=-a\)</span>, dengan <span class="math-inline" role="math">\(a&gt;0\)</span>.</li>
+<li>Berikan dua cara sah untuk merumuskan ulang target inferensi.</li>
+</ol>
+<p><a id="O006-C140-CMP-MS07-P02-H01"></a></p>
+<h3>Petunjuk 1</h3>
+<p>Distribusi data hanya bergantung pada <span class="math-inline" role="math">\(m=\theta^2\)</span>. Bandingkan hukum seluruh
+sampel pada <span class="math-inline" role="math">\(a\)</span> dan <span class="math-inline" role="math">\(-a\)</span>.</p>
+<p><a id="O006-C140-CMP-MS07-P02-H02"></a></p>
+<h3>Petunjuk 2</h3>
+<p>Likelihood sebagai fungsi <span class="math-inline" role="math">\(m\ge0\)</span> adalah likelihood rataan Normal. Proyeksikan
+<span class="math-inline" role="math">\(\bar X\)</span> ke <span class="math-inline" role="math">\([0,\infty)\)</span>, lalu ambil akar kuadrat untuk kembali ke koordinat
+<span class="math-inline" role="math">\(\theta\)</span>.</p>
+<p><a id="O006-C140-CMP-MS07-P02-ANS"></a></p>
+<h3>Jawaban singkat</h3>
+<p><span class="math-inline" role="math">\(P_\theta=P_{-\theta}\)</span>, skor adalah <span class="math-inline" role="math">\(2\theta(X-\theta^2)\)</span>, dan
+<span class="math-inline" role="math">\(I(\theta)=4\theta^2\)</span>. Bila <span class="math-inline" role="math">\(\bar X&gt;0\)</span>, himpunan MLE
+<span class="math-inline" role="math">\(\{-\sqrt{\bar X},\sqrt{\bar X}\}\)</span>; bila <span class="math-inline" role="math">\(\bar X\le0\)</span>, MLE tunggalnya nol.
+Target sah adalah <span class="math-inline" role="math">\(m=\theta^2\)</span> atau <span class="math-inline" role="math">\(\theta\)</span> pada cabang yang ditetapkan
+sebelum data, misalnya <span class="math-inline" role="math">\(\theta\ge0\)</span>.</p>
+<p><a id="O006-C140-CMP-MS07-P02-SOL"></a></p>
+<h3>Solusi lengkap</h3>
+<p>Karena rataan distribusi adalah <span class="math-inline" role="math">\(\theta^2\)</span>,
+<span class="math-inline" role="math">\(N(\theta^2,1)=N((-\theta)^2,1)\)</span>. Jadi model melanggar identifiabilitas
+<a class="xref" data-target-id="O006-C140-CMP-D001-DEF-IDENTIFIABILITY" href="../theory/O006-C140-CMP-D001.html#O006-C140-CMP-D001-DEF-IDENTIFIABILITY">Definisi: identifiabilitas</a>. Log-densitas, selain konstanta,
+adalah <span class="math-inline" role="math">\(-\tfrac12(x-\theta^2)^2\)</span>. Maka</p>
+<div class="math-display" role="math">\[s_\theta(x)=2\theta(x-\theta^2).\]</div>
+<p>Di bawah parameter <span class="math-inline" role="math">\(\theta\)</span>, <span class="math-inline" role="math">\(X-\theta^2\)</span> bervarians satu, sehingga</p>
+<div class="math-display" role="math">\[I(\theta)=E_\theta s_\theta(X)^2=4\theta^2.\]</div>
+<p>Informasi positif untuk <span class="math-inline" role="math">\(\theta\ne0\)</span> hanya merupakan sifat lokal; ia tidak
+menghapus pasangan label global <span class="math-inline" role="math">\(\theta\)</span> dan <span class="math-inline" role="math">\(-\theta\)</span>. Pada <span class="math-inline" role="math">\(\theta=0\)</span>,
+informasi juga singular.</p>
+<p>Sebagai fungsi <span class="math-inline" role="math">\(m=\theta^2\ge0\)</span>, log-likelihood dimaksimumkan pada
+<span class="math-inline" role="math">\(\widehat m=\max(\bar X,0)\)</span>. Jika <span class="math-inline" role="math">\(\bar X&gt;0\)</span>, kedua akar
+<span class="math-inline" role="math">\(\pm\sqrt{\bar X}\)</span> memberi likelihood sama; jika <span class="math-inline" role="math">\(\bar X\le0\)</span>, hanya
+<span class="math-inline" role="math">\(\theta=0\)</span> yang memetakan ke maksimum berkendala <span class="math-inline" role="math">\(m=0\)</span>.</p>
+<p>Andaikan estimator <span class="math-inline" role="math">\(T_n\)</span> konsisten pada <span class="math-inline" role="math">\(a\)</span> dan <span class="math-inline" role="math">\(-a\)</span>. Pilih dua lingkungan
+terpisah <span class="math-inline" role="math">\(A_+\)</span> dan <span class="math-inline" role="math">\(A_-\)</span> di sekitar kedua titik. Konsistensi pada <span class="math-inline" role="math">\(a\)</span> memberi
+<span class="math-inline" role="math">\(P_a(T_n\in A_+)\to1\)</span>. Namun hukum seluruh sampel sama di bawah <span class="math-inline" role="math">\(a\)</span> dan <span class="math-inline" role="math">\(-a\)</span>,
+jadi <span class="math-inline" role="math">\(P_{-a}(T_n\in A_+)\to1\)</span>. Konsistensi pada <span class="math-inline" role="math">\(-a\)</span> sekaligus menuntut
+<span class="math-inline" role="math">\(P_{-a}(T_n\in A_-)\to1\)</span>, mustahil karena kedua kejadian saling lepas.</p>
+<p>Kita dapat (i) menargetkan parameter teridentifikasi <span class="math-inline" role="math">\(m=\theta^2\)</span>, atau
+(ii) menetapkan cabang, misalnya <span class="math-inline" role="math">\(\Theta=[0,\infty)\)</span>, sebelum melihat data.
+Pilihan cabang adalah bagian model substantif, bukan aturan pemecah seri
+setelah hasil dilihat.</p>
+<p><a id="O006-C140-CMP-MS07-P03"></a></p>
+<h2>Soal 3 — Informasi Fisher multivariat dan reparametrisasi</h2>
+<!--PROBLEM_META {"id":"O006-C140-CMP-MS07-P03","prerequisites":["O006-C140-CMP-D001-THM-INFO-IDENTITY","O006-C140-CMP-D001-THM-REPARAMETERIZATION","B40"],"objective":"menghitung informasi multivariat dan mentransformasikannya dengan Jacobian","difficulty":"menengah","misconceptions":["informasi berubah seperti skalar pada reparametrisasi vektor","kovarians silang boleh diabaikan tanpa dihitung"]}-->
+<p>Misalkan <span class="math-inline" role="math">\(X\sim N(\mu,v)\)</span>, <span class="math-inline" role="math">\(v&gt;0\)</span>.</p>
+<ol>
+<li>Turunkan skor untuk <span class="math-inline" role="math">\(\theta=(\mu,v)^\mathsf T\)</span>.</li>
+<li>Hitung <span class="math-inline" role="math">\(I_\theta(\mu,v)\)</span>.</li>
+<li>Gunakan reparametrisasi <span class="math-inline" role="math">\(\eta=(\mu,\tau)^\mathsf T\)</span> dengan
+<span class="math-inline" role="math">\(\tau=\log v\)</span>. Hitung Jacobian
+<span class="math-inline" role="math">\(H=\partial\theta/\partial\eta^\mathsf T\)</span> dan informasi <span class="math-inline" role="math">\(I_\eta\)</span>.</li>
+<li>Jelaskan arti elemen luar-diagonal nol dan apakah hal itu menjadikan
+estimator <span class="math-inline" role="math">\(\widehat\mu\)</span> dan <span class="math-inline" role="math">\(\widehat v\)</span> independen pada setiap model.</li>
+</ol>
+<p><a id="O006-C140-CMP-MS07-P03-H01"></a></p>
+<h3>Petunjuk 1</h3>
+<p>Gunakan momen terpusat Normal sampai orde empat:
+<span class="math-inline" role="math">\(E(X-\mu)^2=v\)</span>, <span class="math-inline" role="math">\(E(X-\mu)^3=0\)</span>, dan <span class="math-inline" role="math">\(E(X-\mu)^4=3v^2\)</span>.</p>
+<p><a id="O006-C140-CMP-MS07-P03-H02"></a></p>
+<h3>Petunjuk 2</h3>
+<p>Karena <span class="math-inline" role="math">\(v=e^\tau\)</span>,</p>
+<div class="math-display" role="math">\[H=
+\begin{pmatrix}
+1&amp;0\\
+0&amp;e^\tau
+\end{pmatrix},\]</div>
+<p>dan gunakan <span class="math-inline" role="math">\(I_\eta=H^\mathsf T I_\theta H\)</span>.</p>
+<p><a id="O006-C140-CMP-MS07-P03-ANS"></a></p>
+<h3>Jawaban singkat</h3>
+<p>Skor adalah
+<span class="math-inline" role="math">\(s_\mu=(X-\mu)/v\)</span> dan
+<span class="math-inline" role="math">\(s_v=-1/(2v)+(X-\mu)^2/(2v^2)\)</span>.
+Informasi dalam koordinat <span class="math-inline" role="math">\((\mu,v)\)</span> adalah
+<span class="math-inline" role="math">\(\operatorname{diag}(1/v,1/(2v^2))\)</span>; dalam koordinat <span class="math-inline" role="math">\((\mu,\log v)\)</span> menjadi
+<span class="math-inline" role="math">\(\operatorname{diag}(e^{-\tau},1/2)\)</span>. Nolnya elemen silang menyatakan
+ortogonalitas informasi lokal, bukan independensi universal estimator.</p>
+<p><a id="O006-C140-CMP-MS07-P03-SOL"></a></p>
+<h3>Solusi lengkap</h3>
+<p>Log-densitas per observasi ialah</p>
+<div class="math-display" role="math">\[\ell(\mu,v;x)
+=-\frac12\log(2\pi v)-\frac{(x-\mu)^2}{2v}.\]</div>
+<p>Turunan komponennya</p>
+<div class="math-display" role="math">\[s_\mu=\frac{x-\mu}{v},
+\qquad
+s_v=-\frac1{2v}+\frac{(x-\mu)^2}{2v^2}.\]</div>
+<p>Nilai harapan kedua skor nol. Untuk elemen informasi,</p>
+<div class="math-display" role="math">\[E(s_\mu^2)=\frac{E(X-\mu)^2}{v^2}=\frac1v,\]</div>
+<div class="math-display" role="math">\[E(s_\mu s_v)
+=-\frac{E(X-\mu)}{2v^2}
++\frac{E(X-\mu)^3}{2v^3}=0,\]</div>
+<p>dan</p>
+<div class="math-display" role="math">\[E(s_v^2)
+=\frac1{4v^2}
+-\frac{E(X-\mu)^2}{2v^3}
++\frac{E(X-\mu)^4}{4v^4}
+=\frac1{2v^2}.\]</div>
+<p>Jadi</p>
+<div class="math-display" role="math">\[I_\theta=
+\begin{pmatrix}
+1/v&amp;0\\
+0&amp;1/(2v^2)
+\end{pmatrix}.\]</div>
+<p>Untuk <span class="math-inline" role="math">\(\theta=h(\eta)=(\mu,e^\tau)^\mathsf T\)</span>,
+<span class="math-inline" role="math">\(H=\operatorname{diag}(1,e^\tau)=\operatorname{diag}(1,v)\)</span>. Teorema
+reparametrisasi <a class="xref" data-target-id="O006-C140-CMP-D001-THM-REPARAMETERIZATION" href="../theory/O006-C140-CMP-D001.html#O006-C140-CMP-D001-THM-REPARAMETERIZATION">Teorema: transformasi informasi</a> memberi</p>
+<div class="math-display" role="math">\[I_\eta=H^\mathsf T I_\theta H
+=
+\begin{pmatrix}
+e^{-\tau}&amp;0\\
+0&amp;1/2
+\end{pmatrix}.\]</div>
+<p>Elemen silang nol berarti arah lokasi dan log-varians ortogonal dalam geometri
+informasi pada model Normal. Itu tidak membenarkan kebiasaan menghapus
+kovarians silang pada model lain. Bahkan bila limit asimtotiknya independen,
+independensi sampel hingga perlu dibuktikan dari hukum gabungan estimator;
+ia tidak mengikuti hanya dari sebuah matriks informasi diagonal.</p>
+<p><a id="O006-C140-CMP-MS07-P04"></a></p>
+<h2>Soal 4 — Konsistensi Bernoulli melalui KL, ULLN, dan argmax</h2>
+<!--PROBLEM_META {"id":"O006-C140-CMP-MS07-P04","prerequisites":["O006-C140-CMP-D002-THM-KL-IDENTIFICATION","O006-C140-CMP-D002-THM-ULLN","O006-C140-CMP-D002-THM-ARGMAX"],"objective":"merangkai bukti konsistensi MLE tanpa melompati uniformitas","difficulty":"lanjut","misconceptions":["hukum bilangan besar titik demi titik cukup untuk pemaksimum acak","identifiabilitas saja membuktikan konsistensi"]}-->
+<p>Misalkan <span class="math-inline" role="math">\(X_i\sim\operatorname{Bernoulli}(p_0)\)</span> iid, dengan
+<span class="math-inline" role="math">\(p_0\in[a,1-a]\)</span> dan <span class="math-inline" role="math">\(0&lt;a&lt;1/2\)</span>. Ruang parameter adalah
+<span class="math-inline" role="math">\(\Theta=[a,1-a]\)</span>.</p>
+<ol>
+<li>Tulis kriteria <span class="math-inline" role="math">\(M_n(p)\)</span> dan <span class="math-inline" role="math">\(M(p)\)</span>.</li>
+<li>Buktikan bahwa <span class="math-inline" role="math">\(M\)</span> mempunyai pemaksimum unik <span class="math-inline" role="math">\(p_0\)</span>.</li>
+<li>Verifikasi syarat Lipschitz acak untuk ULLN.</li>
+<li>Buktikan pemisahan argmax untuk setiap <span class="math-inline" role="math">\(\varepsilon&gt;0\)</span>.</li>
+<li>Simpulkan bahwa MLE berkendala konsisten, termasuk jika algoritme hanya
+menghasilkan pemaksimum hampiran dengan galat <span class="math-inline" role="math">\(r_n=o_P(1)\)</span>.</li>
+</ol>
+<p><a id="O006-C140-CMP-MS07-P04-H01"></a></p>
+<h3>Petunjuk 1</h3>
+<p>Gunakan
+<span class="math-inline" role="math">\(M(p)-M(p_0)=-D_{\mathrm{KL}}(\operatorname{Bern}(p_0)\|\operatorname{Bern}(p))\)</span>.</p>
+<p><a id="O006-C140-CMP-MS07-P04-H02"></a></p>
+<h3>Petunjuk 2</h3>
+<p>Turunan <span class="math-inline" role="math">\(m_p(x)=x\log p+(1-x)\log(1-p)\)</span> dibatasi nilai mutlaknya oleh
+<span class="math-inline" role="math">\(1/a\)</span> pada <span class="math-inline" role="math">\(\Theta\)</span>. Kekompakan dan kontinuitas mengubah keunikan maksimum
+menjadi celah positif di luar bola <span class="math-inline" role="math">\(\varepsilon\)</span>.</p>
+<p><a id="O006-C140-CMP-MS07-P04-ANS"></a></p>
+<h3>Jawaban singkat</h3>
+<p><span class="math-inline" role="math">\(M_n(p)=\bar X\log p+(1-\bar X)\log(1-p)\)</span> dan
+<span class="math-inline" role="math">\(M(p)=p_0\log p+(1-p_0)\log(1-p)\)</span>. Identifikasi KL memberi maksimum unik;
+batas turunan <span class="math-inline" role="math">\(1/a\)</span> memberi ULLN; kontinuitas pada parameter kompak memberi
+pemisahan. Teorema argmax kemudian memberi
+<span class="math-inline" role="math">\(\widehat p_n\xrightarrow{P}p_0\)</span> bagi MLE eksak maupun hampiran.</p>
+<p><a id="O006-C140-CMP-MS07-P04-SOL"></a></p>
+<h3>Solusi lengkap</h3>
+<p>Kriteria per observasi dan rata-ratanya ialah</p>
+<div class="math-display" role="math">\[m_p(x)=x\log p+(1-x)\log(1-p),\]</div>
+<div class="math-display" role="math">\[M_n(p)=\bar X_n\log p+(1-\bar X_n)\log(1-p).\]</div>
+<p>Mengambil harapan di bawah <span class="math-inline" role="math">\(p_0\)</span> memberi</p>
+<div class="math-display" role="math">\[M(p)=p_0\log p+(1-p_0)\log(1-p).\]</div>
+<p>Model Bernoulli teridentifikasi. Oleh identifikasi KL
+<a class="xref" data-target-id="O006-C140-CMP-D002-THM-KL-IDENTIFICATION" href="../theory/O006-C140-CMP-D002.html#O006-C140-CMP-D002-THM-KL-IDENTIFICATION">Teorema: identifikasi kriteria populasi</a>,</p>
+<div class="math-display" role="math">\[M(p)-M(p_0)
+=-D_{\mathrm{KL}}\{\operatorname{Bern}(p_0)\|
+\operatorname{Bern}(p)\}\le0,\]</div>
+<p>dengan kesamaan hanya pada <span class="math-inline" role="math">\(p=p_0\)</span>.</p>
+<p>Untuk <span class="math-inline" role="math">\(p\in[a,1-a]\)</span>,</p>
+<div class="math-display" role="math">\[\left|\partial_p m_p(x)\right|
+=\left|\frac{x}{p}-\frac{1-x}{1-p}\right|
+\le\frac1a.\]</div>
+<p>Teorema nilai rata-rata memberi
+<span class="math-inline" role="math">\(|m_p(x)-m_q(x)|\le a^{-1}|p-q|\)</span>. Jadi ULLN
+<a class="xref" data-target-id="O006-C140-CMP-D002-THM-ULLN" href="../theory/O006-C140-CMP-D002.html#O006-C140-CMP-D002-THM-ULLN">Teorema: ULLN Lipschitz pada himpunan kompak</a> berlaku dengan selubung konstan
+<span class="math-inline" role="math">\(L(X)=1/a\)</span>.</p>
+<p>Untuk <span class="math-inline" role="math">\(\varepsilon&gt;0\)</span>, himpunan
+<span class="math-inline" role="math">\(A_\varepsilon=\{p\in\Theta:|p-p_0|\ge\varepsilon\}\)</span> tertutup di dalam
+himpunan kompak, sehingga kompak. Kontinuitas <span class="math-inline" role="math">\(M\)</span> menjamin maksimum pada
+<span class="math-inline" role="math">\(A_\varepsilon\)</span> tercapai; keunikan maksimum global membuat</p>
+<div class="math-display" role="math">\[\Delta_\varepsilon
+=M(p_0)-\sup_{p\in A_\varepsilon}M(p)&gt;0.\]</div>
+<p>Konvergensi seragam dan celah ini memenuhi hipotesis teorema argmax
+<a class="xref" data-target-id="O006-C140-CMP-D002-THM-ARGMAX" href="../theory/O006-C140-CMP-D002.html#O006-C140-CMP-D002-THM-ARGMAX">Teorema: konsistensi pemaksimum hampiran</a>. Maka setiap
+<span class="math-inline" role="math">\(\widehat p_n\)</span> dengan
+<span class="math-inline" role="math">\(M_n(\widehat p_n)\ge\sup_\Theta M_n-r_n\)</span> dan <span class="math-inline" role="math">\(r_n=o_P(1)\)</span> memenuhi
+<span class="math-inline" role="math">\(\widehat p_n\xrightarrow{P}p_0\)</span>. Bukti tidak bergantung pada formula tertutup MLE.</p>
+<p><a id="O006-C140-CMP-MS07-P05"></a></p>
+<h2>Soal 5 — Konsistensi tidak menyiratkan konvergensi harapan</h2>
+<!--PROBLEM_META {"id":"O006-C140-CMP-MS07-P05","prerequisites":["O006-C140-CMP-D002-DEF-CONSISTENCY","O006-C140-CMP-D002-DEF-UI","O006-C140-CMP-D002-THM-UI-EXPECTATION"],"objective":"membedakan konvergensi probabilitas, L1, dan nilai harapan","difficulty":"menengah","misconceptions":["estimator konsisten otomatis asimtotik tak bias","peluang ekor yang menuju nol selalu membuat kontribusi harapan hilang"]}-->
+<p>Definisikan peubah acak</p>
+<div class="math-display" role="math">\[T_n=
+\begin{cases}
+n,&amp;\text{dengan probabilitas }1/n,\\
+0,&amp;\text{dengan probabilitas }1-1/n.
+\end{cases}\]</div>
+<ol>
+<li>Buktikan <span class="math-inline" role="math">\(T_n\xrightarrow{P}0\)</span> tetapi <span class="math-inline" role="math">\(ET_n\nrightarrow0\)</span>.</li>
+<li>Tunjukkan bahwa <span class="math-inline" role="math">\(\{T_n\}\)</span> tidak uniformly integrable.</li>
+<li>Misalkan sekarang <span class="math-inline" role="math">\(\widehat\theta_n\xrightarrow{P}\theta_0\)</span> dan
+<span class="math-inline" role="math">\(|\widehat\theta_n|\le C\)</span> hampir pasti untuk seluruh <span class="math-inline" role="math">\(n\)</span>. Buktikan
+<span class="math-inline" role="math">\(E|\widehat\theta_n-\theta_0|\to0\)</span> dan
+<span class="math-inline" role="math">\(E\widehat\theta_n\to\theta_0\)</span>.</li>
+<li>Jelaskan mengapa klaim “konsistensi MLE berarti biasnya menuju nol” harus
+menyebut syarat tambahan.</li>
+</ol>
+<p><a id="O006-C140-CMP-MS07-P05-H01"></a></p>
+<h3>Petunjuk 1</h3>
+<p>Untuk bagian pertama, hitung peluang <span class="math-inline" role="math">\(P(|T_n|&gt;\varepsilon)\)</span> dan harapan
+langsung. Untuk UI, pilih <span class="math-inline" role="math">\(n&gt;K\)</span>.</p>
+<p><a id="O006-C140-CMP-MS07-P05-H02"></a></p>
+<h3>Petunjuk 2</h3>
+<p>Keterbatasan seragam membuat keluarga estimator UI. Anda juga dapat membuktikan
+konvergensi <span class="math-inline" role="math">\(L^1\)</span> langsung dengan membagi harapan pada kejadian
+<span class="math-inline" role="math">\(|\widehat\theta_n-\theta_0|\le\varepsilon\)</span> dan komplemennya.</p>
+<p><a id="O006-C140-CMP-MS07-P05-ANS"></a></p>
+<h3>Jawaban singkat</h3>
+<p><span class="math-inline" role="math">\(P(|T_n|&gt;\varepsilon)=1/n\to0\)</span> untuk <span class="math-inline" role="math">\(n&gt;\varepsilon\)</span>, tetapi <span class="math-inline" role="math">\(ET_n=1\)</span>.
+Untuk setiap <span class="math-inline" role="math">\(K\)</span>, pilih <span class="math-inline" role="math">\(n&gt;K\)</span> sehingga
+<span class="math-inline" role="math">\(E[T_n\mathbf1\{T_n&gt;K\}]=1\)</span>; jadi UI gagal. Estimator yang terbatas seragam
+adalah UI, sehingga konsistensi plus UI memberi konvergensi <span class="math-inline" role="math">\(L^1\)</span> dan harapan.</p>
+<p><a id="O006-C140-CMP-MS07-P05-SOL"></a></p>
+<h3>Solusi lengkap</h3>
+<p>Untuk <span class="math-inline" role="math">\(\varepsilon&gt;0\)</span> tetap dan <span class="math-inline" role="math">\(n&gt;\varepsilon\)</span>,</p>
+<div class="math-display" role="math">\[P(|T_n|&gt;\varepsilon)=P(T_n=n)=\frac1n\longrightarrow0.\]</div>
+<p>Jadi <span class="math-inline" role="math">\(T_n\xrightarrow{P}0\)</span>. Namun</p>
+<div class="math-display" role="math">\[ET_n=n\frac1n+0\left(1-\frac1n\right)=1.\]</div>
+<p>Konvergensi probabilitas tidak mengendalikan kontribusi kejadian langka dengan
+nilai besar. Untuk setiap <span class="math-inline" role="math">\(K&gt;0\)</span>, ambil bilangan bulat <span class="math-inline" role="math">\(n&gt;K\)</span>. Maka</p>
+<div class="math-display" role="math">\[E\{T_n\mathbf1(T_n&gt;K)\}=n\frac1n=1.\]</div>
+<p>Akibatnya supremum terhadap <span class="math-inline" role="math">\(n\)</span> tidak menuju nol saat <span class="math-inline" role="math">\(K\to\infty\)</span>, sehingga
+UI gagal menurut <a class="xref" data-target-id="O006-C140-CMP-D002-DEF-UI" href="../theory/O006-C140-CMP-D002.html#O006-C140-CMP-D002-DEF-UI">Definisi: uniform integrability</a>.</p>
+<p>Untuk estimator terbatas, konsistensi juga memaksa
+<span class="math-inline" role="math">\(|\theta_0|\le C\)</span>: jika tidak, jarak estimator dari <span class="math-inline" role="math">\(\theta_0\)</span> dibatasi bawah
+oleh bilangan positif. Karena
+<span class="math-inline" role="math">\(|\widehat\theta_n-\theta_0|\le2C\)</span>, untuk setiap <span class="math-inline" role="math">\(\varepsilon&gt;0\)</span>,</p>
+<div class="math-display" role="math">\[E|\widehat\theta_n-\theta_0|
+\le\varepsilon
++2C\,P(|\widehat\theta_n-\theta_0|&gt;\varepsilon).\]</div>
+<p>Limit superior paling besar <span class="math-inline" role="math">\(\varepsilon\)</span>; ambil
+<span class="math-inline" role="math">\(\varepsilon\downarrow0\)</span>. Jadi konvergensi <span class="math-inline" role="math">\(L^1\)</span> berlaku. Selanjutnya</p>
+<div class="math-display" role="math">\[|E\widehat\theta_n-\theta_0|
+\le E|\widehat\theta_n-\theta_0|\to0.\]</div>
+<p>Secara ekuivalen, keterbatasan seragam memberi UI dan teorema
+<a class="xref" data-target-id="O006-C140-CMP-D002-THM-UI-EXPECTATION" href="../theory/O006-C140-CMP-D002.html#O006-C140-CMP-D002-THM-UI-EXPECTATION">Teorema: UI mengangkat konvergensi probabilitas menjadi konvergensi harapan</a> dapat diterapkan. Maka klaim bias
+menuju nol memerlukan UI, keterbatasan, kontrol momen, atau syarat ekor lain;
+konsistensi saja tidak cukup.</p>
+<p><a id="O006-C140-CMP-MS07-P06"></a></p>
+<h2>Soal 6 — MLE eksponensial: dua jalan menuju limit yang sama</h2>
+<!--PROBLEM_META {"id":"O006-C140-CMP-MS07-P06","prerequisites":["O006-C140-CMP-D003-THM-MLE-AN","O006-C140-CMP-D003-THM-DELTA-SCALAR","O006-C140-CMP-MS07-P01"],"objective":"menurunkan normalitas MLE melalui informasi dan delta method lalu mencocokkan hasil","difficulty":"menengah","misconceptions":["delta method dan teorema MLE boleh memberi varians berbeda","informasi sampel sama dengan informasi per observasi"]}-->
+<p>Misalkan <span class="math-inline" role="math">\(X_1,\ldots,X_n\)</span> iid eksponensial dengan laju <span class="math-inline" role="math">\(\lambda&gt;0\)</span>.</p>
+<ol>
+<li>Temukan MLE <span class="math-inline" role="math">\(\widehat\lambda_n\)</span>.</li>
+<li>Hitung informasi Fisher per observasi dan gunakan teorema normalitas MLE
+untuk memperoleh limit <span class="math-inline" role="math">\(\sqrt n(\widehat\lambda_n-\lambda)\)</span>.</li>
+<li>Peroleh limit yang sama dengan menerapkan CLT pada <span class="math-inline" role="math">\(\bar X\)</span> dan delta
+method pada <span class="math-inline" role="math">\(g(x)=1/x\)</span>.</li>
+<li>Turunkan galat baku plug-in dan interval Wald asimtotik 95%.</li>
+<li>Sebutkan kelemahan interval itu ketika <span class="math-inline" role="math">\(\widehat\lambda_n\)</span> sangat tidak
+presisi.</li>
+</ol>
+<p><a id="O006-C140-CMP-MS07-P06-H01"></a></p>
+<h3>Petunjuk 1</h3>
+<p>Log-likelihood adalah
+<span class="math-inline" role="math">\(n\log\lambda-\lambda\sum_iX_i\)</span>. Untuk satu observasi,
+<span class="math-inline" role="math">\(s_\lambda=1/\lambda-X\)</span>.</p>
+<p><a id="O006-C140-CMP-MS07-P06-H02"></a></p>
+<h3>Petunjuk 2</h3>
+<p><span class="math-inline" role="math">\(E(X)=1/\lambda\)</span> dan
+<span class="math-inline" role="math">\(\operatorname{Var}(X)=1/\lambda^2\)</span>. Pada <span class="math-inline" role="math">\(g(x)=1/x\)</span>,
+<span class="math-inline" role="math">\(g'(1/\lambda)=-\lambda^2\)</span>.</p>
+<p><a id="O006-C140-CMP-MS07-P06-ANS"></a></p>
+<h3>Jawaban singkat</h3>
+<p><span class="math-inline" role="math">\(\widehat\lambda=1/\bar X\)</span>,
+<span class="math-inline" role="math">\(I(\lambda)=1/\lambda^2\)</span>, dan
+<span class="math-inline" role="math">\(\sqrt n(\widehat\lambda-\lambda)\Rightarrow N(0,\lambda^2)\)</span>.
+Galat baku plug-in adalah <span class="math-inline" role="math">\(\widehat\lambda/\sqrt n\)</span>; interval Wald 95% ialah
+<span class="math-inline" role="math">\(\widehat\lambda\{1\pm1.96/\sqrt n\}\)</span>, tetapi ujung bawahnya dapat negatif
+pada sampel kecil.</p>
+<p><a id="O006-C140-CMP-MS07-P06-SOL"></a></p>
+<h3>Solusi lengkap</h3>
+<p>Turunan log-likelihood</p>
+<div class="math-display" role="math">\[\ell_n(\lambda)=n\log\lambda-\lambda\sum_iX_i\]</div>
+<p>adalah <span class="math-inline" role="math">\(n/\lambda-\sum_iX_i\)</span>. Hessian <span class="math-inline" role="math">\(-n/\lambda^2&lt;0\)</span>, sehingga akar tunggal</p>
+<div class="math-display" role="math">\[\widehat\lambda_n=\frac n{\sum_iX_i}=\frac1{\bar X}\]</div>
+<p>adalah maksimum. Skor per observasi <span class="math-inline" role="math">\(1/\lambda-X\)</span> mempunyai varians
+<span class="math-inline" role="math">\(1/\lambda^2\)</span>, jadi <span class="math-inline" role="math">\(I(\lambda)=1/\lambda^2\)</span>. Teorema MLE
+<a class="xref" data-target-id="O006-C140-CMP-D003-THM-MLE-AN" href="../theory/O006-C140-CMP-D003.html#O006-C140-CMP-D003-THM-MLE-AN">Teorema: normalitas asimtotik MLE</a> memberi</p>
+<div class="math-display" role="math">\[\sqrt n(\widehat\lambda_n-\lambda)
+\Rightarrow N(0,I(\lambda)^{-1})
+=N(0,\lambda^2).\]</div>
+<p>Sebagai pemeriksaan independen, CLT memberi</p>
+<div class="math-display" role="math">\[\sqrt n(\bar X-1/\lambda)\Rightarrow N(0,1/\lambda^2).\]</div>
+<p>Dengan <span class="math-inline" role="math">\(g(x)=1/x\)</span> dan <span class="math-inline" role="math">\(g'(1/\lambda)=-\lambda^2\)</span>, delta method memberi varians
+limit</p>
+<div class="math-display" role="math">\[\lambda^4\frac1{\lambda^2}=\lambda^2,\]</div>
+<p>sama dengan hasil informasi. Estimator kovarians orde pertama adalah
+<span class="math-inline" role="math">\(\widehat\lambda^2/n\)</span>, sehingga</p>
+<div class="math-display" role="math">\[\widehat{\operatorname{se}}(\widehat\lambda)
+=\frac{\widehat\lambda}{\sqrt n}.\]</div>
+<p>Interval Wald 95% ialah</p>
+<div class="math-display" role="math">\[\widehat\lambda\pm1.96\frac{\widehat\lambda}{\sqrt n}.\]</div>
+<p>Karena ruang parameter hanya positif, interval simetris dapat mempunyai ujung
+negatif bila ketidakpastian besar. Interval untuk <span class="math-inline" role="math">\(\log\lambda\)</span> yang kemudian
+dieksponensialkan menghormati positivitas dan sering lebih masuk akal secara
+geometris, walaupun tetap asimtotik.</p>
+<p><a id="O006-C140-CMP-MS07-P07"></a></p>
+<h2>Soal 7 — Delta method multivariat untuk rasio dua laju</h2>
+<!--PROBLEM_META {"id":"O006-C140-CMP-MS07-P07","prerequisites":["O006-C140-CMP-D003-THM-DELTA-MULTIVARIATE","O006-C140-CMP-MS07-P06","B40"],"objective":"membangun Jacobian dan kovarians transformasi multivariat","difficulty":"lanjut","misconceptions":["varians rasio adalah rasio varians","ukuran sampel berbeda dapat diserap tanpa mengubah skala"]}-->
+<p>Dua sampel independen tersedia:
+<span class="math-inline" role="math">\(X_1,\ldots,X_n\sim\operatorname{Exp}(\lambda_1)\)</span> dan
+<span class="math-inline" role="math">\(Y_1,\ldots,Y_m\sim\operatorname{Exp}(\lambda_2)\)</span>, dengan
+<span class="math-inline" role="math">\(m/n\to\rho\in(0,\infty)\)</span>. MLE masing-masing adalah
+<span class="math-inline" role="math">\(\widehat\lambda_1=1/\bar X\)</span> dan
+<span class="math-inline" role="math">\(\widehat\lambda_2=1/\bar Y\)</span>.</p>
+<p>Untuk target log-rasio</p>
+<div class="math-display" role="math">\[\psi=\log(\lambda_1/\lambda_2),\]</div>
+<ol>
+<li>tentukan limit gabungan pada skala <span class="math-inline" role="math">\(\sqrt n\)</span>;</li>
+<li>tulis Jacobian <span class="math-inline" role="math">\(g(\lambda_1,\lambda_2)=\log\lambda_1-\log\lambda_2\)</span>;</li>
+<li>turunkan distribusi asimtotik
+<span class="math-inline" role="math">\(\widehat\psi=\log(\widehat\lambda_1/\widehat\lambda_2)\)</span>; dan</li>
+<li>berikan galat baku plug-in serta interval 95% untuk rasio
+<span class="math-inline" role="math">\(\lambda_1/\lambda_2\)</span>.</li>
+</ol>
+<p><a id="O006-C140-CMP-MS07-P07-H01"></a></p>
+<h3>Petunjuk 1</h3>
+<p>Pada skala <span class="math-inline" role="math">\(\sqrt n\)</span>, komponen sampel kedua memperoleh faktor
+<span class="math-inline" role="math">\(\sqrt{n/m}\to1/\sqrt\rho\)</span>.</p>
+<p><a id="O006-C140-CMP-MS07-P07-H02"></a></p>
+<h3>Petunjuk 2</h3>
+<p>Jacobian log-rasio adalah
+<span class="math-inline" role="math">\(G=(1/\lambda_1,-1/\lambda_2)\)</span>. Independensi membuat matriks kovarians limit
+diagonal.</p>
+<p><a id="O006-C140-CMP-MS07-P07-ANS"></a></p>
+<h3>Jawaban singkat</h3>
+<p>Pada skala <span class="math-inline" role="math">\(\sqrt n\)</span>, kovarians limit
+<span class="math-inline" role="math">\(\operatorname{diag}(\lambda_1^2,\lambda_2^2/\rho)\)</span>.
+Karena itu
+<span class="math-inline" role="math">\(\sqrt n(\widehat\psi-\psi)\Rightarrow N(0,1+1/\rho)\)</span>. Galat baku sampel adalah
+<span class="math-inline" role="math">\(\sqrt{1/n+1/m}\)</span>; interval rasio diperoleh dengan mengeksponensialkan
+<span class="math-inline" role="math">\(\widehat\psi\pm1.96\sqrt{1/n+1/m}\)</span>.</p>
+<p><a id="O006-C140-CMP-MS07-P07-SOL"></a></p>
+<h3>Solusi lengkap</h3>
+<p>Dari Soal 6,</p>
+<div class="math-display" role="math">\[\sqrt n(\widehat\lambda_1-\lambda_1)
+\Rightarrow N(0,\lambda_1^2)\]</div>
+<p>dan</p>
+<div class="math-display" role="math">\[\sqrt m(\widehat\lambda_2-\lambda_2)
+\Rightarrow N(0,\lambda_2^2).\]</div>
+<p>Karena sampel independen,</p>
+<div class="math-display" role="math">\[\sqrt n
+\begin{pmatrix}
+\widehat\lambda_1-\lambda_1\\
+\widehat\lambda_2-\lambda_2
+\end{pmatrix}
+\Rightarrow
+N_2\left[
+0,
+\begin{pmatrix}
+\lambda_1^2&amp;0\\
+0&amp;\lambda_2^2/\rho
+\end{pmatrix}
+\right].\]</div>
+<p>Faktor <span class="math-inline" role="math">\(1/\rho\)</span> muncul karena
+<span class="math-inline" role="math">\(\sqrt n(\widehat\lambda_2-\lambda_2)=\sqrt{n/m}\,\sqrt m(\widehat\lambda_2-\lambda_2)\)</span>.</p>
+<p>Untuk <span class="math-inline" role="math">\(g(\lambda_1,\lambda_2)=\log\lambda_1-\log\lambda_2\)</span>,</p>
+<div class="math-display" role="math">\[G=
+\begin{pmatrix}
+1/\lambda_1&amp;-1/\lambda_2
+\end{pmatrix}.\]</div>
+<p>Delta method multivariat
+<a class="xref" data-target-id="O006-C140-CMP-D003-THM-DELTA-MULTIVARIATE" href="../theory/O006-C140-CMP-D003.html#O006-C140-CMP-D003-THM-DELTA-MULTIVARIATE">Teorema: delta method multivariat</a> memberi</p>
+<div class="math-display" role="math">\[G
+\begin{pmatrix}
+\lambda_1^2&amp;0\\
+0&amp;\lambda_2^2/\rho
+\end{pmatrix}
+G^\mathsf T
+=1+\frac1\rho.\]</div>
+<p>Dalam skala sampel asli, varians hampiran
+<span class="math-inline" role="math">\(1/n+1/m\)</span>. Jadi interval 95% untuk <span class="math-inline" role="math">\(\psi\)</span> adalah</p>
+<div class="math-display" role="math">\[\widehat\psi\pm1.96\sqrt{\frac1n+\frac1m}.\]</div>
+<p>Eksponensiasi kedua ujung menghasilkan interval positif untuk rasio:</p>
+<div class="math-display" role="math">\[\left[
+\frac{\widehat\lambda_1}{\widehat\lambda_2}
+\exp\!\left\{-1.96\sqrt{1/n+1/m}\right\},
+\frac{\widehat\lambda_1}{\widehat\lambda_2}
+\exp\!\left\{1.96\sqrt{1/n+1/m}\right\}
+\right].\]</div>
+<p><a id="O006-C140-CMP-MS07-P08"></a></p>
+<h2>Soal 8 — Audit lengkap model Poisson dan transformasi probabilitas</h2>
+<!--PROBLEM_META {"id":"O006-C140-CMP-MS07-P08","prerequisites":["O006-C140-CMP-D001-ASM-R1-R6","O006-C140-CMP-D002-THM-MLE-CONSISTENCY","O006-C140-CMP-D003-THM-MLE-AN","O006-C140-CMP-D003-THM-DELTA-SCALAR"],"objective":"mengintegrasikan audit regularitas, konsistensi, normalitas, dan delta method","difficulty":"lanjut","misconceptions":["memeriksa formula skor sudah cukup untuk normalitas","probabilitas kejadian nol memiliki varians binomial plug-in yang sama dengan transformasi MLE"]}-->
+<p>Misalkan <span class="math-inline" role="math">\(X_i\sim\operatorname{Poisson}(\lambda_0)\)</span> iid dengan
+<span class="math-inline" role="math">\(\lambda_0&gt;0\)</span>, dan target ilmiah adalah probabilitas kejadian nol
+<span class="math-inline" role="math">\(q_0=P_{\lambda_0}(X=0)=e^{-\lambda_0}\)</span>.</p>
+<ol>
+<li>Audit dominasi, support, identifiabilitas, titik interior, pertukaran
+turunan-jumlah, dan nonsingularitas informasi.</li>
+<li>Temukan MLE <span class="math-inline" role="math">\(\widehat\lambda\)</span> dan buktikan konsistensinya.</li>
+<li>Turunkan normalitas asimtotik <span class="math-inline" role="math">\(\widehat\lambda\)</span>.</li>
+<li>Gunakan delta method untuk
+<span class="math-inline" role="math">\(\widehat q=e^{-\widehat\lambda}\)</span>.</li>
+<li>Bandingkan varians asimtotik <span class="math-inline" role="math">\(\widehat q\)</span> dengan varians estimator empiris
+<span class="math-inline" role="math">\(\widetilde q=n^{-1}\sum_i\mathbf1\{X_i=0\}\)</span>. Mana yang lebih kecil, dan
+mengapa hal itu tidak melanggar prinsip informasi?</li>
+</ol>
+<p><a id="O006-C140-CMP-MS07-P08-H01"></a></p>
+<h3>Petunjuk 1</h3>
+<p>Terhadap ukuran pencacahan pada <span class="math-inline" role="math">\(\{0,1,\ldots\}\)</span>,
+<span class="math-inline" role="math">\(f_\lambda(x)=e^{-\lambda}\lambda^x/x!\)</span> dan
+<span class="math-inline" role="math">\(s_\lambda=x/\lambda-1\)</span>.</p>
+<p><a id="O006-C140-CMP-MS07-P08-H02"></a></p>
+<h3>Petunjuk 2</h3>
+<p>Untuk membandingkan varians, tulis <span class="math-inline" role="math">\(q=e^{-\lambda}\)</span> dan gunakan
+<span class="math-inline" role="math">\(e^\lambda&gt;1+\lambda\)</span> bagi <span class="math-inline" role="math">\(\lambda&gt;0\)</span>.</p>
+<p><a id="O006-C140-CMP-MS07-P08-ANS"></a></p>
+<h3>Jawaban singkat</h3>
+<p>Model Poisson reguler untuk <span class="math-inline" role="math">\(\lambda_0&gt;0\)</span>,
+<span class="math-inline" role="math">\(\widehat\lambda=\bar X\)</span>, dan
+<span class="math-inline" role="math">\(\sqrt n(\widehat\lambda-\lambda_0)\Rightarrow N(0,\lambda_0)\)</span>.
+Untuk <span class="math-inline" role="math">\(\widehat q=e^{-\bar X}\)</span>,
+<span class="math-inline" role="math">\(\sqrt n(\widehat q-q_0)\Rightarrow N(0,\lambda_0q_0^2)\)</span>. Estimator empiris mempunyai varians limit
+<span class="math-inline" role="math">\(q_0(1-q_0)\)</span>, yang lebih besar karena
+<span class="math-inline" role="math">\(q_0(1-q_0)-\lambda_0q_0^2=q_0^2(e^{\lambda_0}-1-\lambda_0)&gt;0\)</span>.</p>
+<p><a id="O006-C140-CMP-MS07-P08-SOL"></a></p>
+<h3>Solusi lengkap</h3>
+<p>Ukuran pencacahan mendominasi keluarga dan support
+<span class="math-inline" role="math">\(\{0,1,\ldots\}\)</span> tidak bergantung pada <span class="math-inline" role="math">\(\lambda&gt;0\)</span>. Model teridentifikasi
+karena <span class="math-inline" role="math">\(EX=\lambda\)</span>. Parameter benar positif merupakan titik interior
+<span class="math-inline" role="math">\((0,\infty)\)</span>. Penjumlahan turunan dapat dibenarkan lokal, misalnya melalui
+selubung deret eksponensial pada lingkungan kompak <span class="math-inline" role="math">\(\lambda\)</span>; atau identitas
+skor dapat diverifikasi langsung dari momen Poisson. Skor dan informasi ialah</p>
+<div class="math-display" role="math">\[s_\lambda(X)=\frac X\lambda-1,
+\qquad
+I(\lambda)=\frac{\operatorname{Var}(X)}{\lambda^2}
+=\frac1\lambda,\]</div>
+<p>yang hingga dan positif pada <span class="math-inline" role="math">\(\lambda_0&gt;0\)</span>.</p>
+<p>Log-likelihood, selain konstanta data,</p>
+<div class="math-display" role="math">\[\ell_n(\lambda)
+=-\!n\lambda+\left(\sum_iX_i\right)\log\lambda\]</div>
+<p>dimaksimumkan pada <span class="math-inline" role="math">\(\widehat\lambda=\bar X\)</span> bila jumlah positif. Di bawah
+<span class="math-inline" role="math">\(\lambda_0&gt;0\)</span>, peluang seluruh observasi nol adalah
+<span class="math-inline" role="math">\(e^{-n\lambda_0}\to0\)</span>; pada kejadian komplemennya maksimum interior unik.
+Hukum bilangan besar memberi <span class="math-inline" role="math">\(\bar X\xrightarrow{P}\lambda_0\)</span>, sebuah bukti langsung
+konsistensi yang sejalan dengan teorema argmax. CLT atau teorema MLE memberi</p>
+<div class="math-display" role="math">\[\sqrt n(\widehat\lambda-\lambda_0)
+\Rightarrow N(0,I(\lambda_0)^{-1})
+=N(0,\lambda_0).\]</div>
+<p>Untuk <span class="math-inline" role="math">\(g(\lambda)=e^{-\lambda}\)</span>, <span class="math-inline" role="math">\(g'(\lambda)=-e^{-\lambda}=-q\)</span>. Delta method
+memberi</p>
+<div class="math-display" role="math">\[\sqrt n(\widehat q-q_0)
+\Rightarrow N(0,\lambda_0q_0^2).\]</div>
+<p>Sementara itu, <span class="math-inline" role="math">\(\widetilde q\)</span> adalah rata-rata peubah Bernoulli dengan peluang
+<span class="math-inline" role="math">\(q_0\)</span>, sehingga varians limitnya <span class="math-inline" role="math">\(q_0(1-q_0)\)</span>. Selisihnya</p>
+<div class="math-display" role="math">\[q_0(1-q_0)-\lambda_0q_0^2
+=q_0^2(e^{\lambda_0}-1-\lambda_0)&gt;0.\]</div>
+<p>Estimator MLE plug-in lebih efisien karena ia memakai seluruh nilai hitungan,
+bukan hanya indikator nol. Ini tidak melanggar batas informasi: dalam model
+Poisson parametrik, seluruh distribusi dikendalikan oleh satu <span class="math-inline" role="math">\(\lambda\)</span> dan
+informasi dari hitungan positif relevan untuk <span class="math-inline" role="math">\(q\)</span>. Estimator empiris tetap
+berguna bila model Poisson tidak dipercaya, tetapi robustitas model yang lebih
+lemah dibayar dengan varians lebih besar di bawah model Poisson yang benar.</p>
+
+<footer class="license">Materi pendamping orisinal berlisensi CC BY-SA 4.0. Komponen Penn State dan Random tetap berada di bawah lisensinya masing-masing dan tidak direlisensikan oleh halaman ini.</footer>
+</main>
+</div>
+</body>
+</html>
