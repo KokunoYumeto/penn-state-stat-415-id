@@ -563,9 +563,12 @@ def read_token() -> str:
     return max(matches, key=len)
 
 
-def public_commit(commit: str) -> dict[str, object]:
+def public_commit(
+    commit: str,
+    control_session: requests.Session | None = None,
+) -> dict[str, object]:
     value = api_json(
-        public_session(),
+        control_session or public_session(),
         "GET",
         f"{REPOSITORY_API}/commits/{commit}",
         action="read immutable public commit",
@@ -727,10 +730,14 @@ def validate_target_metadata(value: dict[str, Any], *, draft: bool) -> None:
         raise RuntimeError("target release metadata differs; refusing mutation")
 
 
-def prior_release_witness(snap: Snapshot) -> dict[str, object]:
+def prior_release_witness(
+    snap: Snapshot,
+    control_session: requests.Session | None = None,
+) -> dict[str, object]:
+    control = control_session or public_session()
     ref_url = f"{REPOSITORY_API}/git/ref/tags/{quote(PRIOR_TAG, safe='')}"
     ref = api_json(
-        public_session(),
+        control,
         "GET",
         ref_url,
         action="read prior annotated-tag ref",
@@ -745,7 +752,7 @@ def prior_release_witness(snap: Snapshot) -> dict[str, object]:
     ):
         raise RuntimeError("prior annotated-tag witness differs")
     prior_tag = api_json(
-        public_session(),
+        control,
         "GET",
         f"{REPOSITORY_API}/git/tags/{PRIOR_TAG_OBJECT}",
         action="peel prior annotated tag",
@@ -760,7 +767,7 @@ def prior_release_witness(snap: Snapshot) -> dict[str, object]:
         or target.get("sha") != PRIOR_COMMIT
     ):
         raise RuntimeError("prior annotated tag no longer peels to its fixed commit")
-    value = release_by_tag(public_session(), PRIOR_TAG, allow_missing=False)
+    value = release_by_tag(control, PRIOR_TAG, allow_missing=False)
     assert value is not None
     assets = [row for row in value.get("assets") or [] if isinstance(row, dict)]
     expected = {item.name: item for item in snap.inherited_files}
@@ -866,11 +873,22 @@ def strict_public_asset(
     }
 
 
-def anonymous_readback(snap: Snapshot, commit: str) -> dict[str, object]:
-    commit_witness = public_commit(commit)
-    tag = annotated_tag(public_session(), commit, allow_missing=False)
+def anonymous_readback(
+    snap: Snapshot,
+    commit: str,
+    *,
+    control_session: requests.Session | None = None,
+) -> dict[str, object]:
+    # Release bytes are always fetched without credentials.  API metadata may
+    # use the explicit authenticated control session during publication when
+    # the shared anonymous GitHub API quota is exhausted; the receipt records
+    # that distinction instead of mislabelling the whole check anonymous.
+    control = control_session or public_session()
+    control_credential_access = control_session is not None
+    commit_witness = public_commit(commit, control)
+    tag = annotated_tag(control, commit, allow_missing=False)
     assert tag is not None
-    release = release_by_tag(public_session(), TAG, allow_missing=False)
+    release = release_by_tag(control, TAG, allow_missing=False)
     assert release is not None
     validate_target_metadata(release, draft=False)
     assets = [row for row in release.get("assets") or [] if isinstance(row, dict)]
@@ -907,8 +925,9 @@ def anonymous_readback(snap: Snapshot, commit: str) -> dict[str, object]:
         "file_count": len(verified),
         "total_bytes": sum(int(row["bytes"]) for row in verified),
         "reader_first": verified[0]["name"] == EXPECTED_NAMES[0],
-        "anonymous_readback": True,
-        "credential_access": False,
+        "public_asset_readback_anonymous": True,
+        "control_plane_credential_access": control_credential_access,
+        "credential_access": control_credential_access,
         "automatic_redirects_followed": False,
     }
 
@@ -917,11 +936,13 @@ def validate_existing_target_release(
     value: dict[str, Any],
     snap: Snapshot,
     commit: str,
+    *,
+    control_session: requests.Session | None = None,
 ) -> dict[str, object]:
     """Accept an existing target only after exact anonymous full-union proof."""
 
     validate_target_metadata(value, draft=False)
-    return anonymous_readback(snap, commit)
+    return anonymous_readback(snap, commit, control_session=control_session)
 
 
 def upload_root(value: object, release_id: int) -> str:
@@ -1164,13 +1185,17 @@ def verification_payload(
     commit: str,
     public: dict[str, object],
     prior: dict[str, object],
+    *,
+    control_plane_credential_access: bool,
 ) -> dict[str, object]:
     return {
         "schema": VERIFICATION_SCHEMA,
         "status": "pass",
         **receipt_base(snap, commit),
-        "mode": "anonymous-verification",
-        "credential_access": False,
+        "mode": "public-byte-verification",
+        "public_asset_readback_anonymous": True,
+        "control_plane_credential_access": control_plane_credential_access,
+        "credential_access": control_plane_credential_access,
         "remote_writes": False,
         "prior_release_untouched": True,
         "prior_release_witness": prior,
@@ -1226,7 +1251,13 @@ def main() -> None:
     if args.write_receipt or args.check_only:
         public = anonymous_readback(snap, commit)
         prior = prior_release_witness(snap)
-        payload = verification_payload(snap, commit, public, prior)
+        payload = verification_payload(
+            snap,
+            commit,
+            public,
+            prior,
+            control_plane_credential_access=False,
+        )
         encoded = canonical_json(payload)
         if args.write_receipt:
             atomic_json(VERIFICATION_RECEIPT, payload)
@@ -1255,16 +1286,25 @@ def main() -> None:
         )
         return
 
-    # Local closure and immutable public commit checks precede credential access.
-    public_commit(commit)
-    existing_tag = annotated_tag(public_session(), commit, allow_missing=True)
-    existing_release = release_by_tag(public_session(), TAG, allow_missing=True)
-    prior_before = prior_release_witness(snap)
+    # Local closure precedes credential access.  The explicit credential is
+    # then used only for GitHub API control-plane calls; every release payload
+    # is still downloaded through a fresh credential-free session.
+    token = read_token()
+    authenticated = new_session(token=token)
+    public_commit(commit, authenticated)
+    existing_tag = annotated_tag(authenticated, commit, allow_missing=True)
+    existing_release = release_by_tag(authenticated, TAG, allow_missing=True)
+    prior_before = prior_release_witness(snap, authenticated)
     if existing_release is not None:
         if existing_tag is None:
             raise RuntimeError("existing target release has no exact annotated tag")
-        public = validate_existing_target_release(existing_release, snap, commit)
-        prior_after = prior_release_witness(snap)
+        public = validate_existing_target_release(
+            existing_release,
+            snap,
+            commit,
+            control_session=authenticated,
+        )
+        prior_after = prior_release_witness(snap, authenticated)
         if prior_after != prior_before:
             raise RuntimeError("prior release witness changed during verification")
         publication = {
@@ -1272,7 +1312,7 @@ def main() -> None:
             "status": "pass",
             **receipt_base(snap, commit),
             "mode": "publish-existing-exact",
-            "credential_access": False,
+            "credential_access": True,
             "created_annotated_tag": False,
             "created_target_release": False,
             "uploaded_assets": [],
@@ -1280,7 +1320,13 @@ def main() -> None:
             "prior_release_witness": prior_after,
             "public": public,
         }
-        verification = verification_payload(snap, commit, public, prior_after)
+        verification = verification_payload(
+            snap,
+            commit,
+            public,
+            prior_after,
+            control_plane_credential_access=True,
+        )
         atomic_json(PUBLICATION_RECEIPT, publication)
         atomic_json(VERIFICATION_RECEIPT, verification)
         print(
@@ -1299,8 +1345,6 @@ def main() -> None:
         )
         return
 
-    token = read_token()
-    authenticated = new_session(token=token)
     created_tag = existing_tag is None
     tag = create_annotated_tag(authenticated, commit)
     release = authenticated_target_release(authenticated)
@@ -1312,7 +1356,12 @@ def main() -> None:
     if release.get("draft") is False:
         # A concurrently published target is acceptable only as the exact
         # anonymous full union.  It is never edited.
-        public = validate_existing_target_release(release, snap, commit)
+        public = validate_existing_target_release(
+            release,
+            snap,
+            commit,
+            control_session=authenticated,
+        )
         resumed: list[str] = []
         uploaded: list[str] = []
     else:
@@ -1322,10 +1371,14 @@ def main() -> None:
             snap,
         )
         publish_complete_draft(authenticated, release, snap)
-        public = anonymous_readback(snap, commit)
+        public = anonymous_readback(
+            snap,
+            commit,
+            control_session=authenticated,
+        )
     if tag.get("peeled_commit") != commit:
         raise RuntimeError("post-publication annotated-tag identity differs")
-    prior_after = prior_release_witness(snap)
+    prior_after = prior_release_witness(snap, authenticated)
     if prior_after != prior_before:
         raise RuntimeError("prior release witness changed during target publication")
     publication = {
@@ -1344,7 +1397,13 @@ def main() -> None:
         "prior_release_witness": prior_after,
         "public": public,
     }
-    verification = verification_payload(snap, commit, public, prior_after)
+    verification = verification_payload(
+        snap,
+        commit,
+        public,
+        prior_after,
+        control_plane_credential_access=True,
+    )
     atomic_json(PUBLICATION_RECEIPT, publication)
     atomic_json(VERIFICATION_RECEIPT, verification)
     print(
