@@ -291,7 +291,7 @@ and
 `f56ef5c4adc990bb08a394830df85a653c254ec106d2a67b60478e9137b7b8fc`.
 The public PDF and EPUB identities remain exactly those recorded above.
 
-## Exact Random completeness donor — complete public Pages boundary
+## Exact Random completeness donor — complete public preservation boundary
 
 The selected one-page donor is now a separate component at
 `components/random-completeness/`; the independent 29-page Random repository
@@ -343,7 +343,41 @@ content commit and workflow run, pins and recomputes the local collection
 manifest, rejects unsafe or colliding paths, and verifies each final HTTPS
 path as well as bytes and SHA-256.
 
-The next executable action is to publish a cumulative donor checkpoint in the
-existing GitHub and Zenodo lineages while preserving the current seventeen
-Penn reader artifacts byte-for-byte, then begin the original C140
-rigor/simulation/mastery companion. No upstream message has been sent.
+The cumulative reader-first package has 25 files / 89,238,225 bytes. Its
+24,065-byte receipt has SHA-256
+`61da36364ec719e9af966b3a20eaa459863390b71fce7622c8b365f02818641c`.
+All seventeen inherited Penn release artifacts retain their exact order,
+bytes, and SHA-256; the package appends five substantive donor files plus its
+manifest, checksums, and root receipt. The PDF remains first and the EPUB
+second.
+
+GitHub release `378436672`, tag
+`v2026.08.28.c140-random-completeness`, is public at commit
+`517301bb0cb782a43a3e412b0a07363371f78fe4`. The draft transaction published
+only after all 25 assets matched locally, and every public asset was then
+downloaded through a credential-free session and matched. The publication and
+public-byte verification receipt SHA-256 values are respectively
+`4390967134aebd6f74a5fe6c70da4e62fd6d6040b91dd3b860d57b3712a4816b`
+and
+`5a63c2ad95699feb46672c6fa79085ae9af1e00e6b088ea48392787dd68f585c`.
+The prior GitHub release remains unchanged.
+
+Zenodo record `22143454`, DOI `10.5281/zenodo.22143454`, is public in the
+existing concept record `22077422` / concept DOI
+`10.5281/zenodo.22077422`. The new version inherited all seventeen prior files
+without deletion or replacement, uploaded only the eight additions, and
+published after the exact union passed. The publication, independent anonymous
+readback, final zero-draft lineage audit, and lineage-pointer receipt SHA-256
+values are respectively
+`2f7104c911aef65c2e3a17f304f79e12178b27abd3606e9d45af22f87395bcb4`,
+`5bdf212c4f5d3821397089ffaf762016b2270184cbcaab3647dff7b656cb7efe`,
+`e4c58daa424daa0d6dc97864854f8ab8163ec9e6831029349199b6d7d117602e`,
+and
+`089281b6358dfbd5e90e8b3251efd1091851f5ea2a0bf8ad85b75ba76f7880c7`.
+There are zero unpublished drafts.
+
+The next executable action is original C140 companion batch C1 under
+`components/c140-companion/`: documents `D001`–`D007`, simulations
+`SIM001`–`SIM004`, complete mastery sets `MS07`–`MS10`, and cumulative
+assessment `CA01`, with stable backend IDs and deterministic browser-free
+offline HTML. No upstream message has been sent.

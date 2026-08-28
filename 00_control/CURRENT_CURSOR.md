@@ -109,12 +109,31 @@ files / 19,412,803 bytes. The unchanged Penn partition is 106 files /
 49,911-byte public receipt has SHA-256
 `0ffe07f76adf6187b3c8c006fc61f2da507dd59dda6580c433fafc3a1af7c32a`.
 
-Next, publish a cumulative donor checkpoint in the existing GitHub release and
-Zenodo concept lineages. Preserve the current seventeen reader-first Penn
-artifacts byte-for-byte and add only collision-free donor reader,
-source/backend, rights, release-note, manifest/checksum, and compact-QA
-artifacts. Anonymously verify the complete public union and confirm zero
-Zenodo drafts. Then begin the original C140 rigor/simulation/mastery companion.
+The cumulative preservation package is complete at 25 files / 89,238,225
+bytes; its 24,065-byte package receipt has SHA-256
+`61da36364ec719e9af966b3a20eaa459863390b71fce7622c8b365f02818641c`.
+It preserves all seventeen prior Penn artifacts byte-for-byte and adds eight
+donor/cumulative files. GitHub release `378436672`, tag
+`v2026.08.28.c140-random-completeness`, points to commit
+`517301bb0cb782a43a3e412b0a07363371f78fe4`; all 25 public assets were
+downloaded without credentials and matched. Zenodo record `22143454`, DOI
+`10.5281/zenodo.22143454`, is public in concept `22077422`; its independent
+anonymous replay matched all 25 files, and the authenticated lineage audit
+found zero unpublished drafts.
+
+Next, create `components/c140-companion/` as original CC BY-SA 4.0 content and
+produce the first coherent batch, C1: seven linked regular-likelihood,
+asymptotic-testing, nonregularity, optimality, and risk units
+`O006-C140-CMP-D001` through `D007`; four seeded static simulations `SIM001`
+through `SIM004`; mastery sets `MS07` through `MS10` with eight complete
+problems each; and cumulative assessment `CA01` with ten complete problems and
+rubric. Every theorem exposes hypotheses and proof; every problem has tags,
+staged hints, short answer, and full solution; all IDs and cross-component
+links are locale-neutral and machine-resolvable. Build and replay offline HTML
+with static validators only. Then continue matrix regression, Bayesian
+comparison, the remaining nine mastery sets, three cumulative assessments,
+and two capstones. The overall C140 goal remains active.
+
 The donor authority is 57,507 bytes / SHA-256
 `4d7402f2a960ea2b4232e57e4ee5992ac29801b9269f300f17f8e83074d5a0e4`;
 the canonical id-ID target is 60,895 bytes / SHA-256
@@ -156,4 +175,10 @@ build and QA receipts, `build/PAGES_COLLECTION_RECEIPT.json`,
 `CHECKPOINT_2026-08-28_RANDOM_COMPLETENESS_DONOR_PAGES_PUBLICATION_COMPLETE.md`,
 and
 `GITHUB_PAGES_RECEIPT_2026-08-28_RANDOM_COMPLETENESS_DONOR.json`. Conversation
-summaries are not state. Do not broaden the filesystem or Git scope.
+Then read
+`CHECKPOINT_2026-08-28_RANDOM_COMPLETENESS_DONOR_PRESERVATION_COMPLETE.md`,
+`build/RANDOM_COMPLETENESS_RELEASE_PACKAGE_RECEIPT.json`, the two Random-donor
+GitHub release receipts, the Random-donor Zenodo base/publication/readback/
+lineage-audit receipts, and
+`ZENODO_LINEAGE_2026-08-28_RANDOM_COMPLETENESS.json`. Conversation summaries
+are not state. Do not broaden the filesystem or Git scope.

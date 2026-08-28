@@ -57,8 +57,17 @@ mengarahkan tautan lintas-halaman ke edisi lengkap.
 - QA statis dan replay deterministik: lulus;
 - pembaca publik:
   https://kokunoyumeto.github.io/penn-state-stat-415-id/components/random-completeness/;
+- rilis GitHub kumulatif:
+  https://github.com/KokunoYumeto/penn-state-stat-415-id/releases/tag/v2026.08.28.c140-random-completeness;
+- preservasi Zenodo kumulatif:
+  https://doi.org/10.5281/zenodo.22143454;
 - sumber, backend, hak, dan receipt:
   `components/random-completeness/`.
+
+Rilis kumulatif memuat 25 berkas / 89.238.225 byte. Seluruh 17 artefak Penn
+sebelumnya dipertahankan byte demi byte, lalu delapan berkas donor/kontrol
+ditambahkan. Semua byte publik GitHub dan Zenodo sudah diverifikasi; audit
+konsep Zenodo menemukan nol draf yang belum dikirim.
 
 Hak donor tetap terpisah dari CC BY-NC 4.0 Penn State. Saksi laman utama
 *Random* menyatakan CC BY 2.0, sedangkan `Credits.html` menautkan CC BY 1.0;
