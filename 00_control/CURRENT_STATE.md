@@ -291,7 +291,7 @@ and
 `f56ef5c4adc990bb08a394830df85a653c254ec106d2a67b60478e9137b7b8fc`.
 The public PDF and EPUB identities remain exactly those recorded above.
 
-## Exact Random completeness donor — complete local boundary
+## Exact Random completeness donor — complete public Pages boundary
 
 The selected one-page donor is now a separate component at
 `components/random-completeness/`; the independent 29-page Random repository
@@ -330,8 +330,20 @@ the Pages collection receipt SHA-256 is
 `17b60a65cfb181d170f3302fb5f527608e026fcdbcab39839bcc3aad119f329a`.
 No browser process was used.
 
-The next executable action is to commit and push this complete donor boundary,
-wait for the deterministic Pages workflow, anonymously verify every donor
-route/file and the unchanged Penn reader, persist the public receipt, then
-begin the original C140 rigor/simulation/mastery companion. No upstream message
-has been sent.
+The donor boundary is committed at
+`5ed0e501e3a41c1274d90c9f02aee15bc210324a`; GitHub Pages workflow run
+`33164278836` completed successfully. Two independent credential-free static
+HTTPS passes matched all 124 public files / 19,412,803 bytes: all 106 Penn
+reader files / 17,614,553 bytes remain byte-identical, and all 18 donor files /
+1,798,250 bytes match. The 49,911-byte sanitized anonymous-readback receipt
+has SHA-256
+`0ffe07f76adf6187b3c8c006fc61f2da507dd59dda6580c433fafc3a1af7c32a`.
+Its verifier disables ambient environment credentials, binds the immutable
+content commit and workflow run, pins and recomputes the local collection
+manifest, rejects unsafe or colliding paths, and verifies each final HTTPS
+path as well as bytes and SHA-256.
+
+The next executable action is to publish a cumulative donor checkpoint in the
+existing GitHub and Zenodo lineages while preserving the current seventeen
+Penn reader artifacts byte-for-byte, then begin the original C140
+rigor/simulation/mastery companion. No upstream message has been sent.

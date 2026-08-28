@@ -101,11 +101,21 @@ Updated: 2026-08-28
 
 ## Next executable action
 
-Commit and push the locally complete exact Random completeness donor. Wait for
-the deterministic Pages workflow, anonymously verify the public donor
-inventory and unchanged Penn reader, persist the sanitized public receipt,
-then begin original C140 rigor/simulation/mastery-companion production. The
-donor authority is 57,507 bytes / SHA-256
+The exact Random completeness donor is committed at
+`5ed0e501e3a41c1274d90c9f02aee15bc210324a`, Pages run `33164278836` passed,
+and two independent credential-free static HTTPS readbacks matched all 124
+files / 19,412,803 bytes. The unchanged Penn partition is 106 files /
+17,614,553 bytes; the donor partition is 18 files / 1,798,250 bytes. The
+49,911-byte public receipt has SHA-256
+`0ffe07f76adf6187b3c8c006fc61f2da507dd59dda6580c433fafc3a1af7c32a`.
+
+Next, publish a cumulative donor checkpoint in the existing GitHub release and
+Zenodo concept lineages. Preserve the current seventeen reader-first Penn
+artifacts byte-for-byte and add only collision-free donor reader,
+source/backend, rights, release-note, manifest/checksum, and compact-QA
+artifacts. Anonymously verify the complete public union and confirm zero
+Zenodo drafts. Then begin the original C140 rigor/simulation/mastery companion.
+The donor authority is 57,507 bytes / SHA-256
 `4d7402f2a960ea2b4232e57e4ee5992ac29801b9269f300f17f8e83074d5a0e4`;
 the canonical id-ID target is 60,895 bytes / SHA-256
 `255ac88f235727301ee341eef79b9578910be88b7e2e038d4dfecc0ed686513c`.
@@ -142,5 +152,8 @@ GitHub checkpoint/release receipts, the three LF-repair Zenodo receipts,
 consolidated GitHub receipts, the three consolidated Zenodo receipts, and
 `ZENODO_LINEAGE.json`; then read
 `CHECKPOINT_2026-08-28_RANDOM_COMPLETENESS_DONOR_READY.md`, the donor import,
-build and QA receipts, and `build/PAGES_COLLECTION_RECEIPT.json`. Conversation
+build and QA receipts, `build/PAGES_COLLECTION_RECEIPT.json`,
+`CHECKPOINT_2026-08-28_RANDOM_COMPLETENESS_DONOR_PAGES_PUBLICATION_COMPLETE.md`,
+and
+`GITHUB_PAGES_RECEIPT_2026-08-28_RANDOM_COMPLETENESS_DONOR.json`. Conversation
 summaries are not state. Do not broaden the filesystem or Git scope.
