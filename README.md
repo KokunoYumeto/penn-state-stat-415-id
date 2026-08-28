@@ -31,17 +31,17 @@ bukti QA disimpan bersama edisi.
 
 - Repositori publik: https://github.com/KokunoYumeto/penn-state-stat-415-id
 - Pembaca web: https://kokunoyumeto.github.io/penn-state-stat-415-id/
-- Rilis publik lengkap 14-dari-14:
-  https://github.com/KokunoYumeto/penn-state-stat-415-id/releases/tag/v2026.08.26.14of14
+- Rilis publik PDF/EPUB lengkap 14-dari-14:
+  https://github.com/KokunoYumeto/penn-state-stat-415-id/releases/tag/v2026.08.28.14of14-pdf-epub
 - Konsep preservasi: https://doi.org/10.5281/zenodo.22077422
-- Preservasi publik lengkap 14-dari-14:
-  https://doi.org/10.5281/zenodo.22105616
-- Paket preservasi reader-first lengkap (55.312.500 byte, sembilan berkas)
-  telah diterbitkan pada konsep DOI yang sama dan seluruh byte publiknya cocok
-  pada pembacaan kembali anonim. Audit konsep menemukan tepat satu versi cocok
-  yang dikirim dan nol draf. Identitas LF kanonis 8.203 byte untuk berkas
-  temuan Markdown sudah terikat dalam paket sumber; konten dan 17.614.553 byte
-  pembaca tidak berubah.
+- Preservasi publik PDF/EPUB lengkap 14-dari-14:
+  https://doi.org/10.5281/zenodo.22142292
+- Paket preservasi reader-first terbaru memuat 17 berkas / 87.848.426 byte.
+  PDF menjadi berkas utama, disusul EPUB reflowable, pembaca HTML luring,
+  source/backend, hak komponen, dan bukti QA ringkas. Seluruh 17 berkas pada
+  GitHub dan Zenodo sudah diunduh kembali secara anonim dan cocok byte demi
+  byte serta SHA-256; audit konsep Zenodo menemukan nol draf yang belum
+  dikirim.
 
 ## Reproduksi
 

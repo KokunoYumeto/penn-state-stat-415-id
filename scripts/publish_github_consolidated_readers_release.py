@@ -15,6 +15,7 @@ from concurrent.futures import ThreadPoolExecutor
 import hashlib
 import json
 import mimetypes
+import os
 from pathlib import Path
 import re
 import tempfile
@@ -118,6 +119,16 @@ def fetch_json(url: str) -> dict[str, Any]:
 
 
 def read_token() -> str:
+    in_memory = os.environ.get("GITHUB_TOKEN", "").strip()
+    if re.fullmatch(
+        r"(?:github_pat_[A-Za-z0-9_]{20,}|gh[pousr]_[A-Za-z0-9]{20,})",
+        in_memory,
+    ):
+        return in_memory
+    if not TOKEN_FILE.is_file():
+        raise RuntimeError(
+            "No in-memory GitHub credential is set and the bounded credential file is absent"
+        )
     raw = TOKEN_FILE.read_text("utf-8")
     candidates = re.findall(
         r"(?:github_pat_[A-Za-z0-9_]{20,}|gh[pousr]_[A-Za-z0-9]{20,})",

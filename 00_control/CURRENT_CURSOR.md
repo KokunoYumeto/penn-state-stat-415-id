@@ -54,12 +54,21 @@ Updated: 2026-08-28
   55,312,500 bytes matched by anonymous readback; the final concept audit found
   one submitted matching version and zero drafts. The source package binds the
   canonical 8,203-byte LF findings file.
+- Latest public archive: Zenodo record `22142292`, DOI
+  `10.5281/zenodo.22142292`, version `2026.08.28.14of14-pdf-epub`, in the same
+  concept record `22077422` / concept DOI `10.5281/zenodo.22077422`. Both
+  anonymous passes matched all 17 files / 87,848,426 bytes; the final concept
+  audit found zero unsubmitted drafts.
 - Current GitHub/Pages boundary: content commit
   `13767f55f739ad7dd058fc1dcb55cf5334ab097c`, tree
   `dbf8abf4f729ddca46f69547bcf38d0b71f27f07`, successful run `32930770236`,
   tag/release `v2026.08.26.14of14`. Anonymous readback matched 746 commit-tree
   blobs / 154,064,493 bytes, 106 Pages files / 17,614,553 bytes, and nine
   release assets / 55,312,500 bytes.
+- Latest GitHub release boundary: tag
+  `v2026.08.28.14of14-pdf-epub`, artifact commit
+  `7d1012119d8bd6b8942347e44ffbbca0b8bcba07`, release ID `378391763`.
+  Anonymous readback matched all 17 assets / 87,848,426 bytes.
 - Public checkpoint receipt SHA-256 values: GitHub commit/Pages
   `de0a44ae013f72198b32948a3c5b7f245cdefd2cdeffd902dba615cfb770f752`;
   GitHub release
@@ -73,22 +82,31 @@ Updated: 2026-08-28
   lineage pointer
   `80689f675838b69be6636680eb0fef1c3ff8b01fb07386b752c3b4a4620cfe90`.
 - No upstream message has been sent.
+- Consolidated PDF: 219 A4 pages / 20,170,549 bytes / SHA-256
+  `f39c1c438cc3e793fe9522eb11f5b02704d89fcdc7aecb2207a599087d458964`.
+- Consolidated EPUB: 12,301,415 bytes / SHA-256
+  `e122d65348971b91a5ac0c7a8219e0fa3e0eabedb92d130c661648e399e3c574`.
+- Consolidated publication receipt SHA-256 values: GitHub publication
+  `1f9507df0188a646f0e5b675f3f8bd53e6151d90dfc18e873b49294841eba605`;
+  GitHub anonymous verification
+  `acdf91afdebb7ab4f0143f93f3c5426dd361ebeb637cf7b73f7689a58a005ef2`;
+  Zenodo publication
+  `07b64d6942ae71cd0cdf4dff58fbbaf56851274beb67b4b98e781f430342867b`;
+  Zenodo anonymous verification
+  `af79452568bbde49effe37904e92d5c3acf380ff3dcde9f528753624cc1fe397`;
+  Zenodo final lineage audit
+  `f4b65e0ff7706212c4f5ee189b97aabac2d874b1bf73500b70a54780cfb53bf1`;
+  lineage pointer
+  `f56ef5c4adc990bb08a394830df85a653c254ec106d2a67b60478e9137b7b8fc`.
 
 ## Next executable action
 
-Commit and push the release-ready consolidated-reader source and receipts,
-then publish the 17-file union under GitHub tag
-`v2026.08.28.14of14-pdf-epub` and Zenodo version
-`2026.08.28.14of14-pdf-epub` in the existing concept. The primary PDF is 219
-pages / 20,170,549 bytes / SHA-256
-`f39c1c438cc3e793fe9522eb11f5b02704d89fcdc7aecb2207a599087d458964`;
-the EPUB is 12,301,415 bytes / SHA-256
-`e122d65348971b91a5ac0c7a8219e0fa3e0eabedb92d130c661648e399e3c574`.
-The ordered union is 17 files / 87,848,426 bytes and its package-receipt
-SHA-256 is
-`934f9484dd7fd25a2436c80914c68d9627ba4009da07900a975e168d91d01694`.
-After anonymous byte-and-hash readback and sanitized receipt persistence,
-begin the distinct exact Random completeness donor and then the original C140
+Freeze and localize the distinct exact Random completeness donor as a separate
+licensed component. First inspect the exact completed sibling-edition controls
+and determine whether its `Sufficient.html` translation can be reused by
+stable identity without modifying that repository. Reverify the official page
+bytes and the landing/Credits licence discrepancy, then create the donor only
+in a separate component path. Continue afterward to the original C140
 companion. Do not launch any browser process and do not send an upstream
 message.
 
@@ -109,6 +127,8 @@ receipt, `TRANSLATION_LEDGER.csv`, `ADVERSE_LEDGER.jsonl`, the final glossary,
 `build/CONSOLIDATED_EPUB_STATIC_REFLOW_QA_RECEIPT.json`,
 `build/CONSOLIDATED_READERS_PACKAGE_RECEIPT.json`,
 `CHECKPOINT_2026-08-26_THROUGH_LESSON12_PUBLICATION_COMPLETE.md`, the complete
-GitHub checkpoint/release receipts, the three LF-repair Zenodo receipts, and
+GitHub checkpoint/release receipts, the three LF-repair Zenodo receipts,
+`CHECKPOINT_2026-08-28_CONSOLIDATED_READERS_PUBLICATION_COMPLETE.md`, the two
+consolidated GitHub receipts, the three consolidated Zenodo receipts, and
 `ZENODO_LINEAGE.json`. Conversation summaries are not state. Do not broaden
 the filesystem or Git scope.

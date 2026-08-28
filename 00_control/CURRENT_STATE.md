@@ -224,13 +224,12 @@ and `80689f675838b69be6636680eb0fef1c3ff8b01fb07386b752c3b4a4620cfe90`.
 This version binds the canonical 8,203-byte LF findings file; no duplicate
 concept or pending matching draft exists.
 
-The next production boundary is the consolidated, deterministic PDF and EPUB
-for all fourteen translated documents. After those surfaces pass structural,
-formula, asset, accessibility, and full visual checks and are publicly
-preserved, continue to the distinct exact Random completeness donor and the
-original C140 rigor/simulation/mastery companion. No upstream message has been
-sent. The independent completed Random edition remains outside this
-repository's write boundary.
+The consolidated deterministic PDF and EPUB described below are now publicly
+preserved and anonymously verified. The next production boundary is the
+distinct exact Random completeness donor, followed by the original C140
+rigor/simulation/mastery companion. No upstream message has been sent. The
+independent completed Random edition remains outside this repository's write
+boundary.
 
 ## Consolidated PDF and EPUB release-ready boundary
 
@@ -268,8 +267,31 @@ and adds the PDF, EPUB, concise rights/status notes, compact labelled QA
 evidence, full manifest, checksums, and cryptographic root. Package-receipt
 SHA-256 is
 `934f9484dd7fd25a2436c80914c68d9627ba4009da07900a975e168d91d01694`.
-The next executable action is to commit and push the exact reader sources and
-receipts, publish tag `v2026.08.28.14of14-pdf-epub` and Zenodo version
-`2026.08.28.14of14-pdf-epub` in the existing lineages, anonymously hash every
-public asset, persist sanitized receipts, then begin the distinct Random
-completeness donor. No upstream message has been sent.
+## Consolidated PDF and EPUB published boundary
+
+GitHub tag/release `v2026.08.28.14of14-pdf-epub` is public at artifact commit
+`7d1012119d8bd6b8942347e44ffbbca0b8bcba07`. Anonymous readback matched all
+17 assets / 87,848,426 bytes. Release ID is `378391763`; the publication and
+independent verification receipt SHA-256 values are respectively
+`1f9507df0188a646f0e5b675f3f8bd53e6151d90dfc18e873b49294841eba605`
+and
+`acdf91afdebb7ab4f0143f93f3c5426dd361ebeb637cf7b73f7689a58a005ef2`.
+
+Zenodo record `22142292`, DOI `10.5281/zenodo.22142292`, version
+`2026.08.28.14of14-pdf-epub`, is public in the existing concept record
+`22077422` / concept DOI `10.5281/zenodo.22077422`. Two independent anonymous
+readbacks matched all 17 files / 87,848,426 bytes. The final authenticated
+lineage audit found zero unsubmitted concept drafts. The publication,
+anonymous-readback, final-lineage-audit, and lineage-pointer SHA-256 values are
+respectively
+`07b64d6942ae71cd0cdf4dff58fbbaf56851274beb67b4b98e781f430342867b`,
+`af79452568bbde49effe37904e92d5c3acf380ff3dcde9f528753624cc1fe397`,
+`f4b65e0ff7706212c4f5ee189b97aabac2d874b1bf73500b70a54780cfb53bf1`,
+and
+`f56ef5c4adc990bb08a394830df85a653c254ec106d2a67b60478e9137b7b8fc`.
+The public PDF and EPUB identities remain exactly those recorded above.
+
+The next executable action is to freeze and localize the distinct exact Random
+completeness donor without modifying the independent 29-page Random edition,
+then continue the original C140 companion. No browser process may be launched,
+and no upstream message has been sent.
