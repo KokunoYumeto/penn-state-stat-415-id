@@ -13,19 +13,19 @@ complete worked solution.
 
 The C2 seeded simulation produces three substantive CSV/SVG outputs plus its
 manifest: 4 files / 3,873 bytes. Its receipt SHA-256 is
-`4e54d8a5e169022de110c80240945c00a4b8f388dd94c5f10ffe09e2115db7b8`.
+`de89e57c10c178915ddd96e12d368e5e11b40baa47b6fc31c2e3df5adbd63bd2`.
 Together, C1+C2 cover five simulation families and 12 substantive generated
-assets. The cumulative browser-free HTML closure contains 47 files / 2,509,563
+assets. The cumulative browser-free HTML closure contains 47 files / 2,509,497
 bytes; manifest SHA-256
-`e1e7b2de782a5d49ad9c34d681e6b503bf610c8a8c69e346bba604d80fc07c6c`.
+`17d7dfd35cadf0b16b373221ba490fbd1c1d903c039327b2013a57963660b170`.
 The backend contains 679 entities and 917 relations in four files / 225,463
 bytes; manifest SHA-256
-`d86114d3ee468de1a45e3e54d45dbf73015b60ab61578e3a73476528717695ea`.
+`3304645393ab94d9c3f0b0861876a5123b4db7ac32f797c3fdebba2635c30a9d`.
 
 Build receipt SHA-256 is
-`198df17c460d1dcd4523bcd3fd90230ff9429e1ac44f93565eb61c6950c50644`;
+`6417c7a8764082ce74e397ccdb79d337534d27c888d8d2cc12830d6947d7c0a1`;
 QA receipt SHA-256 is
-`7e05934a8c28643a210b2ae833b3ef49bfefb988e9ada2e50a6786bd9ddd16f8`.
+`0f118dae5488a68098aa9fef5c03a4135968eee2c74f509f67b0817e05bc38ef`.
 Both write/check-only replays pass with browser and network use false. A bounded
 post-authoring audit repaired hidden control-character damage in two formulas,
 restored missing TeX commands, reconciled SIM005 notation and replication

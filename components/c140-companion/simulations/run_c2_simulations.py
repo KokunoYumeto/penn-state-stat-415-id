@@ -46,6 +46,12 @@ def fmt(value: float) -> str:
     return f"{value:.8f}"
 
 
+def stable_float(value: float) -> float:
+    """Remove irrelevant BLAS-order noise from receipt-only numeric summaries."""
+
+    return float(f"{value:.12g}")
+
+
 def coverage_svg(classical: float, hc3: float, exact: float) -> bytes:
     width, height = 720, 430
     left, right, top, bottom = 95, 35, 45, 90
@@ -202,26 +208,26 @@ def experiment() -> tuple[dict[str, bytes], dict[str, object]]:
         "replications": REPLICATIONS,
         "design": {"n": n, "p": p, "rank": int(np.linalg.matrix_rank(X)), "df_residual": df},
         "gaussian": {
-            "slope_bias": bias_exact,
-            "empirical_sd": empirical_sd_exact,
-            "mean_classical_se": float(se_exact.mean()),
-            "exact_t_coverage_95": coverage_exact,
+            "slope_bias": stable_float(bias_exact),
+            "empirical_sd": stable_float(empirical_sd_exact),
+            "mean_classical_se": stable_float(float(se_exact.mean())),
+            "exact_t_coverage_95": stable_float(coverage_exact),
         },
         "heteroskedastic": {
-            "slope_bias": bias_hetero,
-            "empirical_sd": empirical_sd_hetero,
-            "mean_classical_se": float(se_classical.mean()),
-            "mean_hc3_se": float(se_hc3.mean()),
-            "classical_t_coverage_95": coverage_classical,
-            "hc3_normal_coverage_95": coverage_hc3,
+            "slope_bias": stable_float(bias_hetero),
+            "empirical_sd": stable_float(empirical_sd_hetero),
+            "mean_classical_se": stable_float(float(se_classical.mean())),
+            "mean_hc3_se": stable_float(float(se_hc3.mean())),
+            "classical_t_coverage_95": stable_float(coverage_classical),
+            "hc3_normal_coverage_95": stable_float(coverage_hc3),
         },
         "influence": {
             "index_zero_based": influential,
-            "leverage": float(h_all[influential]),
-            "residual": float(residual_all[influential]),
-            "cook_distance": float(cook[influential]),
-            "slope_with_point": float(bhat_all[1]),
-            "slope_without_point": float(bhat_delete[1]),
+            "leverage": stable_float(float(h_all[influential])),
+            "residual": stable_float(float(residual_all[influential])),
+            "cook_distance": stable_float(float(cook[influential])),
+            "slope_with_point": stable_float(float(bhat_all[1])),
+            "slope_without_point": stable_float(float(bhat_delete[1])),
         },
         "assertions": {
             "projection_symmetric": True,

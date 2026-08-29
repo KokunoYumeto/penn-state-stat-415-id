@@ -7,8 +7,8 @@ The exact cumulative scope is `D001`–`D011`, `SIM001`–`SIM005`, `MS07`–`MS
 `MS12`, and `CA01`. Static write/check replay passes for 23 documents, 47 HTML
 files, 679 backend entities, 917 relations, five simulations, and 50 fully
 solved problems. Build and QA receipt SHA-256 values are
-`198df17c460d1dcd4523bcd3fd90230ff9429e1ac44f93565eb61c6950c50644`
-and `7e05934a8c28643a210b2ae833b3ef49bfefb988e9ada2e50a6786bd9ddd16f8`.
+`6417c7a8764082ce74e397ccdb79d337534d27c888d8d2cc12830d6947d7c0a1`
+and `0f118dae5488a68098aa9fef5c03a4135968eee2c74f509f67b0817e05bc38ef`.
 
 Next executable action: package this cumulative C2 closure, integrate the 47
 companion files into the existing Pages union without changing Penn or donor
