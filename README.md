@@ -75,39 +75,41 @@ Hak donor tetap terpisah dari CC BY-NC 4.0 Penn State. Saksi laman utama
 *Random* menyatakan CC BY 2.0, sedangkan `Credits.html` menautkan CC BY 1.0;
 keduanya dipertahankan dan tidak disamakan secara diam-diam.
 
-## Pendamping orisinal C140 — batch C1
+## Pendamping orisinal C140 — checkpoint kumulatif C2
 
-Batch C1 pendamping orisinal CC BY-SA 4.0 sudah terbit sebagai checkpoint
-parsial yang koheren dan terverifikasi secara anonim. Isinya tujuh unit teori rigor,
-empat simulasi seeded, empat set penguasaan, satu asesmen kumulatif, dan indeks:
+Pendamping orisinal CC BY-SA 4.0 sudah terbit sampai batas C2 yang koheren dan
+terverifikasi secara anonim. C1 memuat fondasi likelihood, optimalitas, risiko,
+empat simulasi, empat set penguasaan, dan asesmen `CA01`. C2 menambahkan empat
+unit model linear Gaussian matriks, simulasi regresi seeded, dan set penguasaan
+`MS12`:
 
-- 17 dokumen / 288.436 byte sumber;
-- 42 soal lengkap: metadata, dua petunjuk bertahap, jawaban singkat, dan solusi;
-- 442 anchor stabil / 173 referensi isi yang terselesaikan;
-- pembaca HTML luring: 35 berkas / 2.265.015 byte;
-- backend modular: 469 entitas / 648 relasi;
-- simulasi: 10 keluaran deterministik / 17.645 byte;
-- build, QA statis, replay byte-identik, serta dua audit matematika pasca-fix:
-  lulus;
+- 23 dokumen / 422.089 byte sumber;
+- 50 soal lengkap: metadata, sekurang-kurangnya dua petunjuk bertahap, jawaban
+  singkat, dan solusi penuh;
+- 640 anchor stabil / 221 referensi isi yang terselesaikan;
+- pembaca HTML luring: 47 berkas / 2.509.497 byte;
+- backend modular: 679 entitas / 917 relasi;
+- lima keluarga simulasi dengan 12 artefak substantif deterministik;
+- build, QA statis, replay byte-identik lintas platform, dan audit matematika:
+  lulus tanpa proses browser;
 - pembaca web publik:
   https://kokunoyumeto.github.io/penn-state-stat-415-id/components/c140-companion/;
-- rilis GitHub kumulatif:
-  https://github.com/KokunoYumeto/penn-state-stat-415-id/releases/tag/v2026.08.28.c140-companion-c1;
+- rilis GitHub kumulatif terkoreksi:
+  https://github.com/KokunoYumeto/penn-state-stat-415-id/releases/tag/v2026.08.29.c140-companion-c2-replay-fix;
 - preservasi Zenodo kumulatif:
-  https://doi.org/10.5281/zenodo.22148810;
+  https://doi.org/10.5281/zenodo.22160621 dalam konsep
+  https://doi.org/10.5281/zenodo.22077422;
 - sumber, kontrak, backend, simulasi, hak, dan receipt:
   `components/c140-companion/`.
 
-Checkpoint ini menutup likelihood reguler dan nonreguler, pengujian asimtotik,
-optimalitas estimator/uji, dan risiko. Ia belum menutup keseluruhan C140: model
-linear Gaussian matriks, perbandingan Bayesian–frequentist, sembilan set
-penguasaan, tiga asesmen, dan dua capstone masih berlanjut. Hak Penn, donor
-*Random*, dan pendamping orisinal tetap dipisahkan.
-
-Paket kumulatif memuat 33 berkas / 90.175.090 byte: seluruh 25 berkas batas
-sebelumnya dipertahankan byte demi byte dan hanya delapan berkas C1 ditambahkan.
-Seluruh 159 berkas Pages dan 33 aset GitHub/Zenodo cocok pada pembacaan kembali
-anonim; audit konsep Zenodo menemukan nol draf yang belum dikirim.
+Checkpoint C2 menutup model linear Gaussian matriks, termasuk OLS/MLE,
+Gauss–Markov, hukum sampling eksak, inferensi t/F, ANOVA, interval, dan
+diagnostik. Seluruh 171 berkas Pages dan 41 berkas rilis GitHub/Zenodo cocok
+pada pembacaan kembali anonim; audit konsep Zenodo menemukan nol draf. C140
+belum lengkap: batch C3 perbandingan Bayesian–frequentist sedang diproduksi,
+kemudian set penguasaan, asesmen kumulatif, dan capstone yang tersisa tetap
+harus diselesaikan. Hak Penn, donor *Random*, dan pendamping orisinal tetap
+dipisahkan.
 
 ## Reproduksi
 
@@ -159,10 +161,11 @@ python -B scripts/audit_consolidated_epub.py --check-only
 python -B scripts/audit_consolidated_epub_static_reflow.py --check-only
 python -B scripts/package_consolidated_readers_release.py --check-only
 python -B components/c140-companion/simulations/run_c1_simulations.py --check-only
+python -B components/c140-companion/simulations/run_c2_simulations.py --check-only
 python -B components/c140-companion/scripts/build_companion.py --check-only
 python -B components/c140-companion/scripts/qa_companion.py --check-only
 python -B scripts/assemble_pages_collection.py --check-only
-python -B scripts/package_c140_companion_c1_release.py --check-only
+python -B scripts/package_c140_companion_c2_replay_fix_release.py --check-only
 python -B scripts/publish_github_consolidated_readers_release.py --local-preflight
 python -B scripts/publish_zenodo_consolidated_readers.py --local-preflight
 ```

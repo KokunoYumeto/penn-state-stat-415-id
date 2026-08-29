@@ -151,12 +151,22 @@ Public C1 boundary: Pages run `33188506179` at commit
 `22148810`, DOI `10.5281/zenodo.22148810`, matched 33 files and has zero drafts
 in concept `22077422`.
 
-Next, produce the matrix Gaussian linear-model batch: projection geometry,
-OLS/MLE, Gauss–Markov, exact sampling laws, variance estimation, standard
-errors, t/F inference, confidence/prediction intervals, ANOVA, simple/multiple
-regression, and model checks; add seeded static regression simulation and the
-next mastery set. Then continue Bayesian comparison, remaining mastery and
-assessment sets, and capstones. The overall C140 goal remains active.
+The matrix Gaussian linear-model batch is now publicly complete as cumulative
+C2. Exact scope is `D001`–`D011`, `SIM001`–`SIM005`, `MS07`–`MS10`, `MS12`,
+`CA01`, and the index: 23 documents, 47 reader files, 679 backend entities,
+917 relations, five simulation families, and 50 fully solved problems. Pages
+run `33224203232` passed; corrected GitHub release `378957927` uses tag
+`v2026.08.29.c140-companion-c2-replay-fix`; Zenodo record `22160621`, DOI
+`10.5281/zenodo.22160621`, is public in existing concept `22077422`. Anonymous
+readback matched all 171 Pages files and all 41 release files at both
+preservation destinations.
+
+Next, execute C3 from
+`components/c140-companion/00_control/C3_BAYESIAN_COMPARISON_BATCH_CONTRACT.md`:
+author and integrate `D012`, `D013`, `SIM006`, and `MS11`; then run cumulative
+browser-free write/check build, backend, simulation, and QA replay. Continue
+after C3 through the remaining mastery sets, assessments, and capstones. The
+overall C140 goal remains active.
 
 The donor authority is 57,507 bytes / SHA-256
 `4d7402f2a960ea2b4232e57e4ee5992ac29801b9269f300f17f8e83074d5a0e4`;

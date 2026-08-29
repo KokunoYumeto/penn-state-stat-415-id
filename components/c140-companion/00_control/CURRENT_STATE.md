@@ -2,9 +2,9 @@
 
 Updated: 2026-08-29
 
-## C2 matrix-linear-model boundary — local deterministic closure
+## C2 matrix-linear-model boundary — public deterministic closure
 
-Batch C2 is locally complete and awaiting cumulative publication. It adds
+Batch C2 is complete and publicly preserved. It adds
 `D008`–`D011`, `SIM005`, and `MS12` without replacing C1. The cumulative
 reader now contains 23 documents / 422,089 source bytes / 640 stable anchors /
 221 resolved body references. Five mastery sets and `CA01` contain 50 problems;
@@ -30,6 +30,27 @@ Both write/check-only replays pass with browser and network use false. A bounded
 post-authoring audit repaired hidden control-character damage in two formulas,
 restored missing TeX commands, reconciled SIM005 notation and replication
 counts, and independently checked the theory and all eight MS12 solutions.
+
+Linux CI initially exposed platform-dependent low-order floating-point digits
+in the SIM005 JSON receipt, while all substantive CSV/SVG results were
+unchanged. The generator now quantizes receipt-only summary floats to stable
+decimal identities. CI run `33224203232` passed at commit
+`d330dc7ecbef71c96067f49fab372efd72317d0c`; two static readbacks matched all
+171 Pages files / 21,922,300 bytes. Pages receipt SHA-256 is
+`2d0b33a0b2cc25c0171002ae4291a966300b91dc25cfdd837370c2c2d258fd0a`.
+
+The final corrected cumulative GitHub release is `378957927`, tag
+`v2026.08.29.c140-companion-c2-replay-fix`, at commit
+`7f464d3704c6bbe79fcbf94d5fccd567baa1865f`. Anonymous readback matched all
+41 files / 91,249,199 bytes. Its verification receipt SHA-256 is
+`67e2c95af03695fa4e69de9b8987d755ac24b7f8d7151b3cbf4d68367030917d`.
+The final Zenodo version is record `22160621`, DOI
+`10.5281/zenodo.22160621`, in concept `22077422`; anonymous readback matched
+the same 41-file union and the final lineage audit found zero drafts. Zenodo
+publication, readback, and audit receipt SHA-256 values are
+`57e3a76045b625517d79a009835f7c5dbec4f3c936ec3f60b2ae1e46abc3b0ab`,
+`0f17f4f63eb2284563f547d35349d102c12244fd1d092898df0390ef5d7c11fa`,
+and `263dcb561b41af1d0fc28a52b61d66314c787f2e25ddf5719163f394e741525b`.
 
 Batch C1 is publicly preserved as a coherent partial checkpoint. The admitted
 reader contains 17 documents: index, `D001`–`D007`, `SIM001`–`SIM004`, mastery
@@ -97,7 +118,7 @@ separate. Provenance remains exactly `OpenAI Codex gpt-5.6-sol, Ultra`.
 Permanent gate: no Chrome, Chromium, Playwright, Puppeteer, Electron, WebView,
 DAISY Ace, or other browser process may be launched.
 
-Overall C140 remains incomplete after C2. The matrix Gaussian linear-model
+Overall C140 remains incomplete after the public C2 boundary. The matrix Gaussian linear-model
 bridge is closed. Bayesian–frequentist comparison, remaining scheduled
 simulations, eight mastery sets, three cumulative assessments, and two capstones
 remain.

@@ -20,8 +20,10 @@ byte-identik serta audit matematika pascaperbaikan tanpa proses browser atau
 jaringan. Pembaca web tersedia di
 https://kokunoyumeto.github.io/penn-state-stat-415-id/components/c140-companion/;
 rilis kumulatif tersedia di
-https://github.com/KokunoYumeto/penn-state-stat-415-id/releases/tag/v2026.08.29.c140-companion-c2
-dan lineage https://doi.org/10.5281/zenodo.22077422. C140 belum lengkap sampai
+https://github.com/KokunoYumeto/penn-state-stat-415-id/releases/tag/v2026.08.29.c140-companion-c2-replay-fix
+dan https://doi.org/10.5281/zenodo.22160621 dalam lineage
+https://doi.org/10.5281/zenodo.22077422. Seluruh 171 berkas Pages dan 41 berkas
+rilis telah dibaca kembali dan cocok byte demi byte. C140 belum lengkap sampai
 seluruh batas pada `00_control/WORKFLOW.md` selesai dan dipublikasikan.
 
 Provenans produksi: `OpenAI Codex gpt-5.6-sol, Ultra`.

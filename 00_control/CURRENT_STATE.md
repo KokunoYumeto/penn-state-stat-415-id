@@ -434,3 +434,36 @@ and `c16fc96521afbee4cdcb4d63ea8d868e3760007532687414b82db2a40fa246a9`.
 The next executable action is the matrix Gaussian linear-model batch. Overall
 C140 remains incomplete. No upstream message has been sent, and no browser
 process may be launched.
+
+## Original C140 companion — C2 public preservation boundary
+
+The cumulative original companion now includes `D001`–`D011`,
+`SIM001`–`SIM005`, `MS07`–`MS10`, `MS12`, `CA01`, and the index: 23 documents,
+640 stable anchors, 221 resolved body references, 50 fully solved problems, and
+five seeded simulation families. The deterministic reader has 47 files /
+2,509,497 bytes; its manifest SHA-256 is
+`17d7dfd35cadf0b16b373221ba490fbd1c1d903c039327b2013a57963660b170`.
+The backend has 679 entities / 917 relations / 225,463 bytes; manifest SHA-256
+is `3304645393ab94d9c3f0b0861876a5123b4db7ac32f797c3fdebba2635c30a9d`.
+Build and QA receipt SHA-256 values are
+`6417c7a8764082ce74e397ccdb79d337534d27c888d8d2cc12830d6947d7c0a1`
+and `0f118dae5488a68098aa9fef5c03a4135968eee2c74f509f67b0817e05bc38ef`.
+
+Linux CI exposed only receipt-level low-order floating-point variation in
+SIM005. The generator now quantizes receipt summaries while preserving every
+substantive CSV/SVG result. Run `33224203232` passed at commit
+`d330dc7ecbef71c96067f49fab372efd72317d0c`; two credential-free readbacks
+matched all 171 Pages files / 21,922,300 bytes. The corrected cumulative GitHub
+release is `378957927`, tag
+`v2026.08.29.c140-companion-c2-replay-fix`, at commit
+`7f464d3704c6bbe79fcbf94d5fccd567baa1865f`; Zenodo record `22160621`, DOI
+`10.5281/zenodo.22160621`, is public in concept `22077422`. Both destinations
+matched all 41 release files / 91,249,199 bytes anonymously, and the Zenodo
+lineage has zero drafts.
+
+The matrix Gaussian linear-model boundary is closed. The next executable
+production batch is C3 under
+`components/c140-companion/00_control/C3_BAYESIAN_COMPARISON_BATCH_CONTRACT.md`:
+`D012`, `D013`, `SIM006`, and `MS11`, followed by cumulative static build/QA.
+Overall C140 remains incomplete. No upstream message has been sent, and no
+browser process may be launched.
