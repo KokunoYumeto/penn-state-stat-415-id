@@ -28,14 +28,16 @@ SOURCE = ROOT / "source" / "id-ID"
 GENERATED_BATCHES = {
     "c1": ROOT / "generated" / "simulations" / "c1",
     "c2": ROOT / "generated" / "simulations" / "c2",
+    "c3": ROOT / "generated" / "simulations" / "c3",
 }
 SIMULATION_RECEIPTS = {
     "c1": ROOT / "build" / "C1_SIMULATION_RECEIPT.json",
     "c2": ROOT / "build" / "C2_SIMULATION_RECEIPT.json",
+    "c3": ROOT / "build" / "C3_SIMULATION_RECEIPT.json",
 }
 HTML_TARGET = ROOT / "build" / "html-id"
 BACKEND_TARGET = ROOT / "backend"
-RECEIPT_TARGET = ROOT / "build" / "C2_BUILD_RECEIPT.json"
+RECEIPT_TARGET = ROOT / "build" / "C3_BUILD_RECEIPT.json"
 MATHJAX_SOURCE = REPO / "build" / "html-id" / "assets" / "MathJax"
 MATHJAX_LICENSE = REPO / "build" / "html-id" / "licenses" / "MathJax-3.1.2-LICENSE.txt"
 
@@ -62,6 +64,12 @@ REQUIRED_CUMULATIVE_C2 = REQUIRED_C1 | {
     *(f"O006-C140-CMP-D{i:03d}" for i in range(8, 12)),
     "O006-C140-CMP-SIM005",
     "O006-C140-CMP-MS12",
+}
+REQUIRED_CUMULATIVE_C3 = REQUIRED_CUMULATIVE_C2 | {
+    "O006-C140-CMP-D012",
+    "O006-C140-CMP-D013",
+    "O006-C140-CMP-SIM006",
+    "O006-C140-CMP-MS11",
 }
 ANCHOR_RE = re.compile(r'<a\s+id="([A-Za-z0-9._:-]+)"\s*></a>')
 REF_RE = re.compile(r"\[ref:([A-Za-z0-9._:-]+)\]")
@@ -182,12 +190,12 @@ def load_documents() -> list[Document]:
     ids = [str(item.metadata["id"]) for item in documents]
     if len(ids) != len(set(ids)):
         raise RuntimeError("Duplicate document ID")
-    missing = sorted(REQUIRED_CUMULATIVE_C2 - set(ids))
+    missing = sorted(REQUIRED_CUMULATIVE_C3 - set(ids))
     if missing:
-        raise RuntimeError(f"Cumulative C2 source boundary incomplete; missing {missing}")
-    unexpected = sorted(set(ids) - REQUIRED_CUMULATIVE_C2)
+        raise RuntimeError(f"Cumulative C3 source boundary incomplete; missing {missing}")
+    unexpected = sorted(set(ids) - REQUIRED_CUMULATIVE_C3)
     if unexpected:
-        raise RuntimeError(f"Cumulative C2 source boundary has unexpected documents {unexpected}")
+        raise RuntimeError(f"Cumulative C3 source boundary has unexpected documents {unexpected}")
     all_anchors = [anchor for item in documents for anchor in item.anchors]
     duplicates = sorted({anchor for anchor in all_anchors if all_anchors.count(anchor) > 1})
     if duplicates:
@@ -340,15 +348,78 @@ def generated_output_rel(batch: str, path: Path) -> str:
     return f"assets/simulations/{path.name}"
 
 
+def declared_simulation_assets(
+    batch: str, directory: Path
+) -> tuple[Path, list[tuple[dict[str, str], Path]]]:
+    """Return the manifest-closed generated asset set for one batch."""
+    if directory.is_symlink() or not directory.is_dir():
+        raise RuntimeError(f"{batch.upper()} simulation output directory is missing or unsafe")
+    manifest = directory / "MANIFEST.csv"
+    if manifest.is_symlink() or not manifest.is_file():
+        raise RuntimeError(f"{batch.upper()} simulation manifest is missing or unsafe")
+    rows = list(csv.DictReader(manifest.read_text(encoding="utf-8").splitlines()))
+    if not rows:
+        raise RuntimeError(f"{batch.upper()} simulation manifest is empty")
+    expected_prefix = PurePosixPath("generated") / "simulations" / batch
+    entries: list[tuple[dict[str, str], Path]] = []
+    names: set[str] = set()
+    for index, row in enumerate(rows, start=2):
+        path_value = str(row.get("path") or "")
+        filename_value = str(row.get("filename") or "")
+        if bool(path_value) == bool(filename_value):
+            raise RuntimeError(
+                f"{batch.upper()} manifest row {index} must declare exactly one path field"
+            )
+        if path_value:
+            relative = PurePosixPath(path_value)
+            if relative.parent != expected_prefix or len(relative.name) == 0:
+                raise RuntimeError(
+                    f"{batch.upper()} manifest path escapes its batch: {path_value}"
+                )
+            path = ROOT.joinpath(*relative.parts)
+        else:
+            relative = PurePosixPath(filename_value)
+            if len(relative.parts) != 1 or relative.name != filename_value:
+                raise RuntimeError(
+                    f"{batch.upper()} manifest filename is unsafe: {filename_value}"
+                )
+            path = directory / filename_value
+        if path.name == manifest.name or path.name in names:
+            raise RuntimeError(f"{batch.upper()} manifest duplicates output {path.name}")
+        if path.is_symlink() or not path.is_file() or path.parent.resolve() != directory.resolve():
+            raise RuntimeError(f"{batch.upper()} declared output is missing or unsafe: {path.name}")
+        try:
+            expected_bytes = int(str(row.get("bytes", "")))
+        except ValueError as exc:
+            raise RuntimeError(f"{batch.upper()} manifest byte count is invalid: {path.name}") from exc
+        payload = path.read_bytes()
+        if len(payload) != expected_bytes or sha256(payload) != str(row.get("sha256", "")):
+            raise RuntimeError(f"{batch.upper()} manifest identity differs: {path.name}")
+        names.add(path.name)
+        entries.append((row, path))
+    actual_names: set[str] = set()
+    for candidate in directory.iterdir():
+        if candidate.is_symlink() or not candidate.is_file():
+            raise RuntimeError(
+                f"{batch.upper()} simulation directory contains an unsafe entry: {candidate.name}"
+            )
+        actual_names.add(candidate.name)
+    expected_names = {manifest.name, *names}
+    if actual_names != expected_names:
+        raise RuntimeError(
+            f"{batch.upper()} simulation directory is not manifest-closed; "
+            f"missing={sorted(expected_names - actual_names)}, "
+            f"extra={sorted(actual_names - expected_names)}"
+        )
+    return manifest, entries
+
+
 def iter_generated_assets() -> list[tuple[str, Path, str]]:
     rows: list[tuple[str, Path, str]] = []
     output_paths: set[str] = set()
     for batch, directory in GENERATED_BATCHES.items():
-        if not directory.is_dir():
-            raise RuntimeError(f"{batch.upper()} simulation outputs are missing")
-        for path in sorted(directory.iterdir()):
-            if not path.is_file():
-                continue
+        manifest, entries = declared_simulation_assets(batch, directory)
+        for path in [manifest, *(path for _row, path in entries)]:
             output_rel = generated_output_rel(batch, path)
             if output_rel in output_paths:
                 raise RuntimeError(f"Simulation output collision: {output_rel}")
@@ -476,6 +547,7 @@ def build_payloads(documents: list[Document]) -> tuple[dict[str, bytes], dict[st
     batch_simulations = {
         "c1": [f"O006-C140-CMP-SIM{i:03d}" for i in range(1, 5)],
         "c2": ["O006-C140-CMP-SIM005"],
+        "c3": ["O006-C140-CMP-SIM006"],
     }
     for batch, path in SIMULATION_RECEIPTS.items():
         payload = path.read_bytes()
@@ -524,16 +596,16 @@ def build_payloads(documents: list[Document]) -> tuple[dict[str, bytes], dict[st
             "relations": len(relation_rows),
         },
         "browser_processes_used": False,
-        "boundary": "cumulative-through-c2",
+        "boundary": "cumulative-through-c3",
         "cumulative_documents": len(documents),
-        "cumulative_required_ids": sorted(REQUIRED_CUMULATIVE_C2),
+        "cumulative_required_ids": sorted(REQUIRED_CUMULATIVE_C3),
         "html": {
             "bytes": sum(len(value) for value in html_payloads.values()),
             "files": len(html_payloads),
             "manifest_sha256": sha256(html_payloads["MANIFEST.csv"]),
         },
         "network_access": False,
-        "schema": "o006.c140.companion-cumulative-c2-build.v1",
+        "schema": "o006.c140.companion-cumulative-c3-build.v1",
         "simulation_receipts": [
             {
                 "batch": batch,
@@ -589,9 +661,9 @@ def main() -> None:
         errors = compare_payloads(HTML_TARGET, html_payloads)
         errors.extend(f"backend/{item}" for item in compare_payloads(BACKEND_TARGET, backend_payloads))
         if not RECEIPT_TARGET.is_file():
-            errors.append("missing:C2_BUILD_RECEIPT.json")
+            errors.append("missing:C3_BUILD_RECEIPT.json")
         elif RECEIPT_TARGET.read_bytes() != receipt:
-            errors.append("mismatch:C2_BUILD_RECEIPT.json")
+            errors.append("mismatch:C3_BUILD_RECEIPT.json")
         if errors:
             raise RuntimeError("Deterministic replay failed: " + ", ".join(errors[:40]))
         mode_name = "verified"

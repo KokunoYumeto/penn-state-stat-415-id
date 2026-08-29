@@ -1,0 +1,176 @@
+<!doctype html>
+<html lang="id-ID">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="generator" content="OpenAI Codex gpt-5.6-sol, Ultra">
+<title>Kalibrasi selang Bayesian dan frequentist pada model binomial</title>
+<link rel="stylesheet" href="../assets/style.css">
+<script>window.MathJax={loader:{load:['[tex]/boldsymbol']},tex:{packages:{'[+]':['boldsymbol']},inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']]},svg:{fontCache:'local'}};</script>
+<script defer src="../assets/MathJax/tex-svg.js"></script>
+</head>
+<body>
+<div class="shell">
+<nav class="sidebar" aria-label="Daftar isi pendamping"><h2>Isi pendamping</h2><ol><li><a href="../index.html">Pendamping Orisinal Statistika Matematis</a></li><li><a href="../theory/O006-C140-CMP-D001.html">Model parametrik reguler, skor, dan informasi Fisher</a></li><li><a href="../theory/O006-C140-CMP-D002.html">Konsistensi MLE: identifikasi Kullback–Leibler dan teorema argmax</a></li><li><a href="../theory/O006-C140-CMP-D003.html">Likelihood kuadratik lokal, normalitas asimtotik, dan delta method</a></li><li><a href="../theory/O006-C140-CMP-D004.html">Prosedur Wald, skor, dan rasio likelihood</a></li><li><a href="../theory/O006-C140-CMP-D005.html">Likelihood nonreguler: empat mekanisme kegagalan</a></li><li><a href="../theory/O006-C140-CMP-D006.html">Optimalitas pengujian: Neyman–Pearson, MP, UMP, dan rasio likelihood monoton</a></li><li><a href="../theory/O006-C140-CMP-D007.html">Loss, risk, efisiensi, Rao–Blackwell, dan Lehmann–Scheffé</a></li><li><a href="../theory/O006-C140-CMP-D008.html">Model linear Gaussian desain tetap dan geometri proyeksi</a></li><li><a href="../theory/O006-C140-CMP-D009.html">OLS, MLE Gaussian, dan teorema Gauss–Markov pada rancangan tetap</a></li><li><a href="../theory/O006-C140-CMP-D010.html">Inferensi Gaussian eksak: proyeksi, t, F, ANOVA, dan prediksi</a></li><li><a href="../theory/O006-C140-CMP-D011.html">Diagnostik, leverage, misspesifikasi, dan inferensi pascaseleksi</a></li><li><a href="../theory/O006-C140-CMP-D012.html">Inferensi Bayesian sebagai pembaruan dan keputusan yang koheren</a></li><li><a href="../theory/O006-C140-CMP-D013.html">Perbandingan Bayesian–frequentist: keputusan, cakupan, dan kalibrasi</a></li><li><a href="O006-C140-CMP-SIM001.html">Model lokasi normal: MLE, coverage, dan tiga statistik uji</a></li><li><a href="O006-C140-CMP-SIM002.html">Delta method pada titik reguler dan titik dengan turunan nol</a></li><li><a href="O006-C140-CMP-SIM003.html">Endpoint Uniform: laju nonreguler dan kegagalan bootstrap biasa</a></li><li><a href="O006-C140-CMP-SIM004.html">Uji Neyman–Pearson teracak dengan size tepat</a></li><li><a href="O006-C140-CMP-SIM005.html">Model linear matriks: coverage, heteroskedastisitas, dan pengaruh</a></li><li><a href="O006-C140-CMP-SIM006.html">Kalibrasi selang Bayesian dan frequentist pada model binomial</a></li><li><a href="../mastery/O006-C140-CMP-MS07.html">Set penguasaan 07 — regularitas, konsistensi, dan normalitas MLE</a></li><li><a href="../mastery/O006-C140-CMP-MS08.html">Set penguasaan 08 — Wald, skor, rasio likelihood, dan diagnosis nonregular</a></li><li><a href="../mastery/O006-C140-CMP-MS09.html">Set penguasaan 09 — pengujian eksak dan optimalitas Neyman–Pearson</a></li><li><a href="../mastery/O006-C140-CMP-MS10.html">Set penguasaan 10 — uji likelihood asimtotik, risk, dan perbaikan estimator</a></li><li><a href="../mastery/O006-C140-CMP-MS11.html">Set penguasaan 11 — pembaruan Bayesian, keputusan, dan kalibrasi</a></li><li><a href="../mastery/O006-C140-CMP-MS12.html">Set penguasaan 12 — model linear Gaussian matriks, inferensi eksak, dan diagnostik</a></li><li><a href="../assessments/O006-C140-CMP-CA01.html">Asesmen kumulatif C1: likelihood, optimalitas, dan keputusan statistik</a></li></ol></nav>
+<main>
+<div class="metadata"><strong>O006-C140-CMP-SIM006</strong> · id-ID · CC BY-SA 4.0 · OpenAI Codex gpt-5.6-sol, Ultra</div>
+<p><a id="O006-C140-CMP-SIM006-SEC01"></a></p>
+<h1>Dua jaminan probabilitas yang berbeda</h1>
+<p>Laboratorium ini memakai model</p>
+<div class="math-display" role="math">\[X\mid p\sim\operatorname{Binomial}(20,p).\]</div>
+<p>Analisis Bayesian menetapkan prior <span class="math-inline" role="math">\(p\sim\operatorname{Beta}(2,2)\)</span>. Setelah
+<span class="math-inline" role="math">\(X=x\)</span>, distribusi posteriornya adalah</p>
+<div class="math-display" role="math">\[p\mid X=x\sim\operatorname{Beta}(x+2,22-x).\]</div>
+<p>Selang kredibel berekor sama (<em>equal-tail</em>) 95%
+<span class="math-inline" role="math">\(C_B(x)=[L_B(x),U_B(x)]\)</span> memotong peluang
+posterior 0,025 pada setiap ekor. Pernyataan
+<span class="math-inline" role="math">\(P\{p\in C_B(x)\mid X=x\}=0{,}95\)</span> memperlakukan <span class="math-inline" role="math">\(x\)</span> sebagai data yang sudah
+diamati dan <span class="math-inline" role="math">\(p\)</span> sebagai peubah acak dalam model posterior; lihat
+<a class="xref" data-target-id="O006-C140-CMP-D012" href="../theory/O006-C140-CMP-D012.html">Inferensi Bayesian sebagai pembaruan dan keputusan yang koheren</a> dan <a class="xref" data-target-id="O006-C140-CMP-D013" href="../theory/O006-C140-CMP-D013.html">Perbandingan Bayesian–frequentist: keputusan, cakupan, dan kalibrasi</a>.</p>
+<p>Pembanding frequentist adalah selang kepercayaan dua-sisi Clopper–Pearson
+95%, <span class="math-inline" role="math">\(C_F(x)=[L_F(x),U_F(x)]\)</span>, yang membalik uji ekor binomial eksak. Untuk
+<span class="math-inline" role="math">\(x=0,\ldots,20\)</span>, titik ujungnya didefinisikan lengkap oleh</p>
+<div class="math-display" role="math">\[L_F(x)=
+\begin{cases}
+0,&amp;x=0,\\
+Q_{\operatorname{Beta}(x,21-x)}(0{,}025),&amp;1\le x\le20,
+\end{cases}\]</div>
+<p>dan</p>
+<div class="math-display" role="math">\[U_F(x)=
+\begin{cases}
+Q_{\operatorname{Beta}(x+1,20-x)}(0{,}975),&amp;0\le x\le19,\\
+1,&amp;x=20.
+\end{cases}\]</div>
+<p>Pernyataan cakupannya menahan <span class="math-inline" role="math">\(p\)</span> tetap dan
+memperlakukan <span class="math-inline" role="math">\(X\)</span> sebagai acak:</p>
+<div class="math-display" role="math">\[C_F(p)=P_p\{p\in C_F(X)\}.\]</div>
+<p>Kemiripan bentuk dua pasang titik ujung itu tidak menyamakan makna
+probabilitasnya.</p>
+<p><a id="O006-C140-CMP-SIM006-SIM01"></a></p>
+<h2>Kontrak komputasi</h2>
+<p>Generator kanonis adalah <code>simulations/run_c3_simulations.py</code>. Ia memakai:</p>
+<ul>
+<li>Python 3.13.9 dan NumPy 2.4.4;</li>
+<li><code>numpy.random.Generator(PCG64)</code> dengan seed <code>2026082906</code>;</li>
+<li>grid parameter tetap <span class="math-inline" role="math">\(p=0{,}01,0{,}02,\ldots,0{,}99\)</span>;</li>
+<li>80.000 tarikan binomial pada setiap titik grid untuk memeriksa jumlah eksak;</li>
+<li>500.000 pasangan <span class="math-inline" role="math">\((p,X)\)</span> dari model prior-prediktif untuk memeriksa
+kalibrasi rata-rata-prior;</li>
+<li>tanpa SciPy, jaringan, atau proses browser.</li>
+</ul>
+<p>Karena semua bentuk beta di sini berupa bilangan bulat positif, generator
+menghitung fungsi distribusi beta dengan identitas jumlah berhingga</p>
+<div class="math-display" role="math">\[I_z(a,b)=\sum_{j=a}^{a+b-1}
+{a+b-1\choose j}z^j(1-z)^{a+b-1-j}.\]</div>
+<p>Kuantil dibalik dengan tepat 80 langkah biseksi. Nilai ringkasan diserialkan
+sebagai string desimal berpresisi tetap setelah dikuantisasi, sehingga
+perbedaan tak-relevan pada digit floating-point terakhir tidak mengubah byte
+CSV atau receipt.</p>
+<p><a id="O006-C140-CMP-SIM006-SEC02"></a></p>
+<h1>Cakupan ketika parameter pembangkit ditahan tetap</h1>
+<p>Untuk setiap <span class="math-inline" role="math">\(p\)</span> pada grid, peluang binomial dijumlahkan, bukan hanya
+diperkirakan:</p>
+<div class="math-display" role="math">\[C_B(p)=\sum_{x=0}^{20}
+{20\choose x}p^x(1-p)^{20-x}\,
+\mathbf 1\{p\in C_B(x)\},\]</div>
+<p>dan rumus yang sama dipakai untuk <span class="math-inline" role="math">\(C_F(p)\)</span>. Tabel berikut menampilkan beberapa
+titik representatif; kolom “eksak” berasal dari jumlah berhingga tersebut.</p>
+<table>
+<caption>Cakupan bersyarat pada parameter tetap; 80.000 replikasi per baris hanya memeriksa implementasi</caption>
+<thead><tr><th scope="col"><span class="math-inline" role="math">\(p\)</span> tetap</th><th scope="col">Kredibel, eksak</th><th scope="col">Kredibel, Monte Carlo</th><th scope="col">Clopper–Pearson, eksak</th><th scope="col">Clopper–Pearson, Monte Carlo</th></tr></thead>
+<tbody>
+<tr><th scope="row">0,01</th><td>0,000000</td><td>0,000000</td><td>0,983141</td><td>0,983688</td></tr>
+<tr><th scope="row">0,02</th><td>0,667608</td><td>0,668800</td><td>0,992931</td><td>0,993488</td></tr>
+<tr><th scope="row">0,05</th><td>0,924516</td><td>0,925350</td><td>0,984098</td><td>0,984425</td></tr>
+<tr><th scope="row">0,10</th><td>0,867047</td><td>0,866463</td><td>0,988747</td><td>0,988150</td></tr>
+<tr><th scope="row">0,25</th><td>0,955904</td><td>0,955113</td><td>0,961823</td><td>0,961675</td></tr>
+<tr><th scope="row">0,43</th><td>0,978332</td><td>0,978513</td><td>0,978332</td><td>0,978513</td></tr>
+<tr><th scope="row">0,50</th><td>0,958611</td><td>0,959438</td><td>0,958611</td><td>0,959438</td></tr>
+</tbody>
+</table>
+<p>Prior simetris dan model binomial menghasilkan kurva simetris terhadap
+<span class="math-inline" role="math">\(p=0{,}5\)</span>. Karena itu baris untuk <span class="math-inline" role="math">\(0{,}75\)</span>, <span class="math-inline" role="math">\(0{,}90\)</span>, <span class="math-inline" role="math">\(0{,}95\)</span>, <span class="math-inline" role="math">\(0{,}98\)</span>, dan
+<span class="math-inline" role="math">\(0{,}99\)</span> mempunyai cakupan eksak yang sama dengan baris pasangannya di atas.
+Di seluruh 99 titik, cakupan selang kredibel minimum adalah 0 pada <span class="math-inline" role="math">\(p=0{,}01\)</span> dan
+<span class="math-inline" role="math">\(0{,}99\)</span>, sedangkan maksimum pertamanya 0,9783319525 pada <span class="math-inline" role="math">\(p=0{,}43\)</span>.
+Cakupan Clopper–Pearson minimum pada grid adalah 0,9586105347, dicapai pertama
+kali pada <span class="math-inline" role="math">\(p=0{,}50\)</span>.</p>
+<figure>
+<img src="../assets/simulations/SIM006_beta_binomial_coverage.svg" alt="Kurva cakupan bersyarat pada grid p dari 0,01 sampai 0,99: garis penuh untuk selang kredibel Beta(2,2) berubah tajam dan bernilai nol di kedua ujung grid, sedangkan garis putus-putus untuk selang Clopper–Pearson tetap sedikit di atas garis target 0,95.">
+<figcaption>Cakupan pada parameter tetap bukan peluang posterior setelah data diamati.</figcaption>
+</figure>
+<p>Data seluruh grid: <a href="../assets/simulations/SIM006_beta_binomial_conditional_coverage.csv">CSV cakupan bersyarat</a>.</p>
+<p><a id="O006-C140-CMP-SIM006-CTR01"></a></p>
+<h2>Mengapa cakupan nol di <span class="math-inline" role="math">\(p=0{,}01\)</span> bukan kontradiksi</h2>
+<p>Jika <span class="math-inline" role="math">\(x=0\)</span>, selang kredibel adalah
+<span class="math-inline" role="math">\([0{,}010709966038;\,0{,}219486607453]\)</span>. Nilai tetap <span class="math-inline" role="math">\(p=0{,}01\)</span> berada di
+bawah titik ujung kiri itu. Untuk <span class="math-inline" role="math">\(x&gt;0\)</span>, titik ujung kiri bahkan lebih besar.
+Akibatnya, tidak satu pun kemungkinan data menghasilkan interval yang memuat
+<span class="math-inline" role="math">\(p=0{,}01\)</span>, sehingga cakupannya tepat nol. Namun setiap interval yang telah
+dihitung tetap memuat tepat 0,95 massa posteriornya sendiri. Kedua fakta itu
+menjawab pertanyaan probabilitas yang berbeda.</p>
+<p>Sebagai pembanding, pada <span class="math-inline" role="math">\(x=0\)</span> interval Clopper–Pearson adalah
+<span class="math-inline" role="math">\([0;\,0{,}168433470983]\)</span> dan memuat <span class="math-inline" role="math">\(p=0{,}01\)</span>. Pada <span class="math-inline" role="math">\(x=10\)</span>, selang kredibel
+adalah <span class="math-inline" role="math">\([0{,}305878001491;\,0{,}694121998509]\)</span>, sedangkan interval
+Clopper–Pearson adalah
+<span class="math-inline" role="math">\([0{,}271957849561;\,0{,}728042150439]\)</span>. Prior Beta(2,2) menarik interval
+posterior menjauhi batas; prior lain akan memberi titik ujung serta profil cakupan
+lain. Laboratorium ini tidak menyatakan bahwa satu pilihan prior berlaku
+universal.</p>
+<p>Data titik ujung: <a href="../assets/simulations/SIM006_beta_binomial_intervals.csv">CSV semua selang</a>.</p>
+<p><a id="O006-C140-CMP-SIM006-THM01"></a></p>
+<h1>Identitas kalibrasi rata-rata-prior</h1>
+<p>Misalkan <span class="math-inline" role="math">\(m(x)\)</span> adalah peluang prior-prediktif. Dengan hukum probabilitas total
+dan aturan Bayes,</p>
+<div class="math-display" role="math">\[\begin{aligned}
+\int_0^1 C_B(p)\,\pi(p)\,dp
+&amp;=\sum_{x=0}^{20}\int_{C_B(x)}
+  P(X=x\mid p)\pi(p)\,dp\\
+&amp;=\sum_{x=0}^{20}m(x)
+  \int_{C_B(x)}\pi(p\mid x)\,dp\\
+&amp;=0{,}95\sum_{x=0}^{20}m(x)=0{,}95.
+\end{aligned}\]</div>
+<p>Ini identitas model bersama: mula-mula <span class="math-inline" role="math">\(p\)</span> acak menurut Beta(2,2), lalu <span class="math-inline" role="math">\(X\)</span>
+acak bersyarat pada <span class="math-inline" role="math">\(p\)</span>. Perhitungan berhingga memberi jumlah peluang
+prior-prediktif 1,000000000000 dan cakupan rata-rata-prior selang kredibel
+0,950000000000. Simulasi 500.000 pasangan memberi 0,950392000000.</p>
+<p>Interval Clopper–Pearson mempunyai cakupan rata-rata-prior 0,973876917134 pada
+model bersama yang sama; simulasinya memberi 0,974138000000. Nilai lebih tinggi
+itu mencerminkan konservatisme akibat data diskret, bukan probabilitas posterior
+0,9739 setelah satu <span class="math-inline" role="math">\(x\)</span> diamati.</p>
+<p><a id="O006-C140-CMP-SIM006-REM01"></a></p>
+<h2>Apa yang boleh dan tidak boleh disimpulkan</h2>
+<ul>
+<li>Kalibrasi rata-rata-prior 0,95 tidak menyiratkan cakupan 0,95 untuk setiap
+<span class="math-inline" role="math">\(p\)</span> tetap. Daerah dengan cakupan rendah dapat diimbangi oleh daerah dengan
+cakupan tinggi di bawah bobot prior.</li>
+<li>Jaminan Clopper–Pearson pada parameter tetap tidak mengubah intervalnya
+menjadi pernyataan bahwa peluang posterior <span class="math-inline" role="math">\(p\)</span> berada di dalamnya adalah
+0,95.</li>
+<li>Konservatisme selang kepercayaan tidak otomatis buruk, dan selang kredibel
+yang lebih pendek tidak otomatis lebih baik. Pilihan prosedur harus
+mengikuti target keputusan, loss, prior, dan jaminan pengulangan yang benar.</li>
+<li>Satu contoh terkalibrasi tidak menetapkan superioritas universal Bayesian
+ataupun frequentist.</li>
+</ul>
+<p><a id="O006-C140-CMP-SIM006-SEC03"></a></p>
+<h1>Assertion dan replay</h1>
+<p>Semua assertion berikut lulus: setiap interval terurut; massa posterior setiap
+selang kredibel berbeda dari 0,95 kurang dari <span class="math-inline" role="math">\(5\times10^{-13}\)</span>; peluang
+prior-prediktif menjumlah ke satu; identitas rata-rata-prior berbeda dari 0,95
+kurang dari <span class="math-inline" role="math">\(5\times10^{-13}\)</span>; cakupan Clopper–Pearson tidak kurang dari 0,95
+di grid; serta simetri kedua kurva terjaga hingga <span class="math-inline" role="math">\(5\times10^{-13}\)</span>.
+Selisih absolut Monte Carlo maksimum terhadap jumlah eksak di 99 titik adalah
+0,002279528245 untuk selang kredibel dan 0,001611006822 untuk
+Clopper–Pearson, keduanya di bawah batas assertion 0,008.</p>
+<p>Jalankan <code>python simulations/run_c3_simulations.py --write</code>, lalu
+<code>python simulations/run_c3_simulations.py --check-only</code>. Mode kedua menghitung
+ulang seluruh keluaran dan hard-fail bila inventaris, byte, manifest, atau
+receipt berbeda. Ringkasan metrik tersedia pada
+<a href="../assets/simulations/SIM006_beta_binomial_calibration.csv">CSV kalibrasi</a>.</p>
+
+<footer class="license">Materi pendamping orisinal berlisensi CC BY-SA 4.0. Komponen Penn State dan Random tetap berada di bawah lisensinya masing-masing dan tidak direlisensikan oleh halaman ini.</footer>
+</main>
+</div>
+</body>
+</html>

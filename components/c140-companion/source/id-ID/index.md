@@ -52,8 +52,9 @@ SVG statis, serta assertion numerik. Tidak ada runtime jaringan atau browser.
 Setiap masalah memiliki prasyarat, tujuan, tingkat kesulitan, tag miskonsepsi,
 petunjuk bertahap, jawaban singkat, dan solusi lengkap. C1 adalah checkpoint
 substansial, bukan akhir pendamping. C2 di bawah menutup model linear matriks;
-perbandingan Bayesian–frequentist, set penguasaan serta asesmen sisanya, dan dua
-capstone masih mengikuti urutan pada kontrol hidup.
+pada checkpoint historis itu perbandingan Bayesian–frequentist masih terbuka.
+C3 di bawah sekarang menutup perbandingan tersebut; set penguasaan serta
+asesmen sisanya dan dua capstone masih mengikuti urutan pada kontrol hidup.
 
 <a id="O006-C140-CMP-INDEX-SEC005"></a>
 ## Model linear matriks C2
@@ -73,6 +74,26 @@ capstone masih mengikuti urutan pada kontrol hidup.
 - [ref:O006-C140-CMP-MS12] menyediakan delapan masalah nontrivial dengan
   petunjuk bertahap, jawaban singkat, dan solusi penuh.
 
-C2 menutup batas regresi matriks yang ditetapkan untuk pendamping. Pendamping
-tetap berstatus produksi sampai perbandingan Bayesian–frequentist, set
-penguasaan yang tersisa, empat asesmen kumulatif, dan dua capstone selesai.
+C2 menutup batas regresi matriks yang ditetapkan untuk pendamping. Pada akhir
+checkpoint C2, perbandingan Bayesian–frequentist masih terbuka; bagian C3 di
+bawah menutupnya. Pendamping tetap berstatus produksi sampai set penguasaan
+yang tersisa, tiga asesmen kumulatif, dan dua capstone selesai.
+
+<a id="O006-C140-CMP-INDEX-SEC007"></a>
+## Pembaruan, keputusan, dan kalibrasi C3
+
+1. [ref:O006-C140-CMP-D012] membangun posterior dan prediktif dari hukum
+   bersama, lalu menghubungkan tindakan, loss, risk frequentist, dan risk
+   Bayes dengan syarat prior proper atau improper yang dinyatakan tepat.
+2. [ref:O006-C140-CMP-D013] membandingkan interval credible dengan confidence,
+   keputusan Bayesian dengan size/power, Bayes factor dengan uji, serta
+   pemeriksaan prediktif posterior dengan *p*-value tanpa menyamakan jaminannya.
+3. [ref:O006-C140-CMP-SIM006] memisahkan cakupan pada parameter tetap dari
+   kalibrasi rata-rata-prior pada eksperimen beta–binomial deterministik.
+4. [ref:O006-C140-CMP-MS11] menguji derivasi, keputusan, sensitivitas prior,
+   optional stopping, dan interpretasi hasil kalibrasi melalui delapan masalah
+   dengan solusi penuh.
+
+C3 menutup batas teori perbandingan Bayesian–frequentist yang ditetapkan untuk
+pendamping, tetapi bukan keseluruhan C140. Set penguasaan, asesmen kumulatif,
+dan capstone yang belum dijadwalkan tetap mengikuti kontrol hidup.

@@ -2,6 +2,47 @@
 
 Updated: 2026-08-29
 
+## C3 Bayesian–frequentist boundary — local deterministic closure
+
+Batch C3 is locally complete and adds `D012`, `D013`, `SIM006`, and `MS11`
+without changing C1/C2. The cumulative source is 27 documents / 528,082 bytes
+/ 763 anchors / 251 body references. Six mastery sets and `CA01` contain 58
+fully solved problems. The reader has 57 files / 2,713,731 bytes; manifest
+SHA-256 is
+`18b3ab09539eee0baa355dcb7f7edc2cec00f0960c5508a9419bf2bde7bb1273`.
+The backend has 812 entities / 1,084 relations / 269,101 bytes; manifest
+SHA-256 is
+`2c5b84d662713a037b512a6751dd9e8e7eb2504a69141d6268993db859e83d66`.
+Build, QA, and C3 simulation receipt SHA-256 values are
+`79661673ad7f4d74eff997cebd6fca1f46d2a74cbab5930147ca109762ef37ca`,
+`6f53a1f54d3a1b3e23b874a3c13adda9726bc0a8456d2fb4a8315d11912f72d7`,
+and `c7f176380b2e30b9931cc44bcc2e39bb541559030cf65b1c41f32045c13b1040`.
+Static write/check replay passes.
+
+Independent audits checked the D012/D013 hypotheses and derivations, SIM006
+numerics/accessibility, all eight MS11 solutions, generated-directory closure,
+receipt identity, IDs/relations, and browser/network gates. All bounded
+findings were repaired. The cumulative Pages candidate has 181 files /
+22,126,534 bytes, manifest SHA-256
+`205b1e3ad157d1967f26582ab22bfc0a3c73c2defaf812dbf16a66df33951b98`,
+and deterministic receipt SHA-256
+`b2b42257757950b0baf7240787b36d48ca06c353f35a860b0a3bcf2d8c9e82f5`.
+
+The cumulative release package has 49 files / 92,476,057 bytes. It preserves
+all 41 anonymously verified C2 files / 91,249,199 bytes byte-for-byte and adds
+eight C3 files / 1,226,858 bytes. The 30,151-byte package receipt has SHA-256
+`d78c911bdc2837a3fdddd3f71e6b7211fde46a8668d85a9c00f750cf82716637`.
+The compact source/backend archive embeds both the component licence and the
+exact collection licence governing its repository-level reproduction scripts.
+Package contract/write/check replay and independent ZIP, inheritance, rights,
+privacy, and checksum audit pass.
+
+C3 commit/push, static CI, publication, and anonymous readback are the next
+gate. The latest public checkpoint remains C2 until that transaction completes.
+After C3 publication, seven mastery sets
+`MS00`–`MS06`, three assessments `CA02`–`CA04`, and two capstones remain.
+All minimum theory and simulation-family boundaries are now locally closed.
+
 ## C2 matrix-linear-model boundary — public deterministic closure
 
 Batch C2 is complete and publicly preserved. It adds

@@ -1,0 +1,129 @@
+{
+  "backend": {
+    "documents": 27,
+    "entities": 812,
+    "manifest_sha256": "2c5b84d662713a037b512a6751dd9e8e7eb2504a69141d6268993db859e83d66",
+    "relations": 1084
+  },
+  "browser_processes_used": false,
+  "build_receipt_sha256": "79661673ad7f4d74eff997cebd6fca1f46d2a74cbab5930147ca109762ef37ca",
+  "environment_sha256": "3c5c8901ca9582e42d84ffae3aab3d9505988be6ad16eaac04d4791c601260b0",
+  "html": {
+    "external_links": 24,
+    "files": 57,
+    "images": 6,
+    "local_links": 1026,
+    "manifest_sha256": "18b3ab09539eee0baa355dcb7f7edc2cec00f0960c5508a9419bf2bde7bb1273",
+    "pages": 27,
+    "unique_html_ids": 763
+  },
+  "network_access": false,
+  "schema": "o006.c140.companion-cumulative-c3-qa.v1",
+  "scripts": [
+    {
+      "path": "scripts/build_companion.py",
+      "sha256": "8783bffd0f2bf60d029a7a0cae83d49591e062fece1a40e4ff622cbc21b04fe7"
+    },
+    {
+      "path": "scripts/qa_companion.py",
+      "sha256": "2fcfceeb09c499680d98aa0b90b125b1acc0c46a8468dd97a284fe57fbfcd92b"
+    },
+    {
+      "path": "simulations/run_c1_simulations.py",
+      "sha256": "f924aa482c6a59faa20b9da547096bc1921c9cf7331be2a3708ad448892ebd44"
+    },
+    {
+      "path": "simulations/run_c2_simulations.py",
+      "sha256": "960933c30750932b7dbbb107faacbb1856d7965714a62d0cafd0a206fd3c4ca2"
+    },
+    {
+      "path": "simulations/run_c3_simulations.py",
+      "sha256": "52f92a16b523e7d72dc5800d18eb2275777c59f161f1afb6ee8420fc67701a72"
+    }
+  ],
+  "simulations": {
+    "batches": [
+      {
+        "batch": "c1",
+        "files": 9,
+        "manifest_sha256": "8644723b24a1afa06076d77ac55e96d93540a726df18f449b6f2efc3808d8fb8",
+        "receipt_sha256": "834c8a20025d51bf53ef4e8d0f7d805489af21c34065238131366a734df7e213",
+        "simulations": 4
+      },
+      {
+        "batch": "c2",
+        "files": 3,
+        "manifest_sha256": "49d4b956a278c251458932dc9fcbdf66ef5e73d187f69398620601cf39b3c1b1",
+        "receipt_sha256": "de89e57c10c178915ddd96e12d368e5e11b40baa47b6fc31c2e3df5adbd63bd2",
+        "simulations": 1
+      },
+      {
+        "batch": "c3",
+        "files": 4,
+        "manifest_sha256": "64557d83097e30885ce6a9be08accd184efff745fcf532a8397f7839379e10f0",
+        "receipt_sha256": "c7f176380b2e30b9931cc44bcc2e39bb541559030cf65b1c41f32045c13b1040",
+        "simulations": 1
+      }
+    ],
+    "files": 16,
+    "simulation_ids": [
+      "O006-C140-CMP-SIM001",
+      "O006-C140-CMP-SIM002",
+      "O006-C140-CMP-SIM003",
+      "O006-C140-CMP-SIM004",
+      "O006-C140-CMP-SIM005",
+      "O006-C140-CMP-SIM006"
+    ],
+    "simulations": 6
+  },
+  "source": {
+    "anchors": 763,
+    "assessments": [
+      {
+        "document_id": "O006-C140-CMP-CA01",
+        "problems": 10,
+        "rubrics": 11,
+        "solution_words": 2615
+      }
+    ],
+    "documents": 27,
+    "headings": 763,
+    "mastery_sets": [
+      {
+        "document_id": "O006-C140-CMP-MS07",
+        "problems": 8,
+        "solution_words": 1704
+      },
+      {
+        "document_id": "O006-C140-CMP-MS08",
+        "problems": 8,
+        "solution_words": 1652
+      },
+      {
+        "document_id": "O006-C140-CMP-MS09",
+        "problems": 8,
+        "solution_words": 1226
+      },
+      {
+        "document_id": "O006-C140-CMP-MS10",
+        "problems": 8,
+        "solution_words": 1378
+      },
+      {
+        "document_id": "O006-C140-CMP-MS11",
+        "problems": 8,
+        "solution_words": 2140
+      },
+      {
+        "document_id": "O006-C140-CMP-MS12",
+        "problems": 8,
+        "solution_words": 1214
+      }
+    ],
+    "problems": 58,
+    "references": 251,
+    "source_bytes": 528082
+  },
+  "status": "pass",
+  "translation_provenance": "OpenAI Codex gpt-5.6-sol, Ultra"
+}

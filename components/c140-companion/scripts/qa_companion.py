@@ -22,11 +22,48 @@ import build_companion as build
 ROOT = build.ROOT
 HTML = build.HTML_TARGET
 BACKEND = build.BACKEND_TARGET
-RECEIPT = ROOT / "build" / "C2_QA_RECEIPT.json"
+RECEIPT = ROOT / "build" / "C3_QA_RECEIPT.json"
 SIM_RECEIPTS = build.SIMULATION_RECEIPTS
 ENVIRONMENT = ROOT / "environment.lock.json"
 PROBLEM_META_RE = re.compile(r"<!--PROBLEM_META\s+(\{[^\n]+\})-->")
-PROHIBITED_IMPORTS = {"playwright", "selenium", "pyppeteer", "requests", "httpx", "socket"}
+PROHIBITED_MODULES = {
+    "aiohttp",
+    "ctypes",
+    "ftplib",
+    "http.client",
+    "httpx",
+    "playwright",
+    "pyppeteer",
+    "requests",
+    "selenium",
+    "socket",
+    "subprocess",
+    "urllib.request",
+    "urllib3",
+    "webbrowser",
+    "websocket",
+}
+PROHIBITED_PROCESS_CALLS = {
+    "os.execl",
+    "os.execle",
+    "os.execlp",
+    "os.execlpe",
+    "os.execv",
+    "os.execve",
+    "os.execvp",
+    "os.execvpe",
+    "os.popen",
+    "os.spawnl",
+    "os.spawnle",
+    "os.spawnlp",
+    "os.spawnlpe",
+    "os.spawnv",
+    "os.spawnve",
+    "os.spawnvp",
+    "os.spawnvpe",
+    "os.startfile",
+    "os.system",
+}
 PRIVATE_PATTERNS = [
     re.compile(r"[A-Za-z]:\\Users\\", re.IGNORECASE),
     re.compile(r"-----BEGIN (?:RSA |EC |OPENSSH )?PRIVATE KEY-----"),
@@ -47,19 +84,35 @@ def check_source_scripts() -> list[dict[str, object]]:
     paths = sorted((ROOT / "scripts").glob("*.py")) + [
         ROOT / "simulations" / "run_c1_simulations.py",
         ROOT / "simulations" / "run_c2_simulations.py",
+        ROOT / "simulations" / "run_c3_simulations.py",
     ]
     for path in paths:
         source = path.read_text(encoding="utf-8")
         tree = ast.parse(source, filename=str(path))
         imports: set[str] = set()
+        forbidden_calls: set[str] = set()
         for node in ast.walk(tree):
             if isinstance(node, ast.Import):
-                imports.update(alias.name.split(".")[0] for alias in node.names)
+                imports.update(alias.name for alias in node.names)
             elif isinstance(node, ast.ImportFrom) and node.module:
-                imports.add(node.module.split(".")[0])
-        forbidden = sorted(imports & PROHIBITED_IMPORTS)
+                imports.add(node.module)
+            elif isinstance(node, ast.Call):
+                name = ""
+                if isinstance(node.func, ast.Name):
+                    name = node.func.id
+                elif isinstance(node.func, ast.Attribute) and isinstance(node.func.value, ast.Name):
+                    name = f"{node.func.value.id}.{node.func.attr}"
+                if name in PROHIBITED_PROCESS_CALLS or name in {"__import__", "importlib.import_module"}:
+                    forbidden_calls.add(name)
+        forbidden = sorted(
+            name
+            for name in imports
+            if any(name == prefix or name.startswith(prefix + ".") for prefix in PROHIBITED_MODULES)
+        )
         if forbidden:
             fail(f"Prohibited browser/network import in {path.name}: {forbidden}")
+        if forbidden_calls:
+            fail(f"Prohibited dynamic import/process launch in {path.name}: {sorted(forbidden_calls)}")
         rows.append({"path": path.relative_to(ROOT).as_posix(), "sha256": sha256(path.read_bytes())})
     return rows
 
@@ -132,7 +185,7 @@ def check_sources(documents: list[build.Document]) -> dict[str, object]:
     for document in documents:
         document_id = str(document.metadata["id"])
         if document_id != "O006-C140-CMP-INDEX" and document.metadata["status"] != "complete":
-            fail(f"Non-complete cumulative C2 document {document_id}")
+            fail(f"Non-complete cumulative C3 document {document_id}")
         heading_count += heading_anchors(document)
         for anchor in document.anchors:
             if not anchor.startswith(document_id + "-"):
@@ -165,13 +218,14 @@ def check_sources(documents: list[build.Document]) -> dict[str, object]:
         "O006-C140-CMP-MS08",
         "O006-C140-CMP-MS09",
         "O006-C140-CMP-MS10",
+        "O006-C140-CMP-MS11",
         "O006-C140-CMP-MS12",
     ]
     if mastery_ids != expected_mastery_ids or len(assessment_rows) != 1:
-        fail("Cumulative C2 mastery/assessment document census mismatch")
+        fail("Cumulative C3 mastery/assessment document census mismatch")
     problem_count = sum(int(row["problems"]) for row in mastery_rows + assessment_rows)
-    if problem_count != 50:
-        fail(f"Cumulative C2 problem census mismatch: {problem_count}, expected 50")
+    if problem_count != 58:
+        fail(f"Cumulative C3 problem census mismatch: {problem_count}, expected 58")
     return {
         "anchors": len(anchors),
         "assessments": assessment_rows,
@@ -182,6 +236,18 @@ def check_sources(documents: list[build.Document]) -> dict[str, object]:
         "references": sum(len(item.references) for item in documents),
         "source_bytes": sum(len(item.raw) for item in documents),
     }
+
+
+def receipt_simulation_ids(receipt: dict[str, object]) -> list[str]:
+    tokens: set[str] = set()
+    for row in receipt.get("outputs", []):
+        if not isinstance(row, dict):
+            fail("Simulation receipt output row is malformed")
+        name = PurePosixPath(str(row.get("path", ""))).name
+        match = re.match(r"(SIM\d{3})_", name)
+        if match:
+            tokens.add(match.group(1))
+    return [f"O006-C140-CMP-{token}" for token in sorted(tokens)]
 
 
 def check_simulations() -> dict[str, object]:
@@ -208,27 +274,38 @@ def check_simulations() -> dict[str, object]:
         elif batch == "c2":
             if receipt.get("schema") != "o006.c140.companion-c2-simulations.v1":
                 fail("C2 simulation receipt schema mismatch")
-            ids = ["O006-C140-CMP-SIM005"]
-            expected = ids
+            ids = receipt_simulation_ids(receipt)
+            expected = ["O006-C140-CMP-SIM005"]
             assertions = receipt.get("summary", {}).get("assertions", {})
             if not assertions or not all(assertions.values()):
                 fail("A C2 numerical simulation assertion failed")
+        elif batch == "c3":
+            if receipt.get("schema") != "o006.c140.companion-c3-simulations.v1":
+                fail("C3 simulation receipt schema mismatch")
+            ids = receipt_simulation_ids(receipt)
+            expected = ["O006-C140-CMP-SIM006"]
+            if receipt.get("summary", {}).get("id") != expected[0]:
+                fail("C3 simulation summary ID mismatch")
+            assertions = receipt.get("summary", {}).get("assertions", {})
+            if receipt.get("all_assertions_pass") is not True or not assertions or not all(assertions.values()):
+                fail("A C3 numerical simulation assertion failed")
         else:
             fail(f"Unknown simulation batch {batch}")
         if ids != expected:
             fail(f"{batch.upper()} simulation ID order mismatch: {ids}")
         simulation_ids.extend(ids)
 
-        manifest_path = build.GENERATED_BATCHES[batch] / "MANIFEST.csv"
-        manifest_rows = list(csv.DictReader(manifest_path.read_text(encoding="utf-8").splitlines()))
-        expected_files = 9 if batch == "c1" else 3
+        manifest_path, manifest_entries = build.declared_simulation_assets(
+            batch, build.GENERATED_BATCHES[batch]
+        )
+        manifest_rows = [row for row, _path in manifest_entries]
+        expected_files = {"c1": 9, "c2": 3, "c3": 4}[batch]
         if len(manifest_rows) != expected_files:
             fail(f"{batch.upper()} simulation file census mismatch: {len(manifest_rows)}")
-        for row in manifest_rows:
+        for row, path in manifest_entries:
             relative = row.get("path") or row.get("filename")
             if not relative:
                 fail(f"{batch.upper()} simulation manifest lacks a path column")
-            path = ROOT / PurePosixPath(relative) if row.get("path") else build.GENERATED_BATCHES[batch] / relative
             payload = path.read_bytes()
             if len(payload) != int(row["bytes"]) or sha256(payload) != row["sha256"]:
                 fail(f"Simulation manifest mismatch: {relative}")
@@ -255,19 +332,17 @@ def check_simulations() -> dict[str, object]:
             ):
                 fail("C1 simulation receipt inventory mismatch")
         else:
+            batch_output_paths = [path for _row, path in manifest_entries]
             expected_outputs = [
                 {
                     "bytes": path.stat().st_size,
                     "path": path.relative_to(ROOT).as_posix(),
                     "sha256": sha256(path.read_bytes()),
                 }
-                for path in [manifest_path] + [
-                    build.GENERATED_BATCHES[batch] / str(row["filename"])
-                    for row in manifest_rows
-                ]
+                for path in [manifest_path] + batch_output_paths
             ]
             if receipt.get("outputs") != expected_outputs:
-                fail("C2 simulation receipt inventory mismatch")
+                fail(f"{batch.upper()} simulation receipt inventory mismatch")
         total_files += len(manifest_rows)
         batch_rows.append({
             "batch": batch,
@@ -276,7 +351,7 @@ def check_simulations() -> dict[str, object]:
             "receipt_sha256": sha256(receipt_path.read_bytes()),
             "simulations": len(ids),
         })
-    expected_all = [f"O006-C140-CMP-SIM{i:03d}" for i in range(1, 6)]
+    expected_all = [f"O006-C140-CMP-SIM{i:03d}" for i in range(1, 7)]
     if simulation_ids != expected_all:
         fail(f"Cumulative simulation census mismatch: {simulation_ids}")
     return {
@@ -405,7 +480,7 @@ def compute_receipt() -> bytes:
         "schema": "o006.c140.companion-environment.v1",
         "status": "locked",
     }:
-        fail("Environment lock differs from the admitted cumulative C2 environment")
+        fail("Environment lock differs from the admitted cumulative C3 environment")
     documents = build.load_documents()
     receipt = {
         "backend": check_backend(documents),
@@ -414,7 +489,7 @@ def compute_receipt() -> bytes:
         "environment_sha256": sha256(ENVIRONMENT.read_bytes()),
         "html": check_html(documents),
         "network_access": False,
-        "schema": "o006.c140.companion-cumulative-c2-qa.v1",
+        "schema": "o006.c140.companion-cumulative-c3-qa.v1",
         "scripts": check_source_scripts(),
         "simulations": check_simulations(),
         "source": check_sources(documents),
@@ -437,7 +512,7 @@ def main() -> None:
         mode_name = "written"
     else:
         if not RECEIPT.is_file() or RECEIPT.read_bytes() != payload:
-            fail("C2 QA receipt deterministic replay mismatch")
+            fail("C3 QA receipt deterministic replay mismatch")
         mode_name = "verified"
     receipt = json.loads(payload)
     print(json.dumps({

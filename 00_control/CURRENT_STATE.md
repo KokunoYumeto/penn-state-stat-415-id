@@ -467,3 +467,41 @@ production batch is C3 under
 `D012`, `D013`, `SIM006`, and `MS11`, followed by cumulative static build/QA.
 Overall C140 remains incomplete. No upstream message has been sent, and no
 browser process may be launched.
+
+## Original C140 companion — C3 local deterministic boundary
+
+C3 is locally complete and adds `D012`, `D013`, `SIM006`, and `MS11` to the
+public C2 base. The cumulative scope is 27 documents / 528,082 source bytes /
+763 anchors / 251 body references, with 58 fully solved problems across six
+mastery sets and `CA01`. The deterministic reader contains 57 files /
+2,713,731 bytes; manifest SHA-256 is
+`18b3ab09539eee0baa355dcb7f7edc2cec00f0960c5508a9419bf2bde7bb1273`.
+The backend contains 812 entities / 1,084 relations / 269,101 bytes; manifest
+SHA-256 is
+`2c5b84d662713a037b512a6751dd9e8e7eb2504a69141d6268993db859e83d66`.
+Build, QA, and C3 simulation receipt SHA-256 values are
+`79661673ad7f4d74eff997cebd6fca1f46d2a74cbab5930147ca109762ef37ca`,
+`6f53a1f54d3a1b3e23b874a3c13adda9726bc0a8456d2fb4a8315d11912f72d7`,
+and `c7f176380b2e30b9931cc44bcc2e39bb541559030cf65b1c41f32045c13b1040`.
+
+Independent mathematical and integration audits closed six bounded theory,
+definition, accessibility, terminology, manifest-closure, and receipt-ID
+defects. All write/check replays pass. The cumulative Pages candidate has 181
+files / 22,126,534 bytes, manifest SHA-256
+`205b1e3ad157d1967f26582ab22bfc0a3c73c2defaf812dbf16a66df33951b98`,
+and receipt SHA-256
+`b2b42257757950b0baf7240787b36d48ca06c353f35a860b0a3bcf2d8c9e82f5`.
+
+The cumulative C3 release package has 49 files / 92,476,057 bytes. All 41
+public C2 files / 91,249,199 bytes remain byte-identical and eight C3 files /
+1,226,858 bytes are appended. The 30,151-byte package receipt has SHA-256
+`d78c911bdc2837a3fdddd3f71e6b7211fde46a8668d85a9c00f750cf82716637`.
+An independent audit found and closed a source-bundle rights-scope gap: the
+archive now includes the exact collection licence governing its embedded
+repository-level reproduction scripts. Contract/write/check replay, ZIP
+closure, CRC, privacy, licensing, checksums, and C2 inheritance all pass.
+
+The next gate is C3 commit/CI/publication/readback in the existing GitHub and
+Zenodo lineage. The latest public checkpoint remains C2 until that transaction
+passes. Afterward, `MS00`–`MS06`, `CA02`–`CA04`, and two capstones remain.
+No upstream message has been sent, and no browser process may be launched.

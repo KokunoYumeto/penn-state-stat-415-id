@@ -2,6 +2,27 @@
 
 Updated: 2026-08-29
 
+Current live boundary: cumulative C3 is locally complete. Exact scope is
+`D001`–`D013`, `SIM001`–`SIM006`, `MS07`–`MS12`, `CA01`, and the index: 27
+documents, 57 HTML files, 812 backend entities, 1,084 relations, six
+simulations, and 58 fully solved problems. Build/QA receipt SHA-256 values are
+`79661673ad7f4d74eff997cebd6fca1f46d2a74cbab5930147ca109762ef37ca`
+and `6f53a1f54d3a1b3e23b874a3c13adda9726bc0a8456d2fb4a8315d11912f72d7`.
+The 181-file Pages candidate passes deterministic replay.
+
+The cumulative release package is closed at 49 files / 92,476,057 bytes: 41
+inherited C2 files remain byte-identical and eight C3 files are appended. The
+30,151-byte package receipt has SHA-256
+`d78c911bdc2837a3fdddd3f71e6b7211fde46a8668d85a9c00f750cf82716637`.
+Its source/backend ZIP includes the exact collection-level licence for the
+embedded repository reproduction scripts; the post-repair package audit passes.
+
+Next executable action: commit/push this validated boundary, let static Linux
+CI replay it, publish it to the existing
+GitHub/Zenodo lineage, and anonymously verify every public byte. Then produce
+`MS00`–`MS06`, `CA02`–`CA04`, and both capstones. Do not reopen C1/C2 or the
+closed theory/simulation-family boundaries without proved defects.
+
 Current live boundary: C2 matrix Gaussian linear models are publicly complete.
 The exact cumulative scope is `D001`–`D011`, `SIM001`–`SIM005`, `MS07`–`MS10`,
 `MS12`, and `CA01`. Static write/check replay passes for 23 documents, 47 HTML

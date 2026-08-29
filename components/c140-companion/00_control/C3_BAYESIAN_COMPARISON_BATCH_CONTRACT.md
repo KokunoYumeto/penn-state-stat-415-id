@@ -1,6 +1,6 @@
 # C3 contract — Bayesian–frequentist comparison and calibration
 
-Status: in production, 2026-08-29
+Status: complete locally and release-ready, 2026-08-29
 
 C3 is the next contiguous reader-first batch after the public C2 matrix-model
 boundary. It consists of theory documents `O006-C140-CMP-D012` and `D013`,
