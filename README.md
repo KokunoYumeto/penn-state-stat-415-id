@@ -75,11 +75,11 @@ Hak donor tetap terpisah dari CC BY-NC 4.0 Penn State. Saksi laman utama
 *Random* menyatakan CC BY 2.0, sedangkan `Credits.html` menautkan CC BY 1.0;
 keduanya dipertahankan dan tidak disamakan secara diam-diam.
 
-## Pendamping orisinal C140 — checkpoint kumulatif C4 lokal
+## Pendamping orisinal C140 — checkpoint kumulatif C4 publik
 
-Pendamping orisinal CC BY-SA 4.0 sudah terbit sampai batas C3 yang koheren dan
-terverifikasi secara anonim, sedangkan C4 sudah lengkap secara lokal dan lulus
-replay deterministik. C1 memuat fondasi likelihood, optimalitas, risiko,
+Pendamping orisinal CC BY-SA 4.0 sudah terbit sampai batas C4 yang koheren,
+terverifikasi secara anonim, dan lulus replay deterministik. C1 memuat fondasi
+likelihood, optimalitas, risiko,
 empat simulasi, empat set penguasaan, dan asesmen `CA01`. C2 menambahkan empat
 unit model linear Gaussian matriks, simulasi regresi seeded, dan set penguasaan
 `MS12`. C3 menambahkan dua unit perbandingan Bayesian–frequentist, simulasi
@@ -98,23 +98,22 @@ penguasaan `MS00`–`MS06`, masing-masing dengan delapan masalah lengkap:
 - pembaca web publik:
   https://kokunoyumeto.github.io/penn-state-stat-415-id/components/c140-companion/;
 - rilis GitHub kumulatif:
-  https://github.com/KokunoYumeto/penn-state-stat-415-id/releases/tag/v2026.08.29.c140-companion-c3;
+  https://github.com/KokunoYumeto/penn-state-stat-415-id/releases/tag/v2026.08.29.c140-companion-c4;
 - preservasi Zenodo kumulatif:
-  https://doi.org/10.5281/zenodo.22161363 dalam konsep
+  https://doi.org/10.5281/zenodo.22164344 dalam konsep
   https://doi.org/10.5281/zenodo.22077422;
 - sumber, kontrak, backend, simulasi, hak, dan receipt:
   `components/c140-companion/`.
 
 Checkpoint C2 menutup model linear Gaussian matriks; C3 menutup perbandingan
 Bayesian–frequentist, keputusan berbasis kerugian, serta kalibrasi interval.
-Checkpoint C4 menutup seluruh 13 set penguasaan dan sedang menunggu publikasi
-kumulatif pada lineage yang sama. Paket C4 lokal memuat 57 berkas / 93.850.993
-byte dan mewarisi seluruh 49 berkas C3 secara byte-identik; kandidat Pages
+Checkpoint C4 menutup seluruh 13 set penguasaan. Paket C4 memuat 57 berkas /
+93.850.993 byte dan mewarisi seluruh 49 berkas C3 secara byte-identik; Pages
 memuat 188 berkas / 22.437.587 byte. Replay dan audit independennya lulus.
-Seluruh 181 berkas Pages dan 49 berkas rilis GitHub/Zenodo cocok pada pembacaan
-kembali anonim; audit konsep Zenodo menemukan nol draf. Paket preservasi
-kumulatif C3 berisi 49 berkas / 92.476.057 byte. C140 belum lengkap: tiga
-asesmen kumulatif `CA02`–`CA04` dan dua capstone masih harus diselesaikan. Hak
+Seluruh 188 berkas Pages dan 57 berkas rilis GitHub/Zenodo cocok pada pembacaan
+kembali anonim; audit konsep Zenodo menemukan nol draf. C140 belum lengkap:
+tiga asesmen kumulatif `CA02`–`CA04` dan dua capstone sedang diproduksi di
+bawah kontrak C5. Hak
 Penn, donor *Random*, dan pendamping
 orisinal tetap dipisahkan.
 

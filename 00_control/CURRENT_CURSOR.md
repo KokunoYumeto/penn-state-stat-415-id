@@ -176,9 +176,21 @@ Pages run `33251730934`, GitHub release `378973936` / tag
 68 changed commit blobs, all 181 Pages files, and all 49 release files at both
 preservation destinations. The Zenodo lineage has zero drafts.
 
-Next executable action: produce `MS00`–`MS06`, then `CA02`–`CA04`, then both
-capstones. Do not reopen the closed C1/C2/C3 theory or simulation boundaries
-without a proved defect. The overall C140 goal remains active.
+C4 is publicly complete. Exact cumulative scope is `D001`–`D013`,
+`SIM001`–`SIM006`, `MS00`–`MS12`, `CA01`, and the index: 34 source documents,
+64 reader files, 1,113 backend entities, 1,424 relations, six simulations, and
+114 fully solved problems. Content commit
+`9b10b3e04b451232b1233d0b35cf31c3860d63db` and Pages run `33264397424`
+matched all 188 public files. GitHub release `379047752` / tag
+`v2026.08.29.c140-companion-c4` and Zenodo record `22164344` / DOI
+`10.5281/zenodo.22164344` matched all 57 release files / 93,850,993 bytes at
+both destinations; the Zenodo lineage has zero drafts.
+
+Next executable action: continue C5 under
+`components/c140-companion/00_control/C5_ASSESSMENT_CAPSTONE_BATCH_CONTRACT.md`.
+Produce `CA02`, then `CA03`, `CA04`, `CP01`, and `CP02`; integrate and publish
+the final boundary. Do not reopen C1–C4 without a proved defect. The overall
+C140 goal remains active.
 
 The donor authority is 57,507 bytes / SHA-256
 `4d7402f2a960ea2b4232e57e4ee5992ac29801b9269f300f17f8e83074d5a0e4`;

@@ -2,7 +2,7 @@
 
 Updated: 2026-08-29
 
-Current live boundary: cumulative C4 is locally complete. Exact scope is
+Current live boundary: cumulative C4 is publicly complete. Exact scope is
 `D001`–`D013`, `SIM001`–`SIM006`, `MS00`–`MS12`, `CA01`, and the index: 34
 documents, 64 HTML files, 1,113 backend entities, 1,424 relations, six
 simulations, and 114 fully solved problems. Build/QA receipt SHA-256 values are
@@ -20,11 +20,19 @@ receipt SHA-256 values are
 `fdd057c53c7bb0a092d8ee3499b9116b9219463034c0426b5373687ba9200f90`
 and `ef92d1871a85336890fc48798ad50d170d4de18505cc5ee8c441621fa2473d31`.
 
-Next executable action: commit/push this audited boundary; publish it to the
-existing GitHub release and Zenodo concept lineages; anonymously verify
-filenames, byte counts, and SHA-256 identities; persist sanitized receipts.
-Then author `CA02`–`CA04` and both capstones. Do not reopen C1–C3 without a
-proved defect.
+Public identities: content commit
+`9b10b3e04b451232b1233d0b35cf31c3860d63db`; successful Pages run
+`33264397424`; GitHub release `379047752` / tag
+`v2026.08.29.c140-companion-c4`; and Zenodo record `22164344` / DOI
+`10.5281/zenodo.22164344` in concept `22077422`. Anonymous readback matched all
+62 changed commit files, all 188 Pages files, and all 57 release files at both
+preservation destinations. The Zenodo lineage has zero drafts. Full evidence:
+`CHECKPOINT_2026-08-29_C4_PUBLICATION_COMPLETE.md`.
+
+Next executable action: continue C5 under
+`C5_ASSESSMENT_CAPSTONE_BATCH_CONTRACT.md`. Produce `CA02` completely, then
+`CA03`, `CA04`, `CP01`, and `CP02`; integrate/build/QA and publish the final
+boundary. Do not reopen C1–C4 without a proved defect.
 
 Current live boundary: cumulative C3 is publicly complete. Exact scope is
 `D001`–`D013`, `SIM001`–`SIM006`, `MS07`–`MS12`, `CA01`, and the index: 27

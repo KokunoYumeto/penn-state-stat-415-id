@@ -517,3 +517,27 @@ has SHA-256
 Next, produce `MS00`–`MS06`, `CA02`–`CA04`, and both capstones. Overall C140
 remains incomplete. No upstream message has been sent, and no browser process
 may be launched.
+
+## Original C140 companion — C4 public deterministic boundary
+
+C4 is complete and publicly preserved. It adds `MS00`–`MS06`; cumulative
+scope is `D001`–`D013`, `SIM001`–`SIM006`, `MS00`–`MS12`, `CA01`, and the
+index: 34 source documents / 683,211 bytes, 114 solved problems, 64 reader
+files / 3,024,784 bytes, and a 1,113-entity / 1,424-relation backend. Build and
+QA receipt SHA-256 values are
+`c21aecda780cf8e56eb82a41d19b9b0a112e81caf583f38041a5d9fd4ffc0ac1`
+and `dfadcc6338ad44d9dadd13fa2f7ef19d9b9e19e428f25f3fe7607852bfa8e2e7`.
+
+Content commit `9b10b3e04b451232b1233d0b35cf31c3860d63db` and Pages run
+`33264397424` are public; anonymous static replay matched all 188 files /
+22,437,587 bytes. GitHub release `379047752`, tag
+`v2026.08.29.c140-companion-c4`, and Zenodo record `22164344`, DOI
+`10.5281/zenodo.22164344`, each matched all 57 cumulative files / 93,850,993
+bytes through two credential-free verification paths. The 49 C3 files remain
+byte-identical, eight C4 files are appended, and the Zenodo concept has zero
+drafts. No browser or upstream contact occurred.
+
+The next live production boundary is C5 under
+`components/c140-companion/00_control/C5_ASSESSMENT_CAPSTONE_BATCH_CONTRACT.md`:
+produce `CA02`, `CA03`, `CA04`, `CP01`, and `CP02`, then close the final
+deterministic build/QA/publication gate. Overall C140 remains active.

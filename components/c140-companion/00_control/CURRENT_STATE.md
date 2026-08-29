@@ -2,9 +2,9 @@
 
 Updated: 2026-08-29
 
-## C4 mastery boundary — local deterministic closure
+## C4 mastery boundary — public deterministic closure
 
-Batch C4 is locally complete and awaiting cumulative publication. It adds the
+Batch C4 is complete and publicly preserved. It adds the
 seven original `id-ID` mastery sets `MS00`–`MS06` without changing C1–C3.
 Each set has eight nontrivial problems with stable metadata, two staged hints,
 a short answer, and a complete worked solution. The cumulative source is 34
@@ -32,6 +32,31 @@ SHA-256 `fdd057c53c7bb0a092d8ee3499b9116b9219463034c0426b5373687ba9200f90`,
 and receipt SHA-256
 `ef92d1871a85336890fc48798ad50d170d4de18505cc5ee8c441621fa2473d31`.
 
+Content commit `9b10b3e04b451232b1233d0b35cf31c3860d63db` is public. All 62
+changed files / 1,997,776 bytes matched immutable raw commit URLs. Static
+workflow run `33264397424` passed, and two credential-free passes matched all
+188 Pages files / 22,437,587 bytes. The Pages receipt SHA-256 is
+`5e002a9f7926def73034a6d18686d36a257b7dd9daaf6fa6aa12db9fe764a012`.
+
+GitHub release `379047752`, tag `v2026.08.29.c140-companion-c4`, points to
+that content commit through annotated tag object
+`1dd397eeb0d717046e4f31a5d65abe97c3c9567b`. Transactional and independent
+direct credential-free readbacks matched all 57 assets / 93,850,993 bytes.
+Publication, anonymous-readback, and direct-readback receipt SHA-256 values
+are `6dd0611b227940b2a63c1fc5652c4d7d585e1f522f3a07215ac7f39348e649c8`,
+`efd537d327dcd6d4a02a74c1194696c860f8f1273b88cbd6db920c81faa9598c`,
+and `53235cdaf793eb5600256519eedd4becab85867e3a4a94377c39871a7708ea2f`.
+
+Zenodo record `22164344`, DOI `10.5281/zenodo.22164344`, is public in existing
+concept `22077422` / DOI `10.5281/zenodo.22077422`. Anonymous and independent
+direct readbacks matched the same 57-file union. Publication, public-readback,
+direct-readback, and final lineage-audit receipt SHA-256 values are
+`573f155ec965e6849ed0fff0deb9a04b6ab90c38f6e34deccf0999f0fd4cf30a`,
+`fe92ec27c63d8af29ea30bf46977fd8694e6febcdc3375db29f8bf2db60acf8d`,
+`a8c01aa346b27d49468a41be230289c8c761b8fa94d041c92ab1467c640969d1`,
+and `c02a40387634f79f0f784ed4c8e4ec4b849f5e6e88ec995fbe851914f877effb`.
+The concept has exactly one matching C4 version and zero drafts.
+
 The independent mathematical audit of all 56 C4 problems found and closed the
 MS00 denominator/horizon defects, an MS01 order-statistic symbol collision, an
 MS02 minimax overclaim, a missing Poisson normalization factor in MS03, the
@@ -40,10 +65,11 @@ Student-t digit error. It reported all remaining numerical and algebraic
 results correct. The complete local evidence is
 `CHECKPOINT_2026-08-29_C4_LOCAL_COMPLETE.md`.
 
-Next executable action: commit/push the audited C4 boundary, publish its
-57-file package in the existing GitHub/Zenodo lineage, and anonymously read
-back public bytes. Then produce `CA02`–`CA04` and both capstones. C140 remains
-incomplete until those five documents are closed.
+The complete public evidence is
+`CHECKPOINT_2026-08-29_C4_PUBLICATION_COMPLETE.md`. Next executable action:
+continue C5 under `C5_ASSESSMENT_CAPSTONE_BATCH_CONTRACT.md`, beginning with
+the complete `CA02` assessment and then `CA03`, `CA04`, `CP01`, and `CP02`.
+C140 remains incomplete until those five documents are closed and published.
 
 ## C3 Bayesian–frequentist boundary — public deterministic closure
 
