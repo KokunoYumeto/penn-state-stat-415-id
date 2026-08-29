@@ -75,21 +75,23 @@ Hak donor tetap terpisah dari CC BY-NC 4.0 Penn State. Saksi laman utama
 *Random* menyatakan CC BY 2.0, sedangkan `Credits.html` menautkan CC BY 1.0;
 keduanya dipertahankan dan tidak disamakan secara diam-diam.
 
-## Pendamping orisinal C140 — checkpoint kumulatif C3
+## Pendamping orisinal C140 — checkpoint kumulatif C4 lokal
 
 Pendamping orisinal CC BY-SA 4.0 sudah terbit sampai batas C3 yang koheren dan
-terverifikasi secara anonim. C1 memuat fondasi likelihood, optimalitas, risiko,
+terverifikasi secara anonim, sedangkan C4 sudah lengkap secara lokal dan lulus
+replay deterministik. C1 memuat fondasi likelihood, optimalitas, risiko,
 empat simulasi, empat set penguasaan, dan asesmen `CA01`. C2 menambahkan empat
 unit model linear Gaussian matriks, simulasi regresi seeded, dan set penguasaan
 `MS12`. C3 menambahkan dua unit perbandingan Bayesian–frequentist, simulasi
-kalibrasi interval, dan set penguasaan `MS11`:
+kalibrasi interval, dan set penguasaan `MS11`. C4 menambahkan tujuh set
+penguasaan `MS00`–`MS06`, masing-masing dengan delapan masalah lengkap:
 
-- 27 dokumen / 528.082 byte sumber;
-- 58 soal lengkap: metadata, sekurang-kurangnya dua petunjuk bertahap, jawaban
+- 34 dokumen / 683.211 byte sumber;
+- 114 soal lengkap: metadata, sekurang-kurangnya dua petunjuk bertahap, jawaban
   singkat, dan solusi penuh;
-- 763 anchor stabil / 251 referensi isi yang terselesaikan;
-- pembaca HTML luring: 57 berkas / 2.713.731 byte;
-- backend modular: 812 entitas / 1.084 relasi;
+- 1.057 anchor stabil / 280 referensi isi yang terselesaikan;
+- pembaca HTML luring: 64 berkas / 3.024.784 byte;
+- backend modular: 1.113 entitas / 1.424 relasi;
 - enam keluarga simulasi deterministik;
 - build, QA statis, replay byte-identik lintas platform, dan audit matematika:
   lulus tanpa proses browser;
@@ -105,11 +107,15 @@ kalibrasi interval, dan set penguasaan `MS11`:
 
 Checkpoint C2 menutup model linear Gaussian matriks; C3 menutup perbandingan
 Bayesian–frequentist, keputusan berbasis kerugian, serta kalibrasi interval.
+Checkpoint C4 menutup seluruh 13 set penguasaan dan sedang menunggu publikasi
+kumulatif pada lineage yang sama. Paket C4 lokal memuat 57 berkas / 93.850.993
+byte dan mewarisi seluruh 49 berkas C3 secara byte-identik; kandidat Pages
+memuat 188 berkas / 22.437.587 byte. Replay dan audit independennya lulus.
 Seluruh 181 berkas Pages dan 49 berkas rilis GitHub/Zenodo cocok pada pembacaan
 kembali anonim; audit konsep Zenodo menemukan nol draf. Paket preservasi
-kumulatif berisi 49 berkas / 92.476.057 byte. C140 belum lengkap: tujuh set
-penguasaan `MS00`–`MS06`, tiga asesmen kumulatif `CA02`–`CA04`, dan dua
-capstone masih harus diselesaikan. Hak Penn, donor *Random*, dan pendamping
+kumulatif C3 berisi 49 berkas / 92.476.057 byte. C140 belum lengkap: tiga
+asesmen kumulatif `CA02`–`CA04` dan dua capstone masih harus diselesaikan. Hak
+Penn, donor *Random*, dan pendamping
 orisinal tetap dipisahkan.
 
 ## Reproduksi
@@ -164,10 +170,10 @@ python -B scripts/package_consolidated_readers_release.py --check-only
 python -B components/c140-companion/simulations/run_c1_simulations.py --check-only
 python -B components/c140-companion/simulations/run_c2_simulations.py --check-only
 python -B components/c140-companion/simulations/run_c3_simulations.py --check-only
-python -B components/c140-companion/scripts/build_companion.py --check-only
-python -B components/c140-companion/scripts/qa_companion.py --check-only
+python -B components/c140-companion/scripts/build_companion.py --check-only --c4
+python -B components/c140-companion/scripts/qa_companion.py --check-only --c4
 python -B scripts/assemble_pages_collection.py --check-only
-python -B scripts/package_c140_companion_c3_release.py --check-only
+python -B scripts/package_c140_companion_c4_release.py --check-only
 python -B scripts/publish_github_consolidated_readers_release.py --local-preflight
 python -B scripts/publish_zenodo_consolidated_readers.py --local-preflight
 ```

@@ -2,6 +2,49 @@
 
 Updated: 2026-08-29
 
+## C4 mastery boundary — local deterministic closure
+
+Batch C4 is locally complete and awaiting cumulative publication. It adds the
+seven original `id-ID` mastery sets `MS00`–`MS06` without changing C1–C3.
+Each set has eight nontrivial problems with stable metadata, two staged hints,
+a short answer, and a complete worked solution. The cumulative source is 34
+documents / 683,211 bytes / 1,057 anchors / 280 body references. Thirteen
+mastery sets and `CA01` contain 114 fully solved problems.
+
+The browser-free reader has 64 files / 3,024,784 bytes; manifest SHA-256 is
+`629870245f726b01534c09f7e595e8a15cf11015a63280c0a16b056ce7cb4178`.
+The backend has 1,113 entities / 1,424 relations / 359,500 bytes; manifest
+SHA-256 is
+`86190eddcd4cc4e99ed3adfc22a3d8391934fb940f5ec1ea1572a532df6b44e3`.
+Build and QA receipt SHA-256 values are
+`c21aecda780cf8e56eb82a41d19b9b0a112e81caf583f38041a5d9fd4ffc0ac1`
+and `dfadcc6338ad44d9dadd13fa2f7ef19d9b9e19e428f25f3fe7607852bfa8e2e7`.
+Write/check-only replay passes with browser and network use false.
+
+The cumulative C4 preservation package passes contract/write/check replay and
+an independent ZIP/inventory/inheritance/rights/privacy audit. It contains 57
+files / 93,850,993 bytes: all 49 C3 files / 92,476,057 bytes remain
+byte-identical and eight C4 files are appended at orders 50–57. The 34,142-byte
+package receipt SHA-256 is
+`45c0fceb27af175689e5ee8ac92271d395a41cdf96c32621eacf8d60a8222f7f`.
+The cumulative Pages candidate has 188 files / 22,437,587 bytes, manifest
+SHA-256 `fdd057c53c7bb0a092d8ee3499b9116b9219463034c0426b5373687ba9200f90`,
+and receipt SHA-256
+`ef92d1871a85336890fc48798ad50d170d4de18505cc5ee8c441621fa2473d31`.
+
+The independent mathematical audit of all 56 C4 problems found and closed the
+MS00 denominator/horizon defects, an MS01 order-statistic symbol collision, an
+MS02 minimax overclaim, a missing Poisson normalization factor in MS03, the
+exact MS04 finite-MLE condition, MS05 endpoint arithmetic, and an MS06
+Student-t digit error. It reported all remaining numerical and algebraic
+results correct. The complete local evidence is
+`CHECKPOINT_2026-08-29_C4_LOCAL_COMPLETE.md`.
+
+Next executable action: commit/push the audited C4 boundary, publish its
+57-file package in the existing GitHub/Zenodo lineage, and anonymously read
+back public bytes. Then produce `CA02`–`CA04` and both capstones. C140 remains
+incomplete until those five documents are closed.
+
 ## C3 Bayesian–frequentist boundary — public deterministic closure
 
 Batch C3 is complete and publicly preserved. It adds `D012`, `D013`, `SIM006`, and `MS11`

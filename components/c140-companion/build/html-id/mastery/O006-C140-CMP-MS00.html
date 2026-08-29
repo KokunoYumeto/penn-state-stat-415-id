@@ -1,0 +1,389 @@
+<!doctype html>
+<html lang="id-ID">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="generator" content="OpenAI Codex gpt-5.6-sol, Ultra">
+<title>Set penguasaan 00 — probabilitas, distribusi, dan ekspektasi (diagnostik C140)</title>
+<link rel="stylesheet" href="../assets/style.css">
+<script>window.MathJax={loader:{load:['[tex]/boldsymbol']},tex:{packages:{'[+]':['boldsymbol']},inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']]},svg:{fontCache:'local'}};</script>
+<script defer src="../assets/MathJax/tex-svg.js"></script>
+</head>
+<body>
+<div class="shell">
+<nav class="sidebar" aria-label="Daftar isi pendamping"><h2>Isi pendamping</h2><ol><li><a href="../index.html">Pendamping Orisinal Statistika Matematis</a></li><li><a href="../theory/O006-C140-CMP-D001.html">Model parametrik reguler, skor, dan informasi Fisher</a></li><li><a href="../theory/O006-C140-CMP-D002.html">Konsistensi MLE: identifikasi Kullback–Leibler dan teorema argmax</a></li><li><a href="../theory/O006-C140-CMP-D003.html">Likelihood kuadratik lokal, normalitas asimtotik, dan delta method</a></li><li><a href="../theory/O006-C140-CMP-D004.html">Prosedur Wald, skor, dan rasio likelihood</a></li><li><a href="../theory/O006-C140-CMP-D005.html">Likelihood nonreguler: empat mekanisme kegagalan</a></li><li><a href="../theory/O006-C140-CMP-D006.html">Optimalitas pengujian: Neyman–Pearson, MP, UMP, dan rasio likelihood monoton</a></li><li><a href="../theory/O006-C140-CMP-D007.html">Loss, risk, efisiensi, Rao–Blackwell, dan Lehmann–Scheffé</a></li><li><a href="../theory/O006-C140-CMP-D008.html">Model linear Gaussian desain tetap dan geometri proyeksi</a></li><li><a href="../theory/O006-C140-CMP-D009.html">OLS, MLE Gaussian, dan teorema Gauss–Markov pada rancangan tetap</a></li><li><a href="../theory/O006-C140-CMP-D010.html">Inferensi Gaussian eksak: proyeksi, t, F, ANOVA, dan prediksi</a></li><li><a href="../theory/O006-C140-CMP-D011.html">Diagnostik, leverage, misspesifikasi, dan inferensi pascaseleksi</a></li><li><a href="../theory/O006-C140-CMP-D012.html">Inferensi Bayesian sebagai pembaruan dan keputusan yang koheren</a></li><li><a href="../theory/O006-C140-CMP-D013.html">Perbandingan Bayesian–frequentist: keputusan, cakupan, dan kalibrasi</a></li><li><a href="../simulations/O006-C140-CMP-SIM001.html">Model lokasi normal: MLE, coverage, dan tiga statistik uji</a></li><li><a href="../simulations/O006-C140-CMP-SIM002.html">Delta method pada titik reguler dan titik dengan turunan nol</a></li><li><a href="../simulations/O006-C140-CMP-SIM003.html">Endpoint Uniform: laju nonreguler dan kegagalan bootstrap biasa</a></li><li><a href="../simulations/O006-C140-CMP-SIM004.html">Uji Neyman–Pearson teracak dengan size tepat</a></li><li><a href="../simulations/O006-C140-CMP-SIM005.html">Model linear matriks: coverage, heteroskedastisitas, dan pengaruh</a></li><li><a href="../simulations/O006-C140-CMP-SIM006.html">Kalibrasi selang Bayesian dan frequentist pada model binomial</a></li><li><a href="O006-C140-CMP-MS00.html">Set penguasaan 00 — probabilitas, distribusi, dan ekspektasi (diagnostik C140)</a></li><li><a href="O006-C140-CMP-MS01.html">Set penguasaan 01 — statistik urutan dan distribusi sampel</a></li><li><a href="O006-C140-CMP-MS02.html">Set penguasaan 02 — estimasi, bias, MSE, dan sifat estimator</a></li><li><a href="O006-C140-CMP-MS03.html">Set penguasaan 03 — kecukupan, faktorisasi, kelengkapan, dan statistik ancillary</a></li><li><a href="O006-C140-CMP-MS04.html">Set penguasaan 04 — metode momen dan dasar kemungkinan maksimum</a></li><li><a href="O006-C140-CMP-MS05.html">Set penguasaan 05 — informasi Fisher, interval kepercayaan, bootstrap, dan delta method</a></li><li><a href="O006-C140-CMP-MS06.html">Set penguasaan 06 — pengujian hipotesis, daya, p-value, dan jembatan likelihood</a></li><li><a href="O006-C140-CMP-MS07.html">Set penguasaan 07 — regularitas, konsistensi, dan normalitas MLE</a></li><li><a href="O006-C140-CMP-MS08.html">Set penguasaan 08 — Wald, skor, rasio likelihood, dan diagnosis nonregular</a></li><li><a href="O006-C140-CMP-MS09.html">Set penguasaan 09 — pengujian eksak dan optimalitas Neyman–Pearson</a></li><li><a href="O006-C140-CMP-MS10.html">Set penguasaan 10 — uji likelihood asimtotik, risk, dan perbaikan estimator</a></li><li><a href="O006-C140-CMP-MS11.html">Set penguasaan 11 — pembaruan Bayesian, keputusan, dan kalibrasi</a></li><li><a href="O006-C140-CMP-MS12.html">Set penguasaan 12 — model linear Gaussian matriks, inferensi eksak, dan diagnostik</a></li><li><a href="../assessments/O006-C140-CMP-CA01.html">Asesmen kumulatif C1: likelihood, optimalitas, dan keputusan statistik</a></li></ol></nav>
+<main>
+<div class="metadata"><strong>O006-C140-CMP-MS00</strong> · id-ID · CC BY-SA 4.0 · OpenAI Codex gpt-5.6-sol, Ultra</div>
+<p><a id="O006-C140-CMP-MS00-SEC-OVERVIEW"></a></p>
+<h1>Set penguasaan 00 — probabilitas, distribusi, dan ekspektasi</h1>
+<p>Set ini adalah jembatan diagnostik untuk Pelajaran 00, bukan pengganti kuliah
+probabilitas B90/B95. Kerjakan tanpa perangkat lunak. Setiap solusi menuliskan
+ruang acuan dan objek yang acak, karena kekeliruan pada dua hal itu akan
+merusak likelihood, interval, dan pengujian pada bagian berikutnya.</p>
+<p><a id="O006-C140-CMP-MS00-P01"></a></p>
+<h2>Masalah 1 — aljabar kejadian dan probabilitas diskret</h2>
+<!--PROBLEM_META {"id":"O006-C140-CMP-MS00-P01","prerequisites":["B90"],"objective":"menghitung gabungan, irisan, komplemen, dan independensi pada ruang peluang hingga","difficulty":"dasar","misconceptions":["menganggap kejadian saling lepas selalu independen","menjumlahkan probabilitas irisan dua kali"]}-->
+<p>Sebuah dadu adil bermuka enam dilempar sekali. Misalkan
+<span class="math-inline" role="math">\(\Omega=\{1,2,3,4,5,6\}\)</span>, <span class="math-inline" role="math">\(A=\{2,4,6\}\)</span> (hasil genap), dan
+<span class="math-inline" role="math">\(B=\{4,5,6\}\)</span> (hasil sedikitnya empat).</p>
+<ol>
+<li>Hitung <span class="math-inline" role="math">\(P(A\cup B)\)</span>, <span class="math-inline" role="math">\(P(A\cap B)\)</span>, dan <span class="math-inline" role="math">\(P(A^c\cap B)\)</span>.</li>
+<li>Hitung <span class="math-inline" role="math">\(P(A\mid B)\)</span> dan <span class="math-inline" role="math">\(P(B\mid A)\)</span>.</li>
+<li>Putuskan apakah <span class="math-inline" role="math">\(A\)</span> dan <span class="math-inline" role="math">\(B\)</span> independen, dan jelaskan mengapa keduanya
+tidak saling lepas.</li>
+</ol>
+<p><a id="O006-C140-CMP-MS00-P01-H01"></a></p>
+<h3>Petunjuk 1</h3>
+<p>Tuliskan keenam hasil sebagai atom dengan peluang <span class="math-inline" role="math">\(1/6\)</span>. Gunakan
+<span class="math-inline" role="math">\(P(A\cup B)=P(A)+P(B)-P(A\cap B)\)</span> sebelum menghitung peluang bersyarat.</p>
+<p><a id="O006-C140-CMP-MS00-P01-H02"></a></p>
+<h3>Petunjuk 2</h3>
+<p>Independensi berarti <span class="math-inline" role="math">\(P(A\cap B)=P(A)P(B)\)</span>, sedangkan saling lepas berarti
+irisan kosong. Dua syarat itu berbeda kecuali salah satu kejadian berpeluang
+nol.</p>
+<p><a id="O006-C140-CMP-MS00-P01-ANS"></a></p>
+<h3>Jawaban singkat</h3>
+<p><span class="math-inline" role="math">\(A\cap B=\{4,6\}\)</span>, sehingga <span class="math-inline" role="math">\(P(A\cup B)=4/6\)</span>, <span class="math-inline" role="math">\(P(A\cap B)=2/6\)</span>,
+dan <span class="math-inline" role="math">\(P(A^c\cap B)=1/6\)</span>. Selanjutnya <span class="math-inline" role="math">\(P(A\mid B)=2/3\)</span> dan
+<span class="math-inline" role="math">\(P(B\mid A)=2/3\)</span>. Karena <span class="math-inline" role="math">\((2/6)\ne(3/6)(3/6)\)</span>, kedua kejadian tidak
+independen; irisan mereka juga tidak kosong.</p>
+<p><a id="O006-C140-CMP-MS00-P01-SOL"></a></p>
+<h3>Solusi lengkap</h3>
+<p>Karena dadu adil, setiap atom di <span class="math-inline" role="math">\(\Omega\)</span> mempunyai peluang <span class="math-inline" role="math">\(1/6\)</span>. Kejadian
+<span class="math-inline" role="math">\(A\)</span> berisi tiga atom dan <span class="math-inline" role="math">\(B\)</span> juga tiga atom. Irisannya adalah
+<span class="math-inline" role="math">\(A\cap B=\{4,6\}\)</span>, dua atom, sedangkan gabungannya
+<span class="math-inline" role="math">\(A\cup B=\{2,4,5,6\}\)</span>, empat atom. Maka</p>
+<div class="math-display" role="math">\[P(A\cap B)=\frac{2}{6}=\frac13,
+\qquad P(A\cup B)=\frac{4}{6}=\frac23.\]</div>
+<p>Komplemen <span class="math-inline" role="math">\(A^c=\{1,3,5\}\)</span> hanya beririsan dengan <span class="math-inline" role="math">\(B\)</span> pada hasil <span class="math-inline" role="math">\(5\)</span>, jadi
+<span class="math-inline" role="math">\(P(A^c\cap B)=1/6\)</span>. Dengan definisi probabilitas bersyarat,</p>
+<div class="math-display" role="math">\[P(A\mid B)=\frac{P(A\cap B)}{P(B)}=\frac{2/6}{3/6}=\frac23,
+\qquad
+P(B\mid A)=\frac{2/6}{3/6}=\frac23.\]</div>
+<p>Untuk independensi, produk peluang marginal adalah
+<span class="math-inline" role="math">\(P(A)P(B)=(1/2)(1/2)=1/4\)</span>, sedangkan peluang irisan adalah <span class="math-inline" role="math">\(1/3\)</span>; nilainya
+berbeda. Jadi <span class="math-inline" role="math">\(A\)</span> dan <span class="math-inline" role="math">\(B\)</span> tidak independen. Mereka juga tidak saling lepas
+karena hasil 4 dan 6 berada pada kedua kejadian. Ini memperlihatkan mengapa
+rumus penjumlahan harus mengurangkan irisan, dan mengapa kondisi bersyarat
+tidak boleh diganti dengan peluang marginal.</p>
+<p><a id="O006-C140-CMP-MS00-P02"></a></p>
+<h2>Masalah 2 — Bayes dan pembaruan peluang bersyarat</h2>
+<!--PROBLEM_META {"id":"O006-C140-CMP-MS00-P02","prerequisites":["B90","B95"],"objective":"menerapkan teorema Bayes dengan sensitivitas, spesifisitas, dan prevalensi yang dinyatakan","difficulty":"menengah","misconceptions":["menganggap sensitivitas sama dengan peluang penyakit setelah hasil positif","mengabaikan prevalensi ketika membalik kondisi"]}-->
+<p>Suatu kondisi memiliki prevalensi <span class="math-inline" role="math">\(P(D)=0{,}01\)</span>. Sebuah tes mempunyai
+sensitivitas <span class="math-inline" role="math">\(P(+\mid D)=0{,}95\)</span> dan spesifisitas <span class="math-inline" role="math">\(P(-\mid D^c)=0{,}90\)</span>.</p>
+<ol>
+<li>Hitung <span class="math-inline" role="math">\(P(D\mid +)\)</span>.</li>
+<li>Hitung peluang hasil positif <span class="math-inline" role="math">\(P(+)\)</span> dan peluang penyakit di antara orang
+yang hasilnya negatif, <span class="math-inline" role="math">\(P(D\mid -)\)</span>.</li>
+<li>Jelaskan peran asumsi bahwa hasil tes hanya dikondisikan pada <span class="math-inline" role="math">\(D\)</span> atau
+<span class="math-inline" role="math">\(D^c\)</span>; jangan menyebut hasil tes sebagai bukti independen tanpa syarat.</li>
+</ol>
+<p><a id="O006-C140-CMP-MS00-P02-H01"></a></p>
+<h3>Petunjuk 1</h3>
+<p>Spesifisitas memberi <span class="math-inline" role="math">\(P(+\mid D^c)=0{,}10\)</span>. Pecah <span class="math-inline" role="math">\(P(+)\)</span> menurut partisi
+<span class="math-inline" role="math">\(\{D,D^c\}\)</span> sebelum membalik kondisi.</p>
+<p><a id="O006-C140-CMP-MS00-P02-H02"></a></p>
+<h3>Petunjuk 2</h3>
+<p>Gunakan
+<span class="math-inline" role="math">\(P(D\mid +)=P(+\mid D)P(D)/P(+)\)</span> dan analog yang sama untuk tanda negatif.
+Jangan menukar <span class="math-inline" role="math">\(P(+\mid D)\)</span> dengan <span class="math-inline" role="math">\(P(D\mid +)\)</span>.</p>
+<p><a id="O006-C140-CMP-MS00-P02-ANS"></a></p>
+<h3>Jawaban singkat</h3>
+<p><span class="math-inline" role="math">\(P(+)=0{,}95(0{,}01)+0{,}10(0{,}99)=0{,}1085\)</span>, sehingga
+<span class="math-inline" role="math">\(P(D\mid +)=0{,}0095/0{,}1085\approx0{,}08756\)</span>. Untuk hasil negatif,
+<span class="math-inline" role="math">\(P(-)=0{,}05(0{,}01)+0{,}90(0{,}99)=0{,}8915\)</span> dan
+<span class="math-inline" role="math">\(P(D\mid -)=0{,}0005/0{,}8915\approx0{,}00056085\)</span>.</p>
+<p><a id="O006-C140-CMP-MS00-P02-SOL"></a></p>
+<h3>Solusi lengkap</h3>
+<p>Spesifisitas <span class="math-inline" role="math">\(0{,}90\)</span> berarti tingkat positif palsu adalah
+<span class="math-inline" role="math">\(P(+\mid D^c)=1-0{,}90=0{,}10\)</span>. Dengan hukum probabilitas total,</p>
+<div class="math-display" role="math">\[P(+)=P(+\mid D)P(D)+P(+\mid D^c)P(D^c)
+=0{,}95(0{,}01)+0{,}10(0{,}99)=0{,}1085.\]</div>
+<p>Teorema Bayes kemudian memberi</p>
+<div class="math-display" role="math">\[P(D\mid +)=\frac{0{,}95(0{,}01)}{0{,}1085}
+=\frac{0{,}0095}{0{,}1085}\approx0{,}08756.\]</div>
+<p>Untuk hasil negatif, <span class="math-inline" role="math">\(P(-\mid D)=1-0{,}95=0{,}05\)</span>, dan
+<span class="math-inline" role="math">\(P(-\mid D^c)=0{,}90\)</span>. Jadi</p>
+<div class="math-display" role="math">\[P(-)=0{,}05(0{,}01)+0{,}90(0{,}99)=0{,}8915,
+\qquad
+P(D\mid -)=\frac{0{,}05(0{,}01)}{0{,}8915}\approx0{,}00056085.\]</div>
+<p>Hasil positif meningkatkan peluang dari satu persen menjadi sekitar 8,76
+persen, tetapi tidak menjadi 95 persen; prevalensi rendah membuat positif
+palsu mendominasi. Perhitungan ini mengandaikan bahwa, setelah status <span class="math-inline" role="math">\(D\)</span>
+diketahui, mekanisme tes tidak memerlukan variabel lain yang belum dimodelkan.
+Jika ada kelompok berbeda atau hasil tes berulang, kondisi tambahan harus
+dimasukkan; independensi tanpa menyebut kondisi dapat menghasilkan Bayes yang
+salah.</p>
+<p><a id="O006-C140-CMP-MS00-P03"></a></p>
+<h2>Masalah 3 — ekspektasi melalui indikator dan LOTUS</h2>
+<!--PROBLEM_META {"id":"O006-C140-CMP-MS00-P03","prerequisites":["B90"],"objective":"menggunakan definisi ekspektasi diskret, fungsi indikator, dan LOTUS untuk momen peubah acak","difficulty":"dasar","misconceptions":["mengalikan nilai tengah dengan fungsi nonlinier","lupa bahwa indikator mempunyai nilai nol atau satu"]}-->
+<p>Peubah acak <span class="math-inline" role="math">\(X\)</span> mempunyai massa</p>
+<div class="math-display" role="math">\[P(X=-1)=\frac14,\qquad P(X=0)=\frac12,\qquad P(X=2)=\frac14.\]</div>
+<ol>
+<li>Hitung <span class="math-inline" role="math">\(E[X]\)</span>, <span class="math-inline" role="math">\(E[X^2]\)</span>, dan <span class="math-inline" role="math">\(\operatorname{Var}(X)\)</span>.</li>
+<li>Dengan <span class="math-inline" role="math">\(Y=3X^2-2X+1\)</span>, hitung <span class="math-inline" role="math">\(E[Y]\)</span> memakai LOTUS, tanpa terlebih dahulu
+mencari distribusi <span class="math-inline" role="math">\(Y\)</span>.</li>
+<li>Jika <span class="math-inline" role="math">\(I=\mathbf 1\{X&gt;0\}\)</span>, hitung <span class="math-inline" role="math">\(E[I]\)</span> dan <span class="math-inline" role="math">\(\operatorname{Cov}(I,X)\)</span>.</li>
+</ol>
+<p><a id="O006-C140-CMP-MS00-P03-H01"></a></p>
+<h3>Petunjuk 1</h3>
+<p>Untuk peubah diskret, <span class="math-inline" role="math">\(E[g(X)]=\sum_x g(x)P(X=x)\)</span>. Varians adalah
+<span class="math-inline" role="math">\(E[X^2]-(E[X])^2\)</span>, bukan <span class="math-inline" role="math">\(E[X^2]\)</span>.</p>
+<p><a id="O006-C140-CMP-MS00-P03-H02"></a></p>
+<h3>Petunjuk 2</h3>
+<p>Indikator <span class="math-inline" role="math">\(I\)</span> bernilai satu hanya pada <span class="math-inline" role="math">\(X=2\)</span>. Hitung <span class="math-inline" role="math">\(E[IX]\)</span> secara langsung,
+lalu gunakan <span class="math-inline" role="math">\(\operatorname{Cov}(I,X)=E[IX]-E[I]E[X]\)</span>.</p>
+<p><a id="O006-C140-CMP-MS00-P03-ANS"></a></p>
+<h3>Jawaban singkat</h3>
+<p><span class="math-inline" role="math">\(E[X]=1/4\)</span>, <span class="math-inline" role="math">\(E[X^2]=5/4\)</span>, dan <span class="math-inline" role="math">\(\operatorname{Var}(X)=19/16\)</span>. LOTUS memberi
+<span class="math-inline" role="math">\(E[Y]=17/4\)</span>. Selanjutnya <span class="math-inline" role="math">\(E[I]=1/4\)</span>, <span class="math-inline" role="math">\(E[IX]=1/2\)</span>, dan
+<span class="math-inline" role="math">\(\operatorname{Cov}(I,X)=7/16\)</span>.</p>
+<p><a id="O006-C140-CMP-MS00-P03-SOL"></a></p>
+<h3>Solusi lengkap</h3>
+<p>Jumlahkan kontribusi tiap atom:</p>
+<div class="math-display" role="math">\[E[X]=(-1)\frac14+0\frac12+2\frac14=\frac14,\]</div>
+<div class="math-display" role="math">\[E[X^2]=1\frac14+0+4\frac14=\frac54.\]</div>
+<p>Maka</p>
+<div class="math-display" role="math">\[\operatorname{Var}(X)=\frac54-\left(\frac14\right)^2
+=\frac{20-1}{16}=\frac{19}{16}.\]</div>
+<p>LOTUS menghindari kebutuhan mengelompokkan nilai <span class="math-inline" role="math">\(Y\)</span>. Nilai fungsi pada
+<span class="math-inline" role="math">\(x=-1,0,2\)</span> berturut-turut adalah <span class="math-inline" role="math">\(6,1,9\)</span>, sehingga</p>
+<div class="math-display" role="math">\[E[Y]=6\frac14+1\frac12+9\frac14
+=\frac{6+2+9}{4}=\frac{17}{4}.\]</div>
+<p>Indikator <span class="math-inline" role="math">\(I=1\)</span> tepat ketika <span class="math-inline" role="math">\(X=2\)</span>, jadi <span class="math-inline" role="math">\(E[I]=P(X=2)=1/4\)</span>. Selain itu,
+<span class="math-inline" role="math">\(IX=2\)</span> pada atom tersebut dan nol pada dua atom lain, maka <span class="math-inline" role="math">\(E[IX]=2(1/4)=1/2\)</span>.
+Dengan demikian</p>
+<div class="math-display" role="math">\[\operatorname{Cov}(I,X)=\frac12-\frac14\frac14
+=\frac{8-1}{16}=\frac{7}{16}.\]</div>
+<p>Perhitungan juga menunjukkan pentingnya memeriksa substitusi numerik di setiap
+langkah: ekspektasi fungsi tidak sama dengan fungsi ekspektasi secara umum.</p>
+<p><a id="O006-C140-CMP-MS00-P04"></a></p>
+<h2>Masalah 4 — varians kombinasi dan kovarians</h2>
+<!--PROBLEM_META {"id":"O006-C140-CMP-MS00-P04","prerequisites":["B95"],"objective":"menggunakan kovarians untuk menghitung varians linear dan membedakan tidak berkorelasi dari independen","difficulty":"menengah","misconceptions":["menghapus suku kovarians tanpa alasan","menganggap kovarians nol selalu berarti independensi"]}-->
+<p>Diberikan <span class="math-inline" role="math">\(E[X]=2\)</span>, <span class="math-inline" role="math">\(E[Y]=-1\)</span>, <span class="math-inline" role="math">\(\operatorname{Var}(X)=4\)</span>,
+<span class="math-inline" role="math">\(\operatorname{Var}(Y)=9\)</span>, dan <span class="math-inline" role="math">\(\operatorname{Cov}(X,Y)=1\)</span>.</p>
+<ol>
+<li>Hitung <span class="math-inline" role="math">\(E[Z]\)</span> dan <span class="math-inline" role="math">\(\operatorname{Var}(Z)\)</span> untuk <span class="math-inline" role="math">\(Z=2X-3Y+4\)</span>.</li>
+<li>Hitung korelasi <span class="math-inline" role="math">\(\rho_{X,Y}\)</span>.</li>
+<li>Berikan contoh singkat yang menunjukkan bahwa kovarians nol tidak selalu
+berarti independensi.</li>
+</ol>
+<p><a id="O006-C140-CMP-MS00-P04-H01"></a></p>
+<h3>Petunjuk 1</h3>
+<p>Konstanta mengubah ekspektasi tetapi tidak varians. Gunakan
+<span class="math-inline" role="math">\(\operatorname{Var}(aX+bY)=a^2\operatorname{Var}(X)+b^2\operatorname{Var}(Y)+2ab\operatorname{Cov}(X,Y)\)</span>.</p>
+<p><a id="O006-C140-CMP-MS00-P04-H02"></a></p>
+<h3>Petunjuk 2</h3>
+<p>Korelasi membagi kovarians dengan <span class="math-inline" role="math">\(\sqrt{\operatorname{Var}(X)\operatorname{Var}(Y)}\)</span>.
+Untuk contoh, ambil <span class="math-inline" role="math">\(U\)</span> simetris terhadap nol dan bandingkan <span class="math-inline" role="math">\(U\)</span> dengan <span class="math-inline" role="math">\(U^2\)</span>.</p>
+<p><a id="O006-C140-CMP-MS00-P04-ANS"></a></p>
+<h3>Jawaban singkat</h3>
+<p><span class="math-inline" role="math">\(E[Z]=11\)</span> dan <span class="math-inline" role="math">\(\operatorname{Var}(Z)=4(4)+9(9)-12(1)=85\)</span>.
+Korelasi adalah <span class="math-inline" role="math">\(1/6\)</span>. Contoh kovarians nol tetapi dependen: $U\sim
+\operatorname{Uniform}(-1,1)<span class="math-inline" role="math">\( dan \)</span>V=U^2<span class="math-inline" role="math">\(; \)</span>E[UV]=0<span class="math-inline" role="math">\( namun \)</span>V$ ditentukan
+oleh <span class="math-inline" role="math">\(U\)</span>.</p>
+<p><a id="O006-C140-CMP-MS00-P04-SOL"></a></p>
+<h3>Solusi lengkap</h3>
+<p>Linearitas ekspektasi menghasilkan</p>
+<div class="math-display" role="math">\[E[Z]=2E[X]-3E[Y]+4=2(2)-3(-1)+4=11.\]</div>
+<p>Untuk varians, koefisiennya adalah <span class="math-inline" role="math">\(a=2\)</span> dan <span class="math-inline" role="math">\(b=-3\)</span>, sehingga suku silang
+adalah <span class="math-inline" role="math">\(2ab\operatorname{Cov}(X,Y)=2(2)(-3)(1)=-12\)</span>. Maka</p>
+<div class="math-display" role="math">\[\operatorname{Var}(Z)=2^2(4)+(-3)^2(9)-12=16+81-12=85.\]</div>
+<p>Korelasi dihitung sebagai</p>
+<div class="math-display" role="math">\[\rho_{X,Y}=\frac{1}{\sqrt{4\cdot9}}=\frac16.\]</div>
+<p>Untuk contoh terakhir, simetri <span class="math-inline" role="math">\(U\)</span> memberi <span class="math-inline" role="math">\(E[U^3]=0\)</span>, sehingga
+<span class="math-inline" role="math">\(\operatorname{Cov}(U,U^2)=E[U^3]-E[U]E[U^2]=0\)</span>. Namun <span class="math-inline" role="math">\(V=U^2\)</span> bukan
+independen dari <span class="math-inline" role="math">\(U\)</span>: mengetahui <span class="math-inline" role="math">\(U\)</span> menentukan <span class="math-inline" role="math">\(V\)</span>. Jadi korelasi nol hanya
+menyatakan tidak ada hubungan linear, bukan pemisahan probabilistik umum.</p>
+<p><a id="O006-C140-CMP-MS00-P05"></a></p>
+<h2>Masalah 5 — binomial dan geometri</h2>
+<!--PROBLEM_META {"id":"O006-C140-CMP-MS00-P05","prerequisites":["B90","B95"],"objective":"mengidentifikasi distribusi diskret standar dan menghitung peluang serta momen yang relevan untuk sampling","difficulty":"dasar","misconceptions":["menggunakan peluang geometri untuk hitungan sukses tetap","lupa dukungan distribusi geometri"]}-->
+<p>Sepuluh percobaan pertama dari suatu barisan percobaan Bernoulli independen tak
+hingga mempunyai peluang sukses <span class="math-inline" role="math">\(p=0{,}3\)</span>. Misalkan <span class="math-inline" role="math">\(X\)</span> adalah jumlah sukses
+pada sepuluh percobaan pertama dan <span class="math-inline" role="math">\(G\)</span> adalah nomor percobaan dalam barisan tak
+hingga tempat sukses pertama terjadi.</p>
+<ol>
+<li>Hitung <span class="math-inline" role="math">\(P(X=2)\)</span>, <span class="math-inline" role="math">\(E[X]\)</span>, dan <span class="math-inline" role="math">\(\operatorname{Var}(X)\)</span>.</li>
+<li>Dengan konvensi <span class="math-inline" role="math">\(G\in\{1,2,\ldots\}\)</span>, hitung <span class="math-inline" role="math">\(P(G=4)\)</span>,
+<span class="math-inline" role="math">\(P(G&gt;4)\)</span>, dan <span class="math-inline" role="math">\(E[G]\)</span>.</li>
+<li>Jelaskan mengapa <span class="math-inline" role="math">\(X\)</span> dan <span class="math-inline" role="math">\(G\)</span> bukan dua cara menamai peubah acak yang sama.</li>
+</ol>
+<p><a id="O006-C140-CMP-MS00-P05-H01"></a></p>
+<h3>Petunjuk 1</h3>
+<p>Untuk <span class="math-inline" role="math">\(X\)</span>, pilih dua dari sepuluh posisi sukses. Untuk <span class="math-inline" role="math">\(G\)</span>, tiga percobaan
+pertama harus gagal sebelum sukses pada percobaan keempat.</p>
+<p><a id="O006-C140-CMP-MS00-P05-H02"></a></p>
+<h3>Petunjuk 2</h3>
+<p>Distribusi geometri dengan dukungan mulai satu mempunyai massa
+<span class="math-inline" role="math">\(P(G=k)=(1-p)^{k-1}p\)</span> dan rataan <span class="math-inline" role="math">\(1/p\)</span>.</p>
+<p><a id="O006-C140-CMP-MS00-P05-ANS"></a></p>
+<h3>Jawaban singkat</h3>
+<p><span class="math-inline" role="math">\(P(X=2)=\binom{10}{2}(0{,}3)^2(0{,}7)^8\approx0{,}233474\)</span>,
+<span class="math-inline" role="math">\(E[X]=3\)</span>, dan <span class="math-inline" role="math">\(\operatorname{Var}(X)=2{,}1\)</span>. Selain itu
+<span class="math-inline" role="math">\(P(G=4)=0{,}7^3(0{,}3)=0{,}1029\)</span>, <span class="math-inline" role="math">\(P(G&gt;4)=0{,}7^4=0{,}2401\)</span>,
+dan <span class="math-inline" role="math">\(E[G]=10/3\)</span>.</p>
+<p><a id="O006-C140-CMP-MS00-P05-SOL"></a></p>
+<h3>Solusi lengkap</h3>
+<p>Hitungan sukses mempunyai distribusi <span class="math-inline" role="math">\(\operatorname{Binomial}(10,0{,}3)\)</span>.
+Karena dua posisi sukses dapat dipilih dalam <span class="math-inline" role="math">\(\binom{10}{2}=45\)</span> cara,</p>
+<div class="math-display" role="math">\[P(X=2)=45(0{,}3)^2(0{,}7)^8\approx0{,}233474.\]</div>
+<p>Rataan dan varians binomial adalah <span class="math-inline" role="math">\(np=10(0{,}3)=3\)</span> dan
+<span class="math-inline" role="math">\(np(1-p)=10(0{,}3)(0{,}7)=2{,}1\)</span>.</p>
+<p>Sukses pertama adalah peubah geometri, bukan hitungan dalam sepuluh percobaan.
+Untuk <span class="math-inline" role="math">\(k=4\)</span>, tiga kegagalan diikuti sukses, sehingga</p>
+<div class="math-display" role="math">\[P(G=4)=(0{,}7)^3(0{,}3)=0{,}1029.\]</div>
+<p>Peristiwa <span class="math-inline" role="math">\(G&gt;4\)</span> berarti empat percobaan pertama semuanya gagal, sehingga
+<span class="math-inline" role="math">\(P(G&gt;4)=0{,}7^4=0{,}2401\)</span>. Penjumlahan ekor geometri atau rumus standar
+memberi <span class="math-inline" role="math">\(E[G]=1/p=10/3\)</span>. <span class="math-inline" role="math">\(X\)</span> mengukur berapa banyak sukses dalam horizon
+tetap, sedangkan <span class="math-inline" role="math">\(G\)</span> mengukur waktu sampai sukses pertama dan dapat bernilai
+lebih dari sepuluh. Memilih distribusi yang salah akan mengubah baik likelihood
+maupun varians sampling.</p>
+<p><a id="O006-C140-CMP-MS00-P06"></a></p>
+<h2>Masalah 6 — transformasi peubah kontinu</h2>
+<!--PROBLEM_META {"id":"O006-C140-CMP-MS00-P06","prerequisites":["B95"],"objective":"menurunkan densitas transformasi monoton dan menghitung momen melalui integral","difficulty":"menengah","misconceptions":["melupakan domain transformasi","menggunakan turunan transformasi tanpa nilai mutlak"]}-->
+<p>Misalkan <span class="math-inline" role="math">\(X\sim\operatorname{Uniform}(0,1)\)</span> dan <span class="math-inline" role="math">\(Y=-\log X\)</span>.</p>
+<ol>
+<li>Tentukan fungsi distribusi dan densitas <span class="math-inline" role="math">\(Y\)</span> pada domain yang benar.</li>
+<li>Hitung <span class="math-inline" role="math">\(E[Y]\)</span> dan <span class="math-inline" role="math">\(\operatorname{Var}(Y)\)</span>.</li>
+<li>Verifikasi hasil itu dengan substitusi integral, dan jelaskan mengapa
+transformasi tidak menghasilkan nilai <span class="math-inline" role="math">\(Y&lt;0\)</span>.</li>
+</ol>
+<p><a id="O006-C140-CMP-MS00-P06-H01"></a></p>
+<h3>Petunjuk 1</h3>
+<p>Untuk <span class="math-inline" role="math">\(y\ge0\)</span>, kejadian <span class="math-inline" role="math">\(Y\le y\)</span> ekuivalen dengan
+<span class="math-inline" role="math">\(X\ge e^{-y}\)</span>. Inversnya adalah <span class="math-inline" role="math">\(x=e^{-y}\)</span> dengan turunan mutlak <span class="math-inline" role="math">\(e^{-y}\)</span>.</p>
+<p><a id="O006-C140-CMP-MS00-P06-H02"></a></p>
+<h3>Petunjuk 2</h3>
+<p>Gunakan integral <span class="math-inline" role="math">\(\int_0^\infty ye^{-y}\,dy=1\)</span> dan
+<span class="math-inline" role="math">\(\int_0^\infty y^2e^{-y}\,dy=2\)</span>, misalnya melalui integrasi parsial.</p>
+<p><a id="O006-C140-CMP-MS00-P06-ANS"></a></p>
+<h3>Jawaban singkat</h3>
+<p><span class="math-inline" role="math">\(F_Y(y)=0\)</span> untuk <span class="math-inline" role="math">\(y&lt;0\)</span> dan <span class="math-inline" role="math">\(F_Y(y)=1-e^{-y}\)</span> untuk <span class="math-inline" role="math">\(y\ge0\)</span>; jadi
+<span class="math-inline" role="math">\(f_Y(y)=e^{-y}\mathbf1\{y\ge0\}\)</span>. Dengan demikian $Y\sim
+\operatorname{Exponential}(1)<span class="math-inline" role="math">\(, \)</span>E[Y]=1<span class="math-inline" role="math">\(, dan \)</span>\operatorname{Var}(Y)=1$.</p>
+<p><a id="O006-C140-CMP-MS00-P06-SOL"></a></p>
+<h3>Solusi lengkap</h3>
+<p>Karena <span class="math-inline" role="math">\(0&lt;X&lt;1\)</span>, maka <span class="math-inline" role="math">\(-\log X&gt;0\)</span>. Untuk <span class="math-inline" role="math">\(y&lt;0\)</span>, peluang <span class="math-inline" role="math">\(Y\le y\)</span> adalah
+nol. Untuk <span class="math-inline" role="math">\(y\ge0\)</span>,</p>
+<div class="math-display" role="math">\[F_Y(y)=P(-\log X\le y)=P(X\ge e^{-y})=1-e^{-y},\]</div>
+<p>karena <span class="math-inline" role="math">\(X\)</span> seragam pada interval satuan. Mendiferensiasikan memberi
+<span class="math-inline" role="math">\(f_Y(y)=e^{-y}\)</span> pada <span class="math-inline" role="math">\(y&gt;0\)</span>, dengan massa nol di luar domain. Formula
+Jacobian juga memberi hasil sama: invers <span class="math-inline" role="math">\(x=e^{-y}\)</span> mempunyai
+<span class="math-inline" role="math">\(|dx/dy|=e^{-y}\)</span>.</p>
+<p>Momen diperoleh dari integral Gamma sederhana,</p>
+<div class="math-display" role="math">\[E[Y]=\int_0^\infty ye^{-y}\,dy=1,
+\qquad
+E[Y^2]=\int_0^\infty y^2e^{-y}\,dy=2.\]</div>
+<p>Maka <span class="math-inline" role="math">\(\operatorname{Var}(Y)=2-1^2=1\)</span>. Batas domain merupakan bagian dari
+densitas; memakai <span class="math-inline" role="math">\(e^{-y}\)</span> pada seluruh garis real akan menghasilkan integral
+tak hingga dan bukan distribusi probabilitas. Pemeriksaan domain ini penting
+ketika mengubah parameter atau statistik pada langkah inferensi.</p>
+<p><a id="O006-C140-CMP-MS00-P07"></a></p>
+<h2>Masalah 7 — LLN, CLT, dan peluang rataan sampel</h2>
+<!--PROBLEM_META {"id":"O006-C140-CMP-MS00-P07","prerequisites":["B95","O006-PSU-001"],"objective":"membedakan konvergensi hukum bilangan besar dari aproksimasi CLT dan menggunakannya pada rataan Bernoulli","difficulty":"menengah","misconceptions":["menganggap LLN memberi distribusi Normal hingga","menggunakan simpangan baku peubah tunggal untuk rataan"]}-->
+<p>Misalkan <span class="math-inline" role="math">\(X_1,\ldots,X_{100}\)</span> iid <span class="math-inline" role="math">\(\operatorname{Bernoulli}(0{,}3)\)</span> dan
+<span class="math-inline" role="math">\(\bar X=100^{-1}\sum_iX_i\)</span>.</p>
+<ol>
+<li>Nyatakan limit LLN untuk <span class="math-inline" role="math">\(\bar X\)</span> dan hitung <span class="math-inline" role="math">\(E[\bar X]\)</span> serta
+<span class="math-inline" role="math">\(\operatorname{Var}(\bar X)\)</span>.</li>
+<li>Gunakan CLT untuk mengaproksimasi
+<span class="math-inline" role="math">\(P(\bar X&gt;0{,}4)\)</span> tanpa koreksi kontinuitas.</li>
+<li>Jelaskan perbedaan klaim probabilistik LLN dan CLT, serta kapan aproksimasi
+Normal mungkin buruk.</li>
+</ol>
+<p><a id="O006-C140-CMP-MS00-P07-H01"></a></p>
+<h3>Petunjuk 1</h3>
+<p>Varians satu observasi adalah <span class="math-inline" role="math">\(p(1-p)=0{,}21\)</span>, sedangkan varians rataan
+dibagi <span class="math-inline" role="math">\(100\)</span>. Standarkan ambang <span class="math-inline" role="math">\(0{,}4\)</span> dengan simpangan baku rataan.</p>
+<p><a id="O006-C140-CMP-MS00-P07-H02"></a></p>
+<h3>Petunjuk 2</h3>
+<p>Skor Normalnya adalah
+<span class="math-inline" role="math">\(z=(0{,}4-0{,}3)/\sqrt{0{,}21/100}\approx2{,}182\)</span>. Ekor kanan Normal baku
+sekitar <span class="math-inline" role="math">\(0{,}0146\)</span>.</p>
+<p><a id="O006-C140-CMP-MS00-P07-ANS"></a></p>
+<h3>Jawaban singkat</h3>
+<p>LLN memberi <span class="math-inline" role="math">\(\bar X\to0{,}3\)</span> dalam probabilitas (bahkan hampir pasti pada
+versi kuat). <span class="math-inline" role="math">\(E[\bar X]=0{,}3\)</span> dan variansnya <span class="math-inline" role="math">\(0{,}0021\)</span>. CLT memberi
+<span class="math-inline" role="math">\(P(\bar X&gt;0{,}4)\approx1-\Phi(2{,}182)\approx0{,}0146\)</span>.</p>
+<p><a id="O006-C140-CMP-MS00-P07-SOL"></a></p>
+<h3>Solusi lengkap</h3>
+<p>Untuk Bernoulli<span class="math-inline" role="math">\((p)\)</span>, <span class="math-inline" role="math">\(E[X_i]=p=0{,}3\)</span> dan
+<span class="math-inline" role="math">\(\operatorname{Var}(X_i)=p(1-p)=0{,}21\)</span>. Linearitas dan independensi memberi</p>
+<div class="math-display" role="math">\[E[\bar X]=0{,}3,
+\qquad
+\operatorname{Var}(\bar X)=\frac{0{,}21}{100}=0{,}0021.\]</div>
+<p>LLN menyatakan bahwa <span class="math-inline" role="math">\(\bar X\)</span> mendekati <span class="math-inline" role="math">\(0{,}3\)</span> ketika ukuran sampel tumbuh;
+secara formal <span class="math-inline" role="math">\(\bar X_n\xrightarrow{P}0{,}3\)</span>. CLT menyatakan bentuk fluktuasi
+berskala akar-<span class="math-inline" role="math">\(n\)</span>:</p>
+<div class="math-display" role="math">\[\frac{\sqrt n(\bar X_n-p)}{\sqrt{p(1-p)}}\Rightarrow N(0,1).\]</div>
+<p>Dengan <span class="math-inline" role="math">\(n=100\)</span>, simpangan baku rataan adalah
+<span class="math-inline" role="math">\(\sqrt{0{,}21/100}\approx0{,}045826\)</span>. Maka ambang <span class="math-inline" role="math">\(0{,}4\)</span> berskor
+<span class="math-inline" role="math">\(z=(0{,}4-0{,}3)/0{,}045826\approx2{,}182\)</span>, sehingga peluang ekor kanan
+sekitar <span class="math-inline" role="math">\(1-\Phi(2{,}182)=0{,}0146\)</span>.</p>
+<p>LLN adalah pernyataan konvergensi ketika <span class="math-inline" role="math">\(n\)</span> menuju tak hingga dan tidak
+memberikan bentuk distribusi galat pada <span class="math-inline" role="math">\(n\)</span> tertentu. CLT adalah aproksimasi
+distribusi berskala akar-<span class="math-inline" role="math">\(n\)</span> yang membutuhkan varians hingga dan dapat lambat
+untuk probabilitas sangat dekat nol atau satu, sampel kecil, atau data sangat
+tak simetris. Karena itu angka CLT harus diberi label aproksimasi, bukan
+identitas eksak.</p>
+<p><a id="O006-C140-CMP-MS00-P08"></a></p>
+<h2>Masalah 8 — distribusi sampling Normal dan pivot kuadrat</h2>
+<!--PROBLEM_META {"id":"O006-C140-CMP-MS00-P08","prerequisites":["B95","O006-PSU-001"],"objective":"menyatakan distribusi rataan dan varians sampel Normal serta membangun pivot chi-kuadrat","difficulty":"menengah","misconceptions":["menganggap rataan dan varians sampel selalu independen","membagi jumlah kuadrat dengan varians yang salah"]}-->
+<p>Ambil <span class="math-inline" role="math">\(X_1,\ldots,X_n\)</span> iid <span class="math-inline" role="math">\(N(\mu,\sigma^2)\)</span> dengan <span class="math-inline" role="math">\(\sigma^2&gt;0\)</span>. Definisikan
+<span class="math-inline" role="math">\(\bar X=n^{-1}\sum_iX_i\)</span> dan
+<span class="math-inline" role="math">\(S^2=(n-1)^{-1}\sum_i(X_i-\bar X)^2\)</span>.</p>
+<ol>
+<li>Nyatakan distribusi <span class="math-inline" role="math">\(\bar X\)</span> dan statistik
+<span class="math-inline" role="math">\(Q=(n-1)S^2/\sigma^2\)</span>.</li>
+<li>Nyatakan hubungan independensi antara <span class="math-inline" role="math">\(\bar X\)</span> dan <span class="math-inline" role="math">\(S^2\)</span>.</li>
+<li>Untuk <span class="math-inline" role="math">\(n=16\)</span>, <span class="math-inline" role="math">\(\mu=10\)</span>, dan <span class="math-inline" role="math">\(\sigma=4\)</span>, hitung
+<span class="math-inline" role="math">\(P(\bar X&gt;12)\)</span> secara eksak dalam notasi <span class="math-inline" role="math">\(\Phi\)</span>.</li>
+<li>Jelaskan mengapa fakta ini memungkinkan pivot-<span class="math-inline" role="math">\(t\)</span> ketika <span class="math-inline" role="math">\(\sigma\)</span> tidak
+diketahui, tetapi tidak otomatis berlaku untuk populasi non-Normal.</li>
+</ol>
+<p><a id="O006-C140-CMP-MS00-P08-H01"></a></p>
+<h3>Petunjuk 1</h3>
+<p>Rataan linear Normal memiliki varians <span class="math-inline" role="math">\(\sigma^2/n\)</span>. Teorema Cochran memberi
+<span class="math-inline" role="math">\(Q\sim\chi^2_{n-1}\)</span> dan independensi yang diminta.</p>
+<p><a id="O006-C140-CMP-MS00-P08-H02"></a></p>
+<h3>Petunjuk 2</h3>
+<p>Untuk bagian numerik, standarkan <span class="math-inline" role="math">\(12\)</span> memakai simpangan baku
+<span class="math-inline" role="math">\(4/\sqrt{16}=1\)</span>. Pivot yang relevan sesudah mengganti <span class="math-inline" role="math">\(\sigma\)</span> adalah
+<span class="math-inline" role="math">\(\sqrt n(\bar X-\mu)/S\)</span>.</p>
+<p><a id="O006-C140-CMP-MS00-P08-ANS"></a></p>
+<h3>Jawaban singkat</h3>
+<p><span class="math-inline" role="math">\(\bar X\sim N(\mu,\sigma^2/n)\)</span>, <span class="math-inline" role="math">\(Q\sim\chi^2_{n-1}\)</span>, dan keduanya
+independen. Pada nilai yang diberikan,
+<span class="math-inline" role="math">\(P(\bar X&gt;12)=1-\Phi(2)\approx0{,}0228\)</span>. Independensi eksak dan distribusi
+chi-kuadrat berasal dari asumsi Normal; pada populasi umum, hasilnya hanya
+asimtotik atau memerlukan syarat tambahan.</p>
+<p><a id="O006-C140-CMP-MS00-P08-SOL"></a></p>
+<h3>Solusi lengkap</h3>
+<p>Karena kombinasi linear peubah Normal tetap Normal,</p>
+<div class="math-display" role="math">\[\bar X\sim N\left(\mu,\frac{\sigma^2}{n}\right).\]</div>
+<p>Dekomposisi ortogonal ruang sampel Normal dan teorema Cochran menghasilkan</p>
+<div class="math-display" role="math">\[Q=\frac{\sum_i(X_i-\bar X)^2}{\sigma^2}
+=\frac{(n-1)S^2}{\sigma^2}\sim\chi^2_{n-1},\]</div>
+<p>dan <span class="math-inline" role="math">\(Q\)</span> independen dari <span class="math-inline" role="math">\(\bar X\)</span>. Untuk <span class="math-inline" role="math">\(n=16\)</span>, simpangan baku <span class="math-inline" role="math">\(\bar X\)</span> adalah
+<span class="math-inline" role="math">\(4/\sqrt{16}=1\)</span>. Dengan <span class="math-inline" role="math">\(\mu=10\)</span>,</p>
+<div class="math-display" role="math">\[P(\bar X&gt;12)=P\left(\frac{\bar X-10}{1}&gt;2\right)=1-\Phi(2)
+\approx0{,}0228.\]</div>
+<p>Jika <span class="math-inline" role="math">\(\sigma\)</span> diganti <span class="math-inline" role="math">\(S\)</span>, rasio
+<span class="math-inline" role="math">\(\sqrt n(\bar X-\mu)/S\)</span> mempunyai distribusi <span class="math-inline" role="math">\(t_{n-1}\)</span> karena pembilang
+Normal baku independen dari akar chi-kuadrat yang dinormalisasi. Independensi
+eksak itu adalah ciri sampel Normal, bukan konsekuensi LLN saja. Untuk populasi
+non-Normal, CLT dapat memberi pendekatan untuk rataan, tetapi distribusi tepat
+<span class="math-inline" role="math">\(S^2\)</span> dan pivot-<span class="math-inline" role="math">\(t\)</span> mungkin tidak berlaku.</p>
+<p><a id="O006-C140-CMP-MS00-SEC-CHECK"></a></p>
+<h2>Checklist kelulusan</h2>
+<p>Set ini dikuasai bila Anda dapat menetapkan ruang sampel, menamai apa yang
+dikondisikan, menghitung momen tanpa mengganti fungsi ekspektasi secara ilegal,
+dan membedakan identitas eksak dari aproksimasi LLN/CLT. Secara khusus,
+periksa kembali setiap koreksi numerik dalam solusi sebelum memakai hasilnya
+sebagai prasyarat estimasi atau pengujian.</p>
+
+<footer class="license">Materi pendamping orisinal berlisensi CC BY-SA 4.0. Komponen Penn State dan Random tetap berada di bawah lisensinya masing-masing dan tidak direlisensikan oleh halaman ini.</footer>
+</main>
+</div>
+</body>
+</html>

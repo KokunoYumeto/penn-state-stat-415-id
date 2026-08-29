@@ -23,6 +23,7 @@ ROOT = build.ROOT
 HTML = build.HTML_TARGET
 BACKEND = build.BACKEND_TARGET
 RECEIPT = ROOT / "build" / "C3_QA_RECEIPT.json"
+ACTIVE_BOUNDARY = "c3"
 SIM_RECEIPTS = build.SIMULATION_RECEIPTS
 ENVIRONMENT = ROOT / "environment.lock.json"
 PROBLEM_META_RE = re.compile(r"<!--PROBLEM_META\s+(\{[^\n]+\})-->")
@@ -221,11 +222,14 @@ def check_sources(documents: list[build.Document]) -> dict[str, object]:
         "O006-C140-CMP-MS11",
         "O006-C140-CMP-MS12",
     ]
+    if ACTIVE_BOUNDARY == "c4":
+        expected_mastery_ids = [f"O006-C140-CMP-MS{i:02d}" for i in range(0, 13)]
     if mastery_ids != expected_mastery_ids or len(assessment_rows) != 1:
         fail("Cumulative C3 mastery/assessment document census mismatch")
     problem_count = sum(int(row["problems"]) for row in mastery_rows + assessment_rows)
-    if problem_count != 58:
-        fail(f"Cumulative C3 problem census mismatch: {problem_count}, expected 58")
+    expected_problem_count = 114 if ACTIVE_BOUNDARY == "c4" else 58
+    if problem_count != expected_problem_count:
+        fail(f"Cumulative {ACTIVE_BOUNDARY.upper()} problem census mismatch: {problem_count}, expected {expected_problem_count}")
     return {
         "anchors": len(anchors),
         "assessments": assessment_rows,
@@ -489,7 +493,7 @@ def compute_receipt() -> bytes:
         "environment_sha256": sha256(ENVIRONMENT.read_bytes()),
         "html": check_html(documents),
         "network_access": False,
-        "schema": "o006.c140.companion-cumulative-c3-qa.v1",
+        "schema": f"o006.c140.companion-cumulative-{ACTIVE_BOUNDARY}-qa.v1",
         "scripts": check_source_scripts(),
         "simulations": check_simulations(),
         "source": check_sources(documents),
@@ -500,11 +504,18 @@ def compute_receipt() -> bytes:
 
 
 def main() -> None:
+    global ACTIVE_BOUNDARY, RECEIPT
     parser = argparse.ArgumentParser()
     mode = parser.add_mutually_exclusive_group(required=True)
     mode.add_argument("--write", action="store_true")
     mode.add_argument("--check-only", action="store_true")
+    parser.add_argument("--c4", action="store_true", help="QA the cumulative MS00-MS06 boundary")
     args = parser.parse_args()
+    if args.c4:
+        ACTIVE_BOUNDARY = "c4"
+        build.ACTIVE_BOUNDARY = "c4"
+        build.RECEIPT_TARGET = ROOT / "build" / "C4_BUILD_RECEIPT.json"
+        RECEIPT = ROOT / "build" / "C4_QA_RECEIPT.json"
     payload = compute_receipt()
     if args.write:
         RECEIPT.parent.mkdir(parents=True, exist_ok=True)

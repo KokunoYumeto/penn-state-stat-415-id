@@ -1,0 +1,424 @@
+<!doctype html>
+<html lang="id-ID">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="generator" content="OpenAI Codex gpt-5.6-sol, Ultra">
+<title>Set penguasaan 02 — estimasi, bias, MSE, dan sifat estimator</title>
+<link rel="stylesheet" href="../assets/style.css">
+<script>window.MathJax={loader:{load:['[tex]/boldsymbol']},tex:{packages:{'[+]':['boldsymbol']},inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']]},svg:{fontCache:'local'}};</script>
+<script defer src="../assets/MathJax/tex-svg.js"></script>
+</head>
+<body>
+<div class="shell">
+<nav class="sidebar" aria-label="Daftar isi pendamping"><h2>Isi pendamping</h2><ol><li><a href="../index.html">Pendamping Orisinal Statistika Matematis</a></li><li><a href="../theory/O006-C140-CMP-D001.html">Model parametrik reguler, skor, dan informasi Fisher</a></li><li><a href="../theory/O006-C140-CMP-D002.html">Konsistensi MLE: identifikasi Kullback–Leibler dan teorema argmax</a></li><li><a href="../theory/O006-C140-CMP-D003.html">Likelihood kuadratik lokal, normalitas asimtotik, dan delta method</a></li><li><a href="../theory/O006-C140-CMP-D004.html">Prosedur Wald, skor, dan rasio likelihood</a></li><li><a href="../theory/O006-C140-CMP-D005.html">Likelihood nonreguler: empat mekanisme kegagalan</a></li><li><a href="../theory/O006-C140-CMP-D006.html">Optimalitas pengujian: Neyman–Pearson, MP, UMP, dan rasio likelihood monoton</a></li><li><a href="../theory/O006-C140-CMP-D007.html">Loss, risk, efisiensi, Rao–Blackwell, dan Lehmann–Scheffé</a></li><li><a href="../theory/O006-C140-CMP-D008.html">Model linear Gaussian desain tetap dan geometri proyeksi</a></li><li><a href="../theory/O006-C140-CMP-D009.html">OLS, MLE Gaussian, dan teorema Gauss–Markov pada rancangan tetap</a></li><li><a href="../theory/O006-C140-CMP-D010.html">Inferensi Gaussian eksak: proyeksi, t, F, ANOVA, dan prediksi</a></li><li><a href="../theory/O006-C140-CMP-D011.html">Diagnostik, leverage, misspesifikasi, dan inferensi pascaseleksi</a></li><li><a href="../theory/O006-C140-CMP-D012.html">Inferensi Bayesian sebagai pembaruan dan keputusan yang koheren</a></li><li><a href="../theory/O006-C140-CMP-D013.html">Perbandingan Bayesian–frequentist: keputusan, cakupan, dan kalibrasi</a></li><li><a href="../simulations/O006-C140-CMP-SIM001.html">Model lokasi normal: MLE, coverage, dan tiga statistik uji</a></li><li><a href="../simulations/O006-C140-CMP-SIM002.html">Delta method pada titik reguler dan titik dengan turunan nol</a></li><li><a href="../simulations/O006-C140-CMP-SIM003.html">Endpoint Uniform: laju nonreguler dan kegagalan bootstrap biasa</a></li><li><a href="../simulations/O006-C140-CMP-SIM004.html">Uji Neyman–Pearson teracak dengan size tepat</a></li><li><a href="../simulations/O006-C140-CMP-SIM005.html">Model linear matriks: coverage, heteroskedastisitas, dan pengaruh</a></li><li><a href="../simulations/O006-C140-CMP-SIM006.html">Kalibrasi selang Bayesian dan frequentist pada model binomial</a></li><li><a href="O006-C140-CMP-MS00.html">Set penguasaan 00 — probabilitas, distribusi, dan ekspektasi (diagnostik C140)</a></li><li><a href="O006-C140-CMP-MS01.html">Set penguasaan 01 — statistik urutan dan distribusi sampel</a></li><li><a href="O006-C140-CMP-MS02.html">Set penguasaan 02 — estimasi, bias, MSE, dan sifat estimator</a></li><li><a href="O006-C140-CMP-MS03.html">Set penguasaan 03 — kecukupan, faktorisasi, kelengkapan, dan statistik ancillary</a></li><li><a href="O006-C140-CMP-MS04.html">Set penguasaan 04 — metode momen dan dasar kemungkinan maksimum</a></li><li><a href="O006-C140-CMP-MS05.html">Set penguasaan 05 — informasi Fisher, interval kepercayaan, bootstrap, dan delta method</a></li><li><a href="O006-C140-CMP-MS06.html">Set penguasaan 06 — pengujian hipotesis, daya, p-value, dan jembatan likelihood</a></li><li><a href="O006-C140-CMP-MS07.html">Set penguasaan 07 — regularitas, konsistensi, dan normalitas MLE</a></li><li><a href="O006-C140-CMP-MS08.html">Set penguasaan 08 — Wald, skor, rasio likelihood, dan diagnosis nonregular</a></li><li><a href="O006-C140-CMP-MS09.html">Set penguasaan 09 — pengujian eksak dan optimalitas Neyman–Pearson</a></li><li><a href="O006-C140-CMP-MS10.html">Set penguasaan 10 — uji likelihood asimtotik, risk, dan perbaikan estimator</a></li><li><a href="O006-C140-CMP-MS11.html">Set penguasaan 11 — pembaruan Bayesian, keputusan, dan kalibrasi</a></li><li><a href="O006-C140-CMP-MS12.html">Set penguasaan 12 — model linear Gaussian matriks, inferensi eksak, dan diagnostik</a></li><li><a href="../assessments/O006-C140-CMP-CA01.html">Asesmen kumulatif C1: likelihood, optimalitas, dan keputusan statistik</a></li></ol></nav>
+<main>
+<div class="metadata"><strong>O006-C140-CMP-MS02</strong> · id-ID · CC BY-SA 4.0 · OpenAI Codex gpt-5.6-sol, Ultra</div>
+<p><a id="O006-C140-CMP-MS02-SEC-OVERVIEW"></a></p>
+<h1>Set penguasaan 02 — estimasi, bias, MSE, dan sifat estimator</h1>
+<p>Gunakan bias sebagai <span class="math-inline" role="math">\(E_\theta[T]-\theta\)</span>, varians sebagai penyebaran di
+bawah parameter tetap, dan risiko kuadrat sebagai
+<span class="math-inline" role="math">\(R(\theta,T)=E_\theta[(T-\theta)^2]\)</span>. Ketiga besaran itu tidak boleh dicampur
+dengan performa satu sampel atau dengan hasil komputasi tanpa distribusi
+sampling yang mendasarinya.</p>
+<p><a id="O006-C140-CMP-MS02-P01"></a></p>
+<h2>Masalah 1 — bias dan MSE rataan berbobot</h2>
+<!--PROBLEM_META {"id":"O006-C140-CMP-MS02-P01","prerequisites":["B95"],"objective":"menurunkan bias, varians, dan MSE estimator linear pada sampel iid","difficulty":"dasar","misconceptions":["mengira estimator dengan bias nol selalu mempunyai MSE minimum","melupakan kuadrat koefisien pada varians"]}-->
+<p>Misalkan <span class="math-inline" role="math">\(X_1,\ldots,X_n\)</span> iid dengan <span class="math-inline" role="math">\(E[X_i]=\mu\)</span> dan
+<span class="math-inline" role="math">\(\operatorname{Var}(X_i)=\sigma^2&lt;\infty\)</span>. Untuk konstanta <span class="math-inline" role="math">\(c\)</span> dan nilai acuan
+<span class="math-inline" role="math">\(\mu_0\)</span> yang diketahui, pertimbangkan</p>
+<div class="math-display" role="math">\[T_c=c\bar X+(1-c)\mu_0.\]</div>
+<ol>
+<li>Turunkan bias dan varians <span class="math-inline" role="math">\(T_c\)</span>.</li>
+<li>Tulis MSE sebagai fungsi <span class="math-inline" role="math">\(c,\mu,\mu_0,\sigma^2,n\)</span>.</li>
+<li>Untuk <span class="math-inline" role="math">\(\mu=\mu_0\)</span>, tentukan <span class="math-inline" role="math">\(c\)</span> yang meminimalkan MSE; bandingkan dengan
+<span class="math-inline" role="math">\(c=1\)</span>.</li>
+</ol>
+<p><a id="O006-C140-CMP-MS02-P01-H01"></a></p>
+<h3>Petunjuk 1</h3>
+<p>Gunakan <span class="math-inline" role="math">\(E[\bar X]=\mu\)</span> dan
+<span class="math-inline" role="math">\(\operatorname{Var}(\bar X)=\sigma^2/n\)</span>. Suku konstan <span class="math-inline" role="math">\((1-c)\mu_0\)</span> tidak
+menambah varians.</p>
+<p><a id="O006-C140-CMP-MS02-P01-H02"></a></p>
+<h3>Petunjuk 2</h3>
+<p>Bias adalah <span class="math-inline" role="math">\((1-c)(\mu_0-\mu)\)</span>. MSE selalu sama dengan varians ditambah
+kuadrat bias, sehingga saat <span class="math-inline" role="math">\(\mu=\mu_0\)</span> cukup meminimalkan <span class="math-inline" role="math">\(c^2\sigma^2/n\)</span>.</p>
+<p><a id="O006-C140-CMP-MS02-P01-ANS"></a></p>
+<h3>Jawaban singkat</h3>
+<p>Bias <span class="math-inline" role="math">\(T_c=(1-c)(\mu_0-\mu)\)</span>, varians
+<span class="math-inline" role="math">\(c^2\sigma^2/n\)</span>, dan</p>
+<div class="math-display" role="math">\[\operatorname{MSE}(T_c)=\frac{c^2\sigma^2}{n}+(1-c)^2(\mu_0-\mu)^2.\]</div>
+<p>Jika <span class="math-inline" role="math">\(\mu=\mu_0\)</span>, pilihan <span class="math-inline" role="math">\(c=0\)</span> mempunyai MSE nol karena nilai acuan tepat;
+<span class="math-inline" role="math">\(c=1\)</span> mempunyai MSE <span class="math-inline" role="math">\(\sigma^2/n\)</span>.</p>
+<p><a id="O006-C140-CMP-MS02-P01-SOL"></a></p>
+<h3>Solusi lengkap</h3>
+<p>Linearitas ekspektasi memberi</p>
+<div class="math-display" role="math">\[E[T_c]=c\mu+(1-c)\mu_0,\]</div>
+<p>sehingga bias terhadap target <span class="math-inline" role="math">\(\mu\)</span> adalah</p>
+<div class="math-display" role="math">\[b_c=E[T_c]-\mu=(1-c)(\mu_0-\mu).\]</div>
+<p>Karena hanya bagian <span class="math-inline" role="math">\(c\bar X\)</span> acak,</p>
+<div class="math-display" role="math">\[\operatorname{Var}(T_c)=c^2\operatorname{Var}(\bar X)
+=\frac{c^2\sigma^2}{n}.\]</div>
+<p>Definisi MSE dan identitas bias-varians menghasilkan</p>
+<div class="math-display" role="math">\[\operatorname{MSE}(T_c)=\frac{c^2\sigma^2}{n}
++(1-c)^2(\mu_0-\mu)^2.\]</div>
+<p>Jika nilai acuan memang sama dengan parameter, <span class="math-inline" role="math">\(\mu_0=\mu\)</span>, bias hilang untuk
+semua <span class="math-inline" role="math">\(c\)</span>, tetapi varians paling kecil pada <span class="math-inline" role="math">\(c=0\)</span>, yaitu estimator konstan
+<span class="math-inline" role="math">\(T_0=\mu_0\)</span> yang sudah mengetahui target. Estimator rataan biasa <span class="math-inline" role="math">\(T_1\)</span> lalu
+memiliki MSE <span class="math-inline" role="math">\(\sigma^2/n\)</span>. Dalam praktik <span class="math-inline" role="math">\(\mu_0\)</span> sering hanya tebakan,
+sehingga pengurangan varians harus ditukar dengan bias; tidak ada pilihan
+<span class="math-inline" role="math">\(c\)</span> yang unggul untuk semua nilai <span class="math-inline" role="math">\(\mu\)</span> tanpa menetapkan ruang parameter atau
+kerugian.</p>
+<p><a id="O006-C140-CMP-MS02-P02"></a></p>
+<h2>Masalah 2 — varians sampel dengan penyebut <span class="math-inline" role="math">\(n\)</span> atau <span class="math-inline" role="math">\(n-1\)</span></h2>
+<!--PROBLEM_META {"id":"O006-C140-CMP-MS02-P02","prerequisites":["B95"],"objective":"menghitung bias dan MSE estimator varians Normal dengan dua penyebut","difficulty":"menengah","misconceptions":["menganggap penyebut n selalu tak bias","menggunakan derajat bebas n pada jumlah kuadrat residual"]}-->
+<p>Ambil <span class="math-inline" role="math">\(X_1,\ldots,X_5\)</span> iid <span class="math-inline" role="math">\(N(\mu,\sigma^2)\)</span> dengan <span class="math-inline" role="math">\(\sigma^2=4\)</span>. Definisikan</p>
+<div class="math-display" role="math">\[S_n^2=\frac15\sum_{i=1}^5(X_i-\bar X)^2,
+\qquad
+S^2=\frac14\sum_{i=1}^5(X_i-\bar X)^2.\]</div>
+<ol>
+<li>Hitung <span class="math-inline" role="math">\(E[S_n^2]\)</span>, biasnya, dan MSE-nya.</li>
+<li>Tunjukkan bahwa <span class="math-inline" role="math">\(S^2\)</span> tak bias dan hitung variansnya.</li>
+<li>Jelaskan sumber derajat bebas empat.</li>
+</ol>
+<p><a id="O006-C140-CMP-MS02-P02-H01"></a></p>
+<h3>Petunjuk 1</h3>
+<p>Untuk sampel Normal,
+<span class="math-inline" role="math">\(\sum_i(X_i-\bar X)^2/\sigma^2\sim\chi^2_{n-1}\)</span>. Gunakan rataan dan varians
+chi-kuadrat tersebut.</p>
+<p><a id="O006-C140-CMP-MS02-P02-H02"></a></p>
+<h3>Petunjuk 2</h3>
+<p>Jika <span class="math-inline" role="math">\(V\sim\chi^2_4\)</span>, maka <span class="math-inline" role="math">\(E[V]=4\)</span> dan Var<span class="math-inline" role="math">\((V)=8\)</span>. Tulis kedua estimator
+sebagai kelipatan <span class="math-inline" role="math">\(V\)</span> dengan <span class="math-inline" role="math">\(\sigma^2=4\)</span>.</p>
+<p><a id="O006-C140-CMP-MS02-P02-ANS"></a></p>
+<h3>Jawaban singkat</h3>
+<p><span class="math-inline" role="math">\(E[S_n^2]=16/5\)</span>, bias <span class="math-inline" role="math">\(-4/5\)</span>, dan
+<span class="math-inline" role="math">\(\operatorname{MSE}(S_n^2)=144/25\)</span>. Estimator <span class="math-inline" role="math">\(S^2\)</span> tak bias dengan
+<span class="math-inline" role="math">\(\operatorname{Var}(S^2)=2\sigma^4/(n-1)=8\)</span>. Derajat bebas empat muncul
+karena satu kendala linear dari residual, yaitu jumlah residual nol.</p>
+<p><a id="O006-C140-CMP-MS02-P02-SOL"></a></p>
+<h3>Solusi lengkap</h3>
+<p>Tuliskan <span class="math-inline" role="math">\(V=\sum_{i=1}^5(X_i-\bar X)^2/\sigma^2\)</span>. Teorema distribusi Normal
+memberi <span class="math-inline" role="math">\(V\sim\chi^2_4\)</span>. Dengan <span class="math-inline" role="math">\(\sigma^2=4\)</span>,</p>
+<div class="math-display" role="math">\[S_n^2=\frac{V\sigma^2}{5}=\frac{4V}{5},
+\qquad
+S^2=\frac{V\sigma^2}{4}=V.\]</div>
+<p>Karena <span class="math-inline" role="math">\(E[V]=4\)</span>,
+<span class="math-inline" role="math">\(E[S_n^2]=16/5\)</span>, sehingga biasnya <span class="math-inline" role="math">\(16/5-4=-4/5\)</span>. Variansnya</p>
+<div class="math-display" role="math">\[\operatorname{Var}(S_n^2)=\left(\frac45\right)^2\operatorname{Var}(V)
+=\frac{16}{25}(8)=\frac{128}{25}.\]</div>
+<p>MSE menambahkan kuadrat bias:</p>
+<div class="math-display" role="math">\[\operatorname{MSE}(S_n^2)=\frac{128}{25}+\frac{16}{25}
+=\frac{144}{25}.\]</div>
+<p>Untuk <span class="math-inline" role="math">\(S^2\)</span>, <span class="math-inline" role="math">\(E[S^2]=E[V]=4=\sigma^2\)</span>, jadi tak bias, dan
+<span class="math-inline" role="math">\(\operatorname{Var}(S^2)=\operatorname{Var}(V)=8\)</span>, sama dengan rumus
+<span class="math-inline" role="math">\(2\sigma^4/(n-1)=2(16)/4\)</span>. Residual memenuhi
+<span class="math-inline" role="math">\(\sum_i(X_i-\bar X)=0\)</span>, satu kendala yang menghapus satu arah dari lima
+dimensi data; itulah sebabnya jumlah kuadrat memiliki empat derajat bebas.</p>
+<p><a id="O006-C140-CMP-MS02-P03"></a></p>
+<h2>Masalah 3 — shrinkage dan risiko kuadrat</h2>
+<!--PROBLEM_META {"id":"O006-C140-CMP-MS02-P03","prerequisites":["B95"],"objective":"mengoptimalkan estimator shrinkage linear terhadap risiko terburuk pada ruang parameter terbatas","difficulty":"lanjut","misconceptions":["menganggap bias selalu merugikan tanpa membandingkan MSE","mengoptimalkan risiko titik lalu menyebutnya minimax"]}-->
+<p>Misalkan <span class="math-inline" role="math">\(\bar X\sim N(\mu,v)\)</span> dengan <span class="math-inline" role="math">\(v=\sigma^2/n\)</span> diketahui dan
+<span class="math-inline" role="math">\(|\mu|\le M\)</span>. Pertimbangkan <span class="math-inline" role="math">\(T_a=a\bar X\)</span> untuk <span class="math-inline" role="math">\(0\le a\le1\)</span>.</p>
+<ol>
+<li>Turunkan risiko kuadrat <span class="math-inline" role="math">\(R(\mu,a)\)</span>.</li>
+<li>Tentukan <span class="math-inline" role="math">\(a\)</span> yang meminimalkan risiko terburuk
+<span class="math-inline" role="math">\(\sup_{|\mu|\le M}R(\mu,a)\)</span>.</li>
+<li>Bandingkan hasilnya dengan estimator tak bias <span class="math-inline" role="math">\(a=1\)</span> dan jelaskan kapan
+shrinkage dapat menguntungkan.</li>
+</ol>
+<p><a id="O006-C140-CMP-MS02-P03-H01"></a></p>
+<h3>Petunjuk 1</h3>
+<p>Bias <span class="math-inline" role="math">\(T_a\)</span> adalah <span class="math-inline" role="math">\((a-1)\mu\)</span> dan variansnya <span class="math-inline" role="math">\(a^2v\)</span>. Untuk <span class="math-inline" role="math">\(0\le a\le1\)</span>,
+risiko meningkat terhadap <span class="math-inline" role="math">\(\mu^2\)</span>, sehingga supremum terjadi pada <span class="math-inline" role="math">\(|\mu|=M\)</span>.</p>
+<p><a id="O006-C140-CMP-MS02-P03-H02"></a></p>
+<h3>Petunjuk 2</h3>
+<p>Diferensiasikan <span class="math-inline" role="math">\((1-a)^2M^2+a^2v\)</span> terhadap <span class="math-inline" role="math">\(a\)</span> dan setarakan dengan nol.
+Periksa bahwa turunan kedua positif.</p>
+<p><a id="O006-C140-CMP-MS02-P03-ANS"></a></p>
+<h3>Jawaban singkat</h3>
+<div class="math-display" role="math">\[R(\mu,a)=(1-a)^2\mu^2+a^2v.\]</div>
+<p>Risiko terburuk adalah <span class="math-inline" role="math">\((1-a)^2M^2+a^2v\)</span>, dengan minimum dalam kelas
+<span class="math-inline" role="math">\(T_a=a\bar X\)</span> pada <span class="math-inline" role="math">\(a^*=M^2/(M^2+v)\)</span>. Estimator <span class="math-inline" role="math">\(a=1\)</span> berisiko konstan
+<span class="math-inline" role="math">\(v\)</span>; shrinkage linear menurunkan risiko terburuk menjadi
+<span class="math-inline" role="math">\(M^2v/(M^2+v)\)</span> dengan menerima bias. Ini bukan klaim minimaks global.</p>
+<p><a id="O006-C140-CMP-MS02-P03-SOL"></a></p>
+<h3>Solusi lengkap</h3>
+<p>Di bawah <span class="math-inline" role="math">\(\mu\)</span>, ekspektasi <span class="math-inline" role="math">\(T_a\)</span> adalah <span class="math-inline" role="math">\(a\mu\)</span>, sehingga biasnya
+<span class="math-inline" role="math">\((a-1)\mu\)</span>. Varians <span class="math-inline" role="math">\(a\bar X\)</span> adalah <span class="math-inline" role="math">\(a^2v\)</span>. Identitas risiko-bias-varians
+memberi</p>
+<div class="math-display" role="math">\[R(\mu,a)=E_\mu[(a\bar X-\mu)^2]
+=(1-a)^2\mu^2+a^2v.\]</div>
+<p>Untuk <span class="math-inline" role="math">\(0\le a\le1\)</span>, koefisien <span class="math-inline" role="math">\((1-a)^2\)</span> nonnegatif, jadi risiko maksimum pada
+ruang <span class="math-inline" role="math">\(|\mu|\le M\)</span> tercapai saat <span class="math-inline" role="math">\(\mu^2=M^2\)</span>:</p>
+<div class="math-display" role="math">\[R_{\max}(a)=(1-a)^2M^2+a^2v.\]</div>
+<p>Turunan pertama adalah <span class="math-inline" role="math">\(-2(1-a)M^2+2av\)</span>. Menyetarakannya dengan nol
+menghasilkan</p>
+<div class="math-display" role="math">\[a^*=\frac{M^2}{M^2+v},\]</div>
+<p>dan turunan kedua <span class="math-inline" role="math">\(2(M^2+v)&gt;0\)</span>. Dengan substitusi,
+<span class="math-inline" role="math">\(R_{\max}(a^*)=M^2v/(M^2+v)\)</span>. Estimator tak bias <span class="math-inline" role="math">\(a=1\)</span> mempunyai risiko
+<span class="math-inline" role="math">\(v\)</span>, sehingga shrinkage lebih baik daripada <span class="math-inline" role="math">\(a=1\)</span> dan meminimalkan risiko
+terburuk di dalam kelas linear <span class="math-inline" role="math">\(T_a=a\bar X\)</span>, <span class="math-inline" role="math">\(0\le a\le1\)</span>. Ini bukan klaim
+minimaks global: memotong <span class="math-inline" role="math">\(a^*\bar X\)</span> ke interval <span class="math-inline" role="math">\([-M,M]\)</span> tidak pernah
+memperbesar galat kuadrat untuk <span class="math-inline" role="math">\(|\mu|\le M\)</span> dan memperkecil risiko secara
+ketat ketika hasil linear keluar dari interval. Keuntungan shrinkage tetap
+bergantung pada batas substantif <span class="math-inline" role="math">\(M\)</span>; jika ruang parameter tidak dibatasi,
+bias dapat menjadi mahal dan klaim keunggulan universal tidak sah.</p>
+<p><a id="O006-C140-CMP-MS02-P04"></a></p>
+<h2>Masalah 4 — metode momen versus MLE pada Uniform endpoint</h2>
+<!--PROBLEM_META {"id":"O006-C140-CMP-MS02-P04","prerequisites":["B90","B95","O006-PSU-003"],"objective":"membandingkan estimator metode momen dan MLE serta menghitung bias dan MSE-nya","difficulty":"menengah","misconceptions":["menganggap MLE selalu tak bias","menganggap estimator tak bias selalu ber-MSE lebih kecil"]}-->
+<p>Misalkan <span class="math-inline" role="math">\(X_1,\ldots,X_n\)</span> iid Uniform<span class="math-inline" role="math">\((0,\theta)\)</span>.</p>
+<ol>
+<li>Turunkan estimator metode momen <span class="math-inline" role="math">\(T_{\mathrm{MM}}\)</span> dan MLE
+<span class="math-inline" role="math">\(T_{\mathrm{MLE}}\)</span>.</li>
+<li>Hitung bias dan MSE keduanya untuk <span class="math-inline" role="math">\(n=4\)</span>.</li>
+<li>Putuskan estimator mana yang memiliki MSE lebih kecil, dan jelaskan tradeoff
+bias-variansnya.</li>
+</ol>
+<p><a id="O006-C140-CMP-MS02-P04-H01"></a></p>
+<h3>Petunjuk 1</h3>
+<p>Rataan populasi Uniform<span class="math-inline" role="math">\((0,\theta)\)</span> adalah <span class="math-inline" role="math">\(\theta/2\)</span>, sedangkan likelihood
+menurun terhadap <span class="math-inline" role="math">\(\theta\)</span> di atas maksimum sampel.</p>
+<p><a id="O006-C140-CMP-MS02-P04-H02"></a></p>
+<h3>Petunjuk 2</h3>
+<p>Gunakan <span class="math-inline" role="math">\(E[\bar X]=\theta/2\)</span>, Var<span class="math-inline" role="math">\((\bar X)=\theta^2/(12n)\)</span>, dan untuk
+<span class="math-inline" role="math">\(M=X_{(n)}\)</span> gunakan <span class="math-inline" role="math">\(E[M]=n\theta/(n+1)\)</span> serta
+MSE<span class="math-inline" role="math">\((M)=2\theta^2/[(n+1)(n+2)]\)</span>.</p>
+<p><a id="O006-C140-CMP-MS02-P04-ANS"></a></p>
+<h3>Jawaban singkat</h3>
+<p><span class="math-inline" role="math">\(T_{\mathrm{MM}}=2\bar X\)</span> tak bias dengan MSE
+<span class="math-inline" role="math">\(\theta^2/(3n)=\theta^2/12\)</span> saat <span class="math-inline" role="math">\(n=4\)</span>. MLE adalah <span class="math-inline" role="math">\(M\)</span>, biasnya
+<span class="math-inline" role="math">\(-\theta/5\)</span>, dan MSE-nya <span class="math-inline" role="math">\(\theta^2/15\)</span>. Jadi MLE ber-MSE lebih kecil,
+meskipun bias; ketakbiasan saja bukan kriteria dominan.</p>
+<p><a id="O006-C140-CMP-MS02-P04-SOL"></a></p>
+<h3>Solusi lengkap</h3>
+<p>Momen pertama teoritis adalah <span class="math-inline" role="math">\(E_\theta[X]=\theta/2\)</span>. Menyamakan dengan
+<span class="math-inline" role="math">\(\bar X\)</span> menghasilkan estimator metode momen</p>
+<div class="math-display" role="math">\[T_{\mathrm{MM}}=2\bar X.\]</div>
+<p>Karena Var<span class="math-inline" role="math">\((X)=\theta^2/12\)</span>,</p>
+<div class="math-display" role="math">\[E[T_{\mathrm{MM}}]=\theta,
+\qquad
+\operatorname{Var}(T_{\mathrm{MM}})=4\frac{\theta^2}{12n}
+=\frac{\theta^2}{3n}.\]</div>
+<p>Ia tak bias, jadi MSE sama dengan varians; untuk <span class="math-inline" role="math">\(n=4\)</span> nilainya
+<span class="math-inline" role="math">\(\theta^2/12\)</span>.</p>
+<p>Likelihood sampel adalah <span class="math-inline" role="math">\(\theta^{-n}\mathbf1\{\theta\ge M\}\)</span>. Karena
+fungsi <span class="math-inline" role="math">\(\theta^{-n}\)</span> menurun, MLE adalah <span class="math-inline" role="math">\(T_{\mathrm{MLE}}=M\)</span>. Untuk <span class="math-inline" role="math">\(n=4\)</span>,
+<span class="math-inline" role="math">\(E[M]=4\theta/5\)</span>, sehingga bias <span class="math-inline" role="math">\(-\theta/5\)</span>, dan rumus maksimum Uniform
+memberi</p>
+<div class="math-display" role="math">\[\operatorname{MSE}(M)=\frac{2\theta^2}{(5)(6)}=\frac{\theta^2}{15}.\]</div>
+<p>Karena <span class="math-inline" role="math">\(1/15&lt;1/12\)</span>, MLE memiliki MSE lebih kecil pada ukuran sampel ini.
+Variansnya memang lebih kecil sehingga mengimbangi kuadrat bias. Perbandingan
+ini berlaku untuk loss kuadrat dan model yang dinyatakan; ia bukan bukti bahwa
+MLE selalu terbaik di bawah loss lain atau pada model lain.</p>
+<p><a id="O006-C140-CMP-MS02-P05"></a></p>
+<h2>Masalah 5 — konsistensi tidak menjamin konvergensi harapan</h2>
+<!--PROBLEM_META {"id":"O006-C140-CMP-MS02-P05","prerequisites":["B95"],"objective":"membuktikan konsistensi estimator sederhana dan memberi kontra-contoh kontrol ekor","difficulty":"menengah","misconceptions":["menganggap bias yang menuju nol mengikuti konvergensi probabilitas","mengabaikan peubah langka bernilai besar"]}-->
+<p>Untuk sampel iid bermean <span class="math-inline" role="math">\(\mu\)</span> dan varians <span class="math-inline" role="math">\(\sigma^2&lt;\infty\)</span>, definisikan
+<span class="math-inline" role="math">\(A_n=(1+1/n)\bar X_n\)</span>. Lalu, secara independen dari sampel, definisikan
+<span class="math-inline" role="math">\(R_n=n\)</span> dengan peluang <span class="math-inline" role="math">\(1/n\)</span> dan <span class="math-inline" role="math">\(0\)</span> dengan peluang <span class="math-inline" role="math">\(1-1/n\)</span>, serta
+<span class="math-inline" role="math">\(B_n=\bar X_n+R_n\)</span>.</p>
+<ol>
+<li>Hitung bias dan MSE <span class="math-inline" role="math">\(A_n\)</span>, lalu buktikan konsistensinya.</li>
+<li>Buktikan <span class="math-inline" role="math">\(B_n\xrightarrow{P}\mu\)</span> tetapi <span class="math-inline" role="math">\(E[B_n]-\mu\not\to0\)</span>.</li>
+<li>Sebutkan kondisi tambahan yang akan menghubungkan konsistensi dengan
+konvergensi ekspektasi.</li>
+</ol>
+<p><a id="O006-C140-CMP-MS02-P05-H01"></a></p>
+<h3>Petunjuk 1</h3>
+<p>Bias <span class="math-inline" role="math">\(A_n\)</span> adalah <span class="math-inline" role="math">\(\mu/n\)</span>. Gunakan Chebyshev untuk <span class="math-inline" role="math">\(\bar X_n\)</span> dan lihat bahwa
+MSE menuju nol.</p>
+<p><a id="O006-C140-CMP-MS02-P05-H02"></a></p>
+<h3>Petunjuk 2</h3>
+<p><span class="math-inline" role="math">\(P(R_n&gt;\varepsilon)=1/n\)</span> untuk semua <span class="math-inline" role="math">\(n&gt;\varepsilon\)</span>, tetapi <span class="math-inline" role="math">\(E[R_n]=1\)</span>.
+Gabungkan konvergensi probabilitas <span class="math-inline" role="math">\(R_n\to0\)</span> dengan LLN.</p>
+<p><a id="O006-C140-CMP-MS02-P05-ANS"></a></p>
+<h3>Jawaban singkat</h3>
+<p>Bias <span class="math-inline" role="math">\(A_n=\mu/n\)</span> dan
+<span class="math-inline" role="math">\(\operatorname{MSE}(A_n)=(1+1/n)^2\sigma^2/n+\mu^2/n^2\to0\)</span>,
+sehingga konsisten. Untuk <span class="math-inline" role="math">\(B_n\)</span>, <span class="math-inline" role="math">\(R_n\to_P0\)</span> tetapi <span class="math-inline" role="math">\(E[R_n]=1\)</span>, jadi
+<span class="math-inline" role="math">\(B_n\to_P\mu\)</span> dan biasnya tetap satu. Uniform integrability, dominasi
+integrabel, atau kontrol momen seragam diperlukan untuk pertukaran limit dan
+ekspektasi.</p>
+<p><a id="O006-C140-CMP-MS02-P05-SOL"></a></p>
+<h3>Solusi lengkap</h3>
+<p>Karena <span class="math-inline" role="math">\(E[\bar X_n]=\mu\)</span>,</p>
+<div class="math-display" role="math">\[E[A_n]=(1+1/n)\mu,
+\qquad b_n=E[A_n]-\mu=\frac\mu n.\]</div>
+<p>Variansnya <span class="math-inline" role="math">\((1+1/n)^2\sigma^2/n\)</span>, sehingga</p>
+<div class="math-display" role="math">\[\operatorname{MSE}(A_n)=\frac{(1+1/n)^2\sigma^2}{n}+\frac{\mu^2}{n^2}
+\longrightarrow0.\]</div>
+<p>MSE menuju nol menyiratkan konvergensi probabilitas, jadi <span class="math-inline" role="math">\(A_n\)</span> konsisten.</p>
+<p>Untuk <span class="math-inline" role="math">\(R_n\)</span>, bagi setiap <span class="math-inline" role="math">\(\varepsilon&gt;0\)</span> dan <span class="math-inline" role="math">\(n&gt;\varepsilon\)</span>,
+<span class="math-inline" role="math">\(P(|R_n|&gt;\varepsilon)=1/n\to0\)</span>. LLN memberi
+<span class="math-inline" role="math">\(\bar X_n\to_P\mu\)</span>, dan jumlah dua peubah yang masing-masing konvergen dalam
+probabilitas juga konvergen, sehingga <span class="math-inline" role="math">\(B_n\to_P\mu\)</span>. Namun</p>
+<div class="math-display" role="math">\[E[R_n]=n\frac1n=1,
+\qquad E[B_n]-\mu=1\]</div>
+<p>untuk setiap <span class="math-inline" role="math">\(n\)</span>. Peristiwa langka dengan ukuran besar menggagalkan
+konvergensi harapan. Uniform integrability, misalnya batas momen lebih dari
+satu yang seragam, akan menghapus kontribusi ekor itu; konsistensi saja tidak
+memberikannya.</p>
+<p><a id="O006-C140-CMP-MS02-P06"></a></p>
+<h2>Masalah 6 — batas Cramér–Rao pada model Bernoulli</h2>
+<!--PROBLEM_META {"id":"O006-C140-CMP-MS02-P06","prerequisites":["B90","B95"],"objective":"menghitung informasi Fisher dan memeriksa pencapaian batas Cramér–Rao","difficulty":"menengah","misconceptions":["menerapkan batas pada parameter endpoint tanpa syarat regularitas","menggunakan informasi satu observasi untuk estimator berbasis n observasi"]}-->
+<p>Misalkan <span class="math-inline" role="math">\(X_1,\ldots,X_n\)</span> iid Bernoulli<span class="math-inline" role="math">\((p)\)</span> dengan <span class="math-inline" role="math">\(0&lt;p&lt;1\)</span>.</p>
+<ol>
+<li>Hitung skor dan informasi Fisher sampel.</li>
+<li>Tulis batas Cramér–Rao untuk estimator tak bias <span class="math-inline" role="math">\(T\)</span> bagi <span class="math-inline" role="math">\(p\)</span>.</li>
+<li>Tunjukkan bahwa <span class="math-inline" role="math">\(T=\bar X\)</span> mencapai batas tersebut.</li>
+<li>Jelaskan mengapa argumen ini tidak langsung mencakup <span class="math-inline" role="math">\(p=0\)</span> atau <span class="math-inline" role="math">\(p=1\)</span>.</li>
+</ol>
+<p><a id="O006-C140-CMP-MS02-P06-H01"></a></p>
+<h3>Petunjuk 1</h3>
+<p>Log-likelihood adalah <span class="math-inline" role="math">\(X_\cdot\log p+(n-X_\cdot)\log(1-p)\)</span>. Turunkan dua
+kali atau hitung varians skor.</p>
+<p><a id="O006-C140-CMP-MS02-P06-H02"></a></p>
+<h3>Petunjuk 2</h3>
+<p>Informasi sampel adalah <span class="math-inline" role="math">\(n/[p(1-p)]\)</span>. Turunan fungsi target <span class="math-inline" role="math">\(g(p)=p\)</span> adalah
+satu, sehingga batasnya adalah kebalikan informasi.</p>
+<p><a id="O006-C140-CMP-MS02-P06-ANS"></a></p>
+<h3>Jawaban singkat</h3>
+<p>Skor sampel
+<span class="math-inline" role="math">\(S(p)=(X_\cdot-np)/[p(1-p)]\)</span> dan informasi
+<span class="math-inline" role="math">\(I_n(p)=n/[p(1-p)]\)</span>. Setiap estimator tak bias memenuhi
+<span class="math-inline" role="math">\(\operatorname{Var}_p(T)\ge p(1-p)/n\)</span>. Karena
+<span class="math-inline" role="math">\(\operatorname{Var}(\bar X)=p(1-p)/n\)</span>, rataan mencapai batas. Endpoint tidak
+regular karena <span class="math-inline" role="math">\(p=0,1\)</span> berada pada batas ruang parameter, distribusi menjadi
+degenerat, dan skor serta informasi interior tidak terdefinisi di sana.</p>
+<p><a id="O006-C140-CMP-MS02-P06-SOL"></a></p>
+<h3>Solusi lengkap</h3>
+<p>Dengan <span class="math-inline" role="math">\(X_\cdot=\sum_iX_i\)</span>,</p>
+<div class="math-display" role="math">\[\ell(p)=X_\cdot\log p+(n-X_\cdot)\log(1-p),\]</div>
+<p>dan</p>
+<div class="math-display" role="math">\[S(p)=\frac{X_\cdot}{p}-\frac{n-X_\cdot}{1-p}
+=\frac{X_\cdot-np}{p(1-p)}.\]</div>
+<p>Karena Var<span class="math-inline" role="math">\((X_\cdot)=np(1-p)\)</span>,</p>
+<div class="math-display" role="math">\[I_n(p)=E[S(p)^2]=\frac{n}{p(1-p)}.\]</div>
+<p>Untuk target <span class="math-inline" role="math">\(g(p)=p\)</span>, bentuk Cramér–Rao menyatakan bahwa estimator tak bias
+<span class="math-inline" role="math">\(T\)</span> dengan kondisi regularitas memenuhi</p>
+<div class="math-display" role="math">\[\operatorname{Var}_p(T)\ge\frac{[g'(p)]^2}{I_n(p)}
+=\frac{p(1-p)}n.\]</div>
+<p>Rataan sampel tak bias dan variansnya tepat <span class="math-inline" role="math">\(p(1-p)/n\)</span>, maka equality
+tercapai. Kesetaraan muncul karena skor linear terhadap <span class="math-inline" role="math">\(X_\cdot\)</span> dan rataan
+merupakan fungsi statistik cukup itu. Pada <span class="math-inline" role="math">\(p=0\)</span> atau <span class="math-inline" role="math">\(1\)</span>, keluarga berada di
+endpoint; turunan log-likelihood dan support efektif tidak memenuhi asumsi
+interior yang dipakai dalam pembuktian, sehingga batas tersebut tidak boleh
+diekstrapolasi tanpa analisis endpoint.</p>
+<p><a id="O006-C140-CMP-MS02-P07"></a></p>
+<h2>Masalah 7 — sufficiency dan perbaikan estimator Normal</h2>
+<!--PROBLEM_META {"id":"O006-C140-CMP-MS02-P07","prerequisites":["B95"],"objective":"memakai faktorisasi likelihood dan ekspektasi bersyarat untuk menilai estimator","difficulty":"lanjut","misconceptions":["menganggap statistik cukup otomatis merupakan estimator terbaik untuk semua loss","mengira conditioning mengubah nilai harapan target"]}-->
+<p>Misalkan <span class="math-inline" role="math">\(X_1,\ldots,X_n\)</span> iid <span class="math-inline" role="math">\(N(\mu,\sigma^2)\)</span> dengan <span class="math-inline" role="math">\(\sigma^2\)</span> diketahui.</p>
+<ol>
+<li>Gunakan faktorisasi likelihood untuk menunjukkan bahwa <span class="math-inline" role="math">\(\bar X\)</span> cukup bagi
+<span class="math-inline" role="math">\(\mu\)</span>.</li>
+<li>Untuk estimator tak bias awal <span class="math-inline" role="math">\(T=X_1\)</span>, hitung
+<span class="math-inline" role="math">\(E[T\mid\bar X]\)</span> dan Var<span class="math-inline" role="math">\((T\mid\bar X)\)</span>.</li>
+<li>Gunakan hukum varians total untuk membandingkan varians <span class="math-inline" role="math">\(T\)</span> dan
+<span class="math-inline" role="math">\(E[T\mid\bar X]\)</span>.</li>
+</ol>
+<p><a id="O006-C140-CMP-MS02-P07-H01"></a></p>
+<h3>Petunjuk 1</h3>
+<p>Likelihood bergantung pada data melalui <span class="math-inline" role="math">\(\sum_iX_i=n\bar X\)</span> dan
+<span class="math-inline" role="math">\(\sum_iX_i^2\)</span>; suku kedua bebas dari <span class="math-inline" role="math">\(\mu\)</span> dan masuk faktor data saja.</p>
+<p><a id="O006-C140-CMP-MS02-P07-H02"></a></p>
+<h3>Petunjuk 2</h3>
+<p>Kovarians <span class="math-inline" role="math">\(\operatorname{Cov}(X_1,\bar X)=\sigma^2/n\)</span> dan
+Var<span class="math-inline" role="math">\((\bar X)=\sigma^2/n\)</span>. Karena gabungan Normal, regresi bersyarat adalah
+linear.</p>
+<p><a id="O006-C140-CMP-MS02-P07-ANS"></a></p>
+<h3>Jawaban singkat</h3>
+<p>Faktorisasi memberi kecukupan <span class="math-inline" role="math">\(\bar X\)</span>. Karena pasangan <span class="math-inline" role="math">\((X_1,\bar X)\)</span> Normal,
+<span class="math-inline" role="math">\(E[X_1\mid\bar X]=\bar X\)</span> dan
+<span class="math-inline" role="math">\(\operatorname{Var}(X_1\mid\bar X)=\sigma^2(1-1/n)\)</span>. Jadi estimator
+terkondisi adalah <span class="math-inline" role="math">\(\bar X\)</span>, tetap tak bias, dan variansnya <span class="math-inline" role="math">\(\sigma^2/n\)</span>,
+lebih kecil dari Var<span class="math-inline" role="math">\((X_1)=\sigma^2\)</span> untuk <span class="math-inline" role="math">\(n&gt;1\)</span>.</p>
+<p><a id="O006-C140-CMP-MS02-P07-SOL"></a></p>
+<h3>Solusi lengkap</h3>
+<p>Likelihood bersama, mengabaikan konstanta yang tidak bergantung pada <span class="math-inline" role="math">\(\mu\)</span>,
+adalah</p>
+<div class="math-display" role="math">\[L(\mu;x)\propto
+\exp\left[-\frac1{2\sigma^2}\sum_i(x_i-\mu)^2\right]
+=\exp\left[-\frac{n(\bar x-\mu)^2}{2\sigma^2}\right]
+\exp\left[-\frac{\sum_i(x_i-\bar x)^2}{2\sigma^2}\right].\]</div>
+<p>Faktor pertama bergantung pada data melalui <span class="math-inline" role="math">\(\bar x\)</span>, sedangkan faktor kedua
+tidak bergantung pada <span class="math-inline" role="math">\(\mu\)</span>. Teorema faktorisasi menunjukkan bahwa <span class="math-inline" role="math">\(\bar X\)</span>
+adalah statistik cukup.</p>
+<p>Selanjutnya <span class="math-inline" role="math">\((X_1,\bar X)\)</span> berdistribusi Normal bivariat dengan
+<span class="math-inline" role="math">\(E[X_1]=E[\bar X]=\mu\)</span>, Var<span class="math-inline" role="math">\((X_1)=\sigma^2\)</span>,
+Var<span class="math-inline" role="math">\((\bar X)=\sigma^2/n\)</span>, dan kovarians <span class="math-inline" role="math">\(\sigma^2/n\)</span>. Rumus harapan
+bersyarat Normal memberi</p>
+<div class="math-display" role="math">\[E[X_1\mid\bar X]
+=\mu+\frac{\sigma^2/n}{\sigma^2/n}(\bar X-\mu)=\bar X,\]</div>
+<p>sedangkan varians bersyarat adalah
+<span class="math-inline" role="math">\(\sigma^2-(\sigma^2/n)^2/(\sigma^2/n)=\sigma^2(1-1/n)\)</span>.
+Hukum varians total menyatakan
+$\operatorname{Var}(X_1)=\operatorname{Var}(E[X_1\mid\bar X])
++E[\operatorname{Var}(X_1\mid\bar X)]$, sehingga
+<span class="math-inline" role="math">\(\sigma^2=\sigma^2/n+\sigma^2(1-1/n)\)</span>. Conditioning mempertahankan
+ketakbiasan tetapi menghapus variasi yang tidak informatif tentang <span class="math-inline" role="math">\(\mu\)</span>;
+keunggulan khusus ini memerlukan loss dan syarat yang dinyatakan.</p>
+<p><a id="O006-C140-CMP-MS02-P08"></a></p>
+<h2>Masalah 8 — estimator Laplace untuk proporsi dekat batas</h2>
+<!--PROBLEM_META {"id":"O006-C140-CMP-MS02-P08","prerequisites":["B90","B95"],"objective":"menghitung bias dan MSE estimator tersmoothing lalu membandingkannya dengan rataan sampel","difficulty":"menengah","misconceptions":["menganggap smoothing selalu meningkatkan MSE","menggunakan posterior atau estimator frequentist tanpa menyatakan loss"]}-->
+<p>Misalkan <span class="math-inline" role="math">\(X\sim\operatorname{Binomial}(n,p)\)</span> dan bandingkan
+<span class="math-inline" role="math">\(T_0=X/n\)</span> dengan estimator Laplace
+<span class="math-inline" role="math">\(T_L=(X+1)/(n+2)\)</span>.</p>
+<ol>
+<li>Turunkan bias, varians, dan MSE <span class="math-inline" role="math">\(T_L\)</span> sebagai fungsi <span class="math-inline" role="math">\(n,p\)</span>.</li>
+<li>Untuk <span class="math-inline" role="math">\(n=10\)</span>, hitung MSE kedua estimator pada <span class="math-inline" role="math">\(p=0{,}1\)</span> dan <span class="math-inline" role="math">\(p=0{,}5\)</span>.</li>
+<li>Jelaskan mengapa estimator yang lebih stabil di dekat batas tidak otomatis
+mendominasi pada semua nilai <span class="math-inline" role="math">\(p\)</span>.</li>
+</ol>
+<p><a id="O006-C140-CMP-MS02-P08-H01"></a></p>
+<h3>Petunjuk 1</h3>
+<p>Gunakan <span class="math-inline" role="math">\(E[X]=np\)</span> dan Var<span class="math-inline" role="math">\((X)=np(1-p)\)</span>. Bias <span class="math-inline" role="math">\(T_L\)</span> menyusut menuju <span class="math-inline" role="math">\(1/2\)</span>
+karena dua pseudo-observasi ditambahkan.</p>
+<p><a id="O006-C140-CMP-MS02-P08-H02"></a></p>
+<h3>Petunjuk 2</h3>
+<p>Untuk <span class="math-inline" role="math">\(T_0\)</span>, MSE sama dengan <span class="math-inline" role="math">\(p(1-p)/n\)</span>. Untuk <span class="math-inline" role="math">\(T_L\)</span>, gabungkan kuadrat bias
+<span class="math-inline" role="math">\((1-2p)^2/(n+2)^2\)</span> dengan varians <span class="math-inline" role="math">\(np(1-p)/(n+2)^2\)</span>.</p>
+<p><a id="O006-C140-CMP-MS02-P08-ANS"></a></p>
+<h3>Jawaban singkat</h3>
+<div class="math-display" role="math">\[b_L=\frac{1-2p}{n+2},\qquad
+\operatorname{Var}(T_L)=\frac{np(1-p)}{(n+2)^2},\qquad
+\operatorname{MSE}(T_L)=\frac{np(1-p)+(1-2p)^2}{(n+2)^2}.\]</div>
+<p>Pada <span class="math-inline" role="math">\(n=10\)</span>, MSE <span class="math-inline" role="math">\(T_0\)</span> adalah <span class="math-inline" role="math">\(0{,}009\)</span> untuk <span class="math-inline" role="math">\(p=0{,}1\)</span> dan <span class="math-inline" role="math">\(0{,}025\)</span> untuk
+<span class="math-inline" role="math">\(p=0{,}5\)</span>; MSE <span class="math-inline" role="math">\(T_L\)</span> berturut-turut <span class="math-inline" role="math">\(77/7200\approx0{,}010694\)</span> dan
+<span class="math-inline" role="math">\(5/288\approx0{,}017361\)</span>. Jadi smoothing membantu di tengah tetapi sedikit
+merugikan pada contoh dekat batas ini.</p>
+<p><a id="O006-C140-CMP-MS02-P08-SOL"></a></p>
+<h3>Solusi lengkap</h3>
+<p>Untuk estimator rataan, <span class="math-inline" role="math">\(E[T_0]=p\)</span> dan
+<span class="math-inline" role="math">\(\operatorname{MSE}(T_0)=\operatorname{Var}(T_0)=p(1-p)/n\)</span>.
+Untuk <span class="math-inline" role="math">\(T_L\)</span>,</p>
+<div class="math-display" role="math">\[E[T_L]=\frac{np+1}{n+2},\]</div>
+<p>sehingga</p>
+<div class="math-display" role="math">\[b_L=E[T_L]-p=\frac{1-2p}{n+2}.\]</div>
+<p>Pembagian oleh konstanta memberi</p>
+<div class="math-display" role="math">\[\operatorname{Var}(T_L)=\frac{np(1-p)}{(n+2)^2},\]</div>
+<p>dan karenanya</p>
+<div class="math-display" role="math">\[\operatorname{MSE}(T_L)
+=\frac{np(1-p)+(1-2p)^2}{(n+2)^2}.\]</div>
+<p>Dengan <span class="math-inline" role="math">\(n=10,p=0{,}1\)</span>, rataan mempunyai MSE
+<span class="math-inline" role="math">\(0{,}1(0{,}9)/10=0{,}009\)</span>. Untuk Laplace, pembilangnya
+<span class="math-inline" role="math">\(10(0{,}1)(0{,}9)+(0{,}8)^2=0{,}9+0{,}64=1{,}54\)</span>, sehingga MSE
+<span class="math-inline" role="math">\(1{,}54/144=77/7200\approx0{,}010694\)</span>. Pada <span class="math-inline" role="math">\(p=0{,}5\)</span>, bias Laplace nol;
+MSE-nya <span class="math-inline" role="math">\(10(0{,}25)/144=5/288\approx0{,}017361\)</span>, sedangkan rataan
+mempunyai MSE <span class="math-inline" role="math">\(0{,}25/10=0{,}025\)</span>. Pseudo-observasi mengurangi varians dan
+mencegah nilai ekstrem, tetapi membayar bias yang besar ketika <span class="math-inline" role="math">\(p\)</span> jauh dari
+<span class="math-inline" role="math">\(1/2\)</span>. Pilihan harus mengikuti ruang parameter, loss, dan tujuan kalibrasi,
+bukan slogan bahwa smoothing selalu lebih baik.</p>
+<p><a id="O006-C140-CMP-MS02-SEC-CHECK"></a></p>
+<h2>Checklist kelulusan</h2>
+<p>Set ini dikuasai bila Anda dapat menuliskan distribusi sampling sebelum
+menilai estimator, memisahkan bias dari varians, dan menyatakan ruang parameter
+serta loss ketika memakai risiko. Konsistensi, sufficiency, ketakbiasan, dan
+efisiensi adalah sifat berbeda; satu tidak boleh disimpulkan hanya dari yang
+lain.</p>
+
+<footer class="license">Materi pendamping orisinal berlisensi CC BY-SA 4.0. Komponen Penn State dan Random tetap berada di bawah lisensinya masing-masing dan tidak direlisensikan oleh halaman ini.</footer>
+</main>
+</div>
+</body>
+</html>

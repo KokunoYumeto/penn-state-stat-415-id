@@ -21,3 +21,10 @@ components/random-completeness/source/** -text -whitespace
 components/random-completeness/backend/** -text -whitespace
 components/random-completeness/provenance/sibling/** -text -whitespace
 components/random-completeness/build/** -text -whitespace
+
+# Preserve the deterministic original-companion sources, backend, generated
+# evidence, and browser-free reader bytes without platform EOL conversion.
+components/c140-companion/source/** -text -whitespace
+components/c140-companion/backend/** -text -whitespace
+components/c140-companion/generated/** -text -whitespace
+components/c140-companion/build/** -text -whitespace

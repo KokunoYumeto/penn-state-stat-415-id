@@ -1,0 +1,372 @@
+<!doctype html>
+<html lang="id-ID">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="generator" content="OpenAI Codex gpt-5.6-sol, Ultra">
+<title>Set penguasaan 05 — informasi Fisher, interval kepercayaan, bootstrap, dan delta method</title>
+<link rel="stylesheet" href="../assets/style.css">
+<script>window.MathJax={loader:{load:['[tex]/boldsymbol']},tex:{packages:{'[+]':['boldsymbol']},inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']]},svg:{fontCache:'local'}};</script>
+<script defer src="../assets/MathJax/tex-svg.js"></script>
+</head>
+<body>
+<div class="shell">
+<nav class="sidebar" aria-label="Daftar isi pendamping"><h2>Isi pendamping</h2><ol><li><a href="../index.html">Pendamping Orisinal Statistika Matematis</a></li><li><a href="../theory/O006-C140-CMP-D001.html">Model parametrik reguler, skor, dan informasi Fisher</a></li><li><a href="../theory/O006-C140-CMP-D002.html">Konsistensi MLE: identifikasi Kullback–Leibler dan teorema argmax</a></li><li><a href="../theory/O006-C140-CMP-D003.html">Likelihood kuadratik lokal, normalitas asimtotik, dan delta method</a></li><li><a href="../theory/O006-C140-CMP-D004.html">Prosedur Wald, skor, dan rasio likelihood</a></li><li><a href="../theory/O006-C140-CMP-D005.html">Likelihood nonreguler: empat mekanisme kegagalan</a></li><li><a href="../theory/O006-C140-CMP-D006.html">Optimalitas pengujian: Neyman–Pearson, MP, UMP, dan rasio likelihood monoton</a></li><li><a href="../theory/O006-C140-CMP-D007.html">Loss, risk, efisiensi, Rao–Blackwell, dan Lehmann–Scheffé</a></li><li><a href="../theory/O006-C140-CMP-D008.html">Model linear Gaussian desain tetap dan geometri proyeksi</a></li><li><a href="../theory/O006-C140-CMP-D009.html">OLS, MLE Gaussian, dan teorema Gauss–Markov pada rancangan tetap</a></li><li><a href="../theory/O006-C140-CMP-D010.html">Inferensi Gaussian eksak: proyeksi, t, F, ANOVA, dan prediksi</a></li><li><a href="../theory/O006-C140-CMP-D011.html">Diagnostik, leverage, misspesifikasi, dan inferensi pascaseleksi</a></li><li><a href="../theory/O006-C140-CMP-D012.html">Inferensi Bayesian sebagai pembaruan dan keputusan yang koheren</a></li><li><a href="../theory/O006-C140-CMP-D013.html">Perbandingan Bayesian–frequentist: keputusan, cakupan, dan kalibrasi</a></li><li><a href="../simulations/O006-C140-CMP-SIM001.html">Model lokasi normal: MLE, coverage, dan tiga statistik uji</a></li><li><a href="../simulations/O006-C140-CMP-SIM002.html">Delta method pada titik reguler dan titik dengan turunan nol</a></li><li><a href="../simulations/O006-C140-CMP-SIM003.html">Endpoint Uniform: laju nonreguler dan kegagalan bootstrap biasa</a></li><li><a href="../simulations/O006-C140-CMP-SIM004.html">Uji Neyman–Pearson teracak dengan size tepat</a></li><li><a href="../simulations/O006-C140-CMP-SIM005.html">Model linear matriks: coverage, heteroskedastisitas, dan pengaruh</a></li><li><a href="../simulations/O006-C140-CMP-SIM006.html">Kalibrasi selang Bayesian dan frequentist pada model binomial</a></li><li><a href="O006-C140-CMP-MS00.html">Set penguasaan 00 — probabilitas, distribusi, dan ekspektasi (diagnostik C140)</a></li><li><a href="O006-C140-CMP-MS01.html">Set penguasaan 01 — statistik urutan dan distribusi sampel</a></li><li><a href="O006-C140-CMP-MS02.html">Set penguasaan 02 — estimasi, bias, MSE, dan sifat estimator</a></li><li><a href="O006-C140-CMP-MS03.html">Set penguasaan 03 — kecukupan, faktorisasi, kelengkapan, dan statistik ancillary</a></li><li><a href="O006-C140-CMP-MS04.html">Set penguasaan 04 — metode momen dan dasar kemungkinan maksimum</a></li><li><a href="O006-C140-CMP-MS05.html">Set penguasaan 05 — informasi Fisher, interval kepercayaan, bootstrap, dan delta method</a></li><li><a href="O006-C140-CMP-MS06.html">Set penguasaan 06 — pengujian hipotesis, daya, p-value, dan jembatan likelihood</a></li><li><a href="O006-C140-CMP-MS07.html">Set penguasaan 07 — regularitas, konsistensi, dan normalitas MLE</a></li><li><a href="O006-C140-CMP-MS08.html">Set penguasaan 08 — Wald, skor, rasio likelihood, dan diagnosis nonregular</a></li><li><a href="O006-C140-CMP-MS09.html">Set penguasaan 09 — pengujian eksak dan optimalitas Neyman–Pearson</a></li><li><a href="O006-C140-CMP-MS10.html">Set penguasaan 10 — uji likelihood asimtotik, risk, dan perbaikan estimator</a></li><li><a href="O006-C140-CMP-MS11.html">Set penguasaan 11 — pembaruan Bayesian, keputusan, dan kalibrasi</a></li><li><a href="O006-C140-CMP-MS12.html">Set penguasaan 12 — model linear Gaussian matriks, inferensi eksak, dan diagnostik</a></li><li><a href="../assessments/O006-C140-CMP-CA01.html">Asesmen kumulatif C1: likelihood, optimalitas, dan keputusan statistik</a></li></ol></nav>
+<main>
+<div class="metadata"><strong>O006-C140-CMP-MS05</strong> · id-ID · CC BY-SA 4.0 · OpenAI Codex gpt-5.6-sol, Ultra</div>
+<p><a id="O006-C140-CMP-MS05-SEC-OVERVIEW"></a></p>
+<h1>Set penguasaan 05 — informasi Fisher, interval kepercayaan, bootstrap, dan delta method</h1>
+<p>Delapan soal ini menghubungkan Lesson 06 Penn State <a class="xref external" data-target-id="O006-PSU-006" href="https://kokunoyumeto.github.io/penn-state-stat-415-id/Lesson05.html">Lesson05</a> dengan
+teori informasi dan metode resampling. Nyatakan parameter yang tetap, hukum
+sampling, serta skala aproksimasi sebelum memilih rumus. Identitas informasi
+mengikuti <a class="xref" data-target-id="O006-C140-CMP-D001-THM-INFO-IDENTITY" href="../theory/O006-C140-CMP-D001.html#O006-C140-CMP-D001-THM-INFO-IDENTITY">Teorema: identitas informasi kedua</a>, sedangkan limit dan delta
+method mengikuti <a class="xref" data-target-id="O006-C140-CMP-D003-THM-MLE-AN" href="../theory/O006-C140-CMP-D003.html#O006-C140-CMP-D003-THM-MLE-AN">Teorema: normalitas asimtotik MLE</a> dan
+<a class="xref" data-target-id="O006-C140-CMP-D003-THM-DELTA-SCALAR" href="../theory/O006-C140-CMP-D003.html#O006-C140-CMP-D003-THM-DELTA-SCALAR">Teorema: delta method skalar</a>.</p>
+<p><a id="O006-C140-CMP-MS05-P01"></a></p>
+<h2>Soal 1 — informasi Fisher dan batas Cramér–Rao untuk proporsi Bernoulli</h2>
+<!--PROBLEM_META {"id":"O006-C140-CMP-MS05-P01","prerequisites":["O006-PSU-006","O006-C140-CMP-D001-EX-BERNOULLI","O006-C140-CMP-D007-THM02"],"objective":"menghitung skor, informasi sampel, dan batas varians bagi estimator tak-bias","difficulty":"menengah","misconceptions":["informasi sampel sama dengan informasi satu pengamatan","batas Cramér–Rao berlaku tanpa support bersama atau ketakbiasan"]}-->
+<p>Misalkan <span class="math-inline" role="math">\(X_1,\ldots,X_n\)</span> iid <span class="math-inline" role="math">\(\operatorname{Bernoulli}(p)\)</span>, <span class="math-inline" role="math">\(0&lt;p&lt;1\)</span>, dan
+<span class="math-inline" role="math">\(S=\sum_iX_i\)</span>. (a) Turunkan skor dan informasi Fisher satu pengamatan. (b)
+Hitung informasi sampel dan batas Cramér–Rao bagi estimator tak-bias <span class="math-inline" role="math">\(T\)</span> dengan
+<span class="math-inline" role="math">\(E_pT=p\)</span>. (c) Verifikasi bahwa <span class="math-inline" role="math">\(\widehat p=S/n\)</span> mencapai batas. (d) Untuk
+<span class="math-inline" role="math">\(n=40,S=12\)</span>, hitung estimasi dan varians plug-in.</p>
+<p><a id="O006-C140-CMP-MS05-P01-H01"></a></p>
+<h3>Petunjuk 1</h3>
+<p>Gunakan <span class="math-inline" role="math">\(\ell(p;x)=x\log p+(1-x)\log(1-p)\)</span> dan
+<span class="math-inline" role="math">\(\operatorname{Var}_p(X)=p(1-p)\)</span>. Informasi iid menjumlah.</p>
+<p><a id="O006-C140-CMP-MS05-P01-H02"></a></p>
+<h3>Petunjuk 2</h3>
+<p>Untuk target <span class="math-inline" role="math">\(g(p)=p\)</span>, <span class="math-inline" role="math">\(g'(p)=1\)</span>. Hitung varians <span class="math-inline" role="math">\(S/n\)</span> langsung lalu bandingkan
+dengan batas, dengan mengingat bahwa batas memerlukan regularitas.</p>
+<p><a id="O006-C140-CMP-MS05-P01-ANS"></a></p>
+<h3>Jawaban singkat</h3>
+<p><span class="math-inline" role="math">\(s_p(x)=(x-p)/[p(1-p)]\)</span> dan <span class="math-inline" role="math">\(I_1(p)=1/[p(1-p)]\)</span>, sehingga
+<span class="math-inline" role="math">\(I_n(p)=n/[p(1-p)]\)</span>. Batasnya <span class="math-inline" role="math">\(p(1-p)/n\)</span>, tepat sama dengan varians <span class="math-inline" role="math">\(S/n\)</span>.
+Pada data tersebut <span class="math-inline" role="math">\(\widehat p=0{,}3\)</span> dan varians plug-in <span class="math-inline" role="math">\(0{,}00525\)</span>.</p>
+<p><a id="O006-C140-CMP-MS05-P01-SOL"></a></p>
+<h3>Solusi lengkap</h3>
+<p>Turunan log-likelihood adalah</p>
+<div class="math-display" role="math">\[s_p(x)=\frac{x}{p}-\frac{1-x}{1-p}
+=\frac{x-p}{p(1-p)}.\]</div>
+<p>Karena skor bermean nol dan <span class="math-inline" role="math">\(\operatorname{Var}_p(X)=p(1-p)\)</span>,</p>
+<div class="math-display" role="math">\[I_1(p)=E_ps_p(X)^2=\frac1{p(1-p)}.\]</div>
+<p>Aditivitas skor memberi <span class="math-inline" role="math">\(I_n(p)=n/[p(1-p)]\)</span>. Batas Cramér–Rao
+<a class="xref" data-target-id="O006-C140-CMP-D007-THM02" href="../theory/O006-C140-CMP-D007.html#O006-C140-CMP-D007-THM02">Batas Cramér–Rao untuk mean estimator</a> untuk target <span class="math-inline" role="math">\(p\)</span> adalah</p>
+<div class="math-display" role="math">\[\operatorname{Var}_p(T)\geq\frac{1}{I_n(p)}=\frac{p(1-p)}n.\]</div>
+<p>Estimator <span class="math-inline" role="math">\(S/n\)</span> tak-bias dan memiliki varians <span class="math-inline" role="math">\(p(1-p)/n\)</span>, jadi mencapai batas
+di ruang estimator tak-bias reguler. Dengan <span class="math-inline" role="math">\(S=12,n=40\)</span>, <span class="math-inline" role="math">\(\widehat p=0{,}3\)</span> dan
+<span class="math-inline" role="math">\(0{,}3(0{,}7)/40=0{,}00525\)</span>. Pencapaian ini tidak membandingkan semua estimator
+bias di bawah semua loss, dan angka plug-in bukan peluang posterior.</p>
+<p><a id="O006-C140-CMP-MS05-P02"></a></p>
+<h2>Soal 2 — matriks informasi Normal dan nuisance mean</h2>
+<!--PROBLEM_META {"id":"O006-C140-CMP-MS05-P02","prerequisites":["O006-C140-CMP-D001-EX-NORMAL","O006-C140-CMP-D001-THM-INFO-IDENTITY","O006-C140-CMP-D007-THM02"],"objective":"menurunkan informasi multivariat dan mengaudit batas varians ketika parameter nuisance hadir","difficulty":"lanjut","misconceptions":["elemen diagonal informasi dapat diinvers sendiri tanpa memeriksa nuisance","estimator varians sampel otomatis mencapai batas berbasis informasi"]}-->
+<p>Anggap <span class="math-inline" role="math">\(X_i\sim N(\mu,v)\)</span> iid dengan <span class="math-inline" role="math">\(v=\sigma^2&gt;0\)</span> dan
+<span class="math-inline" role="math">\(\theta=(\mu,v)^\mathsf T\)</span>. (a) Turunkan <span class="math-inline" role="math">\(I_1(\theta)\)</span> dan invers informasi sampel.
+(b) Tuliskan batas formal untuk estimator tak-bias <span class="math-inline" role="math">\(\mu\)</span> dan <span class="math-inline" role="math">\(v\)</span>. (c) Bandingkan
+dengan <span class="math-inline" role="math">\(\bar X\)</span> dan <span class="math-inline" role="math">\(S^2=(n-1)^{-1}\sum_i(X_i-\bar X)^2\)</span>. (d) Apakah matriks
+informasi diagonal membuktikan independensi kedua estimator?</p>
+<p><a id="O006-C140-CMP-MS05-P02-H01"></a></p>
+<h3>Petunjuk 1</h3>
+<p>Skor lokasi dan varians adalah
+<span class="math-inline" role="math">\(s_\mu=(X-\mu)/v\)</span> dan
+<span class="math-inline" role="math">\(s_v=-1/(2v)+(X-\mu)^2/(2v^2)\)</span>. Momen pusat Normal orde dua sampai empat
+menghasilkan elemen silang nol.</p>
+<p><a id="O006-C140-CMP-MS05-P02-H02"></a></p>
+<h3>Petunjuk 2</h3>
+<p>Kalikan informasi per pengamatan dengan <span class="math-inline" role="math">\(n\)</span>, lalu invers. Gunakan
+<span class="math-inline" role="math">\(\operatorname{Var}(S^2)=2v^2/(n-1)\)</span>; jangan mengganti <span class="math-inline" role="math">\(n-1\)</span> dengan <span class="math-inline" role="math">\(n\)</span> tanpa alasan.</p>
+<p><a id="O006-C140-CMP-MS05-P02-ANS"></a></p>
+<h3>Jawaban singkat</h3>
+<p><span class="math-inline" role="math">\(I_1=\operatorname{diag}(1/v,1/(2v^2))\)</span> dan
+<span class="math-inline" role="math">\(I_n^{-1}=\operatorname{diag}(v/n,2v^2/n)\)</span>. Batas formal untuk <span class="math-inline" role="math">\(\mu\)</span> adalah
+<span class="math-inline" role="math">\(v/n\)</span>, sedangkan untuk <span class="math-inline" role="math">\(v\)</span> adalah <span class="math-inline" role="math">\(2v^2/n\)</span>. <span class="math-inline" role="math">\(\bar X\)</span> mencapai batas pertama;
+<span class="math-inline" role="math">\(S^2\)</span> ber-varians <span class="math-inline" role="math">\(2v^2/(n-1)\)</span>, bukan angka batas hingga-sampel. Diagonalitas
+menyatakan ortogonalitas skor, bukan independensi universal.</p>
+<p><a id="O006-C140-CMP-MS05-P02-SOL"></a></p>
+<h3>Solusi lengkap</h3>
+<p>Dengan <span class="math-inline" role="math">\(v=\sigma^2\)</span>, skor per observasi ialah</p>
+<div class="math-display" role="math">\[s_\mu=\frac{X-\mu}{v},\qquad
+s_v=-\frac1{2v}+\frac{(X-\mu)^2}{2v^2}.\]</div>
+<p>Momen Normal memberi</p>
+<div class="math-display" role="math">\[I_1(\mu,v)=
+\begin{pmatrix}1/v&amp;0\\0&amp;1/(2v^2)\end{pmatrix},
+\qquad
+I_n^{-1}=
+\begin{pmatrix}v/n&amp;0\\0&amp;2v^2/n\end{pmatrix}.\]</div>
+<p>Untuk target <span class="math-inline" role="math">\(\mu\)</span>, gradien <span class="math-inline" role="math">\((1,0)^\mathsf T\)</span> memberi batas <span class="math-inline" role="math">\(v/n\)</span>, dan
+<span class="math-inline" role="math">\(\operatorname{Var}(\bar X)=v/n\)</span>, sehingga rataan mencapai batas. Untuk target
+<span class="math-inline" role="math">\(v\)</span>, gradien <span class="math-inline" role="math">\((0,1)^\mathsf T\)</span> memberi batas informasi formal <span class="math-inline" role="math">\(2v^2/n\)</span>.
+Akan tetapi <span class="math-inline" role="math">\(S^2\)</span> tak-bias dengan
+<span class="math-inline" role="math">\(\operatorname{Var}(S^2)=2v^2/(n-1)\)</span>; ia tidak mencapai angka itu pada sampel
+hingga. Hal ini mengingatkan bahwa batas multivariat membutuhkan versi
+regularitas dan kelas estimator yang tepat ketika nuisance mean ikut diestimasi.
+Elemen silang nol adalah kovarians skor nol; independensi hingga-sampel antara
+<span class="math-inline" role="math">\(\bar X\)</span> dan <span class="math-inline" role="math">\(S^2\)</span> merupakan teorema khusus Normal, bukan konsekuensi matriks
+informasi semata.</p>
+<p><a id="O006-C140-CMP-MS05-P03"></a></p>
+<h2>Soal 3 — interval t eksak dan makna cakupan</h2>
+<!--PROBLEM_META {"id":"O006-C140-CMP-MS05-P03","prerequisites":["O006-PSU-006","B95","O006-C140-CMP-D003-SEC-OVERVIEW"],"objective":"membangun interval mean Normal eksak dan menerjemahkan pivot menjadi pernyataan cakupan yang benar","difficulty":"menengah","misconceptions":["interval terhitung mempunyai peluang posterior 95 persen memuat parameter tetap","simpangan baku sampel dibagi n, bukan akar n"]}-->
+<p>Sampel iid Normal menghasilkan <span class="math-inline" role="math">\(n=16\)</span>, <span class="math-inline" role="math">\(\bar X=12\)</span>, dan <span class="math-inline" role="math">\(s=4\)</span>. Tanpa
+menganggap <span class="math-inline" role="math">\(\sigma\)</span> diketahui, (a) turunkan pivot Student,
+(b) bentuk interval dua sisi 95% untuk <span class="math-inline" role="math">\(\mu\)</span> memakai <span class="math-inline" role="math">\(t_{15,0.975}=2{,}131\)</span>,
+(c) hitung endpoint, dan (d) tulis pernyataan cakupan yang benar.</p>
+<p><a id="O006-C140-CMP-MS05-P03-H01"></a></p>
+<h3>Petunjuk 1</h3>
+<p>Gunakan independensi <span class="math-inline" role="math">\(\bar X\)</span> dan <span class="math-inline" role="math">\(S^2\)</span> pada sampel Normal serta
+<span class="math-inline" role="math">\((n-1)S^2/\sigma^2\sim\chi^2_{n-1}\)</span>.</p>
+<p><a id="O006-C140-CMP-MS05-P03-H02"></a></p>
+<h3>Petunjuk 2</h3>
+<p>Kesalahan baku adalah <span class="math-inline" role="math">\(s/\sqrt n=4/4=1\)</span>. Isolasi <span class="math-inline" role="math">\(\mu\)</span> pada
+<span class="math-inline" role="math">\(-2{,}131\leq(\bar X-\mu)/(S/\sqrt n)\leq2{,}131\)</span>.</p>
+<p><a id="O006-C140-CMP-MS05-P03-ANS"></a></p>
+<h3>Jawaban singkat</h3>
+<p><span class="math-inline" role="math">\(T=(\bar X-\mu)/(S/\sqrt n)\sim t_{15}\)</span> dan intervalnya
+<span class="math-inline" role="math">\(12\pm2{,}131=[9{,}869,14{,}131]\)</span>. Jika prosedur diulang pada model Normal,
+cakupan parameter-tetapnya 0,95; setelah data diamati, ini bukan peluang
+posterior bahwa <span class="math-inline" role="math">\(\mu\)</span> berada di interval tersebut.</p>
+<p><a id="O006-C140-CMP-MS05-P03-SOL"></a></p>
+<h3>Solusi lengkap</h3>
+<p>Untuk sampel Normal,
+<span class="math-inline" role="math">\(\bar X\sim N(\mu,\sigma^2/n)\)</span> dan
+<span class="math-inline" role="math">\((n-1)S^2/\sigma^2\sim\chi^2_{n-1}\)</span> secara independen. Karena itu</p>
+<div class="math-display" role="math">\[T=\frac{\bar X-\mu}{S/\sqrt n}\sim t_{15}.\]</div>
+<p>Maka</p>
+<div class="math-display" role="math">\[P\left(-2{,}131\leq T\leq2{,}131\right)=0{,}95.\]</div>
+<p>Menyelesaikan terhadap <span class="math-inline" role="math">\(\mu\)</span> menghasilkan</p>
+<div class="math-display" role="math">\[C(X)=\left[\bar X-2{,}131\frac S{\sqrt{16}},
+\bar X+2{,}131\frac S{\sqrt{16}}\right].\]</div>
+<p>Substitusi memberi <span class="math-inline" role="math">\([12-2{,}131,12+2{,}131]=[9{,}869,14{,}131]\)</span>. Pernyataan
+frequentist yang sah adalah <span class="math-inline" role="math">\(P_\mu\{\mu\in C(X)\}=0{,}95\)</span> untuk pengulangan
+sampel dengan ukuran sama di bawah model. Setelah satu sampel diamati,
+<span class="math-inline" role="math">\(\mu\)</span> adalah nilai tetap; klaim peluang posterior memerlukan prior dan model
+Bayesian yang eksplisit.</p>
+<p><a id="O006-C140-CMP-MS05-P04"></a></p>
+<h2>Soal 4 — interval Wald untuk laju eksponensial dan reparameterisasi</h2>
+<!--PROBLEM_META {"id":"O006-C140-CMP-MS05-P04","prerequisites":["O006-PSU-006","O006-C140-CMP-D003-THM-MLE-AN","O006-C140-CMP-D001-THM-REPARAMETERIZATION"],"objective":"menggunakan informasi dan normalitas MLE untuk membentuk interval laju serta mengaudit transformasi log","difficulty":"menengah","misconceptions":["standard error boleh memakai parameter benar yang tidak diketahui tanpa plug-in","Wald invariant secara eksak dan selalu menjaga domain parameter"]}-->
+<p>Misalkan <span class="math-inline" role="math">\(X_i\sim\operatorname{Exponential}(\lambda)\)</span> iid dan <span class="math-inline" role="math">\(n=100\)</span>,
+<span class="math-inline" role="math">\(\bar X=2{,}5\)</span>. (a) Temukan MLE dan informasi Fisher. (b) Bentuk interval
+Wald 95% pada skala <span class="math-inline" role="math">\(\lambda\)</span>. (c) Bentuk interval Wald pada
+<span class="math-inline" role="math">\(\eta=\log\lambda\)</span>, lalu kembalikan ke skala laju. Gunakan <span class="math-inline" role="math">\(z_{.975}=1{,}96\)</span>.</p>
+<p><a id="O006-C140-CMP-MS05-P04-H01"></a></p>
+<h3>Petunjuk 1</h3>
+<p><span class="math-inline" role="math">\(\ell(\lambda)=n\log\lambda-\lambda\sum_iX_i\)</span>, sehingga
+<span class="math-inline" role="math">\(\widehat\lambda=1/\bar X\)</span> dan <span class="math-inline" role="math">\(I_1(\lambda)=1/\lambda^2\)</span>.</p>
+<p><a id="O006-C140-CMP-MS05-P04-H02"></a></p>
+<h3>Petunjuk 2</h3>
+<p><span class="math-inline" role="math">\(\widehat\lambda=0{,}4\)</span> dan standard error plug-in adalah
+<span class="math-inline" role="math">\(\widehat\lambda/\sqrt n=0{,}04\)</span>. Untuk log-laju, informasi per pengamatan
+menjadi satu dan standard error <span class="math-inline" role="math">\(1/\sqrt n\)</span>.</p>
+<p><a id="O006-C140-CMP-MS05-P04-ANS"></a></p>
+<h3>Jawaban singkat</h3>
+<p>Interval laju langsung adalah <span class="math-inline" role="math">\(0{,}4\pm1{,}96(0{,}04)=[0{,}3216,0{,}4784]\)</span>.
+Interval log yang dieksponensialkan adalah sekitar
+<span class="math-inline" role="math">\([\exp(-1{,}1123),\exp(-0{,}7203)]=[0{,}3288,0{,}4866]\)</span>. Perbedaan sampel
+hingga wajar karena Wald tidak invariant, sedangkan transformasi log menjaga
+positivitas.</p>
+<p><a id="O006-C140-CMP-MS05-P04-SOL"></a></p>
+<h3>Solusi lengkap</h3>
+<p>Skor total eksponensial menghasilkan
+<span class="math-inline" role="math">\(\widehat\lambda=n/\sum_iX_i=1/\bar X=0{,}4\)</span>. Karena
+<span class="math-inline" role="math">\(\operatorname{Var}_\lambda(1/\lambda-X)=1/\lambda^2\)</span>,
+<span class="math-inline" role="math">\(I_n(\lambda)=n/\lambda^2\)</span> dan standard error plug-in
+<span class="math-inline" role="math">\(0{,}4/\sqrt{100}=0{,}04\)</span>. Maka</p>
+<div class="math-display" role="math">\[C_\lambda=[0{,}4-1{,}96(0{,}04),0{,}4+1{,}96(0{,}04)]
+=[0{,}3216,0{,}4784].\]</div>
+<p>Untuk <span class="math-inline" role="math">\(\eta=\log\lambda\)</span>, aturan rantai memberi
+<span class="math-inline" role="math">\(I_1(\eta)=\lambda^2I_1(\lambda)=1\)</span>. Jadi
+<span class="math-inline" role="math">\(\widehat\eta=\log0{,}4\approx-0{,}91629\)</span> dan
+$C_\eta=[-0{,}91629-0{,}196,-0{,}91629+0{,}196]
+=[-1{,}11229,-0{,}72029]$. Eksponensiasi memberi sekitar
+<span class="math-inline" role="math">\([0{,}3288,0{,}4866]\)</span>. Kedua bentuk asimtotik sama pada orde pertama, tetapi
+perbedaan orde lebih tinggi dapat besar pada sampel kecil; transformasi log juga
+mencegah endpoint negatif. Tidak satu pun interval menjadi eksak hanya karena
+angka standard error dihitung dengan plug-in.</p>
+<p><a id="O006-C140-CMP-MS05-P05"></a></p>
+<h2>Soal 5 — delta method untuk logit proporsi</h2>
+<!--PROBLEM_META {"id":"O006-C140-CMP-MS05-P05","prerequisites":["O006-PSU-006","O006-C140-CMP-D003-THM-DELTA-SCALAR","O006-C140-CMP-D003-EX-BERNOULLI-LOGIT"],"objective":"menurunkan standard error fungsi parameter dengan gradien delta method dan mengembalikan interval ke skala asal","difficulty":"menengah","misconceptions":["turunan logit salah arah","memotong interval di skala proporsi menjaga cakupan delta secara otomatis"]}-->
+<p>Dalam model Bernoulli ambil <span class="math-inline" role="math">\(n=100,S=30\)</span> dan
+<span class="math-inline" role="math">\(g(p)=\log\{p/(1-p)\}\)</span>. (a) Hitung <span class="math-inline" role="math">\(g'(p)\)</span> dan varians asimtotik logit.
+(b) Bentuk interval Wald 95% untuk <span class="math-inline" role="math">\(g(p)\)</span> dengan plug-in. (c) Kembalikan
+endpoint ke skala <span class="math-inline" role="math">\(p\)</span> dan jelaskan domainnya.</p>
+<p><a id="O006-C140-CMP-MS05-P05-H01"></a></p>
+<h3>Petunjuk 1</h3>
+<p><span class="math-inline" role="math">\(g'(p)=1/[p(1-p)]\)</span> dan
+<span class="math-inline" role="math">\(\operatorname{Var}(\widehat p)\approx p(1-p)/n\)</span>. Kalikan sesuai
+<a class="xref" data-target-id="O006-C140-CMP-D003-THM-DELTA-SCALAR" href="../theory/O006-C140-CMP-D003.html#O006-C140-CMP-D003-THM-DELTA-SCALAR">Teorema: delta method skalar</a>.</p>
+<p><a id="O006-C140-CMP-MS05-P05-H02"></a></p>
+<h3>Petunjuk 2</h3>
+<p>Dengan <span class="math-inline" role="math">\(\widehat p=0{,}3\)</span>, standard error plug-in adalah
+<span class="math-inline" role="math">\(1/\sqrt{100(0{,}3)(0{,}7)}=1/\sqrt{21}\)</span>. Invers logit
+<span class="math-inline" role="math">\(h(u)=e^u/(1+e^u)\)</span> monoton naik.</p>
+<p><a id="O006-C140-CMP-MS05-P05-ANS"></a></p>
+<h3>Jawaban singkat</h3>
+<p>$\sqrt n{g(\widehat p)-g(p)}\Rightarrow
+N(0,1/[p(1-p)])<span class="math-inline" role="math">\(. Estimasi logit \)</span>-0{,}8473<span class="math-inline" role="math">\(, SE \)</span>0{,}2182$, dan interval
+logit sekitar <span class="math-inline" role="math">\([-1{,}275,-0{,}4196]\)</span>. Invers logit memberi
+<span class="math-inline" role="math">\([0{,}218,0{,}397]\)</span>; pemotongan pada <span class="math-inline" role="math">\([0,1]\)</span> bukan pengganti transformasi
+endpoint.</p>
+<p><a id="O006-C140-CMP-MS05-P05-SOL"></a></p>
+<h3>Solusi lengkap</h3>
+<p>Turunan <span class="math-inline" role="math">\(g'(p)=1/p+1/(1-p)=1/[p(1-p)]\)</span>. CLT untuk proporsi dan delta method
+memberi</p>
+<div class="math-display" role="math">\[\sqrt n\{g(\widehat p)-g(p)\}\Rightarrow
+N\left(0,\frac1{p(1-p)}\right).\]</div>
+<p>Pada <span class="math-inline" role="math">\(\widehat p=0{,}3\)</span>,
+<span class="math-inline" role="math">\(g(\widehat p)=\log(3/7)\approx-0{,}84730\)</span> dan
+<span class="math-inline" role="math">\(\widehat{\operatorname{se}}=1/\sqrt{21}\approx0{,}21822\)</span>. Maka</p>
+<div class="math-display" role="math">\[C_g=[-0{,}84730-1{,}96(0{,}21822),
+-0{,}84730+1{,}96(0{,}21822)]
+\approx[-1{,}27499,-0{,}41961].\]</div>
+<p>Karena invers logit monoton,
+<span class="math-inline" role="math">\(h(-1{,}27499)\approx0{,}2183\)</span> dan
+<span class="math-inline" role="math">\(h(-0{,}41961)\approx0{,}3967\)</span>. Transformasi nonlinier mengubah galat orde
+tinggi; sekadar memotong interval linear menjadi <span class="math-inline" role="math">\([0,1]\)</span> tidak mempertahankan
+pivot atau cakupan. Jika <span class="math-inline" role="math">\(S=0\)</span> atau <span class="math-inline" role="math">\(S=n\)</span>, fungsi logit di MLE tidak terdefinisi,
+sehingga prosedur ini membutuhkan regularisasi atau interval lain.</p>
+<p><a id="O006-C140-CMP-MS05-P06"></a></p>
+<h2>Soal 6 — bootstrap persentil dan interval basic</h2>
+<!--PROBLEM_META {"id":"O006-C140-CMP-MS05-P06","prerequisites":["O006-PSU-006","O006-C140-CMP-SIM001","O006-C140-CMP-SIM002"],"objective":"mengubah distribusi bootstrap yang diberikan menjadi dua interval dan menjelaskan sumber ketidakpastian resampling","difficulty":"menengah","misconceptions":["kuantil bootstrap adalah kuantil posterior","bootstrap otomatis memberi cakupan nominal untuk setiap parameter"]}-->
+<p>Statistik teramati adalah <span class="math-inline" role="math">\(\widehat\theta=2{,}4\)</span>. Dari resampling bootstrap
+nonparametrik dengan seed dan lingkungan yang dikunci, kuantilnya
+<span class="math-inline" role="math">\(q^*_{.025}=2{,}0\)</span> dan <span class="math-inline" role="math">\(q^*_{.975}=2{,}9\)</span>. (a) Hitung interval persentil dan
+basic 95%. (b) Bandingkan pusat dan panjangnya. (c) Jelaskan apa yang
+diaproksimasi oleh <span class="math-inline" role="math">\(\widehat\theta^*-\widehat\theta\)</span>. (d) Sebutkan pemeriksaan
+sebelum interval disebut tervalidasi.</p>
+<p><a id="O006-C140-CMP-MS05-P06-H01"></a></p>
+<h3>Petunjuk 1</h3>
+<p>Persentil memakai <span class="math-inline" role="math">\([q^*_{.025},q^*_{.975}]\)</span>. Basic memantulkan kuantil sekitar
+statistik teramati:
+<span class="math-inline" role="math">\([2\widehat\theta-q^*_{.975},2\widehat\theta-q^*_{.025}]\)</span>.</p>
+<p><a id="O006-C140-CMP-MS05-P06-H02"></a></p>
+<h3>Petunjuk 2</h3>
+<p>Bootstrap mengaproksimasi hukum sampling secara kondisional pada data, bukan
+distribusi parameter. Periksa seed, aturan resampling, statistik yang
+terdefinisi, dan cakupan pada model pembangkit yang relevan.</p>
+<p><a id="O006-C140-CMP-MS05-P06-ANS"></a></p>
+<h3>Jawaban singkat</h3>
+<p>Persentil <span class="math-inline" role="math">\([2{,}0,2{,}9]\)</span>; basic
+<span class="math-inline" role="math">\([4{,}8-2{,}9,4{,}8-2{,}0]=[1{,}9,2{,}8]\)</span>. Keduanya panjang <span class="math-inline" role="math">\(0{,}9\)</span>, tetapi
+pusatnya 2,45 dan 2,35. Distribusi bootstrap meniru variasi sampling
+bersyarat, bukan posterior; validasi memerlukan seed/lingkungan, definisi
+statistik, dan audit cakupan.</p>
+<p><a id="O006-C140-CMP-MS05-P06-SOL"></a></p>
+<h3>Solusi lengkap</h3>
+<p>Interval persentil langsung adalah</p>
+<div class="math-display" role="math">\[C_{\mathrm{perc}}=[2{,}0,2{,}9].\]</div>
+<p>Interval basic membalikkan kuantil galat di sekitar <span class="math-inline" role="math">\(\widehat\theta\)</span>:</p>
+<div class="math-display" role="math">\[C_{\mathrm{basic}}=[2(2{,}4)-2{,}9,2(2{,}4)-2{,}0]=[1{,}9,2{,}8].\]</div>
+<p>Panjang keduanya <span class="math-inline" role="math">\(0{,}9\)</span>; pusat persentil 2,45 dan pusat basic 2,35. Secara
+konseptual, <span class="math-inline" role="math">\(\widehat\theta^*-\widehat\theta\)</span> meniru hukum
+<span class="math-inline" role="math">\(\widehat\theta-\theta\)</span> setelah populasi diganti distribusi empiris. Itu adalah
+aproksimasi kondisional, bukan posterior dan bukan jaminan cakupan seragam.
+Simpan seed, versi lingkungan, jumlah resample, aturan penanganan kegagalan,
+serta assertion bahwa statistik terdefinisi pada seluruh resample. Uji cakupan
+di bawah model pembangkit yang dinyatakan, misalnya <a class="xref" data-target-id="O006-C140-CMP-SIM001" href="../simulations/O006-C140-CMP-SIM001.html">Model lokasi normal: MLE, coverage, dan tiga statistik uji</a>,
+dan laporkan galat Monte Carlo; kuantil yang tampak rapi tidak cukup sebagai
+bukti.</p>
+<p><a id="O006-C140-CMP-MS05-P07"></a></p>
+<h2>Soal 7 — endpoint Uniform dan interval eksak</h2>
+<!--PROBLEM_META {"id":"O006-C140-CMP-MS05-P07","prerequisites":["O006-C140-CMP-D001-CTR-MOVING-SUPPORT","O006-C140-CMP-D005-THM002","O006-C140-CMP-SIM003"],"objective":"menurunkan interval eksak pada support yang bergerak dan mengidentifikasi kegagalan skala akar-n","difficulty":"lanjut","misconceptions":["MLE selalu berlimit Normal akar-n","bootstrap empiris dapat melihat endpoint populasi di luar maksimum sampel"]}-->
+<p>Misalkan <span class="math-inline" role="math">\(X_i\sim\operatorname{Unif}(0,\theta)\)</span> iid dan <span class="math-inline" role="math">\(M=X_{(n)}\)</span>.
+Untuk <span class="math-inline" role="math">\(n=10\)</span> amati <span class="math-inline" role="math">\(M=0{,}8\)</span>. (a) Turunkan distribusi <span class="math-inline" role="math">\(M/\theta\)</span> dan laju
+galat MLE. (b) Bentuk interval kepercayaan eksak 95% untuk <span class="math-inline" role="math">\(\theta\)</span>. (c)
+Hitung interval numeriknya. (d) Jelaskan kegagalan Wald/delta dan bootstrap
+nonparametrik.</p>
+<p><a id="O006-C140-CMP-MS05-P07-H01"></a></p>
+<h3>Petunjuk 1</h3>
+<p><span class="math-inline" role="math">\(P_\theta(M\le m)=(m/\theta)^n\)</span> untuk <span class="math-inline" role="math">\(0&lt;m&lt;\theta\)</span>. Karena <span class="math-inline" role="math">\(M\le\theta\)</span>
+hampir pasti, gunakan kuantil bawah dari <span class="math-inline" role="math">\(M/\theta\)</span> untuk batas atas.</p>
+<p><a id="O006-C140-CMP-MS05-P07-H02"></a></p>
+<h3>Petunjuk 2</h3>
+<p>Dengan <span class="math-inline" role="math">\(\alpha=.05\)</span>,
+<span class="math-inline" role="math">\(P(M/\theta\ge\alpha^{1/n})=1-\alpha\)</span>, sehingga intervalnya
+<span class="math-inline" role="math">\([M,M\alpha^{-1/n}]\)</span>. Resample empiris tidak pernah memiliki maksimum lebih
+besar dari <span class="math-inline" role="math">\(M\)</span>.</p>
+<p><a id="O006-C140-CMP-MS05-P07-ANS"></a></p>
+<h3>Jawaban singkat</h3>
+<p><span class="math-inline" role="math">\((M/\theta)^n\sim\operatorname{Unif}(0,1)\)</span> dan galat endpoint berorde
+<span class="math-inline" role="math">\(n^{-1}\)</span>. Interval eksak adalah <span class="math-inline" role="math">\([M,M\,0{,}05^{-1/10}]\)</span>, yakni kira-kira
+<span class="math-inline" role="math">\([0{,}8,1{,}07943]\)</span>. Support bergerak dan bootstrap empiris terkunci di bawah
+<span class="math-inline" role="math">\(M\)</span>, sehingga teori akar-<span class="math-inline" role="math">\(n\)</span> tidak dapat diterapkan mekanis.</p>
+<p><a id="O006-C140-CMP-MS05-P07-SOL"></a></p>
+<h3>Solusi lengkap</h3>
+<p>Untuk <span class="math-inline" role="math">\(0&lt;m&lt;\theta\)</span>,</p>
+<div class="math-display" role="math">\[P_\theta(M\le m)=P(X_1\le m,\ldots,X_n\le m)=(m/\theta)^n.\]</div>
+<p>Maka <span class="math-inline" role="math">\(V=(M/\theta)^n\)</span> seragam dan
+<span class="math-inline" role="math">\(n(1-M/\theta)\)</span> berlimit eksponensial; laju MLE adalah <span class="math-inline" role="math">\(n^{-1}\)</span>, bukan
+<span class="math-inline" role="math">\(n^{-1/2}\)</span>. Untuk <span class="math-inline" role="math">\(\alpha=.05\)</span>,</p>
+<div class="math-display" role="math">\[P_\theta\{M/\theta\ge\alpha^{1/n}\}=1-\alpha.\]</div>
+<p>Bersama <span class="math-inline" role="math">\(M\le\theta\)</span> hal ini setara dengan</p>
+<div class="math-display" role="math">\[P_\theta\{M\le\theta\le M\alpha^{-1/n}\}=1-\alpha.\]</div>
+<p>Dengan <span class="math-inline" role="math">\(n=10\)</span>, <span class="math-inline" role="math">\(0{,}05^{-1/10}\approx1{,}34928285\)</span>, sehingga intervalnya
+<span class="math-inline" role="math">\([0{,}8,1{,}07942628]\)</span>. Teori regular gagal karena support bergantung pada
+parameter, endpoint bukan interior, dan laju bukan akar-<span class="math-inline" role="math">\(n\)</span>; skor kehilangan
+suku batas. Bootstrap nonparametrik tidak pernah menghasilkan nilai di atas
+maksimum sampel dan menempatkan massa atom pada endpoint empiris, sehingga
+tidak meniru hukum endpoint kontinu. Bootstrap parametrik yang menegakkan
+Uniform<span class="math-inline" role="math">\((0,\theta)\)</span> atau pivot eksak dapat dipakai setelah dibuktikan, bukan
+diasumsikan. Lihat <a class="xref" data-target-id="O006-C140-CMP-D005-THM002" href="../theory/O006-C140-CMP-D005.html#O006-C140-CMP-D005-THM002">Rasio likelihood bukan Wilks berdimensi satu</a>.</p>
+<p><a id="O006-C140-CMP-MS05-P08"></a></p>
+<h2>Soal 8 — audit cakupan Monte Carlo</h2>
+<!--PROBLEM_META {"id":"O006-C140-CMP-MS05-P08","prerequisites":["O006-C140-CMP-SIM001","O006-C140-CMP-SIM002","O006-C140-CMP-D003-THM-DELTA-SCALAR"],"objective":"menghitung galat Monte Carlo dan memisahkan deviasi simulasi dari kegagalan cakupan prosedural","difficulty":"lanjut","misconceptions":["selisih kecil dari target membuktikan validitas universal","galat Monte Carlo adalah bias prosedur","cakupan teramati dapat dibaca sebagai cakupan tepat"]}-->
+<p>Replay deterministik memakai <span class="math-inline" role="math">\(N=20.000\)</span> dataset pada parameter tetap.
+Prosedur A mempunyai target cakupan <span class="math-inline" role="math">\(c_A=0{,}9500\)</span> dan hasil
+<span class="math-inline" role="math">\(\widehat c_A=0{,}9478\)</span>; prosedur B mempunyai target <span class="math-inline" role="math">\(c_B=0{,}9000\)</span> dan hasil
+<span class="math-inline" role="math">\(\widehat c_B=0{,}9025\)</span>. (a) Hitung standard error binomial dan skor
+<span class="math-inline" role="math">\((\widehat c-c)/\operatorname{SE}\)</span>. (b) Bentuk interval kira-kira 95% untuk
+cakupan Monte Carlo. (c) Jelaskan kesimpulan yang sah, termasuk metadata
+reproduksibilitas dan perbedaan cakupan parameter-tetap dari massa posterior.</p>
+<p><a id="O006-C140-CMP-MS05-P08-H01"></a></p>
+<h3>Petunjuk 1</h3>
+<p>Gunakan <span class="math-inline" role="math">\(\operatorname{SE}=\sqrt{c(1-c)/N}\)</span> dan interval
+<span class="math-inline" role="math">\(\widehat c\pm1{,}96\operatorname{SE}\)</span>. Skor mengukur noise replay, bukan
+statistik baru untuk parameter.</p>
+<p><a id="O006-C140-CMP-MS05-P08-H02"></a></p>
+<h3>Petunjuk 2</h3>
+<p>Hitung A dan B terpisah. Pastikan seed, model pembangkit, parameter tetap,
+aturan interval, dan definisi kejadian tercakup disimpan; cakupan <span class="math-inline" role="math">\(P_p\)</span> bukan
+peluang posterior dengan <span class="math-inline" role="math">\(p\)</span> acak.</p>
+<p><a id="O006-C140-CMP-MS05-P08-ANS"></a></p>
+<h3>Jawaban singkat</h3>
+<p><span class="math-inline" role="math">\(\operatorname{SE}_A\approx0{,}001541\)</span>, <span class="math-inline" role="math">\(z_A\approx-1{,}43\)</span>, dan interval
+<span class="math-inline" role="math">\([0{,}9448,0{,}9508]\)</span>. <span class="math-inline" role="math">\(\operatorname{SE}_B\approx0{,}002121\)</span>,
+<span class="math-inline" role="math">\(z_B\approx1{,}18\)</span>, dan interval <span class="math-inline" role="math">\([0{,}8983,0{,}9067]\)</span>. Deviasi konsisten
+dengan noise satu replay; ini tidak membuktikan cakupan universal ataupun
+menyamakan cakupan dengan massa posterior.</p>
+<p><a id="O006-C140-CMP-MS05-P08-SOL"></a></p>
+<h3>Solusi lengkap</h3>
+<p>Untuk A,</p>
+<div class="math-display" role="math">\[\operatorname{SE}_A=\sqrt{\frac{0{,}95(0{,}05)}{20000}}
+\approx0{,}0015411,\qquad
+z_A=\frac{0{,}9478-0{,}9500}{0{,}0015411}\approx-1{,}43.\]</div>
+<p>Interval normal sederhana adalah
+<span class="math-inline" role="math">\(0{,}9478\pm1{,}96(0{,}0015411)\approx[0{,}9448,0{,}9508]\)</span>.
+Untuk B,</p>
+<div class="math-display" role="math">\[\operatorname{SE}_B=\sqrt{\frac{0{,}9(0{,}1)}{20000}}
+\approx0{,}0021213,\qquad
+z_B=\frac{0{,}9025-0{,}9000}{0{,}0021213}\approx1{,}18,\]</div>
+<p>dengan interval <span class="math-inline" role="math">\(0{,}9025\pm1{,}96(0{,}0021213)\approx[0{,}8983,0{,}9067]\)</span>.
+Kedua skor wajar untuk variasi Monte Carlo. Kesimpulan terbatasnya ialah
+replay tidak menunjukkan penyimpangan kuat pada model dan parameter yang
+dibekukan; ia tidak membuktikan validitas pada ukuran sampel, parameter, atau
+distribusi lain. Simpan seed, versi lingkungan, aturan interval, dan definisi
+cakupan. Cakupan parameter-tetap <span class="math-inline" role="math">\(P_p\{p\in C(X)\}\)</span> berbeda dari massa posterior
+<span class="math-inline" role="math">\(P\{p\in C(X)\mid X\}\)</span>; rata-rata prior menjawab pertanyaan lain. Karena itu
+audit <a class="xref" data-target-id="O006-C140-CMP-SIM001" href="../simulations/O006-C140-CMP-SIM001.html">Model lokasi normal: MLE, coverage, dan tiga statistik uji</a> dan <a class="xref" data-target-id="O006-C140-CMP-SIM002" href="../simulations/O006-C140-CMP-SIM002.html">Delta method pada titik reguler dan titik dengan turunan nol</a> adalah bukti
+terarah, bukan klaim superioritas universal.</p>
+<p><a id="O006-C140-CMP-MS05-SEC-CHECKLIST"></a></p>
+<h2>Checklist kelulusan</h2>
+<p>Set ini dikuasai bila Anda dapat menghitung informasi dengan parameterisasi
+jelas; menurunkan interval dari pivot atau limit yang benar; memakai gradien
+delta method sesuai domain; menjalankan bootstrap dengan seed, lingkungan, dan
+statistik terdefinisi; serta melaporkan cakupan dengan galat Monte Carlo.
+Sebelum memakai rumus akar-<span class="math-inline" role="math">\(n\)</span>, periksa support bersama, interior parameter,
+informasi nonsingular, dan regularitas teorema. Interval, bootstrap, dan
+simulasi menjawab pertanyaan probabilistik yang berbeda; jangan mengganti
+salah satunya dengan bahasa yang tidak setara.</p>
+
+<footer class="license">Materi pendamping orisinal berlisensi CC BY-SA 4.0. Komponen Penn State dan Random tetap berada di bawah lisensinya masing-masing dan tidak direlisensikan oleh halaman ini.</footer>
+</main>
+</div>
+</body>
+</html>

@@ -1,0 +1,164 @@
+{
+  "backend": {
+    "documents": 34,
+    "entities": 1113,
+    "manifest_sha256": "86190eddcd4cc4e99ed3adfc22a3d8391934fb940f5ec1ea1572a532df6b44e3",
+    "relations": 1424
+  },
+  "browser_processes_used": false,
+  "build_receipt_sha256": "c21aecda780cf8e56eb82a41d19b9b0a112e81caf583f38041a5d9fd4ffc0ac1",
+  "environment_sha256": "3c5c8901ca9582e42d84ffae3aab3d9505988be6ad16eaac04d4791c601260b0",
+  "html": {
+    "external_links": 28,
+    "files": 64,
+    "images": 6,
+    "local_links": 1492,
+    "manifest_sha256": "629870245f726b01534c09f7e595e8a15cf11015a63280c0a16b056ce7cb4178",
+    "pages": 34,
+    "unique_html_ids": 1057
+  },
+  "network_access": false,
+  "schema": "o006.c140.companion-cumulative-c4-qa.v1",
+  "scripts": [
+    {
+      "path": "scripts/build_companion.py",
+      "sha256": "b42eb8ca8188f3f557c52e544394be99dec8bb9599673791328f58673ee4aff2"
+    },
+    {
+      "path": "scripts/qa_companion.py",
+      "sha256": "0739452f733c066599af89d6ce3e43afebf16828ddd30ae88957cc1763b401ce"
+    },
+    {
+      "path": "simulations/run_c1_simulations.py",
+      "sha256": "f924aa482c6a59faa20b9da547096bc1921c9cf7331be2a3708ad448892ebd44"
+    },
+    {
+      "path": "simulations/run_c2_simulations.py",
+      "sha256": "960933c30750932b7dbbb107faacbb1856d7965714a62d0cafd0a206fd3c4ca2"
+    },
+    {
+      "path": "simulations/run_c3_simulations.py",
+      "sha256": "52f92a16b523e7d72dc5800d18eb2275777c59f161f1afb6ee8420fc67701a72"
+    }
+  ],
+  "simulations": {
+    "batches": [
+      {
+        "batch": "c1",
+        "files": 9,
+        "manifest_sha256": "8644723b24a1afa06076d77ac55e96d93540a726df18f449b6f2efc3808d8fb8",
+        "receipt_sha256": "834c8a20025d51bf53ef4e8d0f7d805489af21c34065238131366a734df7e213",
+        "simulations": 4
+      },
+      {
+        "batch": "c2",
+        "files": 3,
+        "manifest_sha256": "49d4b956a278c251458932dc9fcbdf66ef5e73d187f69398620601cf39b3c1b1",
+        "receipt_sha256": "de89e57c10c178915ddd96e12d368e5e11b40baa47b6fc31c2e3df5adbd63bd2",
+        "simulations": 1
+      },
+      {
+        "batch": "c3",
+        "files": 4,
+        "manifest_sha256": "64557d83097e30885ce6a9be08accd184efff745fcf532a8397f7839379e10f0",
+        "receipt_sha256": "c7f176380b2e30b9931cc44bcc2e39bb541559030cf65b1c41f32045c13b1040",
+        "simulations": 1
+      }
+    ],
+    "files": 16,
+    "simulation_ids": [
+      "O006-C140-CMP-SIM001",
+      "O006-C140-CMP-SIM002",
+      "O006-C140-CMP-SIM003",
+      "O006-C140-CMP-SIM004",
+      "O006-C140-CMP-SIM005",
+      "O006-C140-CMP-SIM006"
+    ],
+    "simulations": 6
+  },
+  "source": {
+    "anchors": 1057,
+    "assessments": [
+      {
+        "document_id": "O006-C140-CMP-CA01",
+        "problems": 10,
+        "rubrics": 11,
+        "solution_words": 2615
+      }
+    ],
+    "documents": 34,
+    "headings": 1057,
+    "mastery_sets": [
+      {
+        "document_id": "O006-C140-CMP-MS00",
+        "problems": 8,
+        "solution_words": 1222
+      },
+      {
+        "document_id": "O006-C140-CMP-MS01",
+        "problems": 8,
+        "solution_words": 1363
+      },
+      {
+        "document_id": "O006-C140-CMP-MS02",
+        "problems": 8,
+        "solution_words": 1312
+      },
+      {
+        "document_id": "O006-C140-CMP-MS03",
+        "problems": 8,
+        "solution_words": 1304
+      },
+      {
+        "document_id": "O006-C140-CMP-MS04",
+        "problems": 8,
+        "solution_words": 1363
+      },
+      {
+        "document_id": "O006-C140-CMP-MS05",
+        "problems": 8,
+        "solution_words": 1148
+      },
+      {
+        "document_id": "O006-C140-CMP-MS06",
+        "problems": 8,
+        "solution_words": 1008
+      },
+      {
+        "document_id": "O006-C140-CMP-MS07",
+        "problems": 8,
+        "solution_words": 1704
+      },
+      {
+        "document_id": "O006-C140-CMP-MS08",
+        "problems": 8,
+        "solution_words": 1652
+      },
+      {
+        "document_id": "O006-C140-CMP-MS09",
+        "problems": 8,
+        "solution_words": 1226
+      },
+      {
+        "document_id": "O006-C140-CMP-MS10",
+        "problems": 8,
+        "solution_words": 1378
+      },
+      {
+        "document_id": "O006-C140-CMP-MS11",
+        "problems": 8,
+        "solution_words": 2140
+      },
+      {
+        "document_id": "O006-C140-CMP-MS12",
+        "problems": 8,
+        "solution_words": 1214
+      }
+    ],
+    "problems": 114,
+    "references": 280,
+    "source_bytes": 683211
+  },
+  "status": "pass",
+  "translation_provenance": "OpenAI Codex gpt-5.6-sol, Ultra"
+}

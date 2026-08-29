@@ -1,0 +1,406 @@
+<!doctype html>
+<html lang="id-ID">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="generator" content="OpenAI Codex gpt-5.6-sol, Ultra">
+<title>Set penguasaan 03 — kecukupan, faktorisasi, kelengkapan, dan statistik ancillary</title>
+<link rel="stylesheet" href="../assets/style.css">
+<script>window.MathJax={loader:{load:['[tex]/boldsymbol']},tex:{packages:{'[+]':['boldsymbol']},inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']]},svg:{fontCache:'local'}};</script>
+<script defer src="../assets/MathJax/tex-svg.js"></script>
+</head>
+<body>
+<div class="shell">
+<nav class="sidebar" aria-label="Daftar isi pendamping"><h2>Isi pendamping</h2><ol><li><a href="../index.html">Pendamping Orisinal Statistika Matematis</a></li><li><a href="../theory/O006-C140-CMP-D001.html">Model parametrik reguler, skor, dan informasi Fisher</a></li><li><a href="../theory/O006-C140-CMP-D002.html">Konsistensi MLE: identifikasi Kullback–Leibler dan teorema argmax</a></li><li><a href="../theory/O006-C140-CMP-D003.html">Likelihood kuadratik lokal, normalitas asimtotik, dan delta method</a></li><li><a href="../theory/O006-C140-CMP-D004.html">Prosedur Wald, skor, dan rasio likelihood</a></li><li><a href="../theory/O006-C140-CMP-D005.html">Likelihood nonreguler: empat mekanisme kegagalan</a></li><li><a href="../theory/O006-C140-CMP-D006.html">Optimalitas pengujian: Neyman–Pearson, MP, UMP, dan rasio likelihood monoton</a></li><li><a href="../theory/O006-C140-CMP-D007.html">Loss, risk, efisiensi, Rao–Blackwell, dan Lehmann–Scheffé</a></li><li><a href="../theory/O006-C140-CMP-D008.html">Model linear Gaussian desain tetap dan geometri proyeksi</a></li><li><a href="../theory/O006-C140-CMP-D009.html">OLS, MLE Gaussian, dan teorema Gauss–Markov pada rancangan tetap</a></li><li><a href="../theory/O006-C140-CMP-D010.html">Inferensi Gaussian eksak: proyeksi, t, F, ANOVA, dan prediksi</a></li><li><a href="../theory/O006-C140-CMP-D011.html">Diagnostik, leverage, misspesifikasi, dan inferensi pascaseleksi</a></li><li><a href="../theory/O006-C140-CMP-D012.html">Inferensi Bayesian sebagai pembaruan dan keputusan yang koheren</a></li><li><a href="../theory/O006-C140-CMP-D013.html">Perbandingan Bayesian–frequentist: keputusan, cakupan, dan kalibrasi</a></li><li><a href="../simulations/O006-C140-CMP-SIM001.html">Model lokasi normal: MLE, coverage, dan tiga statistik uji</a></li><li><a href="../simulations/O006-C140-CMP-SIM002.html">Delta method pada titik reguler dan titik dengan turunan nol</a></li><li><a href="../simulations/O006-C140-CMP-SIM003.html">Endpoint Uniform: laju nonreguler dan kegagalan bootstrap biasa</a></li><li><a href="../simulations/O006-C140-CMP-SIM004.html">Uji Neyman–Pearson teracak dengan size tepat</a></li><li><a href="../simulations/O006-C140-CMP-SIM005.html">Model linear matriks: coverage, heteroskedastisitas, dan pengaruh</a></li><li><a href="../simulations/O006-C140-CMP-SIM006.html">Kalibrasi selang Bayesian dan frequentist pada model binomial</a></li><li><a href="O006-C140-CMP-MS00.html">Set penguasaan 00 — probabilitas, distribusi, dan ekspektasi (diagnostik C140)</a></li><li><a href="O006-C140-CMP-MS01.html">Set penguasaan 01 — statistik urutan dan distribusi sampel</a></li><li><a href="O006-C140-CMP-MS02.html">Set penguasaan 02 — estimasi, bias, MSE, dan sifat estimator</a></li><li><a href="O006-C140-CMP-MS03.html">Set penguasaan 03 — kecukupan, faktorisasi, kelengkapan, dan statistik ancillary</a></li><li><a href="O006-C140-CMP-MS04.html">Set penguasaan 04 — metode momen dan dasar kemungkinan maksimum</a></li><li><a href="O006-C140-CMP-MS05.html">Set penguasaan 05 — informasi Fisher, interval kepercayaan, bootstrap, dan delta method</a></li><li><a href="O006-C140-CMP-MS06.html">Set penguasaan 06 — pengujian hipotesis, daya, p-value, dan jembatan likelihood</a></li><li><a href="O006-C140-CMP-MS07.html">Set penguasaan 07 — regularitas, konsistensi, dan normalitas MLE</a></li><li><a href="O006-C140-CMP-MS08.html">Set penguasaan 08 — Wald, skor, rasio likelihood, dan diagnosis nonregular</a></li><li><a href="O006-C140-CMP-MS09.html">Set penguasaan 09 — pengujian eksak dan optimalitas Neyman–Pearson</a></li><li><a href="O006-C140-CMP-MS10.html">Set penguasaan 10 — uji likelihood asimtotik, risk, dan perbaikan estimator</a></li><li><a href="O006-C140-CMP-MS11.html">Set penguasaan 11 — pembaruan Bayesian, keputusan, dan kalibrasi</a></li><li><a href="O006-C140-CMP-MS12.html">Set penguasaan 12 — model linear Gaussian matriks, inferensi eksak, dan diagnostik</a></li><li><a href="../assessments/O006-C140-CMP-CA01.html">Asesmen kumulatif C1: likelihood, optimalitas, dan keputusan statistik</a></li></ol></nav>
+<main>
+<div class="metadata"><strong>O006-C140-CMP-MS03</strong> · id-ID · CC BY-SA 4.0 · OpenAI Codex gpt-5.6-sol, Ultra</div>
+<p><a id="O006-C140-CMP-MS03-SEC-OVERVIEW"></a></p>
+<h1>Set penguasaan 03 — kecukupan, faktorisasi, kelengkapan, dan statistik ancillary</h1>
+<p>Set ini menempatkan statistik cukup sebagai kompresi data yang dibenarkan oleh
+hukum bersyarat, bukan sekadar simbol yang kebetulan muncul dalam likelihood.
+Setiap jawaban harus menyatakan ruang sampel dan ukuran dominan, memeriksa
+syarat teorema, serta membedakan informasi tentang parameter dari variasi
+ancillary. Kaitan dengan pelajaran kecukupan Penn State dipertahankan pada
+<a class="xref external" data-target-id="O006-PSU-004" href="https://kokunoyumeto.github.io/penn-state-stat-415-id/Lesson03.html">Lesson03</a>, sedangkan definisi statistik cukup mengikuti
+<a class="xref" data-target-id="O006-C140-CMP-D001-DEF-SUPPORT" href="../theory/O006-C140-CMP-D001.html#O006-C140-CMP-D001-DEF-SUPPORT">Definisi: support esensial dan support bersama</a>.</p>
+<p><a id="O006-C140-CMP-MS03-P01"></a></p>
+<h2>Soal 1 — Menguji kecukupan melalui distribusi bersyarat</h2>
+<!--PROBLEM_META {"id":"O006-C140-CMP-MS03-P01","prerequisites":["O006-PSU-004","O006-C140-CMP-D001-DEF-SUPPORT"],"objective":"memeriksa kecukupan dengan menunjukkan bahwa distribusi bersyarat data terhadap statistik tidak bergantung pada parameter","difficulty":"menengah","misconceptions":["statistik yang muncul di likelihood otomatis cukup","distribusi bersyarat boleh diabaikan karena statistik mempunyai ekspektasi yang sama"]}-->
+<p>Misalkan <span class="math-inline" role="math">\(X_1,X_2\)</span> iid Bernoulli<span class="math-inline" role="math">\((p)\)</span>, <span class="math-inline" role="math">\(0&lt;p&lt;1\)</span>, dan
+<span class="math-inline" role="math">\(T=X_1+X_2\)</span>. Tentukan apakah <span class="math-inline" role="math">\(T\)</span> cukup untuk <span class="math-inline" role="math">\(p\)</span> dengan cara langsung.</p>
+<ol>
+<li>Tuliskan semua titik dalam ruang sampel dan nilai <span class="math-inline" role="math">\(T\)</span>-nya.</li>
+<li>Untuk <span class="math-inline" role="math">\(t=0,1,2\)</span>, hitung peluang bersyarat setiap titik data yang mungkin,
+<span class="math-inline" role="math">\(P_p((X_1,X_2)=x\mid T=t)\)</span>.</li>
+<li>Jelaskan mengapa hasil tersebut membuktikan kecukupan, dan mengapa urutan
+dua pengamatan tidak membawa informasi tambahan tentang <span class="math-inline" role="math">\(p\)</span> setelah <span class="math-inline" role="math">\(T\)</span>
+diketahui.</li>
+</ol>
+<p><a id="O006-C140-CMP-MS03-P01-H01"></a></p>
+<h3>Petunjuk 1</h3>
+<p>Di bawah <span class="math-inline" role="math">\(T=1\)</span> hanya ada dua titik data. Bandingkan peluang gabungan masing-masing
+dengan peluang <span class="math-inline" role="math">\(P_p(T=1)\)</span>; faktor <span class="math-inline" role="math">\(p(1-p)\)</span> akan saling meniadakan.</p>
+<p><a id="O006-C140-CMP-MS03-P01-H02"></a></p>
+<h3>Petunjuk 2</h3>
+<p>Pada <span class="math-inline" role="math">\(T=0\)</span> dan <span class="math-inline" role="math">\(T=2\)</span> hanya ada satu titik data. Distribusi bersyarat yang tidak
+memuat <span class="math-inline" role="math">\(p\)</span> harus sama untuk semua nilai parameter yang mungkin.</p>
+<p><a id="O006-C140-CMP-MS03-P01-ANS"></a></p>
+<h3>Jawaban singkat</h3>
+<p><span class="math-inline" role="math">\(T\)</span> cukup. Untuk <span class="math-inline" role="math">\(t=0\)</span> peluang bersyarat titik <span class="math-inline" role="math">\((0,0)\)</span> adalah <span class="math-inline" role="math">\(1\)</span>, untuk <span class="math-inline" role="math">\(t=2\)</span>
+peluang titik <span class="math-inline" role="math">\((1,1)\)</span> adalah <span class="math-inline" role="math">\(1\)</span>, dan untuk <span class="math-inline" role="math">\(t=1\)</span> dua titik <span class="math-inline" role="math">\((1,0)\)</span> dan <span class="math-inline" role="math">\((0,1)\)</span>
+masing-masing mempunyai peluang <span class="math-inline" role="math">\(1/2\)</span>, semuanya bebas dari <span class="math-inline" role="math">\(p\)</span>.</p>
+<p><a id="O006-C140-CMP-MS03-P01-SOL"></a></p>
+<h3>Solusi lengkap</h3>
+<p>Ruang sampelnya ialah <span class="math-inline" role="math">\((0,0),(0,1),(1,0),(1,1)\)</span>. Nilai <span class="math-inline" role="math">\(T\)</span> berturut-turut
+adalah <span class="math-inline" role="math">\(0,1,1,2\)</span>. Untuk <span class="math-inline" role="math">\(t=0\)</span>, hanya <span class="math-inline" role="math">\((0,0)\)</span> mungkin, sehingga peluang
+bersyaratnya satu. Untuk <span class="math-inline" role="math">\(t=2\)</span>, hanya <span class="math-inline" role="math">\((1,1)\)</span> mungkin, juga dengan peluang
+satu. Untuk <span class="math-inline" role="math">\(t=1\)</span>,</p>
+<div class="math-display" role="math">\[P_p((1,0)\mid T=1)
+=\frac{p(1-p)}{P_p(T=1)}
+=\frac{p(1-p)}{2p(1-p)}=\frac12,\]</div>
+<p>dan perhitungan identik berlaku untuk <span class="math-inline" role="math">\((0,1)\)</span>. Jadi seluruh hukum kondisional
+<span class="math-inline" role="math">\(X\)</span> diberikan <span class="math-inline" role="math">\(T=t\)</span> tidak bergantung pada <span class="math-inline" role="math">\(p\)</span>. Menurut karakterisasi kondisional
+kecukupan, ini berarti <span class="math-inline" role="math">\(T\)</span> cukup untuk keluarga Bernoulli. Secara intuitif,
+<span class="math-inline" role="math">\(T\)</span> menyimpan banyaknya sukses; pengacakan posisi sukses hanyalah variasi
+ancillary yang distribusinya tetap setelah <span class="math-inline" role="math">\(T\)</span> diketahui. Kesimpulan ini lebih
+kuat daripada menyamakan beberapa momen: ia mengendalikan seluruh distribusi
+bersyarat pada setiap nilai statistik yang mungkin.</p>
+<p><a id="O006-C140-CMP-MS03-P02"></a></p>
+<h2>Soal 2 — Teorema faktorisasi pada sampel diskret</h2>
+<!--PROBLEM_META {"id":"O006-C140-CMP-MS03-P02","prerequisites":["O006-PSU-004","O006-C140-CMP-D001-DEF-SUPPORT"],"objective":"menggunakan teorema faktorisasi untuk membuktikan kecukupan dan mengidentifikasi faktor yang tidak bergantung pada parameter","difficulty":"menengah","misconceptions":["faktor h(x) boleh bergantung pada parameter","faktor faktorisasi harus berupa distribusi probabilitas tersendiri","satu faktorisasi yang ditemukan membuktikan minimalitas"]}-->
+<p>Misalkan <span class="math-inline" role="math">\(X_1,\ldots,X_n\)</span> iid Poisson<span class="math-inline" role="math">\((\lambda)\)</span>, <span class="math-inline" role="math">\(\lambda&gt;0\)</span>, dan
+<span class="math-inline" role="math">\(T=\sum_{i=1}^nX_i\)</span>.</p>
+<ol>
+<li>Faktorkan fungsi massa gabungan menjadi <span class="math-inline" role="math">\(g_\lambda(T(x))h(x)\)</span>.</li>
+<li>Tunjukkan bahwa <span class="math-inline" role="math">\(h(x)\)</span> benar-benar bebas dari <span class="math-inline" role="math">\(\lambda\)</span> dan bahwa dukungan
+tidak bergantung pada parameter.</li>
+<li>Gunakan faktorisasi itu untuk membuktikan bahwa <span class="math-inline" role="math">\(T\)</span> cukup.</li>
+<li>Apakah bentuk <span class="math-inline" role="math">\(g_\lambda\)</span> harus dinormalisasi terhadap <span class="math-inline" role="math">\(t\)</span> agar teorema
+berlaku? Jelaskan peran normalisasi secara tepat.</li>
+</ol>
+<p><a id="O006-C140-CMP-MS03-P02-H01"></a></p>
+<h3>Petunjuk 1</h3>
+<p>Gunakan
+<span class="math-inline" role="math">\(f_\lambda(x)=\prod_i e^{-\lambda}\lambda^{x_i}/x_i!\)</span> dan kelompokkan semua
+kemunculan <span class="math-inline" role="math">\(\lambda\)</span> melalui <span class="math-inline" role="math">\(\sum_i x_i\)</span>.</p>
+<p><a id="O006-C140-CMP-MS03-P02-H02"></a></p>
+<h3>Petunjuk 2</h3>
+<p>Pilih <span class="math-inline" role="math">\(g_\lambda(t)=e^{-n\lambda}\lambda^t\)</span> dan
+<span class="math-inline" role="math">\(h(x)=\prod_i1/x_i!\)</span> pada <span class="math-inline" role="math">\(\mathbb N_0^n\)</span>. Konstanta yang tidak bergantung pada
+parameter dapat ditempatkan di salah satu faktor tanpa mengubah kesimpulan.</p>
+<p><a id="O006-C140-CMP-MS03-P02-ANS"></a></p>
+<h3>Jawaban singkat</h3>
+<p>Faktorisasi yang sah ialah
+<span class="math-inline" role="math">\(f_\lambda(x)=e^{-n\lambda}\lambda^{T(x)}\prod_i(1/x_i!)\)</span> pada ruang
+<span class="math-inline" role="math">\(\mathbb N_0^n\)</span>. Karena faktor kedua dan dukungan bebas dari <span class="math-inline" role="math">\(\lambda\)</span>, teorema
+faktorisasi menyatakan <span class="math-inline" role="math">\(T\)</span> cukup. Normalisasi <span class="math-inline" role="math">\(g\)</span> tidak diwajibkan oleh teorema.</p>
+<p><a id="O006-C140-CMP-MS03-P02-SOL"></a></p>
+<h3>Solusi lengkap</h3>
+<p>Untuk <span class="math-inline" role="math">\(x_i\in\mathbb N_0\)</span>,</p>
+<div class="math-display" role="math">\[f_\lambda(x)=\prod_{i=1}^n\frac{e^{-\lambda}\lambda^{x_i}}{x_i!}
+=e^{-n\lambda}\lambda^{\sum_i x_i}\prod_{i=1}^n\frac1{x_i!}.\]</div>
+<p>Dengan <span class="math-inline" role="math">\(T(x)=\sum_i x_i\)</span>, ambil
+<span class="math-inline" role="math">\(g_\lambda(t)=e^{-n\lambda}\lambda^t\)</span> dan
+<span class="math-inline" role="math">\(h(x)=\prod_i1/x_i!\)</span>; definisikan <span class="math-inline" role="math">\(h(x)=0\)</span> di luar dukungan. Semua titik pada
+dukungan yang mungkin sama untuk setiap <span class="math-inline" role="math">\(\lambda&gt;0\)</span>, dan <span class="math-inline" role="math">\(h\)</span> tidak mengandung
+parameter. Maka teorema faktorisasi Neyman–Fisher memberikan kecukupan <span class="math-inline" role="math">\(T\)</span>.
+Fungsi <span class="math-inline" role="math">\(g_\lambda\)</span> sendiri belum merupakan massa Poisson<span class="math-inline" role="math">\((n\lambda)\)</span> karena
+belum memuat faktor <span class="math-inline" role="math">\(n^t/t!\)</span>; itu tidak masalah, sebab teorema hanya
+memerlukan produk dua fungsi dengan pemisahan ketergantungan parameter. Jika
+diinginkan, gunakan faktorisasi ternormalisasi</p>
+<div class="math-display" role="math">\[\widetilde g_\lambda(t)=e^{-n\lambda}\frac{(n\lambda)^t}{t!},
+\qquad
+\widetilde h(x)=\frac{t!}{n^t\prod_i x_i!},\quad t=T(x).\]</div>
+<p>Maka <span class="math-inline" role="math">\(\widetilde g_\lambda\)</span> adalah massa
+<span class="math-inline" role="math">\(T\sim\operatorname{Poisson}(n\lambda)\)</span> dan
+<span class="math-inline" role="math">\(\widetilde g_\lambda(T(x))\widetilde h(x)=f_\lambda(x)\)</span>. Normalisasi adalah
+pemeriksaan probabilistik yang berguna, bukan prasyarat logis faktorisasi.</p>
+<p><a id="O006-C140-CMP-MS03-P03"></a></p>
+<h2>Soal 3 — Kriteria rasio untuk minimalitas</h2>
+<!--PROBLEM_META {"id":"O006-C140-CMP-MS03-P03","prerequisites":["O006-C140-CMP-D001-DEF-SUPPORT","O006-C140-CMP-D001-DEF-IDENTIFIABILITY","O006-PSU-004"],"objective":"menerapkan kriteria rasio likelihood untuk menguji apakah statistik cukup juga minimal cukup","difficulty":"lanjut","misconceptions":["statistik cukup selalu minimal","rasio harus konstan satu","titik dengan peluang nol boleh dipakai tanpa memeriksa dukungan"]}-->
+<p>Untuk sampel iid Bernoulli<span class="math-inline" role="math">\((p)\)</span> dengan <span class="math-inline" role="math">\(n=3\)</span>, pertimbangkan
+<span class="math-inline" role="math">\(T=X_1+X_2+X_3\)</span>. Gunakan kriteria: pada keluarga dengan dukungan bersama,
+<span class="math-inline" role="math">\(T\)</span> minimal cukup bila untuk dua titik <span class="math-inline" role="math">\(x,y\)</span> rasio <span class="math-inline" role="math">\(f_p(x)/f_p(y)\)</span> konstan
+terhadap <span class="math-inline" role="math">\(p\)</span> tepat ketika <span class="math-inline" role="math">\(T(x)=T(y)\)</span>.</p>
+<ol>
+<li>Hitung rasio untuk dua titik dengan jumlah sukses sama dan dengan jumlah
+sukses berbeda.</li>
+<li>Buktikan minimalitas <span class="math-inline" role="math">\(T\)</span>.</li>
+<li>Berikan statistik cukup lain yang bukan fungsi satu-ke-satu dari <span class="math-inline" role="math">\(T\)</span>, lalu
+jelaskan mengapa ia tidak minimal.</li>
+</ol>
+<p><a id="O006-C140-CMP-MS03-P03-H01"></a></p>
+<h3>Petunjuk 1</h3>
+<p>Likelihood titik <span class="math-inline" role="math">\(x\)</span> adalah <span class="math-inline" role="math">\(p^{T(x)}(1-p)^{3-T(x)}\)</span>. Jika jumlahnya sama,
+semua faktor parameter saling membatalkan.</p>
+<p><a id="O006-C140-CMP-MS03-P03-H02"></a></p>
+<h3>Petunjuk 2</h3>
+<p>Bila <span class="math-inline" role="math">\(T(x)=r\)</span> dan <span class="math-inline" role="math">\(T(y)=s\)</span> dengan <span class="math-inline" role="math">\(r\ne s\)</span>, rasio
+<span class="math-inline" role="math">\([p/(1-p)]^{r-s}\)</span> berubah ketika <span class="math-inline" role="math">\(p\)</span> berubah di <span class="math-inline" role="math">\((0,1)\)</span>.</p>
+<p><a id="O006-C140-CMP-MS03-P03-ANS"></a></p>
+<h3>Jawaban singkat</h3>
+<p>Rasio dua likelihood adalah
+<span class="math-inline" role="math">\([p/(1-p)]^{T(x)-T(y)}\)</span>. Rasio konstan terhadap <span class="math-inline" role="math">\(p\)</span> tepat ketika jumlah
+sukses sama; jadi <span class="math-inline" role="math">\(T\)</span> minimal cukup. Statistik <span class="math-inline" role="math">\((T,\mathbf1\{X_1=1\})\)</span> cukup
+tetapi tidak minimal karena memuat informasi urutan tambahan.</p>
+<p><a id="O006-C140-CMP-MS03-P03-SOL"></a></p>
+<h3>Solusi lengkap</h3>
+<p>Untuk <span class="math-inline" role="math">\(x\in\{0,1\}^3\)</span>,</p>
+<div class="math-display" role="math">\[f_p(x)=p^{T(x)}(1-p)^{3-T(x)}.\]</div>
+<p>Karena itu</p>
+<div class="math-display" role="math">\[\frac{f_p(x)}{f_p(y)}
+=p^{T(x)-T(y)}(1-p)^{T(y)-T(x)}
+=\left(\frac p{1-p}\right)^{T(x)-T(y)}.\]</div>
+<p>Jika <span class="math-inline" role="math">\(T(x)=T(y)\)</span>, rasio sama dengan satu dan tidak bergantung pada <span class="math-inline" role="math">\(p\)</span>. Jika
+jumlah berbeda, eksponen bukan nol; fungsi rasio berubah pada parameter,
+misalnya nilainya berbeda untuk <span class="math-inline" role="math">\(p=1/4\)</span> dan <span class="math-inline" role="math">\(p=3/4\)</span>. Dukungan bersama adalah
+seluruh kubus biner, jadi kriteria dapat diterapkan tanpa pengecualian.
+Maka <span class="math-inline" role="math">\(T\)</span> minimal cukup. Sekarang <span class="math-inline" role="math">\(U=(T,\mathbf1\{X_1=1\})\)</span> juga cukup karena
+ia menentukan <span class="math-inline" role="math">\(T\)</span>, tetapi <span class="math-inline" role="math">\(U\)</span> membedakan titik-titik yang mempunyai jumlah
+sukses sama. Ia bukan fungsi satu-ke-satu minimal dari <span class="math-inline" role="math">\(T\)</span> dan menyimpan urutan
+yang distribusinya tidak menambah informasi tentang <span class="math-inline" role="math">\(p\)</span>. Minimalitas menyatakan
+kompresi paling kasar yang masih cukup, bukan keunikan nama atau representasi
+numeriknya.</p>
+<p><a id="O006-C140-CMP-MS03-P04"></a></p>
+<h2>Soal 4 — Statistik cukup dan lengkap dalam keluarga Poisson</h2>
+<!--PROBLEM_META {"id":"O006-C140-CMP-MS03-P04","prerequisites":["O006-C140-CMP-D002-THM-KL-IDENTIFICATION","O006-C140-CMP-D001-DEF-SUPPORT","O006-PSU-004"],"objective":"membuktikan kelengkapan statistik jumlah Poisson dengan deret pangkat","difficulty":"lanjut","misconceptions":["cukup menyiratkan lengkap","identitas fungsi nol hanya perlu diperiksa pada satu parameter","identitas deret dapat digunakan tanpa syarat konvergensi"]}-->
+<p>Misalkan <span class="math-inline" role="math">\(X_1,\ldots,X_n\)</span> iid Poisson<span class="math-inline" role="math">\((\lambda)\)</span> dan <span class="math-inline" role="math">\(T=\sum_iX_i\)</span>.
+Anda sudah mengetahui bahwa <span class="math-inline" role="math">\(T\sim\operatorname{Poisson}(n\lambda)\)</span> dan cukup.
+Buktikan bahwa <span class="math-inline" role="math">\(T\)</span> lengkap: jika fungsi <span class="math-inline" role="math">\(a:\mathbb N_0\to\mathbb R\)</span> memenuhi
+<span class="math-inline" role="math">\(E_\lambda[a(T)]=0\)</span> untuk setiap <span class="math-inline" role="math">\(\lambda&gt;0\)</span> dan ekspektasinya ada, maka
+<span class="math-inline" role="math">\(a(t)=0\)</span> untuk semua <span class="math-inline" role="math">\(t\)</span>.</p>
+<p><a id="O006-C140-CMP-MS03-P04-H01"></a></p>
+<h3>Petunjuk 1</h3>
+<p>Tuliskan ekspektasi sebagai
+<span class="math-inline" role="math">\(e^{-n\lambda}\sum_{t\ge0}a(t)(n\lambda)^t/t!\)</span>. Kalikan dengan
+<span class="math-inline" role="math">\(e^{n\lambda}\)</span>.</p>
+<p><a id="O006-C140-CMP-MS03-P04-H02"></a></p>
+<h3>Petunjuk 2</h3>
+<p>Sebuah deret pangkat yang identik nol pada interval terbuka mempunyai semua
+koefisien nol. Periksa bahwa asumsi ekspektasi memastikan deret terdefinisi.</p>
+<p><a id="O006-C140-CMP-MS03-P04-ANS"></a></p>
+<h3>Jawaban singkat</h3>
+<p>Persamaan ekspektasi menjadi
+<span class="math-inline" role="math">\(\sum_{t\ge0}a(t)(n\lambda)^t/t!=0\)</span> untuk semua <span class="math-inline" role="math">\(\lambda&gt;0\)</span>. Keunikan deret
+pangkat memaksa <span class="math-inline" role="math">\(a(t)/t!=0\)</span> untuk setiap <span class="math-inline" role="math">\(t\)</span>, sehingga <span class="math-inline" role="math">\(T\)</span> lengkap.</p>
+<p><a id="O006-C140-CMP-MS03-P04-SOL"></a></p>
+<h3>Solusi lengkap</h3>
+<p>Karena <span class="math-inline" role="math">\(T\sim\operatorname{Poisson}(n\lambda)\)</span>,</p>
+<div class="math-display" role="math">\[0=E_\lambda a(T)=e^{-n\lambda}
+\sum_{t=0}^{\infty}a(t)\frac{(n\lambda)^t}{t!}\]</div>
+<p>untuk setiap <span class="math-inline" role="math">\(\lambda&gt;0\)</span>. Kalikan dengan <span class="math-inline" role="math">\(e^{n\lambda}\)</span> dan tetapkan
+<span class="math-inline" role="math">\(z=n\lambda\)</span>; diperoleh deret pangkat</p>
+<div class="math-display" role="math">\[F(z)=\sum_{t=0}^{\infty}\frac{a(t)}{t!}z^t=0,\qquad z&gt;0.\]</div>
+<p>Keberadaan ekspektasi mutlak pada setiap parameter menjamin deret tersebut
+konvergen pada setiap <span class="math-inline" role="math">\(z&gt;0\)</span> yang dipakai. Sebuah fungsi analitik yang nol pada
+interval terbuka memiliki semua turunan di titik interior sama dengan nol;
+atau, secara elementer, keunikan koefisien deret pangkat memberi
+<span class="math-inline" role="math">\(a(t)/t!=0\)</span> untuk setiap <span class="math-inline" role="math">\(t\)</span>. Jadi <span class="math-inline" role="math">\(a(T)=0\)</span> hampir pasti di semua parameter,
+dan <span class="math-inline" role="math">\(T\)</span> lengkap. Perhatikan arah implikasinya: kecukupan berasal dari
+faktorisasi, sedangkan kelengkapan adalah tidak adanya fungsi tak nol dengan
+harapan nol di seluruh keluarga. Dua sifat itu berbeda dan satu tidak boleh
+disimpulkan dari yang lain.</p>
+<p><a id="O006-C140-CMP-MS03-P05"></a></p>
+<h2>Soal 5 — Ancillary dan independensi dalam sampel Normal</h2>
+<!--PROBLEM_META {"id":"O006-C140-CMP-MS03-P05","prerequisites":["O006-C140-CMP-D001-EX-NORMAL","O006-C140-CMP-D001-DEF-SUPPORT"],"objective":"mengidentifikasi statistik ancillary dan membuktikan independensinya dari statistik cukup pada model Normal","difficulty":"lanjut","misconceptions":["ancillary berarti tidak acak","statistik ancillary selalu independen dari setiap statistik cukup","varians sampel mempunyai distribusi yang bergantung pada mean"]}-->
+<p>Misalkan <span class="math-inline" role="math">\(X_1,\ldots,X_n\)</span> iid <span class="math-inline" role="math">\(N(\mu,\sigma^2)\)</span> dengan <span class="math-inline" role="math">\(\sigma^2&gt;0\)</span> diketahui,
+<span class="math-inline" role="math">\(n\ge2\)</span>. Tinjau <span class="math-inline" role="math">\(\bar X\)</span> dan vektor residual
+<span class="math-inline" role="math">\(R=(X_1-\bar X,\ldots,X_n-\bar X)\)</span>.</p>
+<ol>
+<li>Tunjukkan bahwa distribusi <span class="math-inline" role="math">\(R/\sigma\)</span> tidak bergantung pada <span class="math-inline" role="math">\(\mu\)</span>; apakah
+<span class="math-inline" role="math">\(R\)</span> ancillary jika <span class="math-inline" role="math">\(\sigma\)</span> diketahui?</li>
+<li>Tunjukkan kovarians antara <span class="math-inline" role="math">\(\bar X\)</span> dan setiap komponen <span class="math-inline" role="math">\(R\)</span> nol.</li>
+<li>Gunakan kenormalan gabungan untuk menyimpulkan independensi.</li>
+<li>Jelaskan mengapa fakta ini tidak otomatis berlaku pada model non-Normal.</li>
+</ol>
+<p><a id="O006-C140-CMP-MS03-P05-H01"></a></p>
+<h3>Petunjuk 1</h3>
+<p>Tuliskan <span class="math-inline" role="math">\(X=\mu\mathbf1+\sigma Z\)</span> dengan <span class="math-inline" role="math">\(Z\sim N_n(0,I)\)</span>. Maka residual
+adalah <span class="math-inline" role="math">\(\sigma(I-P_1)Z\)</span>, dengan <span class="math-inline" role="math">\(P_1=\mathbf1\mathbf1^\mathsf T/n\)</span>.</p>
+<p><a id="O006-C140-CMP-MS03-P05-H02"></a></p>
+<h3>Petunjuk 2</h3>
+<p>Untuk setiap <span class="math-inline" role="math">\(j\)</span>,
+<span class="math-inline" role="math">\(\operatorname{Cov}(\bar X,X_j-\bar X)=\sigma^2/n-\sigma^2/n=0\)</span>.
+Vektor Normal dengan kovarians silang nol adalah independen.</p>
+<p><a id="O006-C140-CMP-MS03-P05-ANS"></a></p>
+<h3>Jawaban singkat</h3>
+<p>Jika <span class="math-inline" role="math">\(\sigma\)</span> diketahui, <span class="math-inline" role="math">\(R/\sigma\)</span> memiliki distribusi yang bebas dari
+<span class="math-inline" role="math">\(\mu\)</span>, sehingga ancillary untuk <span class="math-inline" role="math">\(\mu\)</span>. Kovarians <span class="math-inline" role="math">\(\bar X\)</span> dengan setiap residual
+nol; karena gabungan Normal, <span class="math-inline" role="math">\(\bar X\)</span> dan <span class="math-inline" role="math">\(R\)</span> independen. Pada keluarga non-Normal,
+kovarians nol saja tidak cukup.</p>
+<p><a id="O006-C140-CMP-MS03-P05-SOL"></a></p>
+<h3>Solusi lengkap</h3>
+<p>Ambil <span class="math-inline" role="math">\(X=\mu\mathbf1+\sigma Z\)</span>, <span class="math-inline" role="math">\(Z\sim N_n(0,I_n)\)</span>. Dengan
+<span class="math-inline" role="math">\(P_1=\mathbf1\mathbf1^\mathsf T/n\)</span>,</p>
+<div class="math-display" role="math">\[\bar X=\mu+\sigma\frac{\mathbf1^\mathsf TZ}{n},
+\qquad R=(I-P_1)X=\sigma(I-P_1)Z.\]</div>
+<p>Karena <span class="math-inline" role="math">\(\sigma\)</span> diketahui, distribusi <span class="math-inline" role="math">\(R/\sigma=(I-P_1)Z\)</span> tidak bergantung
+pada <span class="math-inline" role="math">\(\mu\)</span>; ia ancillary untuk parameter lokasi. Selanjutnya,</p>
+<div class="math-display" role="math">\[\operatorname{Cov}(\bar X,R)
+=\frac{\sigma^2}{n}\mathbf1^\mathsf T(I-P_1)=0.\]</div>
+<p>Pasangan <span class="math-inline" role="math">\((\bar X,R)\)</span> adalah transformasi linear dari vektor Normal, sehingga
+merupakan vektor Normal gabungan. Pada vektor Normal, kovarians silang nol
+menyiratkan independensi, bukan sekadar tidak berkorelasi. Jadi residual tidak
+membawa informasi lokasi setelah rataan diketahui, dan dapat dipakai sebagai
+komponen ancillary. Jika distribusi pengamatan hanya mempunyai kovarians yang
+sama tetapi tidak Normal, transformasi tersebut belum tentu Normal; kovarians
+nol tidak lagi menjamin independensi. Inilah alasan teorema Basu memerlukan
+hipotesis struktural yang tepat, bukan slogan bahwa semua ancillary selalu
+terpisah dari statistik cukup.</p>
+<p><a id="O006-C140-CMP-MS03-P06"></a></p>
+<h2>Soal 6 — Rao–Blackwell pada model Bernoulli</h2>
+<!--PROBLEM_META {"id":"O006-C140-CMP-MS03-P06","prerequisites":["O006-C140-CMP-D001-DEF-SUPPORT","O006-C140-CMP-D002-THM-GIBBS"],"objective":"menghitung estimator Rao–Blackwell dan membuktikan penurunan risiko kuadrat","difficulty":"menengah","misconceptions":["pengondisian selalu mengubah estimator menjadi tak bias","varians bersyarat dapat dibandingkan tanpa hukum varians total","Rao–Blackwell membutuhkan statistik lengkap"]}-->
+<p>Misalkan <span class="math-inline" role="math">\(X_1,X_2\)</span> iid Bernoulli<span class="math-inline" role="math">\((p)\)</span> dan <span class="math-inline" role="math">\(T=X_1+X_2\)</span>. Estimator awal
+<span class="math-inline" role="math">\(U=X_1\)</span> tidak bias untuk <span class="math-inline" role="math">\(p\)</span>.</p>
+<ol>
+<li>Hitung <span class="math-inline" role="math">\(U^*=E(U\mid T)\)</span> untuk setiap nilai <span class="math-inline" role="math">\(T\)</span>.</li>
+<li>Buktikan <span class="math-inline" role="math">\(U^*\)</span> tidak bias dan hitung variansnya.</li>
+<li>Bandingkan dengan varians <span class="math-inline" role="math">\(U\)</span> menggunakan hukum varians total.</li>
+<li>Apakah kelengkapan <span class="math-inline" role="math">\(T\)</span> diperlukan untuk langkah Rao–Blackwell ini?</li>
+</ol>
+<p><a id="O006-C140-CMP-MS03-P06-H01"></a></p>
+<h3>Petunjuk 1</h3>
+<p>Dari Soal 1, ketika <span class="math-inline" role="math">\(T=1\)</span> peluang <span class="math-inline" role="math">\(X_1=1\)</span> bersyarat adalah <span class="math-inline" role="math">\(1/2\)</span>; ketika
+<span class="math-inline" role="math">\(T=0\)</span> atau <span class="math-inline" role="math">\(2\)</span>, nilai <span class="math-inline" role="math">\(X_1\)</span> diketahui.</p>
+<p><a id="O006-C140-CMP-MS03-P06-H02"></a></p>
+<h3>Petunjuk 2</h3>
+<p>Gunakan <span class="math-inline" role="math">\(U^*=T/2\)</span> dan
+<span class="math-inline" role="math">\(\operatorname{Var}(U)=E\{\operatorname{Var}(U\mid T)\}+\operatorname{Var}(U^*)\)</span>.</p>
+<p><a id="O006-C140-CMP-MS03-P06-ANS"></a></p>
+<h3>Jawaban singkat</h3>
+<p><span class="math-inline" role="math">\(U^*=0\)</span> untuk <span class="math-inline" role="math">\(T=0\)</span>, <span class="math-inline" role="math">\(1/2\)</span> untuk <span class="math-inline" role="math">\(T=1\)</span>, dan <span class="math-inline" role="math">\(1\)</span> untuk <span class="math-inline" role="math">\(T=2\)</span>; jadi
+<span class="math-inline" role="math">\(U^*=T/2\)</span>. Ia tidak bias dan memiliki varians <span class="math-inline" role="math">\(p(1-p)/2\)</span>, sedangkan
+<span class="math-inline" role="math">\(\operatorname{Var}(U)=p(1-p)\)</span>. Kelengkapan tidak diperlukan untuk
+Rao–Blackwell.</p>
+<p><a id="O006-C140-CMP-MS03-P06-SOL"></a></p>
+<h3>Solusi lengkap</h3>
+<p>Jika <span class="math-inline" role="math">\(T=0\)</span>, maka <span class="math-inline" role="math">\(X_1=0\)</span>; jika <span class="math-inline" role="math">\(T=2\)</span>, maka <span class="math-inline" role="math">\(X_1=1\)</span>. Jika <span class="math-inline" role="math">\(T=1\)</span>, dua urutan
+memiliki peluang sama, sehingga <span class="math-inline" role="math">\(E(X_1\mid T=1)=1/2\)</span>. Dengan demikian</p>
+<div class="math-display" role="math">\[U^*=E(X_1\mid T)=\frac T2.\]</div>
+<p>Linearitas ekspektasi memberi
+<span class="math-inline" role="math">\(E_pU^*=E_pE_p(U\mid T)=E_pU=p\)</span>, sehingga estimator tetap tidak bias. Karena
+<span class="math-inline" role="math">\(T\sim\operatorname{Binomial}(2,p)\)</span>,</p>
+<div class="math-display" role="math">\[\operatorname{Var}(U^*)=\operatorname{Var}(T/2)
+=\frac14(2p(1-p))=\frac12p(1-p).\]</div>
+<p>Sementara <span class="math-inline" role="math">\(\operatorname{Var}(U)=p(1-p)\)</span>. Hukum varians total menjelaskan
+selisih itu: varians <span class="math-inline" role="math">\(U\)</span> adalah varians estimator terkondisi ditambah varians
+bersyarat dari <span class="math-inline" role="math">\(U\)</span> yang hilang setelah data diringkas. Rao–Blackwell hanya
+memerlukan statistik <span class="math-inline" role="math">\(T\)</span> yang cukup (atau bahkan sigma-aljabar apa pun yang
+digunakan untuk mengondisikan); ia tidak memerlukan kelengkapan. Kelengkapan
+baru memberi keunikan estimator tak bias dalam kelas fungsi <span class="math-inline" role="math">\(T\)</span> pada langkah
+Lehmann–Scheffé.</p>
+<p><a id="O006-C140-CMP-MS03-P07"></a></p>
+<h2>Soal 7 — Menggabungkan kelengkapan dengan Lehmann–Scheffé</h2>
+<!--PROBLEM_META {"id":"O006-C140-CMP-MS03-P07","prerequisites":["O006-C140-CMP-D001-DEF-SUPPORT","O006-C140-CMP-D002-THM-KL-IDENTIFICATION","O006-PSU-004"],"objective":"menerapkan teorema Lehmann–Scheffé untuk memperoleh estimator tak bias terbaik","difficulty":"lanjut","misconceptions":["setiap estimator fungsi statistik lengkap otomatis tak bias","UMVU berarti unbiased hanya pada satu parameter","kelengkapan dapat diganti dengan kecukupan saja"]}-->
+<p>Misalkan <span class="math-inline" role="math">\(X_1,\ldots,X_n\)</span> iid Poisson<span class="math-inline" role="math">\((\lambda)\)</span>, <span class="math-inline" role="math">\(n\ge1\)</span>, dan
+<span class="math-inline" role="math">\(T=\sum_iX_i\)</span>. Targetkan <span class="math-inline" role="math">\(\psi(\lambda)=e^{-\lambda}\)</span>.</p>
+<ol>
+<li>Temukan fungsi <span class="math-inline" role="math">\(g(T)\)</span> yang tidak bias untuk <span class="math-inline" role="math">\(e^{-\lambda}\)</span>.</li>
+<li>Buktikan ketidakbiasannya dengan menghitung deret atau menggunakan fungsi
+pembangkit probabilitas.</li>
+<li>Dengan kecukupan dan kelengkapan <span class="math-inline" role="math">\(T\)</span>, nyatakan kesimpulan UMVU secara
+tepat.</li>
+<li>Mengapa estimator <span class="math-inline" role="math">\(\mathbf1\{X_1=0\}\)</span> tidak memberi alasan yang sama untuk
+keunikan, walaupun juga tidak bias?</li>
+</ol>
+<p><a id="O006-C140-CMP-MS03-P07-H01"></a></p>
+<h3>Petunjuk 1</h3>
+<p>Untuk <span class="math-inline" role="math">\(T\sim\operatorname{Poisson}(n\lambda)\)</span>, fungsi pembangkitnya ialah
+<span class="math-inline" role="math">\(E(s^T)=\exp(n\lambda(s-1))\)</span>. Pilih <span class="math-inline" role="math">\(s=1-1/n\)</span>.</p>
+<p><a id="O006-C140-CMP-MS03-P07-H02"></a></p>
+<h3>Petunjuk 2</h3>
+<p>Estimator <span class="math-inline" role="math">\(g(T)=(1-1/n)^T\)</span> mempunyai nilai harapan yang dicari; untuk <span class="math-inline" role="math">\(n=1\)</span>
+gunakan konvensi <span class="math-inline" role="math">\(0^0=1\)</span> pada peubah hitungan.</p>
+<p><a id="O006-C140-CMP-MS03-P07-ANS"></a></p>
+<h3>Jawaban singkat</h3>
+<p>Ambil <span class="math-inline" role="math">\(g(T)=(1-1/n)^T\)</span>. Maka
+<span class="math-inline" role="math">\(E_\lambda g(T)=\exp(n\lambda((1-1/n)-1))=e^{-\lambda}\)</span>. Karena <span class="math-inline" role="math">\(T\)</span> cukup
+dan lengkap, <span class="math-inline" role="math">\(g(T)\)</span> adalah estimator UMVU untuk <span class="math-inline" role="math">\(e^{-\lambda}\)</span>. Estimator lain
+yang tidak bias tetapi tidak ditulis sebagai fungsi <span class="math-inline" role="math">\(T\)</span> tidak memperoleh
+keunikan itu tanpa Rao–Blackwellisasi.</p>
+<p><a id="O006-C140-CMP-MS03-P07-SOL"></a></p>
+<h3>Solusi lengkap</h3>
+<p>Distribusi <span class="math-inline" role="math">\(T\)</span> adalah Poisson<span class="math-inline" role="math">\((n\lambda)\)</span>, sehingga untuk <span class="math-inline" role="math">\(0\le s\le1\)</span>,</p>
+<div class="math-display" role="math">\[E_\lambda(s^T)=\sum_{t=0}^{\infty}s^t e^{-n\lambda}\frac{(n\lambda)^t}{t!}
+=\exp\{n\lambda(s-1)\}.\]</div>
+<p>Dengan <span class="math-inline" role="math">\(s=1-1/n\)</span> diperoleh</p>
+<div class="math-display" role="math">\[E_\lambda\left(1-\frac1n\right)^T
+=\exp\left\{n\lambda\left(-\frac1n\right)\right\}=e^{-\lambda}.\]</div>
+<p>Jadi <span class="math-inline" role="math">\(g(T)=(1-1/n)^T\)</span> tidak bias untuk target tersebut. Pada <span class="math-inline" role="math">\(n=1\)</span>, rumus
+menjadi <span class="math-inline" role="math">\(0^T\)</span>, yang bernilai satu ketika <span class="math-inline" role="math">\(T=0\)</span> dan nol ketika <span class="math-inline" role="math">\(T&gt;0\)</span>; itu tetap
+memiliki harapan <span class="math-inline" role="math">\(e^{-\lambda}\)</span>. Dari Soal 2 dan 4, <span class="math-inline" role="math">\(T\)</span> cukup dan lengkap.
+Teorema Lehmann–Scheffé lalu menyatakan bahwa estimator tak bias yang merupakan
+fungsi <span class="math-inline" role="math">\(T\)</span> adalah unik hampir pasti dan memiliki varians minimum di antara
+semua estimator tak bias: ia UMVU. Estimator <span class="math-inline" role="math">\(\mathbf1\{X_1=0\}\)</span> memang tidak
+bias karena peluangnya <span class="math-inline" role="math">\(e^{-\lambda}\)</span>, tetapi ia menggunakan satu pengamatan
+dan bukan fungsi <span class="math-inline" role="math">\(T\)</span> ketika <span class="math-inline" role="math">\(n&gt;1\)</span>. Rao–Blackwellisasi terhadap <span class="math-inline" role="math">\(T\)</span> menghasilkan
+fungsi <span class="math-inline" role="math">\(g(T)\)</span>; kelengkapan, bukan kecukupan saja, yang menutup kemungkinan
+adanya fungsi <span class="math-inline" role="math">\(T\)</span> tak bias lain dengan varians berbeda.</p>
+<p><a id="O006-C140-CMP-MS03-P08"></a></p>
+<h2>Soal 8 — Ancillary dan Basu pada model Normal lokasi</h2>
+<!--PROBLEM_META {"id":"O006-C140-CMP-MS03-P08","prerequisites":["O006-C140-CMP-D001-EX-NORMAL","O006-C140-CMP-D001-DEF-SUPPORT","O006-PSU-004"],"objective":"memverifikasi syarat teorema Basu pada statistik cukup lengkap dan ancillary lalu membuktikan independensi secara langsung","difficulty":"lanjut","misconceptions":["ancillary berarti konstan","independensi Basu boleh diklaim tanpa kelengkapan","kovarians nol selalu berarti independensi"]}-->
+<p>Misalkan <span class="math-inline" role="math">\(X_1,X_2\)</span> iid <span class="math-inline" role="math">\(N(\mu,1)\)</span>, <span class="math-inline" role="math">\(\mu\in\mathbb R\)</span>. Ambil
+<span class="math-inline" role="math">\(T=\bar X\)</span> dan <span class="math-inline" role="math">\(A=\mathbf1\{X_1&gt;X_2\}\)</span>.</p>
+<ol>
+<li>Buktikan bahwa <span class="math-inline" role="math">\(A\)</span> ancillary.</li>
+<li>Buktikan bahwa <span class="math-inline" role="math">\(T\)</span> cukup dan lengkap untuk <span class="math-inline" role="math">\(\mu\)</span>.</li>
+<li>Tunjukkan bahwa <span class="math-inline" role="math">\(T\)</span> dan <span class="math-inline" role="math">\(A\)</span> independen dengan transformasi Normal yang
+eksplisit.</li>
+<li>Jelaskan bagaimana hasil ini merupakan contoh Basu, dan hipotesis mana yang
+harus diperiksa sebelum memakai nama teorema tersebut.</li>
+</ol>
+<p><a id="O006-C140-CMP-MS03-P08-H01"></a></p>
+<h3>Petunjuk 1</h3>
+<p>Selisih <span class="math-inline" role="math">\(D=X_1-X_2\sim N(0,2)\)</span> tidak bergantung pada <span class="math-inline" role="math">\(\mu\)</span>, sehingga tandanya
+ancillary. Rataan dan selisih mempunyai kovarians nol.</p>
+<p><a id="O006-C140-CMP-MS03-P08-H02"></a></p>
+<h3>Petunjuk 2</h3>
+<p>Untuk kelengkapan, jika <span class="math-inline" role="math">\(E_\mu b(\bar X)=0\)</span> untuk semua <span class="math-inline" role="math">\(\mu\)</span>, tulis sebagai
+konvolusi fungsi <span class="math-inline" role="math">\(b\)</span> dengan kernel Normal dan gunakan keunikan transformasi
+Fourier (atau analitikitas fungsi pembangkit) untuk menyimpulkan <span class="math-inline" role="math">\(b=0\)</span> hampir
+di mana-mana.</p>
+<p><a id="O006-C140-CMP-MS03-P08-ANS"></a></p>
+<h3>Jawaban singkat</h3>
+<p><span class="math-inline" role="math">\(A\)</span> ancillary karena <span class="math-inline" role="math">\(D/\sqrt2\sim N(0,1)\)</span>. Likelihood memfaktorkan melalui
+<span class="math-inline" role="math">\(\bar X\)</span>, dan keluarga Normal lokasi berskala tetap adalah keluarga eksponensial
+penuh sehingga <span class="math-inline" role="math">\(\bar X\)</span> lengkap. Karena <span class="math-inline" role="math">\((\bar X,D)\)</span> Normal dengan kovarians
+nol, keduanya independen; maka <span class="math-inline" role="math">\(T\)</span> dan <span class="math-inline" role="math">\(A\)</span> juga independen dan syarat Basu
+terpenuhi.</p>
+<p><a id="O006-C140-CMP-MS03-P08-SOL"></a></p>
+<h3>Solusi lengkap</h3>
+<p>Ambil <span class="math-inline" role="math">\(D=X_1-X_2\)</span>. Distribusi <span class="math-inline" role="math">\(D\)</span> adalah <span class="math-inline" role="math">\(N(0,2)\)</span> untuk setiap <span class="math-inline" role="math">\(\mu\)</span>, jadi
+<span class="math-inline" role="math">\(A=\mathbf1\{D&gt;0\}\)</span> mempunyai peluang <span class="math-inline" role="math">\(1/2\)</span> dan hukum yang sama untuk semua
+parameter; inilah sifat ancillary. Dengan identitas</p>
+<div class="math-display" role="math">\[f_\mu(x_1,x_2)
+=(2\pi)^{-1}\exp\left[-\frac12\{(x_1-\mu)^2+(x_2-\mu)^2\}\right],\]</div>
+<p>dan dekomposisi jumlah kuadrat, semua ketergantungan pada <span class="math-inline" role="math">\(\mu\)</span> melalui
+<span class="math-inline" role="math">\(\bar x\)</span>; teorema faktorisasi menunjukkan bahwa <span class="math-inline" role="math">\(T=\bar X\)</span> cukup. Untuk
+kelengkapan, andaikan <span class="math-inline" role="math">\(E_\mu b(T)=0\)</span> bagi semua <span class="math-inline" role="math">\(\mu\)</span>. Karena
+<span class="math-inline" role="math">\(T\sim N(\mu,1/2)\)</span>, fungsi ini adalah konvolusi <span class="math-inline" role="math">\(b\)</span> dengan kernel Normal yang
+identik nol di seluruh garis. Kernel Normal mempunyai transformasi Fourier
+tidak nol, sehingga keunikan transformasi Fourier memaksa <span class="math-inline" role="math">\(b=0\)</span> hampir di
+mana-mana (di bawah syarat integrabilitas yang diperlukan oleh ekspektasi).
+Dengan demikian <span class="math-inline" role="math">\(T\)</span> lengkap.</p>
+<p>Selanjutnya,</p>
+<div class="math-display" role="math">\[\operatorname{Cov}(T,D)
+=\tfrac12\operatorname{Cov}(X_1+X_2,X_1-X_2)=0.\]</div>
+<p>Pasangan <span class="math-inline" role="math">\((T,D)\)</span> adalah Normal gabungan, sehingga kovarians nol memberi
+independensi. Karena <span class="math-inline" role="math">\(A\)</span> hanya fungsi dari <span class="math-inline" role="math">\(D\)</span>, <span class="math-inline" role="math">\(T\)</span> juga independen dari <span class="math-inline" role="math">\(A\)</span>.
+Ini tepat bentuk teorema Basu: statistik cukup yang lengkap independen dari
+statistik ancillary. Namun nama teorema baru sah setelah kecukupan, kelengkapan,
+ancillarity, dan keluarga probabilitas yang sama semuanya diverifikasi; hasil
+independensi langsung dari Normal dapat menjadi pemeriksaan mandiri.</p>
+<p><a id="O006-C140-CMP-MS03-SEC02"></a></p>
+<h2>Checklist kelulusan</h2>
+<p>Set ini dikuasai bila Anda dapat membuktikan kecukupan dari distribusi bersyarat
+dan faktorisasi, menguji minimalitas dengan rasio likelihood, serta memisahkan
+empat sifat: cukup, minimal cukup, lengkap, dan ancillary. Anda juga harus dapat
+menurunkan Rao–Blackwell, menyatakan tepat kapan Lehmann–Scheffé berlaku, dan
+memeriksa semua hipotesis Basu sebelum menggunakannya. Setiap argumen harus
+menyebut parameter mana yang dipegang tetap dan ruang dukungan yang digunakan.</p>
+
+<footer class="license">Materi pendamping orisinal berlisensi CC BY-SA 4.0. Komponen Penn State dan Random tetap berada di bawah lisensinya masing-masing dan tidak direlisensikan oleh halaman ini.</footer>
+</main>
+</div>
+</body>
+</html>

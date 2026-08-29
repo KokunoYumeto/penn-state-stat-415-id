@@ -1,0 +1,400 @@
+<!doctype html>
+<html lang="id-ID">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="generator" content="OpenAI Codex gpt-5.6-sol, Ultra">
+<title>Set penguasaan 01 — statistik urutan dan distribusi sampel</title>
+<link rel="stylesheet" href="../assets/style.css">
+<script>window.MathJax={loader:{load:['[tex]/boldsymbol']},tex:{packages:{'[+]':['boldsymbol']},inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']]},svg:{fontCache:'local'}};</script>
+<script defer src="../assets/MathJax/tex-svg.js"></script>
+</head>
+<body>
+<div class="shell">
+<nav class="sidebar" aria-label="Daftar isi pendamping"><h2>Isi pendamping</h2><ol><li><a href="../index.html">Pendamping Orisinal Statistika Matematis</a></li><li><a href="../theory/O006-C140-CMP-D001.html">Model parametrik reguler, skor, dan informasi Fisher</a></li><li><a href="../theory/O006-C140-CMP-D002.html">Konsistensi MLE: identifikasi Kullback–Leibler dan teorema argmax</a></li><li><a href="../theory/O006-C140-CMP-D003.html">Likelihood kuadratik lokal, normalitas asimtotik, dan delta method</a></li><li><a href="../theory/O006-C140-CMP-D004.html">Prosedur Wald, skor, dan rasio likelihood</a></li><li><a href="../theory/O006-C140-CMP-D005.html">Likelihood nonreguler: empat mekanisme kegagalan</a></li><li><a href="../theory/O006-C140-CMP-D006.html">Optimalitas pengujian: Neyman–Pearson, MP, UMP, dan rasio likelihood monoton</a></li><li><a href="../theory/O006-C140-CMP-D007.html">Loss, risk, efisiensi, Rao–Blackwell, dan Lehmann–Scheffé</a></li><li><a href="../theory/O006-C140-CMP-D008.html">Model linear Gaussian desain tetap dan geometri proyeksi</a></li><li><a href="../theory/O006-C140-CMP-D009.html">OLS, MLE Gaussian, dan teorema Gauss–Markov pada rancangan tetap</a></li><li><a href="../theory/O006-C140-CMP-D010.html">Inferensi Gaussian eksak: proyeksi, t, F, ANOVA, dan prediksi</a></li><li><a href="../theory/O006-C140-CMP-D011.html">Diagnostik, leverage, misspesifikasi, dan inferensi pascaseleksi</a></li><li><a href="../theory/O006-C140-CMP-D012.html">Inferensi Bayesian sebagai pembaruan dan keputusan yang koheren</a></li><li><a href="../theory/O006-C140-CMP-D013.html">Perbandingan Bayesian–frequentist: keputusan, cakupan, dan kalibrasi</a></li><li><a href="../simulations/O006-C140-CMP-SIM001.html">Model lokasi normal: MLE, coverage, dan tiga statistik uji</a></li><li><a href="../simulations/O006-C140-CMP-SIM002.html">Delta method pada titik reguler dan titik dengan turunan nol</a></li><li><a href="../simulations/O006-C140-CMP-SIM003.html">Endpoint Uniform: laju nonreguler dan kegagalan bootstrap biasa</a></li><li><a href="../simulations/O006-C140-CMP-SIM004.html">Uji Neyman–Pearson teracak dengan size tepat</a></li><li><a href="../simulations/O006-C140-CMP-SIM005.html">Model linear matriks: coverage, heteroskedastisitas, dan pengaruh</a></li><li><a href="../simulations/O006-C140-CMP-SIM006.html">Kalibrasi selang Bayesian dan frequentist pada model binomial</a></li><li><a href="O006-C140-CMP-MS00.html">Set penguasaan 00 — probabilitas, distribusi, dan ekspektasi (diagnostik C140)</a></li><li><a href="O006-C140-CMP-MS01.html">Set penguasaan 01 — statistik urutan dan distribusi sampel</a></li><li><a href="O006-C140-CMP-MS02.html">Set penguasaan 02 — estimasi, bias, MSE, dan sifat estimator</a></li><li><a href="O006-C140-CMP-MS03.html">Set penguasaan 03 — kecukupan, faktorisasi, kelengkapan, dan statistik ancillary</a></li><li><a href="O006-C140-CMP-MS04.html">Set penguasaan 04 — metode momen dan dasar kemungkinan maksimum</a></li><li><a href="O006-C140-CMP-MS05.html">Set penguasaan 05 — informasi Fisher, interval kepercayaan, bootstrap, dan delta method</a></li><li><a href="O006-C140-CMP-MS06.html">Set penguasaan 06 — pengujian hipotesis, daya, p-value, dan jembatan likelihood</a></li><li><a href="O006-C140-CMP-MS07.html">Set penguasaan 07 — regularitas, konsistensi, dan normalitas MLE</a></li><li><a href="O006-C140-CMP-MS08.html">Set penguasaan 08 — Wald, skor, rasio likelihood, dan diagnosis nonregular</a></li><li><a href="O006-C140-CMP-MS09.html">Set penguasaan 09 — pengujian eksak dan optimalitas Neyman–Pearson</a></li><li><a href="O006-C140-CMP-MS10.html">Set penguasaan 10 — uji likelihood asimtotik, risk, dan perbaikan estimator</a></li><li><a href="O006-C140-CMP-MS11.html">Set penguasaan 11 — pembaruan Bayesian, keputusan, dan kalibrasi</a></li><li><a href="O006-C140-CMP-MS12.html">Set penguasaan 12 — model linear Gaussian matriks, inferensi eksak, dan diagnostik</a></li><li><a href="../assessments/O006-C140-CMP-CA01.html">Asesmen kumulatif C1: likelihood, optimalitas, dan keputusan statistik</a></li></ol></nav>
+<main>
+<div class="metadata"><strong>O006-C140-CMP-MS01</strong> · id-ID · CC BY-SA 4.0 · OpenAI Codex gpt-5.6-sol, Ultra</div>
+<p><a id="O006-C140-CMP-MS01-SEC-OVERVIEW"></a></p>
+<h1>Set penguasaan 01 — statistik urutan dan distribusi sampel</h1>
+<p>Tuliskan <span class="math-inline" role="math">\(X_{(1)}\le\cdots\le X_{(n)}\)</span> untuk urutan menaik. Soal-soal ini
+menekankan bahwa statistik urutan bukan sekadar pengurutan data: densitasnya
+memuat informasi tentang letak, rentang, endpoint, dan kuantil. Semua hasil
+kontinu mengabaikan peristiwa tie yang mempunyai probabilitas nol.</p>
+<p><a id="O006-C140-CMP-MS01-P01"></a></p>
+<h2>Masalah 1 — minimum, maksimum, dan rentang Uniform</h2>
+<!--PROBLEM_META {"id":"O006-C140-CMP-MS01-P01","prerequisites":["B95"],"objective":"menurunkan densitas bersama minimum dan maksimum serta menghitung peluang rentang","difficulty":"menengah","misconceptions":["melupakan faktor banyaknya penempatan observasi","menganggap minimum dan maksimum independen pada sampel Uniform"]}-->
+<p>Misalkan <span class="math-inline" role="math">\(U_1,\ldots,U_4\)</span> iid <span class="math-inline" role="math">\(\operatorname{Uniform}(0,1)\)</span>, dengan
+<span class="math-inline" role="math">\(M=U_{(1)}\)</span> dan <span class="math-inline" role="math">\(N=U_{(4)}\)</span>.</p>
+<ol>
+<li>Turunkan densitas bersama <span class="math-inline" role="math">\((M,N)\)</span> pada <span class="math-inline" role="math">\(0&lt;m&lt;v&lt;1\)</span>.</li>
+<li>Hitung <span class="math-inline" role="math">\(P(N-M\le1/2)\)</span>.</li>
+<li>Apakah <span class="math-inline" role="math">\(M\)</span> dan <span class="math-inline" role="math">\(N\)</span> independen? Jelaskan dari densitas marginal atau
+dukungan bersama.</li>
+</ol>
+<p><a id="O006-C140-CMP-MS01-P01-H01"></a></p>
+<h3>Petunjuk 1</h3>
+<p>Untuk <span class="math-inline" role="math">\(m&lt;n\)</span>, satu observasi berada dekat <span class="math-inline" role="math">\(m\)</span>, satu dekat <span class="math-inline" role="math">\(n\)</span>, dan dua sisanya
+berada di antara keduanya. Hitung semua penempatan label yang mungkin.</p>
+<p><a id="O006-C140-CMP-MS01-P01-H02"></a></p>
+<h3>Petunjuk 2</h3>
+<p>Untuk ukuran sampel <span class="math-inline" role="math">\(s\)</span>, secara umum
+<span class="math-inline" role="math">\(f_{U_{(1)},U_{(s)}}(m,v)=s(s-1)(v-m)^{s-2}\)</span>. Integralkan pada daerah
+<span class="math-inline" role="math">\(v-m\le r\)</span> atau gunakan komplemen rentang lebih besar dari <span class="math-inline" role="math">\(r\)</span>.</p>
+<p><a id="O006-C140-CMP-MS01-P01-ANS"></a></p>
+<h3>Jawaban singkat</h3>
+<p><span class="math-inline" role="math">\(f_{M,N}(m,v)=12(v-m)^2\mathbf1\{0&lt;m&lt;v&lt;1\}\)</span>. Untuk <span class="math-inline" role="math">\(r=1/2\)</span>,
+<span class="math-inline" role="math">\(P(N-M\le r)=4r^3-3r^4=5/16\)</span>. Dukungan berbentuk segitiga dan densitas
+tidak memfaktor menjadi fungsi <span class="math-inline" role="math">\(m\)</span> dikali fungsi <span class="math-inline" role="math">\(v\)</span>, jadi keduanya tidak
+independen.</p>
+<p><a id="O006-C140-CMP-MS01-P01-SOL"></a></p>
+<h3>Solusi lengkap</h3>
+<p>Ambil pita kecil di sekitar <span class="math-inline" role="math">\(m\)</span> dan <span class="math-inline" role="math">\(n\)</span>. Agar <span class="math-inline" role="math">\(M\)</span> dan <span class="math-inline" role="math">\(N\)</span> berada di sana,
+satu dari empat label harus menjadi minimum, satu label lain menjadi maksimum,
+dan dua label tersisa harus jatuh di interval <span class="math-inline" role="math">\((m,v)\)</span>. Banyak penempatan label
+adalah <span class="math-inline" role="math">\(4\cdot3=12\)</span>. Luas peluang dua observasi tengah adalah <span class="math-inline" role="math">\((v-m)^2\)</span>,
+sedangkan lebar pita minimum dan maksimum menyumbang <span class="math-inline" role="math">\(dm\,dn\)</span>. Oleh karena
+itu</p>
+<div class="math-display" role="math">\[f_{M,N}(m,v)=12(v-m)^2,
+\qquad 0&lt;m&lt;v&lt;1.\]</div>
+<p>Untuk sampel Uniform berukuran <span class="math-inline" role="math">\(s\)</span> secara umum,</p>
+<div class="math-display" role="math">\[P(U_{(s)}-U_{(1)}\le r)=sr^{s-1}-(s-1)r^s,
+\qquad 0\le r\le1.\]</div>
+<p>Dengan <span class="math-inline" role="math">\(s=4\)</span> dan <span class="math-inline" role="math">\(r=1/2\)</span>, nilainya
+<span class="math-inline" role="math">\(4(1/2)^3-3(1/2)^4=1/2-3/16=5/16\)</span>. Densitas marginal minimum ialah
+<span class="math-inline" role="math">\(4(1-m)^3\)</span>, sedangkan densitas marginal maksimum (gunakan variabel <span class="math-inline" role="math">\(v\)</span>)
+ialah <span class="math-inline" role="math">\(f_N(v)=4v^3\)</span>; produk keduanya adalah <span class="math-inline" role="math">\(16v^3(1-m)^3\)</span>, bukan
+<span class="math-inline" role="math">\(12(v-m)^2\)</span>. Selain itu dukungan bersama mensyaratkan <span class="math-inline" role="math">\(m&lt;v\)</span>, sedangkan produk
+dua marginal akan memberi massa pada <span class="math-inline" role="math">\(m\ge v\)</span>. Maka independensi gagal.</p>
+<p><a id="O006-C140-CMP-MS01-P02"></a></p>
+<h2>Masalah 2 — CDF dan densitas urutan ke-<span class="math-inline" role="math">\(k\)</span></h2>
+<!--PROBLEM_META {"id":"O006-C140-CMP-MS01-P02","prerequisites":["B95"],"objective":"menurunkan CDF dan densitas umum statistik urutan melalui hitungan Binomial","difficulty":"menengah","misconceptions":["menggunakan peluang tepat k alih-alih sedikitnya k","salah menetapkan pangkat pada densitas urutan"]}-->
+<p>Misalkan <span class="math-inline" role="math">\(X_1,\ldots,X_7\)</span> iid dengan CDF kontinu <span class="math-inline" role="math">\(F\)</span> dan densitas <span class="math-inline" role="math">\(f\)</span>.
+Tuliskan <span class="math-inline" role="math">\(X_{(3)}\)</span> untuk urutan ketiga.</p>
+<ol>
+<li>Turunkan <span class="math-inline" role="math">\(P(X_{(3)}\le x)\)</span> sebagai jumlah peluang Binomial.</li>
+<li>Diferensiasikan untuk memperoleh densitas <span class="math-inline" role="math">\(f_{X_{(3)}}(x)\)</span>.</li>
+<li>Jika <span class="math-inline" role="math">\(X_i\sim\operatorname{Uniform}(0,1)\)</span>, nyatakan
+<span class="math-inline" role="math">\(P(X_{(3)}\le0{,}4)\)</span> sebagai jumlah eksplisit dan tuliskan densitasnya.</li>
+</ol>
+<p><a id="O006-C140-CMP-MS01-P02-H01"></a></p>
+<h3>Petunjuk 1</h3>
+<p><span class="math-inline" role="math">\(X_{(3)}\le x\)</span> berarti sedikitnya tiga dari tujuh observasi tidak melebihi
+<span class="math-inline" role="math">\(x\)</span>. Banyak observasi tersebut berdistribusi Binomial<span class="math-inline" role="math">\((7,F(x))\)</span>.</p>
+<p><a id="O006-C140-CMP-MS01-P02-H02"></a></p>
+<h3>Petunjuk 2</h3>
+<p>Untuk densitas, diferensiasikan bentuk
+<span class="math-inline" role="math">\(\sum_{j=3}^7\binom7jF(x)^j[1-F(x)]^{7-j}\)</span> atau gunakan rumus langsung
+<span class="math-inline" role="math">\(\frac{7!}{2!4!}F(x)^2[1-F(x)]^4f(x)\)</span>.</p>
+<p><a id="O006-C140-CMP-MS01-P02-ANS"></a></p>
+<h3>Jawaban singkat</h3>
+<div class="math-display" role="math">\[F_{X_{(3)}}(x)=\sum_{j=3}^{7}\binom7jF(x)^j[1-F(x)]^{7-j},\]</div>
+<p>dan
+<span class="math-inline" role="math">\(f_{X_{(3)}}(x)=105F(x)^2[1-F(x)]^4f(x)\)</span>. Untuk Uniform, peluang pada
+<span class="math-inline" role="math">\(0{,}4\)</span> adalah <span class="math-inline" role="math">\(\sum_{j=3}^7\binom7j0{,}4^j0{,}6^{7-j}\)</span> dan densitasnya
+<span class="math-inline" role="math">\(105x^2(1-x)^4\)</span> pada <span class="math-inline" role="math">\((0,1)\)</span>.</p>
+<p><a id="O006-C140-CMP-MS01-P02-SOL"></a></p>
+<h3>Solusi lengkap</h3>
+<p>Definisikan <span class="math-inline" role="math">\(K_x=\sum_{i=1}^7\mathbf1\{X_i\le x\}\)</span>. Karena observasi iid,
+<span class="math-inline" role="math">\(K_x\sim\operatorname{Binomial}(7,F(x))\)</span>. Urutan ketiga tidak melebihi <span class="math-inline" role="math">\(x\)</span>
+tepat ketika <span class="math-inline" role="math">\(K_x\ge3\)</span>, sehingga</p>
+<div class="math-display" role="math">\[F_{X_{(3)}}(x)=P(K_x\ge3)
+=\sum_{j=3}^{7}\binom7jF(x)^j[1-F(x)]^{7-j}.\]</div>
+<p>Untuk CDF kontinu, diferensiasi dan aturan rantai menghasilkan koefisien</p>
+<div class="math-display" role="math">\[\frac{7!}{(3-1)!(7-3)!}=\frac{7!}{2!4!}=105,\]</div>
+<p>sehingga</p>
+<div class="math-display" role="math">\[f_{X_{(3)}}(x)=105F(x)^2[1-F(x)]^4f(x).\]</div>
+<p>Pada Uniform<span class="math-inline" role="math">\((0,1)\)</span>, <span class="math-inline" role="math">\(F(x)=x\)</span> dan <span class="math-inline" role="math">\(f(x)=1\)</span> di dalam interval satuan. Jadi
+<span class="math-inline" role="math">\(P(X_{(3)}\le0{,}4)=\sum_{j=3}^{7}\binom7j(0{,}4)^j(0{,}6)^{7-j}\)</span>,
+sedangkan densitasnya <span class="math-inline" role="math">\(105x^2(1-x)^4\)</span>. Di luar <span class="math-inline" role="math">\((0,1)\)</span>, CDF harus dipotong
+menjadi nol atau satu; rumus polinomial tanpa domain dapat memberikan nilai
+yang bukan peluang. Hubungan Binomial ini juga menjelaskan mengapa CDF memakai
+&quot;sedikitnya tiga&quot;, bukan peluang tepat tiga.</p>
+<p><a id="O006-C140-CMP-MS01-P03"></a></p>
+<h2>Masalah 3 — momen urutan Uniform melalui Beta</h2>
+<!--PROBLEM_META {"id":"O006-C140-CMP-MS01-P03","prerequisites":["B95"],"objective":"menggunakan distribusi Beta untuk menghitung momen statistik urutan","difficulty":"dasar","misconceptions":["mengira rataan urutan ke-k sama dengan k/n","menggunakan varians distribusi Uniform untuk semua urutan"]}-->
+<p>Untuk <span class="math-inline" role="math">\(U_1,\ldots,U_{10}\)</span> iid Uniform<span class="math-inline" role="math">\((0,1)\)</span>, tentukan distribusi, rataan,
+dan varians <span class="math-inline" role="math">\(U_{(4)}\)</span>. Hitung juga peluang aproksimatif bahwa <span class="math-inline" role="math">\(U_{(4)}&gt;1/2\)</span>
+melalui CDF Binomial, tanpa perlu memberikan desimal panjang.</p>
+<p><a id="O006-C140-CMP-MS01-P03-H01"></a></p>
+<h3>Petunjuk 1</h3>
+<p><span class="math-inline" role="math">\(U_{(k)}\sim\operatorname{Beta}(k,n-k+1)\)</span>. Untuk Beta<span class="math-inline" role="math">\((a,b)\)</span>,
+E<span class="math-inline" role="math">\([V]=a/(a+b)\)</span> dan Var<span class="math-inline" role="math">\((V)=ab/[(a+b)^2(a+b+1)]\)</span>.</p>
+<p><a id="O006-C140-CMP-MS01-P03-H02"></a></p>
+<h3>Petunjuk 2</h3>
+<p>Peristiwa <span class="math-inline" role="math">\(U_{(4)}&gt;1/2\)</span> berarti paling banyak tiga observasi berada di bawah
+<span class="math-inline" role="math">\(1/2\)</span>. Gunakan <span class="math-inline" role="math">\(K\sim\operatorname{Binomial}(10,1/2)\)</span>.</p>
+<p><a id="O006-C140-CMP-MS01-P03-ANS"></a></p>
+<h3>Jawaban singkat</h3>
+<p><span class="math-inline" role="math">\(U_{(4)}\sim\operatorname{Beta}(4,7)\)</span>,
+<span class="math-inline" role="math">\(E[U_{(4)}]=4/11\)</span>, dan
+<span class="math-inline" role="math">\(\operatorname{Var}(U_{(4)})=28/(121\cdot12)=7/363\)</span>. Selain itu
+<span class="math-inline" role="math">\(P(U_{(4)}&gt;1/2)=P(K\le3)=2^{-10}\sum_{j=0}^3\binom{10}{j}\)</span>.</p>
+<p><a id="O006-C140-CMP-MS01-P03-SOL"></a></p>
+<h3>Solusi lengkap</h3>
+<p>Rumus densitas urutan Uniform memberi</p>
+<div class="math-display" role="math">\[f_{U_{(4)}}(u)=\frac{10!}{3!6!}u^{4-1}(1-u)^{10-4}
+=\frac{10!}{3!6!}u^3(1-u)^6,\]</div>
+<p>yang merupakan densitas Beta<span class="math-inline" role="math">\((4,7)\)</span>. Maka</p>
+<div class="math-display" role="math">\[E[U_{(4)}]=\frac4{4+7}=\frac4{11},\]</div>
+<p>dan</p>
+<div class="math-display" role="math">\[\operatorname{Var}(U_{(4)})
+=\frac{4\cdot7}{(11)^2(12)}
+=\frac7{363}.\]</div>
+<p>Untuk peluang ekor, jumlah <span class="math-inline" role="math">\(K\)</span> observasi yang kurang dari atau sama dengan
+<span class="math-inline" role="math">\(1/2\)</span> berdistribusi Binomial<span class="math-inline" role="math">\((10,1/2)\)</span>. Karena tie berpeluang nol,
+<span class="math-inline" role="math">\(U_{(4)}&gt;1/2\)</span> iff <span class="math-inline" role="math">\(K\le3\)</span>, sehingga</p>
+<div class="math-display" role="math">\[P(U_{(4)}&gt;1/2)=\sum_{j=0}^{3}\binom{10}{j}(1/2)^{10}
+=\frac{1+10+45+120}{1024}=\frac{176}{1024}=\frac{11}{64}.\]</div>
+<p>Nilai rataan <span class="math-inline" role="math">\(4/11\)</span> berbeda dari <span class="math-inline" role="math">\(4/10\)</span> karena urutan mempunyai koreksi
+endpoint yang ditentukan oleh ukuran sampel dan posisi rank. Distribusi Beta
+menyediakan momen eksak, sedangkan pendekatan Normal harus memeriksa apakah
+rank berada cukup jauh dari batas.</p>
+<p><a id="O006-C140-CMP-MS01-P04"></a></p>
+<h2>Masalah 4 — median sampel hingga dan limitnya</h2>
+<!--PROBLEM_META {"id":"O006-C140-CMP-MS01-P04","prerequisites":["B95","O006-PSU-002"],"objective":"membandingkan distribusi eksak median Uniform dengan limit asimtotiknya","difficulty":"menengah","misconceptions":["menyamakan varians hingga dengan varians limit berskala akar n","menganggap median selalu Normal tepat"]}-->
+<p>Ambil sembilan observasi iid Uniform<span class="math-inline" role="math">\((0,1)\)</span> dan median <span class="math-inline" role="math">\(T=U_{(5)}\)</span>.</p>
+<ol>
+<li>Hitung <span class="math-inline" role="math">\(E[T]\)</span> dan Var<span class="math-inline" role="math">\((T)\)</span> secara eksak.</li>
+<li>Nyatakan limit distribusi <span class="math-inline" role="math">\(\sqrt n(\widetilde U_n-1/2)\)</span> untuk median sampel
+dari populasi dengan densitas <span class="math-inline" role="math">\(f(1/2)&gt;0\)</span>.</li>
+<li>Bandingkan varians limit untuk Uniform dengan varians hingga pada <span class="math-inline" role="math">\(n=9\)</span>.</li>
+</ol>
+<p><a id="O006-C140-CMP-MS01-P04-H01"></a></p>
+<h3>Petunjuk 1</h3>
+<p>Median kesembilan adalah Beta<span class="math-inline" role="math">\((5,5)\)</span>. Gunakan rumus momen Beta dan
+<span class="math-inline" role="math">\(\operatorname{Var}(\sqrt n(T-m))=n\operatorname{Var}(T)\)</span> hanya sebagai
+perbandingan, bukan identitas limit.</p>
+<p><a id="O006-C140-CMP-MS01-P04-H02"></a></p>
+<h3>Petunjuk 2</h3>
+<p>Limit median mempunyai varians <span class="math-inline" role="math">\(1/[4f(m)^2]\)</span>. Untuk Uniform pada median,
+<span class="math-inline" role="math">\(f(m)=1\)</span>.</p>
+<p><a id="O006-C140-CMP-MS01-P04-ANS"></a></p>
+<h3>Jawaban singkat</h3>
+<p><span class="math-inline" role="math">\(T\sim\operatorname{Beta}(5,5)\)</span>, jadi <span class="math-inline" role="math">\(E[T]=1/2\)</span> dan
+<span class="math-inline" role="math">\(\operatorname{Var}(T)=25/(10^2\cdot11)=1/44\)</span>. Untuk Uniform,
+<span class="math-inline" role="math">\(\sqrt n(T-1/2)\Rightarrow N(0,1/4)\)</span>; varians limit ini tidak sama dengan
+varians hingga <span class="math-inline" role="math">\(1/44\)</span> sebelum penskalaan.</p>
+<p><a id="O006-C140-CMP-MS01-P04-SOL"></a></p>
+<h3>Solusi lengkap</h3>
+<p>Rumus urutan Uniform memberi $U_{(5)}\sim\operatorname{Beta}(5,9-5+1)
+=\operatorname{Beta}(5,5)$. Karena parameter sama,</p>
+<div class="math-display" role="math">\[E[T]=\frac5{10}=\frac12,
+\qquad
+\operatorname{Var}(T)=\frac{5\cdot5}{10^2(11)}=\frac1{44}.\]</div>
+<p>Untuk median sampel dari distribusi kontinu dengan median populasi <span class="math-inline" role="math">\(m\)</span> dan
+densitas positif <span class="math-inline" role="math">\(f(m)\)</span>, teori kuantil memberi</p>
+<div class="math-display" role="math">\[\sqrt n(\widetilde U_n-m)\Rightarrow
+N\left(0,\frac{1}{4f(m)^2}\right).\]</div>
+<p>Pada Uniform<span class="math-inline" role="math">\((0,1)\)</span>, <span class="math-inline" role="math">\(m=1/2\)</span> dan <span class="math-inline" role="math">\(f(m)=1\)</span>, sehingga varians limit adalah
+<span class="math-inline" role="math">\(1/4\)</span>. Jika seseorang ingin membandingkan skala pada <span class="math-inline" role="math">\(n=9\)</span>, varians dari
+<span class="math-inline" role="math">\(\sqrt9(T-1/2)\)</span> yang dihitung dari distribusi tepat ialah <span class="math-inline" role="math">\(9/44\)</span>; angka ini
+belum harus sama dengan <span class="math-inline" role="math">\(1/4\)</span> karena konvergensi distribusi tidak menjamin
+kesamaan momen pada ukuran sampel kecil. Median tepat Beta<span class="math-inline" role="math">\((5,5)\)</span> juga tidak
+Normal tepat, meskipun bentuknya simetris dan dapat didekati Normal ketika
+<span class="math-inline" role="math">\(n\)</span> membesar.</p>
+<p><a id="O006-C140-CMP-MS01-P05"></a></p>
+<h2>Masalah 5 — selang kuantil dari dua statistik urutan</h2>
+<!--PROBLEM_META {"id":"O006-C140-CMP-MS01-P05","prerequisites":["B95"],"objective":"membangun peluang cakupan eksak untuk kuantil populasi menggunakan hitungan Binomial","difficulty":"menengah","misconceptions":["menganggap rank yang dipilih selalu memberi cakupan nominal tepat","salah membalik ketaksamaan urutan"]}-->
+<p>Misalkan <span class="math-inline" role="math">\(q=F^{-1}(0{,}25)\)</span> adalah kuantil populasi pertama dan
+<span class="math-inline" role="math">\(X_1,\ldots,X_{20}\)</span> iid dari distribusi kontinu. Gunakan selang berbasis
+urutan <span class="math-inline" role="math">\([X_{(5)},X_{(15)}]\)</span>.</p>
+<ol>
+<li>Tulis peluang cakupan <span class="math-inline" role="math">\(P(X_{(5)}\le q\le X_{(15)})\)</span> sebagai jumlah Binomial.</li>
+<li>Identifikasi distribusi hitungan yang dipakai dan jelaskan batas indeksnya.</li>
+<li>Apakah selang itu otomatis mempunyai cakupan tepat 95%? Jelaskan bagaimana
+memilih rank lain bila target nominal tertentu diperlukan.</li>
+</ol>
+<p><a id="O006-C140-CMP-MS01-P05-H01"></a></p>
+<h3>Petunjuk 1</h3>
+<p>Definisikan <span class="math-inline" role="math">\(K=\#\{i:X_i\le q\}\)</span>. Karena <span class="math-inline" role="math">\(F(q)=0{,}25\)</span> dan distribusi kontinu,
+<span class="math-inline" role="math">\(K\sim\operatorname{Binomial}(20,0{,}25)\)</span>.</p>
+<p><a id="O006-C140-CMP-MS01-P05-H02"></a></p>
+<h3>Petunjuk 2</h3>
+<p><span class="math-inline" role="math">\(X_{(5)}\le q\)</span> memerlukan <span class="math-inline" role="math">\(K\ge5\)</span>, sedangkan <span class="math-inline" role="math">\(q\le X_{(15)}\)</span>
+memerlukan <span class="math-inline" role="math">\(K\le14\)</span>. Jumlahkan peluang <span class="math-inline" role="math">\(K=5,\ldots,14\)</span>.</p>
+<p><a id="O006-C140-CMP-MS01-P05-ANS"></a></p>
+<h3>Jawaban singkat</h3>
+<div class="math-display" role="math">\[P(X_{(5)}\le q\le X_{(15)})
+=\sum_{k=5}^{14}\binom{20}{k}(0{,}25)^k(0{,}75)^{20-k}.\]</div>
+<p>Hitungan <span class="math-inline" role="math">\(K\)</span> adalah Binomial<span class="math-inline" role="math">\((20,0{,}25)\)</span>. Nilai jumlah tersebut ditentukan
+oleh diskretisasi rank dan umumnya tidak tepat 0,95; rank dapat dicari dengan
+mengevaluasi beberapa pasangan batas dan memilih cakupan yang memenuhi target.</p>
+<p><a id="O006-C140-CMP-MS01-P05-SOL"></a></p>
+<h3>Solusi lengkap</h3>
+<p>Karena <span class="math-inline" role="math">\(q\)</span> adalah kuantil 0,25, setiap indikator
+<span class="math-inline" role="math">\(I_i=\mathbf1\{X_i\le q\}\)</span> mempunyai peluang 0,25. Independensi memberi</p>
+<div class="math-display" role="math">\[K=\sum_{i=1}^{20}I_i\sim\operatorname{Binomial}(20,0{,}25).\]</div>
+<p>Peristiwa <span class="math-inline" role="math">\(X_{(5)}\le q\)</span> berarti setidaknya lima observasi berada di kiri
+<span class="math-inline" role="math">\(q\)</span>, yaitu <span class="math-inline" role="math">\(K\ge5\)</span>. Peristiwa <span class="math-inline" role="math">\(q\le X_{(15)}\)</span> berarti paling banyak empat
+belas observasi berada di kiri <span class="math-inline" role="math">\(q\)</span>; jika lima belas atau lebih berada di kiri,
+urutan ke-15 juga berada di kiri dan batas atas gagal. Jadi cakupan gabungan
+adalah <span class="math-inline" role="math">\(5\le K\le14\)</span> dan</p>
+<div class="math-display" role="math">\[C=\sum_{k=5}^{14}\binom{20}{k}(0{,}25)^k(0{,}75)^{20-k}.\]</div>
+<p>Karena <span class="math-inline" role="math">\(K\)</span> diskret, <span class="math-inline" role="math">\(C\)</span> hanya mengambil sekumpulan nilai tertentu. Tidak ada
+alasan jumlah tersebut tepat 0,95; ia bisa konservatif atau berada di bawah
+target. Untuk membangun selang dengan cakupan sekurangnya target <span class="math-inline" role="math">\(1-\alpha\)</span>,
+pilih pasangan rank <span class="math-inline" role="math">\((r,s)\)</span> sehingga peluang Binomial
+<span class="math-inline" role="math">\(P(r\le K\le s-1)\)</span> paling sedikit <span class="math-inline" role="math">\(1-\alpha\)</span>, lalu laporkan diskretisasi dan
+panjang selangnya. Ketaksamaan ini mengandalkan kontinuitas; pada populasi
+dengan tie, aturan kuantil dan peluang batas harus dinyatakan terpisah.</p>
+<p><a id="O006-C140-CMP-MS01-P06"></a></p>
+<h2>Masalah 6 — spacing Uniform dan jarak maksimum</h2>
+<!--PROBLEM_META {"id":"O006-C140-CMP-MS01-P06","prerequisites":["B95"],"objective":"menurunkan distribusi bersama spacing dan memakai simetri untuk peluang jarak maksimum","difficulty":"menengah","misconceptions":["menganggap spacing independen","menghitung empat kejadian besar yang dapat beririsan tanpa memeriksa disjointness"]}-->
+<p>Untuk tiga observasi iid Uniform<span class="math-inline" role="math">\((0,1)\)</span>, definisikan empat spacing</p>
+<div class="math-display" role="math">\[D_0=U_{(1)},\quad D_1=U_{(2)}-U_{(1)},\quad
+D_2=U_{(3)}-U_{(2)},\quad D_3=1-U_{(3)}.\]</div>
+<ol>
+<li>Tentukan dukungan dan densitas bersama <span class="math-inline" role="math">\((D_0,D_1,D_2,D_3)\)</span> dengan kendala
+jumlahnya satu.</li>
+<li>Hitung <span class="math-inline" role="math">\(E[D_j]\)</span> untuk setiap <span class="math-inline" role="math">\(j\)</span>.</li>
+<li>Hitung <span class="math-inline" role="math">\(P(\max_jD_j&gt;1/2)\)</span>.</li>
+</ol>
+<p><a id="O006-C140-CMP-MS01-P06-H01"></a></p>
+<h3>Petunjuk 1</h3>
+<p>Transformasi dari <span class="math-inline" role="math">\((U_{(1)},U_{(2)},U_{(3)})\)</span> mempunyai Jacobian mutlak satu.
+Densitas urutan bersama adalah <span class="math-inline" role="math">\(3!=6\)</span> pada simpleks.</p>
+<p><a id="O006-C140-CMP-MS01-P06-H02"></a></p>
+<h3>Petunjuk 2</h3>
+<p>Distribusi spacing adalah Dirichlet<span class="math-inline" role="math">\((1,1,1,1)\)</span>, sehingga semua rataan sama.
+Dua spacing berbeda tidak dapat sekaligus melebihi <span class="math-inline" role="math">\(1/2\)</span> kecuali pada batas
+berpeluang nol.</p>
+<p><a id="O006-C140-CMP-MS01-P06-ANS"></a></p>
+<h3>Jawaban singkat</h3>
+<p>Densitas bersama konstan 6 pada <span class="math-inline" role="math">\(d_j\ge0\)</span> dan <span class="math-inline" role="math">\(\sum_{j=0}^3d_j=1\)</span>;
+spacing berdistribusi Dirichlet<span class="math-inline" role="math">\((1,1,1,1)\)</span> dan <span class="math-inline" role="math">\(E[D_j]=1/4\)</span>. Kejadian
+<span class="math-inline" role="math">\(D_j&gt;1/2\)</span> saling lepas, masing-masing berpeluang <span class="math-inline" role="math">\((1/2)^3\)</span>, sehingga
+<span class="math-inline" role="math">\(P(\max D_j&gt;1/2)=4/8=1/2\)</span>.</p>
+<p><a id="O006-C140-CMP-MS01-P06-SOL"></a></p>
+<h3>Solusi lengkap</h3>
+<p>Urutan tiga titik mempunyai densitas <span class="math-inline" role="math">\(3!=6\)</span> pada
+<span class="math-inline" role="math">\(0&lt;u_1&lt;u_2&lt;u_3&lt;1\)</span>. Transformasi linear ke empat spacing memiliki Jacobian
+mutlak satu dan memetakan daerah itu ke simpleks
+<span class="math-inline" role="math">\(d_j\ge0,\ d_0+d_1+d_2+d_3=1\)</span>. Jadi hukum spacing adalah Dirichlet dengan
+empat parameter satu; bentuk densitas terhadap tiga koordinat bebas adalah
+konstan 6 pada simpleks tersebut.</p>
+<p>Simetri Dirichlet membuat semua spacing mempunyai rataan sama. Karena jumlah
+empatnya satu,</p>
+<div class="math-display" role="math">\[E[D_0]=E[D_1]=E[D_2]=E[D_3]=\frac14.\]</div>
+<p>Untuk suatu spacing, misalnya <span class="math-inline" role="math">\(D_0\)</span>, marginalnya Beta<span class="math-inline" role="math">\((1,3)\)</span>, sehingga
+<span class="math-inline" role="math">\(P(D_0&gt;1/2)=(1-1/2)^3=1/8\)</span>. Jika dua spacing masing-masing lebih dari
+<span class="math-inline" role="math">\(1/2\)</span>, jumlahnya sudah lebih dari satu; karena itu empat kejadian tersebut
+saling lepas (irisan batas mempunyai probabilitas nol). Dengan inklusi
+sederhana,</p>
+<div class="math-display" role="math">\[P(\max_jD_j&gt;1/2)=4\cdot\frac18=\frac12.\]</div>
+<p>Spacing tidak independen karena jumlahnya dipatok satu. Ketergantungan ini
+harus dipertahankan ketika spacing digunakan untuk goodness-of-fit atau
+deteksi celah ekstrem.</p>
+<p><a id="O006-C140-CMP-MS01-P07"></a></p>
+<h2>Masalah 7 — spacing urutan eksponensial</h2>
+<!--PROBLEM_META {"id":"O006-C140-CMP-MS01-P07","prerequisites":["B95"],"objective":"menggunakan sifat tanpa ingatan untuk memperoleh distribusi dan momen urutan eksponensial","difficulty":"menengah","misconceptions":["mengira semua selisih urutan mempunyai laju yang sama","menganggap urutan kedua adalah jumlah dua peubah eksponensial berparameter lambda"]}-->
+<p>Misalkan <span class="math-inline" role="math">\(X_1,\ldots,X_4\)</span> iid Exponential<span class="math-inline" role="math">\((\lambda)\)</span> dan tulis
+<span class="math-inline" role="math">\(X_{(1)}&lt;\cdots&lt;X_{(4)}\)</span>. Definisikan
+<span class="math-inline" role="math">\(W_1=X_{(1)}\)</span>, <span class="math-inline" role="math">\(W_2=X_{(2)}-X_{(1)}\)</span>.</p>
+<ol>
+<li>Tentukan distribusi dan independensi <span class="math-inline" role="math">\(W_1,W_2\)</span>.</li>
+<li>Hitung <span class="math-inline" role="math">\(E[X_{(2)}]\)</span> dan Var<span class="math-inline" role="math">\((X_{(2)})\)</span>.</li>
+<li>Jelaskan secara singkat mengapa laju berubah setelah setiap kedatangan.</li>
+</ol>
+<p><a id="O006-C140-CMP-MS01-P07-H01"></a></p>
+<h3>Petunjuk 1</h3>
+<p>Minimum empat eksponensial mempunyai laju <span class="math-inline" role="math">\(4\lambda\)</span>. Setelah minimum
+terjadi, tiga peubah tersisa masih menunggu dengan laju total <span class="math-inline" role="math">\(3\lambda\)</span>.</p>
+<p><a id="O006-C140-CMP-MS01-P07-H02"></a></p>
+<h3>Petunjuk 2</h3>
+<p>Sifat tanpa ingatan menghasilkan independensi antarwaktu tunggu berturut-turut.
+Jumlahkan dua eksponensial independen untuk memperoleh momen urutan kedua.</p>
+<p><a id="O006-C140-CMP-MS01-P07-ANS"></a></p>
+<h3>Jawaban singkat</h3>
+<p><span class="math-inline" role="math">\(W_1\sim\operatorname{Exponential}(4\lambda)\)</span> dan
+<span class="math-inline" role="math">\(W_2\sim\operatorname{Exponential}(3\lambda)\)</span> secara independen.
+Karena <span class="math-inline" role="math">\(X_{(2)}=W_1+W_2\)</span>,
+<span class="math-inline" role="math">\(E[X_{(2)}]=7/(12\lambda)\)</span> dan
+<span class="math-inline" role="math">\(\operatorname{Var}(X_{(2)})=25/(144\lambda^2)\)</span>.</p>
+<p><a id="O006-C140-CMP-MS01-P07-SOL"></a></p>
+<h3>Solusi lengkap</h3>
+<p>Peluang tidak ada kegagalan sebelum waktu <span class="math-inline" role="math">\(t\)</span> untuk empat peubah adalah
+<span class="math-inline" role="math">\(e^{-4\lambda t}\)</span>, sehingga minimum mempunyai laju <span class="math-inline" role="math">\(4\lambda\)</span>. Setelah
+peubah pertama mencapai minimum, tiga peubah yang tersisa memiliki sisa waktu
+tunggu eksponensial yang independen dari masa lalu, masing-masing berlaju
+<span class="math-inline" role="math">\(\lambda\)</span>. Minimum baru karena itu berlaju <span class="math-inline" role="math">\(3\lambda\)</span>. Sifat tanpa ingatan
+juga memberi independensi <span class="math-inline" role="math">\(W_1\)</span> dan <span class="math-inline" role="math">\(W_2\)</span>.</p>
+<p>Untuk peubah Exponential<span class="math-inline" role="math">\((r)\)</span>, rataan <span class="math-inline" role="math">\(1/r\)</span> dan varians <span class="math-inline" role="math">\(1/r^2\)</span>. Maka</p>
+<div class="math-display" role="math">\[E[X_{(2)}]=E[W_1]+E[W_2]
+=\frac1{4\lambda}+\frac1{3\lambda}=\frac7{12\lambda},\]</div>
+<p>dan, karena independen,</p>
+<div class="math-display" role="math">\[\operatorname{Var}(X_{(2)})
+=\frac1{(4\lambda)^2}+\frac1{(3\lambda)^2}
+=\frac{9+16}{144\lambda^2}=\frac{25}{144\lambda^2}.\]</div>
+<p>Setiap kedatangan mengurangi jumlah proses yang masih menunggu, sehingga laju
+minimum berikutnya turun dari <span class="math-inline" role="math">\(4\lambda\)</span> ke <span class="math-inline" role="math">\(3\lambda\)</span>, lalu ke <span class="math-inline" role="math">\(2\lambda\)</span>.
+Menggunakan satu laju <span class="math-inline" role="math">\(\lambda\)</span> untuk semua spacing akan mengabaikan struktur
+risiko yang berubah itu.</p>
+<p><a id="O006-C140-CMP-MS01-P08"></a></p>
+<h2>Masalah 8 — endpoint Uniform: MLE, bias, dan batas kepercayaan</h2>
+<!--PROBLEM_META {"id":"O006-C140-CMP-MS01-P08","prerequisites":["B95","O006-PSU-002"],"objective":"menganalisis maksimum sebagai MLE endpoint dan membangun batas kepercayaan eksak","difficulty":"lanjut","misconceptions":["menganggap MLE endpoint tidak bias karena konsisten","membalik cakupan batas bawah dan batas atas"]}-->
+<p>Misalkan <span class="math-inline" role="math">\(X_1,\ldots,X_n\)</span> iid Uniform<span class="math-inline" role="math">\((0,\theta)\)</span> dengan <span class="math-inline" role="math">\(\theta&gt;0\)</span> dan
+<span class="math-inline" role="math">\(M=X_{(n)}\)</span>.</p>
+<ol>
+<li>Turunkan CDF <span class="math-inline" role="math">\(M\)</span>, likelihood, dan MLE <span class="math-inline" role="math">\(\widehat\theta\)</span>.</li>
+<li>Hitung bias dan MSE <span class="math-inline" role="math">\(M\)</span>, lalu tunjukkan bahwa
+<span class="math-inline" role="math">\(\widetilde\theta=(n+1)M/n\)</span> tak bias.</li>
+<li>Bentuk batas bawah kepercayaan satu sisi tingkat <span class="math-inline" role="math">\(1-\alpha\)</span> untuk <span class="math-inline" role="math">\(\theta\)</span>
+dari <span class="math-inline" role="math">\(M\)</span> dan buktikan cakupannya.</li>
+</ol>
+<p><a id="O006-C140-CMP-MS01-P08-H01"></a></p>
+<h3>Petunjuk 1</h3>
+<p><span class="math-inline" role="math">\(P(M\le m)=(m/\theta)^n\)</span> untuk <span class="math-inline" role="math">\(0&lt;m&lt;\theta\)</span>, sedangkan likelihood nol bila
+<span class="math-inline" role="math">\(\theta&lt;m\)</span>. Maksimum terjadi pada endpoint terkecil yang diizinkan.</p>
+<p><a id="O006-C140-CMP-MS01-P08-H02"></a></p>
+<h3>Petunjuk 2</h3>
+<p>Momen maksimum Uniform adalah <span class="math-inline" role="math">\(E[M]=n\theta/(n+1)\)</span> dan
+<span class="math-inline" role="math">\(\operatorname{Var}(M)=n\theta^2/[(n+1)^2(n+2)]\)</span>. Untuk batas bawah tingkat
+<span class="math-inline" role="math">\(1-\alpha\)</span>, pilih <span class="math-inline" role="math">\(L=M/(1-\alpha)^{1/n}\)</span> dan hitung
+<span class="math-inline" role="math">\(P_\theta(L\le\theta)\)</span>.</p>
+<p><a id="O006-C140-CMP-MS01-P08-ANS"></a></p>
+<h3>Jawaban singkat</h3>
+<p><span class="math-inline" role="math">\(F_M(m)=(m/\theta)^n\)</span> pada <span class="math-inline" role="math">\(0&lt;m&lt;\theta\)</span> dan MLE adalah <span class="math-inline" role="math">\(M\)</span>. Biasnya
+<span class="math-inline" role="math">\(-\theta/(n+1)\)</span>, MSE-nya <span class="math-inline" role="math">\(2\theta^2/[(n+1)(n+2)]\)</span>, dan
+<span class="math-inline" role="math">\(\widetilde\theta=(n+1)M/n\)</span> tak bias. Batas bawah
+<span class="math-inline" role="math">\(L=M/(1-\alpha)^{1/n}\)</span> memenuhi <span class="math-inline" role="math">\(P_\theta(L\le\theta)=1-\alpha\)</span>.</p>
+<p><a id="O006-C140-CMP-MS01-P08-SOL"></a></p>
+<h3>Solusi lengkap</h3>
+<p>Karena semua observasi harus berada di <span class="math-inline" role="math">\((0,\theta)\)</span>,</p>
+<div class="math-display" role="math">\[F_M(m)=P(X_1\le m,\ldots,X_n\le m)=\left(\frac m\theta\right)^n,
+\quad 0&lt;m&lt;\theta.\]</div>
+<p>Likelihood sebagai fungsi <span class="math-inline" role="math">\(\theta\)</span> adalah
+<span class="math-inline" role="math">\(L(\theta;x)=\theta^{-n}\mathbf1\{\theta\ge m\}\)</span>, dengan <span class="math-inline" role="math">\(m\)</span> nilai maksimum
+teramati. Pada daerah yang diizinkan, <span class="math-inline" role="math">\(\theta^{-n}\)</span> menurun terhadap
+<span class="math-inline" role="math">\(\theta\)</span>, sehingga MLE adalah <span class="math-inline" role="math">\(\widehat\theta=M\)</span>.</p>
+<p>Momen maksimum memberi</p>
+<div class="math-display" role="math">\[E[M]=\frac{n}{n+1}\theta,
+\qquad
+\operatorname{Var}(M)=\frac{n\theta^2}{(n+1)^2(n+2)}.\]</div>
+<p>Bias M adalah <span class="math-inline" role="math">\(-\theta/(n+1)\)</span>. Menambahkan kuadrat bias ke varians menghasilkan</p>
+<div class="math-display" role="math">\[\operatorname{MSE}(M)=\frac{n\theta^2}{(n+1)^2(n+2)}
++\frac{\theta^2}{(n+1)^2}
+=\frac{2\theta^2}{(n+1)(n+2)}.\]</div>
+<p>Pengali <span class="math-inline" role="math">\((n+1)/n\)</span> menghapus bias:
+<span class="math-inline" role="math">\(E[(n+1)M/n]=\theta\)</span>.</p>
+<p>Untuk batas bawah tingkat <span class="math-inline" role="math">\(1-\alpha\)</span>, tetapkan
+<span class="math-inline" role="math">\(L=M/(1-\alpha)^{1/n}\)</span>. Karena <span class="math-inline" role="math">\(M/\theta\)</span> mempunyai CDF <span class="math-inline" role="math">\(t^n\)</span> pada
+<span class="math-inline" role="math">\(0&lt;t&lt;1\)</span>,</p>
+<div class="math-display" role="math">\[P_\theta(L\le\theta)
+=P_\theta\left(M\le\theta(1-\alpha)^{1/n}\right)
+=\left((1-\alpha)^{1/n}\right)^n=1-\alpha.\]</div>
+<p>Ini menghitung peluang batas berada di bawah parameter. Jadi cakupan interval
+tak hingga <span class="math-inline" role="math">\([L,\infty)\)</span> adalah <span class="math-inline" role="math">\(1-\alpha\)</span>. MLE konsisten saat <span class="math-inline" role="math">\(n\)</span> tumbuh,
+namun tetap bias pada setiap <span class="math-inline" role="math">\(n\)</span> hingga; konsistensi dan ketakbiasan adalah
+sifat yang berbeda.</p>
+<p><a id="O006-C140-CMP-MS01-SEC-CHECK"></a></p>
+<h2>Checklist kelulusan</h2>
+<p>Anda lulus bila dapat berpindah antara CDF Binomial, densitas Beta, spacing
+Dirichlet, dan transformasi endpoint tanpa kehilangan domain atau faktor
+kominatorik. Audit selalu arah ketaksamaan saat mengubah peluang order menjadi
+cakupan parameter.</p>
+
+<footer class="license">Materi pendamping orisinal berlisensi CC BY-SA 4.0. Komponen Penn State dan Random tetap berada di bawah lisensinya masing-masing dan tidak direlisensikan oleh halaman ini.</footer>
+</main>
+</div>
+</body>
+</html>

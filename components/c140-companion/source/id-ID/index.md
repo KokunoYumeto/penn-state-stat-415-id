@@ -43,6 +43,17 @@ SVG statis, serta assertion numerik. Tidak ada runtime jaringan atau browser.
 <a id="O006-C140-CMP-INDEX-SEC004"></a>
 ## Latihan penguasaan dan asesmen
 
+- [ref:O006-C140-CMP-MS00] mendiagnosis probabilitas, distribusi, dan
+  ekspektasi yang diperlukan sebelum inferensi;
+- [ref:O006-C140-CMP-MS01] menurunkan distribusi statistik urutan dan
+  inferensi kuantil;
+- [ref:O006-C140-CMP-MS02] menguji bias, MSE, dan sifat estimator;
+- [ref:O006-C140-CMP-MS03] menguji kecukupan, faktorisasi, dan kelengkapan;
+- [ref:O006-C140-CMP-MS04] menguji method of moments dan likelihood;
+- [ref:O006-C140-CMP-MS05] menguji informasi Fisher, interval, bootstrap, dan
+  delta method;
+- [ref:O006-C140-CMP-MS06] menguji pengujian eksak, power, *p*-value, dan
+  jembatan Wald/score/LR;
 - [ref:O006-C140-CMP-MS07]
 - [ref:O006-C140-CMP-MS08]
 - [ref:O006-C140-CMP-MS09]
@@ -97,3 +108,8 @@ yang tersisa, tiga asesmen kumulatif, dan dua capstone selesai.
 C3 menutup batas teori perbandingan Bayesian–frequentist yang ditetapkan untuk
 pendamping, tetapi bukan keseluruhan C140. Set penguasaan, asesmen kumulatif,
 dan capstone yang belum dijadwalkan tetap mengikuti kontrol hidup.
+
+Set penguasaan `MS00`–`MS06` membentuk batch C4 untuk menutup latihan mandiri
+yang sebelumnya belum tersedia. Batch ini tidak mengubah teks Penn State;
+masing-masing dokumen adalah karya pendamping orisinal dengan delapan soal
+bersolusi penuh dan ID backend yang dapat dipindahkan lintas bahasa.

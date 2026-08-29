@@ -2,6 +2,30 @@
 
 Updated: 2026-08-29
 
+Current live boundary: cumulative C4 is locally complete. Exact scope is
+`D001`–`D013`, `SIM001`–`SIM006`, `MS00`–`MS12`, `CA01`, and the index: 34
+documents, 64 HTML files, 1,113 backend entities, 1,424 relations, six
+simulations, and 114 fully solved problems. Build/QA receipt SHA-256 values are
+`c21aecda780cf8e56eb82a41d19b9b0a112e81caf583f38041a5d9fd4ffc0ac1`
+and `dfadcc6338ad44d9dadd13fa2f7ef19d9b9e19e428f25f3fe7607852bfa8e2e7`.
+Static write/check replay passes without browser or network use. Full local
+checkpoint: `CHECKPOINT_2026-08-29_C4_LOCAL_COMPLETE.md`.
+
+The cumulative preservation package now passes deterministic replay and
+independent audit at 57 files / 93,850,993 bytes, inheriting all 49 C3 files
+byte-identically and appending eight C4 files. Package receipt SHA-256 is
+`45c0fceb27af175689e5ee8ac92271d395a41cdf96c32621eacf8d60a8222f7f`.
+The Pages candidate passes at 188 files / 22,437,587 bytes; manifest and
+receipt SHA-256 values are
+`fdd057c53c7bb0a092d8ee3499b9116b9219463034c0426b5373687ba9200f90`
+and `ef92d1871a85336890fc48798ad50d170d4de18505cc5ee8c441621fa2473d31`.
+
+Next executable action: commit/push this audited boundary; publish it to the
+existing GitHub release and Zenodo concept lineages; anonymously verify
+filenames, byte counts, and SHA-256 identities; persist sanitized receipts.
+Then author `CA02`–`CA04` and both capstones. Do not reopen C1–C3 without a
+proved defect.
+
 Current live boundary: cumulative C3 is publicly complete. Exact scope is
 `D001`–`D013`, `SIM001`–`SIM006`, `MS07`–`MS12`, `CA01`, and the index: 27
 documents, 57 HTML files, 812 backend entities, 1,084 relations, six

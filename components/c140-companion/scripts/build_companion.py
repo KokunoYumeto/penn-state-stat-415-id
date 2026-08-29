@@ -38,6 +38,7 @@ SIMULATION_RECEIPTS = {
 HTML_TARGET = ROOT / "build" / "html-id"
 BACKEND_TARGET = ROOT / "backend"
 RECEIPT_TARGET = ROOT / "build" / "C3_BUILD_RECEIPT.json"
+ACTIVE_BOUNDARY = "c3"
 MATHJAX_SOURCE = REPO / "build" / "html-id" / "assets" / "MathJax"
 MATHJAX_LICENSE = REPO / "build" / "html-id" / "licenses" / "MathJax-3.1.2-LICENSE.txt"
 
@@ -71,6 +72,9 @@ REQUIRED_CUMULATIVE_C3 = REQUIRED_CUMULATIVE_C2 | {
     "O006-C140-CMP-SIM006",
     "O006-C140-CMP-MS11",
 }
+REQUIRED_CUMULATIVE_C4 = REQUIRED_CUMULATIVE_C3 | {
+    *(f"O006-C140-CMP-MS{i:02d}" for i in range(0, 7)),
+}
 ANCHOR_RE = re.compile(r'<a\s+id="([A-Za-z0-9._:-]+)"\s*></a>')
 REF_RE = re.compile(r"\[ref:([A-Za-z0-9._:-]+)\]")
 HEADING_RE = re.compile(r"^(#{1,6})\s+(.+?)\s*$", re.MULTILINE)
@@ -82,6 +86,14 @@ DOLLAR_INLINE_RE = re.compile(r"(?<!\\)\$(?!\$)(.+?)(?<!\\)\$(?!\$)")
 
 def sha256(payload: bytes) -> str:
     return hashlib.sha256(payload).hexdigest()
+
+
+def active_required_ids() -> set[str]:
+    return REQUIRED_CUMULATIVE_C4 if ACTIVE_BOUNDARY == "c4" else REQUIRED_CUMULATIVE_C3
+
+
+def active_receipt_name() -> str:
+    return "C4_BUILD_RECEIPT.json" if ACTIVE_BOUNDARY == "c4" else "C3_BUILD_RECEIPT.json"
 
 
 def canonical_json(value: object) -> bytes:
@@ -190,12 +202,13 @@ def load_documents() -> list[Document]:
     ids = [str(item.metadata["id"]) for item in documents]
     if len(ids) != len(set(ids)):
         raise RuntimeError("Duplicate document ID")
-    missing = sorted(REQUIRED_CUMULATIVE_C3 - set(ids))
+    required_ids = active_required_ids()
+    missing = sorted(required_ids - set(ids))
     if missing:
-        raise RuntimeError(f"Cumulative C3 source boundary incomplete; missing {missing}")
-    unexpected = sorted(set(ids) - REQUIRED_CUMULATIVE_C3)
+        raise RuntimeError(f"Cumulative {ACTIVE_BOUNDARY.upper()} source boundary incomplete; missing {missing}")
+    unexpected = sorted(set(ids) - required_ids)
     if unexpected:
-        raise RuntimeError(f"Cumulative C3 source boundary has unexpected documents {unexpected}")
+        raise RuntimeError(f"Cumulative {ACTIVE_BOUNDARY.upper()} source boundary has unexpected documents {unexpected}")
     all_anchors = [anchor for item in documents for anchor in item.anchors]
     duplicates = sorted({anchor for anchor in all_anchors if all_anchors.count(anchor) > 1})
     if duplicates:
@@ -596,16 +609,16 @@ def build_payloads(documents: list[Document]) -> tuple[dict[str, bytes], dict[st
             "relations": len(relation_rows),
         },
         "browser_processes_used": False,
-        "boundary": "cumulative-through-c3",
+        "boundary": f"cumulative-through-{ACTIVE_BOUNDARY}",
         "cumulative_documents": len(documents),
-        "cumulative_required_ids": sorted(REQUIRED_CUMULATIVE_C3),
+        "cumulative_required_ids": sorted(active_required_ids()),
         "html": {
             "bytes": sum(len(value) for value in html_payloads.values()),
             "files": len(html_payloads),
             "manifest_sha256": sha256(html_payloads["MANIFEST.csv"]),
         },
         "network_access": False,
-        "schema": "o006.c140.companion-cumulative-c3-build.v1",
+        "schema": f"o006.c140.companion-cumulative-{ACTIVE_BOUNDARY}-build.v1",
         "simulation_receipts": [
             {
                 "batch": batch,
@@ -643,11 +656,17 @@ def compare_payloads(target: Path, payloads: dict[str, bytes]) -> list[str]:
 
 
 def main() -> None:
+    global ACTIVE_BOUNDARY, RECEIPT_TARGET
     parser = argparse.ArgumentParser()
     mode = parser.add_mutually_exclusive_group(required=True)
     mode.add_argument("--write", action="store_true")
     mode.add_argument("--check-only", action="store_true")
+    parser.add_argument("--c4", action="store_true", help="build the cumulative MS00-MS06 boundary")
     args = parser.parse_args()
+
+    if args.c4:
+        ACTIVE_BOUNDARY = "c4"
+        RECEIPT_TARGET = ROOT / "build" / active_receipt_name()
 
     documents = load_documents()
     html_payloads, backend_payloads, receipt = build_payloads(documents)
@@ -661,9 +680,9 @@ def main() -> None:
         errors = compare_payloads(HTML_TARGET, html_payloads)
         errors.extend(f"backend/{item}" for item in compare_payloads(BACKEND_TARGET, backend_payloads))
         if not RECEIPT_TARGET.is_file():
-            errors.append("missing:C3_BUILD_RECEIPT.json")
+            errors.append(f"missing:{active_receipt_name()}")
         elif RECEIPT_TARGET.read_bytes() != receipt:
-            errors.append("mismatch:C3_BUILD_RECEIPT.json")
+            errors.append(f"mismatch:{active_receipt_name()}")
         if errors:
             raise RuntimeError("Deterministic replay failed: " + ", ".join(errors[:40]))
         mode_name = "verified"
