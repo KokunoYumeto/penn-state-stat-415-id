@@ -25,6 +25,9 @@ engine = c2fix.engine
 ROOT = Path(__file__).resolve().parents[1]
 PACKAGE_RELATIVE = "build/C140_COMPANION_C3_RELEASE_PACKAGE_RECEIPT.json"
 PACKAGE_RECEIPT = ROOT / PACKAGE_RELATIVE
+TOKEN_FILE = (
+    Path.home() / "Documents" / "Obsidian notes" / "Github Tokens.md"
+)
 PRIOR_RECEIPT_RELATIVE = (
     "00_control/GITHUB_RELEASE_RECEIPT_2026-08-29_"
     "C140_COMPANION_C2_REPLAY_FIX.json"
@@ -656,6 +659,7 @@ def contract_summary(snap: engine.Snapshot) -> dict[str, object]:
 
 
 def configure_engine() -> None:
+    engine.TOKEN_FILE = TOKEN_FILE
     engine.PACKAGE_RECEIPT = PACKAGE_RECEIPT
     engine.VERIFICATION_RECEIPT = VERIFICATION_RECEIPT
     engine.PUBLICATION_RECEIPT = PUBLICATION_RECEIPT

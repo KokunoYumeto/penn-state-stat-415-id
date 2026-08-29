@@ -2,9 +2,9 @@
 
 Updated: 2026-08-29
 
-## C3 Bayesian–frequentist boundary — local deterministic closure
+## C3 Bayesian–frequentist boundary — public deterministic closure
 
-Batch C3 is locally complete and adds `D012`, `D013`, `SIM006`, and `MS11`
+Batch C3 is complete and publicly preserved. It adds `D012`, `D013`, `SIM006`, and `MS11`
 without changing C1/C2. The cumulative source is 27 documents / 528,082 bytes
 / 763 anchors / 251 body references. Six mastery sets and `CA01` contain 58
 fully solved problems. The reader has 57 files / 2,713,731 bytes; manifest
@@ -37,11 +37,35 @@ exact collection licence governing its repository-level reproduction scripts.
 Package contract/write/check replay and independent ZIP, inheritance, rights,
 privacy, and checksum audit pass.
 
-C3 commit/push, static CI, publication, and anonymous readback are the next
-gate. The latest public checkpoint remains C2 until that transaction completes.
-After C3 publication, seven mastery sets
-`MS00`–`MS06`, three assessments `CA02`–`CA04`, and two capstones remain.
-All minimum theory and simulation-family boundaries are now locally closed.
+Content commit `1c8f97f02e9bccfdbe4df91dd77af969cd6e33d6` is public. All 68
+changed blobs / 1,676,888 bytes matched immutable raw commit URLs. Static
+workflow run `33251730934` passed, and two credential-free passes matched all
+181 Pages files / 22,126,534 bytes; the Pages receipt SHA-256 is
+`9beb5dae3023d6549f6f5ad52ee6e472e1a001bc035d09d1cfbc4091585b1007`.
+
+GitHub release `378973936`, tag `v2026.08.29.c140-companion-c3`, points to the
+same content commit. The transactional publication and two independent direct
+credential-free readbacks matched all 49 assets / 92,476,057 bytes. Publication
+and direct-readback receipt SHA-256 values are respectively
+`62c58f7d5de7eb07e459fcfdf7d4d2450801cda57d68912607de21353a7cf4e4`
+and `84a09172a8a17be2a9aaa991db40b00fd2a4fdb88581277ad3e667b7e4e9043b`.
+
+Zenodo record `22161363`, DOI `10.5281/zenodo.22161363`, is public in existing
+concept `22077422`. Its publication and credential-free 49-file readback
+receipts have SHA-256 values
+`999dc33490eb77c4759857f7fb8ac3baf8919bde5780dc17b4959657dbfe98df`
+and `c53bd0827a06a25dd81bee46d8c6630ce4147f256f0605f089f16aa712a69bbf`;
+the final lineage audit found one submitted matching version and zero drafts.
+An independent paced direct HTTPS replay also matched all 49 files, metadata
+MD5 values, sizes, and SHA-256 values; its receipt is
+`ZENODO_DIRECT_READBACK_2026-08-29_C140_COMPANION_C3.json`, SHA-256
+`55f607cc41f6a0a8ad1355d1a46aa3d22f6b7f27a9224f986fd6f3f136f29ce2`.
+
+The complete publication checkpoint is
+`CHECKPOINT_2026-08-29_C3_PUBLICATION_COMPLETE.md`.
+
+All minimum theory and simulation-family boundaries are closed. Seven mastery
+sets `MS00`–`MS06`, three assessments `CA02`–`CA04`, and two capstones remain.
 
 ## C2 matrix-linear-model boundary — public deterministic closure
 

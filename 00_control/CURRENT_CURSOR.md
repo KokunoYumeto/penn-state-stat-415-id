@@ -161,12 +161,24 @@ run `33224203232` passed; corrected GitHub release `378957927` uses tag
 readback matched all 171 Pages files and all 41 release files at both
 preservation destinations.
 
-Next, execute C3 from
-`components/c140-companion/00_control/C3_BAYESIAN_COMPARISON_BATCH_CONTRACT.md`:
-author and integrate `D012`, `D013`, `SIM006`, and `MS11`; then run cumulative
-browser-free write/check build, backend, simulation, and QA replay. Continue
-after C3 through the remaining mastery sets, assessments, and capstones. The
-overall C140 goal remains active.
+C3 is now publicly complete. Exact cumulative scope is `D001`–`D013`,
+`SIM001`–`SIM006`, `MS07`–`MS12`, `CA01`, and the index: 27 documents, 57
+reader files, 812 backend entities, 1,084 relations, six simulations, and 58
+fully solved problems. Build/QA receipt SHA-256 values are
+`79661673ad7f4d74eff997cebd6fca1f46d2a74cbab5930147ca109762ef37ca`
+and `6f53a1f54d3a1b3e23b874a3c13adda9726bc0a8456d2fb4a8315d11912f72d7`.
+The 181-file Pages collection passes static public replay.
+
+Public identities: commit `1c8f97f02e9bccfdbe4df91dd77af969cd6e33d6`,
+Pages run `33251730934`, GitHub release `378973936` / tag
+`v2026.08.29.c140-companion-c3`, and Zenodo record `22161363` / DOI
+`10.5281/zenodo.22161363` in concept `22077422`. Anonymous readback matched all
+68 changed commit blobs, all 181 Pages files, and all 49 release files at both
+preservation destinations. The Zenodo lineage has zero drafts.
+
+Next executable action: produce `MS00`–`MS06`, then `CA02`–`CA04`, then both
+capstones. Do not reopen the closed C1/C2/C3 theory or simulation boundaries
+without a proved defect. The overall C140 goal remains active.
 
 The donor authority is 57,507 bytes / SHA-256
 `4d7402f2a960ea2b4232e57e4ee5992ac29801b9269f300f17f8e83074d5a0e4`;
@@ -224,3 +236,7 @@ receipts, `build/PAGES_COLLECTION_RECEIPT.json`, and
 Then read `CHECKPOINT_2026-08-28_C1_PUBLICATION_COMPLETE.md`, the C1
 Pages/GitHub/Zenodo receipts, and
 `ZENODO_LINEAGE_2026-08-28_C140_COMPANION_C1.json`.
+Then read the C2 local/publication/replay-fix checkpoints and receipts, followed
+by `components/c140-companion/00_control/C3_BAYESIAN_COMPARISON_BATCH_CONTRACT.md`,
+`CHECKPOINT_2026-08-29_C3_LOCAL_COMPLETE.md`, `build/C3_*_RECEIPT.json`, the
+current backend/HTML manifests, and the newest C3 package/publication receipts.

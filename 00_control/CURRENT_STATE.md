@@ -468,9 +468,9 @@ production batch is C3 under
 Overall C140 remains incomplete. No upstream message has been sent, and no
 browser process may be launched.
 
-## Original C140 companion — C3 local deterministic boundary
+## Original C140 companion — C3 public deterministic boundary
 
-C3 is locally complete and adds `D012`, `D013`, `SIM006`, and `MS11` to the
+C3 is complete and publicly preserved. It adds `D012`, `D013`, `SIM006`, and `MS11` to the
 public C2 base. The cumulative scope is 27 documents / 528,082 source bytes /
 763 anchors / 251 body references, with 58 fully solved problems across six
 mastery sets and `CA01`. The deterministic reader contains 57 files /
@@ -501,7 +501,19 @@ archive now includes the exact collection licence governing its embedded
 repository-level reproduction scripts. Contract/write/check replay, ZIP
 closure, CRC, privacy, licensing, checksums, and C2 inheritance all pass.
 
-The next gate is C3 commit/CI/publication/readback in the existing GitHub and
-Zenodo lineage. The latest public checkpoint remains C2 until that transaction
-passes. Afterward, `MS00`–`MS06`, `CA02`–`CA04`, and two capstones remain.
-No upstream message has been sent, and no browser process may be launched.
+Content commit `1c8f97f02e9bccfdbe4df91dd77af969cd6e33d6` is public; all 68
+changed blobs / 1,676,888 bytes matched anonymously. Pages run `33251730934`
+passed, and two static passes matched all 181 files / 22,126,534 bytes. GitHub
+release `378973936`, tag `v2026.08.29.c140-companion-c3`, matched all 49 assets
+/ 92,476,057 bytes twice through direct credential-free URLs. Zenodo record
+`22161363`, DOI `10.5281/zenodo.22161363`, is public in concept `22077422` and
+matched the same 49-file union; the final lineage audit found zero drafts. The
+independent paced direct HTTPS replay matched all 49 files, metadata MD5
+values, sizes, and SHA-256 values; receipt
+`components/c140-companion/00_control/ZENODO_DIRECT_READBACK_2026-08-29_C140_COMPANION_C3.json`
+has SHA-256
+`55f607cc41f6a0a8ad1355d1a46aa3d22f6b7f27a9224f986fd6f3f136f29ce2`.
+
+Next, produce `MS00`–`MS06`, `CA02`–`CA04`, and both capstones. Overall C140
+remains incomplete. No upstream message has been sent, and no browser process
+may be launched.

@@ -2,7 +2,7 @@
 
 Updated: 2026-08-29
 
-Current live boundary: cumulative C3 is locally complete. Exact scope is
+Current live boundary: cumulative C3 is publicly complete. Exact scope is
 `D001`–`D013`, `SIM001`–`SIM006`, `MS07`–`MS12`, `CA01`, and the index: 27
 documents, 57 HTML files, 812 backend entities, 1,084 relations, six
 simulations, and 58 fully solved problems. Build/QA receipt SHA-256 values are
@@ -17,11 +17,22 @@ inherited C2 files remain byte-identical and eight C3 files are appended. The
 Its source/backend ZIP includes the exact collection-level licence for the
 embedded repository reproduction scripts; the post-repair package audit passes.
 
-Next executable action: commit/push this validated boundary, let static Linux
-CI replay it, publish it to the existing
-GitHub/Zenodo lineage, and anonymously verify every public byte. Then produce
-`MS00`–`MS06`, `CA02`–`CA04`, and both capstones. Do not reopen C1/C2 or the
-closed theory/simulation-family boundaries without proved defects.
+Public identities: content commit
+`1c8f97f02e9bccfdbe4df91dd77af969cd6e33d6`; successful Pages run
+`33251730934`; GitHub release `378973936` / tag
+`v2026.08.29.c140-companion-c3`; and Zenodo record `22161363` / DOI
+`10.5281/zenodo.22161363` in concept `22077422`. Anonymous readback matched all
+181 Pages files and all 49 release files at both preservation destinations. The
+independent paced Zenodo replay receipt is
+`ZENODO_DIRECT_READBACK_2026-08-29_C140_COMPANION_C3.json`, SHA-256
+`55f607cc41f6a0a8ad1355d1a46aa3d22f6b7f27a9224f986fd6f3f136f29ce2`; the
+Zenodo lineage has zero drafts. Full checkpoint:
+`CHECKPOINT_2026-08-29_C3_PUBLICATION_COMPLETE.md`.
+
+Next executable action: produce the remaining independent-study closure in a
+bounded reader-first batch: `MS00`–`MS06`, then `CA02`–`CA04`, then both
+capstones. Do not reopen C1/C2/C3 theory or simulation boundaries without a
+proved defect.
 
 Current live boundary: C2 matrix Gaussian linear models are publicly complete.
 The exact cumulative scope is `D001`–`D011`, `SIM001`–`SIM005`, `MS07`–`MS10`,
