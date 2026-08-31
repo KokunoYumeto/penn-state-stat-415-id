@@ -65,6 +65,17 @@ MAX_INPUT_BYTES = 2_000_000
 MAX_ANALYSIS_FILE_BYTES = 160_000_000
 MAX_DIFFERENCE_EXAMPLES = 25
 
+# The deterministic CP02 profile uses 160 golden-section iterations over a
+# binary64 beta-binomial log likelihood. Once the interval is far below one
+# representable eta step, platform libm rounding can select a neighboring
+# plateau. Bound only the two affected derived profile fields by 5e-10; all
+# profile topology, design fields, decisions and other values remain under the
+# general relative/display-quantum rule or exact comparison.
+CSV_ABSOLUTE_TOLERANCES = {
+    ("CP02_dispersion_profile.csv", "log_likelihood"): Decimal("5e-10"),
+    ("CP02_dispersion_profile.csv", "delta_from_profile_max"): Decimal("5e-10"),
+}
+
 # Complementary columns are always exact, including identifiers, integer counts,
 # decisions, fixed design settings, selectors, hashes, units and prose tokens.
 CSV_FLOAT_COLUMNS = {
@@ -236,8 +247,10 @@ def compare_receipt(
         raise RuntimeError("receipt differs outside the two explicitly normalized ledger bindings")
 
 
-def decimal_difference(old: str, new: str, label: str) -> dict[str, str]:
-    """Allow relative error plus one quantum of the FROZEN displayed value."""
+def decimal_difference(
+    old: str, new: str, label: str, *, absolute_tolerance: Decimal = Decimal(0),
+) -> dict[str, str]:
+    """Apply the general relative/frozen-quantum rule and any named field bound."""
     if INTEGER_TOKEN.fullmatch(old) or INTEGER_TOKEN.fullmatch(new):
         raise RuntimeError("integer token differs at " + label)
     if not DECIMAL_TOKEN.fullmatch(old) or not DECIMAL_TOKEN.fullmatch(new):
@@ -253,7 +266,8 @@ def decimal_difference(old: str, new: str, label: str) -> dict[str, str]:
         # cannot enlarge this allowance; the error bound below still applies.
         error = abs(left - right)
         scale = max(abs(left), abs(right))
-        allowance = Decimal("1e-12") * scale + quantum
+        general_allowance = Decimal("1e-12") * scale + quantum
+        allowance = max(general_allowance, absolute_tolerance)
         if error > allowance:
             raise RuntimeError(
                 f"CSV tolerance exceeded at {label}: frozen={old}, recomputed={new}, "
@@ -263,6 +277,7 @@ def decimal_difference(old: str, new: str, label: str) -> dict[str, str]:
             "frozen": old, "recomputed": new, "absolute_error": str(error),
             "relative_error": str(error / scale if scale else Decimal(0)),
             "frozen_display_quantum": str(quantum), "allowed_error": str(allowance),
+            "field_absolute_tolerance": str(absolute_tolerance),
         }
 
 
@@ -304,7 +319,12 @@ def compare_csv(name: str, frozen_stream: Any, recomputed_stream: Any) -> dict[s
             try:
                 if not numeric:
                     raise RuntimeError("exact CSV token differs at " + label)
-                difference = decimal_difference(old, new, label)
+                difference = decimal_difference(
+                    old, new, label,
+                    absolute_tolerance=CSV_ABSOLUTE_TOLERANCES.get(
+                        (name, column), Decimal(0)
+                    ),
+                )
             except RuntimeError as exc:
                 rejected_count += 1
                 if len(rejected) < MAX_DIFFERENCE_EXAMPLES:
@@ -535,7 +555,12 @@ def analysis_main(capstone: str) -> None:
         "schema": "o006.c140.c5-portable-analysis-check.v1", "status": "pass", "capstone": capstone,
         "mode": "portable-numerical-check-not-byte-exact-producer-replay",
         "python": platform.python_version(), "platform": sys.platform,
-        "rtol": "1e-12", "absolute_allowance": "at most one frozen displayed decimal quantum; integer tokens exact",
+        "rtol": "1e-12",
+        "absolute_allowance": (
+            "general rule: at most one frozen displayed decimal quantum; "
+            "CP02 dispersion-profile log_likelihood and delta_from_profile_max: "
+            "field-specific 5e-10 absolute bound; integer tokens exact"
+        ),
         "csv_tables_compared": len(csv_reports), "csv_rows_compared": sum(row["rows"] for row in csv_reports),
         "csv_differing_cells": sum(row["differing_cells"] for row in csv_reports),
         "max_csv_absolute_error": str(max(Decimal(row["max_absolute_error"]) for row in csv_reports)),

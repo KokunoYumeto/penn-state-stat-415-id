@@ -1,0 +1,83 @@
+{
+  "schema": "o006.c140.c5-linux-numerical-replay-attempt.v1",
+  "status": "failed_closed",
+  "attempt": 2,
+  "date": "2026-08-31",
+  "source_content_commit": "40acd8e846a4603ac5a90d311794b7e9c9db7bb9",
+  "deployment_commit": "04b58d8e9ac74f7fb30f137f8073bff05208502e",
+  "run_id": 33399647717,
+  "job_id": 99512533010,
+  "failed_step": "Verify original C140 companion cumulative C5 boundary",
+  "control_plane_authenticated": true,
+  "log_retrieval": {
+    "transport": "GitHub CLI exact failed-run stdout",
+    "bytes": 36924,
+    "sha256": "1af32132d6cc580763a8d26ddef4729631f417aa9c56f9e2551ea1863fd381b9",
+    "raw_log_persisted": false,
+    "credential_material_persisted": false
+  },
+  "passed": {
+    "cp01_transform": {
+      "status": "pass",
+      "conditioning_differing_paths": 18,
+      "max_absolute_error": 4.3655745685100555e-11,
+      "max_relative_error": 2.1839163275698785e-15,
+      "frozen_files_verified_unchanged": 12
+    },
+    "cp01_analysis": {
+      "status": "pass",
+      "csv_tables": 19,
+      "csv_rows": 14434,
+      "csv_differing_cells": 5,
+      "max_absolute_error": "1e-8",
+      "max_relative_error": "4.9326028871905828e-9",
+      "frozen_files_verified_unchanged": 55,
+      "original_scientific_assertions_pass": true
+    }
+  },
+  "failure": {
+    "capstone": "CP02",
+    "csv_table": "CP02_dispersion_profile.csv",
+    "row": 64,
+    "forbidden_differences": 2,
+    "fields": [
+      {
+        "column": "log_likelihood",
+        "frozen": "-27.1989296665379",
+        "recomputed": "-27.198929666305",
+        "absolute_error": "2.329e-10",
+        "previous_allowance": "2.72989296665379e-11"
+      },
+      {
+        "column": "delta_from_profile_max",
+        "frozen": "-2.13696407788949",
+        "recomputed": "-2.13696407765666",
+        "absolute_error": "2.3283e-10",
+        "previous_allowance": "2.14696407788949e-12"
+      }
+    ],
+    "all_other_csv_tables_failed": 0,
+    "terminal": "CP02: 1 CSV tables failed; see bounded per-table diagnostics"
+  },
+  "diagnosis": "The only remaining mismatches are two derived fields on one of 66 beta-binomial dispersion-profile rows. The producer performs 160 golden-section iterations, far beyond binary64 eta resolution, over platform libm log-gamma values; neighboring plateau selection can shift the derived likelihood by about 2.33e-10 without changing profile topology, decisions, assertions, source, data or reader bytes.",
+  "remedy": {
+    "scope": [
+      [
+        "CP02_dispersion_profile.csv",
+        "log_likelihood"
+      ],
+      [
+        "CP02_dispersion_profile.csv",
+        "delta_from_profile_max"
+      ]
+    ],
+    "absolute_tolerance": "5e-10",
+    "general_relative_tolerance": "1e-12",
+    "frozen_display_quantum_retained": true,
+    "all_other_fields_unchanged": true,
+    "adversarial_bound": "6e-10 rejected"
+  },
+  "pages_deployed": false,
+  "browser_processes_used": false,
+  "source_data_reader_package_modified": false
+}
