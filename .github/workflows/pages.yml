@@ -73,13 +73,26 @@ jobs:
           python -B scripts/build_random_completeness_donor.py --check-only
           python -B scripts/qa_random_completeness_donor.py --check-only
 
-      - name: Verify original C140 companion cumulative C4 boundary
+      - name: Verify original C140 companion cumulative C5 boundary
+        env:
+          PYTHONHASHSEED: "0"
+          OMP_NUM_THREADS: "1"
+          OPENBLAS_NUM_THREADS: "1"
+          MKL_NUM_THREADS: "1"
+          NUMEXPR_NUM_THREADS: "1"
+          LC_NUMERIC: C
+          TZ: UTC
         run: |
+          python -B scripts/hydrate_cp02_coverage.py --write
           python -B components/c140-companion/simulations/run_c1_simulations.py --check-only
           python -B components/c140-companion/simulations/run_c2_simulations.py --check-only
           python -B components/c140-companion/simulations/run_c3_simulations.py --check-only
-          python -B components/c140-companion/scripts/build_companion.py --check-only --c4
-          python -B components/c140-companion/scripts/qa_companion.py --check-only --c4
+          python -B components/c140-companion/data/capstones/CP01/transform_cp01.py --check-only
+          python -B components/c140-companion/capstones/run_cp01_analysis.py --check-only
+          python -B components/c140-companion/data/capstones/CP02/transform_cp02.py --check-only
+          python -B components/c140-companion/capstones/run_cp02_analysis.py --check-only
+          python -B components/c140-companion/scripts/build_companion.py --check-only --c5
+          python -B components/c140-companion/scripts/qa_companion.py --check-only --c5
 
       - name: Assemble byte-preserving Pages collection
         run: |

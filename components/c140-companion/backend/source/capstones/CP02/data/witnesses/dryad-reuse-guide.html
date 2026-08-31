@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Dryad | How to reuse Dryad data</title>
+
+<link rel="icon" type="image/x-icon" href="/assets/favicon-79491b2fa4d1e593dfaa2b4cdcbbea8bebc26ec456492f0ec122deba87fc007e.ico" />
+<link rel="apple-touch-icon" type="img/png" href="/assets/apple-touch-icon-5871baeba1e450a2804f109d5d003e59f6fdb762c27d8aabe8f8fe06a7772fee.png" sizes="180x180" />
+<link rel="icon" type="img/png" href="/assets/favicon-32x32-6e049a961090486526a920cf786e0a96c5c2ea1fc4eb15a22d90b0ac6b258257.png" sizes="32x32" />
+<link rel="icon" type="img/png" href="/assets/favicon-16x16-03da4e37e7c62f47777f4a0676132501919dbf8f56ee5ecf72151f5cdc9bf8de.png" sizes="16x16" />
+<link rel="mask-icon" type="img/svg" href="/assets/safari-pinned-tab-76e2b3ba1a909733ea6e8beec66e06292cae0276597d216293d367ba0baebed1.svg" color="#40853e" />
+<meta name="msapplication-TileColor" content="#40853e">
+<meta name="theme-color" content="#ffffff">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<link rel="sitemap" type="application/xml" href="https://datadryad.org/sitemap.xml">
+<link rel="search" type="application/opensearchdescription+xml" title="Search" href="https://datadryad.org/search/description.xml">
+
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-6CWE0T05CC"></script>
+  <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-6CWE0T05CC');
+  </script>
+
+
+<meta name="csrf-param" content="authenticity_token" />
+<meta name="csrf-token" content="VcbW06EbbfFfUSdcLtyT8_q9QgkB9w1UCLeC4qsZyfq2qmxS00nKnYF-yHw1Ux5I5e5fCsYWAXXjTIvm38G1qQ" />
+
+  <link rel="stylesheet" href="/assets/stash_engine/application-b724c36b3c976a689d3b9484f486d25bf8b07c3ce4c4de3561955c1790b424eb.css" media="all" />
+<link rel="stylesheet" href="/assets/application-e92298e2150b3d50cc8cb82a554b1087844405a4edee35e9e59f447a455961d4.css" media="all" />
+<link rel="stylesheet" href="/assets/stash_datacite/application-0126a68972b2cb8a003a04a0da9e69cf8431e6b543ad8ccfef87178bf0a6f463.css" media="all" />
+<script src="/assets/stash_engine/application-795577497d88308e0c604bc2b09dd6eb95ba679fd645d2806096dcae4602d08f.js" data-turbolinks-track="true"></script>
+<script src="/assets/stash_datacite/application-6e1d67be7c9925b8dd5d971dd0d66a7a89ee1dbf5005fdb448a66dc2ef0f8e06.js" data-turbolinks-track="true"></script>
+<script src="/assets/stash_engine/moment.min-f92c20318b58804f7ecd8bcfdcdb3692ea18d1a932d2af72a270e5e56ba1fce3.js"></script>
+  
+  <link data-pagefind-meta="url[href]" rel="canonical" href="https://datadryad.org/help/guides/reuse"/>
+  <script type="text/javascript" src="/assets/dataload-b680b911ae69a60a12093a853ebfa71c1edcdc8b663adeb75a7156b5bd3cea7d.js" defer></script>
+</head>
+<body class='help_topic'>
+  
+  
+  
+<header class=" c-header">
+  <a class="c-skipnav" href="#maincontent">Skip to main content</a>
+  <div class="c-header__logos">
+    <a class="c-header__dash-logo-link js-nav-out" href="/">
+      <div><img class="c-header__dash-logo-svg" alt="Dryad" src="/assets/stash_engine/logo_dryad-7733b5955fc10066d318eac28ca4c5d791cccaaf4b100d7264563aeff52921a2.png" /></div>
+</a>  </div>
+  <nav class="c-header__nav js-header__nav" aria-label="Main">
+  <ul class="c-header__nav-group" id="mobile-nav-bar">
+    <li class="c-header__nav-item c-pot-item"><a class="js-nav-out" href="/pots">Explore</a>
+    <li class="c-header__nav-item show-mobile">
+      <form class="button_to" method="get" action="/sessions/choose_login"><button class="c-header__menu-button" title="Login and then submit a new dataset" type="submit">Submit</button></form>
+    </li>
+      <li class="c-header__nav-item hide-mobile"><a class="js-nav-out" href="/search/advanced">Advanced search</a></li>
+      <li class="c-header__nav-item last-child">
+        <form role="search" class="o-global-search c-header__global-search" action="/search" accept-charset="UTF-8" method="get">
+          <input name="utf8" value="✓" type="hidden">
+          <label class="o-global-search__label" for="search-field-input1">Search Dryad data</label>
+          <input class="o-global-search__input" id="search-field-input1" type="search" name="q" placeholder="Search">
+          <button aria-label="Search data" class="o-global-search__submit-button" type="submit" id="search">
+            <i class="fa fa-search" aria-hidden="true"></i>
+          </button>
+        </form>
+      </li>
+    <li class="c-header__nav-item show-mobile">
+      <button id="header-menu-button" aria-haspopup="menu" class="c-header__menu-button" aria-controls="site-menu" aria-expanded="false">More <i class="fa fa-bars" aria-hidden="true"></i></button>
+    </li>
+  </ul>
+
+  <ul class="c-header__nav-group" id="site-menu">
+
+    <li class="c-header__nav-item">
+      <button class="c-header_nav-button" aria-haspopup="menu" aria-expanded="false" aria-controls="about-menu">About</button>
+      <ul class="c-header__nav-submenu" id="about-menu" hidden>
+        <li><a href="/about">Who we are</a></li>
+        <li><a href="/mission">What we do</a></li>
+      </ul>
+    </li>
+
+    <li class="c-header__nav-item">
+      <a href="/join_us">Partner with us</a>
+    </li>
+    <li class="c-header__nav-item">
+      <a href="/support_us">Support us</a>
+    </li>
+
+    <li class="c-header__nav-item"><a href="/help">Get help</a></li>
+
+    <li class="c-header__nav-item">  <a id="log-in-out" class="js-nav-out" href="/sessions/choose_login">Login</a>
+</li>
+  </ul>
+</nav>
+
+</header>
+
+  <main id="maincontent" class="help-page">
+    <div id="page-columns">
+      <div id="page-content" data-pagefind-body>
+        <h1>How to reuse Dryad data</h1>
+
+<p>Dryad hosts a vast collection of <a href="/mission#our-curation-and-publication-process">curated</a> datasets across a wide range of scientific disciplines. We enable researchers to share, access, and reuse high-quality data. This guide helps researchers make the most of data on Dryad.</p>
+
+<h2 id="understanding-usage-rights">Understanding usage rights</h2>
+
+<p>All datasets on Dryad are published under the <strong><a href="https://blog.datadryad.org/2023/05/30/good-data-practices-removing-barriers-to-data-reuse-with-cc0-licensing/">CC0 (Creative Commons Zero)</a></strong> Public Domain Dedication. This means:</p>
+
+<ul>
+<li><strong>No restrictions</strong>: You can reuse, modify, share, and even redistribute the data for both commercial and non-commercial purposes without asking for permission.</li>
+<li><strong>Attribution</strong>: While you are not legally required to provide attribution under CC0, we <em>strongly recommend</em> as a scholarly courtesy to cite any data you reuse in your work. This ensures proper credit to the data creators and supports academic integrity. Dryad provides a recommended citation for each dataset, which follows this format:<br>
+<code>Author(s). Year. Dataset Title [Dataset]. Publisher. DOI: Dataset DOI.</code></li>
+</ul>
+
+<h2 id="ideas-for-reusing-dryad-data">Ideas for reusing Dryad data</h2>
+
+<p>The possibilities for reusing data are vast. Here are a few key ways you can leverage the Dryad for your research:</p>
+
+<ol>
+<li><strong>Meta-analysis:</strong> Aggregate datasets from multiple studies to increase statistical power and provide more robust conclusions. This is common in fields like ecology, medicine, and environmental science.</li>
+<li><strong>Secondary analysis:</strong> Perform new analyses on existing datasets to answer different research questions or look for different patterns and relationships than those explored in the original study.</li>
+<li><strong>Comparative studies:</strong> Use datasets from different regions, species, or time periods to conduct comparative studies. For instance, you could examine climate change&#39;s effects on biodiversity across different ecosystems.</li>
+<li><strong>Data validation:</strong> Cross-validate your experimental results by comparing them with similar datasets available on Dryad. This can strengthen the reliability of your findings.</li>
+<li><strong>Machine learning and AI training:</strong> Dryad datasets are an excellent resource for training machine learning models, especially when large, labeled datasets are needed. Researchers in bioinformatics, genomics, and image recognition can utilize datasets for predictive modeling or algorithm development.</li>
+<li><strong>Teaching and learning:</strong> Datasets from Dryad can be valuable teaching tools in undergraduate or graduate courses. Students can use real-world data to practice statistical analysis, coding, or data visualization techniques.</li>
+</ol>
+
+<h2 id="tips-for-maximizing-data-reuse">Tips for maximizing data reuse</h2>
+
+<h3 id="explore-dryad-data">Explore Dryad data</h3>
+
+<p><strong>Discover data through search:</strong> Dryad provides <a href="/search">a user-friendly search interface</a> to help you locate datasets relevant to your interests, as well as <a href="/api">an API for programmatic access to datasets</a>, which is useful for large-scale data gathering, integration with software tools, or analyses that require multiple datasets. <a href="/help/guides/search">Visit the search help page</a> to learn how to utilize these tools to discover relevant data.</p>
+
+<p><strong>Combine multiple datasets for broader insights:</strong> One of the advantages of Dryad is the availability of diverse datasets. You can combine multiple datasets to perform meta-analyses, cross-study comparisons, or integrate data from different geographical areas or species. Just ensure that data formats and variables are consistent across studies before merging.</p>
+
+<p><strong>Explore different data formats:</strong> Dryad datasets may come in a variety of formats (e.g., CSV, fasta, JSON). Be prepared to work with different data formats by converting them or writing scripts that can handle multiple formats. Tools like R, Python, or specialized software can be helpful for analyzing data in various formats.</p>
+
+<h3 id="choose-the-best-data">Choose the best data</h3>
+
+<p><strong>Check for updates</strong>: Dryad allows data versioning. Published datasets can be updated or revised over time. Be sure to check back for new versions if it&#39;s been a while since you first accessed a dataset.</p>
+
+<p><strong>Take advantage of tabular data previews</strong>: For data in tabular formats such as TSV, CSV, and XLSX, Dryad lets you preview the contents of the file before downloading, helping you evaluate the relevance of the data for your goals.</p>
+
+<p><strong>Check file sizes</strong>: Data packages on Dryad can be up to 2 TB. Make sure you have the appropriate computational resources to handle and analyze the data before downloading.</p>
+
+<p><strong>Review the metadata and README:</strong> The README and methods information will include information about how the data was collected, any known limitations, and explanations of variables. A thorough understanding of the dataset&#39;s context will improve the accuracy and interpretation of your analyses.</p>
+
+<p><strong>Verify data integrity and quality:</strong> Before integrating the dataset into your research, perform data quality checks. This might include assessing missing data, identifying outliers, or confirming consistency across related variables. It ensures that the data you are using is reliable and ready for your specific analysis. </p>
+
+<div class="callout">
+<h4>An important note for processing Dryad data</h4>
+<p>Blank cells indicate null values in the data. In addition to blank cells, Dryad recognizes the following strings as indicating a cell with no data: <code>NA</code>, <code>na</code>, <code>N/A</code>, <code>n/a</code>, <code>N.A.</code>, <code>n.a.</code>, <code>-</code>, <code>.</code>, <code>empty</code>, <code>blank</code>
+<p>When processing Dryad data, note that null values may be indicated with these strings.
+</div>
+
+<h3 id="collaborate-and-contribute">Collaborate and contribute</h3>
+
+<p><strong>Collaborate with original authors</strong>: If your work significantly expands on the dataset or involves complex questions, consider reaching out to the original authors for collaboration or clarification. Dryad provides contact information for the corresponding author on the dataset landing page.</p>
+
+<p><strong>Create derived datasets for further research:</strong> If your research results in new data or modifications of an existing Dryad dataset, consider sharing your derived datasets on Dryad. This can contribute to an ongoing cycle of data reuse, allowing future researchers to build upon your work and the original data.</p>
+
+<p><strong>Engage with the Dryad community:</strong> We offer regular educational webinars, tips, and resources for data sharing and reuse. <a href="https://blog.datadryad.org/">Visit our blog</a>, <a href="http://eepurl.com/hp5GxD">subscribe to our newsletter</a>, or follow us on social media to make sure you&#39;re getting the latest updates.</p>
+
+          <hr style="border-top: thin solid #f6f6f6;"/>
+          <p>Unable to find the answer to your question? <a href="/help/contact">Contact the helpdesk</a></p>
+      </div>
+      <nav id="page-nav" aria-label="Help navigation">
+        <button id="nav-mobile-button" class="o-button__plain-text1" aria-label="Expand page menu"><i class="fas fa-angles-up"></i></button>
+        <ul>
+  <li><a href="/help" style="font-size: 1.15rem; font-weight: bold;">Dryad help center</a>
+    <ul style="margin-left: 0;">
+        <li><form id="help-search-form" action="/help">
+  <input type="text" class="c-input__text" name="q" placeholder="Search the help center" id="help_search" aria-label="Search the help center"/>
+  <button type="submit" aria-label="Search the help center" title="Search">
+    <i class="fas fa-search" aria-hidden="true"></i>
+  </button>
+  <input type="reset" class="o-button__plain-textlink" value="&#xf00d;" aria-label="Clear" title="Clear" />
+</form></li>
+      <li>
+        <span class="expand-button"><button aria-controls="account" aria-expanded="false">My account</button></span>
+        <ul id="account" hidden><li><a href="/help/account/login">Creating a Dryad account</a></li><li><a href="/help/account/management">Managing my account</a></li></ul>
+      </li>
+      <li>
+        <span class="expand-button"><button aria-controls="submission_steps" aria-expanded="false">Submission steps</button></span>
+        <ul id="submission_steps" hidden><li><a href="/help/submission_steps/connect">Connecting publications</a></li><li><a href="/help/submission_steps/authors">Authors and editors</a></li><li><a href="/help/submission_steps/description">Describing data</a></li><li><a href="/help/submission_steps/files">Uploading files</a></li><li><a href="/help/submission_steps/readme">Creating a README</a></li><li><a href="/help/submission_steps/peer_review">Private for Peer Review</a></li><li><a href="/help/submission_steps/preview">Preview and payment</a></li></ul>
+      </li>  
+      <li>
+        <span class="expand-button"><button aria-controls="requirements" aria-expanded="false">Requirements</button></span>
+        <ul id="requirements" hidden><li><a href="/help/requirements/files">File requirements</a></li><li><a href="/help/requirements/metadata">Metadata requirements</a></li><li><a href="/help/requirements/costs">Costs</a></li></ul>
+      </li>
+      <li>
+        <span class="expand-button"><button aria-controls="guides" aria-expanded="true">Guides</button></span>
+        <ul id="guides"><li><a href="/help/guides/search">Searching for data</a></li><li><a href="/help/guides/submission">Submitting data</a></li><li><a href="/help/guides/curation">Dataset curation</a></li><li><a href="/help/guides/publication">Published datasets</a></li><li><a href="/help/guides/best_practices">Good data practices</a></li><li><a href="/help/guides/reuse" aria-current="page">How to reuse Dryad data</a><ul>
+<li>
+<a href="#understanding-usage-rights">Understanding usage rights</a>
+</li>
+<li>
+<a href="#ideas-for-reusing-dryad-data">Ideas for reusing Dryad data</a>
+</li>
+<li>
+<a href="#tips-for-maximizing-data-reuse">Tips for maximizing data reuse</a>
+</li>
+</ul>
+</li><li><a href="/help/guides/data_check_alerts">Tabular data check alerts</a></li></ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+<script type="text/javascript">
+  function hideSecs() {
+    const pageNav = document.getElementById('page-nav');
+    if (window.innerWidth < 900 && pageNav.offsetHeight > 100) {
+      Array.from(document.querySelectorAll('#page-nav .expand-button button')).forEach((b) => {
+        b.setAttribute('aria-expanded', 'false')
+        document.getElementById(b.getAttribute('aria-controls')).setAttribute('hidden', '')
+      });
+    }
+  }
+  hideSecs();
+  window.addEventListener('resize', hideSecs);
+</script>
+      </nav>
+    </div>
+  </main>
+  <footer class="c-footer" id="page-footer">
+  <div class="c-footer__link-group">
+    <div class="c-footer__policy-group">
+      <a href="/privacy">Privacy</a>
+      <a href="/accessibility" class="js-nav-out">Accessibility</a>
+      <a href="/terms">Terms of service</a>
+      <a href="/partner_terms">Partner terms</a>
+      <a href="/sitemap">Site map</a>
+    </div>
+    <div class="c-footer__social-group">
+      <a href="/contact"><i class="far fa-envelope" aria-hidden="true"></i>Enquiries</a>
+      <a href="https://blog.datadryad.org/" class="js-nav-out"><i class="far fa-comment fa-flip-horizontal" aria-hidden="true" style="font-size: 1em"></i>Latest news</a>
+      <a href="https://blog.datadryad.org/about/subscribe" class="js-nav-out"><i class="far fa-bell" aria-hidden="true"></i>Subscribe</a>
+      <a href="https://blog.datadryad.org/jobs" class="js-nav-out"><i class="far fa-pen-to-square" aria-hidden="true"></i>Jobs &amp; opportunities</a>
+    </div>
+  </div>
+  <div class="c-footer__link-group">
+    <span>© 2026 Dryad. <a href="/terms#copyright">Content on this site is licensed for reuse</a>.</span>
+  </div>
+</footer>
+
+  <script type="text/javascript" src="/assets/interactions-65412f0286c8e9242c95e7334d83b2b09302e748e29d360f278c3d715e0a68d6.js"></script>
+  
+</body>
+</html>

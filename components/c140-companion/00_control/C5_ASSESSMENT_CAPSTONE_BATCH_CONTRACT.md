@@ -1,6 +1,9 @@
 # C5 contract — asesmen akhir dan capstone data terbuka
 
-Status: in production, 2026-08-29
+Status at source freeze, 2026-08-31: `CA02`–`CA04` and `CP01`–`CP02` are
+complete. Post-translation audit, cumulative build, and packaging follow this
+contract; publication and anonymous readback necessarily occur after its
+immutable package-input identity is frozen and are recorded in release receipts.
 
 C5 menutup seluruh pekerjaan pembelajaran mandiri yang masih tersisa pada
 pendamping orisinal O006/C140. Batasnya tepat lima dokumen baru berbahasa
@@ -12,6 +15,45 @@ Semua prosa, masalah, solusi, rubrik, skrip analisis, dan lapisan editorial C5
 adalah materi orisinal CC BY-SA 4.0 dengan provenans persis
 `OpenAI Codex gpt-5.6-sol, Ultra`. Hak dataset tetap terpisah dan tidak pernah
 disamakan dengan lisensi materi pendamping.
+
+Checkpoint hidup: kelima dokumen sumber berstatus `complete`. Identitas
+terkininya adalah `CA02` 51.965 byte / SHA-256
+`34e9dfa283411852e6940557bf471c162d8b248ec78e45d24326cbf2fe93f829`,
+`CA03` 55.629 byte / SHA-256
+`d903f076431faab78594e79bd471ee80ad4fb547e487db2a0f1a8ac1b0d0b5d8`,
+`CA04` 57.837 byte / SHA-256
+`e0cdacfb8479e8def879c4562fc88c6a41812f4a6a136ab3e76d14ebdeb05ef7`,
+`CP01` 177.604 byte / SHA-256
+`771829b516d4a4662888bc9a852cc400390b32e39ca74d08494c191ed993aa2d`,
+dan `CP02` 85.408 byte / SHA-256
+`824023d7b1d8c06305893e7cc14df5f90f612217edb895b7d9ce3014c372c27b`.
+Catatan seleksi kandidat dan kondisi pembaliknya tetap tersimpan di
+`C5_CAPSTONE_DATA_CANDIDATES.md`. Gate hak tingkat-aset sudah lulus: CP01
+membekukan UCI *Concrete Compressive Strength* di bawah CC BY 4.0 dan CP02
+membekukan agregat Dryad versi 3 di bawah CC0-1.0. Bukti hak, provenans,
+identitas byte, skema, serta transformasi berada di
+`data/capstones/CP01/` dan `data/capstones/CP02/`.
+
+Satu laman saksi DOI CP02 lokal memuat penetapan `apiKey` milik laman publik.
+Byte asli 45.777 byte / SHA-256
+`d48e208611a080220e5b3b884ff733702c4553b67105b197728ba8f8e453a64f`
+tetap menjadi otoritas lokal dan tidak pernah masuk pohon publik. Distribusi
+hanya memuat turunan tersunting deterministik 45.103 byte / SHA-256
+`3a03d836ebdb80191a70ff71d4faaa810eee966307482bdae5d04b430d5c8f9f`
+serta receipt penyuntingan 662 byte / SHA-256
+`5398e6f32c2d0eb81475e37c7a9ea35a8f1833ee387c6119376e308fefa92543`;
+receipt itu mengikat identitas byte asli tanpa menyalin nilai yang dikecualikan.
+
+Buku besar cakupan kanonis CP02 tetap lokal dan receipt-bound sebagai
+`CP02_coverage.csv`, 135.581.717 byte / SHA-256
+`86997c120a94e342d943ae72eb827871564e96545de911d1e3a3c677a5bc347e`.
+Build publik tidak menyalin anggota longgar yang melampaui batas GitHub itu.
+Ia menghitung ulang `assets/capstones/CP02/CP02_coverage.csv.gz` secara
+deterministik dengan gzip level 9, `mtime=0`, dan nama header stabil; turunannya
+5.761.556 byte / SHA-256
+`9f4db98147a57db21ccc424bc9e4292ceecd7c113e6733cf580ed1834b82b106`.
+Manifest backend/build mengikat identitas mentah dan turunan, dan QA menolak
+setiap berkas publik tunggal yang melebihi 100.000.000 byte.
 
 ## Batas asesmen
 
@@ -80,8 +122,9 @@ analisis, assertion, tabel, SVG/teks alternatif dan replay memakai byte lokal.
 ## Urutan, gate, dan kondisi terminal
 
 Produksi berurutan adalah `CA02`, `CA03`, `CA04`, seleksi/freeze dataset
-`CP01`, penulisan `CP01`, seleksi/freeze dataset `CP02`, lalu `CP02`. Setelah
-setiap dokumen, jalankan audit matematika terbatas; setelah lima dokumen,
+`CP01`, penulisan `CP01`, seleksi/freeze dataset `CP02`, lalu `CP02`. Sesuai
+instruksi pengguna terakhir, seluruh produksi sumber selesai sebelum audit;
+setelah lima dokumen,
 perluas build/QA agar menerima tipe `capstone`, empat asesmen total, dua
 capstone, dataset/rights/provenans, dan rubrik 100 poin. Batas akhir yang
 diharapkan adalah 39 dokumen sumber, 13 set penguasaan, empat asesmen, dua

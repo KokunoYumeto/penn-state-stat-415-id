@@ -4,28 +4,29 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="generator" content="OpenAI Codex gpt-5.6-sol, Ultra">
-<title>Perbandingan Bayesian–frequentist: keputusan, cakupan, dan kalibrasi</title>
+<title>Perbandingan Bayesian–frekuentis: keputusan, cakupan, dan kalibrasi</title>
 <link rel="stylesheet" href="../assets/style.css">
 <script>window.MathJax={loader:{load:['[tex]/boldsymbol']},tex:{packages:{'[+]':['boldsymbol']},inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']]},svg:{fontCache:'local'}};</script>
 <script defer src="../assets/MathJax/tex-svg.js"></script>
 </head>
 <body>
+<a class="skip-link" href="#main-content">Langsung ke isi utama</a>
 <div class="shell">
-<nav class="sidebar" aria-label="Daftar isi pendamping"><h2>Isi pendamping</h2><ol><li><a href="../index.html">Pendamping Orisinal Statistika Matematis</a></li><li><a href="O006-C140-CMP-D001.html">Model parametrik reguler, skor, dan informasi Fisher</a></li><li><a href="O006-C140-CMP-D002.html">Konsistensi MLE: identifikasi Kullback–Leibler dan teorema argmax</a></li><li><a href="O006-C140-CMP-D003.html">Likelihood kuadratik lokal, normalitas asimtotik, dan delta method</a></li><li><a href="O006-C140-CMP-D004.html">Prosedur Wald, skor, dan rasio likelihood</a></li><li><a href="O006-C140-CMP-D005.html">Likelihood nonreguler: empat mekanisme kegagalan</a></li><li><a href="O006-C140-CMP-D006.html">Optimalitas pengujian: Neyman–Pearson, MP, UMP, dan rasio likelihood monoton</a></li><li><a href="O006-C140-CMP-D007.html">Loss, risk, efisiensi, Rao–Blackwell, dan Lehmann–Scheffé</a></li><li><a href="O006-C140-CMP-D008.html">Model linear Gaussian desain tetap dan geometri proyeksi</a></li><li><a href="O006-C140-CMP-D009.html">OLS, MLE Gaussian, dan teorema Gauss–Markov pada rancangan tetap</a></li><li><a href="O006-C140-CMP-D010.html">Inferensi Gaussian eksak: proyeksi, t, F, ANOVA, dan prediksi</a></li><li><a href="O006-C140-CMP-D011.html">Diagnostik, leverage, misspesifikasi, dan inferensi pascaseleksi</a></li><li><a href="O006-C140-CMP-D012.html">Inferensi Bayesian sebagai pembaruan dan keputusan yang koheren</a></li><li><a href="O006-C140-CMP-D013.html">Perbandingan Bayesian–frequentist: keputusan, cakupan, dan kalibrasi</a></li><li><a href="../simulations/O006-C140-CMP-SIM001.html">Model lokasi normal: MLE, coverage, dan tiga statistik uji</a></li><li><a href="../simulations/O006-C140-CMP-SIM002.html">Delta method pada titik reguler dan titik dengan turunan nol</a></li><li><a href="../simulations/O006-C140-CMP-SIM003.html">Endpoint Uniform: laju nonreguler dan kegagalan bootstrap biasa</a></li><li><a href="../simulations/O006-C140-CMP-SIM004.html">Uji Neyman–Pearson teracak dengan size tepat</a></li><li><a href="../simulations/O006-C140-CMP-SIM005.html">Model linear matriks: coverage, heteroskedastisitas, dan pengaruh</a></li><li><a href="../simulations/O006-C140-CMP-SIM006.html">Kalibrasi selang Bayesian dan frequentist pada model binomial</a></li><li><a href="../mastery/O006-C140-CMP-MS00.html">Set penguasaan 00 — probabilitas, distribusi, dan ekspektasi (diagnostik C140)</a></li><li><a href="../mastery/O006-C140-CMP-MS01.html">Set penguasaan 01 — statistik urutan dan distribusi sampel</a></li><li><a href="../mastery/O006-C140-CMP-MS02.html">Set penguasaan 02 — estimasi, bias, MSE, dan sifat estimator</a></li><li><a href="../mastery/O006-C140-CMP-MS03.html">Set penguasaan 03 — kecukupan, faktorisasi, kelengkapan, dan statistik ancillary</a></li><li><a href="../mastery/O006-C140-CMP-MS04.html">Set penguasaan 04 — metode momen dan dasar kemungkinan maksimum</a></li><li><a href="../mastery/O006-C140-CMP-MS05.html">Set penguasaan 05 — informasi Fisher, interval kepercayaan, bootstrap, dan delta method</a></li><li><a href="../mastery/O006-C140-CMP-MS06.html">Set penguasaan 06 — pengujian hipotesis, daya, p-value, dan jembatan likelihood</a></li><li><a href="../mastery/O006-C140-CMP-MS07.html">Set penguasaan 07 — regularitas, konsistensi, dan normalitas MLE</a></li><li><a href="../mastery/O006-C140-CMP-MS08.html">Set penguasaan 08 — Wald, skor, rasio likelihood, dan diagnosis nonregular</a></li><li><a href="../mastery/O006-C140-CMP-MS09.html">Set penguasaan 09 — pengujian eksak dan optimalitas Neyman–Pearson</a></li><li><a href="../mastery/O006-C140-CMP-MS10.html">Set penguasaan 10 — uji likelihood asimtotik, risk, dan perbaikan estimator</a></li><li><a href="../mastery/O006-C140-CMP-MS11.html">Set penguasaan 11 — pembaruan Bayesian, keputusan, dan kalibrasi</a></li><li><a href="../mastery/O006-C140-CMP-MS12.html">Set penguasaan 12 — model linear Gaussian matriks, inferensi eksak, dan diagnostik</a></li><li><a href="../assessments/O006-C140-CMP-CA01.html">Asesmen kumulatif C1: likelihood, optimalitas, dan keputusan statistik</a></li></ol></nav>
-<main>
+<nav class="sidebar" aria-labelledby="companion-nav-title"><p class="nav-title" id="companion-nav-title">Isi pendamping</p><ol><li><a href="../index.html">Pendamping Orisinal Statistika Matematis</a></li><li><a href="O006-C140-CMP-D001.html">Model parametrik reguler, skor, dan informasi Fisher</a></li><li><a href="O006-C140-CMP-D002.html">Konsistensi MLE: identifikasi Kullback–Leibler dan teorema argmax</a></li><li><a href="O006-C140-CMP-D003.html">Ekspansi kuadratik lokal fungsi log-kemungkinan, normalitas asimtotik, dan metode delta</a></li><li><a href="O006-C140-CMP-D004.html">Prosedur Wald, skor, dan rasio fungsi kemungkinan</a></li><li><a href="O006-C140-CMP-D005.html">Fungsi kemungkinan nonreguler: empat mekanisme kegagalan</a></li><li><a href="O006-C140-CMP-D006.html">Optimalitas pengujian: Neyman–Pearson, MP, UMP, dan rasio fungsi kemungkinan monoton</a></li><li><a href="O006-C140-CMP-D007.html">Kerugian, risiko, efisiensi, Rao–Blackwell, dan Lehmann–Scheffé</a></li><li><a href="O006-C140-CMP-D008.html">Model linear Gaussian berdesain tetap dan geometri proyeksi</a></li><li><a href="O006-C140-CMP-D009.html">OLS, MLE Gaussian, dan teorema Gauss–Markov pada desain tetap</a></li><li><a href="O006-C140-CMP-D010.html">Inferensi Gaussian eksak: proyeksi, t, F, ANOVA, dan prediksi</a></li><li><a href="O006-C140-CMP-D011.html">Diagnostik, daya ungkit, kesalahan spesifikasi, dan inferensi pascaseleksi</a></li><li><a href="O006-C140-CMP-D012.html">Inferensi Bayesian sebagai pembaruan dan keputusan yang koheren</a></li><li><a href="O006-C140-CMP-D013.html" aria-current="page">Perbandingan Bayesian–frekuentis: keputusan, cakupan, dan kalibrasi</a></li><li><a href="../simulations/O006-C140-CMP-SIM001.html">Model lokasi normal: MLE, cakupan, dan tiga statistik uji</a></li><li><a href="../simulations/O006-C140-CMP-SIM002.html">Metode delta pada titik reguler dan titik dengan turunan nol</a></li><li><a href="../simulations/O006-C140-CMP-SIM003.html">Distribusi seragam pada batas dukungan: laju nonreguler dan kegagalan bootstrap biasa</a></li><li><a href="../simulations/O006-C140-CMP-SIM004.html">Uji Neyman–Pearson teracak dengan ukuran uji tepat</a></li><li><a href="../simulations/O006-C140-CMP-SIM005.html">Model linear matriks: cakupan, heteroskedastisitas, dan pengaruh</a></li><li><a href="../simulations/O006-C140-CMP-SIM006.html">Kalibrasi selang Bayesian dan frekuentis pada model binomial</a></li><li><a href="../mastery/O006-C140-CMP-MS00.html">Set penguasaan 00 — probabilitas, distribusi, dan ekspektasi (diagnostik C140)</a></li><li><a href="../mastery/O006-C140-CMP-MS01.html">Set penguasaan 01 — statistik urutan dan distribusi sampel</a></li><li><a href="../mastery/O006-C140-CMP-MS02.html">Set penguasaan 02 — estimasi, bias, MSE, dan sifat penduga</a></li><li><a href="../mastery/O006-C140-CMP-MS03.html">Set penguasaan 03 — kecukupan, faktorisasi, kelengkapan, dan statistik aksesori</a></li><li><a href="../mastery/O006-C140-CMP-MS04.html">Set penguasaan 04 — metode momen dan dasar kemungkinan maksimum</a></li><li><a href="../mastery/O006-C140-CMP-MS05.html">Set penguasaan 05 — informasi Fisher, interval kepercayaan, bootstrap, dan metode delta</a></li><li><a href="../mastery/O006-C140-CMP-MS06.html">Set penguasaan 06 — pengujian hipotesis, daya, nilai-p, dan jembatan ke teori fungsi kemungkinan</a></li><li><a href="../mastery/O006-C140-CMP-MS07.html">Set penguasaan 07 — keteraturan, konsistensi, dan normalitas MLE</a></li><li><a href="../mastery/O006-C140-CMP-MS08.html">Set penguasaan 08 — Wald, skor, rasio fungsi kemungkinan, dan diagnosis nonreguler</a></li><li><a href="../mastery/O006-C140-CMP-MS09.html">Set penguasaan 09 — pengujian eksak dan optimalitas Neyman–Pearson</a></li><li><a href="../mastery/O006-C140-CMP-MS10.html">Set penguasaan 10 — uji fungsi kemungkinan asimtotik, risiko, dan perbaikan penduga</a></li><li><a href="../mastery/O006-C140-CMP-MS11.html">Set penguasaan 11 — pembaruan Bayesian, keputusan, dan kalibrasi</a></li><li><a href="../mastery/O006-C140-CMP-MS12.html">Set penguasaan 12 — model linear Gaussian dalam bentuk matriks, inferensi eksak, dan diagnostik</a></li><li><a href="../assessments/O006-C140-CMP-CA01.html">Asesmen kumulatif C1: fungsi kemungkinan, optimalitas, dan keputusan statistik</a></li><li><a href="../assessments/O006-C140-CMP-CA02.html">Asesmen kumulatif CA02 — fondasi inferensi sampel berhingga</a></li><li><a href="../assessments/O006-C140-CMP-CA03.html">Asesmen kumulatif CA03 — model linear dalam bentuk matriks, inferensi eksak, dan diagnostik</a></li><li><a href="../assessments/O006-C140-CMP-CA04.html">Asesmen kumulatif CA04 — sintesis Bayesian–frekuentis</a></li><li><a href="../capstones/O006-C140-CMP-CP01.html">Proyek akhir integratif CP01 — regresi data terbuka untuk kuat tekan beton</a></li><li><a href="../capstones/O006-C140-CMP-CP02.html">Proyek akhir CP02 — perbandingan Bayesian–frekuentis pada data agregat kecenderungan bersarang greater sage-grouse</a></li></ol></nav>
+<main id="main-content" tabindex="-1">
 <div class="metadata"><strong>O006-C140-CMP-D013</strong> · id-ID · CC BY-SA 4.0 · OpenAI Codex gpt-5.6-sol, Ultra</div>
 <p><a id="O006-C140-CMP-D013-SEC01"></a></p>
 <h1>Peluang yang berbeda menjawab pertanyaan yang berbeda</h1>
 <p>Pelajaran Bayesian Penn State <a class="xref external" data-target-id="O006-PSU-012" href="https://kokunoyumeto.github.io/penn-state-stat-415-id/Lesson11.html">Lesson11</a> memperkenalkan prior,
 posterior, fungsi kerugian, dan selang kredibel. Kerangka hukum bersama serta
 keputusan koherennya dibangun pada <a class="xref" data-target-id="O006-C140-CMP-D012-SEC01" href="O006-C140-CMP-D012.html#O006-C140-CMP-D012-SEC01">Satu model probabilitas, lalu satu masalah keputusan</a>. Unit ini
-menyambungkannya dengan cakupan frequentist, pengujian, prediksi, dan
+menyambungkannya dengan cakupan frekuentis, pengujian, prediksi, dan
 keputusan. Tujuannya bukan memilih pemenang universal. Dua prosedur dapat sama
 secara aljabar pada satu model dan berbeda tajam pada model lain karena
 peluangnya dikondisikan pada objek yang berbeda.</p>
-<p>Misalkan <span class="math-inline" role="math">\(X\sim P_\theta\)</span>. Dalam analisis frequentist, <span class="math-inline" role="math">\(\theta\)</span> adalah indeks
+<p>Misalkan <span class="math-inline" role="math">\(X\sim P_\theta\)</span>. Dalam analisis frekuentis, <span class="math-inline" role="math">\(\theta\)</span> adalah indeks
 tetap bagi hukum pengulangan sampel. Dalam analisis Bayesian, prior proper
-<span class="math-inline" role="math">\(\Pi\)</span> bersama likelihood membentuk hukum gabungan</p>
+<span class="math-inline" role="math">\(\Pi\)</span> bersama fungsi kemungkinan (likelihood) membentuk hukum gabungan</p>
 <div class="math-display" role="math">\[\theta\sim\Pi,
 \qquad X\mid\theta\sim P_\theta,\]</div>
 <p>dan posterior <span class="math-inline" role="math">\(\Pi(\,·\mid X=x)\)</span> adalah distribusi bersyarat di bawah hukum
@@ -33,18 +34,18 @@ gabungan itu. Kedua konstruksi sah, tetapi simbol peluangnya tidak dapat
 dipertukarkan tanpa menyatakan hukum yang dipakai.</p>
 <p><a id="O006-C140-CMP-D013-DEF01"></a></p>
 <h2>Himpunan kredibel dan prosedur kepercayaan</h2>
-<p>Sebuah aturan himpunan <span class="math-inline" role="math">\(C\)</span> memetakan data <span class="math-inline" role="math">\(x\)</span> ke subset <span class="math-inline" role="math">\(C(x)\)</span> dari ruang
-parameter. Ia merupakan <strong>himpunan kredibel posterior</strong> berisi <span class="math-inline" role="math">\(1-\alpha\)</span> bila</p>
+<p>Sebuah aturan himpunan <span class="math-inline" role="math">\(C\)</span> memetakan data <span class="math-inline" role="math">\(x\)</span> ke himpunan bagian <span class="math-inline" role="math">\(C(x)\)</span> dari ruang
+parameter. Ia merupakan <strong>himpunan kredibel posterior</strong> bermassa <span class="math-inline" role="math">\(1-\alpha\)</span> bila</p>
 <div class="math-display" role="math">\[\Pi\{\theta\in C(x)\mid X=x\}=1-\alpha\]</div>
 <p>untuk data yang relevan. Setelah <span class="math-inline" role="math">\(x\)</span> diamati, parameter acak di dalam model
 Bayesian masih mempunyai distribusi posterior, sehingga pernyataan tersebut
 adalah peluang bersyarat yang literal.</p>
-<p>Aturan yang sama merupakan <strong>prosedur kepercayaan</strong> ber-cakupan
+<p>Aturan yang sama merupakan <strong>prosedur kepercayaan</strong> dengan cakupan
 <span class="math-inline" role="math">\(1-\alpha\)</span> bila</p>
 <div class="math-display" role="math">\[c(\theta):=P_\theta\{\theta\in C(X)\}=1-\alpha\]</div>
 <p>untuk setiap <span class="math-inline" role="math">\(\theta\)</span> dalam ruang parameter, atau sedikitnya
 <span class="math-inline" role="math">\(c(\theta)\geq1-\alpha\)</span> bila cakupan konservatif diizinkan. Sebelum data
-diambil, <span class="math-inline" role="math">\(C(X)\)</span> acak sedangkan <span class="math-inline" role="math">\(\theta\)</span> ditahan tetap. Setelah data diamati,
+diambil, <span class="math-inline" role="math">\(C(X)\)</span> acak sedangkan <span class="math-inline" role="math">\(\theta\)</span> dianggap tetap. Setelah data diamati,
 selang itu tidak lagi acak dalam eksperimen yang telah selesai; angka
 <span class="math-inline" role="math">\(1-\alpha\)</span> mengacu pada frekuensi prosedur di bawah pengulangan yang
 ditentukan.</p>
@@ -57,7 +58,7 @@ parameter tetap di seluruh sampel hipotetis.</li>
 </ol>
 <p>Sebuah aturan dapat memenuhi keduanya, salah satunya, atau tidak keduanya.</p>
 <p><a id="O006-C140-CMP-D013-THM01"></a></p>
-<h2>Identitas cakupan terata-prior</h2>
+<h2>Identitas cakupan rata-rata prior</h2>
 <p>Andaikan <span class="math-inline" role="math">\(\Pi\)</span> proper, <span class="math-inline" role="math">\((\theta,X)\)</span> mempunyai hukum gabungan yang terdefinisi,
 dan <span class="math-inline" role="math">\(C(X)\)</span> terukur. Maka</p>
 <div class="math-display" role="math">\[E_{m_\Pi}\!\left[\Pi\{\theta\in C(X)\mid X\}\right]
@@ -86,19 +87,20 @@ pada daerah lain, lalu tepat berimbang setelah diintegralkan terhadap prior.
 Sebaliknya, bila <span class="math-inline" role="math">\(c(\theta)=1-\alpha\)</span> untuk setiap <span class="math-inline" role="math">\(\theta\)</span>, rata-rata terhadap
 setiap prior proper tentu sama dengan <span class="math-inline" role="math">\(1-\alpha\)</span>; namun fakta itu sendiri tidak
 memaksa <span class="math-inline" role="math">\(C(x)\)</span> mempunyai massa posterior <span class="math-inline" role="math">\(1-\alpha\)</span> untuk setiap <span class="math-inline" role="math">\(x\)</span>.</p>
-<p>Syarat proper juga material. Prior tak proper dapat menghasilkan posterior
+<p>Syarat prior proper juga penting. Prior tak proper dapat menghasilkan posterior
 proper, tetapi tidak menentukan distribusi prediktif prior ternormalisasi.
-Dalam kasus itu integral terata-prior di atas bukan pernyataan peluang sampai
-sebuah prior proper atau limit proper dibekukan.</p>
+Dalam kasus itu integral rata-rata prior di atas bukan pernyataan peluang sampai
+sebuah prior proper atau limit dari prior proper ditetapkan.</p>
 <p><a id="O006-C140-CMP-D013-SEC02"></a></p>
-<h2>Contoh Normal eksak: kebetulan pivot dan efek penyusutan</h2>
-<p>Ambil <span class="math-inline" role="math">\(X_1,\ldots,X_n\)</span> iid <span class="math-inline" role="math">\(N(\mu,\sigma^2)\)</span> dengan <span class="math-inline" role="math">\(\sigma\)</span> diketahui dan
-tulis <span class="math-inline" role="math">\(s^2=\sigma^2/n\)</span>. Maka <span class="math-inline" role="math">\(\bar X\mid\mu\sim N(\mu,s^2)\)</span>.</p>
+<h2>Contoh normal eksak: kesesuaian akibat pivot dan efek penyusutan</h2>
+<p>Ambil <span class="math-inline" role="math">\(X_1,\ldots,X_n\)</span> yang saling independen dan berdistribusi identik (iid)
+menurut <span class="math-inline" role="math">\(N(\mu,\sigma^2)\)</span>, dengan <span class="math-inline" role="math">\(\sigma\)</span> diketahui, dan tulis
+<span class="math-inline" role="math">\(s^2=\sigma^2/n\)</span>. Maka <span class="math-inline" role="math">\(\bar X\mid\mu\sim N(\mu,s^2)\)</span>.</p>
 <p><a id="O006-C140-CMP-D013-EX01"></a></p>
 <h3>Prior datar: selang yang sama, dua pembenaran</h3>
 <p>Dengan prior formal <span class="math-inline" role="math">\(\pi(\mu)\propto1\)</span>, posterior adalah</p>
 <div class="math-display" role="math">\[\mu\mid\bar X=x\sim N(x,s^2).\]</div>
-<p>Selang kredibel ekor-sama <span class="math-inline" role="math">\(1-\alpha\)</span> adalah</p>
+<p>Selang kredibel berekor sama <span class="math-inline" role="math">\(1-\alpha\)</span> adalah</p>
 <div class="math-display" role="math">\[C(x)=[x-z_{1-\alpha/2}s,\ x+z_{1-\alpha/2}s].\]</div>
 <p>Untuk <span class="math-inline" role="math">\(\mu\)</span> tetap,</p>
 <div class="math-display" role="math">\[P_\mu\{\mu\in C(\bar X)\}
@@ -106,12 +108,12 @@ tulis <span class="math-inline" role="math">\(s^2=\sigma^2/n\)</span>. Maka <spa
 \left|\frac{\bar X-\mu}{s}\right|\le z_{1-\alpha/2}
 \right\}=1-\alpha.\]</div>
 <p>Jadi titik ujung yang sama mempunyai interpretasi posterior dan cakupan eksak.
-Kesamaan ini berasal dari pivot lokasi Normal dan bentuk prior datar, bukan
+Kesamaan ini berasal dari pivot pada model lokasi normal dan bentuk prior datar, bukan
 teorema bahwa setiap selang kredibel adalah selang kepercayaan. Karena prior
-datar tak proper, <a class="xref" data-target-id="O006-C140-CMP-D013-THM01" href="O006-C140-CMP-D013.html#O006-C140-CMP-D013-THM01">Identitas cakupan terata-prior</a> bukan pembenaran bagi hasil
-ini; cakupan dibuktikan langsung dari pivot Normal.</p>
+datar tak proper, <a class="xref" data-target-id="O006-C140-CMP-D013-THM01" href="O006-C140-CMP-D013.html#O006-C140-CMP-D013-THM01">Identitas cakupan rata-rata prior</a> bukan pembenaran bagi hasil
+ini; cakupan dibuktikan langsung dari pivot pada model normal.</p>
 <p><a id="O006-C140-CMP-D013-EX02"></a></p>
-<h3>Prior Normal proper: cakupan sebagai fungsi parameter tetap</h3>
+<h3>Prior normal proper: cakupan sebagai fungsi parameter tetap</h3>
 <p>Sekarang gunakan prior <span class="math-inline" role="math">\(\mu\sim N(m_0,\tau^2)\)</span> dengan <span class="math-inline" role="math">\(0&lt;\tau&lt;\infty\)</span>.
 Tuliskan</p>
 <div class="math-display" role="math">\[v_n=(\tau^{-2}+s^{-2})^{-1},
@@ -122,7 +124,7 @@ w=\frac{\tau^2}{\tau^2+s^2}.\]</div>
 N\{m_n(x),v_n\},
 \qquad
 m_n(x)=wx+(1-w)m_0,\]</div>
-<p>dan selang kredibel ekor-sama ialah</p>
+<p>dan selang kredibel berekor sama ialah</p>
 <div class="math-display" role="math">\[C_\Pi(x)=
 [m_n(x)-z_{1-\alpha/2}\sqrt{v_n},\
  m_n(x)+z_{1-\alpha/2}\sqrt{v_n}].\]</div>
@@ -130,7 +132,7 @@ m_n(x)=wx+(1-w)m_0,\]</div>
 <div class="math-display" role="math">\[m_n(\bar X)-\mu
 \sim N\{(1-w)(m_0-\mu),\ w^2s^2\}.\]</div>
 <p>Jika <span class="math-inline" role="math">\(a=z_{1-\alpha/2}\sqrt{v_n}\)</span>,
-cakupan frequentist eksaknya adalah</p>
+cakupan frekuentis eksaknya adalah</p>
 <div class="math-display" role="math">\[c(\mu)=
 \Phi\!\left(
 \frac{a-(1-w)(m_0-\mu)}{ws}
@@ -142,22 +144,23 @@ cakupan frequentist eksaknya adalah</p>
 <p>Formula ini menampilkan dua efek prior: pusat disusutkan ke <span class="math-inline" role="math">\(m_0\)</span>, dan panjang
 selang memakai varians posterior <span class="math-inline" role="math">\(v_n\)</span>. Cakupan bukan konstanta terhadap
 <span class="math-inline" role="math">\(\mu\)</span>.</p>
-<p>Sebagai kontraeksempel numerik, ambil <span class="math-inline" role="math">\(n=25\)</span>, <span class="math-inline" role="math">\(\sigma=1\)</span>, <span class="math-inline" role="math">\(m_0=0\)</span>,
+<p>Sebagai contoh tandingan numerik, ambil <span class="math-inline" role="math">\(n=25\)</span>, <span class="math-inline" role="math">\(\sigma=1\)</span>, <span class="math-inline" role="math">\(m_0=0\)</span>,
 <span class="math-inline" role="math">\(\tau=0{,}2\)</span>, dan <span class="math-inline" role="math">\(\alpha=0{,}05\)</span>. Maka <span class="math-inline" role="math">\(w=1/2\)</span>, <span class="math-inline" role="math">\(v_n=0{,}02\)</span>, dan
 <span class="math-inline" role="math">\(a\approx0{,}27718\)</span>. Pada <span class="math-inline" role="math">\(\mu=0\)</span>, cakupan sekitar <span class="math-inline" role="math">\(0{,}9944\)</span>; pada
 <span class="math-inline" role="math">\(\mu=1\)</span>, cakupan hanya sekitar <span class="math-inline" role="math">\(0{,}0129\)</span>. Meski begitu, jika <span class="math-inline" role="math">\(\mu\)</span> benar-benar
 diambil dari prior <span class="math-inline" role="math">\(N(0,0{,}2^2)\)</span>, identitas
-<a class="xref" data-target-id="O006-C140-CMP-D013-THM01" href="O006-C140-CMP-D013.html#O006-C140-CMP-D013-THM01">Identitas cakupan terata-prior</a> menjamin cakupan terata-prior tepat <span class="math-inline" role="math">\(0{,}95\)</span>.
-Rata-rata yang tepat dapat menyembunyikan daerah parameter-tetap dengan
+<a class="xref" data-target-id="O006-C140-CMP-D013-THM01" href="O006-C140-CMP-D013.html#O006-C140-CMP-D013-THM01">Identitas cakupan rata-rata prior</a> menjamin cakupan rata-rata prior tepat <span class="math-inline" role="math">\(0{,}95\)</span>.
+Rata-rata yang tepat dapat menyembunyikan daerah parameter tetap dengan
 kekurangan cakupan yang besar.</p>
 <p><a id="O006-C140-CMP-D013-REM02"></a></p>
-<h3>Kondisi pembalik pada contoh Normal</h3>
+<h3>Kapan kesesuaian pada contoh normal berubah</h3>
 <p>Jika <span class="math-inline" role="math">\(\tau^2\to\infty\)</span> dengan <span class="math-inline" role="math">\(n\)</span> tetap, maka <span class="math-inline" role="math">\(w\to1\)</span>,
 <span class="math-inline" role="math">\(v_n\to s^2\)</span>, dan formula cakupan kembali ke <span class="math-inline" role="math">\(1-\alpha\)</span> untuk setiap
-<span class="math-inline" role="math">\(\mu\)</span>. Jika <span class="math-inline" role="math">\(n\to\infty\)</span> sementara prior tetap, positif, dan tidak meniadakan
-lingkungan nilai benar, pengaruh penyusutan juga hilang pada orde pertama.
-Namun prior yang makin terkonsentrasi bersama <span class="math-inline" role="math">\(n\)</span>, parameter pada batas,
-model salah, atau target nonreguler dapat membatalkan pembalikan tersebut.</p>
+<span class="math-inline" role="math">\(\mu\)</span>. Jika <span class="math-inline" role="math">\(n\to\infty\)</span> sementara prior tidak berubah dengan <span class="math-inline" role="math">\(n\)</span> dan
+memberikan massa positif pada lingkungan nilai sebenarnya, pengaruh penyusutan
+juga hilang pada orde pertama. Namun prior yang makin terkonsentrasi seiring
+bertambahnya <span class="math-inline" role="math">\(n\)</span>, parameter pada batas,
+model yang salah, atau target nonreguler dapat menggagalkan kesesuaian tersebut.</p>
 <p><a id="O006-C140-CMP-D013-SEC03"></a></p>
 <h2>Beta–binomial: kurva cakupan parameter tetap</h2>
 <p>Misalkan</p>
@@ -176,13 +179,13 @@ eksak</p>
 <div class="math-display" role="math">\[c(p)=\sum_{y=0}^{n}
 \mathbf1\{L_y\le p\le U_y\}
 {n\choose y}p^y(1-p)^{n-y}.\]</div>
-<p>Fungsi ini berubah bersama <span class="math-inline" role="math">\(p\)</span> dan dapat meloncat ketika <span class="math-inline" role="math">\(p\)</span> melewati salah
+<p>Fungsi ini berubah menurut <span class="math-inline" role="math">\(p\)</span> dan dapat meloncat ketika <span class="math-inline" role="math">\(p\)</span> melewati salah
 satu titik ujung <span class="math-inline" role="math">\(L_y\)</span> atau <span class="math-inline" role="math">\(U_y\)</span>. Tidak ada langkah dalam konjugasi
-Beta–binomial yang membuatnya identik dengan <span class="math-inline" role="math">\(1-\alpha\)</span>.</p>
+beta–binomial yang membuatnya identik dengan <span class="math-inline" role="math">\(1-\alpha\)</span>.</p>
 <p><a id="O006-C140-CMP-D013-THM02"></a></p>
-<h3>Identitas Beta–binomial bagi cakupan terata-prior</h3>
+<h3>Identitas beta–binomial bagi cakupan rata-rata prior</h3>
 <p>Dengan <span class="math-inline" role="math">\(\pi(p)\)</span> densitas <span class="math-inline" role="math">\(\operatorname{Beta}(a,b)\)</span> dan <span class="math-inline" role="math">\(m(y)\)</span> massa
-prediktif Beta–binomial,</p>
+prediktif beta–binomial,</p>
 <div class="math-display" role="math">\[\int_0^1c(p)\pi(p)\,dp=1-\alpha.\]</div>
 <p><a id="O006-C140-CMP-D013-PRF02"></a></p>
 <h3>Bukti</h3>
@@ -199,9 +202,9 @@ m(y)\int_{L_y}^{U_y}\pi(p\mid y)\,dp\\
 <span class="math-inline" role="math">\(P(y\mid p)\pi(p)=m(y)\pi(p\mid y)\)</span>; baris terakhir memakai jumlah massa
 prediktif <span class="math-inline" role="math">\(\sum_y m(y)=1\)</span>. <span class="math-inline" role="math">\(\square\)</span></p>
 <p><a id="O006-C140-CMP-D013-EX03"></a></p>
-<h3>Kontraeksempel eksak dengan satu pengamatan</h3>
+<h3>Contoh tandingan eksak dengan satu pengamatan</h3>
 <p>Ambil prior seragam <span class="math-inline" role="math">\(\operatorname{Beta}(1,1)\)</span>, <span class="math-inline" role="math">\(n=1\)</span>, dan interval kredibel
-ekor-sama <span class="math-inline" role="math">\(50\%\)</span>. Jika <span class="math-inline" role="math">\(Y=0\)</span>, posteriornya <span class="math-inline" role="math">\(\operatorname{Beta}(1,2)\)</span> dan</p>
+berekor sama <span class="math-inline" role="math">\(50\%\)</span>. Jika <span class="math-inline" role="math">\(Y=0\)</span>, posteriornya <span class="math-inline" role="math">\(\operatorname{Beta}(1,2)\)</span> dan</p>
 <div class="math-display" role="math">\[C(0)=[1-\sqrt{3}/2,\ 1/2].\]</div>
 <p>Jika <span class="math-inline" role="math">\(Y=1\)</span>, posteriornya <span class="math-inline" role="math">\(\operatorname{Beta}(2,1)\)</span> dan</p>
 <div class="math-display" role="math">\[C(1)=[1/2,\ \sqrt{3}/2].\]</div>
@@ -220,50 +223,50 @@ lain. Namun</p>
 <div class="math-display" role="math">\[\int_q^{1/2}(1-p)\,dp
 +\int_{1/2}^{\sqrt3/2}p\,dp
 =\frac14+\frac14=\frac12.\]</div>
-<p>Kalibrasi prior-rata tepat tidak membalik fakta bahwa kalibrasi pada <span class="math-inline" role="math">\(p\)</span> tetap
+<p>Kalibrasi rata-rata prior yang tepat tidak mengubah fakta bahwa kalibrasi pada <span class="math-inline" role="math">\(p\)</span> tetap
 sangat tidak seragam.</p>
 <p><a id="O006-C140-CMP-D013-ALG01"></a></p>
 <h2>Audit cakupan yang dapat direproduksi</h2>
 <p>Untuk sebuah aturan kredibel diskret atau kontinu:</p>
 <ol>
-<li>bekukan prior, likelihood, metode titik ujung, dan konvensi inklusi batas;</li>
-<li>hitung massa posterior sebagai fungsi data dan hard-fail bila bukan target;</li>
-<li>tahan <span class="math-inline" role="math">\(\theta\)</span> tetap pada kisi yang mencakup batas serta daerah prior tipis;</li>
+<li>tetapkan prior, fungsi kemungkinan, metode titik ujung, dan konvensi inklusi batas;</li>
+<li>hitung massa posterior sebagai fungsi data dan hentikan pemeriksaan bila nilainya bukan target;</li>
+<li>anggap <span class="math-inline" role="math">\(\theta\)</span> tetap pada kisi yang mencakup batas serta daerah yang diberi massa prior kecil;</li>
 <li>hitung <span class="math-inline" role="math">\(P_\theta\{\theta\in C(X)\}\)</span> secara eksak bila jumlah hingga, atau
-dengan simulasi seeded dan galat Monte Carlo yang dilaporkan;</li>
+dengan simulasi yang memakai benih acak tetap dan galat Monte Carlo yang dilaporkan;</li>
 <li>hitung pula rata-rata terhadap prior dan cocokkan dengan
-<a class="xref" data-target-id="O006-C140-CMP-D013-THM01" href="O006-C140-CMP-D013.html#O006-C140-CMP-D013-THM01">Identitas cakupan terata-prior</a>;</li>
+<a class="xref" data-target-id="O006-C140-CMP-D013-THM01" href="O006-C140-CMP-D013.html#O006-C140-CMP-D013-THM01">Identitas cakupan rata-rata prior</a>;</li>
 <li>laporkan minimum, maksimum, serta lokasi kekurangan cakupan, bukan hanya
 rata-ratanya.</li>
 </ol>
 <p>Pemeriksaan langkah kelima menguji implementasi Bayesian. Langkah ketiga dan
-keempat menjawab pertanyaan frequentist yang berbeda.</p>
+keempat menjawab pertanyaan frekuentis yang berbeda.</p>
 <p><a id="O006-C140-CMP-D013-SEC04"></a></p>
-<h2>Pemeriksaan prediktif posterior bukan p-value klasik</h2>
+<h2>Pemeriksaan prediktif posterior bukan nilai-p klasik</h2>
 <p><a id="O006-C140-CMP-D013-DEF02"></a></p>
 <h3>Dua konstruksi ekor</h3>
-<p>Untuk hipotesis nol sederhana <span class="math-inline" role="math">\(P_{\theta_0}\)</span> dan statistik <span class="math-inline" role="math">\(T\)</span>, p-value ekor
+<p>Untuk hipotesis nol sederhana <span class="math-inline" role="math">\(P_{\theta_0}\)</span> dan statistik <span class="math-inline" role="math">\(T\)</span>, nilai-p ekor
 atas dapat ditulis</p>
 <div class="math-display" role="math">\[p_F(x)=P_{\theta_0}\{T(X^{\mathrm{rep}})\ge T(x)\}.\]</div>
-<p>Jika distribusi <span class="math-inline" role="math">\(T(X)\)</span> kontinu di bawah nol, $p_F(X)\sim
-\operatorname{Unif}(0,1)<span class="math-inline" role="math">\(. Karena itu aturan \)</span>p_F\le\alpha$ mempunyai size
+<p>Jika distribusi <span class="math-inline" role="math">\(T(X)\)</span> kontinu di bawah hipotesis nol, maka
+<span class="math-inline" role="math">\(p_F(X)\sim\operatorname{Unif}(0,1)\)</span>. Karena itu aturan <span class="math-inline" role="math">\(p_F\le\alpha\)</span> mempunyai ukuran
 eksak <span class="math-inline" role="math">\(\alpha\)</span>. Pada statistik diskret, distribusinya biasanya konservatif
-tanpa randomisasi. Pada nol komposit, plug-in parameter belum tentu valid;
+tanpa randomisasi. Pada hipotesis nol komposit, substitusi langsung parameter belum tentu valid;
 supremum, pengondisian, pivot, atau kalibrasi lain diperlukan.</p>
 <p>Pemeriksaan prediktif posterior memakai</p>
 <div class="math-display" role="math">\[p_{\mathrm{ppc}}(x)=
 P\{T(X^{\mathrm{rep}},\theta)
 \ge T(x,\theta)\mid X=x\},\]</div>
 <p>dengan <span class="math-inline" role="math">\(\theta\mid x\)</span> diambil dari posterior dan
-<span class="math-inline" role="math">\(X^{\mathrm{rep}}\mid\theta\)</span> dari model sampling. Data <span class="math-inline" role="math">\(x\)</span> menentukan
-posterior sekaligus muncul dalam discrepancy. Karena penggunaan ganda ini,
-<span class="math-inline" role="math">\(p_{\mathrm{ppc}}(X)\)</span> umumnya tidak Uniform di bawah <span class="math-inline" role="math">\(P_\theta\)</span> dan tidak
-otomatis memberi uji size <span class="math-inline" role="math">\(\alpha\)</span>.</p>
+<span class="math-inline" role="math">\(X^{\mathrm{rep}}\mid\theta\)</span> dari model pengambilan sampel. Data <span class="math-inline" role="math">\(x\)</span> menentukan
+posterior sekaligus muncul dalam statistik ketaksesuaian. Karena penggunaan ganda ini,
+<span class="math-inline" role="math">\(p_{\mathrm{ppc}}(X)\)</span> umumnya tidak berdistribusi seragam di bawah <span class="math-inline" role="math">\(P_\theta\)</span> dan tidak
+otomatis memberi uji berukuran <span class="math-inline" role="math">\(\alpha\)</span>.</p>
 <p><a id="O006-C140-CMP-D013-EX04"></a></p>
-<h3>Kontraeksempel Normal: nilai prediktif selalu satu-setengah</h3>
-<p>Ambil model Normal pada <a class="xref" data-target-id="O006-C140-CMP-D013-EX01" href="O006-C140-CMP-D013.html#O006-C140-CMP-D013-EX01">Prior datar: selang yang sama, dua pembenaran</a> dengan
-<span class="math-inline" role="math">\(\sigma\)</span> diketahui, prior datar, dan discrepancy <span class="math-inline" role="math">\(T(X)=\bar X\)</span>. Diberikan
-data <span class="math-inline" role="math">\(x\)</span>,</p>
+<h3>Contoh tandingan normal: nilai-p prediktif posterior selalu <span class="math-inline" role="math">\(1/2\)</span></h3>
+<p>Ambil model normal pada <a class="xref" data-target-id="O006-C140-CMP-D013-EX01" href="O006-C140-CMP-D013.html#O006-C140-CMP-D013-EX01">Prior datar: selang yang sama, dua pembenaran</a> dengan
+<span class="math-inline" role="math">\(\sigma\)</span> diketahui, prior datar, dan statistik ketaksesuaian <span class="math-inline" role="math">\(T(X)=\bar X\)</span>.
+Setelah data <span class="math-inline" role="math">\(x\)</span> diamati,</p>
 <div class="math-display" role="math">\[\mu\mid x\sim N(\bar x,s^2),
 \qquad
 \bar X^{\mathrm{rep}}\mid\mu\sim N(\mu,s^2).\]</div>
@@ -272,28 +275,28 @@ data <span class="math-inline" role="math">\(x\)</span>,</p>
 <p>Akibat simetri,</p>
 <div class="math-display" role="math">\[p_{\mathrm{ppc}}(x)
 =P(\bar X^{\mathrm{rep}}\ge\bar x\mid x)=\frac12\]</div>
-<p>untuk setiap data. Nilai itu bukan bukti bahwa model selalu pas; discrepancy
-lokasi telah disesuaikan oleh parameter lokasi yang sama. Pemeriksaan residual,
+<p>untuk setiap data. Nilai itu bukan bukti bahwa model selalu pas; statistik
+ketaksesuaian berbasis lokasi terserap oleh parameter lokasi yang sama. Pemeriksaan sisaan,
 ekor, bentuk, atau pola yang menyasar kegagalan tertentu lebih informatif,
-tetapi nilai prediktifnya tetap harus dilabeli sebagai diagnostik posterior,
-bukan p-value Uniform tanpa bukti kalibrasi tambahan.</p>
+tetapi nilai-p prediktif posterior tersebut tetap harus dilabeli sebagai diagnostik posterior,
+bukan nilai-p seragam tanpa bukti kalibrasi tambahan.</p>
 <p><a id="O006-C140-CMP-D013-REM03"></a></p>
-<h3>Kondisi pembalik bagi klaim kalibrasi prediktif</h3>
-<p>Jika <span class="math-inline" role="math">\(T(X)\)</span> dan <span class="math-inline" role="math">\(T(X^{\mathrm{rep}})\)</span> merupakan dua tarikan independen dari
+<h3>Kapan klaim kalibrasi prediktif berubah</h3>
+<p>Jika <span class="math-inline" role="math">\(T(X)\)</span> dan <span class="math-inline" role="math">\(T(X^{\mathrm{rep}})\)</span> merupakan dua realisasi independen dari
 distribusi prediktif prior yang sama dan distribusi <strong><span class="math-inline" role="math">\(T(X)\)</span></strong> itu kontinu,
-peluang ekor prediktif prior berdistribusi Uniform terhadap hukum gabungan
-prior tersebut. Kontinuitas <span class="math-inline" role="math">\(X\)</span> saja tidak cukup bila <span class="math-inline" role="math">\(T\)</span> mempunyai atom.
-Untuk statistik diskret, diperlukan randomisasi untuk keuniforman eksak atau
-jaminan konservatif yang dinyatakan tepat. Hasil prior-prediktif itu masih
-bukan jaminan size pada setiap <span class="math-inline" role="math">\(\theta\)</span> tetap. Jika targetnya Type I
-frequentist, distribusi statistik harus dihitung di bawah setiap nol yang
-relevan. Jika targetnya kritik model Bayesian, laporkan discrepancy,
+peluang ekor prediktif prior berdistribusi seragam di bawah hukum gabungan yang
+ditentukan oleh prior tersebut. Kontinuitas <span class="math-inline" role="math">\(X\)</span> saja tidak cukup bila <span class="math-inline" role="math">\(T\)</span> mempunyai atom.
+Untuk statistik diskret, diperlukan randomisasi untuk keseragaman eksak atau
+jaminan konservatif yang dinyatakan tepat. Hasil prediktif prior itu masih
+bukan jaminan ukuran pada setiap <span class="math-inline" role="math">\(\theta\)</span> tetap. Jika targetnya galat Tipe I
+frekuentis, distribusi statistik harus dihitung di bawah setiap distribusi dalam
+hipotesis nol yang relevan. Jika targetnya kritik model Bayesian, laporkan statistik ketaksesuaian,
 distribusi prediktif yang dipakai, dan pola kegagalannya tanpa mengimpor label
-size/power.</p>
+ukuran atau daya uji.</p>
 <p><a id="O006-C140-CMP-D013-SEC05"></a></p>
-<h2>Keputusan Bayes dan Neyman–Pearson memakai batas yang berbeda</h2>
-<p>Pertimbangkan dua keadaan, <span class="math-inline" role="math">\(H_0\)</span> dan <span class="math-inline" role="math">\(H_1\)</span>, serta dua tindakan: pilih nol
-<span class="math-inline" role="math">\(a_0\)</span> atau pilih alternatif <span class="math-inline" role="math">\(a_1\)</span>. Ambil loss nol bagi keputusan benar,
+<h2>Keputusan Bayes dan Neyman–Pearson memakai kendala yang berbeda</h2>
+<p>Pertimbangkan dua keadaan, <span class="math-inline" role="math">\(H_0\)</span> dan <span class="math-inline" role="math">\(H_1\)</span>, serta dua tindakan: pilih <span class="math-inline" role="math">\(H_0\)</span>
+dengan <span class="math-inline" role="math">\(a_0\)</span> atau pilih alternatif <span class="math-inline" role="math">\(H_1\)</span> dengan <span class="math-inline" role="math">\(a_1\)</span>. Ambil kerugian nol bagi keputusan benar,
 <span class="math-inline" role="math">\(c_{10}&gt;0\)</span> bagi memilih <span class="math-inline" role="math">\(H_1\)</span> ketika <span class="math-inline" role="math">\(H_0\)</span> benar, dan <span class="math-inline" role="math">\(c_{01}&gt;0\)</span> bagi memilih
 <span class="math-inline" role="math">\(H_0\)</span> ketika <span class="math-inline" role="math">\(H_1\)</span> benar.</p>
 <p><a id="O006-C140-CMP-D013-THM03"></a></p>
@@ -307,47 +310,47 @@ size/power.</p>
 &gt;\frac{c_{10}}{c_{01}}.\]</div>
 <p>Jika peluang prior model adalah <span class="math-inline" role="math">\(\pi_0,\pi_1&gt;0\)</span> dan</p>
 <div class="math-display" role="math">\[B_{10}(x)=\frac{m_1(x)}{m_0(x)},\]</div>
-<p>maka odds posterior sama dengan <span class="math-inline" role="math">\(B_{10}(x)\pi_1/\pi_0\)</span>, sehingga aturan dapat
+<p>maka nisbah peluang posterior sama dengan <span class="math-inline" role="math">\(B_{10}(x)\pi_1/\pi_0\)</span>, sehingga aturan dapat
 ditulis</p>
 <div class="math-display" role="math">\[B_{10}(x)&gt;
 \frac{c_{10}\pi_0}{c_{01}\pi_1}.\]</div>
 <p><a id="O006-C140-CMP-D013-PRF03"></a></p>
 <h3>Bukti</h3>
-<p>Pilih tindakan dengan ekspektasi loss posterior lebih kecil. Ketaksamaan
-<span class="math-inline" role="math">\(\rho(a_1\mid x)&lt;\rho(a_0\mid x)\)</span> setara dengan ketaksamaan odds pertama.
+<p>Pilih tindakan dengan ekspektasi kerugian posterior lebih kecil. Ketaksamaan
+<span class="math-inline" role="math">\(\rho(a_1\mid x)&lt;\rho(a_0\mid x)\)</span> setara dengan ketaksamaan nisbah peluang pertama.
 Teorema Bayes memberi</p>
 <div class="math-display" role="math">\[\frac{P(H_1\mid x)}{P(H_0\mid x)}
 =\frac{m_1(x)\pi_1}{m_0(x)\pi_0}
 =B_{10}(x)\frac{\pi_1}{\pi_0},\]</div>
 <p>yang menghasilkan ambang kedua. Kesamaan dapat diselesaikan dengan
-randomisasi atau aturan tie yang dibekukan. <span class="math-inline" role="math">\(\square\)</span></p>
-<p>Pada hipotesis sederhana, <span class="math-inline" role="math">\(B_{10}=f_1/f_0\)</span> adalah rasio likelihood.
-Lemma Neyman–Pearson <a class="xref" data-target-id="O006-C140-CMP-D006-THM01" href="O006-C140-CMP-D006.html#O006-C140-CMP-D006-THM01">Lemma Neyman–Pearson dengan randomisasi pada kesamaan</a> juga menolak untuk rasio
-yang besar, tetapi memilih ambang agar
-<span class="math-inline" role="math">\(P_0(\text{tolak})\le\alpha\)</span> dan memaksimalkan power pada kendala tersebut.
-Aturan Bayes memilih ambang dari prior dan rasio loss. Keduanya berimpit hanya
+randomisasi atau aturan untuk kasus imbang yang ditetapkan sebelumnya. <span class="math-inline" role="math">\(\square\)</span></p>
+<p>Pada hipotesis sederhana, <span class="math-inline" role="math">\(B_{10}=f_1/f_0\)</span> adalah rasio fungsi kemungkinan.
+Lemma Neyman–Pearson <a class="xref" data-target-id="O006-C140-CMP-D006-THM01" href="O006-C140-CMP-D006.html#O006-C140-CMP-D006-THM01">Lemma Neyman–Pearson dengan randomisasi pada kesamaan</a> juga menolak <span class="math-inline" role="math">\(H_0\)</span> ketika rasio
+besar, tetapi memilih ambang agar
+<span class="math-inline" role="math">\(P_0(\text{tolak})\le\alpha\)</span> dan memaksimalkan daya uji pada kendala tersebut.
+Aturan Bayes memilih ambang dari prior dan rasio kerugian. Keduanya berimpit hanya
 jika ambang keputusan kebetulan sama dengan kuantil Neyman–Pearson, atau jika
-salah satu masalah secara eksplisit dirumuskan ulang melalui kendala/Lagrange
+salah satu masalah secara eksplisit dirumuskan ulang melalui kendala atau pengali Lagrange
 yang menghasilkan ambang sama.</p>
-<p>Untuk alternatif komposit perbedaannya lebih besar. Bayes factor
-mengintegralkan likelihood terhadap prior di dalam <span class="math-inline" role="math">\(H_1\)</span>; uji MP untuk satu
-titik alternatif memakai likelihood titik itu. Optimal terhadap rata-rata
+<p>Untuk alternatif komposit perbedaannya lebih besar. Faktor Bayes
+mengintegralkan fungsi kemungkinan terhadap prior di dalam <span class="math-inline" role="math">\(H_1\)</span>; uji MP untuk satu
+titik alternatif memakai fungsi kemungkinan titik itu. Optimal terhadap rata-rata
 prior tidak berarti UMP pada setiap titik, dan UMP bila tersedia tidak berarti
-meminimumkan risk Bayes untuk setiap loss.</p>
+meminimumkan risiko Bayes untuk setiap kerugian.</p>
 <p><a id="O006-C140-CMP-D013-SEC06"></a></p>
-<h2>Bayes factor dan sensitivitas prior</h2>
-<p>Bayes factor membandingkan probabilitas marginal data, bukan maksimum
-likelihood:</p>
+<h2>Faktor Bayes dan sensitivitas prior</h2>
+<p>Faktor Bayes membandingkan probabilitas marginal data, bukan maksimum
+fungsi kemungkinan:</p>
 <div class="math-display" role="math">\[B_{10}(x)=
 \frac{\int f(x\mid\theta_1)\pi_1(\theta_1)\,d\theta_1}
      {\int f(x\mid\theta_0)\pi_0(\theta_0)\,d\theta_0}.\]</div>
-<p>Karena prior berada di dalam integral, skala dan bentuk prior adalah bagian
-hipotesis. Prior tak proper membawa konstanta normalisasi sebarang; konstanta
-itu tidak selalu saling menghilangkan antarmodel, sehingga Bayes factor biasa
+<p>Karena prior berada di dalam integral, skala dan bentuk prior merupakan bagian
+dari hipotesis. Prior tak proper membawa konstanta normalisasi sebarang; konstanta
+itu tidak selalu saling menghilangkan antarmodel, sehingga faktor Bayes biasa
 tidak terdefinisi. Posterior parameter yang proper tidak dengan sendirinya
-memperbaiki marginal likelihood tersebut.</p>
+memperbaiki fungsi kemungkinan marginal tersebut.</p>
 <p><a id="O006-C140-CMP-D013-EX05"></a></p>
-<h3>Contoh Normal: bukti berubah ketika skala alternatif berubah</h3>
+<h3>Contoh normal: bukti berubah ketika skala alternatif berubah</h3>
 <p>Ringkas data dengan <span class="math-inline" role="math">\(\bar X\mid\mu\sim N(\mu,s^2)\)</span>. Bandingkan</p>
 <div class="math-display" role="math">\[H_0:\mu=0,
 \qquad
@@ -360,47 +363,48 @@ diintegralkan, <span class="math-inline" role="math">\(\bar X\sim N(0,s^2+\tau^2
 \exp\!\left\{
 \frac{z^2}{2}\frac{r}{1+r}
 \right\}.\]</div>
-<p>Untuk <span class="math-inline" role="math">\(z\)</span> tetap, <span class="math-inline" role="math">\(B_{10}\to0\)</span> ketika <span class="math-inline" role="math">\(r\to\infty\)</span>: faktor penyebaran prior
+<p>Untuk <span class="math-inline" role="math">\(z\)</span> tetap, <span class="math-inline" role="math">\(B_{10}\to0\)</span> ketika <span class="math-inline" role="math">\(r\to\infty\)</span>: penalti akibat penyebaran prior
 akhirnya mengalahkan kenaikan eksponensial yang terbatas. Misalnya pada <span class="math-inline" role="math">\(z=2\)</span>,
 <span class="math-inline" role="math">\(B_{10}\approx1{,}92\)</span> untuk <span class="math-inline" role="math">\(r=1\)</span>, sekitar <span class="math-inline" role="math">\(0{,}72\)</span> untuk <span class="math-inline" role="math">\(r=100\)</span>, dan
-sekitar <span class="math-inline" role="math">\(0{,}00739\)</span> untuk <span class="math-inline" role="math">\(r=10^6\)</span>. p-value dua sisi berbasis <span class="math-inline" role="math">\(z\)</span> tidak
-berubah, sedangkan Bayes factor berubah karena hipotesis alternatif memang
+sekitar <span class="math-inline" role="math">\(0{,}00739\)</span> untuk <span class="math-inline" role="math">\(r=10^6\)</span>. Nilai-p dua sisi berbasis <span class="math-inline" role="math">\(z\)</span> tidak
+berubah, sedangkan faktor Bayes berubah karena hipotesis alternatif memang
 berubah.</p>
 <p>Ini bukan paradoks yang diselesaikan dengan memilih prior selebar mungkin.
 Prior yang sangat lebar mengalokasikan banyak massa pada nilai yang memprediksi
-data teramati dengan buruk. Syarat pembaliknya adalah substantif: bekukan skala
-alternatif yang mewakili efek masuk akal sebelum melihat data, atau laporkan
+data teramati dengan buruk. Pilihan yang dapat mengubah kesimpulan harus
+didasarkan pada pertimbangan substantif: tetapkan skala alternatif yang mewakili
+efek masuk akal sebelum melihat data, atau laporkan
 kurva sensitivitas pada rentang yang dapat dipertanggungjawabkan. Jangan
-menafsirkan posterior odds tanpa menyebut odds prior, dan jangan memilih
-<span class="math-inline" role="math">\(\tau\)</span> sesudah melihat <span class="math-inline" role="math">\(z\)</span> lalu memperlakukannya sebagai hipotesis
-praspesifikasi.</p>
+menafsirkan nisbah peluang posterior tanpa menyebut nisbah peluang prior, dan jangan memilih
+<span class="math-inline" role="math">\(\tau\)</span> sesudah melihat <span class="math-inline" role="math">\(z\)</span> lalu memperlakukannya sebagai hipotesis yang
+ditetapkan sebelumnya.</p>
 <p><a id="O006-C140-CMP-D013-ALG02"></a></p>
-<h3>Audit Bayes factor</h3>
+<h3>Audit faktor Bayes</h3>
 <ol>
 <li>Pastikan setiap prior model proper atau gunakan metode khusus yang
-mendefinisikan konstanta antar-model secara sah.</li>
-<li>Pisahkan <span class="math-inline" role="math">\(B_{10}\)</span>, odds prior, odds posterior, dan ambang loss.</li>
-<li>Bekukan unit dan skala prior; uji sensitivitas terhadap pilihan yang masih
+mendefinisikan konstanta antarmodel secara sah.</li>
+<li>Pisahkan <span class="math-inline" role="math">\(B_{10}\)</span>, nisbah peluang prior, nisbah peluang posterior, dan ambang kerugian.</li>
+<li>Tetapkan unit dan skala prior; uji sensitivitas terhadap pilihan yang masih
 masuk akal secara ilmiah.</li>
 <li>Bedakan prior parameter bersama dari peluang prior model.</li>
 <li>Periksa apakah hipotesis titik, interval, dan alternatif komposit benar-benar
 menjawab pertanyaan ilmiah yang sama.</li>
-<li>Laporkan marginal likelihood atau metode integrasinya beserta galat numerik;
-rasio maksimum likelihood bukan Bayes factor.</li>
+<li>Laporkan fungsi kemungkinan marginal atau metode integrasinya beserta galat numerik;
+rasio maksimum fungsi kemungkinan bukan faktor Bayes.</li>
 </ol>
 <p><a id="O006-C140-CMP-D013-SEC07"></a></p>
-<h2>Optional stopping: inferensi kondisional dan kendali galat</h2>
-<p>Pernyataan “Bayesian kebal terhadap optional stopping” terlalu luas. Ada dua
-hasil yang berguna, dengan hipotesis berbeda.</p>
+<h2>Penghentian opsional: inferensi bersyarat dan kendali galat</h2>
+<p>Pernyataan “Bayesian kebal terhadap penghentian opsional” terlalu luas. Ada dua
+hasil yang berguna, dengan asumsi berbeda.</p>
 <p><a id="O006-C140-CMP-D013-THM04"></a></p>
-<h3>Bayes factor sebagai martingale likelihood-ratio</h3>
-<p>Misalkan <span class="math-inline" role="math">\(P_0\)</span> dan <span class="math-inline" role="math">\(P_1\)</span> adalah dua hukum probabilitas yang telah dibekukan
+<h3>Faktor Bayes sebagai martingal bagi rasio fungsi kemungkinan</h3>
+<p>Misalkan <span class="math-inline" role="math">\(P_0\)</span> dan <span class="math-inline" role="math">\(P_1\)</span> adalah dua hukum probabilitas yang telah ditetapkan sebelumnya
 pada deret data, <span class="math-inline" role="math">\(\mathcal F_n\)</span> adalah riwayat hingga waktu <span class="math-inline" role="math">\(n\)</span>,
 <span class="math-inline" role="math">\(\mathcal F_0\)</span> trivial, dan
 <span class="math-inline" role="math">\(P_1|_{\mathcal F_n}\ll P_0|_{\mathcal F_n}\)</span>. Definisikan</p>
 <div class="math-display" role="math">\[B_{10,n}=
 \frac{dP_1|_{\mathcal F_n}}{dP_0|_{\mathcal F_n}}.\]</div>
-<p>Maka <span class="math-inline" role="math">\((B_{10,n})\)</span> adalah martingale nonnegatif di bawah <span class="math-inline" role="math">\(P_0\)</span> dengan
+<p>Maka <span class="math-inline" role="math">\((B_{10,n})\)</span> adalah martingal nonnegatif di bawah <span class="math-inline" role="math">\(P_0\)</span> dengan
 <span class="math-inline" role="math">\(E_0B_{10,n}=1\)</span>. Akibat ketaksamaan Ville,</p>
 <div class="math-display" role="math">\[P_0\!\left(\sup_{n\ge0}B_{10,n}\ge\frac1\alpha\right)\le\alpha.\]</div>
 <p><a id="O006-C140-CMP-D013-PRF04"></a></p>
@@ -411,14 +415,14 @@ pada deret data, <span class="math-inline" role="math">\(\mathcal F_n\)</span> a
 <p>Karakterisasi ekspektasi bersyarat memberi
 <span class="math-inline" role="math">\(E_0(B_{10,n+1}\mid\mathcal F_n)=B_{10,n}\)</span>. Nonnegativitas dan nilai awal
 satu mengikuti dari turunan Radon–Nikodym. Untuk
-<span class="math-inline" role="math">\(\tau_c=\inf\{n:B_{10,n}\ge c\}\)</span>, terapkan optional stopping pada
+<span class="math-inline" role="math">\(\tau_c=\inf\{n:B_{10,n}\ge c\}\)</span>, terapkan penghentian opsional pada
 <span class="math-inline" role="math">\(\tau_c\wedge N\)</span>:</p>
 <div class="math-display" role="math">\[1=E_0B_{10,0}=E_0B_{10,\tau_c\wedge N}
 \ge c\,P_0(\tau_c\le N).\]</div>
 <p>Biarkan <span class="math-inline" role="math">\(N\to\infty\)</span> dan gunakan kontinuitas probabilitas untuk memperoleh
 <span class="math-inline" role="math">\(P_0(\tau_c&lt;\infty)\le1/c\)</span>. Ambil <span class="math-inline" role="math">\(c=1/\alpha\)</span>. <span class="math-inline" role="math">\(\square\)</span></p>
 <p><a id="O006-C140-CMP-D013-EX06"></a></p>
-<h3>Contoh sequential yang sah dan batasnya</h3>
+<h3>Contoh berurutan yang sah dan batasnya</h3>
 <p>Bandingkan koin sederhana <span class="math-inline" role="math">\(H_0:p=0{,}5\)</span> dengan <span class="math-inline" role="math">\(H_1:p=0{,}7\)</span>. Setelah setiap
 lemparan, perbarui</p>
 <div class="math-display" role="math">\[B_{10,n}=
@@ -427,11 +431,11 @@ lemparan, perbarui</p>
      {0{,}5^{X_i}0{,}5^{1-X_i}}.\]</div>
 <p>Jika pengambilan data dihentikan dan <span class="math-inline" role="math">\(H_0\)</span> ditolak pertama kali
 <span class="math-inline" role="math">\(B_{10,n}\ge20\)</span>, probabilitas pernah menolak di bawah <span class="math-inline" role="math">\(p=0{,}5\)</span> tidak lebih
-dari <span class="math-inline" role="math">\(0{,}05\)</span>. Dengan odds prior sama, threshold ini juga membuat peluang
+dari <span class="math-inline" role="math">\(0{,}05\)</span>. Dengan nisbah peluang prior yang sama, ambang ini juga membuat peluang
 posterior <span class="math-inline" role="math">\(H_1\)</span> sedikitnya <span class="math-inline" role="math">\(20/21\approx0{,}9524\)</span> pada saat berhenti.</p>
 <p>Namun batas tersebut tidak otomatis berlaku pada <span class="math-inline" role="math">\(p=0{,}6\)</span>, sebab nilai itu
-bukan anggota salah satu model sederhana. Untuk nol komposit, diperlukan
-e-process atau supermartingale yang sah bagi <strong>setiap</strong> <span class="math-inline" role="math">\(\theta\in\Theta_0\)</span>,
+bukan anggota salah satu model sederhana. Untuk hipotesis nol komposit, diperlukan
+proses-e atau supermartingal yang sah bagi <strong>setiap</strong> <span class="math-inline" role="math">\(\theta\in\Theta_0\)</span>,
 atau klaim harus dibatasi pada hukum prediktif prior <span class="math-inline" role="math">\(P_0\)</span> yang benar-benar
 dipakai.</p>
 <p><a id="O006-C140-CMP-D013-REM04"></a></p>
@@ -439,58 +443,60 @@ dipakai.</p>
 <p>Jika waktu berhenti adalah fungsi dari riwayat yang diamati, aturan yang sama
 dipakai di bawah kedua model, dan semua data yang menentukan berhenti tercatat,
 indikator “berhenti pada riwayat ini” muncul sebagai faktor yang sama pada dua
-likelihood dan menghilang dari rasionya. Posterior pada riwayat berhenti lalu
-dapat dihitung dari likelihood riwayat tersebut.</p>
-<p>Pembalikan terjadi bila mekanisme berhenti bergantung pada informasi yang
-tidak dicatat, sensor/kehilangan data bergantung parameter, prior atau model
-diubah setelah melihat lintasan, atau likelihood hampiran tidak lagi membentuk
+fungsi kemungkinan dan menghilang dari rasionya. Posterior berdasarkan riwayat
+hingga saat penghentian kemudian dapat dihitung dari fungsi kemungkinan riwayat tersebut.</p>
+<p>Kesimpulan ini tidak berlaku bila mekanisme berhenti bergantung pada informasi yang
+tidak dicatat, penyensoran atau kehilangan data bergantung pada parameter, prior atau model
+diubah setelah melihat lintasan, atau fungsi kemungkinan hampiran tidak lagi membentuk
 turunan Radon–Nikodym yang sah. Mekanisme itu harus dimodelkan. Selain itu,
-validitas posterior di bawah model tidak identik dengan kendali Type I pada
+validitas posterior di bawah model tidak identik dengan kendali Tipe I pada
 setiap parameter tetap.</p>
-<p>p-value fixed-sample yang diperiksa berulang sampai kurang dari <span class="math-inline" role="math">\(0{,}05\)</span> tidak
-mewarisi <a class="xref" data-target-id="O006-C140-CMP-D013-THM04" href="O006-C140-CMP-D013.html#O006-C140-CMP-D013-THM04">Bayes factor sebagai martingale likelihood-ratio</a>. Ia memerlukan desain sequential,
-alpha-spending, atau proses uji yang memang valid setiap saat. Martingale Bayes
-factor memberi satu konstruksi, bukan izin umum untuk mengabaikan rancangan.</p>
+<p>Nilai-p untuk sampel tetap yang diperiksa berulang sampai kurang dari <span class="math-inline" role="math">\(0{,}05\)</span> tidak
+mewarisi <a class="xref" data-target-id="O006-C140-CMP-D013-THM04" href="O006-C140-CMP-D013.html#O006-C140-CMP-D013-THM04">Faktor Bayes sebagai martingal bagi rasio fungsi kemungkinan</a>. Ia memerlukan desain berurutan,
+alokasi alfa (<em>alpha-spending</em>), atau proses uji yang memang valid setiap saat. Argumen martingal
+memberikan batas bagi faktor Bayes: ini satu konstruksi, bukan izin umum untuk
+mengabaikan desain.</p>
 <p><a id="O006-C140-CMP-D013-SEC08"></a></p>
 <h2>Pencocokan asimtotik dan kondisi kegagalannya</h2>
-<p>Dalam model parametrik reguler berdimensi tetap, posterior dan likelihood
+<p>Dalam model parametrik reguler berdimensi tetap, posterior dan fungsi kemungkinan
 sering berbagi geometri kuadratik lokal. Secara informal, sebuah teorema
-Bernstein–von Mises menyatakan bahwa, jika parameter benar interior, model
-teridentifikasi dan terspesifikasi benar, informasi nonsingular, likelihood
+Bernstein–von Mises menyatakan bahwa, jika parameter benar berada di interior, model
+teridentifikasi dan terspesifikasi benar, informasi nonsingular, fungsi kemungkinan
 memenuhi LAN, serta prior proper mempunyai densitas kontinu positif di sekitar
-<span class="math-inline" role="math">\(\theta_0\)</span>, maka posterior yang dipusatkan pada estimator efisien mendekati</p>
+<span class="math-inline" role="math">\(\theta_0\)</span>, maka posterior yang dipusatkan pada penduga efisien mendekati</p>
 <div class="math-display" role="math">\[N_p\{\widehat\theta_n,[nI(\theta_0)]^{-1}\}\]</div>
 <p>dalam metrik probabilitas yang sesuai. Ekspansi LAN dan normalitas MLE yang
 mendasarinya berada pada <a class="xref" data-target-id="O006-C140-CMP-D003-THM-LAN" href="O006-C140-CMP-D003.html#O006-C140-CMP-D003-THM-LAN">Teorema: ekspansi lokal pada skala akar-$n$</a> dan
-<a class="xref" data-target-id="O006-C140-CMP-D003-THM-MLE-AN" href="O006-C140-CMP-D003.html#O006-C140-CMP-D003-THM-MLE-AN">Teorema: normalitas asimtotik MLE</a>.</p>
+<a class="xref" data-target-id="O006-C140-CMP-D003-THM-MLE-AN" href="O006-C140-CMP-D003.html#O006-C140-CMP-D003-THM-MLE-AN">Teorema: normalitas asimtotik akar skor konsisten, termasuk MLE interior</a>.</p>
 <p>Akibatnya, untuk target halus dan titik ujung reguler, himpunan kredibel posterior
-dapat mempunyai cakupan frequentist</p>
+dapat mempunyai cakupan frekuentis</p>
 <div class="math-display" role="math">\[P_{\theta_0}\{\theta_0\in C_n(X)\}=1-\alpha+o(1).\]</div>
-<p>Ini adalah pencocokan orde pertama, bukan identitas sampel hingga. Prior
-<em>probability matching</em> tertentu dapat memperbaiki galat orde lebih tinggi pada
+<p>Ini adalah pencocokan orde pertama, bukan identitas pada sampel berhingga. Prior
+<em>pencocokan peluang</em> tertentu dapat memperbaiki galat orde lebih tinggi pada
 target skalar tertentu, tetapi sifat itu bergantung pada parameterisasi,
-nuisance, model, dan bentuk himpunan; tidak ada prior tunggal yang otomatis
+parameter pengganggu, model, dan bentuk himpunan; tidak ada prior tunggal yang otomatis
 memadankan semua target.</p>
 <p><a id="O006-C140-CMP-D013-CTR01"></a></p>
-<h3>Daftar kontraeksempel terhadap pembalikan otomatis</h3>
-<p>Kesimpulan pencocokan harus ditarik kembali ketika salah satu mekanisme berikut
-material.</p>
+<h3>Daftar contoh tandingan terhadap pencocokan otomatis</h3>
+<p>Kesimpulan pencocokan tidak berlaku ketika salah satu mekanisme berikut
+berpengaruh secara substantif.</p>
 <ol>
-<li><strong>Parameter batas atau support bergerak.</strong> Posterior dapat memiliki massa
-batas atau laju non-<span class="math-inline" role="math">\(\sqrt n\)</span>; limit Normal/Wilks gagal.</li>
+<li><strong>Parameter batas atau dukungan bergerak.</strong> Posterior dapat memiliki massa
+batas atau laju non-<span class="math-inline" role="math">\(\sqrt n\)</span>; limit normal/Wilks gagal.</li>
 <li><strong>Informasi singular atau nonidentifiabilitas.</strong> Geometri kuadratik lokal
-tidak dapat diinvers atau beberapa label menghasilkan hukum data sama.</li>
+tidak dapat dibalik atau beberapa label menghasilkan hukum data yang sama.</li>
 <li><strong>Dimensi bertambah cepat atau target nonreguler.</strong> Aproksimasi berdimensi
 tetap tidak mengontrol seluruh posterior atau fungsional yang takmulus.</li>
 <li><strong>Prior bergantung <span class="math-inline" role="math">\(n\)</span> dan terlalu terkonsentrasi.</strong> Bias penyusutan dapat
 bertahan pada skala <span class="math-inline" role="math">\(n^{-1/2}\)</span> atau lebih besar.</li>
-<li><strong>Misspesifikasi.</strong> Posterior dapat memusat pada parameter pseudo-benar;
-kovarians likelihood, OPG, dan sandwich berbeda, sehingga interval posterior
-naif tidak otomatis mempunyai cakupan sandwich.</li>
-<li><strong>Pemilihan model atau stopping yang mengubah target.</strong> Inferensi setelah
+<li><strong>Kesalahan spesifikasi.</strong> Posterior dapat memusat pada parameter semu-benar
+(<em>pseudo-true</em>); kovarians fungsi kemungkinan, hasil kali luar gradien (OPG),
+dan sandwich berbeda, sehingga interval posterior naif tidak otomatis
+memiliki cakupan frekuentis yang sesuai dengan kovarians sandwich.</li>
+<li><strong>Pemilihan model atau penghentian yang mengubah target.</strong> Inferensi setelah
 seleksi memerlukan hukum/prosedur yang benar-benar mencakup seleksi tersebut.</li>
 </ol>
-<p>Kasus-kasus nonreguler konkret dan hipotesis yang gagal dibahas pada unit
+<p>Kasus-kasus nonreguler konkret dan asumsi yang tidak terpenuhi dibahas pada unit
 pendamping sebelumnya; label “sampel besar” tidak memperbaiki kegagalan
 struktural itu.</p>
 <p><a id="O006-C140-CMP-D013-ALG03"></a></p>
@@ -498,57 +504,58 @@ struktural itu.</p>
 <p>Gunakan urutan berikut sebelum menyatakan prosedur “terkalibrasi”.</p>
 <ol>
 <li><strong>Nyatakan target peluang.</strong> Pilih di antara massa posterior bersyarat,
-cakupan pada <span class="math-inline" role="math">\(\theta\)</span> tetap, prediksi prior/posterior, size/power, atau risk.</li>
-<li><strong>Bekukan model dan prior.</strong> Bedakan prior parameter, peluang prior model,
-likelihood sampling, dan aturan berhenti.</li>
-<li><strong>Turunkan prosedur.</strong> Tulis titik ujung, tindakan, discrepancy, atau ambang
+cakupan pada <span class="math-inline" role="math">\(\theta\)</span> tetap, prediksi prior atau posterior, ukuran atau daya uji, atau risiko.</li>
+<li><strong>Tetapkan model dan prior.</strong> Bedakan prior parameter, peluang prior model,
+fungsi kemungkinan pengambilan sampel, dan aturan berhenti.</li>
+<li><strong>Turunkan prosedur.</strong> Tulis titik ujung, tindakan, statistik ketaksesuaian, atau ambang
 secara eksplisit; jangan menyimpulkan makna hanya dari label “95%”.</li>
 <li><strong>Lakukan audit gabungan.</strong> Untuk prosedur Bayesian, simulasikan
 <span class="math-inline" role="math">\(\theta\sim\Pi\)</span>, lalu <span class="math-inline" role="math">\(X\sim P_\theta\)</span>, dan periksa identitas
-<a class="xref" data-target-id="O006-C140-CMP-D013-THM01" href="O006-C140-CMP-D013.html#O006-C140-CMP-D013-THM01">Identitas cakupan terata-prior</a> serta kalibrasi komputasi posterior.</li>
-<li><strong>Lakukan audit parameter-tetap.</strong> Bekukan beberapa <span class="math-inline" role="math">\(\theta\)</span>, terutama
-batas dan daerah prior tipis, lalu hitung cakupan, size, power, dan risk.</li>
-<li><strong>Uji sensitivitas keputusan.</strong> Variasikan prior dan loss hanya pada rentang
-praspesifikasi yang substantif; laporkan kapan keputusan berbalik.</li>
-<li><strong>Audit prediktif.</strong> Pilih discrepancy yang menyasar kegagalan tertentu dan
-jangan menyebut tail area posterior sebagai p-value Uniform tanpa bukti.</li>
-<li><strong>Audit sequential.</strong> Untuk pemantauan berulang, buktikan martingale/
-supermartingale atau gunakan rancangan sequential yang valid; fixed-sample
-threshold tidak cukup.</li>
-<li><strong>Nyatakan rezim kesetaraan.</strong> Jika prosedur Bayesian dan frequentist
-berimpit, sebutkan apakah kesetaraannya eksak, prior-rata, atau hanya
-asimtotik, beserta syarat pembaliknya.</li>
+<a class="xref" data-target-id="O006-C140-CMP-D013-THM01" href="O006-C140-CMP-D013.html#O006-C140-CMP-D013-THM01">Identitas cakupan rata-rata prior</a> serta kalibrasi hasil komputasi posterior.</li>
+<li><strong>Lakukan audit parameter tetap.</strong> Tetapkan beberapa <span class="math-inline" role="math">\(\theta\)</span>, terutama
+batas dan daerah yang diberi massa prior kecil, lalu hitung cakupan, ukuran, daya uji, dan risiko.</li>
+<li><strong>Uji sensitivitas keputusan.</strong> Variasikan prior dan kerugian hanya pada rentang
+substantif yang telah ditetapkan sebelumnya; laporkan kapan keputusan berbalik.</li>
+<li><strong>Audit prediktif.</strong> Pilih statistik ketaksesuaian yang menyasar kegagalan tertentu dan
+jangan menyebut probabilitas ekor posterior sebagai nilai-p seragam tanpa bukti.</li>
+<li><strong>Audit berurutan.</strong> Untuk pemantauan berulang, buktikan martingal atau
+supermartingal, atau gunakan desain berurutan yang valid; ambang untuk sampel tetap
+tidak cukup.</li>
+<li><strong>Nyatakan rezim kesetaraan.</strong> Jika prosedur Bayesian dan frekuentis
+berimpit, sebutkan apakah kesetaraannya eksak, rata-rata prior, atau hanya
+asimtotik, beserta syarat yang membatasi kesetaraan itu.</li>
 </ol>
 <p><a id="O006-C140-CMP-D013-SEC09"></a></p>
 <h2>Ringkasan</h2>
 <ul>
-<li>Massa kredibel posterior dan cakupan frequentist adalah dua peluang
-berbeda. Identitas iterated-expectation memberi cakupan terata-prior, bukan
+<li>Massa kredibel posterior dan cakupan frekuentis adalah dua peluang
+berbeda. Identitas ekspektasi berulang memberi cakupan rata-rata prior, bukan
 cakupan seragam pada parameter tetap.</li>
-<li>Prior datar pada model lokasi Normal menghasilkan selang yang sekaligus
-kredibel dan ber-cakupan eksak karena pivot khusus. Prior Normal proper dapat
+<li>Prior datar pada model lokasi normal menghasilkan selang yang kredibel sekaligus
+mempunyai cakupan eksak karena pivot khusus. Prior normal proper dapat
 menghasilkan kekurangan cakupan besar jauh dari pusat prior sambil tetap tepat
-secara prior-rata.</li>
-<li>Interval Beta–binomial memperlihatkan secara eksak bagaimana kurva cakupan
-tetap berubah terhadap <span class="math-inline" role="math">\(p\)</span> walaupun massa posterior dan rata-rata priornya
+secara rata-rata prior.</li>
+<li>Interval beta–binomial memperlihatkan secara eksak bagaimana kurva cakupan
+pada parameter tetap berubah menurut <span class="math-inline" role="math">\(p\)</span> walaupun massa posterior dan rata-rata priornya
 tepat.</li>
-<li>Pemeriksaan prediktif posterior adalah alat diagnosis model; tail area-nya
-umumnya bukan p-value Uniform dan dapat menjadi <span class="math-inline" role="math">\(1/2\)</span> untuk setiap data bila
-discrepancy diserap oleh parameter yang dipasang.</li>
-<li>Neyman–Pearson mengoptimalkan power pada kendala size, sedangkan keputusan
-Bayes meminimumkan loss posterior di bawah prior. Ambangnya berimpit hanya
+<li>Pemeriksaan prediktif posterior adalah alat diagnosis model; probabilitas ekornya
+umumnya bukan nilai-p seragam dan dapat menjadi <span class="math-inline" role="math">\(1/2\)</span> untuk setiap data bila
+statistik ketaksesuaian terserap oleh parameter yang diestimasi.</li>
+<li>Neyman–Pearson mengoptimalkan daya uji pada kendala ukuran, sedangkan keputusan
+Bayes meminimumkan kerugian posterior di bawah prior. Ambangnya berimpit hanya
 di bawah kondisi yang dinyatakan.</li>
-<li>Bayes factor bergantung pada prior alternatif. Optional stopping mempunyai
-jaminan martingale hanya untuk model, likelihood, dan filtrasi yang
-benar-benar dibekukan; jaminan itu tidak otomatis seragam pada nol komposit.</li>
-<li>Pencocokan kredibel/kepercayaan pada sampel besar memerlukan regularitas
+<li>Faktor Bayes bergantung pada prior alternatif. Penghentian opsional mempunyai
+jaminan martingal hanya untuk model, fungsi kemungkinan, dan filtrasi yang
+telah ditetapkan sebelumnya; jaminan itu tidak otomatis seragam pada hipotesis
+nol komposit.</li>
+<li>Pencocokan antara kredibilitas dan kepercayaan pada sampel besar memerlukan syarat keteraturan
 Bernstein–von Mises. Batas, singularitas, nonidentifiabilitas,
-misspesifikasi, dimensi bertambah, dan prior yang terlalu kuat adalah kondisi
-pembalik, bukan detail kecil.</li>
+kesalahan spesifikasi, dimensi bertambah, dan prior yang terlalu kuat adalah kondisi
+yang menggagalkan kesesuaian, bukan detail kecil.</li>
 </ul>
-<p>Materi ini adalah prosa orisinal CC BY-SA 4.0. Ia memperluas perkenalan
-Bayesian Penn State dan menghubungkannya dengan unit keputusan/optimalitas
-pendamping tanpa menyalin prosa sumber.</p>
+<p>Materi ini adalah prosa orisinal CC BY-SA 4.0. Ia memperluas pengantar Bayesian
+Penn State dan menghubungkannya dengan unit pendamping tentang keputusan dan
+optimalitas tanpa menyalin prosa sumber.</p>
 
 <footer class="license">Materi pendamping orisinal berlisensi CC BY-SA 4.0. Komponen Penn State dan Random tetap berada di bawah lisensinya masing-masing dan tidak direlisensikan oleh halaman ini.</footer>
 </main>

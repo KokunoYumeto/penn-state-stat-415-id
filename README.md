@@ -11,8 +11,8 @@ sudah diterjemahkan, dibangun, lulus QA, dan dibaca kembali dari repositori
 publik.** Laman utama serta Pelajaran 00–12 membentuk satu pembaca luring
 lengkap. GitHub/Pages, rilis GitHub, dan versi preservasi Zenodo yang mengikat
 perbaikan reproduksibilitas LF semuanya sudah publik dan terverifikasi secara
-anonim. Komponen pendamping orisinal C140 masih berjalan sebagaimana dirinci
-di bawah.
+anonim. Pendamping orisinal C140 telah lengkap secara lokal dan lulus build/QA
+C5; publikasi kumulatif C5 sedang berlangsung sebagaimana dirinci di bawah.
 
 - 4.932 segmen terjemahan di dalam pembaca lengkap;
 - 6.510 unit struktural sumber dengan ID stabil dan 6.498 unit turunan;
@@ -75,47 +75,50 @@ Hak donor tetap terpisah dari CC BY-NC 4.0 Penn State. Saksi laman utama
 *Random* menyatakan CC BY 2.0, sedangkan `Credits.html` menautkan CC BY 1.0;
 keduanya dipertahankan dan tidak disamakan secara diam-diam.
 
-## Pendamping orisinal C140 — checkpoint kumulatif C4 publik
+## Pendamping orisinal C140 — C5 lengkap lokal, C4 publik terakhir
 
-Pendamping orisinal CC BY-SA 4.0 sudah terbit sampai batas C4 yang koheren,
-terverifikasi secara anonim, dan lulus replay deterministik. C1 memuat fondasi
-likelihood, optimalitas, risiko,
-empat simulasi, empat set penguasaan, dan asesmen `CA01`. C2 menambahkan empat
-unit model linear Gaussian matriks, simulasi regresi seeded, dan set penguasaan
-`MS12`. C3 menambahkan dua unit perbandingan Bayesian–frequentist, simulasi
-kalibrasi interval, dan set penguasaan `MS11`. C4 menambahkan tujuh set
-penguasaan `MS00`–`MS06`, masing-masing dengan delapan masalah lengkap:
+Pendamping orisinal CC BY-SA 4.0 telah lengkap secara lokal sampai C5. Audit
+pascatranslasi, build kumulatif, QA statis, dan pemeriksaan ulang deterministik
+telah lulus tanpa proses browser. Publikasi kumulatif C5 sedang berlangsung;
+C4 tetap menjadi rilis publik terakhir yang telah diverifikasi secara anonim.
 
-- 34 dokumen / 683.211 byte sumber;
-- 114 soal lengkap: metadata, sekurang-kurangnya dua petunjuk bertahap, jawaban
-  singkat, dan solusi penuh;
-- 1.057 anchor stabil / 280 referensi isi yang terselesaikan;
-- pembaca HTML luring: 64 berkas / 3.024.784 byte;
-- backend modular: 1.113 entitas / 1.424 relasi;
-- enam keluarga simulasi deterministik;
-- build, QA statis, replay byte-identik lintas platform, dan audit matematika:
-  lulus tanpa proses browser;
-- pembaca web publik:
-  https://kokunoyumeto.github.io/penn-state-stat-415-id/components/c140-companion/;
-- rilis GitHub kumulatif:
-  https://github.com/KokunoYumeto/penn-state-stat-415-id/releases/tag/v2026.08.29.c140-companion-c4;
-- preservasi Zenodo kumulatif:
-  https://doi.org/10.5281/zenodo.22164344 dalam konsep
-  https://doi.org/10.5281/zenodo.22077422;
-- sumber, kontrak, backend, simulasi, hak, dan receipt:
-  `components/c140-companion/`.
+C1 memuat fondasi fungsi kemungkinan, optimalitas, risiko, empat simulasi,
+empat set penguasaan, dan asesmen `CA01`. C2 menambahkan empat unit model linear
+Gaussian matriks, simulasi regresi dengan seed tetap, dan set penguasaan `MS12`.
+C3 menambahkan dua unit perbandingan Bayesian–frekuentis, simulasi kalibrasi
+interval, dan set penguasaan `MS11`. C4 menambahkan tujuh set penguasaan
+`MS00`–`MS06`. C5 menuntaskan tiga asesmen `CA02`–`CA04` dan dua capstone
+`CP01`–`CP02`. Cakupan lokal lengkap sekarang adalah:
 
-Checkpoint C2 menutup model linear Gaussian matriks; C3 menutup perbandingan
-Bayesian–frequentist, keputusan berbasis kerugian, serta kalibrasi interval.
-Checkpoint C4 menutup seluruh 13 set penguasaan. Paket C4 memuat 57 berkas /
-93.850.993 byte dan mewarisi seluruh 49 berkas C3 secara byte-identik; Pages
-memuat 188 berkas / 22.437.587 byte. Replay dan audit independennya lulus.
-Seluruh 188 berkas Pages dan 57 berkas rilis GitHub/Zenodo cocok pada pembacaan
-kembali anonim; audit konsep Zenodo menemukan nol draf. C140 belum lengkap:
-tiga asesmen kumulatif `CA02`–`CA04` dan dua capstone sedang diproduksi di
-bawah kontrak C5. Hak
-Penn, donor *Random*, dan pendamping
-orisinal tetap dipisahkan.
+- 39 dokumen / 1.145.637 byte sumber;
+- 146 soal terpecahkan, 292 petunjuk bertahap, 146 jawaban singkat, dan
+  146 solusi penuh;
+- 1.349 anchor stabil / 379 referensi isi yang terselesaikan;
+- pembaca HTML luring: 135 berkas / 15.757.728 byte;
+- backend modular: 1.523 entitas / 1.949 relasi;
+- 13 set penguasaan, empat asesmen kumulatif, dua capstone, dan enam simulasi
+  deterministik.
+
+Pembaca lokal berada di `components/c140-companion/build/html-id/index.html`.
+Identitas sumber dan hasil build tercatat dalam
+[`C5_BUILD_RECEIPT.json`](components/c140-companion/build/C5_BUILD_RECEIPT.json),
+hasil QA dalam
+[`C5_QA_RECEIPT.json`](components/c140-companion/build/C5_QA_RECEIPT.json), dan
+status lengkap lokal dalam
+[`CHECKPOINT_2026-08-31_C5_LOCAL_COMPLETE.md`](components/c140-companion/00_control/CHECKPOINT_2026-08-31_C5_LOCAL_COMPLETE.md).
+Status lokal ini belum merupakan klaim bahwa C5 telah terbit.
+
+Rujukan publik terakhir yang sudah terverifikasi tetap C4:
+
+- [pembaca web pendamping](https://kokunoyumeto.github.io/penn-state-stat-415-id/components/c140-companion/);
+- [rilis GitHub kumulatif C4](https://github.com/KokunoYumeto/penn-state-stat-415-id/releases/tag/v2026.08.29.c140-companion-c4);
+- [preservasi Zenodo C4](https://doi.org/10.5281/zenodo.22164344) dalam
+  [konsep preservasi](https://doi.org/10.5281/zenodo.22077422).
+
+Paket C4 memuat 57 berkas / 93.850.993 byte dan mewarisi seluruh 49 berkas C3
+secara byte-identik. Pada publikasi C4, seluruh 188 berkas Pages dan 57 berkas
+rilis GitHub/Zenodo cocok pada pembacaan kembali anonim. Hak Penn, donor
+*Random*, pendamping orisinal, serta dataset kedua capstone tetap dipisahkan.
 
 ## Reproduksi
 
@@ -169,13 +172,19 @@ python -B scripts/package_consolidated_readers_release.py --check-only
 python -B components/c140-companion/simulations/run_c1_simulations.py --check-only
 python -B components/c140-companion/simulations/run_c2_simulations.py --check-only
 python -B components/c140-companion/simulations/run_c3_simulations.py --check-only
-python -B components/c140-companion/scripts/build_companion.py --check-only --c4
-python -B components/c140-companion/scripts/qa_companion.py --check-only --c4
+python -B scripts/hydrate_cp02_coverage.py --write
+python -B scripts/hydrate_cp02_coverage.py --check-only
+python -B components/c140-companion/scripts/build_companion.py --check-only --c5
+python -B components/c140-companion/scripts/qa_companion.py --check-only --c5
 python -B scripts/assemble_pages_collection.py --check-only
-python -B scripts/package_c140_companion_c4_release.py --check-only
+python -B scripts/package_c140_companion_c5_release.py --check-only
 python -B scripts/publish_github_consolidated_readers_release.py --local-preflight
 python -B scripts/publish_zenodo_consolidated_readers.py --local-preflight
 ```
+
+Hidrasi CP02 memulihkan CSV cakupan yang tidak dilacak Git dari gzip lokal
+yang identitasnya dipatok. Perintah `--write` hanya membuat CSV bila belum ada;
+berkas yang sudah ada harus cocok jumlah byte dan SHA-256, bukan ditimpa.
 
 Untuk membaca secara lokal, layani `build/html-id` dengan peladen HTTP statis;
 misalnya `python -m http.server` dari direktori tersebut.

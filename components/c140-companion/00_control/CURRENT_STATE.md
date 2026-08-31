@@ -1,6 +1,35 @@
 # Current state — original C140 companion
 
-Updated: 2026-08-29
+Updated: 2026-08-31
+
+## C5 asesmen dan capstone — sumber, build, dan QA lengkap; pengemasan aktif
+
+Seluruh 39 dokumen sumber `id-ID` lengkap, termasuk `CA02`–`CA04` dan
+`CP01`–`CP02`. Produksi sumber selesai sebelum audit. Keempat asesmen dan
+kedua capstone telah lulus pemeriksaan matematika, bahasa, solusi, rubrik,
+hak, dan binding hasil. Seluruh angka hasil capstone terikat pada keluaran
+analisis deterministik; tidak ada template inert atau status `draft`.
+Identitas lima dokumen C5 yang dihitung ulang tercatat dalam
+`C5_ASSESSMENT_CAPSTONE_BATCH_CONTRACT.md`.
+
+Data `CP01` telah dibekukan dari UCI Concrete Compressive Strength di bawah CC
+BY 4.0; data `CP02` telah dibekukan dari Dryad v3 Greater sage-grouse nesting
+propensity di bawah CC0. Byte mentah, bukti hak, provenans, schema, dan
+transformasi lokal berada di `data/capstones/CP01/` dan `CP02/`. Transformasi,
+analisis, aset CSV/SVG/teks aksesibel, dan manifest sudah lengkap. Koreksi
+pascaaudit menyamakan simbol agregat CP01, menerjemahkan teks SVG SIM001–SIM005,
+memperbaiki hierarki heading SIM005/SIM006, dan menutup kasus batas matematis
+serta kerusakan TeX pada set penguasaan. Pembacaan akhir MS09–MS12 lulus;
+jangan mengulang terjemahan atau audit sumber yang telah selesai.
+
+Belum ada publikasi C5: C4 tetap batas publik terakhir. Build HTML/backend
+dan QA C5 sekarang lulus write dan dua replay check-only; koleksi Pages
+259 berkas juga lulus. Pendamping memuat 146 soal terselesaikan, 1.523 entitas,
+dan 1.949 relasi. Identitas lengkap tercatat dalam
+`CHECKPOINT_2026-08-31_C5_LOCAL_COMPLETE.md`. Tindakan berikutnya adalah
+membekukan paket kumulatif 65 berkas. Setelah gate lulus, publikasikan
+ke lineage GitHub/Zenodo yang sudah ada dan baca balik seluruh byte secara
+anonim. Larangan browser dan kontak upstream tetap berlaku.
 
 ## C4 mastery boundary — public deterministic closure
 

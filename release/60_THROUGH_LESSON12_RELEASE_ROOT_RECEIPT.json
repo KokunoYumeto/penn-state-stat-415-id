@@ -1,0 +1,142 @@
+{
+  "coverage": {
+    "complete_count": 14,
+    "complete_documents": [
+      "index",
+      "Lesson00",
+      "Lesson01",
+      "Lesson02",
+      "Lesson03",
+      "Lesson04",
+      "Lesson05",
+      "Lesson06",
+      "Lesson07",
+      "Lesson08",
+      "Lesson09",
+      "Lesson10",
+      "Lesson11",
+      "Lesson12"
+    ],
+    "corpus_document_count": 14,
+    "next_document": null,
+    "pending_documents": []
+  },
+  "file_count": 8,
+  "files": [
+    {
+      "bytes": 17648138,
+      "filename": "00_stat415-id-through-lesson12-offline-reader.zip",
+      "role": "primary-offline-reader",
+      "sha256": "e6c5829452e9d023ae7c54e802673a0e1fb0ddf220716d8f5156f1169ecb01e1"
+    },
+    {
+      "bytes": 37621137,
+      "filename": "10_stat415-id-through-lesson12-source-backend.zip",
+      "role": "compact-resumable-source-backend",
+      "sha256": "510bd0255f1ddbb925f3abb8594b04eac51fa688f0c0f5b184259033e578ada0"
+    },
+    {
+      "bytes": 1213,
+      "filename": "20_THROUGH_LESSON12_RELEASE_NOTES.md",
+      "role": "scope-status-rights-and-provenance",
+      "sha256": "7db90c69118f75e41fef99d0ddd0704471710ff97b1b58957aa8e86a0b36f339"
+    },
+    {
+      "bytes": 1515,
+      "filename": "30_THROUGH_LESSON12_LICENSE.md",
+      "role": "component-rights",
+      "sha256": "cea22cdb06aae5db47989d4daebbe3e36b7eac697e23a6726398744a9812a48d"
+    },
+    {
+      "bytes": 12428,
+      "filename": "40_THROUGH_LESSON12_QA_RECEIPT.json",
+      "role": "deterministic-qa",
+      "sha256": "d12c9dcb4293de0ec929cc2d2c330e197d936a86e17e27adc20dede10bef15db"
+    },
+    {
+      "bytes": 21702,
+      "filename": "41_THROUGH_LESSON12_VISUAL_QA_RECEIPT.json",
+      "role": "desktop-mobile-visual-qa",
+      "sha256": "02583cecceba1db5f8a9f7561f567ebd98585c441a6e4cae5ba1ef92f8710d6e"
+    },
+    {
+      "bytes": 854,
+      "filename": "50_THROUGH_LESSON12_RELEASE_MANIFEST.csv",
+      "role": "six-substantive-assets-manifest",
+      "sha256": "92fb966e8e2d6df14810571bdb171eafa2305e9c0241f7a87f5c3c85545c1528"
+    },
+    {
+      "bytes": 750,
+      "filename": "SHA256SUMS_THROUGH_LESSON12.txt",
+      "role": "sha256-for-substantive-assets-and-manifest",
+      "sha256": "ed97539fb0dd796edcc287cae67920acb04e62bb5e65cd0775e8afbfb7d3d663"
+    }
+  ],
+  "inventory_semantics": {
+    "release_manifest": {
+      "covers": [
+        "00_stat415-id-through-lesson12-offline-reader.zip",
+        "10_stat415-id-through-lesson12-source-backend.zip",
+        "20_THROUGH_LESSON12_RELEASE_NOTES.md",
+        "30_THROUGH_LESSON12_LICENSE.md",
+        "40_THROUGH_LESSON12_QA_RECEIPT.json",
+        "41_THROUGH_LESSON12_VISUAL_QA_RECEIPT.json"
+      ],
+      "excludes": [
+        "50_THROUGH_LESSON12_RELEASE_MANIFEST.csv",
+        "SHA256SUMS_THROUGH_LESSON12.txt",
+        "60_THROUGH_LESSON12_RELEASE_ROOT_RECEIPT.json"
+      ],
+      "filename": "50_THROUGH_LESSON12_RELEASE_MANIFEST.csv"
+    },
+    "root_receipt": {
+      "covers": [
+        "00_stat415-id-through-lesson12-offline-reader.zip",
+        "10_stat415-id-through-lesson12-source-backend.zip",
+        "20_THROUGH_LESSON12_RELEASE_NOTES.md",
+        "30_THROUGH_LESSON12_LICENSE.md",
+        "40_THROUGH_LESSON12_QA_RECEIPT.json",
+        "41_THROUGH_LESSON12_VISUAL_QA_RECEIPT.json",
+        "50_THROUGH_LESSON12_RELEASE_MANIFEST.csv",
+        "SHA256SUMS_THROUGH_LESSON12.txt"
+      ],
+      "excludes": [
+        "60_THROUGH_LESSON12_RELEASE_ROOT_RECEIPT.json"
+      ],
+      "filename": "60_THROUGH_LESSON12_RELEASE_ROOT_RECEIPT.json"
+    },
+    "sha256sums": {
+      "covers": [
+        "00_stat415-id-through-lesson12-offline-reader.zip",
+        "10_stat415-id-through-lesson12-source-backend.zip",
+        "20_THROUGH_LESSON12_RELEASE_NOTES.md",
+        "30_THROUGH_LESSON12_LICENSE.md",
+        "40_THROUGH_LESSON12_QA_RECEIPT.json",
+        "41_THROUGH_LESSON12_VISUAL_QA_RECEIPT.json",
+        "50_THROUGH_LESSON12_RELEASE_MANIFEST.csv"
+      ],
+      "excludes": [
+        "SHA256SUMS_THROUGH_LESSON12.txt",
+        "60_THROUGH_LESSON12_RELEASE_ROOT_RECEIPT.json"
+      ],
+      "filename": "SHA256SUMS_THROUGH_LESSON12.txt"
+    }
+  },
+  "schema": "o006.stat415.through-lesson12-release-root.v1",
+  "self_exclusion": {
+    "filename": "60_THROUGH_LESSON12_RELEASE_ROOT_RECEIPT.json",
+    "reason": "non-self-referential cryptographic root"
+  },
+  "status": "ready",
+  "total_bytes": 55307737,
+  "upload_order": [
+    "00_stat415-id-through-lesson12-offline-reader.zip",
+    "10_stat415-id-through-lesson12-source-backend.zip",
+    "20_THROUGH_LESSON12_RELEASE_NOTES.md",
+    "30_THROUGH_LESSON12_LICENSE.md",
+    "40_THROUGH_LESSON12_QA_RECEIPT.json",
+    "41_THROUGH_LESSON12_VISUAL_QA_RECEIPT.json",
+    "50_THROUGH_LESSON12_RELEASE_MANIFEST.csv",
+    "SHA256SUMS_THROUGH_LESSON12.txt"
+  ]
+}

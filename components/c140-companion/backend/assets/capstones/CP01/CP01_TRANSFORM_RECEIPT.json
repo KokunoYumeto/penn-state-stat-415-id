@@ -1,0 +1,82 @@
+{
+  "all_assertions_pass": true,
+  "browser_processes_used": false,
+  "canonical_input": {
+    "bytes": 41472,
+    "path": "raw/data.csv",
+    "role": "canonical_analysis_input",
+    "sha256": "8d4b15b6fc68cd932d745cbd663d5ceae66dd54422e99c1e4865f2936ab7e2af"
+  },
+  "code": {
+    "bytes": 26527,
+    "path": "data/capstones/CP01/transform_cp01.py",
+    "sha256": "696a329e2aa5d7af0154c83c48be7b869ba1a0bef1ff0e5177c87a5a8707cc11"
+  },
+  "environment": {
+    "numeric_locale": "C",
+    "numpy": "2.4.4",
+    "python": "3.13.9",
+    "required_process_environment": {
+      "MKL_NUM_THREADS": "1",
+      "NUMEXPR_NUM_THREADS": "1",
+      "OMP_NUM_THREADS": "1",
+      "OPENBLAS_NUM_THREADS": "1",
+      "PYTHONHASHSEED": "0",
+      "TZ": "UTC"
+    }
+  },
+  "network_access": false,
+  "outputs": [
+    {
+      "bytes": 2540,
+      "path": "data/capstones/CP01/clean/COLUMN_MANIFEST.csv",
+      "sha256": "890a2b3990557629a03edd8c1c234d0528f7d77dfdbf1ab08c3e1efe4a259fa7"
+    },
+    {
+      "bytes": 99729,
+      "path": "data/capstones/CP01/clean/ROW_MANIFEST.csv",
+      "sha256": "fa4f58250f531f4fb7e5cbbc895ea96f8c8584ad12edd1224237abbc08fb8049"
+    },
+    {
+      "bytes": 5692,
+      "path": "data/capstones/CP01/clean/TRANSFORM_LEDGER.json",
+      "sha256": "7bf040b459d9927ab012b9c469027dd7187091f91d543c8a496c73d6dc1e7beb"
+    },
+    {
+      "bytes": 48780,
+      "path": "data/capstones/CP01/clean/concrete_compressive_strength.csv",
+      "sha256": "74afac6cbd97e01d0a61e47c2c12fdb67dba17553e47db2db9fa5a1946ea1e14"
+    }
+  ],
+  "schema": "o006.c140.cp01-transform-replay.v1",
+  "seed": null,
+  "status": "pass",
+  "summary": {
+    "columns": 9,
+    "kappa2_scaled": 8.711778718605796,
+    "predictor_profiles": 992,
+    "rank": 9,
+    "residual_df": 1021,
+    "rows": 1030
+  },
+  "witness_assets": [
+    {
+      "bytes": 34444,
+      "path": "raw/concrete+compressive+strength.zip",
+      "role": "provenance_witness",
+      "sha256": "dad85d14de8aee4e07479daa774e6b569a313715b71a3b92c95a07cf91c2c9a7"
+    },
+    {
+      "bytes": 124928,
+      "path": "raw/archive/Concrete_Data.xls",
+      "role": "precision_and_header_witness_not_parsed",
+      "sha256": "710076c66b9ca3f8050e7942f3dcbdbe04013534daeb0077ffd3079a52d8e0c4"
+    },
+    {
+      "bytes": 3808,
+      "path": "raw/archive/Concrete_Readme.txt",
+      "role": "source_dictionary_and_rights_witness",
+      "sha256": "5cd3cdb31d3cfd68287daa6b22ed0541d6932113e83ee0980ced63641af3441d"
+    }
+  ]
+}

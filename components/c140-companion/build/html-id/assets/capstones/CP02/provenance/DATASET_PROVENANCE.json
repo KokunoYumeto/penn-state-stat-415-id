@@ -1,0 +1,184 @@
+{
+  "dataset": {
+    "title": "Supporting data for assessing impacts of satellite GPS transmitters on survival, nesting propensity, and nest success of greater sage-grouse",
+    "publisher": "Dryad",
+    "doi": "10.5061/dryad.573n5tbf3",
+    "doi_url": "https://doi.org/10.5061/dryad.573n5tbf3",
+    "canonical_landing_url": "https://datadryad.org/dataset/doi:10.5061/dryad.573n5tbf3",
+    "dataset_id": 120814,
+    "version_number": 3,
+    "version_id": 268230,
+    "publication_date": "2023-12-08",
+    "last_modification_date": "2023-12-08",
+    "curation_status": "Published",
+    "visibility": "public",
+    "creators": [
+      "Stevens, Bryan",
+      "Conway, Courtney",
+      "Tisdale, Cody",
+      "Denny, Kylie",
+      "Meyers, Andrew",
+      "Makela, Paul"
+    ]
+  },
+  "retrieval": {
+    "method": "direct HTTP without a browser process",
+    "completed_at_utc": "2026-08-30T20:22:32Z",
+    "version_metadata_url": "https://datadryad.org/api/v2/versions/268230",
+    "version_files_url": "https://datadryad.org/api/v2/versions/268230/files",
+    "dataset_metadata_url": "https://datadryad.org/api/v2/datasets/doi%3A10.5061%2Fdryad.573n5tbf3",
+    "transport_note": "Pada waktu pengambilan, tautan stash:download API /api/v2/files/{id}/download meminta bearer token. Byte publik diambil melalui tautan file_stream yang diterbitkan halaman DOI untuk file ID yang sama, lalu ukuran dan SHA-256 lokal dicocokkan dengan metadata file Dryad."
+  },
+  "license": {
+    "identifier": "CC0-1.0",
+    "name": "Creative Commons Zero v1.0 Universal",
+    "legal_code_url": "https://creativecommons.org/publicdomain/zero/1.0/legalcode",
+    "dataset_api_value": "https://spdx.org/licenses/CC0-1.0.html",
+    "evidence_path": "RIGHTS_EVIDENCE.md",
+    "separation": "Byte dataset dan README tetap CC0-1.0; teks pendamping orisinal tetap CC BY-SA 4.0 dan tidak melisensikan ulang byte dataset."
+  },
+  "privacy": {
+    "analytic_data_scope": {
+      "unit_of_row": "kelompok tipe pemancar × tahun",
+      "individual_microdata_imported": false,
+      "direct_study_subject_identifiers_imported": false,
+      "location_fields_imported": false,
+      "aggregate_analytic_file": "raw/nest_propensity.csv",
+      "source_dictionary_file": "raw/README.md"
+    },
+    "provenance_witness_scope": {
+      "public_creator_metadata_present": true,
+      "witness_paths": [
+        "witnesses/dataset-doi-10.5061-dryad.573n5tbf3-api.json",
+        "witnesses/version-268230.json"
+      ],
+      "public_creator_fields": ["authors[].email", "authors[].orcid"],
+      "nonempty_email_entries_per_witness": 1,
+      "nonempty_orcid_entries_per_witness": 1,
+      "separation": "Email dan ORCID pencipta yang dipublikasikan Dryad dipertahankan hanya di saksi metadata untuk provenans dan atribusi; keduanya bukan baris analitik, microdata subjek studi, atau input model CP02."
+    }
+  },
+  "frozen_assets": [
+    {
+      "role": "aggregate_data",
+      "file_id": 2765112,
+      "filename": "nest_propensity.csv",
+      "local_path": "raw/nest_propensity.csv",
+      "file_metadata_url": "https://datadryad.org/api/v2/files/2765112",
+      "canonical_api_download_url": "https://datadryad.org/api/v2/files/2765112/download",
+      "actual_retrieval_url": "https://datadryad.org/downloads/file_stream/2765112",
+      "retrieved_at_utc": "2026-08-30T20:22:29Z",
+      "publisher_mime_type": "text/csv",
+      "transport_content_type": "application/octet-stream",
+      "encoding": "UTF-8 (ASCII subset), no BOM",
+      "newlines": "CRLF",
+      "bytes": 285,
+      "sha256": "8790b4dfa29a5b39228e758e40e02cbb48612c38b8440020aa108c85ca0673c4",
+      "publisher_sha256": "8790b4dfa29a5b39228e758e40e02cbb48612c38b8440020aa108c85ca0673c4",
+      "publisher_digest_match": true
+    },
+    {
+      "role": "data_dictionary",
+      "file_id": 2765118,
+      "filename": "README.md",
+      "local_path": "raw/README.md",
+      "file_metadata_url": "https://datadryad.org/api/v2/files/2765118",
+      "canonical_api_download_url": "https://datadryad.org/api/v2/files/2765118/download",
+      "actual_retrieval_url": "https://datadryad.org/downloads/file_stream/2765118",
+      "retrieved_at_utc": "2026-08-30T20:22:31Z",
+      "publisher_mime_type": "text/markdown",
+      "transport_content_type": "application/octet-stream",
+      "encoding": "UTF-8 (ASCII subset), no BOM",
+      "newlines": "LF",
+      "bytes": 4139,
+      "sha256": "43a53f9a451a4030b8d3edb2a7517c48863d8ef23d7ae4986d15c20d7f8f5459",
+      "publisher_sha256": "43a53f9a451a4030b8d3edb2a7517c48863d8ef23d7ae4986d15c20d7f8f5459",
+      "publisher_digest_match": true
+    }
+  ],
+  "witnesses": [
+    {
+      "role": "version_metadata",
+      "url": "https://datadryad.org/api/v2/versions/268230",
+      "local_path": "witnesses/version-268230.json",
+      "retrieved_at_utc": "2026-08-30T20:17:18Z",
+      "content_type": "application/json; charset=utf-8",
+      "bytes": 4718,
+      "sha256": "8f40dea26fcd64a3c0fac26467ada54bce1818b427f2317519e400b4785d0331"
+    },
+    {
+      "role": "version_file_inventory",
+      "url": "https://datadryad.org/api/v2/versions/268230/files",
+      "local_path": "witnesses/version-268230-files.json",
+      "retrieved_at_utc": "2026-08-30T20:17:19Z",
+      "content_type": "application/json; charset=utf-8",
+      "bytes": 4517,
+      "sha256": "c2b8c7e77f5f2a591cca3a4e904b180877833ccbd426cfef7bb2841830abfb34"
+    },
+    {
+      "role": "csv_file_metadata",
+      "url": "https://datadryad.org/api/v2/files/2765112",
+      "local_path": "witnesses/file-2765112.json",
+      "retrieved_at_utc": "2026-08-30T20:17:20Z",
+      "content_type": "application/json; charset=utf-8",
+      "bytes": 620,
+      "sha256": "2aea32ad275de7b69df068119eb55357dedf8bc49e0efdcdf421f80e1c75b021"
+    },
+    {
+      "role": "readme_file_metadata",
+      "url": "https://datadryad.org/api/v2/files/2765118",
+      "local_path": "witnesses/file-2765118.json",
+      "retrieved_at_utc": "2026-08-30T20:17:21Z",
+      "content_type": "application/json; charset=utf-8",
+      "bytes": 617,
+      "sha256": "14a7f7e510f5770bfdc5af267ca04316ee4952c32a4802f0f189f0c06c7676ec"
+    },
+    {
+      "role": "dataset_metadata_and_license",
+      "url": "https://datadryad.org/api/v2/datasets/doi%3A10.5061%2Fdryad.573n5tbf3",
+      "local_path": "witnesses/dataset-doi-10.5061-dryad.573n5tbf3-api.json",
+      "retrieved_at_utc": "2026-08-30T20:17:58Z",
+      "content_type": "application/json; charset=utf-8",
+      "bytes": 4844,
+      "sha256": "86de401cda5e1966253174504c4c786fd48e6cf39ecb4b77c8f826ca7a9b8d74"
+    },
+    {
+      "role": "datacite_doi_and_rights",
+      "url": "https://api.datacite.org/dois/10.5061/dryad.573n5tbf3",
+      "local_path": "witnesses/datacite-doi-10.5061-dryad.573n5tbf3.json",
+      "retrieved_at_utc": "2026-08-30T20:18:00Z",
+      "content_type": "application/json; charset=utf-8",
+      "bytes": 25057,
+      "sha256": "b781ca972d4af2c351cf18de65c30cb68c9bc5f84b7651e92c6213188ef0a14b"
+    },
+    {
+      "role": "doi_resolution_and_landing_license",
+      "url": "https://doi.org/10.5061/dryad.573n5tbf3",
+      "resolved_url": "https://datadryad.org/dataset/doi:10.5061/dryad.573n5tbf3",
+      "local_path": "witnesses/doi-10.5061-dryad.573n5tbf3-resolved.html",
+      "retrieved_at_utc": "2026-08-30T20:18:00Z",
+      "content_type": "text/html; charset=utf-8",
+      "bytes": 45777,
+      "sha256": "d48e208611a080220e5b3b884ff733702c4553b67105b197728ba8f8e453a64f"
+    },
+    {
+      "role": "dryad_reuse_policy",
+      "url": "https://datadryad.org/help/guides/reuse",
+      "local_path": "witnesses/dryad-reuse-guide.html",
+      "retrieved_at_utc": "2026-08-30T20:18:01Z",
+      "content_type": "text/html; charset=utf-8",
+      "bytes": 18229,
+      "sha256": "a132d3541d7edd5f1bc0b7eb25aaff540e7536b9113f6811101bbb34299e87e9"
+    },
+    {
+      "role": "cc0_legal_code",
+      "url": "https://creativecommons.org/publicdomain/zero/1.0/legalcode",
+      "local_path": "witnesses/cc0-1.0-legalcode.html",
+      "retrieved_at_utc": "2026-08-30T20:18:02Z",
+      "content_type": "text/html",
+      "encoding": "UTF-8 declared by HTML meta",
+      "bytes": 32451,
+      "sha256": "001e3d1c905c18b1d034b34200cc952026abb38457c2294c23eaef7f6bda64df"
+    }
+  ]
+}

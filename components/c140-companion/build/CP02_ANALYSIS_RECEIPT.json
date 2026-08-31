@@ -1,0 +1,259 @@
+{
+  "assertions": {
+    "SVG_title_desc_text_and_text_equivalents": true,
+    "fixed_parameter_coverage_and_exact_size": true,
+    "input_and_clean_manifest_identity": true,
+    "log_BF_BF_and_odds_identity": true,
+    "manifest_closed": true,
+    "model_conditional_dependence_label": true,
+    "odds_ratio_infinite_moments_typed": true,
+    "overdispersion_identification_withheld": true,
+    "posterior_and_predictive_mass": true,
+    "posterior_predictive_seeded_replay": true,
+    "primary_Beta_2_2_prior_and_kappa_4": true,
+    "rights_provenance_inputs_closed_and_verified": true,
+    "typed_LOO_complete": true,
+    "wilson_closed_endpoint_coverage": true
+  },
+  "browser_processes_used": false,
+  "canonical_input": {
+    "bytes": 285,
+    "path": "data/capstones/CP02/raw/nest_propensity.csv",
+    "sha256": "8790b4dfa29a5b39228e758e40e02cbb48612c38b8440020aa108c85ca0673c4"
+  },
+  "clean_inputs": {
+    "manifest": {
+      "bytes": 490,
+      "entries": 4,
+      "path": "data/capstones/CP02/clean/MANIFEST.csv",
+      "sha256": "b79f206caea52b557e29b839ccec6b4659960601cc002100cb7c7e36e8d9b6b8"
+    },
+    "transform_receipt": {
+      "bytes": 3988,
+      "path": "build/CP02_TRANSFORM_RECEIPT.json",
+      "schema": "o006.c140.cp02-transform.v1",
+      "sha256": "a993996a6dedf374c7ad5efe1846ae773779a1218863ea7f50d9efa6930eea2a"
+    }
+  },
+  "code": [
+    {
+      "bytes": 30366,
+      "path": "data/capstones/CP02/transform_cp02.py",
+      "sha256": "b0f78101208eb52da9e8536153e9183a5202704fbedca91a34bf49bf618f54ae"
+    },
+    {
+      "bytes": 130738,
+      "path": "capstones/run_cp02_analysis.py",
+      "sha256": "2c156dcba81126dd9fe0f457424e309b43bf6d1fec2ee5e8a007902a660c3c28"
+    }
+  ],
+  "denominator_policy": {
+    "primary": "primary_conservative_method_1",
+    "secondary_changes_estimand": true,
+    "secondary_sensitivity": "secondary_liberal_method_2"
+  },
+  "environment": {
+    "numeric_float": "IEEE-754_binary64",
+    "numpy": "2.4.4",
+    "python": "3.13.9"
+  },
+  "manifest_closure": {
+    "manifest_bytes": 2373,
+    "manifest_lists": "all 18 substantive files and excludes only itself",
+    "manifest_path": "generated/capstones/CP02/MANIFEST.csv",
+    "manifest_sha256": "2f147d50378558730ce2fb334193e1761b2636ee96ee2ba6498bd91849f3d98b",
+    "receipt_lists": "all substantive files plus MANIFEST.csv and excludes itself",
+    "receipt_path": "build/CP02_ANALYSIS_RECEIPT.json"
+  },
+  "methods": {
+    "bayesian": "exact_Beta_Binomial_conjugacy_log_evidence_BF_odds_and_loss",
+    "coverage": "exact_finite_Binomial_sums_on_augmented_endpoint_grid",
+    "dispersion": "fixed_intercept_only_profile_with_all_gates_identifiability_rule",
+    "frequentist": "Wilson_Clopper_Pearson_exact_Binomial_Holm_power_and_exact_conditional_homogeneity",
+    "influence": "typed_leave_one_cell_out_refits_without_cross_scale_ranking",
+    "serialization": "UTF-8_without_BOM_LF_canonical_order_dot_decimal"
+  },
+  "network_access": false,
+  "outputs": [
+    {
+      "bytes": 3336,
+      "path": "generated/capstones/CP02/CP02_cells_clean.csv",
+      "sha256": "13f271df4677a54b4eeed6307fc0165616ab89a123ee62666add42560be84ad8"
+    },
+    {
+      "bytes": 78922,
+      "path": "generated/capstones/CP02/CP02_contrasts.csv",
+      "sha256": "39f9e5d170f60b3572f46006aaf9d575e0bd1329589b44174de633d90660500b"
+    },
+    {
+      "bytes": 135581717,
+      "path": "generated/capstones/CP02/CP02_coverage.csv",
+      "sha256": "86997c120a94e342d943ae72eb827871564e96545de911d1e3a3c677a5bc347e"
+    },
+    {
+      "bytes": 62481,
+      "path": "generated/capstones/CP02/CP02_coverage.svg",
+      "sha256": "f9ddd50d0d05b216b16d1b851abb3b3154bba492c0630e4bfe8bb7744c014137"
+    },
+    {
+      "bytes": 560,
+      "path": "generated/capstones/CP02/CP02_coverage.txt",
+      "sha256": "0c38bdeb84a0cd93fd884658ce32d5b2a96e71ee3d688f9b88fc02eeecce08ec"
+    },
+    {
+      "bytes": 11303,
+      "path": "generated/capstones/CP02/CP02_diagnostics.csv",
+      "sha256": "b5d0d9a90ae3336dd3285380b66c4baadc7cd9c39e9bc14f00b7ca4045ea8113"
+    },
+    {
+      "bytes": 629,
+      "path": "generated/capstones/CP02/CP02_diagnostics.txt",
+      "sha256": "df82834968a00e58b0c253754206c312b3ac61f92f62ba064abd9afe36d84e72"
+    },
+    {
+      "bytes": 24717,
+      "path": "generated/capstones/CP02/CP02_dispersion_profile.csv",
+      "sha256": "f895a81a408b0158cc01d667e3cd2d575882c01188eb2c731441997db786dc1e"
+    },
+    {
+      "bytes": 3716597,
+      "path": "generated/capstones/CP02/CP02_frequentist_comparison.csv",
+      "sha256": "e8bc7769186560f1a568372a000c760380027ff5f9cabcad133e8f7423e986f7"
+    },
+    {
+      "bytes": 17854,
+      "path": "generated/capstones/CP02/CP02_influence.csv",
+      "sha256": "fa8383dd7e8128e2a1f52e6c1ba3a59b705a99eecc963ffd7fa6d0c4f5fab2ba"
+    },
+    {
+      "bytes": 12334,
+      "path": "generated/capstones/CP02/CP02_intervals.svg",
+      "sha256": "2c23ff26fc81a5f173ce2eed8e32b8a3f4837526d4c0665b3f1b1c898b4e1799"
+    },
+    {
+      "bytes": 750,
+      "path": "generated/capstones/CP02/CP02_intervals.txt",
+      "sha256": "471fd5b41937ec3fb664ee0f70a82a8a7aac9773fbd5bc3337c64951ea674e75"
+    },
+    {
+      "bytes": 1415,
+      "path": "generated/capstones/CP02/CP02_model_comparison.csv",
+      "sha256": "7b485760abefa32ed718a206dd7208bd5697353dfafa2a82b8c1dc5ecf433292"
+    },
+    {
+      "bytes": 301075,
+      "path": "generated/capstones/CP02/CP02_posterior_predictive.csv",
+      "sha256": "5a0d8e04e0fc3a75e9d4ce038dcf660ddbda545e61190cc71581fa5afa34a8f3"
+    },
+    {
+      "bytes": 7506,
+      "path": "generated/capstones/CP02/CP02_posterior_summary.csv",
+      "sha256": "30b1da31e41e32f252ad0cb3d31a9de5442c70aae1565ed24d9cff6a2179695b"
+    },
+    {
+      "bytes": 41114,
+      "path": "generated/capstones/CP02/CP02_sensitivity.csv",
+      "sha256": "f8836f90a182fd345588cda8f0a34254fe7a5897df17e832496c40e55837d543"
+    },
+    {
+      "bytes": 9207,
+      "path": "generated/capstones/CP02/CP02_sensitivity.svg",
+      "sha256": "397cacddf7fd29737424222df1e0cb3605b1452ea31477f32ed52ddace9d11c6"
+    },
+    {
+      "bytes": 690,
+      "path": "generated/capstones/CP02/CP02_sensitivity.txt",
+      "sha256": "d18e74a2f53fca95678140ed05c6174bafd870c180063073e9df4ab1829581d3"
+    },
+    {
+      "bytes": 2373,
+      "path": "generated/capstones/CP02/MANIFEST.csv",
+      "sha256": "2f147d50378558730ce2fb334193e1761b2636ee96ee2ba6498bd91849f3d98b"
+    }
+  ],
+  "prior": {
+    "family": "Beta(kappa/2,kappa/2)",
+    "primary_kappa": 4.0,
+    "primary_shape": [
+      2.0,
+      2.0
+    ],
+    "proper_under_M0_and_every_M1_cell": true,
+    "sensitivity_kappas": [
+      1.0,
+      2.0,
+      4.0,
+      8.0,
+      16.0
+    ]
+  },
+  "rights_provenance_inputs": [
+    {
+      "bytes": 8255,
+      "path": "data/capstones/CP02/DATASET_PROVENANCE.json",
+      "role": "frozen_contract_metadata",
+      "sha256": "a044cf3353794031a169189623b273e3aeb116c7d33784e7520eaf1311dac49a"
+    },
+    {
+      "bytes": 913,
+      "path": "data/capstones/CP02/INPUT_MANIFEST.csv",
+      "role": "frozen_input_manifest",
+      "sha256": "4e191caad7a1c4a971dd619039bd5891cae264cbc078ff8fffc23ed5f27669ff"
+    },
+    {
+      "bytes": 3089,
+      "path": "data/capstones/CP02/RIGHTS_EVIDENCE.md",
+      "role": "frozen_contract_metadata",
+      "sha256": "1017d9ba16aa5f64e4c6d19c59a648b677c113ab20b78e8bd87e5d99739ae665"
+    },
+    {
+      "bytes": 4770,
+      "path": "data/capstones/CP02/SCHEMA.json",
+      "role": "frozen_contract_metadata",
+      "sha256": "367597e96a39f50d29a67f1a3ac31c0642e61c0439879253a59c1de9f37627e4"
+    },
+    {
+      "bytes": 4139,
+      "path": "data/capstones/CP02/raw/README.md",
+      "role": "dictionary",
+      "sha256": "43a53f9a451a4030b8d3edb2a7517c48863d8ef23d7ae4986d15c20d7f8f5459"
+    },
+    {
+      "bytes": 285,
+      "path": "data/capstones/CP02/raw/nest_propensity.csv",
+      "role": "numeric_input",
+      "sha256": "8790b4dfa29a5b39228e758e40e02cbb48612c38b8440020aa108c85ca0673c4"
+    }
+  ],
+  "rng": {
+    "contrast_draws": 100000,
+    "generator": "NumPy PCG64 with jumped, non-overlapping deterministic streams",
+    "posterior_predictive_replications": 100000,
+    "seed": 2026083002
+  },
+  "schema": "o006.c140.cp02-analysis.v1",
+  "spot_checks": {
+    "bf10": 1.1400767394465352e-14,
+    "cell_count": 12,
+    "clopper_pearson_grid_minimum": 0.9503896939535688,
+    "contrast_rows": 168,
+    "coverage_primary_summary_rows": 33,
+    "dispersion_gate_rows": 4,
+    "dispersion_identified_rows": 0,
+    "log_bf10": -32.10509572647183,
+    "loo_metric_rows": 60,
+    "odds_ratio_infinite_mean_rows": 14,
+    "odds_ratio_rows": 84,
+    "posterior_odds_10": 1.1400767394465352e-14,
+    "ppc_rows": 16,
+    "primary_kappa": 4.0,
+    "primary_prior": "Beta(2,2)"
+  },
+  "status": "pass",
+  "working_probability_law": {
+    "M0_note": "posterior-predictive cell marginals share one p and are cross-cell dependent after integration",
+    "M1_note": "cell-specific probabilities are independent under the stated proper product prior",
+    "applicability": "conditional_illustrative: aggregate evidence does not prove disjoint independent Bernoulli units or one qualifying initiation per hen",
+    "sampling": "conditionally_independent_Binomial_cells_given_parameters"
+  }
+}

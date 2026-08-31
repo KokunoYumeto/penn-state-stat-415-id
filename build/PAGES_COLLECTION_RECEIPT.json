@@ -1,9 +1,9 @@
 {
   "browser_used": false,
   "collection": {
-    "bytes": 22437587,
-    "files": 188,
-    "manifest_sha256": "fdd057c53c7bb0a092d8ee3499b9116b9219463034c0426b5373687ba9200f90",
+    "bytes": 35170536,
+    "files": 259,
+    "manifest_sha256": "43fad46f62f6925e39f5c24a7d0182a26b2e96e884f5e2b0d7f79be28cf64249",
     "path": "build/pages"
   },
   "files": [
@@ -729,18 +729,39 @@
       "source_path": "assets/unnamed-chunk-1-1.png"
     },
     {
-      "bytes": 6916,
+      "bytes": 15206,
       "path": "components/c140-companion/MANIFEST.csv",
-      "sha256": "629870245f726b01534c09f7e595e8a15cf11015a63280c0a16b056ce7cb4178",
+      "sha256": "cf5f75feececdf98bb02e9cbd8bb8144b457f3434622f9038af26ae7c89c2f46",
       "source": "c140-original-companion",
       "source_path": "MANIFEST.csv"
     },
     {
-      "bytes": 69159,
+      "bytes": 72029,
       "path": "components/c140-companion/assessments/O006-C140-CMP-CA01.html",
-      "sha256": "78a55685fba32d523477b541a18b871c1c0314652d89ac6001c92ecc50a6e0fc",
+      "sha256": "6989f2d418bf8b1bade963d67f570352ba4745982ec6995ccdc6cc345f901976",
       "source": "c140-original-companion",
       "source_path": "assessments/O006-C140-CMP-CA01.html"
+    },
+    {
+      "bytes": 86069,
+      "path": "components/c140-companion/assessments/O006-C140-CMP-CA02.html",
+      "sha256": "a4017aaaeb7953f7c02ab0935c9b003b29b2a92464b9f385ce2d7325854cea0e",
+      "source": "c140-original-companion",
+      "source_path": "assessments/O006-C140-CMP-CA02.html"
+    },
+    {
+      "bytes": 86107,
+      "path": "components/c140-companion/assessments/O006-C140-CMP-CA03.html",
+      "sha256": "ee94a6d6b7971909cfa08063a90d04a8b23879d29d83d58754a4ab9d8ec54cae",
+      "source": "c140-original-companion",
+      "source_path": "assessments/O006-C140-CMP-CA03.html"
+    },
+    {
+      "bytes": 92543,
+      "path": "components/c140-companion/assessments/O006-C140-CMP-CA04.html",
+      "sha256": "e9af861e1469c2456363a7252f4b6c15c1d57f734f739399591ab76dfe9b8dee",
+      "source": "c140-original-companion",
+      "source_path": "assessments/O006-C140-CMP-CA04.html"
     },
     {
       "bytes": 4709,
@@ -778,6 +799,468 @@
       "source_path": "assets/MathJax/tex-svg.js"
     },
     {
+      "bytes": 77506,
+      "path": "components/c140-companion/assets/capstones/ASSET_RIGHTS.jsonl",
+      "sha256": "4a8d8c965196d01ee4ad4229b63254393708472724976df1f393f44f73b2781d",
+      "source": "c140-original-companion",
+      "source_path": "assets/capstones/ASSET_RIGHTS.jsonl"
+    },
+    {
+      "bytes": 1401,
+      "path": "components/c140-companion/assets/capstones/CP01/ALT_TEXT.md",
+      "sha256": "4dd3cbee43a7b7593ecae36d9dda3546faeabfe0ac982cbf8f1134c8ccae39c7",
+      "source": "c140-original-companion",
+      "source_path": "assets/capstones/CP01/ALT_TEXT.md"
+    },
+    {
+      "bytes": 15079,
+      "path": "components/c140-companion/assets/capstones/CP01/CP01_REPLAY_RECEIPT.json",
+      "sha256": "3afee61bc95dd93a23f6d847c02dffde30299c4f62c83f7ae7ebcfa3267724e1",
+      "source": "c140-original-companion",
+      "source_path": "assets/capstones/CP01/CP01_REPLAY_RECEIPT.json"
+    },
+    {
+      "bytes": 2465,
+      "path": "components/c140-companion/assets/capstones/CP01/CP01_TRANSFORM_RECEIPT.json",
+      "sha256": "177848b6be8282fdcc1be402b4e1214eaa7d79019af5a3c02fbd977fa7e5efdc",
+      "source": "c140-original-companion",
+      "source_path": "assets/capstones/CP01/CP01_TRANSFORM_RECEIPT.json"
+    },
+    {
+      "bytes": 511,
+      "path": "components/c140-companion/assets/capstones/CP01/CP01_anova_nested.csv",
+      "sha256": "7a662405825fdc429ffd4b4bd9372743b8ba4a3e767584cefc3cafc7c5047464",
+      "source": "c140-original-companion",
+      "source_path": "assets/capstones/CP01/CP01_anova_nested.csv"
+    },
+    {
+      "bytes": 4943,
+      "path": "components/c140-companion/assets/capstones/CP01/CP01_coefficient_uncertainty.svg",
+      "sha256": "fa4599582dde985083b616e7f271499474adea83ad6ea1e2070f73537c93d367",
+      "source": "c140-original-companion",
+      "source_path": "assets/capstones/CP01/CP01_coefficient_uncertainty.svg"
+    },
+    {
+      "bytes": 719,
+      "path": "components/c140-companion/assets/capstones/CP01/CP01_coefficients_classic_hc3.csv",
+      "sha256": "51556e6a7d1d3c69f5043c07ecb1e018dc48bd9409897770655865c1f2d4d81a",
+      "source": "c140-original-companion",
+      "source_path": "assets/capstones/CP01/CP01_coefficients_classic_hc3.csv"
+    },
+    {
+      "bytes": 1006,
+      "path": "components/c140-companion/assets/capstones/CP01/CP01_conditioning.csv",
+      "sha256": "6a06e6c3326efc26ff90c9a611508c4754e8c21d68e2271a1b1b78e4cc9b3ac6",
+      "source": "c140-original-companion",
+      "source_path": "assets/capstones/CP01/CP01_conditioning.csv"
+    },
+    {
+      "bytes": 1271,
+      "path": "components/c140-companion/assets/capstones/CP01/CP01_data_summary.csv",
+      "sha256": "0d488334c02cf26114a411ff8d88583d5c45ed737150e53c9dda5a1fa39248be",
+      "source": "c140-original-companion",
+      "source_path": "assets/capstones/CP01/CP01_data_summary.csv"
+    },
+    {
+      "bytes": 725690,
+      "path": "components/c140-companion/assets/capstones/CP01/CP01_deleted_case_sensitivity.csv",
+      "sha256": "745acb89d146492baad2ae2fc51765312f01dcb584c6b7d03b1a0737c1355bf5",
+      "source": "c140-original-companion",
+      "source_path": "assets/capstones/CP01/CP01_deleted_case_sensitivity.csv"
+    },
+    {
+      "bytes": 120829,
+      "path": "components/c140-companion/assets/capstones/CP01/CP01_diagnostics_observations.csv",
+      "sha256": "2d83471dc5b9c971f64b32afd9f640bba4be6e5921635344a6f62051d811adc0",
+      "source": "c140-original-companion",
+      "source_path": "assets/capstones/CP01/CP01_diagnostics_observations.csv"
+    },
+    {
+      "bytes": 42872,
+      "path": "components/c140-companion/assets/capstones/CP01/CP01_diagnostics_summary.csv",
+      "sha256": "77ca0dcc40b3500cbdb21f0eb26f6034e978c51d18178063101841525e2fd508",
+      "source": "c140-original-companion",
+      "source_path": "assets/capstones/CP01/CP01_diagnostics_summary.csv"
+    },
+    {
+      "bytes": 5240,
+      "path": "components/c140-companion/assets/capstones/CP01/CP01_diagnostics_text.txt",
+      "sha256": "1ca88687ccf245bf02e92d45c7150955d2c2f20fd083ce54de053565fdf3af22",
+      "source": "c140-original-companion",
+      "source_path": "assets/capstones/CP01/CP01_diagnostics_text.txt"
+    },
+    {
+      "bytes": 3267,
+      "path": "components/c140-companion/assets/capstones/CP01/CP01_inference_coefficients.csv",
+      "sha256": "64ba36558e9a4e340b4d845d2f3b0757cf90c626486dd41520fdc813cb4b7fa7",
+      "source": "c140-original-companion",
+      "source_path": "assets/capstones/CP01/CP01_inference_coefficients.csv"
+    },
+    {
+      "bytes": 2162,
+      "path": "components/c140-companion/assets/capstones/CP01/CP01_inference_contrasts.csv",
+      "sha256": "790078e4515d07df3d386b7917e4005d084eedf198b6cf271a67df87210d3f42",
+      "source": "c140-original-companion",
+      "source_path": "assets/capstones/CP01/CP01_inference_contrasts.csv"
+    },
+    {
+      "bytes": 243,
+      "path": "components/c140-companion/assets/capstones/CP01/CP01_inference_joint_F.csv",
+      "sha256": "e17c657e0c323172302c0bd6bfa3a9e1bd5dbdf8f8b26b7e62a607df43b563d9",
+      "source": "c140-original-companion",
+      "source_path": "assets/capstones/CP01/CP01_inference_joint_F.csv"
+    },
+    {
+      "bytes": 90719,
+      "path": "components/c140-companion/assets/capstones/CP01/CP01_inference_results.csv",
+      "sha256": "c24eb76343d6457d7ef8956493ae4909172911456c50926c8bab6cc761805cbc",
+      "source": "c140-original-companion",
+      "source_path": "assets/capstones/CP01/CP01_inference_results.csv"
+    },
+    {
+      "bytes": 98489,
+      "path": "components/c140-companion/assets/capstones/CP01/CP01_influence.svg",
+      "sha256": "64a30b6d91c87df76fb659673ebc3e0ff9d85202490f2761a84e1de811531e54",
+      "source": "c140-original-companion",
+      "source_path": "assets/capstones/CP01/CP01_influence.svg"
+    },
+    {
+      "bytes": 574,
+      "path": "components/c140-companion/assets/capstones/CP01/CP01_leverage_selector_intervals.csv",
+      "sha256": "fe131f73b9c3295ebcd9d3f01eb48fc5fe405b1c2bef2c7f0542d1317070b113",
+      "source": "c140-original-companion",
+      "source_path": "assets/capstones/CP01/CP01_leverage_selector_intervals.csv"
+    },
+    {
+      "bytes": 660,
+      "path": "components/c140-companion/assets/capstones/CP01/CP01_loocv_metrics.csv",
+      "sha256": "01a22526c0faca0485a2085ac4de7e1ebdd4028f368d0e102c62505746e2eb1a",
+      "source": "c140-original-companion",
+      "source_path": "assets/capstones/CP01/CP01_loocv_metrics.csv"
+    },
+    {
+      "bytes": 419,
+      "path": "components/c140-companion/assets/capstones/CP01/CP01_model_fit.csv",
+      "sha256": "07ccc6ed131ed21787f5daf9e45c45b5104e3d6d8d1c6649b9b076a802376199",
+      "source": "c140-original-companion",
+      "source_path": "assets/capstones/CP01/CP01_model_fit.csv"
+    },
+    {
+      "bytes": 941,
+      "path": "components/c140-companion/assets/capstones/CP01/CP01_model_sensitivity.csv",
+      "sha256": "7080bc84a01abc5a57034e188d6694be24344afc5510cec012a2b66ddb5a266d",
+      "source": "c140-original-companion",
+      "source_path": "assets/capstones/CP01/CP01_model_sensitivity.csv"
+    },
+    {
+      "bytes": 2846,
+      "path": "components/c140-companion/assets/capstones/CP01/CP01_model_sensitivity.svg",
+      "sha256": "1b2b2e021442b4354d6ddd93988f67225dfd78bc97e77a7086980419e4ca58c6",
+      "source": "c140-original-companion",
+      "source_path": "assets/capstones/CP01/CP01_model_sensitivity.svg"
+    },
+    {
+      "bytes": 303853,
+      "path": "components/c140-companion/assets/capstones/CP01/CP01_profile_out_sensitivity.csv",
+      "sha256": "785e213051edad4821eb9584ddac5fd209b50be3730f3335eddae89722924479",
+      "source": "c140-original-companion",
+      "source_path": "assets/capstones/CP01/CP01_profile_out_sensitivity.csv"
+    },
+    {
+      "bytes": 684,
+      "path": "components/c140-companion/assets/capstones/CP01/CP01_reference_prediction.csv",
+      "sha256": "e0cd37d7a2042cc6eb3078374f99c734bedd43bf528819bcdbcc23c012d11bb5",
+      "source": "c140-original-companion",
+      "source_path": "assets/capstones/CP01/CP01_reference_prediction.csv"
+    },
+    {
+      "bytes": 1057,
+      "path": "components/c140-companion/assets/capstones/CP01/CP01_residual_bins.csv",
+      "sha256": "3f4a0d4c2a018edbcaa364c6627882fb637ced19d3f134da3fb3b788ebe2b2e7",
+      "source": "c140-original-companion",
+      "source_path": "assets/capstones/CP01/CP01_residual_bins.csv"
+    },
+    {
+      "bytes": 57405,
+      "path": "components/c140-companion/assets/capstones/CP01/CP01_residual_quantiles.svg",
+      "sha256": "44f5eacd2862331ed3b9544a8fa29ad8b4ad01abc80845ed90813001e1cf8aa6",
+      "source": "c140-original-companion",
+      "source_path": "assets/capstones/CP01/CP01_residual_quantiles.svg"
+    },
+    {
+      "bytes": 177342,
+      "path": "components/c140-companion/assets/capstones/CP01/CP01_residuals_fitted.svg",
+      "sha256": "0c8e5bdfcc9fbd2696ea71405bcdaf0f2ebe9e9ca48a60ab11fc386889175ba2",
+      "source": "c140-original-companion",
+      "source_path": "assets/capstones/CP01/CP01_residuals_fitted.svg"
+    },
+    {
+      "bytes": 8042,
+      "path": "components/c140-companion/assets/capstones/CP01/CP01_screen_sensitivity.csv",
+      "sha256": "98954a60efcecb16f8729f2f475d2bdf3f740c48085e97b2dbbb0c8d87d4db44",
+      "source": "c140-original-companion",
+      "source_path": "assets/capstones/CP01/CP01_screen_sensitivity.csv"
+    },
+    {
+      "bytes": 3195,
+      "path": "components/c140-companion/assets/capstones/CP01/MANIFEST.csv",
+      "sha256": "e298964a34c31110db0944f2f6feb54efb1a9ef88e49aa657ede3a00be2bca9b",
+      "source": "c140-original-companion",
+      "source_path": "assets/capstones/CP01/MANIFEST.csv"
+    },
+    {
+      "bytes": 2540,
+      "path": "components/c140-companion/assets/capstones/CP01/clean/COLUMN_MANIFEST.csv",
+      "sha256": "890a2b3990557629a03edd8c1c234d0528f7d77dfdbf1ab08c3e1efe4a259fa7",
+      "source": "c140-original-companion",
+      "source_path": "assets/capstones/CP01/clean/COLUMN_MANIFEST.csv"
+    },
+    {
+      "bytes": 99729,
+      "path": "components/c140-companion/assets/capstones/CP01/clean/ROW_MANIFEST.csv",
+      "sha256": "fa4f58250f531f4fb7e5cbbc895ea96f8c8584ad12edd1224237abbc08fb8049",
+      "source": "c140-original-companion",
+      "source_path": "assets/capstones/CP01/clean/ROW_MANIFEST.csv"
+    },
+    {
+      "bytes": 5692,
+      "path": "components/c140-companion/assets/capstones/CP01/clean/TRANSFORM_LEDGER.json",
+      "sha256": "7bf040b459d9927ab012b9c469027dd7187091f91d543c8a496c73d6dc1e7beb",
+      "source": "c140-original-companion",
+      "source_path": "assets/capstones/CP01/clean/TRANSFORM_LEDGER.json"
+    },
+    {
+      "bytes": 48780,
+      "path": "components/c140-companion/assets/capstones/CP01/clean/concrete_compressive_strength.csv",
+      "sha256": "74afac6cbd97e01d0a61e47c2c12fdb67dba17553e47db2db9fa5a1946ea1e14",
+      "source": "c140-original-companion",
+      "source_path": "assets/capstones/CP01/clean/concrete_compressive_strength.csv"
+    },
+    {
+      "bytes": 16885,
+      "path": "components/c140-companion/assets/capstones/CP01/provenance/DATASET_PROVENANCE.json",
+      "sha256": "08cd61239545c65900eabc0912cc01181314134d8c59afe2b11c5a026cd33fa0",
+      "source": "c140-original-companion",
+      "source_path": "assets/capstones/CP01/provenance/DATASET_PROVENANCE.json"
+    },
+    {
+      "bytes": 1635,
+      "path": "components/c140-companion/assets/capstones/CP01/provenance/SHA256SUMS",
+      "sha256": "f11ee0fc23691482863a42330004eff024d65dd5c71809a815dc2b02e73028b8",
+      "source": "c140-original-companion",
+      "source_path": "assets/capstones/CP01/provenance/SHA256SUMS"
+    },
+    {
+      "bytes": 9272,
+      "path": "components/c140-companion/assets/capstones/CP02/CP02_ANALYSIS_RECEIPT.json",
+      "sha256": "8905654384a792e718eb824313e7233f8576b6ae8b55132db42e2740c63beb73",
+      "source": "c140-original-companion",
+      "source_path": "assets/capstones/CP02/CP02_ANALYSIS_RECEIPT.json"
+    },
+    {
+      "bytes": 3988,
+      "path": "components/c140-companion/assets/capstones/CP02/CP02_TRANSFORM_RECEIPT.json",
+      "sha256": "a993996a6dedf374c7ad5efe1846ae773779a1218863ea7f50d9efa6930eea2a",
+      "source": "c140-original-companion",
+      "source_path": "assets/capstones/CP02/CP02_TRANSFORM_RECEIPT.json"
+    },
+    {
+      "bytes": 3336,
+      "path": "components/c140-companion/assets/capstones/CP02/CP02_cells_clean.csv",
+      "sha256": "13f271df4677a54b4eeed6307fc0165616ab89a123ee62666add42560be84ad8",
+      "source": "c140-original-companion",
+      "source_path": "assets/capstones/CP02/CP02_cells_clean.csv"
+    },
+    {
+      "bytes": 78922,
+      "path": "components/c140-companion/assets/capstones/CP02/CP02_contrasts.csv",
+      "sha256": "39f9e5d170f60b3572f46006aaf9d575e0bd1329589b44174de633d90660500b",
+      "source": "c140-original-companion",
+      "source_path": "assets/capstones/CP02/CP02_contrasts.csv"
+    },
+    {
+      "bytes": 5761556,
+      "path": "components/c140-companion/assets/capstones/CP02/CP02_coverage.csv.gz",
+      "sha256": "9f4db98147a57db21ccc424bc9e4292ceecd7c113e6733cf580ed1834b82b106",
+      "source": "c140-original-companion",
+      "source_path": "assets/capstones/CP02/CP02_coverage.csv.gz"
+    },
+    {
+      "bytes": 62481,
+      "path": "components/c140-companion/assets/capstones/CP02/CP02_coverage.svg",
+      "sha256": "f9ddd50d0d05b216b16d1b851abb3b3154bba492c0630e4bfe8bb7744c014137",
+      "source": "c140-original-companion",
+      "source_path": "assets/capstones/CP02/CP02_coverage.svg"
+    },
+    {
+      "bytes": 560,
+      "path": "components/c140-companion/assets/capstones/CP02/CP02_coverage.txt",
+      "sha256": "0c38bdeb84a0cd93fd884658ce32d5b2a96e71ee3d688f9b88fc02eeecce08ec",
+      "source": "c140-original-companion",
+      "source_path": "assets/capstones/CP02/CP02_coverage.txt"
+    },
+    {
+      "bytes": 11303,
+      "path": "components/c140-companion/assets/capstones/CP02/CP02_diagnostics.csv",
+      "sha256": "b5d0d9a90ae3336dd3285380b66c4baadc7cd9c39e9bc14f00b7ca4045ea8113",
+      "source": "c140-original-companion",
+      "source_path": "assets/capstones/CP02/CP02_diagnostics.csv"
+    },
+    {
+      "bytes": 629,
+      "path": "components/c140-companion/assets/capstones/CP02/CP02_diagnostics.txt",
+      "sha256": "df82834968a00e58b0c253754206c312b3ac61f92f62ba064abd9afe36d84e72",
+      "source": "c140-original-companion",
+      "source_path": "assets/capstones/CP02/CP02_diagnostics.txt"
+    },
+    {
+      "bytes": 24717,
+      "path": "components/c140-companion/assets/capstones/CP02/CP02_dispersion_profile.csv",
+      "sha256": "f895a81a408b0158cc01d667e3cd2d575882c01188eb2c731441997db786dc1e",
+      "source": "c140-original-companion",
+      "source_path": "assets/capstones/CP02/CP02_dispersion_profile.csv"
+    },
+    {
+      "bytes": 3716597,
+      "path": "components/c140-companion/assets/capstones/CP02/CP02_frequentist_comparison.csv",
+      "sha256": "e8bc7769186560f1a568372a000c760380027ff5f9cabcad133e8f7423e986f7",
+      "source": "c140-original-companion",
+      "source_path": "assets/capstones/CP02/CP02_frequentist_comparison.csv"
+    },
+    {
+      "bytes": 17854,
+      "path": "components/c140-companion/assets/capstones/CP02/CP02_influence.csv",
+      "sha256": "fa8383dd7e8128e2a1f52e6c1ba3a59b705a99eecc963ffd7fa6d0c4f5fab2ba",
+      "source": "c140-original-companion",
+      "source_path": "assets/capstones/CP02/CP02_influence.csv"
+    },
+    {
+      "bytes": 12334,
+      "path": "components/c140-companion/assets/capstones/CP02/CP02_intervals.svg",
+      "sha256": "2c23ff26fc81a5f173ce2eed8e32b8a3f4837526d4c0665b3f1b1c898b4e1799",
+      "source": "c140-original-companion",
+      "source_path": "assets/capstones/CP02/CP02_intervals.svg"
+    },
+    {
+      "bytes": 750,
+      "path": "components/c140-companion/assets/capstones/CP02/CP02_intervals.txt",
+      "sha256": "471fd5b41937ec3fb664ee0f70a82a8a7aac9773fbd5bc3337c64951ea674e75",
+      "source": "c140-original-companion",
+      "source_path": "assets/capstones/CP02/CP02_intervals.txt"
+    },
+    {
+      "bytes": 1415,
+      "path": "components/c140-companion/assets/capstones/CP02/CP02_model_comparison.csv",
+      "sha256": "7b485760abefa32ed718a206dd7208bd5697353dfafa2a82b8c1dc5ecf433292",
+      "source": "c140-original-companion",
+      "source_path": "assets/capstones/CP02/CP02_model_comparison.csv"
+    },
+    {
+      "bytes": 301075,
+      "path": "components/c140-companion/assets/capstones/CP02/CP02_posterior_predictive.csv",
+      "sha256": "5a0d8e04e0fc3a75e9d4ce038dcf660ddbda545e61190cc71581fa5afa34a8f3",
+      "source": "c140-original-companion",
+      "source_path": "assets/capstones/CP02/CP02_posterior_predictive.csv"
+    },
+    {
+      "bytes": 7506,
+      "path": "components/c140-companion/assets/capstones/CP02/CP02_posterior_summary.csv",
+      "sha256": "30b1da31e41e32f252ad0cb3d31a9de5442c70aae1565ed24d9cff6a2179695b",
+      "source": "c140-original-companion",
+      "source_path": "assets/capstones/CP02/CP02_posterior_summary.csv"
+    },
+    {
+      "bytes": 41114,
+      "path": "components/c140-companion/assets/capstones/CP02/CP02_sensitivity.csv",
+      "sha256": "f8836f90a182fd345588cda8f0a34254fe7a5897df17e832496c40e55837d543",
+      "source": "c140-original-companion",
+      "source_path": "assets/capstones/CP02/CP02_sensitivity.csv"
+    },
+    {
+      "bytes": 9207,
+      "path": "components/c140-companion/assets/capstones/CP02/CP02_sensitivity.svg",
+      "sha256": "397cacddf7fd29737424222df1e0cb3605b1452ea31477f32ed52ddace9d11c6",
+      "source": "c140-original-companion",
+      "source_path": "assets/capstones/CP02/CP02_sensitivity.svg"
+    },
+    {
+      "bytes": 690,
+      "path": "components/c140-companion/assets/capstones/CP02/CP02_sensitivity.txt",
+      "sha256": "d18e74a2f53fca95678140ed05c6174bafd870c180063073e9df4ab1829581d3",
+      "source": "c140-original-companion",
+      "source_path": "assets/capstones/CP02/CP02_sensitivity.txt"
+    },
+    {
+      "bytes": 2373,
+      "path": "components/c140-companion/assets/capstones/CP02/MANIFEST.csv",
+      "sha256": "2f147d50378558730ce2fb334193e1761b2636ee96ee2ba6498bd91849f3d98b",
+      "source": "c140-original-companion",
+      "source_path": "assets/capstones/CP02/MANIFEST.csv"
+    },
+    {
+      "bytes": 1848,
+      "path": "components/c140-companion/assets/capstones/CP02/clean/COLUMN_MANIFEST.csv",
+      "sha256": "25ccd74c584bdfbe7adc1b9a2559d25fad7ad41b0b02e327e1acc11ea226dcca",
+      "source": "c140-original-companion",
+      "source_path": "assets/capstones/CP02/clean/COLUMN_MANIFEST.csv"
+    },
+    {
+      "bytes": 552,
+      "path": "components/c140-companion/assets/capstones/CP02/clean/CP02_cells_clean.csv",
+      "sha256": "8699d6f0fa154391cb38880fdd1c3ec7cc2bb12e2cda430a704dbe5c470464ec",
+      "source": "c140-original-companion",
+      "source_path": "assets/capstones/CP02/clean/CP02_cells_clean.csv"
+    },
+    {
+      "bytes": 490,
+      "path": "components/c140-companion/assets/capstones/CP02/clean/MANIFEST.csv",
+      "sha256": "b79f206caea52b557e29b839ccec6b4659960601cc002100cb7c7e36e8d9b6b8",
+      "source": "c140-original-companion",
+      "source_path": "assets/capstones/CP02/clean/MANIFEST.csv"
+    },
+    {
+      "bytes": 1324,
+      "path": "components/c140-companion/assets/capstones/CP02/clean/ROW_MANIFEST.csv",
+      "sha256": "40754aa8ffe2fb75e0cd98d6cd924ecef8403d25949524a6f6860198acd9323e",
+      "source": "c140-original-companion",
+      "source_path": "assets/capstones/CP02/clean/ROW_MANIFEST.csv"
+    },
+    {
+      "bytes": 3698,
+      "path": "components/c140-companion/assets/capstones/CP02/clean/TRANSFORM_LEDGER.json",
+      "sha256": "436c9d3be1fafbb06f6aefb2af0e87c7b88c90e7799cbe2adc1b9a966e0aed82",
+      "source": "c140-original-companion",
+      "source_path": "assets/capstones/CP02/clean/TRANSFORM_LEDGER.json"
+    },
+    {
+      "bytes": 8255,
+      "path": "components/c140-companion/assets/capstones/CP02/provenance/DATASET_PROVENANCE.json",
+      "sha256": "a044cf3353794031a169189623b273e3aeb116c7d33784e7520eaf1311dac49a",
+      "source": "c140-original-companion",
+      "source_path": "assets/capstones/CP02/provenance/DATASET_PROVENANCE.json"
+    },
+    {
+      "bytes": 913,
+      "path": "components/c140-companion/assets/capstones/CP02/provenance/INPUT_MANIFEST.csv",
+      "sha256": "4e191caad7a1c4a971dd619039bd5891cae264cbc078ff8fffc23ed5f27669ff",
+      "source": "c140-original-companion",
+      "source_path": "assets/capstones/CP02/provenance/INPUT_MANIFEST.csv"
+    },
+    {
+      "bytes": 3089,
+      "path": "components/c140-companion/assets/capstones/CP02/provenance/RIGHTS_EVIDENCE.md",
+      "sha256": "1017d9ba16aa5f64e4c6d19c59a648b677c113ab20b78e8bd87e5d99739ae665",
+      "source": "c140-original-companion",
+      "source_path": "assets/capstones/CP02/provenance/RIGHTS_EVIDENCE.md"
+    },
+    {
+      "bytes": 4770,
+      "path": "components/c140-companion/assets/capstones/CP02/provenance/SCHEMA.json",
+      "sha256": "367597e96a39f50d29a67f1a3ac31c0642e61c0439879253a59c1de9f37627e4",
+      "source": "c140-original-companion",
+      "source_path": "assets/capstones/CP02/provenance/SCHEMA.json"
+    },
+    {
       "bytes": 311,
       "path": "components/c140-companion/assets/simulations/SIM001_normal_location.csv",
       "sha256": "6e3272a4323eb297c4275a495effccdbc3024a3a1dd0ec8c275bf9d7b60c08bd",
@@ -785,9 +1268,9 @@
       "source_path": "assets/simulations/SIM001_normal_location.csv"
     },
     {
-      "bytes": 3380,
+      "bytes": 3379,
       "path": "components/c140-companion/assets/simulations/SIM001_normal_location.svg",
-      "sha256": "2bf656c7dafe17e7b8c3705d5d675c78e90e453b37ba9bbe7554b1ca4aaafaf8",
+      "sha256": "48d371bcfea275dd1f36576e829416c8ee4195ce24d1e06426723f48a6e487b3",
       "source": "c140-original-companion",
       "source_path": "assets/simulations/SIM001_normal_location.svg"
     },
@@ -799,9 +1282,9 @@
       "source_path": "assets/simulations/SIM002_delta_boundary.csv"
     },
     {
-      "bytes": 3432,
+      "bytes": 3462,
       "path": "components/c140-companion/assets/simulations/SIM002_delta_boundary.svg",
-      "sha256": "740a8503ba5c266959f206f3021897e86f86d135a0e642a877d7300563d5ffdb",
+      "sha256": "08c6f6666755f6d0817135d8d9b389a5c89bc329d0fe607c94d9a0483fc6f0c6",
       "source": "c140-original-companion",
       "source_path": "assets/simulations/SIM002_delta_boundary.svg"
     },
@@ -813,9 +1296,9 @@
       "source_path": "assets/simulations/SIM003_uniform_endpoint.csv"
     },
     {
-      "bytes": 3432,
+      "bytes": 3452,
       "path": "components/c140-companion/assets/simulations/SIM003_uniform_endpoint.svg",
-      "sha256": "fdeb01049bf6b423518c1933429fe969bd8f274cb17a8c47067383f20995b46e",
+      "sha256": "a306ba3c33f44f67a74e82cfe5d11d6ecaba40f96e01f1c6183151b8b635965e",
       "source": "c140-original-companion",
       "source_path": "assets/simulations/SIM003_uniform_endpoint.svg"
     },
@@ -827,9 +1310,9 @@
       "source_path": "assets/simulations/SIM004_neyman_pearson_power.csv"
     },
     {
-      "bytes": 4620,
+      "bytes": 4627,
       "path": "components/c140-companion/assets/simulations/SIM004_neyman_pearson_power.svg",
-      "sha256": "4e960c7efff15100a5553409644dadc43b04428d727cc3c02e74e84463b49ad3",
+      "sha256": "35087e480e7778f84eaea75f5b8d0da84f28303eaaabe4854f872e22515eab15",
       "source": "c140-original-companion",
       "source_path": "assets/simulations/SIM004_neyman_pearson_power.svg"
     },
@@ -848,9 +1331,9 @@
       "source_path": "assets/simulations/SIM005_matrix_regression_coverage.csv"
     },
     {
-      "bytes": 2922,
+      "bytes": 2976,
       "path": "components/c140-companion/assets/simulations/SIM005_matrix_regression_coverage.svg",
-      "sha256": "14f9935db7d95efc02a0d5c2d221ffc54b2ebb42f03b76da37d831342f16c9ac",
+      "sha256": "a749e0fc6f6e5d93494c2f4b6108d104d0be3836bf7a732c121e3e9fe7f3f081",
       "source": "c140-original-companion",
       "source_path": "assets/simulations/SIM005_matrix_regression_coverage.svg"
     },
@@ -892,14 +1375,14 @@
     {
       "bytes": 1128,
       "path": "components/c140-companion/assets/simulations/manifests/c1.csv",
-      "sha256": "8644723b24a1afa06076d77ac55e96d93540a726df18f449b6f2efc3808d8fb8",
+      "sha256": "926bfad374a0dfa0881c8d4c23b3881b8c20039af2e0c197a19cc3d90fa2dc7d",
       "source": "c140-original-companion",
       "source_path": "assets/simulations/manifests/c1.csv"
     },
     {
       "bytes": 345,
       "path": "components/c140-companion/assets/simulations/manifests/c2.csv",
-      "sha256": "49d4b956a278c251458932dc9fcbdf66ef5e73d187f69398620601cf39b3c1b1",
+      "sha256": "eff4b1c03f0bbb180d4f9ed7da8fd6b20635d2e24e3803486be7b292caed3275",
       "source": "c140-original-companion",
       "source_path": "assets/simulations/manifests/c2.csv"
     },
@@ -913,14 +1396,14 @@
     {
       "bytes": 5468,
       "path": "components/c140-companion/assets/simulations/receipts/C1_SIMULATION_RECEIPT.json",
-      "sha256": "834c8a20025d51bf53ef4e8d0f7d805489af21c34065238131366a734df7e213",
+      "sha256": "d577080010cc99c2bc34fc74c4b059830a459ac010d97e9bd27ecd9265d18a8c",
       "source": "c140-original-companion",
       "source_path": "assets/simulations/receipts/C1_SIMULATION_RECEIPT.json"
     },
     {
       "bytes": 2187,
       "path": "components/c140-companion/assets/simulations/receipts/C2_SIMULATION_RECEIPT.json",
-      "sha256": "de89e57c10c178915ddd96e12d368e5e11b40baa47b6fc31c2e3df5adbd63bd2",
+      "sha256": "2dcb763ef4f4576260eb8483c06927eef2d50f616dc3c67e919553f1381c13f3",
       "source": "c140-original-companion",
       "source_path": "assets/simulations/receipts/C2_SIMULATION_RECEIPT.json"
     },
@@ -932,16 +1415,30 @@
       "source_path": "assets/simulations/receipts/C3_SIMULATION_RECEIPT.json"
     },
     {
-      "bytes": 2349,
+      "bytes": 2964,
       "path": "components/c140-companion/assets/style.css",
-      "sha256": "5cfd5b87fdf35f1e454f61952711b68828cc6ea0682971b42c8c47e709f49405",
+      "sha256": "e3124cfe36c46a322042043fc8c47a39e6f8b1d00309d259548ae2575ceaeeb5",
       "source": "c140-original-companion",
       "source_path": "assets/style.css"
     },
     {
-      "bytes": 15306,
+      "bytes": 246883,
+      "path": "components/c140-companion/capstones/O006-C140-CMP-CP01.html",
+      "sha256": "adeaac567fe046a3f18998798af5bce4359e3045b0f2674e0d5c0dc5aa5d6df5",
+      "source": "c140-original-companion",
+      "source_path": "capstones/O006-C140-CMP-CP01.html"
+    },
+    {
+      "bytes": 107048,
+      "path": "components/c140-companion/capstones/O006-C140-CMP-CP02.html",
+      "sha256": "19b1ff2b712a6936fbdb0170d0109bd91155cc4513534a720eacc1531f4c9a53",
+      "source": "c140-original-companion",
+      "source_path": "capstones/O006-C140-CMP-CP02.html"
+    },
+    {
+      "bytes": 21723,
       "path": "components/c140-companion/index.html",
-      "sha256": "ba3f5dfc9c35e2a8de9170419801c8ba1b7ff952a4cddfb74c01b5810012e289",
+      "sha256": "3fe7d9cad39af310b797acbf5b4e7936067f3b1fbe0e6743860f0a4e1d00f406",
       "source": "c140-original-companion",
       "source_path": "index.html"
     },
@@ -953,226 +1450,226 @@
       "source_path": "licenses/MathJax-3.1.2-LICENSE.txt"
     },
     {
-      "bytes": 39139,
+      "bytes": 40817,
       "path": "components/c140-companion/mastery/O006-C140-CMP-MS00.html",
-      "sha256": "8cd3f68258ff3fcfd1d9416d00ab1616772bbdd292e2d1ebd68856a2aa23bdde",
+      "sha256": "625f159acb2c2985bc307674e276eff65dba5a59299793eaffca4f3715dbb211",
       "source": "c140-original-companion",
       "source_path": "mastery/O006-C140-CMP-MS00.html"
     },
     {
-      "bytes": 39519,
+      "bytes": 41541,
       "path": "components/c140-companion/mastery/O006-C140-CMP-MS01.html",
-      "sha256": "43cf592b765874deafad4ef19b0e66550b073ac9c6d07ca6e97f96b0264d69b5",
+      "sha256": "58958d678fcaf63c055f4fd912516f5e739731c9df11776f68aded1b5ad33443",
       "source": "c140-original-companion",
       "source_path": "mastery/O006-C140-CMP-MS01.html"
     },
     {
-      "bytes": 41239,
+      "bytes": 43850,
       "path": "components/c140-companion/mastery/O006-C140-CMP-MS02.html",
-      "sha256": "20410d3e5385011554ef18fc828ed988a26abf0d5e9defdf0d22be33a7966f3e",
+      "sha256": "1dd4d56590ddc47d88d5da7cc48a29df33bc63f535acd2c2a22af31ac8c713e9",
       "source": "c140-original-companion",
       "source_path": "mastery/O006-C140-CMP-MS02.html"
     },
     {
-      "bytes": 44100,
+      "bytes": 46044,
       "path": "components/c140-companion/mastery/O006-C140-CMP-MS03.html",
-      "sha256": "a2c9a3b9a4f51f425ff5cf1eeab1e07c84888a167f94bf58ff13c7b26045a20f",
+      "sha256": "dd8d99630c49e9d4f0ea96b4c4e94af42bd184fffb56baf948ad277a2d0e6e60",
       "source": "c140-original-companion",
       "source_path": "mastery/O006-C140-CMP-MS03.html"
     },
     {
-      "bytes": 43092,
+      "bytes": 46960,
       "path": "components/c140-companion/mastery/O006-C140-CMP-MS04.html",
-      "sha256": "521cd91c40cd729f1cffa71aef49c350562925f1e4480092335f98d9e31e0322",
+      "sha256": "a427472fd4b91c4f0f1cfe42b47f737f0f0bb096bc620a3b0fddd8579fa67cd9",
       "source": "c140-original-companion",
       "source_path": "mastery/O006-C140-CMP-MS04.html"
     },
     {
-      "bytes": 38797,
+      "bytes": 40963,
       "path": "components/c140-companion/mastery/O006-C140-CMP-MS05.html",
-      "sha256": "cd074699de424e70589620e10effc7c16611b4f2df22cb309a5ad0dc70504d1c",
+      "sha256": "b984ba624332f4538aae2d84b29f51613606703d45635d04a2d96a758d96d6ab",
       "source": "c140-original-companion",
       "source_path": "mastery/O006-C140-CMP-MS05.html"
     },
     {
-      "bytes": 37948,
+      "bytes": 41443,
       "path": "components/c140-companion/mastery/O006-C140-CMP-MS06.html",
-      "sha256": "754da940eb5fbc091c38bd1436caa2bc7dc8a41d4b7fb8f6fa27d520645f3270",
+      "sha256": "74e4b24793250bffd8f05686d57b60ec001688c6113a0effa8a7d7ebced1e66e",
       "source": "c140-original-companion",
       "source_path": "mastery/O006-C140-CMP-MS06.html"
     },
     {
-      "bytes": 49017,
+      "bytes": 51552,
       "path": "components/c140-companion/mastery/O006-C140-CMP-MS07.html",
-      "sha256": "6b75e323d45af5b256e79150dfa4e066809c076d9c0330ae66ae24087985d5a8",
+      "sha256": "e9215034c039efef7b5154a0c47c14f27025493b2d76670a45dd195b27211d53",
       "source": "c140-original-companion",
       "source_path": "mastery/O006-C140-CMP-MS07.html"
     },
     {
-      "bytes": 43803,
+      "bytes": 47939,
       "path": "components/c140-companion/mastery/O006-C140-CMP-MS08.html",
-      "sha256": "d4f9f2984786721576fac03252b29cb951c9574bc6c7914f38358558feae0d6b",
+      "sha256": "8b44161d131ed966607e91d4b28eefdd1102e080280dfedf7c6a2a7294ae45ef",
       "source": "c140-original-companion",
       "source_path": "mastery/O006-C140-CMP-MS08.html"
     },
     {
-      "bytes": 39383,
+      "bytes": 41715,
       "path": "components/c140-companion/mastery/O006-C140-CMP-MS09.html",
-      "sha256": "31ad0b151c7b70f9fe504ffd36915b795058f3bbcb531ea6cc65277c6868c1f0",
+      "sha256": "e222bb3e537a9b62e9c3dc157108d7d7cbdef6b7dcdc73c87765a1a62d6bf4f1",
       "source": "c140-original-companion",
       "source_path": "mastery/O006-C140-CMP-MS09.html"
     },
     {
-      "bytes": 41892,
+      "bytes": 45902,
       "path": "components/c140-companion/mastery/O006-C140-CMP-MS10.html",
-      "sha256": "7f1a06fc66b610421c39f8eef2a94d2b225f7080964ae1ae9530903580d834c8",
+      "sha256": "18c588f98f45a72b2da07a7f370ab1eeb32b6632aba8cc5774d07e4f85210f7a",
       "source": "c140-original-companion",
       "source_path": "mastery/O006-C140-CMP-MS10.html"
     },
     {
-      "bytes": 53603,
+      "bytes": 56619,
       "path": "components/c140-companion/mastery/O006-C140-CMP-MS11.html",
-      "sha256": "852944a18fdba203e4d6c69ace70373302780443d67d2cedd32782ca57248b43",
+      "sha256": "a35d9ba78427368a420b11a9f7ed98292c6c7fd3b998136681d01a297408174b",
       "source": "c140-original-companion",
       "source_path": "mastery/O006-C140-CMP-MS11.html"
     },
     {
-      "bytes": 39169,
+      "bytes": 42154,
       "path": "components/c140-companion/mastery/O006-C140-CMP-MS12.html",
-      "sha256": "007a633f14668a88a8de352600c7f2b3dc7a7e3d95a35d0b1038e48501c716f8",
+      "sha256": "03456991f2ad072ab88463e49abaa38ac2fea03b38dabf6a14c2bb62b41da08a",
       "source": "c140-original-companion",
       "source_path": "mastery/O006-C140-CMP-MS12.html"
     },
     {
-      "bytes": 8664,
+      "bytes": 9849,
       "path": "components/c140-companion/simulations/O006-C140-CMP-SIM001.html",
-      "sha256": "2df27ce9f57724adf8d66b4c6a1c48cbbed818304dac5ab8664447636a9043ad",
+      "sha256": "203bac485cdb7e9358b0d2e5008730d2c4efd56404016a6dd31b878cb333af34",
       "source": "c140-original-companion",
       "source_path": "simulations/O006-C140-CMP-SIM001.html"
     },
     {
-      "bytes": 8278,
+      "bytes": 9517,
       "path": "components/c140-companion/simulations/O006-C140-CMP-SIM002.html",
-      "sha256": "41e50d4960ee7d1adf612c44ecd78dcd44ffea8fe9b496ea9b0a622c73923c1f",
+      "sha256": "05042ed92b39176f201cbe3e54bab46fbd8bcb733d2bc53c90eee146989daf39",
       "source": "c140-original-companion",
       "source_path": "simulations/O006-C140-CMP-SIM002.html"
     },
     {
-      "bytes": 8527,
+      "bytes": 9731,
       "path": "components/c140-companion/simulations/O006-C140-CMP-SIM003.html",
-      "sha256": "d78d90c5dd61e6eb2e7c21a1863fd02c49e88ab6a4853402030e1c4f138c8c3e",
+      "sha256": "17768311939bb1ddc6a1451b08c4a0fc264379a124bfc2186c85848b5319b676",
       "source": "c140-original-companion",
       "source_path": "simulations/O006-C140-CMP-SIM003.html"
     },
     {
-      "bytes": 7975,
+      "bytes": 9129,
       "path": "components/c140-companion/simulations/O006-C140-CMP-SIM004.html",
-      "sha256": "06ba57d79eb9deb5edef3619f55dbb255809e924d88ff696036dc35e306dfb98",
+      "sha256": "c06737def619dfa947fc94c35ba24fb72f2eb11abde92b3ba33ffbbafa0c8754",
       "source": "c140-original-companion",
       "source_path": "simulations/O006-C140-CMP-SIM004.html"
     },
     {
-      "bytes": 11923,
+      "bytes": 13096,
       "path": "components/c140-companion/simulations/O006-C140-CMP-SIM005.html",
-      "sha256": "7af80c9ba2f6b372d8fc58ce47e6389611cba41274121d96a971aa64cd252bb3",
+      "sha256": "e7e23f931eb2a52feb4e1cc1eb28ff37e8b8c000174080df1b9aefd8f5ab26db",
       "source": "c140-original-companion",
       "source_path": "simulations/O006-C140-CMP-SIM005.html"
     },
     {
-      "bytes": 17086,
+      "bytes": 18495,
       "path": "components/c140-companion/simulations/O006-C140-CMP-SIM006.html",
-      "sha256": "8d27b9e40adb59fbe9cedaf3d2737a5fe9cd97261ec647e06711f9ceb5c547cb",
+      "sha256": "09add7f02a586f8927381eb0be81cb4736ee405e0d8c8f125c66c62a9d21028e",
       "source": "c140-original-companion",
       "source_path": "simulations/O006-C140-CMP-SIM006.html"
     },
     {
-      "bytes": 31917,
+      "bytes": 35297,
       "path": "components/c140-companion/theory/O006-C140-CMP-D001.html",
-      "sha256": "c7592192df51795895235f2e93905781c9c5d8ed49bb2ca642a170e7f3e07047",
+      "sha256": "04d6f486fc9baf6467f5dd557f1e67d9a3e39bc201a5803f93102beac38783f9",
       "source": "c140-original-companion",
       "source_path": "theory/O006-C140-CMP-D001.html"
     },
     {
-      "bytes": 33441,
+      "bytes": 36445,
       "path": "components/c140-companion/theory/O006-C140-CMP-D002.html",
-      "sha256": "148ace3e09f89dec20d5fb1ef1d6b60a8b82af64057ba5cfb54de68ffb015fc0",
+      "sha256": "71cb95124015e7896eb09e200e3ff4b8067b4f6e7c75e6e5695adf72d298e695",
       "source": "c140-original-companion",
       "source_path": "theory/O006-C140-CMP-D002.html"
     },
     {
-      "bytes": 35359,
+      "bytes": 38668,
       "path": "components/c140-companion/theory/O006-C140-CMP-D003.html",
-      "sha256": "ff23ad3ea0606d059634ec562f0e341709cec29de4275d5a3593dbe5f30cb2ef",
+      "sha256": "cec61f78ed1e76ba8f50c5afa01eacf084eb3919ebc9fdc4d2886774ac6786f1",
       "source": "c140-original-companion",
       "source_path": "theory/O006-C140-CMP-D003.html"
     },
     {
-      "bytes": 37864,
+      "bytes": 40623,
       "path": "components/c140-companion/theory/O006-C140-CMP-D004.html",
-      "sha256": "c8b42b4dad5cd35dad35410f3ebdebb530c5290fcc6540a6adbf44cb3558aa1e",
+      "sha256": "5d759081ab167cd458e4499b7271b4875631300059abeede1750e8fe9133f9a3",
       "source": "c140-original-companion",
       "source_path": "theory/O006-C140-CMP-D004.html"
     },
     {
-      "bytes": 39654,
+      "bytes": 42430,
       "path": "components/c140-companion/theory/O006-C140-CMP-D005.html",
-      "sha256": "2ac74b815c3c6cf0e8ee750ee55e0f2529485e662543f5591ca3064320a3769d",
+      "sha256": "0b128faf40ee7cc3fd90027f9b97d86fe7856f4453ed33d894949651899c25b4",
       "source": "c140-original-companion",
       "source_path": "theory/O006-C140-CMP-D005.html"
     },
     {
-      "bytes": 33298,
+      "bytes": 35698,
       "path": "components/c140-companion/theory/O006-C140-CMP-D006.html",
-      "sha256": "63cbffc3a4e04551dd702b8405c96ccf9e86171e73daf83df11f70a94ba70d39",
+      "sha256": "5d793bcfa7751a3212d77c807774fc7160a859be09612693f2e28cfc63f65f40",
       "source": "c140-original-companion",
       "source_path": "theory/O006-C140-CMP-D006.html"
     },
     {
-      "bytes": 42526,
+      "bytes": 43864,
       "path": "components/c140-companion/theory/O006-C140-CMP-D007.html",
-      "sha256": "86c174b574fc3aa6ae2f2e73321d1e64e4f6b609720306bfce66c0dc0c0dc44e",
+      "sha256": "d954759240b129010fa66274a767f7c4e1f83b402bca1a794dc9b6a2e94e928a",
       "source": "c140-original-companion",
       "source_path": "theory/O006-C140-CMP-D007.html"
     },
     {
-      "bytes": 52645,
+      "bytes": 54964,
       "path": "components/c140-companion/theory/O006-C140-CMP-D008.html",
-      "sha256": "31adf87977888300f8b2b8eb482bf53db0b8ce1ce9a841846b2ae6cd13868682",
+      "sha256": "c66fe514ecc9bcfdf00ae58bc8dd706362b6e7be4dc81e7ac2bdd98ac0b55a04",
       "source": "c140-original-companion",
       "source_path": "theory/O006-C140-CMP-D008.html"
     },
     {
-      "bytes": 38579,
+      "bytes": 40555,
       "path": "components/c140-companion/theory/O006-C140-CMP-D009.html",
-      "sha256": "88445856f593115db3e5407565c02622b05e5a389ff04b6a9a51867ff5b0f497",
+      "sha256": "2bdfb940954a96fec05122e7563a676d382241943427eedda2d02ed9b44f1b39",
       "source": "c140-original-companion",
       "source_path": "theory/O006-C140-CMP-D009.html"
     },
     {
-      "bytes": 56987,
+      "bytes": 59245,
       "path": "components/c140-companion/theory/O006-C140-CMP-D010.html",
-      "sha256": "d1e3cbfd0b1e40002e9c86c62aedfc8b03d8418545e114bea05542de85e6d2d5",
+      "sha256": "f6b0c90837205ec91ea6ed77d1009d87f5fd66b042dcf149ecc6865a3390d8f8",
       "source": "c140-original-companion",
       "source_path": "theory/O006-C140-CMP-D010.html"
     },
     {
-      "bytes": 26062,
+      "bytes": 27513,
       "path": "components/c140-companion/theory/O006-C140-CMP-D011.html",
-      "sha256": "a232ff96f69195c59dd676668aae9403545ee4cd88b68d20a13537ccfb1259bf",
+      "sha256": "4b6284b1d89b79bbfe75736f5335274f01ea80f07f953d4b46a5409082e6e313",
       "source": "c140-original-companion",
       "source_path": "theory/O006-C140-CMP-D011.html"
     },
     {
-      "bytes": 54328,
+      "bytes": 57114,
       "path": "components/c140-companion/theory/O006-C140-CMP-D012.html",
-      "sha256": "a29aac7e6a4e3f4279f801982ebe4f9bb90b4e502509217c1902c11ae0b99b0e",
+      "sha256": "2962054baa3343fbc083c6b2c225797945871c2bbfc1d960d8a30037ccfaa8e5",
       "source": "c140-original-companion",
       "source_path": "theory/O006-C140-CMP-D012.html"
     },
     {
-      "bytes": 47135,
+      "bytes": 49900,
       "path": "components/c140-companion/theory/O006-C140-CMP-D013.html",
-      "sha256": "9ebe464486e58fceac8fecb46924c8f532c1d5d64d72d25ee11e875245122e2a",
+      "sha256": "ed062b7a902de2cbd0df66e63411eb2d02793caf63f8d142ef71bf4ec23d5e89",
       "source": "c140-original-companion",
       "source_path": "theory/O006-C140-CMP-D013.html"
     },
@@ -1296,9 +1793,9 @@
       "source_path": "random/icons/Stop.svg"
     },
     {
-      "bytes": 63769,
+      "bytes": 63774,
       "path": "components/random-completeness/random/point/Sufficient.html",
-      "sha256": "5b8f4153922f6f69a5937ce4fb3963827f7e37bef4899e7b3c7b02449c60cdd1",
+      "sha256": "edf4a074c02327e08ba2d610dd02f77092ecdc54e034bfcfec4016c37491ae7c",
       "source": "random-completeness-donor",
       "source_path": "random/point/Sufficient.html"
     },
@@ -1327,9 +1824,9 @@
   "generated_by": "scripts/assemble_pages_collection.py",
   "inputs": {
     "c140_original_companion": {
-      "bytes": 3024784,
-      "files": 64,
-      "manifest_sha256": "75c11fb1e8a0925ed64d5a8f16ce33ae5cbd65e0b3341ca0fa774011b54e1293",
+      "bytes": 15757728,
+      "files": 135,
+      "manifest_sha256": "c6caf4c77b25b2029f5a6aefd24db89f657c15e34648b63449fac7db90db777d",
       "mount": "components/c140-companion",
       "path": "components/c140-companion/build/html-id"
     },
@@ -1341,9 +1838,9 @@
       "selection": "git-tracked-files-only"
     },
     "random_completeness_donor": {
-      "bytes": 1798250,
+      "bytes": 1798255,
       "files": 18,
-      "manifest_sha256": "fb0bf5a27de7b6f38373f962ed1597522e4b912002be73b3ac08a908b272376e",
+      "manifest_sha256": "2f06b1c04255c0b8947d7756d4c1566c44367d719f656f0bdda49c18d9db17eb",
       "mount": "components/random-completeness",
       "path": "components/random-completeness/build/html-id"
     }

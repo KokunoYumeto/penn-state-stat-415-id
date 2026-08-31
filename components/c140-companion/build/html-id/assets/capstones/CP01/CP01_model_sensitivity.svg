@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="600" viewBox="0 0 900 600" role="img" lang="id" xml:lang="id" aria-labelledby="cp01-mod-title cp01-mod-desc">
+<title id="cp01-mod-title">Sensitivitas model dan validasi CP01</title>
+<desc id="cp01-mod-desc">RMSE tahan model penuh adalah 10,470 pada LOOCV dan 10,483 pada penghapusan satu profil; transformasi log umur memberi sekitar 7,19 pada keduanya, sedangkan pemasangan ulang setelah menyaring 123 baris mengubah prediksi sampai 30,45 MPa dan bukan pengganti model utama.</desc>
+<rect width="100%" height="100%" fill="#ffffff"/>
+<style>text{font-family:Arial,sans-serif;fill:#17202a}.axis{stroke:#273746;stroke-width:1.4}.grid{stroke:#d5d8dc;stroke-width:1}.label{font-size:13px}.small{font-size:11px}.heading{font-size:20px;font-weight:700}.series{fill:none;stroke-width:2}.point{fill:#2471a3;stroke:#17202a;stroke-width:.35}.square{fill:#ffffff;stroke:#922b21;stroke-width:1.8}</style>
+<text class="heading" x="64" y="31">Sensitivitas model dan validasi CP01</text>
+<line class="axis" x1="86.0" y1="488.0" x2="862.0" y2="488.0"/>
+<line class="axis" x1="86.0" y1="68.0" x2="86.0" y2="488.0"/>
+<text class="label" text-anchor="middle" x="215.33" y="513.0">penuh, umur mentah</text>
+<text class="small" text-anchor="middle" x="215.33" y="122.44">10,470 / 10,483</text>
+<text class="label" text-anchor="middle" x="474.00" y="513.0">tereduksi</text>
+<text class="small" text-anchor="middle" x="474.00" y="103.00">11,046 / 11,057</text>
+<text class="label" text-anchor="middle" x="732.67" y="513.0">penuh, log umur</text>
+<text class="small" text-anchor="middle" x="732.67" y="233.96">7,188 / 7,195</text>
+<polyline class="series" stroke="#1f618d" points="215.33,132.91 474.00,113.35 732.67,244.19"/>
+<polyline class="series" stroke="#922b21" stroke-dasharray="8 5" points="215.33,132.44 474.00,113.00 732.67,243.96"/>
+<circle cx="215.33" cy="132.91" r="4" fill="#1f618d"/>
+<circle cx="474.00" cy="113.35" r="4" fill="#1f618d"/>
+<circle cx="732.67" cy="244.19" r="4" fill="#1f618d"/>
+<rect class="square" x="211.33" y="128.44" width="8" height="8"/>
+<rect class="square" x="470.00" y="109.00" width="8" height="8"/>
+<rect class="square" x="728.67" y="239.96" width="8" height="8"/>
+<text class="label" text-anchor="middle" transform="translate(24 278.0) rotate(-90)">RMSE data tertahan (MPa)</text>
+<text class="small" x="98.0" y="86.0">lingkaran penuh: LOOCV baris analitik; persegi putus-putus: LOPPO eksak 992 profil</text>
+<text class="small" x="98.0" y="558">Pemasangan ulang setelah penyaringan gabungan memakai 907 baris dan tidak mempunyai taksiran CV pascapenyaringan.</text>
+<text class="small" x="98.0" y="578">Prediksinya berbeda paling besar 30,45 MPa dari pemasangan utama; pemasangan ulang ini bukan model pengganti.</text>
+</svg>

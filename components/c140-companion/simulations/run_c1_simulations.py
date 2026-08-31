@@ -163,11 +163,11 @@ def sim001() -> tuple[dict[str, bytes], dict[str, Any]]:
         raise RuntimeError(f"SIM001 assertion failed: {assertions}")
     csv_payload = csv_bytes(list(rows[0]), rows)
     svg_payload = line_svg(
-        title="SIM001: coverage interval Wald pada model lokasi normal",
-        description="Coverage Monte Carlo mendekati 0,95 untuk n 10, 30, dan 100; prosedur Wald, score, dan rasio likelihood identik pada model ini.",
-        series=[("coverage", points, "#1f77b4"), ("target 0,95", [(10.0, 0.95), (100.0, 0.95)], "#c0392b")],
+        title="SIM001: cakupan selang Wald pada model lokasi normal",
+        description="Cakupan Monte Carlo mendekati 0,95 untuk n 10, 30, dan 100; prosedur Wald, skor, dan rasio fungsi kemungkinan identik pada model ini.",
+        series=[("cakupan", points, "#1f77b4"), ("sasaran 0,95", [(10.0, 0.95), (100.0, 0.95)], "#c0392b")],
         x_label="ukuran sampel n",
-        y_label="coverage",
+        y_label="cakupan",
         x_min=10,
         x_max=100,
         y_min=0.94,
@@ -222,10 +222,10 @@ def sim002() -> tuple[dict[str, bytes], dict[str, Any]]:
     return {
         "SIM002_delta_boundary.csv": csv_bytes(list(rows[0]), rows),
         "SIM002_delta_boundary.svg": line_svg(
-            title="SIM002: delta method reguler dan titik turunan nol",
-            description="Varians empiris dari akar-n kali galat transformasi dibandingkan dengan varians delta orde pertama untuk theta 0, 0,2, dan 1.",
+            title="SIM002: metode delta reguler dan titik turunan nol",
+            description="Varians empiris dari akar-n kali galat transformasi dibandingkan dengan varians metode delta orde pertama untuk parameter θ bernilai 0, 0,2, dan 1.",
             series=[("varians empiris", plot, "#117864"), ("varians delta", [(0.0, 0.0), (0.2, 0.16), (1.0, 4.0)], "#af601a")],
-            x_label="theta",
+            x_label="parameter θ",
             y_label="varians asimtotik",
             x_min=0,
             x_max=1,
@@ -292,8 +292,8 @@ def sim003() -> tuple[dict[str, bytes], dict[str, Any]]:
     return {
         "SIM003_uniform_endpoint.csv": csv_bytes(list(rows[0]), rows),
         "SIM003_uniform_endpoint.svg": line_svg(
-            title="SIM003: laju n dan kegagalan bootstrap endpoint Uniform",
-            description="Rata-rata statistik n kali gap endpoint mendekati satu, sedangkan massa bootstrap pada nol mendekati 0,632.",
+            title="SIM003: laju n dan kegagalan bootstrap pada batas sebaran seragam",
+            description="Rata-rata statistik n kali celah ke batas mendekati satu, sedangkan massa bootstrap di nol mendekati 0,632.",
             series=[("E[n(1-Mn)]", rate_points, "#6c3483"), ("massa bootstrap nol", mass_points, "#2874a6")],
             x_label="ukuran sampel n",
             y_label="nilai",
@@ -368,9 +368,9 @@ def sim004() -> tuple[dict[str, bytes], dict[str, Any]]:
         "SIM004_neyman_pearson_summary.csv": csv_bytes(list(summary_rows[0]), summary_rows),
         "SIM004_neyman_pearson_power.csv": csv_bytes(list(curve_rows[0]), curve_rows),
         "SIM004_neyman_pearson_power.svg": line_svg(
-            title="SIM004: fungsi power uji Neyman–Pearson teracak",
-            description="Probabilitas penolakan eksak untuk X binomial dengan n empat; randomisasi pada X sama dengan dua menghasilkan size tepat 0,10 di p sama dengan 0,25.",
-            series=[("power eksak", points, "#b03a2e"), ("alpha 0,10", [(0.0, 0.1), (1.0, 0.1)], "#1f618d")],
+            title="SIM004: fungsi daya uji Neyman–Pearson teracak",
+            description="Probabilitas penolakan eksak untuk X binomial dengan n empat; randomisasi pada X sama dengan dua menghasilkan ukuran uji tepat 0,10 ketika p sama dengan 0,25.",
+            series=[("daya eksak", points, "#b03a2e"), ("taraf 0,10", [(0.0, 0.1), (1.0, 0.1)], "#1f618d")],
             x_label="parameter p",
             y_label="probabilitas penolakan",
             x_min=0,

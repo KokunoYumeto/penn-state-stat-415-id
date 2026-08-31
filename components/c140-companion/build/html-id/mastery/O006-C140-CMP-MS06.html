@@ -4,147 +4,157 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="generator" content="OpenAI Codex gpt-5.6-sol, Ultra">
-<title>Set penguasaan 06 — pengujian hipotesis, daya, p-value, dan jembatan likelihood</title>
+<title>Set penguasaan 06 — pengujian hipotesis, daya, nilai-p, dan jembatan ke teori fungsi kemungkinan</title>
 <link rel="stylesheet" href="../assets/style.css">
 <script>window.MathJax={loader:{load:['[tex]/boldsymbol']},tex:{packages:{'[+]':['boldsymbol']},inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']]},svg:{fontCache:'local'}};</script>
 <script defer src="../assets/MathJax/tex-svg.js"></script>
 </head>
 <body>
+<a class="skip-link" href="#main-content">Langsung ke isi utama</a>
 <div class="shell">
-<nav class="sidebar" aria-label="Daftar isi pendamping"><h2>Isi pendamping</h2><ol><li><a href="../index.html">Pendamping Orisinal Statistika Matematis</a></li><li><a href="../theory/O006-C140-CMP-D001.html">Model parametrik reguler, skor, dan informasi Fisher</a></li><li><a href="../theory/O006-C140-CMP-D002.html">Konsistensi MLE: identifikasi Kullback–Leibler dan teorema argmax</a></li><li><a href="../theory/O006-C140-CMP-D003.html">Likelihood kuadratik lokal, normalitas asimtotik, dan delta method</a></li><li><a href="../theory/O006-C140-CMP-D004.html">Prosedur Wald, skor, dan rasio likelihood</a></li><li><a href="../theory/O006-C140-CMP-D005.html">Likelihood nonreguler: empat mekanisme kegagalan</a></li><li><a href="../theory/O006-C140-CMP-D006.html">Optimalitas pengujian: Neyman–Pearson, MP, UMP, dan rasio likelihood monoton</a></li><li><a href="../theory/O006-C140-CMP-D007.html">Loss, risk, efisiensi, Rao–Blackwell, dan Lehmann–Scheffé</a></li><li><a href="../theory/O006-C140-CMP-D008.html">Model linear Gaussian desain tetap dan geometri proyeksi</a></li><li><a href="../theory/O006-C140-CMP-D009.html">OLS, MLE Gaussian, dan teorema Gauss–Markov pada rancangan tetap</a></li><li><a href="../theory/O006-C140-CMP-D010.html">Inferensi Gaussian eksak: proyeksi, t, F, ANOVA, dan prediksi</a></li><li><a href="../theory/O006-C140-CMP-D011.html">Diagnostik, leverage, misspesifikasi, dan inferensi pascaseleksi</a></li><li><a href="../theory/O006-C140-CMP-D012.html">Inferensi Bayesian sebagai pembaruan dan keputusan yang koheren</a></li><li><a href="../theory/O006-C140-CMP-D013.html">Perbandingan Bayesian–frequentist: keputusan, cakupan, dan kalibrasi</a></li><li><a href="../simulations/O006-C140-CMP-SIM001.html">Model lokasi normal: MLE, coverage, dan tiga statistik uji</a></li><li><a href="../simulations/O006-C140-CMP-SIM002.html">Delta method pada titik reguler dan titik dengan turunan nol</a></li><li><a href="../simulations/O006-C140-CMP-SIM003.html">Endpoint Uniform: laju nonreguler dan kegagalan bootstrap biasa</a></li><li><a href="../simulations/O006-C140-CMP-SIM004.html">Uji Neyman–Pearson teracak dengan size tepat</a></li><li><a href="../simulations/O006-C140-CMP-SIM005.html">Model linear matriks: coverage, heteroskedastisitas, dan pengaruh</a></li><li><a href="../simulations/O006-C140-CMP-SIM006.html">Kalibrasi selang Bayesian dan frequentist pada model binomial</a></li><li><a href="O006-C140-CMP-MS00.html">Set penguasaan 00 — probabilitas, distribusi, dan ekspektasi (diagnostik C140)</a></li><li><a href="O006-C140-CMP-MS01.html">Set penguasaan 01 — statistik urutan dan distribusi sampel</a></li><li><a href="O006-C140-CMP-MS02.html">Set penguasaan 02 — estimasi, bias, MSE, dan sifat estimator</a></li><li><a href="O006-C140-CMP-MS03.html">Set penguasaan 03 — kecukupan, faktorisasi, kelengkapan, dan statistik ancillary</a></li><li><a href="O006-C140-CMP-MS04.html">Set penguasaan 04 — metode momen dan dasar kemungkinan maksimum</a></li><li><a href="O006-C140-CMP-MS05.html">Set penguasaan 05 — informasi Fisher, interval kepercayaan, bootstrap, dan delta method</a></li><li><a href="O006-C140-CMP-MS06.html">Set penguasaan 06 — pengujian hipotesis, daya, p-value, dan jembatan likelihood</a></li><li><a href="O006-C140-CMP-MS07.html">Set penguasaan 07 — regularitas, konsistensi, dan normalitas MLE</a></li><li><a href="O006-C140-CMP-MS08.html">Set penguasaan 08 — Wald, skor, rasio likelihood, dan diagnosis nonregular</a></li><li><a href="O006-C140-CMP-MS09.html">Set penguasaan 09 — pengujian eksak dan optimalitas Neyman–Pearson</a></li><li><a href="O006-C140-CMP-MS10.html">Set penguasaan 10 — uji likelihood asimtotik, risk, dan perbaikan estimator</a></li><li><a href="O006-C140-CMP-MS11.html">Set penguasaan 11 — pembaruan Bayesian, keputusan, dan kalibrasi</a></li><li><a href="O006-C140-CMP-MS12.html">Set penguasaan 12 — model linear Gaussian matriks, inferensi eksak, dan diagnostik</a></li><li><a href="../assessments/O006-C140-CMP-CA01.html">Asesmen kumulatif C1: likelihood, optimalitas, dan keputusan statistik</a></li></ol></nav>
-<main>
+<nav class="sidebar" aria-labelledby="companion-nav-title"><p class="nav-title" id="companion-nav-title">Isi pendamping</p><ol><li><a href="../index.html">Pendamping Orisinal Statistika Matematis</a></li><li><a href="../theory/O006-C140-CMP-D001.html">Model parametrik reguler, skor, dan informasi Fisher</a></li><li><a href="../theory/O006-C140-CMP-D002.html">Konsistensi MLE: identifikasi Kullback–Leibler dan teorema argmax</a></li><li><a href="../theory/O006-C140-CMP-D003.html">Ekspansi kuadratik lokal fungsi log-kemungkinan, normalitas asimtotik, dan metode delta</a></li><li><a href="../theory/O006-C140-CMP-D004.html">Prosedur Wald, skor, dan rasio fungsi kemungkinan</a></li><li><a href="../theory/O006-C140-CMP-D005.html">Fungsi kemungkinan nonreguler: empat mekanisme kegagalan</a></li><li><a href="../theory/O006-C140-CMP-D006.html">Optimalitas pengujian: Neyman–Pearson, MP, UMP, dan rasio fungsi kemungkinan monoton</a></li><li><a href="../theory/O006-C140-CMP-D007.html">Kerugian, risiko, efisiensi, Rao–Blackwell, dan Lehmann–Scheffé</a></li><li><a href="../theory/O006-C140-CMP-D008.html">Model linear Gaussian berdesain tetap dan geometri proyeksi</a></li><li><a href="../theory/O006-C140-CMP-D009.html">OLS, MLE Gaussian, dan teorema Gauss–Markov pada desain tetap</a></li><li><a href="../theory/O006-C140-CMP-D010.html">Inferensi Gaussian eksak: proyeksi, t, F, ANOVA, dan prediksi</a></li><li><a href="../theory/O006-C140-CMP-D011.html">Diagnostik, daya ungkit, kesalahan spesifikasi, dan inferensi pascaseleksi</a></li><li><a href="../theory/O006-C140-CMP-D012.html">Inferensi Bayesian sebagai pembaruan dan keputusan yang koheren</a></li><li><a href="../theory/O006-C140-CMP-D013.html">Perbandingan Bayesian–frekuentis: keputusan, cakupan, dan kalibrasi</a></li><li><a href="../simulations/O006-C140-CMP-SIM001.html">Model lokasi normal: MLE, cakupan, dan tiga statistik uji</a></li><li><a href="../simulations/O006-C140-CMP-SIM002.html">Metode delta pada titik reguler dan titik dengan turunan nol</a></li><li><a href="../simulations/O006-C140-CMP-SIM003.html">Distribusi seragam pada batas dukungan: laju nonreguler dan kegagalan bootstrap biasa</a></li><li><a href="../simulations/O006-C140-CMP-SIM004.html">Uji Neyman–Pearson teracak dengan ukuran uji tepat</a></li><li><a href="../simulations/O006-C140-CMP-SIM005.html">Model linear matriks: cakupan, heteroskedastisitas, dan pengaruh</a></li><li><a href="../simulations/O006-C140-CMP-SIM006.html">Kalibrasi selang Bayesian dan frekuentis pada model binomial</a></li><li><a href="O006-C140-CMP-MS00.html">Set penguasaan 00 — probabilitas, distribusi, dan ekspektasi (diagnostik C140)</a></li><li><a href="O006-C140-CMP-MS01.html">Set penguasaan 01 — statistik urutan dan distribusi sampel</a></li><li><a href="O006-C140-CMP-MS02.html">Set penguasaan 02 — estimasi, bias, MSE, dan sifat penduga</a></li><li><a href="O006-C140-CMP-MS03.html">Set penguasaan 03 — kecukupan, faktorisasi, kelengkapan, dan statistik aksesori</a></li><li><a href="O006-C140-CMP-MS04.html">Set penguasaan 04 — metode momen dan dasar kemungkinan maksimum</a></li><li><a href="O006-C140-CMP-MS05.html">Set penguasaan 05 — informasi Fisher, interval kepercayaan, bootstrap, dan metode delta</a></li><li><a href="O006-C140-CMP-MS06.html" aria-current="page">Set penguasaan 06 — pengujian hipotesis, daya, nilai-p, dan jembatan ke teori fungsi kemungkinan</a></li><li><a href="O006-C140-CMP-MS07.html">Set penguasaan 07 — keteraturan, konsistensi, dan normalitas MLE</a></li><li><a href="O006-C140-CMP-MS08.html">Set penguasaan 08 — Wald, skor, rasio fungsi kemungkinan, dan diagnosis nonreguler</a></li><li><a href="O006-C140-CMP-MS09.html">Set penguasaan 09 — pengujian eksak dan optimalitas Neyman–Pearson</a></li><li><a href="O006-C140-CMP-MS10.html">Set penguasaan 10 — uji fungsi kemungkinan asimtotik, risiko, dan perbaikan penduga</a></li><li><a href="O006-C140-CMP-MS11.html">Set penguasaan 11 — pembaruan Bayesian, keputusan, dan kalibrasi</a></li><li><a href="O006-C140-CMP-MS12.html">Set penguasaan 12 — model linear Gaussian dalam bentuk matriks, inferensi eksak, dan diagnostik</a></li><li><a href="../assessments/O006-C140-CMP-CA01.html">Asesmen kumulatif C1: fungsi kemungkinan, optimalitas, dan keputusan statistik</a></li><li><a href="../assessments/O006-C140-CMP-CA02.html">Asesmen kumulatif CA02 — fondasi inferensi sampel berhingga</a></li><li><a href="../assessments/O006-C140-CMP-CA03.html">Asesmen kumulatif CA03 — model linear dalam bentuk matriks, inferensi eksak, dan diagnostik</a></li><li><a href="../assessments/O006-C140-CMP-CA04.html">Asesmen kumulatif CA04 — sintesis Bayesian–frekuentis</a></li><li><a href="../capstones/O006-C140-CMP-CP01.html">Proyek akhir integratif CP01 — regresi data terbuka untuk kuat tekan beton</a></li><li><a href="../capstones/O006-C140-CMP-CP02.html">Proyek akhir CP02 — perbandingan Bayesian–frekuentis pada data agregat kecenderungan bersarang greater sage-grouse</a></li></ol></nav>
+<main id="main-content" tabindex="-1">
 <div class="metadata"><strong>O006-C140-CMP-MS06</strong> · id-ID · CC BY-SA 4.0 · OpenAI Codex gpt-5.6-sol, Ultra</div>
 <p><a id="O006-C140-CMP-MS06-SEC-OVERVIEW"></a></p>
-<h1>Set penguasaan 06 — pengujian hipotesis, daya, p-value, dan jembatan likelihood</h1>
-<p>Set ini menguji Lesson 07 Penn State <a class="xref external" data-target-id="O006-PSU-007" href="https://kokunoyumeto.github.io/penn-state-stat-415-id/Lesson06.html">Lesson06</a> bersama teori uji
-orisinal. Bedakan hipotesis nol, aturan penolakan, dan hukum yang dipakai
-untuk menghitung peluang. Definisi size, power, serta randomisasi mengikuti
-<a class="xref" data-target-id="O006-C140-CMP-D006-DEF01" href="../theory/O006-C140-CMP-D006.html#O006-C140-CMP-D006-DEF01">Uji teracak, size, dan power</a>; perbandingan Wald, skor, dan rasio likelihood
+<h1>Set penguasaan 06 — pengujian hipotesis, daya, nilai-p, dan jembatan ke teori fungsi kemungkinan</h1>
+<p>Set ini menguji Pelajaran 07 Penn State <a class="xref external" data-target-id="O006-PSU-007" href="https://kokunoyumeto.github.io/penn-state-stat-415-id/Lesson06.html">Lesson06</a> bersama teori pengujian
+orisinal. Bedakan hipotesis nol, aturan penolakan, dan distribusi yang digunakan
+untuk menghitung peluang. Definisi ukuran uji, daya, serta randomisasi mengikuti
+<a class="xref" data-target-id="O006-C140-CMP-D006-DEF01" href="../theory/O006-C140-CMP-D006.html#O006-C140-CMP-D006-DEF01">Uji teracak, ukuran, dan daya</a>; perbandingan Wald, skor, dan rasio fungsi kemungkinan
 mengikuti <a class="xref" data-target-id="O006-C140-CMP-D004-DEF002" href="../theory/O006-C140-CMP-D004.html#O006-C140-CMP-D004-DEF002">Statistik Wald</a>,
 <a class="xref" data-target-id="O006-C140-CMP-D004-DEF003" href="../theory/O006-C140-CMP-D004.html#O006-C140-CMP-D004-DEF003">Statistik skor untuk nol komposit</a>, dan
-<a class="xref" data-target-id="O006-C140-CMP-D004-DEF004" href="../theory/O006-C140-CMP-D004.html#O006-C140-CMP-D004-DEF004">Statistik rasio likelihood</a>.</p>
+<a class="xref" data-target-id="O006-C140-CMP-D004-DEF004" href="../theory/O006-C140-CMP-D004.html#O006-C140-CMP-D004-DEF004">Statistik rasio fungsi kemungkinan</a>.</p>
 <p><a id="O006-C140-CMP-MS06-P01"></a></p>
 <h2>Soal 1 — uji Normal satu sisi dengan varians diketahui</h2>
-<!--PROBLEM_META {"id":"O006-C140-CMP-MS06-P01","prerequisites":["O006-PSU-007","B95","O006-C140-CMP-D006-EX02"],"objective":"menurunkan nilai kritis, p-value, dan fungsi daya uji z satu sisi","difficulty":"menengah","misconceptions":["p-value adalah peluang hipotesis nol benar","daya pada satu alternatif sama dengan size"]}-->
-<p>Misalkan <span class="math-inline" role="math">\(X_1,\ldots,X_n\sim N(\mu,1)\)</span> iid. Uji
+<!--PROBLEM_META {"id":"O006-C140-CMP-MS06-P01","prerequisites":["O006-PSU-007","B95","O006-C140-CMP-D006-EX02"],"objective":"menurunkan nilai kritis, nilai-p, dan fungsi daya uji z satu sisi","difficulty":"menengah","misconceptions":["nilai-p adalah peluang hipotesis nol benar","daya pada satu alternatif sama dengan ukuran uji"]}-->
+<p>Misalkan <span class="math-inline" role="math">\(X_1,\ldots,X_n\sim N(\mu,1)\)</span> saling bebas dan berdistribusi identik
+(iid). Uji
 <span class="math-inline" role="math">\(H_0:\mu\le0\)</span> melawan <span class="math-inline" role="math">\(H_1:\mu&gt;0\)</span> dengan <span class="math-inline" role="math">\(Z=\sqrt n\,\bar X\)</span>.
-Untuk <span class="math-inline" role="math">\(\alpha=.05\)</span>: (a) tentukan daerah penolakan dan buktikan size terjadi
-pada <span class="math-inline" role="math">\(\mu=0\)</span>; (b) turunkan fungsi daya; (c) untuk <span class="math-inline" role="math">\(n=25,\mu=.5\)</span>, hitung daya;
-dan (d) bila <span class="math-inline" role="math">\(\bar X=.40\)</span>, hitung p-value satu sisi.</p>
+Untuk <span class="math-inline" role="math">\(\alpha=.05\)</span>: (a) tentukan daerah penolakan dan buktikan bahwa supremum
+ukuran uji dicapai pada <span class="math-inline" role="math">\(\mu=0\)</span>; (b) turunkan fungsi daya; (c) untuk
+<span class="math-inline" role="math">\(n=25,\mu=.5\)</span>, hitung daya;
+dan (d) bila <span class="math-inline" role="math">\(\bar X=.40\)</span>, hitung nilai-p satu sisi.</p>
 <p><a id="O006-C140-CMP-MS06-P01-H01"></a></p>
 <h3>Petunjuk 1</h3>
-<p>Di bawah <span class="math-inline" role="math">\(\mu\)</span>, <span class="math-inline" role="math">\(Z\sim N(\sqrt n\,\mu,1)\)</span>. Kuantil batas
+<p>Di bawah <span class="math-inline" role="math">\(\mu\)</span>, <span class="math-inline" role="math">\(Z\sim N(\sqrt n\,\mu,1)\)</span>. Kuantil kritis
 <span class="math-inline" role="math">\(z_{.95}\approx1{,}645\)</span> dan penolakan terjadi ketika <span class="math-inline" role="math">\(Z&gt;z_{.95}\)</span>.</p>
 <p><a id="O006-C140-CMP-MS06-P01-H02"></a></p>
 <h3>Petunjuk 2</h3>
 <p>Probabilitas penolakan adalah
-<span class="math-inline" role="math">\(1-\Phi(z_{.95}-\sqrt n\,\mu)\)</span>. Untuk p-value, masukkan
-<span class="math-inline" role="math">\(z_{\rm obs}=\sqrt n\,\bar X\)</span> ke tail nol pada <span class="math-inline" role="math">\(\mu=0\)</span>.</p>
+<span class="math-inline" role="math">\(1-\Phi(z_{.95}-\sqrt n\,\mu)\)</span>. Untuk nilai-p, hitung peluang ekor atas di
+bawah hipotesis nol pada <span class="math-inline" role="math">\(\mu=0\)</span> dengan
+<span class="math-inline" role="math">\(z_{\rm obs}=\sqrt n\,\bar X\)</span> sebagai nilai teramati.</p>
 <p><a id="O006-C140-CMP-MS06-P01-ANS"></a></p>
 <h3>Jawaban singkat</h3>
 <p>Tolak bila <span class="math-inline" role="math">\(Z&gt;1{,}645\)</span>. Daya
 <span class="math-inline" role="math">\(\beta(\mu)=1-\Phi(1{,}645-\sqrt n\,\mu)\)</span> meningkat terhadap <span class="math-inline" role="math">\(\mu\)</span>, sehingga
-supremum pada nol komposit dicapai di <span class="math-inline" role="math">\(\mu=0\)</span>. Pada <span class="math-inline" role="math">\(n=25,\mu=.5\)</span> daya
+supremum di bawah hipotesis nol komposit dicapai di <span class="math-inline" role="math">\(\mu=0\)</span>. Pada <span class="math-inline" role="math">\(n=25\)</span> dan
+<span class="math-inline" role="math">\(\mu=.5\)</span>, dayanya
 <span class="math-inline" role="math">\(\Phi(.855)\approx.804\)</span>; untuk <span class="math-inline" role="math">\(\bar X=.40\)</span>, <span class="math-inline" role="math">\(z_{\rm obs}=2\)</span> dan
 <span class="math-inline" role="math">\(p=1-\Phi(2)\approx.0228\)</span>.</p>
 <p><a id="O006-C140-CMP-MS06-P01-SOL"></a></p>
 <h3>Solusi lengkap</h3>
 <p>Di bawah <span class="math-inline" role="math">\(\mu\)</span>, <span class="math-inline" role="math">\(Z\sim N(\sqrt n\,\mu,1)\)</span>. Pilih <span class="math-inline" role="math">\(c=z_{.95}=1{,}645\)</span> sehingga
-<span class="math-inline" role="math">\(P_0(Z&gt;c)=.05\)</span>. Ekor Normal menurun ketika ambang mean dinaikkan, jadi untuk
-setiap <span class="math-inline" role="math">\(\mu\le0\)</span>, <span class="math-inline" role="math">\(P_\mu(Z&gt;c)\le P_0(Z&gt;c)\)</span>; size tepat .05 pada batas nol.
+<span class="math-inline" role="math">\(P_0(Z&gt;c)=.05\)</span>. Untuk ambang tetap <span class="math-inline" role="math">\(c\)</span>, peluang ekor atas <span class="math-inline" role="math">\(P_\mu(Z&gt;c)\)</span>
+meningkat terhadap rataan <span class="math-inline" role="math">\(\sqrt n\,\mu\)</span>. Karena <span class="math-inline" role="math">\(\mu\le0\)</span>, peluang terbesarnya
+dicapai pada <span class="math-inline" role="math">\(\mu=0\)</span>; ukuran uji tepat .05 pada batas hipotesis nol tersebut.
 Fungsi daya ialah</p>
 <div class="math-display" role="math">\[\beta(\mu)=P_\mu(Z&gt;1{,}645)
 =1-\Phi(1{,}645-\sqrt n\,\mu).\]</div>
-<p>Untuk <span class="math-inline" role="math">\(n=25,\mu=.5\)</span>, mean <span class="math-inline" role="math">\(Z=2.5\)</span>, jadi
+<p>Untuk <span class="math-inline" role="math">\(n=25,\mu=.5\)</span>, rataan <span class="math-inline" role="math">\(Z=2.5\)</span>, jadi
 <span class="math-inline" role="math">\(\beta=\Phi(2.5-1.645)=\Phi(.855)\approx.8038\)</span>. Jika <span class="math-inline" role="math">\(\bar X=.40\)</span>,
-<span class="math-inline" role="math">\(z_{\rm obs}=2\)</span> dan p-value satu sisi <span class="math-inline" role="math">\(P_0(Z\ge2)=1-\Phi(2)\approx.0228\)</span>.
-P-value mengukur ke-ekstreman di bawah nol, bukan peluang nol benar; daya
+<span class="math-inline" role="math">\(z_{\rm obs}=2\)</span> dan nilai-p satu sisi <span class="math-inline" role="math">\(P_0(Z\ge2)=1-\Phi(2)\approx.0228\)</span>.
+Nilai-p mengukur seberapa ekstrem data di bawah hipotesis nol, bukan peluang
+bahwa hipotesis nol benar; daya
 adalah peluang menolak pada alternatif yang telah ditentukan.</p>
 <p><a id="O006-C140-CMP-MS06-P02"></a></p>
 <h2>Soal 2 — uji t dan dualitas dengan interval kepercayaan</h2>
-<!--PROBLEM_META {"id":"O006-C140-CMP-MS06-P02","prerequisites":["O006-PSU-007","B95","O006-C140-CMP-MS05-P03"],"objective":"menghubungkan uji t dua sisi dengan interval kepercayaan eksak dan menghitung keputusan numerik","difficulty":"menengah","misconceptions":["uji dua sisi memakai satu tail saja","interval kepercayaan 95 persen berarti peluang posterior 95 persen"]}-->
+<!--PROBLEM_META {"id":"O006-C140-CMP-MS06-P02","prerequisites":["O006-PSU-007","B95","O006-C140-CMP-MS05-P03"],"objective":"menghubungkan uji t dua sisi dengan interval kepercayaan eksak dan menghitung keputusan numerik","difficulty":"menengah","misconceptions":["uji dua sisi memakai satu ekor saja","interval kepercayaan 95 persen berarti peluang posterior 95 persen"]}-->
 <p>Sampel Normal dengan varians tak diketahui mempunyai <span class="math-inline" role="math">\(n=16\)</span>,
 <span class="math-inline" role="math">\(\bar X=12\)</span>, dan <span class="math-inline" role="math">\(s=4\)</span>. Uji <span class="math-inline" role="math">\(H_0:\mu=10\)</span> melawan <span class="math-inline" role="math">\(H_1:\mu\ne10\)</span> pada
-<span class="math-inline" role="math">\(\alpha=.05\)</span>. (a) Hitung statistik t dan p-value dua sisi menggunakan
+<span class="math-inline" role="math">\(\alpha=.05\)</span>. (a) Hitung statistik t dan nilai-p dua sisi menggunakan
 <span class="math-inline" role="math">\(t_{15,.975}=2{,}131\)</span>. (b) Bentuk interval kepercayaan 95% dan tunjukkan
-dualiasnya dengan keputusan uji. (c) Nyatakan cakupan prosedur secara tepat.</p>
+dualitasnya dengan keputusan uji. (c) Nyatakan cakupan prosedur secara tepat.</p>
 <p><a id="O006-C140-CMP-MS06-P02-H01"></a></p>
 <h3>Petunjuk 1</h3>
 <p><span class="math-inline" role="math">\(T=(\bar X-\mu_0)/(s/\sqrt n)\)</span> dan derajat bebasnya <span class="math-inline" role="math">\(15\)</span>.
-P-value dua sisi adalah <span class="math-inline" role="math">\(2P(t_{15}\ge|T_{\rm obs}|)\)</span>.</p>
+Nilai-p dua sisi adalah <span class="math-inline" role="math">\(2P(t_{15}\ge|T_{\rm obs}|)\)</span>.</p>
 <p><a id="O006-C140-CMP-MS06-P02-H02"></a></p>
 <h3>Petunjuk 2</h3>
 <p>Karena <span class="math-inline" role="math">\(s/\sqrt n=1\)</span>, statistik untuk <span class="math-inline" role="math">\(\mu_0=10\)</span> adalah <span class="math-inline" role="math">\(2\)</span>. Nilai kritis
-yang sama membentuk kedua endpoint interval pivot.</p>
+yang sama membentuk kedua ujung interval yang diperoleh dari pivot.</p>
 <p><a id="O006-C140-CMP-MS06-P02-ANS"></a></p>
 <h3>Jawaban singkat</h3>
-<p><span class="math-inline" role="math">\(T_{\rm obs}=2\)</span>, p-value dua sisi sekitar <span class="math-inline" role="math">\(0{,}063\)</span>, sehingga tidak menolak
+<p><span class="math-inline" role="math">\(T_{\rm obs}=2\)</span>, nilai-p dua sisi sekitar <span class="math-inline" role="math">\(0{,}063\)</span>, sehingga tidak menolak
 pada 5%. Intervalnya <span class="math-inline" role="math">\(12\pm2{,}131=[9{,}869,14{,}131]\)</span> dan memuat 10.
-Cakupan 95% adalah frekuensi pengulangan di bawah model Normal, bukan peluang
-posterior setelah data tetap.</p>
+Cakupan 95% berarti bahwa prosedur memuat parameter pada 95% pengambilan sampel
+berulang menurut model Normal; ini bukan peluang posterior setelah data diamati.</p>
 <p><a id="O006-C140-CMP-MS06-P02-SOL"></a></p>
 <h3>Solusi lengkap</h3>
-<p>Di bawah nol,</p>
+<p>Di bawah <span class="math-inline" role="math">\(H_0\)</span>,</p>
 <div class="math-display" role="math">\[T=\frac{\bar X-\mu_0}{S/\sqrt n}\sim t_{15}.\]</div>
 <p>Dengan <span class="math-inline" role="math">\(s/\sqrt{16}=1\)</span> dan <span class="math-inline" role="math">\(\mu_0=10\)</span>, diperoleh <span class="math-inline" role="math">\(T_{\rm obs}=2\)</span>.
-P-value dua sisi <span class="math-inline" role="math">\(2\{1-F_{t_{15}}(2)\}\approx.063945&gt;.05\)</span>, sehingga nol tidak
-ditolak. Inversi <span class="math-inline" role="math">\(|(\bar X-\mu)/(S/\sqrt n)|\le2{,}131\)</span> memberi</p>
+Nilai-p dua sisi <span class="math-inline" role="math">\(2\{1-F_{t_{15}}(2)\}\approx.063945&gt;.05\)</span>, sehingga <span class="math-inline" role="math">\(H_0\)</span>
+tidak ditolak. Inversi <span class="math-inline" role="math">\(|(\bar X-\mu)/(S/\sqrt n)|\le2{,}131\)</span> memberi</p>
 <div class="math-display" role="math">\[C=[12-2{,}131(1),12+2{,}131(1)]
 =[9{,}869,14{,}131].\]</div>
-<p>Karena 10 berada di dalam <span class="math-inline" role="math">\(C\)</span>, keputusan uji dan interval dual pada level
-sama. Secara frequentist, untuk setiap <span class="math-inline" role="math">\(\mu,\sigma^2\)</span> di model Normal,
+<p>Karena 10 berada di dalam <span class="math-inline" role="math">\(C\)</span>, keputusan uji dan interval tersebut bersifat dual
+pada aras yang sama. Secara frekuentis, untuk setiap <span class="math-inline" role="math">\(\mu,\sigma^2\)</span> dalam model Normal,
 <span class="math-inline" role="math">\(P_\mu\{\mu\in C(X)\}=.95\)</span> pada pengulangan sampel berukuran 16. Setelah data
 diamati, <span class="math-inline" role="math">\(\mu\)</span> tetap; peluang posterior memerlukan prior dan model Bayesian.</p>
 <p><a id="O006-C140-CMP-MS06-P03"></a></p>
 <h2>Soal 3 — Neyman–Pearson diskret dengan randomisasi</h2>
-<!--PROBLEM_META {"id":"O006-C140-CMP-MS06-P03","prerequisites":["O006-C140-CMP-D006-ASM01","O006-C140-CMP-D006-THM01","O006-PSU-007"],"objective":"mengurutkan rasio likelihood dan mengalokasikan sisa size pada himpunan kesamaan","difficulty":"lanjut","misconceptions":["uji diskret harus deterministik","MP pada satu alternatif sama dengan UMP untuk semua alternatif"]}-->
+<!--PROBLEM_META {"id":"O006-C140-CMP-MS06-P03","prerequisites":["O006-C140-CMP-D006-ASM01","O006-C140-CMP-D006-THM01","O006-PSU-007"],"objective":"mengurutkan rasio fungsi kemungkinan dan mengalokasikan sisa ukuran uji pada himpunan kesamaan","difficulty":"lanjut","misconceptions":["uji diskret harus deterministik","MP pada satu alternatif sama dengan UMP untuk semua alternatif"]}-->
 <p>Ambil <span class="math-inline" role="math">\(S\sim\operatorname{Binomial}(3,p)\)</span> dan uji sederhana
-<span class="math-inline" role="math">\(H_0:p=.2\)</span> melawan <span class="math-inline" role="math">\(H_1:p=.5\)</span> pada level <span class="math-inline" role="math">\(\alpha=.10\)</span>.
-(a) Hitung rasio likelihood untuk <span class="math-inline" role="math">\(s=0,1,2,3\)</span> dan urutkan hasilnya.
-(b) Bangun uji MP dengan randomisasi. (c) Hitung size dan power eksaknya.
-(d) Jelaskan kuantor alternatif yang dijamin oleh lemma.</p>
+<span class="math-inline" role="math">\(H_0:p=.2\)</span> melawan <span class="math-inline" role="math">\(H_1:p=.5\)</span> pada aras <span class="math-inline" role="math">\(\alpha=.10\)</span>.
+(a) Hitung rasio fungsi kemungkinan untuk <span class="math-inline" role="math">\(s=0,1,2,3\)</span> dan urutkan hasilnya.
+(b) Bangun uji MP dengan randomisasi. (c) Hitung ukuran uji dan daya eksaknya.
+(d) Jelaskan pada titik alternatif mana jaminan lemma tersebut berlaku.</p>
 <p><a id="O006-C140-CMP-MS06-P03-H01"></a></p>
 <h3>Petunjuk 1</h3>
-<p>Massa di bawah nol untuk <span class="math-inline" role="math">\(s=0,1,2,3\)</span> ialah
-<span class="math-inline" role="math">\((.512,.384,.096,.008)\)</span>; di bawah alternatif ialah
-<span class="math-inline" role="math">\((.125,.375,.375,.125)\)</span>. Isi penolakan dari rasio terbesar.</p>
+<p>Peluang masing-masing nilai di bawah <span class="math-inline" role="math">\(H_0\)</span> untuk <span class="math-inline" role="math">\(s=0,1,2,3\)</span> ialah
+<span class="math-inline" role="math">\((.512,.384,.096,.008)\)</span>; di bawah <span class="math-inline" role="math">\(H_1\)</span> ialah
+<span class="math-inline" role="math">\((.125,.375,.375,.125)\)</span>. Susun daerah penolakan dengan memasukkan nilai <span class="math-inline" role="math">\(s\)</span>
+mulai dari rasio terbesar.</p>
 <p><a id="O006-C140-CMP-MS06-P03-H02"></a></p>
 <h3>Petunjuk 2</h3>
-<p>Ambil <span class="math-inline" role="math">\(s=3\)</span> lebih dahulu, lalu sebagian massa <span class="math-inline" role="math">\(s=2\)</span>. Pilih
+<p>Tolak saat <span class="math-inline" role="math">\(s=3\)</span> terlebih dahulu, lalu lakukan randomisasi saat <span class="math-inline" role="math">\(s=2\)</span>. Pilih
 <span class="math-inline" role="math">\(\gamma=(.10-.008)/.096\)</span> pada lapisan rasio berikutnya.</p>
 <p><a id="O006-C140-CMP-MS06-P03-ANS"></a></p>
 <h3>Jawaban singkat</h3>
 <p>Rasio berturut-turut sekitar <span class="math-inline" role="math">\((.244,.977,3.906,15.625)\)</span>. Tolak pasti
 <span class="math-inline" role="math">\(s=3\)</span> dan dengan probabilitas <span class="math-inline" role="math">\(\gamma=23/24\)</span> saat <span class="math-inline" role="math">\(s=2\)</span>.
-Size <span class="math-inline" role="math">\(.10\)</span> dan power
-<span class="math-inline" role="math">\(.125+(23/24)(.375)=.484375\)</span>. Jaminannya MP hanya terhadap titik
+Ukuran uji <span class="math-inline" role="math">\(.10\)</span> dan daya
+<span class="math-inline" role="math">\(.125+(23/24)(.375)=.484375\)</span>. Jaminan sifat MP itu hanya berlaku terhadap titik
 <span class="math-inline" role="math">\(p=.5\)</span>, bukan UMP untuk alternatif komposit.</p>
 <p><a id="O006-C140-CMP-MS06-P03-SOL"></a></p>
 <h3>Solusi lengkap</h3>
-<p>Massa nol adalah <span class="math-inline" role="math">\((.512,.384,.096,.008)\)</span> dan massa alternatif
+<p>Peluang untuk <span class="math-inline" role="math">\(s=0,1,2,3\)</span> di bawah <span class="math-inline" role="math">\(H_0\)</span> adalah
+<span class="math-inline" role="math">\((.512,.384,.096,.008)\)</span> dan di bawah <span class="math-inline" role="math">\(H_1\)</span> adalah
 <span class="math-inline" role="math">\((.125,.375,.375,.125)\)</span>. Rasio <span class="math-inline" role="math">\(P_1/P_0\)</span> pada <span class="math-inline" role="math">\(s=0,1,2,3\)</span> berturut-turut
 <span class="math-inline" role="math">\(0.2441,0.9766,3.90625,15.625\)</span>, sehingga urutan penolakan dimulai dari
-<span class="math-inline" role="math">\(s=3\)</span>, lalu <span class="math-inline" role="math">\(s=2\)</span>. Menolak <span class="math-inline" role="math">\(s=3\)</span> memakai size .008. Agar size .10, tetapkan</p>
+<span class="math-inline" role="math">\(s=3\)</span>, lalu <span class="math-inline" role="math">\(s=2\)</span>. Penolakan saat <span class="math-inline" role="math">\(s=3\)</span> menggunakan .008 dari anggaran ukuran
+uji. Agar ukuran uji .10, tetapkan</p>
 <div class="math-display" role="math">\[\gamma=\frac{.10-.008}{.096}=\frac{23}{24}\]</div>
-<p>pada <span class="math-inline" role="math">\(s=2\)</span>, dan terima selain itu. Dengan demikian</p>
+<p>pada <span class="math-inline" role="math">\(s=2\)</span>, dan jangan tolak <span class="math-inline" role="math">\(H_0\)</span> pada nilai <span class="math-inline" role="math">\(s\)</span> lainnya. Dengan demikian</p>
 <div class="math-display" role="math">\[E_0\varphi^*=.008+(23/24)(.096)=.10,
 \qquad
 E_1\varphi^*=.125+(23/24)(.375)=.484375.\]</div>
-<p>Lemma Neyman–Pearson <a class="xref" data-target-id="O006-C140-CMP-D006-THM01" href="../theory/O006-C140-CMP-D006.html#O006-C140-CMP-D006-THM01">Lemma Neyman–Pearson dengan randomisasi pada kesamaan</a> menyatakan power maksimum
-di antara semua uji ber-level .10 untuk pasangan sederhana ini. Ia tidak
-mengubah kesimpulan menjadi UMP ketika titik alternatif atau kelas uji berubah.</p>
+<p>Lemma Neyman–Pearson <a class="xref" data-target-id="O006-C140-CMP-D006-THM01" href="../theory/O006-C140-CMP-D006.html#O006-C140-CMP-D006-THM01">Lemma Neyman–Pearson dengan randomisasi pada kesamaan</a> menjamin daya maksimum
+di antara semua uji beraras .10 untuk pasangan hipotesis sederhana ini. Jaminan
+itu tidak serta-merta menjamin sifat UMP ketika titik alternatif atau kelas uji berubah.</p>
 <p><a id="O006-C140-CMP-MS06-P04"></a></p>
 <h2>Soal 4 — MLR dan uji UMP binomial satu sisi</h2>
-<!--PROBLEM_META {"id":"O006-C140-CMP-MS06-P04","prerequisites":["O006-C140-CMP-D006-DEF03","O006-C140-CMP-D006-THM03","O006-C140-CMP-D006-EX03"],"objective":"menggunakan MLR untuk menentukan randomisasi, size, dan power UMP","difficulty":"lanjut","misconceptions":["uji MP pada satu titik otomatis UMP","power harus datar agar disebut uniform"]}-->
+<!--PROBLEM_META {"id":"O006-C140-CMP-MS06-P04","prerequisites":["O006-C140-CMP-D006-DEF03","O006-C140-CMP-D006-THM03","O006-C140-CMP-D006-EX03"],"objective":"menggunakan MLR untuk menentukan randomisasi, ukuran uji, dan daya UMP","difficulty":"lanjut","misconceptions":["uji MP pada satu titik otomatis UMP","daya harus datar agar disebut seragam"]}-->
 <p>Misalkan <span class="math-inline" role="math">\(S\sim\operatorname{Binomial}(5,p)\)</span>. Uji
-<span class="math-inline" role="math">\(H_0:p\le.5\)</span> melawan <span class="math-inline" role="math">\(H_1:p&gt;.5\)</span> pada level <span class="math-inline" role="math">\(\alpha=.10\)</span>.
-(a) Tentukan <span class="math-inline" role="math">\(c,\gamma\)</span> untuk uji ekor atas. (b) Hitung power pada <span class="math-inline" role="math">\(p=.8\)</span>.
-(c) Jelaskan mengapa satu aturan mengendalikan size untuk semua <span class="math-inline" role="math">\(p\le.5\)</span>
+<span class="math-inline" role="math">\(H_0:p\le.5\)</span> melawan <span class="math-inline" role="math">\(H_1:p&gt;.5\)</span> pada aras <span class="math-inline" role="math">\(\alpha=.10\)</span>.
+(a) Tentukan <span class="math-inline" role="math">\(c,\gamma\)</span> untuk uji ekor atas. (b) Hitung daya pada <span class="math-inline" role="math">\(p=.8\)</span>.
+(c) Jelaskan mengapa satu aturan mengendalikan ukuran uji untuk semua <span class="math-inline" role="math">\(p\le.5\)</span>
 dan menjadi UMP untuk seluruh alternatif.</p>
 <p><a id="O006-C140-CMP-MS06-P04-H01"></a></p>
 <h3>Petunjuk 1</h3>
 <p>Di bawah <span class="math-inline" role="math">\(p_0=.5\)</span>, <span class="math-inline" role="math">\(P(S=5)=.03125\)</span> dan <span class="math-inline" role="math">\(P(S=4)=.15625\)</span>.
-Isi sisa size pada <span class="math-inline" role="math">\(S=4\)</span>.</p>
+Alokasikan sisa ukuran uji pada kejadian <span class="math-inline" role="math">\(S=4\)</span>.</p>
 <p><a id="O006-C140-CMP-MS06-P04-H02"></a></p>
 <h3>Petunjuk 2</h3>
 <p><span class="math-inline" role="math">\(\gamma=(.10-.03125)/.15625=.44\)</span>. Untuk <span class="math-inline" role="math">\(p=.8\)</span>, gunakan
@@ -152,92 +162,99 @@ Isi sisa size pada <span class="math-inline" role="math">\(S=4\)</span>.</p>
 <p><a id="O006-C140-CMP-MS06-P04-ANS"></a></p>
 <h3>Jawaban singkat</h3>
 <p>Tolak pasti jika <span class="math-inline" role="math">\(S=5\)</span> dan dengan probabilitas <span class="math-inline" role="math">\(\gamma=.44\)</span> jika <span class="math-inline" role="math">\(S=4\)</span>.
-Power pada <span class="math-inline" role="math">\(p=.8\)</span> adalah
-<span class="math-inline" role="math">\(.8^5+.44[5(.8)^4(.2)]=.507904\)</span>. MLR dalam <span class="math-inline" role="math">\(S\)</span> membuat daerah ekor
-atas MP untuk setiap <span class="math-inline" role="math">\(p&gt;.5\)</span>; power tak-menurun membuat supremum nol pada
+Daya pada <span class="math-inline" role="math">\(p=.8\)</span> adalah
+<span class="math-inline" role="math">\(.8^5+.44[5(.8)^4(.2)]=.507904\)</span>. Sifat MLR dalam <span class="math-inline" role="math">\(S\)</span> menjadikan uji ekor
+atas MP untuk setiap <span class="math-inline" role="math">\(p&gt;.5\)</span>; karena daya tidak menurun, supremum di bawah <span class="math-inline" role="math">\(H_0\)</span>
+tercapai pada
 <span class="math-inline" role="math">\(p=.5\)</span>, sehingga aturan UMP.</p>
 <p><a id="O006-C140-CMP-MS06-P04-SOL"></a></p>
 <h3>Solusi lengkap</h3>
 <p>Pada <span class="math-inline" role="math">\(p_0=.5\)</span>, massa <span class="math-inline" role="math">\(S=5\)</span> adalah <span class="math-inline" role="math">\(1/32=.03125\)</span> dan massa <span class="math-inline" role="math">\(S=4\)</span> adalah
 <span class="math-inline" role="math">\(5/32=.15625\)</span>. Karena .03125 kurang dari .10 tetapi
-<span class="math-inline" role="math">\(.03125+.15625&gt;.10\)</span>, randomisasikan pada <span class="math-inline" role="math">\(S=4\)</span> dengan</p>
+<span class="math-inline" role="math">\(.03125+.15625&gt;.10\)</span>, lakukan randomisasi saat <span class="math-inline" role="math">\(S=4\)</span> dengan</p>
 <div class="math-display" role="math">\[\gamma=\frac{.10-.03125}{.15625}=.44.\]</div>
 <p>Pada <span class="math-inline" role="math">\(p=.8\)</span>, massa <span class="math-inline" role="math">\(S=5\)</span> adalah <span class="math-inline" role="math">\(.32768\)</span> dan massa <span class="math-inline" role="math">\(S=4\)</span> adalah <span class="math-inline" role="math">\(.4096\)</span>,
 sehingga <span class="math-inline" role="math">\(\beta(.8)=.32768+.44(.4096)=.507904\)</span>.
-Untuk <span class="math-inline" role="math">\(p_2&gt;p_1\)</span>, rasio Binomial sebagai fungsi <span class="math-inline" role="math">\(S\)</span> meningkat; ini adalah MLR
-<a class="xref" data-target-id="O006-C140-CMP-D006-DEF03" href="../theory/O006-C140-CMP-D006.html#O006-C140-CMP-D006-DEF03">Monotone likelihood ratio</a>. Teorema <a class="xref" data-target-id="O006-C140-CMP-D006-THM03" href="../theory/O006-C140-CMP-D006.html#O006-C140-CMP-D006-THM03">Jalur MLR menuju uji UMP satu sisi</a>
-membuat satu ekor atas MP bagi setiap <span class="math-inline" role="math">\(p&gt;.5\)</span>. Lemma urutan stokastik membuat
-power tak-menurun terhadap <span class="math-inline" role="math">\(p\)</span>, sehingga size supremum pada batas nol .5.
-“Uniform” berarti satu aturan optimal pada setiap titik alternatif, bukan
-power yang konstan.</p>
+Untuk <span class="math-inline" role="math">\(p_2&gt;p_1\)</span>, rasio fungsi massa Binomial meningkat sebagai fungsi <span class="math-inline" role="math">\(S\)</span>; ini adalah MLR
+<a class="xref" data-target-id="O006-C140-CMP-D006-DEF03" href="../theory/O006-C140-CMP-D006.html#O006-C140-CMP-D006-DEF03">Rasio fungsi kemungkinan monoton</a>. Teorema <a class="xref" data-target-id="O006-C140-CMP-D006-THM03" href="../theory/O006-C140-CMP-D006.html#O006-C140-CMP-D006-THM03">Jalur MLR menuju uji UMP satu sisi</a>
+menjadikan uji ekor atas MP bagi setiap <span class="math-inline" role="math">\(p&gt;.5\)</span>. Berdasarkan pengurutan stokastik,
+daya tidak menurun terhadap <span class="math-inline" role="math">\(p\)</span>, sehingga supremum ukuran uji tercapai pada
+batas hipotesis nol, <span class="math-inline" role="math">\(p=.5\)</span>.
+“Seragam” dalam istilah “paling berdaya seragam” berarti satu aturan optimal pada setiap titik alternatif, bukan
+daya yang konstan.</p>
 <p><a id="O006-C140-CMP-MS06-P05"></a></p>
-<h2>Soal 5 — p-value diskret dan randomisasi</h2>
-<!--PROBLEM_META {"id":"O006-C140-CMP-MS06-P05","prerequisites":["O006-PSU-007","O006-C140-CMP-D006-DEF01","O006-C140-CMP-D006-EX01"],"objective":"menghitung p-value ekor diskret dan membedakan versi konservatif dari aturan teracak","difficulty":"menengah","misconceptions":["p-value adalah peluang nol benar","p-value diskret harus kontinu atau selalu tepat level nominal"]}-->
+<h2>Soal 5 — nilai-p diskret dan randomisasi</h2>
+<!--PROBLEM_META {"id":"O006-C140-CMP-MS06-P05","prerequisites":["O006-PSU-007","O006-C140-CMP-D006-DEF01","O006-C140-CMP-D006-EX01"],"objective":"menghitung nilai-p ekor diskret dan membedakan versi konservatif dari aturan teracak","difficulty":"menengah","misconceptions":["nilai-p adalah peluang nol benar","nilai-p diskret harus kontinu atau selalu tepat pada tingkat nominal"]}-->
 <p>Di bawah <span class="math-inline" role="math">\(H_0:p=.5\)</span>, amati <span class="math-inline" role="math">\(S=8\)</span> dari <span class="math-inline" role="math">\(n=10\)</span> percobaan Bernoulli untuk
-alternatif <span class="math-inline" role="math">\(p&gt;.5\)</span>. (a) Hitung p-value ekor biasa. (b) Tulis p-value teracak
+alternatif <span class="math-inline" role="math">\(p&gt;.5\)</span>. (a) Hitung nilai-p ekor biasa. (b) Tulis nilai-p teracak
 dengan <span class="math-inline" role="math">\(U\sim\operatorname{Unif}(0,1)\)</span>. (c) Tentukan probabilitas randomisasi
-yang membuat uji level .05 tepat. (d) Jelaskan sifat super-uniform p-value
+yang membuat uji beraras .05 tepat. (d) Jelaskan sifat super-seragam nilai-p
 biasa.</p>
 <p><a id="O006-C140-CMP-MS06-P05-H01"></a></p>
 <h3>Petunjuk 1</h3>
-<p><span class="math-inline" role="math">\(P_{.5}(S\ge8)=56/1024\)</span>. Untuk aturan level .05,
-<span class="math-inline" role="math">\(P(S&gt;8)=11/1024\)</span> dan sisa size ditempatkan pada <span class="math-inline" role="math">\(S=8\)</span>.</p>
+<p><span class="math-inline" role="math">\(P_{.5}(S\ge8)=56/1024\)</span>. Untuk aturan beraras .05,
+<span class="math-inline" role="math">\(P(S&gt;8)=11/1024\)</span> dan sisa ukuran uji ditempatkan pada <span class="math-inline" role="math">\(S=8\)</span>.</p>
 <p><a id="O006-C140-CMP-MS06-P05-H02"></a></p>
 <h3>Petunjuk 2</h3>
 <p>Tulis <span class="math-inline" role="math">\(p_U=P_0(S&gt;8)+U P_0(S=8)\)</span>. Cari
 <span class="math-inline" role="math">\(\gamma\)</span> dari <span class="math-inline" role="math">\(11/1024+\gamma(45/1024)=.05\)</span>.</p>
 <p><a id="O006-C140-CMP-MS06-P05-ANS"></a></p>
 <h3>Jawaban singkat</h3>
-<p><span class="math-inline" role="math">\(p_{\rm biasa}=56/1024=.0546875\)</span>. Uji level eksak menolak pasti di
+<p><span class="math-inline" role="math">\(p_{\rm biasa}=56/1024=.0546875\)</span>. Uji beraras eksak menolak pasti di
 <span class="math-inline" role="math">\(S\ge9\)</span> dan pada <span class="math-inline" role="math">\(S=8\)</span> dengan
-<span class="math-inline" role="math">\(\gamma=(.05-11/1024)/(45/1024)=.89333\)</span>. P-value acak
-<span class="math-inline" role="math">\(p_U=11/1024+U(45/1024)\)</span> menghasilkan keputusan yang sama; p-value biasa
-super-uniform dan karenanya konservatif pada dukungan diskret.</p>
+<span class="math-inline" role="math">\(\gamma=(.05-11/1024)/(45/1024)=.89333\)</span>. Nilai-p teracak
+<span class="math-inline" role="math">\(p_U=11/1024+U(45/1024)\)</span> menghasilkan keputusan yang sama; nilai-p biasa
+super-seragam dan karenanya konservatif pada dukungan diskret.</p>
 <p><a id="O006-C140-CMP-MS06-P05-SOL"></a></p>
 <h3>Solusi lengkap</h3>
 <p>Massa Binomial<span class="math-inline" role="math">\((10,.5)\)</span> untuk <span class="math-inline" role="math">\(s=8,9,10\)</span> adalah
-<span class="math-inline" role="math">\(45/1024,10/1024,1/1024\)</span>. Jadi tail biasa</p>
+<span class="math-inline" role="math">\(45/1024,10/1024,1/1024\)</span>. Jadi ekor biasa</p>
 <div class="math-display" role="math">\[p_{\rm biasa}=P_{.5}(S\ge8)=\frac{56}{1024}=.0546875.\]</div>
 <p>Menolak seluruh <span class="math-inline" role="math">\(S\ge8\)</span> akan melebihi .05; menolak hanya <span class="math-inline" role="math">\(S\ge9\)</span>
-menggunakan <span class="math-inline" role="math">\(11/1024\)</span>. Sisanya diberikan pada lapisan <span class="math-inline" role="math">\(S=8\)</span>:</p>
+menggunakan <span class="math-inline" role="math">\(11/1024\)</span>. Sisa anggaran ukuran uji dialokasikan pada kejadian
+batas <span class="math-inline" role="math">\(S=8\)</span>:</p>
 <div class="math-display" role="math">\[\gamma=\frac{.05-11/1024}{45/1024}=.893333\ldots.\]</div>
-<p>Dengan <span class="math-inline" role="math">\(U\)</span> uniform independen, <span class="math-inline" role="math">\(p_U=11/1024+U(45/1024)\)</span> memenuhi
-<span class="math-inline" role="math">\(p_U\le.05\)</span> tepat ketika <span class="math-inline" role="math">\(S&gt;8\)</span> atau <span class="math-inline" role="math">\(S=8,U\le\gamma\)</span>. Untuk setiap
+<p>Dengan <span class="math-inline" role="math">\(U\)</span> seragam dan independen, definisikan
+<span class="math-inline" role="math">\(p_U(s)=P_0(S&gt;s)+U P_0(S=s)\)</span>. Untuk <span class="math-inline" role="math">\(s=8\)</span>, nilainya
+<span class="math-inline" role="math">\(11/1024+U(45/1024)\)</span>; aturan <span class="math-inline" role="math">\(p_U(S)\le.05\)</span> berlaku tepat ketika <span class="math-inline" role="math">\(S&gt;8\)</span>,
+atau ketika <span class="math-inline" role="math">\(S=8\)</span> dan <span class="math-inline" role="math">\(U\le\gamma\)</span>. Untuk setiap
 <span class="math-inline" role="math">\(t\in[0,1]\)</span>, lompatan distribusi membuat
-<span class="math-inline" role="math">\(P_0(p_{\rm biasa}\le t)\le t\)</span>; inilah super-uniformitas dan sumber
-konservatisme diskret. P-value tetap merupakan tail di bawah nol, bukan
-probabilitas nol benar atau posterior tanpa prior.</p>
+<span class="math-inline" role="math">\(P_0(p_{\rm biasa}\le t)\le t\)</span>; inilah sifat super-seragam dan sumber
+konservatisme diskret. Nilai-p tetap merupakan peluang ekor di bawah hipotesis
+nol, bukan probabilitas bahwa hipotesis nol benar atau posterior tanpa prior.</p>
 <p><a id="O006-C140-CMP-MS06-P06"></a></p>
-<h2>Soal 6 — jembatan Wald, skor, dan rasio likelihood</h2>
-<!--PROBLEM_META {"id":"O006-C140-CMP-MS06-P06","prerequisites":["O006-PSU-007","O006-C140-CMP-D004-DEF002","O006-C140-CMP-D004-DEF003","O006-C140-CMP-D004-DEF004"],"objective":"menghitung tiga statistik likelihood dan menjelaskan kesetaraan orde pertama","difficulty":"lanjut","misconceptions":["tiga statistik selalu identik","ekuivalensi asimtotik menghapus kebutuhan memeriksa regularitas"]}-->
+<h2>Soal 6 — jembatan Wald, skor, dan rasio fungsi kemungkinan</h2>
+<!--PROBLEM_META {"id":"O006-C140-CMP-MS06-P06","prerequisites":["O006-PSU-007","O006-C140-CMP-D004-DEF002","O006-C140-CMP-D004-DEF003","O006-C140-CMP-D004-DEF004"],"objective":"menghitung tiga statistik fungsi kemungkinan dan menjelaskan kesetaraan orde pertama","difficulty":"lanjut","misconceptions":["tiga statistik selalu identik","ekuivalensi asimtotik menghapus kebutuhan memeriksa keteraturan"]}-->
 <p>Misalkan <span class="math-inline" role="math">\(S\sim\operatorname{Binomial}(100,p)\)</span> dan uji
-<span class="math-inline" role="math">\(H_0:p=.5\)</span> terhadap <span class="math-inline" role="math">\(p\ne.5\)</span>. Dengan <span class="math-inline" role="math">\(\widehat p=.6\)</span>: (a) hitung Wald
-dengan informasi plug-in, skor dengan informasi nol, dan
+<span class="math-inline" role="math">\(H_0:p=.5\)</span> terhadap <span class="math-inline" role="math">\(p\ne.5\)</span>. Dengan <span class="math-inline" role="math">\(\widehat p=.6\)</span>: (a) hitung Wald dengan
+informasi yang dievaluasi pada <span class="math-inline" role="math">\(\widehat p\)</span>, statistik skor dengan informasi
+yang dievaluasi pada <span class="math-inline" role="math">\(p_0\)</span>, dan
 <span class="math-inline" role="math">\(LR=2\{\ell(\widehat p)-\ell(.5)\}\)</span>; (b) bandingkan; (c) buktikan bentuk
 orde pertama yang sama ketika <span class="math-inline" role="math">\(\widehat p-p_0=O_P(n^{-1/2})\)</span>.</p>
 <p><a id="O006-C140-CMP-MS06-P06-H01"></a></p>
 <h3>Petunjuk 1</h3>
 <p>Gunakan
 <span class="math-inline" role="math">\(W=n(\widehat p-p_0)^2/[\widehat p(1-\widehat p)]\)</span> dan
-<span class="math-inline" role="math">\(S=n(\widehat p-p_0)^2/[p_0(1-p_0)]\)</span>. Untuk LR gunakan dua kali divergensi
+<span class="math-inline" role="math">\(Q_{\rm skor}=n(\widehat p-p_0)^2/[p_0(1-p_0)]\)</span>. Untuk LR gunakan dua kali divergensi
 Bernoulli.</p>
 <p><a id="O006-C140-CMP-MS06-P06-H02"></a></p>
 <h3>Petunjuk 2</h3>
-<p>Di sini <span class="math-inline" role="math">\(W=4{,}1667\)</span>, <span class="math-inline" role="math">\(S=4\)</span>. Ekspansi
+<p>Di sini, statistik Wald bernilai <span class="math-inline" role="math">\(W=4{,}1667\)</span>, sedangkan statistik skor bernilai
+<span class="math-inline" role="math">\(Q_{\rm skor}=4\)</span>. Ekspansi
 <span class="math-inline" role="math">\(D_{\rm KL}(p_0+\delta\Vert p_0)=\delta^2/[2p_0(1-p_0)]+O(\delta^3)\)</span>
 menghasilkan suku utama LR.</p>
 <p><a id="O006-C140-CMP-MS06-P06-ANS"></a></p>
 <h3>Jawaban singkat</h3>
-<p><span class="math-inline" role="math">\(W=4{,}1667\)</span>, <span class="math-inline" role="math">\(S=4\)</span>, dan
+<p><span class="math-inline" role="math">\(W=4{,}1667\)</span>, <span class="math-inline" role="math">\(Q_{\rm skor}=4\)</span>, dan
 <span class="math-inline" role="math">\(LR=2[60\log(1{,}2)+40\log(0{,}8)]\approx4{,}0271\)</span>. Ketiganya sama pada
-orde pertama di bawah nol interior, tetapi tidak identik pada sampel hingga;
-interioritas, identifiabilitas, dan regularitas tetap diperlukan.</p>
+orde pertama ketika parameter nol berada di interior, tetapi tidak identik pada sampel berhingga;
+interioritas, identifiabilitas, dan syarat keteraturan tetap diperlukan.</p>
 <p><a id="O006-C140-CMP-MS06-P06-SOL"></a></p>
 <h3>Solusi lengkap</h3>
 <p>Dengan <span class="math-inline" role="math">\(\delta=.6-.5=.1\)</span>,</p>
 <div class="math-display" role="math">\[W=\frac{100(.1)^2}{.6(.4)}=4.166666\ldots,\qquad
-S=\frac{100(.1)^2}{.5(.5)}=4.\]</div>
-<p>Log-likelihood binomial (konstanta diabaikan) memberi</p>
+Q_{\rm skor}=\frac{100(.1)^2}{.5(.5)}=4.\]</div>
+<p>Fungsi log-kemungkinan binomial (konstanta diabaikan) memberi</p>
 <div class="math-display" role="math">\[LR=2[60\log(1.2)+40\log(0.8)]\approx4.0271.\]</div>
 <p>Secara umum, jika <span class="math-inline" role="math">\(\delta=\widehat p-p_0=O_P(n^{-1/2})\)</span>, maka
 <span class="math-inline" role="math">\(\widehat p(1-\widehat p)=p_0(1-p_0)+O_P(n^{-1/2})\)</span> dan
@@ -246,16 +263,17 @@ S=\frac{100(.1)^2}{.5(.5)}=4.\]</div>
 =\frac{n\delta^2}{p_0(1-p_0)}+O_P(n|\delta|^3)
 =\frac{n\delta^2}{p_0(1-p_0)}+o_P(1).\]</div>
 <p>Statistik skor sudah sama dengan suku utama. Jadi kesetaraan orde pertama
-berlaku hanya di bawah nol interior dan regular; pada batas atau support yang
-bergerak, diagnosis <a class="xref" data-target-id="O006-C140-CMP-D005-SEC002" href="../theory/O006-C140-CMP-D005.html#O006-C140-CMP-D005-SEC002">Perbandingan empat mekanisme</a> harus didahulukan.</p>
+berlaku hanya ketika parameter nol berada di interior dan syarat keteraturan
+terpenuhi; pada batas atau dukungan yang bergerak, lakukan terlebih dahulu
+pemeriksaan <a class="xref" data-target-id="O006-C140-CMP-D005-SEC002" href="../theory/O006-C140-CMP-D005.html#O006-C140-CMP-D005-SEC002">Perbandingan empat mekanisme</a>.</p>
 <p><a id="O006-C140-CMP-MS06-P07"></a></p>
 <h2>Soal 7 — daya, galat tipe II, dan ukuran sampel</h2>
-<!--PROBLEM_META {"id":"O006-C140-CMP-MS06-P07","prerequisites":["O006-C140-CMP-D006-EX02","O006-PSU-007","B95"],"objective":"menghitung daya pada alternatif tetap dan memilih ukuran sampel dari target daya","difficulty":"menengah","misconceptions":["p-value kecil berarti daya tinggi untuk semua alternatif","ukuran sampel ditentukan oleh alpha saja"]}-->
+<!--PROBLEM_META {"id":"O006-C140-CMP-MS06-P07","prerequisites":["O006-C140-CMP-D006-EX02","O006-PSU-007","B95"],"objective":"menghitung daya pada alternatif tetap dan memilih ukuran sampel dari target daya","difficulty":"menengah","misconceptions":["nilai-p kecil berarti daya tinggi untuk semua alternatif","ukuran sampel ditentukan oleh alfa saja"]}-->
 <p>Kembali ke <span class="math-inline" role="math">\(X_i\sim N(\mu,1)\)</span> dan uji satu sisi <span class="math-inline" role="math">\(H_0:\mu\le0\)</span> pada
 <span class="math-inline" role="math">\(\alpha=.05\)</span>. (a) Hitung daya pada <span class="math-inline" role="math">\(\mu=.5\)</span> ketika <span class="math-inline" role="math">\(n=25\)</span>. (b) Tentukan
 ukuran sampel terkecil dengan daya sedikitnya <span class="math-inline" role="math">\(.90\)</span> pada <span class="math-inline" role="math">\(\mu=.5\)</span>.
 Gunakan <span class="math-inline" role="math">\(z_{.95}=1{,}645\)</span> dan <span class="math-inline" role="math">\(z_{.90}=1{,}282\)</span>. (c) Jelaskan hubungan
-daya dengan galat tipe II dan mengapa p-value satu sampel tidak menentukan
+daya dengan galat tipe II dan mengapa nilai-p satu sampel tidak menentukan
 daya itu.</p>
 <p><a id="O006-C140-CMP-MS06-P07-H01"></a></p>
 <h3>Petunjuk 1</h3>
@@ -270,11 +288,11 @@ daya itu.</p>
 <p>Pada <span class="math-inline" role="math">\(n=25\)</span>, daya <span class="math-inline" role="math">\(\Phi(2{,}5-1{,}645)=\Phi(.855)\approx.804\)</span>.
 Untuk daya <span class="math-inline" role="math">\(.90\)</span>, perlu <span class="math-inline" role="math">\(n\ge(2{,}927/.5)^2\approx34{,}27\)</span>, sehingga
 <span class="math-inline" role="math">\(n=35\)</span>; dayanya sekitar <span class="math-inline" role="math">\(.905\)</span>. Galat tipe II pada <span class="math-inline" role="math">\(n=25\)</span> sekitar <span class="math-inline" role="math">\(.196\)</span>.
-P-value satu observasi tidak menetapkan daya tanpa efek, varians, alpha, dan
-rencana sampling.</p>
+Nilai-p dari satu sampel tidak menetapkan daya tanpa efek, varians, alfa, dan
+rancangan pengambilan sampel.</p>
 <p><a id="O006-C140-CMP-MS06-P07-SOL"></a></p>
 <h3>Solusi lengkap</h3>
-<p>Untuk <span class="math-inline" role="math">\(n\)</span> tertentu, <span class="math-inline" role="math">\(Z=\sqrt n\,\bar X\)</span> bermean <span class="math-inline" role="math">\(\sqrt n\,\mu\)</span> dan aturan
+<p>Untuk <span class="math-inline" role="math">\(n\)</span> tertentu, <span class="math-inline" role="math">\(Z=\sqrt n\,\bar X\)</span> memiliki rataan <span class="math-inline" role="math">\(\sqrt n\,\mu\)</span> dan aturan
 menolak bila <span class="math-inline" role="math">\(Z&gt;1{,}645\)</span>. Jadi</p>
 <div class="math-display" role="math">\[\beta(\mu)=P_\mu(Z&gt;1{,}645)=\Phi(\sqrt n\,\mu-1{,}645).\]</div>
 <p>Pada <span class="math-inline" role="math">\(n=25,\mu=.5\)</span>, diperoleh <span class="math-inline" role="math">\(\Phi(.855)\approx.8038\)</span>, sehingga
@@ -283,57 +301,59 @@ menolak bila <span class="math-inline" role="math">\(Z&gt;1{,}645\)</span>. Jadi
 <p>mengharuskan <span class="math-inline" role="math">\(.5\sqrt n-1{,}645\ge1{,}282\)</span>, atau
 <span class="math-inline" role="math">\(n\ge(2.927/.5)^2\approx34.27\)</span>. Bilangan bulat terkecil <span class="math-inline" role="math">\(35\)</span> memberi
 <span class="math-inline" role="math">\(\Phi(0.5\sqrt{35}-1.645)\approx\Phi(1.313)\approx.905\)</span>. Daya dan galat
-tipe II bergantung pada alternatif yang dipilih; p-value sesudah melihat
-data hanya tail di bawah nol dan tidak menggantikan perencanaan daya.</p>
+tipe II bergantung pada alternatif yang dipilih; nilai-p setelah data diamati
+hanya merangkum peluang ekor di bawah hipotesis nol dan tidak menggantikan
+perencanaan daya.</p>
 <p><a id="O006-C140-CMP-MS06-P08"></a></p>
-<h2>Soal 8 — p-value dan interval eksak melalui inversi uji</h2>
-<!--PROBLEM_META {"id":"O006-C140-CMP-MS06-P08","prerequisites":["O006-PSU-007","O006-C140-CMP-D006-DEF01","O006-C140-CMP-D004-THM006"],"objective":"menghitung p-value binomial dan membalikkan keluarga uji menjadi batas kepercayaan konservatif","difficulty":"lanjut","misconceptions":["interval eksak harus simetris","p-value kecil selalu berarti efek praktis besar"]}-->
+<h2>Soal 8 — nilai-p dan interval eksak melalui inversi uji</h2>
+<!--PROBLEM_META {"id":"O006-C140-CMP-MS06-P08","prerequisites":["O006-PSU-007","O006-C140-CMP-D006-DEF01","O006-C140-CMP-D004-THM006"],"objective":"menghitung nilai-p binomial dan membalikkan keluarga uji menjadi batas kepercayaan konservatif","difficulty":"lanjut","misconceptions":["interval eksak harus simetris","nilai-p kecil selalu berarti efek praktis besar"]}-->
 <p>Dalam <span class="math-inline" role="math">\(X\sim\operatorname{Binomial}(8,p)\)</span>, amati <span class="math-inline" role="math">\(X=0\)</span> dan uji satu sisi
-<span class="math-inline" role="math">\(H_0:p=p_0\)</span> melawan <span class="math-inline" role="math">\(H_1:p&lt;p_0\)</span>. (a) Hitung p-value ketika <span class="math-inline" role="math">\(p_0=.2\)</span>.
-(b) Inversikan seluruh uji level <span class="math-inline" role="math">\(\alpha=.05\)</span> untuk memperoleh batas atas
+<span class="math-inline" role="math">\(H_0:p=p_0\)</span> melawan <span class="math-inline" role="math">\(H_1:p&lt;p_0\)</span>. (a) Hitung nilai-p ketika <span class="math-inline" role="math">\(p_0=.2\)</span>.
+(b) Inversikan seluruh uji beraras <span class="math-inline" role="math">\(\alpha=.05\)</span> untuk memperoleh batas atas
 kepercayaan satu sisi bagi <span class="math-inline" role="math">\(p\)</span>. (c) Hitung batas numerik dan jelaskan
 konservatisme akibat diskretisasi.</p>
 <p><a id="O006-C140-CMP-MS06-P08-H01"></a></p>
 <h3>Petunjuk 1</h3>
-<p>Untuk <span class="math-inline" role="math">\(x=0\)</span>, tail kiri nol adalah
+<p>Untuk <span class="math-inline" role="math">\(x=0\)</span>, ekor kiri nol adalah
 <span class="math-inline" role="math">\(P_{p_0}(X\le0)=(1-p_0)^8\)</span>. Batas atas <span class="math-inline" role="math">\(U(x)\)</span> diperoleh dari
 <span class="math-inline" role="math">\((1-U)^8=.05\)</span>.</p>
 <p><a id="O006-C140-CMP-MS06-P08-H02"></a></p>
 <h3>Petunjuk 2</h3>
-<p>Dengan <span class="math-inline" role="math">\(p_0=.2\)</span>, p-value adalah <span class="math-inline" role="math">\(.8^8\)</span>. Solusi persamaan ialah
-<span class="math-inline" role="math">\(U=1-.05^{1/8}\)</span>; periksa bahwa cakupan kejadian <span class="math-inline" role="math">\(p\le U(X)\)</span> sekurangnya
-<span class="math-inline" role="math">\(.95\)</span>.</p>
+<p>Dengan <span class="math-inline" role="math">\(p_0=.2\)</span>, nilai-p adalah <span class="math-inline" role="math">\(.8^8\)</span>. Solusi persamaan ialah
+<span class="math-inline" role="math">\(U=1-.05^{1/8}\)</span>; periksa bahwa prosedur ini memenuhi
+<span class="math-inline" role="math">\(P_p\{p\le U(X)\}\ge.95\)</span>.</p>
 <p><a id="O006-C140-CMP-MS06-P08-ANS"></a></p>
 <h3>Jawaban singkat</h3>
-<p><span class="math-inline" role="math">\(p\text{-value}=.8^8=.16777216\)</span>, jadi nol tidak ditolak pada .05. Batas atas
+<p>Nilai-p <span class="math-inline" role="math">\(=.8^8=.16777216\)</span>, jadi <span class="math-inline" role="math">\(H_0\)</span> tidak ditolak pada .05. Batas atas
 Clopper–Pearson untuk <span class="math-inline" role="math">\(x=0\)</span> adalah
 <span class="math-inline" role="math">\(U=1-.05^{1/8}\approx.3123\)</span>, sehingga interval satu sisi <span class="math-inline" role="math">\([0,.3123]\)</span>.
-Cakupan sedikitnya .95 (umumnya konservatif) karena hukum Binomial diskret.</p>
+Cakupan sedikitnya .95 (umumnya konservatif) karena distribusi Binomial bersifat diskret.</p>
 <p><a id="O006-C140-CMP-MS06-P08-SOL"></a></p>
 <h3>Solusi lengkap</h3>
-<p>Untuk alternatif lebih kecil, hasil paling ekstrem ketika <span class="math-inline" role="math">\(X\)</span> kecil. Dengan
+<p>Untuk alternatif <span class="math-inline" role="math">\(p&lt;p_0\)</span>, hasil dianggap makin ekstrem ketika <span class="math-inline" role="math">\(X\)</span> makin kecil. Dengan
 <span class="math-inline" role="math">\(x=0\)</span>,</p>
 <div class="math-display" role="math">\[p_{\rm obs}=P_{.2}(X\le0)=(1-.2)^8=.8^8=.16777216.\]</div>
-<p>Nilai ini di atas .05. Untuk setiap parameter kandidat, titik pergantian
-batas atas untuk observasi nol ditentukan oleh</p>
+<p>Nilai ini di atas .05. Untuk setiap parameter kandidat, nilai batas atas untuk
+pengamatan nol ditentukan oleh</p>
 <div class="math-display" role="math">\[P_{p_0}(X\le0)=(1-p_0)^8=.05.\]</div>
 <p>Penyelesaian memberi <span class="math-inline" role="math">\(p_0=1-.05^{1/8}\approx.312344\)</span>. Inversi seluruh
-keluarga uji menghasilkan <span class="math-inline" role="math">\(U(0)=.312344\)</span> dan interval <span class="math-inline" role="math">\([0,U(0)]\)</span>. Pada
-observasi lain, persamaan tail dan pembulatan diskret menghasilkan batas
-serupa; lompatan tail menjadikan cakupan sedikitnya .95, tidak selalu tepat.
+keluarga uji menghasilkan <span class="math-inline" role="math">\(U(0)=.312344\)</span> dan interval <span class="math-inline" role="math">\([0,U(0)]\)</span>. Untuk nilai
+pengamatan lain, batas diperoleh dengan membalik peluang ekor diskret yang
+bersesuaian; lompatan ekor menjadikan cakupan sedikitnya .95, tidak selalu tepat.
 Interval ini adalah himpunan nilai parameter yang tidak ditolak oleh keluarga
 uji satu sisi, bukan peluang posterior. Ukuran efek dan daya tetap perlu
 dilaporkan bersama keputusan.</p>
 <p><a id="O006-C140-CMP-MS06-SEC-CHECKLIST"></a></p>
-<h2>Checklist kelulusan</h2>
-<p>Set ini dikuasai bila Anda menyatakan kelas nol dan alternatif sebelum
-menghitung tail; mengendalikan supremum size; membangun randomisasi hanya pada
-lapisan likelihood yang tepat; membedakan MP dari UMP; menghitung daya pada
-alternatif yang disebut; serta menghubungkan p-value, interval, dan statistik
-likelihood tanpa menyamakan makna probabilitasnya. Sebelum memakai limit
-chi-kuadrat, periksa interioritas, support bersama, identifiabilitas, dan
-skala. Semua angka harus dapat diulang dari kuantil atau seed yang dicatat,
-dan keputusan tidak boleh menggantikan derivasi.</p>
+<h2>Daftar periksa kelulusan</h2>
+<p>Set ini dikuasai bila Anda menyatakan ruang parameter untuk hipotesis nol dan
+hipotesis alternatif sebelum
+menghitung ekor; mengendalikan supremum ukuran uji; membangun randomisasi hanya pada
+lapisan fungsi kemungkinan yang tepat; membedakan MP dari UMP; menghitung daya pada
+alternatif yang disebut; serta menghubungkan nilai-p, interval, dan statistik
+fungsi kemungkinan tanpa menyamakan makna probabilitasnya. Sebelum memakai limit
+chi-kuadrat, periksa interioritas, dukungan bersama, identifiabilitas, dan
+skala. Semua angka harus dapat direproduksi dari kuantil atau benih acak yang dicatat,
+dan keputusan uji tidak boleh menggantikan penurunan matematisnya.</p>
 
 <footer class="license">Materi pendamping orisinal berlisensi CC BY-SA 4.0. Komponen Penn State dan Random tetap berada di bawah lisensinya masing-masing dan tidak direlisensikan oleh halaman ini.</footer>
 </main>

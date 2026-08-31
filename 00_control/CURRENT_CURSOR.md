@@ -1,6 +1,25 @@
 # Production cursor
 
-Updated: 2026-08-28
+Updated: 2026-08-31
+
+## Live C140 collection cursor — supersedes historical next actions below
+
+Penn State's complete 14-document translation and the exact Random donor are
+already public. The original C140 companion has now completed all 39 source
+documents, final post-production source audit, deterministic C5 HTML/backend
+build, and static QA with two byte-identical check-only replays. Its 13 mastery
+sets, four cumulative assessments, and two capstones contain 146 completely
+solved problems; all six reproducible simulation families are complete.
+
+Current exact evidence:
+`components/c140-companion/00_control/CHECKPOINT_2026-08-31_C5_LOCAL_COMPLETE.md`.
+The complete 259-file Pages collection passes replay. The C5 65-file release
+package is being frozen; publish it in the existing GitHub and Zenodo concept
+22077422 lineage, anonymously verify public bytes, and persist final receipts.
+Do not redo translation or start another audit cycle. No browser process or
+upstream conversation is permitted. The older goal's Random-first source
+selection is superseded by the direct complete Penn/donor/companion selection;
+the independent 29-page Random edition remains separate and complete.
 
 ## Current boundary
 
@@ -186,11 +205,13 @@ matched all 188 public files. GitHub release `379047752` / tag
 `10.5281/zenodo.22164344` matched all 57 release files / 93,850,993 bytes at
 both destinations; the Zenodo lineage has zero drafts.
 
-Next executable action: continue C5 under
-`components/c140-companion/00_control/C5_ASSESSMENT_CAPSTONE_BATCH_CONTRACT.md`.
-Produce `CA02`, then `CA03`, `CA04`, `CP01`, and `CP02`; integrate and publish
-the final boundary. Do not reopen C1–C4 without a proved defect. The overall
-C140 goal remains active.
+Current C5 source cursor: `CA02` is complete and independently audited at
+50,036 bytes / SHA-256
+`159628fdccdcb6f315bbfb1c5e96e423072566630817fbe20bdfdabc520fafda`;
+`CA03` and `CA04` are in production. Next, finish/audit those two assessments,
+integrate all three into the cumulative reader/backend, then freeze and author
+`CP01`/`CP02` under the recorded asset-level rights gates. Do not reopen C1–C4
+without a proved defect. The overall C140 goal remains active.
 
 The donor authority is 57,507 bytes / SHA-256
 `4d7402f2a960ea2b4232e57e4ee5992ac29801b9269f300f17f8e83074d5a0e4`;

@@ -4,37 +4,39 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="generator" content="OpenAI Codex gpt-5.6-sol, Ultra">
-<title>Set penguasaan 10 — uji likelihood asimtotik, risk, dan perbaikan estimator</title>
+<title>Set penguasaan 10 — uji fungsi kemungkinan asimtotik, risiko, dan perbaikan penduga</title>
 <link rel="stylesheet" href="../assets/style.css">
 <script>window.MathJax={loader:{load:['[tex]/boldsymbol']},tex:{packages:{'[+]':['boldsymbol']},inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']]},svg:{fontCache:'local'}};</script>
 <script defer src="../assets/MathJax/tex-svg.js"></script>
 </head>
 <body>
+<a class="skip-link" href="#main-content">Langsung ke isi utama</a>
 <div class="shell">
-<nav class="sidebar" aria-label="Daftar isi pendamping"><h2>Isi pendamping</h2><ol><li><a href="../index.html">Pendamping Orisinal Statistika Matematis</a></li><li><a href="../theory/O006-C140-CMP-D001.html">Model parametrik reguler, skor, dan informasi Fisher</a></li><li><a href="../theory/O006-C140-CMP-D002.html">Konsistensi MLE: identifikasi Kullback–Leibler dan teorema argmax</a></li><li><a href="../theory/O006-C140-CMP-D003.html">Likelihood kuadratik lokal, normalitas asimtotik, dan delta method</a></li><li><a href="../theory/O006-C140-CMP-D004.html">Prosedur Wald, skor, dan rasio likelihood</a></li><li><a href="../theory/O006-C140-CMP-D005.html">Likelihood nonreguler: empat mekanisme kegagalan</a></li><li><a href="../theory/O006-C140-CMP-D006.html">Optimalitas pengujian: Neyman–Pearson, MP, UMP, dan rasio likelihood monoton</a></li><li><a href="../theory/O006-C140-CMP-D007.html">Loss, risk, efisiensi, Rao–Blackwell, dan Lehmann–Scheffé</a></li><li><a href="../theory/O006-C140-CMP-D008.html">Model linear Gaussian desain tetap dan geometri proyeksi</a></li><li><a href="../theory/O006-C140-CMP-D009.html">OLS, MLE Gaussian, dan teorema Gauss–Markov pada rancangan tetap</a></li><li><a href="../theory/O006-C140-CMP-D010.html">Inferensi Gaussian eksak: proyeksi, t, F, ANOVA, dan prediksi</a></li><li><a href="../theory/O006-C140-CMP-D011.html">Diagnostik, leverage, misspesifikasi, dan inferensi pascaseleksi</a></li><li><a href="../theory/O006-C140-CMP-D012.html">Inferensi Bayesian sebagai pembaruan dan keputusan yang koheren</a></li><li><a href="../theory/O006-C140-CMP-D013.html">Perbandingan Bayesian–frequentist: keputusan, cakupan, dan kalibrasi</a></li><li><a href="../simulations/O006-C140-CMP-SIM001.html">Model lokasi normal: MLE, coverage, dan tiga statistik uji</a></li><li><a href="../simulations/O006-C140-CMP-SIM002.html">Delta method pada titik reguler dan titik dengan turunan nol</a></li><li><a href="../simulations/O006-C140-CMP-SIM003.html">Endpoint Uniform: laju nonreguler dan kegagalan bootstrap biasa</a></li><li><a href="../simulations/O006-C140-CMP-SIM004.html">Uji Neyman–Pearson teracak dengan size tepat</a></li><li><a href="../simulations/O006-C140-CMP-SIM005.html">Model linear matriks: coverage, heteroskedastisitas, dan pengaruh</a></li><li><a href="../simulations/O006-C140-CMP-SIM006.html">Kalibrasi selang Bayesian dan frequentist pada model binomial</a></li><li><a href="O006-C140-CMP-MS00.html">Set penguasaan 00 — probabilitas, distribusi, dan ekspektasi (diagnostik C140)</a></li><li><a href="O006-C140-CMP-MS01.html">Set penguasaan 01 — statistik urutan dan distribusi sampel</a></li><li><a href="O006-C140-CMP-MS02.html">Set penguasaan 02 — estimasi, bias, MSE, dan sifat estimator</a></li><li><a href="O006-C140-CMP-MS03.html">Set penguasaan 03 — kecukupan, faktorisasi, kelengkapan, dan statistik ancillary</a></li><li><a href="O006-C140-CMP-MS04.html">Set penguasaan 04 — metode momen dan dasar kemungkinan maksimum</a></li><li><a href="O006-C140-CMP-MS05.html">Set penguasaan 05 — informasi Fisher, interval kepercayaan, bootstrap, dan delta method</a></li><li><a href="O006-C140-CMP-MS06.html">Set penguasaan 06 — pengujian hipotesis, daya, p-value, dan jembatan likelihood</a></li><li><a href="O006-C140-CMP-MS07.html">Set penguasaan 07 — regularitas, konsistensi, dan normalitas MLE</a></li><li><a href="O006-C140-CMP-MS08.html">Set penguasaan 08 — Wald, skor, rasio likelihood, dan diagnosis nonregular</a></li><li><a href="O006-C140-CMP-MS09.html">Set penguasaan 09 — pengujian eksak dan optimalitas Neyman–Pearson</a></li><li><a href="O006-C140-CMP-MS10.html">Set penguasaan 10 — uji likelihood asimtotik, risk, dan perbaikan estimator</a></li><li><a href="O006-C140-CMP-MS11.html">Set penguasaan 11 — pembaruan Bayesian, keputusan, dan kalibrasi</a></li><li><a href="O006-C140-CMP-MS12.html">Set penguasaan 12 — model linear Gaussian matriks, inferensi eksak, dan diagnostik</a></li><li><a href="../assessments/O006-C140-CMP-CA01.html">Asesmen kumulatif C1: likelihood, optimalitas, dan keputusan statistik</a></li></ol></nav>
-<main>
+<nav class="sidebar" aria-labelledby="companion-nav-title"><p class="nav-title" id="companion-nav-title">Isi pendamping</p><ol><li><a href="../index.html">Pendamping Orisinal Statistika Matematis</a></li><li><a href="../theory/O006-C140-CMP-D001.html">Model parametrik reguler, skor, dan informasi Fisher</a></li><li><a href="../theory/O006-C140-CMP-D002.html">Konsistensi MLE: identifikasi Kullback–Leibler dan teorema argmax</a></li><li><a href="../theory/O006-C140-CMP-D003.html">Ekspansi kuadratik lokal fungsi log-kemungkinan, normalitas asimtotik, dan metode delta</a></li><li><a href="../theory/O006-C140-CMP-D004.html">Prosedur Wald, skor, dan rasio fungsi kemungkinan</a></li><li><a href="../theory/O006-C140-CMP-D005.html">Fungsi kemungkinan nonreguler: empat mekanisme kegagalan</a></li><li><a href="../theory/O006-C140-CMP-D006.html">Optimalitas pengujian: Neyman–Pearson, MP, UMP, dan rasio fungsi kemungkinan monoton</a></li><li><a href="../theory/O006-C140-CMP-D007.html">Kerugian, risiko, efisiensi, Rao–Blackwell, dan Lehmann–Scheffé</a></li><li><a href="../theory/O006-C140-CMP-D008.html">Model linear Gaussian berdesain tetap dan geometri proyeksi</a></li><li><a href="../theory/O006-C140-CMP-D009.html">OLS, MLE Gaussian, dan teorema Gauss–Markov pada desain tetap</a></li><li><a href="../theory/O006-C140-CMP-D010.html">Inferensi Gaussian eksak: proyeksi, t, F, ANOVA, dan prediksi</a></li><li><a href="../theory/O006-C140-CMP-D011.html">Diagnostik, daya ungkit, kesalahan spesifikasi, dan inferensi pascaseleksi</a></li><li><a href="../theory/O006-C140-CMP-D012.html">Inferensi Bayesian sebagai pembaruan dan keputusan yang koheren</a></li><li><a href="../theory/O006-C140-CMP-D013.html">Perbandingan Bayesian–frekuentis: keputusan, cakupan, dan kalibrasi</a></li><li><a href="../simulations/O006-C140-CMP-SIM001.html">Model lokasi normal: MLE, cakupan, dan tiga statistik uji</a></li><li><a href="../simulations/O006-C140-CMP-SIM002.html">Metode delta pada titik reguler dan titik dengan turunan nol</a></li><li><a href="../simulations/O006-C140-CMP-SIM003.html">Distribusi seragam pada batas dukungan: laju nonreguler dan kegagalan bootstrap biasa</a></li><li><a href="../simulations/O006-C140-CMP-SIM004.html">Uji Neyman–Pearson teracak dengan ukuran uji tepat</a></li><li><a href="../simulations/O006-C140-CMP-SIM005.html">Model linear matriks: cakupan, heteroskedastisitas, dan pengaruh</a></li><li><a href="../simulations/O006-C140-CMP-SIM006.html">Kalibrasi selang Bayesian dan frekuentis pada model binomial</a></li><li><a href="O006-C140-CMP-MS00.html">Set penguasaan 00 — probabilitas, distribusi, dan ekspektasi (diagnostik C140)</a></li><li><a href="O006-C140-CMP-MS01.html">Set penguasaan 01 — statistik urutan dan distribusi sampel</a></li><li><a href="O006-C140-CMP-MS02.html">Set penguasaan 02 — estimasi, bias, MSE, dan sifat penduga</a></li><li><a href="O006-C140-CMP-MS03.html">Set penguasaan 03 — kecukupan, faktorisasi, kelengkapan, dan statistik aksesori</a></li><li><a href="O006-C140-CMP-MS04.html">Set penguasaan 04 — metode momen dan dasar kemungkinan maksimum</a></li><li><a href="O006-C140-CMP-MS05.html">Set penguasaan 05 — informasi Fisher, interval kepercayaan, bootstrap, dan metode delta</a></li><li><a href="O006-C140-CMP-MS06.html">Set penguasaan 06 — pengujian hipotesis, daya, nilai-p, dan jembatan ke teori fungsi kemungkinan</a></li><li><a href="O006-C140-CMP-MS07.html">Set penguasaan 07 — keteraturan, konsistensi, dan normalitas MLE</a></li><li><a href="O006-C140-CMP-MS08.html">Set penguasaan 08 — Wald, skor, rasio fungsi kemungkinan, dan diagnosis nonreguler</a></li><li><a href="O006-C140-CMP-MS09.html">Set penguasaan 09 — pengujian eksak dan optimalitas Neyman–Pearson</a></li><li><a href="O006-C140-CMP-MS10.html" aria-current="page">Set penguasaan 10 — uji fungsi kemungkinan asimtotik, risiko, dan perbaikan penduga</a></li><li><a href="O006-C140-CMP-MS11.html">Set penguasaan 11 — pembaruan Bayesian, keputusan, dan kalibrasi</a></li><li><a href="O006-C140-CMP-MS12.html">Set penguasaan 12 — model linear Gaussian dalam bentuk matriks, inferensi eksak, dan diagnostik</a></li><li><a href="../assessments/O006-C140-CMP-CA01.html">Asesmen kumulatif C1: fungsi kemungkinan, optimalitas, dan keputusan statistik</a></li><li><a href="../assessments/O006-C140-CMP-CA02.html">Asesmen kumulatif CA02 — fondasi inferensi sampel berhingga</a></li><li><a href="../assessments/O006-C140-CMP-CA03.html">Asesmen kumulatif CA03 — model linear dalam bentuk matriks, inferensi eksak, dan diagnostik</a></li><li><a href="../assessments/O006-C140-CMP-CA04.html">Asesmen kumulatif CA04 — sintesis Bayesian–frekuentis</a></li><li><a href="../capstones/O006-C140-CMP-CP01.html">Proyek akhir integratif CP01 — regresi data terbuka untuk kuat tekan beton</a></li><li><a href="../capstones/O006-C140-CMP-CP02.html">Proyek akhir CP02 — perbandingan Bayesian–frekuentis pada data agregat kecenderungan bersarang greater sage-grouse</a></li></ol></nav>
+<main id="main-content" tabindex="-1">
 <div class="metadata"><strong>O006-C140-CMP-MS10</strong> · id-ID · CC BY-SA 4.0 · OpenAI Codex gpt-5.6-sol, Ultra</div>
 <p><a id="O006-C140-CMP-MS10-SEC01"></a></p>
 <h1>Set penguasaan 10</h1>
 <p>Pada setiap uji asimtotik, tulis titik tempat informasi dievaluasi dan sebutkan
-kondisi regularitas yang dipakai. Nilai <span class="math-inline" role="math">\(\chi^2\)</span> tidak boleh ditempelkan hanya
-karena statistik memuat likelihood. Pada setiap persoalan estimator, nyatakan
-loss dan kelas pembanding sebelum memakai kata “efisien” atau “optimal”.</p>
+syarat keteraturan yang dipakai. Jangan menyimpulkan limit <span class="math-inline" role="math">\(\chi^2\)</span> hanya karena
+suatu statistik memuat fungsi kemungkinan. Pada setiap persoalan penduga, nyatakan
+kerugian dan kelas pembanding sebelum memakai kata “efisien” atau “optimal”.</p>
 <p><a id="O006-C140-CMP-MS10-P01"></a></p>
-<h2>Masalah 1 — tiga uji Bernoulli dalam satu data</h2>
-<!--PROBLEM_META {"id":"O006-C140-CMP-MS10-P01","prerequisites":["O006-C140-CMP-D004","O006-C140-CMP-D005"],"objective":"menurunkan dan membandingkan statistik Wald, score, dan LR pada model reguler","difficulty":"lanjut","misconceptions":["ketiga statistik identik pada sampel hingga","informasi Wald dievaluasi pada nol","Wald selalu terdefinisi pada batas MLE"]}-->
+<h2>Masalah 1 — tiga uji Bernoulli pada satu himpunan data</h2>
+<!--PROBLEM_META {"id":"O006-C140-CMP-MS10-P01","prerequisites":["O006-C140-CMP-D004","O006-C140-CMP-D005"],"objective":"menurunkan dan membandingkan statistik Wald, skor, dan LR pada model reguler","difficulty":"lanjut","misconceptions":["ketiga statistik identik pada sampel berhingga","informasi Wald dievaluasi pada nol","Wald selalu terdefinisi pada batas MLE"]}-->
 <p>Untuk <span class="math-inline" role="math">\(X\sim\operatorname{Binomial}(n,p)\)</span>, uji dua sisi
 <span class="math-inline" role="math">\(H_0:p=p_0\)</span> melawan <span class="math-inline" role="math">\(H_1:p\neq p_0\)</span>, dengan <span class="math-inline" role="math">\(0&lt;p_0&lt;1\)</span>. Turunkan statistik
-Wald, score, dan likelihood-ratio (LR) dalam <span class="math-inline" role="math">\(\widehat p=X/n\)</span>. Evaluasi
-ketiganya ketika <span class="math-inline" role="math">\(n=100\)</span>, <span class="math-inline" role="math">\(X=60\)</span>, dan <span class="math-inline" role="math">\(p_0=0{,}5\)</span>. Jelaskan limit nol dan satu
-kegagalan Wald pada sampel hingga.</p>
+Wald, skor, dan rasio fungsi kemungkinan (LR) dalam <span class="math-inline" role="math">\(\widehat p=X/n\)</span>. Evaluasi
+ketiganya ketika <span class="math-inline" role="math">\(n=100\)</span>, <span class="math-inline" role="math">\(X=60\)</span>, dan <span class="math-inline" role="math">\(p_0=0{,}5\)</span>. Jelaskan distribusi limit
+di bawah hipotesis nol dan satu
+kegagalan Wald pada sampel berhingga.</p>
 <p><a id="O006-C140-CMP-MS10-P01-H01"></a></p>
 <h3>Petunjuk 1</h3>
 <p><span class="math-inline" role="math">\(\operatorname{Var}(\widehat p)\approx p(1-p)/n\)</span>. Wald memasukkan
-<span class="math-inline" role="math">\(\widehat p\)</span>; score memasukkan <span class="math-inline" role="math">\(p_0\)</span>.</p>
+<span class="math-inline" role="math">\(\widehat p\)</span>; skor memasukkan <span class="math-inline" role="math">\(p_0\)</span>.</p>
 <p><a id="O006-C140-CMP-MS10-P01-H02"></a></p>
 <h3>Petunjuk 2</h3>
-<p>Untuk LR, hitung dua kali selisih log-likelihood pada <span class="math-inline" role="math">\(\widehat p\)</span> dan
+<p>Untuk LR, hitung dua kali selisih fungsi log-kemungkinan pada <span class="math-inline" role="math">\(\widehat p\)</span> dan
 <span class="math-inline" role="math">\(p_0\)</span>, dengan konvensi <span class="math-inline" role="math">\(0\log0=0\)</span>.</p>
 <p><a id="O006-C140-CMP-MS10-P01-ANS"></a></p>
 <h3>Jawaban singkat</h3>
@@ -43,16 +45,18 @@ S=\frac{n(\widehat p-p_0)^2}{p_0(1-p_0)},\]</div>
 <div class="math-display" role="math">\[G^2=2n\left[\widehat p\log\frac{\widehat p}{p_0}
 +(1-\widehat p)\log\frac{1-\widehat p}{1-p_0}\right].\]</div>
 <p>Untuk data yang diberikan: <span class="math-inline" role="math">\(W=4{,}1667\)</span>, <span class="math-inline" role="math">\(S=4\)</span>, dan
-<span class="math-inline" role="math">\(G^2\approx4{,}0271\)</span>. Ketiganya menuju <span class="math-inline" role="math">\(\chi^2_1\)</span> di bawah nol reguler; Wald
+<span class="math-inline" role="math">\(G^2\approx4{,}0271\)</span>. Ketiganya menuju <span class="math-inline" role="math">\(\chi^2_1\)</span> di bawah hipotesis nol yang
+reguler; Wald
 tidak terdefinisi saat <span class="math-inline" role="math">\(\widehat p\in\{0,1\}\)</span>.</p>
 <p><a id="O006-C140-CMP-MS10-P01-SOL"></a></p>
 <h3>Solusi lengkap</h3>
-<p>Log-likelihood tanpa konstanta adalah</p>
+<p>Fungsi log-kemungkinan tanpa konstanta adalah</p>
 <div class="math-display" role="math">\[\ell(p)=X\log p+(n-X)\log(1-p),\]</div>
-<p>dengan MLE interior <span class="math-inline" role="math">\(\widehat p=X/n\)</span>. Varians asimtotik MLE ialah
-<span class="math-inline" role="math">\(p(1-p)/n\)</span>. Uji Wald menaksir varians itu pada MLE:</p>
+<p>dengan MLE <span class="math-inline" role="math">\(\widehat p=X/n\)</span>, yang berada di interior tepat ketika <span class="math-inline" role="math">\(0&lt;X&lt;n\)</span>.
+Varians asimtotik MLE ialah
+<span class="math-inline" role="math">\(p(1-p)/n\)</span>. Uji Wald mengevaluasi penduga varians itu pada MLE:</p>
 <div class="math-display" role="math">\[W=\frac{(\widehat p-p_0)^2}{\widehat p(1-\widehat p)/n}.\]</div>
-<p>Score pada nol adalah</p>
+<p>Skor pada <span class="math-inline" role="math">\(p_0\)</span> adalah</p>
 <div class="math-display" role="math">\[U(p_0)=\frac{X-np_0}{p_0(1-p_0)},\]</div>
 <p>dan informasi <span class="math-inline" role="math">\(I_n(p_0)=n/[p_0(1-p_0)]\)</span>, sehingga</p>
 <div class="math-display" role="math">\[S=\frac{U(p_0)^2}{I_n(p_0)}
@@ -67,25 +71,30 @@ tidak terdefinisi saat <span class="math-inline" role="math">\(\widehat p\in\{0,
 S=\frac{100(0{,}1)^2}{0{,}25}=4,\]</div>
 <p>dan</p>
 <div class="math-display" role="math">\[G^2=2\{60\log(1{,}2)+40\log(0{,}8)\}\approx4{,}0271.\]</div>
-<p>Support bersama, <span class="math-inline" role="math">\(p_0\)</span> interior, informasi positif, dan diferensiabilitas
-memungkinkan ketiganya konvergen ke <span class="math-inline" role="math">\(\chi^2_1\)</span>. Mereka hanya ekuivalen hingga
+<p>Dukungan yang tidak bergantung pada parameter, <span class="math-inline" role="math">\(p_0\)</span> interior, informasi positif,
+dan diferensiabilitas memungkinkan ketiganya konvergen ke <span class="math-inline" role="math">\(\chi^2_1\)</span>. Ketiganya
+hanya ekuivalen hingga
 galat orde lebih kecil, bukan identik. Bila <span class="math-inline" role="math">\(X=0\)</span> atau <span class="math-inline" role="math">\(X=n\)</span>, penyebut Wald
-nol; score dan LR masih dapat didefinisikan, menunjukkan ketidakstabilan Wald
-pada batas sampel hingga.</p>
+nol; skor dan LR masih dapat didefinisikan, menunjukkan ketidakstabilan Wald
+pada nilai batas dalam sampel berhingga.</p>
 <p><a id="O006-C140-CMP-MS10-P02"></a></p>
 <h2>Masalah 2 — ekuivalensi lokal pada model Poisson</h2>
-<!--PROBLEM_META {"id":"O006-C140-CMP-MS10-P02","prerequisites":["O006-C140-CMP-D004","O006-C140-CMP-D005"],"objective":"membuktikan ekuivalensi asimtotik Wald, score, dan LR dengan ekspansi Taylor","difficulty":"lanjut","misconceptions":["ekuivalensi asimtotik berarti sama persis","LR memakai informasi pada MLE","suku sisa Taylor dapat diabaikan tanpa laju MLE"]}-->
-<p>Misalkan <span class="math-inline" role="math">\(X_1,\ldots,X_n\)</span> iid Poisson<span class="math-inline" role="math">\((\lambda)\)</span> dan
-<span class="math-inline" role="math">\(\widehat\lambda=\bar X&gt;0\)</span>. Untuk <span class="math-inline" role="math">\(H_0:\lambda=\lambda_0&gt;0\)</span>:</p>
+<!--PROBLEM_META {"id":"O006-C140-CMP-MS10-P02","prerequisites":["O006-C140-CMP-D004","O006-C140-CMP-D005"],"objective":"membuktikan ekuivalensi asimtotik Wald, skor, dan LR dengan ekspansi Taylor","difficulty":"lanjut","misconceptions":["ekuivalensi asimtotik berarti sama persis","LR memakai informasi pada MLE","suku sisa Taylor dapat diabaikan tanpa laju MLE"]}-->
+<p>Misalkan <span class="math-inline" role="math">\(X_1,\ldots,X_n\)</span> saling bebas dan berdistribusi identik menurut
+<span class="math-inline" role="math">\(\operatorname{Poisson}(\lambda)\)</span>, dan <span class="math-inline" role="math">\(\widehat\lambda=\bar X\)</span>. Untuk
+<span class="math-inline" role="math">\(H_0:\lambda=\lambda_0&gt;0\)</span>:</p>
 <ol>
 <li>turunkan <span class="math-inline" role="math">\(W\)</span>, <span class="math-inline" role="math">\(S\)</span>, dan <span class="math-inline" role="math">\(G^2\)</span>;</li>
 <li>gunakan <span class="math-inline" role="math">\(\widehat\lambda-\lambda_0=O_p(n^{-1/2})\)</span> untuk membuktikan
 <span class="math-inline" role="math">\(W-S=o_p(1)\)</span> dan <span class="math-inline" role="math">\(G^2-S=o_p(1)\)</span>.</li>
 </ol>
+<p>Kerjakan rumus Wald pada kejadian <span class="math-inline" role="math">\(\widehat\lambda&gt;0\)</span>. Pada
+<span class="math-inline" role="math">\(\widehat\lambda=0\)</span>, tetapkan <span class="math-inline" role="math">\(W=0\)</span> dan jelaskan mengapa perluasan ini tidak
+memengaruhi limit asimtotik.</p>
 <p><a id="O006-C140-CMP-MS10-P02-H01"></a></p>
 <h3>Petunjuk 1</h3>
-<p>Informasi sampel adalah <span class="math-inline" role="math">\(n/\lambda\)</span>. Karena itu Wald memakai
-<span class="math-inline" role="math">\(\widehat\lambda/n\)</span> sebagai varians MLE, sedangkan score memakai
+<p>Informasi sampel adalah <span class="math-inline" role="math">\(n/\lambda\)</span>. Karena itu Wald menggunakan
+<span class="math-inline" role="math">\(\widehat\lambda/n\)</span> sebagai penduga varians MLE, sedangkan skor menggunakan
 <span class="math-inline" role="math">\(\lambda_0/n\)</span>.</p>
 <p><a id="O006-C140-CMP-MS10-P02-H02"></a></p>
 <h3>Petunjuk 2</h3>
@@ -98,16 +107,22 @@ S=\frac{n(\widehat\lambda-\lambda_0)^2}{\lambda_0},\]</div>
 <div class="math-display" role="math">\[G^2=2n\left[\widehat\lambda\log
 \frac{\widehat\lambda}{\lambda_0}-(\widehat\lambda-\lambda_0)\right].\]</div>
 <p>Ketiganya sama dengan
-<span class="math-inline" role="math">\(n(\widehat\lambda-\lambda_0)^2/\lambda_0+o_p(1)\)</span> dan berlimit
-<span class="math-inline" role="math">\(\chi^2_1\)</span> di bawah nol.</p>
+<span class="math-inline" role="math">\(n(\widehat\lambda-\lambda_0)^2/\lambda_0+o_p(1)\)</span> dan berkonvergensi dalam
+distribusi ke <span class="math-inline" role="math">\(\chi^2_1\)</span> di bawah hipotesis nol.</p>
+<p>Rumus Wald di atas berlaku pada <span class="math-inline" role="math">\(\widehat\lambda&gt;0\)</span>. Definisi <span class="math-inline" role="math">\(W=0\)</span> pada
+<span class="math-inline" role="math">\(\widehat\lambda=0\)</span> tidak mengubah limit karena
+<span class="math-inline" role="math">\(P_{\lambda_0}(\widehat\lambda=0)=e^{-n\lambda_0}\to0\)</span>.
+Untuk LR, gunakan konvensi <span class="math-inline" role="math">\(0\log(0/\lambda_0)=0\)</span>, sehingga
+<span class="math-inline" role="math">\(G^2=2n\lambda_0\)</span> ketika <span class="math-inline" role="math">\(\widehat\lambda=0\)</span>.</p>
 <p><a id="O006-C140-CMP-MS10-P02-SOL"></a></p>
 <h3>Solusi lengkap</h3>
-<p>Log-likelihood tanpa konstanta ialah</p>
+<p>Fungsi log-kemungkinan tanpa konstanta ialah</p>
 <div class="math-display" role="math">\[\ell(\lambda)=n\bar X\log\lambda-n\lambda.\]</div>
-<p>Score dan informasi adalah</p>
+<p>Skor dan informasi adalah</p>
 <div class="math-display" role="math">\[U(\lambda)=n\left(\frac{\bar X}{\lambda}-1\right),
 \qquad I_n(\lambda)=\frac n\lambda.\]</div>
-<p>Substitusi langsung memberi ketiga formula pada jawaban singkat. Letakkan
+<p>Pada kejadian <span class="math-inline" role="math">\(\widehat\lambda&gt;0\)</span>, substitusi langsung memberi ketiga formula
+pada jawaban singkat. Misalkan
 <span class="math-inline" role="math">\(d=\widehat\lambda-\lambda_0=O_p(n^{-1/2})\)</span>. Karena
 <span class="math-inline" role="math">\(\widehat\lambda^{-1}=\lambda_0^{-1}+O_p(n^{-1/2})\)</span>,</p>
 <div class="math-display" role="math">\[W-S
@@ -123,15 +138,16 @@ S=\frac{n(\widehat\lambda-\lambda_0)^2}{\lambda_0},\]</div>
 <p>Maka</p>
 <div class="math-display" role="math">\[G^2=\frac{nd^2}{\lambda_0}+O_p(nd^3)
 =S+O_p(n^{-1/2})=S+o_p(1).\]</div>
-<p>Di bawah nol, $\sqrt n(\widehat\lambda-\lambda_0)/\sqrt{\lambda_0}
-\Rightarrow N(0,1)<span class="math-inline" role="math">\(, sehingga \)</span>S\Rightarrow\chi^2_1$ dan hasil Slutsky
-memindahkan limit yang sama ke Wald dan LR.</p>
+<p>Di bawah hipotesis nol,
+<span class="math-inline" role="math">\(\sqrt n(\widehat\lambda-\lambda_0)/\sqrt{\lambda_0}\Rightarrow N(0,1)\)</span>,
+sehingga <span class="math-inline" role="math">\(S\Rightarrow\chi^2_1\)</span> dan hasil Slutsky
+memberikan limit yang sama bagi Wald dan LR.</p>
 <p><a id="O006-C140-CMP-MS10-P03"></a></p>
-<h2>Masalah 3 — support berubah dan kegagalan Wilks</h2>
-<!--PROBLEM_META {"id":"O006-C140-CMP-MS10-P03","prerequisites":["O006-C140-CMP-D005"],"objective":"menghitung distribusi LR eksak ketika support bergantung parameter dan membandingkannya dengan Wilks","difficulty":"lanjut","misconceptions":["setiap minus dua log LR berlimit chi-kuadrat dengan derajat restriksi","parameter nol interior menjamin regularitas","support bergantung parameter tidak memengaruhi likelihood asymptotics"]}-->
-<p>Misalkan <span class="math-inline" role="math">\(X_1,\ldots,X_n\)</span> iid Uniform<span class="math-inline" role="math">\((0,\theta)\)</span>, <span class="math-inline" role="math">\(\theta&gt;0\)</span>, dan
-<span class="math-inline" role="math">\(M=\max_iX_i\)</span>. Untuk menguji <span class="math-inline" role="math">\(H_0:\theta=\theta_0\)</span> terhadap alternatif tak
-terbatas <span class="math-inline" role="math">\(\theta&gt;0\)</span>:</p>
+<h2>Masalah 3 — dukungan berubah dan kegagalan Wilks</h2>
+<!--PROBLEM_META {"id":"O006-C140-CMP-MS10-P03","prerequisites":["O006-C140-CMP-D005"],"objective":"menghitung distribusi LR eksak ketika dukungan bergantung parameter dan membandingkannya dengan Wilks","difficulty":"lanjut","misconceptions":["setiap statistik minus dua log LR berkonvergensi ke distribusi chi-kuadrat dengan derajat bebas sebesar jumlah pembatasan","parameter nol interior menjamin keteraturan","dukungan bergantung parameter tidak memengaruhi asimtotik fungsi kemungkinan"]}-->
+<p>Misalkan <span class="math-inline" role="math">\(X_1,\ldots,X_n\)</span> saling bebas dan berdistribusi identik menurut
+<span class="math-inline" role="math">\(\operatorname{Unif}(0,\theta)\)</span>, <span class="math-inline" role="math">\(\theta&gt;0\)</span>, dan <span class="math-inline" role="math">\(M=\max_iX_i\)</span>. Uji
+<span class="math-inline" role="math">\(H_0:\theta=\theta_0\)</span> melawan <span class="math-inline" role="math">\(H_1:\theta&gt;0,\ \theta\ne\theta_0\)</span>:</p>
 <ol>
 <li>cari MLE dan statistik <span class="math-inline" role="math">\(T=-2\log\Lambda\)</span>;</li>
 <li>tentukan distribusi nol eksak <span class="math-inline" role="math">\(T\)</span>;</li>
@@ -139,53 +155,69 @@ terbatas <span class="math-inline" role="math">\(\theta&gt;0\)</span>:</p>
 </ol>
 <p><a id="O006-C140-CMP-MS10-P03-H01"></a></p>
 <h3>Petunjuk 1</h3>
-<p>Likelihood adalah <span class="math-inline" role="math">\(\theta^{-n}\mathbf1\{M\leq\theta\}\)</span> dan dimaksimumkan
-pada nilai <span class="math-inline" role="math">\(\theta\)</span> terkecil yang masih mungkin.</p>
+<p>Fungsi kemungkinan adalah <span class="math-inline" role="math">\(\theta^{-n}\mathbf1\{M\leq\theta\}\)</span> dan dimaksimumkan
+pada nilai <span class="math-inline" role="math">\(\theta\)</span> terkecil yang masih konsisten dengan data.</p>
 <p><a id="O006-C140-CMP-MS10-P03-H02"></a></p>
 <h3>Petunjuk 2</h3>
 <p>Di bawah <span class="math-inline" role="math">\(\theta_0\)</span>, peubah <span class="math-inline" role="math">\(U=(M/\theta_0)^n\)</span> seragam pada <span class="math-inline" role="math">\([0,1]\)</span>.</p>
 <p><a id="O006-C140-CMP-MS10-P03-ANS"></a></p>
 <h3>Jawaban singkat</h3>
-<p><span class="math-inline" role="math">\(\widehat\theta=M\)</span> dan, di bawah nol,</p>
-<div class="math-display" role="math">\[T=-2n\log(M/\theta_0)=-2\log U\sim\chi^2_2\]</div>
-<p>secara eksak. Limit bukan <span class="math-inline" role="math">\(\chi^2_1\)</span> karena support <span class="math-inline" role="math">\((0,\theta)\)</span> berubah
-dengan parameter, sehingga diferensiasi likelihood dan identitas score reguler
-tidak memenuhi kondisi Wilks.</p>
+<p>Untuk <span class="math-inline" role="math">\(M&gt;0\)</span>, MLE adalah <span class="math-inline" role="math">\(\widehat\theta=M\)</span>. Statistik LR ialah</p>
+<div class="math-display" role="math">\[T=
+\begin{cases}
+-2n\log(M/\theta_0),&amp;0&lt;M\leq\theta_0,\\
++\infty,&amp;M&gt;\theta_0.
+\end{cases}\]</div>
+<p>Jika <span class="math-inline" role="math">\(M=0\)</span>, fungsi kemungkinan penuh tidak berbatas ketika <span class="math-inline" role="math">\(\theta\downarrow0\)</span>,
+sehingga tidak ada MLE berhingga; kejadian ini berpeluang nol di bawah setiap
+<span class="math-inline" role="math">\(\theta&gt;0\)</span>. Di bawah hipotesis nol, <span class="math-inline" role="math">\(0&lt;M\leq\theta_0\)</span> hampir pasti dan
+<span class="math-inline" role="math">\(U=(M/\theta_0)^n\sim\operatorname{Unif}(0,1)\)</span>, sehingga
+<span class="math-inline" role="math">\(T=-2\log U\sim\chi^2_2\)</span> secara eksak. Distribusi ini bukan <span class="math-inline" role="math">\(\chi^2_1\)</span> karena dukungan <span class="math-inline" role="math">\((0,\theta)\)</span>
+berubah dengan parameter, sehingga diferensiasi fungsi kemungkinan dan identitas
+skor yang disyaratkan oleh kondisi Wilks tidak berlaku.</p>
 <p><a id="O006-C140-CMP-MS10-P03-SOL"></a></p>
 <h3>Solusi lengkap</h3>
-<p>Likelihood adalah</p>
+<p>Fungsi kemungkinan adalah</p>
 <div class="math-display" role="math">\[L(\theta;x)=\theta^{-n}\mathbf1\{M\leq\theta\}.\]</div>
-<p>Pada himpunan <span class="math-inline" role="math">\(\theta\geq M\)</span>, fungsi <span class="math-inline" role="math">\(\theta^{-n}\)</span> menurun, sehingga MLE
-<span class="math-inline" role="math">\(\widehat\theta=M\)</span>. Di bawah <span class="math-inline" role="math">\(H_0\)</span>, <span class="math-inline" role="math">\(M\leq\theta_0\)</span> hampir pasti dan</p>
+<p>Untuk <span class="math-inline" role="math">\(M&gt;0\)</span>, pada himpunan <span class="math-inline" role="math">\(\theta\geq M\)</span> fungsi <span class="math-inline" role="math">\(\theta^{-n}\)</span> menurun,
+sehingga MLE adalah <span class="math-inline" role="math">\(\widehat\theta=M\)</span>. Jika <span class="math-inline" role="math">\(M=0\)</span>, fungsi kemungkinan tidak
+berbatas ketika <span class="math-inline" role="math">\(\theta\downarrow0\)</span> dan tidak ada MLE berhingga; kejadian ini
+berpeluang nol di bawah setiap <span class="math-inline" role="math">\(\theta&gt;0\)</span>. Untuk <span class="math-inline" role="math">\(M&gt;0\)</span>, rasio fungsi
+kemungkinannya adalah</p>
 <div class="math-display" role="math">\[\Lambda
 =\frac{L(\theta_0)}{L(\widehat\theta)}
-=\left(\frac{M}{\theta_0}\right)^n.\]</div>
-<p>CDF maksimum di bawah nol adalah
+=\begin{cases}
+\left(M/\theta_0\right)^n,&amp;M\leq\theta_0,\\
+0,&amp;M&gt;\theta_0.
+\end{cases}\]</div>
+<p>Kasus kedua terjadi karena <span class="math-inline" role="math">\(L(\theta_0)=0\)</span>, sehingga <span class="math-inline" role="math">\(T=-2\log\Lambda=+\infty\)</span>.
+Di bawah <span class="math-inline" role="math">\(H_0\)</span>, <span class="math-inline" role="math">\(0&lt;M\leq\theta_0\)</span> hampir pasti.</p>
+<p>CDF maksimum di bawah hipotesis nol adalah
 <span class="math-inline" role="math">\(P(M\leq m)=(m/\theta_0)^n\)</span> untuk <span class="math-inline" role="math">\(0&lt;m&lt;\theta_0\)</span>. Karena itu</p>
 <div class="math-display" role="math">\[P\left\{\left(\frac M{\theta_0}\right)^n\leq u\right\}
 =P(M\leq\theta_0u^{1/n})=u,\]</div>
-<p>jadi <span class="math-inline" role="math">\(U=(M/\theta_0)^n\sim\operatorname{Unif}(0,1)\)</span>. Transformasi eksponensial
+<p>jadi <span class="math-inline" role="math">\(U=(M/\theta_0)^n\sim\operatorname{Unif}(0,1)\)</span>. Transformasi logaritmik
 memberi <span class="math-inline" role="math">\(-2\log U\sim\chi^2_2\)</span> secara eksak.</p>
-<p>Wilks reguler untuk satu restriksi akan menyarankan <span class="math-inline" role="math">\(\chi^2_1\)</span>, tetapi support
-data bergantung pada <span class="math-inline" role="math">\(\theta\)</span>. Turunan indikator support menimbulkan kontribusi
-batas yang tidak boleh diabaikan; score reguler tidak mempunyai perilaku mean
+<p>Wilks reguler untuk satu restriksi akan menghasilkan <span class="math-inline" role="math">\(\chi^2_1\)</span>, tetapi dukungan
+data bergantung pada <span class="math-inline" role="math">\(\theta\)</span>. Turunan indikator dukungan menimbulkan kontribusi
+batas yang tidak boleh diabaikan; skor reguler tidak mempunyai sifat bermean
 nol yang diperlukan. Fakta bahwa <span class="math-inline" role="math">\(\theta_0&gt;0\)</span> adalah titik interior ruang
-parameter tidak memperbaiki kegagalan support bersama.</p>
+parameter tidak memperbaiki pelanggaran asumsi dukungan yang tetap.</p>
 <p><a id="O006-C140-CMP-MS10-P04"></a></p>
 <h2>Masalah 4 — parameter pada batas dan limit campuran</h2>
-<!--PROBLEM_META {"id":"O006-C140-CMP-MS10-P04","prerequisites":["O006-C140-CMP-D005"],"objective":"menurunkan limit LR pada parameter batas dan memilih nilai kritis yang benar","difficulty":"lanjut","misconceptions":["parameter batas tetap memakai Wilks chi-kuadrat biasa","massa titik nol dapat diabaikan","nilai kritis chi-kuadrat 0,95 selalu sesuai untuk uji level 0,05"]}-->
+<!--PROBLEM_META {"id":"O006-C140-CMP-MS10-P04","prerequisites":["O006-C140-CMP-D005"],"objective":"menurunkan limit LR pada parameter batas dan memilih nilai kritis yang benar","difficulty":"lanjut","misconceptions":["parameter batas tetap memakai Wilks chi-kuadrat biasa","massa titik nol dapat diabaikan","nilai kritis chi-kuadrat 0,95 selalu sesuai untuk uji beraras 0,05"]}-->
 <p>Misalkan <span class="math-inline" role="math">\(X_1,\ldots,X_n\)</span> iid <span class="math-inline" role="math">\(N(\mu,1)\)</span> tetapi ruang parameter dibatasi
 <span class="math-inline" role="math">\(\mu\geq0\)</span>. Uji <span class="math-inline" role="math">\(H_0:\mu=0\)</span> melawan <span class="math-inline" role="math">\(H_1:\mu&gt;0\)</span> dengan LR.</p>
 <ol>
 <li>Turunkan MLE terbatas dan statistik LR.</li>
 <li>Tentukan distribusi nolnya.</li>
-<li>Tentukan persamaan nilai kritis untuk level <span class="math-inline" role="math">\(0{,}05\)</span> dan bandingkan dengan
-nilai kritis Wilks biasa <span class="math-inline" role="math">\(\chi^2_{1,0.95}\)</span>.</li>
+<li>Tentukan persamaan nilai kritis untuk aras <span class="math-inline" role="math">\(0{,}05\)</span> dan bandingkan dengan
+nilai kritis Wilks biasa <span class="math-inline" role="math">\(\chi^2_{1;\,0{,}95}\)</span>.</li>
 </ol>
 <p><a id="O006-C140-CMP-MS10-P04-H01"></a></p>
 <h3>Petunjuk 1</h3>
 <p>MLE terbatas adalah <span class="math-inline" role="math">\(\max(0,\bar X)\)</span>. Gunakan
-<span class="math-inline" role="math">\(Z=\sqrt n\bar X\sim N(0,1)\)</span> di bawah nol.</p>
+<span class="math-inline" role="math">\(Z=\sqrt n\bar X\sim N(0,1)\)</span> di bawah hipotesis nol.</p>
 <p><a id="O006-C140-CMP-MS10-P04-H02"></a></p>
 <h3>Petunjuk 2</h3>
 <p>Ketika <span class="math-inline" role="math">\(Z\leq0\)</span>, MLE sama dengan nilai nol sehingga statistik LR tepat nol.
@@ -194,34 +226,35 @@ Ketika <span class="math-inline" role="math">\(Z&gt;0\)</span>, statistiknya <sp
 <h3>Jawaban singkat</h3>
 <div class="math-display" role="math">\[\widehat\mu=\max(0,\bar X),\qquad
 T=\{\max(0,Z)\}^2,\quad Z=\sqrt n\bar X.\]</div>
-<p>Di bawah nol,
-<span class="math-inline" role="math">\(T\sim\tfrac12\delta_0+\frac12\chi^2_1\)</span>. Nilai kritis <span class="math-inline" role="math">\(c\)</span> level
+<p>Di bawah hipotesis nol,
+<span class="math-inline" role="math">\(T\sim\tfrac12\delta_0+\frac12\chi^2_1\)</span>. Nilai kritis <span class="math-inline" role="math">\(c\)</span> beraras
 <span class="math-inline" role="math">\(0{,}05\)</span> memenuhi <span class="math-inline" role="math">\(P(\chi^2_1&gt;c)=0{,}10\)</span>, jadi
-<span class="math-inline" role="math">\(c=\chi^2_{1,0.90}\approx2{,}7055\)</span>, bukan <span class="math-inline" role="math">\(3{,}8415\)</span>.</p>
+<span class="math-inline" role="math">\(c=\chi^2_{1;\,0{,}90}\approx2{,}7055\)</span>, bukan <span class="math-inline" role="math">\(3{,}8415\)</span>.</p>
 <p><a id="O006-C140-CMP-MS10-P04-SOL"></a></p>
 <h3>Solusi lengkap</h3>
-<p>Log-likelihood kuadratik dimaksimumkan tanpa batas pada <span class="math-inline" role="math">\(\bar X\)</span>. Proyeksi ke
-<span class="math-inline" role="math">\([0,\infty)\)</span> memberi <span class="math-inline" role="math">\(\widehat\mu=\max(0,\bar X)\)</span>. Jika <span class="math-inline" role="math">\(\bar X\leq0\)</span>,
+<p>Jika ruang parameter tidak dibatasi, fungsi log-kemungkinan kuadratik
+dimaksimumkan pada <span class="math-inline" role="math">\(\bar X\)</span>. Proyeksi ke <span class="math-inline" role="math">\([0,\infty)\)</span> memberi
+<span class="math-inline" role="math">\(\widehat\mu=\max(0,\bar X)\)</span>. Jika <span class="math-inline" role="math">\(\bar X\leq0\)</span>,
 MLE terbatas sama dengan nol dan <span class="math-inline" role="math">\(T=2\{\ell(\widehat\mu)-\ell(0)\}=0\)</span>.
 Jika <span class="math-inline" role="math">\(\bar X&gt;0\)</span>,</p>
 <div class="math-display" role="math">\[T=2\{\ell(\bar X)-\ell(0)\}=n\bar X^2=Z^2.\]</div>
-<p>Di bawah nol, <span class="math-inline" role="math">\(P(Z\leq0)=1/2\)</span>. Pada bagian <span class="math-inline" role="math">\(Z&gt;0\)</span>, kuadrat mempunyai distribusi
+<p>Di bawah hipotesis nol, <span class="math-inline" role="math">\(P(Z\leq0)=1/2\)</span>. Pada kejadian <span class="math-inline" role="math">\(Z&gt;0\)</span>, kuadrat mempunyai distribusi
 <span class="math-inline" role="math">\(\chi^2_1\)</span> yang menyumbang setengah massa. Maka</p>
 <div class="math-display" role="math">\[T\sim\frac12\delta_0+\frac12\chi^2_1.\]</div>
 <p>Untuk <span class="math-inline" role="math">\(c&gt;0\)</span>,</p>
 <div class="math-display" role="math">\[P_0(T&gt;c)=\frac12P(\chi^2_1&gt;c).\]</div>
 <p>Menyamakan dengan <span class="math-inline" role="math">\(0{,}05\)</span> memerlukan ekor <span class="math-inline" role="math">\(\chi^2_1\)</span> sebesar <span class="math-inline" role="math">\(0{,}10\)</span>, yaitu
-kuantil ke-<span class="math-inline" role="math">\(0{,}90\)</span>. Memakai kuantil ke-<span class="math-inline" role="math">\(0{,}95\)</span> menghasilkan level
+kuantil ke-<span class="math-inline" role="math">\(0{,}90\)</span>. Memakai kuantil ke-<span class="math-inline" role="math">\(0{,}95\)</span> menghasilkan aras
 <span class="math-inline" role="math">\(0{,}025\)</span>, terlalu konservatif. Penyebabnya adalah nol terletak pada batas
 ruang parameter, bukan titik interior seperti yang disyaratkan Wilks biasa.</p>
 <p><a id="O006-C140-CMP-MS10-P05"></a></p>
-<h2>Masalah 5 — risk estimator proporsi yang disusutkan</h2>
-<!--PROBLEM_META {"id":"O006-C140-CMP-MS10-P05","prerequisites":["O006-C140-CMP-D007-THM01","O006-C140-CMP-D007-DEF06"],"objective":"menghitung bias, varians, dan risk lalu menguji dominasi seragam","difficulty":"menengah","misconceptions":["estimator dengan risk lebih kecil di p sama dengan setengah mendominasi","varians lebih kecil menjamin MSE lebih kecil","risk pada batas parameter boleh diabaikan"]}-->
-<p>Untuk <span class="math-inline" role="math">\(S\sim\operatorname{Binomial}(n,p)\)</span>, bandingkan di bawah loss kuadratik</p>
+<h2>Masalah 5 — risiko penduga proporsi yang disusutkan</h2>
+<!--PROBLEM_META {"id":"O006-C140-CMP-MS10-P05","prerequisites":["O006-C140-CMP-D007-THM01","O006-C140-CMP-D007-DEF06"],"objective":"menghitung bias, varians, dan risiko lalu menguji dominasi seragam","difficulty":"menengah","misconceptions":["penduga dengan risiko lebih kecil pada p=1/2 mendominasi","varians lebih kecil menjamin MSE lebih kecil","risiko pada batas parameter boleh diabaikan"]}-->
+<p>Untuk <span class="math-inline" role="math">\(S\sim\operatorname{Binomial}(n,p)\)</span>, bandingkan di bawah kerugian kuadratik</p>
 <div class="math-display" role="math">\[\delta_0=\frac Sn,
 \qquad
 \delta_L=\frac{S+1}{n+2}.\]</div>
-<p>Turunkan bias, varians, dan risk <span class="math-inline" role="math">\(\delta_L\)</span>. Bandingkan kedua estimator pada
+<p>Turunkan bias, varians, dan risiko <span class="math-inline" role="math">\(\delta_L\)</span>. Bandingkan kedua penduga pada
 <span class="math-inline" role="math">\(p=1/2\)</span> dan <span class="math-inline" role="math">\(p=0\)</span>. Apakah salah satunya mendominasi yang lain berdasarkan dua
 perbandingan ini?</p>
 <p><a id="O006-C140-CMP-MS10-P05-H01"></a></p>
@@ -232,23 +265,25 @@ perbandingan ini?</p>
 <p>Pada <span class="math-inline" role="math">\(p=0\)</span>, <span class="math-inline" role="math">\(S=0\)</span> hampir pasti. Pada <span class="math-inline" role="math">\(p=1/2\)</span>, bias <span class="math-inline" role="math">\(\delta_L\)</span> menghilang.</p>
 <p><a id="O006-C140-CMP-MS10-P05-ANS"></a></p>
 <h3>Jawaban singkat</h3>
-<div class="math-display" role="math">\[\operatorname{Bias}_p(\delta_L)=\frac{1-2p}{n+2},\]</div>
+<div class="math-display" role="math">\[\operatorname{Bias}_p(\delta_L)=\frac{1-2p}{n+2},
+\qquad
+\operatorname{Var}_p(\delta_L)=\frac{np(1-p)}{(n+2)^2},\]</div>
 <div class="math-display" role="math">\[R(p,\delta_L)=
 \frac{np(1-p)+(1-2p)^2}{(n+2)^2}.\]</div>
-<p>Pada <span class="math-inline" role="math">\(p=1/2\)</span>, <span class="math-inline" role="math">\(\delta_L\)</span> lebih baik; pada <span class="math-inline" role="math">\(p=0\)</span>, <span class="math-inline" role="math">\(\delta_0\)</span> mempunyai risk
+<p>Pada <span class="math-inline" role="math">\(p=1/2\)</span>, <span class="math-inline" role="math">\(\delta_L\)</span> lebih baik; pada <span class="math-inline" role="math">\(p=0\)</span>, <span class="math-inline" role="math">\(\delta_0\)</span> mempunyai risiko
 nol sedangkan <span class="math-inline" role="math">\(\delta_L\)</span> positif. Jadi <span class="math-inline" role="math">\(\delta_L\)</span> tidak mendominasi
-<span class="math-inline" role="math">\(\delta_0\)</span>, dan risk keduanya bersilangan.</p>
+<span class="math-inline" role="math">\(\delta_0\)</span>, dan risiko keduanya bersilangan.</p>
 <p><a id="O006-C140-CMP-MS10-P05-SOL"></a></p>
 <h3>Solusi lengkap</h3>
-<p>Mean estimator Laplace adalah</p>
+<p>Rataan penduga Laplace adalah</p>
 <div class="math-display" role="math">\[E_p\delta_L=\frac{np+1}{n+2},\]</div>
 <p>sehingga bias terhadap <span class="math-inline" role="math">\(p\)</span> ialah</p>
 <div class="math-display" role="math">\[\frac{np+1}{n+2}-p=\frac{1-2p}{n+2}.\]</div>
 <p>Variansnya</p>
 <div class="math-display" role="math">\[\operatorname{Var}_p(\delta_L)
 =\frac{np(1-p)}{(n+2)^2}.\]</div>
-<p>Dekomposisi bias–varians memberi formula risk pada jawaban. Sementara itu
-<span class="math-inline" role="math">\(\delta_0\)</span> tak-bias dan</p>
+<p>Dekomposisi bias–varians memberi formula risiko pada jawaban. Sementara itu
+<span class="math-inline" role="math">\(\delta_0\)</span> tak bias dan</p>
 <div class="math-display" role="math">\[R(p,\delta_0)=\frac{p(1-p)}n.\]</div>
 <p>Pada <span class="math-inline" role="math">\(p=1/2\)</span>,</p>
 <div class="math-display" role="math">\[R(1/2,\delta_L)=\frac{n}{4(n+2)^2}
@@ -257,27 +292,27 @@ nol sedangkan <span class="math-inline" role="math">\(\delta_L\)</span> positif.
 <div class="math-display" role="math">\[R(0,\delta_0)=0,
 \qquad
 R(0,\delta_L)=\frac1{(n+2)^2}&gt;0.\]</div>
-<p>Jadi <span class="math-inline" role="math">\(\delta_L\)</span> tidak mendominasi <span class="math-inline" role="math">\(\delta_0\)</span>. Dua titik ini juga cukup untuk
-menunjukkan bahwa <span class="math-inline" role="math">\(\delta_0\)</span> tidak lebih buruk di semua titik sambil
-<span class="math-inline" role="math">\(\delta_L\)</span> tidak lebih buruk di semua titik; risk bersilangan. Klaim
-admissibility salah satu estimator masih memerlukan pembandingan terhadap
+<p>Jadi <span class="math-inline" role="math">\(\delta_L\)</span> tidak mendominasi <span class="math-inline" role="math">\(\delta_0\)</span>. Sebaliknya, hasil pada <span class="math-inline" role="math">\(p=1/2\)</span>
+menunjukkan bahwa <span class="math-inline" role="math">\(\delta_0\)</span> juga tidak mendominasi <span class="math-inline" role="math">\(\delta_L\)</span>. Dengan demikian,
+kedua fungsi risiko saling bersilangan. Klaim
+keadmisibelan salah satu penduga masih memerlukan pembandingan terhadap
 seluruh kelas aturan, bukan hanya pasangan ini.</p>
 <p><a id="O006-C140-CMP-MS10-P06"></a></p>
 <h2>Masalah 6 — perbaikan Rao–Blackwell Bernoulli</h2>
-<!--PROBLEM_META {"id":"O006-C140-CMP-MS10-P06","prerequisites":["O006-C140-CMP-D007-THM03","O006-C140-CMP-D007-THM04","O006-016-02-0010"],"objective":"menerapkan kecukupan dan Rao–Blackwell untuk memperoleh pengurangan risk eksak","difficulty":"menengah","misconceptions":["ekspektasi bersyarat otomatis bebas parameter tanpa kecukupan","Rao–Blackwell hanya memberi ketaksamaan tanpa besar perbaikan","estimator awal harus sudah berbasis statistik cukup"]}-->
+<!--PROBLEM_META {"id":"O006-C140-CMP-MS10-P06","prerequisites":["O006-C140-CMP-D007-THM03","O006-C140-CMP-D007-THM04","O006-016-02-0010"],"objective":"menerapkan kecukupan dan Rao–Blackwell untuk memperoleh pengurangan risiko eksak","difficulty":"menengah","misconceptions":["ekspektasi bersyarat otomatis bebas parameter tanpa kecukupan","Rao–Blackwell hanya memberi ketaksamaan tanpa besar perbaikan","penduga awal harus sudah berbasis statistik cukup"]}-->
 <p>Misalkan <span class="math-inline" role="math">\(X_1,\ldots,X_n\)</span> iid Bernoulli<span class="math-inline" role="math">\((p)\)</span>, <span class="math-inline" role="math">\(n&gt;1\)</span>, dan
-<span class="math-inline" role="math">\(S=\sum_iX_i\)</span>. Mulai dari estimator <span class="math-inline" role="math">\(\delta=X_1\)</span> untuk <span class="math-inline" role="math">\(p\)</span>.</p>
+<span class="math-inline" role="math">\(S=\sum_iX_i\)</span>. Mulai dari penduga <span class="math-inline" role="math">\(\delta=X_1\)</span> untuk <span class="math-inline" role="math">\(p\)</span>.</p>
 <ol>
 <li>Buktikan <span class="math-inline" role="math">\(S\)</span> cukup.</li>
 <li>Hitung <span class="math-inline" role="math">\(E_p(X_1\mid S)\)</span> tanpa memakai <span class="math-inline" role="math">\(p\)</span>.</li>
-<li>Hitung penurunan risk kuadratik secara eksak.</li>
+<li>Hitung penurunan risiko kuadratik secara eksak.</li>
 <li>Hubungkan langkah Anda dengan simpul donor kecukupan dan Rao–Blackwell.</li>
 </ol>
 <p><a id="O006-C140-CMP-MS10-P06-H01"></a></p>
 <h3>Petunjuk 1</h3>
-<p>Likelihood dapat difaktorkan menjadi
+<p>Fungsi kemungkinan dapat difaktorkan menjadi
 <span class="math-inline" role="math">\(p^S(1-p)^{n-S}\)</span> kali faktor yang tidak bergantung pada <span class="math-inline" role="math">\(p\)</span>; bandingkan
-<a class="xref external" data-target-id="O006-016-02-0001" href="https://kokunoyumeto.github.io/penn-state-stat-415-id/components/random-completeness/#O006-016-02-0001">A statistic \(U\) is sufficient for \(\theta\) if the conditional distribution of \(\bs X\) given \(U\) does not depend </a> dan <a class="xref external" data-target-id="O006-016-02-0003" href="https://kokunoyumeto.github.io/penn-state-stat-415-id/components/random-completeness/#O006-016-02-0003">Fisher-Neyman Factorization Theorem. Let \(f_\theta\) denote the probability density function of \(\bs X\) and suppose t</a>.</p>
+<a class="xref external" data-target-id="O006-016-02-0001" href="https://kokunoyumeto.github.io/penn-state-stat-415-id/components/random-completeness/random/point/Sufficient.html#suf1">Definisi statistik cukup</a> dan <a class="xref external" data-target-id="O006-016-02-0003" href="https://kokunoyumeto.github.io/penn-state-stat-415-id/components/random-completeness/random/point/Sufficient.html#fac">Teorema faktorisasi Fisher–Neyman</a>.</p>
 <p><a id="O006-C140-CMP-MS10-P06-H02"></a></p>
 <h3>Petunjuk 2</h3>
 <p>Diberikan <span class="math-inline" role="math">\(S=s\)</span>, semua penempatan <span class="math-inline" role="math">\(s\)</span> sukses di antara <span class="math-inline" role="math">\(n\)</span> posisi mempunyai
@@ -285,22 +320,22 @@ probabilitas sama. Gunakan simetri posisi pertama.</p>
 <p><a id="O006-C140-CMP-MS10-P06-ANS"></a></p>
 <h3>Jawaban singkat</h3>
 <p><span class="math-inline" role="math">\(S\)</span> cukup, <span class="math-inline" role="math">\(E_p(X_1\mid S)=S/n\)</span>, dan Rao–Blackwell mengubah <span class="math-inline" role="math">\(X_1\)</span> menjadi
-<span class="math-inline" role="math">\(\bar X=S/n\)</span>. Risk turun dari <span class="math-inline" role="math">\(p(1-p)\)</span> menjadi <span class="math-inline" role="math">\(p(1-p)/n\)</span>, yaitu penurunan
+<span class="math-inline" role="math">\(\bar X=S/n\)</span>. Risiko turun dari <span class="math-inline" role="math">\(p(1-p)\)</span> menjadi <span class="math-inline" role="math">\(p(1-p)/n\)</span>, yaitu penurunan
 <span class="math-inline" role="math">\(p(1-p)(1-1/n)\)</span>.</p>
 <p><a id="O006-C140-CMP-MS10-P06-SOL"></a></p>
 <h3>Solusi lengkap</h3>
-<p>Likelihood sampel adalah</p>
+<p>Fungsi kemungkinan sampel adalah</p>
 <div class="math-display" role="math">\[L(p;x)=p^{\sum_i x_i}(1-p)^{n-\sum_i x_i},\]</div>
 <p>sehingga faktorisasi Fisher–Neyman memperlihatkan bahwa <span class="math-inline" role="math">\(S\)</span> cukup. Ini adalah
 penerapan, bukan pengulangan prosa, dari simpul donor
-<a class="xref external" data-target-id="O006-016-02-0001" href="https://kokunoyumeto.github.io/penn-state-stat-415-id/components/random-completeness/#O006-016-02-0001">A statistic \(U\) is sufficient for \(\theta\) if the conditional distribution of \(\bs X\) given \(U\) does not depend </a> dan <a class="xref external" data-target-id="O006-016-02-0003" href="https://kokunoyumeto.github.io/penn-state-stat-415-id/components/random-completeness/#O006-016-02-0003">Fisher-Neyman Factorization Theorem. Let \(f_\theta\) denote the probability density function of \(\bs X\) and suppose t</a>.</p>
+<a class="xref external" data-target-id="O006-016-02-0001" href="https://kokunoyumeto.github.io/penn-state-stat-415-id/components/random-completeness/random/point/Sufficient.html#suf1">Definisi statistik cukup</a> dan <a class="xref external" data-target-id="O006-016-02-0003" href="https://kokunoyumeto.github.io/penn-state-stat-415-id/components/random-completeness/random/point/Sufficient.html#fac">Teorema faktorisasi Fisher–Neyman</a>.</p>
 <p>Jika <span class="math-inline" role="math">\(S=s\)</span>, tepat <span class="math-inline" role="math">\(s\)</span> dari <span class="math-inline" role="math">\(n\)</span> posisi bernilai satu dan seluruh konfigurasi
-mempunyai probabilitas bersyarat sama. Peluang posisi pertama termasuk di
-antara posisi sukses adalah <span class="math-inline" role="math">\(s/n\)</span>, maka</p>
+mempunyai probabilitas bersyarat yang sama. Peluang bahwa posisi pertama
+merupakan salah satu posisi yang bernilai satu adalah <span class="math-inline" role="math">\(s/n\)</span>, maka</p>
 <div class="math-display" role="math">\[E_p(X_1\mid S=s)=\frac sn.\]</div>
 <p>Fungsi ini tidak mengandung <span class="math-inline" role="math">\(p\)</span>, sebagaimana dijamin oleh kecukupan. Teorema
-Rao–Blackwell pada simpul <a class="xref external" data-target-id="O006-016-02-0010" href="https://kokunoyumeto.github.io/penn-state-stat-415-id/components/random-completeness/#O006-016-02-0010">Rao-Blackwell Theorem. Suppose that \(U\) is sufficient for \(\theta\) and that \(V\) is an unbiased estimator of a real</a> menghasilkan estimator
-<span class="math-inline" role="math">\(\delta^*=S/n\)</span>. Keduanya tak-bias. Di bawah loss kuadratik,</p>
+Rao–Blackwell pada simpul <a class="xref external" data-target-id="O006-016-02-0010" href="https://kokunoyumeto.github.io/penn-state-stat-415-id/components/random-completeness/random/point/Sufficient.html#rbt">Teorema Rao–Blackwell</a> menghasilkan penduga
+<span class="math-inline" role="math">\(\delta^*=S/n\)</span>. Keduanya tak bias. Di bawah kerugian kuadratik,</p>
 <div class="math-display" role="math">\[R(p,X_1)=\operatorname{Var}_p(X_1)=p(1-p),\]</div>
 <p>dan</p>
 <div class="math-display" role="math">\[R(p,S/n)=\frac{\operatorname{Var}_p(S)}{n^2}
@@ -311,12 +346,12 @@ Rao–Blackwell pada simpul <a class="xref external" data-target-id="O006-016-02
 <span class="math-inline" role="math">\(E_p\operatorname{Var}(X_1\mid S)\)</span> menurut identitas proyeksi bersyarat.</p>
 <p><a id="O006-C140-CMP-MS10-P07"></a></p>
 <h2>Masalah 7 — Lehmann–Scheffé pada keluarga Poisson</h2>
-<!--PROBLEM_META {"id":"O006-C140-CMP-MS10-P07","prerequisites":["O006-C140-CMP-D007-THM05","O006-016-02-0011","O006-016-02-0013"],"objective":"membuktikan kecukupan dan kelengkapan lalu membangun estimator UMVU","difficulty":"lanjut","misconceptions":["kecukupan saja memberi ketunggalan UMVU","fungsi statistik cukup otomatis tak-bias","UMVU berarti admissible di kelas semua estimator"]}-->
+<!--PROBLEM_META {"id":"O006-C140-CMP-MS10-P07","prerequisites":["O006-C140-CMP-D007-THM05","O006-016-02-0011","O006-016-02-0013"],"objective":"membuktikan kecukupan dan kelengkapan lalu membangun penduga UMVU","difficulty":"lanjut","misconceptions":["kecukupan saja memberi ketunggalan UMVU","fungsi statistik cukup otomatis tak bias","UMVU berarti keadmisibel di kelas semua penduga"]}-->
 <p>Misalkan <span class="math-inline" role="math">\(X_1,\ldots,X_n\)</span> iid Poisson<span class="math-inline" role="math">\((\lambda)\)</span> dengan <span class="math-inline" role="math">\(n\geq2\)</span>, dan
 <span class="math-inline" role="math">\(S=\sum_iX_i\)</span>.</p>
 <ol>
 <li>Buktikan <span class="math-inline" role="math">\(S\)</span> cukup dan lengkap.</li>
-<li>Temukan estimator tak-bias berbasis <span class="math-inline" role="math">\(S\)</span> untuk <span class="math-inline" role="math">\(e^{-\lambda}\)</span>.</li>
+<li>Temukan penduga tak bias berbasis <span class="math-inline" role="math">\(S\)</span> untuk <span class="math-inline" role="math">\(e^{-\lambda}\)</span>.</li>
 <li>Buktikan status UMVU-nya dan nyatakan batas klaim tersebut.</li>
 </ol>
 <p><a id="O006-C140-CMP-MS10-P07-H01"></a></p>
@@ -329,14 +364,15 @@ dengan <span class="math-inline" role="math">\(e^{n\lambda}\)</span> dan gunakan
 <span class="math-inline" role="math">\(a=1-1/n\)</span>.</p>
 <p><a id="O006-C140-CMP-MS10-P07-ANS"></a></p>
 <h3>Jawaban singkat</h3>
-<p><span class="math-inline" role="math">\(S\sim\operatorname{Poisson}(n\lambda)\)</span> adalah statistik cukup-lengkap dan</p>
+<p>Statistik <span class="math-inline" role="math">\(S\)</span>, yang berdistribusi <span class="math-inline" role="math">\(\operatorname{Poisson}(n\lambda)\)</span>, cukup dan
+lengkap. Selain itu,</p>
 <div class="math-display" role="math">\[U=\left(1-\frac1n\right)^S\]</div>
-<p>tak-bias untuk <span class="math-inline" role="math">\(e^{-\lambda}\)</span>. Menurut Lehmann–Scheffé, <span class="math-inline" role="math">\(U\)</span> adalah UMVU di
-kelas estimator tak-bias bermomen kedua; hasil itu tidak dengan sendirinya
-membuktikan admissibility terhadap seluruh estimator bias.</p>
+<p>tak bias untuk <span class="math-inline" role="math">\(e^{-\lambda}\)</span>. Menurut Lehmann–Scheffé, <span class="math-inline" role="math">\(U\)</span> adalah UMVU di
+kelas penduga tak bias bermomen kedua; hasil itu tidak dengan sendirinya
+membuktikan keadmisibelan terhadap seluruh penduga bias.</p>
 <p><a id="O006-C140-CMP-MS10-P07-SOL"></a></p>
 <h3>Solusi lengkap</h3>
-<p>Likelihood sampel dapat ditulis</p>
+<p>Fungsi kemungkinan sampel dapat ditulis</p>
 <div class="math-display" role="math">\[L(\lambda;x)
 =e^{-n\lambda}\lambda^{\sum_i x_i}
 \prod_{i=1}^n\frac1{x_i!},\]</div>
@@ -345,30 +381,30 @@ membuktikan admissibility terhadap seluruh estimator bias.</p>
 Karena <span class="math-inline" role="math">\(S\sim\operatorname{Poisson}(n\lambda)\)</span>,</p>
 <div class="math-display" role="math">\[0=e^{n\lambda}E_\lambda h(S)
 =\sum_{s=0}^{\infty}h(s)\frac{(n\lambda)^s}{s!}.\]</div>
-<p>Deret itu konvergen absolut pada setiap radius positif. Jika nol pada seluruh
-interval <span class="math-inline" role="math">\(\lambda&gt;0\)</span>, ketunggalan deret pangkat memberi <span class="math-inline" role="math">\(h(s)=0\)</span> untuk setiap
-<span class="math-inline" role="math">\(s\)</span>. Inilah kelengkapan pada simpul donor <a class="xref external" data-target-id="O006-016-02-0011" href="https://kokunoyumeto.github.io/penn-state-stat-415-id/components/random-completeness/#O006-016-02-0011">Suppose that \(U = u(\bs X)\) is a statistic taking values in a set \(R\). Then \(U\) is a complete statistic for \(\the</a>.</p>
+<p>Deret itu konvergen absolut untuk setiap <span class="math-inline" role="math">\(\lambda&gt;0\)</span>. Karena nilainya nol pada
+seluruh interval <span class="math-inline" role="math">\(\lambda&gt;0\)</span>, ketunggalan deret pangkat memberi <span class="math-inline" role="math">\(h(s)=0\)</span> untuk setiap
+<span class="math-inline" role="math">\(s\)</span>. Inilah kelengkapan pada simpul donor <a class="xref external" data-target-id="O006-016-02-0011" href="https://kokunoyumeto.github.io/penn-state-stat-415-id/components/random-completeness/random/point/Sufficient.html#o006.random.point.sufficient.unit-11">Definisi statistik lengkap</a>.</p>
 <p>Fungsi pembangkit probabilitas memberi</p>
 <div class="math-display" role="math">\[E_\lambda\left(1-\frac1n\right)^S
 =\exp\left[n\lambda\left\{1-\frac1n-1\right\}\right]
 =e^{-\lambda}.\]</div>
-<p>Jadi <span class="math-inline" role="math">\(U\)</span> tak-bias dan merupakan fungsi statistik cukup-lengkap. Teorema
-Lehmann–Scheffé <a class="xref external" data-target-id="O006-016-02-0013" href="https://kokunoyumeto.github.io/penn-state-stat-415-id/components/random-completeness/#O006-016-02-0013">Lehmann-Scheffé Theorem. Suppose that \(U\) is sufficient and complete for \(\theta\) and that \(V = r(U)\) is an unbias</a> menyatakan bahwa setiap estimator
-tak-bias lain, setelah di-Rao–Blackwell-kan terhadap <span class="math-inline" role="math">\(S\)</span>, harus sama hampir
+<p>Jadi <span class="math-inline" role="math">\(U\)</span> tak bias dan merupakan fungsi dari statistik yang cukup dan lengkap. Teorema
+Lehmann–Scheffé <a class="xref external" data-target-id="O006-016-02-0013" href="https://kokunoyumeto.github.io/penn-state-stat-415-id/components/random-completeness/random/point/Sufficient.html#lst">Teorema Lehmann–Scheffé</a> menyatakan bahwa setiap penduga
+tak bias lain, setelah diperbaiki melalui Rao–Blackwell terhadap <span class="math-inline" role="math">\(S\)</span>, harus sama hampir
 pasti dengan <span class="math-inline" role="math">\(U\)</span>; varians <span class="math-inline" role="math">\(U\)</span> karena itu tidak lebih besar. Klaim yang sah
-adalah UMVU dalam kelas estimator tak-bias. Tanpa pembuktian risk terhadap
-semua estimator bias, tidak ada kesimpulan admissibility global.</p>
+adalah UMVU dalam kelas penduga tak bias. Tanpa pembuktian risiko terhadap
+semua penduga bias, tidak ada kesimpulan keadmisibelan global.</p>
 <p><a id="O006-C140-CMP-MS10-P08"></a></p>
 <h2>Masalah 8 — efisiensi estimasi varians normal</h2>
-<!--PROBLEM_META {"id":"O006-C140-CMP-MS10-P08","prerequisites":["O006-C140-CMP-D007-ASM01","O006-C140-CMP-D007-THM02"],"objective":"menghitung informasi Fisher dan membuktikan pencapaian batas Cramér–Rao","difficulty":"lanjut","misconceptions":["informasi untuk sigma sama dengan informasi untuk sigma kuadrat","mencapai Cramér–Rao membuktikan admissibility global","batas informasi tetap sah pada parameter batas nol"]}-->
+<!--PROBLEM_META {"id":"O006-C140-CMP-MS10-P08","prerequisites":["O006-C140-CMP-D007-ASM01","O006-C140-CMP-D007-THM02"],"objective":"menghitung informasi Fisher dan membuktikan pencapaian batas Cramér–Rao","difficulty":"lanjut","misconceptions":["informasi untuk sigma sama dengan informasi untuk sigma kuadrat","mencapai Cramér–Rao membuktikan keadmisibelan global","batas informasi tetap sah pada parameter batas nol"]}-->
 <p>Misalkan <span class="math-inline" role="math">\(X_1,\ldots,X_n\)</span> iid <span class="math-inline" role="math">\(N(\mu,\tau)\)</span>, dengan <span class="math-inline" role="math">\(\mu\)</span> diketahui dan
 parameter <span class="math-inline" role="math">\(\tau=\sigma^2&gt;0\)</span>. Definisikan</p>
 <div class="math-display" role="math">\[T=\sum_{i=1}^n(X_i-\mu)^2,
 \qquad
 \delta=\frac Tn.\]</div>
 <ol>
-<li>Hitung score dan informasi Fisher untuk parameter <span class="math-inline" role="math">\(\tau\)</span>.</li>
-<li>Buktikan <span class="math-inline" role="math">\(\delta\)</span> tak-bias dan mencapai batas Cramér–Rao untuk menaksir
+<li>Hitung skor dan informasi Fisher untuk parameter <span class="math-inline" role="math">\(\tau\)</span>.</li>
+<li>Buktikan <span class="math-inline" role="math">\(\delta\)</span> tak bias dan mencapai batas Cramér–Rao untuk menduga
 <span class="math-inline" role="math">\(g(\tau)=\tau\)</span>.</li>
 <li>Nyatakan dengan tepat apa yang belum dibuktikan oleh efisiensi ini.</li>
 </ol>
@@ -388,13 +424,13 @@ parameter <span class="math-inline" role="math">\(\tau=\sigma^2&gt;0\)</span>. D
 I_n(\tau)=\frac{n}{2\tau^2}.\]</div>
 <p><span class="math-inline" role="math">\(E(\delta)=\tau\)</span> dan
 <span class="math-inline" role="math">\(\operatorname{Var}(\delta)=2\tau^2/n=1/I_n(\tau)\)</span>, sehingga <span class="math-inline" role="math">\(\delta\)</span>
-efisien dalam kelas tak-bias reguler. Ini belum membuktikan admissibility
-terhadap semua estimator bias atau validitas pada batas <span class="math-inline" role="math">\(\tau=0\)</span>.</p>
+efisien dalam kelas tak bias reguler. Ini belum membuktikan keadmisibelan
+terhadap semua penduga bias atau validitas pada batas <span class="math-inline" role="math">\(\tau=0\)</span>.</p>
 <p><a id="O006-C140-CMP-MS10-P08-SOL"></a></p>
 <h3>Solusi lengkap</h3>
-<p>Log-likelihood tanpa konstanta adalah</p>
+<p>Fungsi log-kemungkinan tanpa konstanta adalah</p>
 <div class="math-display" role="math">\[\ell(\tau)=-\frac n2\log\tau-\frac{T}{2\tau}.\]</div>
-<p>Score-nya</p>
+<p>Skornya</p>
 <div class="math-display" role="math">\[U_\tau
 =-\frac n{2\tau}+\frac{T}{2\tau^2}
 =\frac{T-n\tau}{2\tau^2}.\]</div>
@@ -412,21 +448,21 @@ terhadap semua estimator bias atau validitas pada batas <span class="math-inline
 <p>Untuk <span class="math-inline" role="math">\(g(\tau)=\tau\)</span>, <span class="math-inline" role="math">\(g'(\tau)=1\)</span>, sehingga batas Cramér–Rao adalah</p>
 <div class="math-display" role="math">\[\frac{\{g'(\tau)\}^2}{I_n(\tau)}
 =\frac{2\tau^2}{n},\]</div>
-<p>tepat sama dengan varians <span class="math-inline" role="math">\(\delta\)</span>. Model pada <span class="math-inline" role="math">\(\tau&gt;0\)</span> mempunyai support
+<p>tepat sama dengan varians <span class="math-inline" role="math">\(\delta\)</span>. Model pada <span class="math-inline" role="math">\(\tau&gt;0\)</span> mempunyai dukungan
 bersama <span class="math-inline" role="math">\(\mathbb R^n\)</span>, parameter interior, dan diferensiabilitas yang
 dibutuhkan, sehingga perbandingan reguler sah. Pencapaian batas membuktikan
-efisiensi dalam kelas estimator tak-bias yang tunduk pada asumsi tersebut. Ia
-tidak menyingkirkan semua estimator bias di bawah loss kuadratik, tidak
-membuktikan admissibility global, dan tidak dapat diekstrapolasi ke
+efisiensi dalam kelas penduga tak bias yang tunduk pada asumsi tersebut. Ia
+tidak menyingkirkan semua penduga bias di bawah kerugian kuadratik, tidak
+membuktikan keadmisibelan global, dan tidak dapat diekstrapolasi ke
 <span class="math-inline" role="math">\(\tau=0\)</span>, tempat distribusi menjadi degenerat dan parameter berada pada
 batas.</p>
 <p><a id="O006-C140-CMP-MS10-SEC02"></a></p>
-<h2>Checklist kelulusan</h2>
-<p>Set ini dikuasai bila Anda dapat menurunkan ketiga statistik likelihood tanpa
+<h2>Daftar periksa kelulusan</h2>
+<p>Set ini dikuasai bila Anda dapat menurunkan ketiga statistik fungsi kemungkinan tanpa
 menghafal bentuk akhir; membuktikan laju sisa yang membuatnya ekuivalen;
-mengganti Wilks dengan distribusi yang benar ketika support berubah atau nol
-berada pada batas; serta membedakan perbaikan risk, UMVU, efisiensi
-Cramér–Rao, dan admissibility.</p>
+memakai distribusi yang benar ketika dukungan berubah atau parameter nol
+berada pada batas; serta membedakan perbaikan risiko, UMVU, efisiensi
+Cramér–Rao, dan keadmisibelan.</p>
 
 <footer class="license">Materi pendamping orisinal berlisensi CC BY-SA 4.0. Komponen Penn State dan Random tetap berada di bawah lisensinya masing-masing dan tidak direlisensikan oleh halaman ini.</footer>
 </main>

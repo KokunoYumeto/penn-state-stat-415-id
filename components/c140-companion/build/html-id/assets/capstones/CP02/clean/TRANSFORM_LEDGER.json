@@ -1,0 +1,130 @@
+{
+  "assertions": {
+    "all_group_year_keys_unique": true,
+    "all_integer_tokens_canonical_int64": true,
+    "all_rows_binomial_domain": true,
+    "all_rows_five_fields": true,
+    "all_tokens_nonmissing_and_untrimmed": true,
+    "expected_cell_inventory_exact": true,
+    "primary_secondary_never_combined": true,
+    "raw_hashes_unchanged_after_serialization": true,
+    "row_count_preserved_12": true,
+    "source_to_clean_bijection": true
+  },
+  "contract": {
+    "clean_columns": 8,
+    "clean_rows": 12,
+    "denominator_locked_before_outcome_parse": true,
+    "numeric_input_allowlist": [
+      "raw/nest_propensity.csv"
+    ],
+    "primary_denominator_column": "Total_method_1",
+    "raw_assets_immutable": true,
+    "secondary_denominator_column": "Total_method_2",
+    "source_columns": 5,
+    "source_rows": 12
+  },
+  "exclusions": [],
+  "imputation": false,
+  "input_hashes_before_parse": [
+    {
+      "bytes": 4139,
+      "path": "raw/README.md",
+      "sha256": "43a53f9a451a4030b8d3edb2a7517c48863d8ef23d7ae4986d15c20d7f8f5459"
+    },
+    {
+      "bytes": 285,
+      "path": "raw/nest_propensity.csv",
+      "sha256": "8790b4dfa29a5b39228e758e40e02cbb48612c38b8440020aa108c85ca0673c4"
+    }
+  ],
+  "outputs": [
+    {
+      "bytes": 1848,
+      "path": "COLUMN_MANIFEST.csv",
+      "role": "source_to_clean_column_lineage",
+      "sha256": "25ccd74c584bdfbe7adc1b9a2559d25fad7ad41b0b02e327e1acc11ea226dcca"
+    },
+    {
+      "bytes": 552,
+      "path": "CP02_cells_clean.csv",
+      "role": "canonical_clean_table",
+      "sha256": "8699d6f0fa154391cb38880fdd1c3ec7cc2bb12e2cda430a704dbe5c470464ec"
+    },
+    {
+      "bytes": 1324,
+      "path": "ROW_MANIFEST.csv",
+      "role": "source_to_clean_row_lineage",
+      "sha256": "40754aa8ffe2fb75e0cd98d6cd924ecef8403d25949524a6f6860198acd9323e"
+    }
+  ],
+  "recursive_container_note": "The ledger binds the three lineage/data payloads; clean/MANIFEST.csv binds this ledger, and the external receipt binds the manifest.",
+  "renames": {
+    "No_nests": "nests_initiated",
+    "Total_method_1": "hens_available_primary",
+    "Total_method_2": "hens_available_secondary",
+    "Transmitter": "transmitter",
+    "Year": "year"
+  },
+  "schema": "o006.c140.cp02-transform-ledger.v1",
+  "sorting": {
+    "group_rank": {
+      "PTT": 1,
+      "VHF": 0
+    },
+    "keys": [
+      "year ascending",
+      "group_rank ascending"
+    ]
+  },
+  "steps": [
+    {
+      "operation": "verify_manifest_metadata_and_rights",
+      "order": 1,
+      "rows_after": 12,
+      "rows_before": 12
+    },
+    {
+      "operation": "lock_primary_and_secondary_denominators",
+      "order": 2,
+      "rows_after": 12,
+      "rows_before": 12
+    },
+    {
+      "operation": "parse_exact_five_field_records_as_strings",
+      "order": 3,
+      "rows_after": 12,
+      "rows_before": 12
+    },
+    {
+      "operation": "validate_missing_integer_domain_and_unique_keys",
+      "order": 4,
+      "rows_after": 12,
+      "rows_before": 12
+    },
+    {
+      "operation": "rename_and_convert_canonical_integer_types",
+      "order": 5,
+      "rows_after": 12,
+      "rows_before": 12
+    },
+    {
+      "operation": "derive_trace_fields_and_sort_year_then_group_rank",
+      "order": 6,
+      "rows_after": 12,
+      "rows_before": 12
+    },
+    {
+      "operation": "serialize_lf_utf8_no_bom_and_verify",
+      "order": 7,
+      "rows_after": 12,
+      "rows_before": 12
+    }
+  ],
+  "type_conversions": {
+    "No_nests": "canonical unsigned decimal token -> int64",
+    "Total_method_1": "canonical unsigned decimal token -> int64",
+    "Total_method_2": "canonical unsigned decimal token -> int64",
+    "Year": "canonical unsigned decimal token -> int64"
+  }
+}

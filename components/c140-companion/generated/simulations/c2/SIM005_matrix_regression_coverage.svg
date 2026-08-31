@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<svg xmlns="http://www.w3.org/2000/svg" width="720" height="430" viewBox="0 0 720 430">
-<title>Coverage interval regresi pada tiga skenario</title>
-<desc>Diagram batang memperlihatkan coverage interval 95 persen: Gaussian eksak sekitar 0,948, heteroskedastik dengan galat baku klasik sekitar 0,840, dan heteroskedastik dengan HC3 sekitar 0,943. Garis putus-putus menandai target 0,95.</desc>
+<svg xmlns="http://www.w3.org/2000/svg" width="720" height="430" viewBox="0 0 720 430" role="img" aria-labelledby="title desc">
+<title id="title">Cakupan selang regresi pada tiga skenario</title>
+<desc id="desc">Diagram batang memperlihatkan cakupan selang 95 persen: Gaussian eksak sekitar 0,948, heteroskedastik dengan galat baku klasik sekitar 0,840, dan heteroskedastik dengan HC3 sekitar 0,943. Garis putus-putus menandai sasaran 0,95.</desc>
 <rect width="100%" height="100%" fill="white"/>
-<text x="360" y="25" text-anchor="middle" font-family="sans-serif" font-size="17">Coverage interval 95% untuk koefisien kemiringan</text>
+<text x="360" y="25" text-anchor="middle" font-family="sans-serif" font-size="17">Cakupan selang 95% untuk koefisien kemiringan</text>
 <line x1="95" y1="340.00" x2="685" y2="340.00" stroke="#d1d5db" stroke-width="1"/>
 <text x="85" y="345.00" text-anchor="end" font-family="sans-serif" font-size="12">0.70</text>
 <line x1="95" y1="290.83" x2="685" y2="290.83" stroke="#d1d5db" stroke-width="1"/>
@@ -28,5 +28,5 @@
 <rect x="505" y="100.89" width="105" height="239.11" fill="#15803d"/>
 <text x="557.50" y="92.89" text-anchor="middle" font-family="sans-serif" font-size="13">0.943</text>
 <text x="557.50" y="377" text-anchor="middle" font-family="sans-serif" font-size="13">Hetero HC3</text>
-<text x="360" y="412" text-anchor="middle" font-family="sans-serif" font-size="12">Garis putus-putus: target nominal 0,95</text>
+<text x="360" y="412" text-anchor="middle" font-family="sans-serif" font-size="12">Garis putus-putus: sasaran nominal 0,95</text>
 </svg>

@@ -1,0 +1,994 @@
+<!doctype html>
+<html lang="id-ID">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="generator" content="OpenAI Codex gpt-5.6-sol, Ultra">
+<title>Proyek akhir CP02 — perbandingan Bayesian–frekuentis pada data agregat kecenderungan bersarang greater sage-grouse</title>
+<link rel="stylesheet" href="../assets/style.css">
+<script>window.MathJax={loader:{load:['[tex]/boldsymbol']},tex:{packages:{'[+]':['boldsymbol']},inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']]},svg:{fontCache:'local'}};</script>
+<script defer src="../assets/MathJax/tex-svg.js"></script>
+</head>
+<body>
+<a class="skip-link" href="#main-content">Langsung ke isi utama</a>
+<div class="shell">
+<nav class="sidebar" aria-labelledby="companion-nav-title"><p class="nav-title" id="companion-nav-title">Isi pendamping</p><ol><li><a href="../index.html">Pendamping Orisinal Statistika Matematis</a></li><li><a href="../theory/O006-C140-CMP-D001.html">Model parametrik reguler, skor, dan informasi Fisher</a></li><li><a href="../theory/O006-C140-CMP-D002.html">Konsistensi MLE: identifikasi Kullback–Leibler dan teorema argmax</a></li><li><a href="../theory/O006-C140-CMP-D003.html">Ekspansi kuadratik lokal fungsi log-kemungkinan, normalitas asimtotik, dan metode delta</a></li><li><a href="../theory/O006-C140-CMP-D004.html">Prosedur Wald, skor, dan rasio fungsi kemungkinan</a></li><li><a href="../theory/O006-C140-CMP-D005.html">Fungsi kemungkinan nonreguler: empat mekanisme kegagalan</a></li><li><a href="../theory/O006-C140-CMP-D006.html">Optimalitas pengujian: Neyman–Pearson, MP, UMP, dan rasio fungsi kemungkinan monoton</a></li><li><a href="../theory/O006-C140-CMP-D007.html">Kerugian, risiko, efisiensi, Rao–Blackwell, dan Lehmann–Scheffé</a></li><li><a href="../theory/O006-C140-CMP-D008.html">Model linear Gaussian berdesain tetap dan geometri proyeksi</a></li><li><a href="../theory/O006-C140-CMP-D009.html">OLS, MLE Gaussian, dan teorema Gauss–Markov pada desain tetap</a></li><li><a href="../theory/O006-C140-CMP-D010.html">Inferensi Gaussian eksak: proyeksi, t, F, ANOVA, dan prediksi</a></li><li><a href="../theory/O006-C140-CMP-D011.html">Diagnostik, daya ungkit, kesalahan spesifikasi, dan inferensi pascaseleksi</a></li><li><a href="../theory/O006-C140-CMP-D012.html">Inferensi Bayesian sebagai pembaruan dan keputusan yang koheren</a></li><li><a href="../theory/O006-C140-CMP-D013.html">Perbandingan Bayesian–frekuentis: keputusan, cakupan, dan kalibrasi</a></li><li><a href="../simulations/O006-C140-CMP-SIM001.html">Model lokasi normal: MLE, cakupan, dan tiga statistik uji</a></li><li><a href="../simulations/O006-C140-CMP-SIM002.html">Metode delta pada titik reguler dan titik dengan turunan nol</a></li><li><a href="../simulations/O006-C140-CMP-SIM003.html">Distribusi seragam pada batas dukungan: laju nonreguler dan kegagalan bootstrap biasa</a></li><li><a href="../simulations/O006-C140-CMP-SIM004.html">Uji Neyman–Pearson teracak dengan ukuran uji tepat</a></li><li><a href="../simulations/O006-C140-CMP-SIM005.html">Model linear matriks: cakupan, heteroskedastisitas, dan pengaruh</a></li><li><a href="../simulations/O006-C140-CMP-SIM006.html">Kalibrasi selang Bayesian dan frekuentis pada model binomial</a></li><li><a href="../mastery/O006-C140-CMP-MS00.html">Set penguasaan 00 — probabilitas, distribusi, dan ekspektasi (diagnostik C140)</a></li><li><a href="../mastery/O006-C140-CMP-MS01.html">Set penguasaan 01 — statistik urutan dan distribusi sampel</a></li><li><a href="../mastery/O006-C140-CMP-MS02.html">Set penguasaan 02 — estimasi, bias, MSE, dan sifat penduga</a></li><li><a href="../mastery/O006-C140-CMP-MS03.html">Set penguasaan 03 — kecukupan, faktorisasi, kelengkapan, dan statistik aksesori</a></li><li><a href="../mastery/O006-C140-CMP-MS04.html">Set penguasaan 04 — metode momen dan dasar kemungkinan maksimum</a></li><li><a href="../mastery/O006-C140-CMP-MS05.html">Set penguasaan 05 — informasi Fisher, interval kepercayaan, bootstrap, dan metode delta</a></li><li><a href="../mastery/O006-C140-CMP-MS06.html">Set penguasaan 06 — pengujian hipotesis, daya, nilai-p, dan jembatan ke teori fungsi kemungkinan</a></li><li><a href="../mastery/O006-C140-CMP-MS07.html">Set penguasaan 07 — keteraturan, konsistensi, dan normalitas MLE</a></li><li><a href="../mastery/O006-C140-CMP-MS08.html">Set penguasaan 08 — Wald, skor, rasio fungsi kemungkinan, dan diagnosis nonreguler</a></li><li><a href="../mastery/O006-C140-CMP-MS09.html">Set penguasaan 09 — pengujian eksak dan optimalitas Neyman–Pearson</a></li><li><a href="../mastery/O006-C140-CMP-MS10.html">Set penguasaan 10 — uji fungsi kemungkinan asimtotik, risiko, dan perbaikan penduga</a></li><li><a href="../mastery/O006-C140-CMP-MS11.html">Set penguasaan 11 — pembaruan Bayesian, keputusan, dan kalibrasi</a></li><li><a href="../mastery/O006-C140-CMP-MS12.html">Set penguasaan 12 — model linear Gaussian dalam bentuk matriks, inferensi eksak, dan diagnostik</a></li><li><a href="../assessments/O006-C140-CMP-CA01.html">Asesmen kumulatif C1: fungsi kemungkinan, optimalitas, dan keputusan statistik</a></li><li><a href="../assessments/O006-C140-CMP-CA02.html">Asesmen kumulatif CA02 — fondasi inferensi sampel berhingga</a></li><li><a href="../assessments/O006-C140-CMP-CA03.html">Asesmen kumulatif CA03 — model linear dalam bentuk matriks, inferensi eksak, dan diagnostik</a></li><li><a href="../assessments/O006-C140-CMP-CA04.html">Asesmen kumulatif CA04 — sintesis Bayesian–frekuentis</a></li><li><a href="O006-C140-CMP-CP01.html">Proyek akhir integratif CP01 — regresi data terbuka untuk kuat tekan beton</a></li><li><a href="O006-C140-CMP-CP02.html" aria-current="page">Proyek akhir CP02 — perbandingan Bayesian–frekuentis pada data agregat kecenderungan bersarang greater sage-grouse</a></li></ol></nav>
+<main id="main-content" tabindex="-1">
+<div class="metadata"><strong>O006-C140-CMP-CP02</strong> · id-ID · CC BY-SA 4.0 · OpenAI Codex gpt-5.6-sol, Ultra</div>
+<p><a id="O006-C140-CMP-CP02-SEC01"></a></p>
+<h1>Satu pertanyaan, dua kerangka kalibrasi, dan satu jejak byte</h1>
+<p>Proyek akhir ini memakai data agregat tentang kecenderungan bersarang <em>greater sage-grouse</em> dari
+rekaman Dryad <em>Supporting data for assessing impacts of satellite GPS
+transmitters on survival, nesting propensity, and nest success of greater
+sage-grouse</em>. Rekaman kanonisnya adalah
+<code>https://datadryad.org/dataset/doi:10.5061/dryad.573n5tbf3</code>, dengan DOI
+<code>https://doi.org/10.5061/dryad.573n5tbf3</code>. Analisis dibatasi pada versi dan
+dua aset yang dibekukan di bawah; ia tidak mengambil versi terbaru secara
+diam-diam dan tidak mengimpor data mikro tingkat individu lain dari deposit.</p>
+<p>Pertanyaan utamanya adalah apakah peluang inisiasi sarang yang didefinisikan
+oleh penyebut konservatif cukup konsisten untuk diwakili oleh satu peluang bersama
+atau berbeda menurut sel tipe pemancar–tahun, serta bagaimana kesimpulan dan
+tindakan berubah ketika dinilai melalui target Bayesian dan frekuentis yang
+berbeda. Data agregat yang bersifat observasional tidak mengidentifikasi efek kausal tipe
+pemancar, tahun, alat, perilaku individual, kelangsungan hidup, atau mekanisme biologis.</p>
+<p><a id="O006-C140-CMP-CP02-DATA01"></a></p>
+<h2>Hak, provenans, dan identitas byte</h2>
+<p>Pembekuan mengikat <strong>versi 3</strong>, ID versi <strong>268230</strong>, bertanggal
+<strong>2023-12-08</strong>, diterbitkan Dryad. Pengambilan selesai pada
+<strong>2026-08-30T20:22:32Z</strong>. Bukti mesin berada di
+<code>data/capstones/CP02/DATASET_PROVENANCE.json</code>, inventaris masukan di
+<code>data/capstones/CP02/INPUT_MANIFEST.csv</code>, skema di
+<code>data/capstones/CP02/SCHEMA.json</code>, dan penalaran hak di
+<code>data/capstones/CP02/RIGHTS_EVIDENCE.md</code>.</p>
+<p>Kedua hash lokal identik dengan nilai hash penerbit; inventaris lengkap ditampilkan
+pada Tabel 1 di dalam solusi. Metadata Dryad dan DataCite mengikat rekaman ke
+<strong>CC0-1.0</strong>; byte boleh disalin, didistribusikan ulang,
+dan diolah menjadi turunan. Sitasi ilmiah tetap diwajibkan dalam proyek akhir ini.
+Status CC0 aset sumber dipertahankan terpisah dari CC BY-SA 4.0 untuk teks,
+soal, solusi, skrip, dan lapisan editorial orisinal pendamping. Lisensi
+pendamping tidak melisensikan ulang byte Dryad.</p>
+<p>CSV mentah mempunyai tepat <strong>12 baris data × 5 kolom</strong>:
+<code>Transmitter</code>, <code>Year</code>, <code>No_nests</code>, <code>Total_method_1</code>, dan
+<code>Total_method_2</code>. README menyebut “6 columns”, tetapi deskripsinya sendiri
+hanya menomori posisi 1–5, kepala kolom mentah mempunyai lima nama, dan setiap baris
+mempunyai lima medan. Angka enam dicatat sebagai salah ketik dokumentasi;
+alur kerja tidak membuat kolom laten.</p>
+<p><a id="O006-C140-CMP-CP02-DEF01"></a></p>
+<h2>Populasi, unit analisis, penyebut, dan estimand</h2>
+<p>Setiap baris adalah satu sel tipe pemancar <span class="math-inline" role="math">\(z\)</span> dan tahun <span class="math-inline" role="math">\(t\)</span>, bukan satu
+burung atau satu sarang. Definisikan</p>
+<div class="math-display" role="math">\[y_{zt}=\texttt{No\_nests},\qquad
+n^{(1)}_{zt}=\texttt{Total\_method\_1},\qquad
+n^{(2)}_{zt}=\texttt{Total\_method\_2}.\]</div>
+<p><code>Total_method_1</code> adalah penyebut primer yang oleh dokumentasi sumber diberi
+label metode konservatif; <code>Total_method_2</code> diberi label metode liberal dan
+hanya dipakai dalam analisis sensitivitas terpisah. Byte yang dibekukan tidak memuat
+alasan biologis yang cukup untuk merekonstruksi mengapa kedua metode itu diberi
+label demikian. Pemilihan metode 1 sebagai analisis primer ditetapkan sebelum hasil sebagai
+bagian dari rancangan analitis CP02, bukan klaim tentang maksud biologis
+penulis sumber dan bukan pilihan yang didasarkan pada besarnya efek, kecocokan
+model, atau signifikansi.</p>
+<p>Model kerja utama ialah</p>
+<div class="math-display" role="math">\[Y_{zt}\mid p^{(1)}_{zt},n^{(1)}_{zt}
+\sim\operatorname{Binomial}\!\left(n^{(1)}_{zt},p^{(1)}_{zt}\right),\]</div>
+<p>dengan estimand</p>
+<div class="math-display" role="math">\[p^{(1)}_{zt}=P\{\text{inisiasi sarang}\mid
+\text{masuk penyebut konservatif sumber},z,t\}.\]</div>
+<p>Model kerja ini mensyaratkan unit percobaan Bernoulli yang saling lepas dan
+independensi bersyarat agar fungsi kemungkinan dapat dibentuk sebagai hasil kali. Data
+agregat tidak membuktikan bahwa setiap betina menyumbang paling banyak satu
+inisiasi atau bahwa betina yang sama tidak muncul berulang kali pada sel berbeda. Karena itu setiap hasil
+inferensial di bawah bersifat <strong>bersyarat pada asumsi model</strong>; “eksak” berarti
+eksak di bawah hukum kerja tersebut, bukan verifikasi empiris atas unit yang
+tidak tersedia.</p>
+<p>Populasi target terbatas pada betina yang dicakup oleh protokol sumber dan
+memenuhi aturan penyebut dalam tipe pemancar serta tahun yang
+dipublikasikan. Ia bukan seluruh populasi <em>greater sage-grouse</em>, bukan tahun
+atau lokasi di luar deposit, dan bukan populasi intervensi hipotetis.</p>
+<p>Untuk indeks sel <span class="math-inline" role="math">\(g=1,\ldots,G\)</span>, estimand utama adalah</p>
+<div class="math-display" role="math">\[\boldsymbol p=(p_1,\ldots,p_G).\]</div>
+<p>Kontras yang ditetapkan sebelumnya ialah</p>
+<div class="math-display" role="math">\[\Delta_{gh}=p_g-p_h,
+\qquad
+\Omega_{gh}=\frac{p_g/(1-p_g)}{p_h/(1-p_h)}.\]</div>
+<p>Kontras membandingkan tipe pemancar pada tahun tumpang tindih 2019–2022 dan tahun berurutan di
+dalam tipe yang sama bila kedua sel ada. Tidak ada sel PTT 2015–2018; kombinasi tersebut
+berada di luar dukungan tabel, bukan bernilai nol atau hilang. Sensitivitas
+penyebut menaksir</p>
+<div class="math-display" role="math">\[p^{(2)}_{zt}=P\{\text{inisiasi sarang}\mid
+\text{masuk penyebut liberal sumber},z,t\},\]</div>
+<p>yang dapat merupakan estimand lain, bukan penduga kedua yang boleh dipilih
+berdasarkan hasil untuk <span class="math-inline" role="math">\(p^{(1)}_{zt}\)</span>.</p>
+<p><a id="O006-C140-CMP-CP02-DEF02"></a></p>
+<h2>Kerugian dan keputusan yang dibekukan sebelum hasil</h2>
+<p>Untuk estimasi titik gunakan kerugian kuadratik aditif</p>
+<div class="math-display" role="math">\[L_Q(\boldsymbol p,\boldsymbol d)
+=\sum_{g=1}^G(p_g-d_g)^2.\]</div>
+<p>Untuk keputusan operasional pedagogis, tetapkan <span class="math-inline" role="math">\(p_\star=0{,}50\)</span>, dan
+tindakan <span class="math-inline" role="math">\(a_g=1\)</span> berarti menyatakan <span class="math-inline" role="math">\(p_g&gt;p_\star\)</span>. Ambang itu bukan
+ambang pengelolaan biologis. Positif palsu mempunyai biaya <span class="math-inline" role="math">\(c_{10}=2\)</span> dan
+negatif palsu mempunyai biaya <span class="math-inline" role="math">\(c_{01}=1\)</span>:</p>
+<div class="math-display" role="math">\[L_D(\boldsymbol p,\boldsymbol a)
+=\sum_{g=1}^G\left[
+2\,\mathbf1\{a_g=1,p_g\le0{,}50\}
++\mathbf1\{a_g=0,p_g&gt;0{,}50\}
+\right].\]</div>
+<p>Jika kedua kerugian sama persis, pilih <span class="math-inline" role="math">\(a_g=0\)</span>; selain itu, aturan Bayes memilih <span class="math-inline" role="math">\(a_g=1\)</span> tepat
+ketika</p>
+<div class="math-display" role="math">\[P(p_g&gt;0{,}50\mid\boldsymbol y)&gt;\frac23.\]</div>
+<p>Pembanding frekuentis menahan <span class="math-inline" role="math">\(p_g\)</span> tetap dan menguji</p>
+<div class="math-display" role="math">\[H_{0g}:p_g\le0{,}50
+\quad\text{melawan}\quad
+H_{1g}:p_g&gt;0{,}50\]</div>
+<p>dengan uji binomial eksak satu sisi berukuran paling besar 0,05. Kasus
+<span class="math-inline" role="math">\(p_g=0{,}50\)</span> termasuk dalam hipotesis nol. Klaim serentak lintas sel memakai koreksi Holm pada keluarga
+seluruh sel primer dengan tingkat galat keluarga 0,05.</p>
+<p>Untuk pembandingan model, odds prior <span class="math-inline" role="math">\(M_1:M_0=1:1\)</span> dan kerugian salah memilih
+model simetris. <span class="math-inline" role="math">\(M_0\)</span> menyatakan satu peluang bersama, sedangkan <span class="math-inline" role="math">\(M_1\)</span>
+menyatakan peluang bebas per sel. Tindakan memilih <span class="math-inline" role="math">\(M_1\)</span> bila
+<span class="math-inline" role="math">\(P(M_1\mid\boldsymbol y)&gt;1/2\)</span>, ekuivalen dengan <span class="math-inline" role="math">\(B_{10}&gt;1\)</span>; jika nilainya
+tepat sama, pilih <span class="math-inline" role="math">\(M_0\)</span>. Faktor Bayes, odds prior, odds posterior, dan tindakan
+adalah empat objek berbeda.</p>
+<p><a id="O006-C140-CMP-CP02-P01"></a></p>
+<h2>Masalah 1 — proyek akhir data terbuka Bayesian–frekuentis (100 poin)</h2>
+<!--PROBLEM_META {"id":"O006-C140-CMP-CP02-P01","prerequisites":["O006-C140-CMP-CA02","O006-C140-CMP-CA04","O006-C140-CMP-D012","O006-C140-CMP-D013","O006-C140-CMP-SIM006","O006-C140-CMP-MS11"],"objective":"Membangun analisis Bayesian–frekuentis yang terikat pada byte data agregat, prior dan kerugian yang ditetapkan sebelumnya, kalibrasi parameter-tetap, diagnostik, sensitivitas, dan pemutaran ulang luring","difficulty":"lanjut","misconceptions":["Lisensi pendamping otomatis melisensikan ulang kumpulan data","Kumpulan data kandidat sama dengan byte yang telah dibekukan","Penyebut boleh dipilih setelah melihat hasil","Hitungan agregat otomatis memenuhi model binomial tanpa pemeriksaan","Massa posterior 95 persen sama dengan cakupan 95 persen pada setiap parameter tetap","Faktor Bayes adalah nilai-p atau rasio maksimum fungsi kemungkinan","Prior tak wajar boleh dipakai untuk bukti marginal antarmodel","Keputusan Bayes otomatis mengendalikan ukuran uji frekuentis","Perbedaan observasional antarsel membuktikan efek kausal"]}-->
+<p>Selesaikan delapan paket kerja berikut sebagai satu analisis. Setiap hasil numerik
+harus berasal dari byte lokal yang telah diverifikasi; keluaran perangkat
+lunak tidak menggantikan derivasi peluang, definisi estimand, atau argumen
+keputusan.</p>
+<p><a id="O006-C140-CMP-CP02-P01-TASK-A"></a></p>
+<h3>A. Hak, provenans, dan identitas byte (15 poin)</h3>
+<p>Verifikasi hash sebelum penguraian. Buat kartu data yang memuat DOI dan URL, penerbit, versi,
+waktu pengambilan, aset, lisensi, MIME dan pengodean, byte, SHA-256, skema, serta pemetaan
+kolom dari manifes beku. Pisahkan CC0 data dari CC BY-SA pendamping dan
+jelaskan mengapa tidak ada data mikro tingkat individu.</p>
+<p><a id="O006-C140-CMP-CP02-P01-TASK-B"></a></p>
+<h3>B. Pertanyaan, populasi, estimand, dan kerugian (10 poin)</h3>
+<p>Nyatakan populasi target, unit agregat, penyebut primer, estimand
+<span class="math-inline" role="math">\(\boldsymbol p\)</span>, kontras, <span class="math-inline" role="math">\(L_Q\)</span>, <span class="math-inline" role="math">\(L_D\)</span>, kedua kerugian posterior,
+aturan untuk nilai yang tepat sama, dan aturan keputusan model. Pertahankan penyebut yang telah ditetapkan sebelum
+hasil dilihat dan beri label estimand lain pada skenario liberal bila maknanya
+berbeda. Jelaskan batas nonkausal.</p>
+<p><a id="O006-C140-CMP-CP02-P01-TASK-C"></a></p>
+<h3>C. Pemasukan dan pembersihan deterministik (10 poin)</h3>
+<p>Baca hanya byte pada manifes dan pertahankan byte mentah tanpa perubahan.
+Bekukan pemisah, pengodean, tipe, nilai hilang, urutan, serta kunci sel. Hentikan
+proses bila identitas atau skema berubah, kunci berulang, nilai bukan bilangan bulat,
+<span class="math-inline" role="math">\(n_g\le0\)</span>, <span class="math-inline" role="math">\(y_g&lt;0\)</span>, atau <span class="math-inline" role="math">\(y_g&gt;n_g\)</span>. Hasilkan tabel bersih, manifes
+baris dan kolom, buku besar transformasi, serta hash keluaran tanpa imputasi.</p>
+<p><a id="O006-C140-CMP-CP02-P01-TASK-D"></a></p>
+<h3>D. Derivasi dan analisis Bayesian utama (20 poin)</h3>
+<p>Gunakan prior utama wajar (p_g\stackrel{\mathrm{ind}}\sim
+\operatorname{Beta}(2,2)). Turunkan hukum bersama, bukti marginal sel, posterior,
+rataan, varians, interval kredibel 95%, distribusi prediktif untuk replikasi, kontras,
+probabilitas posterior bagi keputusan, serta kedua kerugian. Bandingkan <span class="math-inline" role="math">\(M_0\)</span>, model satu peluang,
+dan <span class="math-inline" role="math">\(M_1\)</span>, model peluang per sel, yang masing-masing memakai prior wajar, melalui log bukti marginal dan <span class="math-inline" role="math">\(B_{10}\)</span>; gunakan
+<code>loggamma</code> dan jangan memakai prior tak wajar untuk bukti marginal.</p>
+<p><a id="O006-C140-CMP-CP02-P01-TASK-E"></a></p>
+<h3>E. Ketidakpastian dan pembanding frekuentis (15 poin)</h3>
+<p>Untuk setiap sel, hitung <span class="math-inline" role="math">\(\widehat p_g\)</span>, interval Wilson dan
+Clopper–Pearson 95%, uji binomial eksak satu sisi, hitungan kritis, ukuran uji,
+daya, nilai-p mentah, serta keputusan Holm. Lakukan uji homogenitas
+kondisional eksak <span class="math-inline" role="math">\(2\times G\)</span> dengan pengurutan devians. Untuk setiap
+penyebut berbeda, hitung cakupan parameter-tetap interval Bayesian,
+Wilson, dan Clopper–Pearson pada kisi yang ditetapkan sebelumnya, termasuk titik ujung dan
+tetangganya; pisahkan minimum kisi dari identitas rataan terhadap prior.</p>
+<p><a id="O006-C140-CMP-CP02-P01-TASK-F"></a></p>
+<h3>F. Diagnostik dan sensitivitas (15 poin)</h3>
+<p>Tetapkan sebelum hasil dilihat ukuran ketidakcocokan Pearson, sisaan maksimum, jumlah sel batas,
+dan kontras menurut kelompok dan waktu yang dapat dibenarkan. Laporkan distribusi replikasi,
+luas ekor posterior, benih acak, dan MCSE tanpa menyebutnya nilai-p klasik. Ulangi
+analisis untuk prior simetris wajar
+<span class="math-inline" role="math">\(\operatorname{Beta}(\kappa/2,\kappa/2)\)</span>,
+<span class="math-inline" role="math">\(\kappa\in\{1,2,4,8,16\}\)</span>, penyebut liberal, dan penghapusan satu sel.
+Audit kelangkaan, dispersi berlebih, keteridentifikasian, serta batas penghentian opsional.</p>
+<p><a id="O006-C140-CMP-CP02-P01-TASK-G"></a></p>
+<h3>G. Pemutaran ulang luring dan keluaran statis yang aksesibel (10 poin)</h3>
+<p>Sediakan satu generator dengan mode <code>--write</code> dan <code>--check-only</code>; utamakan penjumlahan eksak dan
+gunakan benih acak PCG64 <code>2026083002</code> hanya bila simulasi diperlukan. Setelah menjalankan
+<code>--write</code> satu kali, jalankan <code>--check-only</code> dua kali; hasilnya harus cocok byte demi byte tanpa menulis,
+mengakses jaringan, atau menjalankan proses peramban. Inventarisasikan CSV, SVG, teks alternatif,
+manifes, dan tanda terima. Setiap tabel mempunyai keterangan dan kepala kolom dengan atribut <code>scope</code>, serta
+setiap SVG mempunyai elemen <code>&lt;title&gt;</code> dan <code>&lt;desc&gt;</code>, beserta CSV dan teks pasangannya.</p>
+<p><a id="O006-C140-CMP-CP02-P01-TASK-H"></a></p>
+<h3>H. Kesimpulan terkalibrasi (5 poin)</h3>
+<p>Hubungkan kesimpulan dengan estimand, prior, kerugian, penyebut, dan target
+kalibrasi. Pisahkan posterior, prediktif, cakupan, ukuran uji dan daya, risiko, bukti marginal,
+serta uji homogenitas. Laporkan pembalikan sensitivitas dan akhiri dengan
+batas agregasi, generalisasi, privasi, kelangkaan, dan nonkausalitas.</p>
+<p><a id="O006-C140-CMP-CP02-P01-H01"></a></p>
+<h3>Petunjuk 1</h3>
+<p>Bekukan dahulu tabel sel <span class="math-inline" role="math">\((g,y_g,n_g)\)</span>, arti penyebut primer, dan
+estimand. Tulis fungsi kemungkinan binomial dan prior wajar sebelum menghitung
+posterior. Untuk bukti marginal, integralkan parameter; jangan mengganti integral
+dengan maksimum fungsi kemungkinan. Untuk prosedur frekuentis, tahan <span class="math-inline" role="math">\(p\)</span> tetap dan
+jumlahkan terhadap <span class="math-inline" role="math">\(Y\mid p\)</span>. Dengan demikian posterior, prediktif,
+cakupan, ukuran uji, dan risiko tidak tercampur.</p>
+<p><a id="O006-C140-CMP-CP02-P01-H02"></a></p>
+<h3>Petunjuk 2</h3>
+<p>Selesaikan analisis utama dengan satu penyebut dan prior yang ditetapkan sebelumnya.
+Baru kemudian ulangi prior wajar alternatif, penyebut liberal, dan
+penghapusan satu sel. Hitung faktor Bayes pada skala log. Setiap grafik harus
+mempunyai CSV dan ringkasan teks. Jika hasil berubah, nyatakan apakah yang
+berubah adalah prior, estimand, kerugian, atau data—bukan sekadar “metode”.</p>
+<p><a id="O006-C140-CMP-CP02-P01-ANS"></a></p>
+<h3>Jawaban ringkas untuk pemeriksaan mandiri</h3>
+<p>Byte beku menghasilkan 12 sel, 245 sukses, 252 percobaan primer, dan 277 percobaan sekunder. Analisis utama memakai prior <span class="math-inline" role="math">\(\operatorname{Beta}(2,2)\)</span> untuk parameter bersama di bawah M0 dan untuk setiap parameter peluang di bawah M1.</p>
+<p>Perbandingan model memberi <span class="math-inline" role="math">\(\log B_{10}=-32,105096\)</span>, <span class="math-inline" role="math">\(B_{10}=1,140077\times 10^{-14}\)</span>, dan tindakan <strong>pilih M0</strong> dengan odds prior 1:1 serta kerugian salah memilih simetris. Probabilitas posterior per sel <span class="math-inline" role="math">\(P(p_g&gt;0{,}50\mid y)\)</span> berkisar 0,999512–1,000000. Uji homogenitas primer memberi nilai-p kondisional 2,607693 × 10<sup>-1</sup>; hasil itu bersyarat pada model sel binomial yang saling independen.</p>
+<p>Minimum kisi cakupan adalah Bayes ekor setara (prior utama) 0,000000; Clopper–Pearson 0,950390; Wilson 0,835504. Ukuran uji binomial terbesar adalah 0,048126. Sebanyak 7 pasangan kontras menghasilkan 14 baris sensitivitas rasio odds dengan rataan tak hingga pada κ=1 dan κ=2; karena itu ringkasannya hanya memakai median dan kuantil. Seluruh angka di atas berasal dari manifes analisis; tidak ada klaim kausal atau generalisasi individual.</p>
+<p><a id="O006-C140-CMP-CP02-P01-SOL"></a></p>
+<h3>Solusi lengkap</h3>
+<p>Solusi dimulai dari identitas byte dan estimand yang dibekukan, lalu memakai
+hukum bersama yang sama untuk posterior, prediktif, dan keputusan. Pembanding
+frekuentis dibangun dari ruang sampel pada parameter tetap. Bagian-bagian di
+bawah membentuk satu alur; sensitivitas tidak menggantikan analisis utama dan
+keluaran deterministik tidak menggantikan derivasi.</p>
+<p><a id="O006-C140-CMP-CP02-P01-SOL-DATA"></a></p>
+<h4>Hak, pemasukan, dan tabel sel beku</h4>
+<p><a id="O006-C140-CMP-CP02-TAB01"></a></p>
+<table>
+<caption>Tabel 1. Dua aset Dryad yang dibekukan untuk CP02</caption>
+<thead><tr><th scope="col">Aset lokal</th><th scope="col">ID berkas</th><th scope="col">MIME penerbit / saat diunduh</th><th scope="col">Pengodean</th><th scope="col">Byte</th><th scope="col">SHA-256</th></tr></thead>
+<tbody>
+<tr><th scope="row"><code>raw/nest_propensity.csv</code></th><td>2765112</td><td><code>text/csv</code> / <code>application/octet-stream</code></td><td>UTF-8, subhimpunan ASCII, tanpa BOM; CRLF</td><td>285</td><td><code>8790b4dfa29a5b39228e758e40e02cbb48612c38b8440020aa108c85ca0673c4</code></td></tr>
+<tr><th scope="row"><code>raw/README.md</code></th><td>2765118</td><td><code>text/markdown</code> / <code>application/octet-stream</code></td><td>UTF-8, subhimpunan ASCII, tanpa BOM; LF</td><td>4.139 (nilai mesin: 4139)</td><td><code>43a53f9a451a4030b8d3edb2a7517c48863d8ef23d7ae4986d15c20d7f8f5459</code></td></tr>
+</tbody>
+</table>
+<p><code>No_nests</code> adalah sukses, <code>Total_method_1</code> percobaan primer konservatif, dan
+<code>Total_method_2</code> percobaan sensitivitas liberal. Label konservatif dan liberal
+berasal dari dokumentasi sumber; alasan biologis di balik label itu tidak
+terkandung dalam byte yang dibekukan. Byte mentah memenuhi
+<span class="math-inline" role="math">\(0\le y_g\le n_g^{(1)}\le n_g^{(2)}\)</span> pada seluruh 12 sel; total dalam sumber
+adalah 245 sukses, 252 percobaan primer, dan 277 percobaan sensitivitas. Dua
+kelompok adalah VHF dan PTT; rentang keseluruhan 2015–2022, dengan tumpang tindih
+2019–2022.</p>
+<p><a id="O006-C140-CMP-CP02-ALG01"></a></p>
+<h5>Algoritme pemasukan deterministik</h5>
+<ol>
+<li>Verifikasi <code>INPUT_MANIFEST.csv</code> serta kedua hash sebelum penguraian dan
+kunci <code>Total_method_1</code> sebagai penyebut primer.</li>
+<li>Verifikasi UTF-8 tanpa BOM, baris baru, kepala lima kolom, 12 rekaman data,
+lima medan per rekaman, dan ketidaksesuaian README “enam versus lima”.</li>
+<li>Urai token sebagai untai, lalu validasi nilai hilang, format bilangan bulat, domain,
+label VHF dan PTT, tahun, serta keunikan pasangan pemancar–tahun.</li>
+<li>Bentuk <code>cell_id</code>, <code>source_record</code>, dan <code>cell_order</code>; urutkan tahun menaik,
+lalu VHF sebelum PTT, tanpa memakai besarnya hasil.</li>
+<li>Serialisasikan tabel bersih, manifes baris dan kolom, serta buku besar ke himpunan keluaran
+baru; byte mentah tidak pernah ditulis ulang. Verifikasi kembali hash mentah dan
+seluruh keluaran sebelum penulisan atomik.</li>
+</ol>
+<p><a id="O006-C140-CMP-CP02-TAB02"></a></p>
+<table>
+<caption>Tabel 2. Pemetaan skema mentah ke skema analisis CP02</caption>
+<thead><tr><th scope="col">Kepala kolom mentah</th><th scope="col">Nama bersih</th><th scope="col">Peran</th><th scope="col">Domain</th></tr></thead>
+<tbody>
+<tr><th scope="row"><code>Transmitter</code></th><td><code>transmitter</code></td><td>kelompok</td><td><code>VHF</code> atau <code>PTT</code></td></tr>
+<tr><th scope="row"><code>Year</code></th><td><code>year</code></td><td>waktu</td><td>bilangan bulat, 2015–2022 sesuai inventaris</td></tr>
+<tr><th scope="row"><code>No_nests</code></th><td><code>nests_initiated</code></td><td>sukses <span class="math-inline" role="math">\(y_g\)</span></td><td>bilangan bulat nonnegatif</td></tr>
+<tr><th scope="row"><code>Total_method_1</code></th><td><code>hens_available_primary</code></td><td>percobaan primer <span class="math-inline" role="math">\(n_g^{(1)}\)</span></td><td>bilangan bulat positif, sedikitnya <span class="math-inline" role="math">\(y_g\)</span></td></tr>
+<tr><th scope="row"><code>Total_method_2</code></th><td><code>hens_available_secondary</code></td><td>percobaan sensitivitas <span class="math-inline" role="math">\(n_g^{(2)}\)</span></td><td>bilangan bulat, sedikitnya <span class="math-inline" role="math">\(n_g^{(1)}\)</span></td></tr>
+</tbody>
+</table>
+<p>Keluaran bersih berurutan
+<code>cell_id,source_record,cell_order,transmitter,year,nests_initiated,</code>
+<code>hens_available_primary,hens_available_secondary</code>. Tidak ada imputasi,
+agregasi ulang, penghapusan, hitungan semu, atau koreksi kekontinuan.</p>
+<p>Untuk pengikatan tabel dan gambar, generator membentuk tampilan deterministik tanpa
+mengubah skema dasar: <code>group_label=transmitter</code>, <code>time_label</code> adalah tahun
+empat digit, <code>cell_label=&quot;{group_label} — {time_label}&quot;</code>,
+<code>successes=nests_initiated</code>, <code>trials_primary=hens_available_primary</code>, dan
+<code>trials_secondary=hens_available_secondary</code>. <code>failures_primary</code> serta
+<code>failures_secondary</code> adalah percobaan dikurangi sukses; <code>observed_rate</code> dan
+<code>observed_rate_secondary</code> adalah proporsi pada penyebut masing-masing.
+<code>denominator_id</code> wajib bernilai <code>primary_conservative_method_1</code> atau
+<code>secondary_liberal_method_2</code>. Medan tampilan bukan kolom mentah keenam dan tidak
+ditulis kembali ke CSV sumber.</p>
+<p><a id="O006-C140-CMP-CP02-TAB03"></a></p>
+<table>
+<caption>Tabel 3. Dua belas sel agregat dari byte CSV beku, dalam urutan kanonis</caption>
+<thead><tr><th scope="col">Sel</th><th scope="col">Pemancar</th><th scope="col">Tahun</th><th scope="col">Sukses</th><th scope="col">Percobaan primer</th><th scope="col">Percobaan liberal</th></tr></thead>
+<tbody>
+<tr><th scope="row"><code>CP02-VHF-2015</code></th><td>VHF</td><td>2015</td><td>15</td><td>15</td><td>15</td></tr>
+<tr><th scope="row"><code>CP02-VHF-2016</code></th><td>VHF</td><td>2016</td><td>32</td><td>32</td><td>32</td></tr>
+<tr><th scope="row"><code>CP02-VHF-2017</code></th><td>VHF</td><td>2017</td><td>19</td><td>19</td><td>22</td></tr>
+<tr><th scope="row"><code>CP02-VHF-2018</code></th><td>VHF</td><td>2018</td><td>25</td><td>25</td><td>27</td></tr>
+<tr><th scope="row"><code>CP02-VHF-2019</code></th><td>VHF</td><td>2019</td><td>24</td><td>26</td><td>31</td></tr>
+<tr><th scope="row"><code>CP02-PTT-2019</code></th><td>PTT</td><td>2019</td><td>17</td><td>18</td><td>20</td></tr>
+<tr><th scope="row"><code>CP02-VHF-2020</code></th><td>VHF</td><td>2020</td><td>24</td><td>24</td><td>26</td></tr>
+<tr><th scope="row"><code>CP02-PTT-2020</code></th><td>PTT</td><td>2020</td><td>20</td><td>21</td><td>23</td></tr>
+<tr><th scope="row"><code>CP02-VHF-2021</code></th><td>VHF</td><td>2021</td><td>15</td><td>16</td><td>21</td></tr>
+<tr><th scope="row"><code>CP02-PTT-2021</code></th><td>PTT</td><td>2021</td><td>18</td><td>20</td><td>20</td></tr>
+<tr><th scope="row"><code>CP02-VHF-2022</code></th><td>VHF</td><td>2022</td><td>12</td><td>12</td><td>16</td></tr>
+<tr><th scope="row"><code>CP02-PTT-2022</code></th><td>PTT</td><td>2022</td><td>24</td><td>24</td><td>24</td></tr>
+</tbody>
+</table>
+<p>Kedua belas baris adalah hitungan agregat publik; tidak ada ID burung, ID
+sarang, lokasi, tanggal individual, atau riwayat perjumpaan. Agregasi
+mengurangi risiko pengungkapan, tetapi tidak membuktikan independensi percobaan
+atau penyebut noninformatif. Keduanya tetap asumsi model.</p>
+<p><a id="O006-C140-CMP-CP02-P01-SOL-BAYES"></a></p>
+<h4>Model Bayesian, prediktif, dan keputusan</h4>
+<p>Untuk satu sel dan prior wajar umum</p>
+<div class="math-display" role="math">\[p_g\stackrel{\mathrm{ind}}\sim\operatorname{Beta}(a,b),
+\qquad a&gt;0,\ b&gt;0,\]</div>
+<p>hukum bersamanya adalah</p>
+<div class="math-display" role="math">\[q(p_g,y_g)=
+{n_g\choose y_g}
+\frac{p_g^{a+y_g-1}(1-p_g)^{b+n_g-y_g-1}}{B(a,b)}.\]</div>
+<p>Integrasi terhadap <span class="math-inline" role="math">\(p_g\)</span> memberi bukti marginal sel</p>
+<div class="math-display" role="math">\[m_g(y_g)={n_g\choose y_g}
+\frac{B(a+y_g,b+n_g-y_g)}{B(a,b)},\]</div>
+<p>yang positif dan hingga, serta posterior</p>
+<div class="math-display" role="math">\[p_g\mid y_g,n_g\sim
+\operatorname{Beta}(a+y_g,b+n_g-y_g).\]</div>
+<p>Pada analisis utama, prior bersama bagi <span class="math-inline" role="math">\(M_0\)</span> dan prior pada <strong>setiap</strong> sel
+bagi <span class="math-inline" role="math">\(M_1\)</span> memakai keluarga simetris yang sama,
+<span class="math-inline" role="math">\(\operatorname{Beta}(\kappa/2,\kappa/2)\)</span>, dengan <span class="math-inline" role="math">\(\kappa=4\)</span>; jadi
+<span class="math-inline" role="math">\(a=b=2\)</span>. Independensi prior antarsel di bawah <span class="math-inline" role="math">\(M_1\)</span>, fungsi kemungkinan berbentuk hasil kali, dan
+independensi bersyarat antarunit pengamatan adalah asumsi model, bukan fakta yang
+dapat dibuktikan dari hitungan agregat. Rataan dan varians posterior adalah</p>
+<div class="math-display" role="math">\[E(p_g\mid y_g)=\frac{a+y_g}{a+b+n_g},\]</div>
+<div class="math-display" role="math">\[\operatorname{Var}(p_g\mid y_g)
+=\frac{(a+y_g)(b+n_g-y_g)}
+{(a+b+n_g)^2(a+b+n_g+1)}.\]</div>
+<p>Di bawah <span class="math-inline" role="math">\(L_Q\)</span>, tindakan Bayes per sel adalah rataan posterior. Selang
+kredibel ekor setara 95% memakai kuantil Beta posterior dan menyatakan massa
+posterior bersyarat; hal itu tidak dengan sendirinya menyatakan cakupan pada <span class="math-inline" role="math">\(p_g\)</span> tetap
+<a class="xref" data-target-id="O006-C140-CMP-D013-DEF01" href="../theory/O006-C140-CMP-D013.html#O006-C140-CMP-D013-DEF01">Himpunan kredibel dan prosedur kepercayaan</a>.</p>
+<p>Untuk kontras rasio odds
+<span class="math-inline" role="math">\(\Omega_{gh}=\{p_g/(1-p_g)\}/\{p_h/(1-p_h)\}\)</span>, ringkasan kanonis selalu
+menggunakan median dan kuantil ekor setara 95%. Jika posterior sel ialah
+<span class="math-inline" role="math">\(\operatorname{Beta}(\alpha_g,\beta_g)\)</span>, rataan <span class="math-inline" role="math">\(\Omega_{gh}\)</span> hanya
+hingga bila <span class="math-inline" role="math">\(\beta_g&gt;1\)</span> dan <span class="math-inline" role="math">\(\alpha_h&gt;1\)</span>. Tujuh sel primer mempunyai
+<span class="math-inline" role="math">\(y_g=n_g\)</span>; pada sensitivitas <span class="math-inline" role="math">\(\kappa=1\)</span> dan <span class="math-inline" role="math">\(\kappa=2\)</span>, syarat pertama
+gagal ketika sel tersebut menjadi pembilang. Keluaran mempertahankan
+<code>moment_status=infinite_moment</code> dan tidak mengganti rataan tak hingga dengan
+rataan Monte Carlo semu.</p>
+<p>Untuk replikasi agregat berukuran sama,
+<span class="math-inline" role="math">\(K_g\mid p_g\sim\operatorname{Binomial}(n_g,p_g)\)</span>, integrasi posterior
+menghasilkan</p>
+<div class="math-display" role="math">\[P(K_g=k\mid\boldsymbol y)
+={n_g\choose k}
+\frac{B(a+y_g+k,b+n_g-y_g+n_g-k)}
+{B(a+y_g,b+n_g-y_g)}.\]</div>
+<p>Massa Beta–binomial ini harus berjumlah satu. Varians prediktif memuat variasi
+pengambilan sampel baru dan ketidakpastian posterior; prediksi yang hanya menyubstitusikan taksiran titik menghilangkan
+komponen kedua <a class="xref" data-target-id="O006-C140-CMP-D012-DEF02" href="../theory/O006-C140-CMP-D012.html#O006-C140-CMP-D012-DEF02">Prediktif prior dan prediktif posterior</a>.</p>
+<p>Untuk tindakan biner, tulis</p>
+<div class="math-display" role="math">\[q_g=P(p_g&gt;p_\star\mid\boldsymbol y).\]</div>
+<p>Kerugian posterior tindakan 1 dan 0 adalah</p>
+<div class="math-display" role="math">\[\rho_g(1\mid\boldsymbol y)=2(1-q_g),
+\qquad
+\rho_g(0\mid\boldsymbol y)=q_g.\]</div>
+<p>Karena itu <span class="math-inline" role="math">\(a_g=1\)</span> tepat bila <span class="math-inline" role="math">\(q_g&gt;2/3\)</span>, sebagaimana diperoleh dengan
+meminimumkan kerugian posterior pada <a class="xref" data-target-id="O006-C140-CMP-D012-THM03" href="../theory/O006-C140-CMP-D012.html#O006-C140-CMP-D012-THM03">Minimalisasi posterior menghasilkan aturan Bayes</a>.</p>
+<p><a id="O006-C140-CMP-CP02-ALG02"></a></p>
+<h5>Bukti marginal model bersama dan model per sel</h5>
+<p>Definisikan <span class="math-inline" role="math">\(Y_+=\sum_g y_g\)</span> dan <span class="math-inline" role="math">\(N_+=\sum_g n_g\)</span>. Di bawah</p>
+<div class="math-display" role="math">\[M_0:p_1=\cdots=p_G=p,\qquad p\sim\operatorname{Beta}(a_0,b_0),\]</div>
+<p>bukti marginal adalah</p>
+<div class="math-display" role="math">\[m_0(\boldsymbol y)=
+\left\{\prod_g{n_g\choose y_g}\right\}
+\frac{B(a_0+Y_+,b_0+N_+-Y_+)}{B(a_0,b_0)}.\]</div>
+<p>Di bawah</p>
+<div class="math-display" role="math">\[M_1:p_g\stackrel{\mathrm{ind}}\sim
+\operatorname{Beta}(a_1,b_1),\]</div>
+<p>bukti marginal adalah</p>
+<div class="math-display" role="math">\[m_1(\boldsymbol y)=
+\prod_{g=1}^G\left[
+{n_g\choose y_g}
+\frac{B(a_1+y_g,b_1+n_g-y_g)}{B(a_1,b_1)}
+\right].\]</div>
+<p>Faktor binomial yang sama saling meniadakan, sehingga</p>
+<div class="math-display" role="math">\[B_{10}=\frac{B(a_0,b_0)}
+{B(a_0+Y_+,b_0+N_+-Y_+)}
+\prod_g\frac{B(a_1+y_g,b_1+n_g-y_g)}{B(a_1,b_1)}.\]</div>
+<p>Hitung pada skala log dengan <code>loggamma</code>. Prior tak wajar dilarang karena
+konstanta arbitrernya membuat bukti marginal antarmodel tidak terdefinisi
+<a class="xref" data-target-id="O006-C140-CMP-D012-REM03" href="../theory/O006-C140-CMP-D012.html#O006-C140-CMP-D012-REM03">Konstanta prior tidak proper tidak aman untuk pembandingan model</a>. Dengan odds prior 1:1, odds posterior sama
+dengan <span class="math-inline" role="math">\(B_{10}\)</span>; tindakan model simetris memilih <span class="math-inline" role="math">\(M_1\)</span> bila <span class="math-inline" role="math">\(B_{10}&gt;1\)</span>.</p>
+<p><a id="O006-C140-CMP-CP02-TAB04"></a></p>
+<table>
+<caption>Tabel 4. Posterior beta–binomial, keputusan, dan kerugian per sel pada penyebut primer</caption>
+<thead><tr><th scope="col">Sel</th><th scope="col">y/n¹</th><th scope="col">Posterior</th><th scope="col">Rataan</th><th scope="col">Selang kredibel 95%</th><th scope="col">P(p&gt;0,50|y)</th><th scope="col">Tindakan</th><th scope="col">Kerugian a=0</th><th scope="col">Kerugian a=1</th><th scope="col">E(K replikasi|y)</th></tr></thead>
+<tbody>
+<tr><th scope="row">VHF — 2015</th><td>15/15</td><td>Beta(17; 2)</td><td>0,894737</td><td>[0,727056; 0,986249]</td><td>0,999928</td><td>a=1</td><td>0,999928</td><td>0,000145</td><td>13,421053</td></tr>
+<tr><th scope="row">VHF — 2016</th><td>32/32</td><td>Beta(34; 2)</td><td>0,944444</td><td>[0,850828; 0,993003]</td><td>1,000000</td><td>a=1</td><td>1,000000</td><td>0,000000</td><td>30,222222</td></tr>
+<tr><th scope="row">VHF — 2017</th><td>19/19</td><td>Beta(21; 2)</td><td>0,913043</td><td>[0,771556; 0,988794]</td><td>0,999995</td><td>a=1</td><td>0,999995</td><td>0,000011</td><td>17,347826</td></tr>
+<tr><th scope="row">VHF — 2018</th><td>25/25</td><td>Beta(27; 2)</td><td>0,931034</td><td>[0,816522; 0,991230]</td><td>1,000000</td><td>a=1</td><td>1,000000</td><td>0,000000</td><td>23,275862</td></tr>
+<tr><th scope="row">VHF — 2019</th><td>24/26</td><td>Beta(26; 4)</td><td>0,866667</td><td>[0,726485; 0,961105]</td><td>0,999992</td><td>a=1</td><td>0,999992</td><td>0,000015</td><td>22,533333</td></tr>
+<tr><th scope="row">PTT — 2019</th><td>17/18</td><td>Beta(19; 3)</td><td>0,863636</td><td>[0,696226; 0,969511]</td><td>0,999889</td><td>a=1</td><td>0,999889</td><td>0,000221</td><td>15,545455</td></tr>
+<tr><th scope="row">VHF — 2020</th><td>24/24</td><td>Beta(26; 2)</td><td>0,928571</td><td>[0,810294; 0,990900]</td><td>1,000000</td><td>a=1</td><td>1,000000</td><td>0,000000</td><td>22,285714</td></tr>
+<tr><th scope="row">PTT — 2020</th><td>20/21</td><td>Beta(22; 3)</td><td>0,880000</td><td>[0,730027; 0,973441]</td><td>0,999982</td><td>a=1</td><td>0,999982</td><td>0,000036</td><td>18,480000</td></tr>
+<tr><th scope="row">VHF — 2021</th><td>15/16</td><td>Beta(17; 3)</td><td>0,850000</td><td>[0,668623; 0,966174]</td><td>0,999636</td><td>a=1</td><td>0,999636</td><td>0,000729</td><td>13,600000</td></tr>
+<tr><th scope="row">PTT — 2021</th><td>18/20</td><td>Beta(20; 4)</td><td>0,833333</td><td>[0,664111; 0,950492]</td><td>0,999756</td><td>a=1</td><td>0,999756</td><td>0,000488</td><td>16,666667</td></tr>
+<tr><th scope="row">VHF — 2022</th><td>12/12</td><td>Beta(14; 2)</td><td>0,875000</td><td>[0,680515; 0,983424]</td><td>0,999512</td><td>a=1</td><td>0,999512</td><td>0,000977</td><td>10,500000</td></tr>
+<tr><th scope="row">PTT — 2022</th><td>24/24</td><td>Beta(26; 2)</td><td>0,928571</td><td>[0,810294; 0,990900]</td><td>1,000000</td><td>a=1</td><td>1,000000</td><td>0,000000</td><td>22,285714</td></tr>
+</tbody>
+</table>
+<p><a href="../assets/capstones/CP02/CP02_posterior_summary.csv">Data lengkap Tabel 4</a></p>
+<p><a id="O006-C140-CMP-CP02-TAB05"></a></p>
+<table>
+<caption>Tabel 5A. Bukti marginal dan keputusan model pada κ=4</caption>
+<thead><tr><th scope="col">Objek</th><th scope="col">Log bukti marginal</th><th scope="col">log B₁₀</th><th scope="col">B₁₀</th><th scope="col">Odds prior</th><th scope="col">Odds posterior</th><th scope="col">Tindakan</th></tr></thead>
+<tbody>
+<tr><th scope="row">M0</th><td>-17,593906</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td></tr>
+<tr><th scope="row">M1</th><td>-49,699001</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td></tr>
+<tr><th scope="row">M1 terhadap M0</th><td>(-49,699001) − (-17,593906)</td><td>-32,105096</td><td>1,140077 × 10<sup>-14</sup></td><td>1,000000</td><td>1,140077 × 10<sup>-14</sup></td><td>pilih M0</td></tr>
+</tbody>
+</table>
+<table>
+<caption>Tabel 5B. Kontras yang ditetapkan sebelumnya pada prior utama</caption>
+<thead><tr><th scope="col">Pasangan</th><th scope="col">Estimand</th><th scope="col">Rataan</th><th scope="col">Median</th><th scope="col">Selang 95%</th><th scope="col">P(estimand&gt;0|y)</th><th scope="col">Status momen</th></tr></thead>
+<tbody>
+<tr><th scope="row">PTT — 2019 dibandingkan dengan VHF — 2019</th><td>selisih peluang</td><td>-0,003030</td><td>-0,000010</td><td>[-0,198596; 0,176032]</td><td>0,499920</td><td>hingga</td></tr>
+<tr><th scope="row">PTT — 2019 dibandingkan dengan VHF — 2019</th><td>rasio odds</td><td>tidak dilaporkan</td><td>0,999884</td><td>[0,185539; 5,929982]</td><td>0,499920</td><td>hingga; rataan tidak dilaporkan</td></tr>
+<tr><th scope="row">PTT — 2020 dibandingkan dengan VHF — 2020</th><td>selisih peluang</td><td>-0,048571</td><td>-0,045319</td><td>[-0,217871; 0,103490]</td><td>0,259830</td><td>hingga</td></tr>
+<tr><th scope="row">PTT — 2020 dibandingkan dengan VHF — 2020</th><td>rasio odds</td><td>tidak dilaporkan</td><td>0,526647</td><td>[0,056992; 3,784368]</td><td>0,259830</td><td>hingga; rataan tidak dilaporkan</td></tr>
+<tr><th scope="row">PTT — 2021 dibandingkan dengan VHF — 2021</th><td>selisih peluang</td><td>-0,016667</td><td>-0,017893</td><td>[-0,227915; 0,202369]</td><td>0,431150</td><td>hingga</td></tr>
+<tr><th scope="row">PTT — 2021 dibandingkan dengan VHF — 2021</th><td>rasio odds</td><td>tidak dilaporkan</td><td>0,859123</td><td>[0,140399; 4,713318]</td><td>0,431150</td><td>hingga; rataan tidak dilaporkan</td></tr>
+<tr><th scope="row">PTT — 2022 dibandingkan dengan VHF — 2022</th><td>selisih peluang</td><td>0,053571</td><td>0,044457</td><td>[-0,112117; 0,262342]</td><td>0,714820</td><td>hingga</td></tr>
+<tr><th scope="row">PTT — 2022 dibandingkan dengan VHF — 2022</th><td>rasio odds</td><td>tidak dilaporkan</td><td>1,895010</td><td>[0,180256; 20,180186]</td><td>0,714820</td><td>hingga; rataan tidak dilaporkan</td></tr>
+<tr><th scope="row">VHF — 2016 dibandingkan dengan VHF — 2015</th><td>selisih peluang</td><td>0,049708</td><td>0,041023</td><td>[-0,084970; 0,226365]</td><td>0,739080</td><td>hingga</td></tr>
+<tr><th scope="row">VHF — 2016 dibandingkan dengan VHF — 2015</th><td>rasio odds</td><td>tidak dilaporkan</td><td>2,043381</td><td>[0,202925; 20,678490]</td><td>0,739080</td><td>hingga; rataan tidak dilaporkan</td></tr>
+<tr><th scope="row">VHF — 2017 dibandingkan dengan VHF — 2016</th><td>selisih peluang</td><td>-0,031401</td><td>-0,025231</td><td>[-0,184243; 0,092641]</td><td>0,331550</td><td>hingga</td></tr>
+<tr><th scope="row">VHF — 2017 dibandingkan dengan VHF — 2016</th><td>rasio odds</td><td>tidak dilaporkan</td><td>0,610841</td><td>[0,059410; 6,207900]</td><td>0,331550</td><td>hingga; rataan tidak dilaporkan</td></tr>
+<tr><th scope="row">VHF — 2018 dibandingkan dengan VHF — 2017</th><td>selisih peluang</td><td>0,017991</td><td>0,014772</td><td>[-0,123897; 0,175908]</td><td>0,593880</td><td>hingga</td></tr>
+<tr><th scope="row">VHF — 2018 dibandingkan dengan VHF — 2017</th><td>rasio odds</td><td>tidak dilaporkan</td><td>1,300769</td><td>[0,127149; 13,567549]</td><td>0,593880</td><td>hingga; rataan tidak dilaporkan</td></tr>
+<tr><th scope="row">VHF — 2019 dibandingkan dengan VHF — 2018</th><td>selisih peluang</td><td>-0,064368</td><td>-0,061707</td><td>[-0,221926; 0,084966]</td><td>0,186300</td><td>hingga</td></tr>
+<tr><th scope="row">VHF — 2019 dibandingkan dengan VHF — 2018</th><td>rasio odds</td><td>tidak dilaporkan</td><td>0,439742</td><td>[0,050167; 2,651011]</td><td>0,186300</td><td>hingga; rataan tidak dilaporkan</td></tr>
+<tr><th scope="row">VHF — 2020 dibandingkan dengan VHF — 2019</th><td>selisih peluang</td><td>0,061905</td><td>0,060183</td><td>[-0,090405; 0,221541]</td><td>0,801790</td><td>hingga</td></tr>
+<tr><th scope="row">VHF — 2020 dibandingkan dengan VHF — 2019</th><td>rasio odds</td><td>tidak dilaporkan</td><td>2,210233</td><td>[0,360144; 19,297755]</td><td>0,801790</td><td>hingga; rataan tidak dilaporkan</td></tr>
+<tr><th scope="row">VHF — 2021 dibandingkan dengan VHF — 2020</th><td>selisih peluang</td><td>-0,078571</td><td>-0,072653</td><td>[-0,274827; 0,088675]</td><td>0,184390</td><td>hingga</td></tr>
+<tr><th scope="row">VHF — 2021 dibandingkan dengan VHF — 2020</th><td>rasio odds</td><td>tidak dilaporkan</td><td>0,403495</td><td>[0,042692; 2,948566]</td><td>0,184390</td><td>hingga; rataan tidak dilaporkan</td></tr>
+<tr><th scope="row">VHF — 2022 dibandingkan dengan VHF — 2021</th><td>selisih peluang</td><td>0,025000</td><td>0,026979</td><td>[-0,204633; 0,244837]</td><td>0,604370</td><td>hingga</td></tr>
+<tr><th scope="row">VHF — 2022 dibandingkan dengan VHF — 2021</th><td>rasio odds</td><td>tidak dilaporkan</td><td>1,311866</td><td>[0,175750; 12,678853]</td><td>0,604370</td><td>hingga; rataan tidak dilaporkan</td></tr>
+<tr><th scope="row">PTT — 2020 dibandingkan dengan PTT — 2019</th><td>selisih peluang</td><td>0,016364</td><td>0,014663</td><td>[-0,171511; 0,212573]</td><td>0,565470</td><td>hingga</td></tr>
+<tr><th scope="row">PTT — 2020 dibandingkan dengan PTT — 2019</th><td>rasio odds</td><td>tidak dilaporkan</td><td>1,162882</td><td>[0,180913; 7,516016]</td><td>0,565470</td><td>hingga; rataan tidak dilaporkan</td></tr>
+<tr><th scope="row">PTT — 2021 dibandingkan dengan PTT — 2020</th><td>selisih peluang</td><td>-0,046667</td><td>-0,044812</td><td>[-0,244761; 0,145984]</td><td>0,312890</td><td>hingga</td></tr>
+<tr><th scope="row">PTT — 2021 dibandingkan dengan PTT — 2020</th><td>rasio odds</td><td>tidak dilaporkan</td><td>0,661746</td><td>[0,110302; 3,589314]</td><td>0,312890</td><td>hingga; rataan tidak dilaporkan</td></tr>
+<tr><th scope="row">PTT — 2022 dibandingkan dengan PTT — 2021</th><td>selisih peluang</td><td>0,095238</td><td>0,090917</td><td>[-0,070201; 0,281786]</td><td>0,871570</td><td>hingga</td></tr>
+<tr><th scope="row">PTT — 2022 dibandingkan dengan PTT — 2021</th><td>rasio odds</td><td>tidak dilaporkan</td><td>2,859047</td><td>[0,469447; 25,464910]</td><td>0,871570</td><td>hingga; rataan tidak dilaporkan</td></tr>
+</tbody>
+</table>
+<p><a href="../assets/capstones/CP02/CP02_model_comparison.csv">Data model</a> · <a href="../assets/capstones/CP02/CP02_contrasts.csv">data kontras</a></p>
+<p><a id="O006-C140-CMP-CP02-P01-SOL-FREQ"></a></p>
+<h4>Pembanding frekuentis dan kalibrasi parameter-tetap</h4>
+<p>Analisis frekuentis menahan <span class="math-inline" role="math">\(p_g\)</span> tetap dan memperlakukan sampel hipotetis sebagai peubah acak:</p>
+<div class="math-display" role="math">\[Y_g\mid p_g,n_g\sim\operatorname{Binomial}(n_g,p_g).\]</div>
+<p>Semua kata “eksak” pada bagian ini berarti eksak di bawah hukum binomial
+kerja, dengan penyebut diperlakukan tetap atau noninformatif serta independensi
+bersyarat unit dan sel sebagaimana diperlukan. Hitungan agregat tidak
+memverifikasi asumsi itu. Karena itu hasil membawa status bersyarat pada model dan
+tidak boleh dibaca sebagai pembuktian empiris atas independensi pengamatan.</p>
+<p>Penduga proporsi mempunyai</p>
+<div class="math-display" role="math">\[\widehat p_g=\frac{y_g}{n_g},\qquad
+E_{p_g}(\widehat p_g)=p_g,\qquad
+\operatorname{Var}_{p_g}(\widehat p_g)
+=\frac{p_g(1-p_g)}{n_g}.\]</div>
+<p>Dengan <span class="math-inline" role="math">\(\alpha=0{,}05\)</span>, interval Clopper–Pearson adalah</p>
+<div class="math-display" role="math">\[L_{\mathrm{CP}}(y,n)=
+\begin{cases}
+0,&amp;y=0,\\
+Q_{\operatorname{Beta}(y,n-y+1)}(\alpha/2),&amp;1\le y\le n,
+\end{cases}\]</div>
+<div class="math-display" role="math">\[U_{\mathrm{CP}}(y,n)=
+\begin{cases}
+Q_{\operatorname{Beta}(y+1,n-y)}(1-\alpha/2),&amp;0\le y&lt;n,\\
+1,&amp;y=n.
+\end{cases}\]</div>
+<p>Karena kediskretan,</p>
+<div class="math-display" role="math">\[P_p\{p\in C_{\mathrm{CP}}(Y)\}\ge1-\alpha
+\quad\text{untuk setiap }p\in[0,1].\]</div>
+<p>Interval skor Wilson, dengan <span class="math-inline" role="math">\(z=z_{1-\alpha/2}\)</span>, mempunyai pusat dan
+setengah lebar</p>
+<div class="math-display" role="math">\[m_W=\frac{\widehat p+z^2/(2n)}{1+z^2/n},
+\qquad
+h_W=\frac{z}{1+z^2/n}
+\sqrt{\frac{\widehat p(1-\widehat p)}n+\frac{z^2}{4n^2}}.\]</div>
+<p>Jadi <span class="math-inline" role="math">\(C_W=[m_W-h_W,m_W+h_W]\)</span>. Wilson tetap berada di <span class="math-inline" role="math">\([0,1]\)</span>,
+tetapi cakupannya tidak eksak pada sampel hingga. Interval Wald tidak dipakai,
+terutama karena banyak sel berada pada <span class="math-inline" role="math">\(y=0\)</span> atau <span class="math-inline" role="math">\(y=n\)</span>.</p>
+<p>Untuk aturan <span class="math-inline" role="math">\(C_J(y)=[L_J(y),U_J(y)]\)</span>,
+<span class="math-inline" role="math">\(J\in\{\mathrm{CP},W,B\}\)</span>, cakupan parameter-tetap adalah</p>
+<div class="math-display" role="math">\[c_{J,n}(p)=\sum_{y=0}^n
+\mathbf1\{L_J(y)\le p\le U_J(y)\}
+{n\choose y}p^y(1-p)^{n-y}.\]</div>
+<p>Konvensi batas tertutup sama bagi semua prosedur. Untuk setiap <span class="math-inline" role="math">\(n\)</span> yang
+muncul, mulai dari kisi</p>
+<div class="math-display" role="math">\[\mathcal P_n^{(0)}=\{j/1000:j=0,\ldots,1000\},\]</div>
+<p>lalu tambahkan semua titik ujung dari seluruh hasil <span class="math-inline" role="math">\(y=0,\ldots,n\)</span> dan
+tetangga titik-mengambang terdekat di sebelah kiri dan kanannya. Laporkan minimum, maksimum,
+argmin, dan argmax <strong>pada kisi</strong>; jangan menyebutnya ekstrem global kontinu.
+Untuk interval kredibel utama, periksa terpisah identitas</p>
+<div class="math-display" role="math">\[\int_0^1c_{B,n}(p)\pi(p)\,dp=0{,}95,\]</div>
+<p>yang merupakan kalibrasi rataan terhadap prior, bukan cakupan seragam
+<a class="xref" data-target-id="O006-C140-CMP-SIM006-THM01" href="../simulations/O006-C140-CMP-SIM006.html#O006-C140-CMP-SIM006-THM01">Identitas kalibrasi rataan terhadap prior</a>.</p>
+<p>Uji ambang memakai nilai-p eksak</p>
+<div class="math-display" role="math">\[p_{F,g}(y_g)=P_{1/2}(Y_g\ge y_g)
+=\sum_{k=y_g}^{n_g}{n_g\choose k}2^{-n_g}.\]</div>
+<p>Definisikan hitungan kritis</p>
+<div class="math-display" role="math">\[k_n=\min\{k:P_{1/2}(Y\ge k)\le0{,}05\};\]</div>
+<p>jika himpunannya kosong, ambil <span class="math-inline" role="math">\(k_n=n+1\)</span>. Fungsi daya adalah</p>
+<div class="math-display" role="math">\[\beta_n(p)=\sum_{y=k_n}^n{n\choose y}p^y(1-p)^{n-y}.\]</div>
+<p>Rasio kemungkinan monoton keluarga Binomial memberi</p>
+<div class="math-display" role="math">\[\sup_{p\le1/2}\beta_n(p)=\beta_n(1/2)\le0{,}05.\]</div>
+<p>Kediskretan biasanya membuat ukuran uji lebih kecil dari 0,05. Nilai-p mentah
+tetap dilaporkan, sedangkan klaim serentak memakai Holm pada seluruh 12 sel
+primer. Nilai-p bukan peluang <span class="math-inline" role="math">\(H_0\)</span>, dan kegagalan menolak bukan bukti bahwa
+<span class="math-inline" role="math">\(p_g\le1/2\)</span>.</p>
+<p><a id="O006-C140-CMP-CP02-ALG03"></a></p>
+<h5>Uji homogenitas kondisional eksak di bawah model</h5>
+<p>Tuliskan</p>
+<div class="math-display" role="math">\[Y_+=\sum_g y_g,\qquad N_+=\sum_gn_g,\qquad
+\widehat p_{\mathrm{pool}}=Y_+/N_+.\]</div>
+<p>Di bawah <span class="math-inline" role="math">\(H_0:p_1=\cdots=p_G=p\)</span>, dengan model sel binomial yang saling
+independen secara bersyarat dan setelah dikondisikan pada <span class="math-inline" role="math">\(Y_+=s\)</span>,</p>
+<div class="math-display" role="math">\[P_0(\boldsymbol Y=\boldsymbol x\mid Y_+=s)
+=\frac{\prod_g{n_g\choose x_g}}{{N_+\choose s}},\]</div>
+<p>untuk <span class="math-inline" role="math">\(0\le x_g\le n_g\)</span> dan <span class="math-inline" role="math">\(\sum_gx_g=s\)</span>. Pengurutan yang ditetapkan sebelumnya
+memakai devians</p>
+<div class="math-display" role="math">\[D(\boldsymbol x)=2\sum_g\left[
+x_g\log\frac{x_g}{n_g\widehat p_{\mathrm{pool}}}
++(n_g-x_g)\log
+\frac{n_g-x_g}{n_g(1-\widehat p_{\mathrm{pool}})}
+\right],\]</div>
+<p>dengan <span class="math-inline" role="math">\(0\log 0=0\)</span>. Nilai-p eksak menjumlahkan probabilitas semua tabel yang memenuhi
+<span class="math-inline" role="math">\(D(\boldsymbol x)\ge D(\boldsymbol y)\)</span>, termasuk tabel dengan devians yang sama dengan observasi. Enumerasi atau
+pemrograman dinamis harus memeriksa bahwa massa ruang kondisional menjumlah satu.
+Aproksimasi khi-kuadrat hanya boleh dilaporkan sebagai diagnostik berlabel bila semua hitungan harapan
+sedikitnya 5.</p>
+<p>Uji ini bukan padanan numerik faktor Bayes: yang pertama memakai luas ekor
+pada ruang sampel kondisional, sedangkan yang kedua membandingkan prediksi
+marginal di bawah prior wajar <a class="xref" data-target-id="O006-C140-CMP-D013-SEC05" href="../theory/O006-C140-CMP-D013.html#O006-C140-CMP-D013-SEC05">Keputusan Bayes dan Neyman–Pearson memakai kendala yang berbeda</a>.</p>
+<p>Risiko frekuentis bagi penduga proporsi dan aturan rataan posterior adalah</p>
+<div class="math-display" role="math">\[R_{p_g}(\widehat p_g)=\frac{p_g(1-p_g)}{n_g},\]</div>
+<div class="math-display" role="math">\[R_{p_g}(\delta_{a,b})=
+\frac{n_gp_g(1-p_g)+\{a-(a+b)p_g\}^2}
+{(n_g+a+b)^2},
+\qquad
+\delta_{a,b}(Y_g)=\frac{Y_g+a}{n_g+a+b}.\]</div>
+<p>Risiko dapat bersilang; satu kumpulan data tidak membuktikan dominasi universal.
+Untuk tindakan uji <span class="math-inline" role="math">\(\varphi_g\)</span>, risiko biner adalah</p>
+<div class="math-display" role="math">\[R_{p_g}(\varphi_g)=
+\begin{cases}
+2\,\beta_g(p_g),&amp;p_g\le1/2,\\
+1-\beta_g(p_g),&amp;p_g&gt;1/2.
+\end{cases}\]</div>
+<p>Uji membatasi ukuran; aturan Bayes meminimumkan kerugian posterior. Keduanya hanya
+berimpit jika daerah penolakan yang dihasilkan kebetulan sama.</p>
+<p><a id="O006-C140-CMP-CP02-TAB06"></a></p>
+<table>
+<caption>Tabel 6. Interval dan uji binomial eksak per sel, bersyarat pada hukum kerja</caption>
+<thead><tr><th scope="col">Sel</th><th scope="col">y/n¹</th><th scope="col">Proporsi</th><th scope="col">Wilson 95%</th><th scope="col">Clopper–Pearson 95%</th><th scope="col">Hitungan kritis</th><th scope="col">Ukuran aktual</th><th scope="col">p eksak</th><th scope="col">p Holm</th><th scope="col">Tolak serentak</th></tr></thead>
+<tbody>
+<tr><th scope="row">VHF — 2015</th><td>15/15</td><td>1,000000</td><td>[0,796117; 1,000000]</td><td>[0,781981; 1,000000]</td><td>12</td><td>0,017578</td><td>3,051758 × 10<sup>-5</sup></td><td>1,525879 × 10<sup>-4</sup></td><td>ya</td></tr>
+<tr><th scope="row">VHF — 2016</th><td>32/32</td><td>1,000000</td><td>[0,892821; 1,000000]</td><td>[0,891119; 1,000000]</td><td>22</td><td>0,025051</td><td>2,328306 × 10<sup>-10</sup></td><td>2,793968 × 10<sup>-9</sup></td><td>ya</td></tr>
+<tr><th scope="row">VHF — 2017</th><td>19/19</td><td>1,000000</td><td>[0,831821; 1,000000]</td><td>[0,823533; 1,000000]</td><td>14</td><td>0,031784</td><td>1,907349 × 10<sup>-6</sup></td><td>1,525879 × 10<sup>-5</sup></td><td>ya</td></tr>
+<tr><th scope="row">VHF — 2018</th><td>25/25</td><td>1,000000</td><td>[0,866808; 1,000000]</td><td>[0,862815; 1,000000]</td><td>18</td><td>0,021643</td><td>2,980232 × 10<sup>-8</sup></td><td>3,278255 × 10<sup>-7</sup></td><td>ya</td></tr>
+<tr><th scope="row">VHF — 2019</th><td>24/26</td><td>0,923077</td><td>[0,758584; 0,978645]</td><td>[0,748697; 0,990545]</td><td>18</td><td>0,037759</td><td>5,245209 × 10<sup>-6</sup></td><td>3,671646 × 10<sup>-5</sup></td><td>ya</td></tr>
+<tr><th scope="row">PTT — 2019</th><td>17/18</td><td>0,944444</td><td>[0,742427; 0,990125]</td><td>[0,727056; 0,998594]</td><td>13</td><td>0,048126</td><td>7,247925 × 10<sup>-5</sup></td><td>2,899170 × 10<sup>-4</sup></td><td>ya</td></tr>
+<tr><th scope="row">VHF — 2020</th><td>24/24</td><td>1,000000</td><td>[0,862024; 1,000000]</td><td>[0,857526; 1,000000]</td><td>17</td><td>0,031957</td><td>5,960464 × 10<sup>-8</sup></td><td>5,960464 × 10<sup>-7</sup></td><td>ya</td></tr>
+<tr><th scope="row">PTT — 2020</th><td>20/21</td><td>0,952381</td><td>[0,773306; 0,991544]</td><td>[0,761840; 0,998795]</td><td>15</td><td>0,039177</td><td>1,049042 × 10<sup>-5</sup></td><td>6,294250 × 10<sup>-5</sup></td><td>ya</td></tr>
+<tr><th scope="row">VHF — 2021</th><td>15/16</td><td>0,937500</td><td>[0,716713; 0,988881]</td><td>[0,697679; 0,998419]</td><td>12</td><td>0,038406</td><td>2,593994 × 10<sup>-4</sup></td><td>6,036758 × 10<sup>-4</sup></td><td>ya</td></tr>
+<tr><th scope="row">PTT — 2021</th><td>18/20</td><td>0,900000</td><td>[0,698966; 0,972134]</td><td>[0,683017; 0,987651]</td><td>15</td><td>0,020695</td><td>2,012253 × 10<sup>-4</sup></td><td>6,036758 × 10<sup>-4</sup></td><td>ya</td></tr>
+<tr><th scope="row">VHF — 2022</th><td>12/12</td><td>1,000000</td><td>[0,757506; 1,000000]</td><td>[0,735352; 1,000000]</td><td>10</td><td>0,019287</td><td>2,441406 × 10<sup>-4</sup></td><td>6,036758 × 10<sup>-4</sup></td><td>ya</td></tr>
+<tr><th scope="row">PTT — 2022</th><td>24/24</td><td>1,000000</td><td>[0,862024; 1,000000]</td><td>[0,857526; 1,000000]</td><td>17</td><td>0,031957</td><td>5,960464 × 10<sup>-8</sup></td><td>5,960464 × 10<sup>-7</sup></td><td>ya</td></tr>
+</tbody>
+</table>
+<p><a href="../assets/capstones/CP02/CP02_frequentist_comparison.csv">Data lengkap Tabel 6</a></p>
+<p><a id="O006-C140-CMP-CP02-FIG01"></a></p>
+<figure>
+<img src="../assets/capstones/CP02/CP02_intervals.svg" alt="Dua belas baris sel menampilkan rataan dan selang kredibel Bayesian, interval Wilson, serta interval Clopper–Pearson pada skala peluang.">
+<figcaption>Gambar 1. Ringkasan posterior dan interval frekuentis per sel primer.</figcaption>
+<details><summary>Uraian tekstual lengkap</summary>
+<pre>Interval CP02 — padanan teks yang aksesibel
+Dua belas sel agregat pemancar–tahun memakai penyebut Total_method_1 yang konservatif. Rataan posterior di bawah Beta(2,2) berkisar dari 0,833333333333333 sampai 0,944444444444444. Interval Clopper–Pearson terlebar terdapat pada PTT — 2021. SVG memakai lingkaran bergaris utuh untuk ringkasan Bayes, persegi bergaris putus-putus untuk Wilson, dan belah ketupat bergaris titik untuk Clopper–Pearson, dengan peluang pada sumbu mendatar. Semua ringkasan inferensial bersifat ilustratif dan bersyarat karena bukti agregat tidak membuktikan unit Bernoulli yang saling lepas dan independen ataupun satu inisiasi yang memenuhi syarat per betina. Gambar tidak menyatakan efek kausal pemancar atau tahun.</pre>
+</details>
+</figure>
+<p><a href="../assets/capstones/CP02/CP02_cells_clean.csv">Data kanonis CP02_cells_clean.csv</a> · <a href="../assets/capstones/CP02/CP02_posterior_summary.csv">Data kanonis CP02_posterior_summary.csv</a> · <a href="../assets/capstones/CP02/CP02_frequentist_comparison.csv">Data kanonis CP02_frequentist_comparison.csv</a>
+<a href="../assets/capstones/CP02/MANIFEST.csv">Manifes dan aset pasangan</a></p>
+<p><a id="O006-C140-CMP-CP02-TAB07"></a></p>
+<table>
+<caption>Tabel 7A. Uji homogenitas kondisional eksak di bawah model</caption>
+<thead><tr><th scope="col">Skenario</th><th scope="col">Devians</th><th scope="col">p kondisional</th><th scope="col">Massa ruang</th><th scope="col">Informatif</th><th scope="col">Status</th></tr></thead>
+<tbody>
+<tr><th scope="row">primer</th><td>13,621714</td><td>2,607693 × 10<sup>-1</sup></td><td>1,000000</td><td>ya</td><td>lulus, bersyarat pada model</td></tr>
+<tr><th scope="row">sekunder liberal</th><td>28,432526</td><td>5,509759 × 10<sup>-3</sup></td><td>1,000000</td><td>ya</td><td>lulus, bersyarat pada model</td></tr>
+</tbody>
+</table>
+<table>
+<caption>Tabel 7B. Ekstrem kisi cakupan parameter-tetap pada prior utama</caption>
+<thead><tr><th scope="col">Skenario</th><th scope="col">Prosedur</th><th scope="col">n</th><th scope="col">Titik kisi</th><th scope="col">Min</th><th scope="col">Argmin</th><th scope="col">Maks</th><th scope="col">Argmaks</th><th scope="col">Cakupan p=0,50</th><th scope="col">Rataan terhadap prior</th></tr></thead>
+<tbody>
+<tr><th scope="row">primer</th><td>Bayes ekor setara (prior utama)</td><td>12</td><td>1225</td><td>0,000000</td><td>0,000000</td><td>0,985757</td><td>0,383804</td><td>0,961426</td><td>0,950000</td></tr>
+<tr><th scope="row">primer</th><td>Clopper–Pearson</td><td>12</td><td>1225</td><td>0,954486</td><td>0,723330</td><td>1,000000</td><td>0,000000</td><td>0,961426</td><td>—</td></tr>
+<tr><th scope="row">primer</th><td>Wilson</td><td>12</td><td>1225</td><td>0,835504</td><td>0,014865</td><td>1,000000</td><td>0,000000</td><td>0,961426</td><td>—</td></tr>
+<tr><th scope="row">primer</th><td>Bayes ekor setara (prior utama)</td><td>15</td><td>1279</td><td>0,000000</td><td>0,000000</td><td>0,984253</td><td>0,409925</td><td>0,964844</td><td>0,950000</td></tr>
+<tr><th scope="row">primer</th><td>Clopper–Pearson</td><td>15</td><td>1279</td><td>0,951484</td><td>0,322870</td><td>1,000000</td><td>0,000000</td><td>0,964844</td><td>—</td></tr>
+<tr><th scope="row">primer</th><td>Wilson</td><td>15</td><td>1279</td><td>0,836049</td><td>0,011867</td><td>1,000000</td><td>0,000000</td><td>0,964844</td><td>—</td></tr>
+<tr><th scope="row">primer</th><td>Bayes ekor setara (prior utama)</td><td>16</td><td>1297</td><td>0,000000</td><td>0,000000</td><td>0,981707</td><td>0,383578</td><td>0,978729</td><td>0,950000</td></tr>
+<tr><th scope="row">primer</th><td>Clopper–Pearson</td><td>16</td><td>1297</td><td>0,957814</td><td>0,523771</td><td>1,000000</td><td>0,000000</td><td>0,978729</td><td>—</td></tr>
+<tr><th scope="row">primer</th><td>Wilson</td><td>16</td><td>1297</td><td>0,836184</td><td>0,011119</td><td>1,000000</td><td>0,000000</td><td>0,923187</td><td>—</td></tr>
+<tr><th scope="row">primer</th><td>Bayes ekor setara (prior utama)</td><td>18</td><td>1333</td><td>0,000000</td><td>0,000000</td><td>0,978376</td><td>0,297807</td><td>0,969116</td><td>0,950000</td></tr>
+<tr><th scope="row">primer</th><td>Clopper–Pearson</td><td>18</td><td>1333</td><td>0,954656</td><td>0,357451</td><td>1,000000</td><td>0,000000</td><td>0,969116</td><td>—</td></tr>
+<tr><th scope="row">primer</th><td>Wilson</td><td>18</td><td>1333</td><td>0,836410</td><td>0,009875</td><td>1,000000</td><td>0,000000</td><td>0,969116</td><td>—</td></tr>
+<tr><th scope="row">primer</th><td>Bayes ekor setara (prior utama)</td><td>19</td><td>1351</td><td>0,000000</td><td>0,000000</td><td>0,981251</td><td>0,451276</td><td>0,980789</td><td>0,950000</td></tr>
+<tr><th scope="row">primer</th><td>Clopper–Pearson</td><td>19</td><td>1351</td><td>0,951786</td><td>0,334998</td><td>1,000000</td><td>0,000000</td><td>0,980789</td><td>—</td></tr>
+<tr><th scope="row">primer</th><td>Wilson</td><td>19</td><td>1351</td><td>0,836504</td><td>0,009352</td><td>1,000000</td><td>0,000000</td><td>0,936432</td><td>—</td></tr>
+<tr><th scope="row">primer</th><td>Bayes ekor setara (prior utama)</td><td>20</td><td>1369</td><td>0,000000</td><td>0,000000</td><td>0,979791</td><td>0,385419</td><td>0,958611</td><td>0,950000</td></tr>
+<tr><th scope="row">primer</th><td>Clopper–Pearson</td><td>20</td><td>1369</td><td>0,957970</td><td>0,491046</td><td>1,000000</td><td>0,000000</td><td>0,958611</td><td>—</td></tr>
+<tr><th scope="row">primer</th><td>Wilson</td><td>20</td><td>1369</td><td>0,836589</td><td>0,008881</td><td>1,000000</td><td>0,000000</td><td>0,958611</td><td>—</td></tr>
+<tr><th scope="row">primer</th><td>Bayes ekor setara (prior utama)</td><td>21</td><td>1387</td><td>0,000000</td><td>0,000000</td><td>0,977894</td><td>0,366431</td><td>0,973396</td><td>0,950000</td></tr>
+<tr><th scope="row">primer</th><td>Clopper–Pearson</td><td>21</td><td>1387</td><td>0,953295</td><td>0,478249</td><td>1,000000</td><td>0,000000</td><td>0,973396</td><td>—</td></tr>
+<tr><th scope="row">primer</th><td>Wilson</td><td>21</td><td>1387</td><td>0,836666</td><td>0,008456</td><td>1,000000</td><td>0,000000</td><td>0,921646</td><td>—</td></tr>
+<tr><th scope="row">primer</th><td>Bayes ekor setara (prior utama)</td><td>24</td><td>1441</td><td>0,000000</td><td>0,000000</td><td>0,977735</td><td>0,460393</td><td>0,977344</td><td>0,950000</td></tr>
+<tr><th scope="row">primer</th><td>Clopper–Pearson</td><td>24</td><td>1441</td><td>0,952539</td><td>0,328208</td><td>1,000000</td><td>0,000000</td><td>0,977344</td><td>—</td></tr>
+<tr><th scope="row">primer</th><td>Wilson</td><td>24</td><td>1441</td><td>0,836857</td><td>0,007393</td><td>1,000000</td><td>0,000000</td><td>0,936085</td><td>—</td></tr>
+<tr><th scope="row">primer</th><td>Bayes ekor setara (prior utama)</td><td>25</td><td>1459</td><td>0,000000</td><td>0,000000</td><td>0,976524</td><td>0,405768</td><td>0,956715</td><td>0,950000</td></tr>
+<tr><th scope="row">primer</th><td>Clopper–Pearson</td><td>25</td><td>1459</td><td>0,950511</td><td>0,313057</td><td>1,000000</td><td>0,000000</td><td>0,956715</td><td>—</td></tr>
+<tr><th scope="row">primer</th><td>Wilson</td><td>25</td><td>1459</td><td>0,836910</td><td>0,007096</td><td>1,000000</td><td>0,000000</td><td>0,956715</td><td>—</td></tr>
+<tr><th scope="row">primer</th><td>Bayes ekor setara (prior utama)</td><td>26</td><td>1477</td><td>0,000000</td><td>0,000000</td><td>0,976086</td><td>0,643061</td><td>0,971041</td><td>0,950000</td></tr>
+<tr><th scope="row">primer</th><td>Clopper–Pearson</td><td>26</td><td>1477</td><td>0,952399</td><td>0,482104</td><td>1,000000</td><td>0,000000</td><td>0,971041</td><td>—</td></tr>
+<tr><th scope="row">primer</th><td>Wilson</td><td>26</td><td>1477</td><td>0,836960</td><td>0,006822</td><td>1,000000</td><td>0,000000</td><td>0,924481</td><td>—</td></tr>
+<tr><th scope="row">primer</th><td>Bayes ekor setara (prior utama)</td><td>32</td><td>1585</td><td>0,000000</td><td>0,000000</td><td>0,973085</td><td>0,366458</td><td>0,949898</td><td>0,950000</td></tr>
+<tr><th scope="row">primer</th><td>Clopper–Pearson</td><td>32</td><td>1585</td><td>0,950390</td><td>0,531931</td><td>1,000000</td><td>0,000000</td><td>0,979938</td><td>—</td></tr>
+<tr><th scope="row">primer</th><td>Wilson</td><td>32</td><td>1585</td><td>0,837190</td><td>0,005538</td><td>1,000000</td><td>0,000000</td><td>0,949898</td><td>—</td></tr>
+</tbody>
+</table>
+<p><a href="../assets/capstones/CP02/CP02_coverage.csv.gz">Buku besar cakupan lengkap — distribusi gzip dari CSV kanonis</a></p>
+<p><a id="O006-C140-CMP-CP02-FIG02"></a></p>
+<figure>
+<img src="../assets/capstones/CP02/CP02_coverage.svg" alt="Kurva cakupan membandingkan selang kredibel beta, Wilson, dan Clopper–Pearson untuk setiap ukuran penyebut yang dibekukan.">
+<figcaption>Gambar 2. Cakupan parameter-tetap pada kisi yang memuat titik ujung interval.</figcaption>
+<details><summary>Uraian tekstual lengkap</summary>
+<pre>Cakupan CP02 pada parameter tetap — padanan teks yang aksesibel
+Sumbu mendatar adalah p tetap dari 0 sampai 1 dan panel mewakili 11 penyebut primer yang berbeda. Minimum pada kisi yang diperluas ialah Bayes 0, Wilson 0,835503914016063, dan Clopper–Pearson 0,950389693953569. Garis utuh, putus-putus, dan titik membedakan prosedur; garis acuan mendatar menandai 0,95. Ekstrem kisi tidak diklaim sebagai ekstrem global kontinu. Distribusi acuan eksak hanya di bawah model Binomial; penerapan empiris tetap ilustratif sampai tersedia bukti independensi unit.</pre>
+</details>
+</figure>
+<p><a href="../assets/capstones/CP02/CP02_coverage.csv.gz">Distribusi gzip dari data kanonis CP02_coverage.csv</a>
+<a href="../assets/capstones/CP02/MANIFEST.csv">Manifes dan aset pasangan</a></p>
+<p><a id="O006-C140-CMP-CP02-P01-SOL-DIAG"></a></p>
+<h4>Pemeriksaan prediktif, kelangkaan, dan keteridentifikasian</h4>
+<p>Untuk skenario aktif, bentuk replikasi</p>
+<div class="math-display" role="math">\[Y_g^{\mathrm{rep}}\mid p_g,n_g
+\sim\operatorname{Binomial}(n_g,p_g).\]</div>
+<p>Di bawah <span class="math-inline" role="math">\(M_0\)</span>, gunakan satu <span class="math-inline" role="math">\(p\)</span>; di bawah <span class="math-inline" role="math">\(M_1\)</span>, tarik setiap <span class="math-inline" role="math">\(p_g\)</span>
+dari posterior sel. Pada <span class="math-inline" role="math">\(M_0\)</span>, replikasi antarsel saling independen secara bersyarat setelah
+mengondisikan pada satu <span class="math-inline" role="math">\(p\)</span> bersama, tetapi bergantung secara marginal setelah
+<span class="math-inline" role="math">\(p\)</span> diintegralkan. Generator mempertahankan struktur bersama itu dan tidak
+menyamakan prediktif multisel dengan hasil kali marginal beta–binomial. Ukuran
+ketidakcocokan yang ditetapkan sebelumnya adalah</p>
+<div class="math-display" role="math">\[Z_g(\boldsymbol y,\boldsymbol p)=
+\frac{y_g-n_gp_g}{\sqrt{n_gp_g(1-p_g)}},\]</div>
+<div class="math-display" role="math">\[D_P=\sum_gZ_g^2,\qquad
+D_{\max}=\max_g|Z_g|,\]</div>
+<p>dan jumlah sel batas</p>
+<div class="math-display" role="math">\[D_{\mathrm{batas}}=\sum_g
+\mathbf 1\{y_g=0\ \text{atau}\ y_g=n_g\}.\]</div>
+<p>Jika desain mendukung kontras yang ditetapkan sebelumnya <span class="math-inline" role="math">\(c_g\)</span> dengan
+<span class="math-inline" role="math">\(\sum_gc_g=0\)</span>, gunakan</p>
+<div class="math-display" role="math">\[D_C(\boldsymbol y)=\left|\sum_gc_g\frac{y_g}{n_g}\right|.\]</div>
+<p>Luas ekor prediktif</p>
+<div class="math-display" role="math">\[p_{\mathrm{ppc},j}=P\{D_j(\boldsymbol Y^{\mathrm{rep}},\boldsymbol p)
+\ge D_j(\boldsymbol y,\boldsymbol p)\mid\boldsymbol y\}\]</div>
+<p>disertai nilai teramati, median dan kuantil replikasi, jumlah tarikan, benih acak, dan</p>
+<div class="math-display" role="math">\[\operatorname{MCSE}_j=
+\sqrt{\frac{\widehat p_{\mathrm{ppc},j}
+(1-\widehat p_{\mathrm{ppc},j})}{R}}.\]</div>
+<p>Dalam rumus terakhir, kedua faktor yang ditulis berdampingan dikalikan:
+<span class="math-inline" role="math">\(\widehat p_{\mathrm{ppc},j}(1-\widehat p_{\mathrm{ppc},j})\)</span>, bukan
+penjumlahan. Luas ekor adalah diagnostik posterior, bukan nilai-p yang berdistribusi seragam di bawah hipotesis nol atau
+uji berukuran 0,05 <a class="xref" data-target-id="O006-C140-CMP-D013-DEF02" href="../theory/O006-C140-CMP-D013.html#O006-C140-CMP-D013-DEF02">Dua konstruksi ekor</a>.</p>
+<p>Model kandidat untuk dispersi berlebih menggunakan desain rataan yang hanya memuat intersep</p>
+<div class="math-display" role="math">\[\operatorname{logit}(\mu_g)=\boldsymbol x_g^{\mathsf T}\boldsymbol\beta,
+\qquad \boldsymbol x_g=(1),\qquad q=1,\]</div>
+<p>dan</p>
+<div class="math-display" role="math">\[p_g\mid\mu,\kappa\sim
+\operatorname{Beta}\{\kappa\mu,\kappa(1-\mu)\},
+\quad
+Y_g\mid p_g\sim\operatorname{Binomial}(n_g,p_g),\]</div>
+<p>dengan <span class="math-inline" role="math">\(\rho=1/(\kappa+1)\)</span> dan</p>
+<div class="math-display" role="math">\[\operatorname{Var}(Y_g\mid\mu,\kappa)
+=n_g\mu(1-\mu)\{1+(n_g-1)\rho\}.\]</div>
+<p>Gerbang keteridentifikasian dapat dijalankan secara langsung: profilkan
+<span class="math-inline" role="math">\(\log\kappa\in[-4,12]\)</span> dengan langkah 0,5; optimalkan intersep pada setiap
+titik; hitung peringkat informasi teramati terstandar dengan toleransi <span class="math-inline" role="math">\(10^{-6}\)</span>;
+Pemeriksaan mensyaratkan peringkat 2, lokasi maksimum yang tidak berada pada batas profil, <span class="math-inline" role="math">\(G-q-1=10&gt;0\)</span>, dan
+sedikitnya dua hiperprior wajar yang telah ditetapkan sebelumnya untuk
+sensitivitas. Kontrak beku tidak menyediakan keluarga hiperprior tersebut,
+sehingga status akhirnya <code>unsupported_identification</code> dan tidak ada taksiran
+dispersi yang dipaksakan. Model dengan rataan jenuh per sel mempunyai <span class="math-inline" role="math">\(q=G\)</span> dan
+tidak menyisakan replikasi antarsel untuk dispersi tambahan. Analisis utama
+tetap binomial; agregat tidak memisahkan dispersi berlebih, heterogenitas sel, dan
+dependensi.</p>
+<p><a id="O006-C140-CMP-CP02-TAB08"></a></p>
+<table>
+<caption>Tabel 8A. Pemeriksaan prediktif posterior (100.000 replikasi PCG64 per kombinasi)</caption>
+<thead><tr><th scope="col">Skenario</th><th scope="col">Model</th><th scope="col">Ukuran ketidakcocokan</th><th scope="col">Nilai teramati</th><th scope="col">Median replikasi</th><th scope="col">Selang replikasi 95%</th><th scope="col">Luas ekor</th><th scope="col">MCSE</th><th scope="col">Aliran RNG</th></tr></thead>
+<tbody>
+<tr><th scope="row">primer</th><td>M0</td><td>jumlah Pearson</td><td>10,374205</td><td>10,355225</td><td>[4,849296; 28,727862]</td><td>0,453020</td><td>0,001574</td><td>1</td></tr>
+<tr><th scope="row">primer</th><td>M0</td><td>sisaan terstandar absolut maksimum</td><td>1,633095</td><td>1,852771</td><td>[0,891835; 4,039188]</td><td>0,604200</td><td>0,001546</td><td>1</td></tr>
+<tr><th scope="row">primer</th><td>M0</td><td>jumlah sel batas</td><td>7,000000</td><td>6,000000</td><td>[2,000000; 10,000000]</td><td>0,396670</td><td>0,001547</td><td>1</td></tr>
+<tr><th scope="row">primer</th><td>M0</td><td>kontras desain maksimum yang ditetapkan sebelumnya</td><td>0,100000</td><td>0,100000</td><td>[0,047619; 0,201538]</td><td>0,541560</td><td>0,001576</td><td>1</td></tr>
+<tr><th scope="row">primer</th><td>M1</td><td>jumlah Pearson</td><td>19,135342</td><td>10,956124</td><td>[4,515065; 25,941834]</td><td>0,138220</td><td>0,001091</td><td>2</td></tr>
+<tr><th scope="row">primer</th><td>M1</td><td>sisaan terstandar absolut maksimum</td><td>2,087448</td><td>1,836571</td><td>[1,086048; 3,644826]</td><td>0,371280</td><td>0,001528</td><td>2</td></tr>
+<tr><th scope="row">primer</th><td>M1</td><td>jumlah sel batas</td><td>7,000000</td><td>2,000000</td><td>[0,000000; 5,000000]</td><td>0,004250</td><td>0,000206</td><td>2</td></tr>
+<tr><th scope="row">primer</th><td>M1</td><td>kontras desain maksimum yang ditetapkan sebelumnya</td><td>0,100000</td><td>0,258333</td><td>[0,125000; 0,500000]</td><td>0,996870</td><td>0,000177</td><td>2</td></tr>
+<tr><th scope="row">sekunder liberal</th><td>M0</td><td>jumlah Pearson</td><td>22,361832</td><td>11,201112</td><td>[4,526812; 24,371209]</td><td>0,036490</td><td>0,000593</td><td>3</td></tr>
+<tr><th scope="row">sekunder liberal</th><td>M0</td><td>sisaan terstandar absolut maksimum</td><td>2,400150</td><td>1,830288</td><td>[1,117070; 3,380206]</td><td>0,184480</td><td>0,001227</td><td>3</td></tr>
+<tr><th scope="row">sekunder liberal</th><td>M0</td><td>jumlah sel batas</td><td>3,000000</td><td>1,000000</td><td>[0,000000; 3,000000]</td><td>0,054770</td><td>0,000720</td><td>3</td></tr>
+<tr><th scope="row">sekunder liberal</th><td>M0</td><td>kontras desain maksimum yang ditetapkan sebelumnya</td><td>0,250000</td><td>0,183333</td><td>[0,096990; 0,312500]</td><td>0,149030</td><td>0,001126</td><td>3</td></tr>
+<tr><th scope="row">sekunder liberal</th><td>M1</td><td>jumlah Pearson</td><td>14,797850</td><td>11,130987</td><td>[4,462954; 24,573349]</td><td>0,297970</td><td>0,001446</td><td>4</td></tr>
+<tr><th scope="row">sekunder liberal</th><td>M1</td><td>sisaan terstandar absolut maksimum</td><td>2,004390</td><td>1,862406</td><td>[1,104691; 3,390622]</td><td>0,423070</td><td>0,001562</td><td>4</td></tr>
+<tr><th scope="row">sekunder liberal</th><td>M1</td><td>jumlah sel batas</td><td>3,000000</td><td>1,000000</td><td>[0,000000; 3,000000]</td><td>0,089650</td><td>0,000903</td><td>4</td></tr>
+<tr><th scope="row">sekunder liberal</th><td>M1</td><td>kontras desain maksimum yang ditetapkan sebelumnya</td><td>0,250000</td><td>0,363043</td><td>[0,196023; 0,616667]</td><td>0,898580</td><td>0,000955</td><td>4</td></tr>
+</tbody>
+</table>
+<table>
+<caption>Tabel 8B. Gerbang keteridentifikasian dispersi berlebih</caption>
+<thead><tr><th scope="col">Skenario</th><th scope="col">Model</th><th scope="col">Desain</th><th scope="col">q</th><th scope="col">Derajat bebas sisaan</th><th scope="col">Peringkat informasi</th><th scope="col">Nilai eigen min</th><th scope="col">Maksimum di batas</th><th scope="col">Sensitivitas hiperprior</th><th scope="col">Status</th></tr></thead>
+<tbody>
+<tr><th scope="row">primer</th><td>model kandidat dispersi berlebih beta–binomial</td><td>intersep saja</td><td>1</td><td>10</td><td>2</td><td>0,875255</td><td>tidak</td><td>tidak</td><td>keteridentifikasian tidak didukung</td></tr>
+<tr><th scope="row">primer</th><td>model binomial khusus per sel dengan dispersi tambahan</td><td>rataan jenuh per sel</td><td>12</td><td>-1</td><td>0</td><td>—</td><td>—</td><td>tidak</td><td>tidak teridentifikasi (rataan jenuh per sel)</td></tr>
+<tr><th scope="row">sekunder liberal</th><td>model kandidat dispersi berlebih beta–binomial</td><td>intersep saja</td><td>1</td><td>10</td><td>2</td><td>0,792621</td><td>tidak</td><td>tidak</td><td>keteridentifikasian tidak didukung</td></tr>
+<tr><th scope="row">sekunder liberal</th><td>model binomial khusus per sel dengan dispersi tambahan</td><td>rataan jenuh per sel</td><td>12</td><td>-1</td><td>0</td><td>—</td><td>—</td><td>tidak</td><td>tidak teridentifikasi (rataan jenuh per sel)</td></tr>
+</tbody>
+</table>
+<p>Seluruh luas ekor adalah diagnostik posterior, bukan nilai-p klasik. Taksiran dispersi tambahan tidak dilaporkan karena tidak semua syarat yang ditetapkan terpenuhi; klaim sekuensial juga tidak tersedia.</p>
+<p><a href="../assets/capstones/CP02/CP02_diagnostics.csv">Data diagnostik lengkap</a></p>
+<p><a id="O006-C140-CMP-CP02-P01-SOL-SENS"></a></p>
+<h4>Sensitivitas prior, penyebut, dan pengaruh sel</h4>
+<p>Analisis utama memakai <span class="math-inline" role="math">\(\kappa=4\)</span>, yaitu <span class="math-inline" role="math">\(\operatorname{Beta}(2,2)\)</span>.
+Ulangi seluruh ringkasan posterior, interval, probabilitas dan tindakan, prediktif, serta bukti
+marginal untuk</p>
+<div class="math-display" role="math">\[p_g\sim\operatorname{Beta}(\kappa/2,\kappa/2),
+\qquad \kappa\in\{1,2,4,8,16\}.\]</div>
+<p>Semua prior itu wajar dan tetap berpusat pada <span class="math-inline" role="math">\(1/2\)</span>. Dengan parameter umum
+<span class="math-inline" role="math">\(a_j(\lambda)=\lambda a_j^{(0)}\)</span>,
+<span class="math-inline" role="math">\(b_j(\lambda)=\lambda b_j^{(0)}\)</span>, kurva log faktor Bayes adalah</p>
+<div class="math-display" role="math">\[\begin{aligned}
+\ell_{10}(\lambda)
+&amp;=\log B\{a_0(\lambda),b_0(\lambda)\}
+-\log B\{a_0(\lambda)+Y_+,b_0(\lambda)+N_+-Y_+\}\\
+&amp;\quad+\sum_g\left[
+\log B\{a_1(\lambda)+y_g,b_1(\lambda)+n_g-y_g\}
+-\log B\{a_1(\lambda),b_1(\lambda)\}
+\right].
+\end{aligned}\]</div>
+<p>Laporkan <span class="math-inline" role="math">\(B_{10}\)</span>, odds posterior, dan interval kisi yang mengapit persilangan
+<span class="math-inline" role="math">\(\ell_{10}=0\)</span>. Perubahan bukti marginal mencerminkan perubahan model
+prediktif, bukan galat. Prior tak wajar dan pemilihan skala setelah melihat hasil
+dilarang <a class="xref" data-target-id="O006-C140-CMP-D013-ALG02" href="../theory/O006-C140-CMP-D013.html#O006-C140-CMP-D013-ALG02">Audit faktor Bayes</a>.</p>
+<p>Analisis penyebut liberal mengulangi alur secara utuh dengan
+<span class="math-inline" role="math">\(n_g^{(2)}\)</span>. Analisis ini tidak menjumlahkan, merata-ratakan, atau menukar penyebut;
+perbedaan diberi label sebagai perubahan estimand atau populasi percobaan.</p>
+<p>Untuk penghapusan satu sel (LOO), definisikan</p>
+<div class="math-display" role="math">\[I_r^{BF}=\ell_{10}^{(-r)}-\ell_{10}.\]</div>
+<p>Untuk target skalar <span class="math-inline" role="math">\(\psi_h\)</span> yang tetap terdefinisi,</p>
+<div class="math-display" role="math">\[I_{r,h}^{\mu}=E(\psi_h\mid\boldsymbol y_{-r})
+-E(\psi_h\mid\boldsymbol y),\]</div>
+<div class="math-display" role="math">\[I_{r,h}^{q}=P(\psi_h\in\mathcal A_h\mid\boldsymbol y_{-r})
+-P(\psi_h\in\mathcal A_h\mid\boldsymbol y).\]</div>
+<p><code>CP02_influence.csv</code> menyimpan tiap besaran dengan tipe skalanya sendiri:
+<code>log_evidence</code>, <code>probability</code>, atau <code>probability_endpoint</code>. Perubahan absolut
+hanya dibandingkan di dalam <code>metric_type</code> dan <code>metric_scale</code> yang sama; tidak
+ada maksimum lintas skala. Kontras yang memakai sel yang dihapus berstatus
+<code>not_defined_after_deletion</code>. Besarnya pengaruh tidak membenarkan penghapusan sel dari
+analisis utama.</p>
+<p>Jika hanya hitungan akhir tersedia, tetapkan <code>sequential_claim=false</code>.
+Jaminan penghentian opsional hanya berlaku bila dua hukum peluang yang wajar dan filtrasi
+dibekukan serta</p>
+<div class="math-display" role="math">\[B_{10,t}=\frac{dP_1|_{\mathcal F_t}}{dP_0|_{\mathcal F_t}}\]</div>
+<p>merupakan martingale nonnegatif di bawah <span class="math-inline" role="math">\(P_0\)</span>. Ketaksamaan Ville lalu
+memberi</p>
+<div class="math-display" role="math">\[P_0\left(\sup_tB_{10,t}\ge A\right)\le A^{-1}.\]</div>
+<p>Data CP02 tidak memuat riwayat penghentian, jadi tidak ada klaim sah pada setiap saat
+<a class="xref" data-target-id="O006-C140-CMP-D013-THM04" href="../theory/O006-C140-CMP-D013.html#O006-C140-CMP-D013-THM04">Faktor Bayes sebagai martingal bagi rasio fungsi kemungkinan</a>.</p>
+<p><a id="O006-C140-CMP-CP02-ALG04"></a></p>
+<h5>Urutan diagnostik dan sensitivitas</h5>
+<p>Bekukan ukuran ketidakcocokan, kisi, dan skenario; jalankan pemeriksaan prediktif pada
+spesifikasi utama; ulangi analisis dengan prior wajar alternatif; ulangi dengan penyebut liberal sebagai estimand
+lain; jalankan 12 penghapusan satu sel; lalu evaluasi gerbang dispersi berlebih dan
+penghentian opsional. Urutan keluaran mengikuti <code>cell_id</code>, bukan besarnya perubahan.</p>
+<p><a id="O006-C140-CMP-CP02-TAB09"></a></p>
+<table>
+<caption>Tabel 9A. Sensitivitas skala prior wajar</caption>
+<thead><tr><th scope="col">κ</th><th scope="col">log B₁₀</th><th scope="col">B₁₀</th><th scope="col">Odds posterior</th><th scope="col">Δ log B₁₀</th><th scope="col">Tindakan berubah</th><th scope="col">Tindakan</th></tr></thead>
+<tbody>
+<tr><th scope="row">1,0</th><td>-13,634860</td><td>1,197996 × 10<sup>-6</sup></td><td>1,197996 × 10<sup>-6</sup></td><td>18,470235</td><td>tidak</td><td>pilih M0</td></tr>
+<tr><th scope="row">2,0</th><td>-20,842840</td><td>8,872984 × 10<sup>-10</sup></td><td>8,872984 × 10<sup>-10</sup></td><td>11,262256</td><td>tidak</td><td>pilih M0</td></tr>
+<tr><th scope="row">4,0</th><td>-32,105096</td><td>1,140077 × 10<sup>-14</sup></td><td>1,140077 × 10<sup>-14</sup></td><td>0,000000</td><td>tidak</td><td>pilih M0</td></tr>
+<tr><th scope="row">8,0</th><td>-46,561715</td><td>6,004875 × 10<sup>-21</sup></td><td>6,004875 × 10<sup>-21</sup></td><td>-14,456620</td><td>tidak</td><td>pilih M0</td></tr>
+<tr><th scope="row">16,0</th><td>-61,215085</td><td>2,597923 × 10<sup>-27</sup></td><td>2,597923 × 10<sup>-27</sup></td><td>-29,109990</td><td>tidak</td><td>pilih M0</td></tr>
+</tbody>
+</table>
+<p>Peralihan ke penyebut liberal mengubah populasi percobaan yang memenuhi syarat. Perubahan proporsi teramati terbesar adalah 0,250000 pada VHF — 2022; perubahan rataan posterior terbesar adalah 0,175000 pada VHF — 2022; 0 dari 12 tindakan sel berubah. Angka ini bukan ukuran ketahanan bagi satu estimand yang sama.</p>
+<table>
+<caption>Tabel 9B. Pengaruh penghapusan satu sel, dipisahkan menurut skala</caption>
+<thead><tr><th scope="col">Metrik</th><th scope="col">Skala</th><th scope="col">Sel dihapus</th><th scope="col">Nilai penuh</th><th scope="col">Nilai setelah satu sel dihapus</th><th scope="col">Perubahan</th><th scope="col">|Perubahan|</th></tr></thead>
+<tbody>
+<tr><th scope="row">log faktor Bayes B₁₀</th><td>log bukti marginal</td><td>VHF — 2016</td><td>-32,105096</td><td>-28,042727</td><td>4,062369</td><td>4,062369</td></tr>
+<tr><th scope="row">batas atas kredibel gabungan 95%</th><td>titik ujung peluang</td><td>PTT — 2021</td><td>0,983737</td><td>0,987942</td><td>0,004205</td><td>0,004205</td></tr>
+<tr><th scope="row">batas bawah kredibel gabungan 95%</th><td>titik ujung peluang</td><td>VHF — 2016</td><td>0,939122</td><td>0,930539</td><td>-0,008582</td><td>0,008582</td></tr>
+<tr><th scope="row">rataan posterior gabungan</th><td>peluang</td><td>PTT — 2021</td><td>0,964844</td><td>0,970339</td><td>0,005495</td><td>0,005495</td></tr>
+<tr><th scope="row">peluang posterior gabungan di atas ambang</th><td>peluang</td><td>VHF — 2022</td><td>1,000000</td><td>1,000000</td><td>0,000000</td><td>0,000000</td></tr>
+</tbody>
+</table>
+<table>
+<caption>Tabel 9C. Rasio odds dengan rataan posterior tak hingga</caption>
+<thead><tr><th scope="col">Skenario</th><th scope="col">κ</th><th scope="col">Jumlah kontras</th><th scope="col">Ringkasan yang sah</th></tr></thead>
+<tbody>
+<tr><th scope="row">prior κ=1</th><td>1,0</td><td>7</td><td>median dan kuantil tetap dilaporkan</td></tr>
+<tr><th scope="row">prior κ=2</th><td>2,0</td><td>7</td><td>median dan kuantil tetap dilaporkan</td></tr>
+</tbody>
+</table>
+<p><a href="../assets/capstones/CP02/CP02_sensitivity.csv">Data sensitivitas</a> · <a href="../assets/capstones/CP02/CP02_influence.csv">data pengaruh dengan tipe skala</a></p>
+<p><a id="O006-C140-CMP-CP02-FIG03"></a></p>
+<figure>
+<img src="../assets/capstones/CP02/CP02_sensitivity.svg" alt="Tiga panel memisahkan perubahan log faktor Bayes, perubahan akibat penyebut liberal, dan pengaruh LOO pada rataan posterior gabungan.">
+<figcaption>Gambar 3. Sensitivitas prior, penyebut, dan penghapusan satu sel.</figcaption>
+<details><summary>Uraian tekstual lengkap</summary>
+<pre>Sensitivitas CP02 — padanan teks yang aksesibel
+Perubahan rataan posterior terbesar pada prior wajar ialah 0,160714285714286 pada VHF — 2022. Perubahan proporsi teramati terbesar pada penyebut liberal ialah 0,25 pada VHF — 2022; penyebut ini dapat mendefinisikan estimand populasi percobaan yang berbeda. Perubahan rataan posterior gabungan terbesar ketika satu sel dihapus (LOO) adalah 0,00549523305084743 setelah PTT — 2021 dikeluarkan. Log faktor Bayes B₁₀ primer ialah -32,1050957264718 (faktor Bayes B₁₀ 1,14007673944654e-14); log bukti marginal dan perubahan pada skala peluang tidak pernah diperingkat bersama. Tidak ada panel yang mengidentifikasi sebab biologis.</pre>
+</details>
+</figure>
+<p><a href="../assets/capstones/CP02/CP02_sensitivity.csv">Data kanonis CP02_sensitivity.csv</a> · <a href="../assets/capstones/CP02/CP02_influence.csv">Data kanonis CP02_influence.csv</a>
+<a href="../assets/capstones/CP02/MANIFEST.csv">Manifes dan aset pasangan</a></p>
+<p><a id="O006-C140-CMP-CP02-P01-SOL-REPLAY"></a></p>
+<h4>Pemutaran ulang luring, pemeriksaan, dan aksesibilitas</h4>
+<p>Semua hasil berasal dari satu generator yang membaca hanya inventaris lokal
+CP02. Versi Python, NumPy, dan dependensi yang benar-benar diperlukan dikunci.
+Perhitungan eksak, fungsi Beta, dan kuadratur deterministik diprioritaskan;
+Monte Carlo hanya pemeriksaan tambahan dengan benih acak PCG64 <code>2026083002</code>.</p>
+<p><a id="O006-C140-CMP-CP02-ALG05"></a></p>
+<h5>Kontrak pemutaran ulang</h5>
+<ol>
+<li>Muat dan verifikasi manifes, hak, skema, serta hash byte mentah.</li>
+<li>Bentuk tabel primer dalam urutan kanonis dan hitung analisis
+Bayesian dan frekuentis, diagnostik, serta sensitivitas.</li>
+<li>Mode <code>--write</code> menulis satu himpunan keluaran lengkap dan manifes terakhir.</li>
+<li>Jalankan mode <code>--check-only</code> dua kali; setiap pelaksanaan membangun muatan di memori tanpa menulis,
+lalu membandingkan nama, byte, SHA-256, pemeriksaan, manifes, serta tanda terima.</li>
+<li>Pembangunan gagal bila posterior, interval, atau probabilitas keluar dari domain,
+bukti marginal, odds, atau kerugian tidak konsisten, cakupan memakai hukum yang salah,
+penyebut bercampur, inventaris LOO tidak lengkap, atau keluaran berubah.</li>
+</ol>
+<p>Keluaran minimum meliputi <code>CP02_cells_clean.csv</code>,
+<code>CP02_posterior_summary.csv</code>, <code>CP02_model_comparison.csv</code>,
+<code>CP02_frequentist_comparison.csv</code>, <code>CP02_coverage.csv</code>,
+<code>CP02_posterior_predictive.csv</code>, <code>CP02_diagnostics.csv</code>,
+<code>CP02_sensitivity.csv</code>, <code>CP02_influence.csv</code>, tiga SVG kanonis, CSV dan teks
+pasangan, <code>MANIFEST.csv</code>, dan tanda terima JSON. Tanda terima mencatat
+<code>network_access=false</code> dan <code>browser_processes_used=false</code>.</p>
+<p>Setiap tabel HTML mempunyai keterangan; kepala kolomnya memakai atribut <code>scope</code> dan mencantumkan unit serta penyebut.
+Setiap SVG mempunyai elemen <code>&lt;title&gt;</code> dan <code>&lt;desc&gt;</code>; teks alternatif menyatakan variabel, sumbu,
+prosedur, pola, dan batas interpretasi. Informasi tidak dibedakan hanya lewat
+warna.</p>
+<p><a id="O006-C140-CMP-CP02-TAB10"></a></p>
+<table>
+<caption>Tabel 10. Inventaris keluaran analisis yang ditutup manifes</caption>
+<thead><tr><th scope="col">Berkas</th><th scope="col">Peran</th><th scope="col">Byte</th><th scope="col">SHA-256</th></tr></thead>
+<tbody>
+<tr><th scope="row"><code>CP02_cells_clean.csv</code></th><td>tabel sel siap analisis</td><td>3.336</td><td><code>13f271df4677a54b4eeed6307fc0165616ab89a123ee62666add42560be84ad8</code></td></tr>
+<tr><th scope="row"><code>CP02_contrasts.csv</code></th><td>kontras peluang dan odds yang ditetapkan sebelumnya</td><td>78.922</td><td><code>39f9e5d170f60b3572f46006aaf9d575e0bd1329589b44174de633d90660500b</code></td></tr>
+<tr><th scope="row"><code>CP02_coverage.csv</code></th><td>buku besar cakupan parameter tetap</td><td>135.581.717</td><td><code>86997c120a94e342d943ae72eb827871564e96545de911d1e3a3c677a5bc347e</code></td></tr>
+<tr><th scope="row"><code>CP02_coverage.svg</code></th><td>gambar cakupan statis yang aksesibel</td><td>62.481</td><td><code>f9ddd50d0d05b216b16d1b851abb3b3154bba492c0630e4bfe8bb7744c014137</code></td></tr>
+<tr><th scope="row"><code>CP02_coverage.txt</code></th><td>padanan teks gambar cakupan</td><td>560</td><td><code>0c38bdeb84a0cd93fd884658ce32d5b2a96e71ee3d688f9b88fc02eeecce08ec</code></td></tr>
+<tr><th scope="row"><code>CP02_diagnostics.csv</code></th><td>diagnostik prediktif posterior dan keteridentifikasian</td><td>11.303</td><td><code>b5d0d9a90ae3336dd3285380b66c4baadc7cd9c39e9bc14f00b7ca4045ea8113</code></td></tr>
+<tr><th scope="row"><code>CP02_diagnostics.txt</code></th><td>padanan teks diagnostik</td><td>629</td><td><code>df82834968a00e58b0c253754206c312b3ac61f92f62ba064abd9afe36d84e72</code></td></tr>
+<tr><th scope="row"><code>CP02_dispersion_profile.csv</code></th><td>profil keteridentifikasian dispersi berlebih deterministik</td><td>24.717</td><td><code>f895a81a408b0158cc01d667e3cd2d575882c01188eb2c731441997db786dc1e</code></td></tr>
+<tr><th scope="row"><code>CP02_frequentist_comparison.csv</code></th><td>ringkasan interval, uji, daya, cakupan, dan homogenitas</td><td>3.716.597</td><td><code>e8bc7769186560f1a568372a000c760380027ff5f9cabcad133e8f7423e986f7</code></td></tr>
+<tr><th scope="row"><code>CP02_influence.csv</code></th><td>metrik penghapusan satu sel dengan tipe skala eksplisit</td><td>17.854</td><td><code>fa8383dd7e8128e2a1f52e6c1ba3a59b705a99eecc963ffd7fa6d0c4f5fab2ba</code></td></tr>
+<tr><th scope="row"><code>CP02_intervals.svg</code></th><td>gambar interval statis yang aksesibel</td><td>12.334</td><td><code>2c23ff26fc81a5f173ce2eed8e32b8a3f4837526d4c0665b3f1b1c898b4e1799</code></td></tr>
+<tr><th scope="row"><code>CP02_intervals.txt</code></th><td>padanan teks gambar interval</td><td>750</td><td><code>471fd5b41937ec3fb664ee0f70a82a8a7aac9773fbd5bc3337c64951ea674e75</code></td></tr>
+<tr><th scope="row"><code>CP02_model_comparison.csv</code></th><td>bukti, odds, dan kerugian model</td><td>1.415</td><td><code>7b485760abefa32ed718a206dd7208bd5697353dfafa2a82b8c1dc5ecf433292</code></td></tr>
+<tr><th scope="row"><code>CP02_posterior_predictive.csv</code></th><td>marginal prediktif beta–binomial eksak</td><td>301.075</td><td><code>5a0d8e04e0fc3a75e9d4ce038dcf660ddbda545e61190cc71581fa5afa34a8f3</code></td></tr>
+<tr><th scope="row"><code>CP02_posterior_summary.csv</code></th><td>ringkasan posterior dan kerugian sel primer</td><td>7.506</td><td><code>30b1da31e41e32f252ad0cb3d31a9de5442c70aae1565ed24d9cff6a2179695b</code></td></tr>
+<tr><th scope="row"><code>CP02_sensitivity.csv</code></th><td>sensitivitas prior, penyebut, dan penghapusan satu sel</td><td>41.114</td><td><code>f8836f90a182fd345588cda8f0a34254fe7a5897df17e832496c40e55837d543</code></td></tr>
+<tr><th scope="row"><code>CP02_sensitivity.svg</code></th><td>gambar sensitivitas statis yang aksesibel</td><td>9.207</td><td><code>397cacddf7fd29737424222df1e0cb3605b1452ea31477f32ed52ddace9d11c6</code></td></tr>
+<tr><th scope="row"><code>CP02_sensitivity.txt</code></th><td>padanan teks gambar sensitivitas</td><td>690</td><td><code>d18e74a2f53fca95678140ed05c6174bafd870c180063073e9df4ab1829581d3</code></td></tr>
+</tbody>
+</table>
+<p>Tabel 10 mempertahankan identitas byte CSV kanonis tak terkompresi. Pembaca publik mendistribusikan buku besar cakupan sebagai <code>CP02_coverage.csv.gz</code> deterministik; berkas turunan gzip itu tidak menggantikan ukuran atau SHA-256 CSV kanonis pada tabel.</p>
+<p>Tanda terima analisis: <code>build/CP02_ANALYSIS_RECEIPT.json</code>, 9.272 byte, SHA-256 <code>8905654384a792e718eb824313e7233f8576b6ae8b55132db42e2740c63beb73</code>. Seluruh 14 pemeriksaan bernilai benar; jaringan dan proses peramban tidak digunakan. Penulisan kanonis dan pemutaran ulang <code>--check-only</code> pada byte beku menghasilkan inventaris identik.</p>
+<p><a id="O006-C140-CMP-CP02-P01-SOL-CONC"></a></p>
+<h4>Kesimpulan terkalibrasi</h4>
+<p>Pada penyebut primer, proporsi sel teramati berkisar 0,900000–1,000000. Dengan prior simetris utama <span class="math-inline" role="math">\(\kappa=4\)</span>, probabilitas posterior bahwa <span class="math-inline" role="math">\(p_g&gt;0{,}50\)</span> berkisar 0,999512–1,000000. Pernyataan ini adalah peluang posterior pada data tetap, bukan cakupan prosedur pada pengambilan sampel berulang dengan parameter tetap.</p>
+<p>Pada pembandingan model, <span class="math-inline" role="math">\(\log B_{10}=-32,105096\)</span> dan <span class="math-inline" role="math">\(B_{10}=1,140077\times 10^{-14}\)</span>. Dengan odds prior 1:1 dan kerugian simetris, keputusan ialah <strong>pilih M0</strong>. Faktor Bayes adalah rasio prediksi marginal; ia bukan nilai-p. Uji homogenitas kondisional primer memberi nilai-p 2,607693 × 10<sup>-1</sup>, yang memakai ruang sampel kondisional berbeda dan tidak dikonversi menjadi faktor Bayes.</p>
+<p>Cakupan interval kredibel, Wilson, dan Clopper–Pearson dihitung pada parameter tetap; ukuran dan daya uji berasal dari hukum binomial; tindakan Bayes berasal dari kerugian posterior. Perubahan penyebut adalah perubahan populasi percobaan yang memenuhi syarat, bukan pemeriksaan ketahanan bagi estimand identik. Pengaruh LOO dibandingkan hanya di dalam skala yang sama. Gerbang dispersi berlebih tidak mendukung taksiran tambahan, dan data tidak menyediakan riwayat penghentian sekuensial.</p>
+<p>Seluruh inferensi tetap bersyarat pada model: data agregat tidak membuktikan unit Bernoulli yang tidak berulang atau independensi antarsel. Tidak ada pengacakan tipe pemancar, tahun, lokasi, maupun paparan; kumpulan data tidak menyediakan pengamatan tingkat individu dan tidak mengidentifikasi perancu, deteksi, kelangsungan hidup, atau mekanisme biologis. Karena itu hasil bersifat deskriptif dan asosiatif untuk protokol, tahun, sel, dan penyebut yang dibekukan, bukan efek kausal atau klaim populasi umum.</p>
+<p><a id="O006-C140-CMP-CP02-ATTR01"></a></p>
+<h2>Atribusi, lisensi, dan penyangkalan dukungan</h2>
+<p>Sumber data adalah Stevens, Bryan; Conway, Courtney; Tisdale, Cody; Denny,
+Kylie; Meyers, Andrew; dan Makela, Paul (2023), <em>Supporting data for assessing
+impacts of satellite GPS transmitters on survival, nesting propensity, and
+nest success of greater sage-grouse</em>, Dryad, Dataset,
+<code>https://doi.org/10.5061/dryad.573n5tbf3</code>. Analisis mengikat versi 3
+(ID versi 268230, 2023-12-08) dan hanya dua aset pada Tabel 1. Sitasi mempertahankan
+pengakuan atas kontribusi ilmiah dan rantai provenans walaupun CC0 tidak mensyaratkan atribusi
+lisensi.</p>
+<p>Nama pencipta, afiliasi, pemberi dana, dan Dryad dicantumkan hanya untuk
+atribusi/provenans. Pencantuman tidak menyatakan bahwa pihak tersebut
+mendukung, memeriksa, menyetujui, atau mensponsori terjemahan, pemilihan
+penyebut, analisis, interpretasi, kesimpulan, atau materi CP02. Seluruh
+kekeliruan lapisan pendamping tetap menjadi tanggung jawab penyusun lapisan.</p>
+<p><a id="O006-C140-CMP-CP02-RUB00"></a></p>
+<h2>Rubrik penilaian — total 100 poin</h2>
+<p>Jumlah komponen adalah</p>
+<div class="math-display" role="math">\[15+10+10+20+15+15+10+5=100.\]</div>
+<p>Jawaban numerik tanpa derivasi tidak menerima poin derivasi; derivasi yang
+tidak terikat pada byte dan manifes tidak menerima poin provenans atau pemutaran ulang.</p>
+<p><a id="O006-C140-CMP-CP02-RUB01"></a></p>
+<h3>Hak, provenans, dan identitas byte (15 poin)</h3>
+<ul>
+<li>6 poin: DOI dan URL, penerbit, versi, aset, lisensi, serta pemisahan hak benar.</li>
+<li>5 poin: ukuran, SHA-256, skema, dan manifes cocok.</li>
+<li>4 poin: lingkup agregat, privasi, dan redistribusi dinyatakan tepat.</li>
+</ul>
+<p>Kumpulan data yang tidak terikat pada identitas yang terverifikasi memperoleh nol; hash yang salah secara substantif membatasi
+komponen pada 5/15.</p>
+<p><a id="O006-C140-CMP-CP02-RUB02"></a></p>
+<h3>Pertanyaan, populasi, estimand, dan kerugian (10 poin)</h3>
+<ul>
+<li>4 poin: populasi dan unit agregat, <span class="math-inline" role="math">\(p_g\)</span>, serta kontras tepat.</li>
+<li>3 poin: penyebut primer ditetapkan sebelumnya dan dibenarkan.</li>
+<li>3 poin: kerugian, ambang, dan aturan untuk nilai yang tepat sama eksplisit serta batas nonkausal benar.</li>
+</ul>
+<p><a id="O006-C140-CMP-CP02-RUB03"></a></p>
+<h3>Pemasukan dan pembersihan (10 poin)</h3>
+<ul>
+<li>4 poin: hash sebelum penguraian, skema, tipe, nilai hilang, dan domain diperiksa.</li>
+<li>3 poin: pemetaan, ID, dan urutan kanonis dapat diputar ulang.</li>
+<li>3 poin: byte mentah tidak berubah, buku besar, dan manifes lengkap.</li>
+</ul>
+<p>Imputasi atau penggantian penyebut diam-diam membatasi komponen pada 2/10.</p>
+<p><a id="O006-C140-CMP-CP02-RUB04"></a></p>
+<h3>Derivasi dan analisis utama (20 poin)</h3>
+<ul>
+<li>6 poin: posterior dan prediktif Beta–binomial diturunkan serta dibuktikan ternormalisasi.</li>
+<li>5 poin: tindakan Bayes meminimumkan kerugian yang benar.</li>
+<li>5 poin: bukti marginal dan faktor Bayes untuk model bersama serta model terpisah diturunkan.</li>
+<li>4 poin: kontras, interval, dan semua angka terikat secara eksplisit pada keluaran deterministik.</li>
+</ul>
+<p>Perangkat lunak tanpa derivasi memperoleh paling banyak 8/20; faktor Bayes
+dengan prior tak wajar memperoleh nol pada subkomponen bukti marginal.</p>
+<p><a id="O006-C140-CMP-CP02-RUB05"></a></p>
+<h3>Ketidakpastian dan pembanding (15 poin)</h3>
+<ul>
+<li>6 poin: interval kredibel dan interval kepercayaan memakai hukum peluang yang benar.</li>
+<li>5 poin: cakupan, ukuran, dan daya parameter-tetap diturunkan.</li>
+<li>4 poin: target dibandingkan tanpa klaim dominasi palsu.</li>
+</ul>
+<p><a id="O006-C140-CMP-CP02-RUB06"></a></p>
+<h3>Diagnostik dan sensitivitas (15 poin)</h3>
+<ul>
+<li>5 poin: pemeriksaan prediktif menyasar ukuran ketidakcocokan yang jelas.</li>
+<li>4 poin: sensitivitas prior dan bukti marginal lengkap.</li>
+<li>3 poin: penyebut liberal diberi label sebagai estimand dalam skenario terpisah.</li>
+<li>3 poin: pengaruh, kelangkaan, dan keteridentifikasian dibahas.</li>
+</ul>
+<p>Luas ekor posterior yang disebut nilai-p klasik tanpa dasar membatasi
+komponen pada 5/15.</p>
+<p><a id="O006-C140-CMP-CP02-RUB07"></a></p>
+<h3>Pemutaran ulang luring dan aksesibilitas (10 poin)</h3>
+<ul>
+<li>4 poin: lingkungan komputasi, benih acak, pemeriksaan, dan mode tulis/periksa deterministik.</li>
+<li>3 poin: semua CSV, SVG, tanda terima, dan manifes cocok.</li>
+<li>3 poin: keterangan, atribut <code>scope</code>, judul, deskripsi, teks alternatif, dan teks pasangan lengkap.</li>
+</ul>
+<p>Penggunaan jaringan atau proses peramban menyebabkan komponen ini bernilai nol.</p>
+<p><a id="O006-C140-CMP-CP02-RUB08"></a></p>
+<h3>Kesimpulan terkalibrasi (5 poin)</h3>
+<ul>
+<li>3 poin: posterior, prediktif, cakupan, ukuran dan daya uji, bukti marginal, dan risiko
+dibedakan.</li>
+<li>2 poin: batas agregasi, penyebut, generalisasi, privasi, dan nonkausalitas
+dinyatakan.</li>
+</ul>
+<aside class="artifact-index" aria-label="Artefak reproduksi"><p><strong>Artefak reproduksi.</strong> Berkas di bawah terikat manifest; lisensi efektif setiap berkas ditampilkan terpisah.</p><ul><li><a href="../assets/capstones/CP02/CP02_cells_clean.csv">CP02_cells_clean.csv</a> <span class="asset-license">(analysis; CC-BY-SA-4.0)</span></li><li><a href="../assets/capstones/CP02/CP02_contrasts.csv">CP02_contrasts.csv</a> <span class="asset-license">(analysis; CC-BY-SA-4.0)</span></li><li><a href="../assets/capstones/CP02/CP02_coverage.csv.gz">CP02_coverage.csv.gz</a> <span class="asset-license">(analysis; CC-BY-SA-4.0)</span></li><li><a href="../assets/capstones/CP02/CP02_coverage.svg">CP02_coverage.svg</a> <span class="asset-license">(analysis; CC-BY-SA-4.0)</span></li><li><a href="../assets/capstones/CP02/CP02_coverage.txt">CP02_coverage.txt</a> <span class="asset-license">(analysis; CC-BY-SA-4.0)</span></li><li><a href="../assets/capstones/CP02/CP02_diagnostics.csv">CP02_diagnostics.csv</a> <span class="asset-license">(analysis; CC-BY-SA-4.0)</span></li><li><a href="../assets/capstones/CP02/CP02_diagnostics.txt">CP02_diagnostics.txt</a> <span class="asset-license">(analysis; CC-BY-SA-4.0)</span></li><li><a href="../assets/capstones/CP02/CP02_dispersion_profile.csv">CP02_dispersion_profile.csv</a> <span class="asset-license">(analysis; CC-BY-SA-4.0)</span></li><li><a href="../assets/capstones/CP02/CP02_frequentist_comparison.csv">CP02_frequentist_comparison.csv</a> <span class="asset-license">(analysis; CC-BY-SA-4.0)</span></li><li><a href="../assets/capstones/CP02/CP02_influence.csv">CP02_influence.csv</a> <span class="asset-license">(analysis; CC-BY-SA-4.0)</span></li><li><a href="../assets/capstones/CP02/CP02_intervals.svg">CP02_intervals.svg</a> <span class="asset-license">(analysis; CC-BY-SA-4.0)</span></li><li><a href="../assets/capstones/CP02/CP02_intervals.txt">CP02_intervals.txt</a> <span class="asset-license">(analysis; CC-BY-SA-4.0)</span></li><li><a href="../assets/capstones/CP02/CP02_model_comparison.csv">CP02_model_comparison.csv</a> <span class="asset-license">(analysis; CC-BY-SA-4.0)</span></li><li><a href="../assets/capstones/CP02/CP02_posterior_predictive.csv">CP02_posterior_predictive.csv</a> <span class="asset-license">(analysis; CC-BY-SA-4.0)</span></li><li><a href="../assets/capstones/CP02/CP02_posterior_summary.csv">CP02_posterior_summary.csv</a> <span class="asset-license">(analysis; CC-BY-SA-4.0)</span></li><li><a href="../assets/capstones/CP02/CP02_sensitivity.csv">CP02_sensitivity.csv</a> <span class="asset-license">(analysis; CC-BY-SA-4.0)</span></li><li><a href="../assets/capstones/CP02/CP02_sensitivity.svg">CP02_sensitivity.svg</a> <span class="asset-license">(analysis; CC-BY-SA-4.0)</span></li><li><a href="../assets/capstones/CP02/CP02_sensitivity.txt">CP02_sensitivity.txt</a> <span class="asset-license">(analysis; CC-BY-SA-4.0)</span></li><li><a href="../assets/capstones/CP02/MANIFEST.csv">MANIFEST.csv</a> <span class="asset-license">(analysis; CC-BY-SA-4.0)</span></li><li><a href="../assets/capstones/CP02/clean/CP02_cells_clean.csv">CP02_cells_clean.csv</a> <span class="asset-license">(clean_data; CC0-1.0)</span></li><li><a href="../assets/capstones/CP02/clean/COLUMN_MANIFEST.csv">COLUMN_MANIFEST.csv</a> <span class="asset-license">(clean_metadata; CC-BY-SA-4.0)</span></li><li><a href="../assets/capstones/CP02/clean/MANIFEST.csv">MANIFEST.csv</a> <span class="asset-license">(clean_metadata; CC-BY-SA-4.0)</span></li><li><a href="../assets/capstones/CP02/clean/ROW_MANIFEST.csv">ROW_MANIFEST.csv</a> <span class="asset-license">(clean_metadata; CC-BY-SA-4.0)</span></li><li><a href="../assets/capstones/CP02/clean/TRANSFORM_LEDGER.json">TRANSFORM_LEDGER.json</a> <span class="asset-license">(clean_metadata; CC-BY-SA-4.0)</span></li><li><a href="../assets/capstones/CP02/provenance/DATASET_PROVENANCE.json">DATASET_PROVENANCE.json</a> <span class="asset-license">(provenance; CC-BY-SA-4.0)</span></li><li><a href="../assets/capstones/CP02/provenance/INPUT_MANIFEST.csv">INPUT_MANIFEST.csv</a> <span class="asset-license">(provenance; CC-BY-SA-4.0)</span></li><li><a href="../assets/capstones/CP02/provenance/RIGHTS_EVIDENCE.md">RIGHTS_EVIDENCE.md</a> <span class="asset-license">(provenance; CC-BY-SA-4.0)</span></li><li><a href="../assets/capstones/CP02/provenance/SCHEMA.json">SCHEMA.json</a> <span class="asset-license">(provenance; CC-BY-SA-4.0)</span></li><li><a href="../assets/capstones/CP02/CP02_ANALYSIS_RECEIPT.json">CP02_ANALYSIS_RECEIPT.json</a> <span class="asset-license">(receipt; CC-BY-SA-4.0)</span></li><li><a href="../assets/capstones/CP02/CP02_TRANSFORM_RECEIPT.json">CP02_TRANSFORM_RECEIPT.json</a> <span class="asset-license">(receipt; CC-BY-SA-4.0)</span></li><li><a href="../assets/capstones/ASSET_RIGHTS.jsonl">ASSET_RIGHTS.jsonl</a> <span class="asset-license">(metadata hak; CC-BY-SA-4.0)</span></li></ul></aside>
+<footer class="license">Materi pendamping orisinal berlisensi CC BY-SA 4.0. Komponen Penn State dan Random tetap berada di bawah lisensinya masing-masing dan tidak direlisensikan oleh halaman ini.</footer>
+</main>
+</div>
+</body>
+</html>

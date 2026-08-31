@@ -1,0 +1,128 @@
+{
+  "assertions": {
+    "canonical_order_verified": true,
+    "denominator_locked_before_outcome_parse": true,
+    "input_hashes_verified_after_payload_build": true,
+    "input_hashes_verified_before_parse": true,
+    "integer_missing_domain_and_uniqueness_checks_passed": true,
+    "manifest_excludes_only_itself": true,
+    "no_imputation_aggregation_or_exclusion": true,
+    "rights_and_provenance_verified": true,
+    "schema_header_shape_and_discrepancy_verified": true,
+    "source_to_clean_bijection_verified": true
+  },
+  "browser_processes_used": false,
+  "code": [
+    {
+      "bytes": 30366,
+      "path": "data/capstones/CP02/transform_cp02.py",
+      "sha256": "b0f78101208eb52da9e8536153e9183a5202704fbedca91a34bf49bf618f54ae"
+    }
+  ],
+  "contract": {
+    "clean_shape": {
+      "columns": 8,
+      "rows": 12
+    },
+    "mode_interface": [
+      "--write",
+      "--check-only"
+    ],
+    "primary_denominator_column": "Total_method_1",
+    "raw_assets_immutable": true,
+    "secondary_denominator_column": "Total_method_2",
+    "source_shape": {
+      "columns": 5,
+      "rows": 12
+    }
+  },
+  "environment": {
+    "implementation": "CPython",
+    "python": "3.13.9",
+    "stdlib_only": true
+  },
+  "inputs": [
+    {
+      "bytes": 8255,
+      "path": "data/capstones/CP02/DATASET_PROVENANCE.json",
+      "role": "frozen_contract_metadata",
+      "sha256": "a044cf3353794031a169189623b273e3aeb116c7d33784e7520eaf1311dac49a"
+    },
+    {
+      "bytes": 913,
+      "path": "data/capstones/CP02/INPUT_MANIFEST.csv",
+      "role": "frozen_input_manifest",
+      "sha256": "4e191caad7a1c4a971dd619039bd5891cae264cbc078ff8fffc23ed5f27669ff"
+    },
+    {
+      "bytes": 3089,
+      "path": "data/capstones/CP02/RIGHTS_EVIDENCE.md",
+      "role": "frozen_contract_metadata",
+      "sha256": "1017d9ba16aa5f64e4c6d19c59a648b677c113ab20b78e8bd87e5d99739ae665"
+    },
+    {
+      "bytes": 4770,
+      "path": "data/capstones/CP02/SCHEMA.json",
+      "role": "frozen_contract_metadata",
+      "sha256": "367597e96a39f50d29a67f1a3ac31c0642e61c0439879253a59c1de9f37627e4"
+    },
+    {
+      "bytes": 4139,
+      "path": "data/capstones/CP02/raw/README.md",
+      "role": "dictionary",
+      "sha256": "43a53f9a451a4030b8d3edb2a7517c48863d8ef23d7ae4986d15c20d7f8f5459"
+    },
+    {
+      "bytes": 285,
+      "path": "data/capstones/CP02/raw/nest_propensity.csv",
+      "role": "numeric_input",
+      "sha256": "8790b4dfa29a5b39228e758e40e02cbb48612c38b8440020aa108c85ca0673c4"
+    }
+  ],
+  "manifest": {
+    "bytes": 490,
+    "closure": "lists every other file in clean/ and excludes only itself",
+    "path": "data/capstones/CP02/clean/MANIFEST.csv",
+    "sha256": "b79f206caea52b557e29b839ccec6b4659960601cc002100cb7c7e36e8d9b6b8"
+  },
+  "network_access": false,
+  "outputs": [
+    {
+      "bytes": 1848,
+      "path": "COLUMN_MANIFEST.csv",
+      "role": "source_to_clean_column_lineage",
+      "sha256": "25ccd74c584bdfbe7adc1b9a2559d25fad7ad41b0b02e327e1acc11ea226dcca"
+    },
+    {
+      "bytes": 552,
+      "path": "CP02_cells_clean.csv",
+      "role": "canonical_clean_table",
+      "sha256": "8699d6f0fa154391cb38880fdd1c3ec7cc2bb12e2cda430a704dbe5c470464ec"
+    },
+    {
+      "bytes": 490,
+      "path": "MANIFEST.csv",
+      "role": "clean_directory_manifest",
+      "sha256": "b79f206caea52b557e29b839ccec6b4659960601cc002100cb7c7e36e8d9b6b8"
+    },
+    {
+      "bytes": 1324,
+      "path": "ROW_MANIFEST.csv",
+      "role": "source_to_clean_row_lineage",
+      "sha256": "40754aa8ffe2fb75e0cd98d6cd924ecef8403d25949524a6f6860198acd9323e"
+    },
+    {
+      "bytes": 3698,
+      "path": "TRANSFORM_LEDGER.json",
+      "role": "canonical_transform_ledger",
+      "sha256": "436c9d3be1fafbb06f6aefb2af0e87c7b88c90e7799cbe2adc1b9a966e0aed82"
+    }
+  ],
+  "replay": {
+    "check_only_writes": false,
+    "comparison": "exact relative path and byte identity",
+    "required_external_check_only_replays": 2
+  },
+  "schema": "o006.c140.cp02-transform.v1",
+  "status": "pass"
+}

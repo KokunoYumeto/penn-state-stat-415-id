@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="760" viewBox="0 0 1000 760" role="img" aria-labelledby="cp02-int-title cp02-int-desc">
+<title id="cp02-int-title">Interval sel primer CP02: Bayes, Wilson, dan Clopper-Pearson</title>
+<desc id="cp02-int-desc">Selang peluang bersarang per sel agregat dengan penyebut primer yang konservatif. Lingkaran bergaris utuh menunjukkan rataan posterior Beta(2,2) dan selang kredibel ekor setara; persegi bergaris putus-putus menunjukkan interval Wilson; belah ketupat bergaris titik menunjukkan interval Clopper-Pearson. Perhitungan bersifat bersyarat dan tidak mengidentifikasi efek kausal pemancar atau tahun.</desc>
+<rect width="100%" height="100%" fill="white"/>
+<g font-family="Arial, sans-serif" fill="black">
+<text x="500" y="30" text-anchor="middle" font-size="18" font-weight="bold">Interval sel agregat CP02 (penyebut primer)</text>
+<text x="500" y="53" text-anchor="middle" font-size="12">Ringkasan model kerja bersyarat; bukan efek kausal atau jaminan empiris tanpa syarat</text>
+<line x1="230.000" y1="75" x2="230.000" y2="705.000" stroke="#d0d0d0" stroke-width="1"/>
+<text x="230.000" y="730.000" text-anchor="middle" font-size="11">0</text>
+<line x1="302.000" y1="75" x2="302.000" y2="705.000" stroke="#d0d0d0" stroke-width="1"/>
+<text x="302.000" y="730.000" text-anchor="middle" font-size="11">0,1</text>
+<line x1="374.000" y1="75" x2="374.000" y2="705.000" stroke="#d0d0d0" stroke-width="1"/>
+<text x="374.000" y="730.000" text-anchor="middle" font-size="11">0,2</text>
+<line x1="446.000" y1="75" x2="446.000" y2="705.000" stroke="#d0d0d0" stroke-width="1"/>
+<text x="446.000" y="730.000" text-anchor="middle" font-size="11">0,3</text>
+<line x1="518.000" y1="75" x2="518.000" y2="705.000" stroke="#d0d0d0" stroke-width="1"/>
+<text x="518.000" y="730.000" text-anchor="middle" font-size="11">0,4</text>
+<line x1="590.000" y1="75" x2="590.000" y2="705.000" stroke="#d0d0d0" stroke-width="1"/>
+<text x="590.000" y="730.000" text-anchor="middle" font-size="11">0,5</text>
+<line x1="662.000" y1="75" x2="662.000" y2="705.000" stroke="#d0d0d0" stroke-width="1"/>
+<text x="662.000" y="730.000" text-anchor="middle" font-size="11">0,6</text>
+<line x1="734.000" y1="75" x2="734.000" y2="705.000" stroke="#d0d0d0" stroke-width="1"/>
+<text x="734.000" y="730.000" text-anchor="middle" font-size="11">0,7</text>
+<line x1="806.000" y1="75" x2="806.000" y2="705.000" stroke="#d0d0d0" stroke-width="1"/>
+<text x="806.000" y="730.000" text-anchor="middle" font-size="11">0,8</text>
+<line x1="878.000" y1="75" x2="878.000" y2="705.000" stroke="#d0d0d0" stroke-width="1"/>
+<text x="878.000" y="730.000" text-anchor="middle" font-size="11">0,9</text>
+<line x1="950.000" y1="75" x2="950.000" y2="705.000" stroke="#d0d0d0" stroke-width="1"/>
+<text x="950.000" y="730.000" text-anchor="middle" font-size="11">1</text>
+<line x1="590.000" y1="75" x2="590.000" y2="705.000" stroke="black" stroke-width="1.5" stroke-dasharray="8 5"/>
+<text x="218.000" y="109.000" text-anchor="end" font-size="12">VHF — 2015</text>
+<line x1="753.481" y1="95.000" x2="940.099" y2="95.000" stroke="black" stroke-width="3"/>
+<circle cx="874.211" cy="95.000" r="4" fill="white" stroke="black" stroke-width="2"/>
+<line x1="803.204" y1="105.000" x2="950.000" y2="105.000" stroke="#333" stroke-width="2" stroke-dasharray="7 4"/>
+<rect x="946.000" y="101.000" width="8" height="8" fill="white" stroke="#333" stroke-width="2"/>
+<line x1="793.026" y1="115.000" x2="950.000" y2="115.000" stroke="#555" stroke-width="2" stroke-dasharray="2 4"/>
+<path d="M 950.000 110.000 L 955.000 115.000 L 950.000 120.000 L 945.000 115.000 Z" fill="white" stroke="#555" stroke-width="2"/>
+<text x="218.000" y="159.000" text-anchor="end" font-size="12">VHF — 2016</text>
+<line x1="842.596" y1="145.000" x2="944.962" y2="145.000" stroke="black" stroke-width="3"/>
+<circle cx="910.000" cy="145.000" r="4" fill="white" stroke="black" stroke-width="2"/>
+<line x1="872.831" y1="155.000" x2="950.000" y2="155.000" stroke="#333" stroke-width="2" stroke-dasharray="7 4"/>
+<rect x="946.000" y="151.000" width="8" height="8" fill="white" stroke="#333" stroke-width="2"/>
+<line x1="871.606" y1="165.000" x2="950.000" y2="165.000" stroke="#555" stroke-width="2" stroke-dasharray="2 4"/>
+<path d="M 950.000 160.000 L 955.000 165.000 L 950.000 170.000 L 945.000 165.000 Z" fill="white" stroke="#555" stroke-width="2"/>
+<text x="218.000" y="209.000" text-anchor="end" font-size="12">VHF — 2017</text>
+<line x1="785.520" y1="195.000" x2="941.932" y2="195.000" stroke="black" stroke-width="3"/>
+<circle cx="887.391" cy="195.000" r="4" fill="white" stroke="black" stroke-width="2"/>
+<line x1="828.911" y1="205.000" x2="950.000" y2="205.000" stroke="#333" stroke-width="2" stroke-dasharray="7 4"/>
+<rect x="946.000" y="201.000" width="8" height="8" fill="white" stroke="#333" stroke-width="2"/>
+<line x1="822.944" y1="215.000" x2="950.000" y2="215.000" stroke="#555" stroke-width="2" stroke-dasharray="2 4"/>
+<path d="M 950.000 210.000 L 955.000 215.000 L 950.000 220.000 L 945.000 215.000 Z" fill="white" stroke="#555" stroke-width="2"/>
+<text x="218.000" y="259.000" text-anchor="end" font-size="12">VHF — 2018</text>
+<line x1="817.896" y1="245.000" x2="943.685" y2="245.000" stroke="black" stroke-width="3"/>
+<circle cx="900.345" cy="245.000" r="4" fill="white" stroke="black" stroke-width="2"/>
+<line x1="854.102" y1="255.000" x2="950.000" y2="255.000" stroke="#333" stroke-width="2" stroke-dasharray="7 4"/>
+<rect x="946.000" y="251.000" width="8" height="8" fill="white" stroke="#333" stroke-width="2"/>
+<line x1="851.227" y1="265.000" x2="950.000" y2="265.000" stroke="#555" stroke-width="2" stroke-dasharray="2 4"/>
+<path d="M 950.000 260.000 L 955.000 265.000 L 950.000 270.000 L 945.000 265.000 Z" fill="white" stroke="#555" stroke-width="2"/>
+<text x="218.000" y="309.000" text-anchor="end" font-size="12">VHF — 2019</text>
+<line x1="753.069" y1="295.000" x2="921.996" y2="295.000" stroke="black" stroke-width="3"/>
+<circle cx="854.000" cy="295.000" r="4" fill="white" stroke="black" stroke-width="2"/>
+<line x1="776.181" y1="305.000" x2="934.624" y2="305.000" stroke="#333" stroke-width="2" stroke-dasharray="7 4"/>
+<rect x="890.615" y="301.000" width="8" height="8" fill="white" stroke="#333" stroke-width="2"/>
+<line x1="769.062" y1="315.000" x2="943.192" y2="315.000" stroke="#555" stroke-width="2" stroke-dasharray="2 4"/>
+<path d="M 894.615 310.000 L 899.615 315.000 L 894.615 320.000 L 889.615 315.000 Z" fill="white" stroke="#555" stroke-width="2"/>
+<text x="218.000" y="359.000" text-anchor="end" font-size="12">PTT — 2019</text>
+<line x1="731.282" y1="345.000" x2="928.048" y2="345.000" stroke="black" stroke-width="3"/>
+<circle cx="851.818" cy="345.000" r="4" fill="white" stroke="black" stroke-width="2"/>
+<line x1="764.547" y1="355.000" x2="942.890" y2="355.000" stroke="#333" stroke-width="2" stroke-dasharray="7 4"/>
+<rect x="906.000" y="351.000" width="8" height="8" fill="white" stroke="#333" stroke-width="2"/>
+<line x1="753.481" y1="365.000" x2="948.988" y2="365.000" stroke="#555" stroke-width="2" stroke-dasharray="2 4"/>
+<path d="M 910.000 360.000 L 915.000 365.000 L 910.000 370.000 L 905.000 365.000 Z" fill="white" stroke="#555" stroke-width="2"/>
+<text x="218.000" y="409.000" text-anchor="end" font-size="12">VHF — 2020</text>
+<line x1="813.412" y1="395.000" x2="943.448" y2="395.000" stroke="black" stroke-width="3"/>
+<circle cx="898.571" cy="395.000" r="4" fill="white" stroke="black" stroke-width="2"/>
+<line x1="850.657" y1="405.000" x2="950.000" y2="405.000" stroke="#333" stroke-width="2" stroke-dasharray="7 4"/>
+<rect x="946.000" y="401.000" width="8" height="8" fill="white" stroke="#333" stroke-width="2"/>
+<line x1="847.419" y1="415.000" x2="950.000" y2="415.000" stroke="#555" stroke-width="2" stroke-dasharray="2 4"/>
+<path d="M 950.000 410.000 L 955.000 415.000 L 950.000 420.000 L 945.000 415.000 Z" fill="white" stroke="#555" stroke-width="2"/>
+<text x="218.000" y="459.000" text-anchor="end" font-size="12">PTT — 2020</text>
+<line x1="755.620" y1="445.000" x2="930.877" y2="445.000" stroke="black" stroke-width="3"/>
+<circle cx="863.600" cy="445.000" r="4" fill="white" stroke="black" stroke-width="2"/>
+<line x1="786.781" y1="455.000" x2="943.912" y2="455.000" stroke="#333" stroke-width="2" stroke-dasharray="7 4"/>
+<rect x="911.714" y="451.000" width="8" height="8" fill="white" stroke="#333" stroke-width="2"/>
+<line x1="778.525" y1="465.000" x2="949.132" y2="465.000" stroke="#555" stroke-width="2" stroke-dasharray="2 4"/>
+<path d="M 915.714 460.000 L 920.714 465.000 L 915.714 470.000 L 910.714 465.000 Z" fill="white" stroke="#555" stroke-width="2"/>
+<text x="218.000" y="509.000" text-anchor="end" font-size="12">VHF — 2021</text>
+<line x1="711.409" y1="495.000" x2="925.645" y2="495.000" stroke="black" stroke-width="3"/>
+<circle cx="842.000" cy="495.000" r="4" fill="white" stroke="black" stroke-width="2"/>
+<line x1="746.033" y1="505.000" x2="941.994" y2="505.000" stroke="#333" stroke-width="2" stroke-dasharray="7 4"/>
+<rect x="901.000" y="501.000" width="8" height="8" fill="white" stroke="#333" stroke-width="2"/>
+<line x1="732.329" y1="515.000" x2="948.862" y2="515.000" stroke="#555" stroke-width="2" stroke-dasharray="2 4"/>
+<path d="M 905.000 510.000 L 910.000 515.000 L 905.000 520.000 L 900.000 515.000 Z" fill="white" stroke="#555" stroke-width="2"/>
+<text x="218.000" y="559.000" text-anchor="end" font-size="12">PTT — 2021</text>
+<line x1="708.160" y1="545.000" x2="914.354" y2="545.000" stroke="black" stroke-width="3"/>
+<circle cx="830.000" cy="545.000" r="4" fill="white" stroke="black" stroke-width="2"/>
+<line x1="733.256" y1="555.000" x2="929.936" y2="555.000" stroke="#333" stroke-width="2" stroke-dasharray="7 4"/>
+<rect x="874.000" y="551.000" width="8" height="8" fill="white" stroke="#333" stroke-width="2"/>
+<line x1="721.772" y1="565.000" x2="941.109" y2="565.000" stroke="#555" stroke-width="2" stroke-dasharray="2 4"/>
+<path d="M 878.000 560.000 L 883.000 565.000 L 878.000 570.000 L 873.000 565.000 Z" fill="white" stroke="#555" stroke-width="2"/>
+<text x="218.000" y="609.000" text-anchor="end" font-size="12">VHF — 2022</text>
+<line x1="719.971" y1="595.000" x2="938.065" y2="595.000" stroke="black" stroke-width="3"/>
+<circle cx="860.000" cy="595.000" r="4" fill="white" stroke="black" stroke-width="2"/>
+<line x1="775.404" y1="605.000" x2="950.000" y2="605.000" stroke="#333" stroke-width="2" stroke-dasharray="7 4"/>
+<rect x="946.000" y="601.000" width="8" height="8" fill="white" stroke="#333" stroke-width="2"/>
+<line x1="759.453" y1="615.000" x2="950.000" y2="615.000" stroke="#555" stroke-width="2" stroke-dasharray="2 4"/>
+<path d="M 950.000 610.000 L 955.000 615.000 L 950.000 620.000 L 945.000 615.000 Z" fill="white" stroke="#555" stroke-width="2"/>
+<text x="218.000" y="659.000" text-anchor="end" font-size="12">PTT — 2022</text>
+<line x1="813.412" y1="645.000" x2="943.448" y2="645.000" stroke="black" stroke-width="3"/>
+<circle cx="898.571" cy="645.000" r="4" fill="white" stroke="black" stroke-width="2"/>
+<line x1="850.657" y1="655.000" x2="950.000" y2="655.000" stroke="#333" stroke-width="2" stroke-dasharray="7 4"/>
+<rect x="946.000" y="651.000" width="8" height="8" fill="white" stroke="#333" stroke-width="2"/>
+<line x1="847.419" y1="665.000" x2="950.000" y2="665.000" stroke="#555" stroke-width="2" stroke-dasharray="2 4"/>
+<path d="M 950.000 660.000 L 955.000 665.000 L 950.000 670.000 L 945.000 665.000 Z" fill="white" stroke="#555" stroke-width="2"/>
+<line x1="250" y1="718" x2="300" y2="718" stroke="black" stroke-width="3"/><circle cx="275" cy="718" r="4" fill="white" stroke="black" stroke-width="2"/><text x="310" y="722" font-size="11">Bayes ekor setara</text>
+<line x1="465" y1="718" x2="515" y2="718" stroke="#333" stroke-width="2" stroke-dasharray="7 4"/><rect x="486" y="714" width="8" height="8" fill="white" stroke="#333" stroke-width="2"/><text x="525" y="722" font-size="11">Wilson</text>
+<line x1="640" y1="718" x2="690" y2="718" stroke="#555" stroke-width="2" stroke-dasharray="2 4"/><path d="M 665 713 L 670 718 L 665 723 L 660 718 Z" fill="white" stroke="#555" stroke-width="2"/><text x="700" y="722" font-size="11">Clopper-Pearson</text>
+</g>
+</svg>

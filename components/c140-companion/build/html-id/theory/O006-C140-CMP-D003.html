@@ -4,32 +4,34 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="generator" content="OpenAI Codex gpt-5.6-sol, Ultra">
-<title>Likelihood kuadratik lokal, normalitas asimtotik, dan delta method</title>
+<title>Ekspansi kuadratik lokal fungsi log-kemungkinan, normalitas asimtotik, dan metode delta</title>
 <link rel="stylesheet" href="../assets/style.css">
 <script>window.MathJax={loader:{load:['[tex]/boldsymbol']},tex:{packages:{'[+]':['boldsymbol']},inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']]},svg:{fontCache:'local'}};</script>
 <script defer src="../assets/MathJax/tex-svg.js"></script>
 </head>
 <body>
+<a class="skip-link" href="#main-content">Langsung ke isi utama</a>
 <div class="shell">
-<nav class="sidebar" aria-label="Daftar isi pendamping"><h2>Isi pendamping</h2><ol><li><a href="../index.html">Pendamping Orisinal Statistika Matematis</a></li><li><a href="O006-C140-CMP-D001.html">Model parametrik reguler, skor, dan informasi Fisher</a></li><li><a href="O006-C140-CMP-D002.html">Konsistensi MLE: identifikasi Kullback–Leibler dan teorema argmax</a></li><li><a href="O006-C140-CMP-D003.html">Likelihood kuadratik lokal, normalitas asimtotik, dan delta method</a></li><li><a href="O006-C140-CMP-D004.html">Prosedur Wald, skor, dan rasio likelihood</a></li><li><a href="O006-C140-CMP-D005.html">Likelihood nonreguler: empat mekanisme kegagalan</a></li><li><a href="O006-C140-CMP-D006.html">Optimalitas pengujian: Neyman–Pearson, MP, UMP, dan rasio likelihood monoton</a></li><li><a href="O006-C140-CMP-D007.html">Loss, risk, efisiensi, Rao–Blackwell, dan Lehmann–Scheffé</a></li><li><a href="O006-C140-CMP-D008.html">Model linear Gaussian desain tetap dan geometri proyeksi</a></li><li><a href="O006-C140-CMP-D009.html">OLS, MLE Gaussian, dan teorema Gauss–Markov pada rancangan tetap</a></li><li><a href="O006-C140-CMP-D010.html">Inferensi Gaussian eksak: proyeksi, t, F, ANOVA, dan prediksi</a></li><li><a href="O006-C140-CMP-D011.html">Diagnostik, leverage, misspesifikasi, dan inferensi pascaseleksi</a></li><li><a href="O006-C140-CMP-D012.html">Inferensi Bayesian sebagai pembaruan dan keputusan yang koheren</a></li><li><a href="O006-C140-CMP-D013.html">Perbandingan Bayesian–frequentist: keputusan, cakupan, dan kalibrasi</a></li><li><a href="../simulations/O006-C140-CMP-SIM001.html">Model lokasi normal: MLE, coverage, dan tiga statistik uji</a></li><li><a href="../simulations/O006-C140-CMP-SIM002.html">Delta method pada titik reguler dan titik dengan turunan nol</a></li><li><a href="../simulations/O006-C140-CMP-SIM003.html">Endpoint Uniform: laju nonreguler dan kegagalan bootstrap biasa</a></li><li><a href="../simulations/O006-C140-CMP-SIM004.html">Uji Neyman–Pearson teracak dengan size tepat</a></li><li><a href="../simulations/O006-C140-CMP-SIM005.html">Model linear matriks: coverage, heteroskedastisitas, dan pengaruh</a></li><li><a href="../simulations/O006-C140-CMP-SIM006.html">Kalibrasi selang Bayesian dan frequentist pada model binomial</a></li><li><a href="../mastery/O006-C140-CMP-MS00.html">Set penguasaan 00 — probabilitas, distribusi, dan ekspektasi (diagnostik C140)</a></li><li><a href="../mastery/O006-C140-CMP-MS01.html">Set penguasaan 01 — statistik urutan dan distribusi sampel</a></li><li><a href="../mastery/O006-C140-CMP-MS02.html">Set penguasaan 02 — estimasi, bias, MSE, dan sifat estimator</a></li><li><a href="../mastery/O006-C140-CMP-MS03.html">Set penguasaan 03 — kecukupan, faktorisasi, kelengkapan, dan statistik ancillary</a></li><li><a href="../mastery/O006-C140-CMP-MS04.html">Set penguasaan 04 — metode momen dan dasar kemungkinan maksimum</a></li><li><a href="../mastery/O006-C140-CMP-MS05.html">Set penguasaan 05 — informasi Fisher, interval kepercayaan, bootstrap, dan delta method</a></li><li><a href="../mastery/O006-C140-CMP-MS06.html">Set penguasaan 06 — pengujian hipotesis, daya, p-value, dan jembatan likelihood</a></li><li><a href="../mastery/O006-C140-CMP-MS07.html">Set penguasaan 07 — regularitas, konsistensi, dan normalitas MLE</a></li><li><a href="../mastery/O006-C140-CMP-MS08.html">Set penguasaan 08 — Wald, skor, rasio likelihood, dan diagnosis nonregular</a></li><li><a href="../mastery/O006-C140-CMP-MS09.html">Set penguasaan 09 — pengujian eksak dan optimalitas Neyman–Pearson</a></li><li><a href="../mastery/O006-C140-CMP-MS10.html">Set penguasaan 10 — uji likelihood asimtotik, risk, dan perbaikan estimator</a></li><li><a href="../mastery/O006-C140-CMP-MS11.html">Set penguasaan 11 — pembaruan Bayesian, keputusan, dan kalibrasi</a></li><li><a href="../mastery/O006-C140-CMP-MS12.html">Set penguasaan 12 — model linear Gaussian matriks, inferensi eksak, dan diagnostik</a></li><li><a href="../assessments/O006-C140-CMP-CA01.html">Asesmen kumulatif C1: likelihood, optimalitas, dan keputusan statistik</a></li></ol></nav>
-<main>
+<nav class="sidebar" aria-labelledby="companion-nav-title"><p class="nav-title" id="companion-nav-title">Isi pendamping</p><ol><li><a href="../index.html">Pendamping Orisinal Statistika Matematis</a></li><li><a href="O006-C140-CMP-D001.html">Model parametrik reguler, skor, dan informasi Fisher</a></li><li><a href="O006-C140-CMP-D002.html">Konsistensi MLE: identifikasi Kullback–Leibler dan teorema argmax</a></li><li><a href="O006-C140-CMP-D003.html" aria-current="page">Ekspansi kuadratik lokal fungsi log-kemungkinan, normalitas asimtotik, dan metode delta</a></li><li><a href="O006-C140-CMP-D004.html">Prosedur Wald, skor, dan rasio fungsi kemungkinan</a></li><li><a href="O006-C140-CMP-D005.html">Fungsi kemungkinan nonreguler: empat mekanisme kegagalan</a></li><li><a href="O006-C140-CMP-D006.html">Optimalitas pengujian: Neyman–Pearson, MP, UMP, dan rasio fungsi kemungkinan monoton</a></li><li><a href="O006-C140-CMP-D007.html">Kerugian, risiko, efisiensi, Rao–Blackwell, dan Lehmann–Scheffé</a></li><li><a href="O006-C140-CMP-D008.html">Model linear Gaussian berdesain tetap dan geometri proyeksi</a></li><li><a href="O006-C140-CMP-D009.html">OLS, MLE Gaussian, dan teorema Gauss–Markov pada desain tetap</a></li><li><a href="O006-C140-CMP-D010.html">Inferensi Gaussian eksak: proyeksi, t, F, ANOVA, dan prediksi</a></li><li><a href="O006-C140-CMP-D011.html">Diagnostik, daya ungkit, kesalahan spesifikasi, dan inferensi pascaseleksi</a></li><li><a href="O006-C140-CMP-D012.html">Inferensi Bayesian sebagai pembaruan dan keputusan yang koheren</a></li><li><a href="O006-C140-CMP-D013.html">Perbandingan Bayesian–frekuentis: keputusan, cakupan, dan kalibrasi</a></li><li><a href="../simulations/O006-C140-CMP-SIM001.html">Model lokasi normal: MLE, cakupan, dan tiga statistik uji</a></li><li><a href="../simulations/O006-C140-CMP-SIM002.html">Metode delta pada titik reguler dan titik dengan turunan nol</a></li><li><a href="../simulations/O006-C140-CMP-SIM003.html">Distribusi seragam pada batas dukungan: laju nonreguler dan kegagalan bootstrap biasa</a></li><li><a href="../simulations/O006-C140-CMP-SIM004.html">Uji Neyman–Pearson teracak dengan ukuran uji tepat</a></li><li><a href="../simulations/O006-C140-CMP-SIM005.html">Model linear matriks: cakupan, heteroskedastisitas, dan pengaruh</a></li><li><a href="../simulations/O006-C140-CMP-SIM006.html">Kalibrasi selang Bayesian dan frekuentis pada model binomial</a></li><li><a href="../mastery/O006-C140-CMP-MS00.html">Set penguasaan 00 — probabilitas, distribusi, dan ekspektasi (diagnostik C140)</a></li><li><a href="../mastery/O006-C140-CMP-MS01.html">Set penguasaan 01 — statistik urutan dan distribusi sampel</a></li><li><a href="../mastery/O006-C140-CMP-MS02.html">Set penguasaan 02 — estimasi, bias, MSE, dan sifat penduga</a></li><li><a href="../mastery/O006-C140-CMP-MS03.html">Set penguasaan 03 — kecukupan, faktorisasi, kelengkapan, dan statistik aksesori</a></li><li><a href="../mastery/O006-C140-CMP-MS04.html">Set penguasaan 04 — metode momen dan dasar kemungkinan maksimum</a></li><li><a href="../mastery/O006-C140-CMP-MS05.html">Set penguasaan 05 — informasi Fisher, interval kepercayaan, bootstrap, dan metode delta</a></li><li><a href="../mastery/O006-C140-CMP-MS06.html">Set penguasaan 06 — pengujian hipotesis, daya, nilai-p, dan jembatan ke teori fungsi kemungkinan</a></li><li><a href="../mastery/O006-C140-CMP-MS07.html">Set penguasaan 07 — keteraturan, konsistensi, dan normalitas MLE</a></li><li><a href="../mastery/O006-C140-CMP-MS08.html">Set penguasaan 08 — Wald, skor, rasio fungsi kemungkinan, dan diagnosis nonreguler</a></li><li><a href="../mastery/O006-C140-CMP-MS09.html">Set penguasaan 09 — pengujian eksak dan optimalitas Neyman–Pearson</a></li><li><a href="../mastery/O006-C140-CMP-MS10.html">Set penguasaan 10 — uji fungsi kemungkinan asimtotik, risiko, dan perbaikan penduga</a></li><li><a href="../mastery/O006-C140-CMP-MS11.html">Set penguasaan 11 — pembaruan Bayesian, keputusan, dan kalibrasi</a></li><li><a href="../mastery/O006-C140-CMP-MS12.html">Set penguasaan 12 — model linear Gaussian dalam bentuk matriks, inferensi eksak, dan diagnostik</a></li><li><a href="../assessments/O006-C140-CMP-CA01.html">Asesmen kumulatif C1: fungsi kemungkinan, optimalitas, dan keputusan statistik</a></li><li><a href="../assessments/O006-C140-CMP-CA02.html">Asesmen kumulatif CA02 — fondasi inferensi sampel berhingga</a></li><li><a href="../assessments/O006-C140-CMP-CA03.html">Asesmen kumulatif CA03 — model linear dalam bentuk matriks, inferensi eksak, dan diagnostik</a></li><li><a href="../assessments/O006-C140-CMP-CA04.html">Asesmen kumulatif CA04 — sintesis Bayesian–frekuentis</a></li><li><a href="../capstones/O006-C140-CMP-CP01.html">Proyek akhir integratif CP01 — regresi data terbuka untuk kuat tekan beton</a></li><li><a href="../capstones/O006-C140-CMP-CP02.html">Proyek akhir CP02 — perbandingan Bayesian–frekuentis pada data agregat kecenderungan bersarang greater sage-grouse</a></li></ol></nav>
+<main id="main-content" tabindex="-1">
 <div class="metadata"><strong>O006-C140-CMP-D003</strong> · id-ID · CC BY-SA 4.0 · OpenAI Codex gpt-5.6-sol, Ultra</div>
 <p><a id="O006-C140-CMP-D003-SEC-OVERVIEW"></a></p>
-<h1>Likelihood kuadratik lokal dan normalitas asimtotik</h1>
-<p>Konsistensi MLE <a class="xref" data-target-id="O006-C140-CMP-D002-THM-MLE-CONSISTENCY" href="O006-C140-CMP-D002.html#O006-C140-CMP-D002-THM-MLE-CONSISTENCY">Korolari: konsistensi MLE pada parameter kompak</a> menyatakan bahwa
-galat estimator akhirnya kecil, tetapi tidak memberi skala galat atau bentuk
+<h1>Ekspansi kuadratik lokal fungsi log-kemungkinan dan normalitas asimtotik</h1>
+<p>Konsistensi MLE <a class="xref" data-target-id="O006-C140-CMP-D002-THM-MLE-CONSISTENCY" href="O006-C140-CMP-D002.html#O006-C140-CMP-D002-THM-MLE-CONSISTENCY">Korolari: konsistensi MLE pada ruang parameter kompak</a> menyatakan bahwa
+galat penduga akhirnya kecil, tetapi tidak memberi skala galat atau bentuk
 distribusinya. Dalam model parametrik reguler, perubahan parameter berorde
-<span class="math-inline" role="math">\(n^{-1/2}\)</span> menghasilkan perubahan log-likelihood berorde satu. Pada skala ini,
-log-likelihood mendekati fungsi kuadratik acak: bagian linearnya adalah skor
+<span class="math-inline" role="math">\(n^{-1/2}\)</span> menghasilkan perubahan fungsi log-kemungkinan berorde satu. Pada skala ini,
+fungsi log-kemungkinan mendekati fungsi kuadratik acak: bagian linearnya adalah skor
 ternormalisasi dan kelengkungannya adalah informasi Fisher.</p>
 <p>Struktur kuadratik lokal menjelaskan tiga fakta sekaligus:</p>
 <ol>
 <li>MLE memiliki galat berorde <span class="math-inline" role="math">\(n^{-1/2}\)</span>;</li>
-<li>limit galatnya Normal dengan kovarians <span class="math-inline" role="math">\(I(\theta_0)^{-1}\)</span>; dan</li>
-<li>transformasi mulus dari MLE dapat dianalisis dengan delta method.</li>
+<li>galat yang diskalakan dengan <span class="math-inline" role="math">\(\sqrt n\)</span> memiliki limit normal dengan kovarians
+<span class="math-inline" role="math">\(I(\theta_0)^{-1}\)</span>; dan</li>
+<li>transformasi mulus dari MLE dapat dianalisis dengan metode delta.</li>
 </ol>
 <p>Kesimpulan tersebut tidak berasal dari konsistensi saja. Kita akan menyatakan
-syarat diferensiasi, momen, uniformitas lokal, dan nonsingularitas secara
+syarat diferensiasi, momen, keseragaman lokal, dan ketaksingularan secara
 terpisah sehingga jelas mengapa contoh nonreguler berada di luar teorema.</p>
 <p><a id="O006-C140-CMP-D003-SEC-SETUP"></a></p>
 <h2>Notasi dan asumsi lokal</h2>
@@ -37,34 +39,36 @@ terpisah sehingga jelas mengapa contoh nonreguler berada di luar teorema.</p>
 <div class="math-display" role="math">\[\ell(\theta;x)=\log f_\theta(x),\qquad
 s_\theta(x)=\nabla_\theta\ell(\theta;x),\qquad
 H_\theta(x)=\nabla_\theta^2\ell(\theta;x).\]</div>
-<p>Untuk sampel iid, <span class="math-inline" role="math">\(\ell_n=\sum_i\ell(\theta;X_i)\)</span>,
-<span class="math-inline" role="math">\(U_n=\sum_i s_\theta(X_i)\)</span>, dan
-<span class="math-inline" role="math">\(J_n(\theta)=-\sum_iH_\theta(X_i)\)</span>. Informasi per observasi adalah
-<span class="math-inline" role="math">\(I(\theta)=E_\theta{s_\theta s_\theta^\mathsf T}\)</span> sebagaimana didefinisikan di
-<a class="xref" data-target-id="O006-C140-CMP-D001-DEF-FISHER" href="O006-C140-CMP-D001.html#O006-C140-CMP-D001-DEF-FISHER">Definisi: informasi yang diharapkan dan diamati</a>. Norma vektor adalah norma Euclid dan norma
+<p>Untuk sampel iid, <span class="math-inline" role="math">\(\ell_n(\theta)=\sum_{i=1}^n\ell(\theta;X_i)\)</span>,
+<span class="math-inline" role="math">\(U_n(\theta)=\sum_{i=1}^n s_\theta(X_i)\)</span>, dan
+<span class="math-inline" role="math">\(J_n(\theta)=-\sum_{i=1}^nH_\theta(X_i)\)</span>. Informasi per observasi adalah
+<span class="math-inline" role="math">\(I(\theta)=E_\theta\{s_\theta(X)s_\theta(X)^\mathsf T\}\)</span> sebagaimana didefinisikan di
+<a class="xref" data-target-id="O006-C140-CMP-D001-DEF-FISHER" href="O006-C140-CMP-D001.html#O006-C140-CMP-D001-DEF-FISHER">Definisi: informasi Fisher yang diharapkan dan informasi teramati</a>. Norma vektor adalah norma Euklides dan norma
 matriks adalah norma operator yang kompatibel.</p>
 <p><a id="O006-C140-CMP-D003-ASM-A1-A7"></a></p>
 <h3>Asumsi A1--A7</h3>
-<p>Pada parameter benar <span class="math-inline" role="math">\(\theta_0\in\mathbb R^p\)</span>, andaikan:</p>
+<p>Pada nilai parameter sebenarnya <span class="math-inline" role="math">\(\theta_0\in\mathbb R^p\)</span>, andaikan:</p>
 <ol>
 <li><strong>A1 (interior dan identifikasi).</strong> <span class="math-inline" role="math">\(\theta_0\)</span> adalah titik interior ruang
 parameter dan teridentifikasi.</li>
-<li><strong>A2 (regularitas densitas).</strong> Dominasi, support bersama, diferensiabilitas,
-dan pertukaran integral R1--R5 di
+<li><strong>A2 (keteraturan densitas).</strong> Dominasi, himpunan dukungan bersama,
+diferensiabilitas, dan keabsahan menukar diferensiasi dengan integrasi pada
+R1--R5 di
 <a class="xref" data-target-id="O006-C140-CMP-D001-ASM-R1-R6" href="O006-C140-CMP-D001.html#O006-C140-CMP-D001-ASM-R1-R6">Asumsi R1--R6</a> berlaku pada lingkungan terbuka <span class="math-inline" role="math">\(N\)</span> dari
 <span class="math-inline" role="math">\(\theta_0\)</span>.</li>
-<li><strong>A3 (skor berkuadrat integrabel).</strong> <span class="math-inline" role="math">\(E_{\theta_0}s_{\theta_0}=0\)</span> dan
+<li><strong>A3 (momen kedua skor).</strong> <span class="math-inline" role="math">\(E_{\theta_0}s_{\theta_0}=0\)</span> dan
 <span class="math-inline" role="math">\(E_{\theta_0}\|s_{\theta_0}\|^2&lt;\infty\)</span>.</li>
-<li><strong>A4 (informasi nonsingular).</strong> <span class="math-inline" role="math">\(I_0=I(\theta_0)\)</span> positif definit.</li>
-<li><strong>A5 (kontrol turunan ketiga).</strong> Untuk hampir semua <span class="math-inline" role="math">\(x\)</span>,
-<span class="math-inline" role="math">\(\ell(\theta;x)\)</span> tiga kali terdiferensial pada <span class="math-inline" role="math">\(N\)</span>, dan ada peubah acak
+<li><strong>A4 (informasi tak singular).</strong> <span class="math-inline" role="math">\(I_0=I(\theta_0)\)</span> definit positif.</li>
+<li><strong>A5 (kontrol Hessian dan turunan ketiga).</strong>
+<span class="math-inline" role="math">\(E_{\theta_0}\|H_{\theta_0}(X)\|&lt;\infty\)</span>. Untuk hampir semua <span class="math-inline" role="math">\(x\)</span>,
+<span class="math-inline" role="math">\(\ell(\theta;x)\)</span> tiga kali terdiferensialkan pada <span class="math-inline" role="math">\(N\)</span>, dan ada peubah acak
 <span class="math-inline" role="math">\(B(X)\)</span> dengan <span class="math-inline" role="math">\(E_{\theta_0}B(X)&lt;\infty\)</span> yang mendominasi nilai mutlak setiap
 turunan parsial orde tiga pada satu lingkungan tertutup dari <span class="math-inline" role="math">\(\theta_0\)</span>.</li>
 <li><strong>A6 (solusi konsisten).</strong> Ada pemaksimum lokal atau akar persamaan skor
 <span class="math-inline" role="math">\(\widehat\theta_n\)</span> dengan
 <span class="math-inline" role="math">\(\widehat\theta_n\xrightarrow{P}\theta_0\)</span> dan
-<span class="math-inline" role="math">\(U_n(\widehat\theta_n)=0\)</span> dengan probabilitas menuju satu.</li>
-<li><strong>A7 (pemilihan interior).</strong> Dengan probabilitas menuju satu,
+<span class="math-inline" role="math">\(U_n(\widehat\theta_n)=0\)</span> dengan peluang menuju satu.</li>
+<li><strong>A7 (pemilihan interior).</strong> Dengan peluang menuju satu,
 ruas garis antara <span class="math-inline" role="math">\(\theta_0\)</span> dan <span class="math-inline" role="math">\(\widehat\theta_n\)</span> berada di <span class="math-inline" role="math">\(N\)</span>.</li>
 </ol>
 <p>A6 biasanya diperoleh dari identifikasi Kullback--Leibler, ULLN, dan teorema
@@ -72,7 +76,7 @@ argmax di unit sebelumnya. Ia ditulis terpisah karena normalitas suatu akar
 lokal tidak membuktikan bahwa algoritme telah memilih akar yang konsisten.
 Untuk MLE pada batas, persamaan skor mungkin tidak nol dan A1/A6 gagal.</p>
 <p><a id="O006-C140-CMP-D003-THM-SCORE-CLT"></a></p>
-<h2>Teorema CLT untuk skor</h2>
+<h2>Teorema limit pusat (CLT) untuk skor</h2>
 <p>Di bawah A3--A4,</p>
 <div class="math-display" role="math">\[\Delta_n
 :=\frac1{\sqrt n}U_n(\theta_0)
@@ -82,12 +86,12 @@ Untuk MLE pada batas, persamaan skor mungkin tidak nol dan A1/A6 gagal.</p>
 <h3>Bukti</h3>
 <p>Ambil sembarang vektor tetap <span class="math-inline" role="math">\(a\in\mathbb R^p\)</span>. Peubah
 <span class="math-inline" role="math">\(a^\mathsf T s_{\theta_0}(X_i)\)</span> iid, bernilai harapan nol, dan bervarians
-<span class="math-inline" role="math">\(a^\mathsf T I_0a&lt;\infty\)</span>. CLT skalar memberi</p>
+<span class="math-inline" role="math">\(a^\mathsf T I_0a&lt;\infty\)</span>. Teorema limit pusat skalar memberi</p>
 <div class="math-display" role="math">\[a^\mathsf T\Delta_n\xrightarrow{d}
 N(0,a^\mathsf T I_0a).\]</div>
-<p>Karena ini berlaku untuk setiap <span class="math-inline" role="math">\(a\)</span>, perangkat Cramér--Wold memberi konvergensi
+<p>Karena ini berlaku untuk setiap <span class="math-inline" role="math">\(a\)</span>, teorema Cramér--Wold memberi konvergensi
 vektor ke <span class="math-inline" role="math">\(N_p(0,I_0)\)</span>. <span class="math-inline" role="math">\(\square\)</span></p>
-<p>Skor CLT menyediakan bagian acak dari likelihood lokal. Kelengkungan
+<p>CLT skor menyediakan bagian acak dalam aproksimasi lokal fungsi log-kemungkinan. Kelengkungan
 deterministik berasal dari LLN untuk Hessian.</p>
 <p><a id="O006-C140-CMP-D003-THM-HESSIAN-ULLN"></a></p>
 <h2>Teorema: konvergensi seragam Hessian lokal</h2>
@@ -97,8 +101,7 @@ deterministik berasal dari LLN untuk Hessian.</p>
 \left\|
 \frac1n\sum_{i=1}^n H_\theta(X_i)-E_{\theta_0}H_\theta(X)
 \right\|\xrightarrow{P}0,\]</div>
-<p>asalkan satu Hessian acuan terintegralkan. Selain itu,
-<span class="math-inline" role="math">\(E_{\theta_0}H_{\theta_0}(X)=-I_0\)</span>.</p>
+<p>Selain itu, <span class="math-inline" role="math">\(E_{\theta_0}H_{\theta_0}(X)=-I_0\)</span>.</p>
 <p><a id="O006-C140-CMP-D003-PRF-HESSIAN-ULLN"></a></p>
 <h3>Bukti</h3>
 <p>Untuk setiap elemen <span class="math-inline" role="math">\((j,k)\)</span>, teorema nilai rata-rata multivariat dan A5 memberi</p>
@@ -110,19 +113,20 @@ deterministik berasal dari LLN untuk Hessian.</p>
 konvergensi seragam elemen demi elemen menyiratkan konvergensi dalam norma
 matriks. Identitas harapan Hessian pada titik benar adalah identitas informasi
 kedua <a class="xref" data-target-id="O006-C140-CMP-D001-THM-INFO-IDENTITY" href="O006-C140-CMP-D001.html#O006-C140-CMP-D001-THM-INFO-IDENTITY">Teorema: identitas informasi kedua</a>. <span class="math-inline" role="math">\(\square\)</span></p>
-<p>Perhatikan bahwa harapan pada ruas pertama diambil di bawah distribusi benar
-<span class="math-inline" role="math">\(P_{\theta_0}\)</span>, sementara fungsi Hessian dievaluasi pada <span class="math-inline" role="math">\(\theta\)</span>. Hanya pada
+<p>Perhatikan bahwa nilai harapan pada tampilan di atas diambil di bawah distribusi
+benar <span class="math-inline" role="math">\(P_{\theta_0}\)</span>, sedangkan Hessian dievaluasi pada <span class="math-inline" role="math">\(\theta\)</span>. Hanya pada
 <span class="math-inline" role="math">\(\theta=\theta_0\)</span> identitas informasi standar langsung memberi <span class="math-inline" role="math">\(-I_0\)</span>.</p>
 <p><a id="O006-C140-CMP-D003-THM-MLE-AN"></a></p>
-<h2>Teorema: normalitas asimtotik MLE</h2>
-<p>Di bawah A1--A7,</p>
+<h2>Teorema: normalitas asimtotik akar skor konsisten, termasuk MLE interior</h2>
+<p>Di bawah A1--A7, penduga <span class="math-inline" role="math">\(\widehat\theta_n\)</span> pada A6 memenuhi</p>
 <div class="math-display" role="math">\[\sqrt n(\widehat\theta_n-\theta_0)
 =I_0^{-1}\Delta_n+o_P(1)
 \xrightarrow{d}N_p(0,I_0^{-1}).\]</div>
 <p><a id="O006-C140-CMP-D003-PRF-MLE-AN"></a></p>
 <h3>Bukti</h3>
-<p>Terapkan ekspansi Taylor integral pada skor di sepanjang ruas garis dari
-<span class="math-inline" role="math">\(\theta_0\)</span> ke <span class="math-inline" role="math">\(\widehat\theta_n\)</span>:</p>
+<p>Pada kejadian <span class="math-inline" role="math">\(A_n=\{U_n(\widehat\theta_n)=0\}\)</span>, yang menurut A6 berpeluang
+menuju satu, terapkan ekspansi Taylor integral pada skor di sepanjang ruas garis
+dari <span class="math-inline" role="math">\(\theta_0\)</span> ke <span class="math-inline" role="math">\(\widehat\theta_n\)</span>:</p>
 <div class="math-display" role="math">\[0=U_n(\widehat\theta_n)
 =U_n(\theta_0)
 +\left\{\int_0^1\nabla^2\ell_n
@@ -132,17 +136,17 @@ kedua <a class="xref" data-target-id="O006-C140-CMP-D001-THM-INFO-IDENTITY" href
 <div class="math-display" role="math">\[\overline H_n=\frac1n\int_0^1\nabla^2\ell_n
 (\theta_0+t(\widehat\theta_n-\theta_0))\,dt.\]</div>
 <p>Konsistensi A6 dan A7 membuat seluruh ruas garis berada dalam setiap
-lingkungan kompak kecil dari <span class="math-inline" role="math">\(\theta_0\)</span> dengan probabilitas menuju satu.
+lingkungan kompak kecil dari <span class="math-inline" role="math">\(\theta_0\)</span> dengan peluang menuju satu.
 Konvergensi seragam Hessian
 <a class="xref" data-target-id="O006-C140-CMP-D003-THM-HESSIAN-ULLN" href="O006-C140-CMP-D003.html#O006-C140-CMP-D003-THM-HESSIAN-ULLN">Teorema: konvergensi seragam Hessian lokal</a> dan kontinuitas harapan Hessian
-memberi <span class="math-inline" role="math">\(\overline H_n\xrightarrow{P}-I_0\)</span>. Karena <span class="math-inline" role="math">\(I_0\)</span> nonsingular,
-<span class="math-inline" role="math">\(\overline H_n\)</span> dapat diinvers dengan probabilitas menuju satu dan
+memberi <span class="math-inline" role="math">\(\overline H_n\xrightarrow{P}-I_0\)</span>. Karena <span class="math-inline" role="math">\(I_0\)</span> tak singular,
+<span class="math-inline" role="math">\(\overline H_n\)</span> invertibel dengan peluang menuju satu dan
 <span class="math-inline" role="math">\(-\overline H_n^{-1}\xrightarrow{P}I_0^{-1}\)</span>.</p>
 <p>Kalikan persamaan skor dengan <span class="math-inline" role="math">\(n^{-1/2}\)</span> dan susun ulang:</p>
 <div class="math-display" role="math">\[\sqrt n(\widehat\theta_n-\theta_0)
 =-\overline H_n^{-1}\frac{U_n(\theta_0)}{\sqrt n}
 =I_0^{-1}\Delta_n+o_P(1).\]</div>
-<p>CLT skor <a class="xref" data-target-id="O006-C140-CMP-D003-THM-SCORE-CLT" href="O006-C140-CMP-D003.html#O006-C140-CMP-D003-THM-SCORE-CLT">Teorema CLT untuk skor</a> dan teorema Slutsky memberi
+<p>CLT skor <a class="xref" data-target-id="O006-C140-CMP-D003-THM-SCORE-CLT" href="O006-C140-CMP-D003.html#O006-C140-CMP-D003-THM-SCORE-CLT">Teorema limit pusat (CLT) untuk skor</a> dan teorema Slutsky memberi
 limit Normal dengan kovarians
 <span class="math-inline" role="math">\(I_0^{-1}I_0(I_0^{-1})^\mathsf T=I_0^{-1}\)</span> karena <span class="math-inline" role="math">\(I_0\)</span> simetris.
 <span class="math-inline" role="math">\(\square\)</span></p>
@@ -150,13 +154,13 @@ limit Normal dengan kovarians
 <h3>Catatan: konsistensi bukan normalitas</h3>
 <p>Tidak satu pun langkah bukti di atas mengikuti dari konsistensi saja. CLT skor
 memerlukan momen kedua; penggantian Hessian memerlukan LLN seragam lokal;
-invers memerlukan informasi nonsingular; dan persamaan skor memerlukan solusi
+invers memerlukan informasi tak singular; dan persamaan skor memerlukan solusi
 interior. Pernyataan yang hanya menyebut
 <span class="math-inline" role="math">\(\widehat\theta_n\xrightarrow{P}\theta_0\)</span> tidak membenarkan aproksimasi Normal,
 bahkan tidak membenarkan konvergensi harapan tanpa UI
-<a class="xref" data-target-id="O006-C140-CMP-D002-THM-UI-EXPECTATION" href="O006-C140-CMP-D002.html#O006-C140-CMP-D002-THM-UI-EXPECTATION">Teorema: UI mengangkat konvergensi probabilitas menjadi konvergensi harapan</a>.</p>
+<a class="xref" data-target-id="O006-C140-CMP-D002-THM-UI-EXPECTATION" href="O006-C140-CMP-D002.html#O006-C140-CMP-D002-THM-UI-EXPECTATION">Teorema: UI memperkuat konvergensi dalam peluang menjadi konvergensi harapan</a>.</p>
 <p><a id="O006-C140-CMP-D003-SEC-LAN"></a></p>
-<h2>Ekspansi likelihood kuadratik lokal</h2>
+<h2>Ekspansi kuadratik lokal fungsi log-kemungkinan</h2>
 <p><a id="O006-C140-CMP-D003-THM-LAN"></a></p>
 <h3>Teorema: ekspansi lokal pada skala akar-<span class="math-inline" role="math">\(n\)</span></h3>
 <p>Di bawah A1--A5, untuk setiap vektor tetap <span class="math-inline" role="math">\(h\in\mathbb R^p\)</span> dengan
@@ -164,9 +168,9 @@ bahkan tidak membenarkan konvergensi harapan tanpa UI
 <div class="math-display" role="math">\[\ell_n\left(\theta_0+\frac h{\sqrt n}\right)-\ell_n(\theta_0)
 =h^\mathsf T\Delta_n-\frac12h^\mathsf T I_0h+o_P(1).\]</div>
 <p>Sisa <span class="math-inline" role="math">\(o_P(1)\)</span> berlaku seragam untuk <span class="math-inline" role="math">\(h\)</span> dalam setiap himpunan kompak. Bentuk
-ini disebut ekspansi likelihood kuadratik lokal; bersama limit Normal
-<span class="math-inline" role="math">\(\Delta_n\)</span>, ia merupakan bentuk lokal asimtotik Normal (LAN) pada model iid
-reguler.</p>
+ini disebut ekspansi kuadratik lokal fungsi log-kemungkinan; bersama limit
+Normal <span class="math-inline" role="math">\(\Delta_n\)</span>, bentuk tersebut merupakan representasi normalitas asimtotik
+lokal (LAN) pada model iid reguler.</p>
 <p><a id="O006-C140-CMP-D003-PRF-LAN"></a></p>
 <h3>Bukti</h3>
 <p>Tuliskan <span class="math-inline" role="math">\(u_n=h/\sqrt n\)</span>. Taylor orde dua dengan sisa orde tiga untuk setiap
@@ -185,17 +189,17 @@ adalah <span class="math-inline" role="math">\(h^\mathsf T\Delta_n\)</span>. Suk
 \xrightarrow{P}-\frac12h^\mathsf T I_0h\]</div>
 <p>oleh LLN dan identitas informasi. Batas sisa menggunakan hanya batas kompak
 pada <span class="math-inline" role="math">\(h\)</span>, sehingga keseragaman pada setiap kompak juga berlaku. <span class="math-inline" role="math">\(\square\)</span></p>
-<p>Fungsi kuadratik limit
+<p>Fungsi kuadratik pembatas
 <span class="math-inline" role="math">\(q_n(h)=h^\mathsf T\Delta_n-\tfrac12h^\mathsf TI_0h\)</span> dimaksimumkan pada
 <span class="math-inline" role="math">\(h=I_0^{-1}\Delta_n\)</span>. Inilah bentuk utama representasi asimtotik MLE pada
-<a class="xref" data-target-id="O006-C140-CMP-D003-THM-MLE-AN" href="O006-C140-CMP-D003.html#O006-C140-CMP-D003-THM-MLE-AN">Teorema: normalitas asimtotik MLE</a>. Teorema normalitas tetap dibuktikan lewat
+<a class="xref" data-target-id="O006-C140-CMP-D003-THM-MLE-AN" href="O006-C140-CMP-D003.html#O006-C140-CMP-D003-THM-MLE-AN">Teorema: normalitas asimtotik akar skor konsisten, termasuk MLE interior</a>. Teorema normalitas tetap dibuktikan lewat
 skor agar tidak perlu mengasumsikan secara terselubung bahwa pemaksimum fungsi
 acak dan pemaksimum aproksimasinya selalu dekat.</p>
 <p><a id="O006-C140-CMP-D003-SEC-INFORMATION"></a></p>
-<h2>Informasi yang diharapkan dan informasi yang diamati</h2>
+<h2>Informasi Fisher yang diharapkan dan informasi yang diamati</h2>
 <p><a id="O006-C140-CMP-D003-DEF-INFO-ESTIMATORS"></a></p>
 <h3>Definisi: tiga matriks kelengkungan</h3>
-<p>Pada sampel ukuran <span class="math-inline" role="math">\(n\)</span>, bedakan:</p>
+<p>Untuk sampel berukuran <span class="math-inline" role="math">\(n\)</span>, bedakan:</p>
 <div class="math-display" role="math">\[\mathcal I_n(\theta)=nI(\theta)
 \quad\text{(informasi yang diharapkan)},\]</div>
 <div class="math-display" role="math">\[J_n(\theta)=-\nabla^2\ell_n(\theta)
@@ -203,20 +207,20 @@ acak dan pemaksimum aproksimasinya selalu dekat.</p>
 <p>dan</p>
 <div class="math-display" role="math">\[K_n(\theta)=\sum_{i=1}^n
 s_\theta(X_i)s_\theta(X_i)^\mathsf T
-\quad\text{(outer product of gradients/OPG)}.\]</div>
-<p>Di bawah spesifikasi model yang benar dan pada parameter benar, ketiganya
-memiliki limit per-observasi yang sama. Pada sampel hingga mereka umumnya tidak
-sama. Di bawah salah spesifikasi model, limit Hessian dan OPG bahkan dapat
-berbeda; kovarians sandwich diperlukan dan identitas informasi model benar
-tidak boleh diasumsikan.</p>
+\quad\text{(hasil kali luar gradien/OPG)}.\]</div>
+<p>Di bawah syarat keteraturan, identitas informasi, dan LLN yang diperlukan, jika
+model terspesifikasi dengan benar dan ketiga matriks dievaluasi pada nilai
+parameter sebenarnya, ketiganya memiliki limit per observasi yang sama. Pada sampel
+berukuran hingga, ketiganya umumnya tidak sama. Jika spesifikasi model keliru,
+limit Hessian dan OPG bahkan dapat berbeda; kovarians sandwich diperlukan, dan
+identitas informasi untuk model yang benar tidak boleh diasumsikan.</p>
 <p><a id="O006-C140-CMP-D003-THM-INFO-CONVERGENCE"></a></p>
-<h3>Teorema: konsistensi informasi plug-in</h3>
+<h3>Teorema: konsistensi penduga informasi berbasis substitusi</h3>
 <p>Di bawah A1--A7 dan syarat LLN yang sama untuk
-<span class="math-inline" role="math">\(s_\theta s_\theta^\mathsf T\)</span>, dua hasil pertama di bawah berlaku. Untuk hasil
-ketiga, asumsikan pula bahwa $I(\theta)=E_\theta
-s_\theta s_\theta^\mathsf T<span class="math-inline" role="math">\( kontinu pada \)</span>\theta_0$. Syarat yang cukup adalah
-kontinuitas lokal integran bersama dominasi integrabel yang seragam terhadap
-<span class="math-inline" role="math">\(\theta\)</span>; kontinuitas ini tidak disimpulkan hanya dari ULLN di bawah
+<span class="math-inline" role="math">\(s_\theta(X)s_\theta(X)^\mathsf T\)</span>, dua konvergensi pertama berikut berlaku.
+Untuk hasil ketiga, asumsikan pula bahwa <span class="math-inline" role="math">\(I(\theta)=E_\theta\{s_\theta(X)s_\theta(X)^\mathsf T\}\)</span> kontinu pada <span class="math-inline" role="math">\(\theta_0\)</span>. Syarat yang cukup adalah
+integran yang kontinu secara lokal serta selubung terintegralkan yang seragam
+terhadap <span class="math-inline" role="math">\(\theta\)</span>; kontinuitas ini tidak disimpulkan hanya dari ULLN di bawah
 <span class="math-inline" role="math">\(P_{\theta_0}\)</span>. Dengan tambahan tersebut,</p>
 <div class="math-display" role="math">\[\frac1nJ_n(\widehat\theta_n)\xrightarrow{P}I_0,
 \qquad
@@ -227,38 +231,41 @@ I(\widehat\theta_n)\xrightarrow{P}I_0.\]</div>
 <div class="math-display" role="math">\[J_n(\widehat\theta_n)^{-1},
 \quad K_n(\widehat\theta_n)^{-1},
 \quad \{nI(\widehat\theta_n)\}^{-1}\]</div>
-<p>semuanya merupakan estimator asimtotik untuk kovarians
-<span class="math-inline" role="math">\(\widehat\theta_n\)</span>, yakni <span class="math-inline" role="math">\(I_0^{-1}/n\)</span>.</p>
+<p>Ketiganya mengestimasi <span class="math-inline" role="math">\(I_0^{-1}/n\)</span> dalam arti bahwa, setelah masing-masing
+dikalikan <span class="math-inline" role="math">\(n\)</span>, hasilnya konvergen dalam peluang ke <span class="math-inline" role="math">\(I_0^{-1}\)</span>. Ini adalah
+matriks kovarians untuk aproksimasi Normal asimtotik; klaim tentang kovarians
+aktual memerlukan konvergensi momen tambahan.</p>
 <p><a id="O006-C140-CMP-D003-PRF-INFO-CONVERGENCE"></a></p>
 <h3>Bukti</h3>
 <p>Konsistensi membuat <span class="math-inline" role="math">\(\widehat\theta_n\)</span> masuk ke lingkungan lokal dengan
-probabilitas menuju satu. Konvergensi seragam Hessian
+peluang menuju satu. Konvergensi seragam Hessian
 <a class="xref" data-target-id="O006-C140-CMP-D003-THM-HESSIAN-ULLN" href="O006-C140-CMP-D003.html#O006-C140-CMP-D003-THM-HESSIAN-ULLN">Teorema: konvergensi seragam Hessian lokal</a> memberi
-<span class="math-inline" role="math">\(-n^{-1}\nabla^2\ell_n(\widehat\theta_n)\to I_0\)</span>. Argumen ULLN yang sama pada
+<span class="math-inline" role="math">\(-n^{-1}\nabla^2\ell_n(\widehat\theta_n)\xrightarrow{P}I_0\)</span>. Argumen ULLN yang sama pada
 setiap elemen <span class="math-inline" role="math">\(s_\theta s_\theta^\mathsf T\)</span> memberi limit OPG
-<span class="math-inline" role="math">\(E_{\theta_0}s_{\theta_0}s_{\theta_0}^\mathsf T=I_0\)</span>. Kontinuitas <span class="math-inline" role="math">\(I(\theta)\)</span>
-dan teorema pemetaan kontinu memberi hasil plug-in yang diharapkan. Karena
-pemetaan invers kontinu pada himpunan matriks nonsingular dan <span class="math-inline" role="math">\(I_0\)</span> positif
-definit, hasil untuk invers mengikuti. <span class="math-inline" role="math">\(\square\)</span></p>
+<span class="math-inline" role="math">\(E_{\theta_0}\{s_{\theta_0}(X)s_{\theta_0}(X)^\mathsf T\}=I_0\)</span>. Kontinuitas
+<span class="math-inline" role="math">\(I(\theta)\)</span> dan teorema pemetaan kontinu memberi hasil substitusi untuk
+informasi yang diharapkan. Karena pemetaan invers kontinu pada himpunan matriks
+tak singular dan <span class="math-inline" role="math">\(I_0\)</span> definit positif, hasil untuk invers mengikuti. <span class="math-inline" role="math">\(\square\)</span></p>
 <p><a id="O006-C140-CMP-D003-REM-OBSERVED-EXPECTED"></a></p>
 <h3>Catatan interpretasi</h3>
-<p>Informasi yang diamati memakai kelengkungan log-likelihood yang benar-benar
+<p>Informasi yang diamati memakai kelengkungan fungsi log-kemungkinan yang benar-benar
 terlihat pada data; informasi yang diharapkan merata-ratakan kelengkungan atas
-sampel hipotetis pada model. Memilih salah satunya untuk galat baku sampel
-hingga adalah keputusan aproksimasi, bukan identitas aljabar universal. Keduanya
+sampel hipotetis menurut model. Memilih salah satunya untuk galat baku pada
+sampel berukuran hingga adalah keputusan aproksimasi, bukan identitas aljabar universal. Keduanya
 setara pada orde pertama di bawah teorema, tetapi dapat berbeda nyata pada
 sampel kecil atau dekat batas parameter.</p>
 <p><a id="O006-C140-CMP-D003-SEC-DELTA"></a></p>
-<h2>Delta method</h2>
+<h2>Metode delta</h2>
 <p>Sering kali target ilmiah bukan <span class="math-inline" role="math">\(\theta\)</span> sendiri, melainkan
-<span class="math-inline" role="math">\(g(\theta)\)</span>: odds, log-odds, rasio, probabilitas prediksi, atau kombinasi
-parameter. Delta method memindahkan limit Normal melalui pendekatan linear
+<span class="math-inline" role="math">\(g(\theta)\)</span>: nisbah peluang (<em>odds</em>), logaritma nisbah peluang (<em>log-odds</em>),
+rasio, peluang prediksi, atau kombinasi
+parameter. Metode delta memindahkan limit Normal melalui pendekatan linear
 lokal yang sah.</p>
 <p><a id="O006-C140-CMP-D003-THM-DELTA-SCALAR"></a></p>
-<h3>Teorema: delta method skalar</h3>
+<h3>Teorema: metode delta skalar</h3>
 <p>Jika</p>
 <div class="math-display" role="math">\[\sqrt n(T_n-\theta)\xrightarrow{d}N(0,V)\]</div>
-<p>dan <span class="math-inline" role="math">\(g:\mathbb R\to\mathbb R\)</span> terdiferensial pada <span class="math-inline" role="math">\(\theta\)</span>, maka</p>
+<p>dan <span class="math-inline" role="math">\(g:\mathbb R\to\mathbb R\)</span> dapat didiferensialkan di <span class="math-inline" role="math">\(\theta\)</span>, maka</p>
 <div class="math-display" role="math">\[\sqrt n\{g(T_n)-g(\theta)\}
 \xrightarrow{d}N\bigl(0,[g'(\theta)]^2V\bigr).\]</div>
 <p><a id="O006-C140-CMP-D003-PRF-DELTA-SCALAR"></a></p>
@@ -275,10 +282,11 @@ lokal yang sah.</p>
 =o_P(1)\,O_P(1)=o_P(1).\]</div>
 <p>Hasil mengikuti dari teorema Slutsky. <span class="math-inline" role="math">\(\square\)</span></p>
 <p><a id="O006-C140-CMP-D003-THM-DELTA-MULTIVARIATE"></a></p>
-<h3>Teorema: delta method multivariat</h3>
+<h3>Teorema: metode delta multivariat</h3>
 <p>Misalkan <span class="math-inline" role="math">\(T_n\in\mathbb R^p\)</span> memenuhi</p>
 <div class="math-display" role="math">\[\sqrt n(T_n-\theta)\xrightarrow{d}N_p(0,V),\]</div>
-<p>dan <span class="math-inline" role="math">\(g:\mathbb R^p\to\mathbb R^q\)</span> terdiferensial Fréchet pada <span class="math-inline" role="math">\(\theta\)</span> dengan
+<p>dan <span class="math-inline" role="math">\(g:\mathbb R^p\to\mathbb R^q\)</span> dapat didiferensialkan dalam pengertian
+Fréchet di <span class="math-inline" role="math">\(\theta\)</span> dengan
 Jacobian <span class="math-inline" role="math">\(G=Dg(\theta)\)</span> berukuran <span class="math-inline" role="math">\(q\times p\)</span>. Maka</p>
 <div class="math-display" role="math">\[\sqrt n\{g(T_n)-g(\theta)\}
 \xrightarrow{d}N_q(0,GVG^\mathsf T).\]</div>
@@ -288,7 +296,7 @@ Jacobian <span class="math-inline" role="math">\(G=Dg(\theta)\)</span> berukuran
 <div class="math-display" role="math">\[g(\theta+u)=g(\theta)+Gu+r(u),
 \qquad
 \frac{\|r(u)\|}{\|u\|}\to0.\]</div>
-<p>Seperti pada bukti skalar, konsistensi dan tightness dari
+<p>Seperti pada bukti skalar, konsistensi dan keketatan
 <span class="math-inline" role="math">\(\sqrt n(T_n-\theta)\)</span> membuat <span class="math-inline" role="math">\(\sqrt n\,r(T_n-\theta)=o_P(1)\)</span>. Maka</p>
 <div class="math-display" role="math">\[\sqrt n\{g(T_n)-g(\theta)\}
 =G\sqrt n(T_n-\theta)+o_P(1).\]</div>
@@ -297,35 +305,44 @@ Jacobian <span class="math-inline" role="math">\(G=Dg(\theta)\)</span> berukuran
 <p>Jika <span class="math-inline" role="math">\(G=0\)</span>, teorema hanya memberi limit degenerat nol. Itu bukan bukti bahwa
 galat identik nol; suku Taylor orde kedua dan mungkin skala selain <span class="math-inline" role="math">\(\sqrt n\)</span>
 diperlukan. Kasus informasi singular pada
-<a class="xref" data-target-id="O006-C140-CMP-D001-CTR-SINGULAR-INFORMATION" href="O006-C140-CMP-D001.html#O006-C140-CMP-D001-CTR-SINGULAR-INFORMATION">Kontraeksempel nonreguler: informasi singular</a> memperlihatkan bahaya
+<a class="xref" data-target-id="O006-C140-CMP-D001-CTR-SINGULAR-INFORMATION" href="O006-C140-CMP-D001.html#O006-C140-CMP-D001-CTR-SINGULAR-INFORMATION">Contoh tandingan nonreguler: informasi singular</a> memperlihatkan bahaya
 linearisasi dengan turunan nol.</p>
 <p><a id="O006-C140-CMP-D003-EX-BERNOULLI-LOGIT"></a></p>
-<h2>Contoh lengkap: log-odds Bernoulli</h2>
-<p>Untuk <span class="math-inline" role="math">\(X_i\sim\operatorname{Bernoulli}(p)\)</span> dengan <span class="math-inline" role="math">\(0&lt;p&lt;1\)</span>, MLE
-<span class="math-inline" role="math">\(\widehat p=\bar X\)</span> memenuhi</p>
+<h2>Contoh lengkap: logit pada model Bernoulli</h2>
+<p>Untuk <span class="math-inline" role="math">\(X_i\sim\operatorname{Bernoulli}(p)\)</span> dengan ruang parameter <span class="math-inline" role="math">\([0,1]\)</span> dan
+nilai sebenarnya <span class="math-inline" role="math">\(p\in(0,1)\)</span>, MLE <span class="math-inline" role="math">\(\widehat p=\bar X_n\)</span> memenuhi</p>
 <div class="math-display" role="math">\[\sqrt n(\widehat p-p)\xrightarrow{d}N(0,p(1-p)),\]</div>
 <p>sesuai <span class="math-inline" role="math">\(I(p)^{-1}=p(1-p)\)</span> dari
-<a class="xref" data-target-id="O006-C140-CMP-D001-EX-BERNOULLI" href="O006-C140-CMP-D001.html#O006-C140-CMP-D001-EX-BERNOULLI">Contoh lengkap: model Bernoulli</a>. Targetkan log-odds</p>
+<a class="xref" data-target-id="O006-C140-CMP-D001-EX-BERNOULLI" href="O006-C140-CMP-D001.html#O006-C140-CMP-D001-EX-BERNOULLI">Contoh lengkap: model Bernoulli</a>. Targetkan logit, yaitu logaritma nisbah
+peluang,</p>
 <div class="math-display" role="math">\[g(p)=\log\frac{p}{1-p},
 \qquad g'(p)=\frac1{p(1-p)}.\]</div>
-<p>Delta method memberi</p>
+<p>Definisikan versi logit yang bernilai hingga pada setiap sampel:</p>
+<div class="math-display" role="math">\[\widetilde g_n=
+\begin{cases}
+\log\{\bar X_n/(1-\bar X_n)\},&amp;0&lt;\bar X_n&lt;1,\\
+0,&amp;\bar X_n\in\{0,1\}.
+\end{cases}\]</div>
+<p>Karena <span class="math-inline" role="math">\(P_p(\bar X_n\in\{0,1\})=(1-p)^n+p^n\to0\)</span>, perluasan pada kedua titik
+ujung tersebut tidak memengaruhi limit. Metode delta memberi</p>
 <div class="math-display" role="math">\[\sqrt n\left\{
-\log\frac{\widehat p}{1-\widehat p}
+\widetilde g_n
 -\log\frac p{1-p}
 \right\}
 \xrightarrow{d}
 N\left(0,\frac1{p(1-p)}\right).\]</div>
-<p>Estimator plug-in untuk galat baku log-odds adalah</p>
+<p>Penduga substitusi untuk galat baku logit adalah</p>
 <div class="math-display" role="math">\[\widehat{\operatorname{se}}
 =\{n\widehat p(1-\widehat p)\}^{-1/2}.\]</div>
-<p>Rumus ini hanya terdefinisi bila <span class="math-inline" role="math">\(0&lt;\widehat p&lt;1\)</span>. Bila seluruh observasi nol
-atau satu, MLE berada pada batas dan transformasi logit tak hingga. Untuk <span class="math-inline" role="math">\(p\)</span>
-interior tetap, probabilitas kejadian itu menuju nol, tetapi pada sampel kecil
-ia nyata dan tidak boleh disembunyikan oleh keluaran numerik.</p>
+<p>Rumus galat baku ini hanya terdefinisi bila <span class="math-inline" role="math">\(0&lt;\widehat p&lt;1\)</span>. Bila seluruh
+observasi bernilai nol atau semua bernilai satu, MLE berada pada batas dan
+transformasi logit tidak bernilai hingga. Untuk <span class="math-inline" role="math">\(p\)</span> tetap di interior, peluang
+kejadian itu menuju nol, tetapi pada sampel kecil peluang tersebut tidak dapat
+diabaikan dan tidak boleh disembunyikan oleh keluaran numerik.</p>
 <p><a id="O006-C140-CMP-D003-EX-NORMAL-MEAN-VARIANCE"></a></p>
 <h2>Contoh lengkap: fungsi lokasi dan varians Normal</h2>
 <p>Untuk <span class="math-inline" role="math">\(X_i\sim N(\mu,v)\)</span>, informasi per observasi dari
-<a class="xref" data-target-id="O006-C140-CMP-D001-EX-NORMAL" href="O006-C140-CMP-D001.html#O006-C140-CMP-D001-EX-NORMAL">Contoh lengkap: lokasi dan skala Normal</a> adalah</p>
+<a class="xref" data-target-id="O006-C140-CMP-D001-EX-NORMAL" href="O006-C140-CMP-D001.html#O006-C140-CMP-D001-EX-NORMAL">Contoh lengkap: rataan dan varians pada model normal</a> adalah</p>
 <div class="math-display" role="math">\[I(\mu,v)=
 \begin{pmatrix}1/v&amp;0\\0&amp;1/(2v^2)\end{pmatrix}.\]</div>
 <p>Karena itu MLE <span class="math-inline" role="math">\((\widehat\mu,\widehat v)\)</span> memiliki limit</p>
@@ -342,31 +359,33 @@ N_2\left(
 \xrightarrow{d}N\left(0,\frac v2\right).\]</div>
 <p>Untuk koefisien variasi <span class="math-inline" role="math">\(c(\mu,v)=\sqrt v/\mu\)</span> dengan <span class="math-inline" role="math">\(\mu\ne0\)</span>, Jacobian</p>
 <div class="math-display" role="math">\[G=\left(-\frac{\sqrt v}{\mu^2},\frac{1}{2\mu\sqrt v}\right)\]</div>
-<p>harus dikalikan pada seluruh matriks kovarians. Mengolah kedua parameter seolah
-bebas hanya kebetulan benar di sini karena informasi silang Normal nol; pada
-model umum, suku kovarians silang wajib dipertahankan.</p>
+<p>harus diterapkan pada seluruh matriks kovarians melalui bentuk
+<span class="math-inline" role="math">\(G I(\mu,v)^{-1}G^\mathsf T\)</span>. Mengolah kedua parameter seolah-olah bebas
+kebetulan menghasilkan jawaban yang benar di sini karena elemen silang matriks
+informasi untuk model Normal bernilai nol; pada model umum, suku kovarians
+silang wajib dipertahankan.</p>
 <p><a id="O006-C140-CMP-D003-CTR-UNIFORM"></a></p>
-<h2>Kontraeksempel: likelihood dengan support bergerak</h2>
+<h2>Contoh tandingan: fungsi kemungkinan dengan himpunan dukungan bergerak</h2>
 <p>Pada <span class="math-inline" role="math">\(X_i\sim\operatorname{Unif}(0,\theta)\)</span>, MLE adalah maksimum sampel dan</p>
 <div class="math-display" role="math">\[n\left(1-\frac{\widehat\theta_n}{\theta}\right)
 \xrightarrow{d}\operatorname{Exp}(1)\]</div>
 <p>sebagaimana diturunkan di
-<a class="xref" data-target-id="O006-C140-CMP-D001-CTR-MOVING-SUPPORT" href="O006-C140-CMP-D001.html#O006-C140-CMP-D001-CTR-MOVING-SUPPORT">Kontraeksempel nonreguler: support bergerak</a>. Di sini support bersama A2 gagal,
-skor tidak bernilai harapan nol, Hessian likelihood interior tidak menangkap
-informasi dari batas support, dan skala yang tepat adalah <span class="math-inline" role="math">\(n\)</span>, bukan
+<a class="xref" data-target-id="O006-C140-CMP-D001-CTR-MOVING-SUPPORT" href="O006-C140-CMP-D001.html#O006-C140-CMP-D001-CTR-MOVING-SUPPORT">Contoh tandingan nonreguler: himpunan dukungan bergerak</a>. Di sini himpunan dukungan bersama A2 gagal,
+skor tidak bernilai harapan nol, Hessian fungsi log-kemungkinan di interior tidak menangkap
+informasi dari batas himpunan dukungan, dan skala yang tepat adalah <span class="math-inline" role="math">\(n\)</span>, bukan
 <span class="math-inline" role="math">\(\sqrt n\)</span>. MLE konsisten tetapi teorema normalitas reguler tidak berlaku.</p>
 <p><a id="O006-C140-CMP-D003-CTR-BOUNDARY"></a></p>
-<h2>Kontraeksempel: parameter pada batas</h2>
-<p>Ambil Bernoulli dengan ruang parameter <span class="math-inline" role="math">\([0,1]\)</span> dan parameter benar <span class="math-inline" role="math">\(p_0=0\)</span>.
+<h2>Contoh tandingan: parameter pada batas</h2>
+<p>Ambil Bernoulli dengan ruang parameter <span class="math-inline" role="math">\([0,1]\)</span> dan nilai parameter sebenarnya <span class="math-inline" role="math">\(p_0=0\)</span>.
 Semua observasi sama dengan nol hampir pasti, sehingga <span class="math-inline" role="math">\(\widehat p_n=0\)</span> untuk
 setiap <span class="math-inline" role="math">\(n\)</span>. Maka <span class="math-inline" role="math">\(\sqrt n(\widehat p_n-p_0)=0\)</span> persis, bukan Normal dengan
-varians positif. A1 gagal karena parameter benar bukan titik interior; skor
-biasa mengandung pembagian dengan <span class="math-inline" role="math">\(p\)</span>; informasi <span class="math-inline" role="math">\(1/{p(1-p)}\)</span> tidak hingga
+varians positif. A1 gagal karena nilai parameter sebenarnya bukan titik interior; skor
+biasa mengandung pembagian dengan <span class="math-inline" role="math">\(p\)</span>; informasi <span class="math-inline" role="math">\(1/{p(1-p)}\)</span> tak hingga
 pada batas. Distribusi limit degenerat ini bukan anomali komputasi, melainkan
 konsekuensi geometri ruang parameter.</p>
 <p><a id="O006-C140-CMP-D003-CTR-SINGULAR"></a></p>
-<h2>Kontraeksempel: informasi nol dan laju nonstandar</h2>
-<p>Dalam model terbatasi <span class="math-inline" role="math">\(X_i\sim N(\theta^2,1)\)</span> dengan <span class="math-inline" role="math">\(\theta\ge0\)</span> dan
+<h2>Contoh tandingan: informasi nol dan laju nonstandar</h2>
+<p>Dalam model yang dibatasi <span class="math-inline" role="math">\(X_i\sim N(\theta^2,1)\)</span> dengan <span class="math-inline" role="math">\(\theta\ge0\)</span> dan
 <span class="math-inline" role="math">\(\theta_0=0\)</span>, parameter sudah teridentifikasi tetapi berada pada batas dan
 <span class="math-inline" role="math">\(I(0)=0\)</span>. MLE memenuhi</p>
 <div class="math-display" role="math">\[\widehat\theta_n=\sqrt{\max(\bar X_n,0)}.\]</div>
@@ -376,31 +395,32 @@ konsekuensi geometri ruang parameter.</p>
 \xrightarrow{d}\sqrt{\max(Z,0)},
 \qquad Z\sim N(0,1).\]</div>
 <p>Limit memiliki atom di nol dan bagian kontinu positif; ia tidak Normal. A1 dan
-A4 gagal, sedangkan delta method orde pertama degenerat karena turunan peta
+A4 gagal, sedangkan metode delta orde pertama degenerat karena turunan peta
 <span class="math-inline" role="math">\(\theta\mapsto\theta^2\)</span> di nol sama dengan nol.</p>
 <p><a id="O006-C140-CMP-D003-REM-PRACTICE"></a></p>
 <h2>Prosedur aman untuk aproksimasi asimtotik</h2>
 <p>Untuk menerapkan hasil unit ini pada model baru, lakukan urutan berikut.</p>
 <ol>
-<li>Tentukan parameter benar interior dan parameterisasi yang teridentifikasi.</li>
-<li>Verifikasi dominasi, support bersama, serta alasan pertukaran turunan dan
-integral; jangan hanya memeriksa bahwa formula dapat diturunkan secara
+<li>Pastikan nilai parameter sebenarnya merupakan titik interior dan gunakan parameterisasi yang teridentifikasi.</li>
+<li>Verifikasi dominasi, himpunan dukungan bersama, serta alasan pertukaran turunan dan
+integral; jangan hanya memeriksa bahwa rumus dapat diturunkan secara
 simbolik.</li>
 <li>Hitung skor dan informasi dengan kedua identitas bila keduanya sah. Perbedaan
-hasil adalah tanda kesalahan aljabar atau pelanggaran regularitas.</li>
-<li>Buktikan konsistensi akar likelihood yang dipilih; keberadaan akar skor saja
+hasil adalah tanda kesalahan aljabar atau pelanggaran syarat keteraturan.</li>
+<li>Buktikan konsistensi akar persamaan skor yang dipilih; keberadaan akar skor saja
 tidak cukup.</li>
-<li>Periksa momen skor, LLN lokal Hessian, serta nonsingularitas informasi.</li>
+<li>Periksa momen skor, LLN lokal Hessian, serta ketaksingularan informasi.</li>
 <li>Nyatakan representasi linear
 <span class="math-inline" role="math">\(\sqrt n(\widehat\theta_n-\theta_0)=I_0^{-1}\Delta_n+o_P(1)\)</span> sebelum
 menuliskan limit Normal.</li>
 <li>Untuk target transformasi, tulis Jacobian beserta dimensinya dan gunakan
 <span class="math-inline" role="math">\(GI_0^{-1}G^\mathsf T\)</span>.</li>
-<li>Jika parameter berada pada batas, support bergerak, atau informasi singular,
+<li>Jika parameter berada pada batas, himpunan dukungan bergerak, atau informasi singular,
 hentikan prosedur reguler dan cari ekspansi serta skala yang sesuai.</li>
 </ol>
-<p>Ekspansi lokal memberi dasar untuk prosedur Wald, skor, dan rasio likelihood.
-Kesetaraan orde pertama prosedur-prosedur tersebut memerlukan hipotesis yang
+<p>Ekspansi kuadratik lokal fungsi log-kemungkinan memberi dasar untuk prosedur
+Wald, skor, dan rasio fungsi kemungkinan. Kesetaraan orde pertama
+prosedur-prosedur tersebut memerlukan asumsi keteraturan yang
 sama dan tidak boleh diekstrapolasi ke contoh nonreguler di atas.</p>
 
 <footer class="license">Materi pendamping orisinal berlisensi CC BY-SA 4.0. Komponen Penn State dan Random tetap berada di bawah lisensinya masing-masing dan tidak direlisensikan oleh halaman ini.</footer>

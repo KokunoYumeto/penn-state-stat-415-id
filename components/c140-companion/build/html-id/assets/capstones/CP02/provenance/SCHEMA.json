@@ -1,0 +1,139 @@
+{
+  "source_file": "raw/nest_propensity.csv",
+  "source_file_id": 2765112,
+  "dictionary_file": "raw/README.md",
+  "dictionary_file_id": 2765118,
+  "format": {
+    "media_type": "text/csv",
+    "delimiter": ",",
+    "header": true,
+    "encoding": "UTF-8 (ASCII subset), no BOM",
+    "newline": "CRLF"
+  },
+  "shape": {
+    "data_rows": 12,
+    "columns": 5,
+    "header_rows": 1,
+    "blank_rows": 0
+  },
+  "columns": [
+    {
+      "position": 1,
+      "name": "Transmitter",
+      "physical_type": "string",
+      "semantic_role": "group",
+      "meaning": "tipe pemancar pada kelompok betina",
+      "observed_values": ["PTT", "VHF"],
+      "null_count": 0
+    },
+    {
+      "position": 2,
+      "name": "Year",
+      "physical_type": "integer",
+      "semantic_role": "time",
+      "meaning": "tahun studi",
+      "observed_min": 2015,
+      "observed_max": 2022,
+      "null_count": 0
+    },
+    {
+      "position": 3,
+      "name": "No_nests",
+      "physical_type": "integer",
+      "semantic_role": "success_count",
+      "meaning": "jumlah sarang yang diinisiasi",
+      "observed_sum": 245,
+      "null_count": 0
+    },
+    {
+      "position": 4,
+      "name": "Total_method_1",
+      "physical_type": "integer",
+      "semantic_role": "primary_trial_count",
+      "meaning": "jumlah betina yang tersedia untuk bersarang menurut definisi konservatif",
+      "observed_sum": 252,
+      "null_count": 0
+    },
+    {
+      "position": 5,
+      "name": "Total_method_2",
+      "physical_type": "integer",
+      "semantic_role": "sensitivity_trial_count",
+      "meaning": "jumlah betina yang tersedia untuk bersarang menurut definisi liberal",
+      "observed_sum": 277,
+      "null_count": 0
+    }
+  ],
+  "documentation_resolution": {
+    "readme_claim": "README menyebut enam kolom, tetapi deskripsinya hanya menomori posisi 1, 2, 3, dan 4-5.",
+    "byte_evidence": "Header CSV memiliki tepat lima nama dan setiap satu dari 12 baris data memiliki tepat lima field.",
+    "resolution": "Angka enam diperlakukan sebagai salah ketik dokumentasi; schema kanonis memiliki lima kolom tanpa menambah kolom sintetis."
+  },
+  "denominator_policy": {
+    "success_column": "No_nests",
+    "primary": {
+      "column": "Total_method_1",
+      "definition": "definisi konservatif betina yang tersedia untuk bersarang",
+      "rationale": "README menamai method 1 sebagai definisi konservatif, sehingga CP02 menetapkannya sebagai denominator primer sebelum pemodelan; pilihan ini tidak didasarkan pada estimasi efek, kecocokan model, atau signifikansi.",
+      "evidence_limit": "Byte publik yang dibekukan tidak menetapkan alasan biologis atau pengukuran di balik label konservatif dan liberal; README merujuk ke bagian metode manuskrip, yang bukan aset analitik yang dibekukan di sini."
+    },
+    "sensitivity": {
+      "column": "Total_method_2",
+      "definition": "definisi liberal betina yang tersedia untuk bersarang",
+      "use": "analisis sensitivitas terpisah; tidak boleh menggantikan denominator primer setelah hasil dilihat"
+    }
+  },
+  "coverage": {
+    "groups": ["PTT", "VHF"],
+    "overall_years": [2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022],
+    "PTT_years": [2019, 2020, 2021, 2022],
+    "VHF_years": [2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022],
+    "overlap_years": [2019, 2020, 2021, 2022]
+  },
+  "aggregate_summaries": {
+    "all": {
+      "rows": 12,
+      "No_nests": 245,
+      "Total_method_1": 252,
+      "Total_method_2": 277
+    },
+    "PTT": {
+      "rows": 4,
+      "No_nests": 79,
+      "Total_method_1": 83,
+      "Total_method_2": 87
+    },
+    "VHF": {
+      "rows": 8,
+      "No_nests": 166,
+      "Total_method_1": 169,
+      "Total_method_2": 190
+    }
+  },
+  "integrity_checks": {
+    "all_rows_have_five_fields": true,
+    "all_counts_are_nonnegative_integers": true,
+    "all_rows_satisfy_No_nests_lte_Total_method_1_lte_Total_method_2": true,
+    "unique_Transmitter_Year_pairs": 12,
+    "duplicate_Transmitter_Year_pairs": 0,
+    "missing_values": 0
+  },
+  "privacy_scope": {
+    "unit_of_row": "kelompok tipe pemancar × tahun",
+    "individual_microdata_imported": false,
+    "direct_study_subject_identifiers_imported": false,
+    "location_fields_imported": false,
+    "aggregate_analytic_file": "nest_propensity.csv",
+    "source_dictionary_file": "README.md",
+    "provenance_witness_creator_metadata": {
+      "present": true,
+      "fields": ["authors[].email", "authors[].orcid"],
+      "witness_files": [
+        "dataset-doi-10.5061-dryad.573n5tbf3-api.json",
+        "version-268230.json"
+      ],
+      "not_analytic_data": true,
+      "note": "Saksi API mempertahankan metadata pencipta yang dipublikasikan Dryad untuk provenans; metadata itu bukan microdata subjek studi atau input model."
+    }
+  }
+}

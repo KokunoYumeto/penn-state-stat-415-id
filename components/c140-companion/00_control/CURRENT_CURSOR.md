@@ -1,8 +1,31 @@
 # Production cursor — original C140 companion
 
-Updated: 2026-08-29
+Updated: 2026-08-31
 
-Current live boundary: cumulative C4 is publicly complete. Exact scope is
+Current boundary: all 39 source documents are complete, including CA02–CA04
+and both capstones. Translation/source production finished before audit.
+Assessments, capstone mathematics/data/rights, theory, and simulation source
+audits have closed. Post-audit repairs standardized CP01 aggregate symbols,
+localized SIM001–SIM005 SVG labels, corrected SIM005/SIM006 heading levels,
+and repaired mastery mathematical edge cases and TeX. The final MS09–MS12
+post-patch reread passed. Do not restart completed translation or source audits.
+
+The five C5 document identities were recomputed and updated in
+`C5_ASSESSMENT_CAPSTONE_BATCH_CONTRACT.md`. Generated simulations are current.
+The current HTML/backend build and static QA passed write plus two separate
+check-only replays. The 259-file Pages collection also passed replay.
+Exact identities are in `CHECKPOINT_2026-08-31_C5_LOCAL_COMPLETE.md`.
+No C5 publication has been made yet.
+
+Next executable action: finish the repository C5 preservation package,
+binding the current corrected C1/C2 simulation receipts without rewriting
+historical release bytes. The clean-checkout CP02 hydration helper is tested.
+Create/verify the 65-file union,
+publish GitHub/Pages and Zenodo in concept 22077422, anonymously read back all
+public bytes, and persist final receipts. Historical C1–C4 records below are
+evidence, not current instructions. Do not redo their production.
+
+Last public boundary: cumulative C4 is complete. Exact scope is
 `D001`–`D013`, `SIM001`–`SIM006`, `MS00`–`MS12`, `CA01`, and the index: 34
 documents, 64 HTML files, 1,113 backend entities, 1,424 relations, six
 simulations, and 114 fully solved problems. Build/QA receipt SHA-256 values are

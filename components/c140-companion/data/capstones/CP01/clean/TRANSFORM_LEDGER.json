@@ -1,0 +1,219 @@
+{
+  "assertions": {
+    "asset_identity": true,
+    "duplicate_inventory": true,
+    "exact_rank_9": true,
+    "no_missing_parse_nan_or_nonfinite": true,
+    "no_rng_seed_null": true,
+    "numerical_rank_9": true,
+    "scaled_condition_below_1e8": true,
+    "schema_and_domains": true,
+    "source_order_and_row_ids": true
+  },
+  "browser_processes_used": false,
+  "canonical_analysis_asset": "raw/data.csv",
+  "conditioning": {
+    "epsilon_binary64": 2.220446049250313e-16,
+    "kappa2_raw": 106074.57306673574,
+    "kappa2_scaled": 8.711778718605796,
+    "kappa2_scaled_gate_lt": 100000000.0,
+    "method": "thin_SVD_binary64",
+    "predictor_means": [
+      281.1678640776696,
+      73.89582524271844,
+      54.18834951456309,
+      181.56728155339803,
+      6.204660194174757,
+      972.9189320388344,
+      773.5804854368922,
+      45.662135922330094
+    ],
+    "predictor_sample_sd": [
+      104.50636449481543,
+      86.27934174810551,
+      63.99700415268812,
+      21.354218565032525,
+      5.973841392485506,
+      77.75395396672091,
+      80.17598014240434,
+      63.169911581033155
+    ],
+    "rank_raw": 9,
+    "rank_scaled": 9,
+    "rank_threshold_formula": "epsilon*max(n,p)*sigma_max",
+    "residual_df": 1021,
+    "singular_values_raw_desc": [
+      41491.877510411156,
+      3633.114699855978,
+      2988.1649967947465,
+      2691.291705945627,
+      2023.5959005675122,
+      1566.227389668868,
+      786.6971600943436,
+      117.12691628541839,
+      0.3911576196899417
+    ],
+    "singular_values_scaled_desc": [
+      48.437818312053665,
+      38.17251588964568,
+      37.13409922836238,
+      32.30432597199211,
+      32.09361307176243,
+      31.29060122838866,
+      28.515103745349688,
+      13.527715974640703,
+      5.560037723249873
+    ],
+    "standardization": "source_order_mean_and_sample_sd_ddof_1",
+    "tau_raw": 9.489438975878948e-09,
+    "tau_scaled": 1.1078016917446315e-11
+  },
+  "csv_xls_relationship_frozen_witness": {
+    "positional_cells": 9270,
+    "raw_value_differing_cells": 2260,
+    "rounding_rule": "midpoint_ties_away_from_zero; columns_1_to_7_1dp; age_0dp; response_2dp",
+    "rounding_rule_mismatches": 0,
+    "xls_parsed_during_replay": false
+  },
+  "data_schema": {
+    "clean_headers": [
+      "cement_kg_per_m3",
+      "blast_furnace_slag_kg_per_m3",
+      "fly_ash_kg_per_m3",
+      "water_kg_per_m3",
+      "superplasticizer_kg_per_m3",
+      "coarse_aggregate_kg_per_m3",
+      "fine_aggregate_kg_per_m3",
+      "age_days",
+      "compressive_strength_mpa"
+    ],
+    "data_columns": 9,
+    "n": 1030,
+    "predictors": 8,
+    "response": "compressive_strength_mpa",
+    "source_headers": [
+      "Cement",
+      "Blast Furnace Slag",
+      "Fly Ash",
+      "Water",
+      "Superplasticizer",
+      "Coarse Aggregate",
+      "Fine Aggregate",
+      "Age",
+      "Concrete compressive strength"
+    ]
+  },
+  "duplicates": {
+    "full": {
+      "extra_occurrences": 25,
+      "group_size_distribution": {
+        "2": 1,
+        "3": 6,
+        "4": 4
+      },
+      "groups": 11,
+      "rows": 36,
+      "unique_keys": 1005
+    },
+    "predictor": {
+      "extra_occurrences": 38,
+      "group_size_distribution": {
+        "2": 5,
+        "3": 9,
+        "4": 5
+      },
+      "groups": 19,
+      "rows": 57,
+      "unique_keys": 992
+    },
+    "predictor_groups_with_varying_response": {
+      "groups": 9,
+      "rows": 24
+    }
+  },
+  "network_access": false,
+  "outputs_excluding_ledger": [
+    {
+      "bytes": 2540,
+      "path": "clean/COLUMN_MANIFEST.csv",
+      "sha256": "890a2b3990557629a03edd8c1c234d0528f7d77dfdbf1ab08c3e1efe4a259fa7"
+    },
+    {
+      "bytes": 99729,
+      "path": "clean/ROW_MANIFEST.csv",
+      "sha256": "fa4f58250f531f4fb7e5cbbc895ea96f8c8584ad12edd1224237abbc08fb8049"
+    },
+    {
+      "bytes": 48780,
+      "path": "clean/concrete_compressive_strength.csv",
+      "sha256": "74afac6cbd97e01d0a61e47c2c12fdb67dba17553e47db2db9fa5a1946ea1e14"
+    }
+  ],
+  "parsing": {
+    "columns": 9,
+    "data_rows": 1030,
+    "decimal_mark": ".",
+    "delimiter": ",",
+    "encoding": "UTF-8_without_BOM",
+    "header_rows": 1,
+    "missing_cells": 0,
+    "nan_cells": 0,
+    "nonfinite_cells": 0,
+    "parse_failures": 0,
+    "source_line_endings": "CRLF"
+  },
+  "rank_exact": {
+    "minor_determinant": "-470089281375/2",
+    "minor_determinant_denominator": 2,
+    "minor_determinant_numerator": -470089281375,
+    "pivot_source_records": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      17,
+      185
+    ],
+    "rank_Q": 9
+  },
+  "row_identity": {
+    "first": "CP01-R0001",
+    "last": "CP01-R1030",
+    "rows_excluded": 0,
+    "rows_kept": 1030,
+    "source_order_preserved": true
+  },
+  "schema": "o006.c140.cp01-transform-ledger.v1",
+  "seed": null,
+  "source_assets_before": [
+    {
+      "bytes": 41472,
+      "path": "raw/data.csv",
+      "role": "canonical_analysis_input",
+      "sha256": "8d4b15b6fc68cd932d745cbd663d5ceae66dd54422e99c1e4865f2936ab7e2af"
+    },
+    {
+      "bytes": 34444,
+      "path": "raw/concrete+compressive+strength.zip",
+      "role": "provenance_witness",
+      "sha256": "dad85d14de8aee4e07479daa774e6b569a313715b71a3b92c95a07cf91c2c9a7"
+    },
+    {
+      "bytes": 124928,
+      "path": "raw/archive/Concrete_Data.xls",
+      "role": "precision_and_header_witness_not_parsed",
+      "sha256": "710076c66b9ca3f8050e7942f3dcbdbe04013534daeb0077ffd3079a52d8e0c4"
+    },
+    {
+      "bytes": 3808,
+      "path": "raw/archive/Concrete_Readme.txt",
+      "role": "source_dictionary_and_rights_witness",
+      "sha256": "5cd3cdb31d3cfd68287daa6b22ed0541d6932113e83ee0980ced63641af3441d"
+    }
+  ],
+  "status": "pass",
+  "xls_parser_used": false
+}

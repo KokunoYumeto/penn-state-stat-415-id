@@ -71,11 +71,11 @@ def coverage_svg(classical: float, hc3: float, exact: float) -> bytes:
     x0 = 145
     parts = [
         '<?xml version="1.0" encoding="UTF-8"?>',
-        f'<svg xmlns="http://www.w3.org/2000/svg" width="{width}" height="{height}" viewBox="0 0 {width} {height}">',
-        '<title>Coverage interval regresi pada tiga skenario</title>',
-        '<desc>Diagram batang memperlihatkan coverage interval 95 persen: Gaussian eksak sekitar 0,948, heteroskedastik dengan galat baku klasik sekitar 0,840, dan heteroskedastik dengan HC3 sekitar 0,943. Garis putus-putus menandai target 0,95.</desc>',
+        f'<svg xmlns="http://www.w3.org/2000/svg" width="{width}" height="{height}" viewBox="0 0 {width} {height}" role="img" aria-labelledby="title desc">',
+        '<title id="title">Cakupan selang regresi pada tiga skenario</title>',
+        '<desc id="desc">Diagram batang memperlihatkan cakupan selang 95 persen: Gaussian eksak sekitar 0,948, heteroskedastik dengan galat baku klasik sekitar 0,840, dan heteroskedastik dengan HC3 sekitar 0,943. Garis putus-putus menandai sasaran 0,95.</desc>',
         '<rect width="100%" height="100%" fill="white"/>',
-        '<text x="360" y="25" text-anchor="middle" font-family="sans-serif" font-size="17">Coverage interval 95% untuk koefisien kemiringan</text>',
+        '<text x="360" y="25" text-anchor="middle" font-family="sans-serif" font-size="17">Cakupan selang 95% untuk koefisien kemiringan</text>',
     ]
     for tick in (0.70, 0.75, 0.80, 0.85, 0.90, 0.95, 1.00):
         yy = y(tick)
@@ -90,7 +90,7 @@ def coverage_svg(classical: float, hc3: float, exact: float) -> bytes:
         parts.append(f'<text x="{xx+bar_w/2:.2f}" y="{yy-8:.2f}" text-anchor="middle" font-family="sans-serif" font-size="13">{value:.3f}</text>')
         parts.append(f'<text x="{xx+bar_w/2:.2f}" y="{height-53}" text-anchor="middle" font-family="sans-serif" font-size="13">{label}</text>')
     parts.extend([
-        '<text x="360" y="412" text-anchor="middle" font-family="sans-serif" font-size="12">Garis putus-putus: target nominal 0,95</text>',
+        '<text x="360" y="412" text-anchor="middle" font-family="sans-serif" font-size="12">Garis putus-putus: sasaran nominal 0,95</text>',
         '</svg>',
     ])
     return ("\n".join(parts) + "\n").encode("utf-8")

@@ -1,0 +1,9 @@
+source_position,source_name,clean_position,clean_name,semantic_role,definition,semantic_type,domain,allowed_missing_codes,transformation,missing_count,unique_count,canonical_column_sha256
+,,1,cell_id,trace_id,stable cell identifier,string,CP02-{VHF|PTT}-{year},none,derived from transmitter and year,0,12,f830de79d433ece329ae7b8110cddd77a7a97d97896cf06d23ce92a3f76aa42c
+,,2,source_record,trace_record,one-based source data record,int64,1..12,none,one-based physical data-record position,0,12,4f66184996ec8389d42d14ce33e4802dd4a3ae62effc9369e72e0ca1ba191fe4
+,,3,cell_order,canonical_order,canonical analysis row order,int64,1..12,none,"sort by year then group rank VHF=0,PTT=1",0,12,a5035293b356af50482301ff26924f4977301b017da8d63dc852e74bac897869
+1,Transmitter,4,transmitter,group,published transmitter group,categorical_string,VHF|PTT,none,exact rename; no case folding,0,2,9bbe063ecc1d307ffa5b633bc87fdeb27a44fe3f47b7cf3ca4069e67680fd145
+2,Year,5,year,time,published study year,int64,frozen cell inventory 2015..2022,none,canonical unsigned decimal to int64,0,8,9319f74ca65e2d3b95ffbf5f21967aec05588704c76a9bfdebc88e3a8dc4b703
+3,No_nests,6,nests_initiated,success_count,nests initiated in the aggregate cell,int64,0<=y<=n_primary,none,canonical unsigned decimal to int64,0,9,62715679ad22d6102a17fc79bbb482f34d9513dd9ff481a60949de2079312560
+4,Total_method_1,7,hens_available_primary,primary_trial_count,conservative hens-available denominator,int64,positive; y<=n_primary<=n_secondary,none,canonical unsigned decimal to int64,0,11,d63112d9ceeef30c62d287236e054cb512255babc735bbe3f1c050f686800179
+5,Total_method_2,8,hens_available_secondary,secondary_trial_count,liberal hens-available denominator,int64,positive; n_secondary>=n_primary,none,canonical unsigned decimal to int64,0,11,775133d90c2100ae4266e001c86be1813cd2bea23605e75cc7eb3301f356498a

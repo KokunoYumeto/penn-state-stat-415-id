@@ -4,56 +4,57 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="generator" content="OpenAI Codex gpt-5.6-sol, Ultra">
-<title>Model lokasi normal: MLE, coverage, dan tiga statistik uji</title>
+<title>Model lokasi normal: MLE, cakupan, dan tiga statistik uji</title>
 <link rel="stylesheet" href="../assets/style.css">
 <script>window.MathJax={loader:{load:['[tex]/boldsymbol']},tex:{packages:{'[+]':['boldsymbol']},inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']]},svg:{fontCache:'local'}};</script>
 <script defer src="../assets/MathJax/tex-svg.js"></script>
 </head>
 <body>
+<a class="skip-link" href="#main-content">Langsung ke isi utama</a>
 <div class="shell">
-<nav class="sidebar" aria-label="Daftar isi pendamping"><h2>Isi pendamping</h2><ol><li><a href="../index.html">Pendamping Orisinal Statistika Matematis</a></li><li><a href="../theory/O006-C140-CMP-D001.html">Model parametrik reguler, skor, dan informasi Fisher</a></li><li><a href="../theory/O006-C140-CMP-D002.html">Konsistensi MLE: identifikasi Kullback–Leibler dan teorema argmax</a></li><li><a href="../theory/O006-C140-CMP-D003.html">Likelihood kuadratik lokal, normalitas asimtotik, dan delta method</a></li><li><a href="../theory/O006-C140-CMP-D004.html">Prosedur Wald, skor, dan rasio likelihood</a></li><li><a href="../theory/O006-C140-CMP-D005.html">Likelihood nonreguler: empat mekanisme kegagalan</a></li><li><a href="../theory/O006-C140-CMP-D006.html">Optimalitas pengujian: Neyman–Pearson, MP, UMP, dan rasio likelihood monoton</a></li><li><a href="../theory/O006-C140-CMP-D007.html">Loss, risk, efisiensi, Rao–Blackwell, dan Lehmann–Scheffé</a></li><li><a href="../theory/O006-C140-CMP-D008.html">Model linear Gaussian desain tetap dan geometri proyeksi</a></li><li><a href="../theory/O006-C140-CMP-D009.html">OLS, MLE Gaussian, dan teorema Gauss–Markov pada rancangan tetap</a></li><li><a href="../theory/O006-C140-CMP-D010.html">Inferensi Gaussian eksak: proyeksi, t, F, ANOVA, dan prediksi</a></li><li><a href="../theory/O006-C140-CMP-D011.html">Diagnostik, leverage, misspesifikasi, dan inferensi pascaseleksi</a></li><li><a href="../theory/O006-C140-CMP-D012.html">Inferensi Bayesian sebagai pembaruan dan keputusan yang koheren</a></li><li><a href="../theory/O006-C140-CMP-D013.html">Perbandingan Bayesian–frequentist: keputusan, cakupan, dan kalibrasi</a></li><li><a href="O006-C140-CMP-SIM001.html">Model lokasi normal: MLE, coverage, dan tiga statistik uji</a></li><li><a href="O006-C140-CMP-SIM002.html">Delta method pada titik reguler dan titik dengan turunan nol</a></li><li><a href="O006-C140-CMP-SIM003.html">Endpoint Uniform: laju nonreguler dan kegagalan bootstrap biasa</a></li><li><a href="O006-C140-CMP-SIM004.html">Uji Neyman–Pearson teracak dengan size tepat</a></li><li><a href="O006-C140-CMP-SIM005.html">Model linear matriks: coverage, heteroskedastisitas, dan pengaruh</a></li><li><a href="O006-C140-CMP-SIM006.html">Kalibrasi selang Bayesian dan frequentist pada model binomial</a></li><li><a href="../mastery/O006-C140-CMP-MS00.html">Set penguasaan 00 — probabilitas, distribusi, dan ekspektasi (diagnostik C140)</a></li><li><a href="../mastery/O006-C140-CMP-MS01.html">Set penguasaan 01 — statistik urutan dan distribusi sampel</a></li><li><a href="../mastery/O006-C140-CMP-MS02.html">Set penguasaan 02 — estimasi, bias, MSE, dan sifat estimator</a></li><li><a href="../mastery/O006-C140-CMP-MS03.html">Set penguasaan 03 — kecukupan, faktorisasi, kelengkapan, dan statistik ancillary</a></li><li><a href="../mastery/O006-C140-CMP-MS04.html">Set penguasaan 04 — metode momen dan dasar kemungkinan maksimum</a></li><li><a href="../mastery/O006-C140-CMP-MS05.html">Set penguasaan 05 — informasi Fisher, interval kepercayaan, bootstrap, dan delta method</a></li><li><a href="../mastery/O006-C140-CMP-MS06.html">Set penguasaan 06 — pengujian hipotesis, daya, p-value, dan jembatan likelihood</a></li><li><a href="../mastery/O006-C140-CMP-MS07.html">Set penguasaan 07 — regularitas, konsistensi, dan normalitas MLE</a></li><li><a href="../mastery/O006-C140-CMP-MS08.html">Set penguasaan 08 — Wald, skor, rasio likelihood, dan diagnosis nonregular</a></li><li><a href="../mastery/O006-C140-CMP-MS09.html">Set penguasaan 09 — pengujian eksak dan optimalitas Neyman–Pearson</a></li><li><a href="../mastery/O006-C140-CMP-MS10.html">Set penguasaan 10 — uji likelihood asimtotik, risk, dan perbaikan estimator</a></li><li><a href="../mastery/O006-C140-CMP-MS11.html">Set penguasaan 11 — pembaruan Bayesian, keputusan, dan kalibrasi</a></li><li><a href="../mastery/O006-C140-CMP-MS12.html">Set penguasaan 12 — model linear Gaussian matriks, inferensi eksak, dan diagnostik</a></li><li><a href="../assessments/O006-C140-CMP-CA01.html">Asesmen kumulatif C1: likelihood, optimalitas, dan keputusan statistik</a></li></ol></nav>
-<main>
+<nav class="sidebar" aria-labelledby="companion-nav-title"><p class="nav-title" id="companion-nav-title">Isi pendamping</p><ol><li><a href="../index.html">Pendamping Orisinal Statistika Matematis</a></li><li><a href="../theory/O006-C140-CMP-D001.html">Model parametrik reguler, skor, dan informasi Fisher</a></li><li><a href="../theory/O006-C140-CMP-D002.html">Konsistensi MLE: identifikasi Kullback–Leibler dan teorema argmax</a></li><li><a href="../theory/O006-C140-CMP-D003.html">Ekspansi kuadratik lokal fungsi log-kemungkinan, normalitas asimtotik, dan metode delta</a></li><li><a href="../theory/O006-C140-CMP-D004.html">Prosedur Wald, skor, dan rasio fungsi kemungkinan</a></li><li><a href="../theory/O006-C140-CMP-D005.html">Fungsi kemungkinan nonreguler: empat mekanisme kegagalan</a></li><li><a href="../theory/O006-C140-CMP-D006.html">Optimalitas pengujian: Neyman–Pearson, MP, UMP, dan rasio fungsi kemungkinan monoton</a></li><li><a href="../theory/O006-C140-CMP-D007.html">Kerugian, risiko, efisiensi, Rao–Blackwell, dan Lehmann–Scheffé</a></li><li><a href="../theory/O006-C140-CMP-D008.html">Model linear Gaussian berdesain tetap dan geometri proyeksi</a></li><li><a href="../theory/O006-C140-CMP-D009.html">OLS, MLE Gaussian, dan teorema Gauss–Markov pada desain tetap</a></li><li><a href="../theory/O006-C140-CMP-D010.html">Inferensi Gaussian eksak: proyeksi, t, F, ANOVA, dan prediksi</a></li><li><a href="../theory/O006-C140-CMP-D011.html">Diagnostik, daya ungkit, kesalahan spesifikasi, dan inferensi pascaseleksi</a></li><li><a href="../theory/O006-C140-CMP-D012.html">Inferensi Bayesian sebagai pembaruan dan keputusan yang koheren</a></li><li><a href="../theory/O006-C140-CMP-D013.html">Perbandingan Bayesian–frekuentis: keputusan, cakupan, dan kalibrasi</a></li><li><a href="O006-C140-CMP-SIM001.html" aria-current="page">Model lokasi normal: MLE, cakupan, dan tiga statistik uji</a></li><li><a href="O006-C140-CMP-SIM002.html">Metode delta pada titik reguler dan titik dengan turunan nol</a></li><li><a href="O006-C140-CMP-SIM003.html">Distribusi seragam pada batas dukungan: laju nonreguler dan kegagalan bootstrap biasa</a></li><li><a href="O006-C140-CMP-SIM004.html">Uji Neyman–Pearson teracak dengan ukuran uji tepat</a></li><li><a href="O006-C140-CMP-SIM005.html">Model linear matriks: cakupan, heteroskedastisitas, dan pengaruh</a></li><li><a href="O006-C140-CMP-SIM006.html">Kalibrasi selang Bayesian dan frekuentis pada model binomial</a></li><li><a href="../mastery/O006-C140-CMP-MS00.html">Set penguasaan 00 — probabilitas, distribusi, dan ekspektasi (diagnostik C140)</a></li><li><a href="../mastery/O006-C140-CMP-MS01.html">Set penguasaan 01 — statistik urutan dan distribusi sampel</a></li><li><a href="../mastery/O006-C140-CMP-MS02.html">Set penguasaan 02 — estimasi, bias, MSE, dan sifat penduga</a></li><li><a href="../mastery/O006-C140-CMP-MS03.html">Set penguasaan 03 — kecukupan, faktorisasi, kelengkapan, dan statistik aksesori</a></li><li><a href="../mastery/O006-C140-CMP-MS04.html">Set penguasaan 04 — metode momen dan dasar kemungkinan maksimum</a></li><li><a href="../mastery/O006-C140-CMP-MS05.html">Set penguasaan 05 — informasi Fisher, interval kepercayaan, bootstrap, dan metode delta</a></li><li><a href="../mastery/O006-C140-CMP-MS06.html">Set penguasaan 06 — pengujian hipotesis, daya, nilai-p, dan jembatan ke teori fungsi kemungkinan</a></li><li><a href="../mastery/O006-C140-CMP-MS07.html">Set penguasaan 07 — keteraturan, konsistensi, dan normalitas MLE</a></li><li><a href="../mastery/O006-C140-CMP-MS08.html">Set penguasaan 08 — Wald, skor, rasio fungsi kemungkinan, dan diagnosis nonreguler</a></li><li><a href="../mastery/O006-C140-CMP-MS09.html">Set penguasaan 09 — pengujian eksak dan optimalitas Neyman–Pearson</a></li><li><a href="../mastery/O006-C140-CMP-MS10.html">Set penguasaan 10 — uji fungsi kemungkinan asimtotik, risiko, dan perbaikan penduga</a></li><li><a href="../mastery/O006-C140-CMP-MS11.html">Set penguasaan 11 — pembaruan Bayesian, keputusan, dan kalibrasi</a></li><li><a href="../mastery/O006-C140-CMP-MS12.html">Set penguasaan 12 — model linear Gaussian dalam bentuk matriks, inferensi eksak, dan diagnostik</a></li><li><a href="../assessments/O006-C140-CMP-CA01.html">Asesmen kumulatif C1: fungsi kemungkinan, optimalitas, dan keputusan statistik</a></li><li><a href="../assessments/O006-C140-CMP-CA02.html">Asesmen kumulatif CA02 — fondasi inferensi sampel berhingga</a></li><li><a href="../assessments/O006-C140-CMP-CA03.html">Asesmen kumulatif CA03 — model linear dalam bentuk matriks, inferensi eksak, dan diagnostik</a></li><li><a href="../assessments/O006-C140-CMP-CA04.html">Asesmen kumulatif CA04 — sintesis Bayesian–frekuentis</a></li><li><a href="../capstones/O006-C140-CMP-CP01.html">Proyek akhir integratif CP01 — regresi data terbuka untuk kuat tekan beton</a></li><li><a href="../capstones/O006-C140-CMP-CP02.html">Proyek akhir CP02 — perbandingan Bayesian–frekuentis pada data agregat kecenderungan bersarang greater sage-grouse</a></li></ol></nav>
+<main id="main-content" tabindex="-1">
 <div class="metadata"><strong>O006-C140-CMP-SIM001</strong> · id-ID · CC BY-SA 4.0 · OpenAI Codex gpt-5.6-sol, Ultra</div>
 <p><a id="O006-C140-CMP-SIM001-SEC001"></a></p>
-<h1>Model lokasi normal: MLE, <em>coverage</em>, dan tiga statistik uji</h1>
+<h1>Model lokasi normal: MLE, cakupan, dan tiga statistik uji</h1>
 <p>Eksperimen ini memakai <span class="math-inline" role="math">\(X_1,\ldots,X_n\stackrel{\mathrm{iid}}{\sim}N(\mu,1)\)</span>
-dengan nilai benar <span class="math-inline" role="math">\(\mu=0\)</span>. MLE-nya adalah <span class="math-inline" role="math">\(\widehat\mu=\overline X\)</span>,
-sehingga teori memberi <span class="math-inline" role="math">\(E(\widehat\mu)=0\)</span>,
-<span class="math-inline" role="math">\(\operatorname{Var}(\widehat\mu)=1/n\)</span>, dan interval 95% eksak
-<span class="math-inline" role="math">\(\widehat\mu\pm1{,}9599639845/\sqrt n\)</span>. Model ini juga menjadi kasus khusus
-yang bersih untuk <a class="xref" data-target-id="O006-C140-CMP-D001" href="../theory/O006-C140-CMP-D001.html">Model parametrik reguler, skor, dan informasi Fisher</a>, <a class="xref" data-target-id="O006-C140-CMP-D002" href="../theory/O006-C140-CMP-D002.html">Konsistensi MLE: identifikasi Kullback–Leibler dan teorema argmax</a>, dan
-<a class="xref" data-target-id="O006-C140-CMP-D004" href="../theory/O006-C140-CMP-D004.html">Prosedur Wald, skor, dan rasio likelihood</a>: statistik Wald, score, dan dua kali selisih
-log-likelihood semuanya sama dengan <span class="math-inline" role="math">\(n\widehat\mu^2\)</span> untuk hipotesis
+dengan nilai parameter sebenarnya <span class="math-inline" role="math">\(\mu=0\)</span>. Penduga kemungkinan maksimumnya
+(MLE) adalah <span class="math-inline" role="math">\(\widehat\mu=\overline X\)</span>, sehingga secara teoretis diperoleh <span class="math-inline" role="math">\(E(\widehat\mu)=0\)</span>,
+<span class="math-inline" role="math">\(\operatorname{Var}(\widehat\mu)=1/n\)</span>, dan selang kepercayaan 95% eksak
+<span class="math-inline" role="math">\(\widehat\mu\pm1{,}9599639845/\sqrt n\)</span>. Model ini juga menjadi contoh khusus
+yang sederhana untuk <a class="xref" data-target-id="O006-C140-CMP-D001" href="../theory/O006-C140-CMP-D001.html">Model parametrik reguler, skor, dan informasi Fisher</a>, <a class="xref" data-target-id="O006-C140-CMP-D002" href="../theory/O006-C140-CMP-D002.html">Konsistensi MLE: identifikasi Kullback–Leibler dan teorema argmax</a>, dan
+<a class="xref" data-target-id="O006-C140-CMP-D004" href="../theory/O006-C140-CMP-D004.html">Prosedur Wald, skor, dan rasio fungsi kemungkinan</a>: statistik Wald, skor, dan dua kali selisih
+fungsi log-kemungkinan semuanya sama dengan <span class="math-inline" role="math">\(n\widehat\mu^2\)</span> untuk hipotesis
 <span class="math-inline" role="math">\(H_0:\mu=0\)</span>.</p>
 <p><a id="O006-C140-CMP-SIM001-SIM001"></a></p>
 <h2>Rancangan yang dapat direproduksi</h2>
 <ul>
-<li>Seed PCG64: <code>140001</code>.</li>
+<li>Benih generator PCG64: <code>140001</code>.</li>
 <li>Replikasi per ukuran sampel: 120.000.</li>
 <li>Ukuran sampel: <span class="math-inline" role="math">\(n\in\{10,30,100\}\)</span>.</li>
-<li>Lingkungan terkunci: Python 3.13.9 dan NumPy 2.4.4.</li>
-<li>Tidak ada jaringan, data eksternal, atau proses browser.</li>
+<li>Lingkungan komputasi terkunci: Python 3.13.9 dan NumPy 2.4.4.</li>
+<li>Tidak ada jaringan, data eksternal, atau proses peramban.</li>
 </ul>
-<p>Generator menyimpan bias, varians empiris, <span class="math-inline" role="math">\(n\)</span> kali varians, coverage, dan
-selisih maksimum ketiga statistik uji. Empat assertion wajib lulus: bias
+<p>Generator menyimpan bias, varians empiris yang dikalikan <span class="math-inline" role="math">\(n\)</span>, cakupan, dan
+selisih maksimum ketiga statistik uji. Empat pemeriksaan wajib lulus: bias
 absolut di bawah 0,01; <span class="math-inline" role="math">\(n\widehat{\operatorname{Var}}(\widehat\mu)\)</span> berada
-di antara 0,97 dan 1,03; coverage berada di antara 0,945 dan 0,955; dan selisih
+di antara 0,97 dan 1,03; cakupan berada di antara 0,945 dan 0,955; dan selisih
 numerik maksimum ketiga statistik yang dihitung dari setiap replikasi di bawah
 <span class="math-inline" role="math">\(5\times10^{-14}\)</span>. Secara aljabar ketiganya identik; toleransi hanya
-menampung urutan operasi floating-point yang berbeda.</p>
+mengakomodasi urutan operasi aritmetika titik-mengambang yang berbeda.</p>
 <p><a id="O006-C140-CMP-SIM001-SEC002"></a></p>
-<h2>Hasil dan pembacaan</h2>
-<p>Untuk <span class="math-inline" role="math">\(n=10,30,100\)</span>, coverage berturut-turut 0,950550; 0,950667; dan
-0,950725. Nilai <span class="math-inline" role="math">\(n\)</span> kali varians empiris berturut-turut 1,000761; 0,999867;
-dan 0,993641. Hasil ini bukan bukti teorema, tetapi pemeriksaan terikat bahwa
-kode, penskalaan, dan prediksi analitis saling konsisten. Kesamaan persis
-statistik uji di sini tidak boleh digeneralisasi ke model nonkuadratik: pada
+<h2>Hasil dan interpretasi</h2>
+<p>Untuk <span class="math-inline" role="math">\(n=10,30,100\)</span>, cakupan berturut-turut 0,950550; 0,950667; dan
+0,950725. Hasil kali <span class="math-inline" role="math">\(n\)</span> dengan varians empiris berturut-turut 1,000761; 0,999867;
+dan 0,993641. Hasil ini bukan bukti teorema, melainkan pemeriksaan terbatas yang
+menunjukkan bahwa kode, penskalaan, dan prediksi analitis saling konsisten.
+Kesamaan eksak ketiga statistik uji di sini tidak boleh digeneralisasi ke model nonkuadratik: pada
 model reguler umum ketiganya biasanya hanya ekuivalen secara asimtotik.</p>
 <figure>
-<img src="../assets/simulations/SIM001_normal_location.svg" alt="Grafik coverage interval Wald pada ukuran sampel 10, 30, dan 100; ketiga titik sangat dekat dengan garis target 0,95.">
-<figcaption>Coverage Monte Carlo terhadap target 0,95.</figcaption>
+<img src="../assets/simulations/SIM001_normal_location.svg" alt="Grafik cakupan selang Wald pada ukuran sampel 10, 30, dan 100; ketiga titik sangat dekat dengan garis sasaran 0,95.">
+<figcaption>Cakupan Monte Carlo dibandingkan dengan sasaran 0,95.</figcaption>
 </figure>
-<p>Data: <a href="../assets/simulations/SIM001_normal_location.csv">CSV SIM001</a>.</p>
+<p>Data tersedia dalam <a href="../assets/simulations/SIM001_normal_location.csv">CSV SIM001</a>.</p>
 
 <footer class="license">Materi pendamping orisinal berlisensi CC BY-SA 4.0. Komponen Penn State dan Random tetap berada di bawah lisensinya masing-masing dan tidak direlisensikan oleh halaman ini.</footer>
 </main>

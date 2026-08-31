@@ -1,0 +1,71 @@
+EKUIVALEN TEKS DIAGNOSTIK CP01
+===============================
+
+1. CP01_residuals_fitted.svg
+Sumbu/seri: kuat tekan hasil suaian (MPa) pada sumbu horizontal; sisaan (MPa) dan akar(|sisaan terstandardisasi internal|) pada dua sumbu vertikal. Seluruh 1.030 observasi menurut urutan sumber ditampilkan; panel pertama menambahkan garis nol dan sepuluh bin tipe-7 nilai suaian.
+Tabel bin (indeks,jumlah,batas_bawah,batas_atas,rataan_residual_mpa,rms_residual_mpa):
+1,103,10.45576593,20.43665761,-1.97565501,7.82705550
+2,103,20.43665761,24.51951790,-1.81343632,6.88173857
+3,103,24.51951790,27.57840123,-1.89799521,8.24175047
+4,103,27.57840123,30.87341337,1.94431256,8.56658197
+5,103,30.87341337,33.45769999,-0.26101532,9.35483830
+6,103,33.45769999,36.58067880,1.94444729,8.84778200
+7,103,36.58067880,40.71841577,3.88990642,10.01552657
+8,103,40.71841577,48.81169039,2.18821782,13.08116204
+9,104,48.81169039,54.55747111,-2.39184153,13.76121955
+10,102,54.55747111,78.99087586,-1.61944169,13.98223909
+Kesimpulan: rataan bin berubah tanda dan RMS sisaan meningkat menuju nilai suaian tinggi, yang menandai sisa kelengkungan rataan dan perubahan skala.
+Batas: diagnostik ini tidak mengidentifikasi mekanisme sebab-akibat dan tidak mengizinkan penghapusan kasus.
+
+2. CP01_residual_quantiles.svg
+Sumbu/seri: sisaan terstudentisasi penghapusan-satu terhadap kuantil acuan normal baku; seluruh 1.030 kasus tampil bersama diagonal acuan putus-putus.
+Jumlah: |t|>2=51; |t|>3=2. Lima sisaan penghapusan-satu absolut terbesar:
+1,CP01-R0382,3.34637213
+2,CP01-R0384,3.16631259
+3,CP01-R0115,-2.77190300
+4,CP01-R0057,-2.74500556
+5,CP01-R0611,-2.74417332
+Kesimpulan: penyimpangan pada ekor atas terlihat.
+Batas: kedekatan Q--Q tidak membuktikan kenormalan atau independensi.
+
+3. CP01_influence.svg
+Sumbu/seri: leverage pada sumbu horizontal dan sisaan terstudentisasi penghapusan-satu pada sumbu vertikal; luas penanda meningkat bersama jarak Cook.
+Ambang: h>2p/n=0,01747573 (80 kasus); h>3p/n=0,02621359 (40 kasus); |t|>2 (51); |t|>3 (2); D>4/n=0,00388350 (79 kasus).
+Lima kasus leverage terbesar (peringkat,id_baris,h,t_penghapusan,Cook):
+1,CP01-R0067,0.04107458,-1.77007287,0.01488064
+2,CP01-R0229,0.03725630,-0.59455341,0.00152091
+3,CP01-R0228,0.03536432,-0.72658082,0.00215143
+4,CP01-R0227,0.03470942,-1.25653854,0.00630452
+5,CP01-R0226,0.03454212,-1.72956349,0.01186861
+Lima kasus Cook terbesar (peringkat,id_baris,h,t_penghapusan,Cook):
+1,CP01-R0611,0.03145035,-2.74417332,0.02699698
+2,CP01-R0057,0.03136960,-2.74500556,0.02694163
+3,CP01-R0225,0.03448556,-2.59763984,0.02662907
+4,CP01-R0043,0.03148094,-2.66072327,0.02541664
+5,CP01-R0004,0.02871622,-2.60411695,0.02215172
+Kesimpulan: leverage maksimum, sisaan penghapusan-satu absolut maksimum, dan jarak Cook maksimum terjadi pada baris yang berbeda.
+Batas: ambang adalah layar eksploratif, bukan aturan eksklusi otomatis.
+
+4. CP01_coefficient_uncertainty.svg
+Sumbu/seri: efek kontras yang ditetapkan di muka dalam MPa pada sumbu horizontal; satu baris per kontras. Interval lingkaran penuh adalah interval t Gaussian titik-demi-titik; interval persegi putus-putus adalah interval normal-asimtotik HC3 titik-demi-titik; garis vertikal menandai nol.
+Tabel kontras (id,skala,taksiran,klasik_bawah,klasik_atas,hc3_bawah,hc3_atas):
+CMT10,+10 kg/m^3,1.19804334,1.03146420,1.36462249,1.01552159,1.38056510
+SLG10,+10 kg/m^3,1.03865809,0.83976425,1.23755193,0.81271797,1.26459821
+FLY10,+10 kg/m^3,0.87934322,0.63242204,1.12626439,0.62179695,1.13688948
+WAT10,+10 kg/m^3,-1.49918419,-2.28757421,-0.71079417,-2.39563175,-0.60273663
+SP01,+1 kg/m^3,0.29222460,0.10889944,0.47554975,0.08566299,0.49878620
+CRS100,+100 kg/m^3,1.80862148,-0.03440777,3.65165074,-0.21547448,3.83271745
+FIN100,+100 kg/m^3,2.01903511,-0.08094602,4.11901624,-0.28113385,4.31920406
+AGE07,+7 hari,0.79955448,0.72500700,0.87410195,0.68204168,0.91706728
+Seluruh sembilan rasio SE HC3/klasik melebihi satu; maksimum=1,57821939 untuk UMUR. Wald HC3 bersama W=89,67343789, df=3, p=2,57452367e-19.
+Batas: HC3 hanya mengubah kovarians; panjang efek memakai kenaikan prediktor berbeda yang ditetapkan di muka dan tidak menetapkan sebab-akibat.
+
+5. CP01_model_sensitivity.svg
+Sumbu/seri: RMSE data tertahan (MPa) menurut model; lingkaran penuh menunjukkan LOOCV baris analitik dan persegi putus-putus menunjukkan LOPPO eksak. Setiap fold LOPPO meninggalkan seluruh baris dalam satu dari 992 profil prediktor eksak.
+Tabel validasi (model,LOOCV_RMSE,LOOCV_MAE,LOPPO_RMSE,LOPPO_MAE):
+FULL_ADDITIVE_RAW,10.46951561,8.29601158,10.48339443,8.30392410
+REDUCED_NO_SLG_FLY_SP,11.04624301,8.75733850,11.05651942,8.76347931
+FULL_ADDITIVE_LOG_AGE_28,7.18848710,5.55131323,7.19521467,5.55641551
+Layar gabungan: hanya-leverage=44, hanya-Cook=43, irisan=36, gabungan=123, dipertahankan=907; perubahan prediksi maksimum pada seluruh baris=30,44921381 MPa.
+Kesimpulan: log umur menurunkan loss data tertahan secara material; model penuh umur mentah tetap mengungguli model tereduksi pada kedua pengelompokan validasi; pemasangan ulang setelah penyaringan mengubah proyeksi target secara material.
+Batas: model memakai ruang kolom atau populasi pemasangan efektif yang berbeda; validasi bersifat internal dan tidak memberi validasi sebab-akibat atau laboratorium eksternal.

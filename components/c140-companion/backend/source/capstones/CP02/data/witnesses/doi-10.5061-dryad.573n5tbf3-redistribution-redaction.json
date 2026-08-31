@@ -1,0 +1,21 @@
+{
+  "derivative": {
+    "bytes": 45103,
+    "path": "data/capstones/CP02/witnesses/doi-10.5061-dryad.573n5tbf3-redacted.html",
+    "sha256": "3a03d836ebdb80191a70ff71d4faaa810eee966307482bdae5d04b430d5c8f9f"
+  },
+  "excluded_original": {
+    "bytes": 45777,
+    "path": "data/capstones/CP02/witnesses/doi-10.5061-dryad.573n5tbf3-resolved.html",
+    "sha256": "d48e208611a080220e5b3b884ff733702c4553b67105b197728ba8f8e453a64f"
+  },
+  "redactions": [
+    {
+      "count": 1,
+      "field": "apiKey",
+      "reason": "credential-like public client key excluded from redistribution"
+    }
+  ],
+  "schema": "o006.c140.cp02-witness-redaction.v1",
+  "status": "pass"
+}

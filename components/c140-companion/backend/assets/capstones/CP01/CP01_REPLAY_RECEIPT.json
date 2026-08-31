@@ -1,0 +1,429 @@
+{
+  "all_assertions_pass": true,
+  "assertions": {
+    "SVG_title_desc_text_and_alt_pairs": true,
+    "analytic_LOOCV_matches_explicit_refits": true,
+    "canonical_inference_long_tokens": true,
+    "classic_and_HC3_covariance_psd": true,
+    "diagnostic_identities_and_threshold_counts": true,
+    "exact_992_profile_LOPPO_matches_block_identity": true,
+    "full_reduced_and_log_rank": true,
+    "id_ID_SVG_and_text_localization": true,
+    "interval_endpoints_and_family_sizes": true,
+    "leverage_selector_records_and_intervals": true,
+    "projection_normal_equations_and_scaled_equivalence": true,
+    "q3_quadratic_and_nested_RSS_identity": true,
+    "raw_and_clean_hashes": true,
+    "rights_provenance_closure": true,
+    "schema_rows_columns_and_profiles": true,
+    "seed_is_null": true,
+    "union_screen_is_OR_and_retains_907": true,
+    "union_screen_nominal_p_scientific_and_post_selection_labeled": true
+  },
+  "browser_processes_used": false,
+  "canonical_input": {
+    "bytes": 41472,
+    "path": "data/capstones/CP01/raw/data.csv",
+    "sha256": "8d4b15b6fc68cd932d745cbd663d5ceae66dd54422e99c1e4865f2936ab7e2af"
+  },
+  "clean_inputs": [
+    {
+      "bytes": 2540,
+      "path": "data/capstones/CP01/clean/COLUMN_MANIFEST.csv",
+      "sha256": "890a2b3990557629a03edd8c1c234d0528f7d77dfdbf1ab08c3e1efe4a259fa7"
+    },
+    {
+      "bytes": 99729,
+      "path": "data/capstones/CP01/clean/ROW_MANIFEST.csv",
+      "sha256": "fa4f58250f531f4fb7e5cbbc895ea96f8c8584ad12edd1224237abbc08fb8049"
+    },
+    {
+      "bytes": 5692,
+      "path": "data/capstones/CP01/clean/TRANSFORM_LEDGER.json",
+      "sha256": "7bf040b459d9927ab012b9c469027dd7187091f91d543c8a496c73d6dc1e7beb"
+    },
+    {
+      "bytes": 48780,
+      "path": "data/capstones/CP01/clean/concrete_compressive_strength.csv",
+      "sha256": "74afac6cbd97e01d0a61e47c2c12fdb67dba17553e47db2db9fa5a1946ea1e14"
+    }
+  ],
+  "code": [
+    {
+      "bytes": 26527,
+      "path": "data/capstones/CP01/transform_cp01.py",
+      "sha256": "696a329e2aa5d7af0154c83c48be7b869ba1a0bef1ff0e5177c87a5a8707cc11"
+    },
+    {
+      "bytes": 134413,
+      "path": "capstones/run_cp01_analysis.py",
+      "sha256": "3557247402e41950580f79c5dc78ac0b60311be181b4d6a5bef710e71ee1bf9b"
+    }
+  ],
+  "critical_values": {
+    "F_scheffe_p9": "1.88903397",
+    "scheffe_multiplier_p9": "4.12326397",
+    "t_bonferroni_m8": "2.74005526",
+    "t_point95_full": "1.96229017",
+    "z_bonferroni_m8": "2.73436879",
+    "z_point95": "1.95996398"
+  },
+  "environment": {
+    "linear_algebra_threads": 1,
+    "numeric_locale": "C",
+    "numpy": "2.4.4",
+    "python": "3.13.9",
+    "required_process_environment": {
+      "MKL_NUM_THREADS": "1",
+      "NUMEXPR_NUM_THREADS": "1",
+      "OMP_NUM_THREADS": "1",
+      "OPENBLAS_NUM_THREADS": "1",
+      "PYTHONHASHSEED": "0",
+      "TZ": "UTC"
+    },
+    "scipy": "1.17.1"
+  },
+  "manifest_closure": {
+    "MANIFEST.csv": "lists substantive payloads; excludes MANIFEST.csv and CP01_REPLAY_RECEIPT.json",
+    "receipt_outputs": "lists substantive payloads plus MANIFEST.csv; excludes receipt itself"
+  },
+  "methods": {
+    "LOOCV": "analytic_e_over_one_minus_h_verified_by_explicit_refits",
+    "LOPPO": "direct_refit_for_each_of_992_exact_eight_predictor_profiles_verified_by_block_hat_identity",
+    "OLS": "thin_QR_solve_without_pseudoinverse",
+    "convex_hull": "deterministic_HiGHS_L1_separating_hyperplane",
+    "inference": "classical_Gaussian_t_F_and_asymptotic_HC3_normal_chi_square",
+    "leverage_selector_intervals": "full-model leverage order ascending with source-record ascending tie-break; ranks 1, 515, 1030; nominal pointwise Gaussian t intervals conditional on fixed X; not simultaneous",
+    "rank_and_condition": "binary64_thin_SVD; tau=epsilon*max(n,p)*sigma_max; sample-SD scaling",
+    "serialization": "UTF-8_without_BOM; LF; ASCII_CSV_headers; fixed_8_or_scientific_8"
+  },
+  "network_access": false,
+  "outputs": [
+    {
+      "bytes": 1401,
+      "path": "generated/capstones/CP01/ALT_TEXT.md",
+      "sha256": "4dd3cbee43a7b7593ecae36d9dda3546faeabfe0ac982cbf8f1134c8ccae39c7"
+    },
+    {
+      "bytes": 511,
+      "path": "generated/capstones/CP01/CP01_anova_nested.csv",
+      "sha256": "7a662405825fdc429ffd4b4bd9372743b8ba4a3e767584cefc3cafc7c5047464"
+    },
+    {
+      "bytes": 4943,
+      "path": "generated/capstones/CP01/CP01_coefficient_uncertainty.svg",
+      "sha256": "fa4599582dde985083b616e7f271499474adea83ad6ea1e2070f73537c93d367"
+    },
+    {
+      "bytes": 719,
+      "path": "generated/capstones/CP01/CP01_coefficients_classic_hc3.csv",
+      "sha256": "51556e6a7d1d3c69f5043c07ecb1e018dc48bd9409897770655865c1f2d4d81a"
+    },
+    {
+      "bytes": 1006,
+      "path": "generated/capstones/CP01/CP01_conditioning.csv",
+      "sha256": "6a06e6c3326efc26ff90c9a611508c4754e8c21d68e2271a1b1b78e4cc9b3ac6"
+    },
+    {
+      "bytes": 1271,
+      "path": "generated/capstones/CP01/CP01_data_summary.csv",
+      "sha256": "0d488334c02cf26114a411ff8d88583d5c45ed737150e53c9dda5a1fa39248be"
+    },
+    {
+      "bytes": 725690,
+      "path": "generated/capstones/CP01/CP01_deleted_case_sensitivity.csv",
+      "sha256": "745acb89d146492baad2ae2fc51765312f01dcb584c6b7d03b1a0737c1355bf5"
+    },
+    {
+      "bytes": 120829,
+      "path": "generated/capstones/CP01/CP01_diagnostics_observations.csv",
+      "sha256": "2d83471dc5b9c971f64b32afd9f640bba4be6e5921635344a6f62051d811adc0"
+    },
+    {
+      "bytes": 42872,
+      "path": "generated/capstones/CP01/CP01_diagnostics_summary.csv",
+      "sha256": "77ca0dcc40b3500cbdb21f0eb26f6034e978c51d18178063101841525e2fd508"
+    },
+    {
+      "bytes": 5240,
+      "path": "generated/capstones/CP01/CP01_diagnostics_text.txt",
+      "sha256": "1ca88687ccf245bf02e92d45c7150955d2c2f20fd083ce54de053565fdf3af22"
+    },
+    {
+      "bytes": 3267,
+      "path": "generated/capstones/CP01/CP01_inference_coefficients.csv",
+      "sha256": "64ba36558e9a4e340b4d845d2f3b0757cf90c626486dd41520fdc813cb4b7fa7"
+    },
+    {
+      "bytes": 2162,
+      "path": "generated/capstones/CP01/CP01_inference_contrasts.csv",
+      "sha256": "790078e4515d07df3d386b7917e4005d084eedf198b6cf271a67df87210d3f42"
+    },
+    {
+      "bytes": 243,
+      "path": "generated/capstones/CP01/CP01_inference_joint_F.csv",
+      "sha256": "e17c657e0c323172302c0bd6bfa3a9e1bd5dbdf8f8b26b7e62a607df43b563d9"
+    },
+    {
+      "bytes": 90719,
+      "path": "generated/capstones/CP01/CP01_inference_results.csv",
+      "sha256": "c24eb76343d6457d7ef8956493ae4909172911456c50926c8bab6cc761805cbc"
+    },
+    {
+      "bytes": 98489,
+      "path": "generated/capstones/CP01/CP01_influence.svg",
+      "sha256": "64a30b6d91c87df76fb659673ebc3e0ff9d85202490f2761a84e1de811531e54"
+    },
+    {
+      "bytes": 574,
+      "path": "generated/capstones/CP01/CP01_leverage_selector_intervals.csv",
+      "sha256": "fe131f73b9c3295ebcd9d3f01eb48fc5fe405b1c2bef2c7f0542d1317070b113"
+    },
+    {
+      "bytes": 660,
+      "path": "generated/capstones/CP01/CP01_loocv_metrics.csv",
+      "sha256": "01a22526c0faca0485a2085ac4de7e1ebdd4028f368d0e102c62505746e2eb1a"
+    },
+    {
+      "bytes": 419,
+      "path": "generated/capstones/CP01/CP01_model_fit.csv",
+      "sha256": "07ccc6ed131ed21787f5daf9e45c45b5104e3d6d8d1c6649b9b076a802376199"
+    },
+    {
+      "bytes": 941,
+      "path": "generated/capstones/CP01/CP01_model_sensitivity.csv",
+      "sha256": "7080bc84a01abc5a57034e188d6694be24344afc5510cec012a2b66ddb5a266d"
+    },
+    {
+      "bytes": 2846,
+      "path": "generated/capstones/CP01/CP01_model_sensitivity.svg",
+      "sha256": "1b2b2e021442b4354d6ddd93988f67225dfd78bc97e77a7086980419e4ca58c6"
+    },
+    {
+      "bytes": 303853,
+      "path": "generated/capstones/CP01/CP01_profile_out_sensitivity.csv",
+      "sha256": "785e213051edad4821eb9584ddac5fd209b50be3730f3335eddae89722924479"
+    },
+    {
+      "bytes": 684,
+      "path": "generated/capstones/CP01/CP01_reference_prediction.csv",
+      "sha256": "e0cd37d7a2042cc6eb3078374f99c734bedd43bf528819bcdbcc23c012d11bb5"
+    },
+    {
+      "bytes": 1057,
+      "path": "generated/capstones/CP01/CP01_residual_bins.csv",
+      "sha256": "3f4a0d4c2a018edbcaa364c6627882fb637ced19d3f134da3fb3b788ebe2b2e7"
+    },
+    {
+      "bytes": 57405,
+      "path": "generated/capstones/CP01/CP01_residual_quantiles.svg",
+      "sha256": "44f5eacd2862331ed3b9544a8fa29ad8b4ad01abc80845ed90813001e1cf8aa6"
+    },
+    {
+      "bytes": 177342,
+      "path": "generated/capstones/CP01/CP01_residuals_fitted.svg",
+      "sha256": "0c8e5bdfcc9fbd2696ea71405bcdaf0f2ebe9e9ca48a60ab11fc386889175ba2"
+    },
+    {
+      "bytes": 8042,
+      "path": "generated/capstones/CP01/CP01_screen_sensitivity.csv",
+      "sha256": "98954a60efcecb16f8729f2f475d2bdf3f740c48085e97b2dbbb0c8d87d4db44"
+    },
+    {
+      "bytes": 3195,
+      "path": "generated/capstones/CP01/MANIFEST.csv",
+      "sha256": "e298964a34c31110db0944f2f6feb54efb1a9ef88e49aa657ede3a00be2bca9b"
+    }
+  ],
+  "reader_interface": {
+    "CP01_inference_results.csv": {
+      "columns": [
+        "token_id",
+        "value_type",
+        "numeric_value",
+        "text_value",
+        "unit",
+        "display_format",
+        "source_file",
+        "source_selector",
+        "inference_basis",
+        "status"
+      ],
+      "primary_key": [
+        "token_id"
+      ],
+      "rows": 461,
+      "schema": "o006.c140.cp01-inference-long-tokens.v1"
+    },
+    "CP01_leverage_selector_intervals.csv": {
+      "columns": [
+        "selector_id",
+        "row_id",
+        "source_record",
+        "order_index_one_based",
+        "fitted_mpa",
+        "h0",
+        "se_mean",
+        "tcrit_95",
+        "mean_point_lo",
+        "mean_point_hi",
+        "se_prediction",
+        "prediction_lo",
+        "prediction_hi"
+      ],
+      "inference_label": "NOMINAL_POINTWISE_GAUSSIAN_T__POST_SELECTION_BY_FULL_MODEL_LEVERAGE__NOT_SIMULTANEOUS",
+      "primary_key": [
+        "selector_id"
+      ],
+      "rows": 3,
+      "schema": "o006.c140.cp01-leverage-selector-intervals.v1",
+      "selection_model_id": "FULL_ADDITIVE_RAW",
+      "selector_records": [
+        986,
+        592,
+        67
+      ],
+      "tie_break": "source_record_ascending"
+    },
+    "CP01_screen_sensitivity.csv": {
+      "columns": [
+        "metric_id",
+        "model_id",
+        "subset_id",
+        "term_id",
+        "n",
+        "p",
+        "rank",
+        "df",
+        "numeric_value",
+        "text_value",
+        "unit"
+      ],
+      "p_value_serialization": "scientific_8_below_1e-4_otherwise_fixed_8",
+      "rows": 71,
+      "schema": "o006.c140.cp01-screen-sensitivity.v2",
+      "union_block_inference_label": "NOMINAL_POST_SELECTION_F__EXPLORATORY_SENSITIVITY_ONLY",
+      "union_block_p_metric_id": "BLOCK_SFP_P_F"
+    }
+  },
+  "rights_provenance_inputs": [
+    {
+      "bytes": 16885,
+      "path": "data/capstones/CP01/DATASET_PROVENANCE.json",
+      "sha256": "08cd61239545c65900eabc0912cc01181314134d8c59afe2b11c5a026cd33fa0"
+    },
+    {
+      "bytes": 1635,
+      "path": "data/capstones/CP01/SHA256SUMS",
+      "sha256": "f11ee0fc23691482863a42330004eff024d65dd5c71809a815dc2b02e73028b8"
+    },
+    {
+      "bytes": 315,
+      "path": "data/capstones/CP01/http/cc-by-4.0-legalcode.html.headers",
+      "sha256": "14ce2179f398bf81f3df6738c26defd4c7a7f5832f996ca1fae4b06d0400c11b"
+    },
+    {
+      "bytes": 130,
+      "path": "data/capstones/CP01/http/concrete+compressive+strength.zip.headers",
+      "sha256": "128b5481bf03f61ce8ebedaf0ab1272e41e1df2814e68d1b07d403347f21b3cc"
+    },
+    {
+      "bytes": 130,
+      "path": "data/capstones/CP01/http/data.csv.headers",
+      "sha256": "6416234f55b2194602866263cb1cbb4a5ed76213ff887eff8199b040eec5088f"
+    },
+    {
+      "bytes": 1492,
+      "path": "data/capstones/CP01/http/doi-10.24432-C5PK67-csl.json.headers",
+      "sha256": "8afb3f7a45e359a8150986110ad96085c71d1ec21b320350c0aac9613e171282"
+    },
+    {
+      "bytes": 1204,
+      "path": "data/capstones/CP01/http/doi-10.24432-C5PK67-resolved.html.headers",
+      "sha256": "98449b14ab79c25b836dc2e518896ff1ac244256df3fe0056d60691b05f8c539"
+    },
+    {
+      "bytes": 170,
+      "path": "data/capstones/CP01/http/uci-dataset-165-api.json.headers",
+      "sha256": "ce03e93e32431647cf52bcdca3430e2c3f6907553a51ebeec8093e265d4c6b10"
+    },
+    {
+      "bytes": 192,
+      "path": "data/capstones/CP01/http/uci-dataset-165-record.html.headers",
+      "sha256": "9a4651bec4ff5722784703eca4f5927167ff46751aaa4d1b56f9c12ed3acb39b"
+    },
+    {
+      "bytes": 124928,
+      "path": "data/capstones/CP01/raw/archive/Concrete_Data.xls",
+      "sha256": "710076c66b9ca3f8050e7942f3dcbdbe04013534daeb0077ffd3079a52d8e0c4"
+    },
+    {
+      "bytes": 3808,
+      "path": "data/capstones/CP01/raw/archive/Concrete_Readme.txt",
+      "sha256": "5cd3cdb31d3cfd68287daa6b22ed0541d6932113e83ee0980ced63641af3441d"
+    },
+    {
+      "bytes": 34444,
+      "path": "data/capstones/CP01/raw/concrete+compressive+strength.zip",
+      "sha256": "dad85d14de8aee4e07479daa774e6b569a313715b71a3b92c95a07cf91c2c9a7"
+    },
+    {
+      "bytes": 41472,
+      "path": "data/capstones/CP01/raw/data.csv",
+      "sha256": "8d4b15b6fc68cd932d745cbd663d5ceae66dd54422e99c1e4865f2936ab7e2af"
+    },
+    {
+      "bytes": 48970,
+      "path": "data/capstones/CP01/witnesses/cc-by-4.0-legalcode.html",
+      "sha256": "6d55b998ed5c54f43426d059a8c549ed58a3321e5463e6a6af1c6b56ab78c333"
+    },
+    {
+      "bytes": 376,
+      "path": "data/capstones/CP01/witnesses/doi-10.24432-C5PK67-csl.json",
+      "sha256": "53482e0939fcbc55c7e9f1a16029d8735c7d2c060798b1c85be98425e06512cd"
+    },
+    {
+      "bytes": 119937,
+      "path": "data/capstones/CP01/witnesses/doi-10.24432-C5PK67-resolved.html",
+      "sha256": "d66b9a8327138a98807b0bb9de31b75649617c481b1aba110a364e43d8e3bafb"
+    },
+    {
+      "bytes": 3971,
+      "path": "data/capstones/CP01/witnesses/uci-dataset-165-api.json",
+      "sha256": "e6bf60c33164024edd612f205e429b48cf66a08b639184567e24536c5e3f8e03"
+    },
+    {
+      "bytes": 119937,
+      "path": "data/capstones/CP01/witnesses/uci-dataset-165-record.html",
+      "sha256": "ed33939f897be461aeb9ac491e68e9eedc1c54b34ceea6977ce6557d204dd296"
+    }
+  ],
+  "schema": "o006.c140.cp01-analysis-replay.v2",
+  "seed": null,
+  "spot_checks": {
+    "full_R2": "0.61551987",
+    "full_RSS": "110413.15315711",
+    "full_kappa2_scaled": "8.71177872",
+    "full_s": "10.39914264",
+    "inference_token_rows": 461,
+    "joint_F_q3": "41.20910449",
+    "joint_W_HC3": "89.67343789",
+    "joint_p_F": "3.85991085e-25",
+    "leverage_selector_records": [
+      986,
+      592,
+      67
+    ],
+    "profiles": 992,
+    "reference_profile_muhat_MPa": "22.21180098",
+    "screen_union_rows": 123,
+    "union_screen_block_inference_label": "NOMINAL_POST_SELECTION_F__EXPLORATORY_SENSITIVITY_ONLY",
+    "union_screen_block_p_F_nominal": "3.60370009e-35"
+  },
+  "status": "pass",
+  "transform_receipt": {
+    "bytes": 2465,
+    "path": "build/CP01_TRANSFORM_RECEIPT.json",
+    "sha256": "177848b6be8282fdcc1be402b4e1214eaa7d79019af5a3c02fbd977fa7e5efdc"
+  }
+}

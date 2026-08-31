@@ -1,0 +1,407 @@
+{
+  "schema_version": "1.0",
+  "freeze_status": "frozen",
+  "freeze_scope": "CP01 Concrete Compressive Strength source assets and primary rights/provenance witnesses",
+  "canonical_analysis_asset": "raw/data.csv",
+  "frozen_at_utc": "2026-08-30T20:18:05.757Z",
+  "retrieval": {
+    "transport": "direct HTTPS GET; no browser",
+    "client": "curl 8.21.0 (Windows), libcurl/8.21.0, Schannel",
+    "redirect_policy": "follow, maximum 10",
+    "content_decoding_requested": false,
+    "digest_algorithm": "SHA-256",
+    "digest_origin": "computed locally over the exact stored bytes; not publisher-supplied"
+  },
+  "dataset_identity": {
+    "title": "Concrete Compressive Strength",
+    "creator": "I-Cheng Yeh",
+    "publisher": "UCI Machine Learning Repository",
+    "uci_id": 165,
+    "doi": "10.24432/C5PK67",
+    "canonical_repository_url": "https://archive.ics.uci.edu/dataset/165/concrete+compressive+strength",
+    "record_alias_url": "https://archive.ics.uci.edu/dataset/165/concrete",
+    "doi_url": "https://doi.org/10.24432/C5PK67",
+    "issued_year": 1998,
+    "api_last_updated": "Sun Feb 11 2024",
+    "formal_version": null,
+    "version_note": "Neither the frozen UCI API response nor the DOI CSL response exposes a formal release/version number. Identity is therefore fixed by UCI ID, DOI, API last_updated, retrieval interval, byte length, and SHA-256.",
+    "donation_date_evidence": {
+      "landing_page_display": "8/2/2007",
+      "landing_embedded_utc": "2007-08-03T00:00:00.000Z",
+      "archive_readme": "August 3, 2007",
+      "interpretation": "The one-day difference is a presentation/time-zone discrepancy, not version evidence."
+    }
+  },
+  "rights": {
+    "asset_license": "Creative Commons Attribution 4.0 International",
+    "spdx_expression": "CC-BY-4.0",
+    "license_url": "https://creativecommons.org/licenses/by/4.0/legalcode",
+    "license_witness": "witnesses/uci-dataset-165-record.html",
+    "legal_code_witness": "witnesses/cc-by-4.0-legalcode.html",
+    "archive_notice_witness": "raw/archive/Concrete_Readme.txt",
+    "archive_notice_summary": "The original README says reuse is unlimited provided the copyright notice for Prof. I-Cheng Yeh and the named 1998 Cement and Concrete Research paper are retained.",
+    "required_attribution": "Yeh, I. (1998). Concrete Compressive Strength [Dataset]. UCI Machine Learning Repository. https://doi.org/10.24432/C5PK67.",
+    "separation_rule": "All frozen dataset files, extracted archive members, and faithful derivatives retain their dataset-level CC BY 4.0 status and attribution obligations. They are not relicensed as CC BY-SA by inclusion in the companion."
+  },
+  "assets": [
+    {
+      "path": "raw/data.csv",
+      "role": "canonical_analysis_input; publisher-generated CSV representation",
+      "request_url": "https://archive.ics.uci.edu/static/public/165/data.csv",
+      "effective_url": "https://archive.ics.uci.edu/static/public/165/data.csv",
+      "retrieval_started_at_utc": "2026-08-30T20:15:19.946Z",
+      "retrieval_finished_at_utc": "2026-08-30T20:15:21.138Z",
+      "http_status": 200,
+      "http_content_type": null,
+      "http_content_encoding": null,
+      "http_content_length": null,
+      "http_transfer_encoding": "chunked",
+      "identified_media_type": "text/csv",
+      "text_encoding": "UTF-8 (7-bit ASCII subset), no BOM",
+      "line_endings": "CRLF",
+      "bytes": 41472,
+      "sha256": "8d4b15b6fc68cd932d745cbd663d5ceae66dd54422e99c1e4865f2936ab7e2af",
+      "header_capture": {
+        "path": "http/data.csv.headers",
+        "bytes": 130,
+        "sha256": "6416234f55b2194602866263cb1cbb4a5ed76213ff887eff8199b040eec5088f"
+      },
+      "structure": {
+        "header_rows": 1,
+        "data_rows": 1030,
+        "columns": 9,
+        "missing_cells": 0,
+        "non_numeric_data_cells": 0,
+        "headers": [
+          "Cement",
+          "Blast Furnace Slag",
+          "Fly Ash",
+          "Water",
+          "Superplasticizer",
+          "Coarse Aggregate",
+          "Fine Aggregate",
+          "Age",
+          "Concrete compressive strength"
+        ]
+      }
+    },
+    {
+      "path": "raw/concrete+compressive+strength.zip",
+      "role": "publisher original archive; provenance-comparison witness",
+      "request_url": "https://archive.ics.uci.edu/static/public/165/concrete%2Bcompressive%2Bstrength.zip",
+      "effective_url": "https://archive.ics.uci.edu/static/public/165/concrete%2Bcompressive%2Bstrength.zip",
+      "retrieval_started_at_utc": "2026-08-30T20:15:21.139Z",
+      "retrieval_finished_at_utc": "2026-08-30T20:15:21.929Z",
+      "http_status": 200,
+      "http_content_type": null,
+      "http_content_encoding": null,
+      "http_content_length": null,
+      "http_transfer_encoding": "chunked",
+      "identified_media_type": "application/zip",
+      "bytes": 34444,
+      "sha256": "dad85d14de8aee4e07479daa774e6b569a313715b71a3b92c95a07cf91c2c9a7",
+      "header_capture": {
+        "path": "http/concrete+compressive+strength.zip.headers",
+        "bytes": 130,
+        "sha256": "128b5481bf03f61ce8ebedaf0ab1272e41e1df2814e68d1b07d403347f21b3cc"
+      },
+      "archive_inventory": {
+        "uncompressed_bytes": 128736,
+        "entry_timestamp_local_without_encoded_timezone": "2023-05-22T22:22:54",
+        "timestamp_note": "ZIP packaging timestamp only; not a dataset version identifier.",
+        "entries": [
+          {
+            "path": "Concrete_Data.xls",
+            "bytes": 124928,
+            "compressed_bytes": 32716
+          },
+          {
+            "path": "Concrete_Readme.txt",
+            "bytes": 3808,
+            "compressed_bytes": 1450
+          }
+        ]
+      }
+    },
+    {
+      "path": "raw/archive/Concrete_Data.xls",
+      "role": "byte-exact extracted original workbook; provenance-comparison witness",
+      "container": "raw/concrete+compressive+strength.zip",
+      "identified_media_type": "application/vnd.ms-excel",
+      "bytes": 124928,
+      "sha256": "710076c66b9ca3f8050e7942f3dcbdbe04013534daeb0077ffd3079a52d8e0c4",
+      "structure": {
+        "data_sheet": "Sheet1",
+        "data_rows": 1030,
+        "columns": 9,
+        "other_sheets": [
+          "Sheet2",
+          "Sheet3"
+        ],
+        "other_sheets_note": "No data cells were observed."
+      }
+    },
+    {
+      "path": "raw/archive/Concrete_Readme.txt",
+      "role": "byte-exact extracted source dictionary and copyright/availability witness",
+      "container": "raw/concrete+compressive+strength.zip",
+      "identified_media_type": "text/plain",
+      "text_encoding": "UTF-8 (7-bit ASCII subset), no BOM",
+      "line_endings": "CRLF",
+      "bytes": 3808,
+      "sha256": "5cd3cdb31d3cfd68287daa6b22ed0541d6932113e83ee0980ced63641af3441d"
+    },
+    {
+      "path": "witnesses/uci-dataset-165-api.json",
+      "role": "primary UCI identity, metadata, variable dictionary, units, and last-update witness",
+      "request_url": "https://archive.ics.uci.edu/api/dataset?id=165",
+      "effective_url": "https://archive.ics.uci.edu/api/dataset?id=165",
+      "retrieval_started_at_utc": "2026-08-30T20:15:21.929Z",
+      "retrieval_finished_at_utc": "2026-08-30T20:15:22.977Z",
+      "http_status": 200,
+      "http_content_type": "text/plain;charset=UTF-8",
+      "http_content_encoding": null,
+      "http_content_length": null,
+      "http_transfer_encoding": "chunked",
+      "identified_media_type": "application/json",
+      "text_encoding": "UTF-8, no BOM",
+      "bytes": 3971,
+      "sha256": "e6bf60c33164024edd612f205e429b48cf66a08b639184567e24536c5e3f8e03",
+      "header_capture": {
+        "path": "http/uci-dataset-165-api.json.headers",
+        "bytes": 170,
+        "sha256": "ce03e93e32431647cf52bcdca3430e2c3f6907553a51ebeec8093e265d4c6b10"
+      }
+    },
+    {
+      "path": "witnesses/uci-dataset-165-record.html",
+      "role": "primary UCI record and CC BY 4.0 rights witness",
+      "request_url": "https://archive.ics.uci.edu/dataset/165/concrete",
+      "effective_url": "https://archive.ics.uci.edu/dataset/165/concrete",
+      "retrieval_started_at_utc": "2026-08-30T20:15:22.977Z",
+      "retrieval_finished_at_utc": "2026-08-30T20:15:24.391Z",
+      "http_status": 200,
+      "http_content_type": "text/html",
+      "http_content_encoding": null,
+      "http_content_length": 119937,
+      "identified_media_type": "text/html",
+      "text_encoding": "UTF-8 from in-document meta charset, no BOM",
+      "bytes": 119937,
+      "sha256": "ed33939f897be461aeb9ac491e68e9eedc1c54b34ceea6977ce6557d204dd296",
+      "header_capture": {
+        "path": "http/uci-dataset-165-record.html.headers",
+        "bytes": 192,
+        "sha256": "9a4651bec4ff5722784703eca4f5927167ff46751aaa4d1b56f9c12ed3acb39b"
+      }
+    },
+    {
+      "path": "witnesses/doi-10.24432-C5PK67-resolved.html",
+      "role": "DOI resolution witness",
+      "request_url": "https://doi.org/10.24432/C5PK67",
+      "effective_url": "https://archive.ics.uci.edu/dataset/165/concrete+compressive+strength",
+      "redirect_chain": [
+        "https://doi.org/10.24432/C5PK67",
+        "https://archive.ics.uci.edu/dataset/165",
+        "https://archive.ics.uci.edu/dataset/165/concrete+compressive+strength"
+      ],
+      "retrieval_started_at_utc": "2026-08-30T20:15:24.391Z",
+      "retrieval_finished_at_utc": "2026-08-30T20:15:25.813Z",
+      "http_status": 200,
+      "http_content_type": "text/html",
+      "http_content_encoding": null,
+      "http_content_length": 119937,
+      "identified_media_type": "text/html",
+      "text_encoding": "UTF-8 from in-document meta charset, no BOM",
+      "bytes": 119937,
+      "sha256": "d66b9a8327138a98807b0bb9de31b75649617c481b1aba110a364e43d8e3bafb",
+      "header_capture": {
+        "path": "http/doi-10.24432-C5PK67-resolved.html.headers",
+        "bytes": 1204,
+        "sha256": "98449b14ab79c25b836dc2e518896ff1ac244256df3fe0056d60691b05f8c539"
+      }
+    },
+    {
+      "path": "witnesses/doi-10.24432-C5PK67-csl.json",
+      "role": "DOI citation metadata witness obtained by content negotiation",
+      "request_url": "https://doi.org/10.24432/C5PK67",
+      "request_accept": "application/vnd.citationstyles.csl+json",
+      "effective_url": "https://data.crosscite.org/10.24432%2FC5PK67",
+      "retrieval_started_at_utc": "2026-08-30T20:18:05.234Z",
+      "retrieval_finished_at_utc": "2026-08-30T20:18:05.757Z",
+      "http_status": 200,
+      "http_content_type": "application/vnd.citationstyles.csl+json; charset=utf-8",
+      "http_content_encoding": null,
+      "http_content_length": null,
+      "http_transfer_encoding": "chunked",
+      "identified_media_type": "application/vnd.citationstyles.csl+json",
+      "text_encoding": "UTF-8, no BOM",
+      "bytes": 376,
+      "sha256": "53482e0939fcbc55c7e9f1a16029d8735c7d2c060798b1c85be98425e06512cd",
+      "header_capture": {
+        "path": "http/doi-10.24432-C5PK67-csl.json.headers",
+        "bytes": 1492,
+        "sha256": "8afb3f7a45e359a8150986110ad96085c71d1ec21b320350c0aac9613e171282"
+      }
+    },
+    {
+      "path": "witnesses/cc-by-4.0-legalcode.html",
+      "role": "license legal-code witness linked by the UCI record",
+      "request_url": "https://creativecommons.org/licenses/by/4.0/legalcode",
+      "effective_url": "https://creativecommons.org/licenses/by/4.0/legalcode",
+      "retrieval_started_at_utc": "2026-08-30T20:15:25.813Z",
+      "retrieval_finished_at_utc": "2026-08-30T20:15:25.895Z",
+      "http_status": 200,
+      "http_content_type": "text/html",
+      "http_content_encoding": null,
+      "http_content_length": null,
+      "http_transfer_encoding": "chunked",
+      "http_last_modified": "Tue, 09 Jun 2026 14:26:12 GMT",
+      "identified_media_type": "text/html",
+      "text_encoding": "UTF-8 from in-document meta charset, no BOM",
+      "bytes": 48970,
+      "sha256": "6d55b998ed5c54f43426d059a8c549ed58a3321e5463e6a6af1c6b56ab78c333",
+      "header_capture": {
+        "path": "http/cc-by-4.0-legalcode.html.headers",
+        "bytes": 315,
+        "sha256": "14ce2179f398bf81f3df6738c26defd4c7a7f5832f996ca1fae4b06d0400c11b"
+      }
+    }
+  ],
+  "variable_dictionary": [
+    {
+      "position": 1,
+      "csv_header": "Cement",
+      "xls_header": "Cement (component 1)(kg in a m^3 mixture)",
+      "role": "Feature",
+      "unit": "kg/m^3"
+    },
+    {
+      "position": 2,
+      "csv_header": "Blast Furnace Slag",
+      "xls_header": "Blast Furnace Slag (component 2)(kg in a m^3 mixture)",
+      "role": "Feature",
+      "unit": "kg/m^3"
+    },
+    {
+      "position": 3,
+      "csv_header": "Fly Ash",
+      "xls_header": "Fly Ash (component 3)(kg in a m^3 mixture)",
+      "role": "Feature",
+      "unit": "kg/m^3"
+    },
+    {
+      "position": 4,
+      "csv_header": "Water",
+      "xls_header": "Water  (component 4)(kg in a m^3 mixture)",
+      "role": "Feature",
+      "unit": "kg/m^3"
+    },
+    {
+      "position": 5,
+      "csv_header": "Superplasticizer",
+      "xls_header": "Superplasticizer (component 5)(kg in a m^3 mixture)",
+      "role": "Feature",
+      "unit": "kg/m^3"
+    },
+    {
+      "position": 6,
+      "csv_header": "Coarse Aggregate",
+      "xls_header": "Coarse Aggregate  (component 6)(kg in a m^3 mixture)",
+      "role": "Feature",
+      "unit": "kg/m^3"
+    },
+    {
+      "position": 7,
+      "csv_header": "Fine Aggregate",
+      "xls_header": "Fine Aggregate (component 7)(kg in a m^3 mixture)",
+      "role": "Feature",
+      "unit": "kg/m^3"
+    },
+    {
+      "position": 8,
+      "csv_header": "Age",
+      "xls_header": "Age (day)",
+      "role": "Feature",
+      "unit": "day"
+    },
+    {
+      "position": 9,
+      "csv_header": "Concrete compressive strength",
+      "xls_header": "Concrete compressive strength(MPa, megapascals) ",
+      "role": "Target",
+      "unit": "MPa"
+    }
+  ],
+  "csv_xls_comparison": {
+    "status": "verified",
+    "row_alignment": "All 1030 rows align positionally.",
+    "column_alignment": "All 9 columns align positionally; CSV headers omit the units retained by XLS and UCI metadata.",
+    "raw_value_differing_cells": 2260,
+    "comparison_tolerance": 0,
+    "rounding_relationship": "Every CSV value equals its positional XLS value rounded with midpoint ties away from zero: columns 1-7 to one decimal, Age to zero decimals (already integral), and strength to two decimals.",
+    "rounding_rule_mismatches": 0,
+    "columns": [
+      {
+        "csv_header": "Cement",
+        "rounding_decimals": 1,
+        "raw_value_differing_cells": 205,
+        "maximum_absolute_difference": 0.05
+      },
+      {
+        "csv_header": "Blast Furnace Slag",
+        "rounding_decimals": 1,
+        "raw_value_differing_cells": 55,
+        "maximum_absolute_difference": 0.05
+      },
+      {
+        "csv_header": "Fly Ash",
+        "rounding_decimals": 1,
+        "raw_value_differing_cells": 230,
+        "maximum_absolute_difference": 0.05
+      },
+      {
+        "csv_header": "Water",
+        "rounding_decimals": 1,
+        "raw_value_differing_cells": 230,
+        "maximum_absolute_difference": 0.05
+      },
+      {
+        "csv_header": "Superplasticizer",
+        "rounding_decimals": 1,
+        "raw_value_differing_cells": 300,
+        "maximum_absolute_difference": 0.05
+      },
+      {
+        "csv_header": "Coarse Aggregate",
+        "rounding_decimals": 1,
+        "raw_value_differing_cells": 40,
+        "maximum_absolute_difference": 0.04
+      },
+      {
+        "csv_header": "Fine Aggregate",
+        "rounding_decimals": 1,
+        "raw_value_differing_cells": 170,
+        "maximum_absolute_difference": 0.05
+      },
+      {
+        "csv_header": "Age",
+        "rounding_decimals": 0,
+        "raw_value_differing_cells": 0,
+        "maximum_absolute_difference": 0
+      },
+      {
+        "csv_header": "Concrete compressive strength",
+        "rounding_decimals": 2,
+        "raw_value_differing_cells": 1030,
+        "maximum_absolute_difference": 0.00498796
+      }
+    ],
+    "operational_rule": "Offline analysis and replay pin raw/data.csv by byte count and SHA-256. The XLS parser is not required; XLS, ZIP, and README remain provenance-comparison witnesses."
+  },
+  "integrity_notes": [
+    "The UCI static CSV and ZIP responses declared no Content-Type, Content-Length, Content-Disposition, charset, or Content-Encoding; identified media types and filenames are therefore based on byte signatures, parse validation, URL paths, and the ZIP inventory.",
+    "The UCI API response is JSON bytes served as text/plain;charset=UTF-8.",
+    "Landing-page ETags and other dynamic page fields are not dataset version identifiers. Exact witness identity is the stored body hash plus its captured response headers.",
+    "The record/API report 1030 instances, eight features, one target, and no missing values; the frozen CSV independently parses as 1030 by 9 with no missing or non-numeric data cells."
+  ]
+}

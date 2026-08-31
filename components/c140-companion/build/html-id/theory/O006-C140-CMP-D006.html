@@ -4,30 +4,31 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="generator" content="OpenAI Codex gpt-5.6-sol, Ultra">
-<title>Optimalitas pengujian: Neyman–Pearson, MP, UMP, dan rasio likelihood monoton</title>
+<title>Optimalitas pengujian: Neyman–Pearson, MP, UMP, dan rasio fungsi kemungkinan monoton</title>
 <link rel="stylesheet" href="../assets/style.css">
 <script>window.MathJax={loader:{load:['[tex]/boldsymbol']},tex:{packages:{'[+]':['boldsymbol']},inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']]},svg:{fontCache:'local'}};</script>
 <script defer src="../assets/MathJax/tex-svg.js"></script>
 </head>
 <body>
+<a class="skip-link" href="#main-content">Langsung ke isi utama</a>
 <div class="shell">
-<nav class="sidebar" aria-label="Daftar isi pendamping"><h2>Isi pendamping</h2><ol><li><a href="../index.html">Pendamping Orisinal Statistika Matematis</a></li><li><a href="O006-C140-CMP-D001.html">Model parametrik reguler, skor, dan informasi Fisher</a></li><li><a href="O006-C140-CMP-D002.html">Konsistensi MLE: identifikasi Kullback–Leibler dan teorema argmax</a></li><li><a href="O006-C140-CMP-D003.html">Likelihood kuadratik lokal, normalitas asimtotik, dan delta method</a></li><li><a href="O006-C140-CMP-D004.html">Prosedur Wald, skor, dan rasio likelihood</a></li><li><a href="O006-C140-CMP-D005.html">Likelihood nonreguler: empat mekanisme kegagalan</a></li><li><a href="O006-C140-CMP-D006.html">Optimalitas pengujian: Neyman–Pearson, MP, UMP, dan rasio likelihood monoton</a></li><li><a href="O006-C140-CMP-D007.html">Loss, risk, efisiensi, Rao–Blackwell, dan Lehmann–Scheffé</a></li><li><a href="O006-C140-CMP-D008.html">Model linear Gaussian desain tetap dan geometri proyeksi</a></li><li><a href="O006-C140-CMP-D009.html">OLS, MLE Gaussian, dan teorema Gauss–Markov pada rancangan tetap</a></li><li><a href="O006-C140-CMP-D010.html">Inferensi Gaussian eksak: proyeksi, t, F, ANOVA, dan prediksi</a></li><li><a href="O006-C140-CMP-D011.html">Diagnostik, leverage, misspesifikasi, dan inferensi pascaseleksi</a></li><li><a href="O006-C140-CMP-D012.html">Inferensi Bayesian sebagai pembaruan dan keputusan yang koheren</a></li><li><a href="O006-C140-CMP-D013.html">Perbandingan Bayesian–frequentist: keputusan, cakupan, dan kalibrasi</a></li><li><a href="../simulations/O006-C140-CMP-SIM001.html">Model lokasi normal: MLE, coverage, dan tiga statistik uji</a></li><li><a href="../simulations/O006-C140-CMP-SIM002.html">Delta method pada titik reguler dan titik dengan turunan nol</a></li><li><a href="../simulations/O006-C140-CMP-SIM003.html">Endpoint Uniform: laju nonreguler dan kegagalan bootstrap biasa</a></li><li><a href="../simulations/O006-C140-CMP-SIM004.html">Uji Neyman–Pearson teracak dengan size tepat</a></li><li><a href="../simulations/O006-C140-CMP-SIM005.html">Model linear matriks: coverage, heteroskedastisitas, dan pengaruh</a></li><li><a href="../simulations/O006-C140-CMP-SIM006.html">Kalibrasi selang Bayesian dan frequentist pada model binomial</a></li><li><a href="../mastery/O006-C140-CMP-MS00.html">Set penguasaan 00 — probabilitas, distribusi, dan ekspektasi (diagnostik C140)</a></li><li><a href="../mastery/O006-C140-CMP-MS01.html">Set penguasaan 01 — statistik urutan dan distribusi sampel</a></li><li><a href="../mastery/O006-C140-CMP-MS02.html">Set penguasaan 02 — estimasi, bias, MSE, dan sifat estimator</a></li><li><a href="../mastery/O006-C140-CMP-MS03.html">Set penguasaan 03 — kecukupan, faktorisasi, kelengkapan, dan statistik ancillary</a></li><li><a href="../mastery/O006-C140-CMP-MS04.html">Set penguasaan 04 — metode momen dan dasar kemungkinan maksimum</a></li><li><a href="../mastery/O006-C140-CMP-MS05.html">Set penguasaan 05 — informasi Fisher, interval kepercayaan, bootstrap, dan delta method</a></li><li><a href="../mastery/O006-C140-CMP-MS06.html">Set penguasaan 06 — pengujian hipotesis, daya, p-value, dan jembatan likelihood</a></li><li><a href="../mastery/O006-C140-CMP-MS07.html">Set penguasaan 07 — regularitas, konsistensi, dan normalitas MLE</a></li><li><a href="../mastery/O006-C140-CMP-MS08.html">Set penguasaan 08 — Wald, skor, rasio likelihood, dan diagnosis nonregular</a></li><li><a href="../mastery/O006-C140-CMP-MS09.html">Set penguasaan 09 — pengujian eksak dan optimalitas Neyman–Pearson</a></li><li><a href="../mastery/O006-C140-CMP-MS10.html">Set penguasaan 10 — uji likelihood asimtotik, risk, dan perbaikan estimator</a></li><li><a href="../mastery/O006-C140-CMP-MS11.html">Set penguasaan 11 — pembaruan Bayesian, keputusan, dan kalibrasi</a></li><li><a href="../mastery/O006-C140-CMP-MS12.html">Set penguasaan 12 — model linear Gaussian matriks, inferensi eksak, dan diagnostik</a></li><li><a href="../assessments/O006-C140-CMP-CA01.html">Asesmen kumulatif C1: likelihood, optimalitas, dan keputusan statistik</a></li></ol></nav>
-<main>
+<nav class="sidebar" aria-labelledby="companion-nav-title"><p class="nav-title" id="companion-nav-title">Isi pendamping</p><ol><li><a href="../index.html">Pendamping Orisinal Statistika Matematis</a></li><li><a href="O006-C140-CMP-D001.html">Model parametrik reguler, skor, dan informasi Fisher</a></li><li><a href="O006-C140-CMP-D002.html">Konsistensi MLE: identifikasi Kullback–Leibler dan teorema argmax</a></li><li><a href="O006-C140-CMP-D003.html">Ekspansi kuadratik lokal fungsi log-kemungkinan, normalitas asimtotik, dan metode delta</a></li><li><a href="O006-C140-CMP-D004.html">Prosedur Wald, skor, dan rasio fungsi kemungkinan</a></li><li><a href="O006-C140-CMP-D005.html">Fungsi kemungkinan nonreguler: empat mekanisme kegagalan</a></li><li><a href="O006-C140-CMP-D006.html" aria-current="page">Optimalitas pengujian: Neyman–Pearson, MP, UMP, dan rasio fungsi kemungkinan monoton</a></li><li><a href="O006-C140-CMP-D007.html">Kerugian, risiko, efisiensi, Rao–Blackwell, dan Lehmann–Scheffé</a></li><li><a href="O006-C140-CMP-D008.html">Model linear Gaussian berdesain tetap dan geometri proyeksi</a></li><li><a href="O006-C140-CMP-D009.html">OLS, MLE Gaussian, dan teorema Gauss–Markov pada desain tetap</a></li><li><a href="O006-C140-CMP-D010.html">Inferensi Gaussian eksak: proyeksi, t, F, ANOVA, dan prediksi</a></li><li><a href="O006-C140-CMP-D011.html">Diagnostik, daya ungkit, kesalahan spesifikasi, dan inferensi pascaseleksi</a></li><li><a href="O006-C140-CMP-D012.html">Inferensi Bayesian sebagai pembaruan dan keputusan yang koheren</a></li><li><a href="O006-C140-CMP-D013.html">Perbandingan Bayesian–frekuentis: keputusan, cakupan, dan kalibrasi</a></li><li><a href="../simulations/O006-C140-CMP-SIM001.html">Model lokasi normal: MLE, cakupan, dan tiga statistik uji</a></li><li><a href="../simulations/O006-C140-CMP-SIM002.html">Metode delta pada titik reguler dan titik dengan turunan nol</a></li><li><a href="../simulations/O006-C140-CMP-SIM003.html">Distribusi seragam pada batas dukungan: laju nonreguler dan kegagalan bootstrap biasa</a></li><li><a href="../simulations/O006-C140-CMP-SIM004.html">Uji Neyman–Pearson teracak dengan ukuran uji tepat</a></li><li><a href="../simulations/O006-C140-CMP-SIM005.html">Model linear matriks: cakupan, heteroskedastisitas, dan pengaruh</a></li><li><a href="../simulations/O006-C140-CMP-SIM006.html">Kalibrasi selang Bayesian dan frekuentis pada model binomial</a></li><li><a href="../mastery/O006-C140-CMP-MS00.html">Set penguasaan 00 — probabilitas, distribusi, dan ekspektasi (diagnostik C140)</a></li><li><a href="../mastery/O006-C140-CMP-MS01.html">Set penguasaan 01 — statistik urutan dan distribusi sampel</a></li><li><a href="../mastery/O006-C140-CMP-MS02.html">Set penguasaan 02 — estimasi, bias, MSE, dan sifat penduga</a></li><li><a href="../mastery/O006-C140-CMP-MS03.html">Set penguasaan 03 — kecukupan, faktorisasi, kelengkapan, dan statistik aksesori</a></li><li><a href="../mastery/O006-C140-CMP-MS04.html">Set penguasaan 04 — metode momen dan dasar kemungkinan maksimum</a></li><li><a href="../mastery/O006-C140-CMP-MS05.html">Set penguasaan 05 — informasi Fisher, interval kepercayaan, bootstrap, dan metode delta</a></li><li><a href="../mastery/O006-C140-CMP-MS06.html">Set penguasaan 06 — pengujian hipotesis, daya, nilai-p, dan jembatan ke teori fungsi kemungkinan</a></li><li><a href="../mastery/O006-C140-CMP-MS07.html">Set penguasaan 07 — keteraturan, konsistensi, dan normalitas MLE</a></li><li><a href="../mastery/O006-C140-CMP-MS08.html">Set penguasaan 08 — Wald, skor, rasio fungsi kemungkinan, dan diagnosis nonreguler</a></li><li><a href="../mastery/O006-C140-CMP-MS09.html">Set penguasaan 09 — pengujian eksak dan optimalitas Neyman–Pearson</a></li><li><a href="../mastery/O006-C140-CMP-MS10.html">Set penguasaan 10 — uji fungsi kemungkinan asimtotik, risiko, dan perbaikan penduga</a></li><li><a href="../mastery/O006-C140-CMP-MS11.html">Set penguasaan 11 — pembaruan Bayesian, keputusan, dan kalibrasi</a></li><li><a href="../mastery/O006-C140-CMP-MS12.html">Set penguasaan 12 — model linear Gaussian dalam bentuk matriks, inferensi eksak, dan diagnostik</a></li><li><a href="../assessments/O006-C140-CMP-CA01.html">Asesmen kumulatif C1: fungsi kemungkinan, optimalitas, dan keputusan statistik</a></li><li><a href="../assessments/O006-C140-CMP-CA02.html">Asesmen kumulatif CA02 — fondasi inferensi sampel berhingga</a></li><li><a href="../assessments/O006-C140-CMP-CA03.html">Asesmen kumulatif CA03 — model linear dalam bentuk matriks, inferensi eksak, dan diagnostik</a></li><li><a href="../assessments/O006-C140-CMP-CA04.html">Asesmen kumulatif CA04 — sintesis Bayesian–frekuentis</a></li><li><a href="../capstones/O006-C140-CMP-CP01.html">Proyek akhir integratif CP01 — regresi data terbuka untuk kuat tekan beton</a></li><li><a href="../capstones/O006-C140-CMP-CP02.html">Proyek akhir CP02 — perbandingan Bayesian–frekuentis pada data agregat kecenderungan bersarang greater sage-grouse</a></li></ol></nav>
+<main id="main-content" tabindex="-1">
 <div class="metadata"><strong>O006-C140-CMP-D006</strong> · id-ID · CC BY-SA 4.0 · OpenAI Codex gpt-5.6-sol, Ultra</div>
 <p><a id="O006-C140-CMP-D006-SEC01"></a></p>
 <h1>Optimalitas pengujian</h1>
 <p>Bab ini menjawab pertanyaan yang lebih tajam daripada “apakah suatu uji
-masuk akal?”: di antara semua uji dengan peluang kesalahan tipe I yang sama,
-adakah uji yang mempunyai power terbesar? Untuk dua hipotesis sederhana,
+masuk akal?”: di antara semua uji dengan peluang galat tipe I yang sama,
+adakah uji yang mempunyai daya terbesar? Untuk dua hipotesis sederhana,
 lemma Neyman–Pearson memberi jawaban lengkap. Untuk hipotesis komposit,
-jawaban itu tidak otomatis berlaku; urutan <em>monotone likelihood ratio</em> (MLR)
+jawaban itu tidak otomatis berlaku; urutan <em>rasio fungsi kemungkinan monoton</em> (MLR)
 memberi satu jalur yang sah menuju uji UMP satu sisi.</p>
-<p>Randomisasi bukan hiasan teknis. Pada model diskret, batas level
+<p>Randomisasi bukan hiasan teknis. Pada model diskret, batas aras
 <span class="math-inline" role="math">\(\alpha\)</span> sering jatuh di antara dua probabilitas ekor. Randomisasi pada
-himpunan tempat rasio likelihood tepat sama dengan ambang memungkinkan size
+himpunan tempat rasio fungsi kemungkinan tepat sama dengan ambang memungkinkan ukuran
 eksak tanpa mengubah susunan bukti optimalitas.</p>
 <p><a id="O006-C140-CMP-D006-DEF01"></a></p>
-<h2>Uji teracak, size, dan power</h2>
+<h2>Uji teracak, ukuran, dan daya</h2>
 <p>Misalkan data <span class="math-inline" role="math">\(X\)</span> mempunyai distribusi <span class="math-inline" role="math">\(P_\theta\)</span> pada ruang sampel
 <span class="math-inline" role="math">\((\mathcal X,\mathcal A)\)</span>. Uji teracak adalah fungsi terukur</p>
 <div class="math-display" role="math">\[\varphi:\mathcal X\longrightarrow[0,1].\]</div>
@@ -35,33 +36,33 @@ eksak tanpa mengubah susunan bukti optimalitas.</p>
 <span class="math-inline" role="math">\(H_0\)</span>. Implementasi operasionalnya dapat memakai <span class="math-inline" role="math">\(U\sim\operatorname{Unif}(0,1)\)</span>
 yang independen dari <span class="math-inline" role="math">\(X\)</span>: tolak bila <span class="math-inline" role="math">\(U\leq\varphi(X)\)</span>. Uji biasa adalah kasus
 <span class="math-inline" role="math">\(\varphi(x)\in\{0,1\}\)</span>.</p>
-<p>Fungsi power uji ialah</p>
+<p>Fungsi daya uji ialah</p>
 <div class="math-display" role="math">\[\beta_\varphi(\theta)=E_\theta\{\varphi(X)\}=P_\theta(\text{menolak }H_0).\]</div>
-<p>Untuk <span class="math-inline" role="math">\(H_0:\theta\in\Theta_0\)</span>, <strong>size</strong> adalah</p>
+<p>Untuk <span class="math-inline" role="math">\(H_0:\theta\in\Theta_0\)</span>, <strong>ukuran</strong> adalah</p>
 <div class="math-display" role="math">\[\operatorname{size}(\varphi)
 =\sup_{\theta\in\Theta_0}\beta_\varphi(\theta).\]</div>
-<p>Uji berlevel <span class="math-inline" role="math">\(\alpha\)</span> memenuhi <span class="math-inline" role="math">\(\operatorname{size}(\varphi)\leq\alpha\)</span>.
-Jika supremum itu sama dengan <span class="math-inline" role="math">\(\alpha\)</span>, uji mempunyai size eksak <span class="math-inline" role="math">\(\alpha\)</span>.
-Untuk hipotesis nol sederhana <span class="math-inline" role="math">\(H_0:\theta=\theta_0\)</span>, size hanyalah
+<p>Uji beraras <span class="math-inline" role="math">\(\alpha\)</span> memenuhi <span class="math-inline" role="math">\(\operatorname{size}(\varphi)\leq\alpha\)</span>.
+Jika supremum itu sama dengan <span class="math-inline" role="math">\(\alpha\)</span>, uji mempunyai ukuran eksak <span class="math-inline" role="math">\(\alpha\)</span>.
+Untuk hipotesis nol sederhana <span class="math-inline" role="math">\(H_0:\theta=\theta_0\)</span>, ukuran hanyalah
 <span class="math-inline" role="math">\(E_{\theta_0}\varphi\)</span>.</p>
 <p><a id="O006-C140-CMP-D006-DEF02"></a></p>
 <h2>MP dan UMP: kuantor yang berbeda</h2>
 <p>Untuk pasangan sederhana <span class="math-inline" role="math">\(H_0:\theta=\theta_0\)</span> melawan
-<span class="math-inline" role="math">\(H_1:\theta=\theta_1\)</span>, uji <span class="math-inline" role="math">\(\varphi^*\)</span> disebut <strong>most powerful</strong> (MP)
-berlevel <span class="math-inline" role="math">\(\alpha\)</span> bila, untuk setiap uji <span class="math-inline" role="math">\(\varphi\)</span> dengan
+<span class="math-inline" role="math">\(H_1:\theta=\theta_1\)</span>, uji <span class="math-inline" role="math">\(\varphi^*\)</span> disebut <strong>paling berdaya</strong> (<em>most powerful</em>, MP)
+beraras <span class="math-inline" role="math">\(\alpha\)</span> bila, untuk setiap uji <span class="math-inline" role="math">\(\varphi\)</span> dengan
 <span class="math-inline" role="math">\(E_{\theta_0}\varphi\leq\alpha\)</span>,</p>
 <div class="math-display" role="math">\[E_{\theta_1}\varphi\leq E_{\theta_1}\varphi^*.\]</div>
-<p>Untuk alternatif komposit <span class="math-inline" role="math">\(\Theta_1\)</span>, uji <span class="math-inline" role="math">\(\varphi^*\)</span> disebut <strong>uniformly
-most powerful</strong> (UMP) berlevel <span class="math-inline" role="math">\(\alpha\)</span> bila satu uji yang sama memenuhi</p>
+<p>Untuk alternatif komposit <span class="math-inline" role="math">\(\Theta_1\)</span>, uji <span class="math-inline" role="math">\(\varphi^*\)</span> disebut <strong>paling berdaya
+seragam</strong> (<em>uniformly most powerful</em>, UMP) beraras <span class="math-inline" role="math">\(\alpha\)</span> bila satu uji yang sama memenuhi</p>
 <div class="math-display" role="math">\[\beta_\varphi(\theta)\leq\beta_{\varphi^*}(\theta)
 \quad\text{untuk setiap }\theta\in\Theta_1\]</div>
-<p>dan untuk setiap pesaing berlevel <span class="math-inline" role="math">\(\alpha\)</span>. Menjadi MP terhadap satu titik
-alternatif tidak cukup untuk menjadi UMP. Kata <em>uniformly</em> mengacu pada
-kuantor “untuk setiap <span class="math-inline" role="math">\(\theta\in\Theta_1\)</span>”, bukan pada kerataan fungsi power.</p>
+<p>dan untuk setiap pesaing beraras <span class="math-inline" role="math">\(\alpha\)</span>. Menjadi MP terhadap satu titik
+alternatif tidak cukup untuk menjadi UMP. Kata <em>seragam</em> mengacu pada
+kuantor “untuk setiap <span class="math-inline" role="math">\(\theta\in\Theta_1\)</span>”, bukan pada kerataan fungsi daya.</p>
 <p><a id="O006-C140-CMP-D006-ASM01"></a></p>
 <h2>Kerangka terdominasi untuk dua hipotesis sederhana</h2>
 <p>Ambil <span class="math-inline" role="math">\(P_0\)</span> dan <span class="math-inline" role="math">\(P_1\)</span> yang mempunyai densitas <span class="math-inline" role="math">\(p_0\)</span> dan <span class="math-inline" role="math">\(p_1\)</span> terhadap ukuran
-bersama <span class="math-inline" role="math">\(\mu\)</span>. Definisikan rasio likelihood diperluas</p>
+bersama <span class="math-inline" role="math">\(\mu\)</span>. Definisikan rasio fungsi kemungkinan diperluas</p>
 <div class="math-display" role="math">\[\Lambda(x)=
 \begin{cases}
 p_1(x)/p_0(x),&amp;p_0(x)&gt;0,\\
@@ -69,8 +70,8 @@ p_1(x)/p_0(x),&amp;p_0(x)&gt;0,\\
 0,&amp;p_0(x)=p_1(x)=0.
 \end{cases}\]</div>
 <p>Nilai pada himpunan <span class="math-inline" role="math">\(p_0=p_1=0\)</span> tidak berpengaruh. Konvensi <span class="math-inline" role="math">\(+\infty\)</span> pada
-<span class="math-inline" role="math">\(p_0=0&lt;p_1\)</span> memastikan bahwa observasi yang mustahil di bawah nol tetapi
-mungkin di bawah alternatif selalu ditempatkan dalam daerah penolakan.</p>
+<span class="math-inline" role="math">\(p_0=0&lt;p_1\)</span> memastikan bahwa observasi yang mustahil di bawah <span class="math-inline" role="math">\(P_0\)</span> tetapi
+mungkin di bawah <span class="math-inline" role="math">\(P_1\)</span> selalu ditempatkan dalam daerah penolakan.</p>
 <p>Untuk <span class="math-inline" role="math">\(0&lt;\alpha&lt;1\)</span>, pilih <span class="math-inline" role="math">\(c\in[0,\infty)\)</span> sehingga</p>
 <div class="math-display" role="math">\[P_0(\Lambda&gt;c)\leq\alpha\leq P_0(\Lambda\geq c).\]</div>
 <p>Pemilihan semacam itu adalah pemilihan kuantil distribusi <span class="math-inline" role="math">\(\Lambda\)</span> di bawah
@@ -86,11 +87,11 @@ mungkin di bawah alternatif selalu ditempatkan dalam daerah penolakan.</p>
 <div class="math-display" role="math">\[\varphi^*(x)=
 \mathbf 1\{\Lambda(x)&gt;c\}
 +\gamma\mathbf 1\{\Lambda(x)=c\}.\]</div>
-<p>Jika <span class="math-inline" role="math">\(E_0\varphi^*=\alpha\)</span>, maka <span class="math-inline" role="math">\(\varphi^*\)</span> adalah uji MP berlevel
-<span class="math-inline" role="math">\(\alpha\)</span> untuk <span class="math-inline" role="math">\(H_0:P=P_0\)</span> melawan <span class="math-inline" role="math">\(H_1:P=P_1\)</span>. Syarat kesamaan size ini
-penting bagi kesimpulan yang baru dibuktikan: sekadar mengetahui
-<span class="math-inline" role="math">\(E_0\varphi^*\leq\alpha\)</span> tidak menutup kemungkinan bahwa sisa size dapat
-ditempatkan pada lapisan rasio likelihood berikutnya dan menaikkan power.</p>
+<p>Jika <span class="math-inline" role="math">\(E_0\varphi^*=\alpha\)</span>, maka <span class="math-inline" role="math">\(\varphi^*\)</span> adalah uji MP beraras
+<span class="math-inline" role="math">\(\alpha\)</span> untuk <span class="math-inline" role="math">\(H_0:P=P_0\)</span> melawan <span class="math-inline" role="math">\(H_1:P=P_1\)</span>. Syarat kesamaan ukuran ini
+penting bagi kesimpulan optimalitas: sekadar mengetahui
+<span class="math-inline" role="math">\(E_0\varphi^*\leq\alpha\)</span> tidak menutup kemungkinan bahwa sisa ukuran dapat
+ditempatkan pada lapisan rasio fungsi kemungkinan berikutnya dan menaikkan daya.</p>
 <p><a id="O006-C140-CMP-D006-PRF01"></a></p>
 <h3>Bukti</h3>
 <p>Ambil sembarang pesaing <span class="math-inline" role="math">\(\varphi\)</span> dengan <span class="math-inline" role="math">\(E_0\varphi\leq\alpha\)</span>. Pada
@@ -104,88 +105,114 @@ nilai randomisasi. Karena itu</p>
 <div class="math-display" role="math">\[E_1\varphi-E_1\varphi^*
 \leq c\{E_0\varphi-E_0\varphi^*\}
 \leq c(\alpha-\alpha)=0.\]</div>
-<p>Jadi tidak ada uji berlevel <span class="math-inline" role="math">\(\alpha\)</span> dengan power lebih besar pada <span class="math-inline" role="math">\(P_1\)</span>.
+<p>Jadi tidak ada uji beraras <span class="math-inline" role="math">\(\alpha\)</span> dengan daya lebih besar pada <span class="math-inline" role="math">\(P_1\)</span>.
 Perhatikan bahwa bukti menggunakan nilai <span class="math-inline" role="math">\(\gamma\)</span> hanya untuk memperoleh
-size yang diminta; optimalitas berasal dari tanda
+ukuran yang diminta; optimalitas berasal dari tanda
 <span class="math-inline" role="math">\(p_1-cp_0\)</span>. Ini juga menjelaskan mengapa randomisasi hanya boleh dilakukan
 pada himpunan kesamaan. ∎</p>
 <p><a id="O006-C140-CMP-D006-REM01"></a></p>
 <h3>Kesamaan, ketunggalan, dan interpretasi</h3>
-<p>Jika <span class="math-inline" role="math">\(c&gt;0\)</span> dan rasio likelihood tidak mempunyai massa pada <span class="math-inline" role="math">\(c\)</span>, uji MP
-ber-size eksak pada dasarnya tunggal hingga himpunan <span class="math-inline" role="math">\(P_0\)</span>- dan
-<span class="math-inline" role="math">\(P_1\)</span>-null. Jika <span class="math-inline" role="math">\(P_0(\Lambda=c)&gt;0\)</span>, beberapa mekanisme randomisasi dapat
-memberi total size yang sama. Pada himpunan itu <span class="math-inline" role="math">\(p_1=cp_0\)</span>, sehingga setiap
-tambahan probabilitas penolakan menaikkan power alternatif sebesar <span class="math-inline" role="math">\(c\)</span> kali
-kenaikan size nol. Karena itu semua alokasi yang memenuhi batas yang sama
-memberi power yang sama, walaupun implementasinya dapat berbeda.</p>
+<p>Jika <span class="math-inline" role="math">\(c&gt;0\)</span> dan rasio fungsi kemungkinan tidak mempunyai massa pada <span class="math-inline" role="math">\(c\)</span>, uji MP
+berukuran eksak pada dasarnya tunggal hingga perubahan pada himpunan yang berpeluang
+nol menurut <span class="math-inline" role="math">\(P_0\)</span> dan <span class="math-inline" role="math">\(P_1\)</span>. Jika <span class="math-inline" role="math">\(P_0(\Lambda=c)&gt;0\)</span>, beberapa mekanisme randomisasi dapat
+memberi total ukuran yang sama. Pada himpunan itu <span class="math-inline" role="math">\(p_1=cp_0\)</span>, sehingga setiap
+tambahan probabilitas penolakan menaikkan daya alternatif sebesar <span class="math-inline" role="math">\(c\)</span> kali
+kenaikan probabilitas penolakan di bawah <span class="math-inline" role="math">\(P_0\)</span>. Karena itu semua alokasi yang memenuhi batas yang sama
+memberi daya yang sama, walaupun implementasinya dapat berbeda.</p>
 <p><a id="O006-C140-CMP-D006-EX01"></a></p>
-<h2>Contoh diskret: size eksak memerlukan randomisasi</h2>
+<h2>Contoh diskret: ukuran eksak memerlukan randomisasi</h2>
 <p>Misalkan <span class="math-inline" role="math">\(X_1,X_2\)</span> iid Bernoulli dan <span class="math-inline" role="math">\(S=X_1+X_2\)</span>. Uji</p>
 <div class="math-display" role="math">\[H_0:p=0{,}3
 \quad\text{melawan}\quad
 H_1:p=0{,}6\]</div>
-<p>pada level <span class="math-inline" role="math">\(\alpha=0{,}10\)</span>. Distribusi <span class="math-inline" role="math">\(S\)</span> dan rasio likelihood ialah</p>
-<p>| <span class="math-inline" role="math">\(s\)</span> | <span class="math-inline" role="math">\(P_{0,3}(S=s)\)</span> | <span class="math-inline" role="math">\(P_{0,6}(S=s)\)</span> | <span class="math-inline" role="math">\(\Lambda(s)\)</span> |
-|---:|---:|---:|---:|
-| 0 | <span class="math-inline" role="math">\(0{,}49\)</span> | <span class="math-inline" role="math">\(0{,}16\)</span> | <span class="math-inline" role="math">\(16/49\)</span> |
-| 1 | <span class="math-inline" role="math">\(0{,}42\)</span> | <span class="math-inline" role="math">\(0{,}48\)</span> | <span class="math-inline" role="math">\(8/7\)</span> |
-| 2 | <span class="math-inline" role="math">\(0{,}09\)</span> | <span class="math-inline" role="math">\(0{,}36\)</span> | <span class="math-inline" role="math">\(4\)</span> |</p>
+<p>pada aras <span class="math-inline" role="math">\(\alpha=0{,}10\)</span>. Distribusi <span class="math-inline" role="math">\(S\)</span> dan rasio fungsi kemungkinan ialah</p>
+<table>
+<caption>Tabel 1 — Contoh diskret: ukuran eksak memerlukan randomisasi</caption>
+<thead>
+<tr>
+<th scope="col" style="text-align:right"><span class="math-inline" role="math">\(s\)</span></th>
+<th scope="col" style="text-align:right"><span class="math-inline" role="math">\(P_{0{,}3}(S=s)\)</span></th>
+<th scope="col" style="text-align:right"><span class="math-inline" role="math">\(P_{0{,}6}(S=s)\)</span></th>
+<th scope="col" style="text-align:right"><span class="math-inline" role="math">\(\Lambda(s)\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:right">0</td>
+<td style="text-align:right"><span class="math-inline" role="math">\(0{,}49\)</span></td>
+<td style="text-align:right"><span class="math-inline" role="math">\(0{,}16\)</span></td>
+<td style="text-align:right"><span class="math-inline" role="math">\(16/49\)</span></td>
+</tr>
+<tr>
+<td style="text-align:right">1</td>
+<td style="text-align:right"><span class="math-inline" role="math">\(0{,}42\)</span></td>
+<td style="text-align:right"><span class="math-inline" role="math">\(0{,}48\)</span></td>
+<td style="text-align:right"><span class="math-inline" role="math">\(8/7\)</span></td>
+</tr>
+<tr>
+<td style="text-align:right">2</td>
+<td style="text-align:right"><span class="math-inline" role="math">\(0{,}09\)</span></td>
+<td style="text-align:right"><span class="math-inline" role="math">\(0{,}36\)</span></td>
+<td style="text-align:right"><span class="math-inline" role="math">\(4\)</span></td>
+</tr>
+</tbody>
+</table>
 <p>Urutannya adalah <span class="math-inline" role="math">\(s=2\)</span>, lalu <span class="math-inline" role="math">\(s=1\)</span>, lalu <span class="math-inline" role="math">\(s=0\)</span>. Menolak hanya ketika <span class="math-inline" role="math">\(S=2\)</span>
-memberi size <span class="math-inline" role="math">\(0{,}09\)</span>, belum eksak <span class="math-inline" role="math">\(0{,}10\)</span>. Himpunan kesamaan berikutnya
+memberi ukuran <span class="math-inline" role="math">\(0{,}09\)</span>, belum eksak <span class="math-inline" role="math">\(0{,}10\)</span>. Himpunan kesamaan berikutnya
 adalah <span class="math-inline" role="math">\(S=1\)</span>, sehingga</p>
 <div class="math-display" role="math">\[\gamma=\frac{0{,}10-0{,}09}{0{,}42}=\frac1{42}.\]</div>
 <p>Uji MP menolak pasti ketika <span class="math-inline" role="math">\(S=2\)</span>, menolak dengan probabilitas <span class="math-inline" role="math">\(1/42\)</span> ketika
-<span class="math-inline" role="math">\(S=1\)</span>, dan menerima ketika <span class="math-inline" role="math">\(S=0\)</span>. Size dan power eksaknya adalah</p>
+<span class="math-inline" role="math">\(S=1\)</span>, dan menerima ketika <span class="math-inline" role="math">\(S=0\)</span>. Ukuran dan daya eksaknya adalah</p>
 <div class="math-display" role="math">\[\begin{aligned}
-E_{0,3}\varphi^*
+E_{0{,}3}\varphi^*
 &amp;=0{,}09+\frac1{42}(0{,}42)=0{,}10,\\
-E_{0,6}\varphi^*
+E_{0{,}6}\varphi^*
 &amp;=0{,}36+\frac1{42}(0{,}48)
 =\frac{13}{35}\approx0{,}37143.
 \end{aligned}\]</div>
-<p>Uji deterministik yang hanya menolak pada <span class="math-inline" role="math">\(S=2\)</span> mempunyai power <span class="math-inline" role="math">\(0{,}36\)</span>.
-Selisih power bukan galat pembulatan, melainkan size <span class="math-inline" role="math">\(0{,}01\)</span> yang secara sah
-dipakai pada lapisan likelihood berikutnya.</p>
+<p>Uji deterministik yang hanya menolak pada <span class="math-inline" role="math">\(S=2\)</span> mempunyai daya <span class="math-inline" role="math">\(0{,}36\)</span>.
+Selisih daya bukan galat pembulatan, melainkan ukuran <span class="math-inline" role="math">\(0{,}01\)</span> yang secara sah
+dipakai pada lapisan rasio fungsi kemungkinan berikutnya.</p>
 <p><a id="O006-C140-CMP-D006-EX02"></a></p>
-<h2>Contoh kontinu: mean normal dengan varians diketahui</h2>
+<h2>Contoh kontinu: rataan distribusi Normal dengan varians diketahui</h2>
 <p>Misalkan <span class="math-inline" role="math">\(X_1,\ldots,X_n\)</span> iid <span class="math-inline" role="math">\(N(\mu,\sigma^2)\)</span> dengan <span class="math-inline" role="math">\(\sigma\)</span> diketahui,
 dan uji <span class="math-inline" role="math">\(H_0:\mu=\mu_0\)</span> melawan <span class="math-inline" role="math">\(H_1:\mu=\mu_1\)</span> untuk
-<span class="math-inline" role="math">\(\mu_1&gt;\mu_0\)</span>. Log-rasio likelihood adalah</p>
+<span class="math-inline" role="math">\(\mu_1&gt;\mu_0\)</span>. Log-rasio fungsi kemungkinan adalah</p>
 <div class="math-display" role="math">\[\log\Lambda(x)
 =\frac{\mu_1-\mu_0}{\sigma^2}\sum_{i=1}^n x_i
 -\frac{n(\mu_1^2-\mu_0^2)}{2\sigma^2},\]</div>
 <p>yang meningkat ketat terhadap <span class="math-inline" role="math">\(\bar X\)</span>. Karena distribusi <span class="math-inline" role="math">\(\bar X\)</span> kontinu,
 tidak ada massa pada batas. Uji MP menolak bila</p>
 <div class="math-display" role="math">\[\bar X&gt;\mu_0+\frac{\sigma}{\sqrt n}z_{1-\alpha},\]</div>
-<p>dengan <span class="math-inline" role="math">\(z_q\)</span> kuantil ke-<span class="math-inline" role="math">\(q\)</span> normal standar. Di bawah mean umum <span class="math-inline" role="math">\(\mu\)</span>,</p>
+<p>dengan <span class="math-inline" role="math">\(z_q\)</span> kuantil ke-<span class="math-inline" role="math">\(q\)</span> Normal baku. Di bawah rataan umum <span class="math-inline" role="math">\(\mu\)</span>,</p>
 <div class="math-display" role="math">\[\beta(\mu)
 =1-\Phi\!\left(
 z_{1-\alpha}-\frac{\sqrt n(\mu-\mu_0)}{\sigma}
 \right).\]</div>
-<p>Rumus ini sekaligus membuktikan size <span class="math-inline" role="math">\(\beta(\mu_0)=\alpha\)</span> dan memberi power
+<p>Rumus ini sekaligus membuktikan ukuran <span class="math-inline" role="math">\(\beta(\mu_0)=\alpha\)</span> dan memberi daya
 eksak pada <span class="math-inline" role="math">\(\mu_1\)</span>. Perhitungan tidak memakai aproksimasi asimtotik.</p>
 <p><a id="O006-C140-CMP-D006-CTR01"></a></p>
 <h2>Mengapa MP tidak otomatis UMP: alternatif normal dua sisi</h2>
 <p>Ambil satu observasi <span class="math-inline" role="math">\(X\sim N(\mu,1)\)</span>, <span class="math-inline" role="math">\(H_0:\mu=0\)</span>, dan
 <span class="math-inline" role="math">\(H_1:\mu\neq0\)</span>, dengan <span class="math-inline" role="math">\(0&lt;\alpha&lt;1/2\)</span>. Terhadap alternatif sederhana
-<span class="math-inline" role="math">\(\mu=\mu_1&gt;0\)</span>, <a class="xref" data-target-id="O006-C140-CMP-D006-THM01" href="O006-C140-CMP-D006.html#O006-C140-CMP-D006-THM01">Lemma Neyman–Pearson dengan randomisasi pada kesamaan</a> dan ketunggalan rasio kontinu
+<span class="math-inline" role="math">\(\mu=\mu_1&gt;0\)</span>, <a class="xref" data-target-id="O006-C140-CMP-D006-THM01" href="O006-C140-CMP-D006.html#O006-C140-CMP-D006-THM01">Lemma Neyman–Pearson dengan randomisasi pada kesamaan</a> dan ketunggalan uji MP pada kasus rasio kontinu
 memaksa uji MP berbentuk <span class="math-inline" role="math">\(\mathbf1\{X&gt;z_{1-\alpha}\}\)</span>. Terhadap
 <span class="math-inline" role="math">\(\mu=-\mu_1\)</span>, uji MP yang unik berbentuk
 <span class="math-inline" role="math">\(\mathbf1\{X&lt;-z_{1-\alpha}\}\)</span>.</p>
 <p>Kedua fungsi uji berbeda pada himpunan dengan probabilitas positif di bawah
 <span class="math-inline" role="math">\(H_0\)</span>. Satu uji tidak dapat sama hampir pasti dengan keduanya. Maka tidak ada
-uji UMP berlevel <span class="math-inline" role="math">\(\alpha\)</span> untuk alternatif dua sisi ini. Uji dua sisi yang
-lazim dapat mempunyai sifat lain—misalnya UMP dalam kelas uji tak-bias pada
+uji UMP beraras <span class="math-inline" role="math">\(\alpha\)</span> untuk alternatif dua sisi ini. Uji dua sisi yang
+lazim dapat mempunyai sifat lain—misalnya UMP dalam kelas uji tak bias pada
 kondisi tertentu—tetapi klaim itu berbeda dan memerlukan pembatasan kelas
 pesaing yang dinyatakan terang-terangan.</p>
 <p><a id="O006-C140-CMP-D006-DEF03"></a></p>
-<h2>Monotone likelihood ratio</h2>
+<h2>Rasio fungsi kemungkinan monoton</h2>
 <p>Keluarga <span class="math-inline" role="math">\(\{P_\theta:\theta\in\Theta\subseteq\mathbb R\}\)</span> mempunyai
-<strong>monotone likelihood ratio</strong> dalam statistik <span class="math-inline" role="math">\(T=T(X)\)</span> bila, untuk setiap
+<strong>rasio fungsi kemungkinan monoton</strong> dalam statistik <span class="math-inline" role="math">\(T=T(X)\)</span> bila, untuk setiap
 <span class="math-inline" role="math">\(\theta_2&gt;\theta_1\)</span>, rasio</p>
 <div class="math-display" role="math">\[\frac{p_{\theta_2}(x)}{p_{\theta_1}(x)}=r_{\theta_2,\theta_1}\{T(x)\}\]</div>
-<p>dapat dipilih sebagai fungsi tak-menurun terhadap <span class="math-inline" role="math">\(T\)</span>. Support bersama dan
-dominasi terhadap ukuran yang sama termasuk dalam asumsi ini. Bentuk
+<p>dapat dipilih sebagai fungsi tak-menurun terhadap <span class="math-inline" role="math">\(T\)</span>. Asumsi ini juga mencakup
+himpunan dukungan bersama dan adanya satu ukuran yang mendominasi seluruh keluarga. Bentuk
 faktorisasi tersebut lebih kuat daripada sekadar mengatakan bahwa nilai MLE
 meningkat bersama <span class="math-inline" role="math">\(T\)</span>.</p>
 <p><a id="O006-C140-CMP-D006-THM02"></a></p>
@@ -203,7 +230,7 @@ tak-menurun <span class="math-inline" role="math">\(a(T)\)</span>, fungsi <span 
 <div class="math-display" role="math">\[2\operatorname{Cov}\{a(T),r(T)\}
 =E[(a(T)-a(T'))(r(T)-r(T'))]\]</div>
 <p>berlaku. Kedua selisih selalu bertanda sama karena <span class="math-inline" role="math">\(a\)</span> dan <span class="math-inline" role="math">\(r\)</span> tak-menurun;
-hasil kalinya nonnegatif. Jadi kovarians dan selisih ekspektasi di atas
+hasil kalinya nonnegatif. Jadi kovarians dan selisih nilai harapan di atas
 nonnegatif. ∎</p>
 <p><a id="O006-C140-CMP-D006-THM03"></a></p>
 <h2>Jalur MLR menuju uji UMP satu sisi</h2>
@@ -215,23 +242,24 @@ H_1:\theta&gt;\theta_0.\]</div>
 <div class="math-display" role="math">\[\varphi^*(X)=\mathbf1\{T&gt;c\}+\gamma\mathbf1\{T=c\}
 \quad\text{memenuhi}\quad
 E_{\theta_0}\varphi^*=\alpha.\]</div>
-<p>Maka <span class="math-inline" role="math">\(\varphi^*\)</span> adalah uji UMP berlevel <span class="math-inline" role="math">\(\alpha\)</span> untuk alternatif satu sisi
+<p>Maka <span class="math-inline" role="math">\(\varphi^*\)</span> adalah uji UMP beraras <span class="math-inline" role="math">\(\alpha\)</span> untuk alternatif satu sisi
 tersebut.</p>
 <p><a id="O006-C140-CMP-D006-PRF03"></a></p>
 <h3>Bukti</h3>
 <p>Fungsi <span class="math-inline" role="math">\(t\mapsto\mathbf1\{t&gt;c\}+\gamma\mathbf1\{t=c\}\)</span> tak-menurun. Oleh
 <a class="xref" data-target-id="O006-C140-CMP-D006-THM02" href="O006-C140-CMP-D006.html#O006-C140-CMP-D006-THM02">Lemma urutan stokastik dari MLR</a>, untuk setiap <span class="math-inline" role="math">\(\theta\leq\theta_0\)</span>,</p>
 <div class="math-display" role="math">\[E_\theta\varphi^*\leq E_{\theta_0}\varphi^*=\alpha,\]</div>
-<p>sehingga uji memang berlevel <span class="math-inline" role="math">\(\alpha\)</span> untuk seluruh nol komposit. Sekarang
+<p>sehingga uji memang beraras <span class="math-inline" role="math">\(\alpha\)</span> untuk semua <span class="math-inline" role="math">\(\theta\)</span> dalam hipotesis nol
+komposit. Sekarang
 tetapkan sembarang <span class="math-inline" role="math">\(\theta_1&gt;\theta_0\)</span>. Rasio
 <span class="math-inline" role="math">\(p_{\theta_1}/p_{\theta_0}\)</span> tak-menurun terhadap <span class="math-inline" role="math">\(T\)</span>, sehingga daerah dengan
 rasio terbesar adalah ekor atas <span class="math-inline" role="math">\(T\)</span>; randomisasi, bila perlu, hanya terjadi
 pada lapisan rasio yang sama. Menurut
 <a class="xref" data-target-id="O006-C140-CMP-D006-THM01" href="O006-C140-CMP-D006.html#O006-C140-CMP-D006-THM01">Lemma Neyman–Pearson dengan randomisasi pada kesamaan</a>, <span class="math-inline" role="math">\(\varphi^*\)</span> adalah MP untuk
 <span class="math-inline" role="math">\(\theta_0\)</span> melawan titik <span class="math-inline" role="math">\(\theta_1\)</span>.</p>
-<p>Setiap pesaing yang berlevel <span class="math-inline" role="math">\(\alpha\)</span> untuk nol komposit khususnya memenuhi
+<p>Setiap pesaing yang beraras <span class="math-inline" role="math">\(\alpha\)</span> untuk nol komposit khususnya memenuhi
 <span class="math-inline" role="math">\(E_{\theta_0}\varphi\leq\alpha\)</span>. Karena argumen MP berlaku untuk setiap
-<span class="math-inline" role="math">\(\theta_1&gt;\theta_0\)</span> dengan uji <span class="math-inline" role="math">\(\varphi^*\)</span> yang sama, power <span class="math-inline" role="math">\(\varphi^*\)</span> tidak
+<span class="math-inline" role="math">\(\theta_1&gt;\theta_0\)</span> dengan uji <span class="math-inline" role="math">\(\varphi^*\)</span> yang sama, daya <span class="math-inline" role="math">\(\varphi^*\)</span> tidak
 lebih kecil pada setiap titik alternatif. Itulah tepatnya sifat UMP. ∎</p>
 <p><a id="O006-C140-CMP-D006-EX03"></a></p>
 <h2>Contoh MLR: uji binomial satu sisi</h2>
@@ -247,10 +275,10 @@ lebih kecil pada setiap titik alternatif. Itulah tepatnya sifat UMP. ∎</p>
 <p>dan, bila <span class="math-inline" role="math">\(P_{p_0}(S=c)&gt;0\)</span>, gunakan</p>
 <div class="math-display" role="math">\[\gamma=
 \frac{\alpha-P_{p_0}(S&gt;c)}{P_{p_0}(S=c)}.\]</div>
-<p>Fungsi power eksaknya, bukan aproksimasi normal, adalah</p>
+<p>Fungsi daya eksaknya, bukan aproksimasi Normal, adalah</p>
 <div class="math-display" role="math">\[\beta(p)=P_p(S&gt;c)+\gamma P_p(S=c).\]</div>
 <p>Teorema <a class="xref" data-target-id="O006-C140-CMP-D006-THM03" href="O006-C140-CMP-D006.html#O006-C140-CMP-D006-THM03">Jalur MLR menuju uji UMP satu sisi</a> membuktikan bahwa uji yang sama UMP
-untuk semua <span class="math-inline" role="math">\(p&gt;p_0\)</span>. Contoh <a class="xref" data-target-id="O006-C140-CMP-D006-EX01" href="O006-C140-CMP-D006.html#O006-C140-CMP-D006-EX01">Contoh diskret: size eksak memerlukan randomisasi</a> adalah kasus
+untuk semua <span class="math-inline" role="math">\(p&gt;p_0\)</span>. Contoh <a class="xref" data-target-id="O006-C140-CMP-D006-EX01" href="O006-C140-CMP-D006.html#O006-C140-CMP-D006-EX01">Contoh diskret: ukuran eksak memerlukan randomisasi</a> adalah kasus
 <span class="math-inline" role="math">\(n=2\)</span>, <span class="math-inline" role="math">\(p_0=0{,}3\)</span>, dan satu titik alternatif <span class="math-inline" role="math">\(p=0{,}6\)</span>.</p>
 <p><a id="O006-C140-CMP-D006-EX04"></a></p>
 <h2>Contoh MLR: hitungan Poisson</h2>
@@ -261,7 +289,7 @@ untuk semua <span class="math-inline" role="math">\(p&gt;p_0\)</span>. Contoh <a
 \left(\frac{\lambda_2}{\lambda_1}\right)^s,\]</div>
 <p>yang meningkat terhadap <span class="math-inline" role="math">\(s\)</span>. Uji ekor atas teracak pada satu nilai batas
 karena itu UMP untuk <span class="math-inline" role="math">\(H_0:\lambda\leq\lambda_0\)</span> melawan
-<span class="math-inline" role="math">\(H_1:\lambda&gt;\lambda_0\)</span>. Size dan power dapat dihitung langsung dari fungsi
+<span class="math-inline" role="math">\(H_1:\lambda&gt;\lambda_0\)</span>. Ukuran dan daya dapat dihitung langsung dari fungsi
 massa Poisson:</p>
 <div class="math-display" role="math">\[\beta(\lambda)=
 1-\sum_{s=0}^{c}\frac{e^{-n\lambda}(n\lambda)^s}{s!}
@@ -272,22 +300,22 @@ mencegah penghitungan ganda pada <span class="math-inline" role="math">\(S=c\)</
 <p><a id="O006-C140-CMP-D006-REM02"></a></p>
 <h2>Batas penerapan</h2>
 <ol>
-<li><strong>Parameter nuisance.</strong> Jika rasio likelihood masih bergantung pada
-parameter nuisance setelah <span class="math-inline" role="math">\(T\)</span> ditetapkan, bukti MLR di atas tidak berlaku.
+<li><strong>Parameter pengganggu.</strong> Jika rasio fungsi kemungkinan masih bergantung pada
+parameter pengganggu setelah <span class="math-inline" role="math">\(T\)</span> ditetapkan, bukti MLR di atas tidak berlaku.
 Pengondisian, invariansi, atau pembatasan kelas uji memerlukan teorema lain.</li>
 <li><strong>Alternatif dua sisi.</strong> Dua arah sering memerlukan daerah penolakan yang
 berlawanan, seperti <a class="xref" data-target-id="O006-C140-CMP-D006-CTR01" href="O006-C140-CMP-D006.html#O006-C140-CMP-D006-CTR01">Mengapa MP tidak otomatis UMP: alternatif normal dua sisi</a>. Menjumlahkan dua uji MP
 satu sisi tidak menghasilkan klaim UMP tanpa bukti baru.</li>
-<li><strong>Support berubah.</strong> Definisi rasio diperluas menangani dua distribusi
+<li><strong>Himpunan dukungan berubah.</strong> Definisi rasio diperluas menangani dua distribusi
 sederhana, tetapi teorema MLR komposit memerlukan urutan yang konsisten pada
-support bersama. Support yang bergantung parameter dapat merusak urutan
+himpunan dukungan bersama. Himpunan dukungan yang bergantung parameter dapat merusak urutan
 stokastik.</li>
-<li><strong>Level konservatif.</strong> Uji diskret tanpa randomisasi boleh dipilih demi
-kemudahan operasional, tetapi size-nya biasanya lebih kecil daripada
-<span class="math-inline" role="math">\(\alpha\)</span> dan power-nya tidak sama dengan optimum teracak pada kelas penuh.</li>
-<li><strong>Optimal tidak berarti tahan salah-spesifikasi.</strong> Neyman–Pearson
-mengoptimalkan power di dalam model dan hipotesis yang dinyatakan. Ia tidak
-menjamin robustnes terhadap distribusi yang keliru.</li>
+<li><strong>Aras konservatif.</strong> Uji diskret tanpa randomisasi boleh dipilih demi
+kemudahan operasional, tetapi ukurannya biasanya lebih kecil daripada
+<span class="math-inline" role="math">\(\alpha\)</span> dan dayanya tidak sama dengan optimum teracak pada kelas penuh.</li>
+<li><strong>Optimal tidak berarti tahan terhadap kesalahan spesifikasi.</strong> Neyman–Pearson
+mengoptimalkan daya di dalam model dan hipotesis yang dinyatakan. Ia tidak
+menjamin ketahanan terhadap distribusi yang keliru.</li>
 </ol>
 <p><a id="O006-C140-CMP-D006-ALG01"></a></p>
 <h2>Prosedur audit untuk klaim “uji optimal”</h2>
@@ -295,32 +323,34 @@ menjamin robustnes terhadap distribusi yang keliru.</li>
 <ol>
 <li>Nyatakan <span class="math-inline" role="math">\(\Theta_0\)</span>, <span class="math-inline" role="math">\(\Theta_1\)</span>, dan kelas uji pesaing, termasuk apakah
 randomisasi diizinkan.</li>
-<li>Tulis size sebagai supremum atas seluruh <span class="math-inline" role="math">\(\Theta_0\)</span>, bukan hanya pada satu
+<li>Tulis ukuran sebagai supremum atas seluruh <span class="math-inline" role="math">\(\Theta_0\)</span>, bukan hanya pada satu
 nilai yang nyaman.</li>
-<li>Bekukan ukuran dominasi dan support; definisikan rasio ketika <span class="math-inline" role="math">\(p_0=0\)</span>.</li>
-<li>Untuk MP sederhana, urutkan ruang sampel menurut <span class="math-inline" role="math">\(p_1/p_0\)</span> dan isi size dari
-rasio terbesar; randomisasikan hanya pada lapisan kesamaan.</li>
-<li>Hitung size dan power dengan distribusi eksak bila tersedia.</li>
+<li>Tetapkan ukuran pendominasi dan himpunan dukungan bersama; definisikan rasio
+ketika <span class="math-inline" role="math">\(p_0=0\)</span>.</li>
+<li>Untuk MP sederhana, urutkan ruang sampel menurut <span class="math-inline" role="math">\(p_1/p_0\)</span>, lalu alokasikan
+peluang penolakan mulai dari rasio terbesar hingga batas ukuran tercapai;
+randomisasikan hanya pada lapisan kesamaan.</li>
+<li>Hitung ukuran dan daya dengan distribusi eksak bila tersedia.</li>
 <li>Untuk UMP, tunjukkan bahwa satu daerah penolakan yang sama adalah MP untuk
 setiap titik alternatif. MLR satu-parameter plus urutan stokastik adalah
 satu cara, bukan satu-satunya cara.</li>
-<li>Catat parameter nuisance, perubahan support, batas parameter, dan arah
+<li>Catat parameter pengganggu, perubahan himpunan dukungan, batas parameter, dan arah
 alternatif yang dapat membatalkan argumen.</li>
 </ol>
 <p><a id="O006-C140-CMP-D006-SEC02"></a></p>
 <h2>Ringkasan hasil yang dapat dipakai kembali</h2>
 <ul>
 <li>Lemma Neyman–Pearson membandingkan dua hipotesis sederhana dan mengurutkan
-observasi menurut rasio likelihood.</li>
-<li>Randomisasi pada <span class="math-inline" role="math">\(\Lambda=c\)</span> membuat size diskret eksak dan tetap berada
+observasi menurut rasio fungsi kemungkinan.</li>
+<li>Randomisasi pada <span class="math-inline" role="math">\(\Lambda=c\)</span> membuat ukuran diskret eksak dan tetap berada
 dalam kelas uji MP.</li>
-<li>MP mempunyai satu titik alternatif; UMP memakai satu uji untuk setiap titik
+<li>Optimalitas MP ditetapkan untuk satu titik alternatif; UMP memakai satu uji untuk setiap titik
 alternatif komposit.</li>
-<li>MLR membuat power setiap fungsi penolakan yang tak-menurun terhadap statistik
+<li>MLR membuat daya setiap fungsi penolakan yang tak-menurun terhadap statistik
 <span class="math-inline" role="math">\(T\)</span> menjadi tak-menurun terhadap parameter dan
 mengubah uji ekor satu sisi menjadi UMP di bawah asumsi yang dinyatakan.</li>
-<li>Ketiadaan MLR, adanya nuisance, atau alternatif dua sisi berarti klaim UMP
-harus dibuktikan dengan argumen lain atau ditolak.</li>
+<li>Ketiadaan MLR, adanya parameter pengganggu, atau alternatif dua sisi berarti klaim UMP
+memerlukan argumen lain dan tidak boleh diterima tanpa bukti tersebut.</li>
 </ul>
 <p>Materi ini adalah prosa orisinal CC BY-SA 4.0. Ia tidak mengubah atau
 menyamarkan materi Penn State maupun donor <em>Random</em>.</p>

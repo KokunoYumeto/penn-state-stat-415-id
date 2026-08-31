@@ -4,57 +4,58 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="generator" content="OpenAI Codex gpt-5.6-sol, Ultra">
-<title>Loss, risk, efisiensi, Rao–Blackwell, dan Lehmann–Scheffé</title>
+<title>Kerugian, risiko, efisiensi, Rao–Blackwell, dan Lehmann–Scheffé</title>
 <link rel="stylesheet" href="../assets/style.css">
 <script>window.MathJax={loader:{load:['[tex]/boldsymbol']},tex:{packages:{'[+]':['boldsymbol']},inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']]},svg:{fontCache:'local'}};</script>
 <script defer src="../assets/MathJax/tex-svg.js"></script>
 </head>
 <body>
+<a class="skip-link" href="#main-content">Langsung ke isi utama</a>
 <div class="shell">
-<nav class="sidebar" aria-label="Daftar isi pendamping"><h2>Isi pendamping</h2><ol><li><a href="../index.html">Pendamping Orisinal Statistika Matematis</a></li><li><a href="O006-C140-CMP-D001.html">Model parametrik reguler, skor, dan informasi Fisher</a></li><li><a href="O006-C140-CMP-D002.html">Konsistensi MLE: identifikasi Kullback–Leibler dan teorema argmax</a></li><li><a href="O006-C140-CMP-D003.html">Likelihood kuadratik lokal, normalitas asimtotik, dan delta method</a></li><li><a href="O006-C140-CMP-D004.html">Prosedur Wald, skor, dan rasio likelihood</a></li><li><a href="O006-C140-CMP-D005.html">Likelihood nonreguler: empat mekanisme kegagalan</a></li><li><a href="O006-C140-CMP-D006.html">Optimalitas pengujian: Neyman–Pearson, MP, UMP, dan rasio likelihood monoton</a></li><li><a href="O006-C140-CMP-D007.html">Loss, risk, efisiensi, Rao–Blackwell, dan Lehmann–Scheffé</a></li><li><a href="O006-C140-CMP-D008.html">Model linear Gaussian desain tetap dan geometri proyeksi</a></li><li><a href="O006-C140-CMP-D009.html">OLS, MLE Gaussian, dan teorema Gauss–Markov pada rancangan tetap</a></li><li><a href="O006-C140-CMP-D010.html">Inferensi Gaussian eksak: proyeksi, t, F, ANOVA, dan prediksi</a></li><li><a href="O006-C140-CMP-D011.html">Diagnostik, leverage, misspesifikasi, dan inferensi pascaseleksi</a></li><li><a href="O006-C140-CMP-D012.html">Inferensi Bayesian sebagai pembaruan dan keputusan yang koheren</a></li><li><a href="O006-C140-CMP-D013.html">Perbandingan Bayesian–frequentist: keputusan, cakupan, dan kalibrasi</a></li><li><a href="../simulations/O006-C140-CMP-SIM001.html">Model lokasi normal: MLE, coverage, dan tiga statistik uji</a></li><li><a href="../simulations/O006-C140-CMP-SIM002.html">Delta method pada titik reguler dan titik dengan turunan nol</a></li><li><a href="../simulations/O006-C140-CMP-SIM003.html">Endpoint Uniform: laju nonreguler dan kegagalan bootstrap biasa</a></li><li><a href="../simulations/O006-C140-CMP-SIM004.html">Uji Neyman–Pearson teracak dengan size tepat</a></li><li><a href="../simulations/O006-C140-CMP-SIM005.html">Model linear matriks: coverage, heteroskedastisitas, dan pengaruh</a></li><li><a href="../simulations/O006-C140-CMP-SIM006.html">Kalibrasi selang Bayesian dan frequentist pada model binomial</a></li><li><a href="../mastery/O006-C140-CMP-MS00.html">Set penguasaan 00 — probabilitas, distribusi, dan ekspektasi (diagnostik C140)</a></li><li><a href="../mastery/O006-C140-CMP-MS01.html">Set penguasaan 01 — statistik urutan dan distribusi sampel</a></li><li><a href="../mastery/O006-C140-CMP-MS02.html">Set penguasaan 02 — estimasi, bias, MSE, dan sifat estimator</a></li><li><a href="../mastery/O006-C140-CMP-MS03.html">Set penguasaan 03 — kecukupan, faktorisasi, kelengkapan, dan statistik ancillary</a></li><li><a href="../mastery/O006-C140-CMP-MS04.html">Set penguasaan 04 — metode momen dan dasar kemungkinan maksimum</a></li><li><a href="../mastery/O006-C140-CMP-MS05.html">Set penguasaan 05 — informasi Fisher, interval kepercayaan, bootstrap, dan delta method</a></li><li><a href="../mastery/O006-C140-CMP-MS06.html">Set penguasaan 06 — pengujian hipotesis, daya, p-value, dan jembatan likelihood</a></li><li><a href="../mastery/O006-C140-CMP-MS07.html">Set penguasaan 07 — regularitas, konsistensi, dan normalitas MLE</a></li><li><a href="../mastery/O006-C140-CMP-MS08.html">Set penguasaan 08 — Wald, skor, rasio likelihood, dan diagnosis nonregular</a></li><li><a href="../mastery/O006-C140-CMP-MS09.html">Set penguasaan 09 — pengujian eksak dan optimalitas Neyman–Pearson</a></li><li><a href="../mastery/O006-C140-CMP-MS10.html">Set penguasaan 10 — uji likelihood asimtotik, risk, dan perbaikan estimator</a></li><li><a href="../mastery/O006-C140-CMP-MS11.html">Set penguasaan 11 — pembaruan Bayesian, keputusan, dan kalibrasi</a></li><li><a href="../mastery/O006-C140-CMP-MS12.html">Set penguasaan 12 — model linear Gaussian matriks, inferensi eksak, dan diagnostik</a></li><li><a href="../assessments/O006-C140-CMP-CA01.html">Asesmen kumulatif C1: likelihood, optimalitas, dan keputusan statistik</a></li></ol></nav>
-<main>
+<nav class="sidebar" aria-labelledby="companion-nav-title"><p class="nav-title" id="companion-nav-title">Isi pendamping</p><ol><li><a href="../index.html">Pendamping Orisinal Statistika Matematis</a></li><li><a href="O006-C140-CMP-D001.html">Model parametrik reguler, skor, dan informasi Fisher</a></li><li><a href="O006-C140-CMP-D002.html">Konsistensi MLE: identifikasi Kullback–Leibler dan teorema argmax</a></li><li><a href="O006-C140-CMP-D003.html">Ekspansi kuadratik lokal fungsi log-kemungkinan, normalitas asimtotik, dan metode delta</a></li><li><a href="O006-C140-CMP-D004.html">Prosedur Wald, skor, dan rasio fungsi kemungkinan</a></li><li><a href="O006-C140-CMP-D005.html">Fungsi kemungkinan nonreguler: empat mekanisme kegagalan</a></li><li><a href="O006-C140-CMP-D006.html">Optimalitas pengujian: Neyman–Pearson, MP, UMP, dan rasio fungsi kemungkinan monoton</a></li><li><a href="O006-C140-CMP-D007.html" aria-current="page">Kerugian, risiko, efisiensi, Rao–Blackwell, dan Lehmann–Scheffé</a></li><li><a href="O006-C140-CMP-D008.html">Model linear Gaussian berdesain tetap dan geometri proyeksi</a></li><li><a href="O006-C140-CMP-D009.html">OLS, MLE Gaussian, dan teorema Gauss–Markov pada desain tetap</a></li><li><a href="O006-C140-CMP-D010.html">Inferensi Gaussian eksak: proyeksi, t, F, ANOVA, dan prediksi</a></li><li><a href="O006-C140-CMP-D011.html">Diagnostik, daya ungkit, kesalahan spesifikasi, dan inferensi pascaseleksi</a></li><li><a href="O006-C140-CMP-D012.html">Inferensi Bayesian sebagai pembaruan dan keputusan yang koheren</a></li><li><a href="O006-C140-CMP-D013.html">Perbandingan Bayesian–frekuentis: keputusan, cakupan, dan kalibrasi</a></li><li><a href="../simulations/O006-C140-CMP-SIM001.html">Model lokasi normal: MLE, cakupan, dan tiga statistik uji</a></li><li><a href="../simulations/O006-C140-CMP-SIM002.html">Metode delta pada titik reguler dan titik dengan turunan nol</a></li><li><a href="../simulations/O006-C140-CMP-SIM003.html">Distribusi seragam pada batas dukungan: laju nonreguler dan kegagalan bootstrap biasa</a></li><li><a href="../simulations/O006-C140-CMP-SIM004.html">Uji Neyman–Pearson teracak dengan ukuran uji tepat</a></li><li><a href="../simulations/O006-C140-CMP-SIM005.html">Model linear matriks: cakupan, heteroskedastisitas, dan pengaruh</a></li><li><a href="../simulations/O006-C140-CMP-SIM006.html">Kalibrasi selang Bayesian dan frekuentis pada model binomial</a></li><li><a href="../mastery/O006-C140-CMP-MS00.html">Set penguasaan 00 — probabilitas, distribusi, dan ekspektasi (diagnostik C140)</a></li><li><a href="../mastery/O006-C140-CMP-MS01.html">Set penguasaan 01 — statistik urutan dan distribusi sampel</a></li><li><a href="../mastery/O006-C140-CMP-MS02.html">Set penguasaan 02 — estimasi, bias, MSE, dan sifat penduga</a></li><li><a href="../mastery/O006-C140-CMP-MS03.html">Set penguasaan 03 — kecukupan, faktorisasi, kelengkapan, dan statistik aksesori</a></li><li><a href="../mastery/O006-C140-CMP-MS04.html">Set penguasaan 04 — metode momen dan dasar kemungkinan maksimum</a></li><li><a href="../mastery/O006-C140-CMP-MS05.html">Set penguasaan 05 — informasi Fisher, interval kepercayaan, bootstrap, dan metode delta</a></li><li><a href="../mastery/O006-C140-CMP-MS06.html">Set penguasaan 06 — pengujian hipotesis, daya, nilai-p, dan jembatan ke teori fungsi kemungkinan</a></li><li><a href="../mastery/O006-C140-CMP-MS07.html">Set penguasaan 07 — keteraturan, konsistensi, dan normalitas MLE</a></li><li><a href="../mastery/O006-C140-CMP-MS08.html">Set penguasaan 08 — Wald, skor, rasio fungsi kemungkinan, dan diagnosis nonreguler</a></li><li><a href="../mastery/O006-C140-CMP-MS09.html">Set penguasaan 09 — pengujian eksak dan optimalitas Neyman–Pearson</a></li><li><a href="../mastery/O006-C140-CMP-MS10.html">Set penguasaan 10 — uji fungsi kemungkinan asimtotik, risiko, dan perbaikan penduga</a></li><li><a href="../mastery/O006-C140-CMP-MS11.html">Set penguasaan 11 — pembaruan Bayesian, keputusan, dan kalibrasi</a></li><li><a href="../mastery/O006-C140-CMP-MS12.html">Set penguasaan 12 — model linear Gaussian dalam bentuk matriks, inferensi eksak, dan diagnostik</a></li><li><a href="../assessments/O006-C140-CMP-CA01.html">Asesmen kumulatif C1: fungsi kemungkinan, optimalitas, dan keputusan statistik</a></li><li><a href="../assessments/O006-C140-CMP-CA02.html">Asesmen kumulatif CA02 — fondasi inferensi sampel berhingga</a></li><li><a href="../assessments/O006-C140-CMP-CA03.html">Asesmen kumulatif CA03 — model linear dalam bentuk matriks, inferensi eksak, dan diagnostik</a></li><li><a href="../assessments/O006-C140-CMP-CA04.html">Asesmen kumulatif CA04 — sintesis Bayesian–frekuentis</a></li><li><a href="../capstones/O006-C140-CMP-CP01.html">Proyek akhir integratif CP01 — regresi data terbuka untuk kuat tekan beton</a></li><li><a href="../capstones/O006-C140-CMP-CP02.html">Proyek akhir CP02 — perbandingan Bayesian–frekuentis pada data agregat kecenderungan bersarang greater sage-grouse</a></li></ol></nav>
+<main id="main-content" tabindex="-1">
 <div class="metadata"><strong>O006-C140-CMP-D007</strong> · id-ID · CC BY-SA 4.0 · OpenAI Codex gpt-5.6-sol, Ultra</div>
 <p><a id="O006-C140-CMP-D007-SEC01"></a></p>
 <h1>Keputusan statistik dan ukuran mutu</h1>
 <p>Satu prosedur tidak dapat disebut “terbaik” sebelum kita menentukan kerugian
 apa yang dihitung dan kelas pesaing apa yang diizinkan. Varians saja tidak
-cukup ketika estimator bias; ketakbiasan saja tidak cukup ketika loss bukan
-kuadratik; dan UMVU bukan sinonim dari <em>admissible</em>. Bab ini membangun bahasa
+cukup ketika penduga bias; ketakbiasan saja tidak cukup ketika kerugian bukan
+kuadratik; dan UMVU bukan sinonim dari <em>admisibel</em>. Bab ini membangun bahasa
 keputusan yang memisahkan klaim-klaim tersebut, lalu membuktikan dua hasil
 perbaikan utama: Rao–Blackwell dan Lehmann–Scheffé.</p>
 <p>Donor satu halaman <em>Random</em> menyediakan simpul rujukan untuk kecukupan,
-kelengkapan, dan teorema terkait <a class="xref external" data-target-id="O006-016-00-0001" href="https://kokunoyumeto.github.io/penn-state-stat-415-id/components/random-completeness/">Sufficient, Complete and Ancillary Statistics</a>. Uraian, bukti, serta
-contoh di sini ditulis secara orisinal dan menghubungkan hasil itu dengan loss
-dan risk; prosa donor tidak disalin.</p>
+kelengkapan, dan teorema terkait <a class="xref external" data-target-id="O006-016-00-0001" href="https://kokunoyumeto.github.io/penn-state-stat-415-id/components/random-completeness/random/point/Sufficient.html">Statistik Cukup, Lengkap, dan Ancillary</a>. Uraian, bukti, serta
+contoh di sini ditulis secara orisinal dan menghubungkan hasil itu dengan kerugian
+dan risiko; prosa donor tidak disalin.</p>
 <p><a id="O006-C140-CMP-D007-DEF01"></a></p>
-<h2>Aturan keputusan, loss, dan risk</h2>
+<h2>Aturan keputusan, kerugian, dan risiko</h2>
 <p>Misalkan <span class="math-inline" role="math">\(X\sim P_\theta\)</span>, ruang tindakan <span class="math-inline" role="math">\(\mathcal A\)</span>, dan aturan keputusan
-<span class="math-inline" role="math">\(\delta:\mathcal X\to\mathcal A\)</span>. Fungsi loss</p>
+<span class="math-inline" role="math">\(\delta:\mathcal X\to\mathcal A\)</span>. Fungsi kerugian</p>
 <div class="math-display" role="math">\[L:\Theta\times\mathcal A\longrightarrow[0,\infty]\]</div>
 <p>menilai kerugian ketika parameter sebenarnya <span class="math-inline" role="math">\(\theta\)</span> dan tindakan yang
-diambil <span class="math-inline" role="math">\(a\)</span>. <strong>Risk frequentist</strong> aturan <span class="math-inline" role="math">\(\delta\)</span> adalah fungsi parameter</p>
+diambil <span class="math-inline" role="math">\(a\)</span>. <strong>Risiko frekuentis</strong> aturan <span class="math-inline" role="math">\(\delta\)</span> adalah fungsi parameter</p>
 <div class="math-display" role="math">\[R(\theta,\delta)=E_\theta L\{\theta,\delta(X)\},\]</div>
-<p>selama ekspektasi terdefinisi. Risk adalah fungsi, bukan satu angka. Dua aturan
-dapat berurutan berbeda pada dua nilai <span class="math-inline" role="math">\(\theta\)</span>, sehingga pernyataan “risk
+<p>selama ekspektasi terdefinisi. Risiko adalah fungsi, bukan satu angka. Dua aturan
+dapat memiliki urutan yang berbeda pada dua nilai <span class="math-inline" role="math">\(\theta\)</span>, sehingga pernyataan “risiko
 lebih kecil” harus menyebut apakah berlaku pada satu titik, rata-rata terhadap
 prior, atau seragam untuk semua <span class="math-inline" role="math">\(\theta\)</span>.</p>
-<p>Untuk estimasi <span class="math-inline" role="math">\(g(\theta)\)</span> dengan tindakan real, loss kuadratik ialah</p>
+<p>Untuk pendugaan <span class="math-inline" role="math">\(g(\theta)\)</span> dengan tindakan bernilai riil, kerugian kuadratik ialah</p>
 <div class="math-display" role="math">\[L(\theta,a)=\{a-g(\theta)\}^2,\]</div>
-<p>dan risk-nya sama dengan mean squared error (MSE):</p>
+<p>dan risikonya sama dengan rataan kuadrat galat (MSE):</p>
 <div class="math-display" role="math">\[R(\theta,\delta)=\operatorname{MSE}_\theta(\delta)
 =E_\theta[\{\delta(X)-g(\theta)\}^2].\]</div>
-<p>Pengujian pada <a class="xref" data-target-id="O006-C140-CMP-D006-DEF01" href="O006-C140-CMP-D006.html#O006-C140-CMP-D006-DEF01">Uji teracak, size, dan power</a> juga merupakan masalah
+<p>Pengujian pada <a class="xref" data-target-id="O006-C140-CMP-D006-DEF01" href="O006-C140-CMP-D006.html#O006-C140-CMP-D006-DEF01">Uji teracak, ukuran, dan daya</a> juga merupakan masalah
 keputusan, dengan tindakan “tolak” atau “jangan tolak”. Namun optimalitas
-Neyman–Pearson menahan risk kesalahan tipe I melalui kendala level dan kemudian
-mengoptimalkan power; itu bukan otomatis solusi Bayes untuk suatu loss tanpa
-kendala.</p>
+Neyman–Pearson mengendalikan risiko galat tipe I melalui kendala aras dan kemudian
+mengoptimalkan daya uji; hal itu tidak serta-merta menghasilkan solusi Bayes bagi
+masalah keputusan tanpa kendala dengan suatu fungsi kerugian.</p>
 <p><a id="O006-C140-CMP-D007-DEF02"></a></p>
 <h2>Bias, varians, dan MSE</h2>
 <p>Tuliskan</p>
 <div class="math-display" role="math">\[m_\delta(\theta)=E_\theta\delta(X),
 \qquad
 b_\delta(\theta)=m_\delta(\theta)-g(\theta).\]</div>
-<p>Estimator tak-bias memenuhi <span class="math-inline" role="math">\(b_\delta(\theta)=0\)</span> untuk setiap
+<p>Penduga tak bias memenuhi <span class="math-inline" role="math">\(b_\delta(\theta)=0\)</span> untuk setiap
 <span class="math-inline" role="math">\(\theta\)</span> yang sedang dibahas.</p>
 <p><a id="O006-C140-CMP-D007-THM01"></a></p>
 <h3>Dekomposisi bias–varians</h3>
@@ -69,13 +70,13 @@ b_\delta(\theta)=m_\delta(\theta)-g(\theta).\]</div>
 <p>Setelah dikuadratkan dan diambil ekspektasinya, suku silang menghilang karena
 <span class="math-inline" role="math">\(E_\theta\{\delta-m_\delta(\theta)\}=0\)</span>. Dua suku yang tersisa adalah varians
 dan kuadrat bias. ∎</p>
-<p>Identitas ini menunjukkan kesalahan umum: estimator bias dengan varians kecil
-belum tentu mempunyai MSE kecil, sedangkan estimator dengan varians lebih
+<p>Identitas ini menunjukkan kesalahan umum: penduga bias dengan varians kecil
+belum tentu mempunyai MSE kecil, sedangkan penduga dengan varians lebih
 besar dapat mempunyai MSE lebih kecil jika bias pesaing cukup besar.</p>
 <p><a id="O006-C140-CMP-D007-EX01"></a></p>
-<h2>Contoh risk yang bersilangan: penyusutan mean normal</h2>
+<h2>Contoh risiko yang bersilangan: penyusutan rataan distribusi Normal</h2>
 <p>Misalkan <span class="math-inline" role="math">\(X_1,\ldots,X_n\)</span> iid <span class="math-inline" role="math">\(N(\theta,\sigma^2)\)</span> dengan <span class="math-inline" role="math">\(\sigma\)</span> diketahui,
-dan bandingkan <span class="math-inline" role="math">\(\bar X\)</span> dengan <span class="math-inline" role="math">\(\delta_c=c\bar X\)</span> untuk <span class="math-inline" role="math">\(0&lt;c&lt;1\)</span>. Di bawah loss
+dan bandingkan <span class="math-inline" role="math">\(\bar X\)</span> dengan <span class="math-inline" role="math">\(\delta_c=c\bar X\)</span> untuk <span class="math-inline" role="math">\(0&lt;c&lt;1\)</span>. Di bawah kerugian
 kuadratik untuk <span class="math-inline" role="math">\(g(\theta)=\theta\)</span>,</p>
 <div class="math-display" role="math">\[R(\theta,\bar X)=\frac{\sigma^2}{n},\]</div>
 <p>sedangkan</p>
@@ -90,36 +91,36 @@ mengapa pembandingan varians saja menyesatkan: bias <span class="math-inline" ro
 bersama parameter.</p>
 <p><a id="O006-C140-CMP-D007-DEF03"></a></p>
 <h2>Efisiensi: selalu relatif terhadap pembanding</h2>
-<p>Untuk dua estimator dari target yang sama di bawah loss kuadratik, efisiensi
+<p>Untuk dua penduga dari target yang sama di bawah kerugian kuadratik, efisiensi
 MSE berpasangan dapat didefinisikan sebagai</p>
 <div class="math-display" role="math">\[\operatorname{Eff}_\theta(\delta_1;\delta_2)
 =\frac{\operatorname{MSE}_\theta(\delta_2)}
 {\operatorname{MSE}_\theta(\delta_1)},\]</div>
 <p>bila penyebut positif. Nilai di atas satu berarti <span class="math-inline" role="math">\(\delta_1\)</span> mempunyai MSE
 lebih kecil pada titik <span class="math-inline" role="math">\(\theta\)</span> itu. Nilainya umumnya bergantung pada
-<span class="math-inline" role="math">\(\theta\)</span>; satu angka efisiensi tanpa kelas, loss, dan titik atau limit
-parameter tidak lengkap.</p>
-<p>Dalam kelas estimator tak-bias reguler, batas Cramér–Rao memberi pembanding
+<span class="math-inline" role="math">\(\theta\)</span>; satu angka efisiensi tidak lengkap jika kelas pembanding, kerugian,
+serta nilai parameter atau rezim asimtotik yang digunakan tidak dinyatakan.</p>
+<p>Dalam kelas penduga tak bias reguler, batas Cramér–Rao memberi pembanding
 intrinsik. “Efisien” dalam arti klasik berarti mencapai batas yang sah, bukan
 sekadar mempunyai varians terkecil di antara dua kandidat yang kebetulan
 diperiksa.</p>
 <p><a id="O006-C140-CMP-D007-ASM01"></a></p>
 <h2>Asumsi untuk batas informasi</h2>
-<p>Untuk parameter skalar, andaikan <span class="math-inline" role="math">\(p_\theta(x)\)</span> mempunyai support bersama,
+<p>Untuk parameter skalar, andaikan <span class="math-inline" role="math">\(p_\theta(x)\)</span> mempunyai himpunan dukungan bersama,
 diferensiabel terhadap <span class="math-inline" role="math">\(\theta\)</span>, dan diferensiasi dapat dipertukarkan dengan
-integrasi untuk normalisasi serta untuk <span class="math-inline" role="math">\(E_\theta\delta\)</span>. Definisikan score</p>
+integrasi untuk normalisasi serta untuk <span class="math-inline" role="math">\(E_\theta\delta\)</span>. Definisikan fungsi skor</p>
 <div class="math-display" role="math">\[U_\theta(X)=\frac{\partial}{\partial\theta}\log p_\theta(X),\]</div>
 <p>dengan <span class="math-inline" role="math">\(E_\theta U_\theta=0\)</span> dan informasi
-<span class="math-inline" role="math">\(I(\theta)=E_\theta U_\theta^2\in(0,\infty)\)</span>. Asumsi support bersama dan
+<span class="math-inline" role="math">\(I(\theta)=E_\theta U_\theta^2\in(0,\infty)\)</span>. Asumsi himpunan dukungan bersama dan
 pertukaran integral tidak boleh dihapus; model nonreguler dapat melanggar
 batas berikut.</p>
 <p><a id="O006-C140-CMP-D007-THM02"></a></p>
-<h2>Batas Cramér–Rao untuk mean estimator</h2>
+<h2>Batas Cramér–Rao dalam bentuk umum</h2>
 <p>Jika <span class="math-inline" role="math">\(m_\delta(\theta)=E_\theta\delta(X)\)</span> terdiferensialkan di bawah integral
 dan <span class="math-inline" role="math">\(\operatorname{Var}_\theta(\delta)&lt;\infty\)</span>, maka</p>
 <div class="math-display" role="math">\[\operatorname{Var}_\theta(\delta)
 \geq\frac{\{m_\delta'(\theta)\}^2}{I(\theta)}.\]</div>
-<p>Khusus untuk estimator tak-bias dari <span class="math-inline" role="math">\(g(\theta)\)</span>,</p>
+<p>Khusus untuk penduga tak bias dari <span class="math-inline" role="math">\(g(\theta)\)</span>,</p>
 <div class="math-display" role="math">\[\operatorname{Var}_\theta(\delta)
 \geq\frac{\{g'(\theta)\}^2}{I(\theta)}.\]</div>
 <p><a id="O006-C140-CMP-D007-PRF02"></a></p>
@@ -134,45 +135,45 @@ m_\delta'(\theta)
 <p>karena <span class="math-inline" role="math">\(E_\theta U_\theta=0\)</span>. Ketaksamaan Cauchy–Schwarz menghasilkan</p>
 <div class="math-display" role="math">\[\{m_\delta'(\theta)\}^2
 \leq\operatorname{Var}_\theta(\delta)I(\theta).\]</div>
-<p>Bagi dengan <span class="math-inline" role="math">\(I(\theta)&gt;0\)</span>. Jika <span class="math-inline" role="math">\(m_\delta=g\)</span>, bentuk tak-bias langsung
+<p>Bagi dengan <span class="math-inline" role="math">\(I(\theta)&gt;0\)</span>. Jika <span class="math-inline" role="math">\(m_\delta=g\)</span>, bentuk tak bias langsung
 mengikuti. ∎</p>
 <p>Kesamaan hanya mungkin bila, hampir pasti,
-<span class="math-inline" role="math">\(\delta-E_\theta\delta\)</span> sebanding dengan score. Bahkan ketika batas tercapai
-pada satu <span class="math-inline" role="math">\(\theta\)</span>, perlu diperiksa apakah satu estimator yang sama mencapai
+<span class="math-inline" role="math">\(\delta-E_\theta\delta\)</span> sebanding dengan fungsi skor. Bahkan ketika batas tercapai
+pada satu <span class="math-inline" role="math">\(\theta\)</span>, perlu diperiksa apakah satu penduga yang sama mencapai
 batas untuk seluruh ruang parameter.</p>
 <p><a id="O006-C140-CMP-D007-EX02"></a></p>
 <h2>Contoh efisiensi eksak: proporsi Bernoulli</h2>
-<p>Untuk <span class="math-inline" role="math">\(X_i\)</span> iid Bernoulli<span class="math-inline" role="math">\((p)\)</span>, score sampel adalah</p>
+<p>Untuk <span class="math-inline" role="math">\(X_i\)</span> iid Bernoulli<span class="math-inline" role="math">\((p)\)</span>, fungsi skor sampel adalah</p>
 <div class="math-display" role="math">\[U_p=\frac{\sum_i(X_i-p)}{p(1-p)},\]</div>
 <p>dan <span class="math-inline" role="math">\(I_n(p)=n/[p(1-p)]\)</span>. Karena <span class="math-inline" role="math">\(g(p)=p\)</span> mempunyai <span class="math-inline" role="math">\(g'(p)=1\)</span>, batas
-Cramér–Rao bagi estimator tak-bias adalah <span class="math-inline" role="math">\(p(1-p)/n\)</span>. Estimator
+Cramér–Rao untuk penduga tak bias adalah <span class="math-inline" role="math">\(p(1-p)/n\)</span>. Penduga
 <span class="math-inline" role="math">\(\bar X\)</span> mempunyai tepat varians tersebut, sehingga efisien dalam kelas
-tak-bias reguler ini. Pernyataan tersebut tidak membandingkan <span class="math-inline" role="math">\(\bar X\)</span> dengan
-semua estimator bias di bawah setiap fungsi loss.</p>
+tak bias reguler ini. Pernyataan tersebut tidak membandingkan <span class="math-inline" role="math">\(\bar X\)</span> dengan
+semua penduga bias di bawah setiap fungsi kerugian.</p>
 <p><a id="O006-C140-CMP-D007-DEF04"></a></p>
 <h2>Kecukupan sebagai syarat reduksi yang tidak kehilangan informasi</h2>
-<p>Statistik <span class="math-inline" role="math">\(T\)</span> cukup bila distribusi bersyarat data <span class="math-inline" role="math">\(X\)</span> diberikan <span class="math-inline" role="math">\(T=t\)</span> dapat
+<p>Statistik <span class="math-inline" role="math">\(T\)</span> cukup bila distribusi bersyarat <span class="math-inline" role="math">\(X\)</span> dengan syarat <span class="math-inline" role="math">\(T=t\)</span> dapat
 dipilih tanpa bergantung pada <span class="math-inline" role="math">\(\theta\)</span>. Definisi donor berada pada
-<a class="xref external" data-target-id="O006-016-02-0001" href="https://kokunoyumeto.github.io/penn-state-stat-415-id/components/random-completeness/#O006-016-02-0001">A statistic \(U\) is sufficient for \(\theta\) if the conditional distribution of \(\bs X\) given \(U\) does not depend </a>, dan bentuk faktorisasi yang berguna untuk membuktikan
-kecukupan berada pada <a class="xref external" data-target-id="O006-016-02-0003" href="https://kokunoyumeto.github.io/penn-state-stat-415-id/components/random-completeness/#O006-016-02-0003">Fisher-Neyman Factorization Theorem. Let \(f_\theta\) denote the probability density function of \(\bs X\) and suppose t</a>.</p>
-<p>Poin keputusan yang penting ialah ini: bila kernel bersyarat
+<a class="xref external" data-target-id="O006-016-02-0001" href="https://kokunoyumeto.github.io/penn-state-stat-415-id/components/random-completeness/random/point/Sufficient.html#suf1">Definisi statistik cukup</a>, dan bentuk faktorisasi yang berguna untuk membuktikan
+kecukupan berada pada <a class="xref external" data-target-id="O006-016-02-0003" href="https://kokunoyumeto.github.io/penn-state-stat-415-id/components/random-completeness/random/point/Sufficient.html#fac">Teorema faktorisasi Fisher–Neyman</a>.</p>
+<p>Pokok penting dalam kerangka keputusan ialah ini: bila kernel bersyarat
 <span class="math-inline" role="math">\(Q_t(dx)=P_\theta(X\in dx\mid T=t)\)</span> tidak bergantung pada <span class="math-inline" role="math">\(\theta\)</span>, maka</p>
 <div class="math-display" role="math">\[\delta^*(t)=\int\delta(x)Q_t(dx)\]</div>
-<p>adalah satu fungsi <span class="math-inline" role="math">\(t\)</span> yang sama untuk semua <span class="math-inline" role="math">\(\theta\)</span>. Tanpa kecukupan,
+<p>adalah fungsi dari <span class="math-inline" role="math">\(t\)</span> yang dapat dipilih sama untuk semua <span class="math-inline" role="math">\(\theta\)</span>. Tanpa kecukupan,
 <span class="math-inline" role="math">\(E_\theta(\delta\mid T=t)\)</span> dapat bergantung pada parameter yang tidak diketahui
-dan karenanya tidak mendefinisikan estimator yang dapat dihitung dari data
+dan karenanya tidak mendefinisikan penduga yang dapat dihitung dari data
 saja.</p>
 <p><a id="O006-C140-CMP-D007-THM03"></a></p>
-<h2>Teorema Rao–Blackwell untuk loss konveks</h2>
+<h2>Teorema Rao–Blackwell untuk kerugian konveks</h2>
 <p>Misalkan <span class="math-inline" role="math">\(T\)</span> cukup, ruang tindakan konveks, <span class="math-inline" role="math">\(\delta\)</span> terintegralkan secara
 bersyarat, dan <span class="math-inline" role="math">\(a\mapsto L(\theta,a)\)</span> konveks untuk setiap <span class="math-inline" role="math">\(\theta\)</span>. Definisikan</p>
 <div class="math-display" role="math">\[\delta^*(T)=E\{\delta(X)\mid T\}\]</div>
-<p>menggunakan kernel bersyarat bebas-<span class="math-inline" role="math">\(\theta\)</span> dari kecukupan. Bila kedua risk
+<p>menggunakan kernel bersyarat yang bebas dari <span class="math-inline" role="math">\(\theta\)</span> berdasarkan kecukupan. Bila kedua risiko
 terdefinisi, maka</p>
 <div class="math-display" role="math">\[R(\theta,\delta^*)\leq R(\theta,\delta)
 \quad\text{untuk setiap }\theta.\]</div>
 <p>Ini adalah formulasi keputusan dari hasil yang ditautkan pada donor
-<a class="xref external" data-target-id="O006-016-02-0010" href="https://kokunoyumeto.github.io/penn-state-stat-415-id/components/random-completeness/#O006-016-02-0010">Rao-Blackwell Theorem. Suppose that \(U\) is sufficient for \(\theta\) and that \(V\) is an unbiased estimator of a real</a>.</p>
+<a class="xref external" data-target-id="O006-016-02-0010" href="https://kokunoyumeto.github.io/penn-state-stat-415-id/components/random-completeness/random/point/Sufficient.html#rbt">Teorema Rao–Blackwell</a>.</p>
 <p><a id="O006-C140-CMP-D007-PRF03"></a></p>
 <h3>Bukti</h3>
 <p>Untuk setiap <span class="math-inline" role="math">\(\theta\)</span>, terapkan ketaksamaan Jensen secara bersyarat:</p>
@@ -183,12 +184,12 @@ menjadi <span class="math-inline" role="math">\(R(\theta,\delta^*)\)</span> dan 
 <span class="math-inline" role="math">\(R(\theta,\delta)\)</span>. Karena fungsi <span class="math-inline" role="math">\(\delta^*(t)\)</span> tidak bergantung pada
 <span class="math-inline" role="math">\(\theta\)</span>, ia merupakan aturan yang sah untuk seluruh model. ∎</p>
 <p><a id="O006-C140-CMP-D007-THM04"></a></p>
-<h2>Identitas Rao–Blackwell untuk loss kuadratik</h2>
+<h2>Identitas Rao–Blackwell untuk kerugian kuadratik</h2>
 <p>Untuk target <span class="math-inline" role="math">\(g(\theta)\)</span> dan <span class="math-inline" role="math">\(E_\theta\delta^2&lt;\infty\)</span>,</p>
 <div class="math-display" role="math">\[R(\theta,\delta)
 =R(\theta,\delta^*)
 +E_\theta\{(\delta-\delta^*)^2\}.\]</div>
-<p>Dengan demikian perbaikannya eksak, bukan sekadar sebuah ketaksamaan.</p>
+<p>Dengan demikian perbaikannya eksak, bukan sekadar ketaksamaan.</p>
 <p><a id="O006-C140-CMP-D007-PRF04"></a></p>
 <h3>Bukti</h3>
 <p>Tulis</p>
@@ -198,23 +199,23 @@ menjadi <span class="math-inline" role="math">\(R(\theta,\delta^*)\)</span> dan 
 =E_\theta[(\delta^*-g)E_\theta(\delta-\delta^*\mid T)]=0.\]</div>
 <p>Ekspansi kuadrat memberi identitas. Jika
 <span class="math-inline" role="math">\(P_\theta\{\operatorname{Var}_\theta(\delta\mid T)&gt;0\}&gt;0\)</span>, suku tambahan
-positif dan perbaikan risk ketat pada parameter itu. ∎</p>
-<p>Jika <span class="math-inline" role="math">\(\delta\)</span> tak-bias, hukum ekspektasi iteratif menunjukkan <span class="math-inline" role="math">\(\delta^*\)</span> juga
-tak-bias. Namun <a class="xref" data-target-id="O006-C140-CMP-D007-THM03" href="O006-C140-CMP-D007.html#O006-C140-CMP-D007-THM03">Teorema Rao–Blackwell untuk loss konveks</a> tidak memerlukan ketakbiasan:
-yang diperlukan untuk loss umum ialah konveksitas dan eksistensi ekspektasi.</p>
+positif sehingga <span class="math-inline" role="math">\(R(\theta,\delta^*)&lt;R(\theta,\delta)\)</span> pada nilai parameter itu. ∎</p>
+<p>Jika <span class="math-inline" role="math">\(\delta\)</span> tak bias, hukum nilai harapan iteratif menunjukkan <span class="math-inline" role="math">\(\delta^*\)</span> juga
+tak bias. Namun <a class="xref" data-target-id="O006-C140-CMP-D007-THM03" href="O006-C140-CMP-D007.html#O006-C140-CMP-D007-THM03">Teorema Rao–Blackwell untuk kerugian konveks</a> tidak memerlukan ketakbiasan:
+yang diperlukan untuk kerugian umum ialah konveksitas dan eksistensi ekspektasi.</p>
 <p><a id="O006-C140-CMP-D007-EX03"></a></p>
 <h2>Contoh Rao–Blackwell: dari satu Bernoulli ke proporsi sampel</h2>
 <p>Untuk <span class="math-inline" role="math">\(X_1,\ldots,X_n\)</span> iid Bernoulli<span class="math-inline" role="math">\((p)\)</span>, <span class="math-inline" role="math">\(S=\sum_iX_i\)</span> cukup karena
-likelihood bergantung pada data melalui <span class="math-inline" role="math">\(S\)</span>. Estimator kasar
-<span class="math-inline" role="math">\(\delta=X_1\)</span> tak-bias untuk <span class="math-inline" role="math">\(p\)</span>. Diberikan <span class="math-inline" role="math">\(S=s\)</span>, simetri semua posisi sukses
-memberi</p>
+fungsi kemungkinan bergantung pada data melalui <span class="math-inline" role="math">\(S\)</span>. Penduga kasar
+<span class="math-inline" role="math">\(\delta=X_1\)</span> tak bias untuk <span class="math-inline" role="math">\(p\)</span>. Dengan syarat <span class="math-inline" role="math">\(S=s\)</span>, karena semua indeks
+sampel bersifat simetris, diperoleh</p>
 <div class="math-display" role="math">\[E_p(X_1\mid S=s)=\frac{s}{n},\]</div>
-<p>yang tidak bergantung pada <span class="math-inline" role="math">\(p\)</span>. Jadi estimator Rao–Blackwell adalah
-<span class="math-inline" role="math">\(\delta^*=S/n=\bar X\)</span>. Di bawah loss kuadratik,</p>
+<p>yang tidak bergantung pada <span class="math-inline" role="math">\(p\)</span>. Jadi penduga Rao–Blackwell adalah
+<span class="math-inline" role="math">\(\delta^*=S/n=\bar X\)</span>. Di bawah kerugian kuadratik,</p>
 <div class="math-display" role="math">\[R(p,X_1)=p(1-p),
 \qquad
 R(p,\bar X)=\frac{p(1-p)}{n}.\]</div>
-<p>Untuk <span class="math-inline" role="math">\(n&gt;1\)</span> dan <span class="math-inline" role="math">\(0&lt;p&lt;1\)</span>, perbaikannya ketat. Ini adalah contoh dominasi risk
+<p>Untuk <span class="math-inline" role="math">\(n&gt;1\)</span> dan <span class="math-inline" role="math">\(0&lt;p&lt;1\)</span>, perbaikannya ketat. Ini adalah contoh dominasi risiko
 yang benar-benar berlaku pada seluruh ruang parameter, bukan hanya pada satu
 titik.</p>
 <p><a id="O006-C140-CMP-D007-DEF05"></a></p>
@@ -224,26 +225,26 @@ setiap fungsi terukur <span class="math-inline" role="math">\(h\)</span> yang te
 <div class="math-display" role="math">\[E_\theta h(T)=0\ \text{untuk semua }\theta
 \quad\Longrightarrow\quad
 h(T)=0\quad P_\theta\text{-hampir pasti untuk semua }\theta.\]</div>
-<p>Simpul definisi donor adalah <a class="xref external" data-target-id="O006-016-02-0011" href="https://kokunoyumeto.github.io/penn-state-stat-415-id/components/random-completeness/#O006-016-02-0011">Suppose that \(U = u(\bs X)\) is a statistic taking values in a set \(R\). Then \(U\) is a complete statistic for \(\the</a>. Kecukupan mengatakan
+<p>Simpul definisi donor adalah <a class="xref external" data-target-id="O006-016-02-0011" href="https://kokunoyumeto.github.io/penn-state-stat-415-id/components/random-completeness/random/point/Sufficient.html#o006.random.point.sufficient.unit-11">Definisi statistik lengkap</a>. Kecukupan mengatakan
 bahwa pengondisian pada <span class="math-inline" role="math">\(T\)</span> tidak membuang informasi parameter; kelengkapan
-mengatakan bahwa tidak ada fungsi taknol dari <span class="math-inline" role="math">\(T\)</span> yang mempunyai mean nol pada
+mengatakan bahwa tidak ada fungsi taknol dari <span class="math-inline" role="math">\(T\)</span> yang mempunyai rataan nol pada
 seluruh keluarga. Kedua sifat berbeda dan keduanya diperlukan dalam teorema
 berikut.</p>
 <p><a id="O006-C140-CMP-D007-THM05"></a></p>
 <h2>Teorema Lehmann–Scheffé</h2>
 <p>Misalkan <span class="math-inline" role="math">\(T\)</span> cukup dan lengkap. Jika <span class="math-inline" role="math">\(U=u(T)\)</span> mempunyai momen kedua hingga dan
-tak-bias untuk <span class="math-inline" role="math">\(g(\theta)\)</span>, maka <span class="math-inline" role="math">\(U\)</span> adalah estimator tak-bias dengan varians
+tak bias untuk <span class="math-inline" role="math">\(g(\theta)\)</span>, maka <span class="math-inline" role="math">\(U\)</span> adalah penduga tak bias dengan varians
 minimum seragam (UMVU) bagi <span class="math-inline" role="math">\(g(\theta)\)</span>. Ia juga merupakan satu-satunya
-estimator tak-bias berbasis <span class="math-inline" role="math">\(T\)</span>, hingga kesamaan hampir pasti untuk setiap
+penduga tak bias berbasis <span class="math-inline" role="math">\(T\)</span>, hingga kesamaan hampir pasti untuk setiap
 <span class="math-inline" role="math">\(\theta\)</span>.</p>
-<p>Hasil donor yang dirujuk adalah <a class="xref external" data-target-id="O006-016-02-0013" href="https://kokunoyumeto.github.io/penn-state-stat-415-id/components/random-completeness/#O006-016-02-0013">Lehmann-Scheffé Theorem. Suppose that \(U\) is sufficient and complete for \(\theta\) and that \(V = r(U)\) is an unbias</a>. Bukti berikut
+<p>Hasil donor yang dirujuk adalah <a class="xref external" data-target-id="O006-016-02-0013" href="https://kokunoyumeto.github.io/penn-state-stat-415-id/components/random-completeness/random/point/Sufficient.html#lst">Teorema Lehmann–Scheffé</a>. Bukti berikut
 menampilkan secara eksplisit tempat Rao–Blackwell dan kelengkapan dipakai.</p>
 <p><a id="O006-C140-CMP-D007-PRF05"></a></p>
 <h3>Bukti</h3>
-<p>Ambil sembarang estimator tak-bias <span class="math-inline" role="math">\(V\)</span> untuk <span class="math-inline" role="math">\(g(\theta)\)</span> dengan momen kedua
+<p>Ambil sembarang penduga tak bias <span class="math-inline" role="math">\(V\)</span> untuk <span class="math-inline" role="math">\(g(\theta)\)</span> dengan momen kedua
 hingga. Karena <span class="math-inline" role="math">\(T\)</span> cukup, bentuk Rao–Blackwell</p>
 <div class="math-display" role="math">\[V^*=E(V\mid T)\]</div>
-<p>adalah fungsi <span class="math-inline" role="math">\(T\)</span> yang tidak bergantung pada <span class="math-inline" role="math">\(\theta\)</span>, tetap tak-bias, dan
+<p>adalah fungsi <span class="math-inline" role="math">\(T\)</span> yang tidak bergantung pada <span class="math-inline" role="math">\(\theta\)</span>, tetap tak bias, dan
 memenuhi $\operatorname{Var}<em>\theta(V^*)\leq
 \operatorname{Var}</em>\theta(V)<span class="math-inline" role="math">\( untuk setiap \)</span>\theta$.</p>
 <p>Sekarang <span class="math-inline" role="math">\(V^*-U\)</span> adalah fungsi <span class="math-inline" role="math">\(T\)</span> dan</p>
@@ -265,12 +266,12 @@ kelengkapan, andaikan <span class="math-inline" role="math">\(E_p h(S)=0\)</span
 \quad\text{untuk setiap }z&gt;0.\]</div>
 <p>Polinomial yang nol pada sebuah interval mempunyai semua koefisien nol;
 karena <span class="math-inline" role="math">\({n\choose s}&gt;0\)</span>, diperoleh <span class="math-inline" role="math">\(h(s)=0\)</span> untuk setiap <span class="math-inline" role="math">\(s\)</span>. Jadi <span class="math-inline" role="math">\(S\)</span>
-lengkap. Karena <span class="math-inline" role="math">\(S\)</span> juga cukup dan <span class="math-inline" role="math">\(S/n\)</span> tak-bias untuk <span class="math-inline" role="math">\(p\)</span>,
+lengkap. Karena <span class="math-inline" role="math">\(S\)</span> juga cukup dan <span class="math-inline" role="math">\(S/n\)</span> tak bias untuk <span class="math-inline" role="math">\(p\)</span>,
 <a class="xref" data-target-id="O006-C140-CMP-D007-THM05" href="O006-C140-CMP-D007.html#O006-C140-CMP-D007-THM05">Teorema Lehmann–Scheffé</a> menunjukkan bahwa <span class="math-inline" role="math">\(S/n\)</span> adalah UMVU. Contoh
 ini menyatukan tiga fakta yang berbeda:</p>
 <ol>
-<li><a class="xref" data-target-id="O006-C140-CMP-D007-THM04" href="O006-C140-CMP-D007.html#O006-C140-CMP-D007-THM04">Identitas Rao–Blackwell untuk loss kuadratik</a> memperbaiki <span class="math-inline" role="math">\(X_1\)</span> menjadi <span class="math-inline" role="math">\(S/n\)</span>;</li>
-<li>kelengkapan membuktikan ketunggalan fungsi tak-bias dari <span class="math-inline" role="math">\(S\)</span>; dan</li>
+<li><a class="xref" data-target-id="O006-C140-CMP-D007-THM04" href="O006-C140-CMP-D007.html#O006-C140-CMP-D007-THM04">Identitas Rao–Blackwell untuk kerugian kuadratik</a> memperbaiki <span class="math-inline" role="math">\(X_1\)</span> menjadi <span class="math-inline" role="math">\(S/n\)</span>;</li>
+<li>kelengkapan membuktikan ketunggalan fungsi tak bias dari <span class="math-inline" role="math">\(S\)</span>; dan</li>
 <li>batas informasi pada <a class="xref" data-target-id="O006-C140-CMP-D007-EX02" href="O006-C140-CMP-D007.html#O006-C140-CMP-D007-EX02">Contoh efisiensi eksak: proporsi Bernoulli</a> menunjukkan bahwa
 variansnya juga mencapai batas Cramér–Rao.</li>
 </ol>
@@ -279,145 +280,147 @@ memeriksa asumsi masing-masing.</p>
 <p><a id="O006-C140-CMP-D007-EX05"></a></p>
 <h2>Contoh lengkap: Poisson dan UMVU untuk <span class="math-inline" role="math">\(e^{-\lambda}\)</span></h2>
 <p>Misalkan <span class="math-inline" role="math">\(X_1,\ldots,X_n\)</span> iid Poisson<span class="math-inline" role="math">\((\lambda)\)</span> dengan <span class="math-inline" role="math">\(n\geq2\)</span>, dan
-<span class="math-inline" role="math">\(S=\sum_iX_i\sim\operatorname{Poisson}(n\lambda)\)</span>. Faktorisasi likelihood
+<span class="math-inline" role="math">\(S=\sum_iX_i\sim\operatorname{Poisson}(n\lambda)\)</span>. Faktorisasi fungsi kemungkinan
 menunjukkan bahwa <span class="math-inline" role="math">\(S\)</span> cukup. Untuk kelengkapan, andaikan
 <span class="math-inline" role="math">\(E_\lambda|h(S)|&lt;\infty\)</span> dan <span class="math-inline" role="math">\(E_\lambda h(S)=0\)</span> untuk setiap <span class="math-inline" role="math">\(\lambda&gt;0\)</span>.
 Setelah dikalikan dengan <span class="math-inline" role="math">\(e^{n\lambda}\)</span>,</p>
 <div class="math-display" role="math">\[\sum_{s=0}^{\infty}h(s)\frac{(n\lambda)^s}{s!}=0
 \quad\text{untuk setiap }\lambda&gt;0.\]</div>
 <p>Integrabilitas absolut untuk semua <span class="math-inline" role="math">\(\lambda&gt;0\)</span> membuat deret pangkat ini
-terdefinisi pada setiap radius positif. Ketunggalan koefisien deret pangkat
+konvergen untuk setiap argumen positif. Ketunggalan koefisien deret pangkat
 memberi <span class="math-inline" role="math">\(h(s)=0\)</span> untuk semua <span class="math-inline" role="math">\(s\)</span>, jadi <span class="math-inline" role="math">\(S\)</span> lengkap.</p>
 <p>Gunakan fungsi pembangkit probabilitas Poisson:</p>
 <div class="math-display" role="math">\[E_\lambda\left(1-\frac1n\right)^S
 =\exp\left[n\lambda\left\{\left(1-\frac1n\right)-1\right\}\right]
 =e^{-\lambda}.\]</div>
-<p>Karena <span class="math-inline" role="math">\(U=(1-1/n)^S\)</span> adalah fungsi statistik cukup-lengkap dan tak-bias bagi
+<p>Karena <span class="math-inline" role="math">\(U=(1-1/n)^S\)</span> adalah fungsi dari statistik yang cukup dan lengkap serta tak bias untuk
 <span class="math-inline" role="math">\(e^{-\lambda}\)</span>, ia UMVU menurut <a class="xref" data-target-id="O006-C140-CMP-D007-THM05" href="O006-C140-CMP-D007.html#O006-C140-CMP-D007-THM05">Teorema Lehmann–Scheffé</a>. Kita tidak
-perlu menebak semua estimator tak-bias lain lalu membandingkan varians satu per
+perlu menebak semua penduga tak bias lain lalu membandingkan varians satu per
 satu.</p>
 <p><a id="O006-C140-CMP-D007-THM06"></a></p>
-<h2>Basu sebagai pemisah informasi dan variasi ancillary</h2>
-<p>Statistik <span class="math-inline" role="math">\(A\)</span> disebut ancillary bila distribusinya tidak bergantung pada
-<span class="math-inline" role="math">\(\theta\)</span> <a class="xref external" data-target-id="O006-016-02-0014" href="https://kokunoyumeto.github.io/penn-state-stat-415-id/components/random-completeness/#O006-016-02-0014">Suppose that \(V = v(\bs X)\) is a statistic with values in a set \(R\). If the distribution of \(V\) does not depend on</a>. Jika <span class="math-inline" role="math">\(T\)</span> cukup dan lengkap serta <span class="math-inline" role="math">\(A\)</span>
-ancillary, maka <span class="math-inline" role="math">\(T\)</span> dan <span class="math-inline" role="math">\(A\)</span> independen; simpul donor untuk hasil ini adalah
-<a class="xref external" data-target-id="O006-016-02-0015" href="https://kokunoyumeto.github.io/penn-state-stat-415-id/components/random-completeness/#O006-016-02-0015">Basu&#x27;s Theorem. Suppose that \(U\) is complete and sufficient for a parameter \(\theta\) and that \(V\) is an ancillary </a>.</p>
+<h2>Teorema Basu: pemisahan informasi dan variasi statistik tambahan</h2>
+<p>Statistik <span class="math-inline" role="math">\(A\)</span> disebut <strong>statistik tambahan</strong> (<em>ancillary</em>) bila distribusinya tidak
+bergantung pada <span class="math-inline" role="math">\(\theta\)</span> <a class="xref external" data-target-id="O006-016-02-0014" href="https://kokunoyumeto.github.io/penn-state-stat-415-id/components/random-completeness/random/point/Sufficient.html#o006.random.point.sufficient.unit-14">Definisi statistik ancillary</a>. Jika <span class="math-inline" role="math">\(T\)</span> cukup dan lengkap serta
+<span class="math-inline" role="math">\(A\)</span> merupakan statistik tambahan, maka <span class="math-inline" role="math">\(T\)</span> dan <span class="math-inline" role="math">\(A\)</span> independen; simpul donor untuk hasil ini adalah
+<a class="xref external" data-target-id="O006-016-02-0015" href="https://kokunoyumeto.github.io/penn-state-stat-415-id/components/random-completeness/random/point/Sufficient.html#bas">Teorema Basu</a>.</p>
 <p><a id="O006-C140-CMP-D007-PRF06"></a></p>
-<h3>Bukti untuk fungsi pembatas</h3>
+<h3>Bukti untuk fungsi terbatas</h3>
 <p>Ambil fungsi terbatas <span class="math-inline" role="math">\(q(A)\)</span>. Kecukupan membuat</p>
 <div class="math-display" role="math">\[h(T)=E_\theta\{q(A)\mid T\}-E_\theta q(A)\]</div>
 <p>dapat dipilih sebagai fungsi <span class="math-inline" role="math">\(T\)</span> yang sama untuk semua <span class="math-inline" role="math">\(\theta\)</span>: suku pertama
 menggunakan kernel bersyarat bebas-<span class="math-inline" role="math">\(\theta\)</span>, sedangkan suku kedua konstan
-terhadap <span class="math-inline" role="math">\(\theta\)</span> karena <span class="math-inline" role="math">\(A\)</span> ancillary. Hukum ekspektasi iteratif memberi
+terhadap <span class="math-inline" role="math">\(\theta\)</span> karena <span class="math-inline" role="math">\(A\)</span> merupakan statistik tambahan. Hukum nilai harapan iteratif memberi
 <span class="math-inline" role="math">\(E_\theta h(T)=0\)</span> untuk semua <span class="math-inline" role="math">\(\theta\)</span>. Kelengkapan memaksa <span class="math-inline" role="math">\(h(T)=0\)</span> hampir
 pasti, sehingga</p>
 <div class="math-display" role="math">\[E\{q(A)\mid T\}=Eq(A).\]</div>
 <p>Karena identitas ini berlaku untuk semua fungsi indikator terbatas
-<span class="math-inline" role="math">\(q(A)=\mathbf1\{A\in B\}\)</span>, distribusi bersyarat <span class="math-inline" role="math">\(A\)</span> diberikan <span class="math-inline" role="math">\(T\)</span> sama dengan
+<span class="math-inline" role="math">\(q(A)=\mathbf1\{A\in B\}\)</span>, distribusi bersyarat <span class="math-inline" role="math">\(A\)</span> ketika <span class="math-inline" role="math">\(T\)</span> diketahui sama dengan
 distribusi marginalnya; itulah independensi. ∎</p>
 <p>Teorema Basu bukan langkah yang dibutuhkan dalam bukti
 <a class="xref" data-target-id="O006-C140-CMP-D007-THM05" href="O006-C140-CMP-D007.html#O006-C140-CMP-D007-THM05">Teorema Lehmann–Scheffé</a>. Ia berguna sebagai pemeriksaan struktur:
-statistik lengkap-cukup membawa informasi parameter, sedangkan variasi
-ancillary dapat dipisahkan darinya di bawah asumsi teorema.</p>
+statistik yang lengkap dan cukup membawa informasi parameter, sedangkan variasi
+statistik tambahan dapat dipisahkan darinya di bawah asumsi teorema.</p>
 <p><a id="O006-C140-CMP-D007-DEF06"></a></p>
-<h2>Dominasi dan admissibility</h2>
-<p>Di bawah loss tetap, aturan <span class="math-inline" role="math">\(\delta_1\)</span> <strong>mendominasi</strong> <span class="math-inline" role="math">\(\delta_0\)</span> bila</p>
+<h2>Dominasi dan admisibilitas</h2>
+<p>Untuk fungsi kerugian yang telah ditetapkan, aturan <span class="math-inline" role="math">\(\delta_1\)</span> <strong>mendominasi</strong>
+<span class="math-inline" role="math">\(\delta_0\)</span> bila</p>
 <div class="math-display" role="math">\[R(\theta,\delta_1)\leq R(\theta,\delta_0)
 \quad\text{untuk semua }\theta,\]</div>
 <p>dengan pertidaksamaan ketat untuk sedikitnya satu <span class="math-inline" role="math">\(\theta\)</span>. Aturan
-<span class="math-inline" role="math">\(\delta_0\)</span> <strong>inadmissible</strong> bila ada aturan yang mendominasinya, dan
-<strong>admissible</strong> bila tidak ada.</p>
-<p>Definisi ini selalu relatif terhadap ruang parameter, ruang tindakan, loss,
-dan kelas aturan. Mengubah salah satunya dapat mengubah status admissibility.</p>
+<span class="math-inline" role="math">\(\delta_0\)</span> <strong>inadmisibel</strong> bila ada aturan yang mendominasinya, dan
+<strong>admisibel</strong> bila tidak ada.</p>
+<p>Definisi ini selalu relatif terhadap ruang parameter, ruang tindakan, kerugian,
+dan kelas aturan. Mengubah salah satunya dapat mengubah status admisibilitas.</p>
 <p><a id="O006-C140-CMP-D007-THM07"></a></p>
-<h2>Klaim admissibility yang memang didukung di sini</h2>
-<p>Di bawah asumsi <a class="xref" data-target-id="O006-C140-CMP-D007-THM03" href="O006-C140-CMP-D007.html#O006-C140-CMP-D007-THM03">Teorema Rao–Blackwell untuk loss konveks</a>, hasil Rao–Blackwell
+<h2>Klaim admisibilitas yang memang didukung di sini</h2>
+<p>Di bawah asumsi <a class="xref" data-target-id="O006-C140-CMP-D007-THM03" href="O006-C140-CMP-D007.html#O006-C140-CMP-D007-THM03">Teorema Rao–Blackwell untuk kerugian konveks</a>, hasil Rao–Blackwell
 menunjukkan <span class="math-inline" role="math">\(R(\theta,\delta^*)\leq R(\theta,\delta)\)</span> untuk semua <span class="math-inline" role="math">\(\theta\)</span>.
-Jika ketaksamaan ketat pada sedikitnya satu titik, maka <span class="math-inline" role="math">\(\delta\)</span> inadmissible
+Jika ketaksamaan ketat pada sedikitnya satu titik, maka <span class="math-inline" role="math">\(\delta\)</span> inadmisibel
 karena didominasi oleh <span class="math-inline" role="math">\(\delta^*\)</span>.</p>
-<p>Tidak ada kesimpulan umum bahwa <span class="math-inline" role="math">\(\delta^*\)</span> sendiri admissible. Demikian pula,
+<p>Tidak ada kesimpulan umum bahwa <span class="math-inline" role="math">\(\delta^*\)</span> sendiri admisibel. Demikian pula,
 Lehmann–Scheffé membuktikan bahwa <span class="math-inline" role="math">\(U\)</span> mempunyai varians minimum <strong>di antara
-estimator tak-bias</strong> di bawah loss kuadratik. Ia tidak membandingkan <span class="math-inline" role="math">\(U\)</span> dengan
-seluruh estimator bias. Oleh sebab itu</p>
-<div class="math-display" role="math">\[\text{UMVU}\not\Rightarrow\text{admissible}\]</div>
-<p>tanpa teorema tambahan. Bab ini tidak mengklaim admissibility global bagi
-<span class="math-inline" role="math">\(S/n\)</span>, <span class="math-inline" role="math">\((1-1/n)^S\)</span>, atau estimator efisien lain. Membuktikannya harus meniadakan
-semua aturan pesaing dalam kelas yang dinyatakan, bukan hanya estimator
-tak-bias atau estimator yang sudah diperiksa.</p>
+penduga tak bias</strong> di bawah kerugian kuadratik. Ia tidak membandingkan <span class="math-inline" role="math">\(U\)</span> dengan
+seluruh penduga bias. Oleh sebab itu</p>
+<div class="math-display" role="math">\[\text{UMVU}\not\Rightarrow\text{admisibel}\]</div>
+<p>tanpa teorema tambahan. Bab ini tidak mengklaim admisibilitas global bagi
+<span class="math-inline" role="math">\(S/n\)</span>, <span class="math-inline" role="math">\((1-1/n)^S\)</span>, atau penduga efisien lain. Pembuktiannya harus menyingkirkan
+kemungkinan dominasi oleh setiap aturan pesaing dalam kelas yang dinyatakan, bukan hanya penduga
+tak bias atau penduga yang sudah diperiksa.</p>
 <p><a id="O006-C140-CMP-D007-REM01"></a></p>
 <h2>Kesalahan penalaran yang perlu dihindari</h2>
 <ol>
-<li><strong>“Varians lebih kecil berarti lebih baik.”</strong> Salah untuk estimator bias
-jika loss kuadratik; gunakan MSE pada <a class="xref" data-target-id="O006-C140-CMP-D007-THM01" href="O006-C140-CMP-D007.html#O006-C140-CMP-D007-THM01">Dekomposisi bias–varians</a>.</li>
+<li><strong>“Varians lebih kecil berarti lebih baik.”</strong> Salah untuk penduga bias
+di bawah kerugian kuadratik; gunakan MSE pada <a class="xref" data-target-id="O006-C140-CMP-D007-THM01" href="O006-C140-CMP-D007.html#O006-C140-CMP-D007-THM01">Dekomposisi bias–varians</a>.</li>
 <li><strong>“Rao–Blackwell selalu dapat dihitung tanpa parameter.”</strong> Salah bila
 statistik pengondisi tidak cukup; ekspektasi bersyarat dapat mengandung
 <span class="math-inline" role="math">\(\theta\)</span> yang tidak diketahui.</li>
 <li><strong>“Cukup berarti lengkap.”</strong> Kedua sifat berbeda. Kecukupan memberi reduksi
-data; kelengkapan memberi ketunggalan fungsi mean-nol.</li>
-<li><strong>“Rao–Blackwell memerlukan estimator awal tak-bias.”</strong> Tidak untuk loss
+data; kelengkapan memberi ketunggalan fungsi dengan rataan nol.</li>
+<li><strong>“Rao–Blackwell memerlukan penduga awal tak bias.”</strong> Tidak untuk kerugian
 konveks. Ketakbiasan diperlukan ketika tujuan khususnya UMVU.</li>
-<li><strong>“Mencapai Cramér–Rao berarti terbaik dalam segala arti.”</strong> Batas itu
-bergantung pada regularitas dan biasanya pada kelas tak-bias; model dengan
-support berubah atau estimator bias memerlukan analisis lain.</li>
-<li><strong>“UMVU berarti admissible.”</strong> Kesimpulan itu tidak diberikan oleh
+<li><strong>“Mencapai batas Cramér–Rao berarti terbaik dalam segala arti.”</strong> Batas itu
+bergantung pada syarat keteraturan dan biasanya pada kelas tak bias; model dengan
+himpunan dukungan berubah atau penduga bias memerlukan analisis lain.</li>
+<li><strong>“UMVU berarti admisibel.”</strong> Kesimpulan itu tidak diberikan oleh
 <a class="xref" data-target-id="O006-C140-CMP-D007-THM05" href="O006-C140-CMP-D007.html#O006-C140-CMP-D007-THM05">Teorema Lehmann–Scheffé</a>.</li>
-<li><strong>“Basu membuktikan optimalitas estimator.”</strong> Basu membuktikan independensi
-dalam struktur lengkap-cukup/ancillary; ia bukan perbandingan risk.</li>
+<li><strong>“Basu membuktikan optimalitas penduga.”</strong> Teorema Basu menyatakan bahwa
+statistik yang lengkap dan cukup independen dari statistik tambahan; teorema
+itu tidak membandingkan risiko.</li>
 </ol>
 <p><a id="O006-C140-CMP-D007-EX06"></a></p>
 <h2>Pemeriksaan mandiri terjawab</h2>
-<p><strong>A. Mengapa <span class="math-inline" role="math">\(E(V\mid T)\)</span> tetap tak-bias bila <span class="math-inline" role="math">\(V\)</span> tak-bias?</strong></p>
-<p>Dengan hukum ekspektasi iteratif,</p>
+<p><strong>A. Mengapa <span class="math-inline" role="math">\(E(V\mid T)\)</span> tetap tak bias bila <span class="math-inline" role="math">\(V\)</span> tak bias?</strong></p>
+<p>Dengan hukum nilai harapan iteratif,</p>
 <div class="math-display" role="math">\[E_\theta E_\theta(V\mid T)=E_\theta V=g(\theta).\]</div>
 <p>Kecukupan memastikan versi ekspektasi bersyarat itu dapat dipakai sebagai satu
 fungsi <span class="math-inline" role="math">\(T\)</span> yang tidak mengandung parameter tak diketahui.</p>
 <p><strong>B. Kapan perbaikan Rao–Blackwell kuadratik sama dengan nol?</strong></p>
-<p>Menurut <a class="xref" data-target-id="O006-C140-CMP-D007-THM04" href="O006-C140-CMP-D007.html#O006-C140-CMP-D007-THM04">Identitas Rao–Blackwell untuk loss kuadratik</a>, selisih risk adalah
+<p>Menurut <a class="xref" data-target-id="O006-C140-CMP-D007-THM04" href="O006-C140-CMP-D007.html#O006-C140-CMP-D007-THM04">Identitas Rao–Blackwell untuk kerugian kuadratik</a>, selisih risiko adalah
 <span class="math-inline" role="math">\(E_\theta(\delta-\delta^*)^2=E_\theta\operatorname{Var}(\delta\mid T)\)</span>.
-Ia nol tepat ketika <span class="math-inline" role="math">\(\delta\)</span> sudah merupakan fungsi <span class="math-inline" role="math">\(T\)</span> hampir pasti pada
-parameter tersebut.</p>
+Ia nol tepat ketika <span class="math-inline" role="math">\(\delta\)</span> sudah merupakan fungsi dari <span class="math-inline" role="math">\(T\)</span> hampir pasti di
+bawah <span class="math-inline" role="math">\(P_\theta\)</span>.</p>
 <p><strong>C. Mengapa bukti Lehmann–Scheffé tidak berhenti setelah Rao–Blackwell?</strong></p>
 <p>Rao–Blackwell hanya mengatakan bahwa <span class="math-inline" role="math">\(V^*\)</span>, suatu fungsi <span class="math-inline" role="math">\(T\)</span>, tidak lebih
-buruk daripada <span class="math-inline" role="math">\(V\)</span>. Masih mungkin ada banyak fungsi tak-bias dari <span class="math-inline" role="math">\(T\)</span>.
-Kelengkapan memaksa selisih dua fungsi tak-bias itu nol dan mengidentifikasi
+buruk daripada <span class="math-inline" role="math">\(V\)</span>. Masih mungkin ada banyak fungsi tak bias dari <span class="math-inline" role="math">\(T\)</span>.
+Kelengkapan memaksa selisih dua fungsi tak bias itu nol dan mengidentifikasi
 <span class="math-inline" role="math">\(V^*\)</span> dengan <span class="math-inline" role="math">\(U\)</span>.</p>
-<p><strong>D. Apakah estimator penyusutan pada <a class="xref" data-target-id="O006-C140-CMP-D007-EX01" href="O006-C140-CMP-D007.html#O006-C140-CMP-D007-EX01">Contoh risk yang bersilangan: penyusutan mean normal</a>
+<p><strong>D. Apakah penduga penyusutan pada <a class="xref" data-target-id="O006-C140-CMP-D007-EX01" href="O006-C140-CMP-D007.html#O006-C140-CMP-D007-EX01">Contoh risiko yang bersilangan: penyusutan rataan distribusi Normal</a>
 mendominasi <span class="math-inline" role="math">\(\bar X\)</span>?</strong></p>
-<p>Tidak. Risk penyusutan lebih kecil dekat <span class="math-inline" role="math">\(\theta=0\)</span> tetapi lebih besar ketika
+<p>Tidak. Risiko penyusutan lebih kecil dekat <span class="math-inline" role="math">\(\theta=0\)</span> tetapi lebih besar ketika
 <span class="math-inline" role="math">\(|\theta|\)</span> melewati ambang yang diturunkan. Dominasi memerlukan ketaksamaan
 yang benar untuk setiap <span class="math-inline" role="math">\(\theta\)</span>.</p>
 <p><a id="O006-C140-CMP-D007-ALG01"></a></p>
-<h2>Alur kerja pemilihan estimator</h2>
+<h2>Alur kerja pemilihan penduga</h2>
 <ol>
-<li>Nyatakan target <span class="math-inline" role="math">\(g(\theta)\)</span>, ruang tindakan, dan loss.</li>
-<li>Hitung fungsi risk; untuk loss kuadratik, pisahkan bias dan varians.</li>
-<li>Jika mengklaim efisiensi, nyatakan kelas pembanding dan periksa regularitas
+<li>Nyatakan target <span class="math-inline" role="math">\(g(\theta)\)</span>, ruang tindakan, dan kerugian.</li>
+<li>Hitung fungsi risiko; untuk kerugian kuadratik, pisahkan bias dan varians.</li>
+<li>Jika mengklaim efisiensi, nyatakan kelas pembanding dan periksa syarat keteraturan
 batas informasi.</li>
 <li>Cari statistik cukup dengan definisi atau faktorisasi yang sah.</li>
-<li>Kondisikan kandidat pada statistik cukup dan hitung pengurangan risk secara
+<li>Kondisikan kandidat pada statistik cukup dan hitung pengurangan risiko secara
 eksak jika mungkin.</li>
 <li>Jika mengklaim UMVU, buktikan kelengkapan dan ketakbiasan, lalu terapkan
 Lehmann–Scheffé.</li>
-<li>Jika mengklaim admissibility, lakukan pembandingan terhadap seluruh kelas
+<li>Jika mengklaim admisibilitas, lakukan pembandingan terhadap seluruh kelas
 aturan yang dinyatakan. Jangan mengganti langkah ini dengan label UMVU atau
 “efisien”.</li>
-<li>Catat support berubah, momen tak hingga, loss nonkonveks, atau kernel
+<li>Catat himpunan dukungan yang berubah, momen tak hingga, kerugian nonkonveks, atau kernel
 bersyarat yang bergantung parameter sebagai kegagalan asumsi, bukan sebagai
 detail yang dapat diabaikan.</li>
 </ol>
 <p><a id="O006-C140-CMP-D007-SEC02"></a></p>
 <h2>Ringkasan</h2>
 <ul>
-<li>Risk mengikat mutu prosedur pada parameter dan loss yang eksplisit.</li>
+<li>Risiko mengikat mutu prosedur pada parameter dan kerugian yang eksplisit.</li>
 <li>MSE sama dengan varians ditambah kuadrat bias.</li>
-<li>Cramér–Rao memberi batas efisiensi hanya di bawah regularitas yang sesuai.</li>
-<li>Rao–Blackwell memakai kecukupan dan konveksitas untuk tidak menaikkan risk;
-pada loss kuadratik, besar perbaikannya adalah ekspektasi varians bersyarat.</li>
+<li>Cramér–Rao memberi batas efisiensi hanya di bawah syarat keteraturan yang sesuai.</li>
+<li>Rao–Blackwell memakai kecukupan dan konveksitas untuk tidak menaikkan risiko;
+pada kerugian kuadratik, besarnya perbaikan adalah nilai harapan varians bersyarat.</li>
 <li>Kelengkapan mengubah reduksi Rao–Blackwell menjadi ketunggalan, sehingga
-estimator tak-bias berbasis statistik cukup-lengkap menjadi UMVU.</li>
-<li>Basu memisahkan statistik lengkap-cukup dari statistik ancillary, tetapi
-bukan teorema optimalitas risk.</li>
-<li>Dominasi dalam kelas penuh, UMVU dalam kelas tak-bias, dan admissibility
+penduga tak bias berbasis statistik yang cukup dan lengkap menjadi UMVU.</li>
+<li>Basu memisahkan statistik yang lengkap dan cukup dari statistik tambahan, tetapi
+bukan teorema optimalitas risiko.</li>
+<li>Dominasi dalam kelas penuh, UMVU dalam kelas tak bias, dan admisibilitas
 adalah tiga klaim berbeda.</li>
 </ul>
 <p>Materi ini adalah prosa orisinal CC BY-SA 4.0. Rujukan donor memakai ID stabil

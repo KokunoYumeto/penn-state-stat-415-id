@@ -1,0 +1,327 @@
+{
+  "backend": {
+    "documents": 39,
+    "donor_targets": {
+      "page": "https://kokunoyumeto.github.io/penn-state-stat-415-id/components/random-completeness/random/point/Sufficient.html",
+      "references": 8,
+      "target_bytes": 60900,
+      "target_sha256": "18b0305dc25a19a834204fdf84029ff67408f98262024717abf597c745a00197",
+      "validated_fragments": 7
+    },
+    "entities": 1523,
+    "manifest_sha256": "67defeb90b216f3306c9a49dcbe08bf8da51206cd8d9a9f53a0339374b001bf3",
+    "relations": 1949
+  },
+  "browser_processes_used": false,
+  "build": {
+    "bytes": 13951,
+    "schema": "o006.c140.companion-cumulative-c5-build.v1",
+    "sha256": "cc9e6002edcbb5adbe5a348233fb73f5588728a4fbc330a93061c1f18807f372",
+    "status": "pass"
+  },
+  "build_receipt_sha256": "cc9e6002edcbb5adbe5a348233fb73f5588728a4fbc330a93061c1f18807f372",
+  "capstones": {
+    "assets": 108,
+    "capstones": [
+      {
+        "assets": 53,
+        "bytes": 2511601,
+        "capstone": "CP01",
+        "categories": {
+          "analysis": 27,
+          "clean_data": 1,
+          "clean_metadata": 3,
+          "provenance": 2,
+          "receipt": 2,
+          "source_data": 4,
+          "source_rights_witness": 5,
+          "source_script": 2,
+          "source_transport_witness": 7
+        },
+        "dataset_license": "CC-BY-4.0",
+        "reader_assets": 35,
+        "source_scripts": 2,
+        "static_svgs": 5,
+        "text_equivalents": 2
+      },
+      {
+        "assets": 55,
+        "bytes": 10399921,
+        "capstone": "CP02",
+        "categories": {
+          "analysis": 19,
+          "clean_data": 1,
+          "clean_metadata": 4,
+          "provenance": 4,
+          "receipt": 2,
+          "source_data": 2,
+          "source_metadata": 1,
+          "source_rights_witness": 9,
+          "source_script": 2,
+          "source_transport_witness": 11
+        },
+        "dataset_license": "CC0-1.0",
+        "reader_assets": 30,
+        "source_scripts": 2,
+        "static_svgs": 3,
+        "text_equivalents": 4
+      }
+    ],
+    "reader_assets": 65,
+    "receipts": [
+      {
+        "bytes": 2465,
+        "capstone": "CP01",
+        "path": "build/CP01_TRANSFORM_RECEIPT.json",
+        "role": "transform",
+        "schema": "o006.c140.cp01-transform-replay.v1",
+        "sha256": "177848b6be8282fdcc1be402b4e1214eaa7d79019af5a3c02fbd977fa7e5efdc"
+      },
+      {
+        "bytes": 15079,
+        "capstone": "CP01",
+        "path": "generated/capstones/CP01/CP01_REPLAY_RECEIPT.json",
+        "role": "analysis",
+        "schema": "o006.c140.cp01-analysis-replay.v2",
+        "sha256": "3afee61bc95dd93a23f6d847c02dffde30299c4f62c83f7ae7ebcfa3267724e1"
+      },
+      {
+        "bytes": 3988,
+        "capstone": "CP02",
+        "path": "build/CP02_TRANSFORM_RECEIPT.json",
+        "role": "transform",
+        "schema": "o006.c140.cp02-transform.v1",
+        "sha256": "a993996a6dedf374c7ad5efe1846ae773779a1218863ea7f50d9efa6930eea2a"
+      },
+      {
+        "bytes": 9272,
+        "capstone": "CP02",
+        "path": "build/CP02_ANALYSIS_RECEIPT.json",
+        "role": "analysis",
+        "schema": "o006.c140.cp02-analysis.v1",
+        "sha256": "8905654384a792e718eb824313e7233f8576b6ae8b55132db42e2740c63beb73"
+      }
+    ],
+    "rights_sha256": "4a8d8c965196d01ee4ad4229b63254393708472724976df1f393f44f73b2781d",
+    "source_scripts": 4
+  },
+  "environment_sha256": "5fe445dbaa2456f4b60ee69dfa0842cefdfed7d2cfd02784472918a51d8fd5c3",
+  "html": {
+    "details": 3,
+    "external_links": 29,
+    "files": 135,
+    "images": 14,
+    "local_links": 2058,
+    "manifest_sha256": "cf5f75feececdf98bb02e9cbd8bb8144b457f3434622f9038af26ae7c89c2f46",
+    "pages": 39,
+    "svg_images": 14,
+    "tables": 55,
+    "unique_html_ids": 1351
+  },
+  "network_access": false,
+  "runtime": {
+    "numeric_locale": "C",
+    "numpy": "2.4.4",
+    "process_environment": {
+      "MKL_NUM_THREADS": "1",
+      "NUMEXPR_NUM_THREADS": "1",
+      "OMP_NUM_THREADS": "1",
+      "OPENBLAS_NUM_THREADS": "1",
+      "PYTHONHASHSEED": "0",
+      "TZ": "UTC"
+    },
+    "python": "3.13.9",
+    "scipy": "1.17.1"
+  },
+  "schema": "o006.c140.companion-cumulative-c5-qa.v1",
+  "scripts": [
+    {
+      "path": "capstones/run_cp01_analysis.py",
+      "sha256": "3557247402e41950580f79c5dc78ac0b60311be181b4d6a5bef710e71ee1bf9b"
+    },
+    {
+      "path": "capstones/run_cp02_analysis.py",
+      "sha256": "2c156dcba81126dd9fe0f457424e309b43bf6d1fec2ee5e8a007902a660c3c28"
+    },
+    {
+      "path": "data/capstones/CP01/transform_cp01.py",
+      "sha256": "696a329e2aa5d7af0154c83c48be7b869ba1a0bef1ff0e5177c87a5a8707cc11"
+    },
+    {
+      "path": "data/capstones/CP02/transform_cp02.py",
+      "sha256": "b0f78101208eb52da9e8536153e9183a5202704fbedca91a34bf49bf618f54ae"
+    },
+    {
+      "path": "scripts/build_companion.py",
+      "sha256": "aa8525e715f2cfd69d868d3713295c62344e24847e90d552424390449f1059a2"
+    },
+    {
+      "path": "scripts/qa_companion.py",
+      "sha256": "f56ee4f7a1a5901a2a4892f70ec861bad51678a8e4646e90847fc596bbc94722"
+    },
+    {
+      "path": "simulations/run_c1_simulations.py",
+      "sha256": "f5f98c9ad4a029e5f2633ab04e4a31c786f1f85facd7d88176059831ed5cb450"
+    },
+    {
+      "path": "simulations/run_c2_simulations.py",
+      "sha256": "b5e8f3ccc6e7fbc9a8e3808eeee4bbc498cb14a525241a39b4beed53df127ab2"
+    },
+    {
+      "path": "simulations/run_c3_simulations.py",
+      "sha256": "52f92a16b523e7d72dc5800d18eb2275777c59f161f1afb6ee8420fc67701a72"
+    }
+  ],
+  "simulations": {
+    "batches": [
+      {
+        "batch": "c1",
+        "files": 9,
+        "manifest_sha256": "926bfad374a0dfa0881c8d4c23b3881b8c20039af2e0c197a19cc3d90fa2dc7d",
+        "receipt_sha256": "d577080010cc99c2bc34fc74c4b059830a459ac010d97e9bd27ecd9265d18a8c",
+        "simulations": 4
+      },
+      {
+        "batch": "c2",
+        "files": 3,
+        "manifest_sha256": "eff4b1c03f0bbb180d4f9ed7da8fd6b20635d2e24e3803486be7b292caed3275",
+        "receipt_sha256": "2dcb763ef4f4576260eb8483c06927eef2d50f616dc3c67e919553f1381c13f3",
+        "simulations": 1
+      },
+      {
+        "batch": "c3",
+        "files": 4,
+        "manifest_sha256": "64557d83097e30885ce6a9be08accd184efff745fcf532a8397f7839379e10f0",
+        "receipt_sha256": "c7f176380b2e30b9931cc44bcc2e39bb541559030cf65b1c41f32045c13b1040",
+        "simulations": 1
+      }
+    ],
+    "files": 16,
+    "simulation_ids": [
+      "O006-C140-CMP-SIM001",
+      "O006-C140-CMP-SIM002",
+      "O006-C140-CMP-SIM003",
+      "O006-C140-CMP-SIM004",
+      "O006-C140-CMP-SIM005",
+      "O006-C140-CMP-SIM006"
+    ],
+    "simulations": 6
+  },
+  "source": {
+    "anchors": 1349,
+    "assessments": [
+      {
+        "document_id": "O006-C140-CMP-CA01",
+        "problems": 10,
+        "rubrics": 11,
+        "solution_words": 2791
+      },
+      {
+        "document_id": "O006-C140-CMP-CA02",
+        "problems": 10,
+        "rubrics": 11,
+        "solution_words": 3651
+      },
+      {
+        "document_id": "O006-C140-CMP-CA03",
+        "problems": 10,
+        "rubrics": 11,
+        "solution_words": 3417
+      },
+      {
+        "document_id": "O006-C140-CMP-CA04",
+        "problems": 10,
+        "rubrics": 11,
+        "solution_words": 3751
+      }
+    ],
+    "capstones": [
+      {
+        "document_id": "O006-C140-CMP-CP01",
+        "problems": 1,
+        "rubrics": 9,
+        "solution_words": 18699
+      },
+      {
+        "document_id": "O006-C140-CMP-CP02",
+        "problems": 1,
+        "rubrics": 9,
+        "solution_words": 10978
+      }
+    ],
+    "documents": 39,
+    "headings": 1306,
+    "mastery_sets": [
+      {
+        "document_id": "O006-C140-CMP-MS00",
+        "problems": 8,
+        "solution_words": 1288
+      },
+      {
+        "document_id": "O006-C140-CMP-MS01",
+        "problems": 8,
+        "solution_words": 1433
+      },
+      {
+        "document_id": "O006-C140-CMP-MS02",
+        "problems": 8,
+        "solution_words": 1415
+      },
+      {
+        "document_id": "O006-C140-CMP-MS03",
+        "problems": 8,
+        "solution_words": 1410
+      },
+      {
+        "document_id": "O006-C140-CMP-MS04",
+        "problems": 8,
+        "solution_words": 1558
+      },
+      {
+        "document_id": "O006-C140-CMP-MS05",
+        "problems": 8,
+        "solution_words": 1292
+      },
+      {
+        "document_id": "O006-C140-CMP-MS06",
+        "problems": 8,
+        "solution_words": 1195
+      },
+      {
+        "document_id": "O006-C140-CMP-MS07",
+        "problems": 8,
+        "solution_words": 1760
+      },
+      {
+        "document_id": "O006-C140-CMP-MS08",
+        "problems": 8,
+        "solution_words": 1720
+      },
+      {
+        "document_id": "O006-C140-CMP-MS09",
+        "problems": 8,
+        "solution_words": 1312
+      },
+      {
+        "document_id": "O006-C140-CMP-MS10",
+        "problems": 8,
+        "solution_words": 1527
+      },
+      {
+        "document_id": "O006-C140-CMP-MS11",
+        "problems": 8,
+        "solution_words": 2312
+      },
+      {
+        "document_id": "O006-C140-CMP-MS12",
+        "problems": 8,
+        "solution_words": 1337
+      }
+    ],
+    "problems": 146,
+    "references": 379,
+    "source_bytes": 1145637
+  },
+  "status": "pass",
+  "translation_provenance": "OpenAI Codex gpt-5.6-sol, Ultra"
+}

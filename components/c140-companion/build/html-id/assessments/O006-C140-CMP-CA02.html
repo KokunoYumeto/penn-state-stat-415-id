@@ -1,0 +1,956 @@
+<!doctype html>
+<html lang="id-ID">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="generator" content="OpenAI Codex gpt-5.6-sol, Ultra">
+<title>Asesmen kumulatif CA02 — fondasi inferensi sampel berhingga</title>
+<link rel="stylesheet" href="../assets/style.css">
+<script>window.MathJax={loader:{load:['[tex]/boldsymbol']},tex:{packages:{'[+]':['boldsymbol']},inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']]},svg:{fontCache:'local'}};</script>
+<script defer src="../assets/MathJax/tex-svg.js"></script>
+</head>
+<body>
+<a class="skip-link" href="#main-content">Langsung ke isi utama</a>
+<div class="shell">
+<nav class="sidebar" aria-labelledby="companion-nav-title"><p class="nav-title" id="companion-nav-title">Isi pendamping</p><ol><li><a href="../index.html">Pendamping Orisinal Statistika Matematis</a></li><li><a href="../theory/O006-C140-CMP-D001.html">Model parametrik reguler, skor, dan informasi Fisher</a></li><li><a href="../theory/O006-C140-CMP-D002.html">Konsistensi MLE: identifikasi Kullback–Leibler dan teorema argmax</a></li><li><a href="../theory/O006-C140-CMP-D003.html">Ekspansi kuadratik lokal fungsi log-kemungkinan, normalitas asimtotik, dan metode delta</a></li><li><a href="../theory/O006-C140-CMP-D004.html">Prosedur Wald, skor, dan rasio fungsi kemungkinan</a></li><li><a href="../theory/O006-C140-CMP-D005.html">Fungsi kemungkinan nonreguler: empat mekanisme kegagalan</a></li><li><a href="../theory/O006-C140-CMP-D006.html">Optimalitas pengujian: Neyman–Pearson, MP, UMP, dan rasio fungsi kemungkinan monoton</a></li><li><a href="../theory/O006-C140-CMP-D007.html">Kerugian, risiko, efisiensi, Rao–Blackwell, dan Lehmann–Scheffé</a></li><li><a href="../theory/O006-C140-CMP-D008.html">Model linear Gaussian berdesain tetap dan geometri proyeksi</a></li><li><a href="../theory/O006-C140-CMP-D009.html">OLS, MLE Gaussian, dan teorema Gauss–Markov pada desain tetap</a></li><li><a href="../theory/O006-C140-CMP-D010.html">Inferensi Gaussian eksak: proyeksi, t, F, ANOVA, dan prediksi</a></li><li><a href="../theory/O006-C140-CMP-D011.html">Diagnostik, daya ungkit, kesalahan spesifikasi, dan inferensi pascaseleksi</a></li><li><a href="../theory/O006-C140-CMP-D012.html">Inferensi Bayesian sebagai pembaruan dan keputusan yang koheren</a></li><li><a href="../theory/O006-C140-CMP-D013.html">Perbandingan Bayesian–frekuentis: keputusan, cakupan, dan kalibrasi</a></li><li><a href="../simulations/O006-C140-CMP-SIM001.html">Model lokasi normal: MLE, cakupan, dan tiga statistik uji</a></li><li><a href="../simulations/O006-C140-CMP-SIM002.html">Metode delta pada titik reguler dan titik dengan turunan nol</a></li><li><a href="../simulations/O006-C140-CMP-SIM003.html">Distribusi seragam pada batas dukungan: laju nonreguler dan kegagalan bootstrap biasa</a></li><li><a href="../simulations/O006-C140-CMP-SIM004.html">Uji Neyman–Pearson teracak dengan ukuran uji tepat</a></li><li><a href="../simulations/O006-C140-CMP-SIM005.html">Model linear matriks: cakupan, heteroskedastisitas, dan pengaruh</a></li><li><a href="../simulations/O006-C140-CMP-SIM006.html">Kalibrasi selang Bayesian dan frekuentis pada model binomial</a></li><li><a href="../mastery/O006-C140-CMP-MS00.html">Set penguasaan 00 — probabilitas, distribusi, dan ekspektasi (diagnostik C140)</a></li><li><a href="../mastery/O006-C140-CMP-MS01.html">Set penguasaan 01 — statistik urutan dan distribusi sampel</a></li><li><a href="../mastery/O006-C140-CMP-MS02.html">Set penguasaan 02 — estimasi, bias, MSE, dan sifat penduga</a></li><li><a href="../mastery/O006-C140-CMP-MS03.html">Set penguasaan 03 — kecukupan, faktorisasi, kelengkapan, dan statistik aksesori</a></li><li><a href="../mastery/O006-C140-CMP-MS04.html">Set penguasaan 04 — metode momen dan dasar kemungkinan maksimum</a></li><li><a href="../mastery/O006-C140-CMP-MS05.html">Set penguasaan 05 — informasi Fisher, interval kepercayaan, bootstrap, dan metode delta</a></li><li><a href="../mastery/O006-C140-CMP-MS06.html">Set penguasaan 06 — pengujian hipotesis, daya, nilai-p, dan jembatan ke teori fungsi kemungkinan</a></li><li><a href="../mastery/O006-C140-CMP-MS07.html">Set penguasaan 07 — keteraturan, konsistensi, dan normalitas MLE</a></li><li><a href="../mastery/O006-C140-CMP-MS08.html">Set penguasaan 08 — Wald, skor, rasio fungsi kemungkinan, dan diagnosis nonreguler</a></li><li><a href="../mastery/O006-C140-CMP-MS09.html">Set penguasaan 09 — pengujian eksak dan optimalitas Neyman–Pearson</a></li><li><a href="../mastery/O006-C140-CMP-MS10.html">Set penguasaan 10 — uji fungsi kemungkinan asimtotik, risiko, dan perbaikan penduga</a></li><li><a href="../mastery/O006-C140-CMP-MS11.html">Set penguasaan 11 — pembaruan Bayesian, keputusan, dan kalibrasi</a></li><li><a href="../mastery/O006-C140-CMP-MS12.html">Set penguasaan 12 — model linear Gaussian dalam bentuk matriks, inferensi eksak, dan diagnostik</a></li><li><a href="O006-C140-CMP-CA01.html">Asesmen kumulatif C1: fungsi kemungkinan, optimalitas, dan keputusan statistik</a></li><li><a href="O006-C140-CMP-CA02.html" aria-current="page">Asesmen kumulatif CA02 — fondasi inferensi sampel berhingga</a></li><li><a href="O006-C140-CMP-CA03.html">Asesmen kumulatif CA03 — model linear dalam bentuk matriks, inferensi eksak, dan diagnostik</a></li><li><a href="O006-C140-CMP-CA04.html">Asesmen kumulatif CA04 — sintesis Bayesian–frekuentis</a></li><li><a href="../capstones/O006-C140-CMP-CP01.html">Proyek akhir integratif CP01 — regresi data terbuka untuk kuat tekan beton</a></li><li><a href="../capstones/O006-C140-CMP-CP02.html">Proyek akhir CP02 — perbandingan Bayesian–frekuentis pada data agregat kecenderungan bersarang greater sage-grouse</a></li></ol></nav>
+<main id="main-content" tabindex="-1">
+<div class="metadata"><strong>O006-C140-CMP-CA02</strong> · id-ID · CC BY-SA 4.0 · OpenAI Codex gpt-5.6-sol, Ultra</div>
+<p><a id="O006-C140-CMP-CA02-SEC01"></a></p>
+<h1>Asesmen kumulatif CA02</h1>
+<p>Asesmen ini bernilai 100 poin. Sepuluh masalah masing-masing bernilai 10 poin.
+Semua peluang, harapan, dan risiko harus menyebut hukum pengambilan sampel yang dipakai.
+Nama teorema tanpa asumsi pokoknya tidak memperoleh poin yang dialokasikan untuk asumsi. Jawaban
+numerik tanpa derivasi tidak memperoleh poin derivasi, dan aproksimasi harus
+dibedakan dari identitas sampel berhingga.</p>
+<p><a id="O006-C140-CMP-CA02-P01"></a></p>
+<h2>Masalah 1 — pengambilan sampel tanpa pengembalian dan indikator (10 poin)</h2>
+<!--PROBLEM_META {"id":"O006-C140-CMP-CA02-P01","prerequisites":["O006-C140-CMP-MS00"],"objective":"Menggabungkan probabilitas bersyarat, indikator, harapan, dan kovarians pada pengambilan sampel tanpa pengembalian","difficulty":"menengah","misconceptions":["Indikator pilihan tanpa pengembalian saling independen","Kovarians boleh dihapus dari varians jumlah berbobot","Harapan bersyarat dapat dihitung dengan peluang marginal"]}-->
+<p>Dari populasi berlabel <span class="math-inline" role="math">\(1,2,3,4,5,6\)</span>, dipilih tepat tiga label secara acak
+seragam tanpa pengembalian. Tuliskan <span class="math-inline" role="math">\(I_j=\mathbf1\{j\text{ terpilih}\}\)</span>,
+<span class="math-inline" role="math">\(Y=\sum_{j=1}^6jI_j\)</span>, dan
+<span class="math-inline" role="math">\(B=\{\text{sedikitnya satu dari label 5 dan 6 terpilih}\}\)</span>.</p>
+<ol>
+<li>Hitung <span class="math-inline" role="math">\(P(B)\)</span> dan <span class="math-inline" role="math">\(P(I_1=1\mid B)\)</span> dengan menghitung himpunan bagian.</li>
+<li>Turunkan <span class="math-inline" role="math">\(E(I_j)\)</span>, <span class="math-inline" role="math">\(\operatorname{Var}(I_j)\)</span>, dan
+<span class="math-inline" role="math">\(\operatorname{Cov}(I_i,I_j)\)</span> untuk <span class="math-inline" role="math">\(i\ne j\)</span>.</li>
+<li>Gunakan indikator untuk menghitung <span class="math-inline" role="math">\(E(Y)\)</span> dan
+<span class="math-inline" role="math">\(\operatorname{Var}(Y)\)</span>.</li>
+<li>Hitung <span class="math-inline" role="math">\(E(Y\mid B)\)</span>, dengan membedakan label <span class="math-inline" role="math">\(1,\ldots,4\)</span> dari
+label <span class="math-inline" role="math">\(5,6\)</span>.</li>
+</ol>
+<p><a id="O006-C140-CMP-CA02-P01-H01"></a></p>
+<h3>Petunjuk 1</h3>
+<p>Ada <span class="math-inline" role="math">\(\binom63=20\)</span> himpunan bagian yang sama peluangnya. Komplemen <span class="math-inline" role="math">\(B\)</span> memilih
+ketiga label hanya dari <span class="math-inline" role="math">\(\{1,2,3,4\}\)</span>.</p>
+<p><a id="O006-C140-CMP-CA02-P01-H02"></a></p>
+<h3>Petunjuk 2</h3>
+<p>Untuk <span class="math-inline" role="math">\(i\ne j\)</span>, gunakan
+<span class="math-inline" role="math">\(P(I_i=I_j=1)=(3/6)(2/5)\)</span>. Untuk varians <span class="math-inline" role="math">\(Y\)</span>, jangan hilangkan
+<span class="math-inline" role="math">\(2\sum_{i&lt;j}ij\operatorname{Cov}(I_i,I_j)\)</span>.</p>
+<p><a id="O006-C140-CMP-CA02-P01-ANS"></a></p>
+<h3>Jawaban singkat</h3>
+<div class="math-display" role="math">\[P(B)=\frac45,\qquad P(I_1=1\mid B)=\frac7{16}.\]</div>
+<p>Untuk setiap <span class="math-inline" role="math">\(j\)</span>, <span class="math-inline" role="math">\(E(I_j)=1/2\)</span> dan <span class="math-inline" role="math">\(\operatorname{Var}(I_j)=1/4\)</span>,
+sedangkan untuk <span class="math-inline" role="math">\(i\ne j\)</span>, <span class="math-inline" role="math">\(\operatorname{Cov}(I_i,I_j)=-1/20\)</span>. Maka</p>
+<div class="math-display" role="math">\[E(Y)=\frac{21}{2},\qquad \operatorname{Var}(Y)=\frac{21}{4},
+\qquad E(Y\mid B)=\frac{45}{4}.\]</div>
+<p><a id="O006-C140-CMP-CA02-P01-SOL"></a></p>
+<h3>Solusi lengkap</h3>
+<p>Ruang sampel terdiri atas 20 himpunan bagian berukuran tiga, semuanya berpeluang
+<span class="math-inline" role="math">\(1/20\)</span>. Kejadian <span class="math-inline" role="math">\(B^c\)</span> mempunyai <span class="math-inline" role="math">\(\binom43=4\)</span> himpunan bagian, sehingga</p>
+<div class="math-display" role="math">\[P(B)=1-\frac4{20}=\frac45.\]</div>
+<p>Jika label 1 sudah dipilih, dua label lain dipilih dari lima label tersisa.
+Agar <span class="math-inline" role="math">\(B\)</span> terjadi, tidak boleh keduanya berasal dari <span class="math-inline" role="math">\(\{2,3,4\}\)</span>. Jadi
+ada <span class="math-inline" role="math">\(\binom52-\binom32=7\)</span> himpunan bagian yang termasuk dalam
+<span class="math-inline" role="math">\(\{I_1=1\}\cap B\)</span>, dan</p>
+<div class="math-display" role="math">\[P(I_1=1\mid B)=\frac{7/20}{16/20}=\frac7{16}.\]</div>
+<p>Simetri pengambilan sampel memberi <span class="math-inline" role="math">\(P(I_j=1)=3/6=1/2\)</span>, sehingga peubah indikator
+Bernoulli tersebut mempunyai varians <span class="math-inline" role="math">\(1/4\)</span>. Untuk dua label berbeda,</p>
+<div class="math-display" role="math">\[P(I_i=I_j=1)=\frac36\frac25=\frac15,
+\qquad
+\operatorname{Cov}(I_i,I_j)=\frac15-\frac14=-\frac1{20}.\]</div>
+<p>Kovarians negatif muncul akibat kendala ukuran sampel tetap, bukan
+independensi. Perhitungan indikator dan kovarians ini menerapkan teknik umum dari
+<a class="xref" data-target-id="O006-C140-CMP-MS00-P03-SOL" href="../mastery/O006-C140-CMP-MS00.html#O006-C140-CMP-MS00-P03-SOL">Solusi lengkap</a> dan <a class="xref" data-target-id="O006-C140-CMP-MS00-P04-SOL" href="../mastery/O006-C140-CMP-MS00.html#O006-C140-CMP-MS00-P04-SOL">Solusi lengkap</a>.</p>
+<p>Linearitas harapan tidak memerlukan independensi, sehingga</p>
+<div class="math-display" role="math">\[E(Y)=\sum_{j=1}^6jE(I_j)=\frac12\sum_{j=1}^6j=\frac{21}{2}.\]</div>
+<p>Karena <span class="math-inline" role="math">\(\sum j^2=91\)</span> dan
+<span class="math-inline" role="math">\(\sum_{i&lt;j}ij=\{(\sum j)^2-\sum j^2\}/2=175\)</span>,</p>
+<div class="math-display" role="math">\[\begin{aligned}
+\operatorname{Var}(Y)
+&amp;=\frac14\sum_{j=1}^6j^2
+  +2\left(-\frac1{20}\right)\sum_{i&lt;j}ij\\
+&amp;=\frac{91}{4}-\frac{35}{2}=\frac{21}{4}.
+\end{aligned}\]</div>
+<p>Untuk setiap <span class="math-inline" role="math">\(j\le4\)</span>, hitungan yang sama seperti untuk label 1 memberi
+<span class="math-inline" role="math">\(P(I_j=1\mid B)=7/16\)</span>. Untuk <span class="math-inline" role="math">\(j=5,6\)</span>, kejadian <span class="math-inline" role="math">\(I_j=1\)</span> sudah
+menyiratkan <span class="math-inline" role="math">\(B\)</span>, sehingga</p>
+<div class="math-display" role="math">\[P(I_j=1\mid B)=\frac{P(I_j=1)}{P(B)}
+=\frac{1/2}{4/5}=\frac58.\]</div>
+<p>Oleh karena itu</p>
+<div class="math-display" role="math">\[E(Y\mid B)
+=\frac7{16}(1+2+3+4)+\frac58(5+6)
+=\frac{70+110}{16}=\frac{45}{4}.\]</div>
+<p><a id="O006-C140-CMP-CA02-P02"></a></p>
+<h2>Masalah 2 — transformasi dan hukum minimum–maksimum (10 poin)</h2>
+<!--PROBLEM_META {"id":"O006-C140-CMP-CA02-P02","prerequisites":["O006-C140-CMP-MS00","O006-C140-CMP-MS01"],"objective":"Menurunkan hukum transformasi, bersama, marginal, dan rasio statistik urutan","difficulty":"lanjut","misconceptions":["Jacobian tidak diperlukan setelah mengurutkan data","Minimum dan maksimum selalu dependen","Densitas marginal dapat diperoleh dengan mengabaikan dukungan segitiga"]}-->
+<p>Misalkan <span class="math-inline" role="math">\(X_1,X_2,X_3\)</span> iid dengan densitas</p>
+<div class="math-display" role="math">\[f(x)=2x\mathbf1\{0&lt;x&lt;1\}.\]</div>
+<p>Tuliskan <span class="math-inline" role="math">\(L=X_{(1)}\)</span>, <span class="math-inline" role="math">\(M=X_{(3)}\)</span>, dan <span class="math-inline" role="math">\(R=L/M\)</span>.</p>
+<ol>
+<li>Tunjukkan bahwa <span class="math-inline" role="math">\(Y_i=X_i^2\)</span> iid Seragam<span class="math-inline" role="math">\((0,1)\)</span>, lalu turunkan
+densitas bersama minimum dan maksimum <span class="math-inline" role="math">\((Y_{(1)},Y_{(3)})\)</span>.</li>
+<li>Ubah kembali ke <span class="math-inline" role="math">\((L,M)\)</span> dan turunkan densitas bersamanya beserta kedua
+densitas marginal.</li>
+<li>Transformasikan <span class="math-inline" role="math">\((L,M)\)</span> menjadi <span class="math-inline" role="math">\((R,M)\)</span>. Putuskan apakah <span class="math-inline" role="math">\(R\)</span> dan
+<span class="math-inline" role="math">\(M\)</span> independen.</li>
+<li>Hitung <span class="math-inline" role="math">\(P(R\le1/2)\)</span> dan <span class="math-inline" role="math">\(E(M^2)\)</span>.</li>
+</ol>
+<p><a id="O006-C140-CMP-CA02-P02-H01"></a></p>
+<h3>Petunjuk 1</h3>
+<p>Untuk <span class="math-inline" role="math">\(0&lt;y&lt;1\)</span>,
+<span class="math-inline" role="math">\(P(X_i^2\le y)=P(X_i\le\sqrt y)\)</span>. Untuk tiga peubah Seragam, satu titik menjadi
+minimum, satu menjadi maksimum, dan satu berada di antaranya.</p>
+<p><a id="O006-C140-CMP-CA02-P02-H02"></a></p>
+<h3>Petunjuk 2</h3>
+<p>Pada transformasi <span class="math-inline" role="math">\(a=l^2,b=m^2\)</span>, Jacobian mutlaknya <span class="math-inline" role="math">\(4lm\)</span>. Pada
+transformasi <span class="math-inline" role="math">\(l=rm\)</span>, Jacobian mutlaknya <span class="math-inline" role="math">\(m\)</span>.</p>
+<p><a id="O006-C140-CMP-CA02-P02-ANS"></a></p>
+<h3>Jawaban singkat</h3>
+<div class="math-display" role="math">\[f_{L,M}(l,m)=24lm(m^2-l^2)\mathbf1\{0&lt;l&lt;m&lt;1\}.\]</div>
+<p>Marginalnya adalah</p>
+<div class="math-display" role="math">\[f_L(l)=6l(1-l^2)^2,\qquad f_M(m)=6m^5.\]</div>
+<p>Selanjutnya</p>
+<div class="math-display" role="math">\[f_{R,M}(r,m)=24r(1-r^2)m^5
+=\{4r(1-r^2)\}\{6m^5\},\]</div>
+<p>pada <span class="math-inline" role="math">\(0&lt;r,m&lt;1\)</span>, sehingga <span class="math-inline" role="math">\(R\)</span> dan <span class="math-inline" role="math">\(M\)</span> independen. Akhirnya</p>
+<div class="math-display" role="math">\[P(R\le1/2)=\frac7{16},\qquad E(M^2)=\frac34.\]</div>
+<p><a id="O006-C140-CMP-CA02-P02-SOL"></a></p>
+<h3>Solusi lengkap</h3>
+<p>CDF satu pengamatan adalah <span class="math-inline" role="math">\(F_X(x)=x^2\)</span> pada <span class="math-inline" role="math">\((0,1)\)</span>. Karena transformasi
+kuadrat monoton naik di domain itu,</p>
+<div class="math-display" role="math">\[P(Y_i\le y)=P(X_i\le\sqrt y)=F_X(\sqrt y)=y,
+\qquad 0&lt;y&lt;1.\]</div>
+<p>Jadi <span class="math-inline" role="math">\(Y_i\)</span> iid Seragam<span class="math-inline" role="math">\((0,1)\)</span>. Kontinuitas membuat peluang terjadinya nilai
+kembar sama dengan nol.
+Untuk <span class="math-inline" role="math">\(A=Y_{(1)}\)</span> dan <span class="math-inline" role="math">\(C=Y_{(3)}\)</span>, ada <span class="math-inline" role="math">\(3\cdot2\)</span> cara memilih label
+minimum dan maksimum, sedangkan observasi ketiga jatuh di antara <span class="math-inline" role="math">\(a\)</span> dan
+<span class="math-inline" role="math">\(c\)</span>. Maka, seperti langkah umum pada <a class="xref" data-target-id="O006-C140-CMP-MS01-P01-SOL" href="../mastery/O006-C140-CMP-MS01.html#O006-C140-CMP-MS01-P01-SOL">Solusi lengkap</a>,</p>
+<div class="math-display" role="math">\[f_{A,C}(a,c)=6(c-a)\mathbf1\{0&lt;a&lt;c&lt;1\}.\]</div>
+<p>Karena <span class="math-inline" role="math">\(a=l^2,c=m^2\)</span> dan Jacobian mutlaknya <span class="math-inline" role="math">\(4lm\)</span>,</p>
+<div class="math-display" role="math">\[f_{L,M}(l,m)=6(m^2-l^2)4lm
+=24lm(m^2-l^2),\qquad 0&lt;l&lt;m&lt;1.\]</div>
+<p>Integrasi pada dukungan segitiga memberi</p>
+<div class="math-display" role="math">\[\begin{aligned}
+f_M(m)
+&amp;=\int_0^m24lm(m^2-l^2)\,dl=6m^5,\\
+f_L(l)
+&amp;=\int_l^124lm(m^2-l^2)\,dm=6l(1-l^2)^2.
+\end{aligned}\]</div>
+<p>Kedua integral bernilai satu pada domain masing-masing, yang juga mengaudit
+faktor Jacobian.</p>
+<p>Untuk <span class="math-inline" role="math">\(R=L/M\)</span>, inversnya <span class="math-inline" role="math">\(l=rm\)</span> dan Jacobian mutlaknya <span class="math-inline" role="math">\(m\)</span>. Jadi</p>
+<div class="math-display" role="math">\[f_{R,M}(r,m)
+=24(rm)m\{m^2-r^2m^2\}m
+=24r(1-r^2)m^5,\]</div>
+<p>pada domain hasil kali <span class="math-inline" role="math">\((0,1)^2\)</span>. Bentuk tersebut dapat difaktorkan menjadi densitas
+<span class="math-inline" role="math">\(f_R(r)=4r(1-r^2)\)</span> dan <span class="math-inline" role="math">\(f_M(m)=6m^5\)</span>; integral keduanya sama dengan satu,
+sehingga independensi benar-benar terbukti. Hasil ini tidak bertentangan
+dengan ketergantungan <span class="math-inline" role="math">\(L,M\)</span>: normalisasi melalui rasio telah menghilangkan skala
+yang ditentukan oleh maksimum.
+Terakhir,</p>
+<div class="math-display" role="math">\[P(R\le1/2)=\int_0^{1/2}4r(1-r^2)\,dr
+=\left[2r^2-r^4\right]_0^{1/2}=\frac7{16},\]</div>
+<p>dan</p>
+<div class="math-display" role="math">\[E(M^2)=\int_0^1m^2(6m^5)\,dm=\frac68=\frac34.\]</div>
+<p><a id="O006-C140-CMP-CA02-P03"></a></p>
+<h2>Masalah 3 — kuantil, titik ujung, dan audit himpunan dukungan (10 poin)</h2>
+<!--PROBLEM_META {"id":"O006-C140-CMP-CA02-P03","prerequisites":["O006-C140-CMP-MS01","O006-C140-CMP-MS05"],"objective":"Membangun interval kuantil bebas distribusi dan interval titik ujung parametrik sambil mengaudit himpunan dukungan","difficulty":"lanjut","misconceptions":["Setiap interval statistik urutan memiliki cakupan nominal yang sama","Wald tetap sah ketika himpunan dukungan bergantung pada parameter","Interval titik ujung dan kuantil memakai asumsi yang identik"]}-->
+<p>Delapan observasi iid kontinu mempunyai statistik urutan teramati
+<span class="math-inline" role="math">\(x_{(2)}=1{,}1\)</span>, <span class="math-inline" role="math">\(x_{(7)}=3{,}4\)</span>, dan <span class="math-inline" role="math">\(x_{(8)}=4{,}0\)</span>.</p>
+<ol>
+<li>Tanpa mengasumsikan keluarga parametrik, misalkan <span class="math-inline" role="math">\(q\)</span> adalah median
+populasi unik. Hitung cakupan eksak selang <span class="math-inline" role="math">\([X_{(2)},X_{(7)}]\)</span> dan
+laporkan selang teramatinya.</li>
+<li>Sekarang tambahkan model <span class="math-inline" role="math">\(X_i\sim\operatorname{Uniform}(0,\theta)\)</span>,
+<span class="math-inline" role="math">\(\theta&gt;0\)</span>. Bentuk selang kepercayaan eksak 95% untuk titik ujung
+<span class="math-inline" role="math">\(\theta\)</span> dari <span class="math-inline" role="math">\(M=X_{(8)}\)</span>, lalu hitung nilainya.</li>
+<li>Transformasikan selang titik ujung itu menjadi selang 95% untuk median
+parametrik <span class="math-inline" role="math">\(q=\theta/2\)</span>.</li>
+<li>Audit mengapa argumen Wald reguler tidak sah untuk titik ujung ini dan
+bandingkan asumsi dua selang median yang diperoleh.</li>
+</ol>
+<p><a id="O006-C140-CMP-CA02-P03-H01"></a></p>
+<h3>Petunjuk 1</h3>
+<p>Jika <span class="math-inline" role="math">\(K=\#\{i:X_i\le q\}\)</span>, kontinuitas dan keunikan median memberi
+<span class="math-inline" role="math">\(K\sim\operatorname{Binomial}(8,1/2)\)</span>. Selang mencakup <span class="math-inline" role="math">\(q\)</span> tepat
+ketika <span class="math-inline" role="math">\(2\le K\le6\)</span>.</p>
+<p><a id="O006-C140-CMP-CA02-P03-H02"></a></p>
+<h3>Petunjuk 2</h3>
+<p>Dalam model Seragam,
+<span class="math-inline" role="math">\(P_\theta(M/\theta\le u)=u^8\)</span>. Gunakan
+<span class="math-inline" role="math">\(P(M/\theta\ge0{,}05^{1/8})=0{,}95\)</span> dan ingat bahwa <span class="math-inline" role="math">\(M\le\theta\)</span>
+hampir pasti.</p>
+<p><a id="O006-C140-CMP-CA02-P03-ANS"></a></p>
+<h3>Jawaban singkat</h3>
+<p>Selang bebas distribusi <span class="math-inline" role="math">\([1{,}1,3{,}4]\)</span> mempunyai cakupan</p>
+<div class="math-display" role="math">\[P(2\le K\le6)=\frac{119}{128}\approx0{,}92969.\]</div>
+<p>Selang titik ujung eksak adalah</p>
+<div class="math-display" role="math">\[[M,M(0{,}05)^{-1/8}]
+\approx[4{,}0000,5{,}8169].\]</div>
+<p>Karena <span class="math-inline" role="math">\(q=\theta/2\)</span>, selang median parametriknya kira-kira
+<span class="math-inline" role="math">\([2{,}0000,2{,}9084]\)</span>. Dukungan yang bergantung pada parameter dan MLE yang
+berada di batas membuat prosedur Wald reguler tidak sah.</p>
+<p><a id="O006-C140-CMP-CA02-P03-SOL"></a></p>
+<h3>Solusi lengkap</h3>
+<p>Untuk populasi kontinu dengan median unik <span class="math-inline" role="math">\(q\)</span>, indikator
+<span class="math-inline" role="math">\(\mathbf1\{X_i\le q\}\)</span> iid Bernoulli<span class="math-inline" role="math">\((1/2)\)</span>. Jadi
+<span class="math-inline" role="math">\(K\sim\operatorname{Binomial}(8,1/2)\)</span>. Peristiwa
+<span class="math-inline" role="math">\(X_{(2)}\le q\le X_{(7)}\)</span> setara dengan <span class="math-inline" role="math">\(2\le K\le6\)</span>, karena nilai yang
+persis sama dengan <span class="math-inline" role="math">\(q\)</span> berpeluang nol. Maka</p>
+<div class="math-display" role="math">\[\begin{aligned}
+P(X_{(2)}\le q\le X_{(7)})
+&amp;=1-P(K\in\{0,1,7,8\})\\
+&amp;=1-2\frac{\binom80+\binom81}{2^8}
+=1-\frac{18}{256}=\frac{119}{128}.
+\end{aligned}\]</div>
+<p>Cakupan ini sekitar <span class="math-inline" role="math">\(0{,}92969\)</span>, bukan otomatis 0,95; sifat diskret peringkat
+menentukan nilainya, sebagaimana pada <a class="xref" data-target-id="O006-C140-CMP-MS01-P05-SOL" href="../mastery/O006-C140-CMP-MS01.html#O006-C140-CMP-MS01-P05-SOL">Solusi lengkap</a>.
+Selang teramati adalah <span class="math-inline" role="math">\([1{,}1,3{,}4]\)</span>.</p>
+<p>Di bawah model Seragam,</p>
+<div class="math-display" role="math">\[P_\theta(M\le m)=\left(\frac m\theta\right)^8,
+\qquad 0&lt;m&lt;\theta.\]</div>
+<p>Dengan <span class="math-inline" role="math">\(c=0{,}05^{1/8}\)</span>,</p>
+<div class="math-display" role="math">\[P_\theta(M/\theta\ge c)=1-c^8=0{,}95.\]</div>
+<p>Peristiwa ini setara dengan <span class="math-inline" role="math">\(M\le\theta\le M/c\)</span>. Jadi</p>
+<div class="math-display" role="math">\[C_\theta=[M,M(0{,}05)^{-1/8}].\]</div>
+<p>Untuk <span class="math-inline" role="math">\(M=4\)</span>, faktor <span class="math-inline" role="math">\((0{,}05)^{-1/8}\approx1{,}4542154\)</span>, sehingga
+<span class="math-inline" role="math">\(C_\theta\approx[4{,}0000,5{,}8169]\)</span>. Karena transformasi
+<span class="math-inline" role="math">\(q=\theta/2\)</span> monoton dan satu-ke-satu, invariansi cakupan memberi</p>
+<div class="math-display" role="math">\[C_q=C_\theta/2\approx[2{,}0000,2{,}9084].\]</div>
+<p>Fungsi kemungkinan untuk titik ujung adalah
+<span class="math-inline" role="math">\(L(\theta;x)=\theta^{-8}\mathbf1\{\theta\ge M\}\)</span>. Himpunan dukungan data bergantung
+pada <span class="math-inline" role="math">\(\theta\)</span>, MLE <span class="math-inline" role="math">\(M\)</span> berada pada batas acak, dan galatnya berorde
+<span class="math-inline" role="math">\(1/n\)</span>, bukan <span class="math-inline" role="math">\(1/\sqrt n\)</span>; asumsi himpunan dukungan bersama, titik interior,
+identitas skor, dan normalitas akar-<span class="math-inline" role="math">\(n\)</span> yang diperlukan Wald gagal. Pivot
+eksak tetap sah karena diturunkan langsung dari CDF maksimum; lihat
+<a class="xref" data-target-id="O006-C140-CMP-MS05-P07-SOL" href="../mastery/O006-C140-CMP-MS05.html#O006-C140-CMP-MS05-P07-SOL">Solusi lengkap</a>. Selang peringkat pertama hanya memerlukan iid,
+kontinuitas, dan median unik, tetapi cakupannya <span class="math-inline" role="math">\(119/128\)</span>. Selang kedua
+benar-benar 95% hanya bila model Seragam dengan titik ujung benar. Nilai kembar, median tidak
+unik, atau bentuk distribusi yang bukan Seragam mengubah argumen yang relevan.</p>
+<p><a id="O006-C140-CMP-CA02-P04"></a></p>
+<h2>Masalah 4 — konsistensi tanpa konvergensi momen kedua (10 poin)</h2>
+<!--PROBLEM_META {"id":"O006-C140-CMP-CA02-P04","prerequisites":["O006-C140-CMP-MS02"],"objective":"Membedakan bias, varians, MSE, risiko, konsistensi, dan konvergensi momen melalui gangguan langka","difficulty":"lanjut","misconceptions":["Konsistensi selalu menyiratkan MSE menuju nol","Bias menuju nol menjamin varians menuju nol","Konvergensi probabilitas membolehkan pertukaran semua momen"]}-->
+<p>Misalkan <span class="math-inline" role="math">\(X_1,X_2,\ldots\)</span> iid dengan <span class="math-inline" role="math">\(E(X_i)=\mu\)</span> dan
+<span class="math-inline" role="math">\(\operatorname{Var}(X_i)=\sigma^2&lt;\infty\)</span>. Secara independen dari sampel,
+definisikan <span class="math-inline" role="math">\(R_n=n\)</span> dengan peluang <span class="math-inline" role="math">\(1/n^2\)</span> dan <span class="math-inline" role="math">\(R_n=0\)</span> selainnya.
+Bandingkan</p>
+<div class="math-display" role="math">\[T_n=\bar X_n,
+\qquad U_n=\bar X_n+R_n\]</div>
+<p>untuk menduga <span class="math-inline" role="math">\(\mu\)</span> di bawah kerugian kuadratik.</p>
+<ol>
+<li>Hitung bias, varians, MSE, dan risiko kuadratik kedua penduga.</li>
+<li>Buktikan bahwa <span class="math-inline" role="math">\(U_n\to_P\mu\)</span>.</li>
+<li>Tentukan limit <span class="math-inline" role="math">\(E(U_n)\)</span> dan <span class="math-inline" role="math">\(E(U_n^2)\)</span>. Apakah <span class="math-inline" role="math">\(U_n\to\mu\)</span> dalam
+<span class="math-inline" role="math">\(L^2\)</span>?</li>
+<li>Nyatakan syarat ekor tambahan yang dapat menghubungkan konvergensi
+probabilitas dengan konvergensi momen.</li>
+</ol>
+<p><a id="O006-C140-CMP-CA02-P04-H01"></a></p>
+<h3>Petunjuk 1</h3>
+<p>Gunakan <span class="math-inline" role="math">\(E(R_n)=1/n\)</span>, <span class="math-inline" role="math">\(E(R_n^2)=1\)</span>, dan independensi <span class="math-inline" role="math">\(R_n\)</span> dari
+<span class="math-inline" role="math">\(\bar X_n\)</span>.</p>
+<p><a id="O006-C140-CMP-CA02-P04-H02"></a></p>
+<h3>Petunjuk 2</h3>
+<p>Meskipun nilai tak nol <span class="math-inline" role="math">\(R_n\)</span> membesar, peluangnya <span class="math-inline" role="math">\(1/n^2\)</span> menuju nol.
+Untuk momen kedua, peristiwa langka itu tetap menyumbang satu satuan.</p>
+<p><a id="O006-C140-CMP-CA02-P04-ANS"></a></p>
+<h3>Jawaban singkat</h3>
+<div class="math-display" role="math">\[R(\mu,T_n)=\operatorname{MSE}(T_n)=\frac{\sigma^2}{n},\]</div>
+<p>sedangkan</p>
+<div class="math-display" role="math">\[\operatorname{Bias}(U_n)=\frac1n,\qquad
+\operatorname{Var}(U_n)=\frac{\sigma^2}{n}+1-\frac1{n^2},\qquad
+R(\mu,U_n)=\operatorname{MSE}(U_n)=1+\frac{\sigma^2}{n}.\]</div>
+<p>Walaupun <span class="math-inline" role="math">\(U_n\to_P\mu\)</span> dan <span class="math-inline" role="math">\(E(U_n)\to\mu\)</span>,</p>
+<div class="math-display" role="math">\[E(U_n^2)\to\mu^2+1,\]</div>
+<p>sehingga tidak ada konvergensi <span class="math-inline" role="math">\(L^2\)</span>. Kontrol integrabilitas seragam
+(<em>uniform integrability</em>) pada
+kuadrat diperlukan untuk menukar limit dan momen kedua.</p>
+<p><a id="O006-C140-CMP-CA02-P04-SOL"></a></p>
+<h3>Solusi lengkap</h3>
+<p>Penduga <span class="math-inline" role="math">\(T_n\)</span> tak bias, mempunyai varians <span class="math-inline" role="math">\(\sigma^2/n\)</span>, dan karena
+kerugiannya <span class="math-inline" role="math">\((t-\mu)^2\)</span>, risikonya pada nilai parameter <span class="math-inline" role="math">\(\mu\)</span> sama dengan MSE:</p>
+<div class="math-display" role="math">\[R(\mu,T_n)=E_\mu(T_n-\mu)^2=\frac{\sigma^2}{n}.\]</div>
+<p>Untuk gangguan langka,</p>
+<div class="math-display" role="math">\[E(R_n)=n\frac1{n^2}=\frac1n,\qquad
+E(R_n^2)=n^2\frac1{n^2}=1,\]</div>
+<p>sehingga <span class="math-inline" role="math">\(\operatorname{Var}(R_n)=1-1/n^2\)</span>. Independensi memberi</p>
+<div class="math-display" role="math">\[\operatorname{Bias}(U_n)=\frac1n,\qquad
+\operatorname{Var}(U_n)=\frac{\sigma^2}{n}+1-\frac1{n^2}.\]</div>
+<p>Dekomposisi bias–varians menghasilkan</p>
+<div class="math-display" role="math">\[R(\mu,U_n)=\operatorname{MSE}(U_n)
+=\frac{\sigma^2}{n}+1-\frac1{n^2}+\frac1{n^2}
+=1+\frac{\sigma^2}{n}.\]</div>
+<p>LLN memberi <span class="math-inline" role="math">\(\bar X_n\to_P\mu\)</span>, sedangkan untuk setiap
+<span class="math-inline" role="math">\(\varepsilon&gt;0\)</span> dan <span class="math-inline" role="math">\(n&gt;\varepsilon\)</span>,</p>
+<div class="math-display" role="math">\[P(|R_n|&gt;\varepsilon)=\frac1{n^2}\to0.\]</div>
+<p>Jadi <span class="math-inline" role="math">\(R_n\to_P0\)</span>, dan Slutsky memberi <span class="math-inline" role="math">\(U_n\to_P\mu\)</span>. Secara eksplisit,
+peluang penyimpangan dapat dibatasi oleh jumlah peluang penyimpangan <span class="math-inline" role="math">\(\bar X_n\)</span> dan
+peluang <span class="math-inline" role="math">\(R_n\ne0\)</span>.</p>
+<p>Momen pertama memang konvergen:
+<span class="math-inline" role="math">\(E(U_n)=\mu+1/n\to\mu\)</span>. Namun</p>
+<div class="math-display" role="math">\[\begin{aligned}
+E(U_n^2)
+&amp;=\operatorname{Var}(U_n)+\{E(U_n)\}^2\\
+&amp;=\frac{\sigma^2}{n}+1-\frac1{n^2}
+  +\left(\mu+\frac1n\right)^2\\
+&amp;=\mu^2+1+\frac{\sigma^2+2\mu}{n}
+\longrightarrow\mu^2+1.
+\end{aligned}\]</div>
+<p>Karena <span class="math-inline" role="math">\(E(U_n-\mu)^2\to1\)</span>, konvergensi <span class="math-inline" role="math">\(L^2\)</span> gagal. Contoh ini
+memperkuat peringatan kontrol ekor pada <a class="xref" data-target-id="O006-C140-CMP-MS02-P05-SOL" href="../mastery/O006-C140-CMP-MS02.html#O006-C140-CMP-MS02-P05-SOL">Solusi lengkap</a>:
+konvergensi probabilitas ditambah integrabilitas seragam dari barisan <span class="math-inline" role="math">\(U_n^2\)</span>, misalnya
+batas seragam momen <span class="math-inline" role="math">\(E|U_n|^{2+\delta}\)</span> untuk suatu <span class="math-inline" role="math">\(\delta&gt;0\)</span>, akan
+memungkinkan konvergensi momen kedua. Syarat itu justru gagal karena peristiwa
+ekor yang langka menghasilkan nilai sebesar <span class="math-inline" role="math">\(n\)</span>.</p>
+<p><a id="O006-C140-CMP-CA02-P05"></a></p>
+<h2>Masalah 5 — kecukupan, minimalitas, kelengkapan, statistik aksesori, dan Basu (10 poin)</h2>
+<!--PROBLEM_META {"id":"O006-C140-CMP-CA02-P05","prerequisites":["O006-C140-CMP-MS03"],"objective":"Memverifikasi faktorisasi, kecukupan minimal, kelengkapan, sifat aksesori, dan Basu pada model eksponensial","difficulty":"lanjut","misconceptions":["Faktorisasi saja membuktikan minimalitas dan kelengkapan","Setiap statistik aksesori independen dari statistik cukup","Basu berlaku tanpa kelengkapan"]}-->
+<p>Misalkan <span class="math-inline" role="math">\(X_1,X_2\)</span> iid eksponensial dengan laju <span class="math-inline" role="math">\(\lambda&gt;0\)</span>, dan
+definisikan</p>
+<div class="math-display" role="math">\[T=X_1+X_2,\qquad A=\frac{X_1}{X_1+X_2}.\]</div>
+<ol>
+<li>Nyatakan ukuran dominan dan himpunan dukungan bersama, lalu gunakan teorema
+faktorisasi untuk membuktikan bahwa <span class="math-inline" role="math">\(T\)</span> cukup bagi <span class="math-inline" role="math">\(\lambda\)</span>.</li>
+<li>Gunakan kriteria rasio fungsi kemungkinan untuk membuktikan bahwa <span class="math-inline" role="math">\(T\)</span> minimal
+cukup.</li>
+<li>Buktikan kelengkapan <span class="math-inline" role="math">\(T\)</span> melalui keunikan transformasi Laplace.</li>
+<li>Turunkan hukum bersama <span class="math-inline" role="math">\((T,A)\)</span>, buktikan bahwa <span class="math-inline" role="math">\(A\)</span> aksesori dan
+independen dari <span class="math-inline" role="math">\(T\)</span>, lalu jelaskan tepat bagaimana Basu berlaku.</li>
+</ol>
+<p><a id="O006-C140-CMP-CA02-P05-H01"></a></p>
+<h3>Petunjuk 1</h3>
+<p>Fungsi kemungkinan gabungan adalah
+<span class="math-inline" role="math">\(\lambda^2e^{-\lambda(x_1+x_2)}\)</span> pada kuadran positif. Untuk minimalitas,
+bandingkan fungsi kemungkinan pada dua titik data.</p>
+<p><a id="O006-C140-CMP-CA02-P05-H02"></a></p>
+<h3>Petunjuk 2</h3>
+<p>Gunakan invers <span class="math-inline" role="math">\(x_1=at\)</span>, <span class="math-inline" role="math">\(x_2=(1-a)t\)</span>, dengan Jacobian mutlak <span class="math-inline" role="math">\(t\)</span>.
+Distribusi <span class="math-inline" role="math">\(T\)</span> adalah Gamma dengan parameter bentuk 2 dan parameter laju <span class="math-inline" role="math">\(\lambda\)</span>.</p>
+<p><a id="O006-C140-CMP-CA02-P05-ANS"></a></p>
+<h3>Jawaban singkat</h3>
+<p>Model didominasi oleh ukuran Lebesgue pada himpunan dukungan bersama <span class="math-inline" role="math">\((0,\infty)^2\)</span>.
+Statistik <span class="math-inline" role="math">\(T\)</span> cukup dan minimal cukup, serta lengkap karena transformasi
+Laplace <span class="math-inline" role="math">\(E_\lambda h(T)=0\)</span> untuk semua <span class="math-inline" role="math">\(\lambda&gt;0\)</span> memaksa
+<span class="math-inline" role="math">\(h=0\)</span> hampir di mana-mana. Transformasi memberi</p>
+<div class="math-display" role="math">\[f_{T,A}(t,a)=\lambda^2te^{-\lambda t}
+=f_T(t)\,\mathbf1\{0&lt;a&lt;1\},\]</div>
+<p>jadi <span class="math-inline" role="math">\(A\sim\operatorname{Uniform}(0,1)\)</span>, bersifat aksesori, dan independen dari
+<span class="math-inline" role="math">\(T\)</span>. Semua asumsi teorema Basu terpenuhi.</p>
+<p><a id="O006-C140-CMP-CA02-P05-SOL"></a></p>
+<h3>Solusi lengkap</h3>
+<p>Ukuran dominannya adalah ukuran Lebesgue dua dimensi dan himpunan dukungan esensial
+<span class="math-inline" role="math">\((0,\infty)^2\)</span> sama untuk setiap <span class="math-inline" role="math">\(\lambda&gt;0\)</span>. Densitas gabungan
+dapat difaktorkan sebagai</p>
+<div class="math-display" role="math">\[f_\lambda(x_1,x_2)
+=\lambda^2e^{-\lambda T(x)}
+\mathbf1\{x_1&gt;0,x_2&gt;0\}
+=g_\lambda(T(x))h(x),\]</div>
+<p>dengan <span class="math-inline" role="math">\(h\)</span> bebas parameter. Asumsi dominasi dan himpunan dukungan bersama untuk
+faktorisasi telah diperiksa, sehingga <span class="math-inline" role="math">\(T\)</span> cukup.</p>
+<p>Untuk dua titik <span class="math-inline" role="math">\(x,y\)</span> pada himpunan dukungan,</p>
+<div class="math-display" role="math">\[\frac{f_\lambda(x)}{f_\lambda(y)}
+=\exp[-\lambda\{T(x)-T(y)\}].\]</div>
+<p>Rasio ini konstan terhadap <span class="math-inline" role="math">\(\lambda\in(0,\infty)\)</span> tepat ketika
+<span class="math-inline" role="math">\(T(x)=T(y)\)</span>. Karena densitas positif pada himpunan dukungan bersama, kriteria rasio
+yang dipakai pada <a class="xref" data-target-id="O006-C140-CMP-MS03-P03-SOL" href="../mastery/O006-C140-CMP-MS03.html#O006-C140-CMP-MS03-P03-SOL">Solusi lengkap</a> berlaku dan membuktikan
+kecukupan minimal, bukan sekadar kecukupan.</p>
+<p>Selanjutnya <span class="math-inline" role="math">\(T\sim\operatorname{Gamma}(2,\text{laju }\lambda)\)</span>, dengan
+densitas <span class="math-inline" role="math">\(f_T(t)=\lambda^2te^{-\lambda t}\)</span> untuk <span class="math-inline" role="math">\(t&gt;0\)</span>. Andaikan
+<span class="math-inline" role="math">\(E_\lambda|h(T)|&lt;\infty\)</span> dan <span class="math-inline" role="math">\(E_\lambda h(T)=0\)</span> untuk setiap
+<span class="math-inline" role="math">\(\lambda&gt;0\)</span>. Maka</p>
+<div class="math-display" role="math">\[0=\lambda^2\int_0^\infty h(t)t e^{-\lambda t}\,dt
+\quad\text{untuk semua }\lambda&gt;0.\]</div>
+<p>Keunikan transformasi Laplace, di bawah integrabilitas yang baru dinyatakan,
+memaksa <span class="math-inline" role="math">\(h(t)t=0\)</span> hampir di mana-mana. Karena <span class="math-inline" role="math">\(t&gt;0\)</span>, <span class="math-inline" role="math">\(h(t)=0\)</span>
+hampir di mana-mana, sehingga <span class="math-inline" role="math">\(T\)</span> lengkap.</p>
+<p>Transformasi <span class="math-inline" role="math">\((x_1,x_2)\mapsto(t,a)\)</span> mempunyai invers
+<span class="math-inline" role="math">\(x_1=at,x_2=(1-a)t\)</span>, Jacobian mutlak <span class="math-inline" role="math">\(t\)</span>, dan domain
+<span class="math-inline" role="math">\(t&gt;0,0&lt;a&lt;1\)</span>. Jadi</p>
+<div class="math-display" role="math">\[f_{T,A}(t,a)=\lambda^2te^{-\lambda t}
+\mathbf1\{t&gt;0,0&lt;a&lt;1\}
+=f_T(t)f_A(a),\]</div>
+<p>dengan <span class="math-inline" role="math">\(f_A(a)=1\)</span> pada <span class="math-inline" role="math">\((0,1)\)</span>. Hukum <span class="math-inline" role="math">\(A\)</span> tidak memuat
+<span class="math-inline" role="math">\(\lambda\)</span>, jadi <span class="math-inline" role="math">\(A\)</span> aksesori; faktorisasi densitas bersama juga
+membuktikan independensi secara langsung. Teorema Basu berlaku karena
+<span class="math-inline" role="math">\(T\)</span> telah dibuktikan cukup dan lengkap bagi keluarga yang sama dan
+<span class="math-inline" role="math">\(A\)</span> telah dibuktikan aksesori. Tanpa kelengkapan, sifat aksesori dan
+kecukupan saja tidak menjamin independensi; bandingkan pemeriksaan asumsi
+pada <a class="xref" data-target-id="O006-C140-CMP-MS03-P08-SOL" href="../mastery/O006-C140-CMP-MS03.html#O006-C140-CMP-MS03-P08-SOL">Solusi lengkap</a>.</p>
+<p><a id="O006-C140-CMP-CA02-P06"></a></p>
+<h2>Masalah 6 — metode momen, MLE global, dan batas parameter Pareto (10 poin)</h2>
+<!--PROBLEM_META {"id":"O006-C140-CMP-CA02-P06","prerequisites":["O006-C140-CMP-MS04"],"objective":"Membedakan metode momen dari MLE global serta menangani batas, ketiadaan, dan invariansi","difficulty":"lanjut","misconceptions":["Persamaan momen sah ketika momen populasi tak hingga","Akar skor di luar submodel dapat dipotong dan tetap disebut MLE","Invariansi menciptakan MLE ketika supremum tidak tercapai"]}-->
+<p>Pertimbangkan model Pareto</p>
+<div class="math-display" role="math">\[f_\alpha(x)=\alpha x^{-(\alpha+1)}\mathbf1\{x\ge1\},
+\qquad \alpha&gt;0,\]</div>
+<p>dan data <span class="math-inline" role="math">\((2,2,4,4)\)</span>.</p>
+<ol>
+<li>Verifikasi normalisasi dan tentukan kapan <span class="math-inline" role="math">\(E_\alpha X\)</span> hingga. Bahas
+apakah metode momen berbasis rataan terdefinisi pada seluruh model, lalu
+hitung solusi formalnya pada submodel <span class="math-inline" role="math">\(\alpha&gt;1\)</span>.</li>
+<li>Turunkan MLE pada model penuh <span class="math-inline" role="math">\(\alpha&gt;0\)</span> dan buktikan bahwa ia maksimum
+global.</li>
+<li>Ulangi optimisasi pada submodel terbuka <span class="math-inline" role="math">\(\alpha&gt;1\)</span> dan submodel tertutup
+<span class="math-inline" role="math">\(\alpha\ge1\)</span>. Bedakan maksimum, supremum, dan titik ujung.</li>
+<li>Gunakan invariansi untuk parameter <span class="math-inline" role="math">\(\psi=1/\alpha\)</span>, termasuk pada dua
+submodel tersebut.</li>
+</ol>
+<p><a id="O006-C140-CMP-CA02-P06-H01"></a></p>
+<h3>Petunjuk 1</h3>
+<p>Gunakan <span class="math-inline" role="math">\(E_\alpha X=\alpha/(\alpha-1)\)</span> hanya ketika <span class="math-inline" role="math">\(\alpha&gt;1\)</span>.
+Untuk data, <span class="math-inline" role="math">\(\bar x=3\)</span> dan <span class="math-inline" role="math">\(S=\sum_i\log x_i=6\log2\)</span>.</p>
+<p><a id="O006-C140-CMP-CA02-P06-H02"></a></p>
+<h3>Petunjuk 2</h3>
+<p>Hingga konstanta data,
+<span class="math-inline" role="math">\(\ell(\alpha)=4\log\alpha-\alpha S\)</span>. Periksa kelengkungan dan kedua batas,
+bukan hanya akar skor.</p>
+<p><a id="O006-C140-CMP-CA02-P06-ANS"></a></p>
+<h3>Jawaban singkat</h3>
+<p>Momen pertama hanya hingga untuk <span class="math-inline" role="math">\(\alpha&gt;1\)</span>; pada submodel itu solusi MM
+adalah <span class="math-inline" role="math">\(\widehat\alpha_{\rm MM}=3/2\)</span>. Pada model penuh,</p>
+<div class="math-display" role="math">\[\widehat\alpha_{\rm MLE}=\frac4{6\log2}
+=\frac2{3\log2}\approx0{,}9618\]</div>
+<p>adalah maksimum global. Pada <span class="math-inline" role="math">\(\alpha&gt;1\)</span>, supremum didekati ketika
+<span class="math-inline" role="math">\(\alpha\downarrow1\)</span> tetapi tidak dicapai, jadi MLE tidak ada; pada
+<span class="math-inline" role="math">\(\alpha\ge1\)</span>, MLE berada di batas <span class="math-inline" role="math">\(\alpha=1\)</span>. Untuk <span class="math-inline" role="math">\(\psi=1/\alpha\)</span>, MLE penuh
+adalah <span class="math-inline" role="math">\(3\log2/2\)</span>, sedangkan kasus terbuka tetap tidak mempunyai MLE dan
+kasus tertutup memberi <span class="math-inline" role="math">\(\widehat\psi=1\)</span>.</p>
+<p><a id="O006-C140-CMP-CA02-P06-SOL"></a></p>
+<h3>Solusi lengkap</h3>
+<p>Normalisasi mengikuti</p>
+<div class="math-display" role="math">\[\int_1^\infty\alpha x^{-(\alpha+1)}\,dx=1.\]</div>
+<p>Momen pertama adalah</p>
+<div class="math-display" role="math">\[E_\alpha X=\alpha\int_1^\infty x^{-\alpha}\,dx
+=\frac{\alpha}{\alpha-1}\]</div>
+<p>hanya untuk <span class="math-inline" role="math">\(\alpha&gt;1\)</span>; integral divergen untuk <span class="math-inline" role="math">\(0&lt;\alpha\le1\)</span>.
+Karena itu MM berbasis momen pertama bukan prosedur yang terdefinisi pada
+seluruh model <span class="math-inline" role="math">\(\alpha&gt;0\)</span>. Jika model terlebih dahulu dibatasi ke
+<span class="math-inline" role="math">\(\alpha&gt;1\)</span>, persamaan <span class="math-inline" role="math">\(3=\alpha/(\alpha-1)\)</span> memberi
+<span class="math-inline" role="math">\(\widehat\alpha_{\rm MM}=3/2\)</span>.</p>
+<p>Untuk data yang diberikan,</p>
+<div class="math-display" role="math">\[S=2\log2+2\log4=6\log2.\]</div>
+<p>Fungsi log-kemungkinan, termasuk suku data yang tidak memengaruhi optimisasi, adalah</p>
+<div class="math-display" role="math">\[\ell(\alpha)=4\log\alpha-(\alpha+1)S.\]</div>
+<p>Skor dan kelengkungan adalah</p>
+<div class="math-display" role="math">\[\ell'(\alpha)=\frac4\alpha-S,
+\qquad \ell''(\alpha)=-\frac4{\alpha^2}&lt;0.\]</div>
+<p>Akar tunggal persamaan skor adalah <span class="math-inline" role="math">\(4/S=2/(3\log2)\approx0{,}9618\)</span>. Karena
+<span class="math-inline" role="math">\(\ell\)</span> cekung tegas,
+<span class="math-inline" role="math">\(\ell(\alpha)\to-\infty\)</span> ketika <span class="math-inline" role="math">\(\alpha\downarrow0\)</span> dan ketika
+<span class="math-inline" role="math">\(\alpha\to\infty\)</span>, sebab <span class="math-inline" role="math">\(S&gt;0\)</span>. Jadi akar itu maksimum global pada
+model penuh.</p>
+<p>Pada submodel <span class="math-inline" role="math">\(\alpha&gt;1\)</span>, maksimum tak berkendala berada di luar ruang.
+Lebih konkret, <span class="math-inline" role="math">\(S=6\log2&gt;4\)</span>, sehingga <span class="math-inline" role="math">\(\ell'(1)=4-S&lt;0\)</span>, dan skor makin
+kecil untuk <span class="math-inline" role="math">\(\alpha&gt;1\)</span>. Fungsi kemungkinan menurun pada seluruh submodel:
+supremumnya didekati ketika <span class="math-inline" role="math">\(\alpha\downarrow1\)</span>, tetapi 1 tidak termasuk ruang,
+sehingga MLE tidak ada. Jika ruang ditutup menjadi <span class="math-inline" role="math">\(\alpha\ge1\)</span>, titik ujung
+<span class="math-inline" role="math">\(\widehat\alpha=1\)</span> menjadi maksimum berkendala. Mengganti akar yang berada
+di luar ruang dengan 1 tanpa menyebut penutupan ruang akan mengubah model.</p>
+<p>Peta <span class="math-inline" role="math">\(\psi=1/\alpha\)</span> satu-ke-satu pada model penuh, sehingga invariansi MLE
+memberi</p>
+<div class="math-display" role="math">\[\widehat\psi=\frac1{\widehat\alpha}=\frac S4
+=\frac{3\log2}{2}\approx1{,}0397.\]</div>
+<p>Submodel <span class="math-inline" role="math">\(\alpha&gt;1\)</span> bersesuaian dengan <span class="math-inline" role="math">\(0&lt;\psi&lt;1\)</span>: supremum didekati saat
+<span class="math-inline" role="math">\(\psi\uparrow1\)</span>, tetap tidak tercapai. Submodel tertutup bersesuaian dengan
+<span class="math-inline" role="math">\(0&lt;\psi\le1\)</span> dan memberi MLE 1. Invariansi mentransformasi maksimum yang
+ada; ia tidak mengubah supremum tak tercapai menjadi penduga. Audit global
+ini sejalan dengan pemisahan akar skor dan maksimum pada
+<a class="xref" data-target-id="O006-C140-CMP-MS04-P07-SOL" href="../mastery/O006-C140-CMP-MS04.html#O006-C140-CMP-MS04-P07-SOL">Solusi lengkap</a> serta kegagalan momen pada
+<a class="xref" data-target-id="O006-C140-CMP-MS04-P08-SOL" href="../mastery/O006-C140-CMP-MS04.html#O006-C140-CMP-MS04-P08-SOL">Solusi lengkap</a>.</p>
+<p><a id="O006-C140-CMP-CA02-P07"></a></p>
+<h2>Masalah 7 — informasi, batas bawah Cramér–Rao, pivot eksak, dan Wald (10 poin)</h2>
+<!--PROBLEM_META {"id":"O006-C140-CMP-CA02-P07","prerequisites":["O006-C140-CMP-MS02","O006-C140-CMP-MS05"],"objective":"Menurunkan informasi Fisher dan CRLB lalu membandingkan interval pivot eksak dengan Wald","difficulty":"lanjut","misconceptions":["CRLB berlaku tanpa ketakbiasan dan syarat keteraturan","Informasi eksak membuat interval Wald eksak","Interval Wald selalu menghormati ruang parameter"]}-->
+<p>Misalkan <span class="math-inline" role="math">\(X_1,\ldots,X_n\)</span> iid eksponensial dengan parameter skala
+<span class="math-inline" role="math">\(\mu&gt;0\)</span>:</p>
+<div class="math-display" role="math">\[f_\mu(x)=\mu^{-1}e^{-x/\mu}\mathbf1\{x\ge0\}.\]</div>
+<ol>
+<li>Turunkan skor, informasi Fisher sampel, dan batas bawah Cramér–Rao (CRLB)
+bagi penduga tak bias untuk <span class="math-inline" role="math">\(\mu\)</span>. Nyatakan asumsi teorema yang dipakai.</li>
+<li>Tunjukkan bahwa <span class="math-inline" role="math">\(\bar X\)</span> mencapai CRLB.</li>
+<li>Untuk <span class="math-inline" role="math">\(n=3\)</span> dan <span class="math-inline" role="math">\(S=\sum_iX_i=6\)</span>, bentuk selang kepercayaan eksak
+95% bagi <span class="math-inline" role="math">\(\mu\)</span> dari pivot <span class="math-inline" role="math">\(2S/\mu\sim\chi^2_{2n}\)</span>. Gunakan
+<span class="math-inline" role="math">\(\chi^2_{6,0.025}\approx1{,}237344\)</span> dan
+<span class="math-inline" role="math">\(\chi^2_{6,0.975}\approx14{,}449375\)</span>.</li>
+<li>Bentuk selang Wald 95% dengan <span class="math-inline" role="math">\(z_{0.975}\approx1{,}96\)</span>, lalu audit
+perbedaannya dari selang eksak.</li>
+</ol>
+<p><a id="O006-C140-CMP-CA02-P07-H01"></a></p>
+<h3>Petunjuk 1</h3>
+<p>Skor satu observasi adalah <span class="math-inline" role="math">\((X-\mu)/\mu^2\)</span>. Himpunan dukungan data tetap, tetapi
+CRLB juga memerlukan ketakbiasan target dan pertukaran diferensiasi–integral.</p>
+<p><a id="O006-C140-CMP-CA02-P07-H02"></a></p>
+<h3>Petunjuk 2</h3>
+<p>Selesaikan
+<span class="math-inline" role="math">\(\chi^2_{6,0.025}\le2S/\mu\le\chi^2_{6,0.975}\)</span> dengan hati-hati karena
+<span class="math-inline" role="math">\(\mu&gt;0\)</span>.
+Galat baku Wald substitusi adalah <span class="math-inline" role="math">\(\bar X/\sqrt n\)</span>.</p>
+<p><a id="O006-C140-CMP-CA02-P07-ANS"></a></p>
+<h3>Jawaban singkat</h3>
+<div class="math-display" role="math">\[I_n(\mu)=\frac n{\mu^2},\qquad
+\operatorname{Var}_\mu(T)\ge\frac{\mu^2}{n}.\]</div>
+<p>Rataan sampel tak bias dan variansnya <span class="math-inline" role="math">\(\mu^2/n\)</span>, jadi mencapai batas.
+Untuk data, <span class="math-inline" role="math">\(\widehat\mu=2\)</span>. Selang eksak adalah</p>
+<div class="math-display" role="math">\[\left[\frac{12}{\chi^2_{6,0.975}},
+      \frac{12}{\chi^2_{6,0.025}}\right]
+\approx[0{,}8305,9{,}6982],\]</div>
+<p>sedangkan selang Wald kira-kira <span class="math-inline" role="math">\([-0{,}2632,4{,}2632]\)</span>, yang bahkan
+keluar dari ruang parameter.</p>
+<p><a id="O006-C140-CMP-CA02-P07-SOL"></a></p>
+<h3>Solusi lengkap</h3>
+<p>Logaritma densitas satu observasi adalah
+<span class="math-inline" role="math">\(\ell(\mu;X)=-\log\mu-X/\mu\)</span>. Maka</p>
+<div class="math-display" role="math">\[s_\mu(X)=-\frac1\mu+\frac X{\mu^2}
+=\frac{X-\mu}{\mu^2}.\]</div>
+<p>Karena <span class="math-inline" role="math">\(E_\mu X=\mu\)</span> dan <span class="math-inline" role="math">\(\operatorname{Var}_\mu(X)=\mu^2\)</span>, skor
+berharapan nol dan</p>
+<div class="math-display" role="math">\[I_1(\mu)=E_\mu s_\mu(X)^2=\frac1{\mu^2},
+\qquad I_n(\mu)=\frac n{\mu^2}.\]</div>
+<p>CRLB untuk target <span class="math-inline" role="math">\(g(\mu)=\mu\)</span> memberi
+<span class="math-inline" role="math">\(\operatorname{Var}_\mu(T)\ge[g'(\mu)]^2/I_n(\mu)=\mu^2/n\)</span>.
+Asumsi pokoknya adalah dominasi Lebesgue dengan himpunan dukungan bersama
+<span class="math-inline" role="math">\([0,\infty)\)</span>, <span class="math-inline" role="math">\(\mu\)</span> titik interior <span class="math-inline" role="math">\((0,\infty)\)</span>, diferensiabilitas dan
+dominasi yang membolehkan pertukaran turunan–integral, informasi hingga dan
+positif, serta penduga <span class="math-inline" role="math">\(T\)</span> tak bias dengan momen yang diperlukan. Tanpa
+syarat itu, nama CRLB tidak cukup.</p>
+<p>Rataan sampel memenuhi</p>
+<div class="math-display" role="math">\[E_\mu\bar X=\mu,
+\qquad \operatorname{Var}_\mu(\bar X)=\frac{\mu^2}{n},\]</div>
+<p>sehingga mencapai batas dalam kelas tak bias yang dicakup teorema. Ini tidak
+menyiratkan keunggulan terhadap semua penduga bias di bawah semua fungsi kerugian, sesuai
+pembatasan pada <a class="xref" data-target-id="O006-C140-CMP-MS02-P06-SOL" href="../mastery/O006-C140-CMP-MS02.html#O006-C140-CMP-MS02-P06-SOL">Solusi lengkap</a>.</p>
+<p>Jumlah <span class="math-inline" role="math">\(S\)</span> berdistribusi Gamma dengan parameter bentuk <span class="math-inline" role="math">\(n\)</span> dan parameter skala <span class="math-inline" role="math">\(\mu\)</span>, sehingga
+<span class="math-inline" role="math">\(Q=2S/\mu\sim\chi^2_{2n}\)</span> secara eksak. Untuk <span class="math-inline" role="math">\(n=3,S=6\)</span>,</p>
+<div class="math-display" role="math">\[P\left(\chi^2_{6,0.025}\le\frac{12}{\mu}
+       \le\chi^2_{6,0.975}\right)=0{,}95.\]</div>
+<p>Membalik ketaksamaan positif memberi</p>
+<div class="math-display" role="math">\[C_{\rm eksak}
+=\left[\frac{12}{\chi^2_{6,0.975}},
+       \frac{12}{\chi^2_{6,0.025}}\right]
+\approx[0{,}8305,9{,}6982].\]</div>
+<p>Cakupan 0,95 berasal dari hukum Gamma eksak dan memerlukan model iid
+eksponensial yang benar, tetapi tidak memerlukan <span class="math-inline" role="math">\(n\)</span> besar.</p>
+<p>MLE skala adalah <span class="math-inline" role="math">\(\widehat\mu=\bar X=S/n=2\)</span>. Wald memakai normalitas
+akar-<span class="math-inline" role="math">\(n\)</span> dan galat baku berbasis taksiran <span class="math-inline" role="math">\(2/\sqrt3\)</span>, sehingga</p>
+<div class="math-display" role="math">\[C_{\rm Wald}=2\pm1{,}96\frac2{\sqrt3}
+\approx[-0{,}2632,4{,}2632].\]</div>
+<p>Selang ini hanya aproksimatif; perhitungan informasi Fisher yang eksak tidak
+menjadikan aproksimasi Normal eksak. Titik ujung negatif memperlihatkan pelanggaran domain
+pada sampel kecil. Pivot menjaga positivitas dan cakupan eksak, meskipun
+selangnya lebar karena hanya tiga observasi. Perbedaan ini merupakan gejala
+sampel berhingga, bukan kontradiksi dengan ekuivalensi asimtotik.</p>
+<p><a id="O006-C140-CMP-CA02-P08"></a></p>
+<h2>Masalah 8 — delta, bootstrap, cakupan, dan kasus nonreguler (10 poin)</h2>
+<!--PROBLEM_META {"id":"O006-C140-CMP-CA02-P08","prerequisites":["O006-C140-CMP-MS05"],"objective":"Menghitung interval delta dan bootstrap, mengaudit cakupan dengan MCSE, dan mendiagnosis target yang tidak dapat didiferensiasikan","difficulty":"lanjut","misconceptions":["Kuantil bootstrap adalah distribusi posterior","Selisih cakupan selalu hanya galat Monte Carlo","Metode delta dan bootstrap biasa tetap sah pada fungsi yang tidak dapat didiferensiasikan"]}-->
+<p>Misalkan <span class="math-inline" role="math">\(X_i\sim N(\mu,1)\)</span> iid, <span class="math-inline" role="math">\(n=100\)</span>, dan <span class="math-inline" role="math">\(\bar x=0{,}4\)</span>.
+Parameter sasarannya <span class="math-inline" role="math">\(\psi=e^\mu\)</span>, dengan penduga <span class="math-inline" role="math">\(\widehat\psi=e^{\bar X}\)</span>.
+Sebuah bootstrap nonparametrik yang sudah dijalankan memberi kuantil
+<span class="math-inline" role="math">\(q^*_{0.025}=1{,}21\)</span> dan <span class="math-inline" role="math">\(q^*_{0.975}=1{,}82\)</span> bagi
+<span class="math-inline" role="math">\(\widehat\psi^*\)</span>.</p>
+<ol>
+<li>Turunkan galat baku delta substitusi dan selang Wald berbasis delta 95%.</li>
+<li>Hitung selang bootstrap persentil dan dasar, lalu jelaskan distribusi yang
+didekati bootstrap.</li>
+<li>Pada audit cakupan dengan 40.000 kumpulan data independen, cakupan teramati
+adalah <span class="math-inline" role="math">\(0{,}943\)</span> untuk cakupan nominal <span class="math-inline" role="math">\(0{,}95\)</span>. Hitung MCSE substitusi,
+skor selisih, dan selang Monte Carlo kira-kira 95%.</li>
+<li>Jelaskan mengapa metode delta dan bootstrap biasa tersebut tidak dapat diterapkan
+secara mekanis pada parameter sasaran <span class="math-inline" role="math">\(h(\mu)=|\mu|\)</span> ketika <span class="math-inline" role="math">\(\mu=0\)</span>.</li>
+</ol>
+<p><a id="O006-C140-CMP-CA02-P08-H01"></a></p>
+<h3>Petunjuk 1</h3>
+<p>Turunan <span class="math-inline" role="math">\(g'(\mu)=e^\mu\)</span>, sedangkan
+<span class="math-inline" role="math">\(\operatorname{Var}(\bar X)=1/n\)</span>. Selang dasar memantulkan kuantil:
+<span class="math-inline" role="math">\([2\widehat\psi-q^*_{0.975},2\widehat\psi-q^*_{0.025}]\)</span>.</p>
+<p><a id="O006-C140-CMP-CA02-P08-H02"></a></p>
+<h3>Petunjuk 2</h3>
+<p>Gunakan <span class="math-inline" role="math">\(\sqrt{0{,}943(0{,}057)/40000}\)</span> untuk MCSE substitusi. Pada target
+absolut di nol, <span class="math-inline" role="math">\(\sqrt n|\bar X|=|Z|\)</span>, tetapi <span class="math-inline" role="math">\(|\cdot|\)</span> tidak dapat
+didiferensiasikan di nol.</p>
+<p><a id="O006-C140-CMP-CA02-P08-ANS"></a></p>
+<h3>Jawaban singkat</h3>
+<p><span class="math-inline" role="math">\(\widehat\psi=e^{0{,}4}\approx1{,}4918\)</span>, galat baku delta <span class="math-inline" role="math">\(0{,}14918\)</span>, dan
+selang Wald berbasis delta kira-kira <span class="math-inline" role="math">\([1{,}1994,1{,}7842]\)</span>. Selang persentil
+adalah <span class="math-inline" role="math">\([1{,}21,1{,}82]\)</span>, sedangkan selang dasar kira-kira
+<span class="math-inline" role="math">\([1{,}1636,1{,}7736]\)</span>. MCSE cakupan adalah <span class="math-inline" role="math">\(0{,}001159\)</span>, selisihnya
+sekitar <span class="math-inline" role="math">\(-6{,}04\)</span> MCSE, dan selang Monte Carlo sekitar
+<span class="math-inline" role="math">\([0{,}9407,0{,}9453]\)</span>. Pada <span class="math-inline" role="math">\(h(\mu)=|\mu|\)</span> di nol, distribusi limitnya
+adalah Normal terlipat dan bootstrap terpusat biasa mempunyai limit kondisional yang
+bergantung pada data, sehingga syarat keteraturan gagal.</p>
+<p><a id="O006-C140-CMP-CA02-P08-SOL"></a></p>
+<h3>Solusi lengkap</h3>
+<p>CLT (bahkan kenormalan eksak bagi <span class="math-inline" role="math">\(\bar X\)</span>) dan metode delta dengan
+<span class="math-inline" role="math">\(g'(\mu)=e^\mu\ne0\)</span> memberi</p>
+<div class="math-display" role="math">\[\sqrt n(\widehat\psi-\psi)\Rightarrow N(0,e^{2\mu}).\]</div>
+<p>Dengan substitusi,</p>
+<div class="math-display" role="math">\[\widehat\psi=e^{0{,}4}\approx1{,}4918247,
+\qquad \widehat{\operatorname{se}}_\Delta
+=\frac{e^{0{,}4}}{10}\approx0{,}1491825.\]</div>
+<p>Jadi</p>
+<div class="math-display" role="math">\[C_\Delta=1{,}4918247\pm1{,}96(0{,}1491825)
+\approx[1{,}1994,1{,}7842].\]</div>
+<p>Selang ini menggunakan aproksimasi linear pada fungsi halus; kenormalan
+<span class="math-inline" role="math">\(\bar X\)</span> tidak menjadikan <span class="math-inline" role="math">\(e^{\bar X}\)</span> Normal tepat.</p>
+<p>Selang persentil langsung memakai kuantil bootstrap:</p>
+<div class="math-display" role="math">\[C_{\rm perc}=[1{,}21,1{,}82].\]</div>
+<p>Selang dasar adalah</p>
+<div class="math-display" role="math">\[\begin{aligned}
+C_{\rm basic}
+&amp;=[2(1{,}4918247)-1{,}82,\ 2(1{,}4918247)-1{,}21]\\
+&amp;\approx[1{,}1636,1{,}7736].
+\end{aligned}\]</div>
+<p>Bootstrap mengganti distribusi populasi dengan distribusi empiris dan
+mendekati distribusi pengambilan sampel dari galat penduga, secara kondisional pada data;
+kuantilnya bukan probabilitas posterior bagi parameter. Konstruksi kedua selang mengikuti
+<a class="xref" data-target-id="O006-C140-CMP-MS05-P06-SOL" href="../mastery/O006-C140-CMP-MS05.html#O006-C140-CMP-MS05-P06-SOL">Solusi lengkap</a>.</p>
+<p>Jika indikator cakupan dari 40.000 kumpulan data independen diperlakukan sebagai
+Bernoulli, MCSE berbasis taksiran adalah</p>
+<div class="math-display" role="math">\[\widehat{\operatorname{MCSE}}
+=\sqrt{\frac{0{,}943(1-0{,}943)}{40000}}
+\approx0{,}0011592.\]</div>
+<p>Skor selisih terhadap cakupan nominal adalah</p>
+<div class="math-display" role="math">\[\frac{0{,}943-0{,}95}{0{,}0011592}\approx-6{,}04,\]</div>
+<p>dan selang Monte Carlo sederhana</p>
+<div class="math-display" role="math">\[0{,}943\pm1{,}96(0{,}0011592)
+\approx[0{,}9407,0{,}9453].\]</div>
+<p>Di bawah asumsi replikasi independen, implementasi yang benar, serta model dan nilai
+parameter audit yang ditetapkan sebelum simulasi, selisih ini terlalu besar untuk dijelaskan sebagai galat acak
+Monte Carlo biasa dan menunjukkan cakupan di bawah nominal pada titik audit tersebut.
+Hasil ini belum membuktikan kekurangan cakupan seragam pada semua parameter; MCSE mengukur
+ketidakpastian Monte Carlo akibat replikasi, bukan bias prosedur, sesuai pemisahan pada
+<a class="xref" data-target-id="O006-C140-CMP-MS05-P08-SOL" href="../mastery/O006-C140-CMP-MS05.html#O006-C140-CMP-MS05-P08-SOL">Solusi lengkap</a>.</p>
+<p>Untuk <span class="math-inline" role="math">\(h(\mu)=|\mu|\)</span> di <span class="math-inline" role="math">\(\mu=0\)</span>, fungsi tidak dapat didiferensiasikan. Karena
+<span class="math-inline" role="math">\(Z_n=\sqrt n\bar X\sim N(0,1)\)</span>,</p>
+<div class="math-display" role="math">\[\sqrt n\{|\bar X|-0\}=|Z_n|\Rightarrow|Z|,\]</div>
+<p>bukan limit Normal linear. Dalam bootstrap biasa, jika
+<span class="math-inline" role="math">\(Z^*=\sqrt n(\bar X^*-\bar X)\)</span> mendekati Normal baku secara kondisional,
+maka galat terpusat berbentuk</p>
+<div class="math-display" role="math">\[\sqrt n\{|\bar X^*|-|\bar X|\}
+=|Z_n+Z^*|-|Z_n|.\]</div>
+<p>Hukum kondisionalnya bergantung pada nilai acak <span class="math-inline" role="math">\(Z_n\)</span> dan tidak konvergen
+ke satu hukum tetap yang sama dengan <span class="math-inline" role="math">\(|Z|\)</span>. Jadi hipotesis
+diferensiabilitas delta dan syarat keteraturan bootstrap <span class="math-inline" role="math">\(n\)</span>-dari-<span class="math-inline" role="math">\(n\)</span> gagal;
+selang persentil/dasar tidak memperoleh jaminan cakupan dari argumen
+reguler tadi. Kegagalan ini disebabkan nondiferensiabilitas, bukan contoh turunan pertama
+nol.</p>
+<p><a id="O006-C140-CMP-CA02-P09"></a></p>
+<h2>Masalah 9 — ukuran uji, nilai-p, daya, ukuran sampel, dan inversi (10 poin)</h2>
+<!--PROBLEM_META {"id":"O006-C140-CMP-CA02-P09","prerequisites":["O006-C140-CMP-MS06"],"objective":"Menghitung seluruh komponen uji z dua sisi secara eksak dan menginversikannya menjadi interval","difficulty":"lanjut","misconceptions":["Nilai-p adalah daya pada efek teramati","Rumus ukuran sampel tidak perlu dibulatkan dan diverifikasi","Inversi uji memakai galat baku yang berbeda dari uji"]}-->
+<p>Misalkan <span class="math-inline" role="math">\(X_1,\ldots,X_n\)</span> iid <span class="math-inline" role="math">\(N(\mu,4)\)</span>, dengan varians diketahui.
+Uji dua sisi <span class="math-inline" role="math">\(H_0:\mu=0\)</span> melawan <span class="math-inline" role="math">\(H_1:\mu\ne0\)</span> memakai
+<span class="math-inline" role="math">\(Z=\sqrt n\bar X/2\)</span> dan nilai kritis eksak
+<span class="math-inline" role="math">\(z_{0.975}=1{,}9599639845\ldots\approx1{,}96\)</span>.</p>
+<ol>
+<li>Buktikan bahwa ukuran uji tepat 0,05. Untuk <span class="math-inline" role="math">\(n=25\)</span> dan
+<span class="math-inline" role="math">\(\bar x=0{,}9\)</span>, hitung statistik dan nilai-p.</li>
+<li>Turunkan fungsi daya dua sisi. Hitung daya pada <span class="math-inline" role="math">\(\mu=1\)</span> ketika
+<span class="math-inline" role="math">\(n=25\)</span>.</li>
+<li>Cari ukuran sampel bulat terkecil yang memberi daya sedikitnya 0,90 pada
+<span class="math-inline" role="math">\(|\mu|=1\)</span>. Gunakan <span class="math-inline" role="math">\(z_{0.90}\approx1{,}282\)</span> dan verifikasi kandidat di
+sekitar pembulatan.</li>
+<li>Inversikan keluarga uji beraras 0,05 untuk membentuk selang kepercayaan
+95% dan hitung selang data tersebut.</li>
+</ol>
+<p><a id="O006-C140-CMP-CA02-P09-H01"></a></p>
+<h3>Petunjuk 1</h3>
+<p>Di bawah <span class="math-inline" role="math">\(\mu\)</span>, <span class="math-inline" role="math">\(Z\sim N(\delta,1)\)</span> dengan
+<span class="math-inline" role="math">\(\delta=\sqrt n\mu/2\)</span>. Daya adalah jumlah peluang pada dua ekor terhadap ambang
+<span class="math-inline" role="math">\(\pm z_{0.975}\)</span>; gunakan 1,96 hanya untuk perhitungan numerik dengan pembulatan.</p>
+<p><a id="O006-C140-CMP-CA02-P09-H02"></a></p>
+<h3>Petunjuk 2</h3>
+<p>Untuk perencanaan, syarat ekor dominan adalah
+<span class="math-inline" role="math">\(\sqrt n/2\gtrsim z_{0.975}+z_{0.90}\)</span>; gunakan 1,96 dan 1,282 sebagai
+pendekatan numerik. Setelah membulatkan, hitung daya dua ekor pada
+<span class="math-inline" role="math">\(n=42\)</span> dan <span class="math-inline" role="math">\(n=43\)</span>.</p>
+<p><a id="O006-C140-CMP-CA02-P09-ANS"></a></p>
+<h3>Jawaban singkat</h3>
+<p>Dengan nilai kritis eksak <span class="math-inline" role="math">\(z_{0.975}\)</span>, ukuran uji tepat 0,05; angka 1,96 yang
+dicetak sendiri akan memberi ukuran uji <span class="math-inline" role="math">\(0{,}0499958\)</span>. Pada data,
+<span class="math-inline" role="math">\(Z_{\rm obs}=2{,}25\)</span> dan <span class="math-inline" role="math">\(p\approx0{,}02445\)</span>. Fungsi daya adalah</p>
+<div class="math-display" role="math">\[\beta_n(\mu)=\Phi(-z_{0.975}-\delta)+1-\Phi(z_{0.975}-\delta),
+\qquad \delta=\frac{\sqrt n\mu}{2}.\]</div>
+<p>Pada <span class="math-inline" role="math">\(n=25,\mu=1\)</span>, daya sekitar <span class="math-inline" role="math">\(0{,}7054\)</span>. Ukuran sampel minimum adalah
+43: daya pada 42 sekitar <span class="math-inline" role="math">\(0{,}89980\)</span>, sedangkan pada 43 sekitar
+<span class="math-inline" role="math">\(0{,}90637\)</span>. Selang hasil inversi adalah
+<span class="math-inline" role="math">\([0{,}116,1{,}684]\)</span>.</p>
+<p><a id="O006-C140-CMP-CA02-P09-SOL"></a></p>
+<h3>Solusi lengkap</h3>
+<p>Di bawah <span class="math-inline" role="math">\(H_0\)</span>, varians diketahui dan kenormalan tepat memberi
+<span class="math-inline" role="math">\(Z\sim N(0,1)\)</span>. Karena distribusi kontinu dan <span class="math-inline" role="math">\(z_{0.975}\)</span> adalah
+kuantil Normal baku eksak,</p>
+<div class="math-display" role="math">\[P_0(|Z|&gt;z_{0.975})=2\{1-\Phi(z_{0.975})\}=0{,}05,\]</div>
+<p>jadi ukuran uji tepat, bukan asimtotik. Jika 1,96 dipakai sebagai nilai kritis literal,
+ukuran ujinya <span class="math-inline" role="math">\(2\{1-\Phi(1{,}96)\}\approx0{,}0499958\)</span>; sepanjang solusi ini
+1,96 hanya pendekatan numerik untuk kuantil eksak. Untuk <span class="math-inline" role="math">\(n=25\)</span>,</p>
+<div class="math-display" role="math">\[Z_{\rm obs}=\frac{5(0{,}9)}2=2{,}25,
+\qquad
+p=2\{1-\Phi(2{,}25)\}\approx0{,}02445.\]</div>
+<p>Nilai-p adalah peluang ekor di bawah hipotesis nol bagi statistik yang setidaknya sama ekstremnya dengan data, bukan
+peluang hipotesis nol benar dan bukan daya.</p>
+<p>Di bawah parameter <span class="math-inline" role="math">\(\mu\)</span>, <span class="math-inline" role="math">\(Z\sim N(\delta,1)\)</span> dengan
+<span class="math-inline" role="math">\(\delta=\sqrt n\mu/2\)</span>. Karena itu</p>
+<div class="math-display" role="math">\[\begin{aligned}
+\beta_n(\mu)
+&amp;=P_\mu(Z&lt;-z_{0.975})+P_\mu(Z&gt;z_{0.975})\\
+&amp;=\Phi(-z_{0.975}-\delta)+1-\Phi(z_{0.975}-\delta).
+\end{aligned}\]</div>
+<p>Untuk <span class="math-inline" role="math">\(n=25,\mu=1\)</span>, <span class="math-inline" role="math">\(\delta=2{,}5\)</span>, sehingga</p>
+<div class="math-display" role="math">\[\beta_{25}(1)\approx\Phi(-4{,}46)+1-\Phi(-0{,}54)
+\approx0{,}7054.\]</div>
+<p>Untuk target daya 0,90 pada efek positif 1, ekor atas dominan. Syarat
+konservatif yang hampir eksak adalah</p>
+<div class="math-display" role="math">\[\frac{\sqrt n}{2}-z_{0.975}\gtrsim z_{0.90},\]</div>
+<p>atau</p>
+<div class="math-display" role="math">\[n\gtrsim\{2(1{,}959964+1{,}281552)\}^2\approx42{,}03.\]</div>
+<p>Kandidat bulat adalah 43. Pemeriksaan dengan rumus dua ekor penuh memberi
+<span class="math-inline" role="math">\(\beta_{42}(1)\approx0{,}89980&lt;0{,}90\)</span> dan
+<span class="math-inline" role="math">\(\beta_{43}(1)\approx0{,}90637\)</span>, sehingga 43 memang minimum. Simetri
+Normal memberi daya sama pada <span class="math-inline" role="math">\(\mu=-1\)</span>. Pembulatan tanpa pemeriksaan dapat
+memilih ukuran yang gagal tipis, seperti 42.</p>
+<p>Nilai <span class="math-inline" role="math">\(\mu_0\)</span> tidak ditolak tepat ketika</p>
+<div class="math-display" role="math">\[\left|\frac{\sqrt n(\bar X-\mu_0)}2\right|\le z_{0.975}.\]</div>
+<p>Menyelesaikan terhadap <span class="math-inline" role="math">\(\mu_0\)</span> memberi selang yang dual terhadap uji,</p>
+<div class="math-display" role="math">\[C(X)=\left[\bar X-z_{0.975}\frac2{\sqrt n},
+\bar X+z_{0.975}\frac2{\sqrt n}\right].\]</div>
+<p>Pada data, dengan <span class="math-inline" role="math">\(z_{0.975}\approx1{,}96\)</span>,</p>
+<div class="math-display" role="math">\[C=[0{,}9-0{,}784,0{,}9+0{,}784]=[0{,}116,1{,}684].\]</div>
+<p>Nol tidak berada di selang, selaras dengan nilai-p di bawah 0,05. Ukuran uji,
+daya, dan dualitas ini eksak karena sampel Normal, varians 4 diketahui, dan
+ukuran sampel ditetapkan; mengganti varians dengan estimasi memerlukan pivot
+<span class="math-inline" role="math">\(t\)</span>, seperti dibedakan pada <a class="xref" data-target-id="O006-C140-CMP-MS06-P02-SOL" href="../mastery/O006-C140-CMP-MS06.html#O006-C140-CMP-MS06-P02-SOL">Solusi lengkap</a>.</p>
+<p><a id="O006-C140-CMP-CA02-P10"></a></p>
+<h2>Masalah 10 — audit terpadu model geometrik (10 poin)</h2>
+<!--PROBLEM_META {"id":"O006-C140-CMP-CA02-P10","prerequisites":["O006-C140-CMP-MS02","O006-C140-CMP-MS03","O006-C140-CMP-MS04","O006-C140-CMP-MS05","O006-C140-CMP-MS06"],"objective":"Mengaudit fungsi kemungkinan, penduga, kecukupan, sifat aksesori, informasi, interval, dan nilai-p pada satu model sampel hingga","difficulty":"lanjut","misconceptions":["Akar skor selalu tak bias dan merupakan maksimum global","Statistik yang kondisionalnya bebas parameter otomatis bersifat aksesori","Informasi Fisher membuat Wald eksak dan menentukan arah nilai-p"]}-->
+<p>Misalkan <span class="math-inline" role="math">\(X_1,\ldots,X_5\)</span> iid geometrik dengan</p>
+<div class="math-display" role="math">\[P_p(X=x)=p(1-p)^{x-1},\qquad x=1,2,\ldots,\quad 0&lt;p&lt;1.\]</div>
+<p>Data teramati adalah <span class="math-inline" role="math">\((1,1,2,3,3)\)</span>, sehingga <span class="math-inline" role="math">\(S=\sum_iX_i=10\)</span>.
+Sebuah laporan menyatakan:</p>
+<ol>
+<li>“Akar skor <span class="math-inline" role="math">\(\widehat p=1/2\)</span> otomatis maksimum global dan tak bias.”</li>
+<li>“<span class="math-inline" role="math">\(S\)</span> cukup; banyaknya observasi bernilai satu,
+<span class="math-inline" role="math">\(A=\sum_i\mathbf1\{X_i=1\}\)</span>, bersifat aksesori dan karena itu independen dari
+<span class="math-inline" role="math">\(S\)</span>.”</li>
+<li>“Informasi Fisher membuat selang Wald 95% eksak.”</li>
+<li>“Untuk <span class="math-inline" role="math">\(H_0:p=0{,}4\)</span> melawan <span class="math-inline" role="math">\(p&gt;0{,}4\)</span>, nilai-p adalah peluang ekor
+<span class="math-inline" role="math">\(P_{0.4}(S\ge10)\)</span>.”</li>
+</ol>
+<p>Audit keempat klaim. Turunkan fungsi kemungkinan dan tentukan maksimum global, termasuk kasus
+batas <span class="math-inline" role="math">\(S=5\)</span>. Untuk membahas bias pada seluruh ruang sampel, definisikan
+penduga perluasan pada penutupan ruang parameter, <span class="math-inline" role="math">\(\widetilde p=5/S\)</span>, yang bernilai 1 saat <span class="math-inline" role="math">\(S=5\)</span>, dan
+bedakan ia dari MLE model terbuka. Buktikan kecukupan dan kecukupan
+minimal; periksa sifat aksesori; hitung selang Wald; hitung nilai-p eksak
+yang benar; dan inversikan uji satu sisi untuk memberi batas bawah
+kepercayaan 95%.</p>
+<p><a id="O006-C140-CMP-CA02-P10-H01"></a></p>
+<h3>Petunjuk 1</h3>
+<p>Fungsi kemungkinan umum adalah <span class="math-inline" role="math">\(p^5(1-p)^{S-5}\)</span>. Untuk bias penduga perluasan,
+gunakan kekonveksan tegas <span class="math-inline" role="math">\(s\mapsto1/s\)</span> dan <span class="math-inline" role="math">\(E_pS=5/p\)</span>; jangan menyebut
+nilai batasnya sebagai MLE pada model terbuka.</p>
+<p><a id="O006-C140-CMP-CA02-P10-H02"></a></p>
+<h3>Petunjuk 2</h3>
+<p>Nilai <span class="math-inline" role="math">\(p\)</span> besar menghasilkan waktu tunggu kecil. Peristiwa <span class="math-inline" role="math">\(S\le10\)</span>
+setara dengan memperoleh sedikitnya lima sukses dalam sepuluh percobaan
+Bernoulli.</p>
+<p><a id="O006-C140-CMP-CA02-P10-ANS"></a></p>
+<h3>Jawaban singkat</h3>
+<p>Untuk data, <span class="math-inline" role="math">\(\widehat p=5/10=1/2\)</span> adalah maksimum global. Pada model
+terbuka, MLE hanya ada ketika <span class="math-inline" role="math">\(S&gt;5\)</span>; jika <span class="math-inline" role="math">\(S=5\)</span>, supremum berada di
+<span class="math-inline" role="math">\(p\uparrow1\)</span> dan tidak dicapai. Penduga perluasan
+<span class="math-inline" role="math">\(\widetilde p=5/S\)</span> terdefinisi pada semua sampel dan berbias ke atas karena
+<span class="math-inline" role="math">\(E_p(\widetilde p)&gt;p\)</span>. Statistik <span class="math-inline" role="math">\(S\)</span> cukup dan minimal cukup. Namun
+<span class="math-inline" role="math">\(A\sim\operatorname{Binomial}(5,p)\)</span>, sehingga bukan
+statistik aksesori. Informasi Fisher pada <span class="math-inline" role="math">\(\widehat p\)</span> adalah 40 dan selang Wald kira-kira
+<span class="math-inline" role="math">\([0{,}1901,0{,}8099]\)</span>, hanya aproksimatif. Nilai-p eksak yang benar ialah</p>
+<div class="math-display" role="math">\[P_{0.4}(S\le10)=P\{\operatorname{Binomial}(10,0{,}4)\ge5\}
+\approx0{,}366897.\]</div>
+<p>Batas bawah eksak menyelesaikan
+<span class="math-inline" role="math">\(P_L\{\operatorname{Binomial}(10,L)\ge5\}=0{,}05\)</span>, yaitu
+<span class="math-inline" role="math">\(L\approx0{,}22244\)</span>, sehingga selangnya <span class="math-inline" role="math">\([L,1)\)</span>.</p>
+<p><a id="O006-C140-CMP-CA02-P10-SOL"></a></p>
+<h3>Solusi lengkap</h3>
+<p>Terhadap ukuran hitung pada <span class="math-inline" role="math">\(\{1,2,\ldots\}^5\)</span>, himpunan dukungan bersama tidak
+bergantung pada <span class="math-inline" role="math">\(p\)</span>. Fungsi kemungkinan adalah</p>
+<div class="math-display" role="math">\[L(p;x)=p^5(1-p)^{S-5},\]</div>
+<p>dan untuk <span class="math-inline" role="math">\(S&gt;5\)</span>,</p>
+<div class="math-display" role="math">\[\ell'(p)=\frac5p-\frac{S-5}{1-p}
+=\frac{5-pS}{p(1-p)},
+\qquad
+\ell''(p)=-\frac5{p^2}-\frac{S-5}{(1-p)^2}&lt;0.\]</div>
+<p>Jadi titik stasioner <span class="math-inline" role="math">\(\widehat p=5/S\)</span> unik. Ketika <span class="math-inline" role="math">\(S&gt;5\)</span>, fungsi log-kemungkinan menuju
+<span class="math-inline" role="math">\(-\infty\)</span> pada <span class="math-inline" role="math">\(p\downarrow0\)</span> dan <span class="math-inline" role="math">\(p\uparrow1\)</span>, sehingga titik tersebut
+maksimum global. Untuk data, <span class="math-inline" role="math">\(S=10\)</span> memberi <span class="math-inline" role="math">\(\widehat p=1/2\)</span>. Jika
+<span class="math-inline" role="math">\(S=5\)</span>, semua waktu tunggu bernilai satu dan <span class="math-inline" role="math">\(L(p)=p^5\)</span> meningkat;
+supremum didekati saat <span class="math-inline" role="math">\(p\uparrow1\)</span>, tetapi tidak dicapai dalam
+<span class="math-inline" role="math">\((0,1)\)</span>. Jadi laporan harus membedakan kasus interior <span class="math-inline" role="math">\(S&gt;5\)</span> dari ketiadaan MLE pada
+ruang parameter terbuka. Karena peristiwa <span class="math-inline" role="math">\(S=5\)</span> berpeluang <span class="math-inline" role="math">\(p^5&gt;0\)</span>, tidak ada
+peubah acak MLE yang terdefinisi pada seluruh ruang sampel model terbuka.</p>
+<p>Agar bias tetap merupakan pertanyaan yang terdefinisi, tetapkan penduga
+perluasan pada penutupan ruang parameter, <span class="math-inline" role="math">\(\widetilde p=5/S\)</span>. Ia sama dengan MLE model terbuka pada <span class="math-inline" role="math">\(S&gt;5\)</span>,
+tetapi mengambil nilai batas 1—bukan MLE—pada <span class="math-inline" role="math">\(S=5\)</span>. Karena <span class="math-inline" role="math">\(S\)</span>
+tak degenerat untuk <span class="math-inline" role="math">\(0&lt;p&lt;1\)</span>, fungsi <span class="math-inline" role="math">\(1/s\)</span> konveks tegas dan Jensen memberi</p>
+<div class="math-display" role="math">\[E_p\widetilde p=5E_p(1/S)&gt;\frac5{E_pS}
+=\frac5{5/p}=p.\]</div>
+<p>Jadi penduga perluasan <span class="math-inline" role="math">\(\widetilde p\)</span> berbias ke atas pada sampel berhingga;
+tidak sah menyebut ini bias MLE model terbuka karena MLE itu tidak ada pada
+<span class="math-inline" role="math">\(S=5\)</span>. Kecekungan fungsi kemungkinan dan ketakbiasan adalah pertanyaan yang berbeda.</p>
+<p>Faktorisasi <span class="math-inline" role="math">\(p^5(1-p)^{S-5}\)</span> pada himpunan dukungan bersama membuktikan bahwa <span class="math-inline" role="math">\(S\)</span>
+cukup. Untuk dua titik data <span class="math-inline" role="math">\(x,y\)</span>,</p>
+<div class="math-display" role="math">\[\frac{f_p(x)}{f_p(y)}=(1-p)^{S(x)-S(y)}.\]</div>
+<p>Rasio konstan terhadap <span class="math-inline" role="math">\(p\in(0,1)\)</span> tepat ketika <span class="math-inline" role="math">\(S(x)=S(y)\)</span>, jadi
+kriteria rasio membuktikan kecukupan minimal. Sebaliknya, setiap indikator
+<span class="math-inline" role="math">\(\mathbf1\{X_i=1\}\)</span> adalah Bernoulli<span class="math-inline" role="math">\((p)\)</span>, sehingga</p>
+<div class="math-display" role="math">\[A\sim\operatorname{Binomial}(5,p).\]</div>
+<p>Hukumnya bergantung pada <span class="math-inline" role="math">\(p\)</span>; <span class="math-inline" role="math">\(A\)</span> bukan statistik aksesori. Distribusi
+kondisional konfigurasi data dengan syarat <span class="math-inline" role="math">\(S\)</span> memang bebas parameter, tetapi sifat
+kondisional itu tidak mengubah hukum marginal <span class="math-inline" role="math">\(A\)</span> menjadi bebas parameter.
+Karena sifat aksesori gagal, tidak ada dasar memakai Basu untuk menyatakan
+independensi.</p>
+<p>Skor satu observasi adalah</p>
+<div class="math-display" role="math">\[s_p(X)=\frac1p-\frac{X-1}{1-p}
+=\frac{1-pX}{p(1-p)}.\]</div>
+<p>Dengan <span class="math-inline" role="math">\(\operatorname{Var}_p(X)=(1-p)/p^2\)</span>,</p>
+<div class="math-display" role="math">\[I_1(p)=\frac1{p^2(1-p)},
+\qquad I_5(p)=\frac5{p^2(1-p)}.\]</div>
+<p>Pada <span class="math-inline" role="math">\(\widehat p=1/2\)</span>, <span class="math-inline" role="math">\(I_5(\widehat p)=40\)</span>, jadi galat baku Wald
+<span class="math-inline" role="math">\(1/\sqrt{40}\approx0{,}15811\)</span> dan</p>
+<div class="math-display" role="math">\[C_{\rm Wald}=0{,}5\pm1{,}96(0{,}15811)
+\approx[0{,}1901,0{,}8099].\]</div>
+<p>Ini selang asimtotik. Perhitungan informasi Fisher yang eksak tidak menjadikan
+MLE tepat berdistribusi Normal; untuk sampel berukuran lima, penduga perluasan diskret dan miring, sedangkan
+logitnya tak hingga ketika semua waktu tunggu satu—tepat pada sampel tempat
+MLE model terbuka tidak ada.</p>
+<p>Untuk alternatif <span class="math-inline" role="math">\(p&gt;0{,}4\)</span>, waktu tunggu cenderung lebih pendek, sehingga
+nilai <span class="math-inline" role="math">\(S\)</span> yang kecil—bukan yang besar—lebih ekstrem. Peristiwa keberhasilan
+kelima terjadi paling lambat pada percobaan ke-10, <span class="math-inline" role="math">\(S\le10\)</span>, tepat ketika
+sedikitnya lima sukses muncul dalam sepuluh percobaan Bernoulli. Maka</p>
+<div class="math-display" role="math">\[\begin{aligned}
+\text{nilai-}p
+&amp;=P_{0.4}(S\le10)\\
+&amp;=\sum_{k=5}^{10}\binom{10}{k}(0{,}4)^k(0{,}6)^{10-k}\\
+&amp;\approx0{,}3668967424.
+\end{aligned}\]</div>
+<p>Hipotesis nol tidak ditolak pada taraf 5%. Menginversi seluruh keluarga uji berekor bawah memberi batas
+<span class="math-inline" role="math">\(L\)</span> yang memenuhi</p>
+<div class="math-display" role="math">\[\sum_{k=5}^{10}\binom{10}{k}L^k(1-L)^{10-k}=0{,}05.\]</div>
+<p>Solusi numeriknya <span class="math-inline" role="math">\(L\approx0{,}222441\)</span>, sehingga selang satu sisi adalah
+<span class="math-inline" role="math">\([0{,}222441,1)\)</span> untuk ruang parameter terbuka. Karena distribusinya diskret,
+prosedur hasil inversi mempunyai cakupan sedikitnya 95% dan umumnya konservatif,
+sejalan dengan mekanisme pada <a class="xref" data-target-id="O006-C140-CMP-MS06-P08-SOL" href="../mastery/O006-C140-CMP-MS06.html#O006-C140-CMP-MS06-P08-SOL">Solusi lengkap</a>. Audit terpadu ini memisahkan himpunan dukungan,
+optimisasi global, bias pengambilan sampel, reduksi melalui statistik cukup, sifat aksesori, aproksimasi
+Wald, dan ekor eksak alih-alih menyimpulkan semuanya dari satu akar skor.</p>
+<p><a id="O006-C140-CMP-CA02-RUB00"></a></p>
+<h2>Rubrik penilaian — total 100 poin</h2>
+<p>Setiap masalah bernilai 10 poin. Nilai penuh mensyaratkan derivasi yang dapat
+diperiksa, asumsi pokok teorema, dan diagnosis mekanisme kegagalan.
+Jawaban numerik tanpa alur penalaran tidak memperoleh poin derivasi. Menyebut hasil
+bootstrap atau aproksimasi tanpa hukum pengambilan sampel dan domain tidak memperoleh
+poin validitas.</p>
+<p><a id="O006-C140-CMP-CA02-RUB01"></a></p>
+<h3>Rubrik Masalah 1 (10 poin)</h3>
+<ul>
+<li>2 poin: ruang 20 himpunan bagian, <span class="math-inline" role="math">\(P(B)\)</span>, dan peluang bersyarat benar.</li>
+<li>3 poin: momen indikator serta kovarians <span class="math-inline" role="math">\(-1/20\)</span> diturunkan.</li>
+<li>3 poin: harapan dan varians <span class="math-inline" role="math">\(Y\)</span>, termasuk seluruh suku kovarians.</li>
+<li>2 poin: harapan bersyarat membedakan dua kelas label dan menyebut
+ketergantungan tanpa pengembalian sebagai mekanisme utama.</li>
+</ul>
+<p><a id="O006-C140-CMP-CA02-RUB02"></a></p>
+<h3>Rubrik Masalah 2 (10 poin)</h3>
+<ul>
+<li>2 poin: transformasi ke Seragam dan hukum statistik urutan bersama diturunkan.</li>
+<li>3 poin: Jacobian, dukungan segitiga, dan densitas <span class="math-inline" role="math">\((L,M)\)</span> benar.</li>
+<li>3 poin: kedua marginal serta faktorisasi <span class="math-inline" role="math">\((R,M)\)</span> benar.</li>
+<li>2 poin: peluang dan momen benar, dengan asumsi kontinuitas (sehingga tidak ada nilai kembar) dan domain
+transformasi dinyatakan.</li>
+</ul>
+<p><a id="O006-C140-CMP-CA02-RUB03"></a></p>
+<h3>Rubrik Masalah 3 (10 poin)</h3>
+<ul>
+<li>3 poin: kejadian Binomial, cakupan <span class="math-inline" role="math">\(119/128\)</span>, dan selang peringkat benar.</li>
+<li>3 poin: pivot maksimum dan selang titik ujung numerik benar.</li>
+<li>2 poin: transformasi selang ke median parametrik benar.</li>
+<li>2 poin: membedakan asumsi kontinuitas/median unik dari model Seragam serta
+menyebut dukungan yang bergantung pada parameter dan laju konvergensi yang bukan berorde <span class="math-inline" role="math">\(\sqrt n\)</span> sebagai kegagalan Wald.</li>
+</ul>
+<p><a id="O006-C140-CMP-CA02-RUB04"></a></p>
+<h3>Rubrik Masalah 4 (10 poin)</h3>
+<ul>
+<li>2 poin: momen <span class="math-inline" role="math">\(R_n\)</span> dan bias <span class="math-inline" role="math">\(U_n\)</span> benar.</li>
+<li>2 poin: varians, MSE, dan risiko kedua penduga benar.</li>
+<li>3 poin: bukti konsistensi dan perhitungan dua limit momen lengkap.</li>
+<li>3 poin: diagnosis kegagalan <span class="math-inline" role="math">\(L^2\)</span> serta syarat integrabilitas seragam atau
+kontrol momen seragam dinyatakan; independensi gangguan tidak diabaikan.</li>
+</ul>
+<p><a id="O006-C140-CMP-CA02-RUB05"></a></p>
+<h3>Rubrik Masalah 5 (10 poin)</h3>
+<ul>
+<li>2 poin: dominasi, himpunan dukungan bersama, faktorisasi, dan kecukupan benar.</li>
+<li>2 poin: kriteria rasio membuktikan kecukupan minimal.</li>
+<li>3 poin: bukti kelengkapan memakai hukum Gamma, integrabilitas, dan
+keunikan Laplace secara sah.</li>
+<li>3 poin: transformasi <span class="math-inline" role="math">\((T,A)\)</span>, sifat aksesori, independensi, dan semua
+asumsi teorema Basu benar; kegagalan bila kelengkapan hilang disebutkan.</li>
+</ul>
+<p><a id="O006-C140-CMP-CA02-RUB06"></a></p>
+<h3>Rubrik Masalah 6 (10 poin)</h3>
+<ul>
+<li>2 poin: normalisasi, keberadaan momen, dan solusi MM bersyarat benar.</li>
+<li>3 poin: fungsi kemungkinan penuh, akar, kelengkungan, dan audit maksimum global benar.</li>
+<li>3 poin: submodel terbuka versus tertutup membedakan supremum,
+ketiadaan, dan titik ujung.</li>
+<li>2 poin: invariansi <span class="math-inline" role="math">\(\psi\)</span> benar serta tidak dipakai untuk menyembunyikan
+kegagalan pencapaian maksimum.</li>
+</ul>
+<p><a id="O006-C140-CMP-CA02-RUB07"></a></p>
+<h3>Rubrik Masalah 7 (10 poin)</h3>
+<ul>
+<li>2 poin: skor dan informasi Fisher benar.</li>
+<li>2 poin: CRLB, pencapaiannya, dan kelas penduga tak bias benar.</li>
+<li>3 poin: pivot, arah inversi, serta selang eksak numerik benar.</li>
+<li>3 poin: Wald dihitung dan dibandingkan; himpunan dukungan tetap, parameter interior,
+diferensiabilitas, serta kegagalan domain/akurasi sampel kecil dinyatakan.</li>
+</ul>
+<p><a id="O006-C140-CMP-CA02-RUB08"></a></p>
+<h3>Rubrik Masalah 8 (10 poin)</h3>
+<ul>
+<li>2 poin: metode delta, galat baku berbasis taksiran, dan selang numerik benar.</li>
+<li>2 poin: selang persentil/dasar dan makna kondisional bootstrap benar.</li>
+<li>3 poin: MCSE, skor, selang cakupan, dan interpretasi cakupan di bawah nominal
+memperhitungkan replikasi independen serta galat acak Monte Carlo.</li>
+<li>3 poin: limit Normal terlipat dan kegagalan diferensiabilitas/bootstrap
+terpusat dijelaskan tanpa memakai contoh turunan nol.</li>
+</ul>
+<p><a id="O006-C140-CMP-CA02-RUB09"></a></p>
+<h3>Rubrik Masalah 9 (10 poin)</h3>
+<ul>
+<li>2 poin: ukuran uji eksak, statistik, dan nilai-p benar.</li>
+<li>2 poin: fungsi daya dua ekor dan nilai pada alternatif benar.</li>
+<li>3 poin: perencanaan ukuran sampel, pembulatan, dan verifikasi 42 versus 43.</li>
+<li>3 poin: inversi uji dan selang benar, dengan asumsi Normal, varians
+diketahui, serta ukuran sampel tetap disebut sebagai dasar eksak.</li>
+</ul>
+<p><a id="O006-C140-CMP-CA02-RUB10"></a></p>
+<h3>Rubrik Masalah 10 (10 poin)</h3>
+<ul>
+<li>2 poin: fungsi kemungkinan, maksimum global untuk <span class="math-inline" role="math">\(S&gt;5\)</span>, ketiadaan MLE pada
+<span class="math-inline" role="math">\(S=5\)</span>, serta bias Jensen yang dinyatakan hanya untuk penduga perluasan.</li>
+<li>2 poin: kecukupan/kecukupan minimal serta kegagalan sifat aksesori <span class="math-inline" role="math">\(A\)</span>.</li>
+<li>3 poin: informasi, galat baku, selang Wald, dan alasan ia tidak eksak.</li>
+<li>3 poin: arah ekor, nilai-p eksak, persamaan inversi, batas bawah, dan
+konservatisme diskret semuanya benar.</li>
+</ul>
+
+<footer class="license">Materi pendamping orisinal berlisensi CC BY-SA 4.0. Komponen Penn State dan Random tetap berada di bawah lisensinya masing-masing dan tidak direlisensikan oleh halaman ini.</footer>
+</main>
+</div>
+</body>
+</html>

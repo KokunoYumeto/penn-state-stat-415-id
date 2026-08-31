@@ -1,6 +1,25 @@
 # Current state — Penn State STAT 415 id-ID component
 
-Updated: 2026-08-28
+Updated: 2026-08-31
+
+## Live collection state — source production and deterministic C5 QA complete
+
+The complete Penn State translation, the exact Random completeness donor,
+and the complete original companion are now locally closed. Penn and donor
+are already publicly preserved. The companion's final C5 boundary comprises
+39 source documents, 146 fully solved problems, 1,523 backend entities, and
+1,949 relations; all 13 mastery sets, four cumulative assessments, two
+data-backed capstones, and six simulation families are complete. Source
+production preceded final audit. Build and QA each pass two independent
+byte-identical check-only replays; the 259-file Pages collection also passes.
+
+Publication is the remaining work, not translation. See
+`components/c140-companion/00_control/CHECKPOINT_2026-08-31_C5_LOCAL_COMPLETE.md`
+for exact current bytes, hashes, corrections, and executable next action.
+Preserve all inherited public files and publish the eight C5 additions in the
+existing GitHub and Zenodo concept 22077422 lineage. No browser may launch.
+Historical sections below retain their original evidence and do not restart
+finished production or override this live state.
 
 ## Authority and boundary
 
@@ -537,7 +556,11 @@ bytes through two credential-free verification paths. The 49 C3 files remain
 byte-identical, eight C4 files are appended, and the Zenodo concept has zero
 drafts. No browser or upstream contact occurred.
 
-The next live production boundary is C5 under
-`components/c140-companion/00_control/C5_ASSESSMENT_CAPSTONE_BATCH_CONTRACT.md`:
-produce `CA02`, `CA03`, `CA04`, `CP01`, and `CP02`, then close the final
-deterministic build/QA/publication gate. Overall C140 remains active.
+The live production boundary is C5 under
+`components/c140-companion/00_control/C5_ASSESSMENT_CAPSTONE_BATCH_CONTRACT.md`.
+`CA02` is complete and independently audited at 50,036 bytes / SHA-256
+`159628fdccdcb6f315bbfb1c5e96e423072566630817fbe20bdfdabc520fafda`;
+`CA03` and `CA04` are in production. Candidate data and exact asset-rights
+gates for `CP01`/`CP02` are recorded without premature admission. Overall C140
+remains active until all five C5 documents and the final build/publication are
+closed.
