@@ -1,0 +1,56 @@
+{
+  "control_authenticated": true,
+  "deployment_commit": "0ae796f7b3ef264144cc2744ce59a4c50a4029b5",
+  "downloaded_log_bytes": 56827,
+  "downloaded_log_sha256": "fd7d32255154977c0f53099fb47c47899219f690108b18af4dbea1436868ceb5",
+  "job_id": 99507728050,
+  "numeric_summaries": [
+    {
+      "atol": 0,
+      "conditioning_differing_paths_count": 18,
+      "exact_nonledger_outputs": 3,
+      "frozen_files_verified_unchanged": 12,
+      "max_conditioning_absolute_error": 4.3655745685100555e-11,
+      "max_conditioning_relative_error": 2.1839163275698785e-15,
+      "rtol": 1e-12,
+      "schema": "o006.c140.c5-cp01-portable-transform-check.v1",
+      "status": "pass"
+    },
+    {
+      "absolute_allowance": "at most one frozen displayed decimal quantum; integer tokens exact",
+      "capstone": "CP01",
+      "csv_differing_cells": 5,
+      "csv_rows_compared": 14434,
+      "csv_tables_compared": 19,
+      "frozen_files_verified_unchanged": 55,
+      "max_csv_absolute_error": "1E-8",
+      "max_csv_relative_error": "4.9326028871905827534894219344563620514734868648731196424533740779485422974643659E-9",
+      "original_scientific_assertions_pass": true,
+      "receipt_differing_observations": 0,
+      "recomputed_manifest_and_receipt_bind_recomputed_outputs": true,
+      "rtol": "1e-12",
+      "schema": "o006.c140.c5-portable-analysis-check.v1",
+      "status": "pass"
+    }
+  ],
+  "run_id": 33398190711,
+  "schema": "o006.c140.c5-linux-numerical-replay-attempt.v1",
+  "terminal_error_summaries": [
+    "RuntimeError: recomputed decimal precision decreased at CP02_coverage.csv.row[18889].coverage"
+  ],
+  "status": "fail",
+  "attempt": 1,
+  "source_commit": "40acd8e846a4603ac5a90d311794b7e9c9db7bb9",
+  "workflow_run_url": "https://github.com/KokunoYumeto/penn-state-stat-415-id/actions/runs/33398190711",
+  "job_url": "https://github.com/KokunoYumeto/penn-state-stat-415-id/actions/runs/33398190711/job/99507728050",
+  "failed_step": {
+    "number": 7,
+    "name": "Verify original C140 companion cumulative C5 boundary"
+  },
+  "storage_download_anonymous": true,
+  "raw_log_persisted": false,
+  "credential_material_persisted": false,
+  "browser_processes_used": false,
+  "pages_readback_started": false,
+  "cp02_final_pass_summary_present": false
+}

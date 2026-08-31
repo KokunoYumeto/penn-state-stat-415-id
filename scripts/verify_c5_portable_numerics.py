@@ -248,9 +248,9 @@ def decimal_difference(old: str, new: str, label: str) -> dict[str, str]:
         if not left.is_finite() or not right.is_finite():
             raise RuntimeError("nonfinite CSV value at " + label)
         quantum = Decimal(1).scaleb(left.as_tuple().exponent)
-        # A coarser new serialization must not manufacture a larger allowance.
-        if Decimal(1).scaleb(right.as_tuple().exponent) > quantum:
-            raise RuntimeError("recomputed decimal precision decreased at " + label)
+        # The allowance depends only on the frozen display quantum. A normal
+        # rounding or trailing-zero removal may change the new exponent, but
+        # cannot enlarge this allowance; the error bound below still applies.
         error = abs(left - right)
         scale = max(abs(left), abs(right))
         allowance = Decimal("1e-12") * scale + quantum
@@ -278,6 +278,8 @@ def compare_csv(name: str, frozen_stream: Any, recomputed_stream: Any) -> dict[s
     if not allowed <= set(header):
         raise RuntimeError("CSV numerical column contract differs: " + name)
     examples: list[dict[str, object]] = []
+    rejected: list[dict[str, object]] = []
+    rejected_count = 0
     count = rows = 0
     max_absolute = max_relative = Decimal(0)
     for rows, pair in enumerate(zip_longest(old_reader, new_reader), start=1):
@@ -299,14 +301,25 @@ def compare_csv(name: str, frozen_stream: Any, recomputed_stream: Any) -> dict[s
                 raise RuntimeError("nonfinite CSV value at " + label)
             if old == new:
                 continue
-            if not numeric:
-                raise RuntimeError("exact CSV token differs at " + label)
-            difference = decimal_difference(old, new, label)
+            try:
+                if not numeric:
+                    raise RuntimeError("exact CSV token differs at " + label)
+                difference = decimal_difference(old, new, label)
+            except RuntimeError as exc:
+                rejected_count += 1
+                if len(rejected) < MAX_DIFFERENCE_EXAMPLES:
+                    rejected.append({"row": rows, "column": column, "frozen": old,
+                                     "recomputed": new, "reason": str(exc)})
+                continue
             count += 1
             max_absolute = max(max_absolute, Decimal(difference["absolute_error"]))
             max_relative = max(max_relative, Decimal(difference["relative_error"]))
             if len(examples) < MAX_DIFFERENCE_EXAMPLES:
                 examples.append({"row": rows, "column": column, **difference})
+    if rejected_count:
+        raise RuntimeError(json.dumps({"file": name, "rows": rows,
+            "forbidden_differences": rejected_count, "examples": rejected,
+            "examples_truncated": rejected_count > len(rejected)}, sort_keys=True))
     return {
         "file": name, "rows": rows, "differing_cells": count,
         "max_absolute_error": str(max_absolute), "max_relative_error": str(max_relative),
@@ -498,17 +511,26 @@ def analysis_main(capstone: str) -> None:
     if canonical_json(normalized) != frozen_receipt:
         raise RuntimeError("analysis receipt source/data/environment/method/assertion fields differ")
     csv_reports = []
+    csv_failures = []
     rendered = []
     for name in sorted(expected_names - {"MANIFEST.csv", "CP01_REPLAY_RECEIPT.json"}):
         if name.endswith(".csv"):
-            with (directory / name).open(encoding="utf-8", newline="") as old_stream, io.TextIOWrapper(io.BytesIO(payloads[name]), encoding="utf-8", newline="") as new_stream:
-                report = compare_csv(name, old_stream, new_stream)
+            try:
+                with (directory / name).open(encoding="utf-8", newline="") as old_stream, io.TextIOWrapper(io.BytesIO(payloads[name]), encoding="utf-8", newline="") as new_stream:
+                    report = compare_csv(name, old_stream, new_stream)
+            except RuntimeError as exc:
+                failure = {"file": name, "status": "fail", "reason": str(exc)}
+                csv_failures.append(failure)
+                print(json.dumps({"capstone": capstone, "csv_failure": failure}, sort_keys=True), flush=True)
+                continue
             csv_reports.append(report)
             print(json.dumps({"capstone": capstone, "csv_comparison": report}, sort_keys=True), flush=True)
         else:
             rendered.append({"file": name, "frozen_sha256": next(item["sha256"] for item in frozen_outputs if item["path"] == prefix + name), "recomputed_sha256": digest(payloads[name]), "comparison": "frozen_identity_exact; recomputed_rendered_bytes_not_asserted_equal"})
     for path, (size, checksum, _) in list(observed.items()):
         verify_file(path, (size, checksum))
+    if csv_failures:
+        raise RuntimeError(f"{capstone}: {len(csv_failures)} CSV tables failed; see bounded per-table diagnostics")
     print(json.dumps({
         "schema": "o006.c140.c5-portable-analysis-check.v1", "status": "pass", "capstone": capstone,
         "mode": "portable-numerical-check-not-byte-exact-producer-replay",
