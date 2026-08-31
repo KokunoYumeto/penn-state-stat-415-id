@@ -9,18 +9,18 @@ di repositori publiknya sendiri; berkas di sini adalah impor satu halaman yang
 terikat ke identitas edisi itu, bukan fork kedua dari seluruh buku.
 
 **Status: lengkap dan lulus QA statis.** Pembaca luring donor berisi 18 berkas
-/ 1.798.250 byte. Receipt build mempunyai SHA-256
-`455afd0c425260517857bc61e108d08b2abf0548dcb880095b3a2d95bdc3ac2d`;
+/ 1.798.255 byte. Receipt build mempunyai SHA-256
+`4b72a36653305ab36f6b1863ecd0fd04e416888c83dff58bff20632e83aebd06`;
 receipt QA mempunyai SHA-256
-`5868ed14ecc03094f6fea848d927738f0fe459443c5a5c49afe2a2abbe93c83f`.
+`a4265feb621ec79c4bb2870f03e69f8b73659e6bea3d4e4d905cda3be97fc5c7`.
 Keduanya diputar ulang dengan hasil identik tanpa proses peramban.
 
 ## Batas dan identitas
 
 - sumber resmi: 57.507 byte / SHA-256
   `4d7402f2a960ea2b4232e57e4ee5992ac29801b9269f300f17f8e83074d5a0e4`;
-- target id-ID kanonis: 60.895 byte / SHA-256
-  `255ac88f235727301ee341eef79b9578910be88b7e2e038d4dfecc0ed686513c`;
+- target id-ID kanonis: 60.900 byte / SHA-256
+  `18b0305dc25a19a834204fdf84029ff67408f98262024717abf597c745a00197`;
 - struktur: 436 elemen sumber, 804 rentang TeX terbatas, 39 unit, dan 26
   rincian/derivasi;
 - backend donor: 325 entitas dan 474 relasi dengan ID stabil yang sama seperti
@@ -37,8 +37,11 @@ terikat pada 19 catatan donor yang diimpor; byte sumber resmi tidak berubah.
 ## Provenans dan hubungan sumber
 
 Target kanonis, backend, dan catatan koreksi diimpor secara deterministik dari
-`KokunoYumeto/mathematical-statistics-id` pada commit
-`f2aab7b9a0578dd76624e183fc47e3c1faa664e8`. Edisi lengkap dapat dibaca di:
+edisi lengkap `KokunoYumeto/mathematical-statistics-id`. Commit
+`f2aab7b9a0578dd76624e183fc47e3c1faa664e8` tetap menjadi saksi publik dasar;
+target kini memuat satu penyempurnaan istilah pembaca pada 2026-08-31,
+`bersupport tetap` menjadi `dengan dukungan tetap` (+5 byte), tanpa perubahan
+pada makna matematis atau byte otoritas. Edisi lengkap dapat dibaca di:
 
 - https://kokunoyumeto.github.io/mathematical-statistics-id/random/point/Sufficient.html
 - https://github.com/KokunoYumeto/mathematical-statistics-id/releases/tag/v2026.08.24.29

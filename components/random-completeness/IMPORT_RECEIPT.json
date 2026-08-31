@@ -1,4 +1,15 @@
 {
+  "canonical_reader_correction": {
+    "after": "dengan dukungan tetap",
+    "authority_bytes_changed": false,
+    "base_public_readback_retained_as_historical_evidence": true,
+    "before": "bersupport tetap",
+    "byte_delta": 5,
+    "classification": "reader-facing Indonesian terminology refinement",
+    "date": "2026-08-31",
+    "line": 548,
+    "mathematical_meaning_changed": false
+  },
   "component": "O006/C140 Random completeness donor",
   "counts": {
     "adverse_records": 19,
@@ -73,14 +84,14 @@
       "sha256": "a26f07b700c9de8c7ce83e5a2f38e1e676ed5b085fec8c4a52bb44abefaa8ba8"
     },
     {
-      "bytes": 9494,
+      "bytes": 9584,
       "path": "backend/adverse_records.jsonl",
-      "sha256": "8f1f52c51bd95260d4d29af9ca115e6eccb7ae4d8cc8e3273afd71b82727ac6c"
+      "sha256": "aa99bbd7e97f77f6f5663b557bc65ab9425b5b5c5d486d875a67d9215552a007"
     },
     {
       "bytes": 566058,
       "path": "backend/entities.jsonl",
-      "sha256": "896ffb17d485c820617abf20741de551e7448753ddabe7a3d1a5dfc6ad222376"
+      "sha256": "abe158a6c768cd96a299ea6cb7c26ce66ad8ebb07afd853cd1ae689abdd2e007"
     },
     {
       "bytes": 63237,
@@ -93,9 +104,9 @@
       "sha256": "cd7a10378ea4ce3ec9e9993812f751e475a8661ec6b9ca40a535769769153db7"
     },
     {
-      "bytes": 880,
+      "bytes": 918,
       "path": "backend/translation_ledger.csv",
-      "sha256": "a347a65a105655092409005f32ac53aa831389fdf8d66aba79c9e1fad234c16c"
+      "sha256": "1d6c34b1297184d7ae857c9808788e9f908632b4e10ad3788dcf5a1feaa05f49"
     },
     {
       "bytes": 2162,
@@ -103,9 +114,9 @@
       "sha256": "1cd59cc44cb5c7cbf1a171d8920f6346b6577b7e2057e059c08258117e56565d"
     },
     {
-      "bytes": 60538,
+      "bytes": 60543,
       "path": "provenance/sibling/localize_sufficient.py",
-      "sha256": "040d8dfd069687d54bc8b40069214018cf2b09448a754177f18c890a387c9b6c"
+      "sha256": "87c161233cb0b4bd5c0212de683d9934d80d66aaa1bc755cc9a145a0c3a9ba43"
     },
     {
       "bytes": 901,
@@ -123,9 +134,9 @@
       "sha256": "3e307d3a09c029ec488fdede9de4ac093e660b2a74001921696db75c4662b936"
     },
     {
-      "bytes": 60895,
+      "bytes": 60900,
       "path": "source/id-ID/random/point/Sufficient.html",
-      "sha256": "255ac88f235727301ee341eef79b9578910be88b7e2e038d4dfecc0ed686513c"
+      "sha256": "18b0305dc25a19a834204fdf84029ff67408f98262024717abf597c745a00197"
     }
   ],
   "live_reverification_date": "2026-08-28",
@@ -159,8 +170,8 @@
   "source_bytes": 57507,
   "source_path": "random/point/Sufficient.html",
   "source_sha256": "4d7402f2a960ea2b4232e57e4ee5992ac29801b9269f300f17f8e83074d5a0e4",
-  "target_bytes": 60895,
+  "target_bytes": 60900,
   "target_locale": "id-ID",
-  "target_sha256": "255ac88f235727301ee341eef79b9578910be88b7e2e038d4dfecc0ed686513c",
+  "target_sha256": "18b0305dc25a19a834204fdf84029ff67408f98262024717abf597c745a00197",
   "translation_provenance": "OpenAI Codex gpt-5.6-sol, Ultra"
 }
