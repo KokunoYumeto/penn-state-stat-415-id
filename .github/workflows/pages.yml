@@ -87,10 +87,10 @@ jobs:
           python -B components/c140-companion/simulations/run_c1_simulations.py --check-only
           python -B components/c140-companion/simulations/run_c2_simulations.py --check-only
           python -B components/c140-companion/simulations/run_c3_simulations.py --check-only
-          python -B scripts/verify_c5_portable_numerics.py
-          python -B components/c140-companion/capstones/run_cp01_analysis.py --check-only
+          python -B scripts/verify_c5_portable_numerics.py --mode cp01-transform
+          python -B scripts/verify_c5_portable_numerics.py --mode cp01-analysis
           python -B components/c140-companion/data/capstones/CP02/transform_cp02.py --check-only
-          python -B components/c140-companion/capstones/run_cp02_analysis.py --check-only
+          python -B scripts/verify_c5_portable_numerics.py --mode cp02-analysis
           python -B components/c140-companion/scripts/build_companion.py --check-only --c5
           python -B components/c140-companion/scripts/qa_companion.py --check-only --c5
 
