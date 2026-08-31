@@ -21,45 +21,30 @@ commit: `40acd8e846a4603ac5a90d311794b7e9c9db7bb9`; tag:
 `v2026.08.31.c140-companion-c5`. Exact receipts are the C5-named release and
 Zenodo JSON files in this directory.
 
-Remaining operation: CI-only numerical portability verification, followed by
-Pages deployment/readback and final controls.
-The frozen source/data/readers must not change. Root helper
-`scripts/verify_c5_portable_numerics.py` checks only explicit computed-float
-fields at rtol 1e-12 / atol 0, with every frozen file hash and all other fields
-exact. The Pages verifier accepts an explicitly named descendant deployment
-commit only when exact BUILD/QA/collection blobs match the original content
-commit. The portable check passed on actual Linux with 15 differing leaves,
-maximum relative error 1.9412589578398923e-15. Its run then exposed a missing
-SciPy install: the local pinned requirement had not yet been committed.
-That exact dependency is pushed in commit
-`3877b7dfe9133b89e0c7653ed60ca520d514b343`. Its run `33396740292`
-passed the transform certificate but then failed the byte-only comparison of
-`CP01_inference_joint_F.csv`. The completed bounded helper replays the frozen
-CP01/CP02 analyses with explicit numeric column tolerances; source identities,
-integer/discrete cells, topology, manifests and original scientific assertions
-remain exact. Both local analyses pass: CP01 19 CSVs / 14,434 rows and CP02
-11 CSVs / 484,489 rows, zero differing cells and exact returned receipt hashes.
-The local replay is complete; do not launch a duplicate. No producer, dataset,
-release artifact or reader changed. CI repair commit
-`0ae796f7b3ef264144cc2744ce59a4c50a4029b5` passed both Linux CP01 modes;
-run `33398190711` then exposed an overly strict decimal-formatting check on
-CP02 coverage row 18,889. The `.15g` serializer can remove trailing zeroes;
-the new-value exponent must not be mistaken for numerical error. The redundant
-precision rejection is removed while the frozen-quantum numerical tolerance
-is unchanged. Bounded diagnostics now collect failures across all CSV tables.
-This tested repair is pushed at `04b58d8e9ac74f7fb30f137f8073bff05208502e`;
-monitor only exact run `33399647717`, then perform anonymous Pages readback on
-success. The failed-run evidence is
-`C5_LINUX_NUMERICAL_REPLAY_2026-08-31_ATTEMPT1.json`. The four
-changed CI/dependency/verifier files passed anonymous immutable-commit byte
-readback, recorded in `C5_FINAL_CI_CODE_PUBLIC_READBACK_2026-08-31.json`.
-The Pages verifier's source `--commit` remains
-`40acd8e846a4603ac5a90d311794b7e9c9db7bb9`; its explicit
-`--deployment-commit` is `04b58d8e9ac74f7fb30f137f8073bff05208502e`.
-Do not redo translation or start another audit cycle. No browser process or
-upstream conversation is permitted. The older goal's Random-first source
-selection is superseded by the direct complete Penn/donor/companion selection;
-the independent 29-page Random edition remains separate and complete.
+Terminal operation: Linux numerical portability, Pages deployment, anonymous
+readback, and final publication evidence are complete. Run `33405870018`
+deployed commit `903d54c0971d3c14ec8f6fa0961136b881a73b82`; anonymous readback matched
+all 259 Pages files / 35,170,536 bytes. The 103,239-byte receipt
+`GITHUB_PAGES_RECEIPT_2026-08-31_C140_COMPANION_C5.json` has SHA-256
+`2230f83f946c83d5a9633cdc3f4b1c5af72069634ff72586768a4f8f08a3eae6`.
+
+The Linux replay passed the CP01 transform, all 19 CP01 analysis tables /
+14,434 rows, and all 11 CP02 tables / 484,489 rows with the original scientific
+assertions. Source/data identities, topology, discrete cells, and manifest
+bindings remain exact. The documented `5e-10` absolute exception applies only
+to the CP02 dispersion-profile `log_likelihood` and derived delta fields; a
+`6e-10` adversarial difference fails. Exact success evidence is
+`C5_LINUX_NUMERICAL_REPLAY_2026-08-31_SUCCESS.json`; attempts 1–5 remain as
+fail-closed historical evidence. No producer, dataset, package, or reader byte
+changed during the portability repair.
+
+The complete publication checkpoint is
+`components/c140-companion/00_control/CHECKPOINT_2026-08-31_C5_PUBLICATION_COMPLETE.md`.
+No O006/C140 production, audit, build, publication, readback, or upstream-report
+action remains. Do not redo translation or start another audit cycle. No browser
+process or upstream conversation is permitted. The older goal's Random-first
+source selection is superseded by the direct complete Penn/donor/companion
+selection; the independent 29-page Random edition remains separate and complete.
 
 ## Current boundary
 
@@ -158,7 +143,7 @@ the independent 29-page Random edition remains separate and complete.
   lineage pointer
   `f56ef5c4adc990bb08a394830df85a653c254ec106d2a67b60478e9137b7b8fc`.
 
-## Next executable action
+## Historical production trail — all actions below are complete
 
 The exact Random completeness donor is committed at
 `5ed0e501e3a41c1274d90c9f02aee15bc210324a`, Pages run `33164278836` passed,
@@ -245,13 +230,12 @@ matched all 188 public files. GitHub release `379047752` / tag
 `10.5281/zenodo.22164344` matched all 57 release files / 93,850,993 bytes at
 both destinations; the Zenodo lineage has zero drafts.
 
-Current C5 source cursor: `CA02` is complete and independently audited at
-50,036 bytes / SHA-256
-`159628fdccdcb6f315bbfb1c5e96e423072566630817fbe20bdfdabc520fafda`;
-`CA03` and `CA04` are in production. Next, finish/audit those two assessments,
-integrate all three into the cumulative reader/backend, then freeze and author
-`CP01`/`CP02` under the recorded asset-level rights gates. Do not reopen C1–C4
-without a proved defect. The overall C140 goal remains active.
+Historical C5 cursor, now superseded: `CA02` had been complete at 50,036 bytes /
+SHA-256 `159628fdccdcb6f315bbfb1c5e96e423072566630817fbe20bdfdabc520fafda`
+while `CA03`, `CA04`, `CP01`, and `CP02` were still pending. All five are now
+complete, integrated, audited after production, built, published, and publicly
+verified at the terminal boundary recorded above. Do not reopen C1–C5 without
+a proved defect.
 
 The donor authority is 57,507 bytes / SHA-256
 `4d7402f2a960ea2b4232e57e4ee5992ac29801b9269f300f17f8e83074d5a0e4`;

@@ -1,0 +1,37 @@
+{
+  "schema": "o006.c140.c5-linux-numerical-replay-attempt.v1",
+  "status": "failed_closed",
+  "attempt": 5,
+  "date": "2026-08-31",
+  "source_content_commit": "40acd8e846a4603ac5a90d311794b7e9c9db7bb9",
+  "deployment_commit": "ab1adde9c56a53dc2b2db0095ce49f6b92f17c9c",
+  "run_id": 33404229755,
+  "job_id": 99527694280,
+  "failed_step": "Verify original C140 companion cumulative C5 boundary",
+  "log_retrieval": {
+    "transport": "GitHub CLI exact failed-run stdout",
+    "bytes": 41389,
+    "sha256": "4d45610d8385b4981a7b23044723ac29436195171cdb4442283116426deb9ef0",
+    "raw_log_persisted": false,
+    "credential_material_persisted": false
+  },
+  "passed": {
+    "authority_translation_replay": true,
+    "random_donor_build_qa": true,
+    "numerical_replay": true
+  },
+  "failure": {
+    "terminal": "Deterministic replay failed: backend/mismatch:MANIFEST.csv, backend/mismatch:entities.jsonl, backend/mismatch:source/rights/repository-LICENSE.md, mismatch:C5_BUILD_RECEIPT.json",
+    "cause": "The four generated files were already committed at their validated C5 identities. Their source, root LICENSE.md with the CP01/CP02 dataset rights clauses, was staged locally but omitted from every path-limited commit; Linux therefore regenerated the historical rights payload."
+  },
+  "remedy": {
+    "published_commit": "903d54c0971d3c14ec8f6fa0961136b881a73b82",
+    "file": "LICENSE.md",
+    "working_bytes": 4356,
+    "sha256": "7b8d94baedb054c6b705b0c345fbd8d27c489ca95e6251cb64c70cef7687d965",
+    "scope": "C5 dataset rights and component-separated licensing"
+  },
+  "pages_deployed": false,
+  "browser_processes_used": false,
+  "release_package_modified": false
+}

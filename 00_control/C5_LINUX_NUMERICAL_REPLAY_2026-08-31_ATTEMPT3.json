@@ -1,0 +1,64 @@
+{
+  "schema": "o006.c140.c5-linux-numerical-replay-attempt.v1",
+  "status": "failed_closed",
+  "attempt": 3,
+  "date": "2026-08-31",
+  "source_content_commit": "40acd8e846a4603ac5a90d311794b7e9c9db7bb9",
+  "deployment_commit": "b51a53a30361d25aaa8dc977b30d5f572e0d494b",
+  "run_id": 33402312851,
+  "job_id": 99521359021,
+  "failed_step": "Verify original C140 companion cumulative C5 boundary",
+  "log_retrieval": {
+    "transport": "GitHub CLI exact failed-run stdout",
+    "bytes": 43055,
+    "sha256": "4d62dbab6cd1fc1c39f90a4be1c239c76985d51b731b5ea7f88df68af2fb5220",
+    "raw_log_persisted": false,
+    "credential_material_persisted": false
+  },
+  "numerical_replay": {
+    "status": "pass",
+    "cp01_transform": {
+      "conditioning_differing_paths": 18,
+      "max_relative_error": 2.1839163275698785e-15
+    },
+    "cp01_analysis": {
+      "csv_tables": 19,
+      "csv_rows": 14434,
+      "csv_differing_cells": 5,
+      "max_absolute_error": "1e-8",
+      "max_relative_error": "4.9326028871905828e-9",
+      "original_scientific_assertions_pass": true,
+      "receipt_differences": 0
+    },
+    "cp02_analysis": {
+      "csv_tables": 11,
+      "csv_rows": 484489,
+      "csv_differing_cells": 2752,
+      "max_absolute_error": "2.329e-10",
+      "max_relative_error": "1.0895363305776657e-10",
+      "original_scientific_assertions_pass": true,
+      "receipt_differences": 0,
+      "csv_failures": 0
+    }
+  },
+  "failure": {
+    "stage": "companion deterministic build check",
+    "terminal": "Random donor translated target identity differs",
+    "cause": "The current 60,900-byte terminology-refined donor target and its ten deterministic derivatives were complete locally but absent from the Git commit, whose target blob remained the historical 60,895-byte identity."
+  },
+  "remedy": {
+    "published_commit": "d513756ee14994e111fcfd8e767857528af09f9f",
+    "files": 11,
+    "donor_build_check": "pass",
+    "donor_qa_check": "pass",
+    "companion_build_check": "pass",
+    "companion_qa_check": "pass",
+    "pages_collection_check": "pass",
+    "pages_files": 259,
+    "pages_bytes": 35170536,
+    "pages_manifest_sha256": "43fad46f62f6925e39f5c24a7d0182a26b2e96e884f5e2b0d7f79be28cf64249"
+  },
+  "pages_deployed": false,
+  "browser_processes_used": false,
+  "release_package_modified": false
+}

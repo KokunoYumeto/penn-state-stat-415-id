@@ -8,9 +8,9 @@ sini adalah materi orisinal berlisensi CC BY-SA 4.0.
 Status saat ini: pendamping C5 lengkap; rilis GitHub dan preservasi Zenodo C5
 sudah terbit serta terverifikasi secara anonim. Audit pascatranslasi,
 build kumulatif, QA statis, dan pemeriksaan ulang deterministik telah lulus
-tanpa browser atau akses jaringan. Perbaikan portabilitas numerik CI Pages
-masih berlangsung; C5 belum dinyatakan selesai pada seluruh tujuan
-publikasi. C1 mencakup
+tanpa browser atau akses jaringan. Pages C5 juga telah lulus CI, terdeploy,
+dan dibaca kembali secara anonim. C5 selesai pada seluruh tujuan publikasi dan
+tidak menyisakan pekerjaan tertunda. C1 mencakup
 model parametrik reguler, konsistensi dan normalitas asimtotik MLE, prosedur
 Wald/score/rasio likelihood, kasus nonreguler, Neyman–Pearson, MP versus UMP,
 risiko/efisiensi, empat simulasi deterministik, empat set penguasaan, dan satu
@@ -45,7 +45,7 @@ lengkap lokal dalam
 Build/QA dalam mode `--write` dan `--check-only` telah lulus. Checkpoint
 tersebut mencatat penyelesaian lokal; status publik terkini dirinci berikut.
 
-## Rilis C5 terverifikasi di GitHub dan Zenodo; Pages belum selesai
+## Rilis C5 terverifikasi di GitHub, Zenodo, dan Pages
 
 [Rilis GitHub kumulatif C5](https://github.com/KokunoYumeto/penn-state-stat-415-id/releases/tag/v2026.08.31.c140-companion-c5)
 dan [preservasi Zenodo C5](https://doi.org/10.5281/zenodo.22208527) dalam
@@ -56,10 +56,17 @@ diunduh kembali secara anonim dan cocok jumlah byte serta SHA-256. Seluruh
 [receipt GitHub C5](../../00_control/GITHUB_RELEASE_RECEIPT_2026-08-31_C140_COMPANION_C5.json)
 dan [receipt Zenodo C5](../../00_control/ZENODO_PUBLIC_READBACK_2026-08-31_C140_COMPANION_C5.json).
 
-CI Pages masih memerlukan perbaikan portabilitas numerik yang terbatas pada
-sertifikat pengondisian CP01 pada keluaran BLAS;
-[pembaca web pendamping](https://kokunoyumeto.github.io/penn-state-stat-415-id/components/c140-companion/)
-belum dinyatakan terverifikasi untuk C5.
+Pages C5 terverifikasi pada run `33405870018`, deployment
+`903d54c0971d3c14ec8f6fa0961136b881a73b82`: 259 berkas / 35.170.536 byte,
+terdiri atas Penn 106 / 17.614.553 byte, donor 18 / 1.798.255 byte, dan
+pendamping 135 / 15.757.728 byte. Seluruh berkas dibaca kembali secara anonim
+dan cocok dengan byte serta SHA-256 yang dipatok. Bukti tersimpan dalam
+[receipt Pages C5](../../00_control/GITHUB_PAGES_RECEIPT_2026-08-31_C140_COMPANION_C5.json)
+(103.239 byte; SHA-256
+`2230f83f946c83d5a9633cdc3f4b1c5af72069634ff72586768a4f8f08a3eae6`).
+[Pembaca web utama](https://kokunoyumeto.github.io/penn-state-stat-415-id/)
+dan [pembaca web pendamping](https://kokunoyumeto.github.io/penn-state-stat-415-id/components/c140-companion/)
+keduanya terverifikasi untuk C5; tidak ada pekerjaan C5 yang masih tertunda.
 
 [Rilis GitHub kumulatif C4](https://github.com/KokunoYumeto/penn-state-stat-415-id/releases/tag/v2026.08.29.c140-companion-c4)
 dan [preservasi Zenodo C4](https://doi.org/10.5281/zenodo.22164344) merupakan

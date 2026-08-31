@@ -1,0 +1,127 @@
+{
+  "schema": "o006.c140.goal-completion-audit.v1",
+  "date": "2026-08-31",
+  "status": "pass",
+  "translation_completed_before_audit": true,
+  "browser_processes_used": false,
+  "scope": "O006/C140 Bahasa Indonesia Mathematical Statistics",
+  "requirements": [
+    {
+      "requirement": "complete_admitted_source",
+      "status": "pass",
+      "evidence": {
+        "independent_random_chapters_5_8": "29/29 source pages complete",
+        "penn_state_stat_415": "landing/index plus Lessons 00-12, 14/14 documents and 4932 translation segments complete",
+        "random_completeness_donor": "one exact donor page complete",
+        "original_companion": "39/39 documents complete: index, D001-D013, SIM001-SIM006, MS00-MS12, CA01-CA04, CP01-CP02"
+      }
+    },
+    {
+      "requirement": "translation_and_reader_production",
+      "status": "pass",
+      "evidence": {
+        "independent_random_reader": {
+          "files": 67,
+          "bytes": 2962390,
+          "manifest_sha256": "ce25e1505462bbe60cfe35a46844b40d1646baff18dff72a9f3f8bbf376c9887"
+        },
+        "penn_reader": {
+          "files": 106,
+          "bytes": 17614553,
+          "manifest_sha256": "697c9ee8e23cc10469fea4d1894e16471ffb4276edd1f0d25bebfb5be0dbe79e"
+        },
+        "random_donor_reader": {
+          "files": 18,
+          "bytes": 1798255,
+          "target_sha256": "18b0305dc25a19a834204fdf84029ff67408f98262024717abf597c745a00197"
+        },
+        "companion_reader": {
+          "files": 135,
+          "bytes": 15757728,
+          "fully_solved_problems": 146
+        }
+      }
+    },
+    {
+      "requirement": "locale_neutral_backend",
+      "status": "pass",
+      "evidence": {
+        "independent_random": {
+          "entities": 6567,
+          "relations": 9035,
+          "untranslated_entities": 0
+        },
+        "companion": {
+          "files": 117,
+          "bytes": 13568809,
+          "entities": 1523,
+          "relations": 1949
+        }
+      }
+    },
+    {
+      "requirement": "rights_provenance_and_corrections",
+      "status": "pass",
+      "evidence": {
+        "component_licenses_preserved_separately": true,
+        "random_license_discrepancy_preserved": true,
+        "penn_authority_bytes_immutable": true,
+        "translation_provenance": "OpenAI Codex gpt-5.6-sol, Ultra",
+        "root_license_public_readback": "00_control/C5_ROOT_LICENSE_PUBLIC_READBACK_2026-08-31.json"
+      }
+    },
+    {
+      "requirement": "deterministic_build_qa_accessibility_and_numerics",
+      "status": "pass",
+      "evidence": {
+        "companion_build_receipt": {
+          "path": "components/c140-companion/build/C5_BUILD_RECEIPT.json",
+          "sha256": "cc9e6002edcbb5adbe5a348233fb73f5588728a4fbc330a93061c1f18807f372"
+        },
+        "companion_qa_receipt": {
+          "path": "components/c140-companion/build/C5_QA_RECEIPT.json",
+          "sha256": "aef36e757fca2d3ad1593087af12a5102120697f16715acf210248d94d296bfd"
+        },
+        "linux_replay": "00_control/C5_LINUX_NUMERICAL_REPLAY_2026-08-31_SUCCESS.json",
+        "pages_files": 259,
+        "pages_bytes": 35170536,
+        "pages_manifest_sha256": "43fad46f62f6925e39f5c24a7d0182a26b2e96e884f5e2b0d7f79be28cf64249"
+      }
+    },
+    {
+      "requirement": "public_preservation_and_anonymous_readback",
+      "status": "pass",
+      "evidence": {
+        "independent_random_github": "https://github.com/KokunoYumeto/mathematical-statistics-id/releases/tag/v2026.08.24.29",
+        "independent_random_zenodo": "https://doi.org/10.5281/zenodo.22076539",
+        "collection_pages": "https://kokunoyumeto.github.io/penn-state-stat-415-id/",
+        "collection_pages_receipt": {
+          "path": "00_control/GITHUB_PAGES_RECEIPT_2026-08-31_C140_COMPANION_C5.json",
+          "sha256": "2230f83f946c83d5a9633cdc3f4b1c5af72069634ff72586768a4f8f08a3eae6"
+        },
+        "c5_github_release": "https://github.com/KokunoYumeto/penn-state-stat-415-id/releases/tag/v2026.08.31.c140-companion-c5",
+        "c5_zenodo": "https://doi.org/10.5281/zenodo.22208527",
+        "c5_release_files_each_destination": 65,
+        "c5_release_bytes_each_destination": 134904267
+      }
+    },
+    {
+      "requirement": "upstream_disposition",
+      "status": "pass",
+      "evidence": {
+        "path": "00_control/UPSTREAM_REPORT_DISPOSITION_2026-08-31.md",
+        "sha256": "27fd4371bfab58f3310d7057ca218671969a87d9e095028cdb8ac2da2ddd3102",
+        "new_report_sent": false
+      }
+    },
+    {
+      "requirement": "terminal_state",
+      "status": "pass",
+      "evidence": {
+        "checkpoint": "components/c140-companion/00_control/CHECKPOINT_2026-08-31_C5_PUBLICATION_COMPLETE.md",
+        "remaining_translation_units": 0,
+        "remaining_required_actions": 0
+      }
+    }
+  ]
+}

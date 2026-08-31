@@ -1,0 +1,78 @@
+{
+  "schema": "o006.c140.c5-linux-numerical-replay.v1",
+  "status": "pass",
+  "date": "2026-08-31",
+  "source_content_commit": "40acd8e846a4603ac5a90d311794b7e9c9db7bb9",
+  "deployment_commit": "903d54c0971d3c14ec8f6fa0961136b881a73b82",
+  "run_id": 33405870018,
+  "job_id": 99533205013,
+  "public_run_url": "https://github.com/KokunoYumeto/penn-state-stat-415-id/actions/runs/33405870018",
+  "log_retrieval": {
+    "transport": "GitHub CLI exact successful-run stdout",
+    "bytes": 153417,
+    "sha256": "8f16a910e5c2aeb01860c16c9e597857ebf3a7ce2ccd17ec756ebb02403f7167",
+    "raw_log_persisted": false,
+    "credential_material_persisted": false
+  },
+  "environment": {
+    "platform": "linux",
+    "python": "3.13.9",
+    "numpy": "2.4.4",
+    "scipy": "1.17.1"
+  },
+  "checks": {
+    "cp01_transform": {
+      "status": "pass",
+      "conditioning_differing_paths": 15,
+      "max_relative_error": 1.9412589578398923e-15,
+      "general_relative_tolerance": "1e-12",
+      "absolute_tolerance": "0",
+      "original_bindings_pass": true
+    },
+    "cp01_analysis": {
+      "status": "pass",
+      "csv_tables": 19,
+      "csv_rows": 14434,
+      "csv_differing_cells": 5,
+      "max_absolute_error": "1e-8",
+      "max_relative_error": "4.9326028871905828e-9",
+      "original_scientific_assertions_pass": true,
+      "receipt_differences": 0
+    },
+    "cp02_analysis": {
+      "status": "pass",
+      "csv_tables": 11,
+      "csv_rows": 484489,
+      "csv_differing_cells": 2752,
+      "max_absolute_error": "2.329e-10",
+      "max_relative_error": "1.0895363305776657e-10",
+      "original_scientific_assertions_pass": true,
+      "receipt_differences": 0,
+      "field_specific_absolute_tolerances": [
+        {
+          "csv": "CP02_dispersion_profile.csv",
+          "field": "log_likelihood",
+          "absolute_tolerance": "5e-10"
+        },
+        {
+          "csv": "CP02_dispersion_profile.csv",
+          "field": "delta_from_profile_max",
+          "absolute_tolerance": "5e-10"
+        }
+      ]
+    }
+  },
+  "all_csv_comparisons_pass": true,
+  "source_data_topology_discrete_fields_exact": true,
+  "recomputed_manifest_receipt_bindings_pass": true,
+  "deterministic_companion_build_qa_pass": true,
+  "pages_deployment": {
+    "status": "pass",
+    "files": 259,
+    "bytes": 35170536,
+    "receipt": "GITHUB_PAGES_RECEIPT_2026-08-31_C140_COMPANION_C5.json",
+    "receipt_bytes": 103239,
+    "receipt_sha256": "2230f83f946c83d5a9633cdc3f4b1c5af72069634ff72586768a4f8f08a3eae6"
+  },
+  "browser_processes_used": false
+}

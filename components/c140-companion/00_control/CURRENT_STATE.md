@@ -2,7 +2,7 @@
 
 Updated: 2026-08-31
 
-## C5 asesmen dan capstone — terbit di GitHub dan Zenodo; Pages sedang diverifikasi
+## C5 asesmen dan capstone — lengkap dan terverifikasi publik
 
 Seluruh 39 dokumen sumber `id-ID` lengkap, termasuk `CA02`–`CA04` dan
 `CP01`–`CP02`. Produksi sumber selesai sebelum audit. Keempat asesmen dan
@@ -22,23 +22,24 @@ memperbaiki hierarki heading SIM005/SIM006, dan menutup kasus batas matematis
 serta kerusakan TeX pada set penguasaan. Pembacaan akhir MS09–MS12 lulus;
 jangan mengulang terjemahan atau audit sumber yang telah selesai.
 
-C5 sudah terbit di Zenodo, DOI `10.5281/zenodo.22208527`: 65 berkas /
-134.904.267 byte, seluruhnya cocok pada pembacaan balik anonim. Build HTML/backend
-dan QA C5 sekarang lulus write dan dua replay check-only; koleksi Pages
-259 berkas juga lulus. Pendamping memuat 146 soal terselesaikan, 1.523 entitas,
-dan 1.949 relasi. Identitas lengkap tercatat dalam
-`CHECKPOINT_2026-08-31_C5_LOCAL_COMPLETE.md`. Tindakan berikutnya adalah
-menutup verifikasi numerik CI Linux dan pembacaan balik Pages. Rilis GitHub
-C5 juga sudah lengkap: 65 berkas / 134.904.267 byte cocok secara anonim.
-Paket dan rekonstruksi sumber bersih sudah lulus; jangan mengubah
-byte artefak yang sudah terbit. Commit konten `40acd8e846a4603ac5a90d311794b7e9c9db7bb9`
-sudah didorong dan 489 berkasnya cocok pada pembacaan balik anonim. Replay
-lokal CP01 dan CP02 lulus. CP01 di Linux juga lulus; pemeriksaan format angka
-CP02 telah diperbaiki tanpa memperbesar toleransi numerik. Run Pages aktif
-`33399647717` memakai commit `04b58d8e9ac74f7fb30f137f8073bff05208502e`;
-data dan keluaran pembaca tetap diperiksa eksak.
-Selesaikan deployment/readback Pages dan simpan receipt akhir. Larangan
-browser dan kontak upstream tetap berlaku.
+C5 sudah terbit di Zenodo, DOI `10.5281/zenodo.22208527`, dan rilis GitHub:
+65 berkas / 134.904.267 byte pada masing-masing tujuan cocok melalui pembacaan
+balik anonim. Build HTML/backend dan QA C5 lulus write dan dua replay
+check-only. Pendamping memuat 146 soal terselesaikan, 1.523 entitas, dan 1.949
+relasi. Paket serta rekonstruksi sumber bersih juga lulus; jangan mengubah byte
+artefak yang sudah terbit. Commit konten
+`40acd8e846a4603ac5a90d311794b7e9c9db7bb9` sudah didorong dan 489 berkasnya
+cocok pada pembacaan balik anonim.
+
+Replay Linux CP01 dan CP02 lulus beserta seluruh asersi ilmiah asli. Run Pages
+`33405870018` berhasil memakai commit deployment
+`903d54c0971d3c14ec8f6fa0961136b881a73b82`; seluruh 259 berkas /
+35.170.536 byte cocok pada pembacaan balik anonim. Receipt Pages 103.239 byte
+mempunyai SHA-256
+`2230f83f946c83d5a9633cdc3f4b1c5af72069634ff72586768a4f8f08a3eae6`.
+Checkpoint terminal ialah `CHECKPOINT_2026-08-31_C5_PUBLICATION_COMPLETE.md`.
+Tidak ada pekerjaan produksi, audit, build, publikasi, atau pembacaan balik
+O006/C140 yang tersisa. Larangan browser dan kontak upstream tetap berlaku.
 
 ## C4 mastery boundary — public deterministic closure
 

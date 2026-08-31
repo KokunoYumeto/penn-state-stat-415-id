@@ -1,0 +1,53 @@
+{
+  "schema": "o006.c140.c5-linux-numerical-replay-attempt.v1",
+  "status": "failed_closed",
+  "attempt": 4,
+  "date": "2026-08-31",
+  "source_content_commit": "40acd8e846a4603ac5a90d311794b7e9c9db7bb9",
+  "deployment_commit": "d513756ee14994e111fcfd8e767857528af09f9f",
+  "run_id": 33403833115,
+  "job_id": 99526376083,
+  "failed_step": "Verify isolated Random completeness donor",
+  "log_retrieval": {
+    "transport": "GitHub CLI exact failed-run stdout",
+    "bytes": 3675,
+    "sha256": "05d2b6cec03af57ed14e42423c7e7d6920f87183fcd36ffbc4b81f2407e772a3",
+    "raw_log_persisted": false,
+    "credential_material_persisted": false
+  },
+  "passed": {
+    "authority_translation_replay": true
+  },
+  "failure": {
+    "terminal": "canonical imported donor target differs",
+    "cause": "The eleven current donor output/receipt files were committed, but three repository-level donor import/build/QA scripts still carried the historical 60,895-byte target binding in Git. Their working versions already bound the current 60,900-byte target and had passed locally."
+  },
+  "remedy": {
+    "published_commit": "ab1adde9c56a53dc2b2db0095ce49f6b92f17c9c",
+    "files": [
+      "scripts/import_random_completeness_donor.py",
+      "scripts/build_random_completeness_donor.py",
+      "scripts/qa_random_completeness_donor.py"
+    ],
+    "import_check": {
+      "status": "pass",
+      "files": 25,
+      "entities": 325,
+      "relations": 474
+    },
+    "build_check": {
+      "status": "pass",
+      "reader_files": 18,
+      "reader_bytes": 1798255,
+      "receipt_sha256": "4b72a36653305ab36f6b1863ecd0fd04e416888c83dff58bff20632e83aebd06"
+    },
+    "qa_check": {
+      "status": "pass",
+      "receipt_sha256": "a4265feb621ec79c4bb2870f03e69f8b73659e6bea3d4e4d905cda3be97fc5c7"
+    }
+  },
+  "numerical_stage_started": false,
+  "pages_deployed": false,
+  "browser_processes_used": false,
+  "release_package_modified": false
+}

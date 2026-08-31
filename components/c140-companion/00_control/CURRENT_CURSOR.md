@@ -21,17 +21,16 @@ The content commit `40acd8e846a4603ac5a90d311794b7e9c9db7bb9` is pushed;
 all 489 changed files / 171,731,797 bytes were anonymously verified.
 
 GitHub release readback is complete: all 65 files / 134,904,267 bytes match
-anonymously, with all 57 inherited files preserved. Both local capstone
-replays pass; Linux CP01 transform and analysis also pass. A redundant
-precision-format check rejected CP02 `.15g` trailing-zero removal, and is now
-repaired without enlarging the numeric error bound. No producer, data, reader
-or package bytes changed. Next executable action: monitor only Pages run
-`33399647717` at deployment commit
-`04b58d8e9ac74f7fb30f137f8073bff05208502e`; on success, anonymously verify
-the complete 259-file reader and persist final controls. Root
-`00_control/CURRENT_CURSOR.md` and the C5-named public/local replay receipts
-contain the exact evidence. Do not alter the published package or its tag.
-Historical C1–C4 records below are
+anonymously, with all 57 inherited files preserved. Linux CP01 and CP02 replay
+passed with the original scientific assertions; no producer, data, reader, or
+package byte changed. Pages run `33405870018` deployed commit
+`903d54c0971d3c14ec8f6fa0961136b881a73b82`, and anonymous readback matched
+the complete 259-file / 35,170,536-byte collection. The 103,239-byte Pages
+receipt has SHA-256
+`2230f83f946c83d5a9633cdc3f4b1c5af72069634ff72586768a4f8f08a3eae6`.
+The terminal checkpoint is `CHECKPOINT_2026-08-31_C5_PUBLICATION_COMPLETE.md`.
+No production, audit, build, publication, or readback action remains. Do not
+alter the published package or its tag. Historical C1–C4 records below are
 evidence, not current instructions. Do not redo their production.
 
 Last public boundary: cumulative C4 is complete. Exact scope is
@@ -61,7 +60,7 @@ Public identities: content commit
 preservation destinations. The Zenodo lineage has zero drafts. Full evidence:
 `CHECKPOINT_2026-08-29_C4_PUBLICATION_COMPLETE.md`.
 
-Next executable action: continue C5 under
+Historical next action (completed): continue C5 under
 `C5_ASSESSMENT_CAPSTONE_BATCH_CONTRACT.md`. Produce `CA02` completely, then
 `CA03`, `CA04`, `CP01`, and `CP02`; integrate/build/QA and publish the final
 boundary. Do not reopen C1–C4 without a proved defect.
@@ -93,7 +92,7 @@ independent paced Zenodo replay receipt is
 Zenodo lineage has zero drafts. Full checkpoint:
 `CHECKPOINT_2026-08-29_C3_PUBLICATION_COMPLETE.md`.
 
-Next executable action: produce the remaining independent-study closure in a
+Historical next action (completed): produce the remaining independent-study closure in a
 bounded reader-first batch: `MS00`–`MS06`, then `CA02`–`CA04`, then both
 capstones. Do not reopen C1/C2/C3 theory or simulation boundaries without a
 proved defect.
@@ -114,7 +113,7 @@ DOI `10.5281/zenodo.22160621` in concept `22077422`. Pages matched 171 files /
 21,922,300 bytes twice; both release destinations matched 41 files / 91,249,199
 bytes; the Zenodo lineage has zero drafts.
 
-Next executable action: continue C3 under
+Historical next action (completed): continue C3 under
 `C3_BAYESIAN_COMPARISON_BATCH_CONTRACT.md`: author `D012`–`D013`, `SIM006`,
 and `MS11`, integrate them cumulatively, and run static write/check replay.
 Do not rebuild or republish C2 merely to update postpublication controls.

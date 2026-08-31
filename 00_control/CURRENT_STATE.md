@@ -2,7 +2,7 @@
 
 Updated: 2026-08-31
 
-## Live collection state — source production and deterministic C5 QA complete
+## Live collection state — complete and publicly verified
 
 The complete Penn State translation, the exact Random completeness donor,
 and the complete original companion are now locally closed. Penn and donor
@@ -16,14 +16,18 @@ byte-identical check-only replays; the 259-file Pages collection also passes.
 C5 preservation publication is complete on GitHub release 379767406 and
 Zenodo record 22208527, DOI `10.5281/zenodo.22208527`. All 65 assets /
 134,904,267 bytes passed anonymous SHA-256 readback at both destinations.
-Only the Pages CI portability repair/deployment and final control closure
-remain. See
-`components/c140-companion/00_control/CHECKPOINT_2026-08-31_C5_LOCAL_COMPLETE.md`
-for exact current bytes, hashes, corrections, and `CURRENT_CURSOR.md` for the
-executable next action. All 57 inherited public files remain unchanged.
-Do not republish the finished union or alter its immutable tag. No browser may launch.
-Historical sections below retain their original evidence and do not restart
-finished production or override this live state.
+Pages run `33405870018` deployed commit
+`903d54c0971d3c14ec8f6fa0961136b881a73b82`; anonymous readback matched all
+259 files / 35,170,536 bytes. Its 103,239-byte receipt has SHA-256
+`2230f83f946c83d5a9633cdc3f4b1c5af72069634ff72586768a4f8f08a3eae6`.
+Linux replay passed CP01 and CP02 with the original scientific assertions and
+the narrowly documented floating-point portability rule. See
+`components/c140-companion/00_control/CHECKPOINT_2026-08-31_C5_PUBLICATION_COMPLETE.md`
+for the terminal checkpoint. No O006/C140 work remains. All 57 inherited
+public files remain unchanged. Do not republish the finished union or alter its
+immutable tag. No browser may launch. Historical sections below retain their
+original evidence and do not restart finished production or override this live
+state.
 
 ## Authority and boundary
 

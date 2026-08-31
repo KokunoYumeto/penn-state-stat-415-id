@@ -13,7 +13,9 @@ lengkap. GitHub/Pages, rilis GitHub, dan versi preservasi Zenodo yang mengikat
 perbaikan reproduksibilitas LF semuanya sudah publik dan terverifikasi secara
 anonim. Pendamping orisinal C140 telah lengkap dan lulus build/QA C5;
 preservasi C5 di Zenodo dan rilis GitHub C5 sudah terbit serta terverifikasi.
-Verifikasi Pages masih dalam penyelesaian sebagaimana dirinci di bawah.
+Pages C5 juga sudah terdeploy dan dibaca kembali secara anonim. Dengan demikian,
+edisi C5 lengkap pada seluruh tujuan publikasi dan tidak menyisakan pekerjaan
+tertunda.
 
 - 4.932 segmen terjemahan di dalam pembaca lengkap;
 - 6.510 unit struktural sumber dengan ID stabil dan 6.498 unit turunan;
@@ -78,13 +80,14 @@ Hak donor tetap terpisah dari CC BY-NC 4.0 Penn State. Saksi laman utama
 *Random* menyatakan CC BY 2.0, sedangkan `Credits.html` menautkan CC BY 1.0;
 keduanya dipertahankan dan tidak disamakan secara diam-diam.
 
-## Pendamping orisinal C140 — C5 terbit di GitHub dan Zenodo
+## Pendamping orisinal C140 — C5 terverifikasi di GitHub, Zenodo, dan Pages
 
 Pendamping orisinal CC BY-SA 4.0 telah lengkap sampai C5. Audit
 pascatranslasi, build kumulatif, QA statis, dan pemeriksaan ulang deterministik
 telah lulus tanpa proses browser. Rilis kumulatif C5 di GitHub dan Zenodo sudah
 terbit dan seluruh berkas pada kedua tujuan telah diverifikasi secara anonim.
-Verifikasi Pages C5 belum selesai karena perbaikan portabilitas numerik CI.
+Pages C5 juga telah lulus CI, terdeploy, dan terverifikasi melalui pembacaan
+kembali anonim. Edisi C5 lengkap pada seluruh tujuan publikasi.
 
 C1 memuat fondasi fungsi kemungkinan, optimalitas, risiko, empat simulasi,
 empat set penguasaan, dan asesmen `CA01`. C2 menambahkan empat unit model linear
@@ -122,12 +125,20 @@ diunduh kembali secara anonim dan cocok jumlah byte serta SHA-256; seluruh
 [receipt GitHub C5](00_control/GITHUB_RELEASE_RECEIPT_2026-08-31_C140_COMPANION_C5.json)
 dan [receipt Zenodo C5](00_control/ZENODO_PUBLIC_READBACK_2026-08-31_C140_COMPANION_C5.json).
 
-CI Pages masih memerlukan perbaikan portabilitas numerik yang terbatas pada
-sertifikat pengondisian CP01 pada keluaran BLAS. Karena itu, C5 belum
-dinyatakan terverifikasi di Pages atau selesai pada seluruh tujuan publikasi.
+Pages C5 terverifikasi pada run `33405870018`, deployment
+`903d54c0971d3c14ec8f6fa0961136b881a73b82`: 259 berkas / 35.170.536 byte,
+terdiri atas Penn 106 / 17.614.553 byte, donor 18 / 1.798.255 byte, dan
+pendamping 135 / 15.757.728 byte. Seluruh berkas dibaca kembali secara anonim
+dan cocok dengan byte serta SHA-256 yang dipatok. Bukti tersimpan dalam
+[receipt Pages C5](00_control/GITHUB_PAGES_RECEIPT_2026-08-31_C140_COMPANION_C5.json)
+(103.239 byte; SHA-256
+`2230f83f946c83d5a9633cdc3f4b1c5af72069634ff72586768a4f8f08a3eae6`).
+Tidak ada pekerjaan C5 yang masih tertunda.
 
+- [pembaca web utama](https://kokunoyumeto.github.io/penn-state-stat-415-id/)
+  — terverifikasi untuk C5;
 - [pembaca web pendamping](https://kokunoyumeto.github.io/penn-state-stat-415-id/components/c140-companion/)
-  — verifikasi C5 belum selesai;
+  — terverifikasi untuk C5;
 - [rilis GitHub kumulatif C4](https://github.com/KokunoYumeto/penn-state-stat-415-id/releases/tag/v2026.08.29.c140-companion-c4)
   — versi historis yang diwarisi C5;
 - [preservasi Zenodo C4](https://doi.org/10.5281/zenodo.22164344)
