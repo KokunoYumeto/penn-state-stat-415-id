@@ -42,8 +42,8 @@ PUBLISHED_RANDOM_BASE = (
 
 SOURCE_BYTES = 57_507
 SOURCE_SHA256 = "4d7402f2a960ea2b4232e57e4ee5992ac29801b9269f300f17f8e83074d5a0e4"
-TARGET_BYTES = 60_895
-TARGET_SHA256 = "255ac88f235727301ee341eef79b9578910be88b7e2e038d4dfecc0ed686513c"
+TARGET_BYTES = 60_900
+TARGET_SHA256 = "18b0305dc25a19a834204fdf84029ff67408f98262024717abf597c745a00197"
 
 # Every frozen payload used by the reader is pinned independently of the
 # import receipt.  Paths are component-relative and therefore portable.
