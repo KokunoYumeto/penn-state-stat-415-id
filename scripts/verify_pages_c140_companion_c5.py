@@ -19,6 +19,7 @@ import os
 from pathlib import Path
 import re
 import stat
+import subprocess
 import sys
 import tempfile
 import time
@@ -60,6 +61,7 @@ EXPECTED_COMPANION_IDS = {
 MAX_LOCAL_FILE_BYTES = 64 * 1024 * 1024
 MAX_PUBLIC_FILE_BYTES = 100_000_000
 MAX_CONTROL_JSON_BYTES = 8 * 1024 * 1024
+GIT_COMMAND_TIMEOUT_SECONDS = 30
 
 
 @dataclass(frozen=True)
@@ -379,6 +381,105 @@ def committed_content_witness(
     }
 
 
+def named_git_read(arguments: list[str]) -> subprocess.CompletedProcess[bytes]:
+    """Read only named commit objects; never inspect the working-tree index."""
+    environment = dict(os.environ)
+    environment.update(
+        {
+            "GIT_NO_REPLACE_OBJECTS": "1",
+            "GIT_OPTIONAL_LOCKS": "0",
+            "GIT_TERMINAL_PROMPT": "0",
+        }
+    )
+    try:
+        result = subprocess.run(
+            ["git", "--no-optional-locks", "-c", "core.fsmonitor=false", *arguments],
+            cwd=ROOT,
+            env=environment,
+            stdin=subprocess.DEVNULL,
+            stdout=subprocess.PIPE,
+            stderr=subprocess.DEVNULL,
+            timeout=GIT_COMMAND_TIMEOUT_SECONDS,
+            check=False,
+        )
+    except (OSError, subprocess.TimeoutExpired) as exc:
+        raise RuntimeError("bounded named-commit Git read failed") from exc
+    if len(result.stdout) > MAX_CONTROL_JSON_BYTES:
+        raise RuntimeError("named-commit Git response exceeds its byte cap")
+    return result
+
+
+def validate_pages_identity(commit_id: str, deployment_commit: str, run_id: int) -> None:
+    for value in (commit_id, deployment_commit):
+        if re.fullmatch(r"[0-9a-f]{40}", value) is None:
+            raise RuntimeError("commit must be a full 40-character lowercase Git SHA")
+    if isinstance(run_id, bool) or not isinstance(run_id, int) or run_id <= 0:
+        raise RuntimeError("run-id must be positive")
+
+
+def deployment_content_binding(
+    snapshot: LocalSnapshot, commit_id: str, deployment_commit: str
+) -> dict[str, object]:
+    """Bind a descendant deployment to the original immutable C5 content."""
+    for value in (commit_id, deployment_commit):
+        if re.fullmatch(r"[0-9a-f]{40}", value) is None:
+            raise RuntimeError("deployment binding requires full lowercase commit IDs")
+    commits = tuple(dict.fromkeys((commit_id, deployment_commit)))
+    for value in commits:
+        kind = named_git_read(["cat-file", "-t", value])
+        if kind.returncode != 0 or kind.stdout != b"commit\n":
+            raise RuntimeError("source/deployment identity is not a local commit object")
+    ancestry = named_git_read(
+        ["merge-base", "--is-ancestor", commit_id, deployment_commit]
+    )
+    if ancestry.returncode != 0 or ancestry.stdout:
+        raise RuntimeError("source commit is not a verified ancestor of deployment commit")
+
+    payloads = (
+        (BUILD_RELATIVE, snapshot.build_payload),
+        (QA_RELATIVE, snapshot.qa_payload),
+        (COLLECTION_RELATIVE, snapshot.collection_payload),
+    )
+    for value in commits:
+        for relative, expected in payloads:
+            if not expected or len(expected) > MAX_CONTROL_JSON_BYTES:
+                raise RuntimeError("frozen deployment receipt exceeds its byte cap")
+            object_name = f"{value}:{relative}"
+            # Size-check before reading an immutable, replacement-disabled blob.
+            size = named_git_read(["cat-file", "-s", object_name])
+            if size.returncode != 0 or size.stdout != f"{len(expected)}\n".encode("ascii"):
+                raise RuntimeError(f"committed deployment receipt size differs: {relative}")
+            blob = named_git_read(["cat-file", "blob", object_name])
+            if blob.returncode != 0 or blob.stdout != expected:
+                raise RuntimeError(f"committed deployment receipt bytes differ: {relative}")
+    return {
+        "source_commit": commit_id,
+        "deployment_commit": deployment_commit,
+        "source_is_ancestor_of_deployment": True,
+        "authority": "exact named Git blobs at source and deployment commits",
+        "frozen_receipts_match_both_commits": [
+            {"path": relative, "bytes": len(payload), "sha256": sha256(payload)}
+            for relative, payload in payloads
+        ],
+        "status": "pass",
+    }
+
+
+def pinned_pages_identity(existing: dict[str, Any]) -> tuple[str, str, int]:
+    if existing.get("schema") != SCHEMA:
+        raise RuntimeError("C5 Pages receipt schema differs")
+    control = existing.get("control_plane")
+    if not isinstance(control, dict):
+        raise RuntimeError("C5 Pages receipt lacks control-plane identity")
+    commit_id = str(control.get("content_commit", ""))
+    deployment_commit = str(control.get("deployment_commit", commit_id))
+    run_value = control.get("workflow_run_id", 0)
+    if isinstance(run_value, bool) or not isinstance(run_value, int):
+        raise RuntimeError("C5 Pages receipt workflow run identity differs")
+    validate_pages_identity(commit_id, deployment_commit, run_value)
+    return commit_id, deployment_commit, run_value
+
+
 def c5_control_session() -> tuple[requests.Session, bool]:
     """Return a credential-free GitHub API session regardless of ambient state."""
 
@@ -577,13 +678,21 @@ def configure_engine() -> None:
     engine.verify_file = c5_verify_file_streamed
 
 
-def compute(snapshot: LocalSnapshot, commit_id: str, run_id: int) -> bytes:
+def compute(
+    snapshot: LocalSnapshot,
+    commit_id: str,
+    run_id: int,
+    deployment_commit: str | None = None,
+) -> bytes:
+    deployment_commit = commit_id if deployment_commit is None else deployment_commit
+    validate_pages_identity(commit_id, deployment_commit, run_id)
     content_witness = committed_content_witness(snapshot, commit_id)
+    deployment_binding = deployment_content_binding(snapshot, commit_id, deployment_commit)
     configure_engine()
     previous_collection = engine.COLLECTION
     engine.COLLECTION = FrozenCollection(snapshot.collection_payload)  # type: ignore[assignment]
     try:
-        base_payload = engine.compute(commit_id, run_id)
+        base_payload = engine.compute(deployment_commit, run_id)
     finally:
         engine.COLLECTION = previous_collection
     base = json_payload(base_payload, "hardened Pages engine receipt")
@@ -607,7 +716,7 @@ def compute(snapshot: LocalSnapshot, commit_id: str, run_id: int) -> bytes:
             "files": snapshot.contract["companion_files"],
         }
         or not isinstance(base.get("control_plane"), dict)
-        or base["control_plane"].get("content_commit") != commit_id
+        or base["control_plane"].get("content_commit") != deployment_commit
         or base["control_plane"].get("api_authentication_used") is not False
     ):
         raise RuntimeError("Pages engine output differs from the frozen C5 snapshot")
@@ -621,6 +730,12 @@ def compute(snapshot: LocalSnapshot, commit_id: str, run_id: int) -> bytes:
     }
     base["c5_gate"] = snapshot.contract["c5_gate"]
     base["committed_content_readback"] = content_witness
+    if deployment_commit != commit_id:
+        # Preserve the original release/content linkage while naming the commit
+        # whose workflow run and public Pages transaction were actually verified.
+        base["control_plane"]["content_commit"] = commit_id
+        base["control_plane"]["deployment_commit"] = deployment_commit
+        base["deployment_content_binding"] = deployment_binding
     base["transaction_used_one_immutable_local_snapshot"] = True
     return engine.canonical_json(base)
 
@@ -681,12 +796,16 @@ def main() -> None:
     mode.add_argument("--write", action="store_true")
     mode.add_argument("--check-only", action="store_true")
     parser.add_argument("--commit")
+    parser.add_argument(
+        "--deployment-commit",
+        help="CI deployment commit; defaults to the original --commit content identity",
+    )
     parser.add_argument("--run-id", type=int)
     args = parser.parse_args()
 
     snapshot = capture_snapshot()
     if args.contract_only:
-        if args.commit or args.run_id is not None:
+        if args.commit or args.deployment_commit is not None or args.run_id is not None:
             raise RuntimeError("--contract-only does not accept remote identities")
         print(json.dumps(snapshot.contract, sort_keys=True))
         return
@@ -694,24 +813,18 @@ def main() -> None:
     if args.write:
         if not args.commit or args.run_id is None:
             raise RuntimeError("--write requires --commit and --run-id")
-        if re.fullmatch(r"[0-9a-f]{40}", args.commit) is None:
-            raise RuntimeError("commit must be a full 40-character lowercase Git SHA")
-        if args.run_id <= 0:
-            raise RuntimeError("run-id must be positive")
         commit_id, run_id = args.commit, args.run_id
+        deployment_commit = (
+            commit_id if args.deployment_commit is None else args.deployment_commit
+        )
+        validate_pages_identity(commit_id, deployment_commit, run_id)
     else:
-        if args.commit or args.run_id is not None:
+        if args.commit or args.deployment_commit is not None or args.run_id is not None:
             raise RuntimeError("--check-only reads the pinned receipt identity")
         existing, _payload = object_file(RECEIPT, "C5 Pages receipt")
-        if existing.get("schema") != SCHEMA:
-            raise RuntimeError("C5 Pages receipt schema differs")
-        control = existing.get("control_plane")
-        if not isinstance(control, dict):
-            raise RuntimeError("C5 Pages receipt lacks control-plane identity")
-        commit_id = str(control.get("content_commit", ""))
-        run_id = int(control.get("workflow_run_id", 0))
+        commit_id, deployment_commit, run_id = pinned_pages_identity(existing)
 
-    payload = compute(snapshot, commit_id, run_id)
+    payload = compute(snapshot, commit_id, run_id, deployment_commit)
     if args.write:
         atomic_write(RECEIPT, payload)
         state = "written"
