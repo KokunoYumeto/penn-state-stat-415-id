@@ -13,9 +13,49 @@ solved problems; all six reproducible simulation families are complete.
 
 Current exact evidence:
 `components/c140-companion/00_control/CHECKPOINT_2026-08-31_C5_LOCAL_COMPLETE.md`.
-The complete 259-file Pages collection passes replay. The C5 65-file release
-package is being frozen; publish it in the existing GitHub and Zenodo concept
-22077422 lineage, anonymously verify public bytes, and persist final receipts.
+The complete 259-file Pages collection and clean source reconstruction pass.
+The C5 65-file / 134,904,267-byte package is PUBLIC on GitHub release
+379767406 and Zenodo 22208527 (concept 22077422). Both destinations' complete
+asset bytes were anonymously read back and match SHA-256. Original content
+commit: `40acd8e846a4603ac5a90d311794b7e9c9db7bb9`; tag:
+`v2026.08.31.c140-companion-c5`. Exact receipts are the C5-named release and
+Zenodo JSON files in this directory.
+
+Remaining operation: CI-only numerical portability verification, followed by
+Pages deployment/readback and final controls.
+The frozen source/data/readers must not change. Root helper
+`scripts/verify_c5_portable_numerics.py` checks only explicit computed-float
+fields at rtol 1e-12 / atol 0, with every frozen file hash and all other fields
+exact. The Pages verifier accepts an explicitly named descendant deployment
+commit only when exact BUILD/QA/collection blobs match the original content
+commit. The portable check passed on actual Linux with 15 differing leaves,
+maximum relative error 1.9412589578398923e-15. Its run then exposed a missing
+SciPy install: the local pinned requirement had not yet been committed.
+That exact dependency is pushed in commit
+`3877b7dfe9133b89e0c7653ed60ca520d514b343`. Its run `33396740292`
+passed the transform certificate but then failed the byte-only comparison of
+`CP01_inference_joint_F.csv`. The completed bounded helper replays the frozen
+CP01/CP02 analyses with explicit numeric column tolerances; source identities,
+integer/discrete cells, topology, manifests and original scientific assertions
+remain exact. Both local analyses pass: CP01 19 CSVs / 14,434 rows and CP02
+11 CSVs / 484,489 rows, zero differing cells and exact returned receipt hashes.
+The local replay is complete; do not launch a duplicate. No producer, dataset,
+release artifact or reader changed. CI repair commit
+`0ae796f7b3ef264144cc2744ce59a4c50a4029b5` passed both Linux CP01 modes;
+run `33398190711` then exposed an overly strict decimal-formatting check on
+CP02 coverage row 18,889. The `.15g` serializer can remove trailing zeroes;
+the new-value exponent must not be mistaken for numerical error. The redundant
+precision rejection is removed while the frozen-quantum numerical tolerance
+is unchanged. Bounded diagnostics now collect failures across all CSV tables.
+This tested repair is pushed at `04b58d8e9ac74f7fb30f137f8073bff05208502e`;
+monitor only exact run `33399647717`, then perform anonymous Pages readback on
+success. The failed-run evidence is
+`C5_LINUX_NUMERICAL_REPLAY_2026-08-31_ATTEMPT1.json`. The four
+changed CI/dependency/verifier files passed anonymous immutable-commit byte
+readback, recorded in `C5_FINAL_CI_CODE_PUBLIC_READBACK_2026-08-31.json`.
+The Pages verifier's source `--commit` remains
+`40acd8e846a4603ac5a90d311794b7e9c9db7bb9`; its explicit
+`--deployment-commit` is `04b58d8e9ac74f7fb30f137f8073bff05208502e`.
 Do not redo translation or start another audit cycle. No browser process or
 upstream conversation is permitted. The older goal's Random-first source
 selection is superseded by the direct complete Penn/donor/companion selection;

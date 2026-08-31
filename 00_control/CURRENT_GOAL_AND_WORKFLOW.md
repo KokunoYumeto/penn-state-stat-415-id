@@ -7,6 +7,12 @@ selection is Penn State STAT 415 plus one exact Random completeness donor and
 an original rigor, simulation, and mastery companion. The independent complete
 Random chapters 5–8 edition remains separate; its finished work is preserved.
 
+Live checkpoint: all source production, package reconstruction, GitHub and
+Zenodo preservation publication are COMPLETE. The remaining operation is the
+CI numeric-portability verification, Pages deployment/readback,
+and final control closure. Read `CURRENT_CURSOR.md` before executing the
+general sequence below; do not repeat completed publication or translation.
+
 ## Scope and authority
 
 Complete natural Bahasa Indonesia readers with an additive locale-neutral

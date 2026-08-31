@@ -1,0 +1,27 @@
+{
+  "schema": "o006.c140.c5-ci-portability-public-readback.v1",
+  "status": "pass",
+  "commit": "d1b9a4969e75b20f1e58fa2fe6b7d54761e70ed9",
+  "source_content_commit": "40acd8e846a4603ac5a90d311794b7e9c9db7bb9",
+  "credentials_used": false,
+  "files": [
+    {
+      "path": ".github/workflows/pages.yml",
+      "bytes": 5109,
+      "sha256": "bc4b67a9fe7d9708fd2de60bc452ec6f7f00b53ca7379bd9284e24b39603975c",
+      "match": true
+    },
+    {
+      "path": "scripts/verify_c5_portable_numerics.py",
+      "bytes": 12603,
+      "sha256": "c746d31adc7102a055de3c7df03e3259c7a750a0f8b847de72c4a3f2ac997381",
+      "match": true
+    },
+    {
+      "path": "scripts/verify_pages_c140_companion_c5.py",
+      "bytes": 34951,
+      "sha256": "6ea097d873ff257585ec3e598a0a77c2ef9aad0dbe0713c4c5b2a286cb1b4536",
+      "match": true
+    }
+  ]
+}

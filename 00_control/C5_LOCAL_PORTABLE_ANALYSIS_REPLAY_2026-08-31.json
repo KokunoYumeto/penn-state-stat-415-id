@@ -1,0 +1,65 @@
+{
+  "schema": "o006.c140.c5-local-portable-analysis-replay-observation.v1",
+  "status": "pass",
+  "date": "2026-08-31",
+  "helper": {
+    "path": "scripts/verify_c5_portable_numerics.py",
+    "bytes": 35151,
+    "sha256": "039e78fb6f54cfd5050a8385153d6913f14c603a376368bdfc93db15229e3bc4"
+  },
+  "environment": {
+    "python": "3.13.9",
+    "numpy": "2.4.4",
+    "scipy": "1.17.1",
+    "platform": "win32",
+    "PYTHONHASHSEED": "0",
+    "OMP_NUM_THREADS": "1",
+    "OPENBLAS_NUM_THREADS": "1",
+    "MKL_NUM_THREADS": "1",
+    "NUMEXPR_NUM_THREADS": "1",
+    "TZ": "UTC",
+    "LC_NUMERIC": "C"
+  },
+  "analyses": [
+    {
+      "capstone": "CP01",
+      "status": "pass",
+      "csv_tables": 19,
+      "csv_rows": 14434,
+      "differing_cells": 0,
+      "elapsed_seconds": 2.6965,
+      "frozen_files_verified_unchanged": 55,
+      "receipt": {
+        "path": "components/c140-companion/generated/capstones/CP01/CP01_REPLAY_RECEIPT.json",
+        "bytes": 15079,
+        "sha256": "3afee61bc95dd93a23f6d847c02dffde30299c4f62c83f7ae7ebcfa3267724e1"
+      },
+      "recomputed_receipt_matches_frozen": true
+    },
+    {
+      "capstone": "CP02",
+      "status": "pass",
+      "csv_tables": 11,
+      "csv_rows": 484489,
+      "coverage_csv_rows": 471843,
+      "differing_cells": 0,
+      "elapsed_seconds": 675.7565356,
+      "frozen_files_verified_unchanged": 36,
+      "receipt": {
+        "path": "components/c140-companion/build/CP02_ANALYSIS_RECEIPT.json",
+        "bytes": 9272,
+        "sha256": "8905654384a792e718eb824313e7233f8576b6ae8b55132db42e2740c63beb73"
+      },
+      "recomputed_receipt_matches_frozen": true
+    }
+  ],
+  "original_scientific_assertions_pass": true,
+  "recomputed_manifest_and_receipt_bindings_pass": true,
+  "focused_helper_tests": 50,
+  "independent_root_boundary_tests": 7,
+  "comparator_patch_timing": "The producer replays began before the final receipt-observation comparison patch. Their returned receipts were byte-identical to the frozen receipts; the final comparator passed exact-receipt and mutation tests. No second producer run was needed.",
+  "scope": "Explicit typed CSV and receipt comparisons; exact frozen source/data/artifact identities. Recomputed SVG/text bytes are not independently asserted identical by this portable helper.",
+  "production_files_modified": false,
+  "network_access": false,
+  "browser_processes_used": false
+}

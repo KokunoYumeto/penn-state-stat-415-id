@@ -15,14 +15,23 @@ The five C5 document identities were recomputed and updated in
 The current HTML/backend build and static QA passed write plus two separate
 check-only replays. The 259-file Pages collection also passed replay.
 Exact identities are in `CHECKPOINT_2026-08-31_C5_LOCAL_COMPLETE.md`.
-No C5 publication has been made yet.
+C5 is public on Zenodo: record 22208527 / DOI 10.5281/zenodo.22208527,
+65 files / 134,904,267 bytes, all anonymously read back with matching SHA-256.
+The content commit `40acd8e846a4603ac5a90d311794b7e9c9db7bb9` is pushed;
+all 489 changed files / 171,731,797 bytes were anonymously verified.
 
-Next executable action: finish the repository C5 preservation package,
-binding the current corrected C1/C2 simulation receipts without rewriting
-historical release bytes. The clean-checkout CP02 hydration helper is tested.
-Create/verify the 65-file union,
-publish GitHub/Pages and Zenodo in concept 22077422, anonymously read back all
-public bytes, and persist final receipts. Historical C1–C4 records below are
+GitHub release readback is complete: all 65 files / 134,904,267 bytes match
+anonymously, with all 57 inherited files preserved. Both local capstone
+replays pass; Linux CP01 transform and analysis also pass. A redundant
+precision-format check rejected CP02 `.15g` trailing-zero removal, and is now
+repaired without enlarging the numeric error bound. No producer, data, reader
+or package bytes changed. Next executable action: monitor only Pages run
+`33399647717` at deployment commit
+`04b58d8e9ac74f7fb30f137f8073bff05208502e`; on success, anonymously verify
+the complete 259-file reader and persist final controls. Root
+`00_control/CURRENT_CURSOR.md` and the C5-named public/local replay receipts
+contain the exact evidence. Do not alter the published package or its tag.
+Historical C1–C4 records below are
 evidence, not current instructions. Do not redo their production.
 
 Last public boundary: cumulative C4 is complete. Exact scope is

@@ -13,11 +13,15 @@ data-backed capstones, and six simulation families are complete. Source
 production preceded final audit. Build and QA each pass two independent
 byte-identical check-only replays; the 259-file Pages collection also passes.
 
-Publication is the remaining work, not translation. See
+C5 preservation publication is complete on GitHub release 379767406 and
+Zenodo record 22208527, DOI `10.5281/zenodo.22208527`. All 65 assets /
+134,904,267 bytes passed anonymous SHA-256 readback at both destinations.
+Only the Pages CI portability repair/deployment and final control closure
+remain. See
 `components/c140-companion/00_control/CHECKPOINT_2026-08-31_C5_LOCAL_COMPLETE.md`
-for exact current bytes, hashes, corrections, and executable next action.
-Preserve all inherited public files and publish the eight C5 additions in the
-existing GitHub and Zenodo concept 22077422 lineage. No browser may launch.
+for exact current bytes, hashes, corrections, and `CURRENT_CURSOR.md` for the
+executable next action. All 57 inherited public files remain unchanged.
+Do not republish the finished union or alter its immutable tag. No browser may launch.
 Historical sections below retain their original evidence and do not restart
 finished production or override this live state.
 

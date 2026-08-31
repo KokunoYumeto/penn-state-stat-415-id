@@ -1,0 +1,46 @@
+{
+  "schema": "o006.c140.c5-clean-source-reconstruction.v1",
+  "status": "pass",
+  "date": "2026-08-31",
+  "source_archive": {
+    "path": "release/16_C140_COMPANION_C5_SOURCE_BACKEND_DATA_RIGHTS.zip",
+    "bytes": 24928931,
+    "sha256": "4de938596957e2116d6292f4a5e493a98212e7f9d1c49de32ae6e57c5b746deb"
+  },
+  "repository_context": {
+    "files": 13,
+    "bytes": 2393368,
+    "manifest_sha256": "01ab626811aa9f82e245696dd20738ecf7e2c85cfb7c941a8aa6be5efe6ce2b6",
+    "installed_without_overwrite": true
+  },
+  "execution": {
+    "interpreter": "Python 3.13.9",
+    "layout": "fresh repository/components/c140-companion with manifest-pinned repository context at repository root",
+    "hydration_exit_code": 0,
+    "build_write_exit_code": 0,
+    "build_check_exit_code": 0,
+    "qa_check_exit_code": 0,
+    "browser_processes_used": false,
+    "network_access": false,
+    "production_files_modified": false,
+    "environment": {
+      "PYTHONHASHSEED": "0",
+      "OMP_NUM_THREADS": "1",
+      "OPENBLAS_NUM_THREADS": "1",
+      "MKL_NUM_THREADS": "1",
+      "NUMEXPR_NUM_THREADS": "1",
+      "TZ": "UTC",
+      "LC_NUMERIC": "C"
+    }
+  },
+  "reproduced": {
+    "documents": 39,
+    "problems": 146,
+    "backend_entities": 1523,
+    "html_files": 135,
+    "backend_files": 117,
+    "build_receipt_sha256": "cc9e6002edcbb5adbe5a348233fb73f5588728a4fbc330a93061c1f18807f372",
+    "qa_receipt_sha256": "aef36e757fca2d3ad1593087af12a5102120697f16715acf210248d94d296bfd",
+    "exact_frozen_identities_match": true
+  }
+}

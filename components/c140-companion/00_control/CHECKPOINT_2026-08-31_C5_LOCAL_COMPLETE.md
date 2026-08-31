@@ -81,12 +81,20 @@ Its pinned 13-file repository context includes the Penn document registry,
 current donor identity/credits, MathJax runtime, and collection rights. The
 documented fresh-repository layout is required; a flattened component alone
 does not have the external authority needed for its cross-course links.
-The clean-source reconstruction replay is the final packaging check.
+The clean-source reconstruction replay passed: hydration, build write/check,
+and static QA reproduce the exact frozen identities. Repository receipt:
+`00_control/C5_CLEAN_SOURCE_RECONSTRUCTION_2026-08-31.json`.
 
 The CP02 hydration helper and pinned-public redaction fallback are complete
-and tested. Freeze the packager's exact input identities; package and verify the 65-file cumulative
-union, preserving all 57 C4 artifacts. Commit/push the exact current source,
-backend, reader, code, rights and receipts; verify Pages; publish the C5 GitHub
-release and new version in Zenodo concept 22077422; anonymously read back the
-full inventories and hashes. Record publication receipts and refresh live
-controls. Local completion is not a public-completion claim.
+and tested. The 65-file cumulative union is now public on GitHub release
+`v2026.08.31.c140-companion-c5` and Zenodo record `22208527`, DOI
+`10.5281/zenodo.22208527`, in concept `22077422`. Every asset at both
+destinations passed anonymous byte/SHA-256 readback; all 57 C4 files remain
+unchanged. The tagged source commit is
+`40acd8e846a4603ac5a90d311794b7e9c9db7bb9`.
+
+The remaining operation is the separate online Pages deployment/readback and
+final control closure. CI-only helper changes do not alter any frozen source,
+reader, data, release artifact or package identity. Exact current executable
+state is in repository `00_control/CURRENT_CURSOR.md`; the publication and
+readback receipts are the C5-named JSON records in that same directory.

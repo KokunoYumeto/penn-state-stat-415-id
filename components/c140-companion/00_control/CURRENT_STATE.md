@@ -2,7 +2,7 @@
 
 Updated: 2026-08-31
 
-## C5 asesmen dan capstone — sumber, build, dan QA lengkap; pengemasan aktif
+## C5 asesmen dan capstone — terbit di GitHub dan Zenodo; Pages sedang diverifikasi
 
 Seluruh 39 dokumen sumber `id-ID` lengkap, termasuk `CA02`–`CA04` dan
 `CP01`–`CP02`. Produksi sumber selesai sebelum audit. Keempat asesmen dan
@@ -22,14 +22,23 @@ memperbaiki hierarki heading SIM005/SIM006, dan menutup kasus batas matematis
 serta kerusakan TeX pada set penguasaan. Pembacaan akhir MS09–MS12 lulus;
 jangan mengulang terjemahan atau audit sumber yang telah selesai.
 
-Belum ada publikasi C5: C4 tetap batas publik terakhir. Build HTML/backend
+C5 sudah terbit di Zenodo, DOI `10.5281/zenodo.22208527`: 65 berkas /
+134.904.267 byte, seluruhnya cocok pada pembacaan balik anonim. Build HTML/backend
 dan QA C5 sekarang lulus write dan dua replay check-only; koleksi Pages
 259 berkas juga lulus. Pendamping memuat 146 soal terselesaikan, 1.523 entitas,
 dan 1.949 relasi. Identitas lengkap tercatat dalam
 `CHECKPOINT_2026-08-31_C5_LOCAL_COMPLETE.md`. Tindakan berikutnya adalah
-membekukan paket kumulatif 65 berkas. Setelah gate lulus, publikasikan
-ke lineage GitHub/Zenodo yang sudah ada dan baca balik seluruh byte secara
-anonim. Larangan browser dan kontak upstream tetap berlaku.
+menutup verifikasi numerik CI Linux dan pembacaan balik Pages. Rilis GitHub
+C5 juga sudah lengkap: 65 berkas / 134.904.267 byte cocok secara anonim.
+Paket dan rekonstruksi sumber bersih sudah lulus; jangan mengubah
+byte artefak yang sudah terbit. Commit konten `40acd8e846a4603ac5a90d311794b7e9c9db7bb9`
+sudah didorong dan 489 berkasnya cocok pada pembacaan balik anonim. Replay
+lokal CP01 dan CP02 lulus. CP01 di Linux juga lulus; pemeriksaan format angka
+CP02 telah diperbaiki tanpa memperbesar toleransi numerik. Run Pages aktif
+`33399647717` memakai commit `04b58d8e9ac74f7fb30f137f8073bff05208502e`;
+data dan keluaran pembaca tetap diperiksa eksak.
+Selesaikan deployment/readback Pages dan simpan receipt akhir. Larangan
+browser dan kontak upstream tetap berlaku.
 
 ## C4 mastery boundary — public deterministic closure
 
