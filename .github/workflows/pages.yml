@@ -99,6 +99,11 @@ jobs:
           python -B scripts/assemble_pages_collection.py --write
           python -B scripts/assemble_pages_collection.py --check-only
 
+      - name: Add and verify universal learner navigation
+        run: |
+          python -B scripts/apply_federated_navigation.py --write
+          python -B scripts/apply_federated_navigation.py --check
+
       - name: Configure Pages
         uses: actions/configure-pages@45bfe0192ca1faeb007ade9deae92b16b8254a0d # v6.0.0
 

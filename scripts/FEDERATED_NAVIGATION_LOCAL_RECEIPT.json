@@ -1,0 +1,47 @@
+{
+  "after_manifest_sha256": "04daccf2dfac68059f3fe838acce85b4f6f9584a217be36737e26c0fd65978ac",
+  "authoritative_originals": [
+    {
+      "label": "Kursus asli STAT 415 / Original STAT 415 course",
+      "url": "https://online.stat.psu.edu/stat415/"
+    },
+    {
+      "label": "Sumber asli kecukupan / Original sufficiency source",
+      "url": "https://www.randomservices.org/random/point/Sufficient.html"
+    }
+  ],
+  "before_manifest_sha256": "74edbaf15ff2f428c78ec715a1814d63eeaf614c4a80ed5a414c0d063c72e9c9",
+  "central_links": [
+    {
+      "label": "Program (Bahasa Indonesia)",
+      "locale": "id",
+      "url": "https://kokunoyumeto.github.io/program-matematika-indonesia/id/#course-C140"
+    },
+    {
+      "label": "Program (English)",
+      "locale": "en",
+      "url": "https://kokunoyumeto.github.io/program-matematika-indonesia/en/#course-C140"
+    }
+  ],
+  "checks": {
+    "all_central_and_original_links_present_once_per_document": true,
+    "exactly_one_navigation_landmark_per_document": true,
+    "exactly_one_stylesheet_reference_per_document": true,
+    "idempotent_transform": true,
+    "roundtrip_content_preservation": true
+  },
+  "content_language": "id",
+  "course_id": "C140",
+  "documents_with_navigation": 57,
+  "generated_by": "scripts/apply_federated_navigation.py",
+  "html_bytes_after": 3351332,
+  "html_documents": 57,
+  "published_roots": [
+    "build/pages"
+  ],
+  "repository": "penn-state-stat-415-id",
+  "schema": "program-matematika.federated-navigation.local-receipt.v1",
+  "status": "passed",
+  "stylesheet_sha256": "3c88e12efe746142c009e55762f12619c45a1c384718b990507502fcfd78f5bb",
+  "surface_url": "https://kokunoyumeto.github.io/penn-state-stat-415-id/index.html"
+}
